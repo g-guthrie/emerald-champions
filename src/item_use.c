@@ -818,6 +818,19 @@ static void ItemUseOnFieldCB_Berry(u8 taskId)
     DestroyTask(taskId);
 }
 
+static void Task_OpenHarvestPouch(u8 taskId)
+{
+    extern const u8 EmeraldChampions_EventScript_UseHarvestPouch[];
+    ScriptContext_SetupScript(EmeraldChampions_EventScript_UseHarvestPouch);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_HarvestPouch(u8 taskId)
+{
+    sItemUseOnFieldCB = Task_OpenHarvestPouch;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 {
     if (TryToWaterSudowoodo() == TRUE)

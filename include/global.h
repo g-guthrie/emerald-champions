@@ -286,7 +286,7 @@ struct SaveBlock3
     struct ItemSlot bagPocketMedicine[BAG_MEDICINE_COUNT];
     struct ItemSlot bagPocketBattle[BAG_BATTLE_COUNT];
     struct ItemSlot bagPocketTMHM[BAG_TMHM_COUNT - BAG_LEGACY_TMHM_COUNT];
-    struct ItemSlot bagPocketBerries[BAG_BERRIES_COUNT - BAG_LEGACY_BERRIES_COUNT];
+    struct ItemSlot bagPocketBerries[BAG_BERRIES_PRIMARY_COUNT - BAG_LEGACY_BERRIES_COUNT];
     struct ItemSlot bagPocketKeyItems[BAG_KEYITEMS_COUNT - BAG_LEGACY_KEYITEMS_COUNT];
     struct ItemSlot bagPocketMegaStones[BAG_MEGASTONES_PRIMARY_COUNT];
 }; /* max size 1624 bytes */
@@ -304,7 +304,9 @@ struct Pokedex
     /*0x0C*/ u32 unknown3;
     /*0x10*/ u8 lostLegendaryEncounters[16]; // Legacy loss bits, cleared on migration; preserve the save layout.
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2 == FALSE
-    /*0x20*/ u8 filler[0x58]; // Previously Dex Flags, feel free to remove.
+    /*0x20*/ u8 harvestedBerries[NUM_BERRIES]; // Per-type harvest only; cap 255.
+    u8 gardenCelebiUnlocked;
+    u8 filler[0x58 - NUM_BERRIES - 1]; // Preserve all existing save offsets.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2
 };
 
@@ -1112,6 +1114,7 @@ struct BagSaveBlock1Extension
 {
     struct ItemSlot items[BAG_ITEMS_COUNT - BAG_LEGACY_ITEMS_COUNT];
     struct ItemSlot megaStones[BAG_MEGASTONES_COUNT - BAG_MEGASTONES_PRIMARY_COUNT];
+    struct ItemSlot berries[BAG_BERRIES_COUNT - BAG_BERRIES_PRIMARY_COUNT];
 };
 
 struct SaveBlock1

@@ -711,7 +711,7 @@ gSpecials::
 
 	def_special ResearchSelectedLegendarySign
 
-	def_special CountEmeraldChampionsGardenBerries
+	def_special BuildEmeraldChampionsHarvestChoices
 	def_special TradeEmeraldChampionsGardenBerries
 
 	def_special Unused_CountDaycareHatchedSpecies, unused=1
@@ -740,3 +740,6 @@ gSpecials::
 	def_special ConvertEmeraldChampionsFiniteReward, requests_effects=1
 	def_special BufferEmeraldChampionsShoalReward
 	def_special ReturnInGameTradeHeldItem, requests_effects=1
+	def_special BufferEmeraldChampionsHarvestRecipe
+	def_special CheckEmeraldChampionsGardenCelebi
+	def_special GiveEmeraldChampionsBerryPair

@@ -27,7 +27,8 @@
 #define EC_BATTLE_ITEM_CATEGORY_TYPE 3
 #define EC_BATTLE_ITEM_CATEGORY_GEM 4
 #define EC_BATTLE_ITEM_CATEGORY_SPECIES 5
-#define EC_BATTLE_ITEM_CATEGORY_COUNT 6
+#define EC_BATTLE_ITEM_CATEGORY_BERRIES 6
+#define EC_BATTLE_ITEM_CATEGORY_COUNT 7
 
 // Permanent two-starter opening transaction.
 #define EC_OPENING_UNSELECTED                 0
@@ -38,7 +39,8 @@
 
 #define EMERALD_CHAMPIONS_MEGA_ONLY          TRUE
 
-#define EC_MEGA_BERRY_TRADE_COST             20
+#define EC_HARVEST_LIMIT                    255
+#define EC_HARVEST_REWARD_COUNT               4
 #define EC_MEGA_BERRY_TRADE_SUCCESS           0
 #define EC_MEGA_BERRY_TRADE_ALREADY_DONE      1
 #define EC_MEGA_BERRY_TRADE_NOT_ENOUGH        2

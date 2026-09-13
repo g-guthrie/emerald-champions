@@ -70,7 +70,7 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
         if fallthrough:
             pending.append(fallthrough)
     trade_code = (root / "src/mega_stone_rewards.c").read_text()
-    trades = re.findall(r"\{(ITEM_\w+),\s*(FLAG_EC_BERRY_TRADE_\w+)\}", trade_code)
+    trades = re.findall(r"\{(ITEM_\w+),\s*(FLAG_EC_BERRY_TRADE_\w+),", trade_code)
     if len(trades) != 3 or not trade_reachable:
         raise ValueError("three berry exchanges must be reachable from a world NPC")
     for item, flag in trades:
@@ -107,13 +107,13 @@ def main() -> None:
     if "special OpenEmeraldChampionsEvolutionItemArchive" not in vendor:
         raise SystemExit("the evolution-item archive must remain available")
     code = (ROOT / "src/mega_stone_rewards.c").read_text()
-    garden_block = re.search(r"sGardenBerries\[\]\s*=\s*\{(.*?)\};", code, re.S)[1]
-    garden = set(re.findall(r"ITEM_\w+", garden_block))
+    if "GetHarvestedBerryCount" not in code or "RemoveBagItem" in code:
+        raise SystemExit("harvest trades must spend per-type harvest, never ordinary bag berries")
     from item_catalog import free_vendor_items
-    presets = (ROOT / "data/emerald_champions/emerald_champions_battle_sets.json").read_text()
-    free = free_vendor_items(ROOT) | set(re.findall(r"ITEM_\w+", presets))
-    if garden & free:
-        raise SystemExit(f"garden currency is freely supplied: {sorted(garden & free)}")
+    berries = set(re.findall(r"F\((\w+)\)", (ROOT / "include/constants/berries.h").read_text()))
+    missing = {"ITEM_" + name + "_BERRY" for name in berries} - free_vendor_items(ROOT)
+    if missing:
+        raise SystemExit(f"berries missing from free catalogue: {sorted(missing)}")
     print(f"PASS: all {len(rewards)} Mega Stones have world rewards; three are exclusive berry trades")
     print("PASS: no free Mega archive or preset berry-currency bypass; evolution archive preserved")
 

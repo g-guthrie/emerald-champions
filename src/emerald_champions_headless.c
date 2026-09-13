@@ -20,6 +20,9 @@
 #include "contest_util.h"
 #include "event_data.h"
 #include "item_use.h"
+#include "berry.h"
+#include "mega_stone_rewards.h"
+#include "constants/berry.h"
 #include "load_save.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
@@ -1288,7 +1291,8 @@ void EmeraldChampionsHeadlessObserve(void)
             && gSaveBlock1Ptr->pos.y == sEcHeadlessMapSweep[index].y;
         return;
     }
-    if (EmeraldChampionsHeadlessBattleAutomationActive())
+    if (EmeraldChampionsHeadlessBattleAutomationActive()
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BERRY_ECONOMY)
     {
         if (!gMain.inBattle)
             sEcHeadlessAutoCaptureInProgress = FALSE;
@@ -1315,6 +1319,8 @@ void EmeraldChampionsHeadlessObserve(void)
             gEcHeadlessCampaignQueryValue = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_LEGENDARY_ELIGIBLE)
             gEcHeadlessCampaignQueryValue = CanAcquireLegendarySignSpecies(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
+            gEcHeadlessCampaignQueryValue = GetHarvestedBerryCount(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM)
             gEcHeadlessCampaignQueryValue = CountTotalItemQuantityInBag(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PC_ITEM)
@@ -2057,6 +2063,46 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
 
     switch (scenario)
     {
+    case EC_HEADLESS_SCENARIO_BERRY_ECONOMY:
+    {
+        u32 param = gEcHeadlessFixtureParam;
+        PrepareCircuitParty();
+        AddBagItem(ITEM_BERRY_POUCH, 1);
+        AddBagItem(ITEM_WAILMER_PAIL, 1);
+        AddBagItem(ITEM_LUM_BERRY, 6);
+        if (param == 1 || param == 2 || param == 7)
+            memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 30, NUM_BERRIES);
+        if (param == 8)
+            memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 255, NUM_BERRIES);
+        if (param == 2)
+        {
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_BAXCALIBRITE)];
+            for (u32 slot = 0; slot < pocket->capacity; slot++)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_DRAGONINITE, 1);
+        }
+        if (param >= 3 && param <= 5)
+        {
+            PlantBerryTree(BERRY_TREE_ROUTE_102_ORAN, BERRY_ID_ORAN, BERRY_STAGE_BERRIES, TRUE);
+            if (param == 4)
+                AddHarvestedBerries(BERRY_ID_ORAN, 255);
+            if (param == 5)
+            {
+                struct BagPocket *pocket = &gBagPockets[POCKET_BERRIES];
+                for (u32 slot = 0; slot < pocket->capacity; slot++)
+                    BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_CHERI_BERRY, MAX_BAG_ITEM_CAPACITY);
+            }
+            LoadHeadlessMap(MAP_ROUTE102, 24, 3);
+        }
+        else if (param == 0 || param == 8)
+            LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 2, 3);
+        else
+        {
+            if (param == 7)
+                FlagSet(FLAG_EC_BERRY_TRADE_BAXCALIBRITE);
+            LoadHeadlessMap(MAP_ROUTE123_BERRY_MASTERS_HOUSE, 4, 5);
+        }
+        return;
+    }
     case EC_HEADLESS_SCENARIO_CENTER_OLDALE:
         if (gEcHeadlessFixtureParam != 0)
         {

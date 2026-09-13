@@ -29,14 +29,27 @@ clean Continue; never transplant a savestate into another ROM/ELF.
 
 ## Exact stopping point
 
-- Primary session: `work/v4-c13-coordinated-play`, step **0**. Six Brawly losses.
-  Native preparation/save at previous session098/099; clean Continue preserves
-  all600 party bytes. Dewford Center `(2,4)`, facing up, healthy/free control.
-  New normal/headless builds include coordinated Brawly20/22/20/20/21/20 and
-  Facade status-forecast repairs (burn, primary and secondary paralysis).
-- **Medium**, cap **20**, **35 earned unique trainer clears**. Cristian: two
+- **USER RESUMED full implementation/playthrough. Berry economy implemented.**
+  Primary `work/v4-c13-berry-complete-play`, clean Continue from native
+  `work/v4-c13-harvest-play/earned-six-lum.sav`. Six Lum Berries acquired through
+  the new free vendor; Harvest Pouch obtained and used natively. Harvested Lum
+  remains zero. Native Save021/export022 and new clean Continue preserve these.
+  Current position/step are in `handoff/checkpoint.json`; heading to Steven.
+  Brawly won attempt7 in11 turns; 36 earned unique trainer clears. Do not replay
+  him or pursue the superseded Gyarados/preset Lum workaround.
+  All67 ordinary berries now free. Separate per-type harvest pouch, typed stone
+  recipes and optional Celebi invitation implemented. Growth capped at4h; ripe
+  crops persist. Shared field medicine/resale restrictions cover every berry.
+  Bag now68 types without shifting old save offsets. Native tests8 pass,
+  real harvest/full-bag/full-pouch/full-reward-pocket fixtures and Save/Continue
+  pass, and12 repeated menu entries pass after a shared closemessage redraw fix.
+  Berry Master/Kiri daily pair gifts share an atomic delivery helper.
+  Contact sheets: berries-final-check, berries-menu-accepted, berries-earned.
+  Earlier berries-stress sheet includes the FAILED blank-menu baseline.
+  Normal release gates pass; published external assets remain older.
+- **Medium**, cap **20**, **36 earned unique trainer clears**. Cristian: two
   eight-turn losses then a13-turn win. Jocelyn:13-turn loss, eight-turn loss,
-  then seven-turn win. Brawly:10-,10-,13-,11-,11-, and12-turn losses; still uncleared.
+  then seven-turn win. Brawly: six losses (10,10,13,11,11,12 turns), then11-turn win.
 - Current immutable ROM includes the capture-menu repair and shared timely burn/
   Quash forecasts. Clean Continue from each previous normal save preserved ancestry.
   Native acquisition/preparation includes Carbink and Prankster Sableye. Sableye’s
@@ -87,8 +100,8 @@ Four opponents fell; Pachirisu24/Hawlucha29 remained. Conkeldurr98 survived Play
 Rough96; paralysis nullified Aerodactyl's Speed advantage. A mistaken switch into
 Conkeldurr cost Shaymin. The user directed a material coordinated balance review
 around five serious failed attempts. Current Brawly levels20/22/20/20/21/20;
-all builds/species/AI retained. No tuned win yet. New lead Aero+Timid Shaymin69
-pressures enemy Pachirisu early. Center vendor has no Lum Berry; retain Sash.
+all builds/species/AI retained. Coordinated tuning won with five faints; max full decision60f. New lead Aero+Timid Shaymin69
+pressures enemy Pachirisu early. Center vendor now stocks all berries; six Lum are in the bag. Retain Sash on Aerodactyl.
 
 Facade status forecast: baseline failures reproduced exhausted-Facade exclusion
 under burn, Glare and Nuzzle. Repaired all shared primary/secondary paths and
@@ -96,7 +109,7 @@ actual remaining Facade power; focused native burn9, Glare3, Nuzzle4, secondary
 paralysis3 and Quash4 controls pass. Book has backward/bespoke/forward index;
 `work/facade-status-retrospective-scope.json` inventories exact carriers/setters.
 No prior earned replays and no causal Brawly-loss claim.
-Next: Brawly, then Steven’s Ring and manor/meadow handoffs. His exact T038/
+Next: resume Steven’s Ring and manor/meadow handoffs. His exact T038/
 U0170–0175 team was inspected: Pachirisu/Choice Band Heracross opening; Guts
 Conkeldurr, AV Hariyama, White Herb Unburden Hawlucha and special Cobalion with
 Coaching/Quick Guard. Shared redirection, Coaching recipient survival, burn
@@ -170,7 +183,7 @@ turn7 victory. Maximum of seven full decisions:61 frames. No team/level nerf.
 **Brawly, E0040 / TRAINER_BRAWLY 266.** Six native losses:10,10,13,11,11,12 turns;
 maximum measured full decision budgets45,51,49,61,45,46 native frames respectively.
 Exact T038/U0170–0175 and relevant shared AI were checked before every attempt.
-First five used original levels; sixth used Hawlucha21 only. Coordinated cuts now built; rematch pending. Attempt3 removed Cobalion/Hariyama/Heracross; timely burn
+First five used original levels; sixth used Hawlucha21 only. Coordinated cuts won attempt7 in11 turns with only Azumarill48/88; max decision60f. Attempt3 removed Cobalion/Hariyama/Heracross; timely burn
 let Aerodactyl survive Hawlucha at2HP. Hawlucha's Protect blocked Foul Play while
 Conkeldurr removed Sableye's berry. Attempt4's Taunt disabled early Follow Me;
 Quash/Psychic removed Cobalion on turn3. Kadabra's Gleam punished Hawlucha's

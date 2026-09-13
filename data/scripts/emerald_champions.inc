@@ -407,6 +407,9 @@ Common_EventScript_EmeraldChampionsBattleVendor::
 	faceplayer
 	setvar VAR_0x8008, 0
 	setvar VAR_0x8009, 0
+	checkitem ITEM_BERRY_POUCH
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain
+	additem ITEM_BERRY_POUCH
 
 EmeraldChampions_EventScript_BattleVendorMain:
 	@ Let the prior native list window finish clearing before another menu can
@@ -434,6 +437,10 @@ EmeraldChampions_EventScript_BattleVendorCompleteArchive:
 	goto EmeraldChampions_EventScript_BattleVendorExit
 
 EmeraldChampions_EventScript_BattleItemCategories:
+	checkitem ITEM_BERRY_POUCH
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleItemCategoriesReady
+	additem ITEM_BERRY_POUCH
+EmeraldChampions_EventScript_BattleItemCategoriesReady:
 	delay 1
 	message EmeraldChampions_Text_BattleItemCategoryPrompt
 	waitmessage
@@ -445,13 +452,16 @@ EmeraldChampions_EventScript_BattleItemCategoryChoices:
 	dynmultipush EmeraldChampions_Text_TypeItems, EC_BATTLE_ITEM_CATEGORY_TYPE
 	dynmultipush EmeraldChampions_Text_GemItems, EC_BATTLE_ITEM_CATEGORY_GEM
 	dynmultipush EmeraldChampions_Text_SpeciesItems, EC_BATTLE_ITEM_CATEGORY_SPECIES
-	dynmultipush EmeraldChampions_Text_Back, EC_BATTLE_ITEM_CATEGORY_COUNT
+	dynmultipush EmeraldChampions_Text_Berries, EC_BATTLE_ITEM_CATEGORY_BERRIES
+	dynmultipush EmeraldChampions_Text_HarvestPouch, 7
+	dynmultipush EmeraldChampions_Text_Back, 8
 	@ Four visible rows keep the lower scroll arrow comfortably above the
 	@ native message box while preserving the category cursor between visits.
 	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleItemCategoryBack
 	copyvar VAR_0x8008, VAR_RESULT
+	goto_if_eq VAR_RESULT, 7, EmeraldChampions_EventScript_VendorHarvest
 	goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT, EmeraldChampions_EventScript_BattleItemCategoryBack
 	copyvar VAR_0x8004, VAR_RESULT
 	special OpenEmeraldChampionsBattleItemMart
@@ -510,6 +520,16 @@ EmeraldChampions_Text_GemItems:
 
 EmeraldChampions_Text_SpeciesItems:
 	.string "Species Items$"
+
+EmeraldChampions_EventScript_VendorHarvest:
+	setvar VAR_0x8009, 0
+	call EmeraldChampions_EventScript_HarvestMenu
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_Text_Berries:
+	.string "Berries$"
+EmeraldChampions_Text_HarvestPouch:
+	.string "Harvest Pouch$"
 
 EmeraldChampions_Text_Back:
 	.string "Back$"
@@ -1058,3 +1078,160 @@ EmeraldChampions_Text_ResetIvs:
 	.string "Restore all six IVs to 31?$"
 EmeraldChampions_Text_IvsReset:
 	.string "All IVs were restored to 31.$"
+
+EmeraldChampions_EventScript_UseHarvestPouch::
+	lockall
+	setvar VAR_0x8009, 0
+	call EmeraldChampions_EventScript_HarvestMenu
+	releaseall
+	end
+
+EmeraldChampions_EventScript_HarvestMenu::
+	message EmeraldChampions_Text_HarvestWelcome
+	waitmessage
+	dynmultipush EmeraldChampions_Text_MyHarvest, 0
+	dynmultipush EmeraldChampions_Text_HarvestRequests, 1
+	dynmultipush EmeraldChampions_Text_HarvestHelpChoice, 2
+	dynmultipush EmeraldChampions_Text_Back, 3
+	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_HarvestListStart
+	goto_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_HarvestRequests
+	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_HarvestHelp
+	return
+
+EmeraldChampions_EventScript_HarvestListStart:
+	setvar VAR_0x800A, 1
+EmeraldChampions_EventScript_HarvestList:
+	message EmeraldChampions_Text_HarvestList
+	waitmessage
+	special BuildEmeraldChampionsHarvestChoices
+	dynmultipush EmeraldChampions_Text_Back, 0
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x800A, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_HarvestMenu
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_HarvestMenu
+	copyvar VAR_0x800A, VAR_RESULT
+	goto EmeraldChampions_EventScript_HarvestList
+
+EmeraldChampions_EventScript_HarvestRequests:
+	message EmeraldChampions_Text_HarvestRequestsPrompt
+	waitmessage
+	dynmultipush EmeraldChampions_Text_HarvestBaxcalibrite, 0
+	dynmultipush EmeraldChampions_Text_HarvestDragoninite, 1
+	dynmultipush EmeraldChampions_Text_HarvestTyranitarite, 2
+	dynmultipush EmeraldChampions_Text_HarvestCelebi, 3
+	dynmultipush EmeraldChampions_Text_Back, 4
+	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_ge VAR_RESULT, 4, EmeraldChampions_EventScript_HarvestMenu
+	copyvar VAR_0x8004, VAR_RESULT
+	special BufferEmeraldChampionsHarvestRecipe
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	goto_if_eq VAR_0x8009, 0, EmeraldChampions_EventScript_HarvestRequests
+	goto_if_eq VAR_0x8004, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
+	goto_if_eq VAR_0x800B, 1, EmeraldChampions_EventScript_HarvestAlready
+EmeraldChampions_EventScript_HarvestConfirm:
+	msgbox EmeraldChampions_Text_HarvestConfirm, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, EmeraldChampions_EventScript_HarvestRequests
+	special TradeEmeraldChampionsGardenBerries
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_ALREADY_DONE, EmeraldChampions_EventScript_HarvestAlready
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_NOT_ENOUGH, EmeraldChampions_EventScript_HarvestNotEnough
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_BAG_FULL, EmeraldChampions_EventScript_HarvestBagFull
+	goto_if_ne VAR_RESULT, EC_MEGA_BERRY_TRADE_SUCCESS, EmeraldChampions_EventScript_HarvestRequests
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox EmeraldChampions_Text_HarvestReceived, MSGBOX_DEFAULT
+	waitfanfare
+	goto_if_eq VAR_0x8004, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
+	goto EmeraldChampions_EventScript_HarvestRequests
+
+EmeraldChampions_EventScript_HarvestCelebiCheck:
+	special CheckEmeraldChampionsGardenCelebi
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_HarvestConfirm
+	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_HarvestAlready
+	msgbox EmeraldChampions_Text_HarvestMeetCelebi, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, EmeraldChampions_EventScript_HarvestRequests
+	setvar VAR_0x8004, SPECIES_CELEBI
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
+	dowildbattle
+	waitstate
+	goto EmeraldChampions_EventScript_HarvestMenu
+
+EmeraldChampions_EventScript_HarvestAlready:
+	msgbox EmeraldChampions_Text_HarvestAlready, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_HarvestRequests
+EmeraldChampions_EventScript_HarvestNotEnough:
+	msgbox EmeraldChampions_Text_HarvestNotEnough, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_HarvestRequests
+EmeraldChampions_EventScript_HarvestBagFull:
+	msgbox EmeraldChampions_Text_HarvestBagFull, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_HarvestRequests
+EmeraldChampions_EventScript_HarvestHelp:
+	msgbox EmeraldChampions_Text_HarvestHelp, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_HarvestMenu
+
+EmeraldChampions_Text_HarvestWelcome:
+	.string "Your harvest pouch keeps picked\n"
+	.string "berries separate from battle supplies.$"
+EmeraldChampions_Text_MyHarvest:
+	.string "My harvest$"
+EmeraldChampions_Text_HarvestRequests:
+	.string "Reward requests$"
+EmeraldChampions_Text_HarvestHelpChoice:
+	.string "How it works$"
+EmeraldChampions_Text_HarvestList:
+	.string "HARVESTED BERRIES - by type\n"
+	.string "Only picking a tree adds to this pouch.$"
+EmeraldChampions_Text_HarvestRequestsPrompt:
+	.string "The BERRY MASTER on ROUTE 123\n"
+	.string "offers these harvest rewards.$"
+EmeraldChampions_Text_HarvestBaxcalibrite:
+	.string "Baxcalibrite$"
+EmeraldChampions_Text_HarvestDragoninite:
+	.string "Dragoninite$"
+EmeraldChampions_Text_HarvestTyranitarite:
+	.string "Tyranitarite$"
+EmeraldChampions_Text_HarvestCelebi:
+	.string "Celebi's invitation$"
+EmeraldChampions_Text_HarvestConfirm:
+	.string "Trade those harvested berries for\n"
+	.string "{STR_VAR_1}?$"
+EmeraldChampions_Text_HarvestReceived:
+	.string "You received {STR_VAR_1}!\n"
+	.string "Your battle berries are untouched.$"
+EmeraldChampions_Text_HarvestAlready:
+	.string "That reward is already yours.\n"
+	.string "I'll keep your harvest untouched.$"
+EmeraldChampions_Text_HarvestNotEnough:
+	.string "You still need some of that harvest.\n"
+	.string "Pick as you travel, or plant the gaps!$"
+EmeraldChampions_Text_HarvestBagFull:
+	.string "Make room for the stone in your BAG.\n"
+	.string "Your harvested berries are safe.$"
+EmeraldChampions_Text_HarvestMeetCelebi:
+	.string "CELEBI visits to share your harvest!\n"
+	.string "Would you like to meet it now?\p"
+	.string "Bring your POKé BALLS. You can try\n"
+	.string "again without another berry payment.$"
+EmeraldChampions_Text_HarvestHelp:
+	.string "Every berry is free at the Center's\n"
+	.string "held-item counter, right from the start.\p"
+	.string "Equip them for battle or plant seeds.\n"
+	.string "They aren't medicine to use by hand.\p"
+	.string "Pick three LUM BERRIES: you get three\n"
+	.string "battle berries AND three harvested LUM.\p"
+	.string "Each type has its own harvest count.\n"
+	.string "Only picking trees fills this pouch.\p"
+	.string "Growing takes at most four hours.\n"
+	.string "Ripe crops stay until you pick them.\p"
+	.string "Watering improves your yield. Check\n"
+	.string "requests and plant what you're missing!$"
+
+@ Both berries are already delivered; show the normal receipt without adding again.
+Common_EventScript_ShowDeliveredBerry::
+	copyvar VAR_0x8006, VAR_0x8000
+	setvar VAR_0x8001, 1
+	setvar VAR_0x8007, TRUE
+	call EventScript_ObtainItemMessage
+	return

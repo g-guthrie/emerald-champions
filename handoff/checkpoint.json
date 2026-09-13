@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "session": "work/v4-c13-coordinated-play",
-  "current_step": 0,
+  "session": "work/v4-c13-berry-complete-play",
+  "current_step": 1,
   "chapter": "C13",
-  "map": "MAP_DEWFORD_TOWN_POKEMON_CENTER_1F",
+  "map": "MAP_DEWFORD_TOWN",
   "position": [
     2,
-    4
+    11
   ],
-  "facing": "up",
+  "facing": "down",
   "controls_locked": false,
   "difficulty": "Medium",
   "player_cap": 20,
-  "earned_unique_trainer_clears": 35,
+  "earned_unique_trainer_clears": 36,
   "cleared_trainers": [
     {
       "id": 10,
@@ -154,15 +154,14 @@
     {
       "id": 425,
       "name": "TRAINER_JOCELYN"
-    }
-  ],
-  "uncleared_next": [
+    },
     {
-      "name": "Brawly",
-      "attempts": 6
+      "id": 266,
+      "name": "TRAINER_BRAWLY_1"
     }
   ],
-  "immediate_plan": "Actual Brawly attempt7 with coordinated20/22/20/20/21/20 levels; Aerodactyl+Timid Shaymin lead; defeat Brawly then continue Steven Ring/manor.",
+  "uncleared_next": [],
+  "immediate_plan": "Berry economy implemented/tested. Six Lum acquired and saved natively, Harvest Pouch owned. Continue to Steven in Granite Cave for Ring/starter stones, then C14 manor and meadow. Audit every trainer and all related bug paths. No subagents.",
   "repel_spray": "on",
   "poke_vial_charges": 1,
   "party_order": [
@@ -189,18 +188,18 @@
     20,
     20
   ],
-  "rom_sha256": "74631d059ed51de5e84359b5cc0048df006279e8c8aca8cfe87da8099c128830",
-  "elf_sha256": "4f7c1fd024e92a182856fef35af77e908395b0b29099445bf6497cb3bf4b013d",
-  "inputs_sha256": "3f98b596446c050b882e5d5d8d5bcfba0690a37416abc9c9d516ad47af0bc58d",
-  "save": "work/v4-c13-hawlucha21-play/earned-brawly-prepared.sav",
-  "save_sha256": "3f9eee8320f68b06340f41cd9cdd553f672392b8c92219d3180f77391534ef8d",
-  "state": "work/v4-c13-coordinated-play/current.ss1",
-  "state_sha256": "186356e508bfef1835629cca63a396028618a0c5f3a34009e254761bdf477dff",
-  "trace": "work/v4-c13-coordinated-play/trace.json",
+  "rom_sha256": "aa19065fe1c990b1f92ddb0f75ec7f59976aef9cc8b56a1360381a2eed7e2e61",
+  "elf_sha256": "6d1faef4381d131c45a0dacc040336fe5941652f002a50f317bdeca352a8252b",
+  "inputs_sha256": "51861224a6042b7e66c610af57487d11bfe081e730b634710733825934a8bf9a",
+  "save": "work/v4-c13-harvest-play/earned-six-lum.sav",
+  "save_sha256": "2f3ccce81d9c58e3961289a5a41fa8bba1022f0f05673060dcff031a62008fef",
+  "state": "work/v4-c13-berry-complete-play/current.ss1",
+  "state_sha256": "ad951fafac4e5903d92c5989b157386abd9e457b15e97b0f9dec73bf68359575",
+  "trace": "work/v4-c13-berry-complete-play/trace.json",
   "source_patch": null,
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
   "evidence_limits": [
-    "35 earned clears are not complete acceptance matrices.",
+    "36 earned clears are not full-game acceptance.",
     "Full-party capture YES replacement verified with Abra; direct-PC NO verified with Azurill; full-storage failure pending.",
     "Published original resume assets are behind this local checkpoint until replaced and downloaded.",
     "No later chapter is earned from synthetic execution.",
@@ -223,7 +222,8 @@
       "loss13",
       "loss11",
       "loss11",
-      "loss12"
+      "loss12",
+      "win11"
     ]
   }
 }

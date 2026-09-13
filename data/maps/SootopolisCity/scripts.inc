@@ -718,34 +718,20 @@ SootopolisCity_EventScript_KiriGiveBerry::
 	random 2
 	setvar VAR_0x8009, ITEM_FIGY_BERRY
 	call_if_eq VAR_RESULT, 1, SootopolisCity_EventScript_KiriChooseIapapa
-	additem VAR_0x8008, 1
+	special GiveEmeraldChampionsBerryPair
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	additem VAR_0x8009, 1
-	goto_if_eq VAR_RESULT, FALSE, SootopolisCity_EventScript_KiriNoRoomForPair
 	setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
 	copyvar VAR_0x8000, VAR_0x8008
-	call SootopolisCity_EventScript_KiriShowDeliveredBerry
+	call Common_EventScript_ShowDeliveredBerry
 	msgbox SootopolisCity_Text_GiveYouThisBerryToo, MSGBOX_DEFAULT
 	copyvar VAR_0x8000, VAR_0x8009
-	call SootopolisCity_EventScript_KiriShowDeliveredBerry
+	call Common_EventScript_ShowDeliveredBerry
 	msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_KiriChooseIapapa::
 	setvar VAR_0x8009, ITEM_IAPAPA_BERRY
-	return
-
-SootopolisCity_EventScript_KiriNoRoomForPair::
-	removeitem VAR_0x8008, 1
-	goto Common_EventScript_ShowBagIsFull
-
-@ Both berries are already delivered; show the normal receipt without adding again.
-SootopolisCity_EventScript_KiriShowDeliveredBerry::
-	copyvar VAR_0x8006, VAR_0x8000
-	setvar VAR_0x8001, 1
-	setvar VAR_0x8007, TRUE
-	call EventScript_ObtainItemMessage
 	return
 
 SootopolisCity_EventScript_KiriReceivedBerry::

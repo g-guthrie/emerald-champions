@@ -1,5 +1,7 @@
 #include "global.h"
 #include "berry.h"
+#include "mega_stone_rewards.h"
+#include "constants/emerald_champions.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -2712,7 +2714,7 @@ static u32 GetBerryTreeAge(u8 id, u8 stage)
         stage = 6;
     else if (stage > 0)
         stage -= 1;
-    return GetBerryInfo(id)->growthDuration * stage / (OW_BERRY_SIX_STAGES ? 6 : 4);
+    return min(GetBerryInfo(id)->growthDuration, 4) * stage / (OW_BERRY_SIX_STAGES ? 6 : 4);
 }
 
 static u8 GetBerryCountByBerryTreeId(u8 id)
@@ -2722,7 +2724,7 @@ static u8 GetBerryCountByBerryTreeId(u8 id)
 
 static u16 GetStageDurationByBerryType(u8 berry)
 {
-    return GetBerryInfo(berry)->growthDuration * 60 / (OW_BERRY_SIX_STAGES ? 6 : 4);
+    return min(GetBerryInfo(berry)->growthDuration, 4) * 60 / (OW_BERRY_SIX_STAGES ? 6 : 4);
 }
 
 static u8 GetDrainRateByBerryType(u8 berry)
@@ -2837,16 +2839,36 @@ void ObjectEventInteractionPickBerryTree(void)
     u8 berry = GetBerryTypeByBerryTreeId(id);
     u8 mutation = GetTreeMutationValue(id);
 
+    u8 count = GetBerryCountByBerryTreeId(id);
+    if (!CanAddHarvestedBerries(berry, count)
+     || (OW_BERRY_MUTATIONS && mutation && !CanAddHarvestedBerries(mutation, 1)))
+    {
+        gSpecialVar_0x8004 = 4; // Pouch full: leave the crop intact.
+        return;
+    }
     if (!OW_BERRY_MUTATIONS || mutation == 0)
     {
-        gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+        gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), count);
+        if (gSpecialVar_0x8004)
+            AddHarvestedBerries(berry, count);
         return;
     }
     gSpecialVar_0x8004 = (CheckBagHasSpace(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id)) && CheckBagHasSpace(BerryTypeToItemId(mutation), 1)) + 2;
     if (gSpecialVar_0x8004 == 3)
     {
-        AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
-        AddBagItem(BerryTypeToItemId(mutation), 1);
+        if (!AddBagItem(BerryTypeToItemId(berry), count))
+        {
+            gSpecialVar_0x8004 = 2;
+            return;
+        }
+        if (!AddBagItem(BerryTypeToItemId(mutation), 1))
+        {
+            RemoveBagItem(BerryTypeToItemId(berry), count);
+            gSpecialVar_0x8004 = 2;
+            return;
+        }
+        AddHarvestedBerries(berry, count);
+        AddHarvestedBerries(mutation, 1);
     }
 }
 

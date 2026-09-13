@@ -1746,7 +1746,9 @@ bool8 ScrCmd_closemessage(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     HideFieldMessageBox();
-    return FALSE;
+    // The window clear queues a BG copy. Let that copy finish before the
+    // script reuses the tiles for another message/menu in the same frame.
+    return TRUE;
 }
 
 static bool8 WaitForAorBPress(void)

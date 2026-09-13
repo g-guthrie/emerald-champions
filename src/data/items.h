@@ -14266,17 +14266,17 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_BERRY_POUCH] =
     {
-        .name = ITEM_NAME("Berry Pouch"),
+        .name = ITEM_NAME("Harvest Pouch"),
         .pluralName = ITEM_PLURAL_NAME("Berry Pouches"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "A convenient\n"
-            "container that\n"
-            "holds Berries."),
+            "Harvested Berries\n"
+            "by type, plus\n"
+            "garden requests."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_HarvestPouch,
         .iconPic = gItemIcon_BerryPouch,
         .iconPalette = gItemIconPalette_BerryPouch,
     },

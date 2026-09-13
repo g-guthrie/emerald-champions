@@ -41,6 +41,12 @@ if args.save is not None:
  shutil.copy2(args.save,out/'scene.sav')
  trace['battery_parent']={'path':str(args.save.resolve()),'sha256':hashlib.sha256(args.save.read_bytes()).hexdigest(),'evidence':'normal in-game save imported on a clean boot; not a cross-ROM savestate'}
  trace['evidence']='earned fresh-save campaign continued by normal Save and Continue on an updated ROM; native combat and captures; observer telemetry only'
+ parent_trace=args.save.parent/'trace.json'
+ if parent_trace.exists():
+  parent=json.loads(parent_trace.read_text())
+  if parent.get('scenario') != 'CAMPAIGN_NATIVE' or 'synthetic' in parent.get('evidence','').lower():
+   trace['evidence']='synthetic prerequisite fixture continued by native Save and clean Continue; not earned campaign progress'
+   trace['battery_parent']['evidence']='normal in-game save from a synthetic fixture; no cross-ROM savestate'
  command+=['--save',str(out/'scene.sav')]
 if args.boot is None: command+=['--state-in',str(state)]
 else:

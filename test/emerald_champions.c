@@ -2551,7 +2551,7 @@ TEST("Emerald Champions garden refuses owned stones and Shoal substitutes before
     FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
     EXPECT(AddBagItem(ITEM_RAZZ_BERRY, 20));
     EXPECT(AddPCItem(ITEM_BAXCALIBRITE, 1));
-    gSpecialVar_0x8004 = ITEM_BAXCALIBRITE;
+    gSpecialVar_0x8004 = 0;
     TradeEmeraldChampionsGardenBerries();
     EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_ALREADY_DONE);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_RAZZ_BERRY), 20);

@@ -1,84 +1,160 @@
 #include "global.h"
+#include "berry.h"
 #include "event_data.h"
 #include "item.h"
+#include "legendary_signs.h"
 #include "mega_stone_rewards.h"
-#include "pokemon.h"
-#include "pokemon_storage_system.h"
+#include "malloc.h"
+#include "script_menu.h"
+#include "string_util.h"
 #include "constants/emerald_champions.h"
 
-// These garden berries are not supplied by competitive presets or free item
-// menus. Existing berry trees and planting remain the source of the currency.
-static const enum Item sGardenBerries[] =
-{
-    ITEM_RAZZ_BERRY, ITEM_BLUK_BERRY, ITEM_NANAB_BERRY,
-    ITEM_WEPEAR_BERRY, ITEM_PINAP_BERRY, ITEM_POMEG_BERRY,
-    ITEM_KELPSY_BERRY, ITEM_QUALOT_BERRY, ITEM_HONDEW_BERRY,
-    ITEM_GREPA_BERRY, ITEM_TAMATO_BERRY,
-};
-
+struct HarvestIngredient { u8 berry; u8 count; };
 static const struct
 {
     enum Item item;
     u16 flag;
+    struct HarvestIngredient recipe[6];
 } sBerryStoneTrades[] =
 {
-    {ITEM_BAXCALIBRITE, FLAG_EC_BERRY_TRADE_BAXCALIBRITE},
-    {ITEM_DRAGONINITE, FLAG_EC_BERRY_TRADE_DRAGONINITE},
-    {ITEM_TYRANITARITE, FLAG_EC_BERRY_TRADE_TYRANITARITE},
+    {ITEM_BAXCALIBRITE, FLAG_EC_BERRY_TRADE_BAXCALIBRITE,
+        {{BERRY_ID_RAZZ, 6}, {BERRY_ID_BLUK, 6}, {BERRY_ID_NANAB, 4}, {BERRY_ID_WEPEAR, 4}}},
+    {ITEM_DRAGONINITE, FLAG_EC_BERRY_TRADE_DRAGONINITE,
+        {{BERRY_ID_CHERI, 6}, {BERRY_ID_CHESTO, 6}, {BERRY_ID_ORAN, 6}, {BERRY_ID_PECHA, 6}}},
+    {ITEM_TYRANITARITE, FLAG_EC_BERRY_TRADE_TYRANITARITE,
+        {{BERRY_ID_POMEG, 4}, {BERRY_ID_KELPSY, 4}, {BERRY_ID_QUALOT, 4},
+         {BERRY_ID_HONDEW, 4}, {BERRY_ID_GREPA, 4}, {BERRY_ID_TAMATO, 4}}},
+    // A permanent optional encounter invitation; retries never charge again.
+    {ITEM_NONE, 0,
+        {{BERRY_ID_PINAP, 8}, {BERRY_ID_SITRUS, 8}, {BERRY_ID_LUM, 4}, {BERRY_ID_LEPPA, 8}}},
 };
+STATIC_ASSERT(ARRAY_COUNT(sBerryStoneTrades) == EC_HARVEST_REWARD_COUNT, HarvestRewardCount);
+STATIC_ASSERT(NUM_BERRIES + 1 <= 0x58, HarvestSaveCapacity);
 
-static u16 CountGardenBerries(void)
+u16 GetHarvestedBerryCount(u8 berry)
 {
-    u16 total = 0;
-    for (u32 i = 0; i < ARRAY_COUNT(sGardenBerries); i++)
-        total += CountTotalItemQuantityInBag(sGardenBerries[i]);
-    return total;
+    return berry && berry <= NUM_BERRIES ? gSaveBlock2Ptr->pokedex.harvestedBerries[berry - 1] : 0;
 }
 
-void CountEmeraldChampionsGardenBerries(void)
+bool32 CanAddHarvestedBerries(u8 berry, u16 count)
 {
-    gSpecialVar_Result = CountGardenBerries();
-    gSpecialVar_0x8005 = EC_MEGA_BERRY_TRADE_COST;
+    return berry && berry <= NUM_BERRIES && count <= EC_HARVEST_LIMIT - GetHarvestedBerryCount(berry);
+}
+
+void AddHarvestedBerries(u8 berry, u16 count)
+{
+    if (CanAddHarvestedBerries(berry, count))
+        gSaveBlock2Ptr->pokedex.harvestedBerries[berry - 1] += count;
+}
+
+static bool32 RewardClaimed(u32 choice)
+{
+    if (choice == 3)
+        return gSaveBlock2Ptr->pokedex.gardenCelebiUnlocked || IsLegendarySignCaught(LEGENDARY_SIGN_CELEBI);
+    return FlagGet(sBerryStoneTrades[choice].flag) || PlayerOwnsItem(sBerryStoneTrades[choice].item);
+}
+
+void BuildEmeraldChampionsHarvestChoices(void)
+{
+    for (u32 berry = 1; berry < NUM_BERRIES; berry++)
+    {
+        u8 *label = Alloc(32);
+        u8 *end = CopyItemName(BerryTypeToItemId(berry), label);
+        end = StringAppend(end, COMPOUND_STRING("  x"));
+        ConvertIntToDecimalStringN(end, GetHarvestedBerryCount(berry), STR_CONV_MODE_LEFT_ALIGN, 3);
+        MultichoiceDynamic_PushElement((struct ListMenuItem){label, berry});
+    }
+}
+
+void BufferEmeraldChampionsHarvestRecipe(void)
+{
+    u32 choice = gSpecialVar_0x8004;
+    if (choice >= ARRAY_COUNT(sBerryStoneTrades))
+        return;
+    if (choice == 3)
+        StringCopy(gStringVar1, COMPOUND_STRING("Celebi's invitation"));
+    else
+        CopyItemName(sBerryStoneTrades[choice].item, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}\nHarvested berries: have / need"));
+    for (u32 i = 0; i < ARRAY_COUNT(sBerryStoneTrades[choice].recipe); i++)
+    {
+        const struct HarvestIngredient *part = &sBerryStoneTrades[choice].recipe[i];
+        if (!part->count)
+            break;
+        StringAppend(gStringVar4, i % 2 == 0 ? COMPOUND_STRING("\p") : COMPOUND_STRING("\n"));
+        StringAppend(gStringVar4, GetBerryInfo(part->berry)->name);
+        StringAppend(gStringVar4, COMPOUND_STRING(": "));
+        ConvertIntToDecimalStringN(gStringVar2, GetHarvestedBerryCount(part->berry), STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringAppend(gStringVar4, gStringVar2);
+        StringAppend(gStringVar4, COMPOUND_STRING(" / "));
+        ConvertIntToDecimalStringN(gStringVar2, part->count, STR_CONV_MODE_LEFT_ALIGN, 2);
+        StringAppend(gStringVar4, gStringVar2);
+    }
+    gSpecialVar_0x800B = RewardClaimed(choice);
+    StringAppend(gStringVar4, gSpecialVar_0x800B
+        ? COMPOUND_STRING("\pAlready claimed. No more berries due.")
+        : COMPOUND_STRING("\pBring these to the BERRY MASTER\non ROUTE 123. One of each reward!"));
 }
 
 void TradeEmeraldChampionsGardenBerries(void)
 {
-    enum Item item = gSpecialVar_0x8004;
+    u32 choice = gSpecialVar_0x8004;
     gSpecialVar_Result = EC_MEGA_BERRY_TRADE_INVALID;
-    for (u32 i = 0; i < ARRAY_COUNT(sBerryStoneTrades); i++)
+    if (choice >= ARRAY_COUNT(sBerryStoneTrades))
+        return;
+    if (RewardClaimed(choice))
     {
-        if (item != sBerryStoneTrades[i].item)
-            continue;
-        if (FlagGet(sBerryStoneTrades[i].flag) || PlayerOwnsItem(item))
-        {
-            gSpecialVar_Result = EC_MEGA_BERRY_TRADE_ALREADY_DONE;
-            return;
-        }
-        if (CountGardenBerries() < EC_MEGA_BERRY_TRADE_COST)
+        gSpecialVar_Result = EC_MEGA_BERRY_TRADE_ALREADY_DONE;
+        return;
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(sBerryStoneTrades[choice].recipe); i++)
+    {
+        const struct HarvestIngredient *part = &sBerryStoneTrades[choice].recipe[i];
+        if (GetHarvestedBerryCount(part->berry) < part->count)
         {
             gSpecialVar_Result = EC_MEGA_BERRY_TRADE_NOT_ENOUGH;
             return;
         }
-        // Check and deliver the reward before charging. A full Items pocket
-        // must never cost berries or mark the exchange as completed.
-        if (!AddBagItem(item, 1))
-        {
-            gSpecialVar_Result = EC_MEGA_BERRY_TRADE_BAG_FULL;
-            return;
-        }
-        u16 remaining = EC_MEGA_BERRY_TRADE_COST;
-        for (u32 berry = 0; berry < ARRAY_COUNT(sGardenBerries) && remaining; berry++)
-        {
-            u16 quantity = min(remaining, CountTotalItemQuantityInBag(sGardenBerries[berry]));
-            if (quantity)
-            {
-                RemoveBagItem(sGardenBerries[berry], quantity);
-                remaining -= quantity;
-            }
-        }
-        FlagSet(sBerryStoneTrades[i].flag);
-        gSpecialVar_Result = EC_MEGA_BERRY_TRADE_SUCCESS;
+    }
+    // Delivery before debit/receipt: failed storage must preserve the entire recipe.
+    if (choice != 3 && !AddBagItem(sBerryStoneTrades[choice].item, 1))
+    {
+        gSpecialVar_Result = EC_MEGA_BERRY_TRADE_BAG_FULL;
         return;
     }
+    for (u32 i = 0; i < ARRAY_COUNT(sBerryStoneTrades[choice].recipe); i++)
+    {
+        const struct HarvestIngredient *part = &sBerryStoneTrades[choice].recipe[i];
+        if (part->count)
+            gSaveBlock2Ptr->pokedex.harvestedBerries[part->berry - 1] -= part->count;
+    }
+    if (choice == 3)
+        gSaveBlock2Ptr->pokedex.gardenCelebiUnlocked = TRUE;
+    else
+        FlagSet(sBerryStoneTrades[choice].flag);
+    gSpecialVar_Result = EC_MEGA_BERRY_TRADE_SUCCESS;
 }
 
+void CheckEmeraldChampionsGardenCelebi(void)
+{
+    gSpecialVar_Result = IsLegendarySignCaught(LEGENDARY_SIGN_CELEBI) ? 2
+        : gSaveBlock2Ptr->pokedex.gardenCelebiUnlocked ? 1 : 0;
+}
+
+// Daily seed gifts share an atomic pair delivery. Neither source mints harvest.
+void GiveEmeraldChampionsBerryPair(void)
+{
+    enum Item first = gSpecialVar_0x8008;
+    enum Item second = gSpecialVar_0x8009;
+    gSpecialVar_Result = FALSE;
+    if (GetItemPocket(first) != POCKET_BERRIES || GetItemPocket(second) != POCKET_BERRIES)
+        return;
+    if (!AddBagItem(first, 1))
+        return;
+    if (!AddBagItem(second, 1))
+    {
+        RemoveBagItem(first, 1);
+        return;
+    }
+    gSpecialVar_Result = TRUE;
+}

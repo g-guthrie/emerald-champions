@@ -123,7 +123,8 @@ enum Language
 #define BAG_MEDICINE_COUNT   44
 #define BAG_BATTLE_COUNT     180
 #define BAG_TMHM_COUNT       108
-#define BAG_BERRIES_COUNT    66
+#define BAG_BERRIES_PRIMARY_COUNT 66
+#define BAG_BERRIES_COUNT    68
 #define BAG_POKEBALLS_COUNT  27
 #define BAG_KEYITEMS_COUNT   55
 // Emerald Champions has 99 distinct stones plus the two Primal Orbs. Inclement

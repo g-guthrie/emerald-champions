@@ -1,9 +1,11 @@
 #ifndef GUARD_MEGA_STONE_REWARDS_H
 #define GUARD_MEGA_STONE_REWARDS_H
-
-#include "constants/items.h"
-
-void CountEmeraldChampionsGardenBerries(void);
+u16 GetHarvestedBerryCount(u8 berry);
+bool32 CanAddHarvestedBerries(u8 berry, u16 count);
+void AddHarvestedBerries(u8 berry, u16 count);
+void BuildEmeraldChampionsHarvestChoices(void);
+void BufferEmeraldChampionsHarvestRecipe(void);
 void TradeEmeraldChampionsGardenBerries(void);
-
+void CheckEmeraldChampionsGardenCelebi(void);
+void GiveEmeraldChampionsBerryPair(void);
 #endif

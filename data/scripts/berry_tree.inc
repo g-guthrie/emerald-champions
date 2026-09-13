@@ -167,6 +167,7 @@ BerryTree_EventScript_CheckBerryFullyGrown::
 
 BerryTree_EventScript_PickBerry::
 	special ObjectEventInteractionPickBerryTree
+	goto_if_eq VAR_0x8004, 4, BerryTree_EventScript_HarvestPouchFull
 	goto_if_eq VAR_0x8004, BERRY_NORMAL_BAG_FULL, BerryTree_EventScript_BerryPocketFull
 .if OW_BERRY_MUTATIONS == TRUE
 	goto_if_eq VAR_0x8004, BERRY_MUTATION_BAG_FULL, BerryTree_EventScript_BerryPocketFull_Mutation
@@ -187,6 +188,15 @@ BerryTree_EventScript_PickBerry::
 	hideitemdescription
 	release
 	end
+
+BerryTree_EventScript_HarvestPouchFull::
+	msgbox BerryTree_Text_HarvestPouchFull, MSGBOX_DEFAULT
+	release
+	end
+
+BerryTree_Text_HarvestPouchFull:
+	.string "Your harvest pouch holds 255 of each.\n"
+	.string "Trade some before picking this crop.$"
 
 BerryTree_EventScript_BerryPocketFull::
 	message BerryTree_Text_BerryPocketFull
@@ -320,8 +330,8 @@ BerryTree_Text_PickedTheBerry:
 BerryTree_Text_PutAwayBerry:
 	.string "{PLAYER} put away the {STR_VAR_1}\n"
 	.string "in the BAG's BERRIES POCKET.\p"
-	.string "The soil returned to its soft and\n"
-	.string "loamy state.$"
+	.string "{STR_VAR_2} harvested berries of this type\n"
+	.string "were added to your harvest pouch.$"
 
 BerryTree_Text_BerryPocketFull:
 	.string "The BAG's BERRIES POCKET is full.\p"

@@ -78,6 +78,8 @@ const struct TmHmIndexKey gTMHMItemMoveIds[NUM_ALL_MACHINES + 1] =
 
 static inline struct ItemSlot *NONNULL BagPocket_GetSlotPointer(struct BagPocket *pocket, u32 pocketPos)
 {
+    if (pocket->id == POCKET_BERRIES && pocketPos >= BAG_BERRIES_PRIMARY_COUNT)
+        return &gSaveBlock1Ptr->bagExtension.berries[pocketPos - BAG_BERRIES_PRIMARY_COUNT];
     if (pocketPos < pocket->primaryCapacity)
         return &pocket->itemSlots[pocketPos];
 
@@ -1084,6 +1086,9 @@ enum ItemType GetItemType(enum Item itemId)
 
 ItemUseFunc GetItemFieldFunc(enum Item itemId)
 {
+    // All ordinary berries are free equipment/seeds, never free field medicine.
+    if (GetItemPocket(itemId) == POCKET_BERRIES)
+        return ItemUseOutOfBattle_CannotUse;
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
