@@ -13,8 +13,10 @@ This directory contains the native libmGBA runner restored from Verdant commit
   count, screenshots, video hashes, and scratch save I/O.
 - The renderer rejects missing/dataless input and copies the ROM to a private
   scratch directory. It never opens a user save for writing.
-- Battle screenshots must set both `gEcHeadlessFixtureSetupResult` and
-  `gEcHeadlessFixtureObservedResult`; a plausible stale frame cannot pass.
+- Synthetic battle UI fixture assertions require both setup and observation
+  sentinels. Earned `CAMPAIGN_NATIVE` sessions use actual battle state and trace
+  evidence instead; a zero synthetic-observation sentinel is not a native-play
+  failure. See `docs/VERIFICATION.md` for the active workflow.
 
 ## Build
 
@@ -25,8 +27,9 @@ make -j8 BUILD_NAME=emerald-headless MAP_VERSION=emerald \
   EC_HEADLESS_FIXTURES=1
 ```
 
-The host runner is compiled automatically against the native Homebrew libmGBA
-when a render begins.
+The host runner is compiled automatically against native libmGBA on macOS or
+Linux when a render begins; use the portable dependency instructions in
+`docs/VERIFICATION.md`.
 
 ## Render
 

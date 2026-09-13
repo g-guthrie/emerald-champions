@@ -9,9 +9,10 @@ The source code for these specific builds is available from:
 
 ## Emerald Champions visual harness
 
-The complete official mGBA 0.10.5 source at commit
-`26b7884bc25a5933960f3cdcd98bac1ae14d42e2` is vendored in
-`tools/mgba-source/` under its MPL-2.0 license. The deterministic host runner
+An earlier local mGBA source checkout used commit
+`26b7884bc25a5933960f3cdcd98bac1ae14d42e2`; it is not required or vendored in
+the current Git checkout. Install native libmGBA as described in
+[docs/VERIFICATION.md](../../docs/VERIFICATION.md). The deterministic host runner
 is `tests/headless/emerald_champions_mgba_runner.c`; it links against the
 installed native libmGBA and provides fixed-frame inputs, memory reads/writes,
 scratch saves, video hashes, and PNG screenshots.
@@ -31,5 +32,5 @@ ROM into a private scratch directory and rejects nonresident zero-block input.
 
 An adjacent Desktop save marked `compressed,dataless` can make mGBA appear to
 crash while APFS materializes it. The emulator and ROM are not at fault. Keep
-the live ROM/save pair outside iCloud (the project `playtest/` directory is the
-canonical location) and do not use the Desktop copy for automated runs.
+the live ROM/save pair outside iCloud (an ignored local `work/` session directory is the
+working location) and do not use the Desktop copy for automated runs.

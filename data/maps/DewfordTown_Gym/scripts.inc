@@ -389,7 +389,6 @@ DewfordTown_Gym_Text_CristianPostBattle:
 	.string "active.$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
-	.string "Back from SLATEPORT? Right on!\p"
 	.string "I'm BRAWLY, DEWFORD's GYM LEADER!\p"
 	.string "My team draws attacks aside,\n"
 	.string "then uses the space to set up.\p"
@@ -407,8 +406,6 @@ DewfordTown_Gym_Text_ReceivedKnuckleBadge:
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
 	.string "The KNUCKLE BADGE lets your LEVELER\n"
 	.string "train a party up to Lv. 30.\p"
-	.string "It also enables the hidden move FLASH\n"
-	.string "outside of battle.\p"
 	.string "Take this rare MEGA STONE, too.$"
 DewfordTown_Gym_Text_ExplainLucarionite:
 	.string "Lucarionite lets Lucario Mega Evolve.\n"
@@ -419,10 +416,12 @@ DewfordTown_Gym_Text_RegisteredBrawly:
 	.string "in the POKéNAV.$"
 
 DewfordTown_Gym_Text_BrawlyPostBattle:
-	.string "Return to STEVEN in GRANITE CAVE,\n"
-	.string "northwest of town, for your MEGA RING.\p"
-	.string "Your new BADGE lets you use FLASH\n"
-	.string "to light the way inside.$"
+	.string "Return to STEVEN in his room deep\n"
+	.string "inside GRANITE CAVE, northwest\l"
+	.string "of town, for your MEGA RING.\p"
+	.string "Then head west from DEWFORD into\n"
+	.string "the MEADOW. STEVEN will explain\l"
+	.string "what to investigate at the manor.$"
 
 DewfordTown_Gym_Text_GymStatue:
 	.string "DEWFORD TOWN POKéMON GYM$"

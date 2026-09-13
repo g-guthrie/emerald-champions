@@ -8,8 +8,9 @@ just because it is not a battle.
 
 ## Rules you should plan around
 
-- Campaign level caps are strict. This benchmark always uses the authored Hard
-  opponent levels and AI.
+- Campaign level caps are strict. Respect the run configuration; the active
+  earned v4 playthrough uses Medium. Difficulty changes trainer levels only,
+  never the team or AI quality.
 - Most trainer encounters are Doubles, though intentional Singles and multi
   battles remain. Wild encounters are ordinary battles. Build for partner
   synergy, positioning, speed control, protection, disruption, and focus fire,
@@ -17,8 +18,9 @@ just because it is not a battle.
 - Mega Evolution is the only selectable gimmick. Do not plan around Z-Moves,
   Dynamax, Terastallization, or other later-generation gimmicks. Approved
   Groudon and Kyogre Primal Reversion is automatic and species-specific.
-- The Inclement Emerald story and world remain intact. Exploration, NPCs,
-  routes, puzzles, native captures, and progression gates matter.
+- The current v4 Game Book defines the revised story and required exploration.
+  Exploration, NPCs, routes, puzzles, native captures and progression gates matter.
+  See the repository AGENTS.md and docs/CONTINUE.md for current development scope.
 
 ## Preparation resources
 

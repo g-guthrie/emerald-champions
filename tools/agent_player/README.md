@@ -1,4 +1,8 @@
-# Emerald Champions agent-player benchmark (v1)
+# Emerald Champions agent-player benchmark
+
+For the active earned development run, start at [docs/CONTINUE.md](../../docs/CONTINUE.md)
+and use the portable session tools in [docs/VERIFICATION.md](../../docs/VERIFICATION.md).
+The independent battle-lab mode below does not replace earned campaign traversal.
 
 This is a separate, model-facing play harness. It does not use campaign
 fixtures to choose actions and it does not own trainer teams, presets, or

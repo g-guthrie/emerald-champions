@@ -69,7 +69,7 @@ GraniteCave_StevensRoom_EventScript_RegisterSteven::
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
 
 GraniteCave_StevensRoom_EventScript_Finish::
-	call_if_unset FLAG_DELIVERED_DEVON_GOODS, GraniteCave_StevensRoom_EventScript_SternHandoff
+	call_if_unset FLAG_DELIVERED_DEVON_GOODS, GraniteCave_StevensRoom_EventScript_ManorHandoff
 	call GraniteCave_StevensRoom_EventScript_CobalionFarewell
 	closemessage
 	setflag FLAG_HIDE_GRANITE_CAVE_STEVEN
@@ -95,19 +95,14 @@ GraniteCave_StevensRoom_EventScript_CobalionUncaught::
 	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
 	return
 
-GraniteCave_StevensRoom_EventScript_SternHandoff::
-	msgbox GraniteCave_StevensRoom_Text_SternHandoff, MSGBOX_DEFAULT
+GraniteCave_StevensRoom_EventScript_ManorHandoff::
+	msgbox GraniteCave_StevensRoom_Text_ManorHandoff, MSGBOX_DEFAULT
 	return
 
 GraniteCave_StevensRoom_EventScript_WaitForKnuckleBadge::
 	msgbox GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge, MSGBOX_DEFAULT
-	call_if_unset FLAG_HIDE_SLATEPORT_CITY_BRAWLY, GraniteCave_StevensRoom_EventScript_FindBrawlyInSlateport
 	release
 	end
-
-GraniteCave_StevensRoom_EventScript_FindBrawlyInSlateport::
-	msgbox GraniteCave_StevensRoom_Text_FindBrawlyInSlateport, MSGBOX_DEFAULT
-	return
 
 GraniteCave_StevensRoom_EventScript_StevenExitNorth::
 	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
@@ -227,19 +222,16 @@ GraniteCave_StevensRoom_Text_ArchiveOpen:
 	.string "too.$"
 
 GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge:
-	.string "The LETTER confirms it: unusual\n"
-	.string "weather is driving rare POKéMON\l"
-	.string "into new hiding places.\p"
-	.string "Challenge BRAWLY at DEWFORD GYM.\n"
-	.string "Come back with the KNUCKLE BADGE.$"
-
-GraniteCave_StevensRoom_Text_FindBrawlyInSlateport:
-	.string "BRAWLY is visiting SLATEPORT. Look\n"
-	.string "outside the OCEANIC MUSEUM for him.\p"
-	.string "You've delivered my LETTER, so ask\n"
-	.string "MR. BRINEY at the dock to sail there.\p"
-	.string "Find BRAWLY, then return to DEWFORD.\n"
-	.string "I'll wait here for your KNUCKLE BADGE.$"
+	.string "My father's survey equipment may\n"
+	.string "explain these changes in the sea.\p"
+	.string "The manor's old expedition records\n"
+	.string "describe similar events. I'd like\l"
+	.string "you to help investigate them.\p"
+	.string "First challenge BRAWLY in\n"
+	.string "DEWFORD's GYM. Then return to me\l"
+	.string "here with the KNUCKLE BADGE.\p"
+	.string "I'll entrust you with a MEGA RING\n"
+	.string "before you explore the manor.$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
 	.string "A journey teaches you things you\n"
@@ -252,13 +244,18 @@ GraniteCave_StevensRoom_Text_RegisteredSteven:
 	.string "Registered STEVEN\n"
 	.string "in the POKéNAV.$"
 
-GraniteCave_StevensRoom_Text_SternHandoff:
-	.string "Now take DEVON's GOODS to CAPT. STERN\n"
-	.string "in SLATEPORT CITY.\p"
-	.string "Ask MR. BRINEY at DEWFORD's dock\n"
-	.string "to sail you there.\p"
-	.string "The SHIPYARD staff in SLATEPORT can\n"
-	.string "tell you where to find the captain.$"
+GraniteCave_StevensRoom_Text_ManorHandoff:
+	.string "Go west from DEWFORD into the\n"
+	.string "MEADOW and enter the old MANOR.\p"
+	.string "Read the historian's account, then\n"
+	.string "speak to the meadow warden with\l"
+	.string "a partner that knows SING.\p"
+	.string "Wild JIGGLYPUFF live in the manor.\n"
+	.string "The CENTER's free move preparation\l"
+	.string "can help them remember SING.\p"
+	.string "Once you've read the account and\n"
+	.string "heard the meadow's answer, take\l"
+	.string "STERN's GOODS on to SLATEPORT.$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
 	.string "I am heading east. MAGMA and AQUA\n"

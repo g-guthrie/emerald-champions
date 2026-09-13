@@ -29,9 +29,8 @@ public map setters, graphics loaders and memory-transfer source locations.
 Shared contexts are possible call paths, not demonstrated execution. Dynamic
 coordinates, layout changes, conditional branches and generic memory operations
 remain explicitly unresolved where their state cannot be derived. A successful
-structural check does not certify those states or visual fidelity. Its source
-expression parser has known limitations documented in the static-check audit;
-these inferred dynamic ranges are not release certification.
+structural check does not certify those states or visual fidelity. Its inferred source-expression ranges are not a complete simulation and are
+not release certification.
 
 Render a selected map range from a freshly built fixture tree:
 

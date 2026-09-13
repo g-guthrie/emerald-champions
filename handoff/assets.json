@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "repository": "g-guthrie/emerald-champions",
+  "tag": "v4-handoff-20260913",
+  "assets": [
+    {
+      "name": "Emerald-Champions-7.0-archive.gba",
+      "group": "historical",
+      "format": "file",
+      "destination": "release/Emerald-Champions-7.0-archive.gba",
+      "size": 33554432,
+      "sha256": "33936c50124fca3e1150240bcb65ef540c559ebc3e1174887a23a94ffcc8dc58"
+    },
+    {
+      "name": "7.0-archive-provenance.json",
+      "group": "historical",
+      "format": "file",
+      "destination": "release/7.0-archive-provenance.json",
+      "size": 796,
+      "sha256": "429a9764ad67b4173b90a36ed7ff279c1312edac81c5528d8ba440cf5f22eccb"
+    },
+    {
+      "name": "Emerald-Champions-7.1-archive.zip",
+      "group": "historical",
+      "format": "file",
+      "destination": "release/Emerald-Champions-7.1-archive.zip",
+      "size": 38407637,
+      "sha256": "bdaf26db8082569354c2033e4cfbf43f7d16a98e7aa67c301a846d24da1b67d5"
+    }
+  ]
+}

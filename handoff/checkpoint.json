@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "session": "work/v4-c13-brenden-final-ai-play",
+  "current_step": 96,
+  "chapter": "C13",
+  "map": "MAP_GRANITE_CAVE_B1F",
+  "position": [
+    4,
+    21
+  ],
+  "facing": "down",
+  "controls_locked": false,
+  "difficulty": "Medium",
+  "player_cap": 20,
+  "earned_unique_trainer_clears": 33,
+  "cleared_trainers": [
+    {
+      "id": 10,
+      "name": "TRAINER_GRUNT_PETALBURG_WOODS"
+    },
+    {
+      "id": 16,
+      "name": "TRAINER_GRUNT_RUSTURF_TUNNEL"
+    },
+    {
+      "id": 114,
+      "name": "TRAINER_CINDY_1"
+    },
+    {
+      "id": 136,
+      "name": "TRAINER_WINSTON_1"
+    },
+    {
+      "id": 179,
+      "name": "TRAINER_TAKAO"
+    },
+    {
+      "id": 265,
+      "name": "TRAINER_ROXANNE_1"
+    },
+    {
+      "id": 273,
+      "name": "TRAINER_JERRY_1"
+    },
+    {
+      "id": 318,
+      "name": "TRAINER_CALVIN_1"
+    },
+    {
+      "id": 319,
+      "name": "TRAINER_BILLY"
+    },
+    {
+      "id": 320,
+      "name": "TRAINER_JOSH"
+    },
+    {
+      "id": 321,
+      "name": "TRAINER_TOMMY"
+    },
+    {
+      "id": 322,
+      "name": "TRAINER_JOEY"
+    },
+    {
+      "id": 333,
+      "name": "TRAINER_ALLEN"
+    },
+    {
+      "id": 339,
+      "name": "TRAINER_ELLIOT_1"
+    },
+    {
+      "id": 340,
+      "name": "TRAINER_NED"
+    },
+    {
+      "id": 426,
+      "name": "TRAINER_LAURA"
+    },
+    {
+      "id": 529,
+      "name": "TRAINER_MAY_ROUTE_103_MUDKIP"
+    },
+    {
+      "id": 571,
+      "name": "TRAINER_MARC"
+    },
+    {
+      "id": 572,
+      "name": "TRAINER_BRENDEN"
+    },
+    {
+      "id": 573,
+      "name": "TRAINER_LILITH"
+    },
+    {
+      "id": 600,
+      "name": "TRAINER_MAY_RUSTBORO_MUDKIP"
+    },
+    {
+      "id": 603,
+      "name": "TRAINER_TIANA"
+    },
+    {
+      "id": 605,
+      "name": "TRAINER_JANICE"
+    },
+    {
+      "id": 615,
+      "name": "TRAINER_RICK"
+    },
+    {
+      "id": 616,
+      "name": "TRAINER_LYLE"
+    },
+    {
+      "id": 617,
+      "name": "TRAINER_JOSE"
+    },
+    {
+      "id": 621,
+      "name": "TRAINER_JAMES_1"
+    },
+    {
+      "id": 631,
+      "name": "TRAINER_CLARK"
+    },
+    {
+      "id": 694,
+      "name": "TRAINER_DAWSON"
+    },
+    {
+      "id": 695,
+      "name": "TRAINER_SARAH"
+    },
+    {
+      "id": 696,
+      "name": "TRAINER_DARIAN"
+    },
+    {
+      "id": 753,
+      "name": "TRAINER_DEVAN"
+    },
+    {
+      "id": 754,
+      "name": "TRAINER_JOHNSON"
+    }
+  ],
+  "uncleared_next": [
+    {
+      "id": 574,
+      "name": "Cristian",
+      "attempts": 2,
+      "results": [
+        "loss in 8 turns",
+        "loss in 8 turns"
+      ]
+    },
+    {
+      "name": "Jocelyn"
+    },
+    {
+      "name": "Brawly"
+    }
+  ],
+  "immediate_plan": "Catch accessible B1F Sableye (20% leading land slot), prepare with native Center services, then retry Cristian. Sableye is not yet caught. This is a player adaptation, not an enemy balance edit.",
+  "repel_spray": "off",
+  "poke_vial_charges": 0,
+  "party_order": [
+    "Mienfoo",
+    "Aerodactyl",
+    "Marshtomp",
+    "Combusken",
+    "Shaymin",
+    "Pachirisu"
+  ],
+  "party_hp": [
+    54,
+    68,
+    76,
+    60,
+    76,
+    72
+  ],
+  "party_level": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "rom_sha256": "f97bdbd7b97aff049b366b2c5e8da478a561cbc7ba329d5210aba12592c3b43d",
+  "elf_sha256": "e9dfda8ce313e0557283e6743bc2da18f0a426974f81405185614e5ef8f65658",
+  "inputs_sha256": "9e0c1fdfff99ff02dfbd4aedf97affc98fc2038f05863293f0658c98c5e80c7b",
+  "save": "work/v4-c13-brenden-final-ai-play/earned-machine-handoff-granite-b1f.sav",
+  "save_sha256": "2e110f2c40086529855ede0471119a0478dd280cf41d547cecec105341481add",
+  "state": "work/v4-c13-brenden-final-ai-play/current.ss1",
+  "state_sha256": "b6913b5155bfd17287f4e99d699c21ce32cf52bfa374a966e0d3c08435f7197d",
+  "trace": "work/v4-c13-brenden-final-ai-play/trace.json",
+  "source_patch": "work/v4-c13-brenden-final-ai-play/resume-source.patch",
+  "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
+  "evidence_limits": [
+    "33 unique earned clears are not complete acceptance matrices.",
+    "Cristian losses are reviewed, not victories or full acceptance.",
+    "No later chapter is claimed earned just because a synthetic scene ran.",
+    "User visual acceptance remains pending.",
+    "Broader randomized and alternate-archetype coverage remains incomplete."
+  ]
+}

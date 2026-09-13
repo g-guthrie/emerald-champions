@@ -1,92 +1,112 @@
-# Working on Emerald Champions
+# Working on Emerald Champions v4
 
-Implement the reviewed Emerald Champions Game Book v4 in the original
-pokeemerald-expansion engine. The user created an active full-build goal on
-September 12, 2026 covering the new story, required overworld scenes, tasteful
-graphics/choreography, cohesive systems, hybrid AI and code refactoring. The book is
-`/Users/gguthrie/Desktop/Pokémon Emerald Champions/Game Blueprint/Emerald_Champions_Game_Book.txt`.
-Keep the replacement engine parked. Consolidate rules at their actual owner;
-moving code or lowering a heuristic seam count is not proof of simplification.
-The single authorized fresh Astra High full-book review is complete and its
-dispositions are recorded in section 26. Keep design changes in this one book
-and update authored inputs and their generated consumers together. Every retained
-trainer encounter requires actual native doubles testing and individual strategy
-assessment, reproducible cases and shareable evidence as specified in section 25.
-New or restaged scenes require headless screenshots and user visual review;
-collision validity alone does not establish good choreography or presentation.
+Read `docs/CONTINUE.md`, `docs/GOAL.md` and the relevant parts of the single
+canonical `Game Blueprint/Emerald_Champions_Game_Book.txt` before working.
+This repository root is the active native pokeemerald-expansion implementation.
+The separate replacement-engine experiment is parked and is not the game to run.
+Old 7.0/7.1 branches and archived reports are evidence, not competing instructions.
 
-- Preserve concurrent user work. The single Astra High book review is complete.
-  The user subsequently authorized one additional Astra High implementation
-  agent for native integration and visual QA of new/imported overworld areas,
-  working in the separate `overworld-integration` checkout. No further agents.
-  The main agent owns battle/AI, trainer data, caps/economy, existing story battle
-  chains, final integration and publication. Coordinate shared files and flags
-  before edits; keep builds and artifacts inside each owner's checkout.
-  The main agent alone edits the canonical book; send proposed clarifications.
-- The main implementation/verification path is a fresh save in the book's
-  actual play order: C01, first-arrival Oldale C03, rival/send-off C02, then
-  onward. Implement and verify each chapter's interactions, native battles and
-  handoff before claiming campaign progress beyond it. Parallel later-area
-  preparation does not constitute verified campaign traversal.
-- Complete each area's currently available NPC conversations, inspections,
-  pickups, gifts, trades, economies, services, puzzles, optional activities,
-  unlocks and every trainer battle as the primary playthrough reaches them.
-  Record later-gated content and alternative outcomes for legal revisits or
-  earned-checkpoint branches. Build strong stage-obtainable player teams through
-  the game; tune/replay shared AI rules and individual encounter intent as each
-  fight is reached. Audit our counterplay before weakening a difficult trainer.
-  Area completion requires executed evidence, not manifest declarations. Keep
-  full recordings where supported and distinguish recorded from inspected
-  frames; scope confidence to verified behavior. See book section 25.
-- Review screenshots in labeled contact sheets/collages by default. Group
-  related scene moments and outcomes, preserve unmodified originals and trace
-  links, and identify synthetic versus earned-playthrough views. Inspect an
-  individual frame or crop only for a specific detail. Assemble captured pixels
-  deterministically; never regenerate gameplay evidence to make it look better.
-- Make the smallest coherent change. Prefer deletion and reuse over new layers.
-- Preserve gameplay while refactoring; fix demonstrated defects. Discuss new
-  progression, economy, difficulty, availability or overworld design unless the
-  user has already authorized it. Do not add signs, actors or map tooling as a
-  substitute for understanding the existing art and choreography.
-- Overworld placement provenance means original Emerald/Inclement authorship,
-  not merely presence in our current checkout. Prefer repurposing obsolete
-  original pickups, checking composition and context as well as collision.
-  Later-added sparkles/actors require review; the Diancie (7,9) stone placement
-  is explicitly rejected. Do not invent new coordinates to replace it.
-- Source defines the game. Historical audits, prose snapshots and old test
-  expectations must not restore superseded behavior.
-- Keep one owner for each rule. Edit authored inputs and regenerate their actual
-  consumers together; do not patch generated tables independently.
-- Current saves target fresh games. Preserve current-run save integrity,
-  no-room reward retries and temporary-party restoration; no legacy migrations.
-- Retry restarts the battle; Reload restores the save. Field medicine remains
-  available. Keep free preparation and its protection against resale exploits.
-- Trainer teams and shared preparation presets have separate authorship.
-  Preserve bespoke teams and exact EV choices. AI forecasts must share native
-  mechanics; the complete opponent decision budget is 1.2 seconds.
-- New games currently initialize Hard regardless of title-screen difficulty.
-  Changing that preference behavior requires a design decision.
+## Goal and autonomy
 
-## Source ownership
+- The user wants the game BUILT, PLAYED AND BEATEN. Continue the earned fresh-save
+  Medium campaign, repairing demonstrated issues as you go. Do not stop at a
+  chapter, a passing test suite, a design document or a playable title screen.
+- When the user asks to continue/start goal work, create or resume the goal in
+  `docs/GOAL.md` using the available goal tool. An account/machine change does not
+  imply that the game goal is complete. Do not recreate an already active goal.
+- The one authorized fresh Astra High full-book review is complete; section 26
+  contains its dispositions. The user stopped subagent work. Use no additional
+  agents or agent follow-ups. The main agent owns implementation and playtesting.
+- Preserve existing user/concurrent work. Use Git history for older source rather
+  than introducing competing copies into the live tree. Commit and push supported
+  progress within the user's authorized GitHub handoff/development scope.
+- Favor deletion, reuse, explicit state and the smallest coherent change. Avoid
+  new frameworks, abstraction layers and defensive systems without a real need.
 
-`src/`, `include/` and `data/` contain the game. Authored trainer/preset inputs
-and imported reference data live in `data/emerald_champions/`. Use their existing
-consuming generators in `scripts/`; runtime move-access policy belongs in
-`emerald_champions_battle_sets.c`, ordinary Pokémon operations in `pokemon.c`.
-Tests belong in `test/` and `tests/`. Build and runtime commands are in
-[docs/VERIFICATION.md](docs/VERIFICATION.md). Logs and scratch artifacts belong
-in ignored `work/`, not new historical documents beside the source.
+## Book and source stay together
 
-## Verification
+- The book owns intended design. Source implements the game. Reconcile a mismatch;
+  do not silently treat either stale prose or accidental code as the final choice.
+- Every gameplay change must update its book rule, exact party/build/tactical
+  record, habitat, progression, reward or scene description in the same change.
+  Update implemented/pending statements and evidence scope too. Do not leave the
+  book describing a discarded experiment. A hypothesis is not an approved policy.
+- For trainer changes, edit book sections 8/9/22 and relevant executable-intent
+  rows, then run the book import and check in `docs/VERIFICATION.md`. Do not edit
+  generated tables alone. Shared preparation presets are separately authored;
+  do not overwrite bespoke trainer moves or EVs with player presets.
+- Keep the full specification in this one book. `docs/CONTINUE.md` owns checkpoint
+  and next-work state, `docs/VERIFICATION.md` owns commands, and `docs/GOAL.md` owns
+  the goal. Do not accumulate new competing handoffs or historical task lists.
 
-Audit every failure before changing production code or expectations: inspect
-the contract, fixture, configuration and source/artifact freshness. Correct
-obsolete checks; never weaken a valid check just to pass. Keep the suite small
-and test observable behavior in proportion to risk. Add a regression only when
-it protects a distinct, necessary invariant absent from existing coverage.
+## Earned campaign, battles and difficulty
 
-Build and stamp the same source tree. A fresh stamp cannot repair stale objects.
-Keep campaign traversal with automatic battle resolution separate from native
-combat evaluation. Neither static checks nor automatic victories establish
-balance, strategy quality or complete playability. Report exactly what ran and
-what remains unverified. Commit or publish only within the authorized scope.
+- Follow book play order: C01, first-arrival Oldale C03, rival/send-off C02, then
+  onward. Implement and inspect each reached chapter and handoff. Later synthetic
+  scene tests never count as earned traversal. Current progress is C13.
+- Catch and prepare stage-available Pokemon through native play. Do not write
+  party, progress, RNG, trainer-defeat flags or battle results into the earned
+  run. Read-only diagnostics and the observation bridge are allowed. Synthetic
+  fixtures remain separate and must be labeled as such.
+- Before EVERY trainer battle, briefly inspect the exact team, intent/tactics and
+  applicable shared AI code. Expect possible quality decline beyond roughly the
+  first 130 historically authored encounters. Freely improve demonstrated team,
+  moveset, strategy or AI weaknesses; synchronize the book and consumers.
+- Every Gym trainer should be an exceptional difficulty benchmark; leaders are
+  a major step beyond. A comfortable win deserves scrutiny. Audit AI consequences
+  before inflating levels; judge pressure/counterplay, not a quota of player faints.
+- Preserve cool species, coherent themes, strong moves and correct AI. When a
+  battle/gauntlet is unreasonable, prefer small individual level-offset reductions.
+  Do not nerf competent AI or dismantle a strategy merely because it wins.
+- Review opposing Protect throughout EVERY fight: actual payoff, lost opportunity,
+  partner survival, consecutive risk and pacing. Fix demonstrated empty, harmful
+  or repetitive guarding; an eventual loss/win never excuses poor decisions.
+- Full team/state plus already-committed player moves/targets is approved at all
+  difficulties. It does not include future RNG or uncommitted future choices.
+  The complete opponent decision budget is 1.2 seconds including setup/both actors.
+- Ordinary adjacent fights retain individual clears. Selected clearly announced
+  endurance challenges may restart all legs. Preserve Lilith/Brenden's original
+  overlap and individual wins; losing to Brenden does not reset Lilith.
+- Continue on Medium. Difficulty is trainer levels only; preserve its formulas.
+  New games currently initialize Hard regardless of the title preference; changing
+  that behavior needs a design decision. The earned save is already Medium.
+
+## Overworld and visual work
+
+- Build a flowing new adventure with repeatable guide-free directions for EVERY
+  required handoff and the required exploration integrated into the main story.
+  Do not leave old Inclement routing that contradicts the book.
+- New/materially changed scenes require native headless execution, meaningful
+  screenshots, contact-sheet inspection and refinement: choreography, facing,
+  entrances/exits, waits, camera, labels, collision, outcome and re-entry behavior.
+  Correct collision or plausible code alone is not visual acceptance.
+- Group unmodified captured pixels in labeled contact sheets by default. Preserve
+  originals, hashes, trace references and earned/synthetic provenance. Never use
+  generated artwork to recreate gameplay evidence. Inspect a single frame/crop
+  only for a concrete detail. Present scene evidence for the user's visual review;
+  do not claim the user has approved images they have not accepted.
+- Prefer repurposing obsolete ORIGINAL Emerald/Inclement pickups. Presence in this
+  checkout does not prove original placement. Respect the rejected Diancie (7,9)
+  sparkle; do not replace it with another invented coordinate. No arbitrary sparkles.
+- Do not stall campaign progress on exhaustive furniture/menu/inspection checklists.
+  Cover meaningful interactions, progression, services, rewards and demonstrated
+  failure branches in proportion to risk.
+
+## Verification and delivery
+
+- Audit failed checks first: requirement, fixture/input, config, source and artifact
+  identity. Delete stale checks; never weaken a valid assertion just to pass.
+- Test observable behavior with focused native regressions for real defects. Avoid
+  mirrored/redundant tests and repeated unchanged suites. Preserve baseline failures
+  and fixed-case evidence when they establish the repair.
+- Build/stamp the exact tree. A fresh input stamp cannot repair stale objects.
+  Keep ROM, ELF and input stamp together. Resume changed ROMs through an actual
+  in-game Save and clean Continue, never a cross-ROM savestate.
+- Distinguish generator/static checks, native fixtures, actual complete battles,
+  campaign traversal, visual review, timing samples and full-game acceptance.
+  Do not turn a count of passing tests or trainer flags into broader proof.
+- Preserve fresh-run save integrity, full-storage/bag pending rewards, temporary
+  party restoration and native Retry versus Reload. Field medicine stays available;
+  free preparation must not become a resale exploit. No legacy save migrations.
+- Deliver a source-bound normal ROM and working downloads, organized evidence and
+  the maintained book. Upload success alone is not delivery; verify downloads.

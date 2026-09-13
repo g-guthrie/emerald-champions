@@ -18,8 +18,15 @@ def sha(path):
 
 
 def font(size):
-    path = Path('/System/Library/Fonts/Supplemental/Arial.ttf')
-    return ImageFont.truetype(str(path), size) if path.exists() else ImageFont.load_default(size=size)
+    for name in ('/System/Library/Fonts/Supplemental/Arial.ttf',
+                 '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'):
+        path = Path(name)
+        if path.exists():
+            return ImageFont.truetype(str(path), size)
+    try:
+        return ImageFont.load_default(size=size)
+    except TypeError:  # Distribution Pillow before 10.1.
+        return ImageFont.load_default()
 
 
 def main():
