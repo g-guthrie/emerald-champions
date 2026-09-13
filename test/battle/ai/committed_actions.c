@@ -10,20 +10,28 @@ AI_DOUBLE_BATTLE_TEST("EC committed actions: attack the flank that did not choos
     PARAMETRIZE { flank = 0; }
     PARAMETRIZE { flank = 1; }
     GIVEN {
-        AI_FLAGS(EC_FLAGS);
-        PLAYER(SPECIES_WOBBUFFET) { HP(500); MaxHP(500); Moves(MOVE_PROTECT, MOVE_CELEBRATE); }
-        PLAYER(SPECIES_WOBBUFFET) { HP(500); MaxHP(500); Moves(MOVE_PROTECT, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_TAUROS) { Moves(MOVE_TACKLE); }
+        AI_FLAGS(EC_FLAGS | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS);
+        // The protected foe looks like a knockout to the isolated scorer;
+        // useful chip on its sturdier partner must still win the full turn.
+        PLAYER(flank == 0 ? SPECIES_SUDOWOODO : SPECIES_FERROSEED) {
+            Level(14); HP(flank == 0 ? 27 : 46); MaxHP(49); SpDefense(flank == 0 ? 27 : 33);
+            Item(flank == 0 ? ITEM_LIFE_ORB : ITEM_EVIOLITE); Moves(MOVE_PROTECT, MOVE_CELEBRATE);
+        }
+        PLAYER(flank == 1 ? SPECIES_SUDOWOODO : SPECIES_FERROSEED) {
+            Level(14); HP(flank == 1 ? 27 : 46); MaxHP(49); SpDefense(flank == 1 ? 27 : 33);
+            Item(flank == 1 ? ITEM_LIFE_ORB : ITEM_EVIOLITE); Moves(MOVE_PROTECT, MOVE_CELEBRATE);
+        }
+        OPPONENT(SPECIES_NOSEPASS) { Level(15); SpAttack(35); Moves(MOVE_EARTH_POWER); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
     } WHEN {
         TURN {
             MOVE(playerLeft, flank == 0 ? MOVE_PROTECT : MOVE_CELEBRATE);
             MOVE(playerRight, flank == 1 ? MOVE_PROTECT : MOVE_CELEBRATE);
-            EXPECT_MOVE(opponentLeft, MOVE_TACKLE, target: flank == 0 ? playerRight : playerLeft);
+            EXPECT_MOVE(opponentLeft, MOVE_EARTH_POWER, target: flank == 0 ? playerRight : playerLeft);
         }
     } THEN {
-        EXPECT_EQ(flank == 0 ? playerLeft->hp : playerRight->hp, 500);
-        EXPECT_LT(flank == 0 ? playerRight->hp : playerLeft->hp, 500);
+        EXPECT_EQ(flank == 0 ? playerLeft->hp : playerRight->hp, 27);
+        EXPECT_LT(flank == 0 ? playerRight->hp : playerLeft->hp, 46);
     }
 }
 

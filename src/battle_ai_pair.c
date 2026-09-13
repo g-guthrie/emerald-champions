@@ -1831,6 +1831,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         enum Move move = action->move;
         enum BattleMoveEffects effect = GetMoveEffect(move);
         s32 sign = GetBattlerSide(actor) == ev->side ? 1 : -1;
+        s32 damageOpinion = 0;
         if (((gBattleMons[actor].status1 & STATUS1_SLEEP) > (gAiLogicData->abilities[actor] == ABILITY_EARLY_BIRD ? 2 : 1)
              && !IsUsableWhileAsleepEffect(effect))
          || ((gBattleMons[actor].status1 & STATUS1_FREEZE) && !MoveThawsUser(move))
@@ -1860,7 +1861,13 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (action->score == 0)
                     score -= 500;
                 else
-                    score += (action->score - AI_SCORE_DEFAULT) * 4;
+                {
+                    s32 opinion = (action->score - AI_SCORE_DEFAULT) * 4;
+                    if (opinion <= 0 || IsBattleMoveStatus(action->executedMove))
+                        score += opinion;
+                    else
+                        damageOpinion = opinion;
+                }
             }
         }
         if (effect == EFFECT_BELLY_DRUM)
@@ -2261,6 +2268,14 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // not damage. Poison remains the native single-action opinion.
             struct SimulatedDamage damage = move == MOVE_TOXIC_THREAD || move == MOVE_CHARM ? (struct SimulatedDamage){0}
                 : gAiLogicData->simulatedDmg[actor][target][action->index];
+            // An isolated KO/matchup bonus is not earned by attacking into
+            // Protect. Credit it once, only after a real recipient survives
+            // targeting and guard checks; spread moves may still hit a partner.
+            if (damage.affectsTarget && damageOpinion)
+            {
+                score += damageOpinion * guardHitChance / 100;
+                damageOpinion = 0;
+            }
             bool32 hpPowerAdjusted = actionHp != gBattleMons[actor].hp
                 && (ev->hpPowerTargets[actor][action->index] & (1u << target));
             if (hpPowerAdjusted)
