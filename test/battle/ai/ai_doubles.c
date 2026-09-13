@@ -1814,21 +1814,23 @@ AI_DOUBLE_BATTLE_TEST("AI does not penalize Protect if its ally switches instead
     ASSUME(GetItemHoldEffect(ITEM_WEAKNESS_POLICY) == HOLD_EFFECT_WEAKNESS_POLICY);
 
     GIVEN {
-        WITH_CONFIG(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE, 0);
-        WITH_CONFIG(SHOULD_SWITCH_ALL_MOVES_BAD_PERCENTAGE, 100);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_CHARIZARD) { Moves(MOVE_SCRATCH); }
-        PLAYER(SPECIES_CHARIZARD) { Moves(MOVE_SCRATCH); }
-        OPPONENT(SPECIES_GIBLE)   { Level(1); Attack(1); Moves(MOVE_EARTHQUAKE); }
-        OPPONENT(SPECIES_PIKACHU) { Level(100); HP(400); Defense(400); Item(ITEM_WEAKNESS_POLICY); Moves(MOVE_PROTECT, MOVE_TACKLE); }
-        OPPONENT(SPECIES_RAMPARDOS) { Level(100); Moves(MOVE_ROCK_SLIDE); }
+        AI_FLAGS(EC_EXPERT_FLAGS);
+        PLAYER(SPECIES_CHARIZARD) { Level(100); HP(500); MaxHP(500); Attack(300); Speed(100); Moves(MOVE_SCRATCH); }
+        PLAYER(SPECIES_CHARIZARD) { Level(100); HP(500); MaxHP(500); Attack(300); Speed(90); Moves(MOVE_SCRATCH); }
+        OPPONENT(SPECIES_GIBLE)   { Level(1); Attack(1); Speed(1); Moves(MOVE_EARTHQUAKE); }
+        OPPONENT(SPECIES_PIKACHU) { Level(100); HP(50); MaxHP(50); Defense(100); Speed(50); Item(ITEM_WEAKNESS_POLICY); Moves(MOVE_PROTECT, MOVE_TACKLE); }
+        OPPONENT(SPECIES_RAMPARDOS) { Level(100); HP(500); MaxHP(500); Defense(300); Speed(25); Moves(MOVE_ROCK_SLIDE); }
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft);
             MOVE(playerRight, MOVE_SCRATCH, target: opponentRight);
             EXPECT_SWITCH(opponentLeft, 2);
-            SCORE_GT_VAL(opponentRight, MOVE_PROTECT, AI_SCORE_DEFAULT + WORST_EFFECT, target: playerRight);
+            EXPECT_MOVE(opponentRight, MOVE_PROTECT);
         }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_RAMPARDOS);
+        EXPECT_EQ(opponentRight->hp, 50);
+        EXPECT_EQ(opponentRight->item, ITEM_WEAKNESS_POLICY);
     }
 }
 

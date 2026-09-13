@@ -823,7 +823,7 @@ static bool32 PairIsPassiveGuard(const struct PairAction *action)
 
 static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum BattlerId actor)
 {
-    // This only permits a two-guard candidate; it does not reward or force it.
+    // This permits passive waiting; it does not reward or force a guard.
     // Inspect public state once per board, not inside the pair enumeration.
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
@@ -833,11 +833,21 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
         enum HoldEffect item = gAiLogicData->holdEffects[battler];
         if (!IsBattlerAlly(actor, battler))
         {
+            bool32 committed = IsBattlerActionCommitted(battler);
+            enum Move move = committed && gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
+                ? GetCommittedMove(battler) : MOVE_NONE;
+            u32 index = GetMoveIndex(battler, move);
             if (GetBattlerSecondaryDamage(battler)
              || ((gBattleMons[battler].status1 & STATUS1_BURN) && ability != ABILITY_MAGIC_GUARD)
              || gBattleMons[battler].volatiles.yawn
              || (ability == ABILITY_TRUANT && !gBattleMons[battler].volatiles.truantCounter)
-             || (gBattleStruct->battlerState[battler].isFirstTurn && HasMove(battler, MOVE_FAKE_OUT)))
+             || (gBattleStruct->battlerState[battler].isFirstTurn
+                 && (committed ? move == MOVE_FAKE_OUT : HasMove(battler, MOVE_FAKE_OUT)))
+             || (move != MOVE_NONE && GetMoveEffect(move) == EFFECT_SUCKER_PUNCH)
+             || (move != MOVE_NONE && !IsBattleMoveStatus(move) && index < MAX_MON_MOVES
+                 && gBattleMons[battler].pp[index] == 1)
+             || (gBattleMons[battler].volatiles.semiInvulnerable
+                 && gBattleMons[battler].volatiles.semiInvulnerable != STATE_COMMANDER))
                 return TRUE;
             continue;
         }
@@ -2986,6 +2996,11 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     enum BattlerId firstFoe = GetOppositeBattler(actor);
     enum BattlerId secondFoe = GetPartnerBattler(firstFoe);
     bool32 canWait = PairWaitingHasPayoff(ev, actor);
+    enum Move lastMove = gLastMoves[actor];
+    bool32 emptySoloRepeat = !canWait && !IsBattlerAlive(partner)
+        && ev->board.reserveValue[ev->side] == 0
+        && lastMove != MOVE_NONE && lastMove != MOVE_UNAVAILABLE
+        && gBattleMoveEffects[GetMoveEffect(lastMove)].usesProtectCounter;
     bool32 hasAlternative = FALSE;
     for (u32 index = 0; index < 2; index++)
     {
@@ -3011,6 +3026,12 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             // retain a legal fallback if both actors can only protect.
             if (!canWait && hasAlternative && PairIsPassiveGuard(&ev->action[actor])
              && PairIsPassiveGuard(&ev->action[partner]))
+                continue;
+            // A lone survivor cannot turn the same lost board into progress
+            // by repeatedly keeping only its own HP. Retain a first shield,
+            // real waiting payoffs, contact effects and modern side guards.
+            if (emptySoloRepeat && hasAlternative && PairIsPassiveGuard(&ev->action[actor])
+             && GetProtectType(GetMoveProtectMethod(ev->action[actor].move)) == PROTECT_TYPE_SINGLE)
                 continue;
             s32 score = INT_MAX;
             for (u32 forecast = 0; forecast < forecastCount; forecast++)
