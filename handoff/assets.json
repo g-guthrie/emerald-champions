@@ -26,6 +26,252 @@
       "destination": "release/Emerald-Champions-7.1-archive.zip",
       "size": 38407637,
       "sha256": "bdaf26db8082569354c2033e4cfbf43f7d16a98e7aa67c301a846d24da1b67d5"
+    },
+    {
+      "name": "v4-resume.tar.gz",
+      "group": "resume",
+      "format": "tar",
+      "size": 43922460,
+      "sha256": "b30682d895f8365e9759d02dbad8437701aba4fff763fba42a49383792be954b"
+    },
+    {
+      "name": "v4-evidence-01.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 50708163,
+      "sha256": "e59e5fead40054ac870229c9b16f86541bfada94f05d2d6e36e99b522e04b581"
+    },
+    {
+      "name": "v4-evidence-02.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 55177972,
+      "sha256": "2b45e4cbf206c4ea32b60948c3e2f05dae6a2dc24ed402fcdc17383c3691051a"
+    },
+    {
+      "name": "v4-evidence-03.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 66138862,
+      "sha256": "a0ccb7465526f97b1ae8a8be3adbf8e1bf5486ec2ad414470d401e96de2d2220"
+    },
+    {
+      "name": "v4-evidence-04.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 46295817,
+      "sha256": "5c7dcca780eda41d0ea4eebed55abcf531dced0a3c7b766c690ad90e9acee8b3"
+    },
+    {
+      "name": "v4-evidence-05.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 66183162,
+      "sha256": "ea794505d957036a5893ebb73b78c8e851953c4f7fb3fc9a19a49b1eb6a53b1f"
+    },
+    {
+      "name": "v4-evidence-06.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 51406927,
+      "sha256": "98e63b53c2a09b66ccb0e8bfc95c91c5fca5a1408a9a34921fbc1dbeca2ea554"
+    },
+    {
+      "name": "v4-evidence-07.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 54537930,
+      "sha256": "3995b0ef3ab96cc8cbd5af27d49a6ba83e96f84d45ae9cd0893add3bc1cde18c"
+    },
+    {
+      "name": "v4-evidence-08.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 64101656,
+      "sha256": "d8a1730e8c7e28df7dd7b06e7ba6e129b7af22e442c6b5af2d661c488bcb0c82"
+    },
+    {
+      "name": "v4-evidence-09.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 55459933,
+      "sha256": "5533b7f350c76cea94116ed2cf7579bf90b6c8b5b67b0e28e1b3330073beb639"
+    },
+    {
+      "name": "v4-evidence-10.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 56568524,
+      "sha256": "07cc454c725406ba8ef736eb4bab9fb0f0a1c2d948f19fa085ff24202503ba9b"
+    },
+    {
+      "name": "v4-evidence-11.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 52762789,
+      "sha256": "2fe94a09ea16671fcda1c3c76380ba5b6742b5dee5ea606d8658a61c91e425aa"
+    },
+    {
+      "name": "v4-evidence-12.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 60058611,
+      "sha256": "70f25568d76ea15a81fb3fe2d32630233684ac6b96366fe131e18d7486a11b3e"
+    },
+    {
+      "name": "v4-evidence-13.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 57676163,
+      "sha256": "a7deecbcc0503210aa0b49c14146d84ce8000bd687c64d9cf0bcf0c819f61161"
+    },
+    {
+      "name": "v4-evidence-14.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 64787003,
+      "sha256": "ddc3cf2c0c857ed508203cdbdeee1463a2fe8045d5eed5bc98dc1e9c97ce1435"
+    },
+    {
+      "name": "v4-evidence-15.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 53588353,
+      "sha256": "1cf9cb3a1f9bd1670b223bd0729a97023483ca2f87317d15170a01d5edca3a0b"
+    },
+    {
+      "name": "v4-evidence-16.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 61184924,
+      "sha256": "f8ff8aa875e51419460bbeb2beef1f80cfbbfdc434bd7e5d9e1bc0c42b035cba"
+    },
+    {
+      "name": "v4-evidence-17.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 57288584,
+      "sha256": "509f674cce6dcf55215f3896d47a9ce7a041b02f707b4cf50953b4bffb063d41"
+    },
+    {
+      "name": "v4-evidence-18.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 57730566,
+      "sha256": "e5f65879b459d58b905e3f7e12d47ed567638539b064c8878223976faac756f0"
+    },
+    {
+      "name": "v4-evidence-19.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 51866523,
+      "sha256": "960870230edbe91b5df7eff15a0e6ddae580fad99972639a9d16a5f509553b88"
+    },
+    {
+      "name": "v4-evidence-20.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 54888884,
+      "sha256": "1026864554e81412945d55c195ad9c9256c9f13324d9406c9b47d6479bc7575e"
+    },
+    {
+      "name": "v4-evidence-21.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 55508753,
+      "sha256": "b7e84f70d9c688de890f87e1bc5df448264edfd23ed7bd385e7d79ed0bb940b2"
+    },
+    {
+      "name": "v4-evidence-22.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 58949606,
+      "sha256": "6ec0835e097020ea876164cb9459d062f3eaebc8be9ec30e83f93d64072a6792"
+    },
+    {
+      "name": "v4-evidence-23.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 58159066,
+      "sha256": "e6e2c3d51a06f2df1980a384d635ce574d89e647f887e70c5519c3d770d9466e"
+    },
+    {
+      "name": "v4-evidence-24.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 50603243,
+      "sha256": "ce31e06d37628408256e352b3845acf11b683b1f4a849dd5bd3118f7cde0cf02"
+    },
+    {
+      "name": "v4-evidence-25.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 59536555,
+      "sha256": "e949fb63fc2c8febf980288a7a55b328691e0da1da067f222c1f21f8fa52914a"
+    },
+    {
+      "name": "v4-evidence-26.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 51739281,
+      "sha256": "ee78508cd6d9ec565c5671f2b15cea3d9efd165952b791ff3a953441f1a4bb3b"
+    },
+    {
+      "name": "v4-evidence-27.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 65681857,
+      "sha256": "1406b8125033ef158fe752ecedc4031cd27c2c2bbd928ebb5d9d685aaf200146"
+    },
+    {
+      "name": "v4-evidence-28.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 61106890,
+      "sha256": "23e8d4a71d3cd646b4956b36e16d17d8229d3782611e044e2f5ca628a7ac975d"
+    },
+    {
+      "name": "v4-evidence-29.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 55752829,
+      "sha256": "f5b5b33fa3dcfc4c20288f12c04d4dae151c1b32654448f385824919f33fe0c7"
+    },
+    {
+      "name": "v4-evidence-30.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 63984720,
+      "sha256": "943a7520d65d376a36ccd0345774c1d1b5c11b424ecb71dff52de2864caa0e80"
+    },
+    {
+      "name": "v4-evidence-31.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 62377719,
+      "sha256": "31859223b18c1d7f805cd14f1affc7d6a1c3b7b0046b465496157533b7461aed"
+    },
+    {
+      "name": "v4-evidence-32.tar.gz",
+      "group": "evidence",
+      "format": "blobs",
+      "size": 59720418,
+      "sha256": "b2c6c8c7fa92c65335d4c14475382a73f62c8136465d3b16fe3bf1d3da3b4791"
+    },
+    {
+      "name": "Emerald-Champions-v4-development.gba",
+      "group": "rom",
+      "format": "file",
+      "destination": "release/Emerald-Champions-v4-development.gba",
+      "size": 33554432,
+      "sha256": "cf89bd32ceb6fc040785630798479db219fd75ebc6563e975c023f471243680e"
+    },
+    {
+      "name": "v4-build-artifacts.tar.gz",
+      "group": "rom",
+      "format": "tar",
+      "size": 75520821,
+      "sha256": "db955d85b2092fc45498a7d544ac2bb53797d79e2e580b3fe582f234b88cebe9"
     }
   ]
 }
