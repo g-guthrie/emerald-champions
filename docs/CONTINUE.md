@@ -19,7 +19,7 @@ paid API, browser emulator, or additional agent is needed to continue.
 4. Read the exact stopping point below before using any published resume asset.
    The local earned continuation is ahead of the original transfer download.
    Never silently replace this continuation with that older checkpoint.
-5. Continue Jocelyn, Brawly, Steven's Ring handoff, the manor and the rest of the
+5. Continue Brawly, Steven's Ring handoff, the manor and the rest of the
    campaign. Build missing/revised story scenes, repair systems/AI as encountered,
    update this book and its consumers, and inspect evidence along the way.
 
@@ -29,12 +29,13 @@ clean Continue; never transplant a savestate into another ROM/ELF.
 
 ## Exact stopping point
 
-- Primary session: `work/v4-c13-quash-fixed-play`, step **074**. Jocelyn was
-  defeated, the party recovered at the Center, and native Save completed at073.
-  Export: `earned-jocelyn-cleared.sav`. Dewford Center `(8,4)`, facing up, free control.
+- Primary session: `work/v4-c13-quash-fixed-play`, step **435**. Brawly has five earned losses.
+  Native recovery and Save completed at434; export `earned-brawly-five-losses.sav`.
+  Petalburg Center `(8,4)`, facing up, healthy party and free control.
+  Source now reduces only Brawly Hawlucha22→21; rebuild and clean Continue are next.
 - **Medium**, cap **20**, **35 earned unique trainer clears**. Cristian: two
   eight-turn losses then a13-turn win. Jocelyn:13-turn loss, eight-turn loss,
-  then seven-turn win. Brawly is still unplayed.
+  then seven-turn win. Brawly:10-,10-,13-,11-, and11-turn losses; still uncleared.
 - Current immutable ROM includes the capture-menu repair and shared timely burn/
   Quash forecasts. Clean Continue from each previous normal save preserved ancestry.
   Native acquisition/preparation includes Carbink and Prankster Sableye. Sableye’s
@@ -50,35 +51,53 @@ clean Continue; never transplant a savestate into another ROM/ELF.
   repackaging/upload/download verification. Do not roll back to that old save.
 
 Current ROM/ELF hashes and ancestry are in the session trace. Both repairs pass
-focused native regressions; the normal release also builds. Capture destination/
-Yes-No visual acceptance remains pending on the next earned catch. Never transplant
+focused native regressions; the normal release also builds. Full-party capture YES replacement/
+Yes-No cleanup was exercised successfully on the earned Abra catch. Direct-PC NO is earned-verified with Azurill; full-storage failure remains pending. Never transplant
 savestates between different ROMs.
 
 ## Current party and rematch plan
 
 | Slot | Pokemon / native preparation | Moves | HP |
 | --- | --- | --- | --- |
-| 0 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 68 |
-| 2 | Sableye, Sitrus Berry, Prankster, Careful | Will-O-Wisp, Quash, Fake Out, Foul Play | 76 |
-| 1 | Combusken, Life Orb, Speed Boost, Timid | Heat Wave, Flamethrower, Feint, Protect | 60 |
-| 3 | Shaymin, Choice Specs, Natural Cure, Modest | Seed Flare, Earth Power, Giga Drain, Psychic | 76 |
+| 0 | Kadabra, Life Orb, Magic Guard, Timid | Psychic, Dazzling Gleam, Counter, Protect | 52 |
+| 1 | Sableye, Sitrus Berry, Prankster, Careful | Taunt, Quash, Fake Out, Foul Play | 76 |
+| 2 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 68 |
+| 3 | Shaymin, Life Orb, Natural Cure, Modest | Seed Flare, Earth Power, Giga Drain, Psychic | 76 |
 | 4 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 72 |
-| 5 | Marshtomp, Eviolite, Damp, Quiet | Muddy Water, Earth Power, Icy Wind, Wide Guard | 76 |
+| 5 | Azumarill, Assault Vest, Huge Power, Adamant | Liquidation, Play Rough, Aqua Jet, Knock Off | 88 |
 
-All are level20 and prepared through native services. Sableye has 252 HP/252 SpD/
-4 Speed. Mienfoo was deposited in Box1; Carbink remains stored. Native forced
-replacements reorder the in-battle party; field order restores after settlement.
+All are level20 and prepared through native services. Mienfoo, Carbink, Marshtomp and
+Combusken are stored. Abra was caught on Granite Cave1F with one Great Ball,
+natively replaced Combusken, evolved through the Leveler and received Life Orb.
+Linking Cord is not available until Slateport. Sableye's tutor visit replaced
+Will-O-Wisp: the move-selection inputs came before the summary screen opened.
+Read-only replay confirmed slot0 was still selected; no wrong-slot write proven.
+Check the actual move cursor and resulting moves after future teaching.
+
+Azurill was caught on the first Route104 encounter with one Great Ball, sent directly
+into PC, withdrawn in place of Marshtomp, bonded to255 and evolved twice with the
+Leveler. The specialist applied the Assault Vest doubles preset natively. Save/export
+followed. Attempt five then lost in11 turns; Azumarill's switch into Super Fang and
+next-turn focus fire were costly. Hawlucha's Protect had value, its84 Speed exceeded
+Aerodactyl82, and it survived Wingbeat at5HP before helping close the battle.
+
+First modest balance adjustment: only E0040-B01 Hawlucha offset+2→+1 (22→21 here).
+Expected unboosted Speed81 gives Aerodactyl a response before Unburden. Shared U0174,
+Humberto's reuse, other Brawly levels and all builds/AI stay as authored. Rebuild the
+normal and headless artifacts, then clean Continue from the actual435 battery save.
+Rematch and verify actual stats/outcome; no tuned win claimed. Conkeldurr was the
+initial candidate but fifth-attempt evidence favored Hawlucha's concrete threshold.
 
 Next: Brawly, then Steven’s Ring and manor/meadow handoffs. His exact T038/
 U0170–0175 team was inspected: Pachirisu/Choice Band Heracross opening; Guts
 Conkeldurr, AV Hariyama, White Herb Unburden Hawlucha and special Cobalion with
 Coaching/Quick Guard. Shared redirection, Coaching recipient survival, burn
-exceptions and priority protection code reviewed. Keep native team/levels.
+exceptions and priority protection code reviewed. Preserve the builds and apply only the documented Brawly Hawlucha level cut.
 Navigation: Center exit `(8,8)`; Gym door `(8,17)`; arrival `(5,27)`; Brawly `(4,3)`.
 
-Capture-flow acceptance remains pending: nine ordinary Old Rod casts produced
-no bite. No odds/RNG were changed. Test the repaired full-party destination and
-Yes/No cleanup on the next earned capture; don't stall the campaign on fishing.
+Capture YES replacement is earned-verified with Abra; direct-PC NO with Azurill.
+Full-storage failure remains pending. Earlier nine Old Rod casts produced no bite.
+No odds/RNG were changed; do not stall on incidental fishing.
 Field specialist Yes/No overlay was also observed and is not yet fixed/accepted.
 
 ## Most recent battle findings
@@ -140,6 +159,18 @@ Thunder Wave missed on turn4; Helping Hand/First Impression killed Shaymin on
 turn5. Breloom’s Protect had defensive value. Wingbeat missed on turn6 before
 turn7 victory. Maximum of seven full decisions:61 frames. No team/level nerf.
 
+**Brawly, E0040 / TRAINER_BRAWLY 266.** Five native losses:10,10,13,11,11 turns;
+maximum measured full decision budgets45,51,49,61,45 native frames respectively.
+Exact T038/U0170–0175 and relevant shared AI were checked before every attempt.
+All five losses used original enemy levels. Hawlucha21 is now authored; rematch pending. Attempt3 removed Cobalion/Hariyama/Heracross; timely burn
+let Aerodactyl survive Hawlucha at2HP. Hawlucha's Protect blocked Foul Play while
+Conkeldurr removed Sableye's berry. Attempt4's Taunt disabled early Follow Me;
+Quash/Psychic removed Cobalion on turn3. Kadabra's Gleam punished Hawlucha's
+Close Combat drops on turn8. Pachirisu fell on turn9; Heracross/Conkeldurr won.
+Full observations are in the canonical book, trace and timing reports. These are
+competitive enemy choices and player preparation/sequencing problems; no new
+AI defect has been demonstrated by these attempts.
+
 ## Implementation already integrated
 
 The Git history contains the complete native base plus the v4 implementation;
@@ -175,7 +206,7 @@ Use commit diffs and current consumers, not a stale summary, when editing.
   user visual review. Avoid arbitrary decorative actors/sparkles. The rejected
   Diancie coordinate (7,9) remains rejected.
 - Complete remaining mechanics/AI acceptance and relevant variant/randomized/
-  alternate-archetype coverage. The 35 earned wins are not 34 fully closed
+  alternate-archetype coverage. The 35 earned wins are not35 fully closed
   acceptance matrices. Earlier shared fixes require dependency-based rechecks;
   prior scores do not automatically certify a newly changed engine.
 - Keep ordinary overlapping trainers' individual victories. Full gauntlet reset

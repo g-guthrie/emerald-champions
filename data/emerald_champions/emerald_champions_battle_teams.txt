@@ -1,5 +1,5 @@
 #! Generated from the canonical Emerald Champions Game Book; edit the book.
-#! Book SHA256: 074869289a633d825debaab30661da2c5739c17ce358876d589540c23dcdeedb
+#! Book SHA256: 73d8a8043a1133120eea0666434e1c2a0226f8bd8eb9b2c035a53b3c93b399ef
 #! Reconcile with: emerald_champions_teams.py --book PATH --write
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP class=rival
@@ -512,13 +512,13 @@ SIRFETCHD @LEEK SCRAPPY ADAMANT 4/252/0/0/0/252 1 | LEAF_BLADE, CLOSE_COMBAT, KN
 strategy: REDIRECTION,SETUP
 mega_slots: NONE
 ai: Ace Pokemon
-plan: First two useful turns: Pachirisu uses Follow Me only when it can preserve a worthwhile Heracross action; otherwise Nuzzle/Super Fang/Helping Hand may create more value. Turn two converts that protection into a knockout rather than endlessly sacrificing the support's turns. Alternate deployment: Hariyama's Fake Out supports Hawlucha's Close Combat/White Herb activation or a safe Swords Dance. Reserves & disruption: Conkeldurr is the Guts priority reserve. Cobalion provides special damage, Quick Guard and Coaching; it is not a physical Justified sweeper. Counterplay & audit: Spread attacks, Fairy/Psychic coverage, priority denial and removing Pachirisu before it can protect the correct threat. Disposition: Preserve the six current members; don't replace this distinct support boss with six independently powerful Fighting attackers.
-crack: Spread attacks, Fairy/Psychic coverage, priority denial and removing Pachirisu before it can protect the correct threat. Disposition: Preserve the six current members; don't replace this distinct support boss with six independently powerful Fighting attackers.
+plan: First two useful turns: Pachirisu uses Follow Me only when it can preserve a worthwhile Heracross action; otherwise Nuzzle/Super Fang/Helping Hand may create more value. Turn two converts that protection into a knockout rather than endlessly sacrificing the support's turns. Alternate deployment: Hariyama's Fake Out supports Hawlucha's Close Combat/White Herb activation or a safe Swords Dance. Reserves & disruption: Conkeldurr is the Guts priority reserve. Cobalion provides special damage, Quick Guard and Coaching; it is not a physical Justified sweeper. Counterplay & audit: Spread attacks, Fairy/Psychic coverage, priority denial and removing Pachirisu before it can protect the correct threat. Disposition: Preserve the six current members; don't replace this distinct support boss with six independently powerful Fighting attackers. Brawly-only Hawlucha level offset was reduced from +2 to +1 after the fifth earned loss, retaining White Herb, Unburden, moves, EVs and shared AI. This opens an unboosted Speed counterplay window; the rematch must establish its actual effect.
+crack: Spread attacks, Fairy/Psychic coverage, priority denial and removing Pachirisu before it can protect the correct threat. Disposition: Preserve the six current members; don't replace this distinct support boss with six independently powerful Fighting attackers. Brawly-only Hawlucha level offset was reduced from +2 to +1 after the fifth earned loss, retaining White Herb, Unburden, moves, EVs and shared AI. This opens an unboosted Speed counterplay window; the rematch must establish its actual effect.
 PACHIRISU @SITRUS_BERRY VOLT_ABSORB IMPISH 252/0/140/0/116/0 1 | FOLLOW_ME, NUZZLE, SUPER_FANG, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 HERACROSS @CHOICE_BAND MOXIE ADAMANT 4/252/0/0/0/252 2 | MEGAHORN, CLOSE_COMBAT, ROCK_SLIDE, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
 CONKELDURR @FLAME_ORB GUTS ADAMANT 252/252/4/0/0/0 2 | FACADE, DRAIN_PUNCH, MACH_PUNCH, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
 HARIYAMA @ASSAULT_VEST THICK_FAT ADAMANT 252/252/4/0/0/0 1 | CLOSE_COMBAT, FAKE_OUT, BULLET_PUNCH, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-HAWLUCHA @WHITE_HERB UNBURDEN JOLLY 4/252/0/0/0/252 2 | CLOSE_COMBAT, ACROBATICS, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+HAWLUCHA @WHITE_HERB UNBURDEN JOLLY 4/252/0/0/0/252 1 | CLOSE_COMBAT, ACROBATICS, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 COBALION @LEFTOVERS JUSTIFIED TIMID 4/0/0/252/0/252 1 | AURA_SPHERE, FLASH_CANNON, QUICK_GUARD, COACHING | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0042 TRAINER_HAILEY class=regular

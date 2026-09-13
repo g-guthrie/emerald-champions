@@ -2,9 +2,9 @@
   "schema_version": 1,
   "date": "2026-09-13",
   "session": "work/v4-c13-quash-fixed-play",
-  "current_step": 74,
+  "current_step": 435,
   "chapter": "C13",
-  "map": "MAP_DEWFORD_TOWN_POKEMON_CENTER_1F",
+  "map": "MAP_PETALBURG_CITY_POKEMON_CENTER_1F",
   "position": [
     8,
     4
@@ -159,27 +159,27 @@
   "uncleared_next": [
     {
       "name": "Brawly",
-      "attempts": 0
+      "attempts": 5
     }
   ],
-  "immediate_plan": "Fight Brawly with native preparation; then earn Steven Ring/manor handoffs. Exact T038 team and shared AI reviewed. No manual healing/X items; naturally activated held items allowed.",
+  "immediate_plan": "Rebuild Hawlucha21 only, clean Continue from post-fifth-loss Save, verify stats and rematch Brawly. Preserve legal held items and retrospective AI audit rule.",
   "repel_spray": "on",
   "poke_vial_charges": 1,
   "party_order": [
-    "Aerodactyl",
-    "Combusken",
+    "Kadabra",
     "Sableye",
+    "Aerodactyl",
     "Shaymin",
     "Pachirisu",
-    "Marshtomp"
+    "Azumarill"
   ],
   "party_hp": [
-    68,
-    60,
+    52,
     76,
+    68,
     76,
     72,
-    76
+    88
   ],
   "party_level": [
     20,
@@ -192,16 +192,16 @@
   "rom_sha256": "ba2d9b8f626d794420c4d17280d2256c6a43af2b3302f11b13c39941cbc02dd1",
   "elf_sha256": "ebd85092ee302c5a82922a999bea2e617e6f2c9ebb07c50c1f4613120a5e6d2f",
   "inputs_sha256": "1e82e3dbc418ba0b7a12d10afbc28d058483a95313132490d9e3b9a1e69ca24f",
-  "save": "work/v4-c13-quash-fixed-play/earned-jocelyn-cleared.sav",
-  "save_sha256": "b13fa15a09bc56fe5e3e0076fd25ed33f8ccb30383a02205cff0b1fcbbccd2f5",
+  "save": "work/v4-c13-quash-fixed-play/earned-brawly-five-losses.sav",
+  "save_sha256": "e0b08b6e494dd1391cd77a986069592cbeaa721f92d36567f392753ddb4e109c",
   "state": "work/v4-c13-quash-fixed-play/current.ss1",
-  "state_sha256": "1535cb000e914c8fb954656be9149367e196d17179d62281cfb313555472b787",
+  "state_sha256": "c2bac1acd35cff40d83f152acd1fcda904025346771d54ca455c2cd83b7777e9",
   "trace": "work/v4-c13-quash-fixed-play/trace.json",
   "source_patch": null,
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
   "evidence_limits": [
     "35 earned clears are not complete acceptance matrices.",
-    "Capture-menu repair visual acceptance still pending.",
+    "Full-party capture YES replacement verified with Abra; direct-PC NO verified with Azurill; full-storage failure pending.",
     "Published original resume assets are behind this local checkpoint until replaced and downloaded.",
     "No later chapter is earned from synthetic execution.",
     "User visual acceptance and broader variant coverage remain pending."
@@ -216,6 +216,13 @@
       "loss13",
       "loss8",
       "win7"
+    ],
+    "Brawly": [
+      "loss10",
+      "loss10",
+      "loss13",
+      "loss11",
+      "loss11"
     ]
   }
 }

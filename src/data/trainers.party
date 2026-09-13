@@ -12137,8 +12137,8 @@ Nature: NATURE_ADAMANT
 - MOVE_KNOCK_OFF
 
 SPECIES_HAWLUCHA @ ITEM_WHITE_HERB
-Level: 22
-Level Offset: 2
+Level: 21
+Level Offset: 1
 Ability: ABILITY_UNBURDEN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
