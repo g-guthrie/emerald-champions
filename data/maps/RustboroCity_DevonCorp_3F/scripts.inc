@@ -226,22 +226,22 @@ RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay::
 	end
 
 RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
-	.string "I'm MR. STONE, president of\n"
-	.string "DEVON. You recovered our GOODS\l"
-	.string "and protected my staff. Thank\l"
-	.string "you!\p"
-	.string "Reports of rare POKéMON are\n"
-	.string "arriving from caves and forests\l"
-	.string "across HOENN.\p"
-	.string "MAGMA and AQUA are searching\n"
-	.string "those same places. I fear the\l"
-	.string "thefts are connected.\p"
-	.string "My son STEVEN is in GRANITE CAVE\n"
-	.string "near DEWFORD. Please take this\l"
-	.string "LETTER to him.\p"
-	.string "Then deliver the GOODS to CAPT.\n"
-	.string "STERN in SLATEPORT. He's counting\l"
-	.string "on us.$"
+	.string "I'm MR. STONE, president of DEVON.\n"
+	.string "You recovered our GOODS and\l"
+	.string "protected my staff. Thank you!\p"
+	.string "That equipment is for CAPT. STERN's\n"
+	.string "marine surveys. My son STEVEN is\l"
+	.string "studying the rocks on DEWFORD.\p"
+	.string "Both projects may explain the rare\n"
+	.string "POKéMON appearing across HOENN.\p"
+	.string "MAGMA and AQUA are searching those\n"
+	.string "same places. I fear the thefts\l"
+	.string "are connected.\p"
+	.string "Please take this LETTER to STEVEN\n"
+	.string "in GRANITE CAVE, near DEWFORD.\p"
+	.string "Then take the GOODS on to CAPT.\n"
+	.string "STERN at SLATEPORT's SHIPYARD.\l"
+	.string "One journey can help them both.$"
 
 RustboroCity_DevonCorp_3F_Text_LetterSentToPC:
 	.string "Your KEY ITEMS pocket is full, so the\n"
@@ -252,8 +252,9 @@ RustboroCity_DevonCorp_3F_Text_LetterNoRoom:
 	.string "Make room, then return to my desk.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:
-	.string "Please take this POKéNAV. You'll need\n"
-	.string "a good map for the journey ahead.$"
+	.string "DEVON will provide ¥4,000 for\n"
+	.string "your journey. Please take this\l"
+	.string "POKéNAV to help you find your way.$"
 
 RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:
 	.string "{PLAYER} received a POKéNAV.$"
@@ -269,16 +270,15 @@ RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
 	.string "DEWFORD is your next stop.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare:
-	.string "Go carefully, {PLAYER}. You've already\n"
-	.string "done more for us than I could ask.$"
-
 RustboroCity_DevonCorp_3F_Text_CountingOnYou:
-	.string "You'll find STEVEN in GRANITE\n"
-	.string "CAVE near DEWFORD. He loses track\l"
-	.string "of time studying rocks!\p"
-	.string "For local legendary leads, ask\n"
-	.string "the guide near the PC in any\l"
-	.string "POKéMON CENTER.$"
+	.string "Go south from RUSTBORO, through\n"
+	.string "PETALBURG WOODS, to MR. BRINEY's\l"
+	.string "cottage on ROUTE 104.\p"
+	.string "Ask him to sail to DEWFORD.\n"
+	.string "STEVEN is in GRANITE CAVE,\l"
+	.string "northwest of town.\p"
+	.string "After the LETTER, take STERN's\n"
+	.string "GOODS onward to SLATEPORT.$"
 
 RustboroCity_DevonCorp_3F_Text_StevenAwaitsKnuckleBadge:
 	.string "STEVEN received my LETTER. Good.\p"
@@ -314,22 +314,12 @@ RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
 	.string "You can explore and catch them\n"
 	.string "without visiting our researcher.$"
 RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
-	.string "This is the DEVON CORPORATION's\n"
-	.string "third floor.\p"
-	.string "Our PRESIDENT's OFFICE is on\n"
-	.string "this floor.\p"
-	.string "Anyway, I can't tell you how much I'm\n"
-	.string "grateful for what you've done.\p"
-	.string "Um… By the way, that parcel\n"
-	.string "you got back for us…\p"
-	.string "Could I get you to deliver that to\n"
-	.string "the SHIPYARD in SLATEPORT?\p"
-	.string "It would be awful if those robbers\n"
-	.string "tried to take it again.\p"
-	.string "Uh… Hehehe, so, uh, could I count\n"
-	.string "on you to do that for me?\p"
-	.string "Oh, that's right.\n"
-	.string "Could you wait here a second?$"
+	.string "This is DEVON's third floor.\n"
+	.string "Our PRESIDENT's office is here.\p"
+	.string "That parcel is survey equipment\n"
+	.string "for CAPT. STERN in SLATEPORT.\l"
+	.string "I'll tell MR. STONE it's safe.\p"
+	.string "Please wait here a moment.$"
 
 RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe:
 	.string "Our PRESIDENT would like to have\n"
