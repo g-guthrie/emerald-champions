@@ -35,7 +35,13 @@ Movement_CutTreeDown:
 
 EventScript_CheckTreeCantCut::
 	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
+	goto_if_set FLAG_RECEIVED_HM_CUT, EventScript_CutNeedsStoneBadge
 	msgbox Text_CantCut, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EventScript_CutNeedsStoneBadge::
+	msgbox Text_CutNeedsStoneBadge, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -91,8 +97,13 @@ Text_BrailleFieldMoveLocked:
 	.string "its field licence and required BADGE.$"
 
 Text_CantCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!$"
+	.string "Get the CUT license from the\n"
+	.string "cutter in RUSTBORO. His house is\l"
+	.string "west of the POKéMON CENTER.$"
+
+Text_CutNeedsStoneBadge:
+	.string "Defeat ROXANNE at RUSTBORO GYM.\n"
+	.string "Her STONE BADGE lets you use CUT.$"
 
 @ Use rock smash from party menu
 EventScript_UseRockSmash::

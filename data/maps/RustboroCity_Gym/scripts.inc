@@ -13,11 +13,8 @@ RustboroCity_Gym_EventScript_Roxanne::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
 	goto_if_unset FLAG_RECEIVED_ROXANNE_OLD_AMBER, RustboroCity_Gym_EventScript_GiveRoxanneRewards
-	goto_if_unset FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, RustboroCity_Gym_EventScript_GiveLegacyOldAmber
 	goto_if_set FLAG_BADGE02_GET, RustboroCity_Gym_EventScript_RoxanneJourneyContinues
-	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
-	release
-	end
+	goto RustboroCity_Gym_EventScript_RoxanneNextStep
 
 RustboroCity_Gym_EventScript_RoxanneDefeated::
 	message RustboroCity_Gym_Text_ReceivedStoneBadge
@@ -44,17 +41,22 @@ RustboroCity_Gym_EventScript_GiveOldAmber::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_ROXANNE_OLD_AMBER
 	msgbox RustboroCity_Gym_Text_ExplainRoxanneRewards, MSGBOX_DEFAULT
+	goto RustboroCity_Gym_EventScript_RoxanneNextStep
+
+RustboroCity_Gym_EventScript_RoxanneNextStep::
+	goto_if_set FLAG_RETURNED_DEVON_GOODS, RustboroCity_Gym_EventScript_RoxanneSailing
+	goto_if_set FLAG_RECOVERED_DEVON_GOODS, RustboroCity_Gym_EventScript_RoxanneReturnGoods
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-@ Saves created before Roxanne awarded Old Amber already have the legacy TM flag.
-RustboroCity_Gym_EventScript_GiveLegacyOldAmber::
-	giveitem ITEM_OLD_AMBER
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
-	msgbox RustboroCity_Gym_Text_ExplainRoxanneRewards, MSGBOX_DEFAULT
-	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
+RustboroCity_Gym_EventScript_RoxanneReturnGoods::
+	msgbox RustboroCity_Gym_Text_RoxanneReturnGoods, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_Gym_EventScript_RoxanneSailing::
+	msgbox RustboroCity_Gym_Text_RoxanneSailing, MSGBOX_DEFAULT
 	release
 	end
 
@@ -396,6 +398,19 @@ RustboroCity_Gym_Text_ExplainRoxanneRewards:
 	.string "project.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle:
+	.string "Meet the DEVON employee in town\n"
+	.string "about the theft.\p"
+	.string "Then take RUSTBORO's east exit\n"
+	.string "onto ROUTE 116. Enter RUSTURF\l"
+	.string "TUNNEL to recover the goods\l"
+	.string "and rescue PEEKO.$"
+
+RustboroCity_Gym_Text_RoxanneReturnGoods:
+	.string "Return the recovered goods to\n"
+	.string "the DEVON employee in RUSTBORO,\l"
+	.string "near the ROUTE 116 entrance.$"
+
+RustboroCity_Gym_Text_RoxanneSailing:
 	.string "Your next GYM is BRAWLY's in DEWFORD.\p"
 	.string "MR. BRINEY sails from his cottage on\n"
 	.string "ROUTE 104, south of PETALBURG WOODS.$"
