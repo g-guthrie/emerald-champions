@@ -75,6 +75,14 @@ struct PairDamageRange
     u16 minimum, median, maximum;
 };
 
+struct PairRetaliation
+{
+    struct PairDamageRange damage;
+    u8 source;
+    u8 chance; // Zero means no qualifying hit this turn.
+    bool8 knownDamage; // Variable/unequal multi-strike sequences retain the old estimate.
+};
+
 struct PairEvaluation
 {
     struct PairBoard board;
@@ -1769,6 +1777,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     u32 statModifier[MAX_BATTLERS_COUNT][4];
     u32 usedItems = 0;
     u32 acted = 0, protected = 0, stopped = 0, wideGuard = 0, quickGuard = 0;
+    struct PairRetaliation received[MAX_BATTLERS_COUNT][DAMAGE_CATEGORY_STATUS] = {0};
+    u8 lastReceivedCategory[MAX_BATTLERS_COUNT] = {0};
     u32 newSleepTargets = 0, newSleepSides = 0;
     u32 newWish = 0;
     u32 encoredGuards = 0;
@@ -1847,6 +1857,22 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (statStage[actor][0] == MAX_STAT_STAGE || hp[actor] <= drumCost)
                 continue;
         }
+        struct PairRetaliation *retaliation = NULL;
+        if (effect == EFFECT_REFLECT_DAMAGE)
+        {
+            u32 categories = GetMoveReflectDamage_DamageCategories(move);
+            u32 category = categories == (1u << DAMAGE_CATEGORY_PHYSICAL) ? DAMAGE_CATEGORY_PHYSICAL
+                : categories == (1u << DAMAGE_CATEGORY_SPECIAL) ? DAMAGE_CATEGORY_SPECIAL : lastReceivedCategory[actor];
+            retaliation = &received[actor][category];
+            // The isolated opinion cannot see this trial's recipients or
+            // shields. A preceding opposing attack is not enough: it must
+            // actually hit this user with the required damage category.
+            if (!retaliation->chance)
+            {
+                score -= sign * 150;
+                continue;
+            }
+        }
         if (sign > 0)
         {
             s32 planScore = action->planScore;
@@ -1856,7 +1882,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // The complete turn owns protection's value. Applying the
             // isolated scorer again can prefer a blocked attack over a shield
             // that saves HP while producing the same damage on both sides.
-            if (!PairSupport(move) && effect != EFFECT_WISH && effect != EFFECT_PROTECT)
+            if (!PairSupport(move) && effect != EFFECT_WISH && effect != EFFECT_PROTECT && effect != EFFECT_REFLECT_DAMAGE)
             {
                 if (action->score == 0)
                     score -= 500;
@@ -2139,6 +2165,17 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             && effect != EFFECT_BEAT_UP && gAiLogicData->abilities[actor] != ABILITY_PARENTAL_BOND
             && !PairSpread(move);
         u32 orbHitChance = 0;
+        enum BattlerId selectedTarget = action->target;
+        if (retaliation)
+        {
+            selectedTarget = retaliation->source;
+            if (!hp[selectedTarget])
+            {
+                if (GetConfig(B_COUNTER_TRY_HIT_PARTNER) < GEN_5)
+                    continue;
+                selectedTarget = GetPartnerBattler(selectedTarget);
+            }
+        }
         for (enum BattlerId original = 0; original < gBattlersCount; original++)
         {
             if (original == actor || !hp[original]
@@ -2149,7 +2186,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (IsBattlerAlly(actor, original) && GetMoveTarget(move) == TARGET_BOTH)
                     continue;
             }
-            else if (original != action->target)
+            else if (original != selectedTarget)
                 continue;
             enum BattlerId target = original;
             if (effect == EFFECT_SUCKER_PUNCH
@@ -2359,8 +2396,27 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             amount = PairApplyScreenRatio(amount, screenNumerator, screenDenominator);
             minimumDamage = PairApplyScreenRatio(minimumDamage, screenNumerator, screenDenominator);
             worstDamage = PairApplyScreenRatio(worstDamage, screenNumerator, screenDenominator);
+            if (retaliation)
+            {
+                if (retaliation->knownDamage)
+                {
+                    u32 percent = damage.affectsTarget ? GetMoveReflectDamage_DamagePercent(move) : 0;
+                    amount = retaliation->damage.median * percent / 100;
+                    minimumDamage = retaliation->damage.minimum * percent / 100;
+                    worstDamage = retaliation->damage.maximum * percent / 100;
+                }
+                accuracy = accuracy * retaliation->chance / 100;
+            }
             if (effect == EFFECT_POPULATION_BOMB && gAiLogicData->populationBomb[actor][target].valid)
             {
+                if (damage.maximum && accuracy && !DoesSubstituteBlockMove(actor, target, move)
+                 && (GetConfig(B_COUNTER_MIRROR_COAT_ALLY) <= GEN_4 || !IsBattlerAlly(actor, target)))
+                {
+                    received[target][DAMAGE_CATEGORY_PHYSICAL] = (struct PairRetaliation){
+                        .source = actor, .chance = accuracy * survival[actor] / 100 * actionChance[actor] / 10000,
+                    };
+                    lastReceivedCategory[target] = DAMAGE_CATEGORY_PHYSICAL;
+                }
                 PairApplyPopulationBomb(ev, actor, target, action, nativeAccuracy, guardHitChance,
                     actionChance[actor], boost[actor], statPower, screenNumerator, screenDenominator,
                     hp, survival, speed, &usedItems);
@@ -2491,6 +2547,32 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             bool32 contactPaid = FALSE;
             u32 beforeHitHp = hp[target], beforeHitSurvival = survival[target];
+            if (amount && !DoesSubstituteBlockMove(actor, target, move)
+             && (gBattleMons[target].volatiles.transformed
+                 || !((targetAbility == ABILITY_DISGUISE && IsMimikyuDisguised(target))
+                     || (targetAbility == ABILITY_ICE_FACE && gBattleMons[target].species == SPECIES_EISCUE_ICE
+                         && IsBattleMovePhysical(move))))
+             && (GetConfig(B_COUNTER_MIRROR_COAT_ALLY) <= GEN_4 || !IsBattlerAlly(actor, target)))
+            {
+                enum DamageCategory category = GetBattleMoveCategory(move);
+                if (GetConfig(B_HIDDEN_POWER_COUNTER) < GEN_4 && effect == EFFECT_HIDDEN_POWER)
+                    category = DAMAGE_CATEGORY_PHYSICAL;
+                if (category != DAMAGE_CATEGORY_STATUS)
+                {
+                    struct PairRetaliation *hit = &received[target][category];
+                    hit->source = actor;
+                    hit->chance = hitChance;
+                    // Native Counter uses the final strike, not the total.
+                    // Equal fixed strikes can reuse the aggregate endpoints;
+                    // variable counts, ramping power and Parental Bond cannot.
+                    u32 strikes = max(1, GetMoveStrikeCount(move));
+                    hit->knownDamage = singleHit || (strikes > 1 && !IsMultiHitMove(move)
+                        && effect != EFFECT_TRIPLE_KICK && effect != EFFECT_POPULATION_BOMB
+                        && gAiLogicData->abilities[actor] != ABILITY_PARENTAL_BOND);
+                    hit->damage = (struct PairDamageRange){minimumDamage / strikes, medianDamage / strikes, worstDamage / strikes};
+                    lastReceivedCategory[target] = category;
+                }
+            }
             PairApplyDamageWhenActing(&hp[target], &survival[target], minimumDamage, medianDamage, worstDamage,
                 damageHitChance, actionChance[actor]);
             if (gAiLogicData->abilities[target] == ABILITY_STAMINA && target != actor && hp[target] && amount && singleHit
