@@ -1,5 +1,5 @@
 #! Generated from the canonical Emerald Champions Game Book; edit the book.
-#! Book SHA256: ca7169af7c3a90ccf3b062af417efe7ded09cfd0e25f9d548d1ab6fc45a62025
+#! Book SHA256: 0e95845557fbf776e97de70e96fdb1c360e966c5fd30481a8c6c9244a66e7978
 #! Reconcile with: emerald_champions_teams.py --book PATH --write
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP class=rival

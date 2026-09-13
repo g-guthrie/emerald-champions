@@ -7,6 +7,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "item.h"
+#include "field_effect.h"
 #include "legendary_signs.h"
 #include "pokedex.h"
 #include "pokemon.h"
@@ -377,6 +378,33 @@ static bool32 MeetsSignDiscovery(enum LegendarySignId id)
             && IsLegendarySignCaught(LEGENDARY_SIGN_MUNKIDORI)
             && IsLegendarySignCaught(LEGENDARY_SIGN_FEZANDIPITI);
     return HasCaughtSpeciesFamily(gLegendarySignDefinitions[id].requiredSpecies);
+}
+
+// Prepare presentation only. Discovery is committed after the native song scene.
+void PrepareEmeraldChampionsMeadowSong(void)
+{
+    gSpecialVar_Result = FALSE;
+    if (!FlagGet(FLAG_BADGE02_GET) || !PlayerOwnsItem(ITEM_MEGA_RING))
+        return;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+        if (species == SPECIES_NONE || species == SPECIES_EGG)
+            continue;
+        for (u32 move = 0; move < MAX_MON_MOVES; move++)
+        {
+            if (GetMonData(mon, MON_DATA_MOVE1 + move) == MOVE_SING)
+            {
+                GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+                StringGet_Nickname(gStringVar1);
+                FieldMoveShowMon_ClearSpeciesOverride();
+                gFieldEffectArguments[0] = slot;
+                gSpecialVar_Result = TRUE;
+                return;
+            }
+        }
+    }
 }
 
 void TryUnlockLocalLegendaryDiscovery(void)

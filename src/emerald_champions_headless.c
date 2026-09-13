@@ -1292,7 +1292,8 @@ void EmeraldChampionsHeadlessObserve(void)
         return;
     }
     if (EmeraldChampionsHeadlessBattleAutomationActive()
-     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BERRY_ECONOMY)
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BERRY_ECONOMY
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_C14_SONG)
     {
         if (!gMain.inBattle)
             sEcHeadlessAutoCaptureInProgress = FALSE;
@@ -2063,6 +2064,22 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
 
     switch (scenario)
     {
+    case EC_HEADLESS_SCENARIO_C14_SONG:
+    {
+        u32 param = gEcHeadlessFixtureParam;
+        PrepareCircuitParty();
+        FlagSet(FLAG_BADGE02_GET);
+        FlagSet(FLAG_EC_MANOR_NOTES_READ);
+        if (param != 3)
+            AddBagItem(ITEM_MEGA_RING, 1);
+        if (param != 1)
+        {
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_JIGGLYPUFF, 20, OTID_STRUCT_PLAYER_ID);
+            SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_SING, 0);
+        }
+        LoadHeadlessMap(MAP_DEWFORD_MEADOW, 27, 13);
+        return;
+    }
     case EC_HEADLESS_SCENARIO_BERRY_ECONOMY:
     {
         u32 param = gEcHeadlessFixtureParam;

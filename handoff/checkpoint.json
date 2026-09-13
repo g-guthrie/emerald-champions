@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "session": "work/v4-c13-berry-complete-play",
-  "current_step": 1,
-  "chapter": "C13",
-  "map": "MAP_DEWFORD_TOWN",
+  "session": "work/v4-c14-native-play",
+  "current_step": 0,
+  "chapter": "C14",
+  "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
   "position": [
-    2,
-    11
+    7,
+    7
   ],
-  "facing": "down",
+  "facing": "up",
   "controls_locked": false,
   "difficulty": "Medium",
   "player_cap": 20,
@@ -161,7 +161,11 @@
     }
   ],
   "uncleared_next": [],
-  "immediate_plan": "Berry economy implemented/tested. Six Lum acquired and saved natively, Harvest Pouch owned. Continue to Steven in Granite Cave for Ring/starter stones, then C14 manor and meadow. Audit every trainer and all related bug paths. No subagents.",
+  "immediate_plan": [
+    "Leave Granite Cave; Steven gave Ring, Blazikenite and Swampertite, then departed.",
+    "Earn C14: manor account, native Jigglypuff capture/Sing preparation, meadow performance.",
+    "Continue Slateport and audit every trainer before battle."
+  ],
   "repel_spray": "on",
   "poke_vial_charges": 1,
   "party_order": [
@@ -188,23 +192,17 @@
     20,
     20
   ],
-  "rom_sha256": "aa19065fe1c990b1f92ddb0f75ec7f59976aef9cc8b56a1360381a2eed7e2e61",
-  "elf_sha256": "6d1faef4381d131c45a0dacc040336fe5941652f002a50f317bdeca352a8252b",
-  "inputs_sha256": "51861224a6042b7e66c610af57487d11bfe081e730b634710733825934a8bf9a",
-  "save": "work/v4-c13-harvest-play/earned-six-lum.sav",
-  "save_sha256": "2f3ccce81d9c58e3961289a5a41fa8bba1022f0f05673060dcff031a62008fef",
-  "state": "work/v4-c13-berry-complete-play/current.ss1",
-  "state_sha256": "ad951fafac4e5903d92c5989b157386abd9e457b15e97b0f9dec73bf68359575",
-  "trace": "work/v4-c13-berry-complete-play/trace.json",
-  "source_patch": null,
+  "rom_sha256": "e32077ac5217ff88d9e6f350ba601eb9d68aa665c5815f12b67f0bc547d448a2",
+  "elf_sha256": "adaee2b9fde9510714882ee1fee6aed73d841c68d1c76d02c774bb0e15712748",
+  "inputs_sha256": "0f8b04176517d613afa97213d5f2ae19f822d0e3d599005f4eb604515e04b2a9",
+  "save": "work/v4-c13-berry-complete-play/earned-steven-ring.sav",
+  "save_sha256": "48459242f233c569692e961af4ce4ef63f09c0183ddf358253f5c9ed466d1a6e",
+  "state": "work/v4-c14-native-play/current.ss1",
+  "state_sha256": "8b9c10c9487196c693cc5db40c54333c0cdf1518c84b8530270a3dbe06e88108",
+  "trace": "work/v4-c14-native-play/trace.json",
+  "source_patch": "C14 native singer presentation and repeatable manor/meadow handoffs; berry economy committed 23753c5c6e.",
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
-  "evidence_limits": [
-    "36 earned clears are not full-game acceptance.",
-    "Full-party capture YES replacement verified with Abra; direct-PC NO verified with Azurill; full-storage failure pending.",
-    "Published original resume assets are behind this local checkpoint until replaced and downloaded.",
-    "No later chapter is earned from synthetic execution.",
-    "User visual acceptance and broader variant coverage remain pending."
-  ],
+  "evidence_limits": "36 earned trainer clears. C14 scene synthetic checks passed; earned traversal underway. Whole game remains unfinished.",
   "recent_results": {
     "Cristian": [
       "loss8",

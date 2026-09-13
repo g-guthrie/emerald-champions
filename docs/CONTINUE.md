@@ -30,11 +30,13 @@ clean Continue; never transplant a savestate into another ROM/ELF.
 ## Exact stopping point
 
 - **USER RESUMED full implementation/playthrough. Berry economy implemented.**
-  Primary `work/v4-c13-berry-complete-play`, clean Continue from native
-  `work/v4-c13-harvest-play/earned-six-lum.sav`. Six Lum Berries acquired through
+  Primary `work/v4-c14-native-play`, clean Continue from native
+  `work/v4-c13-berry-complete-play/earned-steven-ring.sav`. Steven has given the
+  Ring, Blazikenite and Swampertite and departed. C14 performance/directions
+  are built and synthetically checked; earn the manor and song chapter next. Six Lum Berries acquired through
   the new free vendor; Harvest Pouch obtained and used natively. Harvested Lum
   remains zero. Native Save021/export022 and new clean Continue preserve these.
-  Current position/step are in `handoff/checkpoint.json`; heading to Steven.
+  Current position/step are in `handoff/checkpoint.json`; leaving Granite Cave.
   Brawly won attempt7 in11 turns; 36 earned unique trainer clears. Do not replay
   him or pursue the superseded Gyarados/preset Lum workaround.
   All67 ordinary berries now free. Separate per-type harvest pouch, typed stone
