@@ -33,7 +33,8 @@ GraniteCave_1F_Text_GetsDarkAheadHereYouGo:
 GraniteCave_1F_Text_ExplainFlash:
 	.string "That HM registers FLASH as a field\n"
 	.string "technique for your team.\p"
-	.string "It lights up even the inky darkness\n"
-	.string "of caves.\p"
-	.string "With DEWFORD's GYM BADGE, caves\n"
-	.string "light up as you enter them!$"
+	.string "With your STONE BADGE and this\n"
+	.string "license, caves light up as you\l"
+	.string "enter. No move slot is needed.\p"
+	.string "Follow the ladders through the\n"
+	.string "lower floors to STEVEN's room.$"

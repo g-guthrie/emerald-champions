@@ -131,7 +131,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_FLASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE01_GET) : FLAG_TO_BADGE(FLAG_BADGE02_GET),
+        .arg = FLAG_TO_BADGE(FLAG_BADGE01_GET),
         .hideIfLocked = TRUE,
         .hideInPartyMenu = TRUE,
     },
