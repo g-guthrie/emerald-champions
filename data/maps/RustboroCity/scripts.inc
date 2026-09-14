@@ -615,7 +615,7 @@ RustboroCity_EventScript_ReturnGoods::
 	call_if_eq VAR_TEMP_1, 4, RustboroCity_EventScript_EmployeeFacePlayerRight
 	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
 	giveitem ITEM_GREAT_BALL
-	goto_if_eq VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
+	call_if_eq VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
 	msgbox RustboroCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
@@ -628,9 +628,9 @@ RustboroCity_EventScript_ReturnGoods::
 	end
 
 RustboroCity_EventScript_BagFull::
-	msgbox RustboroCity_Text_YoureLoadedWithItems, MSGBOX_DEFAULT
-	releaseall
-	end
+	setflag FLAG_EC_RUSTBORO_GREAT_BALL_PENDING
+	msgbox PetalburgWoods_Text_YoureLoadedWithItems, MSGBOX_DEFAULT
+	return
 
 RustboroCity_EventScript_EmployeeFacePlayerUp2::
 	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterUp

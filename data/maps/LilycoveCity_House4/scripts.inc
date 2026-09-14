@@ -21,6 +21,8 @@ LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis:
 
 
 LilycoveCity_House4_EventScript_MegaGift_LAPRASITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_House4_EventScript_Man2
 	goto_if_set FLAG_EC_MEGA_GIFT_LAPRASITE, LilycoveCity_House4_EventScript_Man2
 	lock
 	faceplayer
@@ -38,6 +40,8 @@ LilycoveCity_House4_EventScript_MegaGift_LAPRASITE_Text:
 	.string "Please find a Lapras to give it to.$"
 
 LilycoveCity_House4_EventScript_MegaGift_STARMINITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_House4_EventScript_Man1
 	goto_if_set FLAG_EC_MEGA_GIFT_STARMINITE, LilycoveCity_House4_EventScript_Man1
 	lock
 	faceplayer

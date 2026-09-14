@@ -18,10 +18,29 @@ GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge::
 	goto_if_unset FLAG_BADGE02_GET, GraniteCave_StevensRoom_EventScript_WaitForKnuckleBadge
 	setvar VAR_0x8004, ITEM_MEGA_RING
 	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_StarterGifts
+	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_Aerodactylite
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_RING
 	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
+@ This reuses the original Aerodactylite entitlement; Roxanne now gives Amber only.
+GraniteCave_StevensRoom_EventScript_Aerodactylite::
+	goto_if_set FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, GraniteCave_StevensRoom_EventScript_StarterGifts
+	msgbox GraniteCave_StevensRoom_Text_Aerodactylite, MSGBOX_DEFAULT
+	setvar VAR_0x8000, ITEM_AERODACTYLITE
+	setvar VAR_0x8001, 1
+	special ConvertEmeraldChampionsFiniteReward
+	setvar VAR_0x800B, 3
+	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt
+	additem ITEM_AERODACTYLITE, 1
+	setvar VAR_0x800B, 1
+	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt
+	addpcitem ITEM_AERODACTYLITE, 1
+	setvar VAR_0x800B, 2
+	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_StoneStorageFull
+GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt::
+	setvar VAR_0x8000, ITEM_AERODACTYLITE
+	call GraniteCave_StevensRoom_EventScript_StoneReceipt
+	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
 GraniteCave_StevensRoom_EventScript_StarterGifts::
 	setvar VAR_0x8008, 0
 	setvar VAR_0x8007, TRUE
@@ -200,8 +219,18 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "Have your partner hold its stone.\n"
 	.string "Choose FIGHT, then press START before\l"
 	.string "you choose a move.\p"
-	.string "A strong bond helps your team\n"
-	.string "bring out that power.$"
+	.string "With this RING, you can recognize\n"
+	.string "MEGA STONES out in the field.\p"
+	.string "Some trainers may share the stone\n"
+	.string "their own partner uses!$"
+
+GraniteCave_StevensRoom_Text_Aerodactylite:
+	.string "Take this AERODACTYLITE with\n"
+	.string "your MEGA RING.\p"
+	.string "ROXANNE's OLD AMBER can be restored\n"
+	.string "at DEVON's second-floor laboratory.\p"
+	.string "Have AERODACTYL hold this stone\n"
+	.string "to unlock its Mega Evolution!$"
 
 GraniteCave_StevensRoom_Text_NoStarterStone:
 	.string "I don't have a matching Mega\n"

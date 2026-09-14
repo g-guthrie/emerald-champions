@@ -90,12 +90,13 @@ PetalburgWoods_EventScript_DevonResearcherPostBattle::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox PetalburgWoods_Text_ThatWasAwfullyClose, MSGBOX_DEFAULT
-	giveitem ITEM_GREAT_BALL
+	giveitem ITEM_DUSK_BALL, 3
 	goto_if_eq VAR_RESULT, FALSE, PetalburgWoods_EventScript_BagFull
 	goto PetalburgWoods_EventScript_DevonResearcherFinish
 	end
 
 PetalburgWoods_EventScript_BagFull::
+	setflag FLAG_EC_WOODS_GREAT_BALL_PENDING
 	msgbox PetalburgWoods_Text_YoureLoadedWithItems, MSGBOX_DEFAULT
 	goto PetalburgWoods_EventScript_DevonResearcherFinish
 	end
@@ -370,7 +371,7 @@ PetalburgWoods_Text_ThatWasAwfullyClose:
 	.string "sending to SLATEPORT.\p"
 	.string "I don't know why TEAM AQUA wants\n"
 	.string "our work. We need to find out.\p"
-	.string "First, take this GREAT BALL\n"
+	.string "Take these three DUSK BALLS\n"
 	.string "as my thanks!$"
 
 PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro:
@@ -388,8 +389,10 @@ PetalburgWoods_Text_ICantBeWastingTime:
 	.string "DEVON's survey equipment.$"
 
 PetalburgWoods_Text_YoureLoadedWithItems:
-	.string "You're loaded with items.\n"
-	.string "I can't give you this GREAT BALL.$"
+	.string "Your BAG is full. I'll have a\n"
+	.string "POKéMON CENTER hold your DUSK BALLS.\p"
+	.string "Make room, then ask any CENTER nurse.\n"
+	.string "It will be waiting for you!$"
 
 PetalburgWoods_Text_GoBugPokemonTeam:
 	.string "I caught a whole bunch of POKéMON!\p"
@@ -456,10 +459,8 @@ PetalburgWoods_Text_HiddenItemsExplanation:
 	.string "it grows into the usual form.$"
 
 PetalburgWoods_Text_TryUsingThisItem:
-	.string "Oh, neat!\n"
-	.string "That's the BADGE from RUSTBORO GYM!\p"
-	.string "You must be a TRAINER.\n"
-	.string "You should try using this item.$"
+	.string "The apples here have a sharp tang.\n"
+	.string "Take one for an APPLIN!$"
 
 PetalburgWoods_Text_TartAppleExplanation:
 	.string "It's a TART APPLE. Use it on\n"

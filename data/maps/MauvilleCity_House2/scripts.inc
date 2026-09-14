@@ -75,6 +75,8 @@ MauvilleCity_House2_Text_ThatsDisappointing:
 	.string "GAME CORNER.$"
 
 MauvilleCity_House2_EventScript_MegaGift_AMPHAROSITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_House2_EventScript_MoveSpecialist
 	goto_if_set FLAG_EC_MEGA_GIFT_AMPHAROSITE, MauvilleCity_House2_EventScript_MoveSpecialist
 	lock
 	faceplayer

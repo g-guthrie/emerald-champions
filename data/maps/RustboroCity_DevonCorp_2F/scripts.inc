@@ -705,6 +705,8 @@ RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS
 
 RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_2F_EventScript_BallScientist
 	goto_if_unset FLAG_BADGE08_GET, RustboroCity_DevonCorp_2F_EventScript_BallScientist
 	goto_if_set FLAG_EC_MEGA_GIFT_MAGEARNITE, RustboroCity_DevonCorp_2F_EventScript_BallScientist
 	lock

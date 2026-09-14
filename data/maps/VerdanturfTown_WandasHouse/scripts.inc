@@ -164,6 +164,8 @@ VerdanturfTown_WandasHouse_Text_WallyWasInEverGrande:
 
 
 VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, VerdanturfTown_WandasHouse_EventScript_WallysAunt
 	goto_if_set FLAG_EC_MEGA_GIFT_GARDEVOIRITE, VerdanturfTown_WandasHouse_EventScript_WallysAunt
 	lock
 	faceplayer

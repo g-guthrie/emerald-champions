@@ -41,7 +41,7 @@ OldaleTown_EventScript_MartEmployee::
 
 OldaleTown_EventScript_MartEmployeeContinue::
 	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_ExplainPotion
-	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_ExplainPotion
+	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_GivePotion
 	setflag FLAG_TEMP_1
 	playbgm MUS_FOLLOW_ME, FALSE
 	msgbox OldaleTown_Text_IWorkAtPokemonMart, MSGBOX_DEFAULT
@@ -85,7 +85,8 @@ OldaleTown_EventScript_GoToMartEast::
 
 OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
-	giveitem ITEM_POTION
+OldaleTown_EventScript_GivePotion::
+	giveitem ITEM_HEAL_BALL, 3
 	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE
@@ -373,14 +374,14 @@ OldaleTown_Text_ThisIsAPokemonMart:
 	.string "Just look for the blue roof!\p"
 	.string "The clerk stocks POTIONS and\n"
 	.string "other supplies for your travels.\p"
-	.string "Here, take a POTION to try.$"
+	.string "Take these three HEAL BALLS to try.$"
 
 OldaleTown_Text_PotionExplanation:
-	.string "A POTION can help an injured\n"
-	.string "partner while you're exploring.\p"
-	.string "You can't use your BAG during\n"
-	.string "TRAINER battles, so patch\l"
-	.string "everyone up before a challenge!$"
+	.string "A HEAL BALL restores a wild POKéMON\n"
+	.string "after you catch it.\p"
+	.string "Try different partners as you travel.\n"
+	.string "The CENTER can prepare them for\l"
+	.string "your next challenge!$"
 
 OldaleTown_Text_WaitDontComeInHere:
 	.string "Aaaaah! Wait!\n"

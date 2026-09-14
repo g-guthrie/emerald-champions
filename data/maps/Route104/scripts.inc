@@ -19,8 +19,7 @@ Route104_OnTransition:
 	end
 
 Route104_EventScript_ShowOrHideLeafStoneFlorist::
-	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_EventScript_HideLeafStoneFlorist
-	goto_if_unset FLAG_BADGE03_GET, Route104_EventScript_HideLeafStoneFlorist
+	@ The Leaf Stone gardener is an opening resource, independent of decor sales.
 	clearflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
 
@@ -329,7 +328,7 @@ Route104_EventScript_Boy2::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_ROUTE104_LEAF_STONE, Route104_EventScript_ReceivedLeafStone
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_LEAF_STONE
+	giveitem ITEM_WATER_STONE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_ROUTE104_LEAF_STONE
 	release
@@ -940,19 +939,13 @@ Route104_EventScript_RematchCindy::
 	end
 
 Route104_EventScript_Gina::
-	lock
-	faceplayer
-	special GetPlayerBigGuyGirlString
-	msgbox Route104_Text_GinaPostBattle, MSGBOX_DEFAULT
-	release
+	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_GinaIntro, Route104_Text_TwinsDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route104_Text_GinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Mia::
-	lock
-	faceplayer
-	special GetPlayerBigGuyGirlString
-	msgbox Route104_Text_MiaPostBattle, MSGBOX_DEFAULT
-	release
+	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_MiaIntro, Route104_Text_TwinsDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route104_Text_MiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Darian::
@@ -998,21 +991,21 @@ Route104_Text_ImNotATrainer:
 	.string "as soon as they see you. Others\l"
 	.string "would rather stop and chat!$"
 Route104_Text_LikeFillingMouthWithSeedsTakeThis:
-	.string "I found this LEAF STONE beneath the\n"
-	.string "flowers! Some GRASS POKéMON evolve\l"
-	.string "when exposed to it. You should have it!$"
+	.string "I found this WATER STONE by the sea.\n"
+	.string "You should have it!$"
 Route104_Text_LeafStoneExplanation:
-	.string "That LEAF STONE can evolve certain\n"
-	.string "GRASS POKéMON. Use it when ready.$"
+	.string "A WATER STONE can evolve EEVEE\n"
+	.string "or LOMBRE. LOTAD live on ROUTE 102;\l"
+	.string "raise one into LOMBRE first.$"
 Route104_Text_DontNeedThisTakeIt:
 	.string "I found this Leaf Stone among the\n"
 	.string "flowers. You should have it!$"
 
 Route104_Text_FlowerShopSellingSaplings:
-	.string "This FLOWER SHOP started selling\n"
-	.string "saplings recently.\p"
-	.string "It made me so happy, I went overboard\n"
-	.string "shopping. Where should I put them?$"
+	.string "The FLOWER SHOP can give you a\n"
+	.string "WAILMER PAIL and gardening advice.\p"
+	.string "My LEAF STONE can evolve NUZLEAF.\n"
+	.string "Raise a SEEDOT from ROUTE 102.$"
 
 Route104_Text_MrBrineysCottage:
 	.string "MR. BRINEY'S COTTAGE$"

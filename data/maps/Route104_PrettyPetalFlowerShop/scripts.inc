@@ -95,6 +95,8 @@ Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry::
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl
 	goto_if_set FLAG_EC_MEGA_GIFT_VENUSAURITE, Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl
 	lock
 	faceplayer

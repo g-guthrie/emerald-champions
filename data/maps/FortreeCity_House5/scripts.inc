@@ -35,6 +35,8 @@ FortreeCity_House5_Text_Zigzagoon:
 
 
 FortreeCity_House5_EventScript_MegaGift_CHIMECHITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, FortreeCity_House5_EventScript_PokefanF
 	goto_if_set FLAG_EC_MEGA_GIFT_CHIMECHITE, FortreeCity_House5_EventScript_PokefanF
 	lock
 	faceplayer

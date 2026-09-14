@@ -11,12 +11,12 @@ Route104_Text_PlantBerriesInSoilTakeThis:
 	.string "Here, I'll share this with you.$"
 
 Route104_Text_TrainersOftenMakeMonHoldBerries:
-	.string "The way you look, you must be a\n"
-	.string "TRAINER, no?\p"
-	.string "TRAINERS often make POKéMON hold\n"
-	.string "BERRIES.\p"
-	.string "It's up to you whether to grow BERRIES\n"
-	.string "or use them.$"
+	.string "CENTER vendors give battle BERRIES\n"
+	.string "for free. Try different kinds!\p"
+	.string "Picking a tree also adds that type\n"
+	.string "to your HARVEST POUCH.\p"
+	.string "The BERRY MASTER on ROUTE 123\n"
+	.string "trades those harvests for prizes.$"
 
 Route111_Text_WateredPlantsEveryDayTakeBerry:
 	.string "I watered the plants every day.\n"
@@ -150,18 +150,21 @@ Route104_PrettyPetalFlowerShop_Text_IntroLearnAboutBerries:
 	.string "BERRIES?$"
 
 Route104_PrettyPetalFlowerShop_Text_BerriesExplanation:
-	.string "BERRIES grow on trees that thrive\n"
-	.string "only in soft, loamy soil.\p"
-	.string "If you take some BERRIES, be sure to\n"
-	.string "plant one in the loamy soil again.\p"
-	.string "A planted BERRY will soon sprout,\n"
-	.string "grow into a plant, flower beautifully,\l"
-	.string "then grow BERRIES again.\p"
-	.string "I want to see the whole wide world\n"
-	.string "filled with beautiful flowers.\l"
-	.string "That's my dream.\p"
-	.string "Please help me, {PLAYER}{KUN}. Plant BERRIES\n"
-	.string "and bring more flowers into the world.$"
+	.string "Plant one BERRY in soft soil.\n"
+	.string "Water it as it grows for more fruit.\p"
+	.string "Even the slowest kind ripens\n"
+	.string "within four hours. Ripe fruit\l"
+	.string "waits for you to pick it.\p"
+	.string "Each harvest gives you BERRIES\n"
+	.string "and matching HARVEST POUCH credit.\p"
+	.string "The BERRY MASTER on ROUTE 123\n"
+	.string "asks for different kinds. His\l"
+	.string "prizes include MEGA STONES!\p"
+	.string "CENTER vendors give free BERRIES\n"
+	.string "for planting or holding. Their\l"
+	.string "harvest menus show every request.\p"
+	.string "Plant your favorites as you travel.\n"
+	.string "More flowers, more fruit!$"
 
 Route104_PrettyPetalFlowerShop_Text_FlowersBringHappiness:
 	.string "Flowers bring so much happiness to\n"
@@ -175,14 +178,12 @@ Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis:
 	.string "of it. You can have this.$"
 
 Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation:
-	.string "While BERRY plants are growing,\n"
-	.string "water them with the WAILMER PAIL.\p"
-	.string "Oh, another thing.\p"
-	.string "If you don't pick BERRIES for a while,\n"
-	.string "they'll drop off onto the ground.\l"
-	.string "But they'll sprout again.\p"
-	.string "Isn't that awesome?\n"
-	.string "It's like they have the will to live.$"
+	.string "Water growing plants with the\n"
+	.string "WAILMER PAIL for a bigger harvest.\p"
+	.string "Once the BERRIES ripen, they stay\n"
+	.string "on the tree until you pick them.\p"
+	.string "No need to rush back! Plant another\n"
+	.string "BERRY afterward to grow a new crop.$"
 
 Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers:
 	.string "I'm trying to be like my big sisters.\n"
@@ -191,12 +192,12 @@ Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers:
 	.string "It's for you!$"
 
 Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries:
-	.string "You can plant a BERRY and grow it big,\n"
-	.string "or you can make a POKéMON hold it.\p"
-	.string "But now they have a machine that mixes\n"
-	.string "up different BERRIES and makes candies\l"
-	.string "for POKéMON.\p"
-	.string "I want some candy, too.$"
+	.string "That gift is a seed or a held BERRY.\n"
+	.string "Only picking trees fills your\l"
+	.string "HARVEST POUCH.\p"
+	.string "Try planting different kinds.\n"
+	.string "The BERRY MASTER on ROUTE 123\l"
+	.string "asks for a colorful harvest!$"
 
 SootopolisCity_Text_NameIsKiriHaveOneOfThese:
 	.string "Hi, what's your name?\p"

@@ -165,6 +165,11 @@ enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleR
     // Campaign observation must not choose actions or force battle outcomes.
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE)
         return EC_HEADLESS_BATTLE_NATIVE;
+    // Scoped synthetic reveal fixture: play native turns before explicitly
+    // requesting the existing victory shortcut to inspect the reward scene.
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROXANNE_VICTORY
+     && gEcHeadlessFixtureParam == 1 && !gEcHeadlessFixtureTrigger)
+        return EC_HEADLESS_BATTLE_NATIVE;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK
                           | BATTLE_TYPE_RECORDED
                           | BATTLE_TYPE_RECORDED_LINK
@@ -1150,6 +1155,13 @@ static bool32 IsHeadlessSummaryStateObserved(void)
 void EmeraldChampionsHeadlessObserve(void)
 {
     EmeraldChampionsAgentPrepPoll();
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
+     && (gEcHeadlessFixtureParam == 275 || gEcHeadlessFixtureParam == 276)
+     && gMain.callback2 == CB2_Overworld && !gEcHeadlessFixtureObservedResult)
+    {
+        FlagSet(FLAG_TEMP_1); // Synthetic prior tour, after map temp-flag reset.
+        gEcHeadlessFixtureObservedResult = 1;
+    }
     if ((gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RYDEL_RETRY
       || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROUTE110_RETRY)
      && gEcHeadlessFixtureTrigger && gMain.callback2 == CB2_Overworld
@@ -1447,11 +1459,11 @@ void EmeraldChampionsHeadlessObserve(void)
                 && gEcHeadlessCampaignLastResolution == EC_HEADLESS_BATTLE_WIN
                 && FlagGet(FLAG_BADGE01_GET)
                 && FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)
-                && FlagGet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE)
+                && !FlagGet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE)
                 && FlagGet(FLAG_RECEIVED_ROXANNE_OLD_AMBER)
                 && HasTrainerBeenFought(TRAINER_ROXANNE_1)
                 && GetCurrentLevelCap() == 20
-                && CheckBagHasItem(ITEM_AERODACTYLITE, 1)
+                && !CheckBagHasItem(ITEM_AERODACTYLITE, 1)
                 && CheckBagHasItem(ITEM_OLD_AMBER, 1)
                 && VarGet(VAR_RUSTBORO_CITY_STATE) == 1
                 && !gMain.inBattle
@@ -2356,6 +2368,180 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             FlagSet(FLAG_SYS_POKEMON_GET);
             ClearBag();
             memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+            // Opening reward/bracelet audit: synthetic prerequisites, native scripts.
+            if (gEcHeadlessFixtureParam >= 252 && gEcHeadlessFixtureParam <= 283)
+            {
+                u32 scene = gEcHeadlessFixtureParam;
+                FlagSet(FLAG_ADVENTURE_STARTED);
+                FlagSet(FLAG_RESCUED_BIRCH);
+                FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+                FlagClear(FLAG_BADGE01_GET);
+                FlagClear(FLAG_BADGE02_GET);
+                VarSet(VAR_PETALBURG_CITY_STATE, 3);
+                VarSet(VAR_PETALBURG_GYM_STATE, 2);
+                FlagClear(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                FlagClear(FLAG_EC_RUSTBORO_GREAT_BALL_PENDING);
+                AddBagItem(ITEM_POKE_VIAL, 1);
+                AddBagItem(ITEM_LEVELER, 1);
+                AddBagItem(ITEM_REPEL_SPRAY, 1);
+                AddBagItem(ITEM_FLIGHT_BEACON, 1);
+                VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+                if (scene == 254 || scene == 255 || scene == 256 || scene == 270)
+                {
+                    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_GREAT_BALL)];
+                    for (slot = 0; slot < pocket->capacity; slot++)
+                        BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POKE_BALL, MAX_BAG_ITEM_CAPACITY);
+                }
+                if (scene <= 255)
+                {
+                    VarSet(VAR_PETALBURG_WOODS_STATE, 0);
+                    FlagClear(FLAG_HIDE_PETALBURG_WOODS_DEVON_EMPLOYEE);
+                    FlagClear(FLAG_HIDE_PETALBURG_WOODS_AQUA_GRUNT);
+                    ClearTrainerFlag(TRAINER_GRUNT_PETALBURG_WOODS);
+                    LoadHeadlessMap(MAP_PETALBURG_WOODS, scene & 1 ? 27 : 26, 24);
+                }
+                else if (scene == 256 || scene == 257)
+                {
+                    FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                    FlagSet(FLAG_EC_RUSTBORO_GREAT_BALL_PENDING);
+                    LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
+                }
+                else if (scene == 258 || scene == 259)
+                {
+                    if (scene == 259) AddBagItem(ITEM_MEGA_RING, 1);
+                    FlagClear(FLAG_EC_MEGA_REWARD_BUTTERFRENITE);
+                    SetTrainerFlag(TRAINER_LYLE);
+                    SetTrainerFlag(TRAINER_JAMES_1);
+                    LoadHeadlessMap(MAP_PETALBURG_WOODS, 4, 9);
+                }
+                else if (scene == 260 || scene == 261)
+                {
+                    if (scene == 261) AddBagItem(ITEM_MEGA_RING, 1);
+                    FlagClear(FLAG_EC_MEGA_GIFT_VENUSAURITE);
+                    FlagClear(FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY);
+                    LoadHeadlessMap(MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP, 11, 7);
+                }
+                else if (scene == 262)
+                {
+                    FlagClear(FLAG_ITEM_ROUTE_102_POTION);
+                    SetTrainerFlag(TRAINER_CALVIN_1);
+                    SetTrainerFlag(TRAINER_RICK);
+                    SetTrainerFlag(TRAINER_ALLEN);
+                    SetTrainerFlag(TRAINER_TIANA);
+                    LoadHeadlessMap(MAP_ROUTE102, 11, 16);
+                }
+                else if (scene == 263 || scene == 264)
+                {
+                    FlagClear(FLAG_RECEIVED_ROUTE104_LEAF_STONE);
+                    FlagClear(FLAG_RECEIVED_ROUTE104_FLORIST_LEAF_STONE);
+                    LoadHeadlessMap(MAP_ROUTE104, scene == 263 ? 5 : 8, scene == 263 ? 27 : 20);
+                }
+                else if (scene == 265 || scene == 266)
+                {
+                    FlagSet(FLAG_BADGE01_GET);
+                    SetTrainerFlag(TRAINER_ROXANNE_1);
+                    FlagClear(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
+                    if (scene == 266)
+                    {
+                        AddBagItem(ITEM_MEGA_RING, 1);
+                        FlagSet(FLAG_RECEIVED_ROXANNE_OLD_AMBER);
+                    }
+                    else FlagClear(FLAG_RECEIVED_ROXANNE_OLD_AMBER);
+                    LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, 5, 3);
+                }
+                else if (scene == 267 || scene == 268)
+                {
+                    FlagSet(FLAG_BADGE02_GET);
+                    SetTrainerFlag(TRAINER_BRAWLY_1);
+                    FlagClear(FLAG_RECEIVED_BRAWLY_LUCARIONITE);
+                    if (scene == 268) AddBagItem(ITEM_MEGA_RING, 1);
+                    LoadHeadlessMap(MAP_DEWFORD_TOWN_GYM, 4, 4);
+                }
+                else if (scene == 269)
+                {
+                    VarSet(VAR_PETALBURG_WOODS_STATE, 1);
+                    FlagSet(FLAG_HIDE_PETALBURG_WOODS_DEVON_EMPLOYEE);
+                    FlagSet(FLAG_HIDE_PETALBURG_WOODS_AQUA_GRUNT);
+                    FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                    LoadHeadlessMap(MAP_PETALBURG_WOODS, 26, 24);
+                }
+                else if (scene == 272 || scene == 279 || scene == 280 || scene == 283)
+                {
+                    FlagSet(FLAG_BADGE02_GET);
+                    FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
+                    FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
+                    FlagClear(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
+                    VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, 0);
+                    AddBagItem(ITEM_OLD_AMBER, 1);
+                    if (scene == 280) AddBagItem(ITEM_AERODACTYLITE, 1);
+                    if (scene == 279 || scene == 283)
+                    {
+                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_AERODACTYLITE)];
+                        for (slot = 0; slot < pocket->capacity; slot++)
+                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_VENUSAURITE, MAX_BAG_ITEM_CAPACITY);
+                        if (scene == 279)
+                            for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                                gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, MAX_BAG_ITEM_CAPACITY};
+                    }
+                    LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);
+                }
+                else if (scene == 281)
+                {
+                    FlagClear(FLAG_EC_GARDEN_BUNDLE_ROUTE115_PINAP_BERRY);
+                    LoadHeadlessMap(MAP_ROUTE115, 20, 61);
+                }
+                else if (scene == 282)
+                {
+                    FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                    LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
+                }
+                else if (scene == 273)
+                {
+                    FlagClear(FLAG_RECEIVED_PETALBURG_WOODS_TART_APPLE);
+                    LoadHeadlessMap(MAP_PETALBURG_WOODS, 33, 7);
+                }
+                else if (scene == 274)
+                {
+                    FlagSet(FLAG_EC_BIRCH_GREAT_BALLS_PENDING);
+                    LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
+                }
+                else if (scene == 277 || scene == 278)
+                {
+                    ClearTrainerFlag(TRAINER_GINA_AND_MIA_1);
+                    LoadHeadlessMap(MAP_ROUTE104, scene == 277 ? 27 : 28, 16);
+                }
+                else if (scene == 275 || scene == 276)
+                {
+                    FlagClear(FLAG_RECEIVED_POTION_OLDALE);
+                    // The guide's first tour already ran; retry without restaging it.
+                    AddBagItem(ITEM_POKE_BALL, 10);
+                    if (scene == 275)
+                    {
+                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_HEAL_BALL)];
+                        for (slot = 0; slot < pocket->capacity; slot++)
+                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POKE_BALL, MAX_BAG_ITEM_CAPACITY);
+                    }
+                    LoadHeadlessMap(MAP_OLDALE_TOWN, 13, 15);
+                }
+                else
+                {
+                    FlagSet(FLAG_RECOVERED_DEVON_GOODS);
+                    FlagClear(FLAG_RETURNED_DEVON_GOODS);
+                    FlagClear(FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1);
+                    VarSet(VAR_RUSTBORO_CITY_STATE, 4);
+                    LoadHeadlessMap(MAP_RUSTBORO_CITY, 30, 9);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 251)
+            {
+                // Synthetic dialogue-only review; never an earned campaign warp.
+                FlagClear(FLAG_MET_PRETTY_PETAL_SHOP_OWNER);
+                FlagClear(FLAG_BADGE03_GET);
+                FlagSet(FLAG_RECEIVED_WAILMER_PAIL);
+                LoadHeadlessMap(MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP, 4, 7);
+                break;
+            }
             if (gEcHeadlessFixtureParam == 60 || gEcHeadlessFixtureParam == 61)
             {
                 gSaveBlock2Ptr->playerGender = gEcHeadlessFixtureParam == 60 ? MALE : FEMALE;
@@ -3783,6 +3969,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_BADGE02_GET);
                 VarSet(VAR_STARTER_GEN, 1);
                 VarSet(VAR_STARTER_MON, 1);
+                // Isolate the existing starter-stone retry fixture after the Aero entitlement.
+                FlagSet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
                 AddBagItem(ITEM_MEGA_RING, 1);
                 for (slot = 0; slot < pocket->capacity; slot++)
                     BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_VENUSAURITE, 1);

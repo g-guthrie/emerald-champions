@@ -744,9 +744,9 @@
 #define FLAG_EC_GIFT_SECOND_COSMOG  0x2B1 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
-#define FLAG_UNUSED_0x2B4                     0x2B4
-#define FLAG_UNUSED_0x2B5  0x2B5 // Unused Flag
-#define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
+#define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
+#define FLAG_EC_RUSTBORO_GREAT_BALL_PENDING    0x2B5 // Separate rescue reward entitlement.
+#define FLAG_EC_BIRCH_GREAT_BALLS_PENDING      0x2B6 // Ten-ball send-off gift; never locks Route102.
 #define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
 #define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
 #define FLAG_UNUSED_0x2B9  0x2B9 // Unused Flag

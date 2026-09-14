@@ -136,7 +136,10 @@ DewfordTown_Gym_EventScript_Brawly::
 	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_Gym_EventScript_BrawlyRewardChecked
 	goto_if_unset FLAG_RECEIVED_BRAWLY_LUCARIONITE, DewfordTown_Gym_EventScript_GiveLucarionite2
+DewfordTown_Gym_EventScript_BrawlyRewardChecked:
 	goto_if_set FLAG_HIDE_GRANITE_CAVE_STEVEN, DewfordTown_Gym_EventScript_BrawlyJourneyContinues
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
@@ -170,6 +173,8 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	end
 
 DewfordTown_Gym_EventScript_GiveLucarionite::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_Gym_EventScript_KeepLucarionite
 	giveuniqueitem ITEM_LUCARIONITE
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainLucarionite, MSGBOX_DEFAULT
@@ -462,3 +467,10 @@ DewfordTown_Gym_EventScript_BrawlyJourneyContinues::
 	msgbox DewfordTown_Gym_Text_BrawlyPostRematch, MSGBOX_DEFAULT
 	release
 	end
+
+DewfordTown_Gym_EventScript_KeepLucarionite::
+	msgbox DewfordTown_Gym_Text_KeepLucarionite, MSGBOX_DEFAULT
+	return
+DewfordTown_Gym_Text_KeepLucarionite:
+	.string "Come back with Steven's MEGA RING!\n"
+	.string "I'll have a Lucarionite for you.$"

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "C15 E0047-B01 Dwayne; original T043 team",
+  "availability_audit": "C01-C14 habitats and first-arrival Slateport evolution stock reviewed against active map scripts, wild tables, legendary_signs.h and native earned licenses. handoff/benchmarks/c15_available_pool.json records roots, methods and exclusions. No Surf, Rock Smash, later-route gifts or new legendary cap penalties. Explicit access checks are in the pool manifest. Only selected six are accepted for this benchmark; the broader candidate inventory is not a blanket grant authorization.",
+  "plan": "Lead Mega Aerodactyl + Munkidori: Rock Slide threatens both opening Fire/Ice targets without Flame Body contact; faster Fake Out denies Smoochum and breaks Sash. Keep dual-hit Flying pressure for Monferno. Kartana covers Ice/Electric backline, Alakazam supplies recoil-free special pressure, AV Azumarill resists Fires and supplies priority, Togekiss supplies redirection. Avoid inflating faint counts with weak choices. Strong source-audited candidate, not proof of global optimality.",
+  "party": [
+    {
+      "species": "SPECIES_AERODACTYL",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_TAILWIND",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNNERVE",
+      "item": "ITEM_AERODACTYLITE",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fast Tailwind setter with spread flinches, berry denial, and useful Flying damage",
+      "availability": "Existing earned fossil Aerodactyl and Aerodactylite; Mega Ring earned from Steven after Brawly. Existing party/archive proves access. Equipment otherwise supplied by the free Center held-item catalogue/preparation system."
+    },
+    {
+      "species": "SPECIES_MUNKIDORI",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TOXIC_CHAIN",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Sash disruption pivot using Fake Out and Parting Shot to create turns while threatening severe poison",
+      "availability": "src/data/pokemon/legendary_signs.h: native resident of Dewford Meadow, no badge/quest prerequisite. Native encounter039 already witnessed; assisted acquisition replaces its failed capture. Equipment otherwise supplied by the free Center held-item catalogue/preparation system."
+    },
+    {
+      "species": "SPECIES_KARTANA",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SMART_STRIKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_BEAST_BOOST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Champions-native fast physical attacker with Grass, Fighting, and Steel pressure",
+      "availability": "src/data/wild_encounters.json: PetalburgWoods_3 land table 8%; book explicitly preserves existing access, no added legendary gate. Cut license and Roxanne badge earned; species can be caught directly. Equipment otherwise supplied by the free Center held-item catalogue/preparation system."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fast recoil-free attacker with complete Psychic-Fighting-Ghost coverage",
+      "availability": "Abra on GraniteCave_1F (already caught), Kadabra evolution at16; SlateportCity_Mart_EvolutionStock supplies Linking Cord at current arrival. No later badge requirement. Equipment otherwise supplied by the free Center held-item catalogue/preparation system."
+    },
+    {
+      "species": "SPECIES_AZUMARILL",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_AQUA_JET",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "specially bulky Huge Power attacker with dual STAB, priority, and item removal",
+      "availability": "Existing earned Azurill -> Marill -> Azumarill via bonding and level20 evolution; source route104 and native party/archive. Equipment otherwise supplied by the free Center held-item catalogue/preparation system."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        124,
+        0,
+        132,
+        0
+      ],
+      "role": "premier redirection and Tailwind support with 60-percent flinch pressure",
+      "availability": "Togepi Route102 land; native friendship evolution to Togetic and current Slateport Mart Shiny Stone. No later badge/evolution level requirement. Free specialist provides legal preparation moves. Equipment otherwise supplied by the free Center held-item catalogue/preparation system."
+    }
+  ]
+}

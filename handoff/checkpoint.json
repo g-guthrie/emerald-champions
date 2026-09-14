@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "date": "2026-09-13",
-  "session": "work/v4-c15-taunt-fixed-play",
-  "current_step": 1,
+  "date": "2026-09-14",
+  "session": "work/v4-c15-dwayne-revised-play",
+  "current_step": 24,
   "chapter": "C15",
-  "map": "MAP_SLATEPORT_CITY_POKEMON_CENTER_1F",
+  "map": "MAP_ROUTE109_SEASHORE_HOUSE",
   "position": [
-    8,
-    4
+    2,
+    5
   ],
   "facing": "up",
-  "controls_locked": false,
+  "controls_locked": true,
   "difficulty": "Medium",
   "player_cap": 24,
-  "earned_unique_trainer_clears": 38,
+  "earned_unique_trainer_clears": 40,
   "cleared_trainers": [
     {
       "id": 10,
@@ -166,33 +166,39 @@
     {
       "id": 491,
       "name": "TRAINER_EDMOND"
+    },
+    {
+      "id": 57,
+      "name": "TRAINER_LOLA_1"
+    },
+    {
+      "id": 698,
+      "name": "TRAINER_CHANDLER"
     }
   ],
   "uncleared_next": [
-    "TRAINER_LOLA_1"
+    "TRAINER_DWAYNE (experimental retest; original already won)",
+    "TRAINER_JOHANNA",
+    "TRAINER_SIMON"
   ],
-  "immediate_plan": [
-    "Preaudit and play E0045 Lola, then the remaining retained beach trainers.",
-    "Continue Slateport shipyard/museum story. Review easy fights as well as difficult ones.",
-    "No compulsory replay of earlier trainers after shared repairs."
-  ],
+  "immediate_plan": "Publish synchronized source/book/docs. Collaborative team reviews reach battle28 (Rustboro Gym); continue after the Gym when asked. Joey16 remains on hold. Earned Dwayne experiment and export delivery remain paused.",
   "repel_spray": "off",
   "poke_vial_charges": 1,
   "party_order": [
     "Aerodactyl",
-    "Shaymin",
-    "Pachirisu",
-    "Sableye",
-    "Jigglypuff",
-    "Azumarill"
+    "Munkidori",
+    "Alakazam",
+    "Azumarill",
+    "Kartana",
+    "Togekiss"
   ],
   "party_hp": [
-    80,
-    89,
-    85,
-    90,
-    111,
-    104
+    0,
+    40,
+    0,
+    67,
+    70,
+    97
   ],
   "party_level": [
     24,
@@ -202,17 +208,17 @@
     24,
     24
   ],
-  "rom_sha256": "82dc652416592b9e00c4cae2ad26ac97886314a3cadf341784bd030930276e49",
-  "elf_sha256": "6966391f7178cd5dc27dacd9fac6f6ec2f5e9291479edf6b933f12ace00349b0",
-  "inputs_sha256": "fdb9609a18042ba1fe3a6207fc064176e965fc8068fb093031c62fbf8ac2b172",
-  "save": "work/v4-c14-common-singers-play/earned-edmond-slateport.sav",
-  "save_sha256": "c166d365c5a6e6de737e05e54bf81a9477da557f09a500ffa03f82a2dca4e243",
-  "state": "work/v4-c15-taunt-fixed-play/current.ss1",
-  "state_sha256": "fb35ed08f07c1f566b9685f65c1e64fe55b54f43cae2a75e00418ebd6728aa65",
-  "trace": "work/v4-c15-taunt-fixed-play/trace.json",
-  "source_patch": "Shared timely Taunt forecast repaired in move and switch evaluation. Ten native cases pass, existing eight screen cases pass, normal release gates pass. Book indexes earlier/bespoke/later potential owners.",
+  "rom_sha256": "317853db0bad8e5959df122607e545e00f89987155bcc8ff4c6fc874b8a2d0d4",
+  "elf_sha256": "4be73d450eb31691f3333ad9d90be4ce3c7fc29c811f3fc9234df4ddc1443724",
+  "inputs_sha256": "82e40fe26eef64e26b263c162b24c0f866bf65c0d3233fc11af4a1f33328a33b",
+  "save": "work/v4-c15-assisted-play/pre-dwayne.sav",
+  "save_sha256": "e3467d180424084f1ac7c52c092ab5f6b91242a7fe526e769fc58199ae90dd56",
+  "state": "work/v4-c15-dwayne-revised-play/current.ss1",
+  "state_sha256": "4bb6c27082b42e3dbdf983cde622c479db02a0e0c35313e0ece43959f5a4b15e",
+  "trace": "work/v4-c15-dwayne-revised-play/trace.json",
+  "source_patch": "Current source includes early-team revisions, restored Gina/Mia, 370 active variants, wide trainer offsets/overlevel preservation, opening economy and pending rewards, Medium default, shared AI fixes, and all four Rustboro Gym redesigns. Immutable Dwayne retest uses older ROM; never transplant its state.",
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
-  "evidence_limits": "38 earned clears. Edmond first-attempt twelve-turn win with five player faints on preceding ROM; updated ROM continued from native Save. Whole campaign unfinished.",
+  "evidence_limits": "40 clears in paused retest save;41 distinct clears evidenced by original Dwayne win elsewhere. Revised Dwayne is experimental and paused turn5. Reviews through28 and native fixtures do not certify full battle difficulty. Joey16 and full-game acceptance remain open.",
   "recent_results": {
     "Cristian": [
       "loss8",
@@ -239,5 +245,11 @@
     "Edmond": [
       "win12"
     ]
-  }
+  },
+  "evidenced_unique_trainer_clears": 41,
+  "active_work_mode": "Collaborative team review through battle28; all approved revisions synchronized. Roxanne Mega Aerodactyl/Tailwind, no Trick Room. Opening economy through battle16 repaired and scoped native checks pass.",
+  "reviewed_through_battle": 28,
+  "review_holds": [
+    "Joey16"
+  ]
 }

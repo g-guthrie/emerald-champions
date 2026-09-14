@@ -1,0 +1,392 @@
+{
+  "chapter": "C15 first arrival, Medium cap24; badge2 + Mega Ring + Cut/Flash/Old Rod; no Surf/Rock Smash",
+  "direct_wild_roots": [
+    {
+      "map": "MAP_DEWFORD_MANOR_1F",
+      "method": "land",
+      "species": [
+        "SPECIES_DROWZEE",
+        "SPECIES_GASTLY",
+        "SPECIES_GLAMEOW",
+        "SPECIES_HOOTHOOT",
+        "SPECIES_JIGGLYPUFF",
+        "SPECIES_LITWICK",
+        "SPECIES_RATTATA",
+        "SPECIES_SABLEYE",
+        "SPECIES_SHUPPET",
+        "SPECIES_SINISTEA",
+        "SPECIES_SLOWPOKE_GALAR",
+        "SPECIES_SOLOSIS"
+      ]
+    },
+    {
+      "map": "MAP_DEWFORD_MEADOW",
+      "method": "land",
+      "species": [
+        "SPECIES_BEAUTIFLY",
+        "SPECIES_BUTTERFREE",
+        "SPECIES_COMBEE",
+        "SPECIES_CUTIEFLY",
+        "SPECIES_FLABEBE",
+        "SPECIES_ILLUMISE",
+        "SPECIES_ORICORIO",
+        "SPECIES_PHEROMOSA",
+        "SPECIES_RIBOMBEE",
+        "SPECIES_SPRITZEE",
+        "SPECIES_SWIRLIX",
+        "SPECIES_VOLBEAT"
+      ]
+    },
+    {
+      "map": "MAP_DEWFORD_TOWN",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_MAGIKARP",
+        "SPECIES_MANTYKE"
+      ]
+    },
+    {
+      "map": "MAP_GRANITE_CAVE_1F",
+      "method": "land",
+      "species": [
+        "SPECIES_ABRA",
+        "SPECIES_ARON",
+        "SPECIES_AXEW",
+        "SPECIES_BELDUM",
+        "SPECIES_GEODUDE",
+        "SPECIES_GLIMMET",
+        "SPECIES_MAKUHITA",
+        "SPECIES_NACLI",
+        "SPECIES_NOSEPASS",
+        "SPECIES_ROLYCOLY",
+        "SPECIES_TIMBURR",
+        "SPECIES_ZUBAT"
+      ]
+    },
+    {
+      "map": "MAP_GRANITE_CAVE_B1F",
+      "method": "land",
+      "species": [
+        "SPECIES_ARON",
+        "SPECIES_BRONZOR",
+        "SPECIES_CARBINK",
+        "SPECIES_CUBONE",
+        "SPECIES_GLIMMET",
+        "SPECIES_MAWILE",
+        "SPECIES_MEDITITE",
+        "SPECIES_ONIX",
+        "SPECIES_ROGGENROLA",
+        "SPECIES_SABLEYE",
+        "SPECIES_TIMBURR",
+        "SPECIES_ZUBAT"
+      ]
+    },
+    {
+      "map": "MAP_GRANITE_CAVE_B2F",
+      "method": "land",
+      "species": [
+        "SPECIES_ARON",
+        "SPECIES_BRONZOR",
+        "SPECIES_CARBINK",
+        "SPECIES_CUBONE",
+        "SPECIES_DEINO",
+        "SPECIES_DURALUDON",
+        "SPECIES_MAWILE",
+        "SPECIES_NOSEPASS",
+        "SPECIES_ONIX",
+        "SPECIES_ROLYCOLY",
+        "SPECIES_SABLEYE",
+        "SPECIES_TINKATINK"
+      ]
+    },
+    {
+      "map": "MAP_PETALBURG_CITY",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_MAGIKARP",
+        "SPECIES_MARILL"
+      ]
+    },
+    {
+      "map": "MAP_PETALBURG_WOODS",
+      "method": "land",
+      "species": [
+        "SPECIES_BLIPBUG",
+        "SPECIES_BUNEARY",
+        "SPECIES_BURMY_PLANT",
+        "SPECIES_CATERPIE",
+        "SPECIES_FERROSEED",
+        "SPECIES_FOONGUS",
+        "SPECIES_HERACROSS",
+        "SPECIES_PICHU",
+        "SPECIES_PINECO",
+        "SPECIES_SEWADDLE",
+        "SPECIES_SHROOMISH",
+        "SPECIES_SLAKOTH"
+      ]
+    },
+    {
+      "map": "MAP_PETALBURG_WOODS_2",
+      "method": "land",
+      "species": [
+        "SPECIES_AIPOM",
+        "SPECIES_APPLIN",
+        "SPECIES_BEEDRILL",
+        "SPECIES_BOUNSWEET",
+        "SPECIES_CHERUBI",
+        "SPECIES_LARVESTA",
+        "SPECIES_PANPOUR",
+        "SPECIES_PANSAGE",
+        "SPECIES_PANSEAR",
+        "SPECIES_PARASECT",
+        "SPECIES_VENIPEDE",
+        "SPECIES_WEEDLE"
+      ]
+    },
+    {
+      "map": "MAP_PETALBURG_WOODS_3",
+      "method": "land",
+      "species": [
+        "SPECIES_BELLSPROUT",
+        "SPECIES_CROAGUNK",
+        "SPECIES_DEWPIDER",
+        "SPECIES_EMOLGA",
+        "SPECIES_EXEGGCUTE",
+        "SPECIES_GOOMY",
+        "SPECIES_IMPIDIMP",
+        "SPECIES_KARTANA",
+        "SPECIES_MISDREAVUS",
+        "SPECIES_MURKROW",
+        "SPECIES_PHANTUMP",
+        "SPECIES_YANMA"
+      ]
+    },
+    {
+      "map": "MAP_PETALBURG_WOODS_3",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_MAGIKARP",
+        "SPECIES_POLIWAG"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE101",
+      "method": "land",
+      "species": [
+        "SPECIES_BONSLY",
+        "SPECIES_EEVEE",
+        "SPECIES_LILLIPUP",
+        "SPECIES_MIENFOO",
+        "SPECIES_NIDORAN_F",
+        "SPECIES_NIDORAN_M",
+        "SPECIES_PAWMI",
+        "SPECIES_POOCHYENA",
+        "SPECIES_SENTRET",
+        "SPECIES_TAILLOW",
+        "SPECIES_WURMPLE",
+        "SPECIES_ZIGZAGOON"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE102",
+      "method": "land",
+      "species": [
+        "SPECIES_HAPPINY",
+        "SPECIES_LECHONK",
+        "SPECIES_LOTAD",
+        "SPECIES_MARILL",
+        "SPECIES_NATU",
+        "SPECIES_NYMBLE",
+        "SPECIES_PACHIRISU",
+        "SPECIES_RALTS",
+        "SPECIES_SEEDOT",
+        "SPECIES_SURSKIT",
+        "SPECIES_TIMBURR",
+        "SPECIES_TOGEPI"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE102",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_GOLDEEN",
+        "SPECIES_MAGIKARP"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE103",
+      "method": "land",
+      "species": [
+        "SPECIES_BIDOOF",
+        "SPECIES_CORPHISH",
+        "SPECIES_ELECTRIKE",
+        "SPECIES_GROWLITHE",
+        "SPECIES_GRUBBIN",
+        "SPECIES_HOOTHOOT",
+        "SPECIES_MAREEP",
+        "SPECIES_ROCKRUFF",
+        "SPECIES_SHELLOS",
+        "SPECIES_SHINX",
+        "SPECIES_TOXEL",
+        "SPECIES_WINGULL"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE103",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_MAGIKARP",
+        "SPECIES_REMORAID"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE104",
+      "method": "land",
+      "species": [
+        "SPECIES_AZURILL",
+        "SPECIES_BUDEW",
+        "SPECIES_BUNNELBY",
+        "SPECIES_CROAGUNK",
+        "SPECIES_FLETCHLING",
+        "SPECIES_HOPPIP",
+        "SPECIES_LITLEO",
+        "SPECIES_PIDGEY",
+        "SPECIES_PIKIPEK",
+        "SPECIES_ROSELIA",
+        "SPECIES_SMOLIV",
+        "SPECIES_YUNGOOS"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE104",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_MAGIKARP",
+        "SPECIES_SKRELP"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE106",
+      "method": "land",
+      "species": [
+        "SPECIES_BINACLE",
+        "SPECIES_CHATOT",
+        "SPECIES_CRABRAWLER",
+        "SPECIES_DWEBBLE",
+        "SPECIES_FALINKS",
+        "SPECIES_GEODUDE",
+        "SPECIES_HAWLUCHA",
+        "SPECIES_MACHOP",
+        "SPECIES_MAKUHITA",
+        "SPECIES_MEDITITE",
+        "SPECIES_PIDOVE",
+        "SPECIES_WIMPOD"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE106",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_MAGIKARP",
+        "SPECIES_REMORAID"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE109",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_LUVDISC",
+        "SPECIES_MAGIKARP"
+      ]
+    },
+    {
+      "map": "MAP_ROUTE116",
+      "method": "land",
+      "species": [
+        "SPECIES_DREEPY",
+        "SPECIES_JOLTIK",
+        "SPECIES_MIME_JR",
+        "SPECIES_MUNCHLAX",
+        "SPECIES_NICKIT",
+        "SPECIES_NINCADA",
+        "SPECIES_PURRLOIN",
+        "SPECIES_RIOLU",
+        "SPECIES_ROOKIDEE",
+        "SPECIES_SKITTY",
+        "SPECIES_STARLY",
+        "SPECIES_THROH"
+      ]
+    },
+    {
+      "map": "MAP_RUSTURF_TUNNEL",
+      "method": "land",
+      "species": [
+        "SPECIES_BAGON",
+        "SPECIES_CHINGLING",
+        "SPECIES_DRILBUR",
+        "SPECIES_DUNSPARCE",
+        "SPECIES_LARVITAR",
+        "SPECIES_MACHOP",
+        "SPECIES_NOIBAT",
+        "SPECIES_ROGGENROLA",
+        "SPECIES_TEDDIURSA",
+        "SPECIES_WHISMUR",
+        "SPECIES_ZUBAT"
+      ]
+    },
+    {
+      "map": "MAP_SLATEPORT_CITY",
+      "method": "old_rod",
+      "species": [
+        "SPECIES_CLAUNCHER",
+        "SPECIES_MAGIKARP"
+      ]
+    }
+  ],
+  "additional_available_legendaries": [
+    "SHAYMIN",
+    "VIRIZION",
+    "WO_CHIEN",
+    "CELEBI",
+    "COBALION",
+    "COSMOG",
+    "MUNKIDORI",
+    "MELOETTA"
+  ],
+  "legendary_source": "src/data/pokemon/legendary_signs.h; native residents no quest gate; Meloetta discovery earned in C14. Kartana/Pheromosa are ordinary table roots above.",
+  "evolution_stock": "data/maps/SlateportCity_Mart/scripts.inc: Fire/Water/Thunder/Leaf/Moon/Sun/Ice/Dawn/Dusk/Shiny Stones, Linking Cord, Metal Coat, Kings Rock, Dragon Scale, Deep Sea Tooth/Scale",
+  "strong_evolution_candidates_reviewed": [
+    "Alakazam",
+    "Togekiss",
+    "Gyarados",
+    "Lucario",
+    "Arcanine",
+    "Nidoking",
+    "Nidoqueen",
+    "Raichu",
+    "Roserade",
+    "Vaporeon",
+    "Jolteon",
+    "Sylveon",
+    "Umbreon",
+    "Espeon",
+    "Honchkrow",
+    "Mismagius"
+  ],
+  "excluded_unproven_routes": [
+    "Route115 northern grass without Surf",
+    "Route110/117 acquisitions until actual forward access review",
+    "Altering Cave Surf access",
+    "later mainland routes and Megas",
+    "future-level evolutions without another currently reachable evolved provider"
+  ],
+  "limits": "Direct roots are exact table inventory, not a claim every species/physical sub-area has been captured or visually tested. Evolution candidates require exact evolution validation before selection; selected six have explicit individual receipts. Native acquisition tests remain separately pending.",
+  "physical_access_checks": {
+    "PetalburgWoods": "Two Cut trees at19,10/11 guard deeper paths; Cut license + Roxanne badge earned; Sableye/available compatible carrier can perform without moveslot. East exits42/43,10 lead to Woods2.",
+    "PetalburgWoods_2": "Native map has no story map script or bike requirement. Collision/elevation path exists from entry4,34 to exit42,34 without removing any objects; leads Woods3 entry8,7.",
+    "PetalburgWoods_3": "No story/bike map script. Collision/elevation path from entry8,7 to10,12 in first section. Kartana belongs to this map-wide land table; no special injection gate. Native visual habitat interaction remains separately pending.",
+    "DewfordMeadow": "Actual native arrival and Munkidori encounter039 prove current physical access; C14 song earned, Meloetta eligible query025=1.",
+    "GraniteCave_1F": "Earlier actual Abra catch and subsequent Kadabra evolution prove access.",
+    "Slateport_evolution_provider": "Native session work/v4-c15-assisted-play steps006-014: entered current Mart, purchased Shiny Stone for3000 and reusable Linking Cord for10000; bag queries1 each; duplicate Cord refused, stock end and Cancel rendered. No later story gate."
+  }
+}

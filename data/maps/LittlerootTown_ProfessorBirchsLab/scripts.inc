@@ -18,7 +18,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	@ 3: Received starter in lab
 	@ 4: Defeated rival on Route 103
 	@ 5: Completed the post-rival send-off
-	@ 6: Post-rival Great Balls waiting for storage space
+	@ 6: Legacy post-rival gift retry; new failures use an independent receipt.
 
 LittlerootTown_ProfessorBirchsLab_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
@@ -404,11 +404,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSendoff::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_DebriefBagFull::
-	@ Do not retrigger the automatic walk while the player makes room.
-	setvar VAR_BIRCH_LAB_STATE, 6
+	setflag FLAG_EC_BIRCH_GREAT_BALLS_PENDING
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GreatBallsWaiting, MSGBOX_DEFAULT
-	releaseall
-	end
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSendoff
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningDex, MSGBOX_DEFAULT
@@ -876,5 +874,6 @@ LittlerootTown_ProfessorBirchsLab_Text_GreatBallsInPC:
 
 LittlerootTown_ProfessorBirchsLab_Text_GreatBallsWaiting:
 	.string "Your Bag and item PC are full.\p"
-	.string "Make room and come see me.\n"
-	.string "I'll keep your GREAT BALLS here!$"
+	.string "I'll send your 10 GREAT BALLS to a\n"
+	.string "POKéMON CENTER. Make room, then ask\l"
+	.string "any nurse. Your journey can begin!$"

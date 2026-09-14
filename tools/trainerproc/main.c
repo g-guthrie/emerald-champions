@@ -1378,7 +1378,9 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
         while (match_empty_line(p)) {}
         if (!parse_pokemon_header(p, &nickname, &species, &gender, &item))
         {
-            if (i > 0 || ends_with(trainer->id, "_NONE") || !is_empty_string(trainer->copy_pool))
+            if (i > 0 || ends_with(trainer->id, "_NONE")
+             || (trainer->party_size_line && trainer->party_size == 0)
+             || !is_empty_string(trainer->copy_pool))
                 break;
             if (!p->error)
                 set_parse_error(p, p->location, "expected nickname or species");
@@ -1479,8 +1481,8 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
                 pokemon->level_offset_line = value.location.line;
                 if (!token_int(p, &value, &pokemon->level_offset))
                     any_error = !show_parse_error(p);
-                else if (pokemon->level_offset < -8 || pokemon->level_offset > 7)
-                    any_error = !set_show_parse_error(p, value.location, "Level Offset must be -8..7");
+                else if (pokemon->level_offset < -254 || pokemon->level_offset > 254)
+                    any_error = !set_show_parse_error(p, value.location, "Level Offset must fit native -254..254");
             }
             else if (is_literal_token(&key, "Ball"))
             {

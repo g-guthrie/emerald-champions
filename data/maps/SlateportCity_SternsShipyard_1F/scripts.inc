@@ -73,12 +73,14 @@ SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern:
 	.string "CAPT. STERN asked me to design a ferry.\p"
 	.string "Are those the DEVON GOODS?\n"
 	.string "He's been waiting for them.\p"
-	.string "He's at the OCEANIC MUSEUM.\n"
+	.string "He's upstairs in the OCEANIC\n"
+	.string "MUSEUM, northeast of here.\l"
 	.string "Take the parcel straight to him.$"
 
 SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern:
-	.string "DOCK: Try the OCEANIC MUSEUM.\n"
-	.string "CAPT. STERN needs that parcel.\p"
+	.string "DOCK: CAPT. STERN is upstairs\n"
+	.string "in the OCEANIC MUSEUM, northeast\l"
+	.string "of here. He needs that parcel.\p"
 	.string "I'll be here, arguing with\n"
 	.string "these measurements…$"
 
@@ -125,4 +127,3 @@ SlateportCity_SternsShipyard_1F_Text_SeaIsLikeLivingThing:
 SlateportCity_SternsShipyard_1F_Text_GetSeasickEasily:
 	.string "I get seasick real easily.\n"
 	.string "So I get to help out here instead.$"
-

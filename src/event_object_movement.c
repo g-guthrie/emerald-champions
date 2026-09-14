@@ -48,6 +48,7 @@
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
+#include "constants/hold_effects.h"
 #include "constants/mauville_old_man.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
@@ -1840,6 +1841,13 @@ u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemp
     const struct SubspriteTable *subspriteTables = NULL;
     const struct ObjectEventTemplate objectEventTemplateLocal = TryGetObjectEventTemplateForOWE(objectEventTemplate);
     u16 graphicsId = objectEventTemplateLocal.graphicsId;
+
+    // Mega discoveries begin with Steven's bracelet, including return visits.
+    // Keep the original location and receipt; do not hide unrelated item actors.
+    if (graphicsId == OBJ_EVENT_GFX_MEGA_STONE
+     && GetItemHoldEffect(objectEventTemplateLocal.trainerRange_berryTreeId) == HOLD_EFFECT_MEGA_STONE
+     && !PlayerOwnsItem(ITEM_MEGA_RING))
+        return OBJECT_EVENTS_COUNT;
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(graphicsId, objectEventTemplateLocal.movementType, &spriteTemplate, &subspriteTables);

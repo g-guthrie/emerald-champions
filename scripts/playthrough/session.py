@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[2]; sys.path.insert(0,str(ROOT/'scripts'))
 import render_emerald_champions_ui as ui
 from rom_artifacts import verify_rom_elf_pair
 from run_emerald_champions_campaign import parse_numeric_constants,parse_map_ids
-p=argparse.ArgumentParser(); p.add_argument('out',type=Path);p.add_argument('label');p.add_argument('--boot',type=lambda x:int(x,0));p.add_argument('--scenario',default='CAMPAIGN_NATIVE');p.add_argument('--frames',type=int,default=240);p.add_argument('--key',action='append',default=[]);p.add_argument('--at',action='append',default=[]);p.add_argument('--flag');p.add_argument('--query',nargs=2);p.add_argument('--write',action='append',default=[]);p.add_argument('--read-symbol',action='append',default=[]);p.add_argument('--save',type=Path);p.add_argument('--until');p.add_argument('--read-memory',action='append',default=[]);p.add_argument('--save-out',type=Path,help='export current battery state after an actual native Save');args=p.parse_args()
+p=argparse.ArgumentParser(); p.add_argument('out',type=Path);p.add_argument('label');p.add_argument('--boot',type=lambda x:int(x,0));p.add_argument('--scenario',default='CAMPAIGN_NATIVE');p.add_argument('--frames',type=int,default=240);p.add_argument('--key',action='append',default=[]);p.add_argument('--at',action='append',default=[]);p.add_argument('--flag');p.add_argument('--query',nargs=2);p.add_argument('--write',action='append',default=[]);p.add_argument('--read-symbol',action='append',default=[]);p.add_argument('--save',type=Path);p.add_argument('--until');p.add_argument('--read-memory',action='append',default=[]);p.add_argument('--save-out',type=Path,help='export current battery state after an actual native Save');p.add_argument('--prepare-party',type=Path,help='user-authorized stage-legal party manifest; writes only the native preparation API');args=p.parse_args()
 rom=ROOT/'pokeemerald-headless.gba';elf=ROOT/'pokeemerald-headless.elf';out=args.out.resolve();out.mkdir(parents=True,exist_ok=True)
 manifest=out/'trace.json'; state=out/'current.ss1'; scratch=out/'scene.gba'
 if args.boot is not None:
@@ -47,6 +47,9 @@ if args.save is not None:
   if parent.get('scenario') != 'CAMPAIGN_NATIVE' or 'synthetic' in parent.get('evidence','').lower():
    trace['evidence']='synthetic prerequisite fixture continued by native Save and clean Continue; not earned campaign progress'
    trace['battery_parent']['evidence']='normal in-game save from a synthetic fixture; no cross-ROM savestate'
+  elif parent.get('assisted_preparations') or parent.get('assisted_ancestry'):
+   trace['assisted_ancestry']={'trace':str(parent_trace.resolve()),'sha256':hashlib.sha256(parent_trace.read_bytes()).hexdigest()}
+   trace['evidence']='native campaign continued by normal Save and Continue; includes user-authorized assisted acquisition/preparation in parent trace; not native capture acceptance'
  command+=['--save',str(out/'scene.sav')]
 if args.boot is None: command+=['--state-in',str(state)]
 else:
@@ -56,6 +59,20 @@ else:
 if args.save_out is not None:
  args.save_out.parent.mkdir(parents=True,exist_ok=True)
  command+=['--save-out',str(args.save_out)]
+prep_spec = None
+if args.prepare_party is not None:
+ if args.boot is not None or args.key or args.write:
+  raise SystemExit('Prepare only at an observed unlocked field checkpoint, separately from boot/buttons/writes.')
+ last=trace['steps'][-1]['telemetry']
+ if last['CampaignInBattle'] or last['CampaignControlsLocked']:
+  raise SystemExit('Party preparation requires unlocked field controls outside battle.')
+ from prepare_party import protocol
+ prep_spec, prep_words = protocol(args.prepare_party, ROOT)
+ for name, offset, value in prep_words:
+  command+=['--write',f'0:4:0x{syms[name]+offset:x}:{value}']
+ command+=['--write',f'1:4:0x{syms["gEcAgentPrepCommand"]:x}:1']
+ for name in ['gEcAgentPrepResult','gEcAgentPrepErrorSlot']:
+  command+=['--read',f'4:0x{syms[name]:x}']
 for key in args.key: command+=['--key',key]
 intermediate=[]
 for capture in args.at:
@@ -76,7 +93,14 @@ for spec in args.read_symbol:
 for spec in args.read_memory:
  width,address=spec.split(':',1);command+=['--read',spec];extra_reads[spec]=int(address,0)
 if args.until:command+=['--until',args.until]
-result=ui.run(command);nxt.replace(state)
+result=ui.run(command)
+if prep_spec is not None:
+ prep_reads={int(a,16):int(v,16) for a,v in re.findall(r'READ width=\d+ address=([0-9a-f]+) value=([0-9a-f]+)',result.stdout)}
+ if prep_reads[syms['gEcAgentPrepResult']] != 1:
+  raise SystemExit(f'Native preparation rejected; primary state unchanged. Result={prep_reads[syms["gEcAgentPrepResult"]]}, slot={prep_reads[syms["gEcAgentPrepErrorSlot"]]}')
+ trace['evidence']='native campaign traversal and trainer battles; user-authorized assisted stage-legal Pokemon acquisition/preparation; not native capture acceptance'
+ trace.setdefault('assisted_preparations',[]).append({'step':len(trace['steps']), 'manifest':str(args.prepare_party.resolve()), 'sha256':hashlib.sha256(args.prepare_party.read_bytes()).hexdigest(), 'spec':prep_spec, 'native_result':1})
+nxt.replace(state)
 reads={int(a,16):int(v,16) for a,v in re.findall(r'READ width=\d+ address=([0-9a-f]+) value=([0-9a-f]+)',result.stdout)};values={name:reads[addr] for name,addr in addresses.items()};values['readback']={name:reads[addr] for name,addr in extra_reads.items()}
 values['map']=next((name for name,n in parse_map_ids().items() if n==values['CampaignMapId']),'unknown') if trace.get('scenario','BOOK_RESEARCH') in ['BOOK_RESEARCH','STORY_HANDOFF','CAMPAIGN_AUTOWIN','CAMPAIGN_NATIVE'] else 'campaign telemetry not populated for this UI fixture'
 trace['steps'].append({'label':args.label,'state_before':str(before) if before else None,'frames':args.frames,'until':args.until,'frames_run':int(re.search(r'RESULT frames=(\d+)',result.stdout).group(1)),'keys':args.key,'intermediate':intermediate,'query':query,'telemetry':values,'screenshot':str(shot)})

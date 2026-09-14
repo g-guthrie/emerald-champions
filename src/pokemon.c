@@ -1332,6 +1332,17 @@ void CalculateMonStats(struct Pokemon *mon)
     CalculateMonStatsCont(mon, TRUE);
 }
 
+static bool32 IsOverlevelTrainerOpponent(const struct Pokemon *mon)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return FALSE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        if (mon == &gParties[B_TRAINER_OPPONENT_A][slot]
+         || mon == &gParties[B_TRAINER_OPPONENT_B][slot])
+            return TRUE;
+    return FALSE;
+}
+
 void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
 {
     s32 oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP);
@@ -1341,10 +1352,11 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
 
-    // Circuit opponents have battle-only levels above the boxed EXP ceiling.
+    // Trainer/Circuit opponents have battle-only levels above the boxed EXP ceiling.
     // Preserve them through Mega/form stat recalculation without changing the
     // save layout, player leveling, experience tables, or ordinary wild battles.
-    if (mon->level > MAX_LEVEL && IsChampionsCircuitOpponent(mon))
+    if (mon->level > MAX_LEVEL
+     && (IsOverlevelTrainerOpponent(mon) || IsChampionsCircuitOpponent(mon)))
         level = mon->level;
 
     u8 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);

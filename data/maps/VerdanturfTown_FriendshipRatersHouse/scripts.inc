@@ -140,6 +140,8 @@ VerdanturfTown_FriendshipRatersHouse_Text_Pikachu:
 	.string "PIKACHU: Pika pika!$"
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater
 	goto_if_set FLAG_EC_MEGA_GIFT_RAICHUNITE_X, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater
 	lock
 	faceplayer

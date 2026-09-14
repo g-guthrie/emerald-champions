@@ -13,6 +13,7 @@ RustboroCity_Gym_EventScript_Roxanne::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
 	goto_if_unset FLAG_RECEIVED_ROXANNE_OLD_AMBER, RustboroCity_Gym_EventScript_GiveRoxanneRewards
+RustboroCity_Gym_EventScript_RoxanneRewardChecked:
 	goto_if_set FLAG_BADGE02_GET, RustboroCity_Gym_EventScript_RoxanneJourneyContinues
 	goto RustboroCity_Gym_EventScript_RoxanneNextStep
 
@@ -28,15 +29,13 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 	setvar VAR_0x8008, 1
 	call Common_EventScript_SetGymTrainers
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
+	msgbox RustboroCity_Gym_Text_ExplainMegaEvolution, MSGBOX_DEFAULT
 	goto RustboroCity_Gym_EventScript_GiveRoxanneRewards
 	end
 
 RustboroCity_Gym_EventScript_GiveRoxanneRewards::
-	goto_if_set FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, RustboroCity_Gym_EventScript_GiveOldAmber
-	giveuniqueitem ITEM_AERODACTYLITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
 RustboroCity_Gym_EventScript_GiveOldAmber::
+	goto_if_set FLAG_RECEIVED_ROXANNE_OLD_AMBER, RustboroCity_Gym_EventScript_RoxanneNextStep
 	giveitem ITEM_OLD_AMBER
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_ROXANNE_OLD_AMBER
@@ -391,11 +390,20 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
 	.string "step toward the POKéMON LEAGUE.\p"
 	.string "Please take this with you, too.$"
 RustboroCity_Gym_Text_ExplainRoxanneRewards:
-	.string "Aerodactylite lets Aerodactyl Mega\n"
-	.string "Evolve once you possess a Mega Ring.\p"
-	.string "DEVON can restore that OLD AMBER.\n"
-	.string "Consider Aerodactyl your first Mega\l"
-	.string "project.$"
+	.string "DEVON's second-floor laboratory\n"
+	.string "can restore this OLD AMBER\l"
+	.string "into AERODACTYL.\p"
+	.string "STEVEN studies stones and fossils.\n"
+	.string "An AERODACTYL would interest him!$"
+
+RustboroCity_Gym_Text_ExplainMegaEvolution:
+	.string "The change in my AERODACTYL\n"
+	.string "was MEGA EVOLUTION.\p"
+	.string "It awakens power beyond ordinary\n"
+	.string "Evolution, for a single battle.\p"
+	.string "As your journey continues, you\n"
+	.string "will learn how to use that\l"
+	.string "power, too.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle:
 	.string "Meet the DEVON employee in town\n"

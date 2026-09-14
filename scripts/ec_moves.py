@@ -48,6 +48,9 @@ SIGN_SPECIES = {
 
 
 LEGENDARY_SHOWCASE_ALIASES = {
+    # E0475 uses Unbound; count the Hoopa family without claiming both forms
+    # or their distinct tactical roles have been demonstrated.
+    "SPECIES_HOOPA": {"SPECIES_HOOPA", "SPECIES_HOOPA_UNBOUND"},
     # The acquisition root is the base family, while trainer data uses the
     # battle-ready Power Construct form explicitly.  Either form is a real
     # Zygarde showcase; requiring a third base-form copy would be duplication,

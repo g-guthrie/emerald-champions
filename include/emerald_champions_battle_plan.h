@@ -19,6 +19,7 @@ enum EmeraldChampionsBattlePlan
     EC_BATTLE_PLAN_ALLY_COMBO = 1 << 8,
     EC_BATTLE_PLAN_PERISH_TRAP = 1 << 9,
     EC_BATTLE_PLAN_PRESSURE = 1 << 10,
+    EC_BATTLE_PLAN_MEGA_REVEAL = 1 << 11,
 };
 
 enum EmeraldChampionsBattleTacticKind

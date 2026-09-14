@@ -99,9 +99,9 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
             mons = []
             for match in MON_RE.finditer(branch):
                 offset = int(match.group(3))
-                if not -8 <= offset <= 7:
-                    raise ValueError(f"{trainer}: level offset {offset} is outside -8..7")
-                level = min(100, max(1, cap + offset))
+                if not -254 <= offset <= 254:
+                    raise ValueError(f"{trainer}: level offset {offset} is outside the native -254..254 representation")
+                level = min(255, max(1, cap + offset))
                 mons.append(Mon(
                     species=match.group(1),
                     item=match.group(2),
@@ -197,6 +197,12 @@ def implement(through_encounter: int, master: Path, party: Path) -> tuple[str, i
             block = rewrite_trainer_block(block, design)
             applied += 1
             seen.add(trainer)
+        elif design is None and trainer != "TRAINER_NONE":
+            # Keep names/classes and numeric IDs for saved flags/Match Call,
+            # but never compile a discarded campaign party as hidden content.
+            header = re.split(r"\n\s*\n", block, maxsplit=1)[0]
+            header = replace_attribute(header, "Party Size", "0")
+            block = header.rstrip() + "\n\n/* Retired: metadata only; no battle party in the canonical book. */\n\n"
         rendered.append(block)
     expected = {trainer for trainer, design in designs.items() if design.encounter <= through_encounter}
     missing = sorted(expected - seen)

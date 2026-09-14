@@ -95,13 +95,15 @@ reachability. Shared player presets have their own authored inputs/generator.
 python3 scripts/playthrough/fetch_handoff.py --list
 python3 scripts/playthrough/fetch_handoff.py
 python3 scripts/playthrough/party_snapshot.py \
-  work/v4-c13-brenden-final-ai-play downloaded-checkpoint
-python3 scripts/playthrough/battle_read.py work/v4-c13-brenden-final-ai-play
+  work/v4-c15-dwayne-revised-play downloaded-checkpoint
+python3 scripts/playthrough/battle_read.py work/v4-c15-dwayne-revised-play
 ```
 
-The current checkpoint is in the overworld, so `battle_resources_live: false` is
-expected. The default fetch restores the complete current session, not a new
-synthetic fixture. `--evidence` additionally downloads the archived preceding
+The current checkpoint is paused at a native turn-five command screen, so live
+battle resources are expected. Published September13 assets predate this C15
+checkpoint: inspect `handoff/assets.json` before fetching, and never claim those
+older downloads restore the current run. Inspect an existing C15 session only
+with its matching ROM/ELF. `--evidence` additionally downloads the archived preceding
 campaign/scene/native-test evidence; `--roms` adds the current normal ROM and
 historical releases. `--all` gets everything. It refuses to overwrite different
 existing files so a later session is not silently rolled back.
@@ -190,6 +192,31 @@ observation; they do not alter the game result. `--read-symbol WIDTH:NAME+OFFSET
 reads an ELF-resolved address. Never use `--write` to manufacture earned progress,
 Pokemon, RNG or battle outcomes; the session tool rejects setup writes in native
 mode. Separate synthetic fixtures remain available for focused branch diagnosis.
+
+## Authorized stage-legal benchmark preparation
+
+The user authorizes assisted acquisition/build preparation before trainer benchmarks.
+Preserve an actual pre-edit Save. Audit the chosen habitat's physical route, story
+and field gates, evolution providers and equipment first; the manifest records
+that human/source audit, not an automatic reachability proof.
+
+```sh
+python3 scripts/playthrough/session.py SESSION prepare-team --frames 180 \
+  --prepare-party handoff/benchmarks/c15_dwayne.json
+python3 scripts/playthrough/party_snapshot.py SESSION prepared-party
+```
+
+This narrow interface writes only the existing native agent-preparation API,
+requires unlocked field controls and records the manifest/hash/result. It uses
+native species caps, legal preparation moves, abilities, EV limits and random
+identities with perfect IVs/max PP. Invalid preparation leaves the primary state
+unchanged; `work/assisted-prep-validation/negative-result.json` verifies Aerodactyl
+with Spore is rejected (BAD_MOVE, slot0). The original prototype is diagnostic,
+not the continued party. Acquisition records Pokédex/legendary ownership, so it
+must only include genuinely available species. It does not earn trainer wins or
+story progression, prove native captures, or close functional-NPC acceptance.
+Normal Save/Continue retains assisted ancestry in the trace. This API is excluded
+from the normal release ROM. Generic progress writes remain forbidden.
 
 ## Capture and inspect contact sheets
 
@@ -295,3 +322,150 @@ useful focused baseline/fixed evidence and actual campaign saves. Update the boo
 Use release assets for large immutable artifacts rather than committed build trees.
 Verify the uploaded bytes through actual download; upload status or a local
 server alone does not establish a working phone-accessible handoff.
+
+## Deus codebase memory through real MCP
+
+The September14 Gym review used direct local caller/source inspection after
+automatic approval review rejected an optional Deus trace because it might
+export repository content externally. Do not retry or bypass that rejection.
+Existing historical trace receipts below remain evidence of their own runs.
+
+Use `scripts/deus_mcp.py`: it initializes the official server over stdio and
+calls its advertised MCP tools, preserving requests/results and stderr. This
+is a real MCP transport, not an imitation graph search. No paid API or agent
+configuration installation is needed. The existing canonical book remains the
+design owner; do not create a competing Deus ADR automatically.
+
+This Work runtime denies local Unix sockets. Official v0.10.8 requires its
+daemon even for CLI calls. Diagnosis isolated an additional PID/procfs namespace
+mismatch and secure-cache ancestry requirement; a local compatibility build
+passed those checks but still received EPERM at socket creation. Do not weaken
+those checks or change sandbox policy. Stock v0.9.0 is the compatible direct
+stdio release, before the daemon architecture. Its pinned Linux x86_64 archive
+was checked against the official release checksum. The working binary has no
+local source patches. Download it on a fresh machine with:
+
+```sh
+python3 scripts/setup_deus.py --directory ../deus-v090
+python3 scripts/deus_mcp.py --binary ../deus-v090/codebase-memory-mcp \
+  --cache ~/.cache/emerald-champions-deus-v090 --out work/deus/projects.json list_projects
+python3 scripts/deus_mcp.py --binary ../deus-v090/codebase-memory-mcp \
+  --cache ~/.cache/emerald-champions-deus-v090 --out work/deus/index.json \
+  index_repository '{"repo_path":"/absolute/path/to/emerald-champions","mode":"fast","name":"emerald-champions","persistence":false}'
+python3 scripts/deus_mcp.py --binary ../deus-v090/codebase-memory-mcp \
+  --cache ~/.cache/emerald-champions-deus-v090 --out work/deus/weather-callers.json \
+  trace_path '{"project":"emerald-champions","function_name":"ScorePairWithImmediateEffects","direction":"inbound","depth":3}'
+```
+
+The first actual index contains70,574 nodes/334,405 edges. Actual `trace_path`
+queries identified production tree picking as the harvest-credit caller, plus
+fixtures, and both move/switch callers of the shared pair evaluator. Fast-mode
+coverage excludes several directories, including data/scripts; it does not
+certify book prose or every assembler script edge. Use `search_code` and direct
+active-script inspection for these. Refresh the index after material code
+changes; consult the stored response and limits, not only the node count.
+
+## Trainer catalogue, roster equality and wide trainer levels
+
+`python3 scripts/export_trainer_catalogue.py` produces the requested complete
+plain-text export and validation receipt in `work/exports`. It reads native
+parties, compares all book member fields, lists direct Hoenn callsites, resolves
+regional-rival replacement presets, and includes every Circuit variant/template.
+Empty retired trainer records are metadata only; do not count them as battles.
+`python3 scripts/verify_campaign_trainer_roster.py` is also part of the canonical
+book `--check`: book IDs = nonempty native party IDs = Hoenn script battle IDs.
+The compiler removes retired loadouts without renumbering saved trainer flags.
+
+For the trainer-level change, the focused native build uses the usual harness
+plus `test/trainer_levels.c` and `test/battle/frontier_circuit.c`. Filters:
+`EC trainer levels:`, `Champions Circuit level 255`,
+`Champions Circuit Mega Evolution`. All three pass in the current source-bound
+run (`work/trainer-level-tests.log`). Signed16 offsets replace signed4; ordinary
+trainer opponents can exceed100 using transient levels with bounded boxed EXP.
+The unchanged battle/controller byte representation remains1–255; player caps
+and EXP tables are unchanged. Tests cover both opponent owners, Mega stats,
+wide positive/negative offsets, difficulty, saturation, damage and player isolation.
+
+For the approved first-five redesign, `test/battle/ai/primary_support_pair.c`
+contains3 regression groups/22 parameter cases. `EC primary support:` passes
+with the current native shared evaluator. The before-fix failures and repaired
+run are recorded in `work/first-five-ai-baseline.log` and
+`work/first-five-ai-tests.log`. They test partner choice/survival, timely and late
+Speed/SpDef support, primary-versus-secondary immunity, White Herb, Contrary,
+reflection and sound blocking. They are scoped mechanic/AI tests, not campaign
+fight clears or evidence that the revised teams meet the desired difficulty.
+
+The synchronized first-five production ROM builds successfully and passes
+`scripts/verify_emerald_champions_release.py` (including exact 369-party roster
+agreement and the source/artifact stamp). Evidence:
+`work/first-five-release-final-build.log`, `work/first-five-release-gates.log`.
+The post-change Deus index completed with70,638 nodes/334,552 edges;
+`work/deus/first-five-index.json` records its coverage and exclusions.
+
+Opening follow-up: the `OPTIONS` native fixture runs `NewGameInitData` and
+visually verifies the new Medium default in `work/opening-medium-default`.
+Native specialist checks use `MOVE_SPECIALIST`, with the original and fresh
+builds preserved in `work/opening-specialist-baseline` and
+`work/opening-specialist-current`. Move learning/return and Nature application,
+explicit No and exit show no residual Yes/No overlay. This scopes the old
+unreproduced report; it is not a claim of a new menu-code fix or all-service
+acceptance. `work/deus/opening-yesno-callers.json` traces shared cleanup owners.
+
+The user-directed instinctive level pass updates42 distinct U builds through
+E0010 (60 party references including rival aliases). Current book/native-party
+agreement passes in `work/first-ten-source-check.log`; the production ROM builds
+and passes all release gates in `work/first-ten-release-gates.log`. No new
+difficulty simulations or full battle clears are claimed for these levels.
+The earlier Medium-default and menu screenshots remain scoped to their saved
+matching ROM/ELF, before the subsequent trainer-level edits.
+
+## Darian composition and opening area discussion (2026-09-14)
+
+Approved E0007 uses new U1504 Eviolite/Liquid Ooze Tentacool, Medium15,
+Sludge Bomb/Muddy Water/Acid Spray/Protect; all four moves pass the pinned
+legal-pool check. U0029 is preserved for Elliot. Generation/source check and
+369-party roster check pass (`work/darian-composition-generation.log`,
+`work/darian-composition-check.log`). Existing shared Liquid Ooze and support
+forecast paths were source-audited; Deus inbound trace is
+`work/deus/darian-pair-callers.json`. No new AI implementation or battle
+acceptance is claimed. Build/gates: `work/darian-composition-build.log` and
+`work/darian-composition-release-gates.log`. Opening Woods Great Ball failure
+was traced through Std_ObtainItem/AddBagItem and the researcher exit; the
+missing pending receipt was OPEN at that review and subsequently repaired by
+the early economy cleanup below. No reward or habitat placement changed in
+that earlier discussion pass.
+
+## Early economy cleanup and Mega handoff (2026-09-14)
+
+Run `python3 scripts/audit/early_economy_runtime.py --out work/<new-directory>`
+after a current headless build. This covers changed finite gifts, Bag/PC/full
+storage/repeat receipts, Steven's Aerodactylite transfer and actual prices/sale
+values. Passing evidence: `work/early-economy-native-v2/result.json`; direct
+Woods rescue reward scene: `work/early-economy-woods-direct/trace.json` (synthetic
+battle outcome). Normal release gates: `work/early-economy-release-gates.log`.
+Contact sheet: `work/contact-sheets/early-economy-cleanup-native.png`.
+The existing story-handoff starter retry fixture explicitly starts after the
+Aerodactylite entitlement; the new audit tests Aero's own retry independently.
+The extracted native dependencies need their `usr/bin` on PATH and their
+`usr/lib/x86_64-linux-gnu` in LIBRARY_PATH/LD_LIBRARY_PATH, plus MGBA_PREFIX
+pointing at their `usr`; this is the host setup, not a game-source change.
+
+## Rustboro Gym redesign and Mega reveal (2026-09-14)
+
+Book sections8/9/22 own the four revised six-member teams. Generate/check
+with `scripts/emerald_champions_teams.py`. Focused test allowlist adds
+`test/battle/ai/mega_reveal.c` and `test/battle/ai/emerald_champions_plans.c`
+to the three runner files. Filters `EC Mega reveal:` and
+`EC battle plans: compiled directives` pass; see work/rustboro-focused-tests.log.
+Two pre-existing zero-byte test objects (battle_interface, battle_anim_effects_2)
+were removed and rebuilt; no test assertions were weakened.
+
+Headless evidence: work/roxanne-mega-native-v2/trace.json (parameter1, native
+Mega turn, then weak fixture-party loss), work/roxanne-rewards-v2/trace.json
+(parameter0, synthetic victory, real badge/speech/Amber/direction scripts).
+Observed Mega species918 before player Ring; reward fixture result1, controls
+restored, Old Amber1, Ring0, Aerodactylite0. Contact sheet:
+work/contact-sheets/rustboro-mega-reveal-native.png. Neither is an earned
+clear or difficulty benchmark. Only Roxanne authors MEGA_REVEAL; native
+eligibility remains required. Production build/gates logs:
+work/rustboro-final-release.log and work/rustboro-final-release-gates.log.

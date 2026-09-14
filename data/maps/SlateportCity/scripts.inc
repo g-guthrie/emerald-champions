@@ -877,8 +877,11 @@ SlateportCity_Text_EveryoneCallsHimCaptStern:
 	.string "So, everyone calls him CAPT. STERN.$"
 
 SlateportCity_Text_WhatsLongLineOverThere:
-	.string "What is that over there?\n"
-	.string "That long line…$"
+	.string "That crowd won't let anyone\n"
+	.string "into the MUSEUM.\p"
+	.string "Looking for CAPT. STERN? Ask\n"
+	.string "DOCK at the SHIPYARD, south\l"
+	.string "of here. He works with STERN.$"
 
 SlateportCity_Text_VisitedMuseumOften:
 	.string "When I was a child, I visited\n"
@@ -1225,11 +1228,9 @@ SlateportCity_Text_GretaAfter:
 	.string "That GENGARITE marks a contender.\n"
 	.string "Bring it to the BATTLE FRONTIER.$"
 
-@ Emerald Champions: Inclement sends the player to Slateport before the Knuckle
-@ Badge (Brawly waits in the museum queue), so Slateport, Route 109 and the
-@ Seashore House are authored at chapter cap 20. Route 110 and Mauville stay at
-@ cap 30, the Dynamo chapter. A road worker holds the north exit until Brawly is
-@ beaten; the four trigger tiles beside him push the player back.
+@ v4 arrives after Brawly, Steven's Ring and the manor song, at cap 24.
+@ The museum chapter raises the cap to 30. This inherited no-Knuckle fallback
+@ is dormant on the earned v4 path; it does not define the current story order.
 SlateportCity_EventScript_CheckKnuckleGuard::
 	goto_if_unset FLAG_BADGE02_GET, SlateportCity_EventScript_CheckKnuckleGuardEnd
 	setflag FLAG_HIDE_SLATEPORT_CITY_KNUCKLE_GUARD

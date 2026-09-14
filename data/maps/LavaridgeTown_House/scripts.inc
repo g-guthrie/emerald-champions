@@ -26,6 +26,8 @@ LavaridgeTown_House_Text_Zigzagoon:
 
 
 LavaridgeTown_House_EventScript_MegaGift_BLAZIKENITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_House_EventScript_MimicTutor
 	goto_if_set FLAG_EC_MEGA_GIFT_BLAZIKENITE, LavaridgeTown_House_EventScript_MimicTutor
 	lock
 	faceplayer
@@ -43,6 +45,8 @@ LavaridgeTown_House_EventScript_MegaGift_BLAZIKENITE_Text:
 	.string "Take this stone on your journey.$"
 
 LavaridgeTown_House_EventScript_MegaGift_MACHAMPITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_House_EventScript_OldMan
 	goto_if_set FLAG_EC_MEGA_GIFT_MACHAMPITE, LavaridgeTown_House_EventScript_OldMan
 	lock
 	faceplayer

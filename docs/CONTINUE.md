@@ -1,298 +1,145 @@
-# Continue the earned v4 campaign
+# Current development checkpoint — September 14, 2026
 
-This is the only current handoff. Read `AGENTS.md`, start/resume the unfinished
-objective in `docs/GOAL.md`, and use the canonical Game Book in this repository.
-The old account was paused for a machine/account transfer, not because the game
-was finished. No model-specific account, private memory, local Desktop folder,
-paid API, browser emulator, or additional agent is needed to continue.
+Read `AGENTS.md`, `docs/GOAL.md`, and the relevant sections of the single canonical
+`Game Blueprint/Emerald_Champions_Game_Book.txt`. This file owns current work and
+resume state; the book owns design and historical acceptance evidence;
+`docs/VERIFICATION.md` owns commands. Do not start another full-book review or
+spawn agents. The native engine in this repository is the active project.
 
-## First actions on a new machine
+## Active work: collaborative team reviews
 
-1. Clone the default `main` branch with full history. Work in this repository;
-   do not select an archived 7.0/7.1 branch as the current implementation.
-2. Follow `docs/VERIFICATION.md` to install/build the native dependencies. Download
-   the exact resume assets with `python3 scripts/playthrough/fetch_handoff.py`.
-   The downloader verifies hashes and preserves any differing existing work.
-3. Read `handoff/checkpoint.json`. Run the read-only checkpoint/party inspection,
-   and view the final save/contact sheet. The supplied session already contains
-   its immutable matching ROM, ELF, state, normal save and complete trace.
-4. Read the exact stopping point below before using any published resume asset.
-   The local earned continuation is ahead of the original transfer download.
-   Never silently replace this continuation with that older checkpoint.
-5. Continue Brawly, Steven's Ring handoff, the manor and the rest of the
-   campaign. Build missing/revised story scenes, repair systems/AI as encountered,
-   update this book and its consumers, and inspect evidence along the way.
+The user paused the earned playthrough and export delivery to review teams in
+small waves. Reviews now reach retained battle28, the end of Rustboro Gym.
+Approved revisions through that point are implemented; Joey16 remains on hold
+because of overlap with Calvin’s Belly Drum concept. Do not interpret reviewed
+as difficulty-tested. Individual levels are informed Medium-baseline seeds.
 
-The normal battery save supports a clean Continue if a different mGBA version
-cannot load the archived savestate. After ANY ROM rebuild, use normal Save and
-clean Continue; never transplant a savestate into another ROM/ELF.
+The latest user request is to synchronize the book/docs/README and push all
+completed source work to GitHub. After that, continue the team discussion after
+Rustboro Gym when the user asks; consult the book’s retained ordering rather
+than confusing encounter numbers, E groups and party variants.
 
-## Exact stopping point
-
-- **Primary: `work/v4-c15-taunt-fixed-play`. C14 complete; Hailey and Edmond defeated.**
-  Clean Continue from the actual Save111/export112 in
-  `work/v4-c14-common-singers-play/earned-edmond-slateport.sav`. Step001 verifies
-  Edmond's clear and the healed party is byte-identical across the ROM change.
-  Player at Slateport Center8,4 facing north. Next E0045 Lola, then retained
-  beach fights and the shipyard/museum story. Exact hashes are in the checkpoint.
-- **Medium, cap24,38 earned unique trainer clears.** Brawly remains won attempt7.
-  Edmond won first attempt in12 turns with five faints; Azumarill20/104 survived.
-  His timely-Taunt defect is repaired globally in move/switch forecasting, with
-  ten native cases and the book's backward/bespoke/forward index. No compulsory
-  replay of this earned pre-fix win. Existing eight screen cases still pass;
-  normal release gates pass. Edmond's six sampled pre-fix decisions max44frames
-  (~0.74s), including setup. Helping Hand/Brave Bird and Koffing Protect bought
-  real knockouts. No team/level increase proposed. Review every trainer for weak
-  pressure as well as excessive difficulty; zero/one faint prompts assessment.
-  Hailey won first attempt in9 turns with two faints, max43frames across6 samples.
-  Actual local Jigglypuff capture/song and Briney sailing are complete; cap24
-  earned. Native contact sheets: `c14-earned-song`, `hailey-earned`, `edmond-earned`.
-  Berry economy remains implemented: all67 ordinary berries free; separate typed
-  harvest credits, rewards and persistent crops. Six Lum in bag, harvested Lum0.
-  Native berry fixture/menu checks are recorded in the previous commit/book.
-- Current immutable ROM includes the capture-menu repair and shared timely burn/
-  Quash forecasts. Clean Continue from each previous normal save preserved ancestry.
-  Native acquisition/preparation includes Carbink and Prankster Sableye. Sableye’s
-  actual B1F habitat rate is13%; caught on the twentieth natural encounter.
-- Party healthy. Repel OFF, Old Rod registered. No manual healing consumables or
-  X items in these fights. Naturally activated held items are allowed. The current
-  Champions code restores battle-start held items, including berries, at settlement;
-  they remain consumed within battle unless restored by a native move/ability.
-- Every AI bug requires the book’s backward/bespoke/forward affected-team index,
-  repairs for every plausible affected implementation and focused regressions.
-  Source coverage does not mean every earlier battle was replayed.
-- Published `v4-handoff-20260913` assets remain older than this continuation until
-  repackaging/upload/download verification. Do not roll back to that old save.
-
-Current ROM/ELF hashes and ancestry are in the session trace. Both repairs pass
-focused native regressions; the normal release also builds. Full-party capture YES replacement/
-Yes-No cleanup was exercised successfully on the earned Abra catch. Direct-PC NO is earned-verified with Azurill; full-storage failure remains pending. Never transplant
-savestates between different ROMs.
-
-## Current party and rematch plan
-
-| Slot | Pokemon / native preparation | Moves | HP |
-| --- | --- | --- | --- |
-| 0 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 80 |
-| 1 | Shaymin, Life Orb, Natural Cure, Timid | Seed Flare, Earth Power, Giga Drain, Psychic | 89 |
-| 2 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 85 |
-| 3 | Sableye, Sitrus Berry, Prankster, Careful | Taunt, Quash, Fake Out, Foul Play | 90 |
-| 4 | Jigglypuff, Eviolite, Friend Guard | Fake Out, Icy Wind, Helping Hand, Sing | 111 |
-| 5 | Azumarill, Assault Vest, Huge Power, Adamant | Liquidation, Play Rough, Aqua Jet, Knock Off | 104 |
-
-All are level24. The Leveler preserved the caught singer's native moves.
-Kadabra, Mienfoo, Carbink, Marshtomp and Combusken are stored. Abra was caught on Granite Cave1F with one Great Ball,
-natively replaced Combusken, evolved through the Leveler and received Life Orb.
-Linking Cord is not available until Slateport. Sableye's tutor visit replaced
-Will-O-Wisp: the move-selection inputs came before the summary screen opened.
-Read-only replay confirmed slot0 was still selected; no wrong-slot write proven.
-Check the actual move cursor and resulting moves after future teaching.
-
-Azurill was caught on the first Route104 encounter with one Great Ball, sent directly
-into PC, withdrawn in place of Marshtomp, bonded to255 and evolved twice with the
-Leveler. The specialist applied the Assault Vest doubles preset natively. Save/export
-followed. Attempt five then lost in11 turns; Azumarill's switch into Super Fang and
-next-turn focus fire were costly. Hawlucha's Protect had value, its84 Speed exceeded
-Aerodactyl82, and it survived Wingbeat at5HP before helping close the battle.
-
-Sixth attempt tested Hawlucha21 (Speed81) and lost in12 turns, max decision46f.
-Four opponents fell; Pachirisu24/Hawlucha29 remained. Conkeldurr98 survived Play
-Rough96; paralysis nullified Aerodactyl's Speed advantage. A mistaken switch into
-Conkeldurr cost Shaymin. The user directed a material coordinated balance review
-around five serious failed attempts. Current Brawly levels20/22/20/20/21/20;
-all builds/species/AI retained. Coordinated tuning won with five faints; max full decision60f. New lead Aero+Timid Shaymin69
-pressures enemy Pachirisu early. Center vendor now stocks all berries; six Lum are in the bag. Retain Sash on Aerodactyl.
-
-Facade status forecast: baseline failures reproduced exhausted-Facade exclusion
-under burn, Glare and Nuzzle. Repaired all shared primary/secondary paths and
-actual remaining Facade power; focused native burn9, Glare3, Nuzzle4, secondary
-paralysis3 and Quash4 controls pass. Book has backward/bespoke/forward index;
-`work/facade-status-retrospective-scope.json` inventories exact carriers/setters.
-No prior earned replays and no causal Brawly-loss claim.
-Steven’s Ring handoff and the earned manor song are complete. Brawly’s T038/
-U0170–0175 team was inspected: Pachirisu/Choice Band Heracross opening; Guts
-Conkeldurr, AV Hariyama, White Herb Unburden Hawlucha and special Cobalion with
-Coaching/Quick Guard. Shared redirection, Coaching recipient survival, burn
-exceptions and priority protection code reviewed. Preserve the builds and apply the documented coordinated Brawly offsets.
-Navigation: Center exit `(8,8)`; Gym door `(8,17)`; arrival `(5,27)`; Brawly `(4,3)`.
-
-Capture YES replacement is earned-verified with Abra; direct-PC NO with Azurill.
-Full-storage failure remains pending. Earlier nine Old Rod casts produced no bite.
-No odds/RNG were changed; do not stall on incidental fishing.
-Field specialist Yes/No overlay was also observed and is not yet fixed/accepted.
-
-## Most recent battle findings
-
-**Brenden, E0036-B01 / TRAINER_BRENDEN 572.** Preserve original levels: Sawk,
-Riolu, Throh, Machop and Stufful at cap20; Monferno at21. The temporary Throh19
-experiment was reverted. Two shared bugs were repaired: fainted-target fallback
-and future Coaching value on a doomed recipient. On the final implementation,
-Brenden won one 14-turn attempt, then lost a 12-turn rematch with four player
-faints; only Shaymin28 and Marshtomp76 survived. All twelve winning-turn decisions
-were measured at 7–51 native VBlank frames, max approximately0.85 seconds including
-setup. This is sampled evidence, not a global worst-case certificate.
-
-**Cristian, E0038-B01 / TRAINER_CRISTIAN 574.** Current intent SETUP/ALLY_COMBO,
-Double Ace; Falinks Beat Up activates Justified Gallade/Lucario when profitable.
-Lead Falinks74HP/Sash/Defiant/Jolly, speed58, and Gallade65HP/Life Orb/Justified/
-Adamant, speed54. Reserves: AV Iron Fist Hitmonchan, Expert Belt Justified Lucario,
-Choice Band No Guard Machamp, and level21 Leftovers Vital Spirit Annihilape.
-Check the actual book/team for all exact moves/EVs; these notes are observations.
-The Beat Up count checks active status/HP and party participation, ally damage
-must be survivable, and boosts affect a recipient's later physical attack.
-
-First loss: T1 both Protect denied Fake Out/flying pressure; T2 Helping Hand plus
-Dual Wingbeat removed Gallade, but Falinks damaged Aerodactyl. The AI then used
-Mach Punch plus Close Combat to KO Mienfoo before Drain Punch, survived Psychic
-with Falinks's Sash, focused Shaymin, switched Falinks out of Feint into Machamp,
-and used High Horsepower to KO Follow Me Pachirisu. Lucario/Machamp then focused
-Marshtomp. Second loss: Falinks's consecutive Protect succeeded and bought the
-Mienfoo KO; a later Dual Wingbeat missed. After Falinks fell, Hitmonchan priority
-and Gallade Close Combat removed both attackers. Heat Wave/Follow Me removed
-Gallade at the cost of Pachirisu; Lucario/Hitmonchan finished the last pair.
-
-These attempts show real pressure and purposeful defense/switching, not a reason
-to weaken the trainer. The complete exact input traces, per-turn memory reads,
-reviews and contact sheets are archived. Attempt three was an earned 13-turn
-win with only Sableye (48/76 HP) remaining. Five party members fainted. Ordinary
-burn, Quash, Foul Play, Feint and redirection made the difference. A newly inflicted
-burn was missing from the shared immediate physical-damage forecast; baseline
-failure and seven fixed native cases are preserved. This victory does not certify
-that AI defect or the whole Justified engine. No enemy team/level nerf was made.
-
-**Jocelyn, E0039-B01 / TRAINER_JOCELYN 425.** Attempt one lost in 13 turns;
-Volbeat was the last opponent at 36/74 HP. Dual Wingbeat missed on turns3 and8.
-Her opening Protect denied Wingbeat and earned Speed Boost. Breloom's Protect
-on turn5 blocked a knockout and activated Toxic Orb; turn6 switched to Crabominable
-instead of gambling on consecutive Protect. Tailwind was set on turns2,6,10,
-after each previous instance expired. Sirfetch'd/Whimsicott focused Sableye and
-Combusken; Breloom removed Aerodactyl and Marshtomp. Turn9 Encore on 1-HP Pachirisu
-had no observed payoff because Breloom killed it before its action. Quash on turn2
-exposed a shared forecast omission: native Combusken was moved behind Wingbeat,
-but the scorer had no Quash turn-order effect. Preserve the baseline fixture and
-the repaired shared path passed four native controls before rematching. Max sampled decision was 55 native frames,
-including setup (13 decisions); this is not a universal timing certificate.
-
-Attempt two lost in eight turns; maximum measured decision56 frames. Attempt
-three won in seven turns with four healthy survivors, after matching Tailwind,
-removing Combusken with Feint/Wingbeat and Crabominable with Psychic. Volbeat’s
-Thunder Wave missed on turn4; Helping Hand/First Impression killed Shaymin on
-turn5. Breloom’s Protect had defensive value. Wingbeat missed on turn6 before
-turn7 victory. Maximum of seven full decisions:61 frames. No team/level nerf.
-
-**Brawly, E0040 / TRAINER_BRAWLY 266.** Six native losses:10,10,13,11,11,12 turns;
-maximum measured full decision budgets45,51,49,61,45,46 native frames respectively.
-Exact T038/U0170–0175 and relevant shared AI were checked before every attempt.
-First five used original levels; sixth used Hawlucha21 only. Coordinated cuts won attempt7 in11 turns with only Azumarill48/88; max decision60f. Attempt3 removed Cobalion/Hariyama/Heracross; timely burn
-let Aerodactyl survive Hawlucha at2HP. Hawlucha's Protect blocked Foul Play while
-Conkeldurr removed Sableye's berry. Attempt4's Taunt disabled early Follow Me;
-Quash/Psychic removed Cobalion on turn3. Kadabra's Gleam punished Hawlucha's
-Close Combat drops on turn8. Pachirisu fell on turn9; Heracross/Conkeldurr won.
-Full observations are in the canonical book, trace and timing reports. These are
-competitive enemy choices and player preparation/sequencing problems; no new
-AI defect has been demonstrated by these attempts.
-
-## Implementation already integrated
-
-The Git history contains the complete native base plus the v4 implementation;
-there is no missing uncommitted source tree to transplant. Useful old refactor
-work was checkpointed at `81dfb738c6`; the current source continues from it.
-The replacement engine and other parked checkouts are not execution dependencies.
-
-| Area | Current work and evidence boundary |
+| Rustboro encounter | Approved design |
 | --- | --- |
-| Book and roster | One complete 50-chapter v4 book; single Astra High review integrated; 342 battles/324 groups/369 party definitions. Exact catalogue import/check passes. Full playthrough quality is unfinished. |
-| Core systems | Legendary cap consumers, source-owned preparation/evolution access, fixed-IV/stat rules, finite/duplicate/pending rewards, economy and scripted recovery have implemented changes and scoped checks. Preserve current contracts; do not restore old proposals. |
-| Native AI | Committed-command knowledge and continuation; move-availability fix; blocked-attack opinion fix; first/repeated lone-survivor Protect rules; retaliation forecast; fainted-target fallback; recipient-survival Coaching value. Focused native failures/fixes are archived. |
-| Early story | C01/C03/C02 opening and directions, Woods/Devon theft, Rustboro/Cut guidance, Roxanne reward/handoff, Rusturf rescue, Devon two deliveries, Briney's passage, Dewford directions and first letter journey were exercised in the earned run and repaired where needed. |
-| C13–C15 current | Individual gym clears, Brawly, Steven Ring, local singer capture, manor song and Briney sailing are earned. Hailey and Edmond cleared; Lola next. |
-| Later scenes | Significant source preparation exists, including C48 observation interactions and selected restaged world/reward scenes. Synthetic evidence is available, but none makes later chapters earned or visually user-approved. Continue integrating/polishing them as reached. |
+| 25 Josh | Glimmet / Nosepass / Dwebble / Alolan Geodude / Naclstack / Onix; mineral chemistry, Shell Smash and Galvanize |
+| 26 Tommy | Cradily / Tirtouga / Anorith / Shuckle / Corsola / Binacle; fossil reef, Surf–Storm Drain and Power Split |
+| 27 Marc | Amaura / Stonjourner / Tyrunt / Klawf / Archen / Cranidos; snow support, Power Spot and prehistoric attackers |
+| 28 Roxanne | Mega Aerodactyl / Carbink / Relicanth / Tyrantrum / Omastar / Bombirdier; Tailwind, screens and fast fossil offense |
 
-Notable source commits: `600463d17b` committed-command AI; `b650bbe1c4` blocked
-attacks; `108551a35e` native move legality; `94554ad5f7` empty lone Protect;
-`99a77527f7` first-letter Flash access; `e62e64aff1` retaliation; `c2bf321969`
-fainted-target fallback; `ea87ae2c99` Coaching recipient value/restored Throh20.
-`8b65e7f748` contains C48 observation and original-pickup composition changes.
-Use commit diffs and current consumers, not a stale summary, when editing.
+Roxanne has **no Trick Room**. Aerodactyl leads and is her sole Mega slot;
+Carbink supplies screens/Rock Tomb, Relicanth and Omastar invest in Speed,
+Tyrantrum attacks immediately with Assault Vest, and Bombirdier backs up Tailwind.
+The scoped MEGA_REVEAL directive requires existing native Mega eligibility.
+Her postbadge speech introduces Mega Evolution before the Old Amber reward.
+Coalossal remains a volcano showcase, Minior remains at Meteor Falls, and
+Regirock awaits a later important desert/ruins review. No later team was changed
+merely to reserve those species.
 
-## Unfinished work and constraints that must survive the handoff
+Every individual audit explicitly asks “Could this team be cooler?” Explain the
+species, partnerships, biome, counterplay and AI. All Gym trainers/leaders need
+six Pokémon. Design first, then tune individual levels. Opponents use signed16
+level offsets and native u8 battle levels (1–255), not a level100 balance ceiling.
+New games initialize Medium; difficulty changes trainer levels, not AI quality.
 
-- Continue C15 and every remaining chapter through Champion/postgame obligations in
-  the book. Audit every retained trainer before fighting, review both wins/losses,
-  tune supported weaknesses, acquire sensible counterteams, and keep the book
-  synchronized. Do not substitute autowin traversal or a battle-lab grant for
-  earned campaign progress.
-- Continue the required exploration/story interactions with guide-free repeated
-  directions, meaningful new/restaged choreography, native screenshots and actual
-  user visual review. Avoid arbitrary decorative actors/sparkles. The rejected
-  Diancie coordinate (7,9) remains rejected.
-- Complete remaining mechanics/AI acceptance and relevant variant/randomized/
-  alternate-archetype coverage. The 38 earned wins are not38 fully closed
-  acceptance matrices. Earlier shared fixes require dependency-based rechecks;
-  prior scores do not automatically certify a newly changed engine.
-- Keep ordinary overlapping trainers' individual victories. Full gauntlet reset
-  is reserved for deliberately selected and clearly announced endurance events.
-  Do not reset Lilith after a Brenden loss.
-- The live legendary rule is only legendary/mythical species above600 configured
-  BST: floor(chapterCap×600/BST), including at cap100. Species at600, such as this
-  Shaymin, retain the full cap. A later idea to penalize600-BST legends and remove
-  caps after Champion was **discussion only**, not approved or implemented.
-- New-game title difficulty currently initializes Hard; this run was changed
-  natively to Medium. A change to initialization is a design decision, not an
-  implied cleanup. Do not change teams/AI quality with the difficulty setting.
-- Validate important bag/storage failure, reward retry, loss/Retry/reload,
-  temporary-party restoration and return/re-entry cases. Avoid exhaustive
-  incidental furniture/menu coverage that stops the actual campaign.
-- Keep native fixtures scoped. A baseline fixture that doesn't fail may be wrong:
-  the Coaching reproducer needed actual Brenden identity to include his authored
-  setup preference. Plain DOUBLE fixtures can carry recorded/link flags that
-  bypass campaign caps; set campaign flags intentionally for cap tests.
-- Final delivery still needs an integrated normal release, actual download checks,
-  maintained book, organized honest evidence and explicit remaining limits. The
-  handoff's development ROM is not a completion claim.
+## Book, economy and verification
 
-## Evidence layout and how to use it
+- Current census: **343 encounters / 325 E groups / 370 party variants**.
+  Exact roster check: book variants = nonempty native parties = Hoenn script IDs.
+  All57 Gym trainers and8 leaders have six. Retired IDs retain empty metadata;
+  146 obsolete loadouts remain excluded after Gina/Mia’s restoration.
+- Opening economy through battle16 is reconciled in the book. Oldale gives3
+  Heal Balls; the Woods researcher/nurse gives3 Dusk Balls; the visible southern
+  Route115 pickup gives3 Net Balls. Earlier finite rewards retain pending
+  receipts. Native reward/full-storage/retry checks are scoped in the book.
+- Roxanne gives Old Amber and Devon revival directions. Steven gives Aerodactylite
+  with the bracelet after Letter/Brawly, including Bag/PC fallback and retry.
+  Couple future stones to obtainable families; selected reviewed Mega trainers
+  may give their showcased stone. No bulk later gift assignment is approved.
+- All129 NPC bindings in29 opening maps were inventoried/source-reviewed.
+  Source alignment is not a claim that every interaction was exercised. The
+  specialist overlay did not reproduce in the recorded native checks; do not
+  invent a fix. Optional untested storage/service branches remain open.
+- Source import/ability/roster checks pass. Normal production build and release
+  gates pass: `work/rustboro-final-release.log` and matching `-gates.log`.
+- Focused native Mega reveal (with/without stone) and compiled-plan tests pass:
+  `work/rustboro-focused-tests.log`. Earlier primary-support, weather-survival,
+  trainer-level and economy regressions are documented in VERIFICATION/book.
+- `work/roxanne-mega-native-v2` shows native Mega Evolution before the player
+  bracelet, then a weak fixture-party loss. `work/roxanne-rewards-v2` uses a
+  separate automatic victory to check the real badge/speech/reward scripts:
+  Old Amber1, Ring0, Aerodactylite0 and returned controls. Neither is an earned
+  clear or a difficulty benchmark. Screens: `work/contact-sheets/rustboro-mega-reveal-native.png`.
+- The trainer exporter is available at `scripts/export_trainer_catalogue.py`;
+  delivery remains paused. Regenerate before delivering any old TXT snapshot.
 
-`handoff/assets.json` indexes downloadable assets and their hashes. The default
-fetch gets the complete current session and recent battle contact sheets. Fetch
-`--evidence` when investigating earlier work; it restores the relevant original
-`work/` paths from content-addressed archives without changing captured bytes.
-The archive index distinguishes gameplay sessions, synthetic scene fixtures,
-focused tests, earlier experiments and historical 7.0 references. Old experiments
-are preserved for diagnosis, not reinstated as current decisions.
+## Paused earned playthrough: C15 Dwayne experiment
 
-- Current session: `work/v4-c13-quash-fixed-play/trace.json`; predecessor sessions
-  `v4-c13-burn-fixed-play`,
-  `v4-c13-capture-repair-play`, `v4-c13-native-linux-play`, and the extended
-  `v4-c13-brenden-final-ai-play`. Each preserves native inputs/screens/before states.
-  Timing reports: `work/cristian-third-attempt-timing.json` and
-  `work/jocelyn-first-attempt-timing.json`, `work/jocelyn-second-attempt-timing.json`,
-  and `work/jocelyn-third-attempt-timing.json`. Baseline/fixed burn and Quash fixtures
-  are under `work/burn-forecast-baseline`, `work/quash-forecast-baseline` and logs.
-- Earned ancestry: the `battery_parent` and bridge fields in each session trace
-  name the previous normal save and hash. Earlier current-run directories include
-  `v4-opening-corrected-play`, `v4-c04-play`, `v4-c05-play`, `v4-c06-fixed-play`,
-  `v4-c07-cadence-play`, `v4-c07-roxanne-play`, `v4-c08-selection-fixed-play`,
-  `v4-c08-rusturf-play`, `v4-c09-devon-play`, `v4-c10-dewford-play`,
-  `v4-c12-granite-play` and the C13 repair/rematch directories. Follow actual
-  trace ancestry rather than sorting names into an assumed canonical chain.
-- `work/contact-sheets/`: grouped captured pixels, composition inputs and sidecars
-  containing original hashes/placements. Captured does not mean inspected; use
-  the explicit reviewed-sheet records and continue visual checks for new work.
-- `work/v4-scenes`, `work/v4-origins-integrated`, `work/book-scenes`,
-  `work/book-economy-scenes`: synthetic setup and real native scripts, with
-  separate outcomes. Read each trace's scope; these are not earned trainer wins.
-- `work/v4-*-native.log` and matching immutable test ELFs/stamps preserve focused
-  regression evidence. `work/7.0-first-100-ai-source.json` and related extracted
-  records preserve old authored observations; book sections21–24 carry the useful
-  intent. They are historical evidence, not current instructions or proof.
-- `tests/campaign/playthrough.json` is an input-recipe catalogue, not the live
-  checkpoint. Some later recipes reflect older flow and remain unvalidated until
-  reached. Three early service/inspection recipes were preserved from the existing
-  working tree; do not restart the current campaign to execute every recipe.
+**Do not advance this battle while the user has paused playthrough.**
+`handoff/checkpoint.json` owns machine-readable state and hashes. Current session:
+`work/v4-c15-dwayne-revised-play`, step024 `t5-board`, turn-five command selection,
+Medium, cap24, inside Route109 Seashore House. No turn-five commands submitted.
 
-Large artifacts are release assets rather than committed build products. The
-source checkout has one active book and one handoff; old duplicate playtest
-READMEs/build stamps were removed from the live branch. Git history and labeled
-archive assets preserve earlier evidence. GitHub is now the portable handoff and
-download surface; the previous account's private website is not needed to resume.
+Original Dwayne was beaten in four turns with zero player faints in
+`work/v4-c15-assisted-play`, step054. That is the 41st distinct evidenced win;
+the retest began from the prebattle save with40 clears. His evolved
+Magmar/Jynx/Electabuzz/Monferno roster is an **experiment**, not an accepted final
+concept. The user then clarified that themed low-stat teams should be tuned
+through levels, not evolved merely to increase stats.
+
+| Current party | HP | Battle position |
+| --- | --- | --- |
+| Mega Aerodactyl | 0 | Fainted |
+| Munkidori | 40/83 | Reserve |
+| Alakazam | 0 | Fainted; critical Thunder Punch |
+| Azumarill | 67/104 | Active |
+| Kartana | 70/70 | Active |
+| Togekiss | 97/97 | Reserve |
+
+Opponents: Electabuzz25/72 and Monferno54/72. All player members are level24.
+Preparation/access manifests: `handoff/benchmarks/c15_dwayne.json` and
+`c15_available_pool.json`. The user authorized stage-legal assisted acquisitions;
+these are not native capture acceptance. Access checks must include paths,
+story flags, licenses, bike requirements and evolution/equipment providers.
+
+Preserved battery saves:
+- `work/v4-c15-assisted-play/pre-dwayne.sav`
+- `work/v4-c15-assisted-play/dwayne-original-won.sav`
+- `work/v4-c15-berry-reconciled-play/pre-assisted-preparation.sav`
+
+The immutable midbattle session uses an older ROM. Resume it only with its own
+ROM/ELF; to test current code, use the actual prebattle battery save in a clean
+boot of the new build. Never transplant a savestate across ROMs or write earned
+wins/story progress. The original-win save is a separate completed branch.
+
+Brawly was won on attempt7; Steven’s Ring handoff, local Jigglypuff capture,
+manor song and sailing are earned. Hailey, Edmond, Lola and Chandler are cleared.
+Their historical battles/party snapshots live in the book and immutable traces,
+not as competing current instructions here. Ordinary overlapping trainers keep
+individual wins; do not introduce full gauntlet resets.
+
+Slateport Mart Shiny Stone/Linking Cord/Great Ball purchases, duplicate Cord
+refusal and stock-end/Cancel were exercised. Full-bag/insufficient-money branches
+remain pending. The Seashore owner introduction was exercised; its three-trainer
+reward remains pending. When playthrough resumes, settle Dwayne’s design/retest,
+then Johanna, Simon, Mel/Paul and the museum in book order.
+
+## Portable resume and remaining work
+
+Clone `main`, install dependencies from VERIFICATION, inspect the checkpoint,
+and fetch assets using `scripts/playthrough/fetch_handoff.py`. Check asset dates
+and hashes: old `v4-handoff-20260913` downloads predate the C15 continuation and
+must never silently replace a later local save. The source checkout is authoritative
+for current code; each saved session remains bound to its own immutable artifacts.
+
+Continue the whole campaign when the user resumes play. Audit every trainer’s
+team/AI and each reached area’s dialogue, gates, economy, services and rewards.
+Use strong stage-legal preparation, native combat and no manual healing items.
+Review insufficient pressure and repeated optimized losses; faint counts are
+signals, not quotas. Revisit affected shared AI owners through focused regression
+checks rather than automatically replaying every previously won trainer.
+
+The full game is not played, balanced or visually accepted. Remaining work includes
+later team reviews, level calibration, story/service/return-path coverage and
+full campaign completion. Keep the legendary rule unchanged unless explicitly
+approved: only legendary/mythical species above600 BST receive the existing
+floor(chapterCap×600/BST) cap. Six hundred BST Shaymin keeps the full cap.

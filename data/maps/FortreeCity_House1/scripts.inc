@@ -79,6 +79,8 @@ FortreeCity_House1_Text_Zigzagoon:
 
 
 FortreeCity_House1_EventScript_MegaGift_MILOTICITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, FortreeCity_House1_EventScript_ExpertF
 	goto_if_set FLAG_EC_MEGA_GIFT_MILOTICITE, FortreeCity_House1_EventScript_ExpertF
 	lock
 	faceplayer

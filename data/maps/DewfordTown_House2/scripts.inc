@@ -48,6 +48,8 @@ DewfordTown_House2_Text_BrawlySoCool:
 	.string "Everyone idolizes him.$"
 
 DewfordTown_House2_EventScript_MegaGift_KINGLERITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_Boy
 	goto_if_set FLAG_EC_MEGA_GIFT_KINGLERITE, DewfordTown_House2_EventScript_Boy
 	lock
 	faceplayer
@@ -65,6 +67,8 @@ DewfordTown_House2_EventScript_MegaGift_KINGLERITE_Text:
 	.string "this stone could make it stronger!$"
 
 DewfordTown_House2_EventScript_MegaGift_GYARADOSITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_Man
 	goto_if_set FLAG_EC_MEGA_GIFT_GYARADOSITE, DewfordTown_House2_EventScript_Man
 	lock
 	faceplayer

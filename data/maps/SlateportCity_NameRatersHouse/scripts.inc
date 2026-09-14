@@ -111,6 +111,8 @@ SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg:
 
 
 SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_NameRatersHouse_EventScript_NameRater
 	goto_if_set FLAG_EC_MEGA_GIFT_MALAMARITE, SlateportCity_NameRatersHouse_EventScript_NameRater
 	lock
 	faceplayer

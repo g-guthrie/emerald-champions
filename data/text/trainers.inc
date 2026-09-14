@@ -237,6 +237,17 @@ Route103_Text_MarcosPostBattle:
 	.string "have gathered.\p"
 	.string "Heh, maybe I should turn pro.$"
 
+Route104_Text_GinaIntro::
+	.string "GINA: MIA and I battle as a pair!\n"
+	.string "Our POKéMON do, too!$"
+
+Route104_Text_MiaIntro::
+	.string "MIA: Together, we're twice as strong!\n"
+	.string "Let's show them, GINA!$"
+
+Route104_Text_TwinsDefeat::
+	.string "Even together, we couldn't win!$"
+
 Route104_Text_GinaPostBattle::
 	.string "GINA: MIA and I train together.\n"
 	.string "We have to look out for each other!$"

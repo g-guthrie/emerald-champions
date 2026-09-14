@@ -25,6 +25,8 @@ VerdanturfTown_House_Text_DefeatEliteFourInARow:
 
 
 VerdanturfTown_House_EventScript_MegaGift_GALLADITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, VerdanturfTown_House_EventScript_Woman2
 	goto_if_set FLAG_EC_MEGA_GIFT_GALLADITE, VerdanturfTown_House_EventScript_Woman2
 	lock
 	faceplayer

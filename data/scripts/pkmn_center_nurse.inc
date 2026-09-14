@@ -1,6 +1,9 @@
 Common_EventScript_PkmnCenterNurse::
 	lock
 	faceplayer
+	call_if_set FLAG_EC_BIRCH_GREAT_BALLS_PENDING, EventScript_PkmnCenterNurse_BirchGift
+	call_if_set FLAG_EC_WOODS_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_WoodsGift
+	call_if_set FLAG_EC_RUSTBORO_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_RustboroGift
 	checkitem ITEM_POKE_VIAL, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_HasVial
 	msgbox gText_EmeraldChampionsFirstCenterVisit, MSGBOX_DEFAULT
@@ -186,3 +189,42 @@ Movement_PkmnCenterNurse_Bow:
 	nurse_joy_bow
 	delay_4
 	step_end
+
+@ Devon's two finite gifts are independent of story completion and healing.
+EventScript_PkmnCenterNurse_WoodsGift::
+	msgbox Text_PkmnCenterNurse_WoodsGift, MSGBOX_DEFAULT
+	giveitem ITEM_DUSK_BALL, 3
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
+	clearflag FLAG_EC_WOODS_GREAT_BALL_PENDING
+	return
+EventScript_PkmnCenterNurse_RustboroGift::
+	call EventScript_PkmnCenterNurse_DevonGift
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
+	clearflag FLAG_EC_RUSTBORO_GREAT_BALL_PENDING
+	return
+EventScript_PkmnCenterNurse_DevonGift::
+	msgbox Text_PkmnCenterNurse_DevonGift, MSGBOX_DEFAULT
+	giveitem ITEM_GREAT_BALL
+	return
+EventScript_PkmnCenterNurse_KeepDevonGift::
+	msgbox Text_PkmnCenterNurse_KeepDevonGift, MSGBOX_DEFAULT
+	return
+Text_PkmnCenterNurse_WoodsGift:
+	.string "The WOODS researcher left three\n"
+	.string "DUSK BALLS for you. Here you are!$"
+Text_PkmnCenterNurse_DevonGift:
+	.string "A DEVON researcher left a GREAT BALL\n"
+	.string "for you. Here you are!$"
+Text_PkmnCenterNurse_KeepDevonGift:
+	.string "Your BAG is still full. I'll keep it\n"
+	.string "safe. Make room and speak to me again.$"
+
+EventScript_PkmnCenterNurse_BirchGift::
+	msgbox Text_PkmnCenterNurse_BirchGift, MSGBOX_DEFAULT
+	giveitem ITEM_GREAT_BALL, 10
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
+	clearflag FLAG_EC_BIRCH_GREAT_BALLS_PENDING
+	return
+Text_PkmnCenterNurse_BirchGift:
+	.string "PROF. BIRCH left 10 GREAT BALLS\n"
+	.string "for your journey. Here you are!$"

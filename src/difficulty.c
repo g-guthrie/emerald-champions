@@ -51,12 +51,12 @@ u8 GetTrainerLevelReduction(void)
     }
 }
 
-u8 GetCampaignTrainerLevel(s8 offset)
+u8 GetCampaignTrainerLevel(s16 offset)
 {
-    // Authoring uses the Normal baseline. Apply difficulty before the level
-    // ceiling so a Normal level-100 opponent does not accidentally become 98.
+    // Authoring uses Normal. Opponents may exceed level 100; 255 is the
+    // existing native u8 battle-level representation, not a difficulty policy.
     s32 level = (s32)GetCurrentLevelCap() + offset + 2 - GetTrainerLevelReduction();
-    return max(1, min(MAX_LEVEL, level));
+    return max(1, min(255, level));
 }
 
 enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)

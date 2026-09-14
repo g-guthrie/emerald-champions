@@ -82,7 +82,7 @@ struct TrainerMon
     u8 shouldUseDynamax:1;
     bool8 useLevelOffset:1;
     u8 dynamaxLevel:4;
-    s8 levelOffset:4; // Campaign offset from the live player cap (-8..7).
+    s16 levelOffset; // Campaign offset; full native battle-level range, not a balance cap.
     u32 tags;
 };
 

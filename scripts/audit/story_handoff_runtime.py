@@ -39,7 +39,7 @@ def main():
     state, rows = out / 'current.ss1', []
     result = {'status': 'running', 'rom_sha256': hashlib.sha256(rom.read_bytes()).hexdigest(),
               'elf_sha256': hashlib.sha256(elf.read_bytes()).hexdigest(),
-              'setup': 'Synthetic two-mon party. Missing Letter, PC Letter without Badge 2, or Ring-owned Charmander with full Mega pocket and PC. Trigger 2/3 frees one PC slot and reloads; trigger 1 reloads only. Museum starts without Parts and with both grunts hidden.',
+              'setup': 'Synthetic two-mon party. Missing Letter, PC Letter without Badge 2, or Ring-owned Charmander with Aerodactylite entitlement already fulfilled and full Mega pocket and PC. Trigger 2/3 frees one PC slot and reloads; trigger 1 reloads only. Museum starts without Parts and with both grunts hidden.',
               'scope': 'Real map interactions and persistent inventory/flag state; not fresh-save progression.', 'trace': rows}
     with tempfile.TemporaryDirectory(prefix='ec-handoff-runtime-') as scratch:
         scratch_rom = Path(scratch) / 'handoff.gba'

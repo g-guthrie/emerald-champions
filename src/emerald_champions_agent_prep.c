@@ -7,7 +7,9 @@
 #include "emerald_champions_battle_sets.h"
 #include "main.h"
 #include "load_save.h"
+#include "legendary_signs.h"
 #include "pokemon.h"
+#include "pokedex.h"
 #include "save.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
@@ -51,10 +53,10 @@ static bool32 FindAbility(enum Species species, enum Ability ability, u8 *slotOu
     return FALSE;
 }
 
-static bool32 ApplyOverrides(struct Pokemon *mon, u32 slot)
+static enum EmeraldChampionsAgentPrepResult ApplyOverrides(struct Pokemon *mon, u32 slot)
 {
     u8 perfectIv = MAX_PER_STAT_IVS;
-    u8 ppBonuses = 0;
+    u8 ppBonuses = 0xFF;
     u32 total = 0;
 
     for (u32 moveSlot = 0; moveSlot < MAX_MON_MOVES; moveSlot++)
@@ -62,29 +64,31 @@ static bool32 ApplyOverrides(struct Pokemon *mon, u32 slot)
         u32 move = gEcAgentPrepMoves[slot][moveSlot];
         if (move == EC_AGENT_PREP_KEEP)
             continue;
-        if (move >= MOVES_COUNT)
-            return FALSE;
+        if (move >= MOVES_COUNT || !CanSpeciesUseEmeraldChampionsPreparationMove(GetMonData(mon, MON_DATA_SPECIES), move))
+            return EC_AGENT_PREP_BAD_MOVE;
         SetMonMoveSlot(mon, move, moveSlot);
     }
     if (gEcAgentPrepNature[slot] != EC_AGENT_PREP_KEEP)
     {
-        u8 nature = gEcAgentPrepNature[slot];
-        if (nature >= NUM_NATURES)
-            return FALSE;
+        u8 nature;
+        if (gEcAgentPrepNature[slot] >= NUM_NATURES)
+            return EC_AGENT_PREP_BAD_NATURE;
+        nature = gEcAgentPrepNature[slot];
         SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
     }
     if (gEcAgentPrepAbility[slot] != EC_AGENT_PREP_KEEP)
     {
         u8 abilitySlot;
         if (!FindAbility(GetMonData(mon, MON_DATA_SPECIES), gEcAgentPrepAbility[slot], &abilitySlot))
-            return FALSE;
+            return EC_AGENT_PREP_BAD_ABILITY;
         SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
     }
     if (gEcAgentPrepItem[slot] != EC_AGENT_PREP_KEEP)
     {
-        u16 item = gEcAgentPrepItem[slot];
-        if (item >= ITEMS_COUNT)
-            return FALSE;
+        u16 item;
+        if (gEcAgentPrepItem[slot] >= ITEMS_COUNT)
+            return EC_AGENT_PREP_BAD_ITEM;
+        item = gEcAgentPrepItem[slot];
         SetMonData(mon, MON_DATA_HELD_ITEM, &item);
     }
     for (u32 stat = 0; stat < NUM_STATS; stat++)
@@ -94,19 +98,19 @@ static bool32 ApplyOverrides(struct Pokemon *mon, u32 slot)
         {
             // An override is one complete spread or six KEEP sentinels.
             if (gEcAgentPrepEvs[slot][0] != EC_AGENT_PREP_KEEP)
-                return FALSE;
+                return EC_AGENT_PREP_BAD_EVS;
             continue;
         }
         if (gEcAgentPrepEvs[slot][0] == EC_AGENT_PREP_KEEP)
-            return FALSE;
+            return EC_AGENT_PREP_BAD_EVS;
         if (points > MAX_PER_STAT_EVS)
-            return FALSE;
+            return EC_AGENT_PREP_BAD_EVS;
         total += points;
     }
     if (gEcAgentPrepEvs[slot][0] != EC_AGENT_PREP_KEEP)
     {
         if (total > MAX_TOTAL_EVS)
-            return FALSE;
+            return EC_AGENT_PREP_BAD_EVS;
         for (u32 stat = 0; stat < NUM_STATS; stat++)
         {
             u8 points = gEcAgentPrepEvs[slot][stat];
@@ -117,7 +121,8 @@ static bool32 ApplyOverrides(struct Pokemon *mon, u32 slot)
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, MON_DATA_HP_IV + stat, &perfectIv);
     CalculateMonStats(mon);
-    return TRUE;
+    MonRestorePP(mon);
+    return EC_AGENT_PREP_SUCCESS;
 }
 
 void EmeraldChampionsAgentPrepPoll(void)
@@ -145,6 +150,7 @@ void EmeraldChampionsAgentPrepPoll(void)
     {
         enum Species species = gEcAgentPrepSpecies[slot];
         u32 level = gEcAgentPrepLevel[slot];
+        enum EmeraldChampionsAgentPrepResult overrideResult;
         if (species == SPECIES_NONE || species >= NUM_SPECIES)
         {
             Fail(EC_AGENT_PREP_BAD_SPECIES, slot);
@@ -157,7 +163,7 @@ void EmeraldChampionsAgentPrepPoll(void)
             Fail(EC_AGENT_PREP_BAD_LEVEL, slot);
             return;
         }
-        CreateMon(&sEcAgentPreparedParty[slot], species, level, MAX_PER_STAT_IVS, OTID_STRUCT_PLAYER_ID);
+        CreateRandomMonWithIVs(&sEcAgentPreparedParty[slot], species, level, MAX_PER_STAT_IVS);
         if (gEcAgentPrepPreset[slot] != EC_AGENT_PREP_KEEP
          && ApplyEmeraldChampionsBattleSetChoiceForFormat(
                 &sEcAgentPreparedParty[slot],
@@ -167,9 +173,10 @@ void EmeraldChampionsAgentPrepPoll(void)
             Fail(EC_AGENT_PREP_BAD_PRESET, slot);
             return;
         }
-        if (!ApplyOverrides(&sEcAgentPreparedParty[slot], slot))
+        overrideResult = ApplyOverrides(&sEcAgentPreparedParty[slot], slot);
+        if (overrideResult != EC_AGENT_PREP_SUCCESS)
         {
-            Fail(EC_AGENT_PREP_BAD_EVS, slot);
+            Fail(overrideResult, slot);
             return;
         }
         ClampMonToPlayerLevelCap(&sEcAgentPreparedParty[slot]);
@@ -179,7 +186,12 @@ void EmeraldChampionsAgentPrepPoll(void)
     memcpy(gParties[B_TRAINER_PLAYER], sEcAgentPreparedParty, sizeof(sEcAgentPreparedParty));
     CalculatePlayerPartyCount();
     for (u32 slot = 0; slot < gEcAgentPrepPartyCount; slot++)
+    {
         gEcAgentPrepLevel[slot] = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL);
+        HandleSetPokedexFlagFromMon(&gParties[B_TRAINER_PLAYER][slot], FLAG_SET_SEEN);
+        HandleSetPokedexFlagFromMon(&gParties[B_TRAINER_PLAYER][slot], FLAG_SET_CAUGHT);
+        MarkLegendarySignCaughtBySpecies(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES));
+    }
     SavePlayerParty();
     gEcAgentPrepResult = EC_AGENT_PREP_SUCCESS;
     gEcAgentPrepErrorSlot = EC_AGENT_PREP_KEEP;

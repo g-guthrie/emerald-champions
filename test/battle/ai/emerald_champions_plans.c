@@ -24,13 +24,13 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_ROXANNE_1;
     TRAINER_BATTLE_PARAM.opponentB = TRAINER_BILLY;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
-    EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_1), EC_BATTLE_PLAN_TRICK_ROOM);
-    EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_3), EC_BATTLE_PLAN_TRICK_ROOM);
+    EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_1), EC_BATTLE_PLAN_TAILWIND | EC_BATTLE_PLAN_PRESSURE | EC_BATTLE_PLAN_MEGA_REVEAL);
+    EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_3), EC_BATTLE_PLAN_TAILWIND | EC_BATTLE_PLAN_PRESSURE | EC_BATTLE_PLAN_MEGA_REVEAL);
     EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_0), 0);
     EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_2), 0);
 
     gBattleTypeFlags |= BATTLE_TYPE_TWO_OPPONENTS;
-    EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_1), EC_BATTLE_PLAN_TRICK_ROOM);
+    EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_1), EC_BATTLE_PLAN_TAILWIND | EC_BATTLE_PLAN_PRESSURE | EC_BATTLE_PLAN_MEGA_REVEAL);
     EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_3), EC_BATTLE_PLAN_RAIN);
 
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_TATE_AND_LIZA_1;

@@ -2449,7 +2449,7 @@ static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
         level = GetMonData(&party[i], MON_DATA_LEVEL);
         SetMonData(&party[i], MON_DATA_SPECIES, &newSpecies);
         SetMonData(&party[i], MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
-        experience = gExperienceTables[gSpeciesInfo[newSpecies].growthRate][level];
+        experience = gExperienceTables[gSpeciesInfo[newSpecies].growthRate][min(level, MAX_LEVEL)];
         SetMonData(&party[i], MON_DATA_EXP, &experience);
         ApplyEmeraldChampionsRegionalRivalSet(party, i, stage == 0);
         CalculateMonStats(&party[i]);

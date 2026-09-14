@@ -36,6 +36,8 @@ DewfordTown_House1_Text_Zigzagoon:
 
 
 DewfordTown_House1_EventScript_MegaGift_BARBARACITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House1_EventScript_Man
 	goto_if_set FLAG_EC_MEGA_GIFT_BARBARACITE, DewfordTown_House1_EventScript_Man
 	lock
 	faceplayer

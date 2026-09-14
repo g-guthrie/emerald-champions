@@ -15,7 +15,7 @@ Species, items, abilities, natures and moves are written without their
 six slash-separated values in HP/Atk/Def/SpA/SpD/Spe order or a spread in
 ``EV_SPREADS``. The level column is the offset from the live player cap on Normal.
 TrainerMon stores it explicitly; native creation applies Easy -2 / Hard +2
-before clamping to 1..100, including gyms and the prepared opening rival.
+before the native 1..255 representation bound, including gyms and the prepared opening rival.
 The materialized absolute Level is a preview of the recorded encounter cap.
 
 ``strategy:`` supplies explicit contextual instructions to the bounded doubles
@@ -50,7 +50,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TEAMS = ROOT / "data/emerald_champions/emerald_champions_battle_teams.txt"
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 PLANS = ROOT / "src/data/emerald_champions_battle_plans.h"
-STRATEGIES = {"TRICK_ROOM", "RAIN", "SUN", "SAND", "SNOW", "REDIRECTION", "SETUP", "TAILWIND", "ALLY_COMBO", "PERISH_TRAP", "PRESSURE"}
+STRATEGIES = {"TRICK_ROOM", "RAIN", "SUN", "SAND", "SNOW", "REDIRECTION", "SETUP", "TAILWIND", "ALLY_COMBO", "PERISH_TRAP", "PRESSURE", "MEGA_REVEAL"}
 TACTICS = {"ACTIVATE", "AFTER_YOU", "INSTRUCT", "COMMANDER", "SUPPRESS"}
 ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
@@ -224,8 +224,8 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             raise SystemExit(f"{where}: friendship must be 0..255")
         if not 1 <= len(moves) <= 4:
             raise SystemExit(f"{where}: {len(moves)} moves")
-        if not -8 <= int(mon.group(6)) <= 7:
-            raise SystemExit(f"{where}: native level offset must be -8..7")
+        if not -254 <= int(mon.group(6)) <= 254:
+            raise SystemExit(f"{where}: native level offset must fit -254..254")
         current.mons.append(Mon(
             species=mon.group(1),
             item=mon.group(2),
@@ -605,6 +605,7 @@ def main() -> None:
                 raise SystemExit("generated trainer party differs from authored teams; run --write")
             run([sys.executable, "scripts/verify_trainer_ability_legality.py"],
                 {"EC_TRAINERS_PARTY": str(scratch_party)}, fatal=False)
+        run([sys.executable, "scripts/verify_campaign_trainer_roster.py"])
         if FAILED_GATES:
             raise SystemExit(f"gates failed: {FAILED_GATES}")
         print("PASS: generated master/plans/party match authored teams; configured trainer abilities are valid")
