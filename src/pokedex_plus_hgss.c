@@ -3573,7 +3573,6 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
 
     StringCopy(gStringVar1, GetSpeciesName(species));
 
-    sPokedexView->sEvoScreenData.arrowSpriteDist[*depth_i] = numLines;
 
     //If there are no evolutions print text and return
     if (evolutions == NULL)
@@ -3616,6 +3615,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
         u32 base_x_offset = speciesNameWidth + base_x + depth_offset; // for evo method info
         u32 maxScreenWidth = 230 - base_x_offset;
 
+        sPokedexView->sEvoScreenData.arrowSpriteDist[*depth_i] = numLines;
         sPokedexView->sEvoScreenData.targetSpecies[*depth_i] = targetSpecies;
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*(*depth_i) + numLines, 0);
         HandleTargetSpeciesPrintText(targetSpecies, base_x + depth_x*depth, base_y, base_y_offset, *depth_i, numLines); //evolution mon name
@@ -3942,7 +3942,6 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
 
         numLines = CountLineBreaks(gStringVar4) * fontHeight;
 
-        sPokedexView->sEvoScreenData.arrowSpriteDist[*depth_i + 1] = numLines;
 
         PrintEvolutionTargetSpeciesAndMethod(taskId, targetSpecies, depth+1, depth_i, alreadyPrintedIcons, icon_depth_i, numLines);
     }//For loop end
