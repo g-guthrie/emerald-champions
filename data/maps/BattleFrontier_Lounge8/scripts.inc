@@ -31,8 +31,10 @@ BattleFrontier_Lounge8_Text_KnowAboutFrontierBrains:
 	.string "Do you know about the FRONTIER\n"
 	.string "BRAINS?\p"
 	.string "That's what SCOTT calls the seven\n"
-	.string "special TRAINERS that run the seven\l"
-	.string "facilities in the BATTLE FRONTIER.$"
+	.string "special TRAINERS who once ran the\l"
+	.string "seven FRONTIER facilities.\p"
+	.string "Their buildings now register teams\n"
+	.string "for the CHAMPIONS CIRCUIT.$"
 
 BattleFrontier_Lounge8_Text_ToldMeIHaveTalentForBattling:
 	.string "At the BATTLE TOWER, an older girl\n"
