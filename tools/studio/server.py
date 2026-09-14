@@ -119,7 +119,7 @@ class Catalogue:
         if name in self.map_images: return self.map_images[name]
         layout = self.layouts[self.maps[name]["layout"]]
         headers = (ROOT/"src/data/tilesets/headers.h").read_text()
-        graphics = (ROOT/"src/data/tilesets/graphics.h").read_text()
+        graphics = (ROOT/"src/data/tilesets/graphics.h").read_text() + "\n" + (ROOT/"src/graphics.c").read_text()
         metatiles = (ROOT/"src/data/tilesets/metatiles.h").read_text()
         banks = []
         for ident in (layout["primary_tileset"], layout["secondary_tileset"]):
