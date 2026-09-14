@@ -38,6 +38,8 @@ Route119_EventScript_RivalTrigger2::
 
 Route119_EventScript_RivalEncounter::
 	lockall
+	special HasEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, Route119_EventScript_RivalNeedsTwoMons
 	addobject LOCALID_ROUTE119_RIVAL_ON_BIKE
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, Route119_EventScript_PlayMayMusic
@@ -56,6 +58,13 @@ Route119_EventScript_RivalEncounter::
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, Route119_EventScript_BattleMay
 	goto_if_eq VAR_RESULT, FEMALE, Route119_EventScript_BattleBrendan
+	releaseall
+	end
+
+Route119_EventScript_RivalNeedsTwoMons::
+	msgbox EmeraldChampions_Text_NeedTwoPokemon, MSGBOX_DEFAULT
+	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
 	releaseall
 	end
 

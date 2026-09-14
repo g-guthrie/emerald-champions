@@ -310,6 +310,7 @@ PLAYER HANDOFF — Stern after the museum conflict:
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 C17 — The Route110 rival
+All three road approaches turn an insufficient party back toward Slateport before the rival moves. Healing permits a normal retry; an already-won battle still permits its pending reward retry without another fight.
 Meet the rival while traveling north. The rival notices the player's involvement in the thefts but challenges the team as a trainer, keeping the personal journey present. Continue to Mauville after the battle.
 
 PLAYER HANDOFF — Rival after the Route110 battle:
@@ -439,7 +440,7 @@ PLAYER HANDOFF — Elevated-ruins researcher and Institute return interaction:
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 C31 — Fortree, Steven and Winona
-Continue through the Route119 rival encounter and meet Steven at the existing Devon Scope obstacle. He is following the same growing pattern and points toward Stern's offshore work. Clear the obstacle without requiring Kecleon ownership, defeat Winona, and reach cap 60. Personal Fly becomes usable. The next leg runs east to Lilycove, where transport is being arranged.
+Continue through the Route119 rival encounter and meet Steven at the existing Devon Scope obstacle. Both bridge approaches turn back a party with fewer than two usable Pokémon before staging the rival. Preparation and a fresh approach retry the encounter; rejection grants neither a clear nor the Fly license. He is following the same growing pattern and points toward Stern's offshore work. Clear the obstacle without requiring Kecleon ownership, defeat Winona, and reach cap 60. Personal Fly becomes usable. The next leg runs east to Lilycove, where transport is being arranged.
 
 Retained exact contract:
 Before the Gym, bind Steven’s existing Route120 Devon Scope encounter and its obstacle-clearance result. The survey does not substitute for the Scope. Catching Kecleon is optional. The Route119 rival’s Fly license may already be owned; personal Fly/Flight Beacon use starts only after Winona’s Feather Badge.
