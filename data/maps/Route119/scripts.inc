@@ -16,7 +16,6 @@ Route119_EventScript_TryRemoveKecleon::
 Route119_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call Common_EventScript_SetupRivalOnBikeGfxId
-	call_if_eq VAR_ROUTE119_STATE, 2, Route119_EventScript_ShowWaitingRival
 	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 1, Route119_EventScript_MoveInstituteWorkersDownstairs
 	special SetRoute119Weather
 	end
@@ -94,7 +93,7 @@ Route119_EventScript_BattleMayMudkip::
 
 Route119_EventScript_DefeatedMay::
 	msgbox Route119_Text_MayPresentForYou, MSGBOX_DEFAULT
-	call Route119_EventScript_GiveFlyHM
+	setflag FLAG_RECEIVED_HM_FLY
 	msgbox Route119_Text_MayExplainFly, MSGBOX_DEFAULT
 	goto Route119_EventScript_RivalExitScottArrive
 	end
@@ -125,62 +124,10 @@ Route119_EventScript_BattleBrendanMudkip::
 
 Route119_EventScript_DefeatedBrendan::
 	msgbox Route119_Text_BrendanIllGiveYouThis, MSGBOX_DEFAULT
-	call Route119_EventScript_GiveFlyHM
+	setflag FLAG_RECEIVED_HM_FLY
 	msgbox Route119_Text_BrendanExplainFly, MSGBOX_DEFAULT
 	goto Route119_EventScript_RivalExitScottArrive
 	end
-
-Route119_EventScript_GiveFlyHM::
-	giveitem ITEM_HM_FLY
-	goto_if_eq VAR_RESULT, FALSE, Route119_EventScript_ArchiveFlyHM
-	goto Route119_EventScript_ReceivedFlyHM
-	end
-
-Route119_EventScript_ArchiveFlyHM::
-	addpcitem ITEM_HM_FLY
-	goto_if_eq VAR_RESULT, FALSE, Route119_EventScript_FlyHMNoRoom
-	msgbox Route119_Text_FlyHMSentToPC, MSGBOX_DEFAULT
-
-Route119_EventScript_ReceivedFlyHM::
-	setflag FLAG_RECEIVED_HM_FLY
-	return
-
-Route119_EventScript_FlyHMNoRoom::
-	msgbox Route119_Text_FlyHMNoRoom, MSGBOX_DEFAULT
-	return
-
-Route119_EventScript_ShowWaitingRival::
-	setobjectxyperm LOCALID_ROUTE119_RIVAL, 25, 32
-	setobjectmovementtype LOCALID_ROUTE119_RIVAL, MOVEMENT_TYPE_FACE_UP
-	clearflag FLAG_HIDE_ROUTE_119_RIVAL
-	addobject LOCALID_ROUTE119_RIVAL
-	return
-
-Route119_EventScript_RetryFlyGift::
-	lock
-	faceplayer
-	call Route119_EventScript_GiveFlyHM
-	goto_if_unset FLAG_RECEIVED_HM_FLY, Route119_EventScript_RetryFlyRelease
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, Route119_EventScript_ExplainFlyMay
-	call_if_eq VAR_RESULT, FEMALE, Route119_EventScript_ExplainFlyBrendan
-	closemessage
-	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_ROUTE119_RIVAL
-	setflag FLAG_HIDE_ROUTE_119_RIVAL
-	setvar VAR_ROUTE119_STATE, 1
-	fadescreen FADE_FROM_BLACK
-Route119_EventScript_RetryFlyRelease::
-	release
-	end
-
-Route119_EventScript_ExplainFlyMay::
-	msgbox Route119_Text_MayExplainFly, MSGBOX_DEFAULT
-	return
-
-Route119_EventScript_ExplainFlyBrendan::
-	msgbox Route119_Text_BrendanExplainFly, MSGBOX_DEFAULT
-	return
 
 Route119_EventScript_RivalExitScottArrive::
 	closemessage
@@ -193,9 +140,6 @@ Route119_EventScript_RivalExitScottArrive::
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_RivalExit2
 	removeobject LOCALID_ROUTE119_RIVAL_ON_BIKE
 	setvar VAR_ROUTE119_STATE, 1
-	goto_if_set FLAG_RECEIVED_HM_FLY, Route119_EventScript_ScottArrive
-	setvar VAR_ROUTE119_STATE, 2
-Route119_EventScript_ScottArrive::
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60
@@ -210,7 +154,6 @@ Route119_EventScript_ScottArrive::
 	call_if_eq VAR_TEMP_1, 1, Route119_EventScript_ScottExit1
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_ScottExit2
 	removeobject LOCALID_ROUTE119_SCOTT
-	call_if_eq VAR_ROUTE119_STATE, 2, Route119_EventScript_ShowWaitingRival
 	releaseall
 	end
 
@@ -534,7 +477,7 @@ Route119_Text_MayDefeat:
 Route119_Text_MayPresentForYou:
 	.string "MAY: Your partners came through\n"
 	.string "that battle together.\p"
-	.string "Here. I have a present for you.$"
+	.string "I'll register your FLY license.$"
 Route119_Text_MayExplainFly:
 	.string "MAY: Your FLIGHT BEACON works\n"
 	.string "once you earn the FEATHER BADGE\l"
@@ -544,14 +487,6 @@ Route119_Text_MayExplainFly:
 	.string "to towns you've visited.\p"
 	.string "Stop by home sometime. Your mom\n"
 	.string "would love to see you!$"
-
-Route119_Text_FlyHMSentToPC:
-	.string "Your TM pocket is full, so FLY was sent\n"
-	.string "to your PC. Retrieve it when ready.$"
-
-Route119_Text_FlyHMNoRoom:
-	.string "Your TM pocket and PC are both full.\n"
-	.string "Make room, then speak to me again.$"
 
 Route119_Text_BrendanIntro:
 	.string "BRENDAN: {PLAYER}! I wondered\n"
@@ -565,7 +500,8 @@ Route119_Text_BrendanDefeat:
 
 Route119_Text_BrendanIllGiveYouThis:
 	.string "BRENDAN: I knew you'd give us a\n"
-	.string "good battle. Here, take this!$"
+	.string "good battle. Your FLY license\l"
+	.string "is now registered!$"
 
 Route119_Text_BrendanExplainFly:
 	.string "BRENDAN: Your FLIGHT BEACON works\n"

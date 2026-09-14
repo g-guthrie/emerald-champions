@@ -18,14 +18,10 @@ PetalburgCity_WallysHouse_OnFrame:
 
 PetalburgCity_WallysHouse_EventScript_GiveHMSurf::
 	lockall
-	@ End the automatic visit even if delivery fails; Dad can retry it on talk.
 	setvar VAR_PETALBURG_CITY_STATE, 5
 	msgbox PetalburgCity_WallysHouse_Text_PleaseExcuseUs, MSGBOX_DEFAULT
-	giveitem ITEM_HM_SURF
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_SURF
 	call PetalburgCity_WallysHouse_EventScript_ExplainSurfRoute
-	setvar VAR_PETALBURG_CITY_STATE, 5
 	releaseall
 	end
 
@@ -113,8 +109,8 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
 	.string "It made me, his father, happy too.\p"
 	.string "Happy that he's gained such a great\n"
 	.string "friend as you.\p"
-	.string "This isn't a bribe or anything, but\n"
-	.string "I'd really like you to have this.$"
+	.string "Let me register SURF for your team.\n"
+	.string "You've earned that freedom!$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
 	.string "A partner that can learn SURF can\n"

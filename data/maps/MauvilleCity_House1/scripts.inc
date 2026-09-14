@@ -6,8 +6,6 @@ MauvilleCity_House1_EventScript_RockSmashDude::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM_ROCK_SMASH, MauvilleCity_House1_EventScript_ReceivedRockSmash
 	msgbox MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_HM_ROCK_SMASH
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_ROCK_SMASH
 	setflag FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
 	msgbox MauvilleCity_House1_Text_ExplainRockSmash, MSGBOX_DEFAULT
@@ -29,10 +27,10 @@ MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
 	.string "Anyways, your POKéMON look pretty\n"
 	.string "strong.\p"
 	.string "I like that!\n"
-	.string "Here, take this HIDDEN MACHINE!$"
+	.string "I'll register ROCK SMASH for you!$"
 
 MauvilleCity_House1_Text_ExplainRockSmash:
-	.string "That HM registers ROCK SMASH for\n"
+	.string "Your ROCK SMASH license is ready for\n"
 	.string "your team!\p"
 	.string "With the DYNAMO BADGE and a\n"
 	.string "compatible partner, you can smash\l"

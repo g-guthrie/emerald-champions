@@ -172,6 +172,19 @@ def verify_specialvar_return_contracts(paths: list[Path]) -> int:
     return checked
 
 
+def verify_no_machine_rewards(paths: list[Path], map_names: list[str]) -> None:
+    """Field licenses replace HM items; free move services replace TM rewards."""
+    sources = [path for path in paths if path.name != "debug.inc"]
+    sources.extend(MAPS_ROOT / name / "map.json" for name in map_names)
+    sources.append(ROOT / "src/data/lilycove_lady.h")
+    for path in sources:
+        for line_number, line in enumerate(path.read_text().splitlines(), 1):
+            require(
+                re.search(r"\bITEM_(?:TM(?:[0-9]|_)|HM(?:[0-9]|_))", line) is None,
+                f"{path.relative_to(ROOT)}:{line_number}: physical TM/HM in campaign acquisition source",
+            )
+
+
 def main() -> None:
     map_names = hoenn_map_names()
     all_sources = all_assembly_sources()
@@ -180,6 +193,7 @@ def main() -> None:
     campaign_sources = assembled_sources(map_names)
     script_refs = verify_script_references(campaign_sources, labels)
     specialvar_refs = verify_specialvar_return_contracts(campaign_sources)
+    verify_no_machine_rewards(campaign_sources, map_names)
     script_lines = sum(
         len(path.read_text(errors="ignore").splitlines())
         for path in assembled_sources(map_names)
@@ -188,6 +202,7 @@ def main() -> None:
     print(f"PASS: {event_count} physical NPC/trigger/sign events and {warp_count} warps resolve")
     print(f"PASS: {script_refs} control-flow/dialogue/movement references resolve across {script_lines} script lines")
     print(f"PASS: {specialvar_refs} value-returning special calls never read a void C function")
+    print("PASS: campaign item sources use field licenses instead of physical TM/HM rewards")
     print("Scope: static references and source patterns only; state-dependent campaign reachability is not verified")
 
 

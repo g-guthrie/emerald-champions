@@ -6,8 +6,6 @@ RustboroCity_CuttersHouse_EventScript_Cutter::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM_CUT, RustboroCity_CuttersHouse_EventScript_ExplainCut
 	msgbox RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse, MSGBOX_DEFAULT
-	giveitem ITEM_HM_CUT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_CUT
 	msgbox RustboroCity_CuttersHouse_Text_ExplainCut, MSGBOX_DEFAULT
 	release
@@ -29,13 +27,11 @@ RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:
 	.string "You're obviously a skilled TRAINER!\p"
 	.string "No, wait, don't say a word.\n"
 	.string "I can tell just by looking at you.\p"
-	.string "I'm sure that you can put this\n"
-	.string "HIDDEN MACHINE to good use.\p"
-	.string "No need to be modest or shy.\n"
-	.string "Go on, take it!$"
+	.string "I'll register CUT as a field\n"
+	.string "technique for your team.$"
 
 RustboroCity_CuttersHouse_Text_ExplainCut:
-	.string "That HM registers CUT as a field\n"
+	.string "Your CUT license registers a field\n"
 	.string "technique for your team.\p"
 	.string "ROXANNE is in RUSTBORO GYM.\n"
 	.string "Her STONE BADGE permits field use.\p"

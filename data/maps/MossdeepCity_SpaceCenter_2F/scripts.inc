@@ -359,7 +359,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	removeobject LOCALID_SPACE_CENTER_2F_STEVEN
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_MAGMA_NOTE
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
-	setvar VAR_STEVENS_HOUSE_STATE, 1
+	setvar VAR_STEVENS_HOUSE_STATE, 2
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	removeobject LOCALID_SPACE_CENTER_2F_SCIENTIST
 	setobjectxyperm LOCALID_SPACE_CENTER_2F_SCIENTIST, 5, 6
@@ -578,9 +579,8 @@ MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
 	.string "Your DIVE license and passage to\n"
 	.string "BIRTH ISLAND are earned. LILYCOVE\l"
 	.string "HARBOR can take you there.\p"
-	.string "My home west of the GYM has the\n"
-	.string "physical DIVE HM if you need it.\l"
-	.string "Speak to the scientist before sailing.$"
+	.string "Speak to the scientist here\n"
+	.string "before sailing.$"
 
 MossdeepCity_SpaceCenter_2F_EventScript_BirthIslandBriefing::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_BirthIslandBriefing, MSGBOX_DEFAULT

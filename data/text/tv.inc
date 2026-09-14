@@ -1698,7 +1698,7 @@ gTVTrainerFanClubText09::
 
 gTVTrainerFanClubText10::
 	.string "FANS: The TRAINER's bold ways of\n"
-	.string "using TMs!$"
+	.string "choosing moves!$"
 
 gTVTrainerFanClubText11::
 	.string "MC: As you've just seen, {STR_VAR_1}\n"

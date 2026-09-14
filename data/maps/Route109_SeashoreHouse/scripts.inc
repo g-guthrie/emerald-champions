@@ -176,7 +176,7 @@ Route109_SeashoreHouse_Text_SimonDefeated:
 	.string "…I lost, but I won't cry…$"
 
 Route109_SeashoreHouse_Text_SimonPostBattle:
-	.string "With SURF's HM and the right BADGE,\n"
+	.string "With a SURF license and BALANCE BADGE,\n"
 	.string "a partner that can use it could\l"
 	.string "carry me across the water.\p"
 	.string "It wouldn't need SURF in its\n"

@@ -56,8 +56,6 @@ RusturfTunnel_EventScript_ClearTunnelScene::
 	msgbox RusturfTunnel_Text_YouShatteredBoulderTakeHM, MSGBOX_DEFAULT
 	call_if_eq VAR_TEMP_1, 2, RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
 	call_if_eq VAR_TEMP_1, 3, RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
-	giveitem ITEM_HM_STRENGTH
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_STRENGTH
 	msgbox RusturfTunnel_Text_ExplainStrength, MSGBOX_DEFAULT
 	call VerdanturfTown_WandasHouse_EventScript_NorthernHandoff
@@ -514,10 +512,10 @@ RusturfTunnel_Text_YouShatteredBoulderTakeHM:
 	.string "Wow! You shattered that boulder\n"
 	.string "blocking the way.\p"
 	.string "To show you how much I appreciate it,\n"
-	.string "I'd like you to have this HM.$"
+	.string "I'll register STRENGTH for you.$"
 
 RusturfTunnel_Text_ExplainStrength:
-	.string "That HM registers STRENGTH.\p"
+	.string "Your STRENGTH license is ready.\p"
 	.string "With the HEAT BADGE, a party\n"
 	.string "member able to learn STRENGTH can\l"
 	.string "move large boulders.\p"

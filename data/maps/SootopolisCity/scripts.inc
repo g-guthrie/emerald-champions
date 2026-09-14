@@ -1285,8 +1285,6 @@ SootopolisCity_EventScript_Wallace::
 
 SootopolisCity_EventScript_GiveWaterfall::
 	msgbox SootopolisCity_Text_ThankYouForHelpAcceptThis, MSGBOX_DEFAULT
-	giveitem ITEM_HM_WATERFALL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_WATERFALL
 	msgbox SootopolisCity_Text_ExplainWaterfallGoToGym, MSGBOX_DEFAULT
 	closemessage
@@ -1682,12 +1680,11 @@ SootopolisCity_Text_ThankYouForHelpAcceptThis:
 	.string "SKY PILLAR when we needed you\l"
 	.string "most.\p"
 	.string "Thank you, {PLAYER}{KUN}.\n"
-	.string "SOOTOPOLIS is safe again. Please\l"
-	.string "accept this.$"
+	.string "SOOTOPOLIS is safe again. I'll\l"
+	.string "register WATERFALL for your team.$"
 
 SootopolisCity_Text_ExplainWaterfallGoToGym:
-	.string "That HIDDEN MACHINE contains\n"
-	.string "WATERFALL.\p"
+	.string "Your WATERFALL license is ready.\p"
 	.string "With the RAIN BADGE, a party member\n"
 	.string "that can learn WATERFALL can climb\l"
 	.string "waterfalls without being taught it.\p"

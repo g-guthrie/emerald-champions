@@ -162,8 +162,7 @@ Route119_WeatherInstitute_2F_EventScript_Release::
 
 Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull::
 	msgbox Route119_WeatherInstitute_2F_Text_RevealGlassBagFull, MSGBOX_DEFAULT
-	release
-	end
+	goto Route119_WeatherInstitute_2F_EventScript_OfferSurvey
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather::
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
@@ -432,7 +431,8 @@ Route119_WeatherInstitute_2F_Text_RevealGlassPurpose:
 Route119_WeatherInstitute_2F_Text_RevealGlassBagFull:
 	.string "The REVEAL GLASS is ready for you, but\n"
 	.string "your KEY ITEMS pocket is full.\p"
-	.string "Make room, then speak with me again.$"
+	.string "I will keep it here until you have room.\n"
+	.string "Our survey flight is still available.$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous:
 	.string "Our instruments track unusual\n"

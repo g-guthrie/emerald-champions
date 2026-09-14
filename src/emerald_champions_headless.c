@@ -3106,8 +3106,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     else if (gEcHeadlessFixtureParam == 171)
                     {
                         FlagClear(FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN);
-                        FlagClear(FLAG_RECEIVED_HM_DIVE);
-                        VarSet(VAR_STEVENS_HOUSE_STATE, 1);
+                        FlagSet(FLAG_RECEIVED_HM_DIVE);
+                        FlagSet(FLAG_EC_REPORT_C42_COMPLETE);
+                        VarSet(VAR_STEVENS_HOUSE_STATE, 2);
                         LoadHeadlessMap(MAP_MOSSDEEP_CITY_STEVENS_HOUSE, 3, 7);
                     }
                     else
@@ -3593,10 +3594,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     FlagSet(FLAG_HIDE_ROUTE_119_SCOTT);
                     if (gEcHeadlessFixtureParam >= 89)
                     {
-                        // Synthetic full stores: test owed-HM recovery, not normal item availability.
-                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_HM_FLY)];
-                        for (slot = 0; slot < pocket->capacity; slot++)
-                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_HM_SURF, 1);
+                        // Full storage must not affect direct field-license registration.
+                        FillHeadlessKeyPocket();
                         for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
                             gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
                     }
@@ -3755,7 +3754,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             {
                 FlagSet(FLAG_BADGE03_GET);
                 FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
-                AddBagItem(ITEM_HM_ROCK_SMASH, 1);
                 FlagClear(FLAG_RUSTURF_TUNNEL_OPENED);
                 FlagClear(FLAG_RECEIVED_HM_STRENGTH);
                 FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1);

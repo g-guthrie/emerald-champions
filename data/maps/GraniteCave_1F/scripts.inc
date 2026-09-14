@@ -6,8 +6,6 @@ GraniteCave_1F_EventScript_Hiker::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM_FLASH, GraniteCave_1F_EventScript_ReceivedFlash
 	msgbox GraniteCave_1F_Text_GetsDarkAheadHereYouGo, MSGBOX_DEFAULT
-	giveitem ITEM_HM_FLASH
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_FLASH
 	msgbox GraniteCave_1F_Text_ExplainFlash, MSGBOX_DEFAULT
 	release
@@ -28,10 +26,10 @@ GraniteCave_1F_Text_GetsDarkAheadHereYouGo:
 	.string "to be all right, but…\p"
 	.string "Well, for us HIKERS, helping out those\n"
 	.string "that we meet is our motto.\p"
-	.string "Here you go, I'll pass this on to you.$"
+	.string "I'll register FLASH for your team.$"
 
 GraniteCave_1F_Text_ExplainFlash:
-	.string "That HM registers FLASH as a field\n"
+	.string "Your FLASH license registers a field\n"
 	.string "technique for your team.\p"
 	.string "With your STONE BADGE and this\n"
 	.string "license, caves light up as you\l"

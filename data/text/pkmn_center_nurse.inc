@@ -49,11 +49,11 @@ gText_EmeraldChampionsExplainFlightBeacon::
 	.string "Use it to call a flier once you\n"
 	.string "have the badge for Fly.\p"
 	.string "For skills such as Cut and Surf,\n"
-	.string "you need the HM, its badge, and\l"
+	.string "you need the license, badge, and\l"
 	.string "a compatible party member.\p"
 	.string "They don't take a battle move\n"
 	.string "slot. Flash is automatic: with\l"
-	.string "its HM and badge, caves light up!$"
+	.string "its license and badge, caves light up!$"
 
 gText_EmeraldChampionsGiveMissingRepelSpray::
 	.string "One more tool for you:\n"

@@ -35,11 +35,11 @@ DewfordTown_PokemonCenter_1F_Text_StoneCavern:
 	.string "you prepare for BRAWLY, too.$"
 
 DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM:
-	.string "With an HM and its BADGE, a\n"
+	.string "With a field license and BADGE, a\n"
 	.string "compatible partner can use skills\l"
 	.string "such as CUT without a move slot.\p"
 	.string "Even a fainted partner can help.\n"
-	.string "FLASH is different: get its HM\l"
+	.string "FLASH is different: get its license\l"
 	.string "and BADGE, and caves light up\l"
 	.string "as you enter. No partner needed!$"
 
