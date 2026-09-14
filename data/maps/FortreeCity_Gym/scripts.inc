@@ -23,9 +23,8 @@ FortreeCity_Gym_EventScript_Winona::
 	trainerbattle_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, EmeraldChampions_Text_NeedTwoPokemon, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
-	goto_if_unset FLAG_RECEIVED_WINONA_ALTARIANITE, FortreeCity_Gym_EventScript_GiveAltarianite2
 	goto_if_set FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_WinonaAfterPyre
-	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
+	call FortreeCity_Gym_EventScript_PyreHandoff
 	release
 	end
 
@@ -39,7 +38,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	setflag FLAG_HIDE_ROUTE_120_STEVEN
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
-	call FortreeCity_Gym_EventScript_GiveAltarianite
+	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -52,23 +51,6 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	setflag FLAG_SCOTT_CALL_FORTREE_GYM
 	release
 	end
-
-FortreeCity_Gym_EventScript_GiveAltarianite2::
-	giveuniqueitem ITEM_ALTARIANITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
-	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff
-	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
-	release
-	end
-
-FortreeCity_Gym_EventScript_GiveAltarianite::
-	giveuniqueitem ITEM_ALTARIANITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
-	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff
-	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
-	return
 
 FortreeCity_Gym_EventScript_WinonaRematch::
 	trainerbattle_rematch_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaPreRematch, FortreeCity_Gym_Text_WinonaRematchDefeat, FortreeCity_Gym_Text_WinonaRematchNeedTwoMons
@@ -250,23 +232,15 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge:
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 	.string "The FEATHER BADGE lets your LEVELER\n"
 	.string "train a party up to Lv. 60.\p"
-	.string "It also enables FLY outside of battle.\n"
-	.string "Your FLIGHT BEACON works from now on.\l"
-	.string "Use it from the BAG to revisit towns.\p"
-	.string "And this…\n"
-	.string "This is a gift from me.$"
-FortreeCity_Gym_Text_ExplainAltarianite:
-	.string "Altarianite lets Altaria Mega Evolve.\n"
-	.string "Let it hold the stone in battle.$"
-
+	.string "It also enables FLY outside battle.\n"
+	.string "Your FLIGHT BEACON works now, too!$"
 FortreeCity_Gym_Text_PyreHandoff:
-	.string "AQUA has been seen near MT. PYRE.\n"
-	.string "Follow ROUTES 120 and 121 east,\l"
-	.string "then SURF south on ROUTE 122 to\l"
-	.string "find it.\p"
-	.string "Discover what they are disturbing\n"
-	.string "there. The skies over HOENN are\l"
-	.string "unsettled.$"
+	.string "Follow ROUTES 120 and 121 east\n"
+	.string "to LILYCOVE. Meet your rival\l"
+	.string "outside the DEPARTMENT STORE.\p"
+	.string "Then visit LILYCOVE HARBOR.\n"
+	.string "The captain can take you to the\l"
+	.string "islands connected to these events.$"
 
 FortreeCity_Gym_Text_RegisteredWinona:
 	.string "Registered GYM LEADER WINONA\n"
@@ -336,5 +310,10 @@ FortreeCity_Gym_Text_WinonaAfterPyre:
 	.string "skies.$"
 
 FortreeCity_Gym_EventScript_PyreHandoff::
+	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, FortreeCity_Gym_EventScript_PyreAfterVoyage
 	msgbox FortreeCity_Gym_Text_PyreHandoff, MSGBOX_DEFAULT
+	return
+
+FortreeCity_Gym_EventScript_PyreAfterVoyage::
+	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	return

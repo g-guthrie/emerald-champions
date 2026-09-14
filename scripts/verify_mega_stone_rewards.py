@@ -32,7 +32,7 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
                     raise ValueError(f"{name}/{item}: stone needs its sparkle and persistent pickup flag")
                 rewards[item].append(f"{name}: sparkle at ({obj['x']}, {obj['y']})")
     nodes, aliases = {}, {}
-    paths = list((root / "data/scripts").glob("*.inc"))
+    paths = [root / "data/event_scripts.s", *sorted((root / "data/scripts").glob("*.inc"))]
     paths += [root / "data/maps" / name / "scripts.inc" for name in sorted(maps)]
     for path in paths:
         if not path.exists():
@@ -46,7 +46,8 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
             next_label = labels[i + 1][1] if i + 1 < len(labels) else None
             lines = [line.strip() for line in body.splitlines() if line.strip()]
             # Script branches may intentionally fall through into the next label.
-            falls_through = bool(lines) and not re.match(r"(?:end|return|goto\s|\.byte\s+0|\.string)\b", lines[-1])
+            terminals = {"end", "return", "goto", "gotostd", "gotoram", "endram", "returnram", "step_end", "pokemartlistend"}
+            falls_through = not lines or (not lines[-1].startswith(".") and lines[-1].split()[0] not in terminals)
             nodes[match[1]] = (body, path.parent.name, next_label if falls_through else None)
     visited, pending = set(), list(roots)
     trade_reachable = False
@@ -61,9 +62,15 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
         if name not in nodes:
             continue
         body, location, fallthrough = nodes[name]
-        for item in set(re.findall(r"\bgive(?:unique)?item\s+(ITEM_\w+)", body)) & required:
+        for shop in re.findall(r"\bpokemart\s+(\w+)", body):
+            stock = nodes.get(shop, ("", "", None))[0]
+            sold_stones = set(re.findall(r"\bITEM_\w+", stock)) & required
+            if sold_stones:
+                raise ValueError(f"{location}/{shop}: Mega Stones cannot be shop stock: {sorted(sold_stones)}")
+        # Bag/PC delivery alternatives within one transaction are one source.
+        for item in set(re.findall(r"\b(?:give(?:unique)?item|additem|addpcitem)\s+(ITEM_\w+)", body)) & required:
             rewards[item].append(f"{location}: NPC/event gift ({name})")
-        for special in re.findall(r"\bspecial\s+(\w+)", body):
+        for special in re.findall(r"\b(?:special|callnative)\s+(\w+)", body):
             special_sources[special].append(location)
         trade_reachable |= bool(re.search(r"\bspecial\s+TradeEmeraldChampionsGardenBerries\b", body))
         pending.extend(token for token in re.findall(r"\b\w+\b", body) if token in nodes or token in aliases)
@@ -99,22 +106,32 @@ def main() -> None:
     missing = set(stones()) - rewards.keys()
     if missing:
         raise SystemExit(f"Mega Stones missing world rewards: {sorted(missing)}")
+    duplicates = {item: sources for item, sources in rewards.items() if len(sources) != 1}
+    if duplicates:
+        raise SystemExit(f"Mega Stones must have exactly one world reward source: {duplicates}")
     source = (ROOT / "src/field_specials.c").read_text()
     vendor = (ROOT / "data/scripts/emerald_champions.inc").read_text()
     all_scripts = "\n".join(path.read_text() for path in (ROOT / "data").rglob("*.inc"))
     if "void OpenEmeraldChampionsMegaStoneArchive(" in source or re.search(r"\bspecial\s+OpenEmeraldChampionsMegaStoneArchive\b", all_scripts):
         raise SystemExit("the free Mega Stone archive bypasses world rewards")
+    if "GiveEmeraldChampionsStarterMegaStoneAtIndex" in source or "GiveEmeraldChampionsStarterMegaStoneAtIndex" in all_scripts:
+        raise SystemExit("starter choices must not create extra Mega Stone grants")
     if "special OpenEmeraldChampionsEvolutionItemArchive" not in vendor:
         raise SystemExit("the evolution-item archive must remain available")
     code = (ROOT / "src/mega_stone_rewards.c").read_text()
-    if "GetHarvestedBerryCount" not in code or "RemoveBagItem" in code:
+    trade = re.search(r"void TradeEmeraldChampionsGardenBerries\(void\)\s*\{(.*?)^\}", code, re.S | re.M)
+    if not trade or "GetHarvestedBerryCount" not in trade[1] or "RemoveBagItem" in trade[1]:
         raise SystemExit("harvest trades must spend per-type harvest, never ordinary bag berries")
     from item_catalog import free_vendor_items
+    catalogue_stones = set(stones()) & free_vendor_items(ROOT)
+    catalogue_stones |= set(stones()) & set(re.findall(r"\bITEM_\w+", (ROOT / "src/data/emerald_champions_form_items.h").read_text()))
+    if catalogue_stones:
+        raise SystemExit(f"Mega Stones cannot be free catalogue stock: {sorted(catalogue_stones)}")
     berries = set(re.findall(r"F\((\w+)\)", (ROOT / "include/constants/berries.h").read_text()))
     missing = {"ITEM_" + name + "_BERRY" for name in berries} - free_vendor_items(ROOT)
     if missing:
         raise SystemExit(f"berries missing from free catalogue: {sorted(missing)}")
-    print(f"PASS: all {len(rewards)} Mega Stones have world rewards; three are exclusive berry trades")
+    print(f"PASS: all {len(rewards)} Mega Stones have exactly one world reward source; three are exclusive berry trades")
     print("PASS: no free Mega archive or preset berry-currency bypass; evolution archive preserved")
 
 

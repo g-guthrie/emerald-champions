@@ -87,10 +87,11 @@ def main():
                         writes=[(0, 4, addresses['gEcHeadlessFixtureTrigger'], command)])
             require(campaign.is_stable_overworld(v), 'reload failed to settle')
 
-        def stones(bits, x, y, visible):
-            require(query(2, 'VAR_STEVEN_STARTER_STONE_DELIVERY') == bits, 'wrong delivery ledger')
-            require(query(5, 'ITEM_CHARIZARDITE_X') == x, 'wrong PC Charizardite X quantity')
-            require(query(5, 'ITEM_CHARIZARDITE_Y') == y, 'wrong PC Charizardite Y quantity')
+        def stone(count, visible):
+            require(query(1, 'FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE') == bool(count), 'wrong stone receipt')
+            require(query(5, 'ITEM_AERODACTYLITE') == count, 'wrong PC Aerodactylite quantity')
+            require(query(4, 'ITEM_CHARIZARDITE_X') + query(5, 'ITEM_CHARIZARDITE_X') == 0, 'extra starter stone X')
+            require(query(4, 'ITEM_CHARIZARDITE_Y') + query(5, 'ITEM_CHARIZARDITE_Y') == 0, 'extra starter stone Y')
             require(query(4, 'ITEM_MEGA_RING') == 1, 'Ring lost or duplicated')
             actor(1, visible)
 
@@ -109,18 +110,12 @@ def main():
             actor(1, True)
             boot(2)
             interact('full-storage')
-            stones(0, 0, 0, True)
+            stone(0, True)
             reload(2)
             interact('one-pc-slot')
-            stones(1, 1, 0, True)
+            stone(1, False)
             reload(1)
-            interact('partial-reentry')
-            stones(1, 1, 0, True)
-            reload(3)
-            interact('second-pc-slot')
-            stones(3, 1, 1, False)
-            reload(1)
-            stones(3, 1, 1, False)
+            stone(1, False)
             boot(3)
             actor(3, False)
             actor(4, False)
@@ -134,7 +129,7 @@ def main():
             raise
         finally:
             (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
-    print('PASS: missing/PC Letter, durable two-stone partial/reentry delivery, Museum missing-Parts preflight')
+    print('PASS: missing/PC Letter, durable single-stone retry/reentry delivery without starter extras, Museum missing-Parts preflight')
 
 
 if __name__ == '__main__':

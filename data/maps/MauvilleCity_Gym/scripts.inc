@@ -128,10 +128,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	end
 
 MauvilleCity_Gym_EventScript_GiveManectite2::
-	giveuniqueitem ITEM_MANECTITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox MauvilleCity_Gym_Text_ExplainManectite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_WATTSON_MANECTITE
+	call MauvilleCity_Gym_EventScript_GiveManectite
 	release
 	end
 

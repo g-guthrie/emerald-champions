@@ -521,7 +521,6 @@ static void PrepareBookResearchScene(void)
         VarSet(VAR_STARTER_GEN, 1);
         VarSet(VAR_STARTER_MON, 0);
         VarSet(VAR_EC_SECOND_STARTER, 0);
-        VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, completed ? 1 : 0);
         FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
         FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
         AddPCItem(ITEM_MEGA_RING, 1);
@@ -2530,7 +2529,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
                     FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
                     FlagClear(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
-                    VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, 0);
                     AddBagItem(ITEM_OLD_AMBER, 1);
                     if (scene == 280) AddBagItem(ITEM_AERODACTYLITE, 1);
                     if (scene == 279 || scene == 283)
@@ -4023,13 +4021,13 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 AddPCItem(ITEM_LETTER, 1);
             else if (gEcHeadlessFixtureParam == 2)
             {
-                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_CHARIZARDITE_X)];
+                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_AERODACTYLITE)];
                 FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
                 FlagSet(FLAG_BADGE02_GET);
                 VarSet(VAR_STARTER_GEN, 1);
                 VarSet(VAR_STARTER_MON, 1);
-                // Isolate the existing starter-stone retry fixture after the Aero entitlement.
-                FlagSet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
+                // Ring already delivered; the one Aerodactylite reward still needs space.
+                FlagClear(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
                 AddBagItem(ITEM_MEGA_RING, 1);
                 for (slot = 0; slot < pocket->capacity; slot++)
                     BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_VENUSAURITE, 1);

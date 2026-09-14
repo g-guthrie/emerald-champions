@@ -4,47 +4,14 @@ LilycoveCity_MapScripts::
 	.byte 0
 
 LilycoveCity_EventScript_AltarianiteKeeper::
-	lock
-	faceplayer
-	goto_if_set FLAG_RECEIVED_WINONA_ALTARIANITE, LilycoveCity_EventScript_AltarianiteKeeperExplain
-	checkspecies SPECIES_ALTARIA
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_EventScript_AltarianiteKeeperNeedsAltaria
-	msgbox LilycoveCity_Text_AltarianiteKeeperOffer, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_AltarianiteKeeperDecline
-	giveuniqueitem ITEM_ALTARIANITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
-LilycoveCity_EventScript_AltarianiteKeeperExplain::
-	msgbox LilycoveCity_Text_AltarianiteKeeperExplain, MSGBOX_DEFAULT
-	release
+	msgbox LilycoveCity_Text_AltarianiteKeeperExplain, MSGBOX_NPC
 	end
-
-LilycoveCity_EventScript_AltarianiteKeeperNeedsAltaria::
-	msgbox LilycoveCity_Text_AltarianiteKeeperNeedsAltaria, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_EventScript_AltarianiteKeeperDecline::
-	msgbox LilycoveCity_Text_AltarianiteKeeperDecline, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_Text_AltarianiteKeeperOffer:
-	.string "Your ALTARIA carries itself like a\n"
-	.string "cloud dragon. Take this ALTARIANITE?$"
 
 LilycoveCity_Text_AltarianiteKeeperExplain:
 	.string "ALTARIANITE lets ALTARIA Mega Evolve.\p"
-	.string "WINONA also entrusts one to every\n"
-	.string "TRAINER who earns her BADGE.$"
-
-LilycoveCity_Text_AltarianiteKeeperNeedsAltaria:
-	.string "Return with ALTARIA. I want to see\n"
-	.string "whether it moves like a cloud.$"
-
-LilycoveCity_Text_AltarianiteKeeperDecline:
-	.string "Very well. The stone will wait until\n"
-	.string "you and ALTARIA are ready.$"
+	.string "I've heard of a stone on ROUTE 111,\n"
+	.string "south of the desert. Keep an eye\l"
+	.string "out when you're exploring there!$"
 
 LilycoveCity_OnTransition:
 	setflag FLAG_VISITED_LILYCOVE_CITY

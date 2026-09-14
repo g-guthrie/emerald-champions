@@ -55,7 +55,6 @@ u8 GiveEmeraldChampionsGameCornerPokemonForTesting(enum Species species, u16 fla
 u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level);
 #endif
 
-void GiveEmeraldChampionsStarterMegaStoneAtIndex(void);
 
 void BufferEmeraldChampionsFormGift(void);
 void BuildEmeraldChampionsResearchPartnerChoices(void);

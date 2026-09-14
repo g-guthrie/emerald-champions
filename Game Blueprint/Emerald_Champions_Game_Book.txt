@@ -165,7 +165,7 @@ C01 — A journey with two partners
 Choose both starters and rescue Birch in the existing opening. Birch sees that you can coordinate a pair and encourages the journey. Preserve the rival's remaining-third-starter rule. Initial cap: 14.
 
 Retained exact contract:
-Starter identity contract: record generation, first selected starter and second selected starter independently. The rival uses the remaining third regional starter, as 7.1 GetEmeraldChampionsRivalStarterIndex does; character gender selects the presentation variant. Old TRAINER ID suffixes are not a reason to give the rival one of the player’s selected partners. Both starter ownership and Mega receipts stay separate.
+Starter identity contract: record generation, first selected starter and second selected starter independently. The rival uses the remaining third regional starter, as 7.1 GetEmeraldChampionsRivalStarterIndex does; character gender selects the presentation variant. Old TRAINER ID suffixes are not a reason to give the rival one of the player’s selected partners. Both starter ownership records stay separate.
 
 PLAYER HANDOFF — Birch at the rescue/send-off interaction:
 “Go north from Littleroot along Route 101 to Oldale. Heal and prepare at its Pokémon Center, then take the north exit to Route 103 and meet your rival.”
@@ -252,45 +252,16 @@ C12 — Steven in Granite Cave
 Deliver the letter. Steven recognizes a connection between Devon's stolen survey equipment and old accounts preserved on Dewford. He asks you to look at the manor while he follows the geological evidence. The player continues through the island's existing locations. The Granite Cave hiker grants the Flash field license on this first visit. Flash requires the Stone Badge and that license, so the lower floors light on entry before Brawly; no party move slot or Knuckle Badge is required for this first letter journey.
 
 PLAYER HANDOFF — Steven in Granite Cave:
-“Return to Dewford and challenge Brawly in the Gym. After Brawly, return to Steven in his room deep inside Granite Cave, northwest of Dewford. Speak to him to receive the Mega Ring and starter-stone entitlements. Steven then sends you west from Dewford into the meadow and manor.”
+“Return to Dewford and challenge Brawly in the Gym. After Brawly, return to Steven in his room deep inside Granite Cave, northwest of Dewford. Speak to him to receive the Mega Ring and Aerodactylite. Steven then sends you west from Dewford into the meadow and manor.”
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 C13 — Brawly and Mega access
-Defeat Brawly, then return to Steven in his Granite Cave room to complete the letter/badge/Ring handoff. Brawly explicitly repeats those directions after the battle. Brawly's coordination test and the Ring expand the player's practical options. Deliver the supported starter stone entitlements, preserving independent receipts and pending delivery. No unsupported starter receives an invented Mega. Preserve the original overlapping Lilith/Brenden approach as ordinary back-to-back trainer encounters. Brenden may challenge immediately after Lilith, creating first-pass endurance pressure, but each victory persists independently. Losing to Brenden leaves Lilith defeated; the player can heal, rearrange the team and return to Brenden alone. Do not impose a full reset merely because sight lines overlap. Separately announced, deliberately balanced endurance challenges may require a restart from their first fight.
+Defeat Brawly, then return to Steven in his Granite Cave room to complete the letter/badge/Ring handoff. Brawly explicitly repeats those directions after the battle. Brawly's coordination test and the Ring expand the player's practical options. Steven supplies Aerodactylite with the Ring; every other stone, including starter-family stones, comes from its single established world source. Preserve the original overlapping Lilith/Brenden approach as ordinary back-to-back trainer encounters. Brenden may challenge immediately after Lilith, creating first-pass endurance pressure, but each victory persists independently. Losing to Brenden leaves Lilith defeated; the player can heal, rearrange the team and return to Brenden alone. Do not impose a full reset merely because sight lines overlap. Separately announced, deliberately balanced endurance challenges may require a restart from their first fight.
 
 Retained exact contract:
 
-C13 STARTER-MEGA ENTITLEMENTS — EXACT DESIGN OWNER
-After the letter/Brawly/Ring conditions, process BOTH original starters independently using the recorded original selections, even if those Pokémon have since evolved, been boxed or left the party. The rival's leftover starter does not create a player entitlement.
-For each listed stone: if unowned, deliver it or retain a pending delivery; if already owned through an earlier finite world source, award the standard one-time 3,000 duplicate-Mega payment and close this starter entitlement. A later world source uses its reciprocal finite duplicate rule. Never pay/give twice for the same starter-stone entitlement. Charizard has TWO independent stone entitlements, not a menu that permanently discards one.
-NONE means no supported starter-specific stone in this pinned roster: no fabricated Mega and no invented duplicate-payment entitlement. Everyone still receives the Ring and can use other obtained Mega families. This mapping changes only if the supported roster is deliberately revised.
-- Bulbasaur: Venusaurite
-- Charmander: Charizardite X AND Charizardite Y
-- Squirtle: Blastoisinite
-- Chikorita: Meganiumite
-- Cyndaquil: NONE
-- Totodile: Feraligite
-- Treecko: Sceptilite
-- Torchic: Blazikenite
-- Mudkip: Swampertite
-- Turtwig: NONE
-- Chimchar: NONE
-- Piplup: NONE
-- Snivy: NONE
-- Tepig: Emboarite
-- Oshawott: NONE
-- Chespin: Chesnaughtite
-- Fennekin: Delphoxite
-- Froakie: Greninjite
-- Rowlet: NONE
-- Litten: NONE
-- Popplio: NONE
-- Grookey: NONE
-- Scorbunny: NONE
-- Sobble: NONE
-- Sprigatito: NONE
-- Fuecoco: NONE
-- Quaxly: NONE
+C13 MEGA STONE ACCESS
+Each of the99 item-based Mega Stones has exactly one authored acquisition source. Keep established world locations and remove overlapping trainer, story and starter gifts. Starter choices never create an additional stone entitlement. Charizardite X and Charizardite Y are different stones with their own individual locations. A full-storage retry belongs to the same original reward and keeps its original receipt.
 
 PLAYER HANDOFF — Steven in Granite Cave after the Ring handoff:
 “Go west from Dewford into Dewford Meadow and enter the manor. Read the historian's account, then speak to the meadow warden with any Pokémon that knows Sing. The Jigglypuff inside the manor already know it.”
@@ -657,7 +628,7 @@ AUTHORITATIVE ITEM POLICY
 MEGA REWARDS AND FAMILY ACCESS — APPROVED ECONOMY CLEANUP,2026-09-14
 Keep Mega Stone discovery broadly coupled to obtainable Pokemon and their legal evolution access. Check actual route, rod, Cut/Surf/bike/story gates, evolution supplies and fossil revival; an encounter-table row or trainer holding a species does not prove player access. A stone should normally be usable now or on a clearly explained near-term evolution path, while special locations still feel special. No blanket transfer to a shop or free catalogue.
 In a few selected later encounters, an opponent may give the Mega Stone its own team showcases after victory. Treat this as one authored finite reward with regional/character fit and an obtainable matching family, not an automatic reward from every Mega trainer. Tie the receipt to successful delivery independently of the battle clear; no mandatory repeat fight or invented new actor. Check other sources to avoid accidental redundant prizes. Future trainer reviews choose the actual recipients and update their exact scene/reward rows together.
-Aerodactyl is the first concrete pairing: Roxanne first showcases Mega Aerodactyl in battle and explains the transformation afterward. The player's Mega Ring is still unavailable here. Roxanne gives Old Amber, Devon2F restores it free, then Steven gives Aerodactylite with the Mega Ring after Letter/Brawly. Steven names the fossil lab for players still carrying Amber. The player need not own/evolve/capture Aerodactyl to receive the story Ring or continue. Retain the existing Aerodactylite receipt bit; deliver Bag then PC, keep Steven present if both full, and close the receipt only after delivery or the finite already-owned3,000 alternative. No return to Roxanne for a stone. Starter-specific gifts remain independently receipted.
+Aerodactyl is the first concrete pairing: Roxanne first showcases Mega Aerodactyl in battle and explains the transformation afterward. The player's Mega Ring is still unavailable here. Roxanne gives Old Amber, Devon2F restores it free, then Steven gives Aerodactylite with the Mega Ring after Letter/Brawly. Steven names the fossil lab for players still carrying Amber. The player need not own/evolve/capture Aerodactyl to receive the story Ring or continue. Retain the existing Aerodactylite receipt bit; deliver Bag then PC, keep Steven present if both full, and close the receipt only after delivery or the finite already-owned3,000 alternative. No return to Roxanne for a stone. Starter-family stones use their single world locations.
 
 WHY TWO SOURCES CAN STILL MAKE SENSE
 A merchant offers certainty and early choice; an exploration gift saves a purchase. A consumable can usefully repeat. A reusable tool or one-per-owner Mega must not become a useless repeat:
@@ -3959,7 +3930,7 @@ Each owner has at most one eligible Mega. Steven carries no Mega Stone and has n
 10. PLACE-BY-PLACE ECONOMY DISPOSITIONS
 =======================================
 
-MEGA REWARD TIMING (approved 2026-09-14): no Mega Stone rewards before Steven grants the Mega Ring/bracelet after Brawly. All71 existing ground-stone actors become discoverable only with Ring ownership; preserve coordinates and unclaimed flags. All16 standard optional Mega-gift wrappers fall through to their normal NPC interaction until the Ring is carried. Steven now gives Aerodactylite with the Ring; Roxanne retains only Old Amber. Brawly’s existing post-Ring Lucarionite claim remains. Badges, Amber and story directions are independent. Mr Stone's Pidgeotite already requires the Ring. Steven explains recognition of field stones and that some trainers share their showcased stone; his Aerodactylite gift names the Amber restoration lab instead of sending the player back to Roxanne. This replaces the previous permission to collect unusable Mega rewards early. Previously acquired stones in existing saves are not confiscated; trainer held stones and non-Mega relics are unchanged.
+MEGA REWARD TIMING (approved 2026-09-14): no Mega Stone rewards before Steven grants the Mega Ring/bracelet after Brawly. All71 existing ground-stone actors become discoverable only with Ring ownership; preserve coordinates and unclaimed flags. All16 standard optional Mega-gift wrappers fall through to their normal NPC interaction until the Ring is carried. Steven now gives Aerodactylite with the Ring; Roxanne retains only Old Amber. Lucarionite has its sole source on Route116; Brawly gives no additional copy. Badges, Amber and story directions are independent. Mr Stone's Pidgeotite already requires the Ring. Steven explains recognition of field stones and that some trainers share their showcased stone; his Aerodactylite gift names the Amber restoration lab instead of sending the player back to Roxanne. This replaces the previous permission to collect unusable Mega rewards early. Previously acquired stones in existing saves are not confiscated; trainer held stones and non-Mega relics are unchanged.
 
 These rows are the actionable replacement ledger for existing locations. They do not move coordinates or create new props.
 RULES:
@@ -3981,7 +3952,6 @@ M001 PetalburgCity object_events:6 (19,2,z3): MAX_REVIVE -> KEEP under section 3
 M001 PetalburgCity object_events:7 (3,28,z3): ETHER -> KEEP under section 3
 M001 PetalburgCity bg_events:8 (11,29,z3): ULTRA_BALL -> KEEP under section 3
 M002 SlateportCity object_events:36 (6,54,z3): QUICK_BALL -> KEEP under section 3
-M002 GretaReward: GENGARITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M003 MauvilleCity object_events:9 (28,19,z3): LEVEL_BALL -> KEEP under section 3
 M003 Wattson: BASEMENT_KEY -> KEEP under section 3
 M003 CompletedNewMauville: ELECTIRIZER -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy; gift delivery does NOT gate REPORT_C28_COMPLETE
@@ -3991,7 +3961,6 @@ M006 LilycoveCity object_events:11 (61,36,z5): MAX_REPEL -> KEEP under section 3
 M006 LilycoveCity bg_events:11 (36,31,z3): HEART_SCALE -> KEEP under section 3
 M006 LilycoveCity bg_events:12 (61,7,z0): PP_UP -> ETHER; field use only
 M006 LilycoveCity bg_events:13 (64,31,z0): POKE_BALL -> KEEP under section 3
-M006 AltarianiteKeeper: ALTARIANITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M007 MossdeepCity object_events:6 (63,35,z5): QUICK_BALL -> KEEP under section 3
 M007 KingsRockBoy: KINGS_ROCK -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M008 GiveWaterfall: HM_WATERFALL -> KEEP free field license; no purchase gate
@@ -4182,19 +4151,13 @@ M062 TryGiveNLunarizer: N_LUNARIZER -> KEEP under section 3
 M062 TryGiveReinsOfUnity: REINS_OF_UNITY -> KEEP under section 3
 M062 GivePokedex: GREAT_BALL x10 -> KEEP under section 3
 M068 MegaGift_BARBARACITE: BARBARACITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M071 GiveLucarionite: LUCARIONITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M071 GiveLucarionite2: LUCARIONITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M072 DeepSeaScaleMan: DEEP_SEA_SCALE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M073 Man: REAPER_CLOTH -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M073 MegaGift_KINGLERITE: KINGLERITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M073 MegaGift_GYARADOSITE: GYARADOSITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M074 OldMan: FIRE_STONE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
-M075 GiveCameruptite2: CAMERUPTITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M075 GiveCameruptite: CAMERUPTITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M077 MegaGift_BLAZIKENITE: BLAZIKENITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M077 MegaGift_MACHAMPITE: MACHAMPITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M079 LucyReward: ABSOLITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-Lucy's duplicate payment is available even with a full Bag; only an unowned Absolite needs space. An undelivered stone leaves her receipt pending, and either successful outcome completes it once.
 M087 PlayerHasMeteorite: DAWN_STONE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M087 MegaGift_CLEFABLITE: CLEFABLITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M088 AskExchange: RETIRE the Heart Scale exchange; free preparation coach. Heart Scale remains saleable treasure worth 1,000. No Ether exchange is created.
@@ -4206,7 +4169,6 @@ M101 GiveReturn: SUN_STONE -> KEEP paid evolution acquisition or finite gift; pr
 M101 GiveFrustration: MOON_STONE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M105 GiveHMSurf: HM_SURF -> KEEP free field license; no purchase gate
 M106 GiveEnigmaBerry: ENIGMA_BERRY_E_READER -> KEEP under section 3
-M106 GiveLopunnite: LOPUNNITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M114 PrismScaleGiver: PRISM_SCALE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M117 MegaGift_MALAMARITE: MALAMARITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M118 GiveRedScarf: RED_SCARF -> KEEP under section 3
@@ -4239,8 +4201,6 @@ M145 Cutter: HM_CUT -> KEEP free field license; no purchase gate
 M148 NinjaBoy: PREMIER_BALL -> KEEP under section 3
 M148 GiveFloatStone: METAL_COAT -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M151 MegaGift_MILOTICITE: MILOTICITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M152 GiveAltarianite2: ALTARIANITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M152 GiveAltarianite: ALTARIANITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M155 SpenserReward: PROTECTOR -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M156 DubiousDiscGiver: DUBIOUS_DISC -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M158 WingullReturned: SACHET -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
@@ -4253,16 +4213,12 @@ M171 GiveSSTicket: SS_TICKET -> C32 expedition permission; deliver/retry one ent
 M174 FatMan: MOON_STONE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M176 MegaGift_LAPRASITE: LAPRASITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M176 MegaGift_STARMINITE: STARMINITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M184 GiveMetagrossite2: METAGROSSITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M184 GiveMetagrossite: METAGROSSITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M185 CynthiaReward: SHINY_CHARM -> KEEP under section 3
 M190 SuperRodFisherman: SUPER_ROD -> KEEP under section 3
 M191 StevenGivesDive: HM_DIVE -> KEEP free field license; no purchase gate
 M191 DiveItemBall: HM_DIVE -> KEEP free field license; no purchase gate
 M193 SunStoneMan: SUN_STONE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M193 SunStoneManMagma: SUN_STONE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
-M197 GiveGyaradosite: GYARADOSITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
-M197 GiveGyaradosite2: GYARADOSITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M202 RazorClawBlackBelt: RAZOR_CLAW -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M209 BigSeedot: ELIXIR -> KEEP under section 3
 M209 BigLotad: ELIXIR -> KEEP under section 3
@@ -4417,7 +4373,7 @@ M454 CheckGoldSymbols: STARF_BERRY -> KEEP under section 3
 M483 NavelRock_Top bg_events:1 (12,9,z3): SACRED_ASH -> KEEP under section 3
 M499 DefeatedTrainers: SODA_POP x6 -> KEEP under section 3
 M499 BuySodaPop: SODA_POP -> KEEP under section 3; SODA_POP -> KEEP under section 3
-M500 GivePuzzle1Reward: STARAPTITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
+M500 GivePuzzle1Reward: NUGGET -> finite first-puzzle reward; retry of the same prize
 M500 GivePuzzle2Reward: TIMER_BALL -> KEEP under section 3
 M500 GivePuzzle3Reward: WHIPPED_DREAM -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M500 GivePuzzle4Reward: KINGS_ROCK -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
@@ -4425,14 +4381,13 @@ M500 GivePuzzle5Reward: METAL_ALLOY -> KEEP paid evolution acquisition or finite
 M500 GivePuzzle6Reward: PROTECTOR -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M500 GivePuzzle7Reward: PP_MAX -> MAX_ETHER; field use only
 M501 Route110_TrickHouseEnd bg_events:1 (4,5,z3): NUGGET -> KEEP under section 3
-M501 CompletedPuzzle1: STARAPTITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
+M501 CompletedPuzzle1: NUGGET -> finite first-puzzle reward; entrance retry preserves the same prize
 M501 CompletedPuzzle2: TIMER_BALL -> KEEP under section 3
 M501 CompletedPuzzle3: WHIPPED_DREAM -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M501 CompletedPuzzle4: KINGS_ROCK -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M501 CompletedPuzzle5: METAL_ALLOY -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M501 CompletedPuzzle6: PROTECTOR -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M501 CompletedPuzzle7: PP_MAX -> MAX_ETHER; field use only
-M501 ClaimFinalStone: ALAKAZITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M503 Route110_TrickHousePuzzle1 object_events:13 (9,4,z3): ORANGE_MAIL -> KEEP under section 3
 M504 Route110_TrickHousePuzzle2 object_events:4 (8,17,z3): WAVE_MAIL -> KEEP under section 3
 M504 Route110_TrickHousePuzzle2 object_events:5 (3,13,z3): HARBOR_MAIL -> KEEP under section 3
@@ -4573,7 +4528,7 @@ Slateport market: cash field herb/PP supplies, optional decorations; no link-onl
 Game Corner: 27 starter-species entitlements plus Poipole/Genesect, with stated Coin prices and direct Coin purchase.
 Circuit/Frontier desks: the shared Circuit, its BP stock and finite legendary milestones; do not resurrect every dormant native facility as an extra compulsory campaign.
 Fossils: existing Devon revival, free. Keep every fossil the world actually supplies supported by the revival service.
-Original starters: two permanent partners; supported original-starter Mega entitlements supplied by Steven after letter + Brawly/Ring.
+Original starters: two permanent partners; their supported Mega Stones use the individual world sources in section11.
 Gift eggs: Togepi/Day Care and Wynaut/Lavaridge; no mandatory egg-hatching gate. Genuine Day Care breeding + hatch keeps its separate Kangaskhanite entitlement; a gift egg does not satisfy it.
 Indeedee-F/Wanda's house and Cosplay Pikachu/Contest services remain optional. Later research partners use their own conditions; no retroactive claim that every special form is a pre-League gift.
 Beldum: DESIGN moves Steven's gift to the Space Center chapter, with a prepared, cap-safe partner. Castform remains the guaranteed Institute gift needed by the survey.
@@ -4592,9 +4547,11 @@ M518 Route124 diving treasure hunter: trade one Red Shard for one Fire Stone, Ye
 11. ALL 99 MEGA STONE TYPES — SEED LOCATIONS WITH DESIGN POLICY
 ===============================================================
 
-Shared disposition for every row: retain the existing source unless a practical family-access review justifies changing it; prefer existing pickups/NPCs and the finite duplicate policy. Family candidates below are source-relationship joins, NOT earliest-access proofs. No speculative overworld relocation is approved.
+Shared disposition for every row: exactly one authored acquisition source per stone. Keep the established world location and remove overlapping gifts. Full-storage retries share the original reward receipt. Family candidates below are source-relationship joins, NOT earliest-access proofs. No speculative overworld relocation is approved.
 
-Each existing item-based Mega Stone is accounted for. Rayquaza's stone-free Mega is separate. Source pickup coordinates are recorded in the world atlas. Native soot/Shoal rewards are explicit because the legacy gift scanner misses them. Duplicate retries are not extra rewards. Starter gifts use the original-starter entitlement rather than a new free stone catalogue.
+The Trick House first puzzle gives one Nugget; its final decoration remains the tent, with deferred collection if storage is full. Redundant Staraptite and Alakazite gifts are removed.
+
+Each existing item-based Mega Stone is accounted for. Rayquaza's stone-free Mega is separate. Source pickup coordinates are recorded in the world atlas. Native soot/Shoal rewards are explicit because the legacy gift scanner misses them. Duplicate retries are not extra rewards. Steven supplies only Aerodactylite with the Ring; original starter choices do not add further stone grants.
 
 ABOMASITE · ABOMASNOW_MEGA
 CURRENT rewards: Seaspray_Cave_B1F: sparkle at (25, 21)
@@ -4602,7 +4559,7 @@ Family/pre-evolution wild-table candidates: M539 Seaspray_Cave_B1F, M285 ShoalCa
 Opponent holders: E0311.
 
 ABSOLITE · ABSOL_MEGA
-CURRENT rewards: JaggedPass: sparkle at (23, 24); LavaridgeTown_PokemonCenter_1F: NPC/event gift (LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward)
+CURRENT rewards: JaggedPass: sparkle at (23, 24)
 Family/pre-evolution wild-table candidates: M252 JaggedPass, M260 MtPyre_Exterior, M261 MtPyre_Summit, M036 Route120.
 Opponent holders: E0138.
 
@@ -4622,12 +4579,12 @@ Family/pre-evolution wild-table candidates: M246 GraniteCave_1F, M247 GraniteCav
 Opponent holders: E0163.
 
 ALAKAZITE · ALAKAZAM_MEGA
-CURRENT rewards: GraniteCave_B1F: sparkle at (15, 21); Route110_TrickHouseEnd: NPC/event gift (Route110_TrickHouseEnd_EventScript_ClaimFinalStone)
+CURRENT rewards: GraniteCave_B1F: sparkle at (15, 21)
 Family/pre-evolution wild-table candidates: M246 GraniteCave_1F.
 Opponent holders: E0211,E0388.
 
 ALTARIANITE · ALTARIA_MEGA
-CURRENT rewards: Route111: sparkle at (3, 113); LilycoveCity: NPC/event gift (LilycoveCity_EventScript_AltarianiteKeeper); FortreeCity_Gym: NPC/event gift (FortreeCity_Gym_EventScript_GiveAltarianite2); FortreeCity_Gym: NPC/event gift (FortreeCity_Gym_EventScript_GiveAltarianite)
+CURRENT rewards: Route111: sparkle at (3, 113)
 Family/pre-evolution wild-table candidates: M240 MeteorFalls_1F_2R, M030 Route114, M318 SkyPillar_1F, M320 SkyPillar_3F, M323 SkyPillar_5F.
 Opponent holders: E0128.
 
@@ -4677,7 +4634,7 @@ Family/pre-evolution wild-table candidates: M524 DewfordMeadow, M250 PetalburgWo
 Opponent holders: E0208.
 
 CAMERUPTITE · CAMERUPT_MEGA
-CURRENT rewards: FieryPath: sparkle at (7, 32); LavaridgeTown_Gym_1F: NPC/event gift (LavaridgeTown_Gym_1F_EventScript_GiveCameruptite2); LavaridgeTown_Gym_1F: NPC/event gift (LavaridgeTown_Gym_1F_EventScript_GiveCameruptite)
+CURRENT rewards: FieryPath: sparkle at (7, 32)
 Family/pre-evolution wild-table candidates: M325 MagmaHideout_1F, M326 MagmaHideout_2F_1R, M332 MagmaHideout_2F_3R, M328 MagmaHideout_3F_1R, M330 MagmaHideout_4F, M028 Route112.
 Opponent holders: E0132,E0148,E0339,E0409.
 
@@ -4807,12 +4764,12 @@ Family/pre-evolution wild-table candidates: M018 Route102.
 Opponent holders: E0194,E0400.
 
 GENGARITE · GENGAR_MEGA
-CURRENT rewards: Route120: sparkle at (20, 55); SlateportCity: NPC/event gift (SlateportCity_EventScript_GretaReward)
+CURRENT rewards: Route120: sparkle at (20, 55)
 Family/pre-evolution wild-table candidates: M523 DewfordManor_1F, M254 MtPyre_1F, M255 MtPyre_2F, M256 MtPyre_3F, M257 MtPyre_4F, M258 MtPyre_5F.
 Opponent holders: E0251,E0494.
 
 GLALITITE · GLALIE_MEGA
-CURRENT rewards: ShoalCave_LowTideEntranceRoom: first four salt + four shells exchange (native reward).
+CURRENT rewards: ShoalCave_LowTideEntranceRoom: native finite exchange (TradeEmeraldChampionsShoalMaterials)
 Family/pre-evolution wild-table candidates: M539 Seaspray_Cave_B1F, M285 ShoalCave_LowTideEntranceRoom, M322 ShoalCave_LowTideIceRoom, M286 ShoalCave_LowTideInnerRoom, M288 ShoalCave_LowTideLowerRoom.
 Opponent holders: E0167.
 
@@ -4837,7 +4794,7 @@ Family/pre-evolution wild-table candidates: no direct family table; inspect the 
 Opponent holders: E0491.
 
 GYARADOSITE · GYARADOS_MEGA
-CURRENT rewards: DewfordTown_House2: NPC/event gift (DewfordTown_House2_EventScript_MegaGift_GYARADOSITE); SootopolisCity_Gym_1F: NPC/event gift (SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2); SootopolisCity_Gym_1F: NPC/event gift (SootopolisCity_Gym_1F_EventScript_GiveGyaradosite)
+CURRENT rewards: DewfordTown_House2: NPC/event gift (DewfordTown_House2_EventScript_MegaGift_GYARADOSITE)
 Family/pre-evolution wild-table candidates: M304 AbandonedShip_HiddenFloorCorridors, M297 AbandonedShip_Rooms_B1F, M520 AlteringCave_B1F, M012 DewfordTown, M009 EverGrandeCity, M006 LilycoveCity, M239 MeteorFalls_1F_1R, M240 MeteorFalls_1F_2R, M241 MeteorFalls_B1F_1R, M242 MeteorFalls_B1F_2R, M007 MossdeepCity, M016 PacifidlogTown, M001 PetalburgCity, M529 PetalburgWoods_3, M018 Route102, M019 Route103, M020 Route104, M021 Route105, M022 Route106, M023 Route107, M024 Route108, M025 Route109, M027 Route111, M030 Route114, M031 Route115, M034 Route118, M035 Route119, M036 Route120, M037 Route121, M038 Route122, M039 Route123, M040 Route124, M041 Route125, M042 Route126, M043 Route127, M044 Route128, M045 Route129, M046 Route130, M047 Route131, M048 Route132, M049 Route133, M050 Route134, M408 SafariZone_Northwest, M421 SafariZone_Southeast, M410 SafariZone_Southwest, M531 SandstrewnRuins, M535 ScorchedSlab_B1F, M266 SeafloorCavern_Entrance, M272 SeafloorCavern_Room6, M273 SeafloorCavern_Room7, M538 Seaspray_Cave, M285 ShoalCave_LowTideEntranceRoom, M286 ShoalCave_LowTideInnerRoom, M002 SlateportCity, M008 SootopolisCity, M284 VictoryRoad_B2F.
 Opponent holders: E0184,E0227,E0469.
 
@@ -4857,7 +4814,7 @@ Family/pre-evolution wild-table candidates: M521 AshenWoods, M250 PetalburgWoods
 Opponent holders: E0230.
 
 HOUNDOOMINITE · HOUNDOOM_MEGA
-CURRENT rewards: Route113_GlassWorkshop: lifetime soot 500, glassmaker claim (native reward).
+CURRENT rewards: Route113_GlassWorkshop: native finite exchange (ClaimEmeraldChampionsSootMilestone)
 Family/pre-evolution wild-table candidates: M345 AlteringCave, M521 AshenWoods, M253 FieryPath, M327 MagmaHideout_2F_2R, M332 MagmaHideout_2F_3R, M328 MagmaHideout_3F_1R, M329 MagmaHideout_3F_2R, M331 MagmaHideout_3F_3R, M330 MagmaHideout_4F, M420 SafariZone_Northeast, M421 SafariZone_Southeast.
 Opponent holders: E0131.
 
@@ -4892,12 +4849,12 @@ Family/pre-evolution wild-table candidates: no direct family table; inspect the 
 Opponent holders: E0482.
 
 LOPUNNITE · LOPUNNY_MEGA
-CURRENT rewards: PetalburgWoods: sparkle at (4, 26); PetalburgCity_Gym: NPC/event gift (PetalburgCity_Gym_EventScript_GiveLopunnite)
+CURRENT rewards: PetalburgWoods: sparkle at (4, 26)
 Family/pre-evolution wild-table candidates: M250 PetalburgWoods.
 Opponent holders: E0168.
 
 LUCARIONITE · LUCARIO_MEGA
-CURRENT rewards: Route116: sparkle at (19, 6); DewfordTown_Gym: NPC/event gift (DewfordTown_Gym_EventScript_GiveLucarionite2); DewfordTown_Gym: NPC/event gift (DewfordTown_Gym_EventScript_GiveLucarionite)
+CURRENT rewards: Route116: sparkle at (19, 6)
 Family/pre-evolution wild-table candidates: M519 AlteringCave_1F, M249 GraniteCave_StevensRoom, M032 Route116.
 Opponent holders: E0279.
 
@@ -4922,7 +4879,7 @@ Family/pre-evolution wild-table candidates: M520 AlteringCave_B1F, M021 Route105
 Opponent holders: E0348.
 
 MANECTITE · MANECTRIC_MEGA
-CURRENT rewards: MauvilleCity_Gym: NPC/event gift (MauvilleCity_Gym_EventScript_GiveManectite2); MauvilleCity_Gym: NPC/event gift (MauvilleCity_Gym_EventScript_GiveManectite)
+CURRENT rewards: MauvilleCity_Gym: NPC/event gift (MauvilleCity_Gym_EventScript_GiveManectite)
 Family/pre-evolution wild-table candidates: M019 Route103, M034 Route118.
 Opponent holders: E0092.
 
@@ -4947,7 +4904,7 @@ Family/pre-evolution wild-table candidates: M540 VerdanturfMeadow.
 Opponent holders: E0472.
 
 METAGROSSITE · METAGROSS_MEGA
-CURRENT rewards: MeteorFalls_1F_1R: sparkle at (27, 5); MossdeepCity_Gym: NPC/event gift (MossdeepCity_Gym_EventScript_GiveMetagrossite2); MossdeepCity_Gym: NPC/event gift (MossdeepCity_Gym_EventScript_GiveMetagrossite)
+CURRENT rewards: MeteorFalls_1F_1R: sparkle at (27, 5)
 Family/pre-evolution wild-table candidates: M279 CaveOfOrigin_UnusedRubySapphireMap2, M280 CaveOfOrigin_UnusedRubySapphireMap3, M246 GraniteCave_1F, M249 GraniteCave_StevensRoom, M346 MeteorFalls_StevensCave, M318 SkyPillar_1F, M320 SkyPillar_3F, M323 SkyPillar_5F, M282 VictoryRoad_1F, M283 VictoryRoad_B1F, M284 VictoryRoad_B2F.
 Opponent holders: E0302,E0395,E0512.
 
@@ -4967,7 +4924,7 @@ Family/pre-evolution wild-table candidates: M520 AlteringCave_B1F, M006 Lilycove
 Opponent holders: E0304.
 
 PIDGEOTITE · PIDGEOT_MEGA
-CURRENT rewards: RustboroCity_DevonCorp_3F: NPC/event gift (RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite)
+CURRENT rewards: RustboroCity_DevonCorp_3F: NPC/event gift (RustboroCity_DevonCorp_3F_EventScript_TryGivePidgeotite)
 Family/pre-evolution wild-table candidates: M020 Route104.
 Opponent holders: E0286.
 
@@ -5042,7 +4999,7 @@ Family/pre-evolution wild-table candidates: M520 AlteringCave_B1F, M242 MeteorFa
 Opponent holders: E0175,E0393.
 
 STARAPTITE · STARAPTOR_MEGA
-CURRENT rewards: Route116: sparkle at (10, 17); Route110_TrickHouseEnd: NPC/event gift (Route110_TrickHouseEnd_EventScript_CompletedPuzzle1); Route110_TrickHouseEntrance: NPC/event gift (Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward)
+CURRENT rewards: Route116: sparkle at (10, 17)
 Family/pre-evolution wild-table candidates: M032 Route116.
 Opponent holders: E0171.
 
@@ -7492,7 +7449,7 @@ DRAFT 3.1 REVIEW DISPOSITIONS
 D3-F01: Castform recovery now covers loss of all owned copies before C30, with custody search and no repeated economic reward.
 D3-F02: U1212 Hydro Pump replaced by Muddy Water for the Kingdra/Storm Drain Lumineon pairing.
 D3-F03/F04/F07/F09/F11: Justified home, Norman mode, switching counterplay, reactive Coalossal wording and nonbinding watchlist language corrected.
-D3-F05/F08: all 27 starter choices mapped; zero/one/two stone cases and symmetric finite duplicate handling specified.
+D3-F05/F08: starter identity remains independent; Mega Stones follow the current single-source rule.
 D3-F06: repetition removed in the eight explicit evolution rows, keeping meaningful conditions and no invented level floors.
 D3-F10: user expressly preserves Kartana's existing access/provider/rate. Access testing may verify the route, not re-gate it by inference.
 D3-F12: no blanket Protect removal. Shared + encounter-specific calibration becomes central acceptance work.

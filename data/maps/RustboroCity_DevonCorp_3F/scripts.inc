@@ -194,10 +194,8 @@ RustboroCity_DevonCorp_3F_EventScript_MegaRingPending::
 
 RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite::
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_PIDGEOTITE
+	call RustboroCity_DevonCorp_3F_EventScript_TryGivePidgeotite
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON
-	msgbox RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -367,6 +365,7 @@ RustboroCity_DevonCorp_3F_EventScript_CheckLateGift::
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Common_EventScript_NopReturn
 	checkitem ITEM_MEGA_RING, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
+RustboroCity_DevonCorp_3F_EventScript_TryGivePidgeotite::
 	giveuniqueitem ITEM_PIDGEOTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
 	setflag FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON

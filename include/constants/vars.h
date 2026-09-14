@@ -243,7 +243,7 @@
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
 #define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic delivery bits 0-15.
 #define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned species bits 24-29.
-#define VAR_STEVEN_STARTER_STONE_DELIVERY                 0x40E0 // Starter stone receipts: first family bits 0/1, second family bits 2/3.
+#define VAR_STEVEN_STARTER_STONE_DELIVERY                 0x40E0 // Reserved: retired extra starter-stone grant receipts.
 #define VAR_EC_SECOND_STARTER                         0x40E1 // 0 unset; second regional starter index + 1.
 #define VAR_EC_OPENING_STATE                         0x40E2 // EC_OPENING_* transaction state.
 #define VAR_EC_CIRCUIT_BEST_WINS                         0x40E3 // Best observed Circuit streak; 0 means no record yet.

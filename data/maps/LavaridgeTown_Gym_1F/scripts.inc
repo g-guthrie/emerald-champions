@@ -48,7 +48,6 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	trainerbattle_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, EmeraldChampions_Text_NeedTwoPokemon, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
-	goto_if_unset FLAG_RECEIVED_FLANNERY_CAMERUPTITE, LavaridgeTown_Gym_1F_EventScript_GiveCameruptite2
 	goto_if_set FLAG_BADGE05_GET, LavaridgeTown_Gym_1F_EventScript_FlanneryJourneyContinues
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
@@ -68,7 +67,6 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	call Common_EventScript_SetGymTrainers
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
-	call LavaridgeTown_Gym_1F_EventScript_GiveCameruptite
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -80,21 +78,6 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
 	end
-
-LavaridgeTown_Gym_1F_EventScript_GiveCameruptite2::
-	giveuniqueitem ITEM_CAMERUPTITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainCameruptite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_FLANNERY_CAMERUPTITE
-	release
-	end
-
-LavaridgeTown_Gym_1F_EventScript_GiveCameruptite::
-	giveuniqueitem ITEM_CAMERUPTITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainCameruptite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_FLANNERY_CAMERUPTITE
-	return
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
 	trainerbattle_rematch_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryPreRematch, LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat, LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons
@@ -331,16 +314,10 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 	.string "from FLANNERY.$"
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
-	.string "The HEAT BADGE lets your LEVELER train\n"
-	.string "a party up to Lv. 45.\p"
-	.string "It also enables STRENGTH outside\n"
-	.string "of battle.\p"
-	.string "This is a token of my appreciation.\n"
-	.string "Don't be shy about taking it!$"
-LavaridgeTown_Gym_1F_Text_ExplainCameruptite:
-	.string "Cameruptite lets Camerupt Mega Evolve.\n"
-	.string "Let it hold the stone in battle.$"
-
+	.string "The HEAT BADGE lets your LEVELER\n"
+	.string "train a party up to Lv. 44.\p"
+	.string "It also permits STRENGTH outside\n"
+	.string "battle once you have its license.$"
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
 	.string "Registered GYM LEADER FLANNERY\n"
 	.string "in the POKéNAV.$"

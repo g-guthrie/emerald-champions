@@ -59,7 +59,6 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MossdeepCity_Gym_EventScript_TateAndLizaRematch
-	goto_if_unset FLAG_RECEIVED_TATE_LIZA_METAGROSSITE, MossdeepCity_Gym_EventScript_GiveMetagrossite2
 	goto_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterReminder
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
 	release
@@ -89,7 +88,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	setvar VAR_MOSSDEEP_CITY_STATE, 1
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_STEVEN
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 1
-	call MossdeepCity_Gym_EventScript_GiveMetagrossite
+	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -100,23 +99,6 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	setflag FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL
 	release
 	end
-
-MossdeepCity_Gym_EventScript_GiveMetagrossite2::
-	giveuniqueitem ITEM_METAGROSSITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
-	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff
-	setflag FLAG_RECEIVED_TATE_LIZA_METAGROSSITE
-	release
-	end
-
-MossdeepCity_Gym_EventScript_GiveMetagrossite::
-	giveuniqueitem ITEM_METAGROSSITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
-	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff
-	setflag FLAG_RECEIVED_TATE_LIZA_METAGROSSITE
-	return
 
 MossdeepCity_Gym_EventScript_TateAndLizaRematch::
 	trainerbattle_rematch_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaPreRematch, MossdeepCity_Gym_Text_TateAndLizaRematchDefeat, MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons
@@ -575,15 +557,9 @@ MossdeepCity_Gym_Text_ReceivedMindBadge:
 	.string "from TATE and LIZA.$"
 
 MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
-	.string "TATE: The MIND BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 70.\p"
-	.string "LIZA: It also enables DIVE outside\n"
-	.string "of battle.\p"
-	.string "TATE: You should also take this, too.$"
-MossdeepCity_Gym_Text_ExplainMetagrossite:
-	.string "Tate: Metagrossite lets Metagross Mega\n"
-	.string "Evolve. Let it hold the stone.$"
-
+	.string "TATE: You have earned the MIND BADGE!\p"
+	.string "LIZA: It permits DIVE outside battle\n"
+	.string "once STEVEN gives you its license.$"
 MossdeepCity_Gym_Text_RegisteredTateAndLiza:
 	.string "Registered GYM LEADERS TATE & LIZA\n"
 	.string "in the POKéNAV.$"

@@ -85,8 +85,8 @@ SootopolisCity_Gym_1F_EventScript_Juan::
 	trainerbattle_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, EmeraldChampions_Text_NeedTwoPokemon, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_JuanRematch
-	goto_if_unset FLAG_RECEIVED_JUAN_GYARADOSITE, SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2
 	goto_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_Gym_1F_EventScript_JuanAfterLeague
+	goto_if_unset FLAG_EC_REPORT_C48_COMPLETE, SootopolisCity_Gym_1F_EventScript_OriginsReminder
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -110,7 +110,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
-	call SootopolisCity_Gym_1F_EventScript_GiveGyaradosite
+	call SootopolisCity_Gym_1F_EventScript_OriginsHandoff
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -119,21 +119,6 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_JUAN_MATCH_CALL
-	release
-	end
-
-SootopolisCity_Gym_1F_EventScript_GiveGyaradosite::
-	giveuniqueitem ITEM_GYARADOSITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_ExplainGyaradosite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_JUAN_GYARADOSITE
-	return
-
-SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2::
-	giveuniqueitem ITEM_GYARADOSITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_ExplainGyaradosite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_JUAN_GYARADOSITE
 	release
 	end
 
@@ -221,23 +206,11 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
 	.string "from JUAN.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
-	.string "The RAIN BADGE lets your LEVELER train\n"
-	.string "a party up to Lv. 80.\p"
-	.string "It also enables WATERFALL to scale\n"
-	.string "walls of cascading water.\p"
-	.string "With all eight BADGES, HOENN's last\n"
-	.string "doors open: VICTORY ROAD, and the\l"
-	.string "LEAGUE beyond it.\p"
-	.string "And, so that you never forget the\n"
-	.string "battle we shared, take this…$"
-SootopolisCity_Gym_1F_Text_ExplainGyaradosite:
-	.string "Gyaradosite lets Gyarados Mega\n"
-	.string "Evolve. Let it hold the stone in\l"
-	.string "battle.\p"
-	.string "SURF east from ROUTE 128 to EVER\n"
-	.string "GRANDE. Use WATERFALL at the\l"
-	.string "city's entrance.$"
-
+	.string "The RAIN BADGE lets your LEVELER\n"
+	.string "train a party up to Lv. 90.\p"
+	.string "It permits WATERFALL to scale\n"
+	.string "walls of cascading water once\l"
+	.string "you have its license.$"
 SootopolisCity_Gym_1F_Text_RegisteredJuan:
 	.string "Registered GYM LEADER JUAN\n"
 	.string "in the POKéNAV.$"
@@ -302,3 +275,42 @@ SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons:
 	.string "You have with you but one POKéMON.\p"
 	.string "I wish that you would return with\n"
 	.string "two, perhaps more, POKéMON, please.$"
+
+SootopolisCity_Gym_1F_EventScript_OriginsReminder::
+	call SootopolisCity_Gym_1F_EventScript_OriginsHandoff
+	release
+	end
+
+SootopolisCity_Gym_1F_EventScript_OriginsHandoff::
+	goto_if_unset FLAG_EC_RESOLVED_DIANCIE, SootopolisCity_Gym_1F_EventScript_OriginCrystal
+	goto_if_unset FLAG_EC_RESOLVED_JIRACHI, SootopolisCity_Gym_1F_EventScript_MeteorWish
+	msgbox SootopolisCity_Gym_1F_Text_MeetSteven, MSGBOX_DEFAULT
+	return
+
+SootopolisCity_Gym_1F_EventScript_OriginCrystal::
+	msgbox SootopolisCity_Gym_1F_Text_OriginsHandoff, MSGBOX_DEFAULT
+	return
+
+SootopolisCity_Gym_1F_EventScript_MeteorWish::
+	msgbox SootopolisCity_Gym_1F_Text_MeteorWish, MSGBOX_DEFAULT
+	return
+
+SootopolisCity_Gym_1F_Text_OriginsHandoff:
+	.string "Before the LEAGUE, follow the lower\n"
+	.string "passage in the CAVE OF ORIGIN,\l"
+	.string "here in northern SOOTOPOLIS.\p"
+	.string "Resolve DIANCIE's challenge in\n"
+	.string "the crystal chamber. You may\l"
+	.string "win without catching it.$"
+
+SootopolisCity_Gym_1F_Text_MeteorWish:
+	.string "Reach METEOR FALLS from ROUTE 114.\n"
+	.string "Use SURF and WATERFALL to find\l"
+	.string "JIRACHI's deeper chamber.\p"
+	.string "Resolve its challenge. Winning\n"
+	.string "or catching it both count.$"
+
+SootopolisCity_Gym_1F_Text_MeetSteven:
+	.string "Your discoveries are ready.\n"
+	.string "Meet STEVEN at his house in\l"
+	.string "MOSSDEEP before the LEAGUE.$"

@@ -24,7 +24,7 @@ GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge::
 	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
 @ This reuses the original Aerodactylite entitlement; Roxanne now gives Amber only.
 GraniteCave_StevensRoom_EventScript_Aerodactylite::
-	goto_if_set FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, GraniteCave_StevensRoom_EventScript_StarterGifts
+	goto_if_set FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, GraniteCave_StevensRoom_EventScript_ArchiveOpen
 	msgbox GraniteCave_StevensRoom_Text_Aerodactylite, MSGBOX_DEFAULT
 	setvar VAR_0x8000, ITEM_AERODACTYLITE
 	setvar VAR_0x8001, 1
@@ -41,37 +41,6 @@ GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt::
 	setvar VAR_0x8000, ITEM_AERODACTYLITE
 	call GraniteCave_StevensRoom_EventScript_StoneReceipt
 	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
-GraniteCave_StevensRoom_EventScript_StarterGifts::
-	setvar VAR_0x8008, 0
-	setvar VAR_0x8007, TRUE
-	setvar VAR_0x8006, FALSE
-
-GraniteCave_StevensRoom_EventScript_StarterStoneLoop::
-	special GiveEmeraldChampionsStarterMegaStoneAtIndex
-	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_StarterStonePending
-	goto GraniteCave_StevensRoom_EventScript_StarterStoneReceipt
-
-GraniteCave_StevensRoom_EventScript_StarterStonePending::
-	setvar VAR_0x8007, FALSE
-
-GraniteCave_StevensRoom_EventScript_StarterStoneReceipt::
-	goto_if_eq VAR_0x8004, ITEM_NONE, GraniteCave_StevensRoom_EventScript_NextStarterStone
-	setvar VAR_0x8006, TRUE
-	goto_if_eq VAR_0x8005, 0, GraniteCave_StevensRoom_EventScript_NextStarterStone
-	copyvar VAR_0x8000, VAR_0x8004
-	copyvar VAR_0x800B, VAR_0x8005
-	call GraniteCave_StevensRoom_EventScript_StoneReceipt
-
-GraniteCave_StevensRoom_EventScript_NextStarterStone::
-	addvar VAR_0x8008, 1
-	goto_if_lt VAR_0x8008, 4, GraniteCave_StevensRoom_EventScript_StarterStoneLoop
-	goto_if_eq VAR_0x8007, FALSE, GraniteCave_StevensRoom_EventScript_StoneStorageFull
-	goto_if_eq VAR_0x8006, FALSE, GraniteCave_StevensRoom_EventScript_NoStarterStone
-	goto GraniteCave_StevensRoom_EventScript_ArchiveOpen
-
-GraniteCave_StevensRoom_EventScript_NoStarterStone::
-	msgbox GraniteCave_StevensRoom_Text_NoStarterStone, MSGBOX_DEFAULT
-
 GraniteCave_StevensRoom_EventScript_ArchiveOpen::
 	msgbox GraniteCave_StevensRoom_Text_ArchiveOpen, MSGBOX_DEFAULT
 
@@ -231,14 +200,6 @@ GraniteCave_StevensRoom_Text_Aerodactylite:
 	.string "at DEVON's second-floor laboratory.\p"
 	.string "Have AERODACTYL hold this stone\n"
 	.string "to unlock its Mega Evolution!$"
-
-GraniteCave_StevensRoom_Text_NoStarterStone:
-	.string "I don't have a matching Mega\n"
-	.string "Stone for your original partners\l"
-	.string "here.\p"
-	.string "Keep exploring. Other members of\n"
-	.string "your team may be able to Mega\l"
-	.string "Evolve, too!$"
 
 GraniteCave_StevensRoom_Text_ArchiveOpen:
 	.string "The RING lets your partners use\n"

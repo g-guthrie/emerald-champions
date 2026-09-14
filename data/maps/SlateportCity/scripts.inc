@@ -1188,15 +1188,10 @@ SlateportCity_Text_TakingBattleTentChallenge:
 SlateportCity_EventScript_Greta::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_GRETA_GENGARITE, SlateportCity_EventScript_GretaAfter
-	goto_if_defeated TRAINER_GRETA_SLATEPORT, SlateportCity_EventScript_GretaReward
+	goto_if_defeated TRAINER_GRETA_SLATEPORT, SlateportCity_EventScript_GretaAfter
 	msgbox SlateportCity_Text_GretaChallenge, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SlateportCity_EventScript_GretaDecline
 	trainerbattle_no_intro_double TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-SlateportCity_EventScript_GretaReward::
-	giveuniqueitem ITEM_GENGARITE
-	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_GretaBagFull
-	setflag FLAG_RECEIVED_GRETA_GENGARITE
 SlateportCity_EventScript_GretaAfter::
 	msgbox SlateportCity_Text_GretaAfter, MSGBOX_DEFAULT
 	release
@@ -1204,11 +1199,6 @@ SlateportCity_EventScript_GretaAfter::
 
 SlateportCity_EventScript_GretaDecline::
 	msgbox SlateportCity_Text_GretaDecline, MSGBOX_DEFAULT
-	release
-	end
-
-SlateportCity_EventScript_GretaBagFull::
-	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1225,8 +1215,8 @@ SlateportCity_Text_GretaDecline:
 	.string "ready to be judged together.$"
 
 SlateportCity_Text_GretaAfter:
-	.string "That GENGARITE marks a contender.\n"
-	.string "Bring it to the BATTLE FRONTIER.$"
+	.string "That was the mark of a contender.\n"
+	.string "Bring that spirit to the FRONTIER!$"
 
 @ v4 arrives after Brawly, Steven's Ring and the manor song, at cap 24.
 @ The museum chapter raises the cap to 30. This inherited no-Knuckle fallback
