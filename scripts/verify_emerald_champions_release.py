@@ -30,6 +30,7 @@ STATIC_GATES = (
     ("preset structural validation and output agreement (not strategy quality)", (PYTHON, "scripts/generate_emerald_champions_battle_sets.py", "--check")),
     ("authored Circuit projection", (PYTHON, "scripts/generate_showdown_champions_circuit.py", "--check")),
     ("wild table integrity", (PYTHON, "scripts/verify_wild_distribution.py")),
+    ("one acquisition source per Mega Stone", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
 )
 
 

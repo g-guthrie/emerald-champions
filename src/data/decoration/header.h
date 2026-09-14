@@ -665,7 +665,7 @@ const struct Decoration gDecorations[] =
         .description = COMPOUND_STRING(
             "Awarded for 50\n"
             "straight wins at\n"
-            "the BATTLE TOWER."),
+            "the CIRCUIT."),
         .tiles = DecorGfx_SILVER_SHIELD,
         .icon = {NULL, NULL},
     },
@@ -681,7 +681,7 @@ const struct Decoration gDecorations[] =
         .description = COMPOUND_STRING(
             "Awarded for 100\n"
             "straight wins at\n"
-            "the BATTLE TOWER."),
+            "the CIRCUIT."),
         .tiles = DecorGfx_GOLD_SHIELD,
         .icon = {NULL, NULL},
     },

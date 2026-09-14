@@ -35,7 +35,11 @@ VerdanturfTown_WandasHouse_EventScript_WallysUncleEverGrande::
 	end
 
 VerdanturfTown_WandasHouse_EventScript_WandasBoyfriend::
-	msgbox VerdanturfTown_WandasHouse_Text_CanSeeGirlfriendEveryDay, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox VerdanturfTown_WandasHouse_Text_CanSeeGirlfriendEveryDay, MSGBOX_DEFAULT
+	call_if_unset FLAG_MET_ARCHIE_METEOR_FALLS, VerdanturfTown_WandasHouse_EventScript_NorthernHandoff
+	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_Wanda::
@@ -187,3 +191,16 @@ VerdanturfTown_WandasHouse_EventScript_IndeedeeOffer::
 	call Common_EventScript_EmeraldChampionsFormGift
 	release
 	end
+
+VerdanturfTown_WandasHouse_EventScript_NorthernHandoff::
+	msgbox VerdanturfTown_WandasHouse_Text_NorthernHandoff, MSGBOX_DEFAULT
+	return
+
+VerdanturfTown_WandasHouse_Text_NorthernHandoff:
+	.string "Go east through VERDANTURF and\n"
+	.string "ROUTE 117 to MAUVILLE.\p"
+	.string "Take ROUTE 111 north, then turn\n"
+	.string "west onto ROUTE 112. FIERY PATH\l"
+	.string "leads onward to ROUTE 113.\p"
+	.string "Follow it west to FALLARBOR, then\n"
+	.string "ROUTE 114 to METEOR FALLS.$"

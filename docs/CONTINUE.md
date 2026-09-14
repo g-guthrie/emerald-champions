@@ -18,7 +18,59 @@ resume state; the book owns design and historical acceptance evidence;
 `docs/VERIFICATION.md` owns commands. Do not start another full-book review. Use only the selective fresh-Astra
 review workflow above. The native engine in this repository is the active project.
 
-## Active work: comprehensive trainer audit in first-access order
+## Completed scope: story gates, permanent collapse and recovery
+
+The user approved the story-gate/mandatory-encounter/ticket/finale changes in
+both Book and native game. C26 basement research/report now precedes fossil
+collection; either fossil permanently collapses the tower. All three external
+approaches are sealed afterward: Route111, the elevated ruins and Desert
+Underpass. Zygarde and Stakataka are intentionally missable. The required
+archaeologist and final fossil YES/NO dialogue name both and the permanent loss.
+
+The major story transitions now check their preceding accomplishments. Space
+Center, Deoxys, Scanner and all three Regi challenges precede the submarine
+climax; the acute Sootopolis/Sky Pillar response stays uninterrupted. C45 requires
+all three puzzles AND win-or-catch guardian resolutions. C48 requires both
+observations and Diancie/Jirachi resolutions, then Steven's Mossdeep conclusion.
+Steven directly awards cap94/20000; Devon is an optional epilogue with any
+unclaimed Pidgeotite preserved. The League checks C48 and eight badges.
+
+Earned travel survives physical-ticket storage failure. Any Center nurse retries
+pending documents without withholding healing or duplicating delivered papers.
+Native Studio recordings in VERIFICATION cover the key blocks, collapse choices,
+entrance closures, forced battle outcomes, missing/repeat finale and ticket Bag
+boundaries. These are synthetic scenes; forced wins/catches/losses are not combat
+or earned campaign evidence. The earlier permanent-entrance and optional C48
+battle decisions are superseded. User visual approval and full route traversal
+remain separate acceptance work.
+
+The earlier section17 choreography implementation remains in place. Earned C15,
+team reviews and export delivery stay paused; no additional legendary placement
+was authorized. The live Studio sandbox remains independent of the earned save.
+
+The follow-through moved the existing Sandstrewn researcher to the dry entrance
+path. A native four-badge walk now covers Route111 → tower → lowest chamber →
+researcher → Route111 without Surf, with one C26 grant. The Book inventories all
+lost pickups and exact wild entries, including additional exclusives beyond the
+two explicitly requested legendary warnings. Route111/Fossil Maniac dialogue no
+longer suggests a back entrance. Landorus and its return flight work after collapse.
+
+All eleven required legendary encounters have scoped native no-capture victory
+checks. Diancie/Jirachi also have actual Run → doorway re-entry → retry, and native
+Save/Reload checks. Center documents pass full pocket → make room → receive once →
+Save/Reload → repeat; missing starter tools no longer prevent healing. C45 ends
+with its next-site/Seafloor route after the optional capture reminder, and repeated
+Heatran encounters do not restart the old Groudon/submarine briefing. See
+VERIFICATION for exact recordings, diagnostic fixture failures and scope.
+
+The seven-point implementation is complete. Full campaign play, balancing, other
+area/service coverage and user visual acceptance are still separate work. Keep
+the earned playthrough and team reviews paused until the user resumes them.
+
+
+## Paused work: collaborative team reviews
+
+## Active work: finish engineering, then major-battle-first trainer audit
 
 The current user instruction is a comprehensive first-access trainer audit after
 Roxanne. The Route116 Cut block and the next four designs (Rusturf thug,
@@ -332,3 +384,6 @@ This does not advance the earned campaign or accept every economic interaction.
 The normal delivery and hashes are recorded in that work directory's delivery.json.
 Earlier probe failures were fixture observer/input/position mistakes, retained
 as diagnostic evidence; the verified run used fresh correct-ROM boots.
+
+
+Current user direction after the immediate GitHub checkpoint: finish all outstanding work, especially AI, and finalize the integrated build before resuming design reviews. The next review order prioritizes Elite Four/Champion, then whole Gyms and Magma/Aqua story groups so Mega, legendary and strategy distribution is decided around the most important battles. First-access checks and forward native play remain necessary for progression validation. Do not assign new League teams piecemeal ahead of that review.

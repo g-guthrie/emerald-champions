@@ -1,0 +1,101 @@
+{
+  "start": {
+    "chapter": 3
+  },
+  "warp": {
+    "map": "MirageTower_4F",
+    "x": 5,
+    "y": 5,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL": false,
+      "FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL": false,
+      "FLAG_EC_REPORT_C26_COMPLETE": true
+    }
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Fossil found"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "All ruins will seal"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "No return"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Zygarde and Stakataka"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Only chance"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Other rare finds"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Chest Form Gimmighoul"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Trapinch and Honedge family"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Uncollected stones and fossils"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Explore before choosing"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Permanent decision"
+    },
+    {
+      "tap": "B",
+      "every": 100,
+      "frames": 1000,
+      "until": "idle",
+      "label": "Decline keeps ruins open"
+    }
+  ],
+  "queries": {
+    "fossil": {
+      "kind": 4,
+      "id": "ITEM_ROOT_FOSSIL"
+    },
+    "tower": {
+      "kind": 2,
+      "id": "VAR_MIRAGE_TOWER_STATE"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "map": "MirageTower_4F",
+    "queries": {
+      "fossil": 0,
+      "tower": 0
+    }
+  },
+  "name": "C26 named irreversible warning and deliberate decline"
+}

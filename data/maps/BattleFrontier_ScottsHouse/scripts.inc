@@ -24,13 +24,7 @@ BattleFrontier_ScottsHouse_EventScript_CheckGiveShield::
 	end
 
 BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols::
-	goto_if_unset FLAG_SYS_TOWER_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_DOME_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PALACE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_ARENA_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_FACTORY_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PIKE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PYRAMID_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto_if_lt VAR_EC_CIRCUIT_BEST_WINS, 50, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	msgbox BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols, MSGBOX_DEFAULT
 	giveitem ITEM_LANSAT_BERRY
 	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
@@ -40,13 +34,7 @@ BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols::
 	end
 
 BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols::
-	goto_if_unset FLAG_SYS_TOWER_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_DOME_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PALACE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_ARENA_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_FACTORY_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PIKE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_PYRAMID_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
+	goto_if_lt VAR_EC_CIRCUIT_BEST_WINS, 100, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	msgbox BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols, MSGBOX_DEFAULT
 	giveitem ITEM_STARF_BERRY
 	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
@@ -84,13 +72,7 @@ BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment::
 	end
 
 BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield::
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 50, BattleFrontier_ScottsHouse_EventScript_GiveSilverShield
-	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN
-	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 50, BattleFrontier_ScottsHouse_EventScript_GiveSilverShield
+	goto_if_ge VAR_EC_CIRCUIT_BEST_WINS, 50, BattleFrontier_ScottsHouse_EventScript_GiveSilverShield
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
 
@@ -114,13 +96,7 @@ BattleFrontier_ScottsHouse_EventScript_GivenShield::
 	end
 
 BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield::
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
-	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 100, BattleFrontier_ScottsHouse_EventScript_GiveGoldShield
-	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_OPEN
-	tower_get TOWER_DATA_WIN_STREAK
-	goto_if_ge VAR_RESULT, 100, BattleFrontier_ScottsHouse_EventScript_GiveGoldShield
+	goto_if_ge VAR_EC_CIRCUIT_BEST_WINS, 100, BattleFrontier_ScottsHouse_EventScript_GiveGoldShield
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
 
@@ -280,34 +256,16 @@ BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
 	.string "Fufufu!$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
-	.string "SCOTT: Are you enjoying things in\n"
-	.string "the BATTLE FRONTIER?\p"
-	.string "…Wait a second…\n"
-	.string "Oh!\p"
-	.string "Your FRONTIER PASS!\n"
-	.string "You've collected the full set\l"
-	.string "of silver symbols!\p"
-	.string "That's more than impressive!\n"
-	.string "You are tough, just as I suspected!\p"
-	.string "Normally, I wouldn't do something\n"
-	.string "like this, but this is a special time!\p"
-	.string "I want you to have this.\n"
-	.string "I'm sure you can put it to proper use.$"
+	.string "SCOTT: Your best CIRCUIT run has\n"
+	.string "reached 50 victories!\p"
+	.string "That deserves a LANSAT BERRY.\n"
+	.string "Keep showing us what you can do!$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
-	.string "SCOTT: I hope you're enjoying\n"
-	.string "everything in the BATTLE FRONTIER.\p"
-	.string "…Wait a second…\n"
-	.string "Oh, my disbelieving eyes!\p"
-	.string "Your FRONTIER PASS!\n"
-	.string "You've gathered up the full set\l"
-	.string "of gold symbols!\p"
-	.string "That's more than stupendous!\n"
-	.string "You're incredible, just as I suspected!\p"
-	.string "… … … … … …\p"
-	.string "{PLAYER}, you've got to accept this!\p"
-	.string "I think you will be able to\n"
-	.string "appreciate the value of my gift!$"
+	.string "SCOTT: Your best CIRCUIT run has\n"
+	.string "reached 100 victories!\p"
+	.string "That deserves a STARF BERRY.\n"
+	.string "Keep showing us what you can do!$"
 
 BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
 	.string "I must say I have the gift of knowing\n"
@@ -321,14 +279,14 @@ BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
 
 BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow:
 	.string "SCOTT: Oh, I heard about you!\n"
-	.string "How you ruled the BATTLE TOWER!\l"
+	.string "How you ruled the CIRCUIT!\l"
 	.string "You beat over 50 TRAINERS in a row?\p"
 	.string "That's fantastic!\n"
 	.string "I want you to have this!$"
 
 BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow:
 	.string "SCOTT: Oh, my! I heard about you!\n"
-	.string "How you overwhelmed the BATTLE TOWER!\l"
+	.string "How you overwhelmed the CIRCUIT!\l"
 	.string "You beat over 100 TRAINERS in a row?\p"
 	.string "That's ridiculously spectacular!\n"
 	.string "You've got to have this!$"

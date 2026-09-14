@@ -326,14 +326,8 @@ PetalburgCity_Gym_EventScript_NormanFaceDoorEast::
 PetalburgCity_Gym_EventScript_NormanPostBattle::
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_GiveEnigmaBerry
-	goto_if_unset FLAG_RECEIVED_NORMAN_LOPUNNITE, PetalburgCity_Gym_EventScript_GiveLopunnite2
 	goto_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough
 	msgbox PetalburgCity_Gym_Text_DadGoingToKeepTraining, MSGBOX_DEFAULT
-	release
-	end
-
-PetalburgCity_Gym_EventScript_GiveLopunnite2::
-	call PetalburgCity_Gym_EventScript_GiveLopunnite
 	release
 	end
 
@@ -361,6 +355,7 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry::
 	end
 
 PetalburgCity_Gym_EventScript_NormanBattle::
+	call EC_RequireDesert
 	msgbox PetalburgCity_Gym_Text_NormanIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_NORMAN_1, PetalburgCity_Gym_Text_NormanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	message PetalburgCity_Gym_Text_ReceivedBalanceBadge
@@ -379,7 +374,6 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	clearflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
 	call PetalburgCity_Gym_EventScript_UnlockAllDoors
 	special DrawWholeMapView
-	call PetalburgCity_Gym_EventScript_GiveLopunnite
 	delay 30
 	msgbox PetalburgCity_Gym_Text_DadHappyAndSad, MSGBOX_DEFAULT
 	closemessage
@@ -392,13 +386,6 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	case DIR_WEST, PetalburgCity_Gym_EventScript_WallysDadArrivesWest
 	case DIR_EAST, PetalburgCity_Gym_EventScript_WallysDadArrivesEast
 	end
-
-PetalburgCity_Gym_EventScript_GiveLopunnite::
-	giveuniqueitem ITEM_LOPUNNITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	setflag FLAG_RECEIVED_NORMAN_LOPUNNITE
-	msgbox PetalburgCity_Gym_Text_ExplainLopunnite, MSGBOX_DEFAULT
-	return
 
 PetalburgCity_Gym_EventScript_WallysDadArrivesNorth::
 	setvar VAR_0x8008, 1
@@ -1296,16 +1283,10 @@ PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 
 PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
 	.string "DAD: The BALANCE BADGE lets your\n"
-	.string "LEVELER train a party up to Lv. 55.\p"
-	.string "It also lets POKéMON use SURF to\n"
-	.string "travel over water.\p"
-	.string "This is my gift to you. {PLAYER}, I'm\n"
-	.string "sure you can use it correctly.$"
-PetalburgCity_Gym_Text_ExplainLopunnite:
-	.string "Dad: Lopunnite lets Lopunny Mega\n"
-	.string "Evolve. Let it hold the stone in\l"
-	.string "battle.$"
-
+	.string "LEVELER train a party up to Lv. 50.\p"
+	.string "It permits SURF to carry you\n"
+	.string "across water once you have\l"
+	.string "its license.$"
 PetalburgCity_Gym_Text_DadHappyAndSad:
 	.string "DAD: As a LEADER, I learned from you.\n"
 	.string "As your father, I'm simply proud.$"

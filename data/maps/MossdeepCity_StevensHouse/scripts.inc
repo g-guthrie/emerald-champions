@@ -1,7 +1,6 @@
 MossdeepCity_StevensHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_StevensHouse_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_StevensHouse_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_StevensHouse_OnFrame
 	.byte 0
 
 MossdeepCity_StevensHouse_OnLoad:
@@ -20,54 +19,6 @@ MossdeepCity_StevensHouse_EventScript_SetStevenPos::
 	setobjectxyperm LOCALID_STEVENS_HOUSE_STEVEN, 6, 5
 	setobjectmovementtype LOCALID_STEVENS_HOUSE_STEVEN, MOVEMENT_TYPE_FACE_UP
 	return
-
-MossdeepCity_StevensHouse_OnFrame:
-	map_script_2 VAR_STEVENS_HOUSE_STATE, 1, MossdeepCity_StevensHouse_EventScript_StevenGivesDive
-	.2byte 0
-
-MossdeepCity_StevensHouse_EventScript_StevenGivesDive::
-	lockall
-	applymovement LOCALID_STEVENS_HOUSE_STEVEN, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	playse SE_PIN
-	applymovement LOCALID_STEVENS_HOUSE_STEVEN, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_STEVENS_HOUSE_STEVEN, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_STEVENS_HOUSE_STEVEN, MossdeepCity_StevensHouse_Movement_StevenApproachPlayer
-	waitmovement 0
-	msgbox MossdeepCity_StevensHouse_Text_YouveEarnedHMDive, MSGBOX_DEFAULT
-	giveitem ITEM_HM_DIVE
-	setflag FLAG_RECEIVED_HM_DIVE
-	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
-	msgbox MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT
-	closemessage
-	delay 20
-	applymovement LOCALID_STEVENS_HOUSE_STEVEN, MossdeepCity_StevensHouse_Movement_StevenReturn
-	waitmovement 0
-	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
-	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT
-	setvar VAR_STEVENS_HOUSE_STATE, 2
-	releaseall
-	end
-
-MossdeepCity_StevensHouse_Movement_StevenApproachPlayer:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_in_place_faster_down
-	step_end
-
-MossdeepCity_StevensHouse_Movement_StevenReturn:
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
 
 MossdeepCity_StevensHouse_EventScript_BeldumPokeball::
 	lockall
@@ -136,16 +87,11 @@ MossdeepCity_StevensHouse_EventScript_RockDisplay::
 MossdeepCity_StevensHouse_EventScript_Steven::
 	lock
 	faceplayer
-	call_if_set FLAG_BADGE08_GET, MossdeepCity_StevensHouse_EventScript_ReviewResearch
-	checkitem ITEM_HM_DIVE
-	call_if_eq VAR_RESULT, FALSE, MossdeepCity_StevensHouse_EventScript_DeliverDive
+	goto_if_set FLAG_BADGE08_GET, MossdeepCity_StevensHouse_EventScript_ResearchConversation
+	call EC_RequireSpace
 	msgbox MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis, MSGBOX_DEFAULT
 	release
 	end
-
-MossdeepCity_StevensHouse_EventScript_DeliverDive::
-	giveitem ITEM_HM_DIVE
-	return
 
 MossdeepCity_StevensHouse_EventScript_Letter::
 	lockall
@@ -153,41 +99,13 @@ MossdeepCity_StevensHouse_EventScript_Letter::
 	releaseall
 	end
 
-@ Unused, leftover from RS
-MossdeepCity_StevensHouse_EventScript_DiveItemBall::
-	finditem ITEM_HM_DIVE
-	setflag FLAG_RECEIVED_HM_DIVE
-	end
-
-MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:
-	.string "STEVEN: {PLAYER}{KUN}…\p"
-	.string "As you can see, there's not much here,\n"
-	.string "but this is my home.\p"
-	.string "Thank you for all that you've done.\p"
-	.string "This is my token of appreciation.\n"
-	.string "It's the HIDDEN MACHINE DIVE.\p"
-	.string "No need to be shy--you've earned\n"
-	.string "this HM.$"
-
-MossdeepCity_StevensHouse_Text_ExplainDive:
-	.string "STEVEN: While you're using SURF, you\n"
-	.string "should notice dark patches of water.\p"
-	.string "Use DIVE if you come to deep water\n"
-	.string "like it. You'll drop to the seafloor.\p"
-	.string "When you want to come back up, use\n"
-	.string "DIVE again.\p"
-	.string "In some places, it won't be possible\n"
-	.string "for you to surface, though.\p"
-	.string "AQUA took the submarine to a cavern.\n"
-	.string "Search south on ROUTE 128.\p"
-	.string "Use DIVE in the dark water to find the\n"
-	.string "SEAFLOOR CAVERN and stop ARCHIE.$"
-
 MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
-	.string "STEVEN: Search south on ROUTE 128.\n"
-	.string "Use DIVE in the dark water.\p"
-	.string "Find the SEAFLOOR CAVERN where AQUA\n"
-	.string "took the submarine, and stop ARCHIE.$"
+	.string "STEVEN: Our next lead is the\n"
+	.string "triangle on BIRTH ISLAND. Sail\l"
+	.string "there from LILYCOVE HARBOR.\p"
+	.string "Resolve DEOXYS, then bring STERN\n"
+	.string "the SCANNER from the ABANDONED\l"
+	.string "SHIP, on ROUTE 108.$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
 	.string "{PLAYER} checked the POKé BALL.\p"
@@ -229,9 +147,17 @@ MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
 
 MossdeepCity_StevensHouse_EventScript_ReviewResearch::
 	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, Common_EventScript_NopReturn
+	goto_if_unset FLAG_EC_RESOLVED_DIANCIE, MossdeepCity_StevensHouse_EventScript_ResearchPending
+	goto_if_unset FLAG_EC_RESOLVED_JIRACHI, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_SURVEYED_ORIGIN_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_SURVEYED_METEOR_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	setflag FLAG_EC_STEVEN_RESEARCH_CONCLUSION
+	completemilestone FLAG_EC_REPORT_C48_COMPLETE
+	closemessage
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	delay 30
+	faceplayer
 	msgbox MossdeepCity_StevensHouse_Text_ResearchConclusion, MSGBOX_DEFAULT
 	return
 
@@ -243,13 +169,39 @@ MossdeepCity_StevensHouse_Text_ResearchPending:
 	.string "The chamber beneath SOOTOPOLIS\n"
 	.string "and JIRACHI's room deep inside\l"
 	.string "METEOR FALLS complete our record.\p"
-	.string "Explore both, then bring me your\n"
-	.string "findings. Catching their POKéMON\l"
+	.string "Resolve both encounters, then bring\n"
+	.string "me your findings. Catching them\l"
 	.string "is your own choice.$"
 
 MossdeepCity_StevensHouse_Text_ResearchConclusion:
 	.string "When we met, you carried a letter.\n"
-	.string "Now you can explain what those\l"
-	.string "scattered reports were describing.\p"
-	.string "Take our conclusion to my father\n"
-	.string "at DEVON in RUSTBORO.$"
+	.string "Since then, you've stood where\l"
+	.string "its authors could only imagine.\p"
+	.string "The teams thought understanding\n"
+	.string "a POKéMON meant controlling it.\l"
+	.string "You've seen how much they missed.\p"
+	.string "The crystal light and distant\n"
+	.string "song belong to living places,\l"
+	.string "not machines to command.\p"
+	.string "DEVON has sent your final grant:\n"
+	.string "¥20,000. Your level cap is now 94.\p"
+	.string "SURF east from ROUTE 128 to\n"
+	.string "EVER GRANDE. Climb the WATERFALL;\l"
+	.string "VICTORY ROAD leads to the LEAGUE.$"
+
+MossdeepCity_StevensHouse_EventScript_ResearchConversation::
+	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, MossdeepCity_StevensHouse_EventScript_LeagueSendoff
+	call MossdeepCity_StevensHouse_EventScript_ReviewResearch
+	release
+	end
+MossdeepCity_StevensHouse_EventScript_LeagueSendoff::
+	msgbox MossdeepCity_StevensHouse_Text_LeagueSendoff, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_StevensHouse_Text_LeagueSendoff:
+	.string "Our research is in good hands.\n"
+	.string "Your next challenge is your own.\p"
+	.string "SURF east from ROUTE 128 to\n"
+	.string "EVER GRANDE. Climb the WATERFALL,\l"
+	.string "then take VICTORY ROAD to the LEAGUE.$"

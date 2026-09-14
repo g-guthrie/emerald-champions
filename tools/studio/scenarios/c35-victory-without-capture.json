@@ -1,0 +1,53 @@
+{
+  "name": "c35-victory-without-capture",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "hold": "UP",
+      "frames": 16
+    },
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 8000,
+      "until": "idle",
+      "label": "Victory without capture and native aftermath"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "queries": {
+      "resolved": 1,
+      "caught": 0
+    }
+  },
+  "warp": {
+    "map": "SouthernIsland_Interior",
+    "x": 13,
+    "y": 13,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_ENABLE_SHIP_SOUTHERN_ISLAND": true
+    },
+    "vars": {}
+  },
+  "battle_resolution": "fixture_defeat",
+  "queries": {
+    "resolved": {
+      "kind": 1,
+      "id": "FLAG_EC_RESOLVED_SOUTHERN_LATI"
+    },
+    "caught": {
+      "kind": 1,
+      "id": "FLAG_CAUGHT_LATIAS_OR_LATIOS"
+    }
+  }
+}

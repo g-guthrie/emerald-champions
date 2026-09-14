@@ -62,6 +62,7 @@ Route111_EventScript_UpdateVialQuestObjects::
 	case 4, Route111_EventScript_ShowVialNurse
 	case 5, Route111_EventScript_ShowVialNurse
 	case 6, Route111_EventScript_ShowVialNurse
+	case 7, Route111_EventScript_ShowVialNurse
 	return
 
 Route111_EventScript_ShowVialNurseAndChansey::
@@ -111,6 +112,7 @@ Route111_EventScript_SetLayoutNoMirageTower::
 	return
 
 Route111_EventScript_SetMirageTowerGone::
+	call Route111_EventScript_SetLayoutNoMirageTower
 	setvar VAR_MIRAGE_TOWER_STATE, 3
 	return
 
@@ -464,6 +466,7 @@ Route111_EventScript_VialChanseyEscape::
 Route111_EventScript_VialUpgradeNurse::
 	lock
 	faceplayer
+	goto_if_ge VAR_CHANSEY_NURSE_STATE, 7, Route111_EventScript_VialNextDestination
 	goto_if_eq VAR_CHANSEY_NURSE_STATE, 6, Route111_EventScript_VialUpgradeComplete
 	goto_if_eq VAR_CHANSEY_NURSE_STATE, 0, Route111_EventScript_VialNurseWatching
 	checkitem ITEM_HEAL_BALL
@@ -500,8 +503,8 @@ Route111_EventScript_VialUpgradeComplete::
 	setvar VAR_POKE_VIAL_CHARGES, 2
 Route111_EventScript_VialUpgradeMarkDone::
 	setvar VAR_CHANSEY_NURSE_STATE, 7
-	setflag FLAG_HIDE_ROUTE111_VIAL_NURSE
-	removeobject LOCALID_ROUTE111_VIAL_NURSE
+Route111_EventScript_VialNextDestination::
+	call LavaridgeTown_EventScript_MountainHandoff
 	release
 	end
 
@@ -812,17 +815,18 @@ Route111_Text_MirageTowerClearlyVisible:
 	.string "RUINS.$"
 
 Route111_Text_ThatWasShockingSandRainedDown:
-	.string "The tower collapsed, but its\n"
-	.string "basement passage may still meet\l"
-	.string "DESERT UNDERPASS.\p"
-	.string "That route leads into SANDSTREWN\n"
-	.string "RUINS.$"
+	.string "The tower collapsed, and every\n"
+	.string "route into SANDSTREWN RUINS is\l"
+	.string "sealed forever.\p"
+	.string "DESERT UNDERPASS still exists,\n"
+	.string "but it cannot get you back in.$"
 
 Route111_Text_MirageTowerHasntBeenSeenSince:
-	.string "MIRAGE TOWER is gone, but the\n"
-	.string "ruins below remain. FOSSIL\l"
-	.string "MANIAC's tunnel on ROUTE 114 now\l"
-	.string "reaches DESERT UNDERPASS.$"
+	.string "MIRAGE TOWER is gone. The ruins\n"
+	.string "below it are sealed forever.\p"
+	.string "The FOSSIL MANIAC's tunnel on\n"
+	.string "ROUTE 114 reaches DESERT UNDERPASS,\l"
+	.string "but that passage to the ruins is shut.$"
 
 Route111_Text_ClawFossilDisappeared:
 	.string "The CLAW FOSSIL disappeared into\n"

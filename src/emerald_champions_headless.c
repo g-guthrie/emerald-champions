@@ -1,4 +1,6 @@
 #include "global.h"
+#include "emerald_champions_studio.h"
+#include "reload_save.h"
 #include "money.h"
 
 #if EC_HEADLESS_FIXTURES
@@ -446,7 +448,7 @@ static void PrepareBookResearchScene(void)
             FlagSet(FLAG_EC_SURVEYED_DESERT_DEPTHS);
         if (completed)
             FlagSet(FLAG_EC_REPORT_C26_COMPLETE);
-        LoadHeadlessMap(MAP_SANDSTREWN_RUINS, 4, 14);
+        LoadHeadlessMap(MAP_SANDSTREWN_RUINS, 9, 131);
         break;
     case 5:
         FlagSet(FLAG_EC_REPORT_C26_COMPLETE);
@@ -458,6 +460,10 @@ static void PrepareBookResearchScene(void)
         LoadHeadlessMap(MAP_SEALED_CHAMBER_INNER_ROOM, 10, 5);
         break;
     case 6:
+        FlagSet(FLAG_EC_REPORT_C30_COMPLETE);
+        FlagSet(FLAG_RECEIVED_DEVON_SCOPE);
+        if (!missing)
+            SetTrainerFlag(TRAINER_BRENDAN_LILYCOVE_TREECKO);
         FlagClear(FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT);
         if (completed)
             FlagSet(FLAG_EC_RESOLVED_MEW);
@@ -515,7 +521,6 @@ static void PrepareBookResearchScene(void)
         VarSet(VAR_STARTER_GEN, 1);
         VarSet(VAR_STARTER_MON, 0);
         VarSet(VAR_EC_SECOND_STARTER, 0);
-        VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, completed ? 1 : 0);
         FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
         FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
         AddPCItem(ITEM_MEGA_RING, 1);
@@ -620,6 +625,31 @@ static void PrepareBookResearchScene(void)
             FlagSet(FLAG_EC_MEGA_REWARD_DIANCITE);
         LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM, 12, 12);
         break;
+    case 28: // Finite travel-paper delivery without blocking Center healing.
+    {
+        const enum Item tools[] = {ITEM_POKE_VIAL, ITEM_LEVELER, ITEM_REPEL_SPRAY, ITEM_FLIGHT_BEACON};
+        ClearBag();
+        if (!missing)
+            for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
+                AddBagItem(tools[i], 1);
+        VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+        FlagSet(FLAG_EC_EARNED_SS_TICKET);
+        FlagSet(FLAG_EC_EARNED_EON_TICKET);
+        FlagSet(FLAG_EC_EARNED_OLD_SEA_MAP);
+        FlagSet(FLAG_EC_EARNED_AURORA_TICKET);
+        FlagSet(FLAG_ENABLE_SHIP_NAVEL_ROCK);
+        if (gEcHeadlessFixtureParam & 0x100)
+        {
+            struct BagPocket *pocket = &gBagPockets[POCKET_KEY_ITEMS];
+            for (u32 slot = missing ? 0 : ARRAY_COUNT(tools); slot < pocket->capacity; slot++)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_BASEMENT_KEY, 1);
+        }
+        // An observable healing outcome, not merely the offer text.
+        u16 hp = 1;
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 4);
+        break;
+    }
     case 27:
         FlagSet(FLAG_SYS_USE_FLASH);
         LoadHeadlessMap(MAP_GRANITE_CAVE_B2F, 12, 11);
@@ -1154,6 +1184,7 @@ static bool32 IsHeadlessSummaryStateObserved(void)
 
 void EmeraldChampionsHeadlessObserve(void)
 {
+    EmeraldChampionsStudioPoll();
     EmeraldChampionsAgentPrepPoll();
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
      && (gEcHeadlessFixtureParam == 275 || gEcHeadlessFixtureParam == 276)
@@ -1967,7 +1998,34 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         return;
     }
 
+    if (scenario == EC_HEADLESS_SCENARIO_STUDIO_RESUME)
+    {
+        ReloadSave();
+        gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;
+        return;
+    }
     PrepareHeadlessNewGame();
+    if (scenario == EC_HEADLESS_SCENARIO_STUDIO_NEW)
+    {
+        // An explicitly synthetic playground. Battles always resolve natively.
+        gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 14, OTID_STRUCT_PLAYER_ID);
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 14, OTID_STRUCT_PLAYER_ID);
+        CalculatePlayerPartyCount();
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE);
+        if (gEcHeadlessFixtureParam == 4)
+        {
+            VarSet(VAR_PETALBURG_CITY_STATE, 1);
+            VarSet(VAR_PETALBURG_GYM_STATE, 0);
+            LoadHeadlessMap(MAP_PETALBURG_CITY_GYM, 4, 108);
+        }
+        else if (gEcHeadlessFixtureParam == 7)
+            LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, 5, 4);
+        else
+            LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 6);
+        return;
+    }
 
     if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY
      || scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC)
@@ -2508,7 +2566,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
                     FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
                     FlagClear(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
-                    VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, 0);
                     AddBagItem(ITEM_OLD_AMBER, 1);
                     if (scene == 280) AddBagItem(ITEM_AERODACTYLITE, 1);
                     if (scene == 279 || scene == 283)
@@ -3086,8 +3143,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     else if (gEcHeadlessFixtureParam == 171)
                     {
                         FlagClear(FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN);
-                        FlagClear(FLAG_RECEIVED_HM_DIVE);
-                        VarSet(VAR_STEVENS_HOUSE_STATE, 1);
+                        FlagSet(FLAG_RECEIVED_HM_DIVE);
+                        FlagSet(FLAG_EC_REPORT_C42_COMPLETE);
+                        VarSet(VAR_STEVENS_HOUSE_STATE, 2);
                         LoadHeadlessMap(MAP_MOSSDEEP_CITY_STEVENS_HOUSE, 3, 7);
                     }
                     else
@@ -3573,10 +3631,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     FlagSet(FLAG_HIDE_ROUTE_119_SCOTT);
                     if (gEcHeadlessFixtureParam >= 89)
                     {
-                        // Synthetic full stores: test owed-HM recovery, not normal item availability.
-                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_HM_FLY)];
-                        for (slot = 0; slot < pocket->capacity; slot++)
-                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_HM_SURF, 1);
+                        // Full storage must not affect direct field-license registration.
+                        FillHeadlessKeyPocket();
                         for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
                             gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
                     }
@@ -3735,7 +3791,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             {
                 FlagSet(FLAG_BADGE03_GET);
                 FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
-                AddBagItem(ITEM_HM_ROCK_SMASH, 1);
                 FlagClear(FLAG_RUSTURF_TUNNEL_OPENED);
                 FlagClear(FLAG_RECEIVED_HM_STRENGTH);
                 FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1);
@@ -4001,13 +4056,13 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 AddPCItem(ITEM_LETTER, 1);
             else if (gEcHeadlessFixtureParam == 2)
             {
-                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_CHARIZARDITE_X)];
+                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_AERODACTYLITE)];
                 FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
                 FlagSet(FLAG_BADGE02_GET);
                 VarSet(VAR_STARTER_GEN, 1);
                 VarSet(VAR_STARTER_MON, 1);
-                // Isolate the existing starter-stone retry fixture after the Aero entitlement.
-                FlagSet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
+                // Ring already delivered; the one Aerodactylite reward still needs space.
+                FlagClear(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE);
                 AddBagItem(ITEM_MEGA_RING, 1);
                 for (slot = 0; slot < pocket->capacity; slot++)
                     BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_VENUSAURITE, 1);

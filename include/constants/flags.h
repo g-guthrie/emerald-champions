@@ -747,7 +747,7 @@
 #define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
 #define FLAG_EC_RUSTBORO_GREAT_BALL_PENDING    0x2B5 // Separate rescue reward entitlement.
 #define FLAG_EC_BIRCH_GREAT_BALLS_PENDING      0x2B6 // Ten-ball send-off gift; never locks Route102.
-#define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
+#define FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE 0x2B7
 #define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
 #define FLAG_UNUSED_0x2B9  0x2B9 // Unused Flag
 #define FLAG_UNUSED_0x2BA  0x2BA // Unused Flag
@@ -1548,16 +1548,16 @@
 #define FLAG_EC_STEVEN_RESEARCH_CONCLUSION              (SYSTEM_FLAGS + 0xAB)
 #define FLAG_EC_ROUTE114_ROD_GIFT                    (SYSTEM_FLAGS + 0xAC)
 #define FLAG_EC_ROUTE118_ROD_GIFT                    (SYSTEM_FLAGS + 0xAD)
-#define FLAG_UNUSED_0x90E                           (SYSTEM_FLAGS + 0xAE) // Unused Flag
-#define FLAG_UNUSED_0x90F                           (SYSTEM_FLAGS + 0xAF) // Unused Flag
-#define FLAG_UNUSED_0x910                           (SYSTEM_FLAGS + 0xB0) // Unused Flag
-#define FLAG_UNUSED_0x911                           (SYSTEM_FLAGS + 0xB1) // Unused Flag
-#define FLAG_UNUSED_0x912                           (SYSTEM_FLAGS + 0xB2) // Unused Flag
-#define FLAG_UNUSED_0x913                           (SYSTEM_FLAGS + 0xB3) // Unused Flag
-#define FLAG_UNUSED_0x914                           (SYSTEM_FLAGS + 0xB4) // Unused Flag
-#define FLAG_UNUSED_0x915                           (SYSTEM_FLAGS + 0xB5) // Unused Flag
-#define FLAG_UNUSED_0x916                           (SYSTEM_FLAGS + 0xB6) // Unused Flag
-#define FLAG_UNUSED_0x917                           (SYSTEM_FLAGS + 0xB7) // Unused Flag
+#define FLAG_EC_REPORT_C45_COMPLETE                 (SYSTEM_FLAGS + 0xAE)
+#define FLAG_EC_SURVEY_FLIGHT_ARRIVAL                (SYSTEM_FLAGS + 0xAF)
+#define FLAG_EC_RESOLVED_SOUTHERN_LATI              (SYSTEM_FLAGS + 0xB0)
+#define FLAG_EC_FERRY_ARRIVAL_PENDING               (SYSTEM_FLAGS + 0xB1)
+#define FLAG_EC_RESOLVED_REGIROCK                    (SYSTEM_FLAGS + 0xB2)
+#define FLAG_EC_RESOLVED_REGICE                    (SYSTEM_FLAGS + 0xB3)
+#define FLAG_EC_RESOLVED_REGISTEEL                    (SYSTEM_FLAGS + 0xB4)
+#define FLAG_EC_RESOLVED_DIANCIE                    (SYSTEM_FLAGS + 0xB5)
+#define FLAG_EC_RESOLVED_JIRACHI                    (SYSTEM_FLAGS + 0xB6)
+#define FLAG_EC_RECEIVED_EON_TICKET                     (SYSTEM_FLAGS + 0xB7)
 #define FLAG_UNUSED_0x918                           (SYSTEM_FLAGS + 0xB8) // Unused Flag
 #define FLAG_UNUSED_0x919                           (SYSTEM_FLAGS + 0xB9) // Unused Flag
 #define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag

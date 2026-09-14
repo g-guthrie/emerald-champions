@@ -431,15 +431,21 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_DadApproachPlayerMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_DadApproachPlayerFemale
 	msgbox PlayersHouse_1F_Text_TicketFromBrineyCameForYou, MSGBOX_DEFAULT
+	setvar VAR_0x8004, ITEM_SS_TICKET
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, PlayersHouse_1F_EventScript_SSTicketDelivered
 	giveitem ITEM_SS_TICKET
 	goto_if_eq VAR_RESULT, FALSE, PlayersHouse_1F_EventScript_ArchiveSSTicket
-	goto PlayersHouse_1F_EventScript_ReceivedSSTicket
+	goto PlayersHouse_1F_EventScript_SSTicketDelivered
 	end
 
 PlayersHouse_1F_EventScript_ArchiveSSTicket::
 	addpcitem ITEM_SS_TICKET
 	goto_if_eq VAR_RESULT, FALSE, PlayersHouse_1F_EventScript_SSTicketNoRoom
 	msgbox PlayersHouse_1F_Text_SSTicketSentToPC, MSGBOX_DEFAULT
+
+PlayersHouse_1F_EventScript_SSTicketDelivered::
+	setflag FLAG_RECEIVED_SS_TICKET
 
 PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	msgbox PlayersHouse_1F_Text_PortsInSlateportLilycove, MSGBOX_DEFAULT
@@ -453,7 +459,6 @@ PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_DadExitsFemale
 	playse SE_DOOR
 	removeobject VAR_0x8009
-	setflag FLAG_RECEIVED_SS_TICKET
 	delay 30
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_MomApproachPlayerMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_MomApproachPlayerFemale

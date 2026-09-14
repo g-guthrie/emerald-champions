@@ -87,11 +87,15 @@ SouthernIsland_Interior_EventScript_Lati::
 	end
 
 SouthernIsland_Interior_EventScript_LatiCaught::
+	setflag FLAG_EC_RESOLVED_SOUTHERN_LATI
+	msgbox SouthernIsland_Exterior_Text_ContinueJourney, MSGBOX_DEFAULT
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
+	setflag FLAG_EC_RESOLVED_SOUTHERN_LATI
+	msgbox SouthernIsland_Exterior_Text_ContinueJourney, MSGBOX_DEFAULT
 	goto Common_EventScript_LegendaryResting
 	end
 

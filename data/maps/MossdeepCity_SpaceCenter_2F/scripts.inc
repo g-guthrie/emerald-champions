@@ -34,6 +34,8 @@ MossdeepCity_SpaceCenter_2F_OnFrame:
 	.2byte 0
 
 MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts::
+	call EC_RequireHideout
+	call EC_RequireMind
 	goto_if_defeated TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_EventScript_FirstLegComplete
 	playse SE_PIN
 	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
@@ -213,6 +215,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_Maxie::
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Steven::
+	call EC_RequireHideout
+	call EC_RequireMind
 	lockall
 	goto_if_not_defeated TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_2F_EventScript_TabithaStillGuarding
 	goto_if_set FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER, MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
@@ -355,7 +359,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	removeobject LOCALID_SPACE_CENTER_2F_STEVEN
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_MAGMA_NOTE
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
-	setvar VAR_STEVENS_HOUSE_STATE, 1
+	setvar VAR_STEVENS_HOUSE_STATE, 2
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	removeobject LOCALID_SPACE_CENTER_2F_SCIENTIST
 	setobjectxyperm LOCALID_SPACE_CENTER_2F_SCIENTIST, 5, 6
@@ -566,13 +571,16 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp:
 	.string "ARCHIE before he awakens KYOGRE.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
-	.string "STEVEN: Thank you, {PLAYER}.\n"
-	.string "Together, we kept the staff and\l"
-	.string "their research safe.\p"
-	.string "Come to my home west of the GYM.\n"
-	.string "I have DIVE for you.\p"
-	.string "You'll need it to follow AQUA's\n"
-	.string "stolen submarine.$"
+	.string "STEVEN: We kept the staff safe.\n"
+	.string "But MAGMA wanted more than fuel.\p"
+	.string "They were studying the Center's\n"
+	.string "meteorite readings. BIRTH ISLAND\l"
+	.string "still carries that disturbance.\p"
+	.string "Your DIVE license and passage to\n"
+	.string "BIRTH ISLAND are earned. LILYCOVE\l"
+	.string "HARBOR can take you there.\p"
+	.string "Speak to the scientist here\n"
+	.string "before sailing.$"
 
 MossdeepCity_SpaceCenter_2F_EventScript_BirthIslandBriefing::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_BirthIslandBriefing, MSGBOX_DEFAULT
@@ -580,10 +588,15 @@ MossdeepCity_SpaceCenter_2F_EventScript_BirthIslandBriefing::
 	end
 
 MossdeepCity_SpaceCenter_2F_Text_BirthIslandBriefing:
-	.string "Your BIRTH ISLAND clearance is\n"
-	.string "registered at LILYCOVE HARBOR.\p"
-	.string "The readings aren't random. Take\n"
-	.string "the shortest route between each\l"
-	.string "position of the triangle.\p"
-	.string "Extra steps disturb the pattern.\n"
-	.string "A reset costs no ticket or reward.$"
+	.string "MAGMA studied our meteorite\n"
+	.string "readings. The disturbance at\l"
+	.string "BIRTH ISLAND is still active.\p"
+	.string "Your clearance is registered at\n"
+	.string "LILYCOVE HARBOR. Sail from there\l"
+	.string "to investigate the triangle.\p"
+	.string "Take the shortest route between\n"
+	.string "its successive positions. Extra\l"
+	.string "steps reset the pattern.\p"
+	.string "The harbor sailor can bring you\n"
+	.string "back. A reset costs no ticket\l"
+	.string "or reward.$"

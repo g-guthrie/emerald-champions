@@ -5,7 +5,8 @@ AbandonedShip_CaptainsOffice_EventScript_CaptSternAide::
 	lock
 	faceplayer
 	goto_if_set FLAG_EXCHANGED_SCANNER, AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus
-	checkitem ITEM_SCANNER
+	setvar VAR_0x8004, ITEM_SCANNER
+	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner
 	goto_if_set FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER, AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus
 	msgbox AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner, MSGBOX_DEFAULT
@@ -25,13 +26,17 @@ AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus::
 AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner:
 	.string "I'm investigating this ship on behalf\n"
 	.string "of CAPT. STERN.\p"
-	.string "He also asked me to find a SCANNER,\n"
-	.string "but I haven't had any success…$"
+	.string "The SCANNER is in the lower rooms.\n"
+	.string "DIVE through the flooded cabin\l"
+	.string "to reach their numbered corridor.\p"
+	.string "Start in ROOM 3. Watch for a glint\n"
+	.string "when you enter; each key opens\l"
+	.string "the room with the same number.$"
 
 AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner:
 	.string "Oh! That's a SCANNER!\p"
 	.string "Listen, can I get you to deliver that\n"
-	.string "to CAPT. STERN?\p"
+	.string "to CAPT. STERN at SLATEPORT HARBOR?\p"
 	.string "I want to investigate this ship a\n"
 	.string "little more.$"
 

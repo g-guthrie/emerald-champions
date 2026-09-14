@@ -1,0 +1,57 @@
+{
+  "name": "C45 \u2014 Chamber doors and three destinations",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_REGI_DOORS_OPENED": false,
+      "FLAG_EC_REPORT_C43_COMPLETE": true,
+      "FLAG_EC_REPORT_C44_COMPLETE": true,
+      "FLAG_EC_REPORT_C26_COMPLETE": true,
+      "FLAG_EC_REPORT_C30_COMPLETE": true
+    }
+  },
+  "warp": {
+    "map": "SealedChamber_InnerRoom",
+    "x": 10,
+    "y": 5,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 180,
+      "label": "Three records"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 3800,
+      "until": "idle",
+      "label": "Distant doors answer"
+    }
+  ],
+  "queries": {
+    "doors": {
+      "kind": 1,
+      "id": "FLAG_REGI_DOORS_OPENED"
+    },
+    "completed": {
+      "kind": 1,
+      "id": "FLAG_EC_REPORT_C45_COMPLETE"
+    },
+    "money": {
+      "kind": 9
+    }
+  },
+  "expect": {
+    "ready": true,
+    "cap": 78,
+    "queries": {
+      "doors": 1,
+      "completed": 0,
+      "money": 6000
+    }
+  }
+}

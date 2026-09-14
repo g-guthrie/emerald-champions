@@ -1,0 +1,39 @@
+{
+  "name": "c35 onward voyage",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 6500,
+      "until": "idle",
+      "label": "Scene completes"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "FarawayIsland_Entrance",
+    "contains_text": "MEW"
+  },
+  "warp": {
+    "map": "SouthernIsland_Exterior",
+    "x": 13,
+    "y": 22,
+    "facing": 1
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_RESOLVED_SOUTHERN_LATI": true,
+      "FLAG_EC_EARNED_OLD_SEA_MAP": true,
+      "FLAG_ENABLE_SHIP_FARAWAY_ISLAND": true
+    },
+    "vars": {}
+  }
+}

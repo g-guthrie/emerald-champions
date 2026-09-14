@@ -5,7 +5,7 @@ EMERALD CHAMPIONS — GAME GUIDE, V4
 
 This book explains the game we are making. It owns the intended experience, story and design choices. Its short guide is followed by a generated reference containing exact teams, world data and source dialogue. Source files own those records; the reference is rebuilt and checked automatically. Test logs and development diaries stay outside the book. When a design changes, update this guide only where the experience changes and update the corresponding source at the same time.
 
-Current focus: comprehensively audit every retained trainer in first-access order, starting after Rustboro Gym. The Cut-enclosure block and the Rusturf-to-Dewford team designs are implemented; the seven Brawly Gym designs, seven first-arrival beach/Seashore House designs and the reviewed blocks through Flannery are implemented:131 first-access encounters, including optional summit/Lavaridge battles and the early Ashen Woods detour. The retained roster is341 encounters; Gina and Mia remain an explicit keep. The current task is the question-led design audit, with each trainer discussed in chat; full battle benchmarks and exhaustive AI validation are separate later work and do not block the next design group. The later earned C15 playthrough is a separate, paused development run; its save and unfinished Dwayne experiment are described in docs/CONTINUE.md. Reviewed teams are not automatically difficulty-tested. Later chapters below describe the intended campaign; native play and scene acceptance are unfinished.
+Current focus: finish the integrated AI/Mega/release work, then audit major battle groups first: Elite Four/Champion, whole Gyms, Magma/Aqua arcs and the remaining trainers. The Cut-enclosure block and the Rusturf-to-Dewford team designs are implemented; the seven Brawly Gym designs, seven first-arrival beach/Seashore House designs and the reviewed blocks through Flannery are implemented:131 first-access encounters, including optional summit/Lavaridge battles and the early Ashen Woods detour. The retained roster is341 encounters; Gina and Mia remain an explicit keep. The current task is the question-led design audit, with each trainer discussed in chat; full battle benchmarks and exhaustive AI validation are separate later work and do not block the next design group. The later earned C15 playthrough is a separate, paused development run; its save and unfinished Dwayne experiment are described in docs/CONTINUE.md. Reviewed teams are not automatically difficulty-tested. Later chapters below describe the intended campaign; native play and scene acceptance are unfinished.
 
 1. THE EXPERIENCE
 -----------------
@@ -38,107 +38,459 @@ Field access requires the relevant badge and license. Cut: Rustboro cutter, usab
 3. THE CAMPAIGN
 ---------------
 
-This is one connected adventure: two partners and the Gym journey lead into stolen survey equipment, the old land/sea accounts, the teams' misuse of those discoveries, and the eventual weather crisis. Required exploration must have a clear local reason and an explicit next destination. Optional captures are not story keys unless a chapter explicitly requires a species. A report means a consequential conversation, not repeated generic errands.
+ONE STORY AND ONE REQUIRED ORDER
+The required story spine is C01 → first-arrival C03 access → C02 → C04 → C05 → C07 → C08 → C09 → C10 → C12 → C13 → C14 → C16 → C17 → C18 Wally → C19 → C20 reunion → C22 → C23 → C24 → C25 → C26 → C27 → C28 → C29 → C30 → C31 rival/Scope/Winona → C32 rival/harbor → C34 first voyage → C35 → C36 → C37 → C38 → C39 → C40 → C41 → C42 → C43 → C44 → C45 chamber and three ruins → C46 → C47 → C48 → C49 → C50.
 
-C01 — Two partners. Choose both starters and rescue Birch. His encouragement begins the journey. Go north through Route101 to Oldale before meeting the rival.
+STORY GATE ENFORCEMENT — SEPTEMBER14 USER DIRECTION
+Transitions enforce required accomplishments rather than relying on suggested dialogue: museum after Dewford; Wattson after museum/Wally; Flannery after Chimney; Norman after C26; Weather Institute after C28; Winona after C30 and Scope; new expedition permissions after survey/Scope/Winona and the Lilycove rival; Magma Maxie after C36; Heatran after Maxie's completed Groudon scene; submarine theft/Aqua finale after Heatran; twins after Aqua finale; Space Center after twins; Birth Island after Space Center; Scanner report after Deoxys; Seafloor climax after Space Center/Deoxys/C45; Juan after crisis; Diancie/Jirachi after Badge8; League after Steven's C48 conclusion and eight badges. Earned return transport and healing remain available. Blocked interactions explain the prerequisite and destination. Kyogre's awakening still leads immediately through Sootopolis and Sky Pillar, with no intervening side quest.
 
-C03 — First-arrival Oldale. Heal and prepare before the first real trainer test. Services and basic catching supplies are already available; the chapter number is not an access lock. Go north to Route103.
+C06, C11, C15, C21, C33 and optional services within other chapters are route/preparation opportunities, not requirements to spend, breed, harvest, collect or win optional fights. Required licenses and story interactions at those places remain explicitly named. Story scenes gate the next required event in this spine. Ordinary healing, return transport, preparation and access to already-open habitats remain available. Kartana's preserved access is not changed by this ordering.
+Research is what characters sometimes do within this story; it is not a second progression track. Internal report/accomplishment identities may record persistence, but the player receives concrete dialogue and consequences. Generic report turn-ins do not become extra stages. Capturing a named legendary is optional unless an explicitly optional acquisition itself requires it.
 
-C02 — Rival and send-off. Battle the unchosen starter and its partners, then return to Birch's lab for the Pokédex and supplies. A pending gift cannot block send-off. Travel west from Oldale through Route102 toward Norman.
+C01 — A journey with two partners
+Choose both starters and rescue Birch in the existing opening. Birch sees that you can coordinate a pair and encourages the journey. Preserve the rival's remaining-third-starter rule. Initial cap: 14.
 
-C04 — Norman and Wally. Meet Norman and help Wally begin. Establish the personal relationship that will return at Mauville and Victory Road. Norman directs the player west and north through Petalburg Woods to Roxanne.
+Retained exact contract:
+Starter identity contract: record generation, first selected starter and second selected starter independently. The rival uses the remaining third regional starter, as 7.1 GetEmeraldChampionsRivalStarterIndex does; character gender selects the presentation variant. Old TRAINER ID suffixes are not a reason to give the rival one of the player’s selected partners. Both starter ownership records stay separate.
 
-C05 — Woods ambush. Defend the Devon employee and his survey records. Keep the existing approach scene and habitats. His gratitude and onward journey motivate the later Rustboro theft; send the player north rather than back to another report.
+PLAYER HANDOFF — Birch at the rescue/send-off interaction:
+“Go north from Littleroot along Route 101 to Oldale. Heal and prepare at its Pokémon Center, then take the north exit to Route 103 and meet your rival.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C06 — Rustboro. Explore specialists, obtain the Cut license and optionally trade for Fidough or buy evolutions. The Gym remains the immediate objective. Cut becomes usable after the badge.
+C03 — Oldale before the first real test
+On the first visit, the Center gives practical access to preparation, healing, storage, the Leveler and catching supplies. Let the player try those services before continuing north. This stop supplies the tools for the game without making every tutorial mandatory.
 
-C07 — Roxanne. Four distinct six-member rooms culminate in Mega Aerodactyl-led fossil offense. Josh has living minerals; Tommy a fossil reef; Marc prehistoric Power Spot support. Roxanne uses Tailwind, not Trick Room. She explains Mega Evolution and awards Old Amber with Devon revival directions. Earn cap20, then meet the employee about the theft.
+Retained exact contract:
+ACCESS CLARIFICATION: these services are available on FIRST arrival in Oldale, before E0001 on Route103. The chapter numbering is not a service lock. Free preparation/healing, basic Balls, normal catching and storage must work before that prepared rival; Pokédex/send-off completion afterward is not a prerequisite. C02 therefore includes the optional Oldale preparation stop before its rival sub-event.
 
-C08 — Rusturf rescue. Follow Route116 east, confront the thug, recover the goods and rescue Peeko. Briney's gratitude establishes future transport. Return west to the Devon employee.
+Oldale's west-exit blocker gives the same current direction when spoken to or approached through the blocked path: prepare at the Center and meet the rival through the north exit before that battle; afterward, follow Route101 south to Birch's Littleroot lab for the send-off. The Leveler explanation identifies both badges and major discoveries as cap milestones.
 
-C09 — Devon. Mr. Stone connects Steven's letter and Stern's survey equipment. Deliveries become the next journey through Dewford to Slateport. Fossil revival is a free optional service, not a required extra report.
+PLAYER HANDOFF — Oldale Center service NPC:
+“Your rival is waiting on Route 103, through Oldale's north exit. You can heal, change your team and collect basic Balls here before you go.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C10 — Briney's passage. Sail from the existing Route104 cottage to Dewford. Preserve the boarding choreography and the captain's relationship to Peeko.
+C02 — Rival and send-off
+Fight the rival on Route103, then return to Birch for the Pokédex and send-off. Birch's ten Great Balls use Bag then item-PC delivery; if neither fits, a Center nurse holds the gift while the send-off and Route102 access still complete. The rival's interest in your unusual two-partner journey establishes the recurring competitive relationship. Your immediate aim is Norman's Gym in Petalburg. The Pokédex retains its native information pages. Forms are selectable across a paged grid, including the complete Alcremie family; moving beyond a page shows the next forms, B leaves selection, and START returns to Evolutions. Form selection and exits release their icons before opening the next screen. Evolution selection also retains every displayed target at the ten-row boundary, including Eevee's stone and location alternatives; cursor offsets never overwrite species records.
 
-C11 — Dewford discovery. Town, meadow and manor conversation links expedition records to Steven. Orient the player toward Granite Cave, Brawly and the meadow; fishing and trades are optional. Explain where to obtain a Sing-capable Pokémon before the musical scene.
+PLAYER HANDOFF — Rival after battle; Birch after the return:
+“After the battle: return south through Oldale to Professor Birch's lab in Littleroot. After the lab send-off: go back to Oldale, take the west exit onto Route 102, and continue to Petalburg Gym to meet Norman.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C12 — Letter to Steven. Deliver the letter in Granite Cave. The hiker's Flash license supports this first journey. Steven connects geology with the manor's accounts and directs the investigation onward.
+C04 — Norman and Wally
+Travel west to Petalburg. Norman explains that earning the other badges will prepare you to challenge him. Help Wally, whose uncertain beginning contrasts with the trainer he will become. Continue toward Rustboro through the woods.
 
-C13 — Brawly and bracelet. Beat Brawly, then return to Steven in Granite Cave; Brawly repeats these exact directions. Steven gives the bracelet and Aerodactylite, with independent supported-starter stone entitlements. Each chosen starter's receipt is separate; unsupported Mega lines receive no invented stone. The Ring does not require owning Aerodactyl or completing fossil revival.
+PLAYER HANDOFF — Norman after Wally's scene:
+“Leave Petalburg to the west for Route 104. Follow it north through Petalburg Woods to Rustboro, where Roxanne runs the first Gym.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C14 — Manor and song. Investigate the manor and perform the meadow song with the indicated local resource. Witness the Meloetta discovery; ownership is optional. The account introduces the crystal mystery beneath Sootopolis and leads back to Stern's observations. Finish at cap24 and sail to Slateport.
+C05 — The ambush in Petalburg Woods
+Rescue the Devon employee from the grunt. His survey records accompany Devon’s survey equipment, which is bound for Slateport; he does not yet know why the teams want their work. The attempted theft gives the player a personal reason to help when the equipment is stolen in Rustboro after Roxanne. Keep the existing woods scene, Rustboro theft scene and local habitats. Woods left/right approaches share the same reward branch; on full Bag the researcher names any Center nurse as the reclaim source, then exits normally. The later Rustboro one-ball reward uses a distinct receipt and likewise cannot hold up the Devon escort.
 
-C15 — Slateport. The market offers optional preparation and evolution choices. Find Stern at the shipyard/museum. No shopping tutorial or purchase threshold blocks the mission.
+PLAYER HANDOFF — Rescued Devon employee:
+“Continue north through Petalburg Woods and Route 104 to Rustboro. Challenge Roxanne at the Gym; I'll meet you in town about Devon's survey equipment.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C16 — Museum conflict. Deliver the goods and stop Aqua's attempt to seize the marine survey equipment. Their underwater search becomes clear. Keep the retained grunt and Archie; the redundant middle fight stays retired. Reach cap30 and travel inland.
+C06 — Rustboro
+Meet the local specialists and obtain the existing Cut license. Evolution purchases and the Fidough trade remain optional choices. Devon's problem is unresolved, but the city's Gym challenge is the player's immediate step toward being able to travel farther.
+The Center explains that IVs default to31 and remain freely adjustable through the tutor's Edit Stats service.
 
-C17 — Route110 rival. The rival notices the investigation but tests the player as a trainer. Keep that personal competition alongside the larger story. Continue north to Mauville.
+PLAYER HANDOFF — Rustboro specialist/cutter; Gym attendant:
+“Roxanne is in Rustboro Gym. Prepare at the Center first if you need to. The Cut license is available from the town's cutter, but field use starts after Roxanne's badge.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C18 — Wally and Mauville. Resolve Wally's challenge, obtain Rock Smash and bike access, and prepare for Wattson. Game Corner purchases are optional, never purchased story clues.
+C07 — Roxanne
+Defeat Roxanne. Her interest in stones provides a natural early connection to Steven without turning the Gym into a research exam. Earn the badge, stipend and cap 20; Cut can now open its intended routes. Roxanne gives Old Amber now and names Devon's second-floor restoration lab. Steven gives Aerodactylite with the Mega Ring after Brawly. Roxanne gives no Mega Stone and never requires a return claim; her fossil receipt remains independent.
 
-C19 — Wattson. Win the Dynamo Badge and cap34. Establish Wattson's power expertise for the later generator problem. Rock Smash opens the next route.
+PLAYER HANDOFF — Roxanne's closing line; Devon employee outside:
+“Meet the Devon employee in Rustboro about the theft. Then take Rustboro's east exit onto Route 116 and enter Rusturf Tunnel to recover the goods and rescue Peeko.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C20 — Tunnel reunion. Visit Verdanturf and reunite the couple through Rusturf, paying off the earlier blocked passage. Receive Strength, usable after Flannery. Day Care, breeding and local gifts remain optional.
+C08 — Rusturf Tunnel
+Follow the thief, recover the goods and rescue Peeko. The theft becomes more personal through Briney, who promises transport in gratitude. Return the recovered equipment to Devon.
 
-C21 — Ash country. Follow the northern route toward Fallarbor and Meteor Falls. Existing residents explain the volcano and team activity. Soot collection is an optional side activity, never the reason the main story waits.
+PLAYER HANDOFF — Briney and the Devon employee:
+“Return west along Route 116 to Rustboro. Show the recovered goods to the Devon employee by the town's east entrance; he takes you upstairs to Mr. Stone at Devon. Briney promises a voyage in thanks and will wait at his cottage on Route 104, south of Petalburg Woods.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C22 — Meteor Falls and summit. Discover the meteorite theft and stop Magma at Mt. Chimney. Modern equipment and old accounts now serve the same dangerous search. Preserve the authored multi battle and retained summit opponents; no duplicate grunt leg. Resolve the local disturbance and reach cap40.
+C09 — Devon and the two deliveries
+Mr. Stone explains that the attempted theft concerns both Steven's work and Stern's marine surveys. The letter and equipment deliveries are one sensible journey through Dewford to Slateport. Devon funds the travel. Fossil revival remains an optional return service, not another report requirement.
+If both the Key Items pocket and item PC are full, Mr. Stone holds the letter and the automatic introduction ends. Speaking to him retries delivery without replaying the escort; successful delivery then completes the PokéNav, travel funding and Briney handoff once.
 
-C23 — Flannery. Defeat her in Lavaridge, reach cap44 and receive the established onward access. Her local perspective leads toward trouble in Ashen Woods. Wynaut and other optional gifts retain their identity.
+PLAYER HANDOFF — Mr. Stone:
+“Go south from Rustboro through Petalburg Woods to Briney's cottage on Route 104. Ask him to sail to Dewford. Find Steven in Granite Cave, northwest of Dewford; afterward take Stern's goods onward to Slateport.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C24 — Ashen rescue. The caretaker is the existing Route111 nurse beside the woods. Preserve her position and the Chansey chase. Her repeat dialogue points to Moltres and, afterward, Sandstrewn Ruins.
+C10 — Briney's first passage
+Sail to Dewford with the captain you helped. Keep the existing boarding and departure choreography. This relationship will make his later return for the offshore voyage feel earned.
 
-C25 — Moltres's roost. Use the existing actor, a restrained tremor/cry and the encounter to show a local consequence of the summit disturbance. Victory or capture resolves it; catching is optional. The caretaker explains the northern ruins lead.
+PLAYER HANDOFF — Briney on arrival at Dewford:
+“Find Steven in Granite Cave: leave Dewford north onto Route 106 and follow the shore west to the cave. You can return to me here whenever you need passage.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C26 — Desert safeguards. Investigate the old warnings and their incomplete account of land and sea. Complete the authored discovery and reach cap48. Do not require random capture or archaeology currency to resume the Gym journey.
+C11 — Dewford's town and meadow
+Local conversation connects the manor's old expedition records to Steven's visit. Orient the player toward Granite Cave, the Gym and the meadow. Fishing and the Tropius trade remain optional. Make the Sing requirement discoverable before the musical scene is attempted.
 
-C27 — Norman. Defeat him, earn Surf from Wally's family and reach cap50. This is both a personal payoff and access east. Wattson now needs help at New Mauville across Route110's water.
+PLAYER HANDOFF — Meadow warden; Dewford local:
+“Steven is in Granite Cave, northwest of town. After the letter and Brawly's Gym, visit the manor in Dewford Meadow, through the west exit from town. The manor historian and the meadow warden explain the two parts of the discovery.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C28 — New Mauville. Resolve the restarting generator and Rotom encounter. Wattson sends the readings to the Institute himself; the player is already traveling that way. Conversation/completion earns cap52 and research access, independently of pending Electirizer delivery or Rotom capture.
+C12 — Steven in Granite Cave
+Deliver the letter. Steven recognizes a connection between Devon's stolen survey equipment and old accounts preserved on Dewford. He asks you to look at the manor while he follows the geological evidence. The player continues through the island's existing locations. The Granite Cave hiker grants the Flash field license on this first visit. Flash requires the Stone Badge and that license, so the lower floors light on entry before Brawly; no party move slot or Knuckle Badge is required for this first letter journey.
 
-C29 — Weather Institute. Cross the river and climb Route119. Aqua's occupation follows naturally from its weather/sea search. Defeat the occupiers and receive Castform. The staff arrange direct transport to compare the readings at the elevated ruins.
+PLAYER HANDOFF — Steven in Granite Cave:
+“Return to Dewford and challenge Brawly in the Gym. After Brawly, return to Steven in his room deep inside Granite Cave, northwest of Dewford. Speak to him to receive the Mega Ring and Aerodactylite. Steven then sends you west from Dewford into the meadow and manor.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C30 — Elevated survey. Take Castform on the Institute's round trip. Its weather response and Landorus encounter reveal the contrast with the offshore readings. Capture is optional and a replacement/recovery route for required Castform remains available. Return by the same service and reach cap56.
+C13 — Brawly and Mega access
+Defeat Brawly, then return to Steven in his Granite Cave room to complete the letter/badge/Ring handoff. Brawly explicitly repeats those directions after the battle. Brawly's coordination test and the Ring expand the player's practical options. Steven supplies Aerodactylite with the Ring; every other stone, including starter-family stones, comes from its single established world source. Preserve the original overlapping Lilith/Brenden approach as ordinary back-to-back trainer encounters. Brenden may challenge immediately after Lilith, creating first-pass endurance pressure, but each victory persists independently. Losing to Brenden leaves Lilith defeated; the player can heal, rearrange the team and return to Brenden alone. Do not impose a full reset merely because sight lines overlap. Separately announced, deliberately balanced endurance challenges may require a restart from their first fight.
 
-C31 — Fortree. Resolve the Route119 rival and Steven's Scope obstacle without requiring Kecleon ownership. Beat Winona, reach cap60 and unlock personal Fly. Steven connects the findings to Stern's offshore work; continue east to Lilycove.
+Retained exact contract:
 
-C32 — Harbor arrangements. Fight the rival, then meet the existing harbor staff. Devon and Stern have compared the old expedition with coastal readings. Earn SS Ticket, Eon Ticket and Old Sea Map travel permissions together, without a Rustboro errand or bag-space gate.
+C13 MEGA STONE ACCESS
+Each of the99 item-based Mega Stones has exactly one authored acquisition source. Keep established world locations and remove overlapping trainer, story and starter gifts. Starter choices never create an additional stone entitlement. Charizardite X and Charizardite Y are different stones with their own individual locations. A full-storage retry belongs to the same original reward and keeps its original receipt. PC RELEASE refuses a Pokémon holding a protected item, including a Mega Stone, and asks the player to remove it first; releasing the holder must never delete the finite stone. The existing PC field-move safeguards also count non-Egg species compatible with an unlocked license, across party and boxes; an empty battle-move slot is neither loss nor proof of that capability.
 
-C33 — Mainland preparation. Lilycove's store and services are optional choices before departure. The harbor already names the route and offers passage. No spending or cabin-clear requirement is added.
+PLAYER HANDOFF — Steven in Granite Cave after the Ring handoff:
+“Go west from Dewford into Dewford Meadow and enter the manor. Read the historian's account, then speak to the meadow warden with any Pokémon that knows Sing. The Jigglypuff inside the manor already know it.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C34 — S.S. Tidal. Give the player breathing room, useful conversations and Briney's personal connection. Keep the healing bed and Reaper Cloth gift. Five passenger fights are optional. The substantial story voyage happens once; later transport remains convenient.
+C14 — The manor and the song
+The manor investigation and meadow performance reveal the next part of the old account: earlier travelers saw related phenomena across the land and sea, and left a lead toward a crystal chamber beneath Sootopolis. The song/Meloetta discovery is something the player witnesses. Meloetta ownership is not a key. Steven's immediate conclusion is that Stern's observations may explain what has changed now. Finish the chapter and reach cap 24, then sail onward to Slateport.
 
-C35 — Southern Island. The sanctuary is the first offshore stop. Resolve the Lati scene and continue directly to Faraway using the earned chart. Ownership is optional; the scene shows a living habitat, not a weapon collection.
+Native scene contract: both contacts direct a player without the Ring back to Steven; do not grant C14 completion while bypassing C13's handoff. The historian records the account after its dialogue and then names the warden southeast of the manor. The first performance shows the actual party singer with the native field-move presentation, plays Sing, pauses for Meloetta's answering cry, and shows the warden's reaction. Commit the song/discovery only after presentation. Repeated interactions do not replay the performance. Either order of account/song closes the chapter once; both contacts repeat the explicit Dewford–Briney–Slateport–Oceanic Museum direction afterward. Meloetta ownership is never required. Missing Sing directs players to nearby manor Jigglypuff that already know the move; any other Sing user is equally valid. All three contacts use natural destination/resource directions without counter coordinates or menu instructions. This replaces the previously text-only performance and missing repeated onward directions; native synthetic and earned execution are recorded below.
+C14 habitat rule: every newly generated wild Jigglypuff in Dewford Manor keeps Sing after random ordinary wild-set assignment. If absent, replace the fourth slot; keep the other moves, species, level, identity, stats, ability and held item. Existing Sing is not duplicated. Capturing preserves the move. Other species' moves, other habitats, authored trainers and player-selectable battle sets are unaffected. This makes the local story hint true at encounter time without a compulsory Center detour. Keep every manor species available. Jigglypuff takes the12% Drowzee slot and Drowzee takes the7% Jigglypuff slot, using the existing custom distribution: this improves access to the required nearby resource without changing global encounter weights. The first11 native encounters without a singer exposed that avoidable story friction; no RNG or earned encounter was rewritten.
 
-C36 — Faraway. Follow Mew's existing chase, resolve the encounter and return with Briney. Reach cap64. The old account now points to the Orbs' custodians at Mt. Pyre; do not send the player through a generic report counter.
+Native C14 scene evidence (2026-09-13): work/c14-song-scene executes the actual singer presentation and answer, then records C14 once and exposes cap24; steps005/006 prove control release and repeated directions without a replay. work/c14-no-singer leaves completion0; work/c14-no-ring leaves song0. Contact sheet work/contact-sheets/c14-song-checked.png contains unmodified native frames. Scope is synthetic prerequisite fixtures, not earned chapter completion. The missing performance/directions were local authored omissions: both manor and meadow contacts are repaired together. Shared TryUnlockLocalLegendaryDiscovery also serves the later Landorus survey; its existing distinct weather/battle scene and progression checks were inspected and retained. Earlier earned handoffs are not re-certified by this source review.
 
-C37 — Orb theft. Witness the teams acting on the same history. The elders explain why the Orbs are dangerous as supposed control devices. Pursue Magma; optional additional legends do not delay the chase.
 
-C38 — Magma Hideout. Confront Maxie and witness Groudon awaken beyond his control. The Magma Stone and a concrete geological clue point to Scorched Slab. Reserve the acute simultaneous land/sea emergency for Kyogre's later awakening.
+Earned C14 evidence (2026-09-13): work/v4-c14-common-singers-play found Jigglypuff on the second natural encounter after the local rate change (thirteenth manor encounter overall). One Great Ball caught it at step009; the native full-party flow stored Kadabra and retained the singer. Steps017–020 show that caught Jigglypuff performing without teaching, the answering cry and explicit onward directions, then return controls with cap24. The native Leveler raised the party to24 and Save028/export029 preserve earned-song-cap24.sav. Contact sheet work/contact-sheets/c14-earned-song.png shows unmodified earned frames. This certifies this chapter path; the whole campaign remains unfinished at36 unique trainer clears.
 
-C39 — Heatran. Use the existing chamber and Magma Stone interaction. Resolve the volcanic aftermath and reach cap68; Heatran does not magically put Groudon back to sleep. Capture and separate Reshiram acquisition are optional. Resume pursuit when the submarine is stolen.
+PLAYER HANDOFF — Historian and meadow warden, whichever closes the chapter:
+“You have completed the manor account and the meadow song; catching Meloetta is optional. Return east to Dewford's shore and ask Briney to sail to Slateport. Find Captain Stern at the Oceanic Museum.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C40 — Aqua Hideout. The equipment, weather and Orb threads converge on Stern's stolen submarine. Stop the hideout operation, open the eastern sea and reach cap72. Aqua's destination remains uncertain; continue to Mossdeep.
+C15 — Slateport arrival
+The market offers optional evolution choices before the next conflict. The player's purpose in town is already clear: find Stern and deliver the equipment. Do not interpose an obligatory shopping tutorial.
 
-C41 — Tate and Liza. Earn the Mind Badge in a major coordinated doubles battle. Steven will supply Dive after the nearby Space Center event. The next threat is local and immediate.
+PLAYER HANDOFF — Slateport Center sailor; Dock at the shipyard:
+“Find Captain Stern for the Devon delivery. Speak to the staff in Slateport's shipyard, then go to the Oceanic Museum and find Stern upstairs. Shopping is optional.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C42 — Space Center. Defend the Center with Steven. He heals before three-Pokémon selection; each of four owners contributes three with one active slot. Restore the full player party after the joint battle. The aftermath earns Dive, Birth Island permission, Beldum's entitlement and cap76. Existing observations establish the island disturbance without a new grunt squad.
+C15 active arrival reconciliation (2026-09-13, still in progress): the existing Center sailor now directs first arrivals to Dock at the southeast waterfront shipyard, names the Mart's optional stones/Linking Cords, redirects to Stern upstairs after Dock, and names Route110/Mauville after the delivery. The rare-Pokémon guide retains its separate Thundurus/Mewtwo leads. The woman beside the blocked museum also names Dock; Dock's first/repeat lines name the Oceanic Museum upstairs, northeast of the shipyard. This repairs missing arrival guidance without a shopping tutorial or new actor. Earned native steps001–018 in work/v4-c15-weather-arrival-play verify the Center sailor, Dock first/repeated directions and queue-clear flag. Contact sheet slateport-delivery-guide shows those actual frames. Museum entry and postdelivery branches remain pending.
+C15 native preparation/economy check (2026-09-14): work/v4-c15-assisted-play clean-Continued the pre-assisted battery on the rebuilt ROM. Mart steps006–018 exercised both functional vendors: Shiny Stone3000 and reusable Linking Cord10000 delivered (bag1 each), another Cord refused as SOLD OUT without payment, bottom stock/Cancel/exit rendered, and the main clerk sold one Great Ball300. Remaining money2740. Contact sheet slateport-mart-native records actual pixels; full-bag/insufficient-money branches remain pending. The random Lola call completed normally; Seashore House owner introduction/reward condition was exercised before its trainers.
+Assisted benchmark preparation: handoff/benchmarks/c15_available_pool.json inventories164 distinct direct land/Old Rod roots plus separately gated legends/evolutions, with exclusions and physical-access reasoning. The broader inventory is not blanket access acceptance; each chosen member needs its own proof. Dwayne candidate: Mega Aerodactyl, Munkidori, Kartana, Alakazam, AV Azumarill, Togekiss, all native cap24. Existing Aero/Azu and Abra records, actual Munkidori encounter, Woods Cut/entrance/collision paths and current Mart purchases support the selected access. The native API supplies legal moves/abilities/EVs, random identities, perfect IVs and full PP, records ownership, and refuses illegal moves without replacing the primary save. The original pre-edit Save is preserved. Assisted ownership is not native capture/UI acceptance. No legendary cap change. Deus refreshed to70609 nodes/334450 edges; real inbound tracing confirms the preparation poll is called through the headless observer.
 
-C43 — Birth Island. Preserve the triangle puzzle, changing palette and Deoxys reveal. Resolve the meteorite lead and reach cap78; capture is optional. Stern's next concrete need is the Scanner aboard the wreck to trace the submarine.
+| Reached-area requirement | Current comparison and evidence boundary |
+| --- | --- |
+| Beach trainers | Hailey/Edmond/Lola/Chandler earned. Lola won attempt2 in7 turns with1 faint; Chandler immediately followed and won in6 turns with2 additional faints. Mel/Paul and Seashore House fights remain pending. |
+| Arrival/story gate | Book/source directions reconciled as above; Dock first/repeat text and queue-clear receipt are earned; museum entry/delivery remain pending. Legacy cap20/Brawly-queue source comment corrected; earned v4 arrives after C14 at cap24. |
+| Habitats and evolution | Book M025/M002 exact water/rod species tables retained; actual wild-level cap clamp must govern early fishing. Mart has ten stones plus Cord, Metal Coat, King's Rock, Dragon Scale, Deep Sea Tooth/Scale; native stock and purchase/evolution inspection pending. No distribution change inferred from a single party matchup. |
+| Gifts and Mega sources | Route109 Water Stone, Sharpedonite/Golisopite pickups; Fan Club Soothe Bell/scarves; Tent Prism Scale; Name Rater Malamarite plus naming; museum Deep Sea Tooth; Greta Gengarite traced. Reward receipt/preflight paths retain full-bag retry. Earned acquisitions, meaningful failure branches and rendered service screens still pending. |
+| Optional economy and services | Catching/field/herbal shops, decoration sellers, free Center gear/berries, Fan Club Furfrou styling, naming/storage and Seashore soda reward/sales inventoried. Normal Center recovery is earned; other local interactions are not certified by this inventory. Preserve the book's field-only medicine policy; this playthrough uses no manual healing. |
+| Full-campaign representation | Regional habitat, trainer species/build and Mega catalogues remain canonical; global thematic/coverage acceptance stays open until subsequent areas are reconciled and played. |
 
-C44 — Wreck and Scanner. Follow the existing Abandoned Ship key trail and fights. Return the Scanner to Stern once. The readings identify a southeastern region, but old passages obscure the entrance. Ruins supply the missing geography. The Tooth/Scale choice and payment belong to this same transaction, with pending delivery independent of progress.
+C16 — The museum attack
+Deliver to Stern and stop Aqua. Their attempt to take marine survey equipment establishes their interest in locating something underwater. Stern keeps working on that question while the player follows the inland route toward Mauville. Finish the event, receive the owned payment and reach cap 30.
 
-C45 — Chamber and ruins. Use the desert account and weather/Scanner discoveries to interpret the builders' warnings. Follow the authored chamber and three-ruin sequence, including Dig, Rock Smash, Flash and perimeter actions. No Wailord/Relicanth, tide or legendary-capture requirement. The last clue gives the Route128 approach explicitly; reach cap82. Regigigas is optional collection payoff.
+PLAYER HANDOFF — Stern after the museum conflict:
+“Leave Slateport north onto Route 110 and follow the road toward Mauville. Your rival is on that route. I will investigate why Aqua wanted these instruments.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C46 — Crisis and sky guardian. Pursue Archie through Seafloor Cavern. Kyogre's awakening begins the acute crisis; move directly through Sootopolis and Sky Pillar. Earlier warnings make Rayquaza's role earned. Preserve the native intervention. No shopping, unrelated expedition or report interrupts the emergency. Reach cap86 when it ends.
+C17 — The Route110 rival
+Meet the rival while traveling north. The rival notices the player's involvement in the thefts but challenges the team as a trainer, keeping the personal journey present. Continue to Mauville after the battle.
 
-C47 — Juan. Challenge the final Gym once the city is safe. Earn Waterfall and cap90. The League is visible ahead; the crystal mystery from Dewford is ready to close.
+PLAYER HANDOFF — Rival after the Route110 battle:
+“Continue north along Route 110 into Mauville. Meet Wally outside the Gym, then challenge Wattson. The Center and Rydel's bike shop are in town.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
-C48 — Origins conclusion. Interact with the existing Diancie and Jirachi actors for two deliberate observation scenes, then conclude with Steven/Devon. Room entry, capture, Magearna ownership and exhibitions are not substitutes or gates. Record observation before an optional battle can remove the actor. Reach cap94 and finish the research thread before the League.
+C18 — Wally in Mauville
+Resolve Wally's challenge before Wattson. His effort is a small early step toward the later Victory Road payoff. Obtain the existing Rock Smash license and bike access. Game Corner acquisitions are optional and do not provide a mandatory clue or purchased story key.
 
-C49 — Victory Road Wally. His confidence pays off Petalburg and Mauville. Defeat him, reach cap96 and provide the final outside preparation opportunity.
+Retained exact contract:
+Bind E0069, Wally’s Mauville encounter, to this chapter before C19. Game Corner purchases are optional and do not replace that story check.
 
-C50 — Champion. Fight Sidney, Phoebe, Glacia, Drake and Wallace at cap96. Their teams culminate the game's strategic ideas. Victory raises the cap to100. The ending recognizes relationships and places; optional discoveries, exhibitions and collections remain without a new mandatory research chain after the credits.
+PLAYER HANDOFF — Wally/uncle; Mauville Gym attendant:
+“Challenge Wattson inside Mauville Gym. If you have not collected the Rock Smash license, visit the Rock Smash man in Mauville’s southeastern house before continuing north.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C19 — Wattson
+Defeat Wattson, earn the Dynamo Badge and reach cap 34. He knows the region's power system and becomes the person who can later make sense of an electrical disturbance. For now the northern route and the ongoing theft investigation carry the journey forward.
+
+PLAYER HANDOFF — Wattson:
+“Go west from Mauville along Route 117 to Verdanturf. Enter Rusturf Tunnel and break the rocks separating the couple to receive the Strength license. Then return to Mauville and take Route 111 north.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C20 — Verdanturf and Rusturf reunion
+Use the newly licensed Rock Smash route to reunite the separated couple and obtain the Strength license. Wattson names the southeastern Rock Smash house when that license is missing, then the Rusturf reunion before directing the player north; Route117 Galarian Farfetch'd supplies a nearby compatible partner. The tunneler gives the northern-route directions with Strength and repeats them at Wanda's house until the Meteor Falls encounter. This pays off the tunnel visited earlier. Return to the northern journey. Day Care, breeding, Chansey and local gifts are optional; no breeding assignment is introduced.
+
+Retained exact contract:
+Bind the existing Rusturf reunion/Strength-license handoff here, after the player has the Rock Smash license and Dynamo Badge. The license can be received now, but Strength field use remains locked until Flannery’s Heat Badge.
+
+PLAYER HANDOFF — Reunited couple/Strength handoff:
+“Return east through Verdanturf and Route 117 to Mauville. Go north on Route 111, turn onto Route 112, pass through Fiery Path, then continue through Route 113 to Fallarbor. Follow Route 114 toward Meteor Falls.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C21 — The ash route
+Travel through ash country toward Fallarbor and Meteor Falls. Existing residents give local context about the volcano and unusual activity. The soot collector remains an optional economy, with no compulsory collection quota. The player follows people and tracks, not a request to accumulate ash.
+
+PLAYER HANDOFF — Existing Fallarbor/Meteor Falls approach characters:
+“Go west from Fallarbor onto Route 114 and follow it to Meteor Falls. After the theft scene there, return to Route 112 and take the cable car up Mt. Chimney.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C22 — Meteor Falls and Mt. Chimney
+Discover Magma's interest in the meteorite and stop the summit operation. Their search shows how old accounts and stolen modern equipment are being combined. The failed operation leaves a local disturbance rather than an immediate region-wide apocalypse. Finish the chapter and reach cap 40.
+
+PLAYER HANDOFF — Summit resolution character; cable-car/Jagged Pass interaction:
+“Descend Mt. Chimney through Jagged Pass to Route 112. Go west into Lavaridge and challenge Flannery. The woodland disturbance will be your next stop after the badge.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C23 — Flannery
+Continue down to Lavaridge and defeat Flannery, reaching cap 44. Her local perspective connects the summit disturbance to trouble along the woodland trail. Flannery and both rival variants direct the rescue first; repeated directions advance to Moltres, Sandstrewn research and only then Norman. The next destination is a place that needs help, not a newly assigned abstract survey. Preserve her reward and the optional Wynaut Egg.
+
+PLAYER HANDOFF — Flannery; Lavaridge rival/Go-Goggles handoff:
+“Collect the Go-Goggles from your rival outside the Gym. To reach Ashen Woods, go east to Route 112, take the cable car to Mt. Chimney, descend Jagged Pass and take its western entrance into Ember Path. Follow Ember Path's western passage into Ashen Woods to find Chansey, then return to its nurse on southern Route111.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C24 — The Ashen Woods rescue
+The caretaker is the existing nurse on southern Route111. Preserve her actual position and the woods chase; keep her available after the rescue for repeatable directions to Moltres and, once that disturbance is resolved, Sandstrewn Ruins. Do not relocate her into the woods or duplicate her reward.
+Follow the existing Chansey chase and woodland encounters. The nurse remains at her Route111 post after upgrading the Vial, with repeatable directions to Moltres and then the Sandstrewn archaeologist; later visits never refill or re-award the upgrade. Completing the rescue earns the two-charge Vial and gives the player a concrete reason to follow the trail to the roost.
+
+PLAYER HANDOFF — Ashen Woods caretaker after the rescue:
+“Return through the north exit of Ashen Woods into Ember Path. Follow the existing trail to Moltres's roost and interact with Moltres. Resolving the encounter is required; catching it is your choice.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C25 — Moltres's disturbed roost
+Approach the existing Moltres actor. A restrained tremor, hot-air message and cry show the disturbance before the encounter. Defeating or catching Moltres resolves the immediate danger; its capture remains optional. The caretaker's follow-up connects the disturbed ridge to Magma's earlier route through the northern ruins. This is a local consequence of the previous chapter and the lead into the desert, with no extra cap increase.
+
+PLAYER HANDOFF — Post-encounter message; caretaker on return:
+“Go to the Route 111 desert with your Go-Goggles. Enter Mirage Tower and take the basement passage into Sandstrewn Ruins. Find the archaeologist and explore the lower chamber they identify. This is Sandstrewn Ruins, not the separate Regirock cave.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C26 — The desert safeguards
+Investigate the existing desert ruins and their old warnings. They show that earlier inhabitants understood the danger of disturbing Hoenn's land and sea, but the surviving account is incomplete. This advances the information already found on Dewford. Finish the safeguards chapter and reach cap 48. Fossil collection, Zygarde and Stakataka acquisition stay optional. Complete the lower-chamber investigation and the archaeologist's C26 report before either summit fossil can be taken. Taking a fossil then permanently collapses the tower and seals every entrance to the underground ruins, including the elevated entrance and the Desert Underpass connection. Zygarde and Stakataka are intentionally missable: both are found only below, and there is no later chance after collapse. The archaeologist's repeatable basement warning and the final YES/NO warning explicitly name both and the permanent loss. Declining the fossil leaves the ruins open for further exploration. The tower stays visible before collapse. With the northern trouble resolved, return to Norman for the promised challenge and Surf access.
+
+
+C26 MISSABLES AND PRE-SURF ACCESS — SEPTEMBER14 FOLLOW-THROUGH
+The existing archaeologist stands on dry ground at the tower-entry end of Sandstrewn Ruins. The required investigation/report must be completable through the ruin stairways without Surf or an unexplained Fossil Maniac tunnel detour. After recording the lowest chamber, return to him at that entrance. He then names Norman and explains that the player may return with Surf for optional finds, provided neither summit fossil has been taken. Fossil collection is never required to leave or advance to Norman.
+
+| Sealed area | Optional acquisitions lost if still uncollected at collapse |
+| --- | --- |
+| Sandstrewn Ruins main halls | Garchompite, Golurkite, Flygonite; Sail, Armor, Plume, Skull, Cover, Helix, Dome and Jaw Fossils; Odd Keystone; hidden Protector |
+| Sandstrewn Ruins B1F | Zygarde and Stakataka retain the explicit one-chance warning; the local Cofagrigus, Bronzong, Golurk, Darmanitan, Doublade, Sigilyph, Claydol, Krookodile and Aegislash encounters also disappear from this location |
+| Mirage Tower summit | Choose Root OR Claw Fossil to trigger the collapse. The unchosen fossil still falls to the existing Desert Underpass pickup; that separate pickup and the Underpass itself remain accessible. Only its connection back into Sandstrewn closes. |
+
+Full wild-table audit: the sealed maps contain the only configured wild locations for Trapinch, Yamask, Cofagrigus, Golett, Darumaka, Honedge, Doublade, Aegislash, Orthworm, Great Tusk, Iron Treads, Chest Form Gimmighoul, Krokorok, Krookodile, Sandaconda and Stakataka. Zygarde is injected through its separate native-wild discovery definition in Sandstrewn B1F. Treat these exact wild entries as missable; do not claim Zygarde/Stakataka are the only affected Pokemon. Trapinch's line and Honedge's line have no outside wild member in the current tables. Sandile remains in Desert Underpass; Silicobra and Galarian Yamask remain on Route111; Darmanitan remains in Magma Hideout/Scorched Slab; Golurk remains at Sky Pillar; Roaming Form Gimmighoul remains on Route110. Evolution, breeding and regional forms are separate acquisition paths; loss of an exact wild entry is not automatically loss of every member of its family. The full method tables in section16 remain authoritative for all 47 ordinary species/forms within the sealed area, including fishing, Surf and Rock Smash populations.
+
+These are lost placements, not a claim that every listed nonlegendary species or item has no alternative source. Garchompite Z on Route116 is a different stone from the ruins' Garchompite. All existing pickups retain their own finite receipts. The required archaeologist and fossil choice also warn about uncollected Mega Stones, fossils and other finds. The elevated survey exterior remains available for Landorus/transport; its entrance into the sealed underground ruins does not reopen. The Route111 observer and Fossil Maniac explicitly confirm the permanent seal after collapse; neither suggests an alternative underground entrance. The Underpass and its separate Ting-Lu/fallen-fossil content remain available.
+
+PLAYER HANDOFF — Sandstrewn archaeologist:
+“After exploring the lowest chamber, return to me at the tower entrance. Then challenge Norman in Petalburg Gym for Surf. You may return with Surf for optional finds before taking either summit fossil. Zygarde and Stakataka must be caught before collapse if you want them.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C27 — Norman and the crossing east
+Defeat Norman, earn Surf and reach cap 50. This is a personal milestone as well as the means to continue east. Wattson now has an immediate problem at New Mauville that needs someone who can reach the generator.
+Wally's father names Route102 Lotad as a nearby Surf-capable partner and repeats the New Mauville direction until Wattson accepts the generator findings; afterward, his reminder points across Route118 and north to the Weather Institute.
+
+PLAYER HANDOFF — Norman/Wally-family Surf handoff:
+“Collect Surf from Wally's family in Petalburg, then return to Mauville and speak to Wattson. He needs help in New Mauville. Its entrance is across the water on Route 110, south of Mauville.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C28 — New Mauville
+Resolve the restarting generator and its Rotom encounter. Wattson explains the concrete finding: the machinery was being affected by a Pokémon, while the wider readings still show an unexplained weather disturbance. He passes those readings to the Weather Institute himself. The player is already traveling in that direction. The resolution and Wattson conversation earn cap 52; Electirizer delivery can remain pending and Rotom ownership is unnecessary.
+
+Retained exact contract:
+Research unlock owner: the completed C28 REPORT, not successful Electirizer delivery. Regieleki, Zekrom and Zeraora use REPORT_C28_COMPLETE in the planned game; retain their other badge/species conditions. REPORT_C28_COMPLETE names the persistent accomplishment; it is not a separate player-facing quest. Item storage failure leaves the Electirizer pending without withholding research access.
+
+PLAYER HANDOFF — Wattson before departure and after resolution:
+“First: Surf to New Mauville's entrance from Route 110, resolve the generator/Rotom incident, and return to Wattson in Mauville. Afterward: leave Mauville east onto Route 118, Surf across the river, then head north up Route 119 to the Weather Institute.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C29 — The occupied Weather Institute
+Cross the river and climb Route119. Aqua's occupation now has a clear purpose: they want information about the sea and weather for the same search that led them to Stern's equipment. Defeat them and receive Castform. The staff can compare Wattson's data with their own, but need a direct observation at the elevated ruins. Their transport makes that next action immediate and practical.
+
+Retained exact contract:
+Castform remains a recoverable research entitlement UNTIL C30 completion. Before that point, check all permanent player ownership, including party, PC and Day Care, counting the Castform weather forms as the same family. If an owned Castform exists, identify its location and provide practical retrieval/party-arrangement access; a required retrieval must not be blocked by an unaffordable fee. If none exists after refusal, release, transfer or other loss, the existing Institute NPC reissues one. Never issue a duplicate while one is owned. Reissue grants no second stipend, report reward or sellable progression item. Full storage leaves the replacement pending. Temporary rentals do not count as permanent ownership. C30 still requires an actual owned Castform in the party; its completed survey does not require future reissues. A full Key Items pocket leaves the optional Reveal Glass pending with the researcher; it never blocks the survey flight or its return service.
+
+PLAYER HANDOFF — Institute Castform/transport researcher:
+“Put your owned Castform in your party, then speak to this researcher again and choose the weather-survey trip. We take you to the elevated ruins and bring you back; you do not need Fly. If Castform is boxed, use storage; if you own none, ask this same researcher for a replacement.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C30 — Castform at the elevated ruins
+Take the Institute's organized round trip with Castform. Its response and the Landorus encounter reveal how differently the local weather behaves around the old site. The staff now have a useful contrast to the offshore observations Aqua was pursuing. Finish the event and return using the same service; cap rises to 56. Castform recovery remains available until this scene is complete. Landorus capture is optional.
+
+Retained exact contract:
+Transport contract: the existing Institute researcher offers an organized research-flier round trip to the elevated ruins once the Institute is rescued and the player accepts the survey. This NPC transport does not grant the player Fly. Use a dialogue/fade and validated existing entry anchors; return service persists whether the survey succeeds, is declined or needs a different party. Exact landing/staging remains subject to headless screenshots and user review. No new vehicle/actor is presumed.
+
+PLAYER HANDOFF — Elevated-ruins researcher and Institute return interaction:
+“At the ruins, speak to the researcher with Castform in your party and resolve the Landorus event. Speak to the researcher again for the return trip. Back at the Institute, continue north on Route 119, face your rival, then reach Fortree. Steven waits on Route 120 east of Fortree; clear his Devon Scope encounter before challenging Winona.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C31 — Fortree, Steven and Winona
+Continue through the Route119 rival encounter and meet Steven at the existing Devon Scope obstacle. He is following the same growing pattern and points toward Stern's offshore work. Clear the obstacle without requiring Kecleon ownership, defeat Winona, and reach cap 60. Personal Fly becomes usable. The next leg runs east to Lilycove, where transport is being arranged.
+
+Retained exact contract:
+Before the Gym, bind Steven’s existing Route120 Devon Scope encounter and its obstacle-clearance result. The survey does not substitute for the Scope. Catching Kecleon is optional. The Route119 rival’s Fly license may already be owned; personal Fly/Flight Beacon use starts only after Winona’s Feather Badge.
+
+PLAYER HANDOFF — Winona; Steven Scope repeat interaction:
+“Leave Fortree east onto Route 120, continue south to Route 121, and then head east to Lilycove. Meet your rival outside the department store before going to Lilycove Harbor for the island voyage.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C32 — Lilycove reunion and departure arrangements
+Fight the rival, then continue to the harbor. Both rival variants name the attendant inside Lilycove Harbor on the southwestern waterfront, Southern Island first and Faraway Island next; the obsolete postbattle League/Frontier branches are removed because this required reunion precedes the voyage. Stern and Devon have compared the coastal readings with the old expedition account; Briney can take you along the route it describes. The harbor conversation grants the SS Ticket, Eon Ticket and Old Sea Map travel rights together. Physical item space cannot cancel an earned passage. No return to Rustboro is required merely to collect an assignment.
+
+Retained exact contract:
+EXPEDITION PERMISSION OWNER: before any boarding, the existing Lilycove harbor briefing earns SS_TICKET, EON_TICKET and OLD_SEA_MAP permissions for C34–C36 at no cost. Bind their existing delivery rows to this one entitlement per permission. Important travel rights persist; a full Bag leaves the physical item pending rather than withholding an earned transport right. Any Pokemon Center nurse retries earned SS/Eon/Old Sea Map/Aurora documents; the optional earned Mystic permission uses the same finite receipt. Existing Bag or PC ownership counts as delivered. Failed delivery does not block healing, consume the entitlement or duplicate a paper on later visits. Missing Center tools also remain pending if they cannot fit; the nurse proceeds to the normal healing offer even when those tools are absent from the Bag. No later wreck chart or legendary capture gates this voyage.
+
+PLAYER HANDOFF — Rival after battle; Lilycove harbor attendant:
+“Speak to the attendant inside Lilycove Harbor for your travel permissions and first departure. The first voyage visits Southern Island, then Faraway Island. Shopping at the department store is optional; no purchase or cabin battle is needed to sail.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C33 — The last mainland preparation stop
+The department store provides optional supplies. The harbor already explains the route and offers departure when the player is ready. There is no mandatory spending threshold, cabin battle count or purchase masquerading as an expedition prerequisite.
+
+PLAYER HANDOFF — Department-store guidance; harbor attendant:
+“When you are ready, return to Lilycove Harbor and speak to the ferry attendant. Your next required destination is Southern Island aboard the first expedition voyage.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C34 — Aboard the S.S. Tidal
+Use the voyage to let the player breathe, prepare and speak to the people involved. Briney remembers Peeko. Passenger conversations establish the changing sea conditions and the next island, without requiring a lecture from every cabin. Keep the healing bed and Reaper Cloth gift. The five retained passenger fights remain optional. This substantial ship chapter happens once; later travel uses the ordinary convenient service. Both first-ticket and repeat-ticket Southern Island selections enter the ship until the captain has completed this first arrival. Cabin visits and the healing bed never force an early landing. Briney offers arrival immediately, with a decline that leaves the player free to explore; his acceptance records the voyage before landing. Scott's later cruise invitation does not interrupt this expedition.
+
+PLAYER HANDOFF — Briney/captain aboard the first voyage:
+“Southern Island is the first destination. Speak to the captain when you are ready to arrive. You may use the bed, collect the Reaper Cloth or fight passengers first, but none of those fights is required to leave the ship.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C35 — Southern Island
+Make the sanctuary the first offshore stop. The scene gives direct evidence that the old account describes living habitats rather than a catalogue of weapons. Resolve the Lati encounter and continue the same voyage using the already-earned old chart. Capture is optional. The departure conversation points straight to Faraway Island, not back to a mainland report counter.
+
+PLAYER HANDOFF — Sanctuary resolution; captain at the island landing:
+“Return to the captain at Southern Island's landing and choose Faraway Island. Your passage is already earned. Latias or Latios does not have to be caught to continue.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C36 — Faraway Island
+Follow Mew through its existing habitat and complete the encounter. This concludes the offshore part of the old expedition's route and reinforces the difference between understanding a Pokémon and owning it. Resolving Mew after the Southern Island encounter earns cap 64 and its one-time payment immediately, as specified in the implemented offshore scene. Briney's return conversation closes the voyage; Mew's conclusion points to his ferry without demanding another reward report. The next lead is the old account's reference to the Orbs kept at Mt. Pyre; investigate their custodians on the mainland. No separate trip to Devon is needed to unlock the next chapter.
+
+PLAYER HANDOFF — Briney on return; Lilycove harbor attendant:
+“Return to the mainland with Briney. From Lilycove, go west onto Route 121, then south to Route 122. Surf to Mt. Pyre, enter it and follow its exterior path to the summit to speak to the Orb keepers.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C37 — The Orb theft at Mt. Pyre
+Arrive as the teams act on the same history you have been piecing together. The elders explain the stolen Orbs and the danger of treating them as control devices. Their account supplies the immediate pursuit into Magma Hideout. Darkrai and other additional captures remain optional.
+
+PLAYER HANDOFF — Mt. Pyre elders:
+“Take the Magma Emblem to Jagged Pass. From Route 112, ride the cable car to Mt. Chimney and descend the pass; the emblem reveals Magma Hideout's entrance. Follow Maxie inside.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C38 — Magma Hideout and Groudon
+Confront Maxie and witness Groudon awaken. Magma's confidence collapses when the outcome fails to follow their intentions. The Magma Stone and the existing geological lead point to Scorched Slab, where the disturbance can be investigated while Steven and the leaders follow Groudon's movements. This phase has serious local consequences; reserve the simultaneous acute land/sea emergency for Kyogre's later awakening.
+
+PLAYER HANDOFF — Post-Maxie/Groudon scene; existing exit dialogue:
+“If the Magma Stone is missing, collect the existing item ball in the hideout’s upper-right side chamber first; the state-aware exit directions below explain the route. Once it is owned, take it to Scorched Slab on Route 120. From Fortree's east exit, reach the lake on Route 120 and Surf to the cave entrance. Descend through its basement floors to Heatran's chamber and use the Stone interaction there.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C39 — Heatran in Scorched Slab
+Use the existing chamber and Magma Stone interaction. The stone warms, the chamber answers, and the encounter makes the volcanic aftermath tangible. Resolving it ends this investigation and earns cap 68. Heatran is not a compulsory captured tool and the scene does not claim that it magically puts Groudon back to sleep. The player returns to the active pursuit when Stern's submarine is stolen. Reshiram remains an optional separate acquisition.
+After C39 is recorded, later Heatran encounters preserve that completion and do not repeat the obsolete Groudon/submarine pursuit briefing. A later no-capture victory only offers the optional capture reminder.
+
+PLAYER HANDOFF — Heatran resolution; existing chamber exit interaction:
+“Return to Slateport Harbor and speak to Captain Stern. After witnessing the submarine theft, travel to Lilycove and enter Aqua Hideout through the northeastern coastal cave.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C40 — The stolen submarine and Aqua Hideout
+Witness the theft and follow Aqua to its hideout. The earlier equipment theft, weather data and Orb theft now converge on the submarine expedition. Stop the hideout operation, open the eastern sea and reach cap 72. Aqua's destination remains uncertain; Mossdeep's marine and Space Center expertise can help locate it. Matt's victory and repeat dialogue names the eastern Route 124 crossing, Tate and Liza's Gym, then Steven at the Space Center east of the Gym, rather than sending the player straight to Route 128.
+
+PLAYER HANDOFF — Aqua Hideout conclusion:
+“Leave Lilycove east across Route 124 and sail to Mossdeep. Challenge Tate and Liza in Mossdeep Gym, then go to the Space Center to meet Steven and confront Magma.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C41 — Mossdeep and the twins
+Reach Mossdeep and defeat Tate and Liza. The Mind Badge prepares the player for Dive once Steven supplies the license. Their battle remains a major coordinated doubles encounter. The next event occurs locally: Magma moves against the Space Center.
+
+PLAYER HANDOFF — Tate/Liza after the Gym:
+“Go to Mossdeep's Space Center, on the eastern side of the city. Steven needs your help there. The Center battle comes before the Dive and island-travel handoff.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C42 — The Space Center attack
+Defend the Center with Steven using the exact three-per-owner multi battle. Keep Magma's existing fuel-theft threat and authored confrontation. In the aftermath, the Center's observations and the recovered context establish a second active disturbance at Birth Island, a meteorite site relevant to the teams' search for power. Steven entrusts the player with checking that immediate lead while Stern works on the stolen submarine. Earn Dive, Birth Island travel, Beldum's entitlement and cap 76. Do not require a new grunt squad or new walking scientist on the island.
+
+Retained exact contract:
+PARTY/PERMISSION CONTRACT: use the exact allied U1501–U1503 party defined in section 9. Player selects exactly three healthy non-Egg Pokémon from their party; Steven has three; each opposing owner has the three shown in E0409. One active Pokémon per owner, two per side. Cancellation restores the original party. Win/loss/Retry restore or reinstate the correct full-party checkpoint, including held items. Resolving C42 also earns the AURORA_TICKET/Birth Island permission and Dive license, independently of pending item delivery.
+
+PLAYER HANDOFF — Steven and existing Space Center scientist:
+“Finish Steven's Dive and travel-permission conversation here. Return to Lilycove Harbor and choose Birth Island. On the island, approach the triangle and follow the scientist's shortest-path instructions. You do not need to buy a ticket.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C43 — Birth Island
+Travel directly to the identified disturbance. Use the actual triangle puzzle, palette changes and Deoxys reveal to show what the teams' incomplete interpretation of the meteorite readings missed: another living Pokémon. Resolve the encounter and earn cap 78; capture is optional. The conclusion closes the meteorite lead and lets the party focus on Aqua's underwater route. Stern's specific next step is recovery of the Scanner from the wreck, whose equipment can trace the submarine through the seabed. This chapter needs especially careful dialogue review so the handoff feels like the ongoing response to the teams' actions, not a detached legendary errand.
+
+PLAYER HANDOFF — Island completion/harbor return; Space Center scientist repeat:
+“Return by ferry, then go to the Abandoned Ship on Route 108, between Dewford and Slateport. Bring a party that can use your licensed Surf and Dive; the return sailor names Lapras in Route108's water for both. Enter the wreck and follow the submerged passage and key trail to recover the Scanner, then take it to Stern at Slateport Harbor.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C44 — The wreck and the Scanner
+Dive through the existing Abandoned Ship key trail and battles to recover the Scanner. Bring it to Stern once because he is the person who can use it. His scene pays the existing entitlement and identifies a broad southeastern search region. Reflections from the old undersea passages prevent the Scanner from distinguishing the actual entrance. The Sealed Chamber and three surviving route accounts supply that missing geographical information, as well as the old warning about the sky guardian. Tooth-or-Scale delivery is a separate pending reward within this same transaction, not another task.
+
+Retained exact contract:
+SINGLE SCANNER TRANSACTION: Stern records the report and route information once, earns the existing C44 stipend once, and offers one finite Deep Sea Tooth OR Deep Sea Scale choice. The old trade is part of this report entitlement, never a separate consumer of the Scanner. Record the report before consuming the item; an already-found Scanner is valid, and a completed report remains valid without another copy. Full storage leaves only the selected reward pending.
+
+PLAYER HANDOFF — Stern after using the Scanner:
+“Go to Pacifidlog, then follow the southern current route west through Routes 132 and 133 to the Dive opening on Route 134. Use Dive, follow the underwater passage, then surface into the Sealed Chamber. Stern and the rear-wall clue name Sandshrew in Route111's desert, taught Dig free at any Center. Dig must be learned for the party-menu command. Read the rear inscription and use Dig at that wall. Walk through the opening into the inner room and read its separate rear-wall inscription to open the three distant ruins. That inner account gives the next three ruin destinations and their local actions in plain English.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C45 — The chamber and the three ruins
+Use the desert account, weather observations and Scanner findings to understand the builders' warnings. Open the chamber, solve all three local ruin puzzles and win or catch each guardian. The account clarifies that the land and sea powers were feared, and that the sky's guardian was invoked when their conflict could not be contained. This gives the later Sky Pillar solution prior grounding. Complete the chapter and reach cap 82, then follow the now-understood underwater route to Archie. The Desert Ruins clue names Sandshrew in the surrounding Route111 desert for Rock Smash, and Ancient Tomb names Abra on Granite Cave's entrance floor for Flash. Retain the Dig, Rock Smash, Flash and perimeter actions; no Wailord/Relicanth, tide or legendary-capture gate. Regigigas remains an optional collection payoff.
+
+Retained exact contract:
+REQUIRED ACCOMPLISHMENT INPUTS: C26 desert safeguards + C30 weather survey + C44 Scanner resolution, together with the full preceding story order above. These three inputs do not waive the intervening required chapters. Required approach uses the already-owned Surf and Dive licenses/badges. Retained local field actions are Dig for the chamber wall, Rock Smash for Regirock’s local puzzle and Flash for Registeel’s, with compatible party access; the optional Regigigas condition still requires its three Regis. Regice retains its explained perimeter puzzle. No Wailord/Relicanth, tide, purchase or legendary-capture requirement is added to the required research.
+
+PLAYER HANDOFF — Sealed Chamber inscription and each completed ruin's inscription:
+“The three sites are Desert Ruins on Route 111, Island Cave on Route 105, and Ancient Tomb on Route 120. Resolve their local puzzles and win or catch each guardian: Regirock, Regice and Registeel. Catching them is optional. After all three are complete, return to the sea south of Mossdeep and Dive at the Seafloor Cavern entrance on Route 128. Bring Surf, Dive, Strength and Rock Smash capability, then follow Aqua through the cavern to Archie.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+
+WHAT EACH C45 SITE CONTRIBUTES
+The Sealed Chamber’s inner account explains that its route record was preserved at the three named ruins. It opens those sites and gives their exact modern map names through the player’s interpretation. This is knowledge of geography and history, not a device powered by three captured Regis.
+Desert Ruins supplies the first geographical constraint: the sought entrance lies in the eastern seabed south of the sky-watchers’ island. The player’s map identifies that island as Mossdeep. Its account also warns against disturbing the land power.
+Island Cave supplies the second: the old approach begins under a deep-water basin rather than by following the surface currents into the western channels. This distinguishes the misleading echoes picked up by the Scanner. Its account warns that the sea power cannot be commanded by an artifact alone.
+Ancient Tomb supplies the last route relationship: the basin leads into a submerged cave where the passage rises above the waterline. Combined with the Scanner region and the other two descriptions, this identifies the Route128 Seafloor Cavern approach. It also preserves the account of appealing to the sky guardian when land and sea clash.
+At whichever site is completed last, the player-facing conclusion explicitly says: “The three accounts match the Scanner’s southeastern signal. From Mossdeep, sail south through Route127 to Route128. Dive at the deep-water basin, enter the underwater cave, and surface where you find the submarine. That is Aqua’s route.” The route/entrance must be shown and validated in the actual map presentation. The final prompt also reminds the player to bring licensed Surf/Dive and compatible Strength/Rock Smash access for the cavern. On a guardian victory without capture, the optional later-capture reminder appears BEFORE the chapter/next-site response, so the final instruction remains the Seafloor route or the next unresolved guardian. The shared victorious-legendary reminder explicitly says the challenge is won; losing/fleeing retains the retry reminder. No extra return to Stern is needed to approve these already-understood findings.
+
+C46 — The crisis and Sky Pillar
+Pursue Archie through Seafloor Cavern. Kyogre awakens and the acute simultaneous weather crisis begins. Move directly through the existing Sootopolis conversations and Sky Pillar sequence. Steven and Wallace combine what the player has witnessed with their own knowledge; the appeal to Rayquaza is the culmination of earlier discoveries. Preserve the native intervention and resolution. No new shopping, report delivery or unrelated expedition interrupts this chain. Reach cap 86 when the crisis ends.
+
+PLAYER HANDOFF — Steven/Wallace during the crisis and after Rayquaza's intervention:
+“After Kyogre awakens, go to Sootopolis through its underwater entrance on Route 126 and meet Steven and Wallace at the Cave of Origin. After their explanation, go to Sky Pillar on Route 131, east of Pacifidlog, and climb to Rayquaza. Return to Sootopolis for its intervention. When the weather settles, challenge Juan in Sootopolis Gym. If the approach needs a Mach Bike, Wallace explicitly tells you to exchange bikes free at Rydel's in Mauville before leaving.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C47 — Juan and the final badge
+Challenge Juan once the city is safe. Earn the eighth badge, Waterfall use and cap 90. The city can now open the final stage of the crystal mystery introduced on Dewford. The League remains the player's visible destination, with one unresolved story thread close to conclusion.
+
+PLAYER HANDOFF — Juan; existing Sootopolis/Cave of Origin interaction:
+“Enter the Cave of Origin in northern Sootopolis and follow the newly available lower passage to the crystal chamber. After that scene, travel to Meteor Falls via Route 114 and use your licensed Surf and Waterfall to reach the deeper Jirachi chamber. This is not Steven's optional exhibition cave.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C48 — The origins conclusion
+
+C48 COMPLETION — TWO DISCOVERIES AND CHALLENGES, THEN STEVEN
+After Badge8, interact with Diancie in the Origin crystal room and Jirachi in the deeper Meteor Falls chamber. Each native observation/awakening records its own discovery, followed by a mandatory battle resolution: win or catch. Capturing either is optional. Declining, fleeing or losing preserves any observation but does not complete the challenge; return to retry through the existing resting encounter behavior. A victory without capture preserves later capture access. Room entry and exhibitions do not complete either discovery.
+Origin then Meteor Falls is the suggested order; either order works. Each chamber names the other unresolved encounter, or Steven's Mossdeep house when both are resolved. Surf and Waterfall reach Jirachi's room from Route114; Steven's optional post-Champion exhibition cave is a separate destination.
+Steven's existing house conversation requires both observations and both resolutions, provides the substantial story conclusion, and directly awards the one C48 entitlement: cap94 and ¥20,000. The League also checks this completed conclusion alongside its eight-badge requirement. Mr. Stone at Devon in Rustboro is an optional epilogue, with no further report or payment; any unclaimed eligible Pidgeotite remains available. Magearna and Steven/Wallace exhibitions remain optional.
+
+PLAYER HANDOFF — Origin, Meteor Falls and Steven:
+“Resolve DIANCIE in the CAVE OF ORIGIN and JIRACHI in the deeper METEOR FALLS chamber. Win or catch each; keeping either is your choice. Meet STEVEN at his MOSSDEEP house to conclude the investigation. Then sail east from ROUTE128 to EVER GRANDE, climb the WATERFALL and follow VICTORY ROAD to the LEAGUE.”
+Repeat interactions preserve the next unfinished destination and never pay the grant again.
+
+C49 — Wally on Victory Road
+Travel to Victory Road. Wally's challenge pays off Petalburg and Mauville: someone once afraid to begin is now a serious opponent. Defeat him and reach cap 96. Provide the final preparation opportunity before the League.
+
+PLAYER HANDOFF — Wally after the final battle; League entrance attendant:
+“Continue through Victory Road to its northern exit and the Pokémon League. Heal and finish your team preparation before entering. Defeat the Elite Four and then Wallace; your cap stays 96 until you become Champion.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
+
+C50 — Champion
+Face the Elite Four and Wallace at the unchanged cap 96. The teams test the coordination and counterplay developed throughout the adventure. Becoming Champion raises the cap to 100. The ending recognizes the people helped and the places visited. If the old homecoming ticket scene runs while its paper is still pending, Bag/PC failure finishes the visit without setting the delivery receipt. A Center nurse can retry the earned paper afterward; existing Bag or PC ownership counts as delivered without another copy. Optional exhibitions, captures, economies and collections remain available without an unfinished mandatory research track appearing after the credits.
+
+PLAYER HANDOFF — Ending and post-Champion existing contacts:
+“You are Champion and the required story is complete. Remaining legendary catches, exhibitions, the Circuit and collection activities are optional. Each offered activity names its actual location and entry requirement; none is described as unfinished mandatory research.”
+Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 4. BATTLES, ACCESS AND RECOVERY
 ------------------------------
@@ -622,6 +974,63 @@ Every source-backed entry identifies its location/actor or global rule, reward o
 
 The generator checks all recognized acquisition/shop operations, configured prices, fixed trades, berry plots and held-item sources. New unclassified economic commands and unresolved graph paths appear in its coverage register. Completing the source map is not proof of every native transaction, geometry condition or affordability choice. Those are explicit acceptance work; no "mistake-proof" claim overrides evidence.
 
+Integrated world-reward rules
+
+C13 MEGA STONE ACCESS
+Each of the99 item-based Mega Stones has exactly one authored acquisition source. Keep established world locations and remove overlapping trainer, story and starter gifts. Starter choices never create an additional stone entitlement. Charizardite X and Charizardite Y are different stones with their own individual locations. A full-storage retry belongs to the same original reward and keeps its original receipt. PC RELEASE refuses a Pokémon holding a protected item, including a Mega Stone, and asks the player to remove it first; releasing the holder must never delete the finite stone. The existing PC field-move safeguards also count non-Egg species compatible with an unlocked license, across party and boxes; an empty battle-move slot is neither loss nor proof of that capability.
+
+MEGA REWARD TIMING (approved 2026-09-14): no Mega Stone rewards before Steven grants the Mega Ring/bracelet after Brawly. All71 existing ground-stone actors become discoverable only with Ring ownership; preserve coordinates and unclaimed flags. All16 standard optional Mega-gift wrappers fall through to their normal NPC interaction until the Ring is carried. Steven now gives Aerodactylite with the Ring; Roxanne retains only Old Amber. Lucarionite has its sole source on Route116; Brawly gives no additional copy. Badges, Amber and story directions are independent. Mr Stone's Pidgeotite already requires the Ring. Steven explains recognition of field stones and that some trainers share their showcased stone; his Aerodactylite gift names the Amber restoration lab instead of sending the player back to Roxanne. This replaces the previous permission to collect unusable Mega rewards early. Previously acquired stones in existing saves are not confiscated; trainer held stones and non-Mega relics are unchanged.
+
+MEGA REWARDS AND FAMILY ACCESS — APPROVED ECONOMY CLEANUP,2026-09-14
+Keep Mega Stone discovery broadly coupled to obtainable Pokemon and their legal evolution access. Check actual route, rod, Cut/Surf/bike/story gates, evolution supplies and fossil revival; an encounter-table row or trainer holding a species does not prove player access. A stone should normally be usable now or on a clearly explained near-term evolution path, while special locations still feel special. No blanket transfer to a shop or free catalogue.
+In a few selected later encounters, an opponent may give the Mega Stone its own team showcases after victory. Treat this as one authored finite reward with regional/character fit and an obtainable matching family, not an automatic reward from every Mega trainer. Tie the receipt to successful delivery independently of the battle clear; no mandatory repeat fight or invented new actor. Check other sources to avoid accidental redundant prizes. Future trainer reviews choose the actual recipients and update their exact scene/reward rows together.
+Aerodactyl is the first concrete pairing: Roxanne first showcases Mega Aerodactyl in battle and explains the transformation afterward. The player's Mega Ring is still unavailable here. Roxanne gives Old Amber, Devon2F restores it free, then Steven gives Aerodactylite with the Mega Ring after Letter/Brawly. Steven names the fossil lab for players still carrying Amber. The player need not own/evolve/capture Aerodactyl to receive the story Ring or continue. Retain the existing Aerodactylite receipt bit; deliver Bag then PC, keep Steven present if both full, and close the receipt only after delivery or the finite already-owned3,000 alternative. No return to Roxanne for a stone. Starter-family stones use their single world locations.
+
+SOOT: EXPLORATION MILESTONES, NOT A SECOND SHOPPING BALANCE
+Keep existing ash paths and Sack. Count lifetime collection; no spending reduces progress.
+100: Linking Cord if missing, otherwise the one-time 5,000 alternative.
+250: unlock the Marshadow discovery; it does NOT count as a capture.
+500: Houndoominite or the finite duplicate-Mega alternative.
+Retire the separate soot purchasing balance and the redundant encounter/status-flute rewards. Existing glassmaker actors explain progress and sell decorative glass furniture for ordinary money. No new counter or map prop is required. Chairs/desks are optional cosmetic purchases (initial 6,000/8,000 cash). Repeated walks can earn the milestones, but none is required for the campaign or a basic evolution.
+
+HARVESTED BERRIES: PER-TYPE OPTIONAL EXPLORATION REWARDS
+All 67 supported ordinary berries are freely stocked at every Center held-item vendor from the beginning, in any team quantity the bag holds. Include status, recovery, resist, pinch/stat, flavor and special-effect berries. They remain equipment and planting seeds, not manual field medicine or sellable stock. No preset-stripping workaround is required.
+Harvested berries are separate saved quantities for each berry type, displayed in the Harvest Pouch (Key Items). The vendor supplies the pouch for free and offers the same menu even if Key Items is full. Pouch/Center menus show all types, including zero, and all reward requests from the beginning. Each successful harvest grants its ordinary berry yield plus an equal number of harvested credits of that exact type. Only the shared tree-picking transaction mints these credits. Gifts, catalogue withdrawals, held-item swaps, battle restoration, catches, Blender/Crush and planting itself do not. Planting uses one ordinary seed; it never spends harvested credits.
+Each type holds 255. A full berry bag or insufficient harvest-pouch capacity leaves the entire crop intact and awards nothing. Existing save offsets stay unchanged: the unused 88-byte Pokédex area contains the per-type byte counts and one encounter receipt. This is not an origin flag on interchangeable bag/held items; no retroactive credit for unidentified old bag stock.
+Preserve existing garden locations and species identities. Growth takes at most four real-time hours per complete cycle for every type; original yield and watering bonuses remain. Ripe crops remain until picked. No main-story progression waits for gardening. Requests are visible early, collection across routes supplies much of them, and planting missing types is the optional shortcut. Prices are starting balance values; earned traversal must judge whether actual approach/yields require adjustment.
+Early teaching: Route104's berry-gift NPC distinguishes free battle berries from typed harvest credit and names the Berry Master on Route123. The Flower Shop explains free seeds, four-hour maximum ripening, watering/yield, persistent ripe fruit, exact-type harvest credits and early recipe previews at Center vendors. Its Wailmer Pail explanation must never claim fruit falls off; its ordinary gift supplies no harvest credit. Both first and repeated conversations share these updated texts. No menu-coordinate tutorial or compulsory gardening gate.
+The Berry Master on Route123 trades these exact harvested recipes once each:
+Baxcalibrite: Razz6, Bluk6, Nanab4, Wepear4 (20).
+Dragoninite: Cheri6, Chesto6, Oran6, Pecha6 (24).
+Tyranitarite: Pomeg4, Kelpsy4, Qualot4, Hondew4, Grepa4, Tamato4 (24).
+Celebi's invitation: Pinap8, Sitrus8, Lum4, Leppa8 (28). This permanently unlocks a repeatable meeting with Celebi through the Berry Master, at the current player cap. It does not give or count as catching Celebi. A loss, flee or knockout permits another attempt without another payment. Native Petalburg Woods3 Celebi access remains an alternative; the shared caught-species receipt prevents duplicate captures or payment after Celebi is caught by either source.
+Each recipe preview names the reward and shows have/need for every ingredient. Confirmation precedes payment. Deliver a stone before debiting or closing its receipt; full storage preserves the complete recipe. Already-owned stones in Bag/PC/held storage and claimed receipts never charge or generate repeat cash. Ordinary berries are untouched. Optional legacy berry gifts remain seeds; they cannot become harvested currency or renewable cash.
+Implementation acceptance: native transaction regressions pass; synthetic native fixtures verify per-type harvest, bag-full and255-cap failures, max-count list endpoints, all recipe pages, successful/full-pocket trades, and twelve repeat-menu entries. Harvested Oran3 persisted through native Save and clean Continue. Final earned acquisition and campaign continuation are recorded below.
+
+SHOAL CAVE
+Keep four Shoal Salt + four Shoal Shell for the first Glalitite. Later collections give a Big Pearl. If Glalitite is already owned before this finite first claim, the first claim also gives a Big Pearl and closes the unique entitlement. No second Linking Cord reward. Real-time tides and repeated material collection remain OPTIONAL; no campaign gate waits for a tide or a harvest.
+
+SHARDS
+Keep colored shard → corresponding evolution stone as a cash-saving alternative through the existing Route124 treasure hunter. Stones are consumable, so repeat exchanges can be useful for another family member. No free source of shards through battle preparation. The exchange states the output before charging.
+
+COINS
+Keep direct Coin purchases at 20 cash per Coin; no required gambling. Ordinary starter alternatives: 500 Coins = 10,000 cash, one finite entitlement per offered species, respecting original starter receipts. Poipole 6,500 and Genesect 7,500 Coins remain seed prices (130,000/150,000 cash), marked for optional-collection affordability testing. They are not mandatory campaign gates and are not claimed affordable on first arrival. Do not replace a meaningful existing Pokémon gift with a redundant purchased copy.
+
+BP
+Circuit BP is optional mastery income. Remove paid shelves of free gear and retired PP upgrades/X-items. Stock specialty Balls, selected field recovery, cosmetics and paid evolution alternatives. Working values: regular special Balls 2 BP; Dream/Beast 8; ordinary evolution tools 8–16; reusable Cord 8 with the same ownership check. BP-earned items may retain ordinary resale only where the item is normally saleable; cash buying and selling must never be profitable. This is earned income, not a free-stock loop. No basic move, stat or Ability choice requires BP. Scott uses the saved best Circuit streak for his optional keepsakes: 50 wins unlock Lansat Berry and the Silver Shield; 100 unlock Starf Berry and the Gold Shield. Each is a one-time gift with its own receipt. Full Bag or decoration storage leaves that gift available on a later visit. Retired Frontier symbols and Tower records are not required.
+
+FOSSILS, GIFTS AND TRADES
+Fossil acquisition is the exploration reward; revival is free and quick. Keep the existing one-time gifts/trades and their local identity unless a named row changes them. Do not require another emulator for evolution. Linking Cord is reusable; Metal Coat, King's Rock and similar item evolutions work by local item use. Additional location/party conditions must be stated before item consumption. No gift-only baby requirement is introduced by this revision.
+
+DYNAMIC OFFERS
+An NPC never promises a reward before checking eligibility/receipt. Dialogue uses the actual item/cost and a useful already-owned alternative. Conditional trainer-side Pokémon do not create new permissions for player presets. A retired item cannot remain in a shop description, prize menu, Pickup result or gift message.
+
+BP
+Circuit BP is optional mastery income. Remove paid shelves of free gear and retired PP upgrades/X-items. Stock specialty Balls, selected field recovery, cosmetics and paid evolution alternatives. Working values: regular special Balls 2 BP; Dream/Beast 8; ordinary evolution tools 8–16; reusable Cord 8 with the same ownership check. BP-earned items may retain ordinary resale only where the item is normally saleable; cash buying and selling must never be profitable. This is earned income, not a free-stock loop. No basic move, stat or Ability choice requires BP. Scott uses the saved best Circuit streak for his optional keepsakes: 50 wins unlock Lansat Berry and the Silver Shield; 100 unlock Starf Berry and the Gold Shield. Each is a one-time gift with its own receipt. Full Bag or decoration storage leaves that gift available on a later visit. Retired Frontier symbols and Tower records are not required.
+
+KARTANA — EXPLICIT PRESERVATION DECISION
+Keep Kartana accessible through the existing M529 PetalburgWoods3 route and its 8% ordinary-wild table/provider. Do not add a badge/story lock, lower its encounter weight or remove it merely because it is strong or classified as exceptional. Physical-access/obstacle/marker checks remain necessary to ensure the intended route works; those checks are NOT authorization to gate it later. Preserve the rest of the 7.1 habitat template.
+
 6. WORLD, DIALOGUE AND SCENES
 ----------------------------
 
@@ -632,6 +1041,16 @@ Every required handoff names the action, destination, entrance/person and neares
 Scenes use the existing engine and art. Choreography means deliberate entrances, exits, facing, movement, waits, camera and consequences. Preserve the native Chansey chase, Briney boarding, Mew chase, Deoxys puzzle and weather intervention where they serve the story. New manor music, survey transport, roost and observation scenes need native staging and visual review. Do not invent extra researchers, legendary actors or collectible sparkles because a prose scene feels incomplete.
 
 Story completion, capture, permission and item delivery are different outcomes. A full bag cannot cancel an earned route; an optional capture cannot gate an observation already witnessed. Named required resources need recovery routes if the player legitimately loses them. Unchanged flavor dialogue still needs review against changed teams, rewards and onward destinations.
+
+OUTCOMES AND PRESENTATION CONTRACT
+---------------------------------
+Required trainer victories remain required. Mandatory legendary resolutions are Moltres, Landorus, the Southern Island Lati, Mew, Heatran, Deoxys, Regirock, Regice, Registeel, Diancie and Jirachi: win OR catch each; capture is never required. Fleeing/loss/declining never grants completion and leaves a retry. C14 requires the account/song, with Meloetta battle optional. C26 requires basement research; Zygarde/Stakataka remain optional and permanently missable after the warned fossil collapse. C45 requires puzzles AND guardian resolutions. C48 requires observations AND resolutions, followed by Steven. Rayquaza retains its mandatory cinematic awakening/intervention; no new Rayquaza battle is required. Later capture remains available after noncapture victories outside the explicitly sealed optional tower habitats.
+
+A completed scene stays completed across leaving, returning, saving and reloading. Its monetary reward, physical delivery and optional capture each have their own receipt. Full Bag or PC storage cannot revoke earned travel, duplicate payment, force a repeated boss victory or erase the ability to continue. Castform is the explicit recoverable party entitlement needed for its scene.
+
+Finish the scene before giving control back. Every temporary party, camera state, map effect, movement lock and transport transition must settle on success, failure and cancellation. Use the correct native exits and existing path centers. Do not invent walking routes, actors or sprite frames from prose alone.
+
+Each new/materially restaged sequence requires headless scene execution, screenshots at meaningful moments, and the user's visual review. Check entry, approach, action, battle transition where applicable, each outcome, departure, re-entry and map presentation. A successful build or static coordinate check cannot substitute for viewing the rendered scene.
 
 7. KEEPING THE GUIDE HONEST
 --------------------------

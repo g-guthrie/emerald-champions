@@ -1,4 +1,5 @@
 DesertUnderpass_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, DesertUnderpass_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertUnderpass_OnTransition
 	.byte 0
 
@@ -36,3 +37,9 @@ DesertUnderpass_Text_FoundRootFossil::
 DesertUnderpass_Text_FoundClawFossil::
 	.string "{PLAYER} found the CLAW FOSSIL.$"
 
+
+DesertUnderpass_OnLoad:
+	goto_if_lt VAR_MIRAGE_TOWER_STATE, 2, DesertUnderpass_EntranceOpen
+	setmetatile 132, 15, METATILE_Cave_EntranceCover, TRUE
+DesertUnderpass_EntranceOpen:
+	end

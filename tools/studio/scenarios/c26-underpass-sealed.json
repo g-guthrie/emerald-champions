@@ -1,0 +1,31 @@
+{
+  "name": "Underpass connection 3",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "vars": {
+      "VAR_MIRAGE_TOWER_STATE": 3
+    }
+  },
+  "warp": {
+    "map": "DesertUnderpass",
+    "x": 132,
+    "y": 14,
+    "facing": 1
+  },
+  "steps": [
+    {
+      "hold": "DOWN",
+      "frames": 40
+    },
+    {
+      "frames": 240,
+      "label": "Underground connection"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "DesertUnderpass"
+  }
+}

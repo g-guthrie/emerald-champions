@@ -31,6 +31,8 @@ The C15 Dwayne experiment remains paused; generated book/audit exports are now
 authorized. See `CONTINUE.md`.
 This long-term goal does not override that pause.
 
+Integrated story implementation: the user-approved story-gate, permanent-collapse, mandatory win-or-catch, ticket-recovery and Steven-conclusion work is retained. Its scoped native receipts are recorded in VERIFICATION; they are not full integrated-campaign acceptance.
+
 When asked to continue this project, start/resume a goal with the objective below.
 The previous account's goal was paused only for this machine/account handoff. The
 independent full-book review and initial implementation are already done; use the
@@ -120,3 +122,6 @@ Pokemon, including legendaries and Ultra Beasts. Preserve pre-edit saves and
 label assisted acquisition separately from native capture tests. Play every
 trainer normally; do not write wins or story progress. Gather evidence for possible additional
 legendary cap-relative penalties; do not implement them without approval.
+
+
+Current user direction after the immediate GitHub checkpoint: finish all outstanding work, especially AI, and finalize the integrated build before resuming design reviews. The next review order prioritizes Elite Four/Champion, then whole Gyms and Magma/Aqua story groups so Mega, legendary and strategy distribution is decided around the most important battles. First-access checks and forward native play remain necessary for progression validation. Do not assign new League teams piecemeal ahead of that review.

@@ -1,0 +1,40 @@
+{
+  "name": "c36 voyage home",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 6500,
+      "until": "idle",
+      "label": "Scene completes"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "LilycoveCity_Harbor",
+    "contains_text": "MT. PYRE"
+  },
+  "warp": {
+    "map": "FarawayIsland_Entrance",
+    "x": 13,
+    "y": 38,
+    "facing": 1
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_RESOLVED_MEW": true,
+      "FLAG_EC_REPORT_C36_COMPLETE": true,
+      "FLAG_BADGE06_GET": true,
+      "FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT": false
+    },
+    "vars": {}
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "vars": {
+      "VAR_MIRAGE_TOWER_STATE": 0
+    }
+  },
+  "warp": {
+    "map": "Route111_RuinsExterior",
+    "x": 13,
+    "y": 12,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "hold": "UP",
+      "frames": 16
+    },
+    {
+      "frames": 240,
+      "label": "Entrance after approach"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "SandstrewnRuins_3F"
+  },
+  "name": "c26-upper-entrance-open"
+}

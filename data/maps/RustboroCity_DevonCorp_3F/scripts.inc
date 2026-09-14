@@ -47,6 +47,9 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident::
 	applymovement LOCALID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor, MSGBOX_DEFAULT
+	@ Stop the automatic scene while a full Bag and PC leave the letter pending.
+	setvar VAR_DEVON_CORP_3F_STATE, 2
+RustboroCity_DevonCorp_3F_EventScript_GiveLetter::
 	giveitem ITEM_LETTER
 	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_3F_EventScript_ArchiveLetter
 	goto RustboroCity_DevonCorp_3F_EventScript_ReceivedLetter
@@ -164,7 +167,8 @@ RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk:
 RustboroCity_DevonCorp_3F_EventScript_MrStone::
 	lock
 	faceplayer
-	call_if_set FLAG_EC_STEVEN_RESEARCH_CONCLUSION, RustboroCity_DevonCorp_3F_EventScript_ResearchConclusion
+	goto_if_eq VAR_DEVON_CORP_3F_STATE, 2, RustboroCity_DevonCorp_3F_EventScript_GiveLetter
+	goto_if_set FLAG_EC_STEVEN_RESEARCH_CONCLUSION, RustboroCity_DevonCorp_3F_EventScript_FinalConversation
 	goto_if_set FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_MrStoneFavorPending
 	checkitem ITEM_MEGA_RING, 1
@@ -190,10 +194,8 @@ RustboroCity_DevonCorp_3F_EventScript_MegaRingPending::
 
 RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite::
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_PIDGEOTITE
+	call RustboroCity_DevonCorp_3F_EventScript_TryGivePidgeotite
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON
-	msgbox RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -232,8 +234,9 @@ RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
 	.string "That equipment is for CAPT. STERN's\n"
 	.string "marine surveys. My son STEVEN is\l"
 	.string "studying the rocks on DEWFORD.\p"
-	.string "Both projects may explain the rare\n"
-	.string "POKéMON appearing across HOENN.\p"
+	.string "Someone went to a great deal of\n"
+	.string "trouble to keep those instruments\l"
+	.string "from reaching STERN.\p"
 	.string "MAGMA and AQUA are searching those\n"
 	.string "same places. I fear the thefts\l"
 	.string "are connected.\p"
@@ -342,16 +345,29 @@ RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by the PRESIDENT.$"
 
-RustboroCity_DevonCorp_3F_EventScript_ResearchConclusion::
-	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, Common_EventScript_NopReturn
-	completemilestone FLAG_EC_REPORT_C48_COMPLETE
-	msgbox RustboroCity_DevonCorp_3F_Text_ResearchConclusion, MSGBOX_DEFAULT
-	return
+RustboroCity_DevonCorp_3F_EventScript_FinalConversation::
+RustboroCity_DevonCorp_3F_EventScript_LeagueSendoff::
+	msgbox RustboroCity_DevonCorp_3F_Text_LeagueSendoff, MSGBOX_DEFAULT
+	call_if_unset FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, RustboroCity_DevonCorp_3F_EventScript_CheckLateGift
+	release
+	end
 
-RustboroCity_DevonCorp_3F_Text_ResearchConclusion:
-	.string "The report is complete. What you\n"
-	.string "chose to catch is your own journey.\p"
-	.string "You've earned your place at the\n"
-	.string "LEAGUE, and our final ¥20,000\l"
-	.string "research grant.\p"
-	.string "Your level cap is now 94.$"
+RustboroCity_DevonCorp_3F_Text_LeagueSendoff:
+	.string "You brought our scattered\n"
+	.string "accounts together. Thank you.\p"
+	.string "The LEAGUE is waiting. From\n"
+	.string "ROUTE 128, SURF east to EVER GRANDE,\l"
+	.string "then climb the WATERFALL.\p"
+	.string "VICTORY ROAD leads to your\n"
+	.string "next challenge.$"
+
+RustboroCity_DevonCorp_3F_EventScript_CheckLateGift::
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Common_EventScript_NopReturn
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
+RustboroCity_DevonCorp_3F_EventScript_TryGivePidgeotite::
+	giveuniqueitem ITEM_PIDGEOTITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
+	setflag FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON
+	msgbox RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite, MSGBOX_DEFAULT
+	return

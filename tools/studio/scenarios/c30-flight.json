@@ -1,0 +1,47 @@
+{
+  "name": "C30 \u2014 Institute departure to ruins",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_HIDE_ROUTE_119_TEAM_AQUA": true,
+      "FLAG_EC_RECEIVED_REVEAL_GLASS": true,
+      "FLAG_RECEIVED_CASTFORM": true,
+      "FLAG_BADGE05_GET": true,
+      "FLAG_EC_REPORT_C28_COMPLETE": true
+    },
+    "vars": {
+      "VAR_WEATHER_INSTITUTE_STATE": 1
+    }
+  },
+  "party": [
+    "SPECIES_CASTFORM_NORMAL",
+    "SPECIES_PIDGEOT"
+  ],
+  "warp": {
+    "map": "Route119_WeatherInstitute_2F",
+    "x": 5,
+    "y": 6,
+    "facing": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Survey offer"
+    },
+    {
+      "tap": "A",
+      "every": 90,
+      "frames": 2400,
+      "until": "idle",
+      "label": "Ruins arrival"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "Route111_RuinsExterior",
+    "contains_text": "archaeologist"
+  }
+}

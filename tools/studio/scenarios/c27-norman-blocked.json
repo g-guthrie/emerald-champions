@@ -1,0 +1,37 @@
+{
+  "name": "c27-norman-blocked",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {},
+    "vars": {
+      "VAR_PETALBURG_GYM_STATE": 6
+    }
+  },
+  "warp": {
+    "map": "PetalburgCity_Gym",
+    "x": 4,
+    "y": 3,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "A",
+      "every": 90,
+      "frames": 4000,
+      "until": "idle",
+      "label": "Required next action"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "battle": false,
+    "map": "PetalburgCity_Gym",
+    "contains_text": "SANDSTREWN"
+  }
+}

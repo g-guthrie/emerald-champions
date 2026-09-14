@@ -47,7 +47,7 @@ ScorchedSlab_B2F_EventScript_HeatranAwake:
 	end
 ScorchedSlab_B2F_Text_HeatranCaught:
 	.string "HEATRAN travels with you, too?\n"
-	.string "These caves have shared quite a secret!$"
+	.string "These caves held quite a secret!$"
 ScorchedSlab_B2F_Text_HeatranAwake:
 	.string "HEATRAN is awake in the room below.\p"
 	.string "If it retreats after a battle, leave\n"

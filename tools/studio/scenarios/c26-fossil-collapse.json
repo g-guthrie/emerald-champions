@@ -1,0 +1,51 @@
+{
+  "start": {
+    "chapter": 3
+  },
+  "warp": {
+    "map": "MirageTower_4F",
+    "x": 5,
+    "y": 5,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL": false,
+      "FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL": false,
+      "FLAG_EC_REPORT_C26_COMPLETE": true
+    }
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Interaction begins"
+    },
+    {
+      "tap": "A",
+      "every": 90,
+      "frames": 10000,
+      "until": "idle",
+      "label": "Controls returned"
+    }
+  ],
+  "queries": {
+    "fossil": {
+      "kind": 4,
+      "id": "ITEM_ROOT_FOSSIL"
+    },
+    "tower": {
+      "kind": 2,
+      "id": "VAR_MIRAGE_TOWER_STATE"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "map": "Route111",
+    "queries": {
+      "fossil": 1,
+      "tower": 2
+    }
+  },
+  "name": "c26-fossil-collapse"
+}

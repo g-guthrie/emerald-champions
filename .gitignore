@@ -8,6 +8,7 @@ pokeemerald-test-all-ai.inputs.json
 *.sgm
 *.sa1
 *.ss[0-9]
+/.venv-studio/
 /pokeemerald-*.inputs.json
 /.venv/
 *.sg1

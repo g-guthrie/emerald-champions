@@ -1,6 +1,21 @@
 Route119_WeatherInstitute_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_2F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route119_WeatherInstitute_2F_OnFrame
 	.byte 0
+
+Route119_WeatherInstitute_2F_OnFrame:
+	map_script_2 VAR_TEMP_F, 0, Route119_WeatherInstitute_2F_EventScript_CheckArrival
+	.2byte 0
+
+Route119_WeatherInstitute_2F_EventScript_CheckArrival::
+	setvar VAR_TEMP_F, 1
+	goto_if_unset FLAG_EC_SURVEY_FLIGHT_ARRIVAL, Route119_WeatherInstitute_2F_EventScript_ArrivalEnd
+	clearflag FLAG_EC_SURVEY_FLIGHT_ARRIVAL
+	lockall
+	msgbox Route111_RuinsExterior_Text_Returned, MSGBOX_DEFAULT
+	releaseall
+Route119_WeatherInstitute_2F_EventScript_ArrivalEnd::
+	end
 
 Route119_WeatherInstitute_2F_OnTransition:
 	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 0, Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere
@@ -39,6 +54,7 @@ Route119_WeatherInstitute_2F_EventScript_Grunt3::
 	end
 
 Route119_WeatherInstitute_2F_EventScript_Shelly::
+	call EC_RequireGenerator
 	trainerbattle_double TRAINER_SHELLY_WEATHER_INSTITUTE, Route119_WeatherInstitute_2F_Text_ShellyIntro, Route119_WeatherInstitute_2F_Text_ShellyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route119_WeatherInstitute_2F_EventScript_ShellyDefeated
 	msgbox Route119_WeatherInstitute_2F_Text_ShellyPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -146,11 +162,11 @@ Route119_WeatherInstitute_2F_EventScript_Release::
 
 Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull::
 	msgbox Route119_WeatherInstitute_2F_Text_RevealGlassBagFull, MSGBOX_DEFAULT
-	release
-	end
+	goto Route119_WeatherInstitute_2F_EventScript_OfferSurvey
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather::
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
+	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route119_WeatherInstitute_2F_EventScript_SurveyConclusion
 	msgbox Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT
 	release
 	end
@@ -263,7 +279,12 @@ Route119_WeatherInstitute_2F_EventScript_OfferSurvey::
 	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
 	msgbox Route119_WeatherInstitute_2F_Text_OfferSurvey, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route119_WeatherInstitute_2F_EventScript_Release
+	msgbox Route119_WeatherInstitute_2F_Text_Departure, MSGBOX_DEFAULT
 	closemessage
+	fadescreen FADE_TO_BLACK
+	playse SE_M_FLY
+	waitse
+	setflag FLAG_EC_SURVEY_FLIGHT_ARRIVAL
 	warp MAP_ROUTE111_RUINS_EXTERIOR, 13, 12
 	waitstate
 	releaseall
@@ -410,7 +431,8 @@ Route119_WeatherInstitute_2F_Text_RevealGlassPurpose:
 Route119_WeatherInstitute_2F_Text_RevealGlassBagFull:
 	.string "The REVEAL GLASS is ready for you, but\n"
 	.string "your KEY ITEMS pocket is full.\p"
-	.string "Make room, then speak with me again.$"
+	.string "I will keep it here until you have room.\n"
+	.string "Our survey flight is still available.$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous:
 	.string "Our instruments track unusual\n"
@@ -441,3 +463,26 @@ Route119_WeatherInstitute_2F_Text_NoAbnormalWeather:
 	.string "no longer being reported.\p"
 	.string "The occasional rainfall is a blessing,\n"
 	.string "really.$"
+
+Route119_WeatherInstitute_2F_Text_Departure:
+	.string "Our research flier will take you\n"
+	.string "to the elevated ruins. Keep your\l"
+	.string "CASTFORM close during the ascent.$"
+
+Route119_WeatherInstitute_2F_EventScript_SurveyConclusion::
+	msgbox Route119_WeatherInstitute_2F_Text_SurveyConclusion, MSGBOX_DEFAULT
+	release
+	end
+
+Route119_WeatherInstitute_2F_Text_SurveyConclusion:
+	.string "Now we can separate local weather\n"
+	.string "from the disturbance offshore.\l"
+	.string "This is what AQUA tried to take.\p"
+	.string "STEVEN is following the old\n"
+	.string "account east. Show him what you\l"
+	.string "saw when your paths meet.\p"
+	.string "Continue north on ROUTE 119 to\n"
+	.string "FORTREE. After your rival, meet\l"
+	.string "STEVEN on ROUTE 120, east of town.\p"
+	.string "His DEVON SCOPE investigation\n"
+	.string "comes before WINONA's GYM.$"

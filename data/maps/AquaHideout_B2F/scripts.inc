@@ -23,6 +23,7 @@ AquaHideout_B2F_EventScript_MattNoticePlayer::
 	end
 
 AquaHideout_B2F_EventScript_Matt::
+	call EC_RequireHeatran
 	trainerbattle_double TRAINER_MATT, AquaHideout_B2F_Text_MattIntro, AquaHideout_B2F_Text_MattDefeat, EmeraldChampions_Text_NeedTwoPokemon, AquaHideout_B2F_EventScript_SubmarineEscape
 	msgbox AquaHideout_B2F_Text_MattPostBattle, MSGBOX_DEFAULT
 	release
@@ -102,14 +103,14 @@ AquaHideout_B2F_Text_OurBossGotThroughHisPreparations:
 	.string "late! ARCHIE's ready to dive!$"
 
 AquaHideout_B2F_Text_MattPostBattle:
-	.string "MATT: ARCHIE's headed for a cavern\n"
-	.string "beneath ROUTE 128.\p"
-	.string "Go on, chase him! You'll need DIVE\n"
-	.string "to follow a submarine down there.\p"
-	.string "You'll need MOSSDEEP's BADGE and\n"
-	.string "DIVE. Ask STEVEN for help, if you\l"
-	.string "can find him! ARCHIE will be miles\l"
-	.string "ahead.$"
+	.string "MATT: ARCHIE's submarine is gone!\n"
+	.string "Go east from LILYCOVE, across\l"
+	.string "ROUTE 124 to MOSSDEEP.\p"
+	.string "You'll need TATE and LIZA's BADGE.\n"
+	.string "Then find STEVEN at the SPACE\l"
+	.string "CENTER, east of their GYM.\p"
+	.string "He might know how to follow us.\n"
+	.string "ARCHIE will be miles ahead!$"
 
 AquaHideout_B2F_Text_Grunt4Intro:
 	.string "I've been waiting here so long my\n"

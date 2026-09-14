@@ -7,10 +7,16 @@ MeteorFalls_JirachisRoom_OnTransition:
 	end
 
 MeteorFalls_JirachisRoom_EventScript_Jirachi::
+	call EC_RequireFinalBadge
 	lock
 	faceplayer
 	call_if_unset FLAG_EC_SURVEYED_METEOR_CHAMBER, MeteorFalls_JirachisRoom_EventScript_Observe
+	goto_if_set FLAG_EC_RESOLVED_JIRACHI, MeteorFalls_JirachisRoom_EventScript_OptionalBattle
 	msgbox MeteorFalls_JirachisRoom_Text_BattleOffer, MSGBOX_YESNO
+	goto MeteorFalls_JirachisRoom_EventScript_BattleChoice
+MeteorFalls_JirachisRoom_EventScript_OptionalBattle::
+	msgbox EmeraldChampions_Text_ResearchChallengeComplete, MSGBOX_YESNO
+MeteorFalls_JirachisRoom_EventScript_BattleChoice::
 	goto_if_eq VAR_RESULT, NO, MeteorFalls_JirachisRoom_EventScript_Handoff
 	closemessage
 	waitse
@@ -25,6 +31,8 @@ MeteorFalls_JirachisRoom_EventScript_Jirachi::
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
+	call_if_eq VAR_RESULT, B_OUTCOME_WON, MeteorFalls_JirachisRoom_EventScript_Resolved
+	call_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MeteorFalls_JirachisRoom_EventScript_Resolved
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, MeteorFalls_JirachisRoom_EventScript_JirachiResting
 	goto MeteorFalls_JirachisRoom_EventScript_JirachiCaught
 	end
@@ -37,7 +45,7 @@ MeteorFalls_JirachisRoom_EventScript_JirachiCaught::
 
 MeteorFalls_JirachisRoom_EventScript_JirachiResting::
 	special HideRestingLegendaryObject
-	msgbox gText_LegendaryResting, MSGBOX_DEFAULT
+	call Common_EventScript_ExplainLegendaryResting
 	goto MeteorFalls_JirachisRoom_EventScript_Handoff
 	end
 
@@ -88,8 +96,9 @@ MeteorFalls_JirachisRoom_Movement_Settle:
 	step_end
 
 MeteorFalls_JirachisRoom_EventScript_Handoff::
+	goto_if_unset FLAG_EC_RESOLVED_JIRACHI, MeteorFalls_JirachisRoom_EventScript_BattlePending
 	goto_if_unset FLAG_BADGE08_GET, MeteorFalls_JirachisRoom_EventScript_BadgePending
-	goto_if_set FLAG_EC_SURVEYED_ORIGIN_CHAMBER, MeteorFalls_JirachisRoom_EventScript_StevenHandoff
+	goto_if_set FLAG_EC_RESOLVED_DIANCIE, MeteorFalls_JirachisRoom_EventScript_StevenHandoff
 	msgbox MeteorFalls_JirachisRoom_Text_OriginHandoff, MSGBOX_DEFAULT
 	goto MeteorFalls_JirachisRoom_EventScript_End
 	end
@@ -118,7 +127,8 @@ MeteorFalls_JirachisRoom_Text_Observation:
 
 MeteorFalls_JirachisRoom_Text_BattleOffer:
 	.string "Would you like to battle JIRACHI?\n"
-	.string "This battle and capture are optional.$"
+	.string "Win or catch it to finish this\l"
+	.string "discovery. Capturing is optional.$"
 
 MeteorFalls_JirachisRoom_Text_ObserveEmptyChamber:
 	.string "JIRACHI is no longer here, but\n"
@@ -132,4 +142,17 @@ MeteorFalls_JirachisRoom_Text_OriginHandoff:
 	.string "its lower passage.\p"
 	.string "In the crystal chamber, interact\n"
 	.string "with DIANCIE to study the light.\l"
-	.string "Its battle is optional.$"
+	.string "Win or catch it. Keeping it\p"
+	.string "is your choice.$"
+
+MeteorFalls_JirachisRoom_EventScript_Resolved::
+	setflag FLAG_EC_RESOLVED_JIRACHI
+	return
+
+MeteorFalls_JirachisRoom_EventScript_BattlePending::
+	msgbox MeteorFalls_JirachisRoom_Text_BattlePending, MSGBOX_DEFAULT
+	goto MeteorFalls_JirachisRoom_EventScript_End
+MeteorFalls_JirachisRoom_Text_BattlePending:
+	.string "JIRACHI awaits your challenge.\n"
+	.string "Return ready to win or catch it.\l"
+	.string "You do not have to keep it.$"

@@ -682,44 +682,6 @@ void OpenEmeraldChampionsBattleItemMart(void)
     ScriptContext_Stop();
 }
 
-static enum Item GetEmeraldChampionsStarterStoneAtIndex(u32 index)
-{
-    static const struct { enum Species starter; u16 first; u16 second; } sStarterStones[] =
-    {
-        {SPECIES_BULBASAUR,  ITEM_VENUSAURITE,   ITEM_NONE},
-        {SPECIES_CHARMANDER, ITEM_CHARIZARDITE_X, ITEM_CHARIZARDITE_Y},
-        {SPECIES_SQUIRTLE,   ITEM_BLASTOISINITE, ITEM_NONE},
-        {SPECIES_CHIKORITA,  ITEM_MEGANIUMITE,   ITEM_NONE},
-        {SPECIES_TOTODILE,   ITEM_FERALIGITE,    ITEM_NONE},
-        {SPECIES_TREECKO,    ITEM_SCEPTILITE,    ITEM_NONE},
-        {SPECIES_TORCHIC,    ITEM_BLAZIKENITE,   ITEM_NONE},
-        {SPECIES_MUDKIP,     ITEM_SWAMPERTITE,   ITEM_NONE},
-        {SPECIES_TEPIG,      ITEM_EMBOARITE,     ITEM_NONE},
-        {SPECIES_CHESPIN,    ITEM_CHESNAUGHTITE, ITEM_NONE},
-        {SPECIES_FENNEKIN,   ITEM_DELPHOXITE,    ITEM_NONE},
-        {SPECIES_FROAKIE,    ITEM_GRENINJITE,    ITEM_NONE},
-    };
-    enum Species starter;
-    if (index >= 4 || (index >= 2 && !HasEmeraldChampionsSecondStarter()))
-        return ITEM_NONE;
-    starter = GetStarterPokemonForGeneration(index < 2 ? VarGet(VAR_STARTER_MON)
-        : VarGet(VAR_EC_SECOND_STARTER) - 1, VarGet(VAR_STARTER_GEN));
-    for (u32 i = 0; i < ARRAY_COUNT(sStarterStones); i++)
-        if (sStarterStones[i].starter == starter)
-            return (index & 1) ? sStarterStones[i].second : sStarterStones[i].first;
-    return ITEM_NONE;
-}
-
-void GetEmeraldChampionsStarterMegaStone(void)
-{
-    gSpecialVar_0x8004 = GetEmeraldChampionsStarterStoneAtIndex(0);
-    gSpecialVar_0x8005 = GetEmeraldChampionsStarterStoneAtIndex(1);
-    gSpecialVar_Result = FALSE;
-    for (u32 i = 0; i < 4; i++)
-        if (GetEmeraldChampionsStarterStoneAtIndex(i) != ITEM_NONE)
-            gSpecialVar_Result = TRUE;
-}
-
 // Story handoffs consume exactly one item from either player inventory store.
 void CheckEmeraldChampionsHandoffItem(void)
 {
@@ -747,42 +709,6 @@ void TakeEmeraldChampionsHandoffItem(void)
             return;
         }
     }
-}
-
-void GiveEmeraldChampionsStarterMegaStoneAtIndex(void)
-{
-    u32 index = gSpecialVar_0x8008;
-    enum Item item = GetEmeraldChampionsStarterStoneAtIndex(index);
-    u16 delivered = VarGet(VAR_STEVEN_STARTER_STONE_DELIVERY);
-    gSpecialVar_0x8004 = item;
-    gSpecialVar_0x8005 = 0;
-    gSpecialVar_Result = TRUE;
-    if (item == ITEM_NONE || (delivered & (1 << index)))
-        return;
-    bool32 fulfilled = PlayerOwnsItem(item);
-    bool32 duplicateStarter = FALSE;
-    for (u32 i = 0; i < index; i++)
-        if ((delivered & (1 << i)) && GetEmeraldChampionsStarterStoneAtIndex(i) == item)
-            duplicateStarter = TRUE;
-    if (fulfilled && !duplicateStarter)
-    {
-        AddMoney(&gSaveBlock1Ptr->money, 3000);
-        gSpecialVar_0x8005 = 3;
-    }
-    fulfilled |= duplicateStarter;
-    if (!fulfilled && AddBagItem(item, 1))
-    {
-        fulfilled = TRUE;
-        gSpecialVar_0x8005 = 1;
-    }
-    else if (!fulfilled && AddPCItem(item, 1))
-    {
-        fulfilled = TRUE;
-        gSpecialVar_0x8005 = 2;
-    }
-    if (fulfilled)
-        VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, delivered | (1 << index));
-    gSpecialVar_Result = fulfilled;
 }
 
 void OpenEmeraldChampionsEvolutionItemArchive(void)
@@ -1338,6 +1264,7 @@ enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y
         return SS_TIDAL_LOCATION_LILYCOVE;
     case SS_TIDAL_DEPART_LILYCOVE:
     case SS_TIDAL_EXIT_CURRENTS_LEFT:
+    case SS_TIDAL_EXPEDITION:
         return SS_TIDAL_LOCATION_ROUTE124;
     case SS_TIDAL_DEPART_SLATEPORT:
         if (*varCruiseStepCount < 60)

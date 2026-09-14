@@ -59,7 +59,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle1::
 	msgbox Route110_TrickHouseEnd_Text_AllNightToPlantTrees, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveuniqueitem ITEM_STARAPTITE
+	giveitem ITEM_NUGGET
 	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
@@ -353,17 +353,10 @@ Route110_TrickHouseEnd_Text_YoureIgnoringMe:
 	.string "Now that, I consider heartbreaking!$"
 
 
-Route110_TrickHouseEnd_Text_FinalPrizeMegaStone:
-	.string "And one more thing! A true master of\n"
-	.string "tricks deserves a master of the mind.$"
-
-@ Both final prizes are independent entitlements, including later courier claims.
 Route110_TrickHouseEnd_EventScript_ClaimFinalRewards::
 	call_if_unset FLAG_EC_TRICK_FINAL_TENT_RECEIVED, Route110_TrickHouseEnd_EventScript_ClaimFinalTent
-	call_if_unset FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED, Route110_TrickHouseEnd_EventScript_ClaimFinalStone
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
 	goto_if_unset FLAG_EC_TRICK_FINAL_TENT_RECEIVED, Route110_TrickHouseEnd_EventScript_FinalRewardsPending
-	goto_if_unset FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED, Route110_TrickHouseEnd_EventScript_FinalRewardsPending
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 Route110_TrickHouseEnd_EventScript_FinalRewardsPending::
 	return
@@ -372,11 +365,4 @@ Route110_TrickHouseEnd_EventScript_ClaimFinalTent::
 	call Route110_TrickHouseEnd_EventScript_ChooseTent
 	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_NoRoomForTent
 	setflag FLAG_EC_TRICK_FINAL_TENT_RECEIVED
-	return
-
-Route110_TrickHouseEnd_EventScript_ClaimFinalStone::
-	msgbox Route110_TrickHouseEnd_Text_FinalPrizeMegaStone, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_ALAKAZITE
-	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
-	setflag FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED
 	return

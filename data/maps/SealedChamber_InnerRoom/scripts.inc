@@ -3,32 +3,39 @@ SealedChamber_InnerRoom_MapScripts::
 
 SealedChamber_InnerRoom_EventScript_BrailleBackWall::
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_ThreeRecords
+	msgbox SealedChamber_InnerRoom_Text_ThreeRecords, MSGBOX_DEFAULT
 	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
 	goto_if_unset FLAG_EC_REPORT_C26_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_REPORT_C30_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_REPORT_C44_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
+	closemessage
 	fadeoutbgm 0
 	playse SE_TRUCK_MOVE
 	special DoSealedChamberShakingEffect_Long
+	waitstate
 	delay 40
 	special DoSealedChamberShakingEffect_Short
+	waitstate
 	playse SE_DOOR
 	delay 40
 	special DoSealedChamberShakingEffect_Short
+	waitstate
 	playse SE_DOOR
 	delay 40
 	special DoSealedChamberShakingEffect_Short
+	waitstate
 	playse SE_DOOR
 	delay 40
 	msgbox gText_DoorOpenedFarAway, MSGBOX_DEFAULT
 	closemessage
 	fadeinbgm 0
-	completemilestone FLAG_REGI_DOORS_OPENED
+	setflag FLAG_REGI_DOORS_OPENED
+	msgbox SealedChamber_InnerRoom_Text_ThreeSites, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SealedChamber_InnerRoom_EventScript_NoEffect::
+	msgbox SealedChamber_InnerRoom_Text_ThreeSites, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -135,3 +142,22 @@ SealedChamber_InnerRoom_Text_ResearchPending:
 	.string "weather, and STERN's seabed scan.\p"
 	.string "Complete those research reports\n"
 	.string "to read the builders' message.$"
+
+SealedChamber_InnerRoom_Text_ThreeRecords:
+	.string "STONE. STORM. SEA. REMEMBER.\p"
+	.string "The desert safeguards, weather\n"
+	.string "survey and seabed scan reveal\l"
+	.string "the meaning of these marks.$"
+
+SealedChamber_InnerRoom_Text_ThreeSites:
+	.string "Three doors answer across HOENN.\n"
+	.string "Each site preserves part of the\l"
+	.string "lost undersea route.\p"
+	.string "DESERT RUINS: ROUTE 111's desert.\n"
+	.string "ISLAND CAVE: west of ROUTE 105.\l"
+	.string "ANCIENT TOMB: on ROUTE 120.\p"
+	.string "Solve each rear-wall puzzle and\n"
+	.string "read the revealed account. Start\l"
+	.string "with the DESERT RUINS.\p"
+	.string "The REGIS guard these places.\n"
+	.string "Catching them is optional.$"

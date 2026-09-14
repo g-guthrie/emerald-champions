@@ -1,0 +1,40 @@
+{
+  "name": "c42 meteorite briefing",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 6500,
+      "until": "idle",
+      "label": "Scene completes"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "contains_text": "meteorite"
+  },
+  "warp": {
+    "map": "MossdeepCity_SpaceCenter_2F",
+    "x": 6,
+    "y": 6,
+    "facing": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_REPORT_C42_COMPLETE": true,
+      "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA": true
+    },
+    "vars": {
+      "VAR_MOSSDEEP_CITY_STATE": 3,
+      "VAR_MOSSDEEP_SPACE_CENTER_STATE": 3
+    }
+  }
+}

@@ -1,11 +1,28 @@
 Route111_RuinsExterior_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, Route111_RuinsExterior_OnLoad
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route111_RuinsExterior_OnFrame
 	.byte 0
+
+Route111_RuinsExterior_OnFrame:
+	map_script_2 VAR_TEMP_F, 0, Route111_RuinsExterior_EventScript_CheckArrival
+	.2byte 0
+
+Route111_RuinsExterior_EventScript_CheckArrival::
+	setvar VAR_TEMP_F, 1
+	goto_if_unset FLAG_EC_SURVEY_FLIGHT_ARRIVAL, Route111_RuinsExterior_EventScript_ArrivalEnd
+	clearflag FLAG_EC_SURVEY_FLIGHT_ARRIVAL
+	lockall
+	msgbox Route111_RuinsExterior_Text_Arrival, MSGBOX_DEFAULT
+	releaseall
+Route111_RuinsExterior_EventScript_ArrivalEnd::
+	end
 
 Route111_RuinsExterior_EventScript_Archaeologist::
 	lockall
 	faceplayer
-	goto_if_unset FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route111_RuinsExterior_EventScript_Briefing
 	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route111_RuinsExterior_EventScript_SurveyDone
+	call EC_RequireGenerator
+	goto_if_unset FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route111_RuinsExterior_EventScript_Briefing
 	msgbox Route111_RuinsExterior_Text_Archaeologist, MSGBOX_DEFAULT
 	setvar VAR_0x8004, SPECIES_CASTFORM
 	special DoesPlayerPartyHaveSelectedSpeciesFamily
@@ -17,6 +34,13 @@ Route111_RuinsExterior_EventScript_Archaeologist::
 	goto_if_eq VAR_RESULT, 4, Route111_RuinsExterior_EventScript_RecordSurvey
 	goto_if_eq VAR_RESULT, 5, Route111_RuinsExterior_EventScript_Resting
 	goto_if_lt VAR_RESULT, 2, Route111_RuinsExterior_EventScript_NeedCastform
+	special PrepareEmeraldChampionsCastformSurvey
+	goto_if_eq VAR_RESULT, FALSE, Route111_RuinsExterior_EventScript_NeedCastform
+	closemessage
+	dofieldeffect FLDEFF_FIELD_MOVE_SHOW_MON_INIT
+	waitfieldeffect FLDEFF_FIELD_MOVE_SHOW_MON
+	playmoncry SPECIES_CASTFORM_NORMAL, CRY_MODE_NORMAL
+	waitmoncry
 	msgbox Route111_RuinsExterior_Text_WindAnswers, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route111_RuinsExterior_EventScript_OfferReturn
 	closemessage
@@ -58,6 +82,10 @@ Route111_RuinsExterior_EventScript_OfferReturn::
 	msgbox Route111_RuinsExterior_Text_OfferReturn, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route111_RuinsExterior_EventScript_End
 	closemessage
+	fadescreen FADE_TO_BLACK
+	playse SE_M_FLY
+	waitse
+	setflag FLAG_EC_SURVEY_FLIGHT_ARRIVAL
 	warp MAP_ROUTE119_WEATHER_INSTITUTE_2F, 5, 6
 	waitstate
 Route111_RuinsExterior_EventScript_End::
@@ -115,3 +143,19 @@ Route111_RuinsExterior_Text_Briefing:
 	.string "WEATHER INSTITUTE on ROUTE 119.\p"
 	.string "Their team can arrange a survey\n"
 	.string "when they're ready.$"
+
+Route111_RuinsExterior_Text_Arrival:
+	.string "The flier settles beside the ruins.\p"
+	.string "The archaeologist is just east\n"
+	.string "of the landing. Speak to him with\l"
+	.string "CASTFORM ready in your party.$"
+Route111_RuinsExterior_Text_Returned:
+	.string "Back at the WEATHER INSTITUTE.\p"
+	.string "The survey team can help you\n"
+	.string "prepare or arrange another flight.$"
+
+Route111_RuinsExterior_OnLoad:
+	goto_if_lt VAR_MIRAGE_TOWER_STATE, 2, Route111_RuinsExterior_EntranceOpen
+	setmetatile 13, 11, METATILE_Mauville_MirageTower_Tile4, TRUE
+Route111_RuinsExterior_EntranceOpen:
+	end

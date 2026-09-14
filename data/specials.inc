@@ -517,7 +517,6 @@ gSpecials::
 	def_special Unused_EmeraldChampionsGemItemMart, unused=1
 	def_special Unused_EmeraldChampionsSpeciesItemMart, unused=1
 	def_special Unused_EmeraldChampionsMegaStoneArchive, unused=1
-	def_special GetEmeraldChampionsStarterMegaStone
 	def_special OpenEmeraldChampionsEvolutionItemArchive
 	def_special IsEmeraldChampionsGameCornerPokemonClaimed
 	def_special GiveEmeraldChampionsGameCornerPokemon
@@ -574,7 +573,6 @@ gSpecials::
 	def_special RestockEmeraldChampionsBasicBalls
 	def_special BufferEmeraldChampionsStarterNames
 	def_special SelectEmeraldChampionsStarterForNaming
-	def_special GiveEmeraldChampionsStarterMegaStoneAtIndex
 	def_special SaveForBattleTowerLink, waitstate=1
 	def_special Unused_SetWeatherSunny
 	def_special SetUnlockedPokedexFlags
@@ -744,3 +742,4 @@ gSpecials::
 	def_special CheckEmeraldChampionsGardenCelebi
 	def_special GiveEmeraldChampionsBerryPair
 	def_special PrepareEmeraldChampionsMeadowSong
+	def_special PrepareEmeraldChampionsCastformSurvey

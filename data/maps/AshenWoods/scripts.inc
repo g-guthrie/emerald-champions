@@ -221,11 +221,13 @@ AshenWoods_EventScript_Caretaker::
 	goto_if_unset FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, AshenWoods_EventScript_CaretakerBeforeRescue
 	goto_if_lt VAR_CHANSEY_NURSE_STATE, 7, AshenWoods_EventScript_CaretakerBeforeRescue
 	setflag FLAG_LANDMARK_EMBER_PATH
-	msgbox AshenWoods_Text_RidgeBriefing, MSGBOX_NPC
-	end
+	goto AshenWoods_EventScript_RidgeQuiet
 
 AshenWoods_EventScript_RidgeQuiet::
-	msgbox AshenWoods_Text_RidgeQuiet, MSGBOX_NPC
+	lock
+	faceplayer
+	call LavaridgeTown_EventScript_MountainHandoff
+	release
 	end
 
 AshenWoods_EventScript_CaretakerBeforeRescue::
@@ -283,17 +285,3 @@ AshenWoods_Text_MoltresCaught:
 	.string "MOLTRES found a partner in you!\p"
 	.string "EMBER PATH still glows at sunset.\n"
 	.string "I always look up, out of habit.$"
-
-AshenWoods_Text_RidgeBriefing:
-	.string "The ash has stopped falling, but\n"
-	.string "the ground hasn't settled.\p"
-	.string "Follow the old trail into EMBER PATH.\n"
-	.string "Something is keeping the ridge hot.\p"
-	.string "If you find a roost, give it room.$"
-
-AshenWoods_Text_RidgeQuiet:
-	.string "The ridge is quiet again. You found\n"
-	.string "what was stirring it.\p"
-	.string "Take what you learned back to the\n"
-	.string "researchers. They need more than\l"
-	.string "another weather report.$"

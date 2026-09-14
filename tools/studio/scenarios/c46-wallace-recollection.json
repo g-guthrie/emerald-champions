@@ -1,0 +1,37 @@
+{
+  "name": "c46 wallace recollection",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 6500,
+      "until": "idle",
+      "label": "Scene completes"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "contains_text": "SKY PILLAR"
+  },
+  "warp": {
+    "map": "CaveOfOrigin_B1F",
+    "x": 9,
+    "y": 14,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_REPORT_C45_COMPLETE": true,
+      "FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE": false
+    },
+    "vars": {}
+  }
+}

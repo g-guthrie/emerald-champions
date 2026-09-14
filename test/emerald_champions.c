@@ -491,7 +491,7 @@ static const struct { u16 flag; u8 cap; } sCampaignCapExpectations[] =
     {FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, 72},
     {FLAG_EC_REPORT_C42_COMPLETE, 76},
     {FLAG_EC_REPORT_C43_COMPLETE, 78},
-    {FLAG_REGI_DOORS_OPENED, 82},
+    {FLAG_EC_REPORT_C45_COMPLETE, 82},
     {FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, 86},
     {FLAG_BADGE08_GET, 90},
     {FLAG_EC_REPORT_C48_COMPLETE, 94},
@@ -2538,37 +2538,20 @@ TEST("Emerald Champions free Ball restock remains ten after the opening and cann
     ResetBookItemOwnership();
 }
 
-TEST("Emerald Champions starter and soot alternatives close each finite receipt once")
+TEST("Emerald Champions soot alternatives close each finite receipt once")
 {
     u32 savedMoney = GetMoney(&gSaveBlock1Ptr->money);
     ResetBookItemOwnership();
     SetMoney(&gSaveBlock1Ptr->money, 6000);
-    VarSet(VAR_STARTER_GEN, 1);
-    VarSet(VAR_STARTER_MON, 0);
-    VarSet(VAR_EC_SECOND_STARTER, 0);
-    VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, 0);
-    EXPECT(AddPCItem(ITEM_VENUSAURITE, 1));
-    gSpecialVar_0x8008 = 0;
-    GiveEmeraldChampionsStarterMegaStoneAtIndex();
-    EXPECT_EQ(gSpecialVar_Result, TRUE);
-    EXPECT_EQ(gSpecialVar_0x8005, 3);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
-    GiveEmeraldChampionsStarterMegaStoneAtIndex();
-    EXPECT_EQ(gSpecialVar_0x8005, 0);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
-    gSpecialVar_0x8008 = 1; // Bulbasaur has no second stone.
-    GiveEmeraldChampionsStarterMegaStoneAtIndex();
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
     EXPECT(AddBagItem(ITEM_LINKING_CORD, 1));
     VarSet(VAR_EC_SOOT_PROGRESS, 100);
     ClaimEmeraldChampionsSootMilestone();
     EXPECT_EQ(gSpecialVar_Result, 5);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 14000);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 11000);
     EXPECT_EQ(VarGet(VAR_EC_SOOT_PROGRESS), 100 | EC_SOOT_CORD_RECEIVED);
     ClaimEmeraldChampionsSootMilestone();
     EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 14000);
-    VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, 0);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 11000);
     VarSet(VAR_EC_SOOT_PROGRESS, 0);
     SetMoney(&gSaveBlock1Ptr->money, savedMoney);
     ResetBookItemOwnership();

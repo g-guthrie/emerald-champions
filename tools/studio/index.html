@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Emerald Studio</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><div class="brand"><span class="gem">◆</span><div>Emerald <strong>Studio</strong><small>LIVE DEVELOPMENT</small></div></div>
+<div class="connection"><i id="connectionDot"></i><span id="connection">Connecting</span><span class="tag">LOCAL · NATIVE mGBA</span></div>
+<button id="openLibrary">Library</button><button id="build" class="primary">↻ Build & apply</button></header>
+<main>
+<aside class="navigator">
+<div class="eyebrow">WORKSPACE</div>
+<nav><button class="tab active" data-panel="world">World</button><button class="tab" data-panel="party">Party</button><button class="tab" data-panel="battle">Battle</button><button class="tab" data-panel="history">Saves</button></nav>
+<section id="world" class="panel">
+<label for="mapSearch">Go somewhere</label><input id="mapSearch" placeholder="Search maps…" list="mapNames"><datalist id="mapNames"></datalist>
+<div class="map-title"><span id="mapTitle">Loading world</span><button id="follow" class="quiet" title="Follow player">◎</button></div>
+<div class="map-wrap"><canvas id="mapCanvas" aria-label="Map overview: select NPCs or teleport to walkable tiles"></canvas></div>
+<p class="hint">Click an NPC to inspect. Shift-click a clear tile to move there.</p>
+<label for="npcSelect">People & objects</label><select id="npcSelect"><option>Select an NPC</option></select>
+<button id="goNpc" class="wide">Stand beside selected NPC</button>
+<div class="eyebrow spaced">QUICK LOCATIONS</div><div id="locations" class="location-list"></div>
+<label for="chapter">Start a chapter setup</label><select id="chapter"><option value="3">C03 · Oldale Center</option><option value="4">C04 · Norman & Wally</option><option value="7">C07 · Roxanne</option></select>
+<button id="jumpChapter" class="wide">Load chapter sandbox</button><p class="hint">Starts a fresh test setup. Your current moment is bookmarked first.</p>
+</section>
+<section id="party" class="panel hidden"><p class="hint">Choose up to six Pokémon. Apply their first doubles preset at this chapter’s level cap.</p>
+<div id="partySlots"></div><datalist id="speciesNames"></datalist>
+<button id="applyParty" class="primary wide">Prepare party</button><button id="heal" class="wide">Heal party</button>
+<label for="difficulty">Battle difficulty</label><select id="difficulty"><option value="0">Easy</option><option value="1" selected>Medium</option><option value="2">Hard</option></select>
+<div id="partyReadout"></div></section>
+<section id="battle" class="panel hidden"><label for="trainer">Choose a trainer</label><input id="trainer" list="trainerNames" placeholder="Roxanne, Ned, Laura…"><datalist id="trainerNames"></datalist>
+<div id="trainerTeam" class="hint"></div><button id="startBattle" class="primary wide">Start test battle</button>
+<p class="hint">Runs the native battle with your current party, cap, and difficulty. No story victory is awarded. Retry interaction returns to the prebattle checkpoint.</p></section>
+<section id="history" class="panel hidden"><p class="hint">Bookmarks preserve the exact running build. Every interaction gets a checkpoint before it starts.</p>
+<input id="bookmarkName" placeholder="Name this moment"><button id="bookmark" class="wide">＋ Save bookmark</button><div id="bookmarks"></div></section>
+<div class="sidebar-foot"><span class="dot"></span> Sandbox session<br><small>Your earned campaign is separate.</small></div>
+</aside>
+<section class="play-area">
+<div class="play-heading"><div><span class="eyebrow">NOW PLAYING</span><h1 id="location">Emerald Champions</h1></div><span class="badge" id="gameState">Starting</span></div>
+<div class="screen-shell"><canvas id="screen" width="240" height="160" tabindex="0" aria-label="Emerald Champions game. Arrow keys move, Z is A, X is B, Enter is Start."></canvas>
+<div id="screenMessage">Starting the native game…</div></div>
+<div class="transport"><div><button id="pause">Ⅱ Pause</button><button id="retry">↶ Retry interaction</button><button id="sound">♪ Enable sound</button></div>
+<div><select id="speed" aria-label="Game speed"><option value="1">1× speed</option><option value="2">2× speed</option><option value="4">4× speed</option></select><button id="capture" title="Capture screenshot">▣</button></div></div>
+<div class="input-help"><span><kbd>↑↓←→</kbd> Move</span><span><kbd>Z</kbd> A</span><span><kbd>X</kbd> B</span><span><kbd>Enter</kbd> Start</span><span><kbd>Shift</kbd> Select</span><span><kbd>Q</kbd><kbd>E</kbd> L / R</span></div>
+<div class="scene-controls"><input id="sceneName" placeholder="Name this scene" aria-label="Scene name"><button id="recordScene">● Record</button><button id="markScene" disabled>Mark moment</button><button id="rewind">↶ 2 seconds</button></div>
+<div class="touch-controls"><button data-key="64">↑</button><button data-key="32">←</button><button data-key="128">↓</button><button data-key="16">→</button><button data-key="2">B</button><button data-key="1">A</button><button data-key="8">Start</button></div>
+<div class="session-card"><div class="live-dot"></div><div><strong id="status">Preparing your workspace</strong><p id="details">The game runs on your Mac. This window is its live display.</p></div><span id="performance">—</span></div>
+<details id="buildDetails"><summary>Build output</summary><pre id="buildLog">No build running.</pre></details>
+</section>
+<aside class="inspector"><button id="backWorld" class="wide">← Back to world</button><div class="eyebrow">INSPECTOR</div><h2 id="npcTitle">Meet the world.</h2><p class="hint" id="npcHint">Select an NPC on the map to read their dialogue and change it in the actual project.</p>
+<div id="editor" class="hidden"><label for="dialogueSelect">Conversation</label><select id="dialogueSelect"></select>
+<textarea id="dialogue" spellcheck="true" placeholder="What should this NPC say?"></textarea>
+<button id="applyDialogue" class="primary wide">Apply dialogue & rebuild</button><p class="hint">Updates the source and Game Book. The new build returns you to the interaction.</p><div id="sourcePath" class="source-path"></div></div>
+<details><summary>Text shown in the game</summary><pre id="liveText">No dialogue observed.</pre></details>
+<button id="sceneGraph" class="wide">Inspect scene references</button>
+<div class="inspector-note"><span>↶</span><p><strong>Try. Change. Try again.</strong><br>Retry interaction returns to the moment before the last conversation.</p></div></aside>
+</main>
+<footer><span id="buildId">BUILD —</span><span id="coords">—</span><span>EMERALD CHAMPIONS / DEVELOPMENT SANDBOX</span></footer>
+<div id="toast" role="status"></div>
+<dialog id="libraryDialog"><div class="library-heading"><div><span class="eyebrow">EMERALD STUDIO</span><h2>Scene & story library</h2></div><button id="closeLibrary">Close</button></div>
+<p id="librarySummary" class="hint"></p>
+<nav id="libraryTabs"><button data-view="sceneLibrary" class="active">Scenes</button><button data-view="dialogueLibrary">Dialogue</button><button data-view="assetLibrary">Art</button><button data-view="historyLibrary">History</button></nav>
+<section id="sceneLibrary" class="library-view"><div class="library-actions"><button id="saveSituation">Save current situation</button><button id="refreshScenes">Refresh</button></div><div id="situations"></div><div id="sceneJobs"></div><div id="sceneCards" class="scene-cards"></div>
+<div class="library-actions"><select id="compareBefore" aria-label="Before scene"></select><select id="compareAfter" aria-label="After scene"></select><button id="compareScenes">Compare scenes</button></div><div id="comparisonSheets"></div></section>
+<section id="dialogueLibrary" class="library-view hidden"><div class="library-actions"><input id="dialogueQuery" placeholder="Search NPC dialogue, maps, or labels"><button id="searchDialogue">Search</button><button id="exportDialogue">Build reading copy</button></div><p class="hint">Includes statically referenced conditional branches. Search results do not prove a line is reachable in play.</p><div id="dialogueResults"></div><div id="readingLinks"></div></section>
+<section id="assetLibrary" class="library-view hidden"><div class="library-actions"><input id="assetQuery" placeholder="Search source sprites: boy, nurse, steven…"><button id="searchAssets">Search art</button><button id="assetSheet">Make contact sheet</button></div><p class="hint">Actual source sprite sheets. Use native scene captures to judge palette, placement, scale and animation in context.</p><div id="assetResults" class="asset-grid"></div></section>
+<section id="historyLibrary" class="library-view hidden"><div class="library-actions"><input id="historyPath" placeholder="Source path, or leave blank for project history"><button id="searchHistory">Read history</button><button id="buildHistory">Local builds</button></div><div id="historyResults"></div></section>
+</dialog>
+<script>window.STUDIO_TOKEN="__TOKEN__";</script><script src="/app.js"></script><script src="/library-ui.js"></script>
+</body></html>

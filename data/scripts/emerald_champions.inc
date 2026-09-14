@@ -1215,8 +1215,8 @@ EmeraldChampions_Text_HarvestMeetCelebi:
 	.string "Bring your POKé BALLS. You can try\n"
 	.string "again without another berry payment.$"
 EmeraldChampions_Text_HarvestHelp:
-	.string "Every berry is free at the Center's\n"
-	.string "held-item counter, right from the start.\p"
+	.string "Every berry is free from the start\n"
+	.string "at the Center's held-item counter.\p"
 	.string "Equip them for battle or plant seeds.\n"
 	.string "They aren't medicine to use by hand.\p"
 	.string "Pick three LUM BERRIES: you get three\n"
@@ -1235,3 +1235,438 @@ Common_EventScript_ShowDeliveredBerry::
 	setvar VAR_0x8007, TRUE
 	call EventScript_ObtainItemMessage
 	return
+
+@ The existing three puzzle receipts own the route discovery; capture is optional.
+EmeraldChampions_EventScript_ThreeRuinsProgress::
+	goto_if_unset FLAG_REGI_DOORS_OPENED, EmeraldChampions_EventScript_RuinsNeedChamber
+	goto_if_unset FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, EmeraldChampions_EventScript_NextDesertRuin
+	goto_if_unset FLAG_SYS_BRAILLE_REGICE_COMPLETED, EmeraldChampions_EventScript_NextIslandRuin
+	goto_if_unset FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, EmeraldChampions_EventScript_NextAncientRuin
+	goto_if_unset FLAG_EC_RESOLVED_REGIROCK, EmeraldChampions_EventScript_GuardianDesert
+	goto_if_unset FLAG_EC_RESOLVED_REGICE, EmeraldChampions_EventScript_GuardianIsland
+	goto_if_unset FLAG_EC_RESOLVED_REGISTEEL, EmeraldChampions_EventScript_GuardianAncient
+	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, EmeraldChampions_EventScript_RuinsRouteKnown
+	completemilestone FLAG_EC_REPORT_C45_COMPLETE
+	msgbox EmeraldChampions_Text_ThreeRuinsComplete, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_RuinsRouteKnown::
+	msgbox EmeraldChampions_Text_ThreeRuinsRoute, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_RuinsNeedChamber::
+	msgbox SealedChamber_InnerRoom_Text_ResearchPending, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_NextDesertRuin::
+	msgbox EmeraldChampions_Text_NextDesertRuin, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_NextIslandRuin::
+	msgbox EmeraldChampions_Text_NextIslandRuin, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_NextAncientRuin::
+	msgbox EmeraldChampions_Text_NextAncientRuin, MSGBOX_DEFAULT
+	return
+EmeraldChampions_Text_NextDesertRuin:
+	.string "Next, read the DESERT RUINS\n"
+	.string "account in ROUTE 111's desert.\l"
+	.string "Its puzzle uses ROCK SMASH.$"
+EmeraldChampions_Text_NextIslandRuin:
+	.string "Next, SURF to ISLAND CAVE on the\n"
+	.string "west side of ROUTE 105, north of\l"
+	.string "DEWFORD. Read its rear wall.$"
+EmeraldChampions_Text_NextAncientRuin:
+	.string "Next, visit ANCIENT TOMB on\n"
+	.string "ROUTE 120. Read the rear wall;\l"
+	.string "its puzzle uses FLASH.$"
+EmeraldChampions_Text_ThreeRuinsComplete:
+	.string "The three guardians have answered!\p"
+	.string "Their directions resolve the\n"
+	.string "SCANNER's southeastern echoes.\p"
+	.string "Your discovery earns ¥16,000.\n"
+	.string "Your level cap is now 82.$"
+EmeraldChampions_Text_ThreeRuinsRoute:
+	.string "From MOSSDEEP, sail south through\n"
+	.string "ROUTE 127 to ROUTE 128. DIVE at\l"
+	.string "the deep-water basin.\p"
+	.string "Enter the underwater cave, then\n"
+	.string "surface where the submarine waits.\l"
+	.string "That is TEAM AQUA's route.\p"
+	.string "Bring licensed SURF and DIVE,\n"
+	.string "plus partners for STRENGTH and\l"
+	.string "ROCK SMASH inside the cavern.$"
+
+EmeraldChampions_EventScript_GuardianDesert::
+	msgbox EmeraldChampions_Text_GuardianDesert, MSGBOX_DEFAULT
+	return
+EmeraldChampions_Text_GuardianDesert:
+	.string "REGIROCK still waits in\n"
+	.string "DESERT RUINS on ROUTE 111.\p"
+	.string "Win the battle or catch it to\n"
+	.string "complete this discovery. Keeping\l"
+	.string "it is your choice.$"
+
+EmeraldChampions_EventScript_GuardianIsland::
+	msgbox EmeraldChampions_Text_GuardianIsland, MSGBOX_DEFAULT
+	return
+EmeraldChampions_Text_GuardianIsland:
+	.string "REGICE still waits in\n"
+	.string "ISLAND CAVE on ROUTE 105.\p"
+	.string "Win the battle or catch it to\n"
+	.string "complete this discovery. Keeping\l"
+	.string "it is your choice.$"
+
+EmeraldChampions_EventScript_GuardianAncient::
+	msgbox EmeraldChampions_Text_GuardianAncient, MSGBOX_DEFAULT
+	return
+EmeraldChampions_Text_GuardianAncient:
+	.string "REGISTEEL still waits in\n"
+	.string "ANCIENT TOMB on ROUTE 120.\p"
+	.string "Win the battle or catch it to\n"
+	.string "complete this discovery. Keeping\l"
+	.string "it is your choice.$"
+
+@ Story prerequisites block the next event, never ordinary return travel.
+
+EC_RequireDewford::
+	goto_if_set FLAG_EC_REPORT_C14_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireDewford, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireDewford:
+	.string "Finish the manor account and\n"
+	.string "perform the meadow song on DEWFORD.\p"
+	.string "STEVEN in GRANITE CAVE gives the\n"
+	.string "MEGA RING after his letter and\l"
+	.string "BRAWLY's badge.$"
+
+EC_RequireMuseum::
+	goto_if_set FLAG_DELIVERED_DEVON_GOODS, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireMuseum, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireMuseum:
+	.string "Take the DEVON GOODS to STERN in\n"
+	.string "SLATEPORT's OCEANIC MUSEUM.\l"
+	.string "Resolve the AQUA attack there.$"
+
+EC_RequireWally::
+	goto_if_set FLAG_DEFEATED_WALLY_MAUVILLE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireWally, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireWally:
+	.string "WALLY waits outside MAUVILLE GYM.\n"
+	.string "Accept and finish his challenge\l"
+	.string "before facing WATTSON.$"
+
+EC_RequireChimney::
+	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireChimney, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireChimney:
+	.string "Follow the METEOR FALLS theft to\n"
+	.string "MT. CHIMNEY. Take ROUTE 112's\l"
+	.string "cable car and stop MAXIE.$"
+
+EC_RequireDesert::
+	goto_if_set FLAG_EC_REPORT_C26_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireDesert, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireDesert:
+	.string "Finish the SANDSTREWN investigation\n"
+	.string "beneath MIRAGE TOWER on ROUTE 111.\p"
+	.string "Explore the lowest chamber, then\n"
+	.string "return to the archaeologist above.\l"
+	.string "Catching its POKéMON is optional.$"
+
+EC_RequireGenerator::
+	goto_if_set FLAG_EC_REPORT_C28_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireGenerator, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireGenerator:
+	.string "Resolve ROTOM at NEW MAUVILLE,\n"
+	.string "then speak to WATTSON in town.\l"
+	.string "The entrance is on ROUTE 110.$"
+
+EC_RequireSurvey::
+	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireSurvey, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireSurvey:
+	.string "Bring CASTFORM to the WEATHER\n"
+	.string "INSTITUTE on ROUTE 119. Take its\l"
+	.string "survey trip and resolve LANDORUS.$"
+
+EC_RequireScope::
+	goto_if_set FLAG_RECEIVED_DEVON_SCOPE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireScope, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireScope:
+	.string "Meet STEVEN on ROUTE 120, east of\n"
+	.string "FORTREE. Resolve the invisible\l"
+	.string "obstacle and collect the DEVON SCOPE.$"
+
+EC_RequireFeather::
+	goto_if_set FLAG_BADGE06_GET, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireFeather, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireFeather:
+	.string "Challenge WINONA in FORTREE GYM\n"
+	.string "before the expedition departs.$"
+
+EC_RequireVoyage::
+	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireVoyage, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireVoyage:
+	.string "Sail from LILYCOVE HARBOR to\n"
+	.string "SOUTHERN ISLAND, then FARAWAY.\p"
+	.string "Resolve the sanctuary encounter\n"
+	.string "and MEW's challenge. Capturing\l"
+	.string "either POKéMON is optional.$"
+
+EC_RequireHeatran::
+	goto_if_set FLAG_EC_REPORT_C39_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireHeatran, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireHeatran:
+	.string "Investigate HEATRAN in SCORCHED\n"
+	.string "SLAB on ROUTE 120. Bring the\l"
+	.string "MAGMA STONE from MAGMA HIDEOUT.$"
+
+EC_RequireHideout::
+	goto_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireHideout, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireHideout:
+	.string "Follow the stolen submarine to\n"
+	.string "AQUA HIDEOUT, northeast of\l"
+	.string "LILYCOVE. Defeat its final guard.$"
+
+EC_RequireMind::
+	goto_if_set FLAG_BADGE07_GET, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireMind, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireMind:
+	.string "Challenge TATE and LIZA in\n"
+	.string "MOSSDEEP GYM, then meet STEVEN\l"
+	.string "at the SPACE CENTER.$"
+
+EC_RequireSpace::
+	goto_if_set FLAG_EC_REPORT_C42_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireSpace, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireSpace:
+	.string "Help STEVEN stop MAGMA at the\n"
+	.string "SPACE CENTER in eastern MOSSDEEP.\l"
+	.string "Then finish his travel briefing.$"
+
+EC_RequireDeoxys::
+	goto_if_set FLAG_EC_REPORT_C43_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireDeoxys, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireDeoxys:
+	.string "Take the earned passage from\n"
+	.string "LILYCOVE HARBOR to BIRTH ISLAND.\p"
+	.string "Solve the triangle and resolve\n"
+	.string "DEOXYS's challenge. Catching it\l"
+	.string "is your choice.$"
+
+EC_RequireGuardians::
+	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireGuardians, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireGuardians:
+	.string "Take STERN's scan to the SEALED\n"
+	.string "CHAMBER approach on ROUTE 134.\p"
+	.string "Finish the three ruin puzzles and\n"
+	.string "meet their guardians: REGIROCK,\l"
+	.string "REGICE and REGISTEEL.$"
+
+EC_RequireCrisis::
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireCrisis, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireCrisis:
+	.string "Meet STEVEN and WALLACE at the\n"
+	.string "CAVE OF ORIGIN. Follow their lead\l"
+	.string "to RAYQUAZA atop SKY PILLAR.$"
+
+EC_RequireFinalBadge::
+	goto_if_set FLAG_BADGE08_GET, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireFinalBadge, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireFinalBadge:
+	.string "Finish the SOOTOPOLIS crisis,\n"
+	.string "then challenge JUAN for the\l"
+	.string "RAIN BADGE.$"
+
+EC_RequireFinalConclusion::
+	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireFinalConclusion, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireFinalConclusion:
+	.string "Resolve DIANCIE in the CAVE OF\n"
+	.string "ORIGIN and JIRACHI in METEOR FALLS.\p"
+	.string "Then meet STEVEN at his house in\n"
+	.string "MOSSDEEP to conclude the research.\l"
+	.string "Catching either is optional.$"
+
+EC_RequireLilycoveRival::
+	goto_if_defeated TRAINER_MAY_LILYCOVE_TREECKO, Common_EventScript_NopReturn
+	goto_if_defeated TRAINER_MAY_LILYCOVE_TORCHIC, Common_EventScript_NopReturn
+	goto_if_defeated TRAINER_MAY_LILYCOVE_MUDKIP, Common_EventScript_NopReturn
+	goto_if_defeated TRAINER_BRENDAN_LILYCOVE_TREECKO, Common_EventScript_NopReturn
+	goto_if_defeated TRAINER_BRENDAN_LILYCOVE_TORCHIC, Common_EventScript_NopReturn
+	goto_if_defeated TRAINER_BRENDAN_LILYCOVE_MUDKIP, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireLilycoveRival, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireLilycoveRival:
+	.string "Your rival waits by LILYCOVE's\n"
+	.string "DEPARTMENT STORE. Finish that\l"
+	.string "challenge before this expedition.$"
+
+EC_RequireGroudon::
+	goto_if_set FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, Common_EventScript_NopReturn
+	lockall
+	msgbox EC_Text_RequireGroudon, MSGBOX_DEFAULT
+	releaseall
+	end
+EC_Text_RequireGroudon:
+	.string "Follow MAXIE into MAGMA HIDEOUT\n"
+	.string "on JAGGED PASS. Stop his plan\l"
+	.string "before investigating HEATRAN.$"
+
+EC_DeliverTravelDocuments::
+	setvar VAR_0x8009, 0
+	call_if_set FLAG_EC_EARNED_SS_TICKET, EC_Deliver_SS_TICKET
+	call_if_set FLAG_EC_EARNED_EON_TICKET, EC_Deliver_EON_TICKET
+	call_if_set FLAG_EC_EARNED_OLD_SEA_MAP, EC_Deliver_OLD_SEA_MAP
+	call_if_set FLAG_EC_EARNED_AURORA_TICKET, EC_Deliver_AURORA_TICKET
+	call_if_set FLAG_ENABLE_SHIP_NAVEL_ROCK, EC_Deliver_MYSTIC_TICKET
+	call_if_eq VAR_0x8009, 1, EC_TravelDocumentsPending
+	return
+
+EC_Deliver_SS_TICKET::
+	goto_if_set FLAG_RECEIVED_SS_TICKET, Common_EventScript_NopReturn
+	setvar VAR_0x8004, ITEM_SS_TICKET
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, EC_Received_SS_TICKET
+	checkitemspace ITEM_SS_TICKET, 1
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+	giveitem ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+EC_Received_SS_TICKET::
+	setflag FLAG_RECEIVED_SS_TICKET
+	return
+
+EC_Deliver_EON_TICKET::
+	goto_if_set FLAG_EC_RECEIVED_EON_TICKET, Common_EventScript_NopReturn
+	setvar VAR_0x8004, ITEM_EON_TICKET
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, EC_Received_EON_TICKET
+	checkitemspace ITEM_EON_TICKET, 1
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+	giveitem ITEM_EON_TICKET
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+EC_Received_EON_TICKET::
+	setflag FLAG_EC_RECEIVED_EON_TICKET
+	return
+
+EC_Deliver_OLD_SEA_MAP::
+	goto_if_set FLAG_RECEIVED_OLD_SEA_MAP, Common_EventScript_NopReturn
+	setvar VAR_0x8004, ITEM_OLD_SEA_MAP
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, EC_Received_OLD_SEA_MAP
+	checkitemspace ITEM_OLD_SEA_MAP, 1
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+	giveitem ITEM_OLD_SEA_MAP
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+EC_Received_OLD_SEA_MAP::
+	setflag FLAG_RECEIVED_OLD_SEA_MAP
+	return
+
+EC_Deliver_AURORA_TICKET::
+	goto_if_set FLAG_RECEIVED_AURORA_TICKET, Common_EventScript_NopReturn
+	setvar VAR_0x8004, ITEM_AURORA_TICKET
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, EC_Received_AURORA_TICKET
+	checkitemspace ITEM_AURORA_TICKET, 1
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+	giveitem ITEM_AURORA_TICKET
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+EC_Received_AURORA_TICKET::
+	setflag FLAG_RECEIVED_AURORA_TICKET
+	return
+
+EC_Deliver_MYSTIC_TICKET::
+	goto_if_set FLAG_RECEIVED_MYSTIC_TICKET, Common_EventScript_NopReturn
+	setvar VAR_0x8004, ITEM_MYSTIC_TICKET
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, EC_Received_MYSTIC_TICKET
+	checkitemspace ITEM_MYSTIC_TICKET, 1
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+	giveitem ITEM_MYSTIC_TICKET
+	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
+EC_Received_MYSTIC_TICKET::
+	setflag FLAG_RECEIVED_MYSTIC_TICKET
+	return
+
+EC_TravelDocumentFull::
+	setvar VAR_0x8009, 1
+	return
+EC_TravelDocumentsPending::
+	msgbox EC_Text_TravelDocumentsPending, MSGBOX_DEFAULT
+	return
+EC_Text_TravelDocumentsPending:
+	.string "Your travel papers are waiting.\n"
+	.string "Make room in the KEY ITEMS pocket,\l"
+	.string "then speak to any CENTER nurse.\p"
+	.string "Your passage is already approved.\n"
+	.string "You can sail from LILYCOVE HARBOR\l"
+	.string "while we hold the papers for you.$"
+
+EmeraldChampions_Text_ResearchChallengeComplete:
+	.string "You've already met its challenge.\n"
+	.string "Battle again to try catching it?$"
+
+EmeraldChampions_EventScript_GuardianVictory::
+	special HideRestingLegendaryObject
+	call Common_EventScript_LegendaryVictoryReminder
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	releaseall
+	end

@@ -53,10 +53,16 @@ CaveOfOrigin_DianciesRoom_Text_WallaceNotReady:
 	.string "chamber in the meantime.$"
 
 CaveOfOrigin_DianciesRoom_EventScript_Diancie::
+	call EC_RequireFinalBadge
 	lock
 	faceplayer
 	call_if_unset FLAG_EC_SURVEYED_ORIGIN_CHAMBER, CaveOfOrigin_DianciesRoom_EventScript_Observe
+	goto_if_set FLAG_EC_RESOLVED_DIANCIE, CaveOfOrigin_DianciesRoom_EventScript_OptionalBattle
 	msgbox CaveOfOrigin_DianciesRoom_Text_BattleOffer, MSGBOX_YESNO
+	goto CaveOfOrigin_DianciesRoom_EventScript_BattleChoice
+CaveOfOrigin_DianciesRoom_EventScript_OptionalBattle::
+	msgbox EmeraldChampions_Text_ResearchChallengeComplete, MSGBOX_YESNO
+CaveOfOrigin_DianciesRoom_EventScript_BattleChoice::
 	goto_if_eq VAR_RESULT, NO, CaveOfOrigin_DianciesRoom_EventScript_Handoff
 	closemessage
 	waitse
@@ -71,6 +77,8 @@ CaveOfOrigin_DianciesRoom_EventScript_Diancie::
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
+	call_if_eq VAR_RESULT, B_OUTCOME_WON, CaveOfOrigin_DianciesRoom_EventScript_Resolved
+	call_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, CaveOfOrigin_DianciesRoom_EventScript_Resolved
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, CaveOfOrigin_DianciesRoom_EventScript_DiancieResting
 	goto CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught
 	end
@@ -83,7 +91,7 @@ CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught::
 
 CaveOfOrigin_DianciesRoom_EventScript_DiancieResting::
 	special HideRestingLegendaryObject
-	msgbox gText_LegendaryResting, MSGBOX_DEFAULT
+	call Common_EventScript_ExplainLegendaryResting
 	goto CaveOfOrigin_DianciesRoom_EventScript_Handoff
 	end
 
@@ -116,8 +124,9 @@ CaveOfOrigin_DianciesRoom_EventScript_Observe::
 	return
 
 CaveOfOrigin_DianciesRoom_EventScript_Handoff::
+	goto_if_unset FLAG_EC_RESOLVED_DIANCIE, CaveOfOrigin_DianciesRoom_EventScript_BattlePending
 	goto_if_unset FLAG_BADGE08_GET, CaveOfOrigin_DianciesRoom_EventScript_BadgePending
-	goto_if_set FLAG_EC_SURVEYED_METEOR_CHAMBER, CaveOfOrigin_DianciesRoom_EventScript_StevenHandoff
+	goto_if_set FLAG_EC_RESOLVED_JIRACHI, CaveOfOrigin_DianciesRoom_EventScript_StevenHandoff
 	msgbox CaveOfOrigin_DianciesRoom_Text_MeteorHandoff, MSGBOX_DEFAULT
 	goto CaveOfOrigin_DianciesRoom_EventScript_End
 	end
@@ -125,15 +134,10 @@ CaveOfOrigin_DianciesRoom_EventScript_Handoff::
 CaveOfOrigin_DianciesRoom_EventScript_StevenHandoff::
 	goto_if_set FLAG_SYS_GAME_CLEAR, CaveOfOrigin_DianciesRoom_EventScript_OptionalHandoff
 	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, CaveOfOrigin_DianciesRoom_EventScript_LeagueHandoff
-	goto_if_set FLAG_EC_STEVEN_RESEARCH_CONCLUSION, CaveOfOrigin_DianciesRoom_EventScript_DevonHandoff
 	msgbox CaveOfOrigin_DianciesRoom_Text_StevenHandoff, MSGBOX_DEFAULT
 	goto CaveOfOrigin_DianciesRoom_EventScript_End
 	end
 
-CaveOfOrigin_DianciesRoom_EventScript_DevonHandoff::
-	msgbox CaveOfOrigin_DianciesRoom_Text_DevonHandoff, MSGBOX_DEFAULT
-	goto CaveOfOrigin_DianciesRoom_EventScript_End
-	end
 
 CaveOfOrigin_DianciesRoom_EventScript_LeagueHandoff::
 	msgbox CaveOfOrigin_DianciesRoom_Text_LeagueHandoff, MSGBOX_DEFAULT
@@ -165,7 +169,8 @@ CaveOfOrigin_DianciesRoom_Text_Observation:
 
 CaveOfOrigin_DianciesRoom_Text_BattleOffer:
 	.string "Would you like to battle DIANCIE?\n"
-	.string "This battle and capture are optional.$"
+	.string "Win or catch it to finish this\l"
+	.string "discovery. Capturing is optional.$"
 
 CaveOfOrigin_DianciesRoom_Text_ObserveEmptyChamber:
 	.string "DIANCIE is no longer here, but\n"
@@ -191,18 +196,14 @@ CaveOfOrigin_DianciesRoom_Text_StevenHandoff:
 	.string "Both chambers match the old\n"
 	.string "account. Meet STEVEN at his house\l"
 	.string "in MOSSDEEP to discuss them.\p"
-	.string "The two battles are optional.\n"
-	.string "Your observations are complete.$"
+	.string "Both challenges are complete.\n"
+	.string "Catching either is your choice.$"
 
 CaveOfOrigin_DianciesRoom_Text_BadgePending:
 	.string "Return to study the old account\n"
 	.string "after earning JUAN's RAIN BADGE\l"
 	.string "at SOOTOPOLIS GYM.$"
 
-CaveOfOrigin_DianciesRoom_Text_DevonHandoff:
-	.string "STEVEN has heard both discoveries.\n"
-	.string "Visit MR. STONE upstairs at DEVON\l"
-	.string "in RUSTBORO to close the account.$"
 
 CaveOfOrigin_DianciesRoom_Text_LeagueHandoff:
 	.string "The old account is complete.\n"
@@ -231,3 +232,15 @@ CaveOfOrigin_DianciesRoom_EventScript_WallaceDecline::
 	msgbox CaveOfOrigin_DianciesRoom_Text_WallaceDecline, MSGBOX_DEFAULT
 	release
 	end
+
+CaveOfOrigin_DianciesRoom_EventScript_Resolved::
+	setflag FLAG_EC_RESOLVED_DIANCIE
+	return
+
+CaveOfOrigin_DianciesRoom_EventScript_BattlePending::
+	msgbox CaveOfOrigin_DianciesRoom_Text_BattlePending, MSGBOX_DEFAULT
+	goto CaveOfOrigin_DianciesRoom_EventScript_End
+CaveOfOrigin_DianciesRoom_Text_BattlePending:
+	.string "DIANCIE awaits your challenge.\n"
+	.string "Return ready to win or catch it.\l"
+	.string "You do not have to keep it.$"

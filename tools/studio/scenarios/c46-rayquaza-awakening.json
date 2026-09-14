@@ -1,0 +1,47 @@
+{
+  "name": "C46 \u2014 native Rayquaza awakening",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "vars": {
+      "VAR_SKY_PILLAR_STATE": 0,
+      "VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE": 0
+    },
+    "flags": {
+      "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA": false,
+      "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL": true
+    }
+  },
+  "warp": {
+    "map": "SkyPillar_Top",
+    "x": 14,
+    "y": 10,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "hold": "UP",
+      "frames": 16
+    },
+    {
+      "tap": "A",
+      "every": 120,
+      "frames": 5000,
+      "until": "idle",
+      "label": "Awakening, flight and returned camera"
+    }
+  ],
+  "queries": {
+    "pillar": {
+      "kind": 2,
+      "id": "VAR_SKY_PILLAR_STATE"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "queries": {
+      "pillar": 1
+    }
+  }
+}

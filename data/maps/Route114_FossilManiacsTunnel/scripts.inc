@@ -29,7 +29,12 @@ Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn::
 	applymovement LOCALID_FOSSIL_MANIAC, Common_Movement_WalkInPlaceFasterUp
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
+	goto_if_ge VAR_MIRAGE_TOWER_STATE, 2, Route114_FossilManiacsTunnel_EventScript_CaveInSealed
 	msgbox Route114_FossilManiacsTunnel_Text_NotSafeThatWay, MSGBOX_DEFAULT
+	goto Route114_FossilManiacsTunnel_EventScript_CaveInDone
+Route114_FossilManiacsTunnel_EventScript_CaveInSealed::
+	msgbox Route114_FossilManiacsTunnel_Text_RuinsSealed, MSGBOX_DEFAULT
+Route114_FossilManiacsTunnel_EventScript_CaveInDone::
 	setvar VAR_FOSSIL_MANIAC_STATE, 2
 	releaseall
 	end
@@ -60,6 +65,7 @@ Route114_FossilManiacsTunnel_EventScript_FossilManiac::
 	checkitem ITEM_SAIL_FOSSIL
 	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
 	goto_if_set FLAG_RECEIVED_REVIVED_FOSSIL_MON, Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil
+	goto_if_ge VAR_MIRAGE_TOWER_STATE, 2, Route114_FossilManiacsTunnel_EventScript_RuinsSealed
 	msgbox Route114_FossilManiacsTunnel_Text_LookInDesertForFossils, MSGBOX_DEFAULT
 	release
 	end
@@ -109,3 +115,16 @@ Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
 	.string "Until caught, each has a 3%\n"
 	.string "wild encounter chance in its\l"
 	.string "habitat.$"
+
+Route114_FossilManiacsTunnel_EventScript_RuinsSealed::
+	msgbox Route114_FossilManiacsTunnel_Text_RuinsSealed, MSGBOX_DEFAULT
+	releaseall
+	end
+Route114_FossilManiacsTunnel_Text_RuinsSealed:
+	.string "The collapse sealed SANDSTREWN.\n"
+	.string "No tunnel reaches it anymore.\p"
+	.string "My DESERT UNDERPASS remains open.\n"
+	.string "TING-LU still lives there.\p"
+	.string "The unchosen summit fossil fell\n"
+	.string "into the UNDERPASS, away from\l"
+	.string "the sealed ruins.$"

@@ -1,5 +1,106 @@
 # Build, play, inspect and verify
 
+## Emerald Studio in the Codex browser
+
+Requires native libmGBA headers/library, a working ARM toolchain and Python3
+with venv support. native_tools.py discovers Homebrew mGBA; set MGBA_PREFIX
+elsewhere. The launcher creates an isolated .venv-studio with the pinned
+aiohttp/Pillow dependencies and builds the development ROM if missing.
+
+~~~sh
+python3 tools/studio/cli.py start
+python3 tools/studio/cli.py status
+python3 tools/studio/cli.py command '{"op":"checkpoint","label":"Before my edit"}'
+python3 tools/studio/cli.py command '{"op":"build"}'
+.venv-studio/bin/python tools/studio/verify.py
+~~~
+
+Open the printed localhost URL in Codex's browser. Arrow keys move, Z/X are
+A/B, Enter is Start, Shift is Select, Q/E are L/R. Click Enable sound once.
+The native process runs at GBA frame timing and sends uncompressed RGBA and
+32768Hz stereo PCM over a local socket. Video has at most one unacknowledged
+frame per client; audio discards stale backlog. Fast-forward is silent.
+The server binds loopback only, checks Host and requires a per-launch token
+for commands/WebSocket connections. No remote service or API key is involved.
+
+Map overview renders authored tiles with object/warp/player markers. Shift-click
+a clear tile to warp; select an NPC to inspect dialogue and stand beside them.
+Dialogue changes update the actual script plus one current record in the Game
+Book, run the existing book import, then rebuild. Failed compilation retains
+the running game. Build logs and edit backups are under work/studio.
+
+Rebuild/return records the current state, falls back to the pre-interaction
+checkpoint when needed, requests a native save at an idle field boundary, and
+exports actual flash data. Flash programming needs hundreds of emulated frames;
+the acknowledgment loop runs those without wall-clock pacing. A separate new
+core clean-boots the new ROM and confirms the restored position before replacing
+the old core. Changes to the checked save-layout headers require a new sandbox.
+Bookmarks restore their original ROM/ELF and state together; they never inject
+an old raw state into new code. Work files preserve the paused earned campaign.
+
+Party preparation reuses the game's first Doubles preset and per-species cap.
+Trainer tests reuse the native debug-battle lifecycle: no automatic victory,
+NPC postbattle script, or earned receipt. Hoenn rival seed slots are used by this
+direct launcher; use the real NPC interaction for regional starter substitution.
+Fresh chapter fixtures currently cover C03 Oldale, C04 Norman/Wally and C07
+Roxanne. They are synthetic setups, not full campaign prerequisite reconstruction.
+
+verify.py runs in a separate work/studio/verification session. It checks real
+movement/checkpoint restore, preparation, difficulty, tile/facing warp, native
+save/clean-boot preservation, non-silent audio, trainer entry/retry and C04 setup.
+Its result.json records the exact ROM and sampled native frame costs. Browser
+layout/input/dialogue checks supplement these tests. No full-game performance
+or difficulty claim follows from an idle-scene timing sample.
+
+## Scene recordings, dialogue cohesion and agent workflow
+
+Install the personal skill with `python3 tools/studio/install_skill.py`. Its
+repository-owned source is tools/studio/skill/SKILL.md; the installer records
+this checkout for discovery. The skill supports both direct local commands
+and browser interaction without requiring external code indexing.
+
+Studio's Library contains scene recordings/contact sheets, saved situations,
+a searchable NPC dialogue index, source sprite sheets and Git/local-build history.
+Record captures exact inputs and native frames. Mark moment creates named anchors;
+Stop produces paginated contact sheets, original PNGs with hashes, a lossless
+motion preview and the input/state trace. A bounded rolling buffer also supports
+short same-build rewind. Built-in examples:
+
+~~~sh
+.venv-studio/bin/python tools/studio/run_scene.py tools/studio/scenarios/oldale-vial.json --out work/studio/scenes/new-vial-run
+.venv-studio/bin/python tools/studio/run_scene.py tools/studio/scenarios/c04-norman.json --out work/studio/scenes/new-c04-run
+python3 tools/studio/cli.py command '{"op":"dialogue.export"}'
+python3 tools/studio/cli.py command '{"op":"dialogue.search","query":"Briney"}'
+python3 tools/studio/cli.py command '{"op":"scene.replay","id":"RECORDING_ID","mode":"exact"}'
+~~~
+
+Use a fresh output directory per run. Command JSON can be supplied with
+`command --file command.json`. A scene.run command starts a separate native
+worker so the user can continue playing. Poll scenes for completion; failed
+expectations still produce pictures. Recipes have a start chapter or saved
+recording, optional explicit setup/party/difficulty/warp, and bounded steps.
+Steps support press, hold, periodic tap/every, frames, labels, and until
+idle/dialogue/battle. Exact replay uses the old ROM and state; latest replay
+uses a compatible portable battery save and the newly built ROM. Neither
+replays an old machine state on new code. Position in a changed map remains
+subject to actual collision/event review.
+
+Compare pairs by marker labels, falling back to relative frame timing with
+that limitation recorded. Pixel differences are diagnostic, not a quality
+score. Always inspect the sheets. Source sprites/map previews are labeled
+separately from native screenshots. The runtime observer reports active actors,
+facing, movement flags and the text buffer submitted to the window-zero printer;
+it does not certify that every page was displayed or read. Latin decoding uses
+the first charmap definition; control bytes remain annotations.
+
+The generated dialogue index currently links 2,365 Hoenn NPC bindings to 3,976
+referenced text blocks across 540 maps. It includes conditional branches and
+reports native-handler boundaries. The combined reading copy groups local text
+by map and shared services separately. Duplicate-text groups are review
+candidates, not deletion instructions. Build receipts preserve the Git base,
+workspace patch, changed/untracked source archive, ROM and ELF; they are local
+history and do not publish experimental edits automatically.
+
 Run from the repository root. This is the native GBA engine using libmGBA for
 headless play; no browser remake or paid model/API is required. The active save,
 next work and scope are in `CONTINUE.md`. Do not run a blanket suite before
@@ -935,3 +1036,302 @@ new test-ROM run or final difficulty acceptance is claimed.
 September14, trainer review85–100 implementation: all16 approved encounters /64 builds are materialized, with100 first-access reviews implemented and343 retained encounters /370 variants. `work/trainer-85-100-implementation/` holds exact changes, source-to-proposal checks, materialization, normal release build/gates, book checks, hashes and cut reconciliation. The first PATH-selected compiler lacked newlib headers; the successful full rebuild uses `DEVKITARM=/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload`. No AI C or battle scripts changed in this batch. Existing Lung/Jaylen native regressions use frozen sets and required no fixture changes. Full battle calibration and Protect cadence remain pending.
 
 The adopted cut ledger was restored to the book and independently reconciled:139 first-pass cut groups /141 identities remain after Gina/Mia's restoration, plus five additional v4 retired identities. All146 are absent from active authored teams, nonempty native parties and Hoenn battle opcodes. This is source coverage, not earned traversal. The Deus index was refreshed with its existing partial-parse/exclusion limitations.
+
+
+## Integrated story and Studio verification from origin/main
+
+Studio verification on September14: thirteen native integration checks passed
+(work/studio/verification/result.json). The Oldale Vial recording's exact replay
+matched final pixels, and replay on the subsequent ROM clean-restored its portable
+save. The C04 recipe captured Norman/Wally movement through Route102 tutorial
+battle entry. Live CLI recording, contact-sheet output and an independent replay
+also passed; browser dialogue search returned the expected Briney handoffs.
+The normal production build and release gates passed with USE_LTO_ON_RELEASE=0
+(work/studio/release-final.log, release-gates.log). LTO was disabled for this build
+after the Mac exhausted disk space; failed linker temporary files were removed.
+The normal ELF contains no Studio bridge symbols. Idle native frame timing was
+below2ms in the measured samples; this is not a worst-case campaign benchmark.
+
+
+## Book-scene debut through Emerald Studio — September14
+
+C44: c44-wreck-aide and c44-wreck-pickup exercise the existing aide and Scanner
+object. c44-scanner/c44-scanner-repeat exercise Stern's scan, choice, delivered
+reward and repeated route clue. Observed report1, Scanner0, Tooth1 and money18000
+from a6000 synthetic baseline after both first and repeat visits. The selected
+reward/full-storage branch is source-reviewed; a full-storage native replay is
+not claimed here. Shared Bag/PC handoff helpers consume the Scanner.
+
+C45: c45-chamber confirms doors1 while chapter0, cap78 and money6000. The local
+account recipes exercise repeat inscriptions; c45-rock-smash, c45-island-lap and
+c45-flash execute the actual licensed field actions/walking puzzle and their
+revealed accounts. Native third-account completion gives cap82 and money22000
+from6000; c45-repeat retains those totals. These are synthetic prerequisites,
+not earned navigation or Regi captures. Existing puzzle receipts determine the
+three-account completion, and FLAG_EC_REPORT_C45_COMPLETE owns its cap/stipend.
+
+C30: c30-flight/c30-return verify the existing actors, original landing points,
+finite sound, fades and destination-owned arrival text. The first test exposed
+an endlessly looping wing sound; SE_M_FLY replaced it. A second visual review
+caught post-warp text that never displayed. Destination frame scripts now consume
+one arrival receipt. Recipes assert the final displayed text as well as the map.
+Studio's idle wait now requires twelve consecutive idle frames, so it does not
+stop between a warp and a destination auto-script.
+
+C25/C39: c25-moltres and c39-heatran capture the existing native reveals after
+correct synchronization with the asynchronous quake task. Moltres reaches battle;
+Heatran's Stone scene reveals its existing actor and returns control. Full battles
+and postbattle outcomes are not re-certified by these scene samples.
+
+Evidence is in work/studio/scenes/c44-scanner-final, c44-wreck-final,
+c44-aide-verified, c45-chamber-final, c45-desert-v1, c45-island-v1,
+c45-rock-smash-v1, c45-lap-v1, c45-flash-v1, c45-repeat-final,
+c30-flight-final, c30-return-final, c25-moltres-final and c39-heatran-v1.
+Each trace names its immutable ROM/ELF and original captures. Contact sheets were
+inspected for dialogue, facing, transitions, returned control and preserved art.
+A compact six-panel showcase is work/studio/scene-debut/showcase.png. Earlier
+v1/v2 failures remain diagnostic evidence, not passing acceptance claims.
+
+Normal build: make -j6 release USE_LTO_ON_RELEASE=0 with the configured ARM
+newlib toolchain, then stamp_release_inputs.py and verify_emerald_champions_release.py.
+Logs: work/studio/scene-debut/release-build.log and release-gates.log (PASS).
+Book import/ability/370-party roster checks pass. Added dialogue fits the existing
+font-width budget; the previously existing209px berry-vendor line is unchanged.
+The full wreck key trail, Route134 currents, late story-gate traversal, remaining
+section17 scene branches and user visual approval remain separate coverage.
+
+
+## Remaining section17 choreography completion — 2026-09-14
+
+The second pass finishes the nine-item source disposition in the canonical book.
+Use the tracked `tools/studio/scenarios/c14*`, `c26*`, `c30-castform*`, `c34*`,
+`c35*`, `c36*`, `c39-missing*`, `c42*`, `c43*`, `c46*`, `c48*` and
+`map-ember-path.json` recipes. Each `result.json` contains the observed outcome;
+the recording owns immutable ROM/ELF hashes, prerequisites, inputs and original
+pixels. Directory names below are relative to `work/studio/scenes`.
+
+- `complete-c14-native-song-v1`: retained song/response and Stern handoff.
+- `complete-c26-permanent-approach-v1`: historical superseded behavior (tower
+  remained present after collapse). The approved replacement is below.
+- `complete-c30-castform-response-final`: five-badge prerequisites, native Castform
+  portrait/cry, Landorus offer declined and return offer declined. The earlier
+  v1 had only badge5 and exercised the blocked reminder; it is not response proof.
+- `complete-c34-first-voyage-v1`, `complete-c35-onward-voyage-final`,
+  `complete-c36-voyage-home-final`: Briney promise, ferry departure/fades,
+  destination arrivals, Faraway grass guidance and Lilycove/Mt. Pyre return.
+- `complete-c35-lati-resolution-v1`: native sanctuary reveal and onward text,
+  with automatic wild capture; it does not test a non-capture victory.
+- `complete-c39-missing-stone-final`: actual missing-item guidance displays and
+  returns control. The earlier `c39-heatran-v1` remains reveal evidence.
+- `complete-c42-meteorite-briefing-v1`, `complete-c43-harbor-guide-v1`,
+  `complete-c43-harbor-return-v1`: meteorite/triangle and Scanner directions.
+- `complete-c43-triangle-v2`: all eleven native triangle positions and Deoxys
+  reveal, automatic wild capture, C43 receipt and cap78. The earlier failure
+  was a recorded-input error: direction changes before walking finished. The
+  recipe now releases movement between path segments. Added task waitstate is
+  a separate source fix: read the rock result only after its asynchronous task.
+- `complete-c46-wallace-recollection-v1`, `complete-c46-rayquaza-awakening-v1`:
+  completed-ruins reference, Sky Pillar handoff, original awakening/flight and
+  restored camera/control.
+- `complete-c48-origin-observation-v1`, `complete-c48-meteor-observation-v1`:
+  existing observation interactions and optional battle declines.
+- `complete-c48-steven-conclusion-final`, `complete-c48-devon-gift-final`:
+  research closure receipt, first/repeat Devon dialogue, cap94, money26000
+  from6000, and the previously unclaimed Pidgeotite remains exactly one after
+  subsequent visits. No repeated grant or return to the obsolete main quest.
+- `complete-map-ember-path-v5`: actual Jagged Pass entrance, Ember Path name
+  popup, landmark flag1 and native zoomed PokeNav showing Route112 / Jagged Pass /
+  Ember Path at the established marker. A direct synthetic cave jump used the
+  fixture's old escape-warp origin; a later approach entered from the wrong
+  side. Neither was evidence of a game map defect. The final recipe asserts the
+  destination map and landmark, and the contact sheet confirms presentation.
+
+The source-bound contact sheets above were visually inspected. These are
+synthetic scene tests, not earned route progression. Native fixture setup and
+`battle_resolution:"fixture_win"` are optional independent-worker facilities;
+the latter uses existing campaign automation (automatic wild capture / forced
+trainer win) and is explicitly labeled, never combat acceptance. Default scene
+execution retains native battle behavior. The user's live Studio and earned C15
+save are separate. The earlier Scanner/ruin puzzle evidence remains valid for
+those unchanged scripts.
+
+Logs are in `work/studio/choreography-completion`. The book import/check confirms
+370 variants/parties/battle IDs and legal configured abilities. The text-width
+check found no added over-budget line. Build the normal release with
+`make -j6 release USE_LTO_ON_RELEASE=0`, stamp it with
+`scripts/stamp_release_inputs.py`, then run
+`scripts/verify_emerald_champions_release.py`; keep its ROM, ELF and stamp together.
+The normal build excludes all fixture/agent mutation interfaces.
+
+Remaining acceptance: user visual approval; actual full wreck key/current,
+Magma Hideout/Seafloor/Meteor Falls navigation; uncaptured victory/flee/loss,
+full-storage and clean-save/reload branches not explicitly exercised above;
+and the paused earned campaign. These limits do not imply unbuilt section17
+presentation. The early Devon/Steven/Wattson copy refinements have source and
+font-width checks, without an additional full early-story replay.
+
+Final normal release build and gates passed in
+`work/studio/choreography-completion/release-build.log` and `release-gates.log`.
+The input stamp binds28,978 inputs plus ROM/ELF bytes; the ROM uses27,631,040
+bytes, EWRAM232,368 bytes and IWRAM28,356 bytes. The six-panel native overview is
+`work/studio/choreography-completion/showcase.png`; its JSON sidecar links each
+unaltered source capture and recording. Full sheets and motion previews remain
+in the Studio Library. This is a local normal build; no new public ROM upload or
+earned-run migration is claimed.
+
+
+## Story gates and permanent collapse — 2026-09-14
+
+Source and the single Book implement the approved ordering, encounter-resolution,
+finite-document and one-stop Steven conclusion contracts. The old C26 permanent
+entrance recipe was replaced, and C45/C48 scene expectations were updated to
+require battle resolutions. Former observation/optional-battle and Devon-payment
+recordings above remain historical evidence, not current contracts.
+
+Normal build uses `make -j6 release USE_LTO_ON_RELEASE=0` with the configured
+DEVKITARM; then `scripts/stamp_release_inputs.py` and
+`scripts/verify_emerald_champions_release.py`. Logs: `work/story-gates/`.
+Headless builds use `BUILD_NAME=emerald-headless EC_HEADLESS_FIXTURES=1 TEST=0`.
+The tracked Studio recipes run via the skill's `tools/studio/run_scene.py`.
+Every recording includes its exact immutable ROM/ELF, synthetic setup, original
+PNG hashes, inputs and contact sheets; no cross-ROM savestate was reused.
+
+Evidence directories below are relative to `work/studio/scenes/`:
+
+- `gates-c26-fossil-blocked`, `gates-c26-fossil-decline`,
+  `gates-c26-fossil-collapse`, `gates-c26-claw-collapse`: C26 prerequisite,
+  cancellation and both native collapses/fossil receipts with returned controls.
+- `gates-c26-warning-pages`: every warning page, explicitly naming Zygarde and
+  Stakataka, permanent loss, further exploration and the final declined choice.
+- `gates-c26-sealed-approach`, `gates-c26-upper-entrance-open`,
+  `gates-c26-upper-entrance-sealed`, `gates-c26-underpass-open-v2`,
+  `gates-c26-underpass-sealed-v2`: ordinary approach versus permanent closure.
+  The first Underpass open recipe stopped on the arrow tile; v2 actually walks
+  through the exit. This was an input-duration correction, not a relaxed gate.
+- `gates-final-c26-archaeologist-warning-v2`: repeatable early warning from the
+  existing archaeologist. The old Mirage basement inscription has no map binding
+  and is not claimed as an active warning.
+- `gates-final-c27-norman-blocked`, `gates-c43-triangle-blocked`,
+  `gates-c48-league-blocked`: native prerequisite messages and returned control;
+  eight badges alone cannot bypass the final conclusion.
+- `gates-c48-origin-observation`, `gates-c48-meteor-observation`: declining after
+  observing leaves resolution unset. `gates-c48-origin-fixture_defeat` and
+  `gates-c48-meteor-fixture_defeat`: forced no-capture victories set only the
+  resolution receipt. `gates-c48-origin-fixture_win`,
+  `gates-final-c48-meteor-fixture_win`: forced captures set both receipts.
+  `gates-c48-origin-fixture_loss`, `gates-final-c48-meteor-fixture_loss`: forced
+  loss leaves resolution/capture unset. These validate native postbattle scripts,
+  not battle difficulty, normal strategic wins, native fleeing or whole routes.
+- `gates-final-c45-guardian-pending`, `gates-final-c45-flash`: puzzles alone cannot
+  award C45. `gates-c45-final-guardian-v2`: forced final Registeel victory grants
+  cap82/16000 without a capture. Its final line is the existing resting reminder,
+  after the route directions; the v1 terminal-text expectation was corrected.
+  `gates-c45-repeat`: rereading never pays a second grant.
+- `gates-c48-steven-incomplete`, `gates-c48-steven-conclusion`,
+  `gates-c48-devon-conclusion`: missing challenge blocks C48; Steven grants
+  cap94/20000 once; Devon pays nothing and preserves the finite Pidgeotite.
+- `gates-travel-documents-full`, `gates-travel-documents-repeat`: all five pending
+  papers remain unreceived with a full key pocket; native healing still runs.
+  With space, Center delivery gives exactly one of each and subsequent visits
+  give none. Synthetic full-pocket fixture28 preserves the four Center tools.
+- `gates-final-c44-scanner-repeat`, `gates-final-c30-return`: current-prerequisite
+  Scanner repeat-payment and survey return-service regressions.
+
+Contact sheets were inspected for the warning, collapse/closed entrances,
+legendary aftermath, research/League directions and Center delivery/healing.
+Local recordings are synthetic and not tracked binaries; tracked recipes make
+these cases reproducible. Full earned traversal, all possible ordinary loss/run/
+reload permutations and user visual acceptance remain separate work. The earned
+C15 checkpoint and all paused team-review work were preserved.
+
+`gates-c48-optional-capture-return-v2` checks the completed challenge's optional
+rematch offer and declining it without revoking its receipt. The first archaeologist
+recipe faced him from water at a different elevation and did not start dialogue;
+v2 uses the adjacent land tile and requires actual text. The original ready-only
+expectation was insufficient and has been replaced.
+
+
+## Seven-point follow-through and recovery — 2026-09-14
+
+The seven requested contracts are implemented in Book and native source. This
+pass repairs the dry researcher approach, completes the missables inventory,
+removes obsolete post-collapse directions, retains earned survey return service,
+keeps Center healing available when starter tools cannot fit, leaves C45's route
+as the final instruction, and suppresses Heatran's obsolete briefing on repeat.
+The earned C15 run and team reviews were not advanced.
+
+Commands from the repository root (use a fresh output directory):
+
+```sh
+.venv-studio/bin/python scripts/audit/sandstrewn_runtime.py --out work/studio/scenes/c26-complete-approach-roundtrip
+.venv-studio/bin/python scripts/stamp_release_inputs.py --stamp pokeemerald-headless.inputs.json
+.venv-studio/bin/python scripts/audit/origins_runtime.py --out work/story-followthrough/origins-final-v2 --case flee-retry win-reload missing
+.venv-studio/bin/python scripts/audit/origins_runtime.py --out work/story-followthrough/ticket-recovery --case tickets-full-retry
+.venv-studio/bin/python tools/studio/run_scene.py tools/studio/scenarios/c30-survey-after-collapse.json --out work/studio/scenes/followthrough-c30-survey-after-collapse
+```
+
+`c26-complete-approach-roundtrip` passes the complete Route111/tower/basement/
+researcher/outdoor round trip without Surf. Native queries require the basement
+flag, C26, cap48, money14000 from a6000 baseline, no repeat grant and no fifth
+badge/Surf license. The path planner proposes only directional inputs and avoids
+water; native positions and outcomes are the assertions. Legal Repel Spray is
+part of the synthetic setup. Original pixels and the input trace are retained.
+
+`origins-final-v2` passes native Run → real doorway re-entry → forced retry win,
+resolved-state Save/Reload, and the missing-badge block for both Diancie/Jirachi.
+`ticket-recovery` passes full key pocket → healing → synthetic pocket clearing →
+native pending delivery → Save/Reload → repeat healing, with exactly one of each
+paper and all five travel permissions retained. The initial capture/loss checks
+from the preceding implementation remain separately recorded.
+
+Current Studio recipes/results (under `work/studio/scenes/`):
+
+- `followthrough-c26-warning-pages`, `followthrough-c26-archaeologist-warning`:
+  expanded irreversible/missables warning and the dry entrance NPC.
+- `followthrough-final-c26-fossil-maniac-sealed`,
+  `followthrough-final-c26-observer-sealed`: no back-entrance promise after collapse.
+- `followthrough-c30-survey-after-collapse`, `followthrough-c30-earned-return`:
+  Landorus/return transport survives closure; earned return is checked before
+  the lower-stage generator gate.
+- `followthrough-final-c32-expedition-earned` visits Southern Island and returns
+  without a physical ticket. `followthrough-c32-expedition-rival-missing` keeps
+  new permissions unset and names the department-store rival.
+- `followthrough-travel-documents-missing-tools`: pending tickets AND absent
+  starter tools no longer block native Center healing. `ticket-tools-before`
+  preserves the real prior failure ending at “The BAG is full.”
+- `followthrough-c25-victory-without-capture`, `followthrough-c30-victory-without-capture`,
+  `followthrough-c35-victory-without-capture`, `followthrough-c36-victory-without-capture`,
+  `followthrough-final-c39-victory-without-capture`, `followthrough-c43-victory-without-capture`:
+  Moltres, Landorus, Southern Lati, Mew, Heatran and Deoxys resolutions without ownership.
+- `followthrough-c45-final-guardian`, `followthrough-final-c45-final-regirock`,
+  `followthrough-final-c45-final-regice`: each Regi as the third resolution,
+  cap82/16000, no capture, and final DIVE/Seafloor guidance.
+- `followthrough-c48-origin-fixture_defeat`, `followthrough-c48-meteor-fixture_loss`
+  plus the origins recovery matrix exercise the updated win/optional-capture
+  reminder. A resting shrine without a fresh battle keeps its neutral retry text.
+- `heatran-repeat-baseline` catches the obsolete “GROUDON is still loose outside”
+  briefing after the crisis; `heatran-repeat-fixed` keeps cap94/money6000 and
+  rejects that dialogue throughout the trace.
+
+The Studio runner now supports `expect.visited_maps` for actual intermediate
+travel and `expect.forbidden_text` for stale dialogue anywhere in the recording.
+Permission flags alone do not prove a voyage, and final-text checks alone can
+miss an obsolete intermediate instruction.
+
+Diagnostic corrections were to fixtures/drivers, not relaxed game requirements:
+ordinary Repel's packed high bit is Lure, so the route setup uses the actual
+500-step Repel Spray; native arrow exits need continuation off their tile; the
+harbor attendant grants rights while the sailor/Centers hold physical documents;
+the Book's Heatran cap is68, not70. The snapshot-per-chunk save driver stalled
+when it interrupted flash writing. The final driver keeps native Save in one
+uninterrupted1200-frame run and retains the same saved-counter, position and
+resolved-flag assertions. Native Save/Reload then passes on the same ROM.
+
+Contact sheets were inspected for the dry route, warning pages, closure messages,
+Center recovery, guardian route, native Run/re-entry and Save/Reload. Compact
+recovery sheets are in `work/story-followthrough/contact-sheets/`; each recording
+retains its own ROM/ELF and original hashes. Full earned traversal, every possible
+branch combination, combat quality and user visual approval remain outside
+these scoped checks. Normal release build/stamp/gate logs are in
+`work/story-followthrough/release-final.log`, `stamp-final.log` and
+`release-gates-final.log`.

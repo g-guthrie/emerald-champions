@@ -136,10 +136,6 @@ DewfordTown_Gym_EventScript_Brawly::
 	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, DewfordTown_Gym_EventScript_BrawlyRewardChecked
-	goto_if_unset FLAG_RECEIVED_BRAWLY_LUCARIONITE, DewfordTown_Gym_EventScript_GiveLucarionite2
-DewfordTown_Gym_EventScript_BrawlyRewardChecked:
 	goto_if_set FLAG_HIDE_GRANITE_CAVE_STEVEN, DewfordTown_Gym_EventScript_BrawlyJourneyContinues
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
@@ -157,7 +153,6 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
-	call DewfordTown_Gym_EventScript_GiveLucarionite
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -169,23 +164,6 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 0
 	setflag FLAG_ENABLE_ROXANNE_FIRST_CALL
-	release
-	end
-
-DewfordTown_Gym_EventScript_GiveLucarionite::
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, DewfordTown_Gym_EventScript_KeepLucarionite
-	giveuniqueitem ITEM_LUCARIONITE
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainLucarionite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_BRAWLY_LUCARIONITE
-	return
-
-DewfordTown_Gym_EventScript_GiveLucarionite2:
-	giveuniqueitem ITEM_LUCARIONITE
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainLucarionite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_BRAWLY_LUCARIONITE
 	release
 	end
 
@@ -409,13 +387,10 @@ DewfordTown_Gym_Text_ReceivedKnuckleBadge:
 	.string "from BRAWLY.$"
 
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
-	.string "The KNUCKLE BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 30.\p"
-	.string "Take this rare MEGA STONE, too.$"
-DewfordTown_Gym_Text_ExplainLucarionite:
-	.string "Lucarionite lets Lucario Mega Evolve.\n"
-	.string "You'll soon receive the Ring it needs.$"
-
+	.string "The KNUCKLE BADGE is proof of\n"
+	.string "the strength of your partnership.\p"
+	.string "Show it to STEVEN in GRANITE CAVE.\n"
+	.string "He has something to entrust to you.$"
 DewfordTown_Gym_Text_RegisteredBrawly:
 	.string "Registered GYM LEADER BRAWLY\n"
 	.string "in the POKéNAV.$"
@@ -467,10 +442,3 @@ DewfordTown_Gym_EventScript_BrawlyJourneyContinues::
 	msgbox DewfordTown_Gym_Text_BrawlyPostRematch, MSGBOX_DEFAULT
 	release
 	end
-
-DewfordTown_Gym_EventScript_KeepLucarionite::
-	msgbox DewfordTown_Gym_Text_KeepLucarionite, MSGBOX_DEFAULT
-	return
-DewfordTown_Gym_Text_KeepLucarionite:
-	.string "Come back with Steven's MEGA RING!\n"
-	.string "I'll have a Lucarionite for you.$"

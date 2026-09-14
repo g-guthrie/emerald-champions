@@ -1,0 +1,45 @@
+{
+  "name": "C34 first voyage after earned harbor briefing",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 6500,
+      "until": "idle",
+      "label": "Scene completes"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "SouthernIsland_Exterior",
+    "contains_text": "BRINEY"
+  },
+  "warp": {
+    "map": "LilycoveCity_Harbor",
+    "x": 8,
+    "y": 11,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_BADGE06_GET": true,
+      "FLAG_LATIOS_OR_LATIAS_ROAMING": true,
+      "FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT": false,
+      "FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL": false,
+      "FLAG_EC_EARNED_SS_TICKET": true,
+      "FLAG_EC_EARNED_EON_TICKET": true,
+      "FLAG_EC_EARNED_OLD_SEA_MAP": true,
+      "FLAG_ENABLE_SHIP_SOUTHERN_ISLAND": true,
+      "FLAG_ENABLE_SHIP_FARAWAY_ISLAND": true
+    },
+    "vars": {}
+  }
+}

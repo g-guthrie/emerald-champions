@@ -39,18 +39,19 @@ DesertRuins_EventScript_ShowRegirock::
 DesertRuins_EventScript_CaveEntranceMiddle::
 	lockall
 	goto_if_set FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_BigHoleInWall
-	braillemsgbox DesertRuins_Braille_UseRockSmash
+	msgbox DesertRuins_Text_PuzzleDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DesertRuins_EventScript_BigHoleInWall::
-	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+	call DesertRuins_EventScript_ReadAccount
 	releaseall
 	end
 
 DesertRuins_EventScript_CaveEntranceSide::
 	lockall
-	braillemsgbox DesertRuins_Braille_UseRockSmash
+	goto_if_set FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_BigHoleInWall
+	msgbox DesertRuins_Text_PuzzleDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -77,12 +78,15 @@ DesertRuins_EventScript_Regirock::
 	end
 
 DesertRuins_EventScript_CaughtRegirock::
+	setflag FLAG_EC_RESOLVED_REGIROCK
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	setflag FLAG_DEFEATED_REGIROCK
 	release
 	end
 
 DesertRuins_EventScript_DefeatedRegirock::
-	goto Common_EventScript_LegendaryResting
+	setflag FLAG_EC_RESOLVED_REGIROCK
+	goto EmeraldChampions_EventScript_GuardianVictory
 	end
 
 DesertRuins_EventScript_RanFromRegirock::
@@ -90,3 +94,23 @@ DesertRuins_EventScript_RanFromRegirock::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+
+DesertRuins_EventScript_ReadAccount::
+	msgbox DesertRuins_Text_RouteAccount, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	return
+
+DesertRuins_Text_PuzzleDirections:
+	.string "From this inscription, walk LEFT\n"
+	.string "twice, then DOWN twice. Use your\l"
+	.string "licensed ROCK SMASH there.\p"
+	.string "SANDSHREW in the ROUTE 111 desert\n"
+	.string "outside can use ROCK SMASH.$"
+
+DesertRuins_Text_RouteAccount:
+	.string "The first account describes a\n"
+	.string "route south of the eastern city,\l"
+	.string "past two broad sea routes.\p"
+	.string "When land and sea fought, the\n"
+	.string "builders appealed to the guardian\l"
+	.string "of the sky.$"

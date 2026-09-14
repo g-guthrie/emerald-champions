@@ -39,18 +39,19 @@ AncientTomb_EventScript_HideRegiEntrance::
 AncientTomb_EventScript_CaveEntranceMiddle::
 	lockall
 	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_BigHoleInWall
-	braillemsgbox AncientTomb_Braille_ShineInTheMiddle
+	msgbox AncientTomb_Text_PuzzleDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
 AncientTomb_EventScript_BigHoleInWall::
-	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+	call AncientTomb_EventScript_ReadAccount
 	releaseall
 	end
 
 AncientTomb_EventScript_CaveEntranceSide::
 	lockall
-	braillemsgbox AncientTomb_Braille_ShineInTheMiddle
+	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_BigHoleInWall
+	msgbox AncientTomb_Text_PuzzleDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -77,12 +78,15 @@ AncientTomb_EventScript_Registeel::
 	end
 
 AncientTomb_EventScript_CaughtRegisteel::
+	setflag FLAG_EC_RESOLVED_REGISTEEL
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
 	end
 
 AncientTomb_EventScript_DefeatedRegisteel::
-	goto Common_EventScript_LegendaryResting
+	setflag FLAG_EC_RESOLVED_REGISTEEL
+	goto EmeraldChampions_EventScript_GuardianVictory
 	end
 
 AncientTomb_EventScript_RanFromRegisteel::
@@ -90,3 +94,25 @@ AncientTomb_EventScript_RanFromRegisteel::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+
+AncientTomb_EventScript_ReadAccount::
+	msgbox AncientTomb_Text_RouteAccount, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	return
+
+AncientTomb_Text_PuzzleDirections:
+	.string "Stand in the middle of this room\n"
+	.string "and use your licensed FLASH.\p"
+	.string "The FLASH hiker is at GRANITE\n"
+	.string "CAVE's entrance, by DEWFORD. The\l"
+	.string "STONE BADGE permits its use.\p"
+	.string "ABRA on GRANITE CAVE's entrance\n"
+	.string "floor can use FLASH.$"
+
+AncientTomb_Text_RouteAccount:
+	.string "The final account describes an\n"
+	.string "underwater cave where the path\l"
+	.string "rises above the waterline.\p"
+	.string "The sky guardian quieted the\n"
+	.string "land and sea. Its tower stood\l"
+	.string "above the southern ocean.$"

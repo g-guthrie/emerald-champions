@@ -608,11 +608,17 @@ MauvilleCity_Text_WattsonThanksTakeElectirizer:
 	.string "GENERATOR. You've earned it!$"
 
 MauvilleCity_Text_WattsonYoungTakeCharge:
-	.string "WATTSON: Wahahahaha!\p"
-	.string "It pleases me to no end to see\n"
-	.string "the young step up and take charge!\p"
-	.string "WATTSON: If you find MELTAN, level it\n"
-	.string "up in NEW MAUVILLE to get MELMETAL.\l"
+	.string "WATTSON: ROTOM explains the\n"
+	.string "generator. It doesn't explain\l"
+	.string "the rest of these readings.\p"
+	.string "I'll send them to the WEATHER\n"
+	.string "INSTITUTE. Leave MAUVILLE east\l"
+	.string "onto ROUTE 118 and SURF across.\p"
+	.string "Head north on ROUTE 119 to the\n"
+	.string "Institute. Its staff should see\l"
+	.string "what you found.\p"
+	.string "And if you find MELTAN, level it\n"
+	.string "up inside NEW MAUVILLE to evolve it.\l"
 	.string "The generator can be on or off!$"
 
 MauvilleCity_Text_NurseHurtMonBackToHealth:

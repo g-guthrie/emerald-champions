@@ -18,14 +18,10 @@ PetalburgCity_WallysHouse_OnFrame:
 
 PetalburgCity_WallysHouse_EventScript_GiveHMSurf::
 	lockall
-	@ End the automatic visit even if delivery fails; Dad can retry it on talk.
 	setvar VAR_PETALBURG_CITY_STATE, 5
 	msgbox PetalburgCity_WallysHouse_Text_PleaseExcuseUs, MSGBOX_DEFAULT
-	giveitem ITEM_HM_SURF
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_SURF
-	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
-	setvar VAR_PETALBURG_CITY_STATE, 5
+	call PetalburgCity_WallysHouse_EventScript_ExplainSurfRoute
 	releaseall
 	end
 
@@ -49,9 +45,18 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf::
 	end
 
 PetalburgCity_WallysHouse_EventScript_RemindFortreeRoute::
-	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
+	call PetalburgCity_WallysHouse_EventScript_ExplainSurfRoute
 	release
 	end
+
+PetalburgCity_WallysHouse_EventScript_ExplainSurfRoute::
+	goto_if_set FLAG_EC_REPORT_C28_COMPLETE, PetalburgCity_WallysHouse_EventScript_ExplainEastRoute
+	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
+	return
+
+PetalburgCity_WallysHouse_EventScript_ExplainEastRoute::
+	msgbox PetalburgCity_WallysHouse_Text_EastRoute, MSGBOX_DEFAULT
+	return
 
 PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad::
 	msgbox PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity, MSGBOX_DEFAULT
@@ -104,8 +109,8 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
 	.string "It made me, his father, happy too.\p"
 	.string "Happy that he's gained such a great\n"
 	.string "friend as you.\p"
-	.string "This isn't a bribe or anything, but\n"
-	.string "I'd really like you to have this.$"
+	.string "Let me register SURF for your team.\n"
+	.string "You've earned that freedom!$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
 	.string "A partner that can learn SURF can\n"
@@ -113,11 +118,20 @@ PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
 	.string "It need not learn the move first.\n"
 	.string "Keep it in your party and face\l"
 	.string "the water.\p"
-	.string "Head to MAUVILLE.\p"
-	.string "Go east onto ROUTE 118 and cross its\n"
-	.string "river, then take ROUTE 119 north.\p"
-	.string "Beyond the WEATHER INSTITUTE lies\n"
-	.string "FORTREE CITY and WINONA's GYM.$"
+	.string "LOTAD in the grass on ROUTE 102,\n"
+	.string "just east of town, can help.\p"
+	.string "Return to MAUVILLE. WATTSON is\n"
+	.string "near the city's east exit.\p"
+	.string "He needs help in NEW MAUVILLE.\n"
+	.string "Its entrance is across the water\l"
+	.string "on ROUTE 110, south of MAUVILLE.$"
+
+PetalburgCity_WallysHouse_Text_EastRoute:
+	.string "With WATTSON's problem settled,\n"
+	.string "leave MAUVILLE east on ROUTE 118.\p"
+	.string "SURF across the river, then take\n"
+	.string "ROUTE 119 north to the WEATHER\l"
+	.string "INSTITUTE. FORTREE lies beyond.$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:
 	.string "WALLY's coming home soon.\n"

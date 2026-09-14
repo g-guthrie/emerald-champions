@@ -1,9 +1,10 @@
 SSTidalCorridor_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, SSTidalCorridor_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSTidalCorridor_OnFrame
 	.byte 0
 
 SSTidalCorridor_OnFrame:
-	map_script_2 VAR_SS_TIDAL_SCOTT_STATE, 0, SSTidalCorridor_EventScript_ScottScene
+	map_script_2 VAR_TEMP_F, 0, SSTidalCorridor_EventScript_CheckArrival
 	map_script_2 VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_SLATEPORT, SSTidalCorridor_EventScript_DepartSlateportForLilycove
 	map_script_2 VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE, SSTidalCorridor_EventScript_DepartLilycoveForSlateport
 	map_script_2 VAR_SS_TIDAL_STATE, SS_TIDAL_EXIT_CURRENTS_RIGHT, SSTidalCorridor_EventScript_HalfwayToLilycove
@@ -80,6 +81,7 @@ SSTidalRooms_EventScript_ProgessCruiseAfterBed::
 	return
 
 SSTidalCorridor_EventScript_Briney::
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_EXPEDITION, SSTidalCorridor_EventScript_CaptainArrival
 	msgbox SSTidalCorridor_Text_BrineyWelcomeAboard, MSGBOX_NPC
 	end
 
@@ -112,6 +114,7 @@ SSTidalCorridor_EventScript_Cabin4Sign::
 SSTidalCorridor_EventScript_ExitSailor::
 	lock
 	faceplayer
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_EXPEDITION, SSTidalCorridor_EventScript_ExpeditionGuide
 	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_LILYCOVE, SSTidalCorridor_EventScript_ExitLilycove
 	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_LAND_SLATEPORT, SSTidalCorridor_EventScript_ExitSlateport
 	msgbox SSTidalCorridor_Text_CanRestInCabin2, MSGBOX_DEFAULT
@@ -301,3 +304,77 @@ SSTidalCorridor_Text_Cabin3:
 
 SSTidalCorridor_Text_Cabin4:
 	.string "Cabin 4$"
+
+@ The first island departure owns the ship chapter, independently of paper receipts.
+SSTidalCorridor_EventScript_BoardExpedition::
+	goto_if_set FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE, SSTidalCorridor_EventScript_ArriveSouthernIsland
+	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_EXPEDITION
+	special ResetSSTidalFlag
+	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
+	warp MAP_SS_TIDAL_CORRIDOR, 1, 10
+	waitstate
+	release
+	end
+
+SSTidalCorridor_OnTransition:
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_EXPEDITION, SSTidalCorridor_EventScript_HideScott
+	goto_if_ne VAR_SS_TIDAL_SCOTT_STATE, 0, SSTidalCorridor_EventScript_ArrivalEnd
+	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_SCOTT
+	end
+
+SSTidalCorridor_EventScript_HideScott::
+	setflag FLAG_HIDE_SS_TIDAL_CORRIDOR_SCOTT
+	end
+
+SSTidalCorridor_EventScript_CheckArrival::
+	setvar VAR_TEMP_F, 1
+	goto_if_eq VAR_SS_TIDAL_STATE, SS_TIDAL_EXPEDITION, SSTidalCorridor_EventScript_ExpeditionArrival
+	goto_if_eq VAR_SS_TIDAL_SCOTT_STATE, 0, SSTidalCorridor_EventScript_ScottScene
+	end
+
+SSTidalCorridor_EventScript_ExpeditionArrival::
+	goto_if_unset FLAG_EC_FERRY_ARRIVAL_PENDING, SSTidalCorridor_EventScript_ArrivalEnd
+	clearflag FLAG_EC_FERRY_ARRIVAL_PENDING
+	lockall
+	msgbox SSTidalCorridor_Text_ExpeditionGuide, MSGBOX_DEFAULT
+	releaseall
+SSTidalCorridor_EventScript_ArrivalEnd::
+	end
+
+SSTidalCorridor_EventScript_ExpeditionGuide::
+	msgbox SSTidalCorridor_Text_ExpeditionGuide, MSGBOX_DEFAULT
+	release
+	end
+
+SSTidalCorridor_EventScript_CaptainArrival::
+	lock
+	faceplayer
+	msgbox SSTidalCorridor_Text_ReadyForSouthernIsland, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SSTidalCorridor_EventScript_ExpeditionGuide
+	setflag FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE
+SSTidalCorridor_EventScript_ArriveSouthernIsland::
+	special ResetSSTidalFlag
+	setvar VAR_SS_TIDAL_STATE, 0
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
+	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 13, 22
+	waitstate
+	release
+	end
+
+SSTidalCorridor_Text_ExpeditionGuide:
+	.string "Our first stop is SOUTHERN ISLAND.\n"
+	.string "Captain BRINEY waits at the north\l"
+	.string "end of this corridor.\p"
+	.string "Speak to him when you're ready\n"
+	.string "to arrive. CABIN 2 has a healing bed;\l"
+	.string "a passenger has a REAPER CLOTH gift.\p"
+	.string "Explore and battle if you wish.\n"
+	.string "No passenger battle is required\l"
+	.string "before we land.$"
+
+SSTidalCorridor_Text_ReadyForSouthernIsland:
+	.string "BRINEY: PEEKO and I know these seas!\n"
+	.string "The currents are changing, but the\l"
+	.string "old chart still shows our course.\p"
+	.string "Ready to land at SOUTHERN ISLAND?$"
