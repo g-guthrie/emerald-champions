@@ -703,6 +703,8 @@ class Studio:
                 frames=int(data.get("frames",120))
                 if not 1<=frames<=1800:raise ValueError("Advance one to 1800 frames.")
                 hold=button_mask(data.get("hold",0));press=button_mask(data.get("press",0))
+                if (hold|press)&1 and self.state[0]:
+                    self.last_interaction=await self.checkpoint("Before interaction")
                 self.keys=self.key_pulses=0
                 for f in range(frames):
                     buttons=hold|(press if f==0 else 0)
