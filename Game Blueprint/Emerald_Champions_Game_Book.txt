@@ -177,6 +177,8 @@ On the first visit, the Center gives practical access to preparation, healing, s
 Retained exact contract:
 ACCESS CLARIFICATION: these services are available on FIRST arrival in Oldale, before E0001 on Route103. The chapter numbering is not a service lock. Free preparation/healing, basic Balls, normal catching and storage must work before that prepared rival; Pokédex/send-off completion afterward is not a prerequisite. C02 therefore includes the optional Oldale preparation stop before its rival sub-event.
 
+Oldale's west-exit blocker gives the same current direction when spoken to or approached through the blocked path: prepare at the Center and meet the rival through the north exit before that battle; afterward, follow Route101 south to Birch's Littleroot lab for the send-off. The Leveler explanation identifies both badges and major discoveries as cap milestones.
+
 PLAYER HANDOFF — Oldale Center service NPC:
 “Your rival is waiting on Route 103, through Oldale's north exit. You can heal, change your team and collect basic Balls here before you go.”
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
@@ -204,6 +206,7 @@ Repeat availability: the same existing interaction keeps the current direction u
 
 C06 — Rustboro
 Meet the local specialists and obtain the existing Cut license. Evolution purchases and the Fidough trade remain optional choices. Devon's problem is unresolved, but the city's Gym challenge is the player's immediate step toward being able to travel farther.
+The Center explains that IVs default to31 and remain freely adjustable through the tutor's Edit Stats service.
 
 PLAYER HANDOFF — Rustboro specialist/cutter; Gym attendant:
 “Roxanne is in Rustboro Gym. Prepare at the Center first if you need to. The Cut license is available from the town's cutter, but field use starts after Roxanne's badge.”
@@ -225,6 +228,7 @@ Repeat availability: the same existing interaction keeps the current direction u
 
 C09 — Devon and the two deliveries
 Mr. Stone explains that the attempted theft concerns both Steven's work and Stern's marine surveys. The letter and equipment deliveries are one sensible journey through Dewford to Slateport. Devon funds the travel. Fossil revival remains an optional return service, not another report requirement.
+If both the Key Items pocket and item PC are full, Mr. Stone holds the letter and the automatic introduction ends. Speaking to him retries delivery without replaying the escort; successful delivery then completes the PokéNav, travel funding and Briney handoff once.
 
 PLAYER HANDOFF — Mr. Stone:
 “Go south from Rustboro through Petalburg Woods to Briney's cottage on Route 104. Ask him to sail to Dewford. Find Steven in Granite Cave, northwest of Dewford; afterward take Stern's goods onward to Slateport.”
@@ -427,6 +431,7 @@ Repeat availability: the same existing interaction keeps the current direction u
 
 C27 — Norman and the crossing east
 Defeat Norman, earn Surf and reach cap 50. This is a personal milestone as well as the means to continue east. Wattson now has an immediate problem at New Mauville that needs someone who can reach the generator.
+Wally's father names Route102 Lotad as a nearby Surf-capable partner and repeats the New Mauville direction until Wattson accepts the generator findings; afterward, his reminder points across Route118 and north to the Weather Institute.
 
 PLAYER HANDOFF — Norman/Wally-family Surf handoff:
 “Collect Surf from Wally's family in Petalburg, then return to Mauville and speak to Wattson. He needs help in New Mauville. Its entrance is across the water on Route 110, south of Mauville.”
@@ -4189,6 +4194,7 @@ M075 GiveCameruptite: CAMERUPTITE -> KEEP Mega AFTER MEGA RING; finite duplicate
 M077 MegaGift_BLAZIKENITE: BLAZIKENITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M077 MegaGift_MACHAMPITE: MACHAMPITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M079 LucyReward: ABSOLITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
+Lucy's duplicate payment is available even with a full Bag; only an unowned Absolite needs space. An undelivered stone leaves her receipt pending, and either successful outcome completes it once.
 M087 PlayerHasMeteorite: DAWN_STONE -> KEEP paid evolution acquisition or finite gift; price by shared evolution policy
 M087 MegaGift_CLEFABLITE: CLEFABLITE -> KEEP Mega AFTER MEGA RING; finite duplicate -> 3,000 payment; same existing sparkle/actor
 M088 AskExchange: RETIRE the Heart Scale exchange; free preparation coach. Heart Scale remains saleable treasure worth 1,000. No Ether exchange is created.

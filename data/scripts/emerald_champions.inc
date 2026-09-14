@@ -1215,8 +1215,8 @@ EmeraldChampions_Text_HarvestMeetCelebi:
 	.string "Bring your POKé BALLS. You can try\n"
 	.string "again without another berry payment.$"
 EmeraldChampions_Text_HarvestHelp:
-	.string "Every berry is free at the Center's\n"
-	.string "held-item counter, right from the start.\p"
+	.string "Every berry is free from the start\n"
+	.string "at the Center's held-item counter.\p"
 	.string "Equip them for battle or plant seeds.\n"
 	.string "They aren't medicine to use by hand.\p"
 	.string "Pick three LUM BERRIES: you get three\n"

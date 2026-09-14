@@ -206,7 +206,7 @@ OldaleTown_EventScript_FootprintsMan::
 	lock
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_NotBlockingPath
-	msgbox OldaleTown_Text_DiscoveredFootprints, MSGBOX_DEFAULT
+	call OldaleTown_EventScript_ExplainWestGate
 	closemessage
 	applymovement LOCALID_FOOTPRINTS_MAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -218,7 +218,7 @@ OldaleTown_EventScript_BlockedPath::
 	applymovement LOCALID_PLAYER, OldaleTown_Movement_PlayerStepBack
 	applymovement LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_BackUp
 	waitmovement 0
-	msgbox OldaleTown_Text_WaitDontComeInHere, MSGBOX_DEFAULT
+	call OldaleTown_EventScript_ExplainWestGate
 	closemessage
 	applymovement LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_ReturnToOriginalPosition
 	waitmovement 0
@@ -229,6 +229,15 @@ OldaleTown_EventScript_NotBlockingPath::
 	msgbox OldaleTown_Text_FinishedSketchingFootprints, MSGBOX_DEFAULT
 	release
 	end
+
+OldaleTown_EventScript_ExplainWestGate::
+	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, OldaleTown_EventScript_WestGateReturnToBirch
+	msgbox OldaleTown_Text_DiscoveredFootprints, MSGBOX_DEFAULT
+	return
+
+OldaleTown_EventScript_WestGateReturnToBirch::
+	msgbox OldaleTown_Text_WaitDontComeInHere, MSGBOX_DEFAULT
+	return
 
 OldaleTown_EventScript_Rival::
 	lockall
@@ -384,18 +393,19 @@ OldaleTown_Text_PotionExplanation:
 	.string "your next challenge!$"
 
 OldaleTown_Text_WaitDontComeInHere:
-	.string "Aaaaah! Wait!\n"
-	.string "Please don't come in here.\p"
-	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
-	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "I'm still sketching these tracks.\n"
+	.string "Go south along ROUTE 101 to\l"
+	.string "PROF. BIRCH's lab in LITTLEROOT.\p"
+	.string "I'll have this path clear when\n"
+	.string "you return from your send-off!$"
 
 OldaleTown_Text_DiscoveredFootprints:
 	.string "I just discovered the footprints of\n"
 	.string "a rare POKéMON!\p"
-	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "While I sketch, meet your rival\n"
+	.string "on ROUTE 103, through OLDALE's\l"
+	.string "north exit. The CENTER can help\l"
+	.string "you prepare first!$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
 	.string "I finished sketching those rare\n"

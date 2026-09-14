@@ -47,6 +47,9 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident::
 	applymovement LOCALID_PLAYER, RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor, MSGBOX_DEFAULT
+	@ Stop the automatic scene while a full Bag and PC leave the letter pending.
+	setvar VAR_DEVON_CORP_3F_STATE, 2
+RustboroCity_DevonCorp_3F_EventScript_GiveLetter::
 	giveitem ITEM_LETTER
 	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_3F_EventScript_ArchiveLetter
 	goto RustboroCity_DevonCorp_3F_EventScript_ReceivedLetter
@@ -164,6 +167,7 @@ RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk:
 RustboroCity_DevonCorp_3F_EventScript_MrStone::
 	lock
 	faceplayer
+	goto_if_eq VAR_DEVON_CORP_3F_STATE, 2, RustboroCity_DevonCorp_3F_EventScript_GiveLetter
 	goto_if_set FLAG_EC_STEVEN_RESEARCH_CONCLUSION, RustboroCity_DevonCorp_3F_EventScript_FinalConversation
 	goto_if_set FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_MrStoneFavorPending
