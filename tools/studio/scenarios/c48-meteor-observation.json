@@ -1,0 +1,35 @@
+{
+  "name": "c48 meteor observation",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "B",
+      "every": 100,
+      "frames": 4000,
+      "until": "idle",
+      "label": "Awakening and optional battle declined"
+    }
+  ],
+  "expect": {
+    "ready": true
+  },
+  "warp": {
+    "map": "MeteorFalls_JirachisRoom",
+    "x": 7,
+    "y": 7,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_BADGE08_GET": true,
+      "FLAG_EC_CAUGHT_JIRACHI": false
+    },
+    "vars": {}
+  }
+}

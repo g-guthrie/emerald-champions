@@ -111,6 +111,8 @@ class Recorder:
                   portable=self.portable,parent=self.parent,frames_run=self.length-1,inputs=self.inputs,
                   markers=self.markers,events=self.events,captures=frames,outcome=outcome or {},
                   scope="Synthetic Studio session; native execution and pixels, not earned campaign progress.")
+        if (outcome or {}).get("battle_resolution")=="fixture_win":
+            spec["scope"]="Synthetic setup; automatic wild capture / forced trainer win. Native scenes only, NOT combat validation."
         (self.directory/"recording.json").write_text(json.dumps(spec,ensure_ascii=False,indent=2))
         selected=select_frames(frames,12,self.directory)
         sheets=make_sheets(self.root,self.directory,self.name,self.build,selected,spec["scope"])

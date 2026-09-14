@@ -1,0 +1,39 @@
+{
+  "name": "c35 lati resolution",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "hold": "UP",
+      "frames": 16
+    },
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 9000,
+      "until": "idle",
+      "label": "Sanctuary and onward handoff"
+    }
+  ],
+  "expect": {
+    "ready": true
+  },
+  "warp": {
+    "map": "SouthernIsland_Interior",
+    "x": 13,
+    "y": 13,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_ENABLE_SHIP_SOUTHERN_ISLAND": true
+    },
+    "vars": {}
+  },
+  "battle_resolution": "fixture_win"
+}

@@ -42,6 +42,7 @@ BirthIsland_Exterior_EventScript_Triangle::
 	lock
 	faceplayer
 	special DoDeoxysRockInteraction
+	waitstate
 	switch VAR_RESULT
 	case DEOXYS_ROCK_FAILED,     BirthIsland_Exterior_EventScript_Failed
 	case DEOXYS_ROCK_PROGRESSED, BirthIsland_Exterior_EventScript_Progressed
@@ -53,6 +54,7 @@ BirthIsland_Exterior_EventScript_Triangle::
 @ Unless the player has solved the puzzle and needs to encounter Deoxys,
 @ there's nothing else the script needs to do.
 BirthIsland_Exterior_EventScript_Failed::
+	msgbox BirthIsland_Exterior_Text_PuzzleReset, MSGBOX_DEFAULT
 	release
 	end
 
@@ -128,6 +130,21 @@ BirthIsland_Exterior_EventScript_RecordResearch::
 	return
 
 BirthIsland_Exterior_Text_ResearchRecord:
-	.string "The strange signal is understood.\n"
-	.string "Your discovery earns ¥12,000.\l"
-	.string "Your level cap is now 78.$"
+	.string "The meteorite signal belonged\n"
+	.string "to another living POKéMON.\l"
+	.string "It was never a source to command.\p"
+	.string "Your level cap is now 78.\n"
+	.string "Return to the sailor at the harbor.\p"
+	.string "Next, recover the SCANNER from\n"
+	.string "the ABANDONED SHIP on ROUTE 108,\l"
+	.string "between DEWFORD and SLATEPORT.\p"
+	.string "Bring licensed SURF and DIVE.\n"
+	.string "Take the SCANNER to CAPT. STERN\l"
+	.string "at SLATEPORT HARBOR.$"
+
+BirthIsland_Exterior_Text_PuzzleReset:
+	.string "The triangle returns to its\n"
+	.string "starting point.\p"
+	.string "Reach its next position in as\n"
+	.string "few steps as possible, then face\l"
+	.string "it and press A. Extra steps reset it.$"

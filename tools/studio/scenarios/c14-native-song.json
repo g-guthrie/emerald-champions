@@ -1,0 +1,28 @@
+{
+  "name": "c14 native song",
+  "start": {
+    "fixture": "C14_SONG",
+    "param": 0
+  },
+  "steps": [
+    {
+      "press": "UP",
+      "frames": 16
+    },
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 4500,
+      "until": "idle",
+      "label": "Song and onward clue"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "cap": 24
+  }
+}

@@ -166,6 +166,7 @@ Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull::
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather::
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
+	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route119_WeatherInstitute_2F_EventScript_SurveyConclusion
 	msgbox Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT
 	release
 	end
@@ -466,3 +467,21 @@ Route119_WeatherInstitute_2F_Text_Departure:
 	.string "Our research flier will take you\n"
 	.string "to the elevated ruins. Keep your\l"
 	.string "CASTFORM close during the ascent.$"
+
+Route119_WeatherInstitute_2F_EventScript_SurveyConclusion::
+	msgbox Route119_WeatherInstitute_2F_Text_SurveyConclusion, MSGBOX_DEFAULT
+	release
+	end
+
+Route119_WeatherInstitute_2F_Text_SurveyConclusion:
+	.string "Now we can separate local weather\n"
+	.string "from the disturbance offshore.\l"
+	.string "This is what AQUA tried to take.\p"
+	.string "STEVEN is following the old\n"
+	.string "account east. Show him what you\l"
+	.string "saw when your paths meet.\p"
+	.string "Continue north on ROUTE 119 to\n"
+	.string "FORTREE. After your rival, meet\l"
+	.string "STEVEN on ROUTE 120, east of town.\p"
+	.string "His DEVON SCOPE investigation\n"
+	.string "comes before WINONA's GYM.$"

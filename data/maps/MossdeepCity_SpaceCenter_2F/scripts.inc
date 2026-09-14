@@ -566,13 +566,17 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp:
 	.string "ARCHIE before he awakens KYOGRE.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
-	.string "STEVEN: Thank you, {PLAYER}.\n"
-	.string "Together, we kept the staff and\l"
-	.string "their research safe.\p"
-	.string "Come to my home west of the GYM.\n"
-	.string "I have DIVE for you.\p"
-	.string "You'll need it to follow AQUA's\n"
-	.string "stolen submarine.$"
+	.string "STEVEN: We kept the staff safe.\n"
+	.string "But MAGMA wanted more than fuel.\p"
+	.string "They were studying the Center's\n"
+	.string "meteorite readings. BIRTH ISLAND\l"
+	.string "still carries that disturbance.\p"
+	.string "Your DIVE license and passage to\n"
+	.string "BIRTH ISLAND are earned. LILYCOVE\l"
+	.string "HARBOR can take you there.\p"
+	.string "My home west of the GYM has the\n"
+	.string "physical DIVE HM if you need it.\l"
+	.string "Speak to the scientist before sailing.$"
 
 MossdeepCity_SpaceCenter_2F_EventScript_BirthIslandBriefing::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_BirthIslandBriefing, MSGBOX_DEFAULT
@@ -580,10 +584,15 @@ MossdeepCity_SpaceCenter_2F_EventScript_BirthIslandBriefing::
 	end
 
 MossdeepCity_SpaceCenter_2F_Text_BirthIslandBriefing:
-	.string "Your BIRTH ISLAND clearance is\n"
-	.string "registered at LILYCOVE HARBOR.\p"
-	.string "The readings aren't random. Take\n"
-	.string "the shortest route between each\l"
-	.string "position of the triangle.\p"
-	.string "Extra steps disturb the pattern.\n"
-	.string "A reset costs no ticket or reward.$"
+	.string "MAGMA studied our meteorite\n"
+	.string "readings. The disturbance at\l"
+	.string "BIRTH ISLAND is still active.\p"
+	.string "Your clearance is registered at\n"
+	.string "LILYCOVE HARBOR. Sail from there\l"
+	.string "to investigate the triangle.\p"
+	.string "Take the shortest route between\n"
+	.string "its successive positions. Extra\l"
+	.string "steps reset the pattern.\p"
+	.string "The harbor sailor can bring you\n"
+	.string "back. A reset costs no ticket\l"
+	.string "or reward.$"

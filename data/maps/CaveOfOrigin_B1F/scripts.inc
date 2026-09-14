@@ -17,6 +17,7 @@ CaveOfOrigin_B1F_EventScript_Wallace::
 	delay 30
 	applymovement LOCALID_CAVE_OF_ORIGIN_WALLACE, Common_Movement_FacePlayer
 	waitmovement 0
+	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, CaveOfOrigin_B1F_EventScript_RecallRuins
 	message CaveOfOrigin_B1F_Text_WhereIsRayquaza
 	waitmessage
 	goto CaveOfOrigin_B1F_EventScript_WheresRayquaza
@@ -115,3 +116,15 @@ CaveOfOrigin_B1F_Text_WellHeadToSkyPillar:
 	.string "east of PACIFIDLOG. I will open\l"
 	.string "the way!$"
 
+
+CaveOfOrigin_B1F_EventScript_RecallRuins::
+	msgbox CaveOfOrigin_B1F_Text_RuinsWarning, MSGBOX_DEFAULT
+	goto CaveOfOrigin_B1F_EventScript_AtSkyPillar
+	end
+
+CaveOfOrigin_B1F_Text_RuinsWarning:
+	.string "The desert warnings. The sea\n"
+	.string "ruins. They were describing this.\p"
+	.string "Your three accounts named the\n"
+	.string "sky's guardian and its tower.\l"
+	.string "We must reach SKY PILLAR.$"

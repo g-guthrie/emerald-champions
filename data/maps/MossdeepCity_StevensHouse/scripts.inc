@@ -136,7 +136,7 @@ MossdeepCity_StevensHouse_EventScript_RockDisplay::
 MossdeepCity_StevensHouse_EventScript_Steven::
 	lock
 	faceplayer
-	call_if_set FLAG_BADGE08_GET, MossdeepCity_StevensHouse_EventScript_ReviewResearch
+	goto_if_set FLAG_BADGE08_GET, MossdeepCity_StevensHouse_EventScript_ResearchConversation
 	checkitem ITEM_HM_DIVE
 	call_if_eq VAR_RESULT, FALSE, MossdeepCity_StevensHouse_EventScript_DeliverDive
 	msgbox MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis, MSGBOX_DEFAULT
@@ -232,6 +232,11 @@ MossdeepCity_StevensHouse_EventScript_ReviewResearch::
 	goto_if_unset FLAG_EC_SURVEYED_ORIGIN_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_SURVEYED_METEOR_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	setflag FLAG_EC_STEVEN_RESEARCH_CONCLUSION
+	closemessage
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	delay 30
+	faceplayer
 	msgbox MossdeepCity_StevensHouse_Text_ResearchConclusion, MSGBOX_DEFAULT
 	return
 
@@ -249,7 +254,31 @@ MossdeepCity_StevensHouse_Text_ResearchPending:
 
 MossdeepCity_StevensHouse_Text_ResearchConclusion:
 	.string "When we met, you carried a letter.\n"
-	.string "Now you can explain what those\l"
-	.string "scattered reports were describing.\p"
+	.string "Since then, you've stood where\l"
+	.string "its authors could only imagine.\p"
+	.string "The teams thought understanding\n"
+	.string "a POKéMON meant controlling it.\l"
+	.string "You've seen how much they missed.\p"
+	.string "The crystal light and distant\n"
+	.string "song belong to living places,\l"
+	.string "not machines to command.\p"
 	.string "Take our conclusion to my father\n"
-	.string "at DEVON in RUSTBORO.$"
+	.string "at DEVON in RUSTBORO. Then finish\l"
+	.string "your own journey to the LEAGUE.$"
+
+MossdeepCity_StevensHouse_EventScript_ResearchConversation::
+	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, MossdeepCity_StevensHouse_EventScript_LeagueSendoff
+	call MossdeepCity_StevensHouse_EventScript_ReviewResearch
+	release
+	end
+MossdeepCity_StevensHouse_EventScript_LeagueSendoff::
+	msgbox MossdeepCity_StevensHouse_Text_LeagueSendoff, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_StevensHouse_Text_LeagueSendoff:
+	.string "Our research is in good hands.\n"
+	.string "Your next challenge is your own.\p"
+	.string "SURF east from ROUTE 128 to\n"
+	.string "EVER GRANDE. Climb the WATERFALL,\l"
+	.string "then take VICTORY ROAD to the LEAGUE.$"

@@ -40,7 +40,20 @@ async def run(spec,out):
         await studio.core.rpc(3,cp["state"].encode());packet=await studio.core.tick(frames=0)
     else:
         build=latest
-        studio.core,packet=await studio.boot(build,chapter=int(start.get("chapter",3)))
+        if "fixture" in start:
+            header=(server.ROOT/"include/emerald_champions_headless.h").read_text()
+            import re
+            enums=re.findall(r"EC_HEADLESS_SCENARIO_\w+",header.split("enum EmeraldChampionsHeadlessScenario")[1].split("};")[0])
+            ident="EC_HEADLESS_SCENARIO_"+start["fixture"]
+            if ident not in enums:raise ValueError("Unknown native fixture.")
+            studio.core=await server.Core.open(build["rom"],build["elf"])
+            packet=await studio.core.tick(frames=60)
+            await studio.core.write([(studio.core.syms["gEcHeadlessFixtureParam"],int(start.get("param",0))),
+                                     (studio.core.syms["gEcHeadlessFixtureScenario"],enums.index(ident))])
+            for _ in range(int(start.get("settle_frames",360))//30):
+                packet=await studio.core.tick(frames=30)
+        else:
+            studio.core,packet=await studio.boot(build,chapter=int(start.get("chapter",3)))
     studio.build,studio.build_id=build,build["id"];studio.ingest(packet)
     try:
         if spec.get("setup"):await studio.command(dict(op="setup",**spec["setup"]))
@@ -52,6 +65,13 @@ async def run(spec,out):
             for _ in range(120):
                 studio.ingest(await studio.core.tick(frames=5))
                 if studio.state[0]:break
+        forced=spec.get("battle_resolution","native")
+        if forced not in ("native","fixture_win"):raise ValueError("Unknown battle-resolution mode.")
+        if forced=="fixture_win":
+            import re
+            header=(server.ROOT/"include/emerald_champions_headless.h").read_text()
+            enums=re.findall(r"EC_HEADLESS_SCENARIO_\w+",header.split("enum EmeraldChampionsHeadlessScenario")[1].split("};")[0])
+            await studio.core.write([(studio.core.syms["gEcHeadlessFixtureActiveScenario"],enums.index("EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN"))])
         initial,portable=await studio.scene_start_files(out,save_portable=not replay)
         recorder=Recorder(server.ROOT,out,spec.get("name","Scene test"),studio.build_info(),initial,portable,
                           parent=start.get("recording"))
@@ -112,7 +132,8 @@ async def run(spec,out):
             exact=old==studio.packet[16:153616]
             if not exact:failures.append("Recorded-build replay ended on different pixels.")
         result=await asyncio.to_thread(recorder.finish,studio.packet,
-                 dict(passed=not failures,failures=failures,final=final,exact_replay_pixels=exact))
+                 dict(passed=not failures,failures=failures,final=final,exact_replay_pixels=exact,
+                      battle_resolution=forced))
         (out/"recipe.json").write_text(json.dumps(spec,indent=2))
         return result
     finally:await studio.core.close()

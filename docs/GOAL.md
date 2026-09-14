@@ -1,7 +1,8 @@
 # Full unfinished development goal
 
 Current work is implementing the book's unfinished overworld scenes through
-Emerald Studio, starting with the wreck/Scanner and ruins sequence. Team review through battle28, the C15 Dwayne
+Emerald Studio. The section17 implementation pass is complete; native scene evidence
+and remaining acceptance limits are recorded in the book and VERIFICATION. Team review through battle28, the C15 Dwayne
 experiment and export delivery remain paused;
 see `CONTINUE.md`. This long-term goal does not override that pause.
 

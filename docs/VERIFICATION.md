@@ -630,3 +630,82 @@ Book import/ability/370-party roster checks pass. Added dialogue fits the existi
 font-width budget; the previously existing209px berry-vendor line is unchanged.
 The full wreck key trail, Route134 currents, late story-gate traversal, remaining
 section17 scene branches and user visual approval remain separate coverage.
+
+
+## Remaining section17 choreography completion — 2026-09-14
+
+The second pass finishes the nine-item source disposition in the canonical book.
+Use the tracked `tools/studio/scenarios/c14*`, `c26*`, `c30-castform*`, `c34*`,
+`c35*`, `c36*`, `c39-missing*`, `c42*`, `c43*`, `c46*`, `c48*` and
+`map-ember-path.json` recipes. Each `result.json` contains the observed outcome;
+the recording owns immutable ROM/ELF hashes, prerequisites, inputs and original
+pixels. Directory names below are relative to `work/studio/scenes`.
+
+- `complete-c14-native-song-v1`: retained song/response and Stern handoff.
+- `complete-c26-permanent-approach-v1`: required Sandstrewn tower approach remains
+  present after optional collapse state2.
+- `complete-c30-castform-response-final`: five-badge prerequisites, native Castform
+  portrait/cry, Landorus offer declined and return offer declined. The earlier
+  v1 had only badge5 and exercised the blocked reminder; it is not response proof.
+- `complete-c34-first-voyage-v1`, `complete-c35-onward-voyage-final`,
+  `complete-c36-voyage-home-final`: Briney promise, ferry departure/fades,
+  destination arrivals, Faraway grass guidance and Lilycove/Mt. Pyre return.
+- `complete-c35-lati-resolution-v1`: native sanctuary reveal and onward text,
+  with automatic wild capture; it does not test a non-capture victory.
+- `complete-c39-missing-stone-final`: actual missing-item guidance displays and
+  returns control. The earlier `c39-heatran-v1` remains reveal evidence.
+- `complete-c42-meteorite-briefing-v1`, `complete-c43-harbor-guide-v1`,
+  `complete-c43-harbor-return-v1`: meteorite/triangle and Scanner directions.
+- `complete-c43-triangle-v2`: all eleven native triangle positions and Deoxys
+  reveal, automatic wild capture, C43 receipt and cap78. The earlier failure
+  was a recorded-input error: direction changes before walking finished. The
+  recipe now releases movement between path segments. Added task waitstate is
+  a separate source fix: read the rock result only after its asynchronous task.
+- `complete-c46-wallace-recollection-v1`, `complete-c46-rayquaza-awakening-v1`:
+  completed-ruins reference, Sky Pillar handoff, original awakening/flight and
+  restored camera/control.
+- `complete-c48-origin-observation-v1`, `complete-c48-meteor-observation-v1`:
+  existing observation interactions and optional battle declines.
+- `complete-c48-steven-conclusion-final`, `complete-c48-devon-gift-final`:
+  research closure receipt, first/repeat Devon dialogue, cap94, money26000
+  from6000, and the previously unclaimed Pidgeotite remains exactly one after
+  subsequent visits. No repeated grant or return to the obsolete main quest.
+- `complete-map-ember-path-v5`: actual Jagged Pass entrance, Ember Path name
+  popup, landmark flag1 and native zoomed PokeNav showing Route112 / Jagged Pass /
+  Ember Path at the established marker. A direct synthetic cave jump used the
+  fixture's old escape-warp origin; a later approach entered from the wrong
+  side. Neither was evidence of a game map defect. The final recipe asserts the
+  destination map and landmark, and the contact sheet confirms presentation.
+
+The source-bound contact sheets above were visually inspected. These are
+synthetic scene tests, not earned route progression. Native fixture setup and
+`battle_resolution:"fixture_win"` are optional independent-worker facilities;
+the latter uses existing campaign automation (automatic wild capture / forced
+trainer win) and is explicitly labeled, never combat acceptance. Default scene
+execution retains native battle behavior. The user's live Studio and earned C15
+save are separate. The earlier Scanner/ruin puzzle evidence remains valid for
+those unchanged scripts.
+
+Logs are in `work/studio/choreography-completion`. The book import/check confirms
+370 variants/parties/battle IDs and legal configured abilities. The text-width
+check found no added over-budget line. Build the normal release with
+`make -j6 release USE_LTO_ON_RELEASE=0`, stamp it with
+`scripts/stamp_release_inputs.py`, then run
+`scripts/verify_emerald_champions_release.py`; keep its ROM, ELF and stamp together.
+The normal build excludes all fixture/agent mutation interfaces.
+
+Remaining acceptance: user visual approval; actual full wreck key/current,
+Magma Hideout/Seafloor/Meteor Falls navigation; uncaptured victory/flee/loss,
+full-storage and clean-save/reload branches not explicitly exercised above;
+and the paused earned campaign. These limits do not imply unbuilt section17
+presentation. The early Devon/Steven/Wattson copy refinements have source and
+font-width checks, without an additional full early-story replay.
+
+Final normal release build and gates passed in
+`work/studio/choreography-completion/release-build.log` and `release-gates.log`.
+The input stamp binds28,978 inputs plus ROM/ELF bytes; the ROM uses27,631,040
+bytes, EWRAM232,368 bytes and IWRAM28,356 bytes. The six-panel native overview is
+`work/studio/choreography-completion/showcase.png`; its JSON sidecar links each
+unaltered source capture and recording. Full sheets and motion previews remain
+in the Studio Library. This is a local normal build; no new public ROM upload or
+earned-run migration is claimed.

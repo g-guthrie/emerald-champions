@@ -744,3 +744,4 @@ gSpecials::
 	def_special CheckEmeraldChampionsGardenCelebi
 	def_special GiveEmeraldChampionsBerryPair
 	def_special PrepareEmeraldChampionsMeadowSong
+	def_special PrepareEmeraldChampionsCastformSurvey

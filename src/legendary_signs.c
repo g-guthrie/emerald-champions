@@ -625,6 +625,25 @@ void DoesPlayerPartyHaveSelectedSpeciesFamily(void)
     gSpecialVar_Result = PlayerPartyHasSpeciesFamily(gSpecialVar_0x8004);
 }
 
+void PrepareEmeraldChampionsCastformSurvey(void)
+{
+    gSpecialVar_Result = FALSE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+        if (species == SPECIES_NONE || species == SPECIES_EGG
+         || SpeciesToNationalPokedexNum(species) != NATIONAL_DEX_CASTFORM
+         || GetMonData(mon, MON_DATA_HP) == 0
+         || (GetMonData(mon, MON_DATA_STATUS) & STATUS1_SLEEP))
+            continue;
+        FieldMoveShowMon_ClearSpeciesOverride();
+        gFieldEffectArguments[0] = slot;
+        gSpecialVar_Result = TRUE;
+        return;
+    }
+}
+
 static u8 GetSignLevel(s8 offset)
 {
     s32 level = (s32)GetCurrentLevelCap() + offset;

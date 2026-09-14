@@ -144,6 +144,7 @@ FarawayIsland_Interior_EventScript_Mew::
 	end
 
 FarawayIsland_Interior_EventScript_MewCaught::
+	call FarawayIsland_Interior_EventScript_CompleteJourney
 	setflag FLAG_CAUGHT_MEW
 	setflag FLAG_EC_RESOLVED_MEW
 	msgbox FarawayIsland_Interior_Text_ResearchRecord, MSGBOX_DEFAULT
@@ -151,6 +152,7 @@ FarawayIsland_Interior_EventScript_MewCaught::
 	end
 
 FarawayIsland_Interior_EventScript_MewDefeated::
+	call FarawayIsland_Interior_EventScript_CompleteJourney
 	setflag FLAG_EC_RESOLVED_MEW
 	msgbox FarawayIsland_Interior_Text_ResearchRecord, MSGBOX_DEFAULT
 	goto Common_EventScript_LegendaryResting
@@ -199,3 +201,19 @@ FarawayIsland_Interior_Text_ResearchRecord:
 	.string "A living part of the old record…\n"
 	.string "Take these findings back to the\l"
 	.string "LILYCOVE HARBOR expedition team.$"
+
+FarawayIsland_Interior_EventScript_CompleteJourney::
+	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, Common_EventScript_NopReturn
+	completemilestone FLAG_EC_REPORT_C36_COMPLETE
+	msgbox FarawayIsland_Interior_Text_JourneyComplete, MSGBOX_DEFAULT
+	return
+
+FarawayIsland_Interior_Text_JourneyComplete:
+	.string "The travelers' account led to\n"
+	.string "MEW. A living part of the old story.\p"
+	.string "Your discovery earns ¥12,000.\n"
+	.string "Your level cap is now 64. Catching\l"
+	.string "MEW remains your own choice.\p"
+	.string "Return through the clearing to\n"
+	.string "BRINEY at the ferry. The next\l"
+	.string "lead is the Orb keepers at MT. PYRE.$"

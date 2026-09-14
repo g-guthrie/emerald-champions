@@ -1,0 +1,45 @@
+{
+  "name": "c30 castform response",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "B",
+      "every": 100,
+      "frames": 4000,
+      "until": "idle",
+      "label": "Castform response and encounter declined"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "contains_text": "WEATHER INSTITUTE"
+  },
+  "warp": {
+    "map": "Route111_RuinsExterior",
+    "x": 15,
+    "y": 13,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_BADGE05_GET": true,
+      "FLAG_HIDE_ROUTE_119_TEAM_AQUA": true,
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_BADGE04_GET": true,
+      "FLAG_EC_RECEIVED_REVEAL_GLASS": true
+    },
+    "vars": {}
+  },
+  "party": [
+    "SPECIES_CASTFORM_NORMAL",
+    "SPECIES_ALAKAZAM"
+  ]
+}

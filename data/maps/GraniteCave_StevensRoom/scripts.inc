@@ -274,6 +274,8 @@ GraniteCave_StevensRoom_Text_RegisteredSteven:
 	.string "in the POKéNAV.$"
 
 GraniteCave_StevensRoom_Text_ManorHandoff:
+	.string "The old account continues out to sea.\n"
+	.string "STERN is studying those waters now.\p"
 	.string "Go west from DEWFORD into the\n"
 	.string "MEADOW and enter the old MANOR.\p"
 	.string "Read the historian's account, then\n"

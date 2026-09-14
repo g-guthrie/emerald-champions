@@ -1,4 +1,5 @@
 LilycoveCity_Harbor_MapScripts::
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_Harbor_OnArrivalFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_Harbor_OnTransition
 	.byte 0
 
@@ -55,6 +56,7 @@ LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect::
 
 LilycoveCity_Harbor_EventScript_GoToSouthernIsland::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
 	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 13, 22
 	waitstate
 	release
@@ -69,13 +71,17 @@ LilycoveCity_Harbor_EventScript_GoToNavelRock::
 
 LilycoveCity_Harbor_EventScript_GoToBirthIsland::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
 	warp MAP_BIRTH_ISLAND_HARBOR, 8, 4
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_GoToFarawayIsland::
+	call LilycoveCity_Harbor_EventScript_CheckSouthernJourney
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_SouthernJourneyFirst
 	call LilycoveCity_Harbor_EventScript_BoardFerry
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
 	warp MAP_FARAWAY_ISLAND_ENTRANCE, 13, 38
 	waitstate
 	release
@@ -195,8 +201,10 @@ LilycoveCity_Harbor_EventScript_EonTicketFirstTime::
 	end
 
 LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime::
+	msgbox LilycoveCity_Harbor_Text_BrineyPromise, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
 	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 13, 22
 	waitstate
 	release
@@ -214,12 +222,15 @@ LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime::
 LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime::
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
 	warp MAP_BIRTH_ISLAND_HARBOR, 8, 4
 	waitstate
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
+	call LilycoveCity_Harbor_EventScript_CheckSouthernJourney
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_SouthernJourneyFirst
 	setflag FLAG_SHOWN_OLD_SEA_MAP
 	msgbox EventTicket_Text_ShowOldSeaMap, MSGBOX_DEFAULT
 	closemessage
@@ -247,6 +258,7 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
 	call_if_eq VAR_FACING, DIR_EAST, LilycoveCity_Harbor_EventScript_BoardFerryWithBrineyAndSailorEast
 	setvar VAR_0x8004, LOCALID_LILYCOVE_HARBOR_SS_TIDAL
 	call Common_EventScript_FerryDepart
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
 	warp MAP_FARAWAY_ISLAND_ENTRANCE, 13, 38
 	waitstate
 	release
@@ -255,6 +267,7 @@ LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
 LilycoveCity_Harbor_EventScript_GoToFarawayIslandFirstTime::
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
+	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
 	warp MAP_FARAWAY_ISLAND_ENTRANCE, 13, 38
 	waitstate
 	release
@@ -706,3 +719,71 @@ LilycoveCity_Harbor_Text_LatiReportReady:
 	.string "Red is LATIAS; blue is LATIOS.\p"
 	.string "Watch the routes for your choice,\n"
 	.string "and sail to meet the other!$"
+
+LilycoveCity_Harbor_OnArrivalFrame:
+	map_script_2 VAR_TEMP_F, 0, LilycoveCity_Harbor_EventScript_Arrival
+	.2byte 0
+
+LilycoveCity_Harbor_EventScript_Arrival::
+	setvar VAR_TEMP_F, 1
+	goto_if_unset FLAG_EC_FERRY_ARRIVAL_PENDING, LilycoveCity_Harbor_EventScript_ArrivalEnd
+	clearflag FLAG_EC_FERRY_ARRIVAL_PENDING
+	lockall
+	call LilycoveCity_Harbor_EventScript_ReportMew
+	goto_if_set FLAG_EC_REPORT_C43_COMPLETE, LilycoveCity_Harbor_EventScript_ArrivalScanner
+	goto_if_set FLAG_EC_RESOLVED_MEW, LilycoveCity_Harbor_EventScript_ArrivalMtPyre
+	msgbox LilycoveCity_Harbor_Text_ReturnedToHarbor, MSGBOX_DEFAULT
+	releaseall
+LilycoveCity_Harbor_EventScript_ArrivalEnd::
+	end
+
+LilycoveCity_Harbor_EventScript_ArrivalMtPyre::
+	msgbox LilycoveCity_Harbor_Text_MtPyreArrival, MSGBOX_DEFAULT
+	releaseall
+	end
+LilycoveCity_Harbor_EventScript_ArrivalScanner::
+	msgbox BirthIsland_Harbor_Text_ScannerLead, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LilycoveCity_Harbor_Text_ReturnedToHarbor:
+	.string "Back at LILYCOVE HARBOR.\n"
+	.string "The attendant can arrange your\l"
+	.string "next passage or a return trip.$"
+
+LilycoveCity_Harbor_Text_BrineyPromise:
+	.string "A familiar voice calls from the ferry.\p"
+	.string "BRINEY: When you brought PEEKO\n"
+	.string "home, I promised you a passage.\l"
+	.string "I didn't imagine we'd go this far!\p"
+	.string "SOUTHERN ISLAND first. Then we'll\n"
+	.string "see where that old chart takes us.\l"
+	.string "All aboard!$"
+
+LilycoveCity_Harbor_EventScript_CheckSouthernJourney::
+	setvar VAR_RESULT, TRUE
+	goto_if_set FLAG_EC_RESOLVED_SOUTHERN_LATI, Common_EventScript_NopReturn
+	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, Common_EventScript_NopReturn
+	setvar VAR_RESULT, FALSE
+	return
+LilycoveCity_Harbor_EventScript_SouthernJourneyFirst::
+	msgbox LilycoveCity_Harbor_Text_SouthernJourneyFirst, MSGBOX_DEFAULT
+	goto LilycoveCity_Harbor_EventScript_GoToSouthernIsland
+	end
+LilycoveCity_Harbor_Text_SouthernJourneyFirst:
+	.string "BRINEY's route begins at SOUTHERN\n"
+	.string "ISLAND. Read the inner clearing's\l"
+	.string "stone and meet its guardian first.\p"
+	.string "You don't have to capture it.\n"
+	.string "BRINEY will continue to FARAWAY\l"
+	.string "ISLAND after that encounter.$"
+
+LilycoveCity_Harbor_Text_MtPyreArrival:
+	.string "BRINEY: Back in LILYCOVE, safe\n"
+	.string "and sound. PEEKO would be proud.\p"
+	.string "The old account points to the\n"
+	.string "Orb keepers. Go west onto ROUTE\l"
+	.string "121, then SURF south on ROUTE 122.\p"
+	.string "Enter MT. PYRE and follow its\n"
+	.string "exterior path to the summit.\l"
+	.string "That's your next lead.$"

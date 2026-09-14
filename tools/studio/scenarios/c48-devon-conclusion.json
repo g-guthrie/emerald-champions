@@ -1,0 +1,89 @@
+{
+  "name": "c48 devon conclusion",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 6500,
+      "until": "idle",
+      "label": "Scene completes"
+    },
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 4500,
+      "until": "idle",
+      "label": "Repeat sendoff"
+    },
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 4500,
+      "until": "idle",
+      "label": "Repeat sendoff"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "contains_text": "LEAGUE",
+    "cap": 94,
+    "queries": {
+      "complete": 1,
+      "money": 26000,
+      "gift": 1,
+      "stone": 1
+    }
+  },
+  "warp": {
+    "map": "RustboroCity_DevonCorp_3F",
+    "x": 17,
+    "y": 6,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_STEVEN_RESEARCH_CONCLUSION": true,
+      "FLAG_BADGE08_GET": true,
+      "FLAG_DELIVERED_STEVEN_LETTER": true
+    },
+    "vars": {
+      "VAR_DEVON_CORP_3F_STATE": 1
+    },
+    "items": {
+      "ITEM_MEGA_RING": 1
+    }
+  },
+  "queries": {
+    "complete": {
+      "kind": 1,
+      "id": "FLAG_EC_REPORT_C48_COMPLETE"
+    },
+    "money": {
+      "kind": 9
+    },
+    "gift": {
+      "kind": 1,
+      "id": "FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON"
+    },
+    "stone": {
+      "kind": 4,
+      "id": "ITEM_PIDGEOTITE"
+    }
+  }
+}

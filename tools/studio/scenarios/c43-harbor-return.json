@@ -1,0 +1,38 @@
+{
+  "name": "c43 harbor return",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 6500,
+      "until": "idle",
+      "label": "Scene completes"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "LilycoveCity_Harbor",
+    "contains_text": "SCANNER"
+  },
+  "warp": {
+    "map": "BirthIsland_Harbor",
+    "x": 8,
+    "y": 4,
+    "facing": 1
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_REPORT_C43_COMPLETE": true,
+      "FLAG_BADGE06_GET": true
+    },
+    "vars": {}
+  }
+}

@@ -32,6 +32,13 @@ Route111_RuinsExterior_EventScript_Archaeologist::
 	goto_if_eq VAR_RESULT, 4, Route111_RuinsExterior_EventScript_RecordSurvey
 	goto_if_eq VAR_RESULT, 5, Route111_RuinsExterior_EventScript_Resting
 	goto_if_lt VAR_RESULT, 2, Route111_RuinsExterior_EventScript_NeedCastform
+	special PrepareEmeraldChampionsCastformSurvey
+	goto_if_eq VAR_RESULT, FALSE, Route111_RuinsExterior_EventScript_NeedCastform
+	closemessage
+	dofieldeffect FLDEFF_FIELD_MOVE_SHOW_MON_INIT
+	waitfieldeffect FLDEFF_FIELD_MOVE_SHOW_MON
+	playmoncry SPECIES_CASTFORM_NORMAL, CRY_MODE_NORMAL
+	waitmoncry
 	msgbox Route111_RuinsExterior_Text_WindAnswers, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route111_RuinsExterior_EventScript_OfferReturn
 	closemessage

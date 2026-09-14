@@ -1550,8 +1550,8 @@
 #define FLAG_EC_ROUTE118_ROD_GIFT                    (SYSTEM_FLAGS + 0xAD)
 #define FLAG_EC_REPORT_C45_COMPLETE                 (SYSTEM_FLAGS + 0xAE)
 #define FLAG_EC_SURVEY_FLIGHT_ARRIVAL                (SYSTEM_FLAGS + 0xAF)
-#define FLAG_UNUSED_0x910                           (SYSTEM_FLAGS + 0xB0) // Unused Flag
-#define FLAG_UNUSED_0x911                           (SYSTEM_FLAGS + 0xB1) // Unused Flag
+#define FLAG_EC_RESOLVED_SOUTHERN_LATI              (SYSTEM_FLAGS + 0xB0)
+#define FLAG_EC_FERRY_ARRIVAL_PENDING               (SYSTEM_FLAGS + 0xB1)
 #define FLAG_UNUSED_0x912                           (SYSTEM_FLAGS + 0xB2) // Unused Flag
 #define FLAG_UNUSED_0x913                           (SYSTEM_FLAGS + 0xB3) // Unused Flag
 #define FLAG_UNUSED_0x914                           (SYSTEM_FLAGS + 0xB4) // Unused Flag

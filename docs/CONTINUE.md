@@ -8,17 +8,22 @@ spawn agents. The native engine in this repository is the active project.
 
 ## Active work: book scenes through Emerald Studio
 
-The user asked to debut the Studio skill by implementing unfinished book
-choreography. Current batch: C44 wreck/Scanner and Stern scan; C45 readable
-puzzles and three-account route discovery; C30 research flights; synchronization
-of the existing Moltres/Heatran/chamber shake effects. Canonical intent and
-source-triage scope are in Game Book section17. Existing geography/actors and
-native effects are retained. Earned C15 play and trainer review remain paused.
+The user then asked to finish ALL book-specified missing choreography. The section17
+implementation pass is complete in source: Castform response/flights; Briney's
+Southern→Faraway voyage and return; Heatran resource/aftermath guidance;
+Space Center/Birth Island briefing and triangle synchronization; Wallace's ruins
+recollection; Steven/Devon closure and repeat-safe grant; and native Ember Path
+map presentation. The earlier Scanner/three-ruins and Moltres work remains.
+The required Sandstrewn basement approach now survives optional tower collapse.
+Book section17 contains the nine-item disposition and precise evidence limits.
 
-Studio recipes and contact sheets own synthetic scene evidence. The entire
-wreck key trail, Route134 currents and Seafloor Cavern traversal are not earned
-coverage in this pass. Studio runs are available in its Library; the live user's
-sandbox remains independent. See VERIFICATION for final runs and limits.
+Studio recipes/contact sheets own synthetic scene evidence. Earned C15 play,
+trainer reviews and export delivery remain paused. No new legendary placement
+was authorized or implemented by the earlier location-scouting discussion.
+The user's live Studio sandbox remains independent. User visual approval,
+full dungeon navigation and untested outcome/storage/reload branches remain
+acceptance work; do not describe these as unbuilt choreography or earned clears.
+See VERIFICATION for final runs and limits.
 
 ## Paused work: collaborative team reviews
 

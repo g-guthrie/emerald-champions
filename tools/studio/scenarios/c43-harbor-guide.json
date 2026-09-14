@@ -1,0 +1,28 @@
+{
+  "name": "c43 harbor guide",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "B",
+      "every": 100,
+      "frames": 4000,
+      "until": "idle",
+      "label": "Repeatable puzzle guide"
+    }
+  ],
+  "expect": {
+    "ready": true
+  },
+  "warp": {
+    "map": "BirthIsland_Harbor",
+    "x": 8,
+    "y": 4,
+    "facing": 1
+  }
+}

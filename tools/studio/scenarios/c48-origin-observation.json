@@ -1,0 +1,35 @@
+{
+  "name": "c48 origin observation",
+  "start": {
+    "chapter": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120
+    },
+    {
+      "tap": "B",
+      "every": 100,
+      "frames": 4000,
+      "until": "idle",
+      "label": "Observation without capture"
+    }
+  ],
+  "expect": {
+    "ready": true
+  },
+  "warp": {
+    "map": "CaveOfOrigin_DianciesRoom",
+    "x": 9,
+    "y": 10,
+    "facing": 2
+  },
+  "setup": {
+    "flags": {
+      "FLAG_BADGE08_GET": true,
+      "FLAG_EC_CAUGHT_DIANCIE": false
+    },
+    "vars": {}
+  }
+}

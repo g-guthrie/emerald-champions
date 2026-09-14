@@ -297,29 +297,11 @@ void ClearMirageTowerPulseBlendEffect(void)
 
 void SetMirageTowerVisibility(void)
 {
-    u16 rand;
-    bool8 visible;
-
-    if (VarGet(VAR_MIRAGE_TOWER_STATE))
-    {
-        // Mirage Tower event has already been completed, hide it
-        FlagClear(FLAG_MIRAGE_TOWER_VISIBLE);
-        return;
-    }
-
-    rand = Random();
-    visible = rand & 1;
-    if (FlagGet(FLAG_FORCE_MIRAGE_TOWER_VISIBLE) == TRUE)
-        visible = TRUE;
-
-    if (visible)
-    {
-        FlagSet(FLAG_MIRAGE_TOWER_VISIBLE);
+    // The basement is the required Sandstrewn research approach. Fossil
+    // collection and the tower's one-time collapse cannot remove that route.
+    FlagSet(FLAG_MIRAGE_TOWER_VISIBLE);
+    if (VarGet(VAR_MIRAGE_TOWER_STATE) == 0)
         TryStartMirageTowerPulseBlendEffect();
-        return;
-    }
-
-    FlagClear(FLAG_MIRAGE_TOWER_VISIBLE);
 }
 
 void StartPlayerDescendMirageTower(void)

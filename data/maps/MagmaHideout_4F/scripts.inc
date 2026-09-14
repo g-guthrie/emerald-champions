@@ -63,6 +63,10 @@ MagmaHideout_4F_EventScript_MaxieChallenge::
 	closemessage
 	trainerbattle_no_intro_double TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MagmaHideout_4F_Text_MaxieImGoingAfterGroudon, MSGBOX_DEFAULT
+	setvar VAR_0x8004, ITEM_MAGMA_STONE
+	special CheckEmeraldChampionsHandoffItem
+	call_if_eq VAR_RESULT, FALSE, MagmaHideout_4F_EventScript_MissingStone
+	msgbox MagmaHideout_4F_Text_ScorchedSlabLead, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
 	clearflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
@@ -247,12 +251,22 @@ MagmaHideout_4F_Text_MaxieDefeat:
 	.string "POKéMON?$"
 
 MagmaHideout_4F_Text_MaxieImGoingAfterGroudon:
-	.string "MAXIE: GROUDON is loose. I have\n"
-	.string "to find out why the ORB failed to\l"
-	.string "control it.\p"
-	.string "ARCHIE still has the RED ORB.\n"
-	.string "He'll need STERN's submarine to\l"
-	.string "reach KYOGRE on the seafloor.\p"
-	.string "Go warn CAPT. STERN at the harbor\n"
-	.string "in northeast SLATEPORT.\p"
-	.string "I'm going after GROUDON.$"
+	.string "MAXIE: GROUDON is loose. I must\n"
+	.string "find out why the ORB failed.\p"
+	.string "The MAGMA STONE reacted to our\n"
+	.string "readings from SCORCHED SLAB.\l"
+	.string "Something else answered down there.\p"
+	.string "I'm going after GROUDON. You can\n"
+	.string "follow the geological lead.$"
+
+MagmaHideout_4F_EventScript_MissingStone::
+	msgbox ScorchedSlab_HeatransRoom_Text_MissingStone, MSGBOX_DEFAULT
+	return
+
+MagmaHideout_4F_Text_ScorchedSlabLead:
+	.string "From FORTREE's east exit, reach\n"
+	.string "the lake on ROUTE 120. SURF to\l"
+	.string "the cave entrance at SCORCHED SLAB.\p"
+	.string "Descend through the basement\n"
+	.string "floors to HEATRAN's chamber.\l"
+	.string "Use the MAGMA STONE there.$"
