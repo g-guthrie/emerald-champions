@@ -668,7 +668,7 @@ COINS
 Keep direct Coin purchases at 20 cash per Coin; no required gambling. Ordinary starter alternatives: 500 Coins = 10,000 cash, one finite entitlement per offered species, respecting original starter receipts. Poipole 6,500 and Genesect 7,500 Coins remain seed prices (130,000/150,000 cash), marked for optional-collection affordability testing. They are not mandatory campaign gates and are not claimed affordable on first arrival. Do not replace a meaningful existing Pokémon gift with a redundant purchased copy.
 
 BP
-Circuit BP is optional mastery income. Remove paid shelves of free gear and retired PP upgrades/X-items. Stock specialty Balls, selected field recovery, cosmetics and paid evolution alternatives. Working values: regular special Balls 2 BP; Dream/Beast 8; ordinary evolution tools 8–16; reusable Cord 8 with the same ownership check. BP-earned items may retain ordinary resale only where the item is normally saleable; cash buying and selling must never be profitable. This is earned income, not a free-stock loop. No basic move, stat or Ability choice requires BP.
+Circuit BP is optional mastery income. Remove paid shelves of free gear and retired PP upgrades/X-items. Stock specialty Balls, selected field recovery, cosmetics and paid evolution alternatives. Working values: regular special Balls 2 BP; Dream/Beast 8; ordinary evolution tools 8–16; reusable Cord 8 with the same ownership check. BP-earned items may retain ordinary resale only where the item is normally saleable; cash buying and selling must never be profitable. This is earned income, not a free-stock loop. No basic move, stat or Ability choice requires BP. Scott uses the saved best Circuit streak for his optional keepsakes: 50 wins unlock Lansat Berry and the Silver Shield; 100 unlock Starf Berry and the Gold Shield. Each is a one-time gift with its own receipt. Full Bag or decoration storage leaves that gift available on a later visit. Retired Frontier symbols and Tower records are not required.
 
 FOSSILS, GIFTS AND TRADES
 Fossil acquisition is the exploration reward; revival is free and quick. Keep the existing one-time gifts/trades and their local identity unless a named row changes them. Do not require another emulator for evolution. Linking Cord is reusable; Metal Coat, King's Rock and similar item evolutions work by local item use. Additional location/party conditions must be stated before item consumption. No gift-only baby requirement is introduced by this revision.
@@ -4368,8 +4368,8 @@ M420 SafariZone_Northeast bg_events:2 (21,5,z3): BIG_NUGGET -> KEEP under sectio
 M421 SafariZone_Southeast object_events:4 (31,15,z3): BIG_PEARL -> KEEP under section 3
 M421 SafariZone_Southeast bg_events:1 (19,36,z3): PP_UP -> ETHER; field use only
 M421 SafariZone_Southeast bg_events:2 (32,33,z0): FULL_RESTORE -> KEEP under section 3
-M454 CheckSilverSymbols: LANSAT_BERRY -> KEEP under section 3
-M454 CheckGoldSymbols: STARF_BERRY -> KEEP under section 3
+M454 CheckSilverSymbols: LANSAT_BERRY -> KEEP at Circuit best streak 50 under section 3
+M454 CheckGoldSymbols: STARF_BERRY -> KEEP at Circuit best streak 100 under section 3
 M483 NavelRock_Top bg_events:1 (12,9,z3): SACRED_ASH -> KEEP under section 3
 M499 DefeatedTrainers: SODA_POP x6 -> KEEP under section 3
 M499 BuySodaPop: SODA_POP -> KEEP under section 3; SODA_POP -> KEEP under section 3
