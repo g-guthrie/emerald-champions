@@ -203,6 +203,7 @@ FarawayIsland_Interior_Text_ResearchRecord:
 	.string "LILYCOVE HARBOR expedition team.$"
 
 FarawayIsland_Interior_EventScript_CompleteJourney::
+	goto_if_unset FLAG_EC_RESOLVED_SOUTHERN_LATI, Common_EventScript_NopReturn
 	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, Common_EventScript_NopReturn
 	completemilestone FLAG_EC_REPORT_C36_COMPLETE
 	msgbox FarawayIsland_Interior_Text_JourneyComplete, MSGBOX_DEFAULT

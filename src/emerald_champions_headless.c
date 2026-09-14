@@ -622,6 +622,30 @@ static void PrepareBookResearchScene(void)
             FlagSet(FLAG_EC_MEGA_REWARD_DIANCITE);
         LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM, 12, 12);
         break;
+    case 28: // Finite travel-paper delivery without blocking Center healing.
+    {
+        const enum Item tools[] = {ITEM_POKE_VIAL, ITEM_LEVELER, ITEM_REPEL_SPRAY, ITEM_FLIGHT_BEACON};
+        ClearBag();
+        for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
+            AddBagItem(tools[i], 1);
+        VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+        FlagSet(FLAG_EC_EARNED_SS_TICKET);
+        FlagSet(FLAG_EC_EARNED_EON_TICKET);
+        FlagSet(FLAG_EC_EARNED_OLD_SEA_MAP);
+        FlagSet(FLAG_EC_EARNED_AURORA_TICKET);
+        FlagSet(FLAG_ENABLE_SHIP_NAVEL_ROCK);
+        if (gEcHeadlessFixtureParam & 0x100)
+        {
+            struct BagPocket *pocket = &gBagPockets[POCKET_KEY_ITEMS];
+            for (u32 slot = ARRAY_COUNT(tools); slot < pocket->capacity; slot++)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_BASEMENT_KEY, 1);
+        }
+        // An observable healing outcome, not merely the offer text.
+        u16 hp = 1;
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 4);
+        break;
+    }
     case 27:
         FlagSet(FLAG_SYS_USE_FLASH);
         LoadHeadlessMap(MAP_GRANITE_CAVE_B2F, 12, 11);

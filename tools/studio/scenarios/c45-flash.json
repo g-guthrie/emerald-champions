@@ -54,10 +54,10 @@
   },
   "expect": {
     "ready": true,
-    "cap": 82,
+    "cap": 78,
     "queries": {
       "puzzle": 1,
-      "chapter": 1
+      "chapter": 0
     }
   }
 }

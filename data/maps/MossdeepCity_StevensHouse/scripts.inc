@@ -137,6 +137,7 @@ MossdeepCity_StevensHouse_EventScript_Steven::
 	lock
 	faceplayer
 	goto_if_set FLAG_BADGE08_GET, MossdeepCity_StevensHouse_EventScript_ResearchConversation
+	call EC_RequireSpace
 	checkitem ITEM_HM_DIVE
 	call_if_eq VAR_RESULT, FALSE, MossdeepCity_StevensHouse_EventScript_DeliverDive
 	msgbox MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis, MSGBOX_DEFAULT
@@ -184,10 +185,12 @@ MossdeepCity_StevensHouse_Text_ExplainDive:
 	.string "SEAFLOOR CAVERN and stop ARCHIE.$"
 
 MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
-	.string "STEVEN: Search south on ROUTE 128.\n"
-	.string "Use DIVE in the dark water.\p"
-	.string "Find the SEAFLOOR CAVERN where AQUA\n"
-	.string "took the submarine, and stop ARCHIE.$"
+	.string "STEVEN: Our next lead is the\n"
+	.string "triangle on BIRTH ISLAND. Sail\l"
+	.string "there from LILYCOVE HARBOR.\p"
+	.string "Resolve DEOXYS, then bring STERN\n"
+	.string "the SCANNER from the ABANDONED\l"
+	.string "SHIP, on ROUTE 108.$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
 	.string "{PLAYER} checked the POKé BALL.\p"
@@ -229,9 +232,12 @@ MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
 
 MossdeepCity_StevensHouse_EventScript_ReviewResearch::
 	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, Common_EventScript_NopReturn
+	goto_if_unset FLAG_EC_RESOLVED_DIANCIE, MossdeepCity_StevensHouse_EventScript_ResearchPending
+	goto_if_unset FLAG_EC_RESOLVED_JIRACHI, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_SURVEYED_ORIGIN_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_SURVEYED_METEOR_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	setflag FLAG_EC_STEVEN_RESEARCH_CONCLUSION
+	completemilestone FLAG_EC_REPORT_C48_COMPLETE
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
@@ -248,8 +254,8 @@ MossdeepCity_StevensHouse_Text_ResearchPending:
 	.string "The chamber beneath SOOTOPOLIS\n"
 	.string "and JIRACHI's room deep inside\l"
 	.string "METEOR FALLS complete our record.\p"
-	.string "Explore both, then bring me your\n"
-	.string "findings. Catching their POKéMON\l"
+	.string "Resolve both encounters, then bring\n"
+	.string "me your findings. Catching them\l"
 	.string "is your own choice.$"
 
 MossdeepCity_StevensHouse_Text_ResearchConclusion:
@@ -262,9 +268,11 @@ MossdeepCity_StevensHouse_Text_ResearchConclusion:
 	.string "The crystal light and distant\n"
 	.string "song belong to living places,\l"
 	.string "not machines to command.\p"
-	.string "Take our conclusion to my father\n"
-	.string "at DEVON in RUSTBORO. Then finish\l"
-	.string "your own journey to the LEAGUE.$"
+	.string "DEVON has sent your final grant:\n"
+	.string "¥20,000. Your level cap is now 94.\p"
+	.string "SURF east from ROUTE 128 to\n"
+	.string "EVER GRANDE. Climb the WATERFALL;\l"
+	.string "VICTORY ROAD leads to the LEAGUE.$"
 
 MossdeepCity_StevensHouse_EventScript_ResearchConversation::
 	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, MossdeepCity_StevensHouse_EventScript_LeagueSendoff

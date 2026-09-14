@@ -1552,12 +1552,12 @@
 #define FLAG_EC_SURVEY_FLIGHT_ARRIVAL                (SYSTEM_FLAGS + 0xAF)
 #define FLAG_EC_RESOLVED_SOUTHERN_LATI              (SYSTEM_FLAGS + 0xB0)
 #define FLAG_EC_FERRY_ARRIVAL_PENDING               (SYSTEM_FLAGS + 0xB1)
-#define FLAG_UNUSED_0x912                           (SYSTEM_FLAGS + 0xB2) // Unused Flag
-#define FLAG_UNUSED_0x913                           (SYSTEM_FLAGS + 0xB3) // Unused Flag
-#define FLAG_UNUSED_0x914                           (SYSTEM_FLAGS + 0xB4) // Unused Flag
-#define FLAG_UNUSED_0x915                           (SYSTEM_FLAGS + 0xB5) // Unused Flag
-#define FLAG_UNUSED_0x916                           (SYSTEM_FLAGS + 0xB6) // Unused Flag
-#define FLAG_UNUSED_0x917                           (SYSTEM_FLAGS + 0xB7) // Unused Flag
+#define FLAG_EC_RESOLVED_REGIROCK                    (SYSTEM_FLAGS + 0xB2)
+#define FLAG_EC_RESOLVED_REGICE                    (SYSTEM_FLAGS + 0xB3)
+#define FLAG_EC_RESOLVED_REGISTEEL                    (SYSTEM_FLAGS + 0xB4)
+#define FLAG_EC_RESOLVED_DIANCIE                    (SYSTEM_FLAGS + 0xB5)
+#define FLAG_EC_RESOLVED_JIRACHI                    (SYSTEM_FLAGS + 0xB6)
+#define FLAG_EC_RECEIVED_EON_TICKET                     (SYSTEM_FLAGS + 0xB7)
 #define FLAG_UNUSED_0x918                           (SYSTEM_FLAGS + 0xB8) // Unused Flag
 #define FLAG_UNUSED_0x919                           (SYSTEM_FLAGS + 0xB9) // Unused Flag
 #define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag

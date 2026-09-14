@@ -1,0 +1,36 @@
+{
+  "name": "C26 archaeologist warns before optional acquisitions are lost",
+  "start": {
+    "chapter": 3
+  },
+  "warp": {
+    "map": "SandstrewnRuins",
+    "x": 4,
+    "y": 14,
+    "facing": 4
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Both missable species named"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Permanent collapse warning"
+    },
+    {
+      "tap": "A",
+      "every": 150,
+      "frames": 3000,
+      "until": "idle",
+      "label": "Research guidance returns control"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "SandstrewnRuins",
+    "contains_text": "rare capture"
+  }
+}

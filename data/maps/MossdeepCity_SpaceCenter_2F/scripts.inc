@@ -34,6 +34,8 @@ MossdeepCity_SpaceCenter_2F_OnFrame:
 	.2byte 0
 
 MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts::
+	call EC_RequireHideout
+	call EC_RequireMind
 	goto_if_defeated TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_EventScript_FirstLegComplete
 	playse SE_PIN
 	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
@@ -213,6 +215,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_Maxie::
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Steven::
+	call EC_RequireHideout
+	call EC_RequireMind
 	lockall
 	goto_if_not_defeated TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_2F_EventScript_TabithaStillGuarding
 	goto_if_set FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER, MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt

@@ -47,6 +47,7 @@ EverGrandeCity_PokemonLeague_1F_Pokemart:
 @ leads here in order, but the League entrance must remain correct on its own.
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard::
 	lockall
+	call EC_RequireFinalConclusion
 	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	call_if_ge VAR_TEMP_0, 11, EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight

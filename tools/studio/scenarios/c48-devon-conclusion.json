@@ -1,5 +1,5 @@
 {
-  "name": "c48 devon conclusion",
+  "name": "c48-devon-conclusion",
   "start": {
     "chapter": 3
   },
@@ -45,7 +45,7 @@
     "cap": 94,
     "queries": {
       "complete": 1,
-      "money": 26000,
+      "money": 6000,
       "gift": 1,
       "stone": 1
     }
@@ -60,7 +60,8 @@
     "flags": {
       "FLAG_EC_STEVEN_RESEARCH_CONCLUSION": true,
       "FLAG_BADGE08_GET": true,
-      "FLAG_DELIVERED_STEVEN_LETTER": true
+      "FLAG_DELIVERED_STEVEN_LETTER": true,
+      "FLAG_EC_REPORT_C48_COMPLETE": true
     },
     "vars": {
       "VAR_DEVON_CORP_3F_STATE": 1

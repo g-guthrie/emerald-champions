@@ -22,6 +22,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_TransitionDone:
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
+	call EC_RequireDewford
 	lock
 	faceplayer
 	goto_if_defeated TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_EventScript_Conclude

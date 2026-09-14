@@ -46,11 +46,11 @@
   },
   "expect": {
     "ready": true,
-    "cap": 82,
-    "contains_text": "DIVE",
+    "cap": 78,
+    "contains_text": "REGIROCK",
     "queries": {
-      "completed": 1,
-      "money": 22000
+      "completed": 0,
+      "money": 6000
     }
   }
 }

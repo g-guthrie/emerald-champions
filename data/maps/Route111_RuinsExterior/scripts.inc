@@ -1,4 +1,5 @@
 Route111_RuinsExterior_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, Route111_RuinsExterior_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route111_RuinsExterior_OnFrame
 	.byte 0
 
@@ -17,6 +18,7 @@ Route111_RuinsExterior_EventScript_ArrivalEnd::
 	end
 
 Route111_RuinsExterior_EventScript_Archaeologist::
+	call EC_RequireGenerator
 	lockall
 	faceplayer
 	goto_if_unset FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route111_RuinsExterior_EventScript_Briefing
@@ -151,3 +153,9 @@ Route111_RuinsExterior_Text_Returned:
 	.string "Back at the WEATHER INSTITUTE.\p"
 	.string "The survey team can help you\n"
 	.string "prepare or arrange another flight.$"
+
+Route111_RuinsExterior_OnLoad:
+	goto_if_lt VAR_MIRAGE_TOWER_STATE, 2, Route111_RuinsExterior_EntranceOpen
+	setmetatile 13, 11, METATILE_Mauville_MirageTower_Tile4, TRUE
+Route111_RuinsExterior_EntranceOpen:
+	end

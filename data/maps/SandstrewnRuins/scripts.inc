@@ -9,6 +9,7 @@ SandstrewnRuins_OnTransition:
 SandstrewnRuins_EventScript_Archaeologist::
 	lock
 	faceplayer
+	msgbox SandstrewnRuins_Text_LastChance, MSGBOX_DEFAULT
 	goto_if_set FLAG_EC_REPORT_C26_COMPLETE, SandstrewnRuins_EventScript_ResearchDone
 	goto_if_unset FLAG_BADGE04_GET, SandstrewnRuins_EventScript_ResearchPending
 	goto_if_lt VAR_CHANSEY_NURSE_STATE, 7, SandstrewnRuins_EventScript_ResearchPending
@@ -49,3 +50,13 @@ SandstrewnRuins_Text_Archaeologist:
 	.string "The green lights below may be\n"
 	.string "ZYGARDE. You can keep exploring\l"
 	.string "without holding up our research.$"
+
+SandstrewnRuins_Text_LastChance:
+	.string "ZYGARDE and STAKATAKA live in\n"
+	.string "the lowest chamber below us.\p"
+	.string "Taking a summit fossil collapses\n"
+	.string "the tower and seals these ruins\l"
+	.string "FOREVER, including this entrance.\p"
+	.string "This is your only chance at those\n"
+	.string "two. Catch them before a fossil\l"
+	.string "if you want them on your team.$"

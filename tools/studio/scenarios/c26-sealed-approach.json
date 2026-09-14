@@ -1,5 +1,5 @@
 {
-  "name": "C26 \u2014 permanent desert approach after fossil event",
+  "name": "c26-sealed-approach",
   "start": {
     "chapter": 3
   },
@@ -20,7 +20,7 @@
   "steps": [
     {
       "frames": 180,
-      "label": "Tower remains available"
+      "label": "Collapsed tower stays absent"
     },
     {
       "hold": "UP",
@@ -28,7 +28,7 @@
     },
     {
       "frames": 240,
-      "label": "Enter required approach"
+      "label": "No basement entry"
     }
   ],
   "queries": {
@@ -39,9 +39,9 @@
   },
   "expect": {
     "ready": true,
-    "map": "MirageTower_1F",
+    "map": "Route111",
     "queries": {
-      "visible": 1
+      "visible": 0
     }
   }
 }

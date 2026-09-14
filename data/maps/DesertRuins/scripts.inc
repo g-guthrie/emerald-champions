@@ -78,11 +78,15 @@ DesertRuins_EventScript_Regirock::
 	end
 
 DesertRuins_EventScript_CaughtRegirock::
+	setflag FLAG_EC_RESOLVED_REGIROCK
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	setflag FLAG_DEFEATED_REGIROCK
 	release
 	end
 
 DesertRuins_EventScript_DefeatedRegirock::
+	setflag FLAG_EC_RESOLVED_REGIROCK
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	goto Common_EventScript_LegendaryResting
 	end
 

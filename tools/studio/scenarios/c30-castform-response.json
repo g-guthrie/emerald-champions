@@ -34,7 +34,8 @@
       "FLAG_BADGE02_GET": true,
       "FLAG_BADGE03_GET": true,
       "FLAG_BADGE04_GET": true,
-      "FLAG_EC_RECEIVED_REVEAL_GLASS": true
+      "FLAG_EC_RECEIVED_REVEAL_GLASS": true,
+      "FLAG_EC_REPORT_C28_COMPLETE": true
     },
     "vars": {}
   },

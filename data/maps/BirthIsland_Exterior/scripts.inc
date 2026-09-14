@@ -39,6 +39,7 @@ BirthIsland_Exterior_EventScript_TryRemoveDeoxys::
 	return
 
 BirthIsland_Exterior_EventScript_Triangle::
+	call EC_RequireSpace
 	lock
 	faceplayer
 	special DoDeoxysRockInteraction

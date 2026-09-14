@@ -297,8 +297,11 @@ void ClearMirageTowerPulseBlendEffect(void)
 
 void SetMirageTowerVisibility(void)
 {
-    // The basement is the required Sandstrewn research approach. Fossil
-    // collection and the tower's one-time collapse cannot remove that route.
+    if (VarGet(VAR_MIRAGE_TOWER_STATE) >= 2)
+    {
+        FlagClear(FLAG_MIRAGE_TOWER_VISIBLE);
+        return;
+    }
     FlagSet(FLAG_MIRAGE_TOWER_VISIBLE);
     if (VarGet(VAR_MIRAGE_TOWER_STATE) == 0)
         TryStartMirageTowerPulseBlendEffect();

@@ -361,6 +361,7 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry::
 	end
 
 PetalburgCity_Gym_EventScript_NormanBattle::
+	call EC_RequireDesert
 	msgbox PetalburgCity_Gym_Text_NormanIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_NORMAN_1, PetalburgCity_Gym_Text_NormanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	message PetalburgCity_Gym_Text_ReceivedBalanceBadge

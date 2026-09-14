@@ -1,5 +1,5 @@
 {
-  "name": "C45 \u2014 Completed account repeat",
+  "name": "c45-repeat",
   "start": {
     "chapter": 3
   },
@@ -12,7 +12,10 @@
       "FLAG_EC_REPORT_C30_COMPLETE": true,
       "FLAG_SYS_REGIROCK_PUZZLE_COMPLETED": true,
       "FLAG_SYS_BRAILLE_REGICE_COMPLETED": true,
-      "FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED": true
+      "FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED": true,
+      "FLAG_EC_RESOLVED_REGIROCK": true,
+      "FLAG_EC_RESOLVED_REGICE": true,
+      "FLAG_EC_RESOLVED_REGISTEEL": true
     }
   },
   "warp": {

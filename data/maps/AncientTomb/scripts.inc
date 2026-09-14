@@ -78,11 +78,15 @@ AncientTomb_EventScript_Registeel::
 	end
 
 AncientTomb_EventScript_CaughtRegisteel::
+	setflag FLAG_EC_RESOLVED_REGISTEEL
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
 	end
 
 AncientTomb_EventScript_DefeatedRegisteel::
+	setflag FLAG_EC_RESOLVED_REGISTEEL
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	goto Common_EventScript_LegendaryResting
 	end
 

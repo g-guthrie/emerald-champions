@@ -66,12 +66,15 @@ async def run(spec,out):
                 studio.ingest(await studio.core.tick(frames=5))
                 if studio.state[0]:break
         forced=spec.get("battle_resolution","native")
-        if forced not in ("native","fixture_win"):raise ValueError("Unknown battle-resolution mode.")
-        if forced=="fixture_win":
+        if forced not in ("native","fixture_win","fixture_defeat","fixture_loss"):raise ValueError("Unknown battle-resolution mode.")
+        if forced!="native":
             import re
             header=(server.ROOT/"include/emerald_champions_headless.h").read_text()
             enums=re.findall(r"EC_HEADLESS_SCENARIO_\w+",header.split("enum EmeraldChampionsHeadlessScenario")[1].split("};")[0])
-            await studio.core.write([(studio.core.syms["gEcHeadlessFixtureActiveScenario"],enums.index("EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN"))])
+            scenario="EC_HEADLESS_SCENARIO_BOOK_RESEARCH" if forced=="fixture_defeat" else "EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN"
+            await studio.core.write([(studio.core.syms["gEcHeadlessFixtureActiveScenario"],enums.index(scenario)),
+                                     (studio.core.syms["gEcHeadlessFixtureParam"],0),
+                                     (studio.core.syms["gEcHeadlessCampaignForceLoss"],int(forced=="fixture_loss"))])
         initial,portable=await studio.scene_start_files(out,save_portable=not replay)
         recorder=Recorder(server.ROOT,out,spec.get("name","Scene test"),studio.build_info(),initial,portable,
                           parent=start.get("recording"))

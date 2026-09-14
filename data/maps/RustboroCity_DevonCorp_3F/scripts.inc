@@ -343,36 +343,7 @@ RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by the PRESIDENT.$"
 
-RustboroCity_DevonCorp_3F_EventScript_ResearchConclusion::
-	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, Common_EventScript_NopReturn
-	completemilestone FLAG_EC_REPORT_C48_COMPLETE
-	msgbox RustboroCity_DevonCorp_3F_Text_ResearchConclusion, MSGBOX_DEFAULT
-	return
-
-RustboroCity_DevonCorp_3F_Text_ResearchConclusion:
-	.string "I asked you to make two deliveries.\n"
-	.string "You helped people all across HOENN.\p"
-	.string "STEVEN's letter began a search.\n"
-	.string "You followed it to the living\l"
-	.string "places behind those old accounts.\p"
-	.string "Thank you. This final ¥20,000\n"
-	.string "research grant is yours.\l"
-	.string "Your level cap is now 94.\p"
-	.string "Now finish the journey you set\n"
-	.string "out to make. SURF east from\l"
-	.string "ROUTE 128 to EVER GRANDE.\p"
-	.string "Climb the WATERFALL and follow\n"
-	.string "VICTORY ROAD. The LEAGUE is waiting.$"
-
 RustboroCity_DevonCorp_3F_EventScript_FinalConversation::
-	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, RustboroCity_DevonCorp_3F_EventScript_LeagueSendoff
-	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
-	waitmovement 0
-	delay 24
-	call RustboroCity_DevonCorp_3F_EventScript_ResearchConclusion
-	release
-	end
 RustboroCity_DevonCorp_3F_EventScript_LeagueSendoff::
 	msgbox RustboroCity_DevonCorp_3F_Text_LeagueSendoff, MSGBOX_DEFAULT
 	call_if_unset FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, RustboroCity_DevonCorp_3F_EventScript_CheckLateGift

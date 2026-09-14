@@ -6,7 +6,8 @@
   "setup": {
     "flags": {
       "FLAG_HIDE_ROUTE_119_TEAM_AQUA": true,
-      "FLAG_EC_REPORT_C30_COMPLETE": true
+      "FLAG_EC_REPORT_C30_COMPLETE": true,
+      "FLAG_EC_REPORT_C28_COMPLETE": true
     },
     "vars": {
       "VAR_WEATHER_INSTITUTE_STATE": 1

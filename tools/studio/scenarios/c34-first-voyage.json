@@ -1,5 +1,5 @@
 {
-  "name": "c34 first voyage",
+  "name": "C34 first voyage after earned harbor briefing",
   "start": {
     "chapter": 3
   },
@@ -33,7 +33,12 @@
       "FLAG_BADGE06_GET": true,
       "FLAG_LATIOS_OR_LATIAS_ROAMING": true,
       "FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT": false,
-      "FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL": false
+      "FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL": false,
+      "FLAG_EC_EARNED_SS_TICKET": true,
+      "FLAG_EC_EARNED_EON_TICKET": true,
+      "FLAG_EC_EARNED_OLD_SEA_MAP": true,
+      "FLAG_ENABLE_SHIP_SOUTHERN_ISLAND": true,
+      "FLAG_ENABLE_SHIP_FARAWAY_ISLAND": true
     },
     "vars": {}
   }

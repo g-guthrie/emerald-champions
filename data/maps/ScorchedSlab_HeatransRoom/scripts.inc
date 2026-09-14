@@ -2,6 +2,7 @@ ScorchedSlab_HeatransRoom_MapScripts::
 	.byte 0
 
 ScorchedSlab_HeatransRoom_EventScript_MagmaStone::
+	call EC_RequireGroudon
 	lock
 	specialvar VAR_RESULT, GetHeatranDiscoveryState
 	goto_if_ne VAR_RESULT, 0, ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd
@@ -39,6 +40,7 @@ ScorchedSlab_HeatransRoom_Text_PlaceMagmaStone:
 	.string "Will you set it down here?$"
 
 ScorchedSlab_HeatransRoom_EventScript_Heatran::
+	call EC_RequireGroudon
 	lock
 	faceplayer
 	waitse

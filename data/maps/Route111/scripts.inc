@@ -111,6 +111,7 @@ Route111_EventScript_SetLayoutNoMirageTower::
 	return
 
 Route111_EventScript_SetMirageTowerGone::
+	call Route111_EventScript_SetLayoutNoMirageTower
 	setvar VAR_MIRAGE_TOWER_STATE, 3
 	return
 

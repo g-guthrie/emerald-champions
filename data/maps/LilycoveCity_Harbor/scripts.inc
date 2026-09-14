@@ -136,8 +136,6 @@ LilycoveCity_Harbor_EventScript_GetOldSeaMapState::
 LilycoveCity_Harbor_EventScript_GetMysticTicketState::
 	setvar VAR_TEMP_9, 0
 	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, Common_EventScript_NopReturn
-	checkitem ITEM_MYSTIC_TICKET
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 1
 	goto_if_set FLAG_SHOWN_MYSTIC_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 2
@@ -448,26 +446,19 @@ LilycoveCity_Harbor_EventScript_Sailor::
 LilycoveCity_Harbor_EventScript_SailorFerryAvailable::
 	call LilycoveCity_Harbor_EventScript_BriefExpedition
 	call LilycoveCity_Harbor_EventScript_ReportMew
-	call_if_unset FLAG_RECEIVED_SS_TICKET, LilycoveCity_Harbor_EventScript_GiveSSTicket
 	call_if_unset FLAG_LATIOS_OR_LATIAS_ROAMING, LilycoveCity_Harbor_EventScript_LatiReport
-	checkitem ITEM_EON_TICKET, 1
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveEonTicket
-	checkitem ITEM_MYSTIC_TICKET, 1
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveMysticTicket
 	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
-	setflag FLAG_RECEIVED_MYSTIC_TICKET
-	call_if_set FLAG_EC_EARNED_AURORA_TICKET, LilycoveCity_Harbor_EventScript_TryDeliverAuroraTicket
-	call_if_unset FLAG_RECEIVED_OLD_SEA_MAP, LilycoveCity_Harbor_EventScript_GiveOldSeaMap
+	call EC_DeliverTravelDocuments
 	msgbox LilycoveCity_Harbor_Text_ChampionPassesReady, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_Harbor_EventScript_TryDeliverAuroraTicket::
-	call_if_unset FLAG_RECEIVED_AURORA_TICKET, LilycoveCity_Harbor_EventScript_GiveAuroraTicket
-	return
-
 LilycoveCity_Harbor_EventScript_BriefExpedition::
 	goto_if_set FLAG_EC_EARNED_SS_TICKET, Common_EventScript_NopReturn
+	call EC_RequireSurvey
+	call EC_RequireScope
+	call EC_RequireFeather
+	call EC_RequireLilycoveRival
 	setflag FLAG_EC_EARNED_SS_TICKET
 	setflag FLAG_EC_EARNED_EON_TICKET
 	setflag FLAG_EC_EARNED_OLD_SEA_MAP
@@ -477,38 +468,12 @@ LilycoveCity_Harbor_EventScript_BriefExpedition::
 	return
 
 LilycoveCity_Harbor_EventScript_ReportMew::
+	goto_if_unset FLAG_EC_RESOLVED_SOUTHERN_LATI, Common_EventScript_NopReturn
 	goto_if_unset FLAG_EC_RESOLVED_MEW, Common_EventScript_NopReturn
 	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, Common_EventScript_NopReturn
 	completemilestone FLAG_EC_REPORT_C36_COMPLETE
 	msgbox LilycoveCity_Harbor_Text_MewReport, MSGBOX_DEFAULT
 	return
-
-LilycoveCity_Harbor_EventScript_GiveEonTicket::
-	giveitem ITEM_EON_TICKET
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
-	return
-
-LilycoveCity_Harbor_EventScript_GiveMysticTicket::
-	giveitem ITEM_MYSTIC_TICKET
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
-	return
-
-LilycoveCity_Harbor_EventScript_GiveAuroraTicket::
-	giveitem ITEM_AURORA_TICKET
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
-	setflag FLAG_RECEIVED_AURORA_TICKET
-	return
-
-LilycoveCity_Harbor_EventScript_GiveOldSeaMap::
-	giveitem ITEM_OLD_SEA_MAP
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
-	setflag FLAG_RECEIVED_OLD_SEA_MAP
-	return
-
-LilycoveCity_Harbor_EventScript_PassesBagFull::
-	msgbox LilycoveCity_Harbor_Text_ChampionPassesBagFull, MSGBOX_DEFAULT
-	release
-	end
 
 LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth::
 	applymovement LOCALID_LILYCOVE_HARBOR_FERRY_SAILOR, LilycoveCity_Harbor_Movement_SailorOutOfWayNorth
@@ -665,11 +630,6 @@ LilycoveCity_Harbor_Text_ChampionPassesReady:
 	.string "BIRTH ISLAND clearance follows\l"
 	.string "the SPACE CENTER investigation.$"
 
-LilycoveCity_Harbor_Text_ChampionPassesBagFull:
-	.string "Your travel rights are recorded.\n"
-	.string "You can board now. Make room and\l"
-	.string "return for the remaining papers.$"
-
 LilycoveCity_Harbor_Text_ExpeditionBriefing:
 	.string "DEVON and CAPT. STERN have booked\n"
 	.string "your research passage.\p"
@@ -689,12 +649,6 @@ LilycoveCity_Harbor_Text_MewReport:
 	.string "research. I'll send word to DEVON.\p"
 	.string "Your report earns ¥12,000.\n"
 	.string "Your level cap is now 64.$"
-
-LilycoveCity_Harbor_EventScript_GiveSSTicket::
-	giveitem ITEM_SS_TICKET
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
-	setflag FLAG_RECEIVED_SS_TICKET
-	return
 
 LilycoveCity_Harbor_EventScript_LatiReport::
 	msgbox LilycoveCity_Harbor_Text_LatiReport, MSGBOX_DEFAULT

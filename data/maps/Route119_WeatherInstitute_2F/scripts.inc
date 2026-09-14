@@ -54,6 +54,7 @@ Route119_WeatherInstitute_2F_EventScript_Grunt3::
 	end
 
 Route119_WeatherInstitute_2F_EventScript_Shelly::
+	call EC_RequireGenerator
 	trainerbattle_double TRAINER_SHELLY_WEATHER_INSTITUTE, Route119_WeatherInstitute_2F_Text_ShellyIntro, Route119_WeatherInstitute_2F_Text_ShellyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route119_WeatherInstitute_2F_EventScript_ShellyDefeated
 	msgbox Route119_WeatherInstitute_2F_Text_ShellyPostBattle, MSGBOX_AUTOCLOSE
 	end

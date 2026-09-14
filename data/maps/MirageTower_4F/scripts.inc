@@ -2,6 +2,7 @@ MirageTower_4F_MapScripts::
 	.byte 0
 
 MirageTower_4F_EventScript_RootFossil::
+	call EC_RequireDesert
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_TakeRootFossil, MSGBOX_YESNO
@@ -23,6 +24,7 @@ MirageTower_4F_EventScript_LeaveRootFossil::
 	end
 
 MirageTower_4F_EventScript_ClawFossil::
+	call EC_RequireDesert
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_TakeClawFossil, MSGBOX_YESNO
@@ -60,18 +62,32 @@ MirageTower_4F_EventScript_CollapseMirageTower::
 
 MirageTower_4F_Text_TakeRootFossil:
 	.string "You found the ROOT FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
-	.string "around it will likely crumble away…\p"
-	.string "Take the ROOT FOSSIL anyway?$"
+	.string "Taking it will collapse the tower\n"
+	.string "and seal ALL the ruins below.\l"
+	.string "You can NEVER return.\p"
+	.string "ZYGARDE and STAKATAKA live in\n"
+	.string "the lowest SANDSTREWN chamber.\l"
+	.string "This is your only chance at them.\p"
+	.string "If you still want either, leave\n"
+	.string "the fossil and explore now.\p"
+	.string "Permanently seal the ruins and\n"
+	.string "take the ROOT FOSSIL?$"
 
 MirageTower_4F_Text_LeftRootFossilAlone:
 	.string "{PLAYER} left the ROOT FOSSIL alone.$"
 
 MirageTower_4F_Text_TakeClawFossil:
 	.string "You found the CLAW FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
-	.string "around it will likely crumble away…\p"
-	.string "Take the CLAW FOSSIL anyway?$"
+	.string "Taking it will collapse the tower\n"
+	.string "and seal ALL the ruins below.\l"
+	.string "You can NEVER return.\p"
+	.string "ZYGARDE and STAKATAKA live in\n"
+	.string "the lowest SANDSTREWN chamber.\l"
+	.string "This is your only chance at them.\p"
+	.string "If you still want either, leave\n"
+	.string "the fossil and explore now.\p"
+	.string "Permanently seal the ruins and\n"
+	.string "take the CLAW FOSSIL?$"
 
 MirageTower_4F_Text_LeaveClawFossilAlone:
 	.string "{PLAYER} left the CLAW FOSSIL alone.$"

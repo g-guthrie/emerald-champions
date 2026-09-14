@@ -6,24 +6,35 @@ resume state; the book owns design and historical acceptance evidence;
 `docs/VERIFICATION.md` owns commands. Do not start another full-book review or
 spawn agents. The native engine in this repository is the active project.
 
-## Active work: book scenes through Emerald Studio
+## Active work: story gating and permanent tower consequence
 
-The user then asked to finish ALL book-specified missing choreography. The section17
-implementation pass is complete in source: Castform response/flights; Briney's
-Southern→Faraway voyage and return; Heatran resource/aftermath guidance;
-Space Center/Birth Island briefing and triangle synchronization; Wallace's ruins
-recollection; Steven/Devon closure and repeat-safe grant; and native Ember Path
-map presentation. The earlier Scanner/three-ruins and Moltres work remains.
-The required Sandstrewn basement approach now survives optional tower collapse.
-Book section17 contains the nine-item disposition and precise evidence limits.
+The user approved the story-gate/mandatory-encounter/ticket/finale changes in
+both Book and native game. C26 basement research/report now precedes fossil
+collection; either fossil permanently collapses the tower. All three external
+approaches are sealed afterward: Route111, the elevated ruins and Desert
+Underpass. Zygarde and Stakataka are intentionally missable. The required
+archaeologist and final fossil YES/NO dialogue name both and the permanent loss.
 
-Studio recipes/contact sheets own synthetic scene evidence. Earned C15 play,
-trainer reviews and export delivery remain paused. No new legendary placement
-was authorized or implemented by the earlier location-scouting discussion.
-The user's live Studio sandbox remains independent. User visual approval,
-full dungeon navigation and untested outcome/storage/reload branches remain
-acceptance work; do not describe these as unbuilt choreography or earned clears.
-See VERIFICATION for final runs and limits.
+The major story transitions now check their preceding accomplishments. Space
+Center, Deoxys, Scanner and all three Regi challenges precede the submarine
+climax; the acute Sootopolis/Sky Pillar response stays uninterrupted. C45 requires
+all three puzzles AND win-or-catch guardian resolutions. C48 requires both
+observations and Diancie/Jirachi resolutions, then Steven's Mossdeep conclusion.
+Steven directly awards cap94/20000; Devon is an optional epilogue with any
+unclaimed Pidgeotite preserved. The League checks C48 and eight badges.
+
+Earned travel survives physical-ticket storage failure. Any Center nurse retries
+pending documents without withholding healing or duplicating delivered papers.
+Native Studio recordings in VERIFICATION cover the key blocks, collapse choices,
+entrance closures, forced battle outcomes, missing/repeat finale and ticket Bag
+boundaries. These are synthetic scenes; forced wins/catches/losses are not combat
+or earned campaign evidence. The earlier permanent-entrance and optional C48
+battle decisions are superseded. User visual approval and full route traversal
+remain separate acceptance work.
+
+The earlier section17 choreography implementation remains in place. Earned C15,
+team reviews and export delivery stay paused; no additional legendary placement
+was authorized. The live Studio sandbox remains independent of the earned save.
 
 ## Paused work: collaborative team reviews
 

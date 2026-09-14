@@ -1,11 +1,12 @@
 {
-  "name": "C39 \u2014 missing Stone route guidance",
+  "name": "c39-missing-stone",
   "start": {
     "chapter": 3
   },
   "setup": {
     "flags": {
-      "FLAG_EC_CAUGHT_HEATRAN": true
+      "FLAG_EC_CAUGHT_HEATRAN": true,
+      "FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT": true
     }
   },
   "warp": {

@@ -2,6 +2,7 @@ MagmaHideout_4F_MapScripts::
 	.byte 0
 
 MagmaHideout_4F_EventScript_Maxie::
+	call EC_RequireVoyage
 	lockall
 	goto_if_not_defeated TRAINER_COURTNEY_MAGMA_HIDEOUT, MagmaHideout_4F_EventScript_AdminsStillStanding
 	goto_if_not_defeated TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_EventScript_AdminsStillStanding

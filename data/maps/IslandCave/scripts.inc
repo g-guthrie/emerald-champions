@@ -112,11 +112,15 @@ IslandCave_EventScript_Regice::
 	end
 
 IslandCave_EventScript_CaughtRegice::
+	setflag FLAG_EC_RESOLVED_REGICE
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	setflag FLAG_DEFEATED_REGICE
 	release
 	end
 
 IslandCave_EventScript_DefeatedRegice::
+	setflag FLAG_EC_RESOLVED_REGICE
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	goto Common_EventScript_LegendaryResting
 	end
 

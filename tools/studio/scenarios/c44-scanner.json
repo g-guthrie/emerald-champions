@@ -7,7 +7,8 @@
     "flags": {
       "FLAG_BADGE07_GET": true,
       "FLAG_EC_REPORT_C43_COMPLETE": true,
-      "FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN": false
+      "FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN": false,
+      "FLAG_EC_REPORT_C42_COMPLETE": true
     },
     "vars": {
       "VAR_SLATEPORT_HARBOR_STATE": 2

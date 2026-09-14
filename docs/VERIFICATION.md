@@ -642,8 +642,8 @@ the recording owns immutable ROM/ELF hashes, prerequisites, inputs and original
 pixels. Directory names below are relative to `work/studio/scenes`.
 
 - `complete-c14-native-song-v1`: retained song/response and Stern handoff.
-- `complete-c26-permanent-approach-v1`: required Sandstrewn tower approach remains
-  present after optional collapse state2.
+- `complete-c26-permanent-approach-v1`: historical superseded behavior (tower
+  remained present after collapse). The approved replacement is below.
 - `complete-c30-castform-response-final`: five-badge prerequisites, native Castform
   portrait/cry, Landorus offer declined and return offer declined. The earlier
   v1 had only badge5 and exercised the blocked reminder; it is not response proof.
@@ -709,3 +709,74 @@ bytes, EWRAM232,368 bytes and IWRAM28,356 bytes. The six-panel native overview i
 unaltered source capture and recording. Full sheets and motion previews remain
 in the Studio Library. This is a local normal build; no new public ROM upload or
 earned-run migration is claimed.
+
+
+## Story gates and permanent collapse — 2026-09-14
+
+Source and the single Book implement the approved ordering, encounter-resolution,
+finite-document and one-stop Steven conclusion contracts. The old C26 permanent
+entrance recipe was replaced, and C45/C48 scene expectations were updated to
+require battle resolutions. Former observation/optional-battle and Devon-payment
+recordings above remain historical evidence, not current contracts.
+
+Normal build uses `make -j6 release USE_LTO_ON_RELEASE=0` with the configured
+DEVKITARM; then `scripts/stamp_release_inputs.py` and
+`scripts/verify_emerald_champions_release.py`. Logs: `work/story-gates/`.
+Headless builds use `BUILD_NAME=emerald-headless EC_HEADLESS_FIXTURES=1 TEST=0`.
+The tracked Studio recipes run via the skill's `tools/studio/run_scene.py`.
+Every recording includes its exact immutable ROM/ELF, synthetic setup, original
+PNG hashes, inputs and contact sheets; no cross-ROM savestate was reused.
+
+Evidence directories below are relative to `work/studio/scenes/`:
+
+- `gates-c26-fossil-blocked`, `gates-c26-fossil-decline`,
+  `gates-c26-fossil-collapse`, `gates-c26-claw-collapse`: C26 prerequisite,
+  cancellation and both native collapses/fossil receipts with returned controls.
+- `gates-c26-warning-pages`: every warning page, explicitly naming Zygarde and
+  Stakataka, permanent loss, further exploration and the final declined choice.
+- `gates-c26-sealed-approach`, `gates-c26-upper-entrance-open`,
+  `gates-c26-upper-entrance-sealed`, `gates-c26-underpass-open-v2`,
+  `gates-c26-underpass-sealed-v2`: ordinary approach versus permanent closure.
+  The first Underpass open recipe stopped on the arrow tile; v2 actually walks
+  through the exit. This was an input-duration correction, not a relaxed gate.
+- `gates-final-c26-archaeologist-warning-v2`: repeatable early warning from the
+  existing archaeologist. The old Mirage basement inscription has no map binding
+  and is not claimed as an active warning.
+- `gates-final-c27-norman-blocked`, `gates-c43-triangle-blocked`,
+  `gates-c48-league-blocked`: native prerequisite messages and returned control;
+  eight badges alone cannot bypass the final conclusion.
+- `gates-c48-origin-observation`, `gates-c48-meteor-observation`: declining after
+  observing leaves resolution unset. `gates-c48-origin-fixture_defeat` and
+  `gates-c48-meteor-fixture_defeat`: forced no-capture victories set only the
+  resolution receipt. `gates-c48-origin-fixture_win`,
+  `gates-final-c48-meteor-fixture_win`: forced captures set both receipts.
+  `gates-c48-origin-fixture_loss`, `gates-final-c48-meteor-fixture_loss`: forced
+  loss leaves resolution/capture unset. These validate native postbattle scripts,
+  not battle difficulty, normal strategic wins, native fleeing or whole routes.
+- `gates-final-c45-guardian-pending`, `gates-final-c45-flash`: puzzles alone cannot
+  award C45. `gates-c45-final-guardian-v2`: forced final Registeel victory grants
+  cap82/16000 without a capture. Its final line is the existing resting reminder,
+  after the route directions; the v1 terminal-text expectation was corrected.
+  `gates-c45-repeat`: rereading never pays a second grant.
+- `gates-c48-steven-incomplete`, `gates-c48-steven-conclusion`,
+  `gates-c48-devon-conclusion`: missing challenge blocks C48; Steven grants
+  cap94/20000 once; Devon pays nothing and preserves the finite Pidgeotite.
+- `gates-travel-documents-full`, `gates-travel-documents-repeat`: all five pending
+  papers remain unreceived with a full key pocket; native healing still runs.
+  With space, Center delivery gives exactly one of each and subsequent visits
+  give none. Synthetic full-pocket fixture28 preserves the four Center tools.
+- `gates-final-c44-scanner-repeat`, `gates-final-c30-return`: current-prerequisite
+  Scanner repeat-payment and survey return-service regressions.
+
+Contact sheets were inspected for the warning, collapse/closed entrances,
+legendary aftermath, research/League directions and Center delivery/healing.
+Local recordings are synthetic and not tracked binaries; tracked recipes make
+these cases reproducible. Full earned traversal, all possible ordinary loss/run/
+reload permutations and user visual acceptance remain separate work. The earned
+C15 checkpoint and all paused team-review work were preserved.
+
+`gates-c48-optional-capture-return-v2` checks the completed challenge's optional
+rematch offer and declining it without revoking its receipt. The first archaeologist
+recipe faced him from water at a different elevation and did not start dialogue;
+v2 uses the adjacent land tile and requires actual text. The original ready-only
+expectation was insufficient and has been replaced.

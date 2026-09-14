@@ -49,6 +49,7 @@ SlateportCity_Harbor_EventScript_AquaEscapeTrigger3::
 	end
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene::
+	call EC_RequireHeatran
 	applymovement LOCALID_SLATEPORT_HARBOR_ARCHIE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	applymovement LOCALID_SLATEPORT_HARBOR_GRUNT, Common_Movement_WalkInPlaceFasterDown
@@ -334,6 +335,8 @@ SlateportCity_Harbor_EventScript_FerryFinished::
 	end
 
 SlateportCity_Harbor_EventScript_AskToTradeScanner::
+	call EC_RequireSpace
+	call EC_RequireDeoxys
 	completemilestone FLAG_EC_REPORT_C44_COMPLETE
 	setvar VAR_0x8004, ITEM_SCANNER
 	special TakeEmeraldChampionsHandoffItem
