@@ -56,11 +56,7 @@ LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect::
 
 LilycoveCity_Harbor_EventScript_GoToSouthernIsland::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
-	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
-	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 13, 22
-	waitstate
-	release
-	end
+	goto SSTidalCorridor_EventScript_BoardExpedition
 
 LilycoveCity_Harbor_EventScript_GoToNavelRock::
 	call LilycoveCity_Harbor_EventScript_BoardFerry
@@ -202,11 +198,7 @@ LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime::
 	msgbox LilycoveCity_Harbor_Text_BrineyPromise, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_BoardFerryWithSailor
-	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
-	warp MAP_SOUTHERN_ISLAND_EXTERIOR, 13, 22
-	waitstate
-	release
-	end
+	goto SSTidalCorridor_EventScript_BoardExpedition
 
 LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime::
 	setflag FLAG_SHOWN_AURORA_TICKET

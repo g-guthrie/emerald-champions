@@ -332,59 +332,19 @@ LilycoveCity_EventScript_BattleBrendanMudkip::
 
 LilycoveCity_EventScript_DefeatedMay::
 	msgbox LilycoveCity_Text_MayGoingBackToLittleroot, MSGBOX_DEFAULT
-	setvar VAR_RESULT, FALSE
-	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_CheckFinalBadge
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_EventScript_MayCollectBadges
-	call_if_eq VAR_RESULT, TRUE, LilycoveCity_EventScript_MayPokemonLeague
+	msgbox LilycoveCity_Text_DepartureHandoff, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
 	goto LilycoveCity_EventScript_RivalFlyAway
 	end
 
-LilycoveCity_EventScript_CheckFinalBadge::
-	goto_if_set FLAG_BADGE08_GET, LilycoveCity_EventScript_HasFinalBadge
-	return
-
-LilycoveCity_EventScript_HasFinalBadge::
-	setvar VAR_RESULT, TRUE
-	return
-
-LilycoveCity_EventScript_MayCollectBadges::
-	msgbox LilycoveCity_Text_MayYouGoingToCollectBadges, MSGBOX_DEFAULT
-	return
-
-LilycoveCity_EventScript_MayPokemonLeague::
-	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_MayBattleFrontier
-	msgbox LilycoveCity_Text_MayYouGoingToPokemonLeague, MSGBOX_DEFAULT
-	return
-
-LilycoveCity_EventScript_MayBattleFrontier::
-	msgbox LilycoveCity_Text_MayYouGoingToBattleFrontier, MSGBOX_DEFAULT
-	return
-
 LilycoveCity_EventScript_DefeatedBrendan::
 	msgbox LilycoveCity_Text_BrendanGoingBackToLittleroot, MSGBOX_DEFAULT
-	setvar VAR_RESULT, FALSE
-	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_CheckFinalBadge
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_EventScript_BrendanCollectBadges
-	call_if_eq VAR_RESULT, TRUE, LilycoveCity_EventScript_BrendanPokemonLeague
+	msgbox LilycoveCity_Text_DepartureHandoff, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	goto LilycoveCity_EventScript_RivalFlyAway
 	end
-
-LilycoveCity_EventScript_BrendanCollectBadges::
-	msgbox LilycoveCity_Text_BrendanYouGoingToCollectBadges, MSGBOX_DEFAULT
-	return
-
-LilycoveCity_EventScript_BrendanPokemonLeague::
-	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_BrendanBattleFrontier
-	msgbox LilycoveCity_Text_BrendanYouGoingToPokemonLeague, MSGBOX_DEFAULT
-	return
-
-LilycoveCity_EventScript_BrendanBattleFrontier::
-	msgbox LilycoveCity_Text_BrendanYouGoingToBattleFrontier, MSGBOX_DEFAULT
-	return
 
 LilycoveCity_EventScript_RivalFlyAway::
 	closemessage
@@ -452,29 +412,6 @@ LilycoveCity_Text_MayGoingBackToLittleroot:
 	.string "sorting all our POKéMON\l"
 	.string "sightings.$"
 
-LilycoveCity_Text_MayYouGoingToCollectBadges:
-	.string "Keep going, {PLAYER}{KUN}. Earn\n"
-	.string "the BADGES, explore HOENN and\l"
-	.string "take on the LEAGUE!\p"
-	.string "I'll still finish the POKéDEX\n"
-	.string "before you do. See you!$"
-
-LilycoveCity_Text_MayYouGoingToPokemonLeague:
-	.string "{PLAYER}{KUN}, is it the LEAGUE next?\n"
-	.string "Or the POKéDEX?\p"
-	.string "I lost the battle. I'm still winning\n"
-	.string "the POKéDEX. See you!$"
-
-LilycoveCity_Text_MayYouGoingToBattleFrontier:
-	.string "{PLAYER}{KUN}, what are you going to do?\p"
-	.string "Are you taking the BATTLE FRONTIER\n"
-	.string "challenge?\p"
-	.string "Or, are you going to complete your\n"
-	.string "POKéDEX?\p"
-	.string "I might've lost to you in battling,\n"
-	.string "but I'll finish my POKéDEX before you!\p"
-	.string "See you!$"
-
 LilycoveCity_Text_BrendanShoppingLetsBattle:
 	.string "BRENDAN: {PLAYER}! Running an\n"
 	.string "errand for Dad. No, I'm not\l"
@@ -507,28 +444,6 @@ LilycoveCity_Text_BrendanGoingBackToLittleroot:
 	.string "needs someone to sort our POKéMON\l"
 	.string "sightings, and I know where I\l"
 	.string "found mine.$"
-
-LilycoveCity_Text_BrendanYouGoingToCollectBadges:
-	.string "BRENDAN: What's next, {PLAYER}?\n"
-	.string "The rest of the BADGES, then the\l"
-	.string "LEAGUE?\p"
-	.string "Maybe I'll try that, too. But\n"
-	.string "first, Dad's waiting for these\l"
-	.string "supplies.\p"
-	.string "Don't get too far ahead of me!$"
-
-LilycoveCity_Text_BrendanYouGoingToPokemonLeague:
-	.string "{PLAYER}, going for the LEAGUE?\p"
-	.string "One more rebuild and I'd beat you.\n"
-	.string "Probably. Anyway, hang in there!$"
-
-LilycoveCity_Text_BrendanYouGoingToBattleFrontier:
-	.string "{PLAYER}, what now? The FRONTIER, or\n"
-	.string "the POKéDEX?\p"
-	.string "With your teams, the FRONTIER. The\n"
-	.string "CIRCUIT there is doubles all the way.\p"
-	.string "One more rebuild and I'm stronger than\n"
-	.string "you. Probably. Hang in there!$"
 
 LilycoveCity_Text_MovedLootIntoHideoutToday:
 	.string "Fufufu…\p"
@@ -745,3 +660,13 @@ LilycoveCity_Text_HoneymoonVowToSeeRarePokemon:
 	.string "So we were delighted to see a rare\n"
 	.string "POKéMON as soon as we arrived.\p"
 	.string "I mean, we are totally happy!$"
+
+LilycoveCity_Text_DepartureHandoff:
+	.string "STERN and BRINEY are arranging\n"
+	.string "a voyage to SOUTHERN ISLAND.\p"
+	.string "Head to LILYCOVE HARBOR on the\n"
+	.string "southwestern waterfront.\p"
+	.string "Speak to the attendant inside\n"
+	.string "for your passage and departure.\p"
+	.string "FARAWAY ISLAND comes next.\n"
+	.string "No need to shop before you sail!$"

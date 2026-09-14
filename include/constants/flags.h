@@ -747,7 +747,7 @@
 #define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
 #define FLAG_EC_RUSTBORO_GREAT_BALL_PENDING    0x2B5 // Separate rescue reward entitlement.
 #define FLAG_EC_BIRCH_GREAT_BALLS_PENDING      0x2B6 // Ten-ball send-off gift; never locks Route102.
-#define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
+#define FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE 0x2B7
 #define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
 #define FLAG_UNUSED_0x2B9  0x2B9 // Unused Flag
 #define FLAG_UNUSED_0x2BA  0x2BA // Unused Flag

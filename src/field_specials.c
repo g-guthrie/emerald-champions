@@ -1264,6 +1264,7 @@ enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y
         return SS_TIDAL_LOCATION_LILYCOVE;
     case SS_TIDAL_DEPART_LILYCOVE:
     case SS_TIDAL_EXIT_CURRENTS_LEFT:
+    case SS_TIDAL_EXPEDITION:
         return SS_TIDAL_LOCATION_ROUTE124;
     case SS_TIDAL_DEPART_SLATEPORT:
         if (*varCruiseStepCount < 60)
