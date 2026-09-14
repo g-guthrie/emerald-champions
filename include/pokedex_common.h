@@ -152,9 +152,13 @@ struct EvoScreenData
     u8 arrowSpriteId;
 };
 
+#define POKEDEX_FORMS_PER_PAGE 13
+
 struct FromScreenData
 {
-    u16 formIds[30];
+    enum Species species;
+    u8 iconSpriteIds[POKEDEX_FORMS_PER_PAGE];
+    u8 page;
     bool8 inSubmenu;
     u8 numForms;
     u8 menuPos;
