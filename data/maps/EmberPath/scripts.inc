@@ -41,6 +41,7 @@ EmberPath_EventScript_Moltres::
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EmberPath_EventScript_MoltresCaught
 	goto_if_ne VAR_RESULT, B_OUTCOME_WON, Common_EventScript_LegendaryResting
 	setflag FLAG_EC_RESOLVED_MOLTRES
+	call LavaridgeTown_EventScript_MountainHandoff
 	goto Common_EventScript_LegendaryResting
 	end
 
@@ -48,6 +49,7 @@ EmberPath_EventScript_MoltresCaught::
 	setflag FLAG_EC_RESOLVED_MOLTRES
 	setflag FLAG_EC_CAUGHT_MOLTRES
 	removeobject LOCALID_EC_MOLTRES
+	call LavaridgeTown_EventScript_MountainHandoff
 	release
 	end
 

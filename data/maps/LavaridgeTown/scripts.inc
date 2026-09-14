@@ -91,7 +91,8 @@ LavaridgeTown_EventScript_ArchiveGoGogglesMay::
 
 LavaridgeTown_EventScript_MayReceivedGoGoggles::
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	msgbox LavaridgeTown_Text_MayExplainGoGogglesChallengeDad, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_Text_ExplainGoGoggles, MSGBOX_DEFAULT
+	call LavaridgeTown_EventScript_MountainHandoff
 	goto LavaridgeTown_EventScript_RivalExit
 	end
 
@@ -109,7 +110,8 @@ LavaridgeTown_EventScript_ArchiveGoGogglesBrendan::
 
 LavaridgeTown_EventScript_BrendanReceivedGoGoggles::
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	msgbox LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_Text_ExplainGoGoggles, MSGBOX_DEFAULT
+	call LavaridgeTown_EventScript_MountainHandoff
 	goto LavaridgeTown_EventScript_RivalExit
 	end
 
@@ -354,16 +356,6 @@ LavaridgeTown_Text_GoGogglesNoRoom:
 	.string "If you leave town, I will wait\n"
 	.string "outside the HERB SHOP.$"
 
-LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
-	.string "MAY: Carry those GO-GOGGLES in\n"
-	.string "your BAG to explore the desert.\p"
-	.string "The route signs list its POKéMON.\n"
-	.string "Check them before heading in!\p"
-	.string "With four BADGES, you can\n"
-	.string "challenge your dad in PETALBURG.\p"
-	.string "I want to see how I do against\n"
-	.string "him, too. See you there!$"
-
 LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
 	.string "BRENDAN: Hey, {PLAYER}!\n"
 	.string "You stopped MAXIE at the summit!\p"
@@ -371,16 +363,6 @@ LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
 	.string "You have been busy!\p"
 	.string "Take these for the sandstorm\n"
 	.string "on ROUTE 111.$"
-
-LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
-	.string "BRENDAN: Keep the GO-GOGGLES in\n"
-	.string "your BAG to explore the desert.\p"
-	.string "Check its route signs for POKéMON\n"
-	.string "you have not found elsewhere.\p"
-	.string "Four BADGES means NORMAN will\n"
-	.string "accept your challenge now.\p"
-	.string "I am heading to PETALBURG, too.\n"
-	.string "Your dad should be a tough match!$"
 
 LavaridgeTown_Text_HaveEggWillYouTakeIt:
 	.string "I have here an EGG.\p"
@@ -468,3 +450,57 @@ LavaridgeTown_Text_GymSign:
 LavaridgeTown_Text_HerbShopSign:
 	.string "POKéMON HERB SHOP\n"
 	.string "“Bitter taste--better cure!”$"
+
+LavaridgeTown_Text_ExplainGoGoggles:
+	.string "Carry the GO-GOGGLES in your BAG\n"
+	.string "when you explore ROUTE 111's desert.\p"
+	.string "First, let's see what is troubling\n"
+	.string "the woods below MT. CHIMNEY.$"
+
+LavaridgeTown_EventScript_MountainHandoff::
+	goto_if_set FLAG_EC_REPORT_C26_COMPLETE, LavaridgeTown_EventScript_NormanHandoff
+	goto_if_lt VAR_CHANSEY_NURSE_STATE, 7, LavaridgeTown_EventScript_RescueHandoff
+	goto_if_set FLAG_EC_RESOLVED_MOLTRES, LavaridgeTown_EventScript_DesertHandoff
+	goto LavaridgeTown_EventScript_MoltresHandoff
+LavaridgeTown_EventScript_RescueHandoff::
+	msgbox LavaridgeTown_Text_RescueHandoff, MSGBOX_DEFAULT
+	return
+LavaridgeTown_EventScript_MoltresHandoff::
+	msgbox LavaridgeTown_Text_MoltresHandoff, MSGBOX_DEFAULT
+	return
+LavaridgeTown_EventScript_DesertHandoff::
+	msgbox LavaridgeTown_Text_DesertHandoff, MSGBOX_DEFAULT
+	return
+LavaridgeTown_EventScript_NormanHandoff::
+	msgbox LavaridgeTown_Text_NormanHandoff, MSGBOX_DEFAULT
+	return
+
+LavaridgeTown_Text_RescueHandoff:
+	.string "Help the nurse on southern ROUTE 111\n"
+	.string "bring her CHANSEY home.\p"
+	.string "Follow its trail up ROUTE 112, then\n"
+	.string "take the cable car to MT. CHIMNEY.\p"
+	.string "Descend JAGGED PASS and take its\n"
+	.string "western entrance into EMBER PATH.\p"
+	.string "The western passage leads into\n"
+	.string "ASHEN WOODS. Find CHANSEY there,\l"
+	.string "then return to the nurse.$"
+LavaridgeTown_Text_MoltresHandoff:
+	.string "From ASHEN WOODS, take the north\n"
+	.string "exit into EMBER PATH.\p"
+	.string "Follow the trail to MOLTRES's roost.\n"
+	.string "Win its battle or catch it to\l"
+	.string "resolve the disturbance.$"
+LavaridgeTown_Text_DesertHandoff:
+	.string "Take your GO-GOGGLES into the\n"
+	.string "ROUTE 111 desert. Enter MIRAGE TOWER.\p"
+	.string "Its basement leads to SANDSTREWN\n"
+	.string "RUINS. Speak to the archaeologist.\p"
+	.string "Explore the lowest chamber, then\n"
+	.string "return to him at the tower entrance.$"
+LavaridgeTown_Text_NormanHandoff:
+	.string "NORMAN is ready at PETALBURG GYM.\n"
+	.string "Return through MAUVILLE, then west\l"
+	.string "through RUSTURF TUNNEL.\p"
+	.string "From RUSTBORO, follow the woods\n"
+	.string "south to PETALBURG CITY.$"

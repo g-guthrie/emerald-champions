@@ -376,7 +376,7 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 	.string "The DYNAMO BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 40.\p"
+	.string "train a party up to Lv. 34.\p"
 	.string "It also enables ROCK SMASH outside\n"
 	.string "of battle.\p"
 	.string "Hmm…\n"

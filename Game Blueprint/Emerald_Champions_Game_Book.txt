@@ -358,15 +358,15 @@ PLAYER HANDOFF — Summit resolution character; cable-car/Jagged Pass interactio
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 C23 — Flannery
-Continue down to Lavaridge and defeat Flannery, reaching cap 44. Her local perspective connects the summit disturbance to trouble along the woodland trail. The next destination is a place that needs help, not a newly assigned abstract survey. Preserve her reward and the optional Wynaut Egg.
+Continue down to Lavaridge and defeat Flannery, reaching cap 44. Her local perspective connects the summit disturbance to trouble along the woodland trail. Flannery and both rival variants direct the rescue first; repeated directions advance to Moltres, Sandstrewn research and only then Norman. The next destination is a place that needs help, not a newly assigned abstract survey. Preserve her reward and the optional Wynaut Egg.
 
 PLAYER HANDOFF — Flannery; Lavaridge rival/Go-Goggles handoff:
-“Collect the Go-Goggles from your rival outside the Gym. To reach Ashen Woods, go east to Route 112, take the cable car to Mt. Chimney, descend Jagged Pass and take its western entrance into Ember Path. Follow Ember Path's western passage into Ashen Woods and find the caretaker.”
+“Collect the Go-Goggles from your rival outside the Gym. To reach Ashen Woods, go east to Route 112, take the cable car to Mt. Chimney, descend Jagged Pass and take its western entrance into Ember Path. Follow Ember Path's western passage into Ashen Woods to find Chansey, then return to its nurse on southern Route111.”
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 C24 — The Ashen Woods rescue
-The caretaker is the existing nurse on Route111 beside Ashen Woods. Preserve her actual position and the woods chase; keep her available after the rescue for repeatable directions to Moltres and, once that disturbance is resolved, Sandstrewn Ruins. Do not relocate her into the woods or duplicate her reward.
-Follow the existing Chansey chase and woodland encounters. The caretaker explains that frightened Pokémon have come down from Ember Path since the summit incident. Completing the rescue earns the two-charge Vial and gives the player a concrete reason to follow the trail to the roost.
+The caretaker is the existing nurse on southern Route111. Preserve her actual position and the woods chase; keep her available after the rescue for repeatable directions to Moltres and, once that disturbance is resolved, Sandstrewn Ruins. Do not relocate her into the woods or duplicate her reward.
+Follow the existing Chansey chase and woodland encounters. The nurse remains at her Route111 post after upgrading the Vial, with repeatable directions to Moltres and then the Sandstrewn archaeologist; later visits never refill or re-award the upgrade. Completing the rescue earns the two-charge Vial and gives the player a concrete reason to follow the trail to the roost.
 
 PLAYER HANDOFF — Ashen Woods caretaker after the rescue:
 “Return through the north exit of Ashen Woods into Ember Path. Follow the existing trail to Moltres's roost and interact with Moltres. Resolving the encounter is required; catching it is your choice.”

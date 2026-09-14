@@ -49,7 +49,7 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
 	goto_if_set FLAG_BADGE05_GET, LavaridgeTown_Gym_1F_EventScript_FlanneryJourneyContinues
-	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
+	call LavaridgeTown_Gym_1F_EventScript_NextDestination
 	release
 	end
 
@@ -75,7 +75,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_FLANNERY_MATCH_CALL
-	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
+	call LavaridgeTown_Gym_1F_EventScript_NextDestination
 	release
 	end
 
@@ -323,14 +323,9 @@ LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
 	.string "in the POKéNAV.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
-	.string "Four BADGES! NORMAN is ready for\n"
-	.string "your challenge in PETALBURG CITY.\p"
-	.string "Head back through MAUVILLE, then\n"
-	.string "west through RUSTURF TUNNEL.\p"
-	.string "From RUSTBORO, follow the woods\n"
-	.string "south to PETALBURG and its GYM.\p"
-	.string "EMBER PATH is also open now.\n"
-	.string "Explore it when you can move boulders.$"
+	.string "Your rival is waiting outside.\n"
+	.string "Collect the GO-GOGGLES before\l"
+	.string "you leave LAVARIDGE.$"
 
 LavaridgeTown_Gym_1F_Text_GymStatue:
 	.string "LAVARIDGE TOWN POKéMON GYM$"
@@ -378,3 +373,11 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryJourneyContinues::
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostRematch, MSGBOX_DEFAULT
 	release
 	end
+
+LavaridgeTown_Gym_1F_EventScript_NextDestination::
+	call_if_unset FLAG_RECEIVED_GO_GOGGLES, LavaridgeTown_Gym_1F_EventScript_RemindGoggles
+	call LavaridgeTown_EventScript_MountainHandoff
+	return
+LavaridgeTown_Gym_1F_EventScript_RemindGoggles::
+	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
+	return

@@ -37,7 +37,7 @@ SandstrewnRuins_Text_Report:
 
 SandstrewnRuins_Text_ResearchPending:
 	.string "After earning FLANNERY's BADGE,\n"
-	.string "help the nurse in ASHEN WOODS\l"
+	.string "help the nurse on ROUTE 111\l"
 	.string "and investigate EMBER PATH.\p"
 	.string "Explore the lowest chamber, then\n"
 	.string "return to me at this entrance. No\l"

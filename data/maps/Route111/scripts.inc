@@ -62,6 +62,7 @@ Route111_EventScript_UpdateVialQuestObjects::
 	case 4, Route111_EventScript_ShowVialNurse
 	case 5, Route111_EventScript_ShowVialNurse
 	case 6, Route111_EventScript_ShowVialNurse
+	case 7, Route111_EventScript_ShowVialNurse
 	return
 
 Route111_EventScript_ShowVialNurseAndChansey::
@@ -465,6 +466,7 @@ Route111_EventScript_VialChanseyEscape::
 Route111_EventScript_VialUpgradeNurse::
 	lock
 	faceplayer
+	goto_if_ge VAR_CHANSEY_NURSE_STATE, 7, Route111_EventScript_VialNextDestination
 	goto_if_eq VAR_CHANSEY_NURSE_STATE, 6, Route111_EventScript_VialUpgradeComplete
 	goto_if_eq VAR_CHANSEY_NURSE_STATE, 0, Route111_EventScript_VialNurseWatching
 	checkitem ITEM_HEAL_BALL
@@ -501,8 +503,8 @@ Route111_EventScript_VialUpgradeComplete::
 	setvar VAR_POKE_VIAL_CHARGES, 2
 Route111_EventScript_VialUpgradeMarkDone::
 	setvar VAR_CHANSEY_NURSE_STATE, 7
-	setflag FLAG_HIDE_ROUTE111_VIAL_NURSE
-	removeobject LOCALID_ROUTE111_VIAL_NURSE
+Route111_EventScript_VialNextDestination::
+	call LavaridgeTown_EventScript_MountainHandoff
 	release
 	end
 
