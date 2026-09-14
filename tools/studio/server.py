@@ -79,13 +79,22 @@ class Catalogue:
             self.trainers[ident] = dict(id=ident, name=name[1].title() if name else ident,
                 team=[dict(species=title(s), item=title(i)) for s,i in party])
         self.blocks = {}
+        paths = [ROOT / "data/event_scripts.s"]
         for base in ("data/maps", "data/scripts", "data/text"):
-            for path in (ROOT / base).rglob("*.inc"):
-                text = path.read_text()
-                matches = list(re.finditer(r"(?m)^([A-Za-z_]\w*):{1,2}\s*(?:@[^\n]*)?$", text))
-                for i, m in enumerate(matches):
-                    end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-                    self.blocks[m[1]] = (path, m.start(), end, text[m.end():end])
+            paths.extend(sorted((ROOT / base).rglob("*.inc")))
+        self.fallthrough = {}
+        for path in paths:
+            text = path.read_text()
+            matches = list(re.finditer(r"(?m)^([A-Za-z_]\w*):{1,2}[ \t]*(?:@[^\n]*)?$", text))
+            for i, m in enumerate(matches):
+                end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+                body = text[m.end():end]
+                self.blocks[m[1]] = (path, m.start(), end, body)
+                lines = [line.split("@",1)[0].strip() for line in body.splitlines()]
+                lines = [line for line in lines if line and not line.startswith((".if", ".else", ".endif", ".align"))]
+                terminal = {"end", "endram", "return", "returnram", "goto", "gotostd", "gotoram", "step_end", "pokemartlistend"}
+                if i + 1 < len(matches) and (not lines or (not lines[-1].startswith(".") and lines[-1].split()[0] not in terminal)):
+                    self.fallthrough[m[1]] = matches[i + 1][1]
 
     def npc(self, map_name, index):
         obj = self.maps[map_name]["object_events"][index]
@@ -101,6 +110,7 @@ class Catalogue:
                 plain = raw.rstrip("$").replace(r"\p", "\n\n").replace(r"\n", "\n").replace(r"\l", "\n")
                 texts.append(dict(label=label, text=plain, raw=raw, path=str(path.relative_to(ROOT)), hash=sha(path)))
                 continue
+            if label in self.fallthrough: pending.append(self.fallthrough[label])
             for token in re.findall(r"\b[A-Za-z_]\w*\b", body):
                 if token in self.blocks and token not in seen and not token.startswith("Common_"):
                     pending.append(token)
@@ -576,7 +586,7 @@ class Studio:
         if op=="dialogue.export":
             return await asyncio.to_thread((await self.get_library()).export,WORK/"library")
         if op=="scene.graph":
-            return (await self.get_library()).graph(data["map"],int(data["index"]))
+            return (await self.get_library()).graph(data["map"],int(data["index"]),data.get("kind","object"))
         if op=="history":
             return await asyncio.to_thread((await self.get_library()).history,data.get("path",""),int(data.get("limit",20)))
         if op=="assets":

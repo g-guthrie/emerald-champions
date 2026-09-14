@@ -15,12 +15,36 @@ class Library:
         self.edges = {}
         self.specials = {}
         self.bindings = []
+        standard = {}
+        table = catalogue.blocks.get("gStdScripts", (None, 0, 0, ""))[3]
+        for index, (target, name) in enumerate(re.findall(r"\.4byte\s+(\w+)\s+@\s+(\w+)", table)):
+            standard[name] = standard[str(index)] = target
+        item_macros = dict(giveitem="STD_OBTAIN_ITEM", finditem="STD_FIND_ITEM",
+                           putitemaway="STD_PUT_ITEM_AWAY", givedecoration="STD_OBTAIN_DECORATION",
+                           register_matchcall="STD_REGISTER_MATCH_CALL")
         files={}
         for label, (path, start, end, body) in catalogue.blocks.items():
             code = re.sub(r"(?m)@.*$", "", body)
             self.edges[label] = list(dict.fromkeys(t for t in re.findall(r"\b[A-Za-z_]\w*\b", code)
                                                   if t in catalogue.blocks and t != label))
-            self.specials[label] = re.findall(r"\bspecial(?:var\s+\w+,)?\s+(\w+)", code)
+            if label in catalogue.fallthrough:
+                self.edges[label].append(catalogue.fallthrough[label])
+            for line in code.splitlines():
+                parts = line.strip().split(None, 1)
+                if not parts: continue
+                command, args = parts[0], parts[1].split(",") if len(parts) > 1 else []
+                target = None
+                if command in item_macros:
+                    target = standard.get(item_macros[command])
+                elif command == "giveuniqueitem":
+                    target = "Common_EventScript_ObtainFiniteItem"
+                elif command == "msgbox":
+                    target = standard.get(args[1].strip() if len(args) > 1 else "MSGBOX_DEFAULT")
+                elif command in ("callstd", "gotostd", "callstd_if", "gotostd_if") and args:
+                    target = standard.get(args[-1].strip())
+                if target in catalogue.blocks and target not in self.edges[label]:
+                    self.edges[label].append(target)
+            self.specials[label] = re.findall(r"\b(?:special(?:var\s+\w+,)?|callnative)\s+(\w+)", code)
             strings = re.findall(r'\.string\s+"((?:\\.|[^"])*)"', body)
             if strings:
                 text = "".join(strings).rstrip("$").replace(r'\"', '"')
@@ -29,20 +53,32 @@ class Library:
                 self.records[label] = dict(label=label, text=text, path=str(path.relative_to(root)),
                     line=files[path][:start].count("\n")+1, owners=[])
         self.closures = {}
+        self.interactions = []
+        def bind(name, kind, index, event, script=None):
+            script = script or event.get("script", "")
+            labels, visited, handlers = self.reachable(script) if script in catalogue.blocks else ([],[],[])
+            owner = dict(map=name,kind=kind,index=index,script=script,flag=event.get("flag","0"),
+                         trainer=event.get("trainer_type",""),x=event.get("x"),y=event.get("y"))
+            interaction = dict(owner,texts=labels,native_handlers=handlers,event=event,
+                               unresolved_script=bool(script and script not in ("0x0","0","NULL") and script not in catalogue.blocks))
+            self.interactions.append(interaction)
+            if kind == "object" and script in catalogue.blocks: self.bindings.append(interaction)
+            for label in labels: self.records[label]["owners"].append(owner)
         for name, m in catalogue.maps.items():
-            for index, obj in enumerate(m["object_events"]):
-                script = obj.get("script", "")
-                if script not in catalogue.blocks: continue
-                labels, visited, handlers = self.reachable(script)
-                owner = dict(map=name,index=index,script=script,flag=obj.get("flag","0"),
-                             trainer=obj.get("trainer_type",""),x=obj["x"],y=obj["y"])
-                binding = dict(owner,texts=labels,native_handlers=handlers)
-                self.bindings.append(binding)
-                for label in labels: self.records[label]["owners"].append(owner)
+            for index, obj in enumerate(m["object_events"]): bind(name,"object",index,obj)
+            for index, event in enumerate(m.get("bg_events") or []):
+                bind(name,"background",index,event,"EventScript_HiddenItemScript" if event["type"]=="hidden_item" else None)
+            for index, event in enumerate(m.get("coord_events") or []): bind(name,"coordinate",index,event)
+            for index, event in enumerate(m.get("warp_events") or []): bind(name,"warp",index,event)
+            label = name + "_MapScripts"
+            if label in catalogue.blocks:
+                for index, (event_type, script) in enumerate(re.findall(r"\bmap_script\s+(\w+),\s*(\w+)",catalogue.blocks[label][3])):
+                    bind(name,"map_event",index,dict(type=event_type),script)
         self.active = [r for r in self.records.values() if r["owners"]]
         self.assets = sorted(root.glob("graphics/object_events/pics/**/*.png"))
 
     def reachable(self, script):
+        if script not in self.cat.blocks: return ([], [], [])
         if script in self.closures: return self.closures[script]
         pending, visited, texts, handlers = [script], set(), set(), set()
         while pending:
@@ -59,9 +95,9 @@ class Library:
         return result
 
     def summary(self):
-        return dict(maps=len(self.cat.maps), npc_bindings=len(self.bindings), dialogue_blocks=len(self.active),
+        return dict(maps=len(self.cat.maps), npc_bindings=len(self.bindings), interaction_roots=len(self.interactions), dialogue_blocks=len(self.active),
                     all_text_blocks=len(self.records), assets=len(self.assets),
-                    scope="Static Hoenn NPC bindings; conditional branches are candidates, not proof of runtime reachability.")
+                    scope="Hoenn objects, signs, hidden items, coordinate/map events and warps. Conditional reachability requires review.")
 
     def search(self, query="", map_name="", limit=20):
         terms=query.casefold().split()
@@ -72,8 +108,8 @@ class Library:
             if all(term in haystack for term in terms): matches.append(record)
         return dict(total=len(matches),results=matches[:min(limit,100)],scope=self.summary()["scope"])
 
-    def graph(self, map_name, index):
-        obj=self.cat.maps[map_name]["object_events"][index]
+    def graph(self, map_name, index, kind="object"):
+        obj=next(x for x in self.interactions if (x["map"],x["kind"],x["index"])==(map_name,kind,index))
         texts, visited, handlers=self.reachable(obj["script"])
         nodes=[]
         for label in visited:
@@ -82,7 +118,7 @@ class Library:
                         if re.search(r"\b(?:goto_if|call_if|switch|case |checkitem|checkflag)",line)]
             nodes.append(dict(label=label,path=str(path.relative_to(self.root)),conditions=conditions,
                               targets=self.edges.get(label,[]),text=self.records.get(label,{}).get("text")))
-        return dict(map=map_name,index=index,script=obj["script"],nodes=nodes,native_handlers=handlers,
+        return dict(map=map_name,kind=kind,index=index,script=obj["script"],nodes=nodes,native_handlers=handlers,
                     scope="Static script references and native-handler boundaries, not executed path coverage.")
 
     def export(self, directory):

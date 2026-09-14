@@ -51,8 +51,17 @@ action("searchDialogue",async()=>{
     const row=element("article",undefined,"dialogue-result");row.append(element("h3",r.label),element("p",r.path+":"+r.line,"source-path"),element("pre",r.text));
     const owners=element("div",undefined,"library-actions");
     for(const owner of r.owners.slice(0,5)){
-      const b=element("button",nice(owner.map));
-      b.onclick=async()=>{await loadMap(owner.map);await inspectNpc(owner.index);const i=npcData.dialogues.findIndex(d=>d.label===r.label);if(i>=0){$("dialogueSelect").value=i;showDialogue();}$("libraryDialog").close();};
+      const b=element("button",nice(owner.map)+(owner.kind&&owner.kind!=="object"?" · "+nice(owner.kind):""));
+      b.onclick=async()=>{
+        await loadMap(owner.map);
+        if(!owner.kind||owner.kind==="object"){
+          await inspectNpc(owner.index);const i=npcData.dialogues.findIndex(d=>d.label===r.label);
+          if(i>=0){$("dialogueSelect").value=i;showDialogue();}$("libraryDialog").close();
+        }else{
+          const graph=await api("scene.graph",{map:owner.map,index:owner.index,kind:owner.kind});
+          libraryView("historyLibrary");$("historyResults").replaceChildren(element("pre",JSON.stringify(graph,null,2)));
+        }
+      };
       owners.append(b);
     }row.append(owners);$("dialogueResults").append(row);
   }
