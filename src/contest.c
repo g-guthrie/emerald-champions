@@ -2837,7 +2837,11 @@ static void Task_ContestReturnToField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        DestroyTask(taskId);
+        // Palette-animation tasks also read the Contest resources. Stop the
+        // entire appeal screen before freeing them and returning to the field.
+        ResetTasks();
+        SetVBlankCallback(NULL);
+        sContestBgCopyFlags = 0;
         gFieldCallback = FieldCB_ContestReturnToField;
         FreeAllWindowBuffers();
         FreeContestResources();
