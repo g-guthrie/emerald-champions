@@ -105,7 +105,9 @@ AncientTomb_Text_PuzzleDirections:
 	.string "and use your licensed FLASH.\p"
 	.string "The FLASH hiker is at GRANITE\n"
 	.string "CAVE's entrance, by DEWFORD. The\l"
-	.string "STONE BADGE permits its use.$"
+	.string "STONE BADGE permits its use.\p"
+	.string "ABRA on GRANITE CAVE's entrance\n"
+	.string "floor can use FLASH.$"
 
 AncientTomb_Text_RouteAccount:
 	.string "The final account describes an\n"

@@ -199,8 +199,8 @@ FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded:
 
 FarawayIsland_Interior_Text_ResearchRecord:
 	.string "A living part of the old record…\n"
-	.string "Take these findings back to the\l"
-	.string "LILYCOVE HARBOR expedition team.$"
+	.string "Return to BRINEY at the ferry.\l"
+	.string "He'll take you back to LILYCOVE.$"
 
 FarawayIsland_Interior_EventScript_CompleteJourney::
 	goto_if_unset FLAG_EC_RESOLVED_SOUTHERN_LATI, Common_EventScript_NopReturn

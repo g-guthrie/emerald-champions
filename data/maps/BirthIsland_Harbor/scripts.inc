@@ -57,6 +57,8 @@ BirthIsland_Harbor_Text_ScannerLead:
 	.string "Next, visit the ABANDONED SHIP\l"
 	.string "on ROUTE 108.\p"
 	.string "Bring licensed SURF and DIVE.\n"
+	.string "LAPRAS in ROUTE 108's water\l"
+	.string "can use both.\p"
 	.string "Recover its SCANNER and take it\l"
 	.string "to STERN at SLATEPORT HARBOR.$"
 

@@ -103,7 +103,9 @@ DesertRuins_EventScript_ReadAccount::
 DesertRuins_Text_PuzzleDirections:
 	.string "From this inscription, walk LEFT\n"
 	.string "twice, then DOWN twice. Use your\l"
-	.string "licensed ROCK SMASH there.$"
+	.string "licensed ROCK SMASH there.\p"
+	.string "SANDSHREW in the ROUTE 111 desert\n"
+	.string "outside can use ROCK SMASH.$"
 
 DesertRuins_Text_RouteAccount:
 	.string "The first account describes a\n"
