@@ -448,7 +448,7 @@ static void PrepareBookResearchScene(void)
             FlagSet(FLAG_EC_SURVEYED_DESERT_DEPTHS);
         if (completed)
             FlagSet(FLAG_EC_REPORT_C26_COMPLETE);
-        LoadHeadlessMap(MAP_SANDSTREWN_RUINS, 4, 14);
+        LoadHeadlessMap(MAP_SANDSTREWN_RUINS, 9, 131);
         break;
     case 5:
         FlagSet(FLAG_EC_REPORT_C26_COMPLETE);
@@ -460,6 +460,10 @@ static void PrepareBookResearchScene(void)
         LoadHeadlessMap(MAP_SEALED_CHAMBER_INNER_ROOM, 10, 5);
         break;
     case 6:
+        FlagSet(FLAG_EC_REPORT_C30_COMPLETE);
+        FlagSet(FLAG_RECEIVED_DEVON_SCOPE);
+        if (!missing)
+            SetTrainerFlag(TRAINER_BRENDAN_LILYCOVE_TREECKO);
         FlagClear(FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT);
         if (completed)
             FlagSet(FLAG_EC_RESOLVED_MEW);
@@ -626,8 +630,9 @@ static void PrepareBookResearchScene(void)
     {
         const enum Item tools[] = {ITEM_POKE_VIAL, ITEM_LEVELER, ITEM_REPEL_SPRAY, ITEM_FLIGHT_BEACON};
         ClearBag();
-        for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
-            AddBagItem(tools[i], 1);
+        if (!missing)
+            for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
+                AddBagItem(tools[i], 1);
         VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
         FlagSet(FLAG_EC_EARNED_SS_TICKET);
         FlagSet(FLAG_EC_EARNED_EON_TICKET);
@@ -637,7 +642,7 @@ static void PrepareBookResearchScene(void)
         if (gEcHeadlessFixtureParam & 0x100)
         {
             struct BagPocket *pocket = &gBagPockets[POCKET_KEY_ITEMS];
-            for (u32 slot = ARRAY_COUNT(tools); slot < pocket->capacity; slot++)
+            for (u32 slot = missing ? 0 : ARRAY_COUNT(tools); slot < pocket->capacity; slot++)
                 BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_BASEMENT_KEY, 1);
         }
         // An observable healing outcome, not merely the offer text.

@@ -86,8 +86,7 @@ AncientTomb_EventScript_CaughtRegisteel::
 
 AncientTomb_EventScript_DefeatedRegisteel::
 	setflag FLAG_EC_RESOLVED_REGISTEEL
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
-	goto Common_EventScript_LegendaryResting
+	goto EmeraldChampions_EventScript_GuardianVictory
 	end
 
 AncientTomb_EventScript_RanFromRegisteel::

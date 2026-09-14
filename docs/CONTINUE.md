@@ -6,7 +6,7 @@ resume state; the book owns design and historical acceptance evidence;
 `docs/VERIFICATION.md` owns commands. Do not start another full-book review or
 spawn agents. The native engine in this repository is the active project.
 
-## Active work: story gating and permanent tower consequence
+## Completed scope: story gates, permanent collapse and recovery
 
 The user approved the story-gate/mandatory-encounter/ticket/finale changes in
 both Book and native game. C26 basement research/report now precedes fossil
@@ -35,6 +35,26 @@ remain separate acceptance work.
 The earlier section17 choreography implementation remains in place. Earned C15,
 team reviews and export delivery stay paused; no additional legendary placement
 was authorized. The live Studio sandbox remains independent of the earned save.
+
+The follow-through moved the existing Sandstrewn researcher to the dry entrance
+path. A native four-badge walk now covers Route111 → tower → lowest chamber →
+researcher → Route111 without Surf, with one C26 grant. The Book inventories all
+lost pickups and exact wild entries, including additional exclusives beyond the
+two explicitly requested legendary warnings. Route111/Fossil Maniac dialogue no
+longer suggests a back entrance. Landorus and its return flight work after collapse.
+
+All eleven required legendary encounters have scoped native no-capture victory
+checks. Diancie/Jirachi also have actual Run → doorway re-entry → retry, and native
+Save/Reload checks. Center documents pass full pocket → make room → receive once →
+Save/Reload → repeat; missing starter tools no longer prevent healing. C45 ends
+with its next-site/Seafloor route after the optional capture reminder, and repeated
+Heatran encounters do not restart the old Groudon/submarine briefing. See
+VERIFICATION for exact recordings, diagnostic fixture failures and scope.
+
+The seven-point implementation is complete. Full campaign play, balancing, other
+area/service coverage and user visual acceptance are still separate work. Keep
+the earned playthrough and team reviews paused until the user resumes them.
+
 
 ## Paused work: collaborative team reviews
 

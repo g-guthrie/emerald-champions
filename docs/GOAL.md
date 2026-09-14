@@ -1,8 +1,8 @@
 # Full unfinished development goal
 
-Current work implements the user-approved story gates, permanent tower collapse,
-mandatory win-or-catch encounters, ticket fallback and Steven-owned conclusion
-through Emerald Studio. The earlier section17 choreography remains in place;
+The user-approved seven-point story-gate, permanent-collapse, mandatory
+win-or-catch, ticket-recovery and Steven-conclusion implementation is complete,
+with scoped native follow-through through Emerald Studio. The earlier section17 choreography remains in place;
 native evidence and acceptance limits are recorded in the book and VERIFICATION. Team review through battle28, the C15 Dwayne
 experiment and export delivery remain paused;
 see `CONTINUE.md`. This long-term goal does not override that pause.

@@ -126,9 +126,9 @@ class Scene:
         for _ in range(80):
             if self.last['yesno']:
                 return
-            require(not self.last['CampaignInBattle'], 'unexpected battle before optional choice')
+            require(not self.last['CampaignInBattle'], 'unexpected battle before accepting the offer')
             self.key('A', 'observation')
-        raise RuntimeError('optional menu never appeared')
+        raise RuntimeError('battle offer never appeared')
 
     def settle(self, label='resolved'):
         for _ in range(160):
@@ -145,11 +145,53 @@ class Scene:
         self.key('START', 'start-menu')
         for _ in range(16):
             if self.last['start_action'] == self.symbols['_start_actions'].index(action):
-                self.key('A', action.lower())
+                if action == 'MENU_ACTION_SAVE':
+                    # Keep the native flash transaction in one emulator run.
+                    # Recreating the core from snapshots during flash writes can
+                    # strand the emulated busy state; it is not a game Retry.
+                    self.advance('native-save-uninterrupted', 1200,
+                        keys=[(at,2,'A') for at in (0,120,240,360)])
+                else:
+                    self.key('A', action.lower())
                 self.settle(action.lower() + '-confirm')
                 return
             self.key('DOWN', 'start-menu-row')
         raise RuntimeError(action + ' missing from native Start menu')
+
+    def origins_roundtrip(self, area):
+        """Leave and return through the actual chamber doorway after native Run."""
+        origin = area == 'origin'
+        room = self.symbols['_maps']['MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM' if origin else 'MAP_METEOR_FALLS_JIRACHIS_ROOM']
+        for _ in range(6):
+            self.walk('UP' if origin else 'DOWN', 'leave-for-retry', 100)
+            if self.last['CampaignMapId'] != room:
+                break
+        require(self.last['CampaignMapId'] != room, 'retry did not leave the chamber')
+        self.walk('DOWN', 'step-away-from-door', 100)
+        for _ in range(4):
+            self.walk('UP', 'return-through-door', 100)
+            if self.last['CampaignMapId'] == room:
+                break
+        require(self.last['CampaignMapId'] == room, 'retry doorway did not return to chamber')
+        target_y = 8 if origin else 7
+        for _ in range(6):
+            y = self.last['CampaignPlayerY']
+            if y == target_y:
+                break
+            self.walk('DOWN' if y < target_y else 'UP', 'retry-approach', 100)
+        require(self.last['CampaignPlayerY'] == target_y, 'retry did not reach actor')
+        self.face('DOWN' if origin else 'UP', 'face-returned-actor')
+
+    def save_reload(self):
+        before_save = self.last['save_counter']
+        position = (self.last['CampaignPlayerX'], self.last['CampaignPlayerY'])
+        self.start_action('MENU_ACTION_SAVE')
+        require(self.last['save_counter'] > before_save, 'native Save did not write a new save')
+        self.walk('DOWN', 'walk-after-completed-save')
+        require((self.last['CampaignPlayerX'], self.last['CampaignPlayerY']) != position, 'reload control did not move')
+        self.start_action('MENU_ACTION_RELOAD_SAVE')
+        self.advance('native-completed-reload', 300, writes=[('FixtureActiveScenario', self.scenario)])
+        require((self.last['CampaignPlayerX'], self.last['CampaignPlayerY']) == position, 'native Reload lost saved position')
 
     def shoal_roundtrip(self, label):
         require((self.last['CampaignPlayerX'], self.last['CampaignPlayerY']) == (12, 12), 'unexpected Shoal pickup approach')
@@ -168,7 +210,7 @@ class Scene:
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--out', type=Path, required=True)
-    p.add_argument('--case', nargs='+', choices=['decline', 'reverse', 'missing', 'fallback', 'win', 'capture', 'full-storage', 'loss', 'flee', 'devon', 'league', 'champion', 'save-reload', 'diancite', 'diancite-full', 'diancite-duplicate', 'diancite-claimed', 'meteor-door', 'meteor-door-full'])
+    p.add_argument('--case', nargs='+', choices=['decline', 'reverse', 'missing', 'fallback', 'win', 'capture', 'full-storage', 'loss', 'flee', 'flee-retry', 'win-reload', 'tickets-full-retry', 'devon', 'league', 'champion', 'save-reload', 'diancite', 'diancite-full', 'diancite-duplicate', 'diancite-claimed', 'meteor-door', 'meteor-door-full'])
     args = p.parse_args()
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -203,17 +245,17 @@ def main():
         'source_base': source_base, 'source_patch_sha256': digest(out / 'source.patch'),
         'driver_sha256': digest(Path(__file__)), 'runner_sha256': digest(runner),
         'scope': 'Synthetic setup; real scripts, menus and map exits. Forced win/capture/loss are exit-boundary evidence. Flee uses native Run. Human visual acceptance and fresh-save traversal are not claimed.', 'cases': []}
-    cases = args.case if args.case else ['decline', 'reverse', 'missing', 'fallback', 'win', 'capture', 'full-storage', 'loss', 'flee', 'devon', 'league', 'champion', 'save-reload', 'diancite', 'diancite-full', 'diancite-duplicate', 'diancite-claimed', 'meteor-door', 'meteor-door-full']
+    cases = args.case if args.case else ['decline', 'reverse', 'missing', 'fallback', 'win', 'capture', 'full-storage', 'loss', 'flee', 'flee-retry', 'win-reload', 'tickets-full-retry', 'devon', 'league', 'champion', 'save-reload', 'diancite', 'diancite-full', 'diancite-duplicate', 'diancite-claimed', 'meteor-door', 'meteor-door-full']
     try:
         for area, base, flag, other, caught in [
             ('origin', 21, 'FLAG_EC_SURVEYED_ORIGIN_CHAMBER', 'FLAG_EC_SURVEYED_METEOR_CHAMBER', 'FLAG_EC_CAUGHT_DIANCIE'),
             ('meteor', 22, 'FLAG_EC_SURVEYED_METEOR_CHAMBER', 'FLAG_EC_SURVEYED_ORIGIN_CHAMBER', 'FLAG_EC_CAUGHT_JIRACHI')]:
             for case in cases:
-                if case.startswith(('diancite', 'meteor-door')):
+                if case.startswith(('diancite', 'meteor-door', 'tickets-')):
                     continue
                 param = base | {'reverse': 0x1000, 'missing': 0x200, 'capture': 0x800,
                     'full-storage': 0x100, 'devon': 0x3000, 'league': 0x5000,
-                    'champion': 0x9000, 'flee': 0x10000}.get(case, 0)
+                    'champion': 0x9000, 'flee': 0x10000, 'flee-retry': 0x10000}.get(case, 0)
                 if case == 'fallback':
                     param = base + 2
                 s = Scene(out, area + '-' + case, param, symbols, runner, scenario, constants)
@@ -238,9 +280,14 @@ def main():
                     s.menu()
                     s.key('A', 'accept-observation')
                     s.settle()
+                elif case == 'missing':
+                    s.face('UP', 'face-blocked-actor')
+                    s.key('A', 'badge-prerequisite')
+                    s.settle('badge-prerequisite-return')
+                    require(s.last['CampaignBattleSerial'] == 0, 'missing badge started a battle')
                 else:
                     s.observe()
-                    require(s.query(1, flag) == (case != 'missing'), 'wrong observation at optional menu')
+                    require(s.query(1, flag) == (case != 'missing'), 'wrong observation at battle offer')
                     require(s.query(1, other) == (case in ['reverse', 'devon', 'league', 'champion']), 'observation changed the other chamber')
                     if case in ['decline', 'reverse', 'missing', 'full-storage', 'devon', 'league', 'champion', 'save-reload']:
                         s.key('B', 'decline-battle')
@@ -266,10 +313,10 @@ def main():
                     else:
                         if case == 'loss':
                             s.advance('synthetic-loss-control', 2, writes=[('CampaignForceLoss', 1)])
-                        if case == 'flee':
+                        if case in ('flee', 'flee-retry'):
                             s.advance('native-battle-control', 2, writes=[('FixtureActiveScenario', 0)])
                         s.key('A', 'accept-battle')
-                        if case == 'flee':
+                        if case in ('flee', 'flee-retry'):
                             s.advance('native-command-menu', 600)
                             for _ in range(40):
                                 if s.last['choose_action']:
@@ -285,12 +332,54 @@ def main():
                         s.settle()
                         require(s.query(1, flag) == 1, 'battle exit revoked observation')
                         require(s.query(1, caught) == (case == 'capture'), 'wrong caught flag after battle')
+                resolved = 'FLAG_EC_RESOLVED_DIANCIE' if area == 'origin' else 'FLAG_EC_RESOLVED_JIRACHI'
+                if case == 'flee-retry':
+                    require(s.query(1, resolved) == 0, 'flee completed the required challenge')
+                    s.origins_roundtrip(area)
+                    s.menu()
+                    s.key('A', 'retry-battle-after-native-flee')
+                    s.settle('retry-victory')
+                    require(s.query(1, resolved) == 1, 'returned encounter could not resolve')
+                if case == 'win-reload':
+                    require(s.query(1, resolved) == 1, 'victory did not resolve the required challenge')
+                    s.save_reload()
+                    require(s.query(1, resolved) == 1, 'native Reload revoked the completed challenge')
+                if case in ('flee', 'loss', 'decline', 'save-reload', 'missing'):
+                    require(s.query(1, resolved) == 0, 'unsuccessful encounter completed the challenge')
                 require(s.query(1, flag) == (case != 'missing'), 'wrong final observation flag')
                 require(not s.last['levitate_active'], 'awakening left its movement task running')
                 if case != 'loss':
                     require(s.query(9) == 6000, 'observation paid an unexpected reward')
                 result['cases'].append({'name': area + '-' + case, 'status': 'pass', 'last': s.last})
                 print('PASS:', area, case, flush=True)
+        if 'tickets-full-retry' in cases:
+            s = Scene(out, 'tickets-full-retry', 28 | 0x100, symbols, runner, scenario, constants)
+            papers = [('SS_TICKET','FLAG_RECEIVED_SS_TICKET','FLAG_EC_EARNED_SS_TICKET'),
+                      ('EON_TICKET','FLAG_EC_RECEIVED_EON_TICKET','FLAG_EC_EARNED_EON_TICKET'),
+                      ('OLD_SEA_MAP','FLAG_RECEIVED_OLD_SEA_MAP','FLAG_EC_EARNED_OLD_SEA_MAP'),
+                      ('AURORA_TICKET','FLAG_RECEIVED_AURORA_TICKET','FLAG_EC_EARNED_AURORA_TICKET'),
+                      ('MYSTIC_TICKET','FLAG_RECEIVED_MYSTIC_TICKET','FLAG_ENABLE_SHIP_NAVEL_ROCK')]
+            s.face('UP', 'face-center-nurse')
+            s.menu()
+            s.key('A', 'heal-despite-full-key-pocket')
+            s.settle('full-bag-healing')
+            for item, received, earned in papers:
+                require(s.query(4,'ITEM_'+item) == 0 and s.query(1,received) == 0, 'full pocket consumed document receipt')
+                require(s.query(1,earned) == 1, 'full pocket revoked earned passage')
+            s.advance('synthetic-room-in-key-pocket', 2, writes=[('FixtureTrigger',2)])
+            s.menu()
+            s.key('A', 'heal-after-pending-delivery')
+            s.settle('pending-delivered')
+            s.save_reload()
+            s.face('UP','face-nurse-after-reload')
+            s.menu()
+            s.key('A','repeat-healing')
+            s.settle('repeat-no-duplicate-documents')
+            for item, received, earned in papers:
+                require(s.query(4,'ITEM_'+item) == 1 and s.query(1,received) == 1, 'document was missing or duplicated after retry/reload')
+                require(s.query(1,earned) == 1, 'retry/reload revoked earned passage')
+            result['cases'].append({'name':'tickets-full-retry','status':'pass','last':s.last})
+            print('PASS: tickets-full-retry', flush=True)
         for case in (case for case in cases if case.startswith('diancite')):
             param = 26 | {'diancite-full': 0x100, 'diancite-duplicate': 0x200,
                 'diancite-claimed': 0x400}.get(case, 0)

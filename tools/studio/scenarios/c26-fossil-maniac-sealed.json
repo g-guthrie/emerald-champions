@@ -1,0 +1,38 @@
+{
+  "name": "c26-fossil-maniac-sealed",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_BADGE04_GET": true
+    },
+    "vars": {
+      "VAR_MIRAGE_TOWER_STATE": 3,
+      "VAR_FOSSIL_MANIAC_STATE": 2
+    }
+  },
+  "warp": {
+    "map": "Route114_FossilManiacsTunnel",
+    "x": 6,
+    "y": 6,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 150
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 3000,
+      "until": "idle",
+      "label": "Closed passage explained"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "contains_text": "sealed ruins"
+  }
+}

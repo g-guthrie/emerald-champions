@@ -1663,3 +1663,10 @@ EC_Text_TravelDocumentsPending:
 EmeraldChampions_Text_ResearchChallengeComplete:
 	.string "You've already met its challenge.\n"
 	.string "Battle again to try catching it?$"
+
+EmeraldChampions_EventScript_GuardianVictory::
+	special HideRestingLegendaryObject
+	call Common_EventScript_LegendaryVictoryReminder
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	releaseall
+	end

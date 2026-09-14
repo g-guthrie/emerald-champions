@@ -810,17 +810,18 @@ Route111_Text_MirageTowerClearlyVisible:
 	.string "RUINS.$"
 
 Route111_Text_ThatWasShockingSandRainedDown:
-	.string "The tower collapsed, but its\n"
-	.string "basement passage may still meet\l"
-	.string "DESERT UNDERPASS.\p"
-	.string "That route leads into SANDSTREWN\n"
-	.string "RUINS.$"
+	.string "The tower collapsed, and every\n"
+	.string "route into SANDSTREWN RUINS is\l"
+	.string "sealed forever.\p"
+	.string "DESERT UNDERPASS still exists,\n"
+	.string "but it cannot get you back in.$"
 
 Route111_Text_MirageTowerHasntBeenSeenSince:
-	.string "MIRAGE TOWER is gone, but the\n"
-	.string "ruins below remain. FOSSIL\l"
-	.string "MANIAC's tunnel on ROUTE 114 now\l"
-	.string "reaches DESERT UNDERPASS.$"
+	.string "MIRAGE TOWER is gone. The ruins\n"
+	.string "below it are sealed forever.\p"
+	.string "The FOSSIL MANIAC's tunnel on\n"
+	.string "ROUTE 114 reaches DESERT UNDERPASS,\l"
+	.string "but that passage to the ruins is shut.$"
 
 Route111_Text_ClawFossilDisappeared:
 	.string "The CLAW FOSSIL disappeared into\n"

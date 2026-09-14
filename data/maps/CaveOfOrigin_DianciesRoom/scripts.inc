@@ -91,7 +91,7 @@ CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught::
 
 CaveOfOrigin_DianciesRoom_EventScript_DiancieResting::
 	special HideRestingLegendaryObject
-	msgbox gText_LegendaryResting, MSGBOX_DEFAULT
+	call Common_EventScript_ExplainLegendaryResting
 	goto CaveOfOrigin_DianciesRoom_EventScript_Handoff
 	end
 

@@ -70,6 +70,7 @@ ScorchedSlab_HeatransRoom_EventScript_HeatranCaught::
 
 
 ScorchedSlab_HeatransRoom_EventScript_Report::
+	goto_if_set FLAG_EC_REPORT_C39_COMPLETE, Common_EventScript_NopReturn
 	setflag FLAG_EC_RESOLVED_HEATRAN
 	completemilestone FLAG_EC_REPORT_C39_COMPLETE
 	msgbox ScorchedSlab_HeatransRoom_Text_StoneCools, MSGBOX_DEFAULT

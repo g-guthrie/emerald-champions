@@ -18,11 +18,11 @@ Route111_RuinsExterior_EventScript_ArrivalEnd::
 	end
 
 Route111_RuinsExterior_EventScript_Archaeologist::
-	call EC_RequireGenerator
 	lockall
 	faceplayer
-	goto_if_unset FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route111_RuinsExterior_EventScript_Briefing
 	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route111_RuinsExterior_EventScript_SurveyDone
+	call EC_RequireGenerator
+	goto_if_unset FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route111_RuinsExterior_EventScript_Briefing
 	msgbox Route111_RuinsExterior_Text_Archaeologist, MSGBOX_DEFAULT
 	setvar VAR_0x8004, SPECIES_CASTFORM
 	special DoesPlayerPartyHaveSelectedSpeciesFamily

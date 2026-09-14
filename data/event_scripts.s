@@ -1557,11 +1557,30 @@ gText_LegendaryResting::
 
 Common_EventScript_LegendaryResting::
 	special HideRestingLegendaryObject
+	special FinishLegendaryLandmarkEncounter
+	call Common_EventScript_ExplainLegendaryResting
+	releaseall
+	end
+
+@ A resting shrine can be inspected without a fresh battle outcome.
 Common_EventScript_LegendaryRestingAtShrine::
 	special FinishLegendaryLandmarkEncounter
 	msgbox gText_LegendaryResting, MSGBOX_DEFAULT
 	releaseall
 	end
+
+Common_EventScript_ExplainLegendaryResting::
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Common_EventScript_LegendaryVictoryReminder
+	msgbox gText_LegendaryResting, MSGBOX_DEFAULT
+	return
+Common_EventScript_LegendaryVictoryReminder::
+	msgbox gText_LegendaryVictoryReminder, MSGBOX_DEFAULT
+	return
+gText_LegendaryVictoryReminder:
+	.string "You won this challenge.\p"
+	.string "If you want to catch the POKéMON,\n"
+	.string "leave this area and return later.$"
 
 gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} has retreated.\n"

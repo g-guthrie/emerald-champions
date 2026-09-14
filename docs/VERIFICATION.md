@@ -780,3 +780,89 @@ rematch offer and declining it without revoking its receipt. The first archaeolo
 recipe faced him from water at a different elevation and did not start dialogue;
 v2 uses the adjacent land tile and requires actual text. The original ready-only
 expectation was insufficient and has been replaced.
+
+
+## Seven-point follow-through and recovery — 2026-09-14
+
+The seven requested contracts are implemented in Book and native source. This
+pass repairs the dry researcher approach, completes the missables inventory,
+removes obsolete post-collapse directions, retains earned survey return service,
+keeps Center healing available when starter tools cannot fit, leaves C45's route
+as the final instruction, and suppresses Heatran's obsolete briefing on repeat.
+The earned C15 run and team reviews were not advanced.
+
+Commands from the repository root (use a fresh output directory):
+
+```sh
+.venv-studio/bin/python scripts/audit/sandstrewn_runtime.py --out work/studio/scenes/c26-complete-approach-roundtrip
+.venv-studio/bin/python scripts/stamp_release_inputs.py --stamp pokeemerald-headless.inputs.json
+.venv-studio/bin/python scripts/audit/origins_runtime.py --out work/story-followthrough/origins-final-v2 --case flee-retry win-reload missing
+.venv-studio/bin/python scripts/audit/origins_runtime.py --out work/story-followthrough/ticket-recovery --case tickets-full-retry
+.venv-studio/bin/python tools/studio/run_scene.py tools/studio/scenarios/c30-survey-after-collapse.json --out work/studio/scenes/followthrough-c30-survey-after-collapse
+```
+
+`c26-complete-approach-roundtrip` passes the complete Route111/tower/basement/
+researcher/outdoor round trip without Surf. Native queries require the basement
+flag, C26, cap48, money14000 from a6000 baseline, no repeat grant and no fifth
+badge/Surf license. The path planner proposes only directional inputs and avoids
+water; native positions and outcomes are the assertions. Legal Repel Spray is
+part of the synthetic setup. Original pixels and the input trace are retained.
+
+`origins-final-v2` passes native Run → real doorway re-entry → forced retry win,
+resolved-state Save/Reload, and the missing-badge block for both Diancie/Jirachi.
+`ticket-recovery` passes full key pocket → healing → synthetic pocket clearing →
+native pending delivery → Save/Reload → repeat healing, with exactly one of each
+paper and all five travel permissions retained. The initial capture/loss checks
+from the preceding implementation remain separately recorded.
+
+Current Studio recipes/results (under `work/studio/scenes/`):
+
+- `followthrough-c26-warning-pages`, `followthrough-c26-archaeologist-warning`:
+  expanded irreversible/missables warning and the dry entrance NPC.
+- `followthrough-final-c26-fossil-maniac-sealed`,
+  `followthrough-final-c26-observer-sealed`: no back-entrance promise after collapse.
+- `followthrough-c30-survey-after-collapse`, `followthrough-c30-earned-return`:
+  Landorus/return transport survives closure; earned return is checked before
+  the lower-stage generator gate.
+- `followthrough-final-c32-expedition-earned` visits Southern Island and returns
+  without a physical ticket. `followthrough-c32-expedition-rival-missing` keeps
+  new permissions unset and names the department-store rival.
+- `followthrough-travel-documents-missing-tools`: pending tickets AND absent
+  starter tools no longer block native Center healing. `ticket-tools-before`
+  preserves the real prior failure ending at “The BAG is full.”
+- `followthrough-c25-victory-without-capture`, `followthrough-c30-victory-without-capture`,
+  `followthrough-c35-victory-without-capture`, `followthrough-c36-victory-without-capture`,
+  `followthrough-final-c39-victory-without-capture`, `followthrough-c43-victory-without-capture`:
+  Moltres, Landorus, Southern Lati, Mew, Heatran and Deoxys resolutions without ownership.
+- `followthrough-c45-final-guardian`, `followthrough-final-c45-final-regirock`,
+  `followthrough-final-c45-final-regice`: each Regi as the third resolution,
+  cap82/16000, no capture, and final DIVE/Seafloor guidance.
+- `followthrough-c48-origin-fixture_defeat`, `followthrough-c48-meteor-fixture_loss`
+  plus the origins recovery matrix exercise the updated win/optional-capture
+  reminder. A resting shrine without a fresh battle keeps its neutral retry text.
+- `heatran-repeat-baseline` catches the obsolete “GROUDON is still loose outside”
+  briefing after the crisis; `heatran-repeat-fixed` keeps cap94/money6000 and
+  rejects that dialogue throughout the trace.
+
+The Studio runner now supports `expect.visited_maps` for actual intermediate
+travel and `expect.forbidden_text` for stale dialogue anywhere in the recording.
+Permission flags alone do not prove a voyage, and final-text checks alone can
+miss an obsolete intermediate instruction.
+
+Diagnostic corrections were to fixtures/drivers, not relaxed game requirements:
+ordinary Repel's packed high bit is Lure, so the route setup uses the actual
+500-step Repel Spray; native arrow exits need continuation off their tile; the
+harbor attendant grants rights while the sailor/Centers hold physical documents;
+the Book's Heatran cap is68, not70. The snapshot-per-chunk save driver stalled
+when it interrupted flash writing. The final driver keeps native Save in one
+uninterrupted1200-frame run and retains the same saved-counter, position and
+resolved-flag assertions. Native Save/Reload then passes on the same ROM.
+
+Contact sheets were inspected for the dry route, warning pages, closure messages,
+Center recovery, guardian route, native Run/re-entry and Save/Reload. Compact
+recovery sheets are in `work/story-followthrough/contact-sheets/`; each recording
+retains its own ROM/ELF and original hashes. Full earned traversal, every possible
+branch combination, combat quality and user visual approval remain outside
+these scoped checks. Normal release build/stamp/gate logs are in
+`work/story-followthrough/release-final.log`, `stamp-final.log` and
+`release-gates-final.log`.

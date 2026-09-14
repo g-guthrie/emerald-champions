@@ -86,8 +86,7 @@ DesertRuins_EventScript_CaughtRegirock::
 
 DesertRuins_EventScript_DefeatedRegirock::
 	setflag FLAG_EC_RESOLVED_REGIROCK
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
-	goto Common_EventScript_LegendaryResting
+	goto EmeraldChampions_EventScript_GuardianVictory
 	end
 
 DesertRuins_EventScript_RanFromRegirock::

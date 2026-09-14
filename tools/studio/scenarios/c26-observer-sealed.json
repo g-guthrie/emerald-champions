@@ -1,0 +1,34 @@
+{
+  "name": "Route111 observer confirms permanent closure",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "vars": {
+      "VAR_MIRAGE_TOWER_STATE": 3
+    }
+  },
+  "warp": {
+    "map": "Route111",
+    "x": 14,
+    "y": 57,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 150
+    },
+    {
+      "tap": "A",
+      "every": 100,
+      "frames": 4000,
+      "until": "idle",
+      "label": "No alternate entrance promised"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "contains_text": "passage to the ruins is shut"
+  }
+}

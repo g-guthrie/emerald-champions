@@ -9,18 +9,18 @@ Common_EventScript_PkmnCenterNurse::
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_HasVial
 	msgbox gText_EmeraldChampionsFirstCenterVisit, MSGBOX_DEFAULT
 	giveitem ITEM_POKE_VIAL, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	setvar VAR_POKE_VIAL_MAX_CHARGES, 1
 	setvar VAR_POKE_VIAL_CHARGES, 1
 	msgbox gText_EmeraldChampionsGiveLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsGiveRepelSpray, MSGBOX_DEFAULT
 	giveitem ITEM_REPEL_SPRAY, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	message gText_EmeraldChampionsExplainTools
 	waitmessage
 	waitbuttonpress
@@ -31,7 +31,7 @@ EventScript_PkmnCenterNurse_HasVial::
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
 	msgbox gText_EmeraldChampionsGiveMissingLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
 
 @ Resume tool delivery if the Bag filled during an earlier visit.
@@ -40,7 +40,7 @@ EventScript_PkmnCenterNurse_CheckRepelSpray::
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckFlightBeacon
 	msgbox gText_EmeraldChampionsGiveMissingRepelSpray, MSGBOX_DEFAULT
 	giveitem ITEM_REPEL_SPRAY, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 
 EventScript_PkmnCenterNurse_CheckFlightBeacon::
@@ -48,7 +48,7 @@ EventScript_PkmnCenterNurse_CheckFlightBeacon::
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_Main
 	msgbox gText_EmeraldChampionsGiveMissingFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
 	goto EventScript_PkmnCenterNurse_OfferHealAfterTools
 
@@ -229,3 +229,14 @@ EventScript_PkmnCenterNurse_BirchGift::
 Text_PkmnCenterNurse_BirchGift:
 	.string "PROF. BIRCH left 10 GREAT BALLS\n"
 	.string "for your journey. Here you are!$"
+
+EventScript_PkmnCenterNurse_ToolsPending::
+	msgbox gText_EmeraldChampionsToolsPending, MSGBOX_DEFAULT
+	goto EventScript_PkmnCenterNurse_Main
+
+gText_EmeraldChampionsToolsPending:
+	.string "Your BAG is full. We will hold\n"
+	.string "the missing tools for you.\p"
+	.string "Healing is still available. Make\n"
+	.string "room and return for the tools\l"
+	.string "whenever you are ready.$"

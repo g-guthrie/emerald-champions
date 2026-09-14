@@ -45,7 +45,7 @@ MeteorFalls_JirachisRoom_EventScript_JirachiCaught::
 
 MeteorFalls_JirachisRoom_EventScript_JirachiResting::
 	special HideRestingLegendaryObject
-	msgbox gText_LegendaryResting, MSGBOX_DEFAULT
+	call Common_EventScript_ExplainLegendaryResting
 	goto MeteorFalls_JirachisRoom_EventScript_Handoff
 	end
 

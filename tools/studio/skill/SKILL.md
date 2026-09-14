@@ -60,3 +60,7 @@ Scene recipes may include `queries` for native readbacks, e.g. `"queries":{"mone
 Independent recipes can select an existing native fixture with `start:{"fixture":"C14_SONG","param":0,"settle_frames":360}`. For postbattle presentation only, `battle_resolution:"fixture_win"` enables the existing headless campaign automation: wild encounters are automatically captured and trainer battles force a win. Recordings label this assistance explicitly; it validates neither combat nor the defeated-without-capture branch. Omit it for ordinary native battles. Check `result.json` → `outcome.passed`, since an expectation failure still emits a recording. Supply all preceding badges when the script counts badges; setting just the latest badge does not establish that progression.
 
 For scoped outcome testing, `battle_resolution:"fixture_defeat"` selects the existing no-capture victory fixture; `"fixture_loss"` selects the existing forced-loss fixture. Both are synthetic battle exits and never combat evidence. `"fixture_win"` retains the automatic-capture behavior for wild battles. All modes are recorded in the outcome.
+
+Use `expect.visited_maps:["SouthernIsland_Exterior"]` to require actual intermediate travel in the native capture trace, including when the scene ends back at its starting harbor. Permission flags alone do not prove a voyage occurred.
+
+Use `expect.forbidden_text:["obsolete instruction"]` to reject stale dialogue anywhere in the native trace, rather than only checking the final text buffer.

@@ -124,6 +124,14 @@ async def run(spec,out):
         for field,wanted in spec.get("expect",{}).items():
             if field=="contains_text":
                 if wanted not in final["text"]:failures.append("Displayed text did not contain "+repr(wanted))
+            elif field=="forbidden_text":
+                printed="\n".join(state["text"] for _,_,state,_ in recorder.raw)
+                found=[text for text in wanted if text in printed]
+                if found:failures.append("Unexpected dialogue: "+repr(found))
+            elif field=="visited_maps":
+                visited={studio.cat.map_ids.get((state["group"],state["num"])) for _,_,state,_ in recorder.raw}
+                missing=set(wanted)-visited
+                if missing:failures.append("Native trace never visited "+", ".join(sorted(missing)))
             elif final.get(field)!=wanted:failures.append(f"{field}: expected {wanted!r}, observed {final.get(field)!r}")
         exact=None
         if replay and start.get("mode","exact")=="exact":

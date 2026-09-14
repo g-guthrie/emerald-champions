@@ -44,7 +44,27 @@
     {
       "press": "A",
       "frames": 150,
-      "label": "Explore before fossil"
+      "label": "Other rare finds"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Chest Form Gimmighoul"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Trapinch and Honedge family"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Uncollected stones and fossils"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Explore before choosing"
     },
     {
       "press": "A",
