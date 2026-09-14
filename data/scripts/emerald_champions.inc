@@ -1235,3 +1235,56 @@ Common_EventScript_ShowDeliveredBerry::
 	setvar VAR_0x8007, TRUE
 	call EventScript_ObtainItemMessage
 	return
+
+@ The existing three puzzle receipts own the route discovery; capture is optional.
+EmeraldChampions_EventScript_ThreeRuinsProgress::
+	goto_if_unset FLAG_REGI_DOORS_OPENED, EmeraldChampions_EventScript_RuinsNeedChamber
+	goto_if_unset FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, EmeraldChampions_EventScript_NextDesertRuin
+	goto_if_unset FLAG_SYS_BRAILLE_REGICE_COMPLETED, EmeraldChampions_EventScript_NextIslandRuin
+	goto_if_unset FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, EmeraldChampions_EventScript_NextAncientRuin
+	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, EmeraldChampions_EventScript_RuinsRouteKnown
+	completemilestone FLAG_EC_REPORT_C45_COMPLETE
+	msgbox EmeraldChampions_Text_ThreeRuinsComplete, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_RuinsRouteKnown::
+	msgbox EmeraldChampions_Text_ThreeRuinsRoute, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_RuinsNeedChamber::
+	msgbox SealedChamber_InnerRoom_Text_ResearchPending, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_NextDesertRuin::
+	msgbox EmeraldChampions_Text_NextDesertRuin, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_NextIslandRuin::
+	msgbox EmeraldChampions_Text_NextIslandRuin, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_NextAncientRuin::
+	msgbox EmeraldChampions_Text_NextAncientRuin, MSGBOX_DEFAULT
+	return
+EmeraldChampions_Text_NextDesertRuin:
+	.string "Next, read the DESERT RUINS\n"
+	.string "account in ROUTE 111's desert.\l"
+	.string "Its puzzle uses ROCK SMASH.$"
+EmeraldChampions_Text_NextIslandRuin:
+	.string "Next, SURF to ISLAND CAVE on the\n"
+	.string "west side of ROUTE 105, north of\l"
+	.string "DEWFORD. Read its rear wall.$"
+EmeraldChampions_Text_NextAncientRuin:
+	.string "Next, visit ANCIENT TOMB on\n"
+	.string "ROUTE 120. Read the rear wall;\l"
+	.string "its puzzle uses FLASH.$"
+EmeraldChampions_Text_ThreeRuinsComplete:
+	.string "The three accounts fit together!\p"
+	.string "Their directions resolve the\n"
+	.string "SCANNER's southeastern echoes.\p"
+	.string "Your discovery earns ¥16,000.\n"
+	.string "Your level cap is now 82.$"
+EmeraldChampions_Text_ThreeRuinsRoute:
+	.string "From MOSSDEEP, sail south through\n"
+	.string "ROUTE 127 to ROUTE 128. DIVE at\l"
+	.string "the deep-water basin.\p"
+	.string "Enter the underwater cave, then\n"
+	.string "surface where the submarine waits.\l"
+	.string "That is TEAM AQUA's route.\p"
+	.string "Bring licensed SURF and DIVE,\n"
+	.string "plus partners for STRENGTH and\l"
+	.string "ROCK SMASH inside the cavern.$"

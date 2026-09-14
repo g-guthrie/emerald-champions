@@ -133,3 +133,19 @@ AbandonedShip_HiddenFloorRooms_Text_ResearchChart:
 	.string "complete part of STERN's archive.\p"
 	.string "You receive ¥1,500 in research\n"
 	.string "funding.$"
+
+AbandonedShip_HiddenFloorRooms_EventScript_Scanner::
+	finditem ITEM_SCANNER
+	checkitem ITEM_SCANNER
+	goto_if_eq VAR_RESULT, FALSE, AbandonedShip_HiddenFloorRooms_EventScript_ScannerEnd
+	lock
+	msgbox AbandonedShip_HiddenFloorRooms_Text_ScannerDestination, MSGBOX_DEFAULT
+	release
+	end
+AbandonedShip_HiddenFloorRooms_EventScript_ScannerEnd::
+	end
+AbandonedShip_HiddenFloorRooms_Text_ScannerDestination:
+	.string "The SCANNER still works.\p"
+	.string "Take it to CAPT. STERN at\n"
+	.string "SLATEPORT HARBOR. He can use it\l"
+	.string "to trace the stolen submarine.$"

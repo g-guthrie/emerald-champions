@@ -6,33 +6,19 @@ resume state; the book owns design and historical acceptance evidence;
 `docs/VERIFICATION.md` owns commands. Do not start another full-book review or
 spawn agents. The native engine in this repository is the active project.
 
-## Active work: Emerald Studio
+## Active work: book scenes through Emerald Studio
 
-The user interrupted team reviews to build a fast local development app inside
-the Codex browser. Run python3 tools/studio/cli.py start to open the local service
-at http://127.0.0.1:8766. The emulator is a native libmGBA process; the browser
-receives raw pixels and PCM. The local CLI exposes the same sandbox commands.
-Current scope: continuous play, sound/gamepad/keyboard, map/NPC inspection,
-dialogue source+book editing, background builds and native save/clean reload,
-bookmarks tied to their original builds, party presets, difficulty and native
-trainer tests. Fresh chapter fixtures cover C03, C04 and C07; arbitrary map
-teleportation does not establish another chapter's story prerequisites.
+The user asked to debut the Studio skill by implementing unfinished book
+choreography. Current batch: C44 wreck/Scanner and Stern scan; C45 readable
+puzzles and three-account route discovery; C30 research flights; synchronization
+of the existing Moltres/Heatran/chamber shake effects. Canonical intent and
+source-triage scope are in Game Book section17. Existing geography/actors and
+native effects are retained. Earned C15 play and trainer review remain paused.
 
-The Studio test save is separate from the earned run. Rebuilds return to idle
-field state or the recorded pre-interaction/prebattle checkpoint. Arbitrary
-midbattle code migration and save-layout migrations are unsupported. The map
-overview uses source tiles; live scenery and dialogue acceptance still require
-inspection of the emulated game. Temporary dialogue used to verify the tool
-was restored before publication. Native tool checks are in
-tools/studio/verify.py; command/build details are in VERIFICATION.
-
-Studio now also supports record/replay, headless scene recipes, automatic
-contact sheets, motion previews, before/after comparisons, short rewind,
-portable named situations, explicit sandbox prerequisites, dialogue search/
-reading export, scene-reference graphs, sprite atlases and build/source history.
-The personal emerald-studio skill is installed from tools/studio/skill.
-Library counts and command examples are in VERIFICATION. These tools assist
-visual review; they do not declare choreography or the full game accepted.
+Studio recipes and contact sheets own synthetic scene evidence. The entire
+wreck key trail, Route134 currents and Seafloor Cavern traversal are not earned
+coverage in this pass. Studio runs are available in its Library; the live user's
+sandbox remains independent. See VERIFICATION for final runs and limits.
 
 ## Paused work: collaborative team reviews
 

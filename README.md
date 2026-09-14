@@ -15,7 +15,8 @@ Start with [the current checkpoint](docs/CONTINUE.md).
 | Earned playthrough | **C15, Medium, cap 24.** 41 distinct trainer wins are evidenced; the paused Dwayne retest save contains 40 clears. Brawly and the manor song are complete. |
 | Verification | Production ROM builds and passes release gates. Focused Mega reveal/eligibility tests and native reward-dialogue checks pass. Revised team levels remain provisional; full-game balance and acceptance are unfinished. |
 
-**What we are doing now:** building **Emerald Studio**, a local browser workspace
+**What we are doing now:** implementing the book’s overworld scenes with
+**Emerald Studio**, a local browser workspace
 backed by native mGBA. Start it with:
 
 ~~~sh
@@ -31,6 +32,8 @@ dialogue search, sprite atlases and source history. Install the Codex skill with
 See [verification](docs/VERIFICATION.md) for setup and supported chapter fixtures.
 The collaborative team review, earned playthrough and trainer-export delivery
 are paused at the user’s request.
+Current scene work implements the book’s Scanner/ruins sequence and research
+flights using Studio recordings and contact sheets.
 The next review starts after Rustboro Gym; do not silently resume the Dwayne
 experiment or replace its preserved save with a synthetic fixture.
 

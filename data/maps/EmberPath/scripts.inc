@@ -23,6 +23,7 @@ EmberPath_EventScript_Moltres::
 	msgbox EmberPath_Text_HotAir, MSGBOX_DEFAULT
 	closemessage
 	special DoSealedChamberShakingEffect_Short
+	waitstate
 	waitse
 	playmoncry SPECIES_MOLTRES, CRY_MODE_ENCOUNTER
 	applymovement LOCALID_EC_MOLTRES, EmberPath_Movement_SpreadWings

@@ -61,12 +61,14 @@ Text_MonUsedFieldMove:
 @ Interact at the solution positions described by the original tomb inscriptions.
 EventScript_BrailleRockSmash::
 	lockall
+	setvar VAR_0x8009, 1
 	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
 	checkfieldmove FIELD_MOVE_ROCK_SMASH, TRUE
 	goto EventScript_BrailleFieldMove
 
 EventScript_BrailleFlash::
 	lockall
+	setvar VAR_0x8009, 3
 	buffermovename STR_VAR_2, MOVE_FLASH
 	checkfieldmove FIELD_MOVE_FLASH, TRUE
 EventScript_BrailleFieldMove:
@@ -80,6 +82,8 @@ EventScript_BrailleFieldMove:
 	setfieldeffectargument 3, 0
 	dofieldeffect FLDEFF_USE_TOMB_PUZZLE_EFFECT
 	waitfieldeffect FLDEFF_USE_TOMB_PUZZLE_EFFECT
+	call_if_eq VAR_0x8009, 1, DesertRuins_EventScript_ReadAccount
+	call_if_eq VAR_0x8009, 3, AncientTomb_EventScript_ReadAccount
 	releaseall
 	end
 

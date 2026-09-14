@@ -16,6 +16,7 @@ ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone::
 	msgbox ScorchedSlab_HeatransRoom_Text_StoneAnswers, MSGBOX_DEFAULT
 	closemessage
 	special DoSealedChamberShakingEffect_Short
+	waitstate
 	fadescreen FADE_TO_BLACK
 	waitse
 	playmoncry SPECIES_HEATRAN, CRY_MODE_ENCOUNTER

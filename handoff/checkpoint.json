@@ -181,7 +181,7 @@
     "TRAINER_JOHANNA",
     "TRAINER_SIMON"
   ],
-  "immediate_plan": "Build and verify Emerald Studio in the Codex browser. Team review, earned C15 play and trainer-export delivery remain paused.",
+  "immediate_plan": "Implement and visually verify the book scene batch: C44 wreck/Scanner, C45 three accounts, C30 flights and existing reveal sequencing. Earned C15 play and team review remain paused.",
   "repel_spray": "off",
   "poke_vial_charges": 1,
   "party_order": [
@@ -247,7 +247,7 @@
     ]
   },
   "evidenced_unique_trainer_clears": 41,
-  "active_work_mode": "emerald_studio_local_browser_development",
+  "active_work_mode": "book_overworld_scene_implementation_with_emerald_studio",
   "reviewed_through_battle": 28,
   "review_holds": [
     "Joey16"

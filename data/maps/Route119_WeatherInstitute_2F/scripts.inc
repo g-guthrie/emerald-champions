@@ -1,6 +1,21 @@
 Route119_WeatherInstitute_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_2F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route119_WeatherInstitute_2F_OnFrame
 	.byte 0
+
+Route119_WeatherInstitute_2F_OnFrame:
+	map_script_2 VAR_TEMP_F, 0, Route119_WeatherInstitute_2F_EventScript_CheckArrival
+	.2byte 0
+
+Route119_WeatherInstitute_2F_EventScript_CheckArrival::
+	setvar VAR_TEMP_F, 1
+	goto_if_unset FLAG_EC_SURVEY_FLIGHT_ARRIVAL, Route119_WeatherInstitute_2F_EventScript_ArrivalEnd
+	clearflag FLAG_EC_SURVEY_FLIGHT_ARRIVAL
+	lockall
+	msgbox Route111_RuinsExterior_Text_Returned, MSGBOX_DEFAULT
+	releaseall
+Route119_WeatherInstitute_2F_EventScript_ArrivalEnd::
+	end
 
 Route119_WeatherInstitute_2F_OnTransition:
 	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 0, Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere
@@ -263,7 +278,12 @@ Route119_WeatherInstitute_2F_EventScript_OfferSurvey::
 	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
 	msgbox Route119_WeatherInstitute_2F_Text_OfferSurvey, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route119_WeatherInstitute_2F_EventScript_Release
+	msgbox Route119_WeatherInstitute_2F_Text_Departure, MSGBOX_DEFAULT
 	closemessage
+	fadescreen FADE_TO_BLACK
+	playse SE_M_FLY
+	waitse
+	setflag FLAG_EC_SURVEY_FLIGHT_ARRIVAL
 	warp MAP_ROUTE111_RUINS_EXTERIOR, 13, 12
 	waitstate
 	releaseall
@@ -441,3 +461,8 @@ Route119_WeatherInstitute_2F_Text_NoAbnormalWeather:
 	.string "no longer being reported.\p"
 	.string "The occasional rainfall is a blessing,\n"
 	.string "really.$"
+
+Route119_WeatherInstitute_2F_Text_Departure:
+	.string "Our research flier will take you\n"
+	.string "to the elevated ruins. Keep your\l"
+	.string "CASTFORM close during the ascent.$"

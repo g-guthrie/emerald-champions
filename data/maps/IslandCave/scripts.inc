@@ -47,27 +47,31 @@ IslandCave_EventScript_OpenRegiEntrance::
 	special DrawWholeMapView
 	playse SE_BANG
 	setflag FLAG_SYS_BRAILLE_REGICE_COMPLETED
+	lockall
+	call IslandCave_EventScript_ReadAccount
+	releaseall
 	end
 
 IslandCave_EventScript_CaveEntranceMiddle::
 	lockall
 	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
 	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_BigHoleInWall
-	braillemessage IslandCave_Braille_RunLapAroundWall
+	msgbox IslandCave_Text_PuzzleDirections, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_REGICE_PUZZLE_STARTED
 	special ShouldDoBrailleRegicePuzzle
 	goto IslandCave_EventScript_CloseBrailleMsg
 	end
 
 IslandCave_EventScript_BigHoleInWall::
-	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+	call IslandCave_EventScript_ReadAccount
 	releaseall
 	end
 
 IslandCave_EventScript_CaveEntranceSide::
 	lockall
+	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_BigHoleInWall
 	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
-	braillemessage IslandCave_Braille_RunLapAroundWall
+	msgbox IslandCave_Text_PuzzleDirections, MSGBOX_DEFAULT
 	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_CloseBrailleMsg
 	setflag FLAG_TEMP_REGICE_PUZZLE_STARTED
 	special ShouldDoBrailleRegicePuzzle
@@ -75,8 +79,6 @@ IslandCave_EventScript_CaveEntranceSide::
 	end
 
 IslandCave_EventScript_CloseBrailleMsg::
-	waitbuttonpress
-	closebraillemessage
 	releaseall
 	end
 
@@ -123,3 +125,23 @@ IslandCave_EventScript_RanFromRegice::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+
+IslandCave_EventScript_ReadAccount::
+	msgbox IslandCave_Text_RouteAccount, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	return
+
+IslandCave_Text_PuzzleDirections:
+	.string "Read this wall, then make one\n"
+	.string "complete lap beside the room's\l"
+	.string "outer wall. Return to this spot.\p"
+	.string "Stay next to the wall all the way.\n"
+	.string "If you stray, read this again\l"
+	.string "to begin another lap.$"
+
+IslandCave_Text_RouteAccount:
+	.string "The second account begins below\n"
+	.string "a deep-water basin. The western\l"
+	.string "surface currents are a false trail.\p"
+	.string "The sea's power cannot be bound\n"
+	.string "by an artifact alone.$"

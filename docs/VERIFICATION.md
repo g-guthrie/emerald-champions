@@ -582,3 +582,51 @@ The normal production build and release gates passed with USE_LTO_ON_RELEASE=0
 after the Mac exhausted disk space; failed linker temporary files were removed.
 The normal ELF contains no Studio bridge symbols. Idle native frame timing was
 below2ms in the measured samples; this is not a worst-case campaign benchmark.
+
+
+## Book-scene debut through Emerald Studio — September14
+
+C44: c44-wreck-aide and c44-wreck-pickup exercise the existing aide and Scanner
+object. c44-scanner/c44-scanner-repeat exercise Stern's scan, choice, delivered
+reward and repeated route clue. Observed report1, Scanner0, Tooth1 and money18000
+from a6000 synthetic baseline after both first and repeat visits. The selected
+reward/full-storage branch is source-reviewed; a full-storage native replay is
+not claimed here. Shared Bag/PC handoff helpers consume the Scanner.
+
+C45: c45-chamber confirms doors1 while chapter0, cap78 and money6000. The local
+account recipes exercise repeat inscriptions; c45-rock-smash, c45-island-lap and
+c45-flash execute the actual licensed field actions/walking puzzle and their
+revealed accounts. Native third-account completion gives cap82 and money22000
+from6000; c45-repeat retains those totals. These are synthetic prerequisites,
+not earned navigation or Regi captures. Existing puzzle receipts determine the
+three-account completion, and FLAG_EC_REPORT_C45_COMPLETE owns its cap/stipend.
+
+C30: c30-flight/c30-return verify the existing actors, original landing points,
+finite sound, fades and destination-owned arrival text. The first test exposed
+an endlessly looping wing sound; SE_M_FLY replaced it. A second visual review
+caught post-warp text that never displayed. Destination frame scripts now consume
+one arrival receipt. Recipes assert the final displayed text as well as the map.
+Studio's idle wait now requires twelve consecutive idle frames, so it does not
+stop between a warp and a destination auto-script.
+
+C25/C39: c25-moltres and c39-heatran capture the existing native reveals after
+correct synchronization with the asynchronous quake task. Moltres reaches battle;
+Heatran's Stone scene reveals its existing actor and returns control. Full battles
+and postbattle outcomes are not re-certified by these scene samples.
+
+Evidence is in work/studio/scenes/c44-scanner-final, c44-wreck-final,
+c44-aide-verified, c45-chamber-final, c45-desert-v1, c45-island-v1,
+c45-rock-smash-v1, c45-lap-v1, c45-flash-v1, c45-repeat-final,
+c30-flight-final, c30-return-final, c25-moltres-final and c39-heatran-v1.
+Each trace names its immutable ROM/ELF and original captures. Contact sheets were
+inspected for dialogue, facing, transitions, returned control and preserved art.
+A compact six-panel showcase is work/studio/scene-debut/showcase.png. Earlier
+v1/v2 failures remain diagnostic evidence, not passing acceptance claims.
+
+Normal build: make -j6 release USE_LTO_ON_RELEASE=0 with the configured ARM
+newlib toolchain, then stamp_release_inputs.py and verify_emerald_champions_release.py.
+Logs: work/studio/scene-debut/release-build.log and release-gates.log (PASS).
+Book import/ability/370-party roster checks pass. Added dialogue fits the existing
+font-width budget; the previously existing209px berry-vendor line is unchanged.
+The full wreck key trail, Route134 currents, late story-gate traversal, remaining
+section17 scene branches and user visual approval remain separate coverage.

@@ -1,7 +1,7 @@
 # Full unfinished development goal
 
-Current work is Emerald Studio, the user-requested native mGBA development
-workspace in the Codex browser. Team review through battle28, the C15 Dwayne
+Current work is implementing the book's unfinished overworld scenes through
+Emerald Studio, starting with the wreck/Scanner and ruins sequence. Team review through battle28, the C15 Dwayne
 experiment and export delivery remain paused;
 see `CONTINUE.md`. This long-term goal does not override that pause.
 

@@ -320,7 +320,8 @@ SlateportCity_Harbor_EventScript_NeedDive::
 SlateportCity_Harbor_EventScript_CaptSternFerryOrScannerComment::
 	goto_if_set FLAG_EXCHANGED_SCANNER, SlateportCity_Harbor_EventScript_TradedScanner
 	goto_if_set FLAG_EC_REPORT_C44_COMPLETE, SlateportCity_Harbor_EventScript_ResumeScannerReward
-	checkitem ITEM_SCANNER
+	setvar VAR_0x8004, ITEM_SCANNER
+	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, SlateportCity_Harbor_EventScript_AskToTradeScanner
 	goto_if_set FLAG_BADGE06_GET, SlateportCity_Harbor_EventScript_FerryFinished
 	msgbox SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry, MSGBOX_DEFAULT
@@ -334,8 +335,21 @@ SlateportCity_Harbor_EventScript_FerryFinished::
 
 SlateportCity_Harbor_EventScript_AskToTradeScanner::
 	completemilestone FLAG_EC_REPORT_C44_COMPLETE
-	removeitem ITEM_SCANNER
+	setvar VAR_0x8004, ITEM_SCANNER
+	special TakeEmeraldChampionsHandoffItem
 	msgbox SlateportCity_Harbor_Text_HandedScannerToStern, MSGBOX_DEFAULT
+	closemessage
+	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_ListenToScanner
+	waitmovement 0
+	playse SE_PC_ON
+	waitse
+	delay 24
+	playse SE_DEX_SEARCH
+	waitse
+	delay 24
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	faceplayer
 	msgbox SlateportCity_Harbor_Text_ScannerReport, MSGBOX_DEFAULT
 SlateportCity_Harbor_EventScript_ResumeScannerReward::
 	goto_if_unset FLAG_EC_SCANNER_REWARD_SELECTED, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
@@ -369,13 +383,26 @@ SlateportCity_Harbor_EventScript_DeepSeaScale::
 SlateportCity_Harbor_EventScript_DeliverScale::
 	giveitem ITEM_DEEP_SEA_SCALE
 SlateportCity_Harbor_EventScript_ScannerRewardDelivered::
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_Harbor_EventScript_ScannerRewardPending
 	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_TradedScanner
 	end
 
+SlateportCity_Harbor_EventScript_ScannerRewardPending::
+	msgbox SlateportCity_Harbor_Text_ScannerRewardPending, MSGBOX_DEFAULT
+	msgbox SlateportCity_Harbor_Text_SealedChamberRoute, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_Harbor_Text_ScannerRewardPending:
+	.string "Your BAG is full. I'll keep your\n"
+	.string "chosen reward until you have room.\p"
+	.string "The scan is recorded. You can\n"
+	.string "continue the search right away.$"
+
 SlateportCity_Harbor_EventScript_DeclineTrade::
 	msgbox SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow, MSGBOX_DEFAULT
+	msgbox SlateportCity_Harbor_Text_SealedChamberRoute, MSGBOX_DEFAULT
 	release
 	end
 
@@ -387,8 +414,22 @@ SlateportCity_Harbor_EventScript_ChooseDifferentTrade::
 
 SlateportCity_Harbor_EventScript_TradedScanner::
 	msgbox SlateportCity_Harbor_Text_ThisWillHelpResearch, MSGBOX_DEFAULT
+	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, SlateportCity_Harbor_EventScript_RouteUnderstood
+	msgbox SlateportCity_Harbor_Text_SealedChamberRoute, MSGBOX_DEFAULT
 	release
 	end
+
+SlateportCity_Harbor_EventScript_RouteUnderstood::
+	msgbox EmeraldChampions_Text_ThreeRuinsRoute, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_Harbor_Movement_ListenToScanner:
+	face_up
+	delay_16
+	face_right
+	delay_16
+	step_end
 
 SlateportCity_Harbor_Text_FerryServiceUnavailable:
 	.string "The ferry opens to TRAINERS with\n"
@@ -510,11 +551,14 @@ SlateportCity_Harbor_Text_FinishedMakingFerry:
 	.string "Please go for a short cruise on it!$"
 
 SlateportCity_Harbor_Text_ScannerReport:
-	.string "This SCANNER follows a signal\n"
-	.string "through the seabed. We can find\l"
-	.string "where the submarine stopped.\p"
-	.string "There! ROUTE 128. Mark that inlet.\n"
-	.string "You'll need DIVE to follow it.\p"
+	.string "STERN: There! The submarine is\n"
+	.string "beneath the southeastern sea.\p"
+	.string "But the old undersea passages\n"
+	.string "send back several echoes. I can't\l"
+	.string "tell which entrance reaches it.\p"
+	.string "The SEALED CHAMBER names three\n"
+	.string "surviving route accounts. Their\l"
+	.string "directions can resolve the echoes.\p"
 	.string "Your report earns ¥12,000.\n"
 	.string "Choose one of my deep-sea finds\l"
 	.string "as a further thank-you.$"
@@ -541,5 +585,19 @@ SlateportCity_Harbor_Text_HandedScannerToStern:
 
 SlateportCity_Harbor_Text_ThisWillHelpResearch:
 	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
-	.string "The signal ends on ROUTE 128.\l"
-	.string "DIVE at the inlet to follow it.$"
+	.string "The scan and the old accounts\l"
+	.string "belong together.$"
+
+SlateportCity_Harbor_Text_SealedChamberRoute:
+	.string "From MOSSDEEP, SURF south through\n"
+	.string "ROUTES 127 and 128, then west on\l"
+	.string "129, 130 and 131 to PACIFIDLOG.\p"
+	.string "Heal there before following the\n"
+	.string "westward currents on ROUTES 132\l"
+	.string "and 133 toward ROUTE 134.\p"
+	.string "DIVE at its deep-water opening.\n"
+	.string "Follow the underwater passage,\l"
+	.string "then surface into SEALED CHAMBER.\p"
+	.string "Bring a DIG-capable partner.\n"
+	.string "Use DIG at the rear inscription,\l"
+	.string "then read the inner room's wall.$"

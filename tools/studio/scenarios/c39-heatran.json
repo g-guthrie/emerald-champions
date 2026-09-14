@@ -1,0 +1,37 @@
+{
+  "name": "c39-heatran \u2014 native reveal",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_CAUGHT_HEATRAN": true
+    },
+    "items": {
+      "ITEM_MAGMA_STONE": 1
+    }
+  },
+  "warp": {
+    "map": "ScorchedSlab_HeatransRoom",
+    "x": 10,
+    "y": 15,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "hold": "UP",
+      "frames": 16,
+      "label": "Stone reacts"
+    },
+    {
+      "tap": "A",
+      "every": 90,
+      "frames": 2200,
+      "until": "idle",
+      "label": "Heatran revealed"
+    }
+  ],
+  "expect": {
+    "ready": true
+  }
+}

@@ -39,18 +39,19 @@ AncientTomb_EventScript_HideRegiEntrance::
 AncientTomb_EventScript_CaveEntranceMiddle::
 	lockall
 	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_BigHoleInWall
-	braillemsgbox AncientTomb_Braille_ShineInTheMiddle
+	msgbox AncientTomb_Text_PuzzleDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
 AncientTomb_EventScript_BigHoleInWall::
-	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+	call AncientTomb_EventScript_ReadAccount
 	releaseall
 	end
 
 AncientTomb_EventScript_CaveEntranceSide::
 	lockall
-	braillemsgbox AncientTomb_Braille_ShineInTheMiddle
+	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_BigHoleInWall
+	msgbox AncientTomb_Text_PuzzleDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -90,3 +91,23 @@ AncientTomb_EventScript_RanFromRegisteel::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+
+AncientTomb_EventScript_ReadAccount::
+	msgbox AncientTomb_Text_RouteAccount, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	return
+
+AncientTomb_Text_PuzzleDirections:
+	.string "Stand in the middle of this room\n"
+	.string "and use your licensed FLASH.\p"
+	.string "The FLASH hiker is at GRANITE\n"
+	.string "CAVE's entrance, by DEWFORD. The\l"
+	.string "STONE BADGE permits its use.$"
+
+AncientTomb_Text_RouteAccount:
+	.string "The final account describes an\n"
+	.string "underwater cave where the path\l"
+	.string "rises above the waterline.\p"
+	.string "The sky guardian quieted the\n"
+	.string "land and sea. Its tower stood\l"
+	.string "above the southern ocean.$"

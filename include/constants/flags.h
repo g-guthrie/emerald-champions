@@ -1548,8 +1548,8 @@
 #define FLAG_EC_STEVEN_RESEARCH_CONCLUSION              (SYSTEM_FLAGS + 0xAB)
 #define FLAG_EC_ROUTE114_ROD_GIFT                    (SYSTEM_FLAGS + 0xAC)
 #define FLAG_EC_ROUTE118_ROD_GIFT                    (SYSTEM_FLAGS + 0xAD)
-#define FLAG_UNUSED_0x90E                           (SYSTEM_FLAGS + 0xAE) // Unused Flag
-#define FLAG_UNUSED_0x90F                           (SYSTEM_FLAGS + 0xAF) // Unused Flag
+#define FLAG_EC_REPORT_C45_COMPLETE                 (SYSTEM_FLAGS + 0xAE)
+#define FLAG_EC_SURVEY_FLIGHT_ARRIVAL                (SYSTEM_FLAGS + 0xAF)
 #define FLAG_UNUSED_0x910                           (SYSTEM_FLAGS + 0xB0) // Unused Flag
 #define FLAG_UNUSED_0x911                           (SYSTEM_FLAGS + 0xB1) // Unused Flag
 #define FLAG_UNUSED_0x912                           (SYSTEM_FLAGS + 0xB2) // Unused Flag

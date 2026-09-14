@@ -66,6 +66,7 @@ async def run(spec,out):
             hold=keys(step.get("hold",step.get("keys",0)));press=keys(step.get("press",0))
             tap=keys(step.get("tap",0));every=max(2,int(step.get("every",90)))
             active_seen=not bool(studio.state[0])
+            idle_frames=0
             for f in range(frames):
                 mask=hold|(press if f==0 else 0)|(tap if f%every==0 else 0)
                 studio.ingest(await studio.core.tick(mask,frames=1))
@@ -73,14 +74,29 @@ async def run(spec,out):
                 total+=1
                 if total in markers:recorder.mark(markers[total],studio.packet)
                 active_seen|=not bool(studio.state[0])
+                idle_frames=idle_frames+1 if studio.state[0] else 0
                 if f>=int(step.get("min_frames",30)):
                     condition=step.get("until")
-                    if condition=="idle" and active_seen and studio.state[0]:break
+                    if condition=="idle" and active_seen and idle_frames>=12:break
                     if condition=="battle" and studio.state[1]:break
                     if condition=="dialogue" and studio.state[11] and studio.state[30]!=start_state["text_serial"]:break
             if step.get("label"):recorder.mark(step["label"],studio.packet)
         final=packet_state(studio.packet,recorder.decoder)
         final["map"]=studio.current_map
+        query_values={}
+        for name,query in spec.get("queries",{}).items():
+            kind=int(query["kind"])
+            ident=query.get("id",0)
+            if isinstance(ident,str):ident=studio.cat.constants[ident]
+            syms=studio.core.syms
+            await studio.core.write([(syms["gEcHeadlessCampaignQueryKind"],kind),
+                                     (syms["gEcHeadlessCampaignQueryId"],int(ident))])
+            for _ in range(3):
+                studio.ingest(await studio.core.tick(frames=1))
+                recorder.observe(studio.packet,0)
+            raw=await studio.core.rpc(4,server.words(syms["gEcHeadlessCampaignQueryValue"],4))
+            query_values[name]=struct.unpack("<I",raw)[0]
+        final["queries"]=query_values
         failures=[]
         for field,wanted in spec.get("expect",{}).items():
             if field=="contains_text":

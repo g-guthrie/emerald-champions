@@ -89,7 +89,7 @@ SealedChamber_OuterRoom_EventScript_BrailleComma::
 SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall::
 	lockall
 	goto_if_set FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_HoleInWall
-	braillemsgbox SealedChamber_OuterRoom_Braille_DigHere
+	msgbox SealedChamber_OuterRoom_Text_DigDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -100,7 +100,13 @@ SealedChamber_OuterRoom_EventScript_HoleInWall::
 
 SealedChamber_OuterRoom_EventScript_BrailleDigHere::
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_DigHere
+	msgbox SealedChamber_OuterRoom_Text_DigDirections, MSGBOX_DEFAULT
 	releaseall
 	end
 
+
+SealedChamber_OuterRoom_Text_DigDirections:
+	.string "Use DIG at this rear wall.\p"
+	.string "Go through the opening and read\n"
+	.string "the far wall in the inner room.\l"
+	.string "Its account opens the three ruins.$"

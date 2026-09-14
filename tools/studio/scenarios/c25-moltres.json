@@ -1,0 +1,35 @@
+{
+  "name": "c25-moltres \u2014 native reveal",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_CAUGHT_MOLTRES": false
+    },
+    "items": {}
+  },
+  "warp": {
+    "map": "EmberPath",
+    "x": 21,
+    "y": 15,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Hot air at the roost"
+    },
+    {
+      "tap": "A",
+      "every": 90,
+      "frames": 1800,
+      "until": "battle",
+      "label": "Moltres answers"
+    }
+  ],
+  "expect": {
+    "battle": true
+  }
+}

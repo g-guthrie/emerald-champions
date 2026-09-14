@@ -1,0 +1,39 @@
+{
+  "name": "C44 \u2014 Wreck Scanner recovery",
+  "start": {
+    "chapter": 3
+  },
+  "warp": {
+    "map": "AbandonedShip_HiddenFloorRooms",
+    "x": 16,
+    "y": 11,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 180,
+      "label": "Recover Scanner"
+    },
+    {
+      "tap": "A",
+      "every": 90,
+      "frames": 2600,
+      "until": "idle",
+      "label": "Stern destination"
+    }
+  ],
+  "queries": {
+    "scanner": {
+      "kind": 4,
+      "id": "ITEM_SCANNER"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "contains_text": "SLATEPORT HARBOR",
+    "queries": {
+      "scanner": 1
+    }
+  }
+}
