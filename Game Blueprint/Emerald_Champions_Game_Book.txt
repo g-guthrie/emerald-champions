@@ -261,7 +261,7 @@ Defeat Brawly, then return to Steven in his Granite Cave room to complete the le
 Retained exact contract:
 
 C13 MEGA STONE ACCESS
-Each of the99 item-based Mega Stones has exactly one authored acquisition source. Keep established world locations and remove overlapping trainer, story and starter gifts. Starter choices never create an additional stone entitlement. Charizardite X and Charizardite Y are different stones with their own individual locations. A full-storage retry belongs to the same original reward and keeps its original receipt.
+Each of the99 item-based Mega Stones has exactly one authored acquisition source. Keep established world locations and remove overlapping trainer, story and starter gifts. Starter choices never create an additional stone entitlement. Charizardite X and Charizardite Y are different stones with their own individual locations. A full-storage retry belongs to the same original reward and keeps its original receipt. PC RELEASE refuses a Pokémon holding a protected item, including a Mega Stone, and asks the player to remove it first; releasing the holder must never delete the finite stone. The existing PC field-move safeguards also count non-Egg species compatible with an unlocked license, across party and boxes; an empty battle-move slot is neither loss nor proof of that capability.
 
 PLAYER HANDOFF — Steven in Granite Cave after the Ring handoff:
 “Go west from Dewford into Dewford Meadow and enter the manor. Read the historian's account, then speak to the meadow warden with any Pokémon that knows Sing. The Jigglypuff inside the manor already know it.”

@@ -9,6 +9,7 @@
 #include "event_object_movement.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "field_move.h"
 #include "fldeff_misc.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -109,6 +110,7 @@ enum {
     MSG_ITEM_IS_HELD,
     MSG_CHANGED_TO_ITEM,
     MSG_CANT_STORE_MAIL,
+    MSG_REMOVE_PROTECTED_ITEM,
 };
 
 // IDs for how to resolve variables in the above messages
@@ -1080,6 +1082,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_ITEM_IS_HELD]         = {COMPOUND_STRING("{DYNAMIC 0} is now held."),   MSG_VAR_ITEM_NAME},
     [MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING("Changed to {DYNAMIC 0}."),    MSG_VAR_ITEM_NAME},
     [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("MAIL can't be stored!"),      MSG_VAR_NONE},
+    [MSG_REMOVE_PROTECTED_ITEM] = {COMPOUND_STRING("Remove its held item first."), MSG_VAR_NONE},
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate =
@@ -2557,6 +2560,10 @@ static void Task_OnSelectedMon(u8 taskId)
             {
                 sStorage->state = 4;
             }
+            else if (IsItemProtectedFromLoss(sStorage->displayMonItemId))
+            {
+                sStorage->state = 7;
+            }
             else
             {
                 PlaySE(SE_SELECT);
@@ -2628,6 +2635,11 @@ static void Task_OnSelectedMon(u8 taskId)
     case 4:
         PlaySE(SE_FAILURE);
         PrintMessage(MSG_PLEASE_REMOVE_MAIL);
+        sStorage->state = 6;
+        break;
+    case 7:
+        PlaySE(SE_FAILURE);
+        PrintMessage(MSG_REMOVE_PROTECTED_ITEM);
         sStorage->state = 6;
         break;
     case 6:
@@ -6502,22 +6514,22 @@ static void TrySetCursorFistAnim(void)
 }
 
 // If the player is on the listed map (or any map, if none is specified),
-// they may not release their last Pokémon that knows the specified move.
+// they may not release their last Pokémon capable of the specified field move.
 // This is to stop the player from softlocking themselves by not having
-// a Pokémon that knows a required field move.
+// a Pokémon capable of a required field move.
 struct
 {
     s8 mapGroup;
     s8 mapNum;
-    u16 move;
+    enum FieldMove fieldMove;
 } static const sRestrictedReleaseMoves[] =
 {
-    {MAP_GROUPS_COUNT, 0, MOVE_SURF},
-    {MAP_GROUPS_COUNT, 0, MOVE_DIVE},
-    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MOVE_STRENGTH},
-    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MOVE_ROCK_SMASH},
-    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_STRENGTH},
-    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_ROCK_SMASH},
+    {MAP_GROUPS_COUNT, 0, FIELD_MOVE_SURF},
+    {MAP_GROUPS_COUNT, 0, FIELD_MOVE_DIVE},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), FIELD_MOVE_STRENGTH},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), FIELD_MOVE_ROCK_SMASH},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), FIELD_MOVE_STRENGTH},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), FIELD_MOVE_ROCK_SMASH},
 };
 
 static void GetRestrictedReleaseMoves(u16 *moves)
@@ -6530,11 +6542,30 @@ static void GetRestrictedReleaseMoves(u16 *moves)
         || (sRestrictedReleaseMoves[i].mapGroup == gSaveBlock1Ptr->location.mapGroup
          && sRestrictedReleaseMoves[i].mapNum == gSaveBlock1Ptr->location.mapNum))
         {
-            *moves = sRestrictedReleaseMoves[i].move;
+            *moves = sRestrictedReleaseMoves[i].fieldMove;
             moves++;
         }
     }
-    *moves = MOVES_COUNT;
+    *moves = FIELD_MOVES_COUNT;
+}
+
+static u16 GetRestrictedReleaseCapabilities(struct BoxPokemon *mon)
+{
+    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    u16 capabilities = 0;
+
+    if (species == SPECIES_NONE || species == SPECIES_EGG)
+        return 0;
+    for (u32 i = 0; sStorage->restrictedMoveList[i] != FIELD_MOVES_COUNT; i++)
+    {
+        enum FieldMove fieldMove = sStorage->restrictedMoveList[i];
+        enum Move move = FieldMove_GetMoveId(fieldMove);
+
+        if (BoxMonKnowsMove(mon, move)
+            || (IsFieldMoveUnlocked(fieldMove) && SpeciesCanLearnFieldMove(species, move)))
+            capabilities |= 1u << i;
+    }
+    return capabilities;
 }
 
 static void InitCanReleaseMonVars(void)
@@ -6570,7 +6601,7 @@ static void InitCanReleaseMonVars(void)
     }
 
     GetRestrictedReleaseMoves(sStorage->restrictedMoveList);
-    sStorage->restrictedReleaseMonMoves = GetMonData(&sStorage->tempMon, MON_DATA_KNOWN_MOVES, (u8 *)sStorage->restrictedMoveList);
+    sStorage->restrictedReleaseMonMoves = GetRestrictedReleaseCapabilities(&sStorage->tempMon.box);
     if (sStorage->restrictedReleaseMonMoves != 0)
     {
         // Pokémon knows at least one restricted release move
@@ -6636,7 +6667,7 @@ static s8 RunCanReleaseMon(void)
             // Make sure party Pokémon isn't the one we're releasing first
             if (sStorage->releaseBoxId != TOTAL_BOXES_COUNT || sStorage->releaseBoxPos != i)
             {
-                knownMoves = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_KNOWN_MOVES, (u8 *)sStorage->restrictedMoveList);
+                knownMoves = GetRestrictedReleaseCapabilities(&gParties[B_TRAINER_PLAYER][i].box);
                 sStorage->restrictedReleaseMonMoves &= ~(knownMoves);
             }
         }
@@ -6661,7 +6692,7 @@ static s8 RunCanReleaseMon(void)
         // moves the release Pokémon knows
         for (i = 0; i < IN_BOX_COUNT; i++)
         {
-            knownMoves = GetAndCopyBoxMonDataAt(sStorage->releaseCheckBoxId, sStorage->releaseCheckBoxPos, MON_DATA_KNOWN_MOVES, (u8 *)sStorage->restrictedMoveList);
+            knownMoves = GetRestrictedReleaseCapabilities(GetBoxedMonPtr(sStorage->releaseCheckBoxId, sStorage->releaseCheckBoxPos));
             if (knownMoves != 0 && !(sStorage->releaseBoxId == sStorage->releaseCheckBoxId
                                   && sStorage->releaseBoxPos == sStorage->releaseCheckBoxPos))
             {
