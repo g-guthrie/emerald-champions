@@ -334,7 +334,7 @@ PLAYER HANDOFF — Wattson:
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 C20 — Verdanturf and Rusturf reunion
-Use the newly licensed Rock Smash route to reunite the separated couple and obtain the Strength license. This pays off the tunnel visited earlier. Return to the northern journey. Day Care, breeding, Chansey and local gifts are optional; no breeding assignment is introduced.
+Use the newly licensed Rock Smash route to reunite the separated couple and obtain the Strength license. Wattson names the southeastern Rock Smash house when that license is missing, then the Rusturf reunion before directing the player north; Route117 Galarian Farfetch'd supplies a nearby compatible partner. The tunneler gives the northern-route directions with Strength and repeats them at Wanda's house until the Meteor Falls encounter. This pays off the tunnel visited earlier. Return to the northern journey. Day Care, breeding, Chansey and local gifts are optional; no breeding assignment is introduced.
 
 Retained exact contract:
 Bind the existing Rusturf reunion/Strength-license handoff here, after the player has the Rock Smash license and Dynamo Badge. The license can be received now, but Strength field use remains locked until Flannery’s Heat Badge.

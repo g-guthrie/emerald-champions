@@ -79,12 +79,13 @@ MauvilleCity_Gym_EventScript_Wattson::
 	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, EmeraldChampions_Text_NeedTwoPokemon, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
-	goto_if_unset FLAG_RECEIVED_WATTSON_MANECTITE, MauvilleCity_Gym_EventScript_GiveManectite2
+	call_if_unset FLAG_RECEIVED_WATTSON_MANECTITE, MauvilleCity_Gym_EventScript_GiveManectite
+	goto_if_unset FLAG_RECEIVED_HM_STRENGTH, MauvilleCity_Gym_EventScript_ReunionHandoff
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
 	goto_if_set FLAG_BADGE04_GET, MauvilleCity_Gym_EventScript_WattsonJourneyContinues
 	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MauvilleCity_Gym_EventScript_WattsonLavaridge
 	goto_if_set FLAG_MET_ARCHIE_METEOR_FALLS, MauvilleCity_Gym_EventScript_WattsonMtChimney
-	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
+	call MauvilleCity_Gym_EventScript_NextNorthernStop
 	release
 	end
 
@@ -123,12 +124,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
-	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-MauvilleCity_Gym_EventScript_GiveManectite2::
-	call MauvilleCity_Gym_EventScript_GiveManectite
+	call MauvilleCity_Gym_EventScript_NextNorthernStop
 	release
 	end
 
@@ -456,3 +452,39 @@ MauvilleCity_Gym_EventScript_WattsonJourneyContinues::
 	msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_DEFAULT
 	release
 	end
+
+MauvilleCity_Gym_EventScript_ReunionHandoff::
+	call MauvilleCity_Gym_EventScript_NextNorthernStop
+	release
+	end
+
+MauvilleCity_Gym_EventScript_NextNorthernStop::
+	goto_if_unset FLAG_RECEIVED_HM_ROCK_SMASH, MauvilleCity_Gym_EventScript_FindRockSmash
+	goto_if_unset FLAG_RECEIVED_HM_STRENGTH, MauvilleCity_Gym_EventScript_FindStrength
+	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
+	return
+MauvilleCity_Gym_EventScript_FindRockSmash::
+	msgbox MauvilleCity_Gym_Text_FindRockSmash, MSGBOX_DEFAULT
+	return
+MauvilleCity_Gym_EventScript_FindStrength::
+	msgbox MauvilleCity_Gym_Text_FindStrength, MSGBOX_DEFAULT
+	return
+
+MauvilleCity_Gym_Text_FindRockSmash:
+	.string "Visit the ROCK SMASH man in\n"
+	.string "MAUVILLE's southeastern house.\p"
+	.string "His license and your DYNAMO BADGE\n"
+	.string "let a compatible partner break rocks.\p"
+	.string "Galarian FARFETCH'D on ROUTE 117\n"
+	.string "can help. Head west to VERDANTURF and\l"
+	.string "reunite the couple in RUSTURF TUNNEL.$"
+MauvilleCity_Gym_Text_FindStrength:
+	.string "Head west along ROUTE 117 to\n"
+	.string "VERDANTURF. Enter RUSTURF TUNNEL.\p"
+	.string "Use ROCK SMASH on the rocks\n"
+	.string "separating the couple there.\p"
+	.string "Galarian FARFETCH'D can do it.\n"
+	.string "Find one in ROUTE 117's grass.\p"
+	.string "The tunneler will give you STRENGTH.\p"
+	.string "Then return to MAUVILLE and head\n"
+	.string "north on ROUTE 111.$"
