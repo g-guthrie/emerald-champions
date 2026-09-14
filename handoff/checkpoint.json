@@ -181,7 +181,7 @@
     "TRAINER_JOHANNA",
     "TRAINER_SIMON"
   ],
-  "immediate_plan": "Publish synchronized source/book/docs. Collaborative team reviews reach battle28 (Rustboro Gym); continue after the Gym when asked. Joey16 remains on hold. Earned Dwayne experiment and export delivery remain paused.",
+  "immediate_plan": "Build and verify Emerald Studio in the Codex browser. Team review, earned C15 play and trainer-export delivery remain paused.",
   "repel_spray": "off",
   "poke_vial_charges": 1,
   "party_order": [
@@ -247,7 +247,7 @@
     ]
   },
   "evidenced_unique_trainer_clears": 41,
-  "active_work_mode": "Collaborative team review through battle28; all approved revisions synchronized. Roxanne Mega Aerodactyl/Tailwind, no Trick Room. Opening economy through battle16 repaired and scoped native checks pass.",
+  "active_work_mode": "emerald_studio_local_browser_development",
   "reviewed_through_battle": 28,
   "review_holds": [
     "Joey16"

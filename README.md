@@ -15,9 +15,22 @@ Start with [the current checkpoint](docs/CONTINUE.md).
 | Earned playthrough | **C15, Medium, cap 24.** 41 distinct trainer wins are evidenced; the paused Dwayne retest save contains 40 clears. Brawly and the manor song are complete. |
 | Verification | Production ROM builds and passes release gates. Focused Mega reveal/eligibility tests and native reward-dialogue checks pass. Revised team levels remain provisional; full-game balance and acceptance are unfinished. |
 
-**What we are doing now:** reviewing teams with the user, applying approved
-composition/AI/level changes, and reconciling the book and economy. The earned
-playthrough and trainer-export delivery are paused at the user’s request.
+**What we are doing now:** building **Emerald Studio**, a local browser workspace
+backed by native mGBA. Start it with:
+
+~~~sh
+python3 tools/studio/cli.py start
+~~~
+
+Open the printed localhost URL in the Codex browser. Studio supports live
+play/audio, NPC source editing and rebuild/return, map navigation, party
+preparation, native trainer tests, and build-bound bookmarks. Its Library adds
+headless scene replay, automatic contact sheets, before/after comparisons, NPC
+dialogue search, sprite atlases and source history. Install the Codex skill with
+`python3 tools/studio/install_skill.py`.
+See [verification](docs/VERIFICATION.md) for setup and supported chapter fixtures.
+The collaborative team review, earned playthrough and trainer-export delivery
+are paused at the user’s request.
 The next review starts after Rustboro Gym; do not silently resume the Dwayne
 experiment or replace its preserved save with a synthetic fixture.
 

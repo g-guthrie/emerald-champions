@@ -1,0 +1,10 @@
+{
+  "name": "Oldale — Vial conversation",
+  "start": {"chapter": 3},
+  "warp": {"map": "OldaleTown_PokemonCenter_1F", "x": 12, "y": 7, "facing": 2},
+  "steps": [
+    {"press": "A", "frames": 120, "label": "Vial introduction"},
+    {"tap": "A", "every": 90, "frames": 1200, "until": "idle", "label": "Conversation complete"}
+  ],
+  "expect": {"map": "OldaleTown_PokemonCenter_1F", "x": 12, "y": 7, "ready": true, "contains_text": "VIAL"}
+}

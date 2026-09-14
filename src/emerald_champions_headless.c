@@ -1,4 +1,6 @@
 #include "global.h"
+#include "emerald_champions_studio.h"
+#include "reload_save.h"
 #include "money.h"
 
 #if EC_HEADLESS_FIXTURES
@@ -1154,6 +1156,7 @@ static bool32 IsHeadlessSummaryStateObserved(void)
 
 void EmeraldChampionsHeadlessObserve(void)
 {
+    EmeraldChampionsStudioPoll();
     EmeraldChampionsAgentPrepPoll();
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
      && (gEcHeadlessFixtureParam == 275 || gEcHeadlessFixtureParam == 276)
@@ -1966,7 +1969,34 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         return;
     }
 
+    if (scenario == EC_HEADLESS_SCENARIO_STUDIO_RESUME)
+    {
+        ReloadSave();
+        gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;
+        return;
+    }
     PrepareHeadlessNewGame();
+    if (scenario == EC_HEADLESS_SCENARIO_STUDIO_NEW)
+    {
+        // An explicitly synthetic playground. Battles always resolve natively.
+        gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 14, OTID_STRUCT_PLAYER_ID);
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 14, OTID_STRUCT_PLAYER_ID);
+        CalculatePlayerPartyCount();
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE);
+        if (gEcHeadlessFixtureParam == 4)
+        {
+            VarSet(VAR_PETALBURG_CITY_STATE, 1);
+            VarSet(VAR_PETALBURG_GYM_STATE, 0);
+            LoadHeadlessMap(MAP_PETALBURG_CITY_GYM, 4, 108);
+        }
+        else if (gEcHeadlessFixtureParam == 7)
+            LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, 5, 4);
+        else
+            LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 6);
+        return;
+    }
 
     if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY
      || scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC)

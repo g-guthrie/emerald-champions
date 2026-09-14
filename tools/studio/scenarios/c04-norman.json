@@ -1,0 +1,28 @@
+{
+  "name": "C04 \u2014 Norman and Wally choreography",
+  "start": {
+    "chapter": 4
+  },
+  "steps": [
+    {
+      "hold": "UP",
+      "frames": 1
+    },
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "Norman greeting"
+    },
+    {
+      "tap": "A",
+      "every": 120,
+      "frames": 3600,
+      "label": "Catch tutorial begins",
+      "until": "battle"
+    }
+  ],
+  "expect": {
+    "battle": true,
+    "map": "Route102"
+  }
+}

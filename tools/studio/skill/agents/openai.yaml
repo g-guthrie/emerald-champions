@@ -1,0 +1,6 @@
+interface:
+  display_name: "Emerald Studio"
+  short_description: "Develop and visually test native Emerald game scenes"
+  default_prompt: "Use $emerald-studio to inspect, change and replay this game scene with a contact sheet."
+policy:
+  allow_implicit_invocation: true

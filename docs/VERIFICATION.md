@@ -1,5 +1,106 @@
 # Build, play, inspect and verify
 
+## Emerald Studio in the Codex browser
+
+Requires native libmGBA headers/library, a working ARM toolchain and Python3
+with venv support. native_tools.py discovers Homebrew mGBA; set MGBA_PREFIX
+elsewhere. The launcher creates an isolated .venv-studio with the pinned
+aiohttp/Pillow dependencies and builds the development ROM if missing.
+
+~~~sh
+python3 tools/studio/cli.py start
+python3 tools/studio/cli.py status
+python3 tools/studio/cli.py command '{"op":"checkpoint","label":"Before my edit"}'
+python3 tools/studio/cli.py command '{"op":"build"}'
+.venv-studio/bin/python tools/studio/verify.py
+~~~
+
+Open the printed localhost URL in Codex's browser. Arrow keys move, Z/X are
+A/B, Enter is Start, Shift is Select, Q/E are L/R. Click Enable sound once.
+The native process runs at GBA frame timing and sends uncompressed RGBA and
+32768Hz stereo PCM over a local socket. Video has at most one unacknowledged
+frame per client; audio discards stale backlog. Fast-forward is silent.
+The server binds loopback only, checks Host and requires a per-launch token
+for commands/WebSocket connections. No remote service or API key is involved.
+
+Map overview renders authored tiles with object/warp/player markers. Shift-click
+a clear tile to warp; select an NPC to inspect dialogue and stand beside them.
+Dialogue changes update the actual script plus one current record in the Game
+Book, run the existing book import, then rebuild. Failed compilation retains
+the running game. Build logs and edit backups are under work/studio.
+
+Rebuild/return records the current state, falls back to the pre-interaction
+checkpoint when needed, requests a native save at an idle field boundary, and
+exports actual flash data. Flash programming needs hundreds of emulated frames;
+the acknowledgment loop runs those without wall-clock pacing. A separate new
+core clean-boots the new ROM and confirms the restored position before replacing
+the old core. Changes to the checked save-layout headers require a new sandbox.
+Bookmarks restore their original ROM/ELF and state together; they never inject
+an old raw state into new code. Work files preserve the paused earned campaign.
+
+Party preparation reuses the game's first Doubles preset and per-species cap.
+Trainer tests reuse the native debug-battle lifecycle: no automatic victory,
+NPC postbattle script, or earned receipt. Hoenn rival seed slots are used by this
+direct launcher; use the real NPC interaction for regional starter substitution.
+Fresh chapter fixtures currently cover C03 Oldale, C04 Norman/Wally and C07
+Roxanne. They are synthetic setups, not full campaign prerequisite reconstruction.
+
+verify.py runs in a separate work/studio/verification session. It checks real
+movement/checkpoint restore, preparation, difficulty, tile/facing warp, native
+save/clean-boot preservation, non-silent audio, trainer entry/retry and C04 setup.
+Its result.json records the exact ROM and sampled native frame costs. Browser
+layout/input/dialogue checks supplement these tests. No full-game performance
+or difficulty claim follows from an idle-scene timing sample.
+
+## Scene recordings, dialogue cohesion and agent workflow
+
+Install the personal skill with `python3 tools/studio/install_skill.py`. Its
+repository-owned source is tools/studio/skill/SKILL.md; the installer records
+this checkout for discovery. The skill supports both direct local commands
+and browser interaction without requiring external code indexing.
+
+Studio's Library contains scene recordings/contact sheets, saved situations,
+a searchable NPC dialogue index, source sprite sheets and Git/local-build history.
+Record captures exact inputs and native frames. Mark moment creates named anchors;
+Stop produces paginated contact sheets, original PNGs with hashes, a lossless
+motion preview and the input/state trace. A bounded rolling buffer also supports
+short same-build rewind. Built-in examples:
+
+~~~sh
+.venv-studio/bin/python tools/studio/run_scene.py tools/studio/scenarios/oldale-vial.json --out work/studio/scenes/new-vial-run
+.venv-studio/bin/python tools/studio/run_scene.py tools/studio/scenarios/c04-norman.json --out work/studio/scenes/new-c04-run
+python3 tools/studio/cli.py command '{"op":"dialogue.export"}'
+python3 tools/studio/cli.py command '{"op":"dialogue.search","query":"Briney"}'
+python3 tools/studio/cli.py command '{"op":"scene.replay","id":"RECORDING_ID","mode":"exact"}'
+~~~
+
+Use a fresh output directory per run. Command JSON can be supplied with
+`command --file command.json`. A scene.run command starts a separate native
+worker so the user can continue playing. Poll scenes for completion; failed
+expectations still produce pictures. Recipes have a start chapter or saved
+recording, optional explicit setup/party/difficulty/warp, and bounded steps.
+Steps support press, hold, periodic tap/every, frames, labels, and until
+idle/dialogue/battle. Exact replay uses the old ROM and state; latest replay
+uses a compatible portable battery save and the newly built ROM. Neither
+replays an old machine state on new code. Position in a changed map remains
+subject to actual collision/event review.
+
+Compare pairs by marker labels, falling back to relative frame timing with
+that limitation recorded. Pixel differences are diagnostic, not a quality
+score. Always inspect the sheets. Source sprites/map previews are labeled
+separately from native screenshots. The runtime observer reports active actors,
+facing, movement flags and the text buffer submitted to the window-zero printer;
+it does not certify that every page was displayed or read. Latin decoding uses
+the first charmap definition; control bytes remain annotations.
+
+The generated dialogue index currently links 2,365 Hoenn NPC bindings to 3,976
+referenced text blocks across 540 maps. It includes conditional branches and
+reports native-handler boundaries. The combined reading copy groups local text
+by map and shared services separately. Duplicate-text groups are review
+candidates, not deletion instructions. Build receipts preserve the Git base,
+workspace patch, changed/untracked source archive, ROM and ELF; they are local
+history and do not publish experimental edits automatically.
+
 Run from the repository root. This is the native GBA engine using libmGBA for
 headless play; no browser remake or paid model/API is required. The active save,
 next work and scope are in `CONTINUE.md`. Do not run a blanket suite before
@@ -469,3 +570,15 @@ work/contact-sheets/rustboro-mega-reveal-native.png. Neither is an earned
 clear or difficulty benchmark. Only Roxanne authors MEGA_REVEAL; native
 eligibility remains required. Production build/gates logs:
 work/rustboro-final-release.log and work/rustboro-final-release-gates.log.
+
+Studio verification on September14: thirteen native integration checks passed
+(work/studio/verification/result.json). The Oldale Vial recording's exact replay
+matched final pixels, and replay on the subsequent ROM clean-restored its portable
+save. The C04 recipe captured Norman/Wally movement through Route102 tutorial
+battle entry. Live CLI recording, contact-sheet output and an independent replay
+also passed; browser dialogue search returned the expected Briney handoffs.
+The normal production build and release gates passed with USE_LTO_ON_RELEASE=0
+(work/studio/release-final.log, release-gates.log). LTO was disabled for this build
+after the Mac exhausted disk space; failed linker temporary files were removed.
+The normal ELF contains no Studio bridge symbols. Idle native frame timing was
+below2ms in the measured samples; this is not a worst-case campaign benchmark.

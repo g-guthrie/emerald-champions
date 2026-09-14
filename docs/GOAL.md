@@ -1,7 +1,8 @@
 # Full unfinished development goal
 
-Current work is the user-led team review through battle28 and GitHub
-synchronization. The C15 Dwayne experiment and export delivery remain paused;
+Current work is Emerald Studio, the user-requested native mGBA development
+workspace in the Codex browser. Team review through battle28, the C15 Dwayne
+experiment and export delivery remain paused;
 see `CONTINUE.md`. This long-term goal does not override that pause.
 
 When asked to continue this project, start/resume a goal with the objective below.

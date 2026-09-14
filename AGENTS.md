@@ -1,5 +1,10 @@
 # Working on Emerald Champions v4
 
+Current user-directed work is Emerald Studio (tools/studio), a local Codex-browser
+development workspace using native libmGBA. Team reviews, the earned playthrough
+and export delivery are paused. Studio fixtures and assisted sandbox changes do
+not alter or advance the preserved earned run. See docs/CONTINUE.md.
+
 Read `docs/CONTINUE.md`, `docs/GOAL.md` and the relevant parts of the single
 canonical `Game Blueprint/Emerald_Champions_Game_Book.txt` before working.
 This repository root is the active native pokeemerald-expansion implementation.
