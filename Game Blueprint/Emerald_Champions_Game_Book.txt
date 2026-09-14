@@ -600,7 +600,7 @@ PLAYER HANDOFF — Wally after the final battle; League entrance attendant:
 Repeat availability: the same existing interaction keeps the current direction until its destination event is completed; when it cannot remain, use the existing departure interaction as described in the navigation contract.
 
 C50 — Champion
-Face the Elite Four and Wallace at the unchanged cap 96. The teams test the coordination and counterplay developed throughout the adventure. Becoming Champion raises the cap to 100. The ending recognizes the people helped and the places visited. Optional exhibitions, captures, economies and collections remain available without an unfinished mandatory research track appearing after the credits.
+Face the Elite Four and Wallace at the unchanged cap 96. The teams test the coordination and counterplay developed throughout the adventure. Becoming Champion raises the cap to 100. The ending recognizes the people helped and the places visited. If the old homecoming ticket scene runs while its paper is still pending, Bag/PC failure finishes the visit without setting the delivery receipt. A Center nurse can retry the earned paper afterward; existing Bag or PC ownership counts as delivered without another copy. Optional exhibitions, captures, economies and collections remain available without an unfinished mandatory research track appearing after the credits.
 
 PLAYER HANDOFF — Ending and post-Champion existing contacts:
 “You are Champion and the required story is complete. Remaining legendary catches, exhibitions, the Circuit and collection activities are optional. Each offered activity names its actual location and entry requirement; none is described as unfinished mandatory research.”
