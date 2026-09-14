@@ -533,7 +533,7 @@ def filter_build_conditionals(text, *, is_frlg=False, source="", unresolved=None
     return "".join(output)
 
 
-def derive_script_contexts(root, maps, *, diagnostics=None, is_frlg=False):
+def derive_script_contexts(root, maps, *, diagnostics=None, is_frlg=False, flow=None):
     """Associate labels with possible map-entry reachability, independent of file.
 
     This is a control-flow overapproximation: flag/variable conditions and switch
@@ -681,6 +681,8 @@ def derive_script_contexts(root, maps, *, diagnostics=None, is_frlg=False):
             following = successors.get((label, source))
             if falls_through and following:
                 graph[label].add(following)
+    if flow is not None:
+        flow.update(blocks=blocks, graph=graph)
     contexts = {label: set() for label in graph}
     for map_name, data in maps.items():
         script_owner = data.get("shared_scripts_map", map_name)

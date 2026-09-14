@@ -183,23 +183,26 @@ LavaridgeTown_Gym_1F_EventScript_GymStatue::
 	end
 
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice:
-	.string "FLANNERY's sun strengthens Fire\n"
-	.string "attacks and weakens Water\l"
-	.string "attacks.\p"
-	.string "LILLIGANT can use AFTER YOU to\n"
-	.string "let slow TORKOAL attack sooner.\p"
-	.string "Weather control, disruption and\n"
-	.string "careful damage all offer\l"
-	.string "different ways to challenge that\l"
-	.string "partnership.$"
+	.string "The steam forms MISTY TERRAIN.\n"
+	.string "It prevents new status problems\l"
+	.string "for Pokémon on the ground.\p"
+	.string "Sun and rain are separate!\n"
+	.string "They won't clear the mist.\p"
+	.string "Change the terrain or clear it\n"
+	.string "with a move like DEFOG.\p"
+	.string "Flying Pokémon aren't protected,\n"
+	.string "but terrain seeds still work!\p"
+	.string "FLANNERY uses both sun and mist.\n"
+	.string "Watch LILLIGANT's AFTER YOU\l"
+	.string "bring TORKOAL forward!$"
 
 LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:
 	.string "Yow! That was a scorching-hot battle!$"
 
 LavaridgeTown_Gym_1F_Text_ColeIntro:
-	.string "Owowowowow!\n"
-	.string "Yikes, it's hot!\p"
-	.string "Contact can burn more than pride!$"
+	.string "Owowowowow! It's hot!\p"
+	.string "My partner keeps you busy\n"
+	.string "while COALOSSAL lays its tar!$"
 
 LavaridgeTown_Gym_1F_Text_ColeDefeat:
 	.string "I'm blinded by sweat in my eyes…$"
@@ -211,10 +214,10 @@ LavaridgeTown_Gym_1F_Text_ColePostBattle:
 	.string "your joints.$"
 
 LavaridgeTown_Gym_1F_Text_AxleIntro:
-	.string "I'm trying to relieve my stress.\n"
-	.string "Don't come along and stress me out!\p"
-	.string "ARMAROUGE's WEAKNESS POLICY can\n"
-	.string "turn a weakness into power!$"
+	.string "The mist keeps this room calm.\n"
+	.string "The lava is another matter!\p"
+	.string "My partners turn friendly Fire\n"
+	.string "into something stronger!$"
 
 LavaridgeTown_Gym_1F_Text_AxleDefeat:
 	.string "I hope FLANNERY flames you good!$"
@@ -225,13 +228,10 @@ LavaridgeTown_Gym_1F_Text_AxlePostBattle:
 	.string "hot sand, it tuckers you out…$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganIntro:
-	.string "You must be getting tired by now.\n"
-	.string "You'd like to rest in the hot sand,\l"
-	.string "wouldn't you?\p"
-	.string "But you should know that maintaining\n"
-	.string "your willpower is an important ability\l"
-	.string "for all TRAINERS.\p"
-	.string "My own poison is my fuel!$"
+	.string "First we take what the mist\n"
+	.string "offers. Then we spin it away!\p"
+	.string "That's when FLAREON's poison\n"
+	.string "becomes its fuel!$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganDefeat:
 	.string "Play with fire, and be burned…$"
@@ -257,9 +257,8 @@ LavaridgeTown_Gym_1F_Text_GeraldPostBattle:
 	.string "its partners!$"
 
 LavaridgeTown_Gym_1F_Text_DanielleIntro:
-	.string "Um…\n"
-	.string "Okay, I'll battle with you.\p"
-	.string "Dance, and ORICORIO dances too!$"
+	.string "These flames know the steps.\n"
+	.string "One dance can light up two acts!$"
 
 LavaridgeTown_Gym_1F_Text_DanielleDefeat:
 	.string "Oh, but you're too strong.$"
@@ -269,9 +268,10 @@ LavaridgeTown_Gym_1F_Text_DaniellePostBattle:
 	.string "TRAINER just like FLANNERY.$"
 
 LavaridgeTown_Gym_B1F_Text_JaceIntro:
-	.string "Come on, get with it!\n"
-	.string "Let's go before my feelings cool!\p"
-	.string "SALAZZLE's TOXIC can poison STEEL!$"
+	.string "A little ventilation changes\n"
+	.string "everything in this room.\p"
+	.string "Clear the mist, and my ghosts\n"
+	.string "have new ways to haunt you!$"
 
 LavaridgeTown_Gym_B1F_Text_JaceDefeat:
 	.string "It's so hot, and yet my heart is\n"
@@ -283,10 +283,10 @@ LavaridgeTown_Gym_B1F_Text_JacePostBattle:
 	.string "against our LEADER.$"
 
 LavaridgeTown_Gym_B1F_Text_JeffIntro:
-	.string "See how the flames blaze wildly?\n"
-	.string "They flare in anticipation of my win!\p"
-	.string "At full health, TALONFLAME's\n"
-	.string "Flying moves gain priority!$"
+	.string "My flyer can use a MISTY SEED\n"
+	.string "without touching the ground!\p"
+	.string "Once that seed is gone,\n"
+	.string "watch how fast it moves!$"
 
 LavaridgeTown_Gym_B1F_Text_JeffDefeat:
 	.string "Something didn't go right.$"
@@ -297,10 +297,9 @@ LavaridgeTown_Gym_B1F_Text_JeffPostBattle:
 	.string "…Don't even think about trying it!$"
 
 LavaridgeTown_Gym_B1F_Text_EliIntro:
-	.string "As much as I love mountains,\n"
-	.string "I especially love volcanoes.\p"
-	.string "CLAYDOL avoids Ground attacks.\n"
-	.string "BRONZONG can take the heat!$"
+	.string "CAMERUPT follows ORANGURU's\n"
+	.string "rhythm in this room.\p"
+	.string "One blast can become two!$"
 
 LavaridgeTown_Gym_B1F_Text_EliDefeat:
 	.string "Well, it seems my team has\n"
@@ -316,9 +315,9 @@ LavaridgeTown_Gym_1F_Text_FlanneryIntro:
 	.string "LEADER!\p"
 	.string "MT. CHIMNEY taught me that power\n"
 	.string "needs timing.\p"
-	.string "LILLIGANT and TORKOAL are ready\n"
-	.string "to turn up the heat. Show us your\l"
-	.string "best!$"
+	.string "Sun above, mist below.\n"
+	.string "LILLIGANT and TORKOAL are ready\l"
+	.string "to turn up the heat!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryDefeat:
 	.string "That was a blazing battle!\p"
@@ -330,12 +329,13 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 	.string "from FLANNERY.$"
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
-	.string "The HEAT BADGE lets your LEVELER train\n"
-	.string "a party up to Lv. 45.\p"
-	.string "It also enables STRENGTH outside\n"
-	.string "of battle.\p"
-	.string "This is a token of my appreciation.\n"
+	.string "Your normal training cap is\n"
+	.string "now Lv. 44!\p"
+	.string "The HEAT BADGE also allows\n"
+	.string "STRENGTH outside battle.\p"
+	.string "This is a token of my thanks.\n"
 	.string "Don't be shy about taking it!$"
+
 LavaridgeTown_Gym_1F_Text_ExplainCameruptite:
 	.string "Cameruptite lets Camerupt Mega Evolve.\n"
 	.string "Let it hold the stone in battle.$"

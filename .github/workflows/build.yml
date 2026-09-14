@@ -51,8 +51,14 @@ jobs:
             pkg-config \
             python3 python3-pil fonts-dejavu-core
 
-      - name: Check the canonical book and trainer materialization
-        run: python3 scripts/emerald_champions_teams.py --book 'Game Blueprint/Emerald_Champions_Game_Book.txt' --check
+      - name: Check authored trainer materialization
+        run: python3 scripts/emerald_champions_teams.py --check
+
+      - name: Check source-reference extraction regressions
+        run: python3 -m unittest discover -s tests -p 'test_*reference.py' -v
+
+      - name: Check generated Game Book reference
+        run: python3 scripts/sync_game_book.py --check
 
       - name: Cache native build tools
         uses: actions/cache@v6

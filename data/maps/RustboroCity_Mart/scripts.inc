@@ -11,8 +11,8 @@ RustboroCity_Mart_EventScript_MoveSpecialist::
 	end
 
 RustboroCity_Mart_Text_MoveSpecialist:
-	.string "I sell evolution stones for ¥3000 each.\n"
-	.string "Try one on your POKéMON to check!\p"
+	.string "Evolution stones cost ¥500 each.\n"
+	.string "A reusable LINKING CORD costs ¥3000.\p"
 	.string "SLATEPORT carries more varieties.\n"
 	.string "LILYCOVE stocks the complete range.$"
 
@@ -24,6 +24,7 @@ RustboroCity_Mart_EvolutionStock:
 	.2byte ITEM_LEAF_STONE
 	.2byte ITEM_MOON_STONE
 	.2byte ITEM_SUN_STONE
+	.2byte ITEM_LINKING_CORD
 	pokemartlistend
 
 RustboroCity_Mart_EventScript_Clerk::

@@ -670,6 +670,12 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     BuyMenuPrint(WIN_ITEM_DESCRIPTION, description, 3, 1, 0, COLORID_NORMAL);
 }
 
+static bool32 IsSinglePurchaseItem(enum Item item)
+{
+    return sMartInfo.martType == MART_TYPE_NORMAL
+        && (GetItemImportance(item) || gItemsInfo[item].sortType == ITEM_TYPE_MEGA_STONE);
+}
+
 static u32 GetShopItemPrice(enum Item item)
 {
     if (sMartInfo.freeItems)
@@ -697,7 +703,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
             6);
     }
 
-    if (GetItemImportance(itemId) && PlayerOwnsItem(itemId))
+    if (IsSinglePurchaseItem(itemId) && PlayerOwnsItem(itemId))
         StringCopy(gStringVar4, gText_SoldOut);
     else
         StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
@@ -1065,7 +1071,7 @@ static void Task_BuyMenu(u8 taskId)
             else
                 sShopData->totalCost = gDecorations[itemId].price;
 
-            if (GetItemImportance(itemId) && PlayerOwnsItem(itemId))
+            if (IsSinglePurchaseItem(itemId) && PlayerOwnsItem(itemId))
                 BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
             else if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost))
             {
@@ -1076,7 +1082,7 @@ static void Task_BuyMenu(u8 taskId)
                 if (sMartInfo.martType == MART_TYPE_NORMAL)
                 {
                     CopyItemName(itemId, gStringVar1);
-                    if (GetItemImportance(itemId))
+                    if (IsSinglePurchaseItem(itemId))
                     {
                         tItemCount = 1;
                         sShopData->totalCost = GetShopItemPrice(tItemId) * tItemCount;

@@ -29,11 +29,11 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
 	release
 	end
 LilycoveCity_DepartmentStore_4F_Text_Stones:
-	.string "Every evolution stone, ¥3000 each!\n"
+	.string "Every evolution stone, ¥500 each!\n"
 	.string "Which one does your partner need?$"
 LilycoveCity_DepartmentStore_4F_Text_Tools:
-	.string "Special evolution tools cost ¥5000.\n"
-	.string "Reusable devices cost ¥10000.\p"
+	.string "Special evolution tools cost ¥1000.\n"
+	.string "Reusable devices cost ¥3000.\p"
 	.string "A reusable device only needs to be\n"
 	.string "bought once. Check its description!$"
 LilycoveCity_DepartmentStore_4F_Text_Gentleman:

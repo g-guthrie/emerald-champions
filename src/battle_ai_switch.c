@@ -2935,7 +2935,9 @@ static u32 GetBestMonDoubles(enum BattlerId battler, enum SwitchType switchType)
             if (IsLegalDoublesReserve(partner, slot))
                 partnerChoices |= 1u << slot;
     replaceBoth = replaceBoth && partnerChoices != 0;
-    s32 bestScore = switchType == SWITCH_MID_BATTLE_OPTIONAL ? AI_EvaluateDoublesPosition(battler, 0) : INT_MIN;
+    // baseline owns restoration around every candidate and at this function's
+    // exit; do not allocate another complete board snapshot in the evaluator.
+    s32 bestScore = switchType == SWITCH_MID_BATTLE_OPTIONAL ? AI_EvaluateDoublesCandidate(battler, 0) : INT_MIN;
 
     for (u32 slot = 0; slot < GetAILastPartyIndex(battler); slot++)
     {
@@ -2963,7 +2965,7 @@ static u32 GetBestMonDoubles(enum BattlerId battler, enum SwitchType switchType)
                     if (gSideTimers[side].retaliateTimer)
                         gSideTimers[side].retaliateTimer--;
             }
-            s32 score = AI_EvaluateDoublesPosition(battler, noActionMask);
+            s32 score = AI_EvaluateDoublesCandidate(battler, noActionMask);
             if (score > bestScore || (score == bestScore && best != PARTY_SIZE && aceCost < bestAceCost))
             {
                 bestScore = score;

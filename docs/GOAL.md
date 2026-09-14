@@ -1,8 +1,35 @@
 # Full unfinished development goal
 
-Current work is the user-led team review through battle28 and GitHub
-synchronization. The C15 Dwayne experiment and export delivery remain paused;
-see `CONTINUE.md`. This long-term goal does not override that pause.
+Current checkpoint: implemented through Flannery, including the early Ember Path/Ashen Woods detour. `docs/trainer-review-index.json` records131 implemented first-access encounters and341 retained encounters /368 variants. Angelina and Eric are retired as duplicate ordinary battles; Gina and Mia stay. Misty Terrain is deliberately retained in the Fire Gym, with distinct seed, terrain-control, sun and attack partnerships. Exact builds/evidence: `work/trainer-through-flannery-implementation/`. Next index132: post-Flannery Go-Goggles, Strength and Trick House3 branches. The earned C15 save remains paused.
+
+Review workflow: use the main agent for20-trainer blocks and show the complete report in chat. A fresh Astra reviewer is optional only when the user explicitly requests it; the reviewer used for45–64 is finished and retired. The earlier packet remains historical evidence under `work/trainer-review-next20/`; the implemented receipts are `work/trainer-next20-implementation/`, `work/trainer-65-84-implementation/` and `work/trainer-85-100-implementation/`. Keep design/source implementation distinct from later native battle calibration.
+
+Retrospective similarity check through the Slateport arrival designs is complete:46 concepts (44 available plus deferred Cyndy/Marlene),56 variants. Johnson now uses Sash/Endeavor Doduo; Jose uses Sash/Fell Stinger Kricketune; Cyndy uses Screech/Quick Guard Riolu instead of duplicated Coaching. Existing Slateport changes are applied. Details: `work/early-team-similarity-audit/Review.md`. That earlier look-back is complete; the subsequent approved20-trainer block is now implemented. No battle benchmark prerequisite.
+
+Battle cuts: preserve the book's restored explicit cut ledger. The original140-group pass now has139 cuts after Gina/Mia's restoration, plus five additional v4 identities:146 retired identities total. Current source checks find none in active battle opcodes or nonempty parties. Gina and Mia are an explicit user-directed keep and must remain active on northern Route104. The retained roster is341 encounters after the additional Angelina/Eric cuts;148 retired identities total. Reconcile the ledger at each review window; do not apply another blanket30% reduction. Receipt: `work/trainer-85-100-implementation/cut-reconciliation.json`.
+
+Every trainer discussion includes Stats (role fit of nature/EVs/IVs/items/abilities and relevant partner order), then Could it be cooler?, then Overrepresented? with nearby and campaign-wide species/strategy references.
+
+Current task scope (user correction, September14): use the agreed design questions, show each trainer and reasoning in chat, implement improvements in batches, and advance. Full battles, faint-count tuning and exhaustive AI validation are separate later work, not prerequisites for this audit.
+
+Current work is a comprehensive trainer audit in first-access order, starting
+after Roxanne. The Cut-enclosure and Rusturf-to-Dewford designs are now
+implemented, including the seven Brawly Gym designs. The attacking-Dancer follow-up is implemented and verified in focused tests;
+Sequential defensive-item consumption is repaired. Laura has full baseline, stronger-counterbuild and level26 retest evidence.
+Mienfoo alone rose from24 to26 at a verified Psychic survival breakpoint.
+Takao and the other Gym benchmarks, broader difficulty calibration and
+Teeter Dance/Lunar Dance event forecasting remain unfinished. Full native
+battle-quality acceptance remains unfinished. Review optional branches and newly opened earlier maps at
+every badge, license, transport and story unlock; historical catalogue order
+and old review labels do not establish coverage. Work in four-to-five battle
+blocks, entire Gyms and coherent house/story gauntlets. Every retained trainer
+needs explicit design, implementation and native-verification status. Compare
+campaign-wide species, Mega and strategy coverage while designing each block.
+Historical review position28 is not a reachability count:
+22 trainer encounters are available before the badge and four more with Cut.
+The C15 Dwayne experiment remains paused; generated book/audit exports are now
+authorized. See `CONTINUE.md`.
+This long-term goal does not override that pause.
 
 When asked to continue this project, start/resume a goal with the objective below.
 The previous account's goal was paused only for this machine/account handoff. The
@@ -60,7 +87,8 @@ Further coherent changes are authorized when justified and documented.
 
 The user especially requires a pre-battle code/team check for EVERY trainer;
 historically about the first 130 were hand-authored, so expect weaker later plans.
-After each individual team audit, explicitly ask "Could this team be cooler?"
+The most important creative check after building or auditing EACH team is
+"Could this team be cooler?" Ask it even after your own redesign.
 Give a concrete answer about species, partnerships, setting and memorable play,
 and recommend improvements or explain why the current concept deserves to stay.
 Every Gym trainer and leader must field six Pokemon. Gyms should showcase
@@ -73,7 +101,7 @@ challenge. Keep clever themes, strong moves and good AI. Small individual enemy
 level cuts are preferred when a matchup or gauntlet is actually unreasonable.
 
 The complete v4 book received its one authorized fresh Astra High review; eight
-findings were integrated into section 26. Do not spawn another reviewer or new
+findings are integrated in the current guide and authoring. Do not spawn another reviewer or new
 agent. A previous replacement-engine experiment is parked and non-playable.
 
 Completion requires the whole campaign and its retained encounters to be handled,

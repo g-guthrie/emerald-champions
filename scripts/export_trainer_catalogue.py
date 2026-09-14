@@ -2,7 +2,7 @@
 """Export native trainer parties plus book comparison and runtime alternatives.
 
 Read-only with respect to design/game sources. Fails on missing required fields or
-book/native party mismatch; never fabricates a fixed party for procedural battles.
+authoring/native party mismatch; never fabricates a fixed party for procedural battles.
 """
 from __future__ import annotations
 import argparse
@@ -110,7 +110,7 @@ def source_references(ids):
     return refs, rematches, partners
 
 
-def native_vs_book(parties, branches):
+def native_vs_authoring(parties, branches):
     checked = 0
     for b in branches:
         assert b.trainer in parties, b.trainer
@@ -215,7 +215,8 @@ def regional_sets():
                         m['ability']='ABILITY_BLAZE';m['moves'][1]='MOVE_DRAGON_PULSE'
                     if species=='SPECIES_BAYLEEF':m['moves'][0]='MOVE_GIGA_DRAIN'
                     if species=='SPECIES_MONFERNO':m['moves'][3]='MOVE_FIRE_PUNCH'
-                    if species=='SPECIES_DRIZZILE':m['moves'][2]='MOVE_ICE_BEAM'
+                    if species=='SPECIES_PRINPLUP':m['moves'][0]='MOVE_HYDRO_PUMP'
+                    if species=='SPECIES_DRIZZILE':m['moves'][2]='MOVE_MUD_SHOT'
                 out.append((generation,index,stage,m))
     assert len(out)==81
     return out
@@ -247,10 +248,10 @@ def main():
     parser.add_argument('--out',type=Path,default=ROOT/'work/exports/Emerald_Champions_All_Trainer_Battles.txt')
     args=parser.parse_args()
     parties=parse_parties()
-    branches=teams.read_book(BOOK)
+    branches=teams.read_teams()
     by_id={b.trainer:b for b in branches}
     assert len(by_id)==len(branches)
-    checked=native_vs_book(parties,branches)
+    checked=native_vs_authoring(parties,branches)
     assert {t for t,p in parties.items() if p['mons']} == set(by_id)
     subprocess.run(['python3','scripts/verify_campaign_trainer_roster.py'],cwd=ROOT,check=True)
     meta={n:fields(block[:teams.BRANCH_RE.search(block).start()] if teams.BRANCH_RE.search(block) else block)
@@ -260,29 +261,29 @@ def main():
     w.heading('EMERALD CHAMPIONS — COMPLETE TRAINER SOURCE CATALOGUE')
     w.line('Snapshot: '+datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'))
     w.line('Repository: https://github.com/g-guthrie/emerald-champions')
-    w.line('Current combat-party count matches the canonical book; retired metadata is not a battle.')
+    w.line('Current combat-party count matches the authored catalogue; retired metadata is not a battle.')
     w.line('Commit baseline: '+subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip())
     w.line('Includes the current uncommitted working-tree changes; this is not a published-release claim.')
     w.line()
     total=sum(len(x['mons']) for x in parties.values())
-    w.prose(f"Scope: ALL {len(branches)} CURRENT COMBAT PARTY VARIANTS, containing {total} Pokemon slots, across {len(set(b.encounter for b in branches))} retained book encounter groups. The book counts 342 distinct physical trainer encounters; starter/gender alternatives and multi-battle owners are not extra clears. Native source also preserves {len(parties)-len(branches)} empty records: 147 retired trainer metadata entries and TRAINER_NONE. Those contain NO battle parties. They are included separately for audit, not counted as playable trainers.")
+    w.prose(f"Scope: ALL {len(branches)} CURRENT COMBAT PARTY VARIANTS, containing {total} Pokemon slots, across {len(set(b.encounter for b in branches))} retained authored encounter groups. See the Game Book battle/access section for the finite encounter count and physical-access ledger; starter/gender alternatives and multi-battle owners are not extra clears. An E-group or catalogue position is not first-access order. Native source also preserves {len(parties)-len(branches)} empty records: {len(parties)-len(branches)-1} retired trainer metadata entries and TRAINER_NONE. Those contain NO battle parties. They are included separately for audit, not counted as playable trainers.")
     w.prose('Contents: 1) findings and reading guide; 2) campaign index; 3) every retained campaign party; 4) empty retired metadata and sentinel; 5) exact regional-rival replacement sets; 6) Steven ally and opening rescue; 7) procedural Circuit/Tent roster templates and generating rules; 8) source fingerprints and validation scope.')
     w.heading('1. FINDINGS, BOOK COMPARISON, AND READING GUIDE')
     findings=[
-        f'LOADOUT AGREEMENT: all {len(branches)} retained book variants and {checked} Pokemon slots match native source for species, order, items, abilities, natures, EVs, IVs, moves, friendship and level offsets. Separate generator verification checks generated encounter/AI tables. Agreement is not proof that every tactical idea works or every battle has been played.',
+        f'LOADOUT AGREEMENT: all {len(branches)} retained authored variants and {checked} Pokemon slots match native source for species, order, items, abilities, natures, EVs, IVs, moves, friendship and level offsets. Separate generator verification checks generated encounter/AI tables. Agreement is not proof that every tactical idea works or every battle has been played.',
         'LEVELS: actual campaign level = live player cap + authored offset + difficulty adjustment, with a floor of 1 and the existing native byte representation bound of 255. Opponents can exceed 100. Easy = -2, Medium/Normal = 0, Hard = +2. The printed absolute Level in trainers.party and old strict_cap metadata are historical previews, not current encounter levels. Example: Dwayne stores Level 20 but currently fights at 24 on Medium because the live cap is 24 and his offsets are zero.',
         'LEVEL LIMIT REPAIRED: this audit exposed the old signed four-bit (-8..+7) offset restriction and level-100 clamp. Trainer offsets now use signed 16-bit storage and authoring accepts -254..+254. Trainer creation uses bounded EXP plus transient opponent levels; stat recalculation preserves overlevel trainer opponents, including Mega forms and either opponent owner. The native battle/controller level fields remain one byte (1..255); this is a technical representation bound, not a prescribed difficulty cap. No blanket party-level increase was applied.',
         'DWAYNE IS AN EXPERIMENT: the exported working tree currently uses Magmar, Jynx, Electabuzz and Monferno. The original Magby/Smoochum/Elekid/Monferno battle was won in four turns with zero faints. The evolved-team retest is paused mid-battle; it is not an accepted final composition or completed difficulty benchmark. The user clarified that level tuning should preserve deliberate low-stat themes.',
         'RUNTIME RIVALS: native Hoenn trainer blocks are seeds. Nonmatching regional starters replace the first Hoenn starter slot using the selected generation and unchosen starter index, preserving its level and using the matching evolution stage. Appendix 5 gives the complete alternative sets; printing only the seeds would be incomplete.',
         'PROCEDURAL OPPONENTS: the Champions Circuit, live Battle Tents and exhibition provider generate teams. There is no finite list of fixed six-Pokemon parties for them. Appendix 7 includes every native variant/template plus the exact local generator source, rather than inventing deterministic teams.',
         'STATIC COVERAGE IS NOT SHOWCASE ACCEPTANCE: the authored roster contains all 99 supported Mega Stone item types. The current legendary-family index reports 73 of 78 acquisition families, with Galarian Articuno/Zapdos/Moltres, Glastrier and Meltan absent under its explicit identity/alias rules. Meltan has a recorded intentional trainer-showcase cut; the others need curation review. Hoopa Unbound counts toward the Hoopa family. Presence alone does not prove useful Mega activation, good synergy, fair availability or strong AI execution.',
-        'ROSTER CLEANUP: the pre-audit source had 517 records: 369 book combat parties, 147 obsolete loadouts and the empty TRAINER_NONE sentinel. All 369 Hoenn script battle IDs already matched the book, and none referenced an obsolete party. The book compiler now removes those 147 obsolete loadouts, preserves their empty metadata and stable numeric IDs, and verifies book parties = nonempty native parties = Hoenn script battle IDs. Native rematches are disabled. This avoids both hidden stale loadouts and save-flag renumbering. The master header’s obsolete closed-audit/all-76 claim was corrected. An older design-prompt exporter’s 561-branch count is not current.',
+        f'ROSTER CLEANUP: {len(branches)} authored combat parties agree with nonempty native parties and Hoenn battle IDs. The {len(parties)-len(branches)-1} retired metadata records and TRAINER_NONE contain no combat loadouts. Native rematches are disabled. Historical counts and first-access ordering belong to the Game Book battle/access section; this export does not reuse a pre-restoration census.',
         'DIFFICULTY AND DESIGN: native play is still in chapter C15. Earlier source checks and fixed-mechanic regressions do not amount to completed whole-game playtesting. Evaluate each team concept, local theme, engine support, AI decisions and strongest stage-legal counterteam before using levels as the main tuning lever. This catalogue provides the exact inputs for that work, not a final green check.'
     ]
     for i,f in enumerate(findings,1):w.prose(f'{i}. {f}');w.line()
     w.prose('Every EV and IV line is explicitly labeled HP / Attack / Defense / Special Attack / Special Defense / Speed. EV numbers are native EV allocations, not a derived percentage or a speculative point budget. Items are held items; there is no authorization here for manual potion/X-item use. Campaign held consumables restore after battle according to the Champions settlement rules.')
-    w.prose('Party slots are in native source order. Multi battles may combine two owners and take up to three Pokemon from each according to multiTeamSize/B_MULTI_HALF_TEAMS. The header names the book group and its owners so both halves can be found. A location called “script references” means source linkage, not a proof that every conditional branch is reachable at the current story state. Non-book definitions with references can still be retired rematches or dormant scripts.')
-    w.prose('Plans and counterplay in campaign entries are the canonical book’s authored intent. Strategy flags and tactics are executable configuration; prose itself is not executable AI. Extra definitions have explicitly labeled loadout inferences. Nicknames are presentation only; enum IDs are retained for exact lookup.')
+    w.prose('Party slots are in native source order. Multi battles may combine two owners and take up to three Pokemon from each according to multiTeamSize/B_MULTI_HALF_TEAMS. The header names the authored group and its owners so both halves can be found. A location called “script references” means source linkage, not a proof that every conditional branch is reachable at the current story state. Non-campaign definitions with references can still be retired rematches or dormant scripts.')
+    w.prose('Plans and counterplay in campaign entries are the team file’s authored intent. Strategy flags and tactics are executable configuration; prose itself is not executable AI. Extra definitions have explicitly labeled loadout inferences. Nicknames are presentation only; enum IDs are retained for exact lookup.')
     w.line()
     w.prose('Observed engine coverage in the current native campaign loadouts (party variants, not distinct played encounters):')
     for token,field in [('STEAM_ENGINE','ability'),('JUSTIFIED','ability'),('COMMANDER','ability'),('ANGER_POINT','ability'),('WEAKNESS_POLICY','item'),('PERISH_SONG','moves'),('SHELL_SMASH','moves'),('BEAT_UP','moves')]:
@@ -308,7 +309,7 @@ def main():
             m=meta[b.encounter]
             for key in ('chapter','location','requirement','trainer_ids'):
                 w.prose(key.replace('_',' ').title()+': '+m.get(key,'Not specified'))
-            w.line('Status: retained in canonical book; '+('EXPERIMENTAL CURRENT PARTY' if trainer=='TRAINER_DWAYNE' else 'source agreement confirmed'))
+            w.line('Status: retained in authored catalogue; '+('EXPERIMENTAL CURRENT PARTY' if trainer=='TRAINER_DWAYNE' else 'source agreement confirmed'))
         else:
             w.prose('Status: EMPTY METADATA ONLY — no Pokemon, no combat party, and no live Hoenn script battle call. Retained for stable IDs/contact metadata; TRAINER_NONE is the sentinel.')
         maps=sorted({x['map'] for x in r if x['map']})
@@ -329,8 +330,8 @@ def main():
             if key not in ('Name','Class','Double Battle','Multi Party','AI'):
                 w.prose(key+': '+val)
         if b:
-            w.prose('Book strategy: '+b.plan)
-            w.prose('Book counterplay / audit: '+b.crack)
+            w.prose('Authored strategy: '+b.plan)
+            w.prose('Authored counterplay / audit: '+b.crack)
             w.line('Executable strategy flags: '+(', '.join(b.strategy) or 'NONE'))
             w.line('Executable partner tactics: '+('; '.join(str(t) for t in b.tactics) or 'NONE'))
             w.line('Mega slot configuration: '+str(b.mega_slots)+' (None means generator default; actual source table is authoritative)')
@@ -405,8 +406,8 @@ def main():
     for path in ('include/champions_circuit.h','src/champions_circuit.c'):
         w.line('BEGIN SOURCE: '+path);w.line(read(path));w.line('END SOURCE: '+path)
     w.heading('8. PROVENANCE AND VALIDATION SCOPE')
-    w.prose('The exporter independently parsed native trainerproc input, validated every required mon field, compared every retained book slot field, and asserted complete unique coverage of all native trainer IDs and all procedural templates. It reads source files, not screenshots or memory of an older build. It does not certify every script branch reachable, every move strategically sensible, every AI tactic implemented correctly, or the full game playtested.')
-    w.prose('Out-of-scope alternate games/providers: trainers_frlg.party belongs to the alternate FireRed/LeafGreen build selected by IS_FRLG; debug_trainers.party is development content. Retired original Battle Frontier facility tables, Trainer Hill, record-mixed Secret Base teams, link opponents and player-created teams do not constitute fixed current book campaign encounters. The active Frontier desk boundary is the Champions Circuit. The complete active Hoenn trainers.party is included even for dormant or otherwise unclassified definitions.')
+    w.prose('The exporter independently parsed native trainerproc input, validated every required mon field, compared every retained authored slot field, and asserted complete unique coverage of all native trainer IDs and all procedural templates. It reads source files, not screenshots or memory of an older build. It does not certify every script branch reachable, every move strategically sensible, every AI tactic implemented correctly, or the full game playtested.')
+    w.prose('Out-of-scope alternate games/providers: trainers_frlg.party belongs to the alternate FireRed/LeafGreen build selected by IS_FRLG; debug_trainers.party is development content. Retired original Battle Frontier facility tables, Trainer Hill, record-mixed Secret Base teams, link opponents and player-created teams do not constitute fixed current campaign encounters. The active Frontier desk boundary is the Champions Circuit. The complete active Hoenn trainers.party is included even for dormant or otherwise unclassified definitions.')
     for path in (PARTY,'Game Blueprint/Emerald_Champions_Game_Book.txt',
         'data/emerald_champions/emerald_champions_master_battle_design.txt',
         'src/data/emerald_champions_battle_plans.h','src/battle_setup.c','src/difficulty.c','include/data.h','src/trainer_util.c','src/pokemon.c',
@@ -417,8 +418,8 @@ def main():
     w.line();w.line(f'END — {len(branches)} combat-party variants + {len(emitted)-len(branches)} empty metadata/sentinel records; {total} Pokemon slots; {len(replacement)} regional replacement sets; {len(variants)} procedural variants; {len(templates)} procedural templates.')
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text('\n'.join(w.lines)+'\n',encoding='utf-8')
-    report=dict(path=str(args.out),native_records=len(emitted),combat_parties=len(branches),pokemon=total,book_variants=len(branches),
-        book_pokemon_checked=checked,regional_sets=len(replacement),circuit_variants=len(variants),
+    report=dict(path=str(args.out),native_records=len(emitted),combat_parties=len(branches),pokemon=total,authored_variants=len(branches),
+        authored_pokemon_checked=checked,regional_sets=len(replacement),circuit_variants=len(variants),
         circuit_templates=len(templates),bytes=args.out.stat().st_size,
         sha256=hashlib.sha256(args.out.read_bytes()).hexdigest(),
         campaign_without_direct_battle_call=[b.trainer for b in branches if not any(x['battle'] for x in refs[b.trainer])])

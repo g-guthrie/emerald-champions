@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Check native Mega Stones against reachable world rewards, not an item shop."""
+"""Check native Mega Stones against structurally linked world reward sources.
+
+This is source association, not first-access or native transaction proof."""
 from __future__ import annotations
 
 import json
@@ -61,7 +63,7 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
         if name not in nodes:
             continue
         body, location, fallthrough = nodes[name]
-        for item in set(re.findall(r"\bgive(?:unique)?item\s+(ITEM_\w+)", body)) & required:
+        for item in set(re.findall(r"\b(?:give(?:unique)?item|add(?:pc)?item)\s+(ITEM_\w+)", body)) & required:
             rewards[item].append(f"{location}: NPC/event gift ({name})")
         for special in re.findall(r"\bspecial\s+(\w+)", body):
             special_sources[special].append(location)
@@ -107,7 +109,10 @@ def main() -> None:
     if "special OpenEmeraldChampionsEvolutionItemArchive" not in vendor:
         raise SystemExit("the evolution-item archive must remain available")
     code = (ROOT / "src/mega_stone_rewards.c").read_text()
-    if "GetHarvestedBerryCount" not in code or "RemoveBagItem" in code:
+    from audit.map_dynamic_inventory import functions
+    start, end = functions(code)["TradeEmeraldChampionsGardenBerries"]
+    trade_body = code[start:end]
+    if "GetHarvestedBerryCount" not in trade_body or "RemoveBagItem" in trade_body:
         raise SystemExit("harvest trades must spend per-type harvest, never ordinary bag berries")
     from item_catalog import free_vendor_items
     berries = set(re.findall(r"F\((\w+)\)", (ROOT / "include/constants/berries.h").read_text()))

@@ -1,25 +1,197 @@
 # Current development checkpoint — September 14, 2026
 
+Immediate GitHub checkpoint requested by the user: this is unfinished work, not a new release. The Flannery/Misty implementation and focused native checks are complete in source; the normal ROM rebuild is pending. Dual-Mega engine support is partially implemented and still needs authored League pairs, coverage reconciliation, native budget tests and final validation. Finish all outstanding work before resuming the trainer audit. The next audit order will prioritize Elite Four/Champion, then whole Gyms and Magma/Aqua story groups before the remaining routes.
+
+Current checkpoint: implemented through Flannery, including the early Ember Path/Ashen Woods detour. `docs/trainer-review-index.json` records131 implemented first-access encounters and341 retained encounters /368 variants. Angelina and Eric are retired as duplicate ordinary battles; Gina and Mia stay. Misty Terrain is deliberately retained in the Fire Gym, with distinct seed, terrain-control, sun and attack partnerships. Exact builds/evidence: `work/trainer-through-flannery-implementation/`. Next index132: post-Flannery Go-Goggles, Strength and Trick House3 branches. The earned C15 save remains paused.
+
+Review workflow: use the main agent for20-trainer blocks and show the complete report in chat. A fresh Astra reviewer is optional only when the user explicitly requests it; the reviewer used for45–64 is finished and retired. The earlier packet remains historical evidence under `work/trainer-review-next20/`; the implemented receipts are `work/trainer-next20-implementation/`, `work/trainer-65-84-implementation/` and `work/trainer-85-100-implementation/`. Keep design/source implementation distinct from later native battle calibration.
+
+Retrospective similarity check through the Slateport arrival designs is complete:46 concepts (44 available plus deferred Cyndy/Marlene),56 variants. Johnson now uses Sash/Endeavor Doduo; Jose uses Sash/Fell Stinger Kricketune; Cyndy uses Screech/Quick Guard Riolu instead of duplicated Coaching. Existing Slateport changes are applied. Details: `work/early-team-similarity-audit/Review.md`. That earlier look-back is complete; the subsequent approved20-trainer block is now implemented. No battle benchmark prerequisite.
+
+Battle cuts: preserve the book's restored explicit cut ledger. The original140-group pass now has139 cuts after Gina/Mia's restoration, plus five additional v4 identities:146 retired identities total. Current source checks find none in active battle opcodes or nonempty parties. Gina and Mia are an explicit user-directed keep and must remain active on northern Route104. The retained roster is341 encounters after the additional Angelina/Eric cuts;148 retired identities total. Reconcile the ledger at each review window; do not apply another blanket30% reduction. Receipt: `work/trainer-85-100-implementation/cut-reconciliation.json`.
+
+Every trainer discussion includes Stats (role fit of nature/EVs/IVs/items/abilities and relevant partner order), then Could it be cooler?, then Overrepresented? with nearby and campaign-wide species/strategy references.
+
 Read `AGENTS.md`, `docs/GOAL.md`, and the relevant sections of the single canonical
 `Game Blueprint/Emerald_Champions_Game_Book.txt`. This file owns current work and
 resume state; the book owns design and historical acceptance evidence;
-`docs/VERIFICATION.md` owns commands. Do not start another full-book review or
-spawn agents. The native engine in this repository is the active project.
+`docs/VERIFICATION.md` owns commands. Do not start another full-book review. Use only the selective fresh-Astra
+review workflow above. The native engine in this repository is the active project.
 
-## Active work: collaborative team reviews
+## Active work: comprehensive trainer audit in first-access order
 
-The user paused the earned playthrough and export delivery to review teams in
-small waves. Reviews now reach retained battle28, the end of Rustboro Gym.
-Approved revisions through that point are implemented; Joey16 remains on hold
-because of overlap with Calvin’s Belly Drum concept. Do not interpret reviewed
-as difficulty-tested. Individual levels are informed Medium-baseline seeds.
+The current user instruction is a comprehensive first-access trainer audit after
+Roxanne. The Route116 Cut block and the next four designs (Rusturf thug,
+Rustboro/Route104 rival, Ned, Elliot) are implemented. The seven-battle Brawly Gym designs are now implemented: Laura, Takao, Lilith,
+Brenden, Cristian, Jocelyn and Brawly. The user corrected scope on September14: continue the question-led design audit and discuss each trainer in chat; complete battles and exhaustive AI work are separate later validation, not prerequisites for advancing this audit. First-arrival Dewford exploration/services remain a separate
+acceptance responsibility. The current earned C15 save stays paused.
 
-The latest user request is to synchronize the book/docs/README and push all
-completed source work to GitHub. After that, continue the team discussion after
-Rustboro Gym when the user asks; consult the book’s retained ordering rather
-than confusing encounter numbers, E groups and party variants.
+At every unlock, reconcile the complete active trainer roster against map
+objects, script-triggered/story battles, optional interiors and branches, and
+newly accessible sections of earlier routes. Check physical approach plus
+story/license conditions; do not sort only by E number, map name or preview cap.
+Keep unresolved access explicit and revisit it before moving past that unlock.
+The first 22 prebadge encounters remain the user's design reference; an earlier
+review is not a native-quality acceptance. No campaign save has been advanced.
 
-| Rustboro encounter | Approved design |
+Current Cut-block implementation: Dawson retained; Sarah receives Helping Hand
+and zero Speed IVs throughout; Janice's Swirlix receives Flamethrower in place
+of the allied-Lightning-Rod-conflicting Thunderbolt; Jerry's Varoom becomes fast
+Jolly Acid Spray support. Species and individual level offsets are unchanged.
+Review receipts: `work/post-roxanne-cut-audit/`. The four historical access layout
+hashes still match current map.bin files; current actor/scripts were rechecked.
+Nearby Route103 east/Route115 upper/tunnel Mike remain deferred behind access,
+not silently accepted. Karen and the three tunnel-rest-house workers have no
+active battle; Briney and the displaced digger give the rescue context. The
+Route116 Devon employee's Repeat Ball visit unlocks after the museum delivery,
+so do not count it as a pre-thug service. Native full-battle acceptance remains
+pending; scoped source/mechanic checks must not be promoted to that status.
+
+## Rusturf-to-Dewford block and shared AI follow-through
+
+Exact teams are in the authored catalogue and generated book. The smuggler now
+uses Alolan Grimer/Qwilfish/Skrelp/Noibat; Ned uses Finneon/Wattrel/Mantyke/Arrokuda.
+The rival retains its core with Eerie Impulse Electrike, and Elliot retains his
+shellfish with Will-O-Wisp/Hex Cursed Body Frillish. The non-Hoenn rival resolver
+uses legal Hydro Pump Prinplup and Mud Shot Drizzile; player presets are unchanged.
+Levels are individual Medium design seeds, not completed difficulty calibration.
+
+`work/rusturf-dewford-team-audit/` owns this review's source/access snapshots,
+controlled baseline and repaired native receipts. New pair forecasts cover Soak
+(damage typing and STAB), timed Wind Power/Electromorphosis Charge, and Eerie
+Impulse's timely Special Attack suppression. Temporary native damage queries
+restore battle state and RNG. The book lists affected later trainers separately
+from actual battle acceptance. Current Ned samples are under72 frames; retain
+sampled-board scope, and do not call complete battles or Protect cadence verified.
+
+The three older checks are now resolved. Flannery's fixture omitted committed
+player Rock Slides; explicit commands produce After You and both KOs with full
+Torkoal HP. Parker's turn-one Body Slam lock was real: first Choice commitments
+now retain a small future matchup preference, and he chooses Earthquake before
+using Instruct next turn. Obsolete absolute Speed assertions became the required
+ordering and actual two-KO/no-damage outcomes. The Mega fixture now includes
+both guarded and attacking boards and supplies the observed replacement input;
+it measures60 frames in each current sample and Mega Evolves on the attacking
+board. The old failures and diagnosis are retained under `work/brawly-gym-audit`.
+
+## Current Brawly Gym block
+
+All seven six-member designs are implemented; all42 new member move pools pass.
+See `work/brawly-gym-audit/Review.md`, `source-review.json` and the canonical book.
+Highlights: special Croagunk, Costar Flamigo relay, special Poliwrath, preserved
+Coaching/Justified, controlled Beat Up/Rage Fist, Blitz Boxer priority, a Victory
+Dance/Dancer pair, and protected Mega Heracross with Cobalion support.
+
+Native evidence: `verified-native-tests.log` passes51 selected groups, including
+Coaching, Blitz Boxer, all17 Rage Fist mechanic groups, the new Gym fixtures,
+restoration/purity, prior authored strategies, timing and previous shoreline
+regressions. Brawly/Cristian/Jocelyn samples are60/50/44 frames. Native Oricorio
+was faster than Lilligant in the first seed; revised EVs produce84/83 on Medium
+and change its measured Acrobatics damage from25 to37 after the copied dance.
+Rage caches allocate only for real users. Both production search owners restore
+one saved board around candidates; the pure query API still restores itself.
+This removed the duplicated8-KiB snapshot and passes the full purity check.
+
+The Dancer follow-up in `work/dancer-forecast-audit/` adds copied attacking dances,
+copied Feather Dance and Clangorous Soul's separate HP costs. Helpful and harmful
+copies, own Protect versus Fake Out, sleep/flinch denial, attack-compatible Taunt,
+source Life Orb fainting, native Revelation typing and contact timing have focused
+controls. All64 selected native groups pass, including the previous51 groups and
+an expanded full-state/RNG purity fixture. The full-bench Dancer sample is69 frames;
+cold-Mega samples61/60. The native Lunar Dance sacrifice/healing control passes,
+but its AI forecast remains unimplemented. Exact evidence and limits are in the
+review and book; this does not establish complete Gym fights or Protect cadence.
+
+The item-sequencing follow-up now has71 passing native test groups, including
+ordinary/copy resist-Berry consumption, removed defensive boosts, Plus/Minus
+metadata, Sticky Hold, and a guarded damaging-pivot improvement. Laura's complete
+pre-pivot-repair benchmark ran15 turns with one player faint; all15 measured
+complete decisions were <=63 frames. Croagunk's special lane and the late
+Helping Hand/Fake Out partnership created real pressure. The observed immediate
+Mienfoo switch missed12 safe U-turn damage; the current shared choice path fixes
+that exact case and retains immediate exits against faster attacks, Fake Out,
+recoil/contact/healing hazards and unsupported reactive boards.
+
+The separate benchmark is `work/brawly-gym-benchmark-laura/`, with a native won
+save `laura-cleared.sav`. Its immutable ROM predates the pivot repair. Its prepared
+prebattle battery is `pre-laura-ready.sav`; use clean Continue on a new build,
+never its savestate with a new ROM. The source-bound report, owner index and
+receipts are `work/dancer-item-sequence-audit/Review.md`. Player acquisition and
+pre-Gym access receipts are in `work/brawly-gym-audit/`; contact sheets are under
+`work/contact-sheets/laura-baseline-*`. The paused primary C15 save is unchanged.
+
+The current-build double-Cloak lead cleared Laura's old levels in14 turns with
+zero faints (three late Play Rough misses delayed the finish). Mienfoo alone now
+uses offset+6: Medium26, with the other five unchanged25/25/26/24/27. Native
+queries verify Psychic66–78 versus level25 HP65, but62–74 versus level26 HP67.
+The adjusted team then cleared in12 turns with one player faint; all12 complete
+decisions were <=60 frames. This validates a meaningful opening breakpoint and
+working fight, not final exceptional difficulty. Keep the current seed while the
+remaining Gym benchmarks establish the broader pressure curve.
+
+Current separate benchmark: `work/brawly-gym-laura-level26/`, won save
+`laura-cleared.sav`; the previous zero-faint branch is
+`work/brawly-gym-laura-retest/`. Both are immutable source-bound sessions. Their
+party was prepared legally at cap20; C15 remains unchanged. Results, exact inputs,
+threshold tests and inspected contact sheets are under `work/laura-calibration/`.
+The Focus Sash switch hypothesis was not forced into the AI: native controls show
+Toxic Chain can finish the one-HP recipient. The level-adjusted priority-interrupt
+fixture was strengthened to keep its original lethal-threat premise. All73
+selected native test groups pass.
+
+NEXT DESIGN BLOCK: index132, post-Flannery unlocks. Reconcile Go-Goggles
+desert routes, Strength branches and Trick House3 before advancing toward
+Norman. The early Ashen Woods trio and both Route115 deferred trainers are
+already included through Flannery. Preserve Gina/Mia and the Gym Misty rule.
+
+Later validation remains separate: the Laura branch needs Center recovery before
+play; Gym balance, unowned Teeter/Lunar Dance forecasting and general pivot limits
+remain open. Preserve all historical native sessions and the paused C15 save.
+The current Dwayne design restores Magby/Smoochum/Elekid with Monferno; the evolved
+midbattle experiment is historical and must not be resumed on the revised ROM.
+
+## Generated reference and economy design
+
+The earned playthrough remains paused. The user has authorized generated book
+and audit exports. The Game Book now has a short editable
+guide plus a generated source reference. `scripts/sync_game_book.py --write`
+refreshes exact teams, world data and dialogue; `--check` rejects stale output.
+`Game_Guide_Reading_Copy.txt` is the generated short view. Exact team edits belong
+in `data/emerald_champions/emerald_champions_battle_teams.txt`, followed by the
+team materializer and book refresh. Old section/E-U-T import instructions are
+retired. The economy decision packet is
+`work/book-economy-audit-20260914/Economy_Review.md`; the agreed affordable-rebuilding direction and shop roles are in the guide.
+Generated section C now maps the full current-source economy. Redistribution and
+the proposed Lilycove Mega shelf remain unimplemented; the atlas exposes the
+difference rather than presenting planned stock as obtainable. Preserve current pickup positions and review original provenance.
+
+ The current design-review
+boundary is through Flannery (index131), with later native verification separate. The main creative
+check after building or reviewing EVERY team is **“Could this team be cooler?”**
+Answer it with a concrete partnership, regional identity, memorable interaction
+and worthwhile fallback; legality and six filled slots are not design acceptance.
+
+The earlier “reviewed through battle 28” meant a position in the review list,
+not physical access order. Source/geometry reconciliation finds **22 trainer
+encounters available before the Stone Badge, including Roxanne**, and **four
+more after the badge and Cut: Dawson, Sarah, Janice and Jerry**. That gives
+**26 before the tunnel thug**. Cyndy and Marlene were reviewed but sit beyond
+Route115's early-access terrain; they are not skipped early fights. The book's
+battle/access guide and generated reference owns the complete list and individual judgments.
+These counts describe availability, not the user's personal defeated-trainer flags.
+
+Joey (E0020, historical review position16) is rebuilt without Belly Drum:
+Pawmi / Galarian Farfetch'd / Clefairy / Lechonk. Leek-backed critical hits and
+support replace the duplicate Calvin setup. Calvin's team is unchanged. Cindy's
+Choice Band/Truant Slakoth reserve remains a cohesion/playtesting concern, not a
+settled native success. The Rusturf-to-Dewford block now follows that completed Cut design review.
+Individual levels remain tuning seeds; source agreement is not difficulty testing.
+
+Marlene's later Route115 Gothita had unsupported Dazzling Gleam. It now uses
+legal Fake Tears for timely special-partner support; her levels and the rest of
+her team are unchanged. This correction does not make her reachable earlier.
+
+| Historical review position | Approved Rustboro design |
 | --- | --- |
 | 25 Josh | Glimmet / Nosepass / Dwebble / Alolan Geodude / Naclstack / Onix; mineral chemistry, Shell Smash and Galvanize |
 | 26 Tommy | Cradily / Tirtouga / Anorith / Shuckle / Corsola / Binacle; fossil reef, Surf–Storm Drain and Power Split |
@@ -70,7 +242,7 @@ New games initialize Medium; difficulty changes trainer levels, not AI quality.
   Old Amber1, Ring0, Aerodactylite0 and returned controls. Neither is an earned
   clear or a difficulty benchmark. Screens: `work/contact-sheets/rustboro-mega-reveal-native.png`.
 - The trainer exporter is available at `scripts/export_trainer_catalogue.py`;
-  delivery remains paused. Regenerate before delivering any old TXT snapshot.
+  regenerate before delivering any old TXT snapshot.
 
 ## Paused earned playthrough: C15 Dwayne experiment
 
@@ -143,3 +315,20 @@ later team reviews, level calibration, story/service/return-path coverage and
 full campaign completion. Keep the legendary rule unchanged unless explicitly
 approved: only legendary/mythical species above600 BST receive the existing
 floor(chapterCap×600/BST) cap. Six hundred BST Shaymin keeps the full cap.
+
+## September14 economy implementation
+
+The separate economy request is implemented: all45 paid evolution entries now
+use500 stones /1000 ordinary tools /3000 reusable devices; Rustboro sells Cord
+from first arrival. Lilycove3F right sells Pidgeotite, Ampharosite, Manectite and
+Altarianite at20000 each after the bracelet. Existing sources, side activities,
+actors and pickup positions remain in place. Shared shops refuse duplicate
+Mega ownership through the existing all-storage/held-item scan and limit the
+purchase to one. The guide and generated economy reference describe the source.
+
+`work/economy-map-20260914/native-shops-verified/result.json` passes synthetic
+native transactions and failure branches; its two contact sheets were inspected.
+This does not advance the earned campaign or accept every economic interaction.
+The normal delivery and hashes are recorded in that work directory's delivery.json.
+Earlier probe failures were fixture observer/input/position mistakes, retained
+as diagnostic evidence; the verified run used fresh correct-ROM boots.

@@ -36,6 +36,7 @@ void SetActiveGimmick(enum BattlerId battler, enum Gimmick gimmick);
 enum Gimmick GetActiveGimmick(enum BattlerId battler);
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick);
 bool32 HasTrainerUsedGimmick(enum BattlerId battler, enum Gimmick gimmick);
+u32 GetRemainingMegaEvolutions(enum BattlerId battler);
 void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick);
 
 void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId);

@@ -6,6 +6,7 @@
 #include "battle_gimmick.h"
 #include "battle_z_move.h"
 #include "battle_setup.h"
+#include "emerald_champions_battle_plan.h"
 #include "battle_util.h"
 #include "item.h"
 #include "palette.h"
@@ -110,9 +111,18 @@ bool32 HasTrainerUsedGimmick(enum BattlerId battler, enum Gimmick gimmick)
     return gBattleStruct->gimmick.activated[battler][gimmick];
 }
 
+u32 GetRemainingMegaEvolutions(enum BattlerId battler)
+{
+    u32 limit = EmeraldChampions_GetMegaEvolutionLimit(battler);
+    u32 used = gBattleStruct->gimmick.megaEvolutionsUsed[GetBattlerTrainer(battler)];
+    return used < limit ? limit - used : 0;
+}
+
 // Sets a gimmick as used by a trainer with checks for Multi Battles.
 void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick)
 {
+    if (gimmick == GIMMICK_MEGA)
+        gBattleStruct->gimmick.megaEvolutionsUsed[GetBattlerTrainer(battler)]++;
     gBattleStruct->gimmick.activated[battler][gimmick] = TRUE;
     if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
         gBattleStruct->gimmick.activated[GetPartnerBattler(battler)][gimmick] = TRUE;

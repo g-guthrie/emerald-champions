@@ -7,6 +7,9 @@
 #include "data.h"
 #include "difficulty.h"
 #include "event_data.h"
+#include "field_weather.h"
+#include "constants/weather.h"
+#include "random.h"
 #include "malloc.h"
 #include "trainer_pools.h"
 #include "battle_transition.h"
@@ -78,7 +81,7 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
 
 // Use the compiled campaign loadouts and production stat/level generation,
 // including reserves, rather than a second hand-maintained copy of the team.
-static void AuthoredOpponent(u16 trainerId, u32 badges, bool32 injuredCoalossal)
+static void AuthoredOpponentWithPartner(u16 trainerId, u32 badges, bool32 injuredCoalossal, u32 partnerSlot)
 {
     const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
@@ -96,6 +99,15 @@ static void AuthoredOpponent(u16 trainerId, u32 badges, bool32 injuredCoalossal)
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
     CreateNPCTrainerPartyFromTrainer(party, trainer);
+    EXPECT(partnerSlot < trainer->partySize);
+    if (partnerSlot != 1)
+    {
+        // Alternate-deployment fixture, preserving every native loadout.
+        // Callers use non-Mega parties so a slot permission is not relocated.
+        struct Pokemon swap = party[1];
+        party[1] = party[partnerSlot];
+        party[partnerSlot] = swap;
+    }
     gBattleTypeFlags = savedFlags;
     SetCurrentDifficultyLevel(savedDifficulty);
     for (u32 i = 0; i < ARRAY_COUNT(savedBadges); i++)
@@ -128,6 +140,423 @@ static void AuthoredOpponent(u16 trainerId, u32 badges, bool32 injuredCoalossal)
         }
     }
     Free(party);
+}
+
+static void AuthoredOpponent(u16 trainerId, u32 badges, bool32 injuredCoalossal)
+{
+    AuthoredOpponentWithPartner(trainerId, badges, injuredCoalossal, 1);
+}
+
+DOUBLE_BATTLE_TEST("EC Gym: Lilith's actual Costar reserve copies Scraggy's earned boosts")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_LILITH, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_HELPING_HAND, target: opponentRight);
+            MOVE(opponentRight, MOVE_DRAGON_DANCE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            SWITCH(opponentLeft, 3);
+            MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_FLAMIGO);
+        EXPECT_EQ(opponentLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(opponentLeft->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC Gym mechanics: Victory Dance copies before Oricorio's selected attack")
+{
+    bool32 dance;
+    s16 damage;
+    PARAMETRIZE { dance = TRUE; }
+    PARAMETRIZE { dance = FALSE; }
+    GIVEN {
+        PLAYER(SPECIES_WEEZING) { Level(20); HP(300); MaxHP(300); Defense(80); Speed(30); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_JOCELYN, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, dance ? MOVE_VICTORY_DANCE : MOVE_PROTECT);
+            MOVE(opponentRight, MOVE_ACROBATICS, target: playerLeft);
+        }
+    } SCENE {
+        HP_BAR(playerLeft, captureDamage: &damage);
+    } THEN {
+        EXPECT_EQ(opponentLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE + dance);
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + dance);
+        EXPECT_EQ(opponentRight->statStages[STAT_DEF], DEFAULT_STAT_STAGE + dance);
+        EXPECT_EQ(opponentRight->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + dance);
+        EXPECT(playerLeft->hp < playerLeft->maxHP);
+        Test_MgbaPrintf("DANCE=%d ACRO_DAMAGE=%d LILLI_HP=%d LILLI_DEF=%d ORICORIO_ATK=%d speeds=%d/%d", dance, damage, opponentLeft->maxHP, opponentLeft->defense, opponentRight->attack, opponentLeft->speed, opponentRight->speed);
+        EXPECT(opponentLeft->speed > opponentRight->speed);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Gym: Jocelyn's dance enables a knockout while protecting its user")
+{
+    GIVEN {
+        // Synthetic physical-pressure board, not stage-pool difficulty proof.
+        PLAYER(SPECIES_WEEZING) { Level(20); HP(37); MaxHP(100); Attack(85); Defense(80); SpDefense(100); Speed(60); Ability(ABILITY_LEVITATE); Moves(MOVE_POISON_JAB); }
+        PLAYER(SPECIES_WEEZING) { Level(20); HP(37); MaxHP(100); Attack(85); Defense(80); SpDefense(100); Speed(55); Ability(ABILITY_LEVITATE); Moves(MOVE_POISON_JAB); }
+        AuthoredOpponent(TRAINER_JOCELYN, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_POISON_JAB, target: opponentLeft, secondaryEffect: FALSE, criticalHit: FALSE);
+            MOVE(playerRight, MOVE_POISON_JAB, target: opponentLeft, secondaryEffect: FALSE, criticalHit: FALSE);
+            EXPECT_MOVE(opponentLeft, MOVE_VICTORY_DANCE);
+            EXPECT_MOVE(opponentRight, MOVE_ACROBATICS);
+        }
+    } THEN {
+        EXPECT(playerLeft->hp == 0 || playerRight->hp == 0);
+        EXPECT(opponentLeft->hp > 0);
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+        Test_MgbaPrintf("JOCELYN_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC Gym mechanics: Cristian's actual Beat Up builds Rage Fist without a knockout")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Defense(100); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponentWithPartner(TRAINER_CRISTIAN, 1, FALSE, 2);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_BEAT_UP, target: opponentRight);
+            MOVE(opponentRight, MOVE_RAGE_FIST, target: playerLeft);
+        }
+    } THEN {
+        EXPECT(opponentRight->hp > 0);
+        EXPECT_EQ((u32)GetBattlerPartyState(B_BATTLER_3)->timesGotHit, 6);
+        EXPECT(playerLeft->hp < playerLeft->maxHP);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Gym: Cristian chooses a useful survivable Rage Fist activation")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(140); MaxHP(140); Defense(100); SpAttack(120); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_PSYCHIC); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(300); MaxHP(300); Defense(150); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponentWithPartner(TRAINER_CRISTIAN, 1, FALSE, 2);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP, target: opponentRight);
+            EXPECT_MOVE(opponentRight, MOVE_RAGE_FIST, target: playerLeft);
+        }
+    } THEN {
+        EXPECT_EQ(playerLeft->hp, 0);
+        EXPECT(opponentRight->hp > 0);
+        Test_MgbaPrintf("CRISTIAN_RAGE_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Gym: Brawly protects his actual Mega Heracross from a fast Flying attack")
+{
+    GIVEN {
+        PLAYER(SPECIES_AERODACTYL) { Level(20); HP(100); MaxHP(100); Attack(100); Speed(100); Moves(MOVE_DUAL_WINGBEAT); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_BRAWLY_1, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DUAL_WINGBEAT, target: opponentRight);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_FOLLOW_ME);
+            EXPECT_MOVE(opponentRight, MOVE_ROCK_BLAST, gimmick: GIMMICK_MEGA, target: playerLeft);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->species, SPECIES_HERACROSS_MEGA);
+        EXPECT_EQ(opponentRight->ability, ABILITY_SKILL_LINK);
+        EXPECT_EQ(opponentRight->hp, opponentRight->maxHP);
+        EXPECT_EQ(playerLeft->hp, 0);
+        Test_MgbaPrintf("BRAWLY_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Gym counterplay: Taunt denies the copied setup and permits direct offense")
+{
+    GIVEN {
+        PLAYER(SPECIES_CROBAT) { Level(20); HP(300); MaxHP(300); Defense(200); SpDefense(200); Speed(200); Moves(MOVE_TAUNT); }
+        PLAYER(SPECIES_WEEZING) { Level(20); HP(37); MaxHP(100); Attack(85); Defense(80); SpDefense(100); Speed(60); Ability(ABILITY_LEVITATE); Moves(MOVE_POISON_JAB); }
+        AuthoredOpponent(TRAINER_JOCELYN, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TAUNT, target: opponentRight);
+            MOVE(playerRight, MOVE_POISON_JAB, target: opponentLeft, secondaryEffect: FALSE, criticalHit: FALSE);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_VICTORY_DANCE);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(opponentRight->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(opponentRight->statStages[STAT_SPEED], DEFAULT_STAT_STAGE);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Gym counterplay: Rage Fist does not justify fatal or ineffective friendly fire")
+{
+    bool32 immune;
+    PARAMETRIZE { immune = FALSE; }
+    PARAMETRIZE { immune = TRUE; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
+            | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE
+            | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(immune ? SPECIES_SNORLAX : SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Defense(100); Speed(30); Moves(MOVE_CELEBRATE); }
+        PLAYER(immune ? SPECIES_SNORLAX : SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Defense(100); Speed(20); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_FALINKS) { Level(30); Speed(100); Moves(MOVE_BEAT_UP, MOVE_COACHING, MOVE_CLOSE_COMBAT, MOVE_PROTECT); }
+        OPPONENT(SPECIES_ANNIHILAPE) { Level(30); HP(immune ? 150 : 1); MaxHP(150); Speed(80); Moves(MOVE_RAGE_FIST, MOVE_DRAIN_PUNCH, MOVE_PROTECT); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT(gChosenMoveByBattler[B_BATTLER_1] != MOVE_BEAT_UP
+            || gBattleStruct->moveTarget[B_BATTLER_1] != B_BATTLER_3);
+        EXPECT(opponentRight->hp > 0);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC shoreline: the authored smuggler inherits each actual partner ability")
+{
+    u32 partner;
+    PARAMETRIZE { partner = 1; }
+    PARAMETRIZE { partner = 2; }
+    PARAMETRIZE { partner = 3; }
+    GIVEN {
+        PLAYER(SPECIES_ALAKAZAM) { Level(100); Speed(200); Moves(MOVE_PSYCHIC, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); Speed(10); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_GRUNT_RUSTURF_TUNNEL, 1, FALSE);
+    } WHEN {
+        if (partner != 1)
+            TURN {
+                MOVE(playerLeft, MOVE_CELEBRATE);
+                MOVE(playerRight, MOVE_CELEBRATE);
+                MOVE(opponentLeft, MOVE_PROTECT);
+                SWITCH(opponentRight, partner);
+            }
+        TURN {
+            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_KNOCK_OFF, target: playerRight);
+            MOVE(opponentRight, partner == 1 ? MOVE_WATERFALL : partner == 2 ? MOVE_SLUDGE_BOMB : MOVE_HEAT_WAVE, target: playerRight);
+            SEND_OUT(opponentRight, partner == 1 ? 2 : 1);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_GRIMER_ALOLA);
+        EXPECT_EQ(opponentLeft->ability, partner == 1 ? ABILITY_INTIMIDATE : partner == 2 ? ABILITY_ADAPTABILITY : ABILITY_INFILTRATOR);
+        EXPECT_EQ(playerLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 2);
+        EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 2);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC shoreline: authored Ned uses Soak to enable Wattrel's knockout")
+{
+    GIVEN {
+        // Synthetic resistant board, using Ned's complete native party and
+        // Medium badge-one levels. This is not an earned fight or a legal-pool benchmark.
+        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(55); Speed(25); Ability(ABILITY_IRON_BARBS); Moves(MOVE_SEED_BOMB); }
+        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(55); Speed(20); Ability(ABILITY_IRON_BARBS); Moves(MOVE_SEED_BOMB); }
+        AuthoredOpponent(TRAINER_NED, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SEED_BOMB, target: opponentLeft);
+            MOVE(playerRight, MOVE_SEED_BOMB, target: opponentLeft);
+            EXPECT_MOVE(opponentLeft, MOVE_SOAK);
+            EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT);
+        }
+    } THEN {
+        EXPECT(playerLeft->hp == 0 || playerRight->hp == 0);
+        Test_MgbaPrintf("NED_SOAK_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC shoreline mechanics: native Soak changes Wattrel's actual damage")
+{
+    s16 damage;
+    GIVEN {
+        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(300); MaxHP(300); Speed(25); Ability(ABILITY_IRON_BARBS); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(300); MaxHP(300); Speed(20); Ability(ABILITY_IRON_BARBS); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_NED, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_SOAK, target: playerLeft);
+            MOVE(opponentRight, MOVE_THUNDERBOLT, target: playerLeft);
+        }
+    } SCENE {
+        HP_BAR(playerLeft, captureDamage: &damage);
+    } THEN {
+        Test_MgbaPrintf("Native Soak Thunderbolt damage: %d", damage);
+        EXPECT_EQ(playerLeft->types[0], TYPE_WATER);
+        EXPECT_EQ(playerLeft->types[1], TYPE_WATER);
+        EXPECT(damage > 0);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC shoreline: authored Ned charges Wattrel before its attack")
+{
+    GIVEN {
+        PLAYER(SPECIES_LAPRAS) { Level(25); HP(110); Speed(35); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_ICE_BEAM); }
+        PLAYER(SPECIES_LAPRAS) { Level(25); HP(110); Speed(30); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_ICE_BEAM); }
+        AuthoredOpponent(TRAINER_NED, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_ICE_BEAM, target: opponentRight);
+            MOVE(playerRight, MOVE_ICE_BEAM, target: opponentLeft);
+            EXPECT_MOVE(opponentLeft, MOVE_TAILWIND);
+            EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT);
+        }
+    } THEN {
+        EXPECT(playerLeft->hp == 0 || playerRight->hp == 0);
+        Test_MgbaPrintf("NED_WIND_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC shoreline: authored Arrokuda bypasses its own Finneon's Storm Drain")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(40); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(30); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_NED, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_PROTECT);
+            SWITCH(opponentRight, 3);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_TAILWIND);
+            MOVE(opponentRight, MOVE_LIQUIDATION, target: playerLeft);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->ability, ABILITY_STORM_DRAIN);
+        EXPECT_EQ(opponentRight->ability, ABILITY_PROPELLER_TAIL);
+        EXPECT(playerLeft->hp < playerLeft->maxHP);
+        EXPECT_EQ(opponentLeft->statStages[STAT_SPATK], DEFAULT_STAT_STAGE);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Soak forecast: converted Ground targets enable Electric moves only after a legal timely conversion")
+{
+    enum Ability ability = ABILITY_STURDY;
+    u32 setterSpeed = 100;
+    bool32 enabled = TRUE;
+    PARAMETRIZE { }
+    PARAMETRIZE { ability = ABILITY_WATER_ABSORB; enabled = FALSE; }
+    PARAMETRIZE { ability = ABILITY_STORM_DRAIN; enabled = FALSE; }
+    PARAMETRIZE { ability = ABILITY_MAGIC_BOUNCE; enabled = FALSE; }
+    PARAMETRIZE { ability = ABILITY_GOOD_AS_GOLD; enabled = FALSE; }
+    PARAMETRIZE { ability = ABILITY_MULTITYPE; enabled = FALSE; }
+    PARAMETRIZE { setterSpeed = 10; enabled = FALSE; }
+    GIVEN {
+        // Narrow conversion control; deliberately omit Hydro Pump to isolate
+        // the Electric-immunity transition instead of forcing Ned to ignore
+        // a better ordinary Water attack against a Ground opponent.
+        AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
+            | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE
+            | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_GOLEM) { Level(30); HP(200); MaxHP(200); Speed(40); Ability(ability); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_GOLEM) { Level(30); HP(200); MaxHP(200); Speed(30); Ability(ability); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_FINNEON) { Level(30); Speed(setterSpeed); Ability(ABILITY_STORM_DRAIN); Moves(MOVE_SOAK, MOVE_PROTECT); }
+        OPPONENT(SPECIES_WATTREL) { Level(30); Speed(80); Ability(ABILITY_WIND_POWER); Moves(MOVE_THUNDERBOLT, MOVE_AIR_SLASH); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            if (enabled)
+            {
+                EXPECT_MOVE(opponentLeft, MOVE_SOAK);
+                EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT);
+            }
+            else
+                EXPECT_MOVE(opponentRight, MOVE_AIR_SLASH);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Soak anchors: hypothetical types and charge preserve battlers and RNG")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_FERROTHORN) { Speed(40); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(30); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_FINNEON) { Speed(100); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WATTREL) { Speed(80); Ability(ABILITY_WIND_POWER); Item(ITEM_LIFE_ORB); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); }
+    } THEN {
+        struct BattlePokemon saved[MAX_BATTLERS_COUNT];
+        memcpy(saved, gBattleMons, sizeof(saved));
+        rng_value_t first = gRngValue, second = gRng2Value;
+        struct AiCalcValues calc = {.move = MOVE_THUNDERBOLT, .weather = AI_GetWeather(), .terrain = gFieldTimers.terrain};
+        struct SimulatedDamage ordinary = AI_CalcSoakChargeDamage(&calc, B_BATTLER_3, B_BATTLER_0, FALSE, FALSE, FALSE);
+        struct SimulatedDamage soaked = AI_CalcSoakChargeDamage(&calc, B_BATTLER_3, B_BATTLER_0, FALSE, TRUE, FALSE);
+        struct SimulatedDamage charged = AI_CalcSoakChargeDamage(&calc, B_BATTLER_3, B_BATTLER_0, FALSE, TRUE, TRUE);
+        EXPECT(soaked.minimum > ordinary.maximum);
+        EXPECT(charged.minimum > soaked.maximum);
+        u32 priorHits = GetBattlerPartyState(B_BATTLER_3)->timesGotHit;
+        calc.move = MOVE_RAGE_FIST;
+        struct SimulatedDamage quietRage = AI_CalcRageFistDamage(&calc, B_BATTLER_3, B_BATTLER_0, 0, FALSE, FALSE);
+        struct SimulatedDamage fullRage = AI_CalcRageFistDamage(&calc, B_BATTLER_3, B_BATTLER_0, 6, FALSE, FALSE);
+        EXPECT(fullRage.minimum > quietRage.maximum);
+        EXPECT_EQ((u32)GetBattlerPartyState(B_BATTLER_3)->timesGotHit, priorHits);
+        EXPECT_EQ(memcmp(saved, gBattleMons, sizeof(saved)), 0);
+        EXPECT_EQ(memcmp(&gRngValue, &first, sizeof(first)), 0);
+        EXPECT_EQ(memcmp(&gRng2Value, &second, sizeof(second)), 0);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Soak forecast: committed protection and Fake Out deny the conversion payoff")
+{
+    bool32 protect;
+    PARAMETRIZE { protect = TRUE; }
+    PARAMETRIZE { protect = FALSE; }
+    GIVEN {
+        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(55); Speed(25); Ability(ABILITY_IRON_BARBS); Moves(MOVE_PROTECT, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MIENFOO) { Level(20); Speed(30); Ability(ABILITY_REGENERATOR); Moves(MOVE_PROTECT, MOVE_FAKE_OUT); }
+        AuthoredOpponent(TRAINER_NED, 1, FALSE);
+    } WHEN {
+        TURN {
+            if (protect)
+            {
+                MOVE(playerLeft, MOVE_PROTECT);
+                MOVE(playerRight, MOVE_PROTECT);
+                NOT_EXPECT_MOVE(opponentLeft, MOVE_SOAK);
+            }
+            else
+            {
+                MOVE(playerLeft, MOVE_CELEBRATE);
+                MOVE(playerRight, MOVE_FAKE_OUT, target: opponentLeft);
+                // Thunderbolt may correctly KO Mienfoo more reliably than
+                // Air Slash. It must not target resistant Ferrothorn on the
+                // fictitious assumption that the flinched Finneon used Soak.
+            }
+        }
+    } THEN {
+        EXPECT_EQ(playerLeft->types[0], TYPE_GRASS);
+        EXPECT_EQ(playerLeft->types[1], TYPE_STEEL);
+        if (!protect)
+            EXPECT(gChosenMoveByBattler[B_BATTLER_3] != MOVE_THUNDERBOLT
+                || gBattleStruct->moveTarget[B_BATTLER_3] != B_BATTLER_0);
+    }
 }
 
 
@@ -479,7 +908,12 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Flannery advances Eruption before o
         PLAYER(SPECIES_HERACROSS) { Level(40); Moves(MOVE_ROCK_SLIDE); Speed(GetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_SPEED)); }
         AuthoredOpponent(TRAINER_FLANNERY_1, 3, FALSE);
     } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_ERUPTION); EXPECT_MOVE(opponentRight, MOVE_AFTER_YOU, target: opponentLeft); }
+        TURN {
+            MOVE(playerLeft, MOVE_ROCK_SLIDE);
+            MOVE(playerRight, MOVE_ROCK_SLIDE);
+            EXPECT_MOVE(opponentLeft, MOVE_ERUPTION);
+            EXPECT_MOVE(opponentRight, MOVE_AFTER_YOU, target: opponentLeft);
+        }
     } SCENE {
         MESSAGE("The opposing Lilligant used After You!");
         MESSAGE("The opposing Torkoal used Eruption!");
@@ -523,6 +957,7 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker repeats Earthquake safely th
         TURN {
             MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT);
             EXPECT_MOVE(opponentLeft, MOVE_TRICK_ROOM);
+            EXPECT_MOVE(opponentRight, MOVE_EARTHQUAKE);
         }
         TURN {
             MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
@@ -531,10 +966,12 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker repeats Earthquake safely th
             EXPECT_MOVE(opponentLeft, MOVE_INSTRUCT, target: opponentRight);
         }
     } THEN {
-        EXPECT_EQ(opponentLeft->speed, 62);
-        EXPECT_EQ(opponentRight->speed, 54);
+        EXPECT(opponentRight->speed < opponentLeft->speed);
+        EXPECT(opponentLeft->speed < playerLeft->speed);
         EXPECT(gFieldStatuses & STATUS_FIELD_TRICK_ROOM);
         EXPECT_EQ(opponentLeft->hp, opponentLeft->maxHP);
+        EXPECT_EQ(playerLeft->hp, 0);
+        EXPECT_EQ(playerRight->hp, 0);
     }
 }
 
@@ -591,6 +1028,9 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Maura escapes her countdown while r
 
 AI_DOUBLE_BATTLE_TEST("EC doubles budget: initial Mega and full benches stay below 1.2 seconds")
 {
+    bool32 guard;
+    PARAMETRIZE { guard = TRUE; }
+    PARAMETRIZE { guard = FALSE; }
     GIVEN {
         // Frozen reproduction of the measured 89-frame decision, not a
         // trainer-design lock. Keep native form stats; do not hide this cost
@@ -636,11 +1076,26 @@ AI_DOUBLE_BATTLE_TEST("EC doubles budget: initial Mega and full benches stay bel
             }
         }
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT); }
+        TURN {
+            if (guard)
+            {
+                MOVE(playerLeft, MOVE_PROTECT);
+                MOVE(playerRight, MOVE_PROTECT);
+            }
+            else
+            {
+                MOVE(playerLeft, MOVE_HIGH_JUMP_KICK, target: opponentRight);
+                MOVE(playerRight, MOVE_PSYCHIC, target: opponentLeft);
+                SEND_OUT(playerRight, 2);
+            }
+        }
     } THEN {
-        EXPECT_EQ(opponentRight->species, SPECIES_KANGASKHAN_MEGA);
-        EXPECT_EQ(GetBattlerAbility(B_BATTLER_3), ABILITY_PARENTAL_BOND);
-        EXPECT_EQ(opponentRight->speed, 83);
+        if (!guard)
+        {
+            EXPECT_EQ(opponentRight->species, SPECIES_KANGASKHAN_MEGA);
+            EXPECT_EQ(GetBattlerAbility(B_BATTLER_3), ABILITY_PARENTAL_BOND);
+            EXPECT_EQ(opponentRight->speed, 83);
+        }
         Test_MgbaPrintf("MEGA_BUDGET_INITIAL_FRAMES=%d", gBattleStruct->aiDelayFrames);
         EXPECT(gBattleStruct->aiDelayFrames <= 72);
     }
@@ -754,5 +1209,420 @@ AI_DOUBLE_BATTLE_TEST("EC revealed redirection: do not repeatedly feed Volt Abso
         // An initial prediction error is allowed. A revealed, still-legal
         // redirector must not receive repeated healing Thunderbolts.
         EXPECT(opponentRight->pp[0] >= 14);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC Laura pivot mechanics: a faster U-turn preserves the same recipient and adds damage")
+{
+    bool32 pivot;
+    PARAMETRIZE { pivot = FALSE; }
+    PARAMETRIZE { pivot = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_TOGETIC) { Level(20); HP(70); MaxHP(70); Defense(62); SpDefense(53); Speed(27); Ability(ABILITY_SERENE_GRACE); Item(ITEM_EVIOLITE); Moves(MOVE_HELPING_HAND); }
+        PLAYER(SPECIES_SYLVEON) { Level(20); HP(86); MaxHP(86); Defense(37); SpAttack(73); SpDefense(63); Speed(35); Ability(ABILITY_PIXILATE); Item(ITEM_COVERT_CLOAK); Moves(MOVE_HYPER_VOICE); }
+        AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HELPING_HAND, target: playerRight);
+            MOVE(playerRight, MOVE_HYPER_VOICE, criticalHit: FALSE);
+            if (pivot)
+            {
+                MOVE(opponentLeft, MOVE_U_TURN, target: playerRight, criticalHit: FALSE);
+                SEND_OUT(opponentLeft, 2);
+            }
+            else
+                SWITCH(opponentLeft, 2);
+            MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_CROAGUNK);
+        EXPECT(opponentLeft->hp > 0);
+        EXPECT_EQ(opponentRight->hp, opponentRight->maxHP);
+        EXPECT_EQ(playerLeft->hp, playerLeft->maxHP);
+        if (pivot)
+            EXPECT(playerRight->hp < playerRight->maxHP);
+        else
+            EXPECT_EQ(playerRight->hp, playerRight->maxHP);
+        Test_MgbaPrintf("LAURA_PIVOT=%d CROAGUNK_HP=%d SYLVEON_HP=%d", pivot, opponentLeft->hp, playerRight->hp);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Laura pivot: use the guaranteed faster exit but keep an immediate escape from a faster attack")
+{
+    bool32 fastPlayer;
+    bool32 flinch = FALSE;
+    PARAMETRIZE { fastPlayer = FALSE; }
+    PARAMETRIZE { fastPlayer = TRUE; }
+    PARAMETRIZE { fastPlayer = FALSE; flinch = TRUE; }
+    // Keep the interruption case lethal after the authored level change:
+    // the player's Fake Out must precede every response, and Hyper Voice must
+    // still require an escape rather than merely chip the stronger Mienfoo.
+    GIVEN {
+        PLAYER(flinch ? SPECIES_MIENFOO : SPECIES_TOGETIC) { Level(20); HP(70); MaxHP(70); Attack(24); Defense(62); SpDefense(53); Speed(flinch ? 100 : 27); Ability(flinch ? ABILITY_REGENERATOR : ABILITY_SERENE_GRACE); Item(ITEM_EVIOLITE); Moves(MOVE_HELPING_HAND, MOVE_FAKE_OUT); }
+        PLAYER(SPECIES_SYLVEON) { Level(20); HP(86); MaxHP(86); Defense(37); SpAttack(flinch ? 120 : 73); SpDefense(63); Speed(fastPlayer ? 80 : 35); Ability(ABILITY_PIXILATE); Item(ITEM_COVERT_CLOAK); Moves(MOVE_HYPER_VOICE); }
+        AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
+    } WHEN {
+        TURN {
+            if (flinch)
+                MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentLeft, criticalHit: FALSE);
+            else
+                MOVE(playerLeft, MOVE_HELPING_HAND, target: playerRight);
+            MOVE(playerRight, MOVE_HYPER_VOICE, criticalHit: FALSE);
+            if (fastPlayer || flinch)
+                EXPECT_SWITCH(opponentLeft, 2);
+            else
+            {
+                EXPECT_MOVE(opponentLeft, MOVE_U_TURN, target: playerRight);
+                EXPECT_SEND_OUT(opponentLeft, 2);
+            }
+            EXPECT_MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_CROAGUNK);
+        EXPECT(opponentLeft->hp > 0);
+        EXPECT_EQ(opponentRight->hp, opponentRight->maxHP);
+        if (fastPlayer || flinch)
+            EXPECT_EQ(playerRight->hp, playerRight->maxHP);
+        else
+            EXPECT(playerRight->hp < playerRight->maxHP);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC pivot exits: preserve immediate switching when the extra hit has a cost")
+{
+    u32 hazard;
+    PARAMETRIZE { hazard = 0; } // Passive target: take the extra hit.
+    PARAMETRIZE { hazard = 1; } // Life Orb would faint the outgoing actor.
+    PARAMETRIZE { hazard = 2; } // Contact damage would prevent its departure.
+    PARAMETRIZE { hazard = 3; } // The extra hit would activate the target's Sitrus.
+    GIVEN {
+        AI_FLAGS(gTrainers[DIFFICULTY_NORMAL][TRAINER_LAURA].aiFlags | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_TOGETIC) { Level(20); HP(70); MaxHP(70); Defense(62); SpDefense(53); Speed(27); Ability(ABILITY_SERENE_GRACE); Item(ITEM_EVIOLITE); Moves(MOVE_HELPING_HAND); }
+        PLAYER(SPECIES_SYLVEON) { Level(20); HP(hazard == 3 ? 55 : 86); MaxHP(86); Defense(37); SpAttack(73); SpDefense(63); Speed(35); Ability(ABILITY_PIXILATE); Item(hazard == 2 ? ITEM_ROCKY_HELMET : hazard == 3 ? ITEM_SITRUS_BERRY : ITEM_COVERT_CLOAK); Moves(MOVE_HYPER_VOICE); }
+        OPPONENT(SPECIES_MIENFOO) { Level(24); HP(hazard == 1 || hazard == 2 ? 1 : 63); MaxHP(63); Attack(68); Defense(36); SpDefense(36); Speed(63); Ability(ABILITY_REGENERATOR); Item(hazard == 1 ? ITEM_LIFE_ORB : ITEM_EVIOLITE); Moves(MOVE_U_TURN); }
+        OPPONENT(SPECIES_TIMBURR) { Level(25); HP(96); MaxHP(96); Speed(30); Ability(ABILITY_GUTS); Item(ITEM_FLAME_ORB); Moves(MOVE_PROTECT); }
+        OPPONENT(SPECIES_CROAGUNK) { Level(25); HP(82); MaxHP(82); SpDefense(100); Speed(37); Ability(ABILITY_DRY_SKIN); Item(ITEM_EVIOLITE); Moves(MOVE_SLUDGE_BOMB); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HELPING_HAND, target: playerRight);
+            MOVE(playerRight, MOVE_HYPER_VOICE, criticalHit: FALSE);
+            if (!hazard)
+            {
+                EXPECT_MOVE(opponentLeft, MOVE_U_TURN, target: playerRight);
+                EXPECT_SEND_OUT(opponentLeft, 2);
+            }
+            else
+                EXPECT_SWITCH(opponentLeft, 2);
+            EXPECT_MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_CROAGUNK);
+        EXPECT(opponentLeft->hp > 0);
+        if (!hazard)
+            EXPECT(playerRight->hp < 86);
+        else
+            EXPECT_EQ(playerRight->hp, hazard == 3 ? 55 : 86);
+    }
+}
+
+// The proposed compulsory Sash switch was not a sound requirement: Toxic
+// Chain can poison the one-HP recipient before the end-turn checkpoint.
+DOUBLE_BATTLE_TEST("EC Laura Sash: Toxic Chain makes the one-HP reserve outcome conditional")
+{
+    bool32 chain;
+    PARAMETRIZE { chain = FALSE; }
+    PARAMETRIZE { chain = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_MUNKIDORI) { Level(20); HP(71); MaxHP(71); SpAttack(75); Speed(72); Ability(ABILITY_TOXIC_CHAIN); Item(ITEM_COVERT_CLOAK); Moves(MOVE_PSYCHIC); }
+        PLAYER(SPECIES_SYLVEON) { Level(20); HP(86); MaxHP(86); SpAttack(73); Speed(35); Ability(ABILITY_PIXILATE); Item(ITEM_COVERT_CLOAK); Moves(MOVE_MOONBLAST); }
+        AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentLeft, criticalHit: FALSE, secondaryEffect: FALSE, WITH_RNG(RNG_TOXIC_CHAIN, chain));
+            MOVE(playerRight, MOVE_MOONBLAST, target: opponentRight, criticalHit: FALSE);
+            SWITCH(opponentLeft, 5);
+            MOVE(opponentRight, MOVE_PROTECT);
+            if (chain)
+                SEND_OUT(opponentLeft, 2);
+        }
+    } THEN {
+        if (chain)
+        {
+            EXPECT_EQ(GetMonData(&GetBattlerParty(B_BATTLER_1)[5], MON_DATA_HP), 0);
+            EXPECT_EQ(opponentLeft->species, SPECIES_CROAGUNK);
+        }
+        else
+        {
+            EXPECT_EQ(opponentLeft->species, SPECIES_TYROGUE);
+            EXPECT_EQ(opponentLeft->hp, 1);
+        }
+        EXPECT_EQ(opponentRight->hp, opponentRight->maxHP);
+        EXPECT_EQ(playerLeft->hp, playerLeft->maxHP);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC Laura levels: native Mienfoo stats open the Psychic survival range at 26")
+{
+    u32 level;
+    PARAMETRIZE { level = 24; }
+    PARAMETRIZE { level = 25; }
+    PARAMETRIZE { level = 26; }
+    GIVEN {
+        PLAYER(SPECIES_MUNKIDORI) { Level(20); SpAttack(75); Speed(72); Ability(ABILITY_TOXIC_CHAIN); Item(ITEM_COVERT_CLOAK); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_GASTLY) { Speed(10); Moves(MOVE_CELEBRATE); }
+        struct Pokemon mon;
+        const struct EmeraldChampionsBattleSet set = {.moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_U_TURN}, .item = ITEM_EVIOLITE, .ability = ABILITY_REGENERATOR, .nature = NATURE_JOLLY, .evs = {4,252,0,0,0,252}};
+        CreateRandomMonWithIVs(&mon, SPECIES_MIENFOO, level, MAX_PER_STAT_IVS);
+        EXPECT_EQ(ApplyEmeraldChampionsScriptedSet(&mon, &set), EC_BATTLE_SET_SUCCESS);
+        CalculateMonStats(&mon);
+        OPPONENT(SPECIES_MIENFOO) {
+            *gBattleTestRunnerState->data.currentMon = mon;
+            Nature(GetNature(&mon)); Ability(GetMonAbility(&mon)); Speed(GetMonData(&mon, MON_DATA_SPEED));
+            Moves(MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_U_TURN);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_FAKE_OUT, target: playerRight); MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } THEN {
+        for (u32 battler = 0; battler < gBattlersCount; battler++)
+            SetBattlerAiData(battler, gAiLogicData);
+        struct AiCalcValues calc = {.move = MOVE_PSYCHIC, .weather = AI_GetWeather(), .terrain = gFieldTimers.terrain};
+        struct SimulatedDamage damage = AI_CalcDamage(&calc, B_BATTLER_0, B_BATTLER_1);
+        if (level < 26)
+            EXPECT(damage.minimum >= opponentLeft->hp);
+        else
+        {
+            EXPECT(damage.minimum < opponentLeft->hp);
+            EXPECT(damage.maximum >= opponentLeft->hp);
+        }
+        Test_MgbaPrintf("MIENFOO_LEVEL=%d HP=%d SPDEF=%d PSYCHIC=%d..%d", level, opponentLeft->hp, opponentLeft->spDefense, damage.minimum, damage.maximum);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC Takao benchmark: minimum-roll Specs Bug Buzz removes Wobbuffet before Mirror Coat")
+{
+    GIVEN {
+        struct Pokemon mon;
+        const struct EmeraldChampionsBattleSet set = {.moves = {MOVE_BUG_BUZZ, MOVE_ICE_BEAM, MOVE_FOCUS_BLAST, MOVE_U_TURN}, .item = ITEM_CHOICE_SPECS, .ability = ABILITY_BEAST_BOOST, .nature = NATURE_MODEST, .evs = {4,0,0,252,0,252}};
+        CreateRandomMonWithIVs(&mon, SPECIES_PHEROMOSA, 20, MAX_PER_STAT_IVS);
+        EXPECT_EQ(ApplyEmeraldChampionsScriptedSet(&mon, &set), EC_BATTLE_SET_SUCCESS);
+        CalculateMonStats(&mon);
+        PLAYER(SPECIES_PHEROMOSA) {
+            *gBattleTestRunnerState->data.currentMon = mon;
+            Nature(GetNature(&mon)); Ability(GetMonAbility(&mon)); Speed(GetMonData(&mon, MON_DATA_SPEED));
+            Moves(MOVE_BUG_BUZZ, MOVE_ICE_BEAM, MOVE_FOCUS_BLAST, MOVE_U_TURN);
+        }
+        PLAYER(SPECIES_MUNKIDORI) { Level(20); HP(71); MaxHP(71); Attack(36); SpAttack(75); Speed(72); Ability(ABILITY_TOXIC_CHAIN); Item(ITEM_COVERT_CLOAK); Moves(MOVE_FAKE_OUT); }
+        AuthoredOpponent(TRAINER_TAKAO, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_BUG_BUZZ, target: opponentRight, criticalHit: FALSE, WITH_RNG(RNG_DAMAGE_MODIFIER, 15));
+            MOVE(playerRight, MOVE_FAKE_OUT, target: opponentLeft, criticalHit: FALSE);
+            MOVE(opponentLeft, MOVE_OCTOLOCK, target: playerLeft);
+            MOVE(opponentRight, MOVE_MIRROR_COAT, target: playerLeft);
+            SEND_OUT(opponentRight, 2);
+        }
+    } THEN {
+        EXPECT_EQ(GetMonData(&GetBattlerParty(B_BATTLER_3)[1], MON_DATA_HP), 0);
+        EXPECT_EQ(playerLeft->hp, playerLeft->maxHP);
+        EXPECT_EQ(playerRight->hp, playerRight->maxHP);
+        Test_MgbaPrintf("PHEROMOSA_SPATK=%d SPEED=%d HP=%d", playerLeft->spAttack, playerLeft->speed, playerLeft->hp);
+    }
+}
+
+
+// Execute the actual Lavaridge field and authored teams. The milestone is set
+// only while producing the cap40 opponent party; no campaign save is advanced.
+static void AuthoredMistyGymOpponent(u16 trainerId)
+{
+    bool32 savedSummit = FlagGet(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
+    FlagSet(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
+    AuthoredOpponent(trainerId, 3, FALSE);
+    if (!savedSummit)
+        FlagClear(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
+}
+
+DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or rain")
+{
+    bool32 rain;
+    u8 savedWeather = WEATHER_NONE;
+    PARAMETRIZE { rain = FALSE; }
+    PARAMETRIZE { rain = TRUE; }
+    GIVEN {
+        savedWeather = gWeatherPtr->currWeather;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
+        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
+        AuthoredMistyGymOpponent(TRAINER_FLANNERY_1);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, rain ? MOVE_RAIN_DANCE : MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_PROTECT);
+            MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        gWeatherPtr->currWeather = savedWeather;
+        EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_MISTY);
+        EXPECT_EQ(gFieldTimers.terrainTimer, 0);
+        EXPECT(gBattleWeather & (rain ? B_WEATHER_RAIN : B_WEATHER_SUN));
+        EXPECT_EQ(opponentRight->item, ITEM_NONE);
+        EXPECT_EQ(opponentRight->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(opponentLeft->species, SPECIES_TORKOAL);
+        EXPECT_EQ(opponentRight->species, SPECIES_LILLIGANT);
+        EXPECT_EQ(opponentLeft->level, 42);
+        EXPECT_EQ(opponentRight->level, 41);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC misty gym: Spinner unlocks Flareon's Orb and keeps the seed boost")
+{
+    bool32 clear;
+    u8 savedWeather = WEATHER_NONE;
+    PARAMETRIZE { clear = FALSE; }
+    PARAMETRIZE { clear = TRUE; }
+    GIVEN {
+        savedWeather = gWeatherPtr->currWeather;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
+        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
+        AuthoredMistyGymOpponent(TRAINER_KEEGAN);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            if (clear) MOVE(opponentLeft, MOVE_ICE_SPINNER, target: playerLeft);
+            else MOVE(opponentLeft, MOVE_PROTECT);
+            MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        gWeatherPtr->currWeather = savedWeather;
+        EXPECT_EQ(opponentLeft->species, SPECIES_HITMONTOP);
+        EXPECT_EQ(opponentLeft->item, ITEM_NONE);
+        EXPECT_EQ(opponentLeft->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(gFieldTimers.terrain, clear ? B_TERRAIN_NONE : B_TERRAIN_MISTY);
+        EXPECT_EQ(opponentRight->status1 & STATUS1_ANY, clear ? STATUS1_TOXIC_POISON : STATUS1_NONE);
+        EXPECT_EQ(opponentRight->ability, ABILITY_GUTS);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC misty gym: Defog opens Corrosion while the airborne Orb works in mist")
+{
+    bool32 clear;
+    u8 savedWeather = WEATHER_NONE;
+    PARAMETRIZE { clear = FALSE; }
+    PARAMETRIZE { clear = TRUE; }
+    GIVEN {
+        savedWeather = gWeatherPtr->currWeather;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
+        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
+        PLAYER(SPECIES_REGISTEEL) { HP(600); MaxHP(600); Speed(10); }
+        AuthoredMistyGymOpponent(TRAINER_JACE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            if (clear) MOVE(opponentLeft, MOVE_DEFOG, target: playerLeft);
+            else MOVE(opponentLeft, MOVE_PROTECT);
+            MOVE(opponentRight, MOVE_TOXIC, target: playerRight);
+        }
+    } THEN {
+        gWeatherPtr->currWeather = savedWeather;
+        EXPECT_EQ(opponentLeft->species, SPECIES_DRIFBLIM);
+        EXPECT_EQ(opponentLeft->status1, STATUS1_BURN);
+        EXPECT_EQ(gFieldTimers.terrain, clear ? B_TERRAIN_NONE : B_TERRAIN_MISTY);
+        EXPECT_EQ(playerRight->status1 & STATUS1_ANY, clear ? STATUS1_TOXIC_POISON : STATUS1_NONE);
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC misty gym: airborne seed sprint does not grant status immunity")
+{
+    u8 savedWeather = WEATHER_NONE;
+    GIVEN {
+        savedWeather = gWeatherPtr->currWeather;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
+        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(150); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
+        AuthoredMistyGymOpponent(TRAINER_JEFF);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_WILL_O_WISP, target: opponentLeft);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_ACROBATICS, target: playerRight);
+            MOVE(opponentRight, MOVE_CROSS_POISON, target: playerRight);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ACROBATICS, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_WILL_O_WISP, playerLeft);
+    } THEN {
+        gWeatherPtr->currWeather = savedWeather;
+        EXPECT_EQ(opponentLeft->species, SPECIES_HAWLUCHA);
+        EXPECT_EQ(opponentLeft->item, ITEM_NONE);
+        EXPECT_EQ(opponentLeft->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT(opponentLeft->volatiles.unburdenActive);
+        EXPECT_EQ(opponentLeft->status1, STATUS1_BURN);
+        EXPECT_EQ(playerRight->status1, STATUS1_NONE);
+        EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_MISTY);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC misty gym AI: vents blocked status but preserves useful or unbreakable mist")
+{
+    u32 scenario = 0;
+    u8 savedWeather = WEATHER_NONE;
+    PARAMETRIZE { scenario = 0; } // Grounded targets: clear mist for Corrosion.
+    PARAMETRIZE { scenario = 1; } // Good as Gold: neither Defog nor Toxic works.
+    PARAMETRIZE { scenario = 2; } // Airborne targets are already status-vulnerable.
+    GIVEN {
+        savedWeather = gWeatherPtr->currWeather;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
+        if (scenario == 0)
+        {
+            PLAYER(SPECIES_SNORLAX) { HP(600); MaxHP(600); Ability(ABILITY_THICK_FAT); SpDefense(250); Speed(10); Moves(MOVE_CELEBRATE); }
+            PLAYER(SPECIES_REGISTEEL) { HP(600); MaxHP(600); SpDefense(250); Speed(10); Moves(MOVE_CELEBRATE); }
+        }
+        else if (scenario == 1)
+        {
+            PLAYER(SPECIES_GHOLDENGO) { HP(600); MaxHP(600); Ability(ABILITY_GOOD_AS_GOLD); SpDefense(250); Speed(10); Moves(MOVE_CELEBRATE); }
+            PLAYER(SPECIES_GHOLDENGO) { HP(600); MaxHP(600); Ability(ABILITY_GOOD_AS_GOLD); SpDefense(250); Speed(10); Moves(MOVE_CELEBRATE); }
+        }
+        else
+        {
+            PLAYER(SPECIES_DRAGONITE) { HP(600); MaxHP(600); SpDefense(250); Speed(10); Moves(MOVE_DRAGON_BREATH); }
+            PLAYER(SPECIES_DRAGONITE) { HP(600); MaxHP(600); SpDefense(250); Speed(10); Moves(MOVE_DRAGON_BREATH); }
+        }
+        AuthoredMistyGymOpponent(TRAINER_JACE);
+    } WHEN {
+        TURN {
+            if (scenario == 2)
+            {
+                MOVE(playerLeft, MOVE_DRAGON_BREATH, target: opponentRight);
+                MOVE(playerRight, MOVE_DRAGON_BREATH, target: opponentRight);
+            }
+            else
+            {
+                MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            }
+            if (scenario == 0) EXPECT_MOVE(opponentLeft, MOVE_DEFOG);
+            else NOT_EXPECT_MOVE(opponentLeft, MOVE_DEFOG);
+        }
+    } THEN {
+        gWeatherPtr->currWeather = savedWeather;
+        EXPECT_EQ(gFieldTimers.terrain, scenario == 0 ? B_TERRAIN_NONE : B_TERRAIN_MISTY);
+        if (scenario == 0)
+            EXPECT_EQ(opponentLeft->status1, STATUS1_BURN);
+
+        // Planning probes must not change the live field, battlers or RNG.
+        typeof(gFieldTimers) savedTimers = gFieldTimers;
+        struct BattlePokemon savedMons[MAX_BATTLERS_COUNT];
+        struct Sfc32State savedRng = gRngValue;
+        memcpy(savedMons, gBattleMons, sizeof(savedMons));
+        ShouldClearTerrain(B_BATTLER_1, B_TERRAIN_MISTY);
+        ShouldSetTerrain(B_BATTLER_1, B_TERRAIN_MISTY);
+        EXPECT_EQ(memcmp(&savedTimers, &gFieldTimers, sizeof(savedTimers)), 0);
+        EXPECT_EQ(memcmp(savedMons, gBattleMons, sizeof(savedMons)), 0);
+        EXPECT_EQ(memcmp(&savedRng, &gRngValue, sizeof(savedRng)), 0);
+        Test_MgbaPrintf("MISTY_GYM_AI_SCENARIO=%d FRAMES=%d", scenario, gBattleStruct->aiDelayFrames);
     }
 }

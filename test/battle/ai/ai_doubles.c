@@ -2600,22 +2600,24 @@ AI_DOUBLE_BATTLE_TEST("AI uses Magnetic Flux")
 AI_DOUBLE_BATTLE_TEST("EC expert pair: candidate evaluation restores board caches field and RNG")
 {
     bool32 plusMinus;
+    bool32 dancer = FALSE;
     enum Item offensiveItem;
     PARAMETRIZE { plusMinus = FALSE; offensiveItem = ITEM_NONE; }
     PARAMETRIZE { plusMinus = TRUE; offensiveItem = ITEM_NONE; }
     PARAMETRIZE { plusMinus = FALSE; offensiveItem = ITEM_DEEP_SEA_TOOTH; }
     PARAMETRIZE { plusMinus = FALSE; offensiveItem = ITEM_LIFE_ORB; }
+    PARAMETRIZE { dancer = TRUE; plusMinus = FALSE; offensiveItem = ITEM_CHOICE_SPECS; }
     GIVEN {
         AI_FLAGS(EC_EXPERT_FLAGS);
         PLAYER(SPECIES_CHARMANDER) { Level(50); HP(500); MaxHP(500); SpDefense(300); Speed(40); Item(ITEM_PASSHO_BERRY); Moves(MOVE_CELEBRATE, MOVE_KNOCK_OFF); }
         PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(500); MaxHP(500); SpDefense(300); Speed(30); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_ORANGURU) { Level(50); HP(500); MaxHP(500); SpAttack(10); Speed(60); Ability(plusMinus ? ABILITY_PLUS : ABILITY_TELEPATHY); Moves(MOVE_HELPING_HAND, MOVE_MUD_SLAP, MOVE_PROTECT, MOVE_TRICK_ROOM); }
-        OPPONENT(offensiveItem == ITEM_DEEP_SEA_TOOTH ? SPECIES_CLAMPERL : SPECIES_BLASTOISE) { Level(50); HP(500); MaxHP(500); SpAttack(100); Speed(100); Item(offensiveItem); Ability(plusMinus ? ABILITY_MINUS : ABILITY_TORRENT); Moves(MOVE_SURF, MOVE_PROTECT); }
+        OPPONENT(dancer ? SPECIES_VOLCARONA : SPECIES_ORANGURU) { Level(50); HP(500); MaxHP(500); SpAttack(10); Speed(60); Ability(plusMinus ? ABILITY_PLUS : ABILITY_TELEPATHY); Moves(dancer ? MOVE_FIERY_DANCE : MOVE_HELPING_HAND, MOVE_MUD_SLAP, MOVE_PROTECT, MOVE_TRICK_ROOM); }
+        OPPONENT(dancer ? SPECIES_ORICORIO_POM_POM : offensiveItem == ITEM_DEEP_SEA_TOOTH ? SPECIES_CLAMPERL : SPECIES_BLASTOISE) { Level(50); HP(500); MaxHP(500); SpAttack(100); Speed(100); Item(offensiveItem); Ability(dancer ? ABILITY_DANCER : plusMinus ? ABILITY_MINUS : ABILITY_TORRENT); Moves(MOVE_SURF, MOVE_PROTECT); }
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_CELEBRATE);
             MOVE(playerRight, MOVE_CELEBRATE);
-            EXPECT_MOVES(opponentLeft, MOVE_HELPING_HAND, MOVE_MUD_SLAP, MOVE_PROTECT, MOVE_TRICK_ROOM);
+            EXPECT_MOVES(opponentLeft, dancer ? MOVE_FIERY_DANCE : MOVE_HELPING_HAND, MOVE_MUD_SLAP, MOVE_PROTECT, MOVE_TRICK_ROOM);
             EXPECT_MOVES(opponentRight, MOVE_SURF, MOVE_PROTECT);
         }
     } THEN {
