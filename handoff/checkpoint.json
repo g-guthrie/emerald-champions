@@ -1,255 +1,267 @@
 {
   "schema_version": 1,
-  "date": "2026-09-14",
-  "session": "work/v4-c15-dwayne-revised-play",
-  "current_step": 24,
-  "chapter": "C15",
-  "map": "MAP_ROUTE109_SEASHORE_HOUSE",
-  "position": [
-    2,
-    5
-  ],
-  "facing": "up",
-  "controls_locked": true,
+  "date": "2026-09-15",
+  "status": "fresh run pending",
+  "session": "work/fresh-run/c01-opening",
+  "save": null,
+  "chapter": "C01",
   "difficulty": "Medium",
-  "player_cap": 24,
-  "earned_unique_trainer_clears": 40,
-  "cleared_trainers": [
-    {
-      "id": 10,
-      "name": "TRAINER_GRUNT_PETALBURG_WOODS"
-    },
-    {
-      "id": 16,
-      "name": "TRAINER_GRUNT_RUSTURF_TUNNEL"
-    },
-    {
-      "id": 114,
-      "name": "TRAINER_CINDY_1"
-    },
-    {
-      "id": 136,
-      "name": "TRAINER_WINSTON_1"
-    },
-    {
-      "id": 179,
-      "name": "TRAINER_TAKAO"
-    },
-    {
-      "id": 265,
-      "name": "TRAINER_ROXANNE_1"
-    },
-    {
-      "id": 273,
-      "name": "TRAINER_JERRY_1"
-    },
-    {
-      "id": 318,
-      "name": "TRAINER_CALVIN_1"
-    },
-    {
-      "id": 319,
-      "name": "TRAINER_BILLY"
-    },
-    {
-      "id": 320,
-      "name": "TRAINER_JOSH"
-    },
-    {
-      "id": 321,
-      "name": "TRAINER_TOMMY"
-    },
-    {
-      "id": 322,
-      "name": "TRAINER_JOEY"
-    },
-    {
-      "id": 333,
-      "name": "TRAINER_ALLEN"
-    },
-    {
-      "id": 339,
-      "name": "TRAINER_ELLIOT_1"
-    },
-    {
-      "id": 340,
-      "name": "TRAINER_NED"
-    },
-    {
-      "id": 426,
-      "name": "TRAINER_LAURA"
-    },
-    {
-      "id": 529,
-      "name": "TRAINER_MAY_ROUTE_103_MUDKIP"
-    },
-    {
-      "id": 571,
-      "name": "TRAINER_MARC"
-    },
-    {
-      "id": 572,
-      "name": "TRAINER_BRENDEN"
-    },
-    {
-      "id": 573,
-      "name": "TRAINER_LILITH"
-    },
-    {
-      "id": 600,
-      "name": "TRAINER_MAY_RUSTBORO_MUDKIP"
-    },
-    {
-      "id": 603,
-      "name": "TRAINER_TIANA"
-    },
-    {
-      "id": 605,
-      "name": "TRAINER_JANICE"
-    },
-    {
-      "id": 615,
-      "name": "TRAINER_RICK"
-    },
-    {
-      "id": 616,
-      "name": "TRAINER_LYLE"
-    },
-    {
-      "id": 617,
-      "name": "TRAINER_JOSE"
-    },
-    {
-      "id": 621,
-      "name": "TRAINER_JAMES_1"
-    },
-    {
-      "id": 631,
-      "name": "TRAINER_CLARK"
-    },
-    {
-      "id": 694,
-      "name": "TRAINER_DAWSON"
-    },
-    {
-      "id": 695,
-      "name": "TRAINER_SARAH"
-    },
-    {
-      "id": 696,
-      "name": "TRAINER_DARIAN"
-    },
-    {
-      "id": 753,
-      "name": "TRAINER_DEVAN"
-    },
-    {
-      "id": 754,
-      "name": "TRAINER_JOHNSON"
-    },
-    {
-      "id": 574,
-      "name": "TRAINER_CRISTIAN"
-    },
-    {
-      "id": 425,
-      "name": "TRAINER_JOCELYN"
-    },
-    {
-      "id": 266,
-      "name": "TRAINER_BRAWLY_1"
-    },
-    {
-      "id": 697,
-      "name": "TRAINER_HAILEY"
-    },
-    {
-      "id": 491,
-      "name": "TRAINER_EDMOND"
-    },
-    {
-      "id": 57,
-      "name": "TRAINER_LOLA_1"
-    },
-    {
-      "id": 698,
-      "name": "TRAINER_CHANDLER"
-    }
-  ],
-  "uncleared_next": [
-    "TRAINER_DWAYNE (experimental retest; original already won)",
-    "TRAINER_JOHANNA",
-    "TRAINER_SIMON"
-  ],
-  "immediate_plan": "Implement and visually verify the book scene batch: C44 wreck/Scanner, C45 three accounts, C30 flights and existing reveal sequencing. Earned C15 play and team review remain paused.",
-  "repel_spray": "off",
-  "poke_vial_charges": 1,
-  "party_order": [
-    "Aerodactyl",
-    "Munkidori",
-    "Alakazam",
-    "Azumarill",
-    "Kartana",
-    "Togekiss"
-  ],
-  "party_hp": [
-    0,
-    40,
-    0,
-    67,
-    70,
-    97
-  ],
-  "party_level": [
-    24,
-    24,
-    24,
-    24,
-    24,
-    24
-  ],
-  "rom_sha256": "317853db0bad8e5959df122607e545e00f89987155bcc8ff4c6fc874b8a2d0d4",
-  "elf_sha256": "4be73d450eb31691f3333ad9d90be4ce3c7fc29c811f3fc9234df4ddc1443724",
-  "inputs_sha256": "82e40fe26eef64e26b263c162b24c0f866bf65c0d3233fc11af4a1f33328a33b",
-  "save": "work/v4-c15-assisted-play/pre-dwayne.sav",
-  "save_sha256": "e3467d180424084f1ac7c52c092ab5f6b91242a7fe526e769fc58199ae90dd56",
-  "state": "work/v4-c15-dwayne-revised-play/current.ss1",
-  "state_sha256": "4bb6c27082b42e3dbdf983cde622c479db02a0e0c35313e0ece43959f5a4b15e",
-  "trace": "work/v4-c15-dwayne-revised-play/trace.json",
-  "source_patch": "Current source includes early-team revisions, restored Gina/Mia, 370 active variants, wide trainer offsets/overlevel preservation, opening economy and pending rewards, Medium default, shared AI fixes, and all four Rustboro Gym redesigns. Immutable Dwayne retest uses older ROM; never transplant its state.",
-  "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
-  "evidence_limits": "40 clears in paused retest save;41 distinct clears evidenced by original Dwayne win elsewhere. Revised Dwayne is experimental and paused turn5. Reviews through28 and native fixtures do not certify full battle difficulty. Joey16 and full-game acceptance remain open.",
-  "recent_results": {
-    "Cristian": [
-      "loss8",
-      "loss8",
-      "win13"
+  "player_cap": 14,
+  "cleared_trainers": [],
+  "note": "The September 14 C15 session (work/v4-c15-dwayne-revised-play, 40 clears) was lost with a deleted clone; the run restarts from a new game on the new spine. Previous fields retained under 'lost_checkpoint'.",
+  "lost_checkpoint": {
+    "schema_version": 1,
+    "date": "2026-09-14",
+    "session": "work/v4-c15-dwayne-revised-play",
+    "current_step": 24,
+    "chapter": "C15",
+    "map": "MAP_ROUTE109_SEASHORE_HOUSE",
+    "position": [
+      2,
+      5
     ],
-    "Jocelyn": [
-      "loss13",
-      "loss8",
-      "win7"
+    "facing": "up",
+    "controls_locked": true,
+    "difficulty": "Medium",
+    "player_cap": 24,
+    "earned_unique_trainer_clears": 40,
+    "cleared_trainers": [
+      {
+        "id": 10,
+        "name": "TRAINER_GRUNT_PETALBURG_WOODS"
+      },
+      {
+        "id": 16,
+        "name": "TRAINER_GRUNT_RUSTURF_TUNNEL"
+      },
+      {
+        "id": 114,
+        "name": "TRAINER_CINDY_1"
+      },
+      {
+        "id": 136,
+        "name": "TRAINER_WINSTON_1"
+      },
+      {
+        "id": 179,
+        "name": "TRAINER_TAKAO"
+      },
+      {
+        "id": 265,
+        "name": "TRAINER_ROXANNE_1"
+      },
+      {
+        "id": 273,
+        "name": "TRAINER_JERRY_1"
+      },
+      {
+        "id": 318,
+        "name": "TRAINER_CALVIN_1"
+      },
+      {
+        "id": 319,
+        "name": "TRAINER_BILLY"
+      },
+      {
+        "id": 320,
+        "name": "TRAINER_JOSH"
+      },
+      {
+        "id": 321,
+        "name": "TRAINER_TOMMY"
+      },
+      {
+        "id": 322,
+        "name": "TRAINER_JOEY"
+      },
+      {
+        "id": 333,
+        "name": "TRAINER_ALLEN"
+      },
+      {
+        "id": 339,
+        "name": "TRAINER_ELLIOT_1"
+      },
+      {
+        "id": 340,
+        "name": "TRAINER_NED"
+      },
+      {
+        "id": 426,
+        "name": "TRAINER_LAURA"
+      },
+      {
+        "id": 529,
+        "name": "TRAINER_MAY_ROUTE_103_MUDKIP"
+      },
+      {
+        "id": 571,
+        "name": "TRAINER_MARC"
+      },
+      {
+        "id": 572,
+        "name": "TRAINER_BRENDEN"
+      },
+      {
+        "id": 573,
+        "name": "TRAINER_LILITH"
+      },
+      {
+        "id": 600,
+        "name": "TRAINER_MAY_RUSTBORO_MUDKIP"
+      },
+      {
+        "id": 603,
+        "name": "TRAINER_TIANA"
+      },
+      {
+        "id": 605,
+        "name": "TRAINER_JANICE"
+      },
+      {
+        "id": 615,
+        "name": "TRAINER_RICK"
+      },
+      {
+        "id": 616,
+        "name": "TRAINER_LYLE"
+      },
+      {
+        "id": 617,
+        "name": "TRAINER_JOSE"
+      },
+      {
+        "id": 621,
+        "name": "TRAINER_JAMES_1"
+      },
+      {
+        "id": 631,
+        "name": "TRAINER_CLARK"
+      },
+      {
+        "id": 694,
+        "name": "TRAINER_DAWSON"
+      },
+      {
+        "id": 695,
+        "name": "TRAINER_SARAH"
+      },
+      {
+        "id": 696,
+        "name": "TRAINER_DARIAN"
+      },
+      {
+        "id": 753,
+        "name": "TRAINER_DEVAN"
+      },
+      {
+        "id": 754,
+        "name": "TRAINER_JOHNSON"
+      },
+      {
+        "id": 574,
+        "name": "TRAINER_CRISTIAN"
+      },
+      {
+        "id": 425,
+        "name": "TRAINER_JOCELYN"
+      },
+      {
+        "id": 266,
+        "name": "TRAINER_BRAWLY_1"
+      },
+      {
+        "id": 697,
+        "name": "TRAINER_HAILEY"
+      },
+      {
+        "id": 491,
+        "name": "TRAINER_EDMOND"
+      },
+      {
+        "id": 57,
+        "name": "TRAINER_LOLA_1"
+      },
+      {
+        "id": 698,
+        "name": "TRAINER_CHANDLER"
+      }
     ],
-    "Brawly": [
-      "loss10",
-      "loss10",
-      "loss13",
-      "loss11",
-      "loss11",
-      "loss12",
-      "win11"
+    "uncleared_next": [
+      "TRAINER_DWAYNE (experimental retest; original already won)",
+      "TRAINER_JOHANNA",
+      "TRAINER_SIMON"
     ],
-    "Hailey": [
-      "win9"
+    "immediate_plan": "Implement and visually verify the book scene batch: C44 wreck/Scanner, C45 three accounts, C30 flights and existing reveal sequencing. Earned C15 play and team review remain paused.",
+    "repel_spray": "off",
+    "poke_vial_charges": 1,
+    "party_order": [
+      "Aerodactyl",
+      "Munkidori",
+      "Alakazam",
+      "Azumarill",
+      "Kartana",
+      "Togekiss"
     ],
-    "Edmond": [
-      "win12"
+    "party_hp": [
+      0,
+      40,
+      0,
+      67,
+      70,
+      97
+    ],
+    "party_level": [
+      24,
+      24,
+      24,
+      24,
+      24,
+      24
+    ],
+    "rom_sha256": "317853db0bad8e5959df122607e545e00f89987155bcc8ff4c6fc874b8a2d0d4",
+    "elf_sha256": "4be73d450eb31691f3333ad9d90be4ce3c7fc29c811f3fc9234df4ddc1443724",
+    "inputs_sha256": "82e40fe26eef64e26b263c162b24c0f866bf65c0d3233fc11af4a1f33328a33b",
+    "save": "work/v4-c15-assisted-play/pre-dwayne.sav",
+    "save_sha256": "e3467d180424084f1ac7c52c092ab5f6b91242a7fe526e769fc58199ae90dd56",
+    "state": "work/v4-c15-dwayne-revised-play/current.ss1",
+    "state_sha256": "4bb6c27082b42e3dbdf983cde622c479db02a0e0c35313e0ece43959f5a4b15e",
+    "trace": "work/v4-c15-dwayne-revised-play/trace.json",
+    "source_patch": "Current source includes early-team revisions, restored Gina/Mia, 370 active variants, wide trainer offsets/overlevel preservation, opening economy and pending rewards, Medium default, shared AI fixes, and all four Rustboro Gym redesigns. Immutable Dwayne retest uses older ROM; never transplant its state.",
+    "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
+    "evidence_limits": "40 clears in paused retest save;41 distinct clears evidenced by original Dwayne win elsewhere. Revised Dwayne is experimental and paused turn5. Reviews through28 and native fixtures do not certify full battle difficulty. Joey16 and full-game acceptance remain open.",
+    "recent_results": {
+      "Cristian": [
+        "loss8",
+        "loss8",
+        "win13"
+      ],
+      "Jocelyn": [
+        "loss13",
+        "loss8",
+        "win7"
+      ],
+      "Brawly": [
+        "loss10",
+        "loss10",
+        "loss13",
+        "loss11",
+        "loss11",
+        "loss12",
+        "win11"
+      ],
+      "Hailey": [
+        "win9"
+      ],
+      "Edmond": [
+        "win12"
+      ]
+    },
+    "evidenced_unique_trainer_clears": 41,
+    "active_work_mode": "book_overworld_scene_implementation_with_emerald_studio",
+    "reviewed_through_battle": 28,
+    "review_holds": [
+      "Joey16"
     ]
-  },
-  "evidenced_unique_trainer_clears": 41,
-  "active_work_mode": "book_overworld_scene_implementation_with_emerald_studio",
-  "reviewed_through_battle": 28,
-  "review_holds": [
-    "Joey16"
-  ]
+  }
 }

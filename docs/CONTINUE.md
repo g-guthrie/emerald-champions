@@ -15,16 +15,19 @@ Next three blocks:
    against the cap window's reference parties (define those first, two or three
    per window, from the available pool).
 
-Earned save status (September 15): the paused C15 save
-(`work/v4-c15-assisted-play/pre-dwayne.sav`, 40 clears) was lost when the
-redundant `emerald-champions-restored-20260914` clone was deleted on a git
-status check that could not see the gitignored `work/` directory. No other
-copy exists on this machine. Recovery: fetch the September 13 handoff archive
-(`python3 scripts/playthrough/fetch_handoff.py`, `v4-resume.tar.gz`, about 36
-clears at C14), resume it on the current ROM with a clean Continue, then replay
-the Route109 beach clears and the Slateport arrival. Update
-`handoff/checkpoint.json` to the restored path afterwards. Never delete a clone
-without `git status --ignored`.
+Earned run (September 15): the paused C15 save was lost with a deleted clone
+(see the day log). Decision: start fresh rather than restore the September 13
+archive. The fresh Medium run lives under `work/fresh-run/` (session per
+chapter, native saves exported at each chapter close) and is the only source
+of L3 from now on. `handoff/checkpoint.json` points at it.
+
+Ownership split (September 15): another session is rewriting trainer teams
+and the battle AI. This session does not touch
+`data/emerald_champions/emerald_champions_battle_teams.txt`, `src/battle_ai*`,
+`src/battle_util*` or `test/battle/ai/*`; it owns story scripts, economy,
+world data, docs, the book and the acceptance machinery. Re-materialization
+and index refreshes are run after their commits land, never on their working
+tree.
 
 Dialogue survey (September 15): `work/dialogue-survey/report.md` inventories
 2,474 flagged labels across 539 Hoenn scripts (R5 line length dominates at
