@@ -1,4 +1,37 @@
-# Current development checkpoint — September 15, 2026
+# Current development checkpoint — September 15, 2026 (team/AI session)
+
+Landed this session (all on main, release gates PASS, focused AI suite 89/89):
+
+- Opponent AI no longer reads the player's pending commands at any difficulty
+  (user decision). Pair scoring runs on expected value under a weighted mix of
+  foe forecasts; Protect/Wide Guard/Quick Guard/Fake Out are credited only for
+  what they bank, with a tempo cost and native consecutive-use odds; authored
+  ACTIVATE/INSTRUCT/AFTER_YOU tactics carry a bounded explicit reward. Budget
+  fixtures sit at 66/62 of 72 frames. Report: `work/ai-uncertainty-20260915/`.
+  Constants are tuned against the fixture suite, not play: the next Medium
+  playthrough is the calibration source for `PAIR_GUARD_*`/`PAIR_FORECAST_*`.
+- Every retained encounter now has an audited authored design: the 205
+  post-Flannery encounters were reviewed in three delegated chunks (Petalburg
+  Gym → Fortree; Magma/Aqua/Mt. Pyre/Space Center/Mossdeep/Lilycove rival;
+  Seafloor/Archie/Sootopolis/Victory Road/finale) against the hand-crafted
+  first 131 + League as the bar, each block answering "could this be cooler?"
+  and carrying individual level offsets. Highlights: both Gyms and both
+  hideouts rebuilt as coherent showcases, Archie and Maxie (hideout) redesigned
+  as distinct apex bosses, Wally's Victory Road arc built from his own
+  partners, Cynthia's self-disabling lead fixed, ~20 duplicate sets broken up.
+- Teams check gained two gates: move legality (Showdown pin ∪ ROM learnset,
+  form aliases resolved) and strategy/tactic coherence (setters, weather
+  conflicts, redirection, Perish, ACTIVATE super-effective-on-ally). All clear.
+- Campaign-wide: Trick Room members with minus-Speed natures carry 0 Speed IVs
+  (Parker's Instruct Oranguru deliberately excepted). Magearnite moved to
+  Clifford (Mossdeep). AGENTS.md and the book state the new AI rule.
+
+Next: choose the playthrough approach (see the earned-run note below), then
+native L2 benchmarks of Gyms, Magma/Aqua and the League under the new AI,
+tuning Protect constants and level offsets from real play. Review-index
+statuses are "implemented" for all 341; that is design/source coverage only.
+
+# Previous checkpoint — September 15, 2026 (story/economy session)
 
 State: the consolidation goal (`docs/GOAL.md`) has landed its baseline,
 campaign, economy and Phase 2 machinery in four commits today; the guide is
