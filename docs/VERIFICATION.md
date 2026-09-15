@@ -1411,3 +1411,26 @@ release gates PASS (ROM27,861,944 bytes allocated; EWRAM232,374;
 IWRAM28,312). Game Book freshness check PASS. The native League test covers
 five boss parameter cases; the total focused run is four groups including
 the two existing budget groups and one owner/namespace group.
+
+## Opponent AI without the player read — September 15, 2026
+
+The opponent no longer waits for confirmed human commands; it decides at
+`STATE_TURN_START_RECORD` and scores doubles pairs on expected value under a
+weighted mix of foe forecasts (`src/battle_ai_pair.c`: `PAIR_FORECAST_*`,
+`PAIR_GUARD_*`, `PAIR_TACTIC_REWARD`, `PAIR_RISK_AVERSION`). Report and
+constants: `work/ai-uncertainty-20260915/Report.md` (rounds 1–3). Focused
+regression loop for any change to that model:
+
+```sh
+make -j4 check-tools
+DEVKITARM=/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload make -j6 TEST=1 TEST_SOURCE_ALLOWLIST='test/test_runner.c test/test_runner_args.c test/test_runner_battle.c test/battle/ai/coaching_pair.c test/battle/ai/fainted_target_pair.c test/battle/ai/prankster_burn_pair.c test/battle/ai/quash_pair.c test/battle/ai/primary_support_pair.c test/battle/ai/emerald_champions_plans.c test/battle/ai/mega_reveal.c test/battle/ai/protect_cadence.c test/battle/ai/dancer_pair.c test/battle/ai/screen_pair.c test/battle/ai/taunt_pair.c test/battle/ai/weather_survival_pair.c test/battle/ai/reflect_damage_pair.c test/battle/ai/emerald_champions_perish.c' pokeemerald-test.elf
+python3 scripts/stamp_release_inputs.py --stamp pokeemerald-test.inputs.json
+python3 scripts/playthrough/run_focus.py --elf pokeemerald-test.elf --filter 'EC '
+```
+
+Expected: 89 groups pass. Budget fixtures (`EC Dancer budget`, `EC doubles
+budget`) must stay at or under 72 frames; they sit at 66 and 62. The test ELF
+stamp covers `src/data/trainers.party`, so any team re-materialization requires
+a rebuild before `run_focus.py` will run. The teams check now also gates move
+legality (Showdown pin ∪ ROM learnset) and strategy/tactic coherence:
+`python3 scripts/emerald_champions_teams.py --check`.

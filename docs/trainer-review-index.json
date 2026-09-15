@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Source-based design-review coverage, not earned victories or full native traversal acceptance Ladder fields and source_sha256 are maintained only by scripts/acceptance_ladder.py --write; do not hand-edit them.",
   "count_rule": "368 authored variants minus25 extra rival gender/starter variants and2 extra enemy owners in explicit two-owner battles =341 encounters. Shared E numbers are NOT merged.",
-  "reviewed_implemented_first_access": 131,
+  "reviewed_implemented_first_access": 341,
   "previously_reviewed_access_deferred": [],
   "current_review_indices": null,
   "within_unlock_order": "A chosen coherent review route among simultaneously available branches, not a claim every trainer is mandatory or the order is forced.",
@@ -3786,7 +3786,7 @@
     {
       "key": "TRAINER_AARON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_AARON"
       ],
@@ -3819,12 +3819,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ALAN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ALAN"
       ],
@@ -3858,7 +3859,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ALANNAH",
@@ -3904,7 +3906,7 @@
     {
       "key": "TRAINER_ALBERT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ALBERT"
       ],
@@ -3937,12 +3939,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ALEXA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ALEXA"
       ],
@@ -3975,12 +3978,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ALEXIA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ALEXIA"
       ],
@@ -4014,12 +4018,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ALEXIS",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ALEXIS"
       ],
@@ -4053,12 +4058,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ALIX",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ALIX"
       ],
@@ -4092,12 +4098,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ANDREA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ANDREA"
       ],
@@ -4130,12 +4137,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ANNIKA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ANNIKA"
       ],
@@ -4168,12 +4176,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ARCHIE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ARCHIE"
       ],
@@ -4197,12 +4206,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ASHLEY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ASHLEY"
       ],
@@ -4235,12 +4245,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ATHENA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ATHENA"
       ],
@@ -4273,12 +4284,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_AURON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_AURON"
       ],
@@ -4311,7 +4323,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_AUTUMN",
@@ -4398,7 +4411,7 @@
     {
       "key": "TRAINER_BEAU",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BEAU"
       ],
@@ -4432,12 +4445,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BERKE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BERKE"
       ],
@@ -4471,12 +4485,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BETHANY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BETHANY"
       ],
@@ -4509,12 +4524,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BLAKE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BLAKE"
       ],
@@ -4547,12 +4563,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BRAXTON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BRAXTON"
       ],
@@ -4585,12 +4602,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BRENDA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BRENDA"
       ],
@@ -4623,12 +4641,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BRENDAN_LILYCOVE_MUDKIP|TRAINER_BRENDAN_LILYCOVE_TORCHIC|TRAINER_BRENDAN_LILYCOVE_TREECKO|TRAINER_MAY_LILYCOVE_MUDKIP|TRAINER_MAY_LILYCOVE_TORCHIC|TRAINER_MAY_LILYCOVE_TREECKO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BRENDAN_LILYCOVE_MUDKIP",
         "TRAINER_BRENDAN_LILYCOVE_TORCHIC",
@@ -4751,12 +4770,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BRENDAN_ROUTE_119_MUDKIP|TRAINER_BRENDAN_ROUTE_119_TORCHIC|TRAINER_BRENDAN_ROUTE_119_TREECKO|TRAINER_MAY_ROUTE_119_MUDKIP|TRAINER_MAY_ROUTE_119_TORCHIC|TRAINER_MAY_ROUTE_119_TREECKO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BRENDAN_ROUTE_119_MUDKIP",
         "TRAINER_BRENDAN_ROUTE_119_TORCHIC",
@@ -4830,12 +4850,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BRIANNA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BRIANNA"
       ],
@@ -4868,7 +4889,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BRICE",
@@ -4913,7 +4935,7 @@
     {
       "key": "TRAINER_BRIDGET",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BRIDGET"
       ],
@@ -4946,7 +4968,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_BROOKE_1",
@@ -5041,7 +5064,7 @@
     {
       "key": "TRAINER_BUFFEL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_BUFFEL"
       ],
@@ -5074,12 +5097,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CAROLINA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CAROLINA"
       ],
@@ -5113,12 +5137,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CAROLINE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CAROLINE"
       ],
@@ -5151,12 +5176,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CATHERINE_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CATHERINE_1"
       ],
@@ -5198,7 +5224,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CHARLOTTE",
@@ -5244,7 +5271,7 @@
     {
       "key": "TRAINER_CLIFFORD",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CLIFFORD"
       ],
@@ -5277,7 +5304,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_COBY",
@@ -5363,7 +5391,7 @@
     {
       "key": "TRAINER_COLIN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_COLIN"
       ],
@@ -5396,12 +5424,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_COLTON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_COLTON"
       ],
@@ -5434,12 +5463,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CONNIE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CONNIE"
       ],
@@ -5472,12 +5502,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CONOR",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CONOR"
       ],
@@ -5510,12 +5541,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_COURTNEY_MAGMA_HIDEOUT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_COURTNEY_MAGMA_HIDEOUT"
       ],
@@ -5548,7 +5580,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_COURTNEY_METEOR_FALLS|TRAINER_GRUNT_METEOR_FALLS",
@@ -5597,7 +5630,7 @@
     {
       "key": "TRAINER_COURTNEY_MOSSDEEP|TRAINER_MAXIE_MOSSDEEP",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_COURTNEY_MOSSDEEP",
         "TRAINER_MAXIE_MOSSDEEP"
@@ -5650,12 +5683,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CRISSY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CRISSY"
       ],
@@ -5688,12 +5722,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CRISTIN_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CRISTIN_1"
       ],
@@ -5735,7 +5770,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_CYNDY_1",
@@ -5790,7 +5826,7 @@
     {
       "key": "TRAINER_CYNTHIA_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_CYNTHIA_1"
       ],
@@ -5823,7 +5859,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DANIELLE",
@@ -5869,7 +5906,7 @@
     {
       "key": "TRAINER_DAPHNE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DAPHNE"
       ],
@@ -5902,12 +5939,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DARCY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DARCY"
       ],
@@ -5940,12 +5978,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DARIUS",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DARIUS"
       ],
@@ -5978,12 +6017,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DARRIN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DARRIN"
       ],
@@ -6017,7 +6057,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DIANA_1",
@@ -6072,7 +6113,7 @@
     {
       "key": "TRAINER_DIANNE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DIANNE"
       ],
@@ -6105,7 +6146,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DILLON",
@@ -6150,7 +6192,7 @@
     {
       "key": "TRAINER_DONALD",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DONALD"
       ],
@@ -6183,12 +6225,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DOUG",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DOUG"
       ],
@@ -6221,7 +6264,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DRAKE",
@@ -6267,7 +6311,7 @@
     {
       "key": "TRAINER_DREW",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DREW"
       ],
@@ -6301,12 +6345,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DUNCAN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DUNCAN"
       ],
@@ -6339,12 +6384,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_DUSTY_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DUSTY_1"
       ],
@@ -6387,12 +6433,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_EDGAR",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_EDGAR"
       ],
@@ -6425,12 +6472,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_EDWARDO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_EDWARDO"
       ],
@@ -6463,7 +6511,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ELI",
@@ -6600,7 +6649,7 @@
     {
       "key": "TRAINER_EVERETT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_EVERETT"
       ],
@@ -6634,12 +6683,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_FELIX",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_FELIX"
       ],
@@ -6672,7 +6722,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_FLANNERY_1",
@@ -6727,7 +6778,7 @@
     {
       "key": "TRAINER_FLINT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_FLINT"
       ],
@@ -6760,12 +6811,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_FOSTER",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_FOSTER"
       ],
@@ -6799,12 +6851,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_FREDRICK",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_FREDRICK"
       ],
@@ -6837,7 +6890,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GABBY_AND_TY_1",
@@ -6900,7 +6954,7 @@
     {
       "key": "TRAINER_GABBY_AND_TY_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GABBY_AND_TY_2"
       ],
@@ -6951,12 +7005,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GABBY_AND_TY_5",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GABBY_AND_TY_5"
       ],
@@ -7007,12 +7062,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GABBY_AND_TY_6",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GABBY_AND_TY_6"
       ],
@@ -7095,12 +7151,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GABRIELLE_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GABRIELLE_1"
       ],
@@ -7142,12 +7199,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GARRISON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GARRISON"
       ],
@@ -7180,12 +7238,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GEORGE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GEORGE"
       ],
@@ -7219,7 +7278,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GEORGIA",
@@ -7347,7 +7407,7 @@
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_1"
       ],
@@ -7380,12 +7440,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_2"
       ],
@@ -7418,12 +7479,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_3",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_3"
       ],
@@ -7456,12 +7518,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_4",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_4"
       ],
@@ -7494,12 +7557,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_5",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_5"
       ],
@@ -7532,12 +7596,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_6",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_6"
       ],
@@ -7570,12 +7635,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_7",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_7"
       ],
@@ -7608,12 +7674,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_8",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_AQUA_HIDEOUT_8"
       ],
@@ -7646,7 +7713,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_JAGGED_PASS",
@@ -7692,7 +7760,7 @@
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_1"
       ],
@@ -7725,12 +7793,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_10",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_10"
       ],
@@ -7763,12 +7832,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_11",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_11"
       ],
@@ -7801,12 +7871,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_12",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_12"
       ],
@@ -7839,12 +7910,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_13",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_13"
       ],
@@ -7877,12 +7949,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_14",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_14"
       ],
@@ -7915,12 +7988,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_15",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_15"
       ],
@@ -7953,12 +8027,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_16",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_16"
       ],
@@ -7991,12 +8066,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_2"
       ],
@@ -8029,12 +8105,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_3",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_3"
       ],
@@ -8067,12 +8144,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_4",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_4"
       ],
@@ -8105,12 +8183,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_5",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_5"
       ],
@@ -8143,12 +8222,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_6",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_6"
       ],
@@ -8181,12 +8261,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_7",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_7"
       ],
@@ -8219,12 +8300,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_8",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_8"
       ],
@@ -8257,12 +8339,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_9",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MAGMA_HIDEOUT_9"
       ],
@@ -8295,7 +8378,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MT_CHIMNEY_1",
@@ -8341,7 +8425,7 @@
     {
       "key": "TRAINER_GRUNT_MT_PYRE_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MT_PYRE_1"
       ],
@@ -8374,12 +8458,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MT_PYRE_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MT_PYRE_2"
       ],
@@ -8412,12 +8497,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MT_PYRE_3",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MT_PYRE_3"
       ],
@@ -8450,12 +8536,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_MT_PYRE_4",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_MT_PYRE_4"
       ],
@@ -8488,12 +8575,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SEAFLOOR_CAVERN_1"
       ],
@@ -8526,12 +8614,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SEAFLOOR_CAVERN_2"
       ],
@@ -8564,12 +8653,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_3",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SEAFLOOR_CAVERN_3"
       ],
@@ -8602,12 +8692,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_4",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SEAFLOOR_CAVERN_4"
       ],
@@ -8640,12 +8731,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_5",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SEAFLOOR_CAVERN_5"
       ],
@@ -8678,12 +8770,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SPACE_CENTER_1"
       ],
@@ -8716,12 +8809,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SPACE_CENTER_2"
       ],
@@ -8754,12 +8848,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_3",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SPACE_CENTER_3"
       ],
@@ -8792,12 +8887,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_4",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SPACE_CENTER_4"
       ],
@@ -8830,12 +8926,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_5",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SPACE_CENTER_5"
       ],
@@ -8859,12 +8956,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_7",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_SPACE_CENTER_7"
       ],
@@ -8897,12 +8995,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_WEATHER_INST_1"
       ],
@@ -8935,12 +9034,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_WEATHER_INST_2"
       ],
@@ -8973,12 +9073,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_3",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_WEATHER_INST_3"
       ],
@@ -9011,12 +9112,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_4",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_WEATHER_INST_4"
       ],
@@ -9049,12 +9151,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_5",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GRUNT_WEATHER_INST_5"
       ],
@@ -9087,12 +9190,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HALLE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HALLE"
       ],
@@ -9125,12 +9229,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HANNAH",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HANNAH"
       ],
@@ -9163,12 +9268,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HEIDI",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HEIDI"
       ],
@@ -9202,12 +9308,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HERMAN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HERMAN"
       ],
@@ -9240,12 +9347,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HIDEO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HIDEO"
       ],
@@ -9278,12 +9386,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HOPE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HOPE"
       ],
@@ -9316,12 +9425,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HUDSON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HUDSON"
       ],
@@ -9354,12 +9464,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_HUMBERTO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_HUMBERTO"
       ],
@@ -9392,7 +9503,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JACE",
@@ -9438,7 +9550,7 @@
     {
       "key": "TRAINER_JACKSON_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JACKSON_1"
       ],
@@ -9480,12 +9592,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JANI",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JANI"
       ],
@@ -9518,12 +9631,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JARED",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JARED"
       ],
@@ -9556,7 +9670,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JAYLEN",
@@ -9601,7 +9716,7 @@
     {
       "key": "TRAINER_JAZMYN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JAZMYN"
       ],
@@ -9634,7 +9749,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JEFF",
@@ -9680,7 +9796,7 @@
     {
       "key": "TRAINER_JENNA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JENNA"
       ],
@@ -9713,12 +9829,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JENNIFER",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JENNIFER"
       ],
@@ -9751,12 +9868,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JODY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JODY"
       ],
@@ -9790,12 +9908,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JONATHAN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JONATHAN"
       ],
@@ -9828,12 +9947,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JOSUE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JOSUE"
       ],
@@ -9867,12 +9987,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JUAN_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JUAN_1"
       ],
@@ -9914,12 +10035,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JULIE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JULIE"
       ],
@@ -9952,7 +10074,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_JULIO",
@@ -9998,7 +10121,7 @@
     {
       "key": "TRAINER_JUSTIN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_JUSTIN"
       ],
@@ -10032,7 +10155,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_KAI",
@@ -10078,7 +10202,7 @@
     {
       "key": "TRAINER_KARA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_KARA"
       ],
@@ -10111,12 +10235,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_KATELYNN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_KATELYNN"
       ],
@@ -10149,12 +10274,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_KATELYN_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_KATELYN_1"
       ],
@@ -10196,12 +10322,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_KATHLEEN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_KATHLEEN"
       ],
@@ -10234,12 +10361,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_KAYLEY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_KAYLEY"
       ],
@@ -10272,7 +10400,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_KEEGAN",
@@ -10318,7 +10447,7 @@
     {
       "key": "TRAINER_KEIRA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_KEIRA"
       ],
@@ -10352,7 +10481,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LAWRENCE",
@@ -10397,7 +10527,7 @@
     {
       "key": "TRAINER_LEAF_ALTERING_CAVE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_LEAF_ALTERING_CAVE"
       ],
@@ -10421,12 +10551,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LEA_AND_JED",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_LEA_AND_JED"
       ],
@@ -10476,7 +10607,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LENNY",
@@ -10522,7 +10654,7 @@
     {
       "key": "TRAINER_LEROY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_LEROY"
       ],
@@ -10556,12 +10688,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LILA_AND_ROY_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_LILA_AND_ROY_1"
       ],
@@ -10629,12 +10762,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LINDA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_LINDA"
       ],
@@ -10667,12 +10801,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LORENZO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_LORENZO"
       ],
@@ -10705,7 +10840,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LUCAS_1",
@@ -10792,7 +10928,7 @@
     {
       "key": "TRAINER_LUIS",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_LUIS"
       ],
@@ -10826,7 +10962,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_LUNG",
@@ -10871,7 +11008,7 @@
     {
       "key": "TRAINER_MACEY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MACEY"
       ],
@@ -10904,12 +11041,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MAGIKARP_GUY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MAGIKARP_GUY"
       ],
@@ -10943,12 +11081,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MAKAYLA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MAKAYLA"
       ],
@@ -10981,12 +11120,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MARCEL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MARCEL"
       ],
@@ -11019,12 +11159,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MARIELA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MARIELA"
       ],
@@ -11058,7 +11199,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MARLENE",
@@ -11104,7 +11246,7 @@
     {
       "key": "TRAINER_MARLEY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MARLEY"
       ],
@@ -11137,12 +11279,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MARTHA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MARTHA"
       ],
@@ -11176,12 +11319,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MARY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MARY"
       ],
@@ -11215,12 +11359,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MATT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MATT"
       ],
@@ -11253,12 +11398,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MATT_MT_PYRE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MATT_MT_PYRE"
       ],
@@ -11291,12 +11437,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MAURA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MAURA"
       ],
@@ -11329,12 +11476,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MAXIE_MAGMA_HIDEOUT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MAXIE_MAGMA_HIDEOUT"
       ],
@@ -11367,7 +11515,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MAXIE_MT_CHIMNEY",
@@ -11413,7 +11562,7 @@
     {
       "key": "TRAINER_MEL_AND_PAUL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MEL_AND_PAUL"
       ],
@@ -11464,12 +11613,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MICAH",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MICAH"
       ],
@@ -11502,12 +11652,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MICHELLE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MICHELLE"
       ],
@@ -11540,12 +11691,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MITCHELL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MITCHELL"
       ],
@@ -11578,12 +11730,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MIU_AND_YUKI",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MIU_AND_YUKI"
       ],
@@ -11633,12 +11786,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MOLLIE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MOLLIE"
       ],
@@ -11671,12 +11825,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_MYLES",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_MYLES"
       ],
@@ -11709,12 +11864,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_NAOMI",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_NAOMI"
       ],
@@ -11747,12 +11903,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_NATE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_NATE"
       ],
@@ -11785,12 +11942,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_NICHOLAS",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_NICHOLAS"
       ],
@@ -11823,12 +11981,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_NICOLAS_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_NICOLAS_1"
       ],
@@ -11870,12 +12029,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_NIKKI",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_NIKKI"
       ],
@@ -11908,12 +12068,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_NORMAN_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_NORMAN_1"
       ],
@@ -11947,12 +12108,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_OLIVIA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_OLIVIA"
       ],
@@ -11985,12 +12147,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_OWEN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_OWEN"
       ],
@@ -12023,12 +12186,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_PARKER",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_PARKER"
       ],
@@ -12062,12 +12226,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_PAT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_PAT"
       ],
@@ -12100,12 +12265,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_PAXTON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_PAXTON"
       ],
@@ -12138,12 +12304,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_PHIL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_PHIL"
       ],
@@ -12176,7 +12343,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_PHOEBE",
@@ -12222,7 +12390,7 @@
     {
       "key": "TRAINER_PRESTON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_PRESTON"
       ],
@@ -12255,12 +12423,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_QUINCY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_QUINCY"
       ],
@@ -12293,12 +12462,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_RANDALL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_RANDALL"
       ],
@@ -12332,12 +12502,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ROGER",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_ROGER"
       ],
@@ -12370,7 +12541,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_ROMAN",
@@ -12416,7 +12588,7 @@
     {
       "key": "TRAINER_RONALD",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_RONALD"
       ],
@@ -12449,12 +12621,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_RUBEN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_RUBEN"
       ],
@@ -12487,12 +12660,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SAMANTHA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SAMANTHA"
       ],
@@ -12525,12 +12699,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SAMUEL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SAMUEL"
       ],
@@ -12563,12 +12738,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SANTIAGO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SANTIAGO"
       ],
@@ -12601,12 +12777,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SEBASTIAN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SEBASTIAN"
       ],
@@ -12640,12 +12817,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SHANNON",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SHANNON"
       ],
@@ -12678,7 +12856,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SHAYLA",
@@ -12773,7 +12952,7 @@
     {
       "key": "TRAINER_SHELLY_SEAFLOOR_CAVERN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SHELLY_SEAFLOOR_CAVERN"
       ],
@@ -12806,12 +12985,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SHELLY_WEATHER_INSTITUTE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SHELLY_WEATHER_INSTITUTE"
       ],
@@ -12844,7 +13024,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SHIRLEY",
@@ -12931,7 +13112,7 @@
     {
       "key": "TRAINER_SOPHIA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SOPHIA"
       ],
@@ -12965,7 +13146,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SOPHIE",
@@ -13010,7 +13192,7 @@
     {
       "key": "TRAINER_SPENSER_FORTREE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SPENSER_FORTREE"
       ],
@@ -13043,12 +13225,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_STEVEN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_STEVEN"
       ],
@@ -13081,7 +13264,8 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_STEVE_1",
@@ -13136,7 +13320,7 @@
     {
       "key": "TRAINER_SUSIE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SUSIE"
       ],
@@ -13169,12 +13353,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_SYLVIA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SYLVIA"
       ],
@@ -13207,12 +13392,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TABITHA_MAGMA_HIDEOUT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TABITHA_MAGMA_HIDEOUT"
       ],
@@ -13245,12 +13431,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TABITHA_MOSSDEEP",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TABITHA_MOSSDEEP"
       ],
@@ -13283,7 +13470,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TABITHA_MT_CHIMNEY",
@@ -13329,7 +13517,7 @@
     {
       "key": "TRAINER_TARA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TARA"
       ],
@@ -13363,12 +13551,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TATE_AND_LIZA_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TATE_AND_LIZA_1"
       ],
@@ -13418,12 +13607,13 @@
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TAYLOR",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TAYLOR"
       ],
@@ -13456,7 +13646,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TED",
@@ -13502,7 +13693,7 @@
     {
       "key": "TRAINER_THOMAS",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_THOMAS"
       ],
@@ -13535,12 +13726,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TIFFANY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TIFFANY"
       ],
@@ -13573,12 +13765,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TIMOTHY_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TIMOTHY_1"
       ],
@@ -13621,7 +13814,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_TORI_AND_TIA",
@@ -13683,7 +13877,7 @@
     {
       "key": "TRAINER_TRAVIS",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_TRAVIS"
       ],
@@ -13717,12 +13911,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_VINCENT",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_VINCENT"
       ],
@@ -13756,12 +13951,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_VIRGIL",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_VIRGIL"
       ],
@@ -13794,12 +13990,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_VITO",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_VITO"
       ],
@@ -13832,7 +14029,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_WALLACE",
@@ -13878,7 +14076,7 @@
     {
       "key": "TRAINER_WALLACE_DOUBLES_LEGENDS",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_WALLACE_DOUBLES_LEGENDS"
       ],
@@ -13911,12 +14109,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_WALLY_VR_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_WALLY_VR_1"
       ],
@@ -13940,12 +14139,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_WALLY_VR_2",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_WALLY_VR_2"
       ],
@@ -13987,12 +14187,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_WARREN",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_WARREN"
       ],
@@ -14025,12 +14226,13 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_WENDY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_WENDY"
       ],
@@ -14063,7 +14265,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_WILTON_1",
@@ -14118,7 +14321,7 @@
     {
       "key": "TRAINER_WINONA_1",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_WINONA_1"
       ],
@@ -14160,7 +14363,8 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     },
     {
       "key": "TRAINER_WYATT",
@@ -14205,7 +14409,7 @@
     {
       "key": "TRAINER_YUJI",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_YUJI"
       ],
@@ -14239,22 +14443,26 @@
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
         "L3_earned_clear": false
-      }
+      },
+      "review_artifact": "September 15 trainer audits B/C/D (commits 5eba46b2e9, 400994b3da, aebf2b05e9, 604d505f7d); design/source implementation only, no native calibration"
     }
   ],
   "current_frontier_audit": {
-    "status": "implemented_through_flannery",
-    "scope": "All current first-access branches through Flannery, including early Ember Path/Ashen Woods; Gym Misty Terrain explicitly retained",
-    "receipt": "work/trainer-through-flannery-implementation/Implementation.md",
-    "evidence_limit": "Source access/design and focused native checks; no earned traversal or full-battle calibration claim"
+    "status": "all_encounters_implemented",
+    "scope": "Every retained encounter has an audited authored design (first 131 + League hand-crafted; 205 audited September 15 by delegated review with main-agent merge review)",
+    "receipt": "work/ai-uncertainty-20260915/Report.md and the audit commits",
+    "evidence_limit": "Source design, generator gates and focused native AI regressions; no earned traversal or full-battle calibration claim"
   },
-  "next_review_index": 132,
+  "next_review_index": null,
   "major_battle_review": {
     "completed": [
-      "Elite Four and Champion"
+      "Elite Four and Champion",
+      "Whole Gyms (Petalburg, Fortree, Mossdeep, Sootopolis)",
+      "Magma/Aqua story groups (Weather Institute, Mt. Pyre, Magma Hideout, Aqua Hideout, Space Center, Seafloor Cavern)",
+      "All remaining route/ace/Victory Road/finale encounters"
     ],
-    "next": "Whole Gyms, then Magma/Aqua story groups",
-    "implemented_encounters_total": 136,
-    "first_access_review_boundary": 131
+    "next": "Native L2 benchmarks against reference parties under the no-read AI; Protect/guard constants tuned from play",
+    "implemented_encounters_total": 341,
+    "first_access_review_boundary": 341
   }
 }
