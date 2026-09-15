@@ -199,7 +199,8 @@ MossdeepCity_StevensHouse_Text_ResearchConclusion:
 
 MossdeepCity_StevensHouse_Text_GrantAndCapLine:
 	.string "DEVON has sent your final grant:\n"
-	.string "¥{STR_VAR_2}. Your level cap is now {STR_VAR_1}.$"
+	.string "¥{STR_VAR_2}.\p"
+	.string "Your level cap is now {STR_VAR_1}.$"
 
 MossdeepCity_StevensHouse_Text_GrantLine:
 	.string "DEVON has sent your final grant:\n"
