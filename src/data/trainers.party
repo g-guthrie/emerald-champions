@@ -5930,7 +5930,7 @@ SPECIES_PORYGON @ ITEM_EVIOLITE
 Level: 16
 Level Offset: 2
 Ability: ABILITY_DOWNLOAD
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
@@ -5943,7 +5943,7 @@ SPECIES_HONEDGE @ ITEM_LIFE_ORB
 Level: 16
 Level Offset: 2
 Ability: ABILITY_NO_GUARD
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
 Nature: NATURE_BRAVE
@@ -5956,7 +5956,7 @@ SPECIES_GIMMIGHOUL @ ITEM_EVIOLITE
 Level: 19
 Level Offset: 5
 Ability: ABILITY_RATTLED
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
@@ -5969,7 +5969,7 @@ SPECIES_WOOLOO @ ITEM_EVIOLITE
 Level: 19
 Level Offset: 5
 Ability: ABILITY_FLUFFY
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
 Nature: NATURE_BRAVE
@@ -25911,7 +25911,7 @@ SPECIES_GOTHITA @ ITEM_FOCUS_SASH
 Level: 16
 Level Offset: 2
 Ability: ABILITY_SHADOW_TAG
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
@@ -25924,7 +25924,7 @@ SPECIES_SLOWPOKE @ ITEM_SITRUS_BERRY
 Level: 17
 Level Offset: 3
 Ability: ABILITY_REGENERATOR
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
@@ -25937,7 +25937,7 @@ SPECIES_SPOINK @ ITEM_EVIOLITE
 Level: 18
 Level Offset: 4
 Ability: ABILITY_THICK_FAT
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 0 Atk / 116 Def / 0 SpA / 140 SpD / 0 Spe
 Nature: NATURE_SASSY
@@ -25950,7 +25950,7 @@ SPECIES_BALTOY @ ITEM_EVIOLITE
 Level: 18
 Level Offset: 4
 Ability: ABILITY_LEVITATE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
 EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET

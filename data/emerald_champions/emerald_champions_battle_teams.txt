@@ -170,10 +170,10 @@ mega_slots: NONE
 ai: Ace Pokemon
 plan: First two useful turns: Porygon sets Trick Room only when it survives and the resulting order favors Honedge; Honedge attacks or uses Swords Dance only behind adequate protection. Turn two spends the room on damage. Alternate deployment: Porygon and Wooloo form a bulkier room mode with a conditional Cotton Guard option. Reversal converts low HP, including Double Edge recoil, into Fighting coverage without requiring Wooloo to move last. Reserves & disruption: Gimmighoul supplies a special Ghost lane. When room is denied, use immediate damage and defensive switches rather than endlessly retry the setter. Counterplay & audit: Taunt, double targeting Porygon, slower opposing teams, and priority. Disposition: Keep; explicitly choose useful Speed IVs by matchup instead of inferring zero from Quiet/Brave.
 crack: Taunt, double targeting Porygon, slower opposing teams, and priority. Disposition: Keep; explicitly choose useful Speed IVs by matchup instead of inferring zero from Quiet/Brave.
-PORYGON @EVIOLITE DOWNLOAD QUIET 252/0/4/252/0/0 2 | TRI_ATTACK, TRICK_ROOM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-HONEDGE @LIFE_ORB NO_GUARD BRAVE 252/252/4/0/0/0 2 | IRON_HEAD, SACRED_SWORD, SHADOW_SNEAK, SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
-GIMMIGHOUL @EVIOLITE RATTLED QUIET 252/0/4/252/0/0 5 | SHADOW_BALL, POWER_GEM, SUBSTITUTE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-WOOLOO @EVIOLITE FLUFFY BRAVE 252/252/4/0/0/0 5 | COTTON_GUARD, DOUBLE_EDGE, REVERSAL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PORYGON @EVIOLITE DOWNLOAD QUIET 252/0/4/252/0/0 2 | TRI_ATTACK, TRICK_ROOM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+HONEDGE @LIFE_ORB NO_GUARD BRAVE 252/252/4/0/0/0 2 | IRON_HEAD, SACRED_SWORD, SHADOW_SNEAK, SWORDS_DANCE | ivs=31/31/31/31/31/0 | friendship=255
+GIMMIGHOUL @EVIOLITE RATTLED QUIET 252/0/4/252/0/0 5 | SHADOW_BALL, POWER_GEM, SUBSTITUTE, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+WOOLOO @EVIOLITE FLUFFY BRAVE 252/252/4/0/0/0 5 | COTTON_GUARD, DOUBLE_EDGE, REVERSAL, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 
 ## E0014 TRAINER_GINA_AND_MIA_1 class=regular
 strategy: SETUP,PRESSURE
@@ -200,10 +200,10 @@ strategy: TRICK_ROOM,PRESSURE
 mega_slots: NONE
 plan: Previously reviewed Shadow Tag/Yawn lead and reserve Trick Room remain unchanged. Medium36/37/38/38 now refer to the reachable cap34 window, not a pre-Roxanne assumption. Charlotte changes away from the duplicate trap family. Fake Tears is not assumed to precede Slowpoke under Trick Room. Medium cap34 levels 36/37/38/38. Source implementation; full native battle calibration and Protect cadence remain pending.
 crack: Use the documented type, speed, item and support dependencies; no combination is guaranteed against interruption or incompatible targets.
-GOTHITA @FOCUS_SASH SHADOW_TAG QUIET 252/0/4/252/0/0 2 | PSYCHIC, ENERGY_BALL, FAKE_TEARS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SLOWPOKE @SITRUS_BERRY REGENERATOR QUIET 252/0/4/252/0/0 3 | PSYCHIC, HYDRO_PUMP, YAWN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SPOINK @EVIOLITE THICK_FAT SASSY 252/0/116/0/140/0 4 | TRICK_ROOM, PSYCHIC, POWER_GEM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BALTOY @EVIOLITE LEVITATE QUIET 252/0/4/252/0/0 4 | EARTH_POWER, PSYCHIC, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GOTHITA @FOCUS_SASH SHADOW_TAG QUIET 252/0/4/252/0/0 2 | PSYCHIC, ENERGY_BALL, FAKE_TEARS, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+SLOWPOKE @SITRUS_BERRY REGENERATOR QUIET 252/0/4/252/0/0 3 | PSYCHIC, HYDRO_PUMP, YAWN, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+SPOINK @EVIOLITE THICK_FAT SASSY 252/0/116/0/140/0 4 | TRICK_ROOM, PSYCHIC, POWER_GEM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+BALTOY @EVIOLITE LEVITATE QUIET 252/0/4/252/0/0 4 | EARTH_POWER, PSYCHIC, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 
 ## E0020 TRAINER_JOEY class=regular
 strategy: REDIRECTION,PRESSURE
