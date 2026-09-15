@@ -47,7 +47,7 @@ The first Oldale visit, before the prepared Route103 rival, provides healing, st
 
 Manual medicine and X-items cannot brute-force trainer or wild fights. Poké Balls remain usable for catches, and held effects and healing/revival moves remain ordinary battle mechanics. Battle-start held items, including consumed berries, are restored at settlement. Field Potions, Revives, status cures and PP recovery remain exploration conveniences. Centers, the refillable Vial and established rest points reduce the need to purchase them.
 
-Easy, Medium and Hard adjust enemy levels only, by −2/0/+2. Medium is the new-game default. They do not change teams, AI, story or the player cap. Each trainer member uses the live player cap plus its authored individual offset and the difficulty adjustment. Optional return fights scale with the live cap; old absolute levels in generated trainer records are previews. Opponents can exceed100 within the native1–255 representation. No hidden stat multiplier replaces level tuning.
+Easy, Medium and Hard adjust enemy levels only, by −4/−2/0 relative to the existing authored offsets. This September15 global calibration lowers every difficulty mode by two levels; the mode names and player caps remain unchanged. Earlier individual level seeds in review records predate this global reduction. Medium is the new-game default. They do not change teams, AI, story or the player cap. Each trainer member uses the live player cap plus its authored individual offset and the difficulty adjustment. Optional return fights scale with the live cap; old absolute levels in generated trainer records are previews. Opponents can exceed100 within the native1–255 representation. No hidden stat multiplier replaces level tuning.
 
 Player caps rise after milestones, not during their boss fights. Captures, gifts, evolution and preparation respect the current individual cap. Legendary/mythical species above600 configured BST use floor(chapter cap ×600/BST), with a minimum of1. Species at or below600 retain the chapter cap. Ultra Beasts/Paradox species are not automatically restricted. Temporary Mega/Primal forms do not incur a second reduction. No additional Mega-ready penalty is approved.
 
@@ -128548,5 +128548,5 @@ data/scripts/tv.inc:EventScript_DoInSearchOfTrainers => [NATIVE special DoTVShow
 REFERENCE COVERAGE
 Authoring: 368 trainer variants/1753 slots; 1512 unique builds. Map definitions:540. Complete economy census and unresolved conditions are in C6; wild method tables:381; configured evolution rows:496.
 Known limits: this is not a full transcript, runtime access/necessity proof, stock-condition simulator or battle acceptance. Native providers and dynamic regional choices must be followed through their source owner. No claim that prose/code drift is impossible.
-Source SHA256: 63d21ca64794055e56d66a2e3c54eab79c816a921749f69604283362f7fde5ab
+Source SHA256: 8fe5dd8c28ea7a7e33e622a7201463cd101c45c3a215f4a6e743ad3b6920b8b0
 === END GENERATED GAME REFERENCE ===

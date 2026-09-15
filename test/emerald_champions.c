@@ -520,27 +520,27 @@ TEST("Emerald Champions native trainer creation applies live-cap role offsets on
     ResetCampaignCapMilestones();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     CreateNPCTrainerPartyFromTrainer(party, &trainer);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 17);
-    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 14);
-    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
-    CreateNPCTrainerPartyFromTrainer(party, &trainer);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 15);
     EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 12);
-    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     CreateNPCTrainerPartyFromTrainer(party, &trainer);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 13);
     EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 10);
+    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
+    CreateNPCTrainerPartyFromTrainer(party, &trainer);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 11);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 8);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_HP), GetMonData(&party[0], MON_DATA_MAX_HP));
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPECIES), SPECIES_PIKACHU);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_HELD_ITEM), ITEM_LIGHT_BALL);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_MOVE1), MOVE_THUNDERBOLT);
 
     FlagSet(FLAG_IS_CHAMPION);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 101);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 99);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 103);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 101);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 105);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 103);
     ResetCampaignCapMilestones();
     ZeroEnemyPartyMons();
 }

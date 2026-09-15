@@ -33,8 +33,9 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
 }
 
-// Facilities retain their Hard baseline (Easy -4, Normal -2, Hard 0).
-// Campaign authoring uses Normal and adds two before this reduction.
+// Global calibration: every mode is two levels below its former value.
+// Facilities use Easy -6, Normal -4, Hard -2; campaign adds two below,
+// giving authored cap-relative offsets Easy -4, Normal -2, Hard 0.
 // It never changes trainer AI: the player is meant to experiment with the
 // same authored teams and the same opponents at different level gaps.
 u8 GetTrainerLevelReduction(void)
@@ -42,12 +43,12 @@ u8 GetTrainerLevelReduction(void)
     switch (GetCurrentDifficultyLevel())
     {
     case DIFFICULTY_EASY:
-        return 4;
+        return 6;
     case DIFFICULTY_NORMAL:
-        return 2;
+        return 4;
     case DIFFICULTY_HARD:
     default:
-        return 0;
+        return 2;
     }
 }
 

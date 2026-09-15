@@ -34,25 +34,25 @@ TEST("EC trainer levels: wide offsets survive creation, Mega stats and both oppo
     {
         struct Pokemon *party = gParties[owners[i]];
         CreateNPCTrainerPartyFromTrainer(party, &trainer);
-        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 150);
-        EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 250);
-        EXPECT_EQ(GetMonData(&party[2], MON_DATA_LEVEL), 80);
+        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 148);
+        EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 248);
+        EXPECT_EQ(GetMonData(&party[2], MON_DATA_LEVEL), 78);
         EXPECT_EQ(GetMonData(&party[0], MON_DATA_HP), GetMonData(&party[0], MON_DATA_MAX_HP));
         EXPECT_EQ(GetMonData(&party[1], MON_DATA_MOVE1), MOVE_SEISMIC_TOSS);
         u32 exp = GetMonData(&party[0], MON_DATA_EXP);
         u32 attack = GetMonData(&party[0], MON_DATA_ATK);
         SetMonData(&party[0], MON_DATA_SPECIES, &mega);
         CalculateMonStats(&party[0]);
-        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 150);
+        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 148);
         EXPECT_EQ(GetMonData(&party[0], MON_DATA_EXP), exp);
         EXPECT_GT(GetMonData(&party[0], MON_DATA_ATK), attack);
     }
     EXPECT_EQ(GetCampaignTrainerLevel(254), 255);
     EXPECT_EQ(GetCampaignTrainerLevel(-254), 1);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    EXPECT_EQ(GetCampaignTrainerLevel(50), 152);
+    EXPECT_EQ(GetCampaignTrainerLevel(50), 150);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    EXPECT_EQ(GetCampaignTrainerLevel(50), 148);
+    EXPECT_EQ(GetCampaignTrainerLevel(50), 146);
     // A transient opponent level must not leak into saved player progression.
     gParties[B_TRAINER_PLAYER][0] = gParties[B_TRAINER_OPPONENT_A][0];
     CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
