@@ -34,6 +34,18 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
 - Favor deletion, reuse, explicit state and the smallest coherent change. Avoid
   new frameworks, abstraction layers and defensive systems without a real need.
 
+## Ownership split (September 15, 2026)
+
+Two sessions work this repository concurrently. One owns trainer teams and the
+battle AI: `data/emerald_champions/emerald_champions_battle_teams.txt`, its
+materialized outputs, `src/battle_ai*`, `src/battle_util*`, `test/battle/ai/*`.
+The other owns story scripts, economy, world data, docs, the book's hand-authored
+guide and the acceptance machinery (`scripts/*`, `docs/trainer-review-index.json`).
+Do not edit the other side's files; commit by explicit path so a concurrent
+working-tree change is never swept into your commit; re-materialize teams and
+refresh the ladder index only after the team side's commits land. Never delete a
+clone or worktree without `git status --ignored`; `work/` holds earned saves.
+
 ## Book and source stay together
 
 - The book owns intended design. Source implements the game. Reconcile a mismatch;

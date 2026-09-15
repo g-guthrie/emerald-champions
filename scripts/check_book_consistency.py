@@ -32,8 +32,8 @@ Add --fix-readme to rewrite only the roster-count sentence in README.md's
 "Campaign roster" table row from the freshly computed numbers.
 
 This script is wired into scripts/verify_emerald_champions_release.py as a
-gate, but it is deliberately NON-FATAL there unless that release script is
-invoked with --strict-book: the current guide/README/docs text is known to
+release-blocking gate (since September 15, 2026; pass --lenient-book to that
+script to downgrade it to advisory). Historical note: the current guide/README/docs text is known to
 contradict itself (see check 1), and failing the release gate on prose drift
 before that prose is fixed would block unrelated release work. Pass
 --strict-book to scripts/verify_emerald_champions_release.py once the

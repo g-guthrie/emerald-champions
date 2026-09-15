@@ -165,9 +165,9 @@ def main() -> None:
         help="allow an intentional metadata-free export to skip git diff --check",
     )
     parser.add_argument(
-        "--strict-book",
+        "--lenient-book",
         action="store_true",
-        help="make scripts/check_book_consistency.py release-blocking instead of advisory",
+        help="downgrade scripts/check_book_consistency.py to advisory (it is release-blocking by default since September 15, 2026)",
     )
     args = parser.parse_args()
 
@@ -177,9 +177,9 @@ def main() -> None:
     try:
         run_gate(label, command)
     except subprocess.CalledProcessError:
-        if args.strict_book:
+        if not args.lenient_book:
             raise
-        print(f"NOTE: '{label}' failed but --strict-book was not passed; continuing (see docstring in "
+        print(f"NOTE: '{label}' failed but --lenient-book was passed; continuing (see docstring in "
               "scripts/check_book_consistency.py).")
     verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)
     verify_build_freshness(args.rom.resolve(), args.elf.resolve())
