@@ -15,6 +15,23 @@ Next three blocks:
    against the cap window's reference parties (define those first, two or three
    per window, from the available pool).
 
+Earned save status (September 15): the paused C15 save
+(`work/v4-c15-assisted-play/pre-dwayne.sav`, 40 clears) was lost when the
+redundant `emerald-champions-restored-20260914` clone was deleted on a git
+status check that could not see the gitignored `work/` directory. No other
+copy exists on this machine. Recovery: fetch the September 13 handoff archive
+(`python3 scripts/playthrough/fetch_handoff.py`, `v4-resume.tar.gz`, about 36
+clears at C14), resume it on the current ROM with a clean Continue, then replay
+the Route109 beach clears and the Slateport arrival. Update
+`handoff/checkpoint.json` to the restored path afterwards. Never delete a clone
+without `git status --ignored`.
+
+Dialogue survey (September 15): `work/dialogue-survey/report.md` inventories
+2,474 flagged labels across 539 Hoenn scripts (R5 line length dominates at
+2,320; R6 wordiness 639; R1 stale spine 25, of which two were real and are
+fixed: the wreck's Scanner line and Steven's house pre-Badge-8 direction).
+The full voice pass works this list map by map.
+
 Open design items: none blocking. Mew's authored set uses Rest (Soft-Boiled is
 not in its learnset). 31 Mega Stones show "unmapped" player family access in
 the register under its current rules (regional starters, gift-only legendaries).

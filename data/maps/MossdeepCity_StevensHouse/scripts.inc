@@ -100,12 +100,12 @@ MossdeepCity_StevensHouse_EventScript_Letter::
 	end
 
 MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
-	.string "STEVEN: Our next lead is the\n"
-	.string "triangle on BIRTH ISLAND. Sail\l"
-	.string "there from LILYCOVE HARBOR.\p"
-	.string "Resolve DEOXYS, then bring STERN\n"
-	.string "the SCANNER from the ABANDONED\l"
-	.string "SHIP, on ROUTE 108.$"
+	.string "STEVEN: AQUA went to ground on\n"
+	.string "the seabed south of here. DIVE\l"
+	.string "on ROUTE 128 and follow them.\p"
+	.string "Once the weather settles and\n"
+	.string "JUAN's badge is yours, come back\l"
+	.string "here. There is more to conclude.$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
 	.string "{PLAYER} checked the POKé BALL.\p"

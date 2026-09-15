@@ -146,6 +146,6 @@ AbandonedShip_HiddenFloorRooms_EventScript_ScannerEnd::
 	end
 AbandonedShip_HiddenFloorRooms_Text_ScannerDestination:
 	.string "The SCANNER still works.\p"
-	.string "Take it to CAPT. STERN at\n"
-	.string "SLATEPORT HARBOR. He can use it\l"
-	.string "to trace the stolen submarine.$"
+	.string "CAPT. STERN at SLATEPORT HARBOR\n"
+	.string "would want to see what it\l"
+	.string "recorded.$"
