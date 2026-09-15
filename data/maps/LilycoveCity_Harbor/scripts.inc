@@ -464,7 +464,19 @@ LilycoveCity_Harbor_EventScript_ReportMew::
 	goto_if_unset FLAG_EC_RESOLVED_MEW, Common_EventScript_NopReturn
 	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, Common_EventScript_NopReturn
 	completemilestone FLAG_EC_REPORT_C36_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C36_COMPLETE
 	msgbox LilycoveCity_Harbor_Text_MewReport, MSGBOX_DEFAULT
+	call_if_eq VAR_RESULT, 3, LilycoveCity_Harbor_EventScript_ReportAndCapLine
+	call_if_eq VAR_RESULT, 2, LilycoveCity_Harbor_EventScript_ReportLine
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	return
+
+LilycoveCity_Harbor_EventScript_ReportAndCapLine::
+	msgbox LilycoveCity_Harbor_Text_ReportAndCapLine, MSGBOX_DEFAULT
+	return
+
+LilycoveCity_Harbor_EventScript_ReportLine::
+	msgbox LilycoveCity_Harbor_Text_ReportLine, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth::
@@ -638,9 +650,14 @@ LilycoveCity_Harbor_Text_MewReport:
 	.string "We came looking for a record and\n"
 	.string "found a living part of it.\p"
 	.string "This connects to DEWFORD's old\n"
-	.string "research. I'll send word to DEVON.\p"
-	.string "Your report earns ¥12,000.\n"
-	.string "Your level cap is now 64.$"
+	.string "research. I'll send word to DEVON.$"
+
+LilycoveCity_Harbor_Text_ReportAndCapLine:
+	.string "Your report earns ¥{STR_VAR_2}.\n"
+	.string "Your level cap is now {STR_VAR_1}.$"
+
+LilycoveCity_Harbor_Text_ReportLine:
+	.string "Your report earns ¥{STR_VAR_2}.$"
 
 LilycoveCity_Harbor_EventScript_LatiReport::
 	msgbox LilycoveCity_Harbor_Text_LatiReport, MSGBOX_DEFAULT
@@ -691,7 +708,12 @@ LilycoveCity_Harbor_EventScript_ArrivalMtPyre::
 	releaseall
 	end
 LilycoveCity_Harbor_EventScript_ArrivalScanner::
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, LilycoveCity_Harbor_EventScript_ArrivalScannerAfterCrisis
 	msgbox BirthIsland_Harbor_Text_ScannerLead, MSGBOX_DEFAULT
+	releaseall
+	end
+LilycoveCity_Harbor_EventScript_ArrivalScannerAfterCrisis::
+	msgbox BirthIsland_Harbor_Text_OnwardLeadAfterCrisis, MSGBOX_DEFAULT
 	releaseall
 	end
 

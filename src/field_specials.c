@@ -7090,7 +7090,7 @@ void ClaimEmeraldChampionsSootMilestone(void)
     // A previously obtained reusable device fulfills this tier too.
     if (PlayerOwnsItem(item))
     {
-        u32 bonus = item == ITEM_LINKING_CORD ? 5000 : 3000;
+        u32 bonus = 3000;
         AddMoney(&gSaveBlock1Ptr->money, bonus);
         ConvertIntToDecimalStringN(gStringVar2, bonus, STR_CONV_MODE_LEFT_ALIGN, 4);
         gSpecialVar_Result = 5;

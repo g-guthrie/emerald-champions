@@ -732,6 +732,7 @@ gSpecials::
 	def_special GetHeatranDiscoveryState
 
 	def_special CompleteEmeraldChampionsMilestone, requests_effects=1
+	def_special BufferCampaignMilestoneText
 
 	def_special LocateEmeraldChampionsCastform
 	def_special CheckEmeraldChampionsRedundantPurchase

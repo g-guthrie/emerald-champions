@@ -132,22 +132,18 @@ def native_index(root):
     return nodes,names,economic,raw_sinks,paths
 
 
-def game_corner_offers(root,blocks,arrays):
-    source='data/maps/MauvilleCity_GameCorner/scripts.inc'
+def _resolve_price_offers(root,blocks,arrays,source,cost_var,mon_var='VAR_0x8004'):
     text=(root/source).read_text()
     labels=re.findall(r'(?m)^(\w+)::?\s*$',text)
     following=dict(zip(labels,labels[1:]))
-    coin_vars=set(re.findall(r'(?m)^\s*removecoins\s+(VAR_\w+)',text))
-    if len(coin_vars)!=1:raise ValueError('Game Corner Pokemon coin-debit binding changed; update reader')
-    cost_var=next(iter(coin_vars))
     table=next(a for a in arrays.values() if a['name']=='sEmeraldChampionsGameCornerPokemonPrizes')
     prizes=dict(re.findall(r'\{\s*(SPECIES_\w+),\s*(FLAG_\w+)',table['body']))
     result=[]
     for label,defs in blocks.items():
         for path,line,body in defs:
             if path!=source:continue
-            mon=re.search(r'(?m)^\s*setvar\s+(VAR_\w+),\s*(SPECIES_\w+)',body)
-            if not mon or mon[2] not in prizes:continue
+            mon=re.search(r'(?m)^\s*setvar\s+'+re.escape(mon_var)+r',\s*(SPECIES_\w+)',body)
+            if not mon or mon[1] not in prizes:continue
             value=None;current=label;seen=set()
             while current not in seen:
                 seen.add(current)
@@ -159,7 +155,7 @@ def game_corner_offers(root,blocks,arrays):
                     if not fields:continue
                     command=fields[0];args=arguments(fields[1]) if len(fields)>1 else []
                     if command=='setvar' and args[0]==cost_var:
-                        if not re.fullmatch(r'\d+',args[1]):raise ValueError('Game Corner price is now dynamic: '+label)
+                        if not re.fullmatch(r'\d+',args[1]):raise ValueError('Pokemon price is now dynamic: '+label)
                         value=int(args[1])
                     if value is not None:break
                     if command=='goto':next_label=args[0];break
@@ -168,10 +164,37 @@ def game_corner_offers(root,blocks,arrays):
                 if value is None and next_label is None and not stopped:next_label=following.get(current)
                 if value is not None or not next_label:break
                 current=next_label
-            if value is None:raise ValueError('Unresolved Game Corner Pokemon price: '+label)
-            result.append(dict(species=mon[2],coins=value,receipt=prizes[mon[2]],source=ref(source,line),native_table=table['source']))
-    if {r['species'] for r in result}!=set(prizes):raise ValueError('Game Corner offer list differs from native prize list')
-    return sorted(result,key=lambda r:(r['coins'],r['species']))
+            if value is None:raise ValueError('Unresolved Pokemon price: '+label)
+            result.append(dict(species=mon[1],cost=value,receipt=prizes[mon[1]],source=ref(source,line),native_table=table['source']))
+    return prizes,result
+
+
+def game_corner_offers(root,blocks,arrays):
+    source='data/maps/MauvilleCity_GameCorner/scripts.inc'
+    text=(root/source).read_text()
+    coin_vars=set(re.findall(r'(?m)^\s*removecoins\s+(VAR_\w+)',text))
+    if len(coin_vars)!=1:raise ValueError('Game Corner Pokemon coin-debit binding changed; update reader')
+    cost_var=next(iter(coin_vars))
+    prizes,result=_resolve_price_offers(root,blocks,arrays,source,cost_var)
+    coin_species={r['species'] for r in result}
+
+    # Genesect and Poipole moved off the Game Corner's Coin economy and onto the
+    # Champions Circuit's Battle Point exchange (BattleFrontier_ExchangeServiceCorner's
+    # Rare Pokemon clerk menu). They still share the native prize/flag table with the
+    # Coin-priced starters, so validate them there instead of here.
+    bp_source='data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc'
+    bp_text=(root/bp_source).read_text()
+    bp_vars=set(re.findall(r'(?m)^\s*copyvar\s+VAR_0x8004,\s*(VAR_\w+)\n\s*special\s+TakeFrontierBattlePoints',bp_text))
+    if len(bp_vars)!=1:raise ValueError('Exchange Corner Battle Point debit binding changed; update reader')
+    bp_cost_var=next(iter(bp_vars))
+    _,bp_result=_resolve_price_offers(root,blocks,arrays,bp_source,bp_cost_var)
+    bp_species={r['species'] for r in bp_result}
+
+    if coin_species & bp_species:raise ValueError('Species offered through both the Game Corner and the Circuit BP exchange: '+', '.join(sorted(coin_species & bp_species)))
+    if (coin_species|bp_species)!=set(prizes):raise ValueError('Game Corner + Circuit BP offer lists differ from native prize list')
+    for row in bp_result:row['bp']=row.pop('cost')
+    for row in result:row['coins']=row.pop('cost')
+    return sorted(result,key=lambda r:(r['coins'],r['species'])),sorted(bp_result,key=lambda r:(r['bp'],r['species']))
 
 
 def build_catalog(root=ROOT):
@@ -196,7 +219,7 @@ def build_catalog(root=ROOT):
     free=battle_item_categories(root)
     paid_items=re.findall(r'ITEM_\w+',(root/'src/data/emerald_champions_paid_evolution_items.h').read_text())
     form_items=re.findall(r'ITEM_\w+',(root/'src/data/emerald_champions_form_items.h').read_text())
-    corner_offers=game_corner_offers(root,blocks,arrays)
+    corner_offers,bp_pokemon_offers=game_corner_offers(root,blocks,arrays)
     trade_text=(root/'src/data/trade.h').read_text()
     trade_defs={}
     for m in re.finditer(r'\[(INGAME_TRADE_\w+)\]\s*=\s*\{(.*?)\n\s*\}',trade_text,re.S):
@@ -418,7 +441,7 @@ def build_catalog(root=ROOT):
         body=berry_source[m.end():marks[i+1].start() if i+1<len(marks) else len(berry_source)]
         values={name:compact(value) for name,value in re.findall(r'\.(minYield|maxYield|growthDuration|stageDuration|hoursPerStage)\s*=\s*([^\n]+)',body)}
         if values:berry_profiles[m[1]]=dict(values,source=ref('src/berry.c',berry_source.count('\n',0,m.start())+1))
-    return dict(game_corner_offers=corner_offers,economic_constants=economic_constants,berry_profiles=berry_profiles,core_functions=sorted(core_functions),maps=by_map,records=records,prices=prices,free_categories=free,providers=providers,
+    return dict(game_corner_offers=corner_offers,circuit_bp_pokemon_offers=bp_pokemon_offers,economic_constants=economic_constants,berry_profiles=berry_profiles,core_functions=sorted(core_functions),maps=by_map,records=records,prices=prices,free_categories=free,providers=providers,
         native_functions={k:native[k] for k in sorted(used_functions)},native_tables={k:arrays[k] for k in sorted(used_tables)},
         native_effect_calls=native_sinks,reward_sources={k:sorted(v) for k,v in sorted(reverse.items())},
         coverage=dict(maps=len(maps),interaction_entries=actors,script_transfer_sites=all_transfers,
@@ -495,6 +518,9 @@ def render_catalog(catalog):
     lines+=['\nGAME CORNER POKEMON COUNTER — exact coin prices and native species receipts',
         'One entitlement per offered species; initial-starter/caught-species eligibility and delivery failure are governed by the linked native provider. Cash-to-Coin purchase rates are the separate clerk transaction.']
     for row in catalog['game_corner_offers']:lines.append(row['species']+' | '+str(row['coins'])+' Coins | '+row['receipt']+' | '+row['source']+' | '+row['native_table'])
+    lines+=['\nCIRCUIT BP RARE POKEMON COUNTER — exact Battle Point prices and native species receipts',
+        'Offered at the BattleFrontier_ExchangeServiceCorner Evolution/Rare Pokemon clerk. Shares the same native prize/flag table as the Game Corner counter above; a species appears in exactly one of the two counters.']
+    for row in catalog['circuit_bp_pokemon_offers']:lines.append(row['species']+' | '+str(row['bp'])+' BP | '+row['receipt']+' | '+row['source']+' | '+row['native_table'])
     lines+=['\nNATIVE SUPPLY / PRIZE / TRADE TABLES']
     for key in sorted(catalog['native_tables']):
         r=catalog['native_tables'][key]

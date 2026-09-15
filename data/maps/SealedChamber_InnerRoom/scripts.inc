@@ -7,7 +7,6 @@ SealedChamber_InnerRoom_EventScript_BrailleBackWall::
 	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
 	goto_if_unset FLAG_EC_REPORT_C26_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_REPORT_C30_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
-	goto_if_unset FLAG_EC_REPORT_C44_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
 	closemessage
 	fadeoutbgm 0
 	playse SE_TRUCK_MOVE

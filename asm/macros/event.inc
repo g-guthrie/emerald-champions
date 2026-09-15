@@ -3052,3 +3052,11 @@
 	setvar VAR_0x8003, \flag
 	special CompleteEmeraldChampionsMilestone
 	.endm
+
+	@ Buffers a completed milestone's new cap into STR_VAR_1 and stipend into
+	@ STR_VAR_2 (both decimal, no currency sign). Sets VAR_RESULT to 0 (not a
+	@ cap/stipend milestone), 1 (cap only), 2 (stipend only), or 3 (both).
+	.macro buffermilestonetext flag:req
+	setvar VAR_0x8003, \flag
+	special BufferCampaignMilestoneText
+	.endm

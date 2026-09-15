@@ -56,7 +56,6 @@ static const u8 sSignLocationPetalburgWoods2[] = _("Petalburg Woods, second area
 static const u8 sSignLocationPetalburgWoods3[] = _("Petalburg Woods, third area");
 static const u8 sSignLocationMeteorB1F2R[] = _("Meteor Falls B1F, rear room");
 static const u8 sSignLocationDesertUnderpass[] = _("Desert Underpass");
-static const u8 sSignLocationSandstrewnB1F[] = _("Sandstrewn Ruins B1F");
 static const u8 sSignLocationAshenWoods[] = _("Ashen Woods");
 static const u8 sSignLocationVerdanturfMeadow[] = _("Verdanturf Meadow");
 static const u8 sSignLocationRoute112[] = _("Route 112");
@@ -183,10 +182,10 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     case LEGENDARY_SIGN_WO_CHIEN:
         return sSignLocationPetalburgWoods2;
     case LEGENDARY_SIGN_TING_LU:
-        return sSignLocationDesertUnderpass;
     case LEGENDARY_SIGN_ZYGARDE:
+        return sSignLocationDesertUnderpass;
     case LEGENDARY_SIGN_STAKATAKA:
-        return sSignLocationSandstrewnB1F;
+        return sSignLocationRoute111Ruins;
     case LEGENDARY_SIGN_KUBFU:
         return sSignLocationRoute112;
     case LEGENDARY_SIGN_TYPE_NULL:

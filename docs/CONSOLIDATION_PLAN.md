@@ -1,6 +1,6 @@
 # Emerald Champions — consolidation and baseline plan
 
-Status: proposed, September 15, 2026. Once the user approves the decisions in
+Status: in execution, September 15, 2026. Phases 0, 1 and 3 landed the same day; see docs/CONTINUE.md. Once the user approves the decisions in
 section 1, Phase 0 folds this file into `docs/CONTINUE.md` and the book, and this
 file is deleted. It is not a second handoff.
 
@@ -32,7 +32,7 @@ formulas, free build editing at the Leveler.
 | D5 | Sandstrewn collapse | Keep the collapse as drama. Move the unique progression content out of the sealed area: Zygarde, Stakataka, Garchompite, Golurkite, Flygonite, unique wild families (Trapinch, Honedge lines). Sealed area keeps only duplicated wild entries and fossils. |
 | D6 | Money lane | Money stays, but small and narrow: it buys evolution items, Balls, cosmetics. Nothing else. Stipends scaled to that. |
 | D7 | Coin species | Poipole and Genesect move from 130k/150k Coins to Circuit BP mastery rewards. Battle skill is the currency that fits the pillar. Coins keep starters and dolls only. |
-| D8 | Real-time and chore gates | Remove them. Berry Master's three Mega Stones relocate to world endpoints; Berry Master keeps Celebi's invitation for berries found in the world, no growth timer required. Soot Houndoominite at 100 (one deliberate ash pass). Shoal Glalitite on first visit at any tide. Marshadow gets a discovery gate that is not a walking counter. |
+| D8 | Real-time and chore gates | REVISED (user, September 15): keep the soot, berry-harvest and Shoal economies as they are. They are optional, run in parallel with the campaign, and their rewards are late-family Megas or a mythical discovery, so they are hobbies with a real payoff, not gates. Only the duplicate cash substitutes change (equal to the item's price). The book must describe them as optional collections, never as requirements. |
 | D9 | Rematch payouts | Return fights pay zero money (code), so "cannot be farmed" is true in the binary, not just the book. |
 
 All of D1 and D3–D9 are accepted as recommended (September 15). Additional user
@@ -41,7 +41,7 @@ directions added the same day:
 | # | Direction | Where it lands |
 | --- | --- | --- |
 | D10 | Mom gives the Old Rod together with the Running Shoes. Dewford's fisherman keeps his tip but never issues a second rod. Implemented September 15 (Littleroot send-off, Mom-at-home full-Bag retry). | Done |
-| D11 | Unify all NPC dialogue: one voice, one direction style, rewritten against the new spine. | Phase 1, after the gate order is final |
+| D11 | Unify all NPC dialogue: one voice, one direction style, rewritten against the new spine. | Next: gate order is final as of September 15 |
 | D12 | Rewrite the book and guide from the new build rather than patching the current text. | Phase 4, after Phases 1 and 3 land |
 | D13 | Run and Bun quality of life: key items register to L, R and Select, with a visual indicator in the Bag and no save-block offset shifts. Implemented September 15 in the unused Dex-flag filler of SaveBlock1; L inactive under L=A; R falls back to DexNav. | Done, pending native visual check |
 | D14 | Process: Sonnet subagents implement scoped code tasks; the main agent reviews every diff before it lands. | AGENTS.md |

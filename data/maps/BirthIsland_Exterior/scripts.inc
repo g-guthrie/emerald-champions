@@ -127,21 +127,37 @@ BirthIsland_Exterior_Movement_DeoxysApproach:
 BirthIsland_Exterior_EventScript_RecordResearch::
 	goto_if_set FLAG_EC_REPORT_C43_COMPLETE, Common_EventScript_NopReturn
 	completemilestone FLAG_EC_REPORT_C43_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C43_COMPLETE
 	msgbox BirthIsland_Exterior_Text_ResearchRecord, MSGBOX_DEFAULT
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, BirthIsland_Exterior_EventScript_ResearchRecordDirectionsAfterCrisis
+	msgbox BirthIsland_Exterior_Text_ResearchRecordDirections, MSGBOX_DEFAULT
+	return
+
+BirthIsland_Exterior_EventScript_ResearchRecordDirectionsAfterCrisis::
+	msgbox BirthIsland_Exterior_Text_ResearchRecordDirectionsAfterCrisis, MSGBOX_DEFAULT
 	return
 
 BirthIsland_Exterior_Text_ResearchRecord:
 	.string "The meteorite signal belonged\n"
 	.string "to another living POKéMON.\l"
-	.string "It was never a source to command.\p"
-	.string "Your level cap is now 78.\n"
+	.string "It was never a source to command.$"
+
+BirthIsland_Exterior_Text_ResearchRecordDirections:
 	.string "Return to the sailor at the harbor.\p"
-	.string "Next, recover the SCANNER from\n"
-	.string "the ABANDONED SHIP on ROUTE 108,\l"
-	.string "between DEWFORD and SLATEPORT.\p"
-	.string "Bring licensed SURF and DIVE.\n"
-	.string "Take the SCANNER to CAPT. STERN\l"
-	.string "at SLATEPORT HARBOR.$"
+	.string "AQUA's submarine is still down at\n"
+	.string "SEAFLOOR CAVERN, south of MOSSDEEP\l"
+	.string "past ROUTE 128. Bring licensed\l"
+	.string "SURF, DIVE, STRENGTH and ROCK\l"
+	.string "SMASH and take up the pursuit.$"
+
+BirthIsland_Exterior_Text_ResearchRecordDirectionsAfterCrisis:
+	.string "Return to the sailor at the harbor.\p"
+	.string "With the SOOTOPOLIS crisis behind\n"
+	.string "you, visit STEVEN's house in\l"
+	.string "MOSSDEEP, or press on to the\l"
+	.string "POKéMON LEAGUE.$"
 
 BirthIsland_Exterior_Text_PuzzleReset:
 	.string "The triangle returns to its\n"

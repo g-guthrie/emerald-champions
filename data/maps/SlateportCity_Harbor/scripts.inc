@@ -336,7 +336,6 @@ SlateportCity_Harbor_EventScript_FerryFinished::
 
 SlateportCity_Harbor_EventScript_AskToTradeScanner::
 	call EC_RequireSpace
-	call EC_RequireDeoxys
 	completemilestone FLAG_EC_REPORT_C44_COMPLETE
 	setvar VAR_0x8004, ITEM_SCANNER
 	special TakeEmeraldChampionsHandoffItem
@@ -353,7 +352,33 @@ SlateportCity_Harbor_EventScript_AskToTradeScanner::
 	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
 	faceplayer
+	buffermilestonetext FLAG_EC_REPORT_C44_COMPLETE
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SlateportCity_Harbor_EventScript_ScannerReportAfterCrisis
 	msgbox SlateportCity_Harbor_Text_ScannerReport, MSGBOX_DEFAULT
+	goto SlateportCity_Harbor_EventScript_ScannerReportReward
+	end
+
+SlateportCity_Harbor_EventScript_ScannerReportAfterCrisis::
+	msgbox SlateportCity_Harbor_Text_ScannerReportConfirmed, MSGBOX_DEFAULT
+	goto SlateportCity_Harbor_EventScript_ScannerReportReward
+	end
+
+SlateportCity_Harbor_EventScript_ScannerReportReward::
+	call_if_eq VAR_RESULT, 3, SlateportCity_Harbor_EventScript_ReportAndCapLine
+	call_if_eq VAR_RESULT, 2, SlateportCity_Harbor_EventScript_ReportLine
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	msgbox SlateportCity_Harbor_Text_ChooseDeepSeaFind, MSGBOX_DEFAULT
+	goto SlateportCity_Harbor_EventScript_ResumeScannerReward
+	end
+
+SlateportCity_Harbor_EventScript_ReportAndCapLine::
+	msgbox SlateportCity_Harbor_Text_ReportAndCapLine, MSGBOX_DEFAULT
+	return
+
+SlateportCity_Harbor_EventScript_ReportLine::
+	msgbox SlateportCity_Harbor_Text_ReportLine, MSGBOX_DEFAULT
+	return
+
 SlateportCity_Harbor_EventScript_ResumeScannerReward::
 	goto_if_unset FLAG_EC_SCANNER_REWARD_SELECTED, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
 	goto_if_set FLAG_EC_SCANNER_REWARD_SCALE, SlateportCity_Harbor_EventScript_DeliverScale
@@ -423,7 +448,7 @@ SlateportCity_Harbor_EventScript_TradedScanner::
 	end
 
 SlateportCity_Harbor_EventScript_RouteUnderstood::
-	msgbox EmeraldChampions_Text_ThreeRuinsRoute, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_RuinsRouteKnown
 	release
 	end
 
@@ -554,16 +579,38 @@ SlateportCity_Harbor_Text_FinishedMakingFerry:
 	.string "Please go for a short cruise on it!$"
 
 SlateportCity_Harbor_Text_ScannerReport:
-	.string "STERN: There! The submarine is\n"
-	.string "beneath the southeastern sea.\p"
-	.string "But the old undersea passages\n"
-	.string "send back several echoes. I can't\l"
-	.string "tell which entrance reaches it.\p"
-	.string "The SEALED CHAMBER names three\n"
-	.string "surviving route accounts. Their\l"
-	.string "directions can resolve the echoes.\p"
-	.string "Your report earns ¥12,000.\n"
-	.string "Choose one of my deep-sea finds\l"
+	.string "STERN: There! The scan recovered\n"
+	.string "AQUA's route data down to the\l"
+	.string "seabed south of MOSSDEEP.\p"
+	.string "It's old news to you by now, I'd\n"
+	.string "wager, but it confirms just where\l"
+	.string "they were headed.\p"
+	.string "For what it's worth, the SEALED\n"
+	.string "CHAMBER on ROUTE 134 still keeps\l"
+	.string "three older accounts of that same\l"
+	.string "route, if you're ever curious.$"
+
+SlateportCity_Harbor_Text_ScannerReportConfirmed:
+	.string "STERN: I see now - this matches\n"
+	.string "what happened at SOOTOPOLIS.\l"
+	.string "AQUA's route data led straight to\l"
+	.string "KYOGRE all along.\p"
+	.string "It's history now, but I'm glad to\n"
+	.string "have it confirmed at last.\p"
+	.string "For what it's worth, the SEALED\n"
+	.string "CHAMBER on ROUTE 134 still keeps\l"
+	.string "three older accounts of that same\l"
+	.string "route, if you're ever curious.$"
+
+SlateportCity_Harbor_Text_ReportAndCapLine:
+	.string "Your report earns ¥{STR_VAR_2}.\n"
+	.string "Your level cap is now {STR_VAR_1}.$"
+
+SlateportCity_Harbor_Text_ReportLine:
+	.string "Your report earns ¥{STR_VAR_2}.$"
+
+SlateportCity_Harbor_Text_ChooseDeepSeaFind:
+	.string "Choose one of my deep-sea finds\n"
 	.string "as a further thank-you.$"
 
 SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow:

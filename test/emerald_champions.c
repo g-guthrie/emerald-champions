@@ -477,32 +477,43 @@ static const struct { u16 flag; u8 cap; } sCampaignCapExpectations[] =
 {
     {FLAG_BADGE01_GET, 20},
     {FLAG_EC_REPORT_C14_COMPLETE, 24},
-    {FLAG_DELIVERED_DEVON_GOODS, 30},
-    {FLAG_BADGE03_GET, 34},
-    {FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, 40},
-    {FLAG_BADGE04_GET, 44},
-    {FLAG_EC_REPORT_C26_COMPLETE, 48},
-    {FLAG_BADGE05_GET, 50},
-    {FLAG_EC_REPORT_C28_COMPLETE, 52},
-    {FLAG_EC_REPORT_C30_COMPLETE, 56},
+    {FLAG_BADGE03_GET, 30},
+    {FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, 36},
+    {FLAG_BADGE04_GET, 42},
+    {FLAG_BADGE05_GET, 48},
+    {FLAG_EC_REPORT_C30_COMPLETE, 54},
     {FLAG_BADGE06_GET, 60},
-    {FLAG_EC_REPORT_C36_COMPLETE, 64},
-    {FLAG_EC_REPORT_C39_COMPLETE, 68},
-    {FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, 72},
-    {FLAG_EC_REPORT_C42_COMPLETE, 76},
-    {FLAG_EC_REPORT_C43_COMPLETE, 78},
-    {FLAG_EC_REPORT_C45_COMPLETE, 82},
-    {FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, 86},
+    {FLAG_EC_REPORT_C36_COMPLETE, 68},
+    {FLAG_EC_REPORT_C39_COMPLETE, 76},
+    {FLAG_EC_REPORT_C42_COMPLETE, 84},
     {FLAG_BADGE08_GET, 90},
-    {FLAG_EC_REPORT_C48_COMPLETE, 94},
     {FLAG_DEFEATED_WALLY_VICTORY_ROAD, 96},
     {FLAG_IS_CHAMPION, 100},
+};
+
+// Flags removed from the level-cap table (Consolidation goal). They must
+// still be settable via CompleteCampaignMilestone (story gates depend on
+// them) but must no longer move the cap or pay a stipend.
+static const u16 sRetiredMilestoneFlags[] =
+{
+    FLAG_SYS_POKENAV_GET,
+    FLAG_DELIVERED_DEVON_GOODS,
+    FLAG_EC_REPORT_C26_COMPLETE,
+    FLAG_EC_REPORT_C28_COMPLETE,
+    FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE,
+    FLAG_EC_REPORT_C43_COMPLETE,
+    FLAG_EC_REPORT_C44_COMPLETE,
+    FLAG_EC_REPORT_C45_COMPLETE,
+    FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE,
+    FLAG_EC_REPORT_C48_COMPLETE,
 };
 
 static void ResetCampaignCapMilestones(void)
 {
     for (u32 i = 0; i < ARRAY_COUNT(sCampaignCapExpectations); i++)
         FlagClear(sCampaignCapExpectations[i].flag);
+    for (u32 i = 0; i < ARRAY_COUNT(sRetiredMilestoneFlags); i++)
+        FlagClear(sRetiredMilestoneFlags[i]);
 }
 
 TEST("Emerald Champions native trainer creation applies live-cap role offsets once")
@@ -2329,25 +2340,39 @@ TEST("Emerald Champions authored Dragapult keeps its deliberate zero special Att
 TEST("Emerald Champions milestone stipends are finite and independent of item delivery")
 {
     ResetCampaignCapMilestones();
-    FlagClear(FLAG_SYS_POKENAV_GET);
     SetMoney(&gSaveBlock1Ptr->money, 6000);
     EXPECT(CompleteCampaignMilestone(FLAG_BADGE01_GET));
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    EXPECT_EQ(GetCurrentLevelCap(), 20);
     EXPECT(!CompleteCampaignMilestone(FLAG_BADGE01_GET));
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+
+    // Milestones retired from the cap table (the consolidation pass removed
+    // them) still flip their flag the first time, since story gates depend
+    // on it, but must never pay a stipend or move the cap.
     EXPECT(CompleteCampaignMilestone(FLAG_SYS_POKENAV_GET));
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
     EXPECT_EQ(GetCurrentLevelCap(), 20);
+    EXPECT(!CompleteCampaignMilestone(FLAG_SYS_POKENAV_GET));
+
     EXPECT(CompleteCampaignMilestone(FLAG_DELIVERED_DEVON_GOODS));
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 21000);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    EXPECT_EQ(GetCurrentLevelCap(), 20);
+
     FlagClear(FLAG_RECEIVED_WATTSON_ELECTIRIZER);
     EXPECT(CompleteCampaignMilestone(FLAG_EC_REPORT_C28_COMPLETE));
-    EXPECT_EQ(GetCurrentLevelCap(), 52);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 27000);
+    EXPECT_EQ(GetCurrentLevelCap(), 20);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
     EXPECT(!FlagGet(FLAG_RECEIVED_WATTSON_ELECTIRIZER));
     EXPECT(!CompleteCampaignMilestone(FLAG_EC_REPORT_C28_COMPLETE));
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 27000);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+
+    // A still-active milestone keeps paying and moving the cap as normal.
+    EXPECT(CompleteCampaignMilestone(FLAG_EC_REPORT_C30_COMPLETE));
+    EXPECT_EQ(GetCurrentLevelCap(), 54);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 11000);
+
     ResetCampaignCapMilestones();
-    FlagClear(FLAG_SYS_POKENAV_GET);
 }
 
 TEST("Emerald Champions paired prizes use incoming cap once and exclude replays")

@@ -1192,6 +1192,10 @@ Normal build uses `make -j6 release USE_LTO_ON_RELEASE=0` with the configured
 DEVKITARM; then `scripts/stamp_release_inputs.py` and
 `scripts/verify_emerald_champions_release.py`. Logs: `work/story-gates/`.
 Headless builds use `BUILD_NAME=emerald-headless EC_HEADLESS_FIXTURES=1 TEST=0`.
+The session driver always boots the root `pokeemerald-headless.gba`/`.elf`. Rebuild
+them with that command and re-stamp `pokeemerald-headless.inputs.json` after any
+source change before capturing evidence; otherwise the session drives stale code
+(the September 15 Bag register capture first ran on a day-old headless ROM).
 The tracked Studio recipes run via the skill's `tools/studio/run_scene.py`.
 Every recording includes its exact immutable ROM/ELF, synthetic setup, original
 PNG hashes, inputs and contact sheets; no cross-ROM savestate was reused.

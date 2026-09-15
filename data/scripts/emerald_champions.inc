@@ -1247,9 +1247,29 @@ EmeraldChampions_EventScript_ThreeRuinsProgress::
 	goto_if_unset FLAG_EC_RESOLVED_REGISTEEL, EmeraldChampions_EventScript_GuardianAncient
 	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, EmeraldChampions_EventScript_RuinsRouteKnown
 	completemilestone FLAG_EC_REPORT_C45_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C45_COMPLETE
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, EmeraldChampions_EventScript_ThreeRuinsCompleteConfirmed
 	msgbox EmeraldChampions_Text_ThreeRuinsComplete, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_ThreeRuinsReward
+EmeraldChampions_EventScript_ThreeRuinsCompleteConfirmed::
+	msgbox EmeraldChampions_Text_ThreeRuinsCompleteConfirmed, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_ThreeRuinsReward::
+	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_ThreeRuinsReportAndCapLine
+	call_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_ThreeRuinsReportLine
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	goto EmeraldChampions_EventScript_RuinsRouteKnown
+EmeraldChampions_EventScript_ThreeRuinsReportAndCapLine::
+	msgbox EmeraldChampions_Text_ThreeRuinsReportAndCapLine, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_ThreeRuinsReportLine::
+	msgbox EmeraldChampions_Text_ThreeRuinsReportLine, MSGBOX_DEFAULT
+	return
 EmeraldChampions_EventScript_RuinsRouteKnown::
-	msgbox EmeraldChampions_Text_ThreeRuinsRoute, MSGBOX_DEFAULT
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, EmeraldChampions_EventScript_ThreeRuinsLoreConfirmed
+	msgbox EmeraldChampions_Text_ThreeRuinsLore, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_ThreeRuinsLoreConfirmed::
+	msgbox EmeraldChampions_Text_ThreeRuinsLoreConfirmed, MSGBOX_DEFAULT
 	return
 EmeraldChampions_EventScript_RuinsNeedChamber::
 	msgbox SealedChamber_InnerRoom_Text_ResearchPending, MSGBOX_DEFAULT
@@ -1277,20 +1297,43 @@ EmeraldChampions_Text_NextAncientRuin:
 	.string "its puzzle uses FLASH.$"
 EmeraldChampions_Text_ThreeRuinsComplete:
 	.string "The three guardians have answered!\p"
-	.string "Their directions resolve the\n"
-	.string "SCANNER's southeastern echoes.\p"
-	.string "Your discovery earns ¥16,000.\n"
-	.string "Your level cap is now 82.$"
-EmeraldChampions_Text_ThreeRuinsRoute:
-	.string "From MOSSDEEP, sail south through\n"
-	.string "ROUTE 127 to ROUTE 128. DIVE at\l"
-	.string "the deep-water basin.\p"
-	.string "Enter the underwater cave, then\n"
-	.string "surface where the submarine waits.\l"
-	.string "That is TEAM AQUA's route.\p"
-	.string "Bring licensed SURF and DIVE,\n"
-	.string "plus partners for STRENGTH and\l"
-	.string "ROCK SMASH inside the cavern.$"
+	.string "Together, their accounts tell of an\n"
+	.string "age when the land and sea powers\l"
+	.string "were feared beyond reckoning, until\l"
+	.string "a guardian of the sky was called to\l"
+	.string "hold them apart.$"
+EmeraldChampions_Text_ThreeRuinsCompleteConfirmed:
+	.string "The three guardians have answered!\p"
+	.string "Together, their accounts tell of an\n"
+	.string "age when the land and sea powers\l"
+	.string "were feared beyond reckoning, until\l"
+	.string "a guardian of the sky was called to\l"
+	.string "hold them apart - just as you saw\l"
+	.string "at SOOTOPOLIS.$"
+EmeraldChampions_Text_ThreeRuinsReportAndCapLine:
+	.string "Your discovery earns ¥{STR_VAR_2}.\n"
+	.string "Your level cap is now {STR_VAR_1}.$"
+EmeraldChampions_Text_ThreeRuinsReportLine:
+	.string "Your discovery earns ¥{STR_VAR_2}.$"
+EmeraldChampions_Text_ThreeRuinsLore:
+	.string "The three accounts agree: long ago\n"
+	.string "the land and sea powers were feared\l"
+	.string "beyond reckoning, until a guardian\l"
+	.string "of the sky was invoked to keep\l"
+	.string "them apart.\p"
+	.string "A fourth mark repeats across all\n"
+	.string "three - REGIGIGAS, said to have\l"
+	.string "mustered the others together.$"
+EmeraldChampions_Text_ThreeRuinsLoreConfirmed:
+	.string "The three accounts agree: long ago\n"
+	.string "the land and sea powers were feared\l"
+	.string "beyond reckoning, until a guardian\l"
+	.string "of the sky was invoked to keep\l"
+	.string "them apart - the same balance you\l"
+	.string "restored at SOOTOPOLIS.\p"
+	.string "A fourth mark repeats across all\n"
+	.string "three - REGIGIGAS, said to have\l"
+	.string "mustered the others together.$"
 
 EmeraldChampions_EventScript_GuardianDesert::
 	msgbox EmeraldChampions_Text_GuardianDesert, MSGBOX_DEFAULT
@@ -1483,32 +1526,6 @@ EC_Text_RequireSpace:
 	.string "SPACE CENTER in eastern MOSSDEEP.\l"
 	.string "Then finish his travel briefing.$"
 
-EC_RequireDeoxys::
-	goto_if_set FLAG_EC_REPORT_C43_COMPLETE, Common_EventScript_NopReturn
-	lockall
-	msgbox EC_Text_RequireDeoxys, MSGBOX_DEFAULT
-	releaseall
-	end
-EC_Text_RequireDeoxys:
-	.string "Take the earned passage from\n"
-	.string "LILYCOVE HARBOR to BIRTH ISLAND.\p"
-	.string "Solve the triangle and resolve\n"
-	.string "DEOXYS's challenge. Catching it\l"
-	.string "is your choice.$"
-
-EC_RequireGuardians::
-	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, Common_EventScript_NopReturn
-	lockall
-	msgbox EC_Text_RequireGuardians, MSGBOX_DEFAULT
-	releaseall
-	end
-EC_Text_RequireGuardians:
-	.string "Take STERN's scan to the SEALED\n"
-	.string "CHAMBER approach on ROUTE 134.\p"
-	.string "Finish the three ruin puzzles and\n"
-	.string "meet their guardians: REGIROCK,\l"
-	.string "REGICE and REGISTEEL.$"
-
 EC_RequireCrisis::
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Common_EventScript_NopReturn
 	lockall
@@ -1670,3 +1687,15 @@ EmeraldChampions_EventScript_GuardianVictory::
 	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	releaseall
 	end
+
+@ Shared follow-up line for milestone dialogue. Call `buffermilestonetext`
+@ (or `completemilestone`, which buffers VAR_0x8003 too) immediately before
+@ these so VAR_RESULT and STR_VAR_1 are populated for the flag just handled.
+@ Only the cap sentence is common across NPCs; stipend phrasing stays local
+@ to each script since every reporter describes their payout differently.
+EmeraldChampions_EventScript_PrintMilestoneCapLine::
+	msgbox EmeraldChampions_Text_MilestoneCapLine, MSGBOX_DEFAULT
+	return
+
+EmeraldChampions_Text_MilestoneCapLine:
+	.string "Your level cap is now {STR_VAR_1}.$"

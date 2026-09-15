@@ -225,20 +225,8 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage::
 	waitmessage
 	multichoice 10, 0, MULTI_GAME_CORNER_POKEMON, FALSE
 	switch VAR_RESULT
-	case 0, MauvilleCity_GameCorner_EventScript_SelectGenesect
-	case 1, MauvilleCity_GameCorner_EventScript_SelectPoipole
-	case 2, MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
+	case 0, MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 	goto MauvilleCity_GameCorner_EventScript_CancelPokemonPrize
-
-MauvilleCity_GameCorner_EventScript_SelectGenesect::
-	setvar VAR_0x8004, SPECIES_GENESECT
-	setvar VAR_0x8006, 7500
-	goto MauvilleCity_GameCorner_EventScript_PreparePokemonPrize
-
-MauvilleCity_GameCorner_EventScript_SelectPoipole::
-	setvar VAR_0x8004, SPECIES_POIPOLE
-	setvar VAR_0x8006, 6500
-	goto MauvilleCity_GameCorner_EventScript_PreparePokemonPrize
 
 MauvilleCity_GameCorner_EventScript_ChooseStarterRegion::
 	message MauvilleCity_GameCorner_Text_WhichStarterRegion

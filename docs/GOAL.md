@@ -13,12 +13,33 @@ Everything that is not a battle does one of three jobs: deliver species and
 Megas to the player, tell the story between fights, or get the player to the
 next fight without friction. Anything that does none of those is cut.
 
+## Designed as if Nintendo shipped it (protected)
+
+Within these constraints the game must feel first-party. Every system that
+stays in the game needs a real, non-trivial incentive: berries pay in Mega
+Stones and Celebi, soot in a Mega and Marshadow, Shoal in Glalitite, the
+Circuit in Poipole, Genesect and keepsakes, secret bases and decorations in
+expression. A system with a pointless or token reward is either given a real
+one or removed; it is never left as clutter. Dialogue, directions, menus and
+rewards read as native, never as a ROM hack that assumes an outside guide.
+
 ## Protected (never reduce)
 
 The 341-encounter roster, doubles everywhere, four-to-six member parties,
 six-member Gym personnel, all 99 Mega Stones on trainers, two-Mega League
 bosses, shared AI depth, levels-only difficulty with the existing formulas,
 free build editing at the Leveler.
+
+## Stats play exactly like Gen 9 competitive (protected)
+
+A competitive player builds a Pokémon at the tutor exactly as they would on
+Smogon or in Champions: IVs default to 31 and are editable per stat from 0 to
+31; EVs 0 to 252 per stat, 510 total; nature, ability and legal moves are free.
+All of this is available from the first Oldale visit. No level floor, EV
+ticket, IV lock or paid stat service may be added to soften the early game.
+Every authored trainer is fully invested the same way, so early fights are
+symmetric; difficulty is tuned by level offsets against fully invested
+reference parties (Phase 2), never by restricting the player's build.
 
 ## Locked decisions
 
@@ -30,8 +51,9 @@ free build editing at the Leveler.
   move to the post-Juan origins act.
 - Sandstrewn collapse stays; unique progression content moves out of the sealed area.
 - Money buys evolution items, Balls and cosmetics only. Stipends scaled to that.
-  Poipole and Genesect become Circuit BP rewards. No real-time or counter gates
-  on Mega Stones or legendaries. Rematches pay zero money.
+  Poipole and Genesect become Circuit BP rewards. The soot, berry-harvest and
+  Shoal collections stay as optional hobbies with their Mega and discovery
+  rewards; nothing required ever waits on them. Rematches pay zero money.
 - Mom gives the Old Rod with the Running Shoes.
 - All NPC dialogue is unified in voice and rewritten against the new spine.
 - The book and guide are rewritten from the new build, not patched.

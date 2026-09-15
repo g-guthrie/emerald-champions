@@ -121,11 +121,11 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
             extra = line_value(branch, "ai_extra")
             ai_extra = [trait.strip() for trait in extra.split(",") if trait.strip()] if extra else []
             cls = line_value(encounter, "battle_class")
-            rate = 20 if cls in {"regular", "casual", "grunt"} else 40 if cls in {"ace", "gym", "rival", "brain"} else 100
+            rate = 5 if cls in {"regular", "casual", "grunt"} else 10 if cls in {"ace", "gym", "rival", "brain"} else 25
             if 493 <= encounter_number <= 496:
-                rate = 150
+                rate = 40
             elif encounter_number == 497:
-                rate = 200
+                rate = 50
             designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons, rate)
     return designs
 

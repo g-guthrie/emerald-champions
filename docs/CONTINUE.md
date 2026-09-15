@@ -20,8 +20,34 @@ into this file when Phase 0 closes). Phase 0 progress this day:
 - Pending: native visual check of the Bag register submenu and L/R icons; the
   Old Rod send-off scene contact sheet.
 
-Next: Phase 0 book diet (evidence paragraphs out of the guide), then Phase 1
-campaign restructure and Phase 3 economy together, then resume the earned run.
+Phase 1 and 3 landed the same day (second commit):
+
+- Caps: 15 milestones in `src/caps.c` (14 rows plus opening 14); retired flags
+  still set through `CompleteCampaignMilestone` but pay and move nothing.
+  Milestone dialogue reads the table through `buffermilestonetext`; no script
+  hardcodes a cap or stipend. Guide cap list, chapter caps and stipend total
+  (44,000) follow the table.
+- Story: Seafloor Cavern requires only the Space Center; Birth Island/Deoxys,
+  the Scanner and the Sealed Chamber/Regis/Regigigas are optional. Stern, the
+  Space Center briefing, Birth Island and the ruins conclusion direct the new
+  order. `EC_RequireDeoxys`/`EC_RequireGuardians` are deleted.
+- Sandstrewn: the collapse seals only fossils, Odd Keystone, Protector and
+  Chest Gimmighoul. Garchompite/Flygonite/Golurkite, Zygarde, Stakataka and
+  every formerly exclusive family have open sources;
+  `scripts/verify_wild_open_sources.py` guards this.
+- Economy: prize multipliers 5/10/25/40/50 (was 20/40/100/150/200); Poipole
+  160 BP and Genesect 240 BP at the Circuit exchange, gone from the Game
+  Corner; duplicate cash substitutes equal the item price (3000). Soot, berry
+  harvest and Shoal collections stay as they were (user decision).
+- Verified: normal and headless ROMs build; bag, cap, stipend and EXP-cap
+  native tests pass; wild, Mega, roster and consistency gates pass (the only
+  FAIL is Garchompite's missing trainer holder, a design decision); the Bag
+  register flow is captured natively in
+  `work/contact-sheets/bag-register-lr-select-v2.png`.
+
+Next: Phase 0 book diet and the Phase 4 rewrite of the guide against this
+build (D11 dialogue unification rides with it), then resume the earned run
+on the new spine.
 
 ---
 

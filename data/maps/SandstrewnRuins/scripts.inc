@@ -16,7 +16,11 @@ SandstrewnRuins_EventScript_Archaeologist::
 	goto_if_unset FLAG_EC_RESOLVED_MOLTRES, SandstrewnRuins_EventScript_ResearchPending
 	goto_if_unset FLAG_EC_SURVEYED_DESERT_DEPTHS, SandstrewnRuins_EventScript_ResearchPending
 	completemilestone FLAG_EC_REPORT_C26_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C26_COMPLETE
 	msgbox SandstrewnRuins_Text_Report, MSGBOX_DEFAULT
+	call_if_eq VAR_RESULT, 3, SandstrewnRuins_EventScript_GrantAndCapLine
+	call_if_eq VAR_RESULT, 2, SandstrewnRuins_EventScript_GrantLine
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
 SandstrewnRuins_EventScript_ResearchDone::
 	msgbox SandstrewnRuins_Text_Archaeologist, MSGBOX_DEFAULT
 	release
@@ -27,13 +31,26 @@ SandstrewnRuins_EventScript_ResearchPending::
 	release
 	end
 
+SandstrewnRuins_EventScript_GrantAndCapLine::
+	msgbox SandstrewnRuins_Text_GrantAndCapLine, MSGBOX_DEFAULT
+	return
+
+SandstrewnRuins_EventScript_GrantLine::
+	msgbox SandstrewnRuins_Text_GrantLine, MSGBOX_DEFAULT
+	return
+
 SandstrewnRuins_Text_Report:
 	.string "The mountain shook, but this old\n"
 	.string "stonework held. The builders knew\l"
 	.string "how to protect their world.\p"
-	.string "I've recorded your findings.\n"
-	.string "The research grant is ¥8,000.\l"
-	.string "Your level cap is now 48.$"
+	.string "I've recorded your findings.$"
+
+SandstrewnRuins_Text_GrantAndCapLine:
+	.string "The research grant is ¥{STR_VAR_2}.\l"
+	.string "Your level cap is now {STR_VAR_1}.$"
+
+SandstrewnRuins_Text_GrantLine:
+	.string "The research grant is ¥{STR_VAR_2}.$"
 
 SandstrewnRuins_Text_ResearchPending:
 	.string "After earning FLANNERY's BADGE,\n"
@@ -54,18 +71,13 @@ SandstrewnRuins_Text_Archaeologist:
 	.string "fossils alone until you are done.$"
 
 SandstrewnRuins_Text_LastChance:
-	.string "ZYGARDE and STAKATAKA live in\n"
-	.string "the lowest chamber below us.\p"
 	.string "Taking a summit fossil collapses\n"
 	.string "the tower and seals these ruins\l"
 	.string "FOREVER, including this entrance.\p"
-	.string "This is your only chance at those\n"
-	.string "two. Catch them before a fossil\l"
-	.string "if you want them on your team.\p"
-	.string "Other rare finds here include\n"
-	.string "GREAT TUSK, IRON TREADS, ORTHWORM,\l"
-	.string "and GIMMIGHOUL's CHEST FORM.\p"
-	.string "TRAPINCH and the HONEDGE family\n"
-	.string "also have no other wild home.\p"
-	.string "Uncollected Mega Stones, fossils\n"
-	.string "and other finds will also be lost.$"
+	.string "The fossils, the ODD KEYSTONE and\n"
+	.string "the PROTECTOR down here would be\l"
+	.string "lost, and GIMMIGHOUL's CHEST FORM\l"
+	.string "lives nowhere else.\p"
+	.string "The rest of these ruins' POKéMON\n"
+	.string "also roam the open desert and the\l"
+	.string "DESERT UNDERPASS, so take your time.$"

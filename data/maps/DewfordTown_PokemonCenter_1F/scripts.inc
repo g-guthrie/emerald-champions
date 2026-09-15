@@ -17,6 +17,7 @@ DewfordTown_PokemonCenter_1F_EventScript_Nurse::
 	end
 
 DewfordTown_PokemonCenter_1F_EventScript_PokefanF::
+	buffermilestonetext FLAG_BADGE01_GET
 	msgbox DewfordTown_PokemonCenter_1F_Text_StoneCavern, MSGBOX_NPC
 	end
 
@@ -28,7 +29,7 @@ DewfordTown_PokemonCenter_1F_Text_StoneCavern:
 	.string "Off to explore the cavern?\n"
 	.string "There are rare stones in there.\p"
 	.string "If you've earned the STONE BADGE,\n"
-	.string "your level cap is now 20. Use\l"
+	.string "your level cap is now {STR_VAR_1}. Use\l"
 	.string "the LEVELER before heading out!\p"
 	.string "A new evolution may suit a new\n"
 	.string "Battle Set. The TUTOR can help\l"

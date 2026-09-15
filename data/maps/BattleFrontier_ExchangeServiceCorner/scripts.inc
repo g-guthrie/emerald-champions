@@ -257,7 +257,83 @@ BattleFrontier_ExchangeServiceCorner_EventScript_EvolutionClerk::
 	faceplayer
 	setvar VAR_TEMP_2, EXCHANGE_CORNER_EVOLUTION_CLERK
 	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionCategory
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionCategory::
+	message BattleFrontier_ExchangeServiceCorner_Text_EvolutionOrRarePokemon
+	waitmessage
+	multichoice 10, 0, MULTI_BF_EXCHANGE_EVOLUTION_CATEGORY, FALSE
+	switch VAR_RESULT
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon::
+	message BattleFrontier_ExchangeServiceCorner_Text_WhichRarePokemon
+	waitmessage
+	multichoice 10, 0, MULTI_BF_EXCHANGE_RARE_POKEMON, FALSE
+	switch VAR_RESULT
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_SelectGenesectBP
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_SelectPoipoleBP
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_SelectGenesectBP::
+	setvar VAR_0x8004, SPECIES_GENESECT
+	setvar VAR_0x8008, 240
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ConfirmRarePokemon
+
+BattleFrontier_ExchangeServiceCorner_EventScript_SelectPoipoleBP::
+	setvar VAR_0x8004, SPECIES_POIPOLE
+	setvar VAR_0x8008, 160
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ConfirmRarePokemon
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ConfirmRarePokemon::
+	special IsEmeraldChampionsGameCornerPokemonClaimed
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyReceivedRarePokemon
+	bufferspeciesname STR_VAR_1, VAR_0x8004
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmRarePokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_lt VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_NotEnoughPointsForPokemon
+	special GiveEmeraldChampionsGameCornerPokemon
+	goto_if_eq VAR_RESULT, EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT, BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyCaughtLegendaryBP
+	goto_if_eq VAR_RESULT, MON_CANT_GIVE, BattleFrontier_ExchangeServiceCorner_EventScript_NoRoomForRarePokemon
+	goto_if_eq VAR_RESULT, EC_GAME_CORNER_PRIZE_SET_FAILED, BattleFrontier_ExchangeServiceCorner_EventScript_RarePokemonSetFailed
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	playse SE_SHOP
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_RarePokemonReceived, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_NotEnoughPointsForPokemon::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyReceivedRarePokemon::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_AlreadyReceivedRarePokemon, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyCaughtLegendaryBP::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_AlreadyCaughtLegendaryBP, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_NoRoomForRarePokemon::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_PCIsFull, MSGBOX_DEFAULT
+	special CloseBattlePointsWindow
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_RarePokemonSetFailed::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_RarePokemonSetFailed, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRarePokemon
+	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR
@@ -360,6 +436,34 @@ BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize:
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase:
 	.string "You've chosen the {STR_VAR_1}.\n"
 	.string "Is that correct?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_EvolutionOrRarePokemon:
+	.string "We trade Battle Points for evolution\n"
+	.string "tools, or for a few rare POKéMON.\p"
+	.string "Which would you like to see?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_WhichRarePokemon:
+	.string "Which POKéMON would you like?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmRarePokemon:
+	.string "Exchange your Battle Points for\n"
+	.string "{STR_VAR_1}?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_RarePokemonReceived:
+	.string "Thank you!\n"
+	.string "We'll send it to your PC at home.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_AlreadyReceivedRarePokemon:
+	.string "That unique prize has already been\n"
+	.string "claimed.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_AlreadyCaughtLegendaryBP:
+	.string "Our records show you've already\n"
+	.string "caught one of those.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_RarePokemonSetFailed:
+	.string "I'm so sorry…\n"
+	.string "Something went wrong with that trade…$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC:
 	.string "Thank you!\n"

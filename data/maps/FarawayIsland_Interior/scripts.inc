@@ -206,15 +206,39 @@ FarawayIsland_Interior_EventScript_CompleteJourney::
 	goto_if_unset FLAG_EC_RESOLVED_SOUTHERN_LATI, Common_EventScript_NopReturn
 	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, Common_EventScript_NopReturn
 	completemilestone FLAG_EC_REPORT_C36_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C36_COMPLETE
 	msgbox FarawayIsland_Interior_Text_JourneyComplete, MSGBOX_DEFAULT
+	call_if_eq VAR_RESULT, 3, FarawayIsland_Interior_EventScript_DiscoveryAndCapLine
+	call_if_eq VAR_RESULT, 2, FarawayIsland_Interior_EventScript_DiscoveryLine
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	msgbox FarawayIsland_Interior_Text_CatchingChoice, MSGBOX_DEFAULT
+	msgbox FarawayIsland_Interior_Text_JourneyDirections, MSGBOX_DEFAULT
+	return
+
+FarawayIsland_Interior_EventScript_DiscoveryAndCapLine::
+	msgbox FarawayIsland_Interior_Text_DiscoveryAndCapLine, MSGBOX_DEFAULT
+	return
+
+FarawayIsland_Interior_EventScript_DiscoveryLine::
+	msgbox FarawayIsland_Interior_Text_DiscoveryLine, MSGBOX_DEFAULT
 	return
 
 FarawayIsland_Interior_Text_JourneyComplete:
 	.string "The travelers' account led to\n"
-	.string "MEW. A living part of the old story.\p"
-	.string "Your discovery earns ¥12,000.\n"
-	.string "Your level cap is now 64. Catching\l"
-	.string "MEW remains your own choice.\p"
+	.string "MEW. A living part of the old story.$"
+
+FarawayIsland_Interior_Text_DiscoveryAndCapLine:
+	.string "Your discovery earns ¥{STR_VAR_2}.\n"
+	.string "Your level cap is now {STR_VAR_1}.$"
+
+FarawayIsland_Interior_Text_DiscoveryLine:
+	.string "Your discovery earns ¥{STR_VAR_2}.$"
+
+FarawayIsland_Interior_Text_CatchingChoice:
+	.string "Catching MEW remains your own\n"
+	.string "choice.$"
+
+FarawayIsland_Interior_Text_JourneyDirections:
 	.string "Return through the clearing to\n"
 	.string "BRINEY at the ferry. The next\l"
 	.string "lead is the Orb keepers at MT. PYRE.$"

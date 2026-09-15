@@ -1255,6 +1255,6 @@ u32 GetFiniteDuplicateRewardValue(enum Item item)
         return 3000;
     if (gItemsInfo[item].sortType == ITEM_TYPE_EVOLUTION_ITEM
         && GetItemImportance(item) && PlayerOwnsItem(item))
-        return 5000;
+        return 3000;
     return 0;
 }

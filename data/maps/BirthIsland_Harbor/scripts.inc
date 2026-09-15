@@ -5,7 +5,7 @@ BirthIsland_Harbor_MapScripts::
 BirthIsland_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
-	call_if_set FLAG_EC_REPORT_C43_COMPLETE, BirthIsland_Harbor_EventScript_RepeatScannerLead
+	call_if_set FLAG_EC_REPORT_C43_COMPLETE, BirthIsland_Harbor_EventScript_RepeatOnwardLead
 	call_if_unset FLAG_EC_REPORT_C43_COMPLETE, BirthIsland_Harbor_EventScript_RepeatIslandGuide
 	msgbox BirthIsland_Harbor_Text_SailorReturn, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BirthIsland_Harbor_EventScript_AsYouLike
@@ -53,17 +53,26 @@ BirthIsland_Harbor_Text_ArrivalGuide:
 	.string "return trip, whatever happens.$"
 
 BirthIsland_Harbor_Text_ScannerLead:
-	.string "The meteorite lead is resolved.\n"
-	.string "Next, visit the ABANDONED SHIP\l"
-	.string "on ROUTE 108.\p"
-	.string "Bring licensed SURF and DIVE.\n"
-	.string "LAPRAS in ROUTE 108's water\l"
-	.string "can use both.\p"
-	.string "Recover its SCANNER and take it\l"
-	.string "to STERN at SLATEPORT HARBOR.$"
+	.string "The meteorite lead is resolved.\p"
+	.string "AQUA's submarine is still down at\n"
+	.string "SEAFLOOR CAVERN, south of MOSSDEEP\l"
+	.string "past ROUTE 128. Bring licensed\l"
+	.string "SURF, DIVE, STRENGTH and ROCK\l"
+	.string "SMASH and take up the pursuit.$"
 
-BirthIsland_Harbor_EventScript_RepeatScannerLead::
+BirthIsland_Harbor_Text_OnwardLeadAfterCrisis:
+	.string "The meteorite lead is resolved.\p"
+	.string "With the SOOTOPOLIS crisis behind\n"
+	.string "you, visit STEVEN's house in\l"
+	.string "MOSSDEEP, or press on to the\l"
+	.string "POKéMON LEAGUE.$"
+
+BirthIsland_Harbor_EventScript_RepeatOnwardLead::
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, BirthIsland_Harbor_EventScript_RepeatOnwardLeadAfterCrisis
 	msgbox BirthIsland_Harbor_Text_ScannerLead, MSGBOX_DEFAULT
+	return
+BirthIsland_Harbor_EventScript_RepeatOnwardLeadAfterCrisis::
+	msgbox BirthIsland_Harbor_Text_OnwardLeadAfterCrisis, MSGBOX_DEFAULT
 	return
 BirthIsland_Harbor_EventScript_RepeatIslandGuide::
 	msgbox BirthIsland_Harbor_Text_ArrivalGuide, MSGBOX_DEFAULT

@@ -153,12 +153,25 @@ MossdeepCity_StevensHouse_EventScript_ReviewResearch::
 	goto_if_unset FLAG_EC_SURVEYED_METEOR_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
 	setflag FLAG_EC_STEVEN_RESEARCH_CONCLUSION
 	completemilestone FLAG_EC_REPORT_C48_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C48_COMPLETE
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 30
 	faceplayer
 	msgbox MossdeepCity_StevensHouse_Text_ResearchConclusion, MSGBOX_DEFAULT
+	call_if_eq VAR_RESULT, 3, MossdeepCity_StevensHouse_EventScript_GrantAndCapLine
+	call_if_eq VAR_RESULT, 2, MossdeepCity_StevensHouse_EventScript_GrantLine
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	msgbox MossdeepCity_StevensHouse_Text_ResearchDirections, MSGBOX_DEFAULT
+	return
+
+MossdeepCity_StevensHouse_EventScript_GrantAndCapLine::
+	msgbox MossdeepCity_StevensHouse_Text_GrantAndCapLine, MSGBOX_DEFAULT
+	return
+
+MossdeepCity_StevensHouse_EventScript_GrantLine::
+	msgbox MossdeepCity_StevensHouse_Text_GrantLine, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_StevensHouse_EventScript_ResearchPending::
@@ -182,9 +195,17 @@ MossdeepCity_StevensHouse_Text_ResearchConclusion:
 	.string "You've seen how much they missed.\p"
 	.string "The crystal light and distant\n"
 	.string "song belong to living places,\l"
-	.string "not machines to command.\p"
+	.string "not machines to command.$"
+
+MossdeepCity_StevensHouse_Text_GrantAndCapLine:
 	.string "DEVON has sent your final grant:\n"
-	.string "¥20,000. Your level cap is now 94.\p"
+	.string "¥{STR_VAR_2}. Your level cap is now {STR_VAR_1}.$"
+
+MossdeepCity_StevensHouse_Text_GrantLine:
+	.string "DEVON has sent your final grant:\n"
+	.string "¥{STR_VAR_2}.$"
+
+MossdeepCity_StevensHouse_Text_ResearchDirections:
 	.string "SURF east from ROUTE 128 to\n"
 	.string "EVER GRANDE. Climb the WATERFALL;\l"
 	.string "VICTORY ROAD leads to the LEAGUE.$"

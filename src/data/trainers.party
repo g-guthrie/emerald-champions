@@ -91,7 +91,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -104,7 +104,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TENTACRUEL @ ITEM_BLACK_SLUDGE
 Level: 59
@@ -166,7 +166,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SHARPEDO @ ITEM_LIFE_ORB
 Level: 59
@@ -228,7 +228,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SEISMITOAD @ ITEM_LIFE_ORB
 Level: 59
@@ -290,7 +290,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CROBAT @ ITEM_BLACK_SLUDGE
 Level: 59
@@ -352,7 +352,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MIGHTYENA @ ITEM_LIFE_ORB
 Level: 69
@@ -414,7 +414,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SCRAFTY @ ITEM_ASSAULT_VEST
 Level: 69
@@ -476,7 +476,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_WAILORD @ ITEM_SITRUS_BERRY
 Level: 69
@@ -538,7 +538,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_AVALUGG @ ITEM_LEFTOVERS
 Level: 60
@@ -626,7 +626,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CARVANHA @ ITEM_FOCUS_SASH
 Level: 15
@@ -688,7 +688,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ZERAORA @ ITEM_LIFE_ORB
 Level: 60
@@ -750,7 +750,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -763,7 +763,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -776,7 +776,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GOREBYSS @ ITEM_LIFE_ORB
 Level: 69
@@ -838,7 +838,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -851,7 +851,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GRIMER_ALOLA @ ITEM_EVIOLITE
 Level: 24
@@ -913,7 +913,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GOLBAT @ ITEM_EVIOLITE
 Level: 54
@@ -975,7 +975,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_PELIPPER @ ITEM_DAMP_ROCK
 Level: 54
@@ -1037,7 +1037,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MIGHTYENA @ ITEM_LIFE_ORB
 Level: 54
@@ -1099,7 +1099,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_RATTATA_ALOLA @ ITEM_FIGY_BERRY
 Level: 25
@@ -1161,7 +1161,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -1174,7 +1174,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MIGHTYENA @ ITEM_LIFE_ORB
 Level: 69
@@ -1236,7 +1236,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MUK @ ITEM_BLACK_SLUDGE
 Level: 59
@@ -1298,7 +1298,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BRUXISH @ ITEM_CHOICE_SCARF
 Level: 59
@@ -1360,7 +1360,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_JELLICENT @ ITEM_SITRUS_BERRY
 Level: 59
@@ -1422,7 +1422,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_WALREIN @ ITEM_SITRUS_BERRY
 Level: 54
@@ -1484,7 +1484,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_POLITOED @ ITEM_DAMP_ROCK
 Level: 59
@@ -1546,7 +1546,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TOXICROAK @ ITEM_FOCUS_SASH
 Level: 59
@@ -1608,7 +1608,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_AEGISLASH @ ITEM_LEFTOVERS
 Level: 55
@@ -1670,7 +1670,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_POLITOED @ ITEM_DAMP_ROCK
 Level: 61
@@ -1758,7 +1758,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -1771,7 +1771,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_NINETALES_ALOLA @ ITEM_LIGHT_CLAY
 Level: 56
@@ -1859,7 +1859,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_POLITOED @ ITEM_DAMP_ROCK
 Level: 71
@@ -1947,7 +1947,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_PELIPPER @ ITEM_DAMP_ROCK
 Level: 71
@@ -2035,7 +2035,7 @@ Gender: Female
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2048,7 +2048,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ROSELIA @ ITEM_FOCUS_SASH
 Level: 33
@@ -2110,7 +2110,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_VESPIQUEN @ ITEM_SITRUS_BERRY
 Level: 31
@@ -2172,7 +2172,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_JYNX @ ITEM_FOCUS_SASH
 Level: 80
@@ -2260,7 +2260,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2273,7 +2273,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TING_LU @ ITEM_LEFTOVERS
 Level: 45
@@ -2335,7 +2335,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2348,7 +2348,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_OMASTAR @ ITEM_WHITE_HERB
 Level: 55
@@ -2410,7 +2410,7 @@ Gender: Male
 Music: Interviewer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_LOUDRED @ ITEM_EVIOLITE
 Level: 44
@@ -2472,7 +2472,7 @@ Gender: Male
 Music: Interviewer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MAGNEZONE @ ITEM_SITRUS_BERRY
 Level: 54
@@ -2534,7 +2534,7 @@ Gender: Male
 Music: Interviewer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2547,7 +2547,7 @@ Gender: Male
 Music: Interviewer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2560,7 +2560,7 @@ Gender: Male
 Music: Interviewer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TOXTRICITY @ ITEM_CHOICE_SCARF
 Level: 59
@@ -2622,7 +2622,7 @@ Gender: Male
 Music: Interviewer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_EXPLOUD @ ITEM_CHOICE_SPECS
 Level: 59
@@ -2684,7 +2684,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CHERRIM @ ITEM_FOCUS_SASH
 Level: 21
@@ -2746,7 +2746,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2759,7 +2759,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2772,7 +2772,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_PRINPLUP @ ITEM_FOCUS_SASH
 Level: 21
@@ -2834,7 +2834,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -2847,7 +2847,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CINCCINO @ ITEM_LIFE_ORB
 Level: 45
@@ -2935,7 +2935,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ORANGURU @ ITEM_SITRUS_BERRY
 Level: 45
@@ -3023,7 +3023,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_AUDINO @ ITEM_AUDINITE
 Level: 45
@@ -3111,7 +3111,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_EXPLOUD @ ITEM_THROAT_SPRAY
 Level: 45
@@ -3199,7 +3199,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_BRAVIARY @ ITEM_LIFE_ORB
 Level: 55
@@ -3287,7 +3287,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SABLEYE @ ITEM_MENTAL_HERB
 Level: 100
@@ -3375,7 +3375,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CRESSELIA @ ITEM_MENTAL_HERB
 Level: 100
@@ -3463,7 +3463,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_COFAGRIGUS @ ITEM_MENTAL_HERB
 Level: 41
@@ -3525,7 +3525,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TREVENANT @ ITEM_LEFTOVERS
 Level: 80
@@ -3613,7 +3613,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_RHYPERIOR @ ITEM_WEAKNESS_POLICY
 Level: 80
@@ -3701,7 +3701,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GALVANTULA @ ITEM_LIFE_ORB
 Level: 80
@@ -3789,7 +3789,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_BISHARP @ ITEM_LIFE_ORB
 Level: 80
@@ -3877,7 +3877,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon / Will Suicide
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TORTERRA @ ITEM_LIFE_ORB
 Level: 80
@@ -3965,7 +3965,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GOLEM_ALOLA @ ITEM_LIFE_ORB
 Level: 70
@@ -4053,7 +4053,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_DRAMPA @ ITEM_CHOICE_SPECS
 Level: 45
@@ -4141,7 +4141,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ZANGOOSE @ ITEM_TOXIC_ORB
 Level: 45
@@ -4229,7 +4229,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAUROS @ ITEM_SITRUS_BERRY
 Level: 45
@@ -4317,7 +4317,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ROSERADE @ ITEM_FOCUS_SASH
 Level: 55
@@ -4405,7 +4405,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GIGALITH @ ITEM_SMOOTH_ROCK
 Level: 100
@@ -4493,7 +4493,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_RAIKOU @ ITEM_LIFE_ORB
 Level: 40
@@ -4555,7 +4555,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SABLEYE @ ITEM_SABLENITE
 Level: 55
@@ -4617,7 +4617,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_FORRETRESS @ ITEM_SITRUS_BERRY
 Level: 80
@@ -4705,7 +4705,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_RIBOMBEE @ ITEM_FOCUS_SASH
 Level: 80
@@ -4793,7 +4793,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MEGANIUM @ ITEM_MEGANIUMITE
 Level: 80
@@ -4881,7 +4881,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TYRANITAR @ ITEM_TYRANITARITE
 Level: 80
@@ -4969,7 +4969,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TORKOAL @ ITEM_CHARCOAL
 Level: 80
@@ -5057,7 +5057,7 @@ Gender: Female
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -5070,7 +5070,7 @@ Gender: Female
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -5083,7 +5083,7 @@ Gender: Female
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -5096,7 +5096,7 @@ Gender: Female
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -5109,7 +5109,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SNUBBULL @ ITEM_LUM_BERRY
 Level: 17
@@ -5171,7 +5171,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_LAPRAS @ ITEM_SITRUS_BERRY
 Level: 70
@@ -5259,7 +5259,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FLYGON @ ITEM_YACHE_BERRY
 Level: 69
@@ -5321,7 +5321,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_DEWGONG @ ITEM_LEFTOVERS
 Level: 70
@@ -5409,7 +5409,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TSAREENA @ ITEM_LIFE_ORB
 Level: 99
@@ -5471,7 +5471,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -5484,7 +5484,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -5497,7 +5497,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ALCREMIE @ ITEM_BABIRI_BERRY
 Level: 42
@@ -5559,7 +5559,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -5572,7 +5572,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GASTRODON @ ITEM_LEFTOVERS
 Level: 70
@@ -5660,7 +5660,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PELIPPER @ ITEM_DAMP_ROCK
 Level: 70
@@ -5748,7 +5748,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CARRACOSTA @ ITEM_WEAKNESS_POLICY
 Level: 70
@@ -5836,7 +5836,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_VAPOREON @ ITEM_LEFTOVERS
 Level: 70
@@ -5924,7 +5924,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_PORYGON @ ITEM_EVIOLITE
 Level: 16
@@ -5986,7 +5986,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GENGAR @ ITEM_FOCUS_SASH
 Level: 70
@@ -6048,7 +6048,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6061,7 +6061,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TURTONATOR @ ITEM_LEFTOVERS
 Level: 41
@@ -6123,7 +6123,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6136,7 +6136,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6149,7 +6149,7 @@ Gender: Female
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SANDYGAST @ ITEM_EVIOLITE
 Level: 44
@@ -6211,7 +6211,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_LANTURN @ ITEM_ASSAULT_VEST
 Level: 54
@@ -6273,7 +6273,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_POLITOED @ ITEM_DAMP_ROCK
 Level: 55
@@ -6361,7 +6361,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6374,7 +6374,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6387,7 +6387,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6400,7 +6400,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6413,7 +6413,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6426,7 +6426,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6439,7 +6439,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6452,7 +6452,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_BRONZONG @ ITEM_MENTAL_HERB
 Level: 70
@@ -6540,7 +6540,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GASTRODON_EAST @ ITEM_SITRUS_BERRY
 Level: 69
@@ -6602,7 +6602,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6615,7 +6615,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6628,7 +6628,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6641,7 +6641,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GRAPPLOCT @ ITEM_LEFTOVERS
 Level: 22
@@ -6729,7 +6729,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6742,7 +6742,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6755,7 +6755,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TYPE_NULL @ ITEM_EVIOLITE
 Level: 54
@@ -6817,7 +6817,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6830,7 +6830,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -6844,7 +6844,7 @@ Music: Intense
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PINCURCHIN @ ITEM_TERRAIN_EXTENDER
 Level: 34
@@ -6932,7 +6932,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CLOYSTER @ ITEM_FOCUS_SASH
 Level: 59
@@ -6994,7 +6994,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_RELICANTH @ ITEM_LIFE_ORB
 Level: 59
@@ -7057,7 +7057,7 @@ Music: Intense
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ELECTRODE_HISUI @ ITEM_COVERT_CLOAK
 Level: 30
@@ -7145,7 +7145,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -7158,7 +7158,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -7171,7 +7171,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_COALOSSAL @ ITEM_SITRUS_BERRY
 Level: 41
@@ -7259,7 +7259,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HAWLUCHA @ ITEM_MISTY_SEED
 Level: 40
@@ -7347,7 +7347,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MAGCARGO @ ITEM_FOCUS_SASH
 Level: 43
@@ -7436,7 +7436,7 @@ Music: Hiker
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_DRIFBLIM @ ITEM_FLAME_ORB
 Level: 43
@@ -7524,7 +7524,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HITMONTOP @ ITEM_MISTY_SEED
 Level: 43
@@ -7612,7 +7612,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -7625,7 +7625,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_STAKATAKA @ ITEM_LEFTOVERS
 Level: 44
@@ -7687,7 +7687,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_KARTANA @ ITEM_FOCUS_SASH
 Level: 44
@@ -7749,7 +7749,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -7762,7 +7762,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -7775,7 +7775,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_KECLEON @ ITEM_SITRUS_BERRY
 Level: 44
@@ -7837,7 +7837,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BOUFFALANT @ ITEM_ASSAULT_VEST
 Level: 41
@@ -7899,7 +7899,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_HARIYAMA @ ITEM_FLAME_ORB
 Level: 40
@@ -7961,7 +7961,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ARCHEOPS @ ITEM_FLYING_GEM
 Level: 39
@@ -8023,7 +8023,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8036,7 +8036,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_LEAVANNY @ ITEM_LIFE_ORB
 Level: 55
@@ -8098,7 +8098,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_VIVILLON @ ITEM_MENTAL_HERB
 Level: 54
@@ -8160,7 +8160,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8173,7 +8173,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_WORMADAM @ ITEM_SITRUS_BERRY
 Level: 34
@@ -8236,7 +8236,7 @@ Music: Intense
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8249,7 +8249,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_XATU @ ITEM_FOCUS_SASH
 Level: 60
@@ -8337,7 +8337,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_BRONZONG @ ITEM_LEFTOVERS
 Level: 60
@@ -8425,7 +8425,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MEOWSTIC_F @ ITEM_LIGHT_CLAY
 Level: 60
@@ -8513,7 +8513,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8526,7 +8526,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8539,7 +8539,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8552,7 +8552,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_WOBBUFFET @ ITEM_SITRUS_BERRY
 Level: 30
@@ -8614,7 +8614,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Will Suicide
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_BRUXISH @ ITEM_LIFE_ORB
 Level: 60
@@ -8702,7 +8702,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ESPEON @ ITEM_LIGHT_CLAY
 Level: 60
@@ -8790,7 +8790,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_JYNX @ ITEM_FOCUS_SASH
 Level: 60
@@ -8878,7 +8878,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8891,7 +8891,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_INDEEDEE_F @ ITEM_PSYCHIC_SEED
 Level: 79
@@ -8953,7 +8953,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8966,7 +8966,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -8979,7 +8979,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MANECTRIC @ ITEM_CHOICE_SCARF
 Level: 99
@@ -9041,7 +9041,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_WEAVILE @ ITEM_FOCUS_SASH
 Level: 99
@@ -9104,7 +9104,7 @@ Music: Elite Four
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Mugshot: Purple
-Prize Multiplier: 150
+Prize Multiplier: 40
 
 SPECIES_INCINEROAR @ ITEM_SITRUS_BERRY
 Level: 84
@@ -9193,7 +9193,7 @@ Music: Elite Four
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Mugshot: Green
-Prize Multiplier: 150
+Prize Multiplier: 40
 
 SPECIES_GIRATINA @ ITEM_LEFTOVERS
 Level: 81
@@ -9282,7 +9282,7 @@ Music: Elite Four
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Mugshot: Pink
-Prize Multiplier: 150
+Prize Multiplier: 40
 
 SPECIES_NINETALES_ALOLA @ ITEM_LIGHT_CLAY
 Level: 84
@@ -9371,7 +9371,7 @@ Music: Elite Four
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Mugshot: Blue
-Prize Multiplier: 150
+Prize Multiplier: 40
 
 SPECIES_SALAMENCE @ ITEM_SALAMENCITE
 Level: 80
@@ -9459,7 +9459,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_AERODACTYL @ ITEM_AERODACTYLITE
 Level: 14
@@ -9547,7 +9547,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_PACHIRISU @ ITEM_SITRUS_BERRY
 Level: 23
@@ -9635,7 +9635,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_ELECTRODE @ ITEM_FOCUS_SASH
 Level: 32
@@ -9723,7 +9723,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_TORKOAL @ ITEM_HEAT_ROCK
 Level: 42
@@ -9811,7 +9811,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon / Conservative
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_WEEZING_GALAR @ ITEM_BLACK_SLUDGE
 Level: 46
@@ -9899,7 +9899,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_ZAPDOS @ ITEM_SITRUS_BERRY
 Level: 56
@@ -9987,7 +9987,7 @@ Gender: Male
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_SOLROCK @ ITEM_MENTAL_HERB
 Level: 61
@@ -10075,7 +10075,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_POLITOED @ ITEM_DAMP_ROCK
 Level: 71
@@ -10163,7 +10163,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MAGNEMITE @ ITEM_EVIOLITE
 Level: 16
@@ -10225,7 +10225,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GARDEVOIR @ ITEM_CHOICE_SCARF
 Level: 41
@@ -10287,7 +10287,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -10300,7 +10300,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_DUSKULL @ ITEM_EVIOLITE
 Level: 44
@@ -10362,7 +10362,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -10375,7 +10375,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ORANGURU @ ITEM_SITRUS_BERRY
 Level: 31
@@ -10437,7 +10437,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_STARAVIA @ ITEM_EVIOLITE
 Level: 34
@@ -10499,7 +10499,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_DELCATTY @ ITEM_SITRUS_BERRY
 Level: 32
@@ -10561,7 +10561,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 100
@@ -10649,7 +10649,7 @@ Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_LILLIGANT @ ITEM_MIRACLE_SEED
 Level: 29
@@ -10711,7 +10711,7 @@ Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PALAFIN @ ITEM_LEFTOVERS
 Level: 70
@@ -10800,7 +10800,7 @@ Music: Twins
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_DELCATTY @ ITEM_SITRUS_BERRY
 Level: 32
@@ -10862,7 +10862,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_DUSCLOPS @ ITEM_EVIOLITE
 Level: 55
@@ -10924,7 +10924,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PAWMOT @ ITEM_FOCUS_SASH
 Level: 29
@@ -10986,7 +10986,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_WOBBUFFET @ ITEM_MENTAL_HERB
 Level: 41
@@ -11048,7 +11048,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_POOCHYENA @ ITEM_FOCUS_SASH
 Level: 17
@@ -11110,7 +11110,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_LOTAD @ ITEM_EVIOLITE
 Level: 17
@@ -11169,7 +11169,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GLIMMET @ ITEM_FOCUS_SASH
 Level: 17
@@ -11257,7 +11257,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CRADILY @ ITEM_LEFTOVERS
 Level: 14
@@ -11345,7 +11345,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_PAWMI @ ITEM_FOCUS_SASH
 Level: 17
@@ -11407,7 +11407,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CHARJABUG @ ITEM_EVIOLITE
 Level: 35
@@ -11495,7 +11495,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SLAKING @ ITEM_CHOICE_SCARF
 Level: 80
@@ -11583,7 +11583,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_AUDINO @ ITEM_SITRUS_BERRY
 Level: 80
@@ -11671,7 +11671,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CRYOGONAL @ ITEM_NEVER_MELT_ICE
 Level: 41
@@ -11733,7 +11733,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GARGANACL @ ITEM_LEFTOVERS
 Level: 40
@@ -11795,7 +11795,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_DUGTRIO @ ITEM_FOCUS_SASH
 Level: 30
@@ -11857,7 +11857,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_PIKACHU @ ITEM_LIGHT_BALL
 Level: 15
@@ -11919,7 +11919,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_STUNKY @ ITEM_EVIOLITE
 Level: 33
@@ -11979,7 +11979,7 @@ Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon / Conservative
 Mugshot: Yellow
-Prize Multiplier: 200
+Prize Multiplier: 50
 
 SPECIES_KYOGRE @ ITEM_MYSTIC_WATER
 Level: 80
@@ -12067,7 +12067,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12080,7 +12080,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12093,7 +12093,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CLAUNCHER @ ITEM_CHOICE_SPECS
 Level: 22
@@ -12155,7 +12155,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FINNEON @ ITEM_EVIOLITE
 Level: 25
@@ -12217,7 +12217,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12230,7 +12230,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12243,7 +12243,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_KINGDRA @ ITEM_LIFE_ORB
 Level: 70
@@ -12316,7 +12316,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FERROSEED @ ITEM_ROCKY_HELMET
 Level: 32
@@ -12378,7 +12378,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_DODUO @ ITEM_EVIOLITE
 Level: 34
@@ -12440,7 +12440,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12453,7 +12453,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12466,7 +12466,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_THWACKEY @ ITEM_EVIOLITE
 Level: 33
@@ -12528,7 +12528,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FROSLASS @ ITEM_FOCUS_SASH
 Level: 30
@@ -12590,7 +12590,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12603,7 +12603,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12616,7 +12616,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12629,7 +12629,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12642,7 +12642,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12655,7 +12655,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12668,7 +12668,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12681,7 +12681,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FEAROW @ ITEM_LIFE_ORB
 Level: 59
@@ -12743,7 +12743,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12756,7 +12756,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_EXEGGUTOR_ALOLA @ ITEM_SITRUS_BERRY
 Level: 40
@@ -12818,7 +12818,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_NOIVERN @ ITEM_FOCUS_SASH
 Level: 70
@@ -12880,7 +12880,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -12893,7 +12893,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_STARAPTOR @ ITEM_LIFE_ORB
 Level: 54
@@ -12955,7 +12955,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_NOCTOWL @ ITEM_SITRUS_BERRY
 Level: 55
@@ -13043,7 +13043,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_GLISCOR @ ITEM_TOXIC_ORB
 Level: 55
@@ -13131,7 +13131,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Will Suicide
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13144,7 +13144,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HONCHKROW @ ITEM_LIFE_ORB
 Level: 55
@@ -13232,7 +13232,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_DODRIO @ ITEM_LIFE_ORB
 Level: 54
@@ -13294,7 +13294,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13307,7 +13307,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13320,7 +13320,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13333,7 +13333,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13346,7 +13346,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13359,7 +13359,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Will Suicide
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13372,7 +13372,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ABOMASNOW @ ITEM_SITRUS_BERRY
 Level: 80
@@ -13460,7 +13460,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CLEFAIRY @ ITEM_EVIOLITE
 Level: 54
@@ -13522,7 +13522,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13535,7 +13535,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_WEEZING @ ITEM_PAYAPA_BERRY
 Level: 41
@@ -13597,7 +13597,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_LILLIGANT_HISUI @ ITEM_COBA_BERRY
 Level: 24
@@ -13685,7 +13685,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MIENFOO @ ITEM_EVIOLITE
 Level: 26
@@ -13773,7 +13773,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_RIOLU @ ITEM_EVIOLITE
 Level: 16
@@ -13835,7 +13835,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13848,7 +13848,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13861,7 +13861,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13874,7 +13874,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13887,7 +13887,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13900,7 +13900,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13913,7 +13913,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13926,7 +13926,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13939,7 +13939,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -13952,7 +13952,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SEADRA @ ITEM_SCOPE_LENS
 Level: 54
@@ -14014,7 +14014,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14027,7 +14027,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14040,7 +14040,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14053,7 +14053,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14066,7 +14066,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14079,7 +14079,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_LAPRAS @ ITEM_LEFTOVERS
 Level: 59
@@ -14141,7 +14141,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GLACEON @ ITEM_WISE_GLASSES
 Level: 59
@@ -14203,7 +14203,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14216,7 +14216,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PIDGEOT @ ITEM_LIFE_ORB
 Level: 70
@@ -14304,7 +14304,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MILTANK @ ITEM_SITRUS_BERRY
 Level: 69
@@ -14366,7 +14366,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14379,7 +14379,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14392,7 +14392,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14405,7 +14405,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_KINGDRA @ ITEM_KINGDRANITE
 Level: 69
@@ -14467,7 +14467,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14480,7 +14480,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14493,7 +14493,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SHAYMIN @ ITEM_EXPERT_BELT
 Level: 45
@@ -14555,7 +14555,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MEOWSTIC_F @ ITEM_LIFE_ORB
 Level: 44
@@ -14617,7 +14617,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_DELIBIRD @ ITEM_FOCUS_SASH
 Level: 46
@@ -14679,7 +14679,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14692,7 +14692,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TOGETIC @ ITEM_EVIOLITE
 Level: 32
@@ -14754,7 +14754,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 SPECIES_PLUSLE @ ITEM_FOCUS_SASH
@@ -14817,7 +14817,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_NINETALES @ ITEM_HEAT_ROCK
 Level: 54
@@ -14879,7 +14879,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MANTYKE @ ITEM_EVIOLITE
 Level: 22
@@ -14941,7 +14941,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -14954,7 +14954,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MAGBY @ ITEM_EVIOLITE
 Level: 25
@@ -15016,7 +15016,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -15029,7 +15029,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -15042,7 +15042,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MACHAMP @ ITEM_MACHAMPITE
 Level: 54
@@ -15105,7 +15105,7 @@ Music: Hiker
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ORANGURU @ ITEM_SITRUS_BERRY
 Level: 41
@@ -15193,7 +15193,7 @@ Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PYUKUMUKU @ ITEM_ROCKY_HELMET
 Level: 70
@@ -15281,7 +15281,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_ABSOL @ ITEM_LIFE_ORB
 Level: 55
@@ -15343,7 +15343,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
 Level: 55
@@ -15405,7 +15405,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_LUCARIO @ ITEM_LIFE_ORB
 Level: 60
@@ -15467,7 +15467,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -15480,7 +15480,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_VENUSAUR @ ITEM_BLACK_SLUDGE
 Level: 70
@@ -15542,7 +15542,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -15555,7 +15555,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_POLIWRATH @ ITEM_LIFE_ORB
 Level: 69
@@ -15617,7 +15617,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HARIYAMA @ ITEM_ASSAULT_VEST
 Level: 70
@@ -15680,7 +15680,7 @@ Music: Suspicious
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -15693,7 +15693,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -15706,7 +15706,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_GIGALITH @ ITEM_WEAKNESS_POLICY
 Level: 71
@@ -15794,7 +15794,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TOGEKISS @ ITEM_SITRUS_BERRY
 Level: 80
@@ -15882,7 +15882,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TREECKO @ ITEM_SITRUS_BERRY
 Level: 17
@@ -15944,7 +15944,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 30
@@ -16019,7 +16019,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 55
@@ -16107,7 +16107,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TORCHIC @ ITEM_LIFE_ORB
 Level: 15
@@ -16169,7 +16169,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 30
@@ -16244,7 +16244,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 55
@@ -16332,7 +16332,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MUDKIP @ ITEM_LIFE_ORB
 Level: 15
@@ -16394,7 +16394,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 30
@@ -16469,7 +16469,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 55
@@ -16557,7 +16557,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TREECKO @ ITEM_SITRUS_BERRY
 Level: 17
@@ -16619,7 +16619,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 30
@@ -16694,7 +16694,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 55
@@ -16782,7 +16782,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TORCHIC @ ITEM_LIFE_ORB
 Level: 15
@@ -16844,7 +16844,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 30
@@ -16919,7 +16919,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 55
@@ -17007,7 +17007,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MUDKIP @ ITEM_LIFE_ORB
 Level: 15
@@ -17069,7 +17069,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 30
@@ -17144,7 +17144,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 55
@@ -17232,7 +17232,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MUNCHLAX @ ITEM_EVIOLITE
 Level: 34
@@ -17320,7 +17320,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -17333,7 +17333,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SHIINOTIC @ ITEM_MENTAL_HERB
 Level: 80
@@ -17421,7 +17421,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_FROAKIE @ ITEM_FOCUS_SASH
 Level: 37
@@ -17509,7 +17509,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PINSIR @ ITEM_LIFE_ORB
 Level: 80
@@ -17597,7 +17597,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GOLEM_ALOLA @ ITEM_ASSAULT_VEST
 Level: 54
@@ -17659,7 +17659,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAPU_KOKO @ ITEM_LIFE_ORB
 Level: 55
@@ -17721,7 +17721,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_OGERPON @ ITEM_LIFE_ORB
 Level: 55
@@ -17783,7 +17783,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SCIZOR @ ITEM_LIFE_ORB
 Level: 70
@@ -17845,7 +17845,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
 Level: 55
@@ -17907,7 +17907,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SHIFTRY @ ITEM_FOCUS_SASH
 Level: 55
@@ -17969,7 +17969,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAPU_BULU @ ITEM_LIFE_ORB
 Level: 70
@@ -18031,7 +18031,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CYCLIZAR @ ITEM_SITRUS_BERRY
 Level: 40
@@ -18093,7 +18093,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MANDIBUZZ @ ITEM_SITRUS_BERRY
 Level: 69
@@ -18155,7 +18155,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CARRACOSTA @ ITEM_ROCK_GEM
 Level: 59
@@ -18217,7 +18217,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BLACEPHALON @ ITEM_WISE_GLASSES
 Level: 39
@@ -18279,7 +18279,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_AMAURA @ ITEM_FOCUS_SASH
 Level: 18
@@ -18367,7 +18367,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SAWK @ ITEM_CHOICE_SCARF
 Level: 22
@@ -18455,7 +18455,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HITMONTOP @ ITEM_ROCKY_HELMET
 Level: 22
@@ -18543,7 +18543,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_FALINKS @ ITEM_FOCUS_SASH
 Level: 24
@@ -18631,7 +18631,7 @@ Gender: Female
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_INDEEDEE_F @ ITEM_TERRAIN_EXTENDER
 Level: 60
@@ -18719,7 +18719,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon / Will Suicide
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_INFERNAPE @ ITEM_FOCUS_SASH
 Level: 60
@@ -18781,7 +18781,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -18794,7 +18794,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -18807,7 +18807,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -18820,7 +18820,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HYPNO @ ITEM_ROCKY_HELMET
 Level: 60
@@ -18908,7 +18908,7 @@ Gender: Female
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon / Will Suicide
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SIGILYPH @ ITEM_FLAME_ORB
 Level: 60
@@ -18996,7 +18996,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PINCURCHIN @ ITEM_TERRAIN_EXTENDER
 Level: 60
@@ -19084,7 +19084,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CLAYDOL @ ITEM_ASSAULT_VEST
 Level: 60
@@ -19172,7 +19172,7 @@ Gender: Female
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SALAZZLE @ ITEM_FOCUS_SASH
 Level: 69
@@ -19234,7 +19234,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TORKOAL @ ITEM_CHARCOAL
 Level: 69
@@ -19296,7 +19296,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_REUNICLUS @ ITEM_SITRUS_BERRY
 Level: 69
@@ -19358,7 +19358,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -19371,7 +19371,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 69
@@ -19433,7 +19433,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_FERROTHORN @ ITEM_ROCKY_HELMET
 Level: 60
@@ -19521,7 +19521,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAILLOW @ ITEM_FLAME_ORB
 Level: 23
@@ -19583,7 +19583,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAILLOW @ ITEM_FLAME_ORB
 Level: 23
@@ -19645,7 +19645,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_BRELOOM @ ITEM_FOCUS_SASH
 Level: 70
@@ -19707,7 +19707,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -19720,7 +19720,7 @@ Gender: Female
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TOXICROAK @ ITEM_FOCUS_SASH
 Level: 54
@@ -19782,7 +19782,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_SALANDIT @ ITEM_FOCUS_SASH
 Level: 46
@@ -19870,7 +19870,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_RAMPARDOS @ ITEM_LIFE_ORB
 Level: 70
@@ -19932,7 +19932,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAILLOW @ ITEM_FLAME_ORB
 Level: 23
@@ -19994,7 +19994,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAILLOW @ ITEM_FLAME_ORB
 Level: 23
@@ -20056,7 +20056,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_TORKOAL @ ITEM_CHARCOAL
 Level: 62
@@ -20144,7 +20144,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_NINETALES @ ITEM_HEAT_ROCK
 Level: 41
@@ -20232,7 +20232,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SKITTY @ ITEM_FOCUS_SASH
 Level: 17
@@ -20294,7 +20294,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -20307,7 +20307,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TOGEDEMARU @ ITEM_SITRUS_BERRY
 Level: 14
@@ -20369,7 +20369,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_FOMANTIS @ ITEM_EVIOLITE
 Level: 36
@@ -20431,7 +20431,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_LOPUNNY @ ITEM_SITRUS_BERRY
 Level: 31
@@ -20493,7 +20493,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -20506,7 +20506,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CLOYSTER @ ITEM_FOCUS_SASH
 Level: 70
@@ -20594,7 +20594,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_LANTURN @ ITEM_ASSAULT_VEST
 Level: 70
@@ -20682,7 +20682,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SPINARAK @ ITEM_CHOICE_SCARF
 Level: 19
@@ -20744,7 +20744,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_NYMBLE @ ITEM_FOCUS_SASH
 Level: 16
@@ -20806,7 +20806,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BEAUTIFLY @ ITEM_FOCUS_SASH
 Level: 16
@@ -20868,7 +20868,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MASQUERAIN @ ITEM_FOCUS_SASH
 Level: 54
@@ -20930,7 +20930,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -20943,7 +20943,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -20956,7 +20956,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SURSKIT @ ITEM_FOCUS_SASH
 Level: 16
@@ -21018,7 +21018,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_EXCADRILL @ ITEM_FOCUS_SASH
 Level: 40
@@ -21080,7 +21080,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -21093,7 +21093,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_EXPLOUD @ ITEM_CHOICE_SPECS
 Level: 40
@@ -21155,7 +21155,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_NINETALES_ALOLA @ ITEM_LIGHT_CLAY
 Level: 40
@@ -21217,7 +21217,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_RHYDON @ ITEM_EVIOLITE
 Level: 44
@@ -21279,7 +21279,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ROGGENROLA @ ITEM_EVIOLITE
 Level: 18
@@ -21341,7 +21341,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -21354,7 +21354,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GIGALITH @ ITEM_SMOOTH_ROCK
 Level: 39
@@ -21416,7 +21416,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -21429,7 +21429,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MILTANK @ ITEM_SITRUS_BERRY
 Level: 99
@@ -21489,7 +21489,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -21502,7 +21502,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BUDEW @ ITEM_FOCUS_SASH
 Level: 23
@@ -21564,7 +21564,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_VOLBEAT @ ITEM_HEAT_ROCK
 Level: 44
@@ -21653,7 +21653,7 @@ Music: Intense
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PLUSLE @ ITEM_SITRUS_BERRY
 Level: 35
@@ -21741,7 +21741,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_VOLCARONA @ ITEM_FOCUS_SASH
 Level: 38
@@ -21829,7 +21829,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_BISHARP @ ITEM_LIFE_ORB
 Level: 55
@@ -21891,7 +21891,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_YANMEGA @ ITEM_FOCUS_SASH
 Level: 55
@@ -21979,7 +21979,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PELIPPER @ ITEM_DAMP_ROCK
 Level: 55
@@ -22067,7 +22067,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWABLU @ ITEM_EVIOLITE
 Level: 35
@@ -22129,7 +22129,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_INDEEDEE_F @ ITEM_SITRUS_BERRY
 Level: 100
@@ -22217,7 +22217,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 60
@@ -22305,7 +22305,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 60
@@ -22393,7 +22393,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 60
@@ -22481,7 +22481,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 60
@@ -22569,7 +22569,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 60
@@ -22657,7 +22657,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SWELLOW @ ITEM_FLAME_ORB
 Level: 60
@@ -22745,7 +22745,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -22758,7 +22758,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CRAWDAUNT @ ITEM_LIFE_ORB
 Level: 59
@@ -22820,7 +22820,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_FERALIGATR @ ITEM_LIFE_ORB
 Level: 60
@@ -22908,7 +22908,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HEATMOR @ ITEM_LIFE_ORB
 Level: 60
@@ -22996,7 +22996,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23009,7 +23009,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23022,7 +23022,7 @@ Gender: Female
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23035,7 +23035,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ORICORIO_POM_POM @ ITEM_SITRUS_BERRY
 Level: 40
@@ -23097,7 +23097,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23110,7 +23110,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23123,7 +23123,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ILLUMISE @ ITEM_FOCUS_SASH
 Level: 54
@@ -23185,7 +23185,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23198,7 +23198,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23211,7 +23211,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_DONDOZO @ ITEM_LEFTOVERS
 Level: 60
@@ -23273,7 +23273,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23286,7 +23286,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23299,7 +23299,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MEOWTH_GALAR @ ITEM_EVIOLITE
 Level: 16
@@ -23361,7 +23361,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SPRITZEE @ ITEM_EVIOLITE
 Level: 18
@@ -23423,7 +23423,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CHINCHOU @ ITEM_SITRUS_BERRY
 Level: 16
@@ -23485,7 +23485,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FLAAFFY @ ITEM_LIGHT_CLAY
 Level: 22
@@ -23547,7 +23547,7 @@ Gender: Male
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_PHIONE @ ITEM_SITRUS_BERRY
 Level: 20
@@ -23610,7 +23610,7 @@ Music: Twins
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_AUDINO @ ITEM_LEFTOVERS
 Level: 31
@@ -23673,7 +23673,7 @@ Music: Intense
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23687,7 +23687,7 @@ Music: Female
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23700,7 +23700,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23713,7 +23713,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SCYTHER @ ITEM_EVIOLITE
 Level: 31
@@ -23775,7 +23775,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23788,7 +23788,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SUDOWOODO @ ITEM_CHOICE_BAND
 Level: 30
@@ -23850,7 +23850,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -23863,7 +23863,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FORRETRESS @ ITEM_RED_CARD
 Level: 40
@@ -23925,7 +23925,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CORVIKNIGHT @ ITEM_LEFTOVERS
 Level: 41
@@ -23987,7 +23987,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_HIPPOWDON @ ITEM_SMOOTH_ROCK
 Level: 40
@@ -24049,7 +24049,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GABITE @ ITEM_EVIOLITE
 Level: 44
@@ -24111,7 +24111,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -24124,7 +24124,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GRAPPLOCT @ ITEM_SITRUS_BERRY
 Level: 43
@@ -24186,7 +24186,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FARIGIRAF @ ITEM_SITRUS_BERRY
 Level: 40
@@ -24248,7 +24248,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_KROKOROK @ ITEM_LIFE_ORB
 Level: 33
@@ -24310,7 +24310,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SWALOT @ ITEM_SITRUS_BERRY
 Level: 59
@@ -24372,7 +24372,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_HIPPOWDON @ ITEM_SITRUS_BERRY
 Level: 59
@@ -24434,7 +24434,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CLAYDOL @ ITEM_SITRUS_BERRY
 Level: 59
@@ -24496,7 +24496,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SCRAFTY @ ITEM_ASSAULT_VEST
 Level: 59
@@ -24558,7 +24558,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BISHARP @ ITEM_BLACK_GLASSES
 Level: 59
@@ -24620,7 +24620,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_ARIADOS @ ITEM_SITRUS_BERRY
 Level: 59
@@ -24682,7 +24682,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SKUNTANK @ ITEM_LIFE_ORB
 Level: 59
@@ -24744,7 +24744,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MIGHTYENA @ ITEM_LIFE_ORB
 Level: 59
@@ -24806,7 +24806,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CAMERUPT @ ITEM_SITRUS_BERRY
 Level: 59
@@ -24868,7 +24868,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_CACTURNE @ ITEM_FOCUS_SASH
 Level: 59
@@ -24930,7 +24930,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_MAMOSWINE @ ITEM_LIFE_ORB
 Level: 59
@@ -24992,7 +24992,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SABLEYE @ ITEM_SITRUS_BERRY
 Level: 59
@@ -25054,7 +25054,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_RHYPERIOR @ ITEM_WEAKNESS_POLICY
 Level: 59
@@ -25116,7 +25116,7 @@ Gender: Female
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_THIEVUL @ ITEM_FOCUS_SASH
 Level: 59
@@ -25178,7 +25178,7 @@ Gender: Female
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_KROOKODILE @ ITEM_SITRUS_BERRY
 Level: 59
@@ -25240,7 +25240,7 @@ Gender: Female
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GLISCOR @ ITEM_TOXIC_ORB
 Level: 59
@@ -25302,7 +25302,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_DRAGAPULT @ ITEM_FOCUS_SASH
 Level: 61
@@ -25390,7 +25390,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TORKOAL @ ITEM_CHARCOAL
 Level: 70
@@ -25453,7 +25453,7 @@ Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Multi Party: Half
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_RHYPERIOR @ ITEM_ASSAULT_VEST
 Level: 72
@@ -25502,7 +25502,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -25515,7 +25515,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_PELIPPER @ ITEM_DAMP_ROCK
 Level: 55
@@ -25577,7 +25577,7 @@ Gender: Male
 Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -25590,7 +25590,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -25603,7 +25603,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HAWLUCHA @ ITEM_WHITE_HERB
 Level: 55
@@ -25665,7 +25665,7 @@ Gender: Female
 Music: Girl
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -25678,7 +25678,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -25691,7 +25691,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -25704,7 +25704,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_TYPHLOSION @ ITEM_CHOICE_SCARF
 Level: 40
@@ -25766,7 +25766,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SIMIPOUR @ ITEM_LIFE_ORB
 Level: 41
@@ -25828,7 +25828,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Will Suicide
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -25841,7 +25841,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MUNKIDORI @ ITEM_CHOICE_SPECS
 Level: 55
@@ -25903,7 +25903,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_GOTHITA @ ITEM_FOCUS_SASH
 Level: 16
@@ -25965,7 +25965,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_HIPPOPOTAS @ ITEM_EVIOLITE
 Level: 17
@@ -26027,7 +26027,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_SHINX @ ITEM_EVIOLITE
 Level: 18
@@ -26089,7 +26089,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_YANMA @ ITEM_LIFE_ORB
 Level: 33
@@ -26151,7 +26151,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BRONZOR @ ITEM_EVIOLITE
 Level: 35
@@ -26213,7 +26213,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_FROSLASS @ ITEM_FOCUS_SASH
 Level: 30
@@ -26275,7 +26275,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_AMOONGUSS @ ITEM_COBA_BERRY
 Level: 70
@@ -26337,7 +26337,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -26350,7 +26350,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -26363,7 +26363,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -26376,7 +26376,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -26389,7 +26389,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TOGEKISS @ ITEM_SITRUS_BERRY
 Level: 60
@@ -26477,7 +26477,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_FERALIGATR @ ITEM_LIFE_ORB
 Level: 60
@@ -26565,7 +26565,7 @@ Gender: Female
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_REGIELEKI @ ITEM_MAGNET
 Level: 60
@@ -26627,7 +26627,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAILLOW @ ITEM_FLAME_ORB
 Level: 23
@@ -26689,7 +26689,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TAILLOW @ ITEM_FLAME_ORB
 Level: 23
@@ -26751,7 +26751,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_NINETALES @ ITEM_CHARCOAL
 Level: 100
@@ -26839,7 +26839,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_ROSERADE @ ITEM_FOCUS_SASH
 Level: 101
@@ -26927,7 +26927,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TREVENANT @ ITEM_SITRUS_BERRY
 Level: 46
@@ -26989,7 +26989,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -27002,7 +27002,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_WINGULL @ ITEM_DAMP_ROCK
 Level: 24
@@ -27090,7 +27090,7 @@ Gender: Female
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_LUNATONE @ ITEM_LIFE_ORB
 Level: 41
@@ -27178,7 +27178,7 @@ Gender: Male
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_SOLROCK @ ITEM_FOCUS_SASH
 Level: 42
@@ -27266,7 +27266,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MILOTIC @ ITEM_SITRUS_BERRY
 Level: 41
@@ -27341,7 +27341,7 @@ Gender: Female
 Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_NINETALES @ ITEM_CHARCOAL
 Level: 61
@@ -27429,7 +27429,7 @@ Gender: Male
 Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_PELIPPER @ ITEM_DAMP_ROCK
 Level: 61
@@ -27518,7 +27518,7 @@ Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Multi Party: Half
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_NINETALES @ ITEM_CHARCOAL
 Level: 71
@@ -27567,7 +27567,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
-Prize Multiplier: 100
+Prize Multiplier: 25
 
 SPECIES_KYOGRE @ ITEM_MYSTIC_WATER
 Level: 101
@@ -27655,7 +27655,7 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_HERACROSS @ ITEM_CHOICE_SCARF
 Level: 21
@@ -27717,7 +27717,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_CROBAT @ ITEM_SAFETY_GOGGLES
 Level: 55
@@ -27805,7 +27805,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_DITTO @ ITEM_CHOICE_SCARF
 Level: 55
@@ -27875,7 +27875,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_MIENSHAO @ ITEM_FOCUS_SASH
 Level: 60
@@ -27963,7 +27963,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_BUZZWOLE @ ITEM_LIFE_ORB
 Level: 44
@@ -28025,7 +28025,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_WO_CHIEN @ ITEM_LEFTOVERS
 Level: 45
@@ -28088,7 +28088,7 @@ Music: Suspicious
 Double Battle: Yes
 Multi Party: Half
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_WATTREL @ ITEM_FOCUS_SASH
 Level: 35
@@ -28176,7 +28176,7 @@ Gender: Male
 Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_TORNADUS @ ITEM_MENTAL_HERB
 Level: 55
@@ -28264,7 +28264,7 @@ Gender: Male
 Music: Male
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 40
+Prize Multiplier: 10
 
 SPECIES_SKARMORY @ ITEM_LEFTOVERS
 Level: 100
@@ -28352,7 +28352,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_STARMIE @ ITEM_LIFE_ORB
 Level: 79
@@ -28414,7 +28414,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
-Prize Multiplier: 20
+Prize Multiplier: 5
 Party Size: 0
 
 /* Retired: metadata only; no battle party in the canonical book. */
@@ -28427,7 +28427,7 @@ Gender: Male
 Music: Rich
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
-Prize Multiplier: 20
+Prize Multiplier: 5
 
 SPECIES_LAPRAS @ ITEM_LEFTOVERS
 Level: 79

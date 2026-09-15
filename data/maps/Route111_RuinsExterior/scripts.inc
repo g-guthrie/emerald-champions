@@ -62,9 +62,21 @@ Route111_RuinsExterior_EventScript_Archaeologist::
 Route111_RuinsExterior_EventScript_RecordSurvey::
 	setflag FLAG_EC_RESOLVED_LANDORUS
 	completemilestone FLAG_EC_REPORT_C30_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C30_COMPLETE
 	msgbox Route111_RuinsExterior_Text_SurveyRecorded, MSGBOX_DEFAULT
+	call_if_eq VAR_RESULT, 3, Route111_RuinsExterior_EventScript_SurveyAndCapLine
+	call_if_eq VAR_RESULT, 2, Route111_RuinsExterior_EventScript_SurveyLine
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
 	goto Route111_RuinsExterior_EventScript_OfferReturn
 	end
+
+Route111_RuinsExterior_EventScript_SurveyAndCapLine::
+	msgbox Route111_RuinsExterior_Text_SurveyAndCapLine, MSGBOX_DEFAULT
+	return
+
+Route111_RuinsExterior_EventScript_SurveyLine::
+	msgbox Route111_RuinsExterior_Text_SurveyLine, MSGBOX_DEFAULT
+	return
 
 Route111_RuinsExterior_EventScript_SurveyDone::
 	msgbox Route111_RuinsExterior_Text_SurveyDone, MSGBOX_DEFAULT
@@ -112,9 +124,14 @@ Route111_RuinsExterior_Text_WindAnswers:
 Route111_RuinsExterior_Text_SurveyRecorded:
 	.string "There. The wind changes around\n"
 	.string "the old stonework. The Institute\l"
-	.string "needs to see this record.\p"
-	.string "Your survey earns ¥6,000.\n"
-	.string "Your level cap is now 56.$"
+	.string "needs to see this record.$"
+
+Route111_RuinsExterior_Text_SurveyAndCapLine:
+	.string "Your survey earns ¥{STR_VAR_2}.\n"
+	.string "Your level cap is now {STR_VAR_1}.$"
+
+Route111_RuinsExterior_Text_SurveyLine:
+	.string "Your survey earns ¥{STR_VAR_2}.$"
 
 Route111_RuinsExterior_Text_SurveyDone:
 	.string "The survey is complete. LANDORUS\n"

@@ -3,8 +3,6 @@ SeafloorCavern_Room9_MapScripts::
 
 SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre::
 	call EC_RequireSpace
-	call EC_RequireDeoxys
-	call EC_RequireGuardians
 	lockall
 	call EventScript_CheckStoryDoubleBattleParty
 	setvar VAR_0x8004, LOCALID_SEAFLOOR_CAVERN_ARCHIE
