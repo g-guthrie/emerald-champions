@@ -21,12 +21,13 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
   `docs/GOAL.md` using the available goal tool. An account/machine change does not
   imply that the game goal is complete. Do not recreate an already active goal.
 - The one authorized fresh Astra High full-book review is complete; its dispositions
-  are integrated in the guide and source. The latest user asked to skip the
-  sub-agent: the main agent reviews the20-trainer blocks and presents the report
-  in chat. Use a fresh Astra reviewer only when the user explicitly requests it
-  for a batch; give it a self-contained packet and retire it afterward.
-  No nested delegation or new full-book review. The main agent owns source
-  verification, implementation and playtesting.
+  are integrated in the guide and source. Trainer design review happens in chat
+  with the main agent. No new full-book review.
+- Subagents (user direction, September 15): use Sonnet subagents for basic,
+  well-scoped code implementation from a self-contained spec (files, constraints,
+  verification command). The main agent reviews every subagent diff and runs the
+  checks before it lands, and keeps design decisions, book prose, trainer teams
+  and playtesting itself. No nested delegation.
 - Preserve existing user/concurrent work. Use Git history for older source rather
   than introducing competing copies into the live tree. Commit and push supported
   progress within the user's authorized GitHub handoff/development scope.

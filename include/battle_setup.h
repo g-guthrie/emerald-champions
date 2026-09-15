@@ -139,6 +139,7 @@ void TrainerBattleLoadArgsSecondTrainer(const u8 *data);
 void InitTrainerBattleParameter(void);
 void InitCampaignBattleReward(void);
 u32 GetCampaignBattleMoneyReward(void);
+void InitTrainerMoneyRewardEligibility(void);
 
 void BattleSetup_StartTrainerBattle_Debug(void);
 s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);

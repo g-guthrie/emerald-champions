@@ -13,7 +13,7 @@ or [the current checkpoint](docs/CONTINUE.md).
 | Early access and Joey | **22** encounters available before the Stone Badge; Cut adds Dawson, Sarah, Janice and Jerry. Joey now uses Pawmi / Galarian Farfetch'd / Clefairy / Lechonk for critical-hit offense and support, leaving Belly Drum to Calvin. |
 | Rustboro Gym | Four six-Pokémon teams: Josh’s minerals, Tommy’s fossil reef, Marc’s Power Spot team, and Roxanne’s **Mega Aerodactyl / Tailwind** offense. Roxanne has no Trick Room. |
 | Opening economy | Gifts/pickups through battle 16 reconciled; pending-reward fixes and scoped native checks completed. Roxanne gives Old Amber; Steven later gives the bracelet and Aerodactylite together. |
-| Campaign roster | **343 encounters, 325 encounter groups, 370 party variants.** All 65 Gym trainer/leader parties have six Pokémon. The book, active parties and Hoenn battle IDs pass the exact roster check. |
+| Campaign roster | **341 encounters, 324 encounter groups, 368 party variants.** All 65 Gym trainer/leader parties have six Pokémon. The book, active parties and Hoenn battle IDs pass the exact roster check. |
 | Earned playthrough | **C15, Medium, cap 24.** 41 distinct trainer wins are evidenced; the paused Dwayne retest save contains 40 clears. Brawly and the manor song are complete. |
 | Verification | Production ROM builds and passes release gates. Focused Mega reveal/eligibility tests and native reward-dialogue checks pass. Revised team levels remain provisional; full-game balance and acceptance are unfinished. |
 

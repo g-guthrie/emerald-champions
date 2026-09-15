@@ -2496,3 +2496,33 @@ u32 GetCampaignBattleMoneyReward(void)
     return gBattleStruct->campaignRewardEligible
         ? gBattleStruct->campaignLevelCap * gBattleStruct->campaignPrizeMultiplier : 0;
 }
+
+// Captures, at battle start, whether each trainer owner is eligible for a normal
+// (non-campaign) prize money payout. A trainer that was already flagged as defeated
+// before this battle began, or that was reached through the overworld rematch table
+// / Vs Seeker (TRAINER_BATTLE_PARAM.isRematch), is a return fight and pays out 0.
+// This must be captured here (battle start) rather than read later at reward time,
+// since the win path only sets a trainer's defeated flag via the post-battle
+// overworld script (settrainerflag), well after money is awarded -- but capturing it
+// up front keeps this robust even if that ordering ever changes.
+void InitTrainerMoneyRewardEligibility(void)
+{
+    gBattleStruct->moneyRewardEligibleA = TRUE;
+    gBattleStruct->moneyRewardEligibleB = TRUE;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     || gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED
+                         | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_EREADER_TRAINER))
+        return;
+    if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
+        return;
+
+    gBattleStruct->moneyRewardEligibleA = !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentA)
+                                        && !TRAINER_BATTLE_PARAM.isRematch;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+    {
+        gBattleStruct->moneyRewardEligibleB = !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentB)
+                                            && !TRAINER_BATTLE_PARAM.isRematch;
+    }
+}

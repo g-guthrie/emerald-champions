@@ -637,17 +637,70 @@ void CompactPCItems(void)
     BagPocket_CompactItems(&dummyPocket);
 }
 
+// Returns a pointer to the SaveBlock1 slot backing the given register button.
+u16 *GetRegisteredItemPtr(enum RegisterButton button)
+{
+    switch (button)
+    {
+    case REGISTER_BUTTON_L:
+        return &gSaveBlock1Ptr->registeredItemL;
+    case REGISTER_BUTTON_R:
+        return &gSaveBlock1Ptr->registeredItemR;
+    case REGISTER_BUTTON_SELECT:
+    default:
+        return &gSaveBlock1Ptr->registeredItem;
+    }
+}
+
+// Finds which button (if any) itemId is currently registered to.
+bool8 GetRegisteredItemButton(u16 itemId, enum RegisterButton *button)
+{
+    enum RegisterButton i;
+
+    if (itemId == ITEM_NONE)
+        return FALSE;
+
+    for (i = 0; i < REGISTER_BUTTON_COUNT; i++)
+    {
+        if (*GetRegisteredItemPtr(i) == itemId)
+        {
+            if (button != NULL)
+                *button = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// Registers itemId to the given button. If itemId was already registered to
+// a different button, it is moved (unbound from the old button). If the
+// target button already had an item registered, that item is replaced.
+void RegisterKeyItemToButton(u16 itemId, enum RegisterButton button)
+{
+    enum RegisterButton existingButton;
+
+    if (GetRegisteredItemButton(itemId, &existingButton) == TRUE)
+        *GetRegisteredItemPtr(existingButton) = ITEM_NONE;
+    *GetRegisteredItemPtr(button) = itemId;
+}
+
+// Unbinds itemId from whichever button (if any) it is currently registered to.
+void DeselectRegisteredKeyItem(u16 itemId)
+{
+    enum RegisterButton existingButton;
+
+    if (GetRegisteredItemButton(itemId, &existingButton) == TRUE)
+        *GetRegisteredItemPtr(existingButton) = ITEM_NONE;
+}
+
 void SwapRegisteredBike(void)
 {
-    switch (gSaveBlock1Ptr->registeredItem)
-    {
-    case ITEM_MACH_BIKE:
-        gSaveBlock1Ptr->registeredItem = ITEM_ACRO_BIKE;
-        break;
-    case ITEM_ACRO_BIKE:
-        gSaveBlock1Ptr->registeredItem = ITEM_MACH_BIKE;
-        break;
-    }
+    enum RegisterButton button;
+
+    if (GetRegisteredItemButton(ITEM_MACH_BIKE, &button) == TRUE)
+        *GetRegisteredItemPtr(button) = ITEM_ACRO_BIKE;
+    else if (GetRegisteredItemButton(ITEM_ACRO_BIKE, &button) == TRUE)
+        *GetRegisteredItemPtr(button) = ITEM_MACH_BIKE;
 }
 
 void CompactItemsInBagPocket(enum Pocket pocketId)

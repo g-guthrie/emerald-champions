@@ -3943,8 +3943,12 @@ static void Cmd_getmoneyreward(void)
             money = GetCampaignBattleMoneyReward();
         else
         {
-            money = GetTrainerMoneyToGive(TRAINER_BATTLE_PARAM.opponentA);
-            if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+            // Return fights (already-defeated trainers, or battles launched via the
+            // rematch table / Vs Seeker) pay no prize money -- see
+            // InitTrainerMoneyRewardEligibility(), captured at battle start.
+            if (gBattleStruct->moneyRewardEligibleA)
+                money = GetTrainerMoneyToGive(TRAINER_BATTLE_PARAM.opponentA);
+            if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && gBattleStruct->moneyRewardEligibleB)
                 money += GetTrainerMoneyToGive(TRAINER_BATTLE_PARAM.opponentB);
         }
         AddMoney(&gSaveBlock1Ptr->money, money);

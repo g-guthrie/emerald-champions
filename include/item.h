@@ -14,6 +14,16 @@
  * gTMHMItemMoveIds. The index for an item can be retrieved with GetItemTMHMIndex below.
  */
 #define UNPACK_TM_HM_ENUM(_tmHm) CAT(ENUM_TM_HM_, _tmHm),
+// Run & Bun style key item registration: up to one item bound to each of
+// SELECT, L and R, usable directly from the overworld.
+enum RegisterButton
+{
+    REGISTER_BUTTON_SELECT,
+    REGISTER_BUTTON_L,
+    REGISTER_BUTTON_R,
+    REGISTER_BUTTON_COUNT,
+};
+
 enum TMHMIndex
 {
     FOREACH_TMHM(UNPACK_TM_HM_ENUM)
@@ -257,6 +267,10 @@ bool32 AddPCItem(enum Item itemId, u16 count);
 void RemovePCItem(u8 index, u16 count);
 void CompactPCItems(void);
 void SwapRegisteredBike(void);
+u16 *GetRegisteredItemPtr(enum RegisterButton button);
+bool8 GetRegisteredItemButton(u16 itemId, enum RegisterButton *button);
+void RegisterKeyItemToButton(u16 itemId, enum RegisterButton button);
+void DeselectRegisteredKeyItem(u16 itemId);
 void CompactItemsInBagPocket(enum Pocket pocketId);
 void MoveItemSlotInPocket(enum Pocket pocketId, u32 from, u32 to);
 void MoveItemSlotInPC(struct ItemSlot *itemSlots, u32 from, u32 to);

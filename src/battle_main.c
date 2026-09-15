@@ -2884,6 +2884,7 @@ static void BattleStartClearSetData(void)
     gBattleStruct->wildVictorySong = 0;
     gBattleStruct->moneyMultiplier = 1;
     InitCampaignBattleReward();
+    InitTrainerMoneyRewardEligibility();
 
     gBattleStruct->givenExpMons[0] = 0;
     gBattleStruct->givenExpMons[1] = 0;

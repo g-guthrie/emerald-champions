@@ -96,6 +96,8 @@ DewfordTown_EventScript_OldRodFisherman::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_HowsFishing
+	checkitem ITEM_OLD_ROD
+	goto_if_eq VAR_RESULT, TRUE, DewfordTown_EventScript_HowsFishing
 	msgbox DewfordTown_Text_GettingItchToFish, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_GiveOldRod
 	goto_if_eq VAR_RESULT, NO, DewfordTown_EventScript_NotGettingItchToFish

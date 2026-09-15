@@ -275,3 +275,41 @@ TEST("Items are correctly sorted and compacted in the bag")
     EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_NONE);
     EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
 }
+
+TEST("Key items can be registered to SELECT, L and R independently")
+{
+    gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    gSaveBlock1Ptr->registeredItemL = ITEM_NONE;
+    gSaveBlock1Ptr->registeredItemR = ITEM_NONE;
+
+    // Registering to SELECT only touches the SELECT slot.
+    RegisterKeyItemToButton(ITEM_MACH_BIKE, REGISTER_BUTTON_SELECT);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_MACH_BIKE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemL, ITEM_NONE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_NONE);
+
+    // Registering a different item to L only touches the L slot.
+    RegisterKeyItemToButton(ITEM_ACRO_BIKE, REGISTER_BUTTON_L);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_MACH_BIKE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemL, ITEM_ACRO_BIKE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_NONE);
+
+    // Re-registering the Acro Bike to R moves it, clearing L. SELECT is untouched.
+    RegisterKeyItemToButton(ITEM_ACRO_BIKE, REGISTER_BUTTON_R);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_MACH_BIKE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemL, ITEM_NONE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_ACRO_BIKE);
+
+    EXPECT(GetRegisteredItemButton(ITEM_ACRO_BIKE, NULL));
+    EXPECT(!GetRegisteredItemButton(ITEM_POTION, NULL));
+
+    // Registering a new item onto a button that already holds one replaces it.
+    RegisterKeyItemToButton(ITEM_BICYCLE, REGISTER_BUTTON_R);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_BICYCLE);
+    EXPECT(!GetRegisteredItemButton(ITEM_ACRO_BIKE, NULL));
+
+    // Deselecting unbinds an item from whichever button holds it.
+    DeselectRegisteredKeyItem(ITEM_MACH_BIKE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_NONE);
+    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_BICYCLE);
+}

@@ -899,6 +899,13 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	waitfanfare
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_AlsoPackedOldRod, MSGBOX_DEFAULT
+	giveitem ITEM_OLD_ROD
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_EventScript_FinishGiveRunningShoes
+	setflag FLAG_RECEIVED_OLD_ROD
+	msgbox LittlerootTown_Text_OldRodPondsTip, MSGBOX_DEFAULT
+
+LittlerootTown_EventScript_FinishGiveRunningShoes::
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -937,6 +944,15 @@ LittlerootTown_Text_ExplainRunningShoes:
 	.string "MOM: The shoes came with a note:\p"
 	.string "“Hold the B Button to run.\n"
 	.string "Now get out there and explore!”$"
+
+LittlerootTown_Text_AlsoPackedOldRod:
+	.string "MOM: Oh, and hold on a moment!\p"
+	.string "I packed one of your father's old\n"
+	.string "fishing RODS in your bag, too.$"
+
+LittlerootTown_Text_OldRodPondsTip:
+	.string "There are ponds along ROUTE 102 and\n"
+	.string "ROUTE 103 - give it a try sometime!$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "… … … … … … … …\n"

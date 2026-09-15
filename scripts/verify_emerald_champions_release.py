@@ -33,6 +33,14 @@ STATIC_GATES = (
     ("one acquisition source per Mega Stone", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
 )
 
+# Guide/README/docs drift against source (roster census, economy prices, caps,
+# retired items, Mega Stone sourcing, duplicate guide paragraphs). This is run
+# every release, but --strict-book controls whether a FAIL here blocks the
+# release: the guide/README/docs currently contradict each other (and source)
+# in known, not-yet-reconciled ways, so it stays advisory until that prose is
+# fixed. Pass --strict-book once scripts/check_book_consistency.py is clean.
+BOOK_CONSISTENCY_GATE = ("hand-authored guide/docs agree with source", (PYTHON, "scripts/check_book_consistency.py"))
+
 
 def require(condition: bool, message: str) -> None:
     if not condition:
@@ -156,10 +164,23 @@ def main() -> None:
         action="store_true",
         help="allow an intentional metadata-free export to skip git diff --check",
     )
+    parser.add_argument(
+        "--strict-book",
+        action="store_true",
+        help="make scripts/check_book_consistency.py release-blocking instead of advisory",
+    )
     args = parser.parse_args()
 
     for label, command in STATIC_GATES:
         run_gate(label, command)
+    label, command = BOOK_CONSISTENCY_GATE
+    try:
+        run_gate(label, command)
+    except subprocess.CalledProcessError:
+        if args.strict_book:
+            raise
+        print(f"NOTE: '{label}' failed but --strict-book was not passed; continuing (see docstring in "
+              "scripts/check_book_consistency.py).")
     verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)
     verify_build_freshness(args.rom.resolve(), args.elf.resolve())
     verify_rom(args.rom.resolve(), args.elf.resolve())

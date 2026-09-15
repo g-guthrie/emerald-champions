@@ -1,4 +1,31 @@
-# Current development checkpoint — September 14, 2026
+# Current development checkpoint — September 15, 2026
+
+Consolidation goal active: see `docs/GOAL.md` (the game definition, protected
+pillars and locked decisions) and `docs/CONSOLIDATION_PLAN.md` (phases; it folds
+into this file when Phase 0 closes). Phase 0 progress this day:
+
+- One clone: the redundant `emerald-champions-restored-20260914` checkout is deleted.
+- `scripts/check_book_consistency.py` runs in the release gate (advisory until
+  `--strict-book`). README, this file, GOAL and the guide now agree on
+  341 encounters / 324 groups / 368 variants from source. Prices, caps, stipends
+  and retired items pass. Remaining FAIL: Garchompite has no trainer holder
+  (design decision for the Gym/story audit).
+- Guide fixes: difficulty text matches `src/difficulty.c` (Easy −4, Medium −2,
+  Hard 0); rematches pay no money; "20,000 Mega" and 5,000 soot-substitute
+  sentences corrected; duplicate BP and C13 blocks removed.
+- Engine: Mom gives the Old Rod with the Running Shoes (full-Bag retry at home;
+  Dewford never issues a second rod). Key items register to SELECT, L or R with
+  Bag icons (`test/bag.c` native test passes; L inactive under L=A; R falls back
+  to DexNav). Non-campaign trainer money now also pays first clear only.
+- Pending: native visual check of the Bag register submenu and L/R icons; the
+  Old Rod send-off scene contact sheet.
+
+Next: Phase 0 book diet (evidence paragraphs out of the guide), then Phase 1
+campaign restructure and Phase 3 economy together, then resume the earned run.
+
+---
+
+# Previous checkpoint — September 14, 2026
 
 Latest implementation: all five Elite Four/Champion teams are approved and applied, including ten designated Mega forms and explicit two-Mega introductions. The major-battle-first audit has completed the League design block; next are whole Gyms, then Magma/Aqua story groups. The campaign still has341 encounters /368 variants. Implemented designs total136 (131 first-access plus five League encounters); chronological frontier132 and the paused earned C15 save are unchanged. Exact receipt: `work/league-implementation/Implementation.md`. Full League battles and final difficulty calibration remain later validation.
 
@@ -264,7 +291,7 @@ New games initialize Medium; difficulty changes trainer levels, not AI quality.
 
 ## Book, economy and verification
 
-- Current census: **343 encounters / 325 E groups / 370 party variants**.
+- Current census: **341 encounters / 324 E groups / 368 party variants**.
   Exact roster check: book variants = nonempty native parties = Hoenn script IDs.
   All57 Gym trainers and8 leaders have six. Retired IDs retain empty metadata;
   146 obsolete loadouts remain excluded after Gina/Mia’s restoration.

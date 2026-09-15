@@ -626,6 +626,8 @@ struct BattleStruct
     u8 campaignLevelCap;
     u8 campaignPrizeMultiplier;
     bool8 campaignRewardEligible;
+    bool8 moneyRewardEligibleA; // FALSE for a trainer (opponentA) already defeated, or reached via the rematch table -- return fights pay no prize money.
+    bool8 moneyRewardEligibleB; // Same as above, for opponentB in BATTLE_TYPE_TWO_OPPONENTS battles.
     u8 moneyMultiplier:6;
     u8 moneyMultiplierItem:1;
     u8 moneyMultiplierMove:1;
