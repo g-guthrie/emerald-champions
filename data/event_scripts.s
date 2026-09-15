@@ -1485,13 +1485,11 @@ gText_RegisteredTrainerinPokeNav::
 	.string "in the POKéNAV.$"
 
 gText_ComeBackWithSecretPower::
-	.string "Do you know the TM SECRET POWER?\p"
-	.string "Our group, we love the TM SECRET\n"
-	.string "POWER.\p"
-	.string "One of our members will give it to you.\n"
-	.string "Come back and show me if you get it.\p"
-	.string "We'll accept you as a member and sell\n"
-	.string "you good stuff in secrecy.$"
+	.string "We sell SECRET BASE decorations.\p"
+	.string "Meet our friend by the big tree on\n"
+	.string "ROUTE 111, north of the desert.\p"
+	.string "He'll explain SECRET POWER. Come\n"
+	.string "back afterward to see our stock!$"
 
 gText_PokerusExplanation::
 	.string "Your POKéMON may be infected with\n"
