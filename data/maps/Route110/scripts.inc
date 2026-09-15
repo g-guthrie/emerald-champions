@@ -360,12 +360,20 @@ Route110_EventScript_RivalSceneComplete::
 	releaseall
 	end
 
+Route110_EventScript_RivalNeedsTwoMons::
+	msgbox EmeraldChampions_Text_NeedTwoPokemon, MSGBOX_DEFAULT
+	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	releaseall
+	end
+
 Route110_EventScript_RivalScene::
 	lockall
 	goto_if_eq VAR_ROUTE110_STATE, 1, Route110_EventScript_RivalSceneComplete
 	call Route110_EventScript_CheckRivalWon
 	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalRewardRetry
-	call EventScript_CheckStoryDoubleBattleParty
+	special HasEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, Route110_EventScript_RivalNeedsTwoMons
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, Route110_EventScript_PlayMayMusic
 	call_if_eq VAR_RESULT, FEMALE, Route110_EventScript_PlayBrendanMusic
