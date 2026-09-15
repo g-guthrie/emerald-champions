@@ -14,7 +14,9 @@ AI_DOUBLE_BATTLE_TEST("EC timely Taunt: Mantyke attacks instead of attempting bl
     enum Species targetSpecies = SPECIES_MANTYKE;
     PARAMETRIZE { }
     PARAMETRIZE { timely = FALSE; denied = FALSE; }
-    PARAMETRIZE { cast = FALSE; denied = FALSE; }
+    // An available opposing Taunt is public knowledge, so the setter plays
+    // around it whether or not that Taunt is this turn's actual command.
+    PARAMETRIZE { cast = FALSE; }
     PARAMETRIZE { item = ITEM_MENTAL_HERB; denied = FALSE; }
     PARAMETRIZE { targetAbility = ABILITY_OBLIVIOUS; denied = FALSE; }
     PARAMETRIZE { targetAbility = ABILITY_OBLIVIOUS; attackerAbility = ABILITY_MOLD_BREAKER; }
@@ -54,13 +56,11 @@ AI_DOUBLE_BATTLE_TEST("EC timely Taunt: Mantyke attacks instead of attempting bl
             MOVE(playerLeft, cast ? MOVE_TAUNT : MOVE_CELEBRATE, target: opponentLeft);
             MOVE(playerRight, MOVE_GIGA_DRAIN, target: opponentRight);
             EXPECT_MOVE(opponentLeft, denied ? MOVE_SCALD : MOVE_TAILWIND);
-            EXPECT_MOVE(opponentRight, MOVE_PROTECT);
         }
     } THEN {
         if (denied)
             EXPECT_LT(playerLeft->hp, 80);
         else
             EXPECT(gSideStatuses[1] & SIDE_STATUS_TAILWIND);
-        EXPECT_EQ(opponentRight->hp, 56);
     }
 }

@@ -53,7 +53,10 @@ AI_DOUBLE_BATTLE_TEST("EC Prankster burn: a timely burn preserves the attack tha
             MOVE(playerLeft, MOVE_MUDDY_WATER, hit: TRUE);
             MOVE(playerRight, burn ? MOVE_WILL_O_WISP : MOVE_CELEBRATE, target: opponentLeft, hit: TRUE);
             EXPECT_MOVE(opponentLeft, attack, hit: TRUE, criticalHit: FALSE);
-            EXPECT_MOVE(opponentRight, burn && priority && reduced ? MOVE_PROTECT : MOVE_SHADOW_BALL);
+            // The partner cannot see whether the burn is coming this turn, so
+            // its own choice no longer depends on it. The burn mechanics below
+            // are what this fixture tests.
+            EXPECT_MOVE(opponentRight, MOVE_SHADOW_BALL);
         }
     } THEN {
         if (burn && priority && reduced)

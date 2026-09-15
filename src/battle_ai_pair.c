@@ -4204,7 +4204,7 @@ static bool32 RefreshPairMoveData(u32 noActionMask, bool32 canStop)
 }
 
 
-static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct PairAction *chosen, struct PairEvaluation *ev, bool32 refresh, bool32 canStop)
+static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct PairAction *chosen, struct PairEvaluation *ev, bool32 refresh, bool32 canStop, bool32 mustFinish)
 {
     s32 best = INT_MIN;
     struct PairDefenderItemCache *defenderItem[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
@@ -4344,7 +4344,8 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
         {
             // One shortlisted pair is already a legal action, so the search
             // can respect the budget even on a board that has no fallback yet.
-            if ((canStop || shortCount != 0) && PairDecisionBudgetExpired())
+            // An urgent Perish exit still finishes its own search.
+            if (!mustFinish && (canStop || shortCount != 0) && PairDecisionBudgetExpired())
                 goto settle;
             ev->action[actor] = ev->choices[actor][left];
             ev->action[partner] = ev->choices[partner][right];
@@ -4382,7 +4383,7 @@ settle:
     // Expected value over the weighted opponent model, with a bounded
     // pessimism share. Taking the minimum instead made every credible
     // knockout pattern demand a shield.
-    mixed = forecastCount > 1 && !PairDecisionBudgetExpired();
+    mixed = forecastCount > 1 && (mustFinish || !PairDecisionBudgetExpired());
     for (u32 entry = 0; entry < shortCount; entry++)
     {
         s32 total = shortlist[entry].score * 100, worst = shortlist[entry].score;
@@ -4435,7 +4436,7 @@ static void FreePairEvaluation(struct PairEvaluation *ev)
 s32 AI_EvaluateDoublesCandidate(enum BattlerId battler, u32 noActionMask)
 {
     struct PairEvaluation *ev = AllocZeroed(sizeof(*ev));
-    s32 score = EvaluatePairBoard(battler, noActionMask, NULL, ev, TRUE, FALSE);
+    s32 score = EvaluatePairBoard(battler, noActionMask, NULL, ev, TRUE, FALSE, FALSE);
     FreePairEvaluation(ev);
     return score;
 }
@@ -4818,8 +4819,17 @@ static bool32 PairTryAttackBeforeSwitch(enum BattlerId actor, u32 reserve,
                     enum Move incoming = gBattleMons[foe].moves[foeSlot];
                     if (incoming == MOVE_NONE || IsMoveUnusable(foeSlot, incoming, foeLimitations))
                         continue;
-                    if (PairPivotSensitiveMove(incoming)
-                     || !PairPivotStrictlyBefore(actor, move, foe, incoming, speed))
+                    if (PairPivotSensitiveMove(incoming))
+                        safe = FALSE;
+                    else if (IsBattleMoveStatus(incoming))
+                    {
+                        // A support command cannot punish the pivot's damage.
+                        // A shield or a redirector can waste it outright.
+                        if (GetMoveEffect(incoming) == EFFECT_PROTECT
+                         || GetMoveEffect(incoming) == EFFECT_FOLLOW_ME)
+                            safe = FALSE;
+                    }
+                    else if (!PairPivotStrictlyBefore(actor, move, foe, incoming, speed))
                         safe = FALSE;
                 }
             }
@@ -4985,7 +4995,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                         valid = FALSE;
                 if (!valid)
                     continue;
-                s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev, mega != 0 || noActionMask != 0, canStop);
+                s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev, mega != 0 || noActionMask != 0, canStop, deadline[0] || deadline[1]);
                 if (score == INT_MIN)
                     continue;
                 // Demand a meaningful improvement before voluntarily giving up

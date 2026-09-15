@@ -46,10 +46,12 @@ AI_DOUBLE_BATTLE_TEST("EC new screens: a timely screen preserves the attack thre
             MOVE(playerLeft, MOVE_MUDDY_WATER, hit: TRUE);
             MOVE(playerRight, cast ? screen : MOVE_CELEBRATE);
             EXPECT_MOVE(opponentLeft, MOVE_AURA_SPHERE, criticalHit: FALSE);
-            EXPECT_MOVE(opponentRight, timely && cast && protected ? MOVE_PROTECT : MOVE_SHADOW_BALL);
+            // Whether the screen is actually cast this turn is not knowable
+            // at decision time; the guard follows the board, not the command.
+            EXPECT_MOVE(opponentRight, timely && protected ? MOVE_PROTECT : MOVE_SHADOW_BALL);
         }
     } THEN {
-        if (timely && cast && protected)
+        if (timely && protected)
             EXPECT_GT(playerLeft->hp, 0);
         else
             EXPECT_EQ(playerLeft->hp, 0);

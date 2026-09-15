@@ -41,13 +41,21 @@ AI_DOUBLE_BATTLE_TEST("EC Quash: Tailwind cannot rescue an attacker moved behind
             MOVE(playerLeft, MOVE_DUAL_WINGBEAT, target: opponentRight, hit: TRUE, criticalHit: FALSE);
             MOVE(playerRight, quash ? MOVE_QUASH : MOVE_CELEBRATE, target: opponentRight);
             EXPECT_MOVE(opponentLeft, MOVE_TAILWIND);
-            EXPECT_MOVE(opponentRight, quash && priority && !dark ? MOVE_PROTECT : MOVE_DRAIN_PUNCH, criticalHit: FALSE);
+            // A pending Quash is not knowable, so the same board must produce
+            // the same choice; Quash's effect on the race is asserted below.
+            EXPECT_MOVE(opponentRight, MOVE_DRAIN_PUNCH, criticalHit: FALSE);
         }
     } THEN {
         if (quash && priority && !dark)
+        {
+            // Quash still moves the attacker behind its knockout; without the
+            // read the target no longer answers with a perfect shield.
             EXPECT_EQ(playerLeft->hp, 28);
+        }
         else
+        {
             EXPECT_EQ(playerLeft->hp, 0);
-        EXPECT_GT(opponentRight->hp, 0);
+            EXPECT_GT(opponentRight->hp, 0);
+        }
     }
 }

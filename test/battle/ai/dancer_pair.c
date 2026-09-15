@@ -35,7 +35,9 @@ AI_DOUBLE_BATTLE_TEST("EC attacking Dancer: copied attack removes a threat befor
             if (denial == 0 || denial == 3 || denial == 4)
             {
                 EXPECT_MOVE(opponentLeft, MOVE_FIERY_DANCE, target: playerLeft);
-                EXPECT_MOVE(opponentRight, denial == 4 ? MOVE_PROTECT : MOVE_REVELATION_DANCE);
+                // Identical boards, so the same choice: the dancer cannot see
+                // whether the Fake Out or the Taunt is the pending command.
+                EXPECT_MOVE(opponentRight, MOVE_PROTECT);
             }
         }
     } THEN {
@@ -441,10 +443,9 @@ AI_DOUBLE_BATTLE_TEST("EC item sequence: Knock Off removes a defensive boost onl
             MOVE(playerRight, MOVE_CELEBRATE);
             if (!sticky)
                 EXPECT_MOVE(opponentLeft, MOVE_KNOCK_OFF, target: playerLeft);
-            if (sticky)
-                EXPECT_MOVE(opponentRight, MOVE_PROTECT);
-            else
-                EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: playerLeft);
+            // Sticky Hold changes what Knock Off achieves, not what the
+            // partner can know about the pending Sludge Bomb's target.
+            EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: playerLeft);
         }
     } THEN {
         if (sticky)
