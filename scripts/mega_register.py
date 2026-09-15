@@ -23,6 +23,7 @@ claim. In particular:
 """
 from __future__ import annotations
 
+import heapq
 import json
 import re
 from collections import defaultdict
@@ -136,25 +137,291 @@ def map_dir_to_id() -> dict[str, str]:
     return result
 
 
-def map_cap_index() -> dict[str, int]:
-    """MAP_x -> earliest strict_cap of any authored encounter whose
-    'location' field is that map's directory. This is the encounter index
-    described in the task: it only covers maps that host an authored trainer
-    battle; other maps fall through to 'unmapped'."""
+# ---------------------------------------------------------------------------
+# Map -> cap-window reachability index
+# ---------------------------------------------------------------------------
+#
+# A map's window used to be "the earliest strict_cap of any authored trainer
+# encounter located there" -- which left 188 map directories with no trainer
+# (Route101, GraniteCave_1F/B1F/B2F, ArtisanCave, most houses/interiors)
+# unplaced. This index instead walks the physical map graph -- nodes are map
+# directories, edges are each map.json's 'connections' (routes/towns) and
+# 'warp_events' (doors/staircases/cave mouths) -- starting from the six early
+# towns everyone begins in, and floods outward. A map's window is the
+# cheapest path from a seed: the minimum, over every incoming edge, of
+# max(neighbour's window, that edge's gate cost). Gate cost comes from:
+#   (a) the map's own authored trainer strict_cap (the old index), when
+#       that is higher than the graph alone would give -- MAP_GATES folds
+#       this in as a floor via _trainer_cap_by_dir();
+#   (b) field-move and story gates from the guide, encoded below.
+# This is still a design-review index, not a tile-by-tile proof of walkable
+# geometry -- see the gate table's own notes for the judgment calls (e.g.
+# where a gate has no distinct map node to hang off, or a scripted boat trip
+# has no literal warp_events entry and needs a synthetic EXTRA_EDGES entry).
+#
+# gate                                  window  where (map = MAP_GATES, edge = EDGE_GATES)      rationale
+# ------------------------------------  ------  -----------------------------------------------  ---------------------------------------------
+# Cut                                       20  edge Route116 <-> RusturfTunnel                  cut trees screen the tunnel mouth
+#                                            20  edge PetalburgWoods <-> PetalburgWoods_2          cut trees deeper in the woods
+#                                            20  edge PetalburgWoods_2 <-> PetalburgWoods_3         "
+# Rock Smash                                30  edge RusturfTunnel <-> VerdanturfTown            the Wanda/Peeko reunion rubble
+# Flash (free w/ Stone Badge, not          20  map GraniteCave_B1F, GraniteCave_B2F              lower floors need Flash, not Rock Smash;
+#   Rock Smash)                                                                                   Stone Badge = cap 20
+# Go-Goggles (after Flannery, badge 4)      42  map DesertRuins, MirageTower_1F,                  the whole Route 111 desert dungeon complex
+#                                                    DesertUnderpass, SandstrewnRuins
+# Mach/Acro Bike (after Mauville)           30  map Route110_SeasideCyclingRoadNorthEntrance,     the cycling road needs a bike to cross
+#                                                    Route110_SeasideCyclingRoadSouthEntrance
+# Briney ferry (after Mr. Stone's letter)   20  extra edge Route104 <-> DewfordTown               scripted sail, no literal warp_events entry
+# Dewford -> Slateport (after the manor)    24  extra edge DewfordTown <-> SlateportCity          scripted sail, no literal warp_events entry
+# Route110 north (after the museum)         24  edge Route110 <-> MauvilleCity                    Oceanic Museum story gate
+# Route111 north of Mauville (Wattson)      30  edge Route111 <-> Route113                        badge-3 story gate on the desert-side leg
+# Jagged Pass / Lavaridge (after Chimney)   36  map JaggedPass, LavaridgeTown                     Team Magma driven off Mt. Chimney
+# Surf                                      48  edge Route118 <-> Route123                        the river crossing partway along Route 118
+# Lilycove east (after Winona)              60  edge LilycoveCity <-> Route124                    badge-7 story gate
+# S.S. Tidal islands (Lilycove rival)       60  map SSTidalCorridor; extra edges                 rival battle reveals the ship's other stops;
+#                                                    LilycoveCity_Harbor/SlateportCity_Harbor      no literal warp -- the ferry destination is
+#                                                    <-> SSTidalCorridor                            picked by script, not stored in map.json
+# Mt. Pyre (after the voyage)               68  map MtPyre_1F, MtPyre_Exterior                    Route122 warps straight into 1F, not Exterior
+# Magma Hideout (after Mt. Pyre)            68  map MagmaHideout_1F
+# Scorched Slab (after Groudon)             68  map ScorchedSlab
+# Aqua Hideout (after Heatran)              76  map AquaHideout_1F
+# Mossdeep (after the hideout)              76  map MossdeepCity
+# Seafloor Cavern / Sootopolis (Space       84  map SeafloorCavern_Entrance, SootopolisCity;       Dive surfaces straight into these with no
+#   Center)                                        extra edges Underwater_SeafloorCavern <->        map.json connection either; every 'dive'/
+#                                                    SeafloorCavern_Entrance, Underwater_            'emerge' connection is also auto-gated at
+#                                                    SootopolisCity <-> SootopolisCity                the Dive constant (84), see below
+# Sky Pillar (after Kyogre)                 84  map SkyPillar_Entrance
+# Waterfall / eight badges                  90  map EverGrandeCity, VictoryRoad_1F
+# League                                    96  map EverGrandeCity_PokemonLeague_1F
+#
+# Dive (84) is additionally applied automatically to every map.json
+# connection whose direction is 'dive' or 'emerge' (see _build_map_graph),
+# not just the two extra edges above. Strength (42) and Fly (60) have no
+# instance called out by the guide beyond what is already covered above;
+# FIELD_MOVE_CAPS keeps all of these as the canonical constants a designer
+# should reach for when adding a new MAP_GATES/EDGE_GATES/EXTRA_EDGES entry,
+# rather than inventing a new number.
+#
+# A designer correcting this table: add/move entries in MAP_GATES (whole
+# map, any incoming edge), EDGE_GATES (one specific connection/warp, keyed
+# by an unordered pair of directory names), or EXTRA_EDGES (a connection
+# with no literal map.json entry at all, e.g. another scripted boat trip).
+# Every window must be one of CAP_WINDOWS (src/caps.c's sCampaignMilestones
+# order, plus the 14 baseline before the first milestone).
+
+CAP_WINDOWS = [14, 20, 24, 30, 36, 42, 48, 54, 60, 68, 76, 84, 90, 96, 100]
+
+# The six early towns/routes every save starts able to walk between.
+SEED_MAP_DIRS = ["LittlerootTown", "Route101", "OldaleTown", "Route103", "Route102", "PetalburgCity"]
+SEED_WINDOW = 14
+
+FIELD_MOVE_CAPS = {
+    "cut": 20, "rock_smash": 30, "strength": 42, "surf": 48,
+    "fly": 60, "dive": 84, "waterfall": 90,
+}
+
+MAP_GATES: dict[str, int] = {
+    "GraniteCave_B1F": 20, "GraniteCave_B2F": 20,
+    "DesertRuins": 42, "MirageTower_1F": 42, "DesertUnderpass": 42, "SandstrewnRuins": 42,
+    "Route110_SeasideCyclingRoadNorthEntrance": 30, "Route110_SeasideCyclingRoadSouthEntrance": 30,
+    "JaggedPass": 36, "LavaridgeTown": 36,
+    "SSTidalCorridor": 60,
+    # Route122 warps straight into MtPyre_1F (Exterior is reached only from
+    # inside), so the story floor has to sit on the actual entry point too.
+    "MtPyre_1F": 68, "MtPyre_Exterior": 68,
+    "MagmaHideout_1F": 68,
+    "ScorchedSlab": 68,
+    "AquaHideout_1F": 76,
+    "MossdeepCity": 76,
+    "SeafloorCavern_Entrance": 84, "SootopolisCity": 84,
+    "SkyPillar_Entrance": 84,
+    "EverGrandeCity": 90, "VictoryRoad_1F": 90,
+    "EverGrandeCity_PokemonLeague_1F": 96,
+}
+
+EDGE_GATES: dict[frozenset, int] = {
+    frozenset({"Route116", "RusturfTunnel"}): 20,
+    frozenset({"PetalburgWoods", "PetalburgWoods_2"}): 20,
+    frozenset({"PetalburgWoods_2", "PetalburgWoods_3"}): 20,
+    frozenset({"RusturfTunnel", "VerdanturfTown"}): 30,
+    frozenset({"Route110", "MauvilleCity"}): 24,
+    frozenset({"Route111", "Route113"}): 30,
+    frozenset({"Route118", "Route123"}): 48,
+    frozenset({"LilycoveCity", "Route124"}): 60,
+}
+
+# Scripted boat trips and Dive surfacing points with no literal
+# connections/warp_events entry in map.json (the destination is chosen by a
+# script/coordinate event at runtime, not stored as static map data).
+EXTRA_EDGES: list[tuple[str, str, int]] = [
+    ("Route104", "DewfordTown", 20),
+    ("DewfordTown", "SlateportCity", 24),
+    ("LilycoveCity_Harbor", "SSTidalCorridor", 60),
+    ("SlateportCity_Harbor", "SSTidalCorridor", 60),
+    # Dive surfaces directly into these cities; no map.json connection covers it.
+    ("Underwater_SootopolisCity", "SootopolisCity", 84),
+    ("Underwater_SeafloorCavern", "SeafloorCavern_Entrance", 84),
+]
+
+
+def _trainer_cap_by_dir() -> dict[str, int]:
+    """Directory -> earliest strict_cap of any authored trainer encounter
+    whose 'location' field names that directory. This is the previous,
+    trainer-presence-only index; it is now used only as a floor (gate table
+    point (a)), folded into the graph walk alongside MAP_GATES."""
     dir_to_id = map_dir_to_id()
     _, blocks = teams.split_encounters(MASTER.read_text())
-    cap_by_map: dict[str, int] = {}
+    cap_by_dir: dict[str, int] = {}
     for _number, block in blocks:
         meta = trainers.fields(block)
         loc = meta.get("location", "").strip()
         cap = meta.get("strict_cap", "").strip()
-        mapid = dir_to_id.get(loc)
-        if not mapid or not cap.isdigit():
+        if loc not in dir_to_id or not cap.isdigit():
             continue
         cap = int(cap)
-        if mapid not in cap_by_map or cap < cap_by_map[mapid]:
-            cap_by_map[mapid] = cap
+        if loc not in cap_by_dir or cap < cap_by_dir[loc]:
+            cap_by_dir[loc] = cap
+    return cap_by_dir
+
+
+# Multiplayer link-room maps: every Pokemon Center 2F (and a couple of
+# other rooms) carries a warp_events entry into one of these, and the maps
+# themselves warp back out to a script-chosen 'MAP_DYNAMIC' partner instead
+# of a fixed destination. Left in, they wormhole every Pokemon Center in the
+# game together (18 distinct maps warp into MAP_TRADE_CENTER alone) -- not a
+# walkable path, so they are excluded from the graph entirely.
+HUB_EXCLUDE_MAPS = {
+    "TradeCenter", "TradeCenter_Frlg", "UnionRoom", "UnionRoom_Frlg",
+    "RecordCorner", "RecordCorner_Frlg",
+    "BattleColosseum_2P", "BattleColosseum_2P_Frlg",
+    "BattleColosseum_4P", "BattleColosseum_4P_Frlg",
+}
+
+
+def _build_map_graph() -> dict[str, list[tuple[str, int]]]:
+    """Undirected adjacency over data/maps/*/map.json 'connections' and
+    'warp_events', plus EXTRA_EDGES. Each edge carries its own EDGE_GATES
+    cost (0 if none). HUB_EXCLUDE_MAPS are dropped -- see its docstring."""
+    dir_to_id = map_dir_to_id()
+    id_to_dir = {v: k for k, v in dir_to_id.items()}
+    adjacency: dict[str, list[tuple[str, int]]] = defaultdict(list)
+
+    def add_edge(a: str, b: str, gate: int | None = None) -> None:
+        if a == b or a in HUB_EXCLUDE_MAPS or b in HUB_EXCLUDE_MAPS:
+            return
+        if gate is None:
+            gate = EDGE_GATES.get(frozenset({a, b}), 0)
+        adjacency[a].append((b, gate))
+        adjacency[b].append((a, gate))
+
+    for path in sorted(MAPS_DIR.glob("*/map.json")):
+        a = path.parent.name
+        try:
+            data = json.loads(path.read_text())
+        except (OSError, ValueError):
+            continue
+        for conn in data.get("connections") or []:
+            b = id_to_dir.get(conn.get("map"))
+            if not b:
+                continue
+            if conn.get("direction") in ("dive", "emerge"):
+                add_edge(a, b, FIELD_MOVE_CAPS["dive"])
+            else:
+                add_edge(a, b)
+        for warp in data.get("warp_events") or []:
+            b = id_to_dir.get(warp.get("dest_map"))
+            if b:
+                add_edge(a, b)
+    for a, b, gate in EXTRA_EDGES:
+        add_edge(a, b, gate)
+    return adjacency
+
+
+def _reachability_windows() -> tuple[dict[str, int], dict[str, tuple[str | None, int, str]]]:
+    """Minimax-path (bottleneck shortest path) flood from SEED_MAP_DIRS:
+    window(v) = min over incoming edges (u, v) of max(window(u), edge gate,
+    MAP_GATES/trainer-floor(v)). Returns (window_by_dir, trace) where
+    trace[dir] = (predecessor_dir_or_None, edge_gate_used, 'seed'|'edge'),
+    kept for explain_map_window()."""
+    adjacency = _build_map_graph()
+    trainer_floor = _trainer_cap_by_dir()
+
+    def floor_of(d: str) -> int:
+        return max(trainer_floor.get(d, 0), MAP_GATES.get(d, 0))
+
+    dist: dict[str, int] = {}
+    trace: dict[str, tuple[str | None, int, str]] = {}
+    heap: list[tuple[int, str]] = []
+    for seed in SEED_MAP_DIRS:
+        w = max(SEED_WINDOW, floor_of(seed))
+        dist[seed] = w
+        trace[seed] = (None, 0, "seed")
+        heapq.heappush(heap, (w, seed))
+
+    visited: set[str] = set()
+    while heap:
+        d, node = heapq.heappop(heap)
+        if node in visited:
+            continue
+        visited.add(node)
+        for neighbour, edge_gate in adjacency.get(node, []):
+            candidate = max(d, edge_gate, floor_of(neighbour))
+            if neighbour not in dist or candidate < dist[neighbour]:
+                dist[neighbour] = candidate
+                trace[neighbour] = (node, edge_gate, "edge")
+                heapq.heappush(heap, (candidate, neighbour))
+    return dist, trace
+
+
+def map_cap_index() -> dict[str, int]:
+    """MAP_x -> earliest cap window at which that map is reachable, by graph
+    reachability over data/maps/*/map.json (see the gate table above), not
+    merely trainer presence. Maps unreachable from SEED_MAP_DIRS through
+    this graph -- postgame/unused areas such as the Battle Frontier's own
+    interior chain (reached only by a ferry ticket this index does not
+    model) and FRLG twin maps -- are not included."""
+    windows, _trace = _reachability_windows()
+    dir_to_id = map_dir_to_id()
+    cap_by_map: dict[str, int] = {}
+    for d, w in windows.items():
+        mapid = dir_to_id.get(d)
+        if mapid:
+            cap_by_map[mapid] = w
     return cap_by_map
+
+
+def explain_map_window(mapdir: str) -> str:
+    """Human-readable path + gate breakdown for one map directory's window,
+    for scripts/reference_pool.py's --explain."""
+    windows, trace = _reachability_windows()
+    if mapdir not in windows:
+        return f"{mapdir}: unreachable from SEED_MAP_DIRS through this graph (postgame/unused)."
+    path: list[str] = []
+    cur: str | None = mapdir
+    while cur is not None:
+        path.append(cur)
+        cur = trace[cur][0]
+    path.reverse()
+
+    trainer_floor = _trainer_cap_by_dir()
+    lines = [f"{mapdir}: window={windows[mapdir]}", "path: " + " -> ".join(path)]
+    for name in path:
+        pred, edge_gate, note = trace[name]
+        parts = []
+        if note == "seed":
+            parts.append(f"seed window {SEED_WINDOW}")
+        elif edge_gate:
+            parts.append(f"edge gate {edge_gate} (from {pred})")
+        elif pred:
+            parts.append(f"no edge gate (from {pred})")
+        map_gate = MAP_GATES.get(name)
+        if map_gate:
+            parts.append(f"map gate {map_gate}")
+        floor = trainer_floor.get(name)
+        if floor:
+            parts.append(f"trainer strict_cap floor {floor}")
+        lines.append(f"  {name}: window={windows[name]}" + (" (" + ", ".join(parts) + ")" if parts else ""))
+    return "\n".join(lines)
 
 
 def species_wild_maps() -> dict[str, set[str]]:

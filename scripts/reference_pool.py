@@ -11,20 +11,30 @@ that first makes it obtainable and the window ("gate") that source clears.
 Reuse and provenance
 ---------------------
 - Map -> earliest cap window comes from scripts/mega_register.py's
-  map_cap_index(): the earliest strict_cap of any authored trainer encounter
-  whose 'location' field names that map. That index only covers maps that
-  host an authored trainer battle (96 of 958 Hoenn maps in this tree). Every
-  other map (most interiors, shops, single-NPC houses) is not directly
-  indexed. This script adds ONE extension on top of mega_register's index:
-  when a map has no direct entry, it falls back to the minimum cap among
-  other maps that share the same directory-name prefix before the first
-  underscore (pokeemerald's own "CityName_InteriorName" convention, e.g.
-  "MossdeepCity_House3" falls back to the cheapest indexed "MossdeepCity_*"
-  map). That fallback is marked 'derived' wherever it is used; a direct hit
-  is marked 'direct'. Maps with neither are 'unmapped' and are excluded, not
-  guessed at. This is a naming-convention heuristic, not a claim that the
-  fallback map is physically reachable at that window -- see the caution
-  printed in summary.md.
+  map_cap_index(): a graph-reachability index, not a trainer-presence index.
+  Nodes are data/maps/*/map.json directories; edges are each map's
+  'connections' and 'warp_events', plus a handful of synthetic EXTRA_EDGES
+  for scripted boat trips and Dive surfacing points that have no literal
+  map.json entry. Starting from the six early-game towns, a map's window is
+  the cheapest path in: the minimum, over every incoming edge, of
+  max(neighbour's window, that edge's gate cost), where gate cost folds in
+  both the map's own authored trainer strict_cap (the old index, kept as a
+  floor) and the story/field-move gate table documented at the top of
+  mega_register.py (MAP_GATES / EDGE_GATES / EXTRA_EDGES -- run
+  `python3 reference_pool.py --explain MAP_NAME` to print the path and
+  gates that produced any one map's window). This covers almost every map
+  that is reachable at all in this tree (382 of 958, versus 96 under the
+  old trainer-only index); this script's one remaining extension on top of
+  mega_register's index is a same-directory-prefix fallback ("CityName_*")
+  for the rare map that still has no direct entry, marked 'derived' wherever
+  it is used (a direct hit is marked 'direct'). Maps with neither are
+  'unmapped' and are excluded, not guessed at -- what remains unmapped after
+  both steps is genuinely postgame/mystery-event/unused content (Battle
+  Frontier facility interiors and its own reception routing, FRLG twin
+  maps, Navel/Birth/Southern/Faraway Island, secret bases, unused/prototype
+  maps), not ordinary overworld content. See summary.md for the current
+  list and mega_register.py's own docstring for the gate table and its
+  documented judgment calls.
 - Wild encounters: src/data/wild_encounters.json, mapped to a window via the
   map's resolved cap plus a field-move gate for the encounter table's
   'type': water_mons needs Surf (after Norman, window 48); rock_smash_mons
@@ -32,11 +42,16 @@ Reuse and provenance
   the old_rod sub-slots are free from the start (Mom, window 14) while
   good_rod/super_rod sub-slots are gated by that rod's own gift-map window
   (see ROD_SOURCE_MAPS below). land_mons carries only the map's own window.
-  Cut/Strength/Fly/Dive/Waterfall are not modeled as separate gates: this
-  script trusts the authored strict_cap on each map's own trainer encounters
-  to already encode the intended field-move-gated reachability, per the
-  project's design process. That is a real limit on this index -- it is
-  called out again in summary.md.
+  Cut/Rock Smash/Dive are additionally modeled as map-graph reachability
+  gates inside mega_register.map_cap_index() itself (see its gate table),
+  so a map behind one of those already carries the right window before this
+  script ever looks at it; this script's own water_mons/rock_smash_mons
+  Surf/Rock-Smash bump above is specific to which *encounter table* on an
+  already-reachable map needs the move, which map_cap_index does not
+  distinguish. Strength/Fly/Waterfall have no per-wild-table equivalent and
+  no instance named by the guide beyond what map_cap_index's gate table
+  already encodes; that is a real limit on this index -- it is called out
+  again in summary.md.
 - Gifts/eggs/fossils and legendary signs reuse
   scripts/mega_register.py's species_gift_maps() (any givemon/giveegg in a
   map's scripts.inc -- no separate Hoenn fossil-revival pattern was found,
@@ -605,9 +620,14 @@ def write_outputs(result: dict) -> None:
         lines.append(f"- {line}")
 
     lines.append("\n## Index limitations (do not read beyond what these encode)")
-    lines.append("- map_cap_index (scripts/mega_register.py) only covers maps hosting an "
-                  "authored trainer battle; every other map either falls back to the cheapest "
-                  "same-prefix (\"CityName_*\") map's cap ('derived') or is excluded ('unmapped').")
+    lines.append("- map_cap_index (scripts/mega_register.py) is a graph-reachability index over "
+                  "data/maps/*/map.json connections + warp_events (plus a documented gate table "
+                  "of story/field-move gates and a few synthetic boat/Dive edges), floored by "
+                  "each map's own authored trainer strict_cap where that is higher. A map with no "
+                  "direct entry falls back to the cheapest same-prefix (\"CityName_*\") map's cap "
+                  "('derived'); a map with neither is excluded ('unmapped'). Run "
+                  "`python3 reference_pool.py --explain MAP_NAME` for the path and gates behind "
+                  "any one map's window.")
     lines.append(f"- Unmapped map directories this run could not place at all: "
                   f"{len(result['resolver'].unmapped)}")
     for d in sorted(result["resolver"].unmapped):
@@ -620,11 +640,14 @@ def write_outputs(result: dict) -> None:
         lines.append("  - " + ", ".join(sorted(result["mega_unmapped"])))
     lines.append(f"- Legendary signs with no map (OTHER_SIGN: mastery/circuit/breeding/game-corner "
                  f"sources, not modeled): {', '.join(result['other_signs'])}")
-    lines.append("- Cut/Strength/Fly/Dive/Waterfall are not modeled as independent map gates; this "
-                 "index trusts each map's own authored strict_cap to already reflect the intended "
-                 "field-move-gated reachability. Physical reachability (walking path, geometry, "
-                 "story order beyond a flag/badge) is never claimed beyond what map_cap_index and "
-                 "the same-prefix fallback encode.")
+    lines.append("- Cut/Rock Smash/Dive are modeled as map-graph reachability gates inside "
+                 "mega_register.map_cap_index() (see its gate table); this script's own "
+                 "water_mons/rock_smash_mons handling above is a separate, encounter-table-level "
+                 "bump on top of that. Strength/Fly/Waterfall have no instance named by the guide "
+                 "beyond what map_cap_index's gate table already encodes. Physical reachability "
+                 "(walking path, geometry, story order beyond a flag/badge) is never claimed "
+                 "beyond what map_cap_index's graph walk, its documented gate table, and this "
+                 "script's own same-prefix fallback encode.")
     lines.append("- Bare EVO_TRADE (link trade with no held-item condition) is not modeled as "
                  "solo-reachable and is skipped.")
 
@@ -632,6 +655,19 @@ def write_outputs(result: dict) -> None:
 
 
 def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--explain", metavar="MAP_NAME", default=None,
+                         help="Print the path and gates that gave one map directory its "
+                              "cap-window in mega_register.map_cap_index(), then exit without "
+                              "regenerating the pools.")
+    args = parser.parse_args()
+
+    if args.explain:
+        print(mr.explain_map_window(args.explain))
+        return
+
     result = build_pool()
     write_outputs(result)
     print(f"Wrote {len(CAPS)} pool-<cap>.json files and summary.md to {OUT_DIR}")
