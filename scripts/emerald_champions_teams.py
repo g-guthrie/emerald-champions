@@ -20,6 +20,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import ec_moves
 from emerald_champions_evs import validate_evs
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -392,6 +393,118 @@ def display(species: str) -> str:
 FAILED_GATES: list[str] = []
 
 
+def check_move_legality(branches: list[Branch]) -> tuple[list[str], list[str]]:
+    """Gate 1: every member's moves must be pinned-legal (ec_moves.pinned_legal_moves)
+    or, failing that, present in the ROM's own learnset data. An unresolvable
+    species (no Showdown id and no reviewed extension) is reported as its own
+    violation instead of silently reading as zero legal moves."""
+    violations: list[str] = []
+    notes: list[str] = []
+    for branch in branches:
+        tag = f"E{branch.encounter:04d} {branch.trainer}"
+        for mon in branch.mons:
+            species = f"SPECIES_{mon.species}"
+            if not ec_moves.species_is_resolvable(species):
+                violations.append(
+                    f"{tag} {mon.species}: cannot resolve a Showdown id for move-legality "
+                    f"(extend SHOWDOWN_FORM_SUFFIXES/SHOWDOWN_ID_OVERRIDES in scripts/ec_moves.py)"
+                )
+                continue
+            legal, rom_only = ec_moves.legal_moves_with_rom_union(species)
+            for move in mon.moves:
+                token = f"MOVE_{move}"
+                if token not in legal:
+                    violations.append(f"{tag} {mon.species}: {move} is not pinned-legal or ROM-learnable")
+                elif token in rom_only:
+                    notes.append(
+                        f"# note: {tag} {mon.species} {move} allowed via ROM learnset "
+                        f"(src/data/pokemon/all_learnables.json); not in the Showdown pin"
+                    )
+    return violations, notes
+
+
+WEATHER_SETTERS = {
+    "RAIN": ({"DRIZZLE", "PRIMORDIAL_SEA"}, {"RAIN_DANCE"}),
+    "SUN": ({"DROUGHT", "DESOLATE_LAND"}, {"SUNNY_DAY"}),
+    "SAND": ({"SAND_STREAM", "SAND_SPIT"}, {"SANDSTORM"}),
+    "SNOW": ({"SNOW_WARNING"}, {"SNOWSCAPE", "HAIL", "CHILLY_RECEPTION"}),
+}
+REDIRECTION_MOVES = {"FOLLOW_ME", "RAGE_POWDER", "ALLY_SWITCH"}
+REDIRECTION_ABILITIES = {"STORM_DRAIN", "LIGHTNING_ROD"}
+ACTIVATE_EXEMPT_ABILITIES = {
+    "WATER_ABSORB", "STORM_DRAIN", "DRY_SKIN", "VOLT_ABSORB", "LIGHTNING_ROD",
+    "MOTOR_DRIVE", "FLASH_FIRE", "SAP_SIPPER", "LEVITATE", "STEAM_ENGINE",
+}
+
+
+def check_strategy_coherence(branches: list[Branch]) -> list[str]:
+    """Gate 2: authored strategy flags and ACTIVATE tactics must actually be
+    executable/sane given the party's moves, abilities and typing."""
+    move_types = ec_moves.move_types()
+    move_categories = ec_moves.move_categories()
+    chart = ec_moves.type_chart()
+    violations: list[str] = []
+    for branch in branches:
+        tag = f"E{branch.encounter:04d} {branch.trainer}"
+        flags = set(branch.strategy)
+        if "TRICK_ROOM" in flags and not any("TRICK_ROOM" in mon.moves for mon in branch.mons):
+            violations.append(f"{tag}: strategy TRICK_ROOM flagged but no member knows Trick Room")
+        weather_present = [flag for flag in ("RAIN", "SUN", "SAND", "SNOW") if flag in flags]
+        for flag in weather_present:
+            weather_abilities, weather_moves = WEATHER_SETTERS[flag]
+            if not any(
+                mon.ability in weather_abilities or any(move in weather_moves for move in mon.moves)
+                for mon in branch.mons
+            ):
+                violations.append(f"{tag}: strategy {flag} flagged but no member has a matching weather ability/move")
+        if len(weather_present) > 1 and not re.search(r"\b(manual|replace)\b", branch.plan, re.I):
+            violations.append(
+                f"{tag}: mutually exclusive weather flags {sorted(weather_present)} "
+                f"without 'manual'/'replace' named in the plan"
+            )
+        if "REDIRECTION" in flags and not any(
+            mon.ability in REDIRECTION_ABILITIES or any(move in REDIRECTION_MOVES for move in mon.moves)
+            for mon in branch.mons
+        ):
+            violations.append(
+                f"{tag}: strategy REDIRECTION flagged but no member has Follow Me/Rage Powder/"
+                f"Ally Switch/Storm Drain/Lightning Rod"
+            )
+        if "PERISH_TRAP" in flags and not any(
+            mon.ability == "PERISH_BODY" or "PERISH_SONG" in mon.moves for mon in branch.mons
+        ):
+            violations.append(f"{tag}: strategy PERISH_TRAP flagged but no member knows Perish Song / has Perish Body")
+        if "TAILWIND" in flags and not any("TAILWIND" in mon.moves for mon in branch.mons):
+            violations.append(f"{tag}: strategy TAILWIND flagged but no member knows Tailwind")
+
+        for kind, actor, move, recipient in branch.tactics:
+            if kind != "ACTIVATE" or move == "NONE":
+                continue
+            move_token = f"MOVE_{move}"
+            if move_categories.get(move_token) == "STATUS":
+                continue
+            move_type = move_types.get(move_token)
+            recipient_mon = next((mon for mon in branch.mons if mon.species == recipient), None)
+            if move_type is None or recipient_mon is None:
+                continue
+            defender_types = ec_moves.TYPES.get(f"SPECIES_{recipient_mon.species}")
+            if not defender_types:
+                continue
+            multiplier = 1.0
+            for defender_type in defender_types:
+                multiplier *= chart.get(move_type, {}).get(defender_type, 1.0)
+            if multiplier <= 1.0:
+                continue
+            exempt = recipient_mon.ability in ACTIVATE_EXEMPT_ABILITIES or recipient_mon.item == "WEAKNESS_POLICY"
+            if not exempt:
+                violations.append(
+                    f"{tag}: tactic ACTIVATE {actor} {move} {recipient}: {move} is super effective "
+                    f"({multiplier:g}x) against {recipient}'s typing and its ability/item "
+                    f"({recipient_mon.ability}/{recipient_mon.item}) does not absorb it"
+                )
+    return violations
+
+
 def run(command: list[str], env: dict[str, str] | None = None, fatal: bool = True) -> None:
     result = subprocess.run(command, cwd=ROOT, env={**os.environ, **(env or {})}, text=True, capture_output=True)
     sys.stdout.write(result.stdout)
@@ -459,6 +572,25 @@ def main() -> None:
             run([sys.executable, "scripts/verify_trainer_ability_legality.py"],
                 {"EC_TRAINERS_PARTY": str(scratch_party)}, fatal=False)
         run([sys.executable, "scripts/verify_campaign_trainer_roster.py"])
+
+        move_violations, move_notes = check_move_legality(branches)
+        if move_violations:
+            for violation in move_violations:
+                print(f"FAIL: move legality: {violation}")
+            FAILED_GATES.append("move-legality")
+        else:
+            print("PASS: move legality: every member's moves are pinned-legal or ROM-learnable")
+        for note in move_notes:
+            print(note)
+
+        strategy_violations = check_strategy_coherence(branches)
+        if strategy_violations:
+            for violation in strategy_violations:
+                print(f"FAIL: strategy coherence: {violation}")
+            FAILED_GATES.append("strategy-coherence")
+        else:
+            print("PASS: strategy coherence: authored strategy flags and ACTIVATE tactics check out")
+
         if FAILED_GATES:
             raise SystemExit(f"gates failed: {FAILED_GATES}")
         print("PASS: generated master/plans/party match authored teams; configured trainer abilities are valid")
