@@ -1,10 +1,10 @@
 # Working on Emerald Champions v4
 
-Current user-directed work is the major-battle-first trainer audit: Elite Four
-and Champion, then whole Gyms and Magma/Aqua story groups. Apply approved blocks
-and keep the Game Book/source synchronized. Emerald Studio remains the native
-scene/battle workspace; the earned C15 playthrough stays paused. The user's
-current instructions supersede older workflow pauses. See docs/CONTINUE.md.
+Current user-directed work is the consolidation goal in docs/GOAL.md: the new
+campaign spine, narrow economy and acceptance ladder are landed; a fresh earned
+Medium run under work/fresh-run/ is the only source of L3 clears; the team and
+AI side rewrites trainers concurrently (see the ownership split below). Emerald
+Studio remains the native scene/battle workspace. See docs/CONTINUE.md.
 
 Read `docs/CONTINUE.md`, `docs/GOAL.md` and the relevant parts of the single
 canonical `Game Blueprint/Emerald_Champions_Game_Book.txt` before working.
@@ -102,7 +102,8 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
   keep chosen seeds distinct from demonstrated difficulty calibration.
 - Follow book play order: C01, first-arrival Oldale C03, rival/send-off C02, then
   onward. Implement and inspect each reached chapter and handoff. Later synthetic
-  scene tests never count as earned traversal. Current progress is C15; use the checkpoint for the exact next encounter.
+  scene tests never count as earned traversal. The fresh run's progress is in
+  handoff/checkpoint.json; use it for the exact next encounter.
 - Before calling a useful item unavailable, trace the actual bag, reachable
   harvests, gifts, shops, wild held items and native preparation sources. Obtain
   useful stage-legal berries through play; checking one vendor is insufficient.
