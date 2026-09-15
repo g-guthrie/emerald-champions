@@ -342,3 +342,151 @@ Nothing was weakened to pass.
 7. `SetupAIPredictionData` now runs for player-side battlers every turn again.
    It is inside the measured budget, but it is new per-turn work relative to the
    committed-read build.
+
+---
+
+# Round 2: triage to green
+
+Commits `bfb9087249` (authored-tactic reward) and `f5b343baa0` (triage,
+countdown exit). Focused suite: **85 passed, 1 failed, 86 total**, from 74/13/87.
+
+## The baseline was not green, and the teams file moved under the fixtures
+
+Two findings changed the triage, both established by evidence rather than
+inference.
+
+**1. Eight of 92 fixtures were already failing at the commit this task started
+from.** I rebuilt the pre-change tree (`410904ea5f`, restoring `src/`, `include/`
+and `test/` from it) and ran the same allowlist: `EC League authored Megas 5/5`,
+`EC misty gym 1/2`, `EC status legality: a spent burn`, `EC Flannery advances
+Eruption`, `EC Calm Mind: fast Simple setup`, `EC shoreline: Ned`, `EC Gym:
+Cristian` (already "got Coaching") and `EC Gym: Jocelyn` (already "got Protect")
+were red before I touched anything. My Round 1 report attributed Cristian,
+Jocelyn, Flannery and Ned to the read removal; that was wrong, and the two the
+work incidentally fixed (`status legality`, `Calm Mind`) went unrecorded.
+
+**2. Other agents re-authored several of these teams during this session.**
+`Materialize trainer audit B/D` and the Mega-register commits landed while I was
+working, and `src/data/trainers.party` was regenerated mid-run twice (the stamp
+check caught it). Concretely: Parker's room now leads Farigiraf beside Oranguru
+with Lickilicky as the Instructed Earthquake; Tabitha's Magma Hideout team is a
+Gigalith sand core with no Dragapult, no `ALLY_COMBO` and no tactic at all;
+Flannery's and Wallace's authored levels moved; Sylvia's plan mask gained
+`SETUP`; Laura's reserve order changed twice. Those fixtures were not describing
+the AI, they were describing data that no longer exists.
+
+## Triage, one bucket each
+
+**(a) The assertion encoded omniscience and the new choice is at least as good.**
+
+| Fixture | Retired | Why the new choice is sound |
+| --- | --- | --- |
+| `EC Coaching` | recipient survival read from the pending command | made readable instead: the threatening moves are only on the board in the param where the threat exists, so Coaching is chosen on knowledge |
+| `EC fainted target` (fallback guard) | guard iff the selected foe dies | both attacks could still be retargeted onto the fallback; the guard is a live option either way |
+| `EC Laura pivot` | which reserve, and pivot-versus-Fake-Out | the escape from the faster attack still happens; the reserve slot moved with the re-authoring twice this session |
+| `EC Gym: Jocelyn` | Victory Dance in front of two unread attackers | already red at baseline, where it chose Protect; it now attacks, which is the direction this task exists to produce |
+| `EC reflected damage` (4 params) | Counter/Mirror Coat chosen from the committed category | a revealed Follow Me partner makes a reflected reply a gamble; the AI declines it and the fixture says so |
+| `EC fainted target` (Brenden, turn 1) | how the healthy flank spends the turn | the doomed flank leaving is the subject and still holds |
+
+**(b) A real quality regression the model should recover — fixed in the model.**
+
+* `EC Gym: Cristian` and `EC authored strategy: Parker`: authored ACTIVATE and
+  INSTRUCT had no explicit reward (item 2 below).
+* `EC authored strategy: Tabitha` (before its team was re-authored away): the
+  flat reward fired even when the activation changed nothing. The reward is now
+  withheld when the recipient's own attack already knocks its target out
+  unboosted — which is exactly the difference between that fixture's positive
+  and negative controls.
+* `EC Soak forecast`: rewritten rather than retired. Finneon is the AI's *own*
+  partner, so Soaking the Steel/Grass flank and aiming Thunderbolt at it is a
+  combination the AI is entitled to plan; only the pending Fake Out made it
+  pointless, and that is precisely what it may no longer see. The fixture now
+  asserts the combination positively.
+
+**(c) A bespoke tactic lacking an explicit reward — item 2.**
+
+`EmeraldChampions_GetTacticKind(actor, recipient, move)` matches an authored
+actor/recipient/move triple against this turn's actual command.
+`PairTacticScore` pays `PAIR_TACTIC_REWARD` = 80, on the same bounded scale as
+Trick Room (100), weather (90), Tailwind (≤60) and setup (35), when:
+
+* the trigger reaches the authored recipient this turn (a single-target
+  activation aimed elsewhere is not the interaction);
+* the trigger is not lethal to the recipient — not super-effective on it, and
+  its worst roll short of the recipient's HP. **Beat Up's cached damage is one
+  strike**, so the authored hit count is applied before that judgement; without
+  that correction the reward drove Falinks into killing its own Dark-weak
+  Annihilape, which is the exact case the authored plan forbids;
+* the recipient is still standing at the end of the trial (deferred payment), and
+* the recipient does not already knock its target out unboosted.
+
+Acceptance: `EC Gym: Cristian activates the recipient that survives the Beat Up`
+now covers both halves of the authored rule — Beat Up fires on the Steel
+recipient that resists it and is refused on the Ghost one that dies to it — and
+`EC authored strategy: Parker repeats Earthquake safely through Telepathy`
+passes with Lickilicky deployed. Flannery's After You still advances Eruption
+(`EC authored strategy: Flannery`, with its scene messages, passes).
+
+## Item 3: my two regressions
+
+* **Parker** was never mine: the fixture asserted Earthquake on a partner that
+  the re-authored room no longer fields. Deploying Lickilicky, which the plan
+  prose names as the Instructed Earthquake, fixes it.
+* **Maura** is real and remains the single red test. Evidence: it passes with the
+  guard discount neutralised *and* with the forecast mixing neutralised applied
+  separately, so neither knob alone explains it; adding a decisive
+  forced-exit incentive did not move it either. What the fixture shows is an
+  off-by-one: with `turns == 4` the singer *is* gone, with `turns == 3` it is
+  not, so **Jynx leaves one turn later than the countdown allows** —
+  `EC_PerishMustEscape` appears to recognise the deadline on the turn the counter
+  expires rather than the turn before. That helper is shared with
+  `test/battle/ai/emerald_champions_perish.c`, which is outside this allowlist,
+  so I did not change it blind. I left the assertion intact rather than weaken a
+  valid one; it needs a dedicated look with the Perish suite in the build.
+* While fixing Maura's harness error I also corrected the fixture: the countdown
+  expires at the end of the third turn, so both leads are replaced there.
+
+## Item 4: budget after the changes
+
+| Fixture | Frames | Budget |
+| --- | --- | --- |
+| `EC Dancer budget: mixed copied attacks and full benches` | 61 | ≤72 |
+| `EC doubles budget: initial Mega and full benches` (both params) | 60 | ≤72 |
+| `EC Gym: Cristian` (both params) | 55 / 45 | ≤72 |
+
+Both required fixtures stay under 72. No cheap fix for the shortlist blind spot
+was found, so per instruction it is only noted: a pair that looks bad against the
+primary forecast and good only in the passive one never reaches stage two.
+
+## Item 5: verification
+
+```sh
+make -j4 check-tools
+DEVKITARM=… make -j6 TEST=1 TEST_SOURCE_ALLOWLIST='test/test_runner.c test/test_runner_args.c \
+  test/test_runner_battle.c test/battle/ai/coaching_pair.c test/battle/ai/fainted_target_pair.c \
+  test/battle/ai/prankster_burn_pair.c test/battle/ai/quash_pair.c test/battle/ai/primary_support_pair.c \
+  test/battle/ai/emerald_champions_plans.c test/battle/ai/mega_reveal.c test/battle/ai/protect_cadence.c \
+  test/battle/ai/dancer_pair.c test/battle/ai/screen_pair.c test/battle/ai/taunt_pair.c \
+  test/battle/ai/weather_survival_pair.c test/battle/ai/reflect_damage_pair.c' pokeemerald-test.elf
+python3 scripts/stamp_release_inputs.py --stamp pokeemerald-test.inputs.json
+python3 scripts/playthrough/run_focus.py --elf pokeemerald-test.elf --filter 'EC '
+DEVKITARM=… make -j6 pokeemerald.gba      # 33,554,432 bytes, clean
+```
+
+**85 passed, 1 failed, 86 total.** The one failure is
+`EC authored strategy: Maura escapes her countdown while retaining the trap 1/2`
+at `EXPECT_NE(opponentLeft->species, SPECIES_JYNX)`. Test count moved 87 → 86
+because the Tabitha activation fixture was deleted as data that no longer exists.
+
+## Open risks carried forward
+
+1. Maura's one-turn-late Perish exit (above) — the only red test.
+2. The authored-tactic reward is a bounded score, not a guarantee; it can still
+   lose to a decisively better attack, which is intended.
+3. Fixtures that deploy authored parties are now demonstrably fragile against
+   concurrent re-authoring. Several assertions in this suite pin authored levels
+   and party slots; they will drift again with the next audit pass.
+4. Everything from Round 1 §7 that is not superseded: the shortlist blind spot,
+   the 60-frame truncation ceiling on heavy boards, constants tuned against a
+   test suite rather than play, and `AGENTS.md` line 176 plus the Game Book AI
+   policy prose still authorizing the read.
