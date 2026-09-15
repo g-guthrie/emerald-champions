@@ -67,11 +67,11 @@ EverGrandeCity_GlaciasRoom_EventScript_Defeated::
 EverGrandeCity_GlaciasRoom_Text_IntroSpeech:
 	.string "GLACIA. I came far for opponents\n"
 	.string "worth the cold.\p"
-	.string "Snow is patience. The VEIL buys time,\n"
-	.string "the wind rearranges order, and one\l"
-	.string "powerful Dragon waits behind it.\p"
-	.string "Changing the weather is one answer.\n"
-	.string "But the VEIL can outlast the snow.$"
+	.string "The VEIL shelters my team.\n"
+	.string "FROSLASS can summon fresh snow.\p"
+	.string "And BAXCALIBUR waits behind it.\n"
+	.string "Both can MEGA EVOLVE.\p"
+	.string "Show me how you weather that.$"
 
 EverGrandeCity_GlaciasRoom_Text_Defeat:
 	.string "…Your team weathered the battle.\n"

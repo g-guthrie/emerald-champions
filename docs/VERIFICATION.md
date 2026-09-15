@@ -1374,3 +1374,36 @@ complete Misty Gym battles, Protect cadence and final difficulty tuning remain
 outside this engineering consolidation. The next design block is Elite Four and
 Champion, then whole Gyms and Magma/Aqua arcs, with Mega distribution decided
 cohesively before the remaining route teams.
+
+
+## Elite Four and Champion implementation — September14
+
+All five approved six-member teams are materialized, with ten distinct Mega
+forms and two explicit permitted slots per owner. Static comparison confirms
+all30 builds match the approved levels/moves/items/abilities/EVs/IVs and that
+other trainer authoring is byte-for-byte unchanged. Each prebattle introduction
+announces the exception and the updated concept; changed text is at most178px
+against the208px line budget. No actors, movements, rewards, player cap, healing
+rules or battle count were changed.
+
+The native `EC League authored Megas:` fixture has five parameter cases. It
+loads each production team at cap96, checks all six slot permissions, deploys
+the two actual designated party slots, then executes the native transformations
+and verifies both expected forms and the exhausted shared two-use budget.
+Wallace's forms resolve to Prism Scales Milotic98 and Huge Power Starmie97.
+This is an explicit reserve-pair fixture, not evidence of AI switching into
+that pair during a complete fight. Both existing Mega-budget groups and the
+battle-owner/foreign-namespace group also pass on the same stamped ELF.
+
+Exact sets, source bindings, changed dialogue, logs and artifact hashes are in
+`work/league-implementation/`. Full League playthrough, autonomous dual-Mega
+selection on all boards, Protect cadence and final level calibration remain
+later work. Next design block: whole Gyms, then Magma/Aqua arcs. The existing
+131-entry first-access boundary remains; these five major-battle reviews raise
+implemented design coverage to136 without renumbering the chronological route.
+
+League build completion: normal LTO release, source/artifact stamp and all
+release gates PASS (ROM27,861,944 bytes allocated; EWRAM232,374;
+IWRAM28,312). Game Book freshness check PASS. The native League test covers
+five boss parameter cases; the total focused run is four groups including
+the two existing budget groups and one owner/namespace group.

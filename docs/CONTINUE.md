@@ -1,5 +1,7 @@
 # Current development checkpoint — September 14, 2026
 
+Latest implementation: all five Elite Four/Champion teams are approved and applied, including ten designated Mega forms and explicit two-Mega introductions. The major-battle-first audit has completed the League design block; next are whole Gyms, then Magma/Aqua story groups. The campaign still has341 encounters /368 variants. Implemented designs total136 (131 first-access plus five League encounters); chronological frontier132 and the paused earned C15 save are unchanged. Exact receipt: `work/league-implementation/Implementation.md`. Full League battles and final difficulty calibration remain later validation.
+
 Consolidation complete: local checkpoint90d908cc20 and remote work through e0ae7cf9bd are integrated. The normal ROM passes release gates;39 selected native test groups and13 reference tests pass. Misty Gym AI support and the trainer-owned two-Mega budget are implemented and validated in focused cases. No League roster replacements were made ahead of the next major-battle-first audit. The earned C15 run remains paused by the existing user direction; full battles and difficulty calibration are separate later work.
 
 Current checkpoint: implemented through Flannery, including the early Ember Path/Ashen Woods detour. `docs/trainer-review-index.json` records131 implemented first-access encounters and341 retained encounters /368 variants. Angelina and Eric are retired as duplicate ordinary battles; Gina and Mia stay. Misty Terrain is deliberately retained in the Fire Gym, with distinct seed, terrain-control, sun and attack partnerships. Exact builds/evidence: `work/trainer-through-flannery-implementation/`. Next design block: Elite Four/Champion. First-access index132 remains the post-Flannery Go-Goggles/Strength/Trick House3 boundary for later progression coverage. The earned C15 save remains paused.
@@ -191,7 +193,7 @@ Toxic Chain can finish the one-HP recipient. The level-adjusted priority-interru
 fixture was strengthened to keep its original lethal-threat premise. All73
 selected native test groups pass.
 
-NEXT DESIGN BLOCK: Elite Four and Champion, then whole Gyms and Magma/Aqua arcs. Use the current Mega coverage report to allocate meaningful forms and the permitted two-Mega boss pairs. Do not resume forward route batches before this distribution review. First-access coverage resumes at132 when needed for progression checks.
+NEXT DESIGN BLOCK: Whole Gyms, then Magma/Aqua arcs. The Elite Four/Champion designs are implemented. Use the current Mega coverage report to allocate meaningful forms and the permitted two-Mega boss pairs. Do not resume forward route batches before this distribution review. First-access coverage resumes at132 when needed for progression checks.
 
 Later validation remains separate: the Laura branch needs Center recovery before
 play; Gym balance, unowned Teeter/Lunar Dance forecasting and general pivot limits

@@ -72,11 +72,12 @@ EverGrandeCity_SidneysRoom_EventScript_Defeated::
 
 EverGrandeCity_SidneysRoom_Text_IntroSpeech:
 	.string "Heh. SIDNEY. First door, best door.\p"
-	.string "My crew fights dirty. Fake Out, sleep,\n"
-	.string "TAILWIND to keep you chasing.\l"
-	.string "You'll think you've read it.\p"
-	.string "Then ABSOL shows up and the reading\n"
-	.string "was wrong. Let's go, kid!$"
+	.string "In the LEAGUE, each of us can\n"
+	.string "use two MEGA EVOLUTIONS.\p"
+	.string "My crew covers the approach.\n"
+	.string "Then SHARPEDO and ABSOL strike!\p"
+	.string "Think you can keep up?\n"
+	.string "Let's go, kid!$"
 
 EverGrandeCity_SidneysRoom_Text_Defeat:
 	.string "Ha! You got the better of my crew.\n"

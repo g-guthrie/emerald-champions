@@ -6,7 +6,7 @@
   "previously_reviewed_access_deferred": [],
   "current_review_indices": null,
   "within_unlock_order": "A chosen coherent review route among simultaneously available branches, not a claim every trainer is mandatory or the order is forced.",
-  "source_sha256": "7ddc08747040ddac06e458b98b6d215268ca73cbfb65432985e0a33067a79dae",
+  "source_sha256": "ce407d022fe8b39fc650465737610e25fdc34b197d85d176ab7ca19c6584a37c",
   "encounters": [
     {
       "key": "TRAINER_BRENDAN_ROUTE_103_MUDKIP|TRAINER_BRENDAN_ROUTE_103_TORCHIC|TRAINER_BRENDAN_ROUTE_103_TREECKO|TRAINER_MAY_ROUTE_103_MUDKIP|TRAINER_MAY_ROUTE_103_TORCHIC|TRAINER_MAY_ROUTE_103_TREECKO",
@@ -5374,7 +5374,7 @@
     {
       "key": "TRAINER_DRAKE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_DRAKE"
       ],
@@ -5401,7 +5401,10 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "review_group": "elite_four_and_champion",
+      "implementation_receipt": "work/league-implementation/Implementation.md",
+      "review_note": "Major-battle-first review; no chronological first-access index assigned."
     },
     {
       "key": "TRAINER_DREW",
@@ -6307,7 +6310,7 @@
     {
       "key": "TRAINER_GLACIA",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_GLACIA"
       ],
@@ -6334,7 +6337,10 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "review_group": "elite_four_and_champion",
+      "implementation_receipt": "work/league-implementation/Implementation.md",
+      "review_note": "Major-battle-first review; no chronological first-access index assigned."
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_1",
@@ -10435,7 +10441,7 @@
     {
       "key": "TRAINER_PHOEBE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_PHOEBE"
       ],
@@ -10462,7 +10468,10 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "review_group": "elite_four_and_champion",
+      "implementation_receipt": "work/league-implementation/Implementation.md",
+      "review_note": "Major-battle-first review; no chronological first-access index assigned."
     },
     {
       "key": "TRAINER_PRESTON",
@@ -11033,7 +11042,7 @@
     {
       "key": "TRAINER_SIDNEY",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_SIDNEY"
       ],
@@ -11060,7 +11069,10 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "review_group": "elite_four_and_champion",
+      "implementation_receipt": "work/league-implementation/Implementation.md",
+      "review_note": "Major-battle-first review; no chronological first-access index assigned."
     },
     {
       "key": "TRAINER_SOPHIA",
@@ -11839,7 +11851,7 @@
     {
       "key": "TRAINER_WALLACE",
       "review_index": null,
-      "status": "not_yet_reviewed",
+      "status": "implemented",
       "trainer_ids": [
         "TRAINER_WALLACE"
       ],
@@ -11866,7 +11878,10 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "review_group": "elite_four_and_champion",
+      "implementation_receipt": "work/league-implementation/Implementation.md",
+      "review_note": "Major-battle-first review; no chronological first-access index assigned."
     },
     {
       "key": "TRAINER_WALLACE_DOUBLES_LEGENDS",
@@ -12187,5 +12202,13 @@
     "receipt": "work/trainer-through-flannery-implementation/Implementation.md",
     "evidence_limit": "Source access/design and focused native checks; no earned traversal or full-battle calibration claim"
   },
-  "next_review_index": 132
+  "next_review_index": 132,
+  "major_battle_review": {
+    "completed": [
+      "Elite Four and Champion"
+    ],
+    "next": "Whole Gyms, then Magma/Aqua story groups",
+    "implemented_encounters_total": 136,
+    "first_access_review_boundary": 131
+  }
 }

@@ -66,12 +66,12 @@ EverGrandeCity_PhoebesRoom_EventScript_Defeated::
 
 EverGrandeCity_PhoebesRoom_Text_IntroSpeech:
 	.string "Welcome. I am PHOEBE.\p"
-	.string "I trained on MT. PYRE, where the ones\n"
-	.string "who are gone still take part.\p"
-	.string "My friends can steal your boosts\n"
-	.string "and wear down your strength with burns.\p"
-	.string "Keep something for SPECTRIER.\n"
-	.string "Each knockout can make it stronger.$"
+	.string "I trained on MT. PYRE, where the\n"
+	.string "ones who are gone still take part.\p"
+	.string "GENGAR closes the door.\n"
+	.string "BANETTE asks for an encore.\p"
+	.string "Two MEGA EVOLUTIONS.\n"
+	.string "One haunting performance.$"
 
 EverGrandeCity_PhoebesRoom_Text_Defeat:
 	.string "What a wonderful team! My\n"
