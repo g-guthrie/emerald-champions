@@ -4143,8 +4143,20 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (guardDenied[actor])
             score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions)) / 100;
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
-        if (tacticReward[actor] && hp[GetPartnerBattler(actor)])
-            score += tacticReward[actor];
+    {
+        enum BattlerId recipient = GetPartnerBattler(actor);
+        if (!tacticReward[actor] || !hp[recipient])
+            continue;
+        // An activation that changes nothing is a spent turn. If the recipient
+        // already knocks its target out unboosted, the trigger is not needed.
+        const struct PairAction *reply = &actions[recipient];
+        if (reply->index != PAIR_IDLE && !IsBattleMoveStatus(reply->executedMove)
+         && !IsBattlerAlly(recipient, reply->target) && IsBattlerAlive(reply->target)
+         && gAiLogicData->simulatedDmg[recipient][reply->target][reply->index].minimum
+            >= gBattleMons[reply->target].hp)
+            continue;
+        score += tacticReward[actor];
+    }
     return score;
 }
 
@@ -5048,8 +5060,15 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     continue;
                 // Demand a meaningful improvement before voluntarily giving up
                 // an action; ties and tiny forecast noise must not cause cycling.
-                if (noActionMask)
+                // A countdown exit is not voluntary: this is the last turn the
+                // singer can leave, and no forecast changes that. Everything
+                // else must still earn its lost action.
+                bool32 forcedExit = (deadline[0] && slots[0] < PARTY_SIZE)
+                    || (deadline[1] && slots[1] < PARTY_SIZE);
+                if (noActionMask && !forcedExit)
                     score -= 35;
+                if (forcedExit)
+                    score += 200;
                 // An authored singer leaves one turn early while its partner
                 // still traps the affected foes. This is a conditional phase
                 // preference, never an excuse to bypass reserve legality.

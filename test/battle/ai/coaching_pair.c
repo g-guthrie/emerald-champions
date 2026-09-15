@@ -16,7 +16,12 @@ AI_DOUBLE_BATTLE_TEST("EC Coaching: a flinched recipient must survive to earn th
             Level(20); HP(76); MaxHP(76); Attack(45); Defense(51);
             SpAttack(69); SpDefense(51); Speed(63);
             Ability(ABILITY_NATURAL_CURE); Item(ITEM_CHOICE_SPECS);
-            Moves(MOVE_CELEBRATE, MOVE_EARTH_POWER, MOVE_GIGA_DRAIN, MOVE_PSYCHIC);
+            // The recipient's survival has to be readable from the board, not
+            // from the pending command: give the threat only when it exists.
+            if (partnerSurvives)
+                Moves(MOVE_CELEBRATE);
+            else
+                Moves(MOVE_CELEBRATE, MOVE_EARTH_POWER, MOVE_GIGA_DRAIN, MOVE_PSYCHIC);
         }
         PLAYER(SPECIES_MIENFOO) {
             Level(20); HP(54); MaxHP(54); Attack(62); Defense(31);

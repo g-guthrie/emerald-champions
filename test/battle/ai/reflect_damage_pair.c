@@ -14,9 +14,11 @@ AI_DOUBLE_BATTLE_TEST("EC reflected damage: a real incoming hit retains the matc
     // could take the hit instead, which a reflected reply cannot survive.
     PARAMETRIZE { attack = MOVE_STRENGTH; reply = MOVE_STRENGTH; redirect = FALSE; reflected = FALSE; }
     PARAMETRIZE { attack = MOVE_POWER_GEM; reply = MOVE_STRENGTH; redirect = FALSE; reflected = FALSE; }
-    PARAMETRIZE { attack = MOVE_STRENGTH; reply = MOVE_COUNTER; redirect = TRUE; }
-    PARAMETRIZE { attack = MOVE_POWER_GEM; reply = MOVE_MIRROR_COAT; redirect = TRUE; }
-    PARAMETRIZE { attack = MOVE_DUAL_WINGBEAT; reply = MOVE_COUNTER; redirect = TRUE; }
+    // Same board as the first case, so the same choice: only the pending
+    // command differs, and that is exactly what the AI no longer sees.
+    PARAMETRIZE { attack = MOVE_STRENGTH; reply = MOVE_STRENGTH; redirect = TRUE; reflected = FALSE; }
+    PARAMETRIZE { attack = MOVE_POWER_GEM; reply = MOVE_STRENGTH; redirect = TRUE; reflected = FALSE; }
+    PARAMETRIZE { attack = MOVE_DUAL_WINGBEAT; reply = MOVE_STRENGTH; redirect = TRUE; reflected = FALSE; }
     GIVEN {
         AI_FLAGS(REFLECT_FLAGS);
         PLAYER(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); Attack(200); SpAttack(200); Speed(100); Moves(attack); }
