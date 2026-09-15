@@ -19,7 +19,7 @@ or [the current checkpoint](docs/CONTINUE.md).
 
 **Current work:** finish the outstanding battle AI, Mega-budget support and integrated ROM delivery, then review major battles first: Elite Four/Champion, whole Gyms, Magma/Aqua story groups, then the remaining trainers. The earned C15 run stays paused.
 
-**Emerald Studio**, a local browser workspace
+**Emerald Studio** is a local browser workspace
 backed by native mGBA. Start it with:
 
 ~~~sh

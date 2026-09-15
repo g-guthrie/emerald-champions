@@ -1,6 +1,8 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "battle_gimmick.h"
+#include "battle_controllers.h"
 #include "battle_ai_util.h"
 #include "emerald_champions_battle_plan.h"
 #include "test/battle.h"
@@ -1624,5 +1626,118 @@ AI_DOUBLE_BATTLE_TEST("EC misty gym AI: vents blocked status but preserves usefu
         EXPECT_EQ(memcmp(savedMons, gBattleMons, sizeof(savedMons)), 0);
         EXPECT_EQ(memcmp(&savedRng, &gRngValue, sizeof(savedRng)), 0);
         Test_MgbaPrintf("MISTY_GYM_AI_SCENARIO=%d FRAMES=%d", scenario, gBattleStruct->aiDelayFrames);
+    }
+}
+
+
+DOUBLE_BATTLE_TEST("EC Mega budget: queued requests obey one-Mega execution and two-Mega eligibility")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(10); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(20); }
+        OPPONENT(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); Speed(100); }
+        OPPONENT(SPECIES_SALAMENCE) { Item(ITEM_SALAMENCITE); Speed(90); }
+    } WHEN {
+        // Exercise the final execution guard, even for two queued requests.
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerLeft);
+            MOVE(opponentRight, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerRight);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(opponentRight->species, SPECIES_SALAMENCE);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);
+        EXPECT_EQ(gBattleStruct->gimmick.megaEvolutionsUsed[GetBattlerTrainer(B_BATTLER_1)], 1);
+
+        // Probe the production eligibility gate using an otherwise eligible
+        // candidate in Sidney's authorized sixth slot. This does not reauthor
+        // his live party or choose the second League ace before design review.
+        u32 savedFlags = gBattleTypeFlags;
+        u16 savedA = TRAINER_BATTLE_PARAM.opponentA;
+        u16 savedB = TRAINER_BATTLE_PARAM.opponentB;
+        u8 savedIndex = gBattlerPartyIndexes[B_BATTLER_1];
+        struct BattlePokemon savedMon = gBattleMons[B_BATTLER_1];
+        struct BattleGimmickData savedGimmick = gBattleStruct->gimmick;
+        struct Pokemon savedPartyMon = gParties[B_TRAINER_OPPONENT_A][5];
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_SIDNEY;
+        TRAINER_BATTLE_PARAM.opponentB = TRAINER_PHOEBE;
+        gBattlerPartyIndexes[B_BATTLER_1] = 5;
+        gBattleMons[B_BATTLER_1].species = SPECIES_KANGASKHAN;
+        gBattleMons[B_BATTLER_1].ability = ABILITY_SCRAPPY;
+        gParties[B_TRAINER_OPPONENT_A][5] = gParties[B_TRAINER_OPPONENT_A][0];
+        enum Species baseSpecies = SPECIES_KANGASKHAN;
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][5], MON_DATA_SPECIES, &baseSpecies);
+        memset(gBattleStruct->gimmick.megaEvolutionsUsed, 0, sizeof(gBattleStruct->gimmick.megaEvolutionsUsed));
+        gBattleStruct->gimmick.activeGimmick[B_TRAINER_OPPONENT_A][5] = GIMMICK_NONE;
+        gBattleStruct->gimmick.toActivate = 0;
+        EXPECT_EQ(EmeraldChampions_GetMegaEvolutionLimit(B_BATTLER_1), 2);
+        EXPECT_EQ(EmeraldChampions_GetMegaEvolutionLimit(B_BATTLER_0), 1);
+        EXPECT(CanMegaEvolve(B_BATTLER_1));
+        SetGimmickAsActivated(B_BATTLER_3, GIMMICK_MEGA);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 1);
+        EXPECT(CanMegaEvolve(B_BATTLER_1));
+        // The other battler can reserve the final use, but not spend a third.
+        gBattleStruct->gimmick.toActivate = 1u << B_BATTLER_3;
+        gBattleStruct->gimmick.usableGimmick[B_BATTLER_3] = GIMMICK_MEGA;
+        EXPECT(!CanMegaEvolve(B_BATTLER_1));
+        gBattleStruct->gimmick.toActivate = 0;
+        EXPECT(CanMegaEvolve(B_BATTLER_1));
+        SetGimmickAsActivated(B_BATTLER_1, GIMMICK_MEGA);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);
+        EXPECT(!CanMegaEvolve(B_BATTLER_1));
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 0);
+        // Another trainer has its own budget; foreign namespaces get no boss exception.
+        gBattleTypeFlags |= BATTLE_TYPE_TWO_OPPONENTS;
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 2);
+        gBattleTypeFlags |= BATTLE_TYPE_RECORDED_LINK;
+        EXPECT_EQ(EmeraldChampions_GetMegaEvolutionLimit(B_BATTLER_1), 1);
+        gBattleTypeFlags = savedFlags;
+        TRAINER_BATTLE_PARAM.opponentA = savedA;
+        TRAINER_BATTLE_PARAM.opponentB = savedB;
+        gBattlerPartyIndexes[B_BATTLER_1] = savedIndex;
+        gBattleMons[B_BATTLER_1] = savedMon;
+        gBattleStruct->gimmick = savedGimmick;
+        gParties[B_TRAINER_OPPONENT_A][5] = savedPartyMon;
+    }
+}
+
+
+DOUBLE_BATTLE_TEST("EC Mega budget: an authorized boss executes two evolutions and keeps them across a switch")
+{
+    GIVEN {
+        // Explicit test commands exercise native activation; campaign slot
+        // permission is independently checked above. Live League rosters stay
+        // unchanged until the user-directed major-battle design audit.
+        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SIDNEY;
+        PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(10); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(20); }
+        OPPONENT(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); Speed(100); }
+        OPPONENT(SPECIES_SALAMENCE) { Item(ITEM_SALAMENCITE); Speed(90); }
+        OPPONENT(SPECIES_AERODACTYL) { Item(ITEM_AERODACTYLITE); Speed(80); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerLeft);
+            MOVE(opponentRight, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerRight);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            SWITCH(opponentLeft, 2);
+            MOVE(opponentRight, MOVE_TACKLE, target: playerRight);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerLeft);
+            MOVE(opponentRight, MOVE_TACKLE, target: playerRight);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_AERODACTYL);
+        EXPECT_EQ(opponentRight->species, SPECIES_SALAMENCE_MEGA);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(gBattleStruct->gimmick.megaEvolutionsUsed[B_TRAINER_OPPONENT_A], 2);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 0);
     }
 }

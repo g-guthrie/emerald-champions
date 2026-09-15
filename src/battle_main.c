@@ -5011,6 +5011,14 @@ static bool32 TryActivateGimmick(enum BattlerId battler)
 {
     if ((gBattleStruct->gimmick.toActivate & (1u << battler)) && !(gProtectStructs[battler].noValidMoves))
     {
+        // Recheck the owner's remaining budget at execution. Both move
+        // responses can have been queued before the first Mega consumed it.
+        if (gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_MEGA
+         && GetRemainingMegaEvolutions(battler) == 0)
+        {
+            gBattleStruct->gimmick.toActivate &= ~(1u << battler);
+            return FALSE;
+        }
         if (gBattleStruct->gimmick.usableGimmick[battler] != GIMMICK_Z_MOVE && TryTrainerSlideGimmick(battler))
         {
             return TRUE;

@@ -24,37 +24,23 @@ LilycoveCity_DepartmentStore_3F_Pokemart_CaptureBalls:
 LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
 	lock
 	faceplayer
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_3F_EventScript_NoBracelet
-	msgbox LilycoveCity_DepartmentStore_3F_Text_MegaStock, MSGBOX_DEFAULT
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_MegaStones
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_NoBracelet::
-	msgbox LilycoveCity_DepartmentStore_3F_Text_NoBracelet, MSGBOX_DEFAULT
-	release
-	end
-
 	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_MegaStones:
-	.2byte ITEM_PIDGEOTITE
-	.2byte ITEM_AMPHAROSITE
-	.2byte ITEM_MANECTITE
-	.2byte ITEM_ALTARIANITE
+LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
+	.2byte ITEM_FULL_RESTORE
+	.2byte ITEM_MAX_POTION
+	.2byte ITEM_REVIVE
+	.2byte ITEM_MAX_REVIVE
+	.2byte ITEM_ETHER
+	.2byte ITEM_MAX_ETHER
+	.2byte ITEM_ELIXIR
 	pokemartlistend
-
-LilycoveCity_DepartmentStore_3F_Text_MegaStock:
-	.string "Our MEGA STONES cost ¥20000 each.\n"
-	.string "One of each is all you'll need.\p"
-	.string "You may also find these on your travels.\n"
-	.string "We won't sell a stone you already own.$"
-
-LilycoveCity_DepartmentStore_3F_Text_NoBracelet:
-	.string "MEGA STONES need a MEGA BRACELET.\p"
-	.string "STEVEN studies them in GRANITE CAVE,\n"
-	.string "near DEWFORD. Visit him first!$"
 
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_RightBallBuildsTeamsFast, MSGBOX_NPC

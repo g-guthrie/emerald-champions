@@ -1,8 +1,8 @@
 # Current development checkpoint — September 14, 2026
 
-Immediate GitHub checkpoint requested by the user: this is unfinished work, not a new release. The Flannery/Misty implementation and focused native checks are complete in source; the normal ROM rebuild is pending. Dual-Mega engine support is partially implemented and still needs authored League pairs, coverage reconciliation, native budget tests and final validation. Finish all outstanding work before resuming the trainer audit. The next audit order will prioritize Elite Four/Champion, then whole Gyms and Magma/Aqua story groups before the remaining routes.
+GitHub checkpoint90d908cc20 is published on codex/checkpoint-flannery-20260914-90d908cc20. Merge b741f80e7b integrates origin/main through d3bf075890. Finish the integrated build and verification, then push main before the major-battle-first audit.
 
-Current checkpoint: implemented through Flannery, including the early Ember Path/Ashen Woods detour. `docs/trainer-review-index.json` records131 implemented first-access encounters and341 retained encounters /368 variants. Angelina and Eric are retired as duplicate ordinary battles; Gina and Mia stay. Misty Terrain is deliberately retained in the Fire Gym, with distinct seed, terrain-control, sun and attack partnerships. Exact builds/evidence: `work/trainer-through-flannery-implementation/`. Next index132: post-Flannery Go-Goggles, Strength and Trick House3 branches. The earned C15 save remains paused.
+Current checkpoint: implemented through Flannery, including the early Ember Path/Ashen Woods detour. `docs/trainer-review-index.json` records131 implemented first-access encounters and341 retained encounters /368 variants. Angelina and Eric are retired as duplicate ordinary battles; Gina and Mia stay. Misty Terrain is deliberately retained in the Fire Gym, with distinct seed, terrain-control, sun and attack partnerships. Exact builds/evidence: `work/trainer-through-flannery-implementation/`. Next design block: Elite Four/Champion. First-access index132 remains the post-Flannery Go-Goggles/Strength/Trick House3 boundary for later progression coverage. The earned C15 save remains paused.
 
 Review workflow: use the main agent for20-trainer blocks and show the complete report in chat. A fresh Astra reviewer is optional only when the user explicitly requests it; the reviewer used for45–64 is finished and retired. The earlier packet remains historical evidence under `work/trainer-review-next20/`; the implemented receipts are `work/trainer-next20-implementation/`, `work/trainer-65-84-implementation/` and `work/trainer-85-100-implementation/`. Keep design/source implementation distinct from later native battle calibration.
 
@@ -191,10 +191,7 @@ Toxic Chain can finish the one-HP recipient. The level-adjusted priority-interru
 fixture was strengthened to keep its original lethal-threat premise. All73
 selected native test groups pass.
 
-NEXT DESIGN BLOCK: index132, post-Flannery unlocks. Reconcile Go-Goggles
-desert routes, Strength branches and Trick House3 before advancing toward
-Norman. The early Ashen Woods trio and both Route115 deferred trainers are
-already included through Flannery. Preserve Gina/Mia and the Gym Misty rule.
+NEXT DESIGN BLOCK: Elite Four and Champion, then whole Gyms and Magma/Aqua arcs. Use the current Mega coverage report to allocate meaningful forms and the permitted two-Mega boss pairs. Do not resume forward route batches before this distribution review. First-access coverage resumes at132 when needed for progression checks.
 
 Later validation remains separate: the Laura branch needs Center recovery before
 play; Gym balance, unowned Teeter/Lunar Dance forecasting and general pivot limits
