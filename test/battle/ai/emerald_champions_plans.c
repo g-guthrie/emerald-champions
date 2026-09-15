@@ -5,6 +5,7 @@
 #include "battle_controllers.h"
 #include "battle_ai_util.h"
 #include "emerald_champions_battle_plan.h"
+#include "emerald_champions_perish.h"
 #include "test/battle.h"
 #include "data.h"
 #include "difficulty.h"
@@ -46,6 +47,15 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
     EXPECT(EmeraldChampions_GetBattlePlan(B_BATTLER_1) & EC_BATTLE_PLAN_ALLY_COMBO);
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_FALINKS, SPECIES_GALLADE), EC_BATTLE_TACTIC_ACTIVATE);
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_GALLADE, SPECIES_FALINKS), EC_BATTLE_TACTIC_ACTIVATE);
+    // Tabitha's hideout team keeps no tactic at all after the audit.
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_TABITHA_MAGMA_HIDEOUT;
+    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_DRAGAPULT, SPECIES_COALOSSAL), 0);
+    EXPECT(!(EmeraldChampions_GetBattlePlan(B_BATTLER_1) & EC_BATTLE_PLAN_ALLY_COMBO));
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_DARIUS;
+    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_TORNADUS, SPECIES_KILOWATTREL), EC_BATTLE_TACTIC_ACTIVATE);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_NATE;
+    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_ORANGURU, SPECIES_DELPHOX), EC_BATTLE_TACTIC_INSTRUCT);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_CRISTIAN;
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_VOLCANION, SPECIES_COALOSSAL), 0);
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_3, SPECIES_DRAGAPULT, SPECIES_COALOSSAL), 0);
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_CRISTIAN;
@@ -956,26 +966,85 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker preserves a nonimmune reserv
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Darius charges Wind Power with the authored Tailwind")
+{
+    GIVEN {
+        // Bulky, harmless leads: nothing on the board can be knocked out, so
+        // the activation has to be chosen on the authored plan rather than on
+        // a knockout the recipient could take without it.
+        PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(20); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
+        // Kilowattrel is the authored Wind Power recipient.
+        AuthoredOpponentWithPartner(TRAINER_DARIUS, 6, FALSE, 2);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_TAILWIND);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_TORNADUS);
+        EXPECT_EQ(opponentRight->species, SPECIES_KILOWATTREL);
+        EXPECT(gSideStatuses[B_SIDE_OPPONENT] & SIDE_STATUS_TAILWIND);
+        EXPECT(playerLeft->hp < 600 || playerRight->hp < 600);
+        Test_MgbaPrintf("DARIUS_WIND_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Nate instructs the Delphox that already attacked")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(20); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
+        // Delphox is the authored Instruct recipient.
+        AuthoredOpponentWithPartner(TRAINER_NATE, 6, FALSE, 5);
+    } WHEN {
+        // Instruct only repeats a move the recipient has already used, so the
+        // first turn establishes it and the second is the authored repeat.
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_INSTRUCT, target: opponentRight);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_ORANGURU);
+        EXPECT(opponentRight->hp > 0);
+        Test_MgbaPrintf("NATE_INSTRUCT_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC authored strategy: Maura escapes her countdown while retaining the trap")
 {
     u32 turns;
     PARAMETRIZE { turns = 3; }
     PARAMETRIZE { turns = 4; }
     GIVEN {
+        // Bulk beyond the room's damage output, so the only thing that can
+        // remove a lead is the countdown itself and the timeline is exact.
         for (u32 i = 0; i < 4; i++)
-            PLAYER(SPECIES_CHANSEY) { Level(60); Ability(ABILITY_NATURAL_CURE); Moves(MOVE_CELEBRATE); Speed(GetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_SPEED)); }
+            PLAYER(SPECIES_CHANSEY) { Level(60); HP(600); MaxHP(600); Defense(200); SpDefense(200); Ability(ABILITY_NATURAL_CURE); Moves(MOVE_CELEBRATE); Speed(GetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_SPEED)); }
         AuthoredOpponent(TRAINER_MAURA, 6, FALSE);
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, MOVE_PERISH_SONG); }
         TURN { }
-        // The countdown expires at the end of the third turn, so both leads
-        // are replaced there; the fourth turn is the follow-up exchange.
-        TURN { SEND_OUT(playerLeft, 2); SEND_OUT(playerRight, 3); }
+        TURN { }
         if (turns == 4)
-            TURN { }
+            TURN { SEND_OUT(playerLeft, 2); SEND_OUT(playerRight, 3); }
     } THEN {
         EXPECT(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP) > 0);
         EXPECT(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_HP) > 0);
+        // Perish Song sets three and HandleEndTurnPerishSong takes the life on
+        // the end turn that reads zero, so the counter reads 3/2/1 at the ends
+        // of turns one to three and the fourth turn is the last one on which
+        // the singer can legally leave. The authored preference is to go one
+        // turn earlier, while the partner still holds the trap.
         EXPECT_NE(opponentLeft->species, SPECIES_JYNX);
         if (turns == 3)
             EXPECT_EQ(opponentRight->species, SPECIES_GOTHITELLE);

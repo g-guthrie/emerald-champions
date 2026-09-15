@@ -1130,8 +1130,25 @@ static s32 PairTacticScore(enum BattlerId actor, const struct PairAction *action
     if (!(EmeraldChampions_GetTacticKind(actor, partner, action->move)
           & (EC_BATTLE_TACTIC_ACTIVATE | EC_BATTLE_TACTIC_AFTER_YOU | EC_BATTLE_TACTIC_INSTRUCT)))
         return 0;
-    if (!PairSpread(action->executedMove) && action->target != partner)
-        return 0;
+    // A trigger that can be aimed at a single foe has to be aimed at the
+    // authored recipient. A side or field trigger - Darius's Tailwind into
+    // Wind Power - reaches its own side by construction.
+    switch (GetMoveTarget(action->executedMove))
+    {
+    case TARGET_USER:
+    case TARGET_USER_AND_ALLY:
+    case TARGET_USER_OR_ALLY:
+    case TARGET_ALLY:
+    case TARGET_FIELD:
+    case TARGET_ALL_BATTLERS:
+    case TARGET_BOTH:
+    case TARGET_FOES_AND_ALLY:
+        break;
+    default:
+        if (action->target != partner)
+            return 0;
+        break;
+    }
     // The authored rule is explicit: friendly fire that kills the recipient is
     // not the interaction. A super-effective trigger is a cost however the
     // roll lands - Beat Up is Dark, which feeds a Steel recipient's Justified
@@ -4443,7 +4460,11 @@ settle:
     // Expected value over the weighted opponent model, with a bounded
     // pessimism share. Taking the minimum instead made every credible
     // knockout pattern demand a shield.
-    mixed = forecastCount > 1 && (mustFinish || !PairDecisionBudgetExpired());
+    // The scoring rule has to be the same for every board in one decision,
+    // or a switch candidate evaluated after the budget expired is compared
+    // against a stay board that was scored on the full mixture. The budget
+    // controls how many pairs are searched, never how a pair is valued.
+    mixed = forecastCount > 1;
     for (u32 entry = 0; entry < shortCount; entry++)
     {
         s32 total = shortlist[entry].score * 100, worst = shortlist[entry].score;
@@ -5060,12 +5081,21 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     continue;
                 // Demand a meaningful improvement before voluntarily giving up
                 // an action; ties and tiny forecast noise must not cause cycling.
-                // A countdown exit is not voluntary: this is the last turn the
-                // singer can leave, and no forecast changes that. Everything
-                // else must still earn its lost action.
-                bool32 forcedExit = (deadline[0] && slots[0] < PARTY_SIZE)
-                    || (deadline[1] && slots[1] < PARTY_SIZE);
-                if (noActionMask && !forcedExit)
+                // A countdown exit is not voluntary, and neither is the
+                // authored early pivot that leaves while the partner still
+                // holds the trap: both are the plan, not a change of mind.
+                // Everything else must still earn its lost action.
+                bool32 forcedExit = FALSE, plannedExit = FALSE;
+                for (u32 index = 0; index < 2; index++)
+                {
+                    if (slots[index] >= PARTY_SIZE)
+                        continue;
+                    if (deadline[index])
+                        forcedExit = TRUE;
+                    if (deadline[index] || earlyPivot[index])
+                        plannedExit = TRUE;
+                }
+                if (noActionMask && !plannedExit)
                     score -= 35;
                 if (forcedExit)
                     score += 200;
