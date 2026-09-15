@@ -905,7 +905,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
     for (enum BattlerId battler = 0; battler < battlersCount; battler++)
     {
         // Prediction limited to player side but can be expanded to read partners move in the future
-        if (!IsOnPlayerSide(battler) || BattleAIUsesCommittedActions())
+        if (!IsOnPlayerSide(battler))
             continue;
 
         BattleAI_SetupAIData(0xF, battler);
@@ -3973,8 +3973,8 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         // attacker move effects specifically targeting partner
         // If the partner is only *simulated* to Protect, still let a deliberate
         // Beat Up activation win this battler's target choice. The partner is
-        // scored afterward and will then see the committed Beat Up target and
-        // avoid Protect. Otherwise both allies veto the intended combination.
+        // scored afterward and will then see this ally's chosen Beat Up target
+        // and avoid Protect. Otherwise both allies veto the intended combination.
         if (!partnerProtecting || shouldBeatUpPartner)
         {
             if (wouldPartnerFaint)

@@ -200,8 +200,6 @@ bool32 IsAiBattlerPredictingAbility(enum BattlerId battlerId)
 
 bool32 IsBattlerPredictedToSwitch(enum BattlerId battler)
 {
-    if (IsBattlerActionCommitted(battler))
-        return gChosenActionByBattler[battler] == B_ACTION_SWITCH;
     if (gAiLogicData->predictingSwitch && gAiLogicData->shouldSwitch & (1u << battler))
         return TRUE;
     return FALSE;
@@ -220,29 +218,8 @@ enum Move GetLockedInMove(enum BattlerId battler)
     return gBattleMons[battler].volatiles.encoredMove;
 }
 
-enum Move GetCommittedMove(enum BattlerId battler)
-{
-    if (!IsBattlerActionCommitted(battler))
-        return MOVE_UNAVAILABLE;
-    if (!IsBattlerAlive(battler) || gChosenActionByBattler[battler] != B_ACTION_USE_MOVE
-     || gBattleMons[battler].volatiles.rechargeTimer
-     || gBattleMons[battler].volatiles.semiInvulnerable == STATE_COMMANDER)
-        return MOVE_NONE;
-    if (gProtectStructs[battler].noValidMoves)
-        return MOVE_STRUGGLE;
-    if (gBattleMons[battler].volatiles.multipleTurns)
-        return gLockedMoves[battler];
-    if (GetActiveGimmick(battler) != GIMMICK_Z_MOVE
-     && gBattleMons[battler].volatiles.encoredMove != MOVE_NONE)
-        return gBattleMons[battler].moves[gBattleMons[battler].volatiles.encoredMovePos];
-    return gChosenMoveByBattler[battler];
-}
-
 enum Move GetIncomingMove(enum BattlerId battler, enum BattlerId opposingBattler, struct AiLogicData *aiData)
 {
-    enum Move committed = GetCommittedMove(opposingBattler);
-    if (committed != MOVE_UNAVAILABLE)
-        return committed;
     enum Move locked = GetLockedInMove(opposingBattler);
 
     if (locked != MOVE_NONE)
@@ -255,9 +232,6 @@ enum Move GetIncomingMove(enum BattlerId battler, enum BattlerId opposingBattler
 // When not predicting, don't want to reference player's previous move; leads to weird behaviour for cases like Fake Out or Protect, especially in doubles
 enum Move GetPredictedMove(enum BattlerId battler, enum BattlerId opposingBattler, struct AiLogicData *aiData)
 {
-    enum Move committed = GetCommittedMove(opposingBattler);
-    if (committed != MOVE_UNAVAILABLE)
-        return committed;
     enum Move locked = GetLockedInMove(opposingBattler);
 
     if (locked != MOVE_NONE)

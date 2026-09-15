@@ -322,36 +322,6 @@ static bool32 PairTargetIsLegal(enum BattlerId actor, enum BattlerId target, enu
 static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u32 noActionMask)
 {
     ev->count[actor] = 0;
-    if (IsBattlerActionCommitted(actor))
-    {
-        struct PairAction action = {MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actor};
-        if (!(noActionMask & (1u << actor)) && IsBattlerAlive(actor)
-         && gChosenActionByBattler[actor] == B_ACTION_USE_MOVE
-         && gBattleMons[actor].volatiles.semiInvulnerable != STATE_COMMANDER
-         && !gBattleMons[actor].volatiles.rechargeTimer)
-        {
-            action.index = gBattleStruct->chosenMovePositions[actor];
-            action.move = GetCommittedMove(actor);
-            action.target = gBattleStruct->moveTarget[actor];
-            if (gProtectStructs[actor].noValidMoves)
-            {
-                action.index = 0;
-            }
-            else if (!gBattleMons[actor].volatiles.multipleTurns
-                  && GetActiveGimmick(actor) != GIMMICK_Z_MOVE
-                  && gBattleMons[actor].volatiles.encoredMove != MOVE_NONE)
-            {
-                action.index = gBattleMons[actor].volatiles.encoredMovePos;
-            }
-            action.executedMove = GetMoveEffect(action.move) == EFFECT_NATURE_POWER ? GetNaturePowerMove() : action.move;
-            if (action.move == MOVE_NONE)
-                action.index = PAIR_IDLE;
-        }
-        // A locked command may fail or hit an ally. Neither permits inventing
-        // a different move/target; non-move commands spend this actor's turn.
-        ev->choices[actor][ev->count[actor]++] = action;
-        return;
-    }
     if (!(noActionMask & (1u << actor)) && IsBattlerAlive(actor)
      && gBattleMons[actor].volatiles.semiInvulnerable != STATE_COMMANDER)
     {
@@ -922,19 +892,16 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
         enum HoldEffect item = gAiLogicData->holdEffects[battler];
         if (!IsBattlerAlly(actor, battler))
         {
-            bool32 committed = IsBattlerActionCommitted(battler);
-            enum Move move = committed && gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
-                ? GetCommittedMove(battler) : MOVE_NONE;
-            u32 index = GetMoveIndex(battler, move);
+            // Public, flag-filtered knowledge only: an expiring resource on
+            // the foe that one waiting turn removes. A pending command is not
+            // knowledge, so an available Sucker Punch or one-PP attack counts
+            // exactly like an available Fake Out: a turn worth waiting out.
             if (GetBattlerSecondaryDamage(battler)
              || ((gBattleMons[battler].status1 & STATUS1_BURN) && ability != ABILITY_MAGIC_GUARD)
              || gBattleMons[battler].volatiles.yawn
              || (ability == ABILITY_TRUANT && !gBattleMons[battler].volatiles.truantCounter)
-             || (gBattleStruct->battlerState[battler].isFirstTurn
-                 && (committed ? move == MOVE_FAKE_OUT : HasMove(battler, MOVE_FAKE_OUT)))
-             || (move != MOVE_NONE && GetMoveEffect(move) == EFFECT_SUCKER_PUNCH)
-             || (move != MOVE_NONE && !IsBattleMoveStatus(move) && index < MAX_MON_MOVES
-                 && gBattleMons[battler].pp[index] == 1)
+             || (gBattleStruct->battlerState[battler].isFirstTurn && HasMove(battler, MOVE_FAKE_OUT))
+             || HasMoveWithEffect(battler, EFFECT_SUCKER_PUNCH)
              || (gBattleMons[battler].volatiles.semiInvulnerable
                  && gBattleMons[battler].volatiles.semiInvulnerable != STATE_COMMANDER))
                 return TRUE;
@@ -3522,7 +3489,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     effect == EFFECT_BEAT_UP ? AI_GetBeatUpHitCount(actor) : 1, 100, FALSE);
             }
             // Hit-triggered boosts belong to either side. Hitting an opposing
-            // Sturdy/Policy recipient can enable its already-committed reply.
+            // Sturdy/Policy recipient can enable its reply inside this trial.
             if (hp[target] > worstDamage && amount)
             {
                 if (gAiLogicData->holdEffects[target] == HOLD_EFFECT_WEAKNESS_POLICY
@@ -4104,27 +4071,6 @@ static bool32 RefreshPairMoveData(u32 noActionMask, bool32 canStop)
 }
 
 
-static u32 LoadCommittedSwitches(u32 noActionMask)
-{
-    enum BattlerId actors[2];
-    u32 slots[2], count = 0;
-    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
-        if (!(noActionMask & (1u << actor)) && IsBattlerActionCommitted(actor)
-         && gChosenActionByBattler[actor] == B_ACTION_SWITCH
-         && gBattleStruct->monToSwitchIntoId[actor] < PARTY_SIZE)
-        {
-            actors[count] = actor;
-            slots[count++] = gBattleStruct->monToSwitchIntoId[actor];
-            noActionMask |= 1u << actor;
-        }
-    if (count == 2)
-        AI_LoadSwitchCandidatePair(actors[0], slots[0], actors[1], slots[1], FALSE);
-    else if (count == 1)
-        AI_LoadSwitchCandidate(actors[0], slots[0], FALSE);
-    return noActionMask;
-}
-
-
 static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct PairAction *chosen, struct PairEvaluation *ev, bool32 refresh, bool32 canStop)
 {
     s32 best = INT_MIN;
@@ -4139,9 +4085,6 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     memcpy(ev->rage, rage, sizeof(rage));
     memcpy(ev->dancer, dancer, sizeof(dancer));
     ev->side = GetBattlerSide(actor);
-    u32 committedMask = LoadCommittedSwitches(noActionMask);
-    refresh |= committedMask != noActionMask;
-    noActionMask = committedMask;
     SavePairBoard(&ev->board, ev->side);
     if (refresh && !RefreshPairMoveData(noActionMask, canStop))
         goto done;
@@ -4659,8 +4602,9 @@ static bool32 PairTryAttackBeforeSwitch(enum BattlerId actor, u32 reserve,
             if (IsGimmickSelected(battler, gimmick))
                 return FALSE;
         speed[battler] = GetBattlerTotalSpeedStat(battler, gAiLogicData->abilities[battler], gAiLogicData->holdEffects[battler]);
-        if (!IsBattlerAlly(actor, battler)
-         && (!IsBattlerActionCommitted(battler) || gChosenActionByBattler[battler] != B_ACTION_USE_MOVE))
+        // A free attack before switching is only free when the opposing set
+        // is actually known. An unrevealed move could be Sucker Punch.
+        if (!IsBattlerAlly(actor, battler) && !IsAiBattlerAware(battler))
             return FALSE;
     }
     if (IsBattlerAlive(partner) && partnerAction->index != PAIR_IDLE && PairPivotSensitiveMove(partnerAction->executedMove))
@@ -4686,22 +4630,24 @@ static bool32 PairTryAttackBeforeSwitch(enum BattlerId actor, u32 reserve,
              || gBattleMons[target].volatiles.substitute || gBattleMons[target].volatiles.rage
              || IsSemiInvulnerable(target, CHECK_ALL))
                 continue;
+            // The foes' commands are unknown, so every move they could still
+            // use is the worst case: the pivot must strictly precede all of
+            // them, and any usable pivot-sensitive move cancels the attempt.
             bool32 safe = TRUE;
-            for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+            for (enum BattlerId foe = 0; foe < gBattlersCount && safe; foe++)
             {
                 if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
                     continue;
-                enum Move incoming = GetCommittedMove(foe);
-                if (PairPivotSensitiveMove(incoming))
-                    safe = FALSE;
-                else if (IsBattleMoveStatus(incoming))
+                u32 foeLimitations = CheckMoveLimitations(foe, 0, MOVE_LIMITATIONS_ALL);
+                for (u32 foeSlot = 0; foeSlot < MAX_MON_MOVES; foeSlot++)
                 {
-                    if (incoming != MOVE_HELPING_HAND && incoming != MOVE_CELEBRATE
-                     && !(GetMoveEffect(incoming) == EFFECT_PROTECT && foe != target))
+                    enum Move incoming = gBattleMons[foe].moves[foeSlot];
+                    if (incoming == MOVE_NONE || IsMoveUnusable(foeSlot, incoming, foeLimitations))
+                        continue;
+                    if (PairPivotSensitiveMove(incoming)
+                     || !PairPivotStrictlyBefore(actor, move, foe, incoming, speed))
                         safe = FALSE;
                 }
-                else if (!PairPivotStrictlyBefore(actor, move, foe, incoming, speed))
-                    safe = FALSE;
             }
             if (!safe || AI_GetMoveAccuracy(gAiLogicData, actor, target, move) < 100)
                 continue;
