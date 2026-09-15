@@ -89,11 +89,34 @@ SHOWDOWN_FORM_SUFFIXES = (
     "incarnate", "ordinary", "aria", "amped", "midday", "male", "female", "natural",
     "west", "east", "normal", "altered", "land", "sky", "small", "large", "super",
     "average", "antique", "phony", "rubycream", "marine", "autumn", "roaming",
-    "debutante", "kabuki",
+    "debutante", "kabuki", "disguised", "busted", "shield", "standard", "solo",
+    "plant", "baile", "blue", "orange", "red", "white", "yellow", "dandy",
+    "diamond", "heart", "lareine", "matron", "pharaoh", "star", "50", "10",
 )
 
 
+# Species whose Showdown id cannot be derived by simple prefix/suffix matching
+# (gendered defaults, irregular totem/style/gmax compounds, or Zygarde's bare
+# 50/10 aliases). Checked before the generic suffix table.
+SHOWDOWN_ID_OVERRIDES = {
+    "SPECIES_MIMIKYU_TOTEM_BUSTED": "mimikyubustedtotem",
+    "SPECIES_INDEEDEE_M": "indeedee",
+    "SPECIES_MEOWSTIC_M": "meowstic",
+    "SPECIES_BASCULEGION_M": "basculegion",
+    "SPECIES_DARMANITAN_GALAR_STANDARD": "darmanitangalar",
+    "SPECIES_TOXTRICITY_AMPED_GMAX": "toxtricitygmax",
+    "SPECIES_ZYGARDE_10_AURA_BREAK": "zygarde10",
+    "SPECIES_ZYGARDE_50": "zygarde",
+    "SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GMAX": "urshifurapidstrikegmax",
+    "SPECIES_URSHIFU_SINGLE_STRIKE": "urshifu",
+    "SPECIES_URSHIFU_SINGLE_STRIKE_GMAX": "urshifugmax",
+    "SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GMAX": "urshifugmax",
+}
+
+
 def showdown_id_for_species(species: str) -> str | None:
+    if species in SHOWDOWN_ID_OVERRIDES:
+        return SHOWDOWN_ID_OVERRIDES[species]
     showdown_id = re.sub(r"[^a-z0-9]", "", species.removeprefix("SPECIES_").lower())
     if showdown_id in SHOWDOWN_LEARNSETS:
         return showdown_id
@@ -101,6 +124,41 @@ def showdown_id_for_species(species: str) -> str | None:
         if showdown_id.endswith(suffix) and showdown_id[:-len(suffix)] in SHOWDOWN_LEARNSETS:
             return showdown_id[:-len(suffix)]
     return None
+
+
+def species_is_resolvable(species: str) -> bool:
+    """False only when neither the Showdown pin nor a reviewed extension can
+    tell us this species' legal moves; callers must report that as an error
+    instead of silently treating it as zero legal moves."""
+    return showdown_id_for_species(species) is not None or bool(REVIEWED_MOVE_EXTENSIONS.get(species))
+
+
+ALL_LEARNABLES = json.loads((ROOT / "src/data/pokemon/all_learnables.json").read_text())
+
+
+# Species whose ALL_LEARNABLES entry lives only under a form-qualified key,
+# with no bare/base-form key to fall back to (e.g. Wormadam's default in-game
+# form is Plant, but all_learnables.json only has WORMADAM_PLANT/_SANDY/_TRASH).
+ROM_LEARNABLE_ALIASES = {
+    "WORMADAM": "WORMADAM_PLANT",
+}
+
+
+def rom_learnable_moves(species: str) -> set[str]:
+    """The ROM's own learnset data (level-up/TM/tutor/egg, already flattened)
+    for a species, falling back to its base form when a form-specific entry
+    is absent (e.g. AEGISLASH_BLADE has no entry of its own; AEGISLASH does)."""
+    token = species.removeprefix("SPECIES_")
+    if token in ROM_LEARNABLE_ALIASES:
+        return set(ALL_LEARNABLES.get(ROM_LEARNABLE_ALIASES[token], ()))
+    while token:
+        moves = ALL_LEARNABLES.get(token)
+        if moves is not None:
+            return set(moves)
+        if "_" not in token:
+            break
+        token = token.rsplit("_", 1)[0]
+    return set()
 
 
 def pinned_legal_moves(species: str) -> set[str]:
@@ -113,6 +171,15 @@ def pinned_legal_moves(species: str) -> set[str]:
         if (move := MOVES_BY_ID.get(move_id)) is not None
     }
     return official | REVIEWED_MOVE_EXTENSIONS.get(species, set())
+
+
+def legal_moves_with_rom_union(species: str) -> tuple[set[str], set[str]]:
+    """(legal moves = pinned | ROM learnset, moves only legal via the ROM
+    learnset union -- i.e. the Showdown pin lacks them but the ROM's own
+    all_learnables.json has them)."""
+    pinned = pinned_legal_moves(species)
+    rom_only = rom_learnable_moves(species) - pinned
+    return pinned | rom_only, rom_only
 
 
 def species_types() -> dict[str, tuple[str, ...]]:
@@ -163,6 +230,71 @@ def species_types() -> dict[str, tuple[str, ...]]:
 
 
 TYPES = species_types()
+
+
+def _move_blocks() -> list[str]:
+    text = (ROOT / "src/data/moves_info.h").read_text()
+    return re.split(r"\n    \[MOVE_", text)[1:]
+
+
+def move_types() -> dict[str, str]:
+    """MOVE_x -> its TYPE_x, read from src/data/moves_info.h."""
+    result = {}
+    for block in _move_blocks():
+        name = "MOVE_" + block.split("]")[0].strip()
+        match = re.search(r"\.type\s*=\s*(TYPE_[A-Z0-9_]+)", block)
+        if match:
+            result[name] = match.group(1)
+    return result
+
+
+def move_categories() -> dict[str, str]:
+    """MOVE_x -> PHYSICAL/SPECIAL/STATUS, read from src/data/moves_info.h."""
+    result = {}
+    for block in _move_blocks():
+        name = "MOVE_" + block.split("]")[0].strip()
+        match = re.search(r"\.category\s*=\s*DAMAGE_CATEGORY_([A-Z]+)", block)
+        if match:
+            result[name] = match.group(1)
+    return result
+
+
+TYPE_CHART_COLUMNS = (
+    "TYPE_NONE", "TYPE_NORMAL", "TYPE_FIGHTING", "TYPE_FLYING", "TYPE_POISON", "TYPE_GROUND",
+    "TYPE_ROCK", "TYPE_BUG", "TYPE_GHOST", "TYPE_STEEL", "TYPE_MYSTERY", "TYPE_FIRE", "TYPE_WATER",
+    "TYPE_GRASS", "TYPE_ELECTRIC", "TYPE_PSYCHIC", "TYPE_ICE", "TYPE_DRAGON", "TYPE_DARK",
+    "TYPE_FAIRY", "TYPE_STELLAR",
+)
+
+
+def type_chart() -> dict[str, dict[str, float]]:
+    """Attacker TYPE_x -> {defender TYPE_x: multiplier}, read from
+    src/data/types_info.h. B_UPDATED_TYPE_MATCHUPS is GEN_LATEST in this repo
+    (include/config/battle.h), so generation-conditional matchup macros
+    (STL_RS, PSN_RS, ...) resolve to their modern/current-gen value."""
+    text = (ROOT / "src" / "data" / "types_info.h").read_text()
+    macro_values = {}
+    for macro in re.finditer(
+        r"#define\s+([A-Z0-9_]+)\s+\(B_UPDATED_TYPE_MATCHUPS\s*>=\s*GEN_\d+\s*\?\s*X\(([\d.]+)\)\s*:\s*X\([\d.]+\)\)",
+        text,
+    ):
+        macro_values[macro.group(1)] = float(macro.group(2))
+    table = re.search(r"gTypeEffectivenessTable\[[^\]]*\]\[[^\]]*\]\s*=\s*\{(.*?)\n\};", text, re.S)
+    chart: dict[str, dict[str, float]] = {}
+    for row in re.finditer(r"\[(TYPE_[A-Z0-9_]+)\]\s*=\s*\{([^}]*)\}", table.group(1)):
+        attacker = row.group(1)
+        cells = [cell.strip() for cell in row.group(2).split(",") if cell.strip()]
+        line = {}
+        for column, cell in zip(TYPE_CHART_COLUMNS, cells):
+            if cell == "______":
+                line[column] = 1.0
+            elif cell.startswith("X("):
+                line[column] = float(cell[2:-1])
+            else:
+                line[column] = macro_values.get(cell, 1.0)
+        chart[attacker] = line
+    return chart
+
 
 def abilities() -> dict[str, list[str]]:
     result = {}
