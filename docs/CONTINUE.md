@@ -1,8 +1,36 @@
 # Current development checkpoint — September 15, 2026
 
-Consolidation goal active: see `docs/GOAL.md` (the game definition, protected
-pillars and locked decisions) and `docs/CONSOLIDATION_PLAN.md` (phases; it folds
-into this file when Phase 0 closes). Phase 0 progress this day:
+State: the consolidation goal (`docs/GOAL.md`) has landed its baseline,
+campaign, economy and Phase 2 machinery in four commits today; the guide is
+rewritten as current rules (about 9,000 words) with a generated reference.
+Ladder: L0 341 · L1 50 · L2 2 · L3 40. All gates green.
+
+Next three blocks:
+1. Dialogue unification (one voice, one direction style) across every NPC the
+   spine, caps or rewards touched today; native contact sheets for Stern, the
+   Space Center briefing, Birth Island, the ruins conclusion and Mom's send-off.
+2. Resume the earned run on the new spine from the C15 save (clean Continue on
+   the current ROM) and advance it; every clear moves an encounter to L3.
+3. Major-battle-first benchmarks (L2): League, whole Gyms, Magma/Aqua groups,
+   against the cap window's reference parties (define those first, two or three
+   per window, from the available pool).
+
+Open design items: none blocking. Mew's authored set uses Rest (Soft-Boiled is
+not in its learnset). 31 Mega Stones show "unmapped" player family access in
+the register under its current rules (regional starters, gift-only legendaries).
+
+## Decisions log — September 15, 2026 (was docs/CONSOLIDATION_PLAN.md)
+
+Locked: protected pillars (roster, doubles, six-member Gyms, all Megas, two-Mega
+League, AI, levels-only difficulty, free builds, Gen 9 stats, Nintendo-native
+incentives); mandatory legendaries Moltres, Landorus, Lati, Mew, Heatran,
+Diancie, Jirachi as singles with authored sets; 15 caps; tightened crisis order;
+Sandstrewn relocation; narrow money with quarter multipliers and 44,000 in
+stipends; Poipole/Genesect on BP; soot, berry and Shoal collections kept as they
+were; zero rematch payouts; Old Rod from Mom; key items on SELECT/L/R;
+Garchompite with Caroline; Sonnet subagents supervised by the main agent.
+
+Day log:
 
 - One clone: the redundant `emerald-champions-restored-20260914` checkout is deleted.
 - `scripts/check_book_consistency.py` runs in the release gate (advisory until
@@ -67,6 +95,7 @@ unification, then resume the earned run on the new spine and start moving
 encounters up the ladder major-battle-first.
 
 ---
+
 
 # Previous checkpoint — September 14, 2026
 

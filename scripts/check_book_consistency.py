@@ -59,6 +59,8 @@ from generate_emerald_champions_mega_archive import stones
 from verify_mega_stone_rewards import world_reward_sources
 import mega_register
 import acceptance_ladder
+import cut_ledger
+from verify_campaign_trainer_roster import strip_comments as vcr_strip_comments
 
 README = ROOT / "README.md"
 CONTINUE = ROOT / "docs/CONTINUE.md"
@@ -502,6 +504,67 @@ def check_mega_register_and_ladder() -> None:
     report("ACCEPTANCE LADDER counts match docs/trainer-review-index.json", ok_ladder)
 
 
+def check_cut_ledger() -> None:
+    """Check 8: every identity in data/emerald_champions/retired_battles.json
+    (the CUT LEDGER's source of truth) must be absent from active authored
+    teams, nonempty native parties and Hoenn battle opcodes -- the same three
+    sources scripts/verify_campaign_trainer_roster.py checks -- and the
+    retired-identity count must match CUT POLICY's "<N> identities are
+    retired" sentence in the hand-authored guide."""
+    data = cut_ledger.load()
+    retired_ids: set[str] = set()
+    for row in data["retired_battles"]:
+        retired_ids.update(row["identities"])
+    for row in data["additional_retirements"]:
+        retired_ids.update(row["identities"])
+
+    branches = teams.read_teams()
+    active = {b.trainer for b in branches}
+
+    source = vcr_strip_comments((ROOT / "src/data/trainers.party").read_text())
+    parties = {block.split(" ===", 1)[0] for block in re.split(r"^=== ", source, flags=re.M)[1:]
+               if re.search(r"^SPECIES_", block, re.M)}
+
+    calls: set[str] = set()
+    for path in [*(ROOT / "data/maps").rglob("scripts.inc"), *(ROOT / "data/scripts").rglob("*.inc")]:
+        if "frlg" in str(path.relative_to(ROOT)).lower():
+            continue
+        for line in vcr_strip_comments(path.read_text()).splitlines():
+            if re.match(r"\s*(trainerbattle\w*|multi_\w*)\s", line):
+                calls.update(re.findall(r"\bTRAINER_\w+\b", line))
+
+    still_present: dict[str, list[str]] = {}
+    for label, actual in [("active authored teams", active), ("nonempty native parties", parties),
+                           ("Hoenn battle opcodes", calls)]:
+        hit = retired_ids & actual
+        if hit:
+            still_present[label] = sorted(hit)
+
+    ok_absence = not still_present
+    if ok_absence:
+        print(f"  PASS all {len(retired_ids)} retired identities are absent from active authored teams, "
+              "nonempty native parties and Hoenn battle opcodes")
+    else:
+        for label, hit in still_present.items():
+            print(f"  FAIL retired identities still present in {label}: {hit}")
+    report("every retired identity is absent from active teams/native parties/battle opcodes", ok_absence)
+
+    guide = book.split_guide(book.BOOK.read_text())
+    count_match = re.search(r"(\d+)\s*identities are retired", guide)
+    if not count_match:
+        print("  FAIL could not find '<N> identities are retired' sentence in the guide")
+        report("CUT POLICY retired-identity count matches data/emerald_champions/retired_battles.json", False)
+        return
+    guide_count = int(count_match[1])
+    ok_count = guide_count == len(retired_ids)
+    if ok_count:
+        print(f"  PASS guide's retired-identity count ({guide_count}) matches the data file ({len(retired_ids)})")
+    else:
+        print(f"  FAIL guide says {guide_count} identities are retired; "
+              f"data/emerald_champions/retired_battles.json has {len(retired_ids)}")
+    report("CUT POLICY retired-identity count matches data/emerald_champions/retired_battles.json", ok_count)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--fix-readme", action="store_true",
@@ -522,6 +585,8 @@ def main() -> int:
     check_duplicate_paragraphs()
     print("\n== 7. Mega Register and Acceptance Ladder ==")
     check_mega_register_and_ladder()
+    print("\n== 8. Cut Ledger ==")
+    check_cut_ledger()
 
     print()
     if failures:

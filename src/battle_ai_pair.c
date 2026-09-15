@@ -37,6 +37,29 @@
 #define PAIR_DANCE_TARGET_NO_ITEM 16
 #define PAIR_DANCE_STATES 32
 
+// Opponent model. The pair search cannot see the human's pending commands, so
+// every trial is scored against a small weighted set of joint foe forecasts
+// instead of a single assumed-worst pattern: the strongest damage pattern, a
+// credible alternative (redirection, or the same foes focusing the other
+// target), and a passive turn that damages neither of us (spread that misses
+// our slots, setup, support). Weights are percentages; whatever the available
+// patterns do not use falls back to the primary one.
+#define PAIR_FORECASTS 3
+#define PAIR_FORECAST_ALTERNATE 30
+#define PAIR_FORECAST_PASSIVE 15
+// Expected value drives the choice. A small pessimism share keeps a rare
+// catastrophe visible without restoring assume-the-worst guarding.
+#define PAIR_RISK_AVERSION 25
+
+// Guard policy. A shield's simulated HP saving is not all permanent: with no
+// payoff the same threat simply returns next turn and the foes can focus the
+// unprotected ally instead. Bank only the share a payoff makes real, and pay a
+// flat tempo cost so an empty shield loses ties to an action that does something.
+#define PAIR_GUARD_TEMPO 10
+#define PAIR_GUARD_BANKED_BASE 45
+#define PAIR_GUARD_BANKED_WAIT 40
+#define PAIR_GUARD_BANKED_PARTNER 25
+
 static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MOVE_REVELATION_DANCE, MOVE_AQUA_STEP, MOVE_FEATHER_DANCE};
 
 // Stop optional comparisons after one second, leaving room under the 1.2s
@@ -184,6 +207,7 @@ struct PairEvaluation
     struct PairDancerMoveCache *dancer[MAX_BATTLERS_COUNT][ARRAY_COUNT(sCopiedDances)];
     enum Type revelationType[MAX_BATTLERS_COUNT][2];
     u8 protectChance[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    bool8 waitingPayoff; // Evaluating side has a concrete reason to spend a turn waiting.
     u8 encoreGuardIndex[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // Move slot + 1; zero is ineligible.
     s8 encoreGuardPriority[MAX_BATTLERS_COUNT];
     bool8 sleepClause;
@@ -779,11 +803,13 @@ static s32 PairJointFoeForecast(const struct PairEvaluation *ev, enum BattlerId 
     return score;
 }
 
-static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId actor, struct PairAction forecasts[2][2])
+static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId actor,
+    struct PairAction forecasts[PAIR_FORECASTS][2], u8 weights[PAIR_FORECASTS])
 {
     enum BattlerId first = GetOppositeBattler(actor);
     enum BattlerId second = GetPartnerBattler(first);
     enum BattlerId partner = GetPartnerBattler(actor);
+    weights[0] = 100;
     if (ev->count[first] == 1 && ev->count[second] == 1)
     {
         forecasts[0][0] = ev->choices[first][0];
@@ -826,13 +852,13 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
                 forecasts[0][1] = ev->choices[second][right];
             }
         }
-    // A revealed redirector is a credible alternative to the strongest
-    // damage forecast. Reuse the second slot, not another forecast/turn tree.
-    // Otherwise repeated Follow Me can keep feeding an immune recipient
-    // while every trial assumes the foe attacks instead. Choices already
-    // exclude exhausted, Taunted and otherwise unavailable moves. Retain the
-    // primary damage forecast: last turn's move is not the pending command.
-    for (u32 foe = 0; foe < ARRAY_COUNT(foes); foe++)
+    u32 count = 1;
+    // A revealed redirector is a credible alternative to the strongest damage
+    // forecast. Otherwise repeated Follow Me can keep feeding an immune
+    // recipient while every trial assumes the foe attacks instead. Choices
+    // already exclude exhausted, Taunted and otherwise unavailable moves.
+    // Retain the primary damage forecast: last turn's move is not a command.
+    for (u32 foe = 0; foe < ARRAY_COUNT(foes) && count == 1; foe++)
     {
         enum BattlerId redirector = foes[foe];
         enum Move previous = gAiLogicData->lastUsedMove[redirector];
@@ -848,25 +874,135 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
             forecasts[1][0] = forecasts[0][0];
             forecasts[1][1] = forecasts[0][1];
             forecasts[1][foe] = *action;
-            return 2;
+            weights[1] = PAIR_FORECAST_ALTERNATE;
+            count = 2;
+            break;
         }
     }
     // A fixed target forecast can make Protect look like it shields both
     // allies: the opponent could simply focus the unprotected partner. Keep
-    // one strongest different damage-target pattern from the same enumeration.
-    // This is bounded uncertainty, not access to pending human commands.
-    u32 alternate = 0;
-    for (u32 mask = 1; mask < ARRAY_COUNT(maskScores); mask++)
-        if (mask != bestMask && maskScores[mask] > 0
-         && (alternate == 0 || maskScores[mask] > maskScores[alternate]))
-            alternate = mask;
-    if (alternate != 0 && bestMask != 0)
+    // the strongest different damage-target pattern from the same enumeration.
+    if (count == 1 && bestMask != 0)
     {
-        forecasts[1][0] = maskChoices[alternate][0];
-        forecasts[1][1] = maskChoices[alternate][1];
-        return 2;
+        u32 alternate = 0;
+        for (u32 mask = 1; mask < ARRAY_COUNT(maskScores); mask++)
+            if (mask != bestMask && maskScores[mask] > 0
+             && (alternate == 0 || maskScores[mask] > maskScores[alternate]))
+                alternate = mask;
+        if (alternate != 0)
+        {
+            forecasts[1][0] = maskChoices[alternate][0];
+            forecasts[1][1] = maskChoices[alternate][1];
+            weights[1] = PAIR_FORECAST_ALTERNATE;
+            count = 2;
+        }
     }
-    return 1;
+    // The opponent does not have to attack us at all. A spread that our slots
+    // resist, a setup turn or a support turn is the pattern that punishes a
+    // reflexive shield, so it carries real weight instead of being discarded
+    // by an assume-the-worst comparison.
+    if (bestMask != 0 && maskScores[0] != INT_MIN)
+    {
+        forecasts[count][0] = maskChoices[0][0];
+        forecasts[count][1] = maskChoices[0][1];
+        weights[count] = PAIR_FORECAST_PASSIVE;
+        count++;
+    }
+    weights[0] = 100;
+    for (u32 index = 1; index < count; index++)
+        weights[0] -= weights[index];
+    return count;
+}
+
+// Which forecast actions a chosen guard actually stops. Contact shields and
+// Crafty Shield deny no damage here; their value stays in the trial itself.
+static bool32 PairGuardStops(enum Move guard, enum BattlerId user, enum BattlerId covered,
+    enum BattlerId foe, const struct PairAction *action)
+{
+    if (!PairForecastHitsTarget(foe, action, covered))
+        return FALSE;
+    enum ProtectMethod method = GetMoveProtectMethod(guard);
+    if (GetProtectType(method) == PROTECT_TYPE_SINGLE)
+        return covered == user;
+    switch (method)
+    {
+    case PROTECT_WIDE_GUARD:
+        return PairSpread(action->executedMove);
+    case PROTECT_QUICK_GUARD:
+        return action->priority > 0;
+    case PROTECT_MAT_BLOCK:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+// Expected damage the guard denies this turn, in the same health units
+// PairMonValue uses (a healthy member is worth 180), plus the knockout credit
+// PairJointFoeForecast applies when the denial is guaranteed.
+static s32 PairGuardDeniedValue(const struct PairEvaluation *ev, enum BattlerId user,
+    const struct PairAction *actions)
+{
+    enum Move guard = actions[user].move;
+    s32 value = 0;
+    for (enum BattlerId covered = 0; covered < gBattlersCount; covered++)
+    {
+        if (!IsBattlerAlive(covered) || !IsBattlerAlly(user, covered))
+            continue;
+        u32 hp = gBattleMons[covered].hp;
+        u32 expected = 0, median = hp, guaranteed = hp;
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            if (!IsBattlerAlive(foe) || IsBattlerAlly(user, foe) || actions[foe].index == PAIR_IDLE
+             || !PairGuardStops(guard, user, covered, foe, &actions[foe]))
+                continue;
+            const struct SimulatedDamage *damage = &gAiLogicData->simulatedDmg[foe][covered][actions[foe].index];
+            u32 chance = min(100, gAiLogicData->moveAccuracy[foe][covered][actions[foe].index]);
+            u32 dealt = PairForecastDamage(ev, foe, covered, &actions[foe], median, damage->median);
+            median -= dealt;
+            expected += dealt * chance / 100;
+            guaranteed -= PairForecastDamage(ev, foe, covered, &actions[foe], guaranteed, damage->minimum);
+        }
+        value += (s32)(expected * 180 / max(1, gBattleMons[covered].maxHP));
+        if (!guaranteed)
+            value += 80;
+    }
+    return value;
+}
+
+// A partner turn the shield genuinely buys: an authored field or setup reward
+// (Trick Room, Tailwind, weather, a stat boost), a Fake Out turn, or a
+// knockout the partner is certain to land while the guard absorbs the reply.
+static bool32 PairGuardPartnerPayoff(enum BattlerId user, const struct PairAction *actions)
+{
+    enum BattlerId partner = GetPartnerBattler(user);
+    if (!IsBattlerAlive(partner) || actions[partner].index == PAIR_IDLE)
+        return FALSE;
+    const struct PairAction *action = &actions[partner];
+    if (GetMoveEffect(action->move) == EFFECT_PROTECT)
+        return FALSE;
+    if (action->planScore > 0 || action->move == MOVE_FAKE_OUT)
+        return TRUE;
+    if (IsBattleMoveStatus(action->executedMove))
+        return FALSE;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        if (IsBattlerAlive(foe) && !IsBattlerAlly(user, foe)
+         && gAiLogicData->simulatedDmg[partner][foe][action->index].minimum >= gBattleMons[foe].hp
+         && gAiLogicData->moveAccuracy[partner][foe][action->index] >= 100)
+            return TRUE;
+    return FALSE;
+}
+
+// The share of the denied damage that waiting actually banks. Without a payoff
+// the threat returns next turn, so most of it is only postponed.
+static s32 PairGuardDiscount(const struct PairEvaluation *ev, enum BattlerId user,
+    const struct PairAction *actions)
+{
+    u32 banked = PAIR_GUARD_BANKED_BASE
+        + (ev->waitingPayoff ? PAIR_GUARD_BANKED_WAIT : 0)
+        + (PairGuardPartnerPayoff(user, actions) ? PAIR_GUARD_BANKED_PARTNER : 0);
+    banked = min(100, banked);
+    return PairGuardDeniedValue(ev, user, actions) * (s32)(100 - banked) / 100;
 }
 
 static bool32 PairIsPassiveGuard(const struct PairAction *action)
@@ -2666,6 +2802,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             for (enum BattlerId next = 0; next < gBattlersCount; next++)
                 if (!(acted & (1u << next)) && hp[next] && actions[next].index != PAIR_IDLE)
                     hasLaterMove = TRUE;
+            // Spending the action is a cost even when the shield then fails.
+            if (sign > 0 && !copy)
+                score -= PAIR_GUARD_TEMPO;
             if (!chance || !hasLaterMove)
                 continue;
             if (encoredGuards & (1u << actor))
@@ -2686,6 +2825,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 continue;
             if (chance < 100)
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+            if (sign > 0 && !copy)
+                score -= PairGuardDiscount(ev, actor, actions);
             if (move == MOVE_WIDE_GUARD)
                 wideGuard |= 1u << GetBattlerSide(actor);
             else if (move == MOVE_QUICK_GUARD)
@@ -4176,11 +4317,13 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     }
     // Confirmed human actions have exactly one choice. Only genuinely unknown
     // actors retain the alternative-move/target forecast.
-    struct PairAction forecasts[2][2];
-    u32 forecastCount = ChooseJointFoeForecast(ev, actor, forecasts);
+    struct PairAction forecasts[PAIR_FORECASTS][2];
+    u8 forecastWeights[PAIR_FORECASTS] = {0};
+    u32 forecastCount = ChooseJointFoeForecast(ev, actor, forecasts, forecastWeights);
     enum BattlerId firstFoe = GetOppositeBattler(actor);
     enum BattlerId secondFoe = GetPartnerBattler(firstFoe);
     bool32 canWait = PairWaitingHasPayoff(ev, actor);
+    ev->waitingPayoff = canWait;
     bool32 emptySoloGuard = !canWait && !IsBattlerAlive(partner)
         && ev->board.reserveValue[ev->side] == 0;
     bool32 hasAlternative = FALSE;
@@ -4215,17 +4358,19 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             if (emptySoloGuard && hasAlternative && PairIsPassiveGuard(&ev->action[actor])
              && GetProtectType(GetMoveProtectMethod(ev->action[actor].move)) == PROTECT_TYPE_SINGLE)
                 continue;
-            s32 score = INT_MAX;
+            // Expected value over the weighted opponent model, with a
+            // bounded pessimism share. Taking the minimum instead made every
+            // credible knockout pattern demand a shield.
+            s32 total = 0, worst = INT_MAX;
             for (u32 forecast = 0; forecast < forecastCount; forecast++)
             {
                 ev->action[firstFoe] = forecasts[forecast][0];
                 ev->action[secondFoe] = forecasts[forecast][1];
                 s32 forecastScore = ScorePairWithImmediateEffects(ev);
-                score = min(score, forecastScore);
-                // A second outcome cannot improve this worst-case score.
-                if (score <= best)
-                    break;
+                total += forecastScore * forecastWeights[forecast];
+                worst = min(worst, forecastScore);
             }
+            s32 score = (total / 100 * (100 - PAIR_RISK_AVERSION) + worst * PAIR_RISK_AVERSION) / 100;
             if (score > best)
             {
                 best = score;

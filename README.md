@@ -5,19 +5,19 @@ The canonical Game Book is v4; the older 7.0/7.1 labels refer to its ROM lineage
 Start with [the short reading guide](Game%20Blueprint/Game_Guide_Reading_Copy.txt)
 or [the current checkpoint](docs/CONTINUE.md).
 
-## Current progress — September 14, 2026
+## Current progress — September 15, 2026
 
 | Track | Current state |
 | --- | --- |
-| Collaborative team review | Reviewed through Rustboro Gym. Historical review position **28** includes two later-access Route115 trainers; the actual pre-tunnel-thug pool is **26 encounters**. The book's battle/access guide owns the early boundary. |
-| Early access and Joey | **22** encounters available before the Stone Badge; Cut adds Dawson, Sarah, Janice and Jerry. Joey now uses Pawmi / Galarian Farfetch'd / Clefairy / Lechonk for critical-hit offense and support, leaving Belly Drum to Calvin. |
-| Rustboro Gym | Four six-Pokémon teams: Josh’s minerals, Tommy’s fossil reef, Marc’s Power Spot team, and Roxanne’s **Mega Aerodactyl / Tailwind** offense. Roxanne has no Trick Room. |
-| Opening economy | Gifts/pickups through battle 16 reconciled; pending-reward fixes and scoped native checks completed. Roxanne gives Old Amber; Steven later gives the bracelet and Aerodactylite together. |
+| Goal | Consolidation goal active (`docs/GOAL.md`): one baseline, the new campaign spine, narrow economy, then the battle acceptance ladder. |
 | Campaign roster | **341 encounters, 324 encounter groups, 368 party variants.** All 65 Gym trainer/leader parties have six Pokémon. The book, active parties and Hoenn battle IDs pass the exact roster check. |
-| Earned playthrough | **C15, Medium, cap 24.** 41 distinct trainer wins are evidenced; the paused Dwayne retest save contains 40 clears. Brawly and the manor song are complete. |
-| Verification | Production ROM builds and passes release gates. Focused Mega reveal/eligibility tests and native reward-dialogue checks pass. Revised team levels remain provisional; full-game balance and acceptance are unfinished. |
+| Spine and caps | Four acts, 15 cap milestones, continuous Groudon-to-Kyogre crisis; Birth Island, Scanner and Regis optional. Sandstrewn's collapse seals no unique content. |
+| Megas | All 99 stones held; generated Mega register with a signature owner for each. Seven mandatory legendary scenes carry authored sets. |
+| Economy | Money buys evolution items, Balls and cosmetics; first-clear prize money only; Poipole and Genesect on Circuit BP. |
+| Acceptance ladder | L0 authored 341 · L1 AI fixtures 50 · L2 benchmarked 2 · L3 earned clears 40 (generated in the book). |
+| Verification | Normal, headless and test ROMs build; 76/76 campaign tests; seven book-consistency checks and every static gate pass. |
 
-**Current work:** finish the outstanding battle AI, Mega-budget support and integrated ROM delivery, then review major battles first: Elite Four/Champion, whole Gyms, Magma/Aqua story groups, then the remaining trainers. The earned C15 run stays paused.
+**Current work:** dialogue unification against the new spine, then resume the earned run and move encounters up the ladder major-battle-first (League, whole Gyms, Magma/Aqua groups, then the rest).
 
 **Emerald Studio** is a local browser workspace
 backed by native mGBA. Start it with:
@@ -33,8 +33,6 @@ headless scene replay, automatic contact sheets, before/after comparisons, NPC
 dialogue search, sprite atlases and source history. Install the Codex skill with
 `python3 tools/studio/install_skill.py`.
 See [verification](docs/VERIFICATION.md) for setup and supported chapter fixtures.
-The next review starts after Rustboro Gym; do not silently resume the Dwayne
-experiment or replace its preserved save with a synthetic fixture.
 
 The main creative check after every team build or review is
 **“Could this team be cooler?”** Design memorable,

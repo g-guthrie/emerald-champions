@@ -62,8 +62,7 @@ reference parties (Phase 2), never by restricting the player's build.
 
 ## Phases
 
-See `docs/CONSOLIDATION_PLAN.md` while it exists; it folds into
-`docs/CONTINUE.md` when Phase 0 completes.
+The plan folded into `docs/CONTINUE.md` (decisions log) on September 15.
 
 0. One baseline, one truth: single clone, generated numbers, consistency gate,
    known contradictions closed, book on a diet.

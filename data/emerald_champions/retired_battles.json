@@ -1,0 +1,1176 @@
+{
+  "_source": "work/trainer-85-100-implementation/cut-reconciliation.json (first_pass, additional); E0126 and E0133 added one time from the guide's prior hand-authored ledger paragraph, corroborated against src/data/trainers.party, include/constants/opponents.h and this file's git history (commit 5633b8eae3).",
+  "retired_battles": [
+    {
+      "group": "E0013",
+      "map": "Route104",
+      "identities": [
+        "TRAINER_HALEY_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0015",
+      "map": "Route104",
+      "identities": [
+        "TRAINER_IVAN"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0018",
+      "map": "Route115",
+      "identities": [
+        "TRAINER_HECTOR"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0044",
+      "map": "Route109",
+      "identities": [
+        "TRAINER_RICKY_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0057",
+      "map": "Route110_TrickHousePuzzle1",
+      "identities": [
+        "TRAINER_ROBIN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0060",
+      "map": "Route110",
+      "identities": [
+        "TRAINER_EDWIN_1",
+        "TRAINER_JOSEPH"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0061",
+      "map": "Route110",
+      "identities": [
+        "TRAINER_ALYSSA",
+        "TRAINER_EDWARD"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0065",
+      "map": "Route110",
+      "identities": [
+        "TRAINER_ABIGAIL_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0066",
+      "map": "Route110",
+      "identities": [
+        "TRAINER_BENJAMIN_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0081",
+      "map": "Route111",
+      "identities": [
+        "TRAINER_HAYDEN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0084",
+      "map": "Route111",
+      "identities": [
+        "TRAINER_CELINA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0087",
+      "map": "Route118",
+      "identities": [
+        "TRAINER_DALTON_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0096",
+      "map": "Route111",
+      "identities": [
+        "TRAINER_CELIA"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0097",
+      "map": "Route111",
+      "identities": [
+        "TRAINER_BRYAN"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0098",
+      "map": "Route111",
+      "identities": [
+        "TRAINER_BRANDEN"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0100",
+      "map": "Route110_TrickHousePuzzle2",
+      "identities": [
+        "TRAINER_PAUL"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0106",
+      "map": "Route112",
+      "identities": [
+        "TRAINER_TRENT_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0107",
+      "map": "Route112",
+      "identities": [
+        "TRAINER_LARRY"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0112",
+      "map": "Route113",
+      "identities": [
+        "TRAINER_MADELINE_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0114",
+      "map": "Route113",
+      "identities": [
+        "TRAINER_LAO_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0117",
+      "map": "Route114",
+      "identities": [
+        "TRAINER_NOLAN"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0119",
+      "map": "Route114",
+      "identities": [
+        "TRAINER_CLAUDE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0121",
+      "map": "Route114",
+      "identities": [
+        "TRAINER_TYRA_AND_IVY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0122",
+      "map": "Route114",
+      "identities": [
+        "TRAINER_SHANE"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0124",
+      "map": "Route114",
+      "identities": [
+        "TRAINER_BERNIE_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0129",
+      "map": "MeteorFalls_1F_2R",
+      "identities": [
+        "TRAINER_JOHN_AND_JAY_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0140",
+      "map": "MtChimney",
+      "identities": [
+        "TRAINER_MELISSA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0141",
+      "map": "MtChimney",
+      "identities": [
+        "TRAINER_SHEILA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0143",
+      "map": "MtChimney",
+      "identities": [
+        "TRAINER_SAWYER_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0156",
+      "map": "Route111",
+      "identities": [
+        "TRAINER_DAISUKE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0158",
+      "map": "AshenWoods",
+      "identities": [
+        "TRAINER_MARTIN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0172",
+      "map": "Route110_TrickHousePuzzle4",
+      "identities": [
+        "TRAINER_CORA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0174",
+      "map": "Route110_TrickHousePuzzle4",
+      "identities": [
+        "TRAINER_PAULA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0178",
+      "map": "Route105",
+      "identities": [
+        "TRAINER_BEVERLY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0179",
+      "map": "Route105",
+      "identities": [
+        "TRAINER_IMANI"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0181",
+      "map": "Route105",
+      "identities": [
+        "TRAINER_ANDRES_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0183",
+      "map": "Route106",
+      "identities": [
+        "TRAINER_KYLA"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0185",
+      "map": "Route107",
+      "identities": [
+        "TRAINER_TONY_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0186",
+      "map": "Route107",
+      "identities": [
+        "TRAINER_DENISE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0188",
+      "map": "Route107",
+      "identities": [
+        "TRAINER_LISA_AND_RAY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0189",
+      "map": "Route107",
+      "identities": [
+        "TRAINER_CAMRON"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0193",
+      "map": "Route108",
+      "identities": [
+        "TRAINER_MISSY"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0195",
+      "map": "Route108",
+      "identities": [
+        "TRAINER_CORY_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0196",
+      "map": "AbandonedShip_Corridors_1F",
+      "identities": [
+        "TRAINER_CHARLIE"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0198",
+      "map": "AbandonedShip_Rooms2_1F",
+      "identities": [
+        "TRAINER_KIRA_AND_DAN_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0201",
+      "map": "AbandonedShip_Rooms_1F",
+      "identities": [
+        "TRAINER_DEMETRIUS"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0202",
+      "map": "AbandonedShip_Rooms_1F",
+      "identities": [
+        "TRAINER_THALIA_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0203",
+      "map": "Route109",
+      "identities": [
+        "TRAINER_DAVID"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0204",
+      "map": "Route109",
+      "identities": [
+        "TRAINER_ALICE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0205",
+      "map": "Route109",
+      "identities": [
+        "TRAINER_AUSTINA"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0207",
+      "map": "Route109",
+      "identities": [
+        "TRAINER_CARTER"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0215",
+      "map": "Route103",
+      "identities": [
+        "TRAINER_RHETT"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0219",
+      "map": "Route115",
+      "identities": [
+        "TRAINER_KOICHI"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0221",
+      "map": "Route115",
+      "identities": [
+        "TRAINER_JAIDEN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0225",
+      "map": "Route118",
+      "identities": [
+        "TRAINER_PERRY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0226",
+      "map": "Route118",
+      "identities": [
+        "TRAINER_CHESTER"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0229",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_BRENT"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0233",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_GREG"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0234",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_KENT"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0239",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_TAKASHI"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0240",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_CHRIS"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0242",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_RACHEL"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0250",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_YASU"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0252",
+      "map": "Route119",
+      "identities": [
+        "TRAINER_FABIAN"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0257",
+      "map": "Route120",
+      "identities": [
+        "TRAINER_JEFFREY_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0259",
+      "map": "Route120",
+      "identities": [
+        "TRAINER_CHIP"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0260",
+      "map": "Route120",
+      "identities": [
+        "TRAINER_CLARISSA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0261",
+      "map": "Route120",
+      "identities": [
+        "TRAINER_ANGELICA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0264",
+      "map": "Route120",
+      "identities": [
+        "TRAINER_LEONEL"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0269",
+      "map": "Route123",
+      "identities": [
+        "TRAINER_VIOLET"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0270",
+      "map": "Route123",
+      "identities": [
+        "TRAINER_CAMERON_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0271",
+      "map": "Route123",
+      "identities": [
+        "TRAINER_JACKI_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0275",
+      "map": "Route123",
+      "identities": [
+        "TRAINER_ALBERTO"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0276",
+      "map": "Route123",
+      "identities": [
+        "TRAINER_ED"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0280",
+      "map": "Route123",
+      "identities": [
+        "TRAINER_DAVIS"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0281",
+      "map": "Route123",
+      "identities": [
+        "TRAINER_FERNANDO_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0292",
+      "map": "Route121",
+      "identities": [
+        "TRAINER_WALTER_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0293",
+      "map": "Route121",
+      "identities": [
+        "TRAINER_TAMMY"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0294",
+      "map": "Route121",
+      "identities": [
+        "TRAINER_KATE_AND_JOY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0295",
+      "map": "Route121",
+      "identities": [
+        "TRAINER_JESSICA_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0296",
+      "map": "Route121",
+      "identities": [
+        "TRAINER_CALE"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0305",
+      "map": "MtPyre_2F",
+      "identities": [
+        "TRAINER_MARK"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0306",
+      "map": "MtPyre_2F",
+      "identities": [
+        "TRAINER_DEZ_AND_LUKE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0307",
+      "map": "MtPyre_2F",
+      "identities": [
+        "TRAINER_LEAH"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0308",
+      "map": "MtPyre_2F",
+      "identities": [
+        "TRAINER_ZANDER"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0309",
+      "map": "MtPyre_3F",
+      "identities": [
+        "TRAINER_WILLIAM"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0310",
+      "map": "MtPyre_3F",
+      "identities": [
+        "TRAINER_KAYLA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0312",
+      "map": "MtPyre_4F",
+      "identities": [
+        "TRAINER_ATSUSHI"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0313",
+      "map": "MtPyre_5F",
+      "identities": [
+        "TRAINER_TASHA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0314",
+      "map": "MtPyre_6F",
+      "identities": [
+        "TRAINER_VALERIE_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0315",
+      "map": "MtPyre_6F",
+      "identities": [
+        "TRAINER_CEDRIC"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0351",
+      "map": "Route124",
+      "identities": [
+        "TRAINER_JENNY_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0352",
+      "map": "Route124",
+      "identities": [
+        "TRAINER_GRACE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0355",
+      "map": "Route124",
+      "identities": [
+        "TRAINER_DECLAN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0356",
+      "map": "Route124",
+      "identities": [
+        "TRAINER_ISABELLA"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0358",
+      "map": "Route125",
+      "identities": [
+        "TRAINER_STAN"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0359",
+      "map": "Route125",
+      "identities": [
+        "TRAINER_TANYA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0361",
+      "map": "Route125",
+      "identities": [
+        "TRAINER_ERNEST_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0362",
+      "map": "Route125",
+      "identities": [
+        "TRAINER_KIM_AND_IRIS"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0363",
+      "map": "Route125",
+      "identities": [
+        "TRAINER_PRESLEY"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0365",
+      "map": "Route126",
+      "identities": [
+        "TRAINER_BARRY"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0366",
+      "map": "Route126",
+      "identities": [
+        "TRAINER_DEAN"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0371",
+      "map": "Route126",
+      "identities": [
+        "TRAINER_SIENNA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0372",
+      "map": "Route126",
+      "identities": [
+        "TRAINER_PABLO_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0373",
+      "map": "Route127",
+      "identities": [
+        "TRAINER_CAMDEN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0374",
+      "map": "Route127",
+      "identities": [
+        "TRAINER_DONNY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0376",
+      "map": "Route127",
+      "identities": [
+        "TRAINER_HENRY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0380",
+      "map": "Route127",
+      "identities": [
+        "TRAINER_KOJI_1"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0381",
+      "map": "Route128",
+      "identities": [
+        "TRAINER_ISAIAH_1"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0386",
+      "map": "Route128",
+      "identities": [
+        "TRAINER_HARRISON"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0387",
+      "map": "Route128",
+      "identities": [
+        "TRAINER_CARLEE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0411",
+      "map": "Route110_TrickHousePuzzle6",
+      "identities": [
+        "TRAINER_BENNY"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0413",
+      "map": "Route129",
+      "identities": [
+        "TRAINER_CHASE"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0414",
+      "map": "Route129",
+      "identities": [
+        "TRAINER_ALLISON"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0415",
+      "map": "Route129",
+      "identities": [
+        "TRAINER_REED"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0416",
+      "map": "Route129",
+      "identities": [
+        "TRAINER_TISHA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0417",
+      "map": "Route129",
+      "identities": [
+        "TRAINER_CLARENCE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0418",
+      "map": "Route130",
+      "identities": [
+        "TRAINER_RODNEY"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0419",
+      "map": "Route130",
+      "identities": [
+        "TRAINER_KATIE"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0421",
+      "map": "Route131",
+      "identities": [
+        "TRAINER_RICHARD"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0425",
+      "map": "Route131",
+      "identities": [
+        "TRAINER_RELI_AND_IAN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0426",
+      "map": "Route131",
+      "identities": [
+        "TRAINER_TALIA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0427",
+      "map": "Route131",
+      "identities": [
+        "TRAINER_KEVIN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0428",
+      "map": "Route132",
+      "identities": [
+        "TRAINER_GILBERT"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0429",
+      "map": "Route132",
+      "identities": [
+        "TRAINER_DANA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0431",
+      "map": "Route132",
+      "identities": [
+        "TRAINER_KIYO"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0437",
+      "map": "Route133",
+      "identities": [
+        "TRAINER_DEBRA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0440",
+      "map": "Route133",
+      "identities": [
+        "TRAINER_BECK"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0443",
+      "map": "Route134",
+      "identities": [
+        "TRAINER_JACK"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0444",
+      "map": "Route134",
+      "identities": [
+        "TRAINER_LAUREL"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0445",
+      "map": "Route134",
+      "identities": [
+        "TRAINER_ALEX"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0449",
+      "map": "Route134",
+      "identities": [
+        "TRAINER_REYNA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0451",
+      "map": "Route134",
+      "identities": [
+        "TRAINER_KELVIN"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0470",
+      "map": "Route110_TrickHousePuzzle7",
+      "identities": [
+        "TRAINER_JOSHUA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0471",
+      "map": "Route110_TrickHousePuzzle7",
+      "identities": [
+        "TRAINER_PATRICIA"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0474",
+      "map": "Route110_TrickHousePuzzle7",
+      "identities": [
+        "TRAINER_ALVARO"
+      ],
+      "tier": "regular"
+    },
+    {
+      "group": "E0502",
+      "map": "SSTidalLowerDeck",
+      "identities": [
+        "TRAINER_PHILLIP"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0503",
+      "map": "SSTidalLowerDeck",
+      "identities": [
+        "TRAINER_LEONARD"
+      ],
+      "tier": "casual"
+    },
+    {
+      "group": "E0508",
+      "map": "SSTidalRooms",
+      "identities": [
+        "TRAINER_GARRET"
+      ],
+      "tier": "casual"
+    }
+  ],
+  "additional_retirements": [
+    {
+      "group": "E0051",
+      "identities": [
+        "TRAINER_GRUNT_MUSEUM_2"
+      ],
+      "reason": "remove the second Museum battle; retain both grunt actors/dialogue and the first ambush plus Archie. No repeated prize or extra cap."
+    },
+    {
+      "group": "E0130-B02",
+      "identities": [
+        "TRAINER_GRUNT_MT_CHIMNEY_2"
+      ],
+      "reason": "remove this one sand/control grunt fight. E0130-B01 remains the required sun grunt. Keep the second actor's existing story position and revise its nonbattle dialogue after spatial review."
+    },
+    {
+      "group": "E0266",
+      "identities": [
+        "TRAINER_GABBY_AND_TY_3"
+      ],
+      "reason": "retire the repetitive third sound-core interview battle. Reporter state advances from retained stage 2 to retained stage 5 without an unseen fight or award."
+    },
+    {
+      "group": "E0291",
+      "identities": [
+        "TRAINER_GABBY_AND_TY_4"
+      ],
+      "reason": "retire the repetitive fourth sound-core/Meltan interview battle. Preserve Meltan's player discovery and do not force an unrelated replacement showcase."
+    },
+    {
+      "group": "E0406",
+      "identities": [
+        "TRAINER_GRUNT_SPACE_CENTER_6"
+      ],
+      "reason": "retire the redundant sand-speed leg. The required upstairs sequence becomes grunt 5 (E0405) then grunt 7 (E0407), with explicit between-leg control and no dangling third-battle dispatch."
+    },
+    {
+      "group": "E0126",
+      "map": "Route114",
+      "identities": [
+        "TRAINER_ANGELINA"
+      ],
+      "tier": "casual",
+      "reason": "Angelina's branch retired as a repeated nearby lower-tier formation; Lucas (TRAINER_LUCAS_1, E0126) stays."
+    },
+    {
+      "group": "E0133",
+      "map": "JaggedPass",
+      "identities": [
+        "TRAINER_ERIC"
+      ],
+      "tier": "casual",
+      "reason": "Eric retired as a repeated nearby lower-tier formation."
+    }
+  ],
+  "total_retired_groups": 146,
+  "total_retired_identities": 148
+}

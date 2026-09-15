@@ -25,6 +25,7 @@ from generate_emerald_champions_mega_archive import stones
 from economy_reference import generate as generate_economy
 import mega_register
 import acceptance_ladder
+import cut_ledger
 
 ROOT=Path(__file__).resolve().parents[1]
 BOOK=ROOT/'Game Blueprint/Emerald_Champions_Game_Book.txt'
@@ -288,9 +289,12 @@ def render_reference():
     lines+=mega_register_lines
     ladder_lines,ladder_catalog,ladder_paths=acceptance_ladder.generate(ROOT)
     lines+=ladder_lines
+    cut_ledger_lines,cut_ledger_catalog,cut_ledger_paths=cut_ledger.generate(ROOT)
+    lines+=cut_ledger_lines
     source_paths={Path(__file__),ROOT/'scripts/emerald_champions_teams.py',ROOT/'scripts/export_trainer_catalogue.py',teams.TEAMS,teams.MASTER,ROOT/'src/data/trainers.party',ROOT/'src/emerald_champions_opening.c',ROOT/'src/mega_stone_rewards.c',ROOT/'src/caps.c',ROOT/'src/field_specials.c',ROOT/'src/item.c',ROOT/'src/data/items.h',ROOT/'src/data/wild_encounters.json',ROOT/'src/data/pokemon/legendary_signs.h',ROOT/'src/data/pokemon/form_change_tables.h'}
     source_paths.update(mega_register_paths)
     source_paths.update(ladder_paths)
+    source_paths.update(cut_ledger_paths)
     source_paths.update(p for p,m in maps);source_paths.update(p.with_name('scripts.inc') for p,m in maps if p.with_name('scripts.inc').exists());source_paths.update((ROOT/'data/scripts').rglob('*.inc'));source_paths.update((ROOT/'src/data/pokemon/species_info').glob('*.h'));source_paths.update((ROOT/'include/config').glob('*.h'));source_paths.update(ROOT/p for p in ['src/data/emerald_champions_paid_evolution_items.h','src/data/emerald_champions_form_items.h','src/data/emerald_champions_mega_stones.h'])
     source_paths.update(dialogue_paths)
     source_paths.update(economy_paths)
@@ -303,7 +307,7 @@ def render_reference():
         'Known limits: this is not a full transcript, runtime access/necessity proof, stock-condition simulator or battle acceptance. Native providers and dynamic regional choices must be followed through their source owner. No claim that prose/code drift is impossible.',
         'Source SHA256: '+sha.hexdigest(),END]
     economy_catalog={k:v for k,v in economy_catalog.items() if k!='source_paths'}
-    inventory=dict(economy=economy_catalog,dialogue_coverage=dialogue_coverage,dialogue_routing=routing,paid_evolution_items=paid,form_items=forms,mega_stones=mega,pickups=pickups,literal_deliveries=gifts,local_shops=shops,literal_pokemon_providers=pokemon,mega_register=mega_register_catalog,acceptance_ladder=ladder_catalog)
+    inventory=dict(economy=economy_catalog,dialogue_coverage=dialogue_coverage,dialogue_routing=routing,paid_evolution_items=paid,form_items=forms,mega_stones=mega,pickups=pickups,literal_deliveries=gifts,local_shops=shops,literal_pokemon_providers=pokemon,mega_register=mega_register_catalog,acceptance_ladder=ladder_catalog,cut_ledger=cut_ledger_catalog)
     return '\n'.join(x.rstrip() for x in lines)+'\n',inventory
 
 
