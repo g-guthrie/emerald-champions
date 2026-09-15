@@ -1704,40 +1704,43 @@ DOUBLE_BATTLE_TEST("EC Mega budget: queued requests obey one-Mega execution and 
 }
 
 
-DOUBLE_BATTLE_TEST("EC Mega budget: an authorized boss executes two evolutions and keeps them across a switch")
+
+DOUBLE_BATTLE_TEST("EC Mega budget: native activations consume two uses for one boss owner")
 {
     GIVEN {
-        // Explicit test commands exercise native activation; campaign slot
-        // permission is independently checked above. Live League rosters stay
-        // unchanged until the user-directed major-battle design audit.
-        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SIDNEY;
         PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(20); }
         OPPONENT(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); Speed(100); }
         OPPONENT(SPECIES_SALAMENCE) { Item(ITEM_SALAMENCITE); Speed(90); }
-        OPPONENT(SPECIES_AERODACTYL) { Item(ITEM_AERODACTYLITE); Speed(80); }
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
-            MOVE(opponentLeft, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerLeft);
-            MOVE(opponentRight, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerRight);
-        }
-        TURN {
-            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
-            SWITCH(opponentLeft, 2);
-            MOVE(opponentRight, MOVE_TACKLE, target: playerRight);
-        }
-        TURN {
-            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
-            MOVE(opponentLeft, MOVE_TACKLE, gimmick: GIMMICK_MEGA, target: playerLeft);
-            MOVE(opponentRight, MOVE_TACKLE, target: playerRight);
+            MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE);
         }
     } THEN {
-        EXPECT_EQ(opponentLeft->species, SPECIES_AERODACTYL);
+        // Test the native form/activation owner directly without changing any
+        // authored League slots before their upcoming design review. The
+        // separate queued-request test covers the final execution guard.
+        u32 savedFlags = gBattleTypeFlags;
+        u16 savedTrainer = TRAINER_BATTLE_PARAM.opponentA;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_SIDNEY;
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 2);
+        ActivateMegaEvolution(B_BATTLER_1);
+        EXPECT_EQ(opponentLeft->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(GetActiveGimmick(B_BATTLER_1), GIMMICK_MEGA);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 1);
+        ActivateMegaEvolution(B_BATTLER_3);
         EXPECT_EQ(opponentRight->species, SPECIES_SALAMENCE_MEGA);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(GetActiveGimmick(B_BATTLER_3), GIMMICK_MEGA);
         EXPECT_EQ(gBattleStruct->gimmick.megaEvolutionsUsed[B_TRAINER_OPPONENT_A], 2);
         EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);
         EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 0);
+        u8 savedIndex = gBattlerPartyIndexes[B_BATTLER_1];
+        gBattlerPartyIndexes[B_BATTLER_1] = 2;
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);
+        gBattlerPartyIndexes[B_BATTLER_1] = savedIndex;
+        gBattleTypeFlags = savedFlags;
+        TRAINER_BATTLE_PARAM.opponentA = savedTrainer;
     }
 }

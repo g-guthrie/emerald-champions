@@ -3,7 +3,7 @@ EMERALD CHAMPIONS — GAME GUIDE, V4
 
 This book explains the game we are making. It owns the intended experience, story and design choices. Its short guide is followed by a generated reference containing exact teams, world data and source dialogue. Source files own those records; the reference is rebuilt and checked automatically. Test logs and development diaries stay outside the book. When a design changes, update this guide only where the experience changes and update the corresponding source at the same time.
 
-Current focus: finish the integrated AI/Mega/release work, then audit major battle groups first: Elite Four/Champion, whole Gyms, Magma/Aqua arcs and the remaining trainers. The Cut-enclosure block and the Rusturf-to-Dewford team designs are implemented; the seven Brawly Gym designs, seven first-arrival beach/Seashore House designs and the reviewed blocks through Flannery are implemented:131 first-access encounters, including optional summit/Lavaridge battles and the early Ashen Woods detour. The retained roster is341 encounters; Gina and Mia remain an explicit keep. The current task is the question-led design audit, with each trainer discussed in chat; full battle benchmarks and exhaustive AI validation are separate later work and do not block the next design group. The later earned C15 playthrough is a separate, paused development run; its save and unfinished Dwayne experiment are described in docs/CONTINUE.md. Reviewed teams are not automatically difficulty-tested. Later chapters below describe the intended campaign; native play and scene acceptance are unfinished.
+Current focus: finish the integrated AI/Mega/release work, then audit major battle groups first: Elite Four/Champion, whole Gyms, Magma/Aqua arcs and the remaining trainers. The Cut-enclosure block and the Rusturf-to-Dewford team designs are implemented; the seven Brawly Gym designs, seven first-arrival beach/Seashore House designs and the reviewed blocks through Flannery are implemented:131 first-access encounters, including optional summit/Lavaridge battles and the early Ashen Woods detour. The retained roster is341 encounters; Gina and Mia remain an explicit keep. The next task is the major-battle-first design audit, with each trainer discussed in chat; full battle benchmarks and exhaustive AI validation are separate later work and do not block the next design group. The later earned C15 playthrough is a separate, paused development run; its save and unfinished Dwayne experiment are described in docs/CONTINUE.md. Reviewed teams are not automatically difficulty-tested. Later chapters below describe the intended campaign; native play and scene acceptance are unfinished.
 
 1. THE EXPERIENCE
 -----------------
@@ -20,7 +20,7 @@ Mega allocation and endgame rule — user direction, September14
 
 All supported strategic Mega forms must receive a meaningful trainer-battle role. Stones, cosmetic variants and actually executed Mega showcases are separate coverage measures. The current source audit finds all99 stones held in permitted trainer slots, but Mega Rayquaza is not currently permitted on Steven's team; female Mega Meowstic, original-color Mega Magearna and the Droopy/Stretchy Mega Tatsugiri variants lack explicit owners. Mega Zygarde is conditional on Quincy's Power Construct reaching Complete Form first. None of those gaps is declared battle-validated. Exact coverage: work/trainer-through-flannery-implementation/mega-coverage.json.
 
-Ordinary trainers and the player retain one Mega Evolution per battle. Sidney, Phoebe, Glacia, Drake, Champion Wallace and the final optional former-Champion Steven exhibition may execute at most two. The budget belongs to the trainer, persists across switches and fainting, and counts actual transformations; it does not reset for a new battler. Existing slot permissions still apply. The engine support is being validated independently; the second League partners and any additional exceptions will be designed during the major-battle-first review, not filled by scattered replacements before that review. No Gym leader gets the two-Mega exception by default. Flannery has Mega Chandelure; Gerald Mega Charizard X, Eli Mega Camerupt and Danielle Mega Blaziken provide the other Lavaridge showcases.
+Ordinary trainers and the player retain one Mega Evolution per battle. Sidney, Phoebe, Glacia, Drake, Champion Wallace and the final optional former-Champion Steven exhibition may execute at most two. The budget belongs to the trainer, persists across switches and fainting, and counts actual transformations; it does not reset for a new battler. Existing slot permissions still apply. The engine support has focused native activation, budget, owner and execution-guard validation; the second League partners and any additional exceptions will be designed during the major-battle-first review, not filled by scattered replacements before that review. No Gym leader gets the two-Mega exception by default. Flannery has Mega Chandelure; Gerald Mega Charizard X, Eli Mega Camerupt and Danielle Mega Blaziken provide the other Lavaridge showcases.
 
 The next design audit starts with Elite Four/Champion, then whole Gyms and Magma/Aqua story groups, then remaining trainers. Allocate rare species, Megas and major strategies around those core battles before refining nearby lower-tier encounters. Existing first-access coverage remains evidence of reviewed designs and access, not the required ordering of future design discussions.
 
@@ -15302,17 +15302,17 @@ R1672 native provider | data/maps/Route118/scripts.inc:202 | Route118_EventScrip
   Native provider: N132
   Possible incoming branch Route118_EventScript_Rose | data/maps/Route118/scripts.inc:193: goto_if_eq VAR_RESULT, TRUE, Route118_EventScript_RematchRose
 
-R1673 native provider | data/maps/Route119/scripts.inc:353 | Route119_EventScript_RegisterJackson
+R1673 native provider | data/maps/Route119/scripts.inc:362 | Route119_EventScript_RegisterJackson
   special PlayerFaceTrainerAfterBattle
   Source-associated maps: Route119
   Native provider: N132
-  Possible incoming branch Route119_EventScript_Jackson | data/maps/Route119/scripts.inc:344: goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchJackson
+  Possible incoming branch Route119_EventScript_Jackson | data/maps/Route119/scripts.inc:353: goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchJackson
 
-R1674 native provider | data/maps/Route119/scripts.inc:374 | Route119_EventScript_RegisterCatherine
+R1674 native provider | data/maps/Route119/scripts.inc:383 | Route119_EventScript_RegisterCatherine
   special PlayerFaceTrainerAfterBattle
   Source-associated maps: Route119
   Native provider: N132
-  Possible incoming branch Route119_EventScript_Catherine | data/maps/Route119/scripts.inc:365: goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchCatherine
+  Possible incoming branch Route119_EventScript_Catherine | data/maps/Route119/scripts.inc:374: goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchCatherine
 
 R1675 native provider | data/maps/Route119_WeatherInstitute_2F/scripts.inc:105 | Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
   special GiveEmeraldChampionsPreparedPokemon
@@ -18797,21 +18797,21 @@ R2169 transfer | data/maps/Route109_SeashoreHouse/scripts.inc:59 | Route109_Seas
   Local branch/receipt/cost statements: checkmoney 300; goto_if_eq VAR_RESULT, FALSE, Route109_SeashoreHouse_EventScript_NotEnoughMoney; checkitemspace ITEM_SODA_POP; goto_if_eq VAR_RESULT, FALSE, Route109_SeashoreHouse_EventScript_NotEnoughSpace; removemoney 300
   Possible incoming branch Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop | data/maps/Route109_SeashoreHouse/scripts.inc:38: goto_if_eq VAR_RESULT, YES, Route109_SeashoreHouse_EventScript_BuySodaPop
 
-R2170 transfer | data/maps/Route110/scripts.inc:459 | Route110_EventScript_GiveItemfinder
+R2170 transfer | data/maps/Route110/scripts.inc:467 | Route110_EventScript_GiveItemfinder
   giveitem ITEM_DOWSING_MACHINE
   Source-associated maps: Route110
   Outputs/stock: ITEM_DOWSING_MACHINE [base cash 0]
   Local branch/receipt/cost statements: goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_ArchiveDowsingMachine
-  Possible incoming branch Route110_EventScript_BrendanDefeated | data/maps/Route110/scripts.inc:451:
-  Possible incoming branch Route110_EventScript_MayDefeated | data/maps/Route110/scripts.inc:420:
+  Possible incoming branch Route110_EventScript_BrendanDefeated | data/maps/Route110/scripts.inc:459:
+  Possible incoming branch Route110_EventScript_MayDefeated | data/maps/Route110/scripts.inc:428:
   Possible incoming branch Route110_EventScript_RivalRewardRetry | data/maps/Route110/scripts.inc:340: setvar VAR_0x8004, ITEM_DOWSING_MACHINE; goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalExit; checkplayergender; goto_if_eq VAR_RESULT, MALE, Route110_EventScript_MayExplainRetry
 
-R2171 transfer | data/maps/Route110/scripts.inc:465 | Route110_EventScript_ArchiveDowsingMachine
+R2171 transfer | data/maps/Route110/scripts.inc:473 | Route110_EventScript_ArchiveDowsingMachine
   addpcitem ITEM_DOWSING_MACHINE
   Source-associated maps: Route110
   Outputs/stock: ITEM_DOWSING_MACHINE [base cash 0]
   Local branch/receipt/cost statements: goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_DowsingMachineNoRoom
-  Possible incoming branch Route110_EventScript_GiveItemfinder | data/maps/Route110/scripts.inc:458: goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_ArchiveDowsingMachine
+  Possible incoming branch Route110_EventScript_GiveItemfinder | data/maps/Route110/scripts.inc:466: goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_ArchiveDowsingMachine
 
 R2172 transfer | data/maps/Route110_TrickHouseEnd/scripts.inc:110 | Route110_TrickHouseEnd_EventScript_CompletedPuzzle5
   giveitem ITEM_METAL_ALLOY
@@ -50239,7 +50239,7 @@ SOURCE data/text/tv.inc
   ContestLadyShow_Text_LostBadly: MC: Excuse me! Thanks for joining us on live TV! / How did your CONTEST appearance go? / BEAUTY: Nothing went right… For some reason, my {STR_VAR_2} couldn't attract any popularity. / MC: I hate to say it, but the POKéMON's coloration is a little wanting. / BEAUTY: … … … … … … …Sniff… Waaaaah! / Spectators: See that? The poor girl! / MC: Uh… Uh-oh… / Uh… That's all the time we have today! Thanks for tuning in!
 
 DIALOGUE COVERAGE
-3279 scripted map bindings; 7915 script literal blocks; 1681 native service callsites.
+3279 scripted map bindings; 7915 script literal blocks; 1683 native service callsites.
 Native service UI below is a literal-source supplement. Variable strings, localized formatting, player names and choices are retained as placeholders; this atlas is not a runtime transcript.
 Labels with multiple source definitions (often build alternatives): 1. Conditions above must be honored.
 
@@ -124929,7 +124929,8 @@ data/maps/Route110/scripts.inc:Route110_EventScript_RivalTalk => goto_if_eq VAR_
 data/maps/Route110/scripts.inc:Route110_EventScript_CheckRivalWon => goto_if_defeated TRAINER_MAY_ROUTE_110_TREECKO, Route110_EventScript_RivalAlreadyWon; goto_if_defeated TRAINER_MAY_ROUTE_110_TORCHIC, Route110_EventScript_RivalAlreadyWon; goto_if_defeated TRAINER_MAY_ROUTE_110_MUDKIP, Route110_EventScript_RivalAlreadyWon; goto_if_defeated TRAINER_BRENDAN_ROUTE_110_TREECKO, Route110_EventScript_RivalAlreadyWon; goto_if_defeated TRAINER_BRENDAN_ROUTE_110_TORCHIC, Route110_EventScript_RivalAlreadyWon; goto_if_defeated TRAINER_BRENDAN_ROUTE_110_MUDKIP, Route110_EventScript_RivalAlreadyWon
 data/maps/Route110/scripts.inc:Route110_EventScript_RivalRewardRetry => [NATIVE special CheckEmeraldChampionsHandoffItem]; goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalExit; msgbox Route110_Text_RivalRewardRetry, MSGBOX_DEFAULT; call Route110_EventScript_GiveItemfinder; goto_if_eq VAR_RESULT, MALE, Route110_EventScript_MayExplainRetry; msgbox Route110_Text_BrendanExplainItemfinder, MSGBOX_DEFAULT; goto Route110_EventScript_RivalExit
 data/maps/Route110/scripts.inc:Route110_EventScript_MayExplainRetry => msgbox Route110_Text_MayExplainItemfinder, MSGBOX_DEFAULT; goto Route110_EventScript_RivalExit
-data/maps/Route110/scripts.inc:Route110_EventScript_RivalScene => goto_if_eq VAR_ROUTE110_STATE, 1, Route110_EventScript_RivalSceneComplete; call Route110_EventScript_CheckRivalWon; goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalRewardRetry; call EventScript_CheckStoryDoubleBattleParty; call_if_eq VAR_RESULT, MALE, Route110_EventScript_PlayMayMusic; call_if_eq VAR_RESULT, FEMALE, Route110_EventScript_PlayBrendanMusic; call_if_eq VAR_0x8008, 1, Route110_EventScript_RivalApproachPlayer1; call_if_eq VAR_0x8008, 2, Route110_EventScript_RivalApproachPlayer2; call_if_eq VAR_0x8008, 3, Route110_EventScript_RivalApproachPlayer3; goto_if_eq VAR_RESULT, MALE, Route110_EventScript_MayBattle; goto_if_eq VAR_RESULT, FEMALE, Route110_EventScript_BrendanBattle
+data/maps/Route110/scripts.inc:Route110_EventScript_RivalNeedsTwoMons => msgbox EmeraldChampions_Text_NeedTwoPokemon, MSGBOX_DEFAULT
+data/maps/Route110/scripts.inc:Route110_EventScript_RivalScene => goto_if_eq VAR_ROUTE110_STATE, 1, Route110_EventScript_RivalSceneComplete; call Route110_EventScript_CheckRivalWon; goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalRewardRetry; [NATIVE special HasEnoughMonsForDoubleBattle]; goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, Route110_EventScript_RivalNeedsTwoMons; call_if_eq VAR_RESULT, MALE, Route110_EventScript_PlayMayMusic; call_if_eq VAR_RESULT, FEMALE, Route110_EventScript_PlayBrendanMusic; call_if_eq VAR_0x8008, 1, Route110_EventScript_RivalApproachPlayer1; call_if_eq VAR_0x8008, 2, Route110_EventScript_RivalApproachPlayer2; call_if_eq VAR_0x8008, 3, Route110_EventScript_RivalApproachPlayer3; goto_if_eq VAR_RESULT, MALE, Route110_EventScript_MayBattle; goto_if_eq VAR_RESULT, FEMALE, Route110_EventScript_BrendanBattle
 data/maps/Route110/scripts.inc:Route110_EventScript_MayBattle => msgbox Route110_Text_MayLetsBattle, MSGBOX_DEFAULT; [NATIVE special BufferEmeraldChampionsRivalBranch]; switch VAR_RESULT; case 0, Route110_EventScript_MayBattleTreecko; case 1, Route110_EventScript_MayBattleTorchic; case 2, Route110_EventScript_MayBattleMudkip
 data/maps/Route110/scripts.inc:Route110_EventScript_MayBattleTreecko => trainerbattle_no_intro_double TRAINER_MAY_ROUTE_110_TREECKO, Route110_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon; goto Route110_EventScript_MayDefeated
 data/maps/Route110/scripts.inc:Route110_EventScript_MayBattleTorchic => trainerbattle_no_intro_double TRAINER_MAY_ROUTE_110_TORCHIC, Route110_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon; goto Route110_EventScript_MayDefeated
@@ -125521,7 +125522,8 @@ data/maps/Route119/scripts.inc:Route119_EventScript_TryRemoveKecleon => [NATIVE 
 data/maps/Route119/scripts.inc:Route119_OnTransition => call Common_EventScript_SetupRivalGfxId; call Common_EventScript_SetupRivalOnBikeGfxId; call_if_eq VAR_WEATHER_INSTITUTE_STATE, 1, Route119_EventScript_MoveInstituteWorkersDownstairs; [NATIVE special SetRoute119Weather]
 data/maps/Route119/scripts.inc:Route119_EventScript_RivalTrigger1 => goto Route119_EventScript_RivalEncounter
 data/maps/Route119/scripts.inc:Route119_EventScript_RivalTrigger2 => goto Route119_EventScript_RivalEncounter
-data/maps/Route119/scripts.inc:Route119_EventScript_RivalEncounter => call_if_eq VAR_RESULT, MALE, Route119_EventScript_PlayMayMusic; call_if_eq VAR_RESULT, FEMALE, Route119_EventScript_PlayBrendanMusic; call_if_eq VAR_TEMP_1, 1, Route119_EventScript_RivalEnter1; call_if_eq VAR_TEMP_1, 2, Route119_EventScript_RivalEnter2; call_if_eq VAR_TEMP_1, 1, Route119_EventScript_SetRivalPos1; call_if_eq VAR_TEMP_1, 2, Route119_EventScript_SetRivalPos2; goto_if_eq VAR_RESULT, MALE, Route119_EventScript_BattleMay; goto_if_eq VAR_RESULT, FEMALE, Route119_EventScript_BattleBrendan
+data/maps/Route119/scripts.inc:Route119_EventScript_RivalEncounter => [NATIVE special HasEnoughMonsForDoubleBattle]; goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, Route119_EventScript_RivalNeedsTwoMons; call_if_eq VAR_RESULT, MALE, Route119_EventScript_PlayMayMusic; call_if_eq VAR_RESULT, FEMALE, Route119_EventScript_PlayBrendanMusic; call_if_eq VAR_TEMP_1, 1, Route119_EventScript_RivalEnter1; call_if_eq VAR_TEMP_1, 2, Route119_EventScript_RivalEnter2; call_if_eq VAR_TEMP_1, 1, Route119_EventScript_SetRivalPos1; call_if_eq VAR_TEMP_1, 2, Route119_EventScript_SetRivalPos2; goto_if_eq VAR_RESULT, MALE, Route119_EventScript_BattleMay; goto_if_eq VAR_RESULT, FEMALE, Route119_EventScript_BattleBrendan
+data/maps/Route119/scripts.inc:Route119_EventScript_RivalNeedsTwoMons => msgbox EmeraldChampions_Text_NeedTwoPokemon, MSGBOX_DEFAULT
 data/maps/Route119/scripts.inc:Route119_EventScript_BattleMay => msgbox Route119_Text_MayIntro, MSGBOX_DEFAULT; [NATIVE special BufferEmeraldChampionsRivalBranch]; switch VAR_RESULT; case 0, Route119_EventScript_BattleMayTreecko; case 1, Route119_EventScript_BattleMayTorchic; case 2, Route119_EventScript_BattleMayMudkip
 data/maps/Route119/scripts.inc:Route119_EventScript_BattleMayTreecko => trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TREECKO, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon; goto Route119_EventScript_DefeatedMay
 data/maps/Route119/scripts.inc:Route119_EventScript_BattleMayTorchic => trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TORCHIC, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon; goto Route119_EventScript_DefeatedMay
@@ -128527,5 +128529,5 @@ data/scripts/tv.inc:EventScript_DoInSearchOfTrainers => [NATIVE special DoTVShow
 REFERENCE COVERAGE
 Authoring: 368 trainer variants/1753 slots; 1512 unique builds. Map definitions:540. Complete economy census and unresolved conditions are in C6; wild method tables:381; configured evolution rows:496.
 Known limits: this is not a full transcript, runtime access/necessity proof, stock-condition simulator or battle acceptance. Native providers and dynamic regional choices must be followed through their source owner. No claim that prose/code drift is impossible.
-Source SHA256: 783df0df311ff1274bc3c518d2b301b3f2b62e00e438080dcf920f62db7d34bd
+Source SHA256: 7a5b7a7e64c62b034651f84af03524964b0ccb456410ff859e7a0893cc068744
 === END GENERATED GAME REFERENCE ===

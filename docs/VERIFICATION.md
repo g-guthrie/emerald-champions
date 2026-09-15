@@ -1335,3 +1335,42 @@ branch combination, combat quality and user visual approval remain outside
 these scoped checks. Normal release build/stamp/gate logs are in
 `work/story-followthrough/release-final.log`, `stamp-final.log` and
 `release-gates-final.log`.
+
+
+## Consolidated trainer, Misty Gym and Mega-budget build — September14
+
+The immediate checkpoint90d908cc20 is published on
+`codex/checkpoint-flannery-20260914-90d908cc20`. Merge b741f80e7b retained
+origin/main through d3bf075890; fd8f9ffd8d also includes e0ae7cf9bd's rival
+party-gate repair. The current authored-team/generated-book architecture and
+all battle work are preserved with the newer story, Studio, travel, UI and
+finite-item safeguards. The later one-source-per-Mega policy supersedes the
+earlier four-stone Lilycove shop; the13 reference tests and99-stone source
+check pass.
+
+Normal release: `DEVKITARM=/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload make -j6 release`, stamped against28,978 inputs, passes all release gates. ROM allocation27,862,008 bytes; EWRAM232,374; IWRAM28,312 (verifier values). Logs/hashes: `work/trainer-through-flannery-implementation/`.
+
+The stamped native ELF passes39 selected groups: Mega budget2, Misty mechanics4,
+Misty AI1 (three scenarios), authored strategies6, battle ownership1, primary
+support3, attacking Dancer2, other Dancer13 and Ice Spinner7. The mist cases
+exercise seeds, sun/rain coexistence, airborne vulnerability, Corrosion after
+Defog, Toxic Orb after Spinner, preservation against Good as Gold or useful
+Dragon protection, and query state/RNG preservation. Current AI samples15/15/41
+frames are scoped boards, not a worst-case bound.
+
+Mega-budget evidence separates native activation/form changes and exact
+per-trainer accounting from queued move execution. Two native activations for
+a named boss consume two uses; ordinary queued requests execute only one;
+authorization, final-use reservation, zero remaining uses, party-index changes
+and distinct-owner/foreign namespaces are checked. This does not claim a full
+autonomous two-Mega League battle before its new roster has been designed.
+The first scripted dual-Mega fixture incorrectly used the recorded-link
+namespace; it was replaced with explicit production activation and eligibility
+checks rather than weakening the namespace boundary.
+
+The131 first-access reviews,341 retained encounters,368 variants and148 retired
+identities remain. Gina/Mia is an explicit keep. Full native campaign traversal,
+complete Misty Gym battles, Protect cadence and final difficulty tuning remain
+outside this engineering consolidation. The next design block is Elite Four and
+Champion, then whole Gyms and Magma/Aqua arcs, with Mega distribution decided
+cohesively before the remaining route teams.

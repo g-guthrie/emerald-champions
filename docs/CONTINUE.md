@@ -1,6 +1,6 @@
 # Current development checkpoint — September 14, 2026
 
-GitHub checkpoint90d908cc20 is published on codex/checkpoint-flannery-20260914-90d908cc20. Merge b741f80e7b integrates origin/main through d3bf075890. Finish the integrated build and verification, then push main before the major-battle-first audit.
+Consolidation complete: local checkpoint90d908cc20 and remote work through e0ae7cf9bd are integrated. The normal ROM passes release gates;39 selected native test groups and13 reference tests pass. Misty Gym AI support and the trainer-owned two-Mega budget are implemented and validated in focused cases. No League roster replacements were made ahead of the next major-battle-first audit. The earned C15 run remains paused by the existing user direction; full battles and difficulty calibration are separate later work.
 
 Current checkpoint: implemented through Flannery, including the early Ember Path/Ashen Woods detour. `docs/trainer-review-index.json` records131 implemented first-access encounters and341 retained encounters /368 variants. Angelina and Eric are retired as duplicate ordinary battles; Gina and Mia stay. Misty Terrain is deliberately retained in the Fire Gym, with distinct seed, terrain-control, sun and attack partnerships. Exact builds/evidence: `work/trainer-through-flannery-implementation/`. Next design block: Elite Four/Champion. First-access index132 remains the post-Flannery Go-Goggles/Strength/Trick House3 boundary for later progression coverage. The earned C15 save remains paused.
 
@@ -210,9 +210,7 @@ in `data/emerald_champions/emerald_champions_battle_teams.txt`, followed by the
 team materializer and book refresh. Old section/E-U-T import instructions are
 retired. The economy decision packet is
 `work/book-economy-audit-20260914/Economy_Review.md`; the agreed affordable-rebuilding direction and shop roles are in the guide.
-Generated section C now maps the full current-source economy. Redistribution and
-the proposed Lilycove Mega shelf remain unimplemented; the atlas exposes the
-difference rather than presenting planned stock as obtainable. Preserve current pickup positions and review original provenance.
+Generated section C now maps the full current-source economy. Further reward redistribution remains a later design decision. The later single-source Mega rule supersedes the former Lilycove Mega shelf; its right clerk sells field recovery instead. Preserve current pickup positions and review original provenance.
 
  The current design-review
 boundary is through Flannery (index131), with later native verification separate. The main creative
