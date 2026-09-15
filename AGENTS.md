@@ -1,9 +1,10 @@
 # Working on Emerald Champions v4
 
-Current user-directed work is implementing the book's overworld scenes using
-Emerald Studio (tools/studio), the local Codex-browser native libmGBA workspace. Team reviews, the earned playthrough
-and export delivery are paused. Studio fixtures and assisted sandbox changes do
-not alter or advance the preserved earned run. See docs/CONTINUE.md.
+Current user-directed work is the major-battle-first trainer audit: Elite Four
+and Champion, then whole Gyms and Magma/Aqua story groups. Apply approved blocks
+and keep the Game Book/source synchronized. Emerald Studio remains the native
+scene/battle workspace; the earned C15 playthrough stays paused. The user's
+current instructions supersede older workflow pauses. See docs/CONTINUE.md.
 
 Read `docs/CONTINUE.md`, `docs/GOAL.md` and the relevant parts of the single
 canonical `Game Blueprint/Emerald_Champions_Game_Book.txt` before working.

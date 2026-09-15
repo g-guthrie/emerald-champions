@@ -1744,3 +1744,76 @@ DOUBLE_BATTLE_TEST("EC Mega budget: native activations consume two uses for one 
         TRAINER_BATTLE_PARAM.opponentA = savedTrainer;
     }
 }
+
+
+static void AuthoredLeagueOpponent(u16 trainerId)
+{
+    bool32 savedWally = FlagGet(FLAG_DEFEATED_WALLY_VICTORY_ROAD);
+    bool32 savedChampion = FlagGet(FLAG_IS_CHAMPION);
+    FlagSet(FLAG_DEFEATED_WALLY_VICTORY_ROAD);
+    FlagClear(FLAG_IS_CHAMPION);
+    AuthoredOpponent(trainerId, 8, FALSE);
+    if (!savedWally) FlagClear(FLAG_DEFEATED_WALLY_VICTORY_ROAD);
+    if (savedChampion) FlagSet(FLAG_IS_CHAMPION);
+}
+
+DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates its two actual forms")
+{
+    u16 trainer = TRAINER_NONE;
+    u32 first = 0, second = 0;
+    enum Species firstForm = SPECIES_NONE, secondForm = SPECIES_NONE;
+    PARAMETRIZE { trainer = TRAINER_SIDNEY; first = 4; second = 5; firstForm = SPECIES_SHARPEDO_MEGA; secondForm = SPECIES_ABSOL_MEGA_Z; }
+    PARAMETRIZE { trainer = TRAINER_PHOEBE; first = 3; second = 5; firstForm = SPECIES_BANETTE_MEGA; secondForm = SPECIES_GENGAR_MEGA; }
+    PARAMETRIZE { trainer = TRAINER_GLACIA; first = 3; second = 5; firstForm = SPECIES_FROSLASS_MEGA; secondForm = SPECIES_BAXCALIBUR_MEGA; }
+    PARAMETRIZE { trainer = TRAINER_DRAKE; first = 0; second = 5; firstForm = SPECIES_SALAMENCE_MEGA; secondForm = SPECIES_DRAGONITE_MEGA; }
+    PARAMETRIZE { trainer = TRAINER_WALLACE; first = 4; second = 5; firstForm = SPECIES_MILOTIC_MEGA; secondForm = SPECIES_STARMIE_MEGA; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(10); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(20); }
+        AuthoredLeagueOpponent(trainer);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+            // Every authored lead has at least one direct attack. This first
+            // turn initializes the native board; the deployment below is an
+            // explicit reserve-pair fixture, not earned switching evidence.
+            MOVE(opponentLeft, moveSlot: 0, target: playerLeft);
+            MOVE(opponentRight, moveSlot: 0, target: playerRight);
+        }
+    } THEN {
+        u32 savedFlags = gBattleTypeFlags;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
+        TRAINER_BATTLE_PARAM.opponentA = trainer;
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            gBattlerPartyIndexes[B_BATTLER_1] = slot;
+            EXPECT_EQ(EmeraldChampions_IsMegaAllowed(B_BATTLER_1), slot == first || slot == second);
+        }
+        gBattlerPartyIndexes[B_BATTLER_1] = first;
+        gBattlerPartyIndexes[B_BATTLER_3] = second;
+        PokemonToBattleMon(&gParties[B_TRAINER_OPPONENT_A][first], opponentLeft);
+        PokemonToBattleMon(&gParties[B_TRAINER_OPPONENT_A][second], opponentRight);
+        memset(&gBattleStruct->gimmick, 0, sizeof(gBattleStruct->gimmick));
+        EXPECT(CanMegaEvolve(B_BATTLER_1));
+        EXPECT(CanMegaEvolve(B_BATTLER_3));
+        ActivateMegaEvolution(B_BATTLER_1);
+        EXPECT_EQ(opponentLeft->species, firstForm);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 1);
+        EXPECT(CanMegaEvolve(B_BATTLER_3));
+        ActivateMegaEvolution(B_BATTLER_3);
+        EXPECT_EQ(opponentRight->species, secondForm);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);
+        EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 0);
+        EXPECT(!CanMegaEvolve(B_BATTLER_1));
+        EXPECT(!CanMegaEvolve(B_BATTLER_3));
+        EXPECT_EQ(gBattleStruct->gimmick.megaEvolutionsUsed[B_TRAINER_OPPONENT_A], 2);
+        if (trainer == TRAINER_WALLACE)
+        {
+            EXPECT_EQ(GetBattlerAbility(B_BATTLER_1), ABILITY_PRISM_SCALES);
+            EXPECT_EQ(GetBattlerAbility(B_BATTLER_3), ABILITY_HUGE_POWER);
+            EXPECT_EQ(opponentLeft->level, 98);
+            EXPECT_EQ(opponentRight->level, 97);
+        }
+        gBattleTypeFlags = savedFlags;
+    }
+}

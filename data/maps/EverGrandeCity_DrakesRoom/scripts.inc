@@ -68,14 +68,13 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_DrakesRoom_Text_IntroSpeech:
-	.string "DRAKE. Last of the four, and the one\n"
-	.string "who's sailed the longest.\p"
-	.string "Dragons remember every age of battle.\n"
-	.string "SALAMENCE can bring a TAILWIND.\p"
-	.string "KORAIDON brings sunlight for\n"
-	.string "RESHIRAM's flames.\p"
-	.string "Keep something for MEGA GARCHOMP.\n"
-	.string "Come on!$"
+	.string "I am DRAKE. My Dragons and I\n"
+	.string "have crossed many storms.\p"
+	.string "SALAMENCE strikes with its body.\n"
+	.string "DRAGONITE brings another power.\p"
+	.string "Both can MEGA EVOLVE.\n"
+	.string "KORAIDON brings the sun.\p"
+	.string "Read the wind, then face us!$"
 
 EverGrandeCity_DrakesRoom_Text_Defeat:
 	.string "Hah! My Dragons gave you everything.\n"
