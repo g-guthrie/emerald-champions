@@ -185,8 +185,13 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
 - Review opposing Protect throughout EVERY fight: actual payoff, lost opportunity,
   partner survival, consecutive risk and pacing. Fix demonstrated empty, harmful
   or repetitive guarding; an eventual loss/win never excuses poor decisions.
-- Full team/state plus already-committed player moves/targets is approved at all
-  difficulties. It does not include future RNG or uncommitted future choices.
+- The opponent never reads the player's pending commands (user decision,
+  September 15). It decides at turn start from full team/state, the trainer's
+  knowledge flags, revealed sets, last used moves and native locks, and it
+  scores Protect, Wide/Quick Guard and Fake Out on expected value under a mixed
+  forecast of what the player might do. Never reintroduce committed-action
+  reads, Protect quotas or cooldowns; tune the expected-value constants
+  (`src/battle_ai_pair.c`, `PAIR_GUARD_*`, `PAIR_FORECAST_*`) against play.
   The complete opponent decision budget is 1.2 seconds including setup/both actors.
 - Ordinary adjacent fights retain individual clears. Selected clearly announced
   endurance challenges may restart all legs. Preserve Lilith/Brenden's original
