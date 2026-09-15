@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "date": "2026-09-15",
-  "status": "fresh run pending",
-  "session": "work/fresh-run/c01-opening",
+  "status": "no active run",
+  "session": null,
   "save": null,
   "chapter": "C01",
   "difficulty": "Medium",
   "player_cap": 14,
   "cleared_trainers": [],
-  "note": "The September 14 C15 session (work/v4-c15-dwayne-revised-play, 40 clears) was lost with a deleted clone; the run restarts from a new game on the new spine. Previous fields retained under 'lost_checkpoint'.",
+  "note": "The September 14 C15 session (40 clears) was lost with a deleted clone. A fresh automated run was started and stopped on September 15; no earned run is active until a playthrough approach is chosen.",
   "lost_checkpoint": {
     "schema_version": 1,
     "date": "2026-09-14",

@@ -6,20 +6,22 @@ rewritten as current rules (about 9,000 words) with a generated reference.
 Ladder: L0 341 · L1 50 · L2 2 · L3 40. All gates green.
 
 Next three blocks:
-1. Dialogue unification (one voice, one direction style) across every NPC the
-   spine, caps or rewards touched today; native contact sheets for Stern, the
-   Space Center briefing, Birth Island, the ruins conclusion and Mom's send-off.
-2. Resume the earned run on the new spine from the C15 save (clean Continue on
-   the current ROM) and advance it; every clear moves an encounter to L3.
-3. Major-battle-first benchmarks (L2): League, whole Gyms, Magma/Aqua groups,
-   against the cap window's reference parties (define those first, two or three
-   per window, from the available pool).
+1. Reference parties, two or three per cap window, chosen with the user from
+   work/reference-pools/ (League window first).
+2. Major-battle-first L2 benchmarks against those parties once the team and AI
+   side's commits land: League, whole Gyms, Magma/Aqua groups.
+3. Full-campaign voice pass from work/dialogue-survey/ (R1/R3/R4/R6 findings;
+   the width check is scripts/check_text_widths.py), plus native contact sheets
+   for Stern, the Space Center briefing, Birth Island, the ruins conclusion and
+   Mom's send-off.
 
 Earned run (September 15): the paused C15 save was lost with a deleted clone
-(see the day log). Decision: start fresh rather than restore the September 13
-archive. The fresh Medium run lives under `work/fresh-run/` (session per
-chapter, native saves exported at each chapter close) and is the only source
-of L3 from now on. `handoff/checkpoint.json` points at it.
+(see the day log). The fresh run was started and then stopped on the user's
+call: an automated player is not capable enough for these fights and a
+frontier-model player is too expensive to run per turn. L3 stays at 0 until
+the team and AI rewrite lands and a playthrough approach is chosen (user play
+with Studio, a stronger automated player, or targeted L2 benchmarks only).
+`handoff/checkpoint.json` records "no active run".
 
 Ownership split (September 15): another session is rewriting trainer teams
 and the battle AI. This session does not touch
