@@ -4,6 +4,7 @@
 #include "global.h"
 #include "wild_encounter.h"
 #include "constants/species.h"
+#include "emerald_champions_battle_sets.h"
 
 #include "constants/legendary_signs.h"
 
@@ -31,6 +32,23 @@ struct LegendarySignDefinition
 };
 
 extern const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_SIGN_COUNT];
+
+// Mandatory legendary story scenes use hand-authored competitive sets rather
+// than the random non-Mega pool every other wild legendary draws from. Only
+// the seven species listed in data/pokemon/legendary_authored_sets.h have a
+// row here; everything else falls back to ApplyEmeraldChampionsRandomNonMegaSet.
+struct LegendaryAuthoredSet
+{
+    enum Species species;
+    struct EmeraldChampionsBattleSet set;
+};
+
+extern const struct LegendaryAuthoredSet gLegendaryAuthoredSets[];
+extern const u32 gLegendaryAuthoredSetCount;
+
+// Returns the authored set for species, or NULL when species has no row and
+// should keep receiving the random non-Mega wild set.
+const struct EmeraldChampionsBattleSet *GetLegendaryAuthoredSet(enum Species species);
 
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);
 bool32 IsLegendarySignCaught(enum LegendarySignId signId);

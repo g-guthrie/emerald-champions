@@ -38,7 +38,7 @@ DRAKE: Mixed Dragon air force with a sun phase. Salamence receives Salamencite a
 
 WALLACE: Rain and mist with a durable special anchor and physical Mega finisher. Make Wallace's signature Milotic the second Mega with Miloticite and Muddy Water/Helping Hand/Recover/Ice Beam. Keep Huge Power physical Mega Starmie, Kyogre/Tapu Fini leads, Ferrothorn and Palkia. Give Ferrothorn zero Speed IVs. Stats: Mega Milotic is Water/Fairy with95HP/109Defense/155Special Defense; Prism Scales reduces incoming special damage by30%, so HP/Defense investment covers its weaker side. Mega Starmie has100 Attack doubled by Huge Power and120 Speed. Kyogre/Palkia stay special, avoiding an all-physical ending. Could it be cooler? Kyogre starts rain while Fini starts Misty Terrain; each field is independently replaceable. Later Milotic can use priority Helping Hand for Starmie or recover when doing so buys progress. Milotic's base Competitive phase can punish a real stat drop before it Mega Evolves; the ability changes to Prism Scales afterward. Overrepresented? Milotic is Wallace's own signature, so this pairing strengthens his identity. Starmie's unusual physical Mega stays reserved for the Champion. Keep Ferrothorn's Grass/Steel resistance and Palkia's rain Thunder rather than replace every supporting species with another legendary. Medium cap96 levels 96/100/100/96/98/97 are initial design seeds; complete battle calibration remains pending. Counterplay: Change rain, change terrain, use Wide Guard, target the physical/special lane appropriately, pressure Kyogre before Water Spout, and punish a passive Recover turn. Mist does not cure existing status; sun/rain changes do not remove it. Palkia intentionally avoids Dragon STAB into grounded targets protected by mist.
 
-Distribution decisions: Darkrai/Hoopa-Unbound leave Sidney; Dusclops leaves Phoebe; Articuno leaves Glacia; ordinary Mega Garchomp leaves Drake for a meaningful sand home elsewhere. These are opponent-role decisions, not changes to player availability or permission to remove a protected species. Mega Rayquaza remains for a later Steven allocation discussion. All existing stone acquisition sources remain unchanged. No extra League battles, roster cuts, automatic healing or player Mega allowance are added. Next review: whole Gyms as a group, then Magma/Aqua story groups. Continue tracking the unresolved form-coverage gaps before claiming every Mega is showcased.
+Distribution decisions: Darkrai/Hoopa-Unbound leave Sidney; Dusclops leaves Phoebe; Articuno leaves Glacia; ordinary Mega Garchomp leaves Drake for its sand home on Caroline's Victory Road team (Tyranitar sand, Sand Rush Stoutland and Sandslash, Mega Garchomp Sand Force finisher); Tyranitar there gives up Tyranitarite, which four trainers already hold. These are opponent-role decisions, not changes to player availability or permission to remove a protected species. Mega Rayquaza remains for a later Steven allocation discussion. All existing stone acquisition sources remain unchanged. No extra League battles, roster cuts, automatic healing or player Mega allowance are added. Next review: whole Gyms as a group, then Magma/Aqua story groups. Continue tracking the unresolved form-coverage gaps before claiming every Mega is showcased.
 
 2. RULES, PREPARATION AND PROGRESSION
 -----------------------------------
@@ -1054,7 +1054,7 @@ Story completion, capture, permission and item delivery are different outcomes. 
 
 OUTCOMES AND PRESENTATION CONTRACT
 ---------------------------------
-Required trainer victories remain required. Mandatory legendary resolutions are Moltres, Landorus, the Southern Island Lati, Mew, Heatran, Diancie and Jirachi: win OR catch each; capture is never required. Deoxys, Regirock, Regice, Registeel and Regigigas are optional. Fleeing/loss/declining never grants completion and leaves a retry. C14 requires the account/song, with Meloetta battle optional. C26 requires basement research; Zygarde/Stakataka remain optional and permanently missable after the warned fossil collapse. C45 is optional; its guardians and Regigigas are collection payoffs. C48 requires observations AND resolutions, followed by Steven. Rayquaza retains its mandatory cinematic awakening/intervention; no new Rayquaza battle is required. Later capture remains available after noncapture victories outside the explicitly sealed optional tower habitats.
+Required trainer victories remain required. Mandatory legendary resolutions are Moltres, Landorus, the Southern Island Lati, Mew, Heatran, Diancie and Jirachi: win OR catch each; capture is never required. Deoxys, Regirock, Regice, Registeel and Regigigas are optional. These seven scenes stay singles but use authored competitive sets (src/data/pokemon/legendary_authored_sets.h: item, ability, nature, EVs, four legal moves) at the live cap instead of a random set; a caught legendary keeps that set. Every other legendary discovery keeps its random competitive set. Fleeing/loss/declining never grants completion and leaves a retry. C14 requires the account/song, with Meloetta battle optional. C26 requires basement research; Zygarde/Stakataka remain optional and permanently missable after the warned fossil collapse. C45 is optional; its guardians and Regigigas are collection payoffs. C48 requires observations AND resolutions, followed by Steven. Rayquaza retains its mandatory cinematic awakening/intervention; no new Rayquaza battle is required. Later capture remains available after noncapture victories outside the explicitly sealed optional tower habitats.
 
 A completed scene stays completed across leaving, returning, saving and reloading. Its monetary reward, physical delivery and optional capture each have their own receipt. Full Bag or PC storage cannot revoke earned travel, duplicate payment, force a repeated boss victory or erase the ability to continue. Castform is the explicit recoverable party entitlement needed for its scene.
 
@@ -2253,76 +2253,77 @@ E0487 TRAINER_VITO | VictoryRoad_B2F | ace | B1401(+0),B0904(+0),B1402(+0),B1403
 E0488 TRAINER_OWEN | VictoryRoad_B2F | ace | B1406(+0),B1407(+0),B0916(+0),B1408(+0),B1017(+0),B0972(+1)
   Strategy none; traits Ace Pokemon; Mega slots 4
   Plan: First two useful turns: Torterra attacks while Scarf Staraptor selects a valuable attack, U-turn or Final Gambit using actual HP. Turn two respects the Choice lock and resulting board. Alternate deployment: Sylveon's Helping Hand/sound pressure complements Mega Lucario Z's physical lane. Reserves & disruption: Tentacruel supplies Icy Wind and Victreebel powder/Petaya pressure. Final Gambit trades the user; it is not free damage that leaves the bird active. Counterplay & audit: Ice/Fairy/Fire pressure, Ghost immunity to the relevant move, priority and physical mitigation. Disposition: Keep; custom Mega Lucario Z and Final Gambit trade valuation require explicit tests.
-E0489 TRAINER_CAROLINE | VictoryRoad_B2F | ace | B1409(+0),B1410(+0),B1411(+0),B1412(+0),B1413(+0),B1414(+1)
-  Strategy SAND; traits none; Mega slots 1
-  Plan: First two useful turns: Tyranitar supplies sand and transforms only for a useful payoff while Stoutland attacks under actual Sand Rush. Turn two preserves the weather window or brings the relevant resistance. Alternate deployment: Tyranitar and Sandslash offer the Ground physical sand mode. Reserves & disruption: Alolan Dugtrio has Sand Force, not Sand Rush; Leavanny's web is conditional, and Eternatus provides special coverage. Dynamax Cannon remains an ordinary attack unless a real Dynamax target exists. Counterplay & audit: Weather replacement, Fighting/Water/Grass pressure, priority and room reversal. Disposition: Keep; the move's name is not evidence that this team requires Dynamax.
-E0490 TRAINER_JULIE | VictoryRoad_B2F | ace | B0485(+0),B1415(+0),B1416(+0),B1417(+0),B1418(+0),B1419(+1)
+E0489 TRAINER_CAROLINE | VictoryRoad_B2F | ace | B1389(+0),B1409(+0),B1410(+1),B1411(+0),B1412(+0),B1413(+1)
+  Strategy SAND; traits none; Mega slots 3
+  Plan: First two useful turns: Tyranitar supplies sand (Smooth Rock extends it) while Stoutland attacks under actual Sand Rush. Turn two preserves the weather window or brings the relevant resistance. Alternate deployment: Tyranitar and Sandslash offer the Ground physical sand mode. Reserves & disruption: Garchomp is the sand finisher: it Mega Evolves only when Sand Force has a boosted Ground/Rock attack to cash, and Stomping Tantrum avoids hitting the grounded sand partners that Earthquake would. Alolan Dugtrio has Sand Force too, not Sand Rush; Eternatus provides special coverage. Dynamax Cannon remains an ordinary attack unless a real Dynamax target exists. Counterplay & audit: Weather replacement, Fighting/Water/Grass/Ice pressure, priority, Intimidate and room reversal; Mega Garchomp loses Speed on evolution, so denying sand-boosted turns matters. Disposition: Garchompite's sand home (September 15); Tyranitar gives up its stone because four trainers already hold Tyranitarite.
+  Counterplay: Weather replacement, Fighting/Water/Grass/Ice pressure, priority, Intimidate and room reversal. Disposition: Garchompite's sand home; Mega Garchomp is the Sand Force finisher.
+E0490 TRAINER_JULIE | VictoryRoad_B2F | ace | B0485(+0),B1414(+0),B1415(+0),B1416(+0),B1417(+0),B1418(+1)
   Strategy SUN,SETUP; traits none; Mega slots 6
   Plan: First two useful turns: Torkoal supplies sun and attacks from current HP while Venusaur uses Chlorophyll pressure or legal sleep. Turn two selects the correct reserve against Fire-resistant or faster answers. Alternate deployment: Lycanroc's immediate Rock pressure complements Zamazenta's defensive Body Press mode. Reserves & disruption: Heliolisk's Solar Power has an HP cost; Mega Victreebel may change base Chlorophyll. Zamazenta's entry ability frequency and form use the native rules. Counterplay & audit: Weather replacement, Taunt, Flying/Ground pressure, Haze and priority. Disposition: Keep; don't count pre- and post-Mega abilities or repeated legendary entry boosts simultaneously.
-E0491 TRAINER_FELIX | VictoryRoad_B2F | ace | B1420(+0),B1421(+0),B1422(+0),B1423(+0),B1424(+0),B1144(+1)
+E0491 TRAINER_FELIX | VictoryRoad_B2F | ace | B1419(+0),B1420(+0),B1421(+0),B1422(+0),B1423(+0),B1144(+1)
   Strategy none; traits none; Mega slots 5
   Plan: First two useful turns: Jynx buys Xerneas a survivable Power Herb Geomancy turn with Fake Out or attacks; turn two must use the actual boosts and defensive state rather than assume the setup cannot be denied. Alternate deployment: Jynx supports Stalwart Duraludon's immediate special coverage against redirection. Reserves & disruption: Sceptile and Mega Greninja are special/mixed alternatives, Aegislash reactive stance pressure. Fairy Aura affects eligible Fairy attacks beyond only Xerneas. Counterplay & audit: Taunt, Haze, Steel/Poison pressure, priority and removing Xerneas before it converts the boost. Disposition: Keep as an optional high-pressure setup examination; no claim that a Power Herb guarantees a successful setup action.
-E0492 TRAINER_DIANNE | VictoryRoad_B2F | ace | B1425(+0),B1426(+0),B0974(+0),B1427(+0),B1428(+0),B1429(+1)
+E0492 TRAINER_DIANNE | VictoryRoad_B2F | ace | B1424(+0),B1425(+0),B0974(+0),B1426(+0),B1427(+0),B1428(+1)
   Strategy SNOW,SETUP; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Abomasnow establishes snow while Froslass uses Aurora Veil only when weather and survival permit; turn two attacks through the screen or changes mode. Alternate deployment: Magmortar and Virizion provide Fire/Fighting/Grass coverage outside the main Ice lane. Reserves & disruption: Bisharp punishes opposing drops and Mega Barbaracle is a separate Shell Smash threat. Snow does not automatically improve every reserve's defense. Counterplay & audit: Weather replacement before Veil, Taunt, Fire/Fighting pressure and priority. Disposition: Keep; don't treat every snow-team slot as an Ice-only attacker or every screen as permanent protection.
-E0493 TRAINER_SIDNEY | EverGrandeCity_SidneysRoom | elite | B1430(+4),B1431(+0),B1432(+4),B1433(+1),B1434(+2),B1435(+0)
+E0493 TRAINER_SIDNEY | EverGrandeCity_SidneysRoom | elite | B1429(+4),B1430(+0),B1431(+4),B1432(+1),B1433(+2),B1434(+0)
   Strategy TAILWIND; traits Ace Pokemon; Mega slots 5,6
   Plan: Dark Aura pressure with protected fast finishers. Replace Darkrai with Light Clay Grimmsnarl and Hoopa-Unbound with Speed Boost Sharpedo. Keep Incineroar/Yveltal as the opening, Urshifu as the protection-breaking reserve and Mega Absol Z as the fast Magic Bounce threat. Yveltal gains Heat Wave over Snarl and Life Orb for special pressure. Stats: Incineroar and Grimmsnarl receive compensating level100 support seeds; Yveltal is fast special; Sharpedo/Absol/Urshifu fast physical. Mega Sharpedo gets Strong Jaw for Crunch/Psychic Fangs, not Liquidation. Dark Aura boosts eligible Dark attacks on both sides. Could it be cooler? Sharpedo can earn a Speed Boost before Mega Evolution, then trade its ability for Strong Jaw; the Mega decision is a timing choice. Psychic Fangs removes screens. Mega Absol Z uses its151 base Speed and Magic Bounce to punish direct status targeting; it does not grant teamwide reflection. Overrepresented? Sharpedo is also an Archie showcase; Sidney adds Dark Aura and a second Dark Mega rather than another rain room. Absol Z stays Sidney's exclusive named form. Darkrai/Hoopa are released for more deliberate homes rather than included only for their power. Medium cap96 levels 100/96/100/97/98/96 are initial design seeds; complete battle calibration remains pending.
   Counterplay: Fairy pressure, burns on eligible physical attackers, screen removal, Trick Room, priority and denying Sharpedo a safe setup/activation window. Dark types obstruct Grimmsnarl Prankster Thunder Wave. No Dark Void coin flip is required.
-E0494 TRAINER_PHOEBE | EverGrandeCity_PhoebesRoom | elite | B1436(+1),B1437(+0),B1438(+0),B1439(+4),B1440(+1),B0802(-1)
+E0494 TRAINER_PHOEBE | EverGrandeCity_PhoebesRoom | elite | B1435(+1),B1436(+0),B1437(+0),B1438(+4),B1439(+1),B0802(-1)
   Strategy none; traits Ace Pokemon; Mega slots 4,6
   Plan: Ghost trapping, Encore and boost punishment. Mega Banette replaces Dusclops. Mega Gengar keeps trapping/control; Banette supplies Poltergeist/Encore/Will-O-Wisp/Protect. Lunala replaces Calm Mind with Wide Guard and gets Timid/Cloak. Keep Giratina, Marshadow and Specs Spectrier. Stats: Physical Giratina supports and survives; Lunala and Spectrier attack specially; Marshadow/Banette exploit physical lanes. Banette uses its165 Mega Attack with HP investment and priority utility. Gengar receives95 as a starting seed for170 Special Attack/130 Speed; this is not proven balanced. Could it be cooler? Gengar can trap a foe while Banette Encores an already-used move. Lunala's Wide Guard covers applicable spread attacks; Marshadow steals opposing boosts. This is a coordinated trap/control team, without inventing Perish Song. Overrepresented? Gengar and Banette exist earlier as individual Megas; Phoebe combines them and has no species overlap with the other four League teams. Keep its ghost identity rather than add another weather setter. Medium cap96 levels 97/96/96/100/97/95 are initial design seeds; complete battle calibration remains pending.
   Counterplay: Ghost types can escape Shadow Tag, valid pivots can escape, Dark types block hostile Prankster, and Taunt/ability suppression/priority or special mitigation can disrupt the formation. Poltergeist requires the target to hold an item. Spectrier's Grim Neigh needs a knockout, not just a teammate's KO.
-E0495 TRAINER_GLACIA | EverGrandeCity_GlaciasRoom | elite | B1441(+4),B1442(-1),B1443(+0),B1444(+1),B1445(+4),B1446(+0)
+E0495 TRAINER_GLACIA | EverGrandeCity_GlaciasRoom | elite | B1440(+4),B1441(-1),B1442(+0),B1443(+1),B1444(+4),B1445(+0)
   Strategy SNOW; traits Ace Pokemon; Mega slots 4,6
   Plan: Snow endurance with physical and special closers. Mega Froslass replaces Articuno as the fast special reserve and second Snow Warning opportunity. Ninetales keeps Aurora Veil; Froslass uses Blizzard/Shadow Ball/Icy Wind/Protect. Keep Specs Kyurem, Chien-Pao, Slush Rush Sandslash and Mega Baxcalibur; Baxcalibur gains High Horsepower over redundant Ice Shard. Stats: Ninetales invests in HP/Speed; Kyurem special offense; Chien-Pao/Sandslash/Baxcalibur physical offense; Froslass fast special. Mega Baxcalibur has175 Attack/115HP/117Defense and retains Thermal Exchange. Snow's Ice Defense bonus does not cover special attacks. Could it be cooler? If the first snow setter goes down or weather is replaced, Mega Froslass can establish the second snow phase through actual Mega activation. Sword of Ruin and the physical sweepers convert that window into pressure; Icy Wind offers speed control when snow-speed alone does not solve the board. Overrepresented? This is the League culmination of Lucas's snow formation. No unnecessary third snow setter or fourth generic Ice setup sweeper. Froslass/Baxcalibur are separate offensive roles and do not duplicate another League Mega. Medium cap96 levels 100/95/96/97/100/96 are initial design seeds; complete battle calibration remains pending.
   Counterplay: Weather replacement, strong special Fire/Fighting coverage, screen removal and denying the fast attackers. Sword of Ruin also reduces eligible teammates' Defense; snow is not an excuse to ignore that liability. Glaive Rush leaves its real retaliation risk.
-E0496 TRAINER_DRAKE | EverGrandeCity_DrakesRoom | elite | B1447(+0),B1448(+0),B1449(+1),B1450(-1),B1451(+2),B1452(+2)
+E0496 TRAINER_DRAKE | EverGrandeCity_DrakesRoom | elite | B1446(+0),B1447(+0),B1448(+1),B1449(-1),B1450(+2),B1451(+2)
   Strategy SUN,TAILWIND; traits Ace Pokemon; Mega slots 1,6
   Plan: Mixed Dragon air force with a sun phase. Salamence receives Salamencite and Double-Edge/Earthquake/Tailwind/Protect. Replace Mega Garchomp with specially offensive Mega Dragonite: Draco Meteor/Air Slash/Flamethrower/Roost. Keep Reshiram/Zekrom/Koraidon/Regidrago; Regidrago gains Earth Power over redundant Dragon Pulse. Stats: Mega Salamence uses145 Attack/120 Speed and Aerilate Double-Edge; Mega Dragonite uses145 Special Attack, broad bulk and Multiscale. Their physical/special roles differ. Koraidon and the high-BST dragons use restrained individual seeds rather than raising every member equally. Could it be cooler? The airborne Mega pair creates a safe Earthquake partnership; the other four allies are grounded, so Earthquake is conditional and often wrong beside them. Koraidon supplies actual sun for Reshiram and Dragonite Flamethrower. Air Slash avoids Hurricane's sun accuracy penalty. Overrepresented? Mega Garchomp is freed for an actual sand home, preserving the distinctive ordinary Mega rather than distorting Drake around an inactive Sand Force. Mega Rayquaza remains a separate allocation question for the final Steven exhibition; it is not piled onto this team as a third Mega. Medium cap96 levels 96/96/97/95/98/98 are initial design seeds; complete battle calibration remains pending.
   Counterplay: Fairy immunity, Ice pressure, Wide Guard against Dragon Energy/Earthquake, weather or speed control, and chip breaking Dragonite Multiscale. Draco Meteor lowers Special Attack and Roost changes Dragonite's temporary grounding/type interaction; neither is a free loop.
-E0497 TRAINER_WALLACE | EverGrandeCity_ChampionsRoom | elite | B1453(+0),B1454(+4),B1455(+4),B1456(+0),B1457(+2),B1458(+1)
+E0497 TRAINER_WALLACE | EverGrandeCity_ChampionsRoom | elite | B1452(+0),B1453(+4),B1454(+4),B1455(+0),B1456(+2),B1457(+1)
   Strategy RAIN; traits Double Ace Pokemon,Conservative; Mega slots 5,6
   Plan: Rain and mist with a durable special anchor and physical Mega finisher. Make Wallace's signature Milotic the second Mega with Miloticite and Muddy Water/Helping Hand/Recover/Ice Beam. Keep Huge Power physical Mega Starmie, Kyogre/Tapu Fini leads, Ferrothorn and Palkia. Give Ferrothorn zero Speed IVs. Stats: Mega Milotic is Water/Fairy with95HP/109Defense/155Special Defense; Prism Scales reduces incoming special damage by30%, so HP/Defense investment covers its weaker side. Mega Starmie has100 Attack doubled by Huge Power and120 Speed. Kyogre/Palkia stay special, avoiding an all-physical ending. Could it be cooler? Kyogre starts rain while Fini starts Misty Terrain; each field is independently replaceable. Later Milotic can use priority Helping Hand for Starmie or recover when doing so buys progress. Milotic's base Competitive phase can punish a real stat drop before it Mega Evolves; the ability changes to Prism Scales afterward. Overrepresented? Milotic is Wallace's own signature, so this pairing strengthens his identity. Starmie's unusual physical Mega stays reserved for the Champion. Keep Ferrothorn's Grass/Steel resistance and Palkia's rain Thunder rather than replace every supporting species with another legendary. Medium cap96 levels 96/100/100/96/98/97 are initial design seeds; complete battle calibration remains pending.
   Counterplay: Change rain, change terrain, use Wide Guard, target the physical/special lane appropriately, pressure Kyogre before Water Spout, and punish a passive Recover turn. Mist does not cure existing status; sun/rain changes do not remove it. Palkia intentionally avoids Dragon STAB into grounded targets protected by mist.
-E0498 TRAINER_WALLY_VR_2 | VictoryRoad_1F | rival | B1459(+0),B1460(+0),B1461(+0),B1462(+0),B0973(+0),B1463(+1)
+E0498 TRAINER_WALLY_VR_2 | VictoryRoad_1F | rival | B1458(+0),B1459(+0),B1460(+0),B1461(+0),B0973(+0),B1462(+1)
   Strategy REDIRECTION; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Indeedee-F redirects when it preserves Gallade's worthwhile physical action or attacks through current Psychic Terrain. Turn two picks a complementary special reserve rather than rely only on physical pressure. Alternate deployment: Incineroar and Heatran give a pivot/Fire-Steel mode when their actions are legal under the active field. Reserves & disruption: Psychic Terrain can block Incineroar's Fake Out against grounded opposing targets; the fact that it is the team's own terrain does not exempt that attack. Magearna's Soul Heart and Mega transition are explicit. Counterplay & audit: Terrain replacement, Dark/Steel/Fire pressure, spread damage and Haze. Disposition: Keep as optional advanced Wally; include an own-terrain/Fake Out negative test.
-E0499 TRAINER_VINCENT | Route110_TrickHousePuzzle8 | ace | B1354(+0),B1464(+0),B1465(+0),B1466(+0),B0409(+0),B1467(+1)
+E0499 TRAINER_VINCENT | Route110_TrickHousePuzzle8 | ace | B1354(+0),B1463(+0),B1464(+0),B1465(+0),B0409(+0),B1466(+1)
   Strategy SETUP; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Sableye chooses Fake Out/Quash/Encore for a useful Mienshao attack; turn two pivots only when Regenerator and the replacement improve the board. Alternate deployment: Sableye's control supports Scarf Typhlosion's execution-time Eruption pressure. Reserves & disruption: Gliscor has an independent Swords Dance/Poison Heal mode, Xurkitree special Electroweb pressure and Mega Zeraora a physical finish. Plasma Fists' conversion can affect later same-turn Normal attacks. Counterplay & audit: Priority denial, Dark target restrictions, Water/Ground pressure and speed reversal. Disposition: Keep; source-bound Mega Zeraora and current-HP Eruption matter more than merely listing rare species.
-E0500 TRAINER_KEIRA | Route110_TrickHousePuzzle8 | ace | B1005(+0),B0418(+0),B1468(+0),B1469(+0),B1470(+0),B1471(+1)
+E0500 TRAINER_KEIRA | Route110_TrickHousePuzzle8 | ace | B1005(+0),B0418(+0),B1467(+0),B1468(+0),B1469(+0),B1470(+1)
   Strategy SAND,REDIRECTION,TAILWIND; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Gigalith establishes sand while Sandslash attacks under Sand Rush; turn two uses the weather window or transitions to support only when it protects a worthwhile attacker. Alternate deployment: Clefable's Follow Me supports Necrozma's special pressure and reactive Weakness Policy. Reserves & disruption: Whimsicott's Tailwind is a backup/contested-speed tool, not automatic redundancy. Rotom-Wash offers burn/coverage and may take sand chip. Counterplay & audit: Weather replacement, Taunt, Wide Guard, Water/Grass pressure and Haze. Disposition: Keep; redirection may correctly prevent rather than enable a Policy trigger, so don't score both benefits at once.
-E0501 TRAINER_LEROY | Route110_TrickHousePuzzle8 | ace | B1472(+0),B1473(+0),B1474(+0),B1475(+0),B1476(+0),B1477(+1)
+E0501 TRAINER_LEROY | Route110_TrickHousePuzzle8 | ace | B1471(+0),B1472(+0),B1473(+0),B1474(+0),B1475(+0),B1476(+1)
   Strategy TRICK_ROOM; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Cresselia sets Trick Room or helps a useful Volcanion attack according to the opposing speeds. Turn two spends room turns instead of cycling unnecessary recovery. Alternate deployment: Scrafty's Fake Out can protect Cresselia's initial room action before a deliberate Mega. Reserves & disruption: Mawile is base Intimidate, not a second Mega; Slurpuff supplies Sweet Veil support, Celesteela Wide Guard/physical pressure. No rain setter is present. Counterplay & audit: Taunt, competing slower teams, special pressure, Water/Fire immunity and targeted attacks around Wide Guard. Disposition: Keep; precise base-to-Mega abilities and the slow-mode Speed values must be explicit.
-E0504 TRAINER_COLTON | SSTidalRooms | ace | B0767(+0),B1478(+0),B1479(+0),B1480(+0),B1481(+0),B1482(+1)
+E0504 TRAINER_COLTON | SSTidalRooms | ace | B0767(+0),B1477(+0),B1478(+0),B1479(+0),B1480(+0),B1481(+1)
   Strategy SETUP,TAILWIND; traits Conservative; Mega slots 6
   Plan: First two useful turns: Liepard's Fake Out/Taunt/Encore supports Fezandipiti's attack or Tailwind; turn two converts the control into damage rather than introduce another passive support. Alternate deployment: Mesprit's Helping Hand/speed control supports Eternal Floette's Mega/Calm Mind pressure. Reserves & disruption: Alolan Persian and Incineroar are pivot reserves, not an automatic double-support lead. Toxic Chain remains probabilistic and Wish has a specific delayed recipient. Counterplay & audit: Taunt, priority denial, Steel/Poison/Ground pressure and burst damage before setup. Disposition: Keep optional at live cap 60 on the main voyage; the old level-100 ship floor is discarded.
-E0505 TRAINER_MICAH | SSTidalRooms | regular | B1352(-1),B1483(+0),B1036(+0),B1484(+0)
+E0505 TRAINER_MICAH | SSTidalRooms | regular | B1352(-1),B1482(+0),B1036(+0),B1483(+0)
   Strategy SNOW; traits Conservative; Mega slots 2
   Plan: First two useful turns: Manectric attacks or uses Snarl/Volt Switch according to the Choice Scarf lock while Lapras attacks or establishes a useful snow state. Turn two evaluates the actual post-Mega ability and weather. Alternate deployment: Luxray's Intimidate/Snarl supports Clawitzer's special Launcher pressure. Reserves & disruption: Lightning Rod can intercept friendly single-target Electric moves from Luxray; it does not make all Electric attacks safe or effective. Counterplay & audit: Ground/Grass/Fighting pressure, weather replacement and Choice-lock exploitation. Disposition: Keep as optional ship content; bind Mega Lapras's actual ability before claiming a snow payoff beyond the listed move.
-E0506 TRAINER_THOMAS | SSTidalRooms | regular | B1485(-1),B1486(+0),B1487(+0),B1488(+0)
+E0506 TRAINER_THOMAS | SSTidalRooms | regular | B1484(-1),B1485(+0),B1486(+0),B1487(+0)
   Strategy ALLY_COMBO; traits Conservative; Mega slots 4
   Tactics: ACTIVATE/WEAVILE/ICE_SHARD/ARMAROUGE
   Plan: First two useful turns: Weavile's Ice Shard may hit Armarouge only when the resisted physical damage and Defense drop are worth the Speed gain; Armarouge must not Protect through that trigger. Turn two uses actual speed and survival, not an imagined Policy boost. Alternate deployment: Weavile's Fake Out supports Scarf Genesect's immediate special pressure without friendly damage. Reserves & disruption: Mega Scolipede is a separate timed transformation/Speed Boost reserve. The active ally-hit line does not depend on Dynamax or Tera. Counterplay & audit: Fake Out/priority denial, redirection where supported, physical pressure into lowered Defense and speed reversal. Disposition: AMEND CANDIDATE: zero Weavile's Attack IV to reduce activation damage, accepting weaker Knock Off; native survival/order tests remain required.
-E0507 TRAINER_LEA_AND_JED | SSTidalRooms | casual | B1203(-1),B1001(+0),B1489(+0),B1490(+0)
+E0507 TRAINER_LEA_AND_JED | SSTidalRooms | casual | B1203(-1),B1001(+0),B1488(+0),B1489(+0)
   Strategy none; traits none; Mega slots none
   Plan: First two useful turns: Miltank uses Helping Hand only for a relevant Tauros attack or attacks itself; turn two may bring Primeape for anti-drop pressure. Alternate deployment: Miltank and Primeape are the alternate direct physical mode. Reserves & disruption: Cosmog's two-move set and custom Unaware are a deliberate novelty cost, not a secretly powerful competitive role. Teleport requires an available legal receiver and spends the action. Counterplay & audit: Fighting pressure, Taunt, special attacks and physical mitigation without feeding Defiant. Disposition: Keep optional novelty, but flag Cosmog's unusual attack legality/form role for source validation rather than declare a complete high-pressure quartet.
-E0509 TRAINER_NAOMI | SSTidalRooms | regular | B1491(-1),B1157(+0),B1492(+0),B1287(+0)
+E0509 TRAINER_NAOMI | SSTidalRooms | regular | B1490(-1),B1157(+0),B1491(+0),B1287(+0)
   Strategy SETUP; traits Conservative; Mega slots 3
   Plan: First two useful turns: Tsareena attacks or pivots while Salazzle uses Fake Out only when it buys a useful action; turn two can introduce Darkrai after a safe opening. Alternate deployment: Salazzle's Fake Out supports Darkrai's Nasty Plot or a risk-bearing Hypnosis. Reserves & disruption: Overqwil supplies Intimidate/coverage. Queenly Majesty protects the side from specified opposing priority, not from all disruption, and Mega Darkrai may change its base ability. Counterplay & audit: Spread damage, Taunt, Fire/Flying/Psychic pressure and sleep immunity. Disposition: Keep optional ship content; do not credit Hypnosis as guaranteed setup protection.
-E0510 TRAINER_WALLACE_DOUBLES_LEGENDS | CaveOfOrigin_DianciesRoom | elite | B1493(+1),B1494(+1),B1495(+2),B1496(+2),B1497(+2),B1498(+2)
+E0510 TRAINER_WALLACE_DOUBLES_LEGENDS | CaveOfOrigin_DianciesRoom | elite | B1492(+1),B1493(+1),B1494(+2),B1495(+2),B1496(+2),B1497(+2)
   Strategy RAIN,SETUP,TAILWIND; traits Double Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Kyogre attacks while Therian Tornadus sets Tailwind only when needed or applies pressure. Turn two uses a real Regenerator switch when the replacement improves the board. Alternate deployment: Base Calyrex's Helping Hand supports physical Mega Mewtwo X; it is not a fused rider form. Reserves & disruption: Arceus is ordinary Normal without a plate, and Terapagos requires an explicit non-Tera form contract. Tera Starstorm's name alone neither permits Tera nor proves the set illegal. Counterplay & audit: Weather replacement, Wide Guard, priority denial, physical/special mitigation and targeting the actual support. Disposition: Keep optional postgame status; bind Terapagos's supported form and move behavior before acceptance, with no invented fusion or Tera mechanics.
-E0511 TRAINER_LEAF_ALTERING_CAVE | AlteringCave_B1F | rival | B0904(+0),B1499(+0),B1234(+0),B1500(+0),B1501(+0),B1502(+1)
+E0511 TRAINER_LEAF_ALTERING_CAVE | AlteringCave_B1F | rival | B0904(+0),B1498(+0),B1234(+0),B1499(+0),B1500(+0),B1501(+1)
   Strategy SUN,REDIRECTION; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Ninetales supplies sun while Kangaskhan uses Fake Out or immediate pressure; turn two may pivot to the appropriate support/threat pair. Alternate deployment: Chlorophyll Tangrowth's Rage Powder supports Mega Mewtwo Y's special offense. Reserves & disruption: Gengar supplies Icy Wind and Zeraora physical coverage. Plasma Fists can alter a later same-turn Kangaskhan Double-Edge, and Tangrowth's powder has normal target restrictions. Counterplay & audit: Weather replacement, powder immunity, Dark/Ground pressure, priority denial and special mitigation. Disposition: Keep existing Altering Cave staging and live-cap scaling; no old fixed level-100 floor or automatic second Mega.
-E0512 TRAINER_STEVEN | MeteorFalls_StevensCave | rival | B1503(+0),B1504(+0),B1505(+0),B1506(+0),B1507(+0),B1508(+1)
+E0512 TRAINER_STEVEN | MeteorFalls_StevensCave | rival | B1502(+0),B1503(+0),B1504(+0),B1505(+0),B1506(+0),B1507(+1)
   Strategy SETUP,TAILWIND; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Skarmory chooses Tailwind only when Rayquaza's attack or safe Dragon Dance benefits; turn two attacks through the window or enters the appropriate heavy reserve. Alternate deployment: Cradily's Storm Drain supports Melmetal's physical pressure against eligible single-target Water attacks. Reserves & disruption: Dialga supplies special coverage, and Metagross is the proposed sole Mega designation. Rayquaza's move-based eligibility must not accidentally create a second Mega for the same owner. Counterplay & audit: Ground/Fire/Fighting pressure, Wide Guard where relevant, ability suppression and special attacks into the physical core. Disposition: AMEND CANDIDATE: designate Mega Metagross and keep Rayquaza untransformed; optional exhibition only, never a C48 research gate.
-E0513 TRAINER_CYNTHIA_1 | MossdeepCity_House1 | leader | B0818(+1),B0888(+1),B1509(+2),B1510(+2),B1511(+2),B1512(+2)
+E0513 TRAINER_CYNTHIA_1 | MossdeepCity_House1 | leader | B0818(+1),B0888(+1),B1508(+2),B1509(+2),B1510(+2),B1511(+2)
   Strategy REDIRECTION; traits Ace Pokemon; Mega slots 6
   Plan: First two useful turns: Roserade attacks or uses legal Sleep Powder while Togekiss redirects a meaningful single-target threat. Turn two should bring a stronger attacker when the support pair cannot make progress. Alternate deployment: Togekiss supports Miraidon's special pressure after the deliberate Electric Terrain transition. Reserves & disruption: Electric Terrain can make Sleep Powder fail against grounded targets, including targets of the team's own Roserade. Spiritomb, mixed Scarf Lucario and Mega Garchomp Z provide distinct reserve roles. Counterplay & audit: Terrain replacement, powder immunity, Ground/Fairy pressure, Taunt and special mitigation. Disposition: AMEND CANDIDATE: keep Roserade's sleep phase and Miraidon's terrain phase mutually explicit; source-bind custom Mega Garchomp Z rather than import ordinary Mega stats.
 
@@ -3735,110 +3736,109 @@ B1405 Raichu @Raichunite X | Lightning Rod | Jolly | EV 4/252/0/0/0/252 | Wild C
 B1406 Torterra @Life Orb | Overgrow | Adamant | EV 252/252/4/0/0/0 | Wood Hammer,High Horsepower,Rock Slide,Protect
 B1407 Staraptor @Choice Scarf | Intimidate | Jolly | EV 4/252/0/0/0/252 | Brave Bird,Close Combat,U Turn,Final Gambit
 B1408 Lucario @Lucarionite Z | Inner Focus | Jolly | EV 4/252/0/0/0/252 | Close Combat,Meteor Mash,Extreme Speed,Protect
-B1409 Tyranitar @Tyranitarite | Sand Stream | Adamant | EV 252/252/4/0/0/0 | Rock Slide,Crunch,Low Kick,Protect
-B1410 Stoutland @Clear Amulet | Sand Rush | Jolly | EV 4/252/0/0/0/252 | Double Edge,Wild Charge,Crunch,Protect
-B1411 Leavanny @Life Orb | Swarm | Jolly | EV 4/252/0/0/0/252 | Leaf Blade,X Scissor,Sticky Web,Protect
-B1412 Sandslash @Muscle Band | Sand Rush | Adamant | EV 4/252/0/0/0/252 | High Horsepower,Rock Slide,Knock Off,Protect
-B1413 Dugtrio Alola @Expert Belt | Sand Force | Jolly | EV 4/252/0/0/0/252 | Iron Head,Stomping Tantrum,Sucker Punch,Protect
-B1414 Eternatus @Leftovers | Pressure | Timid | EV 4/0/0/252/0/252 | Dynamax Cannon,Sludge Bomb,Flamethrower,Protect
-B1415 Venusaur @Wise Glasses | Chlorophyll | Modest | EV 4/0/0/252/0/252 | Giga Drain,Sludge Bomb,Sleep Powder,Protect
-B1416 Heliolisk @Sitrus Berry | Solar Power | Timid | EV 4/0/0/252/0/252 | Thunderbolt,Hyper Voice,Glare,Protect
-B1417 Lycanroc @Life Orb | Steadfast | Jolly | EV 4/252/0/0/0/252 | Accelerock,Rock Slide,Drill Run,Protect
-B1418 Zamazenta @Leftovers | Dauntless Shield | Impish | EV 252/0/252/0/4/0 | Body Press,Iron Defense,Crunch,Protect
-B1419 Victreebel @Victreebelite | Chlorophyll | Modest | EV 4/0/0/252/0/252 | Leaf Storm,Sludge Bomb,Weather Ball,Protect
-B1420 Jynx @Focus Sash | Dry Skin | Timid | EV 4/0/0/252/0/252 | Lovely Kiss,Ice Beam,Fake Out,Protect
-B1421 Xerneas @Power Herb | Fairy Aura | Modest | EV 4/0/0/252/0/252 | Geomancy,Moonblast,Thunderbolt,Protect
-B1422 Sceptile @Life Orb | Overgrow | Timid | EV 4/0/0/252/0/252 | Leaf Storm,Dragon Pulse,Focus Blast,Protect
-B1423 Duraludon @Eviolite | Stalwart | Modest | EV 252/0/4/252/0/0 | Flash Cannon,Draco Meteor,Thunderbolt,Protect
-B1424 Greninja @Greninjite | Protean | Naive | EV 8/124/0/124/0/252 | Hydro Pump,Ice Beam,Low Kick,Protect
-B1425 Abomasnow @Sitrus Berry | Snow Warning | Quiet | EV 252/0/4/252/0/0 | Blizzard,Giga Drain,Ice Shard,Protect
-B1426 Froslass @Focus Sash | Cursed Body | Timid | EV 4/0/0/252/0/252 | Blizzard,Shadow Ball,Aurora Veil,Destiny Bond
-B1427 Virizion @Clear Amulet | Justified | Jolly | EV 4/252/0/0/0/252 | Leaf Blade,Close Combat,Stone Edge,Protect
-B1428 Bisharp @Muscle Band | Defiant | Adamant | EV 4/252/0/0/0/252 | Sucker Punch,Iron Head,Throat Chop,Protect
-B1429 Barbaracle @Barbaracite | Tough Claws | Adamant | EV 4/252/0/0/0/252 | Shell Smash,Liquidation,Rock Slide,Protect
-B1430 Incineroar @Sitrus Berry | Intimidate | Careful | EV 252/0/4/0/252/0 | Fake Out,Flare Blitz,Throat Chop,Parting Shot
-B1431 Yveltal @Life Orb | Dark Aura | Modest | EV 4/0/0/252/0/252; IV 31/0/31/31/31/31 | Oblivion Wing,Dark Pulse,Heat Wave,Tailwind
-B1432 Grimmsnarl @Light Clay | Prankster | Careful | EV 252/4/116/0/136/0 | Reflect,Light Screen,Spirit Break,Thunder Wave
-B1433 Urshifu @Clear Amulet | Unseen Fist | Jolly | EV 4/252/0/0/0/252 | Wicked Blow,Close Combat,Sucker Punch,Protect
-B1434 Sharpedo @Sharpedonite | Speed Boost | Jolly | EV 4/252/0/0/0/252 | Crunch,Psychic Fangs,Liquidation,Protect
-B1435 Absol @Absolite Z | Super Luck | Jolly | EV 4/252/0/0/0/252 | Sucker Punch,Knock Off,Close Combat,Protect
-B1436 Giratina @Leftovers | Pressure | Impish | EV 252/0/252/0/4/0 | Poltergeist,Icy Wind,Will O Wisp,Protect
-B1437 Lunala @Covert Cloak | Shadow Shield | Timid | EV 4/0/0/252/0/252; IV 31/0/31/31/31/31 | Moongeist Beam,Moonblast,Wide Guard,Protect
-B1438 Marshadow @Life Orb | Technician | Jolly | EV 4/252/0/0/0/252 | Spectral Thief,Close Combat,Shadow Sneak,Protect
-B1439 Banette @Banettite | Insomnia | Adamant | EV 252/252/0/0/4/0 | Poltergeist,Encore,Will O Wisp,Protect
-B1440 Spectrier @Choice Specs | Grim Neigh | Timid | EV 4/0/0/252/0/252 | Shadow Ball,Dark Pulse,Psychic,Hex
-B1441 Ninetales Alola @Light Clay | Snow Warning | Timid | EV 252/0/0/4/0/252; IV 31/0/31/31/31/31 | Aurora Veil,Blizzard,Moonblast,Encore
-B1442 Kyurem @Choice Specs | Pressure | Modest | EV 4/0/0/252/0/252 | Blizzard,Draco Meteor,Freeze Dry,Earth Power
-B1443 Chien Pao @Focus Sash | Sword Of Ruin | Jolly | EV 4/252/0/0/0/252 | Icicle Crash,Sucker Punch,Sacred Sword,Protect
-B1444 Froslass @Froslassite | Cursed Body | Timid | EV 4/0/0/252/0/252; IV 31/0/31/31/31/31 | Blizzard,Shadow Ball,Icy Wind,Protect
-B1445 Sandslash Alola @Life Orb | Slush Rush | Adamant | EV 4/252/0/0/0/252 | Icicle Crash,Iron Head,High Horsepower,Protect
-B1446 Baxcalibur @Baxcalibrite | Thermal Exchange | Adamant | EV 4/252/0/0/0/252 | Glaive Rush,Icicle Crash,High Horsepower,Protect
-B1447 Salamence @Salamencite | Intimidate | Jolly | EV 4/252/0/0/0/252 | Double Edge,Earthquake,Tailwind,Protect
-B1448 Reshiram @Wise Glasses | Turboblaze | Timid | EV 4/0/0/252/0/252 | Blue Flare,Draco Meteor,Earth Power,Protect
-B1449 Zekrom @Clear Amulet | Teravolt | Adamant | EV 4/252/0/0/0/252 | Bolt Strike,Dragon Claw,Stone Edge,Protect
-B1450 Koraidon @Life Orb | Orichalcum Pulse | Jolly | EV 4/252/0/0/0/252 | Collision Course,Flare Blitz,Dragon Claw,Protect
-B1451 Regidrago @Choice Specs | Dragons Maw | Modest | EV 4/0/0/252/0/252 | Dragon Energy,Draco Meteor,Earth Power,Ancient Power
-B1452 Dragonite @Dragoninite | Multiscale | Modest | EV 252/0/4/252/0/0; IV 31/0/31/31/31/31 | Draco Meteor,Air Slash,Flamethrower,Roost
-B1453 Kyogre @Mystic Water | Drizzle | Modest | EV 4/0/0/252/0/252 | Water Spout,Ice Beam,Origin Pulse,Protect
-B1454 Tapu Fini @Sitrus Berry | Misty Surge | Timid | EV 252/0/4/0/0/252 | Muddy Water,Moonblast,Icy Wind,Protect
-B1455 Ferrothorn @Leftovers | Iron Barbs | Relaxed | EV 252/0/252/0/4/0; IV 31/31/31/31/31/0 | Iron Head,Power Whip,Leech Seed,Protect
-B1456 Palkia @Life Orb | Pressure | Timid | EV 4/0/0/252/0/252 | Aura Sphere,Hydro Pump,Thunder,Protect
-B1457 Milotic @Miloticite | Competitive | Bold | EV 252/0/252/0/4/0; IV 31/0/31/31/31/31 | Muddy Water,Helping Hand,Recover,Ice Beam
-B1458 Starmie @Starminite | Natural Cure | Jolly | EV 4/252/0/0/0/252 | Liquidation,Psycho Cut,Aqua Jet,Protect
-B1459 Indeedee F @Sitrus Berry | Psychic Surge | Modest | EV 252/0/4/0/252/0 | Follow Me,Expanding Force,Helping Hand,Protect
-B1460 Gallade @Life Orb | Sharpness | Jolly | EV 4/252/0/0/0/252 | Psycho Cut,Sacred Sword,Night Slash,Protect
-B1461 Dragapult @Focus Sash | Infiltrator | Timid | EV 4/0/0/252/0/252 | Draco Meteor,Shadow Ball,Flamethrower,Protect
-B1462 Heatran @Charcoal | Flash Fire | Modest | EV 4/0/0/252/0/252 | Magma Storm,Earth Power,Flash Cannon,Protect
-B1463 Magearna @Magearnite | Soul Heart | Modest | EV 4/0/0/252/0/252 | Fleur Cannon,Flash Cannon,Aura Sphere,Protect
-B1464 Mienshao @Life Orb | Regenerator | Adamant | EV 4/252/0/0/0/252 | Close Combat,Knock Off,U Turn,Protect
-B1465 Gliscor @Toxic Orb | Poison Heal | Jolly | EV 4/252/0/0/0/252 | High Horsepower,Rock Slide,Swords Dance,Protect
-B1466 Xurkitree @Assault Vest | Beast Boost | Modest | EV 4/0/0/252/0/252 | Thunderbolt,Energy Ball,Dazzling Gleam,Electroweb
-B1467 Zeraora @Zeraorite | Volt Absorb | Jolly | EV 4/252/0/0/0/252 | Plasma Fists,Close Combat,Play Rough,Protect
-B1468 Whimsicott @Mental Herb | Prankster | Bold | EV 252/0/4/0/252/0 | Tailwind,Encore,Moonblast,Protect
-B1469 Rotom Wash @Wise Glasses | Levitate | Modest | EV 4/0/0/252/0/252 | Hydro Pump,Thunderbolt,Will O Wisp,Protect
-B1470 Necrozma @Weakness Policy | Prism Armor | Modest | EV 4/0/0/252/0/252 | Photon Geyser,Earth Power,Heat Wave,Protect
-B1471 Clefable @Clefablite | Unaware | Modest | EV 252/0/4/0/252/0 | Follow Me,Moonblast,Dazzling Gleam,Protect
-B1472 Cresselia @Mental Herb | Levitate | Sassy | EV 252/0/4/0/252/0 | Trick Room,Psychic,Helping Hand,Moonlight
-B1473 Volcanion @Assault Vest | Water Absorb | Quiet | EV 252/0/4/252/0/0 | Steam Eruption,Heat Wave,Sludge Bomb,Earth Power
-B1474 Mawile @Sitrus Berry | Intimidate | Brave | EV 252/252/4/0/0/0 | Play Rough,Iron Head,Sucker Punch,Protect
-B1475 Slurpuff @Leftovers | Sweet Veil | Quiet | EV 252/0/4/0/252/0 | Dazzling Gleam,Flamethrower,Helping Hand,Protect
-B1476 Celesteela @Life Orb | Beast Boost | Brave | EV 252/252/4/0/0/0 | Heavy Slam,Stone Edge,Wide Guard,Protect
-B1477 Scrafty @Scraftinite | Intimidate | Brave | EV 252/252/4/0/0/0 | Fake Out,Close Combat,Knock Off,Ice Punch
-B1478 Fezandipiti @Life Orb | Toxic Chain | Timid | EV 4/0/0/252/0/252 | Moonblast,Sludge Bomb,Tailwind,Protect
-B1479 Persian Alola @Sitrus Berry | Fur Coat | Timid | EV 252/0/4/0/0/252 | U Turn,Foul Play,Snarl,Protect
-B1480 Incineroar @Mental Herb | Intimidate | Careful | EV 252/0/4/0/252/0 | Flare Blitz,Throat Chop,Parting Shot,Protect
-B1481 Mesprit @Covert Cloak | Levitate | Calm | EV 252/0/4/0/252/0 | Helping Hand,Thunder Wave,Psychic,Protect
-B1482 Floette Eternal @Floettite | Flower Veil | Modest | EV 252/0/4/0/252/0 | Moonblast,Wish,Calm Mind,Protect
-B1483 Lapras @Laprasite | Water Absorb | Modest | EV 4/0/0/252/0/252 | Freeze Dry,Hydro Pump,Snowscape,Protect
-B1484 Luxray @Sitrus Berry | Intimidate | Brave | EV 252/252/4/0/0/0 | Wild Charge,Crunch,Snarl,Protect
-B1485 Weavile @Focus Sash | Pressure | Jolly | EV 252/4/0/0/0/252; IV 31/0/31/31/31/31 | Ice Shard,Fake Out,Knock Off,Taunt
-B1486 Armarouge @Life Orb | Weak Armor | Modest | EV 4/0/0/252/0/252 | Armor Cannon,Psychic,Energy Ball,Protect
-B1487 Genesect @Choice Scarf | Download | Modest | EV 4/0/0/252/0/252 | Bug Buzz,Ice Beam,Flamethrower,U Turn
-B1488 Scolipede @Scolipite | Speed Boost | Jolly | EV 4/252/0/0/0/252 | Protect,Megahorn,Poison Jab,Superpower
-B1489 Primeape @Expert Belt | Defiant | Jolly | EV 4/252/0/0/0/252 | Close Combat,Stone Edge,U Turn,Protect
-B1490 Cosmog @Eviolite | Unaware | Adamant | EV 252/252/4/0/0/0 | Double Edge,Teleport
-B1491 Tsareena @Life Orb | Queenly Majesty | Jolly | EV 4/252/0/0/0/252 | Power Whip,High Jump Kick,U Turn,Protect
-B1492 Darkrai @Darkranite | Bad Dreams | Timid | EV 4/0/0/252/0/252 | Hypnosis,Dark Pulse,Nasty Plot,Protect
-B1493 Kyogre @Mystic Water | Drizzle | Modest | EV 4/0/0/252/0/252 | Origin Pulse,Ice Beam,Thunder,Protect
-B1494 Tornadus Therian @Focus Sash | Regenerator | Timid | EV 4/0/0/252/0/252 | Bleakwind Storm,Heat Wave,Tailwind,Protect
-B1495 Arceus @Leftovers | Multitype | Adamant | EV 4/252/0/0/0/252 | Extreme Speed,Stone Edge,Swords Dance,Protect
-B1496 Calyrex @Sitrus Berry | Unnerve | Modest | EV 4/0/0/252/0/252 | Psychic,Leaf Storm,Helping Hand,Protect
-B1497 Terapagos @Life Orb | Tera Shift | Modest | EV 4/0/0/252/0/252 | Tera Starstorm,Earth Power,Ice Beam,Protect
-B1498 Mewtwo @Mewtwonite X | Unnerve | Adamant | EV 4/252/0/0/0/252 | Drain Punch,Zen Headbutt,Ice Punch,Protect
-B1499 Kangaskhan @Life Orb | Scrappy | Jolly | EV 4/252/0/0/0/252 | Fake Out,Double Edge,Drain Punch,Sucker Punch
-B1500 Tangrowth @Sitrus Berry | Chlorophyll | Modest | EV 4/0/0/252/0/252 | Giga Drain,Sleep Powder,Rage Powder,Protect
-B1501 Zeraora @Clear Amulet | Volt Absorb | Jolly | EV 4/252/0/0/0/252 | Plasma Fists,Close Combat,Play Rough,Protect
-B1502 Mewtwo @Mewtwonite Y | Pressure | Timid | EV 4/0/0/252/0/252 | Psystrike,Aura Sphere,Ice Beam,Protect
-B1503 Skarmory @Leftovers | Sturdy | Impish | EV 252/0/252/0/4/0 | Brave Bird,Tailwind,Body Press,Protect
-B1504 Rayquaza @Focus Sash | Air Lock | Adamant | EV 4/252/0/0/0/252 | Dragon Ascent,Extreme Speed,Dragon Dance,Protect
-B1505 Cradily @Mental Herb | Storm Drain | Calm | EV 252/0/4/0/252/0 | Giga Drain,Stealth Rock,Recover,Protect
-B1506 Melmetal @Weakness Policy | Iron Fist | Brave | EV 252/252/4/0/0/0 | Double Iron Bash,Thunder Punch,Ice Punch,Protect
-B1507 Dialga @Life Orb | Pressure | Modest | EV 4/0/0/252/0/252 | Draco Meteor,Flash Cannon,Earth Power,Protect
-B1508 Metagross @Metagrossite | Clear Body | Adamant | EV 4/252/0/0/0/252 | Meteor Mash,Zen Headbutt,Bullet Punch,Protect
-B1509 Spiritomb @Mental Herb | Infiltrator | Sassy | EV 252/0/4/0/252/0 | Foul Play,Will O Wisp,Snarl,Protect
-B1510 Lucario @Choice Scarf | Inner Focus | Naive | EV 4/252/0/252/0/0 | Close Combat,Flash Cannon,Extreme Speed,Aura Sphere
-B1511 Miraidon @Choice Specs | Hadron Engine | Timid | EV 4/0/0/252/0/252 | Electro Drift,Draco Meteor,Volt Switch,Overheat
-B1512 Garchomp @Garchompite Z | Rough Skin | Jolly | EV 4/252/0/0/0/252 | Dragon Claw,Stomping Tantrum,Rock Slide,Protect
+B1409 Stoutland @Clear Amulet | Sand Rush | Jolly | EV 4/252/0/0/0/252 | Double Edge,Wild Charge,Crunch,Protect
+B1410 Garchomp @Garchompite | Sand Veil | Jolly | EV 4/252/0/0/0/252 | Stomping Tantrum,Dragon Claw,Rock Slide,Protect
+B1411 Sandslash @Muscle Band | Sand Rush | Adamant | EV 4/252/0/0/0/252 | High Horsepower,Rock Slide,Knock Off,Protect
+B1412 Dugtrio Alola @Expert Belt | Sand Force | Jolly | EV 4/252/0/0/0/252 | Iron Head,Stomping Tantrum,Sucker Punch,Protect
+B1413 Eternatus @Leftovers | Pressure | Timid | EV 4/0/0/252/0/252 | Dynamax Cannon,Sludge Bomb,Flamethrower,Protect
+B1414 Venusaur @Wise Glasses | Chlorophyll | Modest | EV 4/0/0/252/0/252 | Giga Drain,Sludge Bomb,Sleep Powder,Protect
+B1415 Heliolisk @Sitrus Berry | Solar Power | Timid | EV 4/0/0/252/0/252 | Thunderbolt,Hyper Voice,Glare,Protect
+B1416 Lycanroc @Life Orb | Steadfast | Jolly | EV 4/252/0/0/0/252 | Accelerock,Rock Slide,Drill Run,Protect
+B1417 Zamazenta @Leftovers | Dauntless Shield | Impish | EV 252/0/252/0/4/0 | Body Press,Iron Defense,Crunch,Protect
+B1418 Victreebel @Victreebelite | Chlorophyll | Modest | EV 4/0/0/252/0/252 | Leaf Storm,Sludge Bomb,Weather Ball,Protect
+B1419 Jynx @Focus Sash | Dry Skin | Timid | EV 4/0/0/252/0/252 | Lovely Kiss,Ice Beam,Fake Out,Protect
+B1420 Xerneas @Power Herb | Fairy Aura | Modest | EV 4/0/0/252/0/252 | Geomancy,Moonblast,Thunderbolt,Protect
+B1421 Sceptile @Life Orb | Overgrow | Timid | EV 4/0/0/252/0/252 | Leaf Storm,Dragon Pulse,Focus Blast,Protect
+B1422 Duraludon @Eviolite | Stalwart | Modest | EV 252/0/4/252/0/0 | Flash Cannon,Draco Meteor,Thunderbolt,Protect
+B1423 Greninja @Greninjite | Protean | Naive | EV 8/124/0/124/0/252 | Hydro Pump,Ice Beam,Low Kick,Protect
+B1424 Abomasnow @Sitrus Berry | Snow Warning | Quiet | EV 252/0/4/252/0/0 | Blizzard,Giga Drain,Ice Shard,Protect
+B1425 Froslass @Focus Sash | Cursed Body | Timid | EV 4/0/0/252/0/252 | Blizzard,Shadow Ball,Aurora Veil,Destiny Bond
+B1426 Virizion @Clear Amulet | Justified | Jolly | EV 4/252/0/0/0/252 | Leaf Blade,Close Combat,Stone Edge,Protect
+B1427 Bisharp @Muscle Band | Defiant | Adamant | EV 4/252/0/0/0/252 | Sucker Punch,Iron Head,Throat Chop,Protect
+B1428 Barbaracle @Barbaracite | Tough Claws | Adamant | EV 4/252/0/0/0/252 | Shell Smash,Liquidation,Rock Slide,Protect
+B1429 Incineroar @Sitrus Berry | Intimidate | Careful | EV 252/0/4/0/252/0 | Fake Out,Flare Blitz,Throat Chop,Parting Shot
+B1430 Yveltal @Life Orb | Dark Aura | Modest | EV 4/0/0/252/0/252; IV 31/0/31/31/31/31 | Oblivion Wing,Dark Pulse,Heat Wave,Tailwind
+B1431 Grimmsnarl @Light Clay | Prankster | Careful | EV 252/4/116/0/136/0 | Reflect,Light Screen,Spirit Break,Thunder Wave
+B1432 Urshifu @Clear Amulet | Unseen Fist | Jolly | EV 4/252/0/0/0/252 | Wicked Blow,Close Combat,Sucker Punch,Protect
+B1433 Sharpedo @Sharpedonite | Speed Boost | Jolly | EV 4/252/0/0/0/252 | Crunch,Psychic Fangs,Liquidation,Protect
+B1434 Absol @Absolite Z | Super Luck | Jolly | EV 4/252/0/0/0/252 | Sucker Punch,Knock Off,Close Combat,Protect
+B1435 Giratina @Leftovers | Pressure | Impish | EV 252/0/252/0/4/0 | Poltergeist,Icy Wind,Will O Wisp,Protect
+B1436 Lunala @Covert Cloak | Shadow Shield | Timid | EV 4/0/0/252/0/252; IV 31/0/31/31/31/31 | Moongeist Beam,Moonblast,Wide Guard,Protect
+B1437 Marshadow @Life Orb | Technician | Jolly | EV 4/252/0/0/0/252 | Spectral Thief,Close Combat,Shadow Sneak,Protect
+B1438 Banette @Banettite | Insomnia | Adamant | EV 252/252/0/0/4/0 | Poltergeist,Encore,Will O Wisp,Protect
+B1439 Spectrier @Choice Specs | Grim Neigh | Timid | EV 4/0/0/252/0/252 | Shadow Ball,Dark Pulse,Psychic,Hex
+B1440 Ninetales Alola @Light Clay | Snow Warning | Timid | EV 252/0/0/4/0/252; IV 31/0/31/31/31/31 | Aurora Veil,Blizzard,Moonblast,Encore
+B1441 Kyurem @Choice Specs | Pressure | Modest | EV 4/0/0/252/0/252 | Blizzard,Draco Meteor,Freeze Dry,Earth Power
+B1442 Chien Pao @Focus Sash | Sword Of Ruin | Jolly | EV 4/252/0/0/0/252 | Icicle Crash,Sucker Punch,Sacred Sword,Protect
+B1443 Froslass @Froslassite | Cursed Body | Timid | EV 4/0/0/252/0/252; IV 31/0/31/31/31/31 | Blizzard,Shadow Ball,Icy Wind,Protect
+B1444 Sandslash Alola @Life Orb | Slush Rush | Adamant | EV 4/252/0/0/0/252 | Icicle Crash,Iron Head,High Horsepower,Protect
+B1445 Baxcalibur @Baxcalibrite | Thermal Exchange | Adamant | EV 4/252/0/0/0/252 | Glaive Rush,Icicle Crash,High Horsepower,Protect
+B1446 Salamence @Salamencite | Intimidate | Jolly | EV 4/252/0/0/0/252 | Double Edge,Earthquake,Tailwind,Protect
+B1447 Reshiram @Wise Glasses | Turboblaze | Timid | EV 4/0/0/252/0/252 | Blue Flare,Draco Meteor,Earth Power,Protect
+B1448 Zekrom @Clear Amulet | Teravolt | Adamant | EV 4/252/0/0/0/252 | Bolt Strike,Dragon Claw,Stone Edge,Protect
+B1449 Koraidon @Life Orb | Orichalcum Pulse | Jolly | EV 4/252/0/0/0/252 | Collision Course,Flare Blitz,Dragon Claw,Protect
+B1450 Regidrago @Choice Specs | Dragons Maw | Modest | EV 4/0/0/252/0/252 | Dragon Energy,Draco Meteor,Earth Power,Ancient Power
+B1451 Dragonite @Dragoninite | Multiscale | Modest | EV 252/0/4/252/0/0; IV 31/0/31/31/31/31 | Draco Meteor,Air Slash,Flamethrower,Roost
+B1452 Kyogre @Mystic Water | Drizzle | Modest | EV 4/0/0/252/0/252 | Water Spout,Ice Beam,Origin Pulse,Protect
+B1453 Tapu Fini @Sitrus Berry | Misty Surge | Timid | EV 252/0/4/0/0/252 | Muddy Water,Moonblast,Icy Wind,Protect
+B1454 Ferrothorn @Leftovers | Iron Barbs | Relaxed | EV 252/0/252/0/4/0; IV 31/31/31/31/31/0 | Iron Head,Power Whip,Leech Seed,Protect
+B1455 Palkia @Life Orb | Pressure | Timid | EV 4/0/0/252/0/252 | Aura Sphere,Hydro Pump,Thunder,Protect
+B1456 Milotic @Miloticite | Competitive | Bold | EV 252/0/252/0/4/0; IV 31/0/31/31/31/31 | Muddy Water,Helping Hand,Recover,Ice Beam
+B1457 Starmie @Starminite | Natural Cure | Jolly | EV 4/252/0/0/0/252 | Liquidation,Psycho Cut,Aqua Jet,Protect
+B1458 Indeedee F @Sitrus Berry | Psychic Surge | Modest | EV 252/0/4/0/252/0 | Follow Me,Expanding Force,Helping Hand,Protect
+B1459 Gallade @Life Orb | Sharpness | Jolly | EV 4/252/0/0/0/252 | Psycho Cut,Sacred Sword,Night Slash,Protect
+B1460 Dragapult @Focus Sash | Infiltrator | Timid | EV 4/0/0/252/0/252 | Draco Meteor,Shadow Ball,Flamethrower,Protect
+B1461 Heatran @Charcoal | Flash Fire | Modest | EV 4/0/0/252/0/252 | Magma Storm,Earth Power,Flash Cannon,Protect
+B1462 Magearna @Magearnite | Soul Heart | Modest | EV 4/0/0/252/0/252 | Fleur Cannon,Flash Cannon,Aura Sphere,Protect
+B1463 Mienshao @Life Orb | Regenerator | Adamant | EV 4/252/0/0/0/252 | Close Combat,Knock Off,U Turn,Protect
+B1464 Gliscor @Toxic Orb | Poison Heal | Jolly | EV 4/252/0/0/0/252 | High Horsepower,Rock Slide,Swords Dance,Protect
+B1465 Xurkitree @Assault Vest | Beast Boost | Modest | EV 4/0/0/252/0/252 | Thunderbolt,Energy Ball,Dazzling Gleam,Electroweb
+B1466 Zeraora @Zeraorite | Volt Absorb | Jolly | EV 4/252/0/0/0/252 | Plasma Fists,Close Combat,Play Rough,Protect
+B1467 Whimsicott @Mental Herb | Prankster | Bold | EV 252/0/4/0/252/0 | Tailwind,Encore,Moonblast,Protect
+B1468 Rotom Wash @Wise Glasses | Levitate | Modest | EV 4/0/0/252/0/252 | Hydro Pump,Thunderbolt,Will O Wisp,Protect
+B1469 Necrozma @Weakness Policy | Prism Armor | Modest | EV 4/0/0/252/0/252 | Photon Geyser,Earth Power,Heat Wave,Protect
+B1470 Clefable @Clefablite | Unaware | Modest | EV 252/0/4/0/252/0 | Follow Me,Moonblast,Dazzling Gleam,Protect
+B1471 Cresselia @Mental Herb | Levitate | Sassy | EV 252/0/4/0/252/0 | Trick Room,Psychic,Helping Hand,Moonlight
+B1472 Volcanion @Assault Vest | Water Absorb | Quiet | EV 252/0/4/252/0/0 | Steam Eruption,Heat Wave,Sludge Bomb,Earth Power
+B1473 Mawile @Sitrus Berry | Intimidate | Brave | EV 252/252/4/0/0/0 | Play Rough,Iron Head,Sucker Punch,Protect
+B1474 Slurpuff @Leftovers | Sweet Veil | Quiet | EV 252/0/4/0/252/0 | Dazzling Gleam,Flamethrower,Helping Hand,Protect
+B1475 Celesteela @Life Orb | Beast Boost | Brave | EV 252/252/4/0/0/0 | Heavy Slam,Stone Edge,Wide Guard,Protect
+B1476 Scrafty @Scraftinite | Intimidate | Brave | EV 252/252/4/0/0/0 | Fake Out,Close Combat,Knock Off,Ice Punch
+B1477 Fezandipiti @Life Orb | Toxic Chain | Timid | EV 4/0/0/252/0/252 | Moonblast,Sludge Bomb,Tailwind,Protect
+B1478 Persian Alola @Sitrus Berry | Fur Coat | Timid | EV 252/0/4/0/0/252 | U Turn,Foul Play,Snarl,Protect
+B1479 Incineroar @Mental Herb | Intimidate | Careful | EV 252/0/4/0/252/0 | Flare Blitz,Throat Chop,Parting Shot,Protect
+B1480 Mesprit @Covert Cloak | Levitate | Calm | EV 252/0/4/0/252/0 | Helping Hand,Thunder Wave,Psychic,Protect
+B1481 Floette Eternal @Floettite | Flower Veil | Modest | EV 252/0/4/0/252/0 | Moonblast,Wish,Calm Mind,Protect
+B1482 Lapras @Laprasite | Water Absorb | Modest | EV 4/0/0/252/0/252 | Freeze Dry,Hydro Pump,Snowscape,Protect
+B1483 Luxray @Sitrus Berry | Intimidate | Brave | EV 252/252/4/0/0/0 | Wild Charge,Crunch,Snarl,Protect
+B1484 Weavile @Focus Sash | Pressure | Jolly | EV 252/4/0/0/0/252; IV 31/0/31/31/31/31 | Ice Shard,Fake Out,Knock Off,Taunt
+B1485 Armarouge @Life Orb | Weak Armor | Modest | EV 4/0/0/252/0/252 | Armor Cannon,Psychic,Energy Ball,Protect
+B1486 Genesect @Choice Scarf | Download | Modest | EV 4/0/0/252/0/252 | Bug Buzz,Ice Beam,Flamethrower,U Turn
+B1487 Scolipede @Scolipite | Speed Boost | Jolly | EV 4/252/0/0/0/252 | Protect,Megahorn,Poison Jab,Superpower
+B1488 Primeape @Expert Belt | Defiant | Jolly | EV 4/252/0/0/0/252 | Close Combat,Stone Edge,U Turn,Protect
+B1489 Cosmog @Eviolite | Unaware | Adamant | EV 252/252/4/0/0/0 | Double Edge,Teleport
+B1490 Tsareena @Life Orb | Queenly Majesty | Jolly | EV 4/252/0/0/0/252 | Power Whip,High Jump Kick,U Turn,Protect
+B1491 Darkrai @Darkranite | Bad Dreams | Timid | EV 4/0/0/252/0/252 | Hypnosis,Dark Pulse,Nasty Plot,Protect
+B1492 Kyogre @Mystic Water | Drizzle | Modest | EV 4/0/0/252/0/252 | Origin Pulse,Ice Beam,Thunder,Protect
+B1493 Tornadus Therian @Focus Sash | Regenerator | Timid | EV 4/0/0/252/0/252 | Bleakwind Storm,Heat Wave,Tailwind,Protect
+B1494 Arceus @Leftovers | Multitype | Adamant | EV 4/252/0/0/0/252 | Extreme Speed,Stone Edge,Swords Dance,Protect
+B1495 Calyrex @Sitrus Berry | Unnerve | Modest | EV 4/0/0/252/0/252 | Psychic,Leaf Storm,Helping Hand,Protect
+B1496 Terapagos @Life Orb | Tera Shift | Modest | EV 4/0/0/252/0/252 | Tera Starstorm,Earth Power,Ice Beam,Protect
+B1497 Mewtwo @Mewtwonite X | Unnerve | Adamant | EV 4/252/0/0/0/252 | Drain Punch,Zen Headbutt,Ice Punch,Protect
+B1498 Kangaskhan @Life Orb | Scrappy | Jolly | EV 4/252/0/0/0/252 | Fake Out,Double Edge,Drain Punch,Sucker Punch
+B1499 Tangrowth @Sitrus Berry | Chlorophyll | Modest | EV 4/0/0/252/0/252 | Giga Drain,Sleep Powder,Rage Powder,Protect
+B1500 Zeraora @Clear Amulet | Volt Absorb | Jolly | EV 4/252/0/0/0/252 | Plasma Fists,Close Combat,Play Rough,Protect
+B1501 Mewtwo @Mewtwonite Y | Pressure | Timid | EV 4/0/0/252/0/252 | Psystrike,Aura Sphere,Ice Beam,Protect
+B1502 Skarmory @Leftovers | Sturdy | Impish | EV 252/0/252/0/4/0 | Brave Bird,Tailwind,Body Press,Protect
+B1503 Rayquaza @Focus Sash | Air Lock | Adamant | EV 4/252/0/0/0/252 | Dragon Ascent,Extreme Speed,Dragon Dance,Protect
+B1504 Cradily @Mental Herb | Storm Drain | Calm | EV 252/0/4/0/252/0 | Giga Drain,Stealth Rock,Recover,Protect
+B1505 Melmetal @Weakness Policy | Iron Fist | Brave | EV 252/252/4/0/0/0 | Double Iron Bash,Thunder Punch,Ice Punch,Protect
+B1506 Dialga @Life Orb | Pressure | Modest | EV 4/0/0/252/0/252 | Draco Meteor,Flash Cannon,Earth Power,Protect
+B1507 Metagross @Metagrossite | Clear Body | Adamant | EV 4/252/0/0/0/252 | Meteor Mash,Zen Headbutt,Bullet Punch,Protect
+B1508 Spiritomb @Mental Herb | Infiltrator | Sassy | EV 252/0/4/0/252/0 | Foul Play,Will O Wisp,Snarl,Protect
+B1509 Lucario @Choice Scarf | Inner Focus | Naive | EV 4/252/0/252/0/0 | Close Combat,Flash Cannon,Extreme Speed,Aura Sphere
+B1510 Miraidon @Choice Specs | Hadron Engine | Timid | EV 4/0/0/252/0/252 | Electro Drift,Draco Meteor,Volt Switch,Overheat
+B1511 Garchomp @Garchompite Z | Rough Skin | Jolly | EV 4/252/0/0/0/252 | Dragon Claw,Stomping Tantrum,Rock Slide,Protect
 
 CONFIGURED BASE STATS (HP/Atk/Def/SpA/SpD/Spe)
 Abomasnow 90/92/75/92/85/60
@@ -21031,35 +21031,35 @@ N081 src/hof_pc.c:AccessHallOfFamePC | src/hof_pc.c:16
   Tables: T015, T017, T020, T025
   Function dependencies: src/battle_ai_main.c:Ai_InitPartyStruct, src/battle_ai_main.c:BattleAI_SetupItems, src/battle_ai_main.c:DoesBattlerKOItselfWithRecoil, src/battle_ai_pair.c:CachePairConditionalBoost, src/battle_ai_pair.c:CachePairCopiedDancers, src/battle_ai_pair.c:CachePairDefenderItems, src/battle_ai_pair.c:PairCanSwitch, src/battle_ai_pair.c:PairNeedsSwitchSearch, src/battle_ai_pair.c:PairPreservesStevenMetagross, src/battle_ai_pair.c:PairReserveChangesPlan, src/battle_ai_pair.c:SavePairBoard, src/battle_ai_pair.c:ScoreFastPair, src/battle_ai_switch.c:ApplySwitchinAllyAbility, src/battle_ai_switch.c:ApplySwitchinForm, src/battle_ai_switch.c:ApplySwitchinItems, src/battle_ai_switch.c:CanPalafinZeroSafelyUseHitEscape, src/battle_ai_switch.c:ConsumeSwitchinItem, src/battle_ai_switch.c:PrepareSwitchCandidateMon, src/battle_ai_switch.c:ShouldStayInToUseMove, src/battle_ai_switch.c:ShouldSwitchIfAbilityBenefit, src/battle_ai_switch.c:StoreSwitchoutCandidate, src/battle_ai_util.c:AI_AdjustGuaranteedSurvival, src/battle_ai_util.c:AI_ApplyMegaForm, src/battle_ai_util.c:AI_CalcDamageAfterBerry, src/battle_ai_util.c:AI_CalcDancerDamage, src/battle_ai_util.c:AI_CalcItemBoostDamage, src/battle_ai_util.c:AI_ConsumeResistBerry, src/battle_ai_util.c:AI_DecideHoldEffectForTurn, src/battle_ai_util.c:AI_FirstStrikeBlocked, src/battle_ai_util.c:AI_GetBattlerMoveTargetType, src/battle_ai_util.c:AI_IsBeatUpParticipant, src/battle_ai_util.c:AI_IsMoveEffectInPlus, src/battle_ai_util.c:AI_PopulationTrySitrus, src/battle_ai_util.c:CanEndureHit, src/battle_ai_util.c:CountUsablePartyMons, src/battle_ai_util.c:IsDamageMoveUnusable, src/battle_ai_util.c:SetBattlerData, src/battle_ai_util.c:ShouldTeraFromCalcs, src/battle_ai_util.c:ShouldUseZMove, src/battle_anim_mons.c:GetBattlerYDelta, src/battle_bg.c:GetBattleEnvironmentOverride, src/battle_controllers.c:IsValidForBattle, src/battle_controllers.c:IsValidForBattleButDead, src/battle_controllers.c:SetUpBattleVarsAndBirchZigzagoon, src/battle_frontier.c:CreateFacilityMon, src/battle_gfx_sfx_util.c:BattleLoadMonSpriteGfx, src/battle_gfx_sfx_util.c:SetBattlerShadowSpriteCallback, src/battle_gfx_sfx_util.c:SpriteCB_EnemyShadow, src/battle_gimmick.c:GetIndicatorSpriteSrc, src/battle_interface.c:UpdateNickInHealthbox, src/battle_main.c:BattleStartClearSetData, src/battle_main.c:DoBattleIntro, src/battle_main.c:GetBattlerTotalSpeedStat, src/battle_main.c:GetDynamicMoveType, src/battle_main.c:HandleTurnActionSelectionState, src/battle_main.c:IsRunningFromBattleImpossible, src/battle_main.c:TryCorrectShedinjaLanguage, src/battle_main.c:TryDoEventsBeforeFirstTurn, src/battle_main.c:TrySetAteType, src/battle_message.c:BattleStringExpandPlaceholders, src/battle_message.c:ExpandBattleTextBuffPlaceholders, src/battle_pike.c:SpeciesToPikeMonId, src/battle_pyramid.c:GenerateBattlePyramidWildMon, src/battle_pyramid_bag.c:CompactItems, src/battle_pyramid_bag.c:Task_HandlePyramidBagInput, src/battle_pyramid_bag.c:UpdatePyramidBagList, src/battle_script_commands.c:BattleDebug_CaptureBattle, src/battle_script_commands.c:CanBattlerSwitch, src/battle_script_commands.c:IsShieldsDownProtected, src/battle_setup.c:CheckSilphScopeInPokemonTower, src/battle_setup.c:GetSumOfPlayerPartyLevel, src/battle_setup.c:UpdateRandomTrainerRematches, src/battle_util.c:CalcAttackStat, src/battle_util.c:CalcDefenseStat, src/battle_util.c:CalcMoveBasePower, src/battle_util.c:CalcMoveBasePowerAfterModifiers, src/battle_util.c:CanBattlerEscape, src/battle_util.c:CanBattlerGetOrLoseItem, src/battle_util.c:CanEvolve, src/battle_util.c:CanMegaEvolve, src/battle_util.c:DoesSpeciesUseHoldItemToChangeForm, src/battle_util.c:GetBattlerHoldEffectIgnoreNegation, src/battle_util.c:GetBattlerHoldEffectInternal, src/battle_util.c:GetBattlerHoldEffectParam, src/battle_util.c:GetBattlerMoveSelectionTargetType, src/battle_util.c:GetBattlerVisualSpecies, src/battle_util.c:GetHoldEffectCritChanceIncrease, src/battle_util.c:GetIllusionMonPartyId, src/battle_util.c:GetIllusionMonSpecies, src/battle_util.c:IsBattlerLeekAffected, src/battle_util.c:IsMimikyuDisguised, src/battle_util.c:IsNaturalEnemy, src/battle_util.c:SetDynamicMoveCategory, src/battle_util.c:ShouldTeraShellDistortTypeMatchups, src/battle_util.c:TryBattleFormChange, src/battle_z_move.c:IsViableZMove, src/berry.c:BerryTreeGrow, src/berry.c:BerryTreeTimeUpdate, src/berry.c:CalcBerryYield, src/berry.c:GetMulchAffectedGrowthRate, src/caps.c:GetLevelCapForSpecies, src/daycare.c:GetDaycareCompatibilityScore, src/daycare.c:ModifyBreedingScoreForOvalCharm, src/decompress.c:LoadSpecialPokePicIsEgg, src/decoration.c:GetDecorationElevation, src/dexnav.c:CreateDexNavWildMon, src/dexnav.c:DexNavDrawHiddenIcons, src/dexnav.c:DexNavDrawPotentialStars, src/dexnav.c:DexNavGenerateHeldItem, src/dexnav.c:DrawDexNavSearchHeldItem, src/dexnav.c:DrawDexNavSearchMonIcon, src/dexnav.c:DrawHiddenSearchWindow, src/dexnav.c:TryFindHiddenPokemon, src/dexnav.c:TryStartDexNavSearch, src/emerald_champions_battle_sets.c:ApplyPreset, src/emerald_champions_battle_sets.c:HasDirectBattleSet, src/emerald_champions_battle_sets.c:HasMegaAccess, src/emerald_champions_battle_sets.c:HasTransformationAccess, src/emerald_champions_battle_sets.c:IsBattleSetTransformationItem, src/emerald_champions_battle_sets.c:IsEmeraldChampionsOrdinaryWildSpecies, src/emerald_champions_battle_sets.c:IsEmeraldChampionsProtectedProgressionItem, src/emerald_champions_battle_sets.c:PresetRequiresTransformation, src/emerald_champions_battle_sets.c:ResolveBattleSetRange, src/emerald_champions_battle_sets.c:ResolveBattleSetSpecies, src/emerald_champions_opening.c:CreateEmeraldChampionsBirchRescueParty, src/event_object_movement.c:GetFirstLiveMon, src/event_object_movement.c:GetMonInfo, src/event_object_movement.c:GetUnownSpecies, src/event_object_movement.c:SpeciesToGraphicsInfo, src/event_object_movement.c:TrySpawnObjectEventTemplate, src/evolution_scene.c:CreateShedinja, src/evolution_scene.c:Task_EvolutionScene, src/field_control_avatar.c:GetInteractedBackgroundEventScript, src/field_effect.c:FieldMoveShowMon_ClearSpeciesOverride, src/field_move.c:FieldMove_GetUserSlot, src/field_weather.c:UpdateWeatherForms, src/follower_npc.c:ChooseFirstThreeEligibleMons, src/frontier_util.c:GetHighestLevelInPlayerParty, src/hall_of_fame.c:HallOfFame_PrintMonInfo, src/hall_of_fame.c:Task_HofPC_CopySaveData, src/hall_of_fame.c:Task_HofPC_DrawSpritesPrintText, src/hall_of_fame.c:Task_HofPC_PrintMonInfo, src/hall_of_fame_frlg.c:HallOfFame_PrintMonInfo, src/hall_of_fame_frlg.c:Task_HofPC_CopySaveData, src/hall_of_fame_frlg.c:Task_HofPC_DrawSpritesPrintText, src/hall_of_fame_frlg.c:Task_HofPC_PrintMonInfo, src/hof_pc.c:AccessHallOfFamePC, src/item.c:AddBagItem, src/item.c:AddMigratedBagItem, src/item.c:AddPyramidBagItem, src/item.c:ApplyNewEncryptionKeyToBagItems, src/item.c:BagPocket_CompactItems, src/item.c:BagPocket_SetSlotData, src/item.c:CheckSlotAndUpdateCount, src/item.c:GetItemBattleUsage, src/item.c:GetItemEffect, src/item.c:GetItemHoldEffect, src/item.c:GetItemPocket, src/item.c:GetRegisteredItemButton, src/item.c:MigrateBagPocketsIfNeeded, src/item.c:PlayerOwnsItem, src/item.c:RemoveBagItem, src/item.c:RemovePyramidBagItem, src/item.c:SanitizeBagItemId, src/item.c:SanitizeItemId, src/item_icon.c:GetItemIconPalette, src/item_icon.c:GetItemIconPic, src/item_menu.c:CompareItemsAlphabetically, src/item_menu.c:CompareItemsByIndex, src/item_menu.c:CompareItemsByMost, src/item_menu.c:CompareItemsByType, src/item_menu.c:MergeSort, src/item_menu.c:OpenContextMenu, src/item_menu.c:PrintTMHMMoveData, src/item_menu.c:Task_BagMenu_HandleInput, src/item_menu.c:Task_WallyTutorialBagMenu, src/item_menu.c:UseRegisteredKeyItemOnField, src/item_use.c:CheckIfItemIsTMHMOrEvolutionStone, src/item_use.c:SetUpItemUseCallback, src/legendary_signs.c:ChooseRareWildLegendarySpecies, src/legendary_signs.c:HasCaughtSpeciesFamily, src/legendary_signs.c:MeetsSignDiscovery, src/legendary_signs.c:PlayerPartyHasSpeciesFamily, src/load_save.c:LoadPlayerParty, src/mail_data.c:ClearMail, src/mail_data.c:GiveMailToMonByItemId, src/mail_data.c:ItemIsMail, src/mail_data.c:SpeciesToMailSpecies, src/mail_data.c:TakeMailFromMon, src/menu_helpers.c:IsHoldingItemAllowed, src/overworld.c:UpdateAmbientCry, src/party_menu.c:AnimatePartySlot, src/party_menu.c:CB2_ContinueLevelerEvolution, src/party_menu.c:CB2_ReturnToPartyOrBagMenuFromWritingMail, src/party_menu.c:CB2_ShowPartyMenuForItemUse, src/party_menu.c:CreatePartyMonHeldItemSprite, src/party_menu.c:CreatePartyMonHeldItemSpriteParameterized, src/party_menu.c:CreatePartyMonIconSpriteParameterized, src/party_menu.c:CreatePartyMonPokeballSprite, src/party_menu.c:CreatePartyMonPokeballSpriteParameterized, src/party_menu.c:CreatePartyMonSprites, src/party_menu.c:CreatePartyMonStatusSprite, src/party_menu.c:CreatePartyMonStatusSpriteParameterized, src/party_menu.c:CreateSelectionWindow, src/party_menu.c:DisplayPartyPokemonDataForMoveTutorOrEvolutionItem, src/party_menu.c:DisplayPartyPokemonDataForMultiBattle, src/party_menu.c:DisplayPartyPokemonGender, src/party_menu.c:DisplayPartyPokemonHPBarCheck, src/party_menu.c:DisplayPartyPokemonHPCheck, src/party_menu.c:DisplayPartyPokemonLevelCheck, src/party_menu.c:DisplayPartyPokemonMaxHPCheck, src/party_menu.c:DisplayPartyPokemonNickname, src/party_menu.c:GetBattleEntryEligibility, src/party_menu.c:GetItemEffectType, src/party_menu.c:GetNewSlotDoubleLayout, src/party_menu.c:GetPartyMenuActionsTypeInBattle, src/party_menu.c:GiveItemOrMailToSelectedMon, src/party_menu.c:GiveItemToMon, src/party_menu.c:GiveItemToSelectedMon, src/party_menu.c:HandleChooseMonSelection, src/party_menu.c:InitPartyMenu, src/party_menu.c:IsMonAllowedInDodrioBerryPicking, src/party_menu.c:ItemUseCB_EvolutionStone, src/party_menu.c:ItemUseCB_RareCandy, src/party_menu.c:PartyMenuTryEvolution, src/party_menu.c:RenderPartyMenuBox, src/party_menu.c:ReturnGiveItemToBagOrPC, src/party_menu.c:SetPartyMonFieldSelectionActions, src/party_menu.c:ShouldUseChooseMonText, src/party_menu.c:ShowOrHideHeldItemSprite, src/party_menu.c:SlideMultiPartyMenuBoxSpritesOneStep, src/party_menu.c:Task_DisplayGaveMailFromBagMessage, src/party_menu.c:Task_HandleSwitchItemsFromBagYesNoInput, src/party_menu.c:Task_LearnedMove, src/party_menu.c:Task_MultiPartnerPartySlideIn, src/party_menu.c:Task_UpdateHeldItemSprite, src/party_menu.c:TryGiveItemOrMailToSelectedMon, src/party_menu.c:TryGiveMailToSelectedMon, src/party_menu.c:UpdatePartySelectionDoubleLayout, src/pokedex.c:GetPokedexMonPersonality, src/pokedex_plus_hgss.c:DrawFormPage, src/pokedex_plus_hgss.c:GetPokedexMonPersonality, src/pokedex_plus_hgss.c:GetSelectedMove, src/pokedex_plus_hgss.c:HasTwoPreEvolutions, src/pokedex_plus_hgss.c:IsItemSweet, src/pokedex_plus_hgss.c:IsSpeciesAlcremie, src/pokedex_plus_hgss.c:PrintCurrentSpeciesTypeInfo, src/pokedex_plus_hgss.c:PrintEvolutionTargetSpeciesAndMethod, src/pokedex_plus_hgss.c:PrintStatsScreen_DestroyMoveItemIcon, src/pokedex_plus_hgss.c:PrintStatsScreen_Moves_Top, src/pokedex_plus_hgss.c:Task_ExitStatsScreen, src/pokedex_plus_hgss.c:Task_SwitchScreensFromStatsScreen, src/pokemon.c:AdjustFriendship, src/pokemon.c:CalculateFriendshipBonuses, src/pokemon.c:CalculatePartyCount, src/pokemon.c:CanLearnTeachableMove, src/pokemon.c:ClampMonToPlayerLevelCap, src/pokemon.c:ComputePlayerShinyOdds, src/pokemon.c:CreateApprenticeMon, src/pokemon.c:CreateBattleTowerMon_HandleLevel, src/pokemon.c:CreateBoxMon, src/pokemon.c:CreateSecretBaseEnemyParty, src/pokemon.c:DoesMonMeetAdditionalConditions, src/pokemon.c:GetBattleBGM, src/pokemon.c:GetEvolutionTargetSpecies, src/pokemon.c:GetFormChangeTargetSpecies_Internal, src/pokemon.c:GetMonSpritePalFromSpeciesIsEgg, src/pokemon.c:GetMonsStateToDoubles, src/pokemon.c:GetMonsStateToDoubles_2, src/pokemon.c:GetSpeciesCategory, src/pokemon.c:GetSpeciesEggMoves, src/pokemon.c:GetSpeciesEvolutions, src/pokemon.c:GetSpeciesFormChanges, src/pokemon.c:GetSpeciesFormTable, src/pokemon.c:GetSpeciesLevelUpLearnset, src/pokemon.c:GetSpeciesName, src/pokemon.c:GetSpeciesPokedexDescription, src/pokemon.c:GetSpeciesPreEvolution, src/pokemon.c:GetSpeciesTeachableLearnset, src/pokemon.c:GetUnownSpeciesId, src/pokemon.c:HasShedinjaHPHandling, src/pokemon.c:HasTwoFramesAnimation, src/pokemon.c:IsMonEligibleForLeveler, src/pokemon.c:IsPlayerPartyAndPokemonStorageFull, src/pokemon.c:IsPokemonStorageFull, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:NationalPokedexNumToSpecies, src/pokemon.c:PokemonUseItemEffects, src/pokemon.c:SanitizeSpeciesId, src/pokemon.c:SetMultiuseSpriteTemplateToPokemon, src/pokemon.c:SetWildMonHeldItem, src/pokemon.c:TryBoxMonFormChangeInternal, src/pokemon.c:TryFormChangeInternal, src/pokemon.c:TrySpecialOverworldEvo, src/pokemon.c:UpdateDaysPassedSinceFormChange, src/pokemon_icon.c:CreateMonIconIsEgg, src/pokemon_icon.c:GetIconSpecies, src/pokemon_icon.c:GetMonIconTilesIsEgg, src/pokemon_spots.c:GetSpeciesSpots, src/pokemon_sprite_visualizer.c:ApplyOffsetSpriteValues, src/pokemon_sprite_visualizer.c:CB2_Pokemon_Sprite_Visualizer, src/pokemon_sprite_visualizer.c:DrawFollowerSprite, src/pokemon_sprite_visualizer.c:HandleInput_PokemonSpriteVisualizer, src/pokemon_sprite_visualizer.c:LoadAndCreateEnemyShadowSpriteCustom, src/pokemon_sprite_visualizer.c:PrintDigitChars, src/pokemon_sprite_visualizer.c:PrintInstructionsOnWindow, src/pokemon_sprite_visualizer.c:ReloadPokemonSprites, src/pokemon_sprite_visualizer.c:ResetShadowSettings, src/pokemon_sprite_visualizer.c:SetConstSpriteValues, src/pokemon_sprite_visualizer.c:UpdateSubmenuOneOptionValue, src/pokemon_sprite_visualizer.c:UpdateSubmenuTwoOptionValue, src/pokemon_storage_system.c:AdvanceStorageMonIndex, src/pokemon_summary_screen.c:IsValidToViewInMulti, src/pokemon_summary_screen.c:PrintGenderSymbol, src/script_pokemon_util.c:HealPlayerParty, src/secret_base.c:InitSecretBaseAppearance, src/trainer_slide.c:GetPartyMonCount, src/trainer_util.c:GenerateMonFromTrainerMon, src/tv.c:UpdateTimeBeforeMassOutbreak, src/vs_seeker.c:ClearAllTrainerRematchStates, src/vs_seeker.c:IsVsSeekerEnabled, src/vs_seeker.c:UpdateVsSeekerStepCounter, src/wild_encounter.c:CreateWildMon, src/wild_encounter.c:GetLocalWaterMon, src/wild_encounter.c:GetLocalWildMon, src/wild_encounter.c:StandardWildEncounter, src/wild_encounter.c:TryGenerateWildMon, src/wild_encounter_ow.c:CheckValidOWESpecies, src/wild_encounter_ow.c:CreateEnemyPartyOWE, src/wild_encounter_ow.c:GetNextOWESpawnSlot, src/wild_encounter_ow.c:GetOldestActiveOWESlot, src/wild_encounter_ow.c:GetSpeciesByOWESpawnSlot, src/wild_encounter_ow.c:OWE_ShouldPlayOWEFleeSound, src/wild_encounter_ow.c:SetSpeciesInfoForOWE, src/wild_encounter_ow.c:SortOWEAges, src/wild_encounter_ow.c:UpdateOverworldWildEncounter
 
-N082 src/legendary_signs.c:CreateEmeraldChampionsStaticLegendaryEncounter | src/legendary_signs.c:731
+N082 src/legendary_signs.c:CreateEmeraldChampionsStaticLegendaryEncounter | src/legendary_signs.c:754
   Tables: T015, T017
   Function dependencies: src/battle_util.c:GetBattlerHoldEffectInternal, src/caps.c:GetLevelCapForSpecies, src/emerald_champions_battle_sets.c:ApplyPreset, src/emerald_champions_battle_sets.c:HasDirectBattleSet, src/emerald_champions_battle_sets.c:HasMegaAccess, src/emerald_champions_battle_sets.c:HasTransformationAccess, src/emerald_champions_battle_sets.c:IsBattleSetTransformationItem, src/emerald_champions_battle_sets.c:IsEmeraldChampionsProtectedProgressionItem, src/emerald_champions_battle_sets.c:PresetRequiresTransformation, src/emerald_champions_battle_sets.c:ResolveBattleSetRange, src/emerald_champions_battle_sets.c:ResolveBattleSetSpecies, src/item.c:GetItemHoldEffect, src/item.c:GetItemPocket, src/item.c:SanitizeItemId, src/legendary_signs.c:CreateEmeraldChampionsStaticLegendaryEncounter, src/pokemon.c:ClampMonToPlayerLevelCap, src/pokemon.c:ComputePlayerShinyOdds, src/pokemon.c:CreateBoxMon, src/pokemon.c:GetFormChangeTargetSpecies_Internal, src/pokemon.c:GetSpeciesFormChanges, src/pokemon.c:GetSpeciesLevelUpLearnset, src/pokemon.c:GetSpeciesName, src/pokemon.c:HasShedinjaHPHandling, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:SanitizeSpeciesId, src/pokemon.c:TryFormChangeInternal, src/script_pokemon_util.c:CreateScriptedWildMon
 
-N083 src/legendary_signs.c:CreateSelectedLegendarySignEncounter | src/legendary_signs.c:713
+N083 src/legendary_signs.c:CreateSelectedLegendarySignEncounter | src/legendary_signs.c:730
   Tables: T015, T017, T020
   Function dependencies: src/battle_util.c:GetBattlerHoldEffectInternal, src/caps.c:GetLevelCapForSpecies, src/emerald_champions_battle_sets.c:ApplyPreset, src/emerald_champions_battle_sets.c:HasDirectBattleSet, src/emerald_champions_battle_sets.c:HasMegaAccess, src/emerald_champions_battle_sets.c:HasTransformationAccess, src/emerald_champions_battle_sets.c:IsBattleSetTransformationItem, src/emerald_champions_battle_sets.c:IsEmeraldChampionsProtectedProgressionItem, src/emerald_champions_battle_sets.c:PresetRequiresTransformation, src/emerald_champions_battle_sets.c:ResolveBattleSetRange, src/emerald_champions_battle_sets.c:ResolveBattleSetSpecies, src/item.c:GetItemHoldEffect, src/item.c:GetItemPocket, src/item.c:SanitizeItemId, src/legendary_signs.c:CreateSelectedLegendarySignEncounter, src/legendary_signs.c:HasCaughtSpeciesFamily, src/legendary_signs.c:MeetsSignDiscovery, src/legendary_signs.c:PlayerPartyHasSpeciesFamily, src/pokemon.c:ClampMonToPlayerLevelCap, src/pokemon.c:ComputePlayerShinyOdds, src/pokemon.c:CreateBoxMon, src/pokemon.c:GetFormChangeTargetSpecies_Internal, src/pokemon.c:GetSpeciesEvolutions, src/pokemon.c:GetSpeciesFormChanges, src/pokemon.c:GetSpeciesLevelUpLearnset, src/pokemon.c:GetSpeciesName, src/pokemon.c:HasShedinjaHPHandling, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:SanitizeSpeciesId, src/pokemon.c:TryFormChangeInternal, src/script_pokemon_util.c:CreateScriptedWildMon
 
-N084 src/legendary_signs.c:RetryPendingLegendaryRelics | src/legendary_signs.c:547
+N084 src/legendary_signs.c:RetryPendingLegendaryRelics | src/legendary_signs.c:564
   Tables: T021
   Function dependencies: src/item.c:AddBagItem, src/item.c:AddPyramidBagItem, src/item.c:CheckSlotAndUpdateCount, src/item.c:GetItemPocket, src/item.c:SanitizeBagItemId, src/item.c:SanitizeItemId, src/legendary_signs.c:GiveLegendaryRelicItem, src/legendary_signs.c:RetryPendingLegendaryRelics
 
-N085 src/legendary_signs.c:TryGiveArceusLegendarySignMasteryReward | src/legendary_signs.c:1095
+N085 src/legendary_signs.c:TryGiveArceusLegendarySignMasteryReward | src/legendary_signs.c:1123
   Tables: T015, T017, T020, T021
   Function dependencies: src/battle_util.c:GetBattlerHoldEffectInternal, src/caps.c:GetLevelCapForSpecies, src/emerald_champions_battle_sets.c:ApplyPreset, src/emerald_champions_battle_sets.c:HasDirectBattleSet, src/emerald_champions_battle_sets.c:HasMegaAccess, src/emerald_champions_battle_sets.c:HasTransformationAccess, src/emerald_champions_battle_sets.c:IsBattleSetTransformationItem, src/emerald_champions_battle_sets.c:IsEmeraldChampionsProtectedProgressionItem, src/emerald_champions_battle_sets.c:PresetRequiresTransformation, src/emerald_champions_battle_sets.c:ResolveBattleSetRange, src/emerald_champions_battle_sets.c:ResolveBattleSetSpecies, src/item.c:AddBagItem, src/item.c:AddPyramidBagItem, src/item.c:CheckSlotAndUpdateCount, src/item.c:GetItemHoldEffect, src/item.c:GetItemPocket, src/item.c:SanitizeBagItemId, src/item.c:SanitizeItemId, src/legendary_signs.c:ApplyNonMegaGiftSet, src/legendary_signs.c:GiveLegendaryRelicItem, src/legendary_signs.c:HasCaughtSpeciesFamily, src/legendary_signs.c:MarkLegendarySignCaughtBySpecies, src/legendary_signs.c:MeetsSignDiscovery, src/legendary_signs.c:PlayerPartyHasSpeciesFamily, src/legendary_signs.c:TryGiveArceusLegendarySignMasteryReward, src/pokemon.c:CalculatePartyCount, src/pokemon.c:ClampMonToPlayerLevelCap, src/pokemon.c:ComputePlayerShinyOdds, src/pokemon.c:CopyMonToPC, src/pokemon.c:CreateBoxMon, src/pokemon.c:GetFormChangeTargetSpecies_Internal, src/pokemon.c:GetSpeciesEvolutions, src/pokemon.c:GetSpeciesFormChanges, src/pokemon.c:GetSpeciesName, src/pokemon.c:GiveMonToPartyOrPC, src/pokemon.c:HandleSetPokedexFlag, src/pokemon.c:HasShedinjaHPHandling, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:NationalPokedexNumToSpecies, src/pokemon.c:SanitizeSpeciesId, src/pokemon.c:TryFormChangeInternal
 
-N086 src/legendary_signs.c:TryGiveSelectedLegendarySignReward | src/legendary_signs.c:750
+N086 src/legendary_signs.c:TryGiveSelectedLegendarySignReward | src/legendary_signs.c:778
   Tables: T015, T017, T020, T021
   Function dependencies: src/battle_util.c:GetBattlerHoldEffectInternal, src/caps.c:GetLevelCapForSpecies, src/emerald_champions_battle_sets.c:ApplyPreset, src/emerald_champions_battle_sets.c:HasDirectBattleSet, src/emerald_champions_battle_sets.c:HasMegaAccess, src/emerald_champions_battle_sets.c:HasTransformationAccess, src/emerald_champions_battle_sets.c:IsBattleSetTransformationItem, src/emerald_champions_battle_sets.c:IsEmeraldChampionsProtectedProgressionItem, src/emerald_champions_battle_sets.c:PresetRequiresTransformation, src/emerald_champions_battle_sets.c:ResolveBattleSetRange, src/emerald_champions_battle_sets.c:ResolveBattleSetSpecies, src/item.c:AddBagItem, src/item.c:AddPyramidBagItem, src/item.c:CheckSlotAndUpdateCount, src/item.c:GetItemHoldEffect, src/item.c:GetItemPocket, src/item.c:SanitizeBagItemId, src/item.c:SanitizeItemId, src/legendary_signs.c:ApplyNonMegaGiftSet, src/legendary_signs.c:GiveLegendaryRelicItem, src/legendary_signs.c:HasCaughtSpeciesFamily, src/legendary_signs.c:MarkLegendarySignCaughtBySpecies, src/legendary_signs.c:MeetsSignDiscovery, src/legendary_signs.c:PlayerPartyHasSpeciesFamily, src/legendary_signs.c:TryGiveSelectedLegendarySignReward, src/pokemon.c:CalculatePartyCount, src/pokemon.c:ClampMonToPlayerLevelCap, src/pokemon.c:ComputePlayerShinyOdds, src/pokemon.c:CopyMonToPC, src/pokemon.c:CreateBoxMon, src/pokemon.c:GetFormChangeTargetSpecies_Internal, src/pokemon.c:GetSpeciesEvolutions, src/pokemon.c:GetSpeciesFormChanges, src/pokemon.c:GetSpeciesName, src/pokemon.c:GiveMonToPartyOrPC, src/pokemon.c:HandleSetPokedexFlag, src/pokemon.c:HasShedinjaHPHandling, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:NationalPokedexNumToSpecies, src/pokemon.c:SanitizeSpeciesId, src/pokemon.c:TryFormChangeInternal
 
-N087 src/legendary_signs.c:TryUnlockDarkraiLegendarySign | src/legendary_signs.c:769
+N087 src/legendary_signs.c:TryUnlockDarkraiLegendarySign | src/legendary_signs.c:797
   Tables: T020
   Function dependencies: src/legendary_signs.c:HasCaughtSpeciesFamily, src/legendary_signs.c:MeetsSignDiscovery, src/legendary_signs.c:PlayerPartyHasSpeciesFamily, src/legendary_signs.c:TryUnlockDarkraiLegendarySign, src/legendary_signs.c:TryUnlockSelectedLegendarySign, src/pokemon.c:GetSpeciesEvolutions, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:SanitizeSpeciesId
 
-N088 src/legendary_signs.c:TryUnlockLocalLegendaryDiscovery | src/legendary_signs.c:410
+N088 src/legendary_signs.c:TryUnlockLocalLegendaryDiscovery | src/legendary_signs.c:427
   Tables: T020
   Function dependencies: src/legendary_signs.c:PlayerPartyHasSpeciesFamily, src/legendary_signs.c:TryUnlockLocalLegendaryDiscovery, src/pokemon.c:GetSpeciesEvolutions, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:SanitizeSpeciesId
 
-N089 src/legendary_signs.c:TryUnlockSelectedLegendarySign | src/legendary_signs.c:660
+N089 src/legendary_signs.c:TryUnlockSelectedLegendarySign | src/legendary_signs.c:677
   Tables: T020
   Function dependencies: src/legendary_signs.c:HasCaughtSpeciesFamily, src/legendary_signs.c:MeetsSignDiscovery, src/legendary_signs.c:PlayerPartyHasSpeciesFamily, src/legendary_signs.c:TryUnlockSelectedLegendarySign, src/pokemon.c:GetSpeciesEvolutions, src/pokemon.c:IsSpeciesEnabled, src/pokemon.c:SanitizeSpeciesId
 
@@ -21368,7 +21368,7 @@ T019 src/field_specials.c:sPaidEvolutionItems | src/field_specials.c:7119
 T020 src/legendary_signs.c:gLegendarySignDefinitions | src/legendary_signs.c:28
 // Acquisition locations and progression gates. Rare wild discoveries each have // a 1% encounter chance. Native residents have 3% slots. Both stop appearing once caught. // Center guides offer local clues and never grant access. #define RARE_WILD_SIGN(id, mon, map, badges, offset, reqMon, reqFlag) \ [id] = {SPECIES_##mon, MAP_##map, SPECIES_##reqMon, reqFlag, LEGENDARY_SOURCE_RARE_WILD, badges, offset} #define NATIVE_WILD_SIGN(id, mon, map) \ [id] = {SPECIES_##mon, MAP_##map, SPECIES_NONE, 0, LEGENDARY_SOURCE_NATIVE_WILD, 0, 0} #define OTHER_SIGN(id, mon, source_) \ [id] = {SPECIES_##mon, 0xFFFF, SPECIES_NONE, 0, source_, 0, 0} #define VISIBLE_SIGN(id, mon, map, badges, offset, reqMon, reqFlag) \ [id] = {SPECIES_##mon, MAP_##map, SPECIES_##reqMon, reqFlag, LEGENDARY_SOURCE_VISIBLE, badges, offset} #define ORDINARY_WILD_SIGN(id, mon, map) \ [id] = {SPECIES_##mon, MAP_##map, SPECIES_NONE, 0, LEGENDARY_SOURCE_ORDINARY_WILD, 0, 0} OTHER_SIGN(LEGENDARY_SIGN_ARCEUS, ARCEUS, LEGENDARY_SOURCE_MASTERY), NATIVE_WILD_SIGN(LEGENDARY_SIGN_AZELF, AZELF, SHOAL_CAVE_LOW_TIDE_ICE_ROOM), ORDINARY_WILD_SIGN(LEGENDARY_SIGN_BLACEPHALON, BLACEPHALON, EMBER_PATH), ORDINARY_WILD_SIGN(LEGENDARY_SIGN_BUZZWOLE, BUZZWOLE, ASHEN_WOODS), OTHER_SIGN(LEGENDARY_SIGN_CALYREX, CALYREX, LEGENDARY_SOURCE_CIRCUIT), NATIVE_WILD_SIGN(LEGENDARY_SIGN_CELEBI, CELEBI, PETALBURG_WOODS_3), OTHER_SIGN(LEGENDARY_SIGN_CELESTEELA, CELESTEELA, LEGENDARY_SOURCE_CIRCUIT), NATIVE_WILD_SIGN(LEGENDARY_SIGN_COBALION, COBALION, GRANITE_CAVE_B2F), RARE_WILD_SIGN(LEGENDARY_SIGN_CRESSELIA, CRESSELIA, METEOR_FALLS_B1F_2R, 6, 2, DARKRAI, FLAG_RECEIVED_RED_OR_BLUE_ORB), VISIBLE_SIGN(LEGENDARY_SIGN_DARKRAI, DARKRAI, MT_PYRE_SUMMIT, 0, 0, MUSHARNA, FLAG_RECEIVED_RED_OR_BLUE_ORB), NATIVE_WILD_SIGN(LEGENDARY_SIGN_DIALGA, DIALGA, METEOR_FALLS_B1F_1R), NATIVE_WILD_SIGN(LEGENDARY_SIGN_ENTEI, ENTEI, FIERY_PATH), OTHER_SIGN(LEGENDARY_SIGN_ETERNATUS, ETERNATUS, LEGENDARY_SOURCE_MASTERY), OTHER_SIGN(LEGENDARY_SIGN_GENESECT, GENESECT, LEGENDARY_SOURCE_GAME_CORNER), NATIVE_WILD_SIGN(LEGENDARY_SIGN_GIRATINA, GIRATINA, MT_PYRE_6F), OTHER_SIGN(LEGENDARY_SIGN_GLASTRIER, GLASTRIER, LEGENDARY_SOURCE_CIRCUIT), ORDINARY_WILD_SIGN(LEGENDARY_SIGN_GUZZLORD, GUZZLORD, ALTERING_CAVE_B1F), NATIVE_WILD_SIGN(LEGENDARY_SIGN_HOOPA, HOOPA, ALTERING_CAVE_1F), ORDINARY_WILD_SIGN(LEGENDARY_SIGN_KARTANA, KARTANA, PETALBURG_WOODS_3), RARE_WILD_SIGN(LEGENDARY_SIGN_KYUREM, KYUREM, SHOAL_CAVE_LOW_TIDE_ICE_ROOM, 7, 3, NONE, FLAG_BADGE07_GET), RARE_WILD_SIGN(LEGENDARY_SIGN_LANDORUS, LANDORUS, ROUTE111_RUINS_EXTERIOR, 5, 1, NONE, FLAG_BADGE05_GET), RARE_WILD_SIGN(LEGENDARY_SIGN_MARSHADOW, MARSHADOW, ROUTE113, 0, 0, NONE, 0), NATIVE_WILD_SIGN(LEGENDARY_SIGN_MESPRIT, MESPRIT, ROUTE120), OTHER_SIGN(LEGENDARY_SIGN_NECROZMA, NECROZMA, LEGENDARY_SOURCE_CIRCUIT), ORDINARY_WILD_SIGN(LEGENDARY_SIGN_NIHILEGO, NIHILEGO, UNDERWATER_SEAFLOOR_CAVERN), NATIVE_WILD_SIGN(LEGENDARY_SIGN_PALKIA, PALKIA, UNDERWATER_SEAFLOOR_CAVERN), ORDINARY_WILD_SIGN(LEGENDARY_SIGN_PHEROMOSA, PHEROMOSA, DEWFORD_MEADOW), OTHER_SIGN(LEGENDARY_SIGN_PHIONE, PHIONE, LEGENDARY_SOURCE_BREEDING), OTHER_SIGN(LEGENDARY_SIGN_POIPOLE, POIPOLE, LEGENDARY_SOURCE_GAME_CORNER), NATIVE_WILD_SIGN(LEGENDARY_SIGN_RAIKOU, RAIKOU, ROUTE110), RARE_WILD_SIGN(LEGENDARY_SIGN_REGIDRAGO, REGIDRAGO, METEOR_FALLS_1F_2R, 6, 2, REGIROCK, FLAG_BADGE06_GET), RARE_WILD_SIGN(LEGENDARY_SIGN_REGIELEKI, REGIELEKI, NEW_MAUVILLE_INSIDE, 5, 2, REGISTEEL, FLAG_EC_REPORT_C28_COMPLETE), NATIVE_WILD_SIGN(LEGENDARY_SIGN_RESHIRAM, RESHIRAM, SCORCHED_SLAB_B2F), NATIVE_WILD_SIGN(LEGENDARY_SIGN_SHAYMIN, SHAYMIN, ROUTE102), OTHER_SIGN(LEGENDARY_SIGN_SPECTRIER, SPECTRIER, LEGENDARY_SOURCE_CIRCUIT), ORDINARY_WILD_SIGN(LEGENDARY_SIGN_STAKATAKA, STAKATAKA, ROUTE111_RUINS_EXTERIOR), NATIVE_WILD_SIGN(LEGENDARY_SIGN_TAPU_BULU, TAPU_BULU, ROUTE123), NATIVE_WILD_SIGN(LEGENDARY_SIGN_TAPU_KOKO, TAPU_KOKO, ROUTE110), NATIVE_WILD_SIGN(LEGENDARY_SIGN_TAPU_LELE, TAPU_LELE, MT_PYRE_EXTERIOR), RARE_WILD_SIGN(LEGENDARY_SIGN_THUNDURUS, THUNDURUS, ROUTE110, 5, 1, NONE, FLAG_HIDE_ROUTE_119_TEAM_AQUA), RARE_WILD_SIGN(LEGENDARY_SIGN_TORNADUS, TORNADUS, ROUTE119, 5, 1, NONE, FLAG_HIDE_ROUTE_119_TEAM_AQUA), NATIVE_WILD_SIGN(LEGENDARY_SIGN_UXIE, UXIE, METEOR_FALLS_B1F_1R), NATIVE_WILD_SIGN(LEGENDARY_SIGN_VICTINI, VICTINI, VICTORY_ROAD_1F), NATIVE_WILD_SIGN(LEGENDARY_SIGN_VIRIZION, VIRIZION, PETALBURG_WOODS_2), NATIVE_WILD_SIGN(LEGENDARY_SIGN_XERNEAS, XERNEAS, ROUTE120), OTHER_SIGN(LEGENDARY_SIGN_XURKITREE, XURKITREE, LEGENDARY_SOURCE_CIRCUIT), RARE_WILD_SIGN(LEGENDARY_SIGN_YVELTAL, YVELTAL, MT_PYRE_EXTERIOR, 6, 3, NONE, FLAG_RECEIVED_RED_OR_BLUE_ORB), OTHER_SIGN(LEGENDARY_SIGN_ZACIAN, ZACIAN, LEGENDARY_SOURCE_CIRCUIT), OTHER_SIGN(LEGENDARY_SIGN_ZAMAZENTA, ZAMAZENTA, LEGENDARY_SOURCE_CIRCUIT), OTHER_SIGN(LEGENDARY_SIGN_ZARUDE, ZARUDE, LEGENDARY_SOURCE_CIRCUIT), RARE_WILD_SIGN(LEGENDARY_SIGN_ZEKROM, ZEKROM, NEW_MAUVILLE_INSIDE, 6, 3, NONE, FLAG_EC_REPORT_C28_COMPLETE), RARE_WILD_SIGN(LEGENDARY_SIGN_ZERAORA, ZERAORA, NEW_MAUVILLE_INSIDE, 5, 1, NONE, FLAG_EC_REPORT_C28_COMPLETE), NATIVE_WILD_SIGN(LEGENDARY_SIGN_ZYGARDE, ZYGARDE, DESERT_UNDERPASS), // Append-only expansion quests. Keeping these after the original 53 entries // preserves every existing save bit while making all remaining acquisition // roots part of the same inspectable system. VISIBLE_SIGN(LEGENDARY_SIGN_ARTICUNO, ARTICUNO, SHOAL_CAVE_LOW_TIDE_ICE_ROOM, 6, 2, NONE, FLAG_BADGE06_GET), NATIVE_WILD_SIGN(LEGENDARY_SIGN_COSMOG, COSMOG, DEWFORD_MEADOW), NATIVE_WILD_SIGN(LEGENDARY_SIGN_ENAMORUS, ENAMORUS, VERDANTURF_MEADOW), NATIVE_WILD_SIGN(LEGENDARY_SIGN_FEZANDIPITI, FEZANDIPITI, VERDANTURF_MEADOW), OTHER_SIGN(LEGENDARY_SIGN_KORAIDON, KORAIDON, LEGENDARY_SOURCE_CIRCUIT), VISIBLE_SIGN(LEGENDARY_SIGN_MAGEARNA, MAGEARNA, RUSTBORO_CITY_DEVON_CORP_2F, 8, 1, DIANCIE, FLAG_BADGE08_GET), RARE_WILD_SIGN(LEGENDARY_SIGN_MELOETTA, MELOETTA, DEWFORD_MEADOW, 2, 1, NONE, FLAG_BADGE02_GET), NATIVE_WILD_SIGN(LEGENDARY_SIGN_MELTAN, MELTAN, NEW_MAUVILLE_INSIDE), VISIBLE_SIGN(LEGENDARY_SIGN_MEWTWO, MEWTWO, ALTERING_CAVE_B1F, 7, 3, NONE, FLAG_BADGE07_GET), OTHER_SIGN(LEGENDARY_SIGN_MIRAIDON, MIRAIDON, LEGENDARY_SOURCE_CIRCUIT), NATIVE_WILD_SIGN(LEGENDARY_SIGN_MUNKIDORI, MUNKIDORI, DEWFORD_MEADOW), NATIVE_WILD_SIGN(LEGENDARY_SIGN_OKIDOGI, OKIDOGI, ASHEN_WOODS), VISIBLE_SIGN(LEGENDARY_SIGN_PECHARUNT, PECHARUNT, MT_PYRE_6F, 7, 3, OKIDOGI, FLAG_BADGE07_GET), VISIBLE_SIGN(LEGENDARY_SIGN_REGIGIGAS, REGIGIGAS, SEALED_CHAMBER_INNER_ROOM, 7, 2, REGIROCK, FLAG_BADGE07_GET), RARE_WILD_SIGN(LEGENDARY_SIGN_TERAPAGOS, TERAPAGOS, CAVE_OF_ORIGIN_B1F, 7, 3, NONE, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE), NATIVE_WILD_SIGN(LEGENDARY_SIGN_WO_CHIEN, WO_CHIEN, PETALBURG_WOODS_2), VISIBLE_SIGN(LEGENDARY_SIGN_ZAPDOS, ZAPDOS, NEW_MAUVILLE_INSIDE, 5, 2, NONE, FLAG_BADGE05_GET), NATIVE_WILD_SIGN(LEGENDARY_SIGN_CHIEN_PAO, CHIEN_PAO, SHOAL_CAVE_LOW_TIDE_ICE_ROOM), NATIVE_WILD_SIGN(LEGENDARY_SIGN_CHI_YU, CHI_YU, ASHEN_WOODS), NATIVE_WILD_SIGN(LEGENDARY_SIGN_KUBFU, KUBFU, ROUTE112), NATIVE_WILD_SIGN(LEGENDARY_SIGN_MANAPHY, MANAPHY, UNDERWATER_SEAFLOOR_CAVERN), NATIVE_WILD_SIGN(LEGENDARY_SIGN_SUICUNE, SUICUNE, ROUTE125), RARE_WILD_SIGN(LEGENDARY_SIGN_TAPU_FINI, TAPU_FINI, ROUTE126, 7, 2, NONE, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE), NATIVE_WILD_SIGN(LEGENDARY_SIGN_TERRAKION, TERRAKION, VICTORY_ROAD_B1F), NATIVE_WILD_SIGN(LEGENDARY_SIGN_TING_LU, TING_LU, DESERT_UNDERPASS), NATIVE_WILD_SIGN(LEGENDARY_SIGN_TYPE_NULL, TYPE_NULL, ROUTE117), RARE_WILD_SIGN(LEGENDARY_SIGN_VOLCANION, VOLCANION, MAGMA_HIDEOUT_4F, 6, 2, NONE, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT), RARE_WILD_SIGN(LEGENDARY_SIGN_KELDEO, KELDEO, ROUTE127, 7, 2, NONE, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE), NATIVE_WILD_SIGN(LEGENDARY_SIGN_OGERPON, OGERPON, ROUTE120), NATIVE_WILD_SIGN(LEGENDARY_SIGN_ARTICUNO_GALAR, ARTICUNO_GALAR, ROUTE120), NATIVE_WILD_SIGN(LEGENDARY_SIGN_ZAPDOS_GALAR, ZAPDOS_GALAR, ROUTE112), NATIVE_WILD_SIGN(LEGENDARY_SIGN_MOLTRES_GALAR, MOLTRES_GALAR, MT_PYRE_EXTERIOR), #undef RARE_WILD_SIGN #undef OTHER_SIGN #undef VISIBLE_SIGN #undef ORDINARY_WILD_SIGN #undef NATIVE_WILD_SIGN
 
-T021 src/legendary_signs.c:sLegendaryRelicItems | src/legendary_signs.c:495
+T021 src/legendary_signs.c:sLegendaryRelicItems | src/legendary_signs.c:512
 ITEM_RED_ORB, ITEM_BLUE_ORB, ITEM_RUSTED_SWORD, ITEM_RUSTED_SHIELD, ITEM_WELLSPRING_MASK, ITEM_HEARTHFLAME_MASK, ITEM_CORNERSTONE_MASK, ITEM_FLAME_PLATE, ITEM_SPLASH_PLATE, ITEM_ZAP_PLATE, ITEM_MEADOW_PLATE, ITEM_ICICLE_PLATE, ITEM_FIST_PLATE, ITEM_TOXIC_PLATE, ITEM_EARTH_PLATE, ITEM_SKY_PLATE, ITEM_MIND_PLATE, ITEM_INSECT_PLATE, ITEM_STONE_PLATE, ITEM_SPOOKY_PLATE, ITEM_DRACO_PLATE, ITEM_DREAD_PLATE, ITEM_IRON_PLATE, ITEM_PIXIE_PLATE,
 
 T022 src/lottery_corner.c:sLotteryPrizes | src/lottery_corner.c:13
@@ -27500,7 +27500,7 @@ RemoveBagItem(gSpecialVar_ItemId, 1);
         UpdatePyramidBagCursorPos();
     }
 
-src/legendary_signs.c:ApplyNonMegaGiftSet | src/legendary_signs.c:1054
+src/legendary_signs.c:ApplyNonMegaGiftSet | src/legendary_signs.c:1082
 enum Species species = GetMonData(mon, MON_DATA_SPECIES);
     u8 selected = 0;
     u32 matches = 0;
@@ -27520,14 +27520,19 @@ enum Species species = GetMonData(mon, MON_DATA_SPECIES);
         return FALSE;
     return ApplyEmeraldChampionsOpponentSet(mon, selected) != EC_BATTLE_SET_FAILED;
 
-src/legendary_signs.c:CreateEmeraldChampionsStaticLegendaryEncounter | src/legendary_signs.c:731
+src/legendary_signs.c:CreateEmeraldChampionsStaticLegendaryEncounter | src/legendary_signs.c:754
 enum Species species = gSpecialVar_0x8004;
     s16 levelOffset = gSpecialVar_0x8005;
+    const struct EmeraldChampionsBattleSet *authored;
 
     if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return;
     CreateScriptedWildMon(species, GetSignLevel(levelOffset), ITEM_NONE);
-    ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    authored = GetLegendaryAuthoredSet(species);
+    if (authored != NULL)
+        ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
+    else
+        ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
     if (species == SPECIES_LATIAS || species == SPECIES_LATIOS)
     {
 
@@ -27537,7 +27542,7 @@ enum Species species = gSpecialVar_0x8004;
         SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &item);
     }
 
-src/legendary_signs.c:CreateSelectedLegendarySignEncounter | src/legendary_signs.c:713
+src/legendary_signs.c:CreateSelectedLegendarySignEncounter | src/legendary_signs.c:730
 enum LegendarySignId id = gSpecialVar_0x8004;
     gSpecialVar_Result = FALSE;
     if (id >= LEGENDARY_SIGN_COUNT || IsSignResting(id)
@@ -27550,14 +27555,20 @@ enum LegendarySignId id = gSpecialVar_0x8004;
     UnlockLegendarySign(id);
     CreateScriptedWildMon(gLegendarySignDefinitions[id].species,
         GetSignLevel(gLegendarySignDefinitions[id].levelOffset), ITEM_NONE);
-    ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    {
+        const struct EmeraldChampionsBattleSet *authored = GetLegendaryAuthoredSet(gLegendarySignDefinitions[id].species);
+        if (authored != NULL)
+            ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
+        else
+            ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    }
     gSpecialVar_Result = TRUE;
 
-src/legendary_signs.c:GiveLegendaryRelicItem | src/legendary_signs.c:541
+src/legendary_signs.c:GiveLegendaryRelicItem | src/legendary_signs.c:558
 return CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1)
         || AddBagItem(item, 1) || AddPCItem(item, 1);
 
-src/legendary_signs.c:MarkLegendarySignCaughtBySpecies | src/legendary_signs.c:580
+src/legendary_signs.c:MarkLegendarySignCaughtBySpecies | src/legendary_signs.c:597
 species = SanitizeSpeciesId(species);
     enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
     u16 objectFlag;
@@ -27576,7 +27587,7 @@ species = SanitizeSpeciesId(species);
     if (objectFlag != 0)
         FlagSet(objectFlag);
 
-src/legendary_signs.c:RetryPendingLegendaryRelics | src/legendary_signs.c:547
+src/legendary_signs.c:RetryPendingLegendaryRelics | src/legendary_signs.c:564
 u32 state = GetLegendaryRelicDeliveryState();
     for (u32 item = 0; item < ARRAY_COUNT(sLegendaryRelicItems); item++)
     {
@@ -27585,7 +27596,7 @@ u32 state = GetLegendaryRelicDeliveryState();
     }
     SetLegendaryRelicDeliveryState(state);
 
-src/legendary_signs.c:TryGiveArceusLegendarySignMasteryReward | src/legendary_signs.c:1095
+src/legendary_signs.c:TryGiveArceusLegendarySignMasteryReward | src/legendary_signs.c:1123
 u8 giveResult;
 
     gSpecialVar_Result = 0;
@@ -27610,7 +27621,7 @@ u8 giveResult;
     StringCopy(gStringVar1, GetSpeciesName(SPECIES_ARCEUS));
     gSpecialVar_Result = giveResult == MON_GIVEN_TO_PARTY ? 1 : 2;
 
-src/legendary_signs.c:TryGiveSelectedLegendarySignReward | src/legendary_signs.c:750
+src/legendary_signs.c:TryGiveSelectedLegendarySignReward | src/legendary_signs.c:778
 enum LegendarySignId signId = gSpecialVar_0x8004;
     u8 giveResult;
 
@@ -27627,11 +27638,11 @@ enum LegendarySignId signId = gSpecialVar_0x8004;
     else
         gSpecialVar_Result = giveResult == MON_GIVEN_TO_PARTY ? 1 : 2;
 
-src/legendary_signs.c:TryUnlockDarkraiLegendarySign | src/legendary_signs.c:769
+src/legendary_signs.c:TryUnlockDarkraiLegendarySign | src/legendary_signs.c:797
 gSpecialVar_0x8004 = LEGENDARY_SIGN_DARKRAI;
     TryUnlockSelectedLegendarySign();
 
-src/legendary_signs.c:TryUnlockLocalLegendaryDiscovery | src/legendary_signs.c:410
+src/legendary_signs.c:TryUnlockLocalLegendaryDiscovery | src/legendary_signs.c:427
 enum LegendarySignId id = gSpecialVar_0x8004;
     u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
     bool32 helped = FALSE;
@@ -27662,7 +27673,7 @@ enum LegendarySignId id = gSpecialVar_0x8004;
         gSpecialVar_Result = TRUE;
     }
 
-src/legendary_signs.c:TryUnlockSelectedLegendarySign | src/legendary_signs.c:660
+src/legendary_signs.c:TryUnlockSelectedLegendarySign | src/legendary_signs.c:677
 enum LegendarySignId id = gSpecialVar_0x8004;
     gSpecialVar_Result = 0;
     if (id >= LEGENDARY_SIGN_COUNT)
@@ -32515,14 +32526,14 @@ src/item_use.c:815 | src/item_use.c:ItemUseOnFieldCB_Berry | cost_or_state_write
 src/item_use.c:983 | src/item_use.c:RemoveUsedItem | cost_or_state_write | RemoveBagItem(gSpecialVar_ItemId, 1)
 src/item_use.c:1120 | src/item_use.c:ItemUseOnFieldCB_EscapeRope | cost_or_state_write | RemoveBagItem(gSpecialVar_ItemId, 1)
 src/item_use.c:1470 | src/item_use.c:ItemUseOnFieldCB_Honey | cost_or_state_write | RemoveBagItem(gSpecialVar_ItemId, 1)
-src/legendary_signs.c:437 | src/legendary_signs.c:TryUnlockLocalLegendaryDiscovery | transfer_or_shop | UnlockLegendarySign(id)
-src/legendary_signs.c:543 | src/legendary_signs.c:GiveLegendaryRelicItem | transfer_or_shop | AddBagItem(item, 1)
-src/legendary_signs.c:543 | src/legendary_signs.c:GiveLegendaryRelicItem | transfer_or_shop | AddPCItem(item, 1)
-src/legendary_signs.c:593 | src/legendary_signs.c:MarkLegendarySignCaughtBySpecies | transfer_or_shop | UnlockLegendarySign(signId)
-src/legendary_signs.c:676 | src/legendary_signs.c:TryUnlockSelectedLegendarySign | transfer_or_shop | UnlockLegendarySign(id)
-src/legendary_signs.c:723 | src/legendary_signs.c:CreateSelectedLegendarySignEncounter | transfer_or_shop | UnlockLegendarySign(id)
-src/legendary_signs.c:745 | src/legendary_signs.c:CreateEmeraldChampionsStaticLegendaryEncounter | cost_or_state_write | SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &item)
-src/legendary_signs.c:1108 | src/legendary_signs.c:TryGiveArceusLegendarySignMasteryReward | transfer_or_shop | UnlockLegendarySign(LEGENDARY_SIGN_ARCEUS)
+src/legendary_signs.c:454 | src/legendary_signs.c:TryUnlockLocalLegendaryDiscovery | transfer_or_shop | UnlockLegendarySign(id)
+src/legendary_signs.c:560 | src/legendary_signs.c:GiveLegendaryRelicItem | transfer_or_shop | AddBagItem(item, 1)
+src/legendary_signs.c:560 | src/legendary_signs.c:GiveLegendaryRelicItem | transfer_or_shop | AddPCItem(item, 1)
+src/legendary_signs.c:610 | src/legendary_signs.c:MarkLegendarySignCaughtBySpecies | transfer_or_shop | UnlockLegendarySign(signId)
+src/legendary_signs.c:693 | src/legendary_signs.c:TryUnlockSelectedLegendarySign | transfer_or_shop | UnlockLegendarySign(id)
+src/legendary_signs.c:740 | src/legendary_signs.c:CreateSelectedLegendarySignEncounter | transfer_or_shop | UnlockLegendarySign(id)
+src/legendary_signs.c:773 | src/legendary_signs.c:CreateEmeraldChampionsStaticLegendaryEncounter | cost_or_state_write | SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &item)
+src/legendary_signs.c:1136 | src/legendary_signs.c:TryGiveArceusLegendarySignMasteryReward | transfer_or_shop | UnlockLegendarySign(LEGENDARY_SIGN_ARCEUS)
 src/lilycove_lady.c:524 | src/lilycove_lady.c:QuizLadyTakePrizeForCustomQuiz | cost_or_state_write | RemoveBagItem(gSpecialVar_ItemId, 1)
 src/mail_data.c:75 | src/mail_data.c:GiveMailToMonByItemId | cost_or_state_write | SetMonData(mon, MON_DATA_HELD_ITEM, heldItem)
 src/mail_data.c:136 | src/mail_data.c:TakeMailFromMon | cost_or_state_write | SetMonData(mon, MON_DATA_HELD_ITEM, heldItem)
@@ -115582,52 +115593,52 @@ NATIVE TEXT SOURCE src/legendary_signs.c
   sSignLocationAlteringB1F: Altering Cave B1F
   sSignLocationEmberPath: Ember Path
   sSignLocationUnknown: an unknown place
-  line 99: Route 113 ash grass
-  line 778: Galarian Articuno
-  line 779: Galarian Zapdos
-  line 780: Galarian Moltres
-  line 853:  / Gym Badges required: {STR_VAR_1}.
-  line 857:  / First, resolve the weather crisis in Sootopolis.
-  line 859:  / Help Wattson stop New Mauville's generator, then report back to him.
-  line 861:  / First, rescue the Weather Institute researchers from Team Aqua.
-  line 863:  / First, confront Maxie deep inside the Magma Hideout.
-  line 865:  / First, help the elders at Mt. Pyre and receive the Magma Emblem.
-  line 879: {STR_VAR_2} {STR_VAR_3}.
-  line 882:  / Caught! This discovery is recorded.
-  line 888:  / A wild resident: 3% per encounter.
-  line 890:  / Search while SURFING here.
-  line 891:  / Search the wild Pokémon here.
-  line 892:  / No special requirements. Once caught, it stops appearing here. / SWEET SCENT: a shared 25% chance among eligible, uncaught legends.
-  line 904:  / Collect 250 soot in total, then speak to Route 113's glassmaker. Spending soot keeps your progress.
-  line 906:  / Help Dewford Meadow's warden perform a song. Bring a Pokémon with SING.
-  line 908:  / Bring CASTFORM to the archaeologist at Route 111's elevated ruins. Help with the local weather survey.
-  line 910:  / First, catch RESHIRAM or ZEKROM. Either discovery is enough.
-  line 912:  / Bring REGIROCK, REGICE and REGISTEEL together to the statue.
-  line 914:  / Catch OKIDOGI, MUNKIDORI and FEZANDIPITI, then inspect the shrine.
-  line 918:  / A clue points to this family: {STR_VAR_1}. / Befriend a member of that family. A caught Pokédex entry is enough; your partner can stay in the PC.
-  line 927:  / Ask the Pokémon prize counter at Mauville's Game Corner.
-  line 930:  / Earn its Champions Circuit milestone at the Battle Frontier's Battle Tower. / The ferry opens with six badges. / Lifetime wins count. The attendant keeps an earned reward until claimed.
-  line 934:  / Resolve the weather crisis and earn all eight badges, then visit Devon. / No Pokédex completion is needed.
-  line 935:  / Win 40 Circuit battles in total and claim its other legendary rewards.
-  line 938:  / Leave MANAPHY and DITTO together at Route 117's Day Care. / Hatch their Egg to meet PHIONE.
-  line 941:  / Available now!
-  line 943:  / Search while SURFING in this area. This Pokémon has a 1% encounter chance.
-  line 944:  / Search the wild Pokémon in this area. This Pokémon has a 1% encounter chance.
-  line 945:  / SWEET SCENT gives a 25% chance of a legendary encounter here. / Eligible local legendaries share that chance equally. Their badge and other requirements still apply.
-  line 946:  / If it escapes or faints, keep looking. It can appear again until caught.
-  line 949:  / Search the wild Pokémon in this area. No research visit is needed.
-  line 956:  / Speak to Devon's dream researcher about his mechanical prototype.
-  line 961:  / Resting after your last encounter. Leave this area and return to retry.
-  line 965:  / Ready! Approach the Pokémon or inspect its shrine in this area.
-  line 999: After you battle the PROF.'s kid, return to BIRCH for your send-off. / Then head west to ROUTE 102. SHAYMIN lives in its grass.
-  line 1012:  / You've found {STR_VAR_1} of those six traveling and island legends.
-  line 1021: HEATRAN is awake in the deepest room of SCORCHED SLAB. / If it fled after a battle, leave that room and return to find it.
-  line 1025: You've already found {STR_VAR_2}! / That's one local legend you have turned into a partner.
-  line 1035: You've already found {STR_VAR_2}! / The local lead was: {STR_VAR_3}.
-  line 1038:  / It has a 3% wild encounter chance. SWEET SCENT gives a shared 25% chance among uncaught local legends.
-  line 1042:  / That discovery is still waiting for your help.
-  line 1044:  / You've met its requirements! You can search for it there now.
-  line 1046:  / You've met its requirements. Visit its resting place to meet it.
+  line 116: Route 113 ash grass
+  line 806: Galarian Articuno
+  line 807: Galarian Zapdos
+  line 808: Galarian Moltres
+  line 881:  / Gym Badges required: {STR_VAR_1}.
+  line 885:  / First, resolve the weather crisis in Sootopolis.
+  line 887:  / Help Wattson stop New Mauville's generator, then report back to him.
+  line 889:  / First, rescue the Weather Institute researchers from Team Aqua.
+  line 891:  / First, confront Maxie deep inside the Magma Hideout.
+  line 893:  / First, help the elders at Mt. Pyre and receive the Magma Emblem.
+  line 907: {STR_VAR_2} {STR_VAR_3}.
+  line 910:  / Caught! This discovery is recorded.
+  line 916:  / A wild resident: 3% per encounter.
+  line 918:  / Search while SURFING here.
+  line 919:  / Search the wild Pokémon here.
+  line 920:  / No special requirements. Once caught, it stops appearing here. / SWEET SCENT: a shared 25% chance among eligible, uncaught legends.
+  line 932:  / Collect 250 soot in total, then speak to Route 113's glassmaker. Spending soot keeps your progress.
+  line 934:  / Help Dewford Meadow's warden perform a song. Bring a Pokémon with SING.
+  line 936:  / Bring CASTFORM to the archaeologist at Route 111's elevated ruins. Help with the local weather survey.
+  line 938:  / First, catch RESHIRAM or ZEKROM. Either discovery is enough.
+  line 940:  / Bring REGIROCK, REGICE and REGISTEEL together to the statue.
+  line 942:  / Catch OKIDOGI, MUNKIDORI and FEZANDIPITI, then inspect the shrine.
+  line 946:  / A clue points to this family: {STR_VAR_1}. / Befriend a member of that family. A caught Pokédex entry is enough; your partner can stay in the PC.
+  line 955:  / Ask the Pokémon prize counter at Mauville's Game Corner.
+  line 958:  / Earn its Champions Circuit milestone at the Battle Frontier's Battle Tower. / The ferry opens with six badges. / Lifetime wins count. The attendant keeps an earned reward until claimed.
+  line 962:  / Resolve the weather crisis and earn all eight badges, then visit Devon. / No Pokédex completion is needed.
+  line 963:  / Win 40 Circuit battles in total and claim its other legendary rewards.
+  line 966:  / Leave MANAPHY and DITTO together at Route 117's Day Care. / Hatch their Egg to meet PHIONE.
+  line 969:  / Available now!
+  line 971:  / Search while SURFING in this area. This Pokémon has a 1% encounter chance.
+  line 972:  / Search the wild Pokémon in this area. This Pokémon has a 1% encounter chance.
+  line 973:  / SWEET SCENT gives a 25% chance of a legendary encounter here. / Eligible local legendaries share that chance equally. Their badge and other requirements still apply.
+  line 974:  / If it escapes or faints, keep looking. It can appear again until caught.
+  line 977:  / Search the wild Pokémon in this area. No research visit is needed.
+  line 984:  / Speak to Devon's dream researcher about his mechanical prototype.
+  line 989:  / Resting after your last encounter. Leave this area and return to retry.
+  line 993:  / Ready! Approach the Pokémon or inspect its shrine in this area.
+  line 1027: After you battle the PROF.'s kid, return to BIRCH for your send-off. / Then head west to ROUTE 102. SHAYMIN lives in its grass.
+  line 1040:  / You've found {STR_VAR_1} of those six traveling and island legends.
+  line 1049: HEATRAN is awake in the deepest room of SCORCHED SLAB. / If it fled after a battle, leave that room and return to find it.
+  line 1053: You've already found {STR_VAR_2}! / That's one local legend you have turned into a partner.
+  line 1063: You've already found {STR_VAR_2}! / The local lead was: {STR_VAR_3}.
+  line 1066:  / It has a 3% wild encounter chance. SWEET SCENT gives a shared 25% chance among uncaught local legends.
+  line 1070:  / That discovery is still waiting for your help.
+  line 1072:  / You've met its requirements! You can search for it there now.
+  line 1074:  / You've met its requirements. Visit its resting place to meet it.
 
 NATIVE TEXT SOURCE src/libisagbprn.c
   literal candidate line 104: unspecified pretty printing handler.
@@ -128704,8 +128715,884 @@ data/scripts/tv.inc:EventScript_MomDadMightLikeThis2 => [NATIVE special GetMomOr
 data/scripts/tv.inc:EventScript_TryDoPokeNews => [NATIVE special DoPokeNews]; goto_if_eq VAR_RESULT, FALSE, EventScript_TryDoTVShow; goto EventScript_TurnOffTV
 data/scripts/tv.inc:EventScript_DoInSearchOfTrainers => [NATIVE special DoTVShowInSearchOfTrainers]; goto_if_eq VAR_RESULT, 0, EventScript_DoInSearchOfTrainers; goto EventScript_TurnOffTV
 
+MEGA REGISTER
+99 item-based Mega Stones. Signature owner = highest design tier (elite/leader>gym>admin/boss>rival>ace>brain>regular/casual/grunt), ties broken by earlier docs/trainer-review-index.json review_index. mega_slots=yes means the holder's authored Mega permission bitmask covers that party position, not that the AI will trigger it in a given battle. player_family_access is the earliest strict_cap of any authored trainer encounter located on a map where the base family is available in the wild table, a givemon/giveegg script grant, or a legendary sign; 'unmapped' means no such source was found under this index's rules (trades and Pickup/lottery odds are not modeled).
+NO TRAINER HOLDER rows: 0 (none)
+
+Venusaurite (ITEM_VENUSAURITE) -> Venusaur Mega
+  World source: Route104_PrettyPetalFlowerShop: NPC/event gift (Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE)
+  Signature owner: TRAINER_ALANNAH (E0157, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Venusaur)
+
+Charizardite X (ITEM_CHARIZARDITE_X) -> Charizard Mega X
+  World source: Route110: sparkle at (33, 45)
+  Signature owner: TRAINER_GERALD (E0144, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_KAYLEY (E0277, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Charizard)
+
+Charizardite Y (ITEM_CHARIZARDITE_Y) -> Charizard Mega Y
+  World source: Route117: sparkle at (3, 18)
+  Signature owner: TRAINER_DARCY (E0433, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Charizard)
+
+Blastoisinite (ITEM_BLASTOISINITE) -> Blastoise Mega
+  World source: Seaspray_Cave: sparkle at (6, 25)
+  Signature owner: TRAINER_OLIVIA (E0464, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_BROOKE_1 (E0095, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Blastoise)
+
+Butterfrenite (ITEM_BUTTERFRENITE) -> Butterfree Mega
+  World source: PetalburgWoods: sparkle at (4, 8)
+  Signature owner: TRAINER_MEL_AND_PAUL (E0208, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Beedrillite (ITEM_BEEDRILLITE) -> Beedrill Mega
+  World source: PetalburgWoods_3: sparkle at (38, 9)
+  Signature owner: TRAINER_TYRON (E0083, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 55
+
+Pidgeotite (ITEM_PIDGEOTITE) -> Pidgeot Mega
+  World source: RustboroCity_DevonCorp_3F: NPC/event gift (RustboroCity_DevonCorp_3F_EventScript_TryGivePidgeotite)
+  Signature owner: TRAINER_ASHLEY (E0286, class=gym, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Raichunite X (ITEM_RAICHUNITE_X) -> Raichu Mega X
+  World source: VerdanturfTown_FriendshipRatersHouse: NPC/event gift (VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X)
+  Signature owner: TRAINER_VITO (E0487, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Raichunite Y (ITEM_RAICHUNITE_Y) -> Raichu Mega Y
+  World source: Route115: sparkle at (26, 67)
+  Signature owner: TRAINER_RONALD (E0430, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Clefablite (ITEM_CLEFABLITE) -> Clefable Mega
+  World source: FallarborTown_CozmosHouse: NPC/event gift (FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE)
+  Signature owner: TRAINER_KEIRA (E0500, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Alakazite (ITEM_ALAKAZITE) -> Alakazam Mega
+  World source: GraniteCave_B1F: sparkle at (15, 21)
+  Signature owner: TRAINER_PRESTON (E0388, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_AMY_AND_LIV_1 (E0211, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Alakazam)
+
+Machampite (ITEM_MACHAMPITE) -> Machamp Mega
+  World source: LavaridgeTown_House: NPC/event gift (LavaridgeTown_House_EventScript_MegaGift_MACHAMPITE)
+  Signature owner: TRAINER_DUNCAN (E0197, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Victreebelite (ITEM_VICTREEBELITE) -> Victreebel Mega
+  World source: Route115: sparkle at (23, 29)
+  Signature owner: TRAINER_JULIE (E0490, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Victreebel)
+
+Slowbronite (ITEM_SLOWBRONITE) -> Slowbro Mega
+  World source: Seaspray_Cave_B1F: sparkle at (11, 12)
+  Signature owner: TRAINER_MAURA (E0393, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_FOSTER (E0175, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 55
+
+Gengarite (ITEM_GENGARITE) -> Gengar Mega
+  World source: Route120: sparkle at (20, 55)
+  Signature owner: TRAINER_PHOEBE (E0494, class=elite, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_HIDEO (E0251, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 60
+
+Steelixite (ITEM_STEELIXITE) -> Steelix Mega
+  World source: Route111_RuinsExterior: sparkle at (10, 22)
+  Signature owner: TRAINER_WILTON_1 (E0094, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 80
+
+Kinglerite (ITEM_KINGLERITE) -> Kingler Mega
+  World source: DewfordTown_House2: NPC/event gift (DewfordTown_House2_EventScript_MegaGift_KINGLERITE)
+  Signature owner: TRAINER_ROGER (E0377, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Kangaskhanite (ITEM_KANGASKHANITE) -> Kangaskhan Mega
+  World source: Route117_PokemonDayCare: NPC/event gift (Route117_PokemonDayCare_EventScript_HatchReward)
+  Signature owner: TRAINER_ISAAC_1 (E0071, class=ace, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_ATHENA (E0379, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Kangaskhan)
+
+Starminite (ITEM_STARMINITE) -> Starmie Mega
+  World source: LilycoveCity_House4: NPC/event gift (LilycoveCity_House4_EventScript_MegaGift_STARMINITE)
+  Signature owner: TRAINER_WALLACE (E0497, class=elite, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Scizorite (ITEM_SCIZORITE) -> Scizor Mega
+  World source: Route118: sparkle at (69, 7)
+  Signature owner: TRAINER_WENDY (E0267, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 30
+
+Pinsirite (ITEM_PINSIRITE) -> Pinsir Mega
+  World source: AshenWoods: sparkle at (6, 40)
+  Signature owner: TRAINER_JODY (E0170, class=gym, mega_slots evolves this slot=yes)
+  Player family access: cap 30
+
+Gyaradosite (ITEM_GYARADOSITE) -> Gyarados Mega
+  World source: DewfordTown_House2: NPC/event gift (DewfordTown_House2_EventScript_MegaGift_GYARADOSITE)
+  Signature owner: TRAINER_JUAN_1 (E0469, class=leader, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_DARRIN (E0184, class=ace, mega_slots evolves this slot=yes); TRAINER_MAGIKARP_GUY (E0227, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Laprasite (ITEM_LAPRASITE) -> Lapras Mega
+  World source: LilycoveCity_House4: NPC/event gift (LilycoveCity_House4_EventScript_MegaGift_LAPRASITE)
+  Signature owner: TRAINER_MICAH (E0505, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Aerodactylite (ITEM_AERODACTYLITE) -> Aerodactyl Mega
+  World source: GraniteCave_StevensRoom: NPC/event gift (GraniteCave_StevensRoom_EventScript_Aerodactylite)
+  Signature owner: TRAINER_ROXANNE_1 (E0030, class=leader, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_DARIUS (E0288, class=gym, mega_slots evolves this slot=yes); TRAINER_COURTNEY_METEOR_FALLS (E0127, class=admin, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Aerodactyl)
+
+Dragoninite (ITEM_DRAGONINITE) -> Dragonite Mega
+  World source: Route123_BerryMastersHouse: one-time garden berry trade
+  Signature owner: TRAINER_DRAKE (E0496, class=elite, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_AARON (E0446, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Mewtwonite X (ITEM_MEWTWONITE_X) -> Mewtwo Mega X
+  World source: AlteringCave_B1F: NPC/event gift (AlteringCave_B1F_EventScript_LeafReward)
+  Signature owner: TRAINER_WALLACE_DOUBLES_LEGENDS (E0510, class=elite, mega_slots evolves this slot=yes)
+  Player family access: cap 100
+
+Mewtwonite Y (ITEM_MEWTWONITE_Y) -> Mewtwo Mega Y
+  World source: AlteringCave_B1F: sparkle at (35, 21)
+  Signature owner: TRAINER_LEAF_ALTERING_CAVE (E0511, class=rival, mega_slots evolves this slot=yes)
+  Player family access: cap 100
+
+Meganiumite (ITEM_MEGANIUMITE) -> Meganium Mega
+  World source: Route110: sparkle at (26, 47)
+  Signature owner: TRAINER_MICHELLE (E0484, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Meganium)
+
+Feraligite (ITEM_FERALIGITE) -> Feraligatr Mega
+  World source: Route110: sparkle at (6, 38)
+  Signature owner: TRAINER_SHELLY_WEATHER_INSTITUTE (E0248, class=admin, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Feraligatr)
+
+Ampharosite (ITEM_AMPHAROSITE) -> Ampharos Mega
+  World source: MauvilleCity_House2: NPC/event gift (MauvilleCity_House2_EventScript_MegaGift_AMPHAROSITE)
+  Signature owner: TRAINER_SHAWN (E0091, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_TIMOTHY_1 (E0218, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Heracronite (ITEM_HERACRONITE) -> Heracross Mega
+  World source: PetalburgWoods: sparkle at (35, 20)
+  Signature owner: TRAINER_BRAWLY_1 (E0040, class=leader, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_DONALD (E0230, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Skarmorite (ITEM_SKARMORITE) -> Skarmory Mega
+  World source: Route112: sparkle at (14, 43)
+  Signature owner: TRAINER_WINONA_1 (E0289, class=leader, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Houndoominite (ITEM_HOUNDOOMINITE) -> Houndoom Mega
+  World source: Route113_GlassWorkshop: native finite exchange (ClaimEmeraldChampionsSootMilestone)
+  Signature owner: TRAINER_TABITHA_MT_CHIMNEY (E0131, class=admin, mega_slots evolves this slot=yes)
+  Player family access: cap 45
+
+Tyranitarite (ITEM_TYRANITARITE) -> Tyranitar Mega
+  World source: Route123_BerryMastersHouse: one-time garden berry trade
+  Signature owner: TRAINER_BRENDAN_LILYCOVE_TREECKO (E0302, class=rival, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_MAY_LILYCOVE_TREECKO (E0302, class=rival, mega_slots evolves this slot=yes); TRAINER_FREDRICK (E0274, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Sceptilite (ITEM_SCEPTILITE) -> Sceptile Mega
+  World source: Route104: sparkle at (5, 8)
+  Signature owner: TRAINER_PAT (E0298, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Sceptile)
+
+Blazikenite (ITEM_BLAZIKENITE) -> Blaziken Mega
+  World source: LavaridgeTown_House: NPC/event gift (LavaridgeTown_House_EventScript_MegaGift_BLAZIKENITE)
+  Signature owner: TRAINER_DANIELLE (E0147, class=gym, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Blaziken)
+
+Swampertite (ITEM_SWAMPERTITE) -> Swampert Mega
+  World source: Route104: sparkle at (39, 15)
+  Signature owner: TRAINER_BRIDGET (E0463, class=gym, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Swampert)
+
+Gardevoirite (ITEM_GARDEVOIRITE) -> Gardevoir Mega
+  World source: VerdanturfTown_WandasHouse: NPC/event gift (VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE)
+  Signature owner: TRAINER_TATE_AND_LIZA_1 (E0400, class=leader, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_CAROLINA (E0194, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Galladite (ITEM_GALLADITE) -> Gallade Mega
+  World source: VerdanturfTown_House: NPC/event gift (VerdanturfTown_House_EventScript_MegaGift_GALLADITE)
+  Signature owner: TRAINER_HANNAH (E0391, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_WALLY_VR_1 (E0476, class=rival, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Sablenite (ITEM_SABLENITE) -> Sableye Mega
+  World source: DewfordManor_1F: sparkle at (1, 11)
+  Signature owner: TRAINER_JENNIFER (E0258, class=ace, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_JONATHAN (E0434, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 70
+
+Mawilite (ITEM_MAWILITE) -> Mawile Mega
+  World source: DewfordMeadow: sparkle at (21, 14)
+  Signature owner: TRAINER_SPENSER_FORTREE (E0282, class=brain, mega_slots evolves this slot=yes)
+  Player family access: cap 100
+
+Aggronite (ITEM_AGGRONITE) -> Aggron Mega
+  World source: MeteorFalls_1F_1R: sparkle at (2, 4)
+  Signature owner: TRAINER_ALAN (E0163, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 80
+
+Medichamite (ITEM_MEDICHAMITE) -> Medicham Mega
+  World source: Route115: sparkle at (18, 7)
+  Signature owner: TRAINER_VIRGIL (E0389, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_SHELBY_1 (E0139, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Manectite (ITEM_MANECTITE) -> Manectric Mega
+  World source: MauvilleCity_Gym: NPC/event gift (MauvilleCity_Gym_EventScript_GiveManectite)
+  Signature owner: TRAINER_WATTSON_1 (E0092, class=leader, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Sharpedonite (ITEM_SHARPEDONITE) -> Sharpedo Mega
+  World source: Route109: sparkle at (25, 6)
+  Signature owner: TRAINER_ARCHIE (E0458, class=leader, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_SIDNEY (E0493, class=elite, mega_slots evolves this slot=yes); TRAINER_BETHANY (E0466, class=gym, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Cameruptite (ITEM_CAMERUPTITE) -> Camerupt Mega
+  World source: FieryPath: sparkle at (7, 32)
+  Signature owner: TRAINER_MAXIE_MT_CHIMNEY (E0132, class=leader, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_MAXIE_MAGMA_HIDEOUT (E0339, class=leader, mega_slots evolves this slot=yes); TRAINER_MAXIE_MOSSDEEP (E0409, class=leader, mega_slots evolves this slot=yes); TRAINER_ELI (E0148, class=gym, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Altarianite (ITEM_ALTARIANITE) -> Altaria Mega
+  World source: Route111: sparkle at (3, 113)
+  Signature owner: TRAINER_NICOLAS_1 (E0128, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Banettite (ITEM_BANETTITE) -> Banette Mega
+  World source: DewfordManor_1F: sparkle at (3, 7)
+  Signature owner: TRAINER_PHOEBE (E0494, class=elite, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_MARTHA (E0162, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 60
+
+Chimechite (ITEM_CHIMECHITE) -> Chimecho Mega
+  World source: FortreeCity_House5: NPC/event gift (FortreeCity_House5_EventScript_MegaGift_CHIMECHITE)
+  Signature owner: TRAINER_MARIELA (E0473, class=casual, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Absolite (ITEM_ABSOLITE) -> Absol Mega
+  World source: JaggedPass: sparkle at (23, 24)
+  Signature owner: TRAINER_LUCY_LAVARIDGE (E0138, class=brain, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Absolite Z (ITEM_ABSOLITE_Z) -> Absol Mega Z
+  World source: Route114: sparkle at (31, 19)
+  Signature owner: TRAINER_SIDNEY (E0493, class=elite, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Glalitite (ITEM_GLALITITE) -> Glalie Mega
+  World source: ShoalCave_LowTideEntranceRoom: native finite exchange (TradeEmeraldChampionsShoalMaterials)
+  Signature owner: TRAINER_BERKE (E0167, class=gym, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Glalie)
+
+Froslassite (ITEM_FROSLASSITE) -> Froslass Mega
+  World source: Seaspray_Cave_B1F: sparkle at (15, 5)
+  Signature owner: TRAINER_GLACIA (E0495, class=elite, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_SUSIE (E0423, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Froslass)
+
+Salamencite (ITEM_SALAMENCITE) -> Salamence Mega
+  World source: MeteorFalls_1F_1R: sparkle at (26, 32)
+  Signature owner: TRAINER_DRAKE (E0496, class=elite, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_FLINT (E0285, class=gym, mega_slots evolves this slot=yes); TRAINER_BRENDAN_LILYCOVE_TORCHIC (E0302, class=rival, mega_slots evolves this slot=yes); TRAINER_MAY_LILYCOVE_TORCHIC (E0302, class=rival, mega_slots evolves this slot=yes); TRAINER_BRAXTON (E0268, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Metagrossite (ITEM_METAGROSSITE) -> Metagross Mega
+  World source: MeteorFalls_1F_1R: sparkle at (27, 5)
+  Signature owner: TRAINER_NATE (E0395, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_BRENDAN_LILYCOVE_MUDKIP (E0302, class=rival, mega_slots evolves this slot=yes); TRAINER_MAY_LILYCOVE_MUDKIP (E0302, class=rival, mega_slots evolves this slot=yes); TRAINER_STEVEN (E0512, class=rival, mega_slots evolves this slot=yes)
+  Player family access: cap 80
+
+Latiasite (ITEM_LATIASITE) -> Latias Mega
+  World source: SouthernIsland_Interior: sparkle at (8, 8)
+  Signature owner: TRAINER_KATHLEEN (E0399, class=gym, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_RUBEN (E0384, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Latias)
+
+Latiosite (ITEM_LATIOSITE) -> Latios Mega
+  World source: SouthernIsland_Interior: sparkle at (10, 6)
+  Signature owner: TRAINER_SAMUEL (E0482, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Latios)
+
+Staraptite (ITEM_STARAPTITE) -> Staraptor Mega
+  World source: Route116: sparkle at (10, 17)
+  Signature owner: TRAINER_NORMAN_1 (E0171, class=leader, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Lopunnite (ITEM_LOPUNNITE) -> Lopunny Mega
+  World source: PetalburgWoods: sparkle at (4, 26)
+  Signature owner: TRAINER_MARY (E0168, class=gym, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Garchompite (ITEM_GARCHOMPITE) -> Garchomp Mega
+  World source: Route111: sparkle at (21, 57)
+  Signature owner: TRAINER_CAROLINE (E0489, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 30
+
+Garchompite Z (ITEM_GARCHOMPITE_Z) -> Garchomp Mega Z
+  World source: Route116: sparkle at (80, 8)
+  Signature owner: TRAINER_CYNTHIA_1 (E0513, class=leader, mega_slots evolves this slot=yes)
+  Player family access: cap 30
+
+Lucarionite (ITEM_LUCARIONITE) -> Lucario Mega
+  World source: Route116: sparkle at (19, 6)
+  Signature owner: TRAINER_JAZMYN (E0279, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Lucarionite Z (ITEM_LUCARIONITE_Z) -> Lucario Mega Z
+  World source: Route116: sparkle at (55, 12)
+  Signature owner: TRAINER_OWEN (E0488, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Abomasite (ITEM_ABOMASITE) -> Abomasnow Mega
+  World source: Seaspray_Cave_B1F: sparkle at (25, 21)
+  Signature owner: TRAINER_GABRIELLE_1 (E0311, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Abomasnow)
+
+Heatranite (ITEM_HEATRANITE) -> Heatran Mega
+  World source: ScorchedSlab_HeatransRoom: sparkle at (8, 16)
+  Signature owner: TRAINER_COURTNEY_MOSSDEEP (E0409, class=leader, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Heatran)
+
+Darkranite (ITEM_DARKRANITE) -> Darkrai Mega
+  World source: VictoryRoad_1F: sparkle at (37, 39)
+  Signature owner: TRAINER_NAOMI (E0509, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 60
+
+Emboarite (ITEM_EMBOARITE) -> Emboar Mega
+  World source: Route110: sparkle at (35, 39)
+  Signature owner: TRAINER_SHANNON (E0483, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Emboar)
+
+Excadrite (ITEM_EXCADRITE) -> Excadrill Mega
+  World source: Route113: sparkle at (79, 5)
+  Signature owner: TRAINER_TABITHA_MOSSDEEP (E0408, class=admin, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Audinite (ITEM_AUDINITE) -> Audino Mega
+  World source: Route117: NPC/event gift (Route117_EventScript_Woman)
+  Signature owner: TRAINER_GEORGE (E0166, class=gym, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Scolipite (ITEM_SCOLIPITE) -> Scolipede Mega
+  World source: PetalburgWoods: sparkle at (45, 15)
+  Signature owner: TRAINER_THOMAS (E0506, class=regular, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Scolipede)
+
+Scraftinite (ITEM_SCRAFTINITE) -> Scrafty Mega
+  World source: JaggedPass: sparkle at (8, 10)
+  Signature owner: TRAINER_LEROY (E0501, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Eelektrossite (ITEM_EELEKTROSSITE) -> Eelektross Mega
+  World source: Route110: sparkle at (4, 35)
+  Signature owner: TRAINER_GRUNT_AQUA_HIDEOUT_4 (E0345, class=grunt, mega_slots evolves this slot=yes)
+  Player family access: cap 100
+
+Chandelurite (ITEM_CHANDELURITE) -> Chandelure Mega
+  World source: DewfordManor_1F: sparkle at (3, 9)
+  Signature owner: TRAINER_FLANNERY_1 (E0150, class=leader, mega_slots evolves this slot=yes)
+  Player family access: cap 60
+
+Golurkite (ITEM_GOLURKITE) -> Golurk Mega
+  World source: DesertUnderpass: sparkle at (110, 3)
+  Signature owner: TRAINER_TABITHA_MAGMA_HIDEOUT (E0337, class=admin, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Golurk)
+
+Chesnaughtite (ITEM_CHESNAUGHTITE) -> Chesnaught Mega
+  World source: Route117: sparkle at (16, 18)
+  Signature owner: TRAINER_MARLEY (E0450, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Chesnaught)
+
+Delphoxite (ITEM_DELPHOXITE) -> Delphox Mega
+  World source: Route110: sparkle at (37, 67)
+  Signature owner: TRAINER_KATELYNN (E0481, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Delphox)
+
+Greninjite (ITEM_GRENINJITE) -> Greninja Mega
+  World source: Route117: sparkle at (9, 1)
+  Signature owner: TRAINER_FELIX (E0491, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Greninja)
+
+Pyroarite (ITEM_PYROARITE) -> Pyroar Mega
+  World source: Route115: sparkle at (31, 56)
+  Signature owner: TRAINER_COURTNEY_MAGMA_HIDEOUT (E0338, class=admin, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Floettite (ITEM_FLOETTITE) -> Floette Mega
+  World source: VerdanturfMeadow: sparkle at (7, 10)
+  Signature owner: TRAINER_COLTON (E0504, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 30
+
+Meowsticite (ITEM_MEOWSTICITE) -> Meowstic M Mega, Meowstic F Mega
+  World source: Route116: sparkle at (34, 7)
+  Signature owner: TRAINER_ALEXIS (E0472, class=regular, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Meowstic F, Meowstic M)
+
+Malamarite (ITEM_MALAMARITE) -> Malamar Mega
+  World source: SlateportCity_NameRatersHouse: NPC/event gift (SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE)
+  Signature owner: TRAINER_MATT (E0348, class=admin, mega_slots evolves this slot=yes)
+  Player family access: cap 55
+
+Barbaracite (ITEM_BARBARACITE) -> Barbaracle Mega
+  World source: DewfordTown_House1: NPC/event gift (DewfordTown_House1_EventScript_MegaGift_BARBARACITE)
+  Signature owner: TRAINER_DIANNE (E0492, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Dragalgite (ITEM_DRAGALGITE) -> Dragalge Mega
+  World source: Route119: sparkle at (29, 53)
+  Signature owner: TRAINER_SHELLY_SEAFLOOR_CAVERN (E0454, class=admin, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Hawluchanite (ITEM_HAWLUCHANITE) -> Hawlucha Mega
+  World source: DewfordMeadow: sparkle at (4, 13)
+  Signature owner: TRAINER_EDGAR (E0477, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Zygardite (ITEM_ZYGARDITE) -> Zygarde Mega
+  World source: VictoryRoad_1F: sparkle at (40, 26)
+  Signature owner: TRAINER_QUINCY (E0480, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Zygarde)
+
+Diancite (ITEM_DIANCITE) -> Diancie Mega
+  World source: ShoalCave_LowTideStairsRoom: sparkle at (13, 12)
+  Signature owner: TRAINER_ALEXA (E0383, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Diancie)
+
+Crabominite (ITEM_CRABOMINITE) -> Crabominable Mega
+  World source: Seaspray_Cave_B1F: sparkle at (20, 24)
+  Signature owner: TRAINER_HERMAN (E0422, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Golisopite (ITEM_GOLISOPITE) -> Golisopod Mega
+  World source: Route109: sparkle at (27, 46)
+  Signature owner: TRAINER_MATT_MT_PYRE (E0320, class=admin, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Drampanite (ITEM_DRAMPANITE) -> Drampa Mega
+  World source: Route111: sparkle at (33, 104)
+  Signature owner: TRAINER_WARREN (E0439, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Magearnite (ITEM_MAGEARNITE) -> Magearna Mega, Magearna Original Mega
+  World source: RustboroCity_DevonCorp_2F: NPC/event gift (RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE)
+  Signature owner: TRAINER_WALLY_VR_2 (E0498, class=rival, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Magearna, Magearna Original)
+
+Zeraorite (ITEM_ZERAORITE) -> Zeraora Mega
+  World source: Route120: sparkle at (22, 13)
+  Signature owner: TRAINER_VINCENT (E0499, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Zeraora)
+
+Falinksite (ITEM_FALINKSITE) -> Falinks Mega
+  World source: Route113: sparkle at (53, 7)
+  Signature owner: TRAINER_HALLE (E0486, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 20
+
+Scovillainite (ITEM_SCOVILLAINITE) -> Scovillain Mega
+  World source: JaggedPass: sparkle at (7, 29)
+  Signature owner: TRAINER_MITCHELL (E0485, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 40
+
+Glimmoranite (ITEM_GLIMMORANITE) -> Glimmora Mega
+  World source: GraniteCave_B2F: sparkle at (29, 4)
+  Signature owner: TRAINER_ALBERT (E0478, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 100
+
+Tatsugirinite (ITEM_TATSUGIRINITE) -> Tatsugiri Curly Mega, Tatsugiri Droopy Mega, Tatsugiri Stretchy Mega
+  World source: Underwater_SeafloorCavern: sparkle at (9, 5)
+  Signature owner: TRAINER_HOPE (E0479, class=ace, mega_slots evolves this slot=yes)
+  Player family access: unmapped (Tatsugiri Curly, Tatsugiri Droopy, Tatsugiri Stretchy)
+
+Baxcalibrite (ITEM_BAXCALIBRITE) -> Baxcalibur Mega
+  World source: Route123_BerryMastersHouse: one-time garden berry trade
+  Signature owner: TRAINER_GLACIA (E0495, class=elite, mega_slots evolves this slot=yes)
+  Player family access: cap 80
+
+Flygonite (ITEM_FLYGONITE) -> Flygon Mega
+  World source: Route111_RuinsExterior: sparkle at (12, 22)
+  Signature owner: TRAINER_CRISTIN_1 (E0300, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 30
+
+Miloticite (ITEM_MILOTICITE) -> Milotic Mega
+  World source: FortreeCity_House1: NPC/event gift (FortreeCity_House1_EventScript_MegaGift_MILOTICITE)
+  Signature owner: TRAINER_WALLACE (E0497, class=elite, mega_slots evolves this slot=yes)
+  Secondary owners: TRAINER_BUFFEL (E0304, class=ace, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+Kingdranite (ITEM_KINGDRANITE) -> Kingdra Mega
+  World source: Route119: sparkle at (33, 117)
+  Signature owner: TRAINER_LINDA (E0438, class=regular, mega_slots evolves this slot=yes)
+  Player family access: cap 14
+
+SPECIAL FORMS CALLED OUT BY THE BOOK
+Rayquaza Mega -- move-triggered by Dragon Ascent: TRAINER_STEVEN (E0512, class=rival, has Dragon Ascent=yes)
+Meowstic F Mega -- female Meowstic form of Meowsticite (shares the stone with SPECIES_MEOWSTIC_M_MEGA).
+Magearna Original Mega -- original-color Magearna form of Magearnite (shares the stone with SPECIES_MAGEARNA_MEGA).
+Tatsugiri Curly Mega -- Tatsugiri Curly form of Tatsugirinite.
+Tatsugiri Droopy Mega -- Tatsugiri Droopy form of Tatsugirinite.
+Tatsugiri Stretchy Mega -- Tatsugiri Stretchy form of Tatsugirinite.
+
+ACCEPTANCE LADDER
+Per-encounter design-review evidence. L0 authored: nonempty party in the current battle teams file. L1 ai_fixtures: referenced under test/ or tests/. L2 benchmark: a named, evidenced clear/victory receipt under work/ (naming heuristic; see scripts/acceptance_ladder.py). L3 earned_clear: named in handoff/checkpoint.json's earned-save cleared_trainers list. None of these levels alone certifies a finished, balanced or fully playtested encounter.
+SUMMARY: 341 encounters -- L0 341, L1 50, L2 2, L3 40.
+E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP,TRAINER_BRENDAN_ROUTE_103_TORCHIC,TRAINER_BRENDAN_ROUTE_103_TREECKO,TRAINER_MAY_ROUTE_103_MUDKIP,TRAINER_MAY_ROUTE_103_TORCHIC,TRAINER_MAY_ROUTE_103_TREECKO | class=rival | cap 14 | L0 L1 -- L3
+E0002 TRAINER_CALVIN_1 | class=regular | cap 14 | L0 L1 -- L3
+E0003 TRAINER_RICK | class=regular | cap 14 | L0 L1 -- L3
+E0004 TRAINER_ALLEN | class=regular | cap 14 | L0 L1 -- L3
+E0005 TRAINER_TIANA | class=casual | cap 14 | L0 L1 -- L3
+E0006 TRAINER_BILLY | class=regular | cap 14 | L0 L1 -- L3
+E0007 TRAINER_DARIAN | class=regular | cap 14 | L0 L1 -- L3
+E0008 TRAINER_CINDY_1 | class=regular | cap 14 | L0 L1 -- L3
+E0009 TRAINER_LYLE | class=casual | cap 14 | L0 L1 -- L3
+E0010 TRAINER_GRUNT_PETALBURG_WOODS | class=grunt | cap 14 | L0 L1 -- L3
+E0011 TRAINER_JAMES_1 | class=regular | cap 14 | L0 L1 -- L3
+E0012 TRAINER_WINSTON_1 | class=regular | cap 14 | L0 L1 -- L3
+E0014 TRAINER_GINA_AND_MIA_1 | class=regular | cap 14 | L0 L1 -- --
+E0020 TRAINER_JOEY | class=regular | cap 14 | L0 -- -- L3
+E0021 TRAINER_JOSE | class=regular | cap 14 | L0 -- -- L3
+E0023 TRAINER_CLARK | class=regular | cap 14 | L0 -- -- L3
+E0023 TRAINER_JOHNSON | class=regular | cap 14 | L0 -- -- L3
+E0024 TRAINER_DEVAN | class=regular | cap 14 | L0 -- -- L3
+E0027 TRAINER_JOSH | class=gym | cap 14 | L0 -- -- L3
+E0028 TRAINER_TOMMY | class=gym | cap 14 | L0 -- -- L3
+E0029 TRAINER_MARC | class=gym | cap 14 | L0 -- -- L3
+E0030 TRAINER_ROXANNE_1 | class=leader | cap 14 | L0 L1 -- L3
+E0025 TRAINER_DAWSON | class=regular | cap 14 | L0 -- -- L3
+E0025 TRAINER_SARAH | class=regular | cap 14 | L0 -- -- L3
+E0026 TRAINER_JANICE | class=casual | cap 14 | L0 -- -- L3
+E0026 TRAINER_JERRY_1 | class=casual | cap 14 | L0 -- -- L3
+E0031 TRAINER_GRUNT_RUSTURF_TUNNEL | class=grunt | cap 20 | L0 L1 -- L3
+E0032 TRAINER_BRENDAN_RUSTBORO_MUDKIP,TRAINER_BRENDAN_RUSTBORO_TORCHIC,TRAINER_BRENDAN_RUSTBORO_TREECKO,TRAINER_MAY_RUSTBORO_MUDKIP,TRAINER_MAY_RUSTBORO_TORCHIC,TRAINER_MAY_RUSTBORO_TREECKO | class=rival | cap 20 | L0 -- -- L3
+E0033 TRAINER_NED | class=regular | cap 20 | L0 L1 -- L3
+E0034 TRAINER_ELLIOT_1 | class=regular | cap 20 | L0 -- -- L3
+E0035 TRAINER_LAURA | class=gym | cap 20 | L0 L1 L2 L3
+E0036 TRAINER_BRENDEN | class=gym | cap 20 | L0 L1 -- L3
+E0036 TRAINER_LILITH | class=gym | cap 20 | L0 L1 -- L3
+E0037 TRAINER_TAKAO | class=gym | cap 20 | L0 L1 -- L3
+E0038 TRAINER_CRISTIAN | class=gym | cap 20 | L0 L1 -- L3
+E0039 TRAINER_JOCELYN | class=gym | cap 20 | L0 L1 -- L3
+E0040 TRAINER_BRAWLY_1 | class=leader | cap 20 | L0 L1 L2 L3
+E0042 TRAINER_HAILEY | class=regular | cap 20 | L0 -- -- L3
+E0043 TRAINER_EDMOND | class=regular | cap 20 | L0 L1 -- L3
+E0045 TRAINER_LOLA_1 | class=regular | cap 20 | L0 L1 -- L3
+E0046 TRAINER_CHANDLER | class=regular | cap 20 | L0 -- -- L3
+E0047 TRAINER_DWAYNE | class=casual | cap 20 | L0 -- -- --
+E0048 TRAINER_JOHANNA | class=regular | cap 20 | L0 -- -- --
+E0049 TRAINER_SIMON | class=regular | cap 20 | L0 -- -- --
+E0053 TRAINER_GRETA_SLATEPORT | class=brain | cap 20 | L0 -- -- --
+E0050 TRAINER_GRUNT_MUSEUM_1 | class=grunt | cap 20 | L0 -- -- --
+E0052 TRAINER_ARCHIE_SLATEPORT | class=leader | cap 20 | L0 L1 -- --
+E0054 TRAINER_ISABEL_1 | class=regular | cap 30 | L0 -- -- --
+E0054 TRAINER_KALEB | class=regular | cap 30 | L0 -- -- --
+E0055 TRAINER_SALLY | class=regular | cap 30 | L0 -- -- --
+E0056 TRAINER_EDDIE | class=regular | cap 30 | L0 -- -- --
+E0210 TRAINER_DAISY | class=regular | cap 30 | L0 -- -- --
+E0211 TRAINER_AMY_AND_LIV_1 | class=ace | cap 30 | L0 -- -- --
+E0213 TRAINER_MIGUEL_1 | class=casual | cap 30 | L0 -- -- --
+E0058 TRAINER_TIMMY | class=regular | cap 30 | L0 -- -- --
+E0059 TRAINER_BRENDAN_ROUTE_110_MUDKIP,TRAINER_BRENDAN_ROUTE_110_TORCHIC,TRAINER_BRENDAN_ROUTE_110_TREECKO,TRAINER_MAY_ROUTE_110_MUDKIP,TRAINER_MAY_ROUTE_110_TORCHIC,TRAINER_MAY_ROUTE_110_TREECKO | class=rival | cap 30 | L0 -- -- --
+E0063 TRAINER_JACLYN | class=regular | cap 30 | L0 L1 -- --
+E0069 TRAINER_WALLY_MAUVILLE | class=rival | cap 30 | L0 -- -- --
+E0064 TRAINER_ANTHONY | class=regular | cap 30 | L0 -- -- --
+E0067 TRAINER_JASMINE | class=regular | cap 30 | L0 -- -- --
+E0068 TRAINER_JACOB | class=regular | cap 30 | L0 -- -- --
+E0070 TRAINER_ANNA_AND_MEG_1 | class=regular | cap 30 | L0 -- -- --
+E0071 TRAINER_ISAAC_1 | class=ace | cap 30 | L0 -- -- --
+E0073 TRAINER_MARIA_1 | class=regular | cap 30 | L0 -- -- --
+E0074 TRAINER_DEREK | class=regular | cap 30 | L0 -- -- --
+E0075 TRAINER_LYDIA_1 | class=ace | cap 30 | L0 -- -- --
+E0076 TRAINER_AISHA | class=casual | cap 30 | L0 -- -- --
+E0076 TRAINER_BRANDI | class=casual | cap 30 | L0 -- -- --
+E0076 TRAINER_MELINA | class=casual | cap 30 | L0 -- -- --
+E0102 TRAINER_MIKE_2 | class=regular | cap 40 | L0 -- -- --
+E0085 TRAINER_ROSE_1 | class=regular | cap 30 | L0 L1 -- --
+E0088 TRAINER_DEANDRE | class=regular | cap 30 | L0 -- -- --
+E0083 TRAINER_TYRON | class=regular | cap 30 | L0 -- -- --
+E0082 TRAINER_BIANCA | class=regular | cap 30 | L0 -- -- --
+E0077 TRAINER_VICTOR | class=ace | cap 30 | L0 -- -- --
+E0078 TRAINER_VICTORIA | class=ace | cap 30 | L0 -- -- --
+E0079 TRAINER_VIVI | class=ace | cap 30 | L0 -- -- --
+E0080 TRAINER_VICKY | class=ace | cap 30 | L0 -- -- --
+E0089 TRAINER_VIVIAN | class=gym | cap 30 | L0 -- -- --
+E0089 TRAINER_KIRK | class=gym | cap 30 | L0 -- -- --
+E0090 TRAINER_BEN | class=gym | cap 30 | L0 -- -- --
+E0091 TRAINER_ANGELO | class=gym | cap 30 | L0 -- -- --
+E0091 TRAINER_SHAWN | class=gym | cap 30 | L0 -- -- --
+E0092 TRAINER_WATTSON_1 | class=leader | cap 30 | L0 -- -- --
+E0446 TRAINER_AARON | class=ace | cap 70 | L0 -- -- --
+E0163 TRAINER_ALAN | class=regular | cap 45 | L0 -- -- --
+E0157 TRAINER_ALANNAH | class=ace | cap 45 | L0 -- -- --
+E0478 TRAINER_ALBERT | class=ace | cap 80 | L0 -- -- --
+E0383 TRAINER_ALEXA | class=ace | cap 60 | L0 -- -- --
+E0169 TRAINER_ALEXIA | class=gym | cap 45 | L0 -- -- --
+E0472 TRAINER_ALEXIS | class=regular | cap 80 | L0 -- -- --
+E0222 TRAINER_ALIX | class=ace | cap 55 | L0 -- -- --
+E0459 TRAINER_ANDREA | class=gym | cap 70 | L0 -- -- --
+E0467 TRAINER_ANNIKA | class=gym | cap 70 | L0 -- -- --
+E0458 TRAINER_ARCHIE | class=leader | cap 70 | L0 L1 -- --
+E0286 TRAINER_ASHLEY | class=gym | cap 55 | L0 -- -- --
+E0379 TRAINER_ATHENA | class=ace | cap 60 | L0 -- -- --
+E0364 TRAINER_AURON | class=ace | cap 60 | L0 -- -- --
+E0136 TRAINER_AUTUMN | class=regular | cap 40 | L0 -- -- --
+E0145 TRAINER_AXLE | class=gym | cap 40 | L0 -- -- --
+E0153 TRAINER_BEAU | class=regular | cap 45 | L0 -- -- --
+E0167 TRAINER_BERKE | class=gym | cap 45 | L0 -- -- --
+E0466 TRAINER_BETHANY | class=gym | cap 70 | L0 -- -- --
+E0390 TRAINER_BLAKE | class=gym | cap 60 | L0 -- -- --
+E0268 TRAINER_BRAXTON | class=ace | cap 55 | L0 -- -- --
+E0368 TRAINER_BRENDA | class=regular | cap 60 | L0 -- -- --
+E0302 TRAINER_BRENDAN_LILYCOVE_MUDKIP,TRAINER_BRENDAN_LILYCOVE_TORCHIC,TRAINER_BRENDAN_LILYCOVE_TREECKO,TRAINER_MAY_LILYCOVE_MUDKIP,TRAINER_MAY_LILYCOVE_TORCHIC,TRAINER_MAY_LILYCOVE_TREECKO | class=rival | cap 60 | L0 -- -- --
+E0249 TRAINER_BRENDAN_ROUTE_119_MUDKIP,TRAINER_BRENDAN_ROUTE_119_TORCHIC,TRAINER_BRENDAN_ROUTE_119_TREECKO,TRAINER_MAY_ROUTE_119_MUDKIP,TRAINER_MAY_ROUTE_119_TORCHIC,TRAINER_MAY_ROUTE_119_TREECKO | class=rival | cap 55 | L0 -- -- --
+E0461 TRAINER_BRIANNA | class=gym | cap 70 | L0 -- -- --
+E0105 TRAINER_BRICE | class=casual | cap 40 | L0 -- -- --
+E0463 TRAINER_BRIDGET | class=gym | cap 70 | L0 -- -- --
+E0095 TRAINER_BROOKE_1 | class=ace | cap 40 | L0 -- -- --
+E0109 TRAINER_BRYANT | class=regular | cap 40 | L0 -- -- --
+E0304 TRAINER_BUFFEL | class=ace | cap 60 | L0 -- -- --
+E0194 TRAINER_CAROLINA | class=ace | cap 55 | L0 -- -- --
+E0489 TRAINER_CAROLINE | class=ace | cap 80 | L0 -- -- --
+E0236 TRAINER_CATHERINE_1 | class=ace | cap 55 | L0 -- -- --
+E0118 TRAINER_CHARLOTTE | class=casual | cap 40 | L0 -- -- --
+E0397 TRAINER_CLIFFORD | class=gym | cap 60 | L0 -- -- --
+E0116 TRAINER_COBY | class=regular | cap 40 | L0 -- -- --
+E0144 TRAINER_COLE | class=gym | cap 40 | L0 -- -- --
+E0253 TRAINER_COLIN | class=regular | cap 55 | L0 -- -- --
+E0504 TRAINER_COLTON | class=ace | cap 100 | L0 -- -- --
+E0462 TRAINER_CONNIE | class=gym | cap 70 | L0 L1 -- --
+E0442 TRAINER_CONOR | class=ace | cap 70 | L0 -- -- --
+E0338 TRAINER_COURTNEY_MAGMA_HIDEOUT | class=admin | cap 60 | L0 -- -- --
+E0127 TRAINER_COURTNEY_METEOR_FALLS,TRAINER_GRUNT_METEOR_FALLS | class=admin | cap 40 | L0 -- -- --
+E0409 TRAINER_COURTNEY_MOSSDEEP,TRAINER_MAXIE_MOSSDEEP | class=leader | cap 70 | L0 L1 -- --
+E0460 TRAINER_CRISSY | class=gym | cap 70 | L0 -- -- --
+E0300 TRAINER_CRISTIN_1 | class=ace | cap 60 | L0 -- -- --
+E0017 TRAINER_CYNDY_1 | class=regular | cap 14 | L0 L1 -- --
+E0513 TRAINER_CYNTHIA_1 | class=leader | cap 100 | L0 -- -- --
+E0147 TRAINER_DANIELLE | class=gym | cap 40 | L0 -- -- --
+E0468 TRAINER_DAPHNE | class=gym | cap 70 | L0 -- -- --
+E0433 TRAINER_DARCY | class=ace | cap 70 | L0 -- -- --
+E0288 TRAINER_DARIUS | class=gym | cap 55 | L0 -- -- --
+E0184 TRAINER_DARRIN | class=ace | cap 55 | L0 -- -- --
+E0135 TRAINER_DIANA_1 | class=regular | cap 40 | L0 -- -- --
+E0492 TRAINER_DIANNE | class=ace | cap 80 | L0 -- -- --
+E0115 TRAINER_DILLON | class=regular | cap 40 | L0 -- -- --
+E0230 TRAINER_DONALD | class=ace | cap 55 | L0 -- -- --
+E0232 TRAINER_DOUG | class=regular | cap 55 | L0 -- -- --
+E0496 TRAINER_DRAKE | class=elite | cap 80 | L0 L1 -- --
+E0151 TRAINER_DREW | class=regular | cap 45 | L0 -- -- --
+E0197 TRAINER_DUNCAN | class=regular | cap 55 | L0 -- -- --
+E0155 TRAINER_DUSTY_1 | class=ace | cap 45 | L0 -- -- --
+E0477 TRAINER_EDGAR | class=ace | cap 80 | L0 -- -- --
+E0284 TRAINER_EDWARDO | class=gym | cap 55 | L0 -- -- --
+E0148 TRAINER_ELI | class=gym | cap 40 | L0 -- -- --
+E0160 TRAINER_ELMER | class=ace | cap 45 | L0 -- -- --
+E0137 TRAINER_ETHAN_1 | class=casual | cap 40 | L0 -- -- --
+E0475 TRAINER_EVERETT | class=regular | cap 80 | L0 -- -- --
+E0491 TRAINER_FELIX | class=ace | cap 80 | L0 -- -- --
+E0150 TRAINER_FLANNERY_1 | class=leader | cap 40 | L0 L1 -- --
+E0285 TRAINER_FLINT | class=gym | cap 55 | L0 -- -- --
+E0175 TRAINER_FOSTER | class=ace | cap 55 | L0 -- -- --
+E0274 TRAINER_FREDRICK | class=ace | cap 55 | L0 -- -- --
+E0093 TRAINER_GABBY_AND_TY_1 | class=casual | cap 40 | L0 -- -- --
+E0228 TRAINER_GABBY_AND_TY_2 | class=regular | cap 55 | L0 -- -- --
+E0301 TRAINER_GABBY_AND_TY_5 | class=regular | cap 60 | L0 -- -- --
+E0303 TRAINER_GABBY_AND_TY_6 | class=regular | cap 60 | L0 L1 -- --
+E0311 TRAINER_GABRIELLE_1 | class=ace | cap 60 | L0 -- -- --
+E0200 TRAINER_GARRISON | class=casual | cap 55 | L0 -- -- --
+E0166 TRAINER_GEORGE | class=gym | cap 45 | L0 -- -- --
+E0101 TRAINER_GEORGIA | class=regular | cap 40 | L0 -- -- --
+E0144 TRAINER_GERALD | class=gym | cap 40 | L0 -- -- --
+E0495 TRAINER_GLACIA | class=elite | cap 80 | L0 L1 -- --
+E0340 TRAINER_GRUNT_AQUA_HIDEOUT_1 | class=grunt | cap 60 | L0 -- -- --
+E0341 TRAINER_GRUNT_AQUA_HIDEOUT_2 | class=grunt | cap 60 | L0 -- -- --
+E0342 TRAINER_GRUNT_AQUA_HIDEOUT_3 | class=grunt | cap 60 | L0 -- -- --
+E0345 TRAINER_GRUNT_AQUA_HIDEOUT_4 | class=grunt | cap 60 | L0 -- -- --
+E0343 TRAINER_GRUNT_AQUA_HIDEOUT_5 | class=grunt | cap 60 | L0 -- -- --
+E0346 TRAINER_GRUNT_AQUA_HIDEOUT_6 | class=grunt | cap 60 | L0 -- -- --
+E0344 TRAINER_GRUNT_AQUA_HIDEOUT_7 | class=grunt | cap 60 | L0 -- -- --
+E0347 TRAINER_GRUNT_AQUA_HIDEOUT_8 | class=grunt | cap 60 | L0 -- -- --
+E0134 TRAINER_GRUNT_JAGGED_PASS | class=grunt | cap 40 | L0 -- -- --
+E0321 TRAINER_GRUNT_MAGMA_HIDEOUT_1 | class=grunt | cap 60 | L0 -- -- --
+E0333 TRAINER_GRUNT_MAGMA_HIDEOUT_10 | class=grunt | cap 60 | L0 -- -- --
+E0334 TRAINER_GRUNT_MAGMA_HIDEOUT_11 | class=grunt | cap 60 | L0 -- -- --
+E0335 TRAINER_GRUNT_MAGMA_HIDEOUT_12 | class=grunt | cap 60 | L0 -- -- --
+E0336 TRAINER_GRUNT_MAGMA_HIDEOUT_13 | class=grunt | cap 60 | L0 -- -- --
+E0323 TRAINER_GRUNT_MAGMA_HIDEOUT_14 | class=grunt | cap 60 | L0 -- -- --
+E0327 TRAINER_GRUNT_MAGMA_HIDEOUT_15 | class=grunt | cap 60 | L0 -- -- --
+E0332 TRAINER_GRUNT_MAGMA_HIDEOUT_16 | class=grunt | cap 60 | L0 -- -- --
+E0322 TRAINER_GRUNT_MAGMA_HIDEOUT_2 | class=grunt | cap 60 | L0 -- -- --
+E0324 TRAINER_GRUNT_MAGMA_HIDEOUT_3 | class=grunt | cap 60 | L0 -- -- --
+E0325 TRAINER_GRUNT_MAGMA_HIDEOUT_4 | class=grunt | cap 60 | L0 -- -- --
+E0326 TRAINER_GRUNT_MAGMA_HIDEOUT_5 | class=grunt | cap 60 | L0 -- -- --
+E0328 TRAINER_GRUNT_MAGMA_HIDEOUT_6 | class=grunt | cap 60 | L0 -- -- --
+E0329 TRAINER_GRUNT_MAGMA_HIDEOUT_7 | class=grunt | cap 60 | L0 -- -- --
+E0330 TRAINER_GRUNT_MAGMA_HIDEOUT_8 | class=grunt | cap 60 | L0 -- -- --
+E0331 TRAINER_GRUNT_MAGMA_HIDEOUT_9 | class=grunt | cap 60 | L0 -- -- --
+E0130 TRAINER_GRUNT_MT_CHIMNEY_1 | class=grunt | cap 40 | L0 -- -- --
+E0316 TRAINER_GRUNT_MT_PYRE_1 | class=grunt | cap 60 | L0 -- -- --
+E0317 TRAINER_GRUNT_MT_PYRE_2 | class=grunt | cap 60 | L0 -- -- --
+E0318 TRAINER_GRUNT_MT_PYRE_3 | class=grunt | cap 60 | L0 -- -- --
+E0319 TRAINER_GRUNT_MT_PYRE_4 | class=grunt | cap 60 | L0 -- -- --
+E0452 TRAINER_GRUNT_SEAFLOOR_CAVERN_1 | class=grunt | cap 70 | L0 -- -- --
+E0453 TRAINER_GRUNT_SEAFLOOR_CAVERN_2 | class=grunt | cap 70 | L0 -- -- --
+E0456 TRAINER_GRUNT_SEAFLOOR_CAVERN_3 | class=grunt | cap 70 | L0 -- -- --
+E0457 TRAINER_GRUNT_SEAFLOOR_CAVERN_4 | class=grunt | cap 70 | L0 -- -- --
+E0455 TRAINER_GRUNT_SEAFLOOR_CAVERN_5 | class=grunt | cap 70 | L0 -- -- --
+E0402 TRAINER_GRUNT_SPACE_CENTER_1 | class=grunt | cap 70 | L0 -- -- --
+E0404 TRAINER_GRUNT_SPACE_CENTER_2 | class=grunt | cap 70 | L0 -- -- --
+E0401 TRAINER_GRUNT_SPACE_CENTER_3 | class=grunt | cap 70 | L0 -- -- --
+E0403 TRAINER_GRUNT_SPACE_CENTER_4 | class=grunt | cap 70 | L0 -- -- --
+E0405 TRAINER_GRUNT_SPACE_CENTER_5 | class=grunt | cap 70 | L0 -- -- --
+E0407 TRAINER_GRUNT_SPACE_CENTER_7 | class=grunt | cap 70 | L0 -- -- --
+E0243 TRAINER_GRUNT_WEATHER_INST_1 | class=grunt | cap 55 | L0 -- -- --
+E0246 TRAINER_GRUNT_WEATHER_INST_2 | class=grunt | cap 55 | L0 -- -- --
+E0247 TRAINER_GRUNT_WEATHER_INST_3 | class=grunt | cap 55 | L0 -- -- --
+E0244 TRAINER_GRUNT_WEATHER_INST_4 | class=grunt | cap 55 | L0 -- -- --
+E0245 TRAINER_GRUNT_WEATHER_INST_5 | class=grunt | cap 55 | L0 -- -- --
+E0486 TRAINER_HALLE | class=ace | cap 80 | L0 -- -- --
+E0391 TRAINER_HANNAH | class=gym | cap 60 | L0 -- -- --
+E0152 TRAINER_HEIDI | class=ace | cap 45 | L0 -- -- --
+E0422 TRAINER_HERMAN | class=ace | cap 70 | L0 -- -- --
+E0251 TRAINER_HIDEO | class=ace | cap 55 | L0 -- -- --
+E0479 TRAINER_HOPE | class=ace | cap 80 | L0 -- -- --
+E0448 TRAINER_HUDSON | class=regular | cap 70 | L0 -- -- --
+E0287 TRAINER_HUMBERTO | class=gym | cap 55 | L0 -- -- --
+E0148 TRAINER_JACE | class=gym | cap 40 | L0 L1 -- --
+E0235 TRAINER_JACKSON_1 | class=ace | cap 55 | L0 -- -- --
+E0199 TRAINER_JANI | class=regular | cap 55 | L0 -- -- --
+E0283 TRAINER_JARED | class=gym | cap 55 | L0 -- -- --
+E0111 TRAINER_JAYLEN | class=regular | cap 40 | L0 L1 -- --
+E0279 TRAINER_JAZMYN | class=ace | cap 55 | L0 -- -- --
+E0149 TRAINER_JEFF | class=gym | cap 40 | L0 L1 -- --
+E0256 TRAINER_JENNA | class=ace | cap 55 | L0 -- -- --
+E0258 TRAINER_JENNIFER | class=ace | cap 55 | L0 -- -- --
+E0170 TRAINER_JODY | class=gym | cap 45 | L0 -- -- --
+E0434 TRAINER_JONATHAN | class=ace | cap 70 | L0 -- -- --
+E0180 TRAINER_JOSUE | class=ace | cap 55 | L0 -- -- --
+E0469 TRAINER_JUAN_1 | class=leader | cap 70 | L0 -- -- --
+E0490 TRAINER_JULIE | class=ace | cap 80 | L0 -- -- --
+E0136 TRAINER_JULIO | class=regular | cap 40 | L0 -- -- --
+E0161 TRAINER_JUSTIN | class=casual | cap 45 | L0 -- -- --
+E0118 TRAINER_KAI | class=casual | cap 40 | L0 -- -- --
+E0424 TRAINER_KARA | class=regular | cap 70 | L0 -- -- --
+E0481 TRAINER_KATELYNN | class=ace | cap 80 | L0 -- -- --
+E0382 TRAINER_KATELYN_1 | class=regular | cap 60 | L0 -- -- --
+E0399 TRAINER_KATHLEEN | class=gym | cap 60 | L0 -- -- --
+E0277 TRAINER_KAYLEY | class=ace | cap 55 | L0 -- -- --
+E0146 TRAINER_KEEGAN | class=gym | cap 40 | L0 L1 -- --
+E0500 TRAINER_KEIRA | class=ace | cap 100 | L0 -- -- --
+E0110 TRAINER_LAWRENCE | class=regular | cap 40 | L0 -- -- --
+E0511 TRAINER_LEAF_ALTERING_CAVE | class=rival | cap 100 | L0 -- -- --
+E0507 TRAINER_LEA_AND_JED | class=casual | cap 100 | L0 -- -- --
+E0125 TRAINER_LENNY | class=regular | cap 40 | L0 -- -- --
+E0501 TRAINER_LEROY | class=ace | cap 100 | L0 -- -- --
+E0354 TRAINER_LILA_AND_ROY_1 | class=ace | cap 60 | L0 -- -- --
+E0438 TRAINER_LINDA | class=regular | cap 70 | L0 -- -- --
+E0255 TRAINER_LORENZO | class=ace | cap 55 | L0 -- -- --
+E0126 TRAINER_LUCAS_1 | class=casual | cap 40 | L0 -- -- --
+E0138 TRAINER_LUCY_LAVARIDGE | class=brain | cap 40 | L0 -- -- --
+E0176 TRAINER_LUIS | class=regular | cap 55 | L0 -- -- --
+E0110 TRAINER_LUNG | class=regular | cap 40 | L0 L1 -- --
+E0396 TRAINER_MACEY | class=gym | cap 60 | L0 -- -- --
+E0227 TRAINER_MAGIKARP_GUY | class=ace | cap 55 | L0 -- -- --
+E0435 TRAINER_MAKAYLA | class=ace | cap 70 | L0 -- -- --
+E0299 TRAINER_MARCEL | class=ace | cap 60 | L0 -- -- --
+E0473 TRAINER_MARIELA | class=casual | cap 80 | L0 -- -- --
+E0019 TRAINER_MARLENE | class=regular | cap 14 | L0 -- -- --
+E0450 TRAINER_MARLEY | class=ace | cap 70 | L0 -- -- --
+E0162 TRAINER_MARTHA | class=regular | cap 45 | L0 -- -- --
+E0168 TRAINER_MARY | class=gym | cap 45 | L0 -- -- --
+E0348 TRAINER_MATT | class=admin | cap 60 | L0 -- -- --
+E0320 TRAINER_MATT_MT_PYRE | class=admin | cap 60 | L0 -- -- --
+E0393 TRAINER_MAURA | class=gym | cap 60 | L0 L1 -- --
+E0339 TRAINER_MAXIE_MAGMA_HIDEOUT | class=leader | cap 60 | L0 -- -- --
+E0132 TRAINER_MAXIE_MT_CHIMNEY | class=leader | cap 40 | L0 -- -- --
+E0208 TRAINER_MEL_AND_PAUL | class=regular | cap 55 | L0 -- -- --
+E0505 TRAINER_MICAH | class=regular | cap 100 | L0 -- -- --
+E0484 TRAINER_MICHELLE | class=ace | cap 80 | L0 -- -- --
+E0485 TRAINER_MITCHELL | class=ace | cap 80 | L0 -- -- --
+E0272 TRAINER_MIU_AND_YUKI | class=regular | cap 55 | L0 -- -- --
+E0441 TRAINER_MOLLIE | class=ace | cap 70 | L0 -- -- --
+E0297 TRAINER_MYLES | class=ace | cap 60 | L0 -- -- --
+E0509 TRAINER_NAOMI | class=regular | cap 100 | L0 -- -- --
+E0395 TRAINER_NATE | class=gym | cap 60 | L0 -- -- --
+E0398 TRAINER_NICHOLAS | class=gym | cap 60 | L0 -- -- --
+E0128 TRAINER_NICOLAS_1 | class=ace | cap 40 | L0 -- -- --
+E0367 TRAINER_NIKKI | class=regular | cap 60 | L0 -- -- --
+E0171 TRAINER_NORMAN_1 | class=leader | cap 45 | L0 -- -- --
+E0464 TRAINER_OLIVIA | class=gym | cap 70 | L0 -- -- --
+E0488 TRAINER_OWEN | class=ace | cap 80 | L0 -- -- --
+E0165 TRAINER_PARKER | class=gym | cap 45 | L0 L1 -- --
+E0298 TRAINER_PAT | class=ace | cap 60 | L0 -- -- --
+E0432 TRAINER_PAXTON | class=ace | cap 70 | L0 -- -- --
+E0238 TRAINER_PHIL | class=regular | cap 55 | L0 -- -- --
+E0494 TRAINER_PHOEBE | class=elite | cap 80 | L0 L1 -- --
+E0388 TRAINER_PRESTON | class=gym | cap 60 | L0 -- -- --
+E0480 TRAINER_QUINCY | class=ace | cap 80 | L0 -- -- --
+E0164 TRAINER_RANDALL | class=gym | cap 45 | L0 -- -- --
+E0377 TRAINER_ROGER | class=regular | cap 60 | L0 -- -- --
+E0159 TRAINER_ROMAN | class=regular | cap 45 | L0 -- -- --
+E0430 TRAINER_RONALD | class=ace | cap 70 | L0 -- -- --
+E0384 TRAINER_RUBEN | class=ace | cap 60 | L0 -- -- --
+E0392 TRAINER_SAMANTHA | class=gym | cap 60 | L0 -- -- --
+E0482 TRAINER_SAMUEL | class=ace | cap 80 | L0 -- -- --
+E0420 TRAINER_SANTIAGO | class=regular | cap 70 | L0 -- -- --
+E0412 TRAINER_SEBASTIAN | class=ace | cap 70 | L0 -- -- --
+E0483 TRAINER_SHANNON | class=ace | cap 80 | L0 -- -- --
+E0109 TRAINER_SHAYLA | class=regular | cap 40 | L0 -- -- --
+E0139 TRAINER_SHELBY_1 | class=ace | cap 40 | L0 -- -- --
+E0454 TRAINER_SHELLY_SEAFLOOR_CAVERN | class=admin | cap 70 | L0 -- -- --
+E0248 TRAINER_SHELLY_WEATHER_INSTITUTE | class=admin | cap 55 | L0 -- -- --
+E0142 TRAINER_SHIRLEY | class=regular | cap 40 | L0 -- -- --
+E0493 TRAINER_SIDNEY | class=elite | cap 80 | L0 L1 -- --
+E0410 TRAINER_SOPHIA | class=ace | cap 70 | L0 -- -- --
+E0116 TRAINER_SOPHIE | class=regular | cap 40 | L0 -- -- --
+E0282 TRAINER_SPENSER_FORTREE | class=brain | cap 55 | L0 -- -- --
+E0512 TRAINER_STEVEN | class=rival | cap 100 | L0 L1 -- --
+E0123 TRAINER_STEVE_1 | class=regular | cap 40 | L0 -- -- --
+E0423 TRAINER_SUSIE | class=ace | cap 70 | L0 -- -- --
+E0394 TRAINER_SYLVIA | class=gym | cap 60 | L0 L1 -- --
+E0337 TRAINER_TABITHA_MAGMA_HIDEOUT | class=admin | cap 60 | L0 L1 -- --
+E0408 TRAINER_TABITHA_MOSSDEEP | class=admin | cap 70 | L0 -- -- --
+E0131 TRAINER_TABITHA_MT_CHIMNEY | class=admin | cap 40 | L0 -- -- --
+E0192 TRAINER_TARA | class=regular | cap 55 | L0 -- -- --
+E0400 TRAINER_TATE_AND_LIZA_1 | class=leader | cap 60 | L0 L1 -- --
+E0231 TRAINER_TAYLOR | class=regular | cap 55 | L0 -- -- --
+E0099 TRAINER_TED | class=regular | cap 40 | L0 -- -- --
+E0506 TRAINER_THOMAS | class=regular | cap 100 | L0 -- -- --
+E0465 TRAINER_TIFFANY | class=gym | cap 70 | L0 -- -- --
+E0218 TRAINER_TIMOTHY_1 | class=ace | cap 55 | L0 -- -- --
+E0113 TRAINER_TORI_AND_TIA | class=regular | cap 40 | L0 -- -- --
+E0104 TRAINER_TRAVIS | class=regular | cap 40 | L0 -- -- --
+E0499 TRAINER_VINCENT | class=ace | cap 100 | L0 -- -- --
+E0389 TRAINER_VIRGIL | class=gym | cap 60 | L0 -- -- --
+E0487 TRAINER_VITO | class=ace | cap 80 | L0 -- -- --
+E0497 TRAINER_WALLACE | class=elite | cap 80 | L0 L1 -- --
+E0510 TRAINER_WALLACE_DOUBLES_LEGENDS | class=elite | cap 100 | L0 -- -- --
+E0476 TRAINER_WALLY_VR_1 | class=rival | cap 80 | L0 -- -- --
+E0498 TRAINER_WALLY_VR_2 | class=rival | cap 100 | L0 -- -- --
+E0439 TRAINER_WARREN | class=ace | cap 70 | L0 -- -- --
+E0267 TRAINER_WENDY | class=ace | cap 55 | L0 -- -- --
+E0094 TRAINER_WILTON_1 | class=ace | cap 40 | L0 -- -- --
+E0289 TRAINER_WINONA_1 | class=leader | cap 55 | L0 -- -- --
+E0110 TRAINER_WYATT | class=regular | cap 40 | L0 -- -- --
+E0173 TRAINER_YUJI | class=regular | cap 55 | L0 -- -- --
+
 REFERENCE COVERAGE
-Authoring: 368 trainer variants/1753 slots; 1512 unique builds. Map definitions:540. Complete economy census and unresolved conditions are in C6; wild method tables:381; configured evolution rows:496.
+Authoring: 368 trainer variants/1753 slots; 1511 unique builds. Map definitions:540. Complete economy census and unresolved conditions are in C6; wild method tables:381; configured evolution rows:496.
 Known limits: this is not a full transcript, runtime access/necessity proof, stock-condition simulator or battle acceptance. Native providers and dynamic regional choices must be followed through their source owner. No claim that prose/code drift is impossible.
-Source SHA256: a88b09d07f54f1bb1974a8446388e8b44f8bcd41b01ce6b35b0a385be76c76e2
+Source SHA256: 52a013cc2bcfdc8b8706cb85ee77b2c3d6b14d1a79b931526b0f6c6b1ef8a438
 === END GENERATED GAME REFERENCE ===

@@ -601,7 +601,7 @@ TEST("Emerald Champions Mega items and Dragon Ascent add no player cap penalty")
     struct Pokemon mon;
     enum Item item;
     ResetCampaignCapMilestones();
-    FlagSet(FLAG_DELIVERED_DEVON_GOODS);
+    FlagSet(FLAG_BADGE03_GET);
     ClearBag();
     EXPECT(AddBagItem(ITEM_MEGA_RING, 1));
     CreateMon(&mon, SPECIES_VENUSAUR, 30, 12345, OTID_STRUCT_PLAYER_ID);
@@ -931,6 +931,46 @@ TEST("Emerald Champions ordinary wild creation applies a prepared non-Mega set")
     EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM), ITEM_CHARIZARDITE_X);
     EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM), ITEM_CHARIZARDITE_Y);
     ClearBag();
+}
+
+TEST("Emerald Champions mandatory legendary scenes apply their authored set")
+{
+    gSpecialVar_0x8004 = SPECIES_HEATRAN;
+    gSpecialVar_0x8005 = 0;
+    CreateEmeraldChampionsStaticLegendaryEncounter();
+
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+    EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), SPECIES_HEATRAN);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_AIR_BALLOON);
+    EXPECT_EQ(GetMonAbility(mon), ABILITY_FLASH_FIRE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HIDDEN_NATURE), NATURE_TIMID);
+    EXPECT_EQ(GetMonData(mon, EC_EV_DATA(3)), 252); // Display-order Sp. Atk.
+    bool32 hasMagmaStorm = FALSE;
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        if (GetMonData(mon, MON_DATA_MOVE1 + slot) == MOVE_MAGMA_STORM)
+            hasMagmaStorm = TRUE;
+    }
+    EXPECT(hasMagmaStorm);
+}
+
+TEST("Emerald Champions unauthored legendary scenes still receive a random set")
+{
+    gSpecialVar_0x8004 = SPECIES_COBALION;
+    gSpecialVar_0x8005 = 0;
+    CreateEmeraldChampionsStaticLegendaryEncounter();
+
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+    EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), SPECIES_COBALION);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+    u32 nonzeroMoves = 0;
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        if (GetMonData(mon, MON_DATA_MOVE1 + slot) != MOVE_NONE)
+            nonzeroMoves++;
+    }
+    EXPECT_EQ(nonzeroMoves, MAX_MON_MOVES);
 }
 
 TEST("Emerald Champions manor Jigglypuff keep Sing after random wild preparation")
@@ -2381,7 +2421,7 @@ TEST("Emerald Champions paired prizes use incoming cap once and exclude replays"
     u32 savedFlags = gBattleTypeFlags;
     TrainerBattleParameter savedParams = gTrainerBattleParameter;
     ResetCampaignCapMilestones();
-    FlagSet(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE);
+    FlagSet(FLAG_EC_REPORT_C39_COMPLETE); // cap 76 before the Space Center (cap 84)
     memset(&sEmeraldChampionsTestBattleStruct, 0, sizeof(sEmeraldChampionsTestBattleStruct));
     gBattleStruct = &sEmeraldChampionsTestBattleStruct;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
@@ -2391,12 +2431,12 @@ TEST("Emerald Champions paired prizes use incoming cap once and exclude replays"
     ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentA);
     ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentB);
     InitCampaignBattleReward();
-    EXPECT_EQ(GetCampaignBattleMoneyReward(), 7200);
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 1900);
     FlagSet(FLAG_EC_REPORT_C42_COMPLETE);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    EXPECT_EQ(GetCampaignBattleMoneyReward(), 7200);
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 1900);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    EXPECT_EQ(GetCampaignBattleMoneyReward(), 7200);
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 1900);
     SetTrainerFlag(TRAINER_BATTLE_PARAM.opponentA);
     SetTrainerFlag(TRAINER_BATTLE_PARAM.opponentB);
     InitCampaignBattleReward();
@@ -2532,7 +2572,7 @@ TEST("Emerald Champions permanent item ownership includes Day Care and protects 
     SetBoxMonData(&gSaveBlock1Ptr->daycare.mons[0].mon, MON_DATA_HELD_ITEM, &none);
     EXPECT(!PlayerOwnsItem(stone));
     EXPECT(AddPCItem(ITEM_LINKING_CORD, 1));
-    EXPECT_EQ(GetFiniteDuplicateRewardValue(ITEM_LINKING_CORD), 5000);
+    EXPECT_EQ(GetFiniteDuplicateRewardValue(ITEM_LINKING_CORD), 3000);
     EXPECT(IsItemProtectedFromLoss(ITEM_LINKING_CORD));
     EXPECT_EQ(GetItemSellPrice(ITEM_LINKING_CORD), 0);
     ResetBookItemOwnership();
@@ -2572,11 +2612,11 @@ TEST("Emerald Champions soot alternatives close each finite receipt once")
     VarSet(VAR_EC_SOOT_PROGRESS, 100);
     ClaimEmeraldChampionsSootMilestone();
     EXPECT_EQ(gSpecialVar_Result, 5);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 11000);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
     EXPECT_EQ(VarGet(VAR_EC_SOOT_PROGRESS), 100 | EC_SOOT_CORD_RECEIVED);
     ClaimEmeraldChampionsSootMilestone();
     EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 11000);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
     VarSet(VAR_EC_SOOT_PROGRESS, 0);
     SetMoney(&gSaveBlock1Ptr->money, savedMoney);
     ResetBookItemOwnership();

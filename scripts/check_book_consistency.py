@@ -19,6 +19,11 @@ It deliberately reuses the existing loaders instead of re-parsing:
     variants minus 25 rival gender/starter aliases minus 2 extra owners in
     two-owner battles = 341 encounters); only trusted when its source_sha256
     still matches the current battle teams file.
+  - scripts/mega_register.py (build_register) for the generated MEGA REGISTER
+    section's NO TRAINER HOLDER count.
+  - scripts/acceptance_ladder.py (compute_ladder), the official maintainer of
+    docs/trainer-review-index.json's per-encounter "ladder" field and
+    source_sha256, for the generated ACCEPTANCE LADDER summary counts.
 
 Each check prints PASS or FAIL with the offending values; the process exits
 1 if any check fails. Run directly:
@@ -52,6 +57,8 @@ import sync_game_book as book
 from economy_reference import item_prices
 from generate_emerald_champions_mega_archive import stones
 from verify_mega_stone_rewards import world_reward_sources
+import mega_register
+import acceptance_ladder
 
 README = ROOT / "README.md"
 CONTINUE = ROOT / "docs/CONTINUE.md"
@@ -457,6 +464,44 @@ def check_duplicate_paragraphs() -> None:
     report("no duplicate paragraphs in the hand-authored guide", ok)
 
 
+def check_mega_register_and_ladder() -> None:
+    """Check 7: the generated MEGA REGISTER must show zero NO TRAINER HOLDER
+    rows, and the generated ACCEPTANCE LADDER summary must equal a fresh
+    recompute from docs/trainer-review-index.json's stored ladder fields
+    (which is only true after scripts/acceptance_ladder.py --write has been
+    run against the current teams/tests/work state)."""
+    register_rows = mega_register.build_register()
+    no_holder = [r["stone"] for r in register_rows if r["no_trainer_holder"]]
+    ok_register = not no_holder
+    if no_holder:
+        print(f"  FAIL Mega Stones with NO TRAINER HOLDER in the generated register: {sorted(no_holder)}")
+    else:
+        print(f"  PASS all {len(register_rows)} Mega Register rows have at least one trainer holder")
+    report("MEGA REGISTER has zero NO TRAINER HOLDER rows", ok_register)
+
+    fresh_ladder, fresh_catalog = acceptance_ladder.compute_ladder()
+    fresh_summary = fresh_catalog["summary"]
+    if not REVIEW_INDEX.exists():
+        print(f"  FAIL {REVIEW_INDEX.relative_to(ROOT)} is missing")
+        report("ACCEPTANCE LADDER counts match docs/trainer-review-index.json", False)
+        return
+    index = json.loads(REVIEW_INDEX.read_text())
+    stored_summary = dict(
+        total=len(index["encounters"]),
+        L0_authored=sum(e.get("ladder", {}).get("L0_authored", False) for e in index["encounters"]),
+        L1_ai_fixtures=sum(e.get("ladder", {}).get("L1_ai_fixtures", False) for e in index["encounters"]),
+        L2_benchmark=sum(e.get("ladder", {}).get("L2_benchmark", False) for e in index["encounters"]),
+        L3_earned_clear=sum(e.get("ladder", {}).get("L3_earned_clear", False) for e in index["encounters"]),
+    )
+    ok_ladder = stored_summary == fresh_summary
+    if ok_ladder:
+        print(f"  PASS ACCEPTANCE LADDER counts agree: {fresh_summary}")
+    else:
+        print(f"  FAIL ACCEPTANCE LADDER counts disagree: book/index={stored_summary} fresh={fresh_summary}; "
+              "run python3 scripts/acceptance_ladder.py --write")
+    report("ACCEPTANCE LADDER counts match docs/trainer-review-index.json", ok_ladder)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--fix-readme", action="store_true",
@@ -475,6 +520,8 @@ def main() -> int:
     check_mega_stones()
     print("\n== 6. Duplicate paragraphs ==")
     check_duplicate_paragraphs()
+    print("\n== 7. Mega Register and Acceptance Ladder ==")
+    check_mega_register_and_ladder()
 
     print()
     if failures:

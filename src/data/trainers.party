@@ -4883,7 +4883,7 @@ Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
-SPECIES_TYRANITAR @ ITEM_TYRANITARITE
+SPECIES_TYRANITAR @ ITEM_SMOOTH_ROCK
 Level: 80
 Level Offset: 0
 Ability: ABILITY_SAND_STREAM
@@ -4909,17 +4909,17 @@ Nature: NATURE_JOLLY
 - MOVE_CRUNCH
 - MOVE_PROTECT
 
-SPECIES_LEAVANNY @ ITEM_LIFE_ORB
-Level: 80
-Level Offset: 0
-Ability: ABILITY_SWARM
+SPECIES_GARCHOMP @ ITEM_GARCHOMPITE
+Level: 81
+Level Offset: 1
+Ability: ABILITY_SAND_VEIL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_JOLLY
-- MOVE_LEAF_BLADE
-- MOVE_X_SCISSOR
-- MOVE_STICKY_WEB
+- MOVE_STOMPING_TANTRUM
+- MOVE_DRAGON_CLAW
+- MOVE_ROCK_SLIDE
 - MOVE_PROTECT
 
 SPECIES_SANDSLASH @ ITEM_MUSCLE_BAND

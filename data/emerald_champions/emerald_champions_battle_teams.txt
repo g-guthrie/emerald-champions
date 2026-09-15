@@ -3880,12 +3880,12 @@ VICTREEBEL @PETAYA_BERRY GLUTTONY MODEST 4/0/0/252/0/252 1 | SLEEP_POWDER, LEAF_
 
 ## E0489 TRAINER_CAROLINE class=ace
 strategy: SAND
-mega_slots: 1
-plan: First two useful turns: Tyranitar supplies sand and transforms only for a useful payoff while Stoutland attacks under actual Sand Rush. Turn two preserves the weather window or brings the relevant resistance. Alternate deployment: Tyranitar and Sandslash offer the Ground physical sand mode. Reserves & disruption: Alolan Dugtrio has Sand Force, not Sand Rush; Leavanny's web is conditional, and Eternatus provides special coverage. Dynamax Cannon remains an ordinary attack unless a real Dynamax target exists. Counterplay & audit: Weather replacement, Fighting/Water/Grass pressure, priority and room reversal. Disposition: Keep; the move's name is not evidence that this team requires Dynamax.
-crack: Weather replacement, Fighting/Water/Grass pressure, priority and room reversal. Disposition: Keep; the move's name is not evidence that this team requires Dynamax.
-TYRANITAR @TYRANITARITE SAND_STREAM ADAMANT 252/252/4/0/0/0 0 | ROCK_SLIDE, CRUNCH, LOW_KICK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+mega_slots: 3
+plan: First two useful turns: Tyranitar supplies sand (Smooth Rock extends it) while Stoutland attacks under actual Sand Rush. Turn two preserves the weather window or brings the relevant resistance. Alternate deployment: Tyranitar and Sandslash offer the Ground physical sand mode. Reserves & disruption: Garchomp is the sand finisher: it Mega Evolves only when Sand Force has a boosted Ground/Rock attack to cash, and Stomping Tantrum avoids hitting the grounded sand partners that Earthquake would. Alolan Dugtrio has Sand Force too, not Sand Rush; Eternatus provides special coverage. Dynamax Cannon remains an ordinary attack unless a real Dynamax target exists. Counterplay & audit: Weather replacement, Fighting/Water/Grass/Ice pressure, priority, Intimidate and room reversal; Mega Garchomp loses Speed on evolution, so denying sand-boosted turns matters. Disposition: Garchompite's sand home (September 15); Tyranitar gives up its stone because four trainers already hold Tyranitarite.
+crack: Weather replacement, Fighting/Water/Grass/Ice pressure, priority, Intimidate and room reversal. Disposition: Garchompite's sand home; Mega Garchomp is the Sand Force finisher.
+TYRANITAR @SMOOTH_ROCK SAND_STREAM ADAMANT 252/252/4/0/0/0 0 | ROCK_SLIDE, CRUNCH, LOW_KICK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 STOUTLAND @CLEAR_AMULET SAND_RUSH JOLLY 4/252/0/0/0/252 0 | DOUBLE_EDGE, WILD_CHARGE, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-LEAVANNY @LIFE_ORB SWARM JOLLY 4/252/0/0/0/252 0 | LEAF_BLADE, X_SCISSOR, STICKY_WEB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GARCHOMP @GARCHOMPITE SAND_VEIL JOLLY 4/252/0/0/0/252 1 | STOMPING_TANTRUM, DRAGON_CLAW, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SANDSLASH @MUSCLE_BAND SAND_RUSH ADAMANT 4/252/0/0/0/252 0 | HIGH_HORSEPOWER, ROCK_SLIDE, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 DUGTRIO_ALOLA @EXPERT_BELT SAND_FORCE JOLLY 4/252/0/0/0/252 0 | IRON_HEAD, STOMPING_TANTRUM, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ETERNATUS @LEFTOVERS PRESSURE TIMID 4/0/0/252/0/252 1 | DYNAMAX_CANNON, SLUDGE_BOMB, FLAMETHROWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255

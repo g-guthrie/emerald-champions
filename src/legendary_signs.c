@@ -31,6 +31,23 @@ const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_SIGN_CO
 #include "data/pokemon/legendary_signs.h"
 };
 
+const struct LegendaryAuthoredSet gLegendaryAuthoredSets[] =
+{
+#include "data/pokemon/legendary_authored_sets.h"
+};
+
+const u32 gLegendaryAuthoredSetCount = ARRAY_COUNT(gLegendaryAuthoredSets);
+
+const struct EmeraldChampionsBattleSet *GetLegendaryAuthoredSet(enum Species species)
+{
+    for (u32 i = 0; i < gLegendaryAuthoredSetCount; i++)
+    {
+        if (gLegendaryAuthoredSets[i].species == species)
+            return &gLegendaryAuthoredSets[i].set;
+    }
+    return NULL;
+}
+
 static const u8 sSignLocationShoalIce[] = _("Shoal Cave's ice room");
 static const u8 sSignLocationGraniteB2F[] = _("Granite Cave B2F");
 static const u8 sSignLocationFieryPath[] = _("Fiery Path");
@@ -723,7 +740,13 @@ void CreateSelectedLegendarySignEncounter(void)
     UnlockLegendarySign(id);
     CreateScriptedWildMon(gLegendarySignDefinitions[id].species,
         GetSignLevel(gLegendarySignDefinitions[id].levelOffset), ITEM_NONE);
-    ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    {
+        const struct EmeraldChampionsBattleSet *authored = GetLegendaryAuthoredSet(gLegendarySignDefinitions[id].species);
+        if (authored != NULL)
+            ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
+        else
+            ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    }
     gSpecialVar_Result = TRUE;
 }
 
@@ -731,11 +754,16 @@ void CreateEmeraldChampionsStaticLegendaryEncounter(void)
 {
     enum Species species = gSpecialVar_0x8004;
     s16 levelOffset = gSpecialVar_0x8005;
+    const struct EmeraldChampionsBattleSet *authored;
 
     if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return;
     CreateScriptedWildMon(species, GetSignLevel(levelOffset), ITEM_NONE);
-    ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    authored = GetLegendaryAuthoredSet(species);
+    if (authored != NULL)
+        ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
+    else
+        ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
     if (species == SPECIES_LATIAS || species == SPECIES_LATIOS)
     {
         // Southern Island keeps its event origin and Soul Dew at the live cap.

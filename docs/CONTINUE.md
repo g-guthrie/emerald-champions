@@ -45,9 +45,26 @@ Phase 1 and 3 landed the same day (second commit):
   register flow is captured natively in
   `work/contact-sheets/bag-register-lr-select-v2.png`.
 
-Next: Phase 0 book diet and the Phase 4 rewrite of the guide against this
-build (D11 dialogue unification rides with it), then resume the earned run
-on the new spine.
+Third commit the same day (Phase 2 machinery and Phase 1 leftovers):
+
+- Garchompite's holder is Caroline (E0489, Victory Road B2F sand ace);
+  Tyranitar there holds Smooth Rock. Mega gate green.
+- The seven mandatory legendary scenes use authored sets
+  (`src/data/pokemon/legendary_authored_sets.h`, applied through the scripted
+  set path; Mew's Soft-Boiled substituted by Rest for learnset legality).
+- Generated MEGA REGISTER (99/99 signature owners; 31 stones' player family
+  access "unmapped" under the index's rules, mostly regional starters and
+  gift-only legendaries) and ACCEPTANCE LADDER (341 encounters: L0 341,
+  L1 50, L2 2, L3 40) in the book appendix, via `scripts/mega_register.py`
+  and `scripts/acceptance_ladder.py`; the latter is now the official
+  maintainer of `docs/trainer-review-index.json` and its source hash.
+  `check_book_consistency.py` has seven checks, all passing.
+- Four campaign tests updated to the new rules (3,000 substitutes, 15-cap
+  table); 76/76 campaign tests and the bag test pass.
+
+Next: the Phase 4 guide rewrite against this build with D11 dialogue
+unification, then resume the earned run on the new spine and start moving
+encounters up the ladder major-battle-first.
 
 ---
 

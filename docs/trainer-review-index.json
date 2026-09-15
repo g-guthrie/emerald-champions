@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "scope": "Source-based design-review coverage, not earned victories or full native traversal acceptance",
+  "scope": "Source-based design-review coverage, not earned victories or full native traversal acceptance Ladder fields and source_sha256 are maintained only by scripts/acceptance_ladder.py --write; do not hand-edit them.",
   "count_rule": "368 authored variants minus25 extra rival gender/starter variants and2 extra enemy owners in explicit two-owner battles =341 encounters. Shared E numbers are NOT merged.",
   "reviewed_implemented_first_access": 131,
   "previously_reviewed_access_deferred": [],
   "current_review_indices": null,
   "within_unlock_order": "A chosen coherent review route among simultaneously available branches, not a claim every trainer is mandatory or the order is forced.",
-  "source_sha256": "ce407d022fe8b39fc650465737610e25fdc34b197d85d176ab7ca19c6584a37c",
+  "source_sha256": "05527961633312e2d3b63e7a9600ce9fdebcc386dbd4ade22be3403ac8a135fd",
   "encounters": [
     {
       "key": "TRAINER_BRENDAN_ROUTE_103_MUDKIP|TRAINER_BRENDAN_ROUTE_103_TORCHIC|TRAINER_BRENDAN_ROUTE_103_TREECKO|TRAINER_MAY_ROUTE_103_MUDKIP|TRAINER_MAY_ROUTE_103_TORCHIC|TRAINER_MAY_ROUTE_103_TREECKO",
@@ -128,7 +128,13 @@
           "flag": "FLAG_HIDE_ROUTE_103_RIVAL",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_CALVIN_1",
@@ -169,7 +175,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_RICK",
@@ -201,7 +213,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_ALLEN",
@@ -233,7 +251,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_TIANA",
@@ -265,7 +289,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_BILLY",
@@ -297,7 +327,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_DARIAN",
@@ -329,7 +365,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_CINDY_1",
@@ -370,7 +412,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_LYLE",
@@ -402,7 +450,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_GRUNT_PETALBURG_WOODS",
@@ -434,7 +488,13 @@
           ]
         }
       ],
-      "actor_bindings": []
+      "actor_bindings": [],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_JAMES_1",
@@ -475,7 +535,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_WINSTON_1",
@@ -516,7 +582,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_GINA_AND_MIA_1",
@@ -566,7 +638,13 @@
           "elevation": 3
         }
       ],
-      "retention_decision": "Explicit user keep: Gina and Mia were deliberately restored and must remain an active northern Route104 battle."
+      "retention_decision": "Explicit user keep: Gina and Mia were deliberately restored and must remain an active northern Route104 battle.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JOEY",
@@ -598,7 +676,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_JOSE",
@@ -630,7 +714,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_CLARK",
@@ -662,7 +752,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_JOHNSON",
@@ -694,7 +790,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_DEVAN",
@@ -726,7 +828,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_JOSH",
@@ -758,7 +866,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_TOMMY",
@@ -790,7 +904,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_MARC",
@@ -822,7 +942,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_ROXANNE_1",
@@ -863,7 +989,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_DAWSON",
@@ -895,7 +1027,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_SARAH",
@@ -927,7 +1065,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_JANICE",
@@ -959,7 +1103,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_JERRY_1",
@@ -1000,7 +1150,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_GRUNT_RUSTURF_TUNNEL",
@@ -1032,7 +1188,13 @@
           "flag": "FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_BRENDAN_RUSTBORO_MUDKIP|TRAINER_BRENDAN_RUSTBORO_TORCHIC|TRAINER_BRENDAN_RUSTBORO_TREECKO|TRAINER_MAY_RUSTBORO_MUDKIP|TRAINER_MAY_RUSTBORO_TORCHIC|TRAINER_MAY_RUSTBORO_TREECKO",
@@ -1256,7 +1418,13 @@
           "flag": "FLAG_HIDE_RUSTBORO_CITY_RIVAL",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_NED",
@@ -1288,7 +1456,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_ELLIOT_1",
@@ -1329,7 +1503,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_LAURA",
@@ -1361,7 +1541,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": true,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_BRENDEN",
@@ -1393,7 +1579,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_LILITH",
@@ -1425,7 +1617,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_TAKAO",
@@ -1457,7 +1655,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_CRISTIAN",
@@ -1489,7 +1693,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_JOCELYN",
@@ -1521,7 +1731,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_BRAWLY_1",
@@ -1562,7 +1778,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": true,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_HAILEY",
@@ -1594,7 +1816,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_EDMOND",
@@ -1626,7 +1854,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_LOLA_1",
@@ -1667,7 +1901,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_CHANDLER",
@@ -1699,7 +1939,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": true
+      }
     },
     {
       "key": "TRAINER_DWAYNE",
@@ -1731,7 +1977,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JOHANNA",
@@ -1763,7 +2015,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SIMON",
@@ -1795,7 +2053,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRETA_SLATEPORT",
@@ -1827,7 +2091,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MUSEUM_1",
@@ -1859,7 +2129,13 @@
           "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_CAPTAIN_STERN",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ARCHIE_SLATEPORT",
@@ -1899,7 +2175,13 @@
           "flag": "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ISABEL_1",
@@ -1940,7 +2222,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KALEB",
@@ -1972,7 +2260,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SALLY",
@@ -2004,7 +2298,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_EDDIE",
@@ -2036,7 +2336,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DAISY",
@@ -2068,7 +2374,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_AMY_AND_LIV_1",
@@ -2135,7 +2447,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MIGUEL_1",
@@ -2176,7 +2494,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TIMMY",
@@ -2208,7 +2532,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRENDAN_ROUTE_110_MUDKIP|TRAINER_BRENDAN_ROUTE_110_TORCHIC|TRAINER_BRENDAN_ROUTE_110_TREECKO|TRAINER_MAY_ROUTE_110_MUDKIP|TRAINER_MAY_ROUTE_110_TORCHIC|TRAINER_MAY_ROUTE_110_TREECKO",
@@ -2281,7 +2611,13 @@
           ]
         }
       ],
-      "actor_bindings": []
+      "actor_bindings": [],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JACLYN",
@@ -2313,7 +2649,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WALLY_MAUVILLE",
@@ -2345,7 +2687,13 @@
           "flag": "FLAG_HIDE_MAUVILLE_CITY_WALLY",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ANTHONY",
@@ -2377,7 +2725,13 @@
           "flag": "0",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JASMINE",
@@ -2409,7 +2763,13 @@
           "flag": "0",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JACOB",
@@ -2441,7 +2801,13 @@
           "flag": "0",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ANNA_AND_MEG_1",
@@ -2508,7 +2874,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ISAAC_1",
@@ -2549,7 +2921,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MARIA_1",
@@ -2590,7 +2968,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DEREK",
@@ -2623,7 +3007,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LYDIA_1",
@@ -2665,7 +3055,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_AISHA",
@@ -2698,7 +3094,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRANDI",
@@ -2731,7 +3133,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MELINA",
@@ -2764,7 +3172,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MIKE_2",
@@ -2797,7 +3211,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ROSE_1",
@@ -2839,7 +3259,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DEANDRE",
@@ -2872,7 +3298,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TYRON",
@@ -2905,7 +3337,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BIANCA",
@@ -2938,7 +3376,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VICTOR",
@@ -2971,7 +3415,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VICTORIA",
@@ -3004,7 +3454,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VIVI",
@@ -3037,7 +3493,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VICKY",
@@ -3070,7 +3532,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VIVIAN",
@@ -3103,7 +3571,13 @@
           "elevation": 0
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KIRK",
@@ -3136,7 +3610,13 @@
           "elevation": 0
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BEN",
@@ -3169,7 +3649,13 @@
           "elevation": 0
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ANGELO",
@@ -3202,7 +3688,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SHAWN",
@@ -3235,7 +3727,13 @@
           "elevation": 3
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WATTSON_1",
@@ -3277,7 +3775,13 @@
           "elevation": 0
         }
       ],
-      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_AARON",
@@ -3309,7 +3813,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ALAN",
@@ -3342,7 +3852,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle3 requires Heat Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle3 requires Heat Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ALANNAH",
@@ -3377,7 +3893,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ALBERT",
@@ -3409,7 +3931,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ALEXA",
@@ -3441,7 +3969,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ALEXIA",
@@ -3474,7 +4008,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ALEXIS",
@@ -3507,7 +4047,13 @@
           "elevation": 0
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle7 requires Rain Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle7 requires Rain Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ALIX",
@@ -3540,7 +4086,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Northern Route115 actors lie beyond the initial southern shore. Reassess from the later northern/Meteor Falls or Surf approach; they are not on the current walkable early shore."
+      "current_frontier_disposition": "Northern Route115 actors lie beyond the initial southern shore. Reassess from the later northern/Meteor Falls or Surf approach; they are not on the current walkable early shore.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ANDREA",
@@ -3572,7 +4124,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ANNIKA",
@@ -3604,7 +4162,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ARCHIE",
@@ -3627,7 +4191,13 @@
           ]
         }
       ],
-      "actor_bindings": []
+      "actor_bindings": [],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ASHLEY",
@@ -3659,7 +4229,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ATHENA",
@@ -3691,7 +4267,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_AURON",
@@ -3723,7 +4305,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_AUTUMN",
@@ -3758,7 +4346,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_AXLE",
@@ -3793,7 +4387,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BEAU",
@@ -3826,7 +4426,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available."
+      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BERKE",
@@ -3859,7 +4465,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BETHANY",
@@ -3891,7 +4503,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BLAKE",
@@ -3923,7 +4541,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRAXTON",
@@ -3955,7 +4579,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRENDA",
@@ -3987,7 +4617,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRENDAN_LILYCOVE_MUDKIP|TRAINER_BRENDAN_LILYCOVE_TORCHIC|TRAINER_BRENDAN_LILYCOVE_TREECKO|TRAINER_MAY_LILYCOVE_MUDKIP|TRAINER_MAY_LILYCOVE_TORCHIC|TRAINER_MAY_LILYCOVE_TREECKO",
@@ -4109,7 +4745,13 @@
           "flag": "FLAG_HIDE_LILYCOVE_CITY_RIVAL",
           "elevation": 5
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRENDAN_ROUTE_119_MUDKIP|TRAINER_BRENDAN_ROUTE_119_TORCHIC|TRAINER_BRENDAN_ROUTE_119_TREECKO|TRAINER_MAY_ROUTE_119_MUDKIP|TRAINER_MAY_ROUTE_119_TORCHIC|TRAINER_MAY_ROUTE_119_TREECKO",
@@ -4182,7 +4824,13 @@
           ]
         }
       ],
-      "actor_bindings": []
+      "actor_bindings": [],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRIANNA",
@@ -4214,7 +4862,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRICE",
@@ -4248,7 +4902,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRIDGET",
@@ -4280,7 +4940,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BROOKE_1",
@@ -4324,7 +4990,13 @@
       ],
       "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BRYANT",
@@ -4358,7 +5030,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_BUFFEL",
@@ -4390,7 +5068,13 @@
           "flag": "FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CAROLINA",
@@ -4423,7 +5107,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing."
+      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CAROLINE",
@@ -4455,7 +5145,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CATHERINE_1",
@@ -4496,7 +5192,13 @@
           "flag": "0",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CHARLOTTE",
@@ -4531,7 +5233,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CLIFFORD",
@@ -4563,7 +5271,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_COBY",
@@ -4597,7 +5311,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_COLE",
@@ -4632,7 +5352,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_COLIN",
@@ -4664,7 +5390,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_COLTON",
@@ -4696,7 +5428,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CONNIE",
@@ -4728,7 +5466,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CONOR",
@@ -4760,7 +5504,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_COURTNEY_MAGMA_HIDEOUT",
@@ -4792,7 +5542,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_COURTNEY_METEOR_FALLS|TRAINER_GRUNT_METEOR_FALLS",
@@ -4830,7 +5586,13 @@
       "actor_bindings": [],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_COURTNEY_MOSSDEEP|TRAINER_MAXIE_MOSSDEEP",
@@ -4882,7 +5644,13 @@
           "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CRISSY",
@@ -4914,7 +5682,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CRISTIN_1",
@@ -4955,7 +5729,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CYNDY_1",
@@ -4999,7 +5779,13 @@
       ],
       "prior_review_status": "implemented_but_access_deferred",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_CYNTHIA_1",
@@ -5031,7 +5817,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DANIELLE",
@@ -5066,7 +5858,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DAPHNE",
@@ -5098,7 +5896,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DARCY",
@@ -5130,7 +5934,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DARIUS",
@@ -5162,7 +5972,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DARRIN",
@@ -5195,7 +6011,13 @@
           "elevation": 1
         }
       ],
-      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing."
+      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DIANA_1",
@@ -5239,7 +6061,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DIANNE",
@@ -5271,7 +6099,13 @@
           "flag": "0",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DILLON",
@@ -5305,7 +6139,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DONALD",
@@ -5337,7 +6177,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DOUG",
@@ -5369,7 +6215,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DRAKE",
@@ -5404,7 +6256,13 @@
       ],
       "review_group": "elite_four_and_champion",
       "implementation_receipt": "work/league-implementation/Implementation.md",
-      "review_note": "Major-battle-first review; no chronological first-access index assigned."
+      "review_note": "Major-battle-first review; no chronological first-access index assigned.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DREW",
@@ -5437,7 +6295,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available."
+      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DUNCAN",
@@ -5469,7 +6333,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_DUSTY_1",
@@ -5511,7 +6381,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available."
+      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_EDGAR",
@@ -5543,7 +6419,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_EDWARDO",
@@ -5575,7 +6457,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ELI",
@@ -5610,7 +6498,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ELMER",
@@ -5645,7 +6539,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ETHAN_1",
@@ -5689,7 +6589,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_EVERETT",
@@ -5722,7 +6628,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle7 requires Rain Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle7 requires Rain Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_FELIX",
@@ -5754,7 +6666,13 @@
           "flag": "0",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_FLANNERY_1",
@@ -5798,7 +6716,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_FLINT",
@@ -5830,7 +6754,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_FOSTER",
@@ -5863,7 +6793,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing."
+      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_FREDRICK",
@@ -5895,7 +6831,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GABBY_AND_TY_1",
@@ -5947,7 +6889,13 @@
       ],
       "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GABBY_AND_TY_2",
@@ -5997,7 +6945,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "East-bank actor(s), across the Surf river; Magikarp Guy also follows the Good Rod interaction, reporters follow their own progression."
+      "current_frontier_disposition": "East-bank actor(s), across the Surf river; Magikarp Guy also follows the Good Rod interaction, reporters follow their own progression.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GABBY_AND_TY_5",
@@ -6047,7 +7001,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "East-bank actor(s), across the Surf river; Magikarp Guy also follows the Good Rod interaction, reporters follow their own progression."
+      "current_frontier_disposition": "East-bank actor(s), across the Surf river; Magikarp Guy also follows the Good Rod interaction, reporters follow their own progression.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GABBY_AND_TY_6",
@@ -6129,7 +7089,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available."
+      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GABRIELLE_1",
@@ -6170,7 +7136,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GARRISON",
@@ -6202,7 +7174,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GEORGE",
@@ -6235,7 +7213,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GEORGIA",
@@ -6270,7 +7254,13 @@
       ],
       "current_frontier_disposition": "Trick House puzzle2 requires Dynamo Badge; only puzzle1 is currently cleared in the design index.",
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GERALD",
@@ -6305,7 +7295,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GLACIA",
@@ -6340,7 +7336,13 @@
       ],
       "review_group": "elite_four_and_champion",
       "implementation_receipt": "work/league-implementation/Implementation.md",
-      "review_note": "Major-battle-first review; no chronological first-access index assigned."
+      "review_note": "Major-battle-first review; no chronological first-access index assigned.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_1",
@@ -6372,7 +7374,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_2",
@@ -6404,7 +7412,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_3",
@@ -6436,7 +7450,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_4",
@@ -6468,7 +7488,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_5",
@@ -6500,7 +7526,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_6",
@@ -6532,7 +7564,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_7",
@@ -6564,7 +7602,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_AQUA_HIDEOUT_8",
@@ -6596,7 +7640,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_JAGGED_PASS",
@@ -6631,7 +7681,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_1",
@@ -6663,7 +7719,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_10",
@@ -6695,7 +7757,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_11",
@@ -6727,7 +7795,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_12",
@@ -6759,7 +7833,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_13",
@@ -6791,7 +7871,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_14",
@@ -6823,7 +7909,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_15",
@@ -6855,7 +7947,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_16",
@@ -6887,7 +7985,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_2",
@@ -6919,7 +8023,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_3",
@@ -6951,7 +8061,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_4",
@@ -6983,7 +8099,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_5",
@@ -7015,7 +8137,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_6",
@@ -7047,7 +8175,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_7",
@@ -7079,7 +8213,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_8",
@@ -7111,7 +8251,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MAGMA_HIDEOUT_9",
@@ -7143,7 +8289,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MT_CHIMNEY_1",
@@ -7178,7 +8330,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MT_PYRE_1",
@@ -7210,7 +8368,13 @@
           "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MT_PYRE_2",
@@ -7242,7 +8406,13 @@
           "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MT_PYRE_3",
@@ -7274,7 +8444,13 @@
           "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_MT_PYRE_4",
@@ -7306,7 +8482,13 @@
           "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_1",
@@ -7338,7 +8520,13 @@
           "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_2",
@@ -7370,7 +8558,13 @@
           "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_3",
@@ -7402,7 +8596,13 @@
           "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_4",
@@ -7434,7 +8634,13 @@
           "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SEAFLOOR_CAVERN_5",
@@ -7466,7 +8672,13 @@
           "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_1",
@@ -7498,7 +8710,13 @@
           "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_2",
@@ -7530,7 +8748,13 @@
           "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_3",
@@ -7562,7 +8786,13 @@
           "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_4",
@@ -7594,7 +8824,13 @@
           "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_5",
@@ -7617,7 +8853,13 @@
           ]
         }
       ],
-      "actor_bindings": []
+      "actor_bindings": [],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_SPACE_CENTER_7",
@@ -7649,7 +8891,13 @@
           "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_1",
@@ -7681,7 +8929,13 @@
           "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_2",
@@ -7713,7 +8967,13 @@
           "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_3",
@@ -7745,7 +9005,13 @@
           "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_4",
@@ -7777,7 +9043,13 @@
           "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_GRUNT_WEATHER_INST_5",
@@ -7809,7 +9081,13 @@
           "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HALLE",
@@ -7841,7 +9119,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HANNAH",
@@ -7873,7 +9157,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HEIDI",
@@ -7906,7 +9196,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available."
+      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HERMAN",
@@ -7938,7 +9234,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HIDEO",
@@ -7970,7 +9272,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HOPE",
@@ -8002,7 +9310,13 @@
           "flag": "0",
           "elevation": 4
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HUDSON",
@@ -8034,7 +9348,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_HUMBERTO",
@@ -8066,7 +9386,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JACE",
@@ -8101,7 +9427,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JACKSON_1",
@@ -8142,7 +9474,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JANI",
@@ -8174,7 +9512,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JARED",
@@ -8206,7 +9550,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JAYLEN",
@@ -8240,7 +9590,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JAZMYN",
@@ -8272,7 +9628,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JEFF",
@@ -8307,7 +9669,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JENNA",
@@ -8339,7 +9707,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JENNIFER",
@@ -8371,7 +9745,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JODY",
@@ -8404,7 +9784,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JONATHAN",
@@ -8436,7 +9822,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JOSUE",
@@ -8469,7 +9861,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing."
+      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JUAN_1",
@@ -8510,7 +9908,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JULIE",
@@ -8542,7 +9946,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JULIO",
@@ -8577,7 +9987,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_JUSTIN",
@@ -8610,7 +10026,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle3 requires Heat Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle3 requires Heat Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KAI",
@@ -8645,7 +10067,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KARA",
@@ -8677,7 +10105,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KATELYNN",
@@ -8709,7 +10143,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KATELYN_1",
@@ -8750,7 +10190,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KATHLEEN",
@@ -8782,7 +10228,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KAYLEY",
@@ -8814,7 +10266,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KEEGAN",
@@ -8849,7 +10307,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_KEIRA",
@@ -8882,7 +10346,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle8 requires League completion; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle8 requires League completion; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LAWRENCE",
@@ -8916,7 +10386,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LEAF_ALTERING_CAVE",
@@ -8939,7 +10415,13 @@
           ]
         }
       ],
-      "actor_bindings": []
+      "actor_bindings": [],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LEA_AND_JED",
@@ -8988,7 +10470,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LENNY",
@@ -9023,7 +10511,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LEROY",
@@ -9056,7 +10550,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle8 requires League completion; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle8 requires League completion; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LILA_AND_ROY_1",
@@ -9123,7 +10623,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LINDA",
@@ -9155,7 +10661,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LORENZO",
@@ -9187,7 +10699,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LUCAS_1",
@@ -9222,7 +10740,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LUCY_LAVARIDGE",
@@ -9257,7 +10781,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LUIS",
@@ -9290,7 +10820,13 @@
           "elevation": 1
         }
       ],
-      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing."
+      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_LUNG",
@@ -9324,7 +10860,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MACEY",
@@ -9356,7 +10898,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MAGIKARP_GUY",
@@ -9389,7 +10937,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "East-bank actor(s), across the Surf river; Magikarp Guy also follows the Good Rod interaction, reporters follow their own progression."
+      "current_frontier_disposition": "East-bank actor(s), across the Surf river; Magikarp Guy also follows the Good Rod interaction, reporters follow their own progression.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MAKAYLA",
@@ -9421,7 +10975,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MARCEL",
@@ -9453,7 +11013,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MARIELA",
@@ -9486,7 +11052,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle7 requires Rain Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle7 requires Rain Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MARLENE",
@@ -9521,7 +11093,13 @@
       ],
       "prior_review_status": "implemented_but_access_deferred",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MARLEY",
@@ -9553,7 +11131,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MARTHA",
@@ -9586,7 +11170,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle3 requires Heat Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle3 requires Heat Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MARY",
@@ -9619,7 +11209,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MATT",
@@ -9651,7 +11247,13 @@
           "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MATT_MT_PYRE",
@@ -9683,7 +11285,13 @@
           "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MAURA",
@@ -9715,7 +11323,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MAXIE_MAGMA_HIDEOUT",
@@ -9747,7 +11361,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MAXIE_MT_CHIMNEY",
@@ -9782,7 +11402,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MEL_AND_PAUL",
@@ -9832,7 +11458,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Mel/Paul share one encounter on the southern island; Surf access is later."
+      "current_frontier_disposition": "Mel/Paul share one encounter on the southern island; Surf access is later.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MICAH",
@@ -9864,7 +11496,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MICHELLE",
@@ -9896,7 +11534,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MITCHELL",
@@ -9928,7 +11572,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MIU_AND_YUKI",
@@ -9977,7 +11627,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MOLLIE",
@@ -10009,7 +11665,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_MYLES",
@@ -10041,7 +11703,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_NAOMI",
@@ -10073,7 +11741,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_NATE",
@@ -10105,7 +11779,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_NICHOLAS",
@@ -10137,7 +11817,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_NICOLAS_1",
@@ -10178,7 +11864,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_NIKKI",
@@ -10210,7 +11902,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_NORMAN_1",
@@ -10243,7 +11941,13 @@
           "elevation": 0
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_OLIVIA",
@@ -10275,7 +11979,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_OWEN",
@@ -10307,7 +12017,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_PARKER",
@@ -10340,7 +12056,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_PAT",
@@ -10372,7 +12094,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_PAXTON",
@@ -10404,7 +12132,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_PHIL",
@@ -10436,7 +12170,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_PHOEBE",
@@ -10471,7 +12211,13 @@
       ],
       "review_group": "elite_four_and_champion",
       "implementation_receipt": "work/league-implementation/Implementation.md",
-      "review_note": "Major-battle-first review; no chronological first-access index assigned."
+      "review_note": "Major-battle-first review; no chronological first-access index assigned.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_PRESTON",
@@ -10503,7 +12249,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_QUINCY",
@@ -10535,7 +12287,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_RANDALL",
@@ -10568,7 +12326,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles."
+      "current_frontier_disposition": "Norman Gym challenge requires four badges; later trainer rooms are not first-visit battles.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ROGER",
@@ -10600,7 +12364,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_ROMAN",
@@ -10635,7 +12405,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_RONALD",
@@ -10667,7 +12443,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_RUBEN",
@@ -10699,7 +12481,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SAMANTHA",
@@ -10731,7 +12519,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SAMUEL",
@@ -10763,7 +12557,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SANTIAGO",
@@ -10795,7 +12595,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SEBASTIAN",
@@ -10828,7 +12634,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle6 requires Mind Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle6 requires Mind Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SHANNON",
@@ -10860,7 +12672,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SHAYLA",
@@ -10894,7 +12712,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SHELBY_1",
@@ -10938,7 +12762,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SHELLY_SEAFLOOR_CAVERN",
@@ -10970,7 +12800,13 @@
           "flag": "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SHELLY_WEATHER_INSTITUTE",
@@ -11002,7 +12838,13 @@
           "flag": "FLAG_HIDE_ROUTE_119_TEAM_AQUA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SHIRLEY",
@@ -11037,7 +12879,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SIDNEY",
@@ -11072,7 +12920,13 @@
       ],
       "review_group": "elite_four_and_champion",
       "implementation_receipt": "work/league-implementation/Implementation.md",
-      "review_note": "Major-battle-first review; no chronological first-access index assigned."
+      "review_note": "Major-battle-first review; no chronological first-access index assigned.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SOPHIA",
@@ -11105,7 +12959,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle6 requires Mind Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle6 requires Mind Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SOPHIE",
@@ -11139,7 +12999,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SPENSER_FORTREE",
@@ -11171,7 +13037,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_STEVEN",
@@ -11203,7 +13075,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_STEVE_1",
@@ -11247,7 +13125,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SUSIE",
@@ -11279,7 +13163,13 @@
           "flag": "0",
           "elevation": 1
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_SYLVIA",
@@ -11311,7 +13201,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TABITHA_MAGMA_HIDEOUT",
@@ -11343,7 +13239,13 @@
           "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TABITHA_MOSSDEEP",
@@ -11375,7 +13277,13 @@
           "flag": "FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TABITHA_MT_CHIMNEY",
@@ -11410,7 +13318,13 @@
       ],
       "prior_review_status": "not_yet_reviewed",
       "review_artifact": "work/trainer-review-through-flannery/proposed-teams.json",
-      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-through-flannery-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TARA",
@@ -11443,7 +13357,13 @@
           "elevation": 1
         }
       ],
-      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing."
+      "current_frontier_disposition": "Water-route swimmers/islands need disembarked water access; Briney boat passage does not supply Surf or free landing.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TATE_AND_LIZA_1",
@@ -11492,7 +13412,13 @@
           "flag": "0",
           "elevation": 0
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TAYLOR",
@@ -11524,7 +13450,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TED",
@@ -11559,7 +13491,13 @@
       ],
       "current_frontier_disposition": "Trick House puzzle2 requires Dynamo Badge; only puzzle1 is currently cleared in the design index.",
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_THOMAS",
@@ -11591,7 +13529,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TIFFANY",
@@ -11623,7 +13567,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TIMOTHY_1",
@@ -11665,7 +13615,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Northern Route115 actors lie beyond the initial southern shore. Reassess from the later northern/Meteor Falls or Surf approach; they are not on the current walkable early shore."
+      "current_frontier_disposition": "Northern Route115 actors lie beyond the initial southern shore. Reassess from the later northern/Meteor Falls or Surf approach; they are not on the current walkable early shore.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TORI_AND_TIA",
@@ -11716,7 +13672,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_TRAVIS",
@@ -11749,7 +13711,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available."
+      "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VINCENT",
@@ -11782,7 +13750,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle8 requires League completion; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle8 requires League completion; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VIRGIL",
@@ -11814,7 +13788,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_VITO",
@@ -11846,7 +13826,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WALLACE",
@@ -11881,7 +13867,13 @@
       ],
       "review_group": "elite_four_and_champion",
       "implementation_receipt": "work/league-implementation/Implementation.md",
-      "review_note": "Major-battle-first review; no chronological first-access index assigned."
+      "review_note": "Major-battle-first review; no chronological first-access index assigned.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": true,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WALLACE_DOUBLES_LEGENDS",
@@ -11913,7 +13905,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WALLY_VR_1",
@@ -11936,7 +13934,13 @@
           ]
         }
       ],
-      "actor_bindings": []
+      "actor_bindings": [],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WALLY_VR_2",
@@ -11977,7 +13981,13 @@
           "flag": "FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WARREN",
@@ -12009,7 +14019,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WENDY",
@@ -12041,7 +14057,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WILTON_1",
@@ -12085,7 +14107,13 @@
       ],
       "current_frontier_disposition": "Beyond the southern Rock Smash/Dynamo barrier at y100/101. Reassess after Wattson with remaining desert/Go-Goggles and reporter gates rather than marking the whole map available.",
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WINONA_1",
@@ -12126,7 +14154,13 @@
           "flag": "0",
           "elevation": 3
         }
-      ]
+      ],
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_WYATT",
@@ -12160,7 +14194,13 @@
         }
       ],
       "review_artifact": "work/trainer-review-85-100/proposed-teams.json",
-      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md"
+      "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     },
     {
       "key": "TRAINER_YUJI",
@@ -12193,7 +14233,13 @@
           "elevation": 3
         }
       ],
-      "current_frontier_disposition": "Trick House puzzle4 requires Balance Badge; only puzzle1 is currently cleared in the design index."
+      "current_frontier_disposition": "Trick House puzzle4 requires Balance Badge; only puzzle1 is currently cleared in the design index.",
+      "ladder": {
+        "L0_authored": true,
+        "L1_ai_fixtures": false,
+        "L2_benchmark": false,
+        "L3_earned_clear": false
+      }
     }
   ],
   "current_frontier_audit": {

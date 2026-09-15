@@ -85,8 +85,8 @@ Goal: every fact lives in exactly one place, and the build fails when copies dri
    blocks removed; difficulty text matches `src/difficulty.c`; rematch payouts
    stated as zero and implemented. `scripts/check_book_consistency.py` runs in
    the release gate (advisory until `--strict-book`).
-   Open (design decision, user): **Garchompite has no trainer holder** since
-   Mega Garchomp left Drake; choose its sand-team showcase in the Gym/story audit.
+   Closed September 15: Garchompite's holder is Caroline (E0489, Victory Road
+   B2F), the sand ace; Tyranitar there drops Tyranitarite. Mega gate passes.
 5. **Book diet.** The hand-authored guide is current rules only. Move every
    dated evidence paragraph (C14 native evidence, Laura benchmarks, Slateport
    mart steps, "September 14 user direction") into `docs/VERIFICATION.md` or the
