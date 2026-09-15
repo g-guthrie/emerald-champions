@@ -102,6 +102,9 @@ void BattleAI_SetupFlags(void);
 void ComputeAiBattlerDecisions(enum BattlerId battler);
 bool32 AI_ComputeDoublesDecisions(enum BattlerId battler);
 s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask);
+// Candidate scoring mutates the temporary board. The caller owns a snapshot
+// and must restore it before another candidate and before returning to play.
+s32 AI_EvaluateDoublesCandidate(enum BattlerId battler, u32 noActionMask);
 s32 AI_ScoreMoveAgainstTarget(enum BattlerId battler, enum BattlerId target, u32 moveIndex);
 u32 AI_GetMoveAccuracy(struct AiLogicData *aiData, enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 u32 BattleAI_ChooseMoveIndex(enum BattlerId battler);

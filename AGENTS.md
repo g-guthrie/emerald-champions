@@ -19,9 +19,13 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
 - When the user asks to continue/start goal work, create or resume the goal in
   `docs/GOAL.md` using the available goal tool. An account/machine change does not
   imply that the game goal is complete. Do not recreate an already active goal.
-- The one authorized fresh Astra High full-book review is complete; section 26
-  contains its dispositions. The user stopped subagent work. Use no additional
-  agents or agent follow-ups. The main agent owns implementation and playtesting.
+- The one authorized fresh Astra High full-book review is complete; its dispositions
+  are integrated in the guide and source. The latest user asked to skip the
+  sub-agent: the main agent reviews the20-trainer blocks and presents the report
+  in chat. Use a fresh Astra reviewer only when the user explicitly requests it
+  for a batch; give it a self-contained packet and retire it afterward.
+  No nested delegation or new full-book review. The main agent owns source
+  verification, implementation and playtesting.
 - Preserve existing user/concurrent work. Use Git history for older source rather
   than introducing competing copies into the live tree. Commit and push supported
   progress within the user's authorized GitHub handoff/development scope.
@@ -46,14 +50,16 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
   record, habitat, progression, reward or scene description in the same change.
   Update implemented/pending statements and evidence scope too. Do not leave the
   book describing a discarded experiment. A hypothesis is not an approved policy.
-- For trainer changes, edit book sections 8/9/22 and relevant executable-intent
-  rows, then run the book import and check in `docs/VERIFICATION.md`. Do not edit
-  generated tables alone. Shared preparation presets are separately authored;
+- For exact trainer changes, edit `data/emerald_champions/emerald_champions_battle_teams.txt`,
+  materialize with `scripts/emerald_champions_teams.py --write`, then refresh the
+  book reference with `scripts/sync_game_book.py --write`. The book has a short
+  hand-authored guide plus a generated canonical reference. Never hand-edit the
+  generated appendix or native projections. Shared preparation presets are separately authored;
   do not overwrite bespoke trainer moves or EVs with player presets.
 - Use the working Deus stdio MCP adapter in `docs/VERIFICATION.md` for codebase
   memory and affected-caller tracing. Refresh its index when source changes.
   Check coverage exclusions; graph results supplement active-script/book review.
-- Keep the full specification in this one book. `docs/CONTINUE.md` owns checkpoint
+- Keep the guide and generated references in this one book; generated reading views are not editable authorities. `docs/CONTINUE.md` owns checkpoint
   and next-work state, `docs/VERIFICATION.md` owns commands, and `docs/GOAL.md` owns
   the goal. Do not accumulate new competing handoffs or historical task lists.
 
@@ -138,7 +144,9 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
   Record acquisition, build, role, matchup and outcomes to assess existing
   legendary level normalization. Propose any additional cap-relative penalties
   with evidence; do not implement new legendary penalties without approval.
-- After EACH individual team audit, explicitly ask "Could this team be cooler?"
+- The most important creative check after building or auditing EACH team is
+  "Could this team be cooler?" Ask it again after your own redesign, not only
+  when reviewing someone else's existing team.
   Answer with a concrete judgment about species, partnerships, theme, memorable
   interactions and counterplay. Recommend a specific improvement when warranted;
   do not equate cooler with simply rarer Pokemon or higher stats. If the concept

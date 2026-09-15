@@ -172,23 +172,22 @@ verification. Host-native and cross-compiled tools must use the right architectu
 
 Edit the current book's rule and exact relevant records whenever gameplay changes.
 This includes implemented/pending status, discarded experiments, handoff text,
-habitats, economy and AI contracts, not just trainer moves. For trainer changes,
-sections8/9/22 own the E/B parties, U builds, EV/IV data, tactics and executable
-intent. Use the existing import/materialization pipeline:
+habitats, economy and AI contracts, not just trainer moves.
+Exact trainer authoring lives in data/emerald_champions/emerald_champions_battle_teams.txt.
+The Game Book's prose is the design guide; its marked reference is generated from
+source. Edit the source record, never both a copied table and its implementation.
 
 ```sh
-python3 scripts/emerald_champions_teams.py \
-  --book 'Game Blueprint/Emerald_Champions_Game_Book.txt' --write
-python3 scripts/emerald_champions_teams.py \
-  --book 'Game Blueprint/Emerald_Champions_Game_Book.txt' --check
-git diff --check
+python3 scripts/emerald_champions_teams.py --write
+python3 scripts/emerald_champions_teams.py --check
+python3 scripts/sync_game_book.py --write
+python3 scripts/sync_game_book.py --check
 ```
 
-A prose-only book edit changes its recorded hash header; regenerate that header
-with the same command. Do not hand-edit generated trainer tables. The check
-compares the book-derived authored teams, master/plans and native parties and
-validates configured Abilities. It does not prove tactical quality or world
-reachability. Shared player presets have their own authored inputs/generator.
+The first check compares master/plans/native parties and configured abilities.
+The second re-renders the reference and rejects stale bytes. Neither establishes
+prose correctness, physical access or native battle quality. Shared presets retain
+their own authoring/generator. Game_Guide_Reading_Copy.txt is a generated short view.
 
 ## Fetch and resume the exact earned session
 
@@ -350,8 +349,8 @@ User visual acceptance cannot be supplied by the agent's own inspection.
 
 ## Trainer/AI review and focused regression loop
 
-Before every battle: find the E/B/T entry in book sections8/22, exact U builds in
-section9, and current `emerald_champions_battle_teams.txt`/native party definition.
+Before every battle: find its TRAINER identifier in the generated book reference
+and inspect the authored teams file, native party and applicable shared AI.
 Check leads, reserves, levels, moves/items/Abilities/EVs, conditional strategies
 and partner tactics. Follow the relevant code in `battle_ai_main.c`,
 `battle_ai_pair.c`, `battle_ai_switch.c`, `battle_ai_util.c` and native mechanic
@@ -412,7 +411,7 @@ A good sample is not a proof of the worst case across the game.
 Record exact source/artifact identity, player/enemy builds, complete inputs and
 native outcomes, failures, meaningful screenshots, measured timing and remaining
 limits. Add broader variants, randomized seeds and alternate player archetypes as
-required by book section25; those are not all complete in the current run.
+required by the Game Book playtesting rules; those are not all complete in the current run.
 
 ## Delivery checks
 
@@ -474,7 +473,7 @@ parties, compares all book member fields, lists direct Hoenn callsites, resolves
 regional-rival replacement presets, and includes every Circuit variant/template.
 Empty retired trainer records are metadata only; do not count them as battles.
 `python3 scripts/verify_campaign_trainer_roster.py` is also part of the canonical
-book `--check`: book IDs = nonempty native party IDs = Hoenn script battle IDs.
+team `--check`: authored IDs = nonempty native party IDs = Hoenn script battle IDs.
 The compiler removes retired loadouts without renumbering saved trainer flags.
 
 For the trainer-level change, the focused native build uses the usual harness
@@ -553,7 +552,7 @@ pointing at their `usr`; this is the host setup, not a game-source change.
 
 ## Rustboro Gym redesign and Mega reveal (2026-09-14)
 
-Book sections8/9/22 own the four revised six-member teams. Generate/check
+The authored team file now owns the four revised six-member teams. Generate/check
 with `scripts/emerald_champions_teams.py`. Focused test allowlist adds
 `test/battle/ai/mega_reveal.c` and `test/battle/ai/emerald_champions_plans.c`
 to the three runner files. Filters `EC Mega reveal:` and
@@ -570,6 +569,476 @@ work/contact-sheets/rustboro-mega-reveal-native.png. Neither is an earned
 clear or difficulty benchmark. Only Roxanne authors MEGA_REVEAL; native
 eligibility remains required. Production build/gates logs:
 work/rustboro-final-release.log and work/rustboro-final-release-gates.log.
+
+
+## September 14 early-access and documentation reconciliation
+
+The Game Book battle/access section owns the corrected pre-Rusturf cutoff:22 trainer
+encounters available before the Stone Badge (including Roxanne), plus Dawson,
+Sarah, Janice and Jerry after Cut. Cyndy/Marlene are later Route115 actors; a
+review-list position is not access order.
+
+`work/early-access-audit-20260914.json` records source collision/obstacle and
+directed-ledge checks. Its exclusion probe relaxes elevation to overapproximate
+walking; this is not native traversal or inspection of a personal save. Shared
+Briney/rival/field-move gates were traced separately in their production scripts.
+
+`work/early-team-audit-20260914.json` verifies all1,759 native/book slots, all50
+literal ability-carrier rows and the two changed trainer branches. Calvin is
+unchanged. Joey now uses Leek/Scrappy Galarian Farfetch'd with supporting partners;
+Marlene's unsupported Dazzling Gleam becomes legal Fake Tears. Both changed teams
+pass the pinned move-pool check and the global configured-ability check.
+
+`work/early-audit-book-final.log` and `work/early-audit-export-check.log` cover
+book/materialized-team/plan/party agreement and the corrected catalogue exporter.
+Historical master chapter/cap fields are explicitly labeled as preview metadata;
+they do not govern current access or override the live-cap formula.
+
+The normal release was built from a fresh object directory with the complete
+local ARM toolchain, then relinked after final authoring/projection updates:
+`work/early-audit-release-final.log`. Artifact/input checks, map integrity, team
+and preset/Circuit projections, wild integrity, header and memory-region checks
+pass in `work/early-audit-release-gates.log`. ROM, ELF, stamp and receipts are
+preserved together under `../downloads/early-audit-20260914/`; both current user
+ROM copies were updated with matching bytes. Saves and the paused campaign were
+not advanced. No new native battle-quality or full-game acceptance is claimed.
+
+
+## Generated book reference (current workflow)
+
+The short guide above the marked appendix is hand-authored. Exact team data,
+configured stats/evolutions, wild methods, literal reward providers and dialogue
+are regenerated by `scripts/sync_game_book.py`; the book is no longer compiler
+input. `--check` performs a full deterministic re-render and compares bytes. CI
+runs that check. Unknown dynamic/native paths remain explicit rather than guessed.
+
+```sh
+python3 -m unittest discover -s tests -p test_game_book_reference.py -v
+python3 scripts/emerald_champions_teams.py --check
+python3 scripts/sync_game_book.py --write --inventory work/book-economy-audit-20260914/reward-inventory.json
+python3 scripts/sync_game_book.py --check
+```
+
+The full book contains the reference the user requested and is necessarily larger
+than the few-thousand-word guide. Its generated short reading view contains only
+the guide. Speech is a literal-source atlas, not a simulated transcript: shared
+text, build variants, native UI/battle strings, placeholders and unattributed
+services are distinguished. The inventory's dialogue_routing maps source labels
+to branch/call references without filling the readable book with script plumbing.
+No global NPC IDs, source map coordinates or gameplay were changed for this tooling.
+
+
+### Automatic reference updates
+
+Normal `make` and `make release` refresh the book after the ROM succeeds. For
+live edits, run `python3 scripts/sync_game_book.py --watch`; the watcher checks
+source changes, waits for a completed save, and runs a fresh exporter process.
+It also materializes changes to the authored team catalogue when projections
+were not edited concurrently. Conflicting authoring/projection edits stop the
+refresh with a visible error instead of silently picking an owner.
+
+The watcher is a local process, not a scheduled cloud task. Restart it after
+reboot/session shutdown. Build-time refresh and the CI freshness check remain
+available when it is not running. The source reference is deterministic; manual
+guide prose still requires editorial review when game behavior changes.
+
+Procedural Circuit/Tent templates and generation rules are intentionally excluded
+from the book at the user’s request. Campaign parties, regional starter/rival
+inputs and story allies remain included. This does not remove game content.
+
+
+## Full economy source atlas
+
+Generated book section C is built by `scripts/economy_reference.py`. It includes
+map pickups/quantities, hidden items, planted and empty berry plots, NPC/menu
+entrypoints, fixed and random gifts, Pokémon trades, ordinary and decoration
+shop stock, native free/evolution counters, BP/Coins/barter offers, wild held
+items, global transfer hooks, native selector tables, configured cash prices and
+a reverse reward index. Native economic code and incoming script conditions are
+linked once rather than described by guessed reward rules.
+
+```sh
+python3 scripts/economy_reference.py --out work/economy-map-20260914
+python3 -m unittest discover -s tests -p 'test_*reference.py' -v
+python3 scripts/verify_mega_stone_rewards.py
+python3 scripts/sync_game_book.py --check
+```
+
+The price projection evaluates configured C expressions; it does not maintain a
+second gen-price table. Native selectors distinguish the ten evolution stones
+from thirty-five other evolution items. Random berry gifts are one item chosen
+from a range, not delivery of every berry in that range. Pickup amount uses the
+actual object quantity field; hidden quantities are separate. Prototypes and
+function definitions are not counted as transfer calls.
+
+The earlier Mega source check omitted Steven's additem/addpcitem delivery. It
+now recognizes those paths. Its harvest check is scoped to the actual trade
+function; unrelated rollback of an ordinary two-berry gift is legitimate.
+
+Source graph associations are potential paths. Build-condition alternatives,
+unbound callbacks/legacy operations and configured items without a mapped fixed
+source are visible in C6; they are not claims of first access or unobtainability.
+The atlas cannot certify every native transaction, physical route, price budget
+or narrative match. The user-approved shop roles remain distinct from stock
+changes not yet implemented, particularly the proposed Lilycove Mega shelf.
+No pickup position, price, stock, reward, trainer or saved-game progress changes
+are part of the atlas work.
+
+
+## Post-Roxanne Cut-enclosure audit
+
+`work/post-roxanne-cut-audit/` contains the before/after authored teams, complete
+native-slot comparison, nearby access/source inventory and campaign species/Mega
+coverage snapshot. The first block is Janice/Jerry/Dawson/Sarah, all first
+accessible with the Stone Badge and Cut; E-number order is not travel order.
+Dawson is retained; Sarah's support/Speed IVs, Janice's allied Lightning Rod
+conflict and Jerry's timely Acid Spray support are revised. No levels changed.
+
+The current focused test build uses the three runner files plus
+`test/battle/ai/primary_support_pair.c` and
+`test/battle/ai/emerald_champions_plans.c`. All six selected test groups pass:
+`EC primary support:` (three), `EC Tailwind:` (two), and
+`EC battle plans: compiled directives` (one). These are existing native mechanic/
+AI regressions, not four complete authored-team battles. See native-tests.log
+and the matching test stamp in the audit directory. Full Protect-cadence and
+optimized Medium difficulty benchmarks remain pending.
+
+The normal production ROM builds and passes all release gates in
+`work/post-roxanne-cut-audit/release-build.log` and `release-gates.log`.
+`release-stamp.log` binds the ROM/ELF to current inputs. No earned save was
+advanced, and this is not full native battle-quality acceptance.
+
+
+## Rusturf-to-Dewford designs and Soak/Charge forecasts
+
+Authoring, access inventory, before/after sets, all24 non-Hoenn middle-stage
+rival replacements, affected-team index and baseline/fixed receipts are under
+`work/rusturf-dewford-team-audit/`. Exact teams and abilities pass the existing
+materializer/roster checks. Do not treat the three unused Hoenn replacement
+presets as the actual bespoke Hoenn party branches.
+
+The focused build uses the three runner files plus
+`test/battle/ai/primary_support_pair.c` and
+`test/battle/ai/emerald_champions_plans.c`. All17 selected groups pass in
+`complete-block-native-tests.log`: `EC reactive Charge:`, `EC shoreline`, `EC Soak`,
+`EC special suppression:`, `EC suppression mechanics:`, `EC primary support:`,
+`EC Tailwind:` and `EC battle plans:`. These cover actual smuggler inheritance
+from all three partners; Ned's authored Soak and Wind Power KOs; changed Ground
+immunity, blocked/late conversion, protection/Fake Out, state/RNG restoration;
+timely Eerie Impulse; and Electromorphosis with/without a real preceding hit.
+Ned's first-decision samples are43 and53 frames, below72. They do not prove the
+worst case or complete battle/Protect quality across the campaign.
+
+Baseline fixture corrections remain explicit: required Speed declarations were
+missing from the first inheritance control; suppression's original80-HP board
+had a legitimate damage-roll risk, and its initial AI profile did not select the
+shared evaluator. The corrected100-HP/profile case fails when Eerie Impulse is
+removed from PairTargetDropStat and passes with it restored; this controlled
+baseline is labeled separately from the historical full-tree ELF. A fake-out
+countercheck now permits Thunderbolt to KO the other foe and instead rejects
+using it on unconverted Ferrothorn. No meaningful assertion was weakened.
+
+Broader previously failing `EC authored strategy:` Flannery/Parker expectations
+and `EC doubles budget:` remain open. Verified old-artifact comparisons are in
+`neighbor-old-artifact-baseline.log` and `budget-old-artifact-baseline.log`;
+current diagnostics show Sleep Powder/Psychic and ordinary Kangaskhan. Audit the
+actual choices, locks, eligibility and outcomes before changing game AI or
+retiring those checks. These are not newly introduced Soak/Charge regressions.
+
+Arrokuda's actual authored Propeller Tail bypasses allied Finneon Storm Drain
+in the added native reserve-pair test. Normal release build and gates pass in
+`release-build.log` and `release-gates.log`; the generated book check passes.
+Artifacts and SHA256 hashes are in `artifacts.json`. No earned save advanced.
+
+
+## Brawly Gym designs, Choice commitment, Rage Fist and setup dances
+
+`work/brawly-gym-audit/` records seven before/after six-member parties, source
+agreement, species reuse, affected-owner lists and native baseline/fixed logs.
+All42 member move pools and the whole370-variant roster agree with source.
+Initial levels are Medium cap20 seeds; no complete Gym fight or balance pass is
+claimed. Map actors, rewards, independent clears and the C15 save are unchanged.
+
+The test allowlist is the three runner files plus `primary_support_pair.c`,
+`emerald_champions_plans.c`, `ai_doubles.c`, `coaching_pair.c`,
+`test/battle/ability/blitz_boxer.c` and `test/battle/move_effect/rage_fist.c`.
+`verified-native-tests.log` passes51 selected groups: `EC Gym`, `EC Coaching:`,
+`Blitz Boxer`, `Rage Fist`, `EC expert pair: candidate evaluation`,
+`EC authored strategy:`, `EC doubles budget:`, `EC shoreline`, `EC Soak`,
+`EC primary support:`, `EC special suppression:`, `EC reactive Charge:`,
+`EC Tailwind:` and `EC battle plans:`. Brawly/Cristian/Jocelyn samples are60/50/44
+frames; the full-bench cold-Mega guarded/attacking cases are60/60. These are
+sampled native decisions, not a global worst-case guarantee.
+
+The original Flannery assertion omitted the actual Rock Slide commands; supplying
+them produces After You, two KOs and full Torkoal HP. Parker was really locking
+Body Slam during a double-Protect turn. A small first-lock future matchup value
+fixes that while leaving current blocked damage at zero. His regression now
+asserts initial Earthquake, legal room order, subsequent Instruct and both KOs;
+obsolete absolute Speed values are gone. The cold-Mega fixture now differentiates
+an idle guarded board from one that needs Mega Evolution and provides the actual
+player replacement input. No gameplay Mega permission was relaxed.
+
+Configured Oricorio Speed103 invalidated the first EV seed: it attacked before
+Lilligant. The revised native Medium order is84/83; its Acrobatics comparison
+shows25 before and37 after the copied Victory Dance. Easy/Hard78/77 and92/89
+are source-formula checks, not separately played fights. A Taunt countercheck
+allows legitimate direct offense rather than requiring Protect.
+
+The larger forecast exposed a real heap limit. Production search owners now
+restore their existing saved board before candidates and on exit, without a
+second8-KiB snapshot. The pure evaluation API still saves/restores itself. Rage
+Fist tables allocate only for participating users. The unchanged full purity
+regression checks caches, battlers, fields, RNG and stack guards and passes.
+Raw Rage Fist queries also preserve the live hit counter. Variable/per-strike
+hit sequences use explicit lower bounds; these are bounded forecasts.
+
+The inherited forced-switch Rage Fist assertion assumed Gen9 while the build
+uses Champions. It now explicitly exercises both configurations, preserving
+retention in Gen9 and reset in Champions; no native rule changed.
+
+The subsequent Dancer follow-up below supersedes the old copied-attacks gap.
+Teeter Dance/Lunar Dance forecasting remains open; the subsequent item-sequencing
+pass below supersedes the demonstrated consumption gap. Current setup/attacking-copy, Rage Fist activation, Costar entry and
+Mega/guard lines have focused evidence. Do not promote that
+to full Dancer semantics, complete battles, Protect cadence or final balance.
+
+Normal ROM build, source/artifact release gates and generated-book freshness
+pass in `work/brawly-gym-audit/release-build.log`, `release-gates.log` and
+`book-check.log`. SHA256 bindings are in `artifacts.json`. This is a source-bound
+normal ROM, not a claim that full Gym playtesting or Dancer coverage is finished.
+
+
+## Dancer forecast follow-up — September 14, 2026
+
+`work/dancer-forecast-audit/Review.md` scopes the repairs, counterexamples and
+remaining work. The normal source adds optional native copied-move damage caches,
+nonrecursive extra actions, both-side Dancer consequences, item-loss query states,
+copied Feather Dance and Clangorous Soul HP costs. Native damage queries restore
+battlers, known abilities/items and RNG. Move selection and switch evaluation
+share this path. No battle-engine Dancer mechanic was changed.
+
+Build the Brawly test allowlist above plus `test/battle/ai/dancer_pair.c` and
+stamp the resulting ELF. `verified-native-tests.log` passes64 selected groups:
+the previous51 filters plus `EC Dancer` (11 groups) and `EC attacking Dancer`
+(2 groups, including5 denial/protection parameters). Full-state/cache/field/RNG
+purity now includes a Dancer/Choice Specs/defensive-item board. The mixed full-bench
+Dancer sample is69 frames and cold-Mega samples61/60; these do not establish a
+worst-case deadline. Initial copied-attack baseline failures are preserved in
+`baseline-ai.log` with their original ELF/stamp. Disabling only Feather Dance's
+copy makes the new support fixture select Water Gun and fail; restoring it
+passes (`feather-control-tests.log` versus `verified-native-tests.log`).
+
+Invalid first drafts were corrected from evidence: all native participants need
+explicit Speed when any has it; an Assault Vest holder cannot spend the fixture
+turn on Celebrate, so the vest query starts after that harmless turn. Fake Out
+cannot deny a copy through the receiver's Protect; the permanent control covers
+both the actually flinched receiver and the correctly guarding receiver.
+
+Teeter Dance confusion and Lunar Dance sacrifice/replacement AI forecasting remain
+open (zero authored trainer owners; player-triggered cases remain possible).
+The native Lunar Dance two-sacrifice/two-heal control passes independently.
+The following item-sequencing pass closes the demonstrated ordinary/copy
+consumption gap; its native anchors and remaining approximation limits are
+recorded below.
+Full Gym battles, difficulty and Protect cadence remain pending. No earned save
+was advanced. See `release-build.log`, `release-gates.log`, `book-check.log` and
+`artifacts.json` in this evidence directory for the integrated normal build.
+
+
+## Item sequencing and the Laura native benchmark — September 14, 2026
+
+`work/dancer-item-sequence-audit/` contains the current follow-up. The same test
+allowlist as the Dancer section passes71 groups in `final-native-tests.log`:
+add `EC item sequence`, `EC Laura pivot` and `EC pivot exits` to the earlier
+filters. Native controls show29 Fire-source /116 resisted Electric-copy /232
+unresisted selected Revelation Dance damage. A controlled build withholding only
+ordinary itemless anchors fails the corrected follow-up attack choice; restored
+anchors pass. Plus/Minus interpolation now preserves hit/consumption metadata.
+Knock Off respects Sticky Hold. Full purity and earlier support/Rage/Gym checks
+pass. The current full-bench Dancer sample is70 frames; cold-Mega61/60.
+
+The initial item fixture mistakenly paired Fiery Dance with Wacan Berry: the
+copied move was still Fire. It was corrected to two Revelation Dance forms before
+the controlled baseline was used as proof. An ordinary-hit fixture's260 HP was
+outside its actual damage budget and became220; the boosted parameter uses320.
+The Sticky Hold negative permits a better Knock Off target rather than forcing
+a wasted attempt. An interim stamp correctly rejected an ELF predating a new
+source edit; only the rebuilt `final-test-*` receipts establish current evidence.
+
+`work/brawly-gym-benchmark-laura/` is a separate branch of the archived pre-Gym
+native save, fetched by verified `v4-evidence-30.tar.gz`. It has no Knuckle Badge,
+Laura initially unbeaten, and cap20. Native Meadow entry and Munkidori eligibility
+were checked before assisted preparation. `laura-benchmark-party.json` and
+`pre-gym-native-access.json` in `work/brawly-gym-audit/` bind the legal party, backup,
+prepared battery and acquisition scope. No capture or primary C15 progression is
+claimed. The15-turn clear has one player faint, native outcome1, trainer flag1,
+returned field control and native held-item restoration. The won battery save
+is `laura-cleared.sav`; the reusable prebattle battery is `pre-laura-ready.sav`.
+
+`laura-decision-times.json` replays all15 completed decisions read-only and finds
+max63 frames. It binds the exact immutable baseline ROM/ELF; it predates the pivot
+repair. `laura-t1-native-decisions.txt` proves Mienfoo chose immediate SWITCH.
+A controlled native U-turn line reaches the same Croagunk at34 HP while dealing12
+extra damage to Sylveon. The corrected AI fixture now chooses that exit and its
+reserved recipient; faster Hyper Voice or earlier Fake Out retain immediate
+switching. Generic recoil, contact and Sitrus-trigger controls also retain it.
+No RNG or battle state from these counterfactuals enters the live benchmark.
+
+The runner syntax is `--until WIDTH:ADDR:MASK:VALUE`. Early ad hoc controller
+stops used reversed mask/value; each observed turn endpoint was checked before
+continuing. The zero-valued final-battle stop consequently ended after one frame,
+without submitting the last attack. It was corrected before the single actual
+turn15 action. These were driver stops, not failed battles or replayed RNG.
+`time_decisions.py` already uses the correct symmetric mask/value test.
+
+Native contact sheets `laura-baseline-opening.png` and `laura-baseline-finish.png`
+were inspected; their sidecars preserve original hashes. System Python lacked
+Pillow, so the existing renderer used the bundled workspace Python. Normal
+release receipts and hashes are under this follow-up's `release-*`, `book-check`
+and `artifacts.json`. This completes a baseline battle and focused fixes, not
+Laura's final difficulty, the other Gym fights, all Dancer effects or the campaign.
+
+
+## Laura calibration — September 14, 2026
+
+`work/laura-calibration/results.json` records two further native runs: current
+pivot code with a double-Cloak Munkidori/Sylveon lead at the old opponent levels
+(14 turns, zero faints,14 decisions max53 frames), then Mienfoo26 with all other
+members unchanged (12 turns, one faint,12 decisions max60 frames). These used
+different tactical choices/RNG, so the result difference is not an isolated
+causal estimate of two levels. The native threshold fixture isolates the actual
+reason for the change: Mienfoo24 HP63/SpDef36 takes Psychic66–80;25 HP65/SpDef37
+takes66–78;26 HP67/SpDef39 takes62–74. Player Munkidori20 has75 Special Attack
+and Covert Cloak. The revised opener used focused Fake Out/Moonblast rather than
+assuming the old guaranteed Psychic KO. Final pressure calibration stays open.
+
+`final-native-tests.log` passes73 groups across21 filters on the current authored
+levels. Add `EC Laura levels:` and `EC Laura Sash:` to the prior71-group filters.
+The Sash check uses controlled native Toxic Chain outcomes: one case leaves
+Tyrogue at1 HP; the other poisons/faints it and requests a replacement. The initial
+compulsory-Sash-switch AI assertion was rejected because its guaranteed-survival
+premise was false. No AI selection rule was changed for that hypothesis.
+
+Mienfoo's level increase invalidated the older interruption fixture's premise:
+its weak Hyper Voice no longer required an escape. The synthetic player Fake Out
+now precedes any response and its Hyper Voice remains lethal; the original
+immediate-switch assertion stays intact. Native threshold, Sash, pivot and
+neighboring mechanics tests pass. The three late Play Rough misses in the
+zero-faint run were inspected through read-only past-input replay; no live RNG
+was read or rerolled. Both runs have actual clear flags/outcomes, native saves
+and held-item restoration. Contact sheets `laura-double-cloak.png` and
+`laura-level26.png` were inspected; black transition frames were replaced with
+actual recorded battle moments. Original hashes remain in sidecars.
+
+Sessions `work/brawly-gym-laura-retest/` and `work/brawly-gym-laura-level26/` retain
+matching immutable ROM/ELF/trace sets and won battery saves. Continue the newer
+branch only with its own artifacts, or use normal Save/clean Continue after any
+build change. C15 remains paused. Native-control helper `work/laura-calibration/step.py`
+uses the existing session API and correct WIDTH:ADDR:MASK:VALUE stop syntax.
+Normal release/book/artifact checks are recorded in this review's `release-*`,
+`book-check.log` and `artifacts.json`.
+
+## Economy shop transactions (September14)
+
+Build the headless ROM and stamp it, then run:
+
+```sh
+python3 scripts/audit/economy_shops_runtime.py --out work/economy-shops-new-run
+```
+
+This uses the ECONOMY_SHOPS synthetic prerequisite fixture and real NPC/menu
+input. It asserts actual inventory/money after purchase/cancel/owned/full-Bag/
+insufficient-money/bracelet branches, the six different stones plus Cord6000
+itinerary, a Lilycove tool purchase and representative native price/resale rules.
+It preserves ROM, ELF, input stamp, input/screenshot trace and a panel manifest.
+No campaign save or trainer flag is advanced. The accepted implementation run is
+`work/economy-map-20260914/native-shops-verified`; inspect its mega-shops.png and
+evolution-shops.png for the native UI. Normal-ROM delivery is separate.
+Deus index/ownership caller receipts are alongside it in the parent directory;
+partial parser coverage and excluded script directories remain explicit limits.
+
+## Slateport arrival design audit — September14
+
+Seven trainers reviewed: Hailey, Edmond, Lola, Chandler, Dwayne, Johanna and Simon.
+Exact before/after builds, role/stat reviews and nearby/full-campaign reuse
+references are in `work/slateport-arrival-design-audit/`. The report follows
+Stats, Could it be cooler?, then Overrepresented? for every trainer.
+
+The final28 builds/112 moves match pinned learnsets; configured ability, roster
+and authoring/materialization checks pass in `teams-check.log`. Normal release
+build, artifact stamp and deterministic release gates pass in `release-build.log`,
+`release-stamp.log` and `release-gates.log`. `book-check.log` owns final book
+freshness. `artifacts.json` binds the normal ROM/ELF/stamp and current authoring.
+No native battles or new AI tests were run; old headless/test artifacts are not
+current-source evidence for these team changes. Difficulty levels are design
+seeds. No saves, scenes, rewards or shared AI code changed in this block.
+
+## Retrospective team similarity review — September14
+
+`work/early-team-similarity-audit/Review.md` records44 reviewed first-access
+encounters plus Cyndy/Marlene from earlier historical discussion,56 authored
+variants and1035 concept-pair comparisons. Comparison data includes evolution
+families, exact item/ability/move sets, lead pairs and manually reviewed battle
+identities. Full-campaign owners of the three revised roles are indexed too.
+
+Johnson, Jose and Cyndy received targeted revisions; the previous Slateport
+changes were confirmed applied. The erroneous Tirtouga/Omastar Shell Smash
+comparison was corrected in the guide/current review. `teams-check.log`,
+`release-build.log`, `release-stamp.log`, `release-gates.log` and `book-check.log`
+own source/build validation. No native battle or new AI tests were run.
+The old source-bound native sessions remain historical, not replayed acceptance.
+
+## Approved next20 implementation — September14
+
+`work/trainer-next20-implementation/Implementation.md` and `applied-teams.json`
+record the implemented20 concepts /25 authored variants. The original Astra
+proposal remains under `work/trainer-review-next20/`. Approved parent changes
+retain Carvanha and lead Rattata/Wailmer in the museum, and lead Lopunny with
+fast bulky Imprison Kirlia for Sally. Her Calm Mind/SETUP role is retired;
+Wally keeps the separate setup lesson. Lola's current reference now reflects
+Daisy's resolved sun overlap.
+
+All110 direct builds pass scoped move/ability/stat checks; current-source
+materialization, configured ability/roster checks, normal release build/gates
+and generated-book freshness are logged in this implementation directory.
+`artifacts.json` binds normal ROM/ELF/stamp, source and book. No fresh native
+battles or test-ROM runs were performed; older test/headless artifacts are
+historical. Existing Jaclyn and Archie fixtures were inspected and remain
+valid frozen-behavior/namespace checks, not current-party snapshots.
+
+Native and ordinary AI handlers for Imprison and Sap Sipper activation were
+traced. Their newly authored complete-turn pair valuation and battle quality
+remain future focused checks; no new AI engine code or guaranteed battle
+execution is claimed. Imprison cannot undo an already executed Protect.
+
+## Implemented review65–84 — September14
+
+`work/trainer-65-84-implementation/Implementation.md` records all20 approved
+teams and94 exact builds. The source-backed ledger now marks indices1–84
+implemented, plus Cyndy/Marlene as separately reviewed but access-deferred.
+The next frontier is the post-Dynamo unlock, not more pre-Wattson indexing.
+
+The Winstrate invitation clarifies the existing four-battle sequence and
+map-transition reset until Vicky is beaten. No battle order, flag logic,
+rewards or actor movement changed. Actual FONT_NORMAL glyph widths pass
+within208px; maximum new line177px (`dialogue-widths.json`).
+
+Current-game move checks include native preparation-preset grants as well as
+pinned and explicit reviewed access. This preserves valid Wormadam Struggle
+Bug, Vespiquen Tailwind and Pincurchin Rising Voltage; Sunflora Overheat is
+an explicit extension. `static-checks.json` covers all94 builds. Live
+materialization/ability/roster checks, normal release build/gates, book
+freshness and artifact hashes are recorded alongside it. No native battle,
+new test-ROM run or final difficulty acceptance is claimed.
+
+
+September14, trainer review85–100 implementation: all16 approved encounters /64 builds are materialized, with100 first-access reviews implemented and343 retained encounters /370 variants. `work/trainer-85-100-implementation/` holds exact changes, source-to-proposal checks, materialization, normal release build/gates, book checks, hashes and cut reconciliation. The first PATH-selected compiler lacked newlib headers; the successful full rebuild uses `DEVKITARM=/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload`. No AI C or battle scripts changed in this batch. Existing Lung/Jaylen native regressions use frozen sets and required no fixture changes. Full battle calibration and Protect cadence remain pending.
+
+The adopted cut ledger was restored to the book and independently reconciled:139 first-pass cut groups /141 identities remain after Gina/Mia's restoration, plus five additional v4 retired identities. All146 are absent from active authored teams, nonempty native parties and Hoenn battle opcodes. This is source coverage, not earned traversal. The Deus index was refreshed with its existing partial-parse/exclusion limitations.
+
+
+## Integrated story and Studio verification from origin/main
 
 Studio verification on September14: thirteen native integration checks passed
 (work/studio/verification/result.json). The Oldale Vial recording's exact replay
@@ -866,3 +1335,42 @@ branch combination, combat quality and user visual approval remain outside
 these scoped checks. Normal release build/stamp/gate logs are in
 `work/story-followthrough/release-final.log`, `stamp-final.log` and
 `release-gates-final.log`.
+
+
+## Consolidated trainer, Misty Gym and Mega-budget build — September14
+
+The immediate checkpoint90d908cc20 is published on
+`codex/checkpoint-flannery-20260914-90d908cc20`. Merge b741f80e7b retained
+origin/main through d3bf075890; fd8f9ffd8d also includes e0ae7cf9bd's rival
+party-gate repair. The current authored-team/generated-book architecture and
+all battle work are preserved with the newer story, Studio, travel, UI and
+finite-item safeguards. The later one-source-per-Mega policy supersedes the
+earlier four-stone Lilycove shop; the13 reference tests and99-stone source
+check pass.
+
+Normal release: `DEVKITARM=/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload make -j6 release`, stamped against28,978 inputs, passes all release gates. ROM allocation27,862,008 bytes; EWRAM232,374; IWRAM28,312 (verifier values). Logs/hashes: `work/trainer-through-flannery-implementation/`.
+
+The stamped native ELF passes39 selected groups: Mega budget2, Misty mechanics4,
+Misty AI1 (three scenarios), authored strategies6, battle ownership1, primary
+support3, attacking Dancer2, other Dancer13 and Ice Spinner7. The mist cases
+exercise seeds, sun/rain coexistence, airborne vulnerability, Corrosion after
+Defog, Toxic Orb after Spinner, preservation against Good as Gold or useful
+Dragon protection, and query state/RNG preservation. Current AI samples15/15/41
+frames are scoped boards, not a worst-case bound.
+
+Mega-budget evidence separates native activation/form changes and exact
+per-trainer accounting from queued move execution. Two native activations for
+a named boss consume two uses; ordinary queued requests execute only one;
+authorization, final-use reservation, zero remaining uses, party-index changes
+and distinct-owner/foreign namespaces are checked. This does not claim a full
+autonomous two-Mega League battle before its new roster has been designed.
+The first scripted dual-Mega fixture incorrectly used the recorded-link
+namespace; it was replaced with explicit production activation and eligibility
+checks rather than weakening the namespace boundary.
+
+The131 first-access reviews,341 retained encounters,368 variants and148 retired
+identities remain. Gina/Mia is an explicit keep. Full native campaign traversal,
+complete Misty Gym battles, Protect cadence and final difficulty tuning remain
+outside this engineering consolidation. The next design block is Elite Four and
+Champion, then whole Gyms and Magma/Aqua arcs, with Mega distribution decided
+cohesively before the remaining route teams.

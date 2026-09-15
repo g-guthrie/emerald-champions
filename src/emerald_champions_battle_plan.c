@@ -49,6 +49,24 @@ bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
         && (permissions & (1u << gBattlerPartyIndexes[battler]));
 }
 
+// Explicit endgame exceptions. Player, ordinary trainer and foreign battle
+// namespaces retain the native one-Mega rule through GetCampaignTrainer.
+u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler)
+{
+    switch (GetCampaignTrainer(battler))
+    {
+    case TRAINER_SIDNEY:
+    case TRAINER_PHOEBE:
+    case TRAINER_GLACIA:
+    case TRAINER_DRAKE:
+    case TRAINER_WALLACE:
+    case TRAINER_STEVEN: // Final optional former-Champion exhibition.
+        return 2;
+    default:
+        return 1;
+    }
+}
+
 u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species species, enum Species partnerSpecies)
 {
     u32 trainer = GetCampaignTrainer(battler);

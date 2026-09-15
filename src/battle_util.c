@@ -8619,9 +8619,25 @@ bool32 CanMegaEvolve(enum BattlerId battler)
         && !CheckBagHasItem(ITEM_MEGA_RING, 1))
         return FALSE;
 
-    // Check if Trainer has already Mega Evolved.
-    if (HasTrainerUsedGimmick(battler, GIMMICK_MEGA))
-        return FALSE;
+    // Ordinary battles preserve native reservation behavior. Named endgame
+    // bosses get two actual activations, including both partners in one turn.
+    if (EmeraldChampions_GetMegaEvolutionLimit(battler) == 1)
+    {
+        if (HasTrainerUsedGimmick(battler, GIMMICK_MEGA))
+            return FALSE;
+    }
+    else
+    {
+        u32 reserved = 0;
+        enum BattlerId partner = GetPartnerBattler(battler);
+        if (IsDoubleBattle() && IsPartnerMonFromSameTrainer(battler)
+         && (gBattleStruct->gimmick.toActivate & (1u << partner))
+         && gBattleStruct->gimmick.usableGimmick[partner] == GIMMICK_MEGA
+         && GetActiveGimmick(partner) != GIMMICK_MEGA)
+            reserved = 1;
+        if (GetRemainingMegaEvolutions(battler) <= reserved)
+            return FALSE;
+    }
 
     // Check if battler has another gimmick active.
     if (GetActiveGimmick(battler) != GIMMICK_NONE)

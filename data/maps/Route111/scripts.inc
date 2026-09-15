@@ -695,10 +695,13 @@ Route111_EventScript_TrainerHillSign::
 	end
 
 Route111_Text_BattleOurFamily:
-	.string "Hello! I take it you're a traveler.\p"
-	.string "How's this? What do you say to taking\n"
-	.string "on our family of four in a series of\l"
-	.string "POKéMON battles?$"
+	.string "Hello, traveler! How about four\n"
+	.string "family battles back-to-back?\p"
+	.string "There are no breaks to recover\n"
+	.string "between opponents.\p"
+	.string "If you leave before beating all\n"
+	.string "four of us, we start again with me.\p"
+	.string "Will you take our challenge?$"
 
 Route111_Text_IsThatSo:
 	.string "Is that so?\n"

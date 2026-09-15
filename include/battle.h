@@ -495,6 +495,7 @@ struct BattleGimmickData
     u8 toActivate;                                       // stores whether a battler should transform at start of turn as bitfield
     u8 activeGimmick[MAX_BATTLE_TRAINERS][PARTY_SIZE];   // stores the active gimmick for each party member
     bool8 activated[MAX_BATTLERS_COUNT][GIMMICKS_COUNT]; // stores whether a trainer has used gimmick
+    u8 megaEvolutionsUsed[MAX_BATTLE_TRAINERS];          // actual activations, persistent across switches/faints
 };
 
 struct LostItem

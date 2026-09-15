@@ -6,6 +6,90 @@
     | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE \
     | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE)
 
+AI_DOUBLE_BATTLE_TEST("EC reactive Charge: Electromorphosis converts an actual earlier hit into a knockout")
+{
+    bool32 hit;
+    PARAMETRIZE { hit = TRUE; }
+    PARAMETRIZE { hit = FALSE; }
+    GIVEN {
+        AI_FLAGS(SUPPORT_FLAGS);
+        // Low HP keeps legal Flail at the same power before/after weak Tackle.
+        // It beats uncharged Thunderbolt, but only charged Thunderbolt KOs.
+        PLAYER(SPECIES_ARCANINE) { Level(50); HP(102); MaxHP(102); Attack(1); Defense(100); SpDefense(100); Speed(100); Ability(ABILITY_FLASH_FIRE); Moves(MOVE_TACKLE, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(300); MaxHP(300); Defense(200); SpDefense(200); Speed(20); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_BELLIBOLT) { Level(50); HP(10); MaxHP(100); Attack(150); Defense(200); SpAttack(100); Speed(50); Ability(ABILITY_ELECTROMORPHOSIS); Moves(MOVE_THUNDERBOLT, MOVE_FLAIL); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, hit ? MOVE_TACKLE : MOVE_CELEBRATE, target: opponentLeft);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, hit ? MOVE_THUNDERBOLT : MOVE_FLAIL, target: playerLeft);
+        }
+    } THEN {
+        if (hit)
+            EXPECT_EQ(playerLeft->hp, 0);
+        else
+            EXPECT(playerLeft->hp > 0);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC special suppression: timely Eerie Impulse preserves a later Guts attack")
+{
+    u32 setterSpeed;
+    PARAMETRIZE { setterSpeed = 100; }
+    PARAMETRIZE { setterSpeed = 10; }
+    GIVEN {
+        AI_FLAGS(SUPPORT_FLAGS);
+        PLAYER(SPECIES_ALAKAZAM) { Level(50); HP(110); MaxHP(110); SpAttack(200); Defense(150); SpDefense(100); Speed(75); Moves(MOVE_PSYCHIC); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(300); MaxHP(300); Defense(200); SpDefense(200); Speed(25); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ELECTRIKE) { Level(50); HP(200); MaxHP(200); SpAttack(100); Speed(setterSpeed); Moves(MOVE_EERIE_IMPULSE, MOVE_THUNDERBOLT); }
+        // Native suppressed Psychic is 73-87 damage; 100 HP survives every
+        // ordinary roll and burn. At 80 HP, Protect was a legitimate safer line.
+        OPPONENT(SPECIES_TAILLOW) { Level(50); HP(100); MaxHP(100); Attack(200); SpDefense(70); Speed(50); Ability(ABILITY_GUTS); Status1(STATUS1_BURN); Moves(MOVE_FACADE, MOVE_PROTECT); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            if (setterSpeed == 100)
+            {
+                EXPECT_MOVE(opponentLeft, MOVE_EERIE_IMPULSE, target: playerLeft);
+                EXPECT_MOVE(opponentRight, MOVE_FACADE);
+            }
+            else
+                EXPECT_MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        if (setterSpeed == 100)
+        {
+            EXPECT(opponentRight->hp > 0);
+            EXPECT_EQ(playerLeft->hp, 0);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("EC suppression mechanics: native Eerie Impulse survival control")
+{
+    s16 damage;
+    GIVEN {
+        PLAYER(SPECIES_ALAKAZAM) { Level(50); HP(110); MaxHP(110); SpAttack(200); Defense(150); SpDefense(100); Speed(75); Moves(MOVE_PSYCHIC); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(300); MaxHP(300); Defense(200); SpDefense(200); Speed(25); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ELECTRIKE) { Level(50); HP(200); MaxHP(200); SpAttack(100); Speed(100); Moves(MOVE_EERIE_IMPULSE, MOVE_THUNDERBOLT); }
+        OPPONENT(SPECIES_TAILLOW) { Level(50); HP(100); MaxHP(100); Attack(200); SpDefense(70); Speed(50); Ability(ABILITY_GUTS); Status1(STATUS1_BURN); Moves(MOVE_FACADE, MOVE_PROTECT); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_EERIE_IMPULSE, target: playerLeft);
+            MOVE(opponentRight, MOVE_FACADE, target: playerLeft);
+        }
+    } SCENE {
+        HP_BAR(opponentRight, captureDamage: &damage);
+    } THEN {
+        Test_MgbaPrintf("Native suppressed Psychic damage: %d; Taillow HP: %d", damage, opponentRight->hp);
+        EXPECT(opponentRight->hp > 0);
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC primary support: timely special-defense drops enable Swirlix's knockout")
 {
     enum Move support = MOVE_FAKE_TEARS;

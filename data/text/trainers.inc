@@ -1417,14 +1417,6 @@ Route114_Text_CharlottePostBattle:
 	.string "I adore cute ones that have a quirk\n"
 	.string "or two!$"
 
-Route114_Text_AngelinaIntro:
-	.string "Have you made your POKéMON evolve\n"
-	.string "very much?$"
-
-Route114_Text_AngelinaDefeat:
-	.string "Oh, I see.\n"
-	.string "That's good to know.$"
-
 Route114_Text_AngelinaPostBattle:
 	.string "Some POKéMON change so much when\n"
 	.string "they evolve, it's startling!$"

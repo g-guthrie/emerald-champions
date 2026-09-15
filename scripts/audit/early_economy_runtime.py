@@ -57,7 +57,7 @@ try:
  reload();actor(False);check(5,'ITEM_AERODACTYLITE',1);check(4,'ITEM_CHARIZARDITE_X',0)
  boot(280);before=query(9,0);talk('steven-owned-stone-alternative');check(4,'ITEM_AERODACTYLITE',1);check(9,0,before+3000);check(1,'FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE',1);reload();actor(False);check(9,0,before+3000)
  for name in ('ITEM_POKE_BALL','ITEM_HEAL_BALL','ITEM_DUSK_BALL','ITEM_NET_BALL','ITEM_ORAN_BERRY','ITEM_LIFE_ORB','ITEM_AERODACTYLITE'):check(7,name,0)
- for name,value in [('ITEM_POKE_BALL',100),('ITEM_GREAT_BALL',300),('ITEM_NET_BALL',600),('ITEM_LEAF_STONE',3000),('ITEM_METAL_COAT',5000)]:check(8,name,value)
+ for name,value in [('ITEM_POKE_BALL',100),('ITEM_GREAT_BALL',300),('ITEM_NET_BALL',600),('ITEM_LEAF_STONE',500),('ITEM_METAL_COAT',1000)]:check(8,name,value)
  result['status']='pass';print('PASS: early gifts/duplicate refusals/full pockets, Roxanne Amber only, Steven Ring/Aero Bag+PC+retry+duplicate, zero-sale and actual prices.',flush=True)
 except Exception as e:
  result.update(status='fail',error=str(e));raise

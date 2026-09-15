@@ -917,6 +917,25 @@ static void AI_GetStrikeCounts(struct DamageContext *ctx, u32 *minimum, u32 *med
 
 static bool32 AI_FirstStrikeBlocked(struct DamageContext *ctx);
 
+u32 AI_GetMinimumRageHits(enum BattlerId actor, enum BattlerId target, enum Move move)
+{
+    enum BattleMoveEffects effect = GetMoveEffect(move);
+    if (effect == EFFECT_BEAT_UP)
+        return AI_GetBeatUpHitCount(actor);
+    // These can stop after their first hit or divide hits between recipients.
+    if (effect == EFFECT_POPULATION_BOMB || effect == EFFECT_TRIPLE_KICK
+     || GetMoveTarget(move) == TARGET_SMART)
+        return 1;
+    struct DamageContext ctx = {.battlerAtk = actor, .battlerDef = target, .move = move};
+    memcpy(ctx.abilities, gAiLogicData->abilities, sizeof(ctx.abilities));
+    memcpy(ctx.holdEffects, gAiLogicData->holdEffects, sizeof(ctx.holdEffects));
+    u32 minimum, median, maximum;
+    // Beat Up and split Dragon Darts, the two mutating preparation branches,
+    // returned above. Remaining count rules are native and read-only.
+    AI_GetStrikeCounts(&ctx, &minimum, &median, &maximum);
+    return minimum;
+}
+
 u32 AI_GetContactDamage(enum BattlerId actor, enum BattlerId target, enum Move move,
     enum Ability ability, enum HoldEffect held, enum HoldEffect targetHeld, enum Ability targetAbility)
 {
@@ -1567,6 +1586,76 @@ static bool32 AI_CanCalcRawSingleHitAnchor(const struct AiCalcValues *aiCalc, en
      || (active == GIMMICK_NONE && aiCalc->gimmickAtk == GIMMICK_MEGA))
         return FALSE;
     return TRUE;
+}
+
+struct SimulatedDamage AI_CalcSoakChargeDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk,
+    enum BattlerId battlerDef, bool32 soakAttacker, bool32 soakDefender, bool32 charged)
+{
+    struct BattlePokemon savedAtk = gBattleMons[battlerAtk];
+    struct BattlePokemon savedDef = gBattleMons[battlerDef];
+    if (soakAttacker)
+        SET_BATTLER_TYPE(battlerAtk, TYPE_WATER);
+    if (soakDefender)
+        SET_BATTLER_TYPE(battlerDef, TYPE_WATER);
+    gBattleMons[battlerAtk].volatiles.chargeTimer = charged ? 1 : 0;
+    // Single hits need raw endpoints so action-time Sash/Sturdy/Endure can
+    // be applied after the changed board. Multihit retains its native sequence.
+    struct SimulatedDamage damage = AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, 0, NULL,
+        AI_CanCalcRawSingleHitAnchor(aiCalc, battlerAtk));
+    gBattleMons[battlerAtk] = savedAtk;
+    gBattleMons[battlerDef] = savedDef;
+    return damage;
+}
+
+struct SimulatedDamage AI_CalcRageFistDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk,
+    enum BattlerId battlerDef, u32 hits, bool32 soakAttacker, bool32 soakDefender)
+{
+    u32 saved = GetBattlerPartyState(battlerAtk)->timesGotHit;
+    GetBattlerPartyState(battlerAtk)->timesGotHit = min(6, hits);
+    struct SimulatedDamage damage = AI_CalcSoakChargeDamage(aiCalc, battlerAtk, battlerDef,
+        soakAttacker, soakDefender, gBattleMons[battlerAtk].volatiles.chargeTimer != 0);
+    GetBattlerPartyState(battlerAtk)->timesGotHit = saved;
+    return damage;
+}
+
+struct SimulatedDamage AI_CalcDancerDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk,
+    enum BattlerId battlerDef, bool32 soakAttacker, bool32 soakDefender, bool32 charged,
+    bool32 withoutAttackerItem, bool32 withoutDefenderItem)
+{
+    enum Ability savedAbilities[MAX_BATTLERS_COUNT];
+    memcpy(savedAbilities, gAiLogicData->abilities, sizeof(savedAbilities));
+    enum BattlerId battlers[] = {battlerAtk, battlerDef};
+    bool32 removed[] = {withoutAttackerItem, withoutDefenderItem};
+    enum Item savedItem[2], savedKnownItem[2];
+    enum HoldEffect savedHeld[2];
+    for (u32 i = 0; i < ARRAY_COUNT(battlers); i++)
+    {
+        enum BattlerId battler = battlers[i];
+        savedItem[i] = gBattleMons[battler].item;
+        savedKnownItem[i] = gAiLogicData->items[battler];
+        savedHeld[i] = gAiLogicData->holdEffects[battler];
+        if (removed[i])
+        {
+            gBattleMons[battler].item = ITEM_NONE;
+            gAiLogicData->items[battler] = ITEM_NONE;
+            gAiLogicData->holdEffects[battler] = HOLD_EFFECT_NONE;
+        }
+    }
+    for (enum BattlerId other = 0; other < gBattlersCount; other++)
+        if (other != battlerAtk && other != battlerDef
+         && (gAiLogicData->abilities[other] == ABILITY_LIGHTNING_ROD || gAiLogicData->abilities[other] == ABILITY_STORM_DRAIN))
+            gAiLogicData->abilities[other] = ABILITY_NONE;
+    struct SimulatedDamage damage = AI_CalcSoakChargeDamage(aiCalc, battlerAtk, battlerDef,
+        soakAttacker, soakDefender, charged);
+    memcpy(gAiLogicData->abilities, savedAbilities, sizeof(savedAbilities));
+    for (u32 i = 0; i < ARRAY_COUNT(battlers); i++)
+    {
+        enum BattlerId battler = battlers[i];
+        gBattleMons[battler].item = savedItem[i];
+        gAiLogicData->items[battler] = savedKnownItem[i];
+        gAiLogicData->holdEffects[battler] = savedHeld[i];
+    }
+    return damage;
 }
 
 struct SimulatedDamage AI_CalcDefeatistDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, bool32 healthy)

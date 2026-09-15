@@ -5322,6 +5322,16 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         }
         break;
     case EFFECT_DEFOG:
+        // Defog also clears terrain in modern battles. Reuse the same field
+        // judgment as terrain moves/Spinner instead of only pricing evasion.
+        if (GetConfig(B_DEFOG_EFFECT_CLEARING) >= GEN_8 && gFieldTimers.terrain != B_TERRAIN_NONE)
+        {
+            if (ShouldClearTerrain(battlerAtk, gFieldTimers.terrain)
+             || ShouldSetTerrain(battlerDef, gFieldTimers.terrain))
+                ADJUST_SCORE(GOOD_EFFECT);
+            if (ShouldSetTerrain(battlerAtk, gFieldTimers.terrain))
+                ADJUST_SCORE(-DECENT_EFFECT);
+        }
         if ((AreAnyHazardsOnSide(GetBattlerSide(battlerAtk)) && CountUsablePartyMons(battlerAtk) != 0)
             || (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_GOOD_FOG))
         {

@@ -183,9 +183,13 @@ void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool
             // Fire STAB remains usable beside the rival's Lightning Rod.
             preset.moves[3] = MOVE_FIRE_PUNCH;
             break;
+        case SPECIES_PRINPLUP:
+            preset.moves[0] = MOVE_HYDRO_PUMP;
+            break;
         case SPECIES_DRIZZILE:
-            // One Water attack is enough; give the rival a Grass matchup.
-            preset.moves[2] = MOVE_ICE_BEAM;
+            // Drizzile does not inherit Inteleon's Ice coverage. Preserve
+            // Sniper/Focus Energy and add legal Electric coverage and speed control.
+            preset.moves[2] = MOVE_MUD_SHOT;
             break;
         default:
             break;

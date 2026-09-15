@@ -182,7 +182,6 @@ JaggedPass_Text_VialChanseyAshenWoods:
 	.string "The HEAL BALL is still warm.$"
 
 JaggedPass_EventScript_Eric::
-	trainerbattle_double TRAINER_ERIC, JaggedPass_Text_EricIntro, JaggedPass_Text_EricDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_EricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -235,16 +234,6 @@ JaggedPass_EventScript_Autumn::
 	trainerbattle_double TRAINER_AUTUMN, JaggedPass_Text_AutumnIntro, JaggedPass_Text_AutumnDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_AutumnPostBattle, MSGBOX_AUTOCLOSE
 	end
-
-JaggedPass_Text_EricIntro:
-	.string "MT. CHIMNEY's JAGGED PASS…\p"
-	.string "Now this is what I've always wanted\n"
-	.string "in a mountain.\p"
-	.string "This jagged bumpiness…\n"
-	.string "It rocks my soul!$"
-
-JaggedPass_Text_EricDefeat:
-	.string "Losing left me bitter!$"
 
 JaggedPass_Text_EricPostBattle:
 	.string "Yes, I did lose at POKéMON…\p"

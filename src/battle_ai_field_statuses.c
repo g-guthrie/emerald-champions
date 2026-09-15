@@ -489,38 +489,88 @@ static enum FieldEffectOutcome BenefitsFromGrassyTerrain(enum BattlerId battler)
     return FIELD_EFFECT_NEUTRAL;
 }
 
-//TODO: when is misty terrain bad?
+// Evaluate the status opportunity without changing battle state or RNG. Native
+// CHECK_TRIGGER queries retain type, powder, ability and sleep-clause rules.
+static bool32 MistyBlocksStatusOpportunity(enum BattlerId actor, enum BattlerId target)
+{
+    if (!AI_IsBattlerGrounded(target) || gBattleMons[target].status1)
+        return FALSE;
+
+    enum Ability actorAbility = gAiLogicData->abilities[actor];
+    enum HoldEffect targetItem = gAiLogicData->holdEffects[target];
+    enum BattleTerrain savedTerrain = gFieldTimers.terrain;
+    bool32 opportunity = FALSE;
+    gFieldTimers.terrain = B_TERRAIN_NONE;
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        enum Move move = gBattleMons[actor].moves[slot];
+        enum MoveEffect status = GetMoveNonVolatileStatus(move);
+        if (!gBattleMons[actor].pp[slot] || !IsBattleMoveStatus(move)
+         || status == MOVE_EFFECT_NONE || GetMoveEffect(move) == EFFECT_REST)
+            continue;
+        enum Ability targetAbility = AI_GetMoldBreakerSanitizedAbility(actor,
+            actorAbility, gAiLogicData->abilities[target], targetItem, move);
+        if (targetAbility == ABILITY_GOOD_AS_GOLD || targetAbility == ABILITY_MAGIC_BOUNCE
+         || DoesSubstituteBlockMove(actor, target, move)
+         || (IsPowderMove(move) && !IsAffectedByPowderMove(target, targetAbility, targetItem))
+         || (status == MOVE_EFFECT_PARALYSIS && GetMoveType(move) == TYPE_ELECTRIC
+             && IS_BATTLER_OF_TYPE(target, TYPE_GROUND)))
+            continue;
+        if (CanSetNonVolatileStatus(actor, target, actorAbility, targetAbility, status, CHECK_TRIGGER))
+        {
+            opportunity = TRUE;
+            break;
+        }
+    }
+    gFieldTimers.terrain = savedTerrain;
+    return opportunity;
+}
+
+static bool32 MistyBlocksUsefulOrb(enum BattlerId battler)
+{
+    if (!AI_IsBattlerGrounded(battler) || gBattleMons[battler].status1)
+        return FALSE;
+    enum Ability ability = gAiLogicData->abilities[battler];
+    enum HoldEffect item = gAiLogicData->holdEffects[battler];
+    bool32 benefit = ability == ABILITY_GUTS || ability == ABILITY_QUICK_FEET
+        || ability == ABILITY_MARVEL_SCALE || HasMoveWithEffect(battler, EFFECT_FACADE)
+        || (ability == ABILITY_POISON_HEAL && item == HOLD_EFFECT_TOXIC_ORB)
+        || (ability == ABILITY_FLARE_BOOST && item == HOLD_EFFECT_FLAME_ORB);
+    if (!benefit || (item != HOLD_EFFECT_TOXIC_ORB && item != HOLD_EFFECT_FLAME_ORB))
+        return FALSE;
+    enum BattleTerrain savedTerrain = gFieldTimers.terrain;
+    gFieldTimers.terrain = B_TERRAIN_NONE;
+    bool32 possible = item == HOLD_EFFECT_TOXIC_ORB
+        ? CanBePoisoned(battler, battler, ability, ability)
+        : CanBeBurned(battler, battler, ability);
+    gFieldTimers.terrain = savedTerrain;
+    return possible;
+}
+
 static enum FieldEffectOutcome BenefitsFromMistyTerrain(enum BattlerId battler)
 {
-    if (DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_MISTY))
-        return FIELD_EFFECT_POSITIVE;
-
-    if (HasBattlerTerrainBoostMove(battler, B_TERRAIN_MISTY)
-     || HasBattlerTerrainBoostMove(GetPartnerBattler(battler), B_TERRAIN_MISTY))
-        return FIELD_EFFECT_POSITIVE;
-
     bool32 grounded = AI_IsBattlerGrounded(battler);
-    bool32 allyGrounded = FALSE;
-    if (HasPartner(battler))
-        allyGrounded = AI_IsBattlerGrounded(GetPartnerBattler(battler));
+    bool32 benefits = DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_MISTY)
+        || HasBattlerTerrainBoostMove(battler, B_TERRAIN_MISTY)
+        || (grounded && !gBattleMons[battler].status1 && gBattleMons[battler].volatiles.yawn);
+    bool32 harms = MistyBlocksUsefulOrb(battler);
 
-    if ((HasMoveWithEffect(GetBattlerLeftFoe(battler), EFFECT_REST) && AI_IsBattlerGrounded(GetBattlerLeftFoe(battler)))
-     || (HasMoveWithEffect(GetBattlerRightFoe(battler), EFFECT_REST) && AI_IsBattlerGrounded(GetBattlerRightFoe(battler))))
-        return FIELD_EFFECT_POSITIVE;
-
-    // harass dragons
-    if ((grounded || allyGrounded)
-     && (HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_DRAGON) || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_DRAGON)))
-        return FIELD_EFFECT_POSITIVE;
-
-    if ((grounded || allyGrounded)
-     && (HasNonVolatileMoveEffect(GetBattlerLeftFoe(battler), MOVE_EFFECT_SLEEP) || HasNonVolatileMoveEffect(GetBattlerRightFoe(battler), MOVE_EFFECT_SLEEP)))
-        return FIELD_EFFECT_POSITIVE;
-
-    if (grounded && (gBattleMons[battler].status1 & STATUS1_SLEEP || gBattleMons[battler].volatiles.yawn))
-        return FIELD_EFFECT_POSITIVE;
-
-    return FIELD_EFFECT_NEUTRAL;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(battler, foe))
+            continue;
+        bool32 foeGrounded = AI_IsBattlerGrounded(foe);
+        benefits |= MistyBlocksStatusOpportunity(foe, battler)
+            || (grounded && HasDamagingMoveOfType(foe, TYPE_DRAGON))
+            || (foeGrounded && HasMoveWithEffect(foe, EFFECT_REST));
+        harms |= MistyBlocksStatusOpportunity(battler, foe)
+            || (foeGrounded && HasDamagingMoveOfType(battler, TYPE_DRAGON));
+    }
+    // Mist protects against new status; it neither cures existing sleep nor
+    // improves an already activated Orb. Conflicting field uses remain neutral.
+    if (benefits == harms)
+        return FIELD_EFFECT_NEUTRAL;
+    return benefits ? FIELD_EFFECT_POSITIVE : FIELD_EFFECT_NEGATIVE;
 }
 
 static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler)

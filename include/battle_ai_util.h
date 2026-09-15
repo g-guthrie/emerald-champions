@@ -208,6 +208,19 @@ struct SimulatedDamage AI_CalcDamageSaveBattlers(enum Move move, enum BattlerId 
 bool32 IsAdditionalEffectBlocked(enum BattlerId battlerAtk, enum Ability abilityAtk, enum BattlerId battlerDef, enum Ability abilityDef, enum Move move);
 bool32 AI_ApplyMegaForm(enum BattlerId battler);
 struct SimulatedDamage AI_CalcDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef);
+// Native damage for the bounded Soak/Wind Power forecast. The temporary types
+// and charge state, damage-calculation globals and RNG are restored on return.
+struct SimulatedDamage AI_CalcSoakChargeDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk,
+    enum BattlerId battlerDef, bool32 soakAttacker, bool32 soakDefender, bool32 charged);
+struct SimulatedDamage AI_CalcRageFistDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk,
+    enum BattlerId battlerDef, u32 hits, bool32 soakAttacker, bool32 soakDefender);
+// Copied attacks resolve redirection separately; keep the actual recipient's
+// immunity, but do not let another redirector erase its raw damage anchor.
+struct SimulatedDamage AI_CalcDancerDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk,
+    enum BattlerId battlerDef, bool32 soakAttacker, bool32 soakDefender, bool32 charged,
+    bool32 withoutAttackerItem, bool32 withoutDefenderItem);
+// Conditional on a hit. Random/per-strike sequences retain a lower bound.
+u32 AI_GetMinimumRageHits(enum BattlerId actor, enum BattlerId target, enum Move move);
 // Raw native single-hit HP-power anchors, with resist Berries but without
 // guaranteed-survival clipping. Unsupported moves/gimmicks/HP return zero;
 // pending Mega forms must be materialized before requesting an anchor.

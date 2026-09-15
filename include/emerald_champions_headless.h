@@ -85,6 +85,7 @@ enum EmeraldChampionsHeadlessScenario
     EC_HEADLESS_SCENARIO_C14_SONG,
     EC_HEADLESS_SCENARIO_STUDIO_NEW,
     EC_HEADLESS_SCENARIO_STUDIO_RESUME,
+    EC_HEADLESS_SCENARIO_ECONOMY_SHOPS,
 };
 
 enum EmeraldChampionsHeadlessLeafState

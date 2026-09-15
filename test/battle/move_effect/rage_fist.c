@@ -396,11 +396,15 @@ SINGLE_BATTLE_TEST("Rage Fist number of hits is copied by Transform")
     }
 }
 
-SINGLE_BATTLE_TEST("Rage Fist base power is increased by 50 if user was hit and forces out")
+SINGLE_BATTLE_TEST("Rage Fist forced-switch power follows the configured generation")
 {
     s16 timesGotHit[2];
+    u32 generation;
+    PARAMETRIZE { generation = GEN_9; }
+    PARAMETRIZE { generation = GEN_CHAMPIONS; }
 
     GIVEN {
+        WITH_CONFIG(B_RAGE_FIST, generation);
         ASSUME(GetMoveEffect(MOVE_DRAGON_TAIL) == EFFECT_HIT_SWITCH_TARGET);
         PLAYER(SPECIES_REGIROCK);
         OPPONENT(SPECIES_REGIROCK);
@@ -417,7 +421,10 @@ SINGLE_BATTLE_TEST("Rage Fist base power is increased by 50 if user was hit and 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, opponent);
         HP_BAR(player, captureDamage: &timesGotHit[1]);
     } THEN {
-        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
+        if (generation == GEN_9)
+            EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
+        else
+            EXPECT_EQ(timesGotHit[0], timesGotHit[1]);
     }
 }
 

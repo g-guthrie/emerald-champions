@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Require exact book/native-party/Hoenn battle-call identity agreement.
+"""Require exact authoring/native-party/Hoenn battle-call identity agreement.
 
 Retired numeric IDs and empty metadata may remain for saves and Match Call;
 retired loadouts may not. Alternate FRLG maps/scripts are outside this build.
@@ -13,7 +13,7 @@ def strip_comments(text):
     return re.sub(r'//[^\n]*|/\*.*?\*/', '', text, flags=re.S)
 
 def main():
-    branches = teams.read_book(ROOT/'Game Blueprint/Emerald_Champions_Game_Book.txt')
+    branches = teams.read_teams()
     expected = {b.trainer for b in branches}
     source = strip_comments((ROOT/'src/data/trainers.party').read_text())
     parties = {block.split(' ===',1)[0] for block in re.split(r'^=== ',source,flags=re.M)[1:]
@@ -41,7 +41,7 @@ def main():
             errors.append(f'{label}: missing={sorted(expected-actual)} extra={sorted(actual-expected)}')
     if errors:
         raise SystemExit('\n'.join(errors))
-    print(f'PASS: exactly {len(expected)} book variants = native nonempty parties = Hoenn script battle IDs; no retired battle loadouts')
+    print(f'PASS: exactly {len(expected)} authored variants = native nonempty parties = Hoenn script battle IDs; no retired battle loadouts')
     print(f'PASS: all {len(gym_parties)} Gym trainer/leader parties contain six Pokemon')
 
 if __name__ == '__main__':

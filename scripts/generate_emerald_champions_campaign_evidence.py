@@ -315,9 +315,9 @@ def write_report() -> None:
     for encounter in rows:
         output += [
             "",
-            f"[{int(encounter['number']):04d}] {encounter['location']} — {encounter['requirement']}",
-            f"  Chapter: {encounter['chapter']}",
-            f"  Level cap: {encounter['cap']}",
+            f"[E{int(encounter['number']):04d}] {encounter['location']} — {encounter['requirement']}",
+            f"  Inherited chapter label (not an access gate): {encounter['chapter']}",
+            f"  Historical level-preview cap (use live cap plus offsets in play): {encounter['cap']}",
             f"  Battle question: {encounter['question']}",
             f"  First-loss lesson: {encounter['first_loss']}",
             f"  Strongest feature: {encounter['strongest']}",

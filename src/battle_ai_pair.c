@@ -29,6 +29,15 @@
 // a bounded, ability-aware shortlist; forced replacements retain every slot.
 #define PAIR_ACTIONS (MAX_MON_MOVES * MAX_BATTLERS_COUNT)
 #define PAIR_IDLE MAX_MON_MOVES
+#define PAIR_SOAK_ATTACKER 1
+#define PAIR_SOAK_TARGET 2
+#define PAIR_CHARGED 4
+#define PAIR_SOAK_CHARGE_STATES 8
+#define PAIR_DANCE_NO_ITEM 8
+#define PAIR_DANCE_TARGET_NO_ITEM 16
+#define PAIR_DANCE_STATES 32
+
+static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MOVE_REVELATION_DANCE, MOVE_AQUA_STEP, MOVE_FEATHER_DANCE};
 
 // Stop optional comparisons after one second, leaving room under the 1.2s
 // complete-decision limit for the current native calculation and restoration.
@@ -57,11 +66,11 @@ struct PairAction
     s16 planScore;
     s8 priority;
     enum Move executedMove; // Nature Power's called move; move/index remain the command.
+    u8 danceCopy; // Copied-dance index + 1; zero is an ordinary selected action.
 };
 
 struct PairBoard
 {
-    struct SwitchCandidateSnapshot *state;
     s32 reserveValue[NUM_BATTLE_SIDES];
     u8 owner[MAX_BATTLERS_COUNT];
     u8 side[MAX_BATTLERS_COUNT];
@@ -81,6 +90,38 @@ struct PairRetaliation
     u8 source;
     u8 chance; // Zero means no qualifying hit this turn.
     bool8 knownDamage; // Variable/unequal multi-strike sequences retain the old estimate.
+};
+
+struct PairRageCache
+{
+    struct SimulatedDamage damage[MAX_BATTLERS_COUNT][4][7];
+    u8 states[MAX_BATTLERS_COUNT];
+};
+
+struct PairDefenderItemCache
+{
+    u8 mask, count;
+    u8 stateIndex[PAIR_SOAK_CHARGE_STATES];
+    u8 moves;
+    struct SimulatedDamage damage[]; // Move slot, then compact field state.
+};
+
+struct PairDancerDamage
+{
+    struct SimulatedDamage damage;
+    uq4_12_t effectiveness;
+};
+
+struct PairDancerMoveCache
+{
+    u8 mask, count;
+    u8 stateIndex[PAIR_DANCE_STATES];
+    u8 accuracy[4][MAX_BATTLERS_COUNT];
+    u16 contact[4][MAX_BATTLERS_COUNT];
+    s8 targetDropDelta[2][MAX_BATTLERS_COUNT];
+    u8 screened[2];
+    enum Type type[2];
+    struct PairDancerDamage damage[];
 };
 
 struct PairEvaluation
@@ -125,11 +166,47 @@ struct PairEvaluation
     u8 conditionalBoostTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 itemBoost[MAX_BATTLERS_COUNT]; // Move-slot mask; other slots can use Plus/Minus.
     u8 itemRemovers; // Living actors with a currently usable Knock Off.
+    // Native damage anchors for type changes and Charge, only populated on
+    // boards with those actual possibilities. No native calls inside pair trials.
+    struct SimulatedDamage soakChargeDamage[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_BATTLERS_COUNT][PAIR_SOAK_CHARGE_STATES];
+    u8 soakChargeStates[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_BATTLERS_COUNT];
+    u8 soakTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    u8 soakRedirectors[MAX_BATTLERS_COUNT];
+    u8 soakable;
+    u8 chargeable;
+    u8 electricMoves[MAX_BATTLERS_COUNT][2]; // Original / Soaked attacker; native dynamic move typing.
+    u8 firstChoiceValue[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    struct PairDefenderItemCache *defenderItem[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
+    struct PairRageCache *rage[MAX_BATTLERS_COUNT];
+    u8 rageActors;
+    u8 rageHitCount[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_BATTLERS_COUNT];
+    s8 danceDelta[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_BATTLERS_COUNT][5]; // Atk/Def/SpDef/SpAtk/Speed.
+    struct PairDancerMoveCache *dancer[MAX_BATTLERS_COUNT][ARRAY_COUNT(sCopiedDances)];
+    enum Type revelationType[MAX_BATTLERS_COUNT][2];
     u8 protectChance[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 encoreGuardIndex[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // Move slot + 1; zero is ineligible.
     s8 encoreGuardPriority[MAX_BATTLERS_COUNT];
     bool8 sleepClause;
 };
+
+static u32 PairCopiedDance(enum Move move)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sCopiedDances); i++)
+        if (sCopiedDances[i] == move)
+            return i;
+    return ARRAY_COUNT(sCopiedDances);
+}
+
+static bool32 PairHasCopiedDance(const struct PairEvaluation *ev, enum BattlerId source, enum Move move)
+{
+    u32 dance = PairCopiedDance(move);
+    if (dance >= ARRAY_COUNT(sCopiedDances))
+        return FALSE;
+    for (enum BattlerId dancer = 0; dancer < gBattlersCount; dancer++)
+        if (dancer != source && ev->dancer[dancer][dance] != NULL)
+            return TRUE;
+    return FALSE;
+}
 
 static u32 PairMonValue(const struct PairBoard *board, enum BattleTrainer owner, u32 hp, u32 maxHp)
 {
@@ -318,6 +395,7 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
                 s32 score = GetBattlerSide(actor) == ev->side ? AI_ScoreMoveAgainstTarget(actor, scoreTarget, index) : AI_SCORE_DEFAULT;
                 if (actor != target && IsBattlerAlly(actor, target) && !IsBattleMoveStatus(executedMove)
                  && GetMoveEffect(executedMove) != EFFECT_HIT_ENEMY_HEAL_ALLY
+                 && !PairHasCopiedDance(ev, actor, executedMove)
                  && (score < AI_SCORE_DEFAULT || GetBattlerSide(actor) != ev->side))
                     continue;
                 // Enabling actions are retained even when their independent
@@ -343,6 +421,7 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
              && targetType != TARGET_SMART)
             {
                 if (!IsBattleMoveStatus(action->executedMove)
+                 && !(ev->soakable & ((1u << actor) | (1u << action->target)))
                  && gAiLogicData->effectiveness[actor][action->target][action->index] == UQ_4_12(0.0))
                     continue;
                 // The native opinion only penalizes a spent status. That
@@ -460,12 +539,11 @@ static bool32 PairWeatherSpeed(enum Ability ability, enum HoldEffect holdEffect,
         || (ability == ABILITY_SLUSH_RUSH && (weather & B_WEATHER_ICY_ANY));
 }
 
-static u32 PairWeatherPower(enum BattlerId actor, enum BattlerId target, enum Move move, u32 weather)
+static u32 PairWeatherPower(enum BattlerId actor, enum BattlerId target, enum Move move, enum Type type, u32 weather)
 {
     // Match native GetWeatherDamageModifier: the defender's Umbrella blocks
     // ordinary rain/sun damage modifiers. The attacker's Umbrella does not
     // remove the global weather's outgoing damage modifier.
-    enum Type type = GetMoveType(move);
     u32 attackerWeather = GetAttackerWeather(gAiLogicData->holdEffects[actor], gAiLogicData->abilities[actor], weather);
     if (GetMoveEffect(move) == EFFECT_HYDRO_STEAM && (attackerWeather & B_WEATHER_SUN))
         return 150;
@@ -1034,12 +1112,378 @@ static void CachePairConditionalBoost(struct PairEvaluation *ev, enum BattlerId 
         }
 }
 
+static bool32 PairCanSoak(enum BattlerId actor, enum BattlerId target)
+{
+    if (actor == target || !IsBattlerAlive(target) || GetActiveGimmick(target) == GIMMICK_TERA
+     || DoesSubstituteBlockMove(actor, target, MOVE_SOAK))
+        return FALSE;
+    enum Type types[3];
+    GetBattlerTypes(target, FALSE, types);
+    if (types[0] == TYPE_WATER && types[1] == TYPE_WATER)
+        return FALSE;
+    enum Ability ability = AI_GetMoldBreakerSanitizedAbility(actor, gAiLogicData->abilities[actor],
+        gAiLogicData->abilities[target], gAiLogicData->holdEffects[target], MOVE_SOAK);
+    if (ability == ABILITY_MULTITYPE || ability == ABILITY_RKS_SYSTEM
+     || ability == ABILITY_GOOD_AS_GOLD || ability == ABILITY_MAGIC_BOUNCE
+     || ability == ABILITY_WATER_ABSORB || ability == ABILITY_DRY_SKIN
+     || (ability == ABILITY_STORM_DRAIN && GetConfig(B_REDIRECT_ABILITY_IMMUNITY) >= GEN_5)
+     || gProtectStructs[target].bounceMove
+     || (GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7 && gAiLogicData->abilities[actor] == ABILITY_PRANKSTER
+         && IS_BATTLER_OF_TYPE(target, TYPE_DARK)))
+        return FALSE;
+    if (IsSemiInvulnerable(target, CHECK_ALL)
+     && !BreaksThroughSemiInvulnerableState(actor, target, gAiLogicData->abilities[actor], ability,
+         MOVE_SOAK, gBattleMons[target].volatiles.semiInvulnerable))
+        return FALSE;
+    if (AI_GetMovePriority(actor, gAiLogicData->abilities[actor], MOVE_SOAK) > 0 && !IsBattlerAlly(actor, target))
+    {
+        if (IsPsychicTerrainAffected(target, ability, gAiLogicData->holdEffects[target], gFieldTimers.terrain))
+            return FALSE;
+        for (enum BattlerId other = 0; other < gBattlersCount; other++)
+            if (IsBattlerAlive(other) && IsBattlerAlly(target, other) && IsDazzlingAbility(gAiLogicData->abilities[other]))
+                return FALSE;
+    }
+    return TRUE;
+}
+
+static void CachePairSoakChargeDamage(struct PairEvaluation *ev, enum BattlerId actor, u32 index, enum Move move)
+{
+    if (!IsBattlerAlive(actor) || IsBattleMoveStatus(move)
+     || IsMoveUnusable(index, gBattleMons[actor].moves[index], gAiLogicData->moveLimitations[actor]))
+        return;
+    if (ev->chargeable & (1u << actor))
+    {
+        struct BattlePokemon saved = gBattleMons[actor];
+        for (u32 soaked = 0; soaked < 2; soaked++)
+        {
+            if (soaked)
+                SET_BATTLER_TYPE(actor, TYPE_WATER);
+            if (GetDynamicMoveType(GetBattlerMon(actor), move, actor, gAiLogicData->abilities[actor],
+                    gAiLogicData->holdEffects[actor], MON_IN_BATTLE) == TYPE_ELECTRIC)
+                ev->electricMoves[actor][soaked] |= 1u << index;
+        }
+        gBattleMons[actor] = saved;
+    }
+    for (enum BattlerId target = 0; target < gBattlersCount; target++)
+    {
+        if (actor == target || !IsBattlerAlive(target))
+            continue;
+        u32 possible = (ev->soakable & (1u << actor) ? PAIR_SOAK_ATTACKER : 0)
+            | (ev->soakable & (1u << target) ? PAIR_SOAK_TARGET : 0)
+            | (ev->chargeable & (1u << actor) ? PAIR_CHARGED : 0);
+        if (!possible)
+            continue;
+        for (u32 state = 0; state < PAIR_SOAK_CHARGE_STATES; state++)
+        {
+            if (state & ~possible)
+                continue;
+            struct AiCalcValues calc = {.move = move, .weather = ev->weather, .terrain = gFieldTimers.terrain};
+            ev->soakChargeDamage[actor][index][target][state] = AI_CalcSoakChargeDamage(&calc, actor, target,
+                state & PAIR_SOAK_ATTACKER, state & PAIR_SOAK_TARGET, state & PAIR_CHARGED);
+            ev->soakChargeStates[actor][index][target] |= 1u << state;
+        }
+    }
+}
+
+static void CachePairRageDamage(struct PairEvaluation *ev, enum BattlerId actor, u32 index, enum Move move)
+{
+    if (GetMoveEffect(move) != EFFECT_RAGE_FIST || !IsBattlerAlive(actor)
+     || IsMoveUnusable(index, gBattleMons[actor].moves[index], gAiLogicData->moveLimitations[actor]))
+        return;
+    u32 current = min(6, GetBattlerPartyState(actor)->timesGotHit);
+    for (enum BattlerId target = 0; target < gBattlersCount; target++)
+    {
+        if (actor == target || !IsBattlerAlive(target))
+            continue;
+        u32 possible = (ev->soakable & (1u << actor) ? PAIR_SOAK_ATTACKER : 0)
+            | (ev->soakable & (1u << target) ? PAIR_SOAK_TARGET : 0);
+        for (u32 state = 0; state < 4; state++)
+        {
+            if (state & ~possible)
+                continue;
+            for (u32 hits = current; hits <= 6; hits++)
+            {
+                struct AiCalcValues calc = {.move = move, .weather = ev->weather, .terrain = gFieldTimers.terrain};
+                ev->rage[actor]->damage[target][state][hits] = AI_CalcRageFistDamage(&calc, actor, target, hits,
+                    state & PAIR_SOAK_ATTACKER, state & PAIR_SOAK_TARGET);
+            }
+            ev->rage[actor]->states[target] |= 1u << state;
+        }
+    }
+}
+
+// Native itemless anchors are needed only for defensive items that can be
+// consumed or removed on this board. Ordinary follow-up attacks share the same
+// item event state as copied attacks; no native query runs inside pair trials.
+static void CachePairDefenderItems(struct PairEvaluation *ev, u32 noActionMask)
+{
+    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+        for (enum BattlerId target = 0; target < gBattlersCount; target++)
+        {
+            struct PairDefenderItemCache *cache = ev->defenderItem[actor][target];
+            enum HoldEffect held = gAiLogicData->holdEffects[target];
+            bool32 removableDefense = (ev->itemRemovers & ~(1u << target))
+                && (held == HOLD_EFFECT_EVIOLITE || held == HOLD_EFFECT_ASSAULT_VEST
+                    || held == HOLD_EFFECT_DEEP_SEA_SCALE || held == HOLD_EFFECT_METAL_POWDER);
+            if (actor == target || !IsBattlerAlive(actor) || !IsBattlerAlive(target)
+             || (noActionMask & (1u << actor)) || (held != HOLD_EFFECT_RESIST_BERRY && !removableDefense))
+            {
+                if (cache != NULL)
+                    Free(cache);
+                ev->defenderItem[actor][target] = NULL;
+                continue;
+            }
+            u32 mask = (ev->soakable & (1u << actor) ? PAIR_SOAK_ATTACKER : 0)
+                | (ev->soakable & (1u << target) ? PAIR_SOAK_TARGET : 0)
+                | (ev->chargeable & (1u << actor) ? PAIR_CHARGED : 0);
+            u32 count = 1;
+            for (u32 bit = 1; bit <= PAIR_CHARGED; bit <<= 1)
+                if (mask & bit)
+                    count *= 2;
+            if (cache == NULL || cache->mask != mask)
+            {
+                if (cache != NULL)
+                    Free(cache);
+                cache = AllocZeroed(sizeof(*cache) + MAX_MON_MOVES * count * sizeof(cache->damage[0]));
+                ev->defenderItem[actor][target] = cache;
+            }
+            else
+                memset(cache, 0, sizeof(*cache) + MAX_MON_MOVES * count * sizeof(cache->damage[0]));
+            if (cache == NULL)
+                continue;
+            cache->mask = mask;
+            cache->count = count;
+            u32 offset = 0;
+            for (u32 state = 0; state < PAIR_SOAK_CHARGE_STATES; state++)
+                if (!(state & ~mask))
+                    cache->stateIndex[state] = offset++;
+            enum Item actualItem = gBattleMons[target].item;
+            enum Item knownItem = gAiLogicData->items[target];
+            gBattleMons[target].item = ITEM_NONE;
+            gAiLogicData->items[target] = ITEM_NONE;
+            gAiLogicData->holdEffects[target] = HOLD_EFFECT_NONE;
+            for (u32 index = 0; index < MAX_MON_MOVES; index++)
+            {
+                enum Move move = gBattleMons[actor].moves[index];
+                if (IsMoveUnusable(index, move, gAiLogicData->moveLimitations[actor]))
+                    continue;
+                if (GetMoveEffect(move) == EFFECT_NATURE_POWER)
+                    move = GetNaturePowerMove();
+                if (IsBattleMoveStatus(move))
+                    continue;
+                cache->moves |= 1u << index;
+                for (u32 state = 0; state < PAIR_SOAK_CHARGE_STATES; state++)
+                    if (!(state & ~mask))
+                    {
+                        struct AiCalcValues calc = {.move = move, .weather = ev->weather, .terrain = gFieldTimers.terrain};
+                        cache->damage[index * count + cache->stateIndex[state]] = AI_CalcSoakChargeDamage(&calc,
+                            actor, target, state & PAIR_SOAK_ATTACKER, state & PAIR_SOAK_TARGET, state & PAIR_CHARGED);
+                    }
+            }
+            gBattleMons[target].item = actualItem;
+            gAiLogicData->items[target] = knownItem;
+            gAiLogicData->holdEffects[target] = held;
+        }
+}
+
+static u32 PairTargetDropStat(enum Move move);
+
+static s8 PairCacheTargetDrop(enum BattlerId actor, enum BattlerId target, enum Move move)
+{
+    u32 targetDropStat = PairTargetDropStat(move);
+    if (!targetDropStat)
+        return 0;
+    struct BattleCalcValues cv = {.battlerAtk = actor, .battlerDef = target, .move = move, .moveEffect = GetMoveEffect(move)};
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        cv.holdEffects[battler] = gAiLogicData->holdEffects[battler];
+        cv.abilities[battler] = AI_GetMoldBreakerSanitizedAbility(actor, gAiLogicData->abilities[actor],
+            gAiLogicData->abilities[battler], cv.holdEffects[battler], move);
+    }
+    if ((IsSoundMove(move) && cv.abilities[target] == ABILITY_SOUNDPROOF)
+     || DoesSubstituteBlockMove(actor, target, move)
+     || (!IsBattleMoveStatus(move)
+         && (IsSheerForceAffected(move, cv.abilities[actor])
+             || IsAdditionalEffectBlocked(actor, cv.abilities[actor], target, cv.abilities[target], move))))
+        return 0;
+    if (IsBattleMoveStatus(move))
+    {
+        // Primary drops are not blocked by Covert Cloak or
+        // Shield Dust, but reflected/status-immune targets get no
+        // fictitious defensive credit in this bounded forecast.
+        if (cv.abilities[target] == ABILITY_GOOD_AS_GOLD
+         || cv.abilities[target] == ABILITY_MAGIC_BOUNCE || gProtectStructs[target].bounceMove
+         || (GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7
+             && cv.abilities[actor] == ABILITY_PRANKSTER && IS_BATTLER_OF_TYPE(target, TYPE_DARK))
+         || (IsSemiInvulnerable(target, CHECK_ALL)
+             && !BreaksThroughSemiInvulnerableState(actor, target, cv.abilities[actor], cv.abilities[target],
+                 move, gBattleMons[target].volatiles.semiInvulnerable)))
+            return 0;
+        if (AI_GetMovePriority(actor, cv.abilities[actor], move) > 0)
+        {
+            bool32 blocked = IsPsychicTerrainAffected(target, cv.abilities[target], cv.holdEffects[target], gFieldTimers.terrain);
+            for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
+                if (IsBattlerAlive(ally) && IsBattlerAlly(target, ally) && IsDazzlingAbility(cv.abilities[ally]))
+                    blocked = TRUE;
+            if (blocked)
+                return 0;
+        }
+    }
+    const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, 0);
+    if (!MoveEffectIsGuaranteed(actor, cv.abilities[actor], additional))
+        return 0;
+    struct StatChange st = {.onlyChecking = TRUE, .stat = targetDropStat};
+    st.stage = GetAdjustedStatStage(-GetStatStage(targetDropStat, additional), cv.abilities[target], FALSE);
+    if (CanStatChange(&cv, &st))
+        // Keep eligibility per move: sound Snarl bypasses Substitute,
+        // while Struggle Bug does not, even on the same moveset.
+        return st.stage;
+    return 0;
+}
+
+static void CachePairCopiedDancers(struct PairEvaluation *ev, u32 noActionMask)
+{
+    u8 sources[MAX_BATTLERS_COUNT] = {0};
+    for (enum BattlerId source = 0; source < gBattlersCount; source++)
+        if (IsBattlerAlive(source) && !(noActionMask & (1u << source)))
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+            {
+                enum Move move = gBattleMons[source].moves[slot];
+                u32 dance = PairCopiedDance(move);
+                if (dance < ARRAY_COUNT(sCopiedDances) && !IsMoveUnusable(slot, move, gAiLogicData->moveLimitations[source]))
+                    sources[source] |= 1u << dance;
+            }
+    for (enum BattlerId dancer = 0; dancer < gBattlersCount; dancer++)
+    {
+        u32 needed = 0;
+        if (IsBattlerAlive(dancer) && gAiLogicData->abilities[dancer] == ABILITY_DANCER)
+            for (enum BattlerId source = 0; source < gBattlersCount; source++)
+                if (source != dancer)
+                    needed |= sources[source];
+        for (u32 dance = 0; dance < ARRAY_COUNT(sCopiedDances); dance++)
+        {
+            struct PairDancerMoveCache *cache = ev->dancer[dancer][dance];
+            if (!(needed & (1u << dance)))
+            {
+                if (cache != NULL)
+                    Free(cache);
+                ev->dancer[dancer][dance] = NULL;
+                continue;
+            }
+            bool32 targetItem = FALSE;
+            for (enum BattlerId target = 0; target < gBattlersCount; target++)
+                if (target != dancer && IsBattlerAlive(target) && gBattleMons[target].item != ITEM_NONE)
+                    targetItem = TRUE;
+            u32 mask = (ev->soakable & (1u << dancer) ? PAIR_SOAK_ATTACKER : 0)
+                | (ev->soakable & ~(1u << dancer) ? PAIR_SOAK_TARGET : 0)
+                | (ev->chargeable & (1u << dancer) ? PAIR_CHARGED : 0)
+                | (gBattleMons[dancer].item != ITEM_NONE ? PAIR_DANCE_NO_ITEM : 0)
+                | (targetItem ? PAIR_DANCE_TARGET_NO_ITEM : 0);
+            if (IsBattleMoveStatus(sCopiedDances[dance]))
+                mask = 0;
+            u32 count = 1;
+            for (u32 bit = 1; bit <= PAIR_DANCE_TARGET_NO_ITEM; bit <<= 1)
+                if (mask & bit)
+                    count *= 2;
+            if (cache == NULL || cache->mask != mask)
+            {
+                if (cache != NULL)
+                    Free(cache);
+                cache = AllocZeroed(sizeof(*cache) + MAX_BATTLERS_COUNT * count * sizeof(cache->damage[0]));
+                ev->dancer[dancer][dance] = cache;
+            }
+            else
+                memset(cache, 0, sizeof(*cache) + MAX_BATTLERS_COUNT * count * sizeof(cache->damage[0]));
+            if (cache == NULL)
+                continue; // Optional forecast must not crash a crowded hypothetical board.
+            cache->mask = mask;
+            cache->count = count;
+            u32 offset = 0;
+            for (u32 state = 0; state < PAIR_DANCE_STATES; state++)
+                if (!(state & ~mask))
+                    cache->stateIndex[state] = offset++;
+            enum Move move = sCopiedDances[dance];
+            struct BattlePokemon saved = gBattleMons[dancer];
+            enum Item savedKnown = gAiLogicData->items[dancer];
+            enum HoldEffect savedHeld = gAiLogicData->holdEffects[dancer];
+            enum BattlerId savedItemBattler = gPotentialItemEffectBattler;
+            for (u32 soaked = 0; soaked < 2; soaked++)
+            {
+                if (soaked)
+                    SET_BATTLER_TYPE(dancer, TYPE_WATER);
+                cache->type[soaked] = GetDynamicMoveType(GetBattlerMon(dancer), move, dancer,
+                    gAiLogicData->abilities[dancer], savedHeld, MON_IN_BATTLE);
+            }
+            gBattleMons[dancer] = saved;
+            for (u32 removed = 0; removed < 4; removed++)
+            {
+                gBattleMons[dancer].item = removed & 1 ? ITEM_NONE : saved.item;
+                gAiLogicData->items[dancer] = removed & 1 ? ITEM_NONE : savedKnown;
+                gAiLogicData->holdEffects[dancer] = removed & 1 ? HOLD_EFFECT_NONE : savedHeld;
+                for (enum BattlerId target = 0; target < gBattlersCount; target++)
+                    if (target != dancer && IsBattlerAlive(target))
+                    {
+                        enum Item targetItem = gBattleMons[target].item;
+                        enum Item targetKnown = gAiLogicData->items[target];
+                        enum HoldEffect targetHeld = gAiLogicData->holdEffects[target];
+                        if (removed & 2)
+                        {
+                            gBattleMons[target].item = ITEM_NONE;
+                            gAiLogicData->items[target] = ITEM_NONE;
+                            gAiLogicData->holdEffects[target] = HOLD_EFFECT_NONE;
+                        }
+                        cache->targetDropDelta[!!(removed & 2)][target] = PairCacheTargetDrop(dancer, target, move);
+                        cache->accuracy[removed][target] = AI_GetMoveAccuracy(gAiLogicData, dancer, target, move);
+                        cache->contact[removed][target] = AI_GetContactDamage(dancer, target, move,
+                            gAiLogicData->abilities[dancer], gAiLogicData->holdEffects[dancer],
+                            gAiLogicData->holdEffects[target], gAiLogicData->abilities[target]);
+                        if (AI_CanScreenReduceDamage(dancer, target, move))
+                            cache->screened[removed & 1] |= 1u << target;
+                        gBattleMons[target].item = targetItem;
+                        gAiLogicData->items[target] = targetKnown;
+                        gAiLogicData->holdEffects[target] = targetHeld;
+                    }
+            }
+            gBattleMons[dancer] = saved;
+            gAiLogicData->items[dancer] = savedKnown;
+            gAiLogicData->holdEffects[dancer] = savedHeld;
+            gPotentialItemEffectBattler = savedItemBattler;
+            for (enum BattlerId target = 0; target < gBattlersCount; target++)
+                if (target != dancer && IsBattlerAlive(target))
+                    for (u32 state = 0; state < PAIR_DANCE_STATES; state++)
+                    {
+                        if (state & ~mask)
+                            continue;
+                        struct AiCalcValues calc = {.move = move, .weather = ev->weather, .terrain = gFieldTimers.terrain};
+                        struct PairDancerDamage *entry = &cache->damage[target * count + cache->stateIndex[state]];
+                        entry->damage = AI_CalcDancerDamage(&calc, dancer, target,
+                            state & PAIR_SOAK_ATTACKER, state & PAIR_SOAK_TARGET, state & PAIR_CHARGED,
+                            state & PAIR_DANCE_NO_ITEM, state & PAIR_DANCE_TARGET_NO_ITEM);
+                        entry->effectiveness = calc.typeEffectiveness;
+                    }
+        }
+    }
+}
+
+static const struct PairDancerDamage *PairCopiedDamage(const struct PairDancerMoveCache *cache,
+    enum BattlerId actor, enum BattlerId target, u32 soaked, u32 charged, u32 usedItems)
+{
+    u32 state = ((soaked & (1u << actor) ? PAIR_SOAK_ATTACKER : 0)
+        | (soaked & (1u << target) ? PAIR_SOAK_TARGET : 0)
+        | (charged & (1u << actor) ? PAIR_CHARGED : 0)
+        | (usedItems & (1u << actor) ? PAIR_DANCE_NO_ITEM : 0)
+        | (usedItems & (1u << target) ? PAIR_DANCE_TARGET_NO_ITEM : 0)) & cache->mask;
+    return &cache->damage[target * cache->count + cache->stateIndex[state]];
+}
+
 static struct SimulatedDamage PairConditionalBoostDamage(const struct PairEvaluation *ev, enum BattlerId actor,
     enum BattlerId target, u32 index, u32 partnerChance)
 {
     const struct PairDamageRange *strong = &ev->conditionalBoosted[actor][index][target];
     const struct PairDamageRange *weak = &ev->conditionalUnboosted[actor][index][target];
     struct SimulatedDamage damage = {
+        .affectsTarget = gAiLogicData->simulatedDmg[actor][target][index].affectsTarget,
+        .consumedItem = gAiLogicData->simulatedDmg[actor][target][index].consumedItem,
         .minimum = partnerChance == 100 ? strong->minimum : weak->minimum,
         .median = (strong->median * partnerChance + weak->median * (100 - partnerChance)) / 100,
         .maximum = partnerChance == 0 ? weak->maximum : strong->maximum,
@@ -1104,6 +1548,8 @@ static struct SimulatedDamage PairHpPowerDamage(const struct PairEvaluation *ev,
     u32 lowPower = max(1, highPower / gBattleMons[actor].maxHP);
     u32 power = max(1, min(hp, gBattleMons[actor].maxHP) * highPower / gBattleMons[actor].maxHP);
     struct SimulatedDamage damage = {
+        .affectsTarget = gAiLogicData->simulatedDmg[actor][target][index].affectsTarget,
+        .consumedItem = gAiLogicData->simulatedDmg[actor][target][index].consumedItem,
         .minimum = PairInterpolateHpDamage(low->minimum, high->minimum, power, lowPower, highPower),
         .median = PairInterpolateHpDamage(low->median, high->median, power, lowPower, highPower),
         .maximum = PairInterpolateHpDamage(low->maximum, high->maximum, power, lowPower, highPower),
@@ -1118,6 +1564,7 @@ static u32 PairTargetDropStat(enum Move move)
     switch (move)
     {
     case MOVE_CHARM:
+    case MOVE_FEATHER_DANCE:
     case MOVE_LUNGE:
         return STAT_ATK;
     case MOVE_FAKE_TEARS:
@@ -1127,6 +1574,7 @@ static u32 PairTargetDropStat(enum Move move)
     case MOVE_LUMINA_CRASH:
         return STAT_SPDEF;
     case MOVE_SNARL:
+    case MOVE_EERIE_IMPULSE:
     case MOVE_STRUGGLE_BUG:
     case MOVE_SKITTER_SMACK:
         return STAT_SPATK;
@@ -1156,10 +1604,77 @@ static enum Stat PairSelfDefenseStat(enum Move move)
     }
 }
 
+static bool32 PairSetupDance(enum Move move)
+{
+    return IsDanceMove(move) && (GetMoveEffect(move) == EFFECT_STAT_CHANGE || GetMoveEffect(move) == EFFECT_CLANGOROUS_SOUL)
+        && GetMoveTarget(move) == TARGET_USER && IsStatRaisingMove(move);
+}
+
+static void CachePairDance(struct PairEvaluation *ev, enum BattlerId source, u32 index, enum Move move)
+{
+    if (!PairSetupDance(move))
+        return;
+    const enum Stat stats[] = {STAT_ATK, STAT_DEF, STAT_SPDEF, STAT_SPATK, STAT_SPEED};
+    for (enum BattlerId receiver = 0; receiver < gBattlersCount; receiver++)
+    {
+        if (!IsBattlerAlive(receiver) || (receiver != source && gAiLogicData->abilities[receiver] != ABILITY_DANCER))
+            continue;
+        struct BattleCalcValues cv = {.battlerAtk = receiver, .battlerDef = receiver,
+            .move = move, .moveEffect = GetMoveEffect(move)};
+        memcpy(cv.abilities, gAiLogicData->abilities, sizeof(cv.abilities));
+        memcpy(cv.holdEffects, gAiLogicData->holdEffects, sizeof(cv.holdEffects));
+        for (u32 stat = 0; stat < ARRAY_COUNT(stats); stat++)
+        {
+            struct StatChange change = {.onlyChecking = TRUE, .certain = TRUE, .stat = stats[stat]};
+            change.stage = GetAdjustedStatStage(GetStatStage(stats[stat], GetMoveAdditionalEffectById(move, 0)),
+                cv.abilities[receiver], FALSE);
+            // Cache native permission, not the starting cap. Earlier actions
+            // can lower a maxed stat before this dance is performed.
+            u8 savedStage = gBattleMons[receiver].statStages[stats[stat]];
+            gBattleMons[receiver].statStages[stats[stat]] = DEFAULT_STAT_STAGE;
+            if (change.stage && CanStatChange(&cv, &change))
+                ev->danceDelta[source][index][receiver][stat] = change.stage;
+            gBattleMons[receiver].statStages[stats[stat]] = savedStage;
+        }
+    }
+}
+
 static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor, u32 index)
 {
     enum Move move = gBattleMons[actor].moves[index];
     enum Move executedMove = GetMoveEffect(move) == EFFECT_NATURE_POWER ? GetNaturePowerMove() : move;
+    CachePairDance(ev, actor, index, executedMove);
+    if (GetMoveEffect(executedMove) == EFFECT_REVELATION_DANCE)
+    {
+        struct BattlePokemon saved = gBattleMons[actor];
+        for (u32 changed = 0; changed < 2; changed++)
+        {
+            if (changed)
+                SET_BATTLER_TYPE(actor, TYPE_WATER);
+            ev->revelationType[actor][changed] = GetDynamicMoveType(GetBattlerMon(actor), executedMove, actor,
+                gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor], MON_IN_BATTLE);
+        }
+        gBattleMons[actor] = saved;
+    }
+    if (HasChoiceEffect(actor) && (gBattleStruct->choicedMove[actor] == MOVE_NONE
+        || gBattleStruct->choicedMove[actor] == MOVE_UNAVAILABLE)
+     && gBattleMons[actor].pp[index] > 1 && !IsBattleMoveStatus(executedMove)
+     && GetMoveEffect(executedMove) != EFFECT_HIT_ESCAPE
+     && executedMove != MOVE_FAKE_OUT && executedMove != MOVE_FIRST_IMPRESSION)
+    {
+        enum BattlerId partner = GetPartnerBattler(actor);
+        bool32 harmsPartner = PairSpread(executedMove) && GetMoveTarget(executedMove) == TARGET_FOES_AND_ALLY
+            && IsBattlerAlive(partner) && gAiLogicData->simulatedDmg[actor][partner][index].maximum;
+        if (!harmsPartner)
+            for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+                if (IsBattlerAlive(foe) && !IsBattlerAlly(actor, foe))
+                    // Small future commitment value, not damage through Protect
+                    // or a fictitious KO. First-lock ties should not lock a
+                    // resisted move just because every current target guards.
+                    ev->firstChoiceValue[actor][index] += 8
+                        * min(gBattleMons[foe].maxHP, gAiLogicData->simulatedDmg[actor][foe][index].median)
+                        / max(1, gBattleMons[foe].maxHP);
+    }
     enum Stat defenseStat = PairSelfDefenseStat(move);
     if (defenseStat != STAT_HP && IsBattlerAlive(actor))
     {
@@ -1192,6 +1707,8 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
     CachePairWeatherAccuracy(ev, actor, index, executedMove);
     CachePairHpPower(ev, actor, index, executedMove);
     CachePairConditionalBoost(ev, actor, index, executedMove);
+    CachePairSoakChargeDamage(ev, actor, index, executedMove);
+    CachePairRageDamage(ev, actor, index, executedMove);
     if (AI_MoveBreaksScreensBeforeDamage(executedMove))
         ev->screenBreakerMoves[actor] |= 1u << index;
     for (enum BattlerId target = 0; target < gBattlersCount; target++)
@@ -1200,6 +1717,8 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
             ev->contactDamage[actor][index][target] = AI_GetContactDamage(actor, target, executedMove,
                 gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor], gAiLogicData->holdEffects[target],
                 gAiLogicData->abilities[target]);
+            if ((ev->rageActors & (1u << target)) && !IsBattleMoveStatus(executedMove))
+                ev->rageHitCount[actor][index][target] = AI_GetMinimumRageHits(actor, target, executedMove);
             if (AI_CanScreenReduceDamage(actor, target, executedMove))
                 ev->screenTargets[actor][index] |= 1u << target;
         }
@@ -1287,44 +1806,7 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
             continue;
         if (targetDropStat)
         {
-            if ((IsSoundMove(move) && cv.abilities[target] == ABILITY_SOUNDPROOF)
-             || DoesSubstituteBlockMove(actor, target, move)
-             || (!IsBattleMoveStatus(move)
-                 && (IsSheerForceAffected(move, cv.abilities[actor])
-                     || IsAdditionalEffectBlocked(actor, cv.abilities[actor], target, cv.abilities[target], move))))
-                continue;
-            if (IsBattleMoveStatus(move))
-            {
-                // Primary drops are not blocked by Covert Cloak or
-                // Shield Dust, but reflected/status-immune targets get no
-                // fictitious defensive credit in this bounded forecast.
-                if (cv.abilities[target] == ABILITY_GOOD_AS_GOLD
-                 || cv.abilities[target] == ABILITY_MAGIC_BOUNCE || gProtectStructs[target].bounceMove
-                 || (GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7
-                     && cv.abilities[actor] == ABILITY_PRANKSTER && IS_BATTLER_OF_TYPE(target, TYPE_DARK))
-                 || (IsSemiInvulnerable(target, CHECK_ALL)
-                     && !BreaksThroughSemiInvulnerableState(actor, target, cv.abilities[actor], cv.abilities[target],
-                         move, gBattleMons[target].volatiles.semiInvulnerable)))
-                    continue;
-                if (AI_GetMovePriority(actor, cv.abilities[actor], move) > 0)
-                {
-                    bool32 blocked = IsPsychicTerrainAffected(target, cv.abilities[target], cv.holdEffects[target], gFieldTimers.terrain);
-                    for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
-                        if (IsBattlerAlive(ally) && IsBattlerAlly(target, ally) && IsDazzlingAbility(cv.abilities[ally]))
-                            blocked = TRUE;
-                    if (blocked)
-                        continue;
-                }
-            }
-            const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, 0);
-            if (!MoveEffectIsGuaranteed(actor, cv.abilities[actor], additional))
-                continue;
-            struct StatChange st = {.onlyChecking = TRUE, .stat = targetDropStat};
-            st.stage = GetAdjustedStatStage(-GetStatStage(targetDropStat, additional), cv.abilities[target], FALSE);
-            if (CanStatChange(&cv, &st))
-                // Keep eligibility per move: sound Snarl bypasses Substitute,
-                // while Struggle Bug does not, even on the same moveset.
-                ev->targetDropDelta[actor][index][target] = st.stage;
+            ev->targetDropDelta[actor][index][target] = PairCacheTargetDrop(actor, target, move);
             continue;
         }
         // Primary status effects need their own immunity checks, not damage's
@@ -1562,6 +2044,61 @@ static void PairChangeStat(u8 *stage, u32 *modifier, s32 delta, u32 chance, bool
     *stage = next;
 }
 
+static bool32 PairApplyDance(struct PairEvaluation *ev, enum BattlerId source, u32 index, enum BattlerId receiver,
+    u8 stages[MAX_BATTLERS_COUNT][4], u32 modifiers[MAX_BATTLERS_COUNT][4], u8 *speedStage,
+    u32 *speed, const struct PairAction *actions, u32 *usedItems, u32 *hp)
+{
+    enum Move move = gBattleMons[source].moves[index];
+    u32 cost = GetMoveEffect(move) == EFFECT_CLANGOROUS_SOUL
+        ? max(1, PairNonDynamaxHP(ev, receiver, gBattleMons[receiver].maxHP) / 3) : 0;
+    if (hp[receiver] <= cost)
+        return FALSE;
+    bool32 changed = FALSE;
+    for (u32 stat = 0; stat < 4; stat++)
+    {
+        u8 old = stages[receiver][stat];
+        PairChangeStat(&stages[receiver][stat], &modifiers[receiver][stat],
+            ev->danceDelta[source][index][receiver][stat], 100, stat == 1 || stat == 2);
+        changed |= old != stages[receiver][stat];
+    }
+    u32 oldSpeed = speedStage[receiver];
+    u32 nextSpeed = max(MIN_STAT_STAGE, min(MAX_STAT_STAGE,
+        (s32)oldSpeed + ev->danceDelta[source][index][receiver][4]));
+    changed |= nextSpeed != oldSpeed;
+    bool32 herb = FALSE;
+    if (changed && gAiLogicData->holdEffects[receiver] == HOLD_EFFECT_WHITE_HERB
+     && !(*usedItems & (1u << receiver)))
+    {
+        for (u32 stat = 0; stat < 4; stat++)
+            if (stages[receiver][stat] < DEFAULT_STAT_STAGE)
+            {
+                PairChangeStat(&stages[receiver][stat], &modifiers[receiver][stat],
+                    DEFAULT_STAT_STAGE - stages[receiver][stat], 100, stat == 1 || stat == 2);
+                herb = TRUE;
+            }
+        if (nextSpeed < DEFAULT_STAT_STAGE)
+        {
+            nextSpeed = DEFAULT_STAT_STAGE;
+            herb = TRUE;
+        }
+    }
+    speed[receiver] = speed[receiver] * gStatStageRatios[nextSpeed][0] * gStatStageRatios[oldSpeed][1]
+        / (gStatStageRatios[nextSpeed][1] * gStatStageRatios[oldSpeed][0]);
+    speedStage[receiver] = nextSpeed;
+    if (herb)
+    {
+        *usedItems |= 1u << receiver;
+        if (gAiLogicData->abilities[receiver] == ABILITY_UNBURDEN && !gBattleMons[receiver].volatiles.unburdenActive)
+            speed[receiver] *= 2;
+    }
+    if (changed && cost)
+    {
+        hp[receiver] -= cost;
+        PairTryHealingBerry(ev, receiver, hp, speed, usedItems);
+    }
+    return changed;
+}
+
 static void PairApplyStatChanges(struct PairEvaluation *ev, enum BattlerId actor, enum BattlerId target,
     enum Move move, u8 stages[MAX_BATTLERS_COUNT][4], u32 modifiers[MAX_BATTLERS_COUNT][4], u32 chance, u32 *usedItems)
 {
@@ -1752,6 +2289,83 @@ static bool32 PairMayBeSnatched(enum BattlerId actor, const struct PairAction *a
     return FALSE;
 }
 
+static bool32 PairDancerCanAct(enum BattlerId actor, enum Move move, const u32 *hp,
+    u32 stopped, u32 newSleep, u32 newTaunt)
+{
+    return hp[actor] && !(stopped & (1u << actor)) && !(newSleep & (1u << actor))
+        && (gBattleMons[actor].status1 & STATUS1_SLEEP) <= 1
+        && (!(gBattleMons[actor].status1 & STATUS1_FREEZE) || MoveThawsUser(move))
+        && !gBattleMons[actor].volatiles.rechargeTimer && !gBattleMons[actor].volatiles.flinched
+        && gBattleMons[actor].volatiles.disabledMove != move
+        && !IsSemiInvulnerable(actor, CHECK_ALL) && !GetImprisonedMovesCount(actor, move)
+        && (!IsBattleMoveStatus(move) || (!(newTaunt & (1u << actor)) && !gBattleMons[actor].volatiles.tauntTimer))
+        && (!IsSoundMove(move) || !gBattleMons[actor].volatiles.throatChopTimer);
+}
+
+static void PairCopyTargetWeights(const struct PairDancerMoveCache *cache, enum BattlerId actor,
+    enum BattlerId source, enum Move move, const u8 *sourceWeights, const u32 *hp, const u32 *speed,
+    const struct PairAction *actions, const enum BattlerId *redirect, bool32 trickRoom,
+    u32 soaked, u32 usedItems, u8 *weights)
+{
+    enum BattleSide foeSide = GetBattlerSide(actor) ^ 1;
+    enum Type type = cache->type[!!(soaked & (1u << actor))];
+    u32 total = 0, foes = 0;
+    for (enum BattlerId target = 0; target < gBattlersCount; target++)
+    {
+        total += sourceWeights[target];
+        if (hp[target] && !IsBattlerAlly(actor, target))
+            foes++;
+    }
+    for (enum BattlerId original = 0; original < gBattlersCount; original++)
+    {
+        enum BattlerId target = original;
+        u32 chance = sourceWeights[original];
+        if (GetMoveTarget(move) == TARGET_RANDOM)
+        {
+            if (!hp[target] || IsBattlerAlly(actor, target) || !foes)
+                continue;
+            chance = total / foes;
+        }
+        else
+        {
+            if (!chance)
+                continue;
+            if (IsBattlerAlly(actor, target))
+                target = source;
+            enum BattlerId follow = redirect[foeSide];
+            bool32 powder = follow < gBattlersCount
+                && (gSideTimers[foeSide].followmePowder || IsPowderMove(actions[follow].move));
+            enum HoldEffect held = usedItems & (1u << actor) ? HOLD_EFFECT_NONE : gAiLogicData->holdEffects[actor];
+            bool32 powderApplies = soaked & (1u << actor)
+                ? held != HOLD_EFFECT_SAFETY_GOGGLES
+                : IsAffectedByPowderMove(actor, gAiLogicData->abilities[actor], held);
+            if (!IsBattlerAlly(actor, target) && follow < gBattlersCount && hp[follow]
+             && (!powder || powderApplies))
+                target = follow;
+        }
+        // Native Follow Me suppresses ability redirection. Otherwise the
+        // earliest eligible Rod/Drain owner receives the copied Water/Electric move.
+        if (redirect[foeSide] >= gBattlersCount && !gSideTimers[foeSide].followmeTimer)
+        {
+            enum Ability redirects = type == TYPE_ELECTRIC ? ABILITY_LIGHTNING_ROD
+                : type == TYPE_WATER ? ABILITY_STORM_DRAIN : ABILITY_NONE;
+            enum BattlerId found = MAX_BATTLERS_COUNT;
+            if (redirects != ABILITY_NONE && gAiLogicData->abilities[target] != redirects)
+                for (enum BattlerId other = 0; other < gBattlersCount; other++)
+                    if (other != actor && hp[other] && gAiLogicData->abilities[other] == redirects
+                     && (B_REDIRECT_ABILITY_ALLIES >= GEN_4 || !IsBattlerAlly(actor, other))
+                     && (found == MAX_BATTLERS_COUNT || PairActsBefore(other, &actions[other], found, &actions[found], speed, trickRoom)))
+                        found = other;
+            if (found < gBattlersCount)
+                target = found;
+        }
+        if (!hp[target] && !IsBattlerAlly(actor, target))
+            target = GetPartnerBattler(target);
+        if (hp[target])
+            weights[target] = min(100, weights[target] + chance);
+    }
+}
+
 static void PairApplyPopulationBomb(const struct PairEvaluation *ev, enum BattlerId actor, enum BattlerId target,
     const struct PairAction *action, u32 accuracy, u32 guardChance, u32 actionChance, u32 boost, u32 statPower,
     u32 screenNumerator, u32 screenDenominator, u32 *hp, u32 *survival, u32 *speed, u32 *usedItems)
@@ -1861,16 +2475,20 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     struct PairAction actions[MAX_BATTLERS_COUNT];
     memcpy(actions, ev->action, sizeof(actions));
     u32 hp[MAX_BATTLERS_COUNT], boost[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
+    u32 statusBoost[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
     u32 survival[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
     u32 actionChance[MAX_BATTLERS_COUNT] = {10000, 10000, 10000, 10000};
     s32 coachingValue[MAX_BATTLERS_COUNT] = {0};
     u32 newParalysisTargets = 0, newBurnTargets = 0;
     u32 newTauntTargets = 0;
     u32 speed[MAX_BATTLERS_COUNT];
-    u8 attackStage[MAX_BATTLERS_COUNT], speedStage[MAX_BATTLERS_COUNT];
+    u8 speedStage[MAX_BATTLERS_COUNT];
     u8 statStage[MAX_BATTLERS_COUNT][4]; // Atk, Def, SpDef, SpAtk.
     u32 statModifier[MAX_BATTLERS_COUNT][4];
     u32 usedItems = 0;
+    u32 soaked = 0, charged = 0;
+    u32 choiceStarted = 0;
+    u8 rageHits[MAX_BATTLERS_COUNT];
     u32 acted = 0, protected = 0, stopped = 0, wideGuard = 0, quickGuard = 0;
     struct PairRetaliation received[MAX_BATTLERS_COUNT][DAMAGE_CATEGORY_STATUS] = {0};
     u8 lastReceivedCategory[MAX_BATTLERS_COUNT] = {0};
@@ -1883,16 +2501,26 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     bool32 trickRoom = gFieldStatuses & STATUS_FIELD_TRICK_ROOM;
     enum BattlerId forceNext = MAX_BATTLERS_COUNT;
     enum BattlerId redirect[NUM_BATTLE_SIDES] = {MAX_BATTLERS_COUNT, MAX_BATTLERS_COUNT};
+    u32 pendingDancers = 0;
+    enum BattlerId danceSource = MAX_BATTLERS_COUNT;
+    enum Move queuedDance = MOVE_NONE;
+    u8 queuedTargets[MAX_BATTLERS_COUNT] = {0};
     u32 screens[NUM_BATTLE_SIDES];
     for (u32 side = 0; side < NUM_BATTLE_SIDES; side++)
+    {
         screens[side] = gSideStatuses[side] & SIDE_STATUS_SCREEN_ANY;
+        if (gSideTimers[side].followmeTimer && IsBattlerAlive(gSideTimers[side].followmeTarget))
+            redirect[side] = gSideTimers[side].followmeTarget;
+    }
     s32 score = ev->board.reserveValue[ev->side] - ev->board.reserveValue[ev->side ^ 1];
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
     {
         hp[actor] = gBattleMons[actor].hp;
+        rageHits[actor] = min(6, GetBattlerPartyState(actor)->timesGotHit);
+        if (gBattleMons[actor].volatiles.chargeTimer)
+            charged |= 1u << actor;
         speed[actor] = gAiLogicData->speedStats[actor];
         speedStage[actor] = gBattleMons[actor].statStages[STAT_SPEED];
-        attackStage[actor] = gBattleMons[actor].statStages[IsBattleMovePhysical(actions[actor].executedMove) ? STAT_ATK : STAT_SPATK];
         statStage[actor][0] = gBattleMons[actor].statStages[STAT_ATK];
         statStage[actor][1] = gBattleMons[actor].statStages[STAT_DEF];
         statStage[actor][2] = gBattleMons[actor].statStages[STAT_SPDEF];
@@ -1911,26 +2539,59 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 return -10000;
         }
     }
-    for (u32 turn = 0; turn < gBattlersCount; turn++)
+    for (u32 turn = 0; turn < gBattlersCount || pendingDancers;)
     {
         enum BattlerId actor = MAX_BATTLERS_COUNT;
-        for (enum BattlerId next = 0; next < gBattlersCount; next++)
+        bool32 copied = pendingDancers != 0;
+        struct PairAction copyAction = {0};
+        u8 copyWeights[MAX_BATTLERS_COUNT] = {0};
+        if (copied)
         {
-            if ((acted & (1u << next)) || !hp[next] || actions[next].index == PAIR_IDLE)
+            for (enum BattlerId next = 0; next < gBattlersCount; next++)
+                if (pendingDancers & (1u << next))
+                {
+                    bool32 earlier = actor == MAX_BATTLERS_COUNT;
+                    if (!earlier)
+                        earlier = GetConfig(B_DANCER_ORDER) < GEN_8
+                            ? gBattleMons[next].speed < gBattleMons[actor].speed : speed[next] > speed[actor];
+                    if (earlier)
+                        actor = next;
+                }
+            pendingDancers &= ~(1u << actor);
+            u32 dance = PairCopiedDance(queuedDance);
+            if (dance >= ARRAY_COUNT(sCopiedDances) || ev->dancer[actor][dance] == NULL
+             || !PairDancerCanAct(actor, queuedDance, hp, stopped, newSleepTargets, newTauntTargets))
                 continue;
-            if (actor == MAX_BATTLERS_COUNT
-             || PairActsBefore(next, &actions[next], actor, &actions[actor], speed, trickRoom))
-                actor = next;
+            copyAction = (struct PairAction){.move = queuedDance, .executedMove = queuedDance,
+                .score = AI_SCORE_DEFAULT, .target = danceSource, .danceCopy = dance + 1};
+            PairCopyTargetWeights(ev->dancer[actor][dance], actor, danceSource, queuedDance, queuedTargets,
+                hp, speed, actions, redirect, trickRoom, soaked, usedItems, copyWeights);
+            if ((gBattleMons[actor].status1 & STATUS1_PARALYSIS) && actionChance[actor] == 10000)
+                for (u32 target = 0; target < gBattlersCount; target++)
+                    copyWeights[target] = copyWeights[target] * ev->paralysisActionChance / 10000;
         }
-        if (forceNext < MAX_BATTLERS_COUNT && hp[forceNext] && !(acted & (1u << forceNext)))
-            actor = forceNext;
-        forceNext = MAX_BATTLERS_COUNT;
-        if (actor == MAX_BATTLERS_COUNT)
-            break;
-        acted |= 1u << actor;
+        else
+        {
+            turn++;
+            for (enum BattlerId next = 0; next < gBattlersCount; next++)
+            {
+                if ((acted & (1u << next)) || !hp[next] || actions[next].index == PAIR_IDLE)
+                    continue;
+                if (actor == MAX_BATTLERS_COUNT
+                 || PairActsBefore(next, &actions[next], actor, &actions[actor], speed, trickRoom))
+                    actor = next;
+            }
+            if (forceNext < MAX_BATTLERS_COUNT && hp[forceNext] && !(acted & (1u << forceNext)))
+                actor = forceNext;
+            forceNext = MAX_BATTLERS_COUNT;
+            if (actor == MAX_BATTLERS_COUNT)
+                break;
+            acted |= 1u << actor;
+        }
         if (stopped & (1u << actor))
             continue;
-        const struct PairAction *action = &actions[actor];
+        const struct PairAction *action = copied ? &copyAction : &actions[actor];
+        const struct PairDancerMoveCache *copy = copied ? ev->dancer[actor][action->danceCopy - 1] : NULL;
         enum BattlerId partner = GetPartnerBattler(actor);
         const struct PairAction *other = &actions[partner];
         enum Move move = action->move;
@@ -1949,6 +2610,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (((newTauntTargets & (1u << actor)) || gBattleMons[actor].volatiles.tauntTimer)
          && IsBattleMoveStatus(move))
             continue;
+        if (!copy && ev->firstChoiceValue[actor][action->index])
+            choiceStarted |= 1u << actor;
         // Conditional HP includes branches where an earlier lethal move
         // missed. A surviving setter must not supply certain weather/order
         // changes (or the full authored setup reward) on those rare branches.
@@ -1987,7 +2650,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 continue;
             }
         }
-        if (sign > 0)
+        if (sign > 0 && !copy)
         {
             s32 planScore = action->planScore;
             if (planScore <= -10000)
@@ -1999,7 +2662,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // The complete turn owns protection's value. Applying the
             // isolated scorer again can prefer a blocked attack over a shield
             // that saves HP while producing the same damage on both sides.
-            if (!PairSupport(move) && effect != EFFECT_WISH && effect != EFFECT_PROTECT && effect != EFFECT_REFLECT_DAMAGE)
+            if (!PairSupport(move) && effect != EFFECT_WISH && effect != EFFECT_PROTECT && effect != EFFECT_REFLECT_DAMAGE
+             && !PairHasCopiedDance(ev, actor, action->executedMove)
+             // The old target/type opinion is stale after Soak. Native damage
+             // on this trial's changed board owns the attack's value instead.
+             && !(soaked && !IsBattleMoveStatus(action->executedMove)))
             {
                 if (action->score == 0)
                     score -= 500;
@@ -2077,6 +2744,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         {
             speed[actor] *= 2;
             speed[partner] *= 2;
+            for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
+                if (hp[ally] && IsBattlerAlly(actor, ally) && gAiLogicData->abilities[ally] == ABILITY_WIND_POWER)
+                    charged |= 1u << ally;
             continue;
         }
         if (effect == EFFECT_TRICK_ROOM)
@@ -2112,7 +2782,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         }
         if (effect == EFFECT_HELPING_HAND)
         {
-            if (hp[partner] && !(acted & (1u << partner)) && !IsBattleMoveStatus(other->executedMove)
+            if (hp[partner] && !(acted & (1u << partner))
              && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD)
                 boost[partner] = boost[partner] * 3 / 2;
             // A wasted boost already produces no damage in this trial. An
@@ -2207,14 +2877,43 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         {
             if (hp[partner])
             {
-                u32 attackStat = IsBattleMovePhysical(actions[partner].executedMove) ? 0 : 3;
-                statStage[partner][attackStat] = attackStage[partner];
                 PairApplyStatChanges(ev, actor, partner, move, statStage, statModifier, survival[actor], &usedItems);
-                attackStage[partner] = statStage[partner][attackStat];
                 // This turn's damage/survival already values immediate stat
                 // effects. The separate setup preference is future value,
                 // earned only if the recipient survives the complete exchange.
                 coachingValue[partner] += coachingOpinion * survival[actor] / 100 * actionChance[actor] / 10000;
+            }
+            continue;
+        }
+        if (PairSetupDance(move))
+        {
+            u32 sourceChance = actionChance[actor] / 100;
+            if (gBattleMons[actor].status1 & STATUS1_PARALYSIS)
+                sourceChance = min(sourceChance, ev->paralysisActionChance / 100);
+            if (PairMayBeSnatched(actor, actions, hp, acted, stopped)
+             || !PairScreenEffectApplies(applyEffects, sourceChance, effectChance))
+                continue;
+            bool32 succeeded = PairApplyDance(ev, actor, action->index, actor, statStage, statModifier,
+                speedStage, speed, actions, &usedItems, hp);
+            if (!succeeded)
+            {
+                if (sign > 0)
+                    score -= max(0, action->planScore) + max(0, (action->score - AI_SCORE_DEFAULT) * 4);
+                continue;
+            }
+            for (enum BattlerId dancer = 0; dancer < gBattlersCount; dancer++)
+            {
+                if (dancer == actor || gAiLogicData->abilities[dancer] != ABILITY_DANCER
+                 || !PairDancerCanAct(dancer, move, hp, stopped, newSleepTargets, newTauntTargets))
+                    continue;
+                u32 copyChance = min(sourceChance, actionChance[dancer] / 100) * survival[actor] / 100;
+                if (gBattleMons[dancer].status1 & STATUS1_PARALYSIS)
+                    copyChance = copyChance * ev->paralysisActionChance / 10000;
+                if (PairScreenEffectApplies(applyEffects, copyChance, effectChance))
+                    // Dancer's extra move does not consume its chosen action.
+                    // Opposing dancers copy too; do not award a free ally-only buff.
+                    PairApplyDance(ev, actor, action->index, dancer, statStage, statModifier,
+                        speedStage, speed, actions, &usedItems, hp);
             }
             continue;
         }
@@ -2270,7 +2969,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         // Nature Power; Sucker Punch below intentionally checks the command.
         move = action->executedMove;
         effect = GetMoveEffect(move);
-        if (IsBattleMoveStatus(move) && !((PairPrimarySpeedDrop(move) || PairTargetDropStat(move) || move == MOVE_SPORE || move == MOVE_SING || move == MOVE_SLEEP_POWDER
+        enum Type actualType = copy ? copy->type[!!(soaked & (1u << actor))]
+            : effect == EFFECT_REVELATION_DANCE ? ev->revelationType[actor][!!(soaked & (1u << actor))] : GetMoveType(move);
+        u32 actionBoost = boost[actor] * (copy
+            ? ((newBurnTargets & (1u << actor)) && IsBattleMovePhysical(move) ? 50 : 100)
+            : statusBoost[actor]) / 100;
+        if (IsBattleMoveStatus(move) && !((move == MOVE_SOAK || PairPrimarySpeedDrop(move) || PairTargetDropStat(move) || move == MOVE_SPORE || move == MOVE_SING || move == MOVE_SLEEP_POWDER
             || move == MOVE_THUNDER_WAVE || move == MOVE_GLARE || move == MOVE_CHARM || move == MOVE_WILL_O_WISP || move == MOVE_QUASH || effect == EFFECT_TAUNT || effect == EFFECT_ENCORE) && applyEffects))
             continue;
         if (gBattleMoveEffects[effect].twoTurnEffect && !gBattleMons[actor].volatiles.multipleTurns
@@ -2290,6 +2994,13 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             && effect != EFFECT_BEAT_UP && gAiLogicData->abilities[actor] != ABILITY_PARENTAL_BOND
             && !PairSpread(move);
         u32 orbHitChance = 0;
+        u8 danceTargets[MAX_BATTLERS_COUNT] = {0};
+        bool32 randomTarget = GetMoveTarget(move) == TARGET_RANDOM;
+        u32 randomTargets = 0;
+        if (randomTarget)
+            for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+                if (hp[foe] && !IsBattlerAlly(actor, foe))
+                    randomTargets++;
         enum BattlerId selectedTarget = action->target;
         if (retaliation)
         {
@@ -2304,7 +3015,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         // Native Follow Me resolves before fainted-target fallback. Resolve it
         // once so the original and fallback paths cannot both hit the redirector.
         enum BattlerId follow = redirect[GetBattlerSide(selectedTarget)];
-        bool32 followed = !PairSpread(move) && !IsBattlerAlly(actor, selectedTarget)
+        bool32 followed = !copy && !randomTarget && !PairSpread(move) && !IsBattlerAlly(actor, selectedTarget)
             && follow < MAX_BATTLERS_COUNT && hp[follow]
             && !IsMoveRedirectionPrevented(actor, move, gAiLogicData->abilities[actor])
             && (!IsPowderMove(actions[follow].move)
@@ -2316,7 +3027,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         // branch and send the already-fainted mass to its partner, as native
         // CancelerSetTargets does. Freeze this before applying the current hit:
         // this move cannot knock out one foe and then hit the other as well.
-        u32 fallbackChance = !retaliation && !followed && !PairSpread(move)
+        u32 fallbackChance = !copy && !randomTarget && !retaliation && !followed && !PairSpread(move)
             && !IsBattlerAlly(actor, selectedTarget)
             && GetMoveTarget(move) != TARGET_OPPONENTS_FIELD
             ? (hp[selectedTarget] ? 100 - survival[selectedTarget] : 100) : 0;
@@ -2325,7 +3036,17 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (original == actor || !hp[original]
              || gBattleMons[original].volatiles.semiInvulnerable == STATE_COMMANDER)
                 continue;
-            if (PairSpread(move))
+            if (copy)
+            {
+                if (!copyWeights[original])
+                    continue;
+            }
+            else if (randomTarget)
+            {
+                if (IsBattlerAlly(actor, original) || !randomTargets)
+                    continue;
+            }
+            else if (PairSpread(move))
             {
                 if (IsBattlerAlly(actor, original) && GetMoveTarget(move) == TARGET_BOTH)
                     continue;
@@ -2346,7 +3067,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                      && !IsBattlerAlly(actor, target)
                      && (quickGuard & (1u << GetBattlerSide(target))))))
                 continue;
-            u32 guardHitChance = !PairSpread(move) && original != selectedTarget ? fallbackChance : 100;
+            u32 guardHitChance = copy ? copyWeights[original] : randomTarget ? 100 / randomTargets
+                : !PairSpread(move) && original != selectedTarget ? fallbackChance : 100;
             if (!MoveIgnoresProtect(move))
             {
                 if (!AI_CanContactBypassProtect(actor, target, move))
@@ -2358,6 +3080,28 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             if (!guardHitChance)
                 continue;
+            if (move == MOVE_SOAK)
+            {
+                if (!(ev->soakTargets[actor][action->index] & (1u << target)) || (soaked & (1u << target)))
+                    continue;
+                bool32 redirected = FALSE;
+                if (!followed)
+                    for (enum BattlerId other = 0; other < gBattlersCount; other++)
+                        if (hp[other] && (ev->soakRedirectors[actor] & (1u << other)))
+                            redirected = TRUE;
+                if (redirected)
+                    continue;
+                u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
+                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                if (PairScreenEffectApplies(applyEffects, chance, effectChance))
+                {
+                    // Unlike Tailwind, Soak is absent from the ordinary pass;
+                    // even a certain conversion must weight the changed pass.
+                    *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                    soaked |= 1u << target;
+                }
+                continue;
+            }
             if (effect == EFFECT_TAUNT)
             {
                 if (!(ev->tauntTargets[actor][action->index] & (1u << target)))
@@ -2417,10 +3161,10 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     if (GetMoveEffect(actions[target].executedMove) == EFFECT_FACADE)
                     {
                         if (GetConfig(B_BURN_FACADE_DMG) >= GEN_6)
-                            boost[target] *= 2;
+                            statusBoost[target] *= 2;
                     }
                     else
-                        boost[target] /= 2;
+                        statusBoost[target] /= 2;
                 }
                 continue;
             }
@@ -2446,7 +3190,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
                 // Status boosts a remaining Facade, not every move in its set.
                 if (!(acted & (1u << target)) && GetMoveEffect(actions[target].executedMove) == EFFECT_FACADE)
-                    boost[target] *= 2;
+                    statusBoost[target] *= 2;
                 // Native total Speed includes generation rules and Quick Feet.
                 // Existing same-turn Speed/weather changes retain their ratio.
                 speed[target] = speed[target] * ev->paralyzedSpeed[target] / max(1, gAiLogicData->speedStats[target]);
@@ -2509,8 +3253,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             // Thread shares targeting/protection and cached Speed handling,
             // not damage. Poison remains the native single-action opinion.
-            struct SimulatedDamage damage = IsBattleMoveStatus(move) ? (struct SimulatedDamage){0}
-                : gAiLogicData->simulatedDmg[actor][target][action->index];
+            u32 itemGone = !!(usedItems & (1u << actor));
+            const struct PairDancerDamage *copyDamage = copy ? PairCopiedDamage(copy, actor, target, soaked, charged, usedItems) : NULL;
+            u32 contactDamage = copy ? copy->contact[itemGone | (usedItems & (1u << target) ? 2 : 0)][target] : ev->contactDamage[actor][action->index][target];
+            uq4_12_t effectiveness = copyDamage ? copyDamage->effectiveness : gAiLogicData->effectiveness[actor][target][action->index];
+            struct SimulatedDamage damage = copyDamage ? copyDamage->damage
+                : IsBattleMoveStatus(move) ? (struct SimulatedDamage){0} : gAiLogicData->simulatedDmg[actor][target][action->index];
             // An isolated KO/matchup bonus is not earned by attacking into
             // Protect. Credit it once, only after a real recipient survives
             // targeting and guard checks; spread moves may still hit a partner.
@@ -2519,11 +3267,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 score += damageOpinion * guardHitChance / 100;
                 damageOpinion = 0;
             }
-            bool32 hpPowerAdjusted = actionHp != gBattleMons[actor].hp
+            bool32 hpPowerAdjusted = !copy && actionHp != gBattleMons[actor].hp
                 && (ev->hpPowerTargets[actor][action->index] & (1u << target));
             if (hpPowerAdjusted)
                 damage = PairHpPowerDamage(ev, actor, target, action->index, move, actionHp);
-            bool32 conditionalBoostAdjusted = ev->conditionalBoostTargets[actor][action->index] & (1u << target);
+            bool32 conditionalBoostAdjusted = !copy && (ev->conditionalBoostTargets[actor][action->index] & (1u << target));
             // Defeatist endpoints are native-rounded; threshold selection
             // uses conditional-alive aggregate HP. Roll/miss/healing branches
             // straddling half HP remain approximate, not an exact KO tree.
@@ -2533,8 +3281,61 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     ? (actionHp > gBattleMons[actor].maxHP / 2 ? 100 : 0)
                     : (ev->itemBoost[actor] & (1u << action->index)) ? ((usedItems & (1u << actor)) ? 0 : 100)
                     : (hp[GetPartnerBattler(actor)] ? survival[GetPartnerBattler(actor)] : 0));
-            u32 accuracy = min(100, gAiLogicData->moveAccuracy[actor][target][action->index]);
-            if (weather != ev->weather)
+            u32 fieldState = (soaked & (1u << actor) ? PAIR_SOAK_ATTACKER : 0)
+                | (soaked & (1u << target) ? PAIR_SOAK_TARGET : 0)
+                | (charged & (1u << actor) ? PAIR_CHARGED : 0);
+            u32 originalFieldState = gBattleMons[actor].volatiles.chargeTimer ? PAIR_CHARGED : 0;
+            bool32 fieldAdjusted = !copy && fieldState != originalFieldState
+                && (ev->soakChargeStates[actor][action->index][target] & (1u << fieldState));
+            u32 rageState = fieldState & (PAIR_SOAK_ATTACKER | PAIR_SOAK_TARGET);
+            u32 originalHits = min(6, GetBattlerPartyState(actor)->timesGotHit);
+            bool32 rageAdjusted = effect == EFFECT_RAGE_FIST && ev->rage[actor] && rageHits[actor] != originalHits
+                && (ev->rage[actor]->states[target] & (1u << rageState));
+            if (fieldAdjusted || rageAdjusted)
+            {
+                struct SimulatedDamage changed = rageAdjusted ? ev->rage[actor]->damage[target][rageState][rageHits[actor]]
+                    : ev->soakChargeDamage[actor][action->index][target][fieldState];
+                if (hpPowerAdjusted || conditionalBoostAdjusted)
+                {
+                    // Compose the already-modeled HP/item/partner change with
+                    // this native type/charge anchor. The ratio remains the
+                    // bounded forecast, not an exact joint rounding tree.
+                    const struct SimulatedDamage *base = rageAdjusted ? &ev->rage[actor]->damage[target][0][originalHits]
+                        : &ev->soakChargeDamage[actor][action->index][target][originalFieldState];
+                    if (base->minimum && base->median && base->maximum)
+                    {
+                        changed.minimum = min(65535u, (u32)changed.minimum * damage.minimum / base->minimum);
+                        changed.median = min(65535u, (u32)changed.median * damage.median / base->median);
+                        changed.maximum = min(65535u, (u32)changed.maximum * damage.maximum / base->maximum);
+                    }
+                }
+                damage = changed;
+            }
+            const struct PairDefenderItemCache *itemCache = ev->defenderItem[actor][target];
+            bool32 defenderItemAdjusted = !copy && (usedItems & (1u << target)) && itemCache != NULL
+                && (itemCache->moves & (1u << action->index));
+            if (defenderItemAdjusted)
+            {
+                struct SimulatedDamage changed = itemCache->damage[action->index * itemCache->count
+                    + itemCache->stateIndex[fieldState & itemCache->mask]];
+                if (hpPowerAdjusted || conditionalBoostAdjusted || rageAdjusted)
+                {
+                    const struct SimulatedDamage *base = ev->soakChargeStates[actor][action->index][target] & (1u << fieldState)
+                        ? &ev->soakChargeDamage[actor][action->index][target][fieldState]
+                        : &gAiLogicData->simulatedDmg[actor][target][action->index];
+                    // Existing HP/partner/Rage combinations retain their bounded
+                    // native-anchor ratio; item loss itself uses native rounding.
+                    if (base->minimum && base->median && base->maximum)
+                    {
+                        changed.minimum = min(65535u, (u32)changed.minimum * damage.minimum / base->minimum);
+                        changed.median = min(65535u, (u32)changed.median * damage.median / base->median);
+                        changed.maximum = min(65535u, (u32)changed.maximum * damage.maximum / base->maximum);
+                    }
+                }
+                damage = changed;
+            }
+            u32 accuracy = copy ? copy->accuracy[itemGone | (usedItems & (1u << target) ? 2 : 0)][target] : min(100, gAiLogicData->moveAccuracy[actor][target][action->index]);
+            if (!copy && weather != ev->weather)
             {
                 u32 cachedAccuracy = ev->weatherAccuracy[actor][action->index][target][PairAccuracyWeatherIndex(weather)];
                 if (cachedAccuracy)
@@ -2551,11 +3352,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // Resolve the actual redirected recipient before considering
             // healing or contact. These unmodeled correlations retain the
             // previous forecast instead of receiving fictitious Orb KOs.
-            if (lifeOrb && (ev->drainPercent[actor][action->index][target]
-             || (!singleContactOrb && ev->contactDamage[actor][action->index][target])
+            if (lifeOrb && ((!copy && ev->drainPercent[actor][action->index][target])
+             || (!singleContactOrb && contactDamage)
              || (stealsSitrus && !singleContactOrb)))
                 lifeOrb = FALSE;
-            if (lifeOrb && gAiLogicData->simulatedDmg[actor][target][action->index].affectsTarget)
+            if (lifeOrb && damage.affectsTarget)
             {
                 // One payment if ANY recipient is affected, including allies
                 // and Substitute/Disguise. Execution/paralysis is one shared
@@ -2564,7 +3365,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     ? 100 - (100 - orbHitChance) * (100 - affectedChance) / 100
                     : min(100, orbHitChance + affectedChance); // Fallback recipients are exclusive.
             }
-            if ((ev->screenBreakerMoves[actor] & (1u << action->index)) && damage.maximum)
+            if (!copy && (ev->screenBreakerMoves[actor] & (1u << action->index)) && damage.maximum)
             {
                 u32 side = B_BRICK_BREAK >= GEN_4 ? GetBattlerSide(target) : GetBattlerSide(actor) ^ BIT_SIDE;
                 u32 chance = accuracy * survival[actor] / 100 * actionChance[actor] / 10000;
@@ -2577,19 +3378,19 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     screens[side] = 0;
             }
             u32 screenNumerator = UQ_4_12(1.0), screenDenominator = UQ_4_12(1.0);
-            if (ev->screenTargets[actor][action->index] & (1u << target))
+            if ((copy ? copy->screened[itemGone] : ev->screenTargets[actor][action->index]) & (1u << target))
             {
                 u32 side = GetBattlerSide(target);
                 screenNumerator = PairScreenFactor(move, screens[side]);
                 screenDenominator = PairScreenFactor(move, gSideStatuses[side]);
             }
-            u32 amount = damage.median * boost[actor] / 100;
-            u32 minimumDamage = damage.minimum * boost[actor] / 100;
-            u32 worstDamage = damage.maximum * boost[actor] / 100;
+            u32 amount = damage.median * actionBoost / 100;
+            u32 minimumDamage = damage.minimum * actionBoost / 100;
+            u32 worstDamage = damage.maximum * actionBoost / 100;
             if (weather != ev->weather)
             {
-                u32 weatherPower = PairWeatherPower(actor, target, move, weather);
-                u32 oldWeatherPower = PairWeatherPower(actor, target, move, ev->weather);
+                u32 weatherPower = PairWeatherPower(actor, target, move, actualType, weather);
+                u32 oldWeatherPower = PairWeatherPower(actor, target, move, actualType, ev->weather);
                 amount = amount * weatherPower / oldWeatherPower;
                 minimumDamage = minimumDamage * weatherPower / oldWeatherPower;
                 worstDamage = worstDamage * weatherPower / oldWeatherPower;
@@ -2626,7 +3427,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     lastReceivedCategory[target] = DAMAGE_CATEGORY_PHYSICAL;
                 }
                 PairApplyPopulationBomb(ev, actor, target, action, nativeAccuracy, guardHitChance,
-                    actionChance[actor], boost[actor], statPower, screenNumerator, screenDenominator,
+                    actionChance[actor], actionBoost, statPower, screenNumerator, screenDenominator,
                     hp, survival, speed, &usedItems);
                 if (!hp[actor])
                     break;
@@ -2638,14 +3439,13 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 // weather. Preserve the cached zero for immunity/failure.
                 amount = minimumDamage = worstDamage = damage.maximum ? PairFixedPercentDamage(ev, target, move, hp[target]) : 0;
             }
-            if (IsBattlerAlly(actor, target) && damage.maximum == 0)
+            if ((copy || IsBattlerAlly(actor, target)) && damage.maximum == 0)
             {
-                enum Type type = GetMoveType(move);
+                enum Type type = actualType;
                 if ((targetAbility == ABILITY_STORM_DRAIN && type == TYPE_WATER)
                  || (targetAbility == ABILITY_LIGHTNING_ROD && type == TYPE_ELECTRIC))
                 {
-                    if (!(acted & (1u << target)) && IsBattleMoveSpecial(actions[target].executedMove))
-                        boost[target] = boost[target] * PairChangeStage(&attackStage[target], 1) / 100;
+                    PairChangeStat(&statStage[target][3], &statModifier[target][3], 1, 100, FALSE);
                 }
                 else if (targetAbility == ABILITY_MOTOR_DRIVE && type == TYPE_ELECTRIC)
                 {
@@ -2664,9 +3464,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             bool32 singleHit = GetMoveStrikeCount(move) <= 1 && !IsMultiHitMove(move)
                 && effect != EFFECT_BEAT_UP && gAiLogicData->abilities[actor] != ABILITY_PARENTAL_BOND;
             if (worstDamage >= hp[target] && singleHit
-             && (((hpPowerAdjusted || conditionalBoostAdjusted) && gBattleMons[target].volatiles.endured)
+             && (((copy || hpPowerAdjusted || conditionalBoostAdjusted || fieldAdjusted || rageAdjusted || defenderItemAdjusted) && gBattleMons[target].volatiles.endured)
                  || (hp[target] == gBattleMons[target].maxHP
-                     && (gAiLogicData->holdEffects[target] == HOLD_EFFECT_FOCUS_SASH
+                     && ((gAiLogicData->holdEffects[target] == HOLD_EFFECT_FOCUS_SASH && !(usedItems & (1u << target)))
                  || AI_GetMoldBreakerSanitizedAbility(actor, gAiLogicData->abilities[actor], gAiLogicData->abilities[target],
                      gAiLogicData->holdEffects[target], move) == ABILITY_STURDY))))
             {
@@ -2676,34 +3476,66 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             u32 damageHitChance = accuracy * survival[actor] / 100;
             u32 hitChance = damageHitChance * actionChance[actor] / 10000;
+            if (!copy && PairCopiedDance(move) < ARRAY_COUNT(sCopiedDances) && damage.affectsTarget)
+                danceTargets[target] = min(100, danceTargets[target] + hitChance * survival[target] / 100);
+            if ((ev->rageActors & (1u << target)) && damage.affectsTarget && !IsBattleMoveStatus(move)
+             && !DoesSubstituteBlockMove(actor, target, move)
+             && PairScreenEffectApplies(applyEffects, hitChance, effectChance))
+            {
+                u32 hits = copy ? 1 : ev->rageHitCount[actor][action->index][target];
+                if (effect == EFFECT_BEAT_UP)
+                    for (enum BattlerId member = 0; member < gBattlersCount; member++)
+                        if (ev->board.owner[member] == ev->board.owner[actor] && gBattleMons[member].hp
+                         && !gBattleMons[member].status1 && (!hp[member]
+                             || ((newBurnTargets | newParalysisTargets | newSleepTargets) & (1u << member))))
+                            hits = hits ? hits - 1 : 0;
+                u32 contact = contactDamage;
+                if (contact)
+                    hits = min(hits, max(1, (hp[actor] + contact - 1) / contact));
+                rageHits[target] = min(6, rageHits[target] + hits);
+            }
+            if (hp[target] > worstDamage && damage.affectsTarget
+             && (gAiLogicData->abilities[target] == ABILITY_ELECTROMORPHOSIS
+                 || (IsWindMove(move) && gAiLogicData->abilities[target] == ABILITY_WIND_POWER))
+             && !DoesSubstituteBlockMove(actor, target, move)
+             && PairScreenEffectApplies(applyEffects, hitChance, effectChance))
+                charged |= 1u << target;
+            if (!(usedItems & (1u << target)) && damage.affectsTarget
+             && gAiLogicData->holdEffects[target] == HOLD_EFFECT_RESIST_BERRY
+             && (damage.consumedItem & AI_ITEM_CONSUMED_MEDIAN)
+             && !DoesSubstituteBlockMove(actor, target, move)
+             && PairScreenEffectApplies(applyEffects, hitChance, effectChance))
+            {
+                usedItems |= 1u << target;
+                if (gAiLogicData->abilities[target] == ABILITY_UNBURDEN && !gBattleMons[target].volatiles.unburdenActive)
+                    speed[target] *= 2;
+            }
             u32 medianDamage = amount;
             amount = min(amount, hp[target]) * hitChance / 100;
             if (hp[target] > worstDamage && amount
              && gAiLogicData->abilities[actor] != ABILITY_MOLD_BREAKER
              && gAiLogicData->abilities[actor] != ABILITY_TERAVOLT
              && gAiLogicData->abilities[actor] != ABILITY_TURBOBLAZE
-             && gAiLogicData->abilities[target] == ABILITY_JUSTIFIED && GetMoveType(move) == TYPE_DARK
-             && !(acted & (1u << target)) && IsBattleMovePhysical(actions[target].executedMove))
+             && gAiLogicData->abilities[target] == ABILITY_JUSTIFIED && actualType == TYPE_DARK)
             {
-                u32 gain = PairChangeStage(&attackStage[target], effect == EFFECT_BEAT_UP ? AI_GetBeatUpHitCount(actor) : 1);
-                boost[target] = boost[target] * gain / 100;
+                PairChangeStat(&statStage[target][0], &statModifier[target][0],
+                    effect == EFFECT_BEAT_UP ? AI_GetBeatUpHitCount(actor) : 1, 100, FALSE);
             }
             // Hit-triggered boosts belong to either side. Hitting an opposing
             // Sturdy/Policy recipient can enable its already-committed reply.
-            if (hp[target] > worstDamage && amount
-             && !(acted & (1u << target)) && !IsBattleMoveStatus(actions[target].executedMove))
+            if (hp[target] > worstDamage && amount)
             {
                 if (gAiLogicData->holdEffects[target] == HOLD_EFFECT_WEAKNESS_POLICY
                  && !(usedItems & (1u << target))
-                 && gAiLogicData->effectiveness[actor][target][action->index] > UQ_4_12(1.0))
+                 && effectiveness > UQ_4_12(1.0))
                 {
                     usedItems |= 1u << target;
-                    u32 gain = PairChangeStage(&attackStage[target],
-                        GetAdjustedStatStage(2, gAiLogicData->abilities[target], FALSE));
-                    boost[target] = boost[target] * gain / 100;
+                    s32 gain = GetAdjustedStatStage(2, gAiLogicData->abilities[target], FALSE);
+                    PairChangeStat(&statStage[target][0], &statModifier[target][0], gain, 100, FALSE);
+                    PairChangeStat(&statStage[target][3], &statModifier[target][3], gain, 100, FALSE);
                 }
                 if (gAiLogicData->abilities[target] == ABILITY_STEAM_ENGINE
-                 && (GetMoveType(move) == TYPE_FIRE || GetMoveType(move) == TYPE_WATER)
+                 && (actualType == TYPE_FIRE || actualType == TYPE_WATER)
                  && gAiLogicData->abilities[actor] != ABILITY_MOLD_BREAKER
                  && gAiLogicData->abilities[actor] != ABILITY_TERAVOLT
                  && gAiLogicData->abilities[actor] != ABILITY_TURBOBLAZE)
@@ -2717,7 +3549,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             u32 drainLimit = hp[target];
             u32 recoilMinimum = 0, recoilMedian = 0, recoilMaximum = 0;
             enum HoldEffect actorHeld = gAiLogicData->holdEffects[actor];
-            bool32 contactMayHeal = ev->contactDamage[actor][action->index][target]
+            bool32 contactMayHeal = contactDamage
                 && !(usedItems & (1u << actor))
                 && (actorHeld == HOLD_EFFECT_RESTORE_HP || actorHeld == HOLD_EFFECT_RESTORE_PCT_HP
                     || actorHeld == HOLD_EFFECT_CONFUSE_FLAVOR
@@ -2841,7 +3673,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     newParalysisTargets |= 1u << target;
                     *effectChance = *effectChance ? min(*effectChance, chance) : chance;
                     if (!(acted & (1u << target)) && GetMoveEffect(actions[target].executedMove) == EFFECT_FACADE)
-                        boost[target] *= 2;
+                        statusBoost[target] *= 2;
                     speed[target] = speed[target] * ev->paralyzedSpeed[target] / max(1, gAiLogicData->speedStats[target]);
                     if (!(acted & (1u << target)) && !IsBattleMoveStatus(actions[target].executedMove)
                      && !(B_MAGIC_GUARD == GEN_4 && gAiLogicData->abilities[target] == ABILITY_MAGIC_GUARD))
@@ -2850,7 +3682,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 // Native secondary status lands before Helmet/Rough Skin can
                 // faint the user. Keep ordinary damage and contact payment.
             }
-            u32 drainPercent = ev->drainPercent[actor][action->index][target];
+            u32 drainPercent = copy ? 0 : ev->drainPercent[actor][action->index][target];
             if (drainPercent && medianDamage && accuracy)
             {
                 enum HoldEffect held = gAiLogicData->holdEffects[actor];
@@ -2876,7 +3708,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 // Magic Guard prevents its damage; it does not grant healing.
             }
             if (amount || (stealsSitrus && affectedChance
-                && gAiLogicData->simulatedDmg[actor][target][action->index].affectsTarget))
+                && damage.affectsTarget))
             {
                 if (stealsSitrus && singleContactOrb && hp[actor])
                 {
@@ -2898,7 +3730,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     u32 afterHit = min(gBattleMons[actor].maxHP, hp[actor] + healing);
                     // Native theft/healing happens before Iron Barbs and
                     // Rough Skin, which may coexist with the stolen Sitrus.
-                    afterHit -= min(afterHit, ev->contactDamage[actor][action->index][target]);
+                    afterHit -= min(afterHit, contactDamage);
                     contactPaid = TRUE;
                     if (lifeOrb)
                     {
@@ -2922,14 +3754,13 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (!(usedItems & (1u << target))
                  && (gBattleMons[target].item == ITEM_SITRUS_BERRY
                      || GetItemHoldEffect(gBattleMons[target].item) == HOLD_EFFECT_CONFUSE_FLAVOR
-                     || (effect == EFFECT_KNOCK_OFF && (gBattleMons[target].item == ITEM_LIFE_ORB
-                         || ev->itemBoost[target])))
+                     || (effect == EFFECT_KNOCK_OFF && gBattleMons[target].item != ITEM_NONE))
                  && targetAbility != ABILITY_STICKY_HOLD && !DoesSubstituteBlockMove(actor, target, move)
                  && (move == MOVE_INCINERATE || move == MOVE_BUG_BITE || move == MOVE_PLUCK
                      || (effect == EFFECT_KNOCK_OFF
                          && !(B_KNOCK_OFF_REMOVAL >= GEN_5 && IsOnPlayerSide(target) && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
                          && CanBattlerGetOrLoseItem(target, actor, gBattleMons[target].item)))
-                 && (!ev->itemBoost[target] || PairScreenEffectApplies(applyEffects, hitChance, effectChance)))
+                 && PairScreenEffectApplies(applyEffects, hitChance, effectChance))
                 {
                     usedItems |= 1u << target;
                     if (gAiLogicData->abilities[target] == ABILITY_UNBURDEN && !gBattleMons[target].volatiles.unburdenActive)
@@ -2941,20 +3772,46 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // attacker. Only then stop processing this fainted actor's move.
             if (!hp[actor])
                 break;
+            if ((move == MOVE_FIERY_DANCE || move == MOVE_AQUA_STEP) && damage.affectsTarget
+             && !IsSheerForceAffected(move, gAiLogicData->abilities[actor]))
+            {
+                const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, 0);
+                u32 chance = hitChance * CalcSecondaryEffectChance(actor, gAiLogicData->abilities[actor], additional) / 100;
+                if (PairScreenEffectApplies(applyEffects, chance, effectChance))
+                {
+                    enum Stat stat = move == MOVE_FIERY_DANCE ? STAT_SPATK : STAT_SPEED;
+                    s32 delta = GetAdjustedStatStage(GetStatStage(stat, additional), gAiLogicData->abilities[actor], FALSE);
+                    u32 old = stat == STAT_SPEED ? speedStage[actor] : statStage[actor][3];
+                    u32 next = max(MIN_STAT_STAGE, min(MAX_STAT_STAGE, (s32)old + delta));
+                    if (next < DEFAULT_STAT_STAGE && gAiLogicData->holdEffects[actor] == HOLD_EFFECT_WHITE_HERB
+                     && !(usedItems & (1u << actor)))
+                    {
+                        next = DEFAULT_STAT_STAGE;
+                        usedItems |= 1u << actor;
+                    }
+                    if (stat == STAT_SPEED)
+                    {
+                        speed[actor] = speed[actor] * gStatStageRatios[next][0] * gStatStageRatios[old][1]
+                            / (gStatStageRatios[next][1] * gStatStageRatios[old][0]);
+                        speedStage[actor] = next;
+                    }
+                    else
+                        PairChangeStat(&statStage[actor][3], &statModifier[actor][3], (s32)next - old, 100, FALSE);
+                }
+            }
             u32 targetDropStat = PairTargetDropStat(move);
+            s32 targetDropDelta = copy ? copy->targetDropDelta[!!(usedItems & (1u << target))][target] : ev->targetDropDelta[actor][action->index][target];
             if (applyEffects && targetDropStat && hp[target] && (IsBattleMoveStatus(move) || (damage.maximum && amount))
-             && ev->targetDropDelta[actor][action->index][target])
+             && targetDropDelta)
             {
                 *effectChance = *effectChance ? min(*effectChance, hitChance) : hitChance;
-                u32 chosenAttackStat = IsBattleMovePhysical(actions[target].executedMove) ? 0 : 3;
-                // Earlier Weakness Policy/ability boosts retain their existing
-                // damage multiplier. Start this ratio at their updated stage.
-                statStage[target][chosenAttackStat] = attackStage[target];
                 u8 next[4];
                 memcpy(next, statStage[target], sizeof(next));
                 u32 dropColumn = targetDropStat == STAT_ATK ? 0 : targetDropStat == STAT_SPDEF ? 2 : 3;
                 next[dropColumn] = max(MIN_STAT_STAGE, min(MAX_STAT_STAGE,
-                    (s32)next[dropColumn] + ev->targetDropDelta[actor][action->index][target]));
+                    (s32)next[dropColumn] + targetDropDelta));
+                if (!copy && move == MOVE_FEATHER_DANCE && next[dropColumn] != statStage[target][dropColumn])
+                    danceTargets[target] = min(100, danceTargets[target] + hitChance * survival[target] / 100);
                 bool32 lowered = next[dropColumn] < statStage[target][dropColumn];
                 // Native retaliation runs in the stat-drop message, before
                 // move-end White Herb. Competitive can erase the negative.
@@ -2982,7 +3839,6 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 for (u32 stat = 0; stat < ARRAY_COUNT(next); stat++)
                     PairChangeStat(&statStage[target][stat], &statModifier[target][stat],
                         (s32)next[stat] - statStage[target][stat], 100, stat == 1 || stat == 2);
-                attackStage[target] = statStage[target][chosenAttackStat];
                 if (herb)
                 {
                     usedItems |= 1u << target;
@@ -3018,12 +3874,6 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                             if (statStage[target][stat] < DEFAULT_STAT_STAGE)
                                 PairChangeStat(&statStage[target][stat], &statModifier[target][stat],
                                     DEFAULT_STAT_STAGE - statStage[target][stat], 100, stat == 1 || stat == 2);
-                        if (attackStage[target] < DEFAULT_STAT_STAGE)
-                        {
-                            // Both offensive stats now have their own modifier;
-                            // do not restore Special Attack a second time here.
-                            attackStage[target] = DEFAULT_STAT_STAGE;
-                        }
                         if (gAiLogicData->abilities[target] == ABILITY_UNBURDEN && !gBattleMons[target].volatiles.unburdenActive)
                             speed[target] *= 2;
                     }
@@ -3034,10 +3884,13 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     speedStage[target] = nextStage;
                     // A successful opposing drop triggers retaliation even if
                     // White Herb immediately restores the lowered Speed.
-                    if (lowered && !IsBattlerAlly(actor, target) && !(acted & (1u << target))
-                     && ((gAiLogicData->abilities[target] == ABILITY_DEFIANT && IsBattleMovePhysical(actions[target].executedMove))
-                         || (gAiLogicData->abilities[target] == ABILITY_COMPETITIVE && IsBattleMoveSpecial(actions[target].executedMove))))
-                        boost[target] = boost[target] * PairChangeStage(&attackStage[target], 2) / 100;
+                    if (lowered && !IsBattlerAlly(actor, target))
+                    {
+                        if (gAiLogicData->abilities[target] == ABILITY_DEFIANT)
+                            PairChangeStat(&statStage[target][0], &statModifier[target][0], 2, 100, FALSE);
+                        else if (gAiLogicData->abilities[target] == ABILITY_COMPETITIVE)
+                            PairChangeStat(&statStage[target][3], &statModifier[target][3], 2, 100, FALSE);
+                    }
                 }
             }
             if (move == MOVE_FAKE_OUT && amount && gBattleStruct->battlerState[actor].isFirstTurn
@@ -3045,8 +3898,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
              && gAiLogicData->abilities[target] != ABILITY_SHIELD_DUST
              && gAiLogicData->holdEffects[target] != HOLD_EFFECT_COVERT_CLOAK)
                 stopped |= 1u << target;
-            if (!contactPaid && singleHit && (ev->contactDamage[actor][action->index][target] || recoilMaximum)
-             && gAiLogicData->simulatedDmg[actor][target][action->index].affectsTarget)
+            if (!contactPaid && singleHit && (contactDamage || recoilMaximum) && damage.affectsTarget)
             {
                 // Contact, damage-based recoil and Orb belong to one landed
                 // hit. Apply their combined range once so a missed attack
@@ -3054,7 +3906,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 // Native contact precedes move recoil, then Orb; with no
                 // intervening healing, summing costs preserves final HP even
                 // when an earlier cost already faints the attacker.
-                u32 contact = ev->contactDamage[actor][action->index][target];
+                u32 contact = contactDamage;
                 u32 contactChance = affectedChance;
                 if (lifeOrb && singleContactOrb)
                 {
@@ -3077,6 +3929,25 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             u32 recoil = max(1, PairNonDynamaxHP(ev, actor, gBattleMons[actor].maxHP) / 10);
             PairApplyDamageWhenActing(&hp[actor], &survival[actor], recoil, recoil, recoil,
                 orbHitChance, actionChance[actor]);
+        }
+        if (B_CHARGE >= GEN_9 && (copy ? actualType == TYPE_ELECTRIC
+            : (ev->electricMoves[actor][!!(soaked & (1u << actor))] & (1u << action->index))))
+            charged &= ~(1u << actor);
+        if (!copy)
+        {
+            u32 dance = PairCopiedDance(move);
+            u32 chance = 0;
+            for (u32 target = 0; target < gBattlersCount; target++)
+                chance += danceTargets[target];
+            if (dance < ARRAY_COUNT(sCopiedDances) && chance)
+            {
+                danceSource = actor;
+                queuedDance = move;
+                memcpy(queuedTargets, danceTargets, sizeof(queuedTargets));
+                for (enum BattlerId receiver = 0; receiver < gBattlersCount; receiver++)
+                    if (receiver != actor && hp[receiver] && ev->dancer[receiver][dance] != NULL)
+                        pendingDancers |= 1u << receiver;
+            }
         }
     }
     u32 livingSides = 0;
@@ -3105,6 +3976,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             * survival[actor] / 100;
         if (hp[actor])
             score += coachingValue[actor] * survival[actor] / 100;
+        if (hp[actor] && (choiceStarted & (1u << actor))
+         && ((livingSides >> (GetBattlerSide(actor) ^ 1)) & 1u)
+         && (!(usedItems & (1u << actor)) || gAiLogicData->abilities[actor] == ABILITY_GORILLA_TACTICS))
+            score += (GetBattlerSide(actor) == ev->side ? 1 : -1)
+                * ev->firstChoiceValue[actor][actions[actor].index] * survival[actor] / 100;
         if (hp[actor] && (newWish & (1u << actor)) && !(newParalysisTargets & (1u << actor)))
         {
             u32 foeSide = GetBattlerSide(actor) ^ 1;
@@ -3139,6 +4015,11 @@ static s32 ScorePairWithImmediateEffects(struct PairEvaluation *ev)
              || GetMoveEffect(action->move) == EFFECT_WEATHER
              || GetMoveEffect(action->move) == EFFECT_TAILWIND
              || GetMoveEffect(action->move) == EFFECT_TRICK_ROOM
+             || action->move == MOVE_SOAK
+             || PairSetupDance(action->move)
+             || PairHasCopiedDance(ev, actor, action->executedMove)
+             || action->executedMove == MOVE_FIERY_DANCE || action->executedMove == MOVE_AQUA_STEP
+             || (IsWindMove(action->executedMove) && ev->chargeable)
              || (PairSelfDefenseStat(action->move) != STAT_HP
                  && (gBattleMons[actor].status1 & STATUS1_PARALYSIS))
              || ((ev->screenBreakerMoves[actor] & (1u << action->index))
@@ -3160,7 +4041,9 @@ static s32 ScorePairWithImmediateEffects(struct PairEvaluation *ev)
             hasEffect = TRUE;
         if (action->index != PAIR_IDLE && !IsBattleMoveStatus(action->executedMove))
             for (enum BattlerId target = 0; target < gBattlersCount; target++)
-                if (gAiLogicData->abilities[target] == ABILITY_STAMINA
+                if ((ev->defenderItem[actor][target] != NULL
+                     || (ev->rageActors & (1u << target)) || gAiLogicData->abilities[target] == ABILITY_STAMINA
+                     || gAiLogicData->abilities[target] == ABILITY_ELECTROMORPHOSIS)
                  && gAiLogicData->simulatedDmg[actor][target][action->index].maximum)
                     hasEffect = TRUE;
         if (action->index != PAIR_IDLE && GetMoveEffect(action->move) == EFFECT_KNOCK_OFF)
@@ -3245,11 +4128,17 @@ static u32 LoadCommittedSwitches(u32 noActionMask)
 static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct PairAction *chosen, struct PairEvaluation *ev, bool32 refresh, bool32 canStop)
 {
     s32 best = INT_MIN;
-    struct SwitchCandidateSnapshot *state = ev->board.state;
+    struct PairDefenderItemCache *defenderItem[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
+    struct PairRageCache *rage[MAX_BATTLERS_COUNT];
+    struct PairDancerMoveCache *dancer[MAX_BATTLERS_COUNT][ARRAY_COUNT(sCopiedDances)];
+    memcpy(defenderItem, ev->defenderItem, sizeof(defenderItem));
+    memcpy(rage, ev->rage, sizeof(rage));
+    memcpy(dancer, ev->dancer, sizeof(dancer));
     memset(ev, 0, sizeof(*ev));
-    ev->board.state = state;
+    memcpy(ev->defenderItem, defenderItem, sizeof(defenderItem));
+    memcpy(ev->rage, rage, sizeof(rage));
+    memcpy(ev->dancer, dancer, sizeof(dancer));
     ev->side = GetBattlerSide(actor);
-    AI_CaptureCandidateState(ev->board.state);
     u32 committedMask = LoadCommittedSwitches(noActionMask);
     refresh |= committedMask != noActionMask;
     noActionMask = committedMask;
@@ -3266,9 +4155,54 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
         if (IsBattlerAlive(battler) && !(noActionMask & (1u << battler)))
             for (u32 index = 0; index < MAX_MON_MOVES; index++)
-                if (GetMoveEffect(gBattleMons[battler].moves[index]) == EFFECT_KNOCK_OFF
-                 && !IsMoveUnusable(index, gBattleMons[battler].moves[index], gAiLogicData->moveLimitations[battler]))
+            {
+                enum Move move = gBattleMons[battler].moves[index];
+                if (IsMoveUnusable(index, move, gAiLogicData->moveLimitations[battler]))
+                    continue;
+                if (GetMoveEffect(move) == EFFECT_KNOCK_OFF)
                     ev->itemRemovers |= 1u << battler;
+                if (GetMoveEffect(move) == EFFECT_RAGE_FIST)
+                    ev->rageActors |= 1u << battler;
+                if (move == MOVE_SOAK)
+                    for (enum BattlerId target = 0; target < gBattlersCount; target++)
+                    {
+                        if (PairCanSoak(battler, target))
+                        {
+                            ev->soakTargets[battler][index] |= 1u << target;
+                            ev->soakable |= 1u << target;
+                        }
+                        if (target != battler && IsBattlerAlive(target)
+                         && gAiLogicData->abilities[target] == ABILITY_STORM_DRAIN
+                         && !IsMoveRedirectionPrevented(battler, move, gAiLogicData->abilities[battler])
+                         && (B_REDIRECT_ABILITY_ALLIES >= GEN_4 || !IsBattlerAlly(battler, target)))
+                            ev->soakRedirectors[battler] |= 1u << target;
+                    }
+                if (move == MOVE_TAILWIND || IsWindMove(move))
+                    for (enum BattlerId target = 0; target < gBattlersCount; target++)
+                        if (IsBattlerAlive(target) && gAiLogicData->abilities[target] == ABILITY_WIND_POWER
+                         && (move == MOVE_TAILWIND ? IsBattlerAlly(battler, target) : target != battler))
+                            ev->chargeable |= 1u << target;
+                if (!IsBattleMoveStatus(move))
+                    for (enum BattlerId target = 0; target < gBattlersCount; target++)
+                        if (target != battler && IsBattlerAlive(target)
+                         && gAiLogicData->abilities[target] == ABILITY_ELECTROMORPHOSIS)
+                            ev->chargeable |= 1u << target;
+            }
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (IsBattlerAlive(battler) && gBattleMons[battler].volatiles.chargeTimer)
+            ev->chargeable |= 1u << battler;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (ev->rageActors & (1u << battler))
+        {
+            // Most boards have no Rage Fist; allocate only for an actual user,
+            // and reuse its buffer across switch/form candidates.
+            if (ev->rage[battler] == NULL)
+                ev->rage[battler] = AllocZeroed(sizeof(*ev->rage[battler]));
+            else
+                memset(ev->rage[battler], 0, sizeof(*ev->rage[battler]));
+        }
+    CachePairCopiedDancers(ev, noActionMask);
+    CachePairDefenderItems(ev, noActionMask);
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
         if (canStop && PairDecisionBudgetExpired())
@@ -3361,18 +4295,40 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
         }
     }
 done:
-    AI_RestoreCandidateState(ev->board.state);
     return best;
 }
 
 
-s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask)
+static void FreePairEvaluation(struct PairEvaluation *ev)
+{
+    for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    {
+        if (ev->rage[battler] != NULL)
+            Free(ev->rage[battler]);
+        for (enum BattlerId target = 0; target < MAX_BATTLERS_COUNT; target++)
+            if (ev->defenderItem[battler][target] != NULL)
+                Free(ev->defenderItem[battler][target]);
+        for (u32 dance = 0; dance < ARRAY_COUNT(sCopiedDances); dance++)
+            if (ev->dancer[battler][dance] != NULL)
+                Free(ev->dancer[battler][dance]);
+    }
+    Free(ev);
+}
+
+s32 AI_EvaluateDoublesCandidate(enum BattlerId battler, u32 noActionMask)
 {
     struct PairEvaluation *ev = AllocZeroed(sizeof(*ev));
-    ev->board.state = AI_SaveCandidateState();
     s32 score = EvaluatePairBoard(battler, noActionMask, NULL, ev, TRUE, FALSE);
-    AI_FreeCandidateState(ev->board.state);
-    Free(ev);
+    FreePairEvaluation(ev);
+    return score;
+}
+
+s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask)
+{
+    struct SwitchCandidateSnapshot *state = AI_SaveCandidateState();
+    s32 score = AI_EvaluateDoublesCandidate(battler, noActionMask);
+    AI_RestoreCandidateState(state);
+    AI_FreeCandidateState(state);
     return score;
 }
 
@@ -3580,6 +4536,200 @@ static bool32 PairPreservesStevenMetagross(enum BattlerId actor)
     return FALSE;
 }
 
+// An already preferred switch can sometimes depart through a reliable hit.
+// Limit this shortcut to passive boards: HP-triggered abilities/items, damage
+// retaliation and field-changing commands need a full pivot-event forecast.
+static bool32 PairPassivePivotAbility(enum Ability ability)
+{
+    switch (ability)
+    {
+    case ABILITY_NONE:
+    case ABILITY_REGENERATOR:
+    case ABILITY_NATURAL_CURE:
+    case ABILITY_GUTS:
+    case ABILITY_THICK_FAT:
+    case ABILITY_DRY_SKIN:
+    case ABILITY_WATER_ABSORB:
+    case ABILITY_VOLT_ABSORB:
+    case ABILITY_LEVITATE:
+    case ABILITY_VITAL_SPIRIT:
+    case ABILITY_INSOMNIA:
+    case ABILITY_OWN_TEMPO:
+    case ABILITY_INNER_FOCUS:
+    case ABILITY_IMMUNITY:
+    case ABILITY_LIMBER:
+    case ABILITY_PRANKSTER:
+    case ABILITY_SERENE_GRACE:
+    case ABILITY_PIXILATE:
+    case ABILITY_AERILATE:
+    case ABILITY_REFRIGERATE:
+    case ABILITY_GALVANIZE:
+    case ABILITY_NORMALIZE:
+    case ABILITY_TECHNICIAN:
+    case ABILITY_ADAPTABILITY:
+    case ABILITY_HUGE_POWER:
+    case ABILITY_PURE_POWER:
+    case ABILITY_IRON_FIST:
+    case ABILITY_TOUGH_CLAWS:
+    case ABILITY_ROCK_HEAD:
+    case ABILITY_SCRAPPY:
+    case ABILITY_MOLD_BREAKER:
+    case ABILITY_BATTLE_ARMOR:
+    case ABILITY_SHELL_ARMOR:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 PairPassivePivotItem(enum HoldEffect held)
+{
+    switch (held)
+    {
+    case HOLD_EFFECT_NONE:
+    case HOLD_EFFECT_EVIOLITE:
+    case HOLD_EFFECT_ASSAULT_VEST:
+    case HOLD_EFFECT_CHOICE_BAND:
+    case HOLD_EFFECT_CHOICE_SCARF:
+    case HOLD_EFFECT_CHOICE_SPECS:
+    case HOLD_EFFECT_COVERT_CLOAK:
+    case HOLD_EFFECT_EXPERT_BELT:
+    case HOLD_EFFECT_MUSCLE_BAND:
+    case HOLD_EFFECT_WISE_GLASSES:
+    case HOLD_EFFECT_FLAME_ORB:
+    case HOLD_EFFECT_TOXIC_ORB:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 PairPivotSensitiveMove(enum Move move)
+{
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_REFLECT_DAMAGE:
+    case EFFECT_BIDE:
+    case EFFECT_RAGE_FIST:
+    case EFFECT_REVENGE:
+    case EFFECT_FLAIL:
+    case EFFECT_ENDEAVOR:
+    case EFFECT_PAYBACK:
+    case EFFECT_PURSUIT:
+    case EFFECT_BEAK_BLAST:
+    case EFFECT_POWER_BASED_ON_TARGET_HP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 PairPivotStrictlyBefore(enum BattlerId actor, enum Move move,
+    enum BattlerId other, enum Move otherMove, const u32 *speed)
+{
+    s32 priority = AI_GetMovePriority(actor, gAiLogicData->abilities[actor], move);
+    s32 otherPriority = AI_GetMovePriority(other, gAiLogicData->abilities[other], otherMove);
+    if (priority != otherPriority)
+        return priority > otherPriority;
+    return gFieldStatuses & STATUS_FIELD_TRICK_ROOM ? speed[actor] < speed[other] : speed[actor] > speed[other];
+}
+
+static bool32 PairTryAttackBeforeSwitch(enum BattlerId actor, u32 reserve,
+    const struct PairAction *partnerAction, struct PairAction *action)
+{
+    enum BattlerId partner = GetPartnerBattler(actor);
+    u32 speed[MAX_BATTLERS_COUNT];
+    if (!IsBattlerAlive(actor) || reserve >= PARTY_SIZE
+     || !PairPassivePivotAbility(GetMonAbility(&GetBattlerParty(actor)[reserve]))
+     || !PairPassivePivotItem(GetItemHoldEffect(GetMonData(&GetBattlerParty(actor)[reserve], MON_DATA_HELD_ITEM)))
+     || (gBattleMons[actor].status1 & (STATUS1_SLEEP | STATUS1_FREEZE | STATUS1_PARALYSIS))
+     || gBattleMons[actor].volatiles.confusionTimer || gBattleMons[actor].volatiles.infatuation
+     || gBattleMons[actor].volatiles.flinched || gBattleMons[actor].volatiles.rechargeTimer
+     || IsSemiInvulnerable(actor, CHECK_ALL))
+        return FALSE;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (!IsBattlerAlive(battler))
+            continue;
+        if (!PairPassivePivotAbility(gAiLogicData->abilities[battler])
+         || !PairPassivePivotItem(gAiLogicData->holdEffects[battler])
+         || GetActiveGimmick(battler) != GIMMICK_NONE)
+            return FALSE;
+        for (enum Gimmick gimmick = GIMMICK_MEGA; gimmick < GIMMICKS_COUNT; gimmick++)
+            if (IsGimmickSelected(battler, gimmick))
+                return FALSE;
+        speed[battler] = GetBattlerTotalSpeedStat(battler, gAiLogicData->abilities[battler], gAiLogicData->holdEffects[battler]);
+        if (!IsBattlerAlly(actor, battler)
+         && (!IsBattlerActionCommitted(battler) || gChosenActionByBattler[battler] != B_ACTION_USE_MOVE))
+            return FALSE;
+    }
+    if (IsBattlerAlive(partner) && partnerAction->index != PAIR_IDLE && PairPivotSensitiveMove(partnerAction->executedMove))
+        return FALSE;
+    u32 limitations = CheckMoveLimitations(actor, 0, MOVE_LIMITATIONS_ALL);
+    u32 bestDamage = 0;
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        enum Move move = gBattleMons[actor].moves[slot];
+        if ((move != MOVE_U_TURN && move != MOVE_VOLT_SWITCH && move != MOVE_FLIP_TURN)
+         || IsMoveUnusable(slot, move, limitations))
+            continue;
+        // An earlier partner attack could remove the pivot's target. Retain
+        // immediate switching for those cases rather than invent a new action.
+        if (IsBattlerAlive(partner) && partnerAction->index != PAIR_IDLE
+         && GetMoveEffect(partnerAction->executedMove) != EFFECT_PROTECT
+         && partnerAction->executedMove != MOVE_CELEBRATE
+         && !PairPivotStrictlyBefore(actor, move, partner, partnerAction->executedMove, speed))
+            continue;
+        for (enum BattlerId target = 0; target < gBattlersCount; target++)
+        {
+            if (!IsBattlerAlive(target) || IsBattlerAlly(actor, target)
+             || gBattleMons[target].volatiles.substitute || gBattleMons[target].volatiles.rage
+             || IsSemiInvulnerable(target, CHECK_ALL))
+                continue;
+            bool32 safe = TRUE;
+            for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+            {
+                if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+                    continue;
+                enum Move incoming = GetCommittedMove(foe);
+                if (PairPivotSensitiveMove(incoming))
+                    safe = FALSE;
+                else if (IsBattleMoveStatus(incoming))
+                {
+                    if (incoming != MOVE_HELPING_HAND && incoming != MOVE_CELEBRATE
+                     && !(GetMoveEffect(incoming) == EFFECT_PROTECT && foe != target))
+                        safe = FALSE;
+                }
+                else if (!PairPivotStrictlyBefore(actor, move, foe, incoming, speed))
+                    safe = FALSE;
+            }
+            if (!safe || AI_GetMoveAccuracy(gAiLogicData, actor, target, move) < 100)
+                continue;
+            enum Stat attack = IsBattleMovePhysical(move) ? STAT_ATK : STAT_SPATK;
+            enum Stat defense = IsBattleMovePhysical(move) ? STAT_DEF : STAT_SPDEF;
+            if (gBattleMons[actor].statStages[attack] < DEFAULT_STAT_STAGE
+             || gBattleMons[target].statStages[defense] > DEFAULT_STAT_STAGE)
+                continue;
+            struct AiCalcValues calc = {.move = move, .weather = AI_GetWeather(), .terrain = gFieldTimers.terrain};
+            struct SimulatedDamage damage = AI_CalcDamage(&calc, actor, target);
+            // The nonlethal margin includes the maximum ordinary critical
+            // multiplier. Avoid faint-triggered effects and displaced KO credit.
+            if (!damage.affectsTarget || !damage.minimum || 3u * damage.maximum >= gBattleMons[target].hp
+             || AI_GetContactDamage(actor, target, move, gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor],
+                 gAiLogicData->holdEffects[target], gAiLogicData->abilities[target]))
+                continue;
+            if (damage.minimum > bestDamage)
+            {
+                bestDamage = damage.minimum;
+                *action = (struct PairAction){.move = move, .executedMove = move, .index = slot,
+                    .target = target, .score = AI_SCORE_DEFAULT,
+                    .priority = AI_GetMovePriority(actor, gAiLogicData->abilities[actor], move)};
+            }
+        }
+    }
+    return bestDamage != 0;
+}
+
 bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
 {
     enum BattlerId partner = GetPartnerBattler(actor);
@@ -3592,7 +4742,8 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
         return TRUE;
     struct SwitchCandidateSnapshot *state = AI_SaveCandidateState();
     struct PairEvaluation *ev = AllocZeroed(sizeof(*ev));
-    ev->board.state = AI_SaveCandidateState();
+    // This owner restores before every candidate and at decisionReady. A
+    // second full snapshot inside each board wastes more than8 KiB of heap.
     u8 reserves[2][PARTY_SIZE + 1] = {{PARTY_SIZE}, {PARTY_SIZE}};
     u32 count[2] = {1, 1};
     enum BattlerId actors[2] = {actor, partner};
@@ -3683,7 +4834,8 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     if (mega != retainedMega)
                         continue;
                 }
-                if ((mega == 3 && IsPartnerMonFromSameTrainer(actor))
+                if ((mega == 3 && IsPartnerMonFromSameTrainer(actor)
+                     && GetRemainingMegaEvolutions(actor) < 2)
                     || (mega & ~canMega)
                     || ((mega & 1) && slots[0] < PARTY_SIZE)
                     || ((mega & 2) && slots[1] < PARTY_SIZE))
@@ -3741,9 +4893,16 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     }
 decisionReady:
     AI_RestoreCandidateState(state);
+    bool32 attackPivot[2] = {FALSE, FALSE};
+    if (!bestMega)
+        for (u32 index = 0; index < 2; index++)
+            if (bestReserves[index] < PARTY_SIZE && bestReserves[index ^ 1] == PARTY_SIZE)
+                attackPivot[index] = PairTryAttackBeforeSwitch(actors[index], bestReserves[index],
+                    &bestActions[index ^ 1], &bestActions[index]);
+    // Queries must not leak scratch data or RNG into the real turn.
+    AI_RestoreCandidateState(state);
     AI_FreeCandidateState(state);
-    AI_FreeCandidateState(ev->board.state);
-    Free(ev);
+    FreePairEvaluation(ev);
     for (u32 index = 0; index < 2; index++)
     {
         enum BattlerId battler = actors[index];
@@ -3752,7 +4911,7 @@ decisionReady:
         gAiLogicData->mostSuitableMonId[battler] = bestReserves[index];
         gAiLogicData->monToSwitchInId[battler] = bestReserves[index];
         gBattleStruct->AI_monToSwitchIntoId[battler] = bestReserves[index];
-        if (bestReserves[index] < PARTY_SIZE)
+        if (bestReserves[index] < PARTY_SIZE && !attackPivot[index])
             gAiLogicData->shouldSwitch |= 1u << battler;
         gAiBattleData->chosenMoveIndex[battler] = bestActions[index].index == PAIR_IDLE ? 0 : bestActions[index].index;
         gAiBattleData->chosenTarget[battler] = bestActions[index].target;

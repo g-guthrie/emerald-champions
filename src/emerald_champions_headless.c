@@ -1336,6 +1336,7 @@ void EmeraldChampionsHeadlessObserve(void)
     }
     if (EmeraldChampionsHeadlessBattleAutomationActive()
      || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BERRY_ECONOMY
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ECONOMY_SHOPS
      || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_C14_SONG)
     {
         if (!gMain.inBattle)
@@ -2251,6 +2252,42 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         break;
     case EC_HEADLESS_SCENARIO_OPTIONS:
         SetMainCallback2(CB2_InitOptionMenu);
+        break;
+    case EC_HEADLESS_SCENARIO_ECONOMY_SHOPS:
+        // Synthetic shop prerequisites; all purchases use native NPC/menu input.
+        ClearBag();
+        memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+        SetMoney(&gSaveBlock1Ptr->money, gEcHeadlessFixtureParam == 0 ? 6000 : 20000);
+        if (gEcHeadlessFixtureParam == 0)
+            LoadHeadlessMap(MAP_RUSTBORO_CITY_MART, 5, 3);
+        else
+        {
+            if (gEcHeadlessFixtureParam != 2)
+                AddBagItem(ITEM_MEGA_RING, 1);
+            if (gEcHeadlessFixtureParam == 3)
+                AddPCItem(ITEM_PIDGEOTITE, 1);
+            if (gEcHeadlessFixtureParam == 4)
+            {
+                u16 item = ITEM_PIDGEOTITE;
+                CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIDGEOT, 36, OTID_STRUCT_PLAYER_ID);
+                SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
+                CalculatePlayerPartyCount();
+            }
+            if (gEcHeadlessFixtureParam == 5)
+            {
+                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_PIDGEOTITE)];
+                for (u32 slot = 0; slot < pocket->capacity; slot++)
+                    BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POTION, MAX_BAG_ITEM_CAPACITY);
+            }
+            if (gEcHeadlessFixtureParam == 6)
+                SetMoney(&gSaveBlock1Ptr->money, 19999);
+            if (gEcHeadlessFixtureParam == 7)
+                LoadHeadlessMap(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F, 9, 4);
+            else if (gEcHeadlessFixtureParam == 8)
+                LoadHeadlessMap(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F, 7, 4);
+            else
+                LoadHeadlessMap(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F, 10, 4);
+        }
         break;
     case EC_HEADLESS_SCENARIO_BATTLE_VENDOR:
         if (gEcHeadlessFixtureParam != 0)
