@@ -989,6 +989,15 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
              || (gBattleMons[battler].volatiles.semiInvulnerable
                  && gBattleMons[battler].volatiles.semiInvulnerable != STATE_COMMANDER))
                 return TRUE;
+            // A last-PP attack is spent by one more waiting turn.
+            for (u32 index = 0; index < MAX_MON_MOVES; index++)
+            {
+                enum Move move = gBattleMons[battler].moves[index];
+                if (move != MOVE_NONE && gBattleMons[battler].pp[index] == 1
+                 && !IsBattleMoveStatus(move)
+                 && !IsMoveUnusable(index, move, gAiLogicData->moveLimitations[battler]))
+                    return TRUE;
+            }
             continue;
         }
         if (EC_PerishPlanScore(battler, MOVE_PROTECT) > 0)

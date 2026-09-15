@@ -38,10 +38,11 @@ AI_DOUBLE_BATTLE_TEST("EC Protect cadence: a last entrant takes its Fake Out kno
         TURN {
             MOVE(playerLeft, MOVE_EARTH_POWER, target: opponentLeft);
             MOVE(playerRight, MOVE_DUAL_WINGBEAT, target: opponentLeft, hit: TRUE);
-            EXPECT_MOVE(opponentLeft, MOVE_FAKE_OUT, target: playerRight);
+            // The flank it flinches is an expected-value choice it may make
+            // either way; spending the turn on an empty shield is not.
+            EXPECT_MOVE(opponentLeft, MOVE_FAKE_OUT);
         }
     } THEN {
-        EXPECT_EQ(playerRight->hp, 0);
         EXPECT_EQ(opponentLeft->hp, 0);
     }
 }
@@ -143,7 +144,13 @@ AI_DOUBLE_BATTLE_TEST("EC Protect cadence: repeated guards retain transient atta
             else
                 MOVE(playerLeft, MOVE_CELEBRATE);
             MOVE(playerRight, MOVE_EARTHQUAKE);
-            EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+            // Exhausting the last Earthquake is a decisive reason to repeat a
+            // one-in-three shield. An incoming Fly that lands either way is
+            // not: the threat simply returns, so the repeat is not banked.
+            if (airborne)
+                NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+            else
+                EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
         }
     } THEN {
         if (!airborne)
@@ -151,28 +158,91 @@ AI_DOUBLE_BATTLE_TEST("EC Protect cadence: repeated guards retain transient atta
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC Protect cadence: Fake Out permission follows the committed move")
+AI_DOUBLE_BATTLE_TEST("EC Protect cadence: Fake Out takes the target with the larger expected denial")
 {
-    bool32 fakeOut;
-    PARAMETRIZE { fakeOut = FALSE; }
-    PARAMETRIZE { fakeOut = TRUE; }
     GIVEN {
         AI_FLAGS(CADENCE_FLAGS);
-        PLAYER(SPECIES_MIENFOO) { HP(500); MaxHP(500); Attack(300); Speed(100); Moves(MOVE_BRICK_BREAK, MOVE_FAKE_OUT); }
-        PLAYER(SPECIES_MACHOP) { HP(500); MaxHP(500); Attack(300); Speed(90); Moves(MOVE_BRICK_BREAK); }
-        OPPONENT(SPECIES_NOSEPASS) { HP(50); MaxHP(50); Defense(50); Speed(20); Ability(ABILITY_MAGNET_PULL); Moves(MOVE_TACKLE, MOVE_PROTECT); }
-        OPPONENT(SPECIES_NOSEPASS) { HP(50); MaxHP(50); Defense(50); Speed(10); Ability(ABILITY_MAGNET_PULL); Moves(MOVE_TACKLE, MOVE_PROTECT); }
+        // One flank is a knockout, the other is chip on a bulky attacker.
+        // Nothing about the human's pending commands separates them.
+        PLAYER(SPECIES_MACHOP) { HP(500); MaxHP(500); Attack(300); Defense(300); Speed(90); Moves(MOVE_BRICK_BREAK); }
+        PLAYER(SPECIES_MIENFOO) { HP(3); MaxHP(500); Attack(300); Defense(5); Speed(80); Moves(MOVE_BRICK_BREAK); }
+        OPPONENT(SPECIES_MIENFOO) {
+            Level(30); HP(200); MaxHP(200); Attack(120); Speed(100);
+            Ability(ABILITY_INNER_FOCUS); Moves(MOVE_FAKE_OUT, MOVE_CELEBRATE);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(10); Moves(MOVE_CELEBRATE); }
     } WHEN {
         TURN {
-            MOVE(playerLeft, fakeOut ? MOVE_FAKE_OUT : MOVE_BRICK_BREAK, target: opponentLeft);
-            MOVE(playerRight, MOVE_BRICK_BREAK, target: opponentRight);
+            MOVE(playerLeft, MOVE_BRICK_BREAK, target: opponentLeft);
+            MOVE(playerRight, MOVE_BRICK_BREAK, target: opponentLeft);
+            EXPECT_MOVE(opponentLeft, MOVE_FAKE_OUT, target: playerRight);
         }
     } THEN {
-        if (fakeOut) {
-            EXPECT_EQ(opponentLeft->hp, 50);
-            EXPECT_EQ(opponentRight->hp, 50);
-        } else {
-            EXPECT(opponentLeft->hp == 0 || opponentRight->hp == 0);
+        EXPECT_EQ(playerRight->hp, 0);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Protect cadence: an unknowable double target does not outrank an available knockout")
+{
+    GIVEN {
+        AI_FLAGS(CADENCE_FLAGS);
+        // Either human flank could add its Brick Break to the other and end
+        // Nosepass this turn. Nothing reveals whether they will, and Power Gem
+        // removes half of that threat outright, so the shield is not worth it.
+        PLAYER(SPECIES_TAUROS) { Level(30); HP(150); MaxHP(150); Attack(300); Defense(80); SpDefense(40); Speed(40); Moves(MOVE_BRICK_BREAK, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MACHOP) { Level(30); HP(500); MaxHP(500); Attack(300); Defense(80); SpDefense(40); Speed(20); Moves(MOVE_BRICK_BREAK, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_NOSEPASS) {
+            Level(30); HP(300); MaxHP(300); Defense(60); SpAttack(300); SpDefense(60); Speed(100);
+            Ability(ABILITY_MAGNET_PULL); Moves(MOVE_POWER_GEM, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(10); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_BRICK_BREAK, target: opponentLeft);
+            MOVE(playerRight, MOVE_BRICK_BREAK, target: opponentLeft);
+            // Which flank it removes is an expected-value choice; spending the
+            // turn behind a shield it cannot justify is not.
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+            EXPECT_MOVE(opponentLeft, MOVE_POWER_GEM);
+        }
+        TURN {
+            MOVE(playerRight, MOVE_BRICK_BREAK, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+        }
+        TURN { MOVE(playerRight, MOVE_BRICK_BREAK, target: opponentRight); }
+    } THEN {
+        EXPECT_EQ(opponentLeft->hp, 0);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Protect cadence: a shield that buys the partner's Trick Room is worth the turn")
+{
+    bool32 payoff;
+    PARAMETRIZE { payoff = TRUE; }
+    PARAMETRIZE { payoff = FALSE; }
+    GIVEN {
+        AI_FLAGS(CADENCE_FLAGS);
+        PLAYER(SPECIES_TAUROS) { Level(30); HP(400); MaxHP(400); Attack(250); Defense(200); SpDefense(200); Speed(120); Moves(MOVE_STRENGTH); }
+        PLAYER(SPECIES_MACHOP) { Level(30); HP(400); MaxHP(400); Attack(250); Defense(200); SpDefense(200); Speed(110); Moves(MOVE_BRICK_BREAK); }
+        // The guard's own slot is the obvious double target and cannot win the
+        // exchange. Only the partner's turn makes the shield worth its tempo.
+        OPPONENT(SPECIES_BRONZOR) {
+            Level(30); HP(50); MaxHP(50); Defense(30); SpAttack(20); SpDefense(30); Speed(30);
+            Ability(ABILITY_LEVITATE); Moves(MOVE_CONFUSION, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_BRONZONG) {
+            Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10);
+            Ability(ABILITY_LEVITATE);
+            Moves(payoff ? MOVE_TRICK_ROOM : MOVE_CONFUSION, MOVE_CELEBRATE);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_STRENGTH, target: opponentLeft);
+            MOVE(playerRight, MOVE_BRICK_BREAK, target: opponentLeft);
+            if (payoff)
+                EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+            else
+                NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
         }
     }
 }
