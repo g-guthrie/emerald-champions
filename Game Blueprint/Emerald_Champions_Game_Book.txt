@@ -129215,5 +129215,5 @@ Additional adopted retirements: E0051 TRAINER_GRUNT_MUSEUM_2 -- remove the secon
 REFERENCE COVERAGE
 Authoring: 368 trainer variants/1753 slots; 1577 unique builds. Map definitions:540. Complete economy census and unresolved conditions are in C6; wild method tables:381; configured evolution rows:496.
 Known limits: this is not a full transcript, runtime access/necessity proof, stock-condition simulator or battle acceptance. Native providers and dynamic regional choices must be followed through their source owner. No claim that prose/code drift is impossible.
-Source SHA256: da6461a602c9108bd494c1815bc51ffb42d773d292fa8f0ec30a38af8556ba91
+Source SHA256: 12f4f9cc1816f302b12ae493c16288d0415f7bd23140b15b3320822132fa5218
 === END GENERATED GAME REFERENCE ===
