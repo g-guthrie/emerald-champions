@@ -245,21 +245,28 @@ DOUBLE_BATTLE_TEST("EC Gym mechanics: Cristian's actual Beat Up builds Rage Fist
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC Gym: Cristian chooses a useful survivable Rage Fist activation")
+AI_DOUBLE_BATTLE_TEST("EC Gym: Cristian activates the recipient that survives the Beat Up")
 {
+    bool32 lethal;
+    // Beat Up is Dark: it is lethal on the Ghost recipient and merely feeds
+    // Justified on the Steel one. The authored plan rejects friendly fire that
+    // kills the recipient, so only the survivable activation may be chosen.
+    PARAMETRIZE { lethal = TRUE; }   // Annihilape, weak to Dark.
+    PARAMETRIZE { lethal = FALSE; }  // Lucario, resists Dark.
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(140); MaxHP(140); Defense(100); SpAttack(120); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_PSYCHIC); }
         PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(300); MaxHP(300); Defense(150); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
-        AuthoredOpponentWithPartner(TRAINER_CRISTIAN, 1, FALSE, 2);
+        AuthoredOpponentWithPartner(TRAINER_CRISTIAN, 1, FALSE, lethal ? 2 : 3);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
             MOVE(playerRight, MOVE_CELEBRATE);
-            EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP, target: opponentRight);
-            EXPECT_MOVE(opponentRight, MOVE_RAGE_FIST, target: playerLeft);
+            if (lethal)
+                NOT_EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP);
+            else
+                EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP, target: opponentRight);
         }
     } THEN {
-        EXPECT_EQ(playerLeft->hp, 0);
         EXPECT(opponentRight->hp > 0);
         Test_MgbaPrintf("CRISTIAN_RAGE_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
         EXPECT(gBattleStruct->aiDelayFrames <= 72);
@@ -959,7 +966,10 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker repeats Earthquake safely th
         // Arm. Speed 84 is attainable by a Jolly, Speed-invested Lv45 Coalossal.
         PLAYER(SPECIES_COALOSSAL) { Level(45); Ability(ABILITY_FLAME_BODY); Item(ITEM_FOCUS_SASH); Speed(84); Moves(MOVE_PROTECT, MOVE_TACKLE); }
         PLAYER(SPECIES_COALOSSAL) { Level(45); Ability(ABILITY_FLAME_BODY); Item(ITEM_FOCUS_SASH); Speed(84); Moves(MOVE_PROTECT, MOVE_TACKLE); }
-        AuthoredOpponent(TRAINER_PARKER, 4, FALSE);
+        // Parker's room was re-authored: Farigiraf now leads beside Oranguru
+        // and Lickilicky is the Earthquake the room Instructs. Deploy the
+        // recipient this fixture is about.
+        AuthoredOpponentWithPartner(TRAINER_PARKER, 4, FALSE, 2);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT);

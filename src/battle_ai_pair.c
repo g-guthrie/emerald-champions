@@ -65,6 +65,12 @@
 #define PAIR_GUARD_BANKED_WAIT 40
 #define PAIR_GUARD_BANKED_PARTNER 25
 
+// An authored signature interaction (ACTIVATE / INSTRUCT / AFTER_YOU) is the
+// point of the trainer, not an accident of the damage arithmetic. Reward it on
+// the same bounded scale as the other authored plans, and only while the
+// recipient is still alive to use what the trigger gives it.
+#define PAIR_TACTIC_REWARD 80
+
 static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MOVE_REVELATION_DANCE, MOVE_AQUA_STEP, MOVE_FEATHER_DANCE};
 
 // Stop optional comparisons after one second, leaving room under the 1.2s
@@ -92,6 +98,7 @@ struct PairAction
     u8 index;
     u8 target;
     s16 planScore;
+    s16 tacticScore;
     s8 priority;
     enum Move executedMove; // Nature Power's called move; move/index remain the command.
     u8 danceCopy; // Copied-dance index + 1; zero is an ordinary selected action.
@@ -1111,6 +1118,37 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         }
     }
     return score;
+}
+
+// The authored trigger must actually reach the authored recipient this turn:
+// a single-target activation aimed elsewhere is not the interaction.
+static s32 PairTacticScore(enum BattlerId actor, const struct PairAction *action)
+{
+    enum BattlerId partner = GetPartnerBattler(actor);
+    if (action->index == PAIR_IDLE || !IsBattlerAlive(actor) || !IsBattlerAlive(partner))
+        return 0;
+    if (!(EmeraldChampions_GetTacticKind(actor, partner, action->move)
+          & (EC_BATTLE_TACTIC_ACTIVATE | EC_BATTLE_TACTIC_AFTER_YOU | EC_BATTLE_TACTIC_INSTRUCT)))
+        return 0;
+    if (!PairSpread(action->executedMove) && action->target != partner)
+        return 0;
+    // The authored rule is explicit: friendly fire that kills the recipient is
+    // not the interaction. A super-effective trigger is a cost however the
+    // roll lands - Beat Up is Dark, which feeds a Steel recipient's Justified
+    // and kills a Ghost one - and the worst roll must leave it standing.
+    if (!IsBattleMoveStatus(action->executedMove))
+    {
+        u32 cost = gAiLogicData->simulatedDmg[actor][partner][action->index].maximum;
+        // The cached figure is one strike; the authored count is what lands.
+        if (GetMoveEffect(action->executedMove) == EFFECT_BEAT_UP)
+            cost *= AI_GetBeatUpHitCount(actor);
+        else if (GetMoveStrikeCount(action->executedMove) > 1)
+            cost *= GetMoveStrikeCount(action->executedMove);
+        if (gAiLogicData->effectiveness[actor][partner][action->index] > UQ_4_12(1.0)
+         || cost >= gBattleMons[partner].hp)
+            return 0;
+    }
+    return PAIR_TACTIC_REWARD;
 }
 
 static u32 PairChangeStage(u8 *stage, s32 change)
@@ -2561,6 +2599,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     // that chose the guard. Measured inside the trial, so turn order, misses,
     // redirection and an ally that removes the attacker first all apply.
     s32 guardDenied[MAX_BATTLERS_COUNT] = {0};
+    s32 tacticReward[MAX_BATTLERS_COUNT] = {0};
     u8 sideGuardUser[NUM_BATTLE_SIDES][2];
     memset(sideGuardUser, MAX_BATTLERS_COUNT, sizeof(sideGuardUser));
     u32 weather = ev->weather;
@@ -2725,6 +2764,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 coachingOpinion += planScore;
             else
                 score += planScore;
+            // Deferred: an activation that kills its own recipient is not the
+            // authored interaction, so the reward is only paid if the recipient
+            // is still standing when the turn ends.
+            if (action->tacticScore)
+                tacticReward[actor] = action->tacticScore;
             // The complete turn owns protection's value. Applying the
             // isolated scorer again can prefer a blocked attack over a shield
             // that saves HP while producing the same damage on both sides.
@@ -4098,6 +4142,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
         if (guardDenied[actor])
             score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions)) / 100;
+    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+        if (tacticReward[actor] && hp[GetPartnerBattler(actor)])
+            score += tacticReward[actor];
     return score;
 }
 
@@ -4305,6 +4352,7 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             struct PairAction *action = &ev->choices[battler][index];
             action->priority = AI_GetMovePriority(battler, gAiLogicData->abilities[battler], action->move);
             action->planScore = GetBattlerSide(battler) == ev->side ? PairPlanScore(battler, action) : 0;
+            action->tacticScore = GetBattlerSide(battler) == ev->side ? PairTacticScore(battler, action) : 0;
         }
     }
     // Confirmed human actions have exactly one choice. Only genuinely unknown

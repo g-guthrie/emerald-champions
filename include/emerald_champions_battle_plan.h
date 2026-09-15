@@ -47,5 +47,8 @@ u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler);
 // native legality, activation survival and resulting payoff still decide it.
 u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species species, enum Species partnerSpecies);
 bool32 EmeraldChampions_HasTacticActor(enum BattlerId actor, u32 kind);
+// Authored signature interaction between two active battlers: the kinds whose
+// actor, recipient and move all match this turn's actual command.
+u32 EmeraldChampions_GetTacticKind(enum BattlerId actor, enum BattlerId recipient, enum Move move);
 
 #endif
