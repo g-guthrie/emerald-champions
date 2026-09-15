@@ -50,6 +50,11 @@
 // Expected value drives the choice. A small pessimism share keeps a rare
 // catastrophe visible without restoring assume-the-worst guarding.
 #define PAIR_RISK_AVERSION 25
+// Scoring every candidate pair against every forecast does not fit the 1.2s
+// decision budget. Rank the pairs once against the primary forecast, then
+// settle the shortlist on expected value. A shield still reaches the
+// shortlist: it scores well against the pattern it is meant to answer.
+#define PAIR_SHORTLIST 4
 
 // Guard policy. A shield's simulated HP saving is not all permanent: with no
 // payoff the same threat simply returns next turn and the foes can focus the
@@ -914,62 +919,6 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
     return count;
 }
 
-// Which forecast actions a chosen guard actually stops. Contact shields and
-// Crafty Shield deny no damage here; their value stays in the trial itself.
-static bool32 PairGuardStops(enum Move guard, enum BattlerId user, enum BattlerId covered,
-    enum BattlerId foe, const struct PairAction *action)
-{
-    if (!PairForecastHitsTarget(foe, action, covered))
-        return FALSE;
-    enum ProtectMethod method = GetMoveProtectMethod(guard);
-    if (GetProtectType(method) == PROTECT_TYPE_SINGLE)
-        return covered == user;
-    switch (method)
-    {
-    case PROTECT_WIDE_GUARD:
-        return PairSpread(action->executedMove);
-    case PROTECT_QUICK_GUARD:
-        return action->priority > 0;
-    case PROTECT_MAT_BLOCK:
-        return TRUE;
-    default:
-        return FALSE;
-    }
-}
-
-// Expected damage the guard denies this turn, in the same health units
-// PairMonValue uses (a healthy member is worth 180), plus the knockout credit
-// PairJointFoeForecast applies when the denial is guaranteed.
-static s32 PairGuardDeniedValue(const struct PairEvaluation *ev, enum BattlerId user,
-    const struct PairAction *actions)
-{
-    enum Move guard = actions[user].move;
-    s32 value = 0;
-    for (enum BattlerId covered = 0; covered < gBattlersCount; covered++)
-    {
-        if (!IsBattlerAlive(covered) || !IsBattlerAlly(user, covered))
-            continue;
-        u32 hp = gBattleMons[covered].hp;
-        u32 expected = 0, median = hp, guaranteed = hp;
-        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
-        {
-            if (!IsBattlerAlive(foe) || IsBattlerAlly(user, foe) || actions[foe].index == PAIR_IDLE
-             || !PairGuardStops(guard, user, covered, foe, &actions[foe]))
-                continue;
-            const struct SimulatedDamage *damage = &gAiLogicData->simulatedDmg[foe][covered][actions[foe].index];
-            u32 chance = min(100, gAiLogicData->moveAccuracy[foe][covered][actions[foe].index]);
-            u32 dealt = PairForecastDamage(ev, foe, covered, &actions[foe], median, damage->median);
-            median -= dealt;
-            expected += dealt * chance / 100;
-            guaranteed -= PairForecastDamage(ev, foe, covered, &actions[foe], guaranteed, damage->minimum);
-        }
-        value += (s32)(expected * 180 / max(1, gBattleMons[covered].maxHP));
-        if (!guaranteed)
-            value += 80;
-    }
-    return value;
-}
-
 // A partner turn the shield genuinely buys: an authored field or setup reward
 // (Trick Room, Tailwind, weather, a stat boost), a Fake Out turn, or a
 // knockout the partner is certain to land while the guard absorbs the reply.
@@ -995,14 +944,13 @@ static bool32 PairGuardPartnerPayoff(enum BattlerId user, const struct PairActio
 
 // The share of the denied damage that waiting actually banks. Without a payoff
 // the threat returns next turn, so most of it is only postponed.
-static s32 PairGuardDiscount(const struct PairEvaluation *ev, enum BattlerId user,
+static u32 PairGuardBankedShare(const struct PairEvaluation *ev, enum BattlerId user,
     const struct PairAction *actions)
 {
     u32 banked = PAIR_GUARD_BANKED_BASE
         + (ev->waitingPayoff ? PAIR_GUARD_BANKED_WAIT : 0)
         + (PairGuardPartnerPayoff(user, actions) ? PAIR_GUARD_BANKED_PARTNER : 0);
-    banked = min(100, banked);
-    return PairGuardDeniedValue(ev, user, actions) * (s32)(100 - banked) / 100;
+    return min(100, banked);
 }
 
 static bool32 PairIsPassiveGuard(const struct PairAction *action)
@@ -2600,6 +2548,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     u32 encoredGuards = 0;
     u8 forcedGuardChance[MAX_BATTLERS_COUNT] = {0};
     u8 forcedWideChance[NUM_BATTLE_SIDES] = {0}, forcedQuickChance[NUM_BATTLE_SIDES] = {0};
+    // Health value this turn's guards actually denied, credited to the battler
+    // that chose the guard. Measured inside the trial, so turn order, misses,
+    // redirection and an ally that removes the attacker first all apply.
+    s32 guardDenied[MAX_BATTLERS_COUNT] = {0};
+    u8 sideGuardUser[NUM_BATTLE_SIDES][2];
+    memset(sideGuardUser, MAX_BATTLERS_COUNT, sizeof(sideGuardUser));
     u32 weather = ev->weather;
     bool32 trickRoom = gFieldStatuses & STATUS_FIELD_TRICK_ROOM;
     enum BattlerId forceNext = MAX_BATTLERS_COUNT;
@@ -2825,12 +2779,16 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 continue;
             if (chance < 100)
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
-            if (sign > 0 && !copy)
-                score -= PairGuardDiscount(ev, actor, actions);
             if (move == MOVE_WIDE_GUARD)
+            {
                 wideGuard |= 1u << GetBattlerSide(actor);
+                sideGuardUser[GetBattlerSide(actor)][0] = actor;
+            }
             else if (move == MOVE_QUICK_GUARD)
+            {
                 quickGuard |= 1u << GetBattlerSide(actor);
+                sideGuardUser[GetBattlerSide(actor)][1] = actor;
+            }
             else if (GetProtectType(GetMoveProtectMethod(move)) == PROTECT_TYPE_SINGLE)
                 protected |= 1u << actor;
             continue;
@@ -3168,13 +3126,32 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                  // when Encore will replace that command at execution time.
                  || IsBattleMoveStatus(ev->action[target].move)))
                 continue;
-            if (!MoveIgnoresProtect(move)
-             && (((protected & (1u << target)) && !AI_CanContactBypassProtect(actor, target, move))
-                 || (PairSpread(move) && (wideGuard & (1u << GetBattlerSide(target))))
-                 || (action->priority > 0
-                     && !IsBattlerAlly(actor, target)
-                     && (quickGuard & (1u << GetBattlerSide(target))))))
-                continue;
+            if (!MoveIgnoresProtect(move))
+            {
+                enum BattlerId guardUser = MAX_BATTLERS_COUNT;
+                if ((protected & (1u << target)) && !AI_CanContactBypassProtect(actor, target, move))
+                    guardUser = target;
+                else if (PairSpread(move) && (wideGuard & (1u << GetBattlerSide(target))))
+                    guardUser = sideGuardUser[GetBattlerSide(target)][0];
+                else if (action->priority > 0 && !IsBattlerAlly(actor, target)
+                      && (quickGuard & (1u << GetBattlerSide(target))))
+                    guardUser = sideGuardUser[GetBattlerSide(target)][1];
+                if (guardUser < MAX_BATTLERS_COUNT)
+                {
+                    if (guardUser < gBattlersCount && GetBattlerSide(guardUser) == ev->side
+                     && !IsBattlerAlly(actor, target) && !IsBattleMoveStatus(action->executedMove))
+                    {
+                        const struct SimulatedDamage *blocked = &gAiLogicData->simulatedDmg[actor][target][action->index];
+                        u32 accuracy = min(100, gAiLogicData->moveAccuracy[actor][target][action->index]);
+                        u32 median = PairForecastDamage(ev, actor, target, action, hp[target], blocked->median);
+                        guardDenied[guardUser] += (s32)(median * 180 / max(1, gBattleMons[target].maxHP)
+                            * accuracy / 100 * survival[actor] / 100);
+                        if (PairForecastDamage(ev, actor, target, action, hp[target], blocked->minimum) >= hp[target])
+                            guardDenied[guardUser] += 80 * (s32)survival[actor] / 100;
+                    }
+                    continue;
+                }
+            }
             u32 guardHitChance = copy ? copyWeights[original] : randomTarget ? 100 / randomTargets
                 : !PairSpread(move) && original != selectedTarget ? fallbackChance : 100;
             if (!MoveIgnoresProtect(move))
@@ -4106,6 +4083,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         }
         score += GetBattlerSide(actor) == ev->side ? value : -value;
     }
+    // A shield's saving is only partly permanent. Without a payoff the same
+    // threat returns next turn and the foes can focus the unprotected ally, so
+    // bank only the share a payoff makes real.
+    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+        if (guardDenied[actor])
+            score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions)) / 100;
     return score;
 }
 
@@ -4338,12 +4321,22 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
                 hasAlternative = TRUE;
         }
     }
+    struct PairShortlistEntry
+    {
+        s32 score;
+        u8 left;
+        u8 right;
+    } shortlist[PAIR_SHORTLIST];
+    u32 shortCount = 0;
+    bool32 mixed = FALSE;
     for (u32 left = 0; left < ev->count[actor]; left++)
     {
         for (u32 right = 0; right < ev->count[partner]; right++)
         {
-            if (canStop && PairDecisionBudgetExpired())
-                goto done;
+            // One shortlisted pair is already a legal action, so the search
+            // can respect the budget even on a board that has no fallback yet.
+            if ((canStop || shortCount != 0) && PairDecisionBudgetExpired())
+                goto settle;
             ev->action[actor] = ev->choices[actor][left];
             ev->action[partner] = ev->choices[partner][right];
             // Preserving the same board for one turn is not progress. Keep
@@ -4358,11 +4351,38 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             if (emptySoloGuard && hasAlternative && PairIsPassiveGuard(&ev->action[actor])
              && GetProtectType(GetMoveProtectMethod(ev->action[actor].move)) == PROTECT_TYPE_SINGLE)
                 continue;
-            // Expected value over the weighted opponent model, with a
-            // bounded pessimism share. Taking the minimum instead made every
-            // credible knockout pattern demand a shield.
-            s32 total = 0, worst = INT_MAX;
-            for (u32 forecast = 0; forecast < forecastCount; forecast++)
+            ev->action[firstFoe] = forecasts[0][0];
+            ev->action[secondFoe] = forecasts[0][1];
+            s32 primary = ScorePairWithImmediateEffects(ev);
+            u32 slot = shortCount;
+            while (slot > 0 && shortlist[slot - 1].score < primary)
+            {
+                if (slot < PAIR_SHORTLIST)
+                    shortlist[slot] = shortlist[slot - 1];
+                slot--;
+            }
+            if (slot < PAIR_SHORTLIST)
+            {
+                shortlist[slot] = (struct PairShortlistEntry){primary, left, right};
+                if (shortCount < PAIR_SHORTLIST)
+                    shortCount++;
+            }
+        }
+    }
+settle:
+    // Expected value over the weighted opponent model, with a bounded
+    // pessimism share. Taking the minimum instead made every credible
+    // knockout pattern demand a shield.
+    mixed = forecastCount > 1 && !PairDecisionBudgetExpired();
+    for (u32 entry = 0; entry < shortCount; entry++)
+    {
+        s32 total = shortlist[entry].score * 100, worst = shortlist[entry].score;
+        ev->action[actor] = ev->choices[actor][shortlist[entry].left];
+        ev->action[partner] = ev->choices[partner][shortlist[entry].right];
+        if (mixed)
+        {
+            total = shortlist[entry].score * forecastWeights[0];
+            for (u32 forecast = 1; forecast < forecastCount; forecast++)
             {
                 ev->action[firstFoe] = forecasts[forecast][0];
                 ev->action[secondFoe] = forecasts[forecast][1];
@@ -4370,15 +4390,15 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
                 total += forecastScore * forecastWeights[forecast];
                 worst = min(worst, forecastScore);
             }
-            s32 score = (total / 100 * (100 - PAIR_RISK_AVERSION) + worst * PAIR_RISK_AVERSION) / 100;
-            if (score > best)
+        }
+        s32 score = (total / 100 * (100 - PAIR_RISK_AVERSION) + worst * PAIR_RISK_AVERSION) / 100;
+        if (score > best)
+        {
+            best = score;
+            if (chosen != NULL)
             {
-                best = score;
-                if (chosen != NULL)
-                {
-                    chosen[0] = ev->action[actor];
-                    chosen[1] = ev->action[partner];
-                }
+                chosen[0] = ev->action[actor];
+                chosen[1] = ev->action[partner];
             }
         }
     }
