@@ -490,3 +490,144 @@ because the Tabitha activation fixture was deleted as data that no longer exists
    the 60-frame truncation ceiling on heavy boards, constants tuned against a
    test suite rather than play, and `AGENTS.md` line 176 plus the Game Book AI
    policy prose still authorizing the read.
+
+---
+
+# Round 3: the Perish exit, and the settled tactics
+
+Commit `f2a3407732`. Focused suite, now including
+`test/battle/ai/emerald_champions_perish.c`: **89 passed, 0 failed, 89 total.**
+
+## There was no off-by-one in the owner
+
+Round 2 diagnosed `EC_PerishMustEscape` as one turn late. That was wrong, and
+the native code settles it. `HandleEndTurnPerishSong`
+(`src/battle_end_turn.c:1020`) buffers the current count, **takes the life when
+the timer reads zero**, and otherwise decrements. Perish Song sets three
+(`src/battle_script_commands.c:6421`). With the song landing on turn one the
+counter therefore reads 3, 2, 1 at the ends of turns one to three and zero at
+the end of turn four, so **turn four is the last turn on which the singer can
+legally leave** — which is precisely the condition
+`EC_PerishMustEscape` tests (`perishSong && perishSongTimer == 0`), and precisely
+what the perish unit suite already pins (`EC Perish policy: fresh trapped
+targets, escape timing and immunity guards` asserts `!MustEscape` at timer 1,
+`ShouldPivotEarly` at timer 1, and `MustEscape` at timer 0). **No Perish
+assertion was deleted or weakened**; the suite passes unchanged, and the owner
+is untouched.
+
+The `turns == 4` parametrization always passed, i.e. the deadline exit always
+worked. What failed was `turns == 3`, which asserts the *authored preference* —
+leave one turn early while the partner still holds the trap. Two separate causes,
+both now fixed.
+
+### Cause 1 (model): the scoring rule was not uniform across a decision
+
+`mixed` was `forecastCount > 1 && (mustFinish || !PairDecisionBudgetExpired())`.
+Boards are evaluated in sequence within one decision, so once the budget expired
+a **switch candidate was scored against the primary forecast alone while the
+stay board it had to beat had been scored on the full weighted mixture**. Those
+two numbers are not comparable, and the bias runs against whichever board is
+evaluated later — the switch candidates. This was the cross-board yardstick risk
+listed in Round 1 §7.3, and it was costing Maura her early pivot.
+
+`mixed` is now `forecastCount > 1`. The budget controls *how many pairs are
+searched* (the stage-one shortlist loop still stops), never *how a pair is
+valued*.
+
+### Cause 2 (model): an authored early pivot paid the voluntary-switch cost
+
+`score -= 35` exists so the AI does not give up an action on a whim. Leaving one
+turn early while the partner maintains the trap is the authored PERISH_TRAP plan,
+not a change of mind, so it is now exempt alongside the deadline exit
+(`plannedExit`); the deadline exit additionally keeps its decisive bonus, since
+it is the last turn the singer can legally leave.
+
+### Cause 3 (fixture): the timeline was damage-roll dependent
+
+The fixture's four Chanseys were built with authored levels only. With Maura's
+re-levelled room they sometimes died to ordinary damage at the end of turn two —
+and when a perished lead is replaced, the replacement carries no song, so
+`IsAffectedFoe` correctly stops seeing a perished trapped foe and the early pivot
+correctly loses its reason. The parametrizations disagreed about whether that
+happened, which is what produced the `SEND_OUT not required (is the send out
+random?)` and `TURN 3 incomplete` symptoms on alternating runs. The Chanseys are
+now bulky enough that the countdown is the only clock, the send-outs sit on turn
+four where the perish faints, and the original intent — singer gone at the end of
+turn three, Gothitelle still out — holds again.
+
+## Settled authoring: ownership and two new positive fixtures
+
+`EC battle plans: compiled directives follow trainer ownership` now reflects the
+merged audits: Tabitha's Magma Hideout team is asserted to carry **no** partner
+tactic and no `ALLY_COMBO`, Cristian is the `ALLY_COMBO` owner, and Darius
+(`ACTIVATE TORNADUS TAILWIND KILOWATTREL`) and Nate (`INSTRUCT ORANGURU INSTRUCT
+DELPHOX`) are pinned by lookup.
+
+One model change was needed before Darius could ever fire: `PairTacticScore`
+required the trigger to be aimed at the recipient, but **Tailwind targets its own
+user**, so an authored side or field trigger could never qualify. The aim check
+now applies only to moves that can be pointed at a single foe; user, ally, field,
+spread and both-target moves reach their own side by construction.
+
+New fixtures:
+
+| Fixture | Asserts |
+| --- | --- |
+| `EC authored strategy: Darius charges Wind Power with the authored Tailwind` | Tornadus chooses the authored Tailwind beside its Wind Power recipient, the side status lands, Kilowattrel does not spend the turn guarding, and the player side takes damage |
+| `EC authored strategy: Nate instructs the Delphox that already attacked` | turn one establishes Delphox's move, turn two is the authored `INSTRUCT` aimed at it, and the recipient survives to use it |
+
+Both are bulky-lead boards on purpose: nothing can be knocked out, so the
+activation has to be chosen on the authored plan rather than on a knockout the
+recipient could take without it — which is exactly the suppressor added in
+Round 2.
+
+## Verification
+
+```sh
+make -j4 check-tools
+DEVKITARM=… make -j6 TEST=1 TEST_SOURCE_ALLOWLIST='test/test_runner.c test/test_runner_args.c \
+  test/test_runner_battle.c test/battle/ai/coaching_pair.c test/battle/ai/fainted_target_pair.c \
+  test/battle/ai/prankster_burn_pair.c test/battle/ai/quash_pair.c test/battle/ai/primary_support_pair.c \
+  test/battle/ai/emerald_champions_plans.c test/battle/ai/emerald_champions_perish.c \
+  test/battle/ai/mega_reveal.c test/battle/ai/protect_cadence.c test/battle/ai/dancer_pair.c \
+  test/battle/ai/screen_pair.c test/battle/ai/taunt_pair.c test/battle/ai/weather_survival_pair.c \
+  test/battle/ai/reflect_damage_pair.c' pokeemerald-test.elf
+python3 scripts/stamp_release_inputs.py --stamp pokeemerald-test.inputs.json
+python3 scripts/playthrough/run_focus.py --elf pokeemerald-test.elf --filter 'EC '
+DEVKITARM=… make -j6 pokeemerald.gba      # 33,554,432 bytes, clean
+```
+
+**89 passed, 0 failed, 89 total** (87 → 86 in Round 2 with the stale Tabitha
+fixture deleted, then +1 perish file, +2 new fixtures).
+
+Decision budget, every instrumented fixture, limit 72 frames (1.2 s):
+
+| Fixture | Round 2 | Round 3 |
+| --- | --- | --- |
+| `EC Dancer budget` | 61 | **66** |
+| `EC doubles budget` (both params) | 60 | **62** |
+| `EC Gym: Cristian` (both params) | 55 / 45 | 55 / 45 |
+| `EC Gym: Jocelyn` | — | 44 |
+| `EC authored strategy: Darius` | — | 23 |
+| `EC authored strategy: Nate` | — | 13 |
+
+Making the scoring rule uniform costs 5 frames on the heaviest board, which is
+the price of comparable scores; the worst case keeps 6 frames of headroom.
+
+## Open risks carried forward
+
+1. The two heaviest boards now sit at 66 and 62 of 72 frames. The headroom is
+   real but smaller than before, and a board heavier than the Dancer fixture is
+   still untested.
+2. The shortlist blind spot is unchanged: a pair that looks bad against the
+   primary forecast and good only in the passive one never reaches stage two.
+   No cheap fix was found.
+3. Fixtures that deploy authored parties remain sensitive to re-authoring. The
+   Maura case shows the failure mode is not always an assertion mismatch — a
+   level change can silently remove a plan's *precondition* and make correct AI
+   behaviour look like a regression. Where a fixture's subject is an AI rule
+   rather than a difficulty check, synthetic bulk is worth the explicitness.
+4. Constants (45/40/25 banking, tempo 10, pessimism 25, tactic 80) are still
+   tuned against a test suite rather than play.
+5. `AGENTS.md` line 176 and the Game Book AI policy prose still authorize the
+   read; both remain the main agent's to correct.
