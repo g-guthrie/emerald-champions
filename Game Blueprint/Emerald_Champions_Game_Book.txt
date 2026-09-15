@@ -47,7 +47,7 @@ The first Oldale visit, before the prepared Route103 rival, provides healing, st
 
 Manual medicine and X-items cannot brute-force trainer or wild fights. Poké Balls remain usable for catches, and held effects and healing/revival moves remain ordinary battle mechanics. Battle-start held items, including consumed berries, are restored at settlement. Field Potions, Revives, status cures and PP recovery remain exploration conveniences. Centers, the refillable Vial and established rest points reduce the need to purchase them.
 
-Easy, Medium and Hard adjust enemy levels only, by −4/−2/0 relative to the existing authored offsets. This September15 global calibration lowers every difficulty mode by two levels; the mode names and player caps remain unchanged. Earlier individual level seeds in review records predate this global reduction. Medium is the new-game default. They do not change teams, AI, story or the player cap. Each trainer member uses the live player cap plus its authored individual offset and the difficulty adjustment. Optional return fights scale with the live cap; old absolute levels in generated trainer records are previews. Opponents can exceed100 within the native1–255 representation. No hidden stat multiplier replaces level tuning.
+Easy, Medium and Hard adjust enemy levels only, by −2/0/+2. Medium is the new-game default. They do not change teams, AI, story or the player cap. Each trainer member uses the live player cap plus its authored individual offset and the difficulty adjustment. Optional return fights scale with the live cap; old absolute levels in generated trainer records are previews. Opponents can exceed100 within the native1–255 representation. No hidden stat multiplier replaces level tuning.
 
 Player caps rise after milestones, not during their boss fights. Captures, gifts, evolution and preparation respect the current individual cap. Legendary/mythical species above600 configured BST use floor(chapter cap ×600/BST), with a minimum of1. Species at or below600 retain the chapter cap. Ultra Beasts/Paradox species are not automatically restricted. Temporary Mega/Primal forms do not incur a second reduction. No additional Mega-ready penalty is approved.
 
@@ -956,6 +956,8 @@ Winstrates are an announced optional four-fight endurance challenge: no between-
 Agreed economy direction: ordinary play should fund several reasonable team rebuilds; substantial spending choices belong mainly to optional Pokémon and Megas. This section owns that design direction. Generated section C maps the current implementation by location and reward with code references. The September14 implementation below applies affordable evolution prices and dependable early Cord access. The later single-source Mega policy supersedes the earlier Lilycove purchase alternatives. Further reward redistribution needs location-specific design; the source atlas remains the complete current allocation. We are not adding collectible locations to fill a reward quota. Existing Emerald/Inclement pickups, NPCs, shops and event handoffs provide the delivery budget. Prefer replacing an unwanted item at a verified existing location over adding a sparkle, hidden item or actor. New playable choreography explicitly required by the story is separate work.
 
 Reward value comes primarily from new Pokémon options: evolution items, appropriate Mega Stones, fossils, useful gifted Pokémon and meaningful encounter access. Capture supplies are useful secondary rewards. Money matters only while it buys wanted choices. Ordinary held items, stat editing and move preparation are already free and should not be sold back to the player as progression prizes. Field healing is useful convenience but a weak default reward for an interesting early detour.
+
+Slateport decoration-shop membership guidance points to the Secret Power camper beside the large tree on Route111 north of the desert. His introduction unlocks the stock; no TM ownership or purchase is required. Creating a Secret Base also qualifies.
 
 Evolution purchases cost500 per stone,1000 per ordinary tool and3000 per reusable device. Rustboro sells its six common stones plus Linking Cord from first arrival; Slateport adds the other stones and imported tools; Lilycove provides the complete paid catalogue. Linking Cord must be available through a dependable early purchasing route, with optional gifts saving a purchase. Item-use trade evolutions remain local. Fossil revival is free; acquiring the fossil is the reward. Free species-dependent form tools are not paid stat improvements. No new evolution ticket or specialist currency is proposed where the existing item/service works.
 
@@ -13942,32 +13944,32 @@ R1482 native provider | data/event_scripts.s:1362 | Common_EventScript_PlayerHan
   Possible incoming branch GraniteCave_StevensRoom_EventScript_Steven | data/maps/GraniteCave_StevensRoom/scripts.inc:4: goto_if_set FLAG_DELIVERED_STEVEN_LETTER, GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge; setvar VAR_0x8004, ITEM_LETTER; goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem; setvar VAR_0x8004, ITEM_LETTER; goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
   Possible incoming branch SlateportCity_OceanicMuseum_2F_EventScript_Conclude | data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc:101: setvar VAR_0x8004, ITEM_DEVON_PARTS; goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem; call_if_unset FLAG_BADGE02_GET, SlateportCity_OceanicMuseum_2F_EventScript_BrawlyHandoff; call_if_eq VAR_REGISTER_BIRCH_STATE, 0, SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch; setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1
 
-R1483 native provider | data/event_scripts.s:1602 | EventScript_ChooseMonForInGameTrade
+R1483 native provider | data/event_scripts.s:1600 | EventScript_ChooseMonForInGameTrade
   special ChoosePartyMon
   NO MAP ENTRY ASSOCIATION: callback, macro, alternate/dormant or unbound path; not a confirmed campaign acquisition.
   Native provider: N107
 
-R1484 native provider | data/event_scripts.s:1612 | EventScript_DoInGameTrade
+R1484 native provider | data/event_scripts.s:1610 | EventScript_DoInGameTrade
   special CreateInGameTradePokemon
   NO MAP ENTRY ASSOCIATION: callback, macro, alternate/dormant or unbound path; not a confirmed campaign acquisition.
   Native provider: N126
 
-R1485 native provider | data/event_scripts.s:1613 | EventScript_DoInGameTrade
+R1485 native provider | data/event_scripts.s:1611 | EventScript_DoInGameTrade
   special DoInGameTradeScene
   NO MAP ENTRY ASSOCIATION: callback, macro, alternate/dormant or unbound path; not a confirmed campaign acquisition.
   Native provider: N127
 
-R1486 native provider | data/event_scripts.s:1689 | EventScript_VsSeekerChargingDone
+R1486 native provider | data/event_scripts.s:1687 | EventScript_VsSeekerChargingDone
   special VsSeekerFreezeObjectsAfterChargeComplete
   NO MAP ENTRY ASSOCIATION: callback, macro, alternate/dormant or unbound path; not a confirmed campaign acquisition.
   Native provider: N138
 
-R1487 native provider | data/event_scripts.s:1725 | EventScript_BrailleCursorWaitButton
+R1487 native provider | data/event_scripts.s:1723 | EventScript_BrailleCursorWaitButton
   special BrailleCursorToggle
   NO MAP ENTRY ASSOCIATION: callback, macro, alternate/dormant or unbound path; not a confirmed campaign acquisition.
   Native provider: N054
 
-R1488 native provider | data/event_scripts.s:1730 | EventScript_BrailleCursorWaitButton
+R1488 native provider | data/event_scripts.s:1728 | EventScript_BrailleCursorWaitButton
   special BrailleCursorToggle
   NO MAP ENTRY ASSOCIATION: callback, macro, alternate/dormant or unbound path; not a confirmed campaign acquisition.
   Caller inputs: {"VAR_0x8006": "1"}
@@ -16416,8 +16418,8 @@ R1810 native provider | data/scripts/cable_club.inc:838 | CableClub_EventScript_
   Caller inputs: {"VAR_FRONTIER_FACILITY": "FACILITY_UNION_ROOM", "VAR_0x8007": "VAR_LAST_TALKED"}
   Native provider: N097
   Local branch/receipt/cost statements: goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements; goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_AbortLinkPlayerHasBadEgg; goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_UnionRoomAdapterNotConnected
-  Possible incoming branch Common_EventScript_UnionRoomAttendant | data/event_scripts.s:1648:
-  VAR_RESULT POSSIBLE INPUTS (not a resolved item/price pairing): 0 @ data/event_scripts.s:1645,data/scripts/cable_club.inc:475,data/scripts/cable_club.inc:480; 1 @ data/scripts/cable_club.inc:470,data/scripts/cable_club.inc:898
+  Possible incoming branch Common_EventScript_UnionRoomAttendant | data/event_scripts.s:1646:
+  VAR_RESULT POSSIBLE INPUTS (not a resolved item/price pairing): 0 @ data/event_scripts.s:1643,data/scripts/cable_club.inc:475,data/scripts/cable_club.inc:480; 1 @ data/scripts/cable_club.inc:470,data/scripts/cable_club.inc:898
 
 R1811 native provider | data/scripts/cable_club.inc:889 | CableClub_EventScript_EnterUnionRoom
   special RunUnionRoom
@@ -16433,8 +16435,8 @@ R1812 native provider | data/scripts/cable_club.inc:938 | CableClub_EventScript_
   Caller inputs: {"VAR_FRONTIER_FACILITY": "FACILITY_MULTI_OR_EREADER"}
   Native provider: N097
   Local branch/receipt/cost statements: goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements; goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_AbortLinkPlayerHasBadEgg; goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_WelcomeToCableClub
-  Possible incoming branch Common_EventScript_DirectCornerAttendant | data/event_scripts.s:1664:
-  VAR_RESULT POSSIBLE INPUTS (not a resolved item/price pairing): 0 @ data/event_scripts.s:1645,data/scripts/cable_club.inc:475,data/scripts/cable_club.inc:480; 1 @ data/scripts/cable_club.inc:470,data/scripts/cable_club.inc:898
+  Possible incoming branch Common_EventScript_DirectCornerAttendant | data/event_scripts.s:1662:
+  VAR_RESULT POSSIBLE INPUTS (not a resolved item/price pairing): 0 @ data/event_scripts.s:1643,data/scripts/cable_club.inc:475,data/scripts/cable_club.inc:480; 1 @ data/scripts/cable_club.inc:470,data/scripts/cable_club.inc:898
 
 R1813 native provider | data/scripts/cave_hole.inc:31 | EventScript_FallDownHoleMtPyre
   special DoFallWarp
@@ -41023,7 +41025,7 @@ SOURCE data/event_scripts.s
   gText_HadQuiteAnExperienceTakeRest: MOM: {PLAYER}! Welcome home. / It sounds like you had quite an experience. / Maybe you should take a quick rest.
   gText_MomExplainHPGetPotions: MOM: Oh, good! You and your POKéMON are looking great. / I just heard from {STR_VAR_1}. / He said that POKéMON's energy is measured in HP. / If your POKéMON lose their HP, you can restore them at any POKéMON CENTER. / If you're going to travel far away, the smart TRAINER stocks up on POTIONS at the POKéMON MART. / Make me proud, honey! / Take care!
   gText_RegisteredTrainerinPokeNav: Registered {STR_VAR_1} {STR_VAR_2} in the POKéNAV.
-  gText_ComeBackWithSecretPower: Do you know the TM SECRET POWER? / Our group, we love the TM SECRET POWER. / One of our members will give it to you. Come back and show me if you get it. / We'll accept you as a member and sell you good stuff in secrecy.
+  gText_ComeBackWithSecretPower: We sell SECRET BASE decorations. / Meet our friend by the big tree on ROUTE 111, north of the desert. / He'll explain SECRET POWER. Come back afterward to see our stock!
   gText_PokerusExplanation: Your POKéMON may be infected with POKéRUS. / Little is known about the POKéRUS except that they are microscopic life- forms that attach to POKéMON. / While infected, POKéMON are said to grow exceptionally well.
   gText_DoorOpenedFarAway: It sounded as if a door opened somewhere far away.
   gText_BigHoleInTheWall: There is a big hole in the wall.
@@ -128548,5 +128550,5 @@ data/scripts/tv.inc:EventScript_DoInSearchOfTrainers => [NATIVE special DoTVShow
 REFERENCE COVERAGE
 Authoring: 368 trainer variants/1753 slots; 1512 unique builds. Map definitions:540. Complete economy census and unresolved conditions are in C6; wild method tables:381; configured evolution rows:496.
 Known limits: this is not a full transcript, runtime access/necessity proof, stock-condition simulator or battle acceptance. Native providers and dynamic regional choices must be followed through their source owner. No claim that prose/code drift is impossible.
-Source SHA256: 8fe5dd8c28ea7a7e33e622a7201463cd101c45c3a215f4a6e743ad3b6920b8b0
+Source SHA256: 61a59292424ca9c78621b99e0b267fbcce61f9649db9e05a8edbdfb4a1d0595a
 === END GENERATED GAME REFERENCE ===
