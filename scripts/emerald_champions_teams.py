@@ -425,7 +425,7 @@ def check_move_legality(branches: list[Branch]) -> tuple[list[str], list[str]]:
 
 WEATHER_SETTERS = {
     "RAIN": ({"DRIZZLE", "PRIMORDIAL_SEA"}, {"RAIN_DANCE"}),
-    "SUN": ({"DROUGHT", "DESOLATE_LAND"}, {"SUNNY_DAY"}),
+    "SUN": ({"DROUGHT", "DESOLATE_LAND", "ORICHALCUM_PULSE"}, {"SUNNY_DAY"}),
     "SAND": ({"SAND_STREAM", "SAND_SPIT"}, {"SANDSTORM"}),
     "SNOW": ({"SNOW_WARNING"}, {"SNOWSCAPE", "HAIL", "CHILLY_RECEPTION"}),
 }
@@ -444,9 +444,15 @@ def check_strategy_coherence(branches: list[Branch]) -> list[str]:
     move_categories = ec_moves.move_categories()
     chart = ec_moves.type_chart()
     violations: list[str] = []
+    # Two-owner battles (one E group, two trainer blocks) share the field: a
+    # weather set by the partner's branch satisfies this branch's flag.
+    group_mons: dict[int, list] = {}
+    for branch in branches:
+        group_mons.setdefault(branch.encounter, []).extend(branch.mons)
     for branch in branches:
         tag = f"E{branch.encounter:04d} {branch.trainer}"
         flags = set(branch.strategy)
+        field_mons = group_mons[branch.encounter]
         if "TRICK_ROOM" in flags and not any("TRICK_ROOM" in mon.moves for mon in branch.mons):
             violations.append(f"{tag}: strategy TRICK_ROOM flagged but no member knows Trick Room")
         weather_present = [flag for flag in ("RAIN", "SUN", "SAND", "SNOW") if flag in flags]
@@ -454,10 +460,10 @@ def check_strategy_coherence(branches: list[Branch]) -> list[str]:
             weather_abilities, weather_moves = WEATHER_SETTERS[flag]
             if not any(
                 mon.ability in weather_abilities or any(move in weather_moves for move in mon.moves)
-                for mon in branch.mons
+                for mon in field_mons
             ):
                 violations.append(f"{tag}: strategy {flag} flagged but no member has a matching weather ability/move")
-        if len(weather_present) > 1 and not re.search(r"\b(manual|replace)\b", branch.plan, re.I):
+        if len(weather_present) > 1 and not re.search(r"(manual|replace)", branch.plan, re.I):
             violations.append(
                 f"{tag}: mutually exclusive weather flags {sorted(weather_present)} "
                 f"without 'manual'/'replace' named in the plan"

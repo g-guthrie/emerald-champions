@@ -23334,10 +23334,10 @@ Level: 20
 Level Offset: 6
 Ability: ABILITY_FLUFFY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 0
+Happiness: 255
 EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
 Nature: NATURE_ADAMANT
-- MOVE_FRUSTRATION
+- MOVE_DOUBLE_EDGE
 - MOVE_WILD_CHARGE
 - MOVE_THUNDER_WAVE
 - MOVE_PROTECT

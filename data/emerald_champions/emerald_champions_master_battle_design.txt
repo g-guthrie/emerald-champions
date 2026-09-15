@@ -778,11 +778,11 @@ requirement: optional native pair
 status: master_audited_ready_for_implementation
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Meowth Galar, Rookidee, Wooloo, Minccino) on its own terms: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Frustration; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
-theme_and_tempo: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Frustration; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
+primary_question: Can the player beat this regular team (Meowth Galar, Rookidee, Wooloo, Minccino) on its own terms: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Double-Edge; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
+theme_and_tempo: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Double-Edge; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
 intentional_weakness: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
 first_loss_lesson: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
-strongest_part: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Frustration; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
+strongest_part: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Double-Edge; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
 weakest_link: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
@@ -796,7 +796,7 @@ strategy: TAILWIND
 team:
   1. SPECIES_MEOWTH_GALAR @ ITEM_EVIOLITE | level_offset=2 | ability=ABILITY_TOUGH_CLAWS | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_IRON_HEAD,MOVE_KNOCK_OFF,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_ROOKIDEE @ ITEM_EVIOLITE | level_offset=4 | ability=ABILITY_KEEN_EYE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_TAILWIND,MOVE_TAUNT,MOVE_ROOST | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_WOOLOO @ ITEM_EVIOLITE | level_offset=6 | ability=ABILITY_FLUFFY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FRUSTRATION,MOVE_WILD_CHARGE,MOVE_THUNDER_WAVE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=0
+  3. SPECIES_WOOLOO @ ITEM_EVIOLITE | level_offset=6 | ability=ABILITY_FLUFFY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_DOUBLE_EDGE,MOVE_WILD_CHARGE,MOVE_THUNDER_WAVE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   4. SPECIES_MINCCINO @ ITEM_WIDE_LENS | level_offset=3 | ability=ABILITY_SKILL_LINK | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_TAIL_SLAP,MOVE_KNOCK_OFF,MOVE_U_TURN,MOVE_ENCORE | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 --- BRANCH TRAINER_SARAH ---
@@ -7111,7 +7111,7 @@ branches:
 trainer_id: TRAINER_BRENDAN_LILYCOVE_MUDKIP
 format: double
 ai_extra: Ace Pokemon
-strategy: SETUP, TAILWIND
+strategy: SETUP
 team:
   1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
@@ -7124,7 +7124,7 @@ source_note: Hand-authored Emerald Champions team; implementation must match exa
 trainer_id: TRAINER_BRENDAN_LILYCOVE_TORCHIC
 format: double
 ai_extra: Ace Pokemon
-strategy: SETUP, TAILWIND
+strategy: SETUP
 team:
   1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
@@ -7137,7 +7137,7 @@ source_note: Hand-authored Emerald Champions team; implementation must match exa
 trainer_id: TRAINER_BRENDAN_LILYCOVE_TREECKO
 format: double
 ai_extra: Ace Pokemon
-strategy: SETUP, TAILWIND
+strategy: SETUP
 team:
   1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
@@ -7150,7 +7150,7 @@ source_note: Hand-authored Emerald Champions team; implementation must match exa
 trainer_id: TRAINER_MAY_LILYCOVE_MUDKIP
 format: double
 ai_extra: Ace Pokemon
-strategy: SETUP, TAILWIND
+strategy: SETUP
 team:
   1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
@@ -7163,7 +7163,7 @@ source_note: Hand-authored Emerald Champions team; implementation must match exa
 trainer_id: TRAINER_MAY_LILYCOVE_TORCHIC
 format: double
 ai_extra: Ace Pokemon
-strategy: SETUP, TAILWIND
+strategy: SETUP
 team:
   1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
@@ -7176,7 +7176,7 @@ source_note: Hand-authored Emerald Champions team; implementation must match exa
 trainer_id: TRAINER_MAY_LILYCOVE_TREECKO
 format: double
 ai_extra: Ace Pokemon
-strategy: SETUP, TAILWIND
+strategy: SETUP
 team:
   1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255

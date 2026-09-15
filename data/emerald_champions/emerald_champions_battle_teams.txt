@@ -260,11 +260,11 @@ SANDILE @EVIOLITE MOXIE JOLLY 4/252/0/0/0/252 3 | STOMPING_TANTRUM, CRUNCH, ROCK
 ## E0025 TRAINER_DAWSON class=regular
 strategy: TAILWIND
 mega_slots: NONE
-plan: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Frustration; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
+plan: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Double-Edge; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
 crack: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
 MEOWTH_GALAR @EVIOLITE TOUGH_CLAWS ADAMANT 252/252/4/0/0/0 2 | FAKE_OUT, IRON_HEAD, KNOCK_OFF, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 ROOKIDEE @EVIOLITE KEEN_EYE JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, TAILWIND, TAUNT, ROOST | ivs=31/31/31/31/31/31 | friendship=255
-WOOLOO @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 6 | FRUSTRATION, WILD_CHARGE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=0
+WOOLOO @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 6 | DOUBLE_EDGE, WILD_CHARGE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MINCCINO @WIDE_LENS SKILL_LINK JOLLY 4/252/0/0/0/252 3 | TAIL_SLAP, KNOCK_OFF, U_TURN, ENCORE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0025 TRAINER_SARAH class=regular
@@ -2454,7 +2454,7 @@ PRIMARINA @THROAT_SPRAY LIQUID_VOICE MODEST 4/0/0/252/0/252 0 | HYPER_VOICE, MOO
 ALTARIA @LIFE_ORB CLOUD_NINE TIMID 4/0/0/252/0/252 0 | DRAGON_PULSE, FIRE_BLAST, TAILWIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0302 TRAINER_BRENDAN_LILYCOVE_MUDKIP class=rival
-strategy: SETUP,TAILWIND
+strategy: SETUP
 mega_slots: 5
 ai: Ace Pokemon
 plan: The Lilycove rival is one design in six printings: five fixed members that are the rival's actual team, plus the starter that beats the player's. First two useful turns: Swellow's Flame Orb activates at the end of turn one and Guts then raises its Attack by 50 percent while the burn cannot reduce it, because Facade doubles against a statused user - so the rival's opening is to survive one turn and then hit with a 140 base power attack. Manectric's Lightning Rod draws every Electric attack on the field to itself and converts it into +1 Special Attack, and Volt Switch keeps the rival's positioning ahead of the player's. Alternate deployment: Breloom's Toxic Orb plus Poison Heal makes it immune to further status while healing an eighth per turn, and Spore is the most reliable disruption in the game; Hariyama's Thick Fat halves the Fire and Ice attacks aimed at the rival's Grass and Flying members and Fake Out buys the Mega turn. Reserves & disruption: Mega Salamence is the rival's constant ace in every variant - Aerilate turns Double-Edge into a Flying attack with a 20 percent boost, and Dragon Dance behind Intimidate makes it the win condition. The sixth slot is the starter chosen to beat the player's, and it is the only thing that changes between the six branches. Counterplay & audit: Grass and powder immunity, Electric immunity or a non-Electric answer to Manectric, Fairy and Ice pressure on Salamence, and denying the free Dragon Dance turn. Could this team be cooler? The old six branches differed in both the starter and the Mega, which meant the rival had three different aces and no identity at all - and two of those Megas, Metagross and Tyranitar, now belong to Magma's Space Center raid and its hideout gate. It is cooler now because the rival is a person the player can learn: the same five Pokemon, the same Guts-and-Poison-Heal status engine, the same Mega Salamence, and one slot that says "I picked the one that beats yours". That is a rival, rather than a randomiser.
@@ -2467,7 +2467,7 @@ SALAMENCE @SALAMENCITE INTIMIDATE ADAMANT 4/252/0/0/0/252 2 | DRAGON_DANCE, DOUB
 SCEPTILE @LIFE_ORB OVERGROW JOLLY 4/252/0/0/0/252 2 | LEAF_BLADE, DRAGON_CLAW, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0302 TRAINER_BRENDAN_LILYCOVE_TORCHIC class=rival
-strategy: SETUP,TAILWIND
+strategy: SETUP
 mega_slots: 5
 ai: Ace Pokemon
 plan: Identical design to the other five branches - see the Mudkip printing for the full plan. The five fixed members are Swellow's Guts-and-Flame-Orb opener, Lightning Rod Manectric, Poison Heal Breloom, Thick Fat Hariyama and the rival's constant Mega Salamence; only the sixth slot changes. Here the player chose Torchic, so the rival brings Swampert, whose Ground and Water lanes answer the Fire starter directly. Could this team be cooler? Keeping all six branches on one roster is the improvement: the rival now has a recognisable team rather than three different Megas across six files, and the starter slot carries the entire "I picked the one that beats yours" idea on its own.
@@ -2480,7 +2480,7 @@ SALAMENCE @SALAMENCITE INTIMIDATE ADAMANT 4/252/0/0/0/252 2 | DRAGON_DANCE, DOUB
 SWAMPERT @LIFE_ORB TORRENT ADAMANT 252/252/4/0/0/0 2 | WATERFALL, HIGH_HORSEPOWER, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0302 TRAINER_BRENDAN_LILYCOVE_TREECKO class=rival
-strategy: SETUP,TAILWIND
+strategy: SETUP
 mega_slots: 5
 ai: Ace Pokemon
 plan: Identical design to the other five branches - see the Mudkip printing for the full plan. Here the player chose Treecko, so the rival brings Blaziken, whose Speed Boost climbs every turn and whose Fire and Fighting lanes answer the Grass starter directly. Could this team be cooler? Keeping all six branches on one roster is the improvement; Blaziken's Speed Boost is also the one starter slot that genuinely changes how the fixed five play, because it gives the rival a second win condition beside Mega Salamence and the player has to answer both.
@@ -2493,7 +2493,7 @@ SALAMENCE @SALAMENCITE INTIMIDATE ADAMANT 4/252/0/0/0/252 2 | DRAGON_DANCE, DOUB
 BLAZIKEN @LIFE_ORB SPEED_BOOST JOLLY 4/252/0/0/0/252 2 | FLARE_BLITZ, CLOSE_COMBAT, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0302 TRAINER_MAY_LILYCOVE_MUDKIP class=rival
-strategy: SETUP,TAILWIND
+strategy: SETUP
 mega_slots: 5
 ai: Ace Pokemon
 plan: Identical design to the other five branches - see the Brendan Mudkip printing for the full plan. May and Brendan are the same rival slot in the same story position and now field the same team, which is deliberate: the branch the player sees depends on their own gender and starter, not on a different opponent. Here the player chose Mudkip, so the rival brings Sceptile. Could this team be cooler? Giving May and Brendan identical rosters is the improvement - previously the six branches disagreed on strategy flags as well as Megas, so the same encounter played differently for reasons the player could never see or learn from.
@@ -2506,7 +2506,7 @@ SALAMENCE @SALAMENCITE INTIMIDATE ADAMANT 4/252/0/0/0/252 2 | DRAGON_DANCE, DOUB
 SCEPTILE @LIFE_ORB OVERGROW JOLLY 4/252/0/0/0/252 2 | LEAF_BLADE, DRAGON_CLAW, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0302 TRAINER_MAY_LILYCOVE_TORCHIC class=rival
-strategy: SETUP,TAILWIND
+strategy: SETUP
 mega_slots: 5
 ai: Ace Pokemon
 plan: Identical design to the other five branches - see the Brendan Mudkip printing for the full plan. Here the player chose Torchic, so the rival brings Swampert. Could this team be cooler? The shared roster is the improvement; the Guts, Poison Heal, Lightning Rod and Thick Fat package is a genuine competitive core rather than four unrelated Hoenn natives, and it is the same core the player will recognise when this rival returns later in the campaign.
@@ -2519,7 +2519,7 @@ SALAMENCE @SALAMENCITE INTIMIDATE ADAMANT 4/252/0/0/0/252 2 | DRAGON_DANCE, DOUB
 SWAMPERT @LIFE_ORB TORRENT ADAMANT 252/252/4/0/0/0 2 | WATERFALL, HIGH_HORSEPOWER, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0302 TRAINER_MAY_LILYCOVE_TREECKO class=rival
-strategy: SETUP,TAILWIND
+strategy: SETUP
 mega_slots: 5
 ai: Ace Pokemon
 plan: Identical design to the other five branches - see the Brendan Mudkip printing for the full plan. Here the player chose Treecko, so the rival brings Blaziken and its Speed Boost. Could this team be cooler? The shared roster is the improvement; against a Grass starter this branch is the hardest of the six, because Blaziken and Mega Salamence are two separate win conditions and the fixed five exist to buy both of them a free turn.
