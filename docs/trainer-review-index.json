@@ -6,7 +6,7 @@
   "previously_reviewed_access_deferred": [],
   "current_review_indices": null,
   "within_unlock_order": "A chosen coherent review route among simultaneously available branches, not a claim every trainer is mandatory or the order is forced.",
-  "source_sha256": "f5e9e67f1ce7cabece434cad2909d5d7ef57c93eccff8d1800f5929fd1478efa",
+  "source_sha256": "6031df2a96a7a61b723d91b85db5a125e766d687fc9d7ffc9eb4b550d950ae6e",
   "encounters": [
     {
       "key": "TRAINER_BRENDAN_ROUTE_103_MUDKIP|TRAINER_BRENDAN_ROUTE_103_TORCHIC|TRAINER_BRENDAN_ROUTE_103_TREECKO|TRAINER_MAY_ROUTE_103_MUDKIP|TRAINER_MAY_ROUTE_103_TORCHIC|TRAINER_MAY_ROUTE_103_TREECKO",
@@ -133,7 +133,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -180,7 +180,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -218,7 +218,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -256,7 +256,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -294,7 +294,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -332,7 +332,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -370,7 +370,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -417,7 +417,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -455,7 +455,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -493,7 +493,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -540,7 +540,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -587,7 +587,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -681,7 +681,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -719,7 +719,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -757,7 +757,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -795,7 +795,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -833,7 +833,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -871,7 +871,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -909,7 +909,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -947,7 +947,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -994,7 +994,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1032,7 +1032,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1070,7 +1070,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1108,7 +1108,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1155,7 +1155,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1193,7 +1193,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1423,7 +1423,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1461,7 +1461,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1508,7 +1508,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1546,7 +1546,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": true,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1584,7 +1584,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1622,7 +1622,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1660,7 +1660,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1698,7 +1698,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1736,7 +1736,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1783,7 +1783,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": true,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1821,7 +1821,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1859,7 +1859,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1906,7 +1906,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": true,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -1944,7 +1944,7 @@
         "L0_authored": true,
         "L1_ai_fixtures": false,
         "L2_benchmark": false,
-        "L3_earned_clear": true
+        "L3_earned_clear": false
       }
     },
     {
@@ -5975,7 +5975,7 @@
       ],
       "ladder": {
         "L0_authored": true,
-        "L1_ai_fixtures": false,
+        "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
       }
@@ -11782,7 +11782,7 @@
       ],
       "ladder": {
         "L0_authored": true,
-        "L1_ai_fixtures": false,
+        "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
       }
