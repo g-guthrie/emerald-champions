@@ -1,0 +1,47 @@
+{
+  "play_order": 262,
+  "e_group": "E0403",
+  "trainer": "TRAINER_GRUNT_SPACE_CENTER_4",
+  "class": "grunt",
+  "location": "MossdeepCity_SpaceCenter_1F",
+  "chapter": "Team Magma Space Center raid (test-fuel bay, Paradox room)",
+  "cap": 84,
+  "cap_confirmation": "driver state reported level_cap 84; offset-0 members at L82, Iron Thorns (offset 1) at L83 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/262-TRAINER_GRUNT_SPACE_CENTER_4/party_raid84.json"],
+  "chronology_note": "Same raid party and audit as E0401: Mind Badge earned, before the Seafloor Cavern; no pool-84 addition used. Landorus is the one reachable legend.",
+  "pre_play_strategy_checks": [
+    "Booster Energy fires on entry for both Paradox members (item consumed, stat boosted)",
+    "Sandy Shocks Gravity or boosted Earth Power / Thunderbolt",
+    "Iron Thorns Dragon Dance stack on the Booster boost",
+    "Klinklang Shift Gear, Magneton Eviolite Analytic"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 13, "build": "work/agent-battle-build-7", "run_dir": "work/playtest/262-TRAINER_GRUNT_SPACE_CENTER_4/a1",
+      "party": "party_raid84.json (Incineroar / Urshifu-Rapid / Mega Swampert / Great Tusk / Landorus / Gholdengo)",
+      "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4,
+      "why": "Both Boosters fired on entry (items shown consumed, Sandy Shocks Sp. Atk, Iron Thorns Attack). Turn 1 Fake Out stopped Iron Thorns' Dragon Dance and Close Combat one-shot it, but the boosted Sandy Shocks' Earth Power one-shot Incineroar from full (332) - the one faint. Turn 2 Mega Swampert replaced it; Urshifu Protected the Thunderbolt and Klinklang's Wild Charge while Earthquake killed Sandy Shocks and Klinklang together. Turn 3 Close Combat killed the last-in Magneton."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Booster Energy on entry", "result": "PASS", "evidence": "turn 0 state: both items ITEM_NONE at battle start, abilities active; Earth Power 332 on a 332 HP Incineroar shows the Sp. Atk boost"},
+    {"check": "Sandy Shocks Gravity / boosted attacks", "result": "PASS (attacks)", "evidence": "turn 1 Earth Power one-shot Incineroar; turn 2 Thunderbolt into a Protect; Gravity never chosen (nothing airborne was on the field until Swampert, which is grounded anyway)"},
+    {"check": "Iron Thorns Dragon Dance", "result": "FAIL", "evidence": "chosen turn 1, flinched by Fake Out, killed by Close Combat"},
+    {"check": "Shift Gear / Analytic", "result": "NOT SEEN", "evidence": "Klinklang chose Wild Charge into a Protect and died to Earthquake; Magneton died before moving"}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "No opponent Protect used (Sandy Shocks, Klinklang and Magneton hold Protect); on turn 2 Klinklang and Sandy Shocks both attacked into the Ground pair, which was the wrong call for Klinklang (see defects).",
+  "ai_defects": [
+    {"turn": 2, "board": "Sandy Shocks 257/257 (+1 SpA) and fresh Klinklang versus a just-entered Swampert (not yet Mega, Water/Ground) and Urshifu-Rapid", "chosen": "Klinklang Wild Charge on Urshifu, Sandy Shocks Thunderbolt on Urshifu", "better": "Both Electric attacks into a board with a Ground type are low value and neither Steel body has a Ground answer; Klinklang should Shift Gear or Protect, Sandy Shocks Earth Power the Urshifu. Two Electric moves chosen with a Ground type staring at them is a targeting-value defect, mild because the target was the non-Ground slot."}
+  ],
+  "ai_notes": "Turn 1 Sandy Shocks Earth Power on the Fire-type Incineroar was the correct super-effective pick and it paid off.",
+  "level_changes": [
+    {"member": "KLINKLANG", "field": "level offset", "before": 0, "after": 1, "why": "won attempt 1 with one faint; Klinklang attacked into a Protect and died to one spread hit"},
+    {"member": "MAGNETON", "field": "level offset", "before": 0, "after": 1, "why": "entered last, one-shot before acting"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 4-1. The Paradox pair carries the room (Sandy Shocks scored the faint); the two Steel reserves go +1.",
+  "cooler": "The Booster Energy idea is visible and the story (stolen rocket fuel feeding Paradox Pokemon) lands; a boosted Earth Power one-shotting a 332 HP Incineroar is the memory. But three of four members fold to one Earthquake, which is the crack line working too cleanly. Cooler: give Klinklang or Magneton Air Balloon so the Ground answer is not a single spread move. Suggestion only.",
+  "legality_notes": "Sets legal as authored.",
+  "verification_limit": "The +1 on Klinklang and Magneton cannot be re-verified until the main agent rebuilds."
+}
