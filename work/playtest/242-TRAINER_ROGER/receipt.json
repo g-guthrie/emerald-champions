@@ -1,0 +1,85 @@
+{
+  "play_order": 242,
+  "e_group": "E0377",
+  "trainer": "TRAINER_ROGER",
+  "class": "regular",
+  "location": "Route127",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Crawdaunt (-1) at L73 and Kingler / Crabominable / Dracovish (0) at L74 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/242-TRAINER_ROGER/party_sea76.json"],
+  "chronology_note": "Route 127 is the open sea south-east of Mossdeep, sailed after the Aqua Hideout and before Dive. Same six as E0368; every pool-76 gate is 42 or lower and no source map is downstream of Lilycove's east harbour. Nothing gated 68 or 76 was used.",
+  "pre_play_strategy_checks": [
+    "Hyper Cutter means Mega Kingler's Attack cannot be lowered by Intimidate",
+    "Crawdaunt's Adaptability doubles STAB on Crabhammer and Knock Off; Swords Dance behind a safe board",
+    "Mega Kingler is the ace and Mega Evolves",
+    "Crabominable's Iron Fist boosts three of its four moves; Mach Punch closes a chipped board",
+    "Choice Scarf Dracovish moves first, so Fishious Rend lands at 170 base power with Strong Jaw"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 2,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/242-TRAINER_ROGER/a1",
+      "party": "party_sea76.json (Incineroar/Rillaboom/Zapdos/Urshifu-Single/Mega Gardevoir/Amoonguss)",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "why": "Rillaboom's Wood Hammer is 2x into three of the four crabs and removed Crawdaunt on turn 1 before Adaptability mattered. The two Pokemon I lost were both one-shot by the team's actual payoffs: Dracovish's doubled Fishious Rend erased a 301 HP Incineroar outright, and Crabominable's Iron Fist Ice Hammer erased a 294 HP Zapdos outright. Zapdos traded itself for the Mega Kingler in that same exchange, which was the right trade. Urshifu's Close Combat is 2x on Crabominable and closed it out."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Hyper Cutter means Intimidate does nothing to Kingler",
+      "result": "PASS",
+      "evidence": "the turn-0 reading has Crawdaunt at atk -1 from Incineroar's Intimidate and Kingler at atk 0 on the same board. The crack line's claim is exactly correct."
+    },
+    {
+      "check": "Crawdaunt's Adaptability Crabhammer / Knock Off, with Swords Dance behind a safe board",
+      "result": "PARTIAL",
+      "evidence": "Crawdaunt chose Crabhammer on its one decision (turn 1) and then died to Wood Hammer. Crabhammer into a 309 HP Rillaboom for 76 with Adaptability and a Life Orb behind it is not much, because Grass resists Water - so the Adaptability lane never got to show itself. Swords Dance was never selected, but Crawdaunt only ever had one turn and the board was not safe, so this is not a defect, just an untested claim."
+    },
+    {
+      "check": "Mega Kingler is the ace and Mega Evolves",
+      "result": "PASS, but late - see AI defect E0377-1",
+      "evidence": "turn 3: 'The opposing Kingler's Kinglerite is reacting... The opposing Kingler has Mega Evolved into Mega Kingler' and the reading afterwards shows SPECIES_KINGLER_MEGA with ABILITY_TOUGH_CLAWS. It then died to Thunderbolt on that same turn. It had spent turn 1 on Protect and turn 2 attacking as base Kingler."
+    },
+    {
+      "check": "Iron Fist boosts Ice Hammer, Drain Punch and Mach Punch; Mach Punch is the priority finish",
+      "result": "PASS",
+      "evidence": "turn 3: Muscle Band Iron Fist Ice Hammer dealt exactly 294 to a 294 HP Zapdos - a clean OHKO on a legendary at cap. turn 5: Mach Punch was selected as the closing priority and hit Urshifu for 216 at 2x, which is precisely the stated role. This member is doing real work."
+    },
+    {
+      "check": "Choice Scarf Dracovish moves first and Fishious Rend doubles",
+      "result": "PASS, decisively",
+      "evidence": "turn 2: Dracovish entered on turn 1 and on turn 2 moved before a 252-Speed Adamant Incineroar and before a Jolly Rillaboom, and 'The opposing Dracovish used Fishious~Rend! It's super effective! Incineroar fainted!' - 301 damage, a clean OHKO from full on a 301 HP body. The surprise the dossier promises is genuine and it is the single scariest thing on the eastern routes so far."
+    },
+    {
+      "check": "Knock Off strips items (the crack's advice used against me)",
+      "result": "PASS with a correct engine exception",
+      "evidence": "turn 3 Mega Kingler used Knock Off on Gardevoir for 131 at 2x, but Gardevoir kept ITEM_GARDEVOIRITE - a Mega Stone its holder can use is not removable - and Mega Evolved normally on turn 5. Good target selection; no defect."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Kingler", "payoff": "modest. It blocked Incineroar's Fake Out, which denies the flinch and keeps Kingler's turn - but Fake Out was the only thing aimed at it and a Protect spent to avoid a 0-damage flinch on the turn its partner was being killed is close to break-even. Not empty, not good"},
+    {"attempt": 1, "turn": 4, "battler": "Crabominable", "payoff": "excellent. Blunted Urshifu's Close Combat from a projected one-shot to 87 damage on a 297 HP body (Unseen Fist pierces for 25 percent), and it read the attack correctly on a turn where it was the last Pokemon alive and had no other way to survive"}
+  ],
+  "protect_summary": "2 opponent Protects, 0 empty, 1 excellent and 1 marginal. No repetition and no consecutive guarding.",
+  "ai_defects": [
+    {
+      "id": "E0377-1",
+      "turn": "a1 turns 1 and 2",
+      "board": "Kingler 226/226 holding ITEM_KINGLERITE, the authored ace, with its partner Crawdaunt alive on turn 1 and Dracovish alive on turn 2, opposite a full-HP Incineroar and Rillaboom.",
+      "chosen": "turn 1 Protect as base Kingler, turn 2 Crabhammer as base Kingler. It finally Mega Evolved on turn 3, the turn it was knocked out.",
+      "better": "Mega Evolve on turn 1 or turn 2. Mega Kingler's whole point is Tough Claws on a contact Crabhammer plus a large stat jump; base Kingler spent two turns fighting with neither. There is no cost to evolving early here - no disguise value, no item to preserve, and Hyper Cutter is only a pre-Mega ability, so delaying it also delays the very Intimidate immunity the crack line advertises. The practical result is that the ace's form change happened on the turn it died and contributed nothing to the fight. Severity: moderate. This is worth tracing as a shared pattern rather than a Roger-specific bug - every mega_slots encounter in the block should be checked for the same deferral, and E0383's Mega Diancie and E0384's Mega Lopunny are the next two chances to observe it."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but lost two Pokemon, both to clean one-shots from the team's own authored payoffs, which is the brief's explicit keep case. Roger is already one of the harder ordinary route trainers in the campaign - a Choice Scarf Dracovish at cap is a legitimate cap-76 threat and the team does not need help. The one thing suppressing its output is the late Mega, and the standing rule is to fix the AI rather than compensate with levels.",
+  "cooler": "Keep the roster; the dossier's self-assessment is right and playing it confirms the joke lands - the biggest crab being the ace is better than Crawdaunt being the ace, and 'a trainer who owns only crabs' is memorable in a way that a generic Water route trainer never is. What the fight actually demonstrates, which the write-up undersells: Dracovish is the member that makes this encounter dangerous, not Kingler. A Choice Scarf 170-power Fishious Rend one-shotting a full-HP Incineroar is the moment the player remembers, and the plan currently files it under 'Reserves & disruption'. Two concrete notes. (1) Dracovish is not a crab and is the only member that breaks the theme; it earns its slot on power alone, and if the theme is the point then Clawitzer or Barbaracle (Mega Barbaracite is in the stone window at 20) would keep the joke intact while still giving the team a non-Adaptability lane - but I would rather keep Dracovish and let the theme be 'crustaceans' as the plan already says, since Dracovish is a fossil fish and that is a real seam. (2) Three of the four share a physical Water lane, and Rillaboom's single Grass move removed a third of the team across two turns. A Grass-resistant body - Crabominable already is one - leading beside Crawdaunt instead of Crawdaunt leading beside Kingler would make the obvious counterplay cost the player a turn.",
+  "legality_notes": "No legality problem in the authored set. Kinglerite's stone window is 20 and Kingler's base window 30, both far inside cap 76; every member and item is legal for Route 127.",
+  "verification_limit": "No level change was made here, so nothing in this receipt is pending re-verification."
+}
