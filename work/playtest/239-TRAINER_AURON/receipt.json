@@ -1,0 +1,57 @@
+{
+  "play_order": 239,
+  "e_group": "E0364",
+  "trainer": "TRAINER_AURON",
+  "class": "ace",
+  "location": "Route125",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Jolteon L75 = 76 + 1 - 2; Vaporeon, Umbreon and Flareon L74 = 76 + 0 - 2. Route 125 is the open sea north-east of Route 124, reached after the hideout and before the Mossdeep Gym (Game Book C40 to C41), and the cap does not move until C42, so 76 is correct.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_rillaboom.json"],
+  "chronology_note": "Same six members; Incineroar beside Rillaboom, because High Horsepower is 2x on Jolteon and Flareon while Wood Hammer is 2x on Vaporeon, and because Rillaboom is the one attacker I own that feeds none of the four absorption abilities. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Each member is immune to something the others fear: Volt Absorb, Water Absorb, Flash Fire and Psychic immunity",
+    "Choice Scarf Jolteon attacks or Volt Switches",
+    "Vaporeon's Helping Hand fires the turn it would otherwise be chipping",
+    "Umbreon's Foul Play uses the target's own Attack stat",
+    "Umbreon's Wish plus Protect heals the partner for half of Umbreon's own large HP",
+    "Flareon's Flash Fire boost makes Flare Blitz the physical finish"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 11, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/239-TRAINER_AURON/a1",
+      "outcome": "won", "turns": 4, "decisions": 5,
+      "player_faints": 0, "opponent_faints": 4, "ai_decision_seconds_max": 1.021,
+      "why": "The concept is exactly as advertised - three of my six attackers would have fed an ability here - and the answer is exactly as advertised too. Rillaboom feeds nothing: Ground is 2x on Jolteon and Flareon, Grass is 2x on Vaporeon, and nothing in its kit is Electric, Water, Fire or Psychic. Fake Out flinched the Choice Scarf Jolteon, High Horsepower missed once and then killed it, Wood Hammer killed a 345 HP Vaporeon in one hit, and Flareon killed itself: a Life Orb Flare Blitz into Urshifu plus its own recoil left it low enough for Knock Off to finish. Urshifu's Close Combat is 2x into Umbreon and ended it. 4-0, nothing lost, and the only real damage I took was the 222 from that Flare Blitz - into a Focus Sash holder."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Four absorption abilities make the player's usual coverage wrong", "result": "PASS (as a concept)", "evidence": "the driver confirmed ABILITY_VOLT_ABSORB, ABILITY_WATER_ABSORB and ABILITY_FLASH_FIRE on the board, and Umbreon's Dark typing is a hard Psychic immunity. Three of my six - Zapdos, Gardevoir and the Water-less rest - would have been actively wrong picks here. The concept is real and I had to build around it. None of the three abilities actually fired, because I did not feed them, which is the correct outcome for a player who reads the team."},
+    {"check": "Choice Scarf Jolteon attacks or Volt Switches", "result": "PARTIAL", "evidence": "Jolteon selected HYPER_VOICE on both of its turns (flinched on the first). It never chose Volt Switch. Hyper Voice is the right pick against a board with no Electric-immune body, so the choice was sound; the pivot half of the slot did not appear."},
+    {"check": "Vaporeon's Helping Hand fires the turn it would otherwise be chipping", "result": "PASS", "evidence": "turn 2 native record: HELPING_HAND aimed at battler 1, its own Jolteon, on the exact turn Jolteon fired Hyper Voice. That is the authored condition, chosen correctly. This is the third time in the block I have seen Helping Hand aimed properly (Politoed at 232, Wishiwashi and Pyukumuku at 235)."},
+    {"check": "Umbreon's Foul Play uses the target's own Attack stat", "result": "PASS (and neutralised)", "evidence": "turn 4: 'The opposing Umbreon used Foul Play! It's mostly ineffective...' into my Urshifu. Dark is 0.5x on Fighting, so the engine move landed for very little - and the dossier's own crack ('special attackers beat Foul Play entirely') has a second, cheaper answer: a Fighting type resists it outright while also being 2x back into Umbreon. Worth stating in the dossier."},
+    {"check": "Umbreon's Wish plus Protect heals the partner", "result": "FAIL", "evidence": "Umbreon selected PROTECT on turn 3 and FOUL_PLAY on turn 4 and never selected Wish. It entered as the third Pokemon with one teammate left, so the Wish/Protect pair never had the two-turn window it needs. The declared 'engine' of the team never ran."},
+    {"check": "Flareon's Flash Fire boost makes Flare Blitz the finish", "result": "PARTIAL", "evidence": "Flareon's unboosted Life Orb Flare Blitz still did 222 to a 262 HP Urshifu, which is the hardest single hit anything landed on me in this fight. Flash Fire itself never activated because I never aimed a Fire move at it. The move then cost it a third of its own health in recoil plus Life Orb chip, and Knock Off finished it the same turn - so the 'finisher' killed itself in one action."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Vaporeon", "payoff": "EMPTY - at 345/345 on turn 0 it guarded while both of my actions went to its partner Jolteon. It gained nothing and gave up a turn of chip or Helping Hand. Defensible as a speculative guard against an unread board - it cannot see my commands - but it is the weakest guard decision in this battle, and Vaporeon is the member with the least reason to fear a turn-1 exchange at 345 HP."},
+    {"turn": 3, "battler": "Umbreon", "payoff": "FULL - blocked Incineroar's Knock Off on its entry turn, which kept its Sitrus Berry. That is precisely the right turn to guard: a fresh switch-in with a valuable item against a revealed Knock Off user."}
+  ],
+  "protect_summary": "2 opponent Protects on two different battlers, not consecutive, one full payoff and one empty-but-defensible. Healthy behaviour overall; the Vaporeon guard is the only one in this battle I would want the expected-value constants to score lower.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No bad target choices. Vaporeon's Helping Hand went to the right partner on the right turn and Umbreon's Protect was on the correct turn.",
+    "AI decision budget max 1.021 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [
+    {"member": "VAPOREON", "before": 0, "after": 1, "why": "the team's bulk at 345 HP, and it spent one turn on an empty Protect and one on Helping Hand before dying to a single Wood Hammer. It is a joint-lowest member and the one with the most to gain from surviving an extra exchange, since its whole role is to be alive for Helping Hand and Ice Beam."},
+    {"member": "UMBREON", "before": 0, "after": 1, "why": "the declared engine, which landed one 0.5x Foul Play and never reached Wish. It is joint-lowest and a specially bulky wall whose value is entirely in turns survived."}
+  ],
+  "level_change_rationale": "The brief's '+1' case: won on attempt 1 with zero player faints in four turns. I raised the two joint-lowest members and left Jolteon alone (it is the trainer's ace, already at +1, and the brief says not to raise the ace first) and Flareon alone (its Flare Blitz did 222, the hardest hit of the fight, so it is already pulling more weight than the other three). Both raised members are +1 of the +-2 allowance. I want to note the honest caveat: I beat this team with one Pokemon that happens to be immune to its entire concept, and the counterplay is legitimate and named in the dossier - so a level is the right lever, but it will not change the matchup, only the number of turns it takes.",
+  "rebuild_note": "The two +1s cannot be re-verified here: the run pinned work/agent-battle-build-5, which predates the edit. The brief's 'rerun once' is owed. If it is rerun, it should be with a party that does NOT contain a Ground-and-Grass attacker, because Rillaboom is close to a hard counter to all four members at once and the fight tells you very little with it on the field.",
+  "theme_check": "Yes, and it reads instantly, which is the dossier's claim and it is correct: two Eeveelution sprites and the player knows what the rest of the team is. The concept is also competitively honest rather than cosmetic - I genuinely had to check my party for Electric, Water, Fire and Psychic moves before leading, and three of my six were wrong answers. As a Route 125 ace between the hideout and Mossdeep it does exactly what a route specialist should: it punishes a player who brought one type-coverage plan for the whole sea.",
+  "cooler_note": "Keep the roster; the concept earns its slot and I would not trade it for rarer species. Asked again after playing: the demonstrated weakness is that all four absorption abilities are defensive and the team has no way to make the player feed them. Nobody here forces a Water, Electric or Fire move to be thrown, so against a prepared party the four abilities are simply four blank lines and what is left is four moderately bulky normal-stat Eeveelutions. A concrete suggestion for a later pass, not made here: the slot that could fix this is Umbreon's Snarl, which it never used - a redirection move (Follow Me is not in its pool, but a Taunt or a Baton Pass is) or, more simply, moving Wish/Protect onto a partner so Umbreon can spend its turns forcing exchanges, would let the team create the situations its abilities are built to punish rather than waiting for them.",
+  "authored_set_legality": "No legality problem found."
+}
