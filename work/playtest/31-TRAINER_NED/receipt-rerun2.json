@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 31,
+  "e_group": "E0033",
+  "trainer": "TRAINER_NED",
+  "class": "regular",
+  "cap": 20,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "FINNEON L23 offset 5 @EVIOLITE STORM_DRAIN",
+    "WATTREL L22 offset 4 @LIFE_ORB WIND_POWER (R1 raised it 3 -> 4; confirmed present)",
+    "MANTYKE L23 offset 5 @EVIOLITE WATER_ABSORB (R1 raised it 4 -> 5; confirmed present)",
+    "ARROKUDA L22 offset 4 @MYSTIC_WATER PROPELLER_TAIL (at the +-2 ceiling)"
+  ],
+  "party_manifest": "work/playtest/31-TRAINER_NED/party-rerun.json",
+  "party_summary": "Reused the R1 party unchanged: Jolteon / Kartana / Quagsire / Nidoking / Magearna / Lucario. Only the first two ever took a turn.",
+  "party_caveat": "Same reservation as E0032: this manifest uses Kartana, an Ultra Beast justified as a Cut-gated Petalburg Woods wild catch. Reused unchanged for comparability with the R1 measurement, but it makes this benchmark an upper bound on cap-20 player power.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3033,
+      "outcome": "won",
+      "turns": 3,
+      "decisions": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 62,
+      "events": "work/playtest/31-TRAINER_NED/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 a 2x Thunderbolt removed Finneon before it could set Tailwind, for the third pass running; Wattrel Protected a resisted Leaf Blade. Arrokuda came in. T2 Arrokuda Protected the Thunderbolt aimed at it while Knock Off removed Wattrel and took its Life Orb. Mantyke came in. T3 Arrokuda used Protect again, it failed, and Thunderbolt (4x) removed Mantyke while Leaf Blade removed the guardless Arrokuda. Won 4-0 in three turns without losing a member or dropping below 90% on either active."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Finneon's Tailwind charges Wattrel before Thunderbolt; execution order determines the same-turn benefit",
+      "result": "NOT EXERCISED - third consecutive pass",
+      "evidence": "Finneon has now died on turn 1 to a single 2x Electric attack in every pass. Its 62 HP Eviolite body at L23 does not survive a cap-20 special attacker. The trainer's declared TAILWIND strategy has never once been on the field."
+    },
+    {
+      "check": "Wind Power is gained and consumed natively",
+      "result": "NOT EXERCISED (no Tailwind was ever set)"
+    },
+    {
+      "check": "Soak converts an eligible foe before Wattrel attacks; attack directly when the conversion has no payoff",
+      "result": "PASS (correct decline, by default)",
+      "evidence": "Finneon never got a turn, so Soak was never mis-fired either. Nothing to fault, nothing to credit."
+    },
+    {
+      "check": "Mantyke supplies Wide Guard and backup Tailwind",
+      "result": "NOT EXERCISED",
+      "evidence": "Mantyke entered on T3 and was removed by a 4x Thunderbolt before acting. Same failure mode as Finneon."
+    },
+    {
+      "check": "Arrokuda applies Propeller Tail physical pressure",
+      "result": "FAIL - it never attacked",
+      "evidence": "Both of its turns were Protect (T2 successful, T3 failed). It was removed having dealt zero damage. See E0033-D1."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "WATTREL",
+      "payoff": "Blocked a Leaf Blade that Wattrel resists (0.5x). Small payoff; it also cost Wattrel the chance to act, and it died the following turn without attacking."
+    },
+    {
+      "turn": 2,
+      "battler": "ARROKUDA",
+      "payoff": "Blocked a 2x Thunderbolt aimed at it. Real payoff."
+    },
+    {
+      "turn": 3,
+      "battler": "ARROKUDA",
+      "payoff": "EMPTY AND WORSE THAN EMPTY - 'But it failed!'. Consecutive Protect, no damage denied, and it lost the turn in which it could have attacked. It then died to the Leaf Blade it had no guard left for."
+    }
+  ],
+  "protect_ledger_note": "Three guards for one real payoff. Two of Ned's four members spent their entire lives on Protect and dealt no damage at all.",
+  "ai_defects": [
+    {
+      "id": "E0033-D1",
+      "severity": "repeated Protect with a failure it should price",
+      "turn": 3,
+      "board": "Arrokuda at 57/57 (untouched), having successfully Protected on the previous turn, opposite a Life Orb Jolteon and a +1 Attack Kartana, with its partner Mantyke at full HP beside it.",
+      "chosen": "Protect again. It failed ('But it failed!') and Arrokuda was removed by Leaf Blade in the same turn without ever attacking.",
+      "better": "Liquidation or Close Combat. Arrokuda was at full HP with Mystic Water and had taken no damage all battle; the consecutive-Protect success chance had already dropped, and even a successful guard would only have delayed the same board.",
+      "note": "This is the flip side of the good guard pricing seen elsewhere in this block: the scoring credits the guard again after a successful one without discounting the native consecutive-use failure roll."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0033-W1",
+      "turn": 1,
+      "board": "Wattrel at full HP with Life Orb, opposite a Kartana whose Leaf Blade it resists and a Jolteon it cannot damage with Electric moves (Volt Absorb).",
+      "chosen": "Protect.",
+      "better": "Air Slash on Kartana (neutral on the Grass/Steel body) or Volt Switch to get out of the matchup. It guarded a resisted hit and then died the next turn having contributed nothing.",
+      "severity": "weak choice."
+    }
+  ],
+  "ai_improvements_observed": [
+    "The T2 Arrokuda Protect was correctly aimed at a super-effective attack.",
+    "No voluntary switches or nonsensical targeting."
+  ],
+  "level_changes": {
+    "FINNEON": "5 -> 6 (L23 -> L24)",
+    "WATTREL": "4 -> 5 (L22 -> L23)"
+  },
+  "level_change_reason": "Won on the first attempt in three turns with zero player faints and no member of mine dropping below 90%. That is squarely the brief's '+1 on the weakest one or two members' band. Wattrel is the joint-lowest member and has one point of budget left (this is its second and final step). Finneon takes its first point: it is the member the whole TAILWIND identity runs through and it has now died on turn 1 in three consecutive passes without acting, so a point is the only lever the brief allows me for it. Arrokuda is at the +-2 ceiling and must not move; Mantyke already took its R1 point and, like Finneon, dies to the type matchup rather than to a level gap. Budget after this pass: FINNEON +1 of 2, WATTREL +2 of 2 (exhausted), MANTYKE +1 of 2, ARROKUDA +2 of 2 (exhausted).",
+  "honest_assessment": "I am repeating the R1 agent's warning rather than burying it: I do not expect these two points to change this result either. Four Water-flavoured members with a shared 2x or 4x Electric weakness lose to one correctly chosen lead regardless of level, and a L24 Finneon still dies to one Life Orb Thunderbolt. The level lever is the only one the brief gives me; the real fix is in the cooler note.",
+  "levels_after": {"FINNEON": 6, "WATTREL": 5, "MANTYKE": 5, "ARROKUDA": 4},
+  "cooler": "Yes, and it is now a three-pass finding. The team's declared strategy is TAILWIND and Tailwind has never been set, because both of its setters are frail Water/Flying bodies that die to the Electric attack every cap-20 party brings. Either the Tailwind job needs to sit on the bulkiest member with a Sitrus or Focus Sash so it survives one hit, or Finneon needs its guard turn to be worth something (Protect plus Storm Drain is a fine turn-one play if a partner threatens back). As authored, the strategy flag is decoration. Recording only - no set change in this pass.",
+  "authored_set_legality": "No legality problem observed.",
+  "materialization_note": "Offset-only edits. I did not run scripts/emerald_champions_teams.py --write: other sessions have uncommitted edits to other trainers in the same authored file and materializing would sweep their in-flight work. The main agent materializes."
+}

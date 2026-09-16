@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 32,
+  "e_group": "E0034",
+  "trainer": "TRAINER_ELLIOT_1",
+  "class": "regular",
+  "cap": 20,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "CLAUNCHER L22 offset 4 @CHOICE_SPECS MEGA_LAUNCHER (R1 raised it 3 -> 4; confirmed present, at the +-2 ceiling)",
+    "FRILLISH L22 offset 4 @EVIOLITE CURSED_BODY",
+    "SHELLDER L22 offset 4 @FOCUS_SASH SKILL_LINK",
+    "CORPHISH L22 offset 4 @CHOICE_BAND ADAPTABILITY (R1 raised it 3 -> 4; confirmed present, at the +-2 ceiling)"
+  ],
+  "party_manifest": "work/playtest/32-TRAINER_ELLIOT_1/party-rerun.json",
+  "party_summary": "Reused the R1 party unchanged: Jolteon / Magearna / Kartana / Celebi / Quagsire / Nidoking. Only the first three took a turn.",
+  "party_caveat": "This manifest carries Kartana (Ultra Beast) and Celebi (mythical) alongside Magearna at cap 20. Magearna's Devon Corp sign is unlocked by this point in play order; Kartana is justified in the manifest as a Cut-gated Petalburg Woods wild catch and Celebi was not used. Reused unchanged for comparability with the R1 measurement, but this is an upper bound on cap-20 player power, not a typical party.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3034,
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 5,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 60,
+      "events": "work/playtest/32-TRAINER_ELLIOT_1/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 a 2x Thunderbolt removed Clauncher before it acted - the third consecutive pass in which the 'immediate pulse cannon' never fires - while Magearna's Thunderbolt took Frillish from 76 to 18; Frillish answered with Hex. Shellder came in. T2 Thunderbolt broke Shellder's Focus Sash and paralysed it, the second Thunderbolt removed Frillish, and Shellder was fully paralysed. Corphish came in. T3 Corphish's Choice Band Adaptability Aqua Jet removed Jolteon with priority - the only real hit Elliot landed - and Magearna finished Shellder, which never acted. T4 Kartana came in and Leaf Blade (2x) removed Corphish. Won 4-1."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Clauncher is the immediate pulse cannon (Choice Specs, Mega Launcher)",
+      "result": "NOT EXERCISED - third consecutive pass",
+      "evidence": "Removed on turn 1 by one super-effective Electric attack before selecting a move. Its 61 HP at L22 does not survive a cap-20 special attacker, and its two points of level offset have not changed that in either pass."
+    },
+    {
+      "check": "Frillish trades Scald for Hex: Will-O-Wisp burn first, then Hex",
+      "result": "PARTIAL",
+      "evidence": "Frillish used Hex on T1 against an unstatused Magearna, for 9 damage, rather than setting the Will-O-Wisp that doubles it. It died before a second decision, so the two-turn plan never assembled - but the one turn it had went to the half-power half of it."
+    },
+    {
+      "check": "Shellder's Shell Smash / Skill Link engine",
+      "result": "NOT EXERCISED",
+      "evidence": "It entered on T2, was paralysed by the same Thunderbolt that broke its Focus Sash, was fully paralysed that turn, and died on T3 without ever selecting a move."
+    },
+    {
+      "check": "Corphish applies Choice Band Adaptability pressure",
+      "result": "PASS - the best play Elliot made",
+      "evidence": "T3 Aqua Jet used priority to remove a 34 HP Jolteon that would otherwise have moved first and killed it. It then used Aqua Jet again on T4 into Kartana, which is correct under a Choice lock."
+    },
+    {
+      "check": "Cursed Body",
+      "result": "NOT EXERCISED (Frillish was never hit by a contact move)"
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opponent Protects; none of Elliot's four sets carries Protect. Nothing to price.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0034-W1",
+      "turn": 1,
+      "board": "Frillish at full HP with Hex, Icy Wind, Will-O-Wisp and Recover, opposite an unstatused Magearna and an unstatused Jolteon.",
+      "chosen": "Hex on Magearna for 9 damage.",
+      "better": "Will-O-Wisp (which is the setup Hex exists for) or Icy Wind for the speed control its partner needed. Hex at half power into a full-HP Steel/Fairy body was the lowest-value option it had.",
+      "severity": "weak choice. The AI does not appear to sequence its own status-then-payoff pair."
+    }
+  ],
+  "ai_improvements_observed": [
+    "The Choice Band priority revenge kill on Jolteon was correctly identified and correctly timed.",
+    "No voluntary switches, no illegal or nonsensical targeting."
+  ],
+  "level_changes": {
+    "FRILLISH": "4 -> 5 (L22 -> L23)",
+    "SHELLDER": "4 -> 5 (L22 -> L23)"
+  },
+  "level_change_reason": "Won on attempt 1 with a single player faint, in four turns, with Magearna finishing untouched at 80/80. That is the brief's 0-1 faint band: +1 on the weakest one or two members. Clauncher and Corphish are both at the +-2 ceiling and cannot move, so the points go to the two members with untouched budget - which are also the two that contributed least: Frillish spent its only turn on a 9 damage Hex, and Shellder has now never selected a move in any pass. Budget after this pass: CLAUNCHER +2 (exhausted), FRILLISH +1 of 2, SHELLDER +1 of 2, CORPHISH +2 (exhausted).",
+  "honest_assessment": "Recording this plainly: I do not expect +1 to change the result. Every member of this team is a Water type and three of the four are removed by a single Electric attack from a cap-20 special attacker regardless of level. The only member that did anything is the one that ignored the type chart by using priority. The fix is in the cooler note, not in the level column.",
+  "levels_after": {"CLAUNCHER": 4, "FRILLISH": 5, "SHELLDER": 5, "CORPHISH": 4},
+  "cooler": "Yes, and it is the same shape as Ned's. A four-member mono-Water roster at cap 20 loses to one Electric or Grass lead before its authored engines (Mega Launcher pulses, Shell Smash, Hex-after-burn) can start. Elliot does not need different species - he needs one member that survives the opening trade: a Rindo/Shuca-class berry or an Assault Vest on Clauncher, or moving the Focus Sash from Shellder (which was paralysed through it) to the pulse cannon that is supposed to fire on turn one. Recording only - no set change in this pass.",
+  "authored_set_legality": "No legality problem observed.",
+  "materialization_note": "Offset-only edits. scripts/emerald_champions_teams.py --write deliberately not run: other sessions have uncommitted edits to other trainers in the same authored file. The main agent materializes."
+}

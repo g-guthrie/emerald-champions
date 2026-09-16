@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 36,
+  "e_group": "E0037",
+  "trainer": "TRAINER_TAKAO",
+  "class": "gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "GRAPPLOCT L20 offset 2 @LEFTOVERS LIMBER",
+    "WOBBUFFET L21 offset 3 @SITRUS_BERRY SHADOW_TAG (R1 raised it 2 -> 3; confirmed present)",
+    "HITMONLEE L21 offset 3 @WHITE_HERB UNBURDEN (R1 raised it 2 -> 3; confirmed present)",
+    "POLIWRATH L20 offset 2 @LIFE_ORB WATER_ABSORB",
+    "PASSIMIAN L20 offset 2 @CHOICE_SCARF DEFIANT",
+    "PAWMO L23 offset 5 @EVIOLITE IRON_FIST"
+  ],
+  "headline": "The turn-one healthy withdrawal did NOT recur. Grapploct stayed in and Protected instead, denying both of my super-effective attacks. That is the single most important result in this receipt.",
+  "party_manifest": "work/playtest/36-TRAINER_TAKAO/party-rerun.json",
+  "party_summary": "Reused the R1 party unchanged: Tsareena / Magearna / Spiritomb / Alakazam / Celebi / Mr. Mime. Only Tsareena, Magearna and Celebi took a turn.",
+  "party_caveat": "This manifest carries Celebi (mythical) and Magearna at cap 20; Alakazam is included although the R1 audit for E0032 called Abra unreachable before the Dewford Gym, and Takao is play_order 36, after Dewford, so that is consistent. Reused unchanged for comparability. Celebi was used on the last turn.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3037,
+      "outcome": "won",
+      "turns": 8,
+      "decisions": 9,
+      "player_faints": 1,
+      "opponent_faints": 6,
+      "ai_decision_frames_max": 61,
+      "events": "work/playtest/36-TRAINER_TAKAO/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 I aimed Play Rough and Fleur Cannon (both 2x) at a full-HP Grapploct, the exact board that produced the R1 switch defect. This time Grapploct Protected and blocked both; Wobbuffet used Counter and it failed. T2 the same pair of attacks removed Grapploct; Wobbuffet used Counter and it failed again. T3 Passimian's Choice Scarf Close Combat took 40 off Magearna, Play Rough removed Passimian, my Flash Cannon hit Wobbuffet for 52 - and Wobbuffet answered a special attack with Counter, which failed a third time. T4 Magearna Protected the incoming Close Combat, a critical Play Rough removed Hitmonlee, and Counter failed a fourth time. T5 Power Whip removed Poliwrath before it acted and Wobbuffet finally used Safeguard. T6 Pawmo's Thunder Punch chipped Magearna, Play Rough missed, and Thunderbolt removed Wobbuffet. T7 Thunder Punch removed Magearna while Play Rough took Pawmo to 13. T8 Celebi came in and a critical Psychic finished Pawmo. Won 6-1."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "The turn-one healthy voluntary switch does not recur (the reason for this rerun)",
+      "result": "PASS - DEFECT NOT REPRODUCED",
+      "evidence": "On the identical board (Grapploct 80/80 and Wobbuffet 130/130 opposite Tsareena and Magearna, both of my attacks super effective on Grapploct), Grapploct chose Protect and blocked both attacks instead of pivoting a 2x-weak Hitmonlee into them. No voluntary switch occurred at any point in the battle. The R1 cost of that defect was two members that never acted; this time Takao lost nobody for free and the fight ran two turns longer."
+    },
+    {
+      "check": "Shadow Tag restricts eligible exits",
+      "result": "PASS",
+      "evidence": "Every pending_decision for both of my battlers reported switch_blocked_by ['ability_prevents_escape'] for as long as Wobbuffet was alive. I was genuinely locked in for six turns."
+    },
+    {
+      "check": "Queenly Majesty blanks the Fake Out lead (crack list)",
+      "result": "PASS (by deterrence)",
+      "evidence": "Hitmonlee never attempted Fake Out into the priority-blocking ability; it used Close Combat instead, which is the correct read."
+    },
+    {
+      "check": "Grapploct's Octolock restricts exits and the end-turn drops lead to useful damage",
+      "result": "NOT EXERCISED",
+      "evidence": "Grapploct spent its first turn on a high-value Protect and died on the second. Octolock has still never been used in any pass."
+    },
+    {
+      "check": "Counter / Mirror Coat must match actual incoming hits",
+      "result": "FAIL - four consecutive failures. See E0037-D1",
+      "evidence": "Wobbuffet selected Counter on turns 1, 2, 3 and 4. It failed every time ('But it failed!'), including on T3 when the only attack that hit Wobbuffet that turn was a special Flash Cannon for 52 - the exact case Mirror Coat exists for, which would have returned 104 to a 40 HP Magearna and probably killed it."
+    },
+    {
+      "check": "Encore must have a useful target",
+      "result": "NOT EXERCISED (never selected, including against a Choice-locked Passimian and against my repeated Play Rough)"
+    },
+    {
+      "check": "Safeguard replaces unsupported Helping Hand",
+      "result": "PASS (once, late)",
+      "evidence": "T5 Safeguard cloaked Takao's side. By then Wobbuffet was at 37/130 and its partner was Pawmo, so the payoff was small, but the move is real and it was the first sensible turn Wobbuffet took."
+    },
+    {
+      "check": "Special Life Orb Poliwrath and Choice Scarf Passimian apply pressure",
+      "result": "PARTIAL",
+      "evidence": "Passimian's Scarf Close Combat took half of Magearna's bar on its only turn - correct. Poliwrath was removed by a 2x Power Whip before acting."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "GRAPPLOCT",
+      "payoff": "Blocked a 2x Play Rough AND a 2x Fleur Cannon in the same turn on a full-HP body, and denied the Fleur Cannon's Sp. Atk drop to my side's benefit. This is the guard that replaced the R1 defect and it is a large, correct payoff."
+    },
+    {
+      "turn": 4,
+      "battler": "MAGEARNA (player) - listed for completeness only, not an opponent guard"
+    }
+  ],
+  "protect_ledger_note": "Exactly one opponent Protect in eight turns, and it was the highest-value guard available on that board. No guard spam. The waste on this team was Counter, not Protect.",
+  "ai_defects": [
+    {
+      "id": "E0037-D1",
+      "severity": "high - a member spends its entire life on a move that cannot resolve",
+      "turns": "1, 2, 3, 4",
+      "board": "Wobbuffet (Counter / Mirror Coat / Encore / Safeguard) beside a partner that was the actual target of my attacks on T1, T2 and T4, and on T3 taking a special Flash Cannon for 52 itself.",
+      "chosen": "Counter, four turns in a row. It failed all four times.",
+      "better": "T1 and T2: Encore on Tsareena, which used Play Rough on five consecutive turns, or Safeguard. T3: Mirror Coat - Wobbuffet was hit by a special attack for 52 that turn, and Mirror Coat would have returned 104 into a 40 HP Magearna. T4: Encore or Safeguard again.",
+      "note": "The reactive-move scoring is not reading the category of the damage actually aimed at Wobbuffet, and it is not discounting Counter when the opposing damage is going to the partner. This turned a 130 HP Shadow Tag trapper into a free four turns for me, and it is why the fight was 6-1 rather than close. It is a different defect from the R1 switch defect, which is fixed."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_defects_resolved": [
+    "R1 'turn-one healthy withdrawal' (Grapploct pivoting Hitmonlee into an unrevealed 2x board): NOT REPRODUCED on the same board and the same seed family. Grapploct stayed and Protected."
+  ],
+  "ai_weak_choices": [],
+  "ai_improvements_observed": [
+    "No voluntary switches at all, on the trainer that produced the block's worst switch defect.",
+    "Hitmonlee correctly declined Fake Out into Queenly Majesty.",
+    "The one Protect was the best turn available."
+  ],
+  "level_changes": {
+    "GRAPPLOCT": "2 -> 3 (L20 -> L21)",
+    "POLIWRATH": "2 -> 3 (L20 -> L21)"
+  },
+  "level_change_reason": "Won on attempt 1 with one player faint, which is the brief's 0-1 band: +1 on the weakest one or two members. Three members sit at offset 2 (L20, exactly the player cap, in a Gym at play order 36). I chose Grapploct and Poliwrath: Grapploct is the trainer's trapping engine whose Octolock has never once fired because it dies on its second turn, and Poliwrath was removed before acting. I did not touch Passimian, which landed the only real hit Takao got, nor Pawmo (offset 5, the ace-equivalent and the member that killed Magearna), nor Wobbuffet and Hitmonlee, which already took their R1 point. Budget after this pass: GRAPPLOCT +1 of 2, WOBBUFFET +1 of 2, HITMONLEE +1 of 2, POLIWRATH +1 of 2, PASSIMIAN 0 of 2, PAWMO 0 of 2.",
+  "r1_caveat_resolved": "The R1 receipt warned that its Wobbuffet +1 and Hitmonlee +1 were awarded on a result contaminated by the switch defect and should be re-evaluated once that was fixed. This run is that re-evaluation: with the defect gone the fight is still a 6-1 win, so both points are justified and I have left them in place rather than taking them back off.",
+  "levels_after": {"GRAPPLOCT": 3, "WOBBUFFET": 3, "HITMONLEE": 3, "POLIWRATH": 3, "PASSIMIAN": 2, "PAWMO": 5},
+  "cooler": "Yes. Wobbuffet is the most interesting body on the team - 130 HP, Shadow Tag, and it genuinely locked me in for six turns - and it spent four of them on a move that could not resolve. Even with the AI fixed, Counter and Mirror Coat on the same set means half its moveslots are dead on any turn where the damage goes to its partner, which in doubles is most turns. Trading Counter for Tickle or Charm - or leaning into the trap with Encore plus Safeguard as the two active slots - would make the trapper actually punish the battler it has locked in. Recording only; no set change in this pass.",
+  "authored_set_legality": "No legality problem observed. All six sets materialized and every move was legal on its board.",
+  "materialization_note": "Offset-only edits. scripts/emerald_champions_teams.py --write deliberately not run: other sessions have uncommitted edits to other trainers in the same authored file. The main agent materializes."
+}
