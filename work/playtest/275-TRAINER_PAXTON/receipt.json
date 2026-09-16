@@ -1,0 +1,31 @@
+{
+  "play_order": 275, "e_group": "E0432", "trainer": "TRAINER_PAXTON", "class": "ace", "location": "Route132",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Breloom/Ursaring/Luxray offset 1 -> L83, Kommo-o offset 2 -> L84. Confirmed.",
+  "party_manifest": "work/playtest/275-TRAINER_PAXTON/party_paxton_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 432, "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Ursaring Protected its Flame Orb turn (authored), Fake Out flinched Breloom, Moonblast into the Protect. T2 Moonblast OHKOed the burned Ursaring before its chosen Facade; Breloom double-crit Bullet Seed 126 into Rillaboom. T3 Luxray switched to Kommo-o and came back as Breloom's replacement (Intimidate twice, -2 on both my actives); Grassy Glide broke the Sash and Moonblast KOed Breloom. T4 Kommo-o Protect (nothing aimed at it), Luxray Wild Charge into Flutter Mane's Protect, U-turn to Landorus. T5 Luxray Protect blocked Earth Power, Moonblast 4x OHKO Kommo-o. T6 Earth Power KO Luxray."}
+  ],
+  "strategy_checks": [
+    {"check": "Breloom Spore only on a legal target, else Mach Punch / Technician Bullet Seed", "result": "FAIL (never Spored)", "evidence": "Flutter Mane was a legal sleep target all three turns; Breloom chose Bullet Seed on T1 (flinched), T2 and T3. Rock Tomb and Mach Punch never used either."},
+    {"check": "Ursaring takes its Flame Orb turn, then Guts Facade", "result": "PASS / denied", "evidence": "T1 Protect while the Orb burned it; T2 native choice Facade into Rillaboom, OHKOed by Moonblast first."},
+    {"check": "Luxray Intimidate + Snarl grind for Kommo-o's Body Press", "result": "PARTIAL", "evidence": "Two Intimidates via the T3 switch cycle (-2 Atk on both my actives, a genuinely good play); Snarl never used; Kommo-o never got an Iron Defense turn."},
+    {"check": "Kommo-o Iron Defense / Body Press wall", "result": "NOT EXERCISED", "evidence": "T4 Protect (empty), T5 OHKOed by 4x Moonblast (Bulletproof irrelevant)."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Ursaring", "payoff": "blocked Moonblast (~253) while the Flame Orb activated; real and authored"},
+    {"turn": 4, "battler": "Kommo-o", "payoff": "empty: no attack was aimed at it (U-turn on Luxray, Protect on my side)"},
+    {"turn": 5, "battler": "Luxray", "payoff": "blocked a lethal Earth Power; real"}
+  ],
+  "ai_defects": [
+    {"turn": "2-3", "battler": "Breloom", "board": "Flutter Mane (legal Spore target, not Grass/Overcoat/Goggles) beside a Grass-type Rillaboom", "chosen": "Bullet Seed x2", "better": "Spore on Flutter Mane: the dossier's first-listed action and the only way Breloom's slot beats a faster Fairy"}
+  ],
+  "level_changes": [
+    {"member": "BRELOOM", "before": 1, "after": 2, "reason": "won first try 4-0 with zero faints; Breloom never used its win condition"},
+    {"member": "URSARING", "before": 1, "after": 2, "reason": "same rule; Protected then died before Guts fired. Kommo-o is the ace, Luxray did real work."}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED (needs rebuild).",
+  "could_this_be_cooler": "The Luxray double-Intimidate switch cycle was a real idea executed by the AI on its own; that plus the Flame Orb Protect turn are the good parts. The Spore scoring is the thing to look at: a Fairy/Ghost lead is exactly the target Spore should be aimed at and it never was. Not changed in this pass.",
+  "authored_set_legality": "No problem found."
+}
