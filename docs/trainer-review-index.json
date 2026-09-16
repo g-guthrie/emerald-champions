@@ -3097,7 +3097,7 @@
       "implementation_receipt": "work/trainer-65-84-implementation/Implementation.md",
       "ladder": {
         "L0_authored": true,
-        "L1_ai_fixtures": false,
+        "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
       }
@@ -7317,7 +7317,7 @@
       "implementation_receipt": "work/trainer-85-100-implementation/Implementation.md",
       "ladder": {
         "L0_authored": true,
-        "L1_ai_fixtures": false,
+        "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
       }
