@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge cap 76 anti-healer party for E0384 TRAINER_RUBEN",
+  "availability_audit": "Cap 76 (C39 Scorched Slab grants it; C40 and C41 change nothing; C42 the Space Center grants 84). Chronology against pool-76.json source_detail, all upstream of Route 128: Incineroar gate 36 (Litten, Mauville Game Corner; level evolutions). Rillaboom gate 36 (Grookey, same). Urshifu-Single gate 42 (Kubfu, legendary_sign:Route112, the Jagged Pass approach used for the Magma Emblem). Amoonguss gate 42 (Foongus, Petalburg Woods). Metagross gate 48 (Beldum/Metang line) with ITEM_METAGROSSITE stone-window 42. Zapdos gate 30, legendary_sign:NewMauville_Inside, the New Mauville shutdown cleared long before the Feather Badge. Nothing from Mossdeep, the Space Center, Shoal Cave, the Abandoned Ship, Seafloor Cavern, Sootopolis, Route 131 or Pacifidlog.",
+  "reachable_legends": "Two: Urshifu-Single (Kubfu, gate 42) and Zapdos (gate 30). No Mythical is used here.",
+  "plan": "Built from the crack line. Taunt replaces Parting Shot on Incineroar because Taunt is the single stated answer - it shuts off Heal Pulse, Light Screen and Wish in one action. Everything else is burst rather than chip, because a priority half-heal beats chip damage by construction: Mega Metagross (Ice Punch is 4x into Dragonite, Steel is 2x into Florges), Rillaboom (Grass 2x into Milotic), Zapdos (Thunderbolt 2x into Milotic, Heat Wave 2x into Meganium), Urshifu (always-crit burst that ignores Protect), Amoonguss (Sludge Bomb 2x into Florges). Known trap to respect: Milotic's Competitive turns Incineroar's Intimidate and any Icy Wind into +2 Special Attack, so Intimidate must not be spent while Milotic is on the field. Known non-answer: Spore cannot touch Meganium, which is Grass, and Florges' Flower Veil protects it from status anyway.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Taunt is the crack line: it shuts off Heal Pulse, Light Screen and Wish at once. Fake Out and Knock Off otherwise",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": [
+        "MOVE_METEOR_MASH",
+        "MOVE_BULLET_PUNCH",
+        "MOVE_HAMMER_ARM",
+        "MOVE_ICE_PUNCH"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Mega win condition; Steel is 2x into Florges, Ice Punch is 4x into Dragonite, Bullet Punch is burst priority",
+      "availability": "pool-76 gate 48 (Beldum/Metang line) with ITEM_METAGROSSITE stone-window 42."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_ROOST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        0,
+        4
+      ],
+      "role": "reachable legend: Thunderbolt is 2x into Milotic, Heat Wave is a 2x spread into Meganium, and Flying coverage answers the Grass lane",
+      "availability": "pool-76 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_HIGH_HORSEPOWER"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Grass is 2x into Milotic; Grassy Glide priority; Fake Out is the second denial",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_THWACKEY."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": [
+        "MOVE_WICKED_BLOW",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Unseen Fist ignores this team's heavy Protect; always-crit Wicked Blow is burst rather than chip",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        252,
+        0
+      ],
+      "role": "Sludge Bomb is 2x into Florges; Spore on anything that is not Meganium (Grass ignores powder) or a Flower Veil ally",
+      "availability": "pool-76 gate 42, evolution:level from SPECIES_FOONGUS."
+    }
+  ]
+}

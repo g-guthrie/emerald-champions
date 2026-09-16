@@ -1,0 +1,100 @@
+{
+  "play_order": 246,
+  "e_group": "E0384",
+  "trainer": "TRAINER_RUBEN",
+  "class": "ace",
+  "location": "Route128",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Heatmor / Meganium / Dragonite / Milotic / Florges-Red (0) at L74 and Lopunny (+1) at L75 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/246-TRAINER_RUBEN/party_antiheal76.json"],
+  "chronology_note": "Route 128 at cap 76, before Dive. Every member gates at 48 or lower: Incineroar 36, Metagross 48 with Metagrossite stone-window 42, Zapdos 30, Rillaboom 36, Urshifu-Single 42, Amoonguss 42. No Mythical and nothing gated 68 or 76 in this party. Nothing from Mossdeep, the Space Center, Shoal Cave, Seafloor Cavern, Sootopolis, Route 131 or Pacifidlog.",
+  "pre_play_strategy_checks": [
+    "Triage gives Meganium's Heal Pulse +3 priority, restoring half an ally's maximum HP before anything else acts",
+    "Mega Lopunny's Scrappy Fake Out hits Ghost types and buys Dragonite its Dragon Dance turn",
+    "Dragonite's Multiscale means it survives the first hit at full HP",
+    "Milotic's Competitive punishes Intimidate and Icy Wind with +2 Special Attack",
+    "Florges' Flower Veil makes Meganium immune to stat drops and status",
+    "Light Screen and Wish are the rest of the support structure",
+    "Taunt is the key: it shuts off Heal Pulse, Light Screen and Wish at once"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 7,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/246-TRAINER_RUBEN/a1",
+      "party": "party_antiheal76.json (Incineroar with Taunt / Mega Metagross / Zapdos / Rillaboom / Urshifu-Single / Amoonguss)",
+      "outcome": "won",
+      "turns": 14,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "A long fight that I won by burst rather than attrition, which is exactly what the crack line prescribes. Heatmor is far scarier than it reads - a Tough Claws Life Orb Fire Lash took my Mega Metagross from 231 to 52 on turn 1 - and Knock Off removing that Life Orb was the turn the fight settled. Urshifu's always-crit Wicked Blow killed Heatmor and Dragonite outright rather than chipping them, Taunt shut Milotic's Recover off after it had already healed once, and Amoonguss's Sludge Bomb is 2x into both of the last two Pokemon. I lost Urshifu to a Mega Lopunny Close Combat and Zapdos to a Moonblast."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Triage Heal Pulse restores half an ally's maximum HP at +3 priority",
+      "result": "FAIL - never selected once in 14 turns. See AI defect E0384-1",
+      "evidence": "Meganium had five decisions across the battle (Protect, a switch, Light Screen, Giga Drain, Giga Drain) and Heal Pulse was not one of them. The move that the dossier opens with - 'Ruben is the campaign's healer, and Meganium is the reason' - never happened. Honest caveat recorded in the defect entry: for much of the battle there was no damaged ally worth healing, partly because I was killing things outright, which is the printed counterplay."
+    },
+    {
+      "check": "Mega Lopunny's Scrappy Fake Out buys Dragonite its Dragon Dance turn",
+      "result": "FAIL on both halves",
+      "evidence": "Lopunny arrived on turn 7, which was its own first turn out and therefore its one legal Fake Out window, and chose Close Combat - which killed Urshifu, so the choice was defensible in isolation. But Dragonite was already dead by then, so the stated partnership could never occur: Dragonite is party slot 3 and Lopunny slot 4, and Ruben deployed them in that order. Fake Out and Encore were both never selected in the whole battle."
+    },
+    {
+      "check": "Dragonite's Multiscale means it survives the first hit at full HP",
+      "result": "PASS",
+      "evidence": "turn 5: an always-crit Wicked Blow from a Jolly 252-Atk Urshifu dealt 86 to a full-HP Dragonite, against 186 for the same move on the following turn once Multiscale was broken. Exactly the advertised halving, and it is the reason Dragonite took two turns to remove."
+    },
+    {
+      "check": "Dragonite sets up with Dragon Dance",
+      "result": "FAIL",
+      "evidence": "Dragonite had two decisions and chose Dragon Claw both times. Turn 5 was a reasonable Dragon Dance turn - it was at full HP behind Multiscale with a partner alive - and Extreme Speed, its printed priority finisher, was also never used. Two of its four moves are invisible. Low severity given the board, but it is the third setup move in this block that was never selected."
+    },
+    {
+      "check": "Milotic's Competitive punishes Intimidate and Icy Wind with +2 Special Attack",
+      "result": "NOT TESTED, by my choice",
+      "evidence": "I deliberately kept Incineroar off the field while Milotic was out so that Intimidate never fed it, and I used no stat-lowering moves. This is the counterplay the ability is designed to tax and it worked, but it means the ability itself is unverified here. Milotic did use Icy Wind offensively on turn 7 and Recover on turn 4 - the Recover restored a full 109 HP the turn before I Taunted it, which is good timing on its part."
+    },
+    {
+      "check": "Florges' Flower Veil makes Meganium immune to stat drops and status",
+      "result": "NOT TESTED",
+      "evidence": "Meganium is Grass, so my only status move (Spore) could never touch it anyway, and I used no stat-lowering moves against it. Flower Veil had nothing to do in this battle. Worth noting that this makes it a somewhat redundant protection: the ally it exists to protect is already immune to the most common status the player brings."
+    },
+    {
+      "check": "Light Screen and Wish are the rest of the support structure",
+      "result": "SPLIT - Light Screen PASS, Wish FAIL",
+      "evidence": "turn 9: Meganium used Light Screen on the turn it re-entered, and the reading shows SIDE_STATUS_LIGHTSCREEN on the opponent side for the rest of the fight. Wish was never selected by Florges across seven decisions (three Protect, three Moonblast, one Helping Hand)."
+    },
+    {
+      "check": "Taunt shuts off the support structure (my counterplay)",
+      "result": "PASS",
+      "evidence": "turn 4: Incineroar's Taunt landed on Milotic one turn after Milotic had used Recover for a full 109 HP, and Milotic never healed again - it died to a Thunderbolt three turns later at a HP total it would otherwise have restored. Taunt is as important as the crack line says, and it is the reason I carried it instead of Parting Shot."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Meganium", "payoff": "outstanding. One Protect blanked both of my attacks on the same turn - a 2x Flare Blitz and a Tough Claws Meteor Mash, both aimed at Meganium - on the turn I was trying to remove the healer before it could function"},
+    {"attempt": 1, "turn": 3, "battler": "Heatmor", "payoff": "good. Blunted an always-crit Wicked Blow to leave Heatmor alive on 26 HP, buying it one more Fire Lash"},
+    {"attempt": 1, "turn": 10, "battler": "Florges-Red", "payoff": "EMPTY. Both of my actions that turn (Amoonguss's Sludge Bomb and Rillaboom's High Horsepower) were aimed at Meganium; nothing was ever pointed at Florges and the guard prevented zero damage. Defensible ex ante under a mixed forecast with two attackers and two targets, but it is the first genuinely empty guard I have logged in this block"},
+    {"attempt": 1, "turn": 12, "battler": "Florges-Red", "payoff": "excellent. Blocked both Rillaboom's Grassy Glide and Amoonguss's 2x Sludge Bomb as the last Pokemon alive"},
+    {"attempt": 1, "turn": 14, "battler": "Florges-Red", "payoff": "good. Blocked the pair again while at low HP as the last Pokemon alive, extending the fight by a turn"}
+  ],
+  "protect_summary": "5 opponent Protects, 1 empty (Florges turn 10), 4 with real payoff including a double-block on turn 1 that saved the healer from being removed before it acted. No consecutive-guard abuse. Overall good but a step below Alexa's.",
+  "ai_defects": [
+    {
+      "id": "E0384-1",
+      "turn": "a1, whole battle",
+      "board": "Meganium had five decisions: turn 1 Protect (correct), turn 2 a switch out (correct), turn 9 Light Screen, turn 10 Giga Drain, turn 11 Giga Drain. On turns 10 and 11 Meganium itself was at 155/271 and then 52/271.",
+      "chosen": "Never MOVE_HEAL_PULSE.",
+      "better": "The honest reading is more interesting than a plain bug. Heal Pulse targets an ally, and on turns 9 to 11 the only ally was a full-HP Florges, so Heal Pulse would have been strictly wasted - the AI was not wrong to skip it. The problem is structural: Ruben's entire identity is a priority half-heal, and the encounter as deployed gives it almost no window, because (a) Meganium leads and a lead has no damaged ally on turn 1, (b) Ruben correctly withdrew Meganium on turn 2 and it did not return until turn 9, by which time three members were dead, and (c) burst damage - the printed counterplay - kills allies outright rather than leaving them damaged. So the very thing the plan tells the player to do also guarantees the plan never appears. I am logging this as a defect rather than a design note because the same 14 turns also contained zero Dragon Dance, zero Fake Out, zero Encore, zero Extreme Speed and zero Wish: six of this team's printed non-damaging tools were never used once. That is a pattern across the encounter, not a single unlucky board, and it is the same 'the support move never gets selected' shape already logged on E0368's Snowscape and E0382's Strength Sap. Severity: high for this encounter specifically, because unlike Brenda the missing move IS the trainer."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but with two player faints after a real 14-turn fight, which is the brief's keep case. I would not raise this team while six of its support moves are invisible - if Heal Pulse and Dragon Dance actually fired, this encounter would be materially harder than what I played, and levels must not paper over that. I would also not lower it: Heatmor alone took a Mega Metagross to 22 percent on turn 1.",
+  "cooler": "The revision is the right call and the concept - a team where everything exists to keep somebody else alive - is genuinely different from anything else on these routes. But playing it exposes that the concept is currently theoretical, and the fix is structural rather than cosmetic. Three concrete notes, none implemented. (1) Meganium should not lead. A healer with no damaged ally on turn 1 is a Protect bot, and Ruben correctly withdrew it immediately; put Heatmor and Dragonite in front and hold Meganium in reserve so it arrives to a board that needs it. That single reorder would probably turn the failed Heal Pulse check into a passing one without touching a move or a level. (2) The plan names Mega Lopunny's Fake Out as the thing that buys Dragonite its Dragon Dance, but they are party slots 4 and 3 and Ruben deploys them in that order, so Dragonite was dead before Lopunny arrived - the same plan-versus-roster mismatch I logged on Athena. Swap their slots. (3) Florges' Flower Veil protects Meganium from status, but Meganium is Grass and already immune to the powders a player actually brings; the protection is close to redundant. Wish on a Pokemon that also has Protect and Helping Hand and Moonblast is a fourth slot it never reaches. A body whose support is impossible to ignore - Heal Pulse's partner rather than a second healer - would state the idea better. Worth saying clearly: Heatmor is the best-performing member of this team by a distance and it is filed under 'first two useful turns' almost in passing.",
+  "legality_notes": "No legality problem in the authored set. Lopunnite's stone window is 14 and all six members and items are inside cap 76.",
+  "verification_limit": "No level change was made here, so nothing in this receipt is pending re-verification."
+}
