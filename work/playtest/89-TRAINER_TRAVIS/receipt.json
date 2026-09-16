@@ -1,0 +1,50 @@
+{
+  "play_order": 89,
+  "e_group": "E0104",
+  "trainer": "TRAINER_TRAVIS",
+  "class": "regular",
+  "location": "Route111",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"ARCHEOPS": 33, "GOGOAT": 35, "CRUSTLE": 35, "SCYTHER": 38},
+  "cap_window_confirmation": "Offsets -1/1/1/4 resolved to 33/35/35/38 against a level-36 party: cap 36 on Medium, matching the dossier's own 'Scyther +4 as an Eviolite pre-evolution, the evolved three -1 to +1'.",
+  "party_manifest": "work/playtest/89-TRAINER_TRAVIS/party.json",
+  "party_pool_audit": "Block core led by Incineroar + Gyarados for a double Intimidate into an entirely physical team. All six gate <= 36 with source maps passed before Route 111.",
+  "pre_declared_strategy_checks": [
+    "Archeops spends its Flying Gem on a valuable Acrobatics",
+    "Archeops is preserved above the Defeatist threshold only when that is better than trading damage",
+    "Gogoat attacks or takes a safe Bulk Up, and does not treat Milk Drink as protection for its ally",
+    "Crustle's Shell Smash line fires and the White Herb is actually consumed",
+    "Only one of the two setup reserves spends a free turn boosting on a dangerous board",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/89-TRAINER_TRAVIS/a1", "seed": 89, "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "Double Intimidate on entry put both leads at -2. T1 Archeops Protected, which blocked a 2x Waterfall that would very likely have killed it from 103, while Gogoat used Horn Leech into Gyarados and Flare Blitz removed Gogoat. T2 Archeops spent the Flying Gem on Acrobatics into Incineroar for 86 - at minus two Attack - and then died to Waterfall; Crustle's Rock Slide hit both of mine and flinched Incineroar. T3 I pivoted the 8 HP Incineroar out for Excadrill, which resists everything Crustle and Scyther carry, and Scyther immediately punished me: Technician Bug Bite is 2x into Mega Gyarados's Dark half and KO'd it from 48. T4 Excadrill's Rock Slide was 4x into Scyther and Togekiss's Air Slash finished it, but Crustle's second Knock Off finished Excadrill. T5-T7 Rillaboom and Togekiss ground Crustle down; it Protected once, blocking both attacks, then died to Wood Hammer."}
+  ],
+  "strategy_checks": [
+    {"check": "Archeops spends its Flying Gem on a valuable Acrobatics", "result": "PASS", "evidence": "T2: 'The Flying Gem strengthened the opposing Archeops's move' and Acrobatics took Incineroar from 94 to 8 - 86 damage from a level-33 Pokemon that was sitting at minus two Attack from a double Intimidate. It waited one turn behind a Protect and then spent the Gem on the turn it could actually connect. This is the two-stage item plan the dossier describes and it is the single most impressive number in my block."},
+    {"check": "Archeops is preserved above Defeatist only when that beats trading damage", "result": "PASS", "evidence": "The T1 Protect is exactly this decision: at -2 Attack, an immediate Acrobatics would have been poor value, and a 2x Waterfall was incoming. Guarding kept it at full, above the Defeatist threshold, and bought the turn on which the Gem attack was worth 86. It then died to the Waterfall it had delayed by one turn, which is a fair price."},
+    {"check": "Gogoat attacks or takes a safe Bulk Up, and Milk Drink is not treated as ally protection", "result": "PASS", "evidence": "Gogoat had one turn, at -2 Attack, facing an Incineroar and a Gyarados. It chose Horn Leech - damage plus recovery, 2x into the Water type - rather than Bulk Up on a board where it was about to be hit for 2x, and rather than Milk Drink. Correct on all three counts."},
+    {"check": "Crustle's Shell Smash fires and the White Herb is consumed", "result": "FAIL - neither happened", "evidence": "Crustle was on the field for five of the seven turns, including two turns as the last Pokemon alive, and never used Shell Smash. It used Rock Slide, Knock Off, Knock Off, Protect, and was killed. The White Herb was still in its hands when it fainted. In fairness the boards were bad for it - at 55 HP facing a healthy Rillaboom and Togekiss, Shell Smash would have lowered its defenses into two attackers that were going to kill it anyway - but the dossier explicitly says the White Herb 'must actually be consumed', and across a full battle it never was. The two Knock Offs it chose instead were genuinely good, so this reads as the scorer correctly refusing a bad setup rather than as a broken tactic."},
+    {"check": "Only one of the two setup reserves boosts on a dangerous board", "result": "PASS in the strictest possible sense - neither did", "evidence": "Scyther never used Swords Dance and Crustle never used Shell Smash. The dossier's stated disposition was to 'author setup admission rather than let both reserves spend a free turn boosting', and the AI went further and declined both. Scyther instead used Technician Bug Bite into the Mega's Dark typing for a clean KO, which is worth far more than a Swords Dance would have been."},
+    {"check": "Defeatist", "result": "NOT OBSERVED", "evidence": "Archeops never fell below half: it was at full behind a Protect on T1 and was KO'd outright by Waterfall on T2. The ability's drawback never applied, which is the best case for the Flying Gem build."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "ARCHEOPS", "payoff": "EXCELLENT. Blocked Mega Gyarados's Waterfall, which is 2x into Rock/Flying and was very likely lethal on a 103 HP body. The guard also preserved Archeops above the Defeatist threshold and bought the turn on which its Flying Gem Acrobatics did 86 damage. This is a Protect that directly converted into the team's best action."},
+    {"turn": 6, "battler": "CRUSTLE", "payoff": "REAL. Blocked both Rillaboom's Wood Hammer and Togekiss's Air Slash in the same turn, and Crustle then healed on my own Grassy Terrain. As the last Pokemon alive against two healthy attackers it only delayed the inevitable, but two full attacks denied plus terrain recovery is not an empty guard, and it was not repeated on the following turn."}
+  ],
+  "protect_ledger_note": "Two opposing Protects in seven turns, on two different Pokemon, both with concrete payoff and neither repeated. This is the cleanest Protect ledger in my block.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Scyther's Bug Bite on T3 is the best single read I saw in the block. My Gyarados had Mega Evolved on turn 1, which changes its typing from Water/Flying to Water/Dark; Bug is 0.5x into the base form and 2x into the Mega. Scyther picked Bug Bite over Dual Wingbeat and got the KO from 48. It then used Dual Wingbeat into Excadrill the following turn, correctly switching moves for the new typing.",
+    "Crustle's two Knock Offs both landed on the same target and both mattered: the first removed Excadrill's Life Orb, the second finished it. Choosing item removal plus damage over a second Rock Slide against a Steel/Ground that resists Rock is right.",
+    "The team never sets up, in a fight whose dossier is built around three setup routes. I do not think that is a fault - every board genuinely favoured attacking - but it does mean Bulk Up, Shell Smash and Swords Dance are decorative in this encounter."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two Pokemon, including the Mega, to correct opponent play. Brief rule 5: won with 2+ faints after a real fight -> keep. No level change. Travis is comfortably the strongest non-ace regular in my block.",
+  "could_this_be_cooler": "The dossier already answers this at length and I agree with its answer - the Flying Gem Archeops is a two-stage build on a Pokemon whose only ability is a drawback, and it delivered exactly that in play. I would add one observation the dossier does not make: the team's three setup routes never fired and probably never will, because all three cost a turn that this composition cannot spare. If the intent is for Crustle's Shell Smash and Scyther's Swords Dance to be real win conditions, one of them needs a partner action that buys the turn - a redirection, a Fake Out, or Gogoat using Bulk Up behind a slower threat - and right now nothing on the team creates that turn. The alternative, which I would prefer, is to accept it: cut Shell Smash and the White Herb for a fourth attack plus a Focus Sash and let Crustle be the Sturdy pivot it actually plays as. The flagged campaign-wide duplication with Beau's Flying Gem Archeops at E0153 stands, and this is the better home for it."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
