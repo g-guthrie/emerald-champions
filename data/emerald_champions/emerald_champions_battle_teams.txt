@@ -678,9 +678,9 @@ strategy: REDIRECTION
 mega_slots: NONE
 plan: Dugtrio Earthquake with airborne Misdreavus attacking/burning; on next turn reassess trapping and immunities. Carnivine can redirect or Stun Spore for a surviving attacker; Gligar is a fast Ground-immune pivot. No ally is presumed immune once grounded/suppressed. Stats: Keep Sash physical Dugtrio, Eviolite special Misdreavus, physical/support Carnivine and Flying Gem Acrobatics Gligar. Could it be cooler? Keep the underground/hovering trap formation; replace unsupported Carnivine Helping Hand with legal Stun Spore. Overrepresented? Eddie develops Sarah alternate Arena Trap/Levitate Earthquake into a full fast team; this accepted overlap remains a pacing watch item. Medium incoming cap30 levels30/32/32/32 are unplayed design seeds.
 crack: Eligible escape/pivot routes, Flying/Levitate/Ghost rules, powder immunity, Water/Grass pressure and grounding or suppressing an ally.
-DUGTRIO @FOCUS_SASH ARENA_TRAP JOLLY 4/252/0/0/0/252 0 | EARTHQUAKE, ROCK_SLIDE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DUGTRIO @FOCUS_SASH ARENA_TRAP JOLLY 4/252/0/0/0/252 1 | EARTHQUAKE, ROCK_SLIDE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MISDREAVUS @EVIOLITE LEVITATE TIMID 4/0/0/252/0/252 2 | SHADOW_BALL, THUNDERBOLT, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-CARNIVINE @SITRUS_BERRY LEVITATE ADAMANT 252/252/4/0/0/0 2 | POWER_WHIP, KNOCK_OFF, RAGE_POWDER, STUN_SPORE | ivs=31/31/31/31/31/31 | friendship=255
+CARNIVINE @SITRUS_BERRY LEVITATE ADAMANT 252/252/4/0/0/0 3 | POWER_WHIP, KNOCK_OFF, RAGE_POWDER, STUN_SPORE | ivs=31/31/31/31/31/31 | friendship=255
 GLIGAR @FLYING_GEM IMMUNITY JOLLY 4/252/0/0/0/252 2 | ACROBATICS, HIGH_HORSEPOWER, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0058 TRAINER_TIMMY class=regular

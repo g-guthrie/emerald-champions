@@ -1,0 +1,59 @@
+{
+  "play_order": 53,
+  "e_group": "E0056",
+  "trainer": "TRAINER_EDDIE",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle1",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"DUGTRIO": 28, "MISDREAVUS": 30, "CARNIVINE": 30, "GLIGAR": 30},
+  "cap_window_confirmation": "Dossier seeds 30/32/32/32 resolved to 28/30/30/30. Cap 30, Medium -2.",
+  "party_manifest": "work/playtest/53-TRAINER_EDDIE/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Weavile + Gardevoir. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Dugtrio uses Earthquake while its partner is airborne, and the partner is unaffected",
+    "Misdreavus attacks or burns from behind Levitate",
+    "Carnivine's Rage Powder redirects a real attack away from a partner that needed saving",
+    "Carnivine uses Stun Spore on a surviving attacker where it pays",
+    "Gligar converts its Flying Gem into a boosted Acrobatics",
+    "No ally is presumed immune once grounded or suppressed",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/53-TRAINER_EDDIE/a1", "seed": 53, "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 both opponents Protected on the same turn - see the defect below - blanking a Triple Axel and a Hyper Voice and making no progress of their own. T2 Weavile out-sped Dugtrio (125 vs 120) and Triple Axel broke the Focus Sash and killed it in the same move, so the Earthquake it had selected never resolved; Misdreavus' Shadow Ball hit Mega Gardevoir for 2x and took it to 30. T3 I pulled Gardevoir for Togekiss and aimed Knock Off at the 25 HP Misdreavus; Carnivine's Rage Powder pulled it onto itself instead, eating 97 damage and losing its Sitrus but genuinely saving its partner. T4 Ice Shard (2x) finished Carnivine and Misdreavus Protected away a lethal Air Slash. T5 Gligar entered and Protected away a 4x Triple Axel while Misdreavus finally fell to Air Slash. T6 Triple Axel crit Gligar for 4x and ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Dugtrio Earthquake with an airborne partner", "result": "NOT_EXERCISED", "evidence": "Earthquake was selected on T2 - the correct move, with a Levitate partner beside it - but Weavile out-sped Dugtrio by 5 points of base Speed and KO'd it through the Focus Sash before the move resolved. The choice was right; it never got to happen."},
+    {"check": "Misdreavus attacks or burns from behind Levitate", "result": "PASS", "evidence": "Shadow Ball on T2 and T3 (2x into Mega Gardevoir, 60 damage the first time) and Thunderbolt on T5. It picked the 2x option against the Psychic-type both times it had one."},
+    {"check": "Will-O-Wisp", "result": "NOT_SELECTED", "evidence": "Never used in four Misdreavus turns. Weavile, a Life Orb physical attacker that was the single biggest threat on the board, was a legal target for all four of them. This is the clearest missed burn in my block."},
+    {"check": "Carnivine's Rage Powder redirects a real attack", "result": "PASS", "evidence": "T3, and it was correct on the merits, not just mechanically. Misdreavus was at 25/85 and my Knock Off was 2x on it and lethal. Carnivine pulled the attack onto a 112 HP body, lost 97 HP and its Sitrus doing it, and its partner survived to take two more turns. That is exactly what the REDIRECTION flag is supposed to buy."},
+    {"check": "Carnivine Stun Spore on a surviving attacker", "result": "NOT_SELECTED", "evidence": "Carnivine had two turns and used Rage Powder then Power Whip. Paralysing a 125-Speed Weavile would have been worth more than the Power Whip, but the redirect turn was clearly right so only one turn is in question."},
+    {"check": "Gligar converts Flying Gem into a boosted Acrobatics", "result": "FAIL", "evidence": "Gligar had exactly two turns and Protected on both, then died with the Flying Gem still in its bag. Neither Protect was empty - the first blocked a 4x Triple Axel that would have killed it outright - but the member's entire reason for existing never happened. See the design note."},
+    {"check": "No ally presumed immune once grounded or suppressed", "result": "NOT_TESTABLE", "evidence": "I had no way to ground or suppress a Levitate ally with this party."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "DUGTRIO", "payoff": "REAL: blocked a 2x Triple Axel that would have broken its Focus Sash and killed it, plus a share of Hyper Voice. Individually the correct call."},
+    {"turn": 1, "battler": "MISDREAVUS", "payoff": "REAL BUT SMALL: blocked one Pixilate Hyper Voice. Its partner Protected on the same turn, so the side scored zero damage and burned both guards at once."},
+    {"turn": 4, "battler": "MISDREAVUS", "payoff": "REAL: at 25/85 it blocked a Serene Grace Air Slash that was lethal, and bought itself the Thunderbolt it fired on T5."},
+    {"turn": 5, "battler": "GLIGAR", "payoff": "REAL: blocked a 4x Triple Axel from a Life Orb Weavile, which is as close to guaranteed-lethal as this board gets. The cost is that it was one of only two turns Gligar ever had, and it spent the other one the same way."}
+  ],
+  "protect_ledger_note": "Four opponent Protects, every one of them blocking damage that was individually lethal or near it. No Protect was empty and no Pokemon Protected on consecutive turns. On raw payoff this is the best guarding in my block; the problem is entirely about what the guarded turns were spent instead of.",
+  "ai_defects": [
+    {"turn": 1, "board": "Opening turn of the battle. Their Dugtrio (b1) and Misdreavus (b3) both at full HP, nothing revealed on either side, no field effect, no status, no incoming forced move.", "chosen": "Dugtrio used Protect and Misdreavus used Protect, in the same turn.", "why_wrong": "Both guards succeeded and both blocked real damage, so neither is wrong in isolation. The defect is that they were chosen independently with no term for what the partner is doing. The result is a whole opponent turn with zero board progress - no attack, no status, no setup - while halving the success probability of BOTH Protects for the following turn, which is when Dugtrio's Earthquake would have mattered. A side that guards with both slots has simply passed the turn. This is the second time in this block: Greta's Shedinja and Umbreon did the same thing on turn 3 of play_order 49.", "better_action": "One of the two guards, and the other battler acting. Dugtrio Protecting while Misdreavus attacks is the strictly better version of the same turn, and it keeps one Protect fresh.", "severity": "medium", "note": "For the AI owner: this looks like a missing partner-correlation term in the PAIR_GUARD expected-value scoring rather than a bug in any single scorer. It is not a committed-action read - each battler only needs to know that its own partner's best action this turn is also a guard, which is its own side's information."}
+  ],
+  "ai_notes": [
+    "The Rage Powder on T3 is the best single decision I have seen from a redirector in this block. It was not a reflex - it was aimed at the one turn where its partner was at 25 HP and my chosen attack was 2x and lethal on that partner, and Carnivine paid 97 HP and its item to make the save.",
+    "Misdreavus never using Will-O-Wisp across four turns, with a Life Orb physical attacker in front of it the entire time, is the same shape as Golbat's unused Taunt in play_order 48 and Whimsicott's unused Encore in play_order 52. Three different teams, three different status/disruption moves with obvious targets, none selected. Worth a look at how non-damaging disruption is priced against small chip damage.",
+    "Gligar spending both of its turns on Protect and dying with an unused Flying Gem is the sharpest example of the cost of good-in-isolation guarding: each individual choice was right, and the member still contributed nothing."
+  ],
+  "level_changes": [
+    {"member": "DUGTRIO", "field": "level offset", "before": 0, "after": 1, "reason": "First-attempt win with zero player faints. Dugtrio at L28 is the lowest-level opponent and it lost the Speed race to a 125-base lead by 5 points, so its Focus Sash and its Earthquake both died with it on the same turn. One level does not win that race but it is the correct application of the rule to the weakest member."},
+    {"member": "CARNIVINE", "field": "level offset", "before": 2, "after": 3, "reason": "Second bump goes to the redirection engine rather than to another L30 body, because Carnivine is the member that actually executed the authored strategy and the one whose survival decides whether it can do it more than once. It took 97 of its 112 HP from a single Knock Off on the turn it redirected. Gligar is left alone deliberately: it has a 4x Ice weakness and a level will not change whether it survives a Triple Axel, so spending the budget there would buy nothing."}
+  ],
+  "post_change_rerun": "NOT RUN - requires a headless ROM rebuild of the shared work/agent-battle-build; see the play_order 49 receipt.",
+  "calibration": "Zero faints in six turns, and three of my six were never sent out. Both the brief rule and the AGENTS three-faint threshold trigger a level increase on the weakest one or two. The fight was longer than Kaleb's only because four well-chosen Protects stretched it, not because it applied pressure.",
+  "could_this_be_cooler": "The concept is genuinely cool and I want to defend it: every one of Eddie's partners is airborne or Levitating specifically so that Dugtrio's Earthquake is a free spread attack, and Arena Trap underneath it means the player cannot simply rotate out of the problem. That is a real board, not a theme sticker. Two things stop it landing. First, the whole team is soft to a single type: Ice is 2x on Dugtrio, 2x on Carnivine and 4x on Gligar, so one Ice-type lead dismantles three quarters of it, and Ice coverage is trivially available at cap 30. Second, Dugtrio is both the engine and the fastest thing Eddie owns at base 120, which means anything at 121 or above removes the engine before it ever uses Earthquake - which is exactly what happened here on turn 2. The fix I would recommend to the design side is to make the Earthquake not depend on Dugtrio living: give the Ground slot to something that survives a turn, or give one of the airborne partners the ability to set the spread up itself. Replacing Gligar with a Levitating member that is not 4x to Ice would also stop the whole board folding to one lead. None of that is a level change, so nothing beyond the two offsets was touched.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
