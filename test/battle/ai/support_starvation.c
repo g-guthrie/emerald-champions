@@ -135,3 +135,55 @@ AI_DOUBLE_BATTLE_TEST("EC starvation: Prankster status is not aimed at a Dark bo
         }
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC starvation: an ally-targeted support move resolves to the partner")
+{
+    GIVEN {
+        AI_FLAGS(STARVE_FLAGS);
+        // Clawitzer's board: the record showed Heal Pulse aimed at a player
+        // slot. A move that can only help an ally has to choose one.
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(400); MaxHP(400); Attack(60); Defense(200); SpDefense(200); Speed(200); Ability(ABILITY_TELEPATHY); Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Attack(5); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_CLAWITZER) {
+            Level(30); HP(300); MaxHP(300); SpAttack(40); Defense(120); SpDefense(120); Speed(40);
+            Ability(ABILITY_MEGA_LAUNCHER); Moves(MOVE_HEAL_PULSE, MOVE_WATER_GUN);
+        }
+        OPPONENT(SPECIES_LAPRAS) { Level(30); HP(60); MaxHP(400); Defense(120); SpDefense(120); Speed(30); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+            EXPECT_MOVE(opponentLeft, MOVE_HEAL_PULSE, target: opponentRight);
+        }
+    } THEN {
+        EXPECT(opponentRight->hp > 60);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC starvation: a guard nothing is aimed at is not taken, twice over")
+{
+    GIVEN {
+        AI_FLAGS(STARVE_FLAGS);
+        // Jared's Noctowl and Foster's Runerigus: full health, both attacks
+        // aimed at the other slot, and a guard chosen anyway on two turns
+        // running with the second one failing.
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(400); MaxHP(400); Attack(150); Defense(200); SpDefense(200); Speed(200); Ability(ABILITY_TELEPATHY); Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Attack(150); Defense(200); SpDefense(200); Speed(150); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_NOCTOWL) {
+            Level(30); HP(300); MaxHP(300); SpAttack(90); Defense(120); SpDefense(120); Speed(90);
+            Ability(ABILITY_INSOMNIA); Moves(MOVE_PROTECT, MOVE_AIR_SLASH);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+        }
+    }
+}
