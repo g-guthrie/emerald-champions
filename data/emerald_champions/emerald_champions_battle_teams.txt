@@ -232,9 +232,9 @@ ai: Conservative
 plan: First two useful turns: Roggenrola and Archen lead. Use Wide Guard only against meaningful spread pressure while itemless Acrobatics or Rock Slide converts the protection into damage; otherwise Roggenrola should attack or make a worthwhile Iron Defense play. Alternate deployment: Geodude supplies direct Rock Head offense; Mudbray supplies Stamina-backed physical pressure. Body Press belongs to Roggenrola, not Mudbray. Reserves & disruption: Preserve Archen above its Defeatist threshold where useful, but switching does not heal it. Stamina boosts Defense only after a surviving hit; Rock Head prevents Double Edge recoil, not Life Orb damage. Counterplay & audit: Special attacks, Water/Grass coverage and targeted attacks around Wide Guard. Disposition: Retain the independent single-owner battle; revised Archen opening and individual levels await native difficulty calibration.
 crack: Special attacks, Water/Grass coverage and targeted attacks around Wide Guard. Disposition: Retain the independent single-owner battle; revised Archen opening and individual levels await native difficulty calibration.
 ROGGENROLA @EVIOLITE STURDY IMPISH 252/0/252/0/4/0 4 | WIDE_GUARD, ROCK_SLIDE, IRON_DEFENSE, BODY_PRESS | ivs=31/31/31/31/31/31 | friendship=255
-ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 1 | ROCK_SLIDE, ACROBATICS, PROTECT, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 2 | ROCK_SLIDE, ACROBATICS, PROTECT, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
 GEODUDE @LIFE_ORB ROCK_HEAD ADAMANT 4/252/0/0/0/252 4 | ROCK_TOMB, DOUBLE_EDGE, STOMPING_TANTRUM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MUDBRAY @SITRUS_BERRY STAMINA ADAMANT 252/252/4/0/0/0 3 | HIGH_HORSEPOWER, ROCK_TOMB, HEAVY_SLAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MUDBRAY @SITRUS_BERRY STAMINA ADAMANT 252/252/4/0/0/0 4 | HIGH_HORSEPOWER, ROCK_TOMB, HEAVY_SLAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0023 TRAINER_JOHNSON class=regular
 strategy: TAILWIND,PRESSURE

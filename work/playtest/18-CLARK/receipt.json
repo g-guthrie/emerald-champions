@@ -1,0 +1,48 @@
+{
+  "play_order": 18,
+  "e_group": "E0023",
+  "trainer": "TRAINER_CLARK",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "ai_profile": "Conservative",
+  "observed_opponent_levels": {"ROGGENROLA": 16, "ARCHEN": 13, "GEODUDE": "16 (offset 4)", "MUDBRAY": "15 (offset 3)"},
+  "outcome": "WON on attempt 1, 4 turns, 0 player faints",
+  "party_manifest": "work/playtest/18-CLARK/party.json",
+  "run_dir": "work/playtest/18-CLARK/a1",
+  "party_change_reason": "Swapped Porygon-Z for Ludicolo (Lotad -> Lombre -> Water Stone, pool-14 gate 14) and Whimsicott's Taunt for Energy Ball. Clark's four members share a Grass and Water weakness, so this is the honest strongest legal answer rather than a reused generic party.",
+  "attempts": [
+    {"seed": "0x1800", "outcome": "won", "turns": 4, "decisions": 5, "player_faints": 0, "opponent_faints": 4,
+     "ai_decision_seconds_max": 0.167,
+     "note": "Weavile was saved by its Focus Sash from a 4x Body Press on turn 1 and was withdrawn. Nothing else on my side dropped below 29/45."}
+  ],
+  "strategy_checks": [
+    {"check": "Roggenrola's Wide Guard answers meaningful spread pressure", "result": "NOT OBSERVED (no opportunity)", "evidence": "I brought Snorlax with Earthquake specifically to give Wide Guard a target, but Roggenrola fell on turn 2 to a 2x Energy Ball before Snorlax ever came in. No spread move was threatened while it was alive, so declining Wide Guard was correct."},
+    {"check": "Roggenrola converts Iron Defense into Body Press damage", "result": "FAIL - the setup half never fired", "evidence": "Roggenrola chose Body Press on turns 1 and 2 and never Iron Defense, including turn 1 when it was at full HP behind Eviolite and Sturdy - the safest setup turn it would ever get. This is the trainer's SETUP strategy flag and it did not execute."},
+    {"check": "Archen attacks with itemless Acrobatics", "result": "PASS (chosen)", "evidence": "Turn 1 chosen action: MOVE_ACROBATICS -> target 0, with ITEM_NONE confirmed in the battler state so the doubled-power condition held. It fainted to Icicle Crash (2x on Rock/Flying) before acting."},
+    {"check": "Defeatist halves Archen's output below 50% HP", "result": "NOT OBSERVED", "evidence": "Archen (level 13, 41 HP) was one-shot from full, so it never crossed the Defeatist threshold."},
+    {"check": "Mudbray's Stamina raises Defense after it survives a hit", "result": "PASS", "evidence": "Turn 3: 'The opposing Mudbray's Defense rose!' immediately after Whimsicott's Energy Ball connected. The ability fired on the correct trigger."},
+    {"check": "Geodude's Rock Head prevents Double-Edge recoil", "result": "NOT OBSERVED", "evidence": "Geodude selected MOVE_DOUBLE_EDGE on turn 4 but was killed by a 4x Energy Ball before it resolved."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS", "evidence": "0.167 s maximum."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "Mudbray", "payoff": "EMPTY - it guarded on its entry turn while both of my actions went elsewhere (a switch and an Energy Ball that killed its partner Roggenrola). A Conservative profile guarding on entry is understandable, but it bought nothing and it did not save Roggenrola."},
+    {"turn": 3, "battler": "Geodude", "payoff": "REAL and large - blocked Ludicolo's Hydro Pump, which is 4x into Rock/Ground and would have killed it outright."},
+    {"turn": 4, "battler": "Mudbray", "payoff": "REAL - blocked Ludicolo's Hydro Pump (2x) at 21/60 HP, which would have been lethal. It bought exactly one turn."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Three opposing Protects, two with clear life-saving payoff and one empty entry-turn guard. Good guarding overall for a Conservative profile.",
+    "Roggenrola never used Iron Defense across two turns at full HP behind Eviolite and Sturdy. Body Press scales off Defense, so the authored SETUP line is Iron Defense first; the AI took the unboosted attack both times. Worth a look at how the scorer values a defensive boost that feeds a damage move."
+  ],
+  "level_changes": [
+    {"member": "ARCHEN", "field": "level offset", "before": 1, "after": 2,
+     "reason": "Brief rule 5: won first try with 0 faints -> +1 to the weakest members. Archen is the floor at level 13 against a cap of 14, and like Joey's Farfetch'd it died to a single super-effective hit before acting. Defeatist already makes it fragile by design; a level restores the chance to act once."},
+    {"member": "MUDBRAY", "field": "level offset", "before": 3, "after": 4,
+     "reason": "Second lowest offset, and the member that actually used its ability well (Stamina fired, two of the three Protects were its). Brings it level with Roggenrola and Geodude."}
+  ],
+  "rerun": "NOT PERFORMED - the headless ROM cannot be rebuilt in this session (see work/playtest/15-MARLENE/receipt.json).",
+  "cooler_note": "Partly. Wide Guard plus Body Press on the same Roggenrola is a genuinely good early puzzle, and Mudbray's Stamina gives the room a second defensive axis. But four members that all take 2x from Water and Grass (and Geodude taking 4x from both) means one correctly built partner ends the fight, which is what happened here. Suggestion for a later pass, not applied here: Geodude is the redundant slot - a third Rock member with a 4x double weakness and Life Orb recoil offence. A Ferroseed or a Bug/Rock partner would keep the hiker theme while removing the single-answer sweep, and would give Wide Guard something worth protecting.",
+  "authored_set_legality": "No legality problem found. Note the dossier line 'Body Press belongs to Roggenrola, not Mudbray' matches the authored moves.",
+  "not_finished": "Wide Guard, Iron Defense, Defeatist and Rock Head recoil prevention are all still unexercised. The +1/+1 has not been retested in a rebuilt ROM."
+}
