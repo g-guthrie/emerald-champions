@@ -1,0 +1,78 @@
+{
+ "play_order": 75,
+ "e_group": "E0085",
+ "trainer": "TRAINER_ROSE_1",
+ "class": "regular",
+ "location": "Route118",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "VESPIQUEN": 29,
+  "SUNFLORA": 32,
+  "RIBOMBEE": 29,
+  "TREVENANT": 29
+ },
+ "cap_window_confirmation": "Dossier seeds 31/34/31/31 resolved to 29/32/29/29. Cap 30, Medium -2.",
+ "party_manifest": "work/playtest/75-TRAINER_ROSE_1/party.json",
+ "party_pool_audit": "Same audited cap-30 Route 110 six, leading Mega Gardevoir + Weavile. All sources at or before Route 110, i.e. before this Route 118 battle. NewMauville and Route 111 desert species excluded for chronology. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_strategy_checks": [
+  "Vespiquen actually puts Tailwind up and the speed it buys is used by a slower member",
+  "Intimidate drops my physical attacker's Attack on entry",
+  "Ribombee contributes Stun Spore / Pollen Puff support or direct Fairy pressure, and Shield Dust is not wasted",
+  "Trevenant's Poltergeist respects its item requirement, and Occa Berry / Harvest handle the Fire pressure the crack line names",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/75-TRAINER_ROSE_1/a1",
+   "seed": 75,
+   "outcome": "won",
+   "turns": 6,
+   "driver_turn_counter": 5,
+   "player_faints": 2,
+   "opponent_faints": 4,
+   "narrative": "I deliberately aimed Fake Out at Choice Specs Sunflora rather than at Vespiquen so the authored Tailwind would have a chance to happen and could be assessed. T1 Fake Out flinched Sunflora out of a 2x Sludge Bomb and Mystical Fire took it to 27/120; Vespiquen's Attack Order (2x on Dark) took Weavile to 10. T2 Rose switched the 27 HP Sunflora out of my priority Ice Shard - a genuinely good read - and Ribombee ate it instead; a critical Attack Order KO'd Weavile. T3 Togekiss replaced it, Air Slash removed Ribombee, and Vespiquen spent its turn on Tailwind. T4 Trevenant's Poltergeist (2x on Psychic, and legal because Mega Gardevoir was holding the Gardevoirite) KO'd Gardevoir from 54; Mystical Fire left Vespiquen on 4. T5 Nidoking replaced Gardevoir, Air Slash finished Vespiquen and Ice Beam (2x, unaffected by the Fire-only Occa Berry) took Trevenant to 1 while Sunflora returned. T6 Ice Beam and Air Slash closed both."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Vespiquen Tailwind actually goes up",
+   "result": "PASS",
+   "evidence": "T3: 'SIDE_STATUS_TAILWIND' appears on the opponent side and is still there at the end of the battle. Vespiquen chose it at 44/106 with -2 Sp.Atk, which was the correct read - Attack Order is physical so the Sp.Atk drops were irrelevant, but Tailwind was worth more than a 0.5x Bug hit into a Fairy/Flying Togekiss."
+  },
+  {
+   "check": "Tailwind is used by a slower member",
+   "result": "PARTIAL",
+   "evidence": "The speed did reach Trevenant (56 base), which then landed the Poltergeist that KO'd my Mega Gardevoir. But the dossier's specific claim - that Tailwind precedes slow Choice Specs Sunflora - never happened, because Sunflora had already retreated by T3. The pairing the plan is named after is still unproven."
+  },
+  {
+   "check": "Intimidate on entry",
+   "result": "PASS",
+   "evidence": "Turn 0 state: both my leads already at atk -1 before a single action."
+  },
+  {
+   "check": "Ribombee support / Fairy pressure, Shield Dust",
+   "result": "PARTIAL",
+   "evidence": "Ribombee got exactly one action and spent it on Moonblast into Mega Gardevoir, which landed the Sp.Atk drop. Reasonable, but Stun Spore and Pollen Puff were never used, so the support half is untested. Shield Dust was never relevant because nothing I used had a secondary effect against it."
+  },
+  {
+   "check": "Trevenant Poltergeist item requirement / Occa Berry / Harvest",
+   "result": "PASS (Poltergeist), NOT EXERCISED (Occa/Harvest)",
+   "evidence": "T4 and T5 Poltergeist both fired against item-holders and the T4 hit KO'd a 54 HP Mega Gardevoir outright - the single best turn Rose had. I deliberately never aimed Fire at Trevenant (I put Mystical Fire into Vespiquen and Ice Beam into Trevenant instead), so the Occa Berry and the Harvest recycle were bypassed rather than beaten. That is correct counterplay on my side, but it means the berry/Harvest engine is still unvalidated."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS (vacuous)",
+   "evidence": "Rose used no Protect in six turns despite three of four members carrying it. Every turn went into an attack, a Tailwind or a switch that mattered. Empty ledger, no empty guarding."
+  }
+ ],
+ "protect_ledger": [],
+ "ai_defects": [],
+ "ai_highlights": [
+  "T2: with Sunflora on 27/120 and a Weavile Ice Shard (2x) queued, the AI switched Sunflora out and sent Ribombee into the priority instead. It never saw my pending command, so this was an expected-value read off a revealed Ice-type attacker, and it saved the Choice Specs member for later - Sunflora came back on T5 and forced another turn out of me."
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt but with two player faints, one of them my Mega, and Nidoking finished on 12/98. Trevenant's Poltergeist and the Sunflora preservation switch both landed real blows. This is the 'won after a real fight' case; levels kept.",
+ "could_this_be_cooler": "Keep the garden - queen, pollinator, sunflower and old tree is a coherent and unusual quartet, and Poltergeist on a Harvest body is a genuinely nasty idea at this stage of the game. The weakness is that the team's named plan and its best actual weapon are two different things: Tailwind exists to precede Choice Specs Sunflora, but a 30-base-Speed Sunflora that is locked into one move is exactly the member the AI wants to switch out, so the pairing almost never happens. The concrete suggestion (not applied) is to move Tailwind onto Ribombee and give Vespiquen Sticky Web in its place. Ribombee at 124 base Speed sets Tailwind on turn one before anything can stop it, and Sticky Web on the bulky Intimidate body is speed control that survives Vespiquen's death and actually makes the slow Specs sunflower functional - a garden that slows you down and speeds itself up, instead of one support move that arrives on turn three. The honest counterplay stays intact: Defog, a Flying type or any Taunt user turns it off."
+}
