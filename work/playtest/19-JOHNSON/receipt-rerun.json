@@ -1,0 +1,119 @@
+{
+  "play_order": 19,
+  "e_group": "E0023",
+  "trainer": "TRAINER_JOHNSON",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "pass": "rerun (pass 2) - AI check only, no level changes were in scope for this trainer",
+  "purpose": "Re-test the pass-1 defect E0023-JOHNSON-ENDEAVOR-DECLINED: a 2 HP Doduo choosing Quick Attack over Endeavor against a healthy target.",
+  "outcome": "WON on attempt 1, 5 turns, 2 player faints. Levels KEPT (unchanged from pass 1, which also kept them).",
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_manifest_note": "New chronology-checked party; the pass-1 party used Seaspray Cave, Verdanturf Meadow and Altering Cave species that a player has not reached at Route 116.",
+  "run_dir": "work/playtest/19-JOHNSON/r1",
+  "opponent_levels_medium": "SHINX 16, FLETCHINDER 14, BUNNELBY 15, DODUO 14 (cap 14; offsets 4/2/3/2, unchanged)",
+  "attempts": [
+    {
+      "seed": 5919,
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 7,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.038,
+      "player_faint_detail": "Shiftry died on turn 1 to a Gale Wings priority Acrobatics (Flying is 2x on Grass, doubled by the empty item slot). Heracross died on turn 3 to Doduo's Drill Peck (4x on Bug/Fighting). Arcanine finished at 22/53 after three Flare Blitz recoils and Tangrowth at 17/65 after the Endeavor.",
+      "note": "Two of six again, as in pass 1, but for different reasons - this time the Endeavor actually landed."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Doduo threatens Endeavor when genuinely low (the pass-1 defect)",
+      "result": "PASS - the pass-1 defect is FIXED",
+      "evidence": "Turn 4 board: Doduo at 1/38 with its Focus Sash already spent, facing a freshly switched-in Tangrowth at 65/65 and an Arcanine at 41/53. Chosen action: MOVE_ENDEAVOR targeting Tangrowth (battler 0). It resolved and took Tangrowth from 65 to 1; only its Sitrus Berry brought it back to 17. In pass 1 the identical board produced MOVE_QUICK_ATTACK for about 10 damage. The priority-versus-payoff scoring now prices the Endeavor correctly."
+    },
+    {
+      "check": "Doduo attacks with Drill Peck at healthy HP",
+      "result": "PASS",
+      "evidence": "Turn 3: Doduo entered at 38/38 and chose MOVE_DRILL_PECK into Heracross - 4x on Bug/Fighting, and it killed it. It used the low-HP move only once it was actually low, which is the exact conditional the dossier describes."
+    },
+    {
+      "check": "Gale Wings gives Fletchinder priority while it is at full HP, and only then",
+      "result": "PASS - clean demonstration in both directions",
+      "evidence": "Turn 1: Fletchinder (base 62 Speed) used Acrobatics BEFORE my Heracross (base 85, 252 Speed EVs) and before Shiftry, and killed Shiftry outright. Turn 2, at 1/45, it moved in ordinary Speed order and died to Arcanine's Extreme Speed before acting. The full-HP condition was honoured both ways."
+    },
+    {
+      "check": "Itemless Acrobatics reaches doubled power",
+      "result": "PASS",
+      "evidence": "ITEM_NONE confirmed in the battler state. The turn-1 Acrobatics killed a 53 HP Shiftry from full at a 2x matchup."
+    },
+    {
+      "check": "Fletchinder opens the Tailwind window",
+      "result": "FAIL - never fired, second pass running",
+      "evidence": "Fletchinder had two decisions and chose Acrobatics both times. The turn-1 choice is genuinely defensible now - Gale Wings priority plus a 2x itemless Acrobatics was an immediate kill, which beats a Tailwind - but the move remains unobserved across two passes. Compare Jose's Dustox, whose Tailwind DID fire this pass; the difference is that Fletchinder always has a kill available on turn one."
+    },
+    {
+      "check": "Fletchinder's Will-O-Wisp creates a burn window",
+      "result": "FAIL - never fired",
+      "evidence": "Never selected, including against two physical attackers (Heracross, Arcanine). Two of Fletchinder's four moves have now gone unused in two consecutive passes."
+    },
+    {
+      "check": "Shinx's Intimidate creates a useful window on entry",
+      "result": "PASS",
+      "evidence": "Intimidate fired on the opening and dropped both Heracross and Shiftry to -1 Attack before either acted."
+    },
+    {
+      "check": "Shinx's Helping Hand beside an attacker",
+      "result": "CHOSEN, but it bought nothing - see the observation below",
+      "evidence": "Turn 4: Shinx (28/55) chose MOVE_HELPING_HAND targeting Doduo. Doduo's chosen action that turn was Endeavor, whose fixed HP-setting damage Helping Hand cannot multiply - a limitation the dossier itself calls out in writing ('Helping Hand does not multiply Endeavor's fixed HP difference')."
+    },
+    {
+      "check": "Bunnelby is the independent Huge Power attacker",
+      "result": "PASS (chosen)",
+      "evidence": "Turn 5: MOVE_QUICK_ATTACK, the correct priority choice for a Huge Power body that was about to be outsped and killed. It did not resolve into anything meaningful because Arcanine's Flare Blitz killed it in the same turn."
+    },
+    {
+      "check": "The authored crack (priority, spread/residual damage, breaking the Sash)",
+      "result": "PASS",
+      "evidence": "Rock Slide broke the Sash threat on Fletchinder for 4x and Flare Blitz broke Doduo's Focus Sash on turn 3, which is what forced the Endeavor onto a 1 HP body instead of a 2 HP one."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "battler": "SHINX (28/55, Eviolite)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY. It blocked Heracross's Close Combat, which is neutral off 252 Adamant Attack and would very likely have killed a 28 HP Shinx. Shinx survived to take its Helping Hand turn and to force Arcanine to spend another Flare Blitz on it."
+    }
+  ],
+  "ai_defects": [],
+  "ai_defects_resolved": [
+    {
+      "id": "E0023-JOHNSON-ENDEAVOR-DECLINED",
+      "status": "RESOLVED",
+      "evidence": "Pass 1: Doduo at 2/38 against a healthy 45/45 Whimsicott chose Quick Attack (about 10 damage) over Endeavor (about 43). Pass 2 on a deliberately reconstructed equivalent board - Doduo at 1/38, Sash spent, against a 65/65 Tangrowth - it chose MOVE_ENDEAVOR and landed it. The affected_index_hint from pass 1 (Flail / Reversal / Final Gambit users) should be treated as covered by the same change."
+    }
+  ],
+  "ai_observations": [
+    {
+      "id": "E0023-HELPING-HAND-ONTO-ENDEAVOR",
+      "severity": "medium",
+      "turn": 4,
+      "board": "Shinx 28/55 with Wild Charge, Crunch, Helping Hand and Protect, beside a 1/38 Doduo. Opposite: Tangrowth 65/65 and Arcanine 41/53.",
+      "chosen_action": "Shinx used MOVE_HELPING_HAND targeting Doduo, on the same turn Doduo used MOVE_ENDEAVOR.",
+      "better_action": "MOVE_WILD_CHARGE or MOVE_CRUNCH into Arcanine, or Protect. Helping Hand multiplies damage; Endeavor sets the target's HP equal to the user's and ignores damage multipliers entirely, so the boost was worth exactly zero.",
+      "assessment": "This is the sharpest remaining coordination gap I found. The AI clearly has pair coordination (src/battle_ai_pair.c) and the engine knows Doduo's chosen move, yet the support turn was spent on a partner action it cannot affect. The dossier anticipates this exact mistake in writing, which suggests it was a known risk. The fix is narrow: Helping Hand should score zero when the partner's selected move is a fixed-damage or level/HP-based move (Endeavor, Seismic Toss, Night Shade, Dragon Rage, Sonic Boom, Super Fang, Final Gambit). Not scored as a hard defect only because I cannot be certain from the outside that the pair scorer had Doduo's choice available at the time it scored Shinx."
+    },
+    {
+      "id": "E0023-FLETCHINDER-SUPPORT-MOVES-UNREACHED",
+      "severity": "low",
+      "turns": "1-2",
+      "observed": "Tailwind and Will-O-Wisp have now gone unselected across two passes and four total Fletchinder decisions.",
+      "assessment": "Not a defect on this run - the turn-1 Gale Wings Acrobatics was a kill, and a kill beats a support turn. Recorded because half of this member's kit is dead weight in practice, which is a design observation more than an AI one. Jose's Dustox proves Tailwind is reachable now when the board actually calls for it."
+    }
+  ],
+  "level_changes": [],
+  "level_rationale": "Out of scope by instruction: Johnson was replayed as an AI check on the Endeavor defect, not as a calibration pass. Two of my six died in any case, so brief rule 5 would have said keep.",
+  "cooler_note": "Better than it reads, and now it plays the way the dossier promises. Gale Wings priority, a Huge Power priority attacker and a Focus Sash Endeavor body is three different ways to act before the player does, and with Endeavor working the Doduo slot finally earns its place - the pass-1 complaint that it was dead weight is withdrawn. The one thing worth considering, not applied here: Fletchinder's Tailwind and Will-O-Wisp are never going to be chosen while the same battler always has an itemless 2x Acrobatics available on entry. Either the slot accepts being a pure priority attacker with a third attack, or the support belongs on a partner that is not simultaneously the best attacker on the field.",
+  "authored_set_legality": "Clean. Fletchinder's ITEM_NONE and Bunnelby's friendship=0 (for Frustration) were both correct in the compiled party.",
+  "not_finished": "Tailwind and Will-O-Wisp remain unobserved. Early Bird was never tested - no sleep was ever applied to Doduo."
+}
