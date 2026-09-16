@@ -1,0 +1,66 @@
+{
+  "play_order": 45,
+  "e_group": "E0048",
+  "trainer": "TRAINER_JOHANNA",
+  "class": "regular",
+  "location": "Route109_SeashoreHouse",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Pass 1 raised Sylveon -1->0 and Qwilfish 0->1 off a one-faint clear, on the reasoning that Sylveon's Throat Spray chain fired perfectly and still only produced one resisted Hyper Voice before dying. This rerun tests both levels against the fixed AI.",
+  "build": "work/agent-battle-build (headless ROM with the pass-1 level changes and the AI fixes)",
+  "level_change_verification": "Confirmed live: Sylveon resolved at L22 (was L21 in pass 1) and Qwilfish at L23 (was L22). Budew L25 and the Feebas ace L29 unchanged.",
+  "resolved_opponent_levels": {"BUDEW": 25, "SYLVEON": 22, "FEEBAS": 29, "QWILFISH": 23},
+  "party_manifest": "work/playtest/45-TRAINER_JOHANNA/party.json",
+  "party_chronology_note": "Unchanged cap-24 core: Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana, all gate <= 24 in work/reference-pools/pool-24.json. No Mega used.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/45-TRAINER_JOHANNA/r1",
+      "seed": 51,
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "narrative": "T1 Earth Power took Budew off full HP so its Focus Sash could not save it from a 2x Air Slash, but Budew's Sludge Bomb poisoned Enamorus and Sylveon's Pixilate Hyper Voice finished it while triggering Throat Spray for +1 Sp.Atk. T2 Magearna replaced Enamorus, Qwilfish entered with Intimidate and dropped both my battlers' Attack; a boosted Draining Kiss plus a 2x Poison Jab KO'd Togekiss, and a 2x Flash Cannon KO'd Sylveon. T3 Kartana came in Poison-immune opposite the L29 Feebas ace; Leaf Blade broke its Focus Sash, Feebas' Muddy Water was 0.25 into Kartana, Qwilfish's Thunder Wave missed, and a +2 Thunderbolt KO'd Feebas. T4 Thunder Wave landed and paralysed Magearna, which still KO'd Qwilfish with a 2x Thunderbolt."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Sylveon's Throat Spray chain converts into more than one resisted attack, which is what the pass-1 level was bought for",
+      "result": "PASS",
+      "evidence": "Turn 1 Pixilate Hyper Voice contributed the killing damage on Enamorus and triggered Throat Spray for +1 Sp.Atk. Turn 2 it survived to spend that boost on a Draining Kiss into Togekiss, which together with Poison Jab produced the second player faint. In pass 1 it managed one resisted Hyper Voice and then died. At L22 the chain now pays out."
+    },
+    {
+      "check": "Qwilfish's Intimidate and Poison pressure land at its new level",
+      "result": "PASS",
+      "evidence": "Entered turn 2 and immediately dropped both my battlers to -1 Atk. Its Poison Jab then did 75 to a 97 HP Togekiss at 2x and produced the knockout. At L22 in pass 1 the comparable Poison Jab took Togekiss from 67 to 12 without killing it; the extra level converted that into a faint."
+    },
+    {
+      "check": "Qwilfish uses Thunder Wave rather than only attacking",
+      "result": "PASS - new behaviour",
+      "evidence": "Selected on turns 3 and 4; missed on turn 3, landed on turn 4 and paralysed Magearna. Thunder Wave is named in the AI commit message as a support move that never fired before the pricing change. On turn 3 it was also the right read - its Poison and Water attacks are 0 and 0.25 into the Steel types I had left, so status was the only thing it could still do."
+    },
+    {
+      "check": "Feebas' Focus Sash and Adaptability water pressure",
+      "result": "PARTIAL",
+      "evidence": "Focus Sash fired correctly ('The opposing Feebas hung on using its Focus Sash!') against Kartana's 2x Leaf Blade on turn 3. Its Muddy Water then hit Kartana for 0.25 and it was KO'd by a +2 Thunderbolt before Icy Wind or Chilling Water could set up the speed control the set is built around."
+    },
+    {
+      "check": "Budew's Sleep Powder",
+      "result": "NOT EXERCISED",
+      "evidence": "Budew got exactly one action and spent it on Sludge Bomb into Enamorus at 2x, which poisoned it and set up the knockout. With the lead about to die that was the higher-value choice, but Sleep Powder - another move named in the AI commit as previously never firing - remains unobserved on this team."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect this battle, on a team where all four members carry it. Every member instead spent its turns on damage or status. Given that three of the four were under immediate lethal pressure when they acted, and the fourth (Qwilfish) had no useful attack left against two Steel types, the empty ledger reads as correct play rather than a missing behaviour.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 3 Qwilfish reaching for Thunder Wave instead of Liquidation or Poison Jab is a good read: against Kartana (Grass/Steel) and Magearna (Steel/Fairy) its Poison Jab is a no-effect and Liquidation is 0.25 and 0.5. Status was genuinely its best remaining action.",
+    "Turn 1 Sylveon's Hyper Voice is a spread move and hit both of my battlers at 0.5 (both are part Fairy). It still produced a knockout because Budew's Sludge Bomb had already taken Enamorus low. Correct sequencing by the pair."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first attempt in four turns but with two player faints - Enamorus on turn 1 and Togekiss on turn 2 - where pass 1 cost only one. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' No level change. Both pass-1 levels are visibly doing their job: Sylveon now survives to spend its Throat Spray boost, and Qwilfish's Poison Jab now kills where it previously only chipped. This trainer is calibrated.",
+  "could_this_be_cooler": "No change wanted. The team's identity - Throat Spray/Pixilate, Intimidate plus Poison, and a Focus Sash speed-control ace - all appeared this run except the ace's own speed control. Worth noting for a later pass that Feebas at L29 is by far the highest-level member in the whole cap-24 stretch and it still died before using Icy Wind or Chilling Water; its problem is that it arrives last, after the two members who apply pressure are already dead, not that it is underlevelled. That is a send-order observation, not a set change, and nothing was changed here.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt, same party manifest as pass 1, levels untouched. No teams-file change for this battle."
+}
