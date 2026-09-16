@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 8,
+  "e_group": "E0008",
+  "trainer": "TRAINER_CINDY_1",
+  "class": "regular",
+  "cap": 14,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "SNUBBULL L16 offset 4 @LUM_BERRY INTIMIDATE (+1 in pass 1)",
+    "MILCERY L17 offset 5 @EVIOLITE AROMA_VEIL (+1 in R1; confirmed present)",
+    "FURFROU L15 offset 3 @SITRUS_BERRY FUR_COAT (+2 cumulative - at the ceiling, must not move again)",
+    "SLAKOTH L18 offset 6 @CHOICE_BAND TRUANT"
+  ],
+  "party_manifest": "work/playtest/08-CINDY_1/party-rerun-a1.json",
+  "party_summary": "Reused the R1 chronology-legal party unchanged: Growlithe / Roselia / Croagunk / Timburr / Pachirisu / Corphish.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3008,
+      "outcome": "won",
+      "turns": 10,
+      "decisions": 12,
+      "player_faints": 5,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 62,
+      "events": "work/playtest/08-CINDY_1/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 both sides Intimidated; I doubled into Milcery and a critical Flare Blitz removed the healer before it acted. Furfrou came in. T2 Furfrou's Double-Edge one-shot Roselia and Snubbull's Thunder Wave paralysed Growlithe - two turns of my offence gone for one support turn. T3 Croagunk's Fake Out flinched Furfrou; Growlithe was fully paralysed. T4 I pivoted the paralysed Growlithe out and Cindy voluntarily withdrew a 36/60 Snubbull for Slakoth, which walked straight into Poison Jab and was poisoned. T5 Mach Punch plus Drain Punch removed Slakoth without it ever acting; Snubbull returned. T6 Furfrou's Double-Edge and Snubbull's Play Rough removed Croagunk and Timburr before either moved. T7 Snubbull's Helping Hand turned Furfrou's Double-Edge into a KO on Corphish while Crabhammer removed Snubbull. T8 Furfrou's Double-Edge killed the paralysed Growlithe. T9-T10 a lone Pachirisu ground the paralysed Furfrou down with Nuzzle and Super Fang. Won 4-5 with one survivor."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Snubbull's Intimidate softens eligible attackers",
+      "result": "PASS",
+      "evidence": "Intimidate fired on the opening and again on its T5 re-entry, dropping four different attackers over the fight."
+    },
+    {
+      "check": "Snubbull's Thunder Wave (NOT FIRED in R1)",
+      "result": "PASS - now fires, and it was the best turn on the board",
+      "evidence": "T2 Thunder Wave on Growlithe. Growlithe was fully paralysed on T3, never attacked again, and eventually died without landing another move. That single support turn removed a member from the fight."
+    },
+    {
+      "check": "Snubbull picks Helping Hand when securing damage matters more than disruption",
+      "result": "PASS",
+      "evidence": "T7 Helping Hand fed Furfrou's Double-Edge, which then KOed Corphish. The branch fired on the right turn and converted immediately."
+    },
+    {
+      "check": "Milcery selects Helping Hand or an active Fairy attack, and heals a relevant slot on turn two",
+      "result": "NOT EXERCISED",
+      "evidence": "Milcery was removed on turn 1 by a critical 4x-ish Flare Blitz plus Sludge Bomb before it had a decision. Recover and Aroma Veil went untested this pass."
+    },
+    {
+      "check": "Snubbull and Furfrou offer a physical-pressure mode with U-turn positioning",
+      "result": "PASS on the pressure, FAIL on U-turn (unchanged from R1)",
+      "evidence": "Furfrou used Double-Edge five times and Snarl once and never used U-turn, including on turns where its partner had just fainted. The pressure mode is real - it scored three KOs - but the authored pivot has now failed to appear in two consecutive passes."
+    },
+    {
+      "check": "Slakoth is a one-hit reserve with an exit",
+      "result": "FAIL - see AI defect E0008-D1",
+      "evidence": "It was brought in voluntarily on a turn it could be attacked, was poisoned on entry and died on the following turn having never acted. It contributed nothing but a free double-attack for me."
+    },
+    {
+      "check": "Reject any AI trace that values pure durability above protecting an actual threat",
+      "result": "PASS",
+      "evidence": "Furfrou at 8 HP chose Snarl over Double-Edge, correctly refusing a recoil move that would have killed it, and Snubbull spent its last turn on Helping Hand for a partner KO rather than a doomed attack. Neither slot sat on durability."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protects were possible - none of Cindy's four authored sets carries Protect. Nothing to price.",
+  "ai_defects": [
+    {
+      "id": "E0008-D1",
+      "severity": "bad voluntary switch - loses a member for nothing",
+      "turn": 4,
+      "board": "Snubbull at 36/60 (Lum Berry intact, having just landed Thunder Wave) opposite a full-HP Croagunk holding Poison Jab and Drain Punch and a 15 HP paralysed Growlithe. Cindy's bench held Slakoth (Choice Band, Truant, no Protect, no recovery).",
+      "chosen": "Withdrew Snubbull and sent Slakoth in.",
+      "result": "Slakoth took Poison Jab on entry (21 damage plus poison) and was removed on T5 by Mach Punch and Drain Punch, both super effective on Normal, without ever selecting a move.",
+      "better": "Keep Snubbull in - it was over half HP, its Play Rough had already KOed Timburr's equivalent and it still had Helping Hand and Play Rough to spend. Slakoth is a Truant battler whose only value is a free entry after a KO; switching it into two healthy Fighting/Poison attackers guarantees it never acts.",
+      "note": "This is the third pass in which the Truant reserve has produced no turn. The switch scoring appears not to price the incoming battler's entry damage or its Truant turn loss."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [],
+  "ai_improvements_observed": [
+    "Thunder Wave and Helping Hand both fired for the first time, on correct turns, and both converted into KOs.",
+    "Furfrou refused a lethal-to-itself recoil move at 8 HP and used Snarl instead.",
+    "Focus fire: on T6 both opponents attacked different targets and removed both of my actives before either moved."
+  ],
+  "level_changes": {},
+  "level_change_reason": "Won on attempt 1 but with 5 of 6 members dead and a single 53 HP Pachirisu left grinding out the last 23 HP. That is far into the brief's 'real fight -> keep' band; if anything this is the hardest fight of my block relative to its cap. No offset moved. Furfrou is at the +-2 ceiling anyway. I am recording explicitly that the R1 Milcery +1 and Furfrou +1 now look fully spent - if a later pass loses this fight, Furfrou is the member that decided it (three KOs) and it cannot be raised again.",
+  "levels_after": {"SNUBBULL": 4, "MILCERY": 5, "FURFROU": 3, "SLAKOTH": 6},
+  "cooler": "Yes. Slakoth at offset 6 is the highest-level member of the team and has now never taken a turn in three passes, because Truant plus Choice Band plus no Protect means it only works on a free entry the AI does not generate. Its six points of level are invisible. Either give it Protect in place of Retaliate - which is exactly the 'exit' the plan already claims it has - or move the reserve slot to something that can act the turn it arrives. Recording only; no set change in this pass.",
+  "authored_set_legality": "No legality problem observed."
+}
