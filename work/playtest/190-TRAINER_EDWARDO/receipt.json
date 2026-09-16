@@ -1,0 +1,49 @@
+{
+  "play_order": 190,
+  "e_group": "E0284",
+  "trainer": "TRAINER_EDWARDO",
+  "class": "gym",
+  "location": "FortreeCity_Gym",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: all six at +2, L54 = cap 54 + 2 - 2 on Medium. Flat-offset room.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/190-TRAINER_EDWARDO/party_b54_edwardo.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_edwardo.json (Incineroar/Regieleki lead)", "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 6,
+     "why": "Same structural answer as room 1: every member is Flying, so Thunderbolt is 2x six times over. Regieleki removed Jumpluff, Zapdos (which resists both Close Combat and Brave Bird) removed Honchkrow, Mandibuzz and Toucannon, and Mega Gardevoir's Hyper Voice cleaned up. Lost Regieleki to a Moxie Sucker Punch and Incineroar to a Choice Band Close Combat."}
+  ],
+  "strategy_checks": [
+    {"check": "Jumpluff redirects with Rage Powder - the team's declared REDIRECTION strategy", "result": "FAIL", "evidence": "Rage Powder was never selected. Jumpluff chose Sleep Powder on turn 1 (flinched by Fake Out) and again on turn 2, and was KOed before it resolved. See AI defect E0284-1."},
+    {"check": "Mandibuzz sets Tailwind - the team's declared TAILWIND strategy", "result": "FAIL", "evidence": "Never selected. Mandibuzz used Foul Play on turns 5 and 6 and then fainted. Neither of the two strategy flags on this team actually happened."},
+    {"check": "Honchkrow converts Moxie with Sucker Punch priority", "result": "PASS", "evidence": "a1 turn 3: Sucker Punch KOed a 34 HP Regieleki and Moxie raised its Attack. Correct priority read against a faster attacker."},
+    {"check": "Braviary Choice Band pressure and Defiant", "result": "PARTIAL", "evidence": "Close Combat OHKOed a full-HP 217 Incineroar on turn 3 - the single hardest hit in the room. Defiant never triggered because Intimidate was never pointed at it."},
+    {"check": "Toucannon Skill Link multi-hits behind an Assault Vest", "result": "FAIL", "evidence": "Entered on turn 6 and was KOed by a 2x Thunderbolt before acting. Never used a move in the battle."},
+    {"check": "Vespiquen Attack Order / Defend Order behind Pressure", "result": "PARTIAL", "evidence": "One Attack Order for 6 damage into Mega Gardevoir; Defend Order never used. Pressure did apply. It contributed almost nothing."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Honchkrow", "payoff": "partial - blocked its half of a spread Electroweb (2x on it) and the associated Speed drop"},
+    {"attempt": 1, "turn": 6, "battler": "Vespiquen", "payoff": "blocked a lethal Hyper Voice at 51/190 and bought itself one more turn"}
+  ],
+  "protect_summary": "2 opponent Protects, both with payoff, 0 empty, no consecutive guarding. As in room 1, six Protect-carrying members guard only twice in six turns.",
+  "ai_defects": [
+    {
+      "id": "E0284-1",
+      "severity": "medium",
+      "turns": "a1 turns 1 and 2",
+      "board": "Jumpluff L54 with Focus Sash, partner Honchkrow L54 at full HP on turn 1 and at 93/189 on turn 2, facing a revealed Transistor Regieleki and an Incineroar.",
+      "chosen": "MOVE_SLEEP_POWDER at Incineroar, both turns.",
+      "outcome": "Turn 1 it was flinched by Fake Out; turn 2 it was KOed by Thunderbolt before the move resolved. Rage Powder, the move this team is built around and the reason the dossier flags REDIRECTION, was never selected in the entire battle.",
+      "better_action": "MOVE_RAGE_POWDER on turn 2 at the latest. Jumpluff had a Focus Sash, so it survives anything once, and drawing both player attacks would have protected a Moxie Honchkrow that was one Thunderbolt from dying. Instead both members took damage and Jumpluff died to a move Rage Powder would have absorbed. Combined with Mandibuzz never choosing Tailwind here, and Crobat never choosing Tailwind in E0282, this looks like ally-protecting and field-setting support moves scoring systematically below attacks and status.",
+      "note": "Reported only. No AI C code was touched."
+    }
+  ],
+  "level_changes": [
+    {"member": "JUMPLUFF", "field": "offset", "before": 2, "after": 3, "reason": "Gym trainer beaten on the first attempt with two faints; Jumpluff is the designated redirector and needs to survive long enough to redirect"},
+    {"member": "VESPIQUEN", "field": "offset", "before": 2, "after": 3, "reason": "same review; Vespiquen contributed 6 damage across the whole battle and is the clear weakest slot"}
+  ],
+  "level_change_rationale": "First-attempt Gym win with only two player faints, below the three-faint aim, so the +1 review applies. I raised the two members that did the least - the redirector that never redirected and the slowest body - rather than Honchkrow or Braviary, which each scored a clean knockout and are correctly weighted. +1 each, inside the +/-2 cap. Note that fixing AI defect E0284-1 would probably do more for this room's difficulty than the levels do.",
+  "cooler": "This is the second consecutive all-Flying room and the shared weakness is now a real design problem, not a quibble: one Electric attacker answered twelve Pokemon across two rooms. The room's own idea - Rage Powder redirection feeding a Moxie sweeper - is good and would play very differently if it ever fired. Concrete improvement: give this room the type break that room 1 also needs. Replacing Toucannon (which is the most generic member and did nothing) with a Rock/Flying or Steel/Flying body that is not Electric-weak, or simply an Electric-immune Ground partner, would force a genuine second answer. Keeping Jumpluff, Honchkrow and Braviary preserves the concept entirely.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "The two +1 changes CANNOT be re-verified in this pass - the snapshot predates the edit and I am not permitted to run make."
+}
