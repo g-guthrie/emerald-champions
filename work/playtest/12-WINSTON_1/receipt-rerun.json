@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 12,
+  "e_group": "E0012",
+  "trainer": "TRAINER_WINSTON_1",
+  "class": "regular",
+  "location": "Route104 (north, after Petalburg Woods)",
+  "cap": 14,
+  "difficulty": "medium",
+  "ai_flag": "Ace Pokemon",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable at this point.",
+  "opponent_as_played": [
+    "PORYGON L15 @EVIOLITE DOWNLOAD QUIET Spe IV 0 (Tri Attack/Trick Room/Thunderbolt/Protect) offset 3",
+    "HONEDGE L15 @LIFE_ORB NO_GUARD BRAVE Spe IV 0 (Iron Head/Sacred Sword/Shadow Sneak/Swords Dance) offset 3",
+    "GIMMIGHOUL L17 @EVIOLITE RATTLED QUIET Spe IV 0 (Shadow Ball/Power Gem/Substitute/Protect) offset 5",
+    "WOOLOO L17 @EVIOLITE FLUFFY BRAVE Spe IV 0 (Cotton Guard/Double-Edge/Reversal/Protect) offset 5"
+  ],
+  "party_manifest": "work/playtest/12-WINSTON_1/party-rerun-a1.json",
+  "party_summary": "Heracross / Growlithe / Timburr / Croagunk / Rockruff / Pachirisu - Route101-104 wilds plus Petalburg Woods Heracross. Nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2012,
+      "outcome": "won",
+      "turns": 9,
+      "decisions": 12,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 61,
+      "ai_decision_seconds_max": 1.021,
+      "events": "work/playtest/12-WINSTON_1/rerun-attempt-1-events.jsonl",
+      "narrative": "I deliberately left Porygon alive on T1 (Knock Off stripped its Eviolite instead of a double-target KO) so the authored Trick Room line could be observed rather than pre-empted. It fired: Porygon set Trick Room and Honedge used Swords Dance behind it in the same turn, while my Flare Blitz left Honedge on 2. T2 the room paid immediately - Honedge, the slowest thing on the field, moved first and its +2 Iron Head removed a full-health Heracross, dying only to its own Life Orb recoil, and Porygon's Tri Attack removed Growlithe. T3 Timburr and Croagunk came in as deliberate Trick Room beneficiaries; Mach Punch removed Porygon and Knock Off stripped Gimmighoul's Eviolite. T4 Gimmighoul's Shadow Ball removed Croagunk. T5 Rockruff's Sucker Punch removed Gimmighoul through the room, Wooloo used Cotton Guard, Timburr knocked its Eviolite away, and the room expired. T6-T9 Wooloo stacked Cotton Guard to +6 behind Fluffy, which made both my physical attackers useless, Protected a lethal Thunderbolt on T8, and finally fell to Pachirisu's special Thunderbolt on T9. 4-3."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Porygon sets Trick Room only when it survives and the resulting order favours Honedge",
+      "result": "PASS - the best authored-strategy execution in the block",
+      "evidence": "T1 Trick Room, with Porygon at full HP behind Eviolite and a 0-Speed-IV Brave Honedge beside it. Both halves of the condition were satisfied and the payoff arrived on the very next turn: under the room Honedge moved first and one-shot a 50 HP Heracross. Contrast with the previous pass, where this team was reported as a 7-turn, 1-faint clear."
+    },
+    {
+      "check": "Honedge attacks or uses Swords Dance only behind adequate protection",
+      "result": "PASS",
+      "evidence": "T1 Swords Dance, chosen on the same turn its partner was guaranteeing it would move first for the next five turns. That is exactly the 'adequate protection' the plan means, and it converted on T2."
+    },
+    {
+      "check": "Turn two spends the room on damage",
+      "result": "PASS",
+      "evidence": "T2 Honedge Iron Head (KO) and Porygon Tri Attack (KO). Neither re-set the room or added more setup."
+    },
+    {
+      "check": "When room is denied, use immediate damage and defensive switches rather than endlessly retry the setter",
+      "result": "N/A",
+      "evidence": "The room was never denied. Porygon died on T3 and never attempted a second Trick Room."
+    },
+    {
+      "check": "Wooloo's Cotton Guard is a conditional option, not a script",
+      "result": "PASS then WEAK",
+      "evidence": "The T5 Cotton Guard was excellent: it arrived opposite two physical attackers and, stacked with Fluffy's contact halving, made Timburr's Mach Punch and Rockruff's Rock Slide do single-digit damage for the rest of the fight - I had to rebuild my board around a special attacker to break it. The T7 repeat is the weak one: Wooloo was already at +3 and the battler actually killing it was a special Thunderbolt, which Cotton Guard does nothing about."
+    },
+    {
+      "check": "Reversal converts low HP, including Double-Edge recoil, into Fighting coverage",
+      "result": "NOT FIRED",
+      "evidence": "Wooloo used Double-Edge (T6), Cotton Guard (T5, T7), Protect (T8). It reached 5/57 on T7 - exactly the HP where Reversal is at its 200 BP maximum - and chose Protect and then died. Reversal at 5 HP into Rockruff (Rock, 2x weak to Fighting) would have been a likely KO. This is the clearest missed conversion of the battle."
+    },
+    {
+      "check": "Gimmighoul supplies a special Ghost lane; Substitute as the disruption option",
+      "result": "PASS on damage, Substitute NOT FIRED",
+      "evidence": "Shadow Ball three times, removing Croagunk on T4 and chipping Timburr - correct, since Ghost is unresisted by anything I had. Substitute never fired, which is defensible: it was taking 40+ per turn and a Substitute would have broken instantly."
+    },
+    {
+      "check": "Explicitly chosen Speed IVs by matchup rather than inferred zero",
+      "result": "PASS (design)",
+      "evidence": "All four sets carry ivs=31/31/31/31/31/0, which is what makes the Trick Room turn actually worth taking. The authored intent is implemented in the data."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 8,
+      "battler": "WOOLOO",
+      "payoff": "Blocked Pachirisu's Thunderbolt at 5/57 - a certain KO - and Rockruff's Rock Slide with it. Large payoff; it bought the extra turn it then spent dying."
+    }
+  ],
+  "protect_ledger_note": "One opponent Protect in nine turns, and it denied a kill. Porygon and Gimmighoul also carry Protect and never used it; both were correct to attack instead, since Porygon's guard would have cost a Trick Room turn and Gimmighoul was converting every turn.",
+  "ai_defects": [
+    {
+      "id": "E0012-W1",
+      "severity": "missed conversion",
+      "turns": "7 and 8",
+      "board": "Wooloo at 36/57 then 5/57, already at +3 Defence behind Fluffy, opposite Pachirisu (special Thunderbolt, the battler actually killing it) and Rockruff (Rock type, 2x weak to Fighting).",
+      "chosen": "Cotton Guard (T7), Protect (T8)",
+      "better": "Reversal. At 5/57 it is at maximum power and super effective on Rockruff. A second Cotton Guard does nothing against the special attacker that was killing it, and the guard only delayed the same Thunderbolt by a turn.",
+      "status": "The set's low-HP payoff move never fired even on the turn it was designed for."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_improvements_observed": [
+    "Trick Room plus same-turn Swords Dance into a next-turn KO is the single best authored sequence observed anywhere in this block, and it is exactly what the SETUP and TRICK_ROOM flags promise.",
+    "Cotton Guard genuinely changed the shape of the fight and forced a board rebuild on my side - a defensive setup move earning its turn.",
+    "Zero voluntary opponent switches."
+  ],
+  "level_changes": "NONE. Won on attempt 1 with 3 of 6 player faints after a nine-turn fight in which I had to abandon both my physical attackers. The first pass's +1 on Porygon and Honedge is validated: L15 Honedge at +2 one-shot a 125-base-Attack Heracross through Intimidate.",
+  "levels_after": {
+    "PORYGON": 3,
+    "HONEDGE": 3,
+    "GIMMIGHOUL": 5,
+    "WOOLOO": 5
+  },
+  "cooler": "Yes, and it is small. Wooloo's Reversal needs the HP to get low while it is still alive to use it, and Double-Edge plus Cotton Guard plus Protect gives the AI three ways to avoid ever being in that window. Replacing Double-Edge with Endure would make the Reversal window something Wooloo creates on purpose - Endure, then a maximum-power Reversal - which is a far more memorable lesson than a wall that guards twice and dies. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found. Download, No Guard, Fluffy, Rattled and the zero Speed IVs all materialized and behaved correctly."
+}

@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0012 TRAINER_WINSTON_1; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR NORTH ROUTE 104. This battle campaign_order 12 sits after the Petalburg Woods encounters (campaign_order 9-11) on the Rustboro side of Route 104, so both Route104 and PetalburgWoods tables are legal. HERACROSS = wild:PetalburgWoods/land_mons; CROAGUNK = wild:Route104/land_mons; GROWLITHE, ROCKRUFF = wild:Route103/land_mons; TIMBURR, PACHIRISU = wild:Route102/land_mons. Nothing evolved (Rustboro is still ahead), nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "Winston answers to the crack list almost exactly. Taunt: TIMBURR carries it and, being slow, is also a Trick Room beneficiary if the room does go up. Double targeting Porygon: Heracross and Growlithe both hit Normal for 2x with Close Combat. Priority: Timburr Mach Punch, Rockruff Sucker Punch, Croagunk Fake Out - and Fake Out on the setter is the cheapest Trick Room denial there is. Type coverage for the odd defensive spread: Honedge and Gimmighoul are immune to Normal and Fighting, so Growlithe FLARE_BLITZ (2x on Steel/Ghost) and the Dark lanes (Heracross and Timburr Knock Off, Rockruff Crunch/Sucker Punch) are the answers to those two, while Fighting covers Porygon and Wooloo.",
+ "party": [
+  {
+   "species": "SPECIES_HERACROSS",
+   "moves": [
+    "MOVE_MEGAHORN",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_KNOCK_OFF"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_MOXIE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the strongest physical attacker Petalburg Woods offers; Moxie snowballs and Rock Slide is the spread",
+   "availability": "pool-14 wild:PetalburgWoods/land_mons."
+  },
+  {
+   "species": "SPECIES_GROWLITHE",
+   "moves": [
+    "MOVE_FLARE_BLITZ",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_WILD_CHARGE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate lead and Fire breaker; Wild Charge is the single-target Electric probe for Lightning Rod / Volt Absorb / Storm Drain redirection",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_KNOCK_OFF",
+    "MOVE_TAUNT",
+    "MOVE_ROCK_SLIDE"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "TAUNT is the crack-list answer to a Trick Room setter, and Timburr is slow enough to be a Trick Room beneficiary itself; Iron Fist Mach Punch is the priority line",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_CROAGUNK",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_POISON_JAB",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_KNOCK_OFF"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_DRY_SKIN",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "DRY_SKIN is a flat Water immunity that heals off the opposing Water attacks; Fake Out tempo, Poison Jab into Grass and Fairy",
+   "availability": "pool-14 wild:Route104/land_mons."
+  },
+  {
+   "species": "SPECIES_ROCKRUFF",
+   "moves": [
+    "MOVE_ROCK_SLIDE",
+    "MOVE_SUCKER_PUNCH",
+    "MOVE_CRUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_STEADFAST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Rock body that resists Flying and Normal-neutral; Rock Slide is the spread and is super effective on Water/Flying",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_THUNDERBOLT",
+    "MOVE_NUZZLE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Follow Me redirection onto a Volt Absorb body, plus a second special Electric lane",
+   "availability": "pool-14 wild:Route102/land_mons."
+  }
+ ]
+}
