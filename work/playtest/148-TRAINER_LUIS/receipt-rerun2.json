@@ -1,0 +1,111 @@
+{
+  "play_order": 148,
+  "e_group": "E0176",
+  "trainer": "TRAINER_LUIS",
+  "class": "regular",
+  "location": "Route105",
+  "cap": 48,
+  "difficulty": "medium",
+  "run_kind": "rerun2",
+  "prior_receipts": ["work/playtest/148-TRAINER_LUIS/receipt.json"],
+  "build": "work/agent-battle-build-5",
+  "why_rerun": "The first pass raised Lanturn from -1 to 0 and Mantine from 0 to +1. Those offsets are now built into work/agent-battle-build-5 and this run re-benchmarks the fight on them. It also retests AI defect P13-D5 from the first run, where Lanturn chose Hydro Pump into a Grass-type.",
+  "cap_confirmation": "Driver reports level_cap 48. Resolved levels read off the live board: Lanturn 46 and Mantine 47 (turn 0), Sharpedo 46 and Arctovish 47 (turn 1). Current authored offsets 0/+1/0/+1 give cap 48 + offset - 2 = 46/47/46/47 on Medium. All four match; Lanturn at 46 and Mantine at 47 confirm the changed offsets are in this build.",
+  "level_offsets_at_run": {"LANTURN": 0, "MANTINE": 1, "SHARPEDO": 0, "ARCTOVISH": 1},
+  "resolved_opponent_levels": {"LANTURN": 46, "MANTINE": 47, "SHARPEDO": 46, "ARCTOVISH": 47},
+  "party_manifest": "work/playtest/148-TRAINER_LUIS/party-a1.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 48, same map (Route 105), same encounter. The first receipt recorded no legality problem and the party won its one attempt, so it was not reported weak or illegal and no rebuild is warranted. Iron Hands is a Paradox species and sits in the party, which the brief permits here: the restriction it names applies to windows at or below 24 and this is a cap-48 window.",
+  "pre_declared_strategy_checks": [
+    "Mantine sets Tailwind when it creates a better race rather than attacking",
+    "Tailwind actually buys the second wave a move-first opportunity",
+    "Surf is never fired beside a partner that does not absorb it",
+    "RETEST of P13-D5: Lanturn selects a sensible attack rather than Hydro Pump into a resisting target",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/148-TRAINER_LUIS/r1",
+      "seed": 2148,
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "log": "work/playtest/148-TRAINER_LUIS/r1/events.jsonl",
+      "damage_note": "Damage read from the driver's new identity-keyed `damage` map, not slot arithmetic.",
+      "narrative": "T1 Rillaboom's priority Grassy Glide under its own Grassy Surge terrain KOed Lanturn (2x) before its Hydro Pump resolved; Mantine used Tailwind and then died to Magnezone's Thunderbolt (4x on Water/Flying). The Tailwind it set survived it and carried to the second wave. T2 Sharpedo and Arctovish entered under that Tailwind and moved first; Arctovish Protected and caught Magnezone's Thunderbolt, and Grassy Glide KOed Sharpedo before its Crunch resolved. T3 Grassy Glide finished Arctovish. No player faints, and Magnezone was never damaged."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Mantine sets Tailwind when it creates a better race",
+      "result": "PASS",
+      "evidence": "T1, with its partner already dead on the same turn and two healthy attackers opposite, Mantine chose Tailwind over attacking. It died immediately afterwards, but the Tailwind outlived it - which is exactly the trade the plan describes."
+    },
+    {
+      "check": "Tailwind buys the second wave a move-first opportunity",
+      "result": "PASS",
+      "evidence": "T2 both Sharpedo and Arctovish acted before both of my battlers - Arctovish's Protect went up before my Thunderbolt, and Sharpedo's Crunch was selected and would have resolved first had Grassy Glide not been priority. The window was real; it was beaten by priority, not by speed."
+    },
+    {
+      "check": "Surf is never fired beside a non-absorbing partner",
+      "result": "N/A",
+      "evidence": "Mantine never selected Surf. It had one turn and spent it on Tailwind."
+    },
+    {
+      "check": "RETEST of P13-D5 - Lanturn's move selection",
+      "result": "PASS - does not reproduce",
+      "evidence": "T1 Lanturn selected Hydro Pump targeting Magnezone. Against an Electric/Steel body that is its best available option at 1x: Thunderbolt is 0.5x into Electric, Ice Beam 0.5x into Steel and Dazzling Gleam 0.5x into Steel. The first run's defect was Hydro Pump into a Grass-type with Ice Beam in the same slot; that choice is not repeated here, and the target was the correct one. The move never resolved because Lanturn died first, but the selection is what was being audited."
+    },
+    {
+      "check": "Every opposing Protect has a payoff",
+      "result": "PASS",
+      "evidence": "One Protect this battle, ledgered below, and it was not empty."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "ARCTOVISH (b3)",
+      "payoff": "REAL - blocked Magnezone's Thunderbolt, a 2x hit on a 156 HP body that had just entered, and did it on Arctovish's entry turn under its own side's Tailwind.",
+      "verdict": "good",
+      "note": "Not repeated. Arctovish attacked rather than guarding again on the following turn, so there is no consecutive-Protect problem on this team."
+    }
+  ],
+  "ai_defects": [],
+  "ai_defect_note": "The first run's P13-D5 (Lanturn's Hydro Pump into a Grass-type) did not reproduce on this build; see the strategy check above. No new defect observed. Every opponent choice this run was defensible: Tailwind over an attack on a lost turn, Protect on an entry turn into a known Electric threat, Crunch from Sharpedo into the Grass attacker that had just killed two of its partners.",
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in three turns with ZERO player faints and no real threat -> +1 on the opponent's weakest one or two members. This team has no ace, Mega or legend (mega_slots: NONE), so nobody is excluded.",
+    "budget_note": "Baselines at the start of this pass were Lanturn -1, Mantine 0, Sharpedo 0, Arctovish +1. Used so far: Lanturn +1, Mantine +1, Sharpedo none, Arctovish none. After the changes below Lanturn stands at +2 used and is closed out for this pass; Sharpedo has taken its first +1 and has one left. Nobody exceeds the +-2 limit.",
+    "changes": [
+      {
+        "trainer": "TRAINER_LUIS",
+        "member": "LANTURN",
+        "field": "level offset",
+        "before": 0,
+        "after": 1,
+        "resolved_level_before": 46,
+        "resolved_level_after": 47,
+        "reasoning": "Joint-lowest member at 46. Lanturn has now died on turn 1 in both runs without landing a move, and it is the Assault Vest body the team leads with, so it is the member most in need of surviving its first turn. This exhausts its +-2 budget for the pass. Honest caveat: the thing that killed it was a priority Grass move at 2x, and one level does not change that."
+      },
+      {
+        "trainer": "TRAINER_LUIS",
+        "member": "SHARPEDO",
+        "field": "level offset",
+        "before": 0,
+        "after": 1,
+        "resolved_level_before": 46,
+        "resolved_level_after": 47,
+        "reasoning": "The other member at 46, and the one that has taken nothing this pass. Sharpedo's Speed Boost is a timing resource that needs turns to accumulate and it has never survived long enough to gain a single stage; it died on its entry turn here with its Crunch selected but unresolved. It is the member with both the most budget and the least evidence of contribution."
+      }
+    ],
+    "not_changed": [
+      {"member": "MANTINE", "reason": "At 47 it is not among the weakest, and it is the member that executed - it correctly traded its only turn for a Tailwind that outlived it and carried to the second wave. +1 of budget remains if a later pass needs it."},
+      {"member": "ARCTOVISH", "reason": "At 47 it is not among the weakest. It also played its turns well: a correctly timed entry Protect that caught a 2x Thunderbolt, and no repeat guard. Full +-2 still available."}
+    ]
+  },
+  "cooler_note": "The triple Water Absorb core is still a genuinely good idea for a route regular and I would keep it, but two runs have now confirmed the weakness the dossier itself names, and more sharply than it puts it. Luis is built to punish a Water-spamming player, and against a Grass lead the entire ability suite is inert - three Water Absorb bodies absorbed nothing across both runs, and the fight is decided by whether the player brought Grass, not by anything Luis does. Mantine's Tailwind is the one part of the plan that fires reliably and it fired again here. The concrete improvement worth flagging, and it is small: the team has no answer to priority, and Grassy Glide beat the Tailwind window both times. One member trading a slot for a Wide Guard or an Ice-type priority answer would make the Tailwind race matter instead of being pre-empted. Flagged only - no composition change in this pass.",
+  "authored_set_legality": "No legality problem found.",
+  "verdict": "still too easy",
+  "note_on_teams_file": "Per this block's override the teams file was edited in place by targeted line replacement and is deliberately NOT staged or committed by this receipt."
+}

@@ -1,0 +1,24 @@
+{
+  "trainer_a": "TRAINER_LUIS",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 2148,
+  "difficulty": "medium",
+  "level_cap": 48,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 2,
+  "decisions": 3,
+  "player_faints": 0,
+  "opponent_faints": 4,
+  "ai_decision_frames_max": 50,
+  "ai_decision_seconds_max": 0.837,
+  "ai_decision_frames": [
+    50,
+    24,
+    24
+  ],
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783",
+  "elf_sha256": "5f4e01bfe2259972778c09af3069d6feb6890b68915bc4206245a00649ea04f1",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
