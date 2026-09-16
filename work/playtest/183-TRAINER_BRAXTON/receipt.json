@@ -1,0 +1,50 @@
+{
+  "play_order": 183,
+  "e_group": "E0268",
+  "trainer": "TRAINER_BRAXTON",
+  "class": "ace",
+  "location": "Route123",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Braviary/Garchomp/Scolipede/Bisharp/Blastoise (all +1) at L53, Salamence (+2) at L54 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_b54.json", "work/playtest/183-TRAINER_BRAXTON/party_b54_braxton.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54.json (Incineroar/Amoonguss lead)", "outcome": "lost", "turns": 7, "player_faints": 6, "opponent_faints": 4,
+     "why": "Amoonguss was OHKOed on turn 1 by Sheer Force Life Orb Brave Bird (237 damage through full HP) and the lead was a non-starter. Lost with Scolipede on 13 and Bisharp on 20."},
+    {"n": 2, "seed": 2, "party": "party_b54_braxton.json (Incineroar/Mamoswine lead)", "outcome": "won", "turns": 7, "player_faints": 4, "opponent_faints": 6,
+     "why": "Fake Out on Braviary plus 4x Icicle Crash on Garchomp turn by turn, Knock Off stripping Braviary's Life Orb, Zapdos as the Ground-immune Garchomp/Blastoise answer, and Ice Shard priority to remove Mega Salamence at 27. Still cost Incineroar, Regieleki, Mega Gardevoir and Mamoswine."}
+  ],
+  "strategy_checks": [
+    {"check": "Braviary converts Sheer Force + Life Orb into immediate spread pressure", "result": "PASS", "evidence": "a1 turn 1 Brave Bird OHKOed a full-HP 237 HP Amoonguss; a2 turns 1-2 Rock Slide hit both player slots."},
+    {"check": "Braviary sets Tailwind", "result": "FAIL", "evidence": "Chosen on a1 turn 3 and a2 turn 3 but Braviary was KOed before the move resolved both times. Tailwind never actually landed in either run."},
+    {"check": "Garchomp Swords Dance into Dragon Claw / Stomping Tantrum behind Clear Amulet", "result": "PARTIAL", "evidence": "Clear Amulet correctly blanked Intimidate. Swords Dance was chosen twice (a1 turn 5, a2 turn 2) and Garchomp died on the same turn both times without ever attacking off the boost. Unboosted Stomping Tantrum still OHKOed Incineroar (a1 turn 2, 190) and Regieleki (a1 turn 4, 151)."},
+    {"check": "Scolipede Speed Boost behind Focus Sash", "result": "PASS", "evidence": "a2 turns 3-6 Speed Boost stacked to +3 and Focus Sash survived a 2x Heat Wave at turn 6."},
+    {"check": "Bisharp Defiant / Sucker Punch priority", "result": "PARTIAL", "evidence": "Sucker Punch fired on a1 turn 7 and helped close the game. Defiant never triggered - Intimidate was never pointed at Bisharp in either run, so the anti-Intimidate half of the set was untested."},
+    {"check": "Blastoise Mega Launcher pulse moves", "result": "PASS", "evidence": "Water Pulse OHKOed Incineroar from 136 (a2 turn 3) and KOed Mamoswine (a1 turn 5). Mega Launcher Water Pulse is one of the hardest hits on this team."},
+    {"check": "Mega Salamence Dragon Dance / Aerilate Double-Edge", "result": "PASS", "evidence": "a1 turn 4 Dragon Dance on entry; a2 turn 5 Aerilate Double-Edge OHKOed Mega Gardevoir from full."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Braviary", "payoff": "blocked a lethal Thunderbolt at 59/185"},
+    {"attempt": 1, "turn": 3, "battler": "Garchomp", "payoff": "blocked a 4x Icicle Crash"},
+    {"attempt": 2, "turn": 1, "battler": "Garchomp", "payoff": "blocked a 4x Icicle Crash on the opening turn, reading the Ice threat correctly before it was revealed"}
+  ],
+  "protect_summary": "3 opponent Protects, all 3 with a concrete payoff, 0 empty, no consecutive-Protect risk taken.",
+  "ai_defects": [
+    {
+      "id": "E0268-1",
+      "severity": "low",
+      "turns": "a2 turn 2, and a1 turn 5",
+      "board": "a2 turn 2: Garchomp 194/194 with Clear Amulet, opposite a Mamoswine that had already been seen selecting Icicle Crash the previous turn (Garchomp Protected it). a1 turn 5: Garchomp 166/194 opposite the same revealed Mamoswine.",
+      "chosen": "MOVE_SWORDS_DANCE both times",
+      "outcome": "Garchomp fainted to the 4x Icicle Crash on that same turn in both attempts and never used the boost.",
+      "better_action": "Attack (Stomping Tantrum OHKOed Incineroar and Regieleki unboosted) or Protect again. The inconsistency is the point: the same AI correctly Protected against the identical revealed threat one turn earlier, then set up into it. Setup scoring appears not to weigh a revealed 4x attacker that outdamages the setter's remaining HP.",
+      "note": "Reported only. No AI C code was touched."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Attempt 2 was won but cost four Pokemon including the Mega, which is squarely the 'real fight' band. Attempt 1's loss came down to a bad lead choice on my side, not an unbeatable team.",
+  "cooler": "Keep. Six distinct physical threats plus a Mega Launcher special breaker is a coherent 'Route 123 hard-hitters' concept, and Clear Amulet Garchomp as the deliberate anti-Intimidate slot next to Defiant Bisharp is a genuinely thoughtful pair of Intimidate punishers. One concrete improvement: Braviary is the designated Tailwind setter and is also the frailest member after recoil, so the speed control died before it ever landed in two runs. Moving Tailwind onto Blastoise's Protect slot, or giving Braviary a Focus Sash so it survives to set it, would let the authored speed plan happen at least once.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "No level change was made for this battle."
+}

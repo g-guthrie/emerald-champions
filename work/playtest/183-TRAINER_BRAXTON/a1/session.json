@@ -1,0 +1,34 @@
+{
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141",
+  "elf_sha256": "70db6be9e609d4fe1de497fd4620a12369072b83a1e79ed108d6b35460058fc5",
+  "seed": 1,
+  "trainer_a": "TRAINER_BRAXTON",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 54,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/_party/party_b54.json",
+  "party_sha256": "f4b1558e4a5d85e1b5f230242350d3f357cad93daaeeb6d88d915411c6490cb7",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "Feather Badge chapter cap 54 benchmark party B (play_order 181-192)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1216
+  },
+  "replacement_commits": {
+    "turn": 6,
+    "slots": {}
+  }
+}
