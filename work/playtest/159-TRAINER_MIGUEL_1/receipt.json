@@ -1,0 +1,32 @@
+{
+  "play_order": 159,
+  "e_group": "E0213",
+  "trainer": "TRAINER_MIGUEL_1",
+  "location": "Route103 (Surf backtrack after Norman)",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Delcatty 48 (+2), Stantler 48 (+2), Lickitung 49 (+3), Munchlax 50 (+4) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/159-TRAINER_MIGUEL_1/party.json",
+  "attempts": [
+    {"seed": 31, "run_dir": "work/playtest/159-TRAINER_MIGUEL_1/run-s31", "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "notes": "Two Steel bodies resist the team's entire Normal STAB. Incineroar did take Double-Edge plus Body Slam down to 10 HP and was paralysed, and pivoted out; nothing else was ever in danger."}
+  ],
+  "strategy_checks": [
+    {"check": "Delcatty opens with Fake Out on a legal interruptible target", "result": "PASS", "evidence": "Turn 1: Jolly Delcatty moved first and flinched Incineroar, denying the player's own Fake Out. Correct target - the other player battler was a Clear Body Mega Metagross that was going to KO it regardless."},
+    {"check": "Stantler attacks or uses Psyshield Bash beside the support", "result": "PASS", "evidence": "Turns 1 and 2 Stantler used Double-Edge into Incineroar, converting Delcatty's flinch turn into damage. It never chose the support move with no board reason."},
+    {"check": "Clear Amulet blocks the opposing Intimidate", "result": "PASS", "evidence": "Turn 0: Incineroar's Intimidate lowered Delcatty's Attack but Stantler's stat stages stayed at 0."},
+    {"check": "Munchlax uses Recycle only when it creates another useful attack", "result": "PASS", "evidence": "Incineroar's turn-2 Knock Off removed the Figy Berry before it could ever be consumed, so Recycle had no consumed item to restore. Munchlax correctly never selected it, using Body Slam on both of its turns instead. The negative half of the authored rule is verified: no empty Recycle."},
+    {"check": "Lickitung strips an important item", "result": "PASS", "evidence": "Turn 3: Lickitung's Knock Off removed Excadrill's Life Orb on the exact turn Excadrill switched in."},
+    {"check": "No repeated empty recovery or all-support pivot", "result": "PASS", "evidence": "Every opponent turn in the fight was an attack or an item-removal; there was no recovery or support chain at all."}
+  ],
+  "protect_ledger": [
+    {"turn": "all", "battler": "Stantler / Lickitung / Munchlax", "payoff": "NOT USED. Stantler and Lickitung both carry Protect and neither used it, including Lickitung as the last Pokemon standing against two attackers. No empty guarding to report."}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "DELCATTY", "before": 2, "after": 3, "reason": "Zero-faint four-turn win. Delcatty is joint-lowest and was OHKOed on turn 1 by a single Meteor Mash."},
+    {"member": "STANTLER", "before": 2, "after": 3, "reason": "Joint-lowest, also OHKOed after the first Double-Edge recoil. Both leads need to survive one more hit for the Fake Out plus Helping Hand plan to get a second turn. Lickitung and Munchlax are left alone - they were the members that actually did work."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM and this agent must not run make.",
+  "could_this_be_cooler": "The household-menagerie concept is charming and the Recycle-instead-of-Curse change is a real improvement, but this run exposed the concept's structural problem rather than a tuning problem: all four members are mono-Normal, so a single Steel type resists 100 percent of the team's STAB and the only non-Normal coverage in the whole roster is Lickitung's Power Whip and Knock Off and Munchlax's two elemental punches. Concrete suggestion for a later pass: swap one member for a non-Normal pet that still reads as a household animal - Purugly or Furfrou keep the theme and Purugly's Defiant would punish the Intimidate leads this cap is full of, or a Rockruff/Lycanroc keeps the 'pets' idea and gives the team a Rock answer to the Flying bodies. Nothing here needs a stronger species, it needs a second type. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal; Gluttony Munchlax with Figy Berry and Recycle all materialized correctly."
+}
