@@ -1,0 +1,37 @@
+{
+  "play_order": 129,
+  "e_group": "E0152",
+  "trainer": "TRAINER_HEIDI",
+  "class": "ace",
+  "location": "Route111",
+  "cap": 42,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/129-TRAINER_HEIDI/party.json",
+  "level_audit": "PASS. Shaymin-Land 41 (+1), Lurantis 41 (+1), Mudsdale 41 (+1), Parasect 42 (+2). All equal cap 42 + offset - 2.",
+  "attempts": [
+    {"seed": 19, "run_dir": "work/playtest/129-TRAINER_HEIDI/run-s19", "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "Shaymin attacks immediately rather than setting up", "result": "PASS", "evidence": "Turn 1: Shaymin used Air Slash into Charizard for 51. It attacked on its only turn, as the plan requires."},
+    {"check": "Seed Flare's 40% two-stage Special Defense drop", "result": "NOT OBSERVED", "evidence": "Shaymin chose Air Slash over Seed Flare, correctly - both of my leads are Fire/Flying and Grass is 0.5x on Charizard and 0.25x on Talonflame while Flying is neutral on both. It was then KOed by one Life Orb Flamethrower (146 HP at 2x) before a second turn. Correct choice, signature move unexercised."},
+    {"check": "Contrary Lurantis turns Superpower into a growth move", "result": "PASS", "evidence": "Turn 1: Lurantis used Superpower and its stat stages afterwards read atk +1, def +1 - Contrary inverting Superpower's own drops, exactly as authored. It used Superpower again on turn 2 and KOed Talonflame with it."},
+    {"check": "Mudsdale has Stamina but no Body Press, so its role is durability and coverage rather than a Body Press win condition", "result": "PASS", "evidence": "Moveset confirmed as High Horsepower / Heavy Slam / Rock Slide / Close Combat with ABILITY_STAMINA and ITEM_ASSAULT_VEST. Its spread Rock Slide on turn 2 was the fight's only player KO (4x on Talonflame after Brave Bird recoil). Stamina never triggered because nothing physical reached it before it died."},
+    {"check": "Parasect's Spore / Leech Seed create a favourable Mudsdale entry", "result": "FAIL (never reached)", "evidence": "Parasect came in last, on turn 3, after Mudsdale had already died. It used Protect on the turn it entered and was then KOed on turn 4 by Icicle Crash plus a 4x Air Slash without ever using Spore or Leech Seed. The authored sequencing requires Parasect to precede Mudsdale, and the AI's send-out order put it fourth."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Parasect", "payoff": "empty", "detail": "Protected on the turn it entered, but both player attacks were aimed at Mudsdale, so nothing was blocked and its partner died anyway. At 141/141 HP with Leftovers and a 100%-accurate Spore available, spending the entry turn on a guard was the wrong call - Spore on either attacker would have changed the fight and was the only thing Parasect was there to do."}
+  ],
+  "ai_defects": [
+    {"id": "HEIDI-1", "severity": "low", "turn": "turn 3", "board": "Parasect enters at 141/141 as the last reserve beside a full-HP Mudsdale, facing a 44-HP Weavile and a full-HP Togekiss", "chosen": "Protect", "better": "Spore on Togekiss or Weavile. Parasect's entire authored role is to buy turns with a 100%-accurate sleep; guarding at full HP on the entry turn, with no incoming threat identified (both player attacks went to the partner), converted its one useful turn into nothing. Borderline between a scoring defect and an ordinary expected-value hedge, so recorded at low severity - but the same pattern (a dedicated status setter choosing Protect on its only free turn) is worth checking against other Spore/Sleep Powder holders."}
+  ],
+  "ai_notes": "Move selection was otherwise good and type-aware: Shaymin declining Seed Flare into two Fire/Flying leads, Lurantis committing to Superpower for the Contrary boosts, and Mudsdale choosing the spread Rock Slide that hit both of my 4x-weak Flying types in one move. Send-out order is the weak link - Parasect is the support piece whose whole job is to precede Mudsdale, and it arrived after Mudsdale had died.",
+  "level_changes": [
+    {"member": "LURANTIS", "before": 1, "after": 2, "reason": "Joint-lowest offset behind the legendary; it played well (two Contrary Superpowers, one player KO) and deserves to be on the field longer."},
+    {"member": "MUDSDALE", "before": 1, "after": 2, "reason": "Joint-lowest offset; it was OHKOed from 171 HP by a single Icicle Crash despite the Assault Vest, which only protects its special side."}
+  ],
+  "level_decision": "RAISE. Won on attempt 1 with a single player faint, which is the brief's raise condition. +1 each to the two weakest members. Shaymin was deliberately not raised - it is the reachable legendary and the team's ace, and the brief says never the ace or legend first. Parasect was not raised either; it is already the highest offset on the team at +2 and its problem is ordering, not levels.",
+  "rerun_status": "DEFERRED. The headless ROM in work/agent-battle-build-2 is prebuilt and this pass may not run make or materialize, so a rerun would replay the old levels. Offsets edited in place and left uncommitted for the main agent.",
+  "cooler_note": "The dossier's own answer to this question was the right one and this run confirms it from the other direction. It flagged that Parasect's Spore 'buys a turn that nobody is explicitly scheduled to spend', and that is exactly what happened - except worse, because Parasect was sent out last and never got to spend the turn at all. The fix is not a rarer species; it is an ally-combo tactic that names what the sleep is for, plus a send-out order that puts Parasect on the field beside Mudsdale rather than after it. As played, a four-Pokemon team with a genuine legendary, a Contrary abuser and a 100%-accurate sleep lost in three turns to straightforward Fire/Flying/Ice coverage, because none of its three interesting pieces ever interacted with each other. The one moment that did land was Contrary Superpower climbing while it attacked - keep that.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}

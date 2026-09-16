@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0152 TRAINER_HEIDI, Route 111 ace (Grass core with Shaymin), cap 42",
+  "availability_audit": "Chronology: Heidi stands on Route 111 immediately after the Heat Badge, at the very start of the cap-42 window (C23 raised the cap; C24 is the Ashen Woods rescue, C26 is the desert). Every member's source gate is 30 or lower and every source map precedes Lavaridge in book play order: Route 102/103/104 (C02-C05), Petalburg Woods (C05), Seaspray Cave (early, gate 14), Dewford Manor (C11-C14), Mauville Game Corner (C18). Nothing from later in the cap-42 window is used - no Mirage Tower or desert (C26), no Meteor Falls fishing, no Ember Path, no Jagged Pass gate-42 species, no legendary, no Surf (C27), no Strength area.",
+  "plan": "Hard type answer to a three-Grass team. Every member hits Grass for at least 2x, and five of the six are immune to Mudsdale's Ground attacks by typing or Levitate. Crobat's Taunt is the specific answer to Parasect - it shuts off Spore, Leech Seed and Lurantis's Synthesis in one move. Weavile is the Ice answer that also handles Mudsdale, which the Fire/Flying core cannot. Charizard, Talonflame and Weavile all threaten Parasect at 4x or 2x.",
+  "party": [
+    {
+      "species": "SPECIES_CHARIZARD",
+      "moves": ["MOVE_FLAMETHROWER", "MOVE_AIR_SLASH", "MOVE_DRAGON_PULSE", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BLAZE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "primary special breaker; Fire and Flying are both 2x on every Grass member and 4x on Bug/Grass Parasect, and Flying is immune to Mudsdale's Ground",
+      "availability": "Charmander from the Mauville Game Corner (500 coins, C18), Charmeleon at 16, Charizard at 36."
+    },
+    {
+      "species": "SPECIES_TALONFLAME",
+      "moves": ["MOVE_BRAVE_BIRD", "MOVE_FLARE_BLITZ", "MOVE_ROOST", "MOVE_TAILWIND"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_GALE_WINGS",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Gale Wings priority Brave Bird, which is 2x on all three Grass members and ignores any speed advantage Heidi has",
+      "availability": "Fletchling on the Route104 land table (gate 14), Fletchinder at 17, Talonflame at 35."
+    },
+    {
+      "species": "SPECIES_CROBAT",
+      "moves": ["MOVE_CROSS_POISON", "MOVE_BRAVE_BIRD", "MOVE_U_TURN", "MOVE_TAUNT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INFILTRATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Taunt shuts off Spore, Leech Seed and Synthesis; Poison/Flying resists Grass at 0.25x and is immune to Ground",
+      "availability": "Zubat in Seaspray Cave (gate 14), Golbat at 22, Crobat by friendship."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": ["MOVE_ICICLE_CRASH", "MOVE_KNOCK_OFF", "MOVE_ICE_SHARD", "MOVE_LOW_KICK"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "the Ice answer the Fire/Flying core lacks; 2x on all three Grass members and 2x on Mudsdale, with Ice Shard priority",
+      "availability": "Sneasel in Seaspray Cave B1F (gate 14), evolves by level/condition."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": ["MOVE_SLUDGE_BOMB", "MOVE_SHADOW_BALL", "MOVE_ENERGY_BALL", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Poison is 2x on Grass, and Levitate makes it a second Ground-immune body against Mudsdale",
+      "availability": "Gastly on the DewfordManor_1F land table (gate 20), Haunter at 25, Gengar by Linking Cord from the Rustboro Mart (C06)."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": ["MOVE_FOLLOW_ME", "MOVE_AIR_SLASH", "MOVE_HELPING_HAND", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 0, 124, 0, 132, 0],
+      "role": "redirection to absorb a Spore or a Seed Flare aimed at a breaker; Air Slash is 2x on Grass and Fairy/Flying is Ground-immune",
+      "availability": "Togepi on the Route102 land table (gate 14), friendship evolution to Togetic, Shiny Stone from the Slateport Mart (C15)."
+    }
+  ]
+}
