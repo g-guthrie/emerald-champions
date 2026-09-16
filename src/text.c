@@ -1,5 +1,6 @@
 #include "global.h"
 #include "emerald_champions_studio.h"
+#include "emerald_champions_agent_battle.h"
 #include "battle.h"
 #include "blit.h"
 #include "dynamic_placeholder_text_util.h"
@@ -405,7 +406,10 @@ void AddSpriteTextPrinterParameterized6(u8 spriteId, u8 fontId, u8 left, u8 top,
 bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
     if (printerTemplate->type == WINDOW_TEXT_PRINTER && printerTemplate->windowId == 0)
+    {
         EmeraldChampionsStudioText(printerTemplate->currentChar);
+        EmeraldChampionsAgentBattleText(printerTemplate->currentChar);
+    }
     if (!gFonts)
         return FALSE;
 
