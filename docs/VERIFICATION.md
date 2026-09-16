@@ -425,6 +425,12 @@ its ordinary turn-start timing and its ordinary knowledge; an in-game partner (t
 Steven multi) keeps its partner AI and is not commanded.
 
 Build and stamp the headless ROM first (see "Dependencies and portable build").
+Each run pins its own ROM and ELF so a concurrent rebuild cannot invalidate a
+battle in progress. Those copies are copy-on-write clones where the filesystem
+supports it, so a run directory costs kilobytes rather than the 68MB the pair
+would otherwise take; `du` still reports the logical size. Delete finished run
+directories anyway - a playtest wave is hundreds of them.
+
 Because other sessions rebuild the root ROM, copy the matched triple aside and
 pass `--build-dir` when a run must survive a concurrent rebuild:
 
@@ -503,6 +509,20 @@ live. The engine clears an owner's party during the end-of-battle teardown, so a
 ROM without the native guard reports that side's faints as zero once the battle
 has ended, which is why the final `act` of a won battle can show
 `opponent_faints: 0`.
+
+`field_source` reports where the battle's field state came from. The engine's
+only setup-side channel for weather or terrain is the trainer's authored
+`startingStatus` (`Starting Status:` in `src/data/trainers.party`), which
+`battle_main.c` ORs into `gStartingStatuses` before the first turn. There is no
+map, Gym or route field table: `BattleSetup_GetEnvironmentId` only chooses the
+battle background from the metatile and map type and has no mechanical effect.
+So `authored_by_trainer_a` / `_b` list exactly what the encounter asked for, and
+an empty list with a bare `terrain_at_turn_0` means the encounter authored
+nothing - not that the driver dropped a field. `from_map` is always false and is
+there to make that explicit. Do not add a driver-side field effect to match book
+prose; that would make the headless ROM disagree with the release ROM. As of this
+writing no trainer in the game authors a starting status
+(`grep -c startingStatus src/data/trainers.h` is 0).
 
 `status` is decoded field by field, not as a plain bitmask: `STATUS1_SLEEP` is
 the low three bits counting turns remaining and `STATUS1_TOXIC_COUNTER` is bits

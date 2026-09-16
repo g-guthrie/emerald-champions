@@ -50,6 +50,7 @@ LEGAL_BASE, LEGAL_SIZE = 252, 6
 CONSTANTS_SCHEMA = 2  # bump whenever build_constants() gains or renames a table
 MSG_BASE, MSG_SIZE, MSG_COUNT = 276, 14, 14
 PREV_BASE, PREV_SIZE = 472, 4
+FIELD_BASE = 488
 MSG_CHARS = (MSG_SIZE - 1) * 4
 
 PHASES = ['idle', 'starting', 'running', 'await_action', 'await_switch', 'ended']
@@ -59,6 +60,16 @@ GIMMICKS = ['none', 'mega', 'ultra_burst', 'z_move', 'dynamax', 'tera']
 OUTCOMES = {0: 'ongoing', 1: 'won', 2: 'lost', 3: 'drew', 4: 'ran', 5: 'player_teleported',
             6: 'mon_fled', 7: 'caught', 8: 'no_safari_balls', 9: 'forfeited', 10: 'mon_teleported'}
 TERRAINS = ['none', 'grassy', 'misty', 'electric', 'psychic']
+# Bit order of AuthoredFieldMask in src/emerald_champions_agent_battle.c.
+AUTHORED_FIELD = {
+    0: 'electric_terrain', 1: 'electric_terrain_temporary',
+    2: 'misty_terrain', 3: 'misty_terrain_temporary',
+    4: 'grassy_terrain', 5: 'grassy_terrain_temporary',
+    6: 'psychic_terrain', 7: 'psychic_terrain_temporary',
+    8: 'trick_room', 9: 'magic_room', 10: 'wonder_room',
+    16: 'sun', 17: 'sun_temporary', 18: 'rain', 19: 'rain_temporary',
+    20: 'sandstorm', 21: 'hail', 22: 'snow', 23: 'fog',
+}
 # Mirrors enum EmeraldChampionsAgentSwitchBlock; index 0 means the switch is legal.
 SWITCH_BLOCKS = ['', 'battle_arena', 'commander', 'trapped', 'ability_prevents_escape']
 MOVE_TARGETS = ['none', 'selected', 'smart', 'depends', 'opponent', 'random', 'both', 'user',
@@ -107,6 +118,24 @@ ENUM_FILES = {
 
 def fail(message):
     raise SystemExit(f'battle_driver: {message}')
+
+
+def clone_file(source, target):
+    """Copy the ROM/ELF into the run directory without spending the space.
+
+    Every run pins its own build so a concurrent rebuild cannot invalidate it,
+    but a plain copy costs ~68MB per battle and a playtest wave is hundreds of
+    battles. A copy-on-write clone is instant, shares the blocks until something
+    writes, and is an ordinary independent file afterwards. Falls back to a real
+    copy on a filesystem that cannot clone."""
+    for flag in ('--reflink=auto', '-c'):  # GNU coreutils, then macOS
+        try:
+            subprocess.run(['cp', flag, str(source), str(target)],
+                           check=True, capture_output=True)
+            return
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            continue
+    shutil.copy2(source, target)
 
 
 # ------------------------------------------------------------------- constants
@@ -543,6 +572,22 @@ def decode_state(session, words):
         'pending_decision': pending,
         'message_serial': words[16],
         'selection_state': selection,
+        # Where the field state came from. The engine's only setup-side channel
+        # is the trainer's authored startingStatus; this game has no map or Gym
+        # field table, so an empty authored list means the encounter itself
+        # asked for nothing and a bare field at turn 0 is faithful, not dropped.
+        'field_source': {
+            'authored_by_trainer_a': [name for bit, name in AUTHORED_FIELD.items()
+                                      if (words[FIELD_BASE] >> bit) & 1],
+            'authored_by_trainer_b': [name for bit, name in AUTHORED_FIELD.items()
+                                      if (words[FIELD_BASE + 1] >> bit) & 1],
+            'terrain_at_turn_0': (TERRAINS[words[FIELD_BASE + 2]]
+                                  if words[FIELD_BASE + 2] < len(TERRAINS)
+                                  else str(words[FIELD_BASE + 2])),
+            'weather_at_turn_0': flags_of(words[FIELD_BASE + 3], c['weather']) or ['none'],
+            'terrain_is_permanent': bool(words[29]) and words[30] == 0,
+            'from_map': False,
+        },
         'previous_turn': [
             {'battler': i,
              'action': ACTIONS.get(words[PREV_BASE + i * PREV_SIZE], words[PREV_BASE + i * PREV_SIZE]),
@@ -676,8 +721,8 @@ def command_start(args):
     if evidence.get('pokeemerald-headless.gba') != rom_hash \
        or evidence.get('pokeemerald-headless.elf') != elf_hash:
         fail('the headless ROM/ELF do not match their input stamp; rebuild and restamp')
-    shutil.copy2(rom, session.rom)
-    shutil.copy2(elf, session.elf)
+    clone_file(rom, session.rom)
+    clone_file(elf, session.elf)
     shutil.copy2(stamp, session.dir / 'inputs.json')
 
     constants = build_constants()

@@ -8,6 +8,7 @@
 #include "battle_gimmick.h"
 #include "battle_script_commands.h"
 #include "battle_setup.h"
+#include "data.h"
 #include "battle_util.h"
 #include "item.h"
 #include "battle_partner.h"
@@ -77,6 +78,9 @@ static EWRAM_DATA u8 sSwitchRefused[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u8 sPlayerFaints = 0;
 static EWRAM_DATA u8 sOpponentFaints = 0;
 static EWRAM_DATA u8 sFinalOutcome = 0;
+// The field the battle actually opened with, before any move could change it.
+static EWRAM_DATA u8 sOpeningTerrain = 0;
+static EWRAM_DATA u16 sOpeningWeather = 0;
 
 #define NO_PENDING_SWITCH 0xFF
 
@@ -101,6 +105,8 @@ void EmeraldChampionsAgentBattleBegin(u32 levelCap, u32 difficulty)
     sPlayerFaints = 0;
     sOpponentFaints = 0;
     sFinalOutcome = 0;
+    sOpeningTerrain = 0;
+    sOpeningWeather = 0;
     gEcAgentBattlePhase = EC_AGENT_BATTLE_PHASE_IDLE;
     gEcAgentBattleSerial = 0;
     gEcAgentBattleNeedMask = 0;
@@ -493,6 +499,41 @@ static void WriteLegality(void)
     }
 }
 
+// What the battle setup actually asked for. The engine's only setup-side channel
+// for a field effect is the trainer's authored startingStatus, which battle_main
+// ORs into gStartingStatuses before the first turn; there is no map or Gym field
+// table. Reporting it lets a caller tell "the room authored nothing" apart from
+// "the driver dropped it".
+static u32 AuthoredFieldMask(u32 trainerId)
+{
+    if (trainerId == TRAINER_NONE || trainerId >= TRAINERS_COUNT)
+        return 0;
+
+    struct StartingStatuses authored = GetTrainerStartingStatusFromId(trainerId);
+    u32 mask = 0;
+
+    if (authored.electricTerrain)          mask |= 1u << 0;
+    if (authored.electricTerrainTemporary) mask |= 1u << 1;
+    if (authored.mistyTerrain)             mask |= 1u << 2;
+    if (authored.mistyTerrainTemporary)    mask |= 1u << 3;
+    if (authored.grassyTerrain)            mask |= 1u << 4;
+    if (authored.grassyTerrainTemporary)   mask |= 1u << 5;
+    if (authored.psychicTerrain)           mask |= 1u << 6;
+    if (authored.psychicTerrainTemporary)  mask |= 1u << 7;
+    if (authored.trickRoom)                mask |= 1u << 8;
+    if (authored.magicRoom)                mask |= 1u << 9;
+    if (authored.wonderRoom)               mask |= 1u << 10;
+    if (authored.weatherSun)               mask |= 1u << 16;
+    if (authored.weatherSunTemporary)      mask |= 1u << 17;
+    if (authored.weatherRain)              mask |= 1u << 18;
+    if (authored.weatherRainTemporary)     mask |= 1u << 19;
+    if (authored.weatherSandstorm)         mask |= 1u << 20;
+    if (authored.weatherHail)              mask |= 1u << 21;
+    if (authored.weatherSnow)              mask |= 1u << 22;
+    if (authored.weatherFog)               mask |= 1u << 23;
+    return mask;
+}
+
 static void WriteView(void)
 {
     u32 liveFoes = 0;
@@ -546,6 +587,15 @@ static void WriteView(void)
     gEcAgentBattleView[26] = (gAiLogicData != NULL) ? gAiLogicData->battlerMovesScored : 0;
     gEcAgentBattleView[27] = gMain.vblankCounter1;
     gEcAgentBattleView[28] = sLevelCap;
+    gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 0] = AuthoredFieldMask(gEcAgentBattleTrainerA);
+    gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 1] = AuthoredFieldMask(gEcAgentBattleTrainerB);
+    if (gMain.inBattle && gBattleTurnCounter == 0)
+    {
+        sOpeningTerrain = gFieldTimers.terrain;
+        sOpeningWeather = gBattleWeather;
+    }
+    gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 2] = sOpeningTerrain;
+    gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 3] = sOpeningWeather;
     gEcAgentBattleView[29] = gFieldTimers.terrain;
     gEcAgentBattleView[30] = gFieldTimers.terrainTimer;
     // Per-battler action-selection state, so the host knows which of its
