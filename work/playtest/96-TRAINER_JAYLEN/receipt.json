@@ -1,0 +1,50 @@
+{
+  "play_order": 96,
+  "e_group": "E0111",
+  "trainer": "TRAINER_JAYLEN",
+  "class": "regular",
+  "location": "Route113",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"CRYOGONAL": 35, "MAGNEZONE": 34, "DARMANITAN_GALAR": 33, "MAMOSWINE": 34},
+  "cap_window_confirmation": "Offsets 1/0/-1/0 resolved to 35/34/33/34 against a level-36 party: cap 36 on Medium, matching the dossier seed line.",
+  "party_manifest": "work/playtest/96-TRAINER_JAYLEN/party.json",
+  "party_pool_audit": "Block core led by Incineroar + Excadrill, with Weavile deliberately excluded - Ice into three Ice types is 0.5x and Snowscape would raise their Defense further. All six gate <= 36 with source maps passed before Route 113.",
+  "pre_declared_strategy_checks": [
+    "Cryogonal establishes Snowscape when the Ice partners benefit, then uses Freeze-Dry / Blizzard or Recover",
+    "Magnezone independently uses Iron Defense / Body Press or Thunderbolt",
+    "Galarian Darmanitan's Choice Scarf and Gorilla Tactics lock is real and exploitable",
+    "Mamoswine provides physical reserve pressure",
+    "Snow boosts Ice-type Defense, does not help Magnezone, and causes no hail chip",
+    "Clear ash weather does not supply free snow",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/96-TRAINER_JAYLEN/a1", "seed": 96, "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "T1 Cryogonal set Snowscape and Magnezone Protected, blocking a 4x High Horsepower and keeping its Shuca Berry; Flare Blitz killed Cryogonal from full - it has base 30 Defense and Fire is 2x into Ice. T2 Excadrill's High Horsepower killed Magnezone anyway, through the Shuca, and Knock Off removed Mamoswine's Sitrus. T3 was the turn that cost me both battlers: Galarian Darmanitan's Choice-locked Superpower is 2x into Excadrill's Steel and killed it from 84, while Mamoswine's High Horsepower is 2x into Incineroar and killed it from 105. T4 I brought in the two Pokemon that answer a Fighting-locked Darmanitan and a Ground attacker - Togekiss, which resists Fighting twice over and is immune to Ground, and Rillaboom, whose Grassy Glide is 2x into Mamoswine - and Grassy Glide killed Mamoswine. T5 Darmanitan, still locked, threw a third Superpower into Togekiss for 0.25x and Knock Off finished it."}
+  ],
+  "strategy_checks": [
+    {"check": "Cryogonal establishes Snowscape", "result": "PASS on the setup, NOT OBSERVED on the follow-up", "evidence": "Snowscape went up on turn 1 and B_WEATHER_SNOW persisted for the rest of the battle, outliving the Cryogonal that set it. It never got a second turn - Flare Blitz is 2x into Ice and Cryogonal's Defense is base 30, so a 133 HP body died in one physical hit - so Freeze-Dry, Blizzard and Recover were never selected. Setting the weather first was correct: it is the one thing only Cryogonal can do and the one thing that survives its death."},
+    {"check": "Magnezone uses Iron Defense / Body Press or Thunderbolt", "result": "PARTIAL", "evidence": "Magnezone's two actions were Protect on T1 - an excellent guard, see the ledger - and Body Press on T2. Body Press without a prior Iron Defense is a weak move on a Pokemon with base 115 Defense and no Defense investment beyond 252 EVs, and it did 52 to my Excadrill. Given that it correctly read a 4x Ground attack incoming on T1 and guarded, spending T2 on Iron Defense instead would have compounded both halves of its authored plan. Thunderbolt was never used, correctly - my two active battlers were a Fire/Dark and a Steel/Ground, and Electric is 0.5x into one and 0x into the other."},
+    {"check": "Galarian Darmanitan's Choice Scarf and Gorilla Tactics lock is real", "result": "PASS, and the battle ended on its downside", "evidence": "Darmanitan locked into Superpower on its first action and used it three times. The first was a KO on Excadrill at 2x into Steel. The second and third were into Rillaboom and then Togekiss - and Togekiss is Fairy/Flying, so Fighting is 0.25x, reported as 'It's mostly ineffective...'. Each Superpower also dropped its own Attack and Defense, so by the end it was throwing a quarter-effective move at -3 Attack with no way to switch moves. That is exactly the dossier's crack, 'exploiting Darmanitan's lock', and the AI could not avoid it - which is the correct behaviour for a Choice item, not a defect."},
+    {"check": "Mamoswine provides physical reserve pressure", "result": "PASS", "evidence": "Three turns, three different moves, all correct: Ice Shard into Excadrill as priority chip, High Horsepower into Incineroar for 2x and the KO, then Icicle Crash into Rillaboom for 2x. It also correctly stopped using Ice Shard once the priority stopped being worth more than the bigger attack. Thick Fat is worth noting too: it halves the Fire damage my Incineroar was built around, which turned a 2x matchup into a neutral one."},
+    {"check": "Snow does no hail chip and does not help Magnezone", "result": "PASS", "evidence": "No chip damage message appeared for any battler on any of the five turns - 'Snow continues to fall' and nothing else. Magnezone took a full-damage 4x High Horsepower through the snow. The dossier is explicit on both points and the engine agrees."},
+    {"check": "Clear ash weather supplies no free snow", "result": "PASS", "evidence": "Weather was ['none'] at turn 0 on Route 113 and only became B_WEATHER_SNOW after Cryogonal used Snowscape. The ash is cosmetic, exactly as with Lung at play_order 94."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "MAGNEZONE", "payoff": "EXCELLENT. Blocked Excadrill's High Horsepower, which is 4x into Steel/Electric, and in doing so also preserved the Shuca Berry that is the authored answer to exactly that attack. Denying a 4x hit and saving the item meant for it in one action is the best guard decision in my block alongside Archeops's at play_order 89. It was not repeated on T2."}
+  ],
+  "protect_ledger_note": "One opposing Protect in five turns, from the only member that carries it, denying a 4x attack, with no repetition.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Magnezone's turn-1 Protect is the standout. It was facing an Excadrill, the most obvious 4x Ground threat in the game to a Steel/Electric, and it guarded on the exact turn the attack came. That is a read, not a reflex.",
+    "Mamoswine changing move every turn as the board changed - priority chip, then the 2x KO, then the 2x spread-type attack into a new switch-in - was clean.",
+    "The only soft decision is Magnezone's unboosted Body Press on T2. With Iron Defense in the same set and a Protect already banked, the setup was available and the payoff move was used first.",
+    "Turn 3 is worth recording as a design success: two opponents at levels 33 and 34 removed two of my level-36 Pokemon in a single turn, purely on type reads (Fighting into Steel, Ground into Fire). Jaylen has the lowest average offset in my block and produced two of my faints."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two Pokemon in a single turn to correct opponent type reads. Brief rule 5: won with 2+ faints after a real fight -> keep. No level change. This is the best value-per-level team in my block: Darmanitan is at cap-3 and Magnezone and Mamoswine at cap-2, and they still took two of my six.",
+  "could_this_be_cooler": "Keep it. The snow formation is coherent - a dedicated setter, a defensive Steel that is not an Ice type and does not pretend to benefit from snow, a Choice-locked glass cannon and a Thick Fat physical reserve are four genuinely different jobs - and the dossier is honest about the parts that do not synergise, which is rare and correct. The one improvement I would make is to give Cryogonal a way to survive its first turn: base 30 Defense means any physical attacker removes it before it does anything except set the weather, so the weather is effectively a one-turn investment that costs a Pokemon. A Focus Sash, or leading Cryogonal beside Mamoswine rather than beside Magnezone so that something is physically threatening the attacker that wants to kill it, would let the Freeze-Dry and Recover half of its set exist. I would not touch Darmanitan's negative offset - a Choice Scarf Gorilla Tactics attacker three levels under the cap that still one-shot my Excadrill is priced correctly.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
