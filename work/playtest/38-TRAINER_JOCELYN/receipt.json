@@ -1,0 +1,49 @@
+{
+  "play_order": 38,
+  "e_group": "E0039",
+  "trainer": "TRAINER_JOCELYN",
+  "class": "gym",
+  "location": "DewfordTown_Gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"LILLIGANT_HISUI": 22, "ORICORIO_POM_POM": 24, "WHIMSICOTT": 21, "CRABOMINABLE": 20, "BRELOOM": 20, "SIRFETCHD": 20},
+  "party_manifest": "work/playtest/38-TRAINER_JOCELYN/party.json",
+  "party_pool_audit": "All six in work/reference-pools/pool-20.json with gate <= 20 (Togetic 14, Enamorus 14 reachable legend, Arcanine 20, Alakazam 20, Hoopa 20, Magearna 20). No Mega.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/38-TRAINER_JOCELYN/a1", "seed": 42, "outcome": "won", "turns": 9, "player_faints": 3, "opponent_faints": 6,
+     "narrative": "T1 Oricorio (L24) out-sped and one-shot Enamorus with Revelation Dance; Air Slash took Lilligant to 31 through Coba Berry. T2 Arcanine came in with Intimidate and Extreme Speed finished Lilligant. T3 Jocelyn withdrew Choice Band Crabominable for Sirfetch'd, which Flare Blitz then KO'd. T4 Revelation Dance KO'd Arcanine; Breloom's Toxic Orb and Poison Heal came online. T5 Hoopa Protected a real Acrobatics; Breloom Spored Magearna. T6 Acrobatics KO'd Hoopa, Magearna woke and Flash Cannon finished Oricorio. T7 Fleur Cannon at +2 KO'd Crabominable; Breloom Protect blocked a lethal Psychic. T8 Whimsicott set Prankster Tailwind, Breloom Spored Magearna again, Alakazam KO'd Breloom. T9-T10 Whimsicott set Light Screen and fell to two Psychics."},
+    {"attempt": "probe-dancer", "run_dir": "work/playtest/38-TRAINER_JOCELYN/probe-dancer", "seed": 43, "outcome": "abandoned_after_6_turns", "purpose": "strategy verification only, not a difficulty attempt: my side Protected and redirected for six turns to give Lilligant a completely safe board on which to use Victory Dance so Oricorio's Dancer could copy it."}
+  ],
+  "strategy_checks": [
+    {"check": "Lilligant-Hisui uses Victory Dance and Oricorio's Dancer copies it the same turn without spending Oricorio's action", "result": "FAIL", "evidence": "Never observed in either run. In the dedicated probe (work/playtest/38-TRAINER_JOCELYN/probe-dancer) my two actives Protected and used Follow Me for six consecutive turns, so Lilligant took essentially no pressure, its Dancer partner was healthy and on the field the whole time, and setup was strictly the best action. Lilligant still chose Leaf Blade, Leaf Blade, Close Combat, Close Combat, Close Combat - including Close Combat into an active Protect and Close Combat that only dropped its own Defense and Sp.Def. Victory Dance was never selected. In attempt 1 it likewise opened Leaf Blade. See AI defect 1."},
+    {"check": "Oricorio Dancer", "result": "NOT_EXERCISED", "evidence": "No dance move was ever used by either side, so Dancer had nothing to copy. It cannot be confirmed working from this battle."},
+    {"check": "Tailwind is set and the speed order flips", "result": "PASS", "evidence": "Attempt 1 turn 8: Whimsicott used Tailwind and SIDE_STATUS_TAILWIND appears on the opponent side in the following state."},
+    {"check": "Prankster gives Whimsicott's status moves +1 priority", "result": "PASS", "evidence": "Attempt 1 turn 8 Tailwind and turn 9 Light Screen both resolved before Alakazam (base 120 Speed, Timid, 252 Spe) despite Whimsicott's base 116 at L21."},
+    {"check": "Breloom Toxic Orb activates and Poison Heal sustains; Spore lands on a legal target", "result": "PASS", "evidence": "Attempt 1 turn 4 state shows Breloom TOXIC_POISON with Toxic Orb held and full 60/60 HP maintained across turns 4-8 while taking Bullet Seed recoil-free chip; Spore put Magearna to sleep on turns 5 and 8."},
+    {"check": "Hustle raises Attack at the cost of accuracy", "result": "PASS", "evidence": "Attempt 1 turn 1: Lilligant's Leaf Blade missed Togetic outright ('Togetic avoided the attack!')."},
+    {"check": "Sirfetch'd First Impression on its first turn out", "result": "NOT_EXERCISED", "evidence": "Sirfetch'd was switched in on turn 3 and KO'd by Flare Blitz before it acted."},
+    {"check": "Crabominable Iron Fist / Choice Band", "result": "PARTIAL", "evidence": "Choice Band and the full four-move set were revealed, but Crabominable was withdrawn on turn 3 and KO'd by Fleur Cannon on turn 7 without ever attacking."}
+  ],
+  "protect_ledger": [
+    {"turn": 7, "battler": "BRELOOM", "payoff": "REAL: blocked Alakazam's Life Orb Psychic (2x into Grass/Fighting), which was a likely KO on a 60 HP Breloom, and Breloom went on to Spore Magearna the next turn."},
+    {"turn": "probe T4", "battler": "LILLIGANT_HISUI", "payoff": "n/a - Lilligant did not Protect; it attacked into my Protect, which is legal blind play since the AI does not read pending commands."}
+  ],
+  "protect_ledger_note": "One opponent Protect across the benchmark attempt, and it paid. No empty or repetitive opponent guarding.",
+  "ai_defects": [
+    {"id": "JOCELYN-1", "severity": "high", "summary": "Lilligant-Hisui never selects Victory Dance, so the room's signature Victory Dance -> Dancer relay cannot execute.",
+     "run_dir": "work/playtest/38-TRAINER_JOCELYN/probe-dancer",
+     "board": "Turns 1-6, opponent side at full health, Oricorio-Pom-Pom (Dancer) alive and adjacent the entire time, my two actives spending every turn on Protect/Follow Me so Lilligant faced no meaningful threat and no KO was available to it.",
+     "chosen_action": "LEAF_BLADE, LEAF_BLADE, CLOSE_COMBAT, CLOSE_COMBAT, CLOSE_COMBAT - twice into a Protect or a 0.25x resist, twice lowering its own Defense and Sp.Def for no return.",
+     "better_action": "VICTORY_DANCE, which raises Attack, Defense and Speed and is immediately copied by the Dancer partner at no action cost. The team is flagged strategy: SETUP,TAILWIND,ALLY_COMBO and the plan block names this exact line.",
+     "note": "Reported only; no AI C code was changed in this pass."}
+  ],
+  "ai_notes": [
+    "Turn 3 Jocelyn withdrew Choice Band Crabominable (Fighting/Ice, 2x to Fire) into Sirfetch'd, which was then KO'd by the same Flare Blitz. Defensible as preserving the Ice-type from a super-effective hit, but it traded a full member for the save; worth watching if it recurs.",
+    "Oricorio at L24 (offset 6) out-sped and one-shot a 252 Spe Timid Enamorus with Revelation Dance on turn 1 and later one-shot a chipped Arcanine. It is clearly the room's real ace despite the dossier framing Lilligant as the lead."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost three of six members against a 4-2 speed and power disadvantage; a real fight. Brief rule 'won with 2+ faints or after a real fight -> keep'. No level change. Note that JOCELYN-1 means this clear happened WITHOUT the team's authored setup engine ever firing, so difficulty should be re-judged after that defect is repaired rather than by adding levels now.",
+  "could_this_be_cooler": "The concept (a dance room where one Pokemon's boost is duplicated for free by a Dancer partner) is genuinely one of the best ideas in this gym, and the species choices - Hisuian Lilligant, Pom-Pom Oricorio, Sirfetch'd, Crabominable - are distinctive rather than merely rare. It is not cooler yet because it does not happen. The single highest-value improvement is making the relay fire; a second, cheaper one is to give Oricorio or Whimsicott a dance of its own (for example Quiver Dance or Teeter Dance on the Oricorio slot) so the Dancer link has a second trigger and does not depend entirely on Lilligant surviving to turn one. No species/move/item change was made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
