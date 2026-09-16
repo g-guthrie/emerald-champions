@@ -1,0 +1,33 @@
+{
+  "play_order": 165,
+  "e_group": "E0231",
+  "trainer": "TRAINER_TAYLOR",
+  "location": "Route119",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Vivillon 45 (-1), Ribombee 47 (+1), Araquanid 47 (+1), Pinsir 47 (+1) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/165-TRAINER_TAYLOR/party.json",
+  "attempts": [
+    {"seed": 91, "run_dir": "work/playtest/165-TRAINER_TAYLOR/run-s91", "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+     "notes": "Run on work/agent-battle-build-4 per the coordinator's snapshot change. Sleep Powder landed on Incineroar on turn 2 and took it out of the fight; Amoonguss was the faint, to Water Bubble Liquidation. No stall or crash."}
+  ],
+  "strategy_checks": [
+    {"check": "Compound Eyes makes Sleep Powder a 100%-accurate move, used on a legal target", "result": "PASS", "evidence": "Vivillon selected Sleep Powder on turns 1, 2 and 4, always at Incineroar or Mega Metagross - never at the Grass type it cannot affect. It landed on turn 2 and removed a 194 HP Assault Vest Incineroar from the battle for the rest of the fight."},
+    {"check": "Vivillon uses Rage Powder to eat the retaliation", "result": "NOT_EXERCISED", "evidence": "Rage Powder was never selected. With a Grass-type Amoonguss on the field for the first four turns - immune to redirection - declining it is arguably correct, but it was also not used on turn 4 when Amoonguss was at 24 HP and Araquanid had just arrived."},
+    {"check": "Ribombee's Quiver Dance converts bought turns into a sweep", "result": "PASS", "evidence": "Turn 1 Ribombee used Quiver Dance behind its partner's Sleep Powder attempt, taking +1 Special Attack, Special Defense and Speed. The setup turn was correctly chosen on the turn its partner was creating the opening."},
+    {"check": "Sweet Veil has a distinct sleep-protection role and is not Friend Guard", "result": "PASS - directly demonstrated", "evidence": "Turn 2 Amoonguss used Spore on Vivillon and the engine answered 'It doesn't affect the opposing Vivillon' while Ribombee was alive. Once Ribombee died on turn 3, Spore became selectable against Araquanid again on turn 4. Sweet Veil was protecting the ally, exactly as authored."},
+    {"check": "Araquanid's Water Bubble doubles Water damage", "result": "PASS", "evidence": "A resisted Liquidation into Amoonguss still finished it, and an unresisted one took 59 off Mega Metagross through 150 HP of Steel/Psychic bulk."},
+    {"check": "Araquanid's Wide Guard is the spread-defence fallback", "result": "NOT_EXERCISED", "evidence": "The player used no spread move at any point in the fight, so declining Wide Guard on every turn is the correct read, not a defect."},
+    {"check": "Pinsir's Moxie", "result": "NOT_EXERCISED", "evidence": "Pinsir selected Stone Edge on its only turn and was KOed by a faster Dual Wingbeat before it resolved. It never got an attack off."}
+  ],
+  "protect_ledger": [
+    {"turn": "all", "battler": "Vivillon / Ribombee / Araquanid / Pinsir", "payoff": "NOT USED, by any member, at any point. All four carry Protect. The clearest missed case is Ribombee on turn 2: it was at 26/128, poisoned, with +1 Speed and a Focus Sash already spent, and it chose Pollen Puff into a body that KOed it the following turn. A Protect there would have preserved a +1 sweeper. No empty or repetitive guarding to report - the opposite problem."}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "PINSIR", "before": 1, "after": 2, "reason": "First-attempt win with one player faint. Pinsir was KOed before its first attack resolved and contributed nothing to the fight."},
+    {"member": "ARAQUANID", "before": 1, "after": 2, "reason": "The Wide Guard/Water Bubble body has to survive for the spread-defence half of the concept to ever appear; it arrived with two members already dead and had two turns. Vivillon is deliberately left at -1: the dossier's stated reason - a 100%-accurate sleep lead needs no level help - was confirmed in play, where its Sleep Powder cost the player its Incineroar for the whole battle."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM and this agent must not run make.",
+  "could_this_be_cooler": "Retain it. The dossier calls this a complete redirect-sleep-setup package with an honest answer, and that is exactly how it played: the player brought a Grass type specifically to switch off half the team, and even then Sleep Powder still landed and took the best body out of the fight. Vivillon at -1 with Compound Eyes is one of the better-judged individual offsets in this block. The improvement worth naming is Ribombee's item and the Protect habit rather than the species: a Focus Sash on a Pokemon whose plan is Quiver Dance wants a turn of protection to cash the boost, and this AI never reaches for it. If a future pass wants a cooler piece, Pinsir is the slot - it is a fourth Bug with no interaction with the powder/redirection theme, and a Butterfree or a Masquerain would at least share the scale-and-powder identity, while Lurantis or Comfey would give the team a non-Bug type it badly needs. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal. Vivillon resolves to VIVILLON_ICY_SNOW; Sweet Veil, Water Bubble and Compound Eyes all materialized and behaved correctly."
+}
