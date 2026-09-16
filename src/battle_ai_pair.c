@@ -97,6 +97,10 @@
 // comparison still overrules it when the base form has something the Mega
 // loses, and the existing tie cost still prefers not evolving on a true tie.
 #define PAIR_MEGA_HORIZON 50
+// A support move that reaches a partner which cannot use it spent the turn for
+// nothing; the trial already gives it no benefit, and this makes it lose to an
+// action that does something rather than to a tie.
+#define PAIR_SUPPORT_WASTED_COST 40
 
 // A single turn cannot see what a boost, a sleep or a stat drop is worth,
 // because all of their value arrives on the turns after this one. Without an
@@ -3192,6 +3196,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
              && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD
              && !IsFixedDamageMove(other->executedMove))
                 boost[partner] = boost[partner] * 3 / 2;
+            else if (sign > 0 && !copy)
+                // Nothing to boost: the partner is leaving, has already acted,
+                // or is holding a move the multiplier cannot touch. Watching a
+                // Helping Hand announce itself and fail into a partner that was
+                // switching out is the turn this costs.
+                score -= PAIR_SUPPORT_WASTED_COST;
             // A wasted boost already produces no damage in this trial. An
             // extra penalty here makes Helping Hand + Protect look worse than
             // Helping Hand + an attack into a confirmed opposing Protect,
@@ -3429,6 +3439,27 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 || IsAffectedByPowderMove(actor, gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor]));
         if (followed)
             selectedTarget = follow;
+        // A crash move whose targets an earlier action on this side already
+        // removed does not simply do nothing: it takes half the user's maximum
+        // off. Watching a High Jump Kick land on a body its partner's Surf had
+        // removed, twice, is what this is: the retarget below cannot save it
+        // when there is nothing left on that side to retarget to.
+        if (!copy && GetMoveEffect(move) == EFFECT_RECOIL_IF_MISS && !PairSpread(move)
+         && !IsBattlerAlly(actor, selectedTarget))
+        {
+            bool32 anyTarget = FALSE;
+            for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+                if (hp[foe] && !IsBattlerAlly(actor, foe)
+                 && gBattleMons[foe].volatiles.semiInvulnerable != STATE_COMMANDER)
+                    anyTarget = TRUE;
+            if (!anyTarget)
+            {
+                u32 crash = max(1, PairNonDynamaxHP(ev, actor, gBattleMons[actor].maxHP) / 2);
+                PairApplyDamageWhenActing(&hp[actor], &survival[actor], crash, crash, crash,
+                    100, actionChance[actor]);
+                continue;
+            }
+        }
         enum BattlerId fallback = GetPartnerBattler(selectedTarget);
         // HP is conditional on survival. Keep the original recipient's live
         // branch and send the already-fainted mass to its partner, as native

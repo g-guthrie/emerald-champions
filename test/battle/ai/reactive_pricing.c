@@ -153,3 +153,60 @@ AI_DOUBLE_BATTLE_TEST("EC reactive pricing: Encore locks in the move the target 
         EXPECT(playerLeft->volatiles.encoreTimer != 0);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC joint conflicts: a crash move is not aimed into a target the partner removes first")
+{
+    GIVEN {
+        AI_FLAGS(REACTIVE_FLAGS);
+        // The partner's spread attack clears both player slots before the
+        // slower flank acts, so a single-target crash move has nothing left to
+        // hit and takes half its user's maximum off for the privilege.
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(20); MaxHP(20); Defense(20); SpDefense(20); Speed(15); Moves(MOVE_SPLASH); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(20); MaxHP(20); Defense(20); SpDefense(20); Speed(10); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_GYARADOS) {
+            Level(30); HP(250); MaxHP(250); SpAttack(200); Speed(120);
+            Ability(ABILITY_INTIMIDATE); Moves(MOVE_SURF);
+        }
+        OPPONENT(SPECIES_TSAREENA) {
+            Level(30); HP(250); MaxHP(250); Attack(200); Speed(60);
+            Ability(ABILITY_QUEENLY_MAJESTY); Moves(MOVE_HIGH_JUMP_KICK, MOVE_PLAY_ROUGH);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_HIGH_JUMP_KICK);
+        }
+    } THEN {
+        // Its own partner's spread attack clips it; what it must not have paid
+        // is half its maximum for a kick that hit nothing.
+        EXPECT_GT(opponentRight->hp, 150);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC joint conflicts: a spread move does not cost a healthy ally when a foes-only attack is there")
+{
+    GIVEN {
+        AI_FLAGS(REACTIVE_FLAGS);
+        // Both attacks reach both foes; only one of them also lands on a
+        // grounded, unprotected, full-health partner.
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Defense(100); SpDefense(100); Speed(15); Moves(MOVE_SPLASH); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Defense(100); SpDefense(100); Speed(10); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_GIBLE) {
+            Level(30); HP(200); MaxHP(200); Attack(150); Speed(80);
+            Ability(ABILITY_SAND_VEIL); Moves(MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE);
+        }
+        OPPONENT(SPECIES_MACHOP) {
+            Level(30); HP(200); MaxHP(200); Attack(150); Defense(80); Speed(40);
+            Ability(ABILITY_GUTS); Moves(MOVE_BRICK_BREAK);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_ROCK_SLIDE);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->hp, 200);
+    }
+}
