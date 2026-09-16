@@ -117,6 +117,9 @@
 // matters as much as landing it: four turns of an unused Will-O-Wisp in front
 // of a Life Orb physical attacker is the case this exists for.
 #define PAIR_BURN_PHYSICAL_HORIZON 20
+// A speed drop that puts one of ours in front of the target is speed control
+// rather than chip, which is the turn a slow partner needs bought for it.
+#define PAIR_SPEED_CROSSING_HORIZON 25
 // A switch preserves board value while an attack spends HP, so a one-turn
 // board makes withdrawing a healthy lead look nearly free. Charge it for the
 // turn it actually gives up - the damage the outgoing battler was about to
@@ -1403,6 +1406,55 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
                 value += 15;
             return value;
         }
+    }
+    if ((effect == EFFECT_TRICK || effect == EFFECT_BESTOW) && IsBattlerAlive(action->target)
+     && !IsBattlerAlly(actor, action->target)
+     && gAiLogicData->abilities[action->target] != ABILITY_STICKY_HOLD
+     && !gBattleMons[action->target].volatiles.substitute)
+    {
+        // A swap is worth the difference between the two items, not a flat
+        // trade. Handing over something the user cannot use anyway - a Choice
+        // item on a status body, anything at all under Klutz - while taking a
+        // working one is the whole reason the move is on the set.
+        // Read the item itself, not the suppressed hold effect: a Klutz body's
+        // Flame Orb does nothing in its hands and everything in theirs.
+        enum HoldEffect mine = GetItemHoldEffect(gAiLogicData->items[actor]);
+        enum HoldEffect theirs = gAiLogicData->holdEffects[action->target];
+        bool32 junkToThem = gAiLogicData->holdEffects[actor] == HOLD_EFFECT_NONE
+                         || (IsHoldEffectChoice(mine) && !IsBattlerItemEnabled(actor));
+        bool32 theirsWorthTaking = theirs != HOLD_EFFECT_NONE;
+        // Sticking a Choice item on a foe locks it into whatever it picks -
+        // a real cost to it even when the item itself is nothing to us.
+        if (IsHoldEffectChoice(mine) && IsBattlerItemEnabled(action->target))
+            return 30;
+        if (junkToThem && theirsWorthTaking)
+            return 45;
+        if (theirsWorthTaking && mine != theirs)
+            return 15;
+        // Handing a working item to an empty hand is a pure gift. The gifts
+        // nobody wants - orbs, a Barb, an Iron Ball - are the exception, and
+        // they are already priced by the per-battler scorer, which knows the
+        // recipient's ability and immunities. Leave that judgment where it is.
+        if (!theirsWorthTaking && !junkToThem
+         && mine != HOLD_EFFECT_FLAME_ORB && mine != HOLD_EFFECT_TOXIC_ORB
+         && mine != HOLD_EFFECT_STICKY_BARB && mine != HOLD_EFFECT_IRON_BALL)
+            return -25;
+        return 0;
+    }
+    if (move == MOVE_DESTINY_BOND && !gBattleMons[actor].volatiles.destinyBond)
+    {
+        // Trading a body that is already lost for the thing that is killing it
+        // is a fair trade, but only when the death is certain and lands first.
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+                continue;
+            if (!AI_IsSlower(actor, foe, MOVE_DESTINY_BOND, MOVE_NONE, DONT_CONSIDER_PRIORITY))
+                continue;
+            if (CanTargetFaintAi(foe, actor))
+                return 55;
+        }
+        return -20;
     }
     if (effect == EFFECT_LEECH_SEED && IsBattlerAlive(action->target)
      && !IsBattlerAlly(actor, action->target)
@@ -4543,6 +4595,15 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         for (u32 stat = 0; stat < ARRAY_COUNT(stats); stat++)
             if (statStage[actor][stat] > gBattleMons[actor].statStages[stats[stat]])
                 raised = TRUE;
+        // An offensive boost with nothing to cash it is not a boost. A Howl on
+        // a body whose only attack scales off the other stat, or off neither,
+        // buys the turn nothing at all.
+        if (raised && statStage[actor][0] > gBattleMons[actor].statStages[STAT_ATK]
+         && !PairAttacksPhysically(actor))
+            raised = speedStage[actor] > gBattleMons[actor].statStages[STAT_SPEED]
+                || statStage[actor][1] > gBattleMons[actor].statStages[STAT_DEF]
+                || statStage[actor][2] > gBattleMons[actor].statStages[STAT_SPDEF]
+                || statStage[actor][3] > gBattleMons[actor].statStages[STAT_SPATK];
         if (raised)
             score += sign * PAIR_SETUP_HORIZON * (s32)survival[actor] / 100;
     }
@@ -4570,8 +4631,20 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 score += sign * PAIR_STAT_DROP_HORIZON
                     * (s32)(gBattleMons[target].statStages[stats[stat]] - statStage[target][stat]);
         if (speedStage[target] < gBattleMons[target].statStages[STAT_SPEED])
+        {
             score += sign * PAIR_STAT_DROP_HORIZON
                 * (s32)(gBattleMons[target].statStages[STAT_SPEED] - speedStage[target]);
+            // A drop that puts one of ours in front of it is speed control,
+            // not chip: that is the whole point of a slow partner's turn.
+            for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
+                if (hp[ally] && GetBattlerSide(ally) != GetBattlerSide(target)
+                 && gAiLogicData->speedStats[ally] <= gAiLogicData->speedStats[target]
+                 && speed[ally] > speed[target])
+                {
+                    score += sign * PAIR_SPEED_CROSSING_HORIZON;
+                    break;
+                }
+        }
     }
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
     {
