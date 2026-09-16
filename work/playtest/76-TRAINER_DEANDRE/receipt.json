@@ -1,0 +1,97 @@
+{
+ "play_order": 76,
+ "e_group": "E0088",
+ "trainer": "TRAINER_DEANDRE",
+ "class": "regular",
+ "location": "Route118",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "KROKOROK": 31,
+  "VULLABY": 32,
+  "SIMISEAR": 28,
+  "GASTRODON_WEST": 27
+ },
+ "cap_window_confirmation": "Dossier seeds 33/34/30/29 resolved to 31/32/28/27. Cap 30, Medium -2.",
+ "party_manifest": "work/playtest/76-TRAINER_DEANDRE/party.json",
+ "party_pool_audit": "Same audited cap-30 Route 110 six, leading Mega Gardevoir + Magearna. All sources at or before Route 110. NewMauville and Route 111 desert species excluded for chronology. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_strategy_checks": [
+  "Gastrodon's Storm Drain redirects an eligible Water attack",
+  "Vullaby, not Krokorok, is the one that uses Taunt and Snarl",
+  "Krokorok's Intimidate lands on entry and it attacks physically behind it",
+  "Simisear supplies the special offence and Will-O-Wisp mitigation",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/76-TRAINER_DEANDRE/a1",
+   "seed": 76,
+   "outcome": "won",
+   "turns": 4,
+   "driver_turn_counter": 3,
+   "player_faints": 0,
+   "opponent_faints": 4,
+   "narrative": "T1 both leads died before acting: one Pixilate Hyper Voice (2x on both Dark types) plus a Fleur Cannon removed a Life Orb Krokorok and a 116 HP Eviolite Vullaby in a single turn. The back half was much better - T2 Simisear's Protect blocked both the spread and a 165-SpA Fleur Cannon while Gastrodon's Earth Power (2x on Steel) took Magearna to 74; T3 Gastrodon Protected away a Hyper Voice that would have KO'd it at 41/122 while Simisear's Heat Wave hit both of mine; T4 the spread finally landed on both and closed it. Zero player faints."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Gastrodon Storm Drain redirection",
+   "result": "NOT TESTABLE with this party",
+   "evidence": "My strongest legal cap-30 party carries no Water move at all. I did not weaken the party to manufacture the test. The redirection half of this encounter's plan therefore remains unvalidated and should be checked by an agent whose best legal build happens to include a Water attacker."
+  },
+  {
+   "check": "Vullaby owns Taunt/Snarl, not Krokorok",
+   "result": "PASS (choice), FAIL (execution)",
+   "evidence": "The turn-1 decision record is Krokorok MOVE_CRUNCH, Vullaby MOVE_TAUNT - exactly the authored ownership split, and Taunt into a Mega Gardevoir is the right target. Neither resolved: both were KO'd before their actions. The ownership is correct in the AI; the team simply cannot live long enough to use it."
+  },
+  {
+   "check": "Krokorok Intimidate on entry",
+   "result": "PASS",
+   "evidence": "Turn 0: both my leads at atk -1 before any action. My Gardevoir Traced the Intimidate and mirrored it straight back, which the engine handled correctly."
+  },
+  {
+   "check": "Simisear special offence and Will-O-Wisp",
+   "result": "PARTIAL",
+   "evidence": "T3 Heat Wave hit both of mine (2x on Magearna's Steel) for real damage, and T2's Protect was excellent. Will-O-Wisp was never used, which is defensible - both of my active Pokemon were special attackers, so a burn would have been close to worthless. Correct reasoning, untested move."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS - the best ledger in this block so far",
+   "evidence": "Two Protects, both excellent. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 2,
+   "battler": "SIMISEAR",
+   "payoff": "blocked BOTH a Pixilate Hyper Voice and a 165-SpA Fleur Cannon aimed at it, while its partner Gastrodon used the free turn on a 2x Earth Power into Magearna. Full value."
+  },
+  {
+   "turn": 3,
+   "battler": "GASTRODON_WEST",
+   "payoff": "at 41/122 it blocked a Hyper Voice that would have killed it outright, and survived to force a fourth turn. Life-saving, and it was the correct battler to guard - Simisear at full HP took the hit instead."
+  }
+ ],
+ "ai_defects": [],
+ "level_changes": [
+  {
+   "member": "GASTRODON_WEST",
+   "field": "level offset",
+   "before": -1,
+   "after": 0,
+   "reason": "First-attempt win in four turns with zero player faints - well past the review threshold. Gastrodon at L27 is the team's lowest and, with Simisear, is the reason this was four turns rather than two: its Protect at 41/122 was the single best decision Deandre made. At offset -1 it was carrying a penalty its performance does not justify."
+  },
+  {
+   "member": "SIMISEAR",
+   "field": "level offset",
+   "before": 0,
+   "after": 1,
+   "reason": "Second-lowest at L28 and the other member that actually functioned - a Protect with double payoff and a spread Heat Wave. Krokorok (offset 3) and Vullaby (offset 4) are deliberately NOT raised: they are already the team's two highest and a level would not have saved either from a single 2x spread attack. The real weakness is compositional, not numerical."
+  }
+ ],
+ "rerun_note": "Not rerun - a level-offset change only reaches the ROM through a re-materialize plus a rebuild, which this block does not perform. Same as play_order 57-59 and 73.",
+ "could_this_be_cooler": "This is the flattest team in my block and the honest answer is yes. The concept - balanced control between more elaborate engines - is real, but the execution puts two Fairy-weak Dark types side by side in the lead slot, so one spread Fairy attack ends half the encounter before either gets an action. That is exactly what happened, and no level offset fixes it. The concrete suggestion (not applied): split the Dark pair. Lead Gastrodon beside Krokorok so Storm Drain is on the field from turn one where it can actually redirect something, keep Vullaby as the Taunt/Roost reserve it is built to be, and give Krokorok's Life Orb slot a Roseli Berry so the lead pair does not both evaporate to the same attack. The team would then open with the ability it is named after instead of ending before that ability is ever relevant.",
+ "authored_set_legality": "No legality problem found; all four prepared and ran clean, and Gastrodon resolved to its West form correctly."
+}
