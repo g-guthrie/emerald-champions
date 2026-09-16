@@ -1,0 +1,118 @@
+{
+  "play_order": 228,
+  "e_group": "E0339",
+  "trainer": "TRAINER_MAXIE_MAGMA_HIDEOUT",
+  "class": "leader",
+  "location": "MagmaHideout_4F",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Stakataka, Regirock, Rhyperior, Copperajah and Garganacl arrived at L61 = 60 + 3 - 2, and Camerupt at L60 = 60 + 2 - 2, matching the authored offsets 3/3/3/3/3/2.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "The same cap-60 rain six used for the grunt rooms and for Courtney - see that manifest's availability_audit. Nothing in it is sourced past the Mt Pyre summit.",
+  "pre_play_strategy_checks": [
+    "Stakataka sets Trick Room on turn 1; it has 0 Speed IVs and 13 base Speed so it moves last in normal order and first under its own room",
+    "Wide Guard is its alternative when the player answers six slow bodies with a spread move",
+    "Mental Herb protects the setter from a Taunt",
+    "Under the reversed order every other member outruns almost the entire player team",
+    "Mega Camerupt's full-HP Eruption fires FIRST rather than last - the single largest attack in the campaign to this point",
+    "Regirock's Curse is pure profit under Trick Room because lowering Speed makes it faster",
+    "Copperajah's Heavy Metal and Rhyperior's Solid Rock hold the field while the room ticks; Rhyperior's Lightning Rod draws Electric",
+    "Garganacl's Purifying Salt blocks status and Salt Cure grinds",
+    "Is Maxie a real step above his admins, and does the theme show on the board?",
+    "Protect ledger across six members"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 5,
+      "player_faints": 0,
+      "opponent_faints": 6,
+      "why": "A 6-0 sweep in four turns with no faints and only three of my six ever deployed. Turn 1 decided it: Mega Swampert's Superpower is 4x into Stakataka's Rock/Steel, it critted, and the Trick Room setter died from 202/202 before the room went up - while Pelipper's rain-boosted Hydro Pump simultaneously OHKOed Regirock from 225/225. Turn 2 Hydro Pump plus Liquidation removed Garganacl from 250/250. Turn 3 Mega Camerupt Mega Evolved and Protected, blocking both of my 4x attacks - the one good turn Maxie had. Turn 4 I pivoted a chipped Pelipper out and one Liquidation removed Mega Camerupt from 210/210 before it ever used Eruption. Turn 5 Liquidation removed Rhyperior (4x) and Surging Strikes removed Copperajah in the same turn. Trick Room never existed, Curse never happened, Eruption never fired."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Stakataka sets Trick Room on turn 1",
+      "result": "FAIL - the room never went up, and the reason is an open question worth a focused rerun",
+      "evidence": "Stakataka was KOed on turn 1 by a critical 4x Superpower before it executed anything, so the room never existed and the five Brave/Sassy zero-Speed-IV bodies behind it spent the whole fight moving last. What I cannot settle from this run is WHY it did not act first in the selection sense: the driver's native latch for Stakataka on turn 1 reads MOVE_STONE_EDGE, not MOVE_TRICK_ROOM, and Regirock's reads MOVE_STONE_EDGE too rather than MOVE_CURSE. If those latches are real selections, this is a severe defect - the setter of a six-member Trick Room team chose to attack on the only turn it had, and the Curse user did the same. But docs/VERIFICATION.md warns that a battler KOed earlier in the same turn keeps a stale native latch, and both of these were KOed before acting, so I am NOT scoring it as a refusal. Recording it as the single most important open item in my block: a focused rerun where Stakataka survives turn 1 would settle it immediately."
+    },
+    {
+      "check": "Wide Guard is the alternative to the room",
+      "result": "NOT OBSERVED",
+      "evidence": "Stakataka had one turn and did not reach it. This is the fourth authored Wide Guard in my block that never appeared (Stonjourner E0331, Steelix E0336, Gigalith E0337, Stakataka here) - none of the four ever chose it in any run."
+    },
+    {
+      "check": "Mental Herb protects the setter from Taunt",
+      "result": "NOT TESTED",
+      "evidence": "I did not bring Tornadus to this fight - the rain six has no Taunt - so the Mental Herb never had a Taunt to cure. Worth noting that the item is a dead slot against any player who does not carry Taunt, which on this board means it does nothing at all in most runs."
+    },
+    {
+      "check": "Mega Camerupt's full-HP Eruption fires first under the room",
+      "result": "FAIL - never fired",
+      "evidence": "Camerupt Mega Evolved on turn 3 ('The opposing Camerupt has Mega Evolved into Mega Camerupt!') and used Protect that turn. On turn 4 its native latch reads MOVE_ERUPTION, so it had selected the signature move - but Quiet nature with 0 Speed IVs and no Trick Room means it moves last, and Mega Swampert's Liquidation (4x into Fire/Ground, rain-boosted) removed it from 210/210 first. 'The single largest attack in the campaign to this point' resolved zero times. Without the room, Mega Camerupt is exactly the slow liability the dossier says it was at Mt Chimney."
+    },
+    {
+      "check": "Regirock's Curse is pure profit under Trick Room",
+      "result": "FAIL - never reached",
+      "evidence": "Regirock was OHKOed from 225/225 by a single rain-boosted Hydro Pump on turn 1. Its latch reads Stone Edge rather than Curse - subject to the same stale-latch caveat as Stakataka."
+    },
+    {
+      "check": "Copperajah and Rhyperior hold the field while the room ticks",
+      "result": "PARTIAL - Copperajah was the only member that worked",
+      "evidence": "Copperajah is the one member of this team that is not weak to Water (pure Steel), and it was the only thing that damaged me all fight: three Heavy Slams into Pelipper at 76 a turn, correctly noted 'not very effective', which is still what forced my only pivot. It survived to the final turn. Rhyperior, by contrast, is Ground/Rock and therefore 4x into Water; it entered on turn 4 and was OHKOed from 268/268. Lightning Rod was untested - my party carries no Electric move."
+    },
+    {
+      "check": "Garganacl's Purifying Salt and Salt Cure",
+      "result": "PARTIAL",
+      "evidence": "Salt Cure landed on Pelipper on turn 2, so the grind lane fired once. Purifying Salt was never tested because Amoonguss never deployed. Garganacl was then OHKOed from 250/250 by Hydro Pump plus Liquidation on the same turn it acted. Its Rocky Helmet did chip Mega Swampert for 41."
+    },
+    {
+      "check": "Is Maxie a real step above his admins, and does the theme show?",
+      "result": "NO on both counts, as played. This is the block's headline finding.",
+      "evidence": "Tabitha (E0337) beat a well-built party 6-4 and only lost to a second party rebuilt specifically against her. Maxie, the story's climax, lost 6-0 in four turns to a party I did not change at all, with zero faints, using only three of my six. The gap runs the wrong way by a wide margin. On theme: the intended image - the land itself refusing to move at your speed - is excellent and completely absent from the board, because the mechanism that produces it (Trick Room) never resolved. What the player actually sees is six slow Rock-and-Ground bodies dying one per attack in rain. Every distinctive interaction the dossier promises - Curse under the room, Beast Boost on a fortress, a full-HP Eruption arriving first - went unseen."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS - one Protect, excellent",
+      "evidence": "See protect_ledger."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "battler": "Camerupt (Mega)",
+      "payoff": "REAL and the best turn Maxie had. On the turn it Mega Evolved, Mega Camerupt Protected and blocked BOTH of my actions - a rain-boosted Liquidation and a Hydro Pump, each 4x into Fire/Ground. It survived a turn it would otherwise have died in, and it did not repeat the guard. Correct in every respect."
+    }
+  ],
+  "protect_summary": "1 opponent Protect across 4 turns and 5 decisions, with a large payoff, 0 empty. Regirock, Copperajah and Garganacl also carry Protect; none of them reached a turn where it was right.",
+  "ai_defects": [
+    {
+      "id": "E0339-1",
+      "turn": 1,
+      "board": "Stakataka 202/202 (Rock/Steel, Mental Herb, Trick Room / Wide Guard / Gyro Ball / Stone Edge) beside Regirock 225/225 (Curse / Stone Edge / Drain Punch / Protect), opening turn of a six-member Trick Room team in which every other member has 0 Speed IVs and a Speed-lowering nature; opposite a Pelipper that had just established rain and a Swampert holding a Swampertite.",
+      "chosen": "The native latch reads MOVE_STONE_EDGE for Stakataka and MOVE_STONE_EDGE for Regirock. Both were KOed before executing.",
+      "better": "Trick Room from Stakataka and Curse (or Protect) from Regirock. UNCONFIRMED - and I want to be explicit that I am filing this as an open item rather than an established defect. docs/VERIFICATION.md states that a battler KOed earlier in the same turn keeps a stale native latch, and both of these battlers were KOed before acting, so the reading may be an artifact rather than a selection. It matters enough to check because the failure mode would be severe and shared: a team whose entire construction (six slow bodies, Brave and Sassy natures, 0 Speed IVs, Gyro Ball, Curse) is worthless without the room, whose setter declines to set it on the one turn it is guaranteed to move last and therefore guaranteed to have the room up for the following turn. If real, the same scorer governs every Trick Room team in the campaign. The cheapest test is a rerun where Stakataka is not removed on turn 1 - for example against a party with no 4x Fighting answer. Severity: unknown, potentially severe; shared field-move scoring."
+    }
+  ],
+  "ai_notes": [
+    "Mega Camerupt's turn-3 Protect and its turn-4 selection of Eruption are both correct, so the AI is reaching for the right actions where it gets the chance.",
+    "Copperajah persisting with Heavy Slam into a resisting Pelipper was right - it is the only damage this team could apply to a Water body, and it worked.",
+    "AI decision budget: max 60 frames (1.005 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"member": "STAKATAKA", "field": "level_offset", "before": 3, "after": 4, "medium_level_before": 61, "medium_level_after": 62},
+    {"member": "REGIROCK", "field": "level_offset", "before": 3, "after": 4, "medium_level_before": 61, "medium_level_after": 62}
+  ],
+  "level_change_rationale": "A 6-0 first-attempt sweep with zero player faints against the faction leader is the most extreme trigger of the +1 review in my block. I raised Stakataka and Regirock, the two that were OHKOed on turn 1 before the team's plan could start, and left Camerupt (the Mega ace, and the only member that made a correct decision), Copperajah (the only member that dealt damage), Rhyperior and Garganacl alone. Both changed members go to offset 4, a +1 within the +/-2 pass limit. As with Courtney, I want it on the record that this is compliance with the rule and not a repair: one extra level does not stop a critical 4x Superpower or a rain-boosted Hydro Pump from one-shotting a 225 HP body, and the fight was lost by the design on turn 1, not by two levels. The two things that would actually fix this encounter are in the cooler note.",
+  "cooler": "The concept is genuinely excellent and I would keep all six species. Fighting the same villain twice with two completely different machines - sun and speed at Mt Chimney, Trick Room and stone in the hideout - is exactly right, and turning the Mega Camerupt that was a liability in the first fight into the payoff of the second is the best single idea in this block's dossiers. It just does not survive contact, for two reasons that are both fixable without touching the theme. First, the team has a single point of failure and no redundancy: everything depends on Stakataka resolving Trick Room, Stakataka is 2x into Water and 4x into Fighting, and it moves last in normal order by design - so any player who opens with a Water or Fighting attack removes the entire plan before it starts. A second Trick Room user (Camerupt, Regirock and Copperajah are all plausible) would make the room a thing the player has to break twice rather than a coin the boss flips once. Second, the shared weakness problem this whole hideout has is at its worst here: Stakataka, Regirock, Rhyperior, Garganacl and Mega Camerupt are ALL weak to Water, two of them 4x, and only Copperajah is not - which is precisely why Copperajah is the only member that did anything. Third, smaller: Mental Herb on the setter is a slot that does nothing against any player who did not bring Taunt, and a Focus Sash or a resist berry would at least guarantee the setter survives to act. The dossier ends by promising three interactions the player has not seen from this faction before; after a full playthrough of this fight the player has still not seen any of them.",
+  "legality_notes": "No legality problem in the authored set. Stakataka is an Ultra Beast and Regirock is a legendary; both sit at a cap-60 villain-leader climax and the campaign's rule restricts them only in windows at or below 24, so both are inside the rules for this window.",
+  "reverify_note": "The Stakataka and Regirock +1 cannot be re-verified from this session; the change reaches the ROM only after the main agent re-materializes and rebuilds. This is the battle in my block I would most want rerun after the rebuild, and not for the levels: a rerun is the cheapest way to settle open item E0339-1 (whether the Trick Room setter actually declined to set the room), and that answer governs every Trick Room team in the campaign.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
