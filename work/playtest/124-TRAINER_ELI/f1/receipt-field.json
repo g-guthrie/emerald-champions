@@ -1,0 +1,112 @@
+{
+  "play_order": 124,
+  "e_group": "E0148",
+  "trainer": "TRAINER_ELI",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/124-TRAINER_ELI/receipt.json (mist-less run at cap 36; left intact)",
+  "build": "work/agent-battle-build-4",
+  "cap_note": "Cap 36 -> 42. Observed levels 41/38/41/41/40/40 = 42 + offset - 2 against the CURRENT offsets, which include the first run's two +1s (Ninetales 0 -> 1, Arcanine -1 -> 0). The dossier prose still quotes the pre-bump 'Medium cap40 levels 41/38/41/40/39/40'.",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS. Terrain read 'misty' at every state check, including while Trick Room was up - the two field effects coexisted with no interaction."
+  },
+  "party_manifest": "work/playtest/124-TRAINER_ELI/f1/party.json",
+  "party_note": "Same rain six, chronology re-checked against pool-42.json; all gate<=36 from maps preceding Lavaridge.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 261,
+      "outcome": "won",
+      "turns": 7,
+      "player_faints": 4,
+      "opponent_faints": 6,
+      "events": "work/playtest/124-TRAINER_ELI/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/124-TRAINER_ELI/f1/attempt-1-result.json",
+      "notes": "Won 6-4 with one Pokemon standing plus Togekiss. This is a very different fight from the mist-less run, which won 6-1 with a single faint - the first run's +1s to Ninetales and Arcanine are visibly doing work, and Arcanine's Choice Band Extreme Speed contributed to three of my four faints. Lost Pelipper on turn 2 to the Instruct double, Kingdra on turn 5, Swampert on turn 6 and Primarina on turn 7 to a critical Wild Charge."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the room's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 0: terrain 'misty', terrain_is_permanent true, authored_by_trainer_a ['misty_terrain'], from_map false."
+    },
+    {
+      "check": "plan: 'Ancient Power replaces Camerupt's mostly mist-blocked Yawn'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 2: Mega Camerupt selected Ancient Power, twice in one turn, and Yawn did not appear in its revealed set at any point. The swap is correct and it paid: Ancient Power is Rock, which is 2x into my Water/Flying Pelipper, whereas Yawn's sleep would have been flatly blocked by the mist on every grounded target I had on the field."
+    },
+    {
+      "check": "strategy TRICK_ROOM: Oranguru sets the room",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Turn 1: Oranguru used Trick Room and it resolved last in the turn as its -7 priority requires; the turn-1 state then read field ['STATUS_FIELD_TRICK_ROOM']. The room ran its full five turns and expired on turn 5 ('The twisted dimensions returned to normal!')."
+    },
+    {
+      "check": "tactic: INSTRUCT ORANGURU INSTRUCT CAMERUPT - 'Trick Room lets Camerupt attack before Oranguru Instruct repeats Heat Wave/Earth Power'",
+      "result": "PASS - the cleanest tactic execution in the block",
+      "mist_dependent": false,
+      "evidence": "Turn 2, inside Trick Room: 'The opposing Camerupt used Ancient Power!' (super effective on Pelipper), then 'The opposing Oranguru used Instruct!', then 'The opposing Camerupt followed the opposing Oranguru['s order]' and 'The opposing Camerupt used Ancient Power!' a second time. The two Ancient Powers in one turn killed a full-health 141 HP Pelipper. Order, target and repeat all fired exactly as authored."
+    },
+    {
+      "check": "plan: 'Misty Terrain protects the grounded room core from new status'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "No status condition was applied by either side in seven turns. My party carries no status move and the room's only status-adjacent options - Camerupt's replaced Yawn and Rapidash's Flame Body - never came up (no contact move was aimed at Rapidash). The claim is sound on the mechanics but untested in play here."
+    },
+    {
+      "check": "plan: 'Bronzong becomes a backup room setter'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "Bronzong never selected Trick Room. Correct play rather than a failure - it arrived on turn 2 with Oranguru's room already up and four turns left on it, so it attacked instead (Body Press twice, then Gyro Ball). Its Mental Herb also never came up, since nothing Taunted or Encored it."
+    },
+    {
+      "check": "plan: 'Faster reserves provide an outside-room plan'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Turn 6, one turn after the room expired: Choice Band Arcanine's Extreme Speed and Rapidash's High Horsepower combined to kill a full-HP 175 Assault Vest Swampert. The reserves did exactly the job the plan assigns them, and Arcanine at its new offset was the single most dangerous member of the room."
+    },
+    {
+      "check": "plan: 'anti-Fake-Out caster' (Inner Focus on Oranguru)",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "My party carries no Fake Out, so Inner Focus never had a flinch to ignore."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "Mega Camerupt",
+      "payoff": "REAL, and very well timed - it Mega Evolved and Protected on the same turn, blocking Kingdra's rain-boosted Hydro Pump, which is 4x into Fire/Ground even through Solid Rock and would very likely have killed it outright on 136 HP. Surviving that turn is what let the Instruct double happen on turn 2."
+    }
+  ],
+  "protect_ledger_summary": "Only one opposing Protect in seven turns, but it was the highest-value guard of the whole block: it saved the room's Mega on turn 1 from a 4x hit and directly enabled the authored Instruct tactic the following turn. Oranguru, Bronzong and Ninetales all carry Protect and never used it - the same under-guarding pattern seen in Axle's room, though here every member that declined was either setting the room or already committed to a better action.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 2 is the best-executed authored sequence in the block: Camerupt attacked first under the room, Oranguru spent its turn on Instruct rather than on damage, and the repeat killed a full-health body. The AI correctly valued a support action over its own Psychic.",
+    "Turn 1: Oranguru chose Trick Room over Protect while its partner was being doubled, and Camerupt guarded itself instead. Splitting setup and guard across the pair is the right division.",
+    "Turn 5: Bronzong chose Gyro Ball into Kingdra specifically - Gyro Ball scales with the target's raw Speed, and Swift Swim Kingdra in rain was the highest-Speed body on the field. Correct target for that move even though it read 'not very effective'.",
+    "Turn 6: Rapidash chose High Horsepower into Swampert (Ground 2x into Water/Ground) over its STAB Flare Blitz in rain. Correct."
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Brief rule: 'Won with 2+ faints or after a real fight -> keep.' Four player faints and the fight came down to my last two bodies. This is a marked change from the mist-less run's 6-1 single-faint win, and the difference is largely the first run's +1s to Ninetales and Arcanine, so those cuts are validated and nothing further is needed. Cumulative across both runs: Ninetales +1, Arcanine +1, everything else unchanged - inside the +/-2 ceiling with room to spare.",
+  "could_this_be_cooler": "Keep it. This room executes its concept better than any other in the block and the turn-2 double Ancient Power is the moment a player would remember - a Mega that is slow enough to be useless everywhere else being made to attack twice in a row by its partner is exactly the kind of interaction the design brief asks for, and the Trick Room framing makes it legible rather than arbitrary. One observation worth passing on rather than a change: Mega Camerupt at -2 (level 38) is the lowest-level member of its own room and 4x weak to the type every player brings into a Fire gym, so the whole showcase hangs on it surviving turn 1, which this time it only managed by Protecting. If the room is ever found to be losing its identity to a turn-1 Water double, the honest fix is a level or a defensive item on Camerupt rather than anything structural, because the tactic itself is working perfectly. Nothing changed in this pass.",
+  "authored_set_legality": "No legality problem. Solid Rock, Inner Focus, Heatproof, Flash Fire, Intimidate and Flame Body all resolved as authored, as did Cameruptite, Sitrus, Mental Herb, Expert Belt, Choice Band and Life Orb. Camerupt's set contained Ancient Power and no Yawn, matching the plan.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
