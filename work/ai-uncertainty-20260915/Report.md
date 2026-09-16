@@ -1757,3 +1757,64 @@ O. Two consecutive-Protect fixture boards have arrived since — Jared's Noctowl
 (E0283 r2) and Foster's Runerigus alone at full HP (E0175 r2) — which is the
 fixture K(1) asked for and I could not build; both are guards with no lethal
 threat, which is a much cleaner board than Alan's.
+
+# The L(1) re-run on the depth fix, and two vetoes from group P
+
+Commit `1b73dc3c3c`. **191 passed, 0 failed** on my allowlist. Dancer full
+bench 60 frames of 72. `pokeemerald.gba` clean.
+
+## L(1): no setup constant should move
+
+Re-ran the headline boards on the new build before touching any value, as
+instructed. Both fire:
+
+* **Tailwind on Wendy's board** — both of hers outsped, both surviving the
+  turn, the wind flipping the order for the rest of the battle. Taken, and the
+  side status is up at the end of the turn.
+* **Dragon Dance on Flint's board** — a setter faster than both, taking almost
+  nothing from either. Taken.
+* **Breloom's Spore** also fires with no powder immunity opposite. The receipt
+  said it never happened in six turns; what happens here is that it goes to the
+  bulkier body rather than the faster one. That is a defensible target and not
+  the reported defect, so the fixture asserts the move rather than the slot.
+
+Aurora Veil and Rage Powder were already withdrawn to "prefers attacks until
+the board clearly favours them" by the rerun. So on current evidence the
+setup-starvation family is **not** a pricing problem on boards that clearly
+favour the support turn, and I have not moved `PAIR_SETUP_HORIZON` or any
+neighbouring value. What is left of the family — Focus Energy, Shift Gear,
+Shell Smash behind a White Herb, nine printed setup moves in block 193–204 —
+should be re-run the same way before anything is retuned, because two of the
+three I checked turned out to be already correct.
+
+## Fixed: an attack fired into our own absorber
+
+A single-target Water or Electric attack aimed at a foe, while our own partner
+holds Storm Drain or Lightning Rod, is not an attack: the partner takes it and
+banks a Special Attack stage for our side. It is refused outright now.
+Huntail gave up a likely knockout to this. Spread moves are exempt — they still
+reach the foes — and the rule respects `B_REDIRECT_ABILITY_ALLIES` and
+`IsMoveRedirectionPrevented`.
+
+The negative control matters here: with the same board and an ordinary partner,
+the same Water move is still the right attack, and the fixture holds both.
+
+## Fixed: Prankster Encore into a Dark body
+
+Prankster's own priority is what makes a Dark target immune, so the lock cannot
+happen. The trial already refused to model it — the plan score was still paying
+the 20/35 for it, which is why Liepard kept choosing a move that does nothing.
+The plan score now agrees with the trial.
+
+This is the second time a group B plan value has paid for an interaction the
+trial correctly refuses to model, after the Taunt rule. Worth a sweep: every
+rule in `PairPlanScore` that rewards a status interaction should be checked
+against the immunity gates the trial already applies.
+
+## Queue after this
+
+J2 (multi-hit Life Orb), J3, J4 (ten remaining reds), J5, K, the rest of L, M,
+N, O, P, Q. Three consecutive-Protect boards are now on file and all three are
+cleaner than Alan's: Jared's Noctowl (E0283 r2), Foster's Runerigus alone at
+full HP (E0175 r2) and Drifblim (E0318). That is the K(1) fixture I could not
+build, three times over.
