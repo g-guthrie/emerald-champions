@@ -20547,7 +20547,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("-------"),
         .description = COMPOUND_STRING(""),
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_PLACEHOLDER,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -21812,7 +21812,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("-------"),
         .description = COMPOUND_STRING(""),
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_PLACEHOLDER,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
