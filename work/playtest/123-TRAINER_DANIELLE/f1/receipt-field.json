@@ -1,0 +1,128 @@
+{
+  "play_order": 123,
+  "e_group": "E0147",
+  "trainer": "TRAINER_DANIELLE",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/123-TRAINER_DANIELLE/receipt.json (mist-less run at cap 36; left intact)",
+  "build": "work/agent-battle-build-4",
+  "cap_note": "Cap 36 -> 42. Observed levels 38/40/46/40/40/38 match the dossier's 'Medium cap40 levels 38/40/46/40/40/38' exactly.",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS. Terrain read 'misty' at every state check through the end; nothing in this room carries a terrain setter or a terrain remover."
+  },
+  "party_manifest": "work/playtest/123-TRAINER_DANIELLE/f1/party.json",
+  "party_note": "Same rain six as Keegan's room (Pelipper / Kingdra / Swampert / Primarina / Garganacl / Togekiss), chronology re-checked against pool-42.json; all gate<=36 from maps preceding Lavaridge. Garganacl was never sent out.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 251,
+      "outcome": "won",
+      "turns": 7,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "events": "work/playtest/123-TRAINER_DANIELLE/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/123-TRAINER_DANIELLE/f1/attempt-1-result.json",
+      "notes": "Won 6-3. Lost Pelipper on turn 5 to a Mega Blaziken Close Combat after two Fiery Dances had already worn it down, Kingdra on turn 6 to Kubfu's Brick Break, and Swampert on turn 7 to a 4x Grass Knot from Delphox stacked on Close Combat. Two Hydro Pump misses (turns 5 and 6) cost me the clean line. For comparison, the mist-less run at cap 36 won on the last Pokemon with five faints; the mist is a modest help to a Water party here because the room applies almost no status anyway."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the room's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 0: terrain 'misty', terrain_is_permanent true, authored_by_trainer_a ['misty_terrain'], from_map false, alongside my own Drizzle rain."
+    },
+    {
+      "check": "plan: 'Misty Terrain does not prevent Fiery Dance's Special Attack gains'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 1, mist live: 'The opposing Volcarona used Fiery Dance!' followed by 'The opposing Volcarona's Sp.Atk rose!', and the turn-1 state confirms spa +1 on Volcarona. A stat boost is not a status condition and the mist did not touch it, exactly as the plan states."
+    },
+    {
+      "check": "plan: 'lead it beside Baile Oricorio ... copied Fiery Dance can earn its own Special Attack boost'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 1: immediately after Volcarona's Fiery Dance the log reads 'The opposing Oricorio used Fiery Dance!' - Dancer copied the move and the copy resolved normally under the mist. The copy did not roll its own Sp.Atk boost, which is the move's own 50% chance and not a mist effect; the plan already says 'the boost is not guaranteed'."
+    },
+    {
+      "check": "plan: 'Volcarona127 Speed precedes Oricorio99'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Turn 1: Volcarona's Fiery Dance resolved before Oricorio's own action, and the Dancer copy followed it, so the intended order held."
+    },
+    {
+      "check": "plan: 'Volcarona is grounded and protected by the mist; Flying Oricorio can still receive status'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "Neither side applied a status condition at any point in seven turns. Volcarona's Flame Body never had a contact move aimed at it (my damage into it was special), and the two Fiery Dances that hit my airborne Pelipper did not roll their 10% burn. So the grounded/airborne asymmetry the plan describes was never put to the test in this room. No player member carried any status all battle."
+    },
+    {
+      "check": "plan: 'Remove Oricorio Quiver Dance for Roost'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Oricorio's revealed moveset in state was Revelation Dance / Air Slash / Roost / Protect with no Quiver Dance; it used Air Slash twice and Protect once."
+    },
+    {
+      "check": "plan: 'No bench support acts alongside both dancers'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Volcarona and Oricorio were the authored lead pair and no third member was on the field while both were alive."
+    },
+    {
+      "check": "plan: 'Mega Blaziken gains Thunder Punch over Swords Dance'",
+      "result": "PARTIAL",
+      "mist_dependent": false,
+      "evidence": "Mega Blaziken never selected Thunder Punch - but that is correct play, not a failure: the only body it faced after Mega Evolving that Thunder Punch could have hit was Swampert, which is Ground and Electric-immune. It used Close Combat twice and Protect once, and it never used Swords Dance, which is the half of the swap the plan cares about. Thunder Punch as an option remains unobserved."
+    },
+    {
+      "check": "plan: 'Kubfu gains Helping Hand'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "Kubfu used Brick Break three times and Protect once across four turns and never selected Helping Hand."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Oricorio",
+      "payoff": "REAL - blocked Kingdra's rain-boosted Hydro Pump, which is 2x into Fire/Flying and would have taken most of its 147 HP."
+    },
+    {
+      "turn": 4,
+      "battler": "Kubfu",
+      "payoff": "REAL - at 20 of 125 HP it blocked Pelipper's Weather Ball, which was lethal. Bought it two more Brick Breaks, one of which killed Kingdra."
+    },
+    {
+      "turn": 6,
+      "battler": "Mega Blaziken",
+      "payoff": "REAL, and well timed - blocked Kingdra's 2x Hydro Pump on the turn it Mega Evolved into, and banked a free Speed Boost tick behind the guard."
+    }
+  ],
+  "protect_ledger_summary": "Three opposing Protects, all three with real payoff, none empty and none consecutive. Mega Blaziken's in particular used the guard turn to gain a Speed Boost stage, which is the right way for a Speed Boost body to spend a Protect.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 7, Delphox: Grass Knot into Swampert. Grass is 4x into Water/Ground and Swampert is heavy enough to put Grass Knot at its top base power, so this was the single largest hit available to it on that board - better than its STAB Mystical Fire into a rain turn. Excellent coverage selection.",
+    "Mega Blaziken correctly never aimed Thunder Punch at the Electric-immune Swampert, choosing Close Combat both times instead.",
+    "Turn 1, Oricorio: attacked with Air Slash in the same turn the Dancer copy fired, so the lead pair generated three actions from two slots. That is the room's concept working.",
+    "Rotom-Heat had selected Thunderbolt on turn 4 (4x into my Pelipper) but was KOed by Hydro Pump before it resolved - correct choice, no chance to land it."
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Brief rule: 'Won with 2+ faints or after a real fight -> keep.' Three player faints, and the room removed my Drizzle setter, my fastest attacker and my bulkiest body. The mist-less run also kept levels here (it won on its last Pokemon with five faints). Danielle's offsets are therefore untouched across both runs.",
+  "could_this_be_cooler": "Keep the concept - a Dancer body standing next to a Fiery Dance body so that one move generates two, and this run showed it working on turn 1 exactly as written. Two honest observations rather than a redesign. First, Kubfu at +6 (level 46, eight levels above its own room's Mega) is doing most of the actual work in this fight and it is the least interesting member: an Eviolite Fighting type spamming Brick Break is what killed my Kingdra and what forced the guard that saved it. If the room is meant to be remembered for its dancers, the level budget is in the wrong slot. Second, the dance pair is fragile in the same way Axle's room is: Volcarona holds a Focus Sash and dies the moment it is hit twice, so the engine lasted exactly two turns. A bulkier Dancer partner, or a second body that also rewards a copied dance, would let the idea last long enough to be the thing the player remembers. Nothing changed in this pass.",
+  "authored_set_legality": "No legality problem. Dancer, Flame Body, Speed Boost, Inner Focus and Levitate all resolved as authored, as did Focus Sash, Sitrus, Eviolite, Choice Specs, Life Orb and Blazikenite.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
