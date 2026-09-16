@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0481 TRAINER_KATELYNN, cap 96",
+ "availability_audit": "Cap window 96 (driver level_cap; after Wally in Victory Road), League not entered. Incineroar 36, Landorus 42 (Route 111 ruins sign, reachable legend), Urshifu 42 (Kubfu Route 112 sign), Iron Hands 30 (New Mauville), Flutter Mane 68 (Mt Pyre Summit), Chi-Yu 48 (Ashen Woods sign, reachable legend), Raging Bolt 60 (Route 119). No Victory Road-only or League species.",
+ "plan": "Fake Out Infernape/Audino; Water/Ground on the furnace; Flutter Mane ignores Fake Out and Bewear; Raging Bolt resists every Fire move.",
+ "party": [
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_KNOCK_OFF",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Fake Out pivot, Fire-resistant",
+   "availability": "pool gate 36 evolution:level from Torracat"
+  },
+  {
+   "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+   "moves": [
+    "MOVE_SURGING_STRIKES",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_AQUA_JET",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_UNSEEN_FIST",
+   "item": "ITEM_CHOICE_BAND",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Water/Fighting crits: Slaking, Zygarde, Fire bodies",
+   "availability": "pool gate 42 evolution from Kubfu (Route 112 sign)"
+  },
+  {
+   "species": "SPECIES_LANDORUS",
+   "moves": [
+    "MOVE_EARTH_POWER",
+    "MOVE_PSYCHIC",
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_SHEER_FORCE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Sheer Force Ground/Psychic: hits Weezing under its own gas, Fire bodies",
+   "availability": "pool gate 42 legendary_sign:Route111_RuinsExterior (reachable legend)"
+  },
+  {
+   "species": "SPECIES_FLUTTER_MANE",
+   "moves": [
+    "MOVE_SHADOW_BALL",
+    "MOVE_MOONBLAST",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_HEAVY_DUTY_BOOTS",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "immune to Double-Edge/Close Combat/Fake Out; Fairy on Zygarde/Terrakion",
+   "availability": "pool gate 68 wild:MtPyre_Summit/land_mons"
+  },
+  {
+   "species": "SPECIES_IRON_HANDS",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_ICE_PUNCH",
+    "MOVE_WILD_CHARGE"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_QUARK_DRIVE",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "second Fake Out, Drain Punch on Slaking, Ice Punch on Zygarde",
+   "availability": "pool gate 30 wild:NewMauville_Inside/land_mons"
+  },
+  {
+   "species": "SPECIES_RAGING_BOLT",
+   "moves": [
+    "MOVE_THUNDERCLAP",
+    "MOVE_THUNDERBOLT",
+    "MOVE_DRACO_METEOR",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Fire-resistant priority Electric",
+   "availability": "pool gate 60 wild:Route119/land_mons"
+  }
+ ]
+}
