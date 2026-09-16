@@ -1,0 +1,33 @@
+{
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783",
+  "elf_sha256": "5f4e01bfe2259972778c09af3069d6feb6890b68915bc4206245a00649ea04f1",
+  "seed": 2151,
+  "trainer_a": "TRAINER_TARA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 48,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/151-TRAINER_TARA/party-a1.json",
+  "party_sha256": "b648d615017e704b1638fe565cae2c6d6c6e15aa793ff1935261ae4cd87c2d78",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET"
+  ],
+  "prepared": {
+    "encounter": "E0192 TRAINER_TARA (Route108, Feather Badge, cap 48, Medium)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1130
+  },
+  "replacement_commits": {
+    "turn": 2,
+    "slots": {}
+  }
+}

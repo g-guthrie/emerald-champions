@@ -1,0 +1,111 @@
+{
+  "play_order": 151,
+  "e_group": "E0192",
+  "trainer": "TRAINER_TARA",
+  "class": "regular",
+  "location": "Route108",
+  "cap": 48,
+  "difficulty": "medium",
+  "run_kind": "rerun2",
+  "prior_receipts": ["work/playtest/151-TRAINER_TARA/receipt.json"],
+  "build": "work/agent-battle-build-5",
+  "why_rerun": "The first pass raised Seadra from -1 to 0 and Feraligatr from 0 to +1. Those offsets are now built into work/agent-battle-build-5 and this run re-benchmarks the fight on them.",
+  "cap_confirmation": "Driver reports level_cap 48. Resolved levels read off the live board as each member appeared: Seadra 46 and Feraligatr 47 (turn 0), Milotic 47 (turn 1), Arctibax 50 (turn 2). Current authored offsets 0/+1/+4/+1 give cap 48 + offset - 2 = 46/47/50/47 on Medium. All four match; Seadra at 46 and Feraligatr at 47 confirm the changed offsets are in this build.",
+  "level_offsets_at_run": {"SEADRA": 0, "FERALIGATR": 1, "ARCTIBAX": 4, "MILOTIC": 1},
+  "resolved_opponent_levels": {"SEADRA": 46, "FERALIGATR": 47, "ARCTIBAX": 50, "MILOTIC": 47},
+  "party_manifest": "work/playtest/151-TRAINER_TARA/party-a1.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 48, same map (Route 108), same encounter. The first receipt recorded no legality problem and the party won its one attempt, so it was not reported weak or illegal and no rebuild is warranted. The first receipt's player-side note - that Milotic's Competitive forbids using any stat-lowering move on it - still applies and was honoured: no stat-dropping move was aimed at Milotic in this run either.",
+  "pre_declared_strategy_checks": [
+    "Seadra uses Focus Energy only when Feraligatr's pressure buys a survivable turn",
+    "Seadra plays off the actual critical stage rather than presuming every attack crits",
+    "Milotic supports with Icy Wind rather than requiring a setup action",
+    "Arctibax's Thermal Exchange is exercised",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/151-TRAINER_TARA/r1",
+      "seed": 2151,
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "log": "work/playtest/151-TRAINER_TARA/r1/events.jsonl",
+      "damage_note": "Damage read from the driver's new identity-keyed `damage` map, not slot arithmetic.",
+      "narrative": "T1 Seadra Protected and caught Magnezone's Thunderbolt, a 2x hit that was a clean one-shot on its 121 HP; Rillaboom's priority Grassy Glide (2x, under its own Grassy Surge) KOed Feraligatr before its correctly-aimed Ice Punch resolved. Milotic entered. T2 Grassy Glide KOed Seadra and Magnezone's Thunderbolt KOed Milotic; both opponents had selected Ice Beam at Rillaboom, which took it from 192 to 101. Arctibax entered. T3 Arctibax moved first and its Icicle Crash (2x on Grass) KOed Rillaboom before the Knock Off that was meant to strip its Eviolite; Magnezone's Flash Cannon (4x on Dragon/Ice) finished it through the Eviolite anyway."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Focus Energy only when Feraligatr's pressure buys a survivable turn",
+      "result": "PASS - condition correctly declined, for the second run running",
+      "evidence": "Seadra never selected Focus Energy. Feraligatr died on turn 1, so no turn was ever survivable and the AI correctly refused the setup, spending its turns on a Protect that saved its life and then an Ice Beam. The authored condition is behaving exactly as written. The consequence, also for the second run running, is that the Focus Energy / Scope Lens / Sniper three-card combination has never assembled in play - see the cooler note."
+    },
+    {
+      "check": "Seadra plays off the actual critical stage",
+      "result": "PASS",
+      "evidence": "T2 Seadra selected Ice Beam targeting Rillaboom - 2x into a Grass-type, and its best damage on that board - rather than a Hydro Pump gamble or a crit-fishing setup. No behaviour anywhere in the run presumed a critical hit it had not earned."
+    },
+    {
+      "check": "Milotic supports with Icy Wind rather than needing a setup action",
+      "result": "PASS with a note",
+      "evidence": "T2 Milotic selected Ice Beam at Rillaboom rather than Icy Wind. On that board that is the better choice - Rillaboom was the member that had killed Feraligatr and was about to kill Seadra, and raw 2x damage beat a speed drop. The plan's point is that Milotic contributes without spending a turn on setup, and it did."
+    },
+    {
+      "check": "Arctibax's Thermal Exchange is exercised",
+      "result": "NOT REACHED",
+      "evidence": "Thermal Exchange grants burn immunity and an Attack boost when hit by a Fire move. My party carried no Fire move and nothing burned it, so the ability had no opportunity. Not an AI matter - there was no decision to make - but recorded because it means an Eviolite pre-evolution sitting four levels above the cap is contributing nothing the ability line promises."
+    },
+    {
+      "check": "Every opposing Protect has a payoff",
+      "result": "PASS",
+      "evidence": "One Protect this battle, ledgered below. Real payoff, not repeated."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "SEADRA (b1)",
+      "payoff": "REAL - blocked Magnezone's Thunderbolt, a 2x hit on a 121 HP body that would have killed it outright on turn 1. Seadra survived at full and got a turn it would otherwise never have had.",
+      "verdict": "good",
+      "note": "Not repeated. Seadra attacked on its second turn rather than guarding again, which is the correct read after a successful Protect. Same clean cadence as the first run."
+    }
+  ],
+  "ai_defects": [],
+  "ai_defect_note": "No defects observed, and target selection was consistently correct: Feraligatr's Ice Punch, Seadra's Ice Beam, Milotic's Ice Beam and Arctibax's Icicle Crash were all aimed at Rillaboom, the 2x-weak member that was doing all the damage. Tara's AI reads the board correctly; it simply keeps losing the speed race to priority.",
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in three turns with 1 player faint -> +1 on the opponent's weakest one or two members. This team has no ace, Mega or legend (mega_slots: NONE), so nobody is excluded.",
+    "budget_note": "Baselines at the start of this pass were Seadra -1, Feraligatr 0, Arctibax +4, Milotic +1. Used so far: Seadra +1, Feraligatr +1, Arctibax none, Milotic none. After the changes below Seadra and Feraligatr each stand at +2 used and are closed out for this pass. Nobody exceeds the +-2 limit.",
+    "changes": [
+      {
+        "trainer": "TRAINER_TARA",
+        "member": "SEADRA",
+        "field": "level offset",
+        "before": 0,
+        "after": 1,
+        "resolved_level_before": 46,
+        "resolved_level_after": 47,
+        "reasoning": "The lowest member on the team at 46, four below its own Arctibax. It is also the member the whole concept rests on, and at 46 it dies to a single neutral hit from anything - which is precisely why it has to spend its first turn Protecting and why the Focus Energy line has never assembled. This exhausts its +-2 budget for the pass. Note that Seadra played well: this is the rule following level, not a criticism of its decisions."
+      },
+      {
+        "trainer": "TRAINER_TARA",
+        "member": "FERALIGATR",
+        "field": "level offset",
+        "before": 1,
+        "after": 2,
+        "resolved_level_before": 47,
+        "resolved_level_after": 48,
+        "reasoning": "Joint second-lowest at 47 with Milotic, and chosen over Milotic on evidence: Feraligatr has now died on turn 1 in both runs without a single move resolving, while Milotic landed an Ice Beam that did real damage. Feraligatr is also the member Seadra's authored condition depends on - the plan says Focus Energy is only correct when Feraligatr's pressure buys a survivable turn, and Feraligatr has never survived to apply any. This exhausts its budget for the pass."
+      }
+    ],
+    "not_changed": [
+      {"member": "MILOTIC", "reason": "Joint second-lowest but it contributed, and it holds its full +-2 for a later pass if needed."},
+      {"member": "ARCTIBAX", "reason": "Already +4 and the highest member at 50, two levels above the cap. It is an Eviolite pre-evolution that is deliberately over-levelled by the authored design; raising it further would distort the team's level shape and it is not where this fight was decided."}
+    ]
+  },
+  "cooler_note": "The build quality here is still genuinely high and I would keep every member - Sniper plus Scope Lens plus Focus Energy on a route regular is one of the sharpest small ideas in the range, and Thermal Exchange Arctibax is exactly the right Eviolite body to stand beside a Water team. But two runs have now produced the same honest verdict, and the dossier already names it: 'what would be cooler is Focus Energy having a partner that benefits from the turn it costs'. Neither the Focus Energy combination nor Thermal Exchange has ever been exercised in play. Seadra correctly declines the setup every time because the condition is never met, which means the team's centrepiece is written as a branch that the board never reaches. That is a cleaner failure than a bad AI choice - the logic is right - but it means what the player actually fights is four Water-types trading single attacks. The specific improvement worth flagging for a later pass is a redirection or Fake Out partner for the Focus Energy turn, the same structural gap E0175 Foster has. Nothing changed in this pass.",
+  "authored_set_legality": "No legality problem found.",
+  "verdict": "still too easy",
+  "note_on_teams_file": "Per this block's override the teams file was edited in place by targeted line replacement and is deliberately NOT staged or committed by this receipt."
+}
