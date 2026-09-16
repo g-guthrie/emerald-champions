@@ -1,0 +1,53 @@
+{
+  "play_order": 67,
+  "e_group": "E0076",
+  "trainer": "TRAINER_BRANDI",
+  "class": "casual",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"BRONZOR": 33, "SOLOSIS": 32, "CUFANT": 32, "MUSHARNA": 27},
+  "cap_window_confirmation": "Dossier seeds 35/34/34/29 resolved to 33/32/32/27 = cap 30 + offset - 2 (Medium). Cap 30 confirmed.",
+  "party_manifest": "work/playtest/67-TRAINER_BRANDI/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, led by Mega Gardevoir + Weavile. All source maps precede Route 117. New Mauville excluded (post-Wattson Basement Key). I want to note explicitly that I had NO Taunt available in this party, so the Trick Room team was never denied its setup by the cheapest counter - it lost the setter to damage instead.",
+  "pre_declared_strategy_checks": [
+    "Bronzor selects and lands Trick Room on turn 1",
+    "Under the room, the slow attackers (Solosis, Cufant) move first and attack rather than idle",
+    "Musharna does not spend every room turn layering support - it attacks when direct pressure is better",
+    "Gyro Ball is used where the speed differential actually pays",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/67-TRAINER_BRANDI/a1", "seed": 67, "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Bronzor did select Trick Room, exactly as authored - but Trick Room has -7 priority and resolves last, and Weavile's Knock Off stripped its Eviolite on the way in, which left a 2x Mystical Fire enough to kill it from 111 before the room ever went up. Solosis Protected on the same turn against attacks that were both aimed elsewhere. T2 Knock Off was 2x into Solosis and removed it outright, Mystical Fire took Cufant to 46 - and then Cufant's Heavy Metal Heavy Slam, 2x into a Fairy-type, one-shot my 90 HP Mega Gardevoir from full. T3 Cufant Protected through a lethal Earth Power (a genuinely good guard) while Knock Off removed a 125 HP Musharna in one hit at 2x. T4 Cufant finally died."}
+  ],
+  "strategy_checks": [
+    {"check": "Bronzor lands Trick Room on turn 1", "result": "SELECTED, NEVER RESOLVED", "evidence": "Bronzor's turn-1 native choice was MOVE_TRICK_ROOM. The decision is correct and I am marking the AI half of this check passed. It never resolved because Trick Room sits at -7 priority, so the setter has to survive the entire turn to land it, and Bronzor did not. I do not count this against the AI - there was no better first action for it."},
+    {"check": "Slow attackers move first and attack under the room", "result": "NOT EXERCISED", "evidence": "The room never existed, so the payoff half of the plan was never on the board. Both Solosis and Cufant did choose attacks (Psychic, Heavy Slam) rather than idling, which is what they should do without a room."},
+    {"check": "Musharna does not spend every turn layering support", "result": "PASS", "evidence": "Musharna's single action was Psychic, an attack, not Helping Hand / Moonlight / Safeguard. The dossier's explicit warning is 'Do not spend every room turn layering support' and the one decision it got was an attack. Small sample but it points the right way."},
+    {"check": "Gyro Ball used where the speed differential pays", "result": "NOT EXERCISED", "evidence": "Bronzor died before taking a second action. Gyro Ball was never selected."},
+    {"check": "Every opposing Protect has a payoff", "result": "SPLIT - one excellent, one empty", "evidence": "See the Protect ledger. Cufant's was one of the best guards in my block; Solosis's was the first genuinely empty one I have recorded."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "SOLOSIS", "payoff": "EMPTY. Both of my turn-1 attacks were aimed at Bronzor, so Solosis blocked nothing at all. Its partner was not protected and died. No effect was expiring. In fairness to the scoring, the opponent does not read my pending commands by design, so this has to be judged on expectation rather than outcome - and on expectation there is a real case for it: Solosis is the Life Orb payload the room exists to enable, it is frail, and guarding it on the setup turn while the bulky setter eats the hit is a coherent idea. I still count it as empty because the outcome was nothing, and because the alternative - attacking with a Life Orb Psychic while the room came up behind it - was free value that it declined. Recorded as empty rather than harmful."},
+    {"turn": 3, "battler": "CUFANT", "payoff": "EXCELLENT. Cufant was at 46/118 and my Nidoking's Earth Power is 2x into Steel and would have killed it outright. Protect blocked exactly that and bought it a further turn of life. It could not save its partner - my Weavile's Knock Off was aimed at Musharna and killed it - but denying a lethal super-effective hit on the turn it is thrown is the correct use of the move and there was no repetition."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "No defects. Every one of Brandi's decisions was reasonable, including the empty Solosis Protect, which I have argued above is defensible in expectation even though it produced nothing.",
+    "The fight is decided by a structural property rather than by play: Trick Room is a -7 priority move, so a room team's entire plan depends on the setter surviving a full turn of focused damage, and Bronzor is a 111 HP Pokemon whose bulk comes almost entirely from an Eviolite. One Knock Off removes the Eviolite and the setter becomes killable in the same turn. That is a legitimate counterplay - it is even the crack line, 'pressure the setter' - but it means the whole team's identity can be erased before it does anything once, which is what happened here.",
+    "Heavy Metal Cufant is the real threat on this team and deserves credit: its Heavy Slam one-shot a full-health 90 HP Mega Gardevoir. Heavy Metal doubling its weight for the Heavy Slam ratio is doing exactly what the dossier says it should.",
+    "Weavile's Knock Off was 2x into three of the four members (all three Psychic-types) AND stripped the Eviolite/Life Orb/Leftovers that this team's bulk depends on. A single Dark-type attacker is close to a hard counter to this composition.",
+    "Decision timing comfortable (max 61 frames)."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt with 1 player faint. Cufant one-shotting my Mega is a real threat moment, but the fight was four turns and the team's whole plan never happened, so this sits in the +1 band. +1 on the weakest member, never the ace first: Bronzor (+5) is the setter and the ace of the concept and is untouched; Solosis and Cufant are both at +4 and Cufant in particular earned its level. Musharna at -1 is the clear floor, four to six levels below its teammates, and it died to a single Knock Off from a 125 HP body without doing anything.",
+    "changes": [
+      {"member": "MUSHARNA", "field": "level offset", "before": -1, "after": 0, "level_before": 27, "level_after": 28}
+    ],
+    "rerun_note": "Not rerun at the new level. Opponent levels are compiled into src/data/trainers.party and the headless ROM in work/agent-battle-build predates this edit; verifying would require re-materializing and running make, which this brief forbids. I will say plainly that this +1 does not address what actually went wrong in this fight - see the cooler note."
+  },
+  "could_this_be_cooler": "The composition is good and the dossier's own reasoning for it is sound - replacing another Kirlia/Wobbuffet psychic quartet with a small mixed-attacking room team was the right call, and Solosis and Cufant have no other authored owners. Heavy Metal Cufant in particular is a genuinely nasty, memorable piece: a Steel-type whose ability makes its STAB heavier, one-shotting a Mega. Keep all four. The problem is that a Trick Room team whose setter is a 111 HP Bronzor holding an Eviolite has no second chance: strip the item, kill the setter, and three of the four members are left playing a game they were not built for, because Solosis, Cufant and Musharna are all deliberately zero-Speed. The fix I would argue for is redundancy rather than levels - give a second member access to Trick Room so that losing Bronzor on turn 1 costs a turn instead of the entire identity. Musharna is the obvious candidate: it is the slowest-natured support body, it is currently the level floor doing very little, and swapping Safeguard (which was never selected and does nothing against a party with no status moves) for Trick Room would mean the room still happens after the setter dies. That single move change would have turned this four-turn win into a real fight. Second, smaller thought: with three Psychic-types out of four, one Dark-type attacker with Knock Off beat most of this team by itself - Cufant being Steel is the only thing breaking that pattern, and a second non-Psychic member would make the team much less answerable to one move.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
