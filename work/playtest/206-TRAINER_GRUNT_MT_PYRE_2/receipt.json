@@ -8,7 +8,9 @@
   "cap": 60,
   "cap_confirmation": "driver state reported level_cap 60; all four members resolved at L56 = 60 + (-2) - 2 on Medium.",
   "difficulty": "medium",
-  "party_manifests": ["work/playtest/_party/party_mtpyre_60.json"],
+  "party_manifests": [
+    "work/playtest/_party/party_mtpyre_60.json"
+  ],
   "chronology_note": "Same cap-60 party as play_order 205; every source map (Litten line 36, Foongus 42, Kubfu 42, Kirlia 30 + Gardevoirite stone-window 14, New Mauville sign 30, Route 111 ruins sign 42) precedes the Mt Pyre summit. Nothing from Shoal Cave, Route 124-127, Mossdeep or the Safari Zone.",
   "pre_play_strategy_checks": [
     "Weavile's Fake Out buys the turn and Polteageist spends it on Shell Smash",
@@ -33,16 +35,48 @@
     }
   ],
   "strategy_checks": [
-    {"check": "Fake Out buys the turn and Polteageist Shell Smashes into it", "result": "FAIL", "evidence": "turn 1 Weavile's Fake Out landed and flinched Incineroar - the bought turn existed exactly as authored - and Polteageist chose Shadow Ball at Amoonguss instead of Shell Smash. It chose Shadow Ball again on turn 2 and died without ever setting up. This is the room's entire stated plan and it did not fire; see AI defects."},
-    {"check": "White Herb restores the Shell Smash drops", "result": "FAIL (item absent)", "evidence": "the driver reported Polteageist's held item as ITEM_NONE on the turn-0 board while Weavile's ITEM_LIFE_ORB and Mismagius's ITEM_FOCUS_SASH both read correctly. src/data/trainers.party line 1303 authors 'SPECIES_POLTEAGEIST_ANTIQUE @ ITEM_WHITE_HERB'. Either the item is not reaching the battle or the driver cannot read it on this mon. See AI/engine defects; I re-test the same item on E0325's Magcargo later in this block."},
-    {"check": "Cursed Body disables the player's strongest attack", "result": "PASS", "evidence": "turn 1, Amoonguss's Sludge Bomb was disabled the moment it connected. Amoonguss was reduced to Spore/Rage Powder/Protect for the rest of its life, which is exactly the authored consequence."},
-    {"check": "Levitate on Mismagius", "result": "NOT OBSERVED", "evidence": "confirmed as ABILITY_LEVITATE on entry and Trace copied it onto Gardevoir, but Landorus never came in so no Ground attack tested it."},
-    {"check": "Weavile's Knock Off strips the player's item", "result": "PASS", "evidence": "turn 2 Knock Off removed Amoonguss's Rocky Helmet (and took Rocky Helmet recoil doing it). Correct target choice - the Helmet was the item on the field worth removing."},
-    {"check": "Carracosta Sturdy plus Shell Smash behind it", "result": "FAIL", "evidence": "Carracosta entered on turn 3 and chose Waterfall then Aqua Jet. It never used Shell Smash, and Sturdy never mattered because Wicked Blow's guaranteed critical hit did 99 then 102 to a 201 HP body - two ordinary hits, not a one-shot. Weakness Policy also never triggered because I never aimed a super-effective move at it, which is the authored counterplay working."}
+    {
+      "check": "Fake Out buys the turn and Polteageist Shell Smashes into it",
+      "result": "FAIL",
+      "evidence": "turn 1 Weavile's Fake Out landed and flinched Incineroar - the bought turn existed exactly as authored - and Polteageist chose Shadow Ball at Amoonguss instead of Shell Smash. It chose Shadow Ball again on turn 2 and died without ever setting up. This is the room's entire stated plan and it did not fire; see AI defects."
+    },
+    {
+      "check": "White Herb restores the Shell Smash drops",
+      "result": "FAIL (item absent)",
+      "evidence": "the driver reported Polteageist's held item as ITEM_NONE on the turn-0 board while Weavile's ITEM_LIFE_ORB and Mismagius's ITEM_FOCUS_SASH both read correctly. src/data/trainers.party line 1303 authors 'SPECIES_POLTEAGEIST_ANTIQUE @ ITEM_WHITE_HERB'. Either the item is not reaching the battle or the driver cannot read it on this mon. See AI/engine defects; I re-test the same item on E0325's Magcargo later in this block."
+    },
+    {
+      "check": "Cursed Body disables the player's strongest attack",
+      "result": "PASS",
+      "evidence": "turn 1, Amoonguss's Sludge Bomb was disabled the moment it connected. Amoonguss was reduced to Spore/Rage Powder/Protect for the rest of its life, which is exactly the authored consequence."
+    },
+    {
+      "check": "Levitate on Mismagius",
+      "result": "NOT OBSERVED",
+      "evidence": "confirmed as ABILITY_LEVITATE on entry and Trace copied it onto Gardevoir, but Landorus never came in so no Ground attack tested it."
+    },
+    {
+      "check": "Weavile's Knock Off strips the player's item",
+      "result": "PASS",
+      "evidence": "turn 2 Knock Off removed Amoonguss's Rocky Helmet (and took Rocky Helmet recoil doing it). Correct target choice - the Helmet was the item on the field worth removing."
+    },
+    {
+      "check": "Carracosta Sturdy plus Shell Smash behind it",
+      "result": "FAIL",
+      "evidence": "Carracosta entered on turn 3 and chose Waterfall then Aqua Jet. It never used Shell Smash, and Sturdy never mattered because Wicked Blow's guaranteed critical hit did 99 then 102 to a 201 HP body - two ordinary hits, not a one-shot. Weakness Policy also never triggered because I never aimed a super-effective move at it, which is the authored counterplay working."
+    }
   ],
   "protect_ledger": [
-    {"turn": 3, "battler": "Weavile", "payoff": "real - blocked Incineroar's Flare Blitz, which is 2x into its Ice half and would have killed it at 103/162. It survived to act once more."},
-    {"turn": 4, "battler": "Weavile (selected Icicle Crash, not Protect)", "payoff": "n/a - listed only to record that it did not guard twice in a row"}
+    {
+      "turn": 3,
+      "battler": "Weavile",
+      "payoff": "real - blocked Incineroar's Flare Blitz, which is 2x into its Ice half and would have killed it at 103/162. It survived to act once more."
+    },
+    {
+      "turn": 4,
+      "battler": "Weavile (selected Icicle Crash, not Protect)",
+      "payoff": "n/a - listed only to record that it did not guard twice in a row"
+    }
   ],
   "protect_summary": "1 opponent Protect, with a clean payoff, 0 empty, no consecutive guarding. The guarding judgement in this room is fine; the setup judgement is not.",
   "ai_defects": [
@@ -70,5 +104,6 @@
   "rebuild_note": "No level change was made, so there is nothing to re-verify. The two defects above are unverifiable from this session until the main agent rebuilds.",
   "theme_check": "Yes, on paper and partly on the board. A haunted teapot, a witch's hat and a fossil turtle looting a graveyard is a clear, distinct look, and Cursed Body disabling my Sludge Bomb is a memorable, location-appropriate moment. But the room's signature - a bought turn becoming a Shell Smash, twice over - did not appear once, from either setter. What the player actually experiences is four ordinary attackers.",
   "cooler_note": "The concept deserves to be kept and made to work rather than redesigned. The room is currently two Shell Smash lanes that the AI declines to use; fixing that is worth more than any species change. If a change were wanted later, Polteageist would be more frightening with Stored Power over Giga Drain, so a landed Smash visibly escalates instead of just hitting harder once.",
-  "authored_set_legality": "One problem: Polteageist's ITEM_WHITE_HERB does not appear on the battle board (see defects). Levels, moves, abilities and the Medium formula are otherwise correct."
+  "authored_set_legality": "One problem: Polteageist's ITEM_WHITE_HERB does not appear on the battle board (see defects). Levels, moves, abilities and the Medium formula are otherwise correct.",
+  "later_ab_result": "Resolved later in this block. E0325 TRAINER_GRUNT_MAGMA_HIDEOUT_4's Magcargo holds the same ITEM_WHITE_HERB, it read correctly on that turn-0 board, and it visibly fired ('The opposing Magcargo returned its stats to normal using its White Herb') against a Simple-doubled Intimidate. So White Herb itself is fine and reaches the battle normally; E0317's Polteageist-Antique specifically is not receiving its authored item. Also note that E0325 declined its Shell Smash on the bought turn WITH the White Herb present, which rules out this receipt's suggestion that the missing item might be depressing the Shell Smash score - the two defects are independent."
 }
