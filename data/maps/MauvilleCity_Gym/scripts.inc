@@ -119,9 +119,6 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	call MauvilleCity_Gym_EventScript_GiveManectite
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox MauvilleCity_Gym_Text_RegisteredWattson, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
@@ -386,10 +383,6 @@ MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 MauvilleCity_Gym_Text_ExplainManectite:
 	.string "Manectite lets Manectric Mega Evolve.\n"
 	.string "Let it hold the stone in battle.$"
-
-MauvilleCity_Gym_Text_RegisteredWattson:
-	.string "Registered GYM LEADER WATTSON\n"
-	.string "in the POKéNAV.$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle:
 	.string "Head north on ROUTE 111. My crew\n"

@@ -70,9 +70,6 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox LavaridgeTown_Gym_1F_Text_RegisteredFlannery, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_FLANNERY_MATCH_CALL
@@ -318,10 +315,6 @@ LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
 	.string "train a party up to Lv. {STR_VAR_1}.\p"
 	.string "It also permits STRENGTH outside\n"
 	.string "battle once you have its license.$"
-LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
-	.string "Registered GYM LEADER FLANNERY\n"
-	.string "in the POKéNAV.$"
-
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
 	.string "Your rival is waiting outside.\n"
 	.string "Collect the GO-GOGGLES before\l"

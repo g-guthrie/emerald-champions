@@ -42,9 +42,6 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox FortreeCity_Gym_Text_RegisteredWinona, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_WINONA_MATCH_CALL
@@ -242,10 +239,6 @@ FortreeCity_Gym_Text_PyreHandoff:
 	.string "Then visit LILYCOVE HARBOR.\n"
 	.string "The captain can take you to the\l"
 	.string "islands connected to these events.$"
-
-FortreeCity_Gym_Text_RegisteredWinona:
-	.string "Registered GYM LEADER WINONA\n"
-	.string "in the POKéNAV.$"
 
 FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "WINONA: A strong wind can carry\n"

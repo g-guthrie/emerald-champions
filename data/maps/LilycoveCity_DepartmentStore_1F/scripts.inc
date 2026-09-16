@@ -152,7 +152,7 @@ LilycoveCity_DepartmentStore_1F_Text_MomBuyingMeFurniture:
 
 LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill:
 	.string "I'm buying something for my AZUMARILL\n"
-	.string "as a reward for winning a CONTEST.$"
+	.string "as a reward for winning a GYM BADGE.$"
 
 LilycoveCity_DepartmentStore_1F_Text_Azumarill:
 	.string "AZUMARILL: Maririroo!$"

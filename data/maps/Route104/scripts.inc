@@ -96,9 +96,6 @@ Route104_EventScript_MayEncounter::
 	msgbox Route104_Text_MayWeShouldRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox Route104_Text_RegisteredMay, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
@@ -183,9 +180,6 @@ Route104_EventScript_BrendanEncounter::
 	msgbox Route104_Text_BrendanWeShouldRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox Route104_Text_RegisteredBrendan, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
@@ -370,9 +364,6 @@ Route104_EventScript_SailToDewfordDadCalls::
 	pokenavcall Route104_Text_DadPokenavCall
 	waitmessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox Route104_Text_RegisteredDadInPokenav, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_NORMAN_MATCH_CALL
@@ -1027,14 +1018,8 @@ Route104_Text_TrainerTipsDoubleBattles:
 	.string "POKéMON room to do its job.$"
 Route104_Text_MayWeShouldRegister:
 	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "DEVON upgraded your POKéNAV with\n"
-	.string "the MATCH CALL system, huh?\p"
-	.string "We should register each other so we\n"
-	.string "can get in contact anytime.$"
-
-Route104_Text_RegisteredMay:
-	.string "{PLAYER} registered MAY\n"
-	.string "in the POKéNAV.$"
+	.string "DEVON gave you a POKéNAV, huh?\n"
+	.string "The map is worth the walk.$"
 
 Route104_Text_MayHowsYourPokedex:
 	.string "MAY: Oh, by the way, {PLAYER}{KUN},\n"
@@ -1072,14 +1057,8 @@ Route104_Text_MayPostBattle:
 
 Route104_Text_BrendanWeShouldRegister:
 	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
-	.string "Cool, you had DEVON install the MATCH\n"
-	.string "CALL system on your POKéNAV!\p"
-	.string "Let's register each other in our\n"
-	.string "POKéNAVS so we can keep in touch.$"
-
-Route104_Text_RegisteredBrendan:
-	.string "{PLAYER} registered BRENDAN\n"
-	.string "in the POKéNAV.$"
+	.string "So DEVON handed you a POKéNAV.\n"
+	.string "That map beats guessing.$"
 
 Route104_Text_BrendanHowsYourPokedex:
 	.string "BRENDAN: {PLAYER}, how's your POKéDEX?\n"

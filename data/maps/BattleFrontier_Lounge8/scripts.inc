@@ -40,8 +40,8 @@ BattleFrontier_Lounge8_Text_ToldMeIHaveTalentForBattling:
 	.string "At the BATTLE TOWER, an older girl\n"
 	.string "told me that I have a lot of talent\l"
 	.string "for battling!\p"
-	.string "I like POKéMON CONTESTS more!\p"
-	.string "But I'm no good at CONTESTS!\p"
+	.string "I like watching DOUBLES more!\p"
+	.string "But I'm no good at DOUBLES!\p"
 	.string "I guess having talent and liking\n"
 	.string "something aren't the same.$"
 

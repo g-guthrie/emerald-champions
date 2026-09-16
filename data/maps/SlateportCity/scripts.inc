@@ -122,9 +122,6 @@ SlateportCity_EventScript_ScottScene::
 	msgbox SlateportCity_Text_LetsRegisterEachOther, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox SlateportCity_Text_RegisteredScott, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_SCOTT_MATCH_CALL
@@ -1153,12 +1150,8 @@ SlateportCity_Text_MaybeThisTrainer:
 
 SlateportCity_Text_LetsRegisterEachOther:
 	.string "SCOTT: I'd like to hear how your\n"
-	.string "journey goes. Let's register\l"
-	.string "each other in our POKéNAVS.$"
-
-SlateportCity_Text_RegisteredScott:
-	.string "Registered SCOTT\n"
-	.string "in the POKéNAV.$"
+	.string "journey goes. I turn up wherever\l"
+	.string "the good battles are.$"
 
 SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou:
 	.string "SCOTT: There are promising\n"

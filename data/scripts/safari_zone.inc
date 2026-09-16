@@ -57,33 +57,7 @@ SafariZone_EventScript_OutOfBalls::
 
 EventScript_PokeBlockFeeder::
 	lockall
-	special GetPokeblockFeederInFront
-	goto_if_ne VAR_RESULT, 0xFFFF, SafariZone_EventScript_PokeblockPresent
-	msgbox SafariZone_Text_PlacePokeblockOnFeeder, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, SafariZone_EventScript_ChoosePokeblock
-	releaseall
-	end
-
-SafariZone_EventScript_ChoosePokeblock::
-	fadescreen FADE_TO_BLACK
-	special OpenPokeblockCaseOnFeeder
-	goto_if_ne VAR_RESULT, 0xFFFF, SafariZone_EventScript_PokeblockPlaced
-#ifdef BUGFIX
-	releaseall  @ Only gets called from EventScript_PokeBlockFeeder which uses lockall.
-#endif
-	end
-
-SafariZone_EventScript_PokeblockPlaced::
-	message SafariZone_Text_PokeblockWasPlaced
-	waitmessage
-	waitbuttonpress
-	releaseall
-	end
-
-SafariZone_EventScript_PokeblockPresent::
-	message SafariZone_Text_PokeblockStillHere
-	waitmessage
-	waitbuttonpress
+	msgbox SafariZone_Text_EmptyFeeder, MSGBOX_SIGN
 	releaseall
 	end
 
@@ -98,18 +72,6 @@ SafariZone_Text_TimesUp:
 SafariZone_Text_OutOfBalls:
 	.string "You've run out of SAFARI BALLS.\n"
 	.string "Your SAFARI Game is over.$"
-
-SafariZone_Text_PlacePokeblockOnFeeder:
-	.string "Would you like to place a {POKEBLOCK}\n"
-	.string "on the {POKEBLOCK} FEEDER?$"
-
-SafariZone_Text_PokeblockStillHere:
-	.string "The {STR_VAR_1} you left\n"
-	.string "before is still here.$"
-
-SafariZone_Text_PokeblockWasPlaced:
-	.string "The {STR_VAR_1} was placed\n"
-	.string "on the {POKEBLOCK} FEEDER.$"
 
 Route121_SafariZoneEntrance_Text_WelcomeToSafariZone:
 	.string "Welcome to the SAFARI ZONE!\p"
@@ -171,15 +133,6 @@ Route121_SafariZoneEntrance_Text_PCIsFull:
 	.string "Excuse me!\n"
 	.string "Your PC BOX is full.$"
 
-Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase:
-	.string "Excuse me!\n"
-	.string "You seem to be without a {POKEBLOCK} CASE.\p"
-	.string "Your SAFARI Game will be much more\n"
-	.string "fruitful if you use {POKEBLOCK}S.\p"
-	.string "Please come back with a {POKEBLOCK} CASE.\p"
-	.string "You may obtain a {POKEBLOCK} CASE from\n"
-	.string "the LILYCOVE CONTEST HALL.$"
-
 SafariZone_South_Text_StillHaveTimeExit:
 	.string "You still have time left. Would you like\n"
 	.string "to exit the SAFARI ZONE now?$"
@@ -202,8 +155,8 @@ SafariZone_South_Text_GoodLuck:
 
 SafariZone_South_Text_Boy:
 	.string "Did you know?\p"
-	.string "If you put a {POKEBLOCK} in that square box,\n"
-	.string "POKéMON gather around.$"
+	.string "That square box used to hold food.\n"
+	.string "The keepers stopped filling it.$"
 
 SafariZone_South_Text_Man:
 	.string "I want to keep going deeper, but I\n"
@@ -212,10 +165,10 @@ SafariZone_South_Text_Man:
 	.string "live in the outlying areas.$"
 
 SafariZone_Southwest_Text_Woman:
-	.string "Sometimes, when I toss a {POKEBLOCK} at \n"
-	.string "POKéMON, it gets ignored.\p"
-	.string "Do POKéMON have likes and dislikes\n"
-	.string "about what they eat?$"
+	.string "Sometimes a POKéMON here looks\n"
+	.string "right at me and bolts anyway.\p"
+	.string "Get close before you throw.\n"
+	.string "That's all I have learned.$"
 
 SafariZone_Northwest_Text_Man:
 	.string "Gasp… Gasp…\n"
@@ -233,44 +186,40 @@ SafariZone_North_Text_Man:
 	.string "here and trade them with my friends!$"
 
 SafariZone_South_Text_Youngster:
-	.string "I put a {POKEBLOCK} on the {POKEBLOCK} FEEDER.\n"
-	.string "But it seems to have disappeared.\p"
+	.string "I left my lunch on the old FEEDER.\n"
+	.string "It seems to have disappeared.\p"
 	.string "I guess POKéMON must have eaten it\n"
 	.string "without me noticing.$"
 
 Route121_SafariZoneEntrance_Text_TrainerTip:
 	.string "SAFARI ZONE TRAINER TIP!\p"
-	.string "Throw {POKEBLOCK}S at wild POKéMON to make\n"
-	.string "them less likely to flee.$"
+	.string "Step closer before you throw.\n"
+	.string "A near throw catches far better.$"
 
 SafariZone_Southwest_Text_RestHouseSign:
 	.string "“Relieve your tired feet.”\n"
 	.string "REST HOUSE$"
 
 SafariZone_RestHouse_Text_Youngster:
-	.string "I don't have any {POKEBLOCK}S, but I caught\n"
-	.string "a good number of POKéMON.\p"
+	.string "I brought nothing but patience,\n"
+	.string "and I caught a good number.\p"
 	.string "You can improve your chances of making\n"
 	.string "a catch by getting closer to them\l"
 	.string "before throwing a SAFARI BALL.$"
 
 SafariZone_RestHouse_Text_PsychicM:
-	.string "If you use {POKEBLOCK}S, wild POKéMON won't\n"
-	.string "be so quick to run away.\p"
-	.string "It's not much use to give {POKEBLOCK}S to\n"
-	.string "POKéMON that don't flee easily.\p"
+	.string "The jumpy ones bolt on the first\n"
+	.string "throw. Close the distance first.\p"
 	.string "Looking for Alolan forms? RAICHU lives\n"
 	.string "in the south. EXEGGUTOR lives in the\l"
 	.string "north and northwest; MAROWAK, north.$"
 
 SafariZone_RestHouse_Text_FatMan:
-	.string "A FEEDER draws nearby POKéMON\n"
-	.string "that enjoy its {POKEBLOCK}'s flavor.\p"
-	.string "Try throwing the same flavor in battle.\n"
-	.string "A tasty treat helps keep them around!\p"
-	.string "Their tastes stay the same when you\n"
-	.string "change battle sets. The FEEDER's treat\l"
-	.string "lasts for 100 steps.$"
+	.string "The FEEDERS out there are empty\n"
+	.string "now. The keepers let the ZONE\l"
+	.string "feed itself.\p"
+	.string "Walk softly, get close, and throw.\n"
+	.string "That is the whole SAFARI Game.$"
 
 SafariZone_South_Text_AreaOffLimits1:
 	.string "This area is still under construction.\n"
@@ -314,3 +263,7 @@ SafariZone_Northeast_Text_Girl:
 	.string "I can't seem to catch anything!\p"
 	.string "I'll end up wasting the admission\n"
 	.string "price if I don't catch something!$"
+
+SafariZone_Text_EmptyFeeder:
+	.string "An empty feeding box.\n"
+	.string "Nothing has been left in it.$"

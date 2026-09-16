@@ -419,14 +419,14 @@ PetalburgWoods_Text_PeopleRespectYou:
 	.string "people respect you for it.$"
 
 PetalburgWoods_Text_IWantRematch1:
-	.string "I want to tell you when my BUG\n"
-	.string "POKéMON grow up!\p"
-	.string "I'm registering you in my POKéNAV!$"
+	.string "I want to show you my BUG POKéMON\n"
+	.string "once they have grown up!\p"
+	.string "Walk this path again some day!$"
 
 PetalburgWoods_Text_IWantRematch2:
-	.string "I want to tell you when my BUG\n"
-	.string "POKéMON grow up!\p"
-	.string "I'm registering you in my POKéNAV!$"
+	.string "I want to show you my BUG POKéMON\n"
+	.string "once they have grown up!\p"
+	.string "Walk this path again some day!$"
 
 PetalburgWoods_Text_MyPokemonHaveGrown:
 	.string "My BUG POKéMON have grown.\n"

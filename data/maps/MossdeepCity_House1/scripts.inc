@@ -6,14 +6,7 @@ MossdeepCity_House1_EventScript_BlackBelt::
 	faceplayer
 	bufferleadmonspeciesname STR_VAR_1
 	msgbox MossdeepCity_House1_Text_HmmYourPokemon, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GetPokeblockNameByMonNature
-	goto_if_eq VAR_RESULT, 0, MossdeepCity_House1_EventScript_NeutralNature
 	msgbox MossdeepCity_House1_Text_ItLikesXPokeblocks, MSGBOX_DEFAULT
-	release
-	end
-
-MossdeepCity_House1_EventScript_NeutralNature::
-	msgbox MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks, MSGBOX_DEFAULT
 	release
 	end
 
@@ -26,18 +19,14 @@ MossdeepCity_House1_Text_HmmYourPokemon:
 	.string "Your {STR_VAR_1}…$"
 
 MossdeepCity_House1_Text_ItLikesXPokeblocks:
-	.string "It likes {STR_VAR_1}S,\n"
-	.string "doesn't it?\p"
-	.string "No, I'm positive of it! It definitely\n"
-	.string "likes {STR_VAR_1}S!$"
-
-MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks:
-	.string "It doesn't appear to like or dislike\n"
-	.string "any {POKEBLOCK}S.$"
+	.string "A nature like that wants a BERRY\n"
+	.string "with a bite to it.\p"
+	.string "No, I'm positive of it! Hand it a\n"
+	.string "bitter one and watch.$"
 
 MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes:
-	.string "My husband can tell what kind of\n"
-	.string "{POKEBLOCK}S a POKéMON likes at a glance.\p"
+	.string "My husband can tell which BERRY a\n"
+	.string "POKéMON likes at a glance.\p"
 	.string "CYNTHIA is our guest while she studies\n"
 	.string "MOSSDEEP's myths and meteor records.$"
 

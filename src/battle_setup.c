@@ -2113,27 +2113,9 @@ void ClearCurrentTrainerWantRematchVsSeeker(void)
 #endif //FREE_MATCH_CALL
 }
 
-static u32 GetTrainerMatchCallFlag(u32 trainerId)
-{
-    s32 i;
-
-    for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
-    {
-        if (gRematchTable[i].trainerIds[0] == trainerId)
-            return TRAINER_REGISTERED_FLAGS_START + i;
-    }
-
-    return 0xFFFF;
-}
-
+// Match Call is removed; beating a trainer registers nobody.
 static void RegisterTrainerInMatchCall(void)
 {
-    if (FlagGet(FLAG_HAS_MATCH_CALL))
-    {
-        u32 matchCallFlagId = GetTrainerMatchCallFlag(TRAINER_BATTLE_PARAM.opponentA);
-        if (matchCallFlagId != 0xFFFF)
-            FlagSet(matchCallFlagId);
-    }
 }
 
 static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBattleTrainerId)

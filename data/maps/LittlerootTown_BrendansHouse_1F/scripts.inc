@@ -356,13 +356,9 @@ PlayersHouse_1F_Text_DontPushYourselfTooHard:
 PlayersHouse_1F_Text_IsThatAPokenav:
 	.string "MOM: What is that, honey? A POKéNAV?\n"
 	.string "Someone from DEVON gave it to you?\p"
-	.string "Well, honey, how about registering\n"
-	.string "your mom?\p"
+	.string "Let me see that map. Look how far\n"
+	.string "you have walked already!\p"
 	.string "… … …$"
-
-PlayersHouse_1F_Text_RegisteredMom:
-	.string "Registered MOM\n"
-	.string "in the POKéNAV.$"
 
 PlayersHouse_1F_Text_Vigoroth1:
 	.string "Fugiiiiih!$"

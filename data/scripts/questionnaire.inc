@@ -29,20 +29,9 @@ Questionnaire_EventScript_PlayerInputMysteryEventPhrase::
 	releaseall
 	end
 
+@ MYSTERY GIFT can deliver nothing here, so the title stays New Game / Continue / Option.
 Questionnaire_EventScript_PlayerInputMysteryGiftPhrase::
-	goto_if_unset FLAG_SYS_POKEDEX_GET, Questionnaire_EventScript_ThankYou
-	goto_if_set FLAG_SYS_MYSTERY_GIFT_ENABLE, Questionnaire_EventScript_ThankYou
-	applymovement VAR_0x8008, Common_Movement_FaceDown
-	waitmovement 0
-	playse SE_PIN
-	applymovement VAR_0x8008, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x8008, Common_Movement_Delay48
-	waitmovement 0
-	msgbox Questionnaire_Text_YouKnowThoseWordsGift, MSGBOX_DEFAULT
-	setflag FLAG_SYS_MYSTERY_GIFT_ENABLE
-	msgbox Questionnaire_Text_YouCanAccessMysteryGift, MSGBOX_DEFAULT
-	releaseall
+	goto Questionnaire_EventScript_ThankYou
 	end
 
 Questionnaire_EventScript_Release::

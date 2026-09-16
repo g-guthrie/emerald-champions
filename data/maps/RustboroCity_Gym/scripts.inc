@@ -120,9 +120,6 @@ RustboroCity_Gym_EventScript_RegisterRoxanne::
 	pokenavcall RustboroCity_Gym_Text_RoxanneRegisterCall
 	waitmessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Gym_Text_RegisteredRoxanne, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_ROXANNE_MATCH_CALL
@@ -446,10 +443,6 @@ RustboroCity_Gym_Text_RoxanneRegisterCall:
 	.string "as your journey continues!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
-
-RustboroCity_Gym_Text_RegisteredRoxanne:
-	.string "Registered GYM LEADER ROXANNE\n"
-	.string "in the POKéNAV.$"
 
 RustboroCity_Gym_Text_RoxannePreRematch:
 	.string "ROXANNE: I'm so glad to see you again.\n"

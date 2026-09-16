@@ -91,9 +91,6 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox MossdeepCity_Gym_Text_RegisteredTateAndLiza, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL
@@ -560,10 +557,6 @@ MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
 	.string "TATE: You have earned the MIND BADGE!\p"
 	.string "LIZA: It permits DIVE outside battle\n"
 	.string "once STEVEN gives you its license.$"
-MossdeepCity_Gym_Text_RegisteredTateAndLiza:
-	.string "Registered GYM LEADERS TATE & LIZA\n"
-	.string "in the POKéNAV.$"
-
 MossdeepCity_Gym_Text_TateAndLizaPostBattle:
 	.string "TATE: A wish sleeps deep inside\n"
 	.string "METEOR FALLS.\p"

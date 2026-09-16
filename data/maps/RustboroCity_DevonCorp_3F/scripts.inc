@@ -80,7 +80,8 @@ RustboroCity_DevonCorp_3F_EventScript_ReceivedLetter::
 	setvar VAR_BRINEY_LOCATION, 1
 	clearflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setvar VAR_DEVON_CORP_3F_STATE, 1
-	setvar VAR_RUSTBORO_CITY_STATE, 6
+	setvar VAR_RUSTBORO_CITY_STATE, 7
+	setvar VAR_ROUTE104_STATE, 1
 	releaseall
 	end
 
@@ -263,8 +264,9 @@ RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:
 	.string "{PLAYER} received a POKéNAV.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
-	.string "The POKéNAV maps HOENN and keeps\n"
-	.string "you in touch with key Trainers.\p"
+	.string "The POKéNAV holds a map of all\n"
+	.string "HOENN. Open it whenever you are\l"
+	.string "unsure which way to walk.\p"
 	.string "For legendary leads, visit the\n"
 	.string "guide near the POKéMON CENTER PC.\p"
 	.string "Each town's guide knows nearby\n"

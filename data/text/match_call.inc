@@ -2834,10 +2834,6 @@ MatchCall_Text_BirchRegisterCall:
 	.string "out in the field.\p"
 	.string "… … … … … …$"
 
-MatchCall_Text_RegisteredBirch:
-	.string "Registered PROF. BIRCH\n"
-	.string "in the POKéNAV.$"
-
 MatchCall_Text_UnusedProfBirch:
 	.string "PROF. BIRCH: When one has both\n"
 	.string "the POKéDEX and POKéNAV, studying\l"

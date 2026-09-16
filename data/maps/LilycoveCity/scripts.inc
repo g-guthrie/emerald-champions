@@ -481,18 +481,17 @@ LilycoveCity_Text_GetLostMessingUpTraining:
 	.string "so can you, like, get lost?$"
 
 LilycoveCity_Text_ContestHallInTown:
-	.string "There's a POKéMON CONTEST HALL\n"
-	.string "right in this here town. \p"
-	.string "That means well-raised POKéMON will\n"
-	.string "come from all over the country.\p"
-	.string "My heart swells with excitement!$"
+	.string "The hobby wing by the shore takes\n"
+	.string "BERRIES from all over the country.\p"
+	.string "Growers come here to argue about\n"
+	.string "soil. My heart swells with it!$"
 
 LilycoveCity_Text_StrangeCaveInCove:
 	.string "Have you seen that strange cave in\n"
 	.string "the cove at the edge of town?$"
 
 LilycoveCity_Text_GoingToMoveDeleterForHMs:
-	.string "I'm choosing moves for a CONTEST.\p"
+	.string "I'm choosing moves for the CIRCUIT.\p"
 	.string "The move tutor beside the CENTER's\n"
 	.string "PC helps me rearrange my team's moves.\p"
 	.string "Field skills don't need a move slot\n"
@@ -574,8 +573,8 @@ LilycoveCity_Text_CitySign:
 	.string "sea begins.”$"
 
 LilycoveCity_Text_ContestHallSign:
-	.string "POKéMON CONTEST HALL\n"
-	.string "“The gathering place for TRAINERS!”$"
+	.string "LILYCOVE HOBBY WING\n"
+	.string "“The gathering place for growers!”$"
 
 LilycoveCity_Text_MotelSign:
 	.string "COVE LILY MOTEL\p"
@@ -622,19 +621,19 @@ LilycoveCity_Text_MoveDeletersHouseSign:
 
 LilycoveCity_Text_DoYouKnowAboutBerryBlender:
 	.string "Do you know about the machine\n"
-	.string "BERRY BLENDER?$"
+	.string "What's that old machine?$"
 
 LilycoveCity_Text_FasterSpinBetterPokeblocks:
-	.string "People have to work together to get it\n"
-	.string "to spin faster.\p"
-	.string "The faster you can make it spin, the\n"
-	.string "better {POKEBLOCK}S you can get, I've heard.$"
+	.string "Four people used to crank it\n"
+	.string "together, I've heard.\p"
+	.string "Nobody in there remembers what\n"
+	.string "it was for.$"
 
 LilycoveCity_Text_ExplainBerryBlender:
-	.string "It's used for making a kind of candy\n"
-	.string "called a {POKEBLOCK}.\p"
-	.string "If you give a good {POKEBLOCK} to a POKéMON,\n"
-	.string "its condition will improve by a lot.$"
+	.string "It ground BERRIES into candy, back\n"
+	.string "when people had a use for that.\p"
+	.string "These days a picked BERRY goes\n"
+	.string "straight into the harvest pouch.$"
 
 LilycoveCity_Text_HeardTowerCalledSkyPillar:
 	.string "I heard there's a tower somewhere out\n"

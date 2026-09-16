@@ -1480,10 +1480,6 @@ gText_MomExplainHPGetPotions::
 	.string "Make me proud, honey!\p"
 	.string "Take care!$"
 
-gText_RegisteredTrainerinPokeNav::
-	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"
-	.string "in the POKéNAV.$"
-
 gText_ComeBackWithSecretPower::
 	.string "We sell SECRET BASE decorations.\p"
 	.string "Meet our friend by the big tree on\n"
