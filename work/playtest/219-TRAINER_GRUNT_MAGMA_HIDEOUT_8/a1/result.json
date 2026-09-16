@@ -1,0 +1,26 @@
+{
+  "trainer_a": "TRAINER_GRUNT_MAGMA_HIDEOUT_8",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 1,
+  "difficulty": "medium",
+  "level_cap": 60,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 4,
+  "decisions": 5,
+  "player_faints": 0,
+  "opponent_faints": 4,
+  "ai_decision_frames_max": 61,
+  "ai_decision_seconds_max": 1.021,
+  "ai_decision_frames": [
+    61,
+    42,
+    46,
+    23,
+    23
+  ],
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783",
+  "elf_sha256": "5f4e01bfe2259972778c09af3069d6feb6890b68915bc4206245a00649ea04f1",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}

@@ -1,0 +1,98 @@
+{
+  "play_order": 219,
+  "e_group": "E0330",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_8",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_2R",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L59 = 60 + 1 - 2 on Medium, matching the authored offset 1. This is the room the dossier calls 'the point where grunt levels pass the player's cap' - it does not: L59 is still one below my L60 party.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217-218.",
+  "pre_play_strategy_checks": [
+    "Flygon sets Tailwind on turn 1 or 2",
+    "Flygon's Yache Berry blunts the Ice answer",
+    "Mudsdale's Stamina gains +1 Defense every time it is hit",
+    "Perrserker's Steely Spirit boosts its own Iron Head by 50 percent",
+    "Turtonator's Shell Armor denies the critical hit that would break the wall plan",
+    "Turtonator's Body Press converts its 135 base Defense into damage",
+    "Protect ledger on Perrserker and Turtonator"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 5,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "I went for the speed-control setter first. Turn 1 Mega Swampert's Ice Punch hit Flygon 4x (Yache halved it) and Pelipper's Hydro Pump finished it - but not before it got Tailwind up, so the denial half-failed. The grunt pre-emptively withdrew Mudsdale for Turtonator on the same turn, reading the rain. Turn 2 was the fight's real moment: Perrserker's Steely Spirit Life Orb Iron Head took a resisted hit and still did 186 to a 198 HP Pelipper and flinched it, and Mega Swampert's Superpower crit removed Perrserker. Turn 3 I pivoted the 12 HP Pelipper out for Urshifu and Liquidation took Mudsdale from 242 to 8 in one action while Stamina raised its Defense. Turn 4 Aqua Jet finished Mudsdale through a protection and Turtonator's Protect blocked the Mega's Liquidation. Turn 5 Surging Strikes and Liquidation removed Turtonator. Zero faints, but Pelipper spent the second half of the fight one hit from death."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Flygon sets Tailwind on turn 1 or 2",
+      "result": "PASS",
+      "evidence": "Turn 1, before it died: 'The opposing Flygon used Tailwind! A tailwind started blowing on the opposing side!' The sides field then read SIDE_STATUS_TAILWIND for the opponent through turn 4, where it 'petered out'. The setter died on the turn it set, and the window still covered the whole rest of the fight - that is the authored trade working."
+    },
+    {
+      "check": "Flygon's Yache Berry blunts the Ice answer",
+      "result": "PASS",
+      "evidence": "Turn 1: 'It's extremely effective!' (4x, Ice into Ground/Dragon) immediately followed by 'The opposing Flygon's Yache Berry lessened the damage'. Flygon survived a 4x Mega Swampert Ice Punch because of it and got its Tailwind off. The item is doing precisely the job it was given."
+    },
+    {
+      "check": "Mudsdale's Stamina gains +1 Defense every time it is hit",
+      "result": "PASS",
+      "evidence": "Turn 3: 'The opposing Mudsdale's Defense rose!' immediately after Liquidation connected. The authored trap is real - but note the counter-lesson my party demonstrated: one very large hit (234 of 242) makes the boost irrelevant, which is exactly the dossier's own stated crack."
+    },
+    {
+      "check": "Perrserker's Steely Spirit boosts its own Iron Head",
+      "result": "PASS - and it is the strongest single thing in the room",
+      "evidence": "Turn 2 Iron Head into Pelipper printed 'It's not very effective...' (Steel into Water/Flying, 0.5x) and still took Pelipper from 198 to 12. A 0.5x resisted hit doing 94 percent of a bulky Water's max HP is Steely Spirit (1.5x) stacking with Life Orb (1.3x) on an Adamant 252 Attack body. It also flinched. If the player leads anything that does not resist Steel, this is a one-shot."
+    },
+    {
+      "check": "Turtonator's Shell Armor denies the critical hit",
+      "result": "PASS, with clean evidence",
+      "evidence": "Urshifu's Surging Strikes is a guaranteed-critical move: against Arcanine in E0329 it printed 'A critical hit!'. Against Turtonator on the final turn it printed only 'The Pokemon was hit 3 times!' with no critical-hit line. Shell Armor suppressed three guaranteed crits. That is the ability doing its authored job against exactly the kind of move it was put there for."
+    },
+    {
+      "check": "Turtonator's Body Press converts its Defense into damage",
+      "result": "NOT OBSERVED",
+      "evidence": "Turtonator used Dragon Pulse (turn 2), Flamethrower (turn 3) and Protect (turn 4) and never reached Body Press. Reasonable: under my Drizzle its Fire lane was halved and both my actives were Water, so special coverage and a guard were defensible picks. The wall-converts-to-offence idea did not get a showing."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS",
+      "evidence": "See protect_ledger. The one Protect had a real payoff."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 4,
+      "battler": "Turtonator",
+      "payoff": "REAL. Blocked Mega Swampert's Liquidation outright ('The opposing Turtonator protected itself!' on the Liquidation line). Turtonator was the last healthy body on a board where its partner Mudsdale was on 8 HP and about to die, so buying a full turn of Leftovers and denying the Mega's action is the correct use of the turn. Not empty, not repeated."
+    }
+  ],
+  "protect_summary": "1 opponent Protect across 4 turns and 5 decisions, 1 with a real payoff, 0 empty. Perrserker also carries Protect and correctly never used it - it spent both its turns attacking, which was right for a Life Orb body that dies to Water.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 1's unprompted withdrawal of Mudsdale for Turtonator was a good read: Mudsdale is 2x into Water and my Drizzle was already on the field, so pulling the wall before it ate a rain-boosted Liquidation is exactly right. It brought Mudsdale back on turn 2 once the board had changed.",
+    "Message-order note for whoever reads the log: on turn 4 the engine printed 'The opposing Mudsdale couldn't fully protect itself' on Urshifu's Aqua Jet. That is Unseen Fist's Protect-bypass line, and it means the driver's per-turn native latch for Mudsdale (HIGH_HORSEPOWER) is not what Mudsdale actually did that turn. Per the driver docs a native latch on a turn where the battler was KOed is not a reliable record of its choice; I did not score this as an AI decision either way.",
+    "Per-turn damage figures in this receipt are taken from the new identity-keyed damage dict (player:N / opponent_a:N). Figures on turns 1-2, which predate that change in my run, came from slot-keyed values and are used only where the surrounding HP readings corroborate them.",
+    "AI decision budget: max 61 frames (1.021 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"member": "MUDSDALE", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60},
+    {"member": "TURTONATOR", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60}
+  ],
+  "level_change_rationale": "Won first attempt with zero player faints, which triggers the +1 review. I raised the two members that demonstrably underperformed - Mudsdale, which died to two Water attacks despite its Stamina gimmick, and Turtonator, which spent three turns on chip and a guard - and deliberately left Perrserker and Flygon alone. Perrserker is already the most dangerous thing in the room by a wide margin (a resisted Iron Head for 94 percent of a bulky Water's HP) and Flygon successfully executed the room's stated plan before dying; raising either would push the room past its class rather than fix what was weak. Both changed members go to offset 2, which is the cap for this pass.",
+  "cooler": "The dossier calls this 'a cavalry room' and the concept holds up better in play than most of this hideout - the Tailwind genuinely covered the whole fight even though the setter died on the turn it set, and Stamina did make me choose between one big hit and feeding the wall. The honest gap is that the room's own write-up names Mudsdale and Flygon as the idea, while the member that actually threatened to end the fight was Perrserker, whose Steely Spirit is described as 'a damage bonus on Steel attacks only' - an undersell of a 1.5x that turns a resisted hit into a near-OHKO. Concrete non-destructive suggestion for a later pass: the Steely Spirit line is currently a solo act, and the ability's real, unusual text is that it boosts ALLY Steel moves too. Pairing Perrserker with a second Steel attacker would make the room's signature visible on the board instead of hidden inside one damage roll, and it would give the wall pair something to protect. No change made in this pass.",
+  "legality_notes": "No legality problem in the authored set. Mudsdale, Perrserker and Turtonator are all first campaign appearances as the dossier claims.",
+  "reverify_note": "The Mudsdale and Turtonator +1 cannot be re-verified from this session; the change only reaches the ROM after the main agent re-materializes and rebuilds. This block's runs all used work/agent-battle-build-5 as it stood before the edit.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
