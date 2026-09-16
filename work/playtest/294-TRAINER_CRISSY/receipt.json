@@ -1,0 +1,33 @@
+{
+  "play_order": 294, "e_group": "E0460", "trainer": "TRAINER_CRISSY", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/294-TRAINER_CRISSY/party_squall_84.json",
+  "availability_note": "Same Sootopolis party as 293 (Raging Bolt 60, Kartana 20, Incineroar 36, Rillaboom 36, Zapdos 30 reachable legend, Flutter Mane 68); Sootopolis after the cavern and Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/294-TRAINER_CRISSY/a1", "seed": 1, "outcome": "won", "turns": 5, "decisions": 6, "player_faints": 0, "opponent_faints": 6, "note": "T1 Leaf Blade OHKOed AV Lanturn and Thunderbolt OHKOed Swanna after it set Rain Dance. T2 Wishiwashi Protect, Alomomola Wish. T3 Leaf Blade broke Wishiwashi's Sash, Thunderbolt OHKOed Alomomola, Helping Hand Ice Beam took Kartana to its Sash and froze it. T4 Wishiwashi reverted to Solo form; Golisopod's First Impression did 216 to Raging Bolt, then Thunderbolt OHKOed Golisopod (Emergency Exit never reached half). T5 Fake Out flinched Primarina and Thunderbolt KOed it; T6 the 1-HP Solo Wishiwashi fell."}
+  ],
+  "strategy_checks": [
+    {"check": "Swanna sets Rain Dance on turn 1-2", "result": "PASS", "evidence": "T1 Rain Dance (Damp Rock, rain persisted the whole fight) - but Swanna died to a 4x Thunderbolt the same turn, so Weather Ball/Hydration were never seen."},
+    {"check": "Lanturn attacks or Volt Switches into the right body", "result": "PASS (choice) / NOT REACHED", "evidence": "T1 chose Scald into Kartana (correct: Steel/Grass fears Fire-side burn) but Leaf Blade OHKOed it first (382 HP, Assault Vest does nothing against a physical Grass hit)."},
+    {"check": "Alomomola Wish / Helping Hand support", "result": "PASS (HH) / QUESTIONABLE (Wish)", "evidence": "T3 Helping Hand into Wishiwashi's Ice Beam broke Kartana's Sash and froze it - the room's best turn. T2 Wish at full HP with a full-HP partner had no recipient in sight, exactly the case the dossier says to avoid."},
+    {"check": "Wishiwashi School form reverts below a quarter HP", "result": "PASS", "evidence": "T3 Leaf Blade -> Focus Sash at 1 HP, T4 driver shows WISHIWASHI_SOLO and a weak Liquidation (116 on Incineroar in rain)."},
+    {"check": "Golisopod Emergency Exit interacts with Choice Band", "result": "NOT REACHED", "evidence": "First Impression 216 on Raging Bolt, then a 2x Thunderbolt took it from full to zero in one hit, so the half-HP exit never triggered."},
+    {"check": "Primarina Liquid Voice Hyper Voice spread", "result": "PASS (selected) / NOT FIRED", "evidence": "T5 chose Hyper Voice; Fake Out flinched it and Thunderbolt KOed it."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Wishiwashi", "payoff": "REAL - blocked Leaf Blade + Thunderbolt; Alomomola Wished beside it (no recipient)."},
+    {"turn": 5, "user": "Wishiwashi Solo (1 HP)", "payoff": "REAL but pointless - blocked nothing aimed at it (both attacks went to Primarina); delayed its death one turn."}
+  ],
+  "ai_defects": [
+    {"turn": 2, "battler": "Alomomola", "board": "Alomomola (full) + Wishiwashi (full, Protecting) vs Raging Bolt + Kartana", "chosen": "Wish", "better": "Scald into Kartana (burn chance on the physical attacker) or Helping Hand; Wish with both allies at full HP has no recipient and the dossier's own rule forbids it. Low severity."}
+  ],
+  "authored_set_legality": "No problem found. Levels L84 x5, Primarina L85.",
+  "theme_note": "Partly. The form-change gimmicks (Schooling revert, rain-dependent Weather Ball, Emergency Exit) are the room's idea and only one of the three (Schooling) was visible; Swanna died the turn it made rain and Golisopod died in one hit. Against a Grass/Electric lead the room has no bulk on the special side: four of six were OHKOed.",
+  "level_changes": [
+    {"member": "LANTURN", "before": 2, "after": 3, "reason": "first-try 6-0 with no faints; OHKOed on T1 by Leaf Blade."},
+    {"member": "ALOMOMOLA", "before": 2, "after": 3, "reason": "OHKOed by a single Thunderbolt at full HP (4 SpD EVs); Swanna and Primarina are the room's concept and ace, so the two support bodies take the levels."}
+  ],
+  "level_changes_unverified": "Not re-run: build-8 ROM predates these offsets; rerun after the main agent rebuilds.",
+  "cooler": "Yes: the room's idea is 'the board changes mid-fight', but every changer dies before changing against the recommended Electric/Grass answers. A Focus Sash on Swanna (so Rain Dance always pays one Weather Ball) and some SpD on Alomomola would let the squall be seen. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun to see whether L85 Lanturn survives Leaf Blade and Volt Switches."
+}
