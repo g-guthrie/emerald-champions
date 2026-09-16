@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0184 TRAINER_DARRIN (Route107, Feather Badge, cap 48, Medium)",
+  "availability_audit": "Route 107 is reached by Surf from Dewford after the Balance Badge; battle index window 48-60, floor 48. Every member is gated at 36 or below in pool-48.json - New Mauville entrance and interior via Wattson's Basement Key (30), Thwackey line (36), Granite Cave Abra plus Slateport Linking Cord (20), Haunter plus Linking Cord (30), Sneasel (14) - so all source maps precede the first Surf. No legendaries, Ultra Beasts or Paradox species.",
+  "plan": "Darrin is a complete rain architecture: a Damp Rock Politoed that supports rather than attacks, three Swift Swim abusers at different speeds behind it, a Levitate Rotom-Wash and Mega Gyarados as the closer. Two facts decide the fight. First, Darrin's six carry no Ground, Fire or Fighting move at all, which makes an Assault Vest Magnezone close to unkillable here - Steel resists Grass, Ice, Dragon and Flying, Electric is resisted outright, and only neutral Water gets through - while its Thunderbolt is 2x on four members and 4x on Mega Gyarados. Second, the honest answer to Swift Swim is not out-speeding it but ignoring speed entirely: Rillaboom's Grassy Glide and Weavile's Ice Shard are priority, and Iron Hands' Fake Out denies a doubled-Speed turn outright. Gengar's Taunt is pointed at Politoed, whose Helping Hand, Icy Wind and Protect are what turn the setter into a support piece. Grass and Electric between them are super effective on every single member.",
+  "party": [
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ANALYTIC",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "the anchor: nothing Darrin owns hits Steel for super effective damage, and Thunderbolt is 4x on Mega Gyarados and 2x on four others",
+      "availability": "pool-48 gate 30: NewMauville_Entrance land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "priority Grass that ignores Swift Swim entirely; Knock Off strips the Damp Rock and the Focus Sash",
+      "availability": "pool-48 gate 36: Thwackey level evolution in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_WILD_CHARGE",
+        "MOVE_HEAVY_SLAM"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Fake Out denies a doubled-Speed turn, and Wild Charge is the second 4x answer to Mega Gyarados",
+      "availability": "pool-48 gate 30: NewMauville_Inside land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Ice is 2x on Kingdra, Ludicolo and Mega Gyarados; Ice Shard is a second priority lane and a second Fake Out",
+      "availability": "pool-48 gate 14: Sneasel level/condition evolution."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest battler outside rain; recoil-free Life Orb damage that does not care about Politoed's Icy Wind chip",
+      "availability": "pool-48 gate 20: Abra GraniteCave_1F, Kadabra evolution, Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Taunt blanks Politoed's whole support kit and Gyarados's Dragon Dance; Icy Wind is spread speed control against a Swift Swim team",
+      "availability": "pool-48 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    }
+  ]
+}

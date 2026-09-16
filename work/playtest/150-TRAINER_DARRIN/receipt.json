@@ -1,0 +1,30 @@
+{
+  "play_order": 150, "e_group": "E0184", "trainer": "TRAINER_DARRIN", "class": "ace",
+  "location": "Route107", "chapter": "Feather Badge", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - all six at 48+1-2=47, matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/150-TRAINER_DARRIN/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 61, "party": "party-a1.json", "outcome": "won", "turns": 6, "player_faints": 3, "opponent_faints": 6,
+     "note": "Magnezone + Rillaboom + Iron Hands + Weavile + Alakazam + Gengar. The best-played opposing team in this block. Turn 1 Politoed's Helping Hand into a Swift Swim Kingdra Draco Meteor removed Rillaboom immediately; Kingdra then Protected through a lethal Ice Shard; Barraskewda traded itself for Weavile; and two rain-boosted Hydro Pumps from Rotom-Wash and Ludicolo finally broke the Assault Vest Magnezone that had been carrying the fight. Won on the last two bodies with Gengar's Sash absorbing a Hydro Pump."}
+  ],
+  "strategy_checks": [
+    {"check": "Politoed sets rain on entry and it lasts", "result": "PASS", "evidence": "Drizzle at turn 0 with a Damp Rock; rain was still up when the battle ended on turn 6."},
+    {"check": "Politoed uses Helping Hand when it actually enables Kingdra's special pressure, rather than attacking", "result": "PASS", "evidence": "turn 1 Helping Hand on Kingdra, which then KO'd Rillaboom with a boosted Draco Meteor. A clean, correctly-sequenced support turn - worth contrasting with the Norman Helping-Hand-into-ally-Protect defect logged at play_order 145."},
+    {"check": "Turn two attacks or repositions the setter rather than overcommitting it", "result": "PASS", "evidence": "at 24 HP Politoed chose Weather Ball as real damage rather than another support turn or a guard, which is the right call for a body that was not surviving either way."},
+    {"check": "Swift Swim genuinely wins the speed race under rain", "result": "PASS", "evidence": "Kingdra outsped my entire party including a Jolly 252-Speed Weavile, and Barraskewda's Liquidation KO'd Weavile before it could act on turn 3."},
+    {"check": "Rotom-Wash covers Electric pressure behind Levitate", "result": "PASS", "evidence": "two rain-boosted Hydro Pumps, the second of which removed Magnezone - the member that had killed four of Darrin's six."},
+    {"check": "Mega Gyarados has a separate Dragon Dance setup endgame", "result": "NOT EXERCISED", "evidence": "Mega Evolved on entry (Mold Breaker announced) and chose Waterfall immediately, then died to a 2x Thunderbolt. Defensible - a Dragon Dance turn would have died just as fast - but the authored endgame never appeared."},
+    {"check": "Ludicolo supplies Fake Out plus Grass coverage", "result": "PARTIAL", "evidence": "Ludicolo entered on turn 4 and had a legal Fake Out on turn 5; it chose Hydro Pump instead, which was the better move here because it helped kill Magnezone. Focus Sash also did its job on the final turn. The Fake Out half of its role simply never came up."},
+    {"check": "Weather is not redundantly reset", "result": "PASS", "evidence": "no second weather move was used at any point; Politoed set rain once and the Damp Rock carried it."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "KINGDRA", "payoff": "REAL - at 26 HP it blocked Weavile's priority Ice Shard, a 2x hit that was a guaranteed KO, and survived to attack on turn 3"}
+  ],
+  "ai_defects": [],
+  "ai_defect_note": "No illegal or nonsensical choice in six turns. Darrin's side sequenced support into damage correctly, guarded exactly once and with full payoff, and targeted the member that was actually killing it. This is the cleanest AI performance in the block.",
+  "level_changes": [],
+  "calibration_reasoning": "Won on the first attempt but with three player faints against a fully optimized six, including losing the Assault Vest Magnezone that was hard-countering the whole team. The brief's 'won with 2+ faints or after a real fight - keep' applies, and AGENTS.md's three-faint threshold for a level-increase review is met exactly. No change.",
+  "could_this_be_cooler": "Keep the architecture wholesale - a supporting Damp Rock Politoed, three genuine Swift Swim abusers at different speeds, a Levitate Rotom-Wash and a Mega closer is a properly built rain team and it played like one. But this run sharpens the dossier's own flagged note. The problem is not that Barraskewda, Kingdra and Ludicolo do the same job at different speeds; it is that five of Darrin's six are 2x or 4x weak to Electric, so one Assault Vest Magnezone - which nothing on the team can hit for super effective damage, because Darrin owns no Ground, Fire or Fighting move anywhere - killed four of them by clicking the same button. Turning one Swift Swim slot into a Storm Drain or Lightning Rod body would fix the variety complaint and the structural weakness with a single change, and would make the rain mirror the dossier mentions actually playable. Recommended, not applied in this pass.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}
