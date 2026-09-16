@@ -1,0 +1,33 @@
+{
+  "play_order": 314, "e_group": "E0483", "trainer": "TRAINER_SHANNON", "class": "ace", "location": "VictoryRoad_B1F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Emboar offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/314-TRAINER_SHANNON/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b): Wally VR beaten, League not entered; two reachable legends (Chi-Yu, Landorus) from far-upstream signs; no window-90 addition used.",
+  "pre_play_strategy_checks": ["Ribombee Focus Sash guarantees Tailwind turn 1", "Mega Emboar arrives in slot 2 and attacks immediately with Reckless moves", "Vikavolt Choice Specs lock is exploitable", "Goodra Gooey slows contact attackers", "Orbeetle Light Screen patient mode", "Sawsbuck Sap Sipper"],
+  "attempts": [
+    {"n": 1, "seed": 3, "run_dir": "a1", "party": "party_vr96_b.json led by Urshifu-Rapid + Landorus", "outcome": "won", "turns": 7, "player_faints": 3, "opponent_faints": 6,
+     "why": "Turn 1 Ribombee Tailwind, Mega Emboar Flare Blitz took Landorus to 16, Rock Slide broke Ribombee's Sash, Surging Strikes (two crits) KO'd Mega Emboar. Aqua Jet finished Ribombee. Goodra crit Dragon Pulse KO'd Chi-Yu, Specs Energy Ball put Urshifu on its Sash; Close Combat took Goodra to 149. Mega Kangaskhan Fake Out flinched Goodra (Gooey -2 Speed), Sucker Punch finished it; Flare Blitz KO'd the Energy-Ball-locked Vikavolt. Orbeetle Protected a lethal Flare Blitz while Sawsbuck Double-Edge KO'd Kangaskhan; Prankster Tailwind then Flare Blitz KO'd Orbeetle (recoil KO'd Incineroar after High Horsepower); Sludge Bomb finished Sawsbuck. Faints: Chi-Yu, Kangaskhan, Incineroar."}
+  ],
+  "strategy_checks": [
+    {"check": "Ribombee Sash Tailwind turn 1", "result": "PASS", "evidence": "turn 1 Tailwind before anything moved; Sash held Rock Slide at 1 HP"},
+    {"check": "Mega Emboar early and Reckless", "result": "PASS", "evidence": "turn 1 Mega Evolved and Flare Blitz did 291 to Landorus (recoil taken)"},
+    {"check": "Vikavolt Choice lock", "result": "PASS (exploited)", "evidence": "locked into Energy Ball turns 2-5; it never Volt Switched out of the lock even into a resisting Incineroar"},
+    {"check": "Goodra Gooey", "result": "PASS", "evidence": "turn 4-5 'Kangaskhan's Speed fell!' x3 from Fake Out (two hits) and Sucker Punch"},
+    {"check": "Orbeetle Light Screen", "result": "FAIL (not chosen)", "evidence": "Orbeetle's only action was Protect (turn 6); it died turn 7 without ever setting the screen"},
+    {"check": "Sawsbuck Sap Sipper", "result": "N/A", "evidence": "no Grass attack was thrown at it"}
+  ],
+  "protect_ledger": [
+    {"turn": 6, "user": "Orbeetle", "payoff": "blocked a Flare Blitz that KO'd it the next turn (308 damage); partner Sawsbuck KO'd Mega Kangaskhan the same turn"}
+  ],
+  "protect_summary": "1 Protect, excellent.",
+  "ai_defects": [
+    {"turn": "4-5", "board": "Vikavolt locked into Energy Ball facing Incineroar (resists) and Kangaskhan (neutral)", "chosen": "Energy Ball into Incineroar (turn 4, -1 Atk irrelevant), then into Kangaskhan", "better": "Turn 4 it threw a resisted Energy Ball into Incineroar rather than the neutral Kangaskhan on the field beside it; the driver's 'chosen' shows target 0 (Incineroar, freshly switched in - the target was picked before the switch, so this is a switch-read, not a defect). Recorded as note only."}
+  ],
+  "ai_notes": "Emboar's Flare Blitz into Landorus over Head Smash was a fine pick (Landorus is Flying, Rock neutral, Fire neutral - it chose the higher-BP recoil move). Goodra's Dragon Pulse into Chi-Yu (Dark/Fire, neutral) was the right target since Urshifu had a Sash. Sawsbuck Double-Edge into the -3 Speed Kangaskhan for the KO was correct.",
+  "level_changes": [],
+  "level_change_rationale": "Won first try but with 3 faints after a real fight (two OHKOs on the player's side). Keep.",
+  "cooler": "The early-Mega rhythm reads well in play: Emboar's turn-1 Flare Blitz is the scariest opening in the block so far. Orbeetle is the weak slot - it Protected and died without a screen. If the player leads Fire it never gets its patient mode; a Sitrus Orbeetle that leads beside Ribombee (screen + Tailwind on turn 1) would show the concept better. Order suggestion only.",
+  "legality_notes": "Sets legal.",
+  "verification_limit": "No level change."
+}
