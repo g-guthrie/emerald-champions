@@ -1,0 +1,31 @@
+{
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141",
+  "elf_sha256": "70db6be9e609d4fe1de497fd4620a12369072b83a1e79ed108d6b35460058fc5",
+  "seed": 97,
+  "trainer_a": "TRAINER_TORI_AND_TIA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 36,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/97-TRAINER_TORI_AND_TIA/party.json",
+  "party_sha256": "c764d3aaef9adba241ae108c3d42c15951bd1abda97b043fe1bbe3be097bcd79",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY"
+  ],
+  "prepared": {
+    "encounter": "E0113 TRAINER_TORI_AND_TIA (Route 113, cap 36 window)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1169
+  },
+  "replacement_commits": {
+    "turn": 3,
+    "slots": {}
+  }
+}

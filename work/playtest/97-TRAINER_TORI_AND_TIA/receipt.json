@@ -1,0 +1,42 @@
+{
+  "play_order": 97,
+  "e_group": "E0113",
+  "trainer": "TRAINER_TORI_AND_TIA",
+  "class": "regular",
+  "location": "Route113",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Oricorio at authored offset 0 resolved to L34 = 36 + 0 - 2 (Medium). Cap 36 confirmed, no --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/97-TRAINER_TORI_AND_TIA/party.json",
+  "attempts": [
+    {"n": 1, "seed": 97, "run_dir": "work/playtest/97-TRAINER_TORI_AND_TIA/a1", "kind": "optimized", "outcome": "won", "turns": 3, "decisions": 4, "player_faints": 1, "opponent_faints": 4, "note": "Excadrill Rock Slide (2x into both Oricorio, 2x Ribombee, 4x Frosmoth) plus Weavile Ice Shard priority. Weavile lost to Frosmoth Ice Beam on the last turn."},
+    {"n": 2, "seed": 197, "run_dir": "work/playtest/97-TRAINER_TORI_AND_TIA/a2", "kind": "strategy-observation (deliberately non-optimized: Protect + Low Kick on turns 1-2 to let both birds live and dance)", "outcome": "lost", "turns": 10, "player_faints": 6, "opponent_faints": 3, "note": "Not a difficulty benchmark. Recorded because it is the honest demonstration that two uninterrupted Dancer turns win the fight outright."}
+  ],
+  "strategy_checks": [
+    {"check": "Sensu Oricorio establishes Tailwind on turn 1 or 2", "result": "PASS", "evidence": "a1 T1 and a2 T1: TRAINER_SENSU used Tailwind, SIDE_STATUS_TAILWIND on the opponent side both runs."},
+    {"check": "Dancer copies Revelation Dance so the two birds can produce up to four attacks in one turn, each using its copier's own typing, with no recursion", "result": "PASS", "evidence": "a2 T2 and a2 T5: four consecutive 'The opposing Oricorio used Revelation~Dance!' in a single turn, with mixed effectiveness lines (Ghost 0.5x into Dark Weavile, Electric neutral), and exactly four - the copies did not recurse. a2 T2 killed a full-HP 107 Weavile; a2 T5 killed a full-HP 148 Intimidate Incineroar through two resisted hits."},
+    {"check": "Ribombee supports with Helping Hand / Pollen Puff instead of Quiver Dance", "result": "PASS", "evidence": "a1 T3 Pollen Puff aimed at its ally (heal mode); a2 T7 Pollen Puff used offensively into Alakazam, super effective. Quiver Dance never appeared."},
+    {"check": "Frosmoth uses Wide Guard rather than Quiver Dance when a spread move is on the board", "result": "FAIL", "evidence": "a1 T4: Frosmoth entered against an Excadrill that had used Rock Slide (spread, 4x into Ice/Bug) on each of the three preceding turns, and chose Ice Beam; Rock Slide then KOed it. Quiver Dance correctly absent, but the authored Wide Guard slot never fired against the exact spread move it exists for. See AI defect 1."},
+    {"check": "Ground immunity blanks Pom-Pom's Electric Revelation Dance (dossier crack)", "result": "PASS", "evidence": "a2 T2/T5: with Excadrill on the field the AI correctly routed every Revelation Dance at the non-immune partner instead of the Ground type."}
+  ],
+  "protect_ledger": [
+    {"turn": "a1 T1", "battler": "ORICORIO_POM_POM", "payoff": "real - blocked Weavile Triple Axel (2x) and the Pom-Pom half of Excadrill Rock Slide (2x) in the same turn"},
+    {"turn": "a2 T1", "battler": "ORICORIO_POM_POM", "payoff": "real - blocked Weavile Low Kick while Sensu set Tailwind unopposed"},
+    {"turn": "a2 T6", "battler": "ORICORIO_POM_POM", "payoff": "empty - Togekiss had already used Follow Me, so nothing could be aimed at Pom-Pom; the turn was spent while its partner Sensu was KOed by Shadow Ball"},
+    {"turn": "a2 T7", "battler": "ORICORIO_POM_POM", "payoff": "n/a - native latch reported Protect but the engine actually switched Pom-Pom out for Frosmoth; see AI note 2"},
+    {"turn": "a2 T8", "battler": "ORICORIO_POM_POM", "payoff": "real - blocked Alakazam Psychic and Togekiss Air Slash, both aimed at slot 1, while Frosmoth KOed Alakazam"}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "moderate", "turn": "a1 T4", "board": "Frosmoth (L35, Ice Scales, full HP) entering beside Ribombee at 7 HP, against Weavile (18 HP, Ice Shard) and Excadrill (136 HP) that had used Rock Slide on T1, T2 and T3", "chosen": "MOVE_ICE_BEAM into Weavile", "better": "MOVE_WIDE_GUARD. Rock Slide is 4x into Ice/Bug, was the only move Excadrill had used all battle, and Wide Guard is in Frosmoth's set specifically for it. Ice Beam killed a Weavile that was already dying to Life Orb recoil; Wide Guard would have kept a 126 HP Ice Scales wall alive for at least another turn.", "note": "Not illegal - a scoring gap. Suggest checking whether the Wide Guard expected-value forecast weights a spread move the opponent has actually used on three consecutive turns."},
+    {"id": 2, "severity": "cosmetic/reporting", "turn": "a2 T7", "board": "Pom-Pom active in slot 1", "chosen": "the 'chosen' native latch reported MOVE_PROTECT for battler 1, but the battle text shows the trainer withdrew Oricorio and sent out Frosmoth", "better": "n/a - this is the documented stale-native-latch trap in docs/VERIFICATION.md rather than a decision defect. Recorded so the next reader does not treat that latch as the AI's choice."},
+    {"id": 3, "severity": "minor", "turn": "a1 T3", "board": "Ribombee entering at full HP with its ally Pom-Pom at 45/126, against a Weavile at 28 HP holding Ice Shard priority", "chosen": "MOVE_POLLEN_PUFF on its own ally (heal), which failed because Weavile's priority KOed Pom-Pom first", "better": "MOVE_MOONBLAST into Weavile - a Fairy move that is 2x into Dark and would have removed the priority attacker that had just KOed two teammates. Healing a partner that dies to the visible priority move was the weaker branch even before the player's command was known."}
+  ],
+  "level_changes": [
+    {"member": "ORICORIO_POM_POM", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "Brief rule 5 / AGENTS.md review threshold: first optimized attempt won in 3 turns with 1 player faint. Pom-Pom and Sensu are the joint-lowest members of this team at offset 0 against Ribombee and Frosmoth at 1. The birds are also the payoff engine, so the level goes where the showcase is rather than onto the support. Deliberately held to +1 and not extended to the support members: attempt 2 shows that two uninterrupted Dancer turns already win this fight outright, so the team is not short of power, it is short of turns against a Rock/Ice lead."},
+    {"member": "ORICORIO_SENSU", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "Same as Pom-Pom; the two leads are a matched pair and the dossier prices them identically."}
+  ],
+  "retest_status": "PENDING REBUILD. The level change lives in data/emerald_champions/emerald_champions_battle_teams.txt; the headless ROM in work/agent-battle-build-2 was stamped before it, so a re-run would still field L34 birds. Per this wave's instructions I do not run make; the main agent should re-materialize and rebuild, then re-run seed 97 against this manifest to confirm the +1.",
+  "cooler": "Keep the concept - the four-attack Dancer duet is one of the most distinctive turns in the early campaign and it demonstrably kills full-HP 148 HP walls. Two concrete improvements, neither implemented in this pass: (1) the back half does not belong to the front half. Ribombee and Frosmoth are generic Bug support; the team's identity is 'every member is a dancer'. Oricorio-Baile and Oricorio-Pa'u would give Tori & Tia four Revelation Dance typings and make the type-immunity crack a real read instead of a single Ground switch-in, and it is the obvious twin-trainer joke. (2) If the Bug half stays, Frosmoth wants Tailwind or Icy Wind rather than Wide Guard, because Wide Guard is the one move on this roster that the AI demonstrably will not use at the moment it matters (defect 1) and a 4x Rock weakness cannot be guarded into anyway.",
+  "authored_set_legality": "No legality problem found. All four members, their abilities, items, moves and EV spreads (all 508/510 legal) were accepted by the native preparation path and behaved as printed: Dancer copied, Shield Dust was live on Ribombee, Ice Scales halved Air Slash, Covert Cloak was held by Sensu.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
