@@ -92,3 +92,81 @@ AI_DOUBLE_BATTLE_TEST("EC lethal choice: a guard is scored after an ordinary att
         EXPECT(opponentLeft->hp > 0 || opponentLeft->hp == 0);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC lethal choice: the immune move never wins the tie a guard creates")
+{
+    GIVEN {
+        AI_FLAGS(LETHAL_FLAGS);
+        // Randall's real board: the only targets are Ghosts that alternate a
+        // shield and a burn, so every attack's guarded expectation collapses
+        // toward zero. The tie must still be settled by what the moves would
+        // do if the shield fails, not by slot order.
+        PLAYER(SPECIES_COFAGRIGUS) { Level(30); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(20); Ability(ABILITY_MUMMY); Moves(MOVE_PROTECT, MOVE_WILL_O_WISP); }
+        PLAYER(SPECIES_SABLEYE) { Level(30); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(10); Ability(ABILITY_KEEN_EYE); Moves(MOVE_PROTECT, MOVE_WILL_O_WISP); }
+        OPPONENT(SPECIES_GREEDENT) {
+            Level(30); HP(300); MaxHP(300); Attack(120); Speed(40);
+            Ability(ABILITY_CHEEK_POUCH); Moves(MOVE_BODY_SLAM, MOVE_CRUNCH);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(10); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_WILL_O_WISP, target: opponentLeft);
+            EXPECT_MOVE(opponentLeft, MOVE_CRUNCH);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_WILL_O_WISP, target: opponentRight);
+            MOVE(playerRight, MOVE_PROTECT);
+            EXPECT_MOVE(opponentLeft, MOVE_CRUNCH);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_PROTECT);
+            EXPECT_MOVE(opponentLeft, MOVE_CRUNCH);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC lethal choice: a half-resisted attack loses to the doubled one")
+{
+    GIVEN {
+        AI_FLAGS(LETHAL_FLAGS);
+        // Luis's board: the Water attack is halved into a Grass body and the
+        // Ice attack on the same set is doubled against the same target.
+        PLAYER(SPECIES_TROPIUS) { Level(30); HP(300); MaxHP(300); Defense(90); SpDefense(90); Speed(20); Ability(ABILITY_HARVEST); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_LANTURN) {
+            Level(30); HP(300); MaxHP(300); SpAttack(110); Speed(40);
+            Ability(ABILITY_VOLT_ABSORB); Moves(MOVE_HYDRO_PUMP, MOVE_ICE_BEAM);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(10); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_ICE_BEAM, target: playerLeft);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC lethal choice: a fresh immune body is read from the type chart, not the last turn")
+{
+    GIVEN {
+        AI_FLAGS(LETHAL_FLAGS);
+        // Norman's board: Spiritomb has no weakness and is immune to Psychic.
+        // Shadow Ball on the same set is neutral into it.
+        PLAYER(SPECIES_SPIRITOMB) { Level(30); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(20); Ability(ABILITY_PRESSURE); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_MELOETTA) {
+            Level(30); HP(300); MaxHP(300); SpAttack(120); Speed(90);
+            Ability(ABILITY_SERENE_GRACE); Moves(MOVE_PSYCHIC, MOVE_SHADOW_BALL);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Speed(10); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_SHADOW_BALL, target: playerLeft);
+        }
+    }
+}
