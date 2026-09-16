@@ -1,0 +1,35 @@
+{
+  "play_order": 293, "e_group": "E0459", "trainer": "TRAINER_ANDREA", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/293-TRAINER_ANDREA/party_sooto_84.json",
+  "availability_note": "Sootopolis reached after Seafloor Cavern and the Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League. Incineroar 36, Raging Bolt 60 (Route 119), Rillaboom 36, Kartana 20, Flutter Mane 68, Zapdos 30 (reachable legend, New Mauville). No Sootopolis, Cave of Origin, Underwater or Seafloor species.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/293-TRAINER_ANDREA/a1", "seed": 1, "outcome": "won", "turns": 9, "decisions": 11, "player_faints": 2, "opponent_faints": 6, "note": "T1 Fake Out flinched Cloyster, Thunderbolt OHKOed Floatzel (Band-locked Aqua Jet did 102). T2 Cloyster Protect; Jellicent switched to Simipour, which died to a crit Knock Off. T3 Cloyster switched to Basculin (OHKOed by Thunderbolt) and Knock Off KOed Jellicent. T4 Cloyster's 5-hit Icicle Spear KOed Raging Bolt (306) while Qwilfish set Spikes; T6 a 4-hit crit Icicle Spear KOed Flutter Mane. T7 Cloyster Protect blocked Fake Out + Leaf Blade; T8 crit Leaf Blade took Cloyster; T9 Leaf Blade took the -2 Qwilfish after three Spikes layers."}
+  ],
+  "strategy_checks": [
+    {"check": "Cloyster Shell Smashes only when Floatzel buys a safe turn, otherwise attacks with Skill Link", "result": "PASS (attack branch)", "evidence": "Cloyster never chose Shell Smash (never a safe turn: Fake Out T1, Electric attacker on the board throughout); it attacked with Icicle Spear on T1, T4, T6 and Rock Blast T8, Protected T2 and T7, switched T3. Two 5-hit / 4-hit Icicle Spears were the room's two KOs - the multi-hit lesson landed."},
+    {"check": "Floatzel Choice Band immediate pressure", "result": "PARTIAL", "evidence": "T1 it locked into Aqua Jet on Incineroar (102, 2x) rather than Wave Crash, then was OHKOed by Thunderbolt. Priority pick was defensible against a Fake Out lead but wasted the Band."},
+    {"check": "Jellicent Water Absorb / Will-O-Wisp / Recover attrition lane", "result": "NOT REACHED", "evidence": "Muddy Water T3 into Incineroar, then OHKOed by a super-effective Knock Off the same turn (the log shows no crit line; see engine_notes). Will-O-Wisp was correctly not used on a Fire type."},
+    {"check": "Qwilfish Intimidate + Rocky Helmet front for Simipour; Spikes only when it beats an attack", "result": "PASS (Intimidate, Helmet) / FAIL (Spikes)", "evidence": "Intimidate fired on both entries and Rocky Helmet chipped Knock Off (T8). Spikes on T4, T5(switch turn), T7 and T8 - four consecutive Spikes turns, the last two at -2 Attack with one partner left and my party down to four; the third layer was a wasted turn by the dossier's own rule."},
+    {"check": "Simipour Grass Knot answers a Grass lead", "result": "NOT REACHED", "evidence": "Switched in on T2 into a crit Knock Off and fainted."},
+    {"check": "Basculin Adaptability / Head Smash all-in", "result": "NOT REACHED", "evidence": "AI switched it in for Cloyster on T3 directly into a 2x Thunderbolt; OHKOed before acting."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Cloyster", "payoff": "REAL - blocked a lethal 2x Thunderbolt; partner slot switched Jellicent out."},
+    {"turn": 6, "user": "Qwilfish", "payoff": "REAL - blocked Thunderbolt + Leaf Blade (both 2x) while Cloyster's crit Icicle Spear KOed Flutter Mane. Best Protect of the block."},
+    {"turn": 7, "user": "Cloyster", "payoff": "REAL - blocked Fake Out + Leaf Blade; Qwilfish set Spikes beside it."}
+  ],
+  "ai_defects": [
+    {"turn": "T4-T8", "battler": "Qwilfish", "board": "Qwilfish (-1 then -2 Atk) beside Cloyster vs a 4-member player party", "chosen": "Spikes four turns running (three layers)", "better": "Liquidation into Kartana or Poison Jab into Flutter Mane at least on T7/T8; the dossier explicitly says Spikes must beat an immediate attack, and a third layer against a team with two reserves does not."},
+    {"turn": "T3", "battler": "Basculin (AI switch for Cloyster)", "board": "Cloyster at 179/204 facing Raging Bolt", "chosen": "switch Cloyster out into Basculin", "better": "Saving Cloyster was right; the receiver should have been Qwilfish (bulk, Intimidate) rather than a 4-HP-EV Water body into a visible Electric type. Low severity."}
+  ],
+  "engine_notes": [
+    {"note": "T3 Knock Off KOed a full-HP Jellicent (Calm 252/0/4/0/252/0, ~341 HP) from a single super-effective Knock Off whose computed max is ~288; no 'critical hit' line appears in the messages. Either a crit line was dropped from the log or the damage is higher than expected. Not verified further."}
+  ],
+  "authored_set_legality": "No problem found. Levels reported L84 x5, Basculin L85.",
+  "theme_note": "Yes: the volley-room lesson shows on the board - Skill Link Icicle Spear took two of my six in single volleys, and the multi-hit went through nothing but raw bulk. It felt like a benchmark room, not a warm-up.",
+  "level_changes": [],
+  "level_changes_unverified": "No changes (won with 2 faints after a real fight).",
+  "cooler": "Good room. The support half (Jellicent, Qwilfish, Simipour) never got to matter because the AI fed them in as switch receivers; if Qwilfish's Spikes were Taunt or Toxic Spikes the wall of hazards would at least punish my repeated pivots. Not changed in this pass.",
+  "most_worth_rerunning": "Not needed for levels."
+}
