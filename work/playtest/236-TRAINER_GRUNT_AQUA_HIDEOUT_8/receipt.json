@@ -1,0 +1,50 @@
+{
+  "play_order": 236,
+  "e_group": "E0347",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_8",
+  "class": "grunt",
+  "location": "AquaHideout_B2F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; all four members L76 = 76 + 2 - 2 on Medium - i.e. this grunt fields a full team at the player's own level cap, the first in the hideout to do so.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_zapdos.json"],
+  "chronology_note": "Same six members; Incineroar beside Zapdos, because Thunderbolt is 4x on Gyarados and 2x on the other three. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Gyarados takes Dragon Dance only behind a board that survives; the Lum Berry beats Thunder Wave and Will-O-Wisp",
+    "Golisopod's First Impression is priority Bug damage on its first turn out",
+    "Emergency Exit switching Golisopod back in later reloads First Impression",
+    "Relicanth's Rock Head makes Head Smash recoil-free - 150 base power with no drawback",
+    "Walrein's Thick Fat halves the Ice and Fire attacks aimed at it, and Ice Body plus Protect stalls if the room needs time"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 8, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/236-TRAINER_GRUNT_AQUA_HIDEOUT_8/a1",
+      "outcome": "won", "turns": 4, "decisions": 8,
+      "player_faints": 4, "opponent_faints": 4, "ai_decision_seconds_max": 1.055,
+      "why": "This is the first battle in my block that I nearly lost, and I do not think I misplayed it. Turn 1 went perfectly - Fake Out flinched a Gyarados that had selected Dragon Dance and a 4x Thunderbolt killed it - and Relicanth then one-shot my full-health 294 HP Zapdos with Head Smash. Turn 2 Rillaboom came in for the 4x Grass answer and Golisopod's Choice Band First Impression killed it outright at 309 HP before it moved, while Relicanth's second Head Smash killed a full-health 301 HP Incineroar. Three Pokemon gone in two turns to two attacks and a priority move. I rebuilt the board with Urshifu and Amoonguss, killed Relicanth through its own Head Smash (Rocky Helmet finished it), lost Amoonguss to Head Smash plus Leech Life, and closed 2-on-2 with Mega Gardevoir and an Urshifu whose Close Combat is 2x on Walrein. Won with two Pokemon standing."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Gyarados takes Dragon Dance only behind a board that survives", "result": "PASS (selected, denied)", "evidence": "turn 1 native record: b1 use_move DRAGON_DANCE, on a board where its partner Relicanth was healthy and nothing had been revealed. That is the authored condition met. Fake Out denied it and a 4x Thunderbolt removed it. The Lum Berry was never relevant because I brought no status."},
+    {"check": "Golisopod's First Impression is priority damage on its first turn out", "result": "PASS", "evidence": "turn 2: 'The opposing Golisopod used First Impression! It's super effective! Rillaboom fainted!' - 309 HP removed in one priority action by a Choice Banded 90 BP Bug move into a Grass type. This is the single most decisive attack anything has thrown at me in this block."},
+    {"check": "Emergency Exit reloads First Impression", "result": "NOT OBSERVED", "evidence": "Golisopod never dropped below half while a reserve existed to swap to. Once Walrein was on the field beside it there was nothing left to switch to, so the ability could not fire. Worth knowing: as the last-but-one Pokemon, Emergency Exit is dead weight."},
+    {"check": "Rock Head makes Head Smash recoil-free", "result": "PASS", "evidence": "three Head Smashes, three 'super effective' messages, zero recoil messages - the only HP Relicanth ever lost to its own actions was Life Orb chip ('The opposing Relicanth lost some of its HP!'). It one-shot a 294 HP Zapdos and a 301 HP Incineroar, both at full health. The dossier's claim that 'the player expects a harmless fossil and takes 150 base power' is not an exaggeration; it is the most dangerous single attacker in the hideout."},
+    {"check": "Walrein's Thick Fat and Ice Body stall", "result": "FAIL", "evidence": "Walrein entered on turn 3 and died on turn 4 to one Close Combat at 324 HP. It selected ENCORE (at Urshifu) and never resolved it. Thick Fat only halves Fire and Ice, and the two attackers I had left were Fighting and Fairy, so the resistance profile did nothing. The walrus that 'refuses to die' died in one hit."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects. Gyarados, Relicanth and Walrein all carry Protect and none reached for it. Given how the fight went, that was right every time - this team wins by attacking and it knew it.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Relicanth's target selection was correct on all three Head Smashes: Zapdos (2x on Flying), Incineroar (2x on Fire), then Amoonguss when nothing weak to Rock was left. It never wasted the move.",
+    "Golisopod spent its priority turn on the Grass type rather than the Fire type, which is the harder and better read - First Impression is 2x on Grass and only 1x on Fire/Dark.",
+    "AI decision budget max 1.055 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep, emphatically. Four player faints out of six against a strong, type-appropriate party - this is the only fight in my block so far that meets the AGENTS.md aspiration of at least three faints against a well-prepared competitive team, and it did it in four turns without a single lucky critical hit in its favour. Three of my six were one-shot from full health. There is nothing to add and nothing to take away; the +2 offsets are earned. If anything this room is the calibration reference the rest of the hideout should be measured against.",
+  "rebuild_note": "No level change, so nothing needs re-verification. Both the levels and the result stand on work/agent-battle-build-5.",
+  "theme_check": "Yes, and it is the best room in the hideout by a wide margin. A sea serpent, a living fossil, an armoured isopod and a walrus is unmistakably a ship's crew at its most dangerous, and unlike the rooms before it, every member's identity showed up in the actual play: the serpent reached for its dance, the fossil hit like a battering ram, the isopod struck first. Standing outside the admin's door, it does exactly the job a last gate should do - it made me afraid of what was behind the door. Matt has a high bar to clear.",
+  "cooler_note": "Keep everything. Asked again after playing it: Relicanth is the piece that makes the room, precisely because it is the member a player would dismiss on sight, and the recoil-free 150 BP is a fact the player learns the hard way exactly once. The only slot that did not justify itself is Walrein, whose Thick Fat, Ice Body and Protect are all defensive answers to a fight this team never has - it wins or loses in two turns and a staller has no role in that. A concrete suggestion for a later pass, not made here: Walrein is the natural home for the room's missing speed control or its Encore, and Encore is already on it; giving it Body Slam or Super Fang over Surf would let the fourth slot participate in the aggressive game the other three are playing rather than preparing for a long one that never arrives.",
+  "authored_set_legality": "No legality problem found."
+}
