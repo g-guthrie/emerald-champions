@@ -1,0 +1,57 @@
+{
+  "play_order": 118,
+  "e_group": "E0142",
+  "trainer": "TRAINER_SHIRLEY",
+  "class": "regular",
+  "location": "MtChimney",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Alcremie L36 (36+2-2), Sylveon L35 (36+1-2), Galarian Mr. Mime L38 (36+4-2), Greedent L35 (36+1-2).",
+  "party_manifest": "work/playtest/118-SHIRLEY/party-a1.json",
+  "party_note": "Same six as the rest of the cap-36 block, reordered so Excadrill leads. Shirley is Fairy-forward and Excadrill is the only member that both resists Fairy and answers it at 2x with Iron Head, so leading it was the honest preparation rather than a power increase.",
+  "attempts": [
+    {"seed": 101, "attempt": 1, "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "notes": "Over in four turns. Alcremie died on turn 1 without using Decorate, which removed the team's entire reason to exist. Excadrill's 2x Iron Head then removed Sylveon and Mamoswine's 2x Knock Off removed the Scarf Mime."}
+  ],
+  "strategy_checks": [
+    {"check": "Alcremie uses Decorate on Sylveon so the +2/+2 precedes Hyper Voice (ALLY_COMBO)", "result": "FAIL",
+     "evidence": "Alcremie had exactly one decision, on turn 1, at full HP, standing beside a healthy Sylveon - the single turn the whole combo is designed around - and chose MOVE_DAZZLING_GLEAM. Decorate was never selected and Sylveon never received a boost. The dossier's lead premise ('Lead fast support Alcremie 107 Speed beside bulky Sylveon 66 so Decorate can precede Hyper Voice') did not happen."},
+    {"check": "Sylveon's Pixilate converts Hyper Voice to a boosted spread Fairy move", "result": "NOT REACHED", "evidence": "Sylveon selected Hyper Voice on turn 2 but was KOed by Excadrill's 2x Iron Head before it resolved. Its only completed action in the battle was a Protect."},
+    {"check": "Alcremie's Babiri Berry softens the first super-effective Steel hit", "result": "PASS", "evidence": "Turn 1: 'The opposing Alcremie's Babiri Berry lessened the damage' against Excadrill's 2x Iron Head. The berry is correctly chosen for the Steel answer this team invites and it did its job - Alcremie survived the Iron Head and died to the partner's Ground move instead."},
+    {"check": "Galarian Mr. Mime's Choice Scarf makes it outspeed the field", "result": "PASS", "evidence": "At L38 with the Scarf it moved before my Jolly Excadrill and KOed it with Freeze-Dry (2x into Ground) on the turn it came in. It is the most dangerous member of the team by a wide margin."},
+    {"check": "Screen Cleaner removes screens", "result": "NOT REACHED", "evidence": "I set no screens, so the ability was never tested."},
+    {"check": "Greedent's Cheek Pouch heals when it eats its Sitrus Berry", "result": "DENIED by counterplay", "evidence": "Mamoswine's Knock Off removed the Sitrus Berry on turn 2 before it could ever be eaten, so Cheek Pouch had nothing to trigger on. That is the correct answer to the ability rather than an AI failure, and worth noting as a clean documented crack."},
+    {"check": "Aroma Veil protects the team from Taunt, Encore and Disable", "result": "NOT REACHED", "evidence": "My party carries none of those moves."},
+    {"check": "Greedent targets correctly", "result": "PASS", "evidence": "It used High Horsepower into the Steel-type Excadrill at 2x on both turns 2 and 3 rather than at the neutral Mamoswine - correct target selection out of two, and it is what actually put Excadrill in range."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "SYLVEON", "payoff": "EMPTY - both of my attacks were aimed at Alcremie, so Protect blocked nothing. Worse than empty in context: Sylveon is the member the partner's Decorate is meant to boost, and it spent the one turn the combo had available hiding instead of being available to receive and use the boost."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P10-D15",
+      "severity": "high",
+      "turn": 1,
+      "board": "Alcremie L36 at full HP leading beside a full-HP Sylveon, against Excadrill and Mamoswine - the exact opening the dossier designs for",
+      "chosen": "MOVE_DAZZLING_GLEAM (spread Fairy, into a Steel-type and a neutral target)",
+      "why_wrong": "Decorate is the reason Alcremie is on this team and the reason Sylveon's spread is scary. Alcremie is faster than Sylveon precisely so the boost lands first. Instead it chose a spread attack that is resisted by one of my two targets, it died the same turn, and Sylveon was left as an ordinary L35 attacker. This is the third instance in the block of the same pattern (see Thievul in E0134 and Cyclizar in E0136): a support/setup move that defines the set loses to an immediate-damage option in scoring.",
+      "better_action": "Decorate on Sylveon on turn 1."
+    },
+    {
+      "id": "P10-D16",
+      "severity": "medium",
+      "turn": 1,
+      "board": "Sylveon at full HP; both of my attacks were committed to its partner Alcremie",
+      "chosen": "MOVE_PROTECT",
+      "why_wrong": "An empty Protect, and specifically the wrong member to Protect with on the combo turn. If Decorate had been used as intended, a Protecting Sylveon could not have acted on it either. Protect scoring is not accounting for the fact that this battler is the intended recipient of a partner's support move.",
+      "better_action": "Hyper Voice, or simply staying available to use a Decorate boost."
+    }
+  ],
+  "level_changes": [
+    {"member": "SYLVEON", "before": 1, "after": 2, "reason": "Won on attempt 1 in four turns with a single faint. Sylveon is tied for the weakest offset and contributed one Protect before dying without landing a move."},
+    {"member": "GREEDENT", "before": 1, "after": 2, "reason": "Tied weakest offset. Galarian Mr. Mime at +4 is clearly and correctly the ace - it was the only member that killed anything - and Alcremie at +2 is the support anchor, so neither moves."}
+  ],
+  "level_change_verification": "NOT RERUN - prebuilt ROM, no level override, no make. Needs the main agent's rebuild.",
+  "could_this_be_cooler": "The concept is good - Decorate into a Pixilate spread is a real doubles archetype and the Babiri Berry shows someone thought about the Steel answer. But as played this is a four-turn fight, because the combo never starts and the team has no Steel resistance apart from that one berry. Two suggestions, neither applied: (1) the Decorate turn needs to survive contact with the AI's damage preference; if Alcremie's only attacking option were weaker, or if it had a redirection move so its turn is never wasted, the support role would hold up. (2) Every member except Galarian Mr. Mime is hit at 2x by a single Steel-type, so one Excadrill answers three quarters of the team - a Fire or Ground partner that punishes the obvious Steel switch-in would make the Fairy core actually threatening rather than a type-chart puzzle with one answer.",
+  "authored_set_legality": "No legality problems. Pixilate, Aroma Veil, Cheek Pouch, Screen Cleaner, the Babiri Berry and the Choice Scarf all behaved as printed.",
+  "notes": "Alcremie resolved as ALCREMIE_STRAWBERRY_VANILLA_CREAM and Mr. Mime as MR_MIME_GALAR, both correct."
+}
