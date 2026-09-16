@@ -444,6 +444,12 @@ static bool32 PairTargetIsLegal(enum BattlerId actor, enum BattlerId target, enu
     }
 }
 
+static bool32 PairSpread(enum Move move)
+{
+    enum MoveTarget target = GetMoveTarget(move);
+    return target == TARGET_BOTH || target == TARGET_FOES_AND_ALLY || target == TARGET_ALL_BATTLERS;
+}
+
 static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u32 noActionMask)
 {
     ev->count[actor] = 0;
@@ -499,9 +505,12 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
             }
         }
     }
-    if (GetBattlerSide(actor) == ev->side)
     {
         // Known single-target failures are not enabling actions on a foe.
+        // This runs for the opposing enumeration too: those actions are
+        // damage forecasts, and one that cannot affect its target contributes
+        // no damage and no target pattern, so carrying it only makes the joint
+        // forecast's comparison larger.
         // Preserve allied activation and multi-recipient/retargeting moves:
         // other recipients may be vulnerable. If every option fails, retain the actual
         // legal moves rather than inventing Struggle or an unavailable action.
@@ -563,12 +572,6 @@ bool32 IsFixedDamageMove(enum Move move)
     default:
         return FALSE;
     }
-}
-
-static bool32 PairSpread(enum Move move)
-{
-    enum MoveTarget target = GetMoveTarget(move);
-    return target == TARGET_BOTH || target == TARGET_FOES_AND_ALLY || target == TARGET_ALL_BATTLERS;
 }
 
 static bool32 PairForecastHitsTarget(enum BattlerId actor, const struct PairAction *action, enum BattlerId target)
