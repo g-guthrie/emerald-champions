@@ -1,0 +1,29 @@
+{
+  "play_order": 268, "e_group": "E0410", "trainer": "TRAINER_SOPHIA", "class": "ace", "location": "Route110_TrickHousePuzzle6",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Tapu Bulu/Bellossom/Oricorio offset 1 -> L83, Mudsdale offset 2 -> L84. Confirmed.",
+  "party_manifest": "work/playtest/268-TRAINER_SOPHIA/party_sophia_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 410, "outcome": "won", "turns": 7, "player_faints": 5, "opponent_faints": 4,
+     "narrative": "T1 Fake Out Bulu + Heat Wave OHKO Bulu; Bellossom Protected. T2 I deliberately gave the troupe a turn (Chi-Yu Protect, Knock Off Oricorio 198) to observe the engine: Bellossom Quiver Dance, Oricorio Dancer-copied it and then used its own for +2. T3 Oricorio +2 Revelation Dance OHKO Incineroar (332); Bellossom Petal Dance went to the slot I had just switched Swampert into (4x) and Dancer copied Petal Dance into it too: two faints in one turn. T4 Sucker Punch KO Oricorio, Heat Wave missed Bellossom, Petal Dance KO Chien-Pao. T5 Bellossom Protect blocked Shadow Ball + Heat Wave, Mudsdale Heavy Slam OHKO Flutter Mane. T6 Surging Strikes KO Mudsdale, +1 Giga Drain KO Urshifu. T7-8 Chi-Yu 1v1: Heat Wave into Sash, Bellossom Quiver Danced at 1 HP, Heat Wave finished. Chi-Yu ended at 44/213."}
+  ],
+  "strategy_checks": [
+    {"check": "Tapu Bulu Grassy Surge sets the stage", "result": "PASS", "evidence": "Grassy terrain at turn 0; healed Chi-Yu/Mudsdale each turn; expired end of T5."},
+    {"check": "Bellossom opens with Quiver Dance while Bulu attacks", "result": "PASS (turn 2, Bulu already gone)", "evidence": "T1 Bellossom Protected (correct read on Fake Out/Heat Wave); T2 Quiver Dance."},
+    {"check": "Oricorio Dancer copies the dance for free", "result": "PASS", "evidence": "T2 Dancer copied Quiver Dance, then Oricorio used its own Quiver Dance (+2/+2/+2). T3 Dancer copied Petal Dance into Swampert (4x) for the second KO of the turn."},
+    {"check": "Turn two spends the boosts", "result": "PASS", "evidence": "T3 +2 Revelation Dance OHKO Incineroar; Bellossom +1 Petal Dance."},
+    {"check": "Petal Dance lock and confusion cost", "result": "PASS", "evidence": "Petal Dance T3-T4, confused after T4, snapped out T6."},
+    {"check": "Mudsdale Stamina/Body Press no-setup mode", "result": "PASS", "evidence": "Stamina +1 on Heat Wave (T5) and on each Surging Strikes hit; Heavy Slam OHKO Flutter Mane T5."},
+    {"check": "Focus Sash Bellossom", "result": "PASS", "evidence": "T7 hung on at 1 HP through Heat Wave."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Bellossom", "payoff": "blocked Heat Wave before the Sash could be broken; real"},
+    {"turn": 5, "battler": "Bellossom", "payoff": "blocked Shadow Ball + Heat Wave (both aimed at it) while Mudsdale KOed Flutter Mane; real"}
+  ],
+  "ai_defects": [],
+  "ai_observations": ["T7 Bellossom at 1 HP chose Quiver Dance over Giga Drain against a 184 HP Chi-Yu; not lethal either way, and it died next turn. Not a defect."],
+  "level_changes": [],
+  "level_change_rationale": "Won on attempt 1 but with 5 faints and Chi-Yu at 44 HP: a real fight -> keep. Caveat: two of the five faints came from a turn I deliberately gave the troupe to observe Dancer; a player who Fake Outs Bellossom and Heat Waves turn 1 (the crack line) finishes this in three turns. The current levels are right for the puzzle-6 slot.",
+  "could_this_be_cooler": "It already is: the Dancer copy landed twice and one +2 Oricorio turned a 6-4 board into a 4-4 board. The one thing that undercuts the concept is the lead: Bulu + Bellossom means Oricorio is never on the field for the opening dance the plan describes, and a Fire lead deletes Bulu before the stage matters. Leading Bellossom + Oricorio (Bulu as the reserve that re-sets terrain) would make the plan's 'one turn buys two boosted attackers' true on turn 1. Not changed in this pass.",
+  "authored_set_legality": "No problem found."
+}

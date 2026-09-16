@@ -1,0 +1,38 @@
+{
+  "rom_sha256": "fafac4dd38ac0046c540c86b1e9b9c2e12d73568e8ceed6d7d85f54baead4eef",
+  "elf_sha256": "c23fa9e473c3242f4e2a18f4051eb68433fbd1ec5c5c610b1e71113ac1951b95",
+  "seed": 410,
+  "trainer_a": "TRAINER_SOPHIA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 84,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/268-TRAINER_SOPHIA/party_sophia_84.json",
+  "party_sha256": "7cb95c83eb16fe256125c149cb94fcd4b490a97d4d86b68f171d80e75ed1b675",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "Trick House puzzle 6, Sophia (E0410), cap 84",
+    "party": 6
+  },
+  "started": {
+    "frames": 1638
+  },
+  "replacement_commits": {
+    "turn": 7,
+    "slots": {}
+  }
+}
