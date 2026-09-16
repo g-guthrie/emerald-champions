@@ -1,0 +1,31 @@
+{
+  "play_order": 271, "e_group": "E0422", "trainer": "TRAINER_HERMAN", "class": "ace", "location": "Route131",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Five members offset 1 -> L83, Crabominable offset 2 -> L84. Confirmed.",
+  "party_manifest": "work/playtest/271-TRAINER_HERMAN/party_herman_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 422, "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 6,
+     "narrative": "T1 both leads Protected (blocked Fake Out and Heat Wave). T2 Bronzong chose Trick Room and Gourgeist Poltergeist, but Chi-Yu's Heat Wave OHKOed both first: the room never went up. T3 Heat Wave OHKO Heracross (Toxic Orb never activated); Florges Protected. T4 Heat Wave + Flare Blitz KO Copperajah; Florges Calm Mind. T5 Crabominable Mega Evolved, Florges Protected again, Mega Drain Punch OHKO Incineroar (329). T6 Crabominable Protected both attacks; +1 Moonblast KO Chi-Yu. T7 Flutter Mane Moonblast KO Mega Crabominable, Surging Strikes through Florges."}
+  ],
+  "strategy_checks": [
+    {"check": "Bronzong sets Trick Room when it helps (Mental Herb vs Taunt)", "result": "PASS chosen / denied", "evidence": "T1 Protect under Fake Out threat, T2 native choice Trick Room; died to Heat Wave before moving. Mental Herb not exercised (no Taunt used)."},
+    {"check": "Gourgeist attacks or burns the physical threat", "result": "PASS chosen", "evidence": "T2 Poltergeist selected; died first."},
+    {"check": "Guts Heracross Toxic Orb -> Facade/Close Combat", "result": "NOT EXERCISED", "evidence": "OHKOed by 4x Heat Wave on its first turn before the Orb activated."},
+    {"check": "Copperajah Heavy Metal / High Horsepower", "result": "chosen, died first", "evidence": "T4 native choice High Horsepower into Chi-Yu; KOed before moving."},
+    {"check": "Florges Calm Mind / Wish endgame with Protect", "result": "PASS", "evidence": "T3 Protect, T4 Calm Mind, T5 Protect, T6 +1 Moonblast KO Chi-Yu. Wish never needed. Flower Veil not exercised."},
+    {"check": "Mega Crabominable Iron Fist Ice Hammer / Drain Punch", "result": "PASS", "evidence": "Mega Evolved T5 on its first action turn; Drain Punch OHKO Incineroar (329/332); T6 Protect blocked Moonblast + Heat Wave."},
+    {"check": "Zero Speed IVs make the crew genuinely slow", "result": "PASS", "evidence": "Every opposing member moved after both my actives all fight; without the room the team was as slow as the crack line promises."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Bronzong", "payoff": "blocked Fake Out; real (but delayed the room by a turn it never got)"},
+    {"turn": 1, "battler": "Gourgeist", "payoff": "blocked Heat Wave (lethal); real"},
+    {"turn": 3, "battler": "Florges", "payoff": "blocked Heat Wave + Flare Blitz (lethal in sum); real"},
+    {"turn": 5, "battler": "Florges", "payoff": "blocked Heat Wave + Flare Blitz again while Mega Crabominable KOed Incineroar; real"},
+    {"turn": 6, "battler": "Crabominable", "payoff": "blocked Moonblast + Heat Wave (lethal in sum); real"}
+  ],
+  "ai_defects": [],
+  "level_changes": [],
+  "level_change_rationale": "Won on attempt 1 with two faints after five real Protects and a Mega that OHKOed Incineroar: a real fight -> keep.",
+  "could_this_be_cooler": "The Speed-IV fix reads: this is a real Trick Room crew now, and Florges/Crabominable Protect timing was the best AI play in the block. The weak spot is that the room itself never appeared against the obvious Fire lead (Bronzong + Gourgeist both 2x to Fire, and Bronzong Protected turn 1 instead of setting under Mental Herb). Leading Bronzong beside Florges (Fire-neutral, can Protect the setter's turn with Wish pressure) would make the room happen more often; not changed in this pass.",
+  "authored_set_legality": "No problem found."
+}

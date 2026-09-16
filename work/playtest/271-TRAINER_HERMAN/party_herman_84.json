@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Route 131, Herman (E0422), cap 84",
+  "availability_audit": "Cap-84 window, Route 131 after Mossdeep; Sootopolis not entered, nothing from Seafloor Cavern, Cave of Origin, Sootopolis, Pacifidlog or Underwater maps. Incineroar gate 36; Chi-Yu gate 48 (reachable legend); Zapdos gate 30 (reachable legend); Flutter Mane gate 68; Urshifu-RS gate 42; Chien-Pao gate 60.",
+  "plan": "Deny the room: Fake Out Bronzong and Beads-of-Ruin Heat Wave (2x on Bronzong and Gourgeist) on turn 1 so Trick Room never goes up; Incineroar and Urshifu are comfortable under a room if it does. Zapdos Hurricane is 4x on Heracross and 2x on Gourgeist; Chien-Pao/Urshifu handle Copperajah and Mega Crabominable; Flutter Mane is the Ghost answer to Bronzong/Gourgeist.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Intimidate, Fake Out, Knock Off",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_TORRACAT (Litten, Mauville C22)."
+    },
+    {
+      "species": "SPECIES_CHI_YU",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_DARK_PULSE",
+        "MOVE_NASTY_PLOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEADS_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "spread Fire, Beads of Ruin",
+      "availability": "pool-84 gate 48, legendary_sign:AshenWoods (C31). Reachable legend."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STATIC",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Electric/Flying special attacker",
+      "availability": "pool-84 gate 30, legendary_sign:NewMauville_Inside (C23). Reachable legend."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest special attacker, Icy Wind speed control",
+      "availability": "pool-84 gate 68, wild:MtPyre_Summit/land_mons (C37)."
+    },
+    {
+      "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+      "moves": [
+        "MOVE_SURGING_STRIKES",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Water/Fighting through Protect",
+      "availability": "pool-84 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER (Jagged Pass C26)."
+    },
+    {
+      "species": "SPECIES_CHIEN_PAO",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SWORD_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fast Ice/Fighting, Sword of Ruin",
+      "availability": "pool-84 gate 60, legendary_sign:ShoalCave_LowTideIceRoom (Route 125, before Mossdeep). Reachable legend."
+    }
+  ]
+}
