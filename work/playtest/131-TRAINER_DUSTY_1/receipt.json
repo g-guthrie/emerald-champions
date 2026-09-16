@@ -1,0 +1,36 @@
+{
+  "play_order": 131,
+  "e_group": "E0155",
+  "trainer": "TRAINER_DUSTY_1",
+  "class": "ace",
+  "location": "Route111",
+  "cap": 42,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/131-TRAINER_DUSTY_1/party.json",
+  "level_audit": "PASS. Ting-Lu 41 (+1), Sigilyph 41 (+1), Bastiodon 41 (+1), Aurorus 42 (+2). All equal cap 42 + offset - 2.",
+  "attempts": [
+    {"seed": 21, "run_dir": "work/playtest/131-TRAINER_DUSTY_1/run-s21", "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "Ting-Lu's Vessel of Ruin is live and cuts Special Attack", "result": "PASS (present, but no target)", "evidence": "ABILITY_VESSEL_OF_RUIN reported throughout. My party was entirely physical, so the 25% Special Attack reduction had nothing to reduce on my side - but it was still charging its own ally, which is the opportunity cost the dossier flags. See design note."},
+    {"check": "Ruination halves the target's current HP regardless of bulk", "result": "PASS", "evidence": "Turn 1: Ting-Lu used Ruination on Swampert, taking it from 175 to 82 - exactly half, through an Assault Vest, ignoring 252 HP investment. This is the team's best moment and it landed on turn 1."},
+    {"check": "Refrigerate Hyper Voice plus Throat Spray - a spread Ice attack that boosts its own Special Attack on use", "result": "PASS", "evidence": "Turn 2: Aurorus used Hyper Voice; state afterwards shows spa +1 and ITEM_THROAT_SPRAY consumed to ITEM_NONE. Refrigerate confirmed as the live ability. The combination fired exactly as authored on the turn Aurorus entered."},
+    {"check": "Sigilyph attacks only after accounting for Vessel of Ruin's reduction to its own Special Attack", "result": "PASS (behaviourally)", "evidence": "Sigilyph chose Heat Wave, the spread option, on its one turn rather than a single-target Psychic - a reasonable way to extract value from a debuffed Special Attack. It was KOed on the same turn by Rock Slide plus Heavy Slam before a second decision."},
+    {"check": "Turn two can switch the aura holder to restore the ally's damage", "result": "FAIL (never attempted)", "evidence": "Ting-Lu never switched. It used Ruination, Stomping Tantrum and Protect across three turns while its Special-Attacking partners Sigilyph and Aurorus both fought under its own 25% penalty. The plan explicitly names this switch as the phase plan and the AI did not execute it."},
+    {"check": "Bastiodon Stealth Rock / Metal Burst / Chesto Rest as an honest stall lane", "result": "FAIL (never reached)", "evidence": "Bastiodon entered last, on turn 3, and was KOed on turn 4 by one Mamoswine High Horsepower (4x on Rock/Steel) without acting. It never used Stealth Rock, Metal Burst or Rest. ITEM_CHESTO_BERRY and ABILITY_SOUNDPROOF confirmed as authored."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Ting-Lu", "payoff": "empty", "detail": "Both player attacks were aimed at Aurorus, so nothing was blocked and the partner died anyway. Ting-Lu was at 216/216 with Leftovers and no incoming threat identified. With the plan's own switch-out line available - moving the aura off the field to restore Aurorus's Special Attack - spending this turn on a guard was the worst of the options."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "Move-level play was fine: Ruination on turn 1 into the bulkiest target is the correct use of a percentage-damage move, Stomping Tantrum correctly picked the 2x target (Steelix) over the neutral one, and Sigilyph's spread Heat Wave was a sensible answer to its own debuffed Special Attack. The gap is entirely at the phase level - the 'Conservative' profile never used the switch that its own plan names as the way to pay back Vessel of Ruin's cost to its allies, and used a Protect instead on the one turn that switch mattered.",
+  "level_changes": [
+    {"member": "SIGILYPH", "before": 1, "after": 2, "reason": "Joint-lowest offset behind the ace; it got one Heat Wave off and was removed on turn 1 at 123 HP."},
+    {"member": "BASTIODON", "before": 1, "after": 2, "reason": "Joint-lowest offset and contributed nothing at all - entered on turn 3, KOed on turn 4 without acting."}
+  ],
+  "level_decision": "RAISE. Won on attempt 1 with a single player faint, which is the brief's raise condition. +1 each to the two weakest members. Ting-Lu was deliberately not raised - it is the ace and the whole identity of the team, and it was also the only member that played well.",
+  "rerun_status": "DEFERRED. The headless ROM in work/agent-battle-build-2 is prebuilt and this pass may not run make or materialize, so a rerun would replay the old levels. Offsets edited in place and left uncommitted for the main agent.",
+  "cooler_note": "Keep it - the dossier's judgment is right and Ruination halving a full-HP Assault Vest Swampert on turn 1 is exactly the moment it promises. But this run exposes the cost the dossier already flagged, in the sharpest possible form: Ting-Lu spent the whole battle charging a 25% Special Attack tax on its own two special attackers, Sigilyph and Aurorus, and never once switched out to lift it, because the plan's phase logic is prose rather than an executable tactic. Two concrete suggestions, neither implemented: (1) the aura's opportunity cost should be paid by composition rather than by a switch the AI does not make - pairing Ting-Lu with the two PHYSICAL members (Bastiodon is already physical-adjacent) and benching the special attackers behind it would make Vessel of Ruin pure upside; or (2) if the special attackers stay, the team needs an authored tactic that names the switch, the same way Eli's room has an explicit INSTRUCT tactic. Bastiodon remains the weakest slot for the reason the dossier gives - Soundproof did nothing here (Hyper Voice is its own ally's move, and Soundproof would have blanked nothing of mine) and it died before Metal Burst could ever be answered.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}

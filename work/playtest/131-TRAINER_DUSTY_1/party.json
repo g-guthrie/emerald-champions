@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0155 TRAINER_DUSTY_1, Route 111 ace (Vessel of Ruin + Refrigerate), cap 42",
+  "availability_audit": "Chronology: Dusty stands on Route 111 immediately after the Heat Badge, at the start of the cap-42 window. Every member's source gate is 36 or lower and every source map precedes Lavaridge in book play order: Petalburg Woods (C05), Seaspray Cave B1F (early, gate 14), Granite Cave (C12), Mauville Game Corner and the C18 Rock Smash license (C18), Altering Cave rock-smash. Nothing from later in the cap-42 window - no Mirage Tower or desert (C26), no Meteor Falls fishing, no Surf (C27), no Strength area, no legendary.",
+  "plan": "Carried forward from the Beau rebuild, which is also the right shape here. The party is entirely physical, so Ting-Lu's Vessel of Ruin - a 25% cut to Special Attack - has nothing to reduce. Heracross's Close Combat is 4x on both Bastiodon and Aurorus and 2x on Ting-Lu; Swampert's and Mamoswine's High Horsepower are 4x on Bastiodon; Steelix's Heavy Slam is 4x on Aurorus; Mamoswine's Thick Fat halves Refrigerate Hyper Voice.",
+  "party": [
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ICE_PUNCH",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Rock-resistant body with single-target Ground (2x on Lycanroc) and Ice (2x on Archeops); deliberately carries no Water move so Storm Drain is dead weight",
+      "availability": "Mudkip from the Mauville Game Corner (500 coins, C18), Marshtomp at 16, Swampert at 36."
+    },
+    {
+      "species": "SPECIES_STEELIX",
+      "moves": [
+        "MOVE_HEAVY_SLAM",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_IRON_TAIL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_STURDY",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "takes Rock at 0.25x and Steel is 2x on both Lycanroc and Archeops; Sturdy guarantees it survives the first hit",
+      "availability": "Onix on the GraniteCave_B1F land table (gate 20), Steelix by Metal Coat trade evolution; the Rustboro Mart stocks the trade items from C06."
+    },
+    {
+      "species": "SPECIES_TORTERRA",
+      "moves": [
+        "MOVE_WOOD_HAMMER",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_CRUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_OVERGROW",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Grass/Ground: Wood Hammer is 4x on Gastrodon and 2x on Lycanroc, and the Ground half means Rock is only 0.5x",
+      "availability": "Turtwig from the Mauville Game Corner (500 coins, C18), Grotle at 18, Torterra at 32."
+    },
+    {
+      "species": "SPECIES_MAMOSWINE",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ICE_SHARD",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Ice is 2x on Archeops and Gastrodon; Ice Shard is the priority answer to a Defeatist Archeops or a weakened Lycanroc",
+      "availability": "Swinub in Seaspray Cave B1F (gate 14), Piloswine at 33, Mamoswine by known-move evolution."
+    },
+    {
+      "species": "SPECIES_HERACROSS",
+      "moves": [
+        "MOVE_MEGAHORN",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GUTS",
+      "item": "ITEM_CHOICE_BAND",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "the Kartana answer without bringing a Rock-weak Fire type; Close Combat is 2x on Kartana and 2x on Lycanroc",
+      "availability": "Heracross on the PetalburgWoods land table (gate 14)."
+    },
+    {
+      "species": "SPECIES_GARGANACL",
+      "moves": [
+        "MOVE_SALT_CURE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_PURIFYING_SALT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        4,
+        0,
+        0,
+        252,
+        0
+      ],
+      "role": "Rock resists Rock; Rock Slide is 2x on Archeops and Salt Cure grinds Gastrodon through Recover",
+      "availability": "Altering Cave 1F rock-smash table (gate 30); Rock Smash license from Mauville (C18)."
+    }
+  ]
+}
