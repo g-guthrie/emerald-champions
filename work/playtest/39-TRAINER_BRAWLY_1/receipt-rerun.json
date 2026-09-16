@@ -1,0 +1,93 @@
+{
+  "play_order": 39,
+  "e_group": "E0040",
+  "trainer": "TRAINER_BRAWLY_1",
+  "class": "leader",
+  "location": "DewfordTown_Gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun against the AI build that prices setup/support moves and charges healthy turn-one switches, to check Coaching, Quick Guard, Wide Guard and specifically whether Brawly still withdraws a healthy Hariyama. No level change was applied to this trainer between passes.",
+  "build": "work/agent-battle-build (headless ROM with the setup-pricing/switch-pricing AI fixes)",
+  "resolved_opponent_levels": {
+    "PACHIRISU": 21,
+    "HERACROSS": 20,
+    "CONKELDURR": 20,
+    "HARIYAMA": 21,
+    "HAWLUCHA": 20,
+    "COBALION": 19
+  },
+  "party_manifest": "work/playtest/39-TRAINER_BRAWLY_1/party.json",
+  "party_chronology_note": "Unchanged from pass 1: Togetic, Enamorus, Arcanine, Alakazam, Hoopa, Magearna, all gate <= 20 in work/reference-pools/pool-20.json. No Mega on the player side: the Mega Ring and Aerodactylite are the reward handed over after this battle, so no Mega is chronology-legal at play_order 39.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/39-TRAINER_BRAWLY_1/r1",
+      "seed": 44,
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "narrative": "T1 Pachirisu's Follow Me pulled both my attacks onto itself; Heracross' pre-Mega Rock Blast hit Enamorus 3 times and KO'd it, gaining Moxie. Arcanine came in and Intimidate erased the Moxie boost. T2 Pachirisu used Helping Hand instead of a second redirect and the boosted 5-hit Rock Blast KO'd Togetic before its 4x Air Slash could land; Heat Wave took Heracross to 21 and Pachirisu to 15. T3 Magearna replaced Togetic, Heracross Mega Evolved and was immediately KO'd by Arcanine's Extreme Speed; Pachirisu redirected Fleur Cannon onto itself and fell. Hariyama and Hawlucha came in. T4 Hariyama's Fake Out critically flinched Magearna and denied the Fleur Cannon; Hawlucha's Close Combat critically took Arcanine to 3 and triggered its White Herb, meeting the Unburden condition; Heat Wave critically hit both. T5 Extreme Speed KO'd Hawlucha, Arcanine died to its own Life Orb recoil, and a +2 Fleur Cannon KO'd the 94 HP Hariyama through its Sitrus. Hoopa replaced Arcanine and Cobalion plus Conkeldurr came in. T6 Conkeldurr's Mach Punch and Cobalion's Flash Cannon did 19 each; Hoopa's Psychic KO'd Conkeldurr and Fleur Cannon KO'd Cobalion."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Brawly no longer withdraws a healthy Hariyama (the pass-1 defect that the switch-pricing fix targets)",
+      "result": "PASS",
+      "evidence": "Turn 5, Hariyama at 94/111 with its Sitrus unspent and a live partner: it chose MOVE_KNOCK_OFF rather than switching. In pass 1 the same trainer withdrew a full-health Hariyama for Conkeldurr on its turn 6. No opponent switch of any kind occurred in this run."
+    },
+    {
+      "check": "Pachirisu's Follow Me creates attack windows",
+      "result": "PASS",
+      "evidence": "Turn 1 Follow Me absorbed both Air Slash and Moonblast, keeping Heracross at full HP for its Rock Blast. Turn 3 Follow Me pulled Fleur Cannon onto a 15 HP Pachirisu."
+    },
+    {
+      "check": "Pachirisu chooses Helping Hand or Super Fang when a second redirect is worth less",
+      "result": "PASS",
+      "evidence": "Turn 2 it chose MOVE_HELPING_HAND over a repeat Follow Me, and the boosted Rock Blast KO'd Togetic. This is exactly the 'Nuzzle or Super Fang is often better than another redirect' clause in the authored plan."
+    },
+    {
+      "check": "Heracross Mega Evolves in its sole permitted slot",
+      "result": "PASS",
+      "evidence": "Turn 3: 'The opposing Heracross's Heracronite is reacting' / 'has Mega Evolved into Mega Heracross'; the opponent party then reports SPECIES_HERACROSS_MEGA. It was KO'd by priority the same turn before it could attack as a Mega."
+    },
+    {
+      "check": "Hariyama's Fake Out is aimed at the setup/nuke threat",
+      "result": "PASS",
+      "evidence": "Turn 4 Fake Out targeted Magearna (battler 0) and the flinch denied a Fleur Cannon that would have KO'd Hawlucha that turn."
+    },
+    {
+      "check": "Hawlucha's White Herb / Unburden chain",
+      "result": "PASS",
+      "evidence": "Turn 4 Close Combat dropped its Defense and Sp.Def, then 'The opposing Hawlucha returned its stats to normal' - White Herb consumed, Unburden condition met."
+    },
+    {
+      "check": "Wide Guard on Hariyama",
+      "result": "NOT EXERCISED",
+      "evidence": "The only turn I used a spread move while Hariyama was out was turn 4, and Hariyama spent it on Fake Out into Magearna. That trade is defensible (the flinch denied a Fleur Cannon), so this is an untested behaviour rather than a wrong choice. Hariyama was KO'd on turn 5 before another spread turn could arise."
+    },
+    {
+      "check": "Quick Guard on Cobalion",
+      "result": "NOT EXERCISED - correctly declined",
+      "evidence": "Cobalion entered on turn 5 (end) and acted once, on turn 6. By then my only priority user, Arcanine, was dead, so Quick Guard would have been an empty guard. Cobalion attacked with Flash Cannon instead. Declining a guard that could deny nothing is the behaviour the guard-pricing fix is supposed to produce."
+    },
+    {
+      "check": "Coaching on Cobalion",
+      "result": "NOT EXERCISED",
+      "evidence": "Cobalion got exactly one action, on the turn the battle ended, with its only partner (Conkeldurr) about to be KO'd. Coaching had no surviving beneficiary. Untested this run; it needs a board where Cobalion arrives earlier alongside a healthy physical partner."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect this battle. Hawlucha is the only member carrying Protect and it chose Close Combat on both of its turns, which was the higher-value action on each (turn 4 it triggered its own White Herb, turn 5 it was aiming at a 3 HP Arcanine). Empty ledger is correct play, not a missing behaviour.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 5 Hariyama used Knock Off on a 3 HP Arcanine rather than attacking the 73 HP Magearna. It is a kill plus an item removal, so it is defensible, but Arcanine was already going to die to its own Life Orb recoil that turn and the turn was in effect spent on a corpse. Logged as a soft valuation observation, not a defect.",
+    "Turn 6 Conkeldurr's Mach Punch resolved against Magearna (19 damage), not against the Fighting-immune Hoopa; Cobalion's Flash Cannon took Hoopa to 61. Both targets were correct. Because the battle ended on that action the driver records no native `chosen` entries for it (documented behaviour), so these were reconstructed from the message log and the per-battler damage record.",
+    "Conkeldurr never got a turn with its Flame Orb active, so the Guts/Facade mode was not observed."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first attempt with three of six player Pokemon KO'd, including both of my Fairy nukes' partners, and with Magearna and Hoopa both taking real damage. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' No level change. Pass 1 on the same board and seed cost two faints; the extra faint here comes from the AI actually spending Pachirisu's turn on Helping Hand rather than a second redirect.",
+  "could_this_be_cooler": "No change wanted. The one gap worth flagging for a later pass is structural rather than cool-factor: Cobalion is the sixth member and on this board it arrived with one turn left, so neither Coaching nor Quick Guard - the two moves that justify it being a Fighting legend rather than another attacker - has now been observed in either pass. If a future pass wants those verified, Cobalion needs to be earlier in the send order, which is a deployment question, not a species/move/item one. Nothing changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass only: one attempt, same party manifest as pass 1, levels untouched. Generated projections were not committed."
+}
