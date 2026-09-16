@@ -1,0 +1,48 @@
+{
+  "play_order": 57,
+  "e_group": "E0064",
+  "trainer": "TRAINER_ANTHONY",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"DODUO": 32, "ZEBSTRIKA": 29, "LINOONE": 30, "MAGNETON": 28},
+  "cap_window_confirmation": "Dossier seeds 34/31/32/30 resolved to 32/29/30/28. Cap 30, Medium -2.",
+  "party_manifest": "work/playtest/57-TRAINER_ANTHONY/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Nidoking + Gardevoir. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Doduo attacks, or uses ONE supported Swords Dance - no Belly Drum and no Gluttony trigger is planned",
+    "Zebstrika threatens coverage or pivots with Volt Switch",
+    "Linoone supplies immediate Choice Band Extreme Speed or a useful Switcheroo",
+    "Magneton uses Reflect against physical pressure and then attacks",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/57-TRAINER_ANTHONY/a1", "seed": 57, "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "Turn 1 was the most dangerous single turn any team dealt me in this block. Zebstrika chose High Horsepower - the one coverage move on its sheet - into my Ground/Poison Nidoking for 2x and KO'd it from full 98 HP, and Doduo's Brave Bird took a freshly Mega-Evolved Gardevoir from 90 to 14. My Hyper Voice killed Zebstrika and Doduo finished itself on Brave Bird recoil, so the turn ended 2-for-1 in my favour on paper while leaving me with one Pokemon on 14 HP. T2 I brought Magearna in, pulled Gardevoir out for Kartana, and a critical Aura Sphere (2x) popped Magneton's Air Balloon and KO'd it; Linoone's Choice Band Extreme Speed and Magneton's Thunderbolt combined for 74 on Kartana through two resistances. T3 Kartana Protected the now-locked Extreme Speed and Aura Sphere KO'd Linoone from full 96."}
+  ],
+  "strategy_checks": [
+    {"check": "Doduo attacks or uses one supported Swords Dance", "result": "PASS (attack branch)", "evidence": "It had exactly one turn and used Brave Bird. Swords Dance on turn 1 against two unrevealed attackers would have been the greedy read and it did not take it. It then died to its own recoil plus a Hyper Voice, which is the cost of a 120 BP recoil move on a 74 HP body, not a decision error."},
+    {"check": "No Belly Drum turn, no Gluttony trigger", "result": "PASS", "evidence": "Neither appeared. Linoone held its Choice Band the whole battle, so Gluttony stayed dormant exactly as the dossier states."},
+    {"check": "Zebstrika threatens coverage or pivots", "result": "PASS - best opposing decision in my block", "evidence": "T1 High Horsepower into Nidoking. Zebstrika is an Electric-type whose STAB is a literal 0 against a Ground-type, and it correctly reached for the single coverage move that is 2x on that exact target, from a body with no Attack investment, and KO'd a 98 HP Life Orb attacker outright. Volt Switch was available and would have been the safe pivot; it took the kill instead, which was right."},
+    {"check": "Linoone supplies immediate Choice Band Extreme Speed or a useful Switcheroo", "result": "PASS (Extreme Speed branch)", "evidence": "T2 Extreme Speed into Kartana. It was 0.5x into a Steel-type and still contributed most of the 74 damage that took Kartana to 11, which is what a Choice Band priority move is for. See the note below about the Switcheroo it did not take."},
+    {"check": "Magneton uses Reflect against physical pressure and then attacks", "result": "CORRECTLY_NOT_USED", "evidence": "Magneton used Thunderbolt on its only turn. My board at that moment was Magearna and a switching Gardevoir - both special attackers - so Reflect would have banked nothing. Declining it was the right read of the 'against physical pressure' condition."},
+    {"check": "Air Balloon grounds-immunity is respected", "result": "PASS", "evidence": "The balloon was intact when Magneton entered and popped on the Aura Sphere that killed it. My plan explicitly routed around it (Mystical Fire and Aura Sphere rather than Earth Power), which is the intended counterplay."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Anthony's team used no Protect at all in three turns. Only Magneton and Doduo lack it on this roster - Linoone and Zebstrika do not carry it - so there was very little to guard with, and both members that could have stalled chose to attack instead. After three battles in this block where simultaneous guarding cost the opponent a turn, a team that simply attacks every turn is a refreshing contrast and it produced the highest damage-per-turn of any team I faced.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Zebstrika's High Horsepower is the single best decision I saw from any opponent in this block and it deserves to be recorded as a win for the scoring: an uninvested coverage move chosen over a STAB that would have done nothing, against the correct one of two targets, for an outright KO on a full-health attacker.",
+    "Linoone declined Switcheroo, which I think is the one decision worth a second look - though not a defect. Switcheroo onto my Magearna would have handed a pure special attacker a Choice Band (near-useless to it, and locking it into one move) while Linoone picked up an Assault Vest. That is a large, permanent swing for one turn. The AI instead took the immediate Extreme Speed damage, which is defensible on tempo - it was already two members down - but the item-trade line is exactly the 'road-race trick' the dossier says the slot exists for, and it has now gone unused.",
+    "Doduo's Brave Bird recoil finishing it off is not an error, but it does mean the highest-levelled member on the team (offset 4, L32) contributed one turn and then removed itself."
+  ],
+  "level_changes": [
+    {"member": "MAGNETON", "field": "level offset", "before": 0, "after": 1, "reason": "First-attempt win with one player faint. Magneton at L28 is the lowest-level opponent and the only support member; it got one turn, spent it correctly on a Thunderbolt, and died to a single (critical) Aura Sphere with its Reflect unused. Zebstrika is deliberately left alone despite being second-lowest at L29: it traded itself for my best attacker on turn one and comfortably earned its keep, and Doduo at offset 4 and Linoone at offset 2 are already the team's level budget."}
+  ],
+  "post_change_rerun": "NOT RUN - requires a headless ROM rebuild of the shared work/agent-battle-build; see the play_order 49 receipt.",
+  "calibration": "Three turns and one faint reads like a blowout, and it was not: I finished with Nidoking dead, Gardevoir on 14 and Kartana on 11, and turn 1 alone cost me 174 HP across two Pokemon. This team hits harder per turn than anything else in my block. The single-faint count still puts it over the review threshold, so one level goes to the weakest member, but I would resist any larger increase here.",
+  "could_this_be_cooler": "Yes, and the improvement is small and specific. The road-race theme is coherent - two runners, a sprinter and a magnet - and the AI plays it aggressively, which suits it. What is missing is that the team's most interesting authored idea, Linoone's Switcheroo item trade, has no board on which it is clearly the best action, so it never happens. Linoone arrives as the third or fourth member, by which time tempo always argues for the Band attack instead. Leading Linoone would fix that: a turn-one Switcheroo onto an opposing lead is a genuinely memorable opening for a roadside trainer and it is the sort of thing a player tells someone about, whereas a turn-three Switcheroo is never correct. The second, smaller point is that Doduo at offset 4 is the highest-levelled member and holds Eviolite, but both of its attacks are recoil moves - it is levelled like a wall and equipped like a wall while playing like a glass cannon that kills itself. Either Quick Attack deserves to be its default or one of the two recoil moves should not be there. Neither change is a level, so nothing beyond Magneton's offset was touched.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
