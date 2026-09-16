@@ -1,0 +1,50 @@
+{
+  "play_order": 260,
+  "e_group": "E0401",
+  "trainer": "TRAINER_GRUNT_SPACE_CENTER_3",
+  "class": "grunt",
+  "location": "MossdeepCity_SpaceCenter_1F",
+  "chapter": "Team Magma Space Center raid (perimeter watch)",
+  "cap": 84,
+  "cap_confirmation": "driver state reported level_cap 84; all four members at offset -1 = L81 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/260-TRAINER_GRUNT_SPACE_CENTER_3/party_raid84.json"],
+  "chronology_note": "Mind Badge earned, Space Center raid, before the Seafloor Cavern. pool-84 adds only Seafloor Cavern / Underwater / Cave of Origin species over pool-76, all excluded. Incineroar 36, Urshifu-Rapid 42 (Kubfu Route112), Swampert 36 + Swampertite stone-window 14, Great Tusk 42 (Route111 ruins), Landorus 42 (Route111 ruins sign - reachable legend), Gholdengo 48.",
+  "pre_play_strategy_checks": [
+    "Salandit Fake Out buys Seviper its Coil turn",
+    "Corrosion Toxic on a Steel/Poison target",
+    "Bastiodon Sturdy + Metal Burst returns a big hit",
+    "Rapidash Flame Body contact burn"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 11, "build": "work/agent-battle-build-7", "run_dir": "work/playtest/260-TRAINER_GRUNT_SPACE_CENTER_3/a1",
+      "party": "party_raid84.json (Incineroar / Urshifu-Rapid / Mega Swampert / Great Tusk / Landorus / Gholdengo)",
+      "outcome": "won", "turns": 5, "player_faints": 0, "opponent_faints": 4,
+      "why": "Salandit's Fake Out flinched Urshifu turn 1 while Seviper Protected my Fake Out, so the plan's opener half-worked - but Seviper never Coiled: the AI withdrew it on turn 2 for Rapidash, which ate a 207 Knock Off, and Surging Strikes broke Salandit's Sash and killed it. Turn 3 Aqua Jet finished Rapidash and Knock Off killed the returning Seviper after its Poison Jab poisoned Incineroar. Bastiodon Protected turn 4 (Weakness Policy fired through the 25 percent Unseen Fist hits) and died turn 5 to three critical Surging Strikes before Metal Burst ever fired."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Fake Out buys Coil", "result": "FAIL", "evidence": "turn 1 Fake Out flinched Urshifu, but Seviper chose Protect that turn and was withdrawn on turn 2; Coil was never used"},
+    {"check": "Corrosion Toxic", "result": "NOT SEEN", "evidence": "Salandit chose Fake Out then Sludge Wave (died before it resolved); no Steel target was on the field"},
+    {"check": "Sturdy + Metal Burst", "result": "FAIL", "evidence": "Surging Strikes' three hits broke Sturdy and killed Bastiodon on turn 5; Metal Burst never chosen (Protect on turn 4)"},
+    {"check": "Flame Body", "result": "NOT TRIGGERED", "evidence": "Aqua Jet contact on turn 3 did not burn (30 percent)"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Seviper", "payoff": "blocked Fake Out (real), but Salandit's own Fake Out turn was meant to be Seviper's Coil turn, so the guard cost the room its setup"},
+    {"turn": 4, "user": "Bastiodon", "payoff": "cut Surging Strikes to 54 and blocked Knock Off (real)"}
+  ],
+  "protect_summary": "2 Protects, both blocked something. Seviper's is strategically empty: Protect on the turn the partner Fake Outs is the room's opener wasted.",
+  "ai_defects": [
+    {"turn": 2, "board": "Salandit 194/194 Sash and Seviper 235/235 (-1 Atk) versus Incineroar and Urshifu, both full", "chosen": "withdrew Seviper for Rapidash, which took Knock Off for 207 of 254 on entry", "better": "Seviper Coil (the plan) or attack; switching the setup piece out into a Knock Off to clear Intimidate gave the player a free 80 percent on Rapidash and brought Seviper back later with no boost. Switch-to-reset-Intimidate is over-valued here."}
+  ],
+  "ai_notes": "Salandit correctly Fake Outed the faster attacker. Rapidash chose Will-O-Wisp into the Fire-type Incineroar's slot on turn 3 - the driver's chosen record shows target 2 (Urshifu) and Rapidash died before moving, so no defect is claimed from the record.",
+  "level_changes": [
+    {"member": "SALANDIT", "field": "level offset", "before": -1, "after": 0, "why": "won attempt 1 with zero faints; the opener piece died turn 2"},
+    {"member": "SEVIPER", "field": "level offset", "before": -1, "after": 0, "why": "never Coiled, killed by one Knock Off after switching back in"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 4-0 with zero faints. Bastiodon and Rapidash keep -1; the two setup pieces go to 0.",
+  "cooler": "The guard-post concept reads (poison lizard, coiling snake, shield wall, horse) but nothing fired: Metal Burst is the memorable piece and it needs Bastiodon to survive a big hit first, which multi-hit Water attacks deny. Cooler: give Bastiodon Wide Guard as the plan text already describes ('Soundproof-free Wide Guard') - the authored set does not actually carry Wide Guard, so the plan and the moves disagree. Suggestion only.",
+  "legality_notes": "Plan text says Bastiodon holds Wide Guard; the set is Metal Burst / Iron Head / Rock Slide / Protect. Sets are legal; the prose is stale.",
+  "verification_limit": "The +1 on Salandit and Seviper cannot be re-verified until the main agent rebuilds."
+}

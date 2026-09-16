@@ -1,0 +1,26 @@
+{
+  "trainer_a": "TRAINER_GRUNT_SPACE_CENTER_3",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 11,
+  "difficulty": "medium",
+  "level_cap": 84,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 4,
+  "decisions": 5,
+  "player_faints": 0,
+  "opponent_faints": 4,
+  "ai_decision_frames_max": 61,
+  "ai_decision_seconds_max": 1.021,
+  "ai_decision_frames": [
+    61,
+    61,
+    23,
+    21,
+    21
+  ],
+  "rom_sha256": "fafac4dd38ac0046c540c86b1e9b9c2e12d73568e8ceed6d7d85f54baead4eef",
+  "elf_sha256": "c23fa9e473c3242f4e2a18f4051eb68433fbd1ec5c5c610b1e71113ac1951b95",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
