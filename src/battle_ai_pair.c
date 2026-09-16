@@ -1334,6 +1334,24 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         if (matched)
             return 25;
     }
+    if (!IsBattleMoveStatus(action->executedMove) && IsBattlerAlive(action->target)
+     && !IsBattlerAlly(actor, action->target)
+     && AI_GetMovePriority(actor, gAiLogicData->abilities[actor], move) > 0
+     // Fake Out's worth is the flinch it buys, not the step in the order, so
+     // it is not redundant on a user that is already faster.
+     && action->executedMove != MOVE_FAKE_OUT && action->executedMove != MOVE_FIRST_IMPRESSION)
+    {
+        // Priority buys one thing: striking first. A user that already
+        // outspeeds its target has bought it for free, so the extra step is
+        // worth nothing and the comparison belongs to the damage - which is
+        // how a Huge Power body took the small priority attack twice over the
+        // move that would have ended the same target.
+        bool32 slowerTarget = gFieldStatuses & STATUS_FIELD_TRICK_ROOM
+            ? gAiLogicData->speedStats[actor] < gAiLogicData->speedStats[action->target]
+            : gAiLogicData->speedStats[actor] > gAiLogicData->speedStats[action->target];
+        if (slowerTarget)
+            return -45;
+    }
     if (move == MOVE_WIDE_GUARD || move == MOVE_QUICK_GUARD)
     {
         // A spread move seen from a living foe last turn is the reason these
