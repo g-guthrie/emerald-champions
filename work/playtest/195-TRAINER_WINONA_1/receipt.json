@@ -1,0 +1,53 @@
+{
+  "play_order": 195,
+  "e_group": "E0289",
+  "trainer": "TRAINER_WINONA_1",
+  "class": "leader",
+  "location": "FortreeCity_Gym",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "driver state reported level_cap 54. Zapdos and Enamorus (+2) at L54, Altaria / Talonflame / Noivern (+3) at L55, Mega Skarmory (+1) at L53 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_fortree54.json"],
+  "chronology_note": "Same audited cap-54 Fortree party as play_order 193-194; see that manifest's availability_audit.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "party": "party_fortree54.json (Incineroar/Amoonguss/Regieleki/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 7, "player_faints": 3, "opponent_faints": 6,
+      "why": "Altaria's Helping Hand is the reason this fight cost three Pokemon: it turned Zapdos's turn-1 Hurricane into an outright OHKO on a 237 HP Amoonguss and Noivern's turn-3 Flamethrower into an OHKO on Regieleki as it switched in. Mega Metagross's Ice Punch removed Zapdos on turn 2 but ate a Static paralysis and had to be withdrawn at 38/167. Weavile's 4x Ice then broke the Dragon half - Icicle Crash KOed Altaria and Ice Shard finished Talonflame - and Zapdos's Thunderbolt (2x on every Flying body) closed Mega Skarmory and Enamorus."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Zapdos applies immediate Thunderbolt/Hurricane pressure", "result": "PASS", "evidence": "turn 1 Hurricane, boosted by Altaria's Helping Hand, dealt 237 and OHKOed a full-health Amoonguss. Turn 2 Thunderbolt paralyzed Mega Metagross through Static and effectively removed it from the fight."},
+    {"check": "Altaria chooses between Tailwind and Haze; Haze erases the player's setup on the turn it should pay off", "result": "NOT OBSERVED", "evidence": "Altaria had four turns (1, 2, 3, 4) and chose Helping Hand every single time. It never used Haze, Tailwind or Roost. This is defensible turn by turn - I never set up a stat boost, so Haze had no target, and each Helping Hand converted into a kill - but the leader's TAILWIND strategy flag never fired and the authored 'reason a player's setup plan fails' was never on screen. A player who does try to set up should re-test this."},
+    {"check": "Enamorus's Contrary Superpower is a growth curve the AI treats as such", "result": "FAIL", "evidence": "Enamorus was held to last and entered at 1-vs-2 on turn 7 with 161 HP against a 170 HP Zapdos and a full Weavile. It used Play Rough once and died. Superpower was never selected, so the Contrary interaction the block calls the turn-two pivot never happened."},
+    {"check": "Gale Wings Talonflame gives priority Brave Bird from full health", "result": "FAIL", "evidence": "Talonflame entered on turn 4 and on turn 5 was at full 168/168 - the exact Gale Wings condition - and chose Flare Blitz into Incineroar, a Fire/Dark body that resists it, instead of the neutral Choice Band STAB Brave Bird. Because of the Choice lock it then had to repeat Flare Blitz on turn 6. See AI defect E0289-1."},
+    {"check": "Choice Specs Noivern with Infiltrator is the special breaker", "result": "PASS", "evidence": "turn 3 Helping Hand + Specs Flamethrower OHKOed Regieleki on the switch-in. Infiltrator was never tested - I brought no screens or Substitute."},
+    {"check": "Mega Skarmory is a separate endgame - Iron Defense into Body Press wins the long game", "result": "FAIL", "evidence": "Skarmory used Body Press on turn 5 (a clean 2x KO contribution on Incineroar), then Mega Evolved on turn 6 and chose Brave Bird into Zapdos - 0.5x AND recoil. The recoil is what took it off full HP, which is the only reason Sturdy did not survive the Thunderbolt that followed. Iron Defense was never used in the fight. See AI defect E0289-2."},
+    {"check": "No single type answers her", "result": "PASS", "evidence": "Ice (4x) beat Altaria and Noivern but is 1x into Skarmory and Talonflame; Electric beat Zapdos's teammates and Skarmory but not Skarmory's Steel half alone. Two damage types plus Fake Out/Spore control were genuinely required, exactly as written."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects in seven turns. Only Enamorus carries Protect and it had a single turn at 1-vs-2, where guarding would have been pointless. Nothing to fault.",
+  "ai_defects": [
+    {
+      "id": "E0289-1",
+      "turn": 5,
+      "board": "Talonflame 168/168 (full health, Gale Wings live, Choice Band, first turn after entry so no lock yet) beside Skarmory 181/181, opposite Incineroar 189/217 (Fire/Dark) and Weavile 156/156 (Dark/Ice).",
+      "chosen": "Flare Blitz into Incineroar - 0.5x, with recoil.",
+      "better": "Brave Bird. Same 120 base power, same Choice Band, but neutral on Incineroar and neutral on Weavile, and it is the move Gale Wings exists to accelerate. Talonflame threw away both its ability and its item on its only free choice, then was locked into the resisted move for the rest of its life. Fire vs a Fire-type is a type-chart read the scorer should never lose; note this is a Choice-item first-selection path, so any Choice-locked attacker in the campaign is plausibly affected. Severity: high."
+    },
+    {
+      "id": "E0289-2",
+      "turn": 6,
+      "board": "Skarmory Mega Evolving at 181/181 with Sturdy, opposite a freshly switched-in Zapdos 211/211 and Weavile 156/156. Iron Defense, Roost and Body Press were all available.",
+      "chosen": "Brave Bird into Zapdos - 0.5x (Flying resists Flying) and self-damaging.",
+      "better": "Iron Defense (the printed win condition) or Roost. The recoil from its own resisted attack is the sole reason Skarmory was below full HP when Thunderbolt resolved, and therefore the sole reason Sturdy did not save it. A Sturdy wall whose whole plan is Iron Defense into Body Press should never spend its Mega turn on a recoil move that is resisted by the target. Severity: high - this is the leader's stated endgame and it deleted itself in one turn. Likely the same recoil/setup scoring family as E0288-3 rather than anything bespoke."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on the first attempt but it cost three Pokemon (Amoonguss OHKOed on turn 1, Regieleki OHKOed on turn 3, Incineroar on turn 5) and the survivor pair finished at 45/211 and 156/156 with the Mega sidelined by paralysis at 38/167. That is a real fight by the brief's rule (2+ faints -> keep) and meets AGENTS.md's three-faint aim for a leader. The +1 rule requires 0-1 faints and no real threat; it does not apply. As with E0288, note that two of the six members under-executed their authored roles, so these levels are calibrated against a weaker-than-intended Winona.",
+  "cooler": "The roster earns retention and the Haze-over-Dragon-Pulse change is right in principle. The honest finding is that Winona's difficulty as played came almost entirely from one move on one Pokemon: Altaria's Helping Hand turned two ordinary attacks into two outright OHKOs and was chosen on all four of its turns. That is a genuinely memorable leader signature - but it means Haze, Tailwind and Roost are dead weight on the same slot, and the AI will keep taking the greedy option. One concrete improvement: give the Helping Hand role to a dedicated partner and let Altaria keep Haze/Tailwind/Roost as the control slot, or accept Helping Hand as the identity and replace one of the two unused support moves with something the AI will actually reach for. Second note, for the book rather than the build: Enamorus is printed as the turn-two Contrary pivot but is deployed as the sixth Pokemon, so in practice it arrives after the fight is decided. Putting Enamorus in the opening pair would make the Contrary growth curve the thing the player has to solve, which is what the plan says it is.",
+  "legality_notes": "No legality problem in the authored set. Two legendaries (Zapdos, Enamorus) at +2 and the custom Skarmorite Mega at +1 are all inside the cap-54 window, and the Skarmorite has no other home in the campaign as the block states.",
+  "verification_limit": "No level change was made, so nothing here is pending re-verification. If the main agent fixes E0289-1 or E0289-2, Winona is the second-most valuable re-run in this block after E0288."
+}
