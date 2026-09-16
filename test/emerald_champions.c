@@ -2431,12 +2431,13 @@ TEST("Emerald Champions paired prizes use incoming cap once and exclude replays"
     ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentA);
     ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentB);
     InitCampaignBattleReward();
-    EXPECT_EQ(GetCampaignBattleMoneyReward(), 1900);
+    // Design item F: the authored tier 25 (leader/admin) now pays 10 per cap point.
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 760);
     FlagSet(FLAG_EC_REPORT_C42_COMPLETE);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    EXPECT_EQ(GetCampaignBattleMoneyReward(), 1900);
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 760);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    EXPECT_EQ(GetCampaignBattleMoneyReward(), 1900);
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 760);
     SetTrainerFlag(TRAINER_BATTLE_PARAM.opponentA);
     SetTrainerFlag(TRAINER_BATTLE_PARAM.opponentB);
     InitCampaignBattleReward();
@@ -2598,7 +2599,7 @@ TEST("Emerald Champions free Ball restock remains ten after the opening and cann
     EXPECT_EQ(GetItemPrice(ITEM_ETHER), 1000);
     EXPECT_EQ(GetItemSellPrice(ITEM_POKE_BALL), 0);
     EXPECT_EQ(GetItemSellPrice(ITEM_ULTRA_BALL), 0);
-    EXPECT_EQ(GetItemSellPrice(ITEM_HEART_SCALE), 1000);
+    EXPECT_EQ(GetItemSellPrice(ITEM_HEART_SCALE), 0); // Field treasure is not a money source.
     FlagClear(FLAG_DEFEATED_RIVAL_ROUTE103);
     ResetBookItemOwnership();
 }

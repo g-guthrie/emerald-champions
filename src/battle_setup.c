@@ -2465,6 +2465,25 @@ void CreateTrainerPartyForPlayer(void)
     CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], GetTrainerStructFromId(gSpecialVar_0x8004));
 }
 
+// The retuned campaign prize tiers (design item F, September 16 2026). The
+// authored per-trainer values in src/data/trainers.party are the design tier
+// labels (ordinary / ace-Gym-rival / leader-admin / Elite Four / Champion);
+// this table is the money they pay per point of the live level cap. Retuning
+// here rather than in the party file keeps the trainer roster untouched and
+// keeps one place to read the whole prize curve.
+static u32 CampaignPrizeMultiplier(u32 authoredTier)
+{
+    switch (authoredTier)
+    {
+    case 5:  return 2;  // ordinary
+    case 10: return 4;  // ace, Gym member, rival
+    case 25: return 10; // Gym Leader, team admin
+    case 40: return 16; // Elite Four
+    case 50: return 20; // Champion
+    default: return authoredTier;
+    }
+}
+
 void InitCampaignBattleReward(void)
 {
     gBattleStruct->campaignLevelCap = 0;
@@ -2475,7 +2494,7 @@ void InitCampaignBattleReward(void)
                          | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_EREADER_TRAINER))
         return;
     gBattleStruct->campaignLevelCap = GetCurrentLevelCap();
-    gBattleStruct->campaignPrizeMultiplier = GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentA)->prizeMultiplier;
+    gBattleStruct->campaignPrizeMultiplier = CampaignPrizeMultiplier(GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentA)->prizeMultiplier);
     gBattleStruct->campaignRewardEligible = !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentA);
     // The final interview's trainer flag is cleared to permit repeat battles.
     // Its persistent interview counter still records the first-clear receipt.
@@ -2485,7 +2504,7 @@ void InitCampaignBattleReward(void)
     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
     {
         gBattleStruct->campaignPrizeMultiplier = max(gBattleStruct->campaignPrizeMultiplier,
-            GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentB)->prizeMultiplier);
+            CampaignPrizeMultiplier(GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentB)->prizeMultiplier));
         gBattleStruct->campaignRewardEligible |= !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentB);
     }
     gBattleStruct->campaignRewardEligible &= !TRAINER_BATTLE_PARAM.isRematch;

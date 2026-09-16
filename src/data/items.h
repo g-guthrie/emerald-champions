@@ -2640,11 +2640,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_NUGGET] =
     {
         .name = ITEM_NAME("Nugget"),
-        .price = 10000 * TREASURE_FACTOR,
+        .price = 0,
         .description = COMPOUND_STRING(
             "A nugget of pure\n"
-            "gold. Can be sold at\n"
-            "a high price."),
+            "gold. Pretty, but\n"
+            "no shop will buy it."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2657,17 +2657,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BIG_NUGGET] =
     {
         .name = ITEM_NAME("Big Nugget"),
-    #if I_PRICE >= GEN_7
-        .price = 40000 * TREASURE_FACTOR,
-    #elif I_PRICE == GEN_6
-        .price = 20000,
-    #else
         .price = 0,
-    #endif
         .description = COMPOUND_STRING(
             "A big nugget of\n"
-            "gold. Can be sold at\n"
-            "a high price."),
+            "gold. Heavy, showy,\n"
+            "and unsellable."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2680,11 +2674,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_TINY_MUSHROOM] =
     {
         .name = ITEM_NAME("Tiny Mushroom"),
-        .price = 500 * TREASURE_FACTOR,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A plain mushroom\n"
-            "that would sell\n"
-            "at a cheap price."),
+            "A plain mushroom.\n"
+            "No shop in HOENN\n"
+            "will buy it."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2697,11 +2691,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BIG_MUSHROOM] =
     {
         .name = ITEM_NAME("Big Mushroom"),
-        .price = 5000 * TREASURE_FACTOR,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A rare mushroom\n"
-            "that would sell at a\n"
-            "high price."),
+            "A rare mushroom.\n"
+            "Prized by cooks,\n"
+            "not by shops."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2714,17 +2708,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BALM_MUSHROOM] =
     {
         .name = ITEM_NAME("Balm Mushroom"),
-    #if I_PRICE >= GEN_7
-        .price = 15000 * TREASURE_FACTOR,
-    #elif I_PRICE == GEN_6
-        .price = 12500,
-    #else
         .price = 0,
-    #endif
         .description = COMPOUND_STRING(
             "Gives off a nice\n"
-            "fragrance. It would\n"
-            "sell at a high price."),
+            "fragrance. No shop\n"
+            "will buy it."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2737,11 +2725,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_PEARL] =
     {
         .name = ITEM_NAME("Pearl"),
-        .price = (I_PRICE >= GEN_7) ? 2000 * TREASURE_FACTOR: 1400,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A pretty pearl\n"
-            "that would sell at a\n"
-            "cheap price."),
+            "A pretty pearl.\n"
+            "Lovely to look at,\n"
+            "but no shop buys it."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2754,11 +2742,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BIG_PEARL] =
     {
         .name = ITEM_NAME("Big Pearl"),
-        .price = (I_PRICE >= GEN_7) ? 8000 * TREASURE_FACTOR: 7500,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A lovely large pearl\n"
-            "that would sell at a\n"
-            "high price."),
+            "A lovely large\n"
+            "pearl. A keepsake,\n"
+            "not a payday."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2771,19 +2759,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_PEARL_STRING] =
     {
         .name = ITEM_NAME("Pearl String"),
-    #if I_PRICE >= GEN_8
-        .price = 20000 * TREASURE_FACTOR,
-    #elif I_PRICE == GEN_7
-        .price = 30000,
-    #elif I_PRICE == GEN_6
-        .price = 15000,
-    #else
         .price = 0,
-    #endif
         .description = COMPOUND_STRING(
-            "Very large pearls\n"
-            "that would sell at a\n"
-            "high price."),
+            "Very large pearls.\n"
+            "A collector's prize,\n"
+            "never a shop's."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2796,11 +2776,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_STARDUST] =
     {
         .name = ITEM_NAME("Stardust"),
-        .price = (I_PRICE >= GEN_7) ? 3000 * TREASURE_FACTOR: 2000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Beautiful red sand.\n"
-            "Can be sold at a\n"
-            "high price."),
+            "Collectors love it.\n"
+            "No shop buys it."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2813,11 +2793,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_STAR_PIECE] =
     {
         .name = ITEM_NAME("Star Piece"),
-        .price = (I_PRICE >= GEN_7) ? 12000 * TREASURE_FACTOR: 9800,
+        .price = 0,
         .description = COMPOUND_STRING(
             "A red gem shard.\n"
-            "It would sell for a\n"
-            "very high price."),
+            "Beautiful, and worth\n"
+            "nothing at a till."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2830,19 +2810,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_COMET_SHARD] =
     {
         .name = ITEM_NAME("Comet Shard"),
-    #if I_PRICE >= GEN_8
-        .price = 25000 * TREASURE_FACTOR,
-    #elif I_PRICE == GEN_7
-        .price = 60000,
-    #elif I_PRICE == GEN_6
-        .price = 30000,
-    #else
         .price = 0,
-    #endif
         .description = COMPOUND_STRING(
             "A fallen shard of\n"
-            "a comet. It would\n"
-            "sell at a high price."),
+            "a comet. Rare, and\n"
+            "worth no money."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2957,11 +2929,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_HEART_SCALE] =
     {
         .name = ITEM_NAME("Heart Scale"),
-        .price = 1000 * ITEM_SELL_FACTOR,
+        .price = 0,
         .description = COMPOUND_STRING(
             "A lovely scale.\n"
-            "It is coveted by\n"
-            "collectors."),
+            "Collectors covet it.\n"
+            "No shop pays for it."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2998,11 +2970,11 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_RARE_BONE] =
     {
         .name = ITEM_NAME("Rare Bone"),
-        .price = (I_PRICE >= GEN_7) ? 5000 * TREASURE_FACTOR: 10000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A bone for study\n"
-            "that would sell at a\n"
-            "high price."),
+            "A bone for study.\n"
+            "Museums want it.\n"
+            "Shops do not."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,

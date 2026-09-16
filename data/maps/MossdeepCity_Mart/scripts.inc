@@ -19,7 +19,6 @@ MossdeepCity_Mart_Pokemart:
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_TIMER_BALL
 	.2byte ITEM_QUICK_BALL
 	pokemartlistend
@@ -44,10 +43,9 @@ MossdeepCity_Mart_Text_ReviveIsFantastic:
 	.string "the used-up PP of moves.$"
 
 MossdeepCity_Mart_Text_MaxRepelLastsLongest:
-	.string "MAX REPEL lasts 250 steps.\n"
-	.string "It keeps weaker wild POKéMON away.\p"
-	.string "The reusable REPEL SPRAY lasts\n"
-	.string "500 steps and can be used again!$"
+	.string "The REPEL SPRAY lasts 500 steps and\n"
+	.string "can be used again. No MART sells it.\p"
+	.string "Nobody here misses the old bottles.$"
 
 MossdeepCity_Mart_Text_NetAndDiveBallsRare:
 	.string "NET and DIVE BALLS specialize in\n"
