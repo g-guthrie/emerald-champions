@@ -498,9 +498,25 @@ def decode_state(session, words):
         for index in range(min(battlers_count, 4)):
             if not actives[index]['agent_controlled']:
                 continue
-            if (need_mask >> index) & 1 or (phase == 'await_action' and actives[index]['alive']
-                                            and selection[index] < ACTION_CONFIRMED):
-                pending.append(decision(index))
+            awaiting = bool((need_mask >> index) & 1)
+            # The engine asks for faint replacements one battler at a time, but
+            # the mailbox holds a command for each, so every battler that owes a
+            # replacement is listed and may be commanded in the same act call.
+            owes_replacement = (phase == 'await_switch' and not actives[index]['alive'])
+            chooses_action = (phase == 'await_action' and actives[index]['alive']
+                              and selection[index] < ACTION_CONFIRMED)
+            if not (awaiting or owes_replacement or chooses_action):
+                continue
+            entry = decision(index)
+            entry['awaiting_now'] = awaiting
+            entry['replacing'] = owes_replacement or (awaiting and not actives[index]['alive'])
+            if entry['replacing']:
+                # The species here is the battler that fainted, not an incoming
+                # one; committed is the slot its partner has already been sent.
+                entry['fainted_species'] = entry.pop('species')
+                entry['species'] = None
+            pending.append(entry)
+
 
     return {
         'phase': phase,
@@ -754,9 +770,39 @@ def command_state(args):
     view, _, _ = session.read_view(advance=False,
                                    png=(session.dir / 'state.png') if args.png else None)
     state = decode_state(session, view)
+    drop_committed_slots(session, state)
     session.log({'event': 'state', 'state': state})
     print(json.dumps(state, indent=2))
 
+
+def drop_committed_slots(session, state):
+    """A replacement already submitted for one battler is no longer available.
+
+    The engine only marks the slot occupied once the switch-in resolves, so
+    between the two halves of a double faint both battlers would otherwise be
+    offered the same reserve. The native menu hides it the same way, by passing
+    the partner's monToSwitchIntoId into the party screen."""
+    record = session.meta.get('replacement_commits') or {}
+    if record.get('turn') != state['turn'] or state['phase'] != 'await_switch':
+        return {}
+    commits = {int(k): v for k, v in record.get('slots', {}).items()}
+    for entry in state['pending_decision']:
+        taken = {slot for battler, slot in commits.items() if battler != entry['battler']}
+        entry['switch_slots'] = [s for s in entry['switch_slots'] if s not in taken]
+    return commits
+
+
+def record_commits(session, state, submitted):
+    """Remember replacements submitted during this await_switch chain."""
+    pending = {entry['battler']: entry for entry in state['pending_decision']}
+    slots = {}
+    if (session.meta.get('replacement_commits') or {}).get('turn') == state['turn']:
+        slots = dict((session.meta['replacement_commits'] or {}).get('slots', {}))
+    for battler, command in submitted.items():
+        if command['action'] == 'switch' and pending.get(battler, {}).get('replacing'):
+            slots[str(battler)] = command['slot']
+    session.meta['replacement_commits'] = {'turn': state['turn'], 'slots': slots}
+    session.meta_path.write_text(json.dumps(session.meta, indent=2) + '\n')
 
 COMMAND_RE = re.compile(r'^(\d+)\s*:\s*(?:move(\d+)@(\d+)(,mega)?|switch(\d+))$')
 
@@ -770,6 +816,7 @@ def command_act(args):
     if state['phase'] not in ('await_action', 'await_switch'):
         fail(f'not at a decision point (phase={state["phase"]})')
 
+    drop_committed_slots(session, state)
     pending = {entry['battler']: entry for entry in state['pending_decision']}
     writes = []
     submitted = {}
@@ -791,6 +838,11 @@ def command_act(args):
                      f'{entry["switch_blocked_by"][0]}')
             if state['phase'] == 'await_action' and not entry['may_switch']:
                 fail(f'battler {battler} cannot switch this turn')
+            duplicate = next((b for b, c in submitted.items()
+                              if c['action'] == 'switch' and c['slot'] == slot), None)
+            if duplicate is not None:
+                fail(f'battler {battler} and battler {duplicate} cannot both switch to '
+                     f'slot {slot}; one reserve can only be sent out once')
             writes += [(syms['gEcAgentBattleSwitchSlot'] + 4 * battler, slot),
                        (syms['gEcAgentBattleAction'] + 4 * battler, 2)]
             submitted[battler] = {'action': 'switch', 'slot': slot}
@@ -816,9 +868,13 @@ def command_act(args):
                        (syms['gEcAgentBattleAction'] + 4 * battler, 1)]
             submitted[battler] = {'action': 'move', 'index': index, 'move': option['move'],
                                   'target': target, 'mega': mega}
-    missing = sorted(set(pending) - set(submitted))
+    # Only the battler the engine is actually asking must be answered now; a
+    # command for the other half of a double faint is held in the mailbox.
+    required = {b for b, entry in pending.items() if entry.get('awaiting_now', True)}
+    missing = sorted(required - set(submitted))
     if missing:
         fail(f'these battlers still need a command: {missing}')
+    record_commits(session, state, submitted)
     writes.append((syms['gEcAgentBattleHalted'], 0))
 
     view, frames_run, stopped = advance_to_halt(
@@ -886,6 +942,7 @@ def command_result(args):
     view, _, _ = session.read_view(advance=False)
     state = decode_state(session, view)
     turns, decisions, ai_frames = 0, 0, []
+    live_faints = None
     for line in session.events.read_text().splitlines():
         record = json.loads(line)
         if record.get('event') != 'act':
@@ -894,6 +951,15 @@ def command_result(args):
         turns = max(turns, record['turn_after'])
         if record['ai_decision_frames']:
             ai_frames.append(record['ai_decision_frames'])
+        if record['phase'] != 'ended':
+            live_faints = (record['player_faints'], record['opponent_faints'])
+    # The engine clears an owner's party during the end-of-battle teardown, so a
+    # ROM without the native guard reports that side's faints as zero once the
+    # battle is over. Fall back to the last reading taken while it was live.
+    player_faints, opponent_faints = state['player_faints'], state['opponent_faints']
+    if live_faints is not None:
+        player_faints = max(player_faints, live_faints[0])
+        opponent_faints = max(opponent_faints, live_faints[1])
     result = {
         'trainer_a': session.meta['trainer_a'],
         'trainer_b': session.meta['trainer_b'],
@@ -905,8 +971,8 @@ def command_result(args):
         'outcome': state['outcome'],
         'turns': turns,
         'decisions': decisions,
-        'player_faints': state['player_faints'],
-        'opponent_faints': state['opponent_faints'],
+        'player_faints': player_faints,
+        'opponent_faints': opponent_faints,
         'ai_decision_frames_max': max(ai_frames) if ai_frames else 0,
         'ai_decision_seconds_max': round(max(ai_frames) / 59.7275, 3) if ai_frames else 0.0,
         'ai_decision_frames': ai_frames,

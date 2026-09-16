@@ -286,6 +286,18 @@ void EmeraldChampionsAgentBattleText(const u8 *text)
 
 // ------------------------------------------------------------------- the view
 
+// The engine clears an owner's party during the end-of-battle teardown while
+// gMain.inBattle is still set, which would zero a finished battle's faint count.
+static bool32 PartyPopulated(enum BattleTrainer trainer)
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gParties[trainer][i], MON_DATA_SPECIES) != SPECIES_NONE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static u32 CountFainted(enum BattleTrainer trainer, u32 count)
 {
     u32 fainted = 0;
@@ -501,10 +513,16 @@ static void WriteView(void)
     gEcAgentBattleView[13] = gBattlersCount;
     if (gMain.inBattle)
     {
-        sPlayerFaints = CountFainted(B_TRAINER_PLAYER, PARTY_SIZE);
-        sOpponentFaints = CountFainted(B_TRAINER_OPPONENT_A, PARTY_SIZE)
-                        + ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-                           ? CountFainted(B_TRAINER_OPPONENT_B, PARTY_SIZE) : 0);
+        bool32 twoOwners = (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) != 0;
+        if (PartyPopulated(B_TRAINER_PLAYER))
+            sPlayerFaints = CountFainted(B_TRAINER_PLAYER, PARTY_SIZE);
+        // Recounted rather than accumulated, so Revival Blessing lowers it.
+        if (PartyPopulated(B_TRAINER_OPPONENT_A)
+         || (twoOwners && PartyPopulated(B_TRAINER_OPPONENT_B)))
+        {
+            sOpponentFaints = CountFainted(B_TRAINER_OPPONENT_A, PARTY_SIZE)
+                            + (twoOwners ? CountFainted(B_TRAINER_OPPONENT_B, PARTY_SIZE) : 0);
+        }
         if (gBattleOutcome != 0)
             sFinalOutcome = gBattleOutcome;
     }

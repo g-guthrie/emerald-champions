@@ -489,6 +489,21 @@ refuses one anyway the bridge answers `PARTY_SIZE` exactly as a cancelled menu
 does, drops the command and halts for a fresh one, reporting it as
 `switch_last_refused`. Never infer switch legality from `switch_slots` alone.
 
+When both player battlers faint on the same turn the engine asks for the two
+replacements one at a time, but `pending_decision` lists both, each with
+`replacing: true`, `species: null` and `fainted_species` naming the Pokemon that
+was KOed, and `awaiting_now` marking the one the engine is actually asking. Only
+the `awaiting_now` battlers must be answered in that `act` call; a command for
+the other is held in the mailbox, so `act "0:switch2" "2:switch4"` resolves both
+at once. Two battlers cannot be sent the same reserve, in one call or across the
+pair of calls, and the driver refuses it either way.
+
+`result` takes the faint counts from the last reading made while the battle was
+live. The engine clears an owner's party during the end-of-battle teardown, so a
+ROM without the native guard reports that side's faints as zero once the battle
+has ended, which is why the final `act` of a won battle can show
+`opponent_faints: 0`.
+
 `status` is decoded field by field, not as a plain bitmask: `STATUS1_SLEEP` is
 the low three bits counting turns remaining and `STATUS1_TOXIC_COUNTER` is bits
 8-11, so both are reported as `sleep:<turns>` and `toxic_counter:<n>` beside the
