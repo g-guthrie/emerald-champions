@@ -1,0 +1,31 @@
+{
+  "play_order": 321, "e_group": "E0490", "trainer": "TRAINER_JULIE", "class": "ace", "location": "VictoryRoad_B2F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Victreebel offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/321-TRAINER_JULIE/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Drought on entry; Eruption at full HP turn 1", "Venusaur Chlorophyll speed and Sleep Powder / Giga Drain", "Heliolisk Solar Power / Glare", "Lycanroc Accelerock priority", "Zamazenta Dauntless Shield, Iron Defense + Body Press", "Mega Victreebel Weather Ball in sun"],
+  "attempts": [
+    {"n": 1, "seed": 11, "run_dir": "a1", "party": "party_vr96_b.json led by Chi-Yu + Whimsicott", "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 6,
+     "why": "Sun live at turn 0. Turn 1 Prankster Taunt beat the Chlorophyll Venusaur to its Sleep Powder; sun Heat Wave OHKO'd Venusaur and took Torkoal to 163; full-HP Eruption put Whimsicott on its Sash (250) and chipped Chi-Yu. Turn 2 Prankster Tailwind, then Heat Wave KO'd both Torkoal and Heliolisk before either moved (Heliolisk had chosen Thunderbolt). Turn 3 Taunt on Zamazenta (Iron Defense denied); Accelerock hit the incoming Urshifu, Body Press KO'd the 1-HP Whimsicott. Turn 4 Close Combat KO'd Lycanroc, Earth Power crit took Zamazenta to 76, Body Press KO'd the -1 Def Urshifu. Turn 5 Mega Fake Out + Earth Power KO'd Zamazenta as the sun and tailwind expired; Victreebel Mega Evolved and was KO'd by Double-Edge + Earth Power before it could use the (now sunless) Weather Ball. Faints: Whimsicott, Urshifu."}
+  ],
+  "strategy_checks": [
+    {"check": "Drought + full-HP Eruption", "result": "PASS", "evidence": "turn 1 Eruption: 250 on Whimsicott (Sash), 60 on Chi-Yu (resisted)"},
+    {"check": "Chlorophyll Venusaur Sleep Powder", "result": "PASS (intent, speed), blocked by Taunt", "evidence": "Venusaur moved before Chi-Yu and chose Sleep Powder into Chi-Yu; 'can't use Sleep Powder after the taunt'"},
+    {"check": "Heliolisk Solar Power / Glare", "result": "FAIL", "evidence": "Thunderbolt chosen turn 2, KO'd under the player's Tailwind before moving; Glare never used"},
+    {"check": "Lycanroc Accelerock", "result": "PASS", "evidence": "turns 3-4 Accelerock priority (44 on Urshifu resisted, 83 on Landorus)"},
+    {"check": "Zamazenta Dauntless Shield / Iron Defense + Body Press", "result": "PASS (Shield, Body Press), Iron Defense denied by Taunt", "evidence": "def+1 on entry; Body Press KO'd Whimsicott (t3) and Urshifu (t4, 284)"},
+    {"check": "Mega Victreebel Weather Ball", "result": "FAIL", "evidence": "Mega Evolved on turn 5 as the sun ended; KO'd before acting"}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "user": "Victreebel", "payoff": "empty in effect - nothing was aimed at it (both attacks went into Zamazenta); it burned its safe turn while the sun expired"}
+  ],
+  "protect_summary": "1 Protect, empty.",
+  "ai_defects": [],
+  "ai_notes": "Zamazenta targeted correctly both turns (the KO on the 1-HP Whimsicott, then the -1 Def Urshifu). Victreebel Protecting on its entry turn while the last sun turn ticked away cost it its only Weather Ball window; not illegal.",
+  "level_changes": [],
+  "level_change_rationale": "Won first try after a real fight with 2 faints (Eruption Sash break, two Body Press KOs). Keep.",
+  "cooler": "The sun-fast half died to its own sun again (Heat Wave off a Fire attacker is boosted by Drought), which is the structural cost of both sun doors; Zamazenta was the memorable piece exactly as the dossier says - it took two Pokemon. No set change; the Taunt vulnerability of Sleep Powder/Iron Defense is the intended crack.",
+  "legality_notes": "Sets legal.",
+  "verification_limit": "No level change."
+}
