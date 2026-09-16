@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0479 TRAINER_HOPE attempt 2 rebuild, cap 96",
+ "availability_audit": "Cap window 96, Victory Road after Wally, League not entered. Incineroar 36, Kingambit 54, Tapu Koko 30 (Route 110 sign, reachable legend), Raging Bolt 60 (Route 119), Chi-Yu 48 (Ashen Woods sign, reachable legend), Flutter Mane 68 (Mt Pyre Summit). Rebuilt after attempt 1 (lost 3-6): no Ground/Fighting bodies that Vaporeon's Ice Beam and Salazzle's Sludge Bomb one-shot, Boots against Stealth Rock, no Choice locks, no single-target Water.",
+ "plan": "Fake Out Lilligant; Kingambit walls Sludge Bomb/Rock Slide/Leaf Storm; Electric core for Aerodactyl and Vaporeon; Chi-Yu Heat Wave for the Fire-weak trio; Flutter Mane Moonblast for Tatsugiri.",
+ "party": [
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_KNOCK_OFF",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Fake Out on Lilligant, Fire on Forretress",
+   "availability": "pool gate 36 evolution:level from Torracat"
+  },
+  {
+   "species": "SPECIES_KINGAMBIT",
+   "moves": [
+    "MOVE_IRON_HEAD",
+    "MOVE_KOWTOW_CLEAVE",
+    "MOVE_SUCKER_PUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_SUPREME_OVERLORD",
+   "item": "ITEM_SAFETY_GOGGLES",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Poison-immune, Rock-resistant, powder-immune bruiser; Iron Head on Aerodactyl",
+   "availability": "pool gate 54 evolution from Bisharp"
+  },
+  {
+   "species": "SPECIES_TAPU_KOKO",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_ELECTRIC_SURGE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Electric on Aerodactyl/Vaporeon/Forretress, terrain blocks Sleep Powder",
+   "availability": "pool gate 30 legendary_sign:Route110 (reachable legend)"
+  },
+  {
+   "species": "SPECIES_RAGING_BOLT",
+   "moves": [
+    "MOVE_THUNDERCLAP",
+    "MOVE_THUNDERBOLT",
+    "MOVE_DRACO_METEOR",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "priority Electric, resists Water/Fire/Grass/Steel",
+   "availability": "pool gate 60 wild:Route119/land_mons"
+  },
+  {
+   "species": "SPECIES_CHI_YU",
+   "moves": [
+    "MOVE_HEAT_WAVE",
+    "MOVE_DARK_PULSE",
+    "MOVE_OVERHEAT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_BEADS_OF_RUIN",
+   "item": "ITEM_HEAVY_DUTY_BOOTS",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Fire spread on Forretress/Lilligant/Salazzle, Boots vs Stealth Rock",
+   "availability": "pool gate 48 legendary_sign:AshenWoods (reachable legend)"
+  },
+  {
+   "species": "SPECIES_FLUTTER_MANE",
+   "moves": [
+    "MOVE_SHADOW_BALL",
+    "MOVE_MOONBLAST",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_HEAVY_DUTY_BOOTS",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Fairy on Tatsugiri, faster than Aerodactyl",
+   "availability": "pool gate 68 wild:MtPyre_Summit/land_mons"
+  }
+ ]
+}
