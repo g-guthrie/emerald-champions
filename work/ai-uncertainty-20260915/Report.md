@@ -1399,3 +1399,94 @@ identically at `HEAD` with my working tree reverted, so they are not mine; that
 file is another agent's. I verified against that baseline rather than assuming,
 and one of my group D drafts did add a 13th (the Klutz case above) before I
 deferred orb pricing back to the scorer.
+
+# Group E — switch pricing
+
+Commit `d0f4a9c67b`. No source change: all three reports are already covered by
+the Round 5 costs and the later plan rules, and none reproduced. They are now
+held by fixtures in `test/battle/ai/switch_pricing.c` and
+`emerald_champions_plans.c` instead of being carried in the backlog.
+
+* **Takao (E0037).** The healthy 80/80 lead stays in on turn one against a
+  Fairy attacker, at two attack strengths. The Round 10 note that this was
+  "reproduced, not fixed" is stale — the board it describes now passes.
+* **The Josh pivot shape.** A full-health wall that takes well over half from
+  the attacker opposite (Nosepass, with Naclstack on the bench) keeps the turn
+  it would otherwise give away.
+* **Cindy's Truant entry.** A Truant body leaves on the board that walls its
+  only attack to nothing and stays on the board it can hit. The loafing turn is
+  not by itself a reason to pivot.
+
+Two narrowings were tried and reverted: waiving the commitment margin on a turn
+with no action (Truant, recharge), and waiving it for an attacker walled to
+zero. Neither changed the reported behaviour and the second moved
+`EC Tailwind: faster recoil attackers do not use empty speed setup`, so the
+margin stands as it was.
+
+# Group F — the Electric Gym block
+
+Commit `e74572d472`. Two of three already covered, one fixed.
+
+**Already covered, now pinned.** An Electric attack is not fed to a Lightning
+Rod: the same Thundurus board with the Rod replaced by Static takes the Electric
+move, so the avoidance is the ability and not a blanket aversion. A pivot with
+an empty bench is only an attack — Volt Switch with nobody to bring in loses to
+the stronger move. Wattson's authored `ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE`
+fires on his real board and Electivire takes the Motor Drive stage, which is the
+room's whole engine.
+
+**Fixed: Taunt had nothing to take.** Taunt spends the entire turn to remove a
+move, and it was being chosen against a side holding no status move at all —
+the Electrode that taunted twice. It now loses 80 when nothing on the other side
+holds a status move, or when everything that does has already been taunted. The
+gate reads the whole opposing side rather than the nominal target, because the
+chosen target for a denial move is not always the battler the denial lands on.
+
+# Group G — conditional power and the empty guard
+
+Commit `1a828035b0`. Both reports already covered; no source change.
+
+**Status-conditional power is priced at the power the move will have.** With
+type, accuracy and target held equal, Hex loses to the flat Ghost attack against
+a clean body and beats it against a poisoned one. The Drifblim sighting is not a
+mispriced conditional: Hex at 65 and 100 accuracy against Air Slash at 75 and 95
+is a near-tie that the risk-averse quarter of the blend settles in favour of the
+move that cannot miss. My first fixture failed only because Ghost is doubled
+against a Psychic body — the matchup, not the pricing.
+
+**Parasect's free turn goes to Spore.** At full health with nothing aimed at it,
+the hundred-accuracy sleep beats the shield that denies nothing. The
+zero-denial guard cost and the sleep horizon are both doing their job here.
+
+# Group H — the Route 111 to Mt. Chimney receipts
+
+Commit `ff4f2e9d54`. Six of seven already covered; no source change.
+
+Those battles were played on a snapshot cut before the group D commit, and none
+of the six reproduce on current HEAD. New fixtures in
+`test/battle/ai/signature_utility.c` pin each one: Octolock is the plan on a
+board that cannot punish the turn; Destiny Bond at one HP takes the trade once
+the killing move has been seen (group D); a support body with nothing to attack
+with spends its turn on Thunder Wave; Aurora Veil is taken while the snow is up;
+Wide Guard answers the spread it has already been shown (group B); and the
+doubled, recoil-free ground attack beats Double-Edge (group C).
+
+The seventh — consecutive Protect on the Graveler board — did not reproduce and
+could not be forced into a fixture: the AI takes the attack on turn one rather
+than the shield, so there is no second guard to discount, and an AI test cannot
+script the opponent's first move. Repeat-guard discounting stays pinned where it
+already is, in `protect_cadence.c`.
+
+# Numbers for groups B through H
+
+**175 passed, 0 failed** across my allowlist (187 total when `ai_doubles.c`,
+`ai_flag_risky.c` and `gimmick_mega.c` are included; those carry 12 failures
+that are identical at `HEAD` with my working tree reverted, in a file another
+agent owns).
+
+Worst decision cost 65 frames of the 72-frame budget (`DANCER_FULL_BENCH`),
+unchanged across all six groups: Brawly 61, Ned soak 61, Laura 60, Ned wind 51,
+Cristian 47/57, Jocelyn 47, Jocelyn dance 25, Darius 25, Nate 15.
+
+`pokeemerald.gba` builds clean at 33,554,432 bytes. The headless ROM and
+`work/agent-battle-build` were not touched.
