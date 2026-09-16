@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 11,
+  "e_group": "E0011",
+  "trainer": "TRAINER_JAMES_1",
+  "class": "regular",
+  "location": "PetalburgWoods",
+  "cap": 14,
+  "difficulty": "medium",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable in Petalburg Woods.",
+  "opponent_as_played": [
+    "SURSKIT L15 @FOCUS_SASH SWIFT_SWIM TIMID (Struggle Bug/Rain Dance/Hydro Pump/Icy Wind) offset 3",
+    "DEWPIDER L15 @EVIOLITE WATER_BUBBLE ADAMANT (Liquidation/Lunge/Leech Life/Protect) offset 3",
+    "VENIPEDE L17 @EVIOLITE SPEED_BOOST JOLLY (Protect/Poison Jab/Struggle Bug/Bug Bite) offset 5",
+    "KRICKETUNE L15 @LIFE_ORB TECHNICIAN JOLLY (Bug Bite/Aerial Ace/Taunt/Protect) offset 3"
+  ],
+  "party_manifest": "work/playtest/11-JAMES_1/party-rerun-a1.json",
+  "party_summary": "Electrike / Heracross / Timburr / Growlithe / Rockruff / Pachirisu - Route101/102/103/104 wilds plus Petalburg Woods Heracross. Nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2011,
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 9,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 62,
+      "ai_decision_seconds_max": 1.038,
+      "events": "work/playtest/11-JAMES_1/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 Surskit declined Rain Dance and opened with Hydro Pump, which outsped and removed Electrike before its Thunderbolt; Water Bubble Liquidation plus Life Orb recoil left Heracross on 2 after its own Rock Slide broke Surskit's Focus Sash and chipped Dewpider. T2 Timburr replaced Electrike, Surskit's Struggle Bug finished the 2 HP Heracross, Dewpider Protected a Rock Slide that was lethal at 19/50, and Timburr's Rock Slide removed Surskit. T3 Growlithe replaced Heracross; Kricketune entered and immediately Protected, and Wild Charge - 2x on Water/Bug - removed Dewpider. T4 Kricketune's Bug Bite stole Growlithe's Sitrus and Venipede's Poison Jab removed Growlithe; Rock Slide chipped both. T5 Rockruff replaced Growlithe, Kricketune Protected both Rock Slides, and the spread still removed Venipede through its partner's guard. T6 Kricketune used Taunt on Timburr and Rockruff's Rock Slide finished it. 4-3."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Surskit sets rain while Dewpider applies immediate Water pressure; if rain would be denied or unnecessary, use Icy Wind/Struggle Bug instead",
+      "result": "PASS (correct decline)",
+      "evidence": "Rain Dance was never selected, and both alternatives it took instead produced a KO. T1 Hydro Pump removed Electrike outright before Electrike's own Thunderbolt could fire; T2 Struggle Bug removed a 2 HP Heracross and dropped Timburr's Special Attack. Setting rain on T1 would have cost the Hydro Pump KO and Surskit was dead by T2, so this is the conditional in the plan being honoured rather than a missing Rain Dance. Contrast with E0006, where Lotad DID set rain because rain paid there."
+    },
+    {
+      "check": "Struggle Bug is special mitigation, not its main damage lane",
+      "result": "PASS",
+      "evidence": "Struggle Bug fired on T2 from Surskit, and it was used exactly as mitigation: it dropped Timburr's Special Attack while finishing off a battler Hydro Pump did not need to be spent on. Venipede also carries it and correctly preferred Poison Jab and Bug Bite, which are its damage lane. This is one of the moves the brief asked about and it now fires."
+    },
+    {
+      "check": "Kricketune Taunt prevents the opponent from freely setting up",
+      "result": "PASS (fired)",
+      "evidence": "T6 Taunt on Timburr. Its value was low - Timburr's only non-damaging move was Wide Guard - and Kricketune died the same turn, so it bought nothing concrete. But the authored Taunt was selected, which it was not in the previous pass."
+    },
+    {
+      "check": "Venipede converts Speed Boost into Poison Jab / Bug Bite pressure",
+      "result": "PASS",
+      "evidence": "Speed Boost banked a stage on T4 and Venipede spent both its turns on Poison Jab (removing Growlithe) and Bug Bite. It never wasted a turn on Protect to farm Speed, which is the failure mode the plan implies."
+    },
+    {
+      "check": "Bug Bite's item theft works",
+      "result": "PASS",
+      "evidence": "T4 Kricketune's Bug Bite stole and ate Growlithe's Sitrus Berry, denying the heal that would have let Growlithe survive Poison Jab."
+    },
+    {
+      "check": "Weather control is required of the player",
+      "result": "N/A this run",
+      "evidence": "I brought Growlithe's Sunny Day specifically as the weather answer after losing to Billy, and never needed it because the AI correctly judged rain was not worth a turn here."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "DEWPIDER",
+      "payoff": "Blocked a Rock Slide that is 2x on Water/Bug and lethal from 19/50. Large payoff - it survived to hit again on T3."
+    },
+    {
+      "turn": 3,
+      "battler": "KRICKETUNE",
+      "payoff": "Blocked Timburr's Rock Slide (~35 of its 52 HP) on its entry turn while its partner Dewpider took the Wild Charge. Moderate payoff - real damage denied, though not lethal."
+    },
+    {
+      "turn": 5,
+      "battler": "KRICKETUNE",
+      "payoff": "Blocked BOTH Rock Slides at 21/52, each of which was individually lethal. Large payoff; it cost me a full turn and a half of damage."
+    }
+  ],
+  "protect_ledger_note": "Three opponent Protects in six turns, all with a payoff and two of them lethal denials. No empty guard. Venipede also carries Protect and correctly never used it - it was the one member whose Speed Boost would have made a farming guard tempting.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_improvements_observed": [
+    "Struggle Bug and Taunt both fired, and the Rain Dance decline was conditional rather than blanket - the same AI set rain on E0006 where it paid and skipped it here where it did not. That is the pricing change behaving like a value judgement instead of a quota.",
+    "Zero voluntary opponent switches."
+  ],
+  "level_changes": "NONE. Won on attempt 1 with 3 of 6 player faints. The first pass's +1 on Surskit and Dewpider is validated: L15 Surskit one-shot a Life Orb Electrike with Hydro Pump on turn one, and L15 Water Bubble Dewpider's Liquidation nearly removed a 50 HP Heracross in a single hit.",
+  "levels_after": {
+    "SURSKIT": 3,
+    "DEWPIDER": 3,
+    "VENIPEDE": 5,
+    "KRICKETUNE": 3
+  },
+  "cooler": "Yes. The team is flagged RAIN but its rain setter is a Focus Sash glass cannon that correctly decides rain is not worth the turn, so the weather half of the identity only exists when the player is slow enough to let Surskit live twice. Moving Rain Dance onto Dewpider - the Eviolite body that survives - and giving Surskit its fourth slot back would make the rain mode something the player has to answer rather than something the AI talks itself out of. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found. Water Bubble, Speed Boost, Technician and Bug Bite's berry theft all behaved correctly."
+}
