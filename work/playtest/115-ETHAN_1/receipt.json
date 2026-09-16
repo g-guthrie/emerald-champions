@@ -1,0 +1,53 @@
+{
+  "play_order": 115,
+  "e_group": "E0137",
+  "trainer": "TRAINER_ETHAN_1",
+  "class": "casual",
+  "location": "JaggedPass",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Bouffalant L35 (36+1-2), Rillaboom L33 (36-1-2), Cacturne L37 (36+3-2), Dhelmise L34 (36+0-2).",
+  "party_manifest": "work/playtest/115-ETHAN_1/party-a1.json",
+  "attempts": [
+    {"seed": 71, "attempt": 1, "outcome": "won", "turns": 5, "player_faints": 3, "opponent_faints": 4,
+     "notes": "Mega Blastoise died on turn 1 again - Grassy Glide at priority for 2x, then a critical Head Charge. Togekiss hard-walls both Cacturne and Rillaboom and did most of the work with 2x Air Slash plus two Serene Grace flinches. Cacturne at +3 is the real threat and traded for Azumarill and Mamoswine."}
+  ],
+  "strategy_checks": [
+    {"check": "Rillaboom's Grassy Surge sets Grassy Terrain on entry", "result": "PASS", "evidence": "Turn 0 state already reports terrain 'grassy' with 5 turns, before any decision. It ran for the whole battle and both sides' grounded members visibly healed each turn."},
+    {"check": "Grassy Glide gains priority in Grassy Terrain", "result": "PASS", "evidence": "Turn 1 Rillaboom's Grassy Glide resolved before every other action on the board including my faster Togekiss, and hit Mega Blastoise at 2x. Textbook."},
+    {"check": "Rillaboom opens with Fake Out", "result": "FAIL (defensible)", "evidence": "Rillaboom had exactly one action and spent it on Grassy Glide rather than Fake Out. Given Grassy Glide was priority, 2x on the Mega, and contributed to killing it that turn, this is arguably the better line - but the dossier specifically added Fake Out for the opening ('Rillaboom gains Fake Out over Drum Beating, supporting the opening') and it did not appear."},
+    {"check": "Grassy Terrain does NOT soften High Horsepower (dossier claim)", "result": "NOT REACHED", "evidence": "Neither Excadrill nor Mamoswine used High Horsepower while the terrain was up - Mamoswine came in on turn 5 and the terrain expired the same turn. Untested, not failed."},
+    {"check": "Cacturne's Water Absorb punishes Water moves", "result": "PASS (by denial)", "evidence": "I deliberately never aimed a Water move at Cacturne - Mega Blastoise's Water Pulse and Azumarill's Liquidation were both withheld for exactly this reason. The ability shaped my whole play, which is the counterplay working."},
+    {"check": "Cacturne's Spiky Shield buys a turn", "result": "PASS", "evidence": "Turn 5, Spiky Shield blocked both a 2x Air Slash and a 2x Icicle Crash on a turn when the pair would very likely have KOed it. Genuinely well-timed."},
+    {"check": "Dhelmise's Steelworker boosts its Steel move (Anchor Shot)", "result": "FAIL", "evidence": "Dhelmise had three decision points and chose Protect, Power Whip and Power Whip. Anchor Shot was never selected, so the Steelworker bonus that the dossier calls out ('attack bonus, not a third defensive type') was never once applied. The ability was inert for the entire battle."},
+    {"check": "Bouffalant's Soundproof blocks sound moves", "result": "NOT REACHED", "evidence": "I had no sound moves on the party, so Soundproof was never tested."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "DHELMISE", "payoff": "EMPTY - Dhelmise Protected on the turn it entered as a replacement, while both of my attacks were aimed at Bouffalant. It blocked nothing and gave up the turn for free."},
+    {"turn": 5, "battler": "CACTURNE", "payoff": "REAL - Spiky Shield blocked a 2x Air Slash and a 2x Icicle Crash that together would very likely have KOed it, and it went on to win the next exchange."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P10-D10",
+      "severity": "medium",
+      "turns": "2, 3, 4",
+      "board": "Dhelmise L34 holding Anchor Shot with Steelworker, against Togekiss (Fairy/Flying) and Azumarill (Water/Fairy)",
+      "chosen": "Protect, then Power Whip, then Power Whip.",
+      "why_wrong": "Anchor Shot is the move Steelworker exists to boost, and Steel is 2x into the Fairy-type Togekiss and Azumarill that were the only two targets available - so the Steelworker-boosted Anchor Shot was both the ability payoff and the super-effective option, and Power Whip (Grass, 0.5x into Togekiss) was neither. The scorer appears to be reading raw base power and ignoring both the ability multiplier and the type chart here.",
+      "better_action": "Anchor Shot at Togekiss on turn 3, which also traps it."
+    },
+    {
+      "id": "P10-D11",
+      "severity": "low",
+      "turn": 2,
+      "board": "Dhelmise entering as a replacement at full HP; both of my actions were already committed to Bouffalant",
+      "chosen": "MOVE_PROTECT",
+      "why_wrong": "An empty Protect on an entry turn. Not costly here, but it is the same pattern seen with Tabitha's Weezing in E0131 - Protect scoring high on a turn with no incoming threat.",
+      "better_action": "Anchor Shot or Power Whip."
+    }
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Won on attempt 1 but lost three of six including the Mega on turn 1. That is the 'won after a real fight' band. Cacturne at +3 is correctly the ace of this team and earned it - it took two of my three faints by itself.",
+  "could_this_be_cooler": "The terrain lead is well built and Grassy Glide reads beautifully in play. The weak link is Dhelmise, which is on the team for Steelworker + Anchor Shot and used neither. Suggestion, not applied: Dhelmise's Power Whip overlaps with Rillaboom's whole Grass identity and is what the AI keeps reaching for; if Anchor Shot were its only trapping/Steel option without a competing Grass move of similar power, the slow trapper role would actually appear on the board. As played, the team reads as 'Rillaboom plus three physical attackers' rather than the terrain-and-trap formation the dossier describes.",
+  "authored_set_legality": "No legality problems. Grassy Surge, Water Absorb, Soundproof and Steelworker were all present and correctly configured; Steelworker simply was never exercised.",
+  "notes": "Two Serene Grace Air Slash flinches (Bouffalant turn 2, Dhelmise turn 3) meaningfully shortened this fight; that is variance in my favour, not a level signal."
+}
