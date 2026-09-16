@@ -170,8 +170,8 @@ mega_slots: NONE
 ai: Ace Pokemon
 plan: First two useful turns: Porygon sets Trick Room only when it survives and the resulting order favors Honedge; Honedge attacks or uses Swords Dance only behind adequate protection. Turn two spends the room on damage. Alternate deployment: Porygon and Wooloo form a bulkier room mode with a conditional Cotton Guard option. Reversal converts low HP, including Double Edge recoil, into Fighting coverage without requiring Wooloo to move last. Reserves & disruption: Gimmighoul supplies a special Ghost lane. When room is denied, use immediate damage and defensive switches rather than endlessly retry the setter. Counterplay & audit: Taunt, double targeting Porygon, slower opposing teams, and priority. Disposition: Keep; explicitly choose useful Speed IVs by matchup instead of inferring zero from Quiet/Brave.
 crack: Taunt, double targeting Porygon, slower opposing teams, and priority. Disposition: Keep; explicitly choose useful Speed IVs by matchup instead of inferring zero from Quiet/Brave.
-PORYGON @EVIOLITE DOWNLOAD QUIET 252/0/4/252/0/0 2 | TRI_ATTACK, TRICK_ROOM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-HONEDGE @LIFE_ORB NO_GUARD BRAVE 252/252/4/0/0/0 2 | IRON_HEAD, SACRED_SWORD, SHADOW_SNEAK, SWORDS_DANCE | ivs=31/31/31/31/31/0 | friendship=255
+PORYGON @EVIOLITE DOWNLOAD QUIET 252/0/4/252/0/0 3 | TRI_ATTACK, TRICK_ROOM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+HONEDGE @LIFE_ORB NO_GUARD BRAVE 252/252/4/0/0/0 3 | IRON_HEAD, SACRED_SWORD, SHADOW_SNEAK, SWORDS_DANCE | ivs=31/31/31/31/31/0 | friendship=255
 GIMMIGHOUL @EVIOLITE RATTLED QUIET 252/0/4/252/0/0 5 | SHADOW_BALL, POWER_GEM, SUBSTITUTE, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 WOOLOO @EVIOLITE FLUFFY BRAVE 252/252/4/0/0/0 5 | COTTON_GUARD, DOUBLE_EDGE, REVERSAL, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 

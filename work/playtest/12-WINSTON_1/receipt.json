@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "play_order": 12,
+  "e_group": "E0012",
+  "trainer": "TRAINER_WINSTON_1",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "PORYGON L14 @EVIOLITE DOWNLOAD QUIET spe-IV 0 (Tri Attack/Trick Room/Thunderbolt/Protect)",
+    "HONEDGE L14 @LIFE_ORB NO_GUARD BRAVE spe-IV 0 (Iron Head/Sacred Sword/Shadow Sneak/Swords Dance)",
+    "GIMMIGHOUL L17 @EVIOLITE RATTLED QUIET spe-IV 0 (Shadow Ball/Power Gem/Substitute/Protect)",
+    "WOOLOO L17 @EVIOLITE FLUFFY BRAVE spe-IV 0 (Cotton Guard/Double-Edge/Reversal/Protect)"
+  ],
+  "authored_strategy_flags": "TRICK_ROOM,SETUP,PRESSURE (ai: Ace Pokemon)",
+  "party_manifest": "work/playtest/12-WINSTON_1/party-a1.json",
+  "party_summary": "Arcanine + Snorlax leading; Magearna* / Whimsicott / Weavile / Iron Leaves* reserve. Magearna entered. Party was deliberately built to be indifferent to Trick Room rather than to race it.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 12001, "outcome": "won", "turns": 7, "decisions": 8,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.234,
+      "events": "work/playtest/12-WINSTON_1/attempt-1-events.jsonl",
+      "narrative": "T1 Flare Blitz (2x on Steel) removed Honedge and Porygon set Trick Room at the end of the turn. T2 the room converted immediately: Gimmighoul's Power Gem (2x on Fire) and Porygon's Tri Attack both resolved before Arcanine's Flare Blitz and killed it. T3 Magearna replaced Arcanine and Porygon Protected away a lethal Flash Cannon. T4 the AI pivoted a damaged Porygon out and fed Wooloo to the Flash Cannon; Gimmighoul Protected a lethal Crunch. T5 Flash Cannon removed Wooloo, Gimmighoul pivoted out and the room expired. T6 Flash Cannon removed Porygon as it tried to re-set the room. T7 Flash Cannon finished Gimmighoul."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "TRICK_ROOM is established and the turn after is spent on damage",
+     "result": "PASS, and it converted",
+     "evidence": "T1 'The opposing Porygon twisted the dimensions!' and the field read STATUS_FIELD_TRICK_ROOM for four turns. T2 both opponents moved before a base-95-Speed Arcanine and killed it with Power Gem plus Tri Attack before its Flare Blitz resolved. The room was used for damage, not maintained: no second Trick Room was attempted while the first was up."},
+    {"check": "Porygon re-sets the room when it has expired",
+     "result": "PASS", "evidence": "T6, with the room expired, Porygon selected Trick Room again. It died to a Sp.Atk +1 Flash Cannon before it resolved, but the selection is the right one."},
+    {"check": "Porygon sets the room only when it survives and the order favours Honedge",
+     "result": "PARTIAL",
+     "evidence": "Porygon did survive the turn it set the room, which is the first half. Honedge died in the same turn to a Flare Blitz that resolved before the room existed, so the second half could not be satisfied by any turn-start decision that does not read my pending command - which the AI correctly does not do. Not a defect."},
+    {"check": "Download raises the stat that matches the weaker opposing defence",
+     "result": "PASS mechanically, MISMATCHED on this set",
+     "evidence": "'The opposing Porygon's Attack rose!' on both of its entries (T1 and T5). The ability is working. But Porygon is QUIET with a fully special attacking pair (Tri Attack, Thunderbolt), so an Attack boost is worth nothing to it. See the cooler note - this is a set-design mismatch, not an AI fault."},
+    {"check": "Rattled raises Gimmighoul's Speed on an eligible hit",
+     "result": "PASS", "evidence": "Gimmighoul reached Speed +2 from Snorlax's Dark-type Crunches."},
+    {"check": "SETUP: Honedge uses Swords Dance only behind adequate protection",
+     "result": "NOT TESTED", "evidence": "Honedge got one turn, used Shadow Sneak, and was OHKOd by a 2x Flare Blitz. Swords Dance never appeared."},
+    {"check": "No Guard makes Honedge's moves never miss",
+     "result": "NOT TESTED", "evidence": "Its single move was Shadow Sneak, which does not miss regardless."},
+    {"check": "Fluffy halves contact damage and doubles Fire damage taken",
+     "result": "NOT TESTED",
+     "evidence": "Wooloo arrived on T4, after Arcanine was already dead, so the Fire vulnerability half was never exercised. It was removed by a non-contact Flash Cannon, so the contact halving was not isolable either. Sequencing note: the member that punishes Fluffy arrives before the Fluffy body does, so a player who leads Fire will usually never meet Wooloo with it."},
+    {"check": "Cotton Guard / Reversal convert Wooloo's low HP into Fighting coverage",
+     "result": "NOT TESTED", "evidence": "Wooloo used one Double-Edge and died. Neither move appeared."},
+    {"check": "Gimmighoul's Substitute supplies the special Ghost lane a foothold",
+     "result": "NOT USED",
+     "evidence": "Gimmighoul had five turns and used Shadow Ball, Power Gem, Protect twice and one pivot. Substitute was never selected. Not scored as a defect - it was under two-attacker pressure the whole time and each Protect blocked a kill - but the move did not earn its slot in this fight."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.234 s maximum across eight decision points."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "user": "PORYGON", "payoff": "EXCELLENT - at 34/55 it blocked a Flash Cannon that was lethal, and survived to be pivoted out and re-used on T6."},
+    {"turn": 4, "user": "GIMMIGHOUL", "payoff": "EXCELLENT - at 12/58 it blocked a 2x Crunch that was lethal by definition."},
+    {"turn": 6, "user": "GIMMIGHOUL", "payoff": "EXCELLENT - at 12/58 it blocked a second lethal 2x Crunch, and not consecutively with the T4 guard."}
+  ],
+  "empty_protects": 0,
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "The T2 room payoff is the clearest demonstration of the TRICK_ROOM flag in the block: two zero-Speed-IV bodies moved before a base 95 Speed attacker and removed it before its queued move.",
+    "Two separate preservation pivots - Porygon out to Wooloo on T4, Gimmighoul out to Porygon on T5 - each fed a fresher body to my attack and kept a damaged member alive. Combined with E0010 and E0011, switch evaluation is consistently the strongest part of this AI's play in this block.",
+    "T6 re-selecting Trick Room the turn after it expired, rather than earlier while it was still up, is exactly the 'do not endlessly retry the setter' discipline the plan asks for."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 1 player faint. The room did convert into a KO, but Magearna and Snorlax were never in danger after that, so this is the +1 case rather than the keep case.",
+    "changes": [
+      {"member": "PORYGON", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15},
+      {"member": "HONEDGE", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15}
+    ],
+    "unchanged": [
+      {"member": "GIMMIGHOUL", "offset": 5, "reason": "already the joint-highest member and it personally blocked two kills"},
+      {"member": "WOOLOO", "offset": 5, "reason": "joint-highest member"}
+    ],
+    "reasoning": "Porygon carries the room and is the lowest member together with Honedge; one level makes the setter likelier to survive the double-target the counterplay list recommends against it. Honedge is raised for the same reason - it is the member the room is built to enable, and at L14 with 49 HP it dies to a single super-effective hit before the room it is waiting for even exists, which is why Swords Dance and No Guard are both still unverified.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "Yes. There is one concrete mismatch worth fixing and one ordering problem.",
+    "keep": "A full zero-Speed-IV Trick Room team at cap 14, with the room actually converting into a KO on the turn after it goes up, is a real and well-built lesson, and it is the only team in this block that changes the rules of the fight rather than just trading damage. The disposition line about choosing Speed IVs by matchup instead of inferring zero from Quiet/Brave is clearly being honoured.",
+    "suggestion": "Porygon's DOWNLOAD raised Attack on both entries, and Porygon is QUIET with Tri Attack and Thunderbolt - two special moves and no physical move at all. Against any player team whose Defence total is lower than its Special Defence total, this ability is dead weight on the team's most important member. Either give Porygon a physical option worth the boost (Return, Facade) or switch the set to something that wants the ability it has. Analytic would also fit a Trick Room setter far better, since it rewards moving last outside the room.",
+    "second_thought": "Wooloo's Fluffy is the team's punish for a Fire lead, and Wooloo is the LAST member to arrive. In this fight Arcanine was dead two turns before Wooloo appeared, so the interaction that the team is built to threaten never met the threat. Leading Wooloo beside Porygon - the plan already names 'Porygon and Wooloo form a bulkier room mode' as the alternate deployment - would put the Fluffy body in front of the Fire attacker while the room goes up, which is a much better fight.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": ["Pool chronology caveat carried from play_order 1."]
+}
