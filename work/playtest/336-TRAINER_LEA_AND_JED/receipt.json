@@ -1,0 +1,31 @@
+{
+ "play_order": 336, "e_group": "E0507", "trainer": "TRAINER_LEA_AND_JED", "class": "casual", "location": "SSTidalRooms", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; Miltank offset 0 L98, others offset 1 L99 = cap+offset-2 on Medium.",
+ "difficulty": "medium",
+ "party_manifests": ["work/playtest/336-TRAINER_LEA_AND_JED/party_pg100_core.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open; same core party as 333 (one reachable legend, Chi-Yu). See the manifest availability audit.",
+ "pre_play_strategy_checks": ["Miltank Helping Hand only when it crosses a threshold, otherwise Body Slam (Scrappy)", "Tauros Intimidate on entry then Double-Edge / Close Combat", "Primeape Defiant punishes stat drops", "Bouffalant Choice Band Head Charge / Megahorn (Reckless)", "Milk Drink as the only recovery"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_pg100_core.json", "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 4,
+   "why": "t1 Fake Out flinched Tauros, Overheat missed Miltank, Miltank Rock Slide hit both Fire leads. t2 Chi-Yu out for Urshifu into Close Combat (202) + Body Slam; Knock Off removed Tauros's Life Orb. t3 Aqua Jet KO'd -1 Def Tauros; Body Slam paralysed Urshifu at 3 HP; Knock Off took Miltank's Sitrus. t4 Urshifu Aqua Jet 169 on Primeape then Life Orb recoil KO'd itself; Primeape Close Combat + Body Slam KO'd Incineroar. t5 Primeape Protected Moonblast; Fake Out flinched Miltank. t6 AI switched Primeape out for Bouffalant to absorb Moonblast (177); crit Wood Hammer KO'd Miltank. t7 Primeape Protected again, Wood Hammer KO'd Bouffalant; t8 Grassy Glide KO'd Primeape. Faints: Urshifu, Incineroar."}
+ ],
+ "strategy_checks": [
+  {"check": "Miltank Body Slam / Helping Hand gating", "result": "PASS", "evidence": "Rock Slide t1 (double SE), Body Slam t2-t6 (paralysed Urshifu t3, hit Ghost Flutter Mane via Scrappy t6); Helping Hand never chosen - no Tauros threshold turn existed"},
+  {"check": "Tauros Intimidate + attacks", "result": "PASS", "evidence": "Intimidate on both leads at start; Close Combat t2 (202 on Urshifu) and t3"},
+  {"check": "Primeape Defiant", "result": "not tested", "evidence": "no stat drop was aimed at it (Intimidate lead was already out); Close Combat KO'd Incineroar t4"},
+  {"check": "Bouffalant Choice Band Head Charge", "result": "PASS", "evidence": "t7 Head Charge chosen into Rillaboom (died first)"},
+  {"check": "Milk Drink", "result": "not observed", "evidence": "Miltank never dropped low enough before the crit Wood Hammer"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 5, "user": "Primeape", "payoff": "blocked Moonblast (an OHKO at 100 HP); partner Miltank was Fake Out flinched"},
+  {"run": "a1", "turn": 7, "user": "Primeape", "payoff": "blocked Moonblast again; partner Bouffalant died to Wood Hammer the same turn"}
+ ],
+ "protect_summary": "2 Protects, both blocked a KO.",
+ "ai_defects": [],
+ "ai_notes": "The t6 Primeape -> Bouffalant switch to eat a Fairy attack was a good read. Sensible throughout.",
+ "level_changes": [],
+ "level_change_rationale": "Won first try 4-2 in 7 turns; two real KOs taken and an Overheat miss made it a fight. Keep.",
+ "cooler": "The herd works as a casual fight; the ranch joke lands with the Choice Band bull. No set change recommended.",
+ "legality_notes": "Sets legal; driver accepted the party.",
+ "verification_limit": "No level change."
+}
