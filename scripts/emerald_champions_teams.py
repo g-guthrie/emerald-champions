@@ -437,6 +437,18 @@ ACTIVATE_EXEMPT_ABILITIES = {
 }
 
 
+def check_party_size_stamps(party_path: str = "src/data/trainers.party") -> list[str]:
+    """A trainers.party block with an authored SPECIES_ body must never carry
+    a retirement 'Party Size: 0' stamp (it compiles to an empty battle)."""
+    text = open(party_path, encoding="utf-8").read()
+    violations = []
+    for block in re.split(r"(?m)^(?==== TRAINER_)", text):
+        marker = re.match(r"=== (TRAINER_\w+) ===", block)
+        if marker and re.search(r"(?m)^Party Size: 0$", block) and re.search(r"(?m)^SPECIES_", block):
+            violations.append(f"{marker.group(1)}: Party Size: 0 with an authored party body")
+    return violations
+
+
 def check_strategy_coherence(branches: list[Branch]) -> list[str]:
     """Gate 2: authored strategy flags and ACTIVATE tactics must actually be
     executable/sane given the party's moves, abilities and typing."""
@@ -628,14 +640,3 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 
-
-def check_party_size_stamps(party_path: str = "src/data/trainers.party") -> list[str]:
-    """A trainers.party block with an authored SPECIES_ body must never carry
-    a retirement 'Party Size: 0' stamp (it compiles to an empty battle)."""
-    text = open(party_path, encoding="utf-8").read()
-    violations = []
-    for block in re.split(r"(?m)^(?==== TRAINER_)", text):
-        marker = re.match(r"=== (TRAINER_\w+) ===", block)
-        if marker and re.search(r"(?m)^Party Size: 0$", block) and re.search(r"(?m)^SPECIES_", block):
-            violations.append(f"{marker.group(1)}: Party Size: 0 with an authored party body")
-    return violations
