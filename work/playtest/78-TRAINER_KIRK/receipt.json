@@ -1,0 +1,111 @@
+{
+ "play_order": 78,
+ "e_group": "E0089",
+ "trainer": "TRAINER_KIRK",
+ "class": "gym",
+ "location": "MauvilleCity_Gym",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "PINCURCHIN": 32,
+  "RAICHU_ALOLA": 27,
+  "TOGEDEMARU": 31,
+  "EMOLGA": 32,
+  "MORPEKO": 29,
+  "BOLTUND": 28
+ },
+ "cap_window_confirmation": "Dossier seeds 34/29/33/34/31/30 resolved to 32/27/31/32/29/28. Cap 30, Medium -2.",
+ "party_manifest": "work/playtest/78-TRAINER_KIRK/party.json",
+ "party_pool_audit": "Same cap-30 Electric-gym counterteam as play_order 77, leading Assault Vest Nidoqueen + Mega Gardevoir. Every source map at or before Route 110; NewMauville (Surf, C28) and Route 111 desert (Go-Goggles, C23) species excluded. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "Electric Surge sets Electric Terrain on entry and the Terrain Extender makes it eight turns, not five",
+  "Rising Voltage actually doubles against a grounded target while the terrain is up, with damage evidence",
+  "Alolan Raichu's Surge Surfer doubles its Speed under that terrain and it moves before things it normally would not",
+  "Emolga's Motor Drive turns an Electric attack into a Speed boost",
+  "Togedemaru's Air Balloon is a real Ground immunity that pops, and Iron Barbs punishes contact",
+  "Morpeko's Hunger Switch flips Aura Wheel's type between Electric and Dark",
+  "Boltund is genuinely Choice-locked and Strong Jaw boosts the fangs",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/78-TRAINER_KIRK/a1",
+   "seed": 78,
+   "outcome": "won",
+   "turns": 8,
+   "driver_turn_counter": 7,
+   "player_faints": 3,
+   "opponent_faints": 6,
+   "narrative": "This room hit harder than any other in the block. T1 the terrain was already up before a single action and Alolan Raichu moved first through Surge Surfer, putting Psychic (2x on Poison) into Nidoqueen for 73; Pincurchin's Rising Voltage then took a full 90 HP Mega Gardevoir to 9 in one hit. My Earth Power removed Raichu. T2 Pincurchin Protected away a lethal Earth Power while I pulled the 9 HP Gardevoir out for Magearna. T3 Earth Power finally removed Pincurchin; Emolga Protected. T4 Morpeko's terrain-boosted Life Orb Aura Wheel plus Emolga's Thunderbolt KO'd an 88 HP Assault Vest Magearna through its own Electric resistance, and Earth Power plus Aura Sphere removed Morpeko. T5 Togedemaru arrived on an Air Balloon; my Flamethrower (2x on Steel) popped it and took it to 9, but Iron Head (2x on Poison) plus Air Slash KO'd a fresh 98 HP Nidoking before it acted. T6 Weavile replaced it and Ice Shard finished Togedemaru; Emolga Protected again. T7 Choice Scarf Boltund arrived and its Strong Jaw Psychic Fangs (2x on Poison) KO'd Nidoqueen before my Earth Power; Triple Axel removed Emolga through the Sash. T8 Kartana replaced Nidoqueen and Smart Strike plus Triple Axel closed on Boltund."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "Electric Surge plus Terrain Extender",
+   "result": "PASS",
+   "evidence": "Turn 0 state, before any action: terrain=electric with 8 turns remaining. Eight, not the default five - the Terrain Extender is being read. It counted down honestly and expired on the final turn."
+  },
+  {
+   "check": "Rising Voltage doubles against grounded targets",
+   "result": "PASS",
+   "evidence": "T1: one Rising Voltage from a L32 Pincurchin took Mega Gardevoir from 90/90 to 9/90. A 70 BP neutral hit from that body does not do 81 to a 100-base-SpD Mega; this is the 140 BP grounded-terrain doubling, and it is the single most impressive hit in my whole block."
+  },
+  {
+   "check": "Surge Surfer",
+   "result": "PASS",
+   "evidence": "T1 Alolan Raichu (110 base Speed, L27) moved before my L30 Mega Gardevoir at 100 base and 252 Speed EVs - only possible with the doubling. As a bonus confirmation, my own Gardevoir Traced Surge Surfer on entry and the engine gave it the same doubling."
+  },
+  {
+   "check": "Emolga Motor Drive",
+   "result": "NOT EXERCISED - deliberately",
+   "evidence": "The only way to test it was to aim an Electric move at Emolga, which would have been a thrown turn: it would have dealt no damage and handed a 103-base-Speed body a free +1 Speed for the rest of the fight. I declined. Motor Drive is covered at Wattson instead, where the authored ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE tactic triggers it from the opponent's own side without costing me anything."
+  },
+  {
+   "check": "Togedemaru Air Balloon and Iron Barbs",
+   "result": "PASS (Balloon), NOT EXERCISED (Iron Barbs)",
+   "evidence": "Togedemaru arrived immune to my two Earth Powers; Flamethrower popped the Balloon ('The opposing Togedemaru's Air Balloon popped!') and its next turn would have been Ground-legal. Iron Barbs never triggered because nothing I used against it makes contact - Flamethrower and Ice Shard are both non-contact. That is my move pool, not an AI fault."
+  },
+  {
+   "check": "Morpeko Hunger Switch",
+   "result": "PARTIAL",
+   "evidence": "Morpeko entered as MORPEKO_FULL_BELLY and used the Electric-type Aura Wheel exactly as that form should. It was removed the same turn, so the end-of-turn flip to the Hangry form and a Dark-type Aura Wheel never happened. The form and the move typing are correct; the flip is untested."
+  },
+  {
+   "check": "Boltund Choice lock and Strong Jaw",
+   "result": "PASS",
+   "evidence": "After its first Psychic Fangs the state showed PSYCHIC_FANGS as its only remaining move - a real Choice lock. That single Strong-Jaw-boosted, Scarf-speed Psychic Fangs (2x on Poison) KO'd a 49 HP Nidoqueen before my Earth Power could resolve."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "Three Protects, all with real payoff and none consecutive. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 2,
+   "battler": "PINCURCHIN",
+   "payoff": "at 45/102 it blocked a 2x Sheer Force Earth Power that would have killed it outright, and bought itself the turn in which it landed a 2x Scald on Nidoqueen. Best possible use."
+  },
+  {
+   "turn": 3,
+   "battler": "EMOLGA",
+   "payoff": "partial. It blocked a +1 Flash Cannon at 87/87 with an intact Focus Sash, so the guard preserved the Sash rather than its life. Still positive value - the Sash mattered four turns later - but this is the weakest of the three."
+  },
+  {
+   "turn": 6,
+   "battler": "EMOLGA",
+   "payoff": "blocked a 2x Ice Beam from Nidoqueen. Without it the Sash would have broken and Emolga would have been in Ice Shard range immediately. Real payoff, and it was three turns after its previous guard, so no repetition problem."
+  }
+ ],
+ "ai_defects": [],
+ "ai_highlights": [
+  "The room focus-fired my Ground bodies three separate times and each time it worked: Raichu's Psychic into Nidoqueen on T1, Togedemaru's Iron Head plus Emolga's Air Slash killing a fresh 98 HP Nidoking on T5 before it acted, and Scarf Boltund's Psychic Fangs on T7. Every one of those was the correct target - Poison is 2x to both Psychic and Steel, so the AI found the crack in an Electric-immune answer instead of hitting into the immunity.",
+  "Morpeko plus Emolga stacking two terrain-boosted Electric attacks to break an Assault Vest Magearna that resists Electric was the right call - no single attack could do it, and two could."
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt but it cost three player faints - Magearna, Nidoking and Nidoqueen, i.e. both of my Ground answers and my special wall - and my Mega Gardevoir spent the whole fight on 9 HP after one hit. This is comfortably at the Gym-room benchmark and is the hardest room of the four. Levels kept exactly as authored.",
+ "could_this_be_cooler": "Kept, and this is the best-designed room in Mauville Gym: the terrain anchor and the terrain sprinter are actually in the same room rather than scattered, the Terrain Extender means the engine outlasts its own setter, and the reserves cover the two angles that beat terrain - Emolga is airborne, Togedemaru rents a Balloon. The one piece that does not earn its slot is Morpeko. Hunger Switch flips at the end of the turn, so a Life Orb body with 58/95/58 bulk in a room full of faster partners essentially never lives to use its second typing, and what the player actually meets is a plain Electric attacker. The concrete suggestion (not applied): give Morpeko a Focus Sash in place of the Life Orb. It costs nothing thematically, it guarantees Morpeko survives to the end of one turn, and that is precisely the condition Hunger Switch needs - the player then has to answer a Dark-type Aura Wheel from something they just watched use an Electric one, which is the whole point of the Pokemon and is currently invisible.",
+ "authored_set_legality": "No legality problem found. All six prepared and ran clean, including Pincurchin's Rising Voltage preset access and both form-specific members (Raichu-Alola, Morpeko-Full-Belly)."
+}
