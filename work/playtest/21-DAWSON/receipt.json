@@ -1,0 +1,42 @@
+{
+  "play_order": 21,
+  "e_group": "E0025",
+  "trainer": "TRAINER_DAWSON",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "observed_opponent_levels": {"MEOWTH_GALAR": 14, "ROOKIDEE": 16, "WOOLOO": "18 (offset 6)", "MINCCINO": "15 (offset 3)"},
+  "outcome": "WON on attempt 1, 5 turns, 2 player faints",
+  "party_manifest": "work/playtest/21-DAWSON/party.json",
+  "run_dir": "work/playtest/21-DAWSON/a1",
+  "attempts": [
+    {"seed": "0x2100", "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+     "player_faint_detail": "Weavile to Meowth-Galar's Iron Head (Steel is 2x on Ice); Whimsicott to Minccino's Tail Slap. Arcanine finished at 14/53 after three Flare Blitz recoils.",
+     "note": "Wooloo at level 18 is four levels above the cap and the single hardest body in the block so far."}
+  ],
+  "strategy_checks": [
+    {"check": "Galarian Meowth opens with Fake Out to enable the partner", "result": "PASS", "evidence": "Turn 1 chosen action: battler 1 MOVE_FAKE_OUT -> target 0. It lost the Fake Out race to my faster Weavile and was flinched, but the authored choice was made on the correct turn."},
+    {"check": "Rookidee converts the Fake Out turn into Tailwind or Taunt", "result": "FAIL - never fired", "evidence": "Rookidee was on the field for two turns and chose MOVE_BRAVE_BIRD both times, taking 33 recoil in the process and dying at 10/43 to an Ice Shard. Tailwind, Taunt and Roost - three of its four moves - never appeared. This is the trainer's only TAILWIND carrier and the strategy flag did not execute."},
+    {"check": "Minccino's Skill Link Tail Slap delivers five hits", "result": "INCONCLUSIVE", "evidence": "Turn 4: 'Whimsicott fainted! The Pokemon was hit 3 times!' The move stopped at three because the target fainted on the third hit, which is correct multi-hit behaviour, so the five-hit guarantee was neither demonstrated nor disproved. Tail Slap was selected again on turn 5 but Minccino died to Close Combat first."},
+    {"check": "Wide Lens improves Tail Slap accuracy rather than the hit count", "result": "NOT OBSERVED", "evidence": "Tail Slap never missed, so the item's contribution was not isolated."},
+    {"check": "Wooloo's Fluffy buffers physical contact and doubles Fire damage", "result": "PASS (Fire half demonstrated)", "evidence": "Arcanine's Flare Blitz took a level-18, 60 HP Wooloo from 52 to 19 in one hit and finished it from 19 on turn 6. That output against a body four levels above cap is consistent with Fluffy's Fire doubling. The contact-halving half was not isolated."},
+    {"check": "Wooloo's zero-friendship Double-Edge and its recoil", "result": "PASS", "evidence": "Double-Edge chosen on turns 3 and 4 with recoil applied both times."},
+    {"check": "Meowth-Galar U-Turns into an improved board", "result": "NOT OBSERVED", "evidence": "Meowth chose Fake Out then Iron Head twice; U-Turn and Knock Off never appeared."},
+    {"check": "Minccino's Encore punishes an exploitable move", "result": "NOT OBSERVED", "evidence": "Never selected in two turns."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS"}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "Wooloo", "payoff": "REAL and life-saving - at 19/60 it blocked Arcanine's Extreme Speed, which would have killed it, and its partner Minccino got its Tail Slap off that turn."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "One opposing Protect in the whole battle and it was a correct lethal save. No guarding problems here.",
+    "Rookidee choosing Brave Bird twice instead of Tailwind is the third TAILWIND-flagged trainer in this block whose Tailwind did not go up (Jose's Dustox selected it but was outsped and killed; Johnson's Fletchinder never selected it in six turns; Dawson's Rookidee never selected it in two). Three independent trainers, three different species, same outcome - this looks like a shared scoring pattern rather than three coincidences, and it is the single most repeated strategy failure I saw. Recommend a focused look at how speed-control set-up is priced against an immediate attack.",
+    "Rookidee also declined Roost at 10/43. With Eviolite it is a genuinely bulky body and Roost was available; Brave Bird recoil is what put it in Ice Shard range in the first place."
+  ],
+  "level_changes": [],
+  "level_verdict": "KEEP. Brief rule 5: won with 2 player faints after a real fight. Wooloo at level 18 (offset 6, four above the cap) is doing exactly the job the authoring intends - it was the last thing standing and it cost me three Flare Blitz recoils to remove. No change.",
+  "cooler_note": "Yes, mostly. The spread of individual levels here (14/16/18/15) is the most interesting thing about the team and it works: the level-18 Fluffy wall genuinely changes how you approach the fight, and the authoring note about Wide Lens not increasing the Skill Link hit count shows real care. The weakness is that Rookidee is authored as the speed-control piece and the AI will not use it that way, so in practice Dawson is three attackers and a wall. Suggestion for a later pass, not applied here: if the Tailwind scoring is not fixed, Rookidee's slot is better spent on something that wants to attack, because Brave Bird recoil on an Eviolite body with an unused Roost is the worst of both designs.",
+  "authored_set_legality": "No legality problem found.",
+  "not_finished": "Tailwind, Taunt, Roost, U-Turn, Knock Off, Encore and a confirmed five-hit Tail Slap are all still unexercised."
+}
