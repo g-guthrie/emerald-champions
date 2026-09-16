@@ -1956,3 +1956,25 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
         gBattleTypeFlags = savedFlags;
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC Gym: Takao's healthy lead does not withdraw on turn one")
+{
+    u32 power;
+    PARAMETRIZE { power = 120; }
+    PARAMETRIZE { power = 400; }
+    GIVEN {
+        // A Fairy attacker opposite a Fighting lead reads as pressure even at
+        // full health. Being threatened is a reason to look at the bench, not
+        // a reason to hand over the first turn from 80 of 80.
+        PLAYER(SPECIES_GARDEVOIR) { Level(24); HP(300); MaxHP(300); SpAttack(power); Speed(200); Moves(MOVE_DAZZLING_GLEAM); }
+        PLAYER(SPECIES_MAGIKARP) { Level(24); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        AuthoredOpponent(TRAINER_TAKAO, 2, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DAZZLING_GLEAM);
+            MOVE(playerRight, MOVE_SPLASH);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_GRAPPLOCT);
+    }
+}
