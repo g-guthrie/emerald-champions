@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "P10 block cap30/36 Mt Chimney - Lavaridge core party",
+  "availability_audit": "Chronology: every member's source map precedes Mt Chimney in book play order (Route 101-104, Petalburg City/Woods, Granite Cave, Dewford, Seaspray Cave, Route 115, Route 118). Magikarp Petalburg City old_rod gate14; Marill Petalburg City old_rod gate14 (Azumarill level evo gate20); Togepi Route102 land gate14 -> Togetic friendship -> Togekiss Shiny Stone gate24; Abra GraniteCave_1F gate20 -> Kadabra level -> Alakazam Linking Cord gate20; Staryu DewfordTown good_rod gate30 -> Starmie Water Stone gate30; Ralts Route102 gate14 -> Kirlia -> Gallade Dawn Stone gate24. Gyaradosite stone-window=20, base-window=20, Mega Ring earned from Steven after Brawly, so the single Mega slot is legal at cap30. No legendaries, no mythicals, no Ultra Beasts, no Paradox species. Ordinary held items from the free Center held-item catalogue/preparation system.",
+  "plan": "Doubles core for the Fire-heavy Magma/Lavaridge block. Mega Gyarados is the Mold Breaker Water/Dark win condition behind Togekiss Follow Me + Tailwind. Azumarill resists Fire and supplies Aqua Jet priority and Knock Off. Alakazam and Starmie supply recoil-free special coverage (Focus Blast for Rock/Steel, Ice Beam and Thunderbolt for the Flying/Ground reserves). Gallade is the Fighting/Psychic physical answer to Rhyperior and Coalossal.",
+  "party": [
+    {
+      "species": "SPECIES_GYARADOS",
+      "moves": ["MOVE_WATERFALL", "MOVE_CRUNCH", "MOVE_DRAGON_DANCE", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_GYARADOSITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition; Intimidate on entry then Mold Breaker Water/Dark",
+      "availability": "Magikarp Petalburg City old_rod gate14, level evolution to Gyarados gate20; Gyaradosite stone-window=20 with the post-Brawly Mega Ring."
+    },
+    {
+      "species": "SPECIES_AZUMARILL",
+      "moves": ["MOVE_LIQUIDATION", "MOVE_PLAY_ROUGH", "MOVE_AQUA_JET", "MOVE_KNOCK_OFF"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fire-resistant Huge Power attacker with priority and item removal",
+      "availability": "Marill Petalburg City old_rod gate14; Azumarill level20 evolution, pool gate20."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": ["MOVE_FOLLOW_ME", "MOVE_AIR_SLASH", "MOVE_TAILWIND", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 0, 124, 0, 132, 0],
+      "role": "redirection and Tailwind support",
+      "availability": "Togepi Route102 land gate14, friendship evolution, Shiny Stone gate24."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": ["MOVE_PSYCHIC", "MOVE_FOCUS_BLAST", "MOVE_SHADOW_BALL", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "fast recoil-free special attacker",
+      "availability": "Abra GraniteCave_1F gate20; Kadabra level evolution; Linking Cord from the Slateport evolution stock, pool gate20."
+    },
+    {
+      "species": "SPECIES_STARMIE",
+      "moves": ["MOVE_HYDRO_PUMP", "MOVE_ICE_BEAM", "MOVE_THUNDERBOLT", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NATURAL_CURE",
+      "item": "ITEM_EXPERT_BELT",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "fast Water with Ice/Electric coverage for Flying and Ground reserves",
+      "availability": "Staryu DewfordTown good_rod gate30; Water Stone evolution, pool gate30."
+    },
+    {
+      "species": "SPECIES_GALLADE",
+      "moves": ["MOVE_SACRED_SWORD", "MOVE_PSYCHO_CUT", "MOVE_NIGHT_SLASH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_JUSTIFIED",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "physical Fighting/Psychic answer to Rock, Steel and Dark bulk",
+      "availability": "Ralts Route102 land gate14; Kirlia level evolution gate20; Dawn Stone gate24."
+    }
+  ]
+}

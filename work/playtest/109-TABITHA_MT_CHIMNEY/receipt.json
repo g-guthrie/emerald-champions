@@ -1,0 +1,106 @@
+{
+  "play_order": 109,
+  "e_group": "E0131",
+  "trainer": "TRAINER_TABITHA_MT_CHIMNEY",
+  "class": "admin",
+  "location": "MtChimney",
+  "cap": 30,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 30: Salandit L34 (30+6-2), Coalossal L28 (30+0-2), Weezing-Galar L29 (30+1-2), Magmortar L28, Rhyperior L28, Houndoom L27 (30-1-2). Cap 36 was rejected by this check; Tabitha is fought before the Mt Chimney milestone.",
+  "party_manifest": "work/playtest/109-TABITHA_MT_CHIMNEY/party_chimney.json",
+  "attempts": [
+    {
+      "seed": 11,
+      "run_dir": "work/playtest/109-TABITHA_MT_CHIMNEY/run-s11",
+      "outcome": "won",
+      "turns": 10,
+      "decisions": 12,
+      "player_faints": 1,
+      "opponent_faints": 6,
+      "notes": "Attempt 1. Mega Gyarados removed Coalossal on turn 4; Alakazam traded with Choice Specs Magmortar after a Focus Blast miss; Azumarill cleaned Rhyperior; confused Gallade finished Weezing on turn 11."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Tabitha leads Salandit + Coalossal as the dossier states",
+      "result": "PASS",
+      "evidence": "Turn 0 actives: b1 SALANDIT L34, b3 COALOSSAL L28."
+    },
+    {
+      "check": "ACTIVATE SALANDIT EMBER COALOSSAL fires: Salandit hits its own Coalossal with a Fire move to trigger Steam Engine",
+      "result": "FAIL",
+      "evidence": "Turn 1 Salandit did choose MOVE_EMBER at target 3 (its partner), but Coalossal had already chosen Protect (+4 priority) and the friendly Ember was absorbed: 'The opposing Coalossal protected itself!'. Turn 2 Salandit chose MOVE_FLAMETHROWER at target 3 (partner) instead of the authored Ember, and was KOed by Aqua Jet before it resolved. The activation never happened in this run."
+    },
+    {
+      "check": "Coalossal reaches +6 Speed via Steam Engine and acts before the player team",
+      "result": "FAIL",
+      "evidence": "Coalossal's stat_stages stayed atk -1 (my Intimidate) / spe 0 for its whole life (turns 1-4). No Steam Engine activation at any point."
+    },
+    {
+      "check": "Galarian Weezing supplies Sunny Day (SUN strategy flag)",
+      "result": "PASS",
+      "evidence": "Turn 3 Weezing used Sunny Day, weather B_WEATHER_SUN_NORMAL; re-set it on turn 8 after it lapsed."
+    },
+    {
+      "check": "Houndoom Mega-evolves and gains Solar Power in the sun",
+      "result": "PASS",
+      "evidence": "Turn 5 'The opposing Houndoom has Mega Evolved into Mega Hou...'; state shows HOUNDOOM_MEGA ability SOLAR_POWER, 76/86 HP from the Solar Power sun chip."
+    },
+    {
+      "check": "Houndoom uses Nasty Plot behind a safe turn",
+      "result": "FAIL",
+      "evidence": "Mega Houndoom lived two turns and chose Protect (turn 5) then Dark Pulse (turn 6). Never set up. Not a defect on its own - it was under immediate pressure - but the authored Nasty Plot line did not appear."
+    },
+    {
+      "check": "Rhyperior is preserved as a separate physical lane",
+      "result": "PASS",
+      "evidence": "Rhyperior entered last-but-one, used High Horsepower twice for 66 on Starmie and 0 chip on Azumarill, dying to a 4x Liquidation."
+    }
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "COALOSSAL", "payoff": "REAL - blocked Mega Gyarados Waterfall (4x, lethal). Side effect: it also absorbed its own partner's authored activation Ember."},
+    {"turn": 3, "battler": "COALOSSAL", "payoff": "REAL - blocked Mega Gyarados Waterfall again while Weezing set Sunny Day behind it."},
+    {"turn": 4, "battler": "COALOSSAL", "payoff": "EMPTY - third Protect attempt, 'But it failed!'; Coalossal then died to the Waterfall it tried to block."},
+    {"turn": 5, "battler": "WEEZING_GALAR", "payoff": "EMPTY - nothing targeted Weezing that turn (I switched Gyarados and Alakazam aimed at Houndoom)."},
+    {"turn": 5, "battler": "HOUNDOOM_MEGA", "payoff": "REAL - blocked Alakazam's Focus Blast (2x) on the Mega-evolution turn."},
+    {"turn": 6, "battler": "WEEZING_GALAR", "payoff": "EMPTY - 'But it failed!' (consecutive). Weezing wasted the turn its Mega partner died."},
+    {"turn": 7, "battler": "WEEZING_GALAR", "payoff": "EMPTY - nothing was aimed at Weezing; both my attacks went to Magmortar."},
+    {"turn": 10, "battler": "WEEZING_GALAR", "payoff": "REAL - blocked Azumarill Knock Off and Gallade Psycho Cut (2x)."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P10-D1",
+      "severity": "high",
+      "turn": 1,
+      "board": "Salandit L34 + Coalossal L28 vs Mega Gyarados + Azumarill, no weather, turn 1 of the battle",
+      "chosen": "Coalossal chose Protect and Salandit chose Ember at target 3 (its own Coalossal). Protect resolved first and absorbed the friendly Ember.",
+      "why_wrong": "The authored tactic ACTIVATE SALANDIT EMBER COALOSSAL is the entire concept of this lead. The ally-activation scorer and the Protect scorer do not talk to each other, so the partner's Protect cancels the activation and Salandit's whole turn is thrown away for nothing.",
+      "better_action": "Either the activation target should not Protect on a turn its partner has selected a friendly activation move, or the activator should see the partner's committed Protect and attack the player instead (Flamethrower on Gyarados / Toxic on Azumarill)."
+    },
+    {
+      "id": "P10-D2",
+      "severity": "medium",
+      "turn": 2,
+      "board": "Salandit L34 (1 HP, Sash spent) + Coalossal L28 (full) vs Mega Gyarados +1/+1 and Azumarill",
+      "chosen": "Salandit chose MOVE_FLAMETHROWER at target 3 (its own partner Coalossal).",
+      "why_wrong": "The dossier picks Ember specifically ('Minimized Special Attack Ember can activate Steam Engine through the quarter-resisted friendly Fire hit; it still costs HP') - Flamethrower is 90 BP against Ember's 40 and costs the partner more than twice the HP for the identical Steam Engine trigger. The activation scorer is not preferring the weakest legal activation move.",
+      "better_action": "Ember, if the activation is still wanted; otherwise attack the player. (The move never resolved - Aqua Jet KOed Salandit first - but the choice was recorded natively.)"
+    },
+    {
+      "id": "P10-D3",
+      "severity": "low",
+      "turn": "5, 6, 7",
+      "board": "Weezing-Galar at 92-99/103, no incoming threat aimed at it",
+      "chosen": "Protect on three consecutive turns; turn 6 was an outright 'But it failed!'.",
+      "why_wrong": "Three empty Protects in a row, including one guaranteed failure, while its Mega partner was being focused down. Weezing had Sunny Day (sun had lapsed once) and Will-O-Wisp available and used neither.",
+      "better_action": "Will-O-Wisp on Azumarill (the Huge Power attacker that was doing all the work), or re-set Sunny Day for the Magmortar/Houndoom payoff."
+    }
+  ],
+  "level_changes": [
+    {"member": "COALOSSAL", "before": 0, "after": 1, "reason": "Won on attempt 1 with a single faint; Coalossal is the cheapest non-Mega member and died to one Waterfall without ever getting its Steam Engine turn."},
+    {"member": "RHYPERIOR", "before": 0, "after": 1, "reason": "Second-weakest non-Mega member; its High Horsepower was the only reason anything of mine was in danger late, so it is the right place for the other point."}
+  ],
+  "level_change_verification": "NOT RERUN. The driver resolves opponent levels out of the prebuilt ROM in work/agent-battle-build-2 and exposes no level override, and this agent is instructed never to run make. The +1s need the main agent's materialize-and-rebuild before they can be re-verified.",
+  "could_this_be_cooler": "The Steam Engine lead is a great idea that the current shell cannot show off, because Coalossal's own Protect eats the activation and because the payoff (a +6 Speed Coalossal) still has base 30 Speed and a Rock/Fire typing that folds to any Water move at this stage. Two suggestions, neither applied in this pass: (1) give Coalossal Tar Shot or Sandstorm-adjacent support instead of Protect so the activation turn cannot be self-cancelled and the sequencing reads cleanly; (2) let the Steam Engine payoff actually matter by pairing Coalossal with the sun rather than putting Weezing's Sunny Day two slots later - a Salandit that leads with Sunny Day + Ember would make the first two turns of this fight legible as a combo instead of a Protect stall.",
+  "authored_set_legality": "No legality problems. All six sets were accepted by the native preparation path and every ability, item and move behaved as printed.",
+  "notes": "AI decision time max 62 frames (1.04 s)."
+}
