@@ -1,0 +1,59 @@
+{
+  "play_order": 26,
+  "e_group": "E0028",
+  "trainer": "TRAINER_TOMMY",
+  "class": "gym",
+  "location": "RustboroCity_Gym",
+  "cap": 14,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/26-TRAINER_TOMMY/party.json",
+  "opponent_levels": {"CRADILY": 12, "TIRTOUGA": 16, "ANORITH": 15, "SHUCKLE": 15, "CORSOLA": 16, "BINACLE": 16},
+  "attempts": [
+    {
+      "id": "a1",
+      "run_dir": "work/playtest/26-TRAINER_TOMMY/a1",
+      "seed": "0x7042",
+      "outcome": "won",
+      "turns": 12,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "ai_decision_frames_max": 15,
+      "narrative": "Shaymin's Seed Flare removed Tirtouga on turn 1 through its Rindo Berry before the authored Surf could fire. Cradily then Protected twice with full payoff and Shuckle ground both special attackers down with repeated Struggle Bug while feeding Helping Hand into Cradily's Power Gem, which killed Whimsicott. Lucario traded into Cradily and then died to a Choice Scarf Tough Claws Liquidation from Binacle. Magearna walled Struggle Bug (Steel resists Bug) and cleaned Binacle, Corsola and Shuckle with Thunderbolt and Flash Cannon while Cloyster's Rock Blast finished Anorith. Three player faints (Whimsicott, Lucario, Cloyster) against six."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "ACTIVATE TIRTOUGA SURF CRADILY - Tirtouga's Surf feeds Cradily's Storm Drain", "result": "CHOSEN, NOT EXECUTED", "evidence": "a1 turn 1: Tirtouga's selected action was Surf with Cradily (Storm Drain) beside it, which is the authored activation choice, but Seed Flare knocked Tirtouga out before it moved. The absorb itself was never observed in this run."},
+    {"check": "Tirtouga's invested Speed should put Surf before Cradily's useful special attack", "result": "FAIL on the board", "evidence": "Tirtouga at L16 with 252 Speed was still slower than an ordinary cap-14 252-Speed Timid attacker, so the partnership had no turn at all. This is a level/speed design observation, not an AI scoring defect - see cooler note."},
+    {"check": "Solid Rock and the Rindo Berry blunt the 4x Grass answer", "result": "PASS", "evidence": "a1 turn 1: 'It's extremely effective!' followed by 'The opposing Tirtouga's Rindo Berry lessened the damage'. It still fainted, but the berry fired correctly."},
+    {"check": "Shuckle uses Power Split to weaken a worthwhile opposing attacker", "result": "PASS", "evidence": "a1 turn 11: Power Split targeted Magearna, which was by then the clear top attacker on the field and the only mon that had not been chipped. Correct recipient, and it was not repeated without a new benefit."},
+    {"check": "Shuckle uses Struggle Bug for special mitigation", "result": "PASS", "evidence": "Used on turns 2, 4, 5, 7, 9, 10, 12 and 13 against a party whose damage was almost entirely special; it stacked my Shaymin to -2 SpA and repeatedly cut Magearna. It correctly kept using it against Steel targets only when nothing better was available under Taunt."},
+    {"check": "Shuckle uses Helping Hand for a genuine payoff", "result": "PASS", "evidence": "a1 turn 3: Helping Hand into Cradily's Power Gem killed Whimsicott outright. a1 turn 8: Helping Hand into Corsola's Earth Power left Jolteon on 1 HP. Both were real, decisive payoffs, and both were chosen on turns where Shuckle's own attack would have done nothing."},
+    {"check": "Shuckle uses Encore", "result": "NOT OBSERVED", "evidence": "No opposing repetition worth locking arose; Taunt from Whimsicott also blanked the option for three turns."},
+    {"check": "Corsola uses Life Dew to preserve useful pressure", "result": "QUESTIONABLE", "evidence": "a1 turn 10: Life Dew at 13/61 with a revealed Shaymin on the field that had already one-shot Tirtouga through a resist berry. The heal was ~15 HP and Corsola died to Seed Flare the same turn; Shuckle was at full HP so the ally half did nothing. See AI defects."},
+    {"check": "Corsola uses Regenerator only after a legal switch", "result": "NOT OBSERVED", "evidence": "Corsola never switched out."},
+    {"check": "Choice Scarf Binacle attacks with contact boosts and obeys its lock", "result": "PARTIAL PASS", "evidence": "a1 turn 6: Liquidation (contact, Tough Claws boosted) one-shot a Lucario at -1 Defense. Binacle died the same turn, so the lock was never re-tested on a second choice."},
+    {"check": "Anorith supplies physical Bug/Rock/priority pressure", "result": "PARTIAL", "evidence": "Bug Bite on turn 11 and a spread Rock Slide on turn 12 that killed Cloyster. Aqua Jet was never selected; no board came up where the priority mattered."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "CRADILY", "payoff": "real - blocked Whimsicott's Taunt (which would have shut off Recover and Protect for three turns) and Shaymin's 2x Earth Power in the same turn"},
+    {"turn": 4, "user": "CRADILY", "payoff": "real - blocked Shaymin's Earth Power and Lucario's 2x Close Combat"},
+    {"turn": 7, "user": "CORSOLA", "payoff": "real - blocked two 2x Thunderbolts on the turn it entered"},
+    {"turn": 9, "user": "CORSOLA", "payoff": "real - blocked a Thunderbolt that was lethal at 13/61"}
+  ],
+  "ai_defects": [
+    {
+      "severity": "minor",
+      "turn": "a1 turn 10",
+      "board": "Corsola at 13/61 with no item left, partnered with a full-HP Shuckle, facing Magearna and a Shaymin whose Seed Flare had already knocked out Tirtouga through a Rindo Berry",
+      "chosen": "Life Dew",
+      "better": "Protect, or a switch to bank Regenerator. Life Dew restores about a quarter of max HP to both allies; that was roughly 15 HP on a body that was about to take a 4x Seed Flare, and zero on a Shuckle already at full. Corsola fainted the same turn having healed nothing that mattered.",
+      "note": "The scorer appears to weigh Life Dew's two-target healing without checking that the ally is already full and that the incoming super-effective hit exceeds the heal."
+    }
+  ],
+  "level_changes": "none. Won on the first optimized attempt but with three player faints out of six against six opponent faints and a twelve-turn grind, which is the brief's 'won after a real fight' band. Shuckle in particular is an excellent, genuinely annoying wall that made the whole second half harder. Keep the authored offsets (0/4/3/3/4/4).",
+  "cooler_note": "The ancient-seabed concept is good and Shuckle is the standout - Power Split plus Helping Hand plus spread Struggle Bug gave the fight its texture, and it survived to the last turn. The concept problem is the headline partnership: Tirtouga carries offset 4 (L16) but is still outsped by any cap-14 investment, and it is 4x weak to the single most obvious counterplay to a Rock gym, so the authored Surf/Storm Drain activation had no turn to exist. A concrete suggestion for a later pass (not applied here): pair Storm Drain Cradily with Corsola instead, whose Life Dew and Regenerator buy the slow turns the absorb needs, and let Tirtouga arrive later as an Ice Beam finisher rather than the opening combo half. Species-wise the roster does not need rarer members; Cradily, Shuckle and Binacle are already an unusual and coherent trio.",
+  "authored_set_legality": "No legality problem found; all six materialized and battled correctly at the resolved Medium levels.",
+  "evidence": {
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+  }
+}
