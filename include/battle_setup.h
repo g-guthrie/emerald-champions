@@ -139,6 +139,7 @@ void TrainerBattleLoadArgsSecondTrainer(const u8 *data);
 void InitTrainerBattleParameter(void);
 void InitCampaignBattleReward(void);
 u32 GetCampaignBattleMoneyReward(void);
+bool32 IsBattleMoneyRewardEligible(void);
 void InitTrainerMoneyRewardEligibility(void);
 
 void BattleSetup_StartTrainerBattle_Debug(void);

@@ -110,8 +110,6 @@ EmeraldChampions_EventScript_MoveDeleterChooseMon:
 	special BufferMoveDeleterNicknameAndMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_MoveDeleterChooseMon
-	special IsLastMonThatKnowsSurf
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_MoveDeleterLastSurf
 	special MoveDeleterForgetMove
 	playfanfare MUS_MOVE_DELETED
 	waitfanfare
@@ -127,11 +125,6 @@ EmeraldChampions_EventScript_MoveDeleterEgg:
 EmeraldChampions_EventScript_MoveDeleterOneMove:
 	special BufferMoveDeleterNicknameAndMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_MoveDeleterChooseMon
-
-EmeraldChampions_EventScript_MoveDeleterLastSurf:
-	special BufferMoveDeleterNicknameAndMove
-	msgbox LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_MoveDeleterChooseMon
 
 EmeraldChampions_EventScript_OpenNameRater:

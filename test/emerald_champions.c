@@ -717,6 +717,39 @@ TEST("Emerald Champions leveling never interrupts a competitive moveset")
         EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1 + i), originalMoves[i]);
 }
 
+TEST("Emerald Champions can forget a former HM move to learn a new one")
+{
+    struct Pokemon mon;
+
+    // CannotForgetMove is the one guard shared by the level-up learn path
+    // (battle_script_commands.c), the evolution learn path and the Summary
+    // replace flow. With licenses instead of HMs it must never refuse.
+    EXPECT(IsMoveHM(MOVE_SURF));
+    EXPECT(IsMoveHM(MOVE_FLY));
+    EXPECT(IsMoveHM(MOVE_DIVE));
+    EXPECT_EQ(CannotForgetMove(MOVE_SURF), FALSE);
+    EXPECT_EQ(CannotForgetMove(MOVE_FLY), FALSE);
+    EXPECT_EQ(CannotForgetMove(MOVE_DIVE), FALSE);
+
+    CreateMon(&mon, SPECIES_MUDKIP, 20, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&mon, MOVE_SURF, 0);
+    SetMonMoveSlot(&mon, MOVE_EARTHQUAKE, 1);
+    SetMonMoveSlot(&mon, MOVE_ICE_BEAM, 2);
+    SetMonMoveSlot(&mon, MOVE_PROTECT, 3);
+
+    // A full moveset forces the replace prompt, exactly as a level-up would.
+    EXPECT_EQ(GiveMoveToMon(&mon, MOVE_WATERFALL), MON_HAS_MAX_MOVES);
+
+    // The level-up handler replaces the chosen slot only when the guard allows it.
+    EXPECT_EQ(CannotForgetMove(GetMonData(&mon, MON_DATA_MOVE1)), FALSE);
+    RemoveMonPPBonus(&mon, 0);
+    SetMonMoveSlot(&mon, MOVE_WATERFALL, 0);
+
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1), MOVE_WATERFALL);
+    EXPECT(!MonKnowsMove(&mon, MOVE_SURF));
+    EXPECT(GetMonData(&mon, MON_DATA_PP1) > 0);
+}
+
 TEST("Emerald Champions applies a complete authored battle set")
 {
     struct Pokemon mon;

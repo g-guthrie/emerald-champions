@@ -330,7 +330,7 @@ PlayersHouse_1F_EventScript_DontPushYourselfTooHard::
 	end
 
 PlayersHouse_1F_EventScript_TryRegisterMom::
-	goto_if_set FLAG_ENABLE_MOM_MATCH_CALL, PlayersHouse_1F_EventScript_CheckGiveAmuletCoin
+	goto_if_set FLAG_ENABLE_MOM_MATCH_CALL, PlayersHouse_1F_EventScript_CheckMomBadgePraise
 	msgbox PlayersHouse_1F_Text_IsThatAPokenav, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -343,16 +343,15 @@ PlayersHouse_1F_EventScript_TryRegisterMom::
 	release
 	end
 
-PlayersHouse_1F_EventScript_CheckGiveAmuletCoin::
-	goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_TryGiveAmuletCoin
+PlayersHouse_1F_EventScript_CheckMomBadgePraise::
+	goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_MomBadgePraise
 	goto PlayersHouse_1F_EventScript_MomHealsParty
 
-PlayersHouse_1F_EventScript_TryGiveAmuletCoin::
+@ MOM has nothing to hand over: money is not a reward in this campaign. The flag
+@ only records that she has already said her piece about DAD's BADGE.
+PlayersHouse_1F_EventScript_MomBadgePraise::
 	goto_if_set FLAG_RECEIVED_AMULET_COIN, PlayersHouse_1F_EventScript_MomHealsParty
-	msgbox PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom, MSGBOX_DEFAULT
-	giveitem ITEM_AMULET_COIN
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox PlayersHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_GotDadsBadge, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_AMULET_COIN
 	release
 	end

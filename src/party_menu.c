@@ -3036,6 +3036,26 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         }
     }
 
+    // Emerald Champions: no field move occupies a battle move slot. A capability-based
+    // move is offered to any member whose species could learn it, just as an obstacle
+    // picks its user, so Teleport and Sweet Scent never cost a competitive slot.
+    if (!GetMonData(&mons[slotId], MON_DATA_IS_EGG))
+    {
+        for (j = 0; j != FIELD_MOVES_COUNT; j++)
+        {
+            enum Move move = FieldMove_GetMoveId(j);
+
+            if (!FieldMove_IsVisible(j) || !FieldMove_IsCapabilityBased(j))
+                continue;
+            if (MonKnowsMove(&mons[slotId], move))
+                continue; // Already listed above.
+            if (sPartyMenuInternal->numActions + 3 >= ARRAY_COUNT(sPartyMenuInternal->actions))
+                break; // Switch, Item and Cancel still have to fit.
+            if (SpeciesCanLearnFieldMove(GetMonData(&mons[slotId], MON_DATA_SPECIES), move))
+                AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
+        }
+    }
+
     if (!InBattlePike())
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
@@ -8634,12 +8654,6 @@ bool32 WouldPartyLoseSurfByReplacingMove(u32 partySlot, u32 moveSlot, enum Move 
     bool32 losesSurf = FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE;
     SetMonData(mon, MON_DATA_MOVE1 + moveSlot, &oldMove);
     return losesSurf;
-}
-
-void IsLastMonThatKnowsSurf(void)
-{
-    gSpecialVar_Result = WouldPartyLoseSurfByReplacingMove(gSpecialVar_0x8004,
-        gSpecialVar_0x8005, MOVE_NONE);
 }
 
 void CursorCb_MoveItemCallback(u8 taskId)

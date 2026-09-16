@@ -742,7 +742,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "frames": 3500,
         "keys": [(400, 3000, "DOWN")],
     },
-    "all-legal-hm-replacement": {
+    "all-legal-move-replacement": {
         "id": 53,
         "frames": 1000,
         "keys": [(400, 2, "A")],
