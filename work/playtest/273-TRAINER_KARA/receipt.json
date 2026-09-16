@@ -1,0 +1,29 @@
+{
+  "play_order": 273, "e_group": "E0424", "trainer": "TRAINER_KARA", "class": "regular", "location": "Route131",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Miltank offset 0 -> L82; Azumarill/Furfrou/Whiscash offset 1 -> L83. Confirmed.",
+  "party_manifest": "work/playtest/273-TRAINER_KARA/party_kara_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 424, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Fake Out flinched Miltank (its chosen Body Slam), Azumarill Protected the Leaf Blade. T2 Miltank switched to Furfrou (Leaf Blade hit it for 192 through Fur Coat), Grassy Glide OHKOed Azumarill before Aqua Jet. T3 Miltank Helping Hand on Furfrou's Sucker Punch (66 into Kartana), Grassy Glide KO Furfrou, Sacred Sword OHKO Miltank (Beast Boost +1). T4 Grassy Glide 4x OHKO Whiscash."}
+  ],
+  "strategy_checks": [
+    {"check": "Miltank Helping Hand only when it crosses a KO threshold, Scrappy Body Slam otherwise", "result": "PARTIAL", "evidence": "T1 chose Body Slam (flinched). T3 Helping Hand on a Sucker Punch that could not KO (66 of 145) while Miltank itself was in lethal range: the authored condition was not met."},
+    {"check": "Azumarill Huge Power Aqua Jet / Play Rough", "result": "chosen, denied", "evidence": "T1 Protect (blocked Leaf Blade), T2 chose Aqua Jet but Grassy Glide's priority KOed it first."},
+    {"check": "Furfrou Fur Coat / U-turn / Thunder Wave sets up Whiscash", "result": "PARTIAL", "evidence": "Fur Coat halved a 4x-scale Leaf Blade (192 of 244); Sucker Punch T3; no U-turn or Thunder Wave; Whiscash entered last and never got a Dragon Dance turn."},
+    {"check": "Whiscash Dragon Dance", "result": "NOT EXERCISED", "evidence": "OHKOed by 4x Grassy Glide on entry."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Azumarill", "payoff": "blocked Leaf Blade (lethal); real"}
+  ],
+  "ai_defects": [
+    {"turn": 3, "battler": "Miltank", "board": "Miltank 246/274 beside Furfrou 52/244 vs Rillaboom + Kartana (+0), terrain up", "chosen": "Helping Hand", "better": "Rock Slide or Body Slam; Helping Hand boosted a Sucker Punch that could not KO, and the dossier itself says Helping Hand only when it crosses a threshold"}
+  ],
+  "level_changes": [
+    {"member": "MILTANK", "before": 0, "after": 1, "reason": "won first try 4-0 with zero faints; Miltank is the lowest offset and did nothing useful"},
+    {"member": "WHISCASH", "before": 1, "after": 2, "reason": "same rule; the Dragon Dance sweeper never got a turn"}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED (needs rebuild).",
+  "could_this_be_cooler": "The dossier's own answer (it should not be) is right for a mid-route regular. The AI's Miltank switch to Furfrou to eat Leaf Blade with Fur Coat was a nice touch. Not changed.",
+  "authored_set_legality": "No problem found."
+}
