@@ -1,0 +1,55 @@
+{
+  "play_order": 71,
+  "e_group": "E0079",
+  "trainer": "TRAINER_VIVI",
+  "class": "ace",
+  "location": "Route111",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"FOMANTIS": 34, "QUAGSIRE": 27, "VIRIZION": 26, "VIBRAVA": 32},
+  "cap_window_confirmation": "Dossier seeds 36/29/28/34 resolved to 34/27/26/32 = cap 30 + offset - 2 (Medium). Cap 30 confirmed. Note the eight-level internal spread, which is the widest in my block.",
+  "party_manifest": "work/playtest/71-TRAINER_VIVI/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, led by Mega Gardevoir + Kartana for the 4x Grass answer to Quagsire. All source maps precede Route 111. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Fomantis's own Leaf Storm RAISES its Special Attack through Contrary rather than lowering it",
+    "Vibrava uses Bulldoze so that the resisted friendly Speed drop becomes a Contrary Speed boost on Fomantis",
+    "Bulldoze is not used when the recipient cannot survive the friendly hit",
+    "Virizion uses Quick Guard rather than another setup move",
+    "Quagsire supplies the Unaware physical alternative",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/71-TRAINER_VIVI/a1", "seed": 71, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Quagsire Protected through a 4x Leaf Blade and a Hyper Voice while Fomantis used Leaf Storm - and Contrary turned the drawback into 'Fomantis's Sp.Atk rose sharply', which is the authored point of the build. The Leaf Storm took my Mega from 90 to 48. T2 Fomantis Protected its last 10 HP through my Hyper Voice, and Kartana's 4x Leaf Blade killed Quagsire THROUGH its Rindo Berry, taking a Beast Boost on the way. T3 Fomantis reached +4 Special Attack with a second Leaf Storm but was KO'd by Hyper Voice before the boost could land, and a +1 Kartana Smart Strike one-shot a 91 HP Virizion from full. T4 Vibrava arrived alone and died to a +2 Smart Strike. Four turns, no player faints."}
+  ],
+  "strategy_checks": [
+    {"check": "Contrary turns Leaf Storm's drawback into a Special Attack boost", "result": "PASS, twice", "evidence": "T1: 'The opposing Fomantis used Leaf Storm! The opposing Fomantis's Sp.Atk rose sharply!' - and again on T3, putting it at +4. The mechanic works exactly as authored and the AI reached for the move willingly rather than treating it as a drawback move to avoid. That is the harder half of this check and it passed."},
+    {"check": "Vibrava's Bulldoze converts a friendly Speed drop into a Contrary boost", "result": "NOT EXERCISED", "evidence": "Vibrava never shared the field with Fomantis. It is authored in slot 4 and entered as the last Pokemon, by which point Fomantis had been dead for a turn. Bulldoze was never selected. This is the same structural problem I found on Melina: the two halves of an ally combo are in slots 1 and 4, so they only meet if the middle two members survive, and here they did not. Not an AI defect - there was no board on which the AI could have chosen it."},
+    {"check": "Bulldoze not used when the recipient cannot survive", "result": "NOT EXERCISED", "evidence": "No Bulldoze was selected at all, so the safety clause was never tested either way."},
+    {"check": "Virizion uses Quick Guard rather than another setup move", "result": "NOT EXERCISED", "evidence": "Virizion selected Leaf Blade on the one turn it had and was KO'd before it resolved. Quick Guard was never selected. At offset -2 it is a level 26 Pokemon with a Life Orb and no defensive investment, and a single +1 Smart Strike from a level 30 Kartana one-shot it from 91/91."},
+    {"check": "Quagsire supplies the Unaware physical alternative", "result": "PARTIAL", "evidence": "Quagsire's Protect on T1 was excellent (below) and it selected Liquidation on T2, which is a real independent attack. Unaware itself never mattered because I never boosted. It is worth noting the Rindo Berry did fire and did lessen the damage - and Leaf Blade at 4x killed it anyway, which says the berry is not enough protection against the coverage its typing invites."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS - both good", "evidence": "See the Protect ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "QUAGSIRE", "payoff": "REAL. It blocked a Kartana Leaf Blade that is 4x into Water/Ground and a Pixilate Hyper Voice on the same turn - the Leaf Blade alone killed it one turn later even through a Rindo Berry, so this genuinely denied a lethal hit. Its partner Fomantis used the turn to take its first Contrary boost. Damage denied and partner setup enabled."},
+    {"turn": 2, "battler": "FOMANTIS", "payoff": "REAL. Fomantis was on 10/82 and my Hyper Voice would have killed it outright; Protect blocked it and bought the turn in which it reached +4 Special Attack. It did not convert that boost - it died the following turn before acting - but guarding 10 HP against a lethal spread attack is plainly correct and there was no repetition."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "No defects. Both Protects were correct, Contrary was used deliberately and repeatedly, and Quagsire's Liquidation was a sensible independent attack.",
+    "The fight is decided by a level-spread problem rather than by play. Fomantis sits at +6 (level 34) and Vibrava at +4 (level 32), while Quagsire is at -1 and Virizion at -2 (levels 27 and 26) - an eight-level spread inside one four-Pokemon team. The two low members are the ones that have to survive for the combo to assemble, and they are the two that cannot. Virizion in particular is a 580 BST legendary being one-shot from full health by a level-30 Kartana's Smart Strike, which should not happen to a Pokemon of that calibre and is purely a function of the -2 offset.",
+    "Decision timing was the fastest in the block (max 61 frames on turn 0, 20 thereafter)."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt with 0 player faints -> +1 on the weakest one or two members, never the ace first. Fomantis (+6) is the centrepiece and Vibrava (+4) is its partner; both untouched. Virizion at -2 and Quagsire at -1 are the floor by six to eight levels and are exactly the two members whose survival the combo depends on.",
+    "changes": [
+      {"member": "VIRIZION", "field": "level offset", "before": -2, "after": -1, "level_before": 26, "level_after": 27},
+      {"member": "QUAGSIRE", "field": "level offset", "before": -1, "after": 0, "level_before": 27, "level_after": 28}
+    ],
+    "rerun_note": "Not rerun at the new levels. Opponent levels are compiled into src/data/trainers.party and the headless ROM in work/agent-battle-build predates this edit; verifying would require re-materializing and running make, which this brief forbids.",
+    "recommendation_beyond_this_pass": "As with Victoria, I think one level is not enough here and I want it recorded rather than acted on unilaterally. Virizion is a legendary-tier 580 BST Pokemon at four levels below the player cap and it was one-shot from full health. If the intent is a cap-relative penalty for reachable legends on the OPPONENT side, it is overshooting - the result is that the team's Quick Guard user simply never gets a turn. I would take Virizion to at least the cap."
+  },
+  "could_this_be_cooler": "The idea is one of the most interesting in my block and I would keep every species. A Contrary Fomantis that grows from its own Leaf Storm's drawback AND from a friendly Bulldoze's Speed drop is a double inversion - two separate downsides converted into growth by one ability - and it is genuinely distinct from every other setup team here. The Contrary half demonstrably works. The problem is purely assembly: the two halves of the combo are authored in slots 1 and 4, so they can only meet if Quagsire and Virizion both survive, and those two are the LOWEST-levelled members of the team by six and eight levels respectively. The combo therefore requires the weakest part of the team to hold the line, which is backwards. The fix I would argue for costs nothing thematically: author Vibrava and Fomantis as the LEAD pair. Vibrava is Levitate, so it is immune to its own Bulldoze; Fomantis is Grass, so it resists Ground and takes the friendly hit at 0.5x, which is precisely why the dossier calls it 'the resisted friendly Speed drop'. Leading them means turn 1 can be Bulldoze - damaging both of my Pokemon while handing Fomantis a Speed boost - and the team's signature interaction happens in the first turn of the fight instead of never. Quagsire and Virizion then do what they are actually built for, which is coming in afterwards as the physical alternatives. That is a lead-order change plus the level look above, with no change to species, moves, items or abilities.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
