@@ -1,0 +1,53 @@
+{
+  "play_order": 235,
+  "e_group": "E0346",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_6",
+  "class": "grunt",
+  "location": "AquaHideout_B2F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; all four members L75 = 76 + 1 - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_gardevoir.json"],
+  "chronology_note": "Same six members; Incineroar beside Gardevoir, because Psyshock is 4x on Toxicroak and Pixilate Hyper Voice is the spread that chips Pyukumuku down before anything has to kill it. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Toxicroak's Fake Out buys the turn",
+    "Innards Out deals Pyukumuku's remaining HP to whoever lands the knockout blow",
+    "Wishiwashi opens in Solo Form and flips to School Form above a quarter HP",
+    "Overqwil's Intimidate plus Swords Dance is the physical lane once the stall bodies have soaked two turns",
+    "Toxicroak's Dry Skin heals it on the Water attacks the player brought for this hideout"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 7, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/235-TRAINER_GRUNT_AQUA_HIDEOUT_6/a1",
+      "outcome": "won", "turns": 3, "decisions": 4,
+      "player_faints": 0, "opponent_faints": 4, "ai_decision_seconds_max": 0.904,
+      "why": "I brought the two types the dossier's own crack names - Psychic and Electric - and neither of the room's three attrition tricks is a defence against damage that is simply super-effective. Toxicroak's Fake Out did flinch my Mega Gardevoir on turn 1, which is the authored job done right, but Psyshock is 4x into a Poison/Fighting body and killed it on turn 2 through the Focus Sash that Fake Out had already broken. Thunderbolt is 2x on a School-form Wishiwashi. Hyper Voice killed Overqwil on its second turn out. The only thing that made me pay was Innards Out, and I had already chipped Pyukumuku with the spread so the backlash was 148 rather than its full bar. 4-0 in four turns, nothing lost."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Toxicroak's Fake Out buys the turn", "result": "PASS", "evidence": "turn 1: 'The opposing Toxicroak used Fake Out! ... Gardevoir flinched and couldn't move!'. It correctly chose the Mega over the Fake Out user beside it, and it moved first because it is the faster Fake Out. It cost me my whole turn-1 Psyshock. Textbook."},
+    {"check": "Innards Out deals Pyukumuku's remaining HP to the killer", "result": "PASS", "evidence": "final turn: Zapdos' Thunderbolt took the KO and Zapdos immediately dropped from 222 to 74 - 148 damage, matching Pyukumuku's remaining HP after Hyper Voice had chipped it for 37. The ability is implemented correctly including the 'remaining, not maximum' detail, which is exactly what makes the chip-first counterplay work."},
+    {"check": "Wishiwashi flips to School Form above a quarter HP", "result": "PASS", "evidence": "the driver reported SPECIES_WISHIWASHI_SCHOOL with 223 HP from turn 0, i.e. it took the field already schooled rather than as the 'free damage' Solo body. The form logic is right; the practical problem is that School form's 223 HP still loses to one 2x Thunderbolt, so the player never sees the transformation as a surprise."},
+    {"check": "Overqwil's Intimidate plus Swords Dance", "result": "PASS (Intimidate) / FAIL (Swords Dance)", "evidence": "Intimidate fired on entry on turn 2 and dropped both my actives an Attack stage - visible and useful, since it blunted nothing I was actually using but would have mattered against a physical party. Swords Dance was never selected. Overqwil's only offensive action was a Gunk Shot that missed, and it died on its second turn."},
+    {"check": "Toxicroak's Dry Skin heals on Water attacks", "result": "NOT OBSERVED", "evidence": "nothing in my party carries a Water move. This is now the third absorption ability in this faction (Mantine and Jellicent's Water Absorb, Lumineon's Storm Drain at play_order 207) that cannot fire against a competently built party. It is a faction-level design observation, not an implementation problem."},
+    {"check": "Pyukumuku's Recover-spam wall", "result": "FAIL", "evidence": "Pyukumuku's one action was HELPING_HAND, on the turn its partner Overqwil was killed by the spread before it could attack. It never used Recover, Toxic or Counter. Wishiwashi did the same thing a turn earlier - Helping Hand into an Overqwil Gunk Shot that missed. Two Helping Hands, zero payoff, from a room whose thesis is attrition."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects; only Toxicroak and Wishiwashi carry one and neither reached for it. No empty or repetitive guarding to report.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Both Helping Hands (Wishiwashi turn 3, Pyukumuku turn 4) were aimed correctly at the partner and both produced nothing, because the partner's attack missed in one case and the partner died before acting in the other. Neither is a scoring error in itself - Helping Hand into a 120 BP Gunk Shot is a reasonable turn - but a support-heavy room that spends two of its six actions on Helping Hand and none on its own Recover or Toxic is not running the attrition plan it is built for. I am recording this as a pattern rather than a defect because each individual choice is defensible.",
+    "AI decision budget max 0.904 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [
+    {"member": "PYUKUMUKU", "before": 1, "after": 2, "why": "the room's memorable piece and the only thing in it that actually cost me something. Innards Out scales directly with its remaining HP, so a level is the one lever that makes the retaliation hurt more without touching the set. It is also a wall that never got to wall - +1 buys it the turn it needs to use Recover at least once."},
+    {"member": "OVERQWIL", "before": 1, "after": 2, "why": "contributed an Intimidate and a missed Gunk Shot and died on its second turn without ever selecting Swords Dance. It is the room's declared physical lane and it has never reached it."}
+  ],
+  "level_change_rationale": "The brief's clearest '+1' case alongside play_order 232: first attempt, zero player faints, four turns, and the only damage that mattered was the opponent's own ability firing on a knockout I chose to take. Both raised members are at the +-2 ceiling for this pass now, which is deliberate - this room starts at +1 and ends at +2, and I do not want to go further without seeing it rerun. I left Toxicroak alone because its Fake Out did exactly its job and cost me a Mega's turn, and Wishiwashi alone because its Muddy Waters were the room's real damage. Neither raised member is an ace, Mega or legend.",
+  "rebuild_note": "The two +1s cannot be re-verified here: the run pinned work/agent-battle-build-5, which predates the edit. The brief's 'rerun once' step is owed on this battle. Of my block, this is the fourth most worth re-running, after Matt (237), Lila & Roy (238) and the rain room (232) - and a rerun should use a party without a 4x Psychic answer to Toxicroak, because Mega Gardevoir happens to be the single worst matchup this room can draw.",
+  "theme_check": "Partly. The pump room reads as a thematic idea on paper - a poison frog, a fish that is many fish, a sea cucumber that spits its guts at you and a spiked blowfish is a genuinely nasty, specific set of animals - but the 'three separate ways of making your damage not count' claim did not hold up, because two of the three (Schooling, Dry Skin) never affected an exchange. Innards Out is the piece that works and it is worth the room on its own: taking 148 damage on a Pokemon that just won an exchange is exactly the 'wait, what just happened' moment the dossier promises, and no other trainer in the campaign has it.",
+  "cooler_note": "Keep the roster. The concept is coherent and Innards Out earns its slot. The demonstrated weakness is that the room's three stall bodies have no way to win a long game: across four turns it used two Helping Hands and no Recover, no Toxic and no Swords Dance, so the attrition never accumulates into anything. A concrete suggestion for a later pass, not made here: Pyukumuku's Helping Hand is the odd move out on a Pokemon that cannot attack - swapping it for Block or Spite would make the sea cucumber an actual trap (something the player must kill, into the retaliation, rather than something they can ignore), which is the interaction the room says it wants to force.",
+  "authored_set_legality": "No legality problem found."
+}
