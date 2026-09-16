@@ -1,0 +1,46 @@
+{
+  "play_order": 85,
+  "e_group": "E0095",
+  "trainer": "TRAINER_BROOKE_1",
+  "class": "ace",
+  "location": "Route111",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"RAIKOU": 34, "INFERNAPE": 34, "EXEGGUTOR": 35, "BLASTOISE": 33},
+  "cap_window_confirmation": "Dossier offsets 0/0/1/-1 resolved to 34/34/35/33 and the player party came out at 36. cap+offset-2 on Medium, so the live cap at Route 111 is 36, the low end of the 36-42 index window.",
+  "party_manifest": "work/playtest/85-TRAINER_BROOKE_1/party.json",
+  "party_pool_audit": "work/playtest/party-cap36-post-wattson.json. Six members, all pool-36 entries with gate <= 36 and a source map the player has already passed on the way to Route 111: Litten/Grookey from the Mauville Game Corner, Togepi Route 102, Magikarp Petalburg Old Rod, Sneasel Seaspray Cave B1F, Abra Granite Cave 1F. Route 118 sources excluded as later than this block. No legendary, mythical, Ultra Beast or Paradox species used, although Raikou, Zapdos, Tapu Koko and Regieleki are all reachable legends in this window.",
+  "pre_declared_strategy_checks": [
+    "Infernape's Fake Out is used to support immediate Raikou offense",
+    "Exeggutor supplies Sleep Powder and conditional Sitrus/Harvest recovery",
+    "Blastoise Mega Evolves in slot 4 and uses Mega Launcher pulse coverage",
+    "Raikou selects attacks rather than unnecessary support when ahead",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/85-TRAINER_BROOKE_1/a1", "seed": 85, "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "Led Incineroar + Rillaboom. T1 I aimed Fake Out at Raikou and it did nothing: Raikou's ability is Inner Focus, so the authored lead is deliberately Fake-Out-proof and my opening was simply wrong. Raikou's Thunderbolt and Infernape's Close Combat (2x into Fire/Dark) then took Incineroar from 148 to 24 through the Sitrus in a single turn, while Rillaboom's High Horsepower left Infernape on 1 HP behind its Focus Sash. T2 I switched Incineroar out for Weavile, which was my real error - Weavile is 4x weak to Fighting and Infernape's Mach Punch plus Raikou's Thunderbolt removed it immediately. Rillaboom's Grassy Glide finished Infernape. T3 Togekiss came in, Rillaboom's Wood Hammer KO'd Raikou and a critical Air Slash KO'd Exeggutor before it ever chose a move. T4 Blastoise Mega Evolved, used Water Pulse into Togekiss, and Rillaboom's Wood Hammer (2x) ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Infernape's Fake Out supports immediate Raikou offense", "result": "NOT OBSERVED, and the plan line is questionable", "evidence": "Infernape never used Fake Out. On T1 it chose Close Combat into Incineroar for 2x, which was clearly the better action - Incineroar had just Intimidated it and was the only target Fake Out could have flinched, and Fake Out into a Pokemon that was about to be removed anyway is worth less than 99 damage. On T2 it used Mach Punch from 1 HP behind its Sash and got a KO on the switch-in. Both choices are correct; what this shows is that the authored plan's headline tactic is the weakest thing Infernape can do with this moveset."},
+    {"check": "Exeggutor supplies Sleep Powder and Sitrus/Harvest recovery", "result": "NOT OBSERVED", "evidence": "Exeggutor came in on T3 and was KO'd by a critical Air Slash (2x into Grass/Psychic) before it selected an action. No fault of the AI; the check simply never got a board."},
+    {"check": "Blastoise Mega Evolves in slot 4 and uses Mega Launcher pulse coverage", "result": "PASS", "evidence": "T4: 'The opposing Blastoise has Mega Evolved', immediately followed by Water Pulse into Togekiss for 40. The Mega fired on the first turn it was legal and it picked a pulse move, which is the Mega Launcher payoff the plan names. Target choice was right too: Togekiss was on 53 HP and Rillaboom was behind an Assault Vest."},
+    {"check": "Raikou selects attacks rather than unnecessary support when ahead", "result": "PASS", "evidence": "Raikou used Thunderbolt on all three of its turns and never reached for Snarl or Protect while it was ahead on board. Life Orb recoil was accepted each time. That is exactly the 'select attacks instead of unnecessary support' line."},
+    {"check": "Inner Focus on the Electric ace", "result": "PASS, and it is the best-designed detail in the team", "evidence": "T1 Fake Out into Raikou produced no flinch. Raikou is the fastest and most dangerous member and it is specifically immune to the single most common doubles opening. A player who does not read the set loses a turn, which is what happened to me."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opposing Protects in four turns, across three Pokemon that carry it (Raikou, Exeggutor, Blastoise). Nothing to criticise: the AI was ahead or even on board the whole time and attacked every turn, which is what the plan asks for. Exeggutor and Blastoise each had only one live turn.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No illegal or nonsensical choice in this battle. Every opponent action was the best or near-best available: Close Combat over Fake Out into a soon-dead Incineroar, Mach Punch from 1 HP into a 4x-weak switch-in, Thunderbolt every turn, and a first-legal-turn Mega Evolution into the correct pulse.",
+    "The Mach Punch on T2 deserves specific credit. Infernape was on 1 HP behind a spent Sash, facing a fresh switch-in; it picked the priority move that was 4x on the incoming Ice/Dark and got the KO before dying. That is a switch-in read from the board, not a habit.",
+    "The plan text oversells Fake Out. Infernape correctly refused to use it twice, so the authored sentence 'Infernape's Fake Out can support immediate Raikou offense' describes a line the AI itself evaluates as worse than attacking. That is a documentation mismatch, not a defect."
+  ],
+  "level_changes": [
+    {"member": "INFERNAPE", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "Brief rule 5 and the AGENTS.md review threshold: won on the first optimized attempt with one player faint, and that faint was my own switching error rather than pressure the team created. Infernape is the lowest-offset non-legend, non-Mega member (Raikou is the reachable legend, Blastoise is the Mega, so neither is touched first). +1 only; the strategies, species, moves, items, abilities and EVs are untouched."}
+  ],
+  "rerun_status": "NOT RERUN. Opponent levels are compiled into the headless ROM from src/data/trainers.party, and this agent is not permitted to run make. The +1 on Infernape needs the main agent's materialization and rebuild before a rerun can reflect it. Recorded as pending.",
+  "could_this_be_cooler": "Yes, in one specific way, and it is not a species swap. The four pieces are individually excellent and the Inner Focus Raikou is a genuinely clever anti-metagame detail, but the team has no interaction between its members - Raikou, Infernape, Exeggutor and Blastoise never help each other do anything. It is four good Pokemon standing next to each other, which for an Ace on the road to the Heat Badge is a step below what the rest of this block manages (Shayla's Storm Drain Surf, Georgia's Weakness Policy activation, Lawrence's sand). The cheapest fix that keeps every species is to give the plan a real connective tissue: Exeggutor already carries Sleep Powder and a Sitrus, and Harvest plus sun would make it a recurring berry engine - Infernape could be the sun, or Exeggutor could hold the redirection instead. As authored, Harvest is the plan's own admission that something is missing ('Harvest is not guaranteed without actual sun'). I would not replace Raikou or Blastoise; I would make Exeggutor's slot do something for its partners.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
