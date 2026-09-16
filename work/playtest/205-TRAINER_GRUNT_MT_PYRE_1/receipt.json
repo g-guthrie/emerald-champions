@@ -1,0 +1,67 @@
+{
+  "play_order": 205,
+  "e_group": "E0316",
+  "trainer": "TRAINER_GRUNT_MT_PYRE_1",
+  "class": "grunt",
+  "location": "MtPyre_Summit",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Liepard/Raticate-A/Qwilfish-H resolved at L55 (cap 60 + offset -3 - 2) and Lanturn at L56 (-2). Cap window is 60-84 but only the Feather Badge milestone is live at the Mt Pyre summit, so 60 is the real cap.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_mtpyre_60.json"],
+  "chronology_note": "Party built only from pool-60 entries whose source map precedes the Mt Pyre summit: Incineroar gate 36 (Litten line), Amoonguss gate 42 (Foongus), Urshifu-Single gate 42 (Kubfu script evolution), Gardevoir gate 30 with Gardevoirite stone-window 14, Zapdos gate 30 (legendary_sign:NewMauville_Inside), Landorus gate 42 (legendary_sign:Route111_RuinsExterior). Two reachable legends, both signed on maps cleared long before Lilycove. Nothing from Shoal Cave, Route 124-127, Mossdeep or the Safari Zone is used.",
+  "pre_play_strategy_checks": [
+    "Liepard's Prankster gives priority Encore/Taunt/Fake Out",
+    "Encore actually locks a player who spent a turn on setup or Protect",
+    "Alolan Raticate's Hustle Double-Edge is a real threat that sometimes misses",
+    "Hisuian Qwilfish brings Intimidate on entry",
+    "Barb Barrage doubles against a poisoned target",
+    "Lanturn's Volt Absorb turns an Electric attack into a heal"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-4",
+      "run_dir": "work/playtest/205-TRAINER_GRUNT_MT_PYRE_1/a1",
+      "party": "party_mtpyre_60.json (Incineroar/Amoonguss/Urshifu-S/Mega Gardevoir/Zapdos/Landorus)",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "why": "Turn 1 traded Fake Outs - Liepard's landed first and flinched Incineroar - but Amoonguss's Spore put Liepard to sleep for the rest of the fight and Raticate's Hustle Double-Edge missed. Flare Blitz removed Raticate on turn 2, Knock Off finished the sleeping Liepard on turn 3, and Lanturn's Hydro Pump took Incineroar in exchange. Landorus replaced it and Earth Power - 2x on both Qwilfish's Poison half and Lanturn's Electric half - closed the room in two more turns. Only three opponent actions ever resolved against a living target."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Prankster priority disruption", "result": "PASS", "evidence": "turn 1 Liepard moved before a 60-base-Speed Incineroar with Fake Out and flinched it; that is the room's only clean opening and it worked."},
+    {"check": "Encore locks a committed player", "result": "FAIL (never resolved)", "evidence": "Liepard selected Encore on turns 2 and 3 but was asleep both times, so it never resolved. See AI defects - the chosen target was Dark-typed Incineroar, which a Prankster status move cannot touch."},
+    {"check": "Hustle Double-Edge is a threat that sometimes misses", "result": "PASS", "evidence": "turn 1 Double-Edge missed outright ('Incineroar avoided the attack'), turn 2 it landed with recoil. Exactly the authored accuracy gamble."},
+    {"check": "Qwilfish-H Intimidate on entry", "result": "PASS", "evidence": "on its switch-in after turn 3 both Landorus and Amoonguss had Attack lowered."},
+    {"check": "Barb Barrage doubles on a poisoned target", "result": "NOT OBSERVED", "evidence": "Qwilfish had two actions: Protect (turn 4) and Aqua Jet (turn 5). Nothing on my side was poisoned, and with no Toxic Spikes lane in this block the AI correctly never reached for the doubled Barb Barrage. The plan's 'poison from its own attacks compounds' needs two Qwilfish turns and it only got two."},
+    {"check": "Lanturn Volt Absorb heals the Electric attack", "result": "NOT OBSERVED", "evidence": "I followed the crack and never aimed an Electric attack at Lanturn; Zapdos stayed in reserve. The ability was never given the chance to fire, which is the counterplay working as authored rather than a defect."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "battler": "Qwilfish-H", "payoff": "real - blocked Landorus's Earth Power, 2x into its Poison half and very likely lethal. It bought the turn that let Lanturn's Ice Beam selection happen and survived to act once more."}
+  ],
+  "protect_summary": "1 opponent Protect, 1 with a concrete payoff, 0 empty, no consecutive guarding. Nothing to tune.",
+  "ai_defects": [
+    {
+      "severity": "minor",
+      "turns": "2 and 3",
+      "board": "Liepard (asleep) vs Incineroar (Fire/Dark) at battler 0 and Amoonguss at battler 2",
+      "chosen": "MOVE_ENCORE targeting battler 0, Incineroar",
+      "problem": "Encore from a Prankster user is blocked outright by a Dark-typed target (Gen 7+ Prankster immunity). Liepard was asleep both times so nothing resolved and no turn was actually wasted, but the selection shows the scorer did not apply the Dark/Prankster immunity to its own status move. Amoonguss, a Grass/Poison target that had just used Spore, was the correct Encore/Taunt target on both turns.",
+      "better": "Encore or Taunt at battler 2 (Amoonguss), or Foul Play at Incineroar.",
+      "note": "Reported, not fixed - this side does not edit AI C code in this pass. Worth a check of whether the shared status-move scorer consults Prankster/Dark immunity, since Prankster appears on other authored teams."
+    }
+  ],
+  "level_changes": [
+    {"member": "LIEPARD", "before": -3, "after": -2, "why": "won on attempt 1 with a single faint; the two -3 Dark bodies are the ones that folded"},
+    {"member": "RATICATE_ALOLA", "before": -3, "after": -2, "why": "same; it contributed one missed Double-Edge and died to a single Flare Blitz"}
+  ],
+  "level_change_rationale": "Won first try with 1 player faint and no point where the room threatened the match, which is the brief's +1 case. Raised the two weakest members (both -3) by one, leaving Qwilfish at -3 and Lanturn at -2 so the room keeps its authored shape as the thinnest crew in the faction. Not the ace-first rule: this room has no ace. The change cannot be re-verified until the main agent rebuilds the headless ROM.",
+  "rebuild_note": "Level changes are unverifiable from this session: the run pinned work/agent-battle-build-4, which was built before the edit. The main agent must rebuild before any rerun.",
+  "theme_check": "Partly. The Aqua scouting-party idea reads in the species list - thief cat, plague rat, Hisuian pufferfish, deep-sea lantern, none shared with another room - but on the board the theme barely showed: the Prankster lane was switched off by one Spore on turn 1 and the fight was over in 5 turns. The mountain never felt like a graveyard mission.",
+  "cooler_note": "The concept is good and should be kept, but the room has no way to survive its own opening being answered. The single cheapest improvement (not made in this pass) would be giving Liepard Substitute or Nasty Plot in place of Fake Out so a slept or flinched lead is not the entire room, or moving Liepard's Focus Sash to Raticate so the Hustle attacker survives its first miss. Lanturn's Volt Absorb also only reads as clever if something on the team invites the player to click an Electric move; nothing here does.",
+  "authored_set_legality": "No problem found. All four members resolve at the Medium formula (cap + offset - 2), moves and abilities are legal for the species, and no member is out of place for the window."
+}
