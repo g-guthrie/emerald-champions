@@ -1156,3 +1156,104 @@ the whole opening-block list (a)-(e): priority overvalued when the user is
 already faster, Wailmer's Water Spout, Wooloo's Reversal, Shroomish's Spore on
 the **pair** path, Choice Scarf String Shot, Paras's Wide Guard after a seen
 Rock Slide, Klutz Switcheroo, and Poochyena's Helping Hand/Snarl.
+
+---
+
+# Round 10: the ceiling's real shape, Mega value, and authored activations
+
+Commits `e658350178`, `f2c89f828e`. Focused allowlist: **115 passed, 0 failed,
+115 total.**
+
+## The 60-frame ceiling: not reachable by pruning
+
+Two enumeration-level prunes, both measured on the instrumented boards:
+
+| Change | Laura | Ned wind / soak | Dancer | Jocelyn | Suite |
+| --- | --- | --- | --- | --- | --- |
+| baseline | 61 | 51 / 61 | 66 | 46 | 112 green |
+| useful-action filter applied to the opposing enumeration | 62 | 51 / 61 | 65 | 47 | 112 green |
+| + collapsing dominated opposing attacks (same target, category, priority, strictly less expected damage) | 62 | 51 / 61 | 65 | 47 | **111**, moved a Protect fixture |
+
+The first is landed as correctness housekeeping. The second is not: it bought
+nothing and cost a fixture. Together with Round 9's ranking shortcut - 10-30%
+for six moved fixtures - that is three attempts, and the conclusion is the same
+each time.
+
+**What the cost actually is.** Not redundancy in the opposing enumeration, and
+not the forecast mixture: it is the size of *our own* pair enumeration times the
+two scoring passes. Two battlers with four moves and two or three legal targets
+each give 64 to 144 candidate pairs, and every one of them is scored twice
+because the second pass is where an applied effect is weighted. The shortlist
+bounds stage two only. Cutting this means a smaller candidate space or a cheaper
+per-pair evaluation, and both change decided values - which is precisely what
+the three measurements demonstrate rather than assume.
+
+## Mega Evolution
+
+`EC_BATTLE_PLAN_MEGA_REVEAL` is authored on Roxanne alone, so every other holder
+depended on same-turn damage clearing the bar, and a form whose worth is an
+ability or a later turn never does: Isaac's Kangaskhan held its stone, took Fake
+Out and Sucker Punch, and fainted in base form with Parental Bond never
+existing. `PAIR_MEGA_HORIZON` (50) makes evolving the default once the holder
+acts. The ordinary board comparison still overrules it when the base form has
+something the Mega loses, and the existing tie cost still prefers not evolving
+on a true tie. Fixture: `EC Mega: the holder evolves on the first turn it acts`.
+
+## Authored activations: one root, two trainers
+
+Aisha's `FROSLASS FROST_BREATH → TAUROS` and Georgia's `DUSKULL SHADOW_SNEAK →
+METANG` never fired while Shayla's `SIMIPOUR SURF → MARACTUS` fired cleanly. The
+difference is exactly what the coordinator suspected: a **single-target** attack
+aimed at an ally is dropped by the `BuildPairActions` ally filter unless its
+isolated score is already neutral, which friendly fire never is. Shayla's Surf
+is a spread move, which the filter does not touch. So two of the three were
+never candidates at all, and the reward meant to judge them was never reached.
+
+Three changes, one root:
+
+* an action matching an authored ACTIVATE survives the ally filter;
+* inside the trial it is judged by its own reward rather than by the isolated
+  opinion of hitting an ally - the same wrong gate one layer down;
+* a Weakness Policy recipient is exempt from the super-effective rejection,
+  because a super-effective hit is the only thing that arms the item. Lethality
+  still decides, so the Dark-weak Annihilape case from Round 2 is untouched.
+
+Fixtures: Aisha's Frost Breath maxing Anger Point, Georgia's Shadow Sneak arming
+the Policy.
+
+## Takao: reproduced, not fixed
+
+`EXPECT_EQ(opponentLeft->species, SPECIES_GRAPPLOCT)` on his authored board with
+a Fairy attacker opposite fails - the healthy 80/80 lead is withdrawn on turn
+one, exactly as reported. The cause is that Round 5's turn-one switch costs are
+waived whenever `PairNeedsSwitchSearch` reports pressure, and a Fairy attack
+aimed at a Fighting lead is pressure by that test even at full health. Narrowing
+the waiver to "below full health, or the incoming damage would actually remove
+it" did **not** fix Takao and broke the Life Orb pivot case, so it is not
+landed. The fixture is not committed either, since it would be red; the recipe
+above reproduces it in one turn.
+
+## Numbers
+
+**115 passed, 0 failed, 115 total.** `pokeemerald.gba` builds clean. Headless
+ROM untouched.
+
+## Queue state
+
+Landed this round: the enumeration filter, the ceiling attribution, Mega value,
+the authored-activation root with Aisha and Georgia.
+
+Not reached, in the order they arrived: Takao's switch; the opening-block list
+(priority overvalued when already faster, Water Spout at full HP, Reversal at
+5 HP, Spore on the pair path, Choice Scarf String Shot, Wide Guard after a seen
+spread move, Klutz Switcheroo, Helping Hand/Snarl beside a live partner); item
+swap value and the Josh pivots; same-turn conflicts (High Jump Kick into a
+target the partner removes first, Helping Hand onto a switching partner); Shell
+Smash and Choice Scarf Trick; and the whole wave-2 rerun batch (Counter spam,
+repeated Protect after a success, Cindy's Truant switch-in, Wish at full HP,
+Howl with no scaling move, Light Screen at 12 HP, Kirlia's guards, Zubat's
+recoil, Lickitung's Helping Hand, Froslass's Destiny Bond, Gible's spread choice).
+
+That backlog is now far larger than one pass can absorb, and several of its
+items are the same shape as each other; grouping them by mechanism rather than
+by battle would let one fix close several at a time.
