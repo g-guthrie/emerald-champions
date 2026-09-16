@@ -1,0 +1,67 @@
+{
+  "play_order": 158,
+  "e_group": "E0211",
+  "trainer": "TRAINER_AMY_AND_LIV_1",
+  "location": "Route103 (Surf backtrack after Norman)",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Togetic 48 (+2), Wigglytuff 48 (+2), Alakazam 45 (-1), Blissey 46 (0) = cap 48 + offset - 2 throughout. The index's 24-36 window is the authored chapter window; the live milestone cap here is 48.",
+  "party_manifest": "work/playtest/158-TRAINER_AMY_AND_LIV_1/party.json",
+  "attempts": [
+    {
+      "seed": 21,
+      "run_dir": "work/playtest/158-TRAINER_AMY_AND_LIV_1/run-s21",
+      "outcome": "abandoned_at_turn_0",
+      "turns": 0,
+      "player_faints": 0,
+      "opponent_faints": 0,
+      "notes": "Probe only. Leading Incineroar handed Competitive Wigglytuff +2 Special Attack on the Intimidate trigger before a single turn was played. No turn was taken; the party was reordered and the battle restarted rather than played from a self-inflicted hole. Recorded because the interaction is the best thing this team does."
+    },
+    {
+      "seed": 22,
+      "run_dir": "work/playtest/158-TRAINER_AMY_AND_LIV_1/run-s22",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "notes": "Mega Metagross ran through the whole team: Steel/Psychic resists Hyper Voice, Dazzling Gleam and Psychic, and Meteor Mash is 2x into both Togetic and Alakazam. Doubling onto Togetic on turn 1 made Follow Me irrelevant. Amoonguss was reduced to 11 HP by a Mega Alakazam Psychic and pivoted out on Regenerator."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Togetic redirects with Follow Me so Wigglytuff can fire Hyper Voice into Throat Spray", "result": "PASS", "evidence": "Turn 1: Togetic used Follow Me, Wigglytuff used Hyper Voice, Throat Spray activated for +1 Special Attack. The whole authored opening executed on the first turn."},
+    {"check": "Turn two cashes the boost or applies meaningful Icy Wind", "result": "PASS", "evidence": "Turn 2 Wigglytuff chose Icy Wind and dropped the Speed of both Mega Metagross and Amoonguss rather than repeating the boosted spread into a Steel resist. That is the better of the two authored options against this board."},
+    {"check": "Mega Alakazam is deployed as the fast single-target alternative", "result": "PASS_WITH_CAVEAT", "evidence": "Alakazam came in on the Togetic KO, Mega Evolved (Trace copied Amoonguss's Regenerator) and its Psychic took a 212 HP Amoonguss to 11. The caveat is the missing Mega Evolution announcement, logged under AI defects."},
+    {"check": "Blissey screens/paralyzes only relevant targets", "result": "FAIL", "evidence": "Turn 3 Blissey chose Light Screen on a board whose only revealed threat was a physical Mega Metagross that had used Meteor Mash twice. Blissey has no Reflect, so special mitigation had no target to mitigate; it was also slower and was KOed by Meteor Mash before the screen resolved. Zero payoff."},
+    {"check": "Do not stall with both passive supports", "result": "PASS", "evidence": "Togetic and Blissey were never both passive on the same turn; the fight was too short for a stall pattern to appear."},
+    {"check": "Competitive punishes Intimidate", "result": "PASS", "evidence": "Seed 21 probe: Incineroar's entry Intimidate gave Wigglytuff +2 Special Attack before turn 1. The authored ability does exactly what it should."}
+  ],
+  "protect_ledger": [
+    {"turn": "all", "battler": "Togetic / Wigglytuff / Alakazam", "payoff": "NOT USED. Three of the four members carry Protect and none of them used it, including Togetic on turn 1 while being doubled onto and Alakazam on turn 2 facing a Meteor Mash that was 2x into it. No empty or repetitive guarding, but also no defensive turn was bought."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0211-D1",
+      "turn": 3,
+      "board": "Player: Mega Metagross (116/150, +2 Atk, Meteor Mash revealed twice) and Amoonguss (11/212). Opponent: Blissey 333/333 just sent out, Wigglytuff asleep.",
+      "chosen": "Blissey used Light Screen",
+      "problem": "Light Screen halves special damage. The only revealed player threat was a purely physical Mega Metagross; the other player battler was a Grass/Poison support at 11 HP. Blissey carries no Reflect, so this action could not mitigate anything on this board. Blissey was also slower and fainted to Meteor Mash before the screen resolved, so the realized payoff was exactly zero.",
+      "better_action": "Thunder Wave on Mega Metagross, which is the dossier's own stated role for the move and is the single highest-value action available against a +2 Attack physical sweeper; or Seismic Toss to finish the 11 HP Amoonguss.",
+      "severity": "moderate - the screen/paralyse choice is not reading the physical/special split of the actual board"
+    },
+    {
+      "id": "E0211-D2",
+      "turn": 2,
+      "board": "Alakazam holding Alakazite, sent out end of turn 1.",
+      "chosen": "Alakazam Mega Evolved silently",
+      "problem": "Mega Evolution produced no 'has Mega Evolved' battle text, and the act result's chosen entry still reported species SPECIES_ALAKAZAM. The mega clearly happened: the message log shows 'It traced Amoonguss's Regenerator!', and Trace is Mega Alakazam's ability while the authored base ability is Magic Guard. The player-visible narration for an opponent Mega Evolution is missing, unlike the player's own, which printed the full banner.",
+      "better_action": "Announce the opponent's Mega Evolution the same way the player's is announced, and report the post-mega species in state/chosen.",
+      "severity": "reporting defect, not a decision defect - handed to the main agent because it affects every mega trainer's evidence, not just this one"
+    }
+  ],
+  "level_changes": [
+    {"member": "BLISSEY", "before": 0, "after": 1, "reason": "Zero-faint four-turn win. Blissey was the lowest-offset non-mega member and was OHKOed by a single Meteor Mash on entry."},
+    {"member": "TOGETIC", "before": 2, "after": 3, "reason": "Togetic is the redirection linchpin and died on turn 1 to a single doubled-up pair of super-effective hits; it has to survive a turn for the authored Follow Me plan to be worth anything."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM and this agent must not run make. Retest belongs to the main agent's wave rebuild.",
+  "could_this_be_cooler": "The Competitive Wigglytuff is genuinely clever and the run proved it - two of the six strongest bodies available at this cap carry Intimidate, and both of them make Wigglytuff stronger just by walking in. That is a real trap. What the team is missing is any way to punish a Steel type, which is the obvious answer to a Fairy/Normal/Psychic quartet: Togetic's Dazzling Gleam, Wigglytuff's Hyper Voice and Dazzling Gleam, Alakazam's Psychic and Dazzling Gleam and Blissey's Seismic Toss are all resisted or blanked by one Mega Metagross, and Seismic Toss was the only move on the team that would have done honest damage to it. Concrete suggestion for a later pass: give Blissey Reflect over Light Screen (it fixes the AI defect above at the same time and makes the Light Clay do something against the physical bodies this cap actually fields), and consider Wigglytuff's Icy Wind slot becoming Fire Blast or Hyper Beam-class coverage so the team is not a free win for any Steel. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal. Alakazam's authored Magic Guard is correctly overwritten by Mega Alakazam's Trace on Mega Evolution."
+}
