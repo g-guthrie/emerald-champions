@@ -477,8 +477,8 @@ mega_slots: NONE
 plan: Takao keeps the island grappler/counterpunch identity. Grapploct Octolock and Wobbuffet Shadow Tag restrict eligible exits, while the end-turn Defense/Special Defense drops must lead to useful damage rather than two passive slots. Wobbuffet's unsupported Helping Hand becomes Safeguard; Counter/Mirror Coat must match actual incoming hits, and Encore must have a useful target. Special Life Orb Poliwrath now exploits Octolock's Special Defense side and gives the room an answer to physical walls. Hitmonlee's White Herb/Close Combat activates Unburden through a real drop; Passimian supplies Scarf Defiant pressure, and Pawmo contributes priority/electric control. The copied or suppressed ability, Ghost escape rules, turn order and guard decisions remain native. There is no invented Perish Song. Medium levels22/22/22/22/22/25 are initial seeds.
 crack: Remove the trapper, use eligible Ghost/escape routes, attack from the right category, deny status, and punish wasted reactive moves or an unsafe setup.
 GRAPPLOCT @LEFTOVERS LIMBER ADAMANT 252/252/4/0/0/0 2 | OCTOLOCK, DRAIN_PUNCH, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-WOBBUFFET @SITRUS_BERRY SHADOW_TAG BOLD 252/0/252/0/4/0 2 | COUNTER, MIRROR_COAT, ENCORE, SAFEGUARD | ivs=31/31/31/31/31/31 | friendship=255
-HITMONLEE @WHITE_HERB UNBURDEN JOLLY 4/252/0/0/0/252 2 | CLOSE_COMBAT, FAKE_OUT, KNOCK_OFF, BLAZE_KICK | ivs=31/31/31/31/31/31 | friendship=255
+WOBBUFFET @SITRUS_BERRY SHADOW_TAG BOLD 252/0/252/0/4/0 3 | COUNTER, MIRROR_COAT, ENCORE, SAFEGUARD | ivs=31/31/31/31/31/31 | friendship=255
+HITMONLEE @WHITE_HERB UNBURDEN JOLLY 4/252/0/0/0/252 3 | CLOSE_COMBAT, FAKE_OUT, KNOCK_OFF, BLAZE_KICK | ivs=31/31/31/31/31/31 | friendship=255
 POLIWRATH @LIFE_ORB WATER_ABSORB MODEST 252/0/4/252/0/0 2 | HYDRO_PUMP, VACUUM_WAVE, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 PASSIMIAN @CHOICE_SCARF DEFIANT JOLLY 4/252/0/0/0/252 2 | CLOSE_COMBAT, KNOCK_OFF, U_TURN, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 PAWMO @EVIOLITE IRON_FIST JOLLY 4/252/0/0/0/252 5 | MACH_PUNCH, THUNDER_PUNCH, NUZZLE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255

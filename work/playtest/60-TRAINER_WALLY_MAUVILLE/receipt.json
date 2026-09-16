@@ -1,0 +1,49 @@
+{
+  "play_order": 60,
+  "e_group": "E0069",
+  "trainer": "TRAINER_WALLY_MAUVILLE",
+  "class": "rival",
+  "alias_note": "Single trainer - this rival encounter has no starter/gender alias set, so there is nothing to propagate. No level change was made in any case.",
+  "location": "MauvilleCity",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"SWABLU": 33, "KIRLIA": 33, "ROSELIA": 30, "MAGNETON": 28},
+  "cap_window_confirmation": "Dossier seeds 35/35/32/30 resolved to 33/33/30/28. Cap 30, Medium -2. Confirms cap 30 still holds at Mauville.",
+  "party_manifest": "work/playtest/60-TRAINER_WALLY_MAUVILLE/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Weavile + Gardevoir. This battle is in Mauville City, so Mauville-area sources (Game Corner, New Mauville, Route 111/117/118) would now be chronologically legal for the first time in my block - I did not use any of them, so the party remains the stricter Route 110 set and the audit is unchanged.",
+  "pre_declared_strategy_checks": [
+    "Swablu chooses Tailwind or Helping Hand while Kirlia takes one Calm Mind or attacks",
+    "Turn two converts the real speed advantage rather than repeating support",
+    "Passive dual-support endings are rejected - Swablu attacks once support is banked",
+    "Roselia supplies Sleep Powder and STAB",
+    "Magneton uses Sturdy plus the temporary Air Balloon Ground immunity",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/60-TRAINER_WALLY_MAUVILLE/a1", "seed": 60, "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "I aimed Fake Out at Kirlia rather than Swablu so that the Tailwind would actually go up and could be assessed, and it did. T1 Tailwind up, Kirlia Protected the Fake Out and the Hyper Voice. T2 Triple Axel (2x) KO'd Swablu through Eviolite, Kirlia took its Calm Mind, and Swablu spent its last turn attacking rather than on a second support move. T3 was Wally's turn: Roselia entered and, doubled by the Tailwind, out-sped my 125-Speed Weavile to land Sleep Powder, and Kirlia's +1 Dazzling Gleam (2x on Dark) KO'd the sleeping Weavile. T4 Magearna came in; Roselia's Sludge Bomb (2x on Fairy) KO'd my Mega Gardevoir, and Flash Cannon at +2 finished Kirlia as the Tailwind expired. T5 I brought Kartana in - Grass, so immune to Sleep Powder, and Steel, so immune to Sludge Bomb - and Smart Strike KO'd Roselia while Magneton's Air Balloon popped. T6 a critical Sacred Sword (2x) ended Magneton."}
+  ],
+  "strategy_checks": [
+    {"check": "Swablu chooses Tailwind or Helping Hand while Kirlia sets up or attacks", "result": "PARTIAL", "evidence": "Swablu's half was correct: Tailwind on T1, which is the whole point of the TAILWIND flag. Kirlia's half was not - it Protected rather than taking the Calm Mind the plan names. The guard did block a Fake Out and a Pixilate Hyper Voice, so it was not empty, but the result was a turn in which the side did no damage and banked no boost, only speed."},
+    {"check": "Turn two converts the real speed advantage", "result": "PASS - and it is the best sequence Wally has", "evidence": "T3: Roselia, doubled by the Tailwind set two turns earlier, moved before a 125 base Speed Weavile and landed Sleep Powder; Kirlia's Dazzling Gleam, boosted by the Calm Mind it took on T2, then KO'd the sleeping Weavile at 2x. Tailwind, a boost and a status all cashed in on the same turn to remove my fastest Pokemon. That is exactly what the authored plan describes and it executed in order."},
+    {"check": "Passive dual-support endings are rejected", "result": "PASS", "evidence": "Once Tailwind was up on T1, Swablu attacked with Hyper Voice on T2 rather than reaching for Helping Hand or Roost. Given it died that same turn, spending its last action on damage was right, and it is the specific failure mode the dossier warns about being avoided."},
+    {"check": "Roselia supplies Sleep Powder and STAB", "result": "PASS, both", "evidence": "Sleep Powder landed on T3 and directly set up the Weavile KO; Sludge Bomb on T4 was 2x into a Fairy-type and KO'd my Mega Gardevoir from 59. Roselia is the member that beat me twice and it is only offset 2."},
+    {"check": "Magneton uses Sturdy plus temporary Air Balloon immunity", "result": "PARTIAL", "evidence": "The Air Balloon was intact on entry and popped correctly to a non-Ground attack (my Thunderbolt), which is the right behaviour - it blocks Ground, not everything. Sturdy never triggered: the Thunderbolt left it on 3 HP rather than taking it from full, so the ability had nothing to do. Magneton had one turn and used Thunderbolt into Kartana at 0.5x for 58, which was nearly a KO; Thunderbolt into Magearna would have been neutral but Magearna was behind an Assault Vest at full health, so I do not think the target choice was wrong."},
+    {"check": "Kirlia Calm Mind converts", "result": "PASS", "evidence": "One Calm Mind on T2 turned Dazzling Gleam into the move that KO'd Weavile on T3. A second Calm Mind on T4 was taken at 5 HP and never paid off, but by then Kirlia was dead either way."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "KIRLIA", "payoff": "REAL BUT MISTIMED: it blocked a Fake Out and a Pixilate Hyper Voice from a freshly Mega-Evolved Gardevoir, which is real damage denied on an 89 HP body. The cost is that T1 was the one turn the plan reserves for Kirlia's Calm Mind while Swablu covers it with Tailwind, and Kirlia used it to guard instead - so the side spent its protected setup turn not setting up. It got the Calm Mind on T2 anyway, one turn later than intended, and that is the turn Swablu died on."}
+  ],
+  "protect_ledger_note": "One opponent Protect in six turns, with genuine damage denied and no repetition. The criticism is about what the guarded turn replaced, not about the guard itself.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Wally's turn 3 is the most complete execution of an authored plan I saw in this block: a Tailwind set two turns earlier, a Calm Mind taken one turn earlier, and a Sleep Powder, all converging to remove my fastest attacker in a single turn. Three separate setup decisions paying off together is not something that happens by accident in the scoring.",
+    "Roselia is the quiet star. At offset 2 it is the third-lowest member and it personally accounted for both of my faints - Sleep Powder into the Weavile KO, then a 2x Sludge Bomb onto my Mega. Its Focus Sash never even needed to trigger.",
+    "The only soft turn is the T1 Kirlia Protect discussed in the ledger. It is the same family as the simultaneous-guard problem elsewhere in this block, though milder: here the partner did act, it just meant the protected turn produced no setup."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two Pokemon, including the Mega, and Wally's plan executed end to end. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. This was both, and it is the second-hardest fight in my block after the Route 110 rival. No level change.",
+  "could_this_be_cooler": "Keep it exactly as it is. This is the team in my block that most deserves its levels, and the reason is that its two over-levelled members (Swablu and Kirlia at offset 5) are both fragile support pieces rather than a stat-check ace - the extra levels buy the plan a turn to happen instead of buying raw power, which is a much more interesting use of the lever. The childhood-team framing holds up too: Wally fights with a Swablu that cannot attack well and a Kirlia that needs a turn of cover, and the whole team is built around protecting that vulnerable setup turn. That is characterful in a way a stronger roster would not be. The one thing I would watch on a future pass is the opening: Kirlia guarding on T1 means the protected setup turn produced nothing, and if that recurs the fix is in guard scoring rather than in the team. I would not change a species, a move or an item here.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
