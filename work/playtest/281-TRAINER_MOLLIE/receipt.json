@@ -1,0 +1,24 @@
+{
+  "play_order": 281, "e_group": "E0441", "trainer": "TRAINER_MOLLIE", "class": "ace", "location": "Route133",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium",
+  "party_manifest": "work/playtest/281-TRAINER_MOLLIE/party_route133_84.json",
+  "availability_note": "Same Route 133 sail-lane party (gate<=68 pool-84 entries; Landorus and Tapu Fini are reachable legends). Nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/281-TRAINER_MOLLIE/a1", "seed": 1, "outcome": "won", "turns": 5, "decisions": 8, "player_faints": 1, "opponent_faints": 4, "note": "Player error T1: Fake Out into Gengar (Ghost-immune). Incineroar ended at 17/332, Flutter Mane at 86/213."}
+  ],
+  "strategy_checks": [
+    {"check": "Gengar attacks or Icy Winds turn 1", "result": "PASS", "evidence": "T1 Sludge Bomb into Urshifu (217); T2 at 1 HP (Sash) Shadow Ball at Urshifu, beaten by Sucker Punch. Cursed Body disabled Wicked Blow on T1."},
+    {"check": "Carracosta attacks or Wide Guards against a real spread threat", "result": "PASS", "evidence": "No spread move was on my board; Carracosta chose Waterfall into Incineroar (2x) T1-T2 and Aqua Jet T3 to try to finish it at 95 HP. Wide Guard never selected, correctly."},
+    {"check": "Rock Gem Rock Slide", "result": "NOT EXERCISED", "evidence": "Knock Off removed the Rock Gem on T2 (crack line); Carracosta died to Close Combat on T3 without using Rock Slide."},
+    {"check": "Aromatisse Helping Hand / Wish support for Rotom-Frost", "result": "PASS", "evidence": "T3 Moonblast KOed Urshifu (4x); T4 Moonblast at Landorus; T5 Helping Hand into Rotom-Frost's Blizzard (Rotom died before moving). Wish never used - it was never at a deficit that Wish could fix."},
+    {"check": "Rotom-Frost Blizzard gamble (Wide Lens) / Will-O-Wisp", "result": "PASS", "evidence": "T4 Blizzard at Landorus (4x; Protected, spread hit Flutter Mane for 106); T5 Blizzard at Landorus again. Both hit."}
+  ],
+  "protect_ledger": [
+    {"turn": "all", "entry": "No opponent Protect used. Gengar at 1 HP facing a faster Sucker Punch line did not Protect on T2 - arguable, but Protect would only have delayed it one turn, so recorded as a non-defect."}
+  ],
+  "ai_defects": [],
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "Four independent threats worked as a change of pace: Waterfall/Aqua Jet, a Sash Gengar that forced a priority read, and a 4x Blizzard that forced a Protect. One faint but Incineroar was at 17 HP and it was a real fight, so levels stay. Cooler idea (not this pass): Carracosta would be more menacing with Shell Smash than Aqua Jet, but the author's 'no setup' premise is a deliberate choice.",
+  "authored_set_legality": "No problem; all four sets played as written (Rotom-Frost L84 at offset 2)."
+}

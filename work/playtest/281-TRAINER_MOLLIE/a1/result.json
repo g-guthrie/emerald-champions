@@ -1,0 +1,29 @@
+{
+  "trainer_a": "TRAINER_MOLLIE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 1,
+  "difficulty": "medium",
+  "level_cap": 84,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 5,
+  "decisions": 8,
+  "player_faints": 1,
+  "opponent_faints": 4,
+  "ai_decision_frames_max": 54,
+  "ai_decision_seconds_max": 0.904,
+  "ai_decision_frames": [
+    54,
+    45,
+    45,
+    45,
+    26,
+    25,
+    18,
+    18
+  ],
+  "rom_sha256": "6619c208ca5009bb976c265221426d1edbd6367dd7b204d9fa2feae5735f8ba4",
+  "elf_sha256": "8e0be54c56310979f9166cc814c6b5586333d1d0057767cb84c6be2ff9ce9d97",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
