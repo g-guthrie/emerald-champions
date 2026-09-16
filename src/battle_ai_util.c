@@ -200,8 +200,6 @@ bool32 IsAiBattlerPredictingAbility(enum BattlerId battlerId)
 
 bool32 IsBattlerPredictedToSwitch(enum BattlerId battler)
 {
-    if (IsBattlerActionCommitted(battler))
-        return gChosenActionByBattler[battler] == B_ACTION_SWITCH;
     if (gAiLogicData->predictingSwitch && gAiLogicData->shouldSwitch & (1u << battler))
         return TRUE;
     return FALSE;
@@ -220,29 +218,8 @@ enum Move GetLockedInMove(enum BattlerId battler)
     return gBattleMons[battler].volatiles.encoredMove;
 }
 
-enum Move GetCommittedMove(enum BattlerId battler)
-{
-    if (!IsBattlerActionCommitted(battler))
-        return MOVE_UNAVAILABLE;
-    if (!IsBattlerAlive(battler) || gChosenActionByBattler[battler] != B_ACTION_USE_MOVE
-     || gBattleMons[battler].volatiles.rechargeTimer
-     || gBattleMons[battler].volatiles.semiInvulnerable == STATE_COMMANDER)
-        return MOVE_NONE;
-    if (gProtectStructs[battler].noValidMoves)
-        return MOVE_STRUGGLE;
-    if (gBattleMons[battler].volatiles.multipleTurns)
-        return gLockedMoves[battler];
-    if (GetActiveGimmick(battler) != GIMMICK_Z_MOVE
-     && gBattleMons[battler].volatiles.encoredMove != MOVE_NONE)
-        return gBattleMons[battler].moves[gBattleMons[battler].volatiles.encoredMovePos];
-    return gChosenMoveByBattler[battler];
-}
-
 enum Move GetIncomingMove(enum BattlerId battler, enum BattlerId opposingBattler, struct AiLogicData *aiData)
 {
-    enum Move committed = GetCommittedMove(opposingBattler);
-    if (committed != MOVE_UNAVAILABLE)
-        return committed;
     enum Move locked = GetLockedInMove(opposingBattler);
 
     if (locked != MOVE_NONE)
@@ -255,9 +232,6 @@ enum Move GetIncomingMove(enum BattlerId battler, enum BattlerId opposingBattler
 // When not predicting, don't want to reference player's previous move; leads to weird behaviour for cases like Fake Out or Protect, especially in doubles
 enum Move GetPredictedMove(enum BattlerId battler, enum BattlerId opposingBattler, struct AiLogicData *aiData)
 {
-    enum Move committed = GetCommittedMove(opposingBattler);
-    if (committed != MOVE_UNAVAILABLE)
-        return committed;
     enum Move locked = GetLockedInMove(opposingBattler);
 
     if (locked != MOVE_NONE)
@@ -5789,7 +5763,15 @@ void IncreaseSleepScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, en
     }
 
     if (AI_CanPutToSleep(battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], move, gAiLogicData->partnerMove))
-        ADJUST_SCORE_PTR(DECENT_EFFECT);
+    {
+        // Taking a healthy threat's turns away is worth more than the chip the
+        // same turn would have dealt; five turns of Leech Seed and Bullet Seed
+        // in front of an unslept attacker that two-shots the user is not the
+        // trade this was pricing.
+        ADJUST_SCORE_PTR(GOOD_EFFECT);
+        if (CanTargetFaintAi(battlerDef, battlerAtk))
+            ADJUST_SCORE_PTR(WEAK_EFFECT);
+    }
     else
         return;
 
@@ -7037,7 +7019,19 @@ bool32 AI_OpponentCanFaintAiWithMod(enum BattlerId battler, u32 healAmount)
 
 s32 GetAILastPartyIndex(enum BattlerId battler)
 {
-    return (BattleSideHasTwoTrainers(battler & BIT_SIDE) && !AreMultiPartiesFullTeams()) ? PARTY_SIZE / 2 : PARTY_SIZE;
+    if (!BattleSideHasTwoTrainers(battler & BIT_SIDE) || AreMultiPartiesFullTeams())
+        return PARTY_SIZE;
+    // Two trainers on one side share a single party array only in the link and
+    // tower multi formats. Everywhere else - every campaign two-owner multi and
+    // the in-game partner - each trainer owns its own array, where the
+    // half-team split hides that trainer's own slots three to five. That left a
+    // fainted battler whose only live reserve sat at slot three counted as
+    // having nothing to switch to, so its absent flag was never cleared: no
+    // replacement was ever requested, the side was empty without the battle
+    // resolving, and both opponents struggled at nothing for hundreds of turns.
+    if (GetBattlerParty(battler) != GetBattlerParty(GetPartnerBattler(battler)))
+        return PARTY_SIZE;
+    return PARTY_SIZE / 2;
 }
 
 bool32 ShouldInstructPartner(enum BattlerId partner, enum Move move)
