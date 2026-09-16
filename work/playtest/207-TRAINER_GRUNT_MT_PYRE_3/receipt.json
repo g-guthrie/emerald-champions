@@ -1,0 +1,77 @@
+{
+  "play_order": 207,
+  "e_group": "E0318",
+  "trainer": "TRAINER_GRUNT_MT_PYRE_3",
+  "class": "grunt",
+  "location": "MtPyre_Summit",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Spiritomb L56 (offset -2), Huntail/Lumineon/Drifblim L57 (offset -1); both match cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_mtpyre_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 205-206; all six source maps precede the Mt Pyre summit. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Trick Room goes up on turn 1 or 2 and only when the slow pair can spend it",
+    "Huntail attacks first under reversed order",
+    "Lumineon's Storm Drain pulls single-target Water attacks and gains +1 Special Attack",
+    "Spiritomb's Pressure drains PP over the long turns",
+    "Drifblim's Aftermath punishes a contact knockout",
+    "Shell Smash on Huntail when the room is already up"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-4",
+      "run_dir": "work/playtest/207-TRAINER_GRUNT_MT_PYRE_3/a1",
+      "party": "party_mtpyre_60.json (Incineroar/Amoonguss/Urshifu-S/Mega Gardevoir/Zapdos/Landorus)",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "I let the room have its opening on purpose - Fake Out went at Huntail, not at the setter - so Trick Room went up on turn 1 exactly as authored. It did not matter. My slowest two are Amoonguss (base 30) and Incineroar (base 60), so reversed order suited my side as much as theirs: Amoonguss moved first under the room and Spored Huntail on turn 2, and two Flare Blitzes removed Spiritomb by turn 3. Huntail then threw its only waking attack into its own partner's Storm Drain and died to Knock Off. I switched the chipped Incineroar out for Zapdos as the room expired; Thunderbolt is 2x on both Lumineon's Water and Drifblim's Flying, and it closed the fight in two turns without losing anyone."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room up on turn 1 or 2, with the slow pair able to spend it", "result": "PASS", "evidence": "turn 1 Spiritomb used Trick Room and the field read STATUS_FIELD_TRICK_ROOM from turn 1 through turn 5, expiring at the end of turn 5 ('The twisted dimensions returned to normal'). It set the room on the very first turn with Huntail beside it, which is the authored condition."},
+    {"check": "Huntail attacks first under reversed order", "result": "PARTIAL", "evidence": "Huntail's speed advantage under the room was real but it never converted: flinched by Fake Out on turn 1, slept by Spore on turn 2, and on turn 4 it woke and chose Waterfall - which its own partner's Storm Drain absorbed. It ended the fight having landed nothing on my side."},
+    {"check": "Storm Drain pulls single-target Water attacks and gains +1 Special Attack", "result": "PASS (on an ally's move)", "evidence": "turn 4, Huntail's Waterfall at my Incineroar was redirected - 'The opposing Lumineon took the attack! The opposing Lumineon's Sp. Atk rose!'. The ability is implemented correctly, including on a partner's move. It was never tested against a player Water attack because nothing in my party carries one; see the note below."},
+    {"check": "Spiritomb's Pressure drains PP", "result": "NOT OBSERVED", "evidence": "Spiritomb lived three turns and took two attacks. Pressure's extra PP cost is real but at that volume it is invisible; the authored 'long turns' never happened."},
+    {"check": "Drifblim's Aftermath punishes the contact knockout", "result": "NOT OBSERVED", "evidence": "Drifblim was KOed by Thunderbolt, a special non-contact move, so Aftermath correctly did not fire. That is the crack working, not a defect."},
+    {"check": "Huntail Shell Smash when the room is up", "result": "FAIL (never resolved)", "evidence": "Huntail selected Shell Smash on turn 3 but was asleep, so it never resolved. The second setup lane never appeared."}
+  ],
+  "storm_drain_note": "Worth flagging for the design side rather than the AI: Lumineon's Storm Drain is the room's advertised centrepiece, and a competent player brings no single-target Water attack into a four-Pokemon Water crew in the first place. The ability only ever fired on the opponent's own Waterfall. As authored, the redirection is a trap that only springs on a player who was already misplaying.",
+  "protect_ledger": [
+    {"turn": 5, "battler": "Drifblim", "payoff": "partial - blocked its own partner Lumineon's spread Surf, so it took zero friendly-fire damage. Real but small: it spent its first turn out doing nothing to me while I switched Zapdos in for free."},
+    {"turn": 6, "battler": "Drifblim", "payoff": "EMPTY - 'The opposing Drifblim used Protect! But it failed!'. It guarded on consecutive turns, the second one failed outright, and it lost its only remaining chance to act before Spore landed."}
+  ],
+  "protect_summary": "2 opponent Protects on the same battler on consecutive turns. 1 partial payoff, 1 outright empty failure. This is the repetitive-guarding pattern AGENTS.md asks to fix; see AI defects.",
+  "ai_defects": [
+    {
+      "severity": "significant",
+      "turn": 6,
+      "board": "Drifblim (291/291, unharmed) had used Protect on turn 5; Lumineon at 108/199 and poisoned beside it; my Zapdos at 183 and Amoonguss at 78",
+      "chosen": "MOVE_PROTECT again",
+      "problem": "Consecutive Protect with no intervening reason. It failed outright and cost Drifblim the turn - it never attacked in the entire battle. Nothing on my side was threatening a KO on a 291 HP Ghost/Flying that turn, and a Will-O-Wisp on Zapdos or a Hex on the poisoned board was available and useful.",
+      "better": "MOVE_WILL_O_WISP at Zapdos, or MOVE_SHADOW_BALL.",
+      "note": "AGENTS.md names repetitive guarding as a defect to fix regardless of the result. The consecutive-Protect success penalty was clearly not priced into the score."
+    },
+    {
+      "severity": "moderate",
+      "turn": 4,
+      "board": "Huntail woke at 122/183 with my Incineroar at 66/240 (Fire type) and its own partner Lumineon (ABILITY_STORM_DRAIN) on the field",
+      "chosen": "MOVE_WATERFALL at Incineroar",
+      "problem": "Storm Drain redirects every single-target Water attack on the field, including an ally's. Waterfall was therefore guaranteed to hit Lumineon instead of a 66 HP Fire type it would have killed. The scorer did not consult its own partner's redirecting ability before picking a single-target Water move.",
+      "better": "MOVE_CRUNCH at Incineroar (neutral, not redirected) or MOVE_SUCKER_PUNCH.",
+      "note": "There is a charitable reading - it fed Lumineon +1 Special Attack - but it gave up a likely KO to do it, and the dossier's plan does not describe this as intentional. This is the shared 'do not aim a redirected move into your own redirector' check; worth tracing against every team that pairs a Storm Drain or Lightning Rod body with an attacker of the same type."
+    }
+  ],
+  "level_changes": [
+    {"member": "SPIRITOMB", "before": -2, "after": -1, "why": "won on attempt 1 with zero player faints while the authored Trick Room was up for its full five turns; Spiritomb is the room's lowest-level member and the engine worth making harder"},
+    {"member": "LUMINEON", "before": -1, "after": 0, "why": "the redirection body is the room's other stated engine and the weakest of the three -1 members; +1 makes it survive a turn longer inside the room it is supposed to profit from"}
+  ],
+  "level_change_rationale": "This is the brief's +1 case: first attempt, zero player faints, and no turn where the room threatened the match even with Trick Room up for its full duration. I raised the two members that actually executed an authored engine rather than the two that did nothing, so the increase lands where the room is real. Neither is an ace, Mega or legend. Both are within the +-2 limit for this pass.",
+  "rebuild_note": "The level changes cannot be re-verified from this session - the run pinned work/agent-battle-build-4, which predates the edit. The main agent must rebuild first. Of my whole block this is the battle least worth re-running: it was a clean 4-0 and the changes are small.",
+  "theme_check": "Yes. This is the best-realised of the four Mt Pyre grunt rooms on the actual board - a weakness-less ghost setting the tempo on a mountain of the dead is a genuinely different feeling from the rooms around it, and Trick Room landing on turn 1 makes the location assert itself immediately. Storm Drain, though, stayed invisible as a threat to the player.",
+  "cooler_note": "Keep the concept; the room's problem is that its two payoffs are both conditional on player error. The concrete suggestion (not made in this pass) is to give Lumineon a reason to exist against a player who brings no Water move - Tailwind or Whirlpool over U-turn would let it act on the room's own terms - and to swap Drifblim's Protect for Destiny Bond so a 291 HP balloon that survives the room's expiry has something to do with the turn."
+}

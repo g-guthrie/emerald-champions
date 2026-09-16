@@ -1,0 +1,28 @@
+{
+  "trainer_a": "TRAINER_GRUNT_MT_PYRE_3",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 1,
+  "difficulty": "medium",
+  "level_cap": 60,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 6,
+  "decisions": 7,
+  "player_faints": 0,
+  "opponent_faints": 4,
+  "ai_decision_frames_max": 61,
+  "ai_decision_seconds_max": 1.021,
+  "ai_decision_frames": [
+    60,
+    58,
+    61,
+    32,
+    33,
+    21,
+    21
+  ],
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "elf_sha256": "34d3c6af9a6b7bbbb5b8c62ee62078c83eac6634733af6c44fe42f7863ec53af",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
