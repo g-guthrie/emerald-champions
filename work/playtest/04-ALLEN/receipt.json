@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "play_order": 4,
+  "e_group": "E0004",
+  "trainer": "TRAINER_ALLEN",
+  "class": "regular",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "PIKACHU L13 @LIGHT_BALL LIGHTNING_ROD JOLLY (Fake Out/Volt Tackle/Electroweb/Protect)",
+    "PARAS L15 @EVIOLITE DRY_SKIN ADAMANT (Spore/Wide Guard/Leech Life/Protect)",
+    "MIENFOO L13 @EVIOLITE REGENERATOR JOLLY (Drain Punch/Knock Off/U-turn/Fake Out)",
+    "BUNNELBY L14 @SITRUS_BERRY HUGE_POWER ADAMANT friendship=0 (Quick Attack/Frustration/Rock Slide/U-turn)"
+  ],
+  "authored_strategy_flags": "NONE",
+  "party_manifest": "work/playtest/04-ALLEN/party-a1.json",
+  "party_summary": "Arcanine + Magearna* leading; Whimsicott / Weavile / Iron Leaves* / Snorlax reserve. Weavile and Snorlax entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 4001, "outcome": "won", "turns": 6, "decisions": 8,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.318,
+      "events": "work/playtest/04-ALLEN/attempt-1-events.jsonl",
+      "narrative": "T1 Extreme Speed put Pikachu on 7; Pikachu's Fake Out flinched Magearna and Paras Protected. T2 a deliberate Protect/Thunderbolt turn confirmed Lightning Rod redirection. T3 Paras Protected away a lethal 4x Flare Blitz while Flash Cannon removed Pikachu; Electroweb dropped both my Speeds. T4 Mienfoo's Fake Out flinched Arcanine off the Flare Blitz and Paras landed Spore on it in the same turn - the authored combination, executed. Fleur Cannon removed Mienfoo. T5 Weavile replaced the sleeping Arcanine, took a friendship-zero Huge Power Frustration to 6, and Paras slept Magearna too. T6 Ice Shard removed Paras, Bunnelby's Quick Attack removed Weavile, and Snorlax closed the fight on T7 with Body Slam."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Lightning Rod redirects a single-target Electric move aimed at Pikachu's partner",
+     "result": "PASS",
+     "evidence": "T2 Magearna's Thunderbolt was aimed at Paras (battler 3). Battle text: 'The opposing Pikachu took the attack!' followed by 'The opposing Pikachu's Sp.Atk rose!'. Paras took zero damage and Pikachu took zero damage and gained Sp.Atk +1. This is the first confirmed Lightning Rod redirection in the block and it also settles the mechanic left untested in play_order 1."},
+    {"check": "A support buys Paras a Spore turn",
+     "result": "PASS",
+     "evidence": "T4 Mienfoo used Fake Out on Arcanine, the battler holding a 4x-effective Flare Blitz on Paras; Arcanine flinched, and Paras used Spore on Arcanine in the same turn and landed it. The dossier writes this as Pikachu's job, but the AI produced it with Mienfoo instead, which is the same authored idea with the piece that was actually on the field."},
+    {"check": "Paras selects Wide Guard against real spread pressure",
+     "result": "NOT TESTED",
+     "evidence": "My party used no spread move all fight, and Wide Guard was never selected. Correct restraint by the AI rather than a miss, but the move remains unverified."},
+    {"check": "Turn two does not automatically shield both supports",
+     "result": "PASS",
+     "evidence": "T2 Paras used Spore, not a second Protect, despite having Protected on T1."},
+    {"check": "Mienfoo's Eviolite/Regenerator U-turn positioning",
+     "result": "NOT TESTED",
+     "evidence": "Mienfoo used Fake Out on its only turn and was OHKOd by a 2x Fleur Cannon. It never switched, so Regenerator never applied."},
+    {"check": "Bunnelby's friendship-zero Frustration reaches full power under Huge Power",
+     "result": "PASS",
+     "evidence": "T5 Frustration took a freshly switched-in 48 HP Weavile to 6 in a single neutral hit. The friendship-0 authoring is intact and the damage is exactly what the set intends."},
+    {"check": "Do not force switches or Fake Out when an immediate attack is better",
+     "result": "PASS",
+     "evidence": "Every Fake Out in the fight denied a specific queued threat rather than being opened with reflexively, and no opponent switched at all."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.318 s maximum across eight decision points."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "PARAS",
+     "payoff": "EMPTY IN OUTCOME, SOUND IN EXPECTATION - it blocked nothing, because its own partner's Fake Out had already removed the Thunderbolt aimed at it and Extreme Speed went to Pikachu. At turn start, facing a Fire lead that is 4x plus Dry Skin against it, guarding was the right expected-value call. Not counted as an empty-guard defect."},
+    {"turn": 3, "user": "PARAS",
+     "payoff": "EXCELLENT - blocked a Flare Blitz that was 4x effective and further amplified by its own Dry Skin, i.e. a guaranteed KO, and it was not consecutive with the T1 guard."}
+  ],
+  "empty_protects": 0,
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "Best opponent performance of the block so far. It landed two Spores, a Lightning Rod absorb, two Fake Out flinches that each denied a specific lethal move, and a perfectly timed Protect, and it killed a party member.",
+    "T3 Pikachu at 7 HP chose Electroweb (spread Speed drop on both my battlers) over Volt Tackle. With one turn left to live, converting into lasting speed control for its partners was the better line and the scorer found it.",
+    "T1 Pikachu Fake Out targeted Magearna, the slower of my two battlers and the one whose action it could actually deny; Arcanine's Extreme Speed would have resolved before any Fake Out."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "KEEP. The brief raises levels on a first-try win with 0-1 faints only when there was no real threat. There was: Allen slept two of my six, removed one outright, and reduced a third to 6 HP. That is the 'won after a real fight' case.",
+    "changes": [],
+    "reasoning": "Every member contributed something that mattered - Pikachu absorbed a Thunderbolt and set up the speed control, Mienfoo's single turn bought the Spore that decided the middle of the fight, Paras guarded a guaranteed KO and landed two Spores, and Bunnelby got the kill. Raising levels here would punish a team that is already doing its job at its current spread.",
+    "rerun": "Not applicable; no change made."
+  },
+  "could_this_be_cooler": {
+    "answer": "It is already the coolest team in this block. One small addition would sharpen it.",
+    "keep": "Fake Out into Spore, with Lightning Rod covering the Electric lane and a friendship-zero Huge Power Frustration as the punish, is a real doubles engine and it executed under live play rather than only on paper. Keep all four.",
+    "suggestion": "Wide Guard on Paras is the one dead slot: it only matters against spread moves, and a player who reads the board simply stops using them - as happened here, where the move was never selected across five of Paras's turns. Rage Powder would carry the same 'Paras protects the plan' idea while always having a use, and it would pair with Lightning Rod to make redirection the trainer's whole identity.",
+    "second_thought": "If Wide Guard is kept for teaching reasons, it deserves a partner with a genuine spread threat so the player is punished for the obvious answer; right now nothing on Allen's side rewards the player for keeping spread moves off the board.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": [
+    "Cross-encounter result: the Lightning Rod check open from play_order 1 is now confirmed at the mechanic level on the same ability and item combination (Light Ball Pikachu with Lightning Rod).",
+    "Pool chronology caveat carried from play_order 1."
+  ]
+}
