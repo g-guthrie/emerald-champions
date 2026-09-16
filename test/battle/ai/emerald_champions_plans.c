@@ -217,6 +217,30 @@ DOUBLE_BATTLE_TEST("EC Gym mechanics: Victory Dance copies before Oricorio's sel
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC Gym: Jocelyn dances on a safe board with the Dancer relay up")
+{
+    GIVEN {
+        // The room's authored engine is the relay: the setter dances, Oricorio
+        // copies it, and both halves gain. On a board that cannot punish the
+        // turn there is nothing for a direct attack to beat.
+        PLAYER(SPECIES_MAGIKARP) { Level(24); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
+        PLAYER(SPECIES_MAGIKARP) { Level(24); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        AuthoredOpponent(TRAINER_JOCELYN, 2, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_VICTORY_DANCE);
+        }
+    } THEN {
+        EXPECT_GT(opponentLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+        // Dancer copies it, so the relay pays on both halves of the room.
+        EXPECT_GT(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+        Test_MgbaPrintf("JOCELYN_DANCE_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC Gym: Jocelyn's dance enables a knockout while protecting its user")
 {
     GIVEN {

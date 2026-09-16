@@ -174,9 +174,14 @@ AI_DOUBLE_BATTLE_TEST("EC primary support: Acid Spray enables only a later unblo
     u32 setterSpeed;
     enum Item item;
     bool32 shouldSpray;
-    PARAMETRIZE { setterSpeed = 100; item = ITEM_NONE; shouldSpray = TRUE; }
-    PARAMETRIZE { setterSpeed = 10; item = ITEM_NONE; shouldSpray = FALSE; }
-    PARAMETRIZE { setterSpeed = 100; item = ITEM_COVERT_CLOAK; shouldSpray = FALSE; }
+    bool32 lethal;
+    // A drop that lands after the partner has already attacked still pays on
+    // the turns after this one, so the slow sprayer sprays too; what it does
+    // not do is produce the knockout in the same turn. Only a drop that cannot
+    // land at all - Covert Cloak - is the direct attack's turn.
+    PARAMETRIZE { setterSpeed = 100; item = ITEM_NONE; shouldSpray = TRUE; lethal = TRUE; }
+    PARAMETRIZE { setterSpeed = 10; item = ITEM_NONE; shouldSpray = TRUE; lethal = FALSE; }
+    PARAMETRIZE { setterSpeed = 100; item = ITEM_COVERT_CLOAK; shouldSpray = FALSE; lethal = FALSE; }
     GIVEN {
         AI_FLAGS(SUPPORT_FLAGS);
         PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(155); MaxHP(155); SpDefense(100); Speed(30); Item(item); Moves(MOVE_CELEBRATE); }
@@ -194,7 +199,7 @@ AI_DOUBLE_BATTLE_TEST("EC primary support: Acid Spray enables only a later unblo
             EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT);
         }
     } THEN {
-        if (shouldSpray)
+        if (lethal)
             EXPECT(playerLeft->hp == 0 || playerRight->hp == 0);
     }
 }
