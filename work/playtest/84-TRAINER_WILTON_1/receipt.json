@@ -1,0 +1,99 @@
+{
+ "play_order": 84,
+ "e_group": "E0094",
+ "trainer": "TRAINER_WILTON_1",
+ "class": "ace",
+ "location": "Route111",
+ "cap": 36,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "COFAGRIGUS": 35,
+  "CLAYDOL": 35,
+  "GOLETT": 39,
+  "STEELIX": 33
+ },
+ "cap_window_confirmation": "Dossier prose 'Medium cap34 levels 35/35/39/33' resolved exactly: 35/35/39/33 with my party at L36. Cap 36, Medium -2, i.e. base 34. Same window as play_order 83.",
+ "party_manifest": "work/playtest/84-TRAINER_WILTON_1/party.json",
+ "party_pool_audit": "Same cap-36 six as play_order 83, reordered to lead Weavile + Nidoking. Excadrill is the only member new at this cap (Drilbur wild RusturfTunnel gate 20, evolving by level at gate 36). Route 111 desert species remain excluded even though this battle is ON Route 111: the battle is at the northern, non-desert position (the dossier says so itself - 'The northern Route111 position is clear weather'), and the Go-Goggles that open the desert are handed over by the rival outside Flannery's Gym in C23, after this fight. NewMauville sources remain excluded (Surf, C28). One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "Trick Room goes up on turn 1 or 2 from Cofagrigus or Claydol",
+  "Under Trick Room the deliberately zero-Speed-IV attackers actually move before my 100-125 Speed Pokemon",
+  "Cofagrigus's Mummy replaces the ability of anything that makes contact with it",
+  "The Mental Herb protects Cofagrigus's setup from Taunt",
+  "Mega Steelix Mega Evolves, and Sand Force stays inert because this position is clear weather, not sand",
+  "Body Press actually uses the Mega's enormous Defence",
+  "Will-O-Wisp lands on a physical attacker",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/84-TRAINER_WILTON_1/a1",
+   "seed": 84,
+   "outcome": "won",
+   "turns": 5,
+   "driver_turn_counter": 4,
+   "player_faints": 4,
+   "opponent_faints": 4,
+   "narrative": "T1 Cofagrigus put Trick Room up immediately and Claydol Protected, blocking BOTH a 2x Knock Off and a 2x Ice Beam at full HP - the best single guard in my whole block. T2 the room was inverted and it decided the fight: Claydol's Earth Power (2x on Poison) and Cofagrigus's Shadow Ball, both moving first, KO'd a full 115 HP Nidoking, and my Knock Off removed Claydol. T3 Magearna replaced Nidoking, Fleur Cannon removed Cofagrigus - but Golett's Iron Fist Drain Punch is 4x on Dark/Ice and it KO'd Weavile before Weavile's Knock Off ever resolved, because under Trick Room a 125-Speed Pokemon acts last. T4 Kartana came in, Leaf Blade (2x) plus Fleur Cannon removed the 131 HP Eviolite Golett, but Mega Steelix's Body Press (2x on Steel) and a second Drain Punch broke Kartana's Focus Sash and killed it in the same turn. T5 Mega Gardevoir arrived, Mega Evolved, and was KO'd by Heavy Slam (2x on Fairy) before its Mystical Fire resolved; Magearna's Aura Sphere (2x) closed on the Mega. I finished with Magearna on 121/137 and an untouched Excadrill."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "Trick Room up on turn 1",
+   "result": "PASS",
+   "evidence": "T1 decision record: Cofagrigus MOVE_TRICK_ROOM, and the field read STATUS_FIELD_TRICK_ROOM from the end of T1 through the end of the battle. Claydol, the backup setter, correctly did not duplicate it - it Protected instead."
+  },
+  {
+   "check": "Zero-Speed-IV attackers move first under Trick Room",
+   "result": "PASS, and it is the reason this fight cost four faints",
+   "evidence": "Three separate turns were decided by the inversion. T2 Claydol and Cofagrigus both resolved before a 85-base-Speed Nidoking and KO'd it from full. T3 Golett's Drain Punch resolved before a 125-base-Speed Weavile and killed it with its Knock Off unspent. T5 Mega Steelix's Heavy Slam resolved before a 100-base-Speed Mega Gardevoir and killed it on the turn it transformed. The whole team is built at minimum Speed and the room makes that an advantage, exactly as authored."
+  },
+  {
+   "check": "Cofagrigus Mummy",
+   "result": "NOT EXERCISED",
+   "evidence": "I deliberately aimed Weavile's contact Knock Off at Cofagrigus on T3 as a cheap test - Pressure is worth almost nothing on that board, so losing it to Mummy was an acceptable price for stripping the Mental Herb. Trick Room denied the test: Weavile moved last and was KO'd by Drain Punch before its Knock Off resolved. Mummy is untested, and this is a good illustration of how the room protects its own setter."
+  },
+  {
+   "check": "Mental Herb",
+   "result": "NOT EXERCISED",
+   "evidence": "Nothing in my cap-36 party carries Taunt, so there was no setup to protect. The Herb was also never knocked off, for the reason above."
+  },
+  {
+   "check": "Mega Steelix and Sand Force",
+   "result": "PASS, including the negative half",
+   "evidence": "'The opposing Steelix has Mega Evolved into Mega Steelix!' and the state then read STEELIX_MEGA with ABILITY_SAND_FORCE at 123 HP. Weather stayed 'none' for the entire battle, so Sand Force gave no boost at all - which is exactly what the dossier says should happen at this clear-weather northern Route 111 position. The set is honest about its own dead ability."
+  },
+  {
+   "check": "Body Press uses the Mega's Defence",
+   "result": "PASS",
+   "evidence": "T5 Body Press (2x into Kartana's Steel half) was half of the KO on a 100 HP Focus Sash body, from a Pokemon whose Attack stat is mediocre and whose Mega Defence is enormous. The dossier's stated reason for swapping Rock Slide out for Body Press holds up."
+  },
+  {
+   "check": "Will-O-Wisp",
+   "result": "PARTIAL",
+   "evidence": "T3 Cofagrigus burned Magearna. Magearna is a special attacker, so the burn cost it only chip damage - a miss on target selection rather than on the move. Weavile, a physical Life Orb attacker, was standing right there. That said, Cofagrigus was about to die and Magearna was the fresh switch-in, so I would not call it a defect."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "Exactly one Protect across five turns, from four members that all carry it, and it was the most valuable guard in my block. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 1,
+   "battler": "CLAYDOL",
+   "payoff": "at 119/119 it blocked BOTH halves of a focused turn - a 2x Knock Off from Weavile and a 2x Ice Beam from Nidoking - while its partner used the same turn to put Trick Room up. It then survived into T2 and its Earth Power was half of the KO on Nidoking. Two super-effective attacks absorbed, the team's engine established behind it, and a kill bought. This is the model for what an opposing Protect should look like."
+  }
+ ],
+ "ai_defects": [],
+ "ai_highlights": [
+  "T1 division of labour between two Trick Room setters: Cofagrigus set the room while Claydol, which also carries Trick Room, did NOT duplicate it and spent the turn on the Protect that kept both of them alive. Redundant setup is the classic Trick Room AI failure and it did not happen.",
+  "Consistent correct focus fire under the inverted speed order - Nidoking on T2, Weavile on T3, Kartana on T4, Mega Gardevoir on T5, four full-health bodies removed in four consecutive turns, each by a correctly typed pair of attacks."
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt but it cost four of six player faints - Nidoking, Weavile, Kartana and my Mega Gardevoir - and I finished with one burned Pokemon and one unused reserve. Alongside Angelo's gym room this is the hardest encounter in my block. Levels kept exactly as authored; nothing here needs adjusting in either direction.",
+ "could_this_be_cooler": "Kept, and I would not change the concept at all - the archaeological guardians are coherent, the two-setter redundancy is handled intelligently rather than wasted, and Golett at offset 5 is a genuinely nasty surprise, a 131 HP Eviolite body with 4x Iron Fist Drain Punch that moves first. The one thing that does not land is Mummy. It is Cofagrigus's signature and the crack line even asks the player to account for it, but the room's own Trick Room makes it nearly impossible to trigger: contact attackers are fast, fast attackers move last under the room, and Cofagrigus at 118 HP usually dies before anyone slow enough to touch it gets a turn. The concrete suggestion (not applied): give Cofagrigus Curse in place of Shadow Ball. It is thematically perfect for a coffin, it is a Ghost-type move that costs half its own HP to lay a guaranteed drain on a chosen target, and crucially it gives Cofagrigus a reason to be attacked at close range on the turn the player is trying to remove it - which is the only way Mummy ever fires. Shadow Ball is currently just a second mediocre special attack on a body whose Sp.Atk is not why it is in the room.",
+ "authored_set_legality": "No legality problem found. All four prepared and ran clean, including the Steelixite Mega slot 4 and the deliberate zero Speed IVs on every member."
+}
