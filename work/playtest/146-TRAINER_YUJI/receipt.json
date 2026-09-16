@@ -1,0 +1,42 @@
+{
+  "play_order": 146,
+  "e_group": "E0173",
+  "trainer": "TRAINER_YUJI",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle4",
+  "chapter": "Trick House puzzle 4",
+  "cap": 54,
+  "difficulty": "medium",
+  "resolved_levels_check": "PASS - Type: Null 54+4-2=56, Scrafty 54+1-2=53, Hariyama 54+1-2=53, Lucario 54+1-2=53, all matching the driver's reported levels with level_cap 54. The battle index gives this encounter a 54-54 window because Trick House puzzle 4 unlocks on a later badge than the Balance Badge; --cap 54 confirmed correct, no adjustment.",
+  "party_manifests": ["work/playtest/146-TRAINER_YUJI/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 41, "party": "party-a1.json", "outcome": "won", "turns": 8, "player_faints": 3, "opponent_faints": 4,
+     "note": "Mega Gardevoir + Togekiss + Gengar + Alakazam + Aegislash + Spiritomb. Pixilate Hyper Voice one-shot Scrafty through its own Fake Out on turn 1, but the room fought back hard: stacked Fake Outs cost me two attacking turns, Type: Null's repeated Icy Wind put Togekiss to -3 Speed, and Lucario's mixed set traded Flash Cannon for Togekiss and Extreme Speed for Alakazam. Mega Gardevoir also died to a Hariyama Ice Punch. Aegislash and Gengar closed it out."}
+  ],
+  "strategy_checks": [
+    {"check": "Scrafty uses Fake Out when it creates a useful Type: Null action", "result": "PASS", "evidence": "turn 1 Fake Out flinched Togekiss, which denied the Air Slash that turn and let Type: Null get its first Icy Wind off cleanly."},
+    {"check": "The two Fake Outs are stacked across turns rather than both spent on turn one", "result": "PASS", "evidence": "Scrafty Fake Out on turn 1; Hariyama entered on turn 1's KO and used its own Fake Out on turn 2, flinching Mega Gardevoir. This is exactly the cadence the dossier flagged as the thing that would make the team cooler, and the AI already does it."},
+    {"check": "Type: Null attacks, slows opponents or pivots rather than idling", "result": "PASS", "evidence": "Icy Wind on turns 1, 2, 3, 7 and 8 - real speed control that took Togekiss to -3 and Gengar and Aegislash to -1 each - plus two U-turn pivots on turns 4 and 5, one of which brought Lucario in on my Alakazam."},
+    {"check": "Lucario's mixed attacking categories are genuinely used, not played as a pure physical set", "result": "PASS", "evidence": "Flash Cannon (special) KO'd Togekiss on turn 5, Extreme Speed (physical priority) KO'd Alakazam on turn 6. Both halves of the mixed EV spread paid."},
+    {"check": "Scrafty's Quick Guard blanks the priority half of the format when priority is threatened", "result": "NOT EXERCISED", "evidence": "Scrafty died on turn 1 and my party carried no priority move, so no board ever offered it the choice. Not a failure; simply untested this run."},
+    {"check": "Turn two brings the appropriate damage reserve rather than rotating Fake Out without pressure", "result": "PASS", "evidence": "after Scrafty fell, Hariyama's Fake Out was immediately followed by Ice Punch and Knock Off as real damage, not a second free guard."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Yuji's side used no Protect at any point. Lucario and Type: Null both carry it; on every board they had a better action and took it. No empty guarding to report.",
+  "ai_defects": [
+    {
+      "id": "P13-D4",
+      "severity": "minor",
+      "turn": 6,
+      "board": "Type: Null + Lucario (both alive, both on the field, no reserve to switch to) vs Alakazam + Aegislash",
+      "chosen": "Type: Null used U-turn on Aegislash",
+      "problem": "U-turn is Bug against a Steel/Ghost, which is 0.25x - the log printed 'It's mostly ineffective...' - and with its only partner already on the field there was no switch to gain from the pivot half either. The move was worth almost nothing on both counts.",
+      "better": "Icy Wind, which is a spread hit for 1x on Alakazam plus speed control on both, or Tri Attack into Alakazam. The pivot value of U-turn should be scored at zero when the owner has no eligible reserve."
+    }
+  ],
+  "level_changes": [],
+  "calibration_reasoning": "Won on the first attempt but with three player faints against a fully optimized six, including the Mega. AGENTS.md sets the level-increase review at a first-attempt win with fewer than three new faints; this was exactly three, and the fight genuinely took Mega Gardevoir, Togekiss and Alakazam with it. The brief's 'won with 2+ faints or after a real fight - keep' applies. No change.",
+  "could_this_be_cooler": "Keep. The dossier's own improvement note - 'what would be cooler is a reason to stack the two Fake Outs across turns rather than spend both on turn one' - turns out to already be satisfied by the AI: Scrafty used Fake Out on turn 1, Hariyama used its own on turn 2 as it entered, and the two together cost me two full attacking turns at the exact moment I was trying to break through Eviolite Type: Null. That is the memorable thing about the room and it works. The composition note I would add is smaller: Type: Null's Icy Wind is doing far more work than its Tri Attack, and a route regular whose Eviolite body is really a speed-control piece rather than a wall is a nicer identity than the dossier currently claims. No species, move, item or EV change recommended.",
+  "legality_problems_found": "None. All four authored sets resolved cleanly through the native preparation path.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}

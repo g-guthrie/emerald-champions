@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0173 TRAINER_YUJI (Trick House puzzle 4, Route110_TrickHousePuzzle4, cap 54, Medium)",
+  "availability_audit": "Battle index gives this encounter a 54-54 cap window (Trick House puzzle 4 unlocks on a later badge than the Balance Badge, which is why an optional side room sits at a higher cap than the Route 105 fights that follow it in campaign order). All six members are gated at 42 or below in work/reference-pools/pool-54.json, so every source map - Granite Cave, Slateport evolution stock, Route 102, Sandstrewn Ruins on Route 111, Altering Cave, the Ralts line - is entered well before the Trick House is reachable. No legendaries, no Ultra Beasts, no Paradox species.",
+  "plan": "Yuji is a fighting dojo: three of his four are Fighting-types and the fourth is a Normal-typed Eviolite Type: Null. The whole room is answered by Psychic, Fairy and Flying damage plus bodies that are simply immune to what it throws. Gengar, Spiritomb and Aegislash are each immune to Normal and Fighting at once, which blanks Close Combat, Drain Punch, Extreme Speed, Fake Out and Tri Attack outright; Mega Gardevoir's Pixilate Hyper Voice is spread Fairy damage that is 4x on Scrafty and 2x on Hariyama; Togekiss supplies Follow Me, Tailwind and Serene Grace flinches; Alakazam is the fast Psychic nuke. The two things to respect are Scrafty's Quick Guard, which blanks my whole priority half for a turn, and the two stacked Fake Outs.",
+  "party": [
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_PSYCHIC",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "the Mega; Pixilate turns Hyper Voice into spread Fairy damage, 4x on Scrafty and 2x on Hariyama",
+      "availability": "pool-54 gate 30: Ralts line level evolutions; Gardevoirite stone-window 14."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "redirection, Tailwind speed control and 60-percent flinch pressure; Flying and Fairy are both super effective on the dojo",
+      "availability": "pool-54 gate 24: Togepi Route 102, friendship evolution, Shiny Stone from the Slateport Mart."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "immune to Normal and Fighting, so Close Combat, Drain Punch, Extreme Speed, Fake Out and Tri Attack are all blanked; Psychic is the 2x answer",
+      "availability": "pool-54 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest battler; recoil-free Life Orb Psychic is 2x on three of the four",
+      "availability": "pool-54 gate 20: Abra GraniteCave_1F, Kadabra evolution, Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_AEGISLASH",
+      "moves": [
+        "MOVE_KINGS_SHIELD",
+        "MOVE_SHADOW_BALL",
+        "MOVE_FLASH_CANNON",
+        "MOVE_IRON_HEAD"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_STANCE_CHANGE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "second Normal/Fighting immunity with King's Shield to punish the contact attackers; Steel resists Lucario's Flash Cannon and Extreme Speed",
+      "availability": "pool-54 gate 42: SandstrewnRuins_B1F land table on Route 111, entered in the Balance Badge window."
+    },
+    {
+      "species": "SPECIES_SPIRITOMB",
+      "moves": [
+        "MOVE_WILL_O_WISP",
+        "MOVE_DARK_PULSE",
+        "MOVE_FOUL_PLAY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "third Normal/Fighting immunity; Will-O-Wisp halves the physical attackers and Foul Play turns their own Attack against them",
+      "availability": "pool-54 gate 14: AlteringCave_1F land table."
+    }
+  ]
+}
