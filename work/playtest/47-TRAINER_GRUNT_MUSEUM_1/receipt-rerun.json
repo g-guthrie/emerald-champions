@@ -1,0 +1,87 @@
+{
+  "play_order": 47,
+  "e_group": "E0050",
+  "trainer": "TRAINER_GRUNT_MUSEUM_1",
+  "class": "grunt",
+  "location": "SlateportCity_OceanicMuseum_2F",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Pass 1 raised Wailmer 3->4 and Zubat 3->4 off a zero-faint four-turn clear. This rerun tests both levels against the fixed AI.",
+  "build": "work/agent-battle-build (headless ROM with the pass-1 level changes and the AI fixes)",
+  "level_change_verification": "Confirmed live: Wailmer resolved at L26 and Zubat at L26 (both L25 in pass 1). Alolan Rattata L27 and Carvanha L26 unchanged.",
+  "resolved_opponent_levels": {"RATTATA_ALOLA": 27, "WAILMER": 26, "ZUBAT": 26, "CARVANHA": 26},
+  "party_manifest": "work/playtest/47-TRAINER_GRUNT_MUSEUM_1/party.json",
+  "party_chronology_note": "Unchanged cap-24 core: Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana, all gate <= 24 in work/reference-pools/pool-24.json. No Mega used.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/47-TRAINER_GRUNT_MUSEUM_1/r1",
+      "seed": 53,
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "narrative": "T1 a 2x Moonblast one-shot the L27 Alolan Rattata before its Super Fang resolved, while Wailmer's Hydro Pump took Enamorus from 77 to 21. T2 I withdrew Enamorus for Magearna; Zubat's Poison Fang was aimed at Enamorus and hit the Steel switch-in for nothing, and Wailmer Protected into a turn where nothing was aimed at it. T3 Zubat landed a 2x Poison Fang on Togekiss for 26 before a 2x Thunderbolt KO'd it; Air Slash flinched Wailmer. T4 Air Slash KO'd the incoming Carvanha before it acted, Wailmer's spread Icy Wind slowed both of my battlers, and a +1 Thunderbolt KO'd the 128 HP Wailmer. No player faints; Togekiss finished at 25/97."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Wailmer anchors the team at its new level instead of dying to one special attack",
+      "result": "PASS",
+      "evidence": "At L26 with 128 HP it survived from turn 1 to turn 4 and landed a 56-damage Hydro Pump on Enamorus plus a spread Icy Wind that slowed both of my battlers. In pass 1 it was one-shot by a single 2x Thunderbolt on turn 3. The level did what it was bought for."
+    },
+    {
+      "check": "Zubat gets to use its disruption kit",
+      "result": "PARTIAL",
+      "evidence": "At L26 it survived to act twice, landing a 2x Poison Fang on Togekiss for 26, where in pass 1 it was halved by a single unboosted Air Slash before doing anything. It reached for Poison Fang both times, though, and never used the Taunt or U-turn that are the reason it is on the team. The level bought it turns; it has still not shown the disruption."
+    },
+    {
+      "check": "Alolan Rattata's Super Fang",
+      "result": "FAIL - never acted",
+      "evidence": "Selected MOVE_SUPER_FANG on turn 1 and was KO'd by a 2x Moonblast before it resolved, exactly as in pass 1. At L27 and offset 5 it is the highest-level member of the team and it has still never taken an action; it is a 78 HP Dark type leading into a Fairy nuke."
+    },
+    {
+      "check": "Speed Boost Carvanha",
+      "result": "FAIL - never acted",
+      "evidence": "Arrived last on turn 4 and was KO'd by a single unboosted Air Slash (67 damage on 67 HP) before its first action. It has now taken zero actions across both passes, so neither Speed Boost nor its Life Orb coverage has ever been observed."
+    },
+    {
+      "check": "Wailmer chooses between spread and single-target correctly",
+      "result": "PASS",
+      "evidence": "Turn 1 single-target Hydro Pump into the frailer Enamorus for 56; turn 4 spread Icy Wind once both of my battlers were worth slowing. That is the discrimination the crack line asks the player to play around."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "WAILMER",
+      "payoff": "EMPTY - nothing was aimed at Wailmer that turn. Togekiss attacked Zubat and I switched Enamorus out for Magearna, so the guard denied zero damage. Wailmer was at 76/128 with its Sitrus unspent, so it was not under the kind of pressure that justifies a shield."
+    }
+  ],
+  "protect_ledger_note": "One opponent Protect, and it was empty - the same empty Wailmer Protect that pass 1 recorded on its turn 2. This is the only empty guard I saw anywhere in the rerun block; the guard-pricing fix cleared the empty Protects on Hailey, Edmond, Johanna and Simon but not this one.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 2 Wailmer's Protect is the weakest opponent choice in the whole rerun block: a healthy battler at 76/128 with an unspent Sitrus guarding on a turn when neither of my battlers had it targeted. It is not illegal or nonsensical enough to call a defect on one sample - Wailmer had just been the target of an Air Slash the previous turn, so expecting more of the same is defensible - but it is the one empty guard that survived the pricing change, and it recurred from pass 1 on the same turn number. Worth a second sample before anyone concludes the guard pricing is fully covering this case.",
+    "Turn 2 Zubat's Poison Fang resolving into a Steel type is not a targeting error: it was aimed at Enamorus (Fairy, 2x) and my switch put Magearna in the way. Pass 1 logged the same event; on this evidence it should not be read as an AI fault.",
+    "Turn 4 Wailmer used spread Icy Wind rather than Hydro Pump on a board where both of my battlers were healthy. Slowing both was the better turn."
+  ],
+  "level_changes": [
+    {
+      "member": "CARVANHA",
+      "field": "level offset",
+      "before": 4,
+      "after": 5,
+      "pass_total": "+1",
+      "reason": "Second consecutive zero-faint clear, so rule 5 calls for a raise. Carvanha is tied-lowest at L26 and it is the only member that has taken zero actions in both passes: it arrives last and dies to one unboosted Air Slash (67 damage into 67 HP - one level of HP is the difference between acting and not). It was untouched in pass 1, so this is its first level."
+    }
+  ],
+  "level_changes_not_made": [
+    {"member": "WAILMER", "reason": "Already +1 in pass 1 and it converted: 128 HP at L26 let it survive four turns and land both a Hydro Pump and a spread Icy Wind. No longer among the weakest in anything but raw level."},
+    {"member": "ZUBAT", "reason": "Already +1 in pass 1 and it converted from zero actions to two. Raising it again would take it to the +2 ceiling for a member that is now taking turns."},
+    {"member": "RATTATA_ALOLA", "reason": "The ace at offset 5. Rule 5: never the ace first - even though it is, ironically, the member that has never acted either."}
+  ],
+  "calibration": "Won on the first attempt in four turns with zero player faints for the second pass running, though Enamorus was taken to 21 and Togekiss to 25. Brief rule 5: 'Won first try with 0-1 player faints and no real threat -> +1 on the weakest one or two members.' Applied to Carvanha only. Wailmer and Zubat both spent their pass-1 levels productively and raising them again would hit the +2 ceiling on the two members that are now working.",
+  "could_this_be_cooler": "No change wanted, but this team has the block's clearest ordering problem. Its two most interesting members - Super Fang/Taunt Alolan Rattata and Speed Boost Carvanha - have between them taken zero actions across two passes and four sampled turns each, because Rattata leads into a Fairy attacker that one-shots it and Carvanha arrives last against a board that is already ahead. Meanwhile the two members that were raised, Wailmer and Zubat, are the ones now carrying the fight. Levels cannot fix an order problem, and the fix is not a species/move/item change either; it is which two are sent out first. Nothing was changed in this pass beyond the Carvanha level.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt, same party manifest as pass 1. Teams-file change is the Carvanha offset only, staged as a single hunk; generated projections were regenerated to verify the offset lands and then reverted, not committed."
+}
