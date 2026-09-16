@@ -1257,3 +1257,49 @@ recoil, Lickitung's Helping Hand, Froslass's Destiny Bond, Gible's spread choice
 That backlog is now far larger than one pass can absorb, and several of its
 items are the same shape as each other; grouping them by mechanism rather than
 by battle would let one fix close several at a time.
+
+---
+
+# Group A: same-turn joint conflicts
+
+Commit `ac2e98e5e9`. Focused allowlist: **117 passed, 0 failed, 117 total.**
+Frames unchanged: Laura 62, Ned 51/61, Dancer 65.
+
+## Already covered by the earlier commit
+
+**Both slots guarding** is the correlated-guard cost from `82ced61526`, and
+`EC reactive pricing: both slots do not guard the same turn` passes. Nothing to
+do.
+
+**A spread move that clips a healthy ally** turned out to be covered too: on a
+board where Earthquake and Rock Slide reach the same two foes and only
+Earthquake also lands on a grounded, unprotected, full-health partner, the AI
+already takes Rock Slide. The ally's HP is real board value in the trial, so it
+was priced all along. Verified with a fixture rather than re-fixed.
+
+## Fixed: the crash with nothing left to hit
+
+The trial models the native retarget - a single-target move whose target has
+fainted is sent to the surviving foe - but not the case where **there is no
+surviving foe to retarget to**. That is exactly the reported board: the
+partner's Surf cleared both player slots before the slower flank acted, so High
+Jump Kick had nothing to hit and crashed, twice, 103 to 67 to 19. The trial saw
+a harmless miss.
+
+A crash move with no living opposing target now takes half the user's maximum in
+the trial, so the pair that produces it carries its real cost. Fixture: `EC joint
+conflicts: a crash move is not aimed into a target the partner removes first`.
+
+## Fixed: a support move the partner cannot use
+
+Helping Hand onto a partner that is leaving, has already acted, or is holding
+damage the multiplier cannot touch produced no boost in the trial - correctly -
+but that made it a *tie* with anything else that achieved nothing, and ties are
+decided by other terms. `PAIR_SUPPORT_WASTED_COST` (40) makes it lose to an
+action that does something. That is the Helping Hand that announced itself and
+failed into a partner already switching out.
+
+No fixture: the case needs the AI itself to choose a switch for the partner,
+which a fixture cannot script. The neighbouring case - Helping Hand in front of
+damage the multiplier cannot touch - is pinned by `EC setup pricing: Helping
+Hand is not spent on damage it cannot multiply`.
