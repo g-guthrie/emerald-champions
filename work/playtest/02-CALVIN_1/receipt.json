@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "play_order": 2,
+  "e_group": "E0002",
+  "trainer": "TRAINER_CALVIN_1",
+  "class": "regular",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "POOCHYENA L15 @FOCUS_SASH RATTLED JOLLY (Crunch/Taunt/Sucker Punch/Helping Hand)",
+    "ZIGZAGOON L13 @FIGY_BERRY GLUTTONY ADAMANT (Belly Drum/Extreme Speed/Seed Bomb/Protect)",
+    "HOOTHOOT L15 @EVIOLITE TINTED_LENS MODEST (Air Slash/Hyper Voice/Tailwind/Protect)",
+    "STARLY L13 @LIFE_ORB RECKLESS JOLLY (Brave Bird/Double-Edge/Quick Attack/U-turn)"
+  ],
+  "authored_strategy_flags": "SETUP,TAILWIND",
+  "party_manifest": "work/playtest/02-CALVIN_1/party-a1.json",
+  "party_summary": "Magearna* + Arcanine leading; Whimsicott / Weavile / Iron Leaves* / Snorlax in reserve. *reachable legends from pool-14. None of the reserves entered.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+    "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1, "seed": 2001, "outcome": "won", "turns": 3, "decisions": 3,
+      "player_faints": 0, "opponent_faints": 4,
+      "ai_decision_seconds_max": 0.285,
+      "events": "work/playtest/02-CALVIN_1/attempt-1-events.jsonl",
+      "narrative": "T1 Flash Cannon OHKOd Zigzagoon through its own Extreme Speed; Arcanine's Extreme Speed took Poochyena to 12 without triggering its Sash. T2 Extreme Speed finished Poochyena and a Soul-Heart-boosted Thunderbolt OHKOd Hoothoot the turn it set Tailwind. T3 Extreme Speed finished Starly as it Brave Birded into recoil. No player damage worth naming: Magearna ended 53/59, Arcanine 16/53 (all of it self-inflicted-free chip and one Brave Bird)."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "SETUP: Zigzagoon Belly Drums only when its post-cost HP and Gluttony/Figy recovery survive the opposing pair",
+      "result": "PASS (guard), UNTESTED (payoff)",
+      "evidence": "T1 Zigzagoon chose Extreme Speed, not Belly Drum, into a board with a full-HP Steel/Fairy Magearna (resists Normal) and a full-HP Arcanine. Drumming to 22/45 there loses to either attacker, so suppressing it is the authored behaviour. The drum itself and the Figy/Gluttony recovery were never exercised - carry forward."
+    },
+    {
+      "check": "After a Drum, cash in with Extreme Speed rather than keep setting up",
+      "result": "NOT TESTED",
+      "evidence": "No Drum occurred."
+    },
+    {
+      "check": "TAILWIND: Hoothoot sets Tailwind and it enables Starly/Poochyena",
+      "result": "FIRED, NO PAYOFF",
+      "evidence": "T2 Hoothoot used Tailwind; the tailwind started and Hoothoot died in the same turn to Thunderbolt, leaving only Starly, which died on T3 before the speed ever mattered. The choice is defensible at turn start (the AI does not read pending commands) but the flag produced nothing."
+    },
+    {
+      "check": "Poochyena makes a real Taunt-vs-Helping-Hand choice",
+      "result": "FAIL",
+      "evidence": "Poochyena used Crunch on Magearna on both of its turns and never used Taunt, Helping Hand or Sucker Punch. See AI defect E0002-D1."
+    },
+    {
+      "check": "Gluttony activates Figy Berry at the raised threshold",
+      "result": "NOT TESTED",
+      "evidence": "Zigzagoon was OHKOd from full HP."
+    },
+    {
+      "check": "Opponent decision budget under 1.2 s",
+      "result": "PASS",
+      "evidence": "0.285 s maximum across three decision points."
+    }
+  ],
+  "protect_ledger": [],
+  "empty_protects": 0,
+  "protect_note": "No opponent used Protect in this fight, although three of the four sets carry it. Nothing to fault - the fight lasted three turns and each Protect turn would have been a wasted turn against two attackers.",
+  "ai_defects": [
+    {
+      "id": "E0002-D1",
+      "severity": "significant",
+      "turn": "1 and 2",
+      "board": "T1: Poochyena 40/40 (Sash) with a living Zigzagoon partner, facing Magearna (Steel/Fairy) and Arcanine. T2: Poochyena 12/40 facing the same Magearna, now at Sp.Atk +1.",
+      "chosen": "Crunch on Magearna, both turns.",
+      "why_wrong": "Dark is resisted by Fairy: the first Crunch did 6 damage to a 59 HP target and the second did 0 through Assault Vest bulk. Poochyena's set exists to support - Helping Hand on Zigzagoon or Taunt on the support-capable side - and Sucker Punch would at least have been neutral. Repeating the same 6-damage move on the same resisting target after the damage was already revealed is the clearer half of the defect: the scorer is not downweighting a move it has watched do nothing.",
+      "better_action": "T1 Helping Hand on Zigzagoon (or Taunt); T2 Sucker Punch on Arcanine, or Taunt.",
+      "note": "Poochyena has the highest offset on this team (+3, L15) and contributed 6 points of damage across the fight."
+    }
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 0 player faints and no real threat -> +1 on the weakest one or two members, never the ace first. Poochyena and Hoothoot are the +3 top of this team, so the two +1 members were raised.",
+    "changes": [
+      {"member": "ZIGZAGOON", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14},
+      {"member": "STARLY", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14}
+    ],
+    "honest_caveat": "Levels are not what decided this fight. Magearna resists Normal, Flying, Bug, Grass and Dark simultaneously and Calvin's team has no Fire, Ground or Fighting anywhere, so the whole roster is walled by one pool-14 legend regardless of level. +1/+1 is the brief's prescribed response to a clean first-try win and it is applied, but the real finding is a pool/matchup outlier, not an underlevelled team. Raising these two further would punish a player without Magearna and would not touch the actual problem.",
+    "rerun": "NOT PERFORMED - blocked, same host build failure recorded in play_order 1: the headless ROM cannot be rebuilt on this machine, so new offsets cannot reach the driver."
+  },
+  "could_this_be_cooler": {
+    "answer": "Yes.",
+    "keep": "Belly Drum + Gluttony Figy on a Zigzagoon is a genuinely charming first-route idea, and pairing it with Extreme Speed so the drum has an immediate payoff is correct design.",
+    "suggestion": "Give Poochyena something that is not walled by half the game's answers. Its whole kit (Crunch, Sucker Punch, Taunt, Helping Hand) is Dark or support, so any Fairy or Steel lead turns the team's highest-level member into a spectator. Swapping Crunch for Play Rough or Fire Fang, or replacing Poochyena with Nickit/Purrloin carrying Fake Out, would keep the disruption identity while giving it a line that functions.",
+    "second_thought": "The two birds (Hoothoot, Starly) are close to redundant Normal/Flying. Trading Starly for Fletchling would give the Tailwind mode a Gale Wings priority payoff and make the TAILWIND flag mean something even when Hoothoot dies.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": [
+    "Pool chronology caveat carried from play_order 1: the cap-14 pool gates Magearna and Iron Leaves at 14 through Devon Corp 2F and Verdanturf Meadow, which sit later than Route 102 in campaign order. Legal under the brief's rule, not literally reachable at this point in a playthrough."
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0002 TRAINER_CALVIN_1; playtest block P1, cap 14, attempt 1",
+  "availability_audit": "Every member is drawn from work/reference-pools/pool-14.json with gate<=14, the legality rule this playtest brief uses for the cap-14 window. Roots are recorded per member. Caveat carried in each receipt: some cap-14 roots (VerdanturfMeadow, RustboroCity_DevonCorp_2F, Route115/116, AlteringCave) sit later in campaign chronology than the Route 102/103/104 fights in this block, so this is a cap-window-legal party, not a party a player literally holds at Petalburg Woods. Held items are ordinary free preparation-catalogue items, one of each, no duplicates.",
+  "plan": "Magearna is the structural answer: Steel/Fairy resists Normal, Flying, Bug, Grass and Dark, so Belly Drum Extreme Speed, Brave Bird, Double-Edge and Crunch are all resisted at once, and Calvin has no Fire, Ground or Fighting. Arcanine's Intimidate shaves the physical side on entry. Whimsicott's Prankster Encore/Taunt is held in reserve as the direct Belly Drum denial, and Weavile's Knock Off removes the Figy Berry that makes Gluttony work.",
+  "party": [
+    {
+      "species": "SPECIES_MAGEARNA",
+      "moves": [
+        "MOVE_FLEUR_CANNON",
+        "MOVE_FLASH_CANNON",
+        "MOVE_THUNDERBOLT",
+        "MOVE_ICE_BEAM"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        4,
+        0
+      ],
+      "role": "Steel/Fairy special wall-breaker; resists Normal/Flying/Bug/Grass/Dark, and its single-target Electric line is the Lightning Rod / Volt Absorb redirection probe",
+      "availability": "pool-14 reachable legend, gate 14: legendary_sign:RustboroCity_DevonCorp_2F."
+    },
+    {
+      "species": "SPECIES_ARCANINE",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Intimidate pivot, Fire/Bug/Grass/Steel breaker, Extreme Speed revenge priority",
+      "availability": "pool-14 gate 14: evolution:item:ITEM_FIRE_STONE from SPECIES_GROWLITHE."
+    },
+    {
+      "species": "SPECIES_WHIMSICOTT",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_ENCORE",
+        "MOVE_TAUNT",
+        "MOVE_MOONBLAST"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Prankster speed control and setup denial: priority Taunt/Encore answers Belly Drum, Shell Smash, Dragon Dance, Swords Dance, Trick Room and Rain Dance",
+      "availability": "pool-14 gate 14: evolution:item:ITEM_SUN_STONE from SPECIES_COTTONEE."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fastest member; Knock Off strips the Eviolite/Life Orb/Berry economy this block runs on, and Fake Out contests the opposing Fake Out tempo",
+      "availability": "pool-14 gate 14: evolution:level/condition from SPECIES_SNEASEL."
+    },
+    {
+      "species": "SPECIES_IRON_LEAVES",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_SACRED_SWORD",
+        "MOVE_PSYBLADE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "powder-immune physical breaker; Grass/Psychic resists Water, Electric, Ground, Grass and Fighting, which covers most of this block",
+      "availability": "pool-14 reachable legend, gate 14: wild:VerdanturfMeadow/land_mons."
+    },
+    {
+      "species": "SPECIES_SNORLAX",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_CRUNCH",
+        "MOVE_EARTHQUAKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Thick Fat blanket against Fire and Ice; Rocky Helmet punishes the contact attackers and multi-hit users in this block",
+      "availability": "pool-14 gate 14: evolution:friendship from SPECIES_MUNCHLAX."
+    }
+  ]
+}
