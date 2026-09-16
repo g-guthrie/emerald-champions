@@ -1,0 +1,21 @@
+{
+  "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+  "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+  "seed": 41847,
+  "trainer_a": "TRAINER_LILITH",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 20,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/35-TRAINER_LILITH/party-rerun.json",
+  "party_sha256": "8074bc6d4a28581593c788deb0847bbaebeaf781e635a8e363e4c86fcdbc17f0",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "prepared": {
+    "encounter": "E0036 TRAINER_LILITH (Dewford Gym, footwork relay); play_order 35, cap 20, Medium",
+    "party": 6
+  },
+  "started": {
+    "frames": 1233
+  }
+}

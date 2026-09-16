@@ -1,0 +1,81 @@
+{
+  "rerun_of": "work/playtest/35-TRAINER_LILITH/receipt.json",
+  "rerun_reason": "AI check only, commissioned by the main agent: re-test the turn-one healthy-lead withdrawal defect recorded in the first pass ('Withdrew Scraggy and sent in Flamigo, the team's Costar body') against the rebuilt headless ROM, which now charges healthy turn-one switches. No level change was authored for E0036 between the passes, and the band did not call for one.",
+  "play_order": 35,
+  "e_group": "E0036",
+  "trainer": "TRAINER_LILITH",
+  "class": "gym",
+  "location": "DewfordTown_Gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/35-TRAINER_LILITH/party-rerun.json",
+  "party_changed_from_first_pass": {
+    "reason": "Chronology only. WHIMSICOTT was removed (Cottonee is Verdanturf Meadow, C20) and replaced by Mr. Mime. The leads were deliberately kept identical to the first pass - Tsareena and Magearna - so that the turn-one board the defect was recorded on would be reproduced as closely as possible.",
+    "removed": ["SPECIES_WHIMSICOTT"], "added": ["SPECIES_MR_MIME"],
+    "kept": ["SPECIES_TSAREENA", "SPECIES_MAGEARNA", "SPECIES_SPIRITOMB", "SPECIES_ALAKAZAM", "SPECIES_CELEBI"]
+  },
+  "opponent_levels": {"HITMONTOP": 20, "SCRAGGY": 22, "PANCHAM": 23, "FLAMIGO": 20, "MEDITITE": 22, "CLOBBOPUS": 24},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/35-TRAINER_LILITH/r1", "seed": "0xA377",
+      "outcome": "won", "turns": 6, "decisions": 10, "player_faints": 3, "opponent_faints": 6,
+      "ai_decision_frames_max": 61, "ai_decision_seconds_max": 1.021,
+      "narrative": "Same leads, same seed family, different and better opening. Both of Lilith's leads attacked on turn 1: Scraggy's Knock Off removed Tsareena's Sitrus Berry and Hitmontop's Close Combat killed Tsareena outright, while my 4x Fleur Cannon removed Scraggy. Spiritomb then walled most of the room - Hitmontop, Meditite and Flamigo all have Fighting and Normal moves that do nothing to a Dark/Ghost body - and the AI routed around it again, aiming both of its Fake Outs and its two Taunts at the other slot. Flamigo's Close Combat took Magearna, Pancham's Scrappy Crunch took Celebi, and Will-O-Wisp chip plus two spread Dazzling Gleams cleared the rest. Six to three."
+    }
+  ],
+  "commissioned_check": {
+    "defect": "turn-one healthy-lead withdrawal (first pass, a1 turn 1: Lilith withdrew a healthy Scraggy and sent Flamigo into an unfavourable board)",
+    "result": "NOT REPRODUCED - the defect appears fixed on this board",
+    "evidence": "r1 turn 1, same trainer, same two leads, same opening HP: Hitmontop chose Close Combat into Tsareena and Scraggy chose Knock Off into Tsareena. No switch was made by either battler, and no switch was made on any turn of the battle while the switching battler was healthy. Every replacement this run was a forced replacement after a knockout. The healthy-turn-one-switch charge is doing what it was built to do here.",
+    "caveat": "One board, one run. This is evidence that the charge is priced high enough on this particular matchup, not a proof that no healthy turn-one switch can occur. I did see one healthy turn-one withdrawal elsewhere in this block, at E0027 Josh, where Glimmet was withdrawn behind a Focus Sash on turn 1; that is recorded in the Josh receipt."
+  },
+  "strategy_checks": [
+    {"check": "Hitmontop Intimidate/Fake Out/Feint opens a useful Scraggy Dragon Dance or attack; Moxie requires a real knockout", "result": "PARTIAL - correctly adapted", "evidence": "Intimidate landed on both my leads before the first decision. Fake Out was NOT used on turn 1, and that is the right read: my lead was Tsareena, whose Queenly Majesty blocks Fake Out outright. Hitmontop chose Close Combat instead and got the knockout. Scraggy never reached Dragon Dance because it died to a 4x Fleur Cannon, and Moxie was never claimed without a knockout."},
+    {"check": "Costar copies the active ally's current stages on entry, including harmful drops; it is not Dancer", "result": "PASS (negative branch, correctly)", "evidence": "Flamigo entered on turn 2 beside a Clobbopus that had no stat stages at all, only a burn. Nothing was copied and nothing was claimed. Costar copies stages, not status, and the engine behaved that way."},
+    {"check": "Never force a switch simply to display Costar or sacrifice a good turn to copy neutral stages", "result": "PASS - and this is the first-pass defect being honoured", "evidence": "This is exactly what the first pass caught the AI doing. This run it did not happen: Flamigo entered only as a forced replacement for a fainted Scraggy, not as a volunteered switch, and no turn was spent manufacturing a Costar board."},
+    {"check": "Pancham's Parting Shot can introduce Costar Flamigo beside the boosted partner", "result": "NOT OBSERVED", "evidence": "Pancham entered last, after Flamigo was already dead, so the relay had no target. It chose Crunch, correctly reading 2x into Celebi's Psychic half, and Scrappy meant it was also the only member that could have touched Spiritomb."},
+    {"check": "Meditite remains the Pure Power breaker", "result": "PARTIAL", "evidence": "Meditite entered and chose Fake Out into Celebi - again correctly avoiding the Ghost - which flinched away a spread Dazzling Gleam and was a real payoff. It died to a 2x Shadow Ball before it could use Zen Headbutt or Drain Punch, so Pure Power's damage was never seen."},
+    {"check": "Technician Clobbopus uses Feint or phasing only when it benefits the actual board", "result": "FAIL", "evidence": "Clobbopus chose Feint on three separate turns, every time into Magearna, a Steel body that takes Normal at 0.5x, and every time with no Protect or guard to break - which is the only thing Feint does that Circle Throw does not. Technician boosts both moves; Circle Throw is 60 BP (90 after Technician) at 1x into Steel/Fairy and also forces a switch, against Feint's 30 BP (45 after Technician) at 0.5x. See AI defects. Taunt, when it finally came on turns 4 and 5, was excellent."}
+  ],
+  "protect_ledger": [
+    {"turn": 6, "user": "CLOBBOPUS", "payoff": "partial, arguably empty - it blocked a lethal spread Dazzling Gleam, but it was at 4/80 with an active burn, so it died at end of turn anyway. The guard bought no additional turn and no partner payoff. See AI defects."}
+  ],
+  "protect_note": "Only one Protect in the whole battle, which is itself an improvement in economy. Its payoff was illusory for the reason above.",
+  "ai_defects": [
+    {
+      "severity": "moderate",
+      "status": "NEW - not present in the first pass",
+      "turn": "r1 turns 2, 3 and 4 (three separate decisions)",
+      "board": "Clobbopus (Technician, Eviolite) active against Magearna (Steel/Fairy) and Spiritomb (Dark/Ghost)",
+      "chosen": "Feint into Magearna, three times, each printing 'It's not very effective'",
+      "better": "Circle Throw. Technician boosts both moves, but Circle Throw is 60 BP (90 boosted) at neutral into Steel/Fairy and additionally forces a switch, while Feint is 30 BP (45 boosted) at 0.5x. Feint's unique property is bypassing Protect, and neither of my battlers used Protect at any point in this battle, so that property was worth nothing on all three turns.",
+      "note": "The dossier line for this member is explicit: 'Technician Clobbopus uses Feint or phasing only when it benefits the actual board.' Three consecutive Feints into a Steel wall with no guard to break is the authored failure mode. This is the clearest scoring error I found anywhere in this block."
+    },
+    {
+      "severity": "minor",
+      "status": "NEW",
+      "turn": "r1 turn 6",
+      "board": "Clobbopus at 4/80 with an active burn, facing Celebi and Spiritomb",
+      "chosen": "Protect",
+      "better": "Any attack, or Circle Throw to phase. Burn residual damage is deterministic and was already larger than its remaining HP, so Protect could not extend its life by even one turn - it blocked the Dazzling Gleam and then fainted to the burn in the same end-of-turn step.",
+      "note": "This suggests the guard scorer weighs blocked incoming damage without checking whether the battler survives its own guaranteed residual. Cheap to check and it would convert a wasted final turn into a real one."
+    }
+  ],
+  "ai_observations": [
+    "The commissioned defect is fixed on this board, and the Costar-related half of it is fixed in spirit too: Flamigo was never volunteered into play to show off its ability.",
+    "Target selection against a Ghost wall was excellent for the second Gym room running. Two Fake Outs, two Taunts and a Knock Off all went into the slot that was not immune, and Pancham - the one member with Scrappy, and therefore the only one that can touch a Ghost - was the only member that ever attacked Spiritomb's side of the field.",
+    "ai_decision_frames_max 61 (1.021 s)."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt but lost three of six members against a six-member Gym team, which is the brief's 'won with 2+ faints or after a real fight' band. Keep. This is also one faint worse for me than the first pass, so nothing suggests the room is soft.",
+    "changes": [],
+    "verdict": "Keep the authored offsets (2/4/5/2/4/6). No level was changed for this trainer in either pass, so the full +/-2 budget remains unspent on all six members."
+  },
+  "cooler_note": "The relay concept reads better than it plays, and the reason is deployment order rather than design. Parting Shot into Costar Flamigo is the team's signature, and across two passes it has never happened, because Pancham is deployed after Flamigo has already died. The same is true of Scraggy's Dragon Dance. Meanwhile Clobbopus, the slowest and most defensive member, is the one that survives to the end and spends its turns on the fight's weakest move. A concrete suggestion for a later pass, not applied here: lead Pancham beside Flamigo. Parting Shot is a switch move, so it wants to be available early with the Costar body already in reserve, and it would give the room a genuinely distinctive opening rather than another Fake Out. Species-wise the footwork theme is good and the Flamigo pick over another Galarian Farfetch'd is the right call.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
