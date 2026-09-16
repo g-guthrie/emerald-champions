@@ -1,0 +1,21 @@
+{
+  "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+  "elf_sha256": "d43f0156f2669176abb19598a1ec55cfc7a82441550e443bfdd1836c41b7be78",
+  "seed": 39731,
+  "trainer_a": "TRAINER_ROXANNE_1",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 14,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/28-TRAINER_ROXANNE_1/party.json",
+  "party_sha256": "e3895a2d1b0c2fc16cb45c88802eb8e7469804ac9286474b9f34863e3d340686",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "prepared": {
+    "encounter": "E0030 TRAINER_ROXANNE_1 (Rustboro Gym leader, fast fossil offense, Mega Aerodactyl reveal); play_order 28, cap 14, Medium",
+    "party": 6
+  },
+  "started": {
+    "frames": 977
+  }
+}

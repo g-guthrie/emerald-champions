@@ -1,0 +1,45 @@
+{
+  "play_order": 28,
+  "e_group": "E0030",
+  "trainer": "TRAINER_ROXANNE_1",
+  "class": "leader",
+  "location": "RustboroCity_Gym",
+  "cap": 14,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/28-TRAINER_ROXANNE_1/party.json",
+  "opponent_levels_before": {"AERODACTYL": 12, "CARBINK": 15, "RELICANTH": 15, "TYRANTRUM": 13, "OMASTAR": 14, "BOMBIRDIER": 15},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/28-TRAINER_ROXANNE_1/a1", "seed": "0x9B33", "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 6, "ai_decision_frames_max": 8,
+     "narrative": "A six-to-zero sweep in six turns. Mega Aerodactyl revealed correctly on turn 1 and was then knocked out by a single Flash Cannon before it landed an attack (its Dual Wingbeat missed). Prankster Taunt shut Carbink's screens off on turns 1 and 4, Prankster Tailwind reversed the speed advantage, and Magearna alone accounted for Aerodactyl, Omastar, Relicanth, Tyrantrum and Carbink - it finished the battle at 40/59 having taken exactly one Body Press all fight. Steel resists or is immune to almost everything this roster throws: Rock, Flying, Dragon, Normal and Fairy."}
+  ],
+  "strategy_checks": [
+    {"check": "MEGA_REVEAL - Aerodactyl reveals Mega Aerodactyl on first entry, before the player's Ring unlock", "result": "PASS", "evidence": "Turn 1: 'The opposing Aerodactyl's Aerodactylite is reacting' then 'has Mega Evolved into Mega Aerodactyl', with no player Mega Stone in the manifest. The directive evaluated the first-entry board and transformed."},
+    {"check": "Aerodactyl chooses immediate Rock Slide or Tough Claws Dual Wingbeat when stronger than Tailwind", "result": "PASS", "evidence": "Turn 1 it chose Dual Wingbeat (the contact move Tough Claws actually boosts) into Whimsicott rather than spending the reveal turn on Tailwind. Correct priority; the attack simply missed and it died before a second turn."},
+    {"check": "Carbink selects the relevant screen and never wastes successive screen turns against the wrong damage profile", "result": "PASS", "evidence": "Turn 1 it chose Light Screen against an all-special player side - the correct screen - and was denied by Taunt. Turn 4, after Roxanne pivoted it out and back to clear the Taunt, it chose Light Screen again and was denied again. Turns 2 and 5 it switched to Rock Tomb and Body Press instead of repeating a blocked screen."},
+    {"check": "Roxanne switches to clear a Taunt rather than burning turns under it", "result": "PASS", "evidence": "Turn 3: Carbink was withdrawn and re-sent the same turn, which cleared the Prankster Taunt. This is a genuinely good switch decision, not scripted rotation."},
+    {"check": "NO Trick Room move or intent on this team", "result": "PASS", "evidence": "No Trick Room was ever selected or present in the field state; the team played as authored fast fossil offense."},
+    {"check": "Relicanth honors Choice Band; Tyrantrum has no status move through Assault Vest", "result": "PARTIAL PASS", "evidence": "Both selected attacks only - Relicanth chose Head Smash, Tyrantrum chose Head Smash - and neither attempted a status move. Both died before a second decision, so the Band lock itself was not re-tested."},
+    {"check": "Aerodactyl and Bombirdier are airborne partners for Tyrantrum's Earthquake; recheck grounding before every spread attack", "result": "NOT OBSERVED", "evidence": "Tyrantrum entered last alongside Carbink, which is grounded, and correctly chose Head Smash rather than Earthquake. That is the right call for that board, but the deliberate airborne pairing never occurred because Aerodactyl and Bombirdier were both gone by then."},
+    {"check": "Rocky Payload Bombirdier attacks and provides a second Tailwind source", "result": "PARTIAL", "evidence": "Bombirdier selected Brave Bird on the turn it died. Tailwind was never needed because Roxanne's side had no surviving speed plan by then."},
+    {"check": "Do not count base Unnerve after Mega transformation", "result": "PASS (no contrary evidence)", "evidence": "No Unnerve-attributed behaviour appeared after the transformation."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Roxanne's side never used Protect in this battle. Aerodactyl and Omastar both carry it and both died before a second decision point; Carbink does not have it. There is therefore no guarding to review here, empty or otherwise.",
+  "ai_defects": [],
+  "ai_observations": [
+    "The AI played this well - correct screen choice, the Taunt-clearing pivot, Dual Wingbeat over Tailwind on the reveal turn, and Head Smash over Earthquake beside a grounded partner. The loss was a composition problem, not a decision problem."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with zero player faints and no real threat, against a Gym leader. The brief's rule is +1 on the weakest one or two members, never the ace/Mega/legend first.",
+    "changes": [
+      {"member": "TYRANTRUM", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14},
+      {"member": "OMASTAR", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15}
+    ],
+    "verification": "python3 scripts/emerald_champions_teams.py --write then --check: all three gates PASS (move legality, strategy coherence, generated/authored agreement).",
+    "rerun": "NOT PERFORMED. The driver reads opponent levels from the compiled ROM, and this machine cannot rebuild it - the arm-none-eabi toolchain fails on a missing stdint.h include path ('fatal error: stdint.h: No such file or directory') for every source file. work/agent-battle-build therefore still holds the pre-change ROM. The confirming rerun needs the main agent's rebuild.",
+    "recommended_follow_up": "The two +1s will not fix the real problem and I am flagging it rather than acting on it, because the brief bars me from touching the ace first and caps this pass at +/-2. Mega Aerodactyl carries offset 0, so it enters a cap-14 fight at level 12 - two levels below the player - and dies to one super-effective hit from any Steel attacker before the reveal means anything. For a leader whose whole identity is the campaign's first Mega, that is the single highest-value level change available. Recommend +2 on AERODACTYL (offset 0 -> 2, level 12 -> 14) in a follow-up pass, with approval, and then a rerun."
+  },
+  "cooler_note": "The fossil-offense concept and the first-Mega reveal are excellent theatre, and the Taunt-clearing pivot showed the AI can play it. The design problem is type monotony: all six members are Rock or Rock-adjacent, so a single Steel/Fairy body resists or is immune to Rock, Flying, Dragon, Normal and Fairy simultaneously and walls the entire roster. Magearna took one hit in six turns. A concrete suggestion for a later pass (not applied here): the team needs one member whose damage a Steel wall cannot ignore - Omastar already has Earth Power and is the natural candidate, so leading Omastar beside Aerodactyl instead of Carbink would put Ground pressure on the field on turn 1 and give the Mega a turn to exist. Carbink's screens are also dead weight against a Prankster Taunt, which is a reasonable thing for a leader to lose to once, but it happens twice here. Species-wise the six are well chosen and worth preserving.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}
