@@ -1,0 +1,33 @@
+{
+  "play_order": 280, "e_group": "E0439", "trainer": "TRAINER_WARREN", "class": "ace", "location": "Route133",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium",
+  "party_manifest": "work/playtest/280-TRAINER_WARREN/party_route133_84.json",
+  "availability_note": "Same Route 133 sail-lane party (gate<=68 pool-84 entries; Landorus and Tapu Fini are reachable legends). Nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/280-TRAINER_WARREN/a1", "seed": 1, "outcome": "won", "turns": 6, "decisions": 8, "player_faints": 1, "opponent_faints": 6}
+  ],
+  "strategy_checks": [
+    {"check": "Musharna sets Trick Room turn 1 (or Helping Hands Golem)", "result": "PASS (selected) / room never up", "evidence": "T1 Musharna chose Trick Room; Urshifu's Wicked Blow (crit, 2x) OHKOed it from 363 HP before it moved."},
+    {"check": "Galvanize Double-Edge used as the Electric attack", "result": "PASS", "evidence": "T1 Golem-Alola Double-Edge into Urshifu for 192 with Life Orb + recoil messages; T2 it chose Double-Edge again but was KOed first."},
+    {"check": "Cofagrigus is the backup setter for the second half", "result": "PASS (selected) / room never up", "evidence": "T3 Cofagrigus chose Trick Room on entry; OHKOed by Wicked Blow (2x crit) first. Mummy correctly replaced Urshifu's Unseen Fist on contact."},
+    {"check": "Mega Drampa fires Hyper Voice/Draco Meteor under a room", "result": "FAIL (never reached)", "evidence": "Both setters died before acting; Drampa Mega Evolved on T6, Protected, then died to Close Combat + Moonblast without attacking. Berserk did trigger (Sp. Atk rose) on the Close Combat hit."},
+    {"check": "Slow bodies attack with Rock Slide / High Horsepower / Wood Hammer", "result": "PASS", "evidence": "T3 Torterra High Horsepower into Incineroar (211, 2x); T4 Aggron Rock Slide KOed Incineroar; T5 Torterra chose Wood Hammer."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Torterra", "payoff": "REAL - blocked Incineroar's Flare Blitz (2x); partner Golem still died to Close Combat."},
+    {"turn": 4, "user": "Torterra", "payoff": "REAL (consecutive-Protect gamble succeeded) - blocked a second lethal Flare Blitz while Aggron's Rock Slide KOed Incineroar. Strong turn."},
+    {"turn": 5, "user": "Aggron (1 HP after Sturdy)", "payoff": "PARTIAL - blocked Muddy Water and survived the turn, but Torterra died beside it and Aggron then died before acting on T6. Delayed rather than converted."},
+    {"turn": 6, "user": "Mega Drampa (Mega-evolution turn)", "payoff": "EMPTY-ISH - blocked a 2x Moonblast, but as the last Pokémon with no partner it only postponed the same two attacks by a turn."}
+  ],
+  "ai_defects": [],
+  "engine_notes": [
+    {"turn": 2, "note": "'The opposing Golem couldn't fully protect itself' printed when Close Combat (Unseen Fist) hit a Golem that had chosen Double-Edge; same cosmetic Unseen Fist message seen in E0438."}
+  ],
+  "level_changes": [
+    {"member": "MUSHARNA", "before": 1, "after": 2, "why": "Won first try with one faint. The room never went up: Musharna was OHKOed by one Wicked Blow before its T1 Trick Room. The whole six-member concept depends on one setter surviving one hit."},
+    {"member": "COFAGRIGUS", "before": 1, "after": 2, "why": "Backup setter also OHKOed on entry before its Trick Room resolved. +1 to both setters is the level-only way to give the room a chance; the Mega and attackers are untouched."}
+  ],
+  "level_changes_unverified": "Cannot be re-verified until the main agent rebuilds the headless ROM; attempt 1 was played at setters L83.",
+  "cooler": "The structure (two setters, zero-Speed IVs, Mega finisher) is right and the Torterra double-Protect turn was the AI at its best. The concept fails to fire against a Dark crit attacker because both setters have 4 Def EVs and die to one physical hit; a Sitrus/Colbur or a Def-invested spread (not this pass) would matter more than any species change. Nothing is over-represented.",
+  "authored_set_legality": "No problem; all six sets played as written, Mega Drampa evolved on T6, Berserk fired."
+}
