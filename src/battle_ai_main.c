@@ -426,8 +426,11 @@ void ComputeAiBattlerDecisions(enum BattlerId battler)
 {
     gAiLogicData->aiCalcInProgress = TRUE;
     // Charge native setup, but not intervening UI/controller frames, against
-    // this side's coordinated decision budget.
-    gAiLogicData->decisionStartFrame = gMain.vblankCounter1 - gAiLogicData->decisionSetupFrames;
+    // this side's coordinated decision budget. The budget covers the complete
+    // opposing decision, so a second owner or an in-game partner scoring later
+    // in the same turn shares this clock instead of restarting it.
+    if (gAiLogicData->battlerMovesScored == 0)
+        gAiLogicData->decisionStartFrame = gMain.vblankCounter1 - gAiLogicData->decisionSetupFrames;
 
         AIDebugTimerStart();
 
@@ -904,9 +907,17 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 
     for (enum BattlerId battler = 0; battler < battlersCount; battler++)
     {
-        // Prediction limited to player side but can be expanded to read partners move in the future
-        if (!IsOnPlayerSide(battler))
+        // Prediction limited to player side but can be expanded to read partners move in the future.
+        // An in-game partner on that side is an AI actor whose decision is
+        // computed for real this turn, so predicting it is a wasted pass -
+        // the multi formats are exactly where the setup budget is tightest.
+        if (!IsOnPlayerSide(battler) || BattlerHasAi(battler))
             continue;
+        // Prediction is an optimisation, not a legality requirement: if the
+        // mandatory setup has already spent this side's shared budget, the
+        // remaining predictions are skipped rather than overrunning it.
+        if ((u32)(gMain.vblankCounter1 - aiData->decisionStartFrame) >= 60)
+            break;
 
         BattleAI_SetupAIData(0xF, battler);
         SetupAIPredictionData(battler, SWITCH_MID_BATTLE_OPTIONAL);

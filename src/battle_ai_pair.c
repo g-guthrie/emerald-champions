@@ -55,6 +55,10 @@
 // settle the shortlist on expected value. A shield still reaches the
 // shortlist: it scores well against the pattern it is meant to answer.
 #define PAIR_SHORTLIST 4
+// A multi shares one decision budget between three AI actors. Halving the
+// shortlist keeps the settle stage bounded without changing how a pair is
+// valued, which must stay identical across every board of one decision.
+#define PAIR_SHORTLIST_CROWDED 2
 
 // Guard policy. A shield's simulated HP saving is not all permanent: with no
 // payoff the same threat simply returns next turn and the foes can focus the
@@ -76,9 +80,54 @@ static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MO
 // Stop optional comparisons after one second, leaving room under the 1.2s
 // complete-decision limit for the current native calculation and restoration.
 // Always establish a legal fallback; urgent Perish exits retain their search.
+// AI battlers that still have to be scored out of this turn's shared budget.
+static u32 PairPendingDecisionActors(void)
+{
+    u32 actors = 0;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (IsBattlerAlive(battler) && BattlerHasAi(battler)
+         && !(gAiLogicData->battlerMovesScored & (1u << battler)))
+            actors++;
+    return actors;
+}
+
+static u32 PairShortlistSize(void)
+{
+    return PairPendingDecisionActors() > 2 ? PAIR_SHORTLIST_CROWDED : PAIR_SHORTLIST;
+}
+
+// One turn's opposing decision can involve more than one group of AI actors:
+// a two-owner multi scores both opponents together and then the in-game
+// partner separately, and every one of them spends the same shared budget.
+// Give each group an equal slice of it, measured from the shared start, so the
+// complete decision still lands inside the limit however many groups there are.
+static u32 PairDecisionBudgetShare(void)
+{
+    u32 groups = 0, pending = 0;
+    for (u32 side = 0; side < NUM_BATTLE_SIDES; side++)
+    {
+        bool32 present = FALSE, unscored = FALSE;
+        for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        {
+            if (!IsBattlerAlive(battler) || !BattlerHasAi(battler) || GetBattlerSide(battler) != side)
+                continue;
+            present = TRUE;
+            if (!(gAiLogicData->battlerMovesScored & (1u << battler)))
+                unscored = TRUE;
+        }
+        if (present)
+            groups++;
+        if (unscored)
+            pending++;
+    }
+    if (groups <= 1)
+        return 60;
+    return 60 * (groups - pending + 1) / groups;
+}
+
 static bool32 PairDecisionBudgetExpired(void)
 {
-    return (u32)(gMain.vblankCounter1 - gAiLogicData->decisionStartFrame) >= 60;
+    return (u32)(gMain.vblankCounter1 - gAiLogicData->decisionStartFrame) >= PairDecisionBudgetShare();
 }
 
 enum PairAccuracyWeather
@@ -4413,7 +4462,7 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
         u8 left;
         u8 right;
     } shortlist[PAIR_SHORTLIST];
-    u32 shortCount = 0;
+    u32 shortCount = 0, shortLimit = PairShortlistSize();
     bool32 mixed = FALSE;
     for (u32 left = 0; left < ev->count[actor]; left++)
     {
@@ -4444,14 +4493,14 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             u32 slot = shortCount;
             while (slot > 0 && shortlist[slot - 1].score < primary)
             {
-                if (slot < PAIR_SHORTLIST)
+                if (slot < shortLimit)
                     shortlist[slot] = shortlist[slot - 1];
                 slot--;
             }
-            if (slot < PAIR_SHORTLIST)
+            if (slot < shortLimit)
             {
                 shortlist[slot] = (struct PairShortlistEntry){primary, left, right};
-                if (shortCount < PAIR_SHORTLIST)
+                if (shortCount < shortLimit)
                     shortCount++;
             }
         }
@@ -4999,7 +5048,11 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
             if (index == 1 && deadline[0] && deadline[1] && secondRank != INT_MIN)
                 count[index] = 3;
         }
+    // A board that runs out of budget before its first pair leaves nothing
+    // behind, so start from a defined legal action rather than stack contents.
     struct PairAction chosen[2], bestActions[2];
+    for (u32 index = 0; index < 2; index++)
+        bestActions[index] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actors[index]};
     u32 bestReserves[2] = {PARTY_SIZE, PARTY_SIZE};
     u32 bestMega = 0, bestTieCost = UINT_MAX;
     u32 activeMega = 0;
@@ -5140,7 +5193,22 @@ decisionReady:
         gBattleStruct->AI_monToSwitchIntoId[battler] = bestReserves[index];
         if (bestReserves[index] < PARTY_SIZE && !attackPivot[index])
             gAiLogicData->shouldSwitch |= 1u << battler;
-        gAiBattleData->chosenMoveIndex[battler] = bestActions[index].index == PAIR_IDLE ? 0 : bestActions[index].index;
+        // Never hand the controller a move it cannot select: the selection
+        // script would reject it and ask again, and the answer never changes.
+        // With every move unusable, slot zero is the native Struggle path.
+        u32 chosenIndex = bestActions[index].index == PAIR_IDLE ? 0 : bestActions[index].index;
+        u32 limitations = IsBattlerAlive(battler)
+            ? CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL) : 0;
+        if (limitations != (1u << MAX_MON_MOVES) - 1 && (limitations & (1u << chosenIndex)))
+        {
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+                if (!(limitations & (1u << slot)))
+                {
+                    chosenIndex = slot;
+                    break;
+                }
+        }
+        gAiBattleData->chosenMoveIndex[battler] = chosenIndex;
         gAiBattleData->chosenTarget[battler] = bestActions[index].target;
         SetAIUsingGimmick(battler, bestMega & (1u << index) ? USE_GIMMICK : NO_GIMMICK);
         gAiLogicData->battlerMovesScored |= 1u << battler;
