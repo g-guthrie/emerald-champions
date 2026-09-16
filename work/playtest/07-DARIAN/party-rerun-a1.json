@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0007 TRAINER_DARIAN; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR ROUTE 104. ROSELIA = wild:Route104/land_mons (this battle own route); ELECTRIKE, CORPHISH = wild:Route103/land_mons; TIMBURR, PACHIRISU = wild:Route102/land_mons; TREECKO = book C01 starter. Petalburg Woods species are excluded - the woods are north of here and unentered. Nothing evolved, nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "Darian is four Water types with a stacked spread lane, so the crack list writes itself. Grass pressure on the other three: ROSELIA is a base-100 special attacker whose Energy Ball is 2x on Chinchou, Tentacool and Clamperl and 4x on Water/Ground Barboach, and TREECKO is a second Grass body. Electric pressure on Tentacool: ELECTRIKE Thunderbolt is 2x there and its own Lightning Rod makes it immune to Discharge damage. Immediate damage before Shell Smash / Dragon Dance resolve: Roselia and Electrike both outspeed and both threaten a one-hit answer. Revenge priority: Timburr Mach Punch and Corphish Aqua Jet. TIMBURR WIDE_GUARD is the direct check on Muddy Water (three carriers) and Discharge. Liquid Ooze is respected: Roselia leads with Energy Ball, not Giga Drain, while Tentacool is alive.",
+ "party": [
+  {
+   "species": "SPECIES_ROSELIA",
+   "moves": [
+    "MOVE_ENERGY_BALL",
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_LEECH_SEED",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_NATURAL_CURE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "the Grass pressure the crack list names, on a base-100 special attacker; Natural Cure wipes Thunder Wave on a switch",
+   "availability": "pool-14 wild:Route104/land_mons."
+  },
+  {
+   "species": "SPECIES_ELECTRIKE",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_FLAMETHROWER",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_LIGHTNING_ROD",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast special Electric breaker; its own LIGHTNING_ROD is an Electric immunity and its Thunderbolt is a single-target Electric redirection probe",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_KNOCK_OFF",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_WIDE_GUARD"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "WIDE_GUARD against the stacked Muddy Water / Discharge spread lanes, plus Iron Fist priority and item removal",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_TREECKO",
+   "moves": [
+    "MOVE_SEED_BOMB",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_SWORDS_DANCE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_OVERGROW",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "powder-immune, Leech-Seed-immune Grass body",
+   "availability": "book C01 starter."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_THUNDERBOLT",
+    "MOVE_NUZZLE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Follow Me redirection onto a Volt Absorb body, plus a second special Electric lane",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_CORPHISH",
+   "moves": [
+    "MOVE_CRABHAMMER",
+    "MOVE_AQUA_JET",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_ADAPTABILITY",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the block's biggest single hit plus priority and item removal",
+   "availability": "pool-14 wild:Route103/land_mons."
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 7,
+  "e_group": "E0007",
+  "trainer": "TRAINER_DARIAN",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "ai_flag": "Conservative",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable on Route 104.",
+  "opponent_as_played": [
+    "CHINCHOU L14 @SITRUS_BERRY VOLT_ABSORB MODEST (Thunder Wave/Muddy Water/Discharge/Protect) offset 2",
+    "BARBOACH L15 @EVIOLITE OBLIVIOUS ADAMANT (Dragon Dance/Waterfall/High Horsepower/Protect) offset 3",
+    "TENTACOOL L14 @EVIOLITE LIQUID_OOZE MODEST (Sludge Bomb/Muddy Water/Acid Spray/Protect) offset 2",
+    "CLAMPERL L13 @DEEP_SEA_TOOTH SHELL_ARMOR MODEST (Shell Smash/Muddy Water/Ice Beam/Protect) offset 1"
+  ],
+  "party_manifest": "work/playtest/07-DARIAN/party-rerun-a1.json",
+  "party_summary": "Roselia / Electrike / Timburr / Treecko / Pachirisu / Corphish - Route101/102/103/104 wilds plus one C01 starter, nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2007,
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 6,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 61,
+      "ai_decision_seconds_max": 1.021,
+      "events": "work/playtest/07-DARIAN/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 Roselia's Energy Ball is 4x on Water/Ground Barboach and removed it outright before it could consider Dragon Dance; Electrike, which has no useful line against a Volt Absorb lead and a Ground partner, withdrew for Timburr. Tentacool replaced Barboach. T2 Chinchou Protected a lethal Energy Ball while Tentacool's Sludge Bomb took Roselia to 8; Timburr knocked Tentacool's Eviolite away. T3 Energy Ball removed Tentacool, Chinchou's Thunder Wave paralysed Timburr and the paralysis immediately cost Timburr its turn. Clamperl replaced Tentacool. T4 Clamperl Protected the Knock Off aimed at its Deep Sea Tooth; Roselia's Energy Ball removed Chinchou and Roselia then died to its own Life Orb recoil - a trade I chose. T5 Pachirisu replaced it and its Thunderbolt, 2x on a lone Water type, finished Clamperl. 4-1."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Chinchou's Thunder Wave fires",
+      "result": "PASS",
+      "evidence": "T3 Thunder Wave on Timburr, and the paralysis cost Timburr its very next turn. This is one of the status moves the pricing change was aimed at and it now fires."
+    },
+    {
+      "check": "Chinchou's Discharge is a safe ally line beside Ground-type Barboach",
+      "result": "INCONCLUSIVE - and a possible ally-damage error",
+      "evidence": "The native record for T4 shows Chinchou selecting Discharge, but Roselia outsped it and KOed it, so the move never resolved. The concerning part is the board: Barboach (the Ground partner that makes Discharge free) had been dead since T1, and Chinchou's live partner was Clamperl, a pure Water type that takes Electric at 2x. If that selection is real it is exactly the ally-damage mistake the plan warns against. It cannot be confirmed from an unresolved move, so it is logged as a watch item rather than a defect."
+    },
+    {
+      "check": "Barboach uses Dragon Dance only behind adequate survival",
+      "result": "PASS (correct decline)",
+      "evidence": "Barboach had one decision, on T1, opposite a Life Orb Roselia whose Energy Ball is 4x on it. It chose Waterfall, not Dragon Dance. Declining setup into a 4x lead is right; it died to that Energy Ball before Waterfall resolved."
+    },
+    {
+      "check": "Tentacool's Acid Spray supports an actual special follow-up",
+      "result": "NOT FIRED (defensible)",
+      "evidence": "Tentacool had two decisions, T2 and T3, and chose Sludge Bomb both times into Roselia - 2x on Grass, and it took Roselia from 29 to 8 in one hit. Acid Spray would have needed Chinchou's Muddy Water to follow into the same target on the same turn, and Sludge Bomb was simply the bigger number. Recorded as unexercised rather than wrong, but Acid Spray has now not fired in either pass."
+    },
+    {
+      "check": "Clamperl retains the special Shell Smash mode",
+      "result": "NOT FIRED (defensible)",
+      "evidence": "Clamperl entered on T3 at L13 with 44 HP against a live Roselia and a Timburr, and spent both its turns on Protect, each of which denied something. Shell Smash halves its defences on a board where a single Thunderbolt or Energy Ball already kills it, so declining is correct. But this means the team's two authored setup moves - Dragon Dance and Shell Smash - both went unused, and in both cases correctly, which says the SETUP flag on this team is aspirational at this level rather than a thing that happens."
+    },
+    {
+      "check": "Muddy Water attacks both opponents without allied damage",
+      "result": "PASS",
+      "evidence": "T1 Chinchou used Muddy Water and only my side took damage."
+    },
+    {
+      "check": "Liquid Ooze punishes eligible draining attacks",
+      "result": "NOT TESTED",
+      "evidence": "I deliberately led Roselia with Energy Ball rather than Giga Drain while Tentacool was alive, so no drain move was ever used into it."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "CHINCHOU",
+      "payoff": "Blocked a Life Orb Energy Ball that was super effective and lethal from 58/58, and its partner used the same turn to take Roselia from 29 to 8. Large payoff."
+    },
+    {
+      "turn": 4,
+      "battler": "CLAMPERL",
+      "payoff": "Blocked Timburr's Knock Off on its entry turn, preserving the Deep Sea Tooth that doubles its Special Attack. No damage denied, but a real item save on the turn it was most exposed. Modest payoff, correctly timed."
+    }
+  ],
+  "protect_ledger_note": "Two opponent Protects in five turns, both with a payoff, neither repeated into an empty turn. Barboach and Tentacool also carry Protect and never spent a turn on it.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_watch_items": [
+    "The unresolved T4 Chinchou Discharge selection with a pure-Water Clamperl partner and the Ground partner long dead. Worth a targeted fixture rather than a balance change."
+  ],
+  "ai_improvements_observed": [
+    "Thunder Wave selected and converted - a status move winning against direct damage, which is the pricing change working.",
+    "Both setup moves correctly declined on boards where they lose, rather than fired reflexively.",
+    "Zero voluntary opponent switches."
+  ],
+  "level_changes": {
+    "BARBOACH": "3 -> 4",
+    "CLAMPERL": "1 -> 2"
+  },
+  "level_change_reason": "Won on attempt 1 with one player faint, and that faint was a Life Orb recoil trade I chose in order to remove Chinchou - so effectively a no-threat clear. The +1 goes on the two members that contributed least and that still have budget: Barboach died on T1 without landing anything, and Clamperl at L13 is the lowest level on the team and spent its whole life guarding. Chinchou (Protect into a KO denial, Thunder Wave, Sitrus) and Tentacool (Sludge Bomb nearly removing a Life Orb Roselia) both earned their current numbers. Cumulative across both passes: Barboach +1, Tentacool +1, Clamperl +2, Chinchou 0 - all within the +-2 cap.",
+  "levels_after": {
+    "CHINCHOU": 2,
+    "BARBOACH": 4,
+    "TENTACOOL": 2,
+    "CLAMPERL": 2
+  },
+  "cooler": "Yes. This team's declared SETUP identity never happens and, on inspection, correctly never happens: both Dragon Dance and Shell Smash ask a frail L13-L15 Water type to spend a turn on a board where one super-effective hit already kills it. The concept that DOES fire here is the Volt Absorb / Ground / Liquid Ooze immunity triangle, which is genuinely interesting and almost invisible because Barboach dies first. Leading Chinchou beside Tentacool rather than Barboach would put two immunities on the field at once and make the marine-immunity idea the fight's actual lesson. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found."
+}
