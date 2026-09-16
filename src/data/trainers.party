@@ -14088,8 +14088,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 5
 
 SPECIES_LAPRAS @ ITEM_LEFTOVERS
-Level: 59
-Level Offset: -1
+Level: 60
+Level Offset: 0
 Ability: ABILITY_WATER_ABSORB
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -18829,8 +18829,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 10
 
 SPECIES_ORANGURU @ ITEM_SITRUS_BERRY
-Level: 61
-Level Offset: 1
+Level: 62
+Level Offset: 2
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -18842,8 +18842,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_BEHEEYEM @ ITEM_CHOICE_SPECS
-Level: 61
-Level Offset: 1
+Level: 62
+Level Offset: 2
 Ability: ABILITY_ANALYTIC
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -19393,8 +19393,8 @@ Nature: NATURE_ADAMANT
 - MOVE_STOMPING_TANTRUM
 
 SPECIES_DURALUDON @ ITEM_WISE_GLASSES
-Level: 71
-Level Offset: 1
+Level: 72
+Level Offset: 2
 Ability: ABILITY_STALWART
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -19406,8 +19406,8 @@ Nature: NATURE_MODEST
 - MOVE_BODY_PRESS
 
 SPECIES_CRADILY @ ITEM_LEFTOVERS
-Level: 71
-Level Offset: 1
+Level: 72
+Level Offset: 2
 Ability: ABILITY_STORM_DRAIN
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -19468,8 +19468,8 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_DUOSION @ ITEM_EVIOLITE
-Level: 61
-Level Offset: 1
+Level: 62
+Level Offset: 2
 Ability: ABILITY_MAGIC_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -19494,8 +19494,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_ELGYEM @ ITEM_EVIOLITE
-Level: 61
-Level Offset: 1
+Level: 62
+Level Offset: 2
 Ability: ABILITY_TELEPATHY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -19879,8 +19879,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 10
 
 SPECIES_RAMPARDOS @ ITEM_LIFE_ORB
-Level: 71
-Level Offset: 1
+Level: 72
+Level Offset: 2
 Ability: ABILITY_SHEER_FORCE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -19892,8 +19892,8 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_AERODACTYL @ ITEM_FOCUS_SASH
-Level: 71
-Level Offset: 1
+Level: 72
+Level Offset: 2
 Ability: ABILITY_UNNERVE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
