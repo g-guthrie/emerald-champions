@@ -1,0 +1,83 @@
+{
+  "play_order": 243,
+  "e_group": "E0379",
+  "trainer": "TRAINER_ATHENA",
+  "class": "ace",
+  "location": "Route127",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Infernape / Accelgor / Pheromosa (0) at L74 and Kangaskhan (+1) at L75 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/243-TRAINER_ATHENA/party_sea76.json"],
+  "chronology_note": "Same cap-76 sea-routes six as E0368 and E0377; every gate is 42 or lower and nothing is sourced downstream of the Aqua Hideout. Note on the authored side rather than mine: Pheromosa is an Ultra Beast, which the brief only forbids at or below cap 24, so it is legal here.",
+  "pre_play_strategy_checks": [
+    "Mega Kangaskhan opens with Fake Out and Parental Bond makes it hit twice",
+    "Pheromosa attacks immediately and Beast Boost raises its highest stat after a knockout",
+    "Infernape's Mach Punch is the priority lane",
+    "Accelgor spends Final Gambit only when its own current HP makes the trade worth it",
+    "Accelgor's Bug Gem plus Unburden doubles its Speed after a single Bug attack",
+    "The whole team is frail, so priority and spread moves invert the fight"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 3,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/243-TRAINER_ATHENA/a1",
+      "party": "party_sea76.json (Incineroar/Rillaboom/Zapdos/Urshifu-Single/Mega Gardevoir/Amoonguss)",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 5,
+      "opponent_faints": 4,
+      "why": "The closest fight of the block so far - I won it with one Pokemon standing. Four of my five losses were clean one-shots from full HP: Overheat erased a 309 HP Rillaboom, Pheromosa's Close Combat erased a 301 HP Incineroar, the two Close Combats together erased Urshifu through its Focus Sash, and a Parental Bond Double-Edge erased a 213 HP Mega Gardevoir the turn it evolved. The two things that actually worked were the two the dossier's own crack line names: Rage Powder aimed a full-HP Final Gambit into the one body on my side with more than 271 max HP, and a single Heat Wave killed Infernape and Pheromosa on the same turn."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Mega Kangaskhan opens with Fake Out, doubled by Parental Bond",
+      "result": "FAIL, and the plan cannot be executed as written - see legality_notes",
+      "evidence": "Kangaskhan is party slot 4, so Athena leads Infernape and Accelgor and Kangaskhan physically cannot open the battle. It arrived on turn 5 as the last Pokemon, which was its own first turn out and therefore its one legal Fake Out window, and chose Double-Edge instead. In fairness the Double-Edge was the better move - it one-shot Mega Gardevoir - so this is a plan-versus-roster problem rather than an AI defect."
+    },
+    {
+      "check": "Parental Bond doubles the hit",
+      "result": "PASS",
+      "evidence": "turn 5 'The opposing Kangaskhan used Double-Edge! Gardevoir fainted! The Pokemon was hit 2 times!' and turn 6 'The Pokemon was hit 1 time!' when the second strike was not needed. Mega Kangaskhan also evolved immediately on entry, which is the correct behaviour and the direct contrast with E0377's Kingler."
+    },
+    {
+      "check": "Pheromosa attacks immediately and Beast Boost fires after a knockout",
+      "result": "PASS, decisively",
+      "evidence": "turn 3: Pheromosa entered and immediately used Close Combat for 263 into a 263 HP Incineroar - an OHKO on a full-HP body - followed by 'The opposing Pheromosa's Speed rose!'. Beast Boost picked Speed, which is correct for a 151-base-Speed body. This member is exactly what the dossier says it is."
+    },
+    {
+      "check": "Infernape's Mach Punch is the priority lane",
+      "result": "FAIL",
+      "evidence": "Infernape had four decisions (Overheat, Close Combat, Overheat, Close Combat) and never once selected Mach Punch, including turn 4 at 39/220 with Blaze live against a Focus Sash Urshifu where a priority Fighting move at 2x was an obvious line. The two moves it did choose were defensible - Overheat into Zapdos is 1x where Close Combat is 0.5x - so severity is low, but the printed priority lane did not appear."
+    },
+    {
+      "check": "Accelgor spends Final Gambit only when its current HP makes the trade worth it",
+      "result": "PASS",
+      "evidence": "turn 2: Accelgor used Final Gambit at 271/271, the maximum possible value, on the earliest turn it was not being denied. That is exactly the authored condition. It was redirected into Amoonguss by Rage Powder and Amoonguss survived on 23 HP - but the AI decides at turn start and Rage Powder resolves at +2 priority, so it could not have known. No defect; this is the counterplay working as the crack line promises."
+    },
+    {
+      "check": "Bug Gem plus Unburden doubles Accelgor's Speed after a Bug attack",
+      "result": "NOT OBSERVED",
+      "evidence": "Accelgor had two decisions (Protect, Final Gambit) and died on turn 2 with ITEM_BUG_GEM unused. Bug Buzz and Encore were never selected. The Unburden half of the set is currently theoretical."
+    },
+    {
+      "check": "The team is frail enough that priority and spread moves invert the fight",
+      "result": "PASS",
+      "evidence": "turn 4: one Zapdos Heat Wave killed Infernape (at 39) and Pheromosa (at 205/213, 2x, from effectively full) on the same action. Two of the four opponents died to one spread move. The crack line is accurate and it is the only reason I won."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Accelgor", "payoff": "low. It blocked Incineroar's Fake Out, so it prevented roughly 24 chip damage and nothing else - it was going to lose the turn either way, since a flinched Accelgor and a Protecting Accelgor both take no action. Defensible under a mixed forecast (Flare Blitz is 2x on a Bug body and would have been far worse), but this is the weakest-value guard in the block so far"}
+  ],
+  "protect_summary": "1 opponent Protect in the whole battle, 0 empty but 1 low-value. Notably, three of the four members carry Protect and only Accelgor ever used it - a glass-cannon team declining to guard is arguably correct, since every turn spent guarding is a turn not spent removing something.",
+  "ai_defects": [],
+  "ai_defect_note": "No defect I am willing to log. The Mach Punch omission and the never-used Bug Gem are both single-battle absences with defensible alternatives, and the Kangaskhan Fake Out is blocked by the roster order, not by the decision code. Recording them as failed strategy checks instead. Positive finding worth carrying forward: Mega Kangaskhan evolved on the turn it entered, which means E0377's two-turn Kingler deferral is not a blanket 'Megas evolve late' bug and should be traced as something narrower.",
+  "level_changes": [],
+  "level_change_rationale": "Keep, emphatically. I won with one Pokemon alive out of six and lost five - four of them one-shot from full HP. This is the hardest encounter in the block so far by a wide margin and it is an ordinary ace trainer on a sea route. Nothing here needs a level in either direction; if anything this fight is the calibration reference for the rest of the block.",
+  "cooler": "Keep it exactly as it is. This is the best-designed encounter I have played in this block: it has one idea (everything is made of glass and hits like a truck), it commits to it completely, and the counterplay the dossier names - priority, spread damage, Fake Out, chipping Accelgor - is precisely what wins and nothing else does. Final Gambit at full HP is a genuinely startling mechanic for an ordinary route ace and it fired correctly. Two concrete suggestions, neither implemented. (1) The plan's opening paragraph describes a board that cannot occur: Kangaskhan and Pheromosa are slots 3 and 4, so Athena always leads Infernape and Accelgor. Either reorder to Kangaskhan and Pheromosa first, which would make the fight considerably scarier and match the write-up, or rewrite the plan to describe the Infernape/Accelgor opening it actually has. I would reorder - a Parental Bond Fake Out on turn 1 beside a 151-Speed attacker is the opening the dossier is proud of. (2) Accelgor's Bug Gem/Unburden line and Encore never appeared in five turns and probably never will, because Final Gambit at full HP is strictly the better first action and the AI correctly finds it. If the Unburden set is meant to be real, Final Gambit and Bug Gem want to be on different Pokemon.",
+  "legality_notes": "No illegal set, but one real authoring mismatch: the plan's 'first two useful turns' describes Mega Kangaskhan opening with Fake Out beside Pheromosa, and those are party slots 4 and 3, so that opening is unreachable. The team as authored always leads Infernape and Accelgor. Pheromosa as an Ultra Beast is legal at cap 76.",
+  "verification_limit": "No level change was made here, so nothing in this receipt is pending re-verification."
+}
