@@ -482,6 +482,18 @@ def check_strategy_coherence(branches: list[Branch]) -> list[str]:
             violations.append(f"{tag}: strategy PERISH_TRAP flagged but no member knows Perish Song / has Perish Body")
         if "TAILWIND" in flags and not any("TAILWIND" in mon.moves for mon in branch.mons):
             violations.append(f"{tag}: strategy TAILWIND flagged but no member knows Tailwind")
+        # Mega permission must point at the members that actually hold a Mega
+        # Stone (custom _Z stones included); Eviolite is not a stone.
+        holders = {
+            index for index, mon in enumerate(branch.mons)
+            if mon.item != "EVIOLITE" and (mon.item.endswith("ITE") or mon.item.endswith(("ITE_X", "ITE_Y", "ITE_Z")))
+        }
+        permitted = {index for index in range(len(branch.mons)) if branch.mega_slots and branch.mega_slots & (1 << index)}
+        if holders != permitted:
+            violations.append(
+                f"{tag}: mega_slots permits {sorted(i + 1 for i in permitted) or 'NONE'} "
+                f"but stone holders are {sorted(i + 1 for i in holders) or 'NONE'}"
+            )
 
         for kind, actor, move, recipient in branch.tactics:
             if kind != "ACTIVATE" or move == "NONE":
