@@ -263,6 +263,29 @@ NewMauville_Inside_EventScript_GeneratorOff::
 	releaseall
 	end
 
+NewMauville_Inside_EventScript_GeneratorIntake::
+	lockall
+	goto_if_lt VAR_NEW_MAUVILLE_STATE, 2, NewMauville_Inside_EventScript_GeneratorIntakeOn
+	goto_if_set FLAG_EC_MEGA_GIFT_EELEKTROSSITE, NewMauville_Inside_EventScript_GeneratorIntakeOff
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, NewMauville_Inside_EventScript_GeneratorIntakeOff
+	msgbox NewMauville_Inside_Text_StoneJammedInIntake, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_EELEKTROSSITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_EELEKTROSSITE
+	releaseall
+	end
+
+NewMauville_Inside_EventScript_GeneratorIntakeOn::
+	msgbox NewMauville_Inside_Text_GeneratorRadiatingHeat, MSGBOX_DEFAULT
+	releaseall
+	end
+
+NewMauville_Inside_EventScript_GeneratorIntakeOff::
+	msgbox NewMauville_Inside_Text_GeneratorQuietedDown, MSGBOX_DEFAULT
+	releaseall
+	end
+
 NewMauville_Inside_EventScript_Voltorb1::
 	lock
 	faceplayer
@@ -346,6 +369,11 @@ NewMauville_Inside_Text_GeneratorRadiatingHeat:
 
 NewMauville_Inside_Text_GeneratorQuietedDown:
 	.string "The generator quieted down.$"
+
+NewMauville_Inside_Text_StoneJammedInIntake:
+	.string "Something is jammed in the intake.\n"
+	.string "It's a stone shaped like an eel's\l"
+	.string "coil.$"
 
 NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped:
 	.string "{PLAYER} stepped on the switch.\p"

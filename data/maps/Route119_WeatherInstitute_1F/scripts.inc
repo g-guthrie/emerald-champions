@@ -47,7 +47,19 @@ Route119_WeatherInstitute_1F_EventScript_StudyingRain::
 	end
 
 Route119_WeatherInstitute_1F_EventScript_InstituteWorker2::
-	msgbox Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo, MSGBOX_DEFAULT
+	goto_if_set FLAG_EC_MEGA_GIFT_ABOMASITE, Route119_WeatherInstitute_1F_EventScript_InstituteWorker2End
+	goto_if_unset FLAG_EC_REPORT_C30_COMPLETE, Route119_WeatherInstitute_1F_EventScript_InstituteWorker2End
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, Route119_WeatherInstitute_1F_EventScript_InstituteWorker2End
+	msgbox Route119_WeatherInstitute_1F_Text_MegaGift_ABOMASITE, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_ABOMASITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_ABOMASITE
+Route119_WeatherInstitute_1F_EventScript_InstituteWorker2End::
+	release
 	end
 
 Route119_WeatherInstitute_1F_EventScript_Bed::
@@ -133,6 +145,15 @@ Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
 	.string "AQUA wanted to know what is\l"
 	.string "causing these violent changes in\l"
 	.string "weather.$"
+
+Route119_WeatherInstitute_1F_Text_MegaGift_ABOMASITE:
+	.string "Oh, one more thing from the survey.\p"
+	.string "Our snow readings turned up\n"
+	.string "something the instruments couldn't\l"
+	.string "explain.\p"
+	.string "Underneath it all was a stone that\n"
+	.string "hums when it snows. We don't need\l"
+	.string "it here. Take it with you.$"
 
 Route119_WeatherInstitute_1F_Text_TakeRestInBed:
 	.string "There's a bed…\n"

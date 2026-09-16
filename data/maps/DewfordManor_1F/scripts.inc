@@ -20,7 +20,8 @@ DewfordManor_1F_EventScript_RepeatDirection:
 	goto_if_unset FLAG_EC_MEADOW_SONG_PERFORMED, DewfordManor_1F_EventScript_FindWarden
 	call DewfordManor_1F_EventScript_RecordResearch
 	msgbox DewfordMeadow_Text_ChapterComplete, MSGBOX_DEFAULT
-	releaseall
+	goto_if_unset FLAG_EC_MEGA_GIFT_CHANDELURITE, DewfordManor_1F_EventScript_MegaGift_CHANDELURITE
+	goto DewfordManor_1F_EventScript_MegaGift_BANETTITE
 	end
 DewfordManor_1F_EventScript_FindWarden:
 	msgbox DewfordManor_1F_Text_FindWarden, MSGBOX_DEFAULT
@@ -49,3 +50,43 @@ DewfordManor_1F_EventScript_RecordResearch::
 	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_PrintMilestoneCapLine
 DewfordManor_1F_EventScript_ResearchRecorded:
 	return
+
+DewfordManor_1F_EventScript_MegaGift_CHANDELURITE::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordManor_1F_EventScript_EndVisit
+	msgbox DewfordManor_1F_Text_MegaGift_CHANDELURITE, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_CHANDELURITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_CHANDELURITE
+	releaseall
+	end
+
+DewfordManor_1F_EventScript_MegaGift_BANETTITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_BANETTITE, DewfordManor_1F_EventScript_EndVisit
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordManor_1F_EventScript_EndVisit
+	msgbox DewfordManor_1F_Text_MegaGift_BANETTITE, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_BANETTITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_BANETTITE
+	releaseall
+	end
+
+DewfordManor_1F_EventScript_EndVisit::
+	releaseall
+	end
+
+DewfordManor_1F_Text_MegaGift_CHANDELURITE:
+	.string "Oh, before you go…\n"
+	.string "This hung in the chandelier once.\p"
+	.string "It caught the candlelight strangely,\n"
+	.string "long before we knew what it was.\p"
+	.string "Take it. It belongs with someone\n"
+	.string "who still lights a room.$"
+
+DewfordManor_1F_Text_MegaGift_BANETTITE:
+	.string "One more thing, while you're here.\p"
+	.string "We found this stitched inside an\n"
+	.string "old doll in the nursery.\p"
+	.string "Whoever hid it there wanted it kept,\n"
+	.string "not found. Now it's yours.$"

@@ -31,6 +31,7 @@ STATIC_GATES = (
     ("authored Circuit projection", (PYTHON, "scripts/generate_showdown_champions_circuit.py", "--check")),
     ("wild table integrity", (PYTHON, "scripts/verify_wild_distribution.py")),
     ("one acquisition source per Mega Stone", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
+    ("ground Mega Stone sparkles on authored tiles", (PYTHON, "scripts/check_stone_placement.py")),
 )
 
 # Guide/README/docs drift against source (roster census, economy prices, caps,

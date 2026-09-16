@@ -74,6 +74,10 @@ Open design items: none blocking. Mew's authored set uses Rest (Soft-Boiled is
 not in its learnset). 31 Mega Stones show "unmapped" player family access in
 the register under its current rules (regional starters, gift-only legendaries).
 
+## Ground Mega Stone placement review — September 15, 2026
+
+All 71 ground sparkles were rendered natively with the player one tile below each (`scripts/audit/stone_sweep.py`; the headless map-sweep fixture now carries a Mega Ring so stone actors spawn). Compared against Inclement Emerald's authored pickup tiles (snapshot in `data/emerald_champions/authored_pickup_tiles.json`): 51 sat on authored tiles, 20 on tiles an agent invented. Rule adopted and enforced by `scripts/check_stone_placement.py`: a sparkle needs an authored or hand-approved tile, no second stone in the same screen, and no item ball within three tiles; anything else becomes a scripted gift. Outcome: 55 sparkles remain, 16 stones became Ring-gated, once-only, Bag-full-retryable gifts (list in the guide's Mega paragraph and the generated register), Sharpedonite moved under an umbrella, Garchompite onto the authored Stardust tile (Stardust retired), Route 117 Quick Ball and manor Dusk Ball retired. Altarianite stays at (3,113): the tile to its left is a solid border wall. The book's generated section could not be re-synced this round because the other session's uncommitted `trainers.party` disagrees with its authored offsets (`export_trainer_catalogue.native_vs_authoring` assertion on TRAINER_BRENDAN_ROUTE_103_MUDKIP); rerun `scripts/sync_game_book.py --write` after their commit.
+
 ## Cohesion audit — September 15, 2026 (twelve read-only Sonnet auditors)
 
 Reports and JSON findings: `work/cohesion-audit/01..12-*.md/json` (ignored dir;

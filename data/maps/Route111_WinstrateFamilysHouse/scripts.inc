@@ -18,11 +18,20 @@ Route111_WinstrateFamilysHouse_EventScript_Victoria::
 	giveitem ITEM_RAZZ_BERRY, 5
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_WINSTRATE_GARDEN_BERRIES
-	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
+	goto Route111_WinstrateFamilysHouse_EventScript_MegaGift_CHARIZARDITE_Y
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_ReceivedBerries::
 	msgbox Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles, MSGBOX_DEFAULT
+Route111_WinstrateFamilysHouse_EventScript_MegaGift_CHARIZARDITE_Y::
+	goto_if_not_defeated TRAINER_VICKY, Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
+	goto_if_set FLAG_EC_MEGA_GIFT_CHARIZARDITE_Y, Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
+	msgbox Route111_WinstrateFamilysHouse_Text_MegaGift_CHARIZARDITE_Y, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_CHARIZARDITE_Y
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_CHARIZARDITE_Y
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
@@ -73,6 +82,13 @@ Route111_WinstrateFamilysHouse_Text_LikeYouToHaveBerries:
 Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
 	.string "Plant those berries or save them for\n"
 	.string "the BERRY MASTER on ROUTE 123.$"
+
+Route111_WinstrateFamilysHouse_Text_MegaGift_CHARIZARDITE_Y:
+	.string "The desert winds bring us strange\n"
+	.string "things, baked hard in the sun.\p"
+	.string "Take this stone. It soaked up all\n"
+	.string "that heat. Your CHARIZARD might put\l"
+	.string "it to good use.$"
 
 Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
 	.string "Mommy is stronger than Daddy.\p"

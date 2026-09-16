@@ -150,7 +150,7 @@ Nurse: "Return through the north exit of Ashen Woods into Ember Path. Follow the
 C25 Moltres's disturbed roost. Tremor, hot air and cry precede the encounter; win or catch (authored set). No cap change.
 Post-encounter and nurse: "Go to the Route 111 desert with your Go-Goggles. Enter Mirage Tower and take the basement passage into Sandstrewn Ruins. Find the archaeologist and explore the lower chamber they identify. This is Sandstrewn Ruins, not the separate Regirock cave."
 
-C26 The desert safeguards. The archaeologist stands on dry ground at the tower-entry end; the lowest chamber and his report are reachable without Surf and must precede either summit fossil. Taking a fossil collapses the tower and seals every ruins entrance forever. Nothing unique is lost: Garchompite, Flygonite and Golurkite sit in the open desert, Zygarde's discovery in the Desert Underpass, Stakataka at the elevated ruins, and every family below has an open source (scripts/verify_wild_open_sources.py guards this). The sealed area keeps only the Sail, Armor, Plume, Skull, Cover, Helix, Dome and Jaw Fossils, the Odd Keystone and the Protector; Chest-form Gimmighoul also lives at the elevated ruins. The repeatable warning and the final YES/NO name exactly those finds. The unchosen summit fossil falls to the Desert Underpass pickup. No cap change.
+C26 The desert safeguards. The archaeologist stands on dry ground at the tower-entry end; the lowest chamber and his report are reachable without Surf and must precede either summit fossil. Taking a fossil collapses the tower and seals every ruins entrance forever. Nothing unique is lost: Garchompite sits in the open desert, the elevated-ruins archaeologist hands over Flygonite, the Fossil Maniac's brother hands over Golurkite once the Underpass has been walked, Zygarde's discovery is in the Desert Underpass, Stakataka at the elevated ruins, and every family below has an open source (scripts/verify_wild_open_sources.py guards this). The sealed area keeps only the Sail, Armor, Plume, Skull, Cover, Helix, Dome and Jaw Fossils, the Odd Keystone and the Protector; Chest-form Gimmighoul also lives at the elevated ruins. The repeatable warning and the final YES/NO name exactly those finds. The unchosen summit fossil falls to the Desert Underpass pickup. No cap change.
 Archaeologist: "After exploring the lowest chamber, return to me at the tower entrance. Then challenge Norman in Petalburg Gym for Surf. You may return with Surf for optional finds before taking either summit fossil. Collect the fossils and finds you want before taking either summit fossil; the ruins' Pokémon also live in the open desert."
 
 C27 Norman and the crossing east. Balance Badge, Surf, cap 48. Wally's father names Route102 Lotad as a Surf partner and repeats the New Mauville direction until Wattson accepts the findings.
@@ -270,7 +270,7 @@ DUPLICATES AND DELIVERY
 An already-owned finite gift (a reusable device or a Mega Stone) pays a one-time cash alternative equal to the item's price (3000); nothing else is refunded, and no substitute can become a loop. Full Bag or PC storage leaves the delivery pending with the original receipt and never requires the fight again; any Center nurse retries pending papers. An NPC never promises a reward before checking eligibility, and a retired item never appears in a shop, prize menu, Pickup table or gift message (the release gate checks this).
 
 MEGA STONES
-No Mega Stone is discoverable before Steven grants the Mega Ring with Aerodactylite after Brawly; ground-stone actors and gift wrappers fall through until the Ring is carried. Each of the 99 stones has exactly one world source and at least one trainer holder; the MEGA REGISTER pairs each with the earliest family access. Roxanne's Old Amber, Devon's free revival and Steven's Aerodactylite are the first concrete pairing. A few later opponents may gift the stone they showcase after victory as one authored finite reward; never every Mega trainer. Trainer holding is separate from the player's source. Garchompite lives in the Route111 desert, Flygonite at the elevated ruins, Golurkite in the Desert Underpass, Lucarionite on Route116, Pidgeotite with Mr. Stone after the Ring.
+No Mega Stone is discoverable before Steven grants the Mega Ring with Aerodactylite after Brawly; ground-stone actors and gift wrappers fall through until the Ring is carried. Each of the 99 stones has exactly one world source and at least one trainer holder; the MEGA REGISTER pairs each with the earliest family access. Roxanne's Old Amber, Devon's free revival and Steven's Aerodactylite are the first concrete pairing. A few later opponents may gift the stone they showcase after victory as one authored finite reward; never every Mega trainer. Trainer holding is separate from the player's source. Ground sparkles sit only on pickup tiles Inclement Emerald's designer authored, never two in one screen and never within three tiles of an item ball (scripts/check_stone_placement.py guards this); every stone that would have needed an invented tile is a scripted gift instead. The scripted gifts: Charizardite X from the empty cradle of the Mt. Chimney meteorite machine, Charizardite Y from the Winstrate mother after all four family battles, Emboarite from the woman in the Lavaridge hot spring after Flannery, Eelektrossite jammed in the New Mauville generator intake after the shutdown, Delphoxite as the Trick Master's final prize, Golurkite from the Fossil Maniac's brother, Flygonite from the elevated-ruins archaeologist, Latiasite and Latiosite together when the Southern Island encounter resolves, Mewtwonite Y from a Space Center scientist after the C42 report, Heatranite from the Magma Stone splitting when Heatran resolves, Tatsugirinite lodged in the stolen submarine's intake or from Captain Stern once it is recovered, Chandelurite and then Banettite from the Dewford Manor historian after the C14 report, Abomasite from a Weather Institute researcher after the C30 survey, and Froslassite from the Mt. Pyre summit elder after the orb story. Every gift checks for the Ring, falls through to ordinary dialogue without it, and can be claimed on a later visit if the Bag was full. Garchompite lives in the Route111 desert, Lucarionite on Route116, Pidgeotite with Mr. Stone after the Ring.
 
 COLLECTIONS (optional, real rewards, never gates)
 Soot counts lifetime ash without spending: 100 gives Linking Cord if missing (else the 3,000 alternative), 250 unlocks the Marshadow discovery, 500 gives Houndoominite (else the duplicate alternative). Glassmakers explain progress and sell glass furniture for money.
@@ -309,22 +309,22 @@ A. EXACT TRAINER TEAMS AND PLANS
 Offsets apply to the live cap; Easy −2, Medium0, Hard+2. First two slots lead in single-owner doubles; multi battles use one per owner.
 Defaults: IVs31/31/31/31/31/31 and friendship255 unless printed. Base stats are species values, not level-adjusted or item/ability-modified battle stats.
 Hoenn rival entries are seed parties; non-Hoenn substitutions use the regional resolver described in section B. Procedural Circuit/Tent teams are outside this reference by user request.
-E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP | Route103 | rival | B0001(+3),B0002(+1),B0003(+2),B0004(+1)
+E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP | Route103 | rival | B0001(+3),B0002(+2),B0003(+2),B0004(+2)
   Strategy SETUP; traits none; Mega slots none
   Plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-E0001 TRAINER_BRENDAN_ROUTE_103_TORCHIC | Route103 | rival | B0005(+1),B0002(+1),B0003(+2),B0004(+1)
+E0001 TRAINER_BRENDAN_ROUTE_103_TORCHIC | Route103 | rival | B0005(+1),B0002(+2),B0003(+2),B0004(+2)
   Strategy none; traits none; Mega slots none
   Plan: same as TRAINER_BRENDAN_ROUTE_103_MUDKIP
-E0001 TRAINER_BRENDAN_ROUTE_103_TREECKO | Route103 | rival | B0006(+1),B0002(+1),B0003(+2),B0004(+1)
+E0001 TRAINER_BRENDAN_ROUTE_103_TREECKO | Route103 | rival | B0006(+1),B0002(+2),B0003(+2),B0004(+2)
   Strategy none; traits none; Mega slots none
   Plan: same as TRAINER_BRENDAN_ROUTE_103_MUDKIP
-E0001 TRAINER_MAY_ROUTE_103_MUDKIP | Route103 | rival | B0001(+3),B0002(+1),B0003(+2),B0004(+1)
+E0001 TRAINER_MAY_ROUTE_103_MUDKIP | Route103 | rival | B0001(+3),B0002(+2),B0003(+2),B0004(+2)
   Strategy SETUP; traits none; Mega slots none
   Plan: same as TRAINER_BRENDAN_ROUTE_103_MUDKIP
-E0001 TRAINER_MAY_ROUTE_103_TORCHIC | Route103 | rival | B0005(+1),B0002(+1),B0003(+2),B0004(+1)
+E0001 TRAINER_MAY_ROUTE_103_TORCHIC | Route103 | rival | B0005(+1),B0002(+2),B0003(+2),B0004(+2)
   Strategy none; traits none; Mega slots none
   Plan: same as TRAINER_BRENDAN_ROUTE_103_MUDKIP
-E0001 TRAINER_MAY_ROUTE_103_TREECKO | Route103 | rival | B0006(+1),B0002(+1),B0003(+2),B0004(+1)
+E0001 TRAINER_MAY_ROUTE_103_TREECKO | Route103 | rival | B0006(+1),B0002(+2),B0003(+2),B0004(+2)
   Strategy none; traits none; Mega slots none
   Plan: same as TRAINER_BRENDAN_ROUTE_103_MUDKIP
 E0002 TRAINER_CALVIN_1 | Route102 | regular | B0007(+3),B0008(+1),B0009(+3),B0010(+1)
@@ -111129,10 +111129,10 @@ NATIVE TEXT SOURCE src/emerald_champions_headless.c
   line 1096: SPARK
   line 1097: ARIA
   line 1098: ROSE
-  line 3289: WWWWWWW
-  line 3314:
-  line 4020: WWWWWWW
-  line 4049: WWWWWWW
+  line 3295: WWWWWWW
+  line 3320:
+  line 4026: WWWWWWW
+  line 4055: WWWWWWW
   literal candidate line 348: Headless key pocket could not be filled
 
 NATIVE TEXT SOURCE src/ereader_helpers.c
@@ -129238,5 +129238,5 @@ Additional adopted retirements: E0051 TRAINER_GRUNT_MUSEUM_2 -- remove the secon
 REFERENCE COVERAGE
 Authoring: 368 trainer variants/1753 slots; 1577 unique builds. Map definitions:540. Complete economy census and unresolved conditions are in C6; wild method tables:381; configured evolution rows:496.
 Known limits: this is not a full transcript, runtime access/necessity proof, stock-condition simulator or battle acceptance. Native providers and dynamic regional choices must be followed through their source owner. No claim that prose/code drift is impossible.
-Source SHA256: 44ad9bee1053d99c2198435ab79729726c4011e54e73d198835876bc8b742047
+Source SHA256: 5420a96767789237e73e1bc861239d5cbeaff1035a29f4cd40d195719e2f11a2
 === END GENERATED GAME REFERENCE ===

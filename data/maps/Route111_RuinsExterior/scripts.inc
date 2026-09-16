@@ -20,6 +20,7 @@ Route111_RuinsExterior_EventScript_ArrivalEnd::
 Route111_RuinsExterior_EventScript_Archaeologist::
 	lockall
 	faceplayer
+	call Route111_RuinsExterior_EventScript_CheckMegaGifts
 	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route111_RuinsExterior_EventScript_SurveyDone
 	call EC_RequireGenerator
 	goto_if_unset FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route111_RuinsExterior_EventScript_Briefing
@@ -109,6 +110,19 @@ Route111_RuinsExterior_EventScript_Briefing::
 	releaseall
 	end
 
+@ Flygonite: unconditional besides having the Mega Ring, so it's reachable
+@ whether or not the player ever collapses the tower.
+Route111_RuinsExterior_EventScript_CheckMegaGifts::
+	goto_if_set FLAG_EC_MEGA_GIFT_FLYGONITE, Route111_RuinsExterior_EventScript_CheckMegaGifts_Done
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, Route111_RuinsExterior_EventScript_CheckMegaGifts_Done
+	msgbox Route111_RuinsExterior_Text_MegaGift_FLYGONITE, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_FLYGONITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_FLYGONITE
+Route111_RuinsExterior_EventScript_CheckMegaGifts_Done::
+	return
+
 Route111_RuinsExterior_Text_Archaeologist:
 	.string "These marks follow the storms,\n"
 	.string "but our instruments only show\l"
@@ -160,6 +174,12 @@ Route111_RuinsExterior_Text_Briefing:
 	.string "WEATHER INSTITUTE on ROUTE 119.\p"
 	.string "Their team can arrange a survey\n"
 	.string "when they're ready.$"
+
+Route111_RuinsExterior_Text_MegaGift_FLYGONITE:
+	.string "The sand at the tower's foot\n"
+	.string "gave this up.\p"
+	.string "No good to an archaeologist.\n"
+	.string "You should have it instead.$"
 
 Route111_RuinsExterior_Text_Arrival:
 	.string "The flier settles beside the ruins.\p"

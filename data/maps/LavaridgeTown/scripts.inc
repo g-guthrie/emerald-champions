@@ -308,11 +308,21 @@ LavaridgeTown_EventScript_EggWoman::
 	message LavaridgeTown_Text_ReceivedTheEgg
 	waitfanfare
 	giveegg SPECIES_WYNAUT
-	release
+	goto LavaridgeTown_EventScript_MegaGift_EMBOARITE
 	end
 
 LavaridgeTown_EventScript_ReceivedEgg::
 	msgbox LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare, MSGBOX_DEFAULT
+LavaridgeTown_EventScript_MegaGift_EMBOARITE::
+	goto_if_unset FLAG_BADGE04_GET, LavaridgeTown_EventScript_EggWomanRelease
+	goto_if_set FLAG_EC_MEGA_GIFT_EMBOARITE, LavaridgeTown_EventScript_EggWomanRelease
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_EggWomanRelease
+	msgbox LavaridgeTown_Text_MegaGift_EMBOARITE, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_EMBOARITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_EMBOARITE
+LavaridgeTown_EventScript_EggWomanRelease::
 	release
 	end
 
@@ -397,6 +407,12 @@ LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare:
 	.string "Every so often, an EGG will be found at\n"
 	.string "the POKéMON DAY CARE.\p"
 	.string "Or at least that's how the rumor goes.$"
+
+LavaridgeTown_Text_MegaGift_EMBOARITE:
+	.string "This old stone has soaked in the\n"
+	.string "spring for years and years.\p"
+	.string "Feel it. It comes out hot to the\n"
+	.string "touch. Take it, won't you?$"
 
 LavaridgeTown_Text_HotSpringsNeverRunDry:
 	.string "We draw as much hot water as we need,\n"

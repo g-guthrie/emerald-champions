@@ -85,6 +85,13 @@ MossdeepCity_SpaceCenter_1F_EventScript_Scientist::
 	lock
 	faceplayer
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma
+	goto_if_unset FLAG_EC_REPORT_C42_COMPLETE, MossdeepCity_SpaceCenter_1F_EventScript_ScientistFlavor
+	goto_if_set FLAG_EC_MEGA_GIFT_MEWTWONITE_Y, MossdeepCity_SpaceCenter_1F_EventScript_ScientistFlavor
+	msgbox MossdeepCity_SpaceCenter_1F_Text_MegaGift_MEWTWONITE_Y, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_MEWTWONITE_Y
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_MEWTWONITE_Y
+MossdeepCity_SpaceCenter_1F_EventScript_ScientistFlavor::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection, MSGBOX_DEFAULT
 	release
 	end
@@ -289,6 +296,13 @@ MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber:
 	.string "MAGMA arrived.\p"
 	.string "I can't believe they're trying to\n"
 	.string "steal our fuel!$"
+
+MossdeepCity_SpaceCenter_1F_Text_MegaGift_MEWTWONITE_Y:
+	.string "The meteorite readings gave us\n"
+	.string "more than data.\p"
+	.string "We synthesized this from a\n"
+	.string "sample. Perfect isn't only for\l"
+	.string "rockets. Take it.$"
 
 MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection:
 	.string "A rocket launch demands perfection.\n"

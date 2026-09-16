@@ -291,6 +291,7 @@ SlateportCity_Harbor_EventScript_FatMan::
 SlateportCity_Harbor_EventScript_CaptStern::
 	lock
 	faceplayer
+	call SlateportCity_Harbor_EventScript_CheckMegaGiftTatsugirinite
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_Harbor_EventScript_CaptSternFerryOrScannerComment
 	goto_if_set FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE, SlateportCity_Harbor_EventScript_NeedDive
 	goto_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, SlateportCity_Harbor_EventScript_TeamAquaLeftNeedDive
@@ -317,6 +318,16 @@ SlateportCity_Harbor_EventScript_NeedDive::
 	msgbox SlateportCity_Harbor_Text_NeedDiveToCatchSub, MSGBOX_DEFAULT
 	release
 	end
+
+@ Fallback: only fires once the submarine story at SEAFLOOR CAVERN is fully
+@ over, and only if the player never examined the hull while it was there.
+SlateportCity_Harbor_EventScript_CheckMegaGiftTatsugirinite::
+	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SlateportCity_Harbor_EventScript_CheckMegaGiftTatsugirinite_Done
+	goto_if_set FLAG_EC_MEGA_GIFT_TATSUGIRINITE, SlateportCity_Harbor_EventScript_CheckMegaGiftTatsugirinite_Done
+	msgbox SlateportCity_Harbor_Text_FoundInIntake, MSGBOX_DEFAULT
+	call Underwater_SeafloorCavern_EventScript_MegaGift_TATSUGIRINITE
+SlateportCity_Harbor_EventScript_CheckMegaGiftTatsugirinite_Done::
+	return
 
 SlateportCity_Harbor_EventScript_CaptSternFerryOrScannerComment::
 	goto_if_set FLAG_EXCHANGED_SCANNER, SlateportCity_Harbor_EventScript_TradedScanner
@@ -556,6 +567,12 @@ SlateportCity_Harbor_Text_TeamAquaLeftNeedDive:
 	.string "Travel to MOSSDEEP. Its divers and\n"
 	.string "the SPACE CENTER may be able to\l"
 	.string "help.$"
+SlateportCity_Harbor_Text_FoundInIntake:
+	.string "CAPT. STERN: Oh, one more thing.\p"
+	.string "We found this jammed in the\n"
+	.string "intake when we recovered the\l"
+	.string "sub. Here, you should have it.$"
+
 SlateportCity_Harbor_Text_NeedDiveToCatchSub:
 	.string "CAPT. STERN: To follow the\n"
 	.string "submarine, you'll need DIVE\l"

@@ -354,19 +354,6 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 12,
-      "y": 54,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_STARDUST",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_111_STARDUST"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 3,
       "y": 113,
@@ -670,8 +657,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
-      "x": 21,
-      "y": 57,
+      "x": 12,
+      "y": 54,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,

@@ -5,7 +5,7 @@ ScorchedSlab_HeatransRoom_EventScript_MagmaStone::
 	call EC_RequireGroudon
 	lock
 	specialvar VAR_RESULT, GetHeatranDiscoveryState
-	goto_if_ne VAR_RESULT, 0, ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd
+	goto_if_ne VAR_RESULT, 0, ScorchedSlab_HeatransRoom_EventScript_MagmaStoneRetryGift
 	setvar VAR_0x8004, ITEM_MAGMA_STONE
 	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone
@@ -33,6 +33,21 @@ ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone::
 ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd::
 	releaseall
 	end
+
+@ Repeatable: stepping back onto the altar after HEATRAN is resolved retries
+@ the gift if a full Bag stopped it in ScorchedSlab_HeatransRoom_EventScript_Report.
+ScorchedSlab_HeatransRoom_EventScript_MagmaStoneRetryGift::
+	call ScorchedSlab_HeatransRoom_EventScript_MegaGift_HEATRANITE
+	goto ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd
+	end
+
+ScorchedSlab_HeatransRoom_EventScript_MegaGift_HEATRANITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_HEATRANITE, ScorchedSlab_HeatransRoom_EventScript_MegaGift_HEATRANITE_Done
+	giveuniqueitem ITEM_HEATRANITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_HEATRANITE
+ScorchedSlab_HeatransRoom_EventScript_MegaGift_HEATRANITE_Done::
+	return
 
 ScorchedSlab_HeatransRoom_Text_PlaceMagmaStone:
 	.string "The MAGMA STONE is reacting\n"
@@ -74,6 +89,8 @@ ScorchedSlab_HeatransRoom_EventScript_Report::
 	setflag FLAG_EC_RESOLVED_HEATRAN
 	completemilestone FLAG_EC_REPORT_C39_COMPLETE
 	msgbox ScorchedSlab_HeatransRoom_Text_StoneCools, MSGBOX_DEFAULT
+	msgbox ScorchedSlab_HeatransRoom_Text_MagmaStoneSplit, MSGBOX_DEFAULT
+	call ScorchedSlab_HeatransRoom_EventScript_MegaGift_HEATRANITE
 	buffermilestonetext FLAG_EC_REPORT_C39_COMPLETE
 	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
 	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_PrintMilestoneCapLine
@@ -92,6 +109,10 @@ ScorchedSlab_HeatransRoom_Text_StoneCools:
 	.string "Return to CAPT. STERN at the\n"
 	.string "harbor in northeast SLATEPORT.\l"
 	.string "His submarine is AQUA's next target.$"
+
+ScorchedSlab_HeatransRoom_Text_MagmaStoneSplit:
+	.string "The MAGMA STONE cooled and\n"
+	.string "split. Inside was a HEATRANITE.$"
 
 ScorchedSlab_HeatransRoom_Text_MissingStone:
 	.string "The chamber answers a MAGMA STONE.\n"

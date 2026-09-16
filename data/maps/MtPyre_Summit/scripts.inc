@@ -300,6 +300,7 @@ MtPyre_Summit_EventScript_OldLady::
 	goto_if_eq VAR_MT_PYRE_STATE, 1, MtPyre_Summit_EventScript_RetryMagmaEmblem
 
 MtPyre_Summit_EventScript_OldLadyAfterEmblem::
+	call MtPyre_Summit_EventScript_MegaGift_FROSLASSITE
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	call_if_ge VAR_MT_PYRE_STATE, 3, MtPyre_Summit_EventScript_OldLadyOrbsReturned
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_OldLadyLegendariesAwake
@@ -330,6 +331,18 @@ MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned::
 	msgbox MtPyre_Summit_Text_SuperAncientPokemonTaughtUs, MSGBOX_DEFAULT
 	release
 	end
+
+MtPyre_Summit_EventScript_MegaGift_FROSLASSITE::
+	goto_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_MegaGift_FROSLASSITE_Skip
+	goto_if_set FLAG_EC_MEGA_GIFT_FROSLASSITE, MtPyre_Summit_EventScript_MegaGift_FROSLASSITE_Skip
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, MtPyre_Summit_EventScript_MegaGift_FROSLASSITE_Skip
+	msgbox MtPyre_Summit_Text_MegaGift_FROSLASSITE, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_FROSLASSITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_FROSLASSITE
+MtPyre_Summit_EventScript_MegaGift_FROSLASSITE_Skip::
+	return
 
 MtPyre_Summit_EventScript_ArchieMaxieTrigger0::
 	lockall
@@ -721,6 +734,16 @@ MtPyre_Summit_Text_SuperAncientPokemonTaughtUs:
 	.string "is alive…\p"
 	.string "The super-ancient POKéMON have\n"
 	.string "taught us that…$"
+
+MtPyre_Summit_Text_MegaGift_FROSLASSITE:
+	.string "Long before you climbed here, a young\n"
+	.string "woman came up chasing a snowstorm\l"
+	.string "and never came back down.\p"
+	.string "They found this stone near where she\n"
+	.string "was last seen, cold as the drifts\l"
+	.string "around it.\p"
+	.string "It shouldn't sit still up here.\n"
+	.string "Take it with you.$"
 
 MtPyre_Summit_Text_WillYouHearOutMyTale:
 	.string "MT. PYRE is where we calm the spirits\n"

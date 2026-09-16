@@ -88,6 +88,9 @@ SouthernIsland_Interior_EventScript_Lati::
 
 SouthernIsland_Interior_EventScript_LatiCaught::
 	setflag FLAG_EC_RESOLVED_SOUTHERN_LATI
+	msgbox SouthernIsland_Interior_Text_TwoStonesRest, MSGBOX_DEFAULT
+	call SouthernIsland_Interior_EventScript_MegaGift_LATIASITE
+	call SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE
 	msgbox SouthernIsland_Exterior_Text_ContinueJourney, MSGBOX_DEFAULT
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall
@@ -95,6 +98,9 @@ SouthernIsland_Interior_EventScript_LatiCaught::
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
 	setflag FLAG_EC_RESOLVED_SOUTHERN_LATI
+	msgbox SouthernIsland_Interior_Text_TwoStonesRest, MSGBOX_DEFAULT
+	call SouthernIsland_Interior_EventScript_MegaGift_LATIASITE
+	call SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE
 	msgbox SouthernIsland_Exterior_Text_ContinueJourney, MSGBOX_DEFAULT
 	goto Common_EventScript_LegendaryResting
 	end
@@ -104,10 +110,32 @@ SouthernIsland_Interior_EventScript_RanFromLati::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+@ Repeatable: also how either stone is retried after a full Bag, since it
+@ is reached every later visit once the encounter is resolved.
 SouthernIsland_Interior_EventScript_Sign::
+	goto_if_unset FLAG_EC_RESOLVED_SOUTHERN_LATI, SouthernIsland_Interior_EventScript_Sign_ShowText
+	call SouthernIsland_Interior_EventScript_MegaGift_LATIASITE
+	call SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE
+SouthernIsland_Interior_EventScript_Sign_ShowText::
 	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
 	releaseall
 	end
+
+SouthernIsland_Interior_EventScript_MegaGift_LATIASITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_LATIASITE, SouthernIsland_Interior_EventScript_MegaGift_LATIASITE_Done
+	giveuniqueitem ITEM_LATIASITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_LATIASITE
+SouthernIsland_Interior_EventScript_MegaGift_LATIASITE_Done::
+	return
+
+SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_LATIOSITE, SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE_Done
+	giveuniqueitem ITEM_LATIOSITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_LATIOSITE
+SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE_Done::
+	return
 
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
 	setvar VAR_0x8004, SPECIES_LATIOS
@@ -154,3 +182,7 @@ SouthernIsland_Interior_Movement_LatiApproach:
 	walk_down
 	walk_down
 	step_end
+
+SouthernIsland_Interior_Text_TwoStonesRest:
+	.string "Two stones rest where the pair\n"
+	.string "slept.$"

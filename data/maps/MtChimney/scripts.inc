@@ -450,7 +450,7 @@ MtChimney_EventScript_AquaPoochyena::
 MtChimney_EventScript_MeteoriteMachine::
 	lockall
 	goto_if_unset FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MtChimney_EventScript_MachineOn
-	goto_if_set FLAG_RECEIVED_METEORITE, MtChimney_EventScript_MachineOff
+	goto_if_set FLAG_RECEIVED_METEORITE, MtChimney_EventScript_MachineOffOrResidue
 	msgbox MtChimney_Text_RemoveTheMeteorite, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MtChimney_EventScript_LeaveMeteoriteAlone
 	msgbox MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT
@@ -462,6 +462,17 @@ MtChimney_EventScript_MeteoriteMachine::
 
 MtChimney_EventScript_LeaveMeteoriteAlone::
 	msgbox MtChimney_Text_PlayerLeftMeteorite, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MtChimney_EventScript_MachineOffOrResidue::
+	goto_if_set FLAG_EC_MEGA_GIFT_CHARIZARDITE_X, MtChimney_EventScript_MachineOff
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, MtChimney_EventScript_MachineOff
+	msgbox MtChimney_Text_ResidueInCradle, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_CHARIZARDITE_X
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_CHARIZARDITE_X
 	releaseall
 	end
 
@@ -706,6 +717,10 @@ MtChimney_Text_PlayerLeftMeteorite:
 MtChimney_Text_MachineMakesNoResponse:
 	.string "This mysterious machine…\n"
 	.string "It makes no response whatsoever.$"
+
+MtChimney_Text_ResidueInCradle:
+	.string "A stone glows blue-white inside\n"
+	.string "the empty cradle.$"
 
 MtChimney_Text_RouteSign:
 	.string "{DOWN_ARROW} JAGGED PASS\n"

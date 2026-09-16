@@ -307,6 +307,8 @@ Route110_TrickHouseEntrance_EventScript_MeetTrickMaster::
 	return
 
 Route110_TrickHouseEntrance_EventScript_StillMakingPuzzle::
+	call_if_ge VAR_TRICK_HOUSE_LEVEL, 7, Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE
+Route110_TrickHouseEntrance_EventScript_StillMakingPuzzleText::
 	msgbox Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer
@@ -384,6 +386,8 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
+	call Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE
+Route110_TrickHouseEntrance_EventScript_GivePuzzle7RewardItem::
 	giveitem ITEM_MAX_ETHER
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
@@ -777,6 +781,24 @@ Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward:
 Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward:
 	.string "Hah?\n"
 	.string "Did you not come to claim your reward?$"
+
+@ Shared Delphoxite gift: the final Trick House prize, Ring-gated and retryable.
+Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_DELPHOXITE, Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE_Done
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE_Done
+	msgbox Route110_TrickHouseEntrance_Text_MegaGift_DELPHOXITE, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_DELPHOXITE
+	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE_Done
+	setflag FLAG_EC_MEGA_GIFT_DELPHOXITE
+Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE_Done::
+	return
+
+Route110_TrickHouseEntrance_Text_MegaGift_DELPHOXITE:
+	.string "Hee hee hee! Here's a little extra\n"
+	.string "for besting my final puzzle.\p"
+	.string "This stone does tricks with fire.\n"
+	.string "See what it does for your DELPHOX!$"
 
 Route110_TrickHouseEntrance_Text_MechadollWhichTent:
 	.string "MECHADOLL 5 I AM!\n"

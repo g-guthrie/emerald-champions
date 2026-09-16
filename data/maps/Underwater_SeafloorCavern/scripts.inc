@@ -37,8 +37,26 @@ Underwater_SeafloorCavern_OnResume:
 	end
 
 Underwater_SeafloorCavern_EventScript_CheckStolenSub::
+	lock
 	msgbox Underwater_SeafloorCavern_Text_SubExplorer1, MSGBOX_SIGN
+	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, Underwater_SeafloorCavern_EventScript_CheckStolenSub_Done
+	goto_if_set FLAG_EC_MEGA_GIFT_TATSUGIRINITE, Underwater_SeafloorCavern_EventScript_CheckStolenSub_Done
+	msgbox Underwater_SeafloorCavern_Text_StoneInIntake, MSGBOX_DEFAULT
+	call Underwater_SeafloorCavern_EventScript_MegaGift_TATSUGIRINITE
+Underwater_SeafloorCavern_EventScript_CheckStolenSub_Done::
+	release
 	end
+
+@ Shared giver: also called from SlateportCity_Harbor's Capt. Stern as the
+@ fallback once the submarine story is over, if the player never examined
+@ the hull while it was still here.
+Underwater_SeafloorCavern_EventScript_MegaGift_TATSUGIRINITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_TATSUGIRINITE, Underwater_SeafloorCavern_EventScript_MegaGift_TATSUGIRINITE_Done
+	giveuniqueitem ITEM_TATSUGIRINITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_TATSUGIRINITE
+Underwater_SeafloorCavern_EventScript_MegaGift_TATSUGIRINITE_Done::
+	return
 
 Underwater_SeafloorCavern_Text_SubExplorer1:
 	.string "“SUBMARINE EXPLORER 1” is painted\n"
@@ -47,4 +65,9 @@ Underwater_SeafloorCavern_Text_SubExplorer1:
 	.string "stole in SLATEPORT!\p"
 	.string "TEAM AQUA must have gone\n"
 	.string "ashore here.$"
+
+Underwater_SeafloorCavern_Text_StoneInIntake:
+	.string "A small stone is lodged in the\n"
+	.string "intake, loose enough to pull\l"
+	.string "free.$"
 
