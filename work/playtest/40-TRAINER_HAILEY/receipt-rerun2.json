@@ -1,0 +1,112 @@
+{
+  "play_order": 40,
+  "e_group": "E0042",
+  "trainer": "TRAINER_HAILEY",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass 2 (agent R6). The rerun-1 pass raised Flaaffy 2->3 and Wartortle 2->3 off a second consecutive zero-faint clear. This is the one confirming run of those levels on the rebuilt ROM (work/agent-battle-build), which also carries the latest AI and now enforces trapping abilities on player switches.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Flaaffy resolved at L25 and Wartortle at L25 (both L24 in the rerun-1 pass). Marill L27 and Palpitoad L25 unchanged. cap=24, difficulty=medium asserted by the driver.",
+  "resolved_opponent_levels": {"FLAAFFY": 25, "WARTORTLE": 25, "MARILL": 27, "PALPITOAD": 25},
+  "party_manifest": "work/playtest/40-TRAINER_HAILEY/party.json",
+  "party_chronology_note": "Reused unchanged: the cap-24 core (Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana), every gate <= 24 in work/reference-pools/pool-24.json, all source maps at or before Route 109. One reachable legend (Enamorus) declared in the manifest; no Mega used. Chronology-legal for this battle and identical to the party the two earlier passes used, which is what makes the three passes comparable.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/40-TRAINER_HAILEY/r2",
+      "seed": 46,
+      "outcome": "won",
+      "turns": 5,
+      "driver_turn_counter": 4,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames": [56, 49, 49, 52, 26, 26],
+      "ai_decision_seconds_max": 0.938,
+      "narrative": "The levels changed this fight materially. T1 Follow Me plus a 2x Earth Power did NOT one-shot Flaaffy this time - it lived on 12/93 and landed a 2x Thunderbolt, and Wartortle's Ice Beam (also redirected onto Togekiss) took Togekiss from 97 to 41 through its Sitrus. In both earlier passes Flaaffy died before acting. T2 Moonblast took Wartortle to 8 and Air Slash KO'd Flaaffy, which had selected Light Screen from 12 HP as the slowest battler on the field and never got to use it; Wartortle's second Ice Beam plus Life Orb recoil left Enamorus on 11/77. T3 I pulled the 11 HP Enamorus for Kartana, and the 8 HP Wartortle - in Torrent - out-sped Togekiss and KO'd it with Hydro Pump. That is the first time any member of this team has taken a player Pokemon in three passes. Palpitoad's Sludge Bomb was aimed at Enamorus and hit the Kartana that replaced it for nothing. T4 Magearna came in and Thunderbolt KO'd Wartortle; Palpitoad's Protect blocked a 4x Leaf Blade that would have killed it outright, and Wartortle's last Hydro Pump missed Kartana. T5 Leaf Blade finished Palpitoad and a +1 Thunderbolt (2x) KO'd the L27 Marill on its second turn. Final: Magearna 76/94, Kartana 70/70 untouched, Togekiss dead, Enamorus 11/77 in reserve."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Flaaffy gets its screens up now that it survives the opening",
+      "result": "FAIL",
+      "evidence": "The level bought Flaaffy the action it had never had: it survived a 2x Earth Power on 12/93 and landed a 2x Thunderbolt on turn 1. But it spent turn 2 selecting LIGHT_SCREEN from 12 HP as the slowest battler on the board, and was KO'd by Air Slash before the screen resolved. Across three passes this team has still never had a screen up. See the AI defect below - this is a decision problem, not a level problem."
+    },
+    {
+      "check": "White Herb Shell Smash Wartortle converts setup",
+      "result": "FAIL - never selected",
+      "evidence": "Wartortle chose Ice Beam on turns 1 and 2 and Hydro Pump on turns 3 and 4. SHELL_SMASH has now not been selected once in three passes and the White Herb has never been consumed. The authored centrepiece of the team has never fired."
+    },
+    {
+      "check": "Wartortle's extra level buys it the turns the plan needs",
+      "result": "PASS",
+      "evidence": "At L25 it survived to turn 4 and, from 8/72 inside Torrent, out-sped Togekiss (Modest 252 Spe on base 43 beats an uninvested Calm Togekiss on base 80) and KO'd it from 41 HP with Hydro Pump. In the rerun-1 pass at L24 it died on turn 2 to one unboosted Moonblast without acting. The +2 total is doing exactly what it was bought for, even though it is buying attacks rather than the Shell Smash."
+    },
+    {
+      "check": "Water Absorb Palpitoad supplies the Electric immunity and Ground coverage",
+      "result": "FAIL - neither observed",
+      "evidence": "Palpitoad used Sludge Bomb (turn 3) and Protect (turn 4) and was KO'd on turn 5. EARTH_POWER and MUDDY_WATER were never selected, and no Water or Electric attack was ever aimed at it, so Water Absorb was never tested. The Sludge Bomb was aimed at Enamorus (Fairy, 2x) and hit the Kartana my switch put in the way, which is not a targeting error."
+    },
+    {
+      "check": "Huge Power Marill is the physical priority alternative",
+      "result": "FAIL",
+      "evidence": "Marill arrived on turn 4 into a board that was already 2-4 down and used AQUA_JET into Kartana, a Grass/Steel that takes Water at 0.25x, for negligible damage, then died to a +1 Thunderbolt. It is the highest-level member (offset 5, L27) and its only action in three passes has been an Aqua Jet into a resist or into its own partner."
+    },
+    {
+      "check": "Palpitoad's Protect has a real payoff",
+      "result": "PASS",
+      "evidence": "Turn 4 Protect blocked a 4x Leaf Blade from a 70/70 Kartana - lethal, since the same move KO'd Palpitoad from full 96 the following turn. The single best guard anywhere in my block."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 4,
+      "battler": "PALPITOAD",
+      "payoff": "REAL - blocked a 4x Leaf Blade from a full-health Kartana. The identical move KO'd it from 96/96 on turn 5, so the guard denied a guaranteed knockout and bought Hailey a whole extra turn on the board."
+    }
+  ],
+  "protect_ledger_note": "One opponent Protect in the whole battle and it was the correct one. No empty guards, in contrast to pass 1 (Wartortle's empty turn-1 Protect) and to the Palpitoad guard in pass 1 that also blanked. The guard pricing looks right on this team now.",
+  "ai_defects": [
+    {
+      "id": "R6-D1",
+      "turn": 2,
+      "trainer": "TRAINER_HAILEY",
+      "battler": "FLAAFFY (12/93, slowest battler on the field)",
+      "board": "Flaaffy 12/93 and Wartortle 44/72 versus Togekiss 41/97 (item already consumed) and Enamorus 70/77. Turn order that turn was Wartortle, Enamorus, Togekiss, Flaaffy - Flaaffy moves last and both of my battlers out-speed it.",
+      "chosen": "MOVE_LIGHT_SCREEN",
+      "problem": "A 12 HP setter, moving last, spent its final action on a five-turn screen that cannot possibly resolve before the KO - and it did not resolve: Togekiss' Air Slash killed it first and the screen never went up. This is the same shape as the 'uncertain setter' defect the dossier already records against Lola's Cherubi Sunny Day (setting a field effect for beneficiaries that will not be there), except here the setter itself provably does not survive to act.",
+      "better_action": "MOVE_THUNDERBOLT at Togekiss: 2x STAB into a 41 HP Flying-type whose Sitrus was already spent, with a real chance to trade its last action for a knockout. Even a whiffed attack is worth more than a screen that cannot exist.",
+      "scope_note": "Do not fix AI C code from this session. Flagged for the AI owner. Affected-team index candidates: any team whose support member carries Light Screen/Reflect/Tailwind/Trick Room and can be scored while it is the last actor at lethal HP."
+    }
+  ],
+  "ai_notes": [
+    "Turn 3 Palpitoad's Sludge Bomb resolving into a Poison-immune Kartana is not a targeting error: it was aimed at Enamorus (Fairy, 2x) at turn start and my switch put the Steel type in the way. The same event was logged in both earlier passes; it should not be read as an AI fault.",
+    "Turn 3 Wartortle at 8/72 choosing Hydro Pump over Ice Beam was correct and is worth recording: Torrent was live, and the Torrent-boosted Hydro Pump was exactly enough to take a 41 HP Togekiss, where Ice Beam was not. That is a good low-HP ability read.",
+    "Turn 4 Palpitoad's Protect is the best opponent decision in this rerun block - a real, lethal block, chosen on the turn it mattered rather than on entry.",
+    "Turn 1 Wartortle choosing Ice Beam over Shell Smash against two Flying-types is defensible on type (2x into both of my leads) even though it means the authored plan never starts. It is a set/ordering problem, not a decision defect."
+  ],
+  "level_changes": [],
+  "level_changes_not_made": [
+    {
+      "member": "WARTORTLE",
+      "reason": "Already at the +2 ceiling for this pass (1 -> 2 -> 3) and it converted: it out-sped and KO'd Togekiss from 8 HP. Must not move again."
+    },
+    {
+      "member": "FLAAFFY",
+      "reason": "+1 in the rerun-1 pass and it converted from never acting to surviving a super-effective hit and landing a 2x Thunderbolt. Its remaining problem is a decision defect (R6-D1), not a level. Brief rule: fix AI defects before compensating with levels."
+    },
+    {
+      "member": "PALPITOAD",
+      "reason": "+1 in pass 1. It survived four turns, made the block's best Protect and forced a second Leaf Blade. Raising it again would spend the ceiling on the member that is already working."
+    },
+    {
+      "member": "MARILL",
+      "reason": "The ace at offset 5 and the highest-level member at L27. Rule 5 says never the ace first. Its problem is that it arrives fourth into a decided board, which is an ordering problem levels cannot fix."
+    }
+  ],
+  "calibration": "KEEP - no level change. This is the first of the three passes that was a real fight: one player faint (Togekiss, to a Torrent Hydro Pump from an 8 HP Wartortle), Enamorus reduced to 11/77 and withdrawn, and a lethal Protect that cost me a turn. The two levels added in the earlier passes both demonstrably converted - Flaaffy acted for the first time, Wartortle survived to turn 4 and took a player Pokemon. Brief rule 5's 'won after a real fight -> keep' applies. The remaining softness (Shell Smash never firing, screens never going up, Marill arriving last) is a plan/ordering and AI-decision problem, and the brief is explicit that AI defects are fixed before levels compensate for them. Wartortle is at the +2 ceiling in any case.",
+  "could_this_be_cooler": "Same answer as the earlier passes, now with three passes of evidence behind it: the concept is good and the execution order is wrong. This is a White-Herb-Shell-Smash team whose Shell Smash has never been selected in three battles, and a screens team that has never had a screen up. Both failures trace to the same cause - the two members that carry the plan (Flaaffy, Wartortle) lead into the player's fastest attackers, while the ace (Marill, offset 5) and the Protect specialist (Palpitoad) arrive after the fight is decided. No species/move/item change is wanted and none was made: the fix is the send-out order, and the honest recommendation to the main agent is to lead Palpitoad + Wartortle so the White Herb Smash has a Water Absorb body next to it and Flaaffy comes in behind a shield. Levels cannot buy that.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass 2: one attempt (the brief allows up to three only on a loss), same party manifest as both earlier passes. No teams-file change for this battle. Synthetic headless benchmark, not earned campaign play."
+}
