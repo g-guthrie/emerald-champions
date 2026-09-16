@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge cap 76, Hannah room four rebuild after a 4-6 loss: Bug and Fairy pressure, Clear Smog for Contrary, Taunt and Spore for Rabsca and Espathra, no Dark-Dragon body for Dazzling Gleam to erase",
+  "availability_audit": "Cap 76, Mossdeep Gym before the Space Center. All sources upstream of Mossdeep in pool-76.json: Rillaboom gate 36 (Grookey game_corner:500coins at Mauville, level evolutions). Zapdos gate 30 (legendary_sign:NewMauville_Inside). Scizor gate 30 (Scyther wild:Route118/rock_smash_mons, trade+ITEM_METAL_COAT) with ITEM_SCIZORITE stone-window 30. Mimikyu gate 60 (wild:Route121/land_mons; Route 121 is walked between Lilycove and Mt Pyre, before Route 124 and Mossdeep). Amoonguss gate 42 (Foongus wild:PetalburgWoods, level evolution). Incineroar gate 36 (Litten game_corner:500coins, level evolutions). Nothing from Shoal Cave, the Seafloor Cavern, Sootopolis, Route 131 or Pacifidlog; nothing needs Dive.",
+  "reachable_legends": "One: Zapdos (gate 30). No Mythical, no Ultra Beast (Kartana and Pheromosa are in the pool at gates 20 and 20 and would flatten this room; deliberately not used).",
+  "plan": "Attempt 1 lost because the room's four Fairy and Fighting attackers erased a Dark-heavy party (Dazzling Gleam 4x on Hydreigon, Close Combat and Superpower 2-4x on Weavile and Urshifu) and Contrary Malamar walled the physical Fighting damage. Rebuild around what the crack line names: Bug (Scizor's U-turn is 4x on Malamar, Bullet Punch outprioritises Speed Boost), Fairy (Mimikyu's Play Rough is 2x on Malamar and Mega Gallade, Disguise absorbs one hit, and Hannah has no Steel or Ghost move), Haze-equivalent (Amoonguss's Clear Smog resets Contrary boosts; Spore stops Espathra and Malamar cold; Rage Powder soaks Close Combat and Psychic Fangs), Taunt on Rabsca before Revival Blessing (Incineroar, which also Knock Offs the Sitrus), Grass and Electric on the two Water-Psychic leads (Rillaboom's priority Grassy Glide, Zapdos's Thunderbolt). Intimidate is held back from Malamar's turns because Contrary would turn it into +1 Attack.",
+  "party": [
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_GRASSY_GLIDE", "MOVE_WOOD_HAMMER", "MOVE_KNOCK_OFF"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "lead: Fake Out control, priority Grassy Glide 2x on Bruxish and Veluza, Knock Off for Life Orb and Sitrus",
+      "availability": "pool-76 gate 36, game_corner Grookey, level evolutions."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "lead: Thunderbolt 2x on the Water-Psychic pair, Heat Wave 2x on Rabsca",
+      "availability": "pool-76 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_SCIZOR",
+      "moves": ["MOVE_BULLET_PUNCH", "MOVE_U_TURN", "MOVE_SWORDS_DANCE", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TECHNICIAN",
+      "item": "ITEM_SCIZORITE",
+      "evs": [248, 252, 0, 0, 0, 8],
+      "role": "Mega: Technician U-turn is 4x on Malamar, Bullet Punch beats Speed Boost; Hannah carries no Fire move",
+      "availability": "pool-76 gate 30 (Scyther Route118 rock smash, Metal Coat trade) with ITEM_SCIZORITE stone-window 30."
+    },
+    {
+      "species": "SPECIES_MIMIKYU",
+      "moves": ["MOVE_PLAY_ROUGH", "MOVE_SHADOW_CLAW", "MOVE_SHADOW_SNEAK", "MOVE_SWORDS_DANCE"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_DISGUISE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Fairy and Ghost pressure: Play Rough 2x on Malamar and Mega Gallade, Shadow Claw 2x on Espathra and Rabsca, Disguise absorbs one hit",
+      "availability": "pool-76 gate 60, wild:Route121/land_mons."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_CLEAR_SMOG", "MOVE_SLUDGE_BOMB"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Clear Smog is the Haze the crack line asks for; Spore for Espathra and Malamar; Rage Powder soaks the single-target Fighting and biting moves",
+      "availability": "pool-76 gate 42, Foongus Petalburg Woods, level evolution."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_TAUNT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Taunt stops Revival Blessing; Knock Off removes Rabsca's Sitrus; Flare Blitz is 2x on Rabsca; held in reserve so Intimidate does not feed Contrary",
+      "availability": "pool-76 gate 36, game_corner Litten, level evolutions."
+    }
+  ]
+}

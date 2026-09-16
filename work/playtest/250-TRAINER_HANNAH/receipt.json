@@ -1,0 +1,75 @@
+{
+  "play_order": 250,
+  "e_group": "E0391",
+  "trainer": "TRAINER_HANNAH",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Bruxish / Veluza / Malamar / Espathra / Rabsca (+1) at L75, Gallade (+2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/250-TRAINER_HANNAH/party_gym76.json", "work/playtest/250-TRAINER_HANNAH/party_antiblade76.json"],
+  "chronology_note": "a1 used the shared gym party (audit in that manifest). a2 rebuilt: Rillaboom 36 (Mauville game corner Grookey), Zapdos 30, Scizor 30 (Route 118 rock-smash Scyther + Metal Coat) with Scizorite window 30, Mimikyu 60 (Route 121, walked before Mt Pyre and before Route 124), Amoonguss 42 (Petalburg Woods Foongus), Incineroar 36. One reachable legend (Zapdos); Kartana and Pheromosa are in the pool at gate 20 and were deliberately not used. Nothing from Shoal Cave, the Seafloor Cavern, Sootopolis or later.",
+  "pre_play_strategy_checks": [
+    "Sharpness Veluza and Strong Jaw Bruxish hit like pseudo-legendaries (Choice Band Aqua Cutter, Psychic Fangs)",
+    "Contrary Malamar: Superpower gives +1 Atk / +1 Def per use",
+    "Espathra Speed Boost climbs behind Protect / Focus Sash",
+    "Rabsca uses Revival Blessing on a fallen partner",
+    "Mega Gallade has Sharpness (plan text)",
+    "Protect ledger"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 12,
+      "build": "work/agent-battle-build-7",
+      "run_dir": "work/playtest/250-TRAINER_HANNAH/a1",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Gengar / Hydreigon / Weavile / Zapdos)",
+      "outcome": "lost",
+      "turns": 7,
+      "player_faints": 6,
+      "opponent_faints": 4,
+      "why": "The gym party is Dark-heavy and this is the Fairy-and-Fighting room. Bruxish and Veluza went down cleanly (Wicked Blow, Sucker Punch), but Malamar's Superpower OHKOed Incineroar from 207 and climbed to +2/+2 while Espathra's Dazzling Gleam hit Hydreigon for 4x and Urshifu for 2x every turn behind a sash and Speed Boost. Malamar Protected on the exact turn I doubled it. I traded Zapdos and Urshifu for Espathra, Gengar and a Draco Meteor for Malamar, and then Rabsca Protected the turn Weavile needed to KO it while Mega Gallade's Close Combat erased Weavile (4x) and the 33 HP Hydreigon. Rabsca never got to revive anything because I never left it a window; it did not need to."
+    },
+    {
+      "n": 2,
+      "seed": 13,
+      "build": "work/agent-battle-build-7",
+      "run_dir": "work/playtest/250-TRAINER_HANNAH/a2",
+      "party": "party_antiblade76.json (Rillaboom / Zapdos lead; Mega Scizor / Mimikyu / Amoonguss / Incineroar)",
+      "outcome": "won",
+      "turns": 11,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "Rebuilt on the crack line. Fake Out + Thunderbolt removed Veluza turn 1 and Thunderbolt removed Bruxish turn 2, but Psychic Fangs plus Malamar's Knock Off took Zapdos in one turn (my error: no Protect). Rillaboom's Knock Off stripped Malamar's Leftovers, Malamar Protected the first double-target again, and Mega Scizor's 4x U-turn KOed it from 211 the next turn before it ever used Superpower. Mimikyu then did the rest of the work: priority Shadow Sneak into a sash-broken Espathra, and Play Rough outsped and OHKOed Mega Gallade on the turn it evolved; it died to Rabsca's Psychic afterwards. Incineroar's Taunt landed on Rabsca before it had a Revival Blessing target worth using, Scizor's U-turn took it to Sitrus range and Flare Blitz finished it through one more Protect."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Sharpness / Strong Jaw damage", "result": "PASS", "evidence": "a2 turn 2: Bruxish's Strong Jaw Psychic Fangs plus one Knock Off took a 294 HP Zapdos from full. a1 turn 1: banded Aqua Cutter was chosen but flinched by Fake Out; Sharpness itself was seen only through the Bruxish half."},
+    {"check": "Contrary Malamar climbs on Superpower", "result": "PASS", "evidence": "a1 turns 2-3: 'Malamar's Attack rose! Defense rose!' after each Superpower, stat_stages atk/def +1 then +2; the +2 Knock Off then KOed Zapdos from 178. In a2 it never got a Superpower off (Knock Off, Protect, then KOed by U-turn)."},
+    {"check": "Espathra Speed Boost behind Protect / Sash", "result": "PASS", "evidence": "a1: spe +1, +2 across turns 3-4 with Dazzling Gleam 4x on Hydreigon and a sash-held Sucker Punch. a2: spe +1 to +4 across turns 3-7 including a Protect that blocked a lethal Shadow Sneak and a Roost to full before the sash broke. It took four of my actions to remove in a2."},
+    {"check": "Revival Blessing", "result": "FAIL - never selected", "evidence": "Rabsca had five decisions across both runs (Psychic x2, Protect x2, Bug Buzz x2 - one in a1, four in a2 before Taunt, one after) with Malamar, Bruxish, Veluza and later Espathra all fainted and available. In a2 turn 5 it chose Bug Buzz with three revivable partners; in a2 turn 6 it Protected. Taunt only landed on turn 7. The room's headline move never fired."},
+    {"check": "Mega Gallade has Sharpness", "result": "FAIL - not in this ROM", "evidence": "a1 turn 6 and a2 turn 8: after Mega Evolution the driver reports Gallade's ability as INNER_FOCUS. src/data/pokemon/species_info/gen_3_families.h line 3071 gives SPECIES_GALLADE_MEGA Inner Focus x3; base Gallade has Sharpness only under P_UPDATED_ABILITIES >= GEN_9. The dossier's 'Mega Gallade has Sharpness too' is wrong for the live build; Psycho Cut and Leaf Blade lose the 1.5x the moment it evolves. Legality note below."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 3, "battler": "Malamar", "payoff": "excellent. Blocked a Draco Meteor (259) and a Close Combat on the turn I doubled it"},
+    {"attempt": 1, "turn": 6, "battler": "Rabsca", "payoff": "excellent. Blocked Triple Axel + Draco Meteor, the only turn I could have removed it; Gallade KOed Weavile behind the guard"},
+    {"attempt": 2, "turn": 3, "battler": "Malamar", "payoff": "excellent. Blocked Wood Hammer + Mega U-turn (a certain KO) on the first double-target"},
+    {"attempt": 2, "turn": 5, "battler": "Espathra", "payoff": "excellent. Blocked a Shadow Sneak that KOed it from 119"},
+    {"attempt": 2, "turn": 6, "battler": "Rabsca", "payoff": "good. Blocked Fake Out (chip only, but it also denied the flinch)"},
+    {"attempt": 2, "turn": 10, "battler": "Rabsca", "payoff": "good. Blocked Flare Blitz + Sludge Bomb at 11 HP as the last body, one extra turn"}
+  ],
+  "protect_summary": "6 Protects, 0 empty. Hannah's Protect reads were the best in the block: every guard landed on a turn I had doubled the target or aimed a lethal priority move at it. This is the AI at its best and it is why a1 was lost.",
+  "ai_defects": [
+    {"id": "E0391-1", "turn": "a2 turns 5-6 (and a1 turn 6)", "board": "Rabsca at full HP with Revival Blessing available and Malamar / Bruxish / Veluza fainted (a2 t5); Espathra also fainted by t7", "chosen": "Bug Buzz into the incoming Incineroar (t5), Protect (t6), Bug Buzz (t7, after Taunt)", "better": "Revival Blessing on Malamar (t5) would have returned the room's win condition at 142 HP against a board where I had just shown I could not touch it physically; instead the move was never selected in five untaunted decisions across two runs. This is the same 'the support move never gets selected' pattern (E0384 Heal Pulse, E0388 Tailwind) and here it is the encounter's signature."}
+  ],
+  "engine_defects": [
+    {"id": "E0391-ENGINE-1", "turn": "a1 turn 3 (and E0389 a1 turn 2)", "board": "Urshifu-Single (Unseen Fist) used Close Combat into a Protecting Malamar", "observed": "'Malamar couldn't fully protect itself' and about 30 damage (13 net after Leftovers) where an unprotected Close Combat does about 105; Unseen Fist should let a contact move hit through Protect at full damage. The same text also printed on E0389 turn 2 against a Dusclops that had not used Protect at all (damage was normal there). Looks like the Unseen Fist path is sharing the Z-move 'partial protect' quarter-damage branch and its message. Not fixed by me; for the AI/engine owner."}
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Lost attempt 1 with a party built for the gym rather than this room, then won attempt 2 with two faints after an eleven-turn fight once I brought what the crack line asks for (Bug, Fairy, Clear Smog, Taunt). That is 'won after a real fight' and the room is doing exactly what a fourth gym room should: punishing a generic anti-Psychic team and rewarding the printed counterplay. Not lowering: the AI's Protect timing, not the levels, decided a1. Not raising: Revival Blessing and Mega Sharpness are both currently absent, and if either turned on this room would be harder than what I beat.",
+  "concept_on_board": "Mostly yes. Strong Jaw and Contrary were on the board and decided a1; Speed Boost Espathra behind sash and Protect was the hardest single body in the gym so far. Revival Blessing - the novel problem the plan promises - never appeared, and Mega Gallade's Sharpness does not exist in this build.",
+  "cooler": "This is the best-designed room in the gym and the only one that beat a reasonable party. Two notes, neither implemented. (1) Revival Blessing is a one-PP move the AI scores like any status move and never picks; if the room wants the 'knockout that does not stay bought' moment, Rabsca needs the AI to value it, or the set needs a second reason to exist (its Sitrus and Protect currently make it a bulky Bug Buzz body). (2) The Gallade line: with Mega Gallade on Inner Focus in this build, the 'Sharpness doubled' ending is prose only. Either keep base Gallade (Sharpness works there and a Choice Band Sharpness Gallade at +2 is terrifying) or accept that the Mega is the room's Close Combat finisher and rewrite the line. Malamar with Leftovers is exactly right - the Knock Off on it was the most important single action of a2.",
+  "legality_notes": "GALLADE @GALLADITE SHARPNESS: the ability is legal on base Gallade only under GEN_9 updated abilities, and Mega Gallade's ability in this ROM is Inner Focus. The set materialises and runs, but the plan's claim about the Mega is false. Everything else inside cap 76.",
+  "verification_limit": "No level change here; nothing pending re-verification. Note for the coordinator: during a2 I deleted the pinned scene.gba/scene.elf one turn early (misread the Protect turn as the end), restored them from work/agent-battle-build-7 with matching sha256 against session.json, and finished the battle; result.json is from the finished battle."
+}
