@@ -850,3 +850,100 @@ seeds 11/3/5/13 measure **83, 98, 82, 95** frames against 165 before.
 * Zubat/Golbat declining Taunt and U-turn, and Brawly's Hariyama withdrawal,
   were logged as watch items and are partly addressed by the switch cost, but
   neither has a fixture.
+
+---
+
+# Round 6: the livelock's real cause, and the per-battler scorer
+
+Commit `9158e1c4e0`. Focused allowlist with `multi_reserve.c` and
+`single_scorer.c` added: **103 passed, 0 failed, 103 total.**
+
+## (1) The livelock is a party-indexing bug
+
+Driving seed 7 to the freeze and reading the board settles it. At the hang:
+`turn_after 303` (the battle ran 295 turns with no decision point), battler 0
+fainted, battler 2 permanently absent, `outcome` still `ongoing` - and the
+player's party holding **Togekiss at slot 3, untouched at 228/228**.
+
+`GetAILastPartyIndex` returned `PARTY_SIZE / 2` for any battler on a side with
+two trainers when `AreMultiPartiesFullTeams()` was false. That rule dates from
+the link and tower multi formats, where the two trainers really do share one
+`gPlayerParty` and split it three and three. In this build `GetBattlerParty`
+returns `gParties[GetBattlerTrainer(battler)]` - **each trainer owns its own
+array** - so the split does not partition anything; it simply hides slots three
+to five of that trainer's own team. The chain:
+
+* `HasNoMonsToSwitch(0, ...)` scanned slots 0-2 only, all fainted, and reported
+  nothing to switch to;
+* so `FAINTED_ACTIONS_NO_MONS_TO_SWITCH` never cleared battler 0's absent flag;
+* so `FAINTED_ACTIONS_HANDLE_FAINTED_MON` never asked for a replacement;
+* and `NoAliveMonsForEitherParty()` was false, because Togekiss was alive, so
+  the battle could not end either.
+
+Both opponents were genuinely out of usable moves and struggling at a side with
+nothing on it, which is the "But it failed!" the capture showed. Struggle was
+the symptom; the missing replacement was the defect.
+
+The split now applies only when the two battlers on a side actually resolve to
+the same party array. The same index drives the AI's own switch search
+(`switchContext.lastId`) and the opponent controller, so this also means every
+trainer on a two-trainer side could previously only consider its first three
+members when switching - a second, quieter consequence fixed by the same line.
+
+`test/battle/ai/multi_reserve.c`: a fainted lead replaced from beyond the split
+on a live board, and the index itself asserted on a half-team multi - it reads
+**3 without the fix and 6 with it**, verified by reverting the change and
+rerunning.
+
+**Not yet confirmed end to end.** Seeds 7 and 17 need a headless ROM built from
+this commit, and the instruction for this pass was not to rebuild it. The
+regression proves the cause and the repair; the two seeds should be re-run on
+the rebuilt ROM.
+
+## (2) Per-battler scorer
+
+This path runs when the pair search does not - every single battle, which is
+where the reported cases live.
+
+* **Negligible chip.** `AI_CheckViability` rejected only moves that cannot
+  damage at all (`hitsToKO == 0`); a move needing nine turns was still a
+  perfectly good attack. An attack that needs `NEGLIGIBLE_DAMAGE_HITS` (5) or
+  more turns now loses a step, and if the user pays contact damage every one of
+  those turns - Rocky Helmet, Iron Barbs, Rough Skin - and that damage is at
+  least half what it deals, it loses a further three. That is the Eevee case
+  exactly: three Quick Attacks for nine, nine and zero while an Adaptability
+  Double-Edge sat unused.
+* **Sleep.** `IncreaseSleepScore` paid `DECENT_EFFECT` (2) for removing a
+  healthy foe's turns, which loses to almost any damage roll. It now pays
+  `GOOD_EFFECT`, and one more step when the target can knock the user out -
+  Shroomish in front of an Arcanine that two-shots it. The existing early return
+  when the AI can simply faint the target is untouched, so this never displaces
+  a knockout.
+
+## (3) The Conservative trait and the guard model
+
+`AI_FLAG_CONSERVATIVE` only ever touched accuracy and friendly-fire thresholds;
+it had no contact with the guard model at all. The trait is a stated preference
+for the safe line and the banked share is exactly where safety is priced, so a
+Conservative battler now banks a further 20 of what its guard denies. The
+fixture runs the same board with and without the flag: the Conservative flank
+guards, the ordinary one attacks.
+
+## Fixtures added
+
+`test/battle/ai/single_scorer.c` (3): chip that costs contact damage loses to
+the real attack; sleep on a healthy threat beats the chip that cannot finish it;
+a Conservative flank banks more of what its guard denies.
+`test/battle/ai/multi_reserve.c` (2), above.
+
+One honest note on the sleep fixture: it asserts the **selection**, which is the
+scorer's job. On that single-battle board the Spore is chosen but the status
+does not resolve; that the sleep itself lands is covered in doubles by
+`EC setup pricing: sleep on a healthy threat is worth the turn`. The
+single-battle powder path is worth a separate look rather than a weaker
+assertion here.
+
+## Numbers
+
+`run_focus.py --filter 'EC '`: **103 passed, 0 failed, 103 total** (98 before).
+`pokeemerald.gba` builds clean. Headless ROM and its stamp untouched this round.
