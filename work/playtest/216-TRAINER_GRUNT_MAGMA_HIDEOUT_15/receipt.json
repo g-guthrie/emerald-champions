@@ -1,0 +1,52 @@
+{
+  "play_order": 216,
+  "e_group": "E0327",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_15",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_2R",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members at L58 = 60 + 0 - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magma_60_ground.json"],
+  "chronology_note": "Same six as the hideout party, all pool-60 gates 42 and below, Ground/Rock lead order. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Incineroar opens with Fake Out and its Intimidate has already cut my physical lead",
+    "Armarouge's Armor Cannon is 120 base power and drops its own defences",
+    "Klawf's Anger Shell flips it to +1 Attack, +1 Special Attack, +1 Speed below half HP",
+    "Muk's Poison Touch poisons through contact",
+    "Parting Shot from Incineroar resets a bad board"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/216-TRAINER_GRUNT_MAGMA_HIDEOUT_15/a1",
+      "party": "party_magma_60_ground.json (Urshifu-Rapid/Amoonguss/Swampert/Mega Gardevoir/Incineroar/Zapdos)",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 4,
+      "opponent_faints": 4,
+      "why": "The hardest fight in my block outside Matt, and it opened by taking a Pokemon off me on turn 1: Incineroar's Fake Out flinched Urshifu and Armarouge's Armor Cannon one-shot a 263 HP Amoonguss from full. Close Combat is 4x into their Incineroar and Liquidation is 2x into Armarouge, so I traded back, but Armarouge's Psyshock is 2x into Urshifu's Fighting half and killed it on the way out. Then Klawf did exactly what it is built to do - my Liquidation took it from 203 to 21, which is past half, and Anger Shell handed it +1/+1/+1; its boosted Knock Off critted Swampert to death through Rocky Helmet chip while Muk's Shadow Sneak removed Mega Gardevoir. I finished with my last two, Incineroar and Zapdos, against a lone Muk that guarded once and then died. 4-4."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Incineroar opens with Fake Out behind an Intimidate", "result": "PASS", "evidence": "Intimidate dropped both my leads' Attack on the turn-0 board, and turn 1 Fake Out flinched Urshifu - stealing the turn from my best attacker on the exact turn Armor Cannon needed to be unanswered. Textbook ambush opening."},
+    {"check": "Armor Cannon is 120 base power and drops its own defences", "result": "PASS, emphatically", "evidence": "turn 1 it one-shot a full-health 263 HP Amoonguss (2x into Grass) and immediately took its own Defense and Sp. Def drop. The trade the dossier describes is real and it is the most violent single move in the hideout. The drop then mattered: Swampert's Liquidation removed it in one hit on turn 2."},
+    {"check": "Klawf's Anger Shell flips it below half HP", "result": "PASS", "evidence": "turn 3, Liquidation took it from 203 to 21 and 'Klawf's Defense fell / Sp. Def fell / Attack rose / Sp. Atk rose / Speed rose' all fired. The dossier says chipping it is worse than killing it and it proved the point immediately - the boosted Klawf then outsped and crit-Knock-Off'd Swampert to death on the following turn. I knew the trap, could not kill a 203 HP body in one action, and paid for it anyway."},
+    {"check": "Muk's Poison Touch poisons through contact", "result": "PASS", "evidence": "turn 6 Shadow Sneak is a contact move and 'Zapdos was poisoned'. Muk also took Mega Gardevoir out with the same move earlier, at 2x into Psychic."},
+    {"check": "Parting Shot from Incineroar resets a bad board", "result": "FAIL", "evidence": "Incineroar had three actions - Fake Out, then Throat Chop twice - and never chose Parting Shot, including on turn 3 when it was at 86/232 with its Sitrus already consumed and a fresh Mega Gardevoir in front of it. That is the textbook Parting Shot board: chip the incoming threat's offence and get a healthy body in. Not a clear defect on its own, since Throat Chop into a Psychic type is defensible, but it is the fourth authored utility move in my block that the scorer declined."}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "Muk", "payoff": "real - as the last Pokemon alive against two healthy ones it blocked BOTH Zapdos's Thunderbolt and Incineroar's Knock Off in one action, and bought itself the extra turn in which it poisoned Zapdos."}
+  ],
+  "protect_summary": "1 opponent Protect, with a clean double-blocking payoff on the only turn it made sense, 0 empty, no consecutive guarding. Nothing to tune.",
+  "ai_defects": [],
+  "ai_defect_summary": "No AI defects. This room's scoring was the best in the hideout alongside E0325: Fake Out on the turn the partner needed it, the biggest available attack into the frailest body, a correct Psyshock read on a Fighting type, Shadow Sneak priority to finish a weakened Mega, and a last-Pokemon Protect that blocked two attacks. The only authored move it never used was Parting Shot, recorded above as a check rather than a defect.",
+  "level_changes": [],
+  "level_change_rationale": "Keep, with no hesitation. Won on attempt 1 but 4-4 - four player faints, more than any other battle in my block including the admin - and every one of them came from an authored mechanic firing correctly: Fake Out into Armor Cannon, Psyshock into a Fighting type, Anger Shell rewarding a half-hearted hit, Poison Touch on contact. AGENTS.md's aim is at least three faints against a well-prepared party and this room exceeded it. Nothing needs adding, and nothing needs taking away either - I won, and I won by playing, not by luck.",
+  "rebuild_note": "No level change, so nothing to re-verify for calibration.",
+  "theme_check": "Yes - the best theme-to-board match in my block. The room's stated idea is that the player's own damage rebounds on them, and that is precisely what happened: Fake Out stole my first turn, Armor Cannon traded its own defences for a one-shot, Anger Shell turned my Liquidation into the boost that killed my Swampert, and Poison Touch punished the contact I could not avoid. Armarouge and Klawf are both rare, both visually volcanic, and both did something I will remember.",
+  "cooler_note": "Keep it exactly as it is. This is the room the rest of the hideout should be measured against: four members, four distinct mechanics, all four of which fired without any help from me. If anything is worth a look later it is only the Parting Shot slot on Incineroar - it is the one move in the room that never appeared - and that is an AI question rather than a design one."
+}
