@@ -1,0 +1,49 @@
+{
+  "play_order": 68,
+  "e_group": "E0076",
+  "trainer": "TRAINER_MELINA",
+  "class": "casual",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"YANMA": 31, "PERSIAN": 29, "FLAMIGO": 28, "GLIGAR": 31},
+  "cap_window_confirmation": "Dossier seeds 33/31/30/33 resolved to 31/29/28/31 = cap 30 + offset - 2 (Medium). Cap 30 confirmed.",
+  "party_manifest": "work/playtest/68-TRAINER_MELINA/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, led by Mega Gardevoir + Weavile. All source maps precede Route 117. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Yanma accumulates real Speed Boost stages across consecutive turns",
+    "A later Flamigo entry copies those accumulated stages through Costar",
+    "Persian disrupts (Fake Out / Icy Wind) or pivots (U-turn) rather than idling",
+    "Gligar plays as bulky Feint / Knock Off / High Horsepower support, not as another Flying attacker",
+    "Every opposing Protect or Detect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/68-TRAINER_MELINA/a1", "seed": 68, "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Persian's Technician Fake Out flinched my freshly Mega-Evolved Gardevoir while Weavile's Triple Axel, 2x into Bug/Flying, killed Yanma from full before a single Speed Boost stage existed. T2 was the busiest turn of my block: Melina switched Flamigo out for Gligar, my Triple Axel was 4x into Ground/Flying and killed it in two hits, Persian's U-turn was 2x into my Dark-type Weavile for 57 and pivoted out to bring Flamigo straight back, and Hyper Voice - 2x into Flamigo's Fighting half - killed it on arrival. T3 Persian came back in and, because the U-turn had reset its first-turn-out status, got a SECOND Fake Out, which killed my 25 HP Weavile; Hyper Voice then finished it."}
+  ],
+  "strategy_checks": [
+    {"check": "Yanma accumulates real Speed Boost stages", "result": "FAIL (denied on turn 1)", "evidence": "Yanma died on turn 1 to a 2x Triple Axel from a base-125 Weavile before its first end-of-turn Speed Boost. It is a 91 HP Bug/Flying Pokemon holding a Life Orb, so it takes 2x from Ice, 2x from Electric and 4x from Rock, with no defensive investment. This is the crack line ('denying accumulated boosts') working, not an AI failure - Yanma's own choice that turn was Bug Buzz into my Weavile, which was a reasonable attack."},
+    {"check": "Flamigo copies accumulated stages through Costar", "result": "NOT EXERCISED", "evidence": "Flamigo entered twice and there were never any stat stages on its partner to copy, because the only member that generates them died before generating one. Costar did nothing in this battle. The dossier's own note - 'Switching Flamigo in spends that slot's action' - is the cost, and here the cost was paid for no benefit."},
+    {"check": "Persian disrupts or pivots", "result": "PASS, and it was the best member by a distance", "evidence": "Fake Out on T1 flinching my Mega; U-turn on T2 for 57 into my Weavile at 2x, pivoting out to reposition; and then a SECOND Fake Out on T3 after re-entering, which got the KO on my Weavile. That last sequence is worth calling out: the AI pivoted out with U-turn and came back in, which legitimately resets Fake Out's first-turn-out condition, and it then used it to finish a weakened target. Whether or not the scoring reasoned about it that way, the line it played - disrupt, pivot, return, disrupt again - is exactly what a Technician Persian is for. Persian is at offset +1 and it accounted for my only faint."},
+    {"check": "Gligar plays as bulky support", "result": "NOT EXERCISED", "evidence": "Gligar was brought in by an AI switch on T2 and was KO'd in the same turn by a 4x Triple Axel. Feint, Knock Off and High Horsepower were never selected. I note the switch itself was questionable - see AI notes."},
+    {"check": "Every opposing Protect or Detect has a payoff", "result": "NOT EXERCISED", "evidence": "No opposing Protect or Detect. Flamigo carries Detect and Wide Guard; it never got an action in either of its two appearances."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Empty. No opposing Protect, Detect or Wide Guard across three turns.",
+  "ai_defects": [],
+  "ai_notes": [
+    "The T2 switch of Flamigo out for Gligar is the one decision I would question, and I have stopped short of calling it a defect. Gligar is Ground/Flying, which takes Ice at 4x, and it was switched directly into a healthy Weavile that had just demonstrated Triple Axel by killing Yanma with it on the previous turn - against an AI with the Know Opponent Party and Omniscient flags, that move was visible. It died in the same turn without acting. In the AI's favour, Flamigo was at full HP and the switch may have been scored as saving Flamigo from the 2x Hyper Voice I was about to throw, which it did; Flamigo then came back in on Persian's U-turn and died to that same Hyper Voice one turn later anyway. So the switch traded Gligar's life for one turn of Flamigo's. I record it as a poor but explicable choice rather than a defect.",
+    "Persian's disrupt-pivot-return-disrupt line was the highlight and is the reason this fight cost me anything at all.",
+    "Decision timing was fast throughout (max 62 frames on turn 0, 22 thereafter)."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt with 1 player faint and no sustained threat - three turns - which is the +1 band. +1 on the weakest one or two members, never the ace first. Yanma (+3) is the engine of the concept and Gligar (+3) is joint-highest; Persian (+1) personally earned its level and produced the only faint I took. Flamigo at offset 0 is the clear floor, two to three levels below the rest, and it entered the battle twice without ever taking an action.",
+    "changes": [
+      {"member": "FLAMIGO", "field": "level offset", "before": 0, "after": 1, "level_before": 28, "level_after": 29}
+    ],
+    "rerun_note": "Not rerun at the new level. Opponent levels are compiled into src/data/trainers.party and the headless ROM in work/agent-battle-build predates this edit; verifying would require re-materializing and running make, which this brief forbids. One level on the Costar recipient changes no threshold I observed."
+  },
+  "could_this_be_cooler": "The idea is good - one Pokemon banks Speed Boost stages and a second inherits them through Costar - and it is genuinely distinct from Lilith's Dragon Dance/Moxie inheritance, which is what the dossier claims for it. But it has the same structural problem I found in Isaac's and Maria's teams, in a sharper form: the member that generates the payoff is the most fragile member and it leads. Yanma is 91 HP of Bug/Flying holding a Life Orb, so Rock is 4x, Ice and Electric are 2x, and it has no defensive EVs at all. Speed Boost needs it to survive to the END of a turn to produce even one stage, and Costar then needs it to survive several more while Flamigo waits in reserve. Against any cap-30 party with priority or Ice coverage that is three or four turns of survival it will not get - it did not survive one. Two fixes preserve the concept completely. The cheaper one is a Focus Sash on Yanma instead of the Life Orb: it guarantees exactly the one turn Speed Boost needs to tick, which is all the combo asks for, and it is a fair trade of power for the thing that makes the team interesting. The better one is to lead Persian and Gligar - the two durable members - and bring Yanma in second behind them, so it starts banking stages on a board where the opposing fast attackers have already committed. Melina already has the pieces for that; Gligar in particular is authored as bulky support and never once got to be it. I would also note Flamigo's Detect and Wide Guard have now gone unused, which is a second sign this team never reaches its second act.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
