@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Feather Badge chapter cap 54 benchmark party B (play_order 181-192) | lead order: INCINEROAR, MAMOSWINE",
+  "availability_audit": "Every member audited against work/reference-pools/pool-54.json and its source_detail checked against the Fortree arrival point (Weather Institute/C30 done, Route 120 partly explored, Winona unfought). Incineroar gate 36 (Litten line), Amoonguss gate 42 (Foongus line), Gardevoir gate 30 (Ralts line) with ITEM_GARDEVOIRITE stone-window 14, Mamoswine gate 36 (Swinub line, known-move evolution), and the two reachable legends Zapdos and Regieleki are both legendary_sign:NewMauville_Inside at gate 30, i.e. the New Mauville shutdown, which precedes Route 119/120 in play order. No species, stone or habitat from Route 121 onward, Lilycove, Mt Pyre, the Southern Island or any post-Winona area is used.",
+  "plan": "Lead Incineroar + Mamoswine into a sun/setup team: Fake Out denies the Sunny Day or the Dragon Dance turn, Incineroar resists Fire and Grass and Intimidates the two physical setup threats, and Mamoswine's High Horsepower is 2x on Mega Charizard X once it loses its Flying type. Regieleki is demoted to last because Emolga's Lightning Rod eats every Electric move it has.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Fake Out and Intimidate control, Knock Off item removal, Parting Shot reset",
+      "availability": "pool-54 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_MAMOSWINE",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ICE_SHARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Ice and Ground coverage with Ice Shard priority against Tailwind sweepers",
+      "availability": "pool-54 gate 36, evolution:known-move from SPECIES_PILOSWINE."
+    },
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_PSYSHOCK",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Mega win condition; Pixilate Hyper Voice spread Fairy damage",
+      "availability": "pool-54 gate 30 (Ralts/Kirlia line) and ITEM_GARDEVOIRITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_ROOST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        4,
+        0
+      ],
+      "role": "reachable legend: bulky Electric/Fire spread pressure with Roost, resists Fighting and Grass",
+      "availability": "pool-54 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        252,
+        0
+      ],
+      "role": "redirection and sleep against setup and weather leads",
+      "availability": "pool-54 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_REGIELEKI",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_ELECTROWEB",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TRANSISTOR",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "reachable legend: uncontested speed, Electroweb spread speed control under enemy Tailwind",
+      "availability": "pool-54 gate 30, legendary_sign:NewMauville_Inside."
+    }
+  ]
+}
