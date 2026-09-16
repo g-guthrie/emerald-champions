@@ -1,0 +1,25 @@
+{
+  "play_order": 282, "e_group": "E0442", "trainer": "TRAINER_CONOR", "class": "ace", "location": "Route133",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-7",
+  "party_manifest": "work/playtest/282-TRAINER_CONOR/party_route133_84.json",
+  "availability_note": "Same Route 133 sail-lane party (gate<=68 pool-84 entries; Landorus and Tapu Fini are reachable legends). Nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/282-TRAINER_CONOR/a1", "seed": 1, "outcome": "won", "turns": 4, "decisions": 8, "player_faints": 3, "opponent_faints": 4, "note": "Faints: Incineroar (Helping Hand Close Combat), Flutter Mane (Gyro Ball), Landorus (player error into a 4x Avalanche)."}
+  ],
+  "strategy_checks": [
+    {"check": "Hariyama Fake Out buys the setter's turn", "result": "PASS", "evidence": "T1 Hariyama Fake Out flinched Urshifu (the Dark attacker) - the right target; my own Fake Out flinched Gothitelle so Trick Room was traded off."},
+    {"check": "Gothitelle sets Trick Room on the turn it is safe / Helping Hand at a KO threshold", "result": "PASS with a note", "evidence": "T1 chose Trick Room (flinched). T2 chose Helping Hand instead of re-trying Trick Room; the boosted -1 Atk Close Combat KOed Incineroar from 332/332 for exactly 332, so the threshold read was correct, but the room never went up and Gothitelle died that turn. The dossier allows both; the AI took the KO."},
+    {"check": "Shadow Tag traps the player", "result": "PASS", "evidence": "pending_decision listed switch_blocked_by ['ability_prevents_escape'] for both actives on T1-T2; only fainting/Flutter Mane (Ghost) got around it."},
+    {"check": "Ferrothorn Gyro Ball / Leech Seed grinding mode", "result": "PASS", "evidence": "T3 Gyro Ball OHKOed Flutter Mane (fast Fairy: 2x, high base power); T4 Gyro Ball at Urshifu again. Leech Seed not used - it attacked, which was better."},
+    {"check": "Avalugg deployed with Wide Guard / Body Press / Recover", "result": "PASS (attack) / NOT EXERCISED (support)", "evidence": "T4 Avalanche into Landorus (4x, OHKO from full); it died on T5 before a second action."}
+  ],
+  "protect_ledger": [{"turn": "all", "entry": "No opponent Protect used (Gothitelle and Ferrothorn carry it). No empty Protects."}],
+  "ai_defects": [],
+  "engine_notes": [
+    {"turn": 5, "note": "With one foe left, Muddy Water's legal target list was [0] (self slot) and the battle text printed 'It doesn't affect Tapu Fini...' while the spread move still hit and KOed Avalugg. Driver/target cosmetic quirk, not AI."}
+  ],
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "Genuinely nasty: Fake Out into the right target, a trap that showed up in the driver's switch gate, a Gyro Ball that deletes fast Fairies and an Avalanche that punishes a Ground/Flying misstep. Three faints, keep. The room never went up because the AI cashed a Helping Hand KO instead - which is fine, but it means the Shadow Tag + Trick Room identity was never actually seen here; a second look after the rebuild would tell whether Gothitelle prefers the room when the KO is not on the table.",
+  "authored_set_legality": "No problem; all four sets played as written (Avalugg L84 at offset 2)."
+}
