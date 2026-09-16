@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Space Center raid (Team Magma grunts E0401-E0405) cap 84 - Ground, Water and Fighting raid party",
+  "availability_audit": "Mind Badge earned, Team Magma's Space Center raid, still before the Seafloor Cavern, Sootopolis and the Cave of Origin. pool-84.json adds exactly 16 species over pool-76 and every one of them is sourced from SeafloorCavern, Underwater_SeafloorCavern, Underwater_Route124/126 or CaveOfOrigin, all downstream of this battle, so none is used; the party is drawn from the gate-76-and-below entries whose source maps precede Mossdeep. Per source_detail: Incineroar gate 36 evolution:level from Torracat. Urshifu-Rapid-Strike gate 42, Kubfu legendary_sign:Route112 then EVO_SCRIPT_TRIGGER. Swampert gate 36 evolution:level from Marshtomp, ITEM_SWAMPERTITE stone-window 14 (Mega Ring window). Great Tusk gate 42, wild:Route111_RuinsExterior/land_mons. Landorus gate 42, legendary_sign:Route111_RuinsExterior - one reachable legend, the desert ruins sign far upstream of Lilycove, used for single-target Sheer Force Ground damage that does not hit its own partner. Gholdengo gate 48 evolution:level from Gimmighoul-Chest.",
+  "plan": "Built off the five rooms' crack lines together: Fighting, Ground and Water pressure, spread damage to beat Metal Burst and Illusion, Protect for the Head Smash turn, a Dark lead that ignores Prankster, and Good as Gold against Corrosion Toxic and Thunder Wave. Surging Strikes always crits through Coil and Iron Defense and its three hits break Sturdy and Focus Sash. Mega Swampert's Earthquake is the spread move; Landorus is immune to it. Incineroar Fake Out beats Salandit's and Shiftry's Fake Out on speed only when faster, so it is used as the Knock Off and Intimidate piece instead.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Dark lead immune to Prankster Thunder Wave; Intimidate on the physical rooms; Fire on the Steel bodies; Knock Off on Eviolite, Light Clay and Focus Sash",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+      "moves": ["MOVE_SURGING_STRIKES", "MOVE_CLOSE_COMBAT", "MOVE_AQUA_JET", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "guaranteed-critical Water through Coil and Iron Defense; three hits break Sturdy and Sash; Fighting for the Steel and Rock bodies",
+      "availability": "pool-84 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": ["MOVE_EARTHQUAKE", "MOVE_LIQUIDATION", "MOVE_ICE_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_SWAMPERTITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega win condition: Electric-immune Water/Ground body, Earthquake is the spread answer to Metal Burst and Illusion",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_MARSHTOMP; ITEM_SWAMPERTITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_GREAT_TUSK",
+      "moves": ["MOVE_HEADLONG_RUSH", "MOVE_CLOSE_COMBAT", "MOVE_KNOCK_OFF", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Ground/Fighting attacker immune to the Electric rooms; Booster Energy mirrors the Paradox room's own trick",
+      "availability": "pool-84 gate 42, wild:Route111_RuinsExterior/land_mons."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: special Ground that does not hit its partner and is immune to Swampert's Earthquake; Sludge Bomb for the Grass bodies",
+      "availability": "pool-84 gate 42, legendary_sign:Route111_RuinsExterior."
+    },
+    {
+      "species": "SPECIES_GHOLDENGO",
+      "moves": ["MOVE_MAKE_IT_RAIN", "MOVE_SHADOW_BALL", "MOVE_NASTY_PLOT", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_GOOD_AS_GOLD",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "Good as Gold refuses Corrosion Toxic, Glare, Thunder Wave and Will-O-Wisp; Make It Rain is a second spread move that reveals Illusion",
+      "availability": "pool-84 gate 48, evolution:level from SPECIES_GIMMIGHOUL_CHEST."
+    }
+  ]
+}

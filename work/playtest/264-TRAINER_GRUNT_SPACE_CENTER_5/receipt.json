@@ -1,0 +1,50 @@
+{
+  "play_order": 264,
+  "e_group": "E0405",
+  "trainer": "TRAINER_GRUNT_SPACE_CENTER_5",
+  "class": "grunt",
+  "location": "MossdeepCity_SpaceCenter_2F",
+  "chapter": "Team Magma Space Center invasion (control room, infiltrators)",
+  "cap": 84,
+  "cap_confirmation": "driver state reported level_cap 84; all four members at offset 1 = L83 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/264-TRAINER_GRUNT_SPACE_CENTER_5/party_raid84.json"],
+  "chronology_note": "Same raid party and audit as E0401: Mind Badge earned, before the Seafloor Cavern; no pool-84 addition used. Landorus is the one reachable legend.",
+  "pre_play_strategy_checks": [
+    "Zoroark enters disguised as Shiftry (last party member) and the illusion covers Kingambit's Swords Dance",
+    "Kingambit Supreme Overlord grows with fallen allies; Kowtow Cleave / Sucker Punch",
+    "Cacturne Water Absorb / Sucker Punch second priority lane",
+    "Shiftry Wind Rider, Fake Out, Focus Sash"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 15, "build": "work/agent-battle-build-7", "run_dir": "work/playtest/264-TRAINER_GRUNT_SPACE_CENTER_5/a1",
+      "party": "party_raid84.json (Incineroar / Urshifu-Rapid / Mega Swampert / Great Tusk / Landorus / Gholdengo)",
+      "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+      "why": "Kingambit led beside the disguised Zoroark ('Shiftry' in every message; the driver's state exposes SPECIES_ZOROARK but I played the messages). Turn 1 the disguise Protected, Fake Out went into Kingambit and Close Combat (4x) one-shot it before Swords Dance - the general died first, the opposite of the plan. Turn 2 Dark Pulse flinched Urshifu (-1 Def from Close Combat) and Cacturne's Seed Bomb killed it from full through the Sash - the one faint; Flare Blitz broke the illusion and left Zoroark at 1 on its Sash. Turn 3 Landorus in, Sludge Bomb killed Cacturne, Knock Off killed Zoroark. Turn 4 Shiftry Fake Out flinched Landorus, Flare Blitz left it at 1 on its Sash. Turn 5 Sludge Bomb finished it."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Illusion as Shiftry", "result": "PASS", "evidence": "turn 1-2 messages name 'the opposing Shiftry' for the Zoroark slot; turn 2 'The opposing Zoroark's illusion wore off!' after Flare Blitz"},
+    {"check": "Illusion turn covers Swords Dance", "result": "FAIL", "evidence": "Kingambit chose Swords Dance turn 1 but was flinched and killed by a 4x Close Combat; the disguise used that turn on Protect rather than attacking"},
+    {"check": "Supreme Overlord late entry", "result": "FAIL (by placement)", "evidence": "Kingambit was in the lead slot with zero fallen allies, so Supreme Overlord contributed nothing; the plan says it is 'deliberately placed to come in late' but the authored party order puts it first"},
+    {"check": "Cacturne Sucker Punch / Water Absorb", "result": "PARTIAL", "evidence": "Seed Bomb knockout on Urshifu turn 2; Sucker Punch and Water Absorb never relevant (I never used a Water move into it)"},
+    {"check": "Shiftry Fake Out / Sash", "result": "PASS", "evidence": "turn 4 Fake Out flinched Landorus, Sash held Flare Blitz"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Zoroark (as Shiftry)", "payoff": "empty - nothing targeted it; and the plan's whole point for the disguise turn was to draw an attack away from Kingambit's Swords Dance, which Protect cannot do"}
+  ],
+  "protect_summary": "1 Protect, empty and strategically backwards (the disguised piece should be the one attacking or standing still to absorb fire, not guarding).",
+  "ai_defects": [
+    {"turn": 1, "board": "Kingambit 337/337 (-1 Atk) and disguised Zoroark 219/219 Sash versus Incineroar and Urshifu-Rapid", "chosen": "Zoroark Protect, Kingambit Swords Dance", "better": "Kingambit facing a Fighting type with 4x Close Combat should attack or be the one Protecting; Zoroark as the decoy should attack (Nasty Plot / Flamethrower) so the disguise absorbs targeting. Protect on the decoy plus Swords Dance on the 4x-weak general is the pair's plan inverted."}
+  ],
+  "ai_notes": "Turn 2 Dark Pulse into the -1 Def Urshifu and Seed Bomb 2x on it was the right focus fire and it won a knockout. Cacturne correctly never used Sucker Punch into Landorus' Protect-free turn.",
+  "level_changes": [
+    {"member": "ZOROARK", "field": "level offset", "before": 1, "after": 2, "why": "won attempt 1 with one faint; the decoy's contribution was one flinch"},
+    {"member": "SHIFTRY", "field": "level offset", "before": 1, "after": 2, "why": "entered last, one Fake Out, died in two hits"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 4-1. Kingambit is the room's general and Cacturne scored the faint; the two Focus Sash pieces go +1.",
+  "cooler": "The infiltration concept is excellent and the illusion genuinely reads in play (the messages say Shiftry until it breaks). It fails structurally, not on levels: Kingambit is authored in slot 1 so Supreme Overlord starts at zero and it eats the Fighting move meant for the whole room. Cooler and correct to the plan: reorder the party so Kingambit is the last slot (Zoroark then also disguises as Kingambit, a much better bluff than Shiftry) and Shiftry leads with Fake Out. That is a party-order change, not a set change; flagged for the main agent.",
+  "legality_notes": "Sets legal. Party order contradicts the plan text ('deliberately placed to come in late'); Illusion copies the last slot, which is Shiftry, so the bluff is a 60/40/40 body pretending to be another Focus Sash attacker.",
+  "verification_limit": "The +1 on Zoroark and Shiftry cannot be re-verified until the main agent rebuilds."
+}
