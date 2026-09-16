@@ -1,0 +1,41 @@
+{
+  "play_order": 315, "e_group": "E0484", "trainer": "TRAINER_MICHELLE", "class": "ace", "location": "VictoryRoad_B1F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Meganium offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/315-TRAINER_MICHELLE/party_vr96_b.json", "work/playtest/315-TRAINER_MICHELLE/party_vr96_b_kanga.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Mega Meganium Triage Heal Pulse fires with priority on a damaged partner", "Light Screen when special damage is the killer", "Machamp No Guard Dynamic Punch confusion", "Chansey Seismic Toss / Soft-Boiled / Helping Hand", "Umbreon Foul Play punishes physical attackers", "Probopass Stealth Rock / Thunder Wave", "Hydreigon is the fast special mode"],
+  "attempts": [
+    {"n": 1, "seed": 4, "run_dir": "a1", "party": "party_vr96_b.json led by Incineroar + Chi-Yu", "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 6,
+     "why": "Turn 1 Meganium Protected the Overheat, Fake Out flinched Machamp. Turn 2 Meganium Mega Evolved and chose Light Screen but Chi-Yu outsped and Overheat OHKO'd it (349); Dynamic Punch confused the incoming Landorus. Machamp Protected turn 3 (empty). Turn 4 Earth Power KO'd Machamp, Close Combat OHKO'd Chansey (669 HP through Eviolite). Turn 5 the AI switched Probopass out for Umbreon into Earth Power; Close Combat OHKO'd Hydreigon before its Draco Meteor (Urshifu 309 Speed vs 308). Turn 6 Earth Power OHKO'd Probopass and Close Combat finished Umbreon. Zero faints."},
+    {"n": 2, "seed": 5, "run_dir": "a2", "party": "party_vr96_b_kanga.json led by Mega Kangaskhan + Incineroar (same levels; run to see whether Heal Pulse ever fires)", "outcome": "won", "turns": 8, "player_faints": 1, "opponent_faints": 6,
+     "why": "Fake Out + Double-Edge OHKO'd Machamp turn 1; Meganium Mega Evolved and Giga Drained. Turn 2 both Meganium and Chansey Protected lethal hits. Turn 3 Double-Edge OHKO'd Chansey and its recoil KO'd Kangaskhan (the one faint); Flare Blitz took Meganium to 97 (it chose Giga Drain, not Heal Pulse, with no partner to heal). Turn 4 Close Combat KO'd Hydreigon, Flare Blitz finished Meganium (its Giga Drain hit Urshifu for 327). Earth Power OHKO'd Probopass; Umbreon Protected once and fell to Sludge Bomb + Moonblast."}
+  ],
+  "strategy_checks": [
+    {"check": "Triage Heal Pulse", "result": "FAIL (never chosen, and impossible after Mega)", "evidence": "a1: Protect, Light Screen, dead. a2: Giga Drain x3, Protect. Heal Pulse never used across 6 Meganium turns. Engine: Mega Meganium's ability is ABILITY_MEGA_SOL ('Acts like under sun', src/data/pokemon/species_info/gen_2_families.h:251), so Triage is lost on Mega Evolution - the plan's priority Heal Pulse cannot exist on the Mega."},
+    {"check": "Light Screen", "result": "PASS (chosen)", "evidence": "a1 turn 2 Light Screen chosen (it died before it resolved)"},
+    {"check": "No Guard Dynamic Punch confusion", "result": "PASS", "evidence": "a1 turn 2 'Landorus became confused!'; a1 turn 3 Landorus hurt itself"},
+    {"check": "Chansey support", "result": "PARTIAL", "evidence": "Helping Hand chosen a1 t4 and a2 t3 (both times the partner's attack was then irrelevant); Seismic Toss once; Soft-Boiled never needed - it was OHKO'd by Close Combat / Double-Edge both runs"},
+    {"check": "Umbreon Foul Play", "result": "PASS", "evidence": "a2 turn 5 Foul Play did 196 to Incineroar, turn 7 120 to Landorus"},
+    {"check": "Probopass Stealth Rock / Thunder Wave", "result": "FAIL (not chosen)", "evidence": "Power Gem, Flash Cannon; it was OHKO'd by Earth Power in both runs and switched out once (a1 t5, a correct read)"},
+    {"check": "Hydreigon fast special mode", "result": "FAIL (speed tie lost)", "evidence": "Draco Meteor chosen both runs; Urshifu-Rapid (L96, 309) moved first over Hydreigon (L95, 308) and OHKO'd it each time"}
+  ],
+  "protect_ledger": [
+    {"run": "a1", "turn": 1, "user": "Meganium", "payoff": "blocked Overheat (486-class hit that OHKO'd it a turn later)"},
+    {"run": "a1", "turn": 3, "user": "Machamp", "payoff": "empty - Landorus hurt itself in confusion; nothing else was aimed at Machamp"},
+    {"run": "a2", "turn": 2, "user": "Meganium", "payoff": "blocked Flare Blitz (252 next turn) - good"},
+    {"run": "a2", "turn": 2, "user": "Chansey", "payoff": "blocked a lethal Double-Edge - good"},
+    {"run": "a2", "turn": 8, "user": "Umbreon", "payoff": "blocked Sludge Bomb + Moonblast (~250 into 150 HP) - good, though it only delayed the KO by a turn"}
+  ],
+  "protect_summary": "5 Protects: 4 good, 1 empty.",
+  "ai_defects": [],
+  "ai_notes": "Probopass switching out of a 4x Earth Power for Umbreon (a1 t5) was a genuinely good read. Chansey choosing Helping Hand beside a Machamp that was about to be KO'd (a1 t4) is weak but not illegal. The wall never walled: every member except Umbreon was OHKO'd by one super-effective hit in at least one run.",
+  "level_changes": [
+    {"member": "CHANSEY", "field": "level offset", "before": 1, "after": 2, "why": "OHKO'd by Close Combat (a1) and Double-Edge (a2) without acting usefully"},
+    {"member": "PROBOPASS", "field": "level offset", "before": 1, "after": 2, "why": "OHKO'd by Earth Power in both runs, never set Stealth Rock"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 6-0 with no real threat. The Mega and the attackers keep their offsets; the two walls that folded fastest go +1. Levels will not make a Fighting/Ground-weak stall team survive Urshifu + Landorus; see cooler.",
+  "cooler": "The concept (a stall gate) is right for the gauntlet, but it is undone by an engine fact: Mega Meganium loses Triage to Mega Sol, so the signature Triage Heal Pulse can never happen on the Mega. Either Meganium should hold a non-Mega item (Leftovers, keeping Triage and the priority heal, with the Mega slot moving to Machamp - Machampite is in the pool) or Heal Pulse should come from a Triage body that is not the Mega. Also every wall is Fighting-weak (Chansey, Umbreon, Probopass) or Ground-weak (Probopass 4x) - one Fighting-resist body (Slowbro/Clefable-class) would make 'you cannot out-grind this team' true. Sets unchanged in this pass.",
+  "legality_notes": "Authored ability TRIAGE is legal on base Meganium, but the plan's 'Mega Meganium uses Heal Pulse ... through Triage' contradicts the engine (Mega form ability = MEGA_SOL). Flagged for the main agent.",
+  "verification_limit": "The +1 on Chansey and Probopass cannot be re-verified until the main agent rebuilds; this is not the battle most worth re-running (the outcome does not hinge on those two)."
+}
