@@ -1,0 +1,68 @@
+{
+  "rerun_of": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/receipt.json",
+  "rerun_reason": "Confirming rerun for the first pass's unverified level changes (starter slot offset 1->2, TAILLOW 3->4) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
+  "play_order": 30,
+  "e_group": "E0032",
+  "trainer_played": "TRAINER_BRENDAN_RUSTBORO_TREECKO",
+  "aliases_covered": ["TRAINER_BRENDAN_RUSTBORO_MUDKIP", "TRAINER_BRENDAN_RUSTBORO_TORCHIC", "TRAINER_BRENDAN_RUSTBORO_TREECKO", "TRAINER_MAY_RUSTBORO_MUDKIP", "TRAINER_MAY_RUSTBORO_TORCHIC", "TRAINER_MAY_RUSTBORO_TREECKO"],
+  "class": "rival",
+  "location": "Route104; RustboroCity",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/party-rerun.json",
+  "party_changed_from_first_pass": {
+    "reason": "Chronology. ALAKAZAM was removed: Abra's only source is wild:GraniteCave_1F, which is C12 - after the Dewford voyage, two chapters past this fight. Magearna is retained and is legal here for the first time in the block: this encounter follows Devon Corp (C09), so FLAG_RETURNED_DEVON_GOODS is set and the second-floor stairs are open.",
+    "removed": ["SPECIES_ALAKAZAM"],
+    "added": ["SPECIES_REUNICLUS"],
+    "kept": ["SPECIES_KARTANA", "SPECIES_NIDOKING", "SPECIES_TSAREENA", "SPECIES_LUCARIO", "SPECIES_MAGEARNA"]
+  },
+  "opponent_levels_before": {"TAILLOW": 21, "ELECTRIKE": 22, "SHROOMISH": 22, "COMBUSKEN": 19},
+  "opponent_levels_this_run": {"TAILLOW": 22, "ELECTRIKE": 22, "SHROOMISH": 22, "COMBUSKEN": 20},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/r1", "seed": "0x6D77",
+      "outcome": "won", "turns": 4, "decisions": 5, "player_faints": 0, "opponent_faints": 4,
+      "ai_decision_frames_max": 63, "ai_decision_seconds_max": 1.055,
+      "narrative": "Four to zero in five decisions, and it never felt close. Turn 1 was the rival's best turn: both leads Protected, which blocked the Knock Off that was aimed at Taillow's Flame Orb and simultaneously banked the burn, so Guts came online exactly as authored. It did not matter. Kartana's Sacred Sword removed Taillow on turn 2 before Facade was ever fired and took a Beast Boost for it; Nidoking is Ground, so Electrike's Thunderbolt and Lightning Rod were both dead weight against my lead pair, and Electrike spent the fight at 1 HP behind its Focus Sash before Leaf Blade finished it. Combusken bought a Speed Boost behind a Protect and then died to a 2x Earth Power, and Shroomish - deployed last, alone, against a Grass body it cannot Spore - guarded an empty turn and fell to Triple Axel. Zero player faints."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff", "result": "PASS", "evidence": "r1 turn 1: Taillow Protected, and the guard did two jobs at once - it blocked Kartana's Knock Off, which was aimed specifically at the Flame Orb, and the end-of-turn burn landed, turning Guts on. That is the authored Orb-turn payoff and it beat my counterplay. On turn 2, with Guts live, it chose Quick Attack rather than guarding again."},
+    {"check": "Electrike's Eerie Impulse can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure", "result": "PARTIAL", "evidence": "Electrike chose Protect then Thunderbolt twice, into a Kartana that resists Electric, while its partner slot faced a Nidoking that is flatly immune to it. Eerie Impulse and Thunder Wave were never selected. Thunder Wave into a Ground-immune board is also pointless, so Thunderbolt was not obviously wrong, but Eerie Impulse against my two special attackers in reserve was the unused branch. Electrike had no good turn available and mostly demonstrated that Lightning Rod does nothing when the opposing pair does not use Electric moves."},
+    {"check": "Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles", "result": "FAIL (this run)", "evidence": "Shroomish entered on turn 4, chose Protect against a board where nothing was aimed at it, and then died on turn 5 without ever using Spore, Leech Seed or Giga Drain. One guard, zero payoff, zero authored moves. See the Protect ledger and AI observations - I am recording it as an empty guard rather than a defect because of the no-read rule, but the authored line names this exact failure mode."},
+    {"check": "Lightning Rod redirects and boosts Electric attacks", "result": "NOT OBSERVED", "evidence": "I deliberately never fired an Electric move - Nidoking held Thunderbolt and never used it, precisely because the redirect exists. That is the ability doing its job by deterrence. The mechanic itself was not exercised."},
+    {"check": "Hoenn keeps its printed bespoke sets; the starter slot is a coherent regional substitution", "result": "PASS", "evidence": "The Treecko-branch Brendan correctly fielded Combusken (the unchosen third starter's middle stage) with Eviolite, Speed Boost, and the printed Fire Punch / Brick Break / Rock Slide / Protect set."},
+    {"check": "Speed Boost Combusken converts a guarded turn into real speed", "result": "PASS", "evidence": "r1 turn 3: Combusken Protected, blocked a 2x Earth Power, and banked a Speed Boost in the same turn. That is a correct, valuable guard and the best use of Protect anyone made in this fight."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "TAILLOW", "payoff": "real, and double - blocked the Knock Off aimed at its Flame Orb and banked the burn that switched Guts on"},
+    {"turn": 1, "user": "ELECTRIKE", "payoff": "real - blocked a Sheer Force Life Orb Earth Power at 2x. It held a Focus Sash so it would have survived anyway, which makes this a smaller win than Taillow's, but real damage was denied"},
+    {"turn": 3, "user": "COMBUSKEN", "payoff": "real - blocked a 2x Earth Power and banked a Speed Boost"},
+    {"turn": 4, "user": "SHROOMISH", "payoff": "EMPTY - at 79/79 on the turn it entered, with both of my attacks aimed at Combusken. Nothing was blocked, no partner action was bought, and Shroomish then died having used none of Spore, Leech Seed or Giga Drain"}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Three of four Protects had real, specific payoff and the Taillow one beat my counterplay outright, which is a marked improvement in guard quality over the first pass. The fourth, Shroomish's, was empty. Under the September 15 no-read rule the AI cannot see my targets, so a turn-of-entry guard is a forecast bet rather than an illegal choice, and I am not filing it as a defect. It is worth passing to the AI owner anyway because the dossier for this trainer explicitly warns against 'empty Protect cycles' on this exact member, and because Shroomish entering as the last body against a powder-immune Grass opponent had a strictly better option available: Leech Seed is not powder and would have worked.",
+    "COSMETIC, not AI: the battle text rendered the rival as 'ウエ~TRAINER~BRENDAN' - two stray katakana before the trainer class. It appears in the send-out and victory lines. Almost certainly an uninitialised rival-name buffer in the headless fixture rather than authored data, but it is in the message stream and the main agent should confirm it does not reach the release ROM.",
+    "ai_decision_frames_max 63 (1.055 s), consistent with the rest of the block and up from the first pass."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with zero player faints and no real threat. The brief's rule is +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "starter slot (GROVYLE / MARSHTOMP / COMBUSKEN, all six aliases)", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21},
+      {"member": "ELECTRIKE (all six aliases)", "offset_before": 4, "offset_after": 5, "level_before": 22, "level_after": 23}
+    ],
+    "reasoning": "The starter is the lowest-level member and the only one that threatened anything, so it takes the second of its two permitted points; this now spends its +/-2 budget for this pass in full. Electrike is untouched so far and takes its first point: at 23 it survives the Ice Beam and Earth Power chip that otherwise leaves it sitting at 1 HP behind a Focus Sash doing nothing. I deliberately did NOT raise Taillow, which already has +1 and played its authored turn perfectly, or Shroomish, whose problem is deployment order rather than level - a level will not make it Spore a Grass type.",
+    "budget_after_this_pass": {"TAILLOW": "+1 of 2 used", "ELECTRIKE": "+1 of 2 used", "SHROOMISH": "0 of 2 used", "starter slot": "+2 of 2 used - exhausted"},
+    "applied_to_all_six_aliases": true,
+    "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. I did not run scripts/emerald_champions_teams.py --write: a concurrent session has uncommitted edits to other trainers in the same authored file (Pikachu, Mienfoo, Ditto, Heliolisk offsets), and materializing would sweep their in-flight work into the generated outputs. My twelve lines were staged as an isolated hunk so their changes were not committed with mine. The main agent materializes.",
+    "rerun_after_this_change": "NOT PERFORMED. The driver reads opponent levels from the compiled ROM, so confirming these two +1s needs a rebuild that only the main agent can do. The brief's 'rerun once' step is therefore outstanding for E0032."
+  },
+  "cooler_note": "The rival's identity is right and the Taillow Orb turn is genuinely clever - it is the one moment in this fight where the AI out-thought my prepared answer. The structural problem is that three of the four members are conditional support and the conditions collapse against a single well-chosen party. Electrike's whole kit is Electric, so a Ground lead makes it a spectator; Shroomish's whole kit is powder and Leech Seed, so a Grass lead makes it a spectator; that leaves Taillow and a middle-stage starter to carry a four-member rival fight. A concrete suggestion for a later pass, not applied here: Electrike's fourth slot is Protect, and giving it a non-Electric attack - or leading Shroomish beside Taillow so its Spore happens while the opponent still has grounded, non-Grass bodies out - would stop both members from being switched off by one type choice. Species-wise the continuity picks are correct and worth keeping.",
+  "authored_set_legality": "No legality problem found in any of the six aliases.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
