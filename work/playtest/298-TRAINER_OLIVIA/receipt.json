@@ -1,0 +1,38 @@
+{
+  "play_order": 298, "e_group": "E0464", "trainer": "TRAINER_OLIVIA", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/298-TRAINER_OLIVIA/party_artillery_84.json",
+  "availability_note": "Same Sootopolis party (Rillaboom 36, Kartana 20, Raging Bolt 60, Flutter Mane 68, Incineroar 36, Zapdos 30 reachable legend); Sootopolis after the cavern and Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/298-TRAINER_OLIVIA/a1", "seed": 1, "outcome": "won", "turns": 8, "decisions": 9, "player_faints": 1, "opponent_faints": 6, "note": "T1 Grassy Glide fired Carracosta's Weakness Policy and Leaf Blade finished it the same turn; Araquanid's Leech Life did 259 to Rillaboom. T2 Rillaboom lost a speed tie to Cramorant's Ice Beam and fainted before U-turn; Araquanid Protect. T3 Clawitzer switched in for Araquanid and was OHKOed by a +1 Leaf Blade; Cramorant Protect. T4 Hurricane broke Kartana's Sash and confused it; Thunderbolt (4x) took Cramorant. T5 Blastoise switched in for Araquanid (un-Mega'd) and was OHKOed by Thunderbolt. T6-T7 Araquanid Protect then Liquidation; Thunderbolt took it. T8 Tentacruel's second Protect failed and Thunderbolt + Knock Off ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Carracosta Shell Smash only behind Araquanid's Wide Guard / attack; Weakness Policy fires on a super-effective hit", "result": "PASS (Policy fired) / no payoff", "evidence": "T1 chose Aqua Jet (not Smash, correct with two Grass foes across); Grassy Glide triggered the Policy (+2/+2 shown) and Leaf Blade KOed it in the same turn through Solid Rock."},
+    {"check": "Araquanid Water Bubble Liquidation / Leech Life / Wide Guard front", "result": "PASS", "evidence": "T1 Leech Life 259 on an Assault Vest Rillaboom; Protect on T2/T4/T6 each blocked a super-effective hit (three real Protects); T7 Liquidation 38 on a resisting Raging Bolt. It never used Wide Guard because I never used a spread move."},
+    {"check": "Cramorant Surf + Gulp Missile signature", "result": "NOT REACHED", "evidence": "It chose Ice Beam (KO on Rillaboom), Protect and Hurricane (Sash break + confusion) and never Surfed, so no catch was ever held; a 4x Thunderbolt took it. Sensible clicks, but the signature never appeared."},
+    {"check": "Tentacruel Liquid Ooze punishes drainers", "result": "NOT TESTED", "evidence": "I never drained (crack line). It used Muddy Water (114 on Incineroar) and Protect twice, the second failing."},
+    {"check": "Choice Specs Clawitzer pulse artillery", "result": "NOT REACHED", "evidence": "AI switched it in for Araquanid on T3 directly into a +1 Leaf Blade and it fainted without a move."},
+    {"check": "Mega Blastoise closer", "result": "FAIL (sacked)", "evidence": "T5 the AI switched Blastoise in for Araquanid as a receiver in front of Raging Bolt; it took a 2x Thunderbolt un-Mega'd and fainted without a move."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Araquanid", "payoff": "REAL - blocked a +1 Leaf Blade; Cramorant KOed Rillaboom beside it."},
+    {"turn": 3, "user": "Cramorant", "payoff": "REAL - blocked a lethal 4x Thunderbolt."},
+    {"turn": 4, "user": "Araquanid", "payoff": "REAL - blocked a +2 Leaf Blade; Cramorant's Hurricane broke Kartana's Sash."},
+    {"turn": 5, "user": "Tentacruel", "payoff": "EMPTY - nothing targeted it; partner slot was a Blastoise sack."},
+    {"turn": 6, "user": "Araquanid", "payoff": "REAL - blocked Thunderbolt + Knock Off; Tentacruel's Muddy Water hit both."},
+    {"turn": 7, "user": "Tentacruel", "payoff": "REAL (redirect) - Knock Off redirected into it after Araquanid fainted."},
+    {"turn": 8, "user": "Tentacruel", "payoff": "FAILED - consecutive Protect failed, last member."}
+  ],
+  "ai_defects": [
+    {"turn": "T3 and T5", "battler": "Clawitzer, then Blastoise (AI switch receivers)", "board": "Araquanid vs Raging Bolt + Kartana(+1)", "chosen": "switch Araquanid out into Clawitzer (T3), then into Blastoise (T5)", "better": "Both receivers were frail special attackers with 4 HP EVs fed into a visible Grass or Electric attacker; the Mega closer in particular should never be the sack. Araquanid itself was the bulkiest body and had Protect. Medium severity: it cost the room its Specs cannon and its Mega without either moving."}
+  ],
+  "authored_set_legality": "No problem found. Levels L84 x5, Blastoise L85.",
+  "theme_note": "Half. The Policy gamble fired visibly and Araquanid's Water Bubble bite was the biggest hit I took in the gym, but the two artillery pieces (Clawitzer, Mega Blastoise) and the Gulp Missile signature never happened - two of them because the AI used them as switch fodder.",
+  "level_changes": [
+    {"member": "CARRACOSTA", "before": 2, "after": 3, "reason": "first-try win with one faint (speed-tie loss) and no real threat; Carracosta died on T1 before its boost could act."},
+    {"member": "CLAWITZER", "before": 2, "after": 3, "reason": "fainted on the switch-in turn without acting; Araquanid/Cramorant did the room's work and Blastoise is the Mega."}
+  ],
+  "level_changes_unverified": "Not re-run: build-8 ROM predates these offsets; rerun after the main agent rebuilds.",
+  "cooler": "The pieces are good; the AI's switch logic undercuts them. Worth checking on the AI side: the switch-receiver choice picks the frailest reserve (Clawitzer, then the un-Mega'd Blastoise) into an obvious super-effective attacker. On the set side, Cramorant needs a reason to click Surf over Ice Beam/Hurricane when the catch is its whole point. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun with a non-Grass lead to see whether Cramorant Surfs and whether the AI still sacks Blastoise."
+}
