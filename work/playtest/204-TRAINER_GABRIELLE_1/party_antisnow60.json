@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge cap 60 anti-snow party, rebuilt for E0311 TRAINER_GABRIELLE_1 after attempt 1 lost 6-4",
+  "availability_audit": "Same discipline as work/playtest/_party/party_route121_60.json - every member's pool-60 gate is 54 or lower, so each source map is one the player cleared well before Mt Pyre: Incineroar gate 36 (Litten line), Amoonguss gate 42 (Foongus line), Cinderace gate 36 (evolution:level from SPECIES_RABOOT), Iron Hands gate 30 (wild:NewMauville_Inside, the New Mauville shutdown), Metagross gate 48 (Beldum/Metang line) with ITEM_METAGROSSITE stone-window 42, and Zapdos gate 30 (legendary_sign:NewMauville_Inside). Nothing from Shoal Cave, Route 123/124/126/127, the Safari Zone, the Abandoned Ship or Mt Pyre itself is used - a player who has just reached Mt Pyre 3F with Lilycove behind them and Team Aqua not yet fought has reached none of those.",
+  "plan": "Built directly from the dossier's own crack line after attempt 1 proved the generalist party could not break an Ice wall. Three things changed. (1) Physical Fire instead of special Fire: Frosmoth's Ice Scales halves special damage, so Incineroar's Flare Blitz and Cinderace's Pyro Ball are the Fire that actually works, and Zapdos's Heat Wave is now a bonus rather than the plan. (2) Real Fighting coverage: Fighting is 2x on every member of an Ice team and answers Avalugg's Body Press wall specifically, so Iron Hands (Drain Punch, Close Combat), Cinderace (High Jump Kick) and Mega Metagross (Hammer Arm) all carry it. Attempt 1 had exactly one Fighting move in the whole party, on a Landorus that died before using it twice. (3) No Ice attacker at all: Weavile's entire moveset was resisted and it was dead weight. Amoonguss keeps Spore for the two Slush Rush sweepers - note Abomasnow is Grass and immune to powder, so sleep must be aimed at Sandslash-Alola and Cetitan.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_FLARE_BLITZ", "MOVE_KNOCK_OFF", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out and Intimidate control; physical Fire is 4x into Abomasnow and Sandslash-Alola, Dark is 2x into Frosmoth's Bug half",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "sleep on the Slush Rush sweepers, which are the only reason this team outspeeds anything",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_CINDERACE",
+      "moves": ["MOVE_PYRO_BALL", "MOVE_HIGH_JUMP_KICK", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_LIBERO",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "fast physical Fire and Fighting in one body; outspeeds a Slush Rush sweeper once the snow is gone",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_RABOOT."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": ["MOVE_DRAIN_PUNCH", "MOVE_CLOSE_COMBAT", "MOVE_THUNDER_PUNCH", "MOVE_FAKE_OUT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [252, 252, 0, 0, 4, 0],
+      "role": "the Fighting wall-breaker: Drain Punch sustains through snow chip and Close Combat is 2x on every member of the team",
+      "availability": "pool-60 gate 30, wild:NewMauville_Inside (New Mauville shutdown, a C24-era chapter)."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "reachable legend: spread Fire pressure and recovery; note Ice Scales blunts it into Frosmoth specifically",
+      "availability": "pool-60 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": ["MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_HAMMER_ARM", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition; Steel is 2x on pure Ice and Hammer Arm is the answer to Avalugg that Ice Punch never was",
+      "availability": "pool-60 gate 48 (Beldum/Metang line) and ITEM_METAGROSSITE stone-window 42."
+    }
+  ]
+}

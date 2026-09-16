@@ -1,0 +1,58 @@
+{
+  "play_order": 204,
+  "e_group": "E0311",
+  "trainer": "TRAINER_GABRIELLE_1",
+  "class": "ace",
+  "location": "MtPyre_3F",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Mega Abomasnow (+1) at L59 and Sandslash-Alola / Cetitan / Frosmoth / Avalugg / Mamoswine (0) at L58 = cap + offset - 2 on Medium. Chronology: Lilycove is reached and Team Aqua has not yet been fought at Mt Pyre, so nothing past the Mind Badge window is legal and the party uses nothing from Mt Pyre itself.",
+  "difficulty": "medium",
+  "party_manifests": [
+    "work/playtest/_party/party_route121_60.json",
+    "work/playtest/204-TRAINER_GABRIELLE_1/party_antisnow60.json"
+  ],
+  "chronology_note": "Both parties are restricted to pool-60 entries gated at 54 or lower, so every source map precedes Mt Pyre: Litten line 36, Foongus line 42, Scorbunny line 36, Iron Hands wild:NewMauville_Inside 30, Beldum line 48 with Metagrossite stone-window 42, Zapdos and Landorus legendary signs at 30 and 42. No Shoal Cave, Route 123/124/126/127, Safari Zone, Abandoned Ship, Lilycove or Mt Pyre species were used.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-5",
+      "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "lost", "turns": 8, "player_faints": 6, "opponent_faints": 4,
+      "why": "The generalist party that had beaten the previous eight battles has no answer to a committed Ice wall. Weavile's entire moveset is resisted by Ice, so a sixth of the party was dead weight; Landorus is 4x weak to Avalanche; Metagross and Weavile are both 4x weak to Avalugg's Body Press; and Zapdos's Heat Wave - my only Fire - is a special move, which Frosmoth's Ice Scales halves. Two Slush Rush sweepers moving first in snow took Amoonguss from 263 to 52 on turn 1 and killed Incineroar before it acted on turn 4. It came down to a 1 HP Weavile against a 38 HP Frosmoth and a 98 HP Avalugg, and Frosmoth's Protect blocked the Icicle Crash that would have won it."
+    },
+    {
+      "n": 2, "seed": 2, "build": "work/agent-battle-build-5",
+      "party": "party_antisnow60.json (Incineroar/Amoonguss/Cinderace/Iron Hands/Zapdos/Mega Metagross)",
+      "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 6,
+      "why": "Rebuilt to the dossier's own crack: physical Fire (Flare Blitz, Pyro Ball) because Ice Scales blanks special Fire, real Fighting coverage on three members because Fighting is 2x on every one of the six, and no Ice attacker at all. Incineroar's Flare Blitz is 4x into both Abomasnow and Sandslash-Alola; Iron Hands' Close Combat OHKOed Mamoswine and Drain Punch finished Cetitan; and the snow expiring on turn 5 after Mega Abomasnow died is the exact turn the fight turned. Iron Hands survived at 8/311."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "SNOW - Mega Abomasnow's Snow Warning is automatic and the whole team becomes physically bulkier", "result": "PASS", "evidence": "the turn-0 board reads weather B_WEATHER_SNOW in both attempts, before any move. 'Snow continues to fall' ticked every turn until Abomasnow's death timer ran out on turn 5-6 of each attempt."},
+    {"check": "Slush Rush doubles Sandslash-Alola's and Cetitan's Speed, so the team has two sweepers off one weather", "result": "PASS, and it is the fight", "evidence": "a1 turn 1: Sandslash moved before a base-30 Amoonguss AND before Incineroar, and its Icicle Crash dealt 211 into a 263 HP body. a1 turn 4: Cetitan's High Horsepower KOed a 126 HP Incineroar before it acted. In both attempts the moment the snow stopped is the moment I stopped losing Pokemon. This is a genuinely well-built weather team."},
+    {"check": "Frosmoth's Ice Scales halves every special attack, answering the Fire and Rock special coverage a player brings", "result": "PASS, decisively", "evidence": "This single ability is why attempt 1 was lost. My only Fire move was Zapdos's special Heat Wave; against Frosmoth that is 4x cut to an effective 2x, and Frosmoth still ended attempt 1 alive at 38 HP after everything I had. The only thing that dented it was a physical Knock Off (165). Rebuilding around physical Fire in attempt 2 is the direct consequence."},
+    {"check": "Quiver Dance behind Ice Scales makes Frosmoth the win condition", "result": "PASS", "evidence": "a1 turn 8: Frosmoth used Quiver Dance at 203/203 with a partner alive, and then Protected at 38 HP on turn 9 to survive. It personally won attempt 1. This is only the second time in the whole block that an opposing Pokemon selected a printed stat-boost move on a turn where it paid off (the other was Gardevoir's Calm Mind in E0303), and it is worth recording as the counter-example."},
+    {"check": "Avalugg's Sturdy guarantees one survived hit and Body Press converts its raised Defense into damage", "result": "PARTIAL", "evidence": "Body Press is exactly as advertised - 4x into Weavile and 4x into Mega Metagross, and it landed the killing blow in attempt 1. Sturdy never came up: no single hit I landed was an OHKO from full. Wide Guard was never selected even after Heat Wave was revealed - see AI defect E0311-1."},
+    {"check": "Mamoswine's Thick Fat halves the Fire and Ice aimed at it, and Ice Shard is the priority finish", "result": "PARTIAL", "evidence": "Thick Fat mattered - it is why Incineroar could not simply Flare Blitz through it, and High Horsepower KOed Incineroar in both attempts. Ice Shard was never selected in either attempt, so the priority-finish half of the role did not appear."},
+    {"check": "Change the weather and the team loses half its Speed", "result": "PASS, by natural expiry", "evidence": "I had no weather setter, but Snow Warning's own timer ran out five turns after Mega Abomasnow fainted, and in both attempts that turn is when the Slush Rush pair stopped moving first. The crack line is correct: the whole team is renting its Speed from one Pokemon's ability."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 9, "battler": "Frosmoth", "payoff": "blocked Weavile's Icicle Crash at 38/203 - the hit that would have KOed it and kept the battle alive. This guard directly won Gabrielle the fight"},
+    {"attempt": 2, "turn": 4, "battler": "Sandslash-Alola", "payoff": "blocked BOTH Cinderace's 4x Pyro Ball and Iron Hands' Close Combat on the same turn, at 177/196. Two lethal or near-lethal hits for one turn"}
+  ],
+  "protect_summary": "2 opponent Protects across two attempts, both with outstanding payoff, 0 empty. Together with E0288's Mega Aerodactyl this is the best guarding in the block.",
+  "ai_defects": [
+    {
+      "id": "E0311-1",
+      "turn": "a1 turn 6",
+      "board": "Avalugg 232/232 (Wide Guard, Recover, Body Press, Avalanche) beside Cetitan at 180/319 and burned, opposite a Zapdos that had used Heat Wave on the previous turn - so the spread Fire move was revealed.",
+      "chosen": "Avalanche.",
+      "better": "Wide Guard. Zapdos's Heat Wave was the only move on my side that could hit both opposing slots, it is 2x on both Ice types, and it had been revealed the turn before; Wide Guard would have blanked it and protected the burned Cetitan for a turn. Avalanche was not a bad attack, but Avalugg is the printed wall and Wide Guard is the one move it has that its partner benefits from. Wide Guard was never selected in either attempt. Severity: low-moderate - Heat Wave happened to miss twice, so the mistake was not punished, but a protective side-move that never fires is the same class of problem as the setup moves elsewhere in this block."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. The brief's reduction rule requires three lost optimized attempts; I lost one and then won on attempt 2 with two faints. The loss was a preparation failure, not an unfair fight - attempt 1 brought a Weavile whose entire moveset is resisted by an Ice team and exactly one Fighting move in six Pokemon, and the dossier's crack line names Fire, Fighting, Rock and Steel explicitly. Once I brought the authored answer the fight was still close enough to cost two Pokemon and leave the winner at 8/311. That is a correctly tuned ace, and it is the only battle in this twelve-battle block that beat me. Nothing changed in either direction.",
+  "cooler": "The revision was the right call and playing it confirms the dossier's self-assessment rather than softening it - the old RAIN-and-SNOW build genuinely would have deleted itself, and one committed weather with two Slush Rush abusers, a special wall and a physical wall is a real ace-class plan. What the fight demonstrates that the write-up does not yet claim: this is the first encounter in the block where a generalist party simply loses and the player has to answer the specific type. That is valuable placement immediately before the Aqua arc. One concrete improvement worth considering: the entire team rents its Speed from Abomasnow's ability, and Abomasnow is also the member most likely to die first (it is 4x weak to Fire, the exact coverage the crack tells the player to bring). In both attempts it died on turn 2 and the snow then ran out on a timer, which hands the player the fight for free. A Heat Rock, or moving Snow Warning onto a less obvious target, would make the weather survive the counterplay it invites. Second note: Mamoswine never used Ice Shard and Avalugg never used Wide Guard, so two of the team's three non-attacking tools are currently invisible.",
+  "legality_notes": "No legality problem in the authored set. Abomasite and all six members are inside the cap-60 window, and Mt Pyre 3F is correctly reachable with Lilycove done and Aqua unfought.",
+  "verification_limit": "No level change was made, so nothing is pending re-verification for this battle."
+}
