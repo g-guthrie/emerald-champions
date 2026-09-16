@@ -1,0 +1,34 @@
+{
+  "play_order": 322, "e_group": "E0491", "trainer": "TRAINER_FELIX", "class": "ace", "location": "VictoryRoad_B2F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Xerneas and Greninja offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/322-TRAINER_FELIX/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Jynx Lovely Kiss or Fake Out steals turn 1", "Xerneas Power Herb Geomancy turn 1 (+2/+2/+2)", "Sceptile / Mega Greninja Protean fast mixed mode", "Eviolite Duraludon special wall, Stalwart", "Aegislash Stance Change + King's Shield + Weakness Policy"],
+  "attempts": [
+    {"n": 1, "seed": 12, "run_dir": "a1", "party": "party_vr96_b.json led by Whimsicott + Mega Kangaskhan", "outcome": "won", "turns": 9, "player_faints": 4, "opponent_faints": 6,
+     "why": "Turn 1 Jynx's faster Fake Out flinched Whimsicott before its Prankster Taunt; Kangaskhan's Fake Out broke Jynx's Sash; Xerneas chose Moonblast (Fairy Aura) and OHKO'd Whimsicott. Turn 2 Xerneas Protected the Double-Edge + Heat Wave; Jynx Ice Beam 174 on Kangaskhan, Heat Wave KO'd Jynx. Turn 3 Overheat + Double-Edge KO'd Xerneas (it chose Moonblast again, never Geomancy); Sceptile's Leaf Storm missed. Turn 4 Double-Edge OHKO'd Sceptile, Duraludon Draco Meteor KO'd Kangaskhan. Turn 5 Mega Greninja Protean Ice Beam 4x OHKO'd Landorus; Close Combat took Duraludon to 69. Turn 6 Greninja Protected (Unseen Fist quarter went through for 119). Turn 7 Close Combat KO'd Duraludon, Flare Blitz KO'd the now-Ice Greninja. Turn 8 Aegislash Shadow Sneak KO'd Urshifu (118, -3 Def); Parting Shot -1/-1. Turn 9 King's Shield blocked Dark Pulse + Flare Blitz (Incineroar -1 Atk). Turn 10 Dark Pulse OHKO'd Aegislash in Shield Forme (Weakness Policy irrelevant because it died). Faints: Whimsicott, Kangaskhan, Landorus, Urshifu."}
+  ],
+  "strategy_checks": [
+    {"check": "Jynx steals turn 1", "result": "PASS", "evidence": "turn 1 Fake Out flinched Whimsicott (the Taunt user) before Prankster Taunt could resolve"},
+    {"check": "Power Herb Geomancy", "result": "FAIL (never chosen)", "evidence": "Xerneas' three turns: Moonblast (KO), Protect, Moonblast. With Power Herb held and a Sash-less Kangaskhan opposite, it never once set up; the dossier's 'single most dangerous turn in Victory Road' did not exist"},
+    {"check": "Sceptile / Mega Greninja Protean", "result": "PASS (Greninja), PARTIAL (Sceptile)", "evidence": "turn 5 Mega Evolved, Ice Beam changed type and 4x OHKO'd Landorus; Sceptile missed Leaf Storm twice then died"},
+    {"check": "Duraludon Stalwart wall", "result": "PASS", "evidence": "Draco Meteor KO'd Kangaskhan turn 4; survived Close Combat at 69"},
+    {"check": "Aegislash Stance Change / King's Shield / Weakness Policy", "result": "PASS (stance, King's Shield), Policy never fired", "evidence": "Shadow Sneak KO turn 8 (Blade), King's Shield turn 9 returned it to Shield and dropped Incineroar's Attack; OHKO'd turn 10 before the Policy mattered"}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Xerneas", "payoff": "blocked Double-Edge + Heat Wave (~480, lethal) - good"},
+    {"turn": 6, "user": "Greninja", "payoff": "blocked Fake Out; Close Combat still did 119 through it (Unseen Fist, by design) - fair"},
+    {"turn": 9, "user": "Aegislash (King's Shield)", "payoff": "blocked lethal Dark Pulse + Flare Blitz and dropped Incineroar's Attack - good, delay only"}
+  ],
+  "protect_summary": "3 Protects, all good.",
+  "ai_defects": [
+    {"turn": "1 and 3", "board": "Xerneas 378/378 with Power Herb beside Jynx, facing Whimsicott (Sash) + Kangaskhan, later Chi-Yu + Kangaskhan", "chosen": "Moonblast both turns", "better": "Geomancy (instant with Power Herb: +2 SpA/SpD/Spe). The turn-1 Moonblast KO on Whimsicott is defensible, but on turn 3 at full HP with no KO available (Kangaskhan 164, Chi-Yu 242 full) it attacked again and was OHKO'd. The authored plan's centrepiece never fired; the setup scoring should value a Power Herb Geomancy far above a non-lethal Moonblast."}
+  ],
+  "ai_notes": "Aegislash's Shadow Sneak into a 118-HP Urshifu and its King's Shield timing were both right. Greninja Protecting on the Fake Out turn was a good read.",
+  "level_changes": [],
+  "level_change_rationale": "Won first try 6-4 after the hardest fight of the block. Keep. The team is at the right tier even with its ace playing wrong.",
+  "cooler": "The gate is correct and, if Geomancy ever fires, ferocious. The one piece of the design that did not matter was the Weakness Policy: the player can simply never hit Shield Forme super-effectively and take it in one Blade-Forme hit. No set change; fix the Geomancy scoring first.",
+  "legality_notes": "Sets legal.",
+  "verification_limit": "No level change."
+}
