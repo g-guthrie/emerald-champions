@@ -1,0 +1,32 @@
+{
+  "play_order": 320, "e_group": "E0489", "trainer": "TRAINER_CAROLINE", "class": "ace", "location": "VictoryRoad_B2F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Garchomp and Eternatus offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/320-TRAINER_CAROLINE/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Sand Stream on entry, Smooth Rock extends it", "Stoutland/Sandslash Sand Rush outspeed the player's lead", "Mega Garchomp in slot 3 with Sand Veil", "Alolan Dugtrio Sand Force / Sucker Punch", "Retaliate after an ally faints", "Eternatus weather-independent closer"],
+  "attempts": [
+    {"n": 1, "seed": 10, "run_dir": "a1", "party": "party_vr96_b.json led by Urshifu-Rapid + Landorus", "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 6,
+     "why": "Sand was live at turn 0. Turn 1 Stoutland Protected, Earth Power + a Surging Strikes crit KO'd Tyranitar. Turn 2 doubled Retaliate + Stomping Tantrum focus-fired Urshifu (308, KO); Earth Power took the un-Mega'd Garchomp to 55. Turn 3 Garchomp Mega Evolved and was KO'd by Sucker Punch before acting; Retaliate hit Kangaskhan for 126; a crit Earth Power KO'd Stoutland. Turn 4 High Horsepower + Iron Head KO'd Mega Kangaskhan; Earth Power OHKO'd Alolan Dugtrio. Turn 5 Prankster Tailwind, Earth Power OHKO'd Sandslash before it moved, Dynamax Cannon hit Landorus for 232. Turn 6-7 Eternatus Protected once, then Earth Power OHKO'd it. Faints: Urshifu, Kangaskhan."}
+  ],
+  "strategy_checks": [
+    {"check": "Sand Stream / Smooth Rock", "result": "PASS", "evidence": "B_WEATHER_SANDSTORM from turn 0 through the end (7 turns, still raging)"},
+    {"check": "Sand Rush speed", "result": "PASS", "evidence": "Stoutland moved before Urshifu and Landorus turns 2-3; Sandslash only lost the race to a Prankster Tailwind"},
+    {"check": "Retaliate after an ally faints", "result": "PASS", "evidence": "turn 2 Retaliate (doubled, ally fainted turn 1) did 308 with Stomping Tantrum to KO Urshifu; turn 3 Retaliate 126"},
+    {"check": "Mega Garchomp slot 3 / Sand Veil", "result": "PARTIAL", "evidence": "entered in slot 3 as designed; took 289 from Earth Power un-Mega'd (turn 2), Mega Evolved turn 3 and was Sucker Punched before acting; no Sand Veil miss occurred"},
+    {"check": "Dugtrio Sand Force / Sucker Punch", "result": "PARTIAL", "evidence": "Iron Head (Sand Force) helped KO Kangaskhan turn 4; Sucker Punch never chosen; OHKO'd by Earth Power"},
+    {"check": "Eternatus closer", "result": "PASS", "evidence": "Dynamax Cannon 232 on Landorus turn 5, Protect turn 6, OHKO'd by Earth Power turn 7"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Stoutland", "payoff": "empty - nothing was aimed at it (both attacks went into Tyranitar)"},
+    {"turn": 6, "user": "Eternatus", "payoff": "blocked a lethal Earth Power + Moonblast - good, delay only"}
+  ],
+  "protect_summary": "2 Protects: 1 good, 1 empty. Tyranitar's 'couldn't fully protect itself' message on turn 1 reads as Unseen Fist through a Protect that the native latch did not record (chosen shows Crunch); noted, not counted.",
+  "ai_defects": [],
+  "ai_notes": "Focus fire was consistently correct (Urshifu turn 2, Kangaskhan turn 4). Garchomp Mega Evolving at 55 HP into a Sucker Punch user is the AI not seeing priority; not illegal.",
+  "level_changes": [],
+  "level_change_rationale": "Won first try after a real fight with 2 faints (two focus-fire KOs). Keep.",
+  "cooler": "The sand door works as designed: three sand abilities all mattered and Retaliate's doubled hit was the fight's best moment. Only note: Mega Garchomp in slot 3 arrives while the player still has fresh answers and left the field without a single attack; Sand Veil never got a chance to matter. That is placement, not sets; no change suggested.",
+  "legality_notes": "Sets legal (Retaliate replacement noted in the dossier).",
+  "verification_limit": "No level change."
+}
