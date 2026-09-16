@@ -1951,3 +1951,59 @@ Under Trick Room a minimum-Speed Stakataka is exactly the body Gyro Ball is
 strongest on. So "86 damage from a resisted Gyro Ball" may well be the correct
 power, and what needs checking on that board is only whether Stone Edge's
 knockout was seen — an effectiveness-and-KO question, not a power-formula one.
+
+# The two-owner multi Mega (E0409): reproduced, and the real fragility
+
+Commit `0267696b32`. **196 passed, 0 failed** on my allowlist.
+
+## What it is not
+
+Instrumented on a native two-owner multi board:
+
+```
+CanMegaEvolve  L=1 R=1     usableGimmick L=mega R=mega
+megaLimit      L=1 R=1     HasTrainerUsedGimmick L=0 R=0
+IsPartnerMonFromSameTrainer = 0
+```
+
+Nothing in the allocation blocks it. With the authored AI flags on both owners
+the joint search runs, enumerates the mega masks across the two trainers,
+scores a mega board, and **both Camerupt and Manectric evolve on their first
+action**. That case is now the fixture.
+
+## What it is
+
+The joint search is gated on `AI_FLAG_SMART_MON_CHOICES` being set on the actor
+**and on its partner**:
+
+```c
+if (!IsDoubleBattle() || !IsBattlerAlive(actor) || !BattlerHasAi(partner)
+    || !(aiFlags[actor] & AI_FLAG_SMART_MON_CHOICES)
+    || (IsBattlerAlive(partner) && !(aiFlags[partner] & AI_FLAG_SMART_MON_CHOICES)))
+    return FALSE;
+```
+
+In a two-owner multi that partner belongs to **the other trainer**. If the two
+owners' flag sets differ, the joint search is skipped for both of them — and in
+doubles the joint search is the only thing that ever elects a Mega. My first
+version of this fixture had no flags, the search never ran (`ran=0`), and
+neither Mega evolved: the reported symptom exactly.
+
+**So the live check is whether Courtney and Maxie carry the same AI flags.** If
+they do not, that single difference disables the joint search, the Mega
+decision and every other pair-level judgement for that whole battle — which
+would also explain why that room's decisions look unlike the rest of the game.
+
+Two things worth doing beyond the check: the gate should fall back to
+per-battler decisions that still elect a usable Mega rather than silently
+dropping it, and a mismatch between two owners on one side is worth surfacing
+in a receipt rather than being invisible.
+
+## A process note on this pass
+
+I lost a build to a stale index: an earlier `git add` had staged an
+experimental change to `src/battle_ai_pair.c`, so `git checkout --` restored
+the *staged* version rather than HEAD's and the experiment stayed in the
+binary. `git checkout HEAD -- <path>` is the form that actually reverts, and
+`git status --short` shows the difference in the first column. Worth knowing on
+a shared tree.
