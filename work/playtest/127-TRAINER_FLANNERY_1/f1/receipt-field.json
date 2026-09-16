@@ -1,0 +1,128 @@
+{
+  "play_order": 127,
+  "e_group": "E0150",
+  "trainer": "TRAINER_FLANNERY_1",
+  "class": "leader",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/127-TRAINER_FLANNERY_1/receipt.json (mist-less run at cap 36; left intact)",
+  "build": "work/agent-battle-build-4",
+  "cap_note": "Cap 36 -> 42. Observed levels 42/41/40/41/40/39 match the dossier's 'Medium cap40 levels 42/41/40/41/40/39' exactly.",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "weather_at_turn_0": [
+        "B_WEATHER_SUN_NORMAL"
+      ],
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS. Turn 0 read terrain 'misty' AND weather sun simultaneously - the authored terrain and Torkoal's Drought coexisted from before the first decision."
+  },
+  "party_manifest": "work/playtest/127-TRAINER_FLANNERY_1/f1/party.json",
+  "party_note": "Same six as the rest of the block but deliberately reordered: Garganacl and Swampert lead and Pelipper is held back, because switch-in abilities resolve in Speed order and the slower one sets the weather, so a lead Pelipper's Drizzle is immediately overwritten by Torkoal's Drought. Bringing Pelipper in on turn 1 instead let the rain replace the sun. Chronology re-checked against pool-42.json; all gate<=36 from maps preceding Lavaridge.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 291,
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 4,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.021,
+      "events": "work/playtest/127-TRAINER_FLANNERY_1/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/127-TRAINER_FLANNERY_1/f1/attempt-1-result.json",
+      "notes": "Won 6-4 with two Pokemon left. My worst single mistake of the block opened it: I led Swampert into a Chlorophyll Lilligant and Leaf Storm is 4x into Water/Ground, so it was gone on turn 1 from full HP before doing anything. Also lost Pelipper to a critical Stone Edge (Rock, 4x into Water/Flying), Garganacl to a second Stone Edge, and Kingdra to a Fake Out flinch followed by Shadow Ball. Five Hydro Pump misses across the battle did not help. The fight turned on turn 6, when Kingdra and Primarina removed Mega Chandelure and Entei in the same turn."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the leader's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 0: terrain 'misty', terrain_is_permanent true, authored_by_trainer_a ['misty_terrain'], from_map false, alongside Drought sun."
+    },
+    {
+      "check": "plan: 'Lilligant's Misty Seed supplies a one-time special-defense boost'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn-0 state, before any action: Lilligant's item read NONE (seed consumed) and its stat stages read spd +1. Lilligant is a grounded Grass type, so with Jeff's Flying Hawlucha this block now has the seed activating correctly on both a grounded and an ungrounded holder."
+    },
+    {
+      "check": "plan: 'Rain changes sun only; terrain replacement changes mist only'",
+      "result": "PASS - the cleanest single piece of field evidence in the block",
+      "mist_dependent": true,
+      "evidence": "Turn 1 I switched Pelipper in. The state immediately before read weather ['B_WEATHER_SUN_NORMAL'] / terrain 'misty'; the state immediately after read weather ['B_WEATHER_RAIN_NORMAL'] / terrain 'misty' with terrain_is_permanent still true. Drizzle replaced Drought and left the authored terrain completely untouched, exactly as the plan states. The rain then ran its own Damp Rock timer and expired on turn 9 ('The rain stopped.') while the mist did not."
+    },
+    {
+      "check": "tactic: AFTER_YOU LILLIGANT AFTER_YOU TORKOAL",
+      "result": "PASS mechanically",
+      "mist_dependent": false,
+      "evidence": "Turn 3: 'The opposing Lilligant used After You!' / 'The opposing Torkoal took the kind offer!' and Torkoal acted immediately afterwards. The tactic fired exactly as authored. What it brought forward was a Body Press rather than an Eruption - see ai_notes; that is a target-appropriate choice, not a tactic failure."
+    },
+    {
+      "check": "plan: 'Helping Hand replaces mist-blocked Sleep Powder as its alternate support action'",
+      "result": "PASS structurally, NOT EXERCISED in play",
+      "mist_dependent": true,
+      "evidence": "Lilligant's revealed set is Leaf Storm / After You / Helping Hand / Protect with no Sleep Powder, which is the correct build - Sleep Powder's sleep would be blocked on every grounded target under the mist. Lilligant spent its three turns on Leaf Storm, Leaf Storm and After You, so Helping Hand itself was never selected."
+    },
+    {
+      "check": "plan: 'Sacred Fire remains a powerful attack even when its burn cannot affect grounded foes'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "Entei never selected Sacred Fire. It locked its Choice Band into Stone Edge on turn 4 - correctly, since Stone Edge is 4x into my Water/Flying Pelipper and it crit-killed it - and stayed locked for three turns until it died. The claim is sound but untested."
+    },
+    {
+      "check": "plan: 'Mega Chandelure Infiltrator bypasses screens/substitutes, not terrain rules'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "My party used no screens and no Substitute, and Mega Chandelure was KOed by a rain Hydro Pump on the turn it Mega Evolved."
+    },
+    {
+      "check": "strategy SUN: Drought powers Torkoal while Chlorophyll speeds Lilligant",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Sun was up at turn 0 from Drought with Heat Rock. Chlorophyll Lilligant moved before both of my leads on turn 1 and one-shot a full-HP 175 HP Swampert with a 4x Leaf Storm. The sun half of the room worked; I removed it by switching my weather setter in on turn 1."
+    },
+    {
+      "check": "Flinch is not blocked by the mist (corroboration)",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 7: Incineroar's Fake Out flinched my grounded Kingdra under the mist, and Skeledirge's Shadow Ball then killed it. Corroborates the same finding from E0144 Cole."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Torkoal",
+      "payoff": "REAL, large - blocked BOTH Pelipper's rain-boosted Weather Ball (2x) and Garganacl's spread Rock Slide (2x) at 108 of 150 HP. A full double blanked on the room's sun engine, and it survived three more turns because of it."
+    },
+    {
+      "turn": 9,
+      "battler": "Skeledirge",
+      "payoff": "EMPTY - both of my actions that turn went into Incineroar and into Togekiss's own Helping Hand, so Protect blocked nothing, and Incineroar died that turn while Skeledirge guarded. Not a defect under the no-command-reading rule, but it is the second of only two guards in this battle and the one that mattered least."
+    }
+  ],
+  "protect_ledger_summary": "Two opposing Protects across nine turns from a six-member leader team in which four members carry Protect. One was the single best guard of the fight (turn 2, a full double blanked on Torkoal); the other was empty. For a leader this is thin guarding - Skeledirge in particular, a 174 HP Unaware body with Slack Off and Leftovers, guarded once and only on the turn it did not need to.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 1, Lilligant: Leaf Storm into Swampert rather than into Garganacl. Grass is 4x into Water/Ground and 2x into Rock, so it picked the 4x target and one-shot a full-HP 175 HP Assault Vest body. Correct and decisive.",
+    "Turn 7, Incineroar and Skeledirge: Fake Out into my fastest body (Kingdra, Swift Swim in rain) so that Skeledirge's Shadow Ball could finish it inside the same turn. A clean two-slot combination.",
+    "Turn 4, Entei: Stone Edge into Pelipper (Rock, 4x into Water/Flying) rather than its STAB Sacred Fire into rain. Correct, and it crit-killed. The Choice Band lock that followed was the cost of that correct choice.",
+    "Torkoal selected Body Press on all four of its attacking turns and never used Eruption or Heat Wave, including turn 1 at full HP in its own sun. Against Garganacl (Rock, Fire 0.5, Fighting 2x) and Swampert (Water/Ground, Fire 0.5) with Torkoal's 140 base Defence behind it, Body Press was very likely the larger number every time, so this reads as correct scoring rather than a defect - but it does mean the leader's signature sun Eruption never appeared, and the After You that exists to accelerate it accelerated a Body Press instead.",
+    "AI decision time peaked at 1.021s, inside the 1.2s budget."
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Brief rule: 'Won with 2+ faints or after a real fight -> keep.' Four player faints against the Gym leader, with the result genuinely uncertain until turn 6. The mist-less run kept levels here too, so Flannery's offsets are untouched across both runs. Worth saying plainly: one of the four faints was my own lead error (Swampert into a Chlorophyll Leaf Storm) and two involved critical hits, so the honest reading is that the room is close to the right difficulty rather than comfortably above or below it.",
+  "could_this_be_cooler": "Keep the roster - Torkoal/Lilligant as an After You sun engine with Incineroar, Unaware Skeledirge, Band Entei and Mega Chandelure behind it is a strong leader team and the mist adds real texture without breaking anything. Two concrete observations. First, the headline never fired: Torkoal has Eruption as its showcase move and the After You tactic exists to bring it forward, but Torkoal's own Body Press out-scores Eruption against most of what a player brings to a Fire gym, so the accelerated move was a Body Press in this battle. If the intended memorable moment is a sun Eruption arriving early off After You, Torkoal's moveset is currently arguing against it; either the scoring needs to weight the spread, or Body Press needs to not be the obviously better button. Second, the leader is unusually easy to disarm for a player who knows the weather rule: because Torkoal is slower than almost anything, holding a Drizzle or Snow Warning body in reserve and switching it in on turn 1 removes the sun for the rest of the battle, and I did exactly that. That is legitimate counterplay and the crack line invites it, but it does mean the sun half of a sun leader lasted one turn. A second weather setter, or Torkoal being able to re-set Drought by switching, would make the weather war a war rather than a single switch. Nothing changed in this pass.",
+  "authored_set_legality": "No legality problem. Drought, Chlorophyll, Intimidate, Unaware, Inner Focus and Flash Fire all resolved as authored, as did Heat Rock, Misty Seed, Sitrus, Leftovers, Choice Band and Chandelurite. Lilligant's set correctly contains Helping Hand and no Sleep Powder.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play, and no Heat Badge is awarded by a driven battle."
+}
