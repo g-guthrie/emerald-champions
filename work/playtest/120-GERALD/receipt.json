@@ -1,0 +1,60 @@
+{
+  "play_order": 120,
+  "e_group": "E0144",
+  "trainer": "TRAINER_GERALD",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Volbeat L38 (36+4-2), Victreebel L34 (36+0-2), Simisear L34 (36+0-2), Scovillain L34 (36+0-2), Pyroar L34 (36+0-2), Charizard L32 (36-2-2).",
+  "party_manifests": ["work/playtest/120-GERALD/party-a1.json", "work/playtest/120-GERALD/party-a2.json", "work/playtest/120-GERALD/party-a3.json"],
+  "attempts": [
+    {"seed": 121, "attempt": 1, "party": "party-a1.json (Water-forward block core)", "outcome": "lost", "turns": 6, "player_faints": 6, "opponent_faints": 2,
+     "notes": "Mega Blastoise was KOed on turn 1 by a sun-instant Solar Beam from a Chlorophyll Victreebel before it could act twice. Choice Specs Simisear then one-shot a full-HP Thick Fat Mamoswine through the sun boost."},
+    {"seed": 122, "attempt": 2, "party": "party-a2.json (rain rebuild: Politoed + Ludicolo)", "outcome": "lost", "turns": 6, "player_faints": 6, "opponent_faints": 2,
+     "notes": "Drizzle was up before the first decision and Volbeat's Prankster Sunny Day overwrote it with priority on turn 1, and again later. Ludicolo was one-shot by Sludge Bomb (2x) before Swift Swim mattered; Mamoswine and Togekiss were each one-shot from full by Victreebel. Weather control is not a viable answer while Volbeat lives."},
+    {"seed": 123, "attempt": 3, "party": "party-a3.json (speed-and-redirection: Alakazam lead + Togekiss Follow Me)", "outcome": "won", "turns": 7, "player_faints": 4, "opponent_faints": 6,
+     "notes": "Answered Victreebel directly instead of fighting the weather: Togekiss' Follow Me absorbed its single-target attacks and Alakazam's 2x Psychic removed it on turn 2 behind a Focus Sash. Still lost four members. Mega Charizard X died to a critical 2x Rock Slide before it could Mega-evolve."}
+  ],
+  "rebuild_reasons": "Two rebuilds across three attempts, both driven by demonstrated failures rather than by adding power. Attempt 2 tried weather control (Politoed's Drizzle, Ludicolo's Swift Swim) because sun was doing all the damage; that failed because Prankster Sunny Day has priority and Volbeat is L38. Attempt 3 dropped the weather plan and used redirection plus a 2x Psychic to remove the single Pokemon that had decided both losses. Every member of all three parties comes from the same chronology-audited pool; no species, item or move was introduced that was not already legal for the earlier attempts.",
+  "strategy_checks": [
+    {"check": "Prankster gives Volbeat's Sunny Day priority so the sun is up before anything else happens", "result": "PASS", "evidence": "Turn 1 of all three attempts, Volbeat moved first and set sun - including attempt 2, where it overwrote a Drizzle that was already on the field. This is the cleanest demonstration of the SUN flag in the block and it is genuinely oppressive."},
+    {"check": "Heat Rock extends the sun to eight turns", "result": "PASS", "evidence": "Sun persisted from turn 1 to the end of every attempt; in attempt 3 it was still up on turn 7 after Volbeat had been dead for three turns."},
+    {"check": "Chlorophyll doubles Victreebel's and Scovillain's Speed in sun", "result": "PASS", "evidence": "Victreebel moved before a Timid 252-Speed L36 Alakazam and before Mega Blastoise; Scovillain outran Mega Blastoise and Mamoswine. Both are base 70 and both were acting first against a party built around speed."},
+    {"check": "Solar Beam is a one-turn move in sun", "result": "PASS", "evidence": "'The opposing Victreebel absorbed light!' with the beam resolving the same turn, in attempts 1 and 2. It one-shot a full-HP Mega Blastoise (136 HP) and a full-HP Mamoswine (136 HP)."},
+    {"check": "Volbeat's Helping Hand converts into partner damage", "result": "PASS", "evidence": "Attempt 2 turn 2 and attempt 3 turn 2: the boosted Sludge Bomb removed a full-HP 141 HP Togekiss. Correctly aimed at the partner that was about to attack, unlike Shuckle's wasted Helping Hand in E0138."},
+    {"check": "Mega Charizard X evolves and holds Tough Claws", "result": "PASS", "evidence": "Attempt 1 turn 5: 'The opposing Charizard has Mega Evolved into Mega Charizard X'; state confirms CHARIZARD_MEGA_X with TOUGH_CLAWS. It used Protect, Roost and Flare Blitz."},
+    {"check": "Mega Charizard X uses Thunder Punch (the dossier's specific anti-Misty-Terrain choice)", "result": "FAIL", "evidence": "Across three attempts Charizard used Protect, Roost and Flare Blitz and never selected Thunder Punch. The move is on the set specifically because the dossier expects Misty Terrain to halve its other coverage - and no terrain was present (see below), so the reason for the choice did not exist on the board either."},
+    {"check": "Victreebel uses Weather Ball, which becomes Fire in sun", "result": "FAIL", "evidence": "Victreebel had eight decision points across the three attempts and chose only Solar Beam, Sludge Bomb and Protect. Weather Ball - the move the dossier explicitly added ('Victreebel gains Weather Ball') - was never selected once. In fairness its other two moves were hitting for 2x every time, so this is the scorer preferring a correct option rather than a blunder."},
+    {"check": "Scovillain uses Growth (the SETUP flag; +2 in sun)", "result": "FAIL", "evidence": "Scovillain had six decision points across the attempts and chose only Flamethrower and Energy Ball. Growth was never used, so the SETUP half of this trainer's strategy flags never appeared. Its Speed investment for Chlorophyll did pay off."},
+    {"check": "Volbeat uses Encore", "result": "FAIL", "evidence": "Encore was never selected in any attempt; Volbeat used Sunny Day, Helping Hand and Struggle Bug. Not costly - its other moves were doing real work - but the fourth slot is inert."},
+    {"check": "Misty Terrain is active in the Lavaridge Gym (the dossier reasons about it twice: 'Misty Terrain remains active alongside Sunny Day')", "result": "FAIL / RECONCILIATION NEEDED", "evidence": "Terrain read 'none' for every turn of all three attempts, exactly as in Cole's room. Both Lavaridge Gym dossier blocks build move choices around a Misty Terrain that is not present on the driven board. This needs a decision from the book/source side: either the gym field effect is not wired into this battle path, or the prose describes an intent the source does not implement."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 5, "battler": "CHARIZARD_MEGA_X", "payoff": "REAL - blocked Alakazam's 2x Focus Blast on the turn it Mega-evolved at 32/102, which is the highest-value Protect turn available to it."},
+    {"attempt": 3, "turn": 1, "battler": "VICTREEBEL", "payoff": "REAL - blocked Alakazam's 2x Psychic, which would otherwise have KOed it on turn 1. It bought the exact turn it needed."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P10-D19",
+      "severity": "medium",
+      "turns": "every turn Scovillain was on the field, across three attempts",
+      "board": "Scovillain L34 with Chlorophyll active in sun, often at full HP with its partner applying pressure",
+      "chosen": "Flamethrower or Energy Ball, six times out of six",
+      "why_wrong": "Growth is the SETUP flag on this trainer and in sun it is +2 Attack and +2 Special Attack in a single turn, on a Pokemon that is already outspeeding the entire field. The turns were there - on attempt 3 turn 5 it was at full HP with a free turn while its partner occupied both of my battlers. This is the sixth instance in the block of the same pattern: the setup or support move that defines a set loses to immediate damage in scoring.",
+      "better_action": "Growth on the first free turn in sun, then Flamethrower from +2."
+    }
+  ],
+  "notable_good_ai": [
+    "Target selection in this room was the best in the block. Victreebel picked Sludge Bomb into the Grass-type Ludicolo and the Fairy-type Togekiss, and Solar Beam into the Water-type Blastoise and the Ground-type Mamoswine - four different correct 2x reads across two attempts, each one a one-shot.",
+    "Attempt 2 turn 2: Volbeat withdrew itself rather than eat a Helping-Hand-supported exchange, preserving the sun engine.",
+    "Volbeat's Helping Hand was always aimed at a partner that had actually selected an attacking move."
+  ],
+  "level_changes": [
+    {"member": "VICTREEBEL", "before": 0, "after": -1, "reason": "This one Pokemon decided both losses. Across attempts 1 and 2 it one-shot a full-HP Mega Blastoise, a full-HP Ludicolo, a full-HP Thick Fat Mamoswine and a full-HP Togekiss - four different 136-151 HP bodies - because Chlorophyll makes it move first and sun makes Solar Beam a one-turn 2x move. Two losses in three optimized attempts is the 'losing too many times' band and this is unambiguously the member responsible."},
+    {"member": "VOLBEAT", "before": 4, "after": 3, "reason": "Second point. At L38 with Prankster it wins the weather war unconditionally - attempt 2 proved that a legitimate Drizzle answer is simply overwritten with priority every turn - and its Helping Hand is what turned Victreebel's 2x hits into one-shots. Taking it to L37 keeps the role intact while shortening the window. Mega Charizard X is already at -2 and is not touched."}
+  ],
+  "level_change_verification": "NOT RERUN. The driver resolves opponent levels from the prebuilt ROM and exposes no level override, and this agent does not run make. Both -1s need the main agent's materialize-and-rebuild before the effect can be measured. Given that this battle took three attempts, it is the one in the block most worth re-running after the rebuild.",
+  "could_this_be_cooler": "This is the most dangerous encounter in the block and the sun engine is genuinely well built - Prankster Sunny Day into two Chlorophyll attackers is a real archetype and the AI plays the targeting beautifully. The issue is that it is currently a stat check rather than a puzzle: the documented counter to a weather team is weather control, I brought it, and Prankster beat it with priority every turn, which leaves no line except out-damaging a team that moves first and hits for 2x. Suggestions, not applied: (1) the -1s above should be re-measured first, since Volbeat at L37 and Victreebel at L33 may be enough. (2) Three of the six members carry a move the AI will never choose - Weather Ball, Growth and Encore - so the room has less texture in play than on paper; trimming the competing option on Scovillain would at least make the SETUP flag real. (3) Mega Charizard X arrives last and died before acting in the winning attempt, which is a shame for a signature; it is fighting for airtime with a Victreebel that is currently scarier than it is.",
+  "authored_set_legality": "No legality problems. Prankster, Chlorophyll, Blaze, Competitive, Heat Rock, the Choice Specs and the Charizardite X all behaved as printed.",
+  "notes": "Three attempts used, which is the brief's maximum. Recorded as won on attempt 3 with a level reduction applied, not as an unbeatable battle."
+}
