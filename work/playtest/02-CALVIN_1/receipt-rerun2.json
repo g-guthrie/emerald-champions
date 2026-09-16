@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 2,
+  "e_group": "E0002",
+  "trainer": "TRAINER_CALVIN_1",
+  "class": "regular",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "POOCHYENA L15 offset 3 @FOCUS_SASH RATTLED",
+    "ZIGZAGOON L14 offset 2 @FIGY_BERRY GLUTTONY",
+    "HOOTHOOT L15 offset 3 @EVIOLITE TINTED_LENS",
+    "STARLY L14 offset 2 @LIFE_ORB RECKLESS"
+  ],
+  "level_provenance_finding": "IMPORTANT: the R1 rerun receipt records POOCHYENA 3->4 and HOOTHOOT 3->4, but commit 91f4438f40 ('Playtest rerun E0002 ... Poochyena/Hoothoot +1') touched only work/playtest/02-CALVIN_1/*; the authored teams file was never part of it. Those two +1s were never applied and are not in this ROM. Cumulative offsets actually landed for E0002 since baseline 4eb6b9206f are ZIGZAGOON +1 and STARLY +1 only. So this is not a confirming run of a level change - it is a confirming run of the rebuilt AI at the unchanged R1 levels.",
+  "party_manifest": "work/playtest/02-CALVIN_1/party-rerun-a1.json",
+  "party_summary": "Reused the R1 chronology-legal party unchanged: Growlithe / Mienfoo / Timburr / Corphish / Pachirisu / Mudkip (Route101/102/103 wilds plus one C01 starter; nothing evolved, no legend).",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "elf_sha256": "ae6ed685cf22c9aeaf141efed91e22b46d284efbe3e3300c07c87c981be29938",
+    "run_dir": "work/playtest/02-CALVIN_1/r2/a1",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3002,
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 9,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 61,
+      "ai_decision_seconds_max": 1.021,
+      "narrative": "T1 Intimidate triggered Rattled (+1 Spe on Poochyena). Mienfoo's Fake Out flinched Poochyena away from its Taunt; Zigzagoon read the turn and Protected the incoming super-effective Close Combat. T2 Zigzagoon cashed in with Extreme Speed and Poochyena used Crunch, both taxed by Rocky Helmet; Drain Punch removed Poochyena and Close Combat removed Zigzagoon. Hoothoot and Starly came in. T3 Knock Off stripped Hoothoot's Eviolite, Hoothoot immediately set Tailwind, and Starly's U-turn finished the 11 HP Growlithe before it could Wild Charge. T4 under Tailwind Starly moved first and Brave Bird one-shot a completely fresh 58 HP Eviolite Timburr; Hoothoot's Tinted Lens Air Slash chunked Mienfoo; my Rock Slide never resolved on the dead battler and Drain Punch left Hoothoot at 1. T5 Corphish's Aqua Jet removed Starly but Air Slash finished Mienfoo. T6 Aqua Jet finished Hoothoot. Won 4-3."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Rattled activates off Intimidate",
+      "result": "PASS",
+      "evidence": "Turn 0: Growlithe's Intimidate dropped Poochyena to atk -1 and Rattled raised it to spe +1."
+    },
+    {
+      "check": "Zigzagoon drums only when its post-cost HP and Gluttony/Figy recovery survive the opposing pair; otherwise cash in with Extreme Speed",
+      "result": "PASS (correct decline)",
+      "evidence": "No Belly Drum on a board with Iron Fist Mach Punch, Close Combat and Drain Punch opposite it. It Protected the turn a super-effective Close Combat was aimed at it (T1) and used Extreme Speed the next turn (T2). Never re-attempted a denied setup."
+    },
+    {
+      "check": "Poochyena picks Taunt or Helping Hand by whether denying setup or securing damage matters more",
+      "result": "PARTIAL (same weak side as R1)",
+      "evidence": "T1 it selected Taunt on Growlithe again - a battler whose only status move is Protect - and was flinched out of it by Fake Out. T2 it used Crunch. The branch fires, but it keeps choosing the low-value side against a three-attack target."
+    },
+    {
+      "check": "Hoothoot's Tailwind gives the team an immediate attacking mode (FAILED in both prior passes)",
+      "result": "PASS - now fires and converts",
+      "evidence": "T3, the turn Hoothoot entered, it chose Tailwind over Air Slash. The payoff landed on the very next turn: under Tailwind Starly moved before Timburr and Brave Bird one-shot a full-HP 58 Eviolite Timburr, and Hoothoot then out-sped and KOed Mienfoo with Air Slash on T5. This is the authored 'immediate attacking mode' working for the first time across three passes, and it is the direct cause of two of my three faints."
+    },
+    {
+      "check": "Starly converts as the Reckless attacker",
+      "result": "PASS",
+      "evidence": "T3 U-turn removed Growlithe; T4 Brave Bird removed a healthy Eviolite Timburr outright."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "ZIGZAGOON",
+      "payoff": "Blocked a super-effective Close Combat aimed at it while its partner was flinched. Real payoff, correctly predictive."
+    }
+  ],
+  "protect_ledger_note": "Exactly one opponent Protect in the battle and it paid. Hoothoot holds Protect and never used it; it spent its turns on Tailwind and Air Slash, which was better. No repeated or empty guards.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0002-W1",
+      "turn": 1,
+      "board": "Poochyena (Focus Sash, Rattled +1 Spe) opposite a full-HP Growlithe whose set is Flare Blitz / Close Combat / Wild Charge / Protect.",
+      "chosen": "Taunt on Growlithe (flinched away before it resolved).",
+      "better": "Crunch, or Helping Hand into the partner's Extreme Speed. Taunting a battler with one status move (Protect) denies at most one guard.",
+      "severity": "weak choice, not a defect; recurs unchanged from R1."
+    },
+    {
+      "id": "E0002-W2",
+      "turn": 3,
+      "board": "Starly at full HP, Calvin's bench empty (Poochyena and Zigzagoon already fainted), Growlithe at 11/43.",
+      "chosen": "U-turn on Growlithe (0.5x into Fire).",
+      "better": "Double-Edge or Brave Bird. The pivot half of U-turn is dead with an empty bench, so it was a resisted 70 BP attack by choice.",
+      "severity": "weak choice, no consequence here because the target was at 11 HP and died anyway. Worth checking whether U-turn's switch value is still scored when there is nobody to switch to."
+    }
+  ],
+  "ai_improvements_observed": [
+    "Hoothoot's authored Tailwind finally fires, on its entry turn, and the team immediately converted it into two KOs.",
+    "Zero voluntary opponent switches.",
+    "The single Protect was predictive and paid; no guard spam."
+  ],
+  "level_changes": {},
+  "level_change_reason": "Won with 3 player faints after a genuine fight (half my party died and the last two members finished at 32/40 and untouched only because the battle ended). Brief rule: '2+ faints or a real fight -> keep'. No offset moved. Note that the R1 receipt's intended Poochyena +1 / Hoothoot +1 were never committed to the teams file; on this evidence they are also no longer warranted, because the Tailwind mode that now works supplies the difficulty those points were meant to buy.",
+  "levels_after": {"POOCHYENA": 3, "ZIGZAGOON": 2, "HOOTHOOT": 3, "STARLY": 2},
+  "cooler": "The R1 suggestion (move Tailwind onto the Poochyena lead) is now withdrawn: with the AI actually setting Tailwind on the reserve's entry turn, the late Hoothoot deployment reads as a deliberate second-wind rather than decoration, and it is the scariest part of the fight. A smaller idea instead: Poochyena's Helping Hand overlaps nothing it ever chooses - swapping it for Tailwind or Howl would give the support slot a turn-one job it is actually willing to take. Recording only; no change in this pass.",
+  "authored_set_legality": "No legality problem. Every move observed was legal on its board and all four sets materialized correctly."
+}

@@ -1,0 +1,30 @@
+{
+  "trainer_a": "TRAINER_CALVIN_1",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 3002,
+  "difficulty": "medium",
+  "level_cap": 14,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 5,
+  "decisions": 9,
+  "player_faints": 3,
+  "opponent_faints": 0,
+  "ai_decision_frames_max": 61,
+  "ai_decision_seconds_max": 1.021,
+  "ai_decision_frames": [
+    61,
+    43,
+    43,
+    45,
+    45,
+    41,
+    41,
+    19,
+    19
+  ],
+  "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "elf_sha256": "ae6ed685cf22c9aeaf141efed91e22b46d284efbe3e3300c07c87c981be29938",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
