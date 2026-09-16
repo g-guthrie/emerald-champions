@@ -6544,11 +6544,19 @@ static s32 AI_PreferBatonPass(enum BattlerId battlerAtk, enum BattlerId battlerD
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_PROTECT:
-        if (GetProtectType(GetMoveProtectMethod(gAiLogicData->lastUsedMove[battlerAtk])) == PROTECT_TYPE_SINGLE)
+    {
+        // Only a protect-family last move has a protect method; asking for one
+        // on any other move (or MOVE_NONE) trips the move.h assertion and
+        // crashes the ROM mid-battle.
+        enum Move lastMove = gAiLogicData->lastUsedMove[battlerAtk];
+        enum BattleMoveEffects lastEffect = GetMoveEffect(lastMove);
+        bool32 lastWasProtect = lastEffect == EFFECT_PROTECT || lastEffect == EFFECT_ENDURE || lastEffect == EFFECT_MAT_BLOCK;
+        if (lastWasProtect && GetProtectType(GetMoveProtectMethod(lastMove)) == PROTECT_TYPE_SINGLE)
             ADJUST_SCORE(-2);
         else
             ADJUST_SCORE(DECENT_EFFECT);
         break;
+    }
     case EFFECT_BATON_PASS:
         if (gBattleMons[battlerAtk].volatiles.root || gBattleMons[battlerAtk].volatiles.aquaRing)
             ADJUST_SCORE(DECENT_EFFECT);
