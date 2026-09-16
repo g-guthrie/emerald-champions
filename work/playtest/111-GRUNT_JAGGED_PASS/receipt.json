@@ -1,0 +1,60 @@
+{
+  "play_order": 111,
+  "e_group": "E0134",
+  "trainer": "TRAINER_GRUNT_JAGGED_PASS",
+  "class": "grunt",
+  "location": "JaggedPass",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Blacephalon L33 (36-1-2), Stunfisk-Galar L37 (36+3-2), Thievul L36 (36+2-2), Salazzle L34 (36+0-2). This battle is after the Mt Chimney milestone, so cap 36.",
+  "party_manifest": "work/playtest/111-GRUNT_JAGGED_PASS/party-a1.json",
+  "attempts": [
+    {"seed": 31, "attempt": 1, "outcome": "won", "turns": 6, "decisions": 8, "player_faints": 1, "opponent_faints": 4,
+     "notes": "Mega Blastoise's Water Pulse removed Blacephalon on turn 1. Stunfisk-Galar spent the fight cycling Yawn and was ground down by Mamoswine's High Horsepower; Salazzle's Flamethrower took Mamoswine with it. Thievul died in one Play Rough."}
+  ],
+  "strategy_checks": [
+    {"check": "Thievul's Snarl consumes Throat Spray, raising Special Attack and activating Unburden for doubled Speed", "result": "FAIL",
+     "evidence": "Thievul was on the field for three decision points (turns 5, 6 and the finishing turn) against two live targets, and chose MOVE_DARK_PULSE every single time. Snarl was never selected. Its item was still ITEM_THROAT_SPRAY when it fainted and its ability never flipped to the Unburden state. The entire authored engine for this Pokemon did not run."},
+    {"check": "Thievul does not throw away an Unburden boost with Parting Shot", "result": "NOT REACHED", "evidence": "Unburden never activated, so the interaction could not be observed. Parting Shot was never chosen either."},
+    {"check": "Galarian Stunfisk uses Snap Trap with Binding Band for chip damage", "result": "FAIL",
+     "evidence": "Stunfisk was active for five turns and never selected Snap Trap. Its Binding Band therefore did nothing all battle. It chose Yawn on turns 1, 2 and 3, Protect on turn 4 and Stomping Tantrum on turn 5."},
+    {"check": "Galarian Stunfisk uses Yawn to force switches", "result": "PASS",
+     "evidence": "Yawn landed on Togekiss (turn 1), Mega Blastoise (turn 2) and Mamoswine (turn 3), and it did force all three switches or plans around them - Yawn is genuinely the reason my Mega left the field on turn 3."},
+    {"check": "Mimicry stays inactive without terrain (dossier: 'Mimicry is reactive, not an assumed field')", "result": "PASS",
+     "evidence": "Terrain was 'none' for the whole battle and Stunfisk-Galar kept its Ground/Steel typing; Aura Sphere read as 2x (Steel) rather than any mimicked chart."},
+    {"check": "Blacephalon's Beast Boost raises its highest stat after a KO", "result": "NOT REACHED", "evidence": "Blacephalon was KOed on turn 1 by a 2x Water Pulse before it scored a knockout. Its one action was Shadow Ball into Mega Blastoise."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "SALAZZLE", "payoff": "EMPTY - nothing was aimed at Salazzle that turn; both my actions went elsewhere (a switch and an Aura Sphere at Stunfisk)."},
+    {"turn": 4, "battler": "STUNFISK_GALAR", "payoff": "REAL - at 27/162 it blocked Mamoswine's High Horsepower, which was lethal. Best decision the AI made in this battle."},
+    {"turn": 5, "battler": "SALAZZLE", "payoff": "REAL - at 1 HP with its Sash already spent, it blocked Azumarill's Aqua Jet and bought itself a turn."},
+    {"turn": 6, "battler": "SALAZZLE", "payoff": "N/A - Salazzle did not Protect on turn 6; it chose Flamethrower and was KOed by Aqua Jet."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P10-D6",
+      "severity": "high",
+      "turns": "5, 6 and the finishing turn",
+      "board": "Thievul L36 at full HP holding Throat Spray with Unburden, facing two live player battlers (Azumarill and Alakazam) on every one of its decisions",
+      "chosen": "MOVE_DARK_PULSE at a single target, three times out of three.",
+      "why_wrong": "This Pokemon's whole authored identity is the Snarl -> Throat Spray -> Unburden chain that the dossier spells out ('a successful Snarl consumes Throat Spray, boosting Special Attack and Speed'). Against two targets, Snarl also puts out more total damage than a single-target Dark Pulse before the item bonus is counted. The scorer is comparing raw single-target base power and giving no weight at all to the held-item activation or the ability it turns on, so the set's engine is unreachable in play.",
+      "better_action": "Snarl on the first turn it is on the field with two live targets, then Dark Pulse from behind the +1 Special Attack and doubled Speed."
+    },
+    {
+      "id": "P10-D7",
+      "severity": "medium",
+      "turns": "1, 2, 3",
+      "board": "Galarian Stunfisk L37 at 162/162, then 162, then 114, holding Binding Band with Snap Trap available",
+      "chosen": "MOVE_YAWN three turns running, at a different target each time.",
+      "why_wrong": "Yawn's value is forcing one switch; re-applying it to a fresh target every turn while taking 87 damage from High Horsepower is three turns of zero damage from the bulkiest member on the team. Snap Trap plus Binding Band is the authored payoff and would have chipped 1/6 per turn while trapping something. The AI never once weighed its own item.",
+      "better_action": "Yawn once, then Snap Trap to convert its bulk into trap chip, or Stomping Tantrum into the Mamoswine that was actually killing it."
+    }
+  ],
+  "level_changes": [
+    {"member": "SALAZZLE", "before": 0, "after": 1, "reason": "Won on attempt 1 with one faint; Salazzle is the weakest non-ace member and is also the member that earned its keep (its Flamethrower took Mamoswine), so it is the right place for a point."},
+    {"member": "THIEVUL", "before": 2, "after": 3, "reason": "Second point. Thievul died to a single Play Rough and contributed only two Dark Pulses. Blacephalon is the ace and is excluded from a first increase per the brief."}
+  ],
+  "level_change_verification": "NOT RERUN. The driver resolves opponent levels from the prebuilt ROM and exposes no level override, and this agent does not run make. The +1s need the main agent's materialize-and-rebuild.",
+  "could_this_be_cooler": "Yes, and cheaply. This team has two members whose authored engines are currently dead on arrival, which makes a rare Blacephalon guard fight feel like a stat check. Suggestions, not applied: (1) Thievul's Snarl line only works if the AI can see the Throat Spray payoff - if that is not fixable on the AI side, give Thievul Snarl as its only Dark option so the chain is forced rather than optional, which costs nothing in power and makes the Unburden turn readable. (2) Galarian Stunfisk is a fantastic trapper concept sitting behind a Yawn button the AI prefers; pairing Snap Trap with a partner that wants the target stuck (Salazzle's Corrosion Toxic on a trapped Steel-type is a genuinely nasty and very on-theme combination) would give the pair a reason to exist together. As played, the four members never interacted once.",
+  "authored_set_legality": "No legality problems. Corrosion, Mimicry, Beast Boost and Unburden were all present and correctly typed; the sets simply were not used.",
+  "notes": "AI decision time max 61 frames."
+}
