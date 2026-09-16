@@ -1,0 +1,43 @@
+{
+  "play_order": 161,
+  "e_group": "E0222",
+  "trainer": "TRAINER_ALIX",
+  "location": "Route115",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Munkidori 47 (+1), Jynx 47 (+1), Musharna 47 (+1), Chimecho 48 (+2) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/161-TRAINER_ALIX/party.json",
+  "attempts": [
+    {"seed": 51, "run_dir": "work/playtest/161-TRAINER_ALIX/run-s51", "outcome": "won", "turns": 3, "player_faints": 0, "opponent_faints": 4,
+     "notes": "Three turns, no player damage worth naming. Mega Metagross OHKOed Munkidori, Musharna and Chimecho with single Meteor Mashes and took one resisted Ice Beam for 32. Incineroar was paralysed but never needed to be fast."}
+  ],
+  "strategy_checks": [
+    {"check": "Munkidori attacks and the Choice lock is respected", "result": "PASS_WITH_CAVEAT", "evidence": "Munkidori selected Focus Blast into Incineroar, which is the correct 2x pick against a Fire/Dark body. It was KOed before the move resolved, so the lock itself was never tested across two turns."},
+    {"check": "Toxic Chain gives attacks a badly-poison chance", "result": "NOT_EXERCISED", "evidence": "Munkidori never landed an attack."},
+    {"check": "Jynx uses Lovely Kiss only when the accuracy risk is justified, or attacks directly", "result": "FAIL", "evidence": "Turn 2 Jynx used Ice Beam into a Steel/Psychic Mega Metagross for 32 of 150. Every attack on its set was resisted or blanked by both player battlers (Ice Beam 0.5x into both, Psychic 0.25x into Metagross and 0x into a Dark type), which is exactly the board where 75%-accurate sleep on the Mega is the justified risk. See AI defects."},
+    {"check": "Musharna's speed control targets something relevant", "result": "PASS", "evidence": "Turn 2 Thunder Wave paralysed Incineroar, the Knock Off body that had just removed Jynx; turn 3 it selected Thunder Wave on Mega Metagross. Both are the correct target on their board."},
+    {"check": "Chimecho supports a worthwhile attacker rather than forming a two-support endgame", "result": "NOT_EXERCISED", "evidence": "Chimecho arrived on turn 2 and Musharna died on turn 3, so the two supports overlapped for exactly one turn, on which Chimecho used Protect. No Heal Pulse or Helping Hand was ever selected, and no support-only stall appeared."},
+    {"check": "There is no Trick Room in Musharna's set", "result": "PASS", "evidence": "Musharna's selections were Thunder Wave twice; no Trick Room exists on the authored line and none was attempted."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Jynx", "payoff": "REAL: blocked Incineroar's Fake Out, preserving the Focus Sash and denying the flinch, on the turn its partner was being KOed."},
+    {"turn": 3, "battler": "Chimecho", "payoff": "REAL: blocked a Knock Off on its entry turn and kept its Leftovers."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0222-D1",
+      "turn": 2,
+      "board": "Jynx 133/133 with Focus Sash. Player: Mega Metagross 150/150 (Steel/Psychic) and Incineroar 194/194 (Fire/Dark), neither statused.",
+      "chosen": "Jynx used Ice Beam on Mega Metagross for 32 damage",
+      "problem": "Jynx's entire offensive set is dead against this pair: Ice Beam is 0.5x into both a Steel type and a Fire type, and Psychic is 0.25x into Steel/Psychic and 0x into Dark. Lovely Kiss at 75% accuracy on Mega Metagross - the only thing on the board that could KO Jynx - is plainly the higher expected value action, and the dossier's own plan line says Lovely Kiss is for exactly the turn where the accuracy risk is justified. The AI appears to prefer a guaranteed small chip over a high-value status even when the chip is 21% of a health bar.",
+      "better_action": "Lovely Kiss on Mega Metagross.",
+      "severity": "moderate - this is the team's signature move and the condition the dossier describes for using it was met exactly"
+    }
+  ],
+  "level_changes": [
+    {"member": "JYNX", "before": 1, "after": 2, "reason": "Zero-faint three-turn win. Jynx is joint-lowest and survived only on its Focus Sash."},
+    {"member": "MUSHARNA", "before": 1, "after": 2, "reason": "Joint-lowest and the member that most needs to survive: a 252 HP Sassy body was OHKOed by a single +1 Meteor Mash, so it got one Thunder Wave off in the whole fight. Munkidori is left alone as the featured lead."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM and this agent must not run make.",
+  "could_this_be_cooler": "The concept the dossier describes is genuinely good on paper - Toxic Chain turning Choice Specs Psychic into a spread-format clock, Lovely Kiss behind a Focus Sash, two real supports rather than four attackers - but the fight proved the team has a single point of failure that is worse than any level: every one of its four members is part Psychic, so one Steel body resists or blanks the whole roster's STAB, and the only move on the team that is not resisted by Mega Metagross is Munkidori's Focus Blast. That is the second team in this block (after Miguel) with a mono-type offensive core. Concrete suggestion for a later pass: Chimecho is the slot to change. It is the third Psychic support in a four-slot team and it contributed one Protect. A Dark- or Steel-resistant partner with Taunt or Encore - Grumpig keeps the psychic-carnival theme while Mr. Rime or a Bruxish would give the team a physical body and a non-Psychic attacking type - would fix the structural problem without touching the Munkidori/Jynx core that is the actual identity here. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal. Dry Skin Jynx, Toxic Chain Munkidori and Mental Herb Musharna all materialized correctly."
+}
