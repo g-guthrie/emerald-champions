@@ -517,6 +517,32 @@ looks exactly like a battle that will not progress. The crash screen carries the
 assertion text, so `crash.png` in the run directory is the evidence. A receipt
 whose run stalled this way is void: the battle never finished.
 
+A `previous_turn` / `chosen` entry's `target` is the target the battler chose as
+its action was confirmed, and `target_kind` says whether that battler is the
+actor's `self`, `ally` or `foe`. Chosen is not always resolved: if the chosen
+target faints earlier in the same turn the move redirects, so read the turn's
+messages for what it actually hit. On the Clawitzer board below, Heal Pulse is
+recorded with `target 0, target_kind foe` and the messages read "The opposing
+Clawitzer used Heal~Pulse!" then "Amoonguss's HP was restored." - battler 0
+(Rillaboom) had fainted, so it redirected to battler 2. Both are the player's, so
+`target_kind: foe` is the load-bearing part: this AI is healing the player.
+
+```sh
+python3 scripts/playthrough/battle_random_policy.py --trainer TRAINER_GRUNT_AQUA_HIDEOUT_4 \
+  --party work/playtest/_party/party_aqua_76.json --seed 23 --cap 76 \
+  --run-dir work/agent-battle-clawitzer
+```
+
+The choice is latched once, as the action is confirmed. `moveTarget` and
+`chosenMovePositions` are working fields the engine rewrites while the turn
+executes, so sampling them per frame recorded whatever was written last and could
+pair a switch with the previous move's name; a switch now reports `MOVE_NONE`.
+
+A move whose target the engine chooses for itself - `user`, `both`, `field`,
+`all_battlers` and the rest - offers only the user in `switch_slots`' sibling
+`targets`, so a record can never imply "Protect on my ally". In receipts taken
+before this, a `target` on a self- or spread-targeted move is meaningless.
+
 `damage` is keyed by the Pokemon, not by the slot it stood in: `owner:party_index`,
 as in `player:3` or `opponent_a:1`. A battler index is a position, so comparing a
 slot's HP before and after a turn that switched or replaced its occupant subtracts

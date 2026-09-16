@@ -58,6 +58,7 @@ static EWRAM_DATA u8 sLastAction[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u8 sLastMovePos[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u8 sLastTarget[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u16 sLastMove[MAX_BATTLERS_COUNT] = {0};
+static EWRAM_DATA u8 sLastSelection[MAX_BATTLERS_COUNT] = {0};
 // The turn that just finished, kept readable at the next decision point.
 static EWRAM_DATA u8 sPrevAction[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u8 sPrevMovePos[MAX_BATTLERS_COUNT] = {0};
@@ -115,6 +116,7 @@ void EmeraldChampionsAgentBattleBegin(u32 levelCap, u32 difficulty)
         gEcAgentBattleAction[i] = EC_AGENT_BATTLE_ACTION_NONE;
         sPendingSwitchSlot[i] = NO_PENDING_SWITCH;
         sLastAction[i] = B_ACTION_NONE;
+        sLastSelection[i] = 0;
         sSwitchRefused[i] = EC_AGENT_SWITCH_ALLOWED;
     }
     for (u32 i = 0; i < MAX_BATTLE_TRAINERS; i++)
@@ -724,6 +726,7 @@ void EmeraldChampionsAgentBattlePoll(void)
             sLastMovePos[i] = 0;
             sLastTarget[i] = 0;
             sLastMove[i] = MOVE_NONE;
+            sLastSelection[i] = 0;
         }
     }
 
@@ -752,14 +755,26 @@ void EmeraldChampionsAgentBattlePoll(void)
 
     for (u32 battler = 0; battler < gBattlersCount; battler++)
     {
-        if (gChosenActionByBattler[battler] != B_ACTION_NONE)
+        // Latch the turn's choice exactly once, as the action is confirmed.
+        // moveTarget and chosenMovePositions are working fields the engine
+        // rewrites while the turn executes, so sampling them every frame
+        // recorded whatever was last written rather than what was chosen: an
+        // ally-targeted Heal Pulse came back pointing at a player battler, and
+        // a later switch could be paired with the earlier move's name.
+        // 4 is STATE_WAIT_ACTION_CONFIRMED_STANDBY, the first confirmed state
+        // in the action-selection enum local to battle_main.c; battle_main sets
+        // all four fields immediately before advancing into it.
+        u32 selection = gBattleCommunication[battler];
+        if (selection >= 4 && sLastSelection[battler] < 4
+         && gChosenActionByBattler[battler] != B_ACTION_NONE)
         {
             sLastAction[battler] = gChosenActionByBattler[battler];
             sLastMovePos[battler] = gBattleStruct->chosenMovePositions[battler];
             sLastTarget[battler] = gBattleStruct->moveTarget[battler];
-            if (gChosenMoveByBattler[battler] != MOVE_NONE)
-                sLastMove[battler] = gChosenMoveByBattler[battler];
+            sLastMove[battler] = (gChosenActionByBattler[battler] == B_ACTION_USE_MOVE)
+                               ? gChosenMoveByBattler[battler] : MOVE_NONE;
         }
+        sLastSelection[battler] = selection;
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             sRevealed[GetBattlerTrainer(battler)] |= 1u << gBattlerPartyIndexes[battler];
     }

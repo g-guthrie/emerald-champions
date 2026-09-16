@@ -75,6 +75,10 @@ SWITCH_BLOCKS = ['', 'battle_arena', 'commander', 'trapped', 'ability_prevents_e
 MOVE_TARGETS = ['none', 'selected', 'smart', 'depends', 'opponent', 'random', 'both', 'user',
                 'ally', 'user_and_ally', 'user_or_ally', 'foes_and_ally', 'field',
                 'opponents_field', 'all_battlers']
+# Target types where the engine chooses the target itself and ignores the byte
+# the controller sends, so the driver must not offer a choice.
+FIXED_TARGET_MOVES = {'user', 'user_and_ally', 'both', 'foes_and_ally', 'field',
+                      'opponents_field', 'all_battlers', 'random'}
 # gBattleCommunication[battler] >= this means the action for this turn is locked in.
 ACTION_CONFIRMED = 4
 STAT_NAMES = ['hp', 'atk', 'def', 'spe', 'spa', 'spd', 'acc', 'eva']
@@ -538,13 +542,18 @@ def decode_state(session, words):
             if move_name == 'MOVE_NONE':
                 continue
             target_type = (mask >> 8) & 0xFF
+            target_name = (MOVE_TARGETS[target_type] if target_type < len(MOVE_TARGETS)
+                           else str(target_type))
             moves.append({
                 'index': i, 'move': move_name,
                 'legal': not (limits >> i) & 1,
                 'blocked_by': flags_of(limits, c['limitation']) if (limits >> i) & 1 else [],
-                'target_type': (MOVE_TARGETS[target_type] if target_type < len(MOVE_TARGETS)
-                                else str(target_type)),
-                'targets': sorted({t for t in range(4) if (mask >> t) & 1} | {index}),
+                'target_type': target_name,
+                # For these the engine ignores the target byte and picks for
+                # itself, so offering a choice invites a misleading record of
+                # "Protect on my ally". Report the user and let it resolve.
+                'targets': ([index] if target_name in FIXED_TARGET_MOVES
+                            else sorted({t for t in range(4) if (mask >> t) & 1} | {index})),
             })
         blocker = (switch >> 16) & 0xFF
         refused = (switch >> 24) & 0xFF
@@ -633,7 +642,9 @@ def decode_state(session, words):
              'action': ACTIONS.get(words[PREV_BASE + i * PREV_SIZE], words[PREV_BASE + i * PREV_SIZE]),
              'move_index': words[PREV_BASE + i * PREV_SIZE + 1],
              'target': words[PREV_BASE + i * PREV_SIZE + 2],
-             'move': name_of(move_t, words[PREV_BASE + i * PREV_SIZE + 3], 'MOVE_')}
+             'move': name_of(move_t, words[PREV_BASE + i * PREV_SIZE + 3], 'MOVE_'),
+             'target_kind': target_kind(i, words[PREV_BASE + i * PREV_SIZE + 2],
+                                        min(battlers_count, 4))}
             for i in range(min(battlers_count, 4))],
     }
 
@@ -893,6 +904,18 @@ def record_commits(session, state, submitted):
             slots[str(battler)] = command['slot']
     session.meta['replacement_commits'] = {'turn': state['turn'], 'slots': slots}
     session.meta_path.write_text(json.dumps(session.meta, indent=2) + '\n')
+
+def target_kind(actor, target, battlers):
+    """How the recorded target relates to the actor.
+
+    Says nothing about the move; it classifies the battler the engine recorded,
+    so an ally-targeted move reads "ally" rather than looking like a mis-aimed
+    attack. Player-side indices are even, opponent-side odd."""
+    if target is None or target >= battlers:
+        return 'unknown'
+    if target == actor:
+        return 'self'
+    return 'ally' if (target % 2) == (actor % 2) else 'foe'
 
 def occupant_key(state, active):
     """A stable identity for the Pokemon standing in a slot.
