@@ -1,0 +1,57 @@
+{
+  "play_order": 63,
+  "e_group": "E0073",
+  "trainer": "TRAINER_MARIA_1",
+  "class": "regular",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"FROSLASS": 28, "SALANDIT": 32, "LYCANROC_DUSK": 28, "RABOOT": 31},
+  "cap_window_confirmation": "Dossier seeds 30/34/30/33 resolved to 28/32/28/31 = cap 30 + offset - 2 (Medium). Cap 30 confirmed.",
+  "party_manifest": "work/playtest/63-TRAINER_MARIA_1/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, reordered to lead Mega Gardevoir + Nidoking for the 4x Ground answer to Salandit. All source maps precede Route 117. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Froslass opens with Icy Wind or Will-O-Wisp to enable Salandit's Nasty Plot or immediate STAB",
+    "The turn after the enabler, the team exploits the speed drop or the boost instead of repeating setup",
+    "Destiny Bond is used only to buy a real trade, never as alternating stall - and IS used when a real trade is available",
+    "Lycanroc and Raboot supply the physical priority / pivot alternatives (Accelerock, Sucker Punch, U-turn)",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/63-TRAINER_MARIA_1/a1", "seed": 63, "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 was Maria's whole fight and she won it on points. I Mega-Evolved Gardevoir and spread Hyper Voice; both of her leads answered by focusing the Mega - Froslass Shadow Ball at 2x into Psychic and Salandit Sludge Bomb at 2x into Fairy - and killed a 90 HP Mega Gardevoir outright on turn one. My Nidoking's Earth Power crit and removed Salandit at 4x in the same turn. T2 Magearna replaced the Mega; Froslass spent its last action on Icy Wind rather than the Destiny Bond trade that was available to it, Raboot's Flare Blitz took Nidoking from 98 to 32, and my Sludge Wave (which Magearna is immune to, being Steel) finished Froslass while Thunderbolt finished Raboot. T3 Lycanroc arrived alone into a +2 Magearna and a Nidoking and died to Earth Power at 2x."}
+  ],
+  "strategy_checks": [
+    {"check": "Froslass opens with Icy Wind or Will-O-Wisp to enable Salandit", "result": "FAIL, and correctly so", "evidence": "Froslass's T1 choice was Shadow Ball into my Mega Gardevoir at 2x, not the authored enabler. I am marking the authored check failed but the DECISION right: the enabler line only makes sense if Salandit is going to get a turn to cash it, and the highest-value action on that board was helping to remove a Mega Gardevoir immediately - which is exactly what it did, in one turn. Will-O-Wisp was never selected in the battle."},
+    {"check": "Next turn exploits the speed drop or boost instead of repeating setup", "result": "NOT EXERCISED", "evidence": "Salandit died on turn 1 to a 4x Earth Power before Nasty Plot was ever selected, so the boost half of the plan never existed. Icy Wind did land on T2 but by then it had nothing to enable."},
+    {"check": "Destiny Bond buys a real trade", "result": "FAIL", "evidence": "T2: Froslass at 13/86, faster than everything I had on the field, facing a full-health Magearna and a Nidoking. Destiny Bond was the authored tactic and the board was the textbook case for it. It chose Icy Wind instead. See AI defects."},
+    {"check": "Lycanroc and Raboot supply the physical alternatives", "result": "PARTIAL", "evidence": "Raboot delivered: Flare Blitz took 66 off a 98 HP Nidoking on T2 and it accepted the recoil to do it, which is the right trade for an Eviolite body that was going to die anyway. Lycanroc did not - it arrived last into a two-on-one, chose Close Combat into the Poison/Ground Nidoking at 0.5x, and died. Accelerock, the priority the dossier names as its job, was never selected, and Sucker Punch was never selected on Raboot either."},
+    {"check": "Every opposing Protect has a payoff", "result": "NOT EXERCISED", "evidence": "No opposing Protect was used in this battle. Protect is on both Salandit's and Lycanroc's sheets; neither lived long enough to want it. Nothing to criticise."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Empty. Zero opposing Protects across the three turns. No empty, harmful or repetitive guarding to report.",
+  "ai_defects": [
+    {"id": "E0073-D1", "severity": "low", "attempt": 1, "turn": 2,
+     "board": "Froslass 13/86 (Focus Sash already irrelevant, it was below full HP), the fastest Pokemon on the field, with its partner Salandit already dead. Against my Magearna 116/116 and Nidoking 98/98. Raboot was its only surviving teammate.",
+     "chosen": "Icy Wind (spread, Speed -1).",
+     "why_wrong": "Froslass was certain to die that turn to either of my two attackers and it knew its own HP. Icy Wind's payoff was one Speed stage on a Magearna that was already slower than everything relevant and on a Nidoking it missed entirely - the damage was a rounding error on a 13 HP Pokemon's last action. Destiny Bond is on the sheet precisely for this board, it has +6 priority so Froslass would have got it up before dying, and it would have taken a healthy Magearna or Nidoking with it. That is a one-for-one trade for a Pokemon at 15 percent HP, which is the single highest-value action available. The dossier's own wording is that Destiny Bond 'only buys a real trade' - this was a real trade and it was declined.",
+     "better_action": "Destiny Bond.",
+     "note": "The inverse failure (Destiny Bond spam as stall) is the one the dossier warns about and the AI is clearly not doing that. The scoring appears to undervalue Destiny Bond rather than overvalue it. Worth checking against the other authored Destiny Bond owners rather than only here."}
+  ],
+  "ai_notes": [
+    "Turn 1 was excellent and I want that on the record ahead of the defect: both of Maria's leads independently identified the Mega Gardevoir as the target, and the two attacks they picked were the two that are super-effective against it from opposite type angles - Ghost into the Psychic half, Poison into the Fairy half. A 90 HP Mega died on turn one. That is real focus-fire behaviour, not two Pokemon happening to hit the same slot, and it is the reason I am not treating this as a soft fight despite the three-turn length.",
+    "Raboot accepting Flare Blitz recoil to take 66 off Nidoking was also correct - it was not going to get a second turn and it maximised the turn it had.",
+    "Lycanroc's Close Combat into a Poison/Ground body at 0.5x on T3 is the one poor target choice, but it was a lost board with one Pokemon against two and Earth Power was going to kill it whatever it picked, so I am not counting it as a defect.",
+    "Decision timing well inside budget (max 62 frames, ~1.03 s)."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first optimized attempt with 1 player faint. That faint was my strongest Pokemon and it happened on turn 1, so this is not a bloodless win - but the team then produced no further threat and the whole fight lasted three turns, which is the +1 band rather than the keep band. Brief rule 5: +1 on the weakest one or two members, never the ace first. Salandit (+4) is the ace and is untouched. Froslass and Lycanroc-Dusk are jointly at the floor (offset 0, level 28); I raised only Lycanroc, because Froslass personally delivered half of the turn-1 Mega kill and has earned its current level, whereas Lycanroc contributed nothing and is the member that makes the back half of this fight collapse.",
+    "changes": [
+      {"member": "LYCANROC_DUSK", "field": "level offset", "before": 0, "after": 1, "level_before": 28, "level_after": 29}
+    ],
+    "rerun_note": "Not rerun at the new level. Opponent levels are compiled into src/data/trainers.party, and the headless ROM in work/agent-battle-build predates this edit; verifying would require re-materializing and running make, which this brief forbids me from doing. One level on the last-slot member changes no speed tier or damage threshold I observed."
+  },
+  "could_this_be_cooler": "The concept holds - an icy disruptor opening for a fire-lizard setup sweeper, with two physical reserves - and I would not change species. The problem is ordering, and it is the same problem as Isaac's: the interesting half of the team is the half that dies first. Salandit is the +4 ace and the only member with a boost move, and it is a Poison/Fire type in a lead slot, which means literally any Ground attack in the cap-30 pool one-shots it at 4x before Nasty Plot ever happens. Nasty Plot was never selected. If Maria led Lycanroc or Raboot and brought Salandit in second, behind a teammate, the setup would actually get a turn and the fight would have a second act. The cheapest version of that fix is just reordering the authored lines so Salandit is not slot 2. The other thing I would genuinely enjoy here: Froslass has Will-O-Wisp and two physical attackers behind it, so a burn on the opposing physical threat is a real plan, but it never came up because Froslass is faster than it is durable and spends its one turn attacking. Giving Froslass Snow or a Light Screen instead of Shadow Ball would make it a support lead rather than a fourth attacker - though as noted above, its attack on turn 1 was the best thing this team did, so I hold that suggestion loosely.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
