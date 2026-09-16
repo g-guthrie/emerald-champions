@@ -1,0 +1,33 @@
+{
+  "play_order": 121,
+  "e_group": "E0145",
+  "trainer": "TRAINER_AXLE",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 36,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/121-TRAINER_AXLE/party.json",
+  "level_audit": "PASS. Resolved opponent levels match cap + authored offset - 2 for all six: Magcargo 37 (+3), Armarouge 33 (-1), Dachsbun 36 (+2), Magmar 38 (+4), Centiskorch 35 (+1), Ceruledge 33 (-1).",
+  "attempts": [
+    {"seed": 11, "run_dir": "work/playtest/121-TRAINER_AXLE/run-s11", "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 6, "ai_decision_seconds_max": 1.038}
+  ],
+  "strategy_checks": [
+    {"check": "ACTIVATE MAGCARGO LAVA_PLUME DACHSBUN - Magcargo's Lava Plume activates an allied thermal ability", "result": "PASS", "evidence": "Turn 2: Magcargo used MOVE_LAVA_PLUME; Dachsbun's stat stages went from def 0 to def +1 on the same turn, i.e. Well-Baked Body absorbed the friendly Fire hit."},
+    {"check": "Magcargo runs the configured Weak Armor (not a substituted ability) and it triggers", "result": "PASS", "evidence": "Turn 1 Swampert Liquidation: Magcargo stat stages def -1, spe +2 afterwards; state reports ABILITY_WEAK_ARMOR."},
+    {"check": "Magcargo Focus Sash survives a lethal first hit", "result": "PASS", "evidence": "Turn 1 Liquidation dealt 102 of 103 HP, Magcargo left at 1, item consumed to ITEM_NONE."},
+    {"check": "Ally Flash Fire holders present and typed correctly (Armarouge, Centiskorch, Ceruledge)", "result": "PASS", "evidence": "All three reported ABILITY_FLASH_FIRE in state."},
+    {"check": "Armarouge Armor Cannon used", "result": "NOT OBSERVED", "evidence": "Armarouge chose Psychic on turn 1 against Pelipper (Psychic is not resisted by Water/Flying; Armor Cannon would have been 0.25x in rain), then was KOed by a rain Weather Ball before acting again. Sensible choice, not a defect - the line simply never got a second turn."},
+    {"check": "Misty Terrain (the Gym's natural starting mist) present", "result": "NOT TESTABLE", "evidence": "state reports terrain \"none\" at turn 0. The headless driver starts the authored trainer battle through the debug lifecycle without the Lavaridge Gym map-side field setup, so every Misty Terrain clause in the Gym plans is untestable in this harness. Environment limitation, not an AI defect."}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "Dachsbun", "payoff": "empty", "detail": "No attack was aimed at Dachsbun that turn (Azumarill focused Magmar, Garganacl switched). Its partner Magmar was KOed on the same turn, so the guard also bought nothing for the ally. Defensible on expected value at 60/120 HP facing two Water attackers, but it produced nothing."},
+    {"turn": 8, "battler": "Dachsbun", "payoff": "real", "detail": "Blocked a Gyarados Waterfall that would have KOed it from 20 HP; Dachsbun survived one extra turn and only lost 7 to Salt Cure residual."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "Magcargo at 1 HP on turn 3 correctly abandoned the spread Lava Plume for Earth Power to finish the 33-HP Swampert - a genuinely good read. Ceruledge's Choice Band lock was respected (Poison Jab into the Fairy, then locked). Max opponent decision time 1.038s, inside the 1.2s budget.",
+  "level_changes": [],
+  "level_decision": "KEEP. Won on attempt 1 but with 2 player faints and a real fight: Swampert was KOed on turn 3 by a 1-HP Magcargo's Earth Power plus Dachsbun's boosted Body Press, and Azumarill was KOed on turn 6 by Choice Band Poison Jab plus Body Press. Per the brief this is the 'won after a real fight' case.",
+  "cooler_note": "Keep the concept - Magcargo as a deliberate friendly-fire battery for three different absorbing abilities is the most interesting idea in the room, and Dachsbun's Well-Baked Body plus Body Press turns the ally hit into offense, which is the payoff the room deserves. Two honest weaknesses: (1) the room is six mono-Fire Pokemon, so a single rain lead cuts every attack in half and the whole showcase is fought at a quarter power - a non-Fire ally with a weather-independent role (Rock/Ground) would make the rain answer cost something; (2) Magcargo's own Lava Plume only ever activates one ally at a time in doubles, and with Weak Armor it is fragile enough to die before the second activation. A Sitrus-berry Magcargo or a Torkoal-style Heat Rock would let the battery fire twice. No changes made in this pass.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0145 TRAINER_AXLE, Lavaridge Gym room 1, cap 36",
+  "availability_audit": "Chronology: Lavaridge Gym sits at the end of the cap-36 window (C22 Mt. Chimney raised the cap; C23 is Flannery). Every member's source map precedes Lavaridge Town in book play order: Route 103 (C02), Petalburg City ponds and Route 102/104 (C02-C05), Granite Cave and Altering Cave rock smash (C12 + Rock Smash license from C18 Mauville), Mauville Game Corner (C18). No Surf-gated water (C27), no Strength-gated area (granted only after Flannery), no legendary, no post-badge source. All evolution levels are at or below cap 36.",
+  "plan": "Rain core against an all-Fire gym. Pelipper's Drizzle halves every Fire attack and powers Weather Ball/Liquidation; Swampert and Azumarill provide the Water damage; Garganacl is a Rock wall with Purifying Salt burn immunity; Gyarados brings Intimidate against the physical Fire attackers; Togekiss redirects with Follow Me.",
+  "party": [
+    {
+      "species": "SPECIES_PELIPPER",
+      "moves": ["MOVE_HURRICANE", "MOVE_WEATHER_BALL", "MOVE_TAILWIND", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_DRIZZLE",
+      "item": "ITEM_DAMP_ROCK",
+      "evs": [252, 0, 0, 4, 0, 252],
+      "role": "rain setter and speed control; Weather Ball becomes a 100-BP rain-boosted Water attack",
+      "availability": "Wingull on Route103 land table (gate 14), evolves to Pelipper at level 25. Route 103 is reached in C02."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": ["MOVE_LIQUIDATION", "MOVE_HIGH_HORSEPOWER", "MOVE_ICE_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "primary rain-boosted physical Water attacker with single-target Ground coverage",
+      "availability": "Mudkip from the Mauville Game Corner (500 coins, C18), Marshtomp at 16, Swampert at 36 which the cap-36 window allows."
+    },
+    {
+      "species": "SPECIES_AZUMARILL",
+      "moves": ["MOVE_LIQUIDATION", "MOVE_PLAY_ROUGH", "MOVE_AQUA_JET", "MOVE_KNOCK_OFF"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Huge Power priority and item removal; Assault Vest survives the special Fire attackers",
+      "availability": "Marill on the Petalburg City old-rod table (gate 14, Old Rod given in C02), evolves at level 18."
+    },
+    {
+      "species": "SPECIES_GARGANACL",
+      "moves": ["MOVE_SALT_CURE", "MOVE_ROCK_SLIDE", "MOVE_RECOVER", "MOVE_PROTECT"],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_PURIFYING_SALT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 4, 0, 0, 252, 0],
+      "role": "Rock-type wall immune to burn; Salt Cure grinds the bulky Fire members down",
+      "availability": "Altering Cave 1F rock-smash table (gate 30); Rock Smash license is granted in Mauville (C18), before Mt. Chimney and Lavaridge."
+    },
+    {
+      "species": "SPECIES_GYARADOS",
+      "moves": ["MOVE_WATERFALL", "MOVE_ICE_FANG", "MOVE_DRAGON_DANCE", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Intimidate support against the physical Fire attackers and a rain-boosted sweeper",
+      "availability": "Magikarp on the Petalburg City old-rod table (gate 14), evolves at level 20."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": ["MOVE_FOLLOW_ME", "MOVE_AIR_SLASH", "MOVE_HELPING_HAND", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 0, 124, 0, 132, 0],
+      "role": "redirection and Helping Hand support with 60-percent flinch pressure",
+      "availability": "Togepi on the Route102 land table (gate 14), friendship evolution to Togetic, Shiny Stone from the Slateport Mart (C15)."
+    }
+  ]
+}
