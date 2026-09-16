@@ -1,0 +1,59 @@
+{
+  "play_order": 143,
+  "e_group": "E0169",
+  "trainer": "TRAINER_ALEXIA",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "room_thesis": "The berserkers - every member poisons or burns itself on purpose and converts the status into damage.",
+  "cap": 42,
+  "difficulty": "medium",
+  "mega_slots": "NONE",
+  "resolved_opponent_levels": {"ZANGOOSE": 42, "URSARING": 43, "LINOONE": 43, "BIBAREL": 43, "SWELLOW": 42, "URSALUNA": 41},
+  "cap_window_confirmation": "Authored offsets 2/3/3/3/2/1 resolved to 42/43/43/43/42/41, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42.",
+  "party_manifest": "work/playtest/143-TRAINER_ALEXIA/party.json",
+  "pre_declared_strategy_checks": [
+    "Toxic Orb and Flame Orb activate at the end of the turn, and before that these are ordinary attackers the AI must play as such",
+    "Toxic Boost and Guts then raise Attack by 50 percent and Facade doubles to 140 BP against a statused user",
+    "Knock Off removes an Orb before it activates and deletes the ability's trigger",
+    "Bibarel's Simple doubles Curse to +2 Attack and +2 Defense per use",
+    "Linoone takes Belly Drum only when Extreme Speed can actually close",
+    "Ursaluna's Bulletproof blocks ball and bomb moves (Sludge Bomb specifically)",
+    "No member of this room has Scrappy, so a Ghost type is immune to Facade, Body Slam, Extreme Speed, Quick Attack and Close Combat",
+    "The AI must not Protect a harmless slot while its partner is removed",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/143-TRAINER_ALEXIA/a1", "seed": 143, "outcome": "won", "turns": 6, "decisions": 10, "player_faints": 3, "opponent_faints": 6,
+     "narrative": "T1 contains the best single opposing decision in my entire block. I aimed an Adaptability Close Combat at Zangoose and a Knock Off at Ursaring - the Knock Off specifically to strip the Flame Orb before its end-of-turn activation, which would have deleted Guts. Ursaring Protected. The Knock Off was blocked, the Orb survived, and it activated at the end of that same turn: 'The opposing Ursaring was burned!' Close Combat killed Zangoose before its own Toxic Orb ever ticked. T2 Bibarel Protected my second Knock Off while Close Combat killed the now-Guts Ursaring before it attacked once. T3 Close Combat killed Ursaluna and Bibarel's Waterfall killed my Mega Lucario, which was at -3 Defense from three Close Combats. T4 Aegislash came in - no Scrappy anywhere in this room, so Facade and Extreme Speed are 0x into it - and a critical Sacred Sword killed Bibarel, but Bibarel's Waterfall killed Incineroar first. T5 Swellow arrived, its Toxic Orb activated immediately, and Sableye's Prankster Taunt shut Linoone out of Belly Drum. T6 Swellow's critical Brave Bird killed Aegislash even at 0.5x and Foul Play - which uses the target's own Attack, and Swellow's was Guts-boosted - killed Swellow. T7 Togekiss finished a Taunted Linoone."}
+  ],
+  "strategy_checks": [
+    {"check": "Orbs activate at end of turn and the AI plays the pre-Orb turns honestly", "result": "PASS", "evidence": "Zangoose and Ursaring both entered with no status and full Orbs. Zangoose's one action was a plain Close Combat at -1 Attack from Intimidate - no anticipated boost. Ursaring spent turn one protecting rather than attacking, which is exactly right for a battler whose damage does not exist yet. The dossier's warning - 'before the Orb activates these are ordinary attackers and should be played that way' - is satisfied."},
+    {"check": "Toxic Boost / Guts convert the status into damage", "result": "PARTIAL", "evidence": "Guts turned on for Ursaring at the end of turn 1 and for Swellow the moment it entered on turn 5. Swellow then used Guts-boosted Brave Bird twice and killed my Aegislash through a 0.5x resistance with a critical hit, so the ability demonstrably works. Ursaring, however, died on turn 2 without ever attacking - it spent its only safe turn protecting its Orb and then lost the turn it was protecting for. Zangoose's Toxic Boost never activated at all."},
+    {"check": "Knock Off removes an Orb before activation", "result": "PASS in principle, DENIED in practice", "evidence": "I attempted it twice and the room stopped it both times - Ursaring Protected the Knock Off on turn 1 and Bibarel Protected the next one on turn 2. The third Knock Off landed and removed Bibarel's Rocky Helmet. This is the most interesting outcome in the battle: the counterplay is real, the room knows it is real, and its guards were aimed at exactly the action that would have defused it."},
+    {"check": "Bibarel Simple Curse", "result": "NOT OBSERVED", "evidence": "Bibarel's three actions were Protect, Waterfall and Waterfall. It never used Curse. Given that it killed both my Mega Lucario and my Incineroar with Waterfall, attacking was clearly the higher-value choice on those boards, but the authored Simple-Curse identity did not appear."},
+    {"check": "Linoone Belly Drum only when Extreme Speed can close", "result": "NOT TESTABLE - it was Taunted", "evidence": "Linoone entered on turn 4 and Sableye's Prankster Taunt landed on turn 5, before Linoone had taken a setup turn. Its two actions were Seed Bomb and Extreme Speed. The dossier's conditional cannot be evaluated from this sample."},
+    {"check": "Ursaluna Bulletproof", "result": "NOT TESTED, by construction", "evidence": "Amoonguss never entered the field, so Sludge Bomb was never aimed at Ursaluna. I declared the interaction in advance and built around it; Ursaluna died to Close Combat, which Bulletproof does not touch."},
+    {"check": "No Scrappy in this room, so Ghost typing is a real answer", "result": "PASS", "evidence": "Aegislash and Sableye between them ignored Facade, Extreme Speed, Quick Attack and Close Combat entirely. Unlike Berke's and Mary's rooms - both of which carry Scrappy specifically to punish this - Alexia's six have no answer to a Ghost's Normal immunity. That said, this did NOT become the degenerate stall I fell into at play_order 138: the room has Waterfall, Seed Bomb, Brave Bird, Crunch, Knock Off and Headlong Rush, and Waterfall and Brave Bird between them killed three of my six. The counterplay is honest here."},
+    {"check": "No Protect on a harmless slot while the partner dies", "result": "PASS", "evidence": "Both of the room's Protects were on the battler I was actually attacking, and both blocked the specific move that threatened that battler's identity. See the ledger. The dossier's own instruction - 'the AI must not Protect a harmless slot while the partner is removed' - is satisfied."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS, and one of them is exceptional", "evidence": "Two guards, two payoffs. See the ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "URSARING", "payoff": "EXCEPTIONAL - the best guard decision in my block. Ursaring Protected on the exact turn my Knock Off was aimed at it, and the thing it saved was the Flame Orb that turns on its Guts. The Orb then activated at the end of that same turn. So the guard did not merely block damage; it protected the item that the battler's entire ability depends on, on the one turn that item was still removable. I cannot tell from the log whether the AI reasoned about the item or simply valued a guard highly on turn one, and I want to be honest about that - but the outcome is the single highest-value Protect I have seen across twelve battles."},
+    {"turn": 2, "battler": "BIBAREL", "payoff": "GOOD. Blocked the second Knock Off, this one aimed at Bibarel's Rocky Helmet, on the turn Bibarel arrived. It did not repeat on turn 3 and instead used Waterfall, which killed my Mega Lucario."}
+  ],
+  "protect_ledger_note": "Two guards in six turns from a six-member room. Both were aimed at the battler being targeted, both blocked the specific move that mattered, and neither repeated. Alexia's room shares George's and Berke's clean cadence and shows none of the consecutive-repeat problem from Alan's team at play_order 137.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Ursaring's turn-1 Protect against an incoming Knock Off, on the last turn its Flame Orb was strippable, is the standout decision of my whole block.",
+    "Bibarel choosing Waterfall over Curse on turns 3 and 4 was correct even though it abandoned its authored identity: my Mega Lucario was at -3 Defense from its own Close Combats and Waterfall killed it, then killed Incineroar. Attacking beat setting up and the AI saw it.",
+    "Swellow used Brave Bird twice despite the recoil stacking on top of its own Toxic Orb damage. That is the room's thesis working as intended, not a mistake - it is on a clock either way and it converted the clock into a kill.",
+    "Alexia's six landed no Protect on a slot I was not attacking, which is the specific failure mode the dossier warns about.",
+    "AI decision time peaked at 1.005 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt with 3 of 6 player faints including my Mega Evolution. Brief rule 5 and the AGENTS.md three-faint threshold both say keep. No level change. This room is well priced: Ursaluna is at +1 and killed nothing, but Bibarel at +3 personally removed my Mega and my Intimidate pivot with an unboosted Waterfall, and Swellow at +2 killed a Ghost/Steel through a resistance.",
+  "could_this_be_cooler": "Keep the six - this is the most thematically disciplined room in the Gym and the dossier's own revision note (swapping Delcatty for Swellow to complete the three-self-inflicted-status thesis) was clearly right. Two observations. First, the room has a sequencing tension the dossier has not spotted: the Orb users are its identity, but an Orb is removable by Knock Off for exactly one turn, and the correct AI response - guarding that turn - costs the Orb user the attack it was going to make. Ursaring spent its only safe turn protecting its Flame Orb and then died before ever using Facade. That is a genuinely interesting dilemma and I would leave it in, but it means Ursaring at +3 contributed nothing, and the guide should say out loud that stripping the Orb on turn one is the play. Second, and this is the one real gap: no member of this room has Scrappy. Berke's room has two Scrappy users and Mary's has one, both specifically so a Ghost cannot blank the room - and those rooms sit either side of this one in the same Gym. Alexia's six are all Normal or Normal-hybrid and every single one of their Normal and Fighting moves is 0x into a Ghost. It does not break the fight, because Waterfall, Brave Bird, Seed Bomb and Headlong Rush all still connect and three of my six died, but it is a notable inconsistency across three adjacent rooms of the same Gym. If one thing changed, I would give the Scrappy job to Zangoose - it is the room's signature species, it already leads, and it currently dies before its Toxic Orb ticks."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
