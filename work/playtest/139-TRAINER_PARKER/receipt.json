@@ -1,0 +1,57 @@
+{
+  "play_order": 139,
+  "e_group": "E0165",
+  "trainer": "TRAINER_PARKER",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "room_thesis": "The slow room, guarded - Trick Room behind Armor Tail, cashed with Instruct.",
+  "cap": 42,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"ORANGURU": 42, "FARIGIRAF": 42, "LICKILICKY": 42, "SPINDA": 44, "WYRDEER": 42, "GIRAFARIG": 46},
+  "cap_window_confirmation": "Authored offsets 2/2/2/4/2/6 resolved to 42/42/42/44/42/46, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42.",
+  "party_manifest": "work/playtest/139-TRAINER_PARKER/party.json",
+  "pre_declared_strategy_checks": [
+    "Oranguru sets Trick Room on turn 1 or 2",
+    "Farigiraf's Armor Tail blocks priority moves aimed at Parker's side - my Fake Out and Ice Shard should FAIL",
+    "Oranguru uses Instruct to repeat an ally's already-used move, and Instruct fails against a freshly switched ally with nothing to repeat",
+    "Telepathy makes Oranguru immune to Lickilicky's Instructed Earthquake",
+    "Girafarig's Sap Sipper absorbs Grass (tested by omission: no Grass move was brought)",
+    "The Brave/Quiet members carry 0 Speed IVs so Trick Room actually reverses them",
+    "Wyrdeer's Intimidate fires on entry and again on re-entry",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/139-TRAINER_PARKER/a1", "seed": 139, "outcome": "won", "turns": 9, "decisions": 13, "player_faints": 3, "opponent_faints": 6,
+     "narrative": "The room lost to its own stated crack on turn one. Oranguru selected Trick Room; Weavile is base 125 Speed and its Knock Off is Dark into a pure Psychic with an item to remove, and it killed a 167 HP Oranguru outright before the room resolved. Trick Room never existed in this battle and neither did Instruct. T2 Knock Off removed Farigiraf and with it Armor Tail; Mega Houndoom Protected through Lickilicky's Choice Band Earthquake, which killed Weavile. T3 I brought Togekiss, which is immune to Ground, and Lickilicky - now locked into Earthquake - could no longer touch it; the same Earthquake killed Mega Houndoom, and notably Girafarig Protected itself from its own partner's Earthquake, which is the job Telepathy was supposed to be doing for Oranguru. T4 Aegislash's Sacred Sword is 2x into pure Normal and killed Lickilicky. T5-T7 Girafarig traded Thunderbolt paralysis onto Aegislash and died to Air Slash; Wyrdeer's Intimidate fired a second time on re-entry and a critical Zen Headbutt killed Togekiss. T8 Wyrdeer Protected at 24 HP and Spinda Encored my paralysed Aegislash into the move it was already using. T9 Knock Off killed Wyrdeer and Flash Cannon killed Spinda."}
+  ],
+  "strategy_checks": [
+    {"check": "Oranguru sets Trick Room turn 1", "result": "SELECTED, NEVER RESOLVED", "evidence": "The native record for turn 1 shows Oranguru chose MOVE_TRICK_ROOM. It died to Weavile's Knock Off before the move executed. The selection is correct - Trick Room on turn one is the right opening for this room - so the AI passes and the room fails, which is a design result rather than an AI one. Oranguru is base 60 Speed with 31 Speed IVs (deliberately, so it can move after its partner under the room), and 167 HP with no Special Defense investment; against a party built around the dossier's own counterplay it does not survive to turn two."},
+    {"check": "Armor Tail blocks priority", "result": "NOT TESTED - I never got to try it", "evidence": "I carried Incineroar's Fake Out and Weavile's Ice Shard specifically as Armor Tail tests, and I never used either, because Farigiraf died on turn 2 and by then removing it was more valuable than testing it. This is an honest miss in my play rather than a finding. Armor Tail was live on the battler for two turns. Flagging it for whoever replays this room: the check still needs doing."},
+    {"check": "Instruct repeats an ally's used move", "result": "NOT OBSERVED", "evidence": "Oranguru is the only Instruct user and it died before its second turn. The five printed INSTRUCT tactics in the dossier are unexercised by this battle."},
+    {"check": "Telepathy blanks the ally Earthquake", "result": "NOT OBSERVED, and something better happened instead", "evidence": "Oranguru was dead before Lickilicky's first Earthquake. What I did see is Girafarig using Protect on the turn Lickilicky used Earthquake, and the log shows Girafarig protecting itself twice in that resolution - the AI used a guard to dodge its own partner's spread Ground move. That is a genuinely good decision and it is the fallback the room needs once its Telepathy holder is gone. Worth recording as a positive."},
+    {"check": "Sap Sipper on Girafarig", "result": "NOT TESTED, by design", "evidence": "I brought no Grass move on any of the six. The ability shaped my construction - Chandelure ran Dark Pulse instead of Energy Ball specifically for this - without ever firing."},
+    {"check": "0 Speed IVs on the Brave/Quiet members", "result": "NOT MEASURABLE from this battle", "evidence": "Without Trick Room up I cannot confirm the reversal works. The turn order I did observe is consistent with the printed spreads: Lickilicky and Girafarig both acted after my base-60 Aegislash, which is what 0 Speed IVs on Brave and Quiet natures should produce."},
+    {"check": "Wyrdeer Intimidate on entry and re-entry", "result": "PASS, twice", "evidence": "'Togekiss's Attack fell! / Aegislash's Attack fell!' on Wyrdeer's first entry, and the same pair again when Parker switched it back in two turns later, taking both of my battlers to -2. The re-entry Intimidate is a real cost and the AI used a switch to collect it."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS, all three", "evidence": "See the ledger. Three Protects, three payoffs, no consecutive repeats and no empty guards. This room did not reproduce Alan's consecutive-Protect defect."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "GIRAFARIG", "payoff": "GOOD, and unusual. Girafarig Protected on the turn it entered and the guard's actual payoff was dodging its OWN partner's Choice Band Earthquake. With Oranguru and its Telepathy already dead, Protect is the only thing keeping the room's spread Ground move from hurting Parker's own side, and the AI found it unprompted."},
+    {"turn": 4, "battler": "GIRAFARIG", "payoff": "N/A - not a repeat. Girafarig attacked with Thunderbolt on the following turn and paralysed my Aegislash, which is the correct escalation."},
+    {"turn": 8, "battler": "WYRDEER", "payoff": "EXCELLENT. At 24 of 178 HP, Wyrdeer Protected and blocked the Knock Off that was aimed at it - a 2x Dark move into a Normal/Psychic body that killed it the very next turn. Guarding at the exact HP where one hit is lethal is the right instinct and it bought Spinda a free Encore."}
+  ],
+  "protect_ledger_note": "Three guards in nine turns, all with a concrete payoff, including one that dodged a friendly Earthquake. No empty guards and no consecutive repeats - materially better cadence than Alan's room at play_order 137.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Parker's AI made no bad decisions in this battle. Trick Room on turn one, Intimidate collected twice via a switch, Protect used to dodge a friendly spread move, Encore used on a paralysed target, and a lethal-HP guard are all correct plays.",
+    "The one thing I would look at is not a defect but a structural observation: Oranguru is simultaneously the Trick Room setter, the Instruct engine and the Telepathy holder, and it is the slowest-to-arrive of those three jobs. Removing one 167 HP battler removed three of the room's four named mechanics at once.",
+    "Spinda's Encore landed on my Aegislash while it was already paralysed and already committed to Flash Cannon, so it cost me nothing - but Encore into a paralysed battler is a reasonable value call, not a mistake.",
+    "AI decision time peaked at 1.005 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt with 3 of 6 player faints including my Mega. Brief rule 5 and the AGENTS.md three-faint threshold both land on keep. No level change. I want to be explicit that the 6-3 scoreline overstates how comfortable this was: I lost Weavile, Mega Houndoom and Togekiss, and the only reason the back half was manageable is that Lickilicky Choice-locked itself into a Ground move against a Flying type. A level increase would not address the room's actual problem, which is structural and described below.",
+  "could_this_be_cooler": "The concept is the best-designed room in the Gym and I would keep every species - the Girafarig/Farigiraf pair doing opposite jobs is a lovely touch and the dossier is right that Armor Tail beside the setter turns the room into a puzzle the player must solve without priority. The problem is a single point of failure. Oranguru is the Trick Room setter, the Instruct engine and the Telepathy holder, and it is a 167 HP body with base 110 Special Defense but zero Special Defense investment, sitting in the lead slot against a cap-42 player pool that contains several base-125-Speed Dark attackers. In this battle one Knock Off deleted Trick Room, Instruct and the Earthquake immunity simultaneously on turn one, and the other five members then fought as an ordinary Normal team. The dossier itself names this as the honest counterplay - 'simply killing Oranguru before Lickilicky lands its first Earthquake' - but in practice it is not a race, it is a single move. Two concrete suggestions, neither of which touches species, moves or items and so neither of which I have implemented: first, the Sitrus Berry on Oranguru does nothing against a one-shot, and an EV spread that put some of those 252 Special Attack points into Special Defense would buy the turn the whole room is built around; second, leading Oranguru beside Wyrdeer rather than beside Farigiraf would put Intimidate on the field on turn zero and make the physical Dark attackers that threaten Oranguru arrive at -1. Armor Tail protects against priority, which is not how Oranguru died. Separately, I owe this room a replay specifically to test Armor Tail against Fake Out - I carried the test and never ran it."
+  ,
+  "legality_problems_in_authored_set": [],
+  "party_construction_note": "One error in my own pre-battle plan, recorded for honesty: I wrote that Aegislash's Shadow Ball would be '2x into five of six'. That is wrong. Four of Parker's six are Normal/Psychic, and Normal's immunity to Ghost dominates, so Shadow Ball is 0x against Farigiraf, Wyrdeer and Girafarig and 0x against pure-Normal Lickilicky and Spinda. Only Oranguru, a pure Psychic, would have taken 2x. Aegislash earned its slot on Sacred Sword, Flash Cannon and its near-immunity to the room's physical kit instead.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
