@@ -1,0 +1,35 @@
+{
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "elf_sha256": "34d3c6af9a6b7bbbb5b8c62ee62078c83eac6634733af6c44fe42f7863ec53af",
+  "seed": 1,
+  "trainer_a": "TRAINER_GRUNT_MT_PYRE_4",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 60,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/_party/party_mtpyre_60.json",
+  "party_sha256": "5520c6da768d57272b57fdd92d0108999ca6d702befe15f91eb16076a40c48a6",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET"
+  ],
+  "prepared": {
+    "encounter": "Mind Badge chapter cap 60 - Mt Pyre Summit Aqua crews (play_order 205-209, E0316-E0320)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1246
+  },
+  "replacement_commits": {
+    "turn": 4,
+    "slots": {}
+  }
+}

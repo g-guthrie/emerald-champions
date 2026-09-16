@@ -1,0 +1,56 @@
+{
+  "play_order": 208,
+  "e_group": "E0319",
+  "trainer": "TRAINER_GRUNT_MT_PYRE_4",
+  "class": "grunt",
+  "location": "MtPyre_Summit",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members at L57 = 60 + (-1) - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_mtpyre_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 205-207; every source map precedes the Mt Pyre summit. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Sneasler's Fake Out opens the room",
+    "Unburden doubles Sneasler's Speed once the Sitrus Berry is gone",
+    "Dire Claw's 50 percent chance to poison, paralyse or sleep the target",
+    "Absol's Super Luck plus Scope Lens crits roughly half the time",
+    "Bruxish's Strong Jaw Psychic Fangs breaks screens",
+    "Froslass' Cursed Body and Destiny Bond pressure lane"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-4",
+      "run_dir": "work/playtest/208-TRAINER_GRUNT_MT_PYRE_4/a1",
+      "party": "party_mtpyre_60.json (Incineroar/Amoonguss/Urshifu-S/Mega Gardevoir/Zapdos/Landorus)",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "The room hit harder than any of the three below it and still lost 4-0, because every hit it landed went into something I could withdraw. Turn 1: Sneasler's Fake Out beat mine and flinched Incineroar while Absol critted Amoonguss for 210 of its 263 HP - the single biggest hit anything took all battle - but Spore put Absol to sleep for three turns. I then used Regenerator and the switch to pay for it: Amoonguss left, Gardevoir came in, ate a Dire Claw down to 18, and left again for Urshifu. Flare Blitz removed Sneasler on turn 3, Close Combat removed the waking Absol and Knock Off removed Bruxish through its Choice Scarf on turn 4, and Wicked Blow plus Knock Off broke Froslass's Focus Sash and finished it on the same turn."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Sneasler's Fake Out opens", "result": "PASS", "evidence": "turn 1 Sneasler's Fake Out resolved before my own and flinched Incineroar. It won the Fake Out race outright."},
+    {"check": "Unburden doubles Speed once the Berry is gone", "result": "PASS (and the dossier's crack is wrong about it)", "evidence": "turn 2 my Knock Off removed Sneasler's Sitrus Berry, and Gardevoir's Trace read ABILITY_UNBURDEN off it on entry. Losing the item to Knock Off is exactly what turns Unburden on - the authored crack line 'Deny or Knock Off the Berry to stop Unburden' has it backwards. Sneasler then moved before everything on my side on turn 3. See the legality/design note."},
+    {"check": "Dire Claw's status chance", "result": "PASS", "evidence": "turn 3 Dire Claw paralysed Urshifu on the turn it switched in, halving the speed of my best attacker for the rest of the fight. Turn 2's Dire Claw into Gardevoir was 2x and left it at 18/170. This is the most dangerous single move in the room and it worked."},
+    {"check": "Super Luck plus Scope Lens crit lane", "result": "PASS", "evidence": "turn 1 Psycho Cut critted for 210 into a 263 HP Amoonguss; turn 4 Night Slash critted again into Urshifu (resisted, so it did little). Two crits in three Absol actions. The dossier calls this the part worth keeping and it is right - it is the only thing in the Aqua arc that punishes a defensive answer."},
+    {"check": "Bruxish Strong Jaw Psychic Fangs breaks screens", "result": "NOT OBSERVED", "evidence": "Bruxish arrived on turn 3 and got one action, a Liquidation into Incineroar. I brought no screens, so the authored answer-to-screens had nothing to answer. It was then removed by a single Knock Off (2x into its Psychic half) and its Choice Scarf with it."},
+    {"check": "Froslass Cursed Body and Destiny Bond", "result": "NOT OBSERVED", "evidence": "Froslass entered on the final turn, chose Ice Beam, was dropped to 1 by Wicked Blow through its Focus Sash and finished by Knock Off in the same turn. Destiny Bond was never selected and Cursed Body never triggered."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects in this battle, although three of the four members carry it. With Fake Out, a doubled-speed Dire Claw and a crit lane all live, attacking was correct on every turn - I have no complaint about the guarding judgement here.",
+  "ai_defects": [],
+  "ai_defect_summary": "No AI defects. Every choice this room made was sensible: Fake Out at the Fake Out user, Dire Claw into the frailest body on the field, Night Slash from the crit-fishing Dark type, Liquidation from a Choice Scarf into a Fire type. It lost to switching and Spore, not to bad decisions.",
+  "authored_set_legality": "One authored-text error, not a mechanical one: the crack line says 'Deny or Knock Off the Berry to stop Unburden'. Knock Off removing the Sitrus is what ACTIVATES Unburden - it was demonstrated this battle. The correct counterplay is to leave the Berry on it, or to KO Sneasler outright. The dossier's crack for E0319 should be fixed; the team itself is legal and correct.",
+  "level_changes": [
+    {"member": "BRUXISH", "before": -1, "after": 0, "why": "won first try with zero faints; Bruxish is the frailest of the four in practice and died to one Knock Off after a single action"},
+    {"member": "FROSLASS", "before": -1, "after": 0, "why": "same; it arrived on the last turn and was removed inside that turn, so it never contributed a decision"}
+  ],
+  "level_change_rationale": "First attempt, zero player faints. Sneasler and Absol are the two members that carried the room and both executed exactly as authored, so I left them alone rather than inflating a lane that already works. The +1 went to the back half - the two that arrive last and currently die before acting twice - so the room's second half stops being free. Neither is an ace, Mega or legend, and both stay within the +-2 limit.",
+  "rebuild_note": "The level changes cannot be re-verified from this session; the run pinned work/agent-battle-build-4, which predates the edit. The main agent must rebuild. If any of my Mt Pyre grunt rooms is worth re-running after the rebuild, it is this one - a zero-faint result that still felt close, where one more Dire Claw status roll would have changed the shape of the fight.",
+  "theme_check": "Yes, and more than the rooms below it. Cold-mountain predators - a climbing Hisuian cat, a disaster omen, a snow bride and a psychic piranha - read as a summit gate crew, and on the board the theme actually showed: the room's opening was Fake Out into a doubled-speed status attacker, and the crit that nearly removed Amoonguss on turn 1 is exactly the 'punishes defensive stacking' identity the dossier claims.",
+  "cooler_note": "Keep it as is; this is the strongest of the four grunt concepts and the only one whose authored plan fired on the board. The one thing that would make it cooler, and it costs nothing, is fixing the crack text so the guide is not telling the player to do the exact thing that switches Unburden on. If a later pass wants more, Froslass would be more memorable holding on to Destiny Bond as a genuine last-mon threat - give it a Sitrus over the Focus Sash so it survives to use it, since the Sash currently only ever buys it one turn it does nothing with."
+}
