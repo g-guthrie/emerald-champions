@@ -1,0 +1,64 @@
+{
+  "play_order": 237,
+  "e_group": "E0348",
+  "trainer": "TRAINER_MATT",
+  "class": "admin",
+  "location": "AquaHideout_B2F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Five members L76 = 76 + 2 - 2 and Mega Malamar L77 = 76 + 3 - 2, matching the authored offsets exactly. Six Pokemon, the first six-slot opponent in this block.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_zapdos.json"],
+  "chronology_note": "Same six members; Incineroar beside Zapdos, because Thunderbolt is 4x on Pelipper and the whole of Matt's front half is Water. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Pelipper's Drizzle is free on entry and Wide Guard covers the crew's first spread turn",
+    "Choice Specs Kingdra at doubled Swift Swim Speed fires a rain-boosted Hydro Pump before the player's lead moves",
+    "Grimmsnarl's Prankster puts Reflect and Light Screen up before the player's first attack",
+    "Archaludon's Electro Shot charges instantly in rain and gains +1 Special Attack every time",
+    "Basculegion's Last Respects grows 50 base power for every fainted teammate",
+    "Mega Malamar's Contrary turns Superpower's drops into +1/+1 every hit"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 9, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/237-TRAINER_MATT/a1",
+      "outcome": "won", "turns": 8, "decisions": 12,
+      "player_faints": 3, "opponent_faints": 6, "ai_decision_seconds_max": 1.021,
+      "why": "A genuine boss fight that I won 6-3 and could have lost. Turn 1 went to plan - Fake Out flinched Kingdra and a 4x Thunderbolt removed Pelipper - but the rain outlived its owner and the two Swift Swim bodies behind it are faster than anything I own. Basculegion's Choice Band Wave Crash one-shot a full-health 301 HP Incineroar on turn 2, and Kingdra's Specs Hydro Pump one-shot a 294 HP Zapdos on turn 3 before my Thunderbolt could resolve. I beat the speed problem with priority: Rillaboom's Grassy Glide removed Basculegion and Urshifu's Sucker Punch finished Kingdra. Then the second half of the team is a completely different fight - Grimmsnarl's Prankster Reflect and a Thunder Wave that paralysed Rillaboom, and an Archaludon whose Electro Shot fires instantly in rain and killed the paralysed Rillaboom while gaining Special Attack. Spirit Break took Urshifu to its Focus Sash. Mega Gardevoir came in last and one Pixilate Hyper Voice killed both the 50 HP Grimmsnarl and the 34 HP Archaludon at once. Mega Malamar Protected through the next Hyper Voice and died to the one after."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Pelipper's Drizzle is free on entry", "result": "PASS", "evidence": "turn-0 state already read B_WEATHER_RAIN_NORMAL with ITEM_DAMP_ROCK on Pelipper, and the rain lasted through turn 8 - outliving Pelipper by seven turns, which is the whole point of the Damp Rock."},
+    {"check": "Pelipper's Wide Guard covers the crew's first spread turn / Tailwind", "result": "FAIL (never acted)", "evidence": "Pelipper selected WEATHER_BALL on turn 1 and was KOed by a 4x Thunderbolt before it resolved. Neither Wide Guard nor Tailwind was ever chosen. This is the third Wide Guard owner in the faction (after Mantine at 229 and Toxapex at 231) whose guard did not appear when it mattered."},
+    {"check": "Swift Swim Specs Kingdra fires before the player's lead", "result": "PASS", "evidence": "turn 3: Kingdra's Hydro Pump killed a full-health 294 HP Zapdos outright, and Zapdos' own Thunderbolt never resolved - so a base-100 Speed legend was outrun and one-shot. That is exactly the authored claim, and it is the most frightening single thing in Matt's front half."},
+    {"check": "Prankster screens land before the player's first attack", "result": "PARTIAL", "evidence": "Prankster priority is demonstrably working - Reflect resolved before both of my attackers on turn 4, Thunder Wave paralysed Rillaboom on turn 5 ahead of it, and Light Screen went up on turn 7. The authored 'before the player's first attack' did not happen, because Grimmsnarl is the fourth Pokemon out and by then I had already taken three. The screens did halve my damage for the rest of the fight - Grassy Glide needed two turns on Grimmsnarl instead of one - so the mechanic earned its slot; it just arrives late by construction."},
+    {"check": "Archaludon's Electro Shot charges instantly in rain and gains +1 Sp. Atk", "result": "PASS", "evidence": "turn 6: 'The opposing Archaludon absorbed electricity! The opposing Archaludon's Sp. Atk rose!' with no charge turn, immediately followed by the KO on Rillaboom. Stamina also fired visibly, taking it to +1 and then +2 Defense off my Close Combats. Both halves of this slot work."},
+    {"check": "Basculegion's Last Respects grows with fainted teammates", "result": "FAIL (structurally locked out)", "evidence": "Basculegion used WAVE_CRASH on turn 2 and again on turn 3 and never selected Last Respects. It holds a Choice Band, so its first selection locks it for the rest of its life - and its first selection came when only one teammate had fainted, i.e. when Last Respects was still at its weakest. See AI defects: as built, this clock can essentially never start."},
+    {"check": "Mega Malamar's Contrary Superpower", "result": "FAIL", "evidence": "Malamar Mega Evolved on turn 8 (driver reported the Mega message and MALAMARITE), used PROTECT, and died to the next Hyper Voice. It never selected Superpower, so Contrary was never demonstrated. In fairness it entered as the last Pokemon against a healthy Mega Gardevoir that is 2x into it - Superpower would have been 0.25x on a Psychic/Fairy target and Protect was arguably its best turn."}
+  ],
+  "protect_ledger": [
+    {"turn": 8, "battler": "Mega Malamar", "payoff": "FULL - it Mega Evolved and Protected on the same turn, blanking a Pixilate Hyper Voice that is 2x into it from a 213 HP Mega Gardevoir at full health. It also happened to blank my Urshifu's own Protect attempt by surviving the turn. The best single Protect decision I have seen in this block."}
+  ],
+  "protect_summary": "Exactly one opponent Protect across an eight-turn six-Pokemon boss fight, and it had full payoff. Pelipper, Grimmsnarl, Archaludon and Kingdra carry no guard; Malamar's was correct. No empty guarding, no repetition, nothing to fix.",
+  "ai_defects": [
+    {
+      "severity": "moderate (set/AI interaction, not a pure scoring bug)",
+      "turns": "2 and 3",
+      "board": "Basculegion entered on turn 1 as the replacement for Pelipper, with one teammate fainted, holding ITEM_CHOICE_BAND and knowing Last Respects, Wave Crash, Psychic Fangs and Aqua Jet.",
+      "chosen": "MOVE_WAVE_CRASH, then locked into it for the rest of the battle",
+      "problem": "Last Respects is the authored 'clock' that is supposed to make the fight worse the longer it runs, but the Pokemon carrying it holds a Choice Band. Whatever it picks on its first turn is what it uses forever, and it always arrives early in the fight when Last Respects is at 50 or 100 base power - so the scorer correctly prefers a 120 BP STAB Wave Crash, and correctly will still prefer it five faints later because it can no longer change. The clock can only ever start if Basculegion happens to enter as the last Pokemon, which on this team it does not.",
+      "better": "Not an AI fix. Either the AI needs to weight a Choice lock by the rest of the battle rather than the current turn, or - far more simply - Basculegion should not hold a Choice item if the point of its slot is a move whose power depends on how late it is used.",
+      "note": "I am flagging it here rather than silently dropping it because the dossier names Last Respects as one of Matt's four engines, and on this build it is the one that cannot run. Worth checking any other Choice-item holder in the campaign whose set includes a move that is conditional on battle state (Last Respects, Stored Power, Rage Fist, Acrobatics off a consumed item)."
+    }
+  ],
+  "ai_notes": [
+    "Matt's AI is noticeably better than his grunts', and it is because the team compounds rather than because any single decision was clever: Prankster priority resolved correctly every time, Stamina stacked while I was forced to keep attacking into it, and Electro Shot's rain interaction fired without a charge turn. I did not catch a single bad target choice in eight turns.",
+    "AI decision budget max 1.021 s against the 1.2 s ceiling, over twelve decisions with six Pokemon on the field - the largest team in this block and still inside budget."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Three player faints out of six in an eight-turn fight, with two of my Pokemon one-shot from full health by two different members, and the winning line required both a Mega and a priority move I happened to have. That is the brief's 'won after a real fight' case and comfortably clears the AGENTS.md three-faint aspiration for a villain boss. I also do not want to raise a team whose two unrealised engines (Last Respects and Contrary Superpower) failed for reasons levels cannot fix - if the Basculegion item question is revisited, this fight gets harder for free.",
+  "rebuild_note": "No level change, so nothing needs re-verification for levels. This is nevertheless the single battle in my block most worth re-running after the main agent rebuilds - it is the block's boss, it is the only fight with six opponents, and two of its four named engines have never been seen working. A rerun should try to reach Basculegion late (or be preceded by the Choice-item decision) so Last Respects can be observed at high power at least once.",
+  "theme_check": "Yes, and the escalation reads exactly as the dossier intends. Pelipper on turn 0 is the Mt Pyre opening again and the rain is already up before the player moves - I recognised it immediately and played into it. What is behind it is not a bigger grunt: it is screens, an instant Electro Shot and a Mega, and the difference in feel between this and the boatswain at play_order 236 is the difference between four dangerous Pokemon and one machine. Matt is comfortably a step above his grunts, and E0347 - which is the hardest grunt room and nearly beat me - still felt like a different kind of fight rather than a smaller version of this one. That is the right relationship between the two.",
+  "cooler_note": "Keep the concept; this is the best-built team I have played in this block and the 'wins by compounding advantages' claim is accurate. Asked again after playing it: the one slot that does not deliver is Basculegion, and not because of the species - a ghost salmon on a pirate crew is a great idea and Wave Crash one-shotting a healthy Incineroar is a real moment - but because its authored identity (a clock that grows as the fight runs) is cancelled by its own Choice Band. The concrete suggestion for a later pass, not made here: give Basculegion a Mystic Water, a Life Orb or a Focus Sash instead of the Choice Band. It keeps the damage, it unlocks the clock the dossier promises, and it makes Matt's endgame genuinely scale with how long the player has taken - which is exactly the compounding identity the rest of the team already has. Second, much smaller observation: Pelipper is holding two support moves it will realistically never use, because on this team it is the lead and it dies to the Electric answer every competent player brings to a rain team.",
+  "authored_set_legality": "No legality problem found. All six sets materialize; Malamar Mega-Evolves correctly from ITEM_MALAMARITE."
+}
