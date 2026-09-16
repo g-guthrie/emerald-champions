@@ -1,0 +1,60 @@
+{
+  "play_order": 230,
+  "e_group": "E0341",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_2",
+  "class": "grunt",
+  "location": "AquaHideout_B1F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; all four members L73 = 76 + (-1) - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_gardevoir.json"],
+  "chronology_note": "Same six members as play_order 229, lead order changed to Incineroar beside Gardevoir. All source maps precede the Lilycove coastal cave; see the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Sharpedo's first action can be Protect purely to bank a Speed Boost when the board is unsafe",
+    "Crawdaunt's Adaptability Crabhammer is immediate damage that does not wait",
+    "Cramorant's Surf leaves it in a Gulping form",
+    "Attacking a loaded Cramorant fires the missile for a quarter of the attacker's max HP and drops its Defense",
+    "Dragalge's Adaptability Draco Meteor and Sludge Bomb are the special lane"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 2, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/230-TRAINER_GRUNT_AQUA_HIDEOUT_2/a1",
+      "outcome": "won", "turns": 3, "decisions": 5,
+      "player_faints": 2, "opponent_faints": 4, "ai_decision_seconds_max": 0.469,
+      "why": "Mega Gardevoir on turn 1: Pixilate Hyper Voice is 2x on both halves of a Water/Dark lead pair and it removed Sharpedo and Crawdaunt in one action, behind a Fake Out that denied Sharpedo its turn. The back half made me pay for it. Dragalge Protected through my focus turn, Cramorant's Icy Wind put both my leads below it in speed, and on turn 3 Cramorant's Surf killed the chipped Gardevoir while Dragalge's Adaptability Draco Meteor killed Incineroar outright for 286. Urshifu and Zapdos came in on the empty board and a critical Wicked Blow finished the -2 Sp. Atk Dragalge."
+    },
+    {
+      "n": 2, "seed": 12, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/230-TRAINER_GRUNT_AQUA_HIDEOUT_2/a2",
+      "outcome": "won", "turns": 4, "decisions": 6,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.469,
+      "why": "Run deliberately to exercise the room's advertised signature, which attempt 1 never resolved: I kept Cramorant alive, let it Surf, and then attacked the loaded bird. Same turn-1 Hyper Voice opener. Gardevoir Protected on turn 2 while Incineroar Knocked Off Dragalge's Wise Glasses, Psyshock removed Dragalge on turn 3, and Incineroar died to the Surf that armed the missile. Urshifu replaced it and attacked into a Protect on turn 4."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Sharpedo Protects to bank a Speed Boost when the board is unsafe", "result": "FAIL (never selected)", "evidence": "Sharpedo's turn-1 native choice was MOVE_CRUNCH on seed 2 and MOVE_LIQUIDATION on seed 12 - an attack both times, into a board holding a Fake Out user and a Mega-usable Gardevoir. It was flinched and then removed by the spread on both runs, so the authored 'this is the one correct empty Protect in the campaign' turn never happened. Worth noting against the AGENTS.md Protect-scoring work: on turn 1 with Speed Boost ticking, no revealed player set and an obvious Fake Out lead, this is the single board where the expected-value model should be reaching for Protect and it does not."},
+    {"check": "Crawdaunt's Adaptability Crabhammer is immediate damage", "result": "PARTIAL (better move chosen)", "evidence": "Crawdaunt chose AQUA_JET at Gardevoir on turn 1 in both runs, not Crabhammer, and did 102 through the Mega. That is the stronger play - it is Choice Banded and Adaptability-boosted, Gardevoir outsped it, and priority was the only way to land anything before dying. The authored line says Crabhammer; the AI found the better one. Not a defect."},
+    {"check": "Cramorant's Surf leaves it in a Gulping form", "result": "PASS", "evidence": "attempt 2, after turn 3's Surf the driver reported the active species as SPECIES_CRAMORANT_GULPING with ABILITY_GULP_MISSILE. The form change is implemented and visible to the player exactly as the dossier's 'the bird is holding a fish' tell requires."},
+    {"check": "Attacking the loaded Cramorant fires the missile", "result": "PASS", "evidence": "attempt 2 turn 4: Urshifu's Wicked Blow into the Gulping Cramorant produced 'Urshifu's Defense fell!' and 65 damage to Urshifu, which is exactly 262/4. Both halves of Gulp Missile - the chip and the Defense drop - work."},
+    {"check": "Dragalge's Adaptability special lane", "result": "PASS", "evidence": "attempt 1 turn 3, DRACO_METEOR killed a full-health 301 HP Incineroar in one hit for 286. Adaptability plus Wise Glasses on a neutral target is genuinely frightening at this level, and it is the reason the room is not a walkover."},
+    {"check": "Unseen Fist punches through the faction's guards (my own crack, verified)", "result": "PASS", "evidence": "attempt 2 turn 4: 'The opposing Cramorant protected itself!' then 'Urshifu used Wicked Blow! ... The opposing Cramorant couldn't fully protect itself'. The Protect-ignoring interaction is implemented, which matters for the whole rest of this block."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Dragalge", "payoff": "FULL - blocked a 2x Psyshock from Mega Gardevoir and a Knock Off from Incineroar in the same turn, i.e. both of my actions, and kept its Wise Glasses for the Draco Meteor that killed Incineroar the following turn. This is a model Protect: it guarded on the exact turn I committed both attackers to it."},
+    {"attempt": 2, "turn": 4, "battler": "Cramorant", "payoff": "PARTIAL - it guarded as the last Pokemon alive, loaded with Gulp Missile, against an Urshifu it had not seen attack. Protect was a sound expected-value choice against an unknown attacker; Unseen Fist happened to be the one ability that beats it, and the missile fired anyway, so it lost nothing."}
+  ],
+  "protect_summary": "2 opponent Protects across two full battles, both on different battlers, both on turns where a guard was genuinely the best or near-best action, neither consecutive and neither empty. This is the healthiest Protect behaviour I have seen in this block. The complaint runs the other way: Sharpedo, whose dossier explicitly authorizes an 'empty' Protect to bank a Speed Boost, never chose one.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Cramorant used Icy Wind rather than Surf while Dragalge was healthy beside it (attempt 2 turn 2), then used Surf once the board favoured it. Avoiding friendly fire on its own partner, and taking the spread once it was worth it, is correct on both turns.",
+    "AI decision budget max 0.469 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Two wins but both cost real Pokemon - two on attempt 1, one on attempt 2 - and in both runs the deaths came from the back half executing its authored plan (an Adaptability Draco Meteor and a Surf) rather than from my error. That is the brief's 'won after a real fight' case. The lead pair evaporating to one Pixilate Hyper Voice is a matchup fact, not a level problem: +1 does not make a 208 HP Water/Dark survive a Mega Gardevoir spread, and raising the back half would punish the two members that are already doing the work.",
+  "rebuild_note": "No level change here, so nothing needs re-verification for this battle. Both runs pinned work/agent-battle-build-5.",
+  "theme_check": "Yes, and this is the best-realised room of the three Aqua rooms so far. A boarding party of two Dark-typed sharks-and-crustaceans backed by a bird that swallows its ammunition reads as piracy rather than as a type chart. The Gulp Missile tell is genuinely a tell: the driver reports the species as CRAMORANT_GULPING, so a player looking at the sprite can see the fish and decide whether to take the hit. Matt is not yet in view but this room is clearly a step above the bilge watch at play_order 229.",
+  "cooler_note": "Keep the roster; the chain is real and the two Adaptability attackers of opposite categories do force a split defensive answer as the dossier claims. One concrete observation for a later pass, not made here: Sharpedo's Protect-to-bank-a-boost plan is the room's stated opening and the AI never chose it in two runs, which means in practice Sharpedo is a frail Life Orb attacker that dies before its ability matters. Either the guard scoring needs to price a Speed Boost turn, or Sharpedo wants a Focus Sash so the boost clock survives the first exchange - the second is a set change and out of scope for this pass.",
+  "authored_set_legality": "No legality problem found."
+}
