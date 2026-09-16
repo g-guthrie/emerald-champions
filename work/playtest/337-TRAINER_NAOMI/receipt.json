@@ -1,0 +1,33 @@
+{
+ "play_order": 337, "e_group": "E0509", "trainer": "TRAINER_NAOMI", "class": "regular", "location": "SSTidalRooms", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; Tsareena offset 0 L98, others offset 1 L99 = cap+offset-2 on Medium.",
+ "difficulty": "medium",
+ "party_manifests": ["work/playtest/337-TRAINER_NAOMI/party_pg100_core.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open; same core party as 333 (one reachable legend, Chi-Yu). See the manifest availability audit.",
+ "pre_play_strategy_checks": ["Queenly Majesty blocks the player's priority (Fake Out / Grassy Glide / Aqua Jet) while Tsareena is out", "Salazzle Fake Out only when it buys an action; Corrosion Toxic on a Steel/Poison target", "Darkrai Mega Evolves; Nasty Plot / Hypnosis behind the safe opening; Bad Dreams survives the Mega", "Meowscarada Protean + Flower Trick guaranteed crit"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_pg100_core.json", "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 4,
+   "why": "t1 Chi-Yu out for Flutter Mane: Salazzle Fake Out and Tsareena High Jump Kick both hit the Ghost (immune; HJK crash cost Tsareena 140), Knock Off broke Salazzle's Sash. t2 Tsareena Protected Moonblast, Sludge Bomb poisoned Flutter Mane, Knock Off KO'd Salazzle. t3 Mega Darkrai Protected Moonblast while Power Whip KO'd Flutter Mane; Flare Blitz KO'd Tsareena. t4 Meowscarada Flower Trick (crit, SE) OHKO'd Urshifu on entry; Darkrai Nasty Plot. t5 Meowscarada Protected Flare Blitz, Overheat left Darkrai at 11 while it Nasty Plotted again (+4). t6 Darkrai Protected Heat Wave, Flare Blitz KO'd Meowscarada. t7 Heat Wave KO'd Darkrai. Faints: Flutter Mane, Urshifu."}
+ ],
+ "strategy_checks": [
+  {"check": "Queenly Majesty priority denial", "result": "not exercised", "evidence": "the player never used priority into Tsareena's side while it was out (Fake Out was aimed at nothing t1 because Chi-Yu switched; driver still listed Fake Out as legal - the ability is not modelled in the legality list)"},
+  {"check": "Salazzle Fake Out gating", "result": "PASS", "evidence": "t1 Fake Out into the slot that switched to Flutter Mane (no omniscience; immune) - sensible against the committed board"},
+  {"check": "Darkrai Mega + Nasty Plot / Hypnosis", "result": "PASS (Nasty Plot), Hypnosis never chosen", "evidence": "Mega Evolved t3; Protect t3, Nasty Plot t4, Nasty Plot t5 (+4), Protect t6; never attacked or slept anything against two Dark-resisting Fire/Dark targets"},
+  {"check": "Bad Dreams survives the Mega", "result": "PASS", "evidence": "state shows DARKRAI_MEGA with ABILITY_BAD_DREAMS"},
+  {"check": "Meowscarada Protean + Flower Trick", "result": "PASS", "evidence": "t4 Flower Trick crit SE OHKO on Urshifu (342), 'transformed into the Grass type'"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 2, "user": "Tsareena", "payoff": "blocked Moonblast (an OHKO at 140); partner Sludge Bomb poisoned Flutter Mane"},
+  {"run": "a1", "turn": 3, "user": "Mega Darkrai", "payoff": "blocked Moonblast on its Mega turn; partner Power Whip KO'd Flutter Mane"},
+  {"run": "a1", "turn": 5, "user": "Meowscarada", "payoff": "blocked Flare Blitz (an OHKO); partner Nasty Plot"},
+  {"run": "a1", "turn": 6, "user": "Mega Darkrai", "payoff": "blocked Heat Wave at 11 HP; partner U-turn (no reserve to pivot to) then died - a stall"}
+ ],
+ "protect_summary": "4 Protects: three good, one stall.",
+ "ai_defects": [],
+ "ai_notes": "Darkrai's second Nasty Plot at 246 HP against Chi-Yu (which then Overheated it to 11) and its refusal to Hypnosis either target was weak but not illegal: both player actives resisted Dark Pulse, so setup had no payoff target and Hypnosis was the better click. Worth looking at whether Hypnosis is scored at all when Dark Pulse is resisted.",
+ "level_changes": [],
+ "level_change_rationale": "Won first try 4-2 in 6 turns with two real KOs taken (Power Whip behind a Protect, Flower Trick OHKO). Keep.",
+ "cooler": "Flower Trick and the Protect timing made this feel sharp. Mega Darkrai never pressed Hypnosis; if the AI scored sleep on a resisted-Dark board the ace would be scarier. No set change recommended.",
+ "legality_notes": "Sets legal; driver accepted the party.",
+ "verification_limit": "No level change."
+}
