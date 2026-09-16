@@ -1,0 +1,51 @@
+{
+  "play_order": 51,
+  "e_group": "E0054",
+  "trainer": "TRAINER_KALEB",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"AUDINO": 29, "GRANBULL": 30, "BOLTUND": 28, "DACHSBUN": 29},
+  "cap_window_confirmation": "Dossier seeds 31/32/30/31 resolved to 29/30/28/29. Cap 30, Medium -2.",
+  "party_manifest": "work/playtest/51-TRAINER_KALEB/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Nidoking + Magearna. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Audino Helping Hand beside a Granbull attack is the default; Life Dew only when survival is actually at stake",
+    "Dachsbun Howl buffs Attack, and the AI does NOT then use Body Press (which reads Defense) expecting the Howl to apply",
+    "No friendly Fire activation: Granbull/Boltund Fire Fang is never aimed at Dachsbun to farm Well-Baked Body",
+    "Boltund provides immediate speed with Strong Jaw fangs",
+    "Audino regenerates on a useful switch",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/51-TRAINER_KALEB/a1", "seed": 51, "outcome": "won", "turns": 3, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Granbull's Intimidate dropped both my Attack stats, which is worth nothing against two special attackers. Nidoking's Sheer Force Life Orb Sludge Wave hit both slots and its own partner: Audino Protected it, Magearna is Steel and took nothing, and Granbull took 2x from full 122 HP and fainted before it could move. Magearna's Flash Cannon was also Protected away. T2 the same Sludge Wave KO'd the incoming Dachsbun from full 99 HP before its Howl resolved, and Flash Cannon at +2 Soul-Heart finished Audino. T3 Boltund's Crunch took Nidoking to 43 and Earth Power KO'd it at 2x."}
+  ],
+  "strategy_checks": [
+    {"check": "Audino Helping Hand beside a Granbull attack is the default", "result": "FAIL", "evidence": "Audino never used Helping Hand. On T1, the only turn it shared with Granbull, it chose Protect. Granbull died that turn without attacking, so the authored default pairing never occurred."},
+    {"check": "Life Dew only changes survival", "result": "CORRECTLY_NOT_USED", "evidence": "Never selected. Nothing on Kaleb's side was ever at a health level where a small party heal changed an outcome - every member died from full or near-full in one hit."},
+    {"check": "Dachsbun Howl, and no Body Press expecting the Howl boost", "result": "NOT_EXERCISED", "evidence": "Dachsbun selected Howl on T2 - the right first action for the authored plan - but Nidoking out-sped it and KO'd it from full before the move resolved. Body Press was never reached, so the specific Attack-vs-Defense trap this check exists for was not tested."},
+    {"check": "No friendly Fire activation on Dachsbun", "result": "PASS", "evidence": "Neither Granbull nor Boltund aimed Fire Fang at Dachsbun. Granbull never moved; Boltund used Crunch on its only turn. The forbidden Well-Baked Body loop did not appear."},
+    {"check": "Boltund provides immediate speed", "result": "PASS", "evidence": "It out-sped Nidoking (base 121 vs 85) on the turn it entered and landed Crunch for 55. Correct move too - Thunder Fang is 0 into a Ground-type and Fire Fang is resisted by nothing relevant, but Crunch off Strong Jaw was the biggest number available."},
+    {"check": "Audino regenerates on a useful switch", "result": "NOT_EXERCISED", "evidence": "Audino never switched; it died on T2."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "AUDINO", "payoff": "REAL: blocked both of my attacks that turn - a spread Sludge Wave and a Flash Cannon - which is the maximum a single Protect can deny in a double. It is only a partial success because the turn it bought was spent by its partner dying; Helping Hand into Granbull would have been the authored line, but the AI cannot know Granbull was about to be KO'd from full."}
+  ],
+  "protect_ledger_note": "One opponent Protect, maximal denial, no repetition.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No AI defects. Every choice Kaleb's side got to make was defensible: a Protect that blocked two attacks, a Howl as the correct opener for a Howl team, and a Crunch that was the largest number Boltund had against a Ground-type. The battle was decided by team construction, not by decision quality.",
+    "Granbull's Intimidate fired into two special attackers and did nothing. That is a matchup outcome rather than a defect, but it is worth recording that Kaleb's only defensive tool is dead against any special-attacking party."
+  ],
+  "level_changes": [
+    {"member": "BOLTUND", "field": "level offset", "before": 0, "after": 1, "reason": "First-attempt win in three turns with zero player faints. Boltund at L28 was the lowest-level opponent and the only member that got a hit in; one level is the cheapest way to make its Strong Jaw turn matter."},
+    {"member": "DACHSBUN", "field": "level offset", "before": 1, "after": 2, "reason": "Tied-lowest at L29 and the support engine the team's authored plan is named after. It selected Howl, which is exactly right, and was KO'd from full 99 HP before the move resolved. A Howl team needs its setter to survive one turn or it has no plan at all. Granbull (offset 2, L30) is the team's damage and is left alone."}
+  ],
+  "post_change_rerun": "NOT RUN - requires a headless ROM rebuild of the shared work/agent-battle-build; see the play_order 49 receipt for the reasoning. Materialization and rebuild are the main agent's step.",
+  "calibration": "Zero faints, three turns, and two of my six never left the party. Brief rule 5 and the AGENTS three-faint threshold both trigger a level increase on the weakest one or two. Applied +1 to Boltund and +1 to Dachsbun. I want to be honest that this will not fix the fight: see below.",
+  "could_this_be_cooler": "Levels are the wrong lever here and I am recording that clearly. Kaleb fields Granbull (Fairy), Dachsbun (Fairy), Audino (Normal) and Boltund (Electric). Three of the four take 2x from Poison and 2x from Steel, and none of them resists either. One spread Sheer Force Sludge Wave from a single Ground/Poison attacker - with a Steel partner that the spread cannot touch - removed two full-health members on consecutive turns and never risked anything. No level offset inside the +/-2 budget changes that; it is a type-coverage hole in the roster, not a stat problem. The concept itself is good and worth keeping: a Howl dog pack with a Well-Baked Body setter is a distinctive idea and Dachsbun had no prior campaign owner. The specific improvement I would recommend to the design side is to give the pack one member that is not weak to Poison and Steel and that punishes a spread attacker - a Steel- or Poison-typed dog (Houndoom is in the cap-30 pool and is Fire/Dark, Mabosstiff is Dark) in place of one of the two Fairies, so the team cannot be erased by a single correctly-typed spread move. Species/move changes are outside this pass's lever, so nothing was changed.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}

@@ -67,9 +67,9 @@ strategy: SETUP,TAILWIND
 mega_slots: NONE
 plan: First two useful turns: Poochyena uses Taunt or Helping Hand according to whether denying setup or securing damage matters more; Zigzagoon drums only when its post-cost HP and legal Gluttony/Figy recovery survive the opposing pair. On the next turn, cash in with Extreme Speed rather than continue setting up. Alternate deployment: Hoothoot Tailwind plus Starly gives an immediate attacking mode without Belly Drum. Reserves & disruption: If Drum is unsafe, attack with Zigzagoon or move to the bird pair. Figy is compatible with Adamant; Unnerve, item suppression or removal can deny recovery. Rattled is an opponent-dependent bonus, not an activation plan. Counterplay & audit: Priority immunity/denial, Fake Out on the support, physical mitigation, berry denial or focused damage before Drum resolves. Disposition: RETAIN; Figy replaces Sitrus to make Gluttony meaningful. Benchmark the first forced route fight against multiple starter pairs, not just a compliant setup fixture.
 crack: Priority immunity/denial, Fake Out on the support, physical mitigation, berry denial or focused damage before Drum resolves. Disposition: RETAIN; Figy replaces Sitrus to make Gluttony meaningful. Benchmark the first forced route fight against multiple starter pairs, not just a compliant setup fixture.
-POOCHYENA @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 3 | CRUNCH, TAUNT, SUCKER_PUNCH, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+POOCHYENA @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 4 | CRUNCH, TAUNT, SUCKER_PUNCH, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 ZIGZAGOON @FIGY_BERRY GLUTTONY ADAMANT 252/252/4/0/0/0 2 | BELLY_DRUM, EXTREME_SPEED, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-HOOTHOOT @EVIOLITE TINTED_LENS MODEST 164/0/8/204/0/132 3 | AIR_SLASH, HYPER_VOICE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+HOOTHOOT @EVIOLITE TINTED_LENS MODEST 164/0/8/204/0/132 4 | AIR_SLASH, HYPER_VOICE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 STARLY @LIFE_ORB RECKLESS JOLLY 4/252/0/0/0/252 2 | BRAVE_BIRD, DOUBLE_EDGE, QUICK_ATTACK, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0003 TRAINER_RICK class=regular
