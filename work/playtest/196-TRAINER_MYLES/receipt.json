@@ -8,28 +8,71 @@
   "cap": 60,
   "cap_confirmation": "driver state reported level_cap 60. Togekiss/Lucario/Magmortar/Serperior/Miltank (+1) resolved at L59 and Whiscash (+2) at L60 = cap + offset - 2 on Medium. Cap window 60-84; the Feather Badge is earned so 60 is live and nothing later is.",
   "difficulty": "medium",
-  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "party_manifests": [
+    "work/playtest/_party/party_route121_60.json"
+  ],
   "chronology_note": "Party restricted to pool entries gated at 54 or lower so every source map precedes Route 121: Litten line 36, Foongus line 42, Sneasel/Weavile 14 (Seaspray_Cave_B1F), Beldum line 48 with Metagrossite stone-window 42, Zapdos legendary_sign:NewMauville_Inside 30, Landorus legendary_sign:Route111_RuinsExterior 42. No Shoal Cave, Route 123/124/126/127, Safari Zone, Abandoned Ship, Lilycove or Mt Pyre species were used, because a player fighting the Route 121 aces has reached none of them.",
   "attempts": [
     {
-      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-4",
       "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
-      "outcome": "won", "turns": 11, "player_faints": 3, "opponent_faints": 6,
+      "outcome": "won",
+      "turns": 11,
+      "player_faints": 3,
+      "opponent_faints": 6,
       "why": "Life Orb Lucario OHKOed Incineroar through Fake Out on turn 1. Landorus then broke the front - Sludge Bomb through Follow Me removed Togekiss, Earth Power removed Magmortar - before Serperior's Dragon Pulse KOed it. Weavile traded into Whiscash's Waterfall after removing Serperior. Zapdos's Heat Wave was the closer: 2x on Lucario, and enough residual on a sleeping Whiscash. Amoonguss's Spore neutralised Lucario twice, Whiscash once and Miltank on arrival."
     }
   ],
   "strategy_checks": [
-    {"check": "REDIRECTION - Togekiss redirects only when it preserves a worthwhile Lucario attack, otherwise Thunder Wave or Air Slash", "result": "PASS", "evidence": "Exactly the authored judgement. Turn 1, with Lucario free to act, it chose Air Slash; turns 2 and 3, with Lucario asleep and my Sludge Bombs aimed at it, it chose Follow Me and ate both. It died doing its job. Thunder Wave was never chosen, which is defensible against two already-slow targets."},
-    {"check": "Follow Me actually pulls single-target attacks off the partner", "result": "PASS", "evidence": "turn 2: Amoonguss's Sludge Bomb was submitted at Lucario (battler 3) and resolved into Togekiss instead, for 166. Turn 3 the same, for the KO."},
-    {"check": "SETUP - Contrary Serperior's Leaf Storm raises its own Special Attack and the third one ends the fight", "result": "FAIL", "evidence": "Serperior had three turns: Dragon Pulse (KOed Landorus), Protect, then Leaf Storm on turn 7 - but it was KOed by Icicle Crash before the move resolved. Not a single Leaf Storm ever landed, so the Contrary growth engine never appeared and the +2 Special Attack stack was never tested. Glare was never chosen either. Nothing the AI did was wrong here; the set is simply slower than the Ice answer the crack recommends."},
-    {"check": "Whiscash is a distinct Dragon Dance mode", "result": "FAIL", "evidence": "Whiscash selected Dragon Dance on turns 9 and 10 but was asleep both times, so it never resolved. When it woke on turn 11 it chose High Horsepower (correctly, 2x into Amoonguss) and died to residual Heat Wave at 33 HP. The setup lane never assembled."},
-    {"check": "Magmortar is immediate special spread", "result": "PASS", "evidence": "turn 4 Heat Wave for 75 into Landorus - a spread move, so Rage Powder correctly did not absorb it. It was then OHKOed by Earth Power, which is the printed weakness of a Choice Specs Fire type."},
-    {"check": "Miltank utility physical pressure and Milk Drink", "result": "NOT OBSERVED", "evidence": "Miltank entered as the sixth Pokemon on turn 11 with the fight already 5-3 and was put to sleep the turn it arrived. One Body Slam (59 into Zapdos) was its whole contribution."},
-    {"check": "Lucario is the payoff attacker behind redirection", "result": "PASS", "evidence": "Life Orb Close Combat OHKOed a 240 HP Incineroar on turn 1 straight through Fake Out (Inner Focus correctly ignored the flinch), and Extreme Speed chipped Landorus twice at priority. It was the single most dangerous member."}
+    {
+      "check": "REDIRECTION - Togekiss redirects only when it preserves a worthwhile Lucario attack, otherwise Thunder Wave or Air Slash",
+      "result": "PASS",
+      "evidence": "Exactly the authored judgement. Turn 1, with Lucario free to act, it chose Air Slash; turns 2 and 3, with Lucario asleep and my Sludge Bombs aimed at it, it chose Follow Me and ate both. It died doing its job. Thunder Wave was never chosen, which is defensible against two already-slow targets."
+    },
+    {
+      "check": "Follow Me actually pulls single-target attacks off the partner",
+      "result": "PASS",
+      "evidence": "turn 2: Amoonguss's Sludge Bomb was submitted at Lucario (battler 3) and resolved into Togekiss instead, for 166. Turn 3 the same, for the KO."
+    },
+    {
+      "check": "SETUP - Contrary Serperior's Leaf Storm raises its own Special Attack and the third one ends the fight",
+      "result": "FAIL",
+      "evidence": "Serperior had three turns: Dragon Pulse (KOed Landorus), Protect, then Leaf Storm on turn 7 - but it was KOed by Icicle Crash before the move resolved. Not a single Leaf Storm ever landed, so the Contrary growth engine never appeared and the +2 Special Attack stack was never tested. Glare was never chosen either. Nothing the AI did was wrong here; the set is simply slower than the Ice answer the crack recommends."
+    },
+    {
+      "check": "Whiscash is a distinct Dragon Dance mode",
+      "result": "FAIL",
+      "evidence": "Whiscash selected Dragon Dance on turns 9 and 10 but was asleep both times, so it never resolved. When it woke on turn 11 it chose High Horsepower (correctly, 2x into Amoonguss) and died to residual Heat Wave at 33 HP. The setup lane never assembled."
+    },
+    {
+      "check": "Magmortar is immediate special spread",
+      "result": "PASS",
+      "evidence": "turn 4 Heat Wave for 75 into Landorus - a spread move, so Rage Powder correctly did not absorb it. It was then OHKOed by Earth Power, which is the printed weakness of a Choice Specs Fire type."
+    },
+    {
+      "check": "Miltank utility physical pressure and Milk Drink",
+      "result": "NOT OBSERVED",
+      "evidence": "Miltank entered as the sixth Pokemon on turn 11 with the fight already 5-3 and was put to sleep the turn it arrived. One Body Slam (59 into Zapdos) was its whole contribution."
+    },
+    {
+      "check": "Lucario is the payoff attacker behind redirection",
+      "result": "PASS",
+      "evidence": "Life Orb Close Combat OHKOed a 240 HP Incineroar on turn 1 straight through Fake Out (Inner Focus correctly ignored the flinch), and Extreme Speed chipped Landorus twice at priority. It was the single most dangerous member."
+    }
   ],
   "protect_ledger": [
-    {"turn": 6, "battler": "Serperior", "payoff": "blocked Weavile's Icicle Crash, 2x into a Grass type and lethal"},
-    {"turn": 9, "battler": "Lucario", "payoff": "blocked Zapdos's Heat Wave at 102/170, 2x on its Steel half and lethal"}
+    {
+      "turn": 6,
+      "battler": "Serperior",
+      "payoff": "blocked Weavile's Icicle Crash, 2x into a Grass type and lethal"
+    },
+    {
+      "turn": 9,
+      "battler": "Lucario",
+      "payoff": "blocked Zapdos's Heat Wave at 102/170, 2x on its Steel half and lethal"
+    }
   ],
   "protect_summary": "2 opponent Protects, both with a concrete payoff, 0 empty, no consecutive guarding. Nothing to tune.",
   "ai_defects": [],
@@ -37,5 +80,6 @@
   "level_change_rationale": "Keep. Won on attempt 1 but it cost Incineroar, Landorus and Weavile - three faints, which is the AGENTS.md aim for a well-prepared party and comfortably past the brief's 2+ faints threshold. The +1 rule does not apply. Note for the record: two of the six (Serperior, Whiscash) never executed their authored engines, so this team is currently harder than its strategy checks suggest rather than easier - the raw Lucario/Magmortar/Togekiss front carried it.",
   "cooler": "Retain. The redirection-plus-growth-engine pairing is a real doubles plan and the fight demonstrated the redirection half cleanly. The concrete finding matches the dossier's own flagged note and sharpens it: the team has two setup win conditions (Serperior's Contrary Leaf Storm, Whiscash's Dragon Dance) and neither one ever got a turn, because both are deployed behind three attackers and arrive after Togekiss - the Pokemon whose entire job is to buy them that turn - is already dead. Follow Me protects the slot beside it, so the growth engine has to be in that slot. Putting Serperior beside Togekiss in the opening pair would make the authored plan happen at the start of the fight rather than never. The Choice Specs lock on Magmortar remains the second-best note, as the dossier says.",
   "legality_notes": "No legality problem in the authored set; all six and their items are inside the cap-60 window. One small observation rather than a defect: Miltank's Scrappy and Whiscash's Oblivious were both irrelevant on the boards that occurred, so two of the six abilities are currently untested by this benchmark.",
-  "verification_limit": "No level change was made, so nothing is pending re-verification."
+  "verification_limit": "No level change was made, so nothing is pending re-verification.",
+  "result_json_note": "No result.json: this run dir's pinned scene.gba/scene.elf/constants.json were deleted for disk before `result` was called (the coordinator's later instruction to run `result` first arrived after this battle). `result` re-runs the emulator against the pinned ROM, so it cannot be regenerated. The full per-turn record is in a1/events.jsonl and the outcome, turn count and faint counts quoted in this receipt are taken from the live `act` readings made while the battle was in progress."
 }

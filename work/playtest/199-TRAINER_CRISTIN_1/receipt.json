@@ -8,27 +8,66 @@
   "cap": 60,
   "cap_confirmation": "driver state reported level_cap 60. Regieleki/Ninetales (+1) at L59, Mega Flygon (0) at L58, Lilligant (+2) at L60 = cap + offset - 2 on Medium.",
   "difficulty": "medium",
-  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "party_manifests": [
+    "work/playtest/_party/party_route121_60.json"
+  ],
   "chronology_note": "Same cap-60 party as play_order 196-198; all gates 54 or lower.",
   "attempts": [
     {
-      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-4",
       "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
-      "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 4,
+      "outcome": "won",
+      "turns": 8,
+      "player_faints": 2,
+      "opponent_faints": 4,
       "why": "This is the dossier's own crack executed literally: Landorus is Ground/Flying, so Transistor Thunderbolt and Electroweb both read 'It doesn't affect Landorus', and Earth Power is 2x back into Regieleki and 2x into Ninetales. Landorus removed both of them and then died to Mega Flygon's Dragon Pulse. Amoonguss was lost to a sun-boosted Heat Wave. Weavile closed on 4x Ice into Mega Flygon and 2x into Lilligant. The sun faded on turn 5 and neither Tailwind nor Chlorophyll ever produced a speed advantage."
     }
   ],
   "strategy_checks": [
-    {"check": "SUN - Ninetales's Drought is automatic and the field starts sunny", "result": "PASS", "evidence": "the turn-0 board already reads weather B_WEATHER_SUN_NORMAL, and 'The sunlight is strong' ticked at the end of turns 1-5. field_source correctly lists no authored startingStatus - the sun is the ability, not a fixture."},
-    {"check": "Sun powers Solar Beam as a one-turn move", "result": "FAIL", "evidence": "Ninetales never selected Solar Beam in four turns of permanent sun. Heat Wave was in fact the better pick on every board that occurred (2x into Amoonguss twice), so this is a set-design observation rather than a scoring error - Solar Beam had no super-effective target in my party."},
-    {"check": "Chlorophyll Lilligant doubles its Speed in the sun", "result": "FAIL", "evidence": "Lilligant was held back to fourth and entered on turn 5 as a forced replacement. The sun faded at the end of that same turn ('The sunlight faded'), so Chlorophyll was live for one turn, during which Lilligant was flinched by Fake Out. It spent both of its real turns using Sleep Powder at ordinary Speed."},
-    {"check": "Mega Flygon supplies Tailwind so the sun team is fast before the Chlorophyll lands", "result": "FAIL", "evidence": "Mega Flygon entered fifth, on turn 6, after the sun had already gone. It Mega Evolved and used Dragon Pulse (a KO on Landorus) and then Bug Buzz. Tailwind was never selected. Both of the team's speed engines therefore produced nothing across the whole fight."},
-    {"check": "Regieleki's Electroweb is speed control from the fastest body in the game", "result": "PASS", "evidence": "turn 4 Electroweb dropped Amoonguss's Speed. Correctly aimed at the battler it could actually affect - the spread half hit Landorus and read 'It doesn't affect Landorus' with no wasted targeting decision."},
-    {"check": "Regieleki has exactly one attacking type and a Ground lead blanks it", "result": "PASS, decisively", "evidence": "Landorus took Thunderbolt (turn 2) and Electroweb (turn 4) for zero. Regieleki's only remaining option was Protect, which it used twice, and then it died to Earth Power. The dossier names this as the honest weakness and it is exactly right."}
+    {
+      "check": "SUN - Ninetales's Drought is automatic and the field starts sunny",
+      "result": "PASS",
+      "evidence": "the turn-0 board already reads weather B_WEATHER_SUN_NORMAL, and 'The sunlight is strong' ticked at the end of turns 1-5. field_source correctly lists no authored startingStatus - the sun is the ability, not a fixture."
+    },
+    {
+      "check": "Sun powers Solar Beam as a one-turn move",
+      "result": "FAIL",
+      "evidence": "Ninetales never selected Solar Beam in four turns of permanent sun. Heat Wave was in fact the better pick on every board that occurred (2x into Amoonguss twice), so this is a set-design observation rather than a scoring error - Solar Beam had no super-effective target in my party."
+    },
+    {
+      "check": "Chlorophyll Lilligant doubles its Speed in the sun",
+      "result": "FAIL",
+      "evidence": "Lilligant was held back to fourth and entered on turn 5 as a forced replacement. The sun faded at the end of that same turn ('The sunlight faded'), so Chlorophyll was live for one turn, during which Lilligant was flinched by Fake Out. It spent both of its real turns using Sleep Powder at ordinary Speed."
+    },
+    {
+      "check": "Mega Flygon supplies Tailwind so the sun team is fast before the Chlorophyll lands",
+      "result": "FAIL",
+      "evidence": "Mega Flygon entered fifth, on turn 6, after the sun had already gone. It Mega Evolved and used Dragon Pulse (a KO on Landorus) and then Bug Buzz. Tailwind was never selected. Both of the team's speed engines therefore produced nothing across the whole fight."
+    },
+    {
+      "check": "Regieleki's Electroweb is speed control from the fastest body in the game",
+      "result": "PASS",
+      "evidence": "turn 4 Electroweb dropped Amoonguss's Speed. Correctly aimed at the battler it could actually affect - the spread half hit Landorus and read 'It doesn't affect Landorus' with no wasted targeting decision."
+    },
+    {
+      "check": "Regieleki has exactly one attacking type and a Ground lead blanks it",
+      "result": "PASS, decisively",
+      "evidence": "Landorus took Thunderbolt (turn 2) and Electroweb (turn 4) for zero. Regieleki's only remaining option was Protect, which it used twice, and then it died to Earth Power. The dossier names this as the honest weakness and it is exactly right."
+    }
   ],
   "protect_ledger": [
-    {"turn": 1, "battler": "Regieleki", "payoff": "blocked Amoonguss's Spore at full HP - denying sleep on the team's only fast attacker is a real payoff and a good read"},
-    {"turn": 3, "battler": "Regieleki", "payoff": "blocked Landorus's Earth Power, 2x and lethal. Note this was a second consecutive successful Protect, which is a genuine risk it took and won"}
+    {
+      "turn": 1,
+      "battler": "Regieleki",
+      "payoff": "blocked Amoonguss's Spore at full HP - denying sleep on the team's only fast attacker is a real payoff and a good read"
+    },
+    {
+      "turn": 3,
+      "battler": "Regieleki",
+      "payoff": "blocked Landorus's Earth Power, 2x and lethal. Note this was a second consecutive successful Protect, which is a genuine risk it took and won"
+    }
   ],
   "protect_summary": "2 opponent Protects, both with concrete payoff, 0 empty. The consecutive pair on turns 1 and 3 is the only back-to-back guarding in the block and both paid, so no tuning is indicated - but it is worth watching, because a third consecutive guard would have been the losing line.",
   "ai_defects": [],
@@ -36,5 +75,6 @@
   "level_change_rationale": "Keep. Won on attempt 1 with two faints against a four-member team, and the survivors were not comfortable - Landorus finished burned at 60/196 before it died and Amoonguss was OHKOed through 263 HP by a sun-boosted spread move. The brief's 2+ faints clause applies. I deliberately do not treat the three failed strategy checks as a reason to add levels: they mean the team under-performed its design, and AGENTS.md is explicit that AI and design defects are fixed before levels compensate.",
   "cooler": "The dossier claims 'two independent speed engines stacked on purpose' and neither one ran. That is the finding worth acting on, and it is a deployment problem rather than a roster problem. Flygon carries the Tailwind and Lilligant carries the Chlorophyll, and both are in the back half behind Regieleki and Ninetales - so by the time either arrives the sun has expired and the fight is decided. Lead Ninetales beside Lilligant and the Chlorophyll sweeper is doubling its Speed from turn 1 under the Drought that just fired, which is the picture the plan paints. Keeping Regieleki as the second pair also fixes its own worst problem: it currently leads into whatever Ground answer the player brought, and against a Ground lead it has literally no legal damaging action, which is how this fight went. The species are all correct - Regieleki used for a job rather than a stat line is a good call, and Mega Flygon is a distinctive custom - but the order is backwards.",
   "legality_notes": "No legality problem in the authored set. Flygonite and all four members are inside the cap-60 window. Flygon at offset 0 is consistent with the block's note.",
-  "verification_limit": "No level change was made, so nothing is pending re-verification."
+  "verification_limit": "No level change was made, so nothing is pending re-verification.",
+  "result_json_note": "No result.json: this run dir's pinned scene.gba/scene.elf/constants.json were deleted for disk before `result` was called (the coordinator's later instruction to run `result` first arrived after this battle). `result` re-runs the emulator against the pinned ROM, so it cannot be regenerated. The full per-turn record is in a1/events.jsonl and the outcome, turn count and faint counts quoted in this receipt are taken from the live `act` readings made while the battle was in progress."
 }
