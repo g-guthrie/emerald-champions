@@ -1,0 +1,95 @@
+{
+  "play_order": 54,
+  "e_group": "E0058",
+  "trainer": "TRAINER_TIMMY",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Heliolisk 0->1 and Ditto 0->1 off a five-turn zero-faint clear. This is the one confirming run of those levels on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Heliolisk resolved at L29 and Ditto at L29 (both L28 in pass 1). Stunky L31 and Herdier L31 unchanged.",
+  "resolved_opponent_levels": {"STUNKY": 31, "HELIOLISK": 29, "HERDIER": 31, "DITTO": 29},
+  "party_manifest": "work/playtest/54-TRAINER_TIMMY/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: Nidoking, Magearna, Gardevoir (Gardevoirite), Togekiss, Weavile, Kartana - all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110. One declared reachable legend (Magearna); Gardevoir was never sent out so no Mega was used.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/54-TRAINER_TIMMY/r1",
+      "seed": 54,
+      "outcome": "won",
+      "turns": 4,
+      "driver_turn_counter": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_frames": [63, 19, 16, 16],
+      "ai_decision_seconds_max": 1.055,
+      "narrative": "T1 was again the dangerous turn: Stunky's Sucker Punch caught Nidoking for 86 of its 98 HP, and Heliolisk's spread Hyper Voice was resisted by Magearna. A critical 2x Earth Power then KO'd Heliolisk from full 84 - it did get its Hyper Voice off first, which is one more action than it managed in pass 1 - and Aura Sphere (2x) took Stunky to 24. Ditto came in and Imposter-copied Nidoking, Choice Scarf and all. T2 I pulled the 12 HP Nidoking for Kartana; Stunky's second Sucker Punch FAILED into the switch, Ditto's Earth Power broke Kartana's Focus Sash (leaving it on 1 HP) and Choice-locked Ditto into Earth Power, and Aura Sphere finished Stunky. Herdier entered and Intimidated. T3 I brought Togekiss in for the 1 HP Kartana - Flying, so the locked Earth Power is a 0x - and a +2 Aura Sphere (2x) KO'd the 110 HP Herdier from full before its Double-Edge resolved. T4 Ditto spent its last turn on the same blanked Earth Power and a +3 Flash Cannon ended it. Zero player faints, but Nidoking finished on 12/98 and Kartana on 1/85."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "'Stunky enables Heliolisk' - the authored plan",
+      "result": "FAIL",
+      "evidence": "Stunky did its half perfectly (a Sucker Punch that took 86 off my best attacker), but Heliolisk never converted: it chose spread Hyper Voice into a board with a Steel resist on it, then died to a critical Earth Power. Across two passes Heliolisk has never landed a meaningful hit. The extra level bought it one action rather than none, which is progress, but not the payoff turn the plan is named for."
+    },
+    {
+      "check": "Heliolisk's extra level buys it a turn",
+      "result": "PARTIAL PASS",
+      "evidence": "At L29 it survived long enough to act (Hyper Voice) where at L28 in pass 1 it was KO'd from full before acting. The knockout that removed it was a critical hit, so on a non-crit roll it would likely have had a second turn. The level is doing something."
+    },
+    {
+      "check": "Imposter Ditto's extra level makes the copy matter",
+      "result": "FAIL, and instructively so",
+      "evidence": "Ditto copied my Choice Scarf Nidoking correctly and got three actions - but its first Earth Power locked it into a Ground move, and I answered by putting a Flying-type in front of it, so its last two turns were literal zeros ('It doesn't affect Togekiss'). This is NOT an AI defect: at the moment it chose Earth Power the targets were a Poison/Ground and a Grass/Steel, both of which take it neutrally, and once locked it had no live bench to switch to. It is correct counterplay by the player against a Choice-locked Imposter, and it is the single biggest reason this team cannot close."
+    },
+    {
+      "check": "Aftermath",
+      "result": "NOT TESTED",
+      "evidence": "Stunky was KO'd by Aura Sphere, which is not a contact move, so Aftermath never triggered. Worth noting that an all-special party sidesteps this ability entirely - it has not triggered in either pass."
+    },
+    {
+      "check": "Intimidate Herdier as the bulky pivot",
+      "result": "FAIL - never acted",
+      "evidence": "Entered on turn 2, dropped my Attack (worthless against two special attackers and a Kartana on 1 HP), selected DOUBLE_EDGE, and was KO'd from full 110 HP by a single +2 Aura Sphere before it resolved. It is the team's bulkiest body and it has produced one Protect across two passes and nothing else."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opponent Protects in four turns, where pass 1 logged a Herdier Protect that blocked both of my attacks. No empty guards to report.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 1 Heliolisk chose spread HYPER_VOICE on a board where GRASS_KNOT was a 2x single-target into a heavy Ground-type (my Nidoking) and Hyper Voice was resisted by half the field. Spread has real value in doubles so I am not calling this a defect on one sample, but it is the mirror image of the good spread-vs-single discrimination I recorded for Wailmer and Gastly, and on this board the single-target option was clearly better. Worth a second sample.",
+    "Turn 2 Stunky's Sucker Punch failing into my switch is not a fault - the opponent does not read pending commands, and Sucker Punch's failure condition is inherent to the move.",
+    "Ditto's blanked Earth Powers on turns 3 and 4 are a Choice lock the player exploited, not a decision defect; it had no living bench to switch to.",
+    "Turn 3 Herdier's Double-Edge selection was reasonable; it simply died to a snowballing Soul-Heart Magearna before acting.",
+    "AI decision timing peaked at 63 frames (1.055 s), the highest in my block and still inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "HERDIER",
+      "field": "level offset",
+      "before": 3,
+      "after": 4,
+      "pass_total": "+1 (first level for this member in this pass)",
+      "reason": "Second consecutive zero-faint clear, this one in four turns, so brief rule 5 calls for a raise. Herdier is the right recipient: it is the team's bulkiest body (110 HP, Sitrus, Intimidate), it has now been KO'd from FULL health before acting, and unlike its team-mates its failure is one that bulk can actually address. Heliolisk and Ditto are both already +1 this pass and Heliolisk did convert its level into an action. Stunky is left alone at offset 3 because it is comfortably the best-performing member - its Sucker Punch took 86 off my strongest attacker on turn 1 of both passes."
+    }
+  ],
+  "level_changes_not_made": [
+    {
+      "member": "HELIOLISK",
+      "reason": "+1 in pass 1 and it did convert from zero actions to one; the knockout that removed it was a critical hit. Raising it again would hit the +2 ceiling on a member that is already starting to work."
+    },
+    {
+      "member": "DITTO",
+      "reason": "+1 in pass 1. Its problem is not level at all - it is that a Choice-locked Imposter can be walled by one type-immune switch-in. A level cannot fix that and would waste the ceiling."
+    },
+    {
+      "member": "STUNKY",
+      "reason": "The team's best member and its highest-impact turn in both passes. Nothing to add at offset 3."
+    }
+  ],
+  "calibration": "RAISE Herdier 3 -> 4. Won on the first attempt in four turns with zero player faints for the second pass running. It was not a walkover - Nidoking finished on 12/98 and Kartana on 1/85 - but nothing died, and Herdier was removed from full health without acting. Brief rule 5: 'Won first try with 0-1 player faints and no real threat -> +1 on the weakest one or two members.' One member only, since the other two non-Stunky members are already +1 this pass and their remaining problems (a critical hit, a Choice lock) are not things levels address.",
+  "could_this_be_cooler": "Retain the concept but record a real structural finding. This is a 'Stunky enables Heliolisk' team whose enabler is excellent and whose payoff piece has never paid off in two passes, plus an Imposter Ditto that is the most interesting idea on the roster and the easiest to blank: one Flying-type switch-in after its first Ground move turned the copy of my own best attacker into two literal zero-damage turns. That is a genuinely cool interaction to have designed and it deserves a partner that punishes the answer to it - something that makes putting a Flying-type in front of the Ditto costly. Aftermath has also never triggered in two passes because a strong cap-30 party has no reason to use contact moves here. No species, move or item change is proposed or made in this pass; the honest note for the main agent is that Heliolisk's payoff turn and Ditto's lock-out are both plan problems, not level problems.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. Teams-file change is the single HERDIER offset line, edited in place; generated projections were not regenerated or committed by this session. Synthetic headless benchmark, not earned campaign play."
+}
