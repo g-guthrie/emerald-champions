@@ -1,0 +1,54 @@
+{
+  "play_order": 19,
+  "e_group": "E0023",
+  "trainer": "TRAINER_JOHNSON",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "observed_opponent_levels": {"SHINX": 16, "FLETCHINDER": 14, "BUNNELBY": "15 (offset 3)", "DODUO": "14 (offset 2)"},
+  "outcome": "WON on attempt 1, 7 turns, 3 player faints",
+  "party_manifest": "work/playtest/19-JOHNSON/party.json",
+  "run_dir": "work/playtest/19-JOHNSON/a1",
+  "attempts": [
+    {"seed": "0x1900", "outcome": "won", "turns": 7, "player_faints": 3, "opponent_faints": 4,
+     "player_faint_detail": "Weavile to Shinx's Wild Charge; Ludicolo to a critical Acrobatics (Flying is 2x on Grass - my switch-in error); Whimsicott at 1 HP to Bunnelby's Huge Power Quick Attack. Lucario finished at 5/48.",
+     "note": "The best-calibrated fight in this block so far. I finished with two members standing and one of them at 5 HP."}
+  ],
+  "strategy_checks": [
+    {"check": "Gale Wings gives Fletchinder priority while it is at full HP", "result": "PASS - clean demonstration", "evidence": "Turn 1: Fletchinder (base 62 Speed) used Acrobatics BEFORE Whimsicott (base 116, Timid, 252 Spe) and after only my +3 Fake Out. From turn 2 on, with Fletchinder at 30/45, it correctly moved in normal Speed order. The full-HP condition was honoured in both directions."},
+    {"check": "Itemless Acrobatics reaches doubled power", "result": "PASS", "evidence": "ITEM_NONE confirmed in the battler state. Acrobatics took Weavile from 48 to 17 at a neutral matchup on turn 1 and killed a 50 HP Ludicolo through a critical hit on turn 3."},
+    {"check": "Fletchinder opens the Tailwind window", "result": "FAIL - never fired", "evidence": "Fletchinder was on the field for six turns and chose Acrobatics (turns 1, 3, 4, 5, 7) and Protect (turns 2, 6). Tailwind was never selected, including turn 1 when Gale Wings would have made it a +1 priority set-up against a faster team - the exact window the plan describes."},
+    {"check": "Fletchinder's Will-O-Wisp creates a burn window", "result": "FAIL - never fired", "evidence": "Never selected across six turns, including against two physical attackers (Lucario, Arcanine)."},
+    {"check": "Shinx's Intimidate creates a useful window on entry", "result": "PASS", "evidence": "Intimidate fired on its turn-5 re-entry ('The opposing Shinx's Attack fell' does not apply here - the log shows Arcanine's Attack fell). It was correctly blocked on Lucario: 'Lucario's Attack was not lowered!' via Inner Focus, which is the right modern interaction."},
+    {"check": "Doduo threatens Endeavor when genuinely low", "result": "FAIL - see AI defect below", "evidence": "At 2/38 HP facing a 45/45 Whimsicott, Doduo selected MOVE_QUICK_ATTACK."},
+    {"check": "Bunnelby is an independent Huge Power attacker", "result": "PASS", "evidence": "Turn 5: Huge Power Quick Attack killed Whimsicott outright. Turn 4 it also chose Quick Attack. It played as its own priority threat rather than a support piece, as authored."},
+    {"check": "Smart switching", "result": "PASS", "evidence": "Turn 3: Shinx withdrew at 18/55 rather than die, bringing Doduo in. A correct preservation switch."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS"}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "Fletchinder", "payoff": "REAL - blocked Weavile's Icicle Crash while its partner Shinx killed Weavile with Wild Charge. Best possible use of the turn."},
+    {"turn": 6, "battler": "Fletchinder", "payoff": "REAL and life-saving - at 13/45 it blocked Arcanine's Extreme Speed, which would have killed it."},
+    {"turn": 7, "battler": "Shinx", "payoff": "REAL and life-saving - at 18/55 it blocked Lucario's Close Combat, which would have killed it."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0023-JOHNSON-ENDEAVOR-DECLINED",
+      "severity": "medium",
+      "turn": 4,
+      "board": "Doduo had just entered and sat at 2/38 HP (its Focus Sash intact but irrelevant at 2 HP) opposite a completely healthy Whimsicott at 45/45 and a Lucario at 48/48. Doduo's authored role is explicitly 'threaten Endeavor when genuinely low'.",
+      "chosen_action": "MOVE_QUICK_ATTACK targeting Whimsicott (45/45).",
+      "better_action": "MOVE_ENDEAVOR targeting Whimsicott. Endeavor would have set a 45 HP target to 2 HP; Quick Attack, from an unboosted Doduo, does roughly 10. Endeavor is worth about four times as much on this exact board and it is the reason the set exists.",
+      "caveat": "Endeavor is priority 0 and Quick Attack is +1, so a scorer that heavily weights 'act before dying' will prefer Quick Attack whenever the user expects to be killed. That is the likely cause. It is still wrong here: the AI does not read my pending commands, so at decision time it should price the enormous Endeavor payoff against the chance of surviving to use it, and a 2 HP body that has already lost its Sash is not a body worth protecting with a 10-damage priority chip.",
+      "affected_index_hint": "Any authored Endeavor/Flail/Reversal user whose set depends on acting at low HP. Within the campaign teams file, Endeavor appears on this Doduo; the same priority-versus-payoff scoring would affect Flail/Reversal and Final Gambit users if any exist later."
+    }
+  ],
+  "ai_observations": [
+    "Three opposing Protects, all three with real payoff and two of them strictly life-saving. No empty or repetitive guarding anywhere in this fight. This is the best Protect record in the block so far.",
+    "The TAILWIND strategy flag is the trainer's headline and never executed. Fletchinder is also the member best placed to use it (Gale Wings makes it a +1 priority set-up) and it chose Acrobatics every single free turn."
+  ],
+  "level_changes": [],
+  "level_verdict": "KEEP. Brief rule 5: won with 3 player faints after a real fight. This trainer is correctly calibrated as authored - the priority pressure from Gale Wings Acrobatics and Huge Power Quick Attack punished two genuine mistakes on my side and the fight was in doubt until the last two turns.",
+  "cooler_note": "Yes, already cool, and it plays better than it reads. Gale Wings Acrobatics plus Huge Power Quick Attack plus a Focus Sash Endeavor body is three different ways to act before you do, which is a real identity for a youngster on Route 116. The only change worth considering, and not applied here, is that Doduo's Endeavor is dead weight as long as the AI prefers Quick Attack at low HP - either the scoring gets fixed (preferred, see the defect above) or the slot is not doing what the dossier promises. Fletchinder's unused Tailwind and Will-O-Wisp are the same problem in miniature: two of its four moves never appear.",
+  "authored_set_legality": "No legality problem found. Bunnelby's friendship=0 Frustration is correctly authored, though Bunnelby never chose Frustration in two turns on the field - it used Quick Attack both times.",
+  "not_finished": "Tailwind, Will-O-Wisp, Endeavor and Frustration were all never used. Doduo's Focus Sash was never seen to activate."
+}

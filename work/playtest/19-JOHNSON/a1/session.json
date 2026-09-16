@@ -1,0 +1,21 @@
+{
+  "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+  "elf_sha256": "d43f0156f2669176abb19598a1ec55cfc7a82441550e443bfdd1836c41b7be78",
+  "seed": 6400,
+  "trainer_a": "TRAINER_JOHNSON",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 14,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/19-JOHNSON/party.json",
+  "party_sha256": "e5f85eb470029ad039569673df060cfe3de1ec32c49db39ec7e839a1b2efa2d9",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "prepared": {
+    "encounter": "E0023 TRAINER_JOHNSON (play_order 19); P2 cap-14 anti-Flying build",
+    "party": 6
+  },
+  "started": {
+    "frames": 1336
+  }
+}
