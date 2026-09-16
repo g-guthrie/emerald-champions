@@ -1,0 +1,43 @@
+{
+  "play_order": 166,
+  "e_group": "E0232",
+  "trainer": "TRAINER_DOUG",
+  "location": "Route119",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Masquerain 45 (-1), Ariados 46 (0), Lokix 47 (+1), Orbeetle 47 (+1) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/166-TRAINER_DOUG/party.json",
+  "attempts": [
+    {"seed": 101, "run_dir": "work/playtest/166-TRAINER_DOUG/run-s101", "outcome": "won", "turns": 7, "player_faints": 1, "opponent_faints": 4,
+     "notes": "Run on work/agent-battle-build-4. Incineroar was KOed by a Lokix Axe Kick and Mega Metagross was taken to 54/150 by two +1 Bug Buzzes before an ally Pollen Puff healed it. Longer and closer than the other two Bug teams."}
+  ],
+  "strategy_checks": [
+    {"check": "Ariados redirects to preserve Masquerain's setup or attack", "result": "PASS", "evidence": "Rage Powder on turns 1, 2 and 3. On turn 2 it pulled a 2x Flare Blitz off a sleeping Masquerain and onto itself; on turn 3 it covered the turn Masquerain woke up and got its Quiver Dance. That is exactly the authored job and it cost Ariados its life to do it."},
+    {"check": "Grass-type powder immunity is the honest counterplay", "result": "PASS - directly demonstrated", "evidence": "Turn 1 Ariados used Rage Powder and Amoonguss's Spore went straight past it into Masquerain, because Amoonguss is a Grass type. Turn 2's Flare Blitz from the non-Grass Incineroar was redirected normally on the same board. The crack line the dossier names is real and works."},
+    {"check": "Masquerain does not need Quiver Dance when immediate pressure is stronger, and spends the earned boost", "result": "PASS", "evidence": "It set Quiver Dance on turn 1, was slept, re-set it on turn 3 on waking, and then spent both boosts on Bug Buzz on turns 4 and 5, taking a 150 HP Mega Metagross to 54. The boost was cashed, not hoarded."},
+    {"check": "Sticky Web requires a damage horizon", "result": "FAIL (over-conservative)", "evidence": "Sticky Web was never selected at any point, including turn 1 where Ariados had a full four-member team behind it and two grounded reserves still to come. The dossier's warning is about setting the web too late; here the AI never set it at all. See AI defects."},
+    {"check": "Orbeetle puts both screens up behind Light Clay", "result": "PASS", "evidence": "Light Screen on turn 6 and Reflect on turn 7, in that order, against a board holding a special attacker and a physical Mega. Both went up before it was Spored."},
+    {"check": "Lokix's Tinted Lens First Impression is entry-only", "result": "PASS, and better than the dossier expects", "evidence": "On its first entry turn Lokix chose Axe Kick over First Impression - correctly, because Axe Kick is 2x into a Fire/Dark Incineroar and KOed it outright while First Impression would only have been neutral. When Doug later switched the sleeping Lokix out and it re-entered, the AI did select First Impression on that fresh entry turn. The move is being scored on actual damage, not used reflexively."},
+    {"check": "Swarm on Orbeetle is dead weight on a purely defensive set", "result": "CONFIRMED", "evidence": "Orbeetle never used a Bug move and never dropped below 2/3 HP while acting, so Swarm was inert for the whole battle, as the dossier predicts."}
+  ],
+  "protect_ledger": [
+    {"turn": "all", "battler": "Masquerain / Ariados / Orbeetle", "payoff": "NOT USED. Three of the four carry Protect and none used it. Ariados in particular spent three consecutive turns on Rage Powder while taking the damage it invited, where a Protect on the third would have bought the same redirection turn for free. No empty guarding, but a clear under-use."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0232-D1",
+      "turn": 1,
+      "board": "Ariados 163/163 on turn 1 with a full four-member team and two grounded reserves (Lokix, Orbeetle) still in the back. Player side: Incineroar and Amoonguss, both grounded.",
+      "chosen": "Ariados used Rage Powder (and again on turns 2 and 3, never anything else)",
+      "problem": "Sticky Web is half of this team's identity - the dossier calls the web plus screens 'a genuinely oppressive shell for a route regular' - and it was never set, at any point, in a seven-turn battle. Turn 1 is the textbook case: maximum remaining damage horizon, both player battlers grounded, both opposing reserves still to come. The guard against setting a web too late appears to have become a guard against setting it at all.",
+      "better_action": "Sticky Web on turn 1, then Rage Powder from turn 2 once the web is banked.",
+      "severity": "moderate - this is a whole authored mechanic not appearing in play, and the same scoring would affect any other entry-hazard setter"
+    }
+  ],
+  "level_changes": [
+    {"member": "MASQUERAIN", "before": -1, "after": 0, "reason": "First-attempt win with one player faint. Masquerain was the lowest-level member at 45 and is the setup lane the team is built around; it got both Quiver Dances up and still only reached 67 HP before dying to one Ice Punch."},
+    {"member": "ARIADOS", "before": 0, "after": 1, "reason": "Second-lowest and the member that has to survive for the redirection shell to mean anything. It died on turn 3 having spent every turn protecting its partner. Lokix and Orbeetle are left at +1; both played well."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM and this agent must not run make.",
+  "could_this_be_cooler": "Keep the concept - it is the best of the three Bug teams in this stretch and the darker-mirror framing against Taylor is real, not just prose. Ariados spending its whole life eating attacks for a partner it could not otherwise protect is a genuinely good three turns of play. But the honest answer to 'could this be cooler' here is that the team is currently not playing its own best idea: Sticky Web never appeared, so what the player actually faced was a redirector, a setup sweeper and a screen-setter, which is Taylor's team again with worse Fire resistance. Fix the web scoring before changing any species. If a species change is wanted later, Orbeetle is the slot - a purely defensive body with a dead ability, whose screens arrived on turns 6 and 7 when the fight was already decided. Something like Galvantula or Frosmoth would let the screens support an actual threat. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal. Insomnia Ariados, Tinted Lens Lokix and Light Clay Orbeetle all materialized correctly."
+}
