@@ -1,0 +1,45 @@
+{
+  "play_order": 17,
+  "e_group": "E0021",
+  "trainer": "TRAINER_JOSE",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "observed_opponent_levels": {"BEAUTIFLY": 14, "VENONAT": 16, "DUSTOX": "16 (offset 4)", "KRICKETUNE": "16 (offset 4)"},
+  "outcome": "WON on attempt 1, 5 turns, 1 player faint",
+  "party_manifest": "work/playtest/17-JOSE/party.json",
+  "run_dir": "work/playtest/17-JOSE/a1",
+  "attempts": [
+    {"seed": "0x1700", "outcome": "won", "turns": 5, "decisions": 7, "player_faints": 1, "opponent_faints": 4,
+     "ai_decision_seconds_max": 0.151,
+     "note": "Weavile fainted to Venonat's Struggle Bug (Bug is 2x on Dark). Whimsicott reached 14/45. Arcanine's Flare Blitz is 2x on all four members and decided the fight."}
+  ],
+  "strategy_checks": [
+    {"check": "Venonat's Rage Powder protects the setup partner", "result": "PASS - executed", "evidence": "Turn 1: Rage Powder selected (flinched by my faster Fake Out). Turn 4: Rage Powder resolved and pulled Arcanine's Flare Blitz off Kricketune onto Venonat, which died taking it. That is the intended sacrifice and it saved the Focus Sash finisher from a 2x hit."},
+    {"check": "Grass-type powder immunity bypasses Rage Powder", "result": "PASS (engine correct)", "evidence": "On the same turn 4, Whimsicott (Grass/Fairy) was NOT redirected - its Moonblast resolved against Kricketune (battler 1) while Arcanine's attack was pulled to battler 3. The authored crack ('powder immunity bypasses Venonat') works exactly as documented."},
+    {"check": "Beautifly gets a safe Quiver Dance behind the powder", "result": "FAIL - never fired", "evidence": "Beautifly chose Bug Buzz on turn 1, was withdrawn on turn 2 at 24/52, returned on turn 4 and chose Bug Buzz again on turn 5 before fainting. Quiver Dance was never selected in either appearance, including turn 1 when its partner had already committed to Rage Powder - the exact board the plan describes."},
+    {"check": "Dustox supplies the alternate Tailwind window", "result": "PARTIAL - chosen, never resolved", "evidence": "Turn 3 chosen action: battler 1 MOVE_TAILWIND. Arcanine's Flare Blitz (2x) killed Dustox before it moved. The choice was correct; execution was denied by speed, not by the AI."},
+    {"check": "Kricketune's Fell Stinger earns the Attack boost only on a genuine knockout", "result": "PASS", "evidence": "Turn 4: Fell Stinger hit Whimsicott and did not KO it (Whimsicott ended at 14/45). No Attack boost was applied, which matches the authored rule that an ordinary hit does not earn it."},
+    {"check": "Venonat's Compound Eyes Sleep Powder lands a sleep", "result": "FAIL - never fired", "evidence": "Venonat had Compound Eyes (100% accurate Sleep Powder) and was on the field for four turns. It chose Rage Powder, Struggle Bug, Protect and Rage Powder. Sleeping Arcanine on turn 3 or 4 was the strongest available action and was never considered."},
+    {"check": "Kricketune Taunt", "result": "NOT OBSERVED", "evidence": "Kricketune chose Fell Stinger and Protect in its two acting turns; Taunt never appeared against an active Prankster Whimsicott."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS", "evidence": "0.151 s maximum."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Venonat", "payoff": "MINOR REAL - blocked Whimsicott's Moonblast, which was only 0.5x into Bug/Poison. It cost Venonat a turn to prevent roughly a tenth of its HP while its partner Dustox died to the Flare Blitz it did not redirect."},
+    {"turn": 5, "battler": "Kricketune", "payoff": "EMPTY - Arcanine's Flare Blitz went to Beautifly and Whimsicott spent the turn switching out, so the guard blocked nothing."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "The SETUP half of this trainer's four strategy flags (SETUP, TAILWIND, REDIRECTION, PRESSURE) never executed: Beautifly declined Quiver Dance in both of its appearances. REDIRECTION executed perfectly, TAILWIND was chosen but outsped, PRESSURE is ambient.",
+    "Venonat's Sleep Powder plus Compound Eyes is the single strongest tool on this team and was never selected across four turns on the field. Worth a focused look at how the scorer prices a guaranteed sleep against a healthy attacker.",
+    "Venonat's turn-3 Protect is the weakest guard in the fight: it guarded against a resisted special attack and spent the turn its partner needed a redirect."
+  ],
+  "level_changes": [
+    {"member": "BEAUTIFLY", "field": "level offset", "before": 2, "after": 3,
+     "reason": "Brief rule 5: won first try with 1 player faint -> +1 to the weakest member. Beautifly is the only member below offset 4 (level 14 against Venonat/Dustox/Kricketune at 16) and it is also the member whose authored job, Quiver Dance, never happened. The other three are already two levels above cap and were left alone."}
+  ],
+  "rerun": "NOT PERFORMED - the headless ROM cannot be rebuilt in this session (see work/playtest/15-MARLENE/receipt.json).",
+  "cooler_note": "The concept is good and the redirection half of it genuinely showed up in play, which is rare in this block. The problem is that a four-member mono-Bug team loses to one Fire attacker: Arcanine's Flare Blitz is 2x on Beautifly, Venonat, Dustox and Kricketune alike, so the whole room has a single answer. Suggestion for a later pass, not applied here: swap Dustox (the most redundant slot - a second Bug/Poison whose Tailwind never resolves because it is slower than the threats it wants to outrun) for a partner that punishes the Fire answer, so the powder support is protecting something the player cannot simply burn through. Keep Venonat and Kricketune exactly as they are; the powder-and-finisher pairing is the interesting idea here.",
+  "authored_set_legality": "No legality problem found.",
+  "not_finished": "Quiver Dance, Sleep Powder, Taunt and a resolved Tailwind are all still unexercised. The +1 has not been retested in a rebuilt ROM."
+}
