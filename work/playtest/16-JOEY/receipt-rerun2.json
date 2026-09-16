@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 16,
+  "e_group": "E0020",
+  "trainer": "TRAINER_JOEY",
+  "class": "regular",
+  "location": "Route116",
+  "cap": 14,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "PAWMI L15 offset 3 @FOCUS_SASH IRON_FIST",
+    "FARFETCHD_GALAR L15 offset 3 @LEEK SCRAPPY (R1 raised it 2 -> 3; confirmed present, now at the +-2 ceiling)",
+    "CLEFAIRY L15 offset 3 @EVIOLITE FRIEND_GUARD (+1 in pass 1)",
+    "LECHONK L16 offset 4 @EVIOLITE AROMA_VEIL"
+  ],
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_summary": "Reused the shared cap-14 chronology party unchanged (Heracross / Shiftry / Arcanine / Sylveon / Tangrowth / Cloyster). Legal here: Joey is on Route 116 at play_order 16, after Route 115 at play_order 14, which is the latest source map in that manifest's audit.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3016,
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 9,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 61,
+      "events": "work/playtest/16-JOEY/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 Pawmi's Fake Out flinched Heracross - the correct target - while my Knock Off critically removed Farfetch'd's Leek; Farfetch'd's Close Combat then one-shot Shiftry through the Dark weakness. T2 I brought Arcanine in for priority, and Joey withdrew the 6 HP Farfetch'd for Clefairy, a genuinely good save: Extreme Speed hit the Eviolite Clefairy for 10 instead of killing the crit engine. Close Combat took Pawmi to its Focus Sash. T3 Extreme Speed removed Pawmi and Clefairy's Moonblast removed the Sp. Def-dropped Heracross. T4 the forced replacement sent the 6 HP Farfetch'd back in and Extreme Speed removed it at once; Clefairy used Follow Me and ate a 2x Sludge Bomb plus poison. T5 Clefairy Protected a lethal Extreme Speed at 8 HP. T6 it spent its last turn on Helping Hand, which turned Lechonk's Body Slam into a 33 damage hit that paralysed Arcanine, and died to Extreme Speed. T7 Arcanine Protected and Power Whip finished Lechonk. Won 4-2."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Pawmi opens with Fake Out or a useful Nuzzle rather than a wasted turn",
+      "result": "PASS",
+      "evidence": "T1 Fake Out on Heracross, the Close Combat threat, not on the slower support. T2 Mach Punch. No wasted turn in its short life."
+    },
+    {
+      "check": "Farfetch'd attacks instead of paying a Belly Drum or Focus Energy setup turn",
+      "result": "PASS",
+      "evidence": "T1 Close Combat one-shot a 53 HP Shiftry. It never paid a setup turn."
+    },
+    {
+      "check": "The Leek reaches the guaranteed-critical threshold with Leaf Blade / Night Slash",
+      "result": "NOT DEMONSTRATED (third pass running)",
+      "evidence": "I opened with Knock Off and the Leek was gone on turn 1 before Leaf Blade or Night Slash was ever selected. This is the counterplay the crack list names, so the AI is not at fault - but the authored identity of this trainer has still never been seen in play, and the R1 +1 was justified partly on that basis."
+    },
+    {
+      "check": "Clefairy's Follow Me / Helping Hand bodyguard modes fire",
+      "result": "PASS - all three support moves used, each on a defensible turn",
+      "evidence": "T4 Follow Me; T5 Protect blocking an Extreme Speed that was lethal at 8 HP; T6 Helping Hand on its dying turn, which boosted Lechonk's Body Slam into 33 damage and a paralysis on Arcanine. That last turn is the best use of a doomed support slot available."
+    },
+    {
+      "check": "Friend Guard reduces damage to the partner",
+      "result": "PASS (implicit)",
+      "evidence": "Extreme Speed into an Eviolite Clefairy did 10; partner damage was visibly suppressed while Clefairy was alive."
+    },
+    {
+      "check": "Lechonk is a pressure slot, not a passive one",
+      "result": "PASS",
+      "evidence": "Three Body Slams, one of which (Helping Hand boosted) took Arcanine from 38 to 5 and paralysed it."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 5,
+      "battler": "CLEFAIRY",
+      "payoff": "Blocked an Extreme Speed that was lethal at 8 HP and bought the turn in which it used Helping Hand for a near-KO. Clear payoff."
+    }
+  ],
+  "protect_ledger_note": "One opponent Protect, correctly timed, with a measurable payoff. No empty or repeated guards."
+  ,
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0020-W1",
+      "turn": 4,
+      "board": "Pawmi had just fainted. Joey's bench held Farfetch'd-Galar at 6/45 (Leek already knocked off, Defense and Sp. Def both -1) and a completely fresh Lechonk at 52/52, opposite my Arcanine holding Extreme Speed.",
+      "chosen": "Sent the 6 HP Farfetch'd back in.",
+      "better": "Lechonk. Farfetch'd was removed by the first priority move of the next turn without acting, which threw away the good voluntary switch the same AI had made two turns earlier to save it.",
+      "severity": "weak choice. The replacement-selection scoring does not appear to account for the incoming battler being in one-shot range of a priority move that is already on the field."
+    }
+  ],
+  "ai_improvements_observed": [
+    "T2 voluntary switch withdrew a 6 HP battler out of Extreme Speed range and took the hit on an Eviolite body instead - a correct, non-obvious pivot.",
+    "Fake Out picked the right target on turn one.",
+    "The support slot spent its final turn on Helping Hand for a partner near-KO rather than a doomed attack."
+  ],
+  "level_changes": {},
+  "level_change_reason": "Won on attempt 1 with 2 player faints (Shiftry one-shot on turn 1, Heracross removed by Moonblast) and with Arcanine finishing on 5 HP and paralysed. Brief band: keep. Farfetch'd-Galar is at the +-2 ceiling and could not be raised regardless; Clefairy earned its pass-1 +1 outright this run.",
+  "levels_after": {"PAWMI": 3, "FARFETCHD_GALAR": 3, "CLEFAIRY": 3, "LECHONK": 4},
+  "cooler": "Yes, and it is now a repeat finding with three passes of evidence: the whole authored identity is a guaranteed-critical Leek engine that dies to one Knock Off, which every reasonable cap-14 party carries. Farfetch'd cannot show the trick it exists for. A Bright Powder or a second item-independent line (Swords Dance is not it; Detect or a Sitrus would be) - or simply giving Clefairy the Knock Off absorption job - would let the engine fire once before the item is stripped. Recording only; no set change in this pass.",
+  "authored_set_legality": "No legality problem observed."
+}
