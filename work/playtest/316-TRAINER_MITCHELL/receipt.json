@@ -1,0 +1,38 @@
+{
+  "play_order": 316, "e_group": "E0485", "trainer": "TRAINER_MITCHELL", "class": "ace", "location": "VictoryRoad_B1F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Scovillain offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/316-TRAINER_MITCHELL/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Gothitelle sets Trick Room turn 1", "Shiinotic Spore on a legal target turn 1", "Shadow Tag traps the player's actives", "Conkeldurr Guts / Flame Orb activates", "Mega Scovillain attacks under the room", "Thick Club Marowak / Life Orb Reuniclus damage"],
+  "attempts": [
+    {"n": 1, "seed": 6, "run_dir": "a1", "party": "party_vr96_b.json led by Whimsicott + Chi-Yu", "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 6,
+     "why": "Turn 1 Prankster Taunt landed on Gothitelle before its Trick Room; Heat Wave OHKO'd Shiinotic (Beads of Ruin) and took Gothitelle to 192; Shiinotic had chosen Moonblast into the Grass-type Whimsicott, not Spore into Chi-Yu. Turn 2 Conkeldurr Protected (Flame Orb burn activated), Dark Pulse KO'd the Taunted Gothitelle. Turn 3 Mach Punch put Chi-Yu on its Sash, Moonblast OHKO'd the burned Conkeldurr, Overheat OHKO'd Mega Scovillain. Turn 4-5 Marowak Shadow Bone and Reuniclus Psychic KO'd Whimsicott (the one faint); Marowak Protected the Fake Out. Turn 6 Earth Power OHKO'd Marowak, Reuniclus Protected Knock Off, then Earth Power finished it."}
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room turn 1", "result": "PASS (intent), blocked by Taunt", "evidence": "turn 1 chosen: Gothitelle MOVE_TRICK_ROOM; message 'can't use Trick Room after the taunt'"},
+    {"check": "Spore on a legal target", "result": "FAIL", "evidence": "turn 1 Shiinotic chose Moonblast into Whimsicott (Grass, Spore-immune) instead of Spore into Chi-Yu, the legal and far more dangerous target; it died before moving"},
+    {"check": "Shadow Tag trap", "result": "PASS", "evidence": "turn 0-1 pending_decision switch_blocked_by ['ability_prevents_escape'] on both player actives"},
+    {"check": "Guts / Flame Orb", "result": "PASS", "evidence": "turn 2 'The opposing Conkeldurr was burned!' behind its own Protect; turn 3 Guts Mach Punch did 241 to Chi-Yu"},
+    {"check": "Mega Scovillain", "result": "PASS (Mega), no room", "evidence": "turn 3 Mega Evolved, chose Fire Blast, was OHKO'd by Overheat before moving"},
+    {"check": "Marowak / Reuniclus damage", "result": "PASS", "evidence": "Shadow Bone 186 to Whimsicott (turn 4), Psychic KO turn 5"}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Conkeldurr", "payoff": "blocked Moonblast (~445 next turn, lethal) and banked the Flame Orb burn - good"},
+    {"turn": 5, "user": "Marowak", "payoff": "blocked Fake Out - good read; partner Reuniclus KO'd Whimsicott"},
+    {"turn": 6, "user": "Reuniclus", "payoff": "blocked a lethal Knock Off; partner Marowak died anyway; it fell next turn - delay only"}
+  ],
+  "protect_summary": "3 Protects: 2 good, 1 delay-only.",
+  "ai_defects": [
+    {"turn": 1, "board": "Shiinotic 308/308 + Gothitelle vs Whimsicott (Grass/Fairy, Sash) + Chi-Yu (Dark/Fire, Sash)", "chosen": "Shiinotic Moonblast -> Whimsicott", "better": "Spore -> Chi-Yu (Whimsicott is powder-immune; Chi-Yu is the threat that OHKOs Shiinotic and the setter). The authored 'Spore puts a legal target to sleep with certainty' did not fire even though a legal target stood on the field."}
+  ],
+  "ai_notes": "Gothitelle's Trick Room intent on turn 1 was correct. Marowak's Protect against the Fake Out turn was a strong read.",
+  "level_changes": [
+    {"member": "SHIINOTIC", "field": "level offset", "before": 1, "after": 2, "why": "OHKO'd turn 1 by Heat Wave without acting"},
+    {"member": "GOTHITELLE", "field": "level offset", "before": 1, "after": 2, "why": "Taunted and KO'd turn 2 without ever setting the room"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 6-1 with no real threat once the room was Taunted. The two setup pieces go +1; the Mega and the heavy mode keep their offsets.",
+  "cooler": "The room-plus-trap identity is right and the trap is real (switch_blocked_by shows it). The weak point is that the whole plan is one Prankster Taunt from collapse and the AI does not Spore the legal target. A Mental Herb on Gothitelle instead of Shiinotic (Gothitelle is the piece that must not be Taunted; Shiinotic's Herb only protects a move the AI did not choose) would make the door far nastier at zero set cost. Recommend swapping the two held items in a later pass.",
+  "legality_notes": "Sets legal.",
+  "verification_limit": "The +1 on Shiinotic and Gothitelle cannot be re-verified until the main agent rebuilds."
+}
