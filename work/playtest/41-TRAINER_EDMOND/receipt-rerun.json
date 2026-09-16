@@ -1,0 +1,95 @@
+{
+  "play_order": 41,
+  "e_group": "E0043",
+  "trainer": "TRAINER_EDMOND",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Pass 1 raised Krabby 1->2 off a one-faint clear, specifically to buy it the second turn the Tailwind/Helping Hand plan is built around. This rerun tests whether the extra level plus the setup/switch-pricing AI fixes delivered that.",
+  "build": "work/agent-battle-build (headless ROM with the pass-1 level changes and the AI fixes)",
+  "level_change_verification": "Confirmed live: Krabby resolved at L24 (was L23 in pass 1). Mantyke, Koffing and Staravia all L24, unchanged.",
+  "resolved_opponent_levels": {"MANTYKE": 24, "KRABBY": 24, "KOFFING": 24, "STARAVIA": 24},
+  "party_manifest": "work/playtest/41-TRAINER_EDMOND/party.json",
+  "party_chronology_note": "Unchanged cap-24 core: Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana, all gate <= 24 in work/reference-pools/pool-24.json. No Mega used.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/41-TRAINER_EDMOND/r1",
+      "seed": 47,
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "narrative": "T1 Moonblast KO'd the extra-level Krabby outright before its selected Rock Slide could resolve, and Air Slash flinched Mantyke out of Tailwind. T2 Air Slash flinched Mantyke again; Koffing's 2x Sludge Bomb took Enamorus from 70 to 6 and poisoned it. T3 I withdrew Enamorus to Magearna, which is immune to Sludge Bomb; Air Slash flinched Mantyke a third time. T4 a 4x Thunderbolt KO'd Mantyke, which had still not landed a single Tailwind, and Air Slash flinched Koffing. T5 Staravia's Reckless Brave Bird took Togekiss to 52 and a 2x Thunderbolt KO'd Staravia; Koffing was flinched again. T6 a critical Air Slash KO'd Koffing. No player faints; Enamorus survived at 6 HP in reserve."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Tailwind goes up",
+      "result": "FAIL",
+      "evidence": "Mantyke selected MOVE_TAILWIND on turns 1, 2 and 4 and executed it zero times: Serene Grace Air Slash flinched it on turns 1, 2 and 3, and on turn 4 a 4x Thunderbolt KO'd it before its action. The selection is correct every time; the move never resolved. Tailwind has now failed to land in both passes, but for a luck reason this run, not a decision reason."
+    },
+    {
+      "check": "Krabby gets the second big turn the pass-1 level was meant to buy",
+      "result": "FAIL",
+      "evidence": "Krabby did not get a first turn, let alone a second. At L24 it was still KO'd by one unboosted Moonblast (56 HP, Life Orb, no Eviolite) with MOVE_ROCK_SLIDE already selected. The pass-1 reasoning - 'one extra level buys it the second turn the plan is built around' - did not hold."
+    },
+    {
+      "check": "Helping Hand boosts a Krabby spread attack",
+      "result": "NOT EXERCISED",
+      "evidence": "No beneficiary survived. Krabby died on turn 1 in both passes, so Mantyke never had a reason to select Helping Hand."
+    },
+    {
+      "check": "Wide Guard blocks spread pressure",
+      "result": "NOT EXERCISED",
+      "evidence": "My cap-24 party carries no spread move, so Wide Guard could never have denied anything. Mantyke correctly never selected it - an empty guard declined is the guard-pricing fix behaving."
+    },
+    {
+      "check": "Sheer Force / Life Orb Krabby interaction",
+      "result": "NOT EXERCISED",
+      "evidence": "Krabby never executed a move in either pass."
+    },
+    {
+      "check": "Levitate Koffing supplies burns and Poison pressure",
+      "result": "PASS",
+      "evidence": "Turn 2 Sludge Bomb took Enamorus from 70 to 6 at 2x and poisoned it, forcing the withdrawal that saved it - the single most effective opponent action of the battle. Turn 3 the same Sludge Bomb correctly reported 'It doesn't affect Magearna' after my switch put a Steel type in the way. Will-O-Wisp was selected on turns 4 and 5, flinched both times."
+    },
+    {
+      "check": "Reckless Staravia applies fast physical pressure",
+      "result": "PASS",
+      "evidence": "Turn 5 Brave Bird did 45 to Togekiss with recoil taken. It was then KO'd by a 2x Thunderbolt."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect this battle. In pass 1 Krabby Protected a real Moonblast on turn 1 and Koffing Protected an Air Slash on turn 4; both are gone. Krabby had no turn at all this run, and Koffing spent its turns on Sludge Bomb and Will-O-Wisp, which were the higher-value actions. Empty ledger is correct play here.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 4 Mantyke selected Tailwind at 17/78 facing a Magearna that had already revealed a 4x Thunderbolt, and was KO'd before acting. Because Tailwind is a side effect that outlives its setter, choosing it on a battler that is about to die is not the same error as a personal stat boost, and every other option was equally dead. Logged as a valuation observation, not a defect.",
+    "Turn 3 Koffing's Sludge Bomb resolving into the Steel type I switched in is ordinary target-selection mechanics (the target was chosen at turn start against Enamorus), not a targeting error.",
+    "Heavy variance warning for whoever reads this alongside the calibration: Serene Grace Air Slash flinched five times in six turns (Mantyke turns 1, 2, 3; Koffing turns 4, 5). Mantyke's entire authored contribution was denied by the flinch chain rather than by the level spread. The zero-faint result overstates how comfortable this matchup is."
+  ],
+  "level_changes": [
+    {
+      "member": "MANTYKE",
+      "field": "level offset",
+      "before": 2,
+      "after": 3,
+      "pass_total": "+1",
+      "reason": "Zero-faint first-attempt win, so rule 5 calls for a raise. Mantyke is the team's whole support engine (Tailwind, Helping Hand, Wide Guard) and it has now failed to land Tailwind in both passes. It was untouched in pass 1, so this is its first level and it stays well inside the +2 ceiling. One level of bulk is the honest lever for a supporter whose problem is surviving to act."
+    }
+  ],
+  "level_changes_not_made": [
+    {
+      "member": "KRABBY",
+      "reason": "Already +1 from pass 1 and it could take one more inside the ceiling, but a second level would be thrown away. Krabby is a 56 HP Life Orb attacker with no defensive item and it died to a single neutral Moonblast at both L23 and L24 with its move already selected. The problem is that nothing on this team buys it a turn, not that it is one level short."
+    },
+    {"member": "KOFFING", "reason": "The best performer on the team this run; it nearly removed Enamorus. Not among the weakest."},
+    {"member": "STARAVIA", "reason": "Landed a real Brave Bird for 45. Not among the weakest."}
+  ],
+  "calibration": "Won on the first attempt in six turns with zero player faints, though Enamorus was taken to 6 HP and had to be withdrawn. Brief rule 5: 'Won first try with 0-1 player faints -> +1 on the weakest one or two members.' Applied to Mantyke only rather than two members, because the clear was inflated by a five-flinch Serene Grace chain and I do not want to price a luck run into the team twice.",
+  "could_this_be_cooler": "Same structural note as Hailey, and it is the clearer case of the two. This team is built as a setup-and-payoff pair - Mantyke buys the turn, Krabby cashes it - but Krabby is the frailest member and leads, so it dies before the support ever arrives, in both passes and in the archived pre-revision audit quoted in the plan text. The pairing would read the way it is written if the payoff piece were not also the one exposed on turn one; that is a lead-order question rather than a species/move/item question. Nothing changed in this pass, as instructed.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt, same party manifest as pass 1. See repo_note below for how the teams-file hunk landed.",
+  "repo_note": "This authored teams file is being edited concurrently by other playtest sessions in the same working tree. The MANTYKE offset 2 -> 3 edit above was made here but was carried into the repository by a concurrent session's commit (d5d3133b96 / e63fd5f960) before this receipt was committed, because `git add <file>` stages every session's hunks in that file. The change is present and correct at HEAD; it is simply not in this session's own commit."
+}
