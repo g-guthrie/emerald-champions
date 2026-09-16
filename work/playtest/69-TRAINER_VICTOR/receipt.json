@@ -1,0 +1,49 @@
+{
+  "play_order": 69,
+  "e_group": "E0077",
+  "trainer": "TRAINER_VICTOR",
+  "class": "ace",
+  "location": "Route111",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"STARAVIA": 32, "DIGGERSBY": 27, "LINOONE_GALAR": 31, "MILTANK": 28},
+  "cap_window_confirmation": "Dossier seeds 34/29/33/30 resolved to 32/27/31/28 = cap 30 + offset - 2 (Medium). Cap 30 confirmed at Route 111.",
+  "party_manifest": "work/playtest/69-TRAINER_VICTOR/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, led by Mega Gardevoir + Magearna. Route 111 is reached from Mauville, one step later than Route 110, so every source map remains legal. Route 111/117 wild stock and the Mauville Game Corner are chronologically open and were not used. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Staravia sets Tailwind on turn 1, honouring the TAILWIND strategy flag",
+    "Intimidate lands on entry and lowers my Attack",
+    "Diggersby keeps its setup option but attacks when attacking is better",
+    "Linoone-Galar's Toxic Orb activates and Quick Feet / Facade convert the self-inflicted status",
+    "Miltank uses Helping Hand to turn a good position into damage rather than stalling with Milk Drink",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/69-TRAINER_VICTOR/a1", "seed": 69, "outcome": "won", "turns": 4, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "Intimidate was already on both of my Pokemon at the turn-0 board. T1 Staravia set Tailwind exactly as authored, my Hyper Voice hit both, and then Diggersby - the LOWEST-levelled member on the team at 27, five below my party - used Huge Power High Horsepower into Magearna at 2x and one-shot 116 HP of Assault Vest from full. Its Soft Sand and Huge Power together make a level-27 Pokemon the hardest hitter in my entire block. T2 Victor withdrew the damaged Staravia for Miltank, which walked into the spread Hyper Voice plus an Air Slash and died on arrival, while Hyper Voice also finished Diggersby. T3 was the punish: under the Tailwind set two turns earlier, Linoone's Throat Chop (2x into Psychic) and Staravia's Brave Bird both moved before my Mega Gardevoir and killed it, and Linoone's Toxic Orb activated at the end of the turn to switch on Quick Feet. T4 Kartana came in resisting Facade at 0.5x, Sacred Sword was 4x into Dark/Normal and removed Linoone, and Air Slash finished an 8 HP Staravia."}
+  ],
+  "strategy_checks": [
+    {"check": "Staravia sets Tailwind on turn 1", "result": "PASS", "evidence": "T1 native choice was MOVE_TAILWIND and it resolved: 'A tailwind started blowing on the opposing side!'. It then paid off two turns later - the T3 double-KO of my Mega Gardevoir happened because both Linoone and Staravia moved before a base-100 Mega under that Tailwind. Speed control set early and cashed later is exactly what the flag is for."},
+    {"check": "Intimidate lands on entry", "result": "PASS, twice", "evidence": "Both of my leads were already at atk-1 on the turn-0 board, and when Staravia re-entered on T2 it dropped my Attack again ('Gardevoir's Attack fell! Togekiss's Attack fell!'). Against my mostly-special party this was worth little, which is my problem rather than a design fault."},
+    {"check": "Diggersby keeps its setup option but attacks when better", "result": "PASS", "evidence": "Swords Dance was never selected - correctly. Diggersby had a 2x High Horsepower available into a Steel-type that it could and did one-shot; spending the turn on Swords Dance instead would have been strictly worse. The dossier's wording is that Diggersby 'retains its setup option', not that it must use it, and the AI made the right call."},
+    {"check": "Linoone-Galar's Toxic Orb activates and Quick Feet / Facade convert", "result": "PASS", "evidence": "The Toxic Orb activated at the end of T3 ('The opposing Linoone was badly poisoned!'), switching on Quick Feet, and Linoone used Facade on T4. The conversion was real but blunted because I had just switched in a Steel-type that resists Normal at 0.5x - which is precisely the 'physical mitigation' counterplay in the crack line. Worth noting the orb activation is not instant: Linoone spent T3 using Throat Chop unboosted, which is the 'conditional orb activation' the dossier acknowledges."},
+    {"check": "Miltank uses Helping Hand rather than stalling", "result": "NOT EXERCISED", "evidence": "Miltank was brought in by an AI switch on T2 directly into a spread Hyper Voice plus an Air Slash and died on arrival without acting. Helping Hand, Milk Drink, Body Slam and Zen Headbutt were all never selected. See AI notes on the switch."},
+    {"check": "Every opposing Protect has a payoff", "result": "NOT EXERCISED", "evidence": "No opposing Protect. Linoone is the only member carrying it and it had two turns, both better spent attacking."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Empty. No opposing Protect across four turns. Specifically relevant here because the crack line names 'punishing an unproductive Orb/Protect turn' as counterplay - there was no unproductive guard turn to punish.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No defects. Victor's play was sound and its T3 was a genuinely good conversion of a T1 investment.",
+    "The one debatable decision is the T2 switch: Staravia at 21/87 was withdrawn for Miltank, which is reasonable in isolation (it saved a damaged Pokemon, and Staravia did come back and take a further turn) but it fed a fresh Miltank into a spread move it could not avoid, and Miltank died without acting. The spread Hyper Voice had been used on the previous turn and the AI has the Omniscient and Know Opponent Party flags, so the risk was visible. I am not logging it as a defect because the alternative - leaving a 21 HP Staravia in front of the same spread move - also loses a Pokemon, and at least this way the Tailwind setter survived to act again. It is a lose-lose board created by the previous turn.",
+    "Diggersby deserves a specific note: at offset -1 it is the lowest-levelled Pokemon in my entire block and it hit the hardest single blow I have taken - a one-shot on a full-health 116 HP Assault Vest Magearna. Huge Power plus Soft Sand plus a 2x matchup is a genuinely alarming combination and the negative offset is clearly deliberate and correct.",
+    "Decision timing comfortable (max 62 frames)."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. Two player faints out of six, including my Mega and my bulkiest body, and both faints came from the team's own authored machinery - a Huge Power attacker and a Tailwind converting two turns later. This also meets the AGENTS.md bar for an ace-class encounter.",
+    "changes": []
+  },
+  "could_this_be_cooler": "Keep it. This is the second-best-designed team in my block after Lydia's and for the same reason: the level offsets are doing real work rather than padding. Diggersby sits at -1 because Huge Power plus a damage item already makes it terrifying, Staravia sits at +4 because its job is to survive long enough to set Tailwind and then Intimidate again on re-entry, and that spread is a much more interesting statement than four members at the cap would be. The Winstrate family concept - a sturdy, unglamorous Normal-type household - also holds up, and Galarian Linoone as the family's angry teenager with a Toxic Orb is a nice touch. The one thing I would change is Miltank, and not for power reasons: it is the only member with no self-sufficient plan. Helping Hand needs a partner that is alive and about to hit something, Milk Drink needs it to have survived, and in practice it entered and died without ever choosing a move. If the family wants a support slot, Miltank would be more reliably itself with Heal Bell or a screen - something that pays off the moment it lands rather than something that needs a second turn to matter. I would not touch the other three.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
