@@ -1,0 +1,44 @@
+{
+  "play_order": 24,
+  "e_group": "E0026",
+  "trainer": "TRAINER_JERRY_1",
+  "class": "casual",
+  "location": "Route116",
+  "cap_window": 14,
+  "ai_profile": "Conservative",
+  "observed_opponent_levels": {"MAGNEMITE": 14, "VAROOM": 16, "SKRELP": "13 (offset 1)", "KOFFING": "16 (offset 4)"},
+  "outcome": "WON on attempt 1, 6 turns, 2 player faints",
+  "party_manifest": "work/playtest/24-JERRY_1/party.json",
+  "run_dir": "work/playtest/24-JERRY_1/a1",
+  "attempts": [
+    {"seed": "0x2400", "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 4,
+     "player_faint_detail": "Arcanine and Lucario to the same Skrelp Muddy Water on turn 4 - it killed the 53 HP Arcanine outright (2x) and took Lucario from 48 to 14 through a 0.5x Steel resist, which the next one finished.",
+     "note": "Weavile survived turn 1 at 4/48 and Whimsicott at 1/45; both were withdrawn and never used again. Skrelp is the whole fight."}
+  ],
+  "strategy_checks": [
+    {"check": "Varoom uses Acid Spray before a useful special partner attack", "result": "FAIL - never fired", "evidence": "Varoom was on the field for three turns and chose MOVE_IRON_HEAD every single time, including turn 3 with Choice Specs Adaptability Skrelp in reserve. Acid Spray is the authored 'industrial chemistry partnership' and the reason this team's slots fit together; it never appeared."},
+    {"check": "Varoom Taunts or Protects when direct damage is not the best action", "result": "FAIL - never fired", "evidence": "Varoom used one of its four moves across three turns. Taunt and Protect never appeared against an active Prankster Whimsicott."},
+    {"check": "Varoom's Air Balloon is temporary Ground immunity", "result": "PASS (temporary half confirmed)", "evidence": "Turn 1: 'The opposing Varoom's Air Balloon popped!' from my Weavile's Fake Out - a 40 BP resisted Normal move. The item behaved correctly (it pops on any hit, not only Ground moves), so the Ground immunity itself was never exercised. The authored caveat that it is temporary is emphatically true."},
+    {"check": "Magnemite supplies useful Thunder Wave or immediate special pressure", "result": "PARTIAL", "evidence": "Immediate special pressure: PASS - Flash Cannon took Weavile from 48 to 4 on turn 1 and Thunderbolt chipped Porygon-Z. Thunder Wave: FAIL - never selected, including turn 1 against a visibly faster Weavile and Whimsicott, and again after my Tailwind went up."},
+    {"check": "Volt Switch introduces a better partner only when the incoming board improves", "result": "NOT USED - but the intent was honoured", "evidence": "Magnemite never used Volt Switch. It did make the right decision on turn 4: Encore-locked into a Flash Cannon my Arcanine resists, and facing a lethal Flare Blitz, it withdrew manually for Koffing. Correct read, wrong tool - Volt Switch would have done the same pivot with damage attached."},
+    {"check": "Skrelp honours its Choice lock", "result": "PASS", "evidence": "Skrelp used Muddy Water on turns 4 and 5 and had it selected again when it died. The Choice Specs lock held correctly across turns."},
+    {"check": "Skrelp chooses Muddy Water for foe-only spread damage", "result": "PASS - and it decided the battle", "evidence": "Turn 4's Muddy Water hit both of my members without touching its own partner: it killed a full-ish 53 HP Arcanine (Water is 2x on Fire) and took a freshly switched-in Lucario from 48 to 14 THROUGH a 0.5x Steel resistance. Adaptability plus Choice Specs on a level-13 Skrelp is a genuinely frightening number."},
+    {"check": "Koffing's Levitate provides a Ground-safe pivot", "result": "NOT TESTED", "evidence": "I never used a Ground move while Koffing was on the field."},
+    {"check": "Koffing supplies burn support with Will-O-Wisp", "result": "FAIL - never fired", "evidence": "Koffing chose Flamethrower and Sludge Bomb in its two turns. Will-O-Wisp and Pain Split never appeared, despite facing a physical Snorlax."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS"}
+  ],
+  "protect_ledger": [
+    {"note": "ZERO opposing Protects in the entire battle. Varoom is the only member carrying Protect and it never used it - see the strategy check above. Nothing to fault on guarding, because no guarding happened."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "This team used a strikingly narrow slice of its movesets: Varoom used 1 of 4 moves across three turns, Koffing 2 of 4 across two turns, Magnemite 2 of 4. Skrelp's narrowness is correct (it is Choice-locked by design). The pattern is that the AI reached for the direct attack in almost every slot, which is exactly the behaviour that also cost Jose his Quiver Dance, Marlene her Trick Room, Dawson his Tailwind and Roggenrola its Iron Defense.",
+    "Acid Spray failing to fire is the most costly instance of that pattern in this block, because Jerry's four slots are built around it: a fast Steel body that lowers Special Defence in front of an Adaptability Choice Specs special attacker. Without it the team is four unrelated attackers, and the one that carried the fight (Skrelp) did so without any help.",
+    "Magnemite's turn-4 manual switch was a genuinely good decision and deserves credit: Encore-locked into a move my Arcanine resists and facing a lethal 2x Flare Blitz, it pivoted out rather than die."
+  ],
+  "level_changes": [],
+  "level_verdict": "KEEP. Brief rule 5: won with 2 player faints after a real fight. Skrelp at level 13 (offset 1) is two-for-one on my party through one spread move, so the low offset on the Adaptability Choice Specs member is correctly judged - I would not raise it, and I would not lower it either.",
+  "cooler_note": "The concept is one of the better ones in the block and the execution is the worst, which is frustrating rather than fixable by levels. Acid Spray into Adaptability Choice Specs Skrelp is a real competitive engine, Air Balloon on the Steel body is a thoughtful touch, and Levitate Koffing gives the pair a Ground-safe pivot - none of which happened. Suggestion for a later pass, not applied here: nothing about the composition needs changing; this team needs the AI to value a Special Defence drop that feeds a known Choice Specs partner. If that scoring is not going to change, the honest alternative is to lean into what the AI will actually do and give Varoom a second attack in place of Acid Spray - but that would be trading a good idea for a working one, and I would fix the scoring instead.",
+  "authored_set_legality": "No legality problem found. The dossier note that Muddy Water replaced an unsupported Scald is reflected correctly in the materialized set.",
+  "not_finished": "Acid Spray, Taunt, Protect, Thunder Wave, Volt Switch, Will-O-Wisp, Pain Split, Levitate and the Air Balloon's Ground immunity are all still unexercised."
+}

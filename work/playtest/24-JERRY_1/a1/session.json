@@ -1,0 +1,21 @@
+{
+  "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+  "elf_sha256": "d43f0156f2669176abb19598a1ec55cfc7a82441550e443bfdd1836c41b7be78",
+  "seed": 9216,
+  "trainer_a": "TRAINER_JERRY_1",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 14,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/24-JERRY_1/party.json",
+  "party_sha256": "3d486da31858a5b6e49d8eb65e70ce72c5f2c3c62e26b1b94fb7f3daf72cb9a6",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "prepared": {
+    "encounter": "E0026 TRAINER_JERRY_1 (play_order 24); P2 cap-14 standing party with Prankster Taunt",
+    "party": 6
+  },
+  "started": {
+    "frames": 1114
+  }
+}
