@@ -66,6 +66,8 @@ enum FirstTurnEventsStates
 
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
+bool32 BattleAIUsesCommittedActions(void);
+bool32 IsBattlerActionCommitted(enum BattlerId battler);
 void CB2_QuitRecordedBattle(void);
 void VBlankCB_Battle(void);
 void SpriteCB_VsLetterDummy(struct Sprite *sprite);

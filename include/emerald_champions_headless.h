@@ -86,7 +86,6 @@ enum EmeraldChampionsHeadlessScenario
     EC_HEADLESS_SCENARIO_STUDIO_NEW,
     EC_HEADLESS_SCENARIO_STUDIO_RESUME,
     EC_HEADLESS_SCENARIO_ECONOMY_SHOPS,
-    EC_HEADLESS_SCENARIO_AGENT_BATTLE,
 };
 
 enum EmeraldChampionsHeadlessLeafState

@@ -86,24 +86,6 @@ u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species spec
     return kinds;
 }
 
-u32 EmeraldChampions_GetTacticKind(enum BattlerId actor, enum BattlerId recipient, enum Move move)
-{
-    u32 trainer = GetCampaignTrainer(actor);
-    if (trainer == TRAINER_NONE || trainer >= TRAINERS_COUNT || move == MOVE_NONE)
-        return 0;
-    enum Species species = GET_BASE_SPECIES_ID(gBattleMons[actor].species);
-    enum Species recipientSpecies = GET_BASE_SPECIES_ID(gBattleMons[recipient].species);
-    u32 kinds = 0;
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
-    {
-        const struct EmeraldChampionsBattleTactic *tactic = &sEmeraldChampionsBattleTactics[i];
-        if (tactic->trainer == trainer && tactic->actor == species
-         && tactic->recipient == recipientSpecies && tactic->move == move)
-            kinds |= tactic->kind;
-    }
-    return kinds;
-}
-
 bool32 EmeraldChampions_HasTacticActor(enum BattlerId actor, u32 kind)
 {
     u32 trainer = GetCampaignTrainer(actor);

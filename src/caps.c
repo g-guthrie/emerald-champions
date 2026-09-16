@@ -82,20 +82,6 @@ void CompleteEmeraldChampionsMilestone(void)
     CompleteCampaignMilestone(gSpecialVar_0x8003);
 }
 
-#if EC_HEADLESS_FIXTURES
-// Headless agent bridge only: put the campaign into the milestone state that
-// yields `cap`, so authored trainer level offsets resolve exactly as in play.
-// This reuses the single milestone table above; it is not a second formula.
-void ApplyCampaignLevelCapMilestones(u32 cap)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sCampaignMilestones); i++)
-    {
-        if (sCampaignMilestones[i].cap != 0 && sCampaignMilestones[i].cap <= cap)
-            FlagSet(sCampaignMilestones[i].flag);
-    }
-}
-#endif
-
 u32 GetCurrentLevelCap(void)
 {
     u32 i;

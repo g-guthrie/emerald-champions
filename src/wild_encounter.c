@@ -910,7 +910,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
     levelCap = GetCurrentLevelCap();
     if (rareLegendary || IsLegendarySignOrdinaryWildSpecies(species))
-        level = min(MAX_LEVEL, GetLevelCapForSpecies(species, levelCap));
+        level = min(MAX_LEVEL, levelCap);
     // Emerald Champions: nothing in the wild is ever above the live level cap.
     // Table levels describe the route; an early Old Rod cannot pull a Lv 45
     // Qwilfish out of Route 103 when the cap is 14.

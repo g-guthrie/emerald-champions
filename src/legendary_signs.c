@@ -671,20 +671,6 @@ static u8 GetSignLevel(s8 offset)
     return level;
 }
 
-// Legendary and mythical species above 600 BST use floor(cap * 600 / BST)
-// (GetLevelCapForSpecies) before the sign's offset; everything else keeps the
-// live cap. This is the acquisition-side rule the guide states.
-static u8 GetSignLevelForSpecies(enum Species species, s8 offset)
-{
-    s32 level = (s32)GetLevelCapForSpecies(species, GetCurrentLevelCap()) + offset;
-
-    if (level < 1)
-        level = 1;
-    if (level > MAX_LEVEL)
-        level = MAX_LEVEL;
-    return level;
-}
-
 
 
 void TryUnlockSelectedLegendarySign(void)
@@ -735,11 +721,7 @@ u16 GetSelectedLegendarySignLevel(void)
     s8 offset = 2;
 
     if (signId < LEGENDARY_SIGN_COUNT)
-    {
         offset = gLegendarySignDefinitions[signId].levelOffset;
-        gSpecialVar_Result = GetSignLevelForSpecies(gLegendarySignDefinitions[signId].species, offset);
-        return gSpecialVar_Result;
-    }
     gSpecialVar_Result = GetSignLevel(offset);
     return gSpecialVar_Result;
 }
@@ -757,7 +739,7 @@ void CreateSelectedLegendarySignEncounter(void)
     sEncounterSignPlusOne = id + 1;
     UnlockLegendarySign(id);
     CreateScriptedWildMon(gLegendarySignDefinitions[id].species,
-        GetSignLevelForSpecies(gLegendarySignDefinitions[id].species, gLegendarySignDefinitions[id].levelOffset), ITEM_NONE);
+        GetSignLevel(gLegendarySignDefinitions[id].levelOffset), ITEM_NONE);
     {
         const struct EmeraldChampionsBattleSet *authored = GetLegendaryAuthoredSet(gLegendarySignDefinitions[id].species);
         if (authored != NULL)
@@ -776,7 +758,7 @@ void CreateEmeraldChampionsStaticLegendaryEncounter(void)
 
     if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return;
-    CreateScriptedWildMon(species, GetSignLevelForSpecies(species, levelOffset), ITEM_NONE);
+    CreateScriptedWildMon(species, GetSignLevel(levelOffset), ITEM_NONE);
     authored = GetLegendaryAuthoredSet(species);
     if (authored != NULL)
         ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
@@ -802,7 +784,7 @@ void TryGiveSelectedLegendarySignReward(void)
         return;
     giveResult = GiveLegendarySignReward(
         gLegendarySignDefinitions[signId].species,
-        GetSignLevelForSpecies(gLegendarySignDefinitions[signId].species, gLegendarySignDefinitions[signId].levelOffset));
+        GetSignLevel(gLegendarySignDefinitions[signId].levelOffset));
     if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
         return;
     if (giveResult == MON_CANT_GIVE)
@@ -1152,7 +1134,7 @@ void TryGiveArceusLegendarySignMasteryReward(void)
 
     // Devon's final campaign discovery is available before the Elite Four.
     UnlockLegendarySign(LEGENDARY_SIGN_ARCEUS);
-    giveResult = GiveLegendarySignReward(SPECIES_ARCEUS, GetSignLevelForSpecies(SPECIES_ARCEUS, 0));
+    giveResult = GiveLegendarySignReward(SPECIES_ARCEUS, min(MAX_LEVEL, GetCurrentLevelCap()));
     if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
         return;
     if (giveResult == MON_CANT_GIVE)

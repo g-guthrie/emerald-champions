@@ -26,6 +26,27 @@ Landed this session (all on main, release gates PASS, focused AI suite 89/89):
   (Parker's Instruct Oranguru deliberately excepted). Magearnite moved to
   Clifford (Mossdeep). AGENTS.md and the book state the new AI rule.
 
+Headless per-turn playtest (September 15, later): the user chose Opus agents
+playing every battle turn by turn through `scripts/playthrough/battle_driver.py`
+(state JSON in, move/switch commands out; docs/VERIFICATION.md "Headless
+per-turn battle driver"). Index: `work/playtest/battle_index.json` (341
+encounters in campaign order); receipts per battle in `work/playtest/<n>-<TRAINER>/`
+(`receipt.json`, `receipt-rerun*.json`, party manifests, event logs). Rules:
+chronology-legal player parties inside the cap window, levels are the only
+opponent lever (±2 per member per review), authored strategy checks verified
+per battle, every AI defect routed to the AI owner with turn evidence. Waves 1
+and 2 (play_order 1–60) are played and re-run under the fixed AI; wave 3
+(61–96 plus confirming reruns of wave-2 changes and Jaclyn's Shadow Tag
+replay) is in progress. Findings so far: setup/support pricing, healthy-lead
+pivots, Helping Hand on fixed damage, multi-battle party indexing (livelock)
+and the Conservative trait are fixed in the AI (105 focused fixtures green);
+open AI queue: 60-frame ceiling on ordinary boards, Takao's Unburden-priced
+switch, Feint with no guard, correlated double guards, last-used-move pricing,
+disruption values, signature-move underpricing (Water Spout, Frustration,
+Reversal). Process rule after a stale-tree commit reverted sixteen files:
+agents commit only by explicit path and never run make; the main agent
+materializes, rebuilds and refreshes `work/agent-battle-build`.
+
 Next: choose the playthrough approach (see the earned-run note below), then
 native L2 benchmarks of Gyms, Magma/Aqua and the League under the new AI,
 tuning Protect constants and level offsets from real play. Review-index

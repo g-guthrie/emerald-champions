@@ -3837,6 +3837,34 @@ enum
     STATE_SELECTION_SCRIPT_MAY_RUN
 };
 
+bool32 BattleAIUsesCommittedActions(void)
+{
+    return (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE))
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_PALACE))
+        // Native AI tests feed recorded human inputs to live AI controllers.
+        && (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) || gTestRunnerEnabled)
+        && !IsAiVsAiBattle();
+}
+
+static bool32 AreHumanActionsConfirmed(void)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (!BattlerHasAi(battler)
+         && gBattleCommunication[battler] != STATE_WAIT_ACTION_CONFIRMED_STANDBY
+         && gBattleCommunication[battler] != STATE_WAIT_ACTION_CONFIRMED)
+            return FALSE;
+    return TRUE;
+}
+
+bool32 IsBattlerActionCommitted(enum BattlerId battler)
+{
+    // The first flank can still be cancelled while choosing the second.
+    // Selection scripts have larger state IDs but are not confirmed input.
+    return gBattleMainFunc == HandleTurnActionSelectionState
+        && BattleAIUsesCommittedActions() && !BattlerHasAi(battler)
+        && AreHumanActionsConfirmed();
+}
+
 static void HandleTurnActionSelectionState(void)
 {
     s32 i;
@@ -3900,14 +3928,19 @@ static void HandleTurnActionSelectionState(void)
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
             bool32 isAiBattler = (gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart()) && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE));
-            if (isAiBattler)
+            if (isAiBattler && !BattleAIUsesCommittedActions())
             {
-                // The opponent decides before any human command exists. Do AI
-                // score computations here so we can use them in AI_TrySwitchOrUseItem.
-                ComputeAiBattlerDecisions(battler);
+                ComputeAiBattlerDecisions(battler); // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
             }
             // fallthrough
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
+            if (BattleAIUsesCommittedActions() && BattlerHasAi(battler))
+            {
+                if (!AreHumanActionsConfirmed())
+                    break;
+                if (!(gAiLogicData->battlerMovesScored & (1u << battler)) && IsBattlerAlive(battler))
+                    ComputeAiBattlerDecisions(battler);
+            }
             gBattleStruct->monToSwitchIntoId[battler] = PARTY_SIZE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
                 || (position & BIT_FLANK) == B_FLANK_LEFT
@@ -4205,36 +4238,6 @@ static void HandleTurnActionSelectionState(void)
                         }
                         else if (TrySetCantSelectMoveBattleScript(battler))
                         {
-                            // A human picks again from the menu. An AI battler
-                            // is asked again and answers the same, forever, so
-                            // take the refused slot out of its options and move
-                            // its choice to one that is still selectable. Four
-                            // refusals exhaust the set and the no-moves path
-                            // below sends it to Struggle, which terminates.
-                            if (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                             && gAiLogicData != NULL)
-                            {
-                                u32 refused = gBattleResources->bufferB[battler][2] & ~RET_GIMMICK;
-                                if (refused < MAX_MON_MOVES)
-                                    gAiLogicData->moveLimitations[battler] |= 1u << refused;
-                                // Only the engine decides that nothing is left:
-                                // forcing Struggle here would make it fail on a
-                                // battler that still has a selectable move. Move
-                                // the choice within what the engine allows and
-                                // let AreAllMovesUnusable route the empty case.
-                                u32 engine = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
-                                u32 usable = ((1u << MAX_MON_MOVES) - 1) & ~engine;
-                                if (usable & ~gAiLogicData->moveLimitations[battler])
-                                    usable &= ~gAiLogicData->moveLimitations[battler];
-                                for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-                                {
-                                    if (usable & (1u << slot))
-                                    {
-                                        gAiBattleData->chosenMoveIndex[battler] = slot;
-                                        break;
-                                    }
-                                }
-                            }
                             RecordedBattle_ClearBattlerAction(battler, 1);
                             gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
                             gBattleStruct->battlerState[battler].selectionScriptFinished = FALSE;
