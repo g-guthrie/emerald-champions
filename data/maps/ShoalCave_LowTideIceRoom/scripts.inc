@@ -1,6 +1,12 @@
 ShoalCave_LowTideIceRoom_MapScripts::
 	.byte 0
 
+@ The old Ice Stone ball is the cave's fifth SHOAL SHELL deposit. Its receipt
+@ is the object's own flag, cleared with the other seven when the tide turns.
+ShoalCave_LowTideIceRoom_EventScript_ShoalShell5::
+	finditem ITEM_SHOAL_SHELL, 1
+	end
+
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
 .set EC_SIGN_ARTICUNO_ID, 53
 

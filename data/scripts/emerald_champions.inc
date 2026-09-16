@@ -1692,3 +1692,12 @@ EmeraldChampions_EventScript_PrintMilestoneCapLine::
 
 EmeraldChampions_Text_MilestoneCapLine:
 	.string "Your level cap is now {STR_VAR_1}.$"
+
+@ Every berry gift mints one Harvest Pouch credit. `giverandomberry` calls this
+@ straight after its giveitem, so VAR_RESULT still holds the delivery result
+@ and VAR_0x8000 still holds the berry that was handed over.
+EmeraldChampions_EventScript_MintBerryHarvest::
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_MintBerryHarvestDone
+	special MintEmeraldChampionsHarvestCredit
+EmeraldChampions_EventScript_MintBerryHarvestDone:
+	return

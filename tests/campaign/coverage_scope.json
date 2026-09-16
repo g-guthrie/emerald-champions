@@ -301,9 +301,10 @@
     },
     {
       "id": "world.shoal_tide",
-      "classification": "optional",
+      "classification": "main_story",
       "evidence": [
-        {"path": "src/time_events.c", "contains": "UpdateShoalTideFlag"}
+        {"path": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "contains": "ShoalCave_EventScript_TurnTide"},
+        {"path": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "contains": "ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems"}
       ]
     },
     {

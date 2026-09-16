@@ -8,4 +8,5 @@ void BufferEmeraldChampionsHarvestRecipe(void);
 void TradeEmeraldChampionsGardenBerries(void);
 void CheckEmeraldChampionsGardenCelebi(void);
 void GiveEmeraldChampionsBerryPair(void);
+void MintEmeraldChampionsHarvestCredit(void);
 #endif

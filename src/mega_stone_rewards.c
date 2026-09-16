@@ -47,6 +47,15 @@ void AddHarvestedBerries(u8 berry, u16 count)
         gSaveBlock2Ptr->pokedex.harvestedBerries[berry - 1] += count;
 }
 
+// Every berry gift mints one pouch credit, so a gifted berry is worth as much
+// as a picked one. The caller's giveitem leaves the item in 0x8000.
+void MintEmeraldChampionsHarvestCredit(void)
+{
+    enum Item item = gSpecialVar_0x8000;
+    if (GetItemPocket(item) == POCKET_BERRIES)
+        AddHarvestedBerries(ItemIdToBerryType(item), 1);
+}
+
 static bool32 RewardClaimed(u32 choice)
 {
     if (choice == 3)
@@ -141,7 +150,7 @@ void CheckEmeraldChampionsGardenCelebi(void)
         : gSaveBlock2Ptr->pokedex.gardenCelebiUnlocked ? 1 : 0;
 }
 
-// Daily seed gifts share an atomic pair delivery. Neither source mints harvest.
+// Paired gifts deliver atomically and mint one pouch credit each.
 void GiveEmeraldChampionsBerryPair(void)
 {
     enum Item first = gSpecialVar_0x8008;
@@ -156,5 +165,7 @@ void GiveEmeraldChampionsBerryPair(void)
         RemoveBagItem(first, 1);
         return;
     }
+    AddHarvestedBerries(ItemIdToBerryType(first), 1);
+    AddHarvestedBerries(ItemIdToBerryType(second), 1);
     gSpecialVar_Result = TRUE;
 }

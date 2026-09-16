@@ -81,8 +81,6 @@ def classify(line: str) -> tuple[str, str, str] | None:
             return "facility_eligibility", "native_coverage", "exercise the native party-selection contract"
         if name in PARTY_SELECTORS:
             return "party_selector", "native_coverage", "exercise the native party-selection and cancel contract"
-        if name == "UpdateShoalTideFlag":
-            return "time_or_tide", "route_setup", "run separate deterministic high- and low-tide coverage"
     return None
 
 

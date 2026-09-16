@@ -2399,11 +2399,6 @@ u8 TryUpdateRusturfTunnelState(void)
     return FALSE;
 }
 
-void SetShoalItemFlag(u16 unused)
-{
-    FlagSet(FLAG_SYS_SHOAL_ITEM);
-}
-
 void LoadWallyZigzagoon(void)
 {
     u16 monData;
@@ -7083,7 +7078,16 @@ void ClaimEmeraldChampionsSootMilestone(void)
         return;
     }
     else if (total >= EC_SOOT_MEGA_TARGET && !FlagGet(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE))
+    {
+        // The caller's checkitem ITEM_MEGA_RING arrives in 0x8004, as at every
+        // other Mega Stone provider. Without the bracelet the tier stays open.
+        if (!gSpecialVar_0x8004)
+        {
+            gSpecialVar_Result = 6;
+            return;
+        }
         item = ITEM_HOUNDOOMINITE;
+    }
     if (item == ITEM_NONE)
         return;
     CopyItemName(item, gStringVar1);
@@ -7154,36 +7158,48 @@ void OpenEmeraldChampionsEvolutionSpecialist(void)
     ScriptContext_Stop();
 }
 
-static enum Item GetEmeraldChampionsShoalReward(void)
+// Fen's three tiers: Glalitite once, then the deep ice is charted, then the
+// haul buys Shoal decorations in script. The cave never pays money.
+#define EC_SHOAL_TIER_GLALITITE 0
+#define EC_SHOAL_TIER_CHARTING  1
+#define EC_SHOAL_TIER_DECOR     2
+
+static u32 GetEmeraldChampionsShoalTier(void)
 {
-    return FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE)
-        || PlayerOwnsItem(ITEM_GLALITITE) ? ITEM_BIG_PEARL : ITEM_GLALITITE;
+    if (!FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE) && !PlayerOwnsItem(ITEM_GLALITITE))
+        return EC_SHOAL_TIER_GLALITITE;
+    if (!FlagGet(FLAG_EC_SHOAL_ICE_CHARTED))
+        return EC_SHOAL_TIER_CHARTING;
+    return EC_SHOAL_TIER_DECOR;
 }
 
 void BufferEmeraldChampionsShoalReward(void)
 {
-    CopyItemName(GetEmeraldChampionsShoalReward(), gStringVar1);
+    CopyItemName(ITEM_GLALITITE, gStringVar1);
+    gSpecialVar_Result = GetEmeraldChampionsShoalTier();
 }
 
 void TradeEmeraldChampionsShoalMaterials(void)
 {
-    enum Item reward = GetEmeraldChampionsShoalReward();
     gSpecialVar_Result = 0;
+    // Only the first tier is an item. Charting and decorations are scripted.
+    if (GetEmeraldChampionsShoalTier() != EC_SHOAL_TIER_GLALITITE)
+        return;
     if (!CheckBagHasItem(ITEM_SHOAL_SALT, 4) || !CheckBagHasItem(ITEM_SHOAL_SHELL, 4))
         return;
-    CopyItemName(reward, gStringVar1);
-    if (AddBagItem(reward, 1))
+    CopyItemName(ITEM_GLALITITE, gStringVar1);
+    if (AddBagItem(ITEM_GLALITITE, 1))
         gSpecialVar_Result = 1;
-    else if (AddPCItem(reward, 1))
+    else if (AddPCItem(ITEM_GLALITITE, 1))
         gSpecialVar_Result = 2;
     else
     {
         gSpecialVar_Result = 3;
         return;
     }
+    FlagSet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
     RemoveBagItem(ITEM_SHOAL_SALT, 4);
     RemoveBagItem(ITEM_SHOAL_SHELL, 4);
-    FlagSet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
 }
 
 void CheckEmeraldChampionsRedundantPurchase(void)

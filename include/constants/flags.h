@@ -1551,8 +1551,8 @@
 #define FLAG_EC_RESOLVED_DIANCIE                    (SYSTEM_FLAGS + 0xB5)
 #define FLAG_EC_RESOLVED_JIRACHI                    (SYSTEM_FLAGS + 0xB6)
 #define FLAG_EC_RECEIVED_EON_TICKET                     (SYSTEM_FLAGS + 0xB7)
-#define FLAG_UNUSED_0x918                           (SYSTEM_FLAGS + 0xB8) // Unused Flag
-#define FLAG_UNUSED_0x919                           (SYSTEM_FLAGS + 0xB9) // Unused Flag
+#define FLAG_EC_SHOAL_ICE_CHARTED                   (SYSTEM_FLAGS + 0xB8) // Emerald Champions: Fen has charted the deep ice for the second haul
+#define FLAG_EC_SHOAL_ICE_SIGHTING                  (SYSTEM_FLAGS + 0xB9) // Emerald Champions: one guaranteed ice-room legendary encounter is owed
 #define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag
 #define FLAG_UNUSED_0x91B                           (SYSTEM_FLAGS + 0xBB) // Unused Flag
 #define FLAG_UNUSED_0x91C                           (SYSTEM_FLAGS + 0xBC) // Unused Flag

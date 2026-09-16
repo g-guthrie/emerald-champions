@@ -91,7 +91,7 @@
 #define VAR_POKELOT_PRIZE_ITEM                           0x4045
 #define VAR_NATIONAL_DEX                                 0x4046
 #define VAR_SEEDOT_SIZE_RECORD                           0x4047
-#define VAR_ASH_GATHER_COUNT                             0x4048
+#define VAR_UNUSED_0x4048                                0x4048 // Emerald Champions: the second soot balance is retired.
 #define VAR_BIRCH_STATE                                  0x4049
 #define VAR_CRUISE_STEP_COUNT                            0x404A
 #define VAR_POKELOT_RND1                                 0x404B // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
@@ -209,7 +209,7 @@
 #define VAR_RUSTBORO_GYM_GUIDE_STATE                     0x40BB // 0: entrance advice pending, 1: complete
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                0x40BC
 #define VAR_JAGGED_PASS_ASH_WEATHER                      0x40BD
-#define VAR_GLASS_WORKSHOP_STATE                         0x40BE
+#define VAR_UNUSED_0x40BE                                0x40BE // Emerald Champions: the glass workshop keeps no state.
 #define VAR_METEOR_FALLS_STATE                           0x40BF
 #define VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE              0x40C0
 #define VAR_TRICK_HOUSE_PRIZE_PICKUP                     0x40C1

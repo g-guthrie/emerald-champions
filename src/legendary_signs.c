@@ -855,6 +855,13 @@ enum Species ChooseRareWildLegendarySpecies(enum WildPokemonArea area, bool32 sw
     }
     if (nativeCount == 0 && questCount == 0)
         return SPECIES_NONE;
+    // A charted deep ice pays one guaranteed local sighting, then is spent.
+    if (map == MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM && FlagGet(FLAG_EC_SHOAL_ICE_SIGHTING))
+    {
+        u32 charted = RandomUniform(RNG_WILD_MON_TARGET, 0, nativeCount + questCount - 1);
+        FlagClear(FLAG_EC_SHOAL_ICE_SIGHTING);
+        return charted < nativeCount ? native[charted] : quests[charted - nativeCount];
+    }
     roll = RandomUniform(RNG_NONE, 0, 99);
     if (sweetScent)
     {
@@ -947,7 +954,7 @@ void ResearchSelectedLegendarySign(void)
     if (!MeetsSignDiscovery(id))
     {
         if (id == LEGENDARY_SIGN_MARSHADOW)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pCollect 250 soot in total, then\nspeak to Route 113's glassmaker.\lSpending soot keeps your progress."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pCollect 250 soot in total, then\nspeak to Route 113's glassmaker.\lYour soot total is never spent."));
         else if (id == LEGENDARY_SIGN_MELOETTA)
             StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Dewford Meadow's warden perform\na song. Bring a Pokémon with SING."));
         else if (id == LEGENDARY_SIGN_LANDORUS)

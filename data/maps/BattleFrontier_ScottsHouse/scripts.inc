@@ -4,7 +4,6 @@ BattleFrontier_ScottsHouse_MapScripts::
 BattleFrontier_ScottsHouse_EventScript_Scott::
 	lock
 	faceplayer
-	goto_if_set FLAG_TEMP_4, BattleFrontier_ScottsHouse_EventScript_GivenBerry
 	goto_if_set FLAG_TEMP_3, BattleFrontier_ScottsHouse_EventScript_GivenShield
 	goto_if_set FLAG_TEMP_2, BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints
 	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveItems
@@ -23,35 +22,19 @@ BattleFrontier_ScottsHouse_EventScript_CheckGiveShield::
 	goto BattleFrontier_ScottsHouse_EventScript_RandomComment
 	end
 
+@ The Silver and Gold Shields are the trophies. Scott hands over no berries;
+@ every berry is free at every Center.
 BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols::
 	goto_if_lt VAR_EC_CIRCUIT_BEST_WINS, 50, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	msgbox BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols, MSGBOX_DEFAULT
-	giveitem ITEM_LANSAT_BERRY
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
 	setflag FLAG_COLLECTED_ALL_SILVER_SYMBOLS
-	setflag FLAG_TEMP_4
-	release
-	end
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 
 BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols::
 	goto_if_lt VAR_EC_CIRCUIT_BEST_WINS, 100, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	msgbox BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols, MSGBOX_DEFAULT
-	giveitem ITEM_STARF_BERRY
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_ScottsHouse_EventScript_BerryPocketFull
 	setflag FLAG_COLLECTED_ALL_GOLD_SYMBOLS
-	setflag FLAG_TEMP_4
-	release
-	end
-
-BattleFrontier_ScottsHouse_EventScript_BerryPocketFull::
-	msgbox BattleFrontier_ScottsHouse_Text_BerryPocketStuffed, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_ScottsHouse_EventScript_GivenBerry::
-	msgbox BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere, MSGBOX_DEFAULT
-	release
-	end
+	goto BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 
 BattleFrontier_ScottsHouse_EventScript_RandomComment::
 	random 3
@@ -258,24 +241,12 @@ BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
 	.string "SCOTT: Your best CIRCUIT run has\n"
 	.string "reached 50 victories!\p"
-	.string "That deserves a LANSAT BERRY.\n"
 	.string "Keep showing us what you can do!$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
 	.string "SCOTT: Your best CIRCUIT run has\n"
 	.string "reached 100 victories!\p"
-	.string "That deserves a STARF BERRY.\n"
 	.string "Keep showing us what you can do!$"
-
-BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
-	.string "I must say I have the gift of knowing\n"
-	.string "a good TRAINER when I see one.\p"
-	.string "I'm so glad I had the foresight to\n"
-	.string "bring you here!$"
-
-BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
-	.string "Your BERRY POCKET seems to\n"
-	.string "be stuffed.$"
 
 BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow:
 	.string "SCOTT: Oh, I heard about you!\n"

@@ -277,6 +277,14 @@ static const struct MenuAction MultichoiceList_GameCornerPokemon[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_ECShoalDecorations[] =
+{
+    {COMPOUND_STRING("HARD CHAIR")},
+    {COMPOUND_STRING("POWDER SNOW MAT")},
+    {COMPOUND_STRING("SEA POSTER")},
+    {gText_Exit},
+};
+
 static const struct MenuAction MultichoiceList_BFExchangeEvolutionCategory[] =
 {
     {COMPOUND_STRING("EVOLUTION ITEMS")},
@@ -1272,6 +1280,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SSTIDAL_BATTLE_FRONTIER]    = MULTICHOICE(MultichoiceList_SSTidalBattleFrontier),
     [MULTI_RIGHTLEFT]                  = MULTICHOICE(MultichoiceList_RightLeft),
     [MULTI_GAME_CORNER_POKEMON]        = MULTICHOICE(MultichoiceList_GameCornerPokemon),
+    [MULTI_EC_SHOAL_DECORATIONS]       = MULTICHOICE(MultichoiceList_ECShoalDecorations),
     [MULTI_BF_EXCHANGE_EVOLUTION_CATEGORY] = MULTICHOICE(MultichoiceList_BFExchangeEvolutionCategory),
     [MULTI_BF_EXCHANGE_RARE_POKEMON]   = MULTICHOICE(MultichoiceList_BFExchangeRarePokemon),
     [MULTI_EC_STARTER_ARCHIVE_KANTO]   = MULTICHOICE(MultichoiceList_ECStarterArchiveKanto),

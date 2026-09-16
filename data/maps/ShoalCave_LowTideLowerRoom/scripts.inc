@@ -35,7 +35,7 @@ ShoalCave_LowTideLowerRoom_EventScript_BlackBelt::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_SHOAL_DEEP_SEA_SCALE, ShoalCave_LowTideLowerRoom_EventScript_ReceivedDeepSeaScale
 	msgbox ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus, MSGBOX_DEFAULT
-	giveitem ITEM_DEEP_SEA_SCALE
+	giveitem ITEM_LUXURY_BALL
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SHOAL_DEEP_SEA_SCALE
 	release
@@ -47,7 +47,8 @@ ShoalCave_LowTideLowerRoom_EventScript_ReceivedDeepSeaScale::
 	end
 ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus:
 	.string "Your focus overcame the cold!\p"
-	.string "Take this Deep Sea Scale.$"
+	.string "Take this LUXURY BALL. The cold\n"
+	.string "is easier with a friend.$"
 
 ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus:
 	.string "Everything starts with focus!$"

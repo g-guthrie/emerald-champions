@@ -230,7 +230,6 @@ gSpecials::
 	def_special GetPokeblockFeederInFront
 	def_special OpenPokeblockCaseOnFeeder, waitstate=1
 	def_special IsMirageIslandPresent
-	def_special UpdateShoalTideFlag
 	def_special InitBirchState
 	def_special ScriptGetPokedexInfo
 	def_special ShowPokedexRatingMessage
@@ -741,5 +740,6 @@ gSpecials::
 	def_special BufferEmeraldChampionsHarvestRecipe
 	def_special CheckEmeraldChampionsGardenCelebi
 	def_special GiveEmeraldChampionsBerryPair
+	def_special MintEmeraldChampionsHarvestCredit
 	def_special PrepareEmeraldChampionsMeadowSong
 	def_special PrepareEmeraldChampionsCastformSurvey
