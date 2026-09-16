@@ -1,0 +1,29 @@
+{
+  "play_order": 274, "e_group": "E0430", "trainer": "TRAINER_RONALD", "class": "ace", "location": "Route132",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Kingdra/Gyarados/Tentacruel offset 1 -> L83, Magikarp offset 0 -> L82, Raichu offset 2 -> L84. Confirmed.",
+  "party_manifest": "work/playtest/274-TRAINER_RONALD/party_ronald_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 430, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 5,
+     "narrative": "T1 the AI switched Kingdra out for Raichu (a Lightning Rod read on the Thunderbolt), but Moonblast, aimed at Kingdra, hit Raichu instead and OHKOed it; Thunderbolt 4x OHKOed Gyarados. T2 Kingdra chose Rain Dance and was OHKOed by Moonblast first; Thunderbolt broke Magikarp's Sash and paralyzed it. T3 Tentacruel Protected both attacks; Magikarp Flail from 1 HP did 80 to Zapdos. T4 Moonblast KO Magikarp, Thunderbolt KO Tentacruel."}
+  ],
+  "strategy_checks": [
+    {"check": "Kingdra Rain Dance only when it repays", "result": "chosen, died first", "evidence": "T1 switched out; T2 native choice Rain Dance beside a Sashed Magikarp (the right time), KOed before moving. Rain never fell."},
+    {"check": "Gyarados attacks / Dragon Dances", "result": "chosen, died first", "evidence": "T1 native choice Waterfall; 4x Thunderbolt first."},
+    {"check": "Raichu Fake Out + Lightning Rod hold the field, timed Mega", "result": "FAIL (not exercised)", "evidence": "Raichu entered by switch on T1 and was OHKOed on entry; Fake Out, Lightning Rod redirection and the Mega never happened."},
+    {"check": "Magikarp Focus Sash + Flail novelty", "result": "PASS (without rain)", "evidence": "T2 Sash held at 1 HP; T3 Flail did 80 to a 272 HP Zapdos. Swift Swim never mattered because rain never fell; as authored, spread damage or a paralysis (it was paralyzed by Thunderbolt) defuses it."},
+    {"check": "Tentacruel speed control / coverage", "result": "PASS (Protect only)", "evidence": "T3 Protect blocked Shadow Ball + Thunderbolt; KOed T4 before acting again."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Tentacruel", "payoff": "blocked Shadow Ball + Thunderbolt (lethal in sum); real"}
+  ],
+  "ai_defects": [],
+  "ai_observations": ["T1 Kingdra -> Raichu switch: a legitimate Lightning Rod read on Zapdos, but it put the team's only Mega and Fake Out user (4 HP EVs) into the line of a 2x Moonblast and it died without acting. Not illegal; costly."],
+  "level_changes": [
+    {"member": "GYARADOS", "before": 1, "after": 2, "reason": "won first try 5-0 with zero faints; Gyarados died before acting"},
+    {"member": "TENTACRUEL", "before": 1, "after": 2, "reason": "same rule; one Protect then died. Magikarp (offset 0) left alone: the dossier says it is a novelty slot, not a scored set; Raichu is the Mega."}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED (needs rebuild).",
+  "could_this_be_cooler": "The joke survives contact: Sash Magikarp Flailed for 80 and it was the funniest thing in the block. But the rain never happened in this run, and the team's structure guarantees that against a fast Fairy/Electric lead: Kingdra is the only setter and it is slower than every good cap-84 special attacker. Giving Kingdra the lead beside Raichu (Fake Out buys the Rain Dance) instead of beside Gyarados would make the concept fire far more often without touching a set. Not changed in this pass.",
+  "authored_set_legality": "No problem found."
+}

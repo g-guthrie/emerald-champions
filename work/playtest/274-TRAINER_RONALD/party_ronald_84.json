@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Route 132, Ronald (E0430), cap 84",
+  "availability_audit": "Cap-84 window, Route 132 after Mossdeep; Sootopolis not entered, nothing from Seafloor Cavern, Cave of Origin, Sootopolis, Pacifidlog or Underwater maps. Flutter Mane gate 68 (Mt Pyre); Zapdos gate 30 (New Mauville, reachable legend); Landorus gate 42 (Desert Ruins, reachable legend); Tyranitar gate 60 (Safari Zone NE); Chien-Pao gate 60 (Shoal Cave); Iron Hands gate 30 (New Mauville).",
+  "plan": "Flutter Mane is a Ghost, so Raichu's Fake Out cannot touch it, and Moonblast is 2x on Kingdra; Zapdos Thunderbolt is 4x on Gyarados. Landorus absorbs Thunder and Earth Powers Raichu/Tentacruel; Tyranitar replaces any rain with sand and its spread Rock Slide breaks Magikarp's Sash; Chien-Pao Sucker Punch punishes the Nasty Plot turn.",
+  "party": [
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest special attacker, Icy Wind speed control",
+      "availability": "pool-84 gate 68, wild:MtPyre_Summit/land_mons (C37)."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STATIC",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Electric/Flying special attacker",
+      "availability": "pool-84 gate 30, legendary_sign:NewMauville_Inside (C23). Reachable legend."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "single-target Ground that spares the partner",
+      "availability": "pool-84 gate 42, legendary_sign:Route111_RuinsExterior (C25). Reachable legend."
+    },
+    {
+      "species": "SPECIES_TYRANITAR",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_CRUNCH",
+        "MOVE_LOW_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SAND_STREAM",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Sand Stream weather replacement",
+      "availability": "pool-84 gate 60, wild:SafariZone_Northeast/rock_smash_mons (Route 121, before Mossdeep)."
+    },
+    {
+      "species": "SPECIES_CHIEN_PAO",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SWORD_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fast Ice/Fighting, Sword of Ruin",
+      "availability": "pool-84 gate 60, legendary_sign:ShoalCave_LowTideIceRoom (Route 125, before Mossdeep). Reachable legend."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_WILD_CHARGE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "bulky Fake Out and Electric/Fighting",
+      "availability": "pool-84 gate 30, wild:NewMauville_Inside/land_mons (C23)."
+    }
+  ]
+}
