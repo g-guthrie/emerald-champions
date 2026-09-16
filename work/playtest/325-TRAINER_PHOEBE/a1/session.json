@@ -1,0 +1,42 @@
+{
+  "rom_sha256": "9349726a62f619a28aad869ab7704b7a13e9c95f7b87d71e811dd80b75c15713",
+  "elf_sha256": "c29c10930aa22d8ae6b6e09b5d1044208ddcc5b15c9204d53cbc3b9aad719770",
+  "seed": 1,
+  "trainer_a": "TRAINER_PHOEBE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 96,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/325-TRAINER_PHOEBE/party_league96.json",
+  "party_sha256": "69808455acb26c9c3d313622bc061eb9a005fbfa5e557ea07dfcce1e8c3ea8c1",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD"
+  ],
+  "prepared": {
+    "encounter": "League run E0494-E0497 (Phoebe, Glacia, Drake, Wallace) cap 96; one party for the whole run, no Center between rooms",
+    "party": 6
+  },
+  "started": {
+    "frames": 1443
+  },
+  "replacement_commits": {
+    "turn": 7,
+    "slots": {
+      "0": 4
+    }
+  }
+}
