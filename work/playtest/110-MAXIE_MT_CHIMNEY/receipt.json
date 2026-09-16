@@ -1,0 +1,79 @@
+{
+  "play_order": 110,
+  "e_group": "E0132",
+  "trainer": "TRAINER_MAXIE_MT_CHIMNEY",
+  "class": "leader",
+  "location": "MtChimney",
+  "cap": 30,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 30: Ninetales L29 (30+1-2), Crobat L28 (30+0-2), Mightyena L31 (30+3-2), Shiftry L29 (30+1-2), Arbok L31 (30+3-2), Camerupt L27 (30-1-2). Maxie is fought before the Mt Chimney milestone, so cap 30, not 36.",
+  "party_manifests": ["work/playtest/110-MAXIE_MT_CHIMNEY/party-a1.json", "work/playtest/110-MAXIE_MT_CHIMNEY/party-a2.json"],
+  "attempts": [
+    {
+      "seed": 21,
+      "attempt": 1,
+      "party": "party-a1.json (Mega Gyarados core carried over from E0131)",
+      "outcome": "lost",
+      "turns": 5,
+      "player_faints": 6,
+      "opponent_faints": 2,
+      "notes": "Swept 6-2. Two of the faints were my own misplays (Starmie switched into a board with two live attackers, Gallade switched into a Crobat holding Brave Bird), but the structural problem was real: Mega Gyarados is Water/Dark and takes 2x from Mightyena's Life Orb Play Rough, and the Drought sun halves every Water move the party owns. Ninetales' Will-O-Wisp also removed Azumarill's Huge Power on turn 1."
+    },
+    {
+      "seed": 22,
+      "attempt": 2,
+      "party": "party-a2.json (rebuilt: Mega Mawile / Togekiss / Azumarill / Lanturn / Alakazam / Quagsire)",
+      "outcome": "won",
+      "turns": 10,
+      "decisions": 13,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "notes": "Rebuilt for Poison immunity and Dark resistance. Mega Mawile OHKOed Crobat through Taunt on turn 1 and later removed Mightyena; Lanturn walled the sun and finished Mega Camerupt with a 4x Scald once the sun lapsed. Lost Quagsire to a Chlorophyll Shiftry Leaf Blade (my misplay, 4x) and Azumarill to a sun-instant Solar Beam."
+    }
+  ],
+  "rebuild_reason": "Attempt 1 was lost, so the party was rebuilt between attempts as the brief allows. The swap was driven by type math, not by adding power: Mega Gyarados (2x Fairy, Water halved in sun) out for Mega Mawile (immune to Gunk Shot and Cross Poison, resists Sucker Punch and Crunch), Starmie and Gallade out for Lanturn and Quagsire, Alakazam's Life Orb swapped for a Focus Sash so Sucker Punch could not remove it for free.",
+  "strategy_checks": [
+    {"check": "Ninetales' Drought sets sun before the first decision (SUN)", "result": "PASS", "evidence": "Turn 0 state reports weather B_WEATHER_SUN_NORMAL in both attempts, before any move was made."},
+    {"check": "Sun makes Solar Beam a one-turn move", "result": "PASS", "evidence": "Attempt 2 turns 5, 6 and 8: 'The opposing Ninetales absorbed light!' and the beam resolved the same turn. It KOed Azumarill on turn 6."},
+    {"check": "Will-O-Wisp is aimed at a physical attacker", "result": "PASS", "evidence": "Attempt 1 turn 1 burned Azumarill (Huge Power); attempt 2 turn 2 burned Mega Mawile (Huge Power). Both times it picked the correct target out of two and both times it mattered - Mawile spent the rest of the fight at half Attack."},
+    {"check": "Crobat sets Tailwind (TAILWIND strategy flag)", "result": "FAIL", "evidence": "Crobat never selected Tailwind in either attempt. Attempt 1 it used Cross Poison twice then Brave Bird; attempt 2 it used Taunt on Togekiss and then died. The authored TAILWIND flag did not materialize on either board."},
+    {"check": "Crobat's Taunt denies opposing support", "result": "PASS", "evidence": "Attempt 2 turn 1 Taunt hit Togekiss, which held Follow Me, Tailwind and Protect - the single best Taunt target on the board. Togekiss was reduced to Air Slash for three turns."},
+    {"check": "Shiftry opens with Fake Out on an interruptible threat", "result": "PASS", "evidence": "Attempt 2 turn 2, Chlorophyll Shiftry moved first in sun and Fake Out flinched Togekiss, the support member."},
+    {"check": "Mega Camerupt appears and Mega-evolves", "result": "PASS", "evidence": "Attempt 2 turn 4: 'The opposing Camerupt has Mega Evolved into Mega Cam...'; state shows CAMERUPT_MEGA, ability SHEER_FORCE. It used Ancient Power, Heat Wave, Earth Power and Protect."},
+    {"check": "SETUP: Mightyena Howl / Arbok Coil", "result": "PARTIAL", "evidence": "Arbok used Coil on attempt 2 turn 7. Mightyena never used Howl in either attempt - it used Sucker Punch and Play Rough instead, which was the stronger line every time, so this is correct play rather than a miss."}
+  ],
+  "protect_ledger": [
+    {"attempt": 2, "turn": 5, "battler": "CAMERUPT_MEGA", "payoff": "REAL - blocked Azumarill's 4x Liquidation on the turn after it Mega-evolved at 48/100."},
+    {"attempt": 2, "turn": 10, "battler": "CAMERUPT_MEGA", "payoff": "REAL - blocked Lanturn's 4x Scald while it was the last Pokemon standing."}
+  ],
+  "notable_good_ai": [
+    "Attempt 2 turn 6: with Mega Camerupt at 48/100 and two Water attacks aimed at it, the AI switched it out for Arbok instead of eating them. Preserving a damaged Mega by pivoting is exactly right and it forced me to spend four more turns.",
+    "Attempt 1 turn 4: Mightyena's Sucker Punch KOed Alakazam before its Focus Blast could resolve - the AI correctly read that the frail special attacker was committed to attacking.",
+    "Attempt 2 turn 1: Taunt on the support member rather than a damage race."
+  ],
+  "ai_defects": [
+    {
+      "id": "P10-D4",
+      "severity": "low",
+      "attempt": 2,
+      "turn": 7,
+      "board": "Arbok L31 at 85/107 and burned, partnered with Ninetales, against Alakazam (holding Psychic) and Lanturn",
+      "chosen": "MOVE_COIL",
+      "why_wrong": "Arbok was already burned, which halves the Attack that Coil's +1 is meant to buy, and it was sitting across from a Psychic-type attacker that threatens it at 2x. It died to Psychic the same turn without ever using the boost.",
+      "better_action": "Gunk Shot or Stomping Tantrum at the frail Alakazam, or Glare to cripple a member before dying."
+    },
+    {
+      "id": "P10-D5",
+      "severity": "low",
+      "attempt": 2,
+      "turn": 8,
+      "board": "Mightyena L31 full HP; my Alakazam switched out to Mawile that turn",
+      "chosen": "MOVE_SUCKER_PUNCH into a switch, 'But it failed!'",
+      "why_wrong": "A wasted turn. This is an inherent Sucker Punch gamble rather than a misread, and the same choice was correct on attempt 1, so it is recorded for completeness rather than as a scoring bug."
+    }
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. One loss and one win across two optimized attempts, and the win cost 2 player faints after a genuine fight in which the Mega survived to the last turn. That is exactly the 'won after a real fight' band, so no member moves. This is the best-calibrated battle in the block.",
+  "could_this_be_cooler": "The team is already strong and reads as Maxie. Two observations, neither applied in this pass: (1) the TAILWIND strategy flag is dead weight - Crobat never chose Tailwind on either board because Taunt and its own attacks always scored higher, so either the flag should go or Crobat needs a reason to want the turn (for example, it is the only fast member, and the slow Mega Camerupt is the one that would actually benefit, which the AI cannot currently connect). (2) Mega Camerupt is the signature and it spent the fight as a Protect-and-pivot body because everything on the field outruns base 20 Speed. Pairing it with a real Trick Room or After You line instead of the Tailwind that never happens would make the ace feel like the plan rather than the cleanup.",
+  "authored_set_legality": "No legality problems. Every ability, item and move behaved as printed, including Drought, Chlorophyll, Inner Focus, Sheer Force and the Cameruptite Mega.",
+  "notes": "AI decision time max 61 frames (1.02 s)."
+}
