@@ -1,0 +1,62 @@
+{
+  "play_order": 61,
+  "e_group": "E0070",
+  "trainer": "TRAINER_ANNA_AND_MEG_1",
+  "class": "regular",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"ORANGURU": 29, "HITMONLEE": 29, "LICKITUNG": 31, "TRUMBEAK": 32},
+  "cap_window_confirmation": "Dossier seeds 31/31/33/34 resolved to 29/29/31/32 = cap 30 + offset - 2 (Medium). Cap 30 confirmed at Route 117.",
+  "party_manifest": "work/playtest/61-TRAINER_ANNA_AND_MEG_1/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json (Mega Gardevoir, Togekiss, Magearna, Nidoking, Kartana, Weavile). Route 117 is one step later than Route 110 in play order, so every source map remains legal. Route 117/111 wild stock and the Mauville Game Corner are now chronologically open and were deliberately not used; New Mauville was excluded because its Basement Key comes from Wattson, after the Mauville Gym and therefore after this battle.",
+  "pre_declared_strategy_checks": [
+    "Oranguru does NOT reach for Instruct on turn 1, when no ally has an eligible move history",
+    "Once an ally has used an eligible move, Oranguru Instructs it and the repeat goes into a valid surviving target",
+    "Choice Band Hitmonlee respects its lock and repeats only into a valid surviving target",
+    "Lickitung's Helping Hand buys real damage rather than being spent on a doomed or weak ally",
+    "Trumbeak actually uses its Skill Link multi-hit moves as the faster alternative",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/61-TRAINER_ANNA_AND_MEG_1/a1", "seed": 61, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Gardevoir Mega-Evolved and Pixilate Hyper Voice (2x on Fighting) crit-KO'd Choice Band Hitmonlee before it could fire the Rock Slide it had selected; Togekiss's Follow Me pulled Oranguru's Foul Play onto a Pokemon with almost no Attack for 6. T2 Anna & Meg withdrew Trumbeak for Lickitung, which ate Hyper Voice plus Air Slash for 77; Oranguru's Sitrus Berry triggered under the Hyper Voice. T3 Lickitung spent its action on Helping Hand for a doomed min-Speed Oranguru; Hyper Voice KO'd Oranguru before it could use the boosted move, and Air Slash KO'd Lickitung. T4 Trumbeak's Skill Link Bullet Seed hit five times for 57 into my Mega, and Air Slash finished it."},
+    {"attempt": 2, "run_dir": "work/playtest/61-TRAINER_ANNA_AND_MEG_1/a2", "seed": 161, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "Confirmation run on a second seed, taken specifically because attempt 1's turn-1 KO was a critical hit and I did not want to raise levels off one lucky roll. Without the crit, Hyper Voice still OHKO'd Hitmonlee from full. Same shape: Trumbeak pivoted out to Lickitung, Oranguru Protected once on T3, and the fight ended on T4 with zero player faints again."}
+  ],
+  "strategy_checks": [
+    {"check": "Oranguru does not waste turn 1 on Instruct", "result": "PASS", "evidence": "Both runs: Oranguru's T1 choice was Foul Play, not Instruct. With no ally move history the Instruct would have failed outright, and the AI correctly did not reach for it. This is the 'invalid move history' clause of the crack line being respected from the opponent's own side."},
+    {"check": "Instruct fires on an ally with eligible history into a valid surviving target", "result": "FAIL (never fired in either run) - circumstantial, not an AI mis-choice", "evidence": "Instruct was never legal at any decision point in either attempt. The authored plan says 'Hitmonlee attacks before minimum-Speed Oranguru and can be Instructed in the same turn after successful eligible move history exists', but Hitmonlee is Speed 87 and my Mega Gardevoir is faster, so Hitmonlee died on T1 before it ever moved, in both runs, with and without a crit. After that the only allies were a freshly switched-in Lickitung (no history) and a freshly switched-in Trumbeak (no history). Oranguru is minimum-Speed by design, so it acts last, which means the ally it wants to Instruct must both survive the player's turn AND have already moved. On this board that window never opened. I am recording this as a design fragility rather than an AI defect: at each individual decision Oranguru picked correctly, there was simply never a legal Instruct."},
+    {"check": "Choice Band Hitmonlee respects its lock", "result": "NOT EXERCISED", "evidence": "Hitmonlee selected Rock Slide on T1 in both runs - a sensible spread pick into a Flying-type Togekiss - but was KO'd before executing it, so no lock was ever established and nothing could be verified about repeat targeting."},
+    {"check": "Lickitung's Helping Hand buys real damage", "result": "FAIL", "evidence": "a1 T3: Lickitung at 48/125 used Helping Hand on Oranguru, which was at 42/118, is minimum-Speed by design, and whose only revealed attack (Foul Play) had been doing 6 and 25 damage into my low-Attack Fairy pair. The boosted move never happened - Oranguru was KO'd first. See AI defects."},
+    {"check": "Trumbeak uses Skill Link multi-hits", "result": "PASS", "evidence": "a1 T4 and a2 T4: Bullet Seed hit exactly five times for 57 into a 90 HP Mega Gardevoir, taking it from 65 to 8. Skill Link is doing its job and Trumbeak is comfortably the most dangerous member of this team."},
+    {"check": "Every opposing Protect has a payoff", "result": "PARTIAL", "evidence": "One Protect across two runs (a2 T3, Oranguru). It did block a Pixilate Hyper Voice, so it was not empty, but it bought a turn that Oranguru then spent dying without acting - no Instruct became legal, no partner was saved (Lickitung died in the same turn to Air Slash), and no effect was waiting to expire. Real damage denied, zero conversion."}
+  ],
+  "protect_ledger": [
+    {"attempt": 2, "turn": 3, "battler": "ORANGURU", "payoff": "PARTIAL: blocked one Pixilate Hyper Voice (~54 damage on a 118 HP body, which is a genuine save) but converted it into nothing. Oranguru survived to the next turn and was KO'd there without having used a move. Its partner Lickitung was not protected and died in the same turn."}
+  ],
+  "ai_defects": [
+    {"id": "E0070-D1", "severity": "low", "attempt": 1, "turn": 3,
+     "board": "Opponent Lickitung 48/125 and Oranguru 42/118 against my Mega Gardevoir 65/90 and Togekiss 113/119.",
+     "chosen": "Lickitung used Helping Hand targeting Oranguru.",
+     "why_wrong": "Helping Hand is +5 priority so it resolves first, but it only pays off if the boosted ally then moves and lands something worthwhile. Oranguru is built at minimum Speed (0 Speed IV, Relaxed) precisely so it acts last, and its only revealed attack was Foul Play, which had already proved nearly worthless into my party - Foul Play scales off the TARGET's Attack, and both of my active Pokemon are special attackers with no Attack investment, so it had done 6 into Togekiss and 25 into Gardevoir. Doubling a 25-damage move is worth 25 damage, and only if the slowest Pokemon on the field survives to use it, which it did not.",
+     "better_action": "Lickitung's own Body Slam or Power Whip into my Mega Gardevoir at 65/90. Lickitung is Impish with 252 HP / 252 Def but still has a real Normal STAB and Power Whip is 120 BP; either was worth several times the expected value of the Helping Hand. Knock Off into Togekiss to remove the Sitrus Berry was also strictly better.",
+     "note": "This is the generic 'support move chosen when the supported ally cannot cash it' pattern. It is not specific to Anna & Meg and is worth checking in the shared support scoring rather than here."}
+  ],
+  "ai_notes": [
+    "The T2 Trumbeak-for-Lickitung switch is defensible and I do not count it as a defect: it pulled the team's best attacker out of range of a Mega Gardevoir that had just one-shot Hitmonlee, and Lickitung is the right body to absorb Hyper Voice. It cost 77 HP and a turn, but Trumbeak came back later and was the only member that seriously hurt me.",
+    "Foul Play is a poor fit for the AI's scoring here through no fault of the AI: the move's damage depends on my Attack stat, and against a Fairy special-attacking core it reads as a real attack while dealing single-digit damage. The AI has no better option on Oranguru's sheet against this specific party, which is a set problem rather than a decision problem.",
+    "Decision timing was well inside budget: 61, 58, 30, 30 frames, max 1.021 s."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt with 0 player faints and no real threat -> +1 on the weakest one or two members, never the ace first. Trumbeak (+4) is the ace and the only member that did damage, and Lickitung (+3) is the bulk, so the two +1 members were raised. I ran a second seed first to make sure the verdict was not built on attempt 1's turn-1 critical hit; it was not.",
+    "changes": [
+      {"member": "ORANGURU", "field": "level offset", "before": 1, "after": 2, "level_before": 29, "level_after": 30},
+      {"member": "HITMONLEE", "field": "level offset", "before": 1, "after": 2, "level_before": 29, "level_after": 30}
+    ],
+    "rerun_note": "Not rerun at the new levels. Opponent levels are baked into src/data/trainers.party at build time, and the headless ROM in work/agent-battle-build was built before this edit; verifying the new levels would require re-materializing and running make, which this brief explicitly forbids me from doing. The main agent materializes and builds. The +1 is a single level on two members and does not change any relevant speed order or OHKO threshold I observed."
+  },
+  "could_this_be_cooler": "Yes, and the fix is not levels. The concept - an Oranguru teacher Instructing its kicking pupil - is genuinely good and unusual for a route double, but as built the centerpiece cannot fire. Instruct needs the ally to have already moved this turn AND to still be alive when minimum-Speed Oranguru acts last. Hitmonlee is Speed 87 with no Speed investment and a Choice Band, so against any cap-30 party with a fast special attacker it dies in the first turn, before it moves, and the fight becomes a plain four-Pokemon beatdown. It never once became legal across two full runs. The cheapest fix that keeps the theme completely intact is to give Hitmonlee survivability rather than speed: a Focus Sash in place of the Choice Band guarantees it lives the opening turn, moves, and hands Oranguru a legal Instruct on turn 2 - which is exactly the lesson the team is about. Failing that, Oranguru would rather have Trick Room than Protect: under room the min-Speed builds move first, Hitmonlee still attacks before Oranguru's Instruct in the same turn, and the whole team's deliberately terrible Speed becomes the point instead of a liability. I am not changing the set in this pass, as directed; this is the recommendation. Second, smaller note: Foul Play is dead weight on a team whose job is to repeat a physical ally's attack, because it does nothing against special attackers; Oranguru's third slot would be better as almost anything else.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
