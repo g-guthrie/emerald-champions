@@ -1,0 +1,48 @@
+{
+  "play_order": 181,
+  "e_group": "E0258",
+  "trainer": "TRAINER_JENNIFER",
+  "class": "ace",
+  "location": "Route120",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "driver state resolved Sableye (offset 0) at L52, Kommo-o (+1) at L53, Hydreigon (+2) at L54, Whimsicott (+1) at L53 = cap 54 + offset - 2 on Medium. Cap window 48-60; C30 (Weather Institute) is done so 54 is live, Badge06 (60) is not yet earned.",
+  "difficulty": "medium",
+  "party_manifests": [
+    "work/playtest/181-TRAINER_JENNIFER/party_core54.json",
+    "work/playtest/_party/party_b54.json"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "party": "party_core54.json (Incineroar/Amoonguss/Mega Metagross/Regieleki/Zapdos/Mamoswine)",
+      "outcome": "lost", "turns": 9, "player_faints": 6, "opponent_faints": 2,
+      "why": "No Fairy, Psychic or Ice-special answer to Kommo-o. It reached +4 Defence behind Bulletproof and Body Press OHKOed Mega Metagross (167), Regieleki (167) and Mamoswine (200) in consecutive turns."
+    },
+    {
+      "n": 2, "seed": 2, "party": "party_b54.json (Incineroar/Amoonguss/Mega Gardevoir/Zapdos/Regieleki/Mamoswine)",
+      "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+      "why": "Rebuilt to carry the dossier's own crack: Fairy pressure. Spore on Kommo-o turn 1, Mega Gardevoir Pixilate Hyper Voice turn 2 removed the sleeping +2 Kommo-o (4x) outright and put Sableye to 21; Hyper Voice then removed Hydreigon (4x), Sableye and Whimsicott."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Sableye Mega Evolves and the post-Mega ability matters", "result": "PASS", "evidence": "a1 turn 1 and a2 turn 1: Mega Evolution resolves before any move; Magic Bounce is live from then on, and Prankster is gone."},
+    {"check": "Mega Sableye uses its Prankster action or Recover to stay alive", "result": "PARTIAL", "evidence": "It Megas on turn 1 in both attempts, so Will-O-Wisp (a1 turn 2, burned Amoonguss; a2 turn 4) is never at priority, and Recover was never chosen at 35/183 or 21/183. Both refusals are defensible - Meteor Mash 148 and Hyper Voice 162 both outrun a 91 HP heal - but the authored 'pre-Mega turn is the window' idea never actually happened."},
+    {"check": "Kommo-o stacks Iron Defense behind Bulletproof and converts with Body Press", "result": "PASS", "evidence": "a1 turns 1-4 reached +4 Defence; Body Press then OHKOed Mega Metagross (turn 5), Regieleki (turn 6) and Mamoswine (turn 7), and was correctly resisted into Zapdos."},
+    {"check": "Whimsicott passes Tailwind at Prankster priority", "result": "PASS", "evidence": "a2 turn 4: Tailwind set on the opponent side the turn it entered. Encore and Helping Hand were never needed."},
+    {"check": "Hydreigon supplies immediate special pressure", "result": "PASS", "evidence": "a1 Draco Meteor turns 6/8/9 and a2 Fire Blast turn 3 (128 into Amoonguss, super effective)."},
+    {"check": "Alternate deployment (Whimsicott support for Hydreigon) actually pairs", "result": "NOT OBSERVED", "evidence": "Whimsicott is the last reserve in both runs and never shared the field with Hydreigon."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 4, "battler": "Mega Sableye", "payoff": "blocked a lethal Meteor Mash at 35/183"},
+    {"attempt": 1, "turn": 7, "battler": "Hydreigon", "payoff": "blocked a lethal Thunderbolt at 60/180 (Mamoswine's Icicle Crash hit the other slot)"},
+    {"attempt": 1, "turn": 9, "battler": "Hydreigon", "payoff": "blocked a lethal Fake Out at 13/180"},
+    {"attempt": 2, "turn": 3, "battler": "Mega Sableye", "payoff": "blocked a lethal Hyper Voice at 21/183"}
+  ],
+  "protect_summary": "4 opponent Protects across both attempts, 4 with a concrete payoff, 0 empty, no repetitive guarding.",
+  "ai_defects": [],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Attempt 1 was a 6-2 loss to an honest competitive six, and attempt 2 only won cleanly because the party was rebuilt around the dossier's own stated crack (Fairy pressure plus special damage). That is the counterplay working, not an undertuned team. Neither the +1 rule (this was not a first-try win) nor the -1 rule (fewer than three losses) applies.",
+  "cooler": "Keep the concept - two Pranksters with different jobs is genuinely distinctive. The one concrete improvement: as played, Sableye Mega Evolves on turn 1 every time, which throws away the Prankster window the dossier itself calls the point of the set. If the intent is that the pre-Mega turn matters, the AI should be nudged to spend turn 1 on priority Will-O-Wisp or Recover and Mega on turn 2; alternatively give Whimsicott the lead slot so the Prankster-support half of the concept is on screen from turn 0.",
+  "legality_notes": "No legality problem in the authored set. All four members and both held Mega Stones are inside the cap-54 window.",
+  "verification_limit": "The level changes recorded in this receipt (none for this battle) cannot be re-verified until the main agent re-materializes and rebuilds the headless ROM."
+}

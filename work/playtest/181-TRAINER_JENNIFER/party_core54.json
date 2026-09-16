@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Feather Badge chapter cap 54 core benchmark party (play_order 181-192)",
+  "availability_audit": "All six audited against work/reference-pools/pool-54.json with source_detail checked against Fortree-arrival chronology (Weather Institute/C30 done, Route 120 partly explored, Winona not yet fought). Every source map precedes Fortree in play order: Litten line and Foongus line are pre-Mauville/Route119 habitats at gates 36/42, Beldum line gate 48 (post-Norman), Swinub line gate 36, and the two legendary signs (Regieleki, Zapdos) both sit in NewMauville_Inside, gate 30, opened by the New Mauville shutdown long before Route 120. Metagrossite stone-window 42. Nothing from Route 121 onward, Lilycove, Mt Pyre or the Southern Island is used.",
+  "plan": "Standard strong doubles control core for a Flying/Tailwind-heavy chapter: Incineroar Fake Out + Intimidate and Amoonguss Spore/Rage Powder buy the turns, Mega Metagross is the Steel-resist win condition, Regieleki and Zapdos supply the Electric answer every Flying opponent fears, and Mamoswine covers Dragon/Ground/Flying with Ice Shard priority under enemy Tailwind.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out and Intimidate control, Knock Off item removal, Parting Shot reset",
+      "availability": "pool-54 gate 36, evolution:level from SPECIES_TORRACAT; Litten line habitat precedes Fortree."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "redirection and sleep, the single strongest support answer to setup leads",
+      "availability": "pool-54 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": ["MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_ICE_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition; Tough Claws Meteor Mash plus Bullet Punch priority",
+      "availability": "pool-54 gate 48 (Beldum/Metang line) and ITEM_METAGROSSITE stone-window 42."
+    },
+    {
+      "species": "SPECIES_REGIELEKI",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_ELECTROWEB", "MOVE_VOLT_SWITCH", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TRANSISTOR",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: uncontested speed control and the Electric answer to Flying",
+      "availability": "pool-54 gate 30, legendary_sign:NewMauville_Inside; New Mauville shutdown is a C24-era chapter, well before Route 120."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "reachable legend: bulky Electric/Fire spread pressure with recovery",
+      "availability": "pool-54 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_MAMOSWINE",
+      "moves": ["MOVE_ICICLE_CRASH", "MOVE_HIGH_HORSEPOWER", "MOVE_ICE_SHARD", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Ice and Ground coverage with Ice Shard priority against Tailwind sweepers",
+      "availability": "pool-54 gate 36, evolution:known-move from SPECIES_PILOSWINE (Swinub habitat precedes Fortree)."
+    }
+  ]
+}
