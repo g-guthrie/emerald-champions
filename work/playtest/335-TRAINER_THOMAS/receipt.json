@@ -1,0 +1,30 @@
+{
+ "play_order": 335, "e_group": "E0506", "trainer": "TRAINER_THOMAS", "class": "regular", "location": "SSTidalRooms", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; Weavile offset 0 L98, others offset 1 L99 = cap+offset-2 on Medium.",
+ "difficulty": "medium",
+ "party_manifests": ["work/playtest/335-TRAINER_THOMAS/party_pg100_core.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open; same core party as 333 (one reachable legend, Chi-Yu). See the manifest availability audit.",
+ "pre_play_strategy_checks": ["Authored tactic ACTIVATE: Weavile Ice Shard into Armarouge to trigger Weak Armor (+2 Spe) and Armarouge does not Protect through it", "Armarouge Armor Cannon after the boost", "Alternate: Weavile Fake Out supports Scarf Genesect; Download boost on entry", "Mega Scolipede Speed Boost before transforming"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_pg100_core.json", "outcome": "won", "turns": 3, "player_faints": 0, "opponent_faints": 4,
+   "why": "Deliberately did not Fake Out Weavile so the activation combo could show. t1 Armarouge Protected Dark Pulse, Weavile Fake Out flinched Incineroar. t2 Weavile Taunted Incineroar and Armarouge fired Armor Cannon into Chi-Yu (resisted) - no Ice Shard activation; Dark Pulse OHKO'd Armarouge, Knock Off took Weavile's Sash. Genesect entered with Download +1 Atk. t3 Bug Buzz 193 on Chi-Yu, Weavile Knock Off, then Beads of Ruin Heat Wave KO'd Weavile and Genesect (both 4x). t4 Mega Scolipede transformed and was OHKO'd by Heat Wave before acting. No player faints."}
+ ],
+ "strategy_checks": [
+  {"check": "Weavile Ice Shard into Armarouge (authored ACTIVATE tactic)", "result": "FAIL (never chosen)", "evidence": "t1 Fake Out (alternate mode, fine); t2 Taunt on Incineroar with Armarouge alive at full HP and slower than Chi-Yu (246 vs 328 Spe) - the one turn the +2 Speed would have mattered; t3 Knock Off. The gating ('only when worth the Speed') may have judged Armarouge could not KO either Fire/Dark lead, which is true, so dormant rather than illegal."},
+  {"check": "Armarouge Armor Cannon", "result": "PASS (chosen)", "evidence": "t2 Armor Cannon into Chi-Yu (resisted; every move it had was resisted or immune against two Fire/Dark leads)"},
+  {"check": "Weavile Fake Out turn 1", "result": "PASS", "evidence": "t1 Fake Out flinched Incineroar"},
+  {"check": "Genesect Download on entry", "result": "PASS", "evidence": "t2 entry 'Attack rose' (Beads of Ruin had lowered the player side's Sp. Def, so Download picked Attack for an all-special set - a Download quirk, not a defect)"},
+  {"check": "Mega Scolipede Speed Boost before Mega", "result": "FAIL (no window)", "evidence": "entered last against two Fire attackers and Mega Evolved on its first turn, OHKO'd by Heat Wave"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 1, "user": "Armarouge", "payoff": "blocked Dark Pulse (an OHKO), partner Fake Out flinched Incineroar - excellent"}
+ ],
+ "protect_summary": "1 Protect, good.",
+ "ai_defects": [],
+ "ai_notes": "The activation tactic never fired in a three-turn window; against a party that resists Fire and is immune to Psychic the Speed boost buys nothing, so this is not evidence of a broken tactic. Needs a replay against a neutral lead to verify it fires at all.",
+ "level_changes": [{"member": "WEAVILE", "before": 0, "after": 1}, {"member": "ARMAROUGE", "before": 1, "after": 2}],
+ "level_change_rationale": "Won first try 4-0 in 3 turns with no player faints and no real threat (Beads of Ruin Heat Wave double-4x). +1 on the two weakest members; Genesect (legend) and Mega Scolipede untouched.",
+ "cooler": "The friendly-fire combo is the coolest idea on the boat but it did not appear; the team is also entirely walled by a Fire/Dark lead (three of four are Fire-weak, two 4x). No set change in this pass; worth a targeted test of the ACTIVATE tactic scoring against a lead Armarouge can actually threaten.",
+ "legality_notes": "Sets legal; driver accepted the party.",
+ "verification_limit": "Weavile 0->1 and Armarouge 1->2 cannot be re-verified until the main agent rebuilds; this is the battle in the block most worth re-running afterwards, with a non-Fire lead so the Ice Shard tactic gets a real window."
+}
