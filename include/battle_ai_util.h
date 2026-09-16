@@ -387,7 +387,6 @@ void IncreaseTidyUpScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, e
 u32 IncreaseSubstituteMoveScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 bool32 IsBattlerItemEnabled(enum BattlerId battler);
 bool32 IsBattlerPredictedToSwitch(enum BattlerId battler);
-bool32 IsFixedDamageMove(enum Move move);
 enum Move GetLockedInMove(enum BattlerId battler);
 bool32 IsTargetCertainToBlockWithProtect(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 enum Move GetIncomingMove(enum BattlerId battler, enum BattlerId opposingBattler, struct AiLogicData *aiData);

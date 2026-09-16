@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 9,
+  "e_group": "E0009",
+  "trainer": "TRAINER_LYLE",
+  "class": "casual",
+  "location": "PetalburgWoods",
+  "cap": 14,
+  "difficulty": "medium",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable in Petalburg Woods.",
+  "opponent_as_played": [
+    "NYMBLE L15 @FOCUS_SASH TINTED_LENS JOLLY (First Impression/Leech Life/Sucker Punch/U-turn) offset 3",
+    "SEWADDLE L16 @EVIOLITE OVERCOAT ADAMANT (Bug Bite/Seed Bomb/Struggle Bug/Protect) offset 4",
+    "ANORITH L14 @LIFE_ORB BATTLE_ARMOR JOLLY (Rock Blast/X-Scissor/Aqua Jet/Protect) offset 2",
+    "DOTTLER L15 @LEFTOVERS SWARM MODEST (Psychic/Struggle Bug/Reflect/Helping Hand) offset 3"
+  ],
+  "party_manifest": "work/playtest/09-LYLE/party-rerun-a1.json",
+  "party_summary": "Growlithe / Timburr / Heracross / Hoothoot / Corphish / Croagunk. Heracross is the first Petalburg Woods encounter used in this block - the player is inside the woods at this battle. Nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2009,
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 5,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 55,
+      "ai_decision_seconds_max": 0.921,
+      "events": "work/playtest/09-LYLE/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 Nymble opened with First Impression on its legal entry turn (resisted by Fighting Timburr); Growlithe's Flare Blitz, 4x on Bug/Grass, removed Sewaddle outright and Timburr's Rock Slide took Nymble to its Focus Sash. Dottler replaced Sewaddle. T2 Dottler used Helping Hand on Nymble's Sucker Punch - a fair gamble that failed only because I switched Growlithe out for Hoothoot the same turn - and Rock Slide removed Nymble. Anorith replaced it. T3 Dottler's second Helping Hand fed Anorith's Rock Blast, which is 2x on Normal/Flying, and it removed a full-health 50 HP Eviolite Hoothoot in one turn. T4 Heracross replaced Hoothoot; a third Helping Hand fed a three-hit Rock Blast that with Life Orb recoil took Heracross down, but Heracross's own Rock Slide removed Anorith AND Dottler together first. 4-2."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Nymble uses First Impression only on its eligible entry turn and otherwise attacks or pivots",
+      "result": "PASS",
+      "evidence": "T1 First Impression (entry turn, legal). T2 it correctly did NOT retry it - First Impression is no longer selectable - and chose Sucker Punch instead. The entry-only restriction is being respected, which is the defining intent the disposition names."
+    },
+    {
+      "check": "The second turn accounts for Nymble's entry-only restriction",
+      "result": "PASS",
+      "evidence": "See above; Sucker Punch, boosted by its partner's Helping Hand, was the right second-turn choice. It failed only because Growlithe switched out that turn, which Sucker Punch cannot punish."
+    },
+    {
+      "check": "Dottler Reflect or Helping Hand supports Anorith's Rock pressure",
+      "result": "PASS - strongly",
+      "evidence": "Helping Hand on T2, T3 and T4, each time onto the partner whose attack mattered. The T3 one turned Anorith's Rock Blast into a one-turn KO on a full-health 50 HP Eviolite Hoothoot, and the T4 one took down a 50 HP Heracross. This is the second team in the block where Helping Hand is doing real work; support pricing is clearly reaching this move."
+    },
+    {
+      "check": "Dottler's Reflect",
+      "result": "NOT FIRED",
+      "evidence": "Helping Hand was chosen all three turns instead. Defensible - every Helping Hand converted into damage that mattered, two into KOs - but Reflect against a party that was hitting it with physical Rock Slides every turn would also have been reasonable."
+    },
+    {
+      "check": "Sewaddle's Struggle Bug is special mitigation, not its main damage lane",
+      "result": "NOT TESTED",
+      "evidence": "Sewaddle had one decision (T1 Seed Bomb) and was removed by a 4x Flare Blitz on the same turn. Struggle Bug never fired for either carrier - Dottler also never used it - so the team's spread-mitigation lane went unexercised."
+    },
+    {
+      "check": "U-turn renews a later First Impression opportunity through a real switch",
+      "result": "NOT TESTED",
+      "evidence": "Nymble died on T2."
+    },
+    {
+      "check": "Anorith handles targets that resist the Bug opening",
+      "result": "PASS",
+      "evidence": "T3 and T4 it chose Rock Blast into Normal/Flying Hoothoot and Bug/Fighting Heracross, both of which resist Bug and take Rock at 2x. Correct type read both times, and X-Scissor was never picked into a resisting target."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect in the whole battle. Sewaddle and Anorith both carry it; Sewaddle had only one turn, and Anorith spent both of its turns on a Helping-Hand-boosted Rock Blast that each time removed one of my Pokemon - guarding instead would have been strictly worse. Empty ledger, but for a good reason.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_improvements_observed": [
+    "Helping Hand chosen three times out of three and converting twice into KOs. Together with Skitty in E0005 and Snubbull in E0008, Helping Hand is now the most reliably-selected support move in the block.",
+    "First Impression's entry-only restriction respected without a wasted retry.",
+    "Zero voluntary opponent switches."
+  ],
+  "level_changes": "NONE. Won on attempt 1 but with 2 of 6 player faints, which the brief's rule treats as keep. The first pass's +1 on Nymble and Anorith is validated: L14 Anorith with one Helping Hand behind it removed a full-health Eviolite wall and then a 125-base-Attack Heracross on consecutive turns.",
+  "levels_after": {
+    "NYMBLE": 3,
+    "SEWADDLE": 4,
+    "ANORITH": 2,
+    "DOTTLER": 3
+  },
+  "cooler": "Yes. Struggle Bug appears on two of the four sets and fired zero times, because on a team whose whole plan is 'Helping Hand plus a big physical hit' a spread special-attack debuff never competes. Giving Dottler Rage Powder in place of Struggle Bug would let the support body actually protect the Rock attacker it keeps boosting, and would turn the Helping-Hand engine into a two-move identity rather than one move repeated. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found. First Impression's entry-turn gate and Battle Armor both behaved correctly."
+}

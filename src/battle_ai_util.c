@@ -5763,15 +5763,7 @@ void IncreaseSleepScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, en
     }
 
     if (AI_CanPutToSleep(battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], move, gAiLogicData->partnerMove))
-    {
-        // Taking a healthy threat's turns away is worth more than the chip the
-        // same turn would have dealt; five turns of Leech Seed and Bullet Seed
-        // in front of an unslept attacker that two-shots the user is not the
-        // trade this was pricing.
-        ADJUST_SCORE_PTR(GOOD_EFFECT);
-        if (CanTargetFaintAi(battlerDef, battlerAtk))
-            ADJUST_SCORE_PTR(WEAK_EFFECT);
-    }
+        ADJUST_SCORE_PTR(DECENT_EFFECT);
     else
         return;
 
@@ -7019,19 +7011,7 @@ bool32 AI_OpponentCanFaintAiWithMod(enum BattlerId battler, u32 healAmount)
 
 s32 GetAILastPartyIndex(enum BattlerId battler)
 {
-    if (!BattleSideHasTwoTrainers(battler & BIT_SIDE) || AreMultiPartiesFullTeams())
-        return PARTY_SIZE;
-    // Two trainers on one side share a single party array only in the link and
-    // tower multi formats. Everywhere else - every campaign two-owner multi and
-    // the in-game partner - each trainer owns its own array, where the
-    // half-team split hides that trainer's own slots three to five. That left a
-    // fainted battler whose only live reserve sat at slot three counted as
-    // having nothing to switch to, so its absent flag was never cleared: no
-    // replacement was ever requested, the side was empty without the battle
-    // resolving, and both opponents struggled at nothing for hundreds of turns.
-    if (GetBattlerParty(battler) != GetBattlerParty(GetPartnerBattler(battler)))
-        return PARTY_SIZE;
-    return PARTY_SIZE / 2;
+    return (BattleSideHasTwoTrainers(battler & BIT_SIDE) && !AreMultiPartiesFullTeams()) ? PARTY_SIZE / 2 : PARTY_SIZE;
 }
 
 bool32 ShouldInstructPartner(enum BattlerId partner, enum Move move)

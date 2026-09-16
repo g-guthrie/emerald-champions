@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0009 TRAINER_LYLE; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR PETALBURG WOODS. Book play order: ... Petalburg Gym -> Route104 -> north through Petalburg Woods (C05) -> Rustboro. The player is inside the woods now, so wild:PetalburgWoods/land_mons is legal for the first time: HERACROSS comes from that table. GROWLITHE, HOOTHOOT, CORPHISH = wild:Route103/land_mons; TIMBURR = wild:Route102/land_mons; CROAGUNK = wild:Route104/land_mons. Nothing evolved (Rustboro lies beyond the woods and is the first stone vendor), nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "Lyle is four Bugs, so Fire, Flying and Rock are the whole answer. Growlithe Flare Blitz is 2x on Nymble and Dottler and 4x on Bug/Grass Sewaddle; Hoothoot Air Slash is 2x on three of the four; Timburr and Heracross Rock Slide are 2x spreads on Nymble, Sewaddle and Dottler; Corphish Crabhammer is 4x on Rock/Bug Anorith. Authored-crack specifics: Protect on the entry burst is covered by Timburr and Heracross both outliving a First Impression, and TIMBURR WIDE_GUARD is the direct check on Struggle Bug, the teams spread mitigation move. Hoothoot INSOMNIA and Sewaddle OVERCOAT are both powder-proof, so no sleep lane exists either way.",
+ "party": [
+  {
+   "species": "SPECIES_GROWLITHE",
+   "moves": [
+    "MOVE_FLARE_BLITZ",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_WILD_CHARGE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate lead and Fire breaker; Wild Charge is the single-target Electric probe for Lightning Rod / Volt Absorb / Storm Drain redirection",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_KNOCK_OFF",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_WIDE_GUARD"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "WIDE_GUARD against the stacked Muddy Water / Discharge spread lanes, plus Iron Fist priority and item removal",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_HERACROSS",
+   "moves": [
+    "MOVE_MEGAHORN",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_KNOCK_OFF"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_MOXIE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the strongest physical attacker Petalburg Woods offers; Moxie snowballs and Rock Slide is the spread",
+   "availability": "pool-14 wild:PetalburgWoods/land_mons."
+  },
+  {
+   "species": "SPECIES_HOOTHOOT",
+   "moves": [
+    "MOVE_AIR_SLASH",
+    "MOVE_TAILWIND",
+    "MOVE_HYPNOSIS",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_INSOMNIA",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    164,
+    0,
+    8,
+    204,
+    0,
+    132
+   ],
+   "role": "Insomnia sleep-proof body, super-effective Flying special damage, player-side Tailwind",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_CORPHISH",
+   "moves": [
+    "MOVE_CRABHAMMER",
+    "MOVE_AQUA_JET",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_ADAPTABILITY",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the block's biggest single hit plus priority and item removal",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_CROAGUNK",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_POISON_JAB",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_KNOCK_OFF"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_DRY_SKIN",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "DRY_SKIN is a flat Water immunity that heals off the opposing Water attacks; Fake Out tempo, Poison Jab into Grass and Fairy",
+   "availability": "pool-14 wild:Route104/land_mons."
+  }
+ ]
+}

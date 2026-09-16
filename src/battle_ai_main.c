@@ -3492,10 +3492,7 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!hasPartner
          || !HasDamagingMove(battlerAtkPartner)
          || aiData->abilities[battlerAtkPartner] == ABILITY_GOOD_AS_GOLD
-         || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove))
-         // A fixed or percentage damage move ignores the multiplier entirely,
-         // so boosting it spends the turn for nothing.
-         || (aiData->partnerMove != MOVE_NONE && IsFixedDamageMove(aiData->partnerMove)))
+         || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove)))
         {
             ADJUST_SCORE(WORST_EFFECT);
         }
@@ -6374,26 +6371,10 @@ static s32 AI_CheckViability(enum BattlerId battlerAtk, enum BattlerId battlerDe
 
     if (GetMovePower(move) != 0)
     {
-        u32 hitsToKO = GetNoOfHitsToKOBattler(battlerAtk, battlerDef, gAiThinkingStruct->movesetIndex, AI_ATTACKING, CONSIDER_ENDURE);
-        if (hitsToKO == 0)
+        if (GetNoOfHitsToKOBattler(battlerAtk, battlerDef, gAiThinkingStruct->movesetIndex, AI_ATTACKING, CONSIDER_ENDURE) == 0)
             ADJUST_AND_RETURN_SCORE(NO_DAMAGE_OR_FAILS); // No point in checking the move further so return early
         else
         {
-            // Damage this small is barely progress, and watching it repeat is
-            // what play actually showed: Crunch into a Fairy twice for six, and
-            // three Quick Attacks into a Rocky Helmet wall for nine, nine and
-            // zero while an Adaptability attack sat unused. Chip that needs
-            // this many turns loses ground; chip the user pays contact damage
-            // for every turn loses more.
-            if (hitsToKO >= NEGLIGIBLE_DAMAGE_HITS)
-            {
-                ADJUST_SCORE(BAD_EFFECT);
-                u32 dealt = aiData->simulatedDmg[battlerAtk][battlerDef][gAiThinkingStruct->movesetIndex].median;
-                u32 selfDamage = AI_GetContactDamage(battlerAtk, battlerDef, move, aiData->abilities[battlerAtk],
-                    aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef], aiData->abilities[battlerDef]);
-                if (selfDamage != 0 && selfDamage * 2 >= dealt)
-                    ADJUST_SCORE(AWFUL_EFFECT);
-            }
             if (gAiThinkingStruct->aiFlags[battlerAtk] & (AI_FLAG_RISKY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE)
                 && IsBestDmgMove(battlerAtk, battlerDef, AI_ATTACKING, move))
                 ADJUST_SCORE(BEST_DAMAGE_MOVE);

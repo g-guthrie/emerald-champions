@@ -68,42 +68,12 @@
 #define PAIR_GUARD_BANKED_BASE 45
 #define PAIR_GUARD_BANKED_WAIT 40
 #define PAIR_GUARD_BANKED_PARTNER 25
-// The Conservative trait is a stated preference for the safe line, and the
-// banked share is exactly where safety is valued. Without this the trait had
-// no contact with the guard model at all, which is why a team whose four
-// members all carried Protect never used it.
-#define PAIR_GUARD_BANKED_CONSERVATIVE 20
-// A guard that denies nothing at all bought nothing at all. The banked share
-// prices what a shield keeps, so it says nothing about a shield with no denial
-// to keep - and a turn-one guard from full health was still winning the safest
-// setup or status turn its side would get.
-#define PAIR_GUARD_EMPTY_COST 30
 
 // An authored signature interaction (ACTIVATE / INSTRUCT / AFTER_YOU) is the
 // point of the trainer, not an accident of the damage arithmetic. Reward it on
 // the same bounded scale as the other authored plans, and only while the
 // recipient is still alive to use what the trigger gives it.
 #define PAIR_TACTIC_REWARD 80
-
-// A single turn cannot see what a boost, a sleep or a stat drop is worth,
-// because all of their value arrives on the turns after this one. Without an
-// explicit horizon they price at zero and lose to any direct attack, which is
-// how three separate teams went a whole battle without using Tailwind and a
-// Quiver Dance user never danced. These are bounded next-turn values, paid only
-// when the effect actually landed and survives the turn - the same shape the
-// Wish horizon already uses - never a quota.
-#define PAIR_SETUP_HORIZON 40
-#define PAIR_SLEEP_HORIZON 35
-#define PAIR_STATUS_HORIZON 20
-#define PAIR_STAT_DROP_HORIZON 12
-// A switch preserves board value while an attack spends HP, so a one-turn
-// board makes withdrawing a healthy lead look nearly free. Charge it for the
-// turn it actually gives up - the damage the outgoing battler was about to
-// deal - on top of the flat commitment cost, capped so a real escape stays
-// affordable. Turn one, with nothing revealed, costs a little more again.
-#define PAIR_SWITCH_COMMITMENT 35
-#define PAIR_SWITCH_TEMPO_CAP 70
-#define PAIR_SWITCH_BLIND_COST 60
 
 static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MOVE_REVELATION_DANCE, MOVE_AQUA_STEP, MOVE_FEATHER_DANCE};
 
@@ -530,28 +500,6 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
             ev->choices[actor][ev->count[actor]++] = (struct PairAction){MOVE_STRUGGLE, AI_SCORE_DEFAULT, 0, IsBattlerAlive(GetOppositeBattler(actor)) ? GetOppositeBattler(actor) : GetOppositeBattler(GetPartnerBattler(actor)), .executedMove = MOVE_STRUGGLE};
         else
             ev->choices[actor][ev->count[actor]++] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actor};
-    }
-}
-
-// Helping Hand multiplies an attack's power. A move whose damage is a fixed
-// number, a fraction of the target's HP, or a reflection of damage taken
-// ignores that multiplier, so the turn spent boosting it buys nothing.
-bool32 IsFixedDamageMove(enum Move move)
-{
-    switch (GetMoveEffect(move))
-    {
-    case EFFECT_FIXED_HP_DAMAGE:
-    case EFFECT_FIXED_PERCENT_DAMAGE:
-    case EFFECT_LEVEL_DAMAGE:
-    case EFFECT_PSYWAVE:
-    case EFFECT_ENDEAVOR:
-    case EFFECT_FINAL_GAMBIT:
-    case EFFECT_REFLECT_DAMAGE:
-    case EFFECT_OHKO:
-    case EFFECT_BIDE:
-        return TRUE;
-    default:
-        return FALSE;
     }
 }
 
@@ -1052,41 +1000,12 @@ static bool32 PairGuardPartnerPayoff(enum BattlerId user, const struct PairActio
 
 // The share of the denied damage that waiting actually banks. Without a payoff
 // the threat returns next turn, so most of it is only postponed.
-// Half the maximum back is permanent; what a shield saves is only the part a
-// payoff makes permanent. A guard that denies less than the user could simply
-// have healed is the worse way to spend the same turn, so it banks nothing
-// beyond the base: the choice is then settled by the HP the trial actually
-// ends with, which is what watching a Naclstack guard twice and die showed.
-static bool32 PairHealsMoreThanGuardDenies(enum BattlerId user, s32 denied)
-{
-    u32 missing = gBattleMons[user].maxHP - gBattleMons[user].hp;
-    if (!missing || gBattleMons[user].volatiles.healBlockTimer)
-        return FALSE;
-    for (u32 index = 0; index < MAX_MON_MOVES; index++)
-    {
-        enum Move move = gBattleMons[user].moves[index];
-        enum BattleMoveEffects effect = GetMoveEffect(move);
-        if (move == MOVE_NONE || IsMoveUnusable(index, move, gAiLogicData->moveLimitations[user]))
-            continue;
-        if (effect != EFFECT_RESTORE_HP
-         && !(effect == EFFECT_ROOST && !IS_BATTLER_OF_TYPE(user, TYPE_FLYING)))
-            continue;
-        u32 heal = min(missing, max(1, gBattleMons[user].maxHP / 2));
-        if ((s32)(heal * 180 / max(1, gBattleMons[user].maxHP)) > denied)
-            return TRUE;
-    }
-    return FALSE;
-}
-
 static u32 PairGuardBankedShare(const struct PairEvaluation *ev, enum BattlerId user,
-    const struct PairAction *actions, s32 denied)
+    const struct PairAction *actions)
 {
-    if (PairHealsMoreThanGuardDenies(user, denied))
-        return PAIR_GUARD_BANKED_BASE;
     u32 banked = PAIR_GUARD_BANKED_BASE
         + (ev->waitingPayoff ? PAIR_GUARD_BANKED_WAIT : 0)
-        + (PairGuardPartnerPayoff(user, actions) ? PAIR_GUARD_BANKED_PARTNER : 0)
-        + ((gAiThinkingStruct->aiFlags[user] & AI_FLAG_CONSERVATIVE) ? PAIR_GUARD_BANKED_CONSERVATIVE : 0);
+        + (PairGuardPartnerPayoff(user, actions) ? PAIR_GUARD_BANKED_PARTNER : 0);
     return min(100, banked);
 }
 
@@ -1206,12 +1125,8 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
     {
         if (gSideStatuses[GetBattlerSide(actor)] & SIDE_STATUS_TAILWIND)
             return -10000;
-        if (!(gFieldStatuses & STATUS_FIELD_TRICK_ROOM))
+        if ((plan & EC_BATTLE_PLAN_TAILWIND) && !(gFieldStatuses & STATUS_FIELD_TRICK_ROOM))
         {
-            // The order crossings it actually buys are the value, whether or
-            // not the trainer carries the authored flag: a team that is outsped
-            // gains exactly as much from speed control either way. The flag
-            // still adds its own weight on top.
             u32 crossings = 0;
             for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
                 for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
@@ -1219,20 +1134,19 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
                      && !IsBattlerAlly(actor, foe) && gAiLogicData->speedStats[ally] <= gAiLogicData->speedStats[foe]
                      && gAiLogicData->speedStats[ally] * 2 > gAiLogicData->speedStats[foe])
                         crossings++;
-            if (crossings)
-                return min(60, crossings * 20) + ((plan & EC_BATTLE_PLAN_TAILWIND) ? 20 : 0);
+            return min(60, crossings * 20);
         }
     }
-    if (IsStatRaisingMove(move)
+    if (IsStatRaisingMove(move) && (plan & EC_BATTLE_PLAN_SETUP)
      // A neutral Drum score can reflect isolated incoming damage, before
      // the concrete partner's redirection or Fake Out is considered. The
      // pair trial already checks action-time HP, berry recovery and survival;
-     // let that supported setup earn the bonus. Preserve negative viability
-     // judgments and never reward an already-maximized stat.
-     && (action->score >= AI_SCORE_DEFAULT
-         || ((plan & EC_BATTLE_PLAN_SETUP) && effect == EFFECT_BELLY_DRUM))
+     // let that supported setup earn the existing bonus. Preserve negative
+     // viability judgments and never reward an already-maximized Attack.
+     && (action->score > AI_SCORE_DEFAULT
+         || (effect == EFFECT_BELLY_DRUM && action->score == AI_SCORE_DEFAULT))
      && AI_CanAnyStatChange(actor, actor, move))
-        return (plan & EC_BATTLE_PLAN_SETUP) ? 35 : 0;
+        return 35;
     s32 score = EC_PerishPlanScore(actor, move);
     if (effect == EFFECT_PROTECT
      && GetProtectType(GetMoveProtectMethod(move)) == PROTECT_TYPE_SINGLE)
@@ -2751,7 +2665,6 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     // that chose the guard. Measured inside the trial, so turn order, misses,
     // redirection and an ally that removes the attacker first all apply.
     s32 guardDenied[MAX_BATTLERS_COUNT] = {0};
-    u32 guardUsed = 0;
     s32 tacticReward[MAX_BATTLERS_COUNT] = {0};
     u8 sideGuardUser[NUM_BATTLE_SIDES][2];
     memset(sideGuardUser, MAX_BATTLERS_COUNT, sizeof(sideGuardUser));
@@ -2985,7 +2898,6 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 continue;
             if (chance < 100)
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
-            guardUsed |= 1u << actor;
             if (move == MOVE_WIDE_GUARD)
             {
                 wideGuard |= 1u << GetBattlerSide(actor);
@@ -3056,8 +2968,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (effect == EFFECT_HELPING_HAND)
         {
             if (hp[partner] && !(acted & (1u << partner))
-             && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD
-             && !IsFixedDamageMove(other->executedMove))
+             && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD)
                 boost[partner] = boost[partner] * 3 / 2;
             // A wasted boost already produces no damage in this trial. An
             // extra penalty here makes Helping Hand + Protect look worse than
@@ -4295,56 +4206,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     // threat returns next turn and the foes can focus the unprotected ally, so
     // bank only the share a payoff makes real.
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
-    {
-        if (GetBattlerSide(actor) != ev->side)
-            continue;
         if (guardDenied[actor])
-            score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions, guardDenied[actor])) / 100;
-        else if ((guardUsed & (1u << actor)) && !ev->waitingPayoff
-              && !PairGuardPartnerPayoff(actor, actions))
-            score -= PAIR_GUARD_EMPTY_COST;
-    }
-    // Next-turn value that a one-turn board cannot see. Each term is paid only
-    // when the effect actually landed in this trial and its owner or victim is
-    // still standing at the end of it, so a boost that gets its user killed and
-    // a sleep on something that faints anyway are both worth nothing.
-    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
-    {
-        const struct PairAction *action = &actions[actor];
-        s32 sign = GetBattlerSide(actor) == ev->side ? 1 : -1;
-        if (action->index == PAIR_IDLE || !hp[actor] || !IsStatRaisingMove(action->move))
-            continue;
-        bool32 raised = speedStage[actor] > gBattleMons[actor].statStages[STAT_SPEED];
-        static const u8 stats[4] = {STAT_ATK, STAT_DEF, STAT_SPDEF, STAT_SPATK};
-        for (u32 stat = 0; stat < ARRAY_COUNT(stats); stat++)
-            if (statStage[actor][stat] > gBattleMons[actor].statStages[stats[stat]])
-                raised = TRUE;
-        if (raised)
-            score += sign * PAIR_SETUP_HORIZON * (s32)survival[actor] / 100;
-    }
-    for (enum BattlerId target = 0; target < gBattlersCount; target++)
-    {
-        // Credited to the side that did not receive it.
-        s32 sign = GetBattlerSide(target) == ev->side ? -1 : 1;
-        if (!hp[target])
-            continue;
-        if (newSleepTargets & (1u << target))
-            score += sign * PAIR_SLEEP_HORIZON;
-        if (newParalysisTargets & (1u << target))
-            score += sign * PAIR_STATUS_HORIZON;
-        if (newBurnTargets & (1u << target))
-            score += sign * PAIR_STATUS_HORIZON;
-        if (newTauntTargets & (1u << target))
-            score += sign * PAIR_STATUS_HORIZON;
-        static const u8 stats[4] = {STAT_ATK, STAT_DEF, STAT_SPDEF, STAT_SPATK};
-        for (u32 stat = 0; stat < ARRAY_COUNT(stats); stat++)
-            if (statStage[target][stat] < gBattleMons[target].statStages[stats[stat]])
-                score += sign * PAIR_STAT_DROP_HORIZON
-                    * (s32)(gBattleMons[target].statStages[stats[stat]] - statStage[target][stat]);
-        if (speedStage[target] < gBattleMons[target].statStages[STAT_SPEED])
-            score += sign * PAIR_STAT_DROP_HORIZON
-                * (s32)(gBattleMons[target].statStages[STAT_SPEED] - speedStage[target]);
-    }
+            score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions)) / 100;
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
     {
         enum BattlerId recipient = GetPartnerBattler(actor);
@@ -4715,29 +4578,6 @@ s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask)
     AI_RestoreCandidateState(state);
     AI_FreeCandidateState(state);
     return score;
-}
-
-// Board value of the best attack the outgoing battler is giving up this turn.
-static s32 PairForfeitedAttackValue(enum BattlerId actor)
-{
-    s32 best = 0;
-    if (!IsBattlerAlive(actor))
-        return 0;
-    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
-    {
-        if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
-            continue;
-        for (u32 index = 0; index < MAX_MON_MOVES; index++)
-        {
-            if (IsMoveUnusable(index, gBattleMons[actor].moves[index], gAiLogicData->moveLimitations[actor]))
-                continue;
-            u32 damage = min(gBattleMons[foe].hp, gAiLogicData->simulatedDmg[actor][foe][index].median);
-            u32 accuracy = min(100, gAiLogicData->moveAccuracy[actor][foe][index]);
-            s32 value = (s32)(damage * 180 / max(1, gBattleMons[foe].maxHP) * accuracy / 100);
-            best = max(best, value);
-        }
-    }
-    return min(PAIR_SWITCH_TEMPO_CAP, best);
 }
 
 static bool32 PairCanSwitch(enum BattlerId actor)
@@ -5170,9 +5010,6 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     u32 canMega = (CanMegaEvolve(actor) ? 1u : 0u) | (IsBattlerAlive(partner) && CanMegaEvolve(partner) ? 2u : 0u);
     bool32 deadline[2] = {EC_PerishMustEscape(actor), EC_PerishMustEscape(partner)};
     bool32 earlyPivot[2] = {EC_PerishShouldPivotEarly(actor), EC_PerishShouldPivotEarly(partner)};
-    // A position that needs to change is not paying for the turn it gives up:
-    // the extra costs below are for leaving a healthy, unpressured board.
-    bool32 pressured[2] = {PairNeedsSwitchSearch(actor), PairNeedsSwitchSearch(partner)};
     u32 revealMega = 0;
     for (u32 index = 0; index < 2; index++)
         if ((canMega & (1u << index)) && !deadline[index]
@@ -5312,23 +5149,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                         plannedExit = TRUE;
                 }
                 if (noActionMask && !plannedExit)
-                {
-                    for (u32 index = 0; index < 2; index++)
-                    {
-                        if (slots[index] >= PARTY_SIZE)
-                            continue;
-                        score -= PAIR_SWITCH_COMMITMENT;
-                        if (pressured[index])
-                            continue;
-                        score -= PairForfeitedAttackValue(actors[index]);
-                        // Turn one from full health, with nothing revealed, is
-                        // the worst moment to hand over a free turn for a
-                        // matchup guess.
-                        if (IsBattlersFirstTurn(actors[index])
-                         && gBattleMons[actors[index]].hp == gBattleMons[actors[index]].maxHP)
-                            score -= PAIR_SWITCH_BLIND_COST;
-                    }
-                }
+                    score -= 35;
                 if (forcedExit)
                     score += 200;
                 // An authored singer leaves one turn early while its partner
