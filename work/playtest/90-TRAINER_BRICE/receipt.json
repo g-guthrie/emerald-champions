@@ -1,0 +1,50 @@
+{
+  "play_order": 90,
+  "e_group": "E0105",
+  "trainer": "TRAINER_BRICE",
+  "class": "casual",
+  "location": "Route112",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"EXCADRILL": 34, "LAIRON": 38, "BRONZONG": 35, "CLAYDOL": 34},
+  "cap_window_confirmation": "Offsets 0/4/1/0 resolved to 34/38/35/34 against a level-36 party: cap 36 on Medium, matching the dossier seed line exactly.",
+  "party_manifest": "work/playtest/90-TRAINER_BRICE/party.json",
+  "party_pool_audit": "Block core led by Incineroar + Gyarados for a double Intimidate; Alakazam carried as the special answer the dossier's crack asks for. All six gate <= 36 with source maps passed before Route 112.",
+  "pre_declared_strategy_checks": [
+    "Excadrill applies immediate physical pressure and takes Swords Dance only when it is actually useful",
+    "Rock Head Lairon uses Head Smash without recoil",
+    "Heatproof Bronzong handles defense and special mitigation; Fire is 0.25x into it",
+    "Bronzong's zero Speed IV makes Gyro Ball a real threat to my fast members",
+    "Claydol supplies special coverage from behind Levitate",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/90-TRAINER_BRICE/a1", "seed": 90, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "A four-turn shutout and the most one-sided fight in my block. Double Intimidate put both leads at -2 before anything happened. T1 Fake Out flinched Excadrill and Mega Gyarados's Waterfall, 2x into Ground/Steel, killed it outright through the Focus Sash it never got to use; Lairon's Head Smash did 46 to Gyarados. T2 Waterfall killed Claydol from full the turn it arrived - 2x into Ground/Psychic on a Modest special build with no HP-relative physical bulk - and Incineroar's Knock Off, retargeted onto Lairon, removed the Eviolite; Lairon's second Head Smash missed. T3 Waterfall finished Lairon and Bronzong Protected. T4 Gyarados switched to Crunch, which is 2x into Bronzong's Psychic half and completely sidesteps Heatproof, and Knock Off finished it. My Alakazam, Rillaboom, Weavile and Togekiss never entered and Gyarados never dropped below 79 of 125."}
+  ],
+  "strategy_checks": [
+    {"check": "Excadrill applies immediate physical pressure, Swords Dance only when useful", "result": "PASS on restraint, but it never got to act", "evidence": "Excadrill selected Rock Slide, not Swords Dance, on a board with two healthy attackers - correct, and the same good negative result I recorded for Mike's Graveler and Wide Guard. It was then flinched by Fake Out and killed by Waterfall before the move resolved. The Focus Sash was irrelevant because Waterfall did not need to break it."},
+    {"check": "Rock Head Lairon uses Head Smash without recoil", "result": "PASS", "evidence": "Two Head Smashes, zero recoil taken, which is the whole point of the Rock Head pairing - a 150 BP move with no drawback on a 38-level Eviolite body. The first did 46 to a Mega Gyarados at -2 Attack; the second missed, which is Head Smash's 80 percent accuracy being the real cost instead."},
+    {"check": "Heatproof Bronzong handles defense and special mitigation", "result": "NOT MEANINGFULLY TESTED, and the reason is instructive", "evidence": "I never pointed a Fire move at Bronzong, because Heatproof on a Steel/Psychic makes Fire 0.25x and I wrote that into the manifest before playing. Bronzong got two turns: Protect, then death to Crunch plus Knock Off, both Dark, both 2x into its Psychic half. Heatproof is a strong defensive ability that is completely bypassed by the two Dark attackers this team is most likely to meet; the Mental Herb never mattered either because nothing tried to Taunt or Encore it."},
+    {"check": "Bronzong's zero Speed IV makes Gyro Ball a real threat", "result": "NOT OBSERVED", "evidence": "Bronzong never used Gyro Ball. The two fast members it would have punished, my Alakazam and Weavile, were on the bench precisely because I expected it, and it died in two turns to the two slow physical attackers that Gyro Ball is worst against."},
+    {"check": "Claydol supplies special coverage from behind Levitate", "result": "FAIL in effect, though the choice was right", "evidence": "Claydol chose Earth Power, which is the correct move into an Incineroar, but it was KO'd by a single 2x Waterfall from full on the turn it entered and the attack never resolved. Levitate is worth nothing here: my Mega Gyarados carries Mold Breaker anyway, and none of my six brought a Ground move to the field."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "BRONZONG", "payoff": "REAL. Blocked Incineroar's Knock Off, which is 2x into Bronzong's Psychic half and would additionally have removed the Mental Herb. That is a meaningful denial on the turn Bronzong arrived, and it was not repeated on the following turn, when Bronzong had no partner left and guarding again would have been pure stalling. Correct use and correct restraint."}
+  ],
+  "protect_ledger_note": "One opposing Protect in four turns, with real payoff and no repetition, out of three members that carry the move (Lairon, Bronzong, Claydol). Lairon and Claydol both attacked instead of guarding on boards where they were about to die, which is the right call - guarding would only have delayed them by one turn while their partner took the damage.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No bad opponent decision. Excadrill declining Swords Dance, Lairon committing to Head Smash, Claydol picking Earth Power into a Fire type and Bronzong guarding on arrival are all defensible. This fight was lost on construction, not on play.",
+    "The construction problem is specific and severe: Excadrill (Ground/Steel), Lairon (Steel/Rock) and Claydol (Ground/Psychic) are all 2x into Water, and Bronzong (Steel/Psychic) is 2x into Dark. One Mega Gyarados carries Water and Dark on the same Pokemon and personally killed or set up all four. Three members died to a single Waterfall each, from full HP, at level 34-38.",
+    "Heatproof and Levitate are both abilities that reward a specific attacking answer, and neither mattered: the Fire move stayed home because I read the ability, and the Levitate was moot because I never needed a Ground move. A player who does not read the sets loses nothing here."
+  ],
+  "level_changes": [
+    {"member": "EXCADRILL", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "Brief rule 5: first-attempt win with zero player faints and no member of my party even reaching half HP. Excadrill is one of the two joint-lowest members at offset 0 and is not a Mega or a legend."},
+    {"member": "CLAYDOL", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "The other joint-lowest member. A 4-0 shutout in four turns is the widest margin in my block and justifies both permitted bumps. Lairon (offset 4) and Bronzong (offset 1) are untouched. I record explicitly that two levels will not fix this encounter - see could_this_be_cooler - because the problem is that one Water attacker is 2x into three quarters of the roster."}
+  ],
+  "rerun_status": "NOT RERUN. Opponent levels are compiled into the headless ROM from src/data/trainers.party and this agent may not run make. Pending the main agent's materialization and rebuild.",
+  "could_this_be_cooler": "Yes, and this is the team in my block I would most want changed. The 'volcanic excavation formation' theme is fine and the individual builds are thoughtful - Rock Head plus Head Smash, a zero Speed IV for Gyro Ball, Heatproof on the Steel, Mold Breaker on Excadrill so Earthquake would not have bypassed allied Levitate - but the four of them share a single fatal axis. Excadrill, Lairon and Claydol are all 2x into Water, and my Mega Gyarados killed all three with the same move from full HP without ever being threatened; Bronzong then died to the Dark half of the same Pokemon. The theme does not require this. Route 112 is the Fiery Path approach, and the obvious fix that makes the concept cooler rather than merely sturdier is to make one slot a Fire/Ground or Fire/Rock miner - something like a Coalossal or a Camerupt - which keeps the excavation identity, gives the team a member that is not 2x into Water, and gives Bronzong's Heatproof an actual reason to exist next to a Fire partner. I would keep Lairon exactly as it is; Rock Head Head Smash at level 38 is the only thing here that genuinely hurt.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
