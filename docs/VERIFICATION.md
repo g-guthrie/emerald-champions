@@ -475,6 +475,12 @@ the native record for the other battlers (`source: native`) only when a turn
 resolved; never read a `native` entry as this call's choice. A battler that was
 KOed earlier in the same turn keeps a stale native latch and is omitted.
 
+`status` is decoded field by field, not as a plain bitmask: `STATUS1_SLEEP` is
+the low three bits counting turns remaining and `STATUS1_TOXIC_COUNTER` is bits
+8-11, so both are reported as `sleep:<turns>` and `toxic_counter:<n>` beside the
+single-bit conditions. Decoding either as a flag reports nothing at all for every
+value but a full mask, which is how four landed Spores read as no status.
+
 Two reported reading traps in `pending_decision`. `may_switch` is the engine's
 own `CanBattlerSwitch` for that battler, while `switch_slots` is the list of
 slots that actually exist to switch into; a full field or a two-Pokemon party

@@ -46,6 +46,7 @@ BATTLER_BASE, BATTLER_SIZE = 32, 28
 PARTY_BASE, PARTY_SIZE_W = 144, 12
 FOE_BASE, FOE_SIZE = 216, 3
 LEGAL_BASE, LEGAL_SIZE = 252, 6
+CONSTANTS_SCHEMA = 2  # bump whenever build_constants() gains or renames a table
 MSG_BASE, MSG_SIZE, MSG_COUNT = 276, 14, 14
 PREV_BASE, PREV_SIZE = 472, 4
 MSG_CHARS = (MSG_SIZE - 1) * 4
@@ -72,8 +73,11 @@ DEFINE_GROUPS = {
     'field': ('constants/battle.h', ['STATUS_FIELD_MAGIC_ROOM', 'STATUS_FIELD_TRICK_ROOM',
         'STATUS_FIELD_WONDER_ROOM', 'STATUS_FIELD_MUDSPORT', 'STATUS_FIELD_WATERSPORT',
         'STATUS_FIELD_GRAVITY', 'STATUS_FIELD_ION_DELUGE', 'STATUS_FIELD_FAIRY_LOCK']),
+    # STATUS1_SLEEP and STATUS1_TOXIC_COUNTER are multi-bit counters, not flags;
+    # decode_status owns them. Every other group here is single-bit.
     'status': ('constants/battle.h', ['STATUS1_SLEEP', 'STATUS1_POISON', 'STATUS1_BURN',
-        'STATUS1_FREEZE', 'STATUS1_PARALYSIS', 'STATUS1_TOXIC_POISON', 'STATUS1_FROSTBITE']),
+        'STATUS1_FREEZE', 'STATUS1_PARALYSIS', 'STATUS1_TOXIC_POISON', 'STATUS1_FROSTBITE',
+        'STATUS1_TOXIC_COUNTER']),
     'side': ('constants/battle.h', ['SIDE_STATUS_REFLECT', 'SIDE_STATUS_LIGHTSCREEN',
         'SIDE_STATUS_SAFEGUARD', 'SIDE_STATUS_MIST', 'SIDE_STATUS_TAILWIND',
         'SIDE_STATUS_AURORA_VEIL', 'SIDE_STATUS_LUCKY_CHANT',
@@ -173,6 +177,11 @@ def build_constants():
     tables['limits'] = {'trainers': resolved['TRAINERS_COUNT'], 'partners': resolved['PARTNER_COUNT']}
     tables['trainers'] = parse_trainer_ids()
     tables['charmap'] = parse_charmap()
+    tables['schema'] = CONSTANTS_SCHEMA
+    for group in ('weather', 'field', 'side', 'battletype', 'limitation'):
+        for name, bit in tables[group].items():
+            if bit & (bit - 1):
+                fail(f'{name} is a multi-bit mask; flags_of cannot decode it')
     return tables
 
 
@@ -233,7 +242,30 @@ def decode_text(raw, charmap):
 
 
 def flags_of(value, table):
+    """Single-bit flag names only. A multi-bit mask would need every bit set."""
     return [name for name, bit in table.items() if bit and (value & bit) == bit]
+
+
+def decode_status(value, table):
+    """STATUS1 mixes single-bit conditions with two counters.
+
+    Sleep lives in the low bits as turns remaining, and the toxic counter in
+    bits 8-11, so decoding either as a flag drops it for every value but a full
+    mask - a sleeping battler read as no status at all."""
+    out = []
+    for mask, label in ((table['STATUS1_SLEEP'], 'sleep'),):
+        counter = value & mask
+        if counter:
+            out.append(f'{label}:{counter // (mask & -mask)}')
+    for name in ('STATUS1_POISON', 'STATUS1_BURN', 'STATUS1_FREEZE', 'STATUS1_PARALYSIS',
+                 'STATUS1_TOXIC_POISON', 'STATUS1_FROSTBITE'):
+        if value & table[name]:
+            out.append(name)
+    toxic_mask = table['STATUS1_TOXIC_COUNTER']
+    toxic = value & toxic_mask
+    if toxic:
+        out.append(f'toxic_counter:{toxic // (toxic_mask & -toxic_mask)}')
+    return out
 
 
 # ---------------------------------------------------------------- session I/O
@@ -259,7 +291,7 @@ class Session:
     def constants_table(self):
         if self.constants is None:
             cache = self.dir / 'constants.json'
-            if cache.exists():
+            if cache.exists() and json.loads(cache.read_text()).get('schema') == CONSTANTS_SCHEMA:
                 self.constants = json.loads(cache.read_text())
             else:
                 self.constants = build_constants()
@@ -345,7 +377,7 @@ def decode_state(session, words):
             'level': words[base + 1],
             'hp': words[base + 2],
             'max_hp': words[base + 3],
-            'status': flags_of(words[base + 4], c['status']),
+            'status': decode_status(words[base + 4], c['status']),
             'item': name_of(item_t, words[base + 5], 'ITEM_'),
             'ability': name_of(ability_t, words[base + 6], 'ABILITY_'),
             'party_slot': words[base + 7],
@@ -378,7 +410,7 @@ def decode_state(session, words):
             'level': words[base + 1],
             'hp': words[base + 2],
             'max_hp': words[base + 3],
-            'status': flags_of(words[base + 4], c['status']),
+            'status': decode_status(words[base + 4], c['status']),
             'item': name_of(item_t, words[base + 5], 'ITEM_'),
             'ability': name_of(ability_t, words[base + 6], 'ABILITY_'),
             'moves': [{'index': i, 'move': name_of(move_t, words[base + 7 + i], 'MOVE_'),
