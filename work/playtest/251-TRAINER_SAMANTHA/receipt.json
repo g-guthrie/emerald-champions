@@ -1,0 +1,53 @@
+{
+  "play_order": 251,
+  "e_group": "E0392",
+  "trainer": "TRAINER_SAMANTHA",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Wobbuffet / Reuniclus / Swoobat / Munkidori / Indeedee-M (+1) at L75, Azelf (+2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/251-TRAINER_SAMANTHA/party_gym76.json"],
+  "chronology_note": "Shared gym party (audit in the manifest): Incineroar 36, Urshifu-Single 42, Gengar 30 + Gengarite 60, Hydreigon 68, Weavile 14, Zapdos 30. Gengar is the Ghost the crack line asks for; it was never needed. Nothing from Shoal Cave, the Seafloor Cavern, Sootopolis or later.",
+  "pre_play_strategy_checks": [
+    "Shadow Tag prevents my non-Ghost switches while Wobbuffet is out",
+    "Wobbuffet answers a big hit with Counter or Mirror Coat, or Encores",
+    "Reuniclus Calm Minds behind Magic Guard; Swoobat's Simple makes one Calm Mind +2/+2",
+    "Toxic Chain badly poisons off an attack",
+    "Indeedee Specs and Azelf Nasty Plot are the immediate special pressure",
+    "Protect ledger"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 14,
+      "build": "work/agent-battle-build-7",
+      "run_dir": "work/playtest/251-TRAINER_SAMANTHA/a1",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Gengar / Hydreigon / Weavile / Zapdos)",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "The trap never closed. Turn 1 Fake Out flinched Wobbuffet and a single always-crit Wicked Blow took all 440 of its HP before Counter could resolve; a critical Focus Blast from Reuniclus took Incineroar from full the same turn. Turn 2 Wicked Blow removed Reuniclus as it Calm Minded, and Zapdos's Thunderbolt, redirected off the fainted target, took Swoobat (+2/+2 from one Simple Calm Mind) from full. Wicked Blow removed Specs Indeedee turn 3 while Munkidori's Toxic Chain badly poisoned Zapdos; turn 4 Wicked Blow removed Munkidori but its Sludge Bomb finished the poisoned Zapdos and Azelf's Dazzling Gleam put Urshifu on its sash. Ice Shard plus Sucker Punch ended Azelf on turn 5."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Shadow Tag traps non-Ghosts", "result": "PASS", "evidence": "turn 0 pending_decision: switch_blocked_by ['ability_prevents_escape'] on both my actives while Wobbuffet stood. It lasted one turn."},
+    {"check": "Wobbuffet Counter / Mirror Coat / Encore", "result": "PASS as a choice, never resolved", "evidence": "turn 1 native record: Wobbuffet chose Counter (Incineroar had just Fake Outed it, Urshifu was the physical threat). It was KOed by Wicked Blow (440 from full, Sitrus never triggered) before its -5 priority move came up. The wall the room is built on lasted one action."},
+    {"check": "Reuniclus Calm Mind behind Magic Guard", "result": "PASS", "evidence": "turn 2: 'Reuniclus used Calm Mind' (its second decision; the first was the Focus Blast that OHKOed Incineroar). It then died to Wicked Blow the same turn, so Magic Guard was never load-bearing."},
+    {"check": "Swoobat Simple Calm Mind = +2/+2", "result": "PASS", "evidence": "turn 2 on entry: 'Swoobat's Sp. Atk rose sharply! Sp. Def rose sharply!' - stat_stages spa +2 spd +2 from one Calm Mind. It died to a redirected Thunderbolt before it could Stored Power."},
+    {"check": "Toxic Chain", "result": "PASS", "evidence": "turn 3: Sludge Bomb on Zapdos, 'Zapdos was badly poisoned!' with STATUS1_TOXIC_POISON in the state; the poison plus a second Sludge Bomb killed Zapdos on turn 4."},
+    {"check": "Indeedee / Azelf special pressure", "result": "PASS", "evidence": "turn 1 Reuniclus Focus Blast (crit) OHKOed a 301 HP Incineroar; turn 4 Azelf Dazzling Gleam did 261 to a full Urshifu (sash). Indeedee itself was KOed on its first turn before acting."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "No opponent Protect in five turns. Reuniclus, Munkidori and Azelf all carry Protect and chose to attack or set up instead; each of those choices was defensible on the visible board and two of them cost me a Pokemon.",
+  "ai_defects": [],
+  "observations": ["Wicked Blow's always-crit is doing more than my paper figures throughout this block (440 to a 252 HP / 4 Def Wobbuffet from a 274-Attack Urshifu). Not a defect claim - I cannot read the ROM's crit multiplier from the driver - but the main agent may want to confirm the crit multiplier is 1.5 and not 2.0, because a 2.0 crit would explain every 'harder than it reads' Wicked Blow and Knock Off number in receipts 247-251."],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 with two faints, both to the room's real special damage (a crit Focus Blast, Toxic Chain plus Sludge Bomb). The brief's keep case. I considered +1 on Wobbuffet because the centrepiece died to one hit, but that is a design question (a 58-base-Defense wall versus an always-crit Dark move) and not a level one; +1 would not have saved it.",
+  "concept_on_board": "No, and that is the finding. The room's idea - 'you cannot switch and the thing preventing you cannot be safely attacked' - was on the board for exactly one action. Wobbuffet's whole design assumes the player attacks it once and eats Counter; a 4-Def-EV Wobbuffet against a 2x always-crit STAB move does not get its turn. Simple and Toxic Chain and Magic Guard all showed, but only as things I removed the same turn they appeared.",
+  "cooler": "The concept is the strongest in the gym on paper and the weakest in play, for one reason: Wobbuffet is physically paper. Two notes, not implemented. (1) Wobbuffet's spread is 252 HP / 4 Def / 252 SpD Calm; against this cap window the physical Dark hit is the first thing any player brings, so a 252 HP / 252 Def / 4 SpD Bold spread (Mirror Coat still covers special) or at least a split would let it live to Counter once. (2) The room's payoff bodies (Reuniclus, Swoobat) are in slots 2 and 3 and arrive while the player still has full offence; Wobbuffet leading alone with Azelf (Sash + Nasty Plot) would let Azelf punish the turn the player spends on the wall. Toxic Chain Munkidori was the best body here and the only one that took a Pokemon by design rather than by crit.",
+  "legality_notes": "None found.",
+  "verification_limit": "No level change here; nothing pending re-verification."
+}
