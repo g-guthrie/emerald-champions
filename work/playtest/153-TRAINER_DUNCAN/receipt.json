@@ -1,0 +1,37 @@
+{
+  "play_order": 153, "e_group": "E0197", "trainer": "TRAINER_DUNCAN", "class": "regular",
+  "location": "AbandonedShip_Corridors_B1F", "chapter": "Feather Badge", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - Mega Machamp 48-1-2=45, Gholdengo 48+0-2=46, Dhelmise 48+0-2=46, Decidueye 48+1-2=47, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/153-TRAINER_DUNCAN/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 73, "party": "party-a1.json", "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+     "note": "Gengar + Incineroar + Spiritomb + Togekiss + Alakazam + Weavile. Duncan opened with the best two-card sequence in this block - Machamp's priority Bullet Punch broke Gengar's Focus Sash and Gholdengo's Shadow Ball then killed it through the hole, on the same turn. Mega Machamp's No Guard Drain Punch then one-shot a 194 HP Incineroar. Spiritomb's Fighting immunity plus a Will-O-Wisp was what turned it: a burned Mega Machamp could not break either of my last two bodies, and Togekiss's Flying and Fairy damage cleaned up the three Ghosts."}
+  ],
+  "strategy_checks": [
+    {"check": "Machamp and Choice Scarf Gholdengo apply coordinated physical and special pressure", "result": "PASS - and better than the dossier claims", "evidence": "turn 1, Machamp's Bullet Punch (priority, chosen specifically to break a Focus Sash) landed first and Gholdengo's 2x Shadow Ball then KO'd Gengar through the broken Sash. That is a real two-card combination, not two solos, and it cost me my best answer to the room on turn one."},
+    {"check": "Gholdengo chooses a useful locked attack rather than assuming Make It Rain can be repeated", "result": "PASS", "evidence": "it locked into Shadow Ball, the 2x option on the board, rather than Make It Rain and its Special Attack drop."},
+    {"check": "Good as Gold is not treated as blanket immunity, and blocks every status move", "result": "PASS by deterrence", "evidence": "I withheld Gengar's Taunt and Spiritomb's Will-O-Wisp from Gholdengo for the whole battle because both would simply fail. The ability shaped my play without ever needing to trigger."},
+    {"check": "Trick requires an eligible item exchange and a useful recipient; a blocked Trick is not setup", "result": "NOT EXERCISED", "evidence": "Gholdengo had a guaranteed 2x KO available on turn 1 and correctly took it instead of Tricking. It died that same turn."},
+    {"check": "Mega Machamp's No Guard means perfect accuracy on everything it throws", "result": "PASS", "evidence": "every Machamp attack in the battle connected, and Drain Punch one-shot a full-HP 194 HP Incineroar while healing itself."},
+    {"check": "Dhelmise's Anchor Shot traps the switch-out", "result": "NOT EXERCISED", "evidence": "Dhelmise selected Anchor Shot on turn 4 but was flinched by a Serene Grace Air Slash before it resolved, and died that turn. Decidueye's Spirit Shackle did land twice, so the trapping half of the wreck's identity was at least represented."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Duncan's side used no Protect at all. Dhelmise and Decidueye both carry it and on every board they had a better action. No empty guarding to report.",
+  "ai_defects": [
+    {
+      "id": "P13-D6",
+      "severity": "minor",
+      "turn": 1,
+      "board": "Machamp (holding Machampite, Mega unused) + Gholdengo vs Gengar + Incineroar",
+      "chosen": "Machamp used Bullet Punch without Mega Evolving, and only Mega Evolved on turn 2",
+      "problem": "Mega Evolution is free - it costs no action and applies before the turn resolves - so holding it back for a turn simply gives up a turn of the Mega's stats for nothing. Machamp spent turn 1 in its base form and Mega Evolved on turn 2 instead.",
+      "better": "Mega Evolve on turn 1 alongside the same Bullet Punch. There is no board on which delaying a Mega Evolution by a turn is correct here, since the stone carries no downside and the form change does not reveal information the opponent could not already see from the held item.",
+      "note": "Worth checking against the other Mega owners in this block: Foster's Slowbro, Darrin's Gyarados, Carolina's Gardevoir and Norman's Staraptor all Mega Evolved on their entry turn, so this looks specific to a Mega that starts the battle on the field rather than a general rule."
+    }
+  ],
+  "level_changes": [],
+  "calibration_reasoning": "Won on the first attempt with two player faints. AGENTS.md sets a level-increase review at a first-attempt win with fewer than three faints, so I reviewed it and am recording the justified exception: the brief's own threshold is 'won with 2+ faints or after a real fight - keep', and this was plainly a real fight. Duncan is a regular-class trainer with four members and he removed Gengar and Incineroar - two of my six best answers - inside two turns, one of them through a correctly executed Sash-break combination and one to a No Guard Drain Punch that one-shot a 194 HP body. A regular that costs a fully optimized cap-48 party two premium bodies does not need a level. No change.",
+  "could_this_be_cooler": "Keep, and the dossier's closing judgement deserves a correction. It says 'the honest gap is that four strong solos never combine; this is a very good pile rather than a team.' That is not what happened. Machamp's Bullet Punch into Gholdengo's Shadow Ball is a deliberate, executable Focus Sash break, and the AI found it on turn one unprompted - two cards, one kill, on the exact body that was built to answer the room. The wreck also has a coherent second idea in its two trapping moves, Anchor Shot and Spirit Shackle, which punish exactly the switching a player wants to do against a Choice Scarf Trick user. If anything is worth changing it is smaller than the dossier suggests: Gholdengo's Trick is the one card that never has a good moment, because a Scarf user with a 2x attack available should always attack, and by the time Trick is the right play Gholdengo is usually dead. Swapping it for a fourth attack, or accepting it as a rarely-fired option, is the honest call. No species, ability, item or EV change recommended.",
+  "legality_problems_found": "None. Gholdengo's zero Attack IVs are correctly set for a special attacker, as the dossier states.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}
