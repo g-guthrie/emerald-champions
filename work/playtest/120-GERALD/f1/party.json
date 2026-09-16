@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0144 TRAINER_GERALD (Lavaridge Gym room 2) cap 42 Medium - MIST RERUN f1",
+  "availability_audit": "Chronology: every source map precedes Jagged Pass in book play order (Route 101-104, 111, 116, 117, Petalburg Woods, Granite Cave, Rusturf Tunnel, Seaspray Cave, Mauville Game Corner). Togepi Route102 land g14 -> friendship Togetic -> Shiny Stone Togekiss g24. Squirtle Mauville Game Corner 500 coins g30 -> Wartortle -> Blastoise g36; Blastoisinite stone-window=14, base-window=36, Mega Ring earned from Steven after Brawly. Marill Petalburg City old_rod g14 -> Azumarill g20. Swinub Seaspray_Cave_B1F land g14 -> Piloswine -> Mamoswine known-move g36. Abra GraniteCave_1F g20 -> Kadabra -> Alakazam Linking Cord g20. Drilbur RusturfTunnel land g20 -> Excadrill level g36. No legendaries, mythicals, Ultra Beasts or Paradox species; single Mega slot. Ordinary held items from the free Center held-item catalogue. Cap-42 re-check for this rerun: the window moved 36 -> 42 (FLAG_BADGE04_GET), which is the window the plan targets ('Medium cap40 levels' = 42 + offset - 2). No member was added or changed, so every source above is still a gate<=36 map that precedes Lavaridge in book play order (C02-C22); nothing depends on the Heat Badge, Strength, Surf or any post-Lavaridge area. Gate-42 species that ARE chronology-legal here were considered and deliberately not used: Skarmory (Route113, C21 ash route), Turtonator (JaggedPass, C22/C23) and Drampa (MeteorFalls_1F_1R, C22). The Meteor Falls Surf-gated rooms (1F_2R, B1F_1R, B1F_2R - Altaria, Swablu, Lapras, Salamence, Goodra, Dragonite, Noivern) are NOT legal here: Surf arrives at C27, four chapters after this Gym.",
+  "plan": "Attempts 1 and 2 both lost 6-2 and the same Pokemon decided both: Life Orb Chlorophyll Victreebel. In sun it outruns everything, Solar Beam is a one-turn move at 2x into Water and Ground, and Sludge Bomb is 2x into Grass and Fairy - between them it one-shot a full-HP Mega Blastoise, a full-HP Thick Fat Mamoswine, a full-HP Ludicolo and a full-HP Togekiss across the two attempts. Attempt 2's rain answer failed because Volbeat's Prankster Sunny Day overwrites Drizzle with priority every single turn it is alive. Attempt 3 stops trying to win the weather war and instead answers Victreebel directly: Alakazam's Psychic is 2x into its Poison typing and its Focus Sash guarantees it survives to fire even going second, while Togekiss' Follow Me pulls Victreebel's single-target attacks onto the one body that resists Solar Beam. Tailwind is the backup speed answer if the first exchange goes badly. No new species and no items the earlier attempts did not already have - this is a reordering plus a target-selection plan, not a power increase. MIST RERUN: unchanged six, so the comparison against the mist-less attempt 3 is clean; what changed is the cap (36 -> 42, the party is now level 42) and Gerald's own offsets from the first run (Victreebel 0 -> -1, Volbeat 4 -> 3). Misty Terrain is now authored under the room. It does not touch the sun and it does not touch Solar Beam, so the Victreebel problem is unchanged; what it does do is halve Dragon-type damage against my grounded members, which is exactly why the dossier swapped Mega Charizard X's Dragon Claw for Thunder Punch. Thunder Punch is 2x into Togekiss and Gyarados-shaped bodies, so the mist quietly makes Charizard X more dangerous to this party, not less. Deliberately NOT bringing the hard counter: Cloud Nine Drampa is legal here (Meteor Falls 1F 1R, C22) and would switch the sun off outright, which would make this room meaningless rather than calibrate it. Recorded as a design finding instead.",
+  "party": [
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fast special breaker; Sash survives one priority hit",
+      "availability": "Abra GraniteCave_1F g20; Linking Cord from the Slateport evolution stock, pool g20."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        124,
+        0,
+        132,
+        0
+      ],
+      "role": "redirection and Tailwind",
+      "availability": "Togepi Route102 land g14; friendship evolution; Shiny Stone g24."
+    },
+    {
+      "species": "SPECIES_AZUMARILL",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_AQUA_JET",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Fire-resistant Huge Power attacker with priority and item removal",
+      "availability": "Marill Petalburg City old_rod g14; level20 evolution, pool g20."
+    },
+    {
+      "species": "SPECIES_MAMOSWINE",
+      "moves": [
+        "MOVE_ICE_SHARD",
+        "MOVE_ICICLE_CRASH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Thick Fat Fire sponge with Ice priority and single-target Ground damage",
+      "availability": "Swinub Seaspray_Cave_B1F land g14; Piloswine level evolution; Mamoswine known-move evolution, pool g36."
+    },
+    {
+      "species": "SPECIES_BLASTOISE",
+      "moves": [
+        "MOVE_WATER_PULSE",
+        "MOVE_AURA_SPHERE",
+        "MOVE_DARK_PULSE",
+        "MOVE_ICE_BEAM"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_BLASTOISINITE",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Mega win condition; Mega Launcher pulse coverage behind real bulk",
+      "availability": "Squirtle Mauville Game Corner 500 coins g30; Wartortle and Blastoise level evolutions g36; Blastoisinite stone-window=14, base-window=36."
+    },
+    {
+      "species": "SPECIES_EXCADRILL",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_IRON_HEAD",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SWORDS_DANCE"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Mold Breaker Ground/Steel lane that ignores Levitate, Air Balloon and Sturdy",
+      "availability": "Drilbur RusturfTunnel land g20; Excadrill level evolution, pool g36."
+    }
+  ]
+}

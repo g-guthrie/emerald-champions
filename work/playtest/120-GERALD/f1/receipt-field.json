@@ -1,0 +1,157 @@
+{
+  "play_order": 120,
+  "e_group": "E0144",
+  "trainer": "TRAINER_GERALD",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/120-GERALD/receipt.json (mist-less run at cap 36; left intact)",
+  "cap_note": "Cap moved 36 -> 42, the window the plan targets. Observed levels 43/39/40/40/40/38 = 42 + offset - 2 against the CURRENT offsets (Volbeat 3, Victreebel -1 after the first run's two -1s; Simisear/Scovillain/Pyroar 0, Charizard -2). The dossier prose still quotes the pre-nerf 44/40/40/40/40/38.",
+  "build_note": "Both attempts ran on work/agent-battle-build-3, each against its own pinned ROM/ELF copy. Neither attempt stalled. The coordinator's build-4 (AI Protect-scoring crash fix) arrived mid-attempt-2; every start from E0145 onward uses build-4.",
+  "mist_confirmation": {
+    "checked_at": "turn 0 of both attempts, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "weather_at_turn_0": [
+        "none"
+      ],
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS in both attempts."
+  },
+  "party_manifests": [
+    "work/playtest/120-GERALD/f1/party.json (attempt 1)",
+    "work/playtest/120-GERALD/f1/party-a2.json (attempt 2)"
+  ],
+  "chronology_note": "Both parties are drawn from gate<=36 maps that precede Lavaridge in book play order (C02-C22). Gate-42 species that ARE chronology-legal for this Gym were identified and deliberately not used: Skarmory (Route113, C21), Turtonator (JaggedPass, C22/C23) and Drampa (MeteorFalls_1F_1R, C22). The Meteor Falls Surf-gated rooms (1F_2R and both B1F rooms - Altaria, Swablu, Lapras, Salamence, Goodra, Dragonite, Noivern) are NOT legal: Surf arrives at C27.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 221,
+      "party": "party.json (the mist-less run's attempt-3 six, unchanged)",
+      "outcome": "lost",
+      "turns": 8,
+      "player_faints": 6,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.038,
+      "events": "work/playtest/120-GERALD/f1/attempt-1-events.jsonl",
+      "notes": "Victreebel was NOT the problem this time - the first run's -1 plus Alakazam's Psychic removed it on turn 2, which is exactly the result that -1 was meant to produce. Choice Specs Simisear took over: at -6 Sp.Atk, under sun, with a Prankster Helping Hand from Volbeat, its Overheat one-shot a full-HP Thick Fat Mamoswine (157 HP) on turn 4 and still took 125 off Excadrill at -6 on turn 6. Two of the six faints were my errors: I left Volbeat alive for four turns feeding Helping Hand and Struggle Bug, and on the last turn I sent Mega Blastoise into a board holding Scovillain's Energy Ball and Mega Charizard X's Thunder Punch, both 2x into Water."
+    },
+    {
+      "attempt": 2,
+      "seed": 222,
+      "party": "party-a2.json (Excadrill/Tailwind rebuild, no Mega at all)",
+      "outcome": "won",
+      "turns": 7,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.055,
+      "events": "work/playtest/120-GERALD/f1/attempt-2-events.jsonl",
+      "rebuild_reason": "Three fixes to attempt 1: remove Helping Hand from the fight early, make Ground the win condition (it is 2x into five of the six - Victreebel through its Poison half, Simisear, Scovillain, Pyroar, and Mega Charizard X, which is Fire/Dragon rather than Fire/Flying), and bring no Water-typed body at all, because Energy Ball and Thunder Punch are both 2x into Water and the sun halves Water attacks anyway. Togekiss traded a redirection slot for Tailwind so Excadrill could outrun Chlorophyll Victreebel, Simisear and Pyroar. Mega Blastoise was dropped entirely; attempt 2 used no Mega.",
+      "notes": "Won 6-3 after a genuine fight. Lost Excadrill on turn 2 to a sun Weather Ball, Alakazam on turn 5 and Togekiss on turn 6. Garganacl was the body that held the endgame together: Rock takes Fire at 0.5 and its spread Rock Slide is 2x into both Pyroar and Volbeat."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the room's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Both attempts, turn 0: terrain 'misty', terrain_is_permanent true, field_source.authored_by_trainer_a ['misty_terrain'], from_map false."
+    },
+    {
+      "check": "plan: 'Misty Terrain remains active alongside Sunny Day'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "From the turn Volbeat's Prankster Sunny Day resolved (turn 1 of both attempts) the state read terrain 'misty' and weather ['B_WEATHER_SUN_NORMAL'] simultaneously, and kept reading both every turn afterwards. Neither field displaced the other."
+    },
+    {
+      "check": "Mist and sun are independent and expire independently",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Attempt 1, turn 8: 'The sunlight faded.' - the Heat Rock sun ran out while the terrain still read 'misty' with terrain_is_permanent true. Confirms the brief's framing: the mist has no countdown, the weather does."
+    },
+    {
+      "check": "plan: 'Mega Charizard X uses Thunder Punch instead of Dragon Claw so its Water/Flying coverage is not halved against grounded targets by the mist'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Mega Charizard X selected Thunder Punch three times and a Dragon move zero times. Attempt 1 turn 7 Thunder Punch took 106 off a grounded Assault Vest Azumarill (2x) and turn 9 it helped finish Mega Blastoise (2x); attempt 2 turn 4 it used Thunder Punch into Alakazam. The swap is load-bearing exactly as written: a Dragon Claw into Azumarill would have been 0x on the Fairy half and halved by the mist besides, while Thunder Punch was 2x and decisive. The mist makes this Charizard MORE dangerous to a Water/Flying-leaning party, not less."
+    },
+    {
+      "check": "strategy SUN: Volbeat is the manual Prankster sun conductor, not automatic Drought",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Turn 1 of both attempts: Volbeat used Sunny Day with Prankster priority, before anything else on the board moved, and Heat Rock kept it up for eight turns. Attempt 1 turn 4 it followed with Helping Hand into Simisear rather than re-setting sun it did not need."
+    },
+    {
+      "check": "strategy SETUP / Victreebel Chlorophyll + Solar Beam is the room's pressure",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Attempt 1 turn 2: Victreebel moved before Alakazam under sun and fired a one-turn Solar Beam ('absorbed light' with no charge turn). Attempt 2 turn 2 it used the sun-typed Weather Ball to kill Excadrill (Steel, 2x) instead - the AI picked the right one of its two sun payoffs for the target in front of it."
+    },
+    {
+      "check": "plan: 'Scovillain gains Speed investment for Chlorophyll'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Attempt 2 turns 5-7: Scovillain moved before a 42-level Togekiss and before Azumarill every turn it was out under sun."
+    },
+    {
+      "check": "plan: 'Victreebel gains Weather Ball'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Attempt 2 turn 2: Weather Ball resolved as a Fire attack ('super effective' into Steel/Ground Excadrill) and killed it from 142."
+    },
+    {
+      "check": "The mist's status block on grounded targets",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "Nothing in Gerald's room applies a status condition - no burn move, no powder, no Toxic, and Flame Body is not on this team. The mist's central defensive effect simply never came up in this room, on either side."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "attempt": 1,
+      "turn": 1,
+      "battler": "Victreebel",
+      "payoff": "REAL - blocked Alakazam's Psychic, which is 2x into its Poison half and did OHKO it one turn later from full HP. Bought Volbeat the turn it needed to get the sun up."
+    },
+    {
+      "attempt": 2,
+      "turn": 1,
+      "battler": "Victreebel",
+      "payoff": "REAL but modest - blocked its half of Excadrill's spread Rock Slide (the other half took 65 off Volbeat). Worth roughly 30 HP."
+    },
+    {
+      "attempt": 2,
+      "turn": 3,
+      "battler": "Victreebel",
+      "payoff": "REAL - blocked a 2x Psychic that killed it outright on the following turn."
+    },
+    {
+      "attempt": 2,
+      "turn": 7,
+      "battler": "Pyroar",
+      "payoff": "REAL - blocked Garganacl's spread Rock Slide (2x into Fire/Normal); the same move had taken 72 off it the turn before."
+    }
+  ],
+  "protect_ledger_summary": "Four opposing Protects across two attempts, all four with real payoff and none empty. No consecutive-Protect spam: Victreebel's guards on attempt 2 were separated by a Weather Ball turn. This is the best Protect cadence in the block so far.",
+  "ai_defects": [],
+  "notable_good_ai": [
+    "Attempt 1 turn 4 - the best AI sequence in this block. Simisear was Choice-locked into Overheat and had already fallen to -2 Sp.Atk, i.e. visibly neutered. Volbeat spent its turn on Helping Hand instead of anything else, and the resulting Overheat one-shot a FULL-HP Thick Fat Mamoswine (157 damage) through a Fire resistance. Recognising that a Choice-locked, stat-dropped attacker is still lethal with a 1.5x support multiplier under sun is genuinely strong doubles play.",
+    "Attempt 2 turn 2 - Volbeat, at 84 of 149 HP and facing an obvious double, switched itself out to Simisear, and Victreebel used the same turn to kill Excadrill with a sun-typed Weather Ball. The pivot preserved the sun conductor and the kill was on the one member of my team that was 2x to it.",
+    "Attempt 2 turn 7 - the AI chose Protect on Pyroar and Energy Ball on Scovillain on the same turn, splitting guard and offence correctly rather than double-guarding."
+  ],
+  "ai_reporting_note": "Not an AI defect, a driver reporting artifact worth recording: the per-turn 'damage' map is computed as hp_before minus hp_after per battler slot, so on a turn where the opponent switches, the slot's 'before' HP belongs to the outgoing Pokemon and the 'after' to the incoming one. Attempt 2 turn 2 reported 'damage 34' for slot 1 when Simisear had actually taken 72. Read the messages and the hp_after pair, not the damage field, across a switch turn.",
+  "level_changes": [],
+  "level_change_decision": "KEEP. Brief rule: 'Won with 2+ faints or after a real fight -> keep.' Attempt 1 lost 6-4 and attempt 2 won 6-3 - one loss and one three-faint win is squarely the band the design wants, and it is the band the first run's two -1s (Victreebel 0 -> -1, Volbeat 4 -> 3) were aimed at. Those cuts are demonstrably doing their job: the Pokemon that decided both of the first run's losses was removed on turn 2 of both attempts here. Nothing is added back and nothing further is cut. Cumulative change across both runs stays at -1 for Victreebel and -1 for Volbeat, inside the +/-2 ceiling.",
+  "could_this_be_cooler": "Keep it as it is - this is the strongest-executing room in the block and the one that best earns its concept. The idea the dossier states, 'manual priority sun rather than Flannery's automatic sun/After You', is not just flavour: Volbeat being a Prankster support rather than a Drought body is what makes the room dangerous, because it can spend a turn on Helping Hand and still guarantee the sun, and the attempt-1 Mamoswine kill is the moment that proves it. One genuine design finding rather than a cooler-suggestion: Cloud Nine Drampa is legal at this point in the campaign (Meteor Falls 1F 1R, C22, gate 42) and would switch the sun off outright for the whole battle, which would reduce this room to six Fire types with no engine. I deliberately did not bring it, but a player who does has a hard counter to the entire concept. That is a pool question rather than a Gerald question, and it applies equally to Flannery's Drought room two doors along; it is worth a decision from the team side rather than a level change here.",
+  "authored_set_legality": "No legality problem. Every ability, item and move behaved as authored: Prankster on Volbeat, Chlorophyll on Victreebel and Scovillain, Choice Specs lock on Simisear, Competitive on Pyroar (never triggered - I avoided stat-lowering moves into it), Heat Rock's eight-turn sun, Charizardite X. One documentation nit: the plan text still quotes the pre-nerf 'Medium cap40 levels 44/40/40/40/40/38'; the live offsets now resolve 43/39/40/40/40/38. The prose should be refreshed when the team side next touches this block.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
