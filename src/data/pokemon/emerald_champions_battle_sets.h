@@ -30138,7 +30138,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .evs = {252, 0, 252, 0, 4, 0},
     }},
     {.name = sEmeraldChampionsSetName_2892, .preset = {
-        .moves = {MOVE_DRACO_METEOR, MOVE_TERA_BLAST, MOVE_GRASSY_GLIDE, MOVE_POUNCE},
+        .moves = {MOVE_DRACO_METEOR, MOVE_GRASSY_GLIDE, MOVE_POUNCE, MOVE_NONE},
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .requiredMove = MOVE_NONE,
@@ -38837,7 +38837,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .requiredItem = ITEM_NONE,
         .requiredMove = MOVE_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_TERA_SHIFT,
+        .ability = ABILITY_TERRA,
         .evs = {252, 0, 4, 252, 0, 0},
     }},
     {.name = sEmeraldChampionsSetName_3859, .preset = {
@@ -38846,7 +38846,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .requiredItem = ITEM_NONE,
         .requiredMove = MOVE_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_TERA_SHIFT,
+        .ability = ABILITY_TERRA,
         .evs = {252, 0, 252, 0, 4, 0},
     }},
     {.name = sEmeraldChampionsSetName_3860, .preset = {
@@ -59919,7 +59919,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .evs = {252, 0, 4, 0, 0, 252},
     }},
     {.name = sEmeraldChampionsSetName_6879, .preset = {
-        .moves = {MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_RAPID_SPIN, MOVE_TERA_BLAST},
+        .moves = {MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_RAPID_SPIN, MOVE_NONE},
         .item = ITEM_HEAVY_DUTY_BOOTS,
         .requiredItem = ITEM_NONE,
         .requiredMove = MOVE_NONE,
@@ -64406,7 +64406,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .requiredItem = ITEM_NONE,
         .requiredMove = MOVE_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_TERA_SHIFT,
+        .ability = ABILITY_TERRA,
         .evs = {252, 0, 4, 252, 0, 0},
     }},
     {.name = sEmeraldChampionsSetName_6700, .preset = {

@@ -384,11 +384,6 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
         u32 data = fmon->gigantamaxFactor;
         SetMonData(dst, MON_DATA_GIGANTAMAX_FACTOR, &data);
     }
-    if (fmon->teraType)
-    {
-        u32 data = fmon->teraType;
-        SetMonData(dst, MON_DATA_TERA_TYPE, &data);
-    }
 
 
     SetMonData(dst, MON_DATA_POKEBALL, &ball);

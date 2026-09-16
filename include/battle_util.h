@@ -56,7 +56,6 @@ enum BattleWeather GetBattleWeather(u32 weather);
 bool32 CompareBattleValues(u32 comparison, u32 lhs, u32 rhs);
 bool32 EndOrContinueWeather(void);
 enum DamageCategory GetReflectDamageMoveDamageCategory(enum BattlerId battler, enum Move move);
-bool32 ShouldTeraShellDistortTypeMatchups(struct DamageContext *ctx);
 bool32 IsUnnerveBlocked(enum BattlerId battler, enum Item itemId);
 bool32 IsAffectedByFollowMe(enum BattlerId battlerAtk, enum BattleSide defSide, enum Move move);
 void HandleAction_UseMove(void);
@@ -246,7 +245,7 @@ bool32 AreBattlersOfOppositeGender(enum BattlerId battler1, enum BattlerId battl
 bool32 AreBattlersOfSameGender(enum BattlerId battler1, enum BattlerId battler2);
 u32 CalcSecondaryEffectChance(enum BattlerId battler, enum Ability battlerAbility, const struct AdditionalEffect *additionalEffect);
 bool32 MoveEffectIsGuaranteed(enum BattlerId battler, enum Ability battlerAbility, const struct AdditionalEffect *additionalEffect);
-void GetBattlerTypes(enum BattlerId battler, bool32 ignoreTera, enum Type types[static 3]);
+void GetBattlerTypes(enum BattlerId battler, enum Type types[static 3]);
 bool32 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 void RemoveBattlerType(enum BattlerId battler, enum Type type);
 enum Type GetBattleMoveType(enum Move move);

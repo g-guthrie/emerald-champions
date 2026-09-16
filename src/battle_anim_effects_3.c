@@ -112,8 +112,6 @@ static void AnimTask_OdorSleuthMovementWaitFinish(u8);
 static void MoveOdorSleuthClone(struct Sprite *);
 static void AnimTask_TeeterDanceMovement_Step(u8);
 static void AnimTask_SlackOffSquish_Step(u8);
-static void AnimTask_TeraCrystalShatter(struct Sprite *);
-static void AnimTask_TeraCrystalShatter_Step(struct Sprite *);
 
 const union AnimCmd gScratchAnimCmds[] =
 {
@@ -1168,52 +1166,8 @@ const struct SpriteTemplate gZSymbolSpriteTemplate =
     .callback = AnimSpriteOnMonPos,
 };
 
-const struct SpriteTemplate gTeraCrystalSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_TERA_CRYSTAL,
-    .paletteTag = ANIM_TAG_TERA_CRYSTAL,
-    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
-    .affineAnims = gAffineAnims_LusterPurgeCircle,
-    .callback = AnimSpriteOnMonPos,
-};
 
-const struct SpriteTemplate gTeraCrystalSpreadSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_TERA_SHATTER,
-    .paletteTag = ANIM_TAG_TERA_SHATTER,
-    .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .callback = AnimTask_TeraCrystalShatter,
-};
-
-// See AnimSpriteOnMonPos in battle_anim_mons.c for more specifics
-// Reuses the Mega Symbol affine animation seen in Mega Evolution
-// gBattleAnimArgs 0-3 used
-// 0, 1 used for position
-// 2, 3 as some control variables
-const struct SpriteTemplate gTeraSymbolSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_TERA_SYMBOL,
-    .paletteTag = ANIM_TAG_TERA_SYMBOL,
-    .oam = &gOamData_AffineDouble_ObjBlend_32x32,
-    .affineAnims = gSpriteAffineAnimTable_MegaSymbol,
-    .callback = AnimSpriteOnMonPos,
-};
-
-// Swirls particle in vortex. Used for moves like Fire Spin or Sand Tomb
-// args[0] - initial x offset
-// args[1] - initial y offset
-// args[2] - y increment
-// args[3] - duration
-// args[4] - increments some sin parameter
-// args[5] - fixed sin parameter
-// args[6] - attacker or target
-const struct SpriteTemplate gTeraSmokeSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_SPARKLE_6,
-    .paletteTag = ANIM_TAG_SPARKLE_6,
-    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
-    .callback = AnimParticleInVortex,
-};
+#undef tCounter
 
 const struct SpriteTemplate gPinkPetalVortexTemplate =
 {
@@ -1223,35 +1177,6 @@ const struct SpriteTemplate gPinkPetalVortexTemplate =
     .anims = gSweetScentPetalAnimCmdTable,
     .callback = AnimParticleInVortex
 };
-
-// Task data for AnimTask_TeraCrystalShatter
-#define tCounter    data[0]
-#define tDX         data[6]
-#define tDY         data[7]
-
-static void AnimTask_TeraCrystalShatter(struct Sprite *sprite)
-{
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
-    sprite->oam.tileNum += gBattleAnimArgs[0] * 4;
-
-    sprite->tCounter = 0;
-    sprite->tDX = gBattleAnimArgs[1];
-    sprite->tDY = gBattleAnimArgs[2];
-
-    sprite->callback = AnimTask_TeraCrystalShatter_Step;
-}
-
-static void AnimTask_TeraCrystalShatter_Step(struct Sprite *sprite)
-{
-    sprite->x += sprite->tDX;
-    sprite->y += sprite->tDY;
-
-    if (++sprite->tCounter > 15)
-        DestroyAnimSprite(sprite);
-}
-
-#undef tCounter
 
 void AnimBlackSmoke(struct Sprite *sprite)
 {

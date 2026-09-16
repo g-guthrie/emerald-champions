@@ -43,8 +43,6 @@ const u16 gBattleAnimSpritePal_AlphaSymbol[] = INCGFX_U16("graphics/battle_anims
 const u32 gBattleAnimSpriteGfx_OmegaSymbol[] = INCGFX_U32("graphics/battle_anims/sprites/omega_symbol.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_OmegaSymbol[] = INCGFX_U16("graphics/battle_anims/sprites/omega_symbol.png", ".gbapal");
 
-const u32 gBattleAnimSpriteGfx_TeraSymbol[] = INCGFX_U32("graphics/battle_anims/sprites/tera_symbol.png", ".4bpp.smol");
-const u16 gBattleAnimSpritePal_TeraSymbol[] = INCGFX_U16("graphics/battle_anims/sprites/tera_symbol.png", ".gbapal");
 
 const u32 gBattleAnimSpriteGfx_FlashCannonBall[] = INCGFX_U32("graphics/battle_anims/sprites/flash_cannon_ball.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_FlashCannonBall[] = INCGFX_U16("graphics/battle_anims/sprites/flash_cannon_ball.png", ".gbapal");
@@ -61,11 +59,7 @@ const u16 gBattleAnimSpritePal_QuickGuard[] = INCGFX_U16("graphics/battle_anims/
 const u32 gBattleAnimSpriteGfx_AlphaStone[] = INCGFX_U32("graphics/battle_anims/sprites/alpha_stone.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_AlphaStone[] = INCGFX_U16("graphics/battle_anims/sprites/alpha_stone.png", ".gbapal");
 
-const u32 gBattleAnimSpriteGfx_TeraCrystal[] = INCGFX_U32("graphics/battle_anims/sprites/tera_crystal.png", ".4bpp.smol");
-const u16 gBattleAnimSpritePal_TeraCrystal[] = INCGFX_U16("graphics/battle_anims/sprites/tera_crystal.png", ".gbapal");
 
-const u32 gBattleAnimSpriteGfx_TeraShatter[] = INCGFX_U32("graphics/battle_anims/sprites/tera_shatter.png", ".4bpp.smol");
-const u16 gBattleAnimSpritePal_TeraShatter[] = INCGFX_U16("graphics/battle_anims/sprites/tera_shatter.png", ".gbapal");
 
 const u32 gBattleAnimSpriteGfx_Anchor[] = INCGFX_U32("graphics/battle_anims/sprites/anchor.png", ".4bpp.smol");
 
@@ -1314,8 +1308,6 @@ const u16 gBattleAnimSpritePal_Meteor[] = INCGFX_U16("graphics/battle_anims/spri
 const u32 gBattleAnimSpriteGfx_FlatRock[] = INCGFX_U32("graphics/battle_anims/sprites/flat_rock.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_FlatRock[] = INCGFX_U16("graphics/battle_anims/sprites/flat_rock.png", ".gbapal");
 
-const u32 gBattleAnimSpriteGfx_TeraStarstormBeam[] = INCGFX_U32("graphics/battle_anims/sprites/starstorm_beam.png", ".4bpp.smol");
-const u16 gBattleAnimSpritePal_TeraStarstormBeam[] = INCGFX_U16("graphics/battle_anims/sprites/starstorm_beam.png", ".gbapal");
 
 const u32 gBattleAnimSpriteGfx_SaltParticle[] = INCGFX_U32("graphics/battle_anims/sprites/salt_particle.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_SaltParticle[] = INCGFX_U16("graphics/battle_anims/sprites/salt_particle.png", ".gbapal");

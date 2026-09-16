@@ -68,19 +68,6 @@ SINGLE_BATTLE_TEST("Changing forms doesn't overwrite set stats (not HP)")
     }
 }
 
-SINGLE_BATTLE_TEST("Changing forms doesn't overwrite set stats (HP)")
-{
-    GIVEN {
-        PLAYER(SPECIES_TERAPAGOS) { HP(5); MaxHP(10); TeraType(TYPE_STELLAR); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_CELEBRATE); }
-    } THEN {
-        EXPECT_EQ(player->hp, 5);
-        EXPECT_EQ(player->maxHP, 10);
-    }
-}
-
 MULTI_BATTLE_TEST("Multi Battle Tests register partner's status1")
 {
     GIVEN {

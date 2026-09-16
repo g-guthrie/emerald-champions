@@ -126,9 +126,6 @@ def prepare_output(all_learnables: dict[str, set[str]], tms: list[str], tutors: 
 
 
         repo_species_teachables = part1 + part2
-        if species_upper == "TERAPAGOS":
-             repo_species_teachables = filter(lambda m: m != "MOVE_TERA_BLAST", repo_species_teachables)
-
         repo_species_teachables = list(dict.fromkeys(repo_species_teachables))
         new += "\n".join([
             f"    {joinpat.join(chain(repo_species_teachables, ('MOVE_UNAVAILABLE',)))},",

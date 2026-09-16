@@ -80,7 +80,6 @@ static const struct SpriteTemplate sUnusedSpinningFistSpriteTemplate =
 };
 
 // Previously an unused function named sAnim_CirclingElectricShock
-// Now used for Tera Blast Electric
 static const union AnimCmd sAnim_CirclingElectricShock[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -93,7 +92,6 @@ static const union AnimCmd sAnim_CirclingElectricShock[] =
 };
 
 // Previously an unused function named sAnims_UnusedCirclingShock
-// Now used for Tera Blast Electric
 const union AnimCmd *const sAnims_CirclingElectricShock[] =
 {
     sAnim_CirclingElectricShock,

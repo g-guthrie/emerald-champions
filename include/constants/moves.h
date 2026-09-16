@@ -832,7 +832,7 @@ enum __attribute__((packed)) Move
     MOVES_COUNT_GEN8,
 
     // Gen 9
-    MOVE_TERA_BLAST = MOVES_COUNT_GEN8,
+    MOVE_779 = MOVES_COUNT_GEN8,
     MOVE_SILK_TRAP = 780,
     MOVE_AXE_KICK = 781,
     MOVE_LAST_RESPECTS = 782,
@@ -889,7 +889,7 @@ enum __attribute__((packed)) Move
     MOVE_IVY_CUDGEL = 832,
     // The Indigo Disk Moves
     MOVE_ELECTRO_SHOT = 833,
-    MOVE_TERA_STARSTORM = 834,
+    MOVE_834 = 834,
     MOVE_FICKLE_BEAM = 835,
     MOVE_BURNING_BULWARK = 836,
     MOVE_THUNDERCLAP = 837,

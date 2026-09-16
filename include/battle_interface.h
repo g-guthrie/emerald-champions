@@ -90,7 +90,6 @@ enum
 #define TAG_GIMMICK_TRIGGER_PAL         0xD777
 #define TAG_MEGA_INDICATOR_PAL          0xD778
 #define TAG_MISC_INDICATOR_PAL          0xD779 // Alpha, Omega, and Dynamax indicators use the same palette as each of them only uses 4 different colors.
-#define TAG_TERA_INDICATOR_PAL          0xD77A
 
 enum
 {

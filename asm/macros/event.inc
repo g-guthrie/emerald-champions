@@ -1089,7 +1089,7 @@
 
 	@ Gives the player a Pokémon of the specified species and level, and allows to customize extra parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
-	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, teraType, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
+	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
 	callnative ScrCmd_createmon, requests_effects=1
 	.byte 0
 	.byte PARTY_SIZE @ assign to first empty slot
@@ -1119,7 +1119,6 @@
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
 	.ifnb \shinyMode; .set givemon_flags, givemon_flags | (1 << 21); .endif
 	.ifnb \gmaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
-	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.ifnb \dmaxLevel; .set givemon_flags, givemon_flags | (1 << 24); .endif
 	.ifnb \isEgg; .set givemon_flags, givemon_flags | (1 << 25); .endif
 	.if \ignoreTotalEvCheck; .set givemon_flags, givemon_flags | (1 << 26); .endif
@@ -1147,14 +1146,13 @@
 	.ifnb \move4; .2byte \move4; .endif
 	.ifnb \shinyMode; .2byte \shinyMode; .endif
 	.ifnb \gmaxFactor; .2byte \gmaxFactor; .endif
-	.ifnb \teraType; .2byte \teraType; .endif
 	.ifnb \dmaxLevel; .2byte \dmaxLevel; .endif
 	.ifnb \isEgg; .2byte \isEgg; .endif
 	.endm
 
 	@ creates a mon for a given party and slot
 	@ otherwise
-	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, teraType, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
+	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
 	callnative ScrCmd_createmon, requests_effects=1
 	.byte \side	 @ 0 - player, 1 - opponent
 	.byte \slot	 @ 0-5
@@ -1184,7 +1182,6 @@
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
 	.ifnb \shinyMode; .set givemon_flags, givemon_flags | (1 << 21); .endif
 	.ifnb \gmaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
-	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.ifnb \dmaxLevel; .set givemon_flags, givemon_flags | (1 << 24); .endif
 	.ifnb \isEgg; .set givemon_flags, givemon_flags | (1 << 25); .endif
 	.if \ignoreTotalEvCheck; .set givemon_flags, givemon_flags | (1 << 26); .endif
@@ -1212,7 +1209,6 @@
 	.ifnb \move4; .2byte \move4; .endif
 	.ifnb \shinyMode; .2byte \shinyMode; .endif
 	.ifnb \gmaxFactor; .2byte \gmaxFactor; .endif
-	.ifnb \teraType; .2byte \teraType; .endif
 	.ifnb \dmaxLevel; .2byte \dmaxLevel; .endif
 	.ifnb \isEgg; .2byte \isEgg; .endif
 	.endm
@@ -2385,18 +2381,6 @@
 	.2byte \slot
 	.endm
 
-	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
-	.macro checkteratype slot:req
-	callnative CheckTeraType, requests_effects=1
-	.2byte \slot
-	.endm
-
-	@ Sets the Pokémon in \slot's Tera Type
-	.macro setteratype type:req, slot:req
-	callnative SetTeraType, requests_effects=1
-	.byte \type
-	.2byte \slot
-	.endm
 
 	@ Saves species and forms of Daycare Pokémon to specific vars. Saves the amount of Daycare mon to VAR_RESULT.
 	.macro getdaycaregfx varSpecies1:req varSpecies2:req varForm1:req varForm2:req

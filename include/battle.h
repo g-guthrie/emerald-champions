@@ -22,7 +22,6 @@
 #include "main.h"
 #include "battle_debug.h"
 #include "battle_dynamax.h"
-#include "battle_terastal.h"
 #include "battle_gimmick.h"
 #include "config_changes.h"
 #include "item.h"
@@ -135,7 +134,6 @@ struct SpecialStatus
     // End of byte
     u8 parentalBondState:2;
     u8 multiHitOn:1;
-    u8 teraShellAbilityDone:1;
     u8 backUpTarget:3;
     u8 padding1:1;
     // End of byte
@@ -839,24 +837,23 @@ static inline bool32 IsBattleMoveStatus(enum Move move)
 /* Checks if 'battler' is any of the types.
  * Passing multiple types is more efficient than calling this multiple
  * times with one type because it shares the 'GetBattlerTypes' result. */
-#define _IS_BATTLER_ANY_TYPE(battler, ignoreTera, ...)                           \
+#define IS_BATTLER_ANY_TYPE(battler, ...)                                        \
     ({                                                                           \
         enum Type types[3];                                                      \
-        GetBattlerTypes(battler, ignoreTera, types);                             \
+        GetBattlerTypes(battler, types);                                          \
         RECURSIVELY(R_FOR_EACH(_IS_BATTLER_ANY_TYPE_HELPER, __VA_ARGS__)) FALSE; \
     })
 
 #define _IS_BATTLER_ANY_TYPE_HELPER(type) (types[0] == type) || (types[1] == type) || (types[2] == type) ||
 
-#define IS_BATTLER_ANY_TYPE(battler, ...) _IS_BATTLER_ANY_TYPE(battler, FALSE, __VA_ARGS__)
 #define IS_BATTLER_OF_TYPE IS_BATTLER_ANY_TYPE
-#define IS_BATTLER_ANY_BASE_TYPE(battler, ...) _IS_BATTLER_ANY_TYPE(battler, TRUE, __VA_ARGS__)
-#define IS_BATTLER_OF_BASE_TYPE IS_BATTLER_ANY_BASE_TYPE
+#define IS_BATTLER_ANY_BASE_TYPE IS_BATTLER_ANY_TYPE
+#define IS_BATTLER_OF_BASE_TYPE IS_BATTLER_ANY_TYPE
 
 #define IS_BATTLER_TYPELESS(battlerId)                                                    \
     ({                                                                                    \
         enum Type types[3];                                                               \
-        GetBattlerTypes(battlerId, FALSE, types);                                         \
+        GetBattlerTypes(battlerId, types);                                         \
         types[0] == TYPE_MYSTERY && types[1] == TYPE_MYSTERY && types[2] == TYPE_MYSTERY; \
     })
 

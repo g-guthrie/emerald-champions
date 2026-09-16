@@ -20543,26 +20543,19 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_TakeHeart,
     },
 
-    [MOVE_TERA_BLAST] =
+    [MOVE_779] =
     {
-        .name = COMPOUND_STRING("Tera Blast"),
-        .description = COMPOUND_STRING(
-            "If the user's Terastallized,\n"
-            "it hits with its Tera type."),
-        .effect = EFFECT_TERA_BLAST,
-        .power = 80,
+        .name = COMPOUND_STRING("-------"),
+        .description = COMPOUND_STRING(""),
+        .effect = EFFECT_PLACEHOLDER,
+        .power = 0,
         .type = TYPE_NORMAL,
-        .accuracy = 100,
-        .pp = 10,
+        .accuracy = 0,
+        .pp = 0,
         .target = TARGET_SELECTED,
         .priority = 0,
-        .category = DAMAGE_CATEGORY_SPECIAL,
-        .forcePressure = TRUE,
-        .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_TERA_BLAST,
-            .self = TRUE,
-        }),
-        .battleAnimScript = gBattleAnimMove_TeraBlast,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_Splash,
     },
 
     [MOVE_SILK_TRAP] =
@@ -21815,25 +21808,19 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_ElectroShot,
     },
 
-    [MOVE_TERA_STARSTORM] =
+    [MOVE_834] =
     {
-        .name = COMPOUND_STRING("Tera Starstorm"),
-        .description = COMPOUND_STRING(
-            "In Terapagos's Stellar\n"
-            "Form, it hits all foes."),
-        .effect = EFFECT_TERA_STARSTORM,
-        .power = 120,
+        .name = COMPOUND_STRING("-------"),
+        .description = COMPOUND_STRING(""),
+        .effect = EFFECT_PLACEHOLDER,
+        .power = 0,
         .type = TYPE_NORMAL,
-        .accuracy = 100,
-        .pp = 5,
+        .accuracy = 0,
+        .pp = 0,
         .target = TARGET_SELECTED,
         .priority = 0,
-        .category = DAMAGE_CATEGORY_SPECIAL,
-        .assistBanned = TRUE,
-        .copycatBanned = TRUE,
-        .mimicBanned = TRUE,
-        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
-        .battleAnimScript = gBattleAnimMove_TeraStarstorm,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .battleAnimScript = gBattleAnimMove_Splash,
     },
 
     [MOVE_FICKLE_BEAM] =

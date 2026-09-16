@@ -15205,20 +15205,14 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_ScrollOfWaters,
     },
 
-    [ITEM_TERA_ORB] =
+    [ITEM_772] =
     {
-        .name = ITEM_NAME("Tera Orb"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "When charged, it\n"
-            "can cause Pokémon\n"
-            "to Terastallize."),
-        .importance = 1,
-        .pocket = POCKET_KEY_ITEMS,
+        .description = COMPOUND_STRING(""),
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraOrb,
-        .iconPalette = gItemIconPalette_TeraOrb,
     },
 
     [ITEM_TINY_BAMBOO_SHOOT] =
@@ -15238,292 +15232,184 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_TinyBambooShoot,
     },
 
-    [ITEM_BUG_TERA_SHARD] =
+    [ITEM_774] =
     {
-        .name = ITEM_NAME("Bug Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_BugTeraShard,
     },
 
-    [ITEM_DARK_TERA_SHARD] =
+    [ITEM_775] =
     {
-        .name = ITEM_NAME("Dark Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_DarkTeraShard,
     },
 
-    [ITEM_DRAGON_TERA_SHARD] =
+    [ITEM_776] =
     {
-        .name = ITEM_NAME("Dragon Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_DragonTeraShard,
     },
 
-    [ITEM_ELECTRIC_TERA_SHARD] =
+    [ITEM_777] =
     {
-        .name = ITEM_NAME("Electric Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_ElectricTeraShard,
     },
 
-    [ITEM_FAIRY_TERA_SHARD] =
+    [ITEM_778] =
     {
-        .name = ITEM_NAME("Fairy Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_FairyTeraShard,
     },
 
-    [ITEM_FIGHTING_TERA_SHARD] =
+    [ITEM_779] =
     {
-        .name = ITEM_NAME("Fighting Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_FightingTeraShard,
     },
 
-    [ITEM_FIRE_TERA_SHARD] =
+    [ITEM_780] =
     {
-        .name = ITEM_NAME("Fire Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_FireTeraShard,
     },
 
-    [ITEM_FLYING_TERA_SHARD] =
+    [ITEM_781] =
     {
-        .name = ITEM_NAME("Flying Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_FlyingTeraShard,
     },
 
-    [ITEM_GHOST_TERA_SHARD] =
+    [ITEM_782] =
     {
-        .name = ITEM_NAME("Ghost Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_GhostTeraShard,
     },
 
-    [ITEM_GRASS_TERA_SHARD] =
+    [ITEM_783] =
     {
-        .name = ITEM_NAME("Grass Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_GrassTeraShard,
     },
 
-    [ITEM_GROUND_TERA_SHARD] =
+    [ITEM_784] =
     {
-        .name = ITEM_NAME("Ground Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_GroundTeraShard,
     },
 
-    [ITEM_ICE_TERA_SHARD] =
+    [ITEM_785] =
     {
-        .name = ITEM_NAME("Ice Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_IceTeraShard,
     },
 
-    [ITEM_NORMAL_TERA_SHARD] =
+    [ITEM_786] =
     {
-        .name = ITEM_NAME("Normal Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_NormalTeraShard,
     },
 
-    [ITEM_POISON_TERA_SHARD] =
+    [ITEM_787] =
     {
-        .name = ITEM_NAME("Poison Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_PoisonTeraShard,
     },
 
-    [ITEM_PSYCHIC_TERA_SHARD] =
+    [ITEM_788] =
     {
-        .name = ITEM_NAME("Psychic Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_PsychicTeraShard,
     },
 
-    [ITEM_ROCK_TERA_SHARD] =
+    [ITEM_789] =
     {
-        .name = ITEM_NAME("Rock Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_RockTeraShard,
     },
 
-    [ITEM_STEEL_TERA_SHARD] =
+    [ITEM_790] =
     {
-        .name = ITEM_NAME("Steel Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_SteelTeraShard,
     },
 
-    [ITEM_WATER_TERA_SHARD] =
+    [ITEM_791] =
     {
-        .name = ITEM_NAME("Water Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_TeraShard,
-        .iconPalette = gItemIconPalette_WaterTeraShard,
     },
 
     [ITEM_ADAMANT_CRYSTAL] =
@@ -15922,9 +15808,9 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING(
-            "Increases the\n"
-            "number of Tera\n"
-            "Shards from raids."),
+            "A charm said to\n"
+            "glimmer with a\n"
+            "faint light."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -15949,20 +15835,14 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_MetalAlloy,
     },
 
-    [ITEM_STELLAR_TERA_SHARD] =
+    [ITEM_815] =
     {
-        .name = ITEM_NAME("Stellar Tera Shard"),
+        .name = ITEM_NAME("-------"),
         .price = 0,
-        .description = COMPOUND_STRING(
-            "Shards that may\n"
-            "form when a Tera\n"
-            "Pokémon falls."),
+        .description = COMPOUND_STRING(""),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_TERA_SHARD,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .iconPic = gItemIcon_StellarTeraShard,
-        .iconPalette = gItemIconPalette_StellarTeraShard,
     },
 
     [ITEM_JUBILIFE_MUFFIN] =

@@ -27311,25 +27311,9 @@ const u32 gObjectEventPic_Substitute[] = INCGFX_COMP("graphics/pokemon/question_
     const u16 gMonShinyPalette_OgerponCornerstone[] = INCGFX_U16("graphics/pokemon/ogerpon/cornerstone/shiny.pal", ".gbapal");
     const u8 gMonIcon_OgerponCornerstone[] = INCGFX_U8("graphics/pokemon/ogerpon/cornerstone/icon.png", ".4bpp");
 
-    const u32 gMonFrontPic_OgerponTealTera[] = INCGFX_U32("graphics/pokemon/ogerpon/teal_tera/front.png", ".4bpp.smol");
-    const u16 gMonPalette_OgerponTealTera[] = INCGFX_U16("graphics/pokemon/ogerpon/teal_tera/normal.pal", ".gbapal");
-    const u32 gMonBackPic_OgerponTealTera[] = INCGFX_U32("graphics/pokemon/ogerpon/teal_tera/back.png", ".4bpp.smol");
-    const u16 gMonShinyPalette_OgerponTealTera[] = INCGFX_U16("graphics/pokemon/ogerpon/teal_tera/shiny.pal", ".gbapal");
 
-    const u32 gMonFrontPic_OgerponWellspringTera[] = INCGFX_U32("graphics/pokemon/ogerpon/wellspring_tera/front.png", ".4bpp.smol");
-    const u16 gMonPalette_OgerponWellspringTera[] = INCGFX_U16("graphics/pokemon/ogerpon/wellspring_tera/normal.pal", ".gbapal");
-    const u32 gMonBackPic_OgerponWellspringTera[] = INCGFX_U32("graphics/pokemon/ogerpon/wellspring_tera/back.png", ".4bpp.smol");
-    const u16 gMonShinyPalette_OgerponWellspringTera[] = INCGFX_U16("graphics/pokemon/ogerpon/wellspring_tera/shiny.pal", ".gbapal");
 
-    const u32 gMonFrontPic_OgerponHearthflameTera[] = INCGFX_U32("graphics/pokemon/ogerpon/hearthflame_tera/front.png", ".4bpp.smol");
-    const u16 gMonPalette_OgerponHearthflameTera[] = INCGFX_U16("graphics/pokemon/ogerpon/hearthflame_tera/normal.pal", ".gbapal");
-    const u32 gMonBackPic_OgerponHearthflameTera[] = INCGFX_U32("graphics/pokemon/ogerpon/hearthflame_tera/back.png", ".4bpp.smol");
-    const u16 gMonShinyPalette_OgerponHearthflameTera[] = INCGFX_U16("graphics/pokemon/ogerpon/hearthflame_tera/shiny.pal", ".gbapal");
 
-    const u32 gMonFrontPic_OgerponCornerstoneTera[] = INCGFX_U32("graphics/pokemon/ogerpon/cornerstone_tera/front.png", ".4bpp.smol");
-    const u16 gMonPalette_OgerponCornerstoneTera[] = INCGFX_U16("graphics/pokemon/ogerpon/cornerstone_tera/normal.pal", ".gbapal");
-    const u32 gMonBackPic_OgerponCornerstoneTera[] = INCGFX_U32("graphics/pokemon/ogerpon/cornerstone_tera/back.png", ".4bpp.smol");
-    const u16 gMonShinyPalette_OgerponCornerstoneTera[] = INCGFX_U16("graphics/pokemon/ogerpon/cornerstone_tera/shiny.pal", ".gbapal");
 
 #if OW_POKEMON_OBJECT_EVENTS
     const u32 gObjectEventPic_OgerponTeal[] = INCGFX_COMP("graphics/pokemon/ogerpon/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
@@ -27345,18 +27329,6 @@ const u32 gObjectEventPic_Substitute[] = INCGFX_COMP("graphics/pokemon/question_
     const u16 gOverworldPalette_OgerponTeal[] = INCGFX_U16("graphics/pokemon/ogerpon/overworld_normal.pal", ".gbapal");
     const u16 gShinyOverworldPalette_OgerponTeal[] = INCGFX_U16("graphics/pokemon/ogerpon/overworld_shiny.pal", ".gbapal");
 
-    const u32 gObjectEventPic_OgerponTealTera[] = INCGFX_COMP("graphics/pokemon/ogerpon/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
-    const u32 gObjectEventPic_OgerponWellspringTera[] = INCGFX_COMP("graphics/pokemon/ogerpon/wellspring/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
-    const u32 gObjectEventPic_OgerponHearthflameTera[] = INCGFX_COMP("graphics/pokemon/ogerpon/hearthflame/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
-    const u32 gObjectEventPic_OgerponCornerstoneTera[] = INCGFX_COMP("graphics/pokemon/ogerpon/cornerstone/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
-    const u16 gOverworldPalette_OgerponWellspringTera[] = INCGFX_U16("graphics/pokemon/ogerpon/wellspring/overworld_normal.pal", ".gbapal");
-    const u16 gShinyOverworldPalette_OgerponWellspringTera[] = INCGFX_U16("graphics/pokemon/ogerpon/wellspring/overworld_shiny.pal", ".gbapal");
-    const u16 gOverworldPalette_OgerponHearthflameTera[] = INCGFX_U16("graphics/pokemon/ogerpon/hearthflame/overworld_normal.pal", ".gbapal");
-    const u16 gShinyOverworldPalette_OgerponHearthflameTera[] = INCGFX_U16("graphics/pokemon/ogerpon/hearthflame/overworld_shiny.pal", ".gbapal");
-    const u16 gOverworldPalette_OgerponCornerstoneTera[] = INCGFX_U16("graphics/pokemon/ogerpon/cornerstone/overworld_normal.pal", ".gbapal");
-    const u16 gShinyOverworldPalette_OgerponCornerstoneTera[] = INCGFX_U16("graphics/pokemon/ogerpon/cornerstone/overworld_shiny.pal", ".gbapal");
-    const u16 gOverworldPalette_OgerponTealTera[] = INCGFX_U16("graphics/pokemon/ogerpon/overworld_normal.pal", ".gbapal");
-    const u16 gShinyOverworldPalette_OgerponTealTera[] = INCGFX_U16("graphics/pokemon/ogerpon/overworld_shiny.pal", ".gbapal");
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_FAMILY_OGERPON
 
@@ -27438,46 +27410,38 @@ const u32 gObjectEventPic_Substitute[] = INCGFX_COMP("graphics/pokemon/question_
     const u32 gMonBackPic_TerapagosNormal[] = INCGFX_U32("graphics/pokemon/terapagos/back.png", ".4bpp.smol");
     const u16 gMonShinyPalette_TerapagosNormal[] = INCGFX_U16("graphics/pokemon/terapagos/shiny.pal", ".gbapal");
     const u8 gMonIcon_TerapagosNormal[] = INCGFX_U8("graphics/pokemon/terapagos/icon.png", ".4bpp");
+
+    const u32 gMonFrontPic_TerapagosAwakened[] = INCGFX_U32("graphics/pokemon/terapagos/awakened/front.png", ".4bpp.smol");
+    const u16 gMonPalette_TerapagosAwakened[] = INCGFX_U16("graphics/pokemon/terapagos/awakened/normal.pal", ".gbapal");
+    const u32 gMonBackPic_TerapagosAwakened[] = INCGFX_U32("graphics/pokemon/terapagos/awakened/back.png", ".4bpp.smol");
+    const u16 gMonShinyPalette_TerapagosAwakened[] = INCGFX_U16("graphics/pokemon/terapagos/awakened/shiny.pal", ".gbapal");
+    const u8 gMonIcon_TerapagosAwakened[] = INCGFX_U8("graphics/pokemon/terapagos/awakened/icon.png", ".4bpp");
 #if P_FOOTPRINTS
     const u8 gMonFootprint_TerapagosNormal[] = INCGFX_U8("graphics/pokemon/terapagos/footprint.png", ".1bpp");
+    const u8 gMonFootprint_TerapagosAwakened[] = INCGFX_U8("graphics/pokemon/terapagos/awakened/footprint.png", ".1bpp");
 #endif //P_FOOTPRINTS
 #if OW_POKEMON_OBJECT_EVENTS
     const u32 gObjectEventPic_TerapagosNormal[] = INCGFX_COMP("graphics/pokemon/terapagos/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
+    const u32 gObjectEventPic_TerapagosAwakened[] = INCGFX_COMP("graphics/pokemon/terapagos/awakened/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
     const u16 gOverworldPalette_TerapagosNormal[] = INCGFX_U16("graphics/pokemon/terapagos/overworld_normal.pal", ".gbapal");
     const u16 gShinyOverworldPalette_TerapagosNormal[] = INCGFX_U16("graphics/pokemon/terapagos/overworld_shiny.pal", ".gbapal");
+    const u16 gOverworldPalette_TerapagosAwakened[] = INCGFX_U16("graphics/pokemon/terapagos/awakened/overworld_normal.pal", ".gbapal");
+    const u16 gShinyOverworldPalette_TerapagosAwakened[] = INCGFX_U16("graphics/pokemon/terapagos/awakened/overworld_shiny.pal", ".gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
 
-    const u32 gMonFrontPic_TerapagosTerastal[] = INCGFX_U32("graphics/pokemon/terapagos/terastal/front.png", ".4bpp.smol");
-    const u16 gMonPalette_TerapagosTerastal[] = INCGFX_U16("graphics/pokemon/terapagos/terastal/normal.pal", ".gbapal");
-    const u32 gMonBackPic_TerapagosTerastal[] = INCGFX_U32("graphics/pokemon/terapagos/terastal/back.png", ".4bpp.smol");
-    const u16 gMonShinyPalette_TerapagosTerastal[] = INCGFX_U16("graphics/pokemon/terapagos/terastal/shiny.pal", ".gbapal");
-    const u8 gMonIcon_TerapagosTerastal[] = INCGFX_U8("graphics/pokemon/terapagos/terastal/icon.png", ".4bpp");
 #if P_FOOTPRINTS
-    const u8 gMonFootprint_TerapagosTerastal[] = INCGFX_U8("graphics/pokemon/terapagos/terastal/footprint.png", ".1bpp");
 #endif //P_FOOTPRINTS
 #if OW_POKEMON_OBJECT_EVENTS
-    const u32 gObjectEventPic_TerapagosTerastal[] = INCGFX_COMP("graphics/pokemon/terapagos/terastal/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
-    const u16 gOverworldPalette_TerapagosTerastal[] = INCGFX_U16("graphics/pokemon/terapagos/terastal/overworld_normal.pal", ".gbapal");
-    const u16 gShinyOverworldPalette_TerapagosTerastal[] = INCGFX_U16("graphics/pokemon/terapagos/terastal/overworld_shiny.pal", ".gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
 
-    const u32 gMonFrontPic_TerapagosStellar[] = INCGFX_U32("graphics/pokemon/terapagos/stellar/front.png", ".4bpp.smol");
-    const u16 gMonPalette_TerapagosStellar[] = INCGFX_U16("graphics/pokemon/terapagos/stellar/normal.pal", ".gbapal");
-    const u32 gMonBackPic_TerapagosStellar[] = INCGFX_U32("graphics/pokemon/terapagos/stellar/back.png", ".4bpp.smol");
-    const u16 gMonShinyPalette_TerapagosStellar[] = INCGFX_U16("graphics/pokemon/terapagos/stellar/shiny.pal", ".gbapal");
-    const u8 gMonIcon_TerapagosStellar[] = INCGFX_U8("graphics/pokemon/terapagos/stellar/icon.png", ".4bpp");
 #if P_FOOTPRINTS
-    const u8 gMonFootprint_TerapagosStellar[] = INCGFX_U8("graphics/pokemon/terapagos/stellar/footprint.png", ".1bpp");
 #endif //P_FOOTPRINTS
 #if OW_POKEMON_OBJECT_EVENTS
-//    const u32 gObjectEventPic_TerapagosStellar[] = INCGFX_COMP("graphics/pokemon/terapagos/stellar/overworld.png", ".4bpp");
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
-//    const u16 gOverworldPalette_TerapagosStellar[] = INCGFX_U16("graphics/pokemon/terapagos/stellar/overworld_normal.pal", ".gbapal");
-//    const u16 gShinyOverworldPalette_TerapagosStellar[] = INCGFX_U16("graphics/pokemon/terapagos/stellar/overworld_shiny.pal", ".gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_FAMILY_TERAPAGOS

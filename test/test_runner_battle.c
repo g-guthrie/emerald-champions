@@ -1346,7 +1346,6 @@ static const char *const sGimmickIdentifiers[GIMMICKS_COUNT] =
     [GIMMICK_ULTRA_BURST] = "Ultra Burst",
     [GIMMICK_Z_MOVE] = "Z-Move",
     [GIMMICK_DYNAMAX] = "Dynamax",
-    [GIMMICK_TERA] = "Terastallize",
 };
 
 static u32 CountAiExpectMoves(struct ExpectedAIAction *expectedAction, enum BattlerId battlerId, bool32 printLog)
@@ -2737,13 +2736,6 @@ void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor)
     INVALID_IF(!DATA.currentMon, "GigantamaxFactor outside of PLAYER/OPPONENT");
     SetMonData(DATA.currentMon, MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
     SetGimmick(sourceLine, DATA.battlerParty, DATA.currentPartyIndex, GIMMICK_DYNAMAX);
-}
-
-void TeraType_(u32 sourceLine, enum Type teraType)
-{
-    INVALID_IF(!DATA.currentMon, "TeraType outside of PLAYER/OPPONENT");
-    SetMonData(DATA.currentMon, MON_DATA_TERA_TYPE, &teraType);
-    SetGimmick(sourceLine, DATA.battlerParty, DATA.currentPartyIndex, GIMMICK_TERA);
 }
 
 void Shadow_(u32 sourceLine, bool32 isShadow)

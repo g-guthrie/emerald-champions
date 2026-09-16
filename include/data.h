@@ -77,7 +77,6 @@ struct TrainerMon
     u8 nature:5;
     bool8 gender:2;
     bool8 isShiny:1;
-    enum Type teraType:5;
     bool8 gigantamaxFactor:1;
     u8 shouldUseDynamax:1;
     bool8 useLevelOffset:1;
@@ -162,7 +161,6 @@ struct TypeInfo
     u8 palette;
     u16 zMove;
     u16 maxMove;
-    u16 teraTypeRGBValue;    // Most values pulled from the Tera type icon palette.
     u16 damageCategory:2;    // Used for B_PHYSICAL_SPECIAL_SPLIT <= GEN_3
     u16 useSecondTypeIconPalette:1;
     u16 isSpecialCaseType:1;

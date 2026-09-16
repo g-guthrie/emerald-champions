@@ -6610,7 +6610,6 @@ const struct SpriteTemplate gOrderUpTatsugiriStretchySpriteTemplate =
     .callback = AnimRockTomb,
 };
 
-// Start of Tera Blast sprite templates
 const struct SpriteTemplate gFireSpreadBlastSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
@@ -6731,32 +6730,6 @@ const struct SpriteTemplate gYellowStarSpiralOutwardSpriteTemplate =
     .callback = AnimFireSpiralOutward,
 };
 
-const struct SpriteTemplate gTeraBlastFlyingSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_METAL_SOUND_WAVES,
-    .paletteTag = ANIM_TAG_METAL_SOUND_WAVES,
-    .oam = &gOamData_AffineDouble_ObjNormal_32x64,
-    .affineAnims = gAffineAnims_SpinningBone,
-    .callback = AnimShadowBall,
-};
-
-const struct SpriteTemplate gTeraBlastWaterSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_HYDRO_PUMP,
-    .paletteTag = ANIM_TAG_HYDRO_PUMP,
-    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
-    .callback = AnimDracoMeteorRock,
-};
-
-const struct SpriteTemplate gTeraBlastRockSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_BasicRock,
-    .callback = AnimDracoMeteorRock,
-};
-
 const struct SpriteTemplate gGhostProjectileSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GHOSTLY_SPIRIT,
@@ -6764,7 +6737,6 @@ const struct SpriteTemplate gGhostProjectileSpriteTemplate =
     .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .callback = AnimPoisonJabProjectile,
 };
-// End of Tera Blast sprite templates
 
 const union AnimCmd gSproutAnimCmds[] =
 {
