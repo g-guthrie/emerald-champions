@@ -354,7 +354,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
-	giveitem ITEM_WHIPPED_DREAM
+	giveitem ITEM_BEAST_BALL
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -362,7 +362,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
-	giveitem ITEM_KINGS_ROCK
+	giveitem ITEM_DREAM_BALL
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -370,7 +370,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward::
-	giveitem ITEM_METAL_ALLOY
+	giveitem ITEM_SAFARI_BALL
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -378,9 +378,16 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward::
-	giveitem ITEM_PROTECTOR
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	bufferdecorationname STR_VAR_2, DECOR_DITTO_DOLL
+	checkdecorspace DECOR_DITTO_DOLL
+	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEntrance_EventScript_NoRoomForTrickMasterDoll
+	msgbox Route110_TrickHouseEntrance_Text_TrickMasterDoll, MSGBOX_DEFAULT
+	givedecoration DECOR_DITTO_DOLL
+	goto Route110_TrickHouseEntrance_EventScript_GotReward
+	end
+
+Route110_TrickHouseEntrance_EventScript_NoRoomForTrickMasterDoll::
+	call Common_EventScript_NoRoomForDecor
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -781,6 +788,12 @@ Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward:
 Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward:
 	.string "Hah?\n"
 	.string "Did you not come to claim your reward?$"
+
+Route110_TrickHouseEntrance_Text_TrickMasterDoll:
+	.string "This doll is me! Well… it is a DITTO\n"
+	.string "wearing my face. Close enough!\p"
+	.string "Stand it in your SECRET BASE and I\n"
+	.string "shall be watching you. Hah!$"
 
 @ Shared Delphoxite gift: the final Trick House prize, Ring-gated and retryable.
 Route110_TrickHouseEntrance_EventScript_MegaGift_DELPHOXITE::

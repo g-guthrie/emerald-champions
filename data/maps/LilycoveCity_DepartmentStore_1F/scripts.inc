@@ -158,13 +158,13 @@ LilycoveCity_DepartmentStore_1F_Text_Azumarill:
 	.string "AZUMARILL: Maririroo!$"
 
 LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign:
-	.string "1F: SERVICE COUNTER\n"
+	.string "1F: RECEPTION\n"
 	.string "    LOTTERY CORNER\p"
 	.string "2F: EVERYDAY SUPPLIES\p"
-	.string "3F: CATCHING & RECOVERY\p"
-	.string "4F: EVOLUTION DEPARTMENT\p"
-	.string "5F: POKé DOLL FLOOR\p"
-	.string "ROOFTOP: ROOFTOP PLAZA$"
+	.string "3F: CATCHING & FIELD RECOVERY\p"
+	.string "4F: EVOLUTION STONES & TOOLS\p"
+	.string "5F: HOME & GIFTS\p"
+	.string "ROOFTOP: REFRESHMENTS$"
 
 @ Unused
 LilycoveCity_DepartmentStore_1F_Text_WirelessCommIsFun:

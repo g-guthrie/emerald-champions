@@ -19,12 +19,9 @@ PetalburgCity_Mart_Pokemart_Basic:
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
 	.2byte ITEM_HEAL_BALL
 	.2byte ITEM_NET_BALL
 	.2byte ITEM_NEST_BALL
-	.2byte ITEM_ORANGE_MAIL
 	pokemartlistend
 
 PetalburgCity_Mart_EventScript_ExpandedItems::
@@ -42,12 +39,9 @@ PetalburgCity_Mart_Pokemart_Expanded:
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
 	.2byte ITEM_HEAL_BALL
 	.2byte ITEM_NET_BALL
 	.2byte ITEM_NEST_BALL
-	.2byte ITEM_ORANGE_MAIL
 	pokemartlistend
 
 PetalburgCity_Mart_EventScript_Woman::
@@ -69,9 +63,8 @@ PetalburgCity_Mart_Text_WeakWillGrowStronger:
 	.string "Love for your POKéMON!$"
 
 PetalburgCity_Mart_Text_RepelIsUseful:
-	.string "Do you use REPEL?\n"
-	.string "It keeps POKéMON away, so it's\l"
-	.string "useful when you're in a hurry.$"
+	.string "Your REPEL SPRAY keeps weak POKéMON\n"
+	.string "away, and it never runs out.$"
 
 PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou:
 	.string "Do you carry ANTIDOTES?\p"

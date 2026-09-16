@@ -37,10 +37,11 @@ LilycoveCity_DepartmentStore_4F_Text_Tools:
 	.string "A reusable device only needs to be\n"
 	.string "bought once. Check its description!$"
 LilycoveCity_DepartmentStore_4F_Text_Gentleman:
-	.string "The left counter sells stones.\n"
-	.string "The right has the unusual tools.\p"
-	.string "Even the LINKING CORD! It's reusable,\n"
-	.string "so my whole team can share it.$"
+	.string "Everything, every floor.\p"
+	.string "RUSTBORO mines six stones and\n"
+	.string "SLATEPORT's ships bring ten more.\p"
+	.string "Only this store has all of it, tools\n"
+	.string "and the reusable devices included.$"
 LilycoveCity_DepartmentStore_4F_Text_Woman:
 	.string "I found an evolution item on my travels.\n"
 	.string "That saved me a shopping trip!$"

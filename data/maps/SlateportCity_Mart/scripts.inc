@@ -19,9 +19,6 @@ SlateportCity_Mart_Pokemart:
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
-	.2byte ITEM_HARBOR_MAIL
 	pokemartlistend
 
 SlateportCity_Mart_EventScript_BlackBelt::
@@ -43,10 +40,10 @@ SlateportCity_Mart_Text_MarketAndMartStockDifferentGoods:
 	.string "restock everyday field supplies.$"
 
 SlateportCity_Mart_Text_GreatBallIsBetter:
-	.string "Ships bring evolution items from afar.\n"
-	.string "I sell stones and a few special tools.\p"
-	.string "LILYCOVE's department store carries\n"
-	.string "every kind. Have a look at mine!$"
+	.string "Ships bring the rest.\n"
+	.string "Ten stones and the imported tools.\p"
+	.string "LILYCOVE's department store is the\n"
+	.string "only place with everything.$"
 
 	.align 2
 SlateportCity_Mart_EvolutionStock:

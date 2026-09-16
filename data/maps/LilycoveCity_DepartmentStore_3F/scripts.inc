@@ -26,20 +26,16 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_FieldRecovery
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
-	.2byte ITEM_FULL_RESTORE
+LilycoveCity_DepartmentStore_3F_Pokemart_FieldRecovery:
 	.2byte ITEM_MAX_POTION
 	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REVIVE
 	.2byte ITEM_ETHER
-	.2byte ITEM_MAX_ETHER
-	.2byte ITEM_ELIXIR
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::

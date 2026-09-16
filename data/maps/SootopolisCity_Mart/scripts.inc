@@ -18,10 +18,8 @@ SootopolisCity_Mart_Pokemart:
 	.2byte ITEM_MAX_POTION
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_TIMER_BALL
 	.2byte ITEM_QUICK_BALL
-	.2byte ITEM_SHADOW_MAIL
 	pokemartlistend
 
 SootopolisCity_Mart_EventScript_FatMan::
@@ -64,10 +62,9 @@ SootopolisCity_Mart_Text_TooScaryOutside:
 	.string "scary to go outside.$"
 
 SootopolisCity_Mart_Text_FullRestoreItemOfDreams:
-	.string "Do you know FULL RESTORE?\p"
-	.string "Full restoration of HP!\n"
-	.string "Eradication of all status problems!\p"
-	.string "It's truly an item of your dreams!$"
+	.string "The CENTER heals a whole party for\n"
+	.string "nothing, and the POKé VIAL refills.\p"
+	.string "No bottle in here can match that.$"
 
 SootopolisCity_Mart_Text_DidSomethingAwaken:
 	.string "This weather…\n"

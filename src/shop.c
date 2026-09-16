@@ -680,7 +680,7 @@ static u32 GetShopItemPrice(enum Item item)
 {
     if (sMartInfo.freeItems)
         return 0;
-    return GetItemPrice(item) >> IsPokeNewsActive(POKENEWS_SLATEPORT);
+    return GetItemPrice(item);
 }
 
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)

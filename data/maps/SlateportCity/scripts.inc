@@ -570,11 +570,7 @@ SlateportCity_EventScript_FieldSupplyClerk::
 	.align 2
 SlateportCity_Pokemart_FieldSupplies:
 	.2byte ITEM_HONEY
-	.2byte ITEM_POKE_DOLL
 	.2byte ITEM_FLUFFY_TAIL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
-	.2byte ITEM_SUPER_REPEL
 	pokemartlistend
 
 @ Scene with Capt Sterns interview and Team Aqua announcing plans to steal Submarine
@@ -755,8 +751,6 @@ SlateportCity_HerbalSupplyStock:
 	.2byte ITEM_HEAL_POWDER
 	.2byte ITEM_REVIVAL_HERB
 	.2byte ITEM_ETHER
-	.2byte ITEM_MAX_ETHER
-	.2byte ITEM_ELIXIR
 	pokemartlistend
 
 SlateportCity_EventScript_ScottBattleTentScene::

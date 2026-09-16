@@ -11,10 +11,10 @@ RustboroCity_Mart_EventScript_MoveSpecialist::
 	end
 
 RustboroCity_Mart_Text_MoveSpecialist:
-	.string "Evolution stones cost ¥500 each.\n"
-	.string "A reusable LINKING CORD costs ¥3000.\p"
-	.string "SLATEPORT carries more varieties.\n"
-	.string "LILYCOVE stocks the complete range.$"
+	.string "DEVON mines the six common stones\n"
+	.string "right here, ¥500 each.\p"
+	.string "The reusable LINKING CORD is ¥3000.\n"
+	.string "SLATEPORT and LILYCOVE carry more.$"
 
 	.align 2
 RustboroCity_Mart_EvolutionStock:
@@ -49,8 +49,6 @@ RustboroCity_Mart_Pokemart_Basic:
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
 	.2byte ITEM_HEAL_BALL
 	.2byte ITEM_NEST_BALL
 	.2byte ITEM_LUXURY_BALL
@@ -71,8 +69,6 @@ RustboroCity_Mart_Pokemart_Expanded:
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
 	.2byte ITEM_DUSK_BALL
 	.2byte ITEM_QUICK_BALL
 	.2byte ITEM_LUXURY_BALL
@@ -103,7 +99,7 @@ RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead:
 	.string "instead of ordinary POTIONS.$"
 
 RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
-	.string "I'm getting an ESCAPE ROPE just in\n"
-	.string "case I get lost in a cave.\p"
-	.string "I just need to use it to get back to\n"
-	.string "the entrance.$"
+	.string "My ESCAPE ROPE came free with my\n"
+	.string "gear, and it never wears out.\p"
+	.string "One use and I'm back at the cave\n"
+	.string "entrance.$"
