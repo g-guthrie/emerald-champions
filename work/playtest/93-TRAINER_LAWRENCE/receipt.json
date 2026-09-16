@@ -1,0 +1,47 @@
+{
+  "play_order": 93,
+  "e_group": "E0110",
+  "trainer": "TRAINER_LAWRENCE",
+  "class": "regular",
+  "location": "Route113",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"HIPPOWDON": 34, "SANDSLASH": 35, "CRADILY": 35, "TORTERRA": 34},
+  "cap_window_confirmation": "Offsets 0/1/1/0 resolved to 34/35/35/34 against a level-36 party: cap 36 on Medium, matching the dossier seed line.",
+  "party_manifest": "work/playtest/93-TRAINER_LAWRENCE/party.json",
+  "party_pool_audit": "Block core led by Incineroar + Weavile, with Gyarados deliberately excluded from the party so that no Water move existed on my side for Cradily's Storm Drain to redirect. All six gate <= 36 with source maps passed before Route 113.",
+  "pre_declared_strategy_checks": [
+    "Hippowdon creates real sand and Sand Rush actually doubles Sandslash's Speed",
+    "Cradily's Storm Drain redirects eligible targeted Water attacks",
+    "Torterra's Wide Guard is used against applicable spread pressure - and not otherwise",
+    "Both protections only exist while the relevant partner is active",
+    "Torterra's Yache Berry reduces one Ice hit",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/93-TRAINER_LAWRENCE/a1", "seed": 93, "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "Sand was up before the first command. T1 Sandslash moved before my Jolly max-Speed Weavile, which is Sand Rush and nothing else, and its High Horsepower plus Hippowdon's spread Rock Slide killed Weavile; my Triple Axel left Sandslash on 11 and Incineroar's Knock Off removed Hippowdon's Smooth Rock. T2 I switched Excadrill in, which was my own error - Steel is 2x weak to Ground and Sandslash's Life Orb High Horsepower one-shot it from 136 - though Sandslash then died to its own Life Orb recoil, and Hippowdon used Slack Off to restore 46. T3 Rillaboom's Wood Hammer, 2x into Ground and boosted by my own Grassy Terrain, killed a full-health Hippowdon through the heal, and Knock Off removed Cradily's Leftovers. T4 Torterra arrived and Flare Blitz killed it from full at 2x while Cradily Protected. T5 Wood Hammer finished Cradily."}
+  ],
+  "strategy_checks": [
+    {"check": "Hippowdon creates real sand and Sand Rush doubles Sandslash's Speed", "result": "PASS, both halves, demonstrated in turn order", "evidence": "B_WEATHER_SANDSTORM was set at turn 0 by Sand Stream, and it was still raging on turn 5. The Sand Rush proof is the move order: on both T1 and T2 Sandslash acted before my Weavile, which is Jolly with 252 Speed EVs, base 125, and two levels higher. Nothing but a doubled Speed stat produces that. This is the complete authored ecosystem - a setter whose weather exists to make one specific partner outrun the entire opposing team - and it worked, and it is what killed my best answer to the rest of the roster."},
+    {"check": "Cradily's Storm Drain redirects Water attacks", "result": "NOT TESTED, by deliberate construction", "evidence": "I left Gyarados out of the party entirely, so there was no Water move on my side at any point. Storm Drain never had anything to redirect and Cradily's headline ability contributed nothing to the fight. That is the dossier's own 'bypass redirection' crack taken to its logical end, and it is cheap: a redirection ability that only reads one type is switched off by simply not bringing that type, at no cost to me, because Ice and Fire were better answers to this team anyway."},
+    {"check": "Torterra's Wide Guard is used against spread pressure and not otherwise", "result": "PASS by omission", "evidence": "Every attack I used was single-target. Torterra had one turn and used High Horsepower rather than a Wide Guard that would have blocked nothing. Same correct restraint I recorded for Mike's Graveler at play_order 88 - this is now twice in the block that an AI has correctly valued a guard move at zero rather than using it because it is in the set."},
+    {"check": "Torterra's Yache Berry reduces one Ice hit", "result": "NOT OBSERVED", "evidence": "Weavile died on turn 1, two turns before Torterra came in, so no Ice attack ever reached it. Torterra was KO'd from full 140 by a single 2x Flare Blitz on the turn it arrived."},
+    {"check": "Hippowdon's recovery and disruption", "result": "PASS, unlisted", "evidence": "T2, at 103 of 149 and with its partner dying, Hippowdon chose Slack Off and went back to full. T3 it chose Yawn into my Incineroar. Both are correct uses of a defensive setter's turns; the Slack Off in particular forced Rillaboom to deal a full 149 rather than 103, and the only reason it did not matter is that Wood Hammer is 2x into Ground and boosted by the terrain I had just set."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "battler": "CRADILY", "payoff": "REAL. Blocked Rillaboom's Wood Hammer, which was the attack aimed at it, and Cradily then healed 8 from my own Grassy Terrain during the same turn. It was not repeated on the following turn, when it was alone and guarding would only have been stalling, and it died there instead. Correct use and correct restraint."}
+  ],
+  "protect_ledger_note": "One opposing Protect in six turns, out of two members that carry it (Sandslash, Cradily). Sandslash never guarded despite being the fragile Life Orb runner, which I think is right - its value is entirely in attacking first, and a guarded turn in sand is a turn of Sand Rush wasted.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No bad opponent decision. The sand ecosystem executed end to end: the setter set, the runner outran, the setter healed itself when the runner was dying, and the guard-carrier declined to guard when there was nothing to guard against.",
+    "Both of my faints involved a Ground attack into a Pokemon that resists or should resist Ground on paper. Weavile fell to a spread Rock Slide rather than to Ground, but Excadrill is the instructive one: Ground is 2x into Steel, so a Ground/Steel type is not a safe switch into a Ground attacker, and a Life Orb Sand Rush Sandslash one-shot 136 HP. That is my mistake, not a team defect, but it is worth recording that this team punishes exactly the switch a player instinctively makes to get out of the sand chip.",
+    "Cradily is the weak link and it is not a level problem. Storm Drain reads one type, its Leftovers came off to a single Knock Off, and its best turn was a Protect that healed it 8 on my terrain."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two Pokemon. Brief rule 5: won with 2+ faints after a real fight -> keep. No level change. I note honestly that one of the two faints was my own bad switch; the other, Weavile to the Sand Rush plus spread Rock Slide turn, was entirely the team's doing.",
+  "could_this_be_cooler": "Keep the ecosystem - it is the best-realised weather team in my block and the contrast the dossier draws with Mike's defensive sand is real: Devan teaches the runner, Mike teaches the wall, Lawrence teaches the whole system. The slot worth revisiting is Cradily. Its entire identity is Storm Drain, and Storm Drain is the one defensive ability a player can switch off for free by not packing a Water move - which, against a team of two Grounds and two Grass-types, is what a player wants to do anyway. Give that slot something that punishes the Ice and Fire answers this team actually invites, or move the Storm Drain onto a member the player is forced to attack. I would not touch Hippowdon, Sandslash or Torterra; the Smooth Rock, the Life Orb on the runner and the Yache Berry on the 4x-Ice-weak Grass type are all correct, even though I never got to see the last of those work.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
