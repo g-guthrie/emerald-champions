@@ -2497,6 +2497,19 @@ u32 GetCampaignBattleMoneyReward(void)
         ? gBattleStruct->campaignLevelCap * gBattleStruct->campaignPrizeMultiplier : 0;
 }
 
+// Emerald Champions: any money a battle pays out answers to the same eligibility as the
+// prize purse. A wild battle always pays; a trainer battle pays only on a first clear,
+// never on a rematch or a return fight. Pay Day uses this so it cannot farm a rematch.
+bool32 IsBattleMoneyRewardEligible(void)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return TRUE;
+    if (gBattleStruct->campaignPrizeMultiplier != 0)
+        return gBattleStruct->campaignRewardEligible;
+    return gBattleStruct->moneyRewardEligibleA
+        || ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && gBattleStruct->moneyRewardEligibleB);
+}
+
 // Captures, at battle start, whether each trainer owner is eligible for a normal
 // (non-campaign) prize money payout. A trainer that was already flagged as defeated
 // before this battle began, or that was reached through the overworld rematch table

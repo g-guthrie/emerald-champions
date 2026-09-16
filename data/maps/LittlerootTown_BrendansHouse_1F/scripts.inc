@@ -343,9 +343,10 @@ PlayersHouse_1F_Text_YouShouldRestABit:
 PlayersHouse_1F_Text_TakeCareHoney:
 	.string "MOM: Take care, honey!$"
 
-PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom:
+PlayersHouse_1F_Text_GotDadsBadge:
 	.string "MOM: Oh? Did DAD give you that BADGE?\p"
-	.string "Then here's something from your MOM!$"
+	.string "He never went easy on anybody.\n"
+	.string "I'm so proud of you, honey.$"
 
 PlayersHouse_1F_Text_DontPushYourselfTooHard:
 	.string "Don't push yourself too hard, dear.\n"

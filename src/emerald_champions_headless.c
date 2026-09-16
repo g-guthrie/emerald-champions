@@ -715,7 +715,7 @@ static void PrepareAllLegalMoves(enum Species species)
     SetMainCallback2(CB2_InitLearnMove);
 }
 
-static void PrepareHmReplacement(void)
+static void PrepareMoveReplacement(void)
 {
     CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEW, 30, OTID_STRUCT_PLAYER_ID);
     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_SURF, 0);
@@ -1546,7 +1546,7 @@ void EmeraldChampionsHeadlessObserve(void)
             gEcHeadlessFixtureObservedResult = TRUE;
         return;
     }
-    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_HM_REPLACEMENT)
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_MOVE_REPLACEMENT)
     {
         if (gSpecialVar_Result == TRUE && gSpecialVar_0x8005 == 0)
             gEcHeadlessFixtureObservedResult = TRUE;
@@ -2372,8 +2372,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     case EC_HEADLESS_SCENARIO_ALL_LEGAL_MOVES_MEW:
         PrepareAllLegalMoves(SPECIES_MEW);
         break;
-    case EC_HEADLESS_SCENARIO_HM_REPLACEMENT:
-        PrepareHmReplacement();
+    case EC_HEADLESS_SCENARIO_MOVE_REPLACEMENT:
+        PrepareMoveReplacement();
         break;
     case EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY:
         LoadHeadlessMap(MAP_DEWFORD_TOWN, 8, 18);

@@ -29,7 +29,11 @@ struct FieldMoveInfo
     // Emerald Champions: obstacle moves are used by pressing A on the
     // obstacle, so they never appear in a Pokémon's party menu.
     u32 hideInPartyMenu:1;
-    u32 padding:2;
+    // Emerald Champions: a field move never occupies a battle move slot. A move
+    // marked here is offered in the party menu to any member whose species could
+    // learn it, exactly as an obstacle move picks its user.
+    u32 capabilityInPartyMenu:1;
+    u32 padding:1;
 };
 
 extern const struct FieldMoveInfo gFieldMoveInfo[];
@@ -61,6 +65,11 @@ static inline enum Move FieldMove_GetMoveId(enum FieldMove fieldMove)
 static inline u32 FieldMove_GetPartyMsgID(enum FieldMove fieldMove)
 {
     return gFieldMoveInfo[fieldMove].partyMsgID;
+}
+
+static inline bool32 FieldMove_IsCapabilityBased(enum FieldMove fieldMove)
+{
+    return gFieldMoveInfo[fieldMove].capabilityInPartyMenu;
 }
 
 static inline bool32 FieldMove_IsVisible(enum FieldMove fieldMove)

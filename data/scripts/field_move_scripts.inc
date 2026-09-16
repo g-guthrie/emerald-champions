@@ -98,7 +98,7 @@ Text_UseBrailleFieldMove:
 
 Text_BrailleFieldMoveLocked:
 	.string "To use {STR_VAR_2}, you need\n"
-	.string "its field licence and required BADGE.$"
+	.string "its field license and required BADGE.$"
 
 Text_CantCut:
 	.string "Get the CUT license from the\n"
@@ -281,6 +281,7 @@ EventScript_StrengthBoulder::
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkfieldmove FIELD_MOVE_STRENGTH, TRUE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength

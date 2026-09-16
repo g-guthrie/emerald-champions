@@ -600,7 +600,6 @@ gSpecials::
 	def_special ShowTrainerHillRecords, waitstate=1
 	def_special PlayerFaceTrainerAfterBattle
 	def_special ResetHealLocationFromDewford
-	def_special IsLastMonThatKnowsSurf
 	def_special CountPartyAliveNonEggMons
 	def_special TryPrepareSecondApproachingTrainer
 	def_special PrepareSecondApproachingTrainer

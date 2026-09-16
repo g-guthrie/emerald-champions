@@ -177,6 +177,8 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE03_GET) : FLAG_TO_BADGE(FLAG_BADGE06_GET),
         .hideIfLocked = TRUE,
+        // The Flight Beacon owns Fly: it is called from the Bag, never from a moveslot.
+        .hideInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_DIVE] =
@@ -207,6 +209,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = ALWAYS_UNLOCKED,
         .moveID = MOVE_TELEPORT,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
+        .capabilityInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_DIG] =
@@ -215,6 +218,8 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = ALWAYS_UNLOCKED,
         .moveID = MOVE_DIG,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
+        // The Sealed Chamber wall asks for Dig itself; the Escape Rope covers the rest.
+        .hideInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_SECRET_POWER] =
@@ -247,6 +252,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = ALWAYS_UNLOCKED,
         .moveID = MOVE_SWEET_SCENT,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
+        .capabilityInPartyMenu = TRUE,
     },
     [FIELD_MOVE_ROCK_CLIMB] =
     {
