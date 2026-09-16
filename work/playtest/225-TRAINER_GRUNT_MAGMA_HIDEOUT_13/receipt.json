@@ -1,0 +1,107 @@
+{
+  "play_order": 225,
+  "e_group": "E0336",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_13",
+  "class": "grunt",
+  "location": "MagmaHideout_4F",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L60 = 60 + 2 - 2 on Medium, matching the authored offset 2.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217-224.",
+  "pre_play_strategy_checks": [
+    "Tyranitar's Sand Stream overwrites whatever weather the player installed",
+    "The Assault Vest makes the special answer to Tyranitar fail",
+    "Probopass' Magnet Pull traps the player's Steel switch-ins",
+    "Sturdy plus sand makes Probopass a four-turn problem",
+    "Steelix takes Wide Guard against the player's spread answer and converts Defense with Body Press",
+    "The room has no fast member on purpose",
+    "Protect ledger on Probopass and Rhydon"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 5,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "The gate opened on the first push. Sand Stream did take the weather off me on turn 0. But every member of this room is 2x or 4x into Water and 2x or 4x into Fighting, which is precisely what my party is made of. Turn 1 Liquidation plus Hydro Pump removed a 246 HP Assault Vest Tyranitar before it landed anything. Turn 2 a single Hydro Pump removed a 216 HP Steelix from full and Probopass Protected away a 4x Superpower. Turn 3 Rhydon Protected away a 4x Liquidation while Probopass's Power Gem took Pelipper to 42. Turn 4 I pivoted the sand-chipped Pelipper out for Urshifu and a crit Liquidation removed Rhydon. Turn 5 Close Combat (4x into Rock/Steel) removed Probopass. Zero faints."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Sand Stream overwrites the player's weather",
+      "result": "PASS",
+      "evidence": "The opening state reported B_WEATHER_SANDSTORM despite my Drizzle lead: Tyranitar's base 61 Speed is under Pelipper's 65, so its ability applied last and its weather won. The sand then chipped Pelipper for 12 a turn for the rest of the fight and was directly responsible for my only pivot. Together with E0335, this is the second room in a row to take the weather off a dedicated weather party, which is exactly what the two rooms are for."
+    },
+    {
+      "check": "The Assault Vest makes the special answer to Tyranitar fail",
+      "result": "FAIL",
+      "evidence": "Pelipper's Hydro Pump - the special answer the Vest is supposed to blunt - was half of what killed Tyranitar on turn 1, from 246/246, alongside one Liquidation. Assault Vest raises Special Defense by 50 percent, which is simply not enough against a 2x hit from a 252 Special Attack body; and because the Vest also forbids status moves, it bought Tyranitar nothing else. The item is doing less work than the dossier claims."
+    },
+    {
+      "check": "Probopass' Magnet Pull traps the player's Steel switch-ins",
+      "result": "NOT TESTED",
+      "evidence": "My party carries no Steel type, deliberately - the hideout is a Rock/Ground/Fire dungeon and a Steel pivot is the trap this room is built around. The dossier calls this 'the most consequential grunt decision in the hideout' and against a player who did bring Metagross or Corviknight I expect that is true; it did nothing against me. Recording honestly as untested rather than claiming a pass."
+    },
+    {
+      "check": "Sturdy plus sand makes Probopass a four-turn problem",
+      "result": "FAIL as written - Probopass does not have Sturdy here",
+      "evidence": "Its authored ability is MAGNET_PULL, which the driver confirmed on the field. The dossier's sentence 'Sturdy plus sand makes it a four-turn problem' describes an ability this Probopass does not have. It was in fact a four-turn problem, but on Leftovers, 252 HP / 252 Special Defense and two Protects, not on Sturdy. Flagging as a dossier/implementation mismatch in the prose rather than a legality problem in the set."
+    },
+    {
+      "check": "Steelix takes Wide Guard against the player's spread answer",
+      "result": "FAIL - never used",
+      "evidence": "Steelix used Body Press on turns 1 and 2 and was KOed by a single Hydro Pump from 216/216. It never reached Wide Guard. Defensible in the moment - I had no spread move on the field for it to catch - but the room's authored anti-spread tool never appeared, and the same thing happened to Stonjourner's Wide Guard in E0331."
+    },
+    {
+      "check": "The room has no fast member on purpose",
+      "result": "PASS, and it is the room's real weakness",
+      "evidence": "True and confirmed: Mega Swampert outsped every member of this team without rain. The dossier frames this as 'the player who solved earlier rooms with speed has to solve this one with damage'. In practice the absence of speed control means the room never gets to act first against anything, and four slow bodies that are all weak to the same two types lose before their bulk matters."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "MIXED - two excellent, one empty",
+      "evidence": "See protect_ledger."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Probopass",
+      "payoff": "REAL and large. Blocked Mega Swampert's Superpower, which is 4x into Rock/Steel and would very likely have been a one-shot. Probopass survived the entire fight because of this guard."
+    },
+    {
+      "turn": 3,
+      "battler": "Rhydon",
+      "payoff": "REAL and large. Blocked Mega Swampert's Liquidation on its entry turn - 4x into Ground/Rock. Rhydon is the single most Water-vulnerable body in this hideout and it guarded on exactly the turn the Water attack came."
+    },
+    {
+      "turn": 4,
+      "battler": "Probopass",
+      "payoff": "EMPTY, but defensible. At 126/198 it guarded and blocked nothing - my two actions were a switch and a Liquidation aimed at its partner. Unlike the Weezing case in E0329 this is not a clear error: Probopass had already been hit, its partner was dying, and a 4x Superpower had been revealed against it two turns earlier, so 'the Mega will aim at me' was a reasonable forecast. It was also its second guard in three turns, which is the pacing the AGENTS Protect rule asks to be watched. Recording as empty for the ledger, not raising it as a defect."
+    }
+  ],
+  "protect_summary": "3 opponent Protects across 4 turns: 2 with large payoffs (each blocking a 4x attack) and 1 empty but defensible. This team guards more than any other in the block, which is right for four slow walls, and two of the three guards are the reason the fight lasted past turn 3.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Target selection was good throughout: Probopass correctly reached for Power Gem into the Water/Flying Pelipper (2x) rather than Flash Cannon, and it was the only attack in the fight that seriously hurt anything of mine.",
+    "Thunder Wave on Probopass never appeared, which is a small missed opportunity - paralysing the Mega that was outspeeding the entire room would have been the single most useful thing this team could do. Not raising it as a defect because the guard it chose instead also paid off, but it is worth a note for whoever reviews status-move scoring on slow teams.",
+    "AI decision budget: max 60 frames (1.005 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"member": "TYRANITAR", "field": "level_offset", "before": 2, "after": 3, "medium_level_before": 60, "medium_level_after": 61},
+    {"member": "STEELIX", "field": "level_offset", "before": 2, "after": 3, "medium_level_before": 60, "medium_level_after": 61}
+  ],
+  "level_change_rationale": "Won first attempt with zero player faints against the room the dossier calls 'the hardest grunt fight in the campaign so far', so the +1 review clearly applies. I raised Tyranitar and Steelix, which are the two that contributed least: Tyranitar died on turn 1 without landing a single point of damage, and Steelix died on turn 2 to one attack having never used the Wide Guard it is built around. I left Probopass and Rhydon alone because both made large, correct Protect decisions and Probopass landed the only meaningful damage of the fight. A note on the 'never raise the ace first' guidance: Tyranitar reads as this room's ace on paper and I am raising it anyway, because in play it was the room's weakest member, not its strongest - a 246 HP Assault Vest body that is 2x into Water and 4x into Fighting is a liability in front of a party that carries both. Both changed members go to offset 3, a +1 within the +/-2 pass limit.",
+  "cooler": "The gate concept is good and the Magnet Pull idea is genuinely the cleverest piece of authoring in the hideout - trapping the player's Steel pivot immediately before an admin gauntlet is a real decision imposed at a real moment. But the room has a structural problem that a level cannot fix: all four members share the same two weaknesses. Tyranitar, Steelix, Probopass and Rhydon are every one of them weak to Fighting, and three of the four are weak to Water, with Rhydon 4x to Water and Tyranitar and Probopass 4x to Fighting. Against a party holding a Water attacker and a Fighting attacker - which is the obvious preparation for a Rock and Ground hideout that the previous rooms have been demanding - there is no member that punishes either answer. The single most valuable change would be one member that is comfortable into Water and Fighting, to break the shared weakness and make the trap matter. Also worth recording: the dossier's claim about Probopass's Sturdy is wrong, the authored ability is Magnet Pull, and the prose should be corrected. No change made in this pass.",
+  "legality_notes": "No legality problem in the authored set. The Sturdy sentence in the plan text does not match the authored Magnet Pull ability - a prose defect, flagged above.",
+  "reverify_note": "The Tyranitar and Steelix +1 cannot be re-verified from this session; the change reaches the ROM only after the main agent re-materializes and rebuilds.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
