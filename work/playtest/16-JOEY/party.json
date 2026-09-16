@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0020 TRAINER_JOEY (play_order 16); P2 cap-14 standing party with Prankster Taunt",
+  "availability_audit": "Every member's root and evolution provider is listed in work/reference-pools/pool-14.json at gate 14: Riolu (wild:Route116) -> Lucario also appears directly as wild:AlteringCave_1F; Growlithe (wild:Route103) -> Arcanine via ITEM_FIRE_STONE; Cottonee (wild:VerdanturfMeadow) -> Whimsicott via ITEM_SUN_STONE; Porygon-Z (wild:AlteringCave_1F); Sneasel (wild:Seaspray_Cave_B1F) -> Weavile via level/condition; Munchlax (wild:Route116) -> Snorlax via friendship. Items are ordinary stage-available held items. No legendary, no Mega stone, no unreached gate is claimed. Assisted acquisition through the authorized native preparation API; not a native capture receipt.",
+  "plan": "Marlene is a Trick Room + Shadow Tag psychic room. Prankster Taunt on Whimsicott is the pre-emptive answer to Spoink/Baltoy's Trick Room, Weavile and Snorlax carry Dark coverage into four Psychic-types, and Lucario's Steel typing walls Psychic outright. Same six as the block's standing party with Whimsicott's Protect traded for Taunt.",
+  "party": [
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_ICICLE_CRASH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Fake Out pressure, item removal and Ice priority",
+      "availability": "Sneasel wild:Seaspray_Cave_B1F/land_mons, evolution:level/condition (pool-14 gate 14)."
+    },
+    {
+      "species": "SPECIES_WHIMSICOTT",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_ENCORE",
+        "MOVE_MOONBLAST",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Prankster Taunt to deny Trick Room, plus Encore and speed control",
+      "availability": "Cottonee wild:VerdanturfMeadow/land_mons, evolution:item:ITEM_SUN_STONE (pool-14 gate 14)."
+    },
+    {
+      "species": "SPECIES_LUCARIO",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_METEOR_MASH",
+        "MOVE_BULLET_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INNER_FOCUS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "primary physical breaker with Steel priority",
+      "availability": "wild:AlteringCave_1F/land_mons (pool-14 gate 14)."
+    },
+    {
+      "species": "SPECIES_ARCANINE",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_CRUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Intimidate support and priority Normal/Fire offense",
+      "availability": "Growlithe wild:Route103/land_mons, evolution:item:ITEM_FIRE_STONE (pool-14 gate 14)."
+    },
+    {
+      "species": "SPECIES_PORYGON_Z",
+      "moves": [
+        "MOVE_TRI_ATTACK",
+        "MOVE_DARK_PULSE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_ADAPTABILITY",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Adaptability special attacker",
+      "availability": "wild:AlteringCave_1F/land_mons (pool-14 gate 14)."
+    },
+    {
+      "species": "SPECIES_SNORLAX",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_EARTHQUAKE",
+        "MOVE_CRUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "bulky Ground-move pivot against Electric and Steel cores",
+      "availability": "Munchlax wild:Route116/land_mons, evolution:friendship (pool-14 gate 14)."
+    }
+  ]
+}

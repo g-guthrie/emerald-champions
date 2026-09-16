@@ -1,0 +1,44 @@
+{
+  "play_order": 16,
+  "e_group": "E0020",
+  "trainer": "TRAINER_JOEY",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "observed_opponent_levels": {"PAWMI": 15, "FARFETCHD_GALAR": 13, "CLEFAIRY": "14 (offset 2)", "LECHONK": "16 (offset 4)"},
+  "outcome": "WON on attempt 1, 7 turns, 0 player faints",
+  "party_manifest": "work/playtest/16-JOEY/party.json",
+  "run_dir": "work/playtest/16-JOEY/a1",
+  "attempts": [
+    {"seed": "0x1600", "outcome": "won", "turns": 7, "player_faints": 0, "opponent_faints": 4,
+     "note": "Weavile dropped to 8/48 from a 4x Mach Punch and was withdrawn; nothing else on my side was ever in danger."}
+  ],
+  "strategy_checks": [
+    {"check": "Pawmi opens with Fake Out or a useful Nuzzle on its entry turn", "result": "PASS", "evidence": "Turn 1 chosen action: battler 1 MOVE_FAKE_OUT -> target 2 (Whimsicott). It did not resolve because my faster Weavile Fake Out flinched Pawmi first; the authored choice was made."},
+    {"check": "Galarian Farfetch'd attacks immediately instead of paying a setup turn", "result": "PASS", "evidence": "Turn 1 chosen action: MOVE_CLOSE_COMBAT -> target 0 (Weavile), which would have been 4x and lethal. No Belly Drum / Focus Energy line exists on this set and none was attempted."},
+    {"check": "The Leek's guaranteed-critical Leaf Blade / Night Slash lands", "result": "NOT OBSERVED", "evidence": "Farfetch'd (level 13, 40 HP) fainted to a single Whimsicott Moonblast on turn 1 before it ever acted. Its whole authored identity never fired. This drives the level change below."},
+    {"check": "Clefairy Follow Me redirects the player's single-target attacks", "result": "PASS - textbook", "evidence": "Turn 2: I aimed Weavile's Icicle Crash and Whimsicott's Moonblast at Pawmi (battler 1). Clefairy used Follow Me, both moves resolved against battler 3, and the Focus Sash Pawmi was preserved at 25/43. Clefairy took 36 damage for its partner."},
+    {"check": "Clefairy Friend Guard reduces partner damage", "result": "PASS (inferred)", "evidence": "Arcanine's Extreme Speed into Clefairy on turn 5 did only 10 damage; the Eviolite plus Friend Guard's own defensive contribution is consistent, but Friend Guard's partner-side reduction was not isolated."},
+    {"check": "Lechonk's Aroma Veil blocks its side's eligible disruption", "result": "PASS", "evidence": "Turn 6: Whimsicott used Taunt on Lechonk and the battle text read 'The opposing Lechonk is protected by an aromatic veil'. On turn 5 the same Taunt was instead blocked by Lechonk's Protect, so it took two attempts to isolate."},
+    {"check": "Helping Hand is used when it beats a direct action", "result": "NOT OBSERVED", "evidence": "Neither Clefairy nor Lechonk ever chose Helping Hand. Both spent their turns on Follow Me, Moonblast, Protect and Body Slam, which were defensible given how fast their partners were dying."},
+    {"check": "Smart switching", "result": "PASS", "evidence": "Turn 4: Clefairy, freshly Taunted, withdrew for Lechonk rather than sit through the lock. That is a correct and non-clairvoyant response to a revealed condition."}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "Lechonk", "payoff": "REAL - blocked Whimsicott's Taunt, which would have shut off its Helping Hand and Protect for three turns."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Only one opposing Protect in the whole battle and it had a real payoff. No empty, harmful or repetitive guarding in this fight.",
+    "Follow Me on turn 2 was the single best decision I saw in this block so far: it read the double-target on the Sash holder and spent a 56 HP body to keep it alive."
+  ],
+  "level_changes": [
+    {"member": "FARFETCHD_GALAR", "field": "level offset", "before": 1, "after": 2,
+     "reason": "Brief rule 5: won first try with 0 player faints -> +1 to the weakest members. Farfetch'd-Galar is the floor of this team by two levels (13 against a cap of 14) and the Leek crit engine, which is the trainer's whole authored identity, died to one neutral-ish special attack before acting. It is the lowest-level member, not a Mega or legend, so the 'never the ace first' guard does not apply in the sense the brief intends."},
+    {"member": "CLEFAIRY", "field": "level offset", "before": 2, "after": 3,
+     "reason": "Second lowest offset, and the member that actually earned its keep (Follow Me, Friend Guard) - a level makes the redirection body survive a round longer."}
+  ],
+  "rerun": "NOT PERFORMED - the headless ROM cannot be rebuilt in this session. See work/playtest/15-MARLENE/receipt.json for the toolchain detail.",
+  "cooler_note": "Mostly yes already. The two bodyguard modes (Follow Me + Friend Guard versus Aroma Veil) are genuinely distinct and both showed up in play, which is more than most teams in this block managed. The weak link is the concept-versus-level mismatch: a guaranteed-critical Leek attacker is a memorable idea that is authored two levels below the cap, so the player never meets it. Suggestion for a later pass, not applied here: lead Farfetch'd-Galar behind Clefairy's Follow Me rather than beside Pawmi, so the bodyguard buys the crit attacker its turn - that is the same package the trainer already owns, arranged so the payoff is visible.",
+  "authored_set_legality": "No legality problem. All four members, abilities, items and moves resolved correctly.",
+  "not_finished": "The Leek guaranteed-critical line and Helping Hand were never exercised. The +1/+1 calibration has not been retested in a rebuilt ROM."
+}
