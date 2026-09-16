@@ -1,0 +1,143 @@
+{
+  "play_order": 16,
+  "e_group": "E0020",
+  "trainer": "TRAINER_JOEY",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "pass": "rerun (pass 2) after the +1 offsets from pass 1 and the opponent-AI setup/support pricing fix",
+  "outcome": "WON on attempt 1, 8 turns, 1 player faint. FARFETCHD_GALAR +1 (2 -> 3); the other three kept.",
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_manifest_note": "New chronology-checked party; the pass-1 party used Seaspray Cave, Verdanturf Meadow and Altering Cave species that a player has not reached at Route 116.",
+  "run_dir": "work/playtest/16-JOEY/r1",
+  "opponent_levels_medium": "PAWMI 15, FARFETCHD_GALAR 14, CLEFAIRY 15, LECHONK 16 (cap 14; offsets 3/2/3/4 before this pass's change)",
+  "attempts": [
+    {
+      "seed": 5616,
+      "outcome": "won",
+      "turns": 8,
+      "decisions": 9,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.021,
+      "player_faint_detail": "Arcanine was killed on turn 7 by a Lechonk Body Slam that Clefairy had boosted with Helping Hand, after paralysis from an earlier Body Slam had already cost it a full turn.",
+      "note": "Harder than pass 1 (7 turns, 0 faints). Heracross finished at 6/50, Shiftry was withdrawn at 21/53 and Arcanine died. Joey's bodyguard package did real work this time."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Pawmi opens with Fake Out or a useful Nuzzle on its entry turn",
+      "result": "PASS - and it resolved this time",
+      "evidence": "Turn 1: MOVE_FAKE_OUT into Heracross; 'Heracross flinched and couldn't move!' It denied a Rock Slide that would have broken its own Focus Sash and chipped its partner."
+    },
+    {
+      "check": "Pawmi picks the right attack afterwards rather than repeating Fake Out",
+      "result": "PASS",
+      "evidence": "Turn 2: MOVE_MACH_PUNCH into Shiftry (battler 2), not into Heracross. Fighting is 2x on Grass/Dark and 0.25x on Bug/Fighting, so it correctly picked the target its Iron Fist priority move actually hurts - 22 of Shiftry's 53 HP in one priority hit. Fake Out was not repeated."
+    },
+    {
+      "check": "Galarian Farfetch'd attacks immediately instead of paying a setup turn",
+      "result": "PASS (chosen)",
+      "evidence": "Turn 1 chosen action: MOVE_CLOSE_COMBAT into Shiftry (battler 2), which is 2x. No Belly Drum / Focus Energy line exists on the set and none was attempted."
+    },
+    {
+      "check": "The Leek's guaranteed-critical Leaf Blade / Night Slash lands",
+      "result": "FAIL - NOT OBSERVED for the second pass running",
+      "evidence": "Farfetch'd (L14, 43 HP) was killed by a single Shiftry Leaf Blade on turn 1 before its Close Combat resolved, exactly as in pass 1 but against a completely different party. Its Speed (base 55) puts it behind almost every cap-14 attacker, and 43 HP at two levels below the cap does not survive one neutral STAB hit. The trainer's entire authored identity has now never fired. This is the level change below."
+    },
+    {
+      "check": "Clefairy Follow Me redirects the player's single-target attacks",
+      "result": "PASS - and it mattered",
+      "evidence": "Turn 4: Clefairy used Follow Me and pulled Heracross's Close Combat (2x on Lechonk, off 252 Adamant Attack) onto itself, where it was 0.5x. That single redirection is the reason Lechonk survived to turn 8. Turn 3's Follow Me was correctly bypassed by Rock Slide, which is a spread move - the engine handled both directions correctly."
+    },
+    {
+      "check": "Clefairy Helping Hand beside an attacker",
+      "result": "PASS - textbook, and it took a Pokemon off me",
+      "evidence": "Turn 7: Clefairy (16/60, about to die) chose MOVE_HELPING_HAND targeting Lechonk instead of attacking or protecting. The boosted Body Slam killed Arcanine. That is the correct use of a doomed support body and the best single AI decision in this block."
+    },
+    {
+      "check": "Clefairy Friend Guard reduces partner damage",
+      "result": "PASS (inferred, not isolated)",
+      "evidence": "Ability confirmed as ABILITY_FRIEND_GUARD in the battler state and Clefairy was on the field beside Lechonk for five turns. I did not isolate the 0.75x on a single hit."
+    },
+    {
+      "check": "Lechonk supplies Aroma Veil and immediate Body Slam / Play Rough",
+      "result": "PASS on the attacks, NOT TESTED on Aroma Veil",
+      "evidence": "Lechonk chose Body Slam four times and Play Rough once, and the target choice was right every time: Play Rough went into Heracross (2x on Fighting, took it from 42 to 6) and Body Slam into Arcanine (paralysis landed and cost Arcanine a full turn). I carried no Taunt, Encore, Attract or Disable, so Aroma Veil had nothing to block."
+    },
+    {
+      "check": "Lechonk's Helping Hand",
+      "result": "NOT USED - correctly",
+      "evidence": "Lechonk was the team's damage the whole fight and its partner was a Follow Me body; a Helping Hand from it would have been strictly worse than attacking on every turn it had."
+    },
+    {
+      "check": "The authored crack (item removal, spread damage around Follow Me, Fairy/Flying/Psychic pressure on Farfetch'd)",
+      "result": "PASS",
+      "evidence": "Knock Off removed Pawmi's Focus Sash and killed it the same turn; Rock Slide and Hyper Voice both went around Follow Me as spread moves; Sludge Bomb is 2x on Clefairy and finished it. The documented counterplay is exactly what won."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "LECHONK (52/52, entry turn)",
+      "action": "MOVE_PROTECT",
+      "payoff": "PARTIAL. It blocked Heracross's Rock Slide, which is a neutral spread hit and took Clefairy for only 10 later, so the denied damage was small. Not empty, but close to it - this is a guard that denied roughly one fifth of what Lechonk could take."
+    },
+    {
+      "turn": 6,
+      "battler": "CLEFAIRY (16/60)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - saved its life. It blocked Tangrowth's Sludge Bomb, which is 2x on Fairy and was comfortably lethal from 16 HP. Clefairy used the extra turn to Helping-Hand the Body Slam that killed Arcanine, so the guard converted directly into a kill on the following turn."
+    },
+    {
+      "turn": 5,
+      "battler": "CLEFAIRY",
+      "action": "MOVE_FOLLOW_ME (third consecutive)",
+      "payoff": "EMPTY. Arcanine was fully paralyzed and Heracross had switched out, so no single-target attack existed to redirect. Recorded as an empty redirection turn rather than an empty Protect; see the observation below."
+    },
+    {
+      "turn": 3,
+      "battler": "CLEFAIRY",
+      "action": "MOVE_FOLLOW_ME (first)",
+      "payoff": "EMPTY. My only attack that turn was Rock Slide, a spread move Follow Me cannot redirect, and my other battler switched. Defensible at decision time - it could not know - but it banked nothing."
+    },
+    {
+      "turn": 4,
+      "battler": "CLEFAIRY",
+      "action": "MOVE_FOLLOW_ME (second)",
+      "payoff": "NOT EMPTY - the best redirection in the block. Pulled a 2x Close Combat off Lechonk (42/52 at the time) onto a 0.5x Fairy body behind Eviolite."
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    {
+      "id": "E0020-FOLLOWME-REPEAT-INTO-PARALYSIS",
+      "severity": "low",
+      "turn": 5,
+      "board": "Clefairy 16/60, partner Lechonk 42/52. Opposite: a fully paralyzed Arcanine and a Tangrowth that had just switched in.",
+      "chosen_action": "MOVE_FOLLOW_ME, its third in a row.",
+      "better_action": "MOVE_MOONBLAST into Tangrowth, or Protect. Moonblast is Clefairy's only damage and it had two turns left to live.",
+      "assessment": "Not a defect - Follow Me has no consecutive-use penalty and the AI cannot see my commands, so protecting a 42/52 partner is a reasonable default. Recorded because two of Clefairy's three Follow Me turns banked nothing, and a redirection is a support move whose next-turn value should also be priced on what it actually denied."
+    }
+  ],
+  "level_changes": [
+    {
+      "member": "FARFETCHD_GALAR",
+      "field": "level offset",
+      "before": 2,
+      "after": 3,
+      "reason": "It is the sole floor of the team (L14 against a cap of 14, two levels under Lechonk) and it has now been one-shot before acting in two consecutive passes against two completely different legal parties. The Leek guaranteed-critical engine is the entire authored identity of this trainer and the player has never once seen it. +1 is the second and final step inside the brief's +-2 total per member (original offset 1 -> 2 in pass 1 -> 3 now), so this member is capped out for this review."
+    }
+  ],
+  "level_changes_declined": [
+    {
+      "member": "PAWMI / CLEFAIRY / LECHONK",
+      "reason": "All three executed their authored jobs and cost me real resources this pass: Fake Out resolved, Mach Punch picked the correct 2x target, Follow Me pulled a lethal Close Combat, Helping Hand bought a kill, Body Slam's paralysis cost a full turn. A 1-faint win against that is a fair fight, not a walkover."
+    }
+  ],
+  "rerun_note": "The brief's step 5 asks for one rerun after a bump. This rerun agent was instructed to take one attempt per trainer, so the +1 is recorded for the next pass rather than replayed here. Farfetch'd-Galar is now at the +-2 ceiling and must not be moved again in this review.",
+  "cooler_note": "Confirmed from pass 1 and now stronger: the two bodyguard modes are genuinely distinct and both showed up, and the Helping Hand finish is a better moment than most teams in this block produce. The unchanged problem is the arrangement, not the parts - Farfetch'd is the memorable idea and it is the member that dies first, every time, because it leads beside Pawmi instead of behind Clefairy. Suggestion for a later pass, not applied here: lead Clefairy + Farfetch'd so Follow Me buys the crit attacker the turn it needs. Same four members, same items, same moves; the payoff simply becomes visible."
+  ,
+  "authored_set_legality": "Clean. All four sets resolve at cap 14 with the correct abilities and items; the Leek was present on Farfetch'd in the battler state.",
+  "not_finished": "The Leek crit engine is still unobserved after two passes. Aroma Veil is untested - it needs a party carrying Taunt, Encore, Attract or Disable."
+}
