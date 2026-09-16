@@ -1,0 +1,60 @@
+{
+  "play_order": 252,
+  "e_group": "E0393",
+  "trainer": "TRAINER_MAURA",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Jynx / Gothitelle / Slowking / Slowbro-Galar / Slowking-Galar (+1) at L75, Slowbro (+2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/252-TRAINER_MAURA/party_gym76.json"],
+  "chronology_note": "Shared gym party (audit in the manifest): Incineroar 36, Urshifu-Single 42, Gengar 30 + Gengarite 60, Hydreigon 68, Weavile 14, Zapdos 30. Gengar (the Ghost the crack line names) was never sent out; I escaped the trap the other printed way, by removing Gothitelle inside three turns. Nothing from Shoal Cave, the Seafloor Cavern, Sootopolis or later.",
+  "pre_play_strategy_checks": [
+    "Gothitelle's Shadow Tag locks my non-Ghosts in",
+    "Jynx sings Perish Song in the first two turns (Fake Out first)",
+    "Regenerator rotation: Slow-line bodies switch out and heal a third",
+    "Curious Medicine resets my stat boosts on Galarian Slowking's entry",
+    "Mega Slowbro is the ace (Shell Armor after Mega)",
+    "Protect ledger"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 15,
+      "build": "work/agent-battle-build-7",
+      "run_dir": "work/playtest/252-TRAINER_MAURA/a1",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Gengar / Hydreigon / Weavile / Zapdos)",
+      "outcome": "won",
+      "turns": 11,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "why": "The trap worked as written and I escaped it the printed way. Jynx Fake Outed Incineroar so my turn-1 Taunt never happened, and Perish Song went up on turn 2 with Shadow Tag holding both my actives; Gothitelle Protected the Knock Off that would have freed me the same turn. Turn 3 Wicked Blow took the sashed Jynx and Knock Off took Gothitelle, so with the counters at 2 I had exactly one attacking turn left: turn 4 Knock Off put Galarian Slowbro on 14 and Wicked Blow went into a Slowking Protect, and Shell Side Arm finished the 25 HP Urshifu. Turn 5 Incineroar switched out at count 1 while Weavile's Ice Shard removed Galarian Slowbro through Maura's Regenerator rotation. From there Zapdos did the work: Thunderbolt took Mega Slowbro to 17 on the turn it evolved, Maura rotated it out, and Thunderbolt plus Dark Pulse removed both Slowkings through two more Protects; Weavile and Hydreigon fell to Scald and Sludge Bomb on the way. Mega Slowbro came back at 17 HP and Thunderbolt ended it."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Shadow Tag locks non-Ghosts", "result": "PASS", "evidence": "turns 0-2: switch_blocked_by ['ability_prevents_escape'] on both my actives; it cleared the moment Gothitelle fainted on turn 3."},
+    {"check": "Fake Out then Perish Song in the first two turns", "result": "PASS", "evidence": "turn 1 Jynx Fake Out (Helping Hand-boosted, 12 damage) flinched Incineroar and cancelled my Taunt; turn 2 'All Pokemon that heard the song will faint in three turns', perish count 3 on all four battlers. The room's opening was executed exactly as authored and it cost me Urshifu (it had to spend its last turn attacking rather than leaving)."},
+    {"check": "Regenerator rotation", "result": "PASS", "evidence": "turn 5: Maura withdrew a 222/298 Slowking for Slowbro and it returned on the same turn at 298/298 (dmg -76 recorded on opponent_a:2). Turn 7: Maura withdrew Mega Slowbro at 17 HP (Shell Armor, so no heal) to bring Galarian Slowking. Two voluntary switches in eleven turns, both sensible."},
+    {"check": "Curious Medicine resets boosts", "result": "NOT TESTED", "evidence": "I had no stat boosts when Galarian Slowking entered (turn 7); the ability had nothing to reset."},
+    {"check": "Mega Slowbro ace", "result": "PASS mechanically, weak in practice", "evidence": "turn 6: Mega Evolved, Shell Armor shown; a single 2x Thunderbolt took it from 301 to 17 the same turn. It Protected once (turn 10, blocking a redirected Knock Off) and died to the next Thunderbolt. A 4 SpD EV Mega Slowbro against the Electric the crack line names is a one-hit body."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Gothitelle", "payoff": "outstanding. Blocked the Knock Off that would have KOed it (91 HP) and freed my side from Shadow Tag on the Perish Song turn - the single most valuable Protect in the block"},
+    {"attempt": 1, "turn": 4, "battler": "Slowking", "payoff": "excellent. Blocked a Wicked Blow that KOes it from full; Unseen Fist leaked 76 (see engine defect)"},
+    {"attempt": 1, "turn": 6, "battler": "Slowking", "payoff": "excellent. Blocked a 2x Knock Off (about 290) and kept its Leftovers"},
+    {"attempt": 1, "turn": 8, "battler": "Slowking", "payoff": "excellent. Blocked a Dark Pulse that KOed it from 170 the next turn"},
+    {"attempt": 1, "turn": 10, "battler": "Mega Slowbro", "payoff": "good by redirect. Nothing was aimed at it; the Knock Off aimed at Galarian Slowking retargeted after the KO and hit the guard"}
+  ],
+  "protect_summary": "5 Protects, 0 empty, 4 of them blocking a KO. Slowking's three guards were spaced correctly (turns 4, 6, 8) and each landed on the turn I doubled or aimed a lethal move at it. Together with Hannah this is the strongest Protect play in the gym.",
+  "ai_defects": [],
+  "engine_defects": [
+    {"id": "E0393-ENGINE-1", "turn": "a1 turn 4 (Slowking) and turn 2 (Jynx, no Protect)", "observed": "Wicked Blow (Unseen Fist) into a Protecting Slowking printed 'couldn't fully protect itself' and dealt 76 where the unprotected hit is about 400 (see turn 3 on Jynx and Gothitelle); the same text printed on turn 2 against a Focus Sash Jynx that had not Protected. Third occurrence in the block (E0389, E0391). Unseen Fist appears to be routed through the Z-move partial-protect branch (quarter damage) instead of bypassing Protect."}
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 with three faints after an eleven-turn fight in which the trap fired exactly as written and cost me Urshifu, and Scald and Sludge Bomb took two more. The room decided its own tempo for five turns; that is what a sixth gym room should do.",
+  "concept_on_board": "Yes, the most completely of the six rooms. Shadow Tag plus Perish Song was up by turn 2, the three-turn clock forced my choices for turns 3-5, and Regenerator rotation was visible twice. Only Curious Medicine went untested, because I never boosted.",
+  "cooler": "This room plays like its description and is the gym's best-executed concept. Two notes, neither implemented. (1) Mega Slowbro at 252 HP / 4 Def / 252 SpA Modest is a one-Thunderbolt body against the counterplay the room itself names; a 252 HP / 252 Def spread with Slack Off would make the ace the wall its Mega stats promise and the Regenerator rotation would then actually buy something. (2) Gothitelle carries Trick Room it never used and Helping Hand it used to boost a Fake Out; Trick Room under a Perish clock with four Slow bodies is a real idea (they all move first while the player is trapped) and the AI never reached for it. If the room wants that, Gothitelle should lead beside a Slow body rather than beside Jynx. Jynx with Dry Skin against a party that answers this room with Electric and Dark is a nice touch that never came up.",
+  "legality_notes": "None found.",
+  "verification_limit": "No level change here; nothing pending re-verification."
+}
