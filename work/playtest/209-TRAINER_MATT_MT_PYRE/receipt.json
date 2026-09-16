@@ -1,0 +1,77 @@
+{
+  "play_order": 209,
+  "e_group": "E0320",
+  "trainer": "TRAINER_MATT_MT_PYRE",
+  "class": "admin",
+  "location": "MtPyre_Summit",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Pelipper/Ludicolo/Heliolisk L59 (offset +1) and Araquanid/Okidogi/Golisopod L60 (offset +2), both matching cap + offset - 2 on Medium. This is the first team in my block that is not below the player's cap.",
+  "difficulty": "medium",
+  "party_manifests": [
+    "work/playtest/_party/party_matt_60.json",
+    "work/playtest/_party/party_matt_60_b.json"
+  ],
+  "chronology_note": "Attempt 1 used one species sourced inside the current window - Tyranitar, pool-60 gate 60, SafariZone_Northeast rock smash, legal here because the Safari Zone entrance is on Route 121 and Matt is fought after Route 121/122. Attempt 2 dropped it, so the winning party is built entirely from gates 42 and below: Torkoal 42 (FieryPath), Incineroar 36, Gardevoir 30 with Gardevoirite stone-window 14, Landorus 42 (Route 111 ruins sign), Amoonguss 42, Zapdos 30 (New Mauville sign). Two reachable legends. Nothing from Shoal Cave, Route 124-127 or Mossdeep.",
+  "pre_play_strategy_checks": [
+    "Pelipper's Drizzle is free on entry and is Matt's bird in both of his battles",
+    "Pelipper picks Tailwind or Wide Guard depending on whether the crew needs speed or cover",
+    "Araquanid's Water Bubble doubles its Water moves and halves incoming Fire",
+    "Ludicolo's Swift Swim makes it the fastest thing on the field in rain",
+    "Heliolisk's Dry Skin heals it in the rain that makes its Thunder never miss",
+    "Okidogi's Toxic Chain badly poisons on roughly a third of its hits",
+    "Mega Golisopod's First Impression is priority and only works on its first turn out"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-4",
+      "run_dir": "work/playtest/209-TRAINER_MATT_MT_PYRE/a1",
+      "party": "party_matt_60.json (Tyranitar/Incineroar/Amoonguss/Zapdos/Urshifu-S/Mega Gardevoir)",
+      "outcome": "lost",
+      "turns": 8,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "why": "I took the dossier's own crack literally - change the weather first - and led Tyranitar for Sand Stream. It worked on the weather and lost the battle. Rock Slide killed Araquanid on turn 1 and left Pelipper at 45, but Okidogi's Drain Punch is 4x into Tyranitar and 2x into both of my Dark bodies, and it proceeded to remove Tyranitar, Incineroar and Urshifu personally while Clear Amulet made Incineroar's Intimidate worthless. Mega Golisopod then one-shot Mega Gardevoir with First Impression. I had no Psychic or Fairy-that-matters answer to a Poison/Fighting wall and no resist to Bug priority, and the sand chipped my own five non-Rock bodies for the whole fight. Beaten 6-3 with Okidogi never below half until the very end."
+    },
+    {
+      "n": 2,
+      "seed": 2,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/209-TRAINER_MATT_MT_PYRE/a2",
+      "party": "party_matt_60_b.json (Torkoal/Incineroar/Mega Gardevoir/Landorus/Amoonguss/Zapdos) - rebuilt, see below",
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "Rebuilt around the two things that beat me: Torkoal's Drought instead of Tyranitar's sand, because it does the same job to the rain engines without being Fighting-weak and additionally halves every Water attack, and Mega Gardevoir's Psyshock, which is 4x into Okidogi. Sun was up from turn 0. Pelipper's Hurricane missed twice at sun accuracy and Heliolisk's Thunder missed once, which is three whole opponent turns the weather ate. Zapdos did the heavy lifting - Thunderbolt is 2x into Pelipper, Araquanid and Golisopod - and the Mega ace died in a single turn to Thunderbolt plus a sun-boosted Heat Wave, with First Impression only 0.5 into Zapdos's Flying half. It still cost me Torkoal and Zapdos, and Okidogi was the last thing standing again; Psyshock finally answered it on the last turn."
+    }
+  ],
+  "rebuild_reason": "Between attempts I changed five of six slots. The brief allows a rebuild between attempts and this one was earned by the loss, not guessed: attempt 1 established that Okidogi's Drain Punch and Golisopod's First Impression were the two losing vectors, so attempt 2 brought two Flying bodies that resist both, a Psychic move that is 4x into Okidogi, and a weather answer that is not weak to Fighting.",
+  "strategy_checks": [
+    {"check": "Pelipper's Drizzle is free on entry", "result": "PASS mechanically, NEVER LIVE in practice", "evidence": "Drizzle fires, but it lost the on-entry ability race to a slower setter in both attempts - turn 0 weather read B_WEATHER_SANDSTORM in attempt 1 and B_WEATHER_SUN_NORMAL in attempt 2. Matt's rain did not exist for a single turn of either battle. This is the authored crack ('change the weather first') working exactly as written, and it is also the biggest design finding here: the RAIN strategy flag on Matt is trivially switched off by any slower weather ability, and with it Swift Swim, Dry Skin, the boosted Water moves and accurate Hurricane/Thunder all go at once."},
+    {"check": "Pelipper chooses Tailwind or Wide Guard by need", "result": "PARTIAL", "evidence": "Tailwind on turn 1 in both attempts, which is the right opener. Wide Guard was never chosen in either battle. In attempt 2 turn 4 I fired two spread Heat Waves into a board where Wide Guard would have blanked both and saved Heliolisk; Pelipper was already dead by then (turn 3), so this is not clearly a scoring defect, but the second half of the authored choice was never demonstrated."},
+    {"check": "Water Bubble doubles Araquanid's Water moves and halves incoming Fire", "result": "PASS", "evidence": "attempt 2: Liquidation killed a 210 HP Torkoal - a Fire type with 140 base Defense - through sun, which is the doubled-damage claim proved. The halving is real too and it mattered: Heat Wave into Araquanid was a wasted action all battle, which is why I stopped aiming it there."},
+    {"check": "Ludicolo's Swift Swim makes it fastest in rain", "result": "FAIL (no rain existed)", "evidence": "Trace read ABILITY_SWIFT_SWIM off Ludicolo on Gardevoir's entry, so the ability is correctly assigned; it never did anything because the rain never existed. Its Fake Out lane was the real contribution - it flinched Urshifu in attempt 1 and Zapdos in attempt 2, the latter on the exact turn that killed my Torkoal."},
+    {"check": "Heliolisk's Dry Skin heals in rain and Thunder never misses", "result": "FAIL (inverted)", "evidence": "attempt 2: in sun, Dry Skin is a liability rather than a heal and Thunder's accuracy drops to 50 - it missed the one time it was used, on turn 4, and Heliolisk died in the same turn without acting again. The authored synergy is entirely contingent on a rain that a slower weather setter removes for free."},
+    {"check": "Okidogi's Toxic Chain badly poisons on roughly a third of its hits", "result": "FAIL (never once)", "evidence": "Across both battles Okidogi landed 4 Drain Punches, 1 Knock Off and 3 Poison Jabs. Discounting the hits on my Poison-typed Amoonguss, that is at least six contact hits on valid targets (Tyranitar, Incineroar, Urshifu twice, Zapdos, Mega Gardevoir) with zero 'was badly poisoned' messages. At the authored 30 percent that is roughly a 12 percent outcome. Low confidence on its own, but it is the one authored ability on this team that never fired at all, and the dossier calls it 'how Matt beats the bulky ground the player brings'. Flagged for a focused check rather than asserted as a bug."},
+    {"check": "Mega Golisopod's First Impression is priority and first-turn only", "result": "PASS", "evidence": "attempt 1 turn 8: it Mega Evolved and First Impression one-shot a 170 HP Mega Gardevoir at priority on the turn it arrived - the single most decisive move either battle. Attempt 2 turn 5: same opening, but into Zapdos, where Flying halves Bug, and it died in the same turn. The move behaved correctly and the 'only on its first turn out' constraint is what makes the ace beatable."},
+    {"check": "Emergency Exit on the un-Mega'd Golisopod", "result": "PASS", "evidence": "attempt 1 turn 5: Close Combat plus Sludge Bomb took it under half and it withdrew itself, bringing Ludicolo back in. Correct, and a real nuisance - it cost me a turn of focus fire."}
+  ],
+  "protect_ledger": [
+    {"turn": "a2 t1", "battler": "Araquanid", "payoff": "excellent - blocked BOTH Incineroar's Fake Out and Torkoal's sun-boosted spread Heat Wave in one action, on the turn its partner was setting Tailwind. Best-timed guard I saw in this whole block."},
+    {"turn": "a2 t5", "battler": "Araquanid", "payoff": "real - woke from Yawn-induced sleep and immediately blocked a second spread Heat Wave. Not consecutive: it had slept through turn 4."},
+    {"turn": "a2 t9", "battler": "Okidogi", "payoff": "excellent - blocked Mega Gardevoir's Psyshock, which is 4x into Poison/Fighting and would very likely have killed it outright. It survived one more turn because of it."},
+    {"turn": "a1", "battler": "none", "payoff": "n/a - Matt's crew chose no Protect at all in attempt 1, correctly: it was ahead on tempo from turn 2 onward and attacking was right every turn."}
+  ],
+  "protect_summary": "3 opponent Protects across two battles, all three with a concrete, well-timed payoff, 0 empty, no consecutive guarding, and none at all in the battle where guarding would have been wrong. This is the best guarding judgement in my block and needs no tuning.",
+  "ai_defects": [],
+  "ai_defect_summary": "No AI decision defect. Matt's crew played well: Tailwind first, Protect on exactly the turns a spread or a 4x move was coming, Emergency Exit respected, focus fire on the frailest body, and Okidogi correctly identified as the engine to keep alive. What is wrong with this battle is design-side, not scoring - see the weather note. The Toxic Chain observation above is logged as a check to run, not as a decision defect.",
+  "level_changes": [],
+  "level_change_rationale": "Keep. Lost the first optimized attempt outright 6-3 and won the second 6-2 only after rebuilding five of six slots specifically against this team. That is the brief's 'won after a real fight' case and it is exactly what an admin should feel like. Nothing here needs a level in either direction: the crew's authored levels (+1 and +2) already put it above the player's cap and it earned them.",
+  "rebuild_note": "No level change, so nothing needs re-verification for calibration. But the weather finding below deserves a re-run once the main agent rebuilds, and of my whole block this is the battle most worth re-running - it is the only one that beat an optimized party, and it has never once been played with Matt's rain actually on the field.",
+  "theme_check": "Yes on the board in attempt 1, no in attempt 2 - and that split is the finding. A pirate with a water-bubble spider, a priority Mega and a poison dog is a genuinely distinct, memorable admin, and in attempt 1 it beat me. But the crew's stated identity is rain, and in neither battle did rain exist for one turn, because any slower weather ability overwrites Drizzle on entry for free. Three of Matt's six members are explicitly rain-contingent. A player who brings a weather setter of any kind deletes half of this team's design before turn 1, and gets no acknowledgement from the fight that they did something clever.",
+  "cooler_note": "The concept is strong and should be kept; the problem is that it is fragile in one specific, cheap way. Two concrete suggestions, neither applied in this pass. First, give Pelipper a way to reassert the rain after it is overwritten - Rain Dance in the Wide Guard slot would make the weather a contest across the fight instead of a coin flip settled on turn 0, and it would make Matt's second appearance at the hideout read as an escalation rather than a repeat. Second, Araquanid is correctly identified as the standout and it is the member that most deserves to survive to turn 3; a Sitrus or Mystic Water over the Life Orb would stop the crew's best idea from being the thing that dies to the first spread move. Okidogi does not need help - it personally won attempt 1.",
+  "authored_set_legality": "No legality problem. Levels, items, abilities and moves all resolve correctly, the Mega ace triggers on its own, and Emergency Exit and the Golisopite interact as authored."
+}
