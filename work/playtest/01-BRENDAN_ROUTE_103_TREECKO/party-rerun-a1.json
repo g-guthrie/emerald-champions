@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0001 TRAINER_BRENDAN_ROUTE_103_TREECKO; playtest rerun R1, cap 14, attempt 1",
+  "availability_audit": "CHRONOLOGY-LEGAL FOR ROUTE 103. Book C01: the player chooses BOTH starters and the rival takes the unchosen third; this is the _TREECKO alias, so the rival holds Torchic and the player holds TREECKO + MUDKIP. Book C01/C03/C02 play order is Littleroot -> Route101 -> Oldale -> Route103 rival. Only two wild tables precede this battle: wild:Route101/land_mons and wild:Route103/land_mons (pool-14.json). GROWLITHE, CORPHISH = Route103 land; MIENFOO = Route101 land. HOOTHOOT = Route103 land. No fishing member: Mom gives the Old Rod only AFTER this battle (book C02), so Route102/Route103 old_rod is excluded. No evolved member: Rustboro sells the six common stones only from first arrival (book, money section), which is many chapters later, and no friendship/level evolution of a Route101/103 species completes at or below cap 14. No legendary, mythical, Ultra Beast or Paradox species. Held items are ordinary free-preparation catalogue items, one each.",
+  "plan": "Answer the authored crack list with what Route 101/103 actually offers. Grass/powder immunity = Treecko (also resists Electric, immune to Leech Seed and Giga Drain drain-lock) and Insomnia Hoothoot as the second Spore-proof body. Electric immunity is NOT available this early - Treecko's resistance is the honest substitute. Priority denial = Intimidate Growlithe plus Corphish Aqua Jet and Mienfoo Fake Out to contest the Fake Out tempo. Double targeting = focus the Light Ball Pikachu turn one. Denying free setup = Knock Off on Eviolite/Light Ball/Toxic Orb. Growlithe's WILD_CHARGE is the single-target Electric probe for the Lightning Rod redirection check. Mudkip's WIDE_GUARD is the Heat Wave / Electroweb check.",
+  "party": [
+    {
+      "species": "SPECIES_GROWLITHE",
+      "moves": ["MOVE_FLARE_BLITZ", "MOVE_CLOSE_COMBAT", "MOVE_WILD_CHARGE", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Intimidate lead, Fire resist for Torchic, Flare Blitz answers Shroomish/Taillow, Wild Charge is the Lightning Rod probe",
+      "availability": "pool-14 wild:Route103/land_mons - the route this battle is on."
+    },
+    {
+      "species": "SPECIES_CORPHISH",
+      "moves": ["MOVE_CRABHAMMER", "MOVE_AQUA_JET", "MOVE_KNOCK_OFF", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_ADAPTABILITY",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Adaptability Crabhammer breaks Torchic; Aqua Jet is revenge priority; Knock Off strips Light Ball / Eviolite / Toxic Orb",
+      "availability": "pool-14 wild:Route103/land_mons."
+    },
+    {
+      "species": "SPECIES_TREECKO",
+      "moves": ["MOVE_SEED_BOMB", "MOVE_DRAIN_PUNCH", "MOVE_SWORDS_DANCE", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_OVERGROW",
+      "item": "ITEM_EVIOLITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "the powder-immune, Electric-resistant, Leech-Seed-immune body; the authored crack's Grass answer",
+      "availability": "book C01 starter - the player's own chosen starter in this alias."
+    },
+    {
+      "species": "SPECIES_MIENFOO",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_DRAIN_PUNCH", "MOVE_KNOCK_OFF", "MOVE_U_TURN"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_EVIOLITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "contests the opposing Fake Out, removes items, pivots with Regenerator recovery",
+      "availability": "pool-14 wild:Route101/land_mons - the first route the player walks."
+    },
+    {
+      "species": "SPECIES_MUDKIP",
+      "moves": ["MOVE_LIQUIDATION", "MOVE_SUPERPOWER", "MOVE_WIDE_GUARD", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_EVIOLITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "bulky Water; WIDE_GUARD is the authored Heat Wave / Electroweb spread check",
+      "availability": "book C01 starter - the player's second chosen starter."
+    },
+    {
+      "species": "SPECIES_HOOTHOOT",
+      "moves": ["MOVE_AIR_SLASH", "MOVE_TAILWIND", "MOVE_HYPNOSIS", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_INSOMNIA",
+      "item": "ITEM_EVIOLITE",
+      "evs": [164, 0, 8, 204, 0, 132],
+      "role": "Insomnia is the second Spore-proof body; Tailwind is the player's own speed control",
+      "availability": "pool-14 wild:Route103/land_mons."
+    }
+  ]
+}
