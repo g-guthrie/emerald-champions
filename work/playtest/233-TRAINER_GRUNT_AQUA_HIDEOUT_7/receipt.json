@@ -1,0 +1,61 @@
+{
+  "play_order": 233,
+  "e_group": "E0344",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_7",
+  "class": "grunt",
+  "location": "AquaHideout_B1F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; all four members L74 = 76 + 0 - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76.json"],
+  "chronology_note": "Same six members as the rest of the block; Incineroar beside Amoonguss, because Spore and Fake Out are the two cleanest ways to deny a manual weather turn. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Lapras sets Rain Dance by hand off a Damp Rock and the room is built so that turn is worth paying for",
+    "Beartic's Swift Swim doubles off that manual rain",
+    "Cloyster's Skill Link Icicle Spear fires five hits every time, answering Focus Sash and Sturdy",
+    "Cloyster can Shell Smash instead when the board is safe, with no White Herb to undo the drops",
+    "Kingler's Sheer Force Crabhammer is boosted by both the rain and the ability",
+    "Lapras' Freeze-Dry hits the Water answers the player brings for 2x"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 5, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/233-TRAINER_GRUNT_AQUA_HIDEOUT_7/a1",
+      "outcome": "won", "turns": 6, "decisions": 9,
+      "player_faints": 2, "opponent_faints": 4, "ai_decision_seconds_max": 1.021,
+      "why": "I played the dossier's own crack - kill the rain before it exists - and it worked in two different ways. Fake Out flinched Lapras on the turn it had selected Rain Dance, and on turn 2 Knock Off removed the Damp Rock outright. The room made me pay for the tempo anyway: Cloyster's five-hit Icicle Spear plus Lapras' Freeze-Dry removed a full-health 330 HP Amoonguss in one turn. Urshifu replaced it and Close Combat is 2x on three of the four members; Unseen Fist punched through a Lapras Protect on turn 3 and a Kingler Protect on turn 6. Cloyster's Rock Blast (five hits, 2x on a Fire type) and Kingler's Crabhammer between them took Incineroar. Zapdos closed it."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Lapras sets Rain Dance by hand and the room pays for that turn", "result": "FAIL", "evidence": "Lapras selected RAIN_DANCE on turn 1 - the authored opening, correctly chosen - and was flinched by Fake Out. It then never selected it again, choosing FREEZE_DRY on turn 2 (while still holding the Damp Rock; Knock Off resolved later in the same turn) and PROTECT on turn 3. The room's entire premise is a manual weather turn and across a whole battle the rain never once existed. See AI defects."},
+    {"check": "Beartic's Swift Swim doubles off the manual rain", "result": "NOT OBSERVED (blocked by the above)", "evidence": "no rain ever fell, so Beartic entered on turn 5 as an ordinary 50-base-Speed Ice type and died in one turn to a Close Combat. Its whole reason for being in this room is downstream of a weather turn that never happened."},
+    {"check": "Skill Link Icicle Spear fires five hits every time", "result": "PASS", "evidence": "turn 2, 'The opposing Cloyster used Icicle Spear! It's super effective! The Pokemon was hit 5 times!' - and that plus one Freeze-Dry killed a 330 HP Amoonguss outright. Turn 3, Rock Blast also hit five times for 142 into Incineroar. Skill Link is correct and it is the most dangerous thing in the room by a distance."},
+    {"check": "Cloyster Shell Smash when the board is safe", "result": "NOT OBSERVED", "evidence": "Cloyster chose Protect, Icicle Spear and Rock Blast. It never judged the board safe enough to Smash, which is a defensible read against a Fake Out lead and a Fighting type, and it did more damage attacking than a Smash turn would have bought."},
+    {"check": "Kingler's Sheer Force Crabhammer", "result": "PASS (ability), FAIL (rain)", "evidence": "turn 5, Crabhammer was 2x into Incineroar and killed it from 159. Sheer Force is doing its job. The rain half of the authored boost never applied because there was no rain."},
+    {"check": "Lapras' Freeze-Dry hits Water for 2x", "result": "PASS (on the wrong target)", "evidence": "turn 2 Freeze-Dry was 'super effective' into Amoonguss - that is the ordinary Ice-on-Grass 2x, not the Freeze-Dry-on-Water gimmick. Nothing in my party is a Water type, so the move's signature property was never exercised. Same structural point as Jellicent's Water Absorb at play_order 232: a competent party brings no Water into this faction."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Cloyster", "payoff": "FULL - blocked Amoonguss' Spore. That is the single most valuable thing anything on that side could have done: sleep on the Skill Link body would have ended the room, and Cloyster went on to do more damage than the rest of the team combined. A correct, high-value guard on turn 1."},
+    {"turn": 3, "battler": "Lapras", "payoff": "ZERO in outcome, correct in process - at 145/345 facing a revealed Close Combat user it guarded, and Unseen Fist ignored it ('The opposing Lapras couldn't fully protect itself'). It could not have known about Unseen Fist; against any other Fighting type this is the right call."},
+    {"turn": 6, "battler": "Kingler", "payoff": "FULL - blocked a 2x Thunderbolt from Zapdos while alone at 271 HP, and Unseen Fist again went through with the smaller Wicked Blow instead. It then attacked rather than guarding again."}
+  ],
+  "protect_summary": "3 opponent Protects on three different battlers, none consecutive, none empty in process, two with clear payoff and the third only nullified by an ability that beats Protect by design. This is good guard behaviour and I have no complaint about it.",
+  "ai_defects": [
+    {
+      "severity": "moderate",
+      "turn": 2,
+      "board": "Lapras 299/345, still holding ITEM_DAMP_ROCK at turn start, with a Swift Swim Beartic and a Sheer Force Kingler in reserve and no weather on the field. It had selected Rain Dance the previous turn and been flinched.",
+      "chosen": "MOVE_FREEZE_DRY at Amoonguss",
+      "problem": "This room has exactly one engine and it is a manual weather turn. Having had the setup denied by a flinch - not by a counter, not by a threat, by a one-off priority move that cannot be repeated - the correct play is to spend the turn it was always going to spend. Instead it abandoned the plan permanently and the team's other two rain-dependent members entered a dry field. The scorer appears to treat a denied setup as a refuted setup.",
+      "better": "MOVE_RAIN_DANCE again. Fake Out cannot be used twice by the same Pokemon, so the turn was guaranteed to resolve.",
+      "note": "This is the weather-setter analogue of the Trick Room finding at play_order 207. It is worth tracing against every hand-set weather or terrain owner in the campaign - anything holding Rain Dance, Sunny Day, Sandstorm, Hail or a terrain move without the matching ability - because the pattern is 'setter gets flinched or forced once, never tries again'. Charitably, Freeze-Dry plus the partner's Icicle Spear did take a 330 HP Pokemon off the board that turn, so the choice was not valueless; but it cost the room three-quarters of its design."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Two player faints, six turns, and both deaths came from the room executing real damage - a five-hit Icicle Spear plus Freeze-Dry on turn 2, and a five-hit Rock Blast plus a Sheer Force Crabhammer on turn 5. That is the brief's 'won with 2+ faints or after a real fight' case. It also seems wrong to add levels to a room that lost three of its four design payoffs to an AI scoring problem: the honest test of this trainer's difficulty is a rerun after the weather-setter behaviour is fixed, not a level it did not earn. I would rather leave it at 0 and let the main agent retest than inflate it now and have to walk it back.",
+  "rebuild_note": "No level change, so nothing here needs re-verification for levels. What this battle does need is a rerun after the Rain Dance scoring is looked at - it is the second most informative rerun in my block after Matt (play_order 237), because three of its four strategy checks are blocked behind one decision.",
+  "theme_check": "Yes, and the variation is real: an ice hold next door to the rain room is a different room, not a repeat, and the answer to 'how do you do rain twice without repeating yourself' is genuinely answered on paper. On the board it did not show, because the rain never fell - what the player actually met was a very good multi-hit Cloyster and three ordinary Ice and Water bodies. The dossier's claim that 'killing Lapras on turn one is the correct play and the room knows it' is exactly right and I did it; what the room does not yet know is what to do afterwards.",
+  "cooler_note": "Keep the roster. Cloyster with Skill Link and no White Herb is the best-designed single slot in the hideout - it is the answer to Focus Sash and Sturdy, it fires five hits every time, and its Shell Smash is a real risk because the drops stick. The demonstrated weakness is not the composition, it is that three members are conditional on one member's one turn. A concrete suggestion for a later pass, not made here: if the weather-setter scoring is fixed and the room still folds, give Lapras a second reason to be alive on turn 3 rather than a second setup lane - Icy Wind over Hydro Pump would let it bank speed control on the turns it is not setting, which is the same lesson the Politoed room at play_order 232 already teaches well.",
+  "authored_set_legality": "No legality problem found."
+}
