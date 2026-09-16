@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 7,
+  "e_group": "E0007",
+  "trainer": "TRAINER_DARIAN",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "CHINCHOU L14 offset 2 @SITRUS_BERRY VOLT_ABSORB",
+    "BARBOACH L16 offset 4 @EVIOLITE OBLIVIOUS (R1 raised it 3 -> 4; confirmed present)",
+    "TENTACOOL L14 offset 2 @EVIOLITE LIQUID_OOZE",
+    "CLAMPERL L14 offset 2 @DEEP_SEA_TOOTH SHELL_ARMOR (at the +-2 ceiling; must not move again)"
+  ],
+  "party_manifest": "work/playtest/07-DARIAN/party-rerun-a1.json",
+  "party_summary": "Reused the R1 chronology-legal Route 104 party unchanged: Roselia / Electrike / Timburr / Treecko / Pachirisu / Corphish.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3007,
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 8,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 61,
+      "events": "work/playtest/07-DARIAN/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 I aimed a 4x Energy Ball at Barboach and it Protected, exactly right; Chinchou's Muddy Water took Electrike from 39 to 11 and dropped its accuracy. T2 I pivoted Electrike out for Timburr and the second Energy Ball removed Barboach. Tentacool came in. T3 Chinchou Protected the next 4x Energy Ball - the second correctly predicted guard - while Knock Off stripped Tentacool's Eviolite and Sludge Bomb took Roselia to 9. T4 Energy Ball finally landed and removed Chinchou; Roselia died to Sludge Bomb plus its own Life Orb. Clamperl came in. T5 Tentacool's Acid Spray dropped Timburr's Sp. Def two stages, Rock Slide removed Tentacool, Seed Bomb took Clamperl to 6, and Clamperl's Deep Sea Tooth Ice Beam removed Treecko. T6 Corphish's Aqua Jet finished Clamperl. Won 4-2."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Chinchou's Discharge is a safe ally line beside Ground-type Barboach",
+      "result": "PASS (correct decline)",
+      "evidence": "Chinchou never used Discharge, which is right on this board: my left slot was a Lightning Rod Electrike, so Discharge would have been absorbed for a free Sp. Atk boost. It used Muddy Water (foes only, so also safe beside Barboach) twice and Protect once instead. The authored line was evaluated, not scripted."
+    },
+    {
+      "check": "Barboach uses Dragon Dance only behind adequate survival; turn two re-evaluates the speed order",
+      "result": "PASS (correct decline)",
+      "evidence": "Barboach never danced opposite a lead holding a 4x-effective Energy Ball. It Protected the turn that attack was aimed at it, which is the correct use of its fourth slot, and died to the second one. No wasted setup turn."
+    },
+    {
+      "check": "Tentacool's Acid Spray sets up a partner special attack rather than being a free turn",
+      "result": "PARTIAL PASS",
+      "evidence": "T5 Acid Spray harshly dropped Timburr's Sp. Def and its partner Clamperl did use a special attack the same turn (Ice Beam) - but on Treecko, not on the battler whose Sp. Def had just been halved. The setup and the payoff were on different targets, so the combination produced a KO by coincidence rather than by design."
+    },
+    {
+      "check": "Clamperl's Shell Smash is taken only behind a safe turn",
+      "result": "PASS (correct decline)",
+      "evidence": "Clamperl entered opposite a Grass type holding Seed Bomb (2x) and chose Ice Beam for an immediate KO rather than paying a setup turn it would not have survived."
+    },
+    {
+      "check": "Liquid Ooze / no forced Acid Spray or Discharge script",
+      "result": "PASS",
+      "evidence": "Neither move was used reflexively; each appeared once, on the turn it had a reason."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "BARBOACH",
+      "payoff": "Blocked a 4x super-effective Energy Ball that was a probable one-shot on a 57 HP Eviolite body. Largest possible payoff."
+    },
+    {
+      "turn": 3,
+      "battler": "CHINCHOU",
+      "payoff": "Blocked a second 4x Energy Ball aimed at it while it was at 46/58. Also a probable one-shot denied."
+    }
+  ],
+  "protect_ledger_note": "Two opponent Protects, both predictive, both denying a 4x attack. Neither was repeated and neither was empty. This is the best guard pricing I have seen from this build.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0007-W1",
+      "turn": 5,
+      "board": "Tentacool at 17/48 with Acid Spray, partner Clamperl fresh with Ice Beam; my side was Treecko (Grass, 39/39) and Timburr (Fighting, 42/58).",
+      "chosen": "Acid Spray on Timburr; Clamperl's Ice Beam then went to Treecko.",
+      "better": "Acid Spray on Treecko, the target its partner was about to hit specially - or Sludge Bomb on Treecko (2x) for immediate damage from a battler that was about to die anyway.",
+      "severity": "weak choice, not a defect. The pair did not coordinate the debuff with the attack."
+    }
+  ],
+  "ai_improvements_observed": [
+    "Two high-value predictive Protects, both denying a 4x attack.",
+    "Two correct declines of authored options (Discharge into a Lightning Rod, Dragon Dance into a 4x lead).",
+    "Zero voluntary switches; no free pivots into a faint."
+  ],
+  "level_changes": {},
+  "level_change_reason": "Won with 2 player faints (Roselia and Treecko) after a genuine fight in which two correctly timed Protects cost me four turns of tempo. Brief band: keep. Barboach's R1 +1 is confirmed earned - the Protect it bought made the 4x lead work for its levels - and Clamperl is already at the +-2 ceiling, so it could not move regardless.",
+  "levels_after": {"CHINCHOU": 2, "BARBOACH": 4, "TENTACOOL": 2, "CLAMPERL": 2},
+  "cooler": "Yes: the whole roster is mono-Water-flavoured and three of the four fold to one Grass attacker, which is why both of my faints came from their own recoil and a single Ice Beam rather than from pressure. The identity would survive intact if one slot traded its Muddy Water for a real answer to Grass - Tentacool already has Sludge Bomb and could hold an Air Balloon or a Chesto/Rindo-class berry so the authored Acid Spray support gets a second turn. Recording only.",
+  "authored_set_legality": "No legality problem; every opponent move resolved legally on its board."
+}
