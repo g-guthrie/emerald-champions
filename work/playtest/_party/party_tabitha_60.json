@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0337 Tabitha rebuild after a 6-4 loss on attempt 1 (cap 60)",
+  "availability_audit": "Excadrill gate 36 (evolution:level from Drilbur). Kommo-o gate 48 (evolution:level from Hakamo-o). Landorus gate 42, legendary_sign:Route111_RuinsExterior. Venusaur gate 36 (Ivysaur line) with ITEM_VENUSAURITE stone-window 14. Amoonguss gate 42 (Foongus line). Tornadus gate 60, legendary_sign:Route119 (Fortree). Every source map is at or before the Magma Hideout in play order; nothing from Shoal Cave, the sea routes or Mossdeep onward.",
+  "plan": "Attempt 1 lost 6-4 to three specific things and this party answers each. (1) Sand Rush Excadrill's Life Orb Iron Head one-shot my Tapu Bulu from full: so I bring my own Excadrill, which runs at the same doubled Speed in Tabitha's own sand, resists Rock Slide, and threatens Gigalith and Coalossal with 2x High Horsepower. (2) Choice Specs Volcanion's spread Heat Wave killed two Grass bodies in two turns: Kommo-o resists both Fire and Rock, and Mega Venusaur's Thick Fat halves the Fire rather than leading into it. (3) Grassy Terrain healed her side as much as mine, so Tapu Bulu is out entirely. Amoonguss stays because Spore on the Choice-locked Volcanion was the single best turn of attempt 1. Tornadus stays for Prankster Tailwind. No Water attack anywhere, because Volcanion's Water Absorb heals on it and Coalossal's Steam Engine turns it into +6 Speed.",
+  "party": [
+    {
+      "species": "SPECIES_EXCADRILL",
+      "moves": ["MOVE_HIGH_HORSEPOWER", "MOVE_IRON_HEAD", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SAND_RUSH",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "turns Tabitha's own Sand Stream into my speed control; 2x Ground into Gigalith, Coalossal and Volcanion",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_DRILBUR."
+    },
+    {
+      "species": "SPECIES_KOMMO_O",
+      "moves": ["MOVE_CLOSE_COMBAT", "MOVE_DRAGON_CLAW", "MOVE_POISON_JAB", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SOUNDPROOF",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "resists Fire and Rock - the two damage types that killed attempt 1 - and Close Combat is 2x into four of Tabitha's six",
+      "availability": "pool-60 gate 48, evolution:level from SPECIES_HAKAMO_O."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: special Ground into Gigalith, Excadrill, Coalossal and Volcanion",
+      "availability": "pool-60 gate 42, legendary_sign:Route111_RuinsExterior."
+    },
+    {
+      "species": "SPECIES_VENUSAUR",
+      "moves": ["MOVE_GIGA_DRAIN", "MOVE_SLUDGE_BOMB", "MOVE_SLEEP_POWDER", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_OVERGROW",
+      "item": "ITEM_VENUSAURITE",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "Mega win condition held in reserve this time; Thick Fat halves the Heat Wave and Giga Drain is 2x into Gigalith, Excadrill, Krookodile and Golurk",
+      "availability": "pool-60 gate 36 with ITEM_VENUSAURITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Spore is the answer to a Choice-locked Volcanion; it won me four turns on attempt 1",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_TORNADUS",
+      "moves": ["MOVE_TAUNT", "MOVE_HURRICANE", "MOVE_TAILWIND", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: Prankster speed control and the Flying body that Krookodile's Ground lane cannot touch",
+      "availability": "pool-60 gate 60, legendary_sign:Route119."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Magma Hideout admin/leader climax, cap 60 (play_order 226-228: E0337 Tabitha, E0339 Maxie)",
+  "availability_audit": "Every member's pool-60 gate is 60 or lower and its source map lies at or before the Magma Hideout in play order. Tapu Bulu gate 60, legendary_sign:Route123 (the Lilycove-side stretch walked immediately before Mt Pyre). Venusaur gate 36 (evolution:level from Ivysaur) with ITEM_VENUSAURITE stone-window 14. Urshifu-Single-Strike gate 42 (evolution:other:EVO_SCRIPT_TRIGGER from Kubfu, the same tower quest as the Rapid Strike form). Landorus gate 42, legendary_sign:Route111_RuinsExterior. Amoonguss gate 42 (evolution:level from Foongus). Tornadus gate 60, legendary_sign:Route119 - the Fortree route, which the player crosses before the Feather Badge and therefore long before this hideout. Excluded as post-hideout: Suicune (Route125), Tapu Fini (Route126), Keldeo (Route127) and every stone-window-60 Mega placed on the sea routes or the Mossdeep side.",
+  "plan": "A deliberate rebuild for Tabitha and Maxie, replacing the rain six used for the grunt rooms. Two of Tabitha's members punish Water specifically - Volcanion's Water Absorb heals on it and Coalossal's Steam Engine converts a Water attack into +6 Speed - so this party carries no Water attack at all. Grass is the through-line instead: Tapu Bulu and Mega Venusaur hit Gigalith, Excadrill, Krookodile, Golurk and Great Tusk for 2x, and Mega Venusaur's Thick Fat halves the Fire damage that Coalossal, Volcanion, Ninetales, Chi-Yu, Ceruledge and Pyroar all deal. Landorus is the special Ground lane that is 2x into Gigalith, Excadrill, Coalossal and Volcanion and 4x into Salazzle. Urshifu-Single-Strike replaces the Rapid Strike form precisely so its Unseen Fist Protect-breaking and guaranteed crits arrive on a Dark and Fighting body rather than a Water one - Wicked Blow is 2x into Golurk's Ghost half and Close Combat is 2x into four of Tabitha's six. Amoonguss buys turns. Tornadus is the answer to Maxie: Prankster Taunt moves before a zero-Speed Stakataka in normal order and denies Trick Room outright.",
+  "party": [
+    {
+      "species": "SPECIES_TAPU_BULU",
+      "moves": ["MOVE_WOOD_HAMMER", "MOVE_HORN_LEECH", "MOVE_SUPERPOWER", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "reachable legend: the Grass lane into a faction made of Rock and Ground bodies; Horn Leech sustains",
+      "availability": "pool-60 gate 60, legendary_sign:Route123."
+    },
+    {
+      "species": "SPECIES_VENUSAUR",
+      "moves": ["MOVE_GIGA_DRAIN", "MOVE_SLUDGE_BOMB", "MOVE_SLEEP_POWDER", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_OVERGROW",
+      "item": "ITEM_VENUSAURITE",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "Mega win condition; Thick Fat halves the Fire damage that every Magma team deals, and Grass is 2x into most of the roster",
+      "availability": "pool-60 gate 36 (Ivysaur line) with ITEM_VENUSAURITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Protect and Wide Guard breaker on a non-Water body, so it does not feed Water Absorb or Steam Engine",
+      "availability": "pool-60 gate 42, evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: special Ground into the Rock and Fire bodies, around Intimidate and through physical bulk",
+      "availability": "pool-60 gate 42, legendary_sign:Route111_RuinsExterior."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "turn-buyer against a gauntlet of slow setup bodies",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_TORNADUS",
+      "moves": ["MOVE_TAUNT", "MOVE_HURRICANE", "MOVE_TAILWIND", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: Prankster Taunt is the Trick Room and Curse denial for Maxie, and Tailwind is the speed answer under a reversed field",
+      "availability": "pool-60 gate 60, legendary_sign:Route119 (Fortree, pre-Feather Badge)."
+    }
+  ]
+}

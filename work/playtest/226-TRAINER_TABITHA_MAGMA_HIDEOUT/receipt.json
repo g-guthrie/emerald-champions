@@ -1,0 +1,133 @@
+{
+  "play_order": 226,
+  "e_group": "E0337",
+  "trainer": "TRAINER_TABITHA_MAGMA_HIDEOUT",
+  "class": "admin",
+  "location": "MagmaHideout_4F",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Gigalith, Excadrill, Coalossal, Volcanion and Krookodile all arrived at L60 = 60 + 2 - 2, and Golurk at L61 = 60 + 3 - 2, matching the authored offsets 2/2/2/2/2/3.",
+  "difficulty": "medium",
+  "party_manifests": [
+    "work/playtest/_party/party_magma_admins_60.json",
+    "work/playtest/_party/party_tabitha_60.json"
+  ],
+  "chronology_note": "Both parties are built only from species whose pool-60 gate is 60 or lower and whose source map lies at or before the Magma Hideout: Excadrill 36, Venusaur 36 (Venusaurite stone-window 14), Urshifu 42, Landorus 42 (Route111 ruins sign), Amoonguss 42, Kommo-o 48, Tapu Bulu 60 (Route123 sign), Tornadus 60 (Route119 sign). Suicune, Tapu Fini, Keldeo and every stone-window-60 Mega on the sea routes are excluded as post-hideout.",
+  "pre_play_strategy_checks": [
+    "Gigalith's Sand Stream with a Smooth Rock lasts eight turns and Excadrill's Sand Rush doubles its Speed for all of them",
+    "Gigalith's alternative action is Wide Guard against a spread answer",
+    "Coalossal is a trap: a surviving Fire or Water hit grants Steam Engine +6 Speed and Weakness Policy +2/+2, so killing it outright is correct",
+    "Volcanion's Choice Specs Steam Eruption is the admin's raw damage, and Water Absorb heals it on the obvious answer",
+    "Krookodile's Moxie converts a knockout into a sweep",
+    "Mega Golurk with Iron Fist is the ace and its Shadow Punch and Drain Punch are both boosted",
+    "Does the excavation theme actually show on the board?",
+    "Protect ledger across six members"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magma_admins_60.json (Tapu Bulu/Mega Venusaur/Urshifu-SS/Landorus/Amoonguss/Tornadus)",
+      "outcome": "lost",
+      "turns": 8,
+      "decisions": 13,
+      "player_faints": 6,
+      "opponent_faints": 4,
+      "why": "Lost 6-4. Two mistakes, both mine, both punished immediately. First, I led a Grass/Fairy Tapu Bulu into a Sand Rush Excadrill: its Life Orb Iron Head is 2x into Fairy and one-shot a 210/210 body on turn 1 before I acted. Second, I underestimated Choice Specs Volcanion - its spread Heat Wave is 2x into both of my Grass bodies at once and took Amoonguss from 263 to 63 and Mega Venusaur from 190 to 88 in a single action, and I then mis-read the Speed tier and let Venusaur die assuming it outran Volcanion (Mega Venusaur has no Speed EVs; Volcanion has 252). Amoonguss's Spore on the Choice-locked Volcanion on turn 6 was the one thing that worked. I finished with Tornadus alone against a Mega Golurk and a full-HP Coalossal."
+    },
+    {
+      "n": 2,
+      "seed": 2,
+      "build": "work/agent-battle-build-5",
+      "party": "party_tabitha_60.json (Excadrill/Kommo-o/Landorus/Mega Venusaur/Amoonguss/Tornadus) - rebuilt, see the manifest's plan for why each swap was made",
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 7,
+      "player_faints": 1,
+      "opponent_faints": 6,
+      "why": "Bringing my own Sand Rush Excadrill turned Tabitha's engine against her. Turn 1 my Excadrill outran hers (Jolly over Adamant) and crit-KOed it with High Horsepower while Kommo-o's Close Combat took Gigalith to 24; Gigalith's Stomping Tantrum then killed my Excadrill. Turn 2 Landorus came in Ground-immune and Kommo-o finished Gigalith; Tabitha withdrew Volcanion for Golurk, which ate a 169-damage Earth Power. Turn 3 Golurk Mega Evolved at 67/236 and died to the next Earth Power without acting, while Krookodile Protected away a Close Combat. Turn 4 Earth Power removed Volcanion (2x) and Close Combat removed Krookodile (2x) in the same turn. Turn 5 Coalossal Protected away both my actions, and turn 6 a single Earth Power - 4x into Rock/Fire - removed it from 258/258. One faint."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Sand Stream plus Smooth Rock lasts eight turns and Sand Rush doubles Excadrill's Speed",
+      "result": "PASS in both attempts",
+      "evidence": "Sand was up at turn 0 of both runs, overwriting my Drizzle in attempt 1 (Gigalith's base 25 Speed applies its ability after Pelipper's 65), and it was still raging on turn 8 of attempt 1. Sand Rush is the reason attempt 1 was lost on turn 1: her Excadrill acted before a Tapu Bulu that is not slow, and one-shot it. The engine works exactly as authored and it is the strongest part of this fight."
+    },
+    {
+      "check": "Gigalith's alternative action is Wide Guard",
+      "result": "NOT OBSERVED",
+      "evidence": "Gigalith used Rock Slide, Stomping Tantrum and Rock Slide across the two runs and never chose Wide Guard. Defensible each time - I had a spread move on the field only rarely - but this is now the third authored Wide Guard in the block that has never appeared (Steelix in E0336, Stonjourner in E0331, Gigalith here). Worth a look at how Wide Guard is scored when the opponent has not yet revealed a spread move."
+    },
+    {
+      "check": "Coalossal is a trap; killing it outright is correct",
+      "result": "PASS as design, trap NOT TRIGGERED",
+      "evidence": "I brought no Fire or Water attack in either attempt, precisely because of the Steam Engine and Weakness Policy note, so neither ever fired. In attempt 2 I removed it exactly as the dossier prescribes - one action, from full HP - with a Landorus Earth Power that printed 'It's extremely effective!', because Ground is 4x into Rock/Fire. That 4x Ground hole is worth recording: the trap is built to punish the Fire and Water answers, and the answer that walks straight past it is the Ground lane the rest of this hideout has been teaching the player to bring."
+    },
+    {
+      "check": "Volcanion's Choice Specs damage",
+      "result": "PASS, and it is the fight's best-designed threat",
+      "evidence": "Attempt 1: Heat Wave hit both of my Grass bodies for 2x in one action (Amoonguss 263 to 63, Mega Venusaur 190 to 88 even through Thick Fat) and the Choice lock then kept it firing Heat Wave, which is what let Spore eventually neutralise it. Attempt 2: Steam Eruption fired once before Earth Power removed it. The Choice Specs is a genuine double-edge the AI does not get to take back, and both sides of it showed."
+    },
+    {
+      "check": "Water Absorb heals Volcanion on the obvious answer",
+      "result": "NOT TESTED - deliberately",
+      "evidence": "Neither of my two parties carried a single Water attack, which is a direct consequence of this ability sitting next to Coalossal's Steam Engine. Two abilities on two different Pokemon jointly removed an entire attacking type from my team-building for this fight. That is the best compliment I can pay an authored roster, and it is why I am recording this as untested rather than reaching for a Water move to make a checkbox green."
+    },
+    {
+      "check": "Krookodile's Moxie converts a knockout into a sweep",
+      "result": "PASS on the trigger, FAIL on the sweep",
+      "evidence": "Attempt 1 turn 7: Krookodile's Crunch KOed Amoonguss and the log printed 'The opposing Krookodile's Attack rose!'. It then died on the following turn to a 2x Close Combat before cashing the boost. The ability fires correctly; the body is too frail for the boost to compound."
+    },
+    {
+      "check": "Mega Golurk with Iron Fist is the ace",
+      "result": "PARTIAL - it Megas reliably but it is not the fight's ace in practice",
+      "evidence": "Mega Evolution confirmed in both runs ('The opposing Golurk has Mega Evolved into Mega Golurk!'), and the driver reported GOLURK_MEGA at L61. In attempt 1 it earned its billing: Shadow Punch KOed Urshifu and Drain Punch drained Tornadus. In attempt 2 it was switched in to absorb an Earth Power, Mega Evolved at 67/236, and died to the next one without acting. Across both runs the member that actually decided the fight was Volcanion, not Golurk."
+    },
+    {
+      "check": "Does the excavation theme show on the board?",
+      "result": "PASS - clearly",
+      "evidence": "Tabitha runs the digging crew and every slot reads as that: a Rock golem that raises the dust, a drill that runs at double speed in it, a coal miner, a Ground/Dark crocodile, an animated statue dug out of the ground, and the volcano spirit itself. The sandstorm is on the field from turn 0 and never leaves, so the theme is not just in the names - it is the mechanical condition the whole fight runs under. Volcanion in particular is the right legendary for a man who digs into volcanoes, as the dossier claims."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS - three Protects, all with real payoffs",
+      "evidence": "See protect_ledger."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "attempt": 1,
+      "turn": 4,
+      "battler": "Krookodile",
+      "payoff": "REAL. Blocked Mega Venusaur's Giga Drain, 2x into Ground/Dark, on its entry turn, while its partner Volcanion fired the spread Heat Wave that took two of my bodies to under a third."
+    },
+    {
+      "attempt": 2,
+      "turn": 3,
+      "battler": "Krookodile",
+      "payoff": "REAL. Blocked Kommo-o's Close Combat, 2x into Dark. Its partner Golurk was KOed on the same turn, so the guard preserved the healthy body over the dying one."
+    },
+    {
+      "attempt": 2,
+      "turn": 5,
+      "battler": "Coalossal",
+      "payoff": "REAL and the best of the three. As the last Pokemon on the field at 258/258 it blocked BOTH of my actions - Landorus's Earth Power and Kommo-o's Close Combat - and then correctly did not repeat the guard on the following turn, which is the pacing the rule asks for."
+    }
+  ],
+  "protect_summary": "3 opponent Protects across 13 turns of play, all three with a genuine payoff, 0 empty. Gigalith, Volcanion (Choice-locked, so it could not) and both Excadrill never guarded and never needed to.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Attempt 2 turn 2's pivot - withdrawing a just-deployed Volcanion for Golurk - looks wasteful and is actually correct: Volcanion is 2x into the Earth Power that Landorus had already revealed, and Golurk's Ground/Ghost takes it neutrally. It saved Volcanion for two more turns. Recording as a good decision.",
+    "The debatable call is what came next: on turn 3 the AI spent its once-per-battle Mega Evolution on a Golurk sitting at 67/236 that was KOed by the next Earth Power without acting. Mega Evolving a body that is one hit from death burns the trainer's Mega for nothing. I am not raising this as a defect because Mega Evolution is resolved at turn start before the incoming damage is known, and the stat boost is the only thing that could have saved it - but if the Mega-timing scorer has a health or expected-survival term, this is a sample worth looking at.",
+    "AI decision budget: max 62 frames (1.038 s) in attempt 1, 61 frames (1.021 s) in attempt 2 - the six-member admin boards are the slowest in the block and both are inside the 1.2 s budget, with roughly 10 percent of headroom."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep, and this is the clearest keep in the block. I lost the first optimized attempt 6-4 and only won the second after rebuilding the party specifically around this trainer - a different lead, a different Mega deployment, two members swapped for their type-resistances and one member (Excadrill) chosen purely to steal her own weather engine. That is exactly the difficulty an admin at the villain-base climax should demand: it beat a good general-purpose team and required a dedicated answer. The rules say a loss followed by a win after a real fight is a keep, and nothing here underperformed enough to raise either: Gigalith set the engine, Excadrill killed a full-HP body on turn 1, Volcanion killed two, Krookodile got its Moxie, Coalossal blocked two actions as the last body standing, and Golurk earned its ace billing in attempt 1. No offsets touched.",
+  "cooler": "Yes, the theme lands, and the roster is coherent in a way most of the grunt rooms are not. The dossier's own account of the redesign is right too: the previous build had Dragapult firing Surf at its own Rock/Fire Coalossal, and removing that turned Coalossal into a real puzzle. Two concrete observations. First, the Coalossal trap has a hole the write-up does not mention: it is authored to punish Fire and Water, and it is 4x weak to Ground, which is the exact lane rooms two through fourteen of this hideout have been demanding the player bring. My Landorus removed it from 258/258 in one action without ever engaging with the trap. If Coalossal is meant to be the fight's puzzle, the Ground answer needs to cost something. Second, the fight's real centre of gravity is Volcanion, not Mega Golurk - a Choice Specs spread attack that takes two bodies below a third in one action is more memorable than any of Golurk's punches, and in one of my two runs the ace died without acting. That is not an argument to change the roster; it is an argument that the write-up has the emphasis backwards. The one slot I would revisit is Krookodile: Moxie fired exactly as designed and then the body died the very next turn, which means the ability is decorative here.",
+  "legality_notes": "No legality problem in the authored set. Volcanion is a Mythical, and it is used as this admin's signature at a cap-60 villain-base climax; the campaign's own rule bars legendaries and mythicals only in windows at or below 24, so it is inside the rules for this window. Recording it explicitly because it is the strongest single member of the fight.",
+  "reverify_note": "No level change was made here, so nothing in this receipt needs a rebuild to re-verify.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
