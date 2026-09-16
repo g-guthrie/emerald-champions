@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 5,
+  "e_group": "E0005",
+  "trainer": "TRAINER_TIANA",
+  "class": "casual",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable on Route 102.",
+  "opponent_as_played": [
+    "SKITTY L15 @FOCUS_SASH WONDER_SKIN JOLLY (Fake Out/Fake Tears/Helping Hand/Protect) offset 3",
+    "SWIRLIX L15 @SITRUS_BERRY UNBURDEN MODEST (Draining Kiss/Dazzling Gleam/Thunderbolt/Protect) offset 3",
+    "EEVEE L16 @EVIOLITE ADAPTABILITY ADAMANT (Quick Attack/Double-Edge/Wish/Protect) offset 4",
+    "BUNEARY L15 @FLAME_ORB KLUTZ JOLLY (Fake Out/Switcheroo/Encore/Drain Punch) offset 3"
+  ],
+  "party_manifest": "work/playtest/05-TIANA/party-rerun-a1.json",
+  "party_summary": "Growlithe / Mienfoo / Timburr / Corphish / Pachirisu / Hoothoot - Route101/102/103 wilds only, nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2005,
+      "outcome": "won",
+      "turns": 7,
+      "decisions": 11,
+      "player_faints": 5,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 62,
+      "ai_decision_seconds_max": 1.038,
+      "events": "work/playtest/05-TIANA/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 I aimed Mienfoo's Fake Out at Skitty to deny its turn and Skitty answered with Helping Hand, which at +5 priority moves before Fake Out - the flinch arrived too late - and the boosted Dazzling Gleam then one-shot the Fighting-type Mienfoo. T2 Timburr replaced it; Skitty stacked Helping Hand again and an Unburden-accelerated Thunderbolt removed Growlithe before its Flare Blitz. T3 Pachirisu replaced Growlithe, its Nuzzle paralysed Skitty, Timburr's Poison Jab removed Swirlix - and a third Helping-Hand-boosted Dazzling Gleam took Timburr from 58 to 2 on the way out. Buneary replaced Swirlix. T4 Timburr withdrew for Corphish, Buneary's Fake Out hit it on entry, and Skitty Protected the Nuzzle that was lethal at 3 HP. T5 a fourth Helping Hand fed Buneary's Drain Punch, Nuzzle finally removed Skitty, and Crabhammer removed Buneary while Life Orb recoil removed Corphish. T6 Eevee's Quick Attack correctly finished the 2 HP Timburr, Super Fang halved Eevee. T7 Super Fang halved it again and its own Adaptability Double-Edge killed Hoothoot and then itself on recoil. 4-5: I finished with one Pokemon standing."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Skitty chooses Fake Out when interruption is necessary, or Fake Tears / Helping Hand when the partner can exploit it",
+      "result": "PASS - best AI performance in the block so far",
+      "evidence": "Skitty used Helping Hand on T1, T2, T3 and T5, every time into the partner attack that mattered, and the first three each produced a KO or near-KO (Mienfoo dead T1, Growlithe dead T2, Timburr 58 -> 2 on T3). It never used Fake Out - correct, since Helping Hand at +5 priority both dodged my own Fake Out and converted - and never used Fake Tears, which the plan explicitly says must not be spent after the relevant partner attack has already happened."
+    },
+    {
+      "check": "Do not spend a turn lowering Special Defence after the relevant partner attack has already happened",
+      "result": "PASS",
+      "evidence": "Fake Tears was never selected. Every support turn went to the option that paid immediately."
+    },
+    {
+      "check": "Swirlix Unburden is earned, not assumed",
+      "result": "PASS",
+      "evidence": "Swirlix's Sitrus was consumed by Growlithe's T1 Flare Blitz and Unburden then let it outrun my whole party, which is exactly how it killed Growlithe on T2. No phantom Unburden before the berry was spent."
+    },
+    {
+      "check": "Buneary threatens Klutz-assisted Flame Orb Switcheroo",
+      "result": "FAIL (never fired)",
+      "evidence": "Buneary held the field on T4 and T5 and chose Fake Out then Drain Punch. Switcheroo was never selected, and neither was Encore. On T5 the slot opposite it was Corphish, a Life Orb Water type with no burn immunity and a purely physical set - the single best Switcheroo target the battle offered. The Flame Orb correctly never burned its Klutz holder, so the item half of the gimmick is implemented; the AI just will not use the move."
+    },
+    {
+      "check": "Eevee can receive a Wish on a planned switch or keep itself alive for another attack",
+      "result": "NOT TESTED / PASS on the attacking half",
+      "evidence": "Eevee entered last with no partner, so Wish had no recipient and no switch to cover; it correctly did not waste a turn on it. Its two decisions were both right: Quick Attack to finish a 2 HP Timburr on T6, Double-Edge to remove a 50 HP Hoothoot on T7."
+    },
+    {
+      "check": "An unconsumed Sitrus does not grant Unburden",
+      "result": "PASS",
+      "evidence": "Swirlix moved at normal Speed on T1 while still holding the berry and only accelerated after it was consumed."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 4,
+      "battler": "SKITTY",
+      "payoff": "Blocked Pachirisu's Nuzzle, which was lethal at 3/54, and Skitty then lived to throw a fourth Helping Hand on T5. Large payoff."
+    }
+  ],
+  "protect_ledger_note": "One opponent Protect in seven turns, and it converted into an extra support turn. Swirlix and Eevee also carry Protect and never spent a turn on it, which is right - both were converting every turn.",
+  "ai_defects": [
+    {
+      "id": "E0005-D1",
+      "severity": "authored tactic never fires",
+      "turns": "4, 5",
+      "board": "Klutz Buneary holding an unusable Flame Orb, opposite Corphish (Life Orb, four physical moves, no burn immunity) on T5 and Pachirisu on T4.",
+      "chosen": "Fake Out (T4), Drain Punch (T5)",
+      "better": "Switcheroo on T5. It hands a burn to a purely physical Life Orb attacker and takes its Life Orb in exchange - the entire point of a Klutz Flame Orb holder. Encore, also unused, would have locked Pachirisu into Follow Me or Super Fang.",
+      "status": "STILL PRESENT. Neither Switcheroo nor Encore has fired for this trainer in either pass."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_improvements_observed": [
+    "Helping Hand is now being selected repeatedly and correctly, and is the reason this fight went 4-5. That is precisely the 'support move that buys a real next-turn value' the pricing change targets, and here it works.",
+    "Zero voluntary opponent switches. No empty guard."
+  ],
+  "level_changes": "NONE. Won on attempt 1 but with 5 of 6 player faints and only Pachirisu left standing - a real fight by any reading of the brief's rule. The first pass's +1 on Swirlix and Eevee is strongly validated: L15 Swirlix personally removed two of my six, and L16 Adaptability Eevee traded itself for a full-health Hoothoot.",
+  "levels_after": {
+    "SKITTY": 3,
+    "SWIRLIX": 3,
+    "EEVEE": 4,
+    "BUNEARY": 3
+  },
+  "cooler": "Yes. Skitty is carrying this team and Buneary is the dead weight, because two of Buneary's four moves (Switcheroo, Encore) are moves the AI will not choose. Rather than change them, the cheaper improvement is thematic: Skitty's Fake Tears is the move that is correctly never picked while Helping Hand exists, so giving Skitty the third support slot something that does not compete with Helping Hand - Sing, or After You to let the slower Swirlix fire first - would make the whimsical support core read as two distinct supports instead of one good one and three spare turns. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found. Klutz correctly suppressed the Flame Orb burn all battle."
+}
