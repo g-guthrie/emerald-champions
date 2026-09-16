@@ -1,0 +1,51 @@
+{
+  "play_order": 133,
+  "e_group": "E0159",
+  "trainer": "TRAINER_ROMAN",
+  "class": "regular",
+  "location": "AshenWoods",
+  "cap": 42,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"BUZZWOLE": 39, "STARMIE": 40, "GOLEM": 41, "RHYDON": 43},
+  "cap_window_confirmation": "Authored offsets -1/0/1/3 resolved to 39/40/41/43, i.e. cap 42 + offset - 2 on Medium. The driver reported level_cap 42. This also matches the dossier's own prose seed line 'Medium cap40 levels 39/40/41/43', which was written as cap+offset without the Medium -2; the resolved numbers are the authored intent.",
+  "party_manifest": "work/playtest/133-TRAINER_ROMAN/party.json",
+  "pre_declared_strategy_checks": [
+    "Starmie controls speed with Icy Wind and/or uses its Focus Sash to survive a hit",
+    "Rhydon's Lightning Rod draws Electric attacks off the Ground-weak partners (untestable if the player brings no Electric move)",
+    "Buzzwole's Beast Boost raises Attack (its highest stat) on a KO",
+    "Golem's Sturdy plus Weakness Policy convert a super-effective non-KO into +2/+2",
+    "Life Orb recoil on Buzzwole is real and it is not treated as a free attacker",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/133-TRAINER_ROMAN/a1", "seed": 133, "outcome": "won", "turns": 4, "decisions": 7, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "T1 I double-targeted the Focus Sash Starmie with Grassy Glide and Leaf Blade and Starmie Protected through both of them; in the same turn Buzzwole's Life Orb Lunge one-shot a 175 HP Assault Vest Rillaboom from full, which is a 2x hit off base 139 Attack at level 39. T2 I replaced with Incineroar for Intimidate, then Fake Out flinched Starmie so it never got to move and Kartana's Leaf Blade killed it - but Buzzwole's Close Combat is 2x into Incineroar's Dark half and removed a 171 HP body through the Intimidate. Two faints in two turns, both to the lowest-level member on the team. T3 Gardevoir came in, Mega Evolved and the plan finally worked: Kartana's Leaf Blade is 4x into Golem, Sturdy held it at 1 HP and the Weakness Policy fired, and Pixilate Hyper Voice - not super effective, so it could not be turned into another Weakness Policy proc - finished Golem while Buzzwole Protected. T4 Rhydon Protected the turn it arrived and blocked both of my attacks, but Hyper Voice killed Buzzwole behind it. T5 Kartana's 4x Leaf Blade removed Rhydon."}
+  ],
+  "strategy_checks": [
+    {"check": "Starmie's Focus Sash and speed role", "result": "PASS in substance, Icy Wind NOT OBSERVED", "evidence": "Starmie never used Icy Wind, and it was right not to: on T1 it correctly spent the turn on Protect against a double-target, and on T2 it was flinched by Fake Out before it could act. Its one selected action after the Protect was Psychic aimed at Kartana, which is correct targeting - Psychic is 0x into the Fire/Dark Incineroar beside it and 1x into Kartana, while Hydro Pump would have been 0.5x into Kartana. The Sash was never consumed because the only thing that hit it was a Fake Out at 68% HP followed by a critical Leaf Blade. Speed control as an authored role is unproven here rather than failed."},
+    {"check": "Rhydon Lightning Rod redirection", "result": "NOT TESTED", "evidence": "My party carried no Electric move, deliberately - Golem and Rhydon are both Ground types and Electric is 0x into them, so an Electric attacker was never the right build for this fight. The ability is present on the battler and the dossier's own claim is a matchup tool, not a Water answer. Recording it as untested rather than claiming a pass."},
+    {"check": "Buzzwole Beast Boost raises Attack", "result": "PASS", "evidence": "Two KOs, two Attack boosts, both explicitly Attack ('The opposing Buzzwole's Attack rose!' after Rillaboom on T1 and after Incineroar on T2). Attack is Buzzwole's highest stat with this 252/252 Adamant spread, so Beast Boost picked the right stat. Note it also gained +1 from Lunge's own Attack-drop-on-target effect being irrelevant - the T1 rise was Beast Boost, and Intimidate on my Incineroar switch-in correctly took one stage back off."},
+    {"check": "Golem Sturdy + Weakness Policy", "result": "PASS, exactly as authored", "evidence": "T3: Kartana's +1 Leaf Blade is 4x into Rock/Ground and would have overkilled a 155 HP Golem several times over. 'The opposing Golem endured the hit!' then 'The Weakness Policy sharply boosted' twice - Sturdy held it at 1 HP and converted a lethal super-effective hit into +2 Attack and +2 Special Attack. This is the single best-designed interaction in the fight and it fired on the first opportunity. It only failed to matter because I had a neutral spread move queued behind it: Pixilate Hyper Voice is Fairy into Rock/Ground, so it could not re-trigger the Policy and simply removed the 1 HP body before Golem's Rock Slide resolved. That is the honest counterplay, and the room teaches it."},
+    {"check": "Life Orb recoil on Buzzwole is real", "result": "PASS", "evidence": "'The opposing Buzzwole lost some of its HP!' after each attack, 6 HP a time off 169. It was partly offset by my own Grassy Terrain healing it - Rillaboom's Grassy Surge is a player-side liability in this matchup and the engine applied the heal to the opponent correctly."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS, all three", "evidence": "See the Protect ledger. Three Protects in four turns, every one of them blocking at least one attack that was already aimed at that exact battler, and none of them repeated on consecutive turns by the same battler."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "STARMIE", "payoff": "EXCELLENT. Blocked both of my turn-1 attacks - a priority Grassy Glide and a 2x Leaf Blade - which together were built to kill it through its Focus Sash. It denied a clean 2-for-0 and kept the Sash intact for the rest of the fight. It did not repeat on T2."},
+    {"turn": 3, "battler": "BUZZWOLE", "payoff": "GOOD. Blocked Mega Gardevoir's Pixilate Hyper Voice, which is 2x into Bug/Fighting and was the single attack on the field that could kill it - it did kill it one turn later for 167 of 169 HP. The cost is that Golem died that turn without Buzzwole adding damage, but guarding against a confirmed lethal spread move is the right price."},
+    {"turn": 4, "battler": "RHYDON", "payoff": "EXCELLENT, and well-timed. Rhydon Protected on its first turn on the field, which is the turn a freshly-arrived battler is most likely to be double-targeted, and it blocked a 4x Leaf Blade and a Hyper Voice. Both of my attacks were in fact aimed at it."}
+  ],
+  "protect_ledger_note": "Three Protects, three payoffs, no empty guard and no consecutive repeat by the same battler. Roman's Protect cadence is correct and the dossier's 'Protect cadence remains pending' line can be closed for this encounter.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn-1 Starmie Protect against a double-target is the strongest decision in the fight. It was the obvious focus-fire target (Focus Sash, lowest HP, speed control) and it guarded on exactly the turn both of my attacks arrived.",
+    "Targeting discipline was clean throughout. Starmie chose Psychic into Kartana rather than into the Fire/Dark Incineroar it is 0x against; Buzzwole chose Lunge into a Grass type and Close Combat into a Dark type; Golem's Rock Slide is a spread move and needed no read.",
+    "AI decision time peaked at 1.021 s (61 frames) on the opening turns and dropped to 20 frames once the board was small, inside the 1.2 s budget.",
+    "One soft call, not a defect: Buzzwole's final action was Lunge into Mega Gardevoir (1x - Bug is 2x into Psychic and 0.5x into Fairy) when Ice Punch is also 1x and Close Combat is 0.25x. It died before the move resolved, so it cost nothing, but Lunge into a Fairy is the weakest of the three neutral options once Gardevoir has Mega Evolved."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two of six, both to the same battler, and needed a Mega Evolution to stabilise. Brief rule 5: won with 2+ faints after a real fight -> keep. No level change. Worth recording that Buzzwole carries the lowest offset on the team (-1, level 39) and produced both player faints: a Life Orb Adamant 252 Attack Beast Boost body at base 139 Attack does not need a positive offset to be the scariest thing in an Ashen Woods fight, and raising it would push this regular trainer past several Gym rooms.",
+  "could_this_be_cooler": "Keep the four species; improve one slot's job. The concept reads clearly - an Ultra Beast bruiser with two Rock/Ground bodies behind it and a fast Water/Psychic for speed - and the Golem package (Sturdy plus Weakness Policy) is the best single interaction in my block's non-Gym battles, because it forces the player to think about what type their killing blow is rather than how big it is. The weak link is Starmie: its authored job is speed control and it never reached Icy Wind in two chances, because a Focus Sash on a 110 HP body invites exactly the double-target that makes Protect the better action. Either give it the room to be a controller (Icy Wind is far more threatening from behind Rhydon's Eviolite bulk, so leading Starmie beside Rhydon rather than beside Buzzwole would do it) or accept it as a Sash pivot. The other flagged idea: Rhydon's Lightning Rod is advertised as protecting the partners from Electric attacks, but both of the partners it would protect are Ground types that are already immune - the ability only matters for Starmie and Buzzwole. Pairing it with a genuinely Electric-weak partner would make the authored plan's own sentence true. Neither change made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded.",
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141"
+}
