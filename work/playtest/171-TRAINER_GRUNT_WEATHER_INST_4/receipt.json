@@ -1,0 +1,88 @@
+{
+  "play_order": 171,
+  "e_group": "E0244",
+  "trainer": "TRAINER_GRUNT_WEATHER_INST_4",
+  "class": "grunt",
+  "location": "Route119_WeatherInstitute_1F",
+  "raid_stage": "2 of 6 - the cold storage",
+  "cap": 48,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/171-TRAINER_GRUNT_WEATHER_INST_4/party.json",
+  "level_verification": "cap 48: Walrein, Malamar, Gourgeist-Super and Sharpedo all authored +1 and all resolved to L47 = 48 + 1 - 2. --cap 48 correct.",
+  "attempts": [
+    {
+      "seed": 21,
+      "run_dir": "work/playtest/171-TRAINER_GRUNT_WEATHER_INST_4/run-s1",
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 8,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.038
+    }
+  ],
+  "showcase_escalation_check": {
+    "declared_before_play": "Raid stage 2 must still show NO Aqua weather - the dossier explicitly says no weather flag is claimed because nothing on this team can set one.",
+    "result": "PASS",
+    "evidence": "weather at turn 0 = none. The only weather all fight was my own Drought, and when Mega Charizard Y fainted on turn 2 the sun ran out normally on turn 5 ('The sunlight faded'). No Aqua action set weather. The escalation from stage 1 to stage 2 is correctly still weatherless."
+  },
+  "strategy_checks": [
+    {
+      "check": "SETUP flag is backed - Malamar's Contrary Superpower produces real Attack and Defense boosts rather than drops",
+      "result": "PASS",
+      "evidence": "Turn 3: 'The opposing Malamar used Superpower! It's super effective! The opposing Malamar's Attack rose! The opposing Malamar's Defense rose!' aimed at Magnezone (Steel, 2x Fighting) for 98 damage. Contrary inverted both drops exactly as authored."
+    },
+    {
+      "check": "The AI values REPEATING Superpower rather than treating it as a one-shot",
+      "result": "NOT_EXERCISED",
+      "evidence": "Malamar was KOed by a critical Thunderbolt on the same turn it first used Superpower. There was no second Superpower to observe. Undetermined."
+    },
+    {
+      "check": "Walrein opens with Icy Wind (speed reversal) or Encore (lock a dead move)",
+      "result": "FAIL",
+      "evidence": "Walrein's only two actions were Hydro Pump into Mega Charizard (turn 1) and Hydro Pump again (turn 2, it died first). It never reached for Icy Wind or Encore. I will not call this a defect: Charizard outsped Walrein by a wide margin so Icy Wind would not have reversed anything, and Hydro Pump into a 2x Fire/Flying target was the higher-damage line. But the authored 'first two useful turns' script did not happen, and the support half of Walrein's kit went completely unused."
+    },
+    {
+      "check": "Gourgeist-Super's Flare Boost comes online through its own Flame Orb",
+      "result": "PASS",
+      "evidence": "End of turn 3: 'The opposing Gourgeist was burned!'. Turn 4 it used Shadow Ball into Magnezone under the 1.5x Flare Boost. Its form alias, ability and item all resolved correctly - the dossier's open 'catalogue permission to confirm' question is answered: GOURGEIST_SUPER with FLARE_BOOST resolves as authored in the ROM."
+    },
+    {
+      "check": "Speed Boost Sharpedo is the fast frail mode and accumulates real boosts",
+      "result": "PASS",
+      "evidence": "Sharpedo reached +2 Speed across turns 4 and 5 and used the boosts to outspeed and KO Magnezone with a Life Orb Crunch on turn 5. Its Ice Fang target choice on the final turn (Dragonite, 4x) was also correct."
+    },
+    {
+      "check": "Thick Fat makes Walrein the crew's answer to Fire and Ice",
+      "result": "NOT_EXERCISED",
+      "evidence": "I killed Walrein with Grass damage (one-turn Solar Beam under my own sun), which routes around Thick Fat entirely."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "battler": "Gourgeist-Super",
+      "call": "Protect",
+      "payoff": "REAL - entry turn; blocked Togekiss's Air Slash (2x into Grass, roughly 75 damage plus a 60% flinch chance). It also let the Flame Orb burn land without Gourgeist having eaten a hit first."
+    },
+    {
+      "turn": 4,
+      "battler": "Sharpedo",
+      "call": "Protect",
+      "payoff": "EXCELLENT - entry turn; blocked Magnezone's Analytic Thunderbolt (2x into Water, lethal or near-lethal on a 137 HP frame) AND banked a free Speed Boost. This is the model Protect for this campaign: it denied a kill and converted the turn into a permanent stat advantage that later won Sharpedo the Magnezone trade."
+    }
+  ],
+  "consecutive_protect_risk": "none - neither guard was repeated.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Malamar's turn-1 and turn-2 Rock Slide was the single best sequence any opponent produced in this block so far: a spread Rock attack into a 4x Mega Charizard Y and a 2x Togekiss, which killed my Mega and made the fight cost two Pokemon. Correct move, correct read of a double-Flying board, no Protect waste.",
+    "Malamar correctly switched from Rock Slide to Superpower the moment Magnezone (Steel, 2x Fighting, not weak to Rock) replaced Charizard.",
+    "Opponent decision time again peaked at 1.038 s against the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Won with 2 player faints after a genuine fight - Mega Charizard Y and Magnezone both died, and Sharpedo was still alive and boosted at the end. That is the 'keep' band. No offsets touched.",
+  "rerun": "not needed - no level change.",
+  "could_this_be_cooler": "Keep it. The Lum Berry swap the dossier describes is correct and the room plays exactly as advertised in one respect the dossier undersells: the memorable moment here was not Contrary at all, it was spread Rock Slide punishing a double-Flying player lead. The one improvement worth naming is that Walrein's support half (Icy Wind, Encore) never gets used because the AI correctly prefers Hydro Pump damage; if the room wants Walrein to be support rather than a fourth attacker, Hydro Pump is the slot that should eventually change, not the support moves. Flagged as a build note, not changed.",
+  "authored_set_legality": "No legality problem. GOURGEIST_SUPER resolves with FLARE_BOOST and Flame Orb; Malamar's Lum Berry and Contrary both resolve; Sharpedo's Speed Boost resolves.",
+  "notes": "Player party unchanged from E0238."
+}
