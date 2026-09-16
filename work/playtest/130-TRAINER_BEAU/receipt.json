@@ -1,0 +1,32 @@
+{
+  "play_order": 130,
+  "e_group": "E0153",
+  "trainer": "TRAINER_BEAU",
+  "class": "regular",
+  "location": "Route111",
+  "cap": 42,
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/130-TRAINER_BEAU/party.json", "work/playtest/130-TRAINER_BEAU/party-v2.json"],
+  "level_audit": "PASS. Kartana 40 (0), Gastrodon-West 41 (+1), Lycanroc-Dusk 41 (+1), Archeops 41 (+1). All equal cap 42 + offset - 2.",
+  "attempts": [
+    {"seed": 20, "run_dir": "work/playtest/130-TRAINER_BEAU/run-s20", "party": "party.json", "outcome": "lost", "turns": 5, "player_faints": 6, "opponent_faints": 2, "note": "Lost 2-6 with the Fire/Flying party carried over from Heidi. My error, not a difficulty spike: five of my six took Rock at 2x or 4x, and Archeops plus Lycanroc-Dusk both click Rock Slide. Archeops's Flying Gem Acrobatics OHKOed Weavile from 117 HP and the spread Rock Slide removed Togekiss and Charizard on the same turn."},
+    {"seed": 30, "run_dir": "work/playtest/130-TRAINER_BEAU/run-s30", "party": "party-v2.json", "outcome": "won", "turns": 16, "player_faints": 5, "opponent_faints": 4, "note": "Rebuilt entirely around Rock resistance (Steelix 0.25x, Swampert/Torterra/Garganacl 0.5x) with no Water move at all. Still cost five of six; the last eight turns were a Recover stall that only broke when Gastrodon ran out of PP."}
+  ],
+  "strategy_checks": [
+    {"check": "Kartana attacks and snowballs Attack with Beast Boost", "result": "PARTIAL", "evidence": "Kartana attacked on every turn it had (Smart Strike, Leaf Blade, Smart Strike) and its raw Attack is genuinely frightening - a 0.5x-resisted Leaf Blade still did 94 to a full-HP Heracross. But it never got a KO, so Beast Boost never triggered in either attempt. Focus Sash confirmed and it did survive a lethal Flamethrower at full HP in attempt 1."},
+    {"check": "Storm Drain does not protect Kartana from Fire and does not redirect spread Water moves", "result": "PASS (by construction)", "evidence": "Attempt 1: Charizard's Flamethrower reached Kartana directly for 4x - Storm Drain correctly did not intervene against a Fire move. Neither party carried a Water move, so the redirection half was never exercised; the honest note is that a player who reads the dossier simply brings no Water attack and Gastrodon's signature ability becomes a blank."},
+    {"check": "Lycanroc-Dusk offers Rock pressure and Accelerock priority", "result": "PARTIAL", "evidence": "Rock pressure: emphatically yes - its spread Rock Slide was the single most damaging thing either of Beau's fights produced, taking Togekiss and Charizard together in attempt 1. Accelerock was never used in either attempt; it preferred Rock Slide, Close Combat and Protect."},
+    {"check": "Archeops gives a fast Flying Gem Acrobatics option", "result": "PASS", "evidence": "Attempt 1 turn 3: Flying Gem Acrobatics OHKOed a 117-HP Weavile and the gem was consumed (item went to ITEM_NONE). It continued using Acrobatics at base power afterwards. Defeatist was visible in attempt 2 - once Archeops dropped to 45/125 its damage fell off sharply."},
+    {"check": "Gastrodon's Icy Wind creates a useful next turn", "result": "PASS", "evidence": "Attempt 1 turn 1 and turn 2, attempt 2 turn 7: spread Icy Wind put -1 Speed on both player battlers each time, which directly enabled Archeops and Lycanroc to move first in the turns that followed. This is the most consistently well-used move on the team."}
+  ],
+  "protect_ledger": [
+    {"attempt": 2, "turn": 6, "battler": "Lycanroc-Dusk", "payoff": "real", "detail": "Blocked a Swampert High Horsepower, which is 2x on Rock and was the single biggest threat to it on the board. It stayed at 125/125 and its partner's Earth Power KOed Garganacl on the same turn."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "Target selection was good throughout: Gastrodon consistently aimed Earth Power at whichever of my bodies was 2x to it (Steelix, Garganacl) rather than the higher-HP neutral target, and the Icy Wind speed control was used proactively rather than as filler. The one questionable pattern is the endgame: from turn 8 to turn 16 Gastrodon used Recover every single turn while never attacking, against a Swampert that was out-damaging the heal by a small margin. That is a losing line - it spent eight turns falling from 139 to 0 without dealing a point of damage - but it is a close call rather than a clear scoring error, since its attacks could not have won the race either. Recorded here rather than as a defect.",
+  "level_changes": [],
+  "level_decision": "KEEP. One loss and one win, and the win still cost five of six Pokemon. Neither the raise condition (first-try win, 0-1 faints) nor the cut condition (three failed optimized attempts) is met. This is comfortably the hardest four-member route fight in the block.",
+  "cooler_note": "The dossier's own verdict holds up and this run sharpens it. The Kartana/Gastrodon core is good and should stay - but the fight's real teeth turned out to be somewhere else entirely. Lycanroc-Dusk and Archeops both clicking Rock Slide into a doubles board is what actually won Beau a game, and Flying Gem Acrobatics OHKOing a healthy attacker is the moment I will remember, not Storm Drain. Meanwhile Storm Drain never did anything in either attempt, because the counterplay is simply 'bring no Water move', which costs a prepared player nothing. Two concrete suggestions, neither implemented: (1) the duplication the dossier flags is real - Beau's Archeops is byte-for-byte Travis's - and re-species or re-item of that slot is still the right call, but it should be replaced by something that punishes the Rock-resistant Ground/Steel answer this fight forces, not by another Flying attacker; (2) Gastrodon would be more interesting with a way to make Storm Drain matter against a player who brought no Water - Muddy Water or Surf on the team, so that the redirection protects a partner from the ALLY's spread move, would turn a dead ability into a real doubles interaction.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}

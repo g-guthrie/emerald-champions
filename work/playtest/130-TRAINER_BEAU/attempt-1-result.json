@@ -1,0 +1,30 @@
+{
+  "trainer_a": "TRAINER_BEAU",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 20,
+  "difficulty": "medium",
+  "level_cap": 42,
+  "phase": "ended",
+  "outcome": "lost",
+  "turns": 5,
+  "decisions": 9,
+  "player_faints": 6,
+  "opponent_faints": 2,
+  "ai_decision_frames_max": 62,
+  "ai_decision_seconds_max": 1.038,
+  "ai_decision_frames": [
+    62,
+    60,
+    60,
+    62,
+    62,
+    29,
+    29,
+    14,
+    14
+  ],
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141",
+  "elf_sha256": "70db6be9e609d4fe1de497fd4620a12369072b83a1e79ed108d6b35460058fc5",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
