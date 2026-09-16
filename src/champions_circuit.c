@@ -207,7 +207,8 @@ bool32 IsChampionsCircuitOpponent(const struct Pokemon *mon)
 
 u8 GetChampionsCircuitOpponentLevel(u16 wins, u32 slot)
 {
-    u32 level = CIRCUIT_BASE_LEVEL - GetTrainerLevelReduction()
+    // Mirrors GetCampaignTrainerLevel: Hard plays as designed, Medium -2, Easy -4.
+    u32 level = CIRCUIT_BASE_LEVEL + 2 - GetTrainerLevelReduction()
               + wins / PARTY_SIZE + (slot < wins % PARTY_SIZE);
     return min(CHAMPIONS_CIRCUIT_MAX_LEVEL, level);
 }
@@ -1599,7 +1600,7 @@ void ChampionsTentBegin(void)
 
 void ChampionsTentGenerateOpponent(void)
 {
-    GenerateCompetitionOpponent(sTentWins, max(1, sTentCap - GetTrainerLevelReduction()));
+    GenerateCompetitionOpponent(sTentWins, max(1, sTentCap + 2 - GetTrainerLevelReduction()));
 }
 
 void ChampionsTentHandleBattleResult(void)
