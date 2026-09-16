@@ -1,0 +1,27 @@
+{
+  "play_order": 152, "e_group": "E0194", "trainer": "TRAINER_CAROLINA", "class": "ace",
+  "location": "Route108", "chapter": "Feather Badge", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - Hawlucha 48+1-2=47, Luxray 48+1-2=47, Mega Gardevoir 48+0-2=46, Kommo-o 48+2-2=48, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/152-TRAINER_CAROLINA/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 71, "party": "party-a1.json", "outcome": "won", "turns": 5, "player_faints": 3, "opponent_faints": 4,
+     "note": "Gengar + Magnezone + Togekiss + Weavile + Alakazam + Iron Hands. A genuine trade-heavy fight. Gengar's Psychic one-shot Hawlucha before it could start its White Herb sequence, but Kommo-o's Body Press then killed Magnezone through its Steel typing, a critical Wild Charge from Luxray killed Gengar through its Focus Sash, and Mega Gardevoir entered last and immediately took Iron Hands with a 2x Psychic. Togekiss's Dazzling Gleam finished a Protect-stalling Kommo-o and Weavile's Knock Off removed Mega Gardevoir."}
+  ],
+  "strategy_checks": [
+    {"check": "Hawlucha chooses Close Combat only against a legal target where the follow-up speed is useful", "result": "PASS on the choice, NOT EXERCISED on the payoff", "evidence": "turn 1 it selected Close Combat into Magnezone, which is the correct 2x target on the board, but Gengar's faster Psychic KO'd it first. The White Herb into Unburden sequence therefore never reached step two."},
+    {"check": "Luxray attacks or pivots after Intimidate", "result": "PASS", "evidence": "Intimidate fired on entry and put both my leads to -1 Attack, which is the only support turn the team gets; Luxray then attacked on all three of its turns and its critical Wild Charge broke Gengar's Focus Sash math and KO'd it."},
+    {"check": "Turn two uses the consumed-item Acrobatics state rather than presuming it", "result": "NOT EXERCISED", "evidence": "Hawlucha never got a second turn."},
+    {"check": "Kommo-o's Iron Defense into Body Press is a separate slow endgame", "result": "PARTIAL", "evidence": "Body Press did its job - it removed Magnezone outright through Steel's Fighting weakness - but Iron Defense was never used, so the endgame ran on its base Defense rather than the authored boost. Defensible: Kommo-o spent its spare turn on a Protect that saved it from a lethal Psychic instead."},
+    {"check": "Bulletproof blocks the ball and bomb moves", "result": "PASS by deterrence", "evidence": "Gengar's Sludge Bomb was the natural 2x answer to Mega Gardevoir and I never once fired it while Kommo-o was on the field. The ability shaped my whole move selection without needing to trigger."},
+    {"check": "Mega Gardevoir's Trace and Pixilate are used correctly", "result": "PASS", "evidence": "it Traced Togekiss's Serene Grace on entry and chose Psychic rather than Hyper Voice into Iron Hands - the stronger single-target option against a Fighting-type - then died to a 2x Knock Off."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "KOMMO_O", "payoff": "REAL - blocked Gengar's Psychic, a 2x hit that was lethal on its remaining 73 HP, and it survived to fight for two more turns"}
+  ],
+  "ai_defects": [],
+  "level_changes": [],
+  "calibration_reasoning": "Won on the first attempt but with three player faints, and every one of them was taken by a different member of Carolina's four - Kommo-o took Magnezone, Luxray took Gengar, Mega Gardevoir took Iron Hands. That is a real fight by both the brief's 'won with 2+ faints' rule and AGENTS.md's three-faint threshold. No change.",
+  "could_this_be_cooler": "Keep. The White Herb into Unburden line is genuinely clever and Bulletproof Kommo-o did real work simply by existing. But this battle sharpens the dossier's own flagged concern in a way worth recording, because it is the third time in this block the same shape has appeared: the setup piece is in the lead slot with nothing protecting it. Hawlucha is a 145 HP body at level 47 that needs three separate steps to come online and it died to one special attack before step two, exactly as Foster's Omastar and Tara's Seadra did. The dossier notes that 'Luxray's Intimidate is the team's only support turn and it is attached to its weakest member' - that is precisely the fix: the room needs a support turn that is not attached to the body it is trying to keep alive. A Fake Out or a redirection partner beside Hawlucha would let the three-step sequence exist, and Luxray is the natural slot to change since its Intimidate already fires for free on entry regardless. Recommended, not applied in this pass.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}
