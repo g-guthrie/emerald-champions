@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0171 TRAINER_NORMAN_1 (Petalburg Gym leader, Balance Badge, cap 42, Medium)",
+  "availability_audit": "Cap-42 window covers Route 111 / Ashen Woods / Petalburg Gym (battle index campaign_order 151-171), i.e. everything after the Heat Badge. Every member's pool-42.json gate is 36 or lower except none; all source maps (Granite Cave, Petalburg Woods area, Slateport evolution stock, Mauville-era New Mauville, Fiery Path/Jagged Pass Litten line) are entered strictly before Petalburg Gym in book chapter order. No cap-42-gated desert species (Sandstrewn Ruins / Desert Underpass) were needed. No legendaries; Iron Hands is a Paradox species in a window well above 24, permitted by the brief.",
+  "plan": "Lead Mega Alakazam + Incineroar. Incineroar's Intimidate lands on both of Norman's leads on entry and its Fake Out flinches Choice Band Slaking before it can lock a move; in that bought turn Mega Alakazam's Psychic (2x on Poison/Fairy) removes Galarian Weezing outright, which switches Neutralizing Gas off and gives Truant back to Slaking on turn one. Beat the SUPPRESS engine first, then win the second, Psychic-Terrain battle. Gengar is the hard Slaking wall: Ghost blanks Double-Edge, Ghost blanks Hammer Arm, Levitate blanks High Horsepower, so only Ice Punch touches it. Weavile's Knock Off strips Slaking's Choice Band; Fake Out from Incineroar/Weavile buys the turns. Mega Alakazam's Psychic and Iron Hands' Heavy Slam both hit Galarian Weezing for 2x to end the Gas early. Incineroar's Intimidate taxes Slaking and Staraptor; Togekiss supplies Follow Me redirection and Tailwind. For the post-Gas half, Weavile and Incineroar are Dark bodies that resist Expanding Force and Psychic Terrain blocks nothing of ours except Ice Shard/Fake Out against grounded targets.",
+  "party": [
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_SHADOW_BALL",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_ALAKAZITE",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Mega special nuke; Psychic ends Galarian Weezing, Shadow Ball answers Meloetta/Indeedee",
+      "availability": "pool-42 gate 20: Abra Granite Cave 1F, Kadabra evolution, Linking Cord from Slateport evolution stock. Alakazite stone-window 20. All before the Balance Badge."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DARKEST_LARIAT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Intimidate tax on Slaking/Staraptor, Fake Out turns, Dark body for the Psychic half",
+      "availability": "pool-42 gate 36: Torracat level evolution, Litten line available in the Heat Badge window. Before the Balance Badge."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Slaking wall (Normal/Fighting/Ground all blanked), Icy Wind speed control, Taunt on the support core",
+      "availability": "pool-42 gate 30: Haunter line plus Linking Cord, Mauville-era. Before the Balance Badge."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "strips Slaking's Choice Band with Knock Off, priority Ice Shard, Dark resist to Expanding Force",
+      "availability": "pool-42 gate 14: Sneasel level/condition evolution. Long before the Balance Badge."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_WILD_CHARGE",
+        "MOVE_HEAVY_SLAM"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "bulky Fighting body: Drain Punch hits Slaking and Porygon2 2x, Heavy Slam hits Galarian Weezing 2x, Wild Charge answers Staraptor",
+      "availability": "pool-42 gate 30: NewMauville_Inside land table, entered with Wattson's Basement Key in the Dynamo Badge window. Before the Balance Badge."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "redirection off the Choice-locked Slaking plus Tailwind speed control and 60% flinch pressure",
+      "availability": "pool-42 gate 24: Togepi Route 102, friendship evolution, Shiny Stone from Slateport Mart. Before the Balance Badge."
+    }
+  ]
+}

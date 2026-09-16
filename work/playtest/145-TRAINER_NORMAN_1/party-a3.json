@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0171 TRAINER_NORMAN_1 (Petalburg Gym leader, Balance Badge, cap 42, Medium) - attempt 3 rebuild",
+  "availability_audit": "Cap-42 window covers Route 111 / Ashen Woods / Petalburg Gym (battle_index campaign_order 151-171). Gates: Alakazam 20 (Abra Granite Cave + Linking Cord from Slateport evolution stock), Incineroar 36 (Torracat, Heat Badge window), Spiritomb 14 (AlteringCave_1F land table), Scizor 30 (Scyther + Metal Coat; Scizorite stone-window 30), Weavile 14 (Sneasel), Gengar 30 (Haunter + Linking Cord). Every source map is entered strictly before Petalburg Gym in book chapter order. No cap-42-gated desert species, no legendaries, no Paradox species.",
+  "plan": "Third configuration, built from the two losses. Fix 1: attempt 1's Mega Alakazam had a forced Trace that copied Slaking's Truant the moment Neutralizing Gas dropped and loafed itself to death, so Alakazam runs Magic Guard with a Life Orb instead (no recoil, no Trace) and the Mega Ring goes to Scizor. Its Psychic still one-shots the 252/252 Bold Galarian Weezing, whose Special Defense is its one soft side. Fix 2: attempt 2 proved that a Choice Band Slaking at L44 one-shots any body that does not resist or blank its move, so the team is built out of immunities rather than bulk. Spiritomb (Ghost/Dark) is immune to Slaking's Double-Edge and Hammer Arm, to Meloetta's Psychic and Hyper Voice, to Indeedee's Expanding Force and to Porygon2's Tri Attack all at once, and its Will-O-Wisp permanently halves Slaking's Attack. Gengar adds the second Slaking blank (Ghost stops Double-Edge and Hammer Arm, Levitate stops High Horsepower once the Gas is gone). Fix 3: Shadow Ball is dead weight against five of Norman's six, so Gengar carries Psychic instead, and the Dark/Bug answers to Indeedee and Meloetta are Incineroar's Darkest Lariat, Weavile's Knock Off and Mega Scizor's Bug Bite.",
+  "party": [
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": ["MOVE_PSYCHIC", "MOVE_FOCUS_BLAST", "MOVE_SHADOW_BALL", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "fastest battler on the field; recoil-free Life Orb Psychic one-shots Galarian Weezing to end Neutralizing Gas",
+      "availability": "pool-42 gate 20: Abra on GraniteCave_1F, Kadabra level evolution, Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_DARKEST_LARIAT", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out denies Slaking its first Choice lock; Intimidate lands the moment the Gas drops; Darkest Lariat is 2x on Indeedee and Meloetta",
+      "availability": "pool-42 gate 36: Torracat level evolution from the Litten line in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_SPIRITOMB",
+      "moves": ["MOVE_WILL_O_WISP", "MOVE_DARK_PULSE", "MOVE_FOUL_PLAY", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "type-immune anchor: Ghost/Dark blanks Double-Edge, Hammer Arm, Psychic, Hyper Voice, Expanding Force and Tri Attack; Will-O-Wisp halves Slaking's Attack for the rest of the fight",
+      "availability": "pool-42 gate 14: AlteringCave_1F land table."
+    },
+    {
+      "species": "SPECIES_SCIZOR",
+      "moves": ["MOVE_BULLET_PUNCH", "MOVE_BUG_BITE", "MOVE_KNOCK_OFF", "MOVE_SWORDS_DANCE"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TECHNICIAN",
+      "item": "ITEM_SCIZORITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "the Mega: resists Psychic and Normal, Technician Bullet Punch is the priority finisher, Bug Bite is 2x on Indeedee and Meloetta",
+      "availability": "pool-42 gate 30: Scyther plus Metal Coat trade evolution; Scizorite stone-window 30."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_ICE_SHARD", "MOVE_TRIPLE_AXEL"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "immune to Psychic, one-shots Indeedee with Knock Off, strips Slaking's Choice Band, Triple Axel answers Staraptor",
+      "availability": "pool-42 gate 14: Sneasel level/condition evolution."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": ["MOVE_SLUDGE_BOMB", "MOVE_PSYCHIC", "MOVE_ICY_WIND", "MOVE_TAUNT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "second Slaking blank once the Gas is gone; Taunt shuts Indeedee's all-status kit; Psychic replaces a Shadow Ball that is dead against five of Norman's six",
+      "availability": "pool-42 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    }
+  ]
+}

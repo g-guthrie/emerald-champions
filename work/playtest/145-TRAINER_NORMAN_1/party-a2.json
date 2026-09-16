@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0171 TRAINER_NORMAN_1 (Petalburg Gym leader, Balance Badge, cap 42, Medium) - attempt 2 rebuild",
+  "availability_audit": "Cap-42 window covers Route 111 / Ashen Woods / Petalburg Gym (battle_index campaign_order 151-171), everything after the Heat Badge. Every member's pool-42.json gate is 36 or lower, so each source map is entered strictly before Petalburg Gym in book chapter order: Litten line (Heat Badge window, gate 36), Thwackey/Rillaboom (gate 36), Scyther+Metal Coat (gate 30) with Scizorite stone-window 30, Haunter+Linking Cord (gate 30), Sneasel (gate 14), New Mauville with Wattson's Basement Key (gate 30). No cap-42-gated desert species used, no legendaries. Iron Hands is a Paradox species in a window far above 24, which the brief permits.",
+  "plan": "Attempt 1 lost to the second half of the fight: Mega Alakazam's forced Trace copied Slaking's Truant the instant Neutralizing Gas dropped and loafed itself to death, and Life Orb Meloetta's Psychic under a Terrain-Extender Psychic Terrain (1.3x, and Expanding Force turned into a spread move) erased Togekiss and Iron Hands. Attempt 2 attacks the terrain instead of the Pokemon: Rillaboom's Grassy Surge overwrites Psychic Terrain, which removes Expanding Force's spread mode and Meloetta's 1.3x at once, halves Slaking's High Horsepower, heals my side every turn and gives my priority back (Psychic Terrain had been blanking Fake Out, Ice Shard and Bullet Punch against grounded targets). Around it: Incineroar and Weavile are Dark bodies immune to Psychic, Mega Scizor resists Psychic and Normal and answers Galarian Weezing with Steel, Gengar is the hard Slaking wall once the Gas is gone (Ghost blanks Double-Edge and Hammer Arm, Levitate blanks High Horsepower, only Ice Punch touches it), and Iron Hands' Heavy Slam is the opening 2x on Weezing while Drain Punch is 2x on every Normal-type Norman owns. Gengar's Taunt is aimed at Indeedee, whose whole kit (Follow Me, Helping Hand, Protect) is status moves.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_DARKEST_LARIAT", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Intimidate tax, Fake Out tempo, Dark body immune to Psychic; Darkest Lariat is 2x on Indeedee and Meloetta",
+      "availability": "pool-42 gate 36: Torracat level evolution from the Litten line, available in the Heat Badge window before the Balance Badge."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_DRAIN_PUNCH", "MOVE_HEAVY_SLAM", "MOVE_WILD_CHARGE"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "bulky opener: Heavy Slam is 2x on Galarian Weezing, Drain Punch is 2x on Slaking and Porygon2 and heals",
+      "availability": "pool-42 gate 30: NewMauville_Inside land table, entered with Wattson's Basement Key in the Dynamo Badge window."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": ["MOVE_GRASSY_GLIDE", "MOVE_WOOD_HAMMER", "MOVE_KNOCK_OFF", "MOVE_U_TURN"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "terrain control: Grassy Surge overwrites Indeedee's Psychic Terrain, halves High Horsepower, heals the side and restores my priority via Grassy Glide",
+      "availability": "pool-42 gate 36: Thwackey level evolution, available in the Heat Badge window before the Balance Badge."
+    },
+    {
+      "species": "SPECIES_SCIZOR",
+      "moves": ["MOVE_BULLET_PUNCH", "MOVE_BUG_BITE", "MOVE_KNOCK_OFF", "MOVE_SWORDS_DANCE"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TECHNICIAN",
+      "item": "ITEM_SCIZORITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega wall-breaker that resists Psychic and Normal; Bug Bite is 2x on Indeedee and Meloetta, Bullet Punch is 2x on Galarian Weezing",
+      "availability": "pool-42 gate 30: Scyther plus Metal Coat trade evolution; Scizorite stone-window 30 and the Mega Ring is earned long before."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": ["MOVE_SLUDGE_BOMB", "MOVE_SHADOW_BALL", "MOVE_ICY_WIND", "MOVE_TAUNT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "hard Slaking wall once Neutralizing Gas is gone, Taunt on Indeedee's all-status kit, Icy Wind speed control",
+      "availability": "pool-42 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_ICE_SHARD", "MOVE_TRIPLE_AXEL"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "fastest body on the field, immune to Psychic, Knock Off is 2x on Indeedee/Meloetta and strips Slaking's Choice Band",
+      "availability": "pool-42 gate 14: Sneasel level/condition evolution."
+    }
+  ]
+}

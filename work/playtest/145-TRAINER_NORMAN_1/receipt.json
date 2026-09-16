@@ -1,0 +1,107 @@
+{
+  "play_order": 145,
+  "e_group": "E0171",
+  "trainer": "TRAINER_NORMAN_1",
+  "class": "leader",
+  "location": "PetalburgCity_Gym",
+  "chapter": "Balance Badge",
+  "cap": 42,
+  "difficulty": "medium",
+  "resolved_levels_check": "PASS - every opponent level equals cap + authored offset - 2: Weezing-Galar 42+3-2=43, Slaking 42+4-2=44, Indeedee-F 42+3-2=43, Porygon2 42+4-2=44, Meloetta 42+3-2=43, Mega Staraptor 42+1-2=41. Driver reported level_cap 42. No --cap adjustment needed.",
+  "party_manifests": [
+    "work/playtest/145-TRAINER_NORMAN_1/party-a1.json",
+    "work/playtest/145-TRAINER_NORMAN_1/party-a2.json",
+    "work/playtest/145-TRAINER_NORMAN_1/party-a3.json"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 13,
+      "party": "party-a1.json",
+      "outcome": "lost",
+      "turns": 8,
+      "player_faints": 6,
+      "opponent_faints": 4,
+      "note": "Mega Alakazam + Incineroar + Gengar + Weavile + Iron Hands + Togekiss. Opening was excellent (Weezing dead on turn 2, zero faints), then collapsed: Mega Alakazam's forced Trace copied Slaking's Truant the instant the Gas dropped, loafed on turn 3 and died to a Mega Staraptor Brave Bird; after that Life Orb Meloetta's Psychic under a Terrain-Extender Psychic Terrain one-shot Togekiss and Iron Hands in turn."
+    },
+    {
+      "attempt": 2,
+      "seed": 23,
+      "party": "party-a2.json",
+      "outcome": "lost",
+      "turns": 9,
+      "player_faints": 6,
+      "opponent_faints": 2,
+      "note": "Terrain-control rebuild (Rillaboom Grassy Surge, Mega Scizor, Incineroar, Iron Hands, Gengar, Weavile). Grassy Terrain did its job - it overwrote Psychic Terrain, restored my priority and cut High Horsepower - but the configuration had no fast answer to Galarian Weezing. Its 252/252 Bold body took three turns of physical Steel while Will-O-Wisp halved Iron Hands' Attack, and a Choice Band Slaking got three free one-shots in the meantime. Worse than attempt 1."
+    },
+    {
+      "attempt": 3,
+      "seed": 37,
+      "party": "party-a3.json",
+      "outcome": "won",
+      "turns": 10,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "note": "Alakazam (Magic Guard + Life Orb, no Mega, so no Trace/Truant trap) one-shot Weezing on turn 2 through its turn-one Protect; Incineroar's Parting Shot pushed Slaking to -2 Attack and pivoted; Spiritomb (Ghost/Dark) then anchored the whole second half - immune to Double-Edge, Hammer Arm, Psychic, Hyper Voice, Expanding Force and Tri Attack at once - and its Will-O-Wisp burned first Mega Staraptor and then Slaking. Weavile removed Staraptor and Meloetta on consecutive turns; Gengar and Spiritomb finished a burned, Choice-locked Slaking that Gengar's Levitate had blanked outright. Lost Alakazam and Weavile."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Galarian Weezing leads and Neutralizing Gas suppresses every ability on the field, Truant included", "result": "PASS", "evidence": "a1/a3 turn 1: Incineroar's Intimidate did not fire on entry and no stat stages moved while Weezing was alive; on Weezing's KO the log printed 'The effects of the neutralizing gas wore off!' and Trace (a1) and Intimidate (a1/a3) both resolved in that same instant."},
+    {"check": "Choice Band Slaking attacks every turn while the Gas is up (no Truant loaf)", "result": "PASS", "evidence": "a2 turns 1-3: Slaking chose an action on three consecutive turns with Weezing alive (flinched turn 1, High Horsepower turns 2 and 3) and never printed a loaf message until after the Gas ended."},
+    {"check": "Truant comes back mid-battle once Weezing is gone", "result": "PASS", "evidence": "a1 turn 3 and a3 turns 8 and 10: 'The opposing Slaking is loafing around!' on alternate turns, immediately after the Gas had worn off."},
+    {"check": "Indeedee-F sets Psychic Terrain on entry and only comes online after the Gas has left", "result": "PASS", "evidence": "a1 and a3: 'The battlefield got weird!' on every Indeedee entry, terrain_turns 8 from the Terrain Extender; Indeedee never entered while Weezing was alive."},
+    {"check": "Expanding Force becomes a spread attack under Psychic Terrain", "result": "PASS", "evidence": "a1 turn 4: one Expanding Force damaged both Gengar and Togekiss; a2 final turn it one-shot Iron Hands for super effective damage."},
+    {"check": "Psychic Terrain actually denies the player's priority", "result": "PASS", "evidence": "a1 turn 9 and a2 turn 8: Fake Out was legal but pointless and Mega Scizor's Bullet Punch printed 'The opposing Indeedee is protected by the Psychic Terrain'."},
+    {"check": "Indeedee uses Follow Me or Helping Hand to protect and enable the pair", "result": "PARTIAL", "evidence": "Helping Hand fired twice (a1 turn 6, a3 turn 9) but Follow Me was never chosen in three full attempts, across boards where redirecting off a Choice-locked Slaking was exactly the printed plan. See AI defect 3."},
+    {"check": "Mega Staraptor Mega-Evolves and the AI reads the live suppression state rather than counting all six abilities", "result": "PASS", "evidence": "a1 turn 3 and a3 turn 4 Mega Evolved on entry turn; a3 showed the ability field flip from RECKLESS to CONTRARY on the Mega, and Reckless recoil only applied while unsuppressed."},
+    {"check": "Porygon2's Download activates only once the Gas has gone", "result": "PASS", "evidence": "a1 turn 7 and a3 turn 2: 'The opposing Porygon2's Attack rose!' / 'Sp. Atk rose!' fired on entry, both times after Weezing had fainted."},
+    {"check": "SUPPRESS tactic: Weezing spends its turns keeping Slaking's output alive, not on empty guarding", "result": "PASS", "evidence": "a1/a3 turn 1 Protect blocked a Psychic that would have one-shot it; a2 turn 1 Will-O-Wisp burned my physical opener and halved its Attack for the whole battle; a2 turns 2-3 Strange Steam as real damage. It never guarded an unthreatened slot."},
+    {"check": "Every opponent Protect has a payoff", "result": "PASS", "evidence": "see protect_ledger - six Protects across three attempts, all with concrete payoff, none empty, none repeated consecutively on the same battler."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "WEEZING_GALAR", "payoff": "blocked Mega Alakazam's Psychic, a guaranteed one-shot on a 149 HP body"},
+    {"attempt": 1, "turn": 5, "battler": "INDEEDEE_F", "payoff": "blocked Gengar's Sludge Bomb and Togekiss's Air Slash, which together were lethal on the 110 HP it had left"},
+    {"attempt": 1, "turn": 6, "battler": "MELOETTA_ARIA", "payoff": "blocked Gengar's Sludge Bomb; real payoff, but its partner spent the same turn on a Helping Hand aimed at it, which the Protect then wasted (AI defect 1)"},
+    {"attempt": 3, "turn": 1, "battler": "WEEZING_GALAR", "payoff": "blocked a lethal Life Orb Psychic"},
+    {"attempt": 3, "turn": 6, "battler": "MELOETTA_ARIA", "payoff": "blocked Spiritomb's Dark Pulse, a 2x hit worth most of its remaining 137 HP"},
+    {"attempt": 3, "turn": 8, "battler": "INDEEDEE_F", "payoff": "blocked Gengar's Sludge Bomb and Spiritomb's Dark Pulse in the same turn, which together were exactly lethal; bought Norman a full extra turn"}
+  ],
+  "ai_defects": [
+    {
+      "id": "P13-D1",
+      "severity": "real",
+      "attempt": 1,
+      "turn": 6,
+      "board": "Indeedee-F (110 HP) + Meloetta (152) vs Weavile (124) + Gengar (1 HP)",
+      "chosen": "Indeedee used Helping Hand targeting Meloetta while Meloetta used Protect on the same turn",
+      "problem": "Helping Hand only exists to boost the ally's attack that turn. An ally that guards cannot attack, so the support action was worth exactly nothing and Indeedee spent the turn it needed to survive (it died to Knock Off in that same turn).",
+      "better": "Indeedee should have Protected itself or used Expanding Force; alternatively Meloetta should have attacked behind the Helping Hand. This is the same-turn joint-pair conflict class the team has been pricing in src/battle_ai_pair.c."
+    },
+    {
+      "id": "P13-D2",
+      "severity": "real",
+      "attempt": 3,
+      "turn": 4,
+      "board": "Mega Staraptor + Meloetta vs Alakazam (Protect) + freshly switched-in Spiritomb (Ghost/Dark)",
+      "chosen": "Meloetta used Psychic on Spiritomb",
+      "problem": "Psychic is 0x against a Dark-type. The log printed 'It doesn't affect Spiritomb...'. Typing is fully visible to the AI at turn start and needs no knowledge flag.",
+      "better": "Shadow Ball (1x on Spiritomb) or Psychic/Hyper Voice into the Alakazam slot. A move with zero type effectiveness against a visible typing should never survive scoring."
+    },
+    {
+      "id": "P13-D3",
+      "severity": "design gap, not illegal",
+      "attempt": "all three",
+      "turn": "n/a",
+      "board": "every board where Indeedee-F was active",
+      "chosen": "Indeedee never once selected Follow Me in three complete attempts",
+      "problem": "Follow Me is half of the printed ALLY_COMBO/REDIRECTION plan for this leader and the dossier names it as what protects the Psychic-mode pair. It scored below Expanding Force, Helping Hand and Protect on every board, including boards where a Choice-locked Slaking was the thing redirection is supposed to shield.",
+      "better": "Worth a look at the redirection scoring for a support-slot Pokemon standing beside a Choice-locked partner. Not an illegal choice, so recorded as a gap rather than a bug."
+    }
+  ],
+  "level_changes": [],
+  "calibration_reasoning": "Two optimized losses and then a win with two player faints after a genuine ten-turn fight. The brief's keep condition ('won with 2+ faints or after a real fight') and the AGENTS.md leader standard ('leaders are a major step beyond') are both satisfied: Norman is clearly harder than the six Gym rooms that precede him, he punished two different well-built cap-42 parties, and the win required finding the specific counterplay the dossier advertises (kill Weezing to give Truant back, blank the Choice lock with a Ghost, and beat the Psychic half a different way with Dark bodies). No level changes.",
+  "could_this_be_cooler": "Keep the concept exactly as written - a leader whose signature is a support Pokemon that switches off the whole field so his ace can exist is the best idea in either Petalburg gym, and it reads clearly in play: the first two turns genuinely feel like a Slaking with no drawback, and the moment Weezing dies the fight visibly changes shape. Two honest observations. First, the second mode is currently carried by Meloetta rather than by the Psychic Terrain pair: Indeedee dies quickly and never redirects, so Expanding Force's spread mode showed up in only one of three attempts while Meloetta's Life Orb Psychic did nearly all of the work. Fixing that is an AI cadence question (defect 3), not a composition change. Second, the coolest unused interaction on this team is that Norman's own Porygon2 and Meloetta are Normal-types who would love the Gas to be gone, while Slaking needs it to stay - that tension is real but invisible to the player. If anything were ever added, a single line of leader dialogue when the Gas drops would sell it. No species, move, item, ability or EV change recommended.",
+  "legality_problems_found": "None. All six authored sets are legal: moves, abilities, items and EV totals all resolved through the native preparation path without complaint, and the printed SUPPRESS tactic has a real bespoke consumer.",
+  "notes": "Player-side lesson worth recording for later blocks: Mega Alakazam's forced Trace is a liability against any Truant/Slow Start/Defeatist owner - it copied Truant and loafed itself to death in attempt 1. Also confirmed that Psychic Terrain blanks Fake Out, Ice Shard, Bullet Punch and Grassy Glide against grounded targets, which is a real cost to any priority-based player plan in this fight.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}
