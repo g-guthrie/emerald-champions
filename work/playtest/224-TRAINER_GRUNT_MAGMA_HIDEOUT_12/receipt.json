@@ -1,0 +1,93 @@
+{
+  "play_order": 224,
+  "e_group": "E0335",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_12",
+  "class": "grunt",
+  "location": "MagmaHideout_4F",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L60 = 60 + 2 - 2 on Medium, matching the authored offset 2.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217-223.",
+  "pre_play_strategy_checks": [
+    "Torkoal's Drought is automatic and wins the weather war against my Drizzle",
+    "Torkoal's first action is a full-HP sun-boosted Eruption into both slots",
+    "Scovillain's Chlorophyll doubles its Speed in that sun",
+    "Scovillain's Fire-typed Rage Powder buys Torkoal a second full-power Eruption",
+    "Volcarona takes Quiver Dance behind the redirection and becomes the room's real threat",
+    "Garchomp's Rough Skin punishes contact",
+    "Protect ledger - all four carry Protect"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 7,
+      "decisions": 11,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "why": "The hardest fight in the block by a distance and the first one that beat my weather plan outright. Drought resolved after Drizzle - Torkoal is slower, so its ability applied last - and the room ran in sun from turn 0. Turn 1 Wide Guard blocked the full-HP Eruption exactly as the dossier's own crack says it should, and Scovillain, at doubled Chlorophyll Speed, answered with an Energy Ball that hit my Mega Swampert 4x into Water/Ground and killed it from 246/246 before it acted twice. Turn 2 a sun-boosted Overheat one-shot the Landorus I brought in to replace it. Turn 3 Urshifu, which resists Fire, finally stabilised the board and crit-killed Torkoal. Turns 4-5 Volcarona got its Quiver Dance and Aqua Jet removed it at +1 before it converted. Turn 6 Garchomp's Rock Slide killed Pelipper. Turn 7 Garchomp Protected through both a Wood Hammer and a Spore, and turn 8 Wood Hammer finally put it down. Three faints, and I finished with Tapu Bulu on 140 and Amoonguss on 107."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Drought is automatic and wins the weather war",
+      "result": "PASS",
+      "evidence": "The battle's opening state reported weather B_WEATHER_SUN_NORMAL despite my lead being a Drizzle Pelipper. Both abilities fired on turn 0 and the slower battler's applied last: Torkoal's base 20 Speed against Pelipper's 65. Sun then held for the entire seven turns on the Heat Rock. This is the first room in the block to take the weather off me, and it is the reason the fight was close - every Water attack I owned was halved for the whole battle."
+    },
+    {
+      "check": "Torkoal's first action is a full-HP sun-boosted Eruption into both slots",
+      "result": "PASS",
+      "evidence": "Eruption on turn 1 at 210/210 and again on turn 2 at 210/210. The turn-1 one was caught by Wide Guard ('Pelipper protected itself!'); the turn-2 one connected for 46 into a Water/Flying body that resists it. The authored opening is exactly what the dossier promises and the counterplay it names (Wide Guard) is exactly what worked."
+    },
+    {
+      "check": "Scovillain's Chlorophyll doubles its Speed in sun",
+      "result": "PASS - and it is the room's real killer",
+      "evidence": "On turn 1 Scovillain acted before my Mega Swampert, which had Swift Swim but no rain to use it in, and its Energy Ball printed 'It's extremely effective!' - Grass 4x into Water/Ground - for a clean OHKO from 246/246. On turn 2 its sun-boosted Overheat one-shot a full-HP 196 Landorus. Two of my six died to this one Pokemon in two turns. The dossier frames Scovillain as a support piece that buys Torkoal turns; in play it was the single most dangerous body in the hideout."
+    },
+    {
+      "check": "Scovillain's Rage Powder buys Torkoal a second full-power Eruption",
+      "result": "FAIL - never chosen",
+      "evidence": "Scovillain used Energy Ball, Overheat and Energy Ball across its three turns and never used Rage Powder. Judged as AI quality this is correct - it was killing a Pokemon per turn and redirection would have been strictly worse - but it means the authored signature of the room, the Fire-typed redirection that 'almost nothing else in the campaign offers', did not appear. Note also that one of my two actives when it arrived (Amoonguss, later) and my Tapu Bulu are Grass-typed and therefore immune to it anyway."
+    },
+    {
+      "check": "Volcarona takes Quiver Dance and becomes the room's real threat",
+      "result": "PARTIAL",
+      "evidence": "Turn 4: 'The opposing Volcarona's Sp.Atk rose! Sp.Def rose! Speed rose!' - it did take the dance, on its entry turn, with its partner still alive. But it never converted: a 2x Hurricane had already taken it to 47/191 on the same turn and Urshifu's priority Aqua Jet (2x into Bug/Fire) removed it on turn 5. Setting up on the entry turn against a board that already had a 2x answer on the field is the debatable half - attacking immediately would have been better - but it is a defensible gamble for a sweeper in its own weather rather than a defect."
+    },
+    {
+      "check": "Garchomp's Rough Skin punishes contact",
+      "result": "NOT OBSERVED",
+      "evidence": "I used exactly one contact move against Garchomp (Wood Hammer, twice) and the log shows Amoonguss's Rocky Helmet damaging it rather than Rough Skin damaging me - the relevant contact went the other way. Untested rather than broken."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS - one outstanding Protect",
+      "evidence": "See protect_ledger."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 7,
+      "battler": "Garchomp",
+      "payoff": "OUTSTANDING. As the last Pokemon on the field at 171/218, Garchomp Protected and blocked BOTH of my actions in the same turn - Tapu Bulu's Wood Hammer and Amoonguss's Spore. Blocking the Spore is the important half: a sleeping Garchomp loses the fight outright, and this bought it the turn in which it landed a 70-damage Dragon Claw. It then correctly did not repeat the guard on the following turn."
+    }
+  ],
+  "protect_summary": "1 opponent Protect across 7 turns, with the best single payoff in the block (blocked a Wood Hammer and a Spore simultaneously), 0 empty. Torkoal, Scovillain and Volcarona all carry Protect and none of them used it - correctly, because all three spent every turn they had either attacking for a kill or setting up.",
+  "ai_defects": [],
+  "ai_notes": [
+    "This is the best AI performance in the block and it deserves saying plainly. Turn 1 Scovillain chose Energy Ball - a coverage move, not its STAB - because the target was 4x weak to it, and killed a Mega from full HP. Turn 2 it chose Overheat into a Ground/Flying body that Grass does not hurt, taking the sun boost instead. Turn 3 Torkoal switched from Eruption to Heat Wave once it had been chipped to 70/210, which is correct because Eruption's power scales with the user's remaining HP. Every one of those is the right move for the right reason.",
+    "AI decision budget: max 62 frames (1.038 s), tied for the highest in the block and inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep, comfortably. Three player faints and a seven-turn fight is squarely the 'won after a real fight' band, and it is the only battle in my block to reach the three-faint bar that AGENTS names as the aspiration for a well-prepared party. Two of my six were one-shot from full HP by the same opponent on consecutive turns. No member of this team underperformed: Torkoal executed its opening twice, Scovillain killed two Pokemon, Volcarona got its dance, and Garchomp made the best defensive decision of the block. There is nothing here to raise and nothing to cut.",
+  "cooler": "No - and I mean that as praise. This room is already the best thing in the hideout and the dossier's own description of it as 'the rehearsal for Courtney's sun' is accurate: it taught me, at real cost, that my weather is not safe, that Wide Guard is the answer to Eruption, and that Chlorophyll in sun outruns a Swift Swim body with no rain. One observation for the record rather than a change: the plan describes Scovillain primarily as a redirection piece buying Torkoal a second Eruption, and in play the AI never once reached for Rage Powder because Scovillain's attacking lane was simply better. The room is stronger than its write-up and the write-up should probably credit the Chlorophyll attacker rather than the redirection. If anything is worth revisiting here it is that the Fire-typed Rage Powder - genuinely rare and genuinely clever - has now gone unused, and it will keep going unused as long as the same Pokemon can just kill something instead. Splitting those two jobs across two members would make the signature actually appear.",
+  "legality_notes": "No legality problem in the authored set.",
+  "reverify_note": "No level change was made here, so nothing in this receipt needs a rebuild to re-verify.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
