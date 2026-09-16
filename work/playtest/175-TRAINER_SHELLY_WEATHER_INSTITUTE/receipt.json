@@ -1,0 +1,111 @@
+{
+  "play_order": 175,
+  "e_group": "E0248",
+  "trainer": "TRAINER_SHELLY_WEATHER_INSTITUTE",
+  "class": "admin",
+  "location": "Route119_WeatherInstitute_2F",
+  "raid_stage": "6 of 6 - the raid boss",
+  "cap": 48,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/175-TRAINER_SHELLY_WEATHER_INSTITUTE/party.json",
+  "level_verification": "cap 48: Ninetales-Alola +3 -> L49, Empoleon +4 -> L50, Clefable +3 -> L49, Castform +5 -> L51, Rotom-Wash +3 -> L49, Feraligatr +3 -> L49. All equal cap + offset - 2. --cap 48 correct (the survey milestone raises the cap to 54 only AFTER this battle).",
+  "attempts": [
+    {
+      "seed": 61,
+      "run_dir": "work/playtest/175-TRAINER_SHELLY_WEATHER_INSTITUTE/run-s1",
+      "line": "weather-counter line - Mega Evolve on turn 1 so Drought replaces the snow before Ninetales acts",
+      "outcome": "won",
+      "turns": 8,
+      "decisions": 12,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.038
+    },
+    {
+      "seed": 62,
+      "run_dir": "work/playtest/175-TRAINER_SHELLY_WEATHER_INSTITUTE/run-s2",
+      "line": "no-weather-counter line - deliberately never Mega Evolved, so the snow and Aurora Veil stood. Run to verify the authored plan as a player without a weather ability would meet it, and to check the fight is fair without the hard counter.",
+      "outcome": "won",
+      "turns": 9,
+      "decisions": 13,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.038
+    }
+  ],
+  "showcase_escalation_check": {
+    "declared_before_play": "The raid's authored escalation is: stages 1-3 no weather at all -> stage 4 a stolen rain switch -> stage 6 Shelly turns the building to snow. Each step must be mechanically real (the weather must come from a Pokemon's ability, not from the room's authored field), and Shelly must read as a boss rather than a sixth grunt.",
+    "result": "PASS",
+    "evidence": "E0243 / E0244 / E0245 (stages 1-3): weather at turn 0 = ['none'] in all three, and no Aqua action set weather in any of them. E0246 (stage 4): live weather at turn 0 = ['B_WEATHER_RAIN_NORMAL'] while field_source.weather_at_turn_0 = ['none'] and from_map = false - the rain is Pelipper's Drizzle on entry. E0247 (stage 5): back to none. E0248 (stage 6): live weather at turn 0 = ['B_WEATHER_SNOW'] while field_source.weather_at_turn_0 = ['none'] - the snow is Alolan Ninetales's Snow Warning on entry. The three-step escalation from an untouched building, to a stolen rain switch, to the admin reprogramming the whole Institute is real in the engine and not cosmetic text.",
+    "shelly_as_boss": "PASS on numbers - six members at L49-L51 against a cap of 48, and the only fight in my block that cost me three Pokemon, twice, on two completely different lines. She is clearly a step above the five grunts. But see the two major findings below: the specific thing that is supposed to make her memorable does not actually happen."
+  },
+  "strategy_checks": [
+    {
+      "check": "SNOW flag is backed by an automatic setter",
+      "result": "PASS",
+      "evidence": "Snow Warning set snow on entry in both attempts. See showcase check."
+    },
+    {
+      "check": "Alolan Ninetales takes Aurora Veil behind Light Clay - eight turns of halved damage on both sides, the single biggest number in the fight",
+      "result": "PASS (attempt 2) and PASS-BY-COUNTERPLAY (attempt 1)",
+      "evidence": "Attempt 2, turn 1: 'The opposing Ninetales used Aurora Veil! Aurora Veil made the opposing side stronger against...' and sides.opponent = ['SIDE_STATUS_AURORA_VEIL'] thereafter. The Light Clay extension is real - the veil was still up on turn 8, five turns after Ninetales died, and only wore off on turn 9. That is genuinely the biggest single number in the fight: my damage was roughly halved for eight turns. Attempt 1, turn 1: same move, 'But it failed!', because my Mega Charizard Y's Drought had already replaced the snow at turn start. The dossier's crack line ('Replace the snow') is literally, mechanically correct."
+    },
+    {
+      "check": "Ninetales uses Encore",
+      "result": "PASS_CHOSEN_NOT_RESOLVED",
+      "evidence": "Attempt 2, turn 2 latch: Ninetales's choice was MOVE_ENCORE aimed at Togekiss (which had used Tailwind the turn before - a correct Encore target). It was KOed first."
+    },
+    {
+      "check": "Castform is the thematic heart: under Shelly's snow Forecast makes it Ice, Weather Ball is a 100-power STAB attack and Blizzard never misses",
+      "result": "FAIL - STRUCTURALLY UNREACHABLE",
+      "evidence": "Castform never once appeared as an Ice type, in either attempt, on two different lines. Attempt 1: it entered under MY sun and resolved as SPECIES_CASTFORM_SUNNY (Fire). Attempt 2, where I deliberately left the snow alone: Snow Warning's snow is five turns and carries no Icy Rock, Ninetales died on turn 2, and Shelly does not deploy Castform until her fourth and fifth slots - it entered on turn 6, one turn AFTER 'The snow stopped', and resolved as SPECIES_CASTFORM_NORMAL. Its Blizzard on turn 8 was thrown under no weather and missed ('Excadrill avoided the attack'), which is exactly the 70% accuracy the dossier says snow would fix. Forecast itself works perfectly - I watched it resolve Sunny, then Normal, and revert correctly - but the one form the boss is built around is the one the deployment order makes impossible. This is the most important finding in my block; see cooler."
+    },
+    {
+      "check": "Clefable's Follow Me absorbs a double-target so Mega Feraligatr can Dragon Dance safely",
+      "result": "SPLIT - redirection PASS, pairing FAIL",
+      "evidence": "Follow Me fired three times in attempt 1 (turns 3, 4, 5) and twice in attempt 2, and it worked: on attempt 1 turn 3 it pulled my Air Slash off the incoming Rotom-Wash, and on turn 4 it soaked my single-target damage while Rotom KOed Togekiss. REDIRECTION is fully backed. But the authored pairing never happened in either attempt: Clefable and Feraligatr were never on the field at the same time. Shelly's deployment order puts Clefable third and Feraligatr sixth, so the Follow-Me-covers-the-Dragon-Dance play the dossier describes as the turn-two payoff is not reachable from her lead order either."
+    },
+    {
+      "check": "SETUP is backed by a real Dragon Dance",
+      "result": "FAIL",
+      "evidence": "Mega Feraligatr got four turns across the two attempts and never used Dragon Dance once - Liquidation (x3) and Ice Punch (x1). Its targets were correct every time (Liquidation into Magnezone, Ice Punch into Togekiss), so this is the AI reasonably preferring immediate damage as a lone sixth Pokemon with no partner cover; but the SETUP flag is not backed by observed behaviour."
+    },
+    {
+      "check": "The custom Mega Feraligatr transition is a source and native gate to confirm (dossier's own open question)",
+      "result": "CONFIRMED, WITH A CORRECTION TO THE DOSSIER",
+      "evidence": "The transition works: 'The opposing Feraligatr's Feraligite is reacting to... The opposing Feraligatr has Mega Evolved into Mega F...' and the state resolves to SPECIES_FERALIGATR_MEGA in both attempts. BUT the resolved ability of the Mega form is ABILITY_DRAGONIZE, not Sheer Force. Pre-Mega Feraligatr shows ABILITY_SHEER_FORCE; the moment it Mega Evolves the state reads ability = ABILITY_DRAGONIZE. The dossier's plan text - 'Sheer Force Liquidation and Ice Punch lose their secondary effects but gain 1.3x damage in exchange' - is therefore wrong about the form that actually fights. Worse, Dragonize converts Normal-type moves to Dragon, and Feraligatr's set is Dragon Dance / Liquidation / Ice Punch / Protect: there is not one Normal-type attacking move on it, so the Mega's ability does literally nothing in this battle. See cooler."
+    },
+    {
+      "check": "Empoleon's Competitive punishes only genuine opposing stat drops",
+      "result": "NOT_EXERCISED",
+      "evidence": "I brought no stat-dropping moves, per the crack line. No spurious Competitive trigger was observed, which is the correct negative result."
+    },
+    {
+      "check": "Clefable's Unaware ignores a player who answered the grunts by setting up",
+      "result": "NOT_EXERCISED",
+      "evidence": "My party carried no setup moves."
+    },
+    {
+      "check": "Rotom-Wash is the Levitate Electric pivot",
+      "result": "PASS",
+      "evidence": "Rotom-Wash was the best individual performer on Shelly's team in both attempts: it KOed Togekiss (attempt 1, turn 4), KOed Mega Charizard Y (attempt 1, turn 5), KOed base Charizard (attempt 2, turn 3) and helped kill Magnezone. Its Thunderbolt/Hydro Pump target selection against my Flying and Steel bodies was correct every turn. Levitate itself went untested - I aimed no Ground damage at it."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "ZERO opposing Protects across both attempts - 17 turns, 12 opponent deployments, and five of Shelly's six members carry Protect. Not one was used. This is the opposite of the empty-guard problem the campaign's Protect review is looking for, and it is worth recording as the other failure mode: a boss that never guards. Several turns clearly justified one - Castform at 104/148 holding an unbroken Focus Sash with a lethal double-target incoming (attempt 2 turn 8), and Mega Feraligatr at 50/157 facing two attackers (attempt 2 turn 6, where it flinched instead) are the two clearest. I am not calling this a defect because a boss that always attacks is a defensible design posture, but the asymmetry against the grunts - who guarded well and often - is stark enough that the guard scoring may be weighting six-member boss teams differently.",
+  "consecutive_protect_risk": "n/a - no Protects.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Attempt 1 turn 1: Ninetales used Aurora Veil into a field where my Drought had just replaced the snow, and it failed. This is NOT a defect. The AI decides at turn start, when snow was still up; Mega Evolution and its Drought resolve after selection. This is the authored no-pending-command-reads rule working correctly and I am recording it explicitly so it is not later mistaken for a weather-check bug.",
+    "Attempt 1 turn 3: Shelly withdrew Castform at 8/148 and sent Rotom-Wash, saving a nearly dead Pokemon and bringing in the member that then killed two of mine. That is a genuinely good boss switch and better than anything the grunts did.",
+    "Attempt 2 turn 6: Shelly withdrew a SLEEPING Rotom-Wash and brought Castform in. Correct - removing a sleeping body from the field is the right call and it woke up clean later.",
+    "Target selection was correct on essentially every opposing action in both attempts. I found no mis-targeting at all in this fight, which is a marked improvement over E0246.",
+    "Decision time peaked at 1.038 s on a six-member team, against the 1.2 s budget. This is the tightest margin in my block and it is the boss, so it is the case to watch."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Won both attempts with 3 player faints each - which is exactly the campaign's 'at least three faints against a well-prepared competitive party' bar, hit on two structurally different lines (with and without the weather counter). That is squarely the 'won after a real fight' band. No offsets touched. I want to be explicit that I am NOT recommending a level increase to compensate for the two structural findings below: both are design/data problems, and inflating levels would hide them rather than fix them.",
+  "rerun": "not needed - no level change.",
+  "could_this_be_cooler": "The concept is excellent and the Castform swap is exactly the right instinct - but two things are broken underneath it, and neither is a level problem.\n\n(1) THE THEMATIC HEART NEVER HAPPENS. The dossier says the moment to remember is 'a Castform turning white as Shelly's snow lands and immediately throwing a perfect-accuracy Blizzard'. I played this fight twice, once specifically trying to make that happen, and it cannot: Snow Warning's snow is five turns, the Light Clay is on Ninetales (not an Icy Rock on anyone), Ninetales is slot one and dies early, and Castform is deployed fourth or fifth. By the time Castform arrives the snow has always stopped. Castform therefore fights as a 420-BST Normal type with a 70%-accuracy Blizzard - measurably worse than the Kingdra it replaced. Three fixes, any one of which works and none of which touches a species or a strategy: give Ninetales an Icy Rock instead of Light Clay (8 turns of snow, which is also long enough for the Veil to matter), give Castform itself the Icy Rock, or move Castform into the lead pair beside Ninetales so it transforms on turn one while the snow is guaranteed. I would pick the last one: it puts the transformation in the player's face at the start of the boss fight, which is what the dossier actually wants.\n\n(2) THE MEGA'S ABILITY IS DEAD. Mega Feraligatr resolves as ABILITY_DRAGONIZE, not Sheer Force. Dragonize turns Normal-type moves into Dragon-type ones. Feraligatr's set is Dragon Dance, Liquidation, Ice Punch, Protect - zero Normal moves. The ace of the raid boss is carrying an ability that does nothing whatsoever, and the dossier describes a Sheer Force interaction that the Mega form does not have. This needs a decision from the design side rather than a playtest patch: either the book text is corrected to describe Dragonize and the set gains a Normal move worth converting (Return / Double-Edge / Extreme Speed become STAB Dragon attacks, which is a genuinely cool payoff for a Dragon Dance turn), or the Mega's ability is changed to match the authored intent. I have changed nothing; flagging both.\n\nEverything else earns retention. Rotom-Wash is the quiet star, Clefable's Follow Me does real work, and the Aurora Veil under Light Clay is a genuinely oppressive eight turns when the player lets it land.",
+  "authored_set_legality": "One real discrepancy, recorded above: the dossier's description of Mega Feraligatr's ability (Sheer Force) does not match the resolved form (Dragonize). Everything else - Snow Warning, Light Clay, Shuca Berry, Competitive, Unaware, Forecast's three-way transformation, Levitate, and the custom Feraligite transition - resolved exactly as authored.",
+  "notes": "Two attempts on deliberately different lines so the report is not just a record of one hard counter. Attempt 1 used Mega Charizard Y's Drought to delete the snow on turn 1 (the dossier's own crack line, and it works exactly as written). Attempt 2 never Mega Evolved at all, so the snow and an eight-turn Aurora Veil stood. Both cost me three Pokemon. The fight is well-tuned at its current levels."
+}
