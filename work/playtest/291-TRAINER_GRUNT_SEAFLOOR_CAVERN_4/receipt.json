@@ -1,0 +1,29 @@
+{
+  "play_order": 291, "e_group": "E0457", "trainer": "TRAINER_GRUNT_SEAFLOOR_CAVERN_4", "class": "grunt", "location": "SeafloorCavern_Room4",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/291-TRAINER_GRUNT_SEAFLOOR_CAVERN_4/party_jaws_84.json",
+  "availability_note": "Same Seafloor Cavern party (Rillaboom 36, Raging Bolt 60, Flutter Mane 68, Kartana 20, Incineroar 36, Amoonguss 42); Incineroar deliberately not led so Intimidate never fed Defiant. No legends, no Underwater/Seafloor species.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/291-TRAINER_GRUNT_SEAFLOOR_CAVERN_4/a1", "seed": 1, "outcome": "won", "turns": 3, "decisions": 3, "player_faints": 0, "opponent_faints": 4, "note": "T1 Purugly Fake Out flinched Rillaboom and Gorebyss set Rain Dance, but Raging Bolt's Thunderbolt OHKOed Gorebyss the same turn. T2 Bruxish survived Grassy Glide, hit Rillaboom for 225 with Psychic Fangs and died to its own Life Orb; Purugly switched to Overqwil (Intimidate) which took the Thunderbolt aimed at Purugly and was OHKOed. T3 Purugly re-entered, Fake Out again, and fell to Thunderbolt."}
+  ],
+  "strategy_checks": [
+    {"check": "Purugly Fake Out buys Gorebyss the Rain Dance turn", "result": "PASS", "evidence": "T1 Fake Out on Rillaboom, Rain Dance went up; the rain then cost the team nothing because Gorebyss died to a faster Thunderbolt before Swift Swim mattered."},
+    {"check": "Attack under doubled Speed / pivot when weather denied", "result": "PARTIAL", "evidence": "Rain stayed up; Bruxish attacked (Psychic Fangs 225), but Purugly pivoted by hard switch rather than U-turn on T2, and the switch-in Overqwil was OHKOed."},
+    {"check": "Overqwil Intimidate fronts for Bruxish", "result": "PASS (Intimidate fired) / FAIL (timing)", "evidence": "Overqwil came in on T2 by AI switch and Intimidated both my attackers, but it entered into a Thunderbolt already aimed at that slot and fainted without acting."},
+    {"check": "Bruxish Strong Jaw pressure / screen removal", "result": "PASS (damage)", "evidence": "Psychic Fangs did 225 to an Assault Vest Rillaboom (340). No screens to break."},
+    {"check": "Defiant punishes Intimidate", "result": "NOT REACHED", "evidence": "I never brought Intimidate to the board (the crack line)."}
+  ],
+  "protect_ledger": [{"turn": "all", "entry": "No opponent Protect used in three turns; no empty Protects."}],
+  "ai_defects": [
+    {"turn": 2, "battler": "Purugly", "board": "Bruxish + Purugly vs Rillaboom + Raging Bolt, rain up", "chosen": "hard switch to Overqwil", "better": "U-turn (its authored pivot) would have dealt damage and still brought Overqwil in; alternatively Body Slam. The switch fed a fresh body into a Thunderbolt and lost it for nothing. Low severity - the read that Intimidate helps against two physical/special mixed attackers is defensible."}
+  ],
+  "authored_set_legality": "No problem found; all four at L84 (offset 2).",
+  "theme_note": "The jaws concept is visible - two Fake Outs, an Intimidate switch, Strong Jaw Psychic Fangs was the hardest single hit - but the room folded in three turns, which is not what 'the last door before Archie' should feel like against a Grass/Electric lead the crack line itself recommends.",
+  "level_changes": [
+    {"member": "GOREBYSS", "before": 2, "after": 3, "reason": "first-try 4-0 win with no faints; Gorebyss died on turn 1 without its rain paying off."},
+    {"member": "OVERQWIL", "before": 2, "after": 3, "reason": "OHKOed by one neutral Thunderbolt on the switch-in; Bruxish (the star) and Purugly left at 2."}
+  ],
+  "level_changes_unverified": "Not re-run: build-8 ROM predates these offsets; rerun after the main agent rebuilds.",
+  "cooler": "Bruxish is the right kind of surprise. The room's weakness is that three of its four members have 4 HP EVs and no Sash, so a fast Electric attacker takes a body per turn; a Focus Sash on Gorebyss (so the Rain Dance turn is guaranteed) would make the concept fire more often. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun to check whether L85 Gorebyss survives Thunderbolt long enough for Swift Swim Muddy Water to happen."
+}
