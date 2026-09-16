@@ -1,0 +1,98 @@
+{
+  "play_order": 24,
+  "e_group": "E0026",
+  "trainer": "TRAINER_JERRY_1",
+  "class": "casual",
+  "location": "Route116",
+  "cap_window": 14,
+  "ai_profile": "Conservative",
+  "pass": "rerun (pass 2) - AI check only, no level changes were in scope for this trainer",
+  "purpose": "Re-test the pass-1 failure: Varoom used Iron Head on every one of its three turns and never chose Acid Spray, Taunt or Protect, so the authored 'industrial chemistry partnership' with the Choice Specs Adaptability Skrelp never happened.",
+  "outcome": "WON on attempt 1, 7 turns, 4 player faints - the closest fight of the block. Levels KEPT.",
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_manifest_note": "New chronology-checked party; the pass-1 party used Seaspray Cave, Verdanturf Meadow and Altering Cave species that a player has not reached at Route 116.",
+  "run_dir": "work/playtest/24-JERRY_1/r1",
+  "opponent_levels_medium": "MAGNEMITE 14, VAROOM 16, SKRELP 13, KOFFING 16 (cap 14; offsets 2/4/1/4, unchanged)",
+  "attempts": [
+    {
+      "seed": 6024,
+      "outcome": "won",
+      "turns": 7,
+      "decisions": 9,
+      "player_faints": 4,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.088,
+      "player_faint_detail": "Shiftry on turn 1 to the Acid Spray -> Flash Cannon combination. Heracross on turn 4 to Koffing's Sludge Bomb. Cloyster on turn 5 to a Magnemite Thunderbolt (Sash) plus a Koffing Sludge Bomb. Tangrowth on turn 6 to Sludge Bomb (2x on Grass) before it acted. I finished with Arcanine at 48/53 and a 27/63 Sylveon.",
+      "note": "Four of six against a casual-class trainer. Koffing's Eviolite-backed Sludge Bomb is 2x on three of my six and it alone accounted for three of the four faints."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Varoom uses Acid Spray before a useful special partner attack (the pass-1 failure)",
+      "result": "PASS - the pass-1 failure is FIXED, on turn one",
+      "evidence": "Turn 1 chosen action: Varoom used MOVE_ACID_SPRAY targeting Shiftry (battler 2). 'It's super effective! Shiftry's Sp. Def harshly fell!' - Poison is 2x on Grass/Dark and the drop is two stages. Magnemite's Flash Cannon then killed Shiftry in the same turn through the lowered Special Defence. That is precisely the authored partnership: the low-damage debuff is the setup and the special attack is the payoff, and the AI sequenced it without any scripting. In pass 1 Acid Spray never appeared once."
+    },
+    {
+      "check": "Acid Spray targets the foe the surviving special partner can exploit, respecting Steel immunity",
+      "result": "PASS",
+      "evidence": "It picked Shiftry, the Grass/Dark body that takes 2x from Poison and that its special partners could then kill, over the Bug/Fighting Heracross which resists nothing relevant but was also the sturdier target. No Steel-immune or Substitute-protected target was involved."
+    },
+    {
+      "check": "Varoom Taunts or Protects when direct damage is not the best action (the other half of the pass-1 failure)",
+      "result": "PASS on Protect - also fixed",
+      "evidence": "Turn 2: Varoom at 1/45 with its Air Balloon already popped chose MOVE_PROTECT and blocked both Arcanine's Extreme Speed and Heracross's Rock Slide, either of which was lethal. In pass 1 Protect and Taunt never appeared across three turns. Taunt still did not fire, but nothing on my side was using a status move worth taunting."
+    },
+    {
+      "check": "Varoom's Air Balloon is temporary Ground immunity",
+      "result": "PASS (temporary half confirmed again)",
+      "evidence": "Turn 1: 'The opposing Varoom's Air Balloon popped!' from Shiftry's Knock Off. As in pass 1 the item behaved correctly and the Ground immunity itself was never exercised, because nothing in my party carries a Ground move."
+    },
+    {
+      "check": "Magnemite supplies useful Thunder Wave or immediate special pressure",
+      "result": "PASS on pressure, FAIL on Thunder Wave",
+      "evidence": "Flash Cannon converted the Acid Spray into a turn-1 kill and Thunderbolt later broke Cloyster's Focus Sash and paralyzed it. Thunder Wave itself was never selected in either pass. On this board that is defensible - the two attacks were both doing real work and one of them applied paralysis anyway."
+    },
+    {
+      "check": "Volt Switch introduces a better partner only when the incoming board improves",
+      "result": "PASS in spirit - the pivot happened, by switch rather than by Volt Switch",
+      "evidence": "Turn 3: Jerry withdrew a 1/35 Magnemite (Sturdy already consumed, so it was one hit from dead) and sent in Skrelp. That is a genuine escape that preserved a Pokemon and brought in the Choice Specs threat, and the new turn-giving-up charge on switches correctly did not suppress it. Magnemite came back later and took the last kill's worth of chip. Volt Switch itself was never selected; a plain switch cost the same turn and did not lock Magnemite out of Flash Cannon."
+    },
+    {
+      "check": "Skrelp chooses Muddy Water / Hydro Pump / coverage appropriately before honouring its Choice lock",
+      "result": "PASS (chosen)",
+      "evidence": "Turn 4 chosen action: MOVE_MUDDY_WATER, the foe-only spread option, against a board of Heracross and Arcanine where Water is 2x on Fire. It did not resolve - Arcanine's Extreme Speed killed the 15/40 Skrelp first - but the choice was right."
+    },
+    {
+      "check": "Koffing's Levitate provides a Ground-safe pivot and its Will-O-Wisp / Pain Split support",
+      "result": "PARTIAL",
+      "evidence": "Levitate present and confirmed, never tested (no Ground moves on my side). Koffing chose Sludge Bomb on all four of its turns and it was right every time - Poison is 2x on Shiftry, Tangrowth and Sylveon, and the Eviolite kept it alive to fire it four times. Will-O-Wisp and Pain Split never appeared; against a board where its STAB was 2x on most of my party, declining them is correct."
+    },
+    {
+      "check": "The authored crack (Ground damage after Balloon removal, special pressure, Choice-lock exploitation, immunity-aware positioning)",
+      "result": "PARTIAL - I could not bring Ground damage",
+      "evidence": "Knock Off removed the Balloon and priority Extreme Speed exploited the Choice lock by killing Skrelp before it could act. I had no Ground move in the party, so the Balloon-removal line was never cashed in. That is a gap in my party, not in the trainer."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "VAROOM (1/45, Air Balloon already popped)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - saved its life from two lethal hits at once. It blocked Arcanine's Extreme Speed and Heracross's Rock Slide from 1 HP. Varoom survived to force me to spend a Flare Blitz on it the following turn. The first Protect this trainer has ever used across two passes."
+    }
+  ],
+  "ai_defects": [],
+  "ai_defects_resolved": [
+    {
+      "id": "E0026-JERRY-ACIDSPRAY-NEVER-USED",
+      "status": "RESOLVED",
+      "evidence": "Pass 1: 'Varoom was on the field for three turns and chose MOVE_IRON_HEAD every single time, including turn 3 with Choice Specs Adaptability Skrelp in reserve.' Pass 2: Acid Spray on turn 1 into the correct 2x target, converted into a kill by the partner's Flash Cannon in the same turn, and Protect on turn 2 denying two lethal attacks. The pass-1 conclusion that this team 'needs the AI to value a Special Defence drop that feeds a known Choice Specs partner' is answered, and the alternative suggestion there (replace Acid Spray with a second attack) should NOT be taken - the move works now."
+    }
+  ],
+  "ai_observations": [],
+  "level_changes": [],
+  "level_rationale": "Out of scope by instruction: Jerry was replayed as an AI check on the Acid Spray failure, not as a calibration pass. Four of my six died, so brief rule 5 would have said keep in any case. If anything this casual-class trainer is now on the hard side of its band; nothing should be added.",
+  "cooler_note": "Pass 1 called this 'the best concept and the worst execution in the block'. The execution is fixed and the concept holds up: Acid Spray into a special partner is a genuine competitive engine and it now fires on turn one and takes a Pokemon with it. The one thing I would look at, not applied here, is that Koffing rather than Skrelp is the member that actually wins the fight - an Eviolite Sludge Bomb that is 2x on most cap-14 Grass and Fairy answers took three of my four faints while the Choice Specs ace died at 13th level before acting. Skrelp's offset of 1 is very low for the member the plan builds around; that is a calibration note for whoever owns this trainer's band, not a change I am making here.",
+  "authored_set_legality": "Clean. Sturdy, Overcoat, Adaptability and Levitate all present; the Air Balloon and Choice Specs behaved correctly.",
+  "not_finished": "Thunder Wave, Volt Switch, Taunt, Will-O-Wisp and Pain Split remain unobserved across two passes. Levitate and the post-Balloon Ground line need a party carrying a Ground move, which mine did not."
+}
