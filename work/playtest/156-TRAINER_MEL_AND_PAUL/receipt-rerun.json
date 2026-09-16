@@ -1,0 +1,80 @@
+{
+  "play_order": 156,
+  "e_group": "E0208",
+  "trainer": "TRAINER_MEL_AND_PAUL",
+  "class": "regular",
+  "location": "Route109 (battle index); the rerun assignment named Route 118 - both sit on the optional post-Balance-Badge Surf backtrack and the driver resolves the battle from the map script either way",
+  "chapter": "Feather Badge - optional Surf backtrack",
+  "cap": 48,
+  "difficulty": "medium",
+  "run_kind": "fresh run (added to the block mid-session)",
+  "prior_receipt": "work/playtest/156-TRAINER_MEL_AND_PAUL/receipt.json",
+  "build": "work/agent-battle-build-4",
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "why_rerun": "The first receipt's attempts 1 and 2 were driver stalls (defect P13-D8) on two independent seeds, and only attempt 3 completed by deliberately avoiding the trigger. The stall was a ROM-side crash now fixed in build-4, so the earlier evidence is void and this battle was replayed fresh - including a deliberate re-test of the exact trigger.",
+  "SNAPSHOT_DISCREPANCY": {
+    "summary": "IMPORTANT: the levels I actually played against are the PRE-CHANGE ones, not the current teams-file offsets. The +1 on Illumise and the +1 on Volbeat are in the teams file but have not been materialized, so they are not in this ROM.",
+    "teams_file_offsets_now": {"ILLUMISE": 0, "BUTTERFREE": 0, "VOLBEAT": 2, "DUSTOX": 1},
+    "materialized_offsets_in_src_data_trainers_party": {"ILLUMISE": -1, "BUTTERFREE": 0, "VOLBEAT": 1, "DUSTOX": "1"},
+    "driver_observed_levels": {"ILLUMISE": 45, "BUTTERFREE": 46, "VOLBEAT": 47, "DUSTOX": 47},
+    "arithmetic": "cap 48 - 2 = 46 base. Observed 45/46/47/47 = offsets -1/0/1/1, which matches src/data/trainers.party lines 23138-23166 (Illumise 'Level Offset: -1', Volbeat 'Level Offset: 1') and NOT the teams file. scripts/emerald_champions_teams.py --write has not been run since those two offsets were edited, and build-4 predates it.",
+    "consequence": "This run re-benchmarks the levels the first pass already judged too easy. It therefore CONFIRMS that judgement rather than testing the response to it. The landed +1 on Illumise and +1 on Volbeat remain unverified in play and should be re-benchmarked after the main agent materializes and rebuilds."
+  },
+  "level_offsets_at_run": {"ILLUMISE": -1, "BUTTERFREE": 0, "VOLBEAT": 1, "DUSTOX": 1},
+  "resolved_opponent_levels": {"ILLUMISE": 45, "BUTTERFREE": 46, "VOLBEAT": 47, "DUSTOX": 47},
+  "party_manifest": "work/playtest/156-TRAINER_MEL_AND_PAUL/party-a1.json",
+  "party_reuse_justification": "Reused unchanged from the first pass. Same cap 48, same encounter. The manifest's audit still holds: every member is gated at 36 or below in pool-48 and every source map precedes the Surf backtrack - Torracat line (36), New Mauville entrance via Wattson's Basement Key (30), Sneasel (14), Togepi Route 102 plus Shiny Stone (24), Altering Cave 1F (14), Granite Cave Abra plus Slateport Linking Cord (20). No legendaries, Ultra Beasts or Paradox species. The party was not reported weak or illegal - it won the one completed attempt of the first pass - so no rebuild was warranted.",
+  "pre_declared_strategy_checks": [
+    "REGRESSION TEST for driver/ROM defect P13-D8: cause EXACTLY ONE opponent faint on turn 1 in this two-owner battle while the other owner's battler survives, and confirm the driver reaches the next decision point instead of stalling at phase 'running'",
+    "Illumise chooses Tailwind, Encore or Helping Hand to enable the partner",
+    "Butterfree Mega-Evolves and takes a safe Quiver Dance when the turn is bought",
+    "Volbeat uses Tail Glow (FAILED in the first pass - it never selected the move)",
+    "Volbeat Baton Passes the boost to a legal receiver, and does not attempt the pass with no receiver available",
+    "Compound Eyes makes Mega Butterfree's Hurricane unmissable",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/156-TRAINER_MEL_AND_PAUL/r1",
+      "seed": 1156,
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "narrative": "T1 I deliberately reproduced the old crash trigger: Incineroar's Flare Blitz KO'd Mega Butterfree, exactly one opponent faint, with its partner Illumise alive on 25 HP behind a spent Focus Sash. Butterfree had Mega-Evolved and Quiver Danced first, so the sequence was identical in shape to the stalled runs. The driver handled it cleanly - the replacement Volbeat arrived and the next decision point was reached. T2 Illumise threw a Prankster Encore that locked my Assault Vest Magnezone into Flash Cannon, which was a good move into the wrong target (Flash Cannon was already the move I wanted), and died to it; Volbeat Protected away a 2x Darkest Lariat. That was a second single-owner replacement, also clean. T3 Volbeat finally used Tail Glow for +3 Special Attack while Flare Blitz removed Dustox at 2x. T4 Volbeat's +3 Bug Buzz killed a recoil-worn Incineroar, and Flash Cannon finished it. Won 4-1."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "REGRESSION P13-D8 - single-owner replacement in a two-owner battle", "result": "PASS - defect FIXED on build-4", "evidence": "Turn 1 produced the exact trigger the first receipt described: Mega Butterfree fainted as the last action of the turn while its partner Illumise survived. On build-3 and earlier this left the driver at phase 'running' with empty awaiting_now and empty pending_decision and refused every subsequent act call on two independent seeds. On build-4 the log continued straight into 'YOUNG COUPLE MEL & PAUL sent out Volbeat!' and the driver returned phase 'await_action' with both of my battlers pending. It then handled a SECOND single-owner replacement on turn 2 (Illumise died, Dustox arrived, Volbeat still standing) equally cleanly. Two clean instances of the exact trigger in one battle. This defect is resolved."},
+    {"check": "Illumise uses Tailwind / Encore / Helping Hand", "result": "PASS", "evidence": "T1 Dazzling Gleam - an attack rather than support, which was correct since my Magnezone resists it but Illumise was about to die and had no partner worth enabling. T2 a Prankster Encore at priority, locking my Assault Vest Magnezone. Encoring the wall is the same good instinct the first pass praised, though this time the lock was harmless because Flash Cannon was already my best move into a team of bugs. Tailwind was never selected in either pass."},
+    {"check": "Butterfree Mega-Evolves and Quiver Dances behind a bought turn", "result": "PASS on both halves", "evidence": "T1: 'The opposing Butterfree has Mega Evolved into Mega Butterfree!' followed immediately by Quiver Dance for +1/+1/+1. It took the free transformation on turn one - another Mega that transforms on arrival, in contrast with E0071's Kangaskhan. The Quiver Dance was then wasted because Flare Blitz is 2x and killed it through the Special Defense boost, but the decision itself was the authored line."},
+    {"check": "Volbeat uses Tail Glow", "result": "PASS - improved over the first pass", "evidence": "T3: 'The opposing Volbeat used Tail Glow!' / 'The opposing Volbeat's Sp. Atk rose drastically!' - driver state confirms spa +3. In the first pass Volbeat spent its two turns on Protect and Bug Buzz and never selected the move at all. It then cashed the boost immediately: the +3 Bug Buzz on T4 killed my Incineroar. The authored engine works."},
+    {"check": "Baton Pass to a legal receiver, and no pass without one", "result": "NOT EXERCISED - and correctly so", "evidence": "By the time Tail Glow resolved on T3, Dustox had died on the same turn and Volbeat was the last Pokemon on its side, so there was no legal receiver at all. The dossier is explicit that 'Baton Pass requires an available receiver' and the AI correctly did NOT attempt a pass into an empty bench - it attacked instead. I am recording this as untested rather than as a repeat of the first pass's failure: the precondition genuinely did not exist. The 'Prefer Baton Pass' trait has still never been observed producing a pass, and that remains the open question for this trainer."},
+    {"check": "Compound Eyes Hurricane", "result": "NOT EXERCISED", "evidence": "Mega Butterfree had one action and spent it on Quiver Dance. Hurricane has still never been thrown in either pass. This is the second run in which the team's single most distinctive interaction - an unmissable Hurricane and Sleep Powder off Compound Eyes - has not appeared, because Butterfree dies before its second turn."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "One Protect. See ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "VOLBEAT", "payoff": "REAL. Blocked Incineroar's Darkest Lariat, 2x into Bug and a clean one-shot on a 133 HP body. Volbeat survived to use Tail Glow on the following turn and then to kill my Incineroar with the boosted Bug Buzz, so the guarded turn directly produced the team's only kill of the battle. Not repeated."}
+  ],
+  "ai_defects": [],
+  "defects_resolved": [
+    {"id": "P13-D8", "was": "DRIVER/ROM stall: after exactly one owner in a two-owner battle needed a replacement while the other owner's battler was still on the field, battle_driver.py sat at phase 'running' with empty awaiting_now and pending_decision and refused all further act calls. Reproduced on seeds 89 and 97.", "now": "FIXED on work/agent-battle-build-4. The trigger was reproduced twice in this single battle (turns 1 and 2) and resolved cleanly both times. The first receipt's attempts 1 and 2 are void and this run supersedes them."}
+  ],
+  "ai_notes": [
+    "The team plays better than the first pass recorded: it Mega-Evolved on turn one, Quiver Danced behind it, Encored at Prankster priority, Protected a lethal hit and then cashed a Tail Glow into a kill. Three of the four authored pieces fired. The one that did not - Baton Pass - had no legal receiver, which is the dossier's own stated precondition rather than a bad decision.",
+    "Illumise's T2 Encore is worth a tuning note rather than a defect: locking an Assault Vest Magnezone into Flash Cannon costs the player nothing when every opposing member is a Bug and Flash Cannon is the move they were going to click anyway. Encore is best aimed at a move the player does NOT want repeated.",
+    "The structural problem is unchanged and is named in the dossier's own crack line: four Bug types means one Fire attacker is 2x into the entire room. My Incineroar alone accounted for three of the four KOs."
+  ],
+  "level_changes": {
+    "rule_applied": "NO CHANGE APPLIED, deliberately, and this is a departure from the arithmetic of brief rule 5 that needs stating plainly. On the levels I actually played - Illumise 45, Butterfree 46, Volbeat 47, Dustox 47 - this was a first-attempt win in four turns with one player faint, which is the rule's +1 trigger. But those are the PRE-CHANGE levels: the +1 on Illumise and the +1 on Volbeat are already in the teams file and simply have not been materialized into the ROM (see SNAPSHOT_DISCREPANCY). Applying a further +1 would mean stacking a second increase on evidence gathered before the first one existed, and would put Illumise and Volbeat at +2 of their +/-2 budget on the strength of a single unrepeated benchmark of the old numbers.",
+    "changes": [],
+    "what_this_run_actually_establishes": "It confirms the first pass's judgement that this fight is too easy at the old levels, so the already-landed +1 on Illumise and +1 on Volbeat are the correct response and should stand. They are unverified in play. The correct next step is to materialize with scripts/emerald_champions_teams.py --write, rebuild, and re-benchmark this encounter once; if it is still a one-faint four-turn win at Illumise 46 / Volbeat 48, Dustox (unmoved, offset 1) is the next honest candidate - Butterfree is the Mega and is excluded first.",
+    "budget_state": {"ILLUMISE": "+1 of +/-2 used (unverified)", "BUTTERFREE": "0 used, Mega, excluded first", "VOLBEAT": "+1 of +/-2 used (unverified)", "DUSTOX": "0 used"}
+  },
+  "verdict": "still too easy",
+  "verdict_caveat": "Measured at the pre-change levels that are in the ROM. The response to that finding is already in the teams file and awaiting materialization.",
+  "could_this_be_cooler": "It is one of the more inventive teams in the range and I would keep every member: two Prankster bugs, one passing Tailwind and Encore at priority, the other using Prankster Tail Glow for a three-stage boost and Baton Passing it to a Compound Eyes Mega Butterfree whose Hurricane and Sleep Powder then cannot miss. That is a genuine four-card chain and it deserves to exist. The problem across two passes is that the chain has never once completed, and the reason is ordering rather than levels: Butterfree, the pass RECEIVER and the Mega, leads, so it is the first thing to die and it dies to the Fire move the crack line already tells the player to bring. By the time Volbeat reaches its Tail Glow there is nothing left to pass to. The concrete suggestion is a deployment change, not a species change: lead Illumise beside VOLBEAT, and hold Mega Butterfree in reserve as the receiver it is supposed to be. Then Tail Glow, then Baton Pass into a fresh Compound Eyes Mega Butterfree is a real sequence the player has to interrupt, and Dustox is the survivor that lets it run twice - which is exactly what the dossier says the team is for. Flagged, not changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-4. Not earned campaign traversal. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}
