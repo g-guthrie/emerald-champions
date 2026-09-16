@@ -1,0 +1,30 @@
+{
+  "play_order": 295, "e_group": "E0461", "trainer": "TRAINER_BRIANNA", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/295-TRAINER_BRIANNA/party_deep_84.json",
+  "availability_note": "Same Sootopolis party (Rillaboom 36, Kartana 20, Flutter Mane 68, Zapdos 30 reachable legend, Raging Bolt 60, Incineroar 36); Sootopolis after the cavern and Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/295-TRAINER_BRIANNA/a1", "seed": 1, "outcome": "won", "turns": 8, "decisions": 10, "player_faints": 2, "opponent_faints": 6, "note": "T1 Slowking Protect blocked Fake Out + Leaf Blade while the AI swapped Relicanth for Overqwil's Intimidate. T2 Slowking chose Trick Room but Leaf Blade (2x) KOed it first; Overqwil's crit Barb Barrage did 277 to Rillaboom. T3 Grassy Glide did 243 to Relicanth, Crunch finished Rillaboom. T4 Flutter Mane's Thunderbolt took Relicanth; T5 Thunderbolt took Overqwil into Kartana's Protect. T6 Shadow Ball broke Cursola, Leaf Blade OHKOed Quagsire but Rocky Helmet finished the 27-HP Kartana; Cursola's Shadow Ball left Flutter Mane at 3. T7 Shadow Ball took Cursola while Avalugg's Wide Guard blocked Heat Wave; T8 two Thunderbolts beat Sturdy."}
+  ],
+  "strategy_checks": [
+    {"check": "Slowking sets Trick Room behind Mental Herb on turn 1-2", "result": "PASS (selected) / never resolved", "evidence": "T1 Protect (blocked a 2x Leaf Blade + Fake Out - correct), T2 chose Trick Room but a faster Leaf Blade KOed it. The setter was killed, so the room's concept never showed on the board; that is the crack line working, not an AI failure."},
+    {"check": "Relicanth Rock Head Head Smash is the payoff", "result": "PASS (fired) / no payoff", "evidence": "T3 Head Smash into Rillaboom-slot after Rillaboom fainted (redirected, 'not very effective' on Kartana), T4 Head Smash 126 on Kartana; without Trick Room it always moved last and took a 4x Grassy Glide first."},
+    {"check": "Cursola Perish Body / Strength Sap threat", "result": "NOT TRIGGERED (by design)", "evidence": "I attacked it only with Shadow Ball; it used Shadow Ball three times (one into a Protect, one that left Flutter Mane at 3 HP with a SpD drop). It never used Strength Sap on my physical attackers, which would have been the better click on T5-T6 against Kartana."},
+    {"check": "Quagsire Unaware / Yawn wall", "result": "NOT REACHED", "evidence": "Entered T5, chose High Horsepower into Kartana on T6 and was OHKOed by a 4x Leaf Blade; Rocky Helmet chip took Kartana with it."},
+    {"check": "Overqwil Intimidate + Barb Barrage", "result": "PASS", "evidence": "AI switched it in on T1 for the Intimidate; T2 crit Barb Barrage 277 on Rillaboom (not poisoned, so no doubling); Crunch KOed Rillaboom T3."},
+    {"check": "Avalugg Body Press / Wide Guard closer", "result": "PASS (Wide Guard)", "evidence": "T7 Wide Guard on entry blanked Heat Wave; T8 it was double-Thunderbolted through Sturdy before Body Press."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Slowking", "payoff": "REAL - blocked Fake Out + 2x Leaf Blade; partner slot switched to Overqwil (Intimidate landed)."},
+    {"turn": 7, "user": "Avalugg Wide Guard", "payoff": "REAL - blocked a 2x Heat Wave; Cursola died beside it anyway."}
+  ],
+  "ai_defects": [
+    {"turn": "T5-T6", "battler": "Cursola", "board": "Cursola + Overqwil/Quagsire vs Flutter Mane (full) + Kartana (~50 HP, Protecting T5)", "chosen": "Shadow Ball at Kartana (T5, into Protect) then at Flutter Mane (T6)", "better": "T5 Shadow Ball at Flutter Mane (2x, the only target that was not Protecting) - it chose the battler that had just Protected the turn before. Low severity."}
+  ],
+  "authored_set_legality": "No problem found. Levels L84 x5, Avalugg L85; all six had 0 Speed IVs as authored (Relicanth and Cursola moved last every turn).",
+  "theme_note": "Only half. The room is built on Trick Room and the setter died before the room went up, so what the board showed was six slow Waters being outsped - correct counterplay by the dossier's own crack line, but it means the concept is fragile: one Fake Out + one Grass hit on Slowking ends the idea. The Cursola-avoidance lesson did shape my play (I never made contact).",
+  "level_changes": [],
+  "level_changes_unverified": "No changes (won with 2 faints after a real fight).",
+  "cooler": "The concept is right but too easy to decapitate: Slowking with a Focus Sash or Eject Button, or a second Trick Room user (Cursola learns it), would let the reversal actually happen against a Fake Out lead. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun without a Fake Out lead to see the room under Trick Room at least once."
+}
