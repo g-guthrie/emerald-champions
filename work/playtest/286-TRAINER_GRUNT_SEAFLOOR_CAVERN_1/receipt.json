@@ -1,0 +1,25 @@
+{
+  "play_order": 286, "e_group": "E0452", "trainer": "TRAINER_GRUNT_SEAFLOOR_CAVERN_1", "class": "grunt", "location": "SeafloorCavern_Room1",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-7",
+  "party_manifest": "work/playtest/286-TRAINER_GRUNT_SEAFLOOR_CAVERN_1/party_seafloor_84.json",
+  "availability_note": "Seafloor Cavern is entered by Dive from Route 128 after the Space Center, before Sootopolis; same gate<=68 pool-84 party as the Route 132-134 battles (Landorus and Tapu Fini are reachable legends). No Underwater/Seafloor species used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/286-TRAINER_GRUNT_SEAFLOOR_CAVERN_1/a1", "seed": 1, "outcome": "won", "turns": 3, "decisions": 4, "player_faints": 0, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "Crobat chooses Tailwind or Taunt turn 1", "result": "PASS (selected)", "evidence": "T1 chose Tailwind (Fake Out flinched it); T2 Tailwind resolved ('A tailwind started blowing') but Crobat died to Flare Blitz the same turn and only Barraskewda ever moved under it."},
+    {"check": "Obstagoon attacks after Flame Orb / Obstruct on contact", "result": "FAIL (never reached)", "evidence": "T1 chose Close Combat at Urshifu; OHKOed by a 4x Close Combat before moving. Flame Orb never activated, Obstruct never seen."},
+    {"check": "Sharpedo Speed Boost earned per turn", "result": "PASS (one boost pending)", "evidence": "Entered T1 end, T2 Liquidation into Urshifu for 202 and a Def drop; died to Close Combat before the first end-of-turn boost could matter."},
+    {"check": "Barraskewda Propeller Tail bypasses redirection", "result": "NOT EXERCISED", "evidence": "No Rage Powder was on the field; Barraskewda used Liquidation into Urshifu's Protect, Sash absorbed Knock Off, Sucker Punch finished it."}
+  ],
+  "protect_ledger": [{"turn": "all", "entry": "No opponent Protect/Obstruct used (Obstagoon, Sharpedo, Barraskewda carry one). No empty Protects."}],
+  "ai_defects": [],
+  "theme_note": "The 'boarding party' reads as Aqua pirates - Sharpedo and Barraskewda are on-brand and no rain is faked - but at these levels the crew is over in three turns with zero player faints, so the cavern mouth does not feel like a climax yet.",
+  "level_changes": [
+    {"member": "OBSTAGOON", "before": 0, "after": 1, "why": "0-faint win in 3 turns. Obstagoon (L82) is the lowest-levelled member and died to one hit before its Flame Orb turn; it is the bruiser the concept is named after."},
+    {"member": "CROBAT", "before": 1, "after": 2, "why": "The Tailwind setter fell to a single neutral Flare Blitz on the turn its Tailwind went up. Sharpedo/Barraskewda untouched."}
+  ],
+  "level_changes_unverified": "Cannot be re-verified until the main agent rebuilds the headless ROM; attempt 1 was played at offsets 0/1/1/1.",
+  "cooler": "The faction identity is right (fast, mean, no weather crutch). What it lacks is a survivable turn: every member folds to one Fighting hit and the Tailwind never buys anything. Levels are the right first lever; if that is not enough, a Sitrus or Lum on Obstagoon instead of the Flame Orb (not this pass) would give the boarding party a second turn.",
+  "authored_set_legality": "No problem; all four sets played as written."
+}
