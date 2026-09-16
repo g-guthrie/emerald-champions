@@ -1,0 +1,49 @@
+{
+  "play_order": 184,
+  "e_group": "E0272",
+  "trainer": "TRAINER_MIU_AND_YUKI",
+  "class": "regular",
+  "location": "Route123",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Ninetales (offset -1) at L51, Weepinbell (+1) at L53, Ninetales-Alola (0) at L52, Torterra (+1) at L53 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/184-TRAINER_MIU_AND_YUKI/party_b54_miu.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_miu.json (Incineroar/Mamoswine lead)", "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4,
+     "why": "High Horsepower removed the Drought Ninetales on turn 1, Flare Blitz removed the Alolan Ninetales on turn 2 before Aurora Veil could go up, and a Ground-immune Zapdos closed on Torterra and Weepinbell. Only loss was Mega Gardevoir to a critical High Horsepower."}
+  ],
+  "strategy_checks": [
+    {"check": "Ninetales establishes sun on entry", "result": "PASS", "evidence": "Drought fires at turn 0; state weather reads B_WEATHER_SUN_NORMAL before the first command."},
+    {"check": "Sun makes Solar Beam a one-turn move", "result": "PASS", "evidence": "a1 turn 1: 'The opposing Ninetales absorbed light!' and Solar Beam resolved the same turn for 168 into Mamoswine, super effective."},
+    {"check": "Weepinbell exploits Chlorophyll under sun", "result": "PARTIAL", "evidence": "Fake Out flinched it on turn 1 and the sun was gone by turn 2, so doubled Speed never mattered. Its Sleep Powder did land on turn 3 and put Incineroar to sleep, so the support half of the set works."},
+    {"check": "The two Ninetales are never deployed together (the dossier's explicit caution)", "result": "PASS", "evidence": "Alolan Ninetales entered only on the turn the Kantonian Ninetales fainted, into the vacated slot. The two weather setters were never simultaneously on the field."},
+    {"check": "The snow/Veil mode actually flips the sky", "result": "PASS", "evidence": "a1 turn 1: 'It started to snow!' the instant Alolan Ninetales entered; weather stayed B_WEATHER_SNOW for the rest of the battle. This is the memorable moment the dossier describes and it fired exactly as written."},
+    {"check": "Alolan Ninetales sets Aurora Veil behind Light Clay", "result": "FAIL", "evidence": "On its only turn (a1 turn 2) it chose Blizzard into Incineroar, which is a Fire-type and resists it ('It's not very effective on Incineroar'), and then fainted. Aurora Veil was never used, so the second mode's actual payoff never appeared and Light Clay did nothing."},
+    {"check": "Torterra is the grounded Solid Rock body that ignores the weather", "result": "PASS", "evidence": "a1 turn 3 High Horsepower critical hit OHKOed Mega Gardevoir from 106; Life Orb recoil taken as designed."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Weepinbell", "payoff": "empty in outcome - nothing was aimed at it that turn (Flare Blitz went to Alolan Ninetales, Mamoswine switched). Defensible on expected value: at 119/148 it faced a 2x Flare Blitz and a 2x Icicle Crash, so guarding was a reasonable forecast, just an unlucky one."}
+  ],
+  "protect_summary": "1 opponent Protect, 0 with realised payoff, 1 defensible-but-empty. Not repetitive, no consecutive risk taken.",
+  "ai_defects": [
+    {
+      "id": "E0272-1",
+      "severity": "low",
+      "turns": "a1 turn 2",
+      "board": "Alolan Ninetales L52 at 154/154 with Light Clay, having just entered and set snow. Opponents: Incineroar (Fire/Dark, revealed Flare Blitz) at 217/217 and an empty slot being filled by a switch.",
+      "chosen": "MOVE_BLIZZARD targeting Incineroar",
+      "outcome": "Blizzard was resisted by the Fire-type ('not very effective'), dealt little, and Alolan Ninetales fainted to Flare Blitz the same turn having accomplished nothing beyond the weather its ability set for free.",
+      "better_action": "MOVE_AURORA_VEIL. It is the whole reason the set carries Light Clay, snow was already up from its own Snow Warning, and a Veil would have protected Torterra for the rest of the fight. Choosing a resisted attack over the set's signature screen suggests screen moves are scored below even a bad attack on entry.",
+      "note": "Reported only. No AI C code was touched. This is the same slot the dossier calls the point of the second mode, so it is worth a targeted fix."
+    }
+  ],
+  "level_changes": [
+    {"member": "NINETALES", "field": "offset", "before": -1, "after": 0, "reason": "first-attempt win with one player faint; the sun setter died on turn 1 without the sun mattering"},
+    {"member": "NINETALES_ALOLA", "field": "offset", "before": 0, "after": 1, "reason": "same; the snow setter died on turn 2 before Aurora Veil"}
+  ],
+  "level_change_rationale": "Won on the first attempt in three turns with one player faint (a critical hit), which is the +1 review trigger. Both weather setters are the weakest members and both are the reason the fight is interesting, so +1 each is the change that most helps them survive to execute their mode. Weepinbell (+1) and Torterra (+1) are left alone: Torterra already carried the fight and Weepinbell's Eviolite bulk is the authored point. Total change per member is +1, inside the +/-2 cap.",
+  "cooler": "Keep, enthusiastically - the two-Ninetales weather relay is the best idea in this block and it fired correctly. The concrete improvement is not a species change but a survivability one: the Alolan half has to live one turn to matter, and it did not. Now that its offset is +1, the second improvement worth naming is swapping Encore (never used, and redundant with the Kantonian Ninetales's own Encore) for a defensive or momentum option so the Veil turn is affordable.",
+  "legality_notes": "No legality problem in the authored set. Note that Weepinbell holding Eviolite while Victreebel exists is intentional per the dossier.",
+  "verification_limit": "These two offset changes CANNOT be re-verified in this pass: the headless snapshot predates the edit and I am not permitted to run make. This battle is the one in my block most worth re-running after the main agent re-materializes and rebuilds, because it is the only one where I changed levels."
+}
