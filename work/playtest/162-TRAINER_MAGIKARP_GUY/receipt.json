@@ -1,0 +1,50 @@
+{
+  "play_order": 162,
+  "e_group": "E0227",
+  "trainer": "TRAINER_MAGIKARP_GUY",
+  "location": "Route118",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Ditto 47 (+1), Milotic 47 (+1), Magikarp 47 (+1), Feebas 49 (+3), Gyarados 47 (+1) = cap 48 + offset - 2 throughout. Five members, as authored.",
+  "party_manifest": "work/playtest/162-TRAINER_MAGIKARP_GUY/party.json",
+  "attempts": [
+    {"seed": 61, "run_dir": "work/playtest/162-TRAINER_MAGIKARP_GUY/run-s61", "outcome": "won", "turns": 7, "player_faints": 1, "opponent_faints": 5,
+     "notes": "Rillaboom was the only loss, to its own Wood Hammer recoil stacked on a Milotic Ice Beam. Mega Gyarados got its Dragon Dance off and was then Spored and killed by a critical Pollen Puff."}
+  ],
+  "strategy_checks": [
+    {"check": "Ditto transforms only into a worthwhile eligible target", "result": "PASS", "evidence": "Imposter copied the player's Rillaboom - the highest-Attack body on the field - rather than the Amoonguss deliberately placed in the facing slot. Note for the record: Imposter copied the diagonal battler (player b2), not the directly opposite one, so 'denying a useful Ditto target' by slot placement does not work."},
+    {"check": "Turn two exploits the actual copied set and item rather than assuming a perfect counter", "result": "FAIL", "evidence": "Ditto locked its Choice Scarf into Fake Out on turn 1 and was forced into Struggle on turn 2, taking recoil and dying to a Sludge Bomb it had handed the player a free turn to aim. See AI defects - this is the single most damaging decision in the fight."},
+    {"check": "Milotic attacks or controls speed", "result": "PASS", "evidence": "Turn 1 Icy Wind slowed Rillaboom (correct - Rillaboom was the threat); turn 2 Ice Beam into the Grass type for 143, which set up the Wood Hammer recoil KO. Both choices were right."},
+    {"check": "Feebas's Eviolite utility set does real work", "result": "PASS_WITH_CAVEAT", "evidence": "Feebas used Icy Wind on five consecutive turns and took the player's whole side to -5 Speed, which is genuinely what the set is for. The caveat is that it kept selecting Icy Wind at -3 and -4 while Hypnosis and Chilling Water sat unused; by turn 5 the marginal Speed drop was worth very little and a sleep attempt on the surviving attacker was worth a lot."},
+    {"check": "Mega Gyarados is the genuine competitive pressure mode", "result": "PASS", "evidence": "Turn 3 it Mega Evolved with the correct Mold Breaker banner and used Dragon Dance for +1 Attack and +1 Speed behind Feebas's speed control. It was only stopped because Spore landed on the same turn."},
+    {"check": "Magikarp's two moves are an identity choice, not missing data", "result": "PASS", "evidence": "Magikarp used Tackle at full HP and Flail at 6 HP - Flail's power scales inversely with HP, so that is the correct order, and the joke set is being played correctly."}
+  ],
+  "protect_ledger": [
+    {"turn": "all", "battler": "Feebas / Gyarados", "payoff": "NOT USED. Both carry Protect and neither used it. Gyarados in particular never Protected on the turn it Mega Evolved and Dragon Danced, and Feebas never Protected across five turns of taking Pollen Puffs. No empty guarding, but the shield was never cashed either."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0227-D1",
+      "turn": 1,
+      "board": "Ditto had just transformed into the player's Rillaboom (Grassy Glide, Wood Hammer, Fake Out, Protect) while holding a Choice Scarf.",
+      "chosen": "Ditto used Fake Out",
+      "problem": "Fake Out only works on the user's first turn out. Selecting it as the locked move on a Choice item guarantees the Pokemon can never use a legal move again: on turn 2 Ditto was forced into Struggle, took recoil, and died. One turn of a flinch was traded for the entire rest of the Pokemon's fight. This turns a five-member team into a four-member one and it destroys the exact moment the dossier says the team exists for - Ditto copying the player's ace and moving first with a Scarf.",
+      "better_action": "Any of the other three copied moves. Grassy Glide is priority and would have kept the Scarf useful for the whole fight; Wood Hammer is the damage; even Protect would have been better than a self-disabling lock.",
+      "severity": "HIGH - the interaction is general, not specific to this team: any Choice-item holder with Fake Out can lock itself into a move that cannot legally be used again. Worth an affected-team index for every Choice Scarf/Band/Specs set that also carries Fake Out, and for Imposter in particular, since Imposter copies whatever the player brought."
+    },
+    {
+      "id": "E0227-D2",
+      "turns": "5, 6, 7",
+      "board": "Both player battlers already at -3, then -4, then -5 Speed. Feebas at 101/124 with Hypnosis and Chilling Water unused.",
+      "chosen": "Feebas used Icy Wind three more times",
+      "problem": "Speed control that is already decisive stops having value. From turn 5 on, the player's side was slower than Feebas regardless, and the marginal Speed stage was worth almost nothing while Hypnosis on the surviving attacker would have been worth a turn or more. This is repetition rather than a bad move in isolation.",
+      "better_action": "Hypnosis on Togekiss once the Speed drops had already landed.",
+      "severity": "minor"
+    }
+  ],
+  "level_changes": [
+    {"member": "MILOTIC", "before": 1, "after": 2, "reason": "Won on the first attempt with one player faint. Milotic is the team's only real competitive body besides the Mega and it died on turn 2; it is the one member where a level is worth something. Deliberately NOT raising Magikarp or Ditto: Magikarp's level is irrelevant to a joke set and Ditto's Imposter copies the target's stats, so a level only changes its HP. Gyarados is the Mega and is excluded by rule. Feebas is already at +3 and was the member doing the most work."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM and this agent must not run make.",
+  "could_this_be_cooler": "No, and that is correct - the dossier already says so and the fight confirms it. The joke lands: Feebas spent five turns quietly taking the player's team to -5 Speed while nobody was looking at it, and Mega Gyarados was waiting behind two fish that read as free wins. Keep every species, item and move. What this team needs is not a redesign but the AI fix above, because the Choice-Scarf-into-Fake-Out lock deletes the single moment the whole encounter is built around. One genuinely cool small idea for a later pass, offered as a suggestion only: Magikarp with a Focus Sash and Flail is already the right joke, but giving Feebas Scale Shot or Mirror Coat rather than a third redundant speed-control move would let the two unevolved fish have distinct gags instead of one.",
+  "legality_notes": "Authored sets are internally legal. Imposter, Choice Scarf, Eviolite Feebas and Gyaradosite all materialized correctly, and Mega Gyarados announced its Mega Evolution and gained Mold Breaker properly."
+}

@@ -1,0 +1,29 @@
+{
+  "trainer_a": "TRAINER_MAGIKARP_GUY",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 61,
+  "difficulty": "medium",
+  "level_cap": 48,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 6,
+  "decisions": 8,
+  "player_faints": 1,
+  "opponent_faints": 5,
+  "ai_decision_frames_max": 64,
+  "ai_decision_seconds_max": 1.072,
+  "ai_decision_frames": [
+    41,
+    41,
+    64,
+    57,
+    26,
+    26,
+    21,
+    21
+  ],
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141",
+  "elf_sha256": "70db6be9e609d4fe1de497fd4620a12369072b83a1e79ed108d6b35460058fc5",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
