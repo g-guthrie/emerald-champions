@@ -1,0 +1,70 @@
+{
+  "play_order": 134,
+  "e_group": "E0160",
+  "trainer": "TRAINER_ELMER",
+  "class": "ace",
+  "location": "AshenWoods",
+  "cap": 42,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"WO_CHIEN": 40, "MASQUERAIN": 41, "ARAQUANID": 41, "CLAWITZER": 40},
+  "cap_window_confirmation": "Authored offsets 0/1/1/0 resolved to 40/41/41/40, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42. This matches the dossier's own 'Medium cap40 levels 40/41/41/40' seed line.",
+  "party_manifest": "work/playtest/134-TRAINER_ELMER/party.json",
+  "pre_declared_strategy_checks": [
+    "Tablets of Ruin lowers the Attack of every other Pokemon on the field by 25 percent",
+    "Masquerain's Intimidate fires on entry and again on re-entry after a switch",
+    "Masquerain uses Quiver Dance behind a protected turn rather than as a free turn-one action",
+    "Araquanid's Water Bubble doubles its Water damage (and halves Fire taken)",
+    "Araquanid's Wide Guard blocks a spread move and is not used on a board with no spread threat",
+    "Clawitzer's Mega Launcher boosts Water Pulse, Aura Sphere and Dark Pulse by 50 percent",
+    "Hydro Pump's accuracy is a real cost and the AI does not treat it as guaranteed",
+    "Every opposing Protect and Wide Guard has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/134-TRAINER_ELMER/a1", "seed": 134, "outcome": "won", "turns": 5, "decisions": 7, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "I built almost entirely special because Tablets of Ruin and Intimidate between them cut physical Attack by 25 percent and a stage, and because Flying is 2x into three of the four and Electric is 2x into the other three. T1 Masquerain Protected the Thunderbolt aimed at it while Togekiss's Air Slash flinched Wo-Chien out of its Leech Seed. T2 Elmer withdrew the healthy Masquerain for Clawitzer, which walked into the same Thunderbolt at the same 2x and took 117 of its 144 HP - see the AI defect section. T3 Thunderbolt finished Clawitzer, Air Slash flinched Wo-Chien again, and Araquanid came in. T4 Thunderbolt took Araquanid to 18 of 145, Air Slash killed Wo-Chien, and Araquanid's Water Bubble Hydro Pump killed Jolteon in one hit - 120 HP erased, which is what that ability is for. T5 I sent Mega Gardevoir; Araquanid used Wide Guard against two single-target moves and died to Air Slash, and Mystical Fire dropped Masquerain's Special Attack in the same turn it used Quiver Dance. T6 Mystical Fire finished Masquerain."}
+  ],
+  "strategy_checks": [
+    {"check": "Tablets of Ruin", "result": "PASS", "evidence": "Wo-Chien entered with ABILITY_TABLETS_OF_RUIN live on the battler for the whole fight. It is the reason my manifest is four special attackers and only two physical bodies, neither of which was needed."},
+    {"check": "Masquerain Intimidate on entry and re-entry", "result": "PASS, twice", "evidence": "Turn 0 both of my battlers were already at atk -1 before I gave a command. On T5 Masquerain re-entered and the log shows 'Togekiss's Attack fell!' and 'Gardevoir's Attack fell!' again, taking Togekiss to -2. Intimidate correctly re-fires on a switch-in."},
+    {"check": "Masquerain uses Quiver Dance rather than wasting it", "result": "PASS on timing, but it came too late to matter", "evidence": "Masquerain's four actions were Protect (T1), a switch out (T2), Quiver Dance (T5) and Bug Buzz (T6). It set up on the turn Araquanid was holding Wide Guard in front of it, which is the correct turn to do it - that is exactly the authored 'protected special setup role'. It got +1/+1/+1 and then died to a 2x Mystical Fire, having already eaten a -1 Special Attack from the same move. Mystical Fire is the precise counter to this member and the room has no answer to it."},
+    {"check": "Araquanid Water Bubble doubles Water damage", "result": "PASS, emphatically", "evidence": "T4 Hydro Pump killed a 120 HP Jolteon outright from 62 HP remaining, and Jolteon's Special Defense is base 95. The same Araquanid also survived a 2x Life Orb Thunderbolt at 18 HP, so its base 132 Special Defense is doing its job too. This is the best member on the team and the one the player has to plan around."},
+    {"check": "Araquanid Wide Guard is not used on a board with no spread threat", "result": "FAIL", "evidence": "T5. The board was Togekiss and a freshly switched-in Gardevoir against Masquerain and an 18 HP Araquanid. Togekiss's only attack is Air Slash, a single-target move; Gardevoir had not yet Mega Evolved and had revealed nothing. Araquanid used Wide Guard, which blocked nothing, and died to the single-target Air Slash it could have blocked with Protect. Logged as an AI defect below rather than a design fault - the move is correct on the set, the selection was wrong on that board."},
+    {"check": "Clawitzer Mega Launcher", "result": "PARTIAL", "evidence": "Clawitzer got exactly one action, Water Pulse into Jolteon, before dying on the following turn. Mega Launcher was live on the battler. The set could not be shown because the switch that brought it in put it directly into an Electric attack it is 2x weak to."},
+    {"check": "Hydro Pump accuracy is a real cost", "result": "NOT DEMONSTRATED", "evidence": "One Hydro Pump was used in the fight and it hit. No missed attack occurred on either side, so the 80 percent accuracy the dossier flags as a real limitation never bit."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "MASQUERAIN", "payoff": "GOOD. Blocked a Life Orb Thunderbolt, which is 2x into Bug/Flying and would very likely have killed a 121 HP Masquerain outright on turn one. It guarded on the turn it was the obvious focus target and did not repeat."},
+    {"turn": 5, "battler": "ARAQUANID", "payoff": "EMPTY. Wide Guard on a board with no spread move in play, from a battler at 18 of 145 HP that died to the single-target attack a plain Protect would have blocked. This is the only empty guard in my block so far and it is recorded as an AI defect."}
+  ],
+  "protect_ledger_note": "Two guards. One is a correct, well-timed Protect; the other is an empty Wide Guard that cost Araquanid its life.",
+  "ai_defects": [
+    {"id": "P12-D1", "severity": "medium", "turn": 5, "trainer": "TRAINER_ELMER", "battler": "ARAQUANID",
+     "board": "Player: Togekiss (162/162, moves revealed: Air Slash only) and Gardevoir, just switched in, nothing revealed, not yet Mega Evolved. Opponent: Masquerain (31/121) and Araquanid (18/145).",
+     "chosen": "MOVE_WIDE_GUARD",
+     "why_wrong": "Wide Guard protects the user's side against spread moves only. Nothing the player had revealed in four turns was a spread move - Togekiss had used Air Slash four times and Jolteon had used Thunderbolt four times, both single-target - and Araquanid had no reason to forecast one. Araquanid was at 18 HP, i.e. one hit from anything would kill it, so the guard it needed was the one that blocks everything.",
+     "better_action": "MOVE_PROTECT. It is on the same set, it would have blocked the Air Slash that killed Araquanid, and it would have bought Masquerain's Quiver Dance a second turn behind a living partner. Alternatively Hydro Pump into Togekiss, trading the last 18 HP for real damage.",
+     "note": "The general shape of the defect is that Wide Guard appears to be scored as a guard of comparable value to Protect when the forecast contains any spread move at all, rather than being discounted by the probability that the incoming damage is actually spread. On a board where the player's entire revealed moveset is single-target, Wide Guard's expected value is close to zero and Protect's is not. This is a shared-AI concern, not an Elmer-specific one: Araquanid is the block's only Wide Guard user, but the same scoring path covers every Wide Guard and Quick Guard holder in the campaign. Not fixed here - the brief forbids editing AI C code in this pass."},
+    {"id": "P12-D2", "severity": "low", "turn": 2, "trainer": "TRAINER_ELMER", "battler": "MASQUERAIN/CLAWITZER",
+     "board": "Player: Togekiss (162/162) and Jolteon (120/120, Thunderbolt revealed on T1). Opponent: Wo-Chien (102/155) and an untouched Masquerain (121/121) that had successfully Protected a Thunderbolt the turn before.",
+     "chosen": "switch Masquerain out for Clawitzer",
+     "why_wrong": "Both Masquerain and Clawitzer are 2x weak to Electric, so the switch bought no resistance; it surrendered the tempo of a healthy, already-guarded setup threat, and it put a 144 HP Assault Vest body into the lane a revealed Life Orb Thunderbolt was covering. Clawitzer took 117 damage on arrival and died the following turn without showing Mega Launcher. Clawitzer is also slower than Masquerain, so the switch made the slot worse on both axes.",
+     "better_action": "Stay in and use Quiver Dance, or attack with Hydro Pump. If a switch was wanted, Wo-Chien's Grass half resists Electric at 0.5x and was the only member on the team that does - but it was already on the field.",
+     "note": "I am recording this as low severity because the opponent legitimately cannot read my pending commands and a switch into a revealed threat is a defensible gamble. What makes it a defect rather than a gamble is that the incoming battler shared the outgoing battler's exact weakness, so no reading of the forecast made Clawitzer the safer body."}
+  ],
+  "ai_notes": [
+    "Masquerain's T1 Protect and its T5 Quiver Dance behind a guarding partner are both textbook - the setup turn was taken on the one turn the room could pay for it.",
+    "Wo-Chien's move selection was correct throughout: Leech Seed on turn one into a board it expected to outlast, then Giga Drain into Jolteon (1x, and the only thing on the field its Dark Pulse would not have done better against - Dark Pulse is 1x into Electric too, but Giga Drain heals).",
+    "Two Serene Grace Air Slash flinches in a row on Wo-Chien decided the middle of the fight. That is my luck, not an AI failure, but it is worth recording that a 121-HP-and-under opposing team facing a Serene Grace flinch engine has a real variance problem.",
+    "AI decision time peaked at 1.038 s (62 frames), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"trainer": "TRAINER_ELMER", "member": "CLAWITZER", "offset_before": 0, "offset_after": 1, "level_before": 40, "level_after": 41,
+     "rule_applied": "Brief rule 5: won on the first optimized attempt with 1 player faint -> +1 on the weakest one or two members, never the ace/Mega/legend first.",
+     "reasoning": "Clawitzer and Wo-Chien share the lowest offset (0, level 40). Wo-Chien is a reachable legendary and the team's named ability anchor, so it is not raised first. Clawitzer is the member that contributed least - one Water Pulse before it died - and at 144 HP with an Assault Vest it should not be falling to a single non-critical Thunderbolt. Only one member is raised, not two: Masquerain and Araquanid are already at +1 and both did their authored jobs (a correct Protect and a Quiver Dance; a one-hit kill on a 120 HP battler)."}
+  ],
+  "rerun": "Not performed in this pass. A level offset only reaches the battle through scripts/emerald_champions_teams.py --write and a ROM rebuild, and this brief forbids running make; the headless build at work/agent-battle-build-2 still carries Clawitzer at level 40. The rerun belongs to the main agent's post-materialization pass.",
+  "could_this_be_cooler": "The concept is good and I would keep all four species, but the room has one structural problem that a level cannot fix: Wo-Chien, Masquerain and Araquanid are all 2x to Flying, and Masquerain, Araquanid and Clawitzer are all 2x to Electric, so two moves cover the entire team twice over. A single Serene Grace Air Slash user and a single Thunderbolt between them beat four different ability packages, which is why a 4-1 scoreline was available on a first attempt against an ace-class trainer. The individual pieces are genuinely interesting - Tablets of Ruin quietly taxing the player's physical damage is the sort of effect players notice three turns late, and Water Bubble Hydro Pump is the best single attack in my block - but they do not defend each other. The specific improvement I would make: give one slot a body that punishes Flying and Electric rather than sharing their weaknesses. Clawitzer, the member I raised, is the natural place for it - it is the one member whose ability (Mega Launcher) works on any type, so changing what carries it costs the theme nothing. Not changed in this pass, as the brief directs. Separately, the dossier's own line 'Hydro Pump accuracy is a real limitation' is honest and correct and should stay; it just did not bite in this sample."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
