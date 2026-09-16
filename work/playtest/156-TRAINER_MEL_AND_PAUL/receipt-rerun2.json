@@ -1,0 +1,126 @@
+{
+  "play_order": 156,
+  "e_group": "E0208",
+  "trainer": "TRAINER_MEL_AND_PAUL",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 48,
+  "difficulty": "medium",
+  "run_kind": "rerun2",
+  "prior_receipts": [
+    "work/playtest/156-TRAINER_MEL_AND_PAUL/receipt.json",
+    "work/playtest/156-TRAINER_MEL_AND_PAUL/receipt-rerun.json"
+  ],
+  "build": "work/agent-battle-build-5",
+  "why_rerun": "The previous rerun ran on STALE levels - it played Illumise 45, Butterfree 46, Volbeat 47, Dustox 47, which were the pre-change values, because the first pass's +1 on Illumise and +1 on Volbeat were in the teams file but not yet materialized into that build's ROM. That rerun therefore correctly declined to apply a further change. This run re-benchmarks the fight on the levels that were actually authored.",
+  "cap_confirmation": "Driver reports level_cap 48. Resolved levels read off the live board as each member appeared: Illumise 46 and Butterfree 46 (turn 0), Dustox 47 (turn 1), Volbeat 48 (turn 2). Current authored offsets 0/0/+2/+1 give cap 48 + offset - 2 = 46/46/48/47 on Medium. All four match. STALE-LEVEL ISSUE RESOLVED: Illumise came in at 46 rather than 45 and Volbeat at 48 rather than 47, which is exactly the delta the previous rerun reported as missing. This build carries the authored offsets.",
+  "level_offsets_at_run": {"ILLUMISE": 0, "BUTTERFREE": 0, "VOLBEAT": 2, "DUSTOX": 1},
+  "resolved_opponent_levels": {"ILLUMISE": 46, "BUTTERFREE": 46, "VOLBEAT": 48, "DUSTOX": 47},
+  "party_manifest": "work/playtest/156-TRAINER_MEL_AND_PAUL/party-a1.json",
+  "party_reuse_justification": "Reused unchanged from both prior passes. Same cap 48, same encounter. The manifest's audit still holds: every member is gated at 36 or below in pool-48 and every source map precedes the Surf backtrack - Torracat line (36), New Mauville entrance via Wattson's Basement Key (30), Sneasel (14), Togepi Route 102 plus Shiny Stone (24), Altering Cave 1F (14), Granite Cave Abra plus Slateport Linking Cord (20). No legendaries, Ultra Beasts or Paradox species. The party was never reported weak or illegal.",
+  "pre_declared_strategy_checks": [
+    "Illumise chooses Tailwind / Encore / Helping Hand to enable Butterfree rather than attacking into a lost board",
+    "Volbeat uses Prankster Tail Glow and Baton Passes the boost to a legal receiver - the trainer carries an explicit `ai: Prefer Baton Pass` trait",
+    "Mega Butterfree's Compound Eyes kit is actually deployed behind the pass",
+    "Dustox is the survivor that lets the chain run twice",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/156-TRAINER_MEL_AND_PAUL/r2",
+      "seed": 2156,
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "log": "work/playtest/156-TRAINER_MEL_AND_PAUL/r2/events.jsonl",
+      "damage_note": "Damage read from the driver's new identity-keyed `damage` map, not slot arithmetic.",
+      "narrative": "T1 Butterfree Mega Evolved and used Quiver Dance; Incineroar's Fake Out flinched Illumise out of its Dazzling Gleam; Magnezone's Thunderbolt (2x on Bug/Flying) KOed Mega Butterfree through the fresh +1 Sp.Def. Dustox entered. T2 Illumise's Prankster Encore locked my Magnezone into Thunderbolt at priority - a genuinely good play that cost me the Flash Cannon I had aimed at Dustox - and Dustox used Quiver Dance; Incineroar's Flare Blitz (2x) KOed Illumise. Volbeat entered. T3 Volbeat Protected and caught the Encore-forced Thunderbolt; Dustox used Roost and was KOed by Flare Blitz anyway. T4 Volbeat attacked rather than guarding again and fell to a critical Thunderbolt. No player faints; Incineroar finished on 130 of 194 from its own recoil."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Illumise chooses support to enable Butterfree",
+      "result": "MIXED - right move, one turn late",
+      "evidence": "T1, with Butterfree committing to a Quiver Dance beside it, Illumise selected Dazzling Gleam at Incineroar (2x into Dark) rather than a Tailwind or Helping Hand that would have protected or cashed the boost; it was flinched before it resolved. T2, with Butterfree already dead, it selected Encore at Magnezone - the correct read and the single best opposing decision of the battle, locking my strongest attacker into a 1x move for the rest of the fight. So the support instinct is there and is well targeted; it just did not arrive on the turn the setup partner needed it."
+    },
+    {
+      "check": "Volbeat uses Tail Glow and Baton Passes it",
+      "result": "FAIL / NOT REACHED - second run running",
+      "evidence": "Volbeat entered on T2 and had two turns. It chose Protect and then Bug Buzz. Tail Glow and Baton Pass were never selected in this run or the previous one, so the authored four-card chain that the `ai: Prefer Baton Pass` trait exists to serve has never been observed. Mitigating: by the time Volbeat arrived, both legal pass receivers were dead, so on this board there was nothing to pass to and Protect/attack were the only sensible options. The failure is that Volbeat always arrives last, not that it chose wrongly once it did."
+    },
+    {
+      "check": "Mega Butterfree's kit deployed behind the pass",
+      "result": "FAIL",
+      "evidence": "Mega Evolution confirmed on this build - 'The opposing Butterfree has Mega Evolved into Mega Butterfree' - and it used Quiver Dance. It then died on the same turn to a 2x Thunderbolt, without ever attacking and without ever receiving a pass. See defect E0208-D1."
+    },
+    {
+      "check": "Dustox is the survivor that lets the chain run twice",
+      "result": "PARTIAL PASS",
+      "evidence": "Dustox did behave like the durable member - Quiver Dance on entry, then Roost when it dropped to 94 of 176, which is correct play for a Black Sludge wall. It restored a meaningful chunk and still died to a 2x Flare Blitz. It survived longer than anything else on the team, so the role is right; there was simply no chain left to run."
+    },
+    {
+      "check": "Every opposing Protect has a payoff",
+      "result": "PASS",
+      "evidence": "One Protect this battle, ledgered below. Real payoff, not repeated."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "battler": "VOLBEAT (b1)",
+      "payoff": "REAL - blocked Magnezone's Thunderbolt on Volbeat's entry turn. Because Illumise's Encore had locked Magnezone into Thunderbolt, this was also a guard against a move the AI could predict with certainty from the native lock, which is legitimate information rather than a command read.",
+      "verdict": "good",
+      "note": "Not repeated. On T4 Volbeat attacked with Bug Buzz rather than guarding again, correctly declining the consecutive-use roll. Good cadence - the opposite of E0175 Foster's last-Pokemon Protect."
+    }
+  ],
+  "ai_defects": [
+    {
+      "id": "E0208-D1",
+      "status": "NEW this run",
+      "severity": "medium",
+      "attempt": 1,
+      "turn": 1,
+      "board": "Butterfree 125/125 holding a Butterfrenite, at zero stat stages, against Incineroar 194/194 and a visible Magnezone 170/170 - an Electric/Steel body whose typing alone marks it as an Electric attacker, and Butterfree is Bug/Flying at 2x to Electric with 125 HP.",
+      "chosen": "Mega Evolve, then MOVE_QUIVER_DANCE.",
+      "better_action": "Hurricane or Bug Buzz at Magnezone, or at Incineroar. Anything that converts the turn into damage before a 2x attacker removes it.",
+      "why_wrong": "Butterfree spent its only turn on a boost and died to that boost's most obvious counter on the same turn, so the Mega Evolution and the Quiver Dance both returned nothing. The AI does not read my pending commands and should not - but Magnezone's typing was fully visible on the board from turn 0, and a 125 HP Bug/Flying setting up in front of a healthy Electric-type is a losing proposition against any move it might pick. This is the same shape as the E0162 Martha dual-Calm-Mind defect: setup-move scoring is not pricing in a visibly lethal 2x attacker opposite.",
+      "shared_path_note": "No AI C code was changed. E0162 TRAINER_MARTHA showed the same class of behaviour on the same build, which suggests a shared setup-scoring path rather than two isolated owners. Any team with a frail setup user opposite a visible super-effective type could be affected; these two should be indexed together."
+    }
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in four turns with ZERO player faints -> +1 on the opponent's weakest one or two members, never the ace/Mega/legend first.",
+    "budget_note": "Baselines at the start of this pass were Illumise -1, Butterfree 0, Volbeat +1, Dustox +1. Used so far: Illumise +1, Volbeat +1, Butterfree none, Dustox none. After the changes below Illumise stands at +2 used and is closed out for this pass; Dustox has taken its first +1 and has one left. Nobody exceeds the +-2 limit. Note that this is the first change applied to this trainer on evidence from correctly materialized levels - the previous rerun's decision to hold was right, and this is not a second bump stacked on the same evidence.",
+    "changes": [
+      {
+        "trainer": "TRAINER_MEL_AND_PAUL",
+        "member": "ILLUMISE",
+        "field": "level offset",
+        "before": 0,
+        "after": 1,
+        "resolved_level_before": 46,
+        "resolved_level_after": 47,
+        "reasoning": "Joint-lowest member at 46 alongside Butterfree, and Butterfree is the Mega, which the brief excludes from a first bump. Illumise is also the member whose turns matter most: its Prankster Encore was the best opposing decision in the fight, and every extra turn it survives is a turn of priority disruption. This exhausts its +-2 budget for the pass."
+      },
+      {
+        "trainer": "TRAINER_MEL_AND_PAUL",
+        "member": "DUSTOX",
+        "field": "level offset",
+        "before": 1,
+        "after": 2,
+        "resolved_level_before": 47,
+        "resolved_level_after": 48,
+        "reasoning": "The next-lowest eligible member at 47, and it has taken nothing this pass. Dustox is explicitly the team's survivor - the member the dossier says 'makes the chain work twice' - so bulk is the stat its role actually converts, and it was the only member that lasted more than one turn of focus. It has one more point of budget after this."
+      }
+    ],
+    "not_changed": [
+      {"member": "BUTTERFREE", "reason": "The Mega. Excluded from a first bump by the brief, and it still holds its full +-2. Its problem this run was defect E0208-D1, not its level - AGENTS.md says to fix the defect before compensating with levels."},
+      {"member": "VOLBEAT", "reason": "Already the highest member at 48 after the first pass's +1, with +1 of budget left. It is not among the weakest, and its real problem is that it always arrives last with nothing left to pass to, which a level does not address."}
+    ]
+  },
+  "cooler_note": "The concept remains one of the most inventive in the range and I would keep all four species - two Prankster fireflies, one passing Tailwind and Encore at priority and the other passing a three-stage Tail Glow to a Compound Eyes Mega Butterfree, is a real four-card chain rather than four setup moves in a trenchcoat. The problem, now confirmed over two completed runs, is purely ordering: Volbeat is the passer and Butterfree is the receiver, and they are deployed third and second, so Butterfree is always dead before Volbeat arrives and Volbeat always finds an empty board. The team's signature move has never once been used. The concrete fix worth flagging for a later pass is a lead-order change and nothing more - lead Volbeat beside Butterfree so the pass has a receiver on turn 1, and hold Illumise back as the second-wave disruptor its Encore already proves it is good at. That preserves every species, move, item and the Prefer Baton Pass trait. Not applied in this pass, which changes levels only.",
+  "authored_set_legality": "No legality problem found.",
+  "verdict": "still too easy",
+  "note_on_teams_file": "Per this block's override the teams file was edited in place by targeted line replacement and is deliberately NOT staged or committed by this receipt."
+}
