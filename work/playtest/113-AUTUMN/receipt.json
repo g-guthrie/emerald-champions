@@ -1,0 +1,35 @@
+{
+  "play_order": 113,
+  "e_group": "E0136",
+  "trainer": "TRAINER_AUTUMN",
+  "class": "regular",
+  "location": "JaggedPass",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Hariyama L34 (36+0-2), Avalugg L35 (36+1-2), Toedscruel L34 (36+0-2), Sawsbuck L35 (36+1-2).",
+  "party_manifest": "work/playtest/113-AUTUMN/party-a1.json",
+  "attempts": [
+    {"seed": 51, "attempt": 1, "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+     "notes": "Togekiss' 2x Air Slash carried the fight, removing Hariyama and Sawsbuck. Avalugg was killed with non-super-effective Dark Pulse specifically so Weakness Policy could never fire. Lost Mega Blastoise to a Muscle Band Body Slam after Horn Leech had chipped it."}
+  ],
+  "strategy_checks": [
+    {"check": "Hariyama's Flame Orb self-burn turns on Guts", "result": "PASS", "evidence": "End of turn 1: 'The opposing Hariyama was burned!'; it then used Close Combat from behind Guts on turn 2. The burn is self-inflicted and the Attack drop is inverted exactly as authored."},
+    {"check": "Hariyama's Facade doubles behind the burn", "result": "NOT REACHED", "evidence": "Hariyama got two actions (Fake Out, Close Combat) and died on turn 2 before Facade came up. Close Combat into the Mega was the higher-damage choice on that board, so this is not a miss."},
+    {"check": "Hariyama opens with Fake Out on an interruptible threat", "result": "PASS", "evidence": "Turn 1, Fake Out targeted Mega Blastoise - the member that had just Mega-evolved and the biggest threat on my side - and the flinch denied its Water Pulse. Correct target out of two."},
+    {"check": "Avalugg's Weakness Policy activates on a super-effective hit for the Avalanche retaliation role", "result": "NOT TRIGGERED - by deliberate counterplay", "evidence": "I killed Avalugg with Dark Pulse (1x) rather than Aura Sphere (2x) precisely to deny the Policy. Two Mega Launcher Dark Pulses did 114 and 30 through its base-46 Special Defense. This is the crack working as documented, not an AI failure, but it does show the retaliation role is opt-in for the player: a special attacker with a neutral move simply never gives Avalugg its turn."},
+    {"check": "Avalugg's Sturdy survives an OHKO from full", "result": "NOT TRIGGERED", "evidence": "No single hit took it from full to zero; the first Dark Pulse left it at 30."},
+    {"check": "Avalugg's Avalanche retaliates after being hit", "result": "PASS", "evidence": "Avalanche on turns 1, 2 and 3, all into Togekiss at 2x, for 54 and 25. It used the move it was built for."},
+    {"check": "Toedscruel's Mycelium Might makes status moves resolve last", "result": "PASS", "evidence": "Turn 4: Toedscruel's Spore resolved after Sawsbuck's Body Slam, after Togekiss' Air Slash and after Sawsbuck had already fainted - dead last in the turn despite base 100 Speed. That is Mycelium Might's documented drawback, correctly applied."},
+    {"check": "Spore lands despite the target's ability", "result": "PASS", "evidence": "Togekiss fell asleep for 2 turns ('sleep:2' in the decoded status), which is the Mycelium Might ability-ignoring upside."},
+    {"check": "Sawsbuck's Serene Grace doubles Body Slam's paralysis chance", "result": "NOT OBSERVED", "evidence": "Body Slam KOed Mega Blastoise outright on turn 4, so no paralysis roll was visible. Sawsbuck's two actions (Horn Leech at 2x into the Water-type, then Body Slam) were both correct targeting."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "HARIYAMA", "before": 0, "after": 1, "reason": "Won on attempt 1 with a single faint. Hariyama is tied for the weakest offset and died to two Air Slashes having landed one Fake Out and one Close Combat."},
+    {"member": "TOEDSCRUEL", "before": 0, "after": 1, "reason": "Tied weakest offset; it got one Spore off and then died to a single 4x Icicle Crash from full HP. Avalugg and Sawsbuck both already sit at +1 and both did real work, so neither moves."}
+  ],
+  "level_change_verification": "NOT RERUN - prebuilt ROM, no level override, no make. Needs the main agent's rebuild.",
+  "could_this_be_cooler": "This is the most coherent regular-trainer team in the block - four distinct, readable mechanics and no dead sets, and the AI played all four correctly. The one structural note: Avalugg's Weakness Policy is a trap that a thinking player declines for free, because Avalugg's Special Defense is so low that any neutral special move kills it faster than a super-effective one would. Suggestion, not applied: the retaliation role would actually threaten if Avalugg's partner could force the super-effective hit - a Toedscruel that leads beside it and Spores the special attacker, leaving only the physical Fighting/Rock/Steel answers on the field, would make the Policy a real decision instead of a button the player never presses.",
+  "authored_set_legality": "No legality problems. Guts, Sturdy, Mycelium Might and Serene Grace all behaved as printed, and Sawsbuck resolved as SAWSBUCK_SPRING.",
+  "notes": "No opponent Protect was used in this battle, so the Protect ledger is empty."
+}
