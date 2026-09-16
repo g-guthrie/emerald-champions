@@ -1,0 +1,38 @@
+{
+  "rom_sha256": "6619c208ca5009bb976c265221426d1edbd6367dd7b204d9fa2feae5735f8ba4",
+  "elf_sha256": "8e0be54c56310979f9166cc814c6b5586333d1d0057767cb84c6be2ff9ce9d97",
+  "seed": 1,
+  "trainer_a": "TRAINER_LINDA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 84,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/279-TRAINER_LINDA/party_route133_84.json",
+  "party_sha256": "3aa42080c5a77087bd02b93026719fcc5414a25ae0344188bb299ab8982b59ae",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "E0438 TRAINER_LINDA, Route 133 regular, cap 84 doubles",
+    "party": 6
+  },
+  "started": {
+    "frames": 1191
+  },
+  "replacement_commits": {
+    "turn": 5,
+    "slots": {}
+  }
+}

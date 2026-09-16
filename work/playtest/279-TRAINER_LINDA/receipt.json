@@ -1,0 +1,29 @@
+{
+  "play_order": 279, "e_group": "E0438", "trainer": "TRAINER_LINDA", "class": "regular", "location": "Route133",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium",
+  "party_manifest": "work/playtest/279-TRAINER_LINDA/party_route133_84.json",
+  "availability_note": "Route 133 is the next sail lane west of Route 132 on the same Pacifidlog-Slateport trip; same gate<=68 pool-84 party as E0434/E0435 (Incineroar 36, Urshifu-S 42, Amoonguss 42, Landorus 42 legend, Tapu Fini 60 legend, Flutter Mane 68). Nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/279-TRAINER_LINDA/a1", "seed": 1, "outcome": "won", "turns": 5, "decisions": 8, "player_faints": 2, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "Kingdra opens with Rain Dance or Muddy Water", "result": "PASS", "evidence": "T1 Kingdra Mega Evolved and chose Rain Dance (denied by Fake Out flinch); T2 at 31/241 it chose Muddy Water instead of re-trying Rain Dance, which is the right call at that HP."},
+    {"check": "Lumineon attacks or sets Tailwind", "result": "PASS", "evidence": "T1-T2 Hydro Pump into Incineroar (2x, 159 then KO); T4 Tailwind once Arctozolt was the incoming reserve."},
+    {"check": "Rain + Tailwind stacking / Swift Swim speed tier", "result": "NOT REACHED", "evidence": "Rain never went up: Fake Out flinched the T1 Rain Dance and Kingdra died on T2. The stack could not be tested in this line; that is the crack line working, not a defect."},
+    {"check": "Arctozolt Bolt Beak used when it moves first", "result": "PASS", "evidence": "T5 under Tailwind Arctozolt chose Bolt Beak into Tapu Fini (2x) and moved before it; Fini had Protected."},
+    {"check": "Araquanid Water Bubble damage / Wide Guard vs spread", "result": "PASS (Water Bubble) / NOT EXERCISED (Wide Guard)", "evidence": "T3 Liquidation OHKOed Flutter Mane (213/213). No spread move was aimed at it so Wide Guard was never relevant."},
+    {"check": "Sticky Web only if it beats an immediate attack", "result": "PASS", "evidence": "Araquanid attacked both turns it was on the field; never spent a turn on Sticky Web while under pressure."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "user": "Lumineon", "payoff": "REAL - blocked Flutter Mane's Thunderbolt (2x, lethal on a 234-HP Lumineon) while Araquanid KOed Flutter Mane. Best possible use of the move."},
+    {"turn": "other", "entry": "Kingdra, Lumineon (other turns) and Arctozolt carry Protect and did not use it; no empty Protects."}
+  ],
+  "ai_defects": [],
+  "engine_notes": [
+    {"turn": 3, "note": "Battle text printed 'The opposing Araquanid couldn't fully protect itself' when Urshifu's Wicked Blow hit an Araquanid that had chosen Liquidation, not a protect move. Cosmetic Unseen Fist message fires without a protect being active. Not an AI issue."}
+  ],
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "This is a good regular-trainer fight: two player faints, one genuinely well-timed Protect, and Bolt Beak forced a Protect read. The Mega Kingdra at offset 0 (L82) is the soft spot - it never got the rain up and fell to Wicked Blow twice - but a Fake Out lead is exactly the counterplay the crack describes. If anything (not this pass) the rain would be more robust from a Damp Rock on Lumineon's Tailwind partner or a second setter; species are fine.",
+  "authored_set_legality": "No problem; all four sets played as written and Kingdra Mega Evolved on turn 1."
+}
