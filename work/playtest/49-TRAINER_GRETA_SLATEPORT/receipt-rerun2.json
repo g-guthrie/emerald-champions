@@ -1,0 +1,113 @@
+{
+  "play_order": 49,
+  "e_group": "E0053",
+  "trainer": "TRAINER_GRETA_SLATEPORT",
+  "class": "brain",
+  "location": "SlateportCity",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Heracross 1->2 and Umbreon 0->1 off a one-faint five-turn clear. This is the one confirming run of those levels on the rebuilt ROM, which carries them plus the latest AI and the switch-legality enforcement.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Heracross resolved at L24 and Umbreon at L23 (L23 and L22 in pass 1). Shedinja L24 and Gastly L27 unchanged.",
+  "resolved_opponent_levels": {"HERACROSS": 24, "UMBREON": 23, "SHEDINJA": 24, "GASTLY": 27},
+  "party_manifest": "work/playtest/49-TRAINER_GRETA_SLATEPORT/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: the cap-24 core (Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana), all gates <= 24 in work/reference-pools/pool-24.json and all source maps at or before Slateport. One declared reachable legend (Enamorus); no Mega.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/49-TRAINER_GRETA_SLATEPORT/r1",
+      "seed": 49,
+      "outcome": "won",
+      "turns": 7,
+      "driver_turn_counter": 6,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames": [43, 60, 61, 50, 50, 27, 27, 23, 23],
+      "ai_decision_seconds_max": 1.021,
+      "narrative": "The hardest and best-played fight in my block. T1 I double-targeted Heracross so Moxie could never start; it got its Choice Scarf turn first and again picked Rock Slide - the one move on its sheet that is not resisted by two Fairy/Flying leads - hitting both for 2x AND flinching Enamorus, so my Moonblast never resolved. A 4x Air Slash then KO'd it. Umbreon opened with Wish at 98/98 (see defect R6-D3). T2 I withdrew the 27 HP Enamorus for Magearna; Air Slash broke Shedinja's Focus Sash, and the Wish resolved on a completely undamaged Umbreon for nothing. T3 Shedinja Protected away the Air Slash that would have finished it - a 1 HP body with no Sash left, so a perfect guard - while Fleur Cannon took Umbreon 98 to 26 and Umbreon's Snarl dropped both my special attackers (Magearna to -3 SpA in total). T4 Greta pivoted the 1 HP Shedinja OUT to Gastly, which ate the Air Slash aimed at Shedinja: the second-best predictive switch anyone has made against me. Umbreon Protected into an empty turn. I brought Kartana in for the crippled Magearna. T5 Kartana's Sacred Sword (2x) KO'd Umbreon, and Gastly answered with spread Sludge Wave - 0x on the Steel Kartana, 2x on Togekiss - and KO'd Togekiss before its Air Slash resolved. T6 Hoopa came in for Shadow Ball range and the 1 HP Shedinja's priority Shadow Sneak hit it at 4x and KO'd it from full 94 HP; Smart Strike removed Gastly. T7 only Alakazam can legally damage Shedinja (Wonder Guard leaves Shadow Ball as my single super-effective option), so Alakazam came in, ate a 2x Shadow Sneak down to 12/68 and Shadow Ball ended it while Kartana Protected. Won with two player faints, a third member on 27 and a fourth on 12."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Choice Scarf Moxie Heracross gets its turn",
+      "result": "PASS",
+      "evidence": "At L24 it moved first and selected ROCK_SLIDE, the only move on its sheet not resisted by two Fairy/Flying leads, hit both of my battlers for 2x and flinched Enamorus out of its Moonblast. Its extra level did not let it survive the 4x Air Slash, but the Scarf turn was used correctly and cost me the first half of my turn-1 damage. Moxie never started, which is the crack line working as authored."
+    },
+    {
+      "check": "Wonder Guard Shedinja is a genuine wall the player must answer",
+      "result": "PASS - emphatically",
+      "evidence": "Shedinja survived to the last turn of the battle, Protected away a lethal Air Slash at 1 HP with no Sash, was pivoted out of danger by its trainer, and its priority Shadow Sneak KO'd a full-health 94 HP Hoopa at 4x. By the end only one of my six Pokemon could legally damage it at all. This is the single most effective opposing Pokemon in my entire block."
+    },
+    {
+      "check": "Umbreon's Wish/Snarl support does real work",
+      "result": "PARTIAL",
+      "evidence": "Snarl was excellent: one spread use dropped both of my special attackers, contributing to Magearna reaching -3 SpA and being withdrawn. Wish was a wasted turn (R6-D3). Foul Play was correctly weak against an all-special party and it only reached for it once."
+    },
+    {
+      "check": "Gastly is the cleanup ace",
+      "result": "PASS",
+      "evidence": "Entered on the pivot, and its spread Sludge Wave was the right read of the board: 0x into the Steel Kartana, 2x into Togekiss, and it took Togekiss out before the Air Slash aimed at Gastly could resolve. It died at 21/61 having traded for a player Pokemon."
+    },
+    {
+      "check": "The authored pivot/redirection play executes",
+      "result": "PASS",
+      "evidence": "Turn 4: Greta withdrew a 1 HP Shedinja and sent Gastly into the Air Slash that was aimed at Shedinja. That single switch preserved the Pokemon that later took Hoopa. The AI is reading the board, not just its own sheet."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "battler": "SHEDINJA",
+      "payoff": "REAL and maximal - blocked an Air Slash from Togekiss on a 1 HP Wonder Guard body whose Focus Sash was already gone. Air Slash is one of only two super-effective moves my whole party had against it, so the guard denied a certain knockout and kept Shedinja alive for four more turns, in which it took Hoopa."
+    },
+    {
+      "turn": 4,
+      "battler": "UMBREON",
+      "payoff": "EMPTY - nothing was aimed at Umbreon that turn. Togekiss attacked the other slot and I switched Magearna out for Kartana, so the guard denied zero damage. Mitigating: Umbreon was at 26/98 with two attackers on the field and had just taken a 2x Fleur Cannon, so a shield is a defensible expected-value call even though it happened to blank; it also banked a Leftovers tick it would have got anyway."
+    }
+  ],
+  "protect_ledger_note": "Two opponent guards: one perfect, one empty-but-defensible. No repetitive or harmful guarding, and no consecutive-Protect risk taken. On balance this is good guard pricing - the empty one was made from 26 percent HP under two attackers, which is exactly the board where a mixed forecast should sometimes favour the shield.",
+  "ai_defects": [
+    {
+      "id": "R6-D3",
+      "turn": 1,
+      "trainer": "TRAINER_GRETA_SLATEPORT",
+      "battler": "UMBREON (98/98, full health, Leftovers)",
+      "board": "Turn 1. Heracross 80/80 and Umbreon 98/98 versus Togekiss 97/97 and Enamorus 77/77, both undamaged, both special attackers. Nothing on either side had taken damage.",
+      "chosen": "MOVE_WISH",
+      "problem": "Wish was used at full health on turn 1 and resolved on turn 2 with Umbreon still at 98/98 - the log reads 'The opposing Umbreon's HP is full!' It healed nothing. Greta did not switch, so there was no Wish pass either. It is a completely blank turn from the team's only support body, on the one turn when the board was at its most even, and it is the same category of failure as an empty Protect: a support move scored without a payoff to score against.",
+      "better_action": "MOVE_SNARL. Both player battlers were special attackers, Snarl is a spread special-attack drop, and when Umbreon did eventually use it on turn 3 it was the single most useful thing the team's support did all battle. Foul Play would also have been better than nothing.",
+      "scope_note": "For the AI owner: this is Wish (and by extension delayed-heal/self-support moves) being scored without a target-state check - 'will there be damage to heal when this resolves'. It is the same shape as empty-Protect pricing, which the guard work already addresses; the delayed-heal path appears not to be covered. Affected-team index candidates: every authored team carrying Wish, Life Dew, Roost, Morning Sun or Pollen Puff healing on a full-health body - Audino on E0054 and Swablu on E0069 are the nearest in my block. Not fixing AI C code from this session."
+    }
+  ],
+  "ai_notes": [
+    "Turn 4's Shedinja -> Gastly pivot is excellent play and should be preserved: it saved a 1 HP Wonder Guard body from a super-effective attack by putting a healthy body in the way, and the Pokemon it saved went on to take a player Pokemon two turns later.",
+    "Gastly's spread Sludge Wave on turn 5 was chosen on a board where it was 0x into one of my battlers and 2x into the other. That is correct spread-vs-single discrimination, and the same discrimination the rerun-1 museum-grunt pass praised in Wailmer.",
+    "Heracross picking Rock Slide off a Choice Scarf into two Fairy/Flying leads is the right move twice running. No Choice-lock mistakes were made anywhere in this battle.",
+    "Umbreon's Foul Play (turn 2) into an all-special party was low value but is not a defect on one use: Foul Play uses the target's Attack, and with Snarl already on the sheet the AI reached for Snarl the very next turn.",
+    "AI decision timing peaked at 61 frames (1.021 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "level_changes_not_made": [
+    {
+      "member": "HERACROSS",
+      "reason": "+1 in pass 1 and it converted: it got its Scarf turn, picked the right move, hit both of my battlers for 2x and flinched one out of its attack. Two player faints in the battle means the calibration rule says keep."
+    },
+    {
+      "member": "UMBREON",
+      "reason": "+1 in pass 1. Its Snarl turn was worth a level on its own; its Wish turn was an AI defect (R6-D3), not a level problem, and the brief says defects are fixed before levels compensate."
+    },
+    {
+      "member": "SHEDINJA",
+      "reason": "The best-performing opposing Pokemon in my block at its current level. Nothing to add."
+    },
+    {
+      "member": "GASTLY",
+      "reason": "The ace at offset 5 / L27. Rule 5 says never the ace first, and it traded itself for Togekiss anyway."
+    }
+  ],
+  "calibration": "KEEP - no level change. Won on the first attempt but in seven turns with TWO player faints (Togekiss to Gastly's spread Sludge Wave, Hoopa to a 1 HP Shedinja's 4x priority Shadow Sneak), a third member withdrawn on 27/77 and a fourth finishing on 12/68. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' This is the correctly calibrated fight of my block and the pass-1 levels are the reason: Heracross now gets a Scarf turn that costs me real damage, and Umbreon now survives long enough to land the Snarl that crippled my special attackers.",
+  "could_this_be_cooler": "No change wanted - this team is the one in my block I would hold up as the model. The concept (a Wonder Guard body that most legal cap-24 parties simply cannot damage, behind a Scarf Moxie opener and a Wish/Snarl wall, with a Life Orb Gastly as cleanup) produced a fight where I had to work out mid-battle that exactly one of my six Pokemon could legally touch the last opponent, and then get that Pokemon in alive. That is a puzzle, not a stat check, and it is exactly what the brief's 'find a test suite for each AI team so its specific strategy actually works' is asking for. The one honest suggestion is not a species change: Umbreon's Wish is the weakest slot on the sheet in practice (it has now produced one blank turn and no pass), and if the AI's delayed-heal scoring is not going to be fixed, that move slot would do more work as Yawn or Taunt. I am NOT proposing that change in this pass, per the brief - recording it as the answer to the question.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. No teams-file change for this battle. Synthetic headless benchmark, not earned campaign play."
+}
