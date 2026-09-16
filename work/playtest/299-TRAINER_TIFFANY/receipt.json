@@ -1,0 +1,33 @@
+{
+  "play_order": 299, "e_group": "E0465", "trainer": "TRAINER_TIFFANY", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/299-TRAINER_TIFFANY/party_tidepool_84.json",
+  "availability_note": "Same Sootopolis party (Rillaboom 36, Kartana 20, Raging Bolt 60, Flutter Mane 68, Zapdos 30 reachable legend, Incineroar 36); Sootopolis after the cavern and Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League. Only the two Grass leads were used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/299-TRAINER_TIFFANY/a1", "seed": 1, "outcome": "won", "turns": 4, "decisions": 5, "player_faints": 0, "opponent_faints": 6, "note": "T1 both leads Protected (blocked 4x Wood Hammer and 2x Leaf Blade). T2 Vaporeon switched to Mantine, which died to a crit Leaf Blade; Wood Hammer (4x) took Seismitoad after its Hydro Pump (94, resisted). T3 Vaporeon Protect again; Leaf Blade (4x) took Whiscash. T4 Barbaracle switched to Feraligatr, which died to a +2 Leaf Blade; Wood Hammer took Vaporeon after its Ice Beam (108). T5 Grassy Glide (4x) took Barbaracle."}
+  ],
+  "strategy_checks": [
+    {"check": "Vaporeon Surfs beside a Water Absorb partner (free heal)", "result": "FAIL (never selected)", "evidence": "With Seismitoad beside it on T1 Vaporeon chose Protect; on T4 with Feraligatr beside it (correctly not a Surf turn) it chose Ice Beam. Surf into two Grass foes is the worst click, so the engine skipping was defensible - but the engine never showed."},
+    {"check": "Wish only with a live recipient", "result": "PASS (never used)", "evidence": "Wish was never selected."},
+    {"check": "Seismitoad / Mantine attack in the other slot", "result": "PASS (Seismitoad) / NOT REACHED (Mantine)", "evidence": "T2 Seismitoad Hydro Pump 94 on Rillaboom (resisted) then died to Wood Hammer; Mantine was switched in as a receiver and died to a crit Leaf Blade without moving."},
+    {"check": "AI switches lanes for Barbaracle's White Herb Shell Smash rather than Surfing beside it", "result": "NOT REACHED", "evidence": "Barbaracle entered T3 and was withdrawn for Feraligatr on T4 (into a +2 Leaf Blade); it never got a Smash turn."},
+    {"check": "Whiscash / Feraligatr non-absorbing finishers", "result": "NOT REACHED", "evidence": "Whiscash used Liquidation into Rillaboom (resisted) and died to a 4x Leaf Blade; Feraligatr was OHKOed on the switch-in."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Vaporeon", "payoff": "REAL - blocked a 2x Leaf Blade."},
+    {"turn": 1, "user": "Seismitoad", "payoff": "REAL - blocked a lethal 4x Wood Hammer. A double Protect on turn 1 was the correct read against two Grass attackers, but it spent the only turn the two Water Absorb bodies were together."},
+    {"turn": 3, "user": "Vaporeon", "payoff": "REAL - blocked a lethal 2x Wood Hammer; Whiscash died beside it."}
+  ],
+  "ai_defects": [
+    {"turn": "T2 and T4", "battler": "Mantine, then Feraligatr (AI switch receivers)", "board": "vs Rillaboom + Kartana (+1/+2)", "chosen": "switch a Water body into a Grass attacker's slot", "better": "Both receivers took a super-effective or crit Leaf Blade on entry and never moved; keeping the Protect user in and attacking was better. Same receiver-choice pattern as Olivia (298). Low-medium severity."}
+  ],
+  "authored_set_legality": "No problem found. Levels L84 x5, Feraligatr L85.",
+  "theme_note": "No. The Water Absorb Surf engine never fired because a Grass lead makes Surf the wrong click, and four of six were OHKOed by 4x Grass. Against the crack line the tide pool is six bodies that fold in four turns.",
+  "level_changes": [
+    {"member": "MANTINE", "before": 2, "after": 3, "reason": "first-try 6-0 with no faints; died on the switch-in without acting (a crit, but 4 Def EVs)."},
+    {"member": "WHISCASH", "before": 2, "after": 3, "reason": "OHKOed by 4x Leaf Blade after one resisted Liquidation; Vaporeon/Seismitoad are the engine and Feraligatr the ace."}
+  ],
+  "level_changes_unverified": "Not re-run: build-8 ROM predates these offsets; rerun after the main agent rebuilds.",
+  "cooler": "The engine needs a reason to exist against Grass: a Water Absorb body that resists Grass (Mantine does, but it died on entry) or Mantine leading beside Vaporeon so Surf + Air Slash is a real opener. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun with a non-Grass lead to see whether Vaporeon ever Surfs into its own absorber."
+}
