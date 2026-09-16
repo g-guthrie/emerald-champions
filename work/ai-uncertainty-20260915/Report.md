@@ -1853,3 +1853,57 @@ AI's own expected incoming damage on the guard holder at decision time, an
 empty guard becomes falsifiable. Without it, every one of these boards reads as
 "it guarded against a threat that did not come", which is a different claim
 from "it guarded against nothing".
+
+# Post-merge verification, R(1) fixed, and the side-guard term checked
+
+Commit `cef54e57f9`. Merged tree (`9f40818d33`) verified first: **195 passed,
+0 failed** on my allowlist, failures only in the ten known `ai_doubles.c` reds.
+Frames on the merged tree: Dancer 60, Laura 61, Brawly 60, Ned 59/50,
+Cristian 47/56, Jocelyn 47/25, Darius 25, Nate 14 — all inside 72. The depth
+fix, the Taunt rule, the absorber veto and the Prankster-Encore veto all
+survived the resolution.
+
+## R(1): fixed, and my earlier "not an AI defect" was wrong
+
+My first fixture healed the partner, so I reported the receipt writer. The
+driver's re-verification was right and my board was too kind: the live board
+has a **foe missing far more HP than the partner is**, and by missing HP the
+best recipient was on the other side. The engine permits Heal Pulse on a foe,
+so nothing stopped it.
+
+A move whose whole effect is to help whoever it lands on is now refused
+outright when the chosen target is not an ally: Heal Pulse, Helping Hand,
+After You, Instruct, Coaching, Decorate, Aromatic Mist, Floral Healing. Pollen
+Puff is deliberately excluded — it damages a foe and only heals an ally, so
+aiming it across is an attack, not a gift.
+
+The fixture is the reported shape (foe at 80 of 400, partner at 360 of 400) and
+asserts the player's body is not put back up.
+
+**The lesson I am taking from this one.** A fixture that passes only proves the
+behaviour on the board I built. When a receipt and my fixture disagree, the
+board is the thing to interrogate, not the receipt — I should have asked what
+made the foe attractive before concluding the record was wrong.
+
+## R(3)/L(3)/O(5)/Q(5): the side-guard term works
+
+Wide Guard is taken for a partner that dies without it, once the spread move
+has been seen. Two confounds cost me a build each before that was visible: a
+Water Absorb partner that the guard user could heal with its own Surf (the AI
+was making a better play than the one I was testing for), and a partner that
+died on the setup turn.
+
+Reverted along the way: banking a lethal denial in full rather than clawing
+back the un-banked share. It moved four of my own fixtures and did not fix the
+board, so the claw-back stands as it was.
+
+With a healthy partner the AI guards as well, which is defensible against a
+spread move it has already been shown, so that arm is not in the fixture.
+
+## Standing caveat on receipts
+
+Noted and now applied: a `chosen` entry with `source: native` may name the
+wrong target or move until the driver fix lands. Everything I have pinned was
+reproduced natively on a board I built, not read from a record — including the
+Prankster-Encore and absorber vetoes, which were both observed directly in the
+harness before being fixed.
