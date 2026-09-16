@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "play_order": 10,
+  "e_group": "E0010",
+  "trainer": "TRAINER_GRUNT_PETALBURG_WOODS",
+  "class": "grunt",
+  "location": "PetalburgWoods",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "CARVANHA L13 @FOCUS_SASH SPEED_BOOST ADAMANT (Crunch/Aqua Jet/Waterfall/Protect)",
+    "WAILMER L15 @SITRUS_BERRY OBLIVIOUS MODEST (Water Spout/Scald/Icy Wind/Protect)",
+    "GRIMER L15 @EVIOLITE POISON_TOUCH ADAMANT (Poison Jab/Drain Punch/Shadow Sneak/Protect)",
+    "POOCHYENA L16 @EVIOLITE RATTLED CALM (Foul Play/Helping Hand/Snarl/Protect)"
+  ],
+  "authored_strategy_flags": "PRESSURE",
+  "party_manifest": "work/playtest/10-GRUNT_PETALBURG_WOODS/party-a1.json",
+  "party_summary": "Magearna* + Iron Leaves* leading; Arcanine / Snorlax / Weavile / Whimsicott reserve. Snorlax, Arcanine and Whimsicott all entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 10001, "outcome": "won", "turns": 8, "decisions": 10,
+      "player_faints": 2, "opponent_faints": 4, "ai_decision_seconds_max": 0.184,
+      "events": "work/playtest/10-GRUNT_PETALBURG_WOODS/attempt-1-events.jsonl",
+      "narrative": "T1 I aimed a Leaf Blade at Wailmer to remove Water Spout before it fired; the grunt pivoted Wailmer out to Grimer, which resists Grass, and Carvanha's Crunch took Iron Leaves to 6. T2 Grimer's priority Shadow Sneak killed Iron Leaves before its Psyblade, and Carvanha at 1 HP Protected away a lethal Flash Cannon. T3 Snorlax replaced it and Body Slam removed Carvanha; Wailmer returned at full HP. T4 Water Spout took 70 off Snorlax at full power while Thunderbolt removed Wailmer and Grimer's Drain Punch (2x on Steel) started eating Magearna. T5 Poochyena Protected away a lethal Fleur Cannon and Drain Punch took Magearna to 10. T6 Foul Play finished Magearna. T7-T8 Whimsicott and Arcanine cleaned up Poochyena and Grimer."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Wailmer selects Water Spout using its HP at execution",
+     "result": "PASS, and better than the text asks",
+     "evidence": "T1 the grunt withdrew a full-HP Wailmer rather than spend the turn, which preserved the full-HP Water Spout. It returned on T3 at 74/74 and on T4 its Water Spout hit for 70 at maximum power. Preserving the HP that scales the move, and then spending it on the turn it was worth most, is the whole intent of the set."},
+    {"check": "Do not sacrifice Wailmer merely to preserve Carvanha at full HP",
+     "result": "PASS", "evidence": "The T1 pivot went the other way: Wailmer was preserved and Carvanha stayed in to take the damage. The explicit failure mode named in the plan did not occur."},
+    {"check": "Carvanha attacks or protects only when the earned Speed Boost changes a relevant matchup",
+     "result": "PASS", "evidence": "T1 Crunch correctly targeted Iron Leaves (Dark is 2x on Psychic) rather than the Steel/Fairy Magearna that resists it; T2 it Protected at 1 HP to block a lethal Flash Cannon; T3 it attacked. No wasted guard turn at full HP."},
+    {"check": "Grimer and the support reserve provide a useful line when Water pressure is resisted",
+     "result": "PASS, and it was the fight's turning point",
+     "evidence": "Grimer entered specifically into the Grass attacker, resisted the Leaf Blade aimed at Wailmer, then used priority Shadow Sneak (Ghost, 2x on Psychic) to kill a 6 HP Iron Leaves that would otherwise have OHKOd it with Psyblade. It then used Drain Punch, 2x on Steel, to remove Magearna over two turns while healing. Both of its non-Poison moves were chosen because the team's Water lane was walled - exactly what the plan asks the reserve to do."},
+    {"check": "Rattled raises Speed on an eligible trigger",
+     "result": "PASS", "evidence": "Poochyena gained Speed +1 on Arcanine's Intimidate entry."},
+    {"check": "Poison Touch inflicts poison on contact",
+     "result": "NOT OBSERVED", "evidence": "Grimer's contact moves (Drain Punch, Poison Jab was never used) did not produce a poison message in this run. Steel-type Magearna is immune to poison, which accounts for the Drain Punch cases; Snorlax took one Drain Punch and was not poisoned, which is an ordinary 30% roll failing rather than evidence of a defect."},
+    {"check": "Poochyena's Snarl/Helping Hand supports Grimer's physical pressure",
+     "result": "NOT USED", "evidence": "Poochyena used Protect and Foul Play twice. Not scored as a defect: the Foul Play that killed Magearna was the correct action on that turn, and Grimer was already at 1 HP by the time Poochyena had a free turn."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.184 s maximum across ten decision points."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "CARVANHA", "payoff": "EXCELLENT - at 1 HP behind a spent Focus Sash it blocked a Flash Cannon that was lethal by definition, and bought the turn in which its partner killed Iron Leaves."},
+    {"turn": 3, "user": "GRIMER", "payoff": "GOOD - blocked a Sp.Atk +1 Flash Cannon while at 47/63, and the turn was not wasted for the team because its partner's action still resolved."},
+    {"turn": 5, "user": "POOCHYENA", "payoff": "EXCELLENT - blocked a Sp.Atk +3 Fleur Cannon that is 2x on Dark, a guaranteed OHKO on its 52 HP."},
+    {"turn": 7, "user": "GRIMER", "payoff": "EXCELLENT - at 1 HP it blocked a Moonblast and survived one more turn."}
+  ],
+  "empty_protects": 0,
+  "protect_note": "Four Protects across four different turns from three different members, every one of them blocking a hit that was lethal or near-lethal, and no member guarded on consecutive turns. This and E0009 are the two best Protect records in the block.",
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "The T1 double play - pivot the full-HP Water Spout user out, and bring in the member that resists the attack aimed at it - is the strongest single decision recorded in this block. It preserved the team's biggest damage move AND put a Grass-resistant body in front of the Grass attacker.",
+    "Priority selection was consistently correct: Shadow Sneak into a 6 HP target that outspeeds Grimer, Aqua Jet held back, Foul Play used on the turn it finished a 10 HP Magearna.",
+    "Type targeting was correct on every single attack in the fight - Crunch into the Psychic, Drain Punch into the Steel, Shadow Sneak into the Psychic, Foul Play into the Fairy it could still finish."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "KEEP. Won with 2 player faints after a real fight, which is the brief's explicit keep case.",
+    "changes": [],
+    "reasoning": "This is the hardest fight in the block and the best-played opponent in it. It removed two party members including a 600 BST legend, forced three separate switches, and landed a full-power Water Spout for 70. Every member contributed and there were no empty turns. Nothing here needs a level in either direction.",
+    "rerun": "Not applicable; no change made."
+  },
+  "could_this_be_cooler": {
+    "answer": "No change recommended. This is the team the rest of the block should be measured against.",
+    "keep": "Water Spout on a preserved full-HP body, a Focus Sash Speed Boost opener, a Poison bruiser whose job is explicitly to cover the turns when Water is resisted, and a Foul Play support that punishes physical attackers - four distinct roles, no duplicated moves beyond Protect, and a real answer to the obvious Grass/Electric counterplay. It is also the only team in the block whose reserve exists to fix a specific matchup rather than to be a fourth attacker.",
+    "suggestion": "If anything is added later, give Poochyena a reason to use Snarl - the only move on the team that went unused across a full eight-turn fight - by pairing it with a second special attacker so the Sp.Atk drop compounds. That is a refinement, not a fix.",
+    "second_thought": "Worth noting for the design side that this is a grunt fight, and it is harder and more coherent than several of the 'regular' trainers around it. That is probably correct for a villain encounter, but the route trainers on either side of it now look soft by comparison.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": ["Pool chronology caveat carried from play_order 1."]
+}
