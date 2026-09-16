@@ -1,0 +1,124 @@
+{
+  "play_order": 173,
+  "e_group": "E0246",
+  "trainer": "TRAINER_GRUNT_WEATHER_INST_2",
+  "class": "grunt",
+  "location": "Route119_WeatherInstitute_2F",
+  "raid_stage": "4 of 6 - the machine room, the first grunt who turns something on",
+  "cap": 48,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/173-TRAINER_GRUNT_WEATHER_INST_2/party.json",
+  "level_verification": "cap 48: Pelipper, Ferrothorn, Inteleon and Ludicolo all authored +2 and all resolved to L48 = 48 + 2 - 2. --cap 48 correct.",
+  "attempts": [
+    {
+      "seed": 41,
+      "run_dir": "work/playtest/173-TRAINER_GRUNT_WEATHER_INST_2/run-s1",
+      "outcome": "won",
+      "turns_reported": 5,
+      "turns_played": 7,
+      "decisions": 6,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.021
+    }
+  ],
+  "showcase_escalation_check": {
+    "declared_before_play": "Raid stage 4 is the stolen rain switch. Rain must be present and it must come from Pelipper's Drizzle, not from the room - i.e. field_source.weather_at_turn_0 must be 'none' while the live weather at turn 0 is rain.",
+    "result": "PASS",
+    "evidence": "start state: weather = ['B_WEATHER_RAIN_NORMAL'], while field_source = {\"authored_by_trainer_a\": [], \"weather_at_turn_0\": [\"none\"], \"terrain_is_permanent\": false, \"from_map\": false}. The rain is Pelipper's ability firing on entry, not a room effect. Aqua has turned the machine on. Stage 1 (none) -> stage 4 (rain) escalation is mechanically real, not cosmetic.",
+    "counter_evidence_for_the_crack_line": "The dossier's crack line - 'Take the weather back, one Drought or Sand Stream turn undoes the room's whole reason for existing' - is exactly true. My Mega Charizard Y's Drought overwrote the rain on turn 1 before any Aqua Pokemon acted, and the room never got it back: Pelipper was the only weather source and it died on turn 2. Swift Swim Ludicolo spent the entire fight at normal speed."
+  },
+  "strategy_checks": [
+    {
+      "check": "RAIN flag is backed by an automatic setter",
+      "result": "PASS",
+      "evidence": "Pelipper's Drizzle set rain at battle start. See showcase check."
+    },
+    {
+      "check": "TAILWIND flag is backed by a real user",
+      "result": "PASS_CHOSEN_NOT_RESOLVED",
+      "evidence": "Turn 2 previous-turn latch: Pelipper's choice was MOVE_TAILWIND. It was KOed by Solar Beam plus Air Slash before the move resolved. The AI did reach for the authored support move on the correct turn."
+    },
+    {
+      "check": "SETUP flag is backed by a real Iron Defense",
+      "result": "PASS_CHOSEN_NOT_RESOLVED",
+      "evidence": "Turn 1 previous-turn latch: Ferrothorn's choice was MOVE_IRON_DEFENSE. It was KOed by the sun-boosted 4x Heat Wave first. The 'takes a survivable Iron Defense behind Iron Barbs' line was selected on the correct turn but Ferrothorn at L48 does not survive a Mega Charizard Y Heat Wave, so it was never survivable."
+    },
+    {
+      "check": "Pelipper uses Wide Guard when that is what protects Ferrothorn's turn",
+      "result": "FAIL",
+      "evidence": "Turn 1 was the textbook Wide Guard turn: a Mega Charizard Y with a revealed spread Fire move was on the field beside a 4x-weak Ferrothorn that had committed to a setup move. Pelipper chose Weather Ball instead and Ferrothorn died. Wide Guard would have blocked Heat Wave outright and bought exactly the Iron Defense turn the dossier describes. See ai_defects."
+    },
+    {
+      "check": "Inteleon's Snipe Shot ignores redirection - the answer to a Follow Me player",
+      "result": "FAIL",
+      "evidence": "I set up the test deliberately: Togekiss used Follow Me on turns 3 and 4 with Inteleon on the field. Inteleon's turn-3 action was Protect and its turn-4 latched choice was Ice Beam aimed at Charizard - which Follow Me would have redirected to Togekiss anyway. Snipe Shot was never used, against an active Follow Me, which is the single situation the move exists for. See ai_defects."
+    },
+    {
+      "check": "Ludicolo's Swift Swim is the fast-rain pressure mode",
+      "result": "FAIL_BY_COUNTERPLAY",
+      "evidence": "Not an AI fault: I removed the rain on turn 1, so Swift Swim never activated. Ludicolo still played well at normal speed and took my Mega with it."
+    },
+    {
+      "check": "Iron Barbs taxes contact moves",
+      "result": "NOT_EXERCISED",
+      "evidence": "I used no contact moves into Ferrothorn."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "battler": "Inteleon",
+      "call": "Protect",
+      "payoff": "REAL - entry turn; blocked Mega Charizard Y's one-turn Solar Beam (2x into Water, roughly a clean KO on a 140 HP frame). High value."
+    },
+    {
+      "turn": 5,
+      "battler": "Ludicolo",
+      "call": "Protect",
+      "payoff": "EXCELLENT AND SUBTLE - blocked both Heat Wave and a 2x Air Slash while Ludicolo was the last Pokemon alive, and in doing so let my Drought expire ('The sunlight faded' that same turn). On the next turn, with the sun gone, Ludicolo's Hydro Pump was no longer halved and it KOed Mega Charizard Y. The guard was not stalling - it was waiting out the player's weather, and it directly converted into a kill. This is the best-reasoned opposing Protect I saw in the whole block."
+    }
+  ],
+  "consecutive_protect_risk": "none.",
+  "ai_defects": [
+    {
+      "turn": 1,
+      "board": "Pelipper 160/160 (Wide Guard on its set) and Ferrothorn 174/174 (Steel/Grass, 4x Fire, committed to Iron Defense) vs a just-Mega-Evolved Charizard Y that had already set sun, plus Togekiss. Heat Wave is a spread move.",
+      "chosen": "Pelipper used Weather Ball, aimed at Charizard.",
+      "why_wrong": "Two separate errors in one action. (a) Wide Guard was the correct move and was on Pelipper's set: it blocks Heat Wave, saves a 4x-weak partner that had committed to a defensive setup move, and is the exact case the dossier names ('Wide Guard when that is what protects Ferrothorn's turn'). (b) Worse, Weather Ball's type follows the CURRENT weather, and the current weather at that moment was my sun, so Weather Ball was a FIRE move - aimed at a Fire/Flying target that resists it (0.5x, 24 damage). Even keeping the move, Togekiss would have taken full damage. The AI appears to score Weather Ball's target without re-resolving the move's type under the live weather.",
+      "better_action": "Wide Guard. Failing that, Weather Ball at Togekiss, or Hurricane.",
+      "severity": "major - it is both a missed authored tactic and an apparent type-resolution bug in the scoring of a weather-dependent move. The second half is worth checking against every other Weather Ball user in the campaign, because any AI that can have its own weather overwritten will hit this."
+    },
+    {
+      "turn": 4,
+      "board": "Togekiss had Follow Me active (used on turn 3 and again on turn 4). Inteleon 140/140 with Snipe Shot on its set, facing Mega Charizard Y (2x to Water) and Togekiss.",
+      "chosen": "Inteleon's latched choice was Ice Beam aimed at Charizard.",
+      "why_wrong": "Snipe Shot is the one move in this trainer's entire roster that ignores redirection, and the dossier calls it out as 'the answer to a Follow Me or Rage Powder player'. Follow Me was active and visible. Snipe Shot into Charizard would have been 2x (Water on Fire/Flying) AND would have gone through the redirection. Ice Beam into Charizard is 1x and would have been redirected onto Togekiss instead. The AI picked the strictly worse move for the strictly worse reason.",
+      "better_action": "Snipe Shot at Charizard.",
+      "severity": "major - the authored anti-redirection tool is not wired to the presence of redirection. Worth an index sweep: any other Snipe Shot, Sky Drop or ability-based redirection-ignoring move in the campaign is likely to have the same blind spot."
+    }
+  ],
+  "ai_notes": [
+    "The turn-2 double switch (Ludicolo out for Inteleon, then Ludicolo straight back in when Pelipper died) shows the AI does use its alternate-deployment modes. Good.",
+    "Ludicolo's endgame was genuinely well played - Protect to outlast the sun, then Hydro Pump for the kill.",
+    "Decision time peaked at 1.021 s against the 1.2 s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "PELIPPER",
+      "before": 2,
+      "after": 3,
+      "reason": "First-attempt win with a single player faint. Pelipper is the room's entire reason for existing - it is the only weather source in the trainer, and once it dies the rain never comes back and Swift Swim Ludicolo is a normal-speed Pokemon for the rest of the fight. At L48 it died on turn 2 to one Solar Beam plus one Air Slash. +1 so that taking the weather back costs the player more than two attacks."
+    },
+    {
+      "member": "FERROTHORN",
+      "before": 2,
+      "after": 3,
+      "reason": "Same trigger. Ferrothorn is the authored defensive half of the room and it died on turn 1 without acting, which made its Iron Defense / Body Press plan unobservable. +1 will not fix a 4x Fire weakness and I am not pretending it will, but it is the correct small individual step under the rules; the structural point is in the cooler note."
+    }
+  ],
+  "rerun": "NOT POSSIBLE IN THIS SESSION - opponent levels come from the compiled headless ROM and this agent must not run make. Deferred to the main agent's rebuild.",
+  "could_this_be_cooler": "Keep the composition - the defensive-Steel-mode versus fast-Water-mode contrast is genuinely more interesting than a fourth rain sweeper, and the dossier is right that raid position, not species, was the problem. But playing it surfaces a concrete structural issue the dossier misses: the room's whole identity is rain, and its rain has exactly one source with no backup. A single Drought or Sand Stream turn from the player deletes the room's theme permanently on turn one, and then three of the four members are just Water types at normal speed. The cheapest fix that changes nothing about species or strategy is to give Pelipper Rain Dance in the Weather Ball slot, so the room can take its own weather back once - which would also turn the player's weather swap into a two-turn argument instead of a one-turn win, and would make the Damp Rock actually matter. Flagged, not changed.",
+  "authored_set_legality": "No legality problem. Drizzle, Damp Rock, Iron Barbs, Sniper, Scope Lens and Swift Swim all resolved as authored.",
+  "notes": "Player party unchanged. Mega Charizard Y is close to a hard counter for this specific room and a player without a weather ability will find it materially harder."
+}
