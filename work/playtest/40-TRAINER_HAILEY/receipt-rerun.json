@@ -1,0 +1,90 @@
+{
+  "play_order": 40,
+  "e_group": "E0042",
+  "trainer": "TRAINER_HAILEY",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Pass 1 raised Wartortle 1->2 and Palpitoad 2->3 off a zero-faint clear. This rerun plays the same board on the headless ROM that carries both the level changes and the setup/switch-pricing AI fixes.",
+  "build": "work/agent-battle-build (headless ROM with the pass-1 level changes and the AI fixes)",
+  "level_change_verification": "Confirmed live: Wartortle resolved at L24 (was L23 in pass 1) and Palpitoad at L25 (was L24). Flaaffy L24 and Marill L27 unchanged.",
+  "resolved_opponent_levels": {"FLAAFFY": 24, "WARTORTLE": 24, "MARILL": 27, "PALPITOAD": 25},
+  "party_manifest": "work/playtest/40-TRAINER_HAILEY/party.json",
+  "party_chronology_note": "Unchanged cap-24 core: Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana, all gate <= 24 in work/reference-pools/pool-24.json. No Mega used; the Mega Ring is available from play_order 40 onward but no legal stone in this window improves the party.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/40-TRAINER_HAILEY/r1",
+      "seed": 46,
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "narrative": "T1 Follow Me absorbed the turn and a 2x Earth Power one-shot Flaaffy before it could act; Wartortle's Ice Beam took Togekiss to 65. T2 Moonblast KO'd the extra-level Wartortle in one hit before it ever used Shell Smash, and Air Slash flinched the incoming Palpitoad. T3 Marill used Aqua Jet on its own partner to trigger Palpitoad's Water Absorb and heal it, then Moonblast plus a second Air Slash flinch took Palpitoad from 96 to 2. T4 Moonblast KO'd Palpitoad and the redirected Air Slash took Marill to 57 and flinched it. T5 Moonblast KO'd Marill. Togekiss finished at 65/97 and Enamorus at 17/77, all six of my Pokemon alive."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Wartortle converts Shell Smash now that it has the extra level",
+      "result": "FAIL",
+      "evidence": "Wartortle used Ice Beam on turns 1 and 2 and was KO'd by a single Moonblast on turn 2 at L24 without ever selecting Shell Smash. The setup-pricing fix did not make Shell Smash attractive here, which reads as correct: my board threatened a knockout both turns, so the smash would have been priced at zero. The team's authored centrepiece still has not fired in either pass."
+    },
+    {
+      "check": "Flaaffy sets screens or uses Electroweb",
+      "result": "FAIL - never acted",
+      "evidence": "Flaaffy selected MOVE_THUNDERBOLT on turn 1 but was KO'd by a 2x Earth Power before its action resolved, exactly as in pass 1. At L24 it still dies before it can move to a Ground attack from a Life Orb special attacker."
+    },
+    {
+      "check": "Water Absorb Palpitoad is used as more than an Electric immunity",
+      "result": "PASS - and better than authored",
+      "evidence": "Turn 3: 'The opposing Marill used Aqua~Jet!' targeting battler 1, its own partner, followed by 'The opposing Palpitoad had its HP restored.' The AI spent Marill's turn deliberately healing its ally through Water Absorb. This is an ally-targeting line the plan text does not even claim, and it forced me to spend two full turns removing Palpitoad."
+    },
+    {
+      "check": "Palpitoad applies real pressure at its new level",
+      "result": "PARTIAL",
+      "evidence": "It selected Sludge Bomb into Enamorus (2x) on turns 2, 3 and 4 and never landed one: Serene Grace Air Slash flinched it twice and Moonblast finished it the third time. The extra level bought it survivability (96 HP with Eviolite, plus the Water Absorb heal) but the flinch chain denied every payoff."
+    },
+    {
+      "check": "Marill as the Huge Power priority alternative",
+      "result": "PASS",
+      "evidence": "Aqua Jet on turns 3 and 5, Play Rough selected on turn 4. It was flinched out of the turn-4 Play Rough and KO'd on turn 5 before the final Aqua Jet mattered."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect this battle, on a team where all four members carry it. In pass 1 there were two empty Protects (Wartortle turn 1, Palpitoad turn 3); both are gone. Every member instead spent its turns attacking or, in Marill's case, healing its partner. This is a visible improvement from the guard-pricing fix: an empty shield now loses to the real action.",
+  "ai_defects": [],
+  "ai_notes": [
+    "The two empty Protects recorded in pass 1 did not recur. The guard-pricing change appears to be doing what it was meant to do on this board.",
+    "Marill's turn-3 partner-targeted Aqua Jet into Water Absorb is the best AI choice observed across this whole block. Worth keeping as a regression case."
+  ],
+  "tooling_notes": [
+    "Pre-existing repo bug, unrelated to this change: `python3 scripts/emerald_champions_teams.py --check` crashes with NameError: check_party_size_stamps. The function is defined at line 632, below the `if __name__ == \"__main__\": main()` block at line 628-629, so it is never in scope when main() calls it at line 612. Every gate that runs before it passes (trainer/variant count, abilities, Gym party size, move legality, strategy coherence); only the final party-size-stamp gate and the closing PASS line are unreachable. Present at HEAD before any edit in this session. Not fixed here: this rerun's edit scope is level offsets and receipts only."
+  ],
+  "level_changes": [
+    {
+      "member": "FLAAFFY",
+      "field": "level offset",
+      "before": 2,
+      "after": 3,
+      "pass_total": "+1",
+      "reason": "Second consecutive zero-faint clear. Flaaffy is now tied-lowest at L24 and it is the only member that has not taken a single action in either pass: it selected Thunderbolt both times and was KO'd by a 2x Earth Power before the action resolved. It was untouched in pass 1, so this is its first level and leaves it +1 of the allowed +2."
+    },
+    {
+      "member": "WARTORTLE",
+      "field": "level offset",
+      "before": 2,
+      "after": 3,
+      "pass_total": "+2 (1 -> 2 in pass 1, 2 -> 3 here)",
+      "reason": "The other tied-lowest member at L24, and the authored centrepiece: the whole team is built around White Herb Shell Smash and Wartortle has now died on turn 2 to a single unboosted Moonblast in both passes without ever smashing. This takes it to the +2 ceiling for this calibration; it cannot be raised again."
+    }
+  ],
+  "level_changes_not_made": [
+    {"member": "PALPITOAD", "reason": "Already +1 in pass 1 and it earned its keep this time: it survived from turn 1 to turn 4, absorbed a partner Aqua Jet heal and cost me two full turns of focused fire. Rule 5 says raise the weakest one or two, and it is no longer among them."},
+    {"member": "MARILL", "reason": "The ace at offset 5 / L27. Rule 5: never the ace first."}
+  ],
+  "calibration": "Won on the first attempt in five turns with zero player faints and no member of my party below 17 HP other than Enamorus, which only lost HP to its own Life Orb. Brief rule 5: 'Won first try with 0-1 player faints and no real threat -> +1 on the opponent's weakest one or two members.' Applied to Flaaffy and Wartortle, the two tied-lowest at L24. Wartortle is now at the +2 per-member ceiling across both passes.",
+  "could_this_be_cooler": "Yes, and this is the one place in the block where I would say the design has a real problem rather than a level problem. Wartortle's Shell Smash has now failed to fire in two passes and in the archived pre-revision audit quoted in the plan text, always for the same reason: a four-member team with no redirection and no speed control cannot buy a free turn, so the setup is always priced at zero and the AI correctly declines it. Two levels will not change that. The cheapest fix that keeps the shell-breaker identity would be giving one of the supporters a way to actually buy the smash turn - the team already has Flaaffy carrying two screens it never lives to set. No species/move/item change made in this pass, as instructed.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt, same party manifest as pass 1. Teams-file change is the two level offsets above; generated projections (src/data/trainers.party, src/data/emerald_champions_battle_plans.h, data/emerald_champions/emerald_champions_master_battle_design.txt) were regenerated to verify the offsets land and then reverted, not committed."
+}
