@@ -1,0 +1,61 @@
+{
+  "rerun_of": "work/playtest/32-TRAINER_ELLIOT_1/receipt.json",
+  "rerun_reason": "Confirming rerun for the first pass's unverified level changes (CLAUNCHER offset 2->3, CORPHISH 2->3) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
+  "play_order": 32,
+  "e_group": "E0034",
+  "trainer": "TRAINER_ELLIOT_1",
+  "class": "regular",
+  "location": "Route106",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/32-TRAINER_ELLIOT_1/party-rerun.json",
+  "party_changed_from_first_pass": {
+    "reason": "Chronology. ALAKAZAM was removed: Abra's only source is wild:GraniteCave_1F, and the player reaches Route 106 on the way TO Granite Cave, not after it. Celebi replaces it in the Psychic lane and is legal here - it is a static sign in Petalburg Woods 3, which needs Cut and so opens after Roxanne, well before this fight.",
+    "removed": ["SPECIES_ALAKAZAM"], "added": ["SPECIES_CELEBI"],
+    "kept": ["SPECIES_JOLTEON", "SPECIES_MAGEARNA", "SPECIES_KARTANA", "SPECIES_QUAGSIRE", "SPECIES_NIDOKING"]
+  },
+  "opponent_levels_before": {"CLAUNCHER": 20, "FRILLISH": 22, "SHELLDER": 22, "CORPHISH": 20},
+  "opponent_levels_this_run": {"CLAUNCHER": 21, "FRILLISH": 22, "SHELLDER": 22, "CORPHISH": 21},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/32-TRAINER_ELLIOT_1/r1", "seed": "0x8C21",
+      "outcome": "won", "turns": 3, "decisions": 5, "player_faints": 1, "opponent_faints": 4,
+      "ai_decision_frames_max": 61, "ai_decision_seconds_max": 1.021,
+      "narrative": "Three turns again, but Elliot landed more than Ned did. Jolteon removed Clauncher on turn 1 and Magearna's Thunderbolt took Frillish to 16 - and Cursed Body immediately disabled it, which is the authored mechanic firing on its first opportunity. Turn 2 Cursed Body fired a second time and disabled Jolteon's Thunderbolt too, and Shellder's five-hit Icicle Spear killed Jolteon outright rather than setting up behind its Focus Sash. Celebi came in, a spread Dazzling Gleam finished the 1 HP Shellder, and Magearna - at +3 Sp. Atk from three Soul-Heart triggers - Fleur Cannoned Corphish. Four to one."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Cursed Body replaces unexploited Water Absorb; a disable is a probabilistic native response, never an assumed outcome", "result": "PASS - fired twice, and it mattered", "evidence": "r1 turn 1: 'Magearna's Thunderbolt was disabled!' after Magearna's 2x hit. r1 turn 2: Jolteon's Thunderbolt was disabled on the hit that killed Frillish. Both disables landed on the move that was doing the damage, and Magearna's stayed disabled for the rest of the fight (state shows legal=false, MOVE_LIMITATION_DISABLED). The ability outlived its holder in effect. The first pass observed neither proc."},
+    {"check": "Frillish replaces unsupported Helping Hand with Will-O-Wisp; burn can weaken physical attackers before a later hit", "result": "PASS (correct negative branch)", "evidence": "Frillish never used Will-O-Wisp, and that is right: both of my leads were special attackers, so a burn would have weakened nothing. It chose Hex on turn 1 and Icy Wind on turn 2 instead. Hex at half power with no status on the target is the weaker-looking choice, but with no burn worth applying and Icy Wind's speed drop already spent, its Ghost STAB was the honest option."},
+    {"check": "Clauncher is the immediate pulse cannon; Mega Launcher is its normal ability, not Mega Evolution", "result": "PARTIAL", "evidence": "Clauncher chose Water Pulse (its Mega Launcher-boosted STAB) into Jolteon and died to a 2x Thunderbolt in the same turn. No Mega Evolution was attempted or claimed. The Choice Specs lock itself was not re-tested, as in the first pass, because it never took a second decision."},
+    {"check": "Frillish supports a safe Shellder Shell Smash or a direct attack", "result": "PASS - correct refusal to set up", "evidence": "Shellder entered on turn 1 behind a Focus Sash with Frillish still alive, which is the authored Shell Smash window. It chose Icicle Spear instead and knocked Jolteon out. Direct removal of a 130-base-Speed attacker beat a setup turn, and the AI priced it that way. This is the setup-pricing change behaving well - the plan line permits Shell Smash 'or a direct attack' and the direct attack was plainly better."},
+    {"check": "Corphish provides priority Aqua Jet and item removal if setup is denied; respects the Choice lock", "result": "PARTIAL", "evidence": "Corphish entered last and chose Aqua Jet into Celebi. Priority did let the slower Corphish (base 35 Speed) act before Celebi, which is the move's purpose, but it could not come close to a knockout at 0.5x into a Grass/Psychic body, and Choice Band Crabhammer at 100 BP would have done far more for the same effectiveness. A marginal choice rather than a wrong one - see AI observations. It died before the lock could be tested."},
+    {"check": "Skill Link Shellder multi-hits break Focus Sash and Sturdy", "result": "PASS", "evidence": "r1 turn 2: Icicle Spear 'The Pokemon was hit 5 times' and killed Jolteon through its remaining HP in one turn."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Elliot's side used Protect zero times, as in the first pass - correctly, since no member of this team carries it. There is no guarding to review on this trainer, empty or otherwise.",
+  "ai_defects": [],
+  "ai_observations": [
+    "No defects. The two best choices were Shellder declining Shell Smash to remove a fast threat outright, and Frillish declining Will-O-Wisp against two special attackers. Both are refusals to use a signature move when it would have been worse, which is exactly the judgement the setup pricing is meant to add.",
+    "One marginal choice, recorded for the AI owner rather than filed as a defect: Corphish's opening Aqua Jet into Celebi. Priority is genuinely valuable for a base-35 Speed body, but Aqua Jet at 40 BP and Crabhammer at 100 BP are the same 0.5x into a Grass/Psychic target, so the priority only pays if it secures a knockout, and it could not. The scorer appears to value moving first more than the damage difference when neither option kills.",
+    "ai_decision_frames_max 61 (1.021 s). The first pass did not record a frame count for this trainer, so there is no comparison here."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with one player faint. That is the brief's 0-1 faint band: +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "CLAUNCHER", "offset_before": 3, "offset_after": 4, "level_before": 21, "level_after": 22},
+      {"member": "CORPHISH", "offset_before": 3, "offset_after": 4, "level_before": 21, "level_after": 22}
+    ],
+    "reasoning": "Clauncher and Corphish are the two lowest-level members and each takes the second of its two permitted points, which brings the whole team level with Frillish and Shellder at 22 and exhausts both budgets for this pass. Clauncher in particular is described as the immediate pulse cannon and has now died before a second decision in both passes; a point is the only lever I have to give it one. I left Frillish and Shellder untouched deliberately - both earned their keep this run (two Cursed Body disables and a five-hit knockout) and neither is the weak link.",
+    "budget_after_this_pass": {"CLAUNCHER": "+2 of 2 used - exhausted", "FRILLISH": "0 of 2 used", "SHELLDER": "0 of 2 used", "CORPHISH": "+2 of 2 used - exhausted"},
+    "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. scripts/emerald_champions_teams.py --write was deliberately NOT run: a concurrent session has uncommitted edits to other trainers in the same authored file. My two lines were staged as an isolated hunk. The main agent materializes.",
+    "rerun_after_this_change": "NOT PERFORMED - needs a ROM rebuild only the main agent can do."
+  },
+  "cooler_note": "This team is in noticeably better shape than its Route 106 neighbour. Cursed Body is a real, felt mechanic - losing Thunderbolt on two separate attackers changed how I had to play the rest of the fight - and Shellder's Skill Link is a genuine threat rather than a threat on paper. It is still four Water bodies, so the same single-Electric-lead problem as Ned applies, but Frillish's Ghost half and Shellder's Ice half at least mean two different answers are needed. A concrete suggestion for a later pass, not applied here: Frillish is the member that makes this team interesting and it is deployed second, where it spends its turns attacking; pairing it with Shellder instead of Clauncher would let Will-O-Wisp and Icy Wind actually set up the Shell Smash the plan describes, and would give Hex the status it wants. Species-wise the four are well chosen and clearly distinct from Ned's.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
