@@ -1,0 +1,33 @@
+{
+ "play_order": 333, "e_group": "E0504", "trainer": "TRAINER_COLTON", "class": "ace", "location": "SSTidalRooms", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; offset-1 members L99, Floette offset 2 L100 = cap+offset-2 on Medium.",
+ "difficulty": "medium",
+ "party_manifests": ["work/playtest/333-TRAINER_COLTON/party_pg100_core.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open; no gate-100 species used. One reachable legend (Chi-Yu, AshenWoods sign gate 48). See the manifest availability audit.",
+ "pre_play_strategy_checks": ["Liepard Prankster control opens (Fake Out/Taunt/Encore) and decides the player's first turn", "Fezandipiti Tailwind or attack turn 1; Toxic Chain poison chance", "Mesprit Helping Hand / Thunder Wave supports Mega Floette", "Floette Mega Evolves and uses Calm Mind / Wish behind Protect", "Incineroar Intimidate pivot with Parting Shot", "Persian Fur Coat + Foul Play punish physical setup"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_pg100_core.json (Incineroar/Chi-Yu/Flutter Mane/Urshifu-Rapid/Rillaboom/Whimsicott)", "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 6,
+   "why": "Dark double lead (Incineroar + Chi-Yu) made Prankster Taunt/Encore useless; Liepard Fake Out flinched Chi-Yu t1 while Fezandipiti set Tailwind. AI withdrew Liepard for Incineroar t2 and Fezandipiti Protected the Heat Wave. t3 Overheat + Knock Off KO'd Fezandipiti (Moonblast left Chi-Yu at 19). t4 Chi-Yu out for Urshifu into Fake Out, Flare Blitz took Liepard to 73, Tailwind ended. t5 Surging Strikes OHKO'd Incineroar, Flare Blitz KO'd Liepard. t6 Close Combat OHKO'd Persian through Fur Coat, Mesprit Psychic KO'd Urshifu, crit Knock Off left Mesprit at 4. t7 Shadow Ball KO'd Mesprit; Mega Floette (Fairy Aura) + Helping Hand Moonblast OHKO'd Flutter Mane. t8 Floette Protected Fake Out + Flare Blitz; t9 Wood Hammer (neutral, terrain-boosted, 343) KO'd it. Faints: Urshifu, Flutter Mane."}
+ ],
+ "strategy_checks": [
+  {"check": "Liepard Prankster control turn 1", "result": "PASS", "evidence": "a1 t1 Fake Out flinched Chi-Yu; t5 Taunt on Urshifu (sensible, only Detect to lock). Status priority never attempted into the Dark leads - correct."},
+  {"check": "Fezandipiti Tailwind", "result": "PASS", "evidence": "a1 t1 Tailwind on the first action; Life Orb Moonblast 209 into Chi-Yu t3"},
+  {"check": "Toxic Chain poison", "result": "not observed", "evidence": "one hit (Moonblast t3), no poison proc"},
+  {"check": "Mesprit Helping Hand support for Floette", "result": "PASS", "evidence": "a1 t7 Helping Hand -> Mega Floette Moonblast OHKO'd Flutter Mane (252)"},
+  {"check": "Floette Mega + Calm Mind / Wish", "result": "PARTIAL", "evidence": "Mega Evolved t7 and Protected t8 (both attackers blocked); no Calm Mind or Wish window before it died t9"},
+  {"check": "Incineroar Intimidate pivot / Parting Shot", "result": "PASS (Intimidate)", "evidence": "t2 entry dropped both player attackers; Flare Blitz chosen t3/t4, never Parting Shot before Surging Strikes OHKO"},
+  {"check": "Persian Fur Coat / Foul Play", "result": "FAIL (no window)", "evidence": "t6 Snarl then OHKO'd by Close Combat through Fur Coat"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 2, "user": "Fezandipiti", "payoff": "blocked Heat Wave (which did 122 to the Incineroar switch-in); partner switch executed"},
+  {"run": "a1", "turn": 8, "user": "Mega Floette", "payoff": "blocked Fake Out and Flare Blitz; grassy terrain healed 22"}
+ ],
+ "protect_summary": "2 Protects, both good.",
+ "ai_defects": [],
+ "ai_notes": "Withdrawing Liepard into two Dark types (t2) was the right read; bringing it back t4 for a second Fake Out was also good. Mega Floette Eternal shows ability FAIRY_AURA after transformation (Flower Veil is the base form's); dossier prose about Flower Veil only applies pre-Mega.",
+ "level_changes": [],
+ "level_change_rationale": "Won first try 6-2 after an 8-turn fight with two real KOs (Psychic on Urshifu, Helping Hand Moonblast on Flutter Mane). Keep.",
+ "cooler": "The thief theme holds. The ace never got to Calm Mind because it Megas last against a field that is already 5-0; leading Floette + Mesprit (Fake Out immune via Covert Cloak) would let the Wish/Calm Mind plan actually appear. No set change recommended.",
+ "legality_notes": "Sets legal; driver accepted both parties.",
+ "verification_limit": "No level change."
+}
