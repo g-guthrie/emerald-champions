@@ -1,0 +1,32 @@
+{
+ "play_order": 338, "e_group": "E0510", "trainer": "TRAINER_WALLACE_DOUBLES_LEGENDS", "class": "elite", "location": "CaveOfOrigin_DianciesRoom", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; offset-2 members L100, Mewtwo offset 3 L101 = cap+offset-2 on Medium.",
+ "difficulty": "medium",
+ "party_manifests": ["work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_storm_answer.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open; no gate-100 species (Mewtwo and the Steven's Cave paradoxes are reached at or after Leaf/Steven, later in play order). One reachable legend, Ting-Lu (DesertUnderpass sign gate 42); two Paradox wilds (Raging Bolt Route 119, Flutter Mane Mt. Pyre summit). The party was built specifically from the dossier's own crack: Electric attacks abuse their rain.",
+ "pre_play_strategy_checks": ["Kyogre Drizzle live on entry; Origin Pulse / Thunder in rain", "Tornadus Tailwind when the speed race matters, else Bleakwind Storm (100% in rain)", "Regenerator switch only when it improves the board", "Zapdos Thunder / Hurricane at full accuracy in rain", "Lugia Multiscale + Calm Mind win condition", "Terapagos Terra form change on entry, Tri Attack", "Mega Mewtwo X physical closer; Unnerve"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_storm_answer.json (Rillaboom/Archaludon/Raging Bolt/Flutter Mane/Ting-Lu/Incineroar)", "outcome": "won", "turns": 7, "player_faints": 1, "opponent_faints": 6,
+   "why": "t1 Fake Out flinched Tornadus (Sash chipped), Kyogre Ice Beam 213 on Rillaboom, rain-charged Electro Shot OHKO'd Kyogre (+1 SpA). t2 Rillaboom out for Ting-Lu (Vessel of Ruin), Bleakwind Storm resisted by Archaludon (Stamina +1), Hurricane confused Ting-Lu, Electro Shot left Zapdos at 34. t3 Electro Shot OHKO'd Tornadus; Ting-Lu hit itself. t4 Ting-Lu Protected Hurricane, Lugia Calm Mind, Electro Shot broke Multiscale (98). t5 Zapdos Protected at 2 HP, Lugia Calm Mind again, Electro Shot 184; rain and terrain expired. t6 Ting-Lu out for Incineroar (Intimidate), Zapdos Hurricane KO'd itself on Life Orb recoil, +5 Draco Meteor KO'd +2/+2 Lugia. t7 Mewtwo Mega Evolved and was Fake Out flinched, Terapagos Tri Attack 136 on Incineroar, +3 Draco Meteor OHKO'd Mega Mewtwo X (357). t8 Tri Attack KO'd Incineroar, +2 Def Body Press KO'd Terapagos. Faints: Incineroar. Raging Bolt, Flutter Mane never entered."}
+ ],
+ "strategy_checks": [
+  {"check": "Kyogre Drizzle + rain offence", "result": "PASS (Drizzle), Origin Pulse/Thunder never fired", "evidence": "rain at turn 0; t1 Ice Beam into Rillaboom (correct target vs a Water-resist pair) then OHKO'd by Electro Shot"},
+  {"check": "Tornadus Tailwind / Bleakwind Storm", "result": "PARTIAL", "evidence": "t1 flinched; t2 and t3 Bleakwind Storm (never Tailwind, never Protect with a live Sash) - defensible since its side was already faster, but the Tailwind mode never appeared"},
+  {"check": "Regenerator switch", "result": "FAIL (never chosen)", "evidence": "Tornadus stayed in at 240/300 into a +2 Archaludon and died"},
+  {"check": "Zapdos rain Thunder / Hurricane", "result": "PASS (Hurricane)", "evidence": "t2 Hurricane confused Ting-Lu, t3 Hurricane (Ting-Lu hit itself), t4 into Protect, t6 Hurricane on the Incineroar switch-in (148) then Life Orb recoil KO'd it. Thunder never chosen into Ground/Steel-Dragon - correct"},
+  {"check": "Lugia Multiscale + Calm Mind", "result": "PASS (chosen), lost", "evidence": "Calm Mind t4 and t5 while +3/+4 Archaludon broke Multiscale and 2HKO'd it; Ice Beam t6 into Incineroar (resisted). Setting up twice into a visible 2HKO was weak"},
+  {"check": "Terapagos Terra form change", "result": "PASS", "evidence": "'The opposing Terapagos transformed!' on entry, TERAPAGOS_AWAKENED; Tri Attack 136 + KO on Incineroar"},
+  {"check": "Mega Mewtwo X closer + Unnerve", "result": "PASS (Mega, Unnerve), no attack", "evidence": "'Your side is too nervous to eat Berries' on entry; Mega Evolved t7, Drain Punch chosen into Incineroar but Fake Out flinched it, then OHKO'd by +3 Draco Meteor"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 5, "user": "Zapdos (2 HP)", "payoff": "read Rock Slide correctly, but Ting-Lu hit itself in confusion so nothing was blocked; partner Calm Mind. Effectively empty"}
+ ],
+ "protect_summary": "1 Protect, empty in effect (correct read). Kyogre, Tornadus, Lugia, Terapagos and Mewtwo never Protected.",
+ "ai_defects": [],
+ "ai_notes": "No illegal choice. Weak spots: Tornadus never used Tailwind or its Regenerator switch; Lugia Calm Minded twice into a +3/+4 special attacker that had already broken Multiscale; Zapdos kept firing at 2 HP with a Life Orb and killed itself. None of these is a rules violation.",
+ "level_changes": [{"member": "TORNADUS_THERIAN", "before": 2, "after": 3}, {"member": "ZAPDOS", "before": 2, "after": 3}],
+ "level_change_rationale": "The fight is meant to be the hardest in the game and a tailored post-game party won it first try 6-1 in 7 turns with two reserves never used. Per the block instruction, +1 on the two weakest members (both 4 HP EV Sash/Life Orb bodies that were each OHKO'd by a single Electro Shot); Kyogre/Lugia/Terapagos/Mewtwo untouched. A level cannot close the real hole: an Electric attacker standing in their own rain (Archaludon Electro Shot, no charge, +1 per use) is super effective on four of the six and the roster carries no Ground type, no Lightning Rod / Volt Absorb and no weather-change answer.",
+ "cooler": "The storm is spectacular but it is a glass storm: Kyogre died turn 1 to the exact crack the dossier names. To make it the hardest fight it needs a body that punishes the Electric answer - e.g. a Ground-type or Lightning Rod partner for Kyogre, or Tornadus leading Tailwind + Protect so the flyers move before the Electric attacker - and Lugia should attack rather than Calm Mind once Multiscale is gone. Species/set changes are outside this pass; reported only.",
+ "legality_notes": "Sets legal; driver accepted the party. Terapagos's Terra form change and Mega Mewtwo X both executed natively.",
+ "verification_limit": "Tornadus 2->3 and Zapdos 2->3 cannot be re-verified until the main agent rebuilds. This is the block's second-most-worth-rerunning battle; a rerun should use a non-Electric party to see whether the storm is hard for anyone who did not bring the dossier's answer."
+}
