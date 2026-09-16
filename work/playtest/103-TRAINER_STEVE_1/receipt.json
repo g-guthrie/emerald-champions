@@ -1,0 +1,35 @@
+{
+  "play_order": 103,
+  "e_group": "E0123",
+  "trainer": "TRAINER_STEVE_1",
+  "class": "regular",
+  "location": "Route114",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Tyrantrum offset 0 -> L34, Turtonator +1 -> L35, Graveler-Alola +4 -> L38, Fraxure +5 -> L39, all equal 36 + offset - 2 (Medium). No --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/103-TRAINER_STEVE_1/party.json",
+  "attempts": [
+    {"n": 1, "seed": 103, "run_dir": "work/playtest/103-TRAINER_STEVE_1/a1", "kind": "optimized", "outcome": "won", "turns": 3, "decisions": 4, "player_faints": 1, "opponent_faints": 4, "note": "Excadrill + Togekiss is a hard counter to this composition: Earthquake is 2x/4x/2x into three of the four members and Togekiss is immune to it, so Earthquake fired unrestricted every turn and took a double KO on T2. Lost Togekiss to a Choice Scarf Head Smash."}
+  ],
+  "strategy_checks": [
+    {"check": "Turtonator becomes a Defense/Body Press bulwark via Iron Defense rather than a Shell Smash copy", "result": "PASS (partial)", "evidence": "T1 Iron Defense, 'Defense rose sharply', +2 recorded in its stat stages. It selected Iron Defense again on T2 and died to Earthquake before reaching Body Press. Shell Smash correctly absent - the dossier's swap away from Wyatt's copy is respected."},
+    {"check": "Alolan Graveler's Galvanize turns Double-Edge into an Electric move", "result": "NOT OBSERVED", "evidence": "Graveler chose Protect on both of its turns and was KOed on the second by a 4x Earthquake. Galvanize was live on its stat block but never converted a move. See AI defect 1 - this is a consequence of the Protect choice, not of the ability."},
+    {"check": "Mold Breaker Fraxure uses Breaking Swipe / Dragon Claw / Stomping Tantrum instead of a second setup plan", "result": "PASS (partial)", "evidence": "'The opposing Fraxure breaks the mold!' fired on entry, confirming Mold Breaker. T3 it chose Stomping Tantrum and correctly picked the 2x Ground move into my Steel/Ground Excadrill over its Dragon STAB. No setup move was selected, as the dossier intends. Breaking Swipe's spread Attack drop was not reached - it only had one turn."},
+    {"check": "Choice Scarf Rock Head Tyrantrum throws recoil-free Head Smash", "result": "PASS", "evidence": "T3 Head Smash KOed a 141 HP Togekiss in one hit (Rock is 2x into Flying) with no recoil message - Rock Head confirmed. The Choice Scarf let a L34 member move before my whole side; it is the lowest-level Pokemon on the team and it took the only Pokemon I lost."},
+    {"check": "Ground/Fairy pressure and denying setup (counterplay)", "result": "PASS", "evidence": "Earthquake from an Earthquake-immune partner is the clean answer and it produced a double KO on T2, including through Turtonator's +2 Defense. Togekiss's Dazzling Gleam covered the Dragon half."}
+  ],
+  "protect_ledger": [
+    {"turn": "T1", "battler": "GRAVELER_ALOLA", "payoff": "real and large - blocked a 4x Earthquake and a Dazzling Gleam in the same turn on the opening turn"},
+    {"turn": "T2", "battler": "GRAVELER_ALOLA", "payoff": "EMPTY AND HARMFUL - 'But it failed!'. Consecutive Protect failed, the turn was spent doing nothing, and Graveler was KOed by the Earthquake it had guarded against the turn before. See AI defect 1."}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "moderate", "turn": "T2", "board": "Alolan Graveler (L38, Eviolite, Galvanize, full 125 HP) having successfully Protected on T1, beside a Turtonator at 24/119, against an Excadrill that had used Earthquake on T1", "chosen": "MOVE_PROTECT a second consecutive time - it failed outright", "better": "MOVE_DOUBLE_EDGE (Galvanize-boosted Electric, the team's signature interaction) or Stomping Tantrum. Graveler was at full HP behind an Eviolite; even eating the 4x Earthquake it would very likely have survived to act, whereas the failed Protect guaranteed it did nothing at all before dying.", "note": "This is the 'consecutive risk' case AGENTS.md asks to be reviewed explicitly. The expected-value forecast appears to have re-scored Protect highly because the previous Protect paid off, without discounting for the consecutive-use failure chance. Same PAIR_GUARD_* constants would affect every repeat-Protect holder in the campaign, so it is worth a shared check rather than a per-team fix."}
+  ],
+  "level_changes": [
+    {"member": "TYRANTRUM", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "Brief rule 5 / AGENTS.md review threshold: first optimized attempt won in 3 turns with 1 player faint. Tyrantrum is by a wide margin the lowest member at offset 0 against 1/4/5 - two levels under the player cap while its teammates sit two and three above it - and it is also the member that earned the level: its Choice Scarf Head Smash was the only thing on this team that took one of my Pokemon. Deliberately not applied to Turtonator (the second-lowest): it died because it is 2x to Ground while standing beside a 4x Ground partner, and a level does not change a shared weakness."}
+  ],
+  "retest_status": "PENDING REBUILD. The offset change is in data/emerald_champions/emerald_champions_battle_teams.txt but the headless ROM in work/agent-battle-build-2 predates it. Per this wave's instructions I do not run make; the main agent should re-materialize, rebuild and re-run seed 103 against this manifest.",
+  "cooler": "The individual sets are good - Galvanize Graveler and a recoil-free Scarf Head Smash are both genuinely clever, and the dossier is right that Turtonator as a Body Press bulwark is more interesting than another Shell Smash. The structural problem is that three of the four members are 2x or 4x weak to Ground and the fourth is neutral, so one Earthquake user with a Flying partner beat the team in three turns without ever being in danger. That is not a level problem and I did not treat it as one. Concrete suggestion for a later pass: Turtonator and Tyrantrum and Fraxure are all Dragon, and Graveler and Tyrantrum are both Rock - the team is two types wearing four bodies. Giving Steve one Levitate or Flying member (a Flygon, say, which is thematically a Pokemaniac's dragon and is itself Ground-immune) would let the team stand beside its own Earthquake, break the shared weakness, and turn 'bring a Ground move' from a solution into a trap. Second, smaller note: the most memorable moment of the fight was Tyrantrum's Scarf Head Smash, and it happened at the lowest level on the team. That member deserves to be seen, which is part of why it got the level.",
+  "authored_set_legality": "No legality problem found. Shell Armor, Galvanize with Eviolite, Mold Breaker (announced on entry) and Rock Head with Choice Scarf were all live on the correct members.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
