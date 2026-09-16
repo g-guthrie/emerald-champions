@@ -1,0 +1,35 @@
+{
+  "play_order": 187,
+  "e_group": "E0279",
+  "trainer": "TRAINER_JAZMYN",
+  "class": "ace",
+  "location": "Route123",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Absol/Goodra/Jolteon (all +1) L53, Lucario (+2) L54 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/187-TRAINER_JAZMYN/party_b54_jazmyn.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_jazmyn.json (Incineroar/Gardevoir lead)", "outcome": "won", "turns": 8, "player_faints": 5, "opponent_faints": 4,
+     "why": "Won on the last possible turn with one Pokemon left. Mega Gardevoir removed Absol and gutted Goodra on turn 1, but Adaptability Mega Lucario then OHKOed Incineroar (217) and Mamoswine (200) on consecutive turns, and Poison Heal Goodra healed 21 a turn against every resisted move I had left. The kill came from stacking a Life Orb Thunderbolt and a Heat Wave into a 61 HP Goodra on the final turn."}
+  ],
+  "strategy_checks": [
+    {"check": "Goodra converts Toxic Orb into Poison Heal sustain", "result": "PASS", "evidence": "Orb activated turn 1 the moment Goodra was badly poisoned; it healed 21 per turn from turn 2 to turn 8, climbed from 13/175 back up repeatedly, and effectively stalemated Zapdos, whose only resisted Fire and Electric options netted zero. Best-executed set in the whole block."},
+    {"check": "Mega Lucario Adaptability physical pressure", "result": "PASS", "evidence": "Mega Evolved on entry turn 2; Close Combat OHKOed a 217 HP Incineroar (turn 2) and a 200 HP Mamoswine (turn 3). It is the single hardest-hitting opponent I faced at this cap."},
+    {"check": "Absol Justified / Sucker Punch priority", "result": "FAIL", "evidence": "Absol chose Knock Off on turn 1 and was removed by a 2x Hyper Voice before it acted a second time. Sucker Punch and Justified never appeared. It is by some distance the frailest member."},
+    {"check": "Jolteon Focus Sash / Volt Absorb / Thunder Wave", "result": "PARTIAL", "evidence": "Volt Absorb was never tested - I benched Regieleki and avoided Electric all fight, which is itself the ability doing its job as a deterrent. Focus Sash never triggered because chip damage preceded. Thunder Wave was never selected; Jolteon only used Thunderbolt and Protect."},
+    {"check": "The team's reserves get a defined entry rather than dumping in", "result": "PASS", "evidence": "a1 turn 4: Jazmyn withdrew a sleeping Mega Lucario and sent Jolteon into the Heat Wave, preserving the ace for later. That is a correct and non-obvious switch."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Goodra", "payoff": "blocked a lethal Knock Off at 13/175, which is the single turn the whole battle turned on"},
+    {"attempt": 1, "turn": 4, "battler": "Goodra", "payoff": "blocked both a Heat Wave and a Sludge Bomb while its Poison Heal ticked"},
+    {"attempt": 1, "turn": 5, "battler": "Jolteon", "payoff": "blocked a Spore and a Heat Wave; Spore in particular would have removed it from the game"}
+  ],
+  "protect_summary": "3 opponent Protects, all 3 with clear and in one case match-winning payoff, 0 empty, no consecutive-turn guarding. The best Protect discipline of any team in my block.",
+  "ai_defects": [],
+  "level_changes": [],
+  "level_change_rationale": "Keep, emphatically. Won on the final turn with one Pokemon standing and five faints. This is the correct difficulty target for a Route 123 ace and needs no adjustment in either direction.",
+  "cooler": "Keep. Poison Heal Goodra next to Adaptability Mega Lucario is a genuinely well-built pair - one is unkillable by chip, the other converts every free turn into a knockout, and Jolteon's Volt Absorb is a real deterrent that changed my party order before the battle started. The one improvement worth naming is Absol: it is the only member that does not survive contact with the field, and Justified never triggered because nothing on this team invites a Dark-type attack. A Focus Sash instead of Life Orb would let it actually land the Sucker Punch the set is built around, or move it to a partner that draws Fighting moves so Justified means something.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "No level change was made for this battle."
+}
