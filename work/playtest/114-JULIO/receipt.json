@@ -1,0 +1,40 @@
+{
+  "play_order": 114,
+  "e_group": "E0136",
+  "trainer": "TRAINER_JULIO",
+  "class": "regular",
+  "location": "JaggedPass",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Cyclizar L34 (36+0-2), Jolteon L33 (36-1-2), Haunter L35 (36+1-2), Dodrio L35 (36+1-2).",
+  "party_manifest": "work/playtest/114-JULIO/party-a1.json",
+  "attempts": [
+    {"seed": 61, "attempt": 1, "outcome": "won", "turns": 6, "player_faints": 4, "opponent_faints": 4,
+     "notes": "The hardest regular-trainer fight in the block by a distance. Mega Blastoise was killed on turn 1 by Life Orb Thunderbolt plus Dragon Claw before it moved twice. Excadrill traded for Jolteon and then died to a Choice Band Low Kick. Togekiss died to a 2x Sludge Bomb and Azumarill to a crit of the same move. Won on the last two members."}
+  ],
+  "strategy_checks": [
+    {"check": "Cyclizar uses Shed Tail to bring Choice Specs Haunter or Choice Band Dodrio in behind a substitute", "result": "FAIL",
+     "evidence": "Cyclizar had three decision points (turns 1, 2 and 3) at 102, 102 and 66 HP and chose Dragon Claw, Knock Off and Knock Off. Shed Tail was never selected, and both Choice users came in the ordinary way after a faint, with no substitute. The dossier's entire lead concept ('Lead Cyclizar/Jolteon so Shed Tail can bring Specs Haunter or Band Dodrio behind a real substitute') did not happen."},
+    {"check": "Regenerator restores HP when Cyclizar switches out", "result": "NOT REACHED", "evidence": "Cyclizar never left the field - it had no Shed Tail or U-turn selected and died in place, so Regenerator never had an opportunity. Since Shed Tail is the intended way it leaves, this check is downstream of the one above."},
+    {"check": "Haunter's Choice Specs locks it into one move", "result": "PASS", "evidence": "Sludge Bomb on all three of its turns, never another move. Its targeting was also correct: it picked the 2x Fairy targets (Togekiss, then Azumarill) both times rather than the Poison-resistant Mamoswine standing next to them, and killed both."},
+    {"check": "Dodrio's Choice Band locks it into one move", "result": "PASS", "evidence": "Low Kick on all three of its turns. The first one KOed Excadrill at 2x through its Steel typing."},
+    {"check": "Haunter's Levitate ignores Ground", "result": "NOT REACHED", "evidence": "My Mold Breaker Excadrill, which was the counterplay to this, died before Haunter ever came in."},
+    {"check": "Jolteon's Volt Absorb heals from Electric", "result": "NOT REACHED", "evidence": "I never used an Electric move. Recorded as untested rather than failed."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {
+      "id": "P10-D9",
+      "severity": "high",
+      "turns": "1, 2, 3",
+      "board": "Cyclizar L34 leading at full HP with Shed Tail available and two Choice-item attackers waiting in the back",
+      "chosen": "Dragon Claw, then Knock Off, then Knock Off.",
+      "why_wrong": "Same shape as the Thievul defect in E0134: the scorer weighs immediate damage and never values the setup move that the set exists to use. Shed Tail is the reason this Pokemon is on the team - it costs half its HP to give a Choice Specs Haunter a free turn, and Regenerator is on the set specifically to pay that cost back. Turn 1 with both Choice users healthy in the back is exactly the turn to use it. Instead the substitute never existed and both Choice attackers had to come in raw off a faint.",
+      "better_action": "Shed Tail on turn 1, bringing Haunter or Dodrio in behind the substitute, then let Regenerator refund the HP when Cyclizar returns."
+    }
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Won on attempt 1 but lost four of six members doing it, including the Mega on turn 1. That is squarely the 'won after a real fight' band. This team is already the most dangerous regular encounter in the block and needs no points - if anything the AI failing to use Shed Tail means the printed levels are being judged against a weaker version of the intended plan, so the current numbers should be re-read after the Shed Tail behaviour is fixed.",
+  "could_this_be_cooler": "The concept is already cool and the raw numbers are genuinely threatening; the problem is that the centrepiece never fires. Two notes, neither applied: (1) if the AI cannot be taught to value Shed Tail, Cyclizar's other three moves are all good enough that it will always prefer them - trimming one attacking option would force the pass and make the fight read as the relay it is designed to be. (2) Haunter's Choice Specs targeting was genuinely impressive here (it picked the 2x Fairy target over the Poison-resistant one twice) which is worth noting as the AI doing something right, and it is the reason this fight is hard even without the substitute.",
+  "authored_set_legality": "No legality problems. Both Choice locks, Early Bird, Levitate and Regenerator were all present and correctly configured.",
+  "notes": "AI decision times were normal. The one-turn loss of a Mega Blastoise to Thunderbolt plus Dragon Claw is a legitimate burst, not a bug."
+}
