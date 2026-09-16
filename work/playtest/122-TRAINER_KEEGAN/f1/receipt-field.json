@@ -1,0 +1,140 @@
+{
+  "play_order": 122,
+  "e_group": "E0146",
+  "trainer": "TRAINER_KEEGAN",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/122-TRAINER_KEEGAN/receipt.json (mist-less run at cap 36; left intact)",
+  "build": "work/agent-battle-build-4",
+  "why_this_room_matters": "This is the room the rerun exists for. Keegan's entire opening is mist-dependent and was structurally invisible in the mist-less run: without terrain, Hitmontop's Misty Seed cannot activate at all, and Flareon's Toxic Orb poisons it on turn 1 with nothing to stop it, so the room's authored sequence ran backwards. With the mist authored, the chain is testable for the first time.",
+  "cap_note": "Cap 36 -> 42. Observed levels 43/40/39/40/40/40 match the dossier's 'Medium cap40 levels 43/40/39/40/40/40' exactly.",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS. Terrain still read 'misty' at every state check through the final turn - nothing in the battle ever removed it."
+  },
+  "party_manifest": "work/playtest/122-TRAINER_KEEGAN/f1/party.json",
+  "party_note": "Reused the mist-less run's winning rain six (Pelipper / Kingdra / Swampert / Primarina / Garganacl / Togekiss) after re-checking chronology against pool-42.json; all gate<=36, all from maps preceding Lavaridge. Togekiss was never sent out. Chronology-legal gate-42 species (Skarmory, Turtonator, Drampa) were available and not used; Surf-gated Meteor Falls rooms are not legal here.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 241,
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.021,
+      "events": "work/playtest/122-TRAINER_KEEGAN/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/122-TRAINER_KEEGAN/f1/attempt-1-result.json",
+      "notes": "Won 6-3 after a genuine nine-turn fight. Lost Kingdra on turn 2 (Hydro Pump missed at 80% and Close Combat finished it), Pelipper on turn 5 to a 4x Thunderbolt from Magmortar, and Primarina on turn 6 to a Choice Band Wild Charge from Emboar. I deliberately spent turn 1 on Tailwind plus a chip rather than trying to remove Hitmontop before it could act, because the point of the rerun was to see whether the authored chain fires."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Seed activates on Hitmontop from the room's authored starting terrain",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn-0 state, before any action was submitted: Hitmontop's item read NONE (the Misty Seed was already consumed) and its stat stages read spd +1. The seed fired on send-out off the authored field, exactly as the plan says. Corroborated on turn 1, when Close Combat's own -1 Sp.Def took that stage from +1 back to 0."
+    },
+    {
+      "check": "plan: 'a successful Ice Spinner can then remove terrain'",
+      "result": "NOT ACHIEVED",
+      "mist_dependent": true,
+      "evidence": "Hitmontop selected Ice Spinner exactly once in the whole battle (turn 4, one occurrence in the events log) and was KOed by Primarina's Moonblast before it resolved. On turns 1 and 2 it chose Close Combat and on turn 3 Protect. The terrain read 'misty' at every state check from turn 0 to the end. See ai_defects KEEGAN-1."
+    },
+    {
+      "check": "plan: Ice Spinner's terrain removal is what allows Flareon's Toxic Orb to trigger at the end of that turn",
+      "result": "PASS by the negative case - and this is the strongest mist evidence in the block",
+      "mist_dependent": true,
+      "evidence": "Flareon was on the field for seven turns (turns 1-7) and held ITEM_TOXIC_ORB with status [] at every single state read, right up to the turn it fainted. It never became poisoned, so Guts never came online, and its Facade stayed at base power - it did 36 to Pelipper on turn 1, roughly a third of what a Guts-boosted Facade would have managed. The mist blocked the opponent's OWN item from working on its OWN grounded Pokemon, which is precisely the dependency the dossier describes."
+    },
+    {
+      "check": "Misty Terrain blocks new status on grounded targets",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Two independent confirmations. (a) Flareon's Toxic Orb, above. (b) No player Pokemon carried any status at any point across nine turns; Swampert, Kingdra, Primarina and Garganacl are all grounded, and Magmortar with Flame Body and Typhlosion with Burning Jealousy were both on the field."
+    },
+    {
+      "check": "plan: 'Intimidate supports physical survival'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Hitmontop's Intimidate applied on send-out; both player actives read atk -1 in the turn-0 state before any move was chosen."
+    },
+    {
+      "check": "plan: 'Helping Hand supports later attacks'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "Hitmontop never selected Helping Hand. It lived four turns and spent them on Close Combat, Close Combat, Protect and a fatal Ice Spinner."
+    },
+    {
+      "check": "plan: 'Emboar retains Reckless Band offense'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Choice Band Emboar locked into Wild Charge from turn 6 and killed a full-health Assault Vest Primarina with it (Electric 2x into Water/Fairy), taking Reckless recoil each turn as authored."
+    },
+    {
+      "check": "plan: 'bulky AV Typhlosion uses Burning Jealousy ... and Houndoom Snarl instead of extra setup'",
+      "result": "PARTIAL",
+      "mist_dependent": true,
+      "evidence": "Houndoom used Snarl twice as authored (it landed once, dropping Swampert's Sp.Atk, and missed once). Typhlosion never selected Burning Jealousy - it used Focus Blast and Extrasensory - which is arguably correct, since Burning Jealousy's burn could not have landed on any of my grounded bodies under the mist anyway. Worth noting that the mist makes one of Typhlosion's four moves close to dead weight in its own Gym."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Flareon",
+      "payoff": "REAL - blocked a rain-boosted Weather Ball (Water, 2x into Fire) from a 252 Sp.Atk Pelipper, which was lethal or near-lethal on its 114 HP."
+    },
+    {
+      "turn": 3,
+      "battler": "Hitmontop",
+      "payoff": "REAL, and the best guard in the block - at 63 of 162 HP it blocked BOTH Pelipper's Weather Ball and Primarina's Hydro Pump in the same turn. Either one would very likely have killed it."
+    },
+    {
+      "turn": 4,
+      "battler": "Flareon",
+      "payoff": "REAL - blocked another Weather Ball."
+    },
+    {
+      "turn": 6,
+      "battler": "Flareon",
+      "payoff": "REAL - blocked BOTH Swampert's Liquidation and Primarina's Hydro Pump, a full double at 2x, from full HP."
+    }
+  ],
+  "protect_ledger_summary": "Four opposing Protects, all four with real payoff, two of them blocking a complete double. Not one empty guard, and no consecutive-Protect spam: Flareon guarded on turns 2, 4 and 6, attacking on the turns in between. This is the best Protect cadence of the nine rooms.",
+  "ai_defects": [
+    {
+      "id": "KEEGAN-1",
+      "severity": "suspected scoring gap, not an illegal choice",
+      "turn": 1,
+      "board": "Misty Terrain up. Opponent: Hitmontop L43 (Misty Seed already consumed, +1 Sp.Def) beside Flareon L40 holding an unactivated Toxic Orb with no status. Player: Pelipper L42 (Water/Flying) and Kingdra L42 (Water/Dragon), both full HP, rain up from my Drizzle.",
+      "chosen": "Hitmontop selected Close Combat into Kingdra.",
+      "better": "Ice Spinner. Turn 1 is the authored trigger: the seed had already banked its Sp.Def, Flareon was sitting beside it with a dead Toxic Orb, and Ice Spinner is the single move on the whole team that turns Flareon's Guts on. Removing the terrain would also have restored Typhlosion's Burning Jealousy burn and Magmortar's Flame Body against my four grounded bodies.",
+      "assessment": "Close Combat is not illegal or absurd - it is 120 BP versus Ice Spinner's 80, and both are 1x into Kingdra, so on raw damage Close Combat wins. The gap is that the scorer appears to place no value on Ice Spinner's terrain removal as an enabler for an ally's ability and item. Hitmontop did eventually select Ice Spinner on turn 4, so the move is reachable in scoring; it simply loses to a bigger damage number for three turns running, by which point it was at 63 HP and died before the move resolved. Net effect: the room's authored payoff never came online in a nine-turn battle.",
+      "relation_to_axle": "This is the same shape as AXLE-1 in E0145, where Magcargo never selected Lava Plume despite four explicit ACTIVATE tactic lines naming its allies. Both are cases of an ally-enabling move losing to raw damage scoring. Worth tracing as one issue rather than two. I did not touch AI C code."
+    }
+  ],
+  "ai_notes": [
+    "Turn 5, Magmortar: Thunderbolt into Pelipper for a 4x OHKO rather than its STAB Flamethrower into a rain board. Correct.",
+    "Turn 6, Emboar: Wild Charge into Primarina (Electric 2x into Water/Fairy) rather than Flare Blitz into a rain board. Correct, and it killed a full-HP Assault Vest body.",
+    "Turn 4, Flareon and Hitmontop guarded and attacked on alternating turns rather than both guarding at once - the pair-level cadence is working.",
+    "AI decision time peaked at 1.021s, inside the 1.2s budget."
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Brief rule: 'Won with 2+ faints or after a real fight -> keep.' Three player faints across nine turns, with the outcome genuinely in doubt at 3-3 on turn 7. The mist-less run also made no change here, so Keegan's offsets are untouched across both runs. Levels are emphatically not the lever for this room anyway: KEEGAN-1 means the authored payoff never fired, and AGENTS.md is explicit that AI defects are fixed before difficulty is compensated with levels.",
+  "could_this_be_cooler": "The concept is one of the best in the Gym and should be kept exactly as designed - a room that deliberately dismantles its own field so that its partner's drawback item becomes a weapon is a genuinely memorable idea, and 'this is a deliberate terrain-removal room, not a global exception to the Gym mist' is the right instinct. But as built, the whole payoff hangs on a single 80 BP move from a single 162 HP body that the AI will not prioritise and that the player has every reason to remove first. In this battle the chain broke at the first link and Flareon spent seven turns as a weak Normal-move attacker holding a useless item. Two concrete options, neither applied in this pass. First and simplest: give the terrain removal to a second body as well, so losing Hitmontop does not end the plan - Emboar or Typhlosion carrying Ice Spinner or a Defog would make the room's identity redundant rather than fragile. Second: if the AI-side fix to KEEGAN-1 lands and Hitmontop reliably opens with Ice Spinner, the room may need no change at all, because the version the design intends - turn 1 Spinner, turn 1 Toxic Orb, turn 2 Guts Facade into a party that can no longer hide behind the mist - is a much harder and much better fight than the one I played. Re-run this room once that fix exists before touching anything else here.",
+  "authored_set_legality": "No legality problem. Every item and ability resolved as authored: Misty Seed consumed on the authored terrain, Toxic Orb correctly suppressed by it, Guts correctly gated behind the poison that never arrived, Intimidate, Choice Band on Emboar, Assault Vest on Typhlosion, Life Orb on Magmortar, Flash Fire and Sitrus on Houndoom.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
