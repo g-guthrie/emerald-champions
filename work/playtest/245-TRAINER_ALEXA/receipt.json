@@ -1,0 +1,102 @@
+{
+  "play_order": 245,
+  "e_group": "E0383",
+  "trainer": "TRAINER_ALEXA",
+  "class": "ace",
+  "location": "Route128",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Feraligatr / Marowak-Alola / Scizor / Exeggutor / Ampharos (0) at L74 and Diancie (+1) at L75 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": [
+    "work/playtest/245-TRAINER_ALEXA/party_sea76.json",
+    "work/playtest/245-TRAINER_ALEXA/party_antiitem76.json"
+  ],
+  "chronology_note": "Route 128 at cap 76, before Dive. Attempt 1 used the sea-routes six (all gates 42 or lower). Attempt 2 added Metagross (gate 48, Metagrossite stone-window 42) and Volcanion (gate 68, legendary_sign:MagmaHideout_4F). Volcanion is the only member above gate 48 and it is legal because C38 Magma Hideout and Groudon precede C40's Aqua Hideout and C41 Mossdeep in the book's chapter order - a player on Route 128 has already been through the hideout. Nothing from Mossdeep, the Space Center, Shoal Cave, the Abandoned Ship, Seafloor Cavern, Sootopolis, Route 131 or Pacifidlog.",
+  "reachable_legends_note": "Attempt 2 fielded Urshifu-Single (Kubfu, gate 42) and Volcanion (gate 68, Mythical). Volcanion was brought as the honest strongest answer - Fire/Water covers Scizor at 4x and Mega Diancie's Rock half at 2x in one slot, and no ordinary cap-76 body does both. It is worth recording that it never actually attacked: attempt 2 was won by Knock Off, Rillaboom's High Horsepower and a 4x Flare Blitz, and Volcanion sat in reserve the whole battle. The rebuild that mattered was Mega Metagross replacing Mega Gardevoir, not the Mythical.",
+  "pre_play_strategy_checks": [
+    "Feraligatr's Sheer Force removes secondary effects for 30 percent more power; Dragon Dance behind a safe board",
+    "Thick Club doubles Marowak-Alola's Attack, and Knock Off is the stated counter",
+    "Mega Diancie is the ace and Diamond Storm often raises its Defense by two stages",
+    "Technician Scizor's Bullet Punch is the priority finish",
+    "Harvest Exeggutor recycles its Sitrus Berry; Hypnosis is the disruption",
+    "Ampharos' Electroweb is the speed control that lets the slower physical members move first"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 5,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/245-TRAINER_ALEXA/a1",
+      "party": "party_sea76.json (Incineroar/Rillaboom/Zapdos/Urshifu-Single/Mega Gardevoir/Amoonguss)",
+      "outcome": "lost",
+      "turns": 11,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "why": "A preparation failure against the exact thing the crack line warns about. I had no Steel and no Water, so Mega Diancie at +2 Defense behind Magic Bounce was a wall I could only chip - my best answer was a 1x Thunderbolt from a Zapdos whose other three moves were 0.5x or worse into this team. Zapdos contributed nothing and died to a spread Diamond Storm. Then Technician Bullet Punch killed Urshifu at 46 and Mega Gardevoir at 50 on consecutive turns, both through priority, and I never got a turn back. Knock Off did work - it took the Thick Club off Marowak on turn 1 for 226 damage - but one correct move in six Pokemon is not a plan."
+    },
+    {
+      "n": 2,
+      "seed": 6,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/245-TRAINER_ALEXA/a2",
+      "party": "party_antiitem76.json (Incineroar/Mega Metagross/Volcanion/Rillaboom/Urshifu-Single/Amoonguss)",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "Rebuilt straight from the dossier's crack line: Steel and Ground for Diancie, a Fire body kept alive for Scizor, and Knock Off leading. Mega Metagross's Bullet Punch answered the priority lane with priority and a Steel body that resists it, Rillaboom's High Horsepower is 2x into both Ampharos and Diancie, and Incineroar's Flare Blitz is 4x into Scizor - 'It's extremely effective!' and a full-HP Scizor died in one hit. Knock Off stripped the Thick Club on turn 2 for 252 damage on a 264 HP body, which is the whole Marowak problem solved in one action. I still lost Mega Metagross to a critical Thunderbolt and Incineroar to a Moonblast on the last turn."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Feraligatr's Sheer Force and Dragon Dance behind a safe board",
+      "result": "PASS",
+      "evidence": "a2 turn 1: Feraligatr selected Dragon Dance on exactly the turn its partner Marowak used Protect - a genuinely safe board - and got +1/+1, then used Liquidation for 116 into a Steel/Psychic Mega Metagross on turn 2. That is the authored condition met precisely, and it is the second setup move in this whole block that was chosen on a turn where it actually paid. a1 it opened with Protect instead, which blanked a 2x Wood Hammer, so both branches were sensible."
+    },
+    {
+      "check": "Thick Club doubles Marowak-Alola's Attack, and Knock Off is the counter",
+      "result": "PASS, on both sides of the ledger",
+      "evidence": "With the club: a1 turn 1 Flare Blitz for 143 into a 309 HP Rillaboom. Without it: Knock Off dealt 226 (a1) and 252 (a2) on a 264 HP body thanks to the item-removal multiplier, and the stripped Marowak was reduced to a 12 HP non-threat. The dossier's claim that Knock Off is the single best move against this team is exactly correct and it is the reason both attempts opened with it."
+    },
+    {
+      "check": "Mega Diancie is the ace; Diamond Storm raises its Defense by two stages",
+      "result": "PASS",
+      "evidence": "a1 turn 3: 'The opposing Diancie's Defense rose sharply!' - the reading afterwards shows def +2 - and a1 turn 5 a second Diamond Storm was spread damage that killed Zapdos outright at 2x. Mega Diancie's Magic Bounce also returned my Spore on a1 turn 3, which is a genuinely good surprise: the Mega form changes the ability from Clear Body and the player who planned to sleep the ace cannot. It Mega Evolved on its first action turn in attempt 2 and its second in attempt 1."
+    },
+    {
+      "check": "Technician Scizor's Bullet Punch is the priority finish",
+      "result": "PASS, decisively",
+      "evidence": "a1 turns 7 and 11: Bullet Punch killed Urshifu at 46/262 and Mega Gardevoir at 50/213 on consecutive appearances, both before they could act. It is also worth recording that Scizor's Clear Amulet blocked Incineroar's Intimidate on a1 turn 8 - 'The effects of the Clear Amulet held by the opposing...' - which is the item theme doing defensive work the plan does not even claim."
+    },
+    {
+      "check": "Harvest Exeggutor recycles its Sitrus Berry; Hypnosis is the disruption",
+      "result": "FAIL / NOT OBSERVED",
+      "evidence": "Exeggutor never appeared at all in attempt 1 and appeared for exactly one turn in attempt 2, where it used Psychic and died to a 2x Flare Blitz. Neither Harvest nor Hypnosis was ever seen across 17 turns of play. This is the one member of the six whose stated job is entirely unverified."
+    },
+    {
+      "check": "Ampharos' Electroweb is the speed control that lets the slower physical members move first",
+      "result": "PASS",
+      "evidence": "a1 turn 5: Electroweb, 'Amoonguss's Speed fell'. It also correctly varied between Thunderbolt and Dragon Pulse by target across the fight rather than spamming its STAB. A reasonable, unspectacular member playing its printed role."
+    },
+    {
+      "check": "Switching quality (not an authored check, but worth recording)",
+      "result": "NOTABLY GOOD",
+      "evidence": "Alexa made two genuinely strong switches. a1 turn 2: withdrew a 38 HP Marowak that was about to die and sent Diancie into the gap. a2 turn 5: withdrew Mega Diancie into Scizor on the exact turn Rillaboom's 2x High Horsepower was aimed at it. Both are reads a decent human doubles player makes and neither is a reflex. This is the best switching I have seen from any trainer in the block."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Feraligatr", "payoff": "excellent. Blocked Rillaboom's Life Orb Wood Hammer, 2x into a Water body from a 252 Atk Adamant attacker in Grassy Terrain - very likely a one-shot"},
+    {"attempt": 2, "turn": 1, "battler": "Marowak-Alola", "payoff": "excellent, and specifically clever. It blocked Incineroar's Knock Off, which preserved the Thick Club for another full turn - the guard protected an item, not just HP, and the item is the member's whole identity"},
+    {"attempt": 2, "turn": 4, "battler": "Mega Diancie", "payoff": "excellent. Blocked Rillaboom's High Horsepower, 2x into its Rock half, on the turn it Mega Evolved"},
+    {"attempt": 2, "turn": 6, "battler": "Mega Diancie", "payoff": "excellent, and it is the one consecutive guard in the block that succeeded. Blocked a second High Horsepower, again 2x and again the largest incoming hit. Consecutive Protect carries a real failure chance and this one paid"}
+  ],
+  "protect_summary": "4 opponent Protects across two attempts, 0 empty, all four blocking a super-effective or item-critical hit. Alexa's guarding and switching together are the strongest opponent decision-making in the block so far, and the Marowak guard that protected the Thick Club rather than the HP is the single best individual Protect I have logged.",
+  "ai_defects": [],
+  "ai_defect_note": "No defect logged. The only unexercised claim is Exeggutor's Harvest/Hypnosis, and Exeggutor got one turn in 17 - that is a deployment-order outcome, not a decision bug. Mega Evolution was prompt in attempt 2 (first action turn) and one turn late in attempt 1, which is worth watching against the E0377 Kingler observation but is not by itself evidence.",
+  "level_changes": [],
+  "level_change_rationale": "Keep. The brief's reduction rule requires three lost optimized attempts; I lost one and then won on attempt 2 with two faints. Attempt 1 was a preparation failure against a crack line that names Steel, Water, Fire, Fighting and Ground explicitly and that I ignored in four of six slots - a Zapdos whose entire moveset ranges from 1x to 0.5x against this team is dead weight and that is my fault, not Alexa's. Attempt 2 was still a real fight that cost me my Mega and my lead. This is a correctly tuned ace.",
+  "cooler": "Keep it. Alexa is the most coherent team in the block after Athena and the two are a good pair: Athena teaches you to hit first, Alexa teaches you to look at items. Playing it confirms the thesis rather than softening it - Knock Off swings the Marowak matchup by roughly 100 damage in a single action, and a player who does not carry it will genuinely conclude that Marowak-Alola is bugged. Two things the write-up does not claim that it should. (1) Mega Diancie's form change swaps Clear Body for Magic Bounce, which is a second item-driven surprise: my Spore came straight back at me the turn it evolved, and the plan's counterplay section does not warn about it at all. That is the best moment in the fight and it deserves to be stated. (2) Clear Amulet on Scizor blocked Intimidate outright - another item doing real work, also unmentioned. One concrete improvement: Exeggutor is the weak slot. Harvest plus Sitrus is the team's slowest item idea and it got one turn in two full battles, while the Hypnosis it carries is redundant with a team that already has a Magic Bounce ace. A body that punishes Knock Off specifically - a Sticky Hold or Covert Cloak user, or an Unnerve body - would make the room's own thesis fight back against its own counterplay, which is a more interesting sixth slot than a berry recycler.",
+  "legality_notes": "No legality problem in the authored set. Diancite's stone window is well inside 76, Thick Club, Clear Amulet, Sitrus Berry, Life Orb and Wise Glasses are all ordinary, and Diancie as a Mythical is legal at this cap.",
+  "verification_limit": "No level change was made here, so nothing in this receipt is pending re-verification."
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge cap 76 anti-item party, rebuilt for E0383 TRAINER_ALEXA after attempt 1 lost 3-6",
+  "availability_audit": "Cap 76 (C39 Scorched Slab grants it; C40 and C41 change nothing; C42 the Space Center grants 84). Chronology against pool-76.json source_detail, all upstream of Route 128: Incineroar gate 36 (Litten, Mauville Game Corner; level evolutions). Rillaboom gate 36 (Grookey, same). Urshifu-Single gate 42 (Kubfu, legendary_sign:Route112, the Jagged Pass approach used for the Magma Emblem). Amoonguss gate 42 (Foongus, Petalburg Woods). Metagross gate 48 (Beldum/Metang line) with ITEM_METAGROSSITE stone-window 42. Volcanion gate 68, legendary_sign:MagmaHideout_4F - C38 Magma Hideout and Groudon precede C40's Aqua Hideout and C41 Mossdeep in the book's own chapter order, so a player standing on Route 128 has cleared it. Nothing from Mossdeep, the Space Center, Shoal Cave, the Abandoned Ship, Seafloor Cavern, Sootopolis, Route 131 or Pacifidlog.",
+  "reachable_legends": "Two: Urshifu-Single (via Kubfu, gate 42) and Volcanion (gate 68, a Mythical). Volcanion is here because it is the honest strongest answer to this specific encounter, not as a general upgrade - Fire/Water is simultaneously 4x into Technician Scizor and 2x into Mega Diancie's Rock half, and no non-legendary body in the cap-76 pool covers both of Alexa's two best Pokemon in one slot. Attempt 1 lost precisely because I had neither a Water nor a Steel answer to Mega Diancie and lost my only Fire body before Scizor arrived.",
+  "plan": "Built from the dossier's own crack line after attempt 1. Four changes from the sea-routes six. (1) Knock Off stays and leads: it stripped Marowak-Alola's Thick Club on turn 1 of attempt 1 for 226 damage on a 264 HP body, which is the single most valuable action available in this fight. (2) Mega Metagross replaces Mega Gardevoir: Meteor Mash is Steel, 2x into Mega Diancie, Bullet Punch answers Scizor's priority with priority, and a Steel body resists the Technician Bullet Punch that killed three of my Pokemon last time. (3) Volcanion replaces Zapdos: Steam Eruption is 2x into Diancie and Flamethrower is 4x into Scizor, where Zapdos's Thunderbolt was 0.5x into Ampharos and its Heat Wave 0.5x into Diancie - Zapdos contributed almost nothing. (4) Rillaboom's High Horsepower is kept deliberately: Ground is 2x into both Ampharos and Diancie. Amoonguss keeps Spore, but note Mega Diancie's Magic Bounce returns it, so sleep must be aimed at anything else.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Knock Off removes the Thick Club and the Sitrus Berry; Flare Blitz is 4x into Scizor; Fake Out and Intimidate control",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": ["MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_HAMMER_ARM", "MOVE_ICE_PUNCH"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition; Steel is 2x on Mega Diancie, Bullet Punch matches Scizor's priority, and a Steel body resists it",
+      "availability": "pool-76 gate 48 (Beldum/Metang line) with ITEM_METAGROSSITE stone-window 42."
+    },
+    {
+      "species": "SPECIES_VOLCANION",
+      "moves": ["MOVE_STEAM_ERUPTION", "MOVE_FLAMETHROWER", "MOVE_EARTH_POWER", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_WATER_ABSORB",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "reachable legend, and the specific answer: Water is 2x into Diancie, Fire is 4x into Scizor, Earth Power is 2x into Ampharos",
+      "availability": "pool-76 gate 68, legendary_sign:MagmaHideout_4F (C38, cleared before the Aqua Hideout)."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_GRASSY_GLIDE", "MOVE_WOOD_HAMMER", "MOVE_HIGH_HORSEPOWER"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Wood Hammer is 2x into Feraligatr; High Horsepower is 2x into both Ampharos and Diancie; Grassy Glide is a second priority lane",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_THWACKEY."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "always-crit Wicked Blow is 2x into Marowak-Alola and Exeggutor and ignores Diamond Storm's Defense boosts; Unseen Fist pierces the team's Protects",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Spore on anything that is not Mega Diancie; Rage Powder buys the Mega its setup turn",
+      "availability": "pool-76 gate 42, evolution:level from SPECIES_FOONGUS."
+    }
+  ]
+}
