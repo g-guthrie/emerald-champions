@@ -1003,3 +1003,54 @@ its stamp are untouched.
 Confirmed in play by the coordinator's reruns from the previous rounds: Trick
 Room, Iron Defense, Endeavor, Acid Spray, Sleep Powder, Tailwind and the
 Victory Dance/Dancer relay all fire, and healthy-lead withdrawals are gone.
+
+---
+
+# Round 8: the single-battle Spore board
+
+Commit `940393c149`. Focused allowlist: **105 passed, 0 failed, 105 total.**
+
+## Cause: the fixture's own attacker, not the engine
+
+The board was: Arcanine (Speed 120, Bite) against Shroomish (Speed 30, Spore +
+Absorb). Arcanine moved first, Shroomish's Spore was the chosen command, and the
+player ended the turn awake with `status1 == 0`.
+
+Ruled out, each by inspection of that exact board:
+
+* **Grass immunity** - the target is Fire, and the powder rule exempts Grass.
+* **Overcoat / Safety Goggles** - no ability or item was set on the target;
+  the debug read `GetBattlerAbility(B_BATTLER_0) == 22`, which is Intimidate,
+  not Insomnia (15) or Vital Spirit.
+* **Misty or Electric Terrain** - the state dump shows `terrain: none`.
+* **Substitute** - never used on the board.
+* **A move-failed path or a singles powder defect** - disproved below.
+
+The cause is **Bite's flinch**. `EXPECT_MOVE` matches the command a battler
+*chose*, through `TestRunner_Battle_CheckChosenMove` at selection time, not a
+move that executed. A flinched Shroomish therefore satisfied the Spore
+expectation perfectly while the powder never went off, which is exactly what the
+30% secondary does on a board whose attacker moves first. Holding the secondary
+off (`MOVE(player, MOVE_BITE, secondaryEffect: FALSE)`) makes the sleep land on
+every run, and the fixture now asserts it:
+
+```
+EXPECT(player->status1 & STATUS1_SLEEP);
+```
+
+No engine change was needed. The scorer's valuation - the fixture's actual
+subject - was already correct and is now pinned together with the status it
+produces.
+
+This is worth remembering when reading any AI fixture: an `EXPECT_MOVE` that
+passes says the AI *chose* the move, not that the move resolved. Where the
+resolution matters, the board has to keep the chooser from being interrupted.
+
+## Numbers
+
+**105 passed, 0 failed, 105 total**; `pokeemerald.gba` builds clean; the
+headless ROM and its stamp untouched.
+
+Seeds 7 and 17 of the E0409 multi were confirmed by the coordinator on a
+headless ROM rebuilt from the multi-reserve commit - won in 10 turns and lost in
+9 - which closes the livelock item end to end.
