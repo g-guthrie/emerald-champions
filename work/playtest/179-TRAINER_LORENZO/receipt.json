@@ -1,0 +1,91 @@
+{
+  "play_order": 179,
+  "e_group": "E0255",
+  "trainer": "TRAINER_LORENZO",
+  "class": "ace",
+  "location": "Route120",
+  "cap": 54,
+  "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-4",
+  "party_manifests": ["work/playtest/179-TRAINER_LORENZO/party.json (attempt 1)", "work/playtest/179-TRAINER_LORENZO/party-v2.json (attempt 2)"],
+  "level_verification": "cap 54: Ogerpon +1 -> L53, Zangoose +1 -> L53, Nidoqueen +1 -> L53, Starmie +2 -> L54. All equal cap + offset - 2. --cap 54 correct.",
+  "attempts": [
+    {
+      "seed": 101,
+      "run_dir": "work/playtest/179-TRAINER_LORENZO/run-s1",
+      "party": "Ground/Water core (Garchomp / Excadrill / Alakazam / Azumarill / Amoonguss / Mega Swampert)",
+      "outcome": "lost",
+      "turns": 4,
+      "player_faints": 6,
+      "opponent_faints": 1,
+      "why_lost": "Type mismatch of my own making. Ogerpon's Ivy Cudgel and Horn Leech are Grass and Zangoose's Close Combat is Fighting; my core was Water/Ground and Steel/Ground, i.e. 2x or 4x to nearly all of it. Turn 1 alone cost me Garchomp (crit Ivy Cudgel) and a full-HP Excadrill (Close Combat). Horn Leech then healed Ogerpon back up twice. A 6-1 wipe."
+    },
+    {
+      "seed": 102,
+      "run_dir": "work/playtest/179-TRAINER_LORENZO/run-s2",
+      "party": "Flying-resist core (Mega Charizard Y / Togekiss / Magnezone / Excadrill / Amoonguss / Dragonite), rebuild reason in party-v2.json",
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.021
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Spiky Shield is a Protect that damages whoever tried to hit through it - a guard with a real payoff rather than a free read (the dossier's stated Protect standard for this campaign)",
+      "result": "PASS ON DENIAL, CONDITIONAL ON PAYOFF - and the condition matters more than the dossier admits",
+      "evidence": "Attempt 2 turn 1: Ogerpon used Spiky Shield and blocked BOTH a sun-boosted 2x Heat Wave from a Mega Charizard Y and a 2x Air Slash from Togekiss - almost certainly a KO denied on a 164 HP body, and the single highest-value guard I saw in twelve battles. But neither move makes contact, so the spikes did nothing: it functioned as an ordinary Protect. The dossier's own note that 'Spiky Shield's contact payoff is conditional' is correct and, from play, the condition is the common case at this stage - most of what threatens Ogerpon (Fire, Flying, Psychic, Ice special attacks) is non-contact."
+    },
+    {
+      "check": "Ogerpon's Defiant punishes Intimidate",
+      "result": "NOT_EXERCISED",
+      "evidence": "Neither of my parties carried Intimidate or any stat-dropping move, per the crack line."
+    },
+    {
+      "check": "Zangoose's Toxic Boost is credited only after Orb activation",
+      "result": "PASS",
+      "evidence": "Attempt 1, end of turn 1: 'The opposing Zangoose was badly poisoned!'. From turn 2 its Facade was clearly running at the boosted number - it contributed to KOing a full-HP 222 HP Assault Vest Azumarill in a single turn alongside Horn Leech. The orb-then-payoff sequencing is correct, and Zangoose is genuinely frightening once it is online."
+    },
+    {
+      "check": "Nidoqueen and Starmie give a fully special alternative against physical mitigation",
+      "result": "PASS",
+      "evidence": "Both attempts. Nidoqueen's Ice Beam KOed Amoonguss (2x into Grass) in attempt 1 and its Sheer Force Sludge Bomb was 2x into a Fairy in attempt 2; Starmie's Thunderbolt was 2x into two different Flying types in attempt 2 and KOed Mega Charizard Y. The special half of the roster does real, correctly-targeted work."
+    },
+    {
+      "check": "Starmie's Natural Cure means status never sticks to it",
+      "result": "NOT_EXERCISED",
+      "evidence": "Starmie was never statused - my only status move was Spore and it never got a turn against Starmie."
+    },
+    {
+      "check": "Horn Leech recovery",
+      "result": "PASS - and it is the reason attempt 1 was unwinnable",
+      "evidence": "Attempt 1: Ogerpon healed from 32 to 110 across two Horn Leech kills. Draining off a 2x target while KOing it is a very strong effect on a Life Orb body and it made Ogerpon effectively a three-Pokemon problem."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "attempt": 2,
+      "turn": 1,
+      "battler": "Ogerpon",
+      "call": "Spiky Shield",
+      "payoff": "EXCELLENT - blocked a 2x sun-boosted Heat Wave and a 2x Air Slash on the same turn, on the turn a double-target was most likely. No contact damage was returned because neither move makes contact. Denial value very high; the move's distinguishing effect did not apply."
+    }
+  ],
+  "consecutive_protect_risk": "none - one guard across two attempts and seven turns.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No bad opponent decisions in either attempt. Every target choice was correct: Ivy Cudgel into the Water/Ground Mega, Close Combat into the Steel, Ice Beam into the Grass type, Thunderbolt into the Flying types, Sludge Bomb into the Fairy.",
+    "Attempt 2 turn 1: Ogerpon reading the spread attack and guarding, while its partner attacked, is the coordinated behaviour that E0245's Toxicroak/Scizor pair failed to produce. Worth noting as the positive example.",
+    "Decision time peaked at 1.038 s."
+  ],
+  "player_mistakes": [
+    "Attempt 1: bringing a Ground/Water core into a Grass and Fighting trainer. My error, and the reason for the rebuild."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Lorenzo produced the most emphatic result of my whole block - a 6-1 wipe of a fully competitive six against a four-member route ace - and then still cost a Mega on the counter-built rematch. That is comfortably a real fight, and the dossier's claim that 'Lorenzo wins on raw quality' is demonstrably true. The win in attempt 2 was 4-1 rather than 4-3, but it came after a deliberate type-counter rebuild and I do not think a trainer that can 6-0 a good party should be raised because a targeted answer beat it. No offsets touched.",
+  "rerun": "not needed - no level change.",
+  "could_this_be_cooler": "Keep, emphatically. The dossier's self-criticism - 'four attackers share no support turn between them; Lorenzo wins on raw quality rather than on a plan' - turns out to understate the team and slightly misdiagnose it. Playing it, the plan IS the composition: two self-harming physical attackers whose drawbacks are also their engines (Life Orb Ogerpon draining it back with Horn Leech, Toxic Orb Zangoose converting poison into power) backed by a clean special pair for anything that walls physical damage. That is a plan, and it is a good one - the team covers both damage categories with no dead slot, which is more than most four-member trainers in this stretch manage.\n\nThe one improvement I would name is the opposite of adding support: Ogerpon's Spiky Shield is the team's signature move and its distinguishing effect almost never fires, because the things that threaten Ogerpon at this stage are special and non-contact. If the intent is for the guard to punish, Ogerpon's partner should be the one forcing contact - Zangoose already has Close Combat and Knock Off, so a player answering Zangoose physically walks into the spikes on the wrong turn. As it stands the interaction needs the player to cooperate. Either accept Spiky Shield as a flavourful Protect (which is fine, it is still an excellent guard) or give Ogerpon a partner that pressures the player into physical answers. Flagged, not changed.",
+  "authored_set_legality": "No legality problem. OGERPON_TEAL resolves with Defiant and a Grass-type Ivy Cudgel (no mask, no Tera assumption, exactly as the dossier requires), Toxic Boost, Sheer Force and Natural Cure all resolved as authored.",
+  "notes": "Two attempts on two deliberately different parties. Attempt 1's party is the same one that beat Hideo and Colin comfortably, which is the clearest evidence in my block that Lorenzo punishes composition rather than skill."
+}
