@@ -1,0 +1,32 @@
+{
+  "play_order": 104,
+  "e_group": "E0125",
+  "trainer": "TRAINER_LENNY",
+  "class": "regular",
+  "location": "Route114",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Exploud offset 0 -> L34, Mr. Mime +1 -> L35, Hakamo-o +5 -> L39, Noibat +6 -> L40, all equal 36 + offset - 2 (Medium). No --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/104-TRAINER_LENNY/party.json",
+  "attempts": [
+    {"n": 1, "seed": 104, "run_dir": "work/playtest/104-TRAINER_LENNY/a1", "kind": "optimized", "outcome": "won", "turns": 3, "decisions": 4, "player_faints": 3, "opponent_faints": 4, "note": "Won on Togekiss and Magnezone. Lost Weavile and Excadrill to Exploud's Fire Blast (one critical) and Incineroar to a Helping-Hand-boosted Brick Break."}
+  ],
+  "strategy_checks": [
+    {"check": "Scrappy Exploud's Boomburst hits Ghosts and pressures the field", "result": "NOT OBSERVED - and this is the headline finding", "evidence": "Boomburst was never used. On T1 the Choice Specs Exploud selected Fire Blast into my Weavile (Ice, 2x) and was then locked into it for the rest of its life; T2 it used Fire Blast again and KOed Excadrill through its Steel typing. Both choices were locally correct - Fire Blast was the higher-damage move against both targets - but the consequence is that the trainer's signature move, and the three abilities built around it, never appeared. See the cooler note; this is a design observation, not an AI defect."},
+    {"check": "Telepathy Noibat is immune to its ally's Boomburst", "result": "NOT OBSERVED", "evidence": "Noibat was KOed on T1 before Boomburst was ever used. Telepathy was live on its stat block."},
+    {"check": "Soundproof on Mr. Mime and Hakamo-o blanks the friendly Boomburst", "result": "NOT TESTED", "evidence": "Both abilities were live and correct on the stat blocks, but no sound move was used by either side in the whole battle, so neither had anything to be immune to."},
+    {"check": "Noibat sets Tailwind (the trainer's TAILWIND strategy flag)", "result": "FAIL (not reached)", "evidence": "Noibat's selected move on T1 was MOVE_TAILWIND - the correct choice - but it was KOed first by a 4x Triple Axel that broke its Focus Sash and killed it in the same turn. The team's speed control is on its most fragile member, and that member is 4x weak to a common Ice attacker."},
+    {"check": "Mr. Mime's Fake Out creates a turn for a partner (ALLY_COMBO)", "result": "PASS", "evidence": "T2 Fake Out flinched Excadrill, which then took Exploud's Fire Blast without acting and fainted. That is a clean two-Pokemon combination, and it is the turn that cost me my Steel resist."},
+    {"check": "Mr. Mime's Helping Hand converts into partner damage", "result": "PASS", "evidence": "T3 Helping Hand on Hakamo-o; the boosted Brick Break then KOed a full-HP 148 HP Incineroar. Mr. Mime spent both of its turns supporting rather than attacking, which is exactly the authored role."},
+    {"check": "Hakamo-o retains physical pressure behind Eviolite", "result": "PASS", "evidence": "T3 Brick Break, correctly aimed at the Dark-type Incineroar (2x) rather than at Magnezone. It went down to a 4x Dazzling Gleam, which is the printed counterplay."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Hakamo-o is the only Protect holder on this team and it never used it - it attacked on its single turn, correctly. No empty or repetitive guarding to report.",
+  "ai_defects": [],
+  "level_changes": [],
+  "level_decision": "KEEP. Brief rule 5: won with 3 player faints after a real fight, which is at the AGENTS.md target. No reduction (won on attempt 1) and no increase. I specifically considered whether Noibat at +6 (L40, four levels above the player cap) is mis-priced given it died on turn one without acting, and decided against touching it: it died to a 4x type matchup on a Focus Sash body, which is a build property, not a level property, and lowering it would make the problem worse while raising it would not save it. Flagged in the cooler note instead.",
+  "retest_status": "n/a - no level change.",
+  "cooler": "The concept is excellent on paper and it is the most thoughtfully-constructed ability web in my block: a Scrappy Boomburst that ignores Ghost immunity, a Telepathy partner so the spread does not hit the ally, and two Soundproof reserves so the rest of the team can switch in under it. That is four members all speaking to one move. The problem is that the move is on a Choice Specs user, and the Specs lock means Boomburst only ever happens if turn one happens to favour it. It did not, the AI correctly picked Fire Blast instead, and the entire ability web became decoration - Telepathy, Soundproof and Soundproof all sat inert for the whole battle while I never saw the thing the team is named after. Concrete suggestion for a later pass: take the Choice Specs off Exploud. A Life Orb or Throat Spray Exploud keeps every one of the four abilities meaningful on every turn and makes the Wide Guard on Mr. Mime a real decision, whereas the Specs actively suppress the team's own identity. Second, smaller idea: the speed control lives on Noibat, a 4x-Ice, Focus-Sash pre-evolution carrying the highest offset in my entire block (+6). If Tailwind is meant to happen, it should not be one Ice Shard away from never happening - Mr. Mime could carry it instead of Helping Hand, or Noibat could lead beside a body that threatens the Ice attacker.",
+  "authored_set_legality": "No legality problem found. Scrappy with Choice Specs, Telepathy with Focus Sash, and both Soundproof holders were live with the printed items. Exploud's Choice lock behaved correctly and was visible in its move selection.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
