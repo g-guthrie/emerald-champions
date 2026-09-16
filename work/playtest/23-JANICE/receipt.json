@@ -1,0 +1,42 @@
+{
+  "play_order": 23,
+  "e_group": "E0026",
+  "trainer": "TRAINER_JANICE",
+  "class": "casual",
+  "location": "Route116",
+  "cap_window": 14,
+  "observed_opponent_levels": {"TOGEDEMARU": 12, "MARILL": 16, "SWIRLIX": "15 (offset 3)", "CHEWTLE": "16 (offset 4)"},
+  "outcome": "WON on attempt 1, 6 turns, 2 player faints",
+  "party_manifest": "work/playtest/23-JANICE/party.json",
+  "run_dir": "work/playtest/23-JANICE/a1",
+  "attempts": [
+    {"seed": "0x2300", "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 4,
+     "player_faint_detail": "Lucario to Marill's Encore-locked Play Rough after Spiky Shield blocked its Close Combat and chipped it; Porygon-Z to Swirlix's Energy Ball after Life Orb recoil had worn it down.",
+     "note": "Weavile survived turn 1 only on its Focus Sash against a Huge Power Play Rough."}
+  ],
+  "strategy_checks": [
+    {"check": "Togedemaru opens with Fake Out or a useful Nuzzle", "result": "PASS (Fake Out)", "evidence": "Turn 1 chosen action: battler 1 MOVE_FAKE_OUT -> target 0. It lost the race to my faster Weavile and was flinched. Nuzzle was never used in three turns."},
+    {"check": "Spiky Shield requires a useful partner action or a survival payoff", "result": "PASS - both", "evidence": "Turn 3: Spiky Shield blocked Lucario's Close Combat, which is 2x into Electric/Steel, AND chipped Lucario on contact ('Lucario was hurt!'). On the same turn its partner Marill's Play Rough finished Lucario off. The guard bought a kill, not just a turn."},
+    {"check": "Lightning Rod redirects an Electric attack away from the Water partner", "result": "NOT TESTED - my sequencing error", "evidence": "I brought Porygon-Z specifically with Thunderbolt to test this. On turn 4 I aimed Thunderbolt at Marill, but Arcanine's Flare Blitz (2x on Steel) killed Togedemaru earlier in the same turn, so there was no Lightning Rod on the field to redirect and the Thunderbolt resolved on Marill for 2x. The test needs a turn where Togedemaru is guaranteed to survive."},
+    {"check": "Marill's Huge Power carries the physical damage", "result": "PASS", "evidence": "Play Rough took a full-HP 48 HP Weavile to its Focus Sash on turn 1 (Fairy is 2x on Dark) and killed a 48 HP Lucario on turn 3 at a neutral matchup. At level 16 it was the trainer's real threat."},
+    {"check": "Swirlix's Dazzling Gleam is foe-only spread damage", "result": "PASS", "evidence": "Turn 7: one Dazzling Gleam hit both Arcanine ('not very effective on Arcanine') and Snorlax ('A critical hit on Snorlax!') without touching its own side. Correct spread targeting, and the right move choice against two opponents."},
+    {"check": "Swirlix receives Unburden only after its Sitrus Berry is consumed", "result": "NOT CLEARLY OBSERVED", "evidence": "Swirlix entered on turn 6 at 48/48 and ended that turn at 20/48 (below the Sitrus threshold), then died on turn 7. No berry-consumption or speed-boost message appeared in the log window I captured, so neither the Sitrus trigger nor the Unburden hand-off was confirmed."},
+    {"check": "Chewtle's Strong Jaw biting moves", "result": "NOT OBSERVED", "evidence": "Chewtle selected MOVE_LIQUIDATION on turn 5 but was killed by a critical 2x Thunderbolt before it resolved. Liquidation is not a biting move, so Strong Jaw would not have applied to that choice anyway."},
+    {"check": "Thunderbolt is correctly absent from the authored sets", "result": "PASS (authoring)", "evidence": "The dossier retires Thunderbolt because an allied Lightning Rod would redirect it away from the intended foe and Togedemaru has no special attack to exploit the boost. Confirmed: no member carries an Electric attack."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS"}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Togedemaru", "payoff": "REAL and the best guard of the fight - Spiky Shield blocked a 2x Close Combat, chipped Lucario on contact, and its partner's attack killed Lucario the same turn. Exactly the 'useful partner action or actual survival payoff' the dossier asks for."},
+    {"note": "One opposing guard in six turns. No empty or repetitive guarding."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Clean, economical play for a casual-class trainer. The single Spiky Shield was the highest-value turn either side took, and Dazzling Gleam was correctly chosen as foe-only spread damage against two opponents.",
+    "Togedemaru never used Nuzzle in three turns on the field, including turn 2 when paralysing my Tailwind-boosted side would have been strong. Not scored as a defect - Fake Out and then Iron Head into a Steel-resisting Lucario are both defensible - but Nuzzle is the half of its support kit that never appeared."
+  ],
+  "level_changes": [],
+  "level_verdict": "KEEP. Brief rule 5: won with 2 player faints after a real fight. Noted for the main agent without applying it: Togedemaru is authored at level offset 0, making it level 12 against a cap of 14 - the lowest-level opponent anywhere in play_order 13-24. It still earned its keep through Spiky Shield, so I did not raise it, but if a later pass wants this casual battle to bite harder that is the obvious lever.",
+  "cooler_note": "Reasonably, yes. Lightning Rod beside two Water attackers is a real defensive idea, Spiky Shield is a more interesting guard than plain Protect, and the authoring note about retiring Thunderbolt because an allied Lightning Rod would eat it shows the team was thought through rather than assembled. The flat spot is Chewtle, which is a third physical Water body next to Marill and contributed nothing; Swirlix's Unburden is the more interesting reserve and it barely got to exist. Suggestion for a later pass, not applied here: give Swirlix the turns Chewtle is currently taking - lead Togedemaru with Swirlix so the Sitrus/Unburden hand-off actually happens behind a Spiky Shield, which is the memorable version of this team.",
+  "authored_set_legality": "No legality problem found.",
+  "not_finished": "Lightning Rod redirection, Nuzzle, Unburden and Strong Jaw are all still unexercised. The Lightning Rod test in particular should be repeated with a line that guarantees Togedemaru is alive when the Electric attack resolves."
+}
