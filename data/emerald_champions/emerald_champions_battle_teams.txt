@@ -129,9 +129,9 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Snubbull's Intimidate softens eligible attackers while Milcery selects Helping Hand or an active Fairy attack. Turn two should exploit a damage threshold or heal a relevant slot, not maintain two harmless supports. Alternate deployment: Snubbull and Furfrou offer a physical-pressure mode with U-turn positioning. Reserves & disruption: Slakoth is a one-hit reserve with an exit; Aroma Veil protects only its enumerated effects and is not a blanket anti-disruption shield. Counterplay & audit: Special offense, Defiant/Competitive, Taunt outside Aroma Veil's protected set, and targeting Milcery. Disposition: Keep the species identity; reject any AI trace that values pure durability above protecting an actual threat.
 crack: Special offense, Defiant/Competitive, Taunt outside Aroma Veil's protected set, and targeting Milcery. Disposition: Keep the species identity; reject any AI trace that values pure durability above protecting an actual threat.
-SNUBBULL @LUM_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 3 | PLAY_ROUGH, FIRE_PUNCH, THUNDER_WAVE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SNUBBULL @LUM_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 4 | PLAY_ROUGH, FIRE_PUNCH, THUNDER_WAVE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 MILCERY @EVIOLITE AROMA_VEIL BOLD 252/0/8/124/124/0 4 | DRAINING_KISS, DAZZLING_GLEAM, HELPING_HAND, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
-FURFROU @SITRUS_BERRY FUR_COAT CAREFUL 252/0/4/0/252/0 1 | DOUBLE_EDGE, U_TURN, SUCKER_PUNCH, SNARL | ivs=31/31/31/31/31/31 | friendship=255
+FURFROU @SITRUS_BERRY FUR_COAT CAREFUL 252/0/4/0/252/0 2 | DOUBLE_EDGE, U_TURN, SUCKER_PUNCH, SNARL | ivs=31/31/31/31/31/31 | friendship=255
 SLAKOTH @CHOICE_BAND TRUANT ADAMANT 252/252/4/0/0/0 6 | BODY_SLAM, HAMMER_ARM, RETALIATE, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0009 TRAINER_LYLE class=casual

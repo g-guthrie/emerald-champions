@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "play_order": 8,
+  "e_group": "E0008",
+  "trainer": "TRAINER_CINDY_1",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "SNUBBULL L15 @LUM_BERRY INTIMIDATE ADAMANT (Play Rough/Fire Punch/Thunder Wave/Helping Hand)",
+    "MILCERY L16 @EVIOLITE AROMA_VEIL BOLD (Draining Kiss/Dazzling Gleam/Helping Hand/Recover)",
+    "FURFROU L13 @SITRUS_BERRY FUR_COAT CAREFUL (Double-Edge/U-turn/Sucker Punch/Snarl)",
+    "SLAKOTH L18 @CHOICE_BAND TRUANT ADAMANT (Body Slam/Hammer Arm/Retaliate/Rock Slide)"
+  ],
+  "authored_strategy_flags": "NONE (ai: Conservative)",
+  "party_manifest": "work/playtest/08-CINDY_1/party-a1.json",
+  "party_summary": "Magearna* + Arcanine leading; Whimsicott / Iron Leaves* / Snorlax / Weavile reserve. Whimsicott entered and fainted.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 8001, "outcome": "won", "turns": 4, "decisions": 5,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.151,
+      "events": "work/playtest/08-CINDY_1/attempt-1-events.jsonl",
+      "narrative": "Both sides opened with Intimidate. T1 Flash Cannon (2x on Fairy) OHKOd Snubbull as it passed a Helping Hand to Milcery; Flare Blitz chipped Milcery. T2 Arcanine pivoted to Whimsicott to run the Aroma Veil probe. T3 Whimsicott's Prankster Taunt was blocked by Aroma Veil, and Whimsicott was then killed by a Helping-Hand-boosted Double-Edge; Flash Cannon removed Milcery. T4 Arcanine returned, Close Combat removed Furfrou and a Sp.Atk +3 Fleur Cannon removed the L18 Choice Band Slakoth before it acted."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Aroma Veil blocks its enumerated effects (Taunt) and is not a blanket shield",
+     "result": "PASS",
+     "evidence": "T3 Whimsicott used Prankster Taunt on Milcery: 'The opposing Milcery is protected by an aromatic veil!' - the move failed. Damage, stat drops and Intimidate all continued to apply to Milcery in the same fight, so the ability is behaving as the enumerated-effect shield the dossier describes rather than as general disruption immunity."},
+    {"check": "Fur Coat halves incoming physical damage",
+     "result": "PASS",
+     "evidence": "T4 Arcanine's Close Combat, a 120 BP Fighting move that is 2x on Normal, did 19 to a 54 HP L13 Furfrou. That is roughly half of what the same move does to comparable bulk without Fur Coat (compare the same Close Combat OHKOing L13/L15 targets earlier in this block)."},
+    {"check": "Snubbull's Intimidate softens eligible attackers while Milcery takes a useful support or attacking action",
+     "result": "PASS",
+     "evidence": "Intimidate landed on entry, and T1 Snubbull chose Helping Hand while Milcery used Draining Kiss - support plus an active Fairy attack, exactly the authored split rather than two harmless supports."},
+    {"check": "Turn two exploits a damage threshold or heals a relevant slot rather than maintaining two harmless supports",
+     "result": "PASS, and it converted",
+     "evidence": "T3 Milcery passed Helping Hand to Furfrou and the boosted Double-Edge killed Whimsicott outright. That is the fight's only KO and it came from the support chain the plan describes. Milcery also correctly did not spend the turn on Recover while a kill was available."},
+    {"check": "Sucker Punch is used only when a damaging move is incoming",
+     "result": "PASS", "evidence": "T4 Furfrou's Sucker Punch resolved and dealt damage rather than failing, so a damaging move was genuinely incoming when it was selected."},
+    {"check": "Truant forces Slakoth to loaf on alternate turns",
+     "result": "NOT TESTED",
+     "evidence": "Slakoth entered on T3 as a forced replacement and was OHKOd on T4 by a Sp.Atk +3 Fleur Cannon before taking a single action. The Choice Band lock is likewise unverified."},
+    {"check": "Lum Berry cures a status on Snubbull",
+     "result": "NOT TESTED", "evidence": "I used no status move; Snubbull was OHKOd on T1."},
+    {"check": "Milcery's Recover sustains the wall",
+     "result": "NOT TESTED", "evidence": "Recover was never selected. Milcery took 16 on T1 and was then OHKOd from 39 by a boosted Flash Cannon on T3, so there was no turn where Recover was the better action."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.151 s maximum."}
+  ],
+  "protect_ledger": [],
+  "empty_protects": 0,
+  "protect_note": "No member of this team carries Protect, so there is nothing to review. Worth noting for the design side: this is the only team in the block with no Protect anywhere, and it still produced the cleanest support-into-kill sequence of the block.",
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "The Helping Hand chain is the point of this team and it worked: Snubbull passed to Milcery on T1 and Milcery passed to Furfrou on T3, and the second pass converted a Double-Edge into a kill on a 53 HP Whimsicott.",
+    "The dossier's disposition line asks the AI to 'reject any trace that values pure durability above protecting an actual threat'. Milcery had Recover available on the turn it instead passed Helping Hand into a kill. That is the exact behaviour the line asks for and it is worth recording as a pass, not just an absence of failure."
+  ],
+  "driver_caveats": [
+    "The driver's `chosen` field is populated from the post-turn `previous_turn` block. On an act that does not advance the turn counter - a forced replacement, or the action that ends the battle - it reports the PREVIOUS turn's selections and is therefore stale. In this run it showed 'Slakoth used Helping Hand', a move Slakoth does not have, carried over from Milcery in the same battler slot. The `messages` list is the reliable record of what actually happened. Flagged so later agents do not log a phantom illegal move as an AI defect."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 1 player faint and no sustained threat -> +1 on the weakest one or two members, never the ace first.",
+    "changes": [
+      {"member": "FURFROU", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14},
+      {"member": "SNUBBULL", "offset_before": 3, "offset_after": 4, "level_before": 15, "level_after": 16}
+    ],
+    "unchanged": [
+      {"member": "SLAKOTH", "offset": 6, "reason": "the ace, and already the highest-level opponent in the block at L18"},
+      {"member": "MILCERY", "offset": 4, "reason": "the designated wall and the member that produced the fight's only KO"}
+    ],
+    "reasoning": "Furfrou is the lowest member and it is also the one that actually converted the support chain, so a level makes the team's working plan more dangerous rather than propping up a dead slot. Snubbull is raised because it was OHKOd from full HP by a single 2x Flash Cannon before its Intimidate/Thunder Wave/Lum Berry package could matter for more than one turn.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "Mostly yes already. One slot is doing nothing the fight can reach.",
+    "keep": "Two Helping Hand users feeding a physical finisher, behind an Aroma Veil wall that cannot be Taunted, is a coherent and slightly wicked support identity, and it is the only team in this block that killed something through a support chain rather than through raw typing.",
+    "suggestion": "Slakoth is a L18 Choice Band Truant behind three supports, which means in practice it arrives as the last mon, is locked into one move, and loafs on half its turns. In a four-mon fight it will usually act once or - as here - not at all. Either move it forward so the Truant rhythm is something the player has to play around for several turns, or replace it with a finisher that can actually use the two Helping Hands it will never live to receive.",
+    "second_thought": "Three Fairies plus a Normal means Magearna, or any Steel, walls the entire special side. Giving Milcery or Snubbull one coverage move that threatens Steel - Snubbull already has Fire Punch, so this is close - would stop a single Steel lead from deciding the matchup.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": ["Pool chronology caveat carried from play_order 1."]
+}
