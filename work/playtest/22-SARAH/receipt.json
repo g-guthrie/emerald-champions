@@ -1,0 +1,47 @@
+{
+  "play_order": 22,
+  "e_group": "E0025",
+  "trainer": "TRAINER_SARAH",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "ai_profile": "Conservative",
+  "observed_opponent_levels": {"SPRITZEE": 16, "GOTHITA": 16, "TRAPINCH": "13 (offset 1)", "BALTOY": "16 (offset 4)"},
+  "outcome": "WON on attempt 1, 10 turns, 5 player faints - won with one member left at 14/81",
+  "party_manifest": "work/playtest/22-SARAH/party.json",
+  "run_dir": "work/playtest/22-SARAH/a1",
+  "party_change_reason": "Arcanine was deliberately excluded: its Intimidate would hand Gothita a free Competitive +2 Special Attack on switch-in. Ludicolo replaced it to answer the two Ground members.",
+  "attempts": [
+    {"seed": "0x2200", "outcome": "won", "turns": 10, "player_faints": 5, "opponent_faints": 4,
+     "player_faint_detail": "Weavile, Whimsicott, Lucario, Ludicolo and Porygon-Z. Snorlax finished alone at 14/81 after a Protect turn that ran out the second Trick Room.",
+     "note": "The hardest fight in this block by a wide margin, and the only one where losing was a live possibility for several turns."}
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room is up on turn 1 or 2", "result": "PASS - turn 1", "evidence": "Spritzee chose MOVE_TRICK_ROOM on turn 1 and the field state read STATUS_FIELD_TRICK_ROOM from that turn on. The contrast with Marlene (E0019), whose Spoink declined the same move, is stark: here the setter had a healthy board and took the -7 priority turn."},
+    {"check": "Trick Room is renewed when it expires", "result": "PASS - turn 6", "evidence": "The first room expired at the end of turn 5. On turn 6 Spritzee, at 12/66 HP, set Trick Room again rather than attack or guard. It then died on turn 7 having spent its last useful turn on the room. Baltoy, the authored reserve setter, was never needed for renewal."},
+    {"check": "Gothita's Competitive punishes a stat drop", "result": "PASS - and it decided a kill", "evidence": "Turn 4: Snorlax's Crunch lowered Gothita's Defense, Competitive raised its Sp. Atk sharply, and the boosted Psychic on the same turn killed a full-HP 48/48 Lucario THROUGH a 0.5x Steel resistance. This is the single most impressive authored interaction I saw in the block."},
+    {"check": "Gothita uses priority Helping Hand for a partner damage threshold", "result": "PASS", "evidence": "Turn 5: Gothita, at 7/55 and about to die, chose MOVE_HELPING_HAND on Spritzee instead of attacking. The boosted Moonblast took Ludicolo from 50 to 20. Correct triage on its last turn."},
+    {"check": "Trapinch's Earthquake is reappraised beside its partner", "result": "PASS - textbook", "evidence": "Turns 8 and 9: Trapinch used Earthquake with Baltoy beside it and the log reads 'It doesn't affect the opposing Baltoy...' - Levitate made the spread move free. The authored caveat says Earthquake must be reappraised beside a grounded or ability-suppressed partner; the AI correctly treated an airborne partner as safe and took the spread damage both times, killing Porygon-Z with a critical hit."},
+    {"check": "All four members have zero Speed IVs so the room is a real slow mode", "result": "PASS", "evidence": "Under Trick Room, Spritzee and Gothita both moved before my Jolly max-Speed Weavile and Timid max-Speed Whimsicott, and Trapinch moved before my Adamant zero-Spe-EV Snorlax. Once the room lapsed on turn 10 the order inverted correctly and Snorlax moved first."},
+    {"check": "Trapinch's First Impression works only on its entry turn", "result": "NOT OBSERVED - defensible", "evidence": "Trapinch entered on turn 8 and chose Earthquake rather than First Impression. Under the active Trick Room it was the slowest battler and so moved first anyway, which removes First Impression's priority value, and Earthquake hit both of my members while its Levitate partner was immune. Choosing the spread move was the better action; the authored constraint was simply never put to the test."},
+    {"check": "Arena Trap restricts eligible grounded foes", "result": "NOT TESTED", "evidence": "I never attempted a voluntary switch while Trapinch was on the field."},
+    {"check": "Aroma Veil blocks eligible disruption", "result": "NOT TESTED here", "evidence": "I never attempted Taunt or Encore into Spritzee. The same ability was verified against Joey's Lechonk in work/playtest/16-JOEY/receipt.json."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Gothita", "payoff": "REAL - blocked Weavile's Knock Off, which is 2x into Psychic and would have stripped its Eviolite, while its partner spent the turn setting Trick Room."},
+    {"turn": 6, "battler": "Baltoy", "payoff": "REAL - on its entry turn it blocked Snorlax's Crunch, which is 2x into Ground/Psychic, while its partner renewed Trick Room."},
+    {"note": "Two opposing Protects in ten turns, both timed to cover a Trick Room turn. No empty or repetitive guarding."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "This is the best AI performance in the block. The room went up on turn 1, was renewed the turn after it lapsed by a member at 12/66 HP, both Protects covered a set-up turn, Helping Hand was spent on the correct dying turn, and Earthquake was correctly priced as free next to a Levitate partner.",
+    "Both times Trick Room was active the pair focus-fired one of my members down in a single turn (Weavile on turn 2, Whimsicott on turn 3) rather than splitting damage. That is the right use of a speed reversal and it is what actually beat me down to one member.",
+    "Directly comparable to E0019 Marlene, whose single Trick Room carrier declined the move on a board that wanted it. Same mechanic, opposite outcome, so the E0019 finding is about that specific decision rather than a broken Trick Room path."
+  ],
+  "level_changes": [],
+  "level_verdict": "KEEP, emphatically. Brief rule 5: won after a real fight with 5 player faints - well past the AGENTS.md 'at least three faints against a well-prepared competitive party' bar. If anything this trainer sits at the top of the acceptable range for a cap-14 route battle; I would not add a level, and I would look here first if a later pass decides the early game is too punishing.",
+  "cooler_note": "Yes - this is the coolest and best-executed team in play_order 13-24 and I would not change a thing. Four zero-Speed-IV bodies behind a turn-1 Trick Room, with a Competitive punisher that turns your own stat-drop move against you and a Levitate partner that makes the spread attacker's Earthquake free, is a genuine competitive package rather than a themed list. Trapinch at level 13 is the only soft spot and it still killed Porygon-Z on entry. Worth holding up as the reference for what the other route trainers in this block should aspire to.",
+  "authored_set_legality": "No legality problem found. The zero Speed IVs on all four members are correctly materialized.",
+  "not_finished": "Arena Trap and First Impression were never exercised; Aroma Veil was not re-tested here."
+}
