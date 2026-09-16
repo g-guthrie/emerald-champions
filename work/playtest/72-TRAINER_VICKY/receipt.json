@@ -1,0 +1,50 @@
+{
+  "play_order": 72,
+  "e_group": "E0080",
+  "trainer": "TRAINER_VICKY",
+  "class": "ace",
+  "location": "Route111",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"PAWMOT": 27, "MACHAMP": 26, "TOGETIC": 31, "SAWK": 27},
+  "cap_window_confirmation": "Dossier seeds 29/28/33/29 resolved to 27/26/31/27 = cap 30 + offset - 2 (Medium). Cap 30 confirmed, and this closes the cap-30 window for my block.",
+  "party_manifest": "work/playtest/72-TRAINER_VICKY/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, led by Mega Gardevoir + Togekiss because Psychic/Fairy and Fairy/Flying both take Fighting at 0.25x. All source maps precede Route 111. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Pawmot and Machamp lead with immediate Fake Out and No Guard pressure",
+    "Pawmot uses Double Shock, accepting that it loses its Electric typing until reset",
+    "Machamp uses Wide Guard against my spread attacks rather than Bulk Up",
+    "Togetic works as the reserve protector with Follow Me",
+    "Sawk closes as an independent physical finisher",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/72-TRAINER_VICKY/a1", "seed": 72, "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "T1 Pawmot's Fake Out flinched my freshly Mega-Evolved Gardevoir, exactly as authored; my Togekiss's Air Slash critted for 2x into Fighting and removed Machamp from full before it could fire the Stone Edge it had selected. T2 was Vicky's best turn and it cost me a 119 HP Pokemon: Togetic used Helping Hand on Pawmot, and the boosted Double Shock - Electric, 2x into my Flying-type Togekiss - KO'd it from full, with the message confirming Pawmot 'used up all its electricity' and dropped to pure Fighting. My Hyper Voice left Pawmot on its Focus Sash at 1. T3 Togetic Protected through a 2x Flash Cannon and a Hyper Voice while Pawmot died. T4 Togetic used Follow Me and died to Flash Cannon; Sawk's Sturdy let it endure my Hyper Voice at 1 HP and its Poison Jab, 2x into Fairy, poisoned my Mega Gardevoir, which then died to the poison at end of turn. T5 Nidoking's Earth Power finished the 1 HP Sawk."}
+  ],
+  "strategy_checks": [
+    {"check": "Pawmot and Machamp lead with Fake Out and No Guard pressure", "result": "PASS on the lead and the Fake Out, NOT EXERCISED on No Guard", "evidence": "The authored leads were the actual leads, and Pawmot's first action was Fake Out into my Mega Gardevoir, which flinched. Machamp selected Stone Edge - a move whose 80 percent accuracy is exactly what No Guard is for - but died to a critical Air Slash before it resolved, so No Guard never actually mattered and Dynamic Punch was never used."},
+    {"check": "Pawmot uses Double Shock", "result": "PASS", "evidence": "T2, and it was the correct read: Double Shock is Electric and my Togekiss is Flying, so it was 2x, and with Togetic's Helping Hand behind it, it one-shot a 119 HP Pokemon. The typing cost landed as the dossier describes - 'The opposing Pawmot used up all its electricity!' - leaving it as a pure Fighting-type, which is why my Hyper Voice was still 2x into it afterwards. Spending its typing to get a KO was clearly worth it."},
+    {"check": "Machamp uses Wide Guard", "result": "NOT EXERCISED", "evidence": "Machamp had one selection (Stone Edge) and was KO'd before acting. Wide Guard was never used. Worth noting it would have been genuinely valuable against my party - Hyper Voice was my main move all fight - so this is a real loss for the team rather than a redundant slot."},
+    {"check": "Togetic works as the reserve protector", "result": "PASS, and it was the team's most valuable member", "evidence": "Three actions, three good ones: Helping Hand on T2 that directly produced the Togekiss KO, Protect on T3 that blocked a 2x Flash Cannon and a Hyper Voice, and Follow Me on T4. It is the only member above the cap at +3 and it earned that level."},
+    {"check": "Sawk closes as an independent finisher", "result": "PASS", "evidence": "Sturdy survived my Hyper Voice at 1 HP and Sawk used that turn to land Poison Jab, which is 2x into Fairy and poisoned my Mega Gardevoir - the residual damage then killed it at end of turn. A level-27 Pokemon on 1 HP taking a Mega with it is a good last act. The Fighting Gem and Close Combat were never used."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "One Protect, on T3 by Togetic, blocking two attacks including a 2x Flash Cannon. See the ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "TOGETIC", "payoff": "REAL. It blocked a Magearna Flash Cannon that is 2x into Fairy and a Pixilate Hyper Voice. It did not save its partner - Pawmot was on 1 HP behind a spent Focus Sash and died to the same Hyper Voice - but Togetic itself was the team's most useful Pokemon and buying it another turn was correct; it went on to use Follow Me the next turn. No repetition, genuine damage denied."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "No defects. Vicky's turn 2 is the clearest example of two-slot coordination in my block after Lydia's Icy Wind stack: the AI chose Helping Hand on the redirector rather than Follow Me, specifically so that its partner's super-effective move became a one-shot on a 119 HP body. Choosing the support move that converts over the support move that protects, on the turn the conversion is available, is a genuinely good decision.",
+    "Two of my six died to this team, and both faints came from correct type reads by level-26-to-27 Pokemon against a level-30 party - Double Shock into a Flying-type and Poison Jab into a Fairy-type. This is a well-built team punching above its levels.",
+    "I lost Machamp to a critical hit on turn 1, which cost the team its Wide Guard and its No Guard Dynamic Punch. On a different roll this fight is meaningfully harder, and I want that noted against the level decision below.",
+    "Decision timing was the fastest in the block (max 62 frames on turn 0, 18-22 thereafter)."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. Two player faints out of six, both produced by the team's own authored machinery rather than by chip damage, and the fight was decided by a turn-1 critical hit in my favour that removed the Wide Guard body before it acted. On a normal roll this is harder than the five turns suggest.",
+    "changes": []
+  },
+  "could_this_be_cooler": "Keep it. As the closing leg of the Winstrate family this does its job well - after Victor's blunt Normal-types, Victoria's dancers and Vivi's Contrary garden, a coordinated Fighting trio behind a Fairy redirector is a clean final statement, and the dossier's stated intent of 'coordinated attacks rather than another redirector-plus-setup opening' is exactly what I experienced. Togetic at +3 being the highest-levelled member of a team of Fighting-types is a nice inversion and it is the member that actually beat me. The one thing I would change is Sawk, and only its item: it carries a Fighting Gem, which is a one-use consumable for a single Close Combat, and the moves that actually earned it a place in this fight were Poison Jab (into a Fairy) and its Sturdy. A Sitrus Berry or an Assault Vest would let it survive to be the finisher the dossier calls it, rather than dying at 1 HP with its gem unused - it never got to throw the Close Combat the gem exists for. Everything else I would leave alone, and I would specifically resist the temptation to raise Machamp: at -2 it is the level floor, but the reason it did nothing here is that it took a critical hit, not that it was under-levelled.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
