@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "C19-C20 E0082 Bianca (Route 111); cap 30 core party",
+  "availability_audit": "Reuses the already-audited cap-30 Route 110 core, every member of which is sourced at or before Route 110 and therefore before this Route 111 battle. GARDEVOIR (Ralts wild Route102 gate 14 -> Kirlia L20 -> Gardevoir L30) with ITEM_GARDEVOIRITE (stone-window 14; Mega Ring earned from Steven after Brawly). MAGEARNA (legendary_sign RustboroCity_DevonCorp_2F, gate 14; declared reachable legend). KARTANA (wild PetalburgWoods_3, gate 20). TOGEKISS (Togepi Route102 -> Togetic friendship -> Shiny Stone, Slateport Mart, gate 24). WEAVILE (Sneasel wild Seaspray_Cave_B1F gate 14, condition evolution). NIDOKING (Nidoran-M wild Route101 gate 14 -> Nidorino -> Moon Stone, gate 20). Deliberately excluded as not yet reachable at this point in play order: every NewMauville source (Zapdos, Regieleki, Zekrom, Zeraora, Magnezone, Iron Hands, Eelektross, Meltan/Melmetal) because the book gates New Mauville behind Surf in C28, and every Route111 desert species (Trapinch/Gible/Hippopotas/Sandaconda/Silicobra/Cacnea/Stonjourner) because the Go-Goggles arrive in C23. One reachable legend (Magearna) and one Mega (Gardevoir) are used and declared.",
+  "plan": "Lead Mega Gardevoir + Weavile: Pixilate Hyper Voice is spread damage the Grass forest has no resist to, and Fake Out denies the Choice Band Sudowoodo its first Head Smash. Mystical Fire and Fleur Cannon punish the bulky Grass reserves; Kartana Smart Strike and Nidoking Sludge Wave are the Poison/Steel pressure the dossier names as the crack.",
+  "party": [
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_PSYCHIC",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Mega Pixilate spread attacker",
+      "availability": "pool-30: evolution:level from SPECIES_KIRLIA (gate 30); mega:ITEM_GARDEVOIRITE stone-window=14"
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        132,
+        0,
+        124,
+        0
+      ],
+      "role": "redirection, Tailwind, Serene Grace flinch pressure",
+      "availability": "pool-30: evolution:item:ITEM_SHINY_STONE from SPECIES_TOGETIC (gate 24)"
+    },
+    {
+      "species": "SPECIES_MAGEARNA",
+      "moves": [
+        "MOVE_FLEUR_CANNON",
+        "MOVE_FLASH_CANNON",
+        "MOVE_THUNDERBOLT",
+        "MOVE_AURA_SPHERE"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "bulky Steel/Fairy Soul-Heart attacker (Assault Vest, so no Protect slot)",
+      "availability": "pool-30: legendary_sign:RustboroCity_DevonCorp_2F (gate 14); reachable legend"
+    },
+    {
+      "species": "SPECIES_KARTANA",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SMART_STRIKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_BEAST_BOOST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fast Grass/Steel/Fighting physical attacker",
+      "availability": "pool-30: wild:PetalburgWoods_3/land_mons (gate 20)"
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Fake Out disruption, item removal and Ice priority",
+      "availability": "pool-30: evolution:level/condition from SPECIES_SNEASEL (gate 14), Sneasel wild:Seaspray_Cave_B1F"
+    },
+    {
+      "species": "SPECIES_NIDOKING",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_ICE_BEAM",
+        "MOVE_THUNDERBOLT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "recoil-free Sheer Force special coverage: Ground, Poison, Ice, Electric",
+      "availability": "pool-30: evolution:item:ITEM_MOON_STONE from SPECIES_NIDORINO (gate 20), Nidoran-M wild:Route101"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+ "play_order": 73,
+ "e_group": "E0082",
+ "trainer": "TRAINER_BIANCA",
+ "class": "regular",
+ "location": "Route111",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "SUDOWOODO": 28,
+  "PUMPKABOO_AVERAGE": 33,
+  "SKIDDO": 33,
+  "BELLOSSOM": 29
+ },
+ "cap_window_confirmation": "Dossier seeds 30/35/35/31 resolved to 28/33/33/29, i.e. cap 30 with the Medium -2. Confirms the live cap window for play_order 73 is 30, matching the E0082-E0092 dossier prose.",
+ "party_manifest": "work/playtest/73-TRAINER_BIANCA/party.json",
+ "party_pool_audit": "Reuses the already-audited cap-30 Route 110 core (Mega Gardevoir, Togekiss, Magearna, Kartana, Weavile, Nidoking); every source map is at or before Route 110 and therefore before this battle on Route 111. Explicitly excluded as not yet reachable: all NewMauville sources (the book gates New Mauville behind Surf in C28) and all Route 111 desert species (Go-Goggles arrive in C23). One reachable legend (Magearna) and one Mega (Gardevoir, stone-window 14) declared.",
+ "pre_declared_strategy_checks": [
+  "Sudowoodo's Choice Band Head Smash fires with no recoil (Rock Head) and the Choice lock is respected afterwards",
+  "Pumpkaboo uses its disruption (Leech Seed / Will-O-Wisp) rather than only chip damage, and Insomnia is not wasted",
+  "Skiddo converts a bought turn into Bulk Up or Milk Drink sustain, and Sap Sipper is not fed",
+  "Bellossom uses Pollen Puff / Helping Hand as real support or as correct offence, and Healer is not treated as a promised cure",
+  "Every opposing Protect has a concrete payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/73-TRAINER_BIANCA/a1",
+   "seed": 73,
+   "outcome": "won",
+   "turns": 4,
+   "driver_turn_counter": 3,
+   "player_faints": 1,
+   "opponent_faints": 4,
+   "narrative": "T1 Mega Gardevoir Hyper Voice (Pixilate spread) plus Togekiss Air Slash removed Eviolite Pumpkaboo outright; Pumpkaboo had already spent its action on Shadow Sneak into Gardevoir (2x on Psychic) and Sudowoodo's Choice Band Head Smash KO'd Togekiss (2x on Flying) from full. T1.5 replacement: Weavile in, Bianca sent Skiddo. T2 Ice Shard finished the 12 HP Sudowoodo before it could move again; Skiddo Protected and blocked a 2x Mystical Fire. T3 Mystical Fire plus Triple Axel removed Bellossom the turn it arrived; Bellossom's Pollen Puff (2x on Dark) and Skiddo's Horn Leech left Gardevoir on 4/90. T4 Triple Axel KO'd Skiddo through Eviolite before it moved."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Sudowoodo recoil-free Choice Band Head Smash",
+   "result": "PASS",
+   "evidence": "T1 Head Smash KO'd a full-HP 119 HP Togekiss with no recoil message; T2 the only legal move listed for Sudowoodo was MOVE_HEAD_SMASH, so the Choice lock is real."
+  },
+  {
+   "check": "Pumpkaboo disruption (Leech Seed / Will-O-Wisp)",
+   "result": "PARTIAL",
+   "evidence": "T1 it chose Shadow Sneak into the Mega Gardevoir (2x on Psychic) rather than Leech Seed. That is a defensible pick against a frail 90 HP special threat it could not outspeed, but it died on T1 so neither Leech Seed, Will-O-Wisp nor Insomnia was ever exercised. Not a defect, but the disruption half of the design went untested."
+  },
+  {
+   "check": "Skiddo Bulk Up / Milk Drink sustain, Sap Sipper not fed",
+   "result": "PARTIAL",
+   "evidence": "Skiddo used Protect (T2) then Horn Leech (T3) then died. It never took Bulk Up or Milk Drink. Both were reasonable given the board (it was at 117/117 on T2 and 73/117 facing lethal on T4), so this is untested rather than wrong. Sap Sipper was correctly never fed - I deliberately withheld Kartana's Leaf Blade."
+  },
+  {
+   "check": "Bellossom support / correct offence",
+   "result": "PASS",
+   "evidence": "T3, the turn it arrived, it used Pollen Puff offensively on Weavile (Bug 2x on Dark) rather than a pointless Helping Hand into an already-committed board, and with no status on the field Healer had nothing to cure. Correct choice; it simply arrived into lethal."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "One Protect all battle - Skiddo T2 - and it blocked a 2x Mystical Fire from a 165-SpA Mega Gardevoir. Real payoff, no empty or repeated guarding."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 2,
+   "battler": "SKIDDO",
+   "payoff": "blocked Mega Gardevoir's Mystical Fire, 2x super effective; partner Sudowoodo was already at 12 HP and lost to priority regardless, but the guard itself saved roughly half of Skiddo's bar"
+  }
+ ],
+ "ai_defects": [],
+ "level_changes": [
+  {
+   "member": "SUDOWOODO",
+   "field": "level offset",
+   "before": 0,
+   "after": 1,
+   "reason": "First-attempt win in four turns with one player faint, which is under the three-faint review threshold. Sudowoodo is the team's lowest at L28 and Choice Band Head Smash is its whole identity; it got exactly one hit and that hit only looked scary because it landed on a 2x-weak Togekiss. +1 makes its single locked hit matter against a neutral target."
+  },
+  {
+   "member": "BELLOSSOM",
+   "field": "level offset",
+   "before": 1,
+   "after": 2,
+   "reason": "Second-lowest at L29 and the member that contributed least - it arrived on T3 into lethal and was removed the same turn, so its Helping Hand/Healer support role never happened. Pumpkaboo and Skiddo are already at offset 5 and are not touched."
+  }
+ ],
+ "rerun_note": "Not rerun. A level-offset change only reaches the ROM through scripts/emerald_champions_teams.py --write plus a rebuild, and this block is forbidden from running make; the main agent materializes and builds. This matches the established pattern in the receipts for play_order 57, 58 and 59.",
+ "could_this_be_cooler": "The concept - a 'strange forest' of odd plants with a genuine healer - is sound and I would keep the species. The defect is that the team has no way to buy the turns its own plan needs. Pumpkaboo is built as a disrupter with Leech Seed and Will-O-Wisp but has 33 base Speed and no redirection or priority support, so against anything fast it dies before disrupting anything, exactly as it did here. The concrete suggestion (not applied this pass): give Bellossom Rage Powder in place of Helping Hand. It is thematically perfect for a flower, it is the one move that would let the slow Eviolite Pumpkaboo actually land a Leech Seed and a Will-O-Wisp, and it turns Bellossom from a member that died doing nothing into the piece the whole forest is built around - while keeping the honest counterplay the crack line already names (Grass typing and Overcoat ignore powder, and Taunt shuts it off).",
+ "authored_set_legality": "No legality problem found. All four members' moves, abilities and items validated through the native preparation API and the battle ran clean."
+}
