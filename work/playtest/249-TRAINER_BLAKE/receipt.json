@@ -1,0 +1,57 @@
+{
+  "play_order": 249,
+  "e_group": "E0390",
+  "trainer": "TRAINER_BLAKE",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Meowstic-M / Meowstic-F / Farigiraf / Mr. Mime / Mr. Rime (+1) at L75, Starmie (+2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/249-TRAINER_BLAKE/party_gym76_blake.json"],
+  "chronology_note": "Same six as the gym party (same cap-76 audit: Incineroar 36, Urshifu-Single 42, Gengar 30 + Gengarite 60, Hydreigon 68, Weavile 14, Zapdos 30), reordered so Hydreigon and Zapdos lead: a build-6 start (discarded, unplayed, when the build-7 instruction arrived) showed Intimidate handing the female Meowstic +2 Sp. Atk on turn 0, which is exactly what the crack line says not to do.",
+  "pre_play_strategy_checks": [
+    "Prankster Reflect or Light Screen goes up turn 1 before my attack",
+    "Competitive: a stat drop gives the female Meowstic +2 Sp. Atk",
+    "Armor Tail blocks a priority move aimed at Blake's side while Farigiraf is out",
+    "Ally Switch (Mr. Mime, Mr. Rime) redirects a committed attack",
+    "Screen Cleaner must not erase Blake's own screens",
+    "Analytic Starmie deals late damage; Farigiraf Trick Room",
+    "Protect ledger"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 11,
+      "build": "work/agent-battle-build-7",
+      "run_dir": "work/playtest/249-TRAINER_BLAKE/a1",
+      "party": "party_gym76_blake.json (Hydreigon / Zapdos lead; Gengar / Incineroar / Weavile / Urshifu-Single)",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "Doubled the Prankster setter turn 1: Light Screen went up first, then Dark Pulse + Thunderbolt removed the male Meowstic through it. Turn 2 the same pair removed the female Meowstic, but her Psychic dropped Zapdos's Sp. Def and Farigiraf's Psychic finished Zapdos the same turn. Turn 3 Blake switched Farigiraf out to Starmie against two Psychic-immune bodies (a good read), Mr. Mime's 4x Dazzling Gleam erased Hydreigon before it moved, and my Fake Out landed on the incoming Starmie. Sucker Punch then KOed Life Orb Starmie on turn 4 before it could Hydro Pump Incineroar, Knock Off left sashed Mr. Mime on 1 HP, and turn 5 Wicked Blow and Knock Off took Mime and Farigiraf before either acted. Mr. Rime entered last and its own Screen Cleaner erased Blake's Light Screen; Wicked Blow ended it."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Prankster screen turn 1", "result": "PASS", "evidence": "turn 1: 'Meowstic used Light Screen' resolved before either of my attacks; SIDE_STATUS_LIGHTSCREEN on the opponent side from turn 1 through turn 5. Dark Pulse on the male Meowstic dealt about half its unscreened value."},
+    {"check": "Competitive +2 on a stat drop", "result": "PASS (from the discarded build-6 start)", "evidence": "turn 0 of the discarded start with Incineroar leading: Meowstic-F showed stat_stages spa +2 and atk -1 immediately after Intimidate. In the played run I led without Intimidate and the trigger never occurred."},
+    {"check": "Armor Tail blocks priority", "result": "NOT TESTED", "evidence": "Turn 3 I aimed Fake Out at Farigiraf to test it, but Blake switched Farigiraf out first and Fake Out hit the incoming Starmie. Farigiraf's second stint (turn 4-5) faced no priority move; both my priority users were spent on other targets."},
+    {"check": "Ally Switch redirects", "result": "FAIL", "evidence": "Mr. Mime had two decisions (Dazzling Gleam into Hydreigon, Dazzling Gleam into Urshifu) and Mr. Rime none (KOed on its first turn before acting). Ally Switch was never selected. Mime's choices were the highest-damage plays each time, so this is 'never selected', not 'wrongly skipped'."},
+    {"check": "Screen Cleaner does not erase own screens", "result": "FAIL (set design, not AI)", "evidence": "turn 5: 'Blake sent out Mr. Rime' then 'All screens on the field were cleansed!' with Light Screen still active on Blake's side (turn 5 of 8 under Light Clay). Screen Cleaner is an entry ability; the AI has no way to withhold it other than not deploying Rime, and Rime was the last body left. See defect E0390-1."},
+    {"check": "Farigiraf Trick Room / Analytic Starmie", "result": "NOT SEEN", "evidence": "Farigiraf's decisions: Psychic (KOed Zapdos), a switch-out, Hyper Voice (died before it resolved). Trick Room never selected. Starmie flinched to Fake Out on entry and was KOed by Sucker Punch on its second turn; Analytic never mattered."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "No opponent Protect in the battle. Meowstic-F chose Psychic twice with Protect available; Mr. Rime died before acting. Not a defect: the Psychics were both strong plays.",
+  "ai_defects": [
+    {"id": "E0390-1", "turn": "a1 turn 5 (entry)", "board": "Blake's Light Screen had three turns left; Mr. Rime was the only reserve", "chosen": "Sent out Mr. Rime (forced) and Screen Cleaner erased Blake's own Light Screen", "better": "This is a set/roster defect rather than a decision: the plan text says the AI 'must not use' Screen Cleaner on its own screens, but the ability is automatic on entry, so the only way to honour that is to never bring Rime in while a screen stands. As the sixth slot, Rime enters late and almost always while Light Clay screens are still up. Either give Mr. Rime a different ability (Tangled Feet / Ice Body) or move it to a lead slot so the screens go up after it has entered."},
+    {"id": "E0390-2", "turn": "a1 whole battle", "board": "Two Ally Switch users, both facing single-target attacks", "chosen": "Ally Switch never selected across the encounter", "better": "Low severity given the boards, but the room's named positioning trick did not appear once. Same 'support move never selected' pattern as E0384 and E0388."}
+  ],
+  "observations": ["Blake's turn-3 switch of a healthy Farigiraf out into Starmie against Hydreigon + Incineroar (both Psychic-immune) was a genuinely good AI read; Starmie's Hydro Pump would have OHKOed Incineroar next turn had Sucker Punch not landed first."],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 with two faints (Zapdos to a Sp. Def drop plus Farigiraf, Hydreigon to a 4x Dazzling Gleam) in six turns. Both losses were real damage from the room's bodies rather than throws.",
+  "concept_on_board": "Half. The Prankster screen went up before my first attack and halved my damage for five turns, and Competitive was demonstrated in the discarded start. The other half of the room - Armor Tail, Ally Switch and Screen Cleaner-as-irony - was not seen: Ally Switch was never chosen, Armor Tail was never challenged, and Screen Cleaner cost Blake his own screen.",
+  "cooler": "The screens-plus-positioning idea is good and the Meowstic pair is a nice regional touch, but two of the six pieces work against the room as deployed. (1) Mr. Rime's Screen Cleaner is the plan's own joke and it fired on Blake's side; give Rime Ice Body or Tangled Feet and let the irony live in the flavour text, or lead with Rime so the screens go up after it. (2) Ally Switch on two bodies that also carry the room's best damage means the AI never picks it; one dedicated support Mr. Mime (Ally Switch / Icy Wind / Wide Guard / Protect) would show the trick more than two half-committed ones. Farigiraf was the best body on the board: its Psychic finished Zapdos, its switch-out was smart, and Armor Tail forced me to stop and think about every priority move even though it was never tested. Starmie with Life Orb at cap+2 is a legitimate threat that I only survived because Sucker Punch outprioritises it.",
+  "legality_notes": "None found. Light Clay screens ran 8 turns as expected until Rime cleaned them.",
+  "verification_limit": "No level change here; nothing pending re-verification."
+}
