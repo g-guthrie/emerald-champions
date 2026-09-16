@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 2,
+  "e_group": "E0002",
+  "trainer": "TRAINER_CALVIN_1",
+  "class": "regular",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "voids_previous_receipt": "receipt.json is void: its party used Magearna, Iron Leaves, Weavile and stone/friendship evolutions unreachable on Route 102.",
+  "opponent_as_played": [
+    "POOCHYENA L15 @FOCUS_SASH RATTLED JOLLY (Crunch/Taunt/Sucker Punch/Helping Hand) offset 3",
+    "ZIGZAGOON L14 @FIGY_BERRY GLUTTONY ADAMANT (Belly Drum/Extreme Speed/Seed Bomb/Protect) offset 2",
+    "HOOTHOOT L15 @EVIOLITE TINTED_LENS MODEST (Air Slash/Hyper Voice/Tailwind/Protect) offset 3",
+    "STARLY L14 @LIFE_ORB RECKLESS JOLLY (Brave Bird/Double-Edge/Quick Attack/U-turn) offset 2"
+  ],
+  "party_manifest": "work/playtest/02-CALVIN_1/party-rerun-a1.json",
+  "party_summary": "Growlithe / Mienfoo / Timburr / Corphish / Pachirisu / Mudkip. Route103 wilds (Growlithe, Corphish), Route101 wild (Mienfoo), Route102 wilds (Timburr, Pachirisu) and one C01 starter (Mudkip). Nothing evolved, nothing fished, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2002,
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 7,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 62,
+      "ai_decision_seconds_max": 1.038,
+      "events": "work/playtest/02-CALVIN_1/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 Growlithe's Intimidate triggered Poochyena's Rattled (+1 Speed). I aimed Close Combat at Poochyena and Fake Out at Zigzagoon to deny the Drum turn; Zigzagoon read it and Protected the Fake Out, Poochyena Taunted Growlithe, and Close Combat broke the Focus Sash to 1 HP. T2 Zigzagoon's Extreme Speed critically hit and removed Growlithe outright before its Close Combat; Rocky Helmet taxed it 7 back and Mienfoo's Knock Off finished Poochyena. Timburr replaced Growlithe and Calvin sent Starly. T3 Zigzagoon Protected a lethal Iron Fist Mach Punch, Mienfoo knocked Starly's Life Orb away, and Starly's own Brave Bird recoil killed it after taking Timburr to 8. T4 Timburr withdrew for Corphish; Mienfoo's Drain Punch removed Zigzagoon while Extreme Speed and Air Slash cut Corphish to 3. T5 Corphish withdrew for Pachirisu and Knock Off stripped Hoothoot's Eviolite. T6 Super Fang plus Drain Punch finished Hoothoot. 4-1 for the player, but Growlithe dead and Corphish (3/40), Timburr (8/58) both a hit from gone."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Zigzagoon Belly Drums only when its post-cost HP and Gluttony/Figy recovery survive the opposing pair",
+      "result": "PASS (correct decline)",
+      "evidence": "Zigzagoon never used Belly Drum. That is the right call on this board and not a defect: Drum would have put it at 23/47 opposite Iron Fist Mach Punch (~53 damage, super effective) and Mienfoo's Drain Punch, both of which KO through the Figy recovery. It instead Protected the two turns it was threatened and spent the other two on Extreme Speed. The conditional in the plan is exactly what it honoured."
+    },
+    {
+      "check": "On the turn after setting up, cash in with Extreme Speed rather than continue setting up",
+      "result": "PASS",
+      "evidence": "No setup happened, but the fallback the plan names did: Extreme Speed on T2 (critical, removed Growlithe) and T4. It never wasted a turn re-attempting a denied Drum."
+    },
+    {
+      "check": "Poochyena picks Taunt or Helping Hand by whether denying setup or securing damage matters more",
+      "result": "PARTIAL",
+      "evidence": "T1 Taunt on Growlithe. Growlithe's only status move was Protect, so the Taunt bought one denied guard and nothing else, while Helping Hand into Zigzagoon's Extreme Speed (which did kill Growlithe the next turn) or an immediate Crunch would both have converted. Not illegal - Taunt did deny Growlithe's Protect - but the cheaper of the two authored options was taken against a three-attack target."
+    },
+    {
+      "check": "Hoothoot's Tailwind gives the team an immediate attacking mode",
+      "result": "FAIL (never fired)",
+      "evidence": "Hoothoot was the last opponent alive and held the field for T5 and T6. It chose Air Slash then Hyper Voice and never set Tailwind. Weak evidence against the AI as such - by the time it entered it had one partner left and then none, so Tailwind's order crossings would have bought little - but the authored TAILWIND strategy flag on this team went entirely unexercised for the second pass running. The alternate deployment the plan describes ('Hoothoot Tailwind plus Starly gives an immediate attacking mode without Belly Drum') never occurred because the AI never leads with or pivots to that pair."
+    },
+    {
+      "check": "Starly converts as the Reckless attacker",
+      "result": "PASS",
+      "evidence": "T3 Brave Bird took Timburr from 58 to 8 through Eviolite; only its own Reckless recoil killed it."
+    },
+    {
+      "check": "Rattled activates off Intimidate",
+      "result": "PASS",
+      "evidence": "T0 Growlithe's Intimidate dropped Poochyena's Attack and Rattled raised its Speed one stage, which is why it outran Mienfoo all game."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "ZIGZAGOON",
+      "payoff": "Blocked Mienfoo's Fake Out. No damage denied, but it denied the flinch that was specifically aimed at its setup turn - a correct read of the crack list."
+    },
+    {
+      "turn": 3,
+      "battler": "ZIGZAGOON",
+      "payoff": "Blocked an Iron Fist Mach Punch that was lethal (super effective, ~53 versus 40 HP remaining). Large payoff, and its partner Starly used the same turn to take Timburr to 8."
+    }
+  ],
+  "protect_ledger_note": "Two opponent Protects, both from Zigzagoon, both with a real payoff and neither repeated into an empty turn. Hoothoot also carries Protect and never used it.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0002-W1",
+      "turn": 1,
+      "board": "Poochyena (Focus Sash, Rattled +1 Spe) opposite a full-HP Intimidate Growlithe whose set is Flare Blitz / Close Combat / Wild Charge / Protect, with Zigzagoon about to Protect.",
+      "chosen": "Taunt on Growlithe",
+      "better": "Crunch or Helping Hand. Taunt on a battler carrying one status move (Protect) denies at most one guard; Poochyena then died on T2 having dealt 6 damage all battle.",
+      "severity": "weak choice, not a defect - the authored branch did fire, it just picked the lower-value side of it."
+    }
+  ],
+  "ai_improvements_observed": [
+    "Zero voluntary opponent switches; no healthy pivot into a free faint.",
+    "Both Protects were predictive and paid, including one that denied a KO. The guard pricing is visibly better than 'guard twice and die from half'."
+  ],
+  "level_changes": {
+    "POOCHYENA": "3 -> 4",
+    "HOOTHOOT": "3 -> 4"
+  },
+  "level_change_reason": "Won on attempt 1 with 1 player faint. The +1 goes on the two members that contributed least and that still have budget: Poochyena spent its only turn on a low-value Taunt and dealt 6 damage before dying, and Hoothoot arrived last and never set its Tailwind. Zigzagoon and Starly already took +1 in the first pass and earned it here (a critical Extreme Speed KO and a Brave Bird that nearly removed a 58 HP Eviolite wall), so they stay at +2 total budget unused. Cumulative across both passes: Poochyena +1, Zigzagoon +1, Hoothoot +1, Starly +1 - all within the +-2 cap.",
+  "levels_after": {
+    "POOCHYENA": 4,
+    "ZIGZAGOON": 2,
+    "HOOTHOOT": 3,
+    "STARLY": 2
+  },
+  "cooler": "Yes. The team's declared TAILWIND identity lives on a reserve that the AI will essentially never bring out in time, so the strategy flag reads as decoration. Moving Tailwind onto the Poochyena support slot (replacing Helping Hand, which overlaps Taunt's disruption job) would put the speed mode on a lead that is actually on the field turn one, and would give the Focus Sash a purpose beyond surviving one hit. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem. All four sets materialized and every move observed was legal on its board."
+}
