@@ -1,0 +1,62 @@
+{
+  "play_order": 140,
+  "e_group": "E0166",
+  "trainer": "TRAINER_GEORGE",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "room_thesis": "The fortress with a clock - attrition walls behind Heal Pulse, with Curse Snorlax as the win condition.",
+  "cap": 42,
+  "difficulty": "medium",
+  "mega_slots": 1,
+  "resolved_opponent_levels": {"AUDINO": 39, "DUBWOOL": 42, "CHANSEY": 46, "KOMALA": 42, "MILTANK": 42, "SNORLAX": 42},
+  "cap_window_confirmation": "Authored offsets -1/2/6/2/2/2 resolved to 39/42/46/42/42/42, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42.",
+  "party_manifest": "work/playtest/140-TRAINER_GEORGE/party.json",
+  "pre_declared_strategy_checks": [
+    "Taunt shuts Cotton Guard, Curse, Heal Pulse, Soft-Boiled, Thunder Wave and Encore - the dossier's own named counterplay",
+    "Mega Audino gains Healer and uses Heal Pulse and Encore rather than attacking",
+    "Dubwool's Fluffy halves contact damage and DOUBLES Fire damage taken",
+    "Dubwool converts a Cotton Guard into Body Press damage rather than guarding again",
+    "Chansey's Eviolite is the reason it is a wall, and Knock Off should change the fight",
+    "Komala's Comatose makes it immune to every status",
+    "Miltank's Scrappy lets its Normal moves hit Ghost types",
+    "Snorlax uses Curse to become the room's clock, and the AI does not guard indefinitely - the dossier requires a damage conversion by turn three",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/140-TRAINER_GEORGE/a1", "seed": 140, "outcome": "won", "turns": 11, "decisions": 16, "player_faints": 4, "opponent_faints": 6,
+     "narrative": "The hardest-fought win in my block and the one where the opponent's Protect play was genuinely excellent. T1 Mega Audino Protected my Mega Medicham's High Jump Kick and the crash took half of Medicham's HP; Dubwool used Cotton Guard behind it. T2 Kartana's Sacred Sword ignored the +3 Defense exactly as designed, but Dubwool's Body Press off that same boosted Defense is 4x into Grass/Steel and killed Kartana outright. T3 Chandelure replaced it - Dubwool's Body Press and Double-Edge are both 0x into a Ghost - and Zen Headbutt killed Mega Audino. T4 High Jump Kick removed a full-HP Choice Band Miltank in one hit, and George withdrew Dubwool for Snorlax with Chansey beside it. T5 Chansey Protected and High Jump Kick crashed again, leaving Medicham on 1 HP; that is two HJK crashes bought by two well-timed Protects. T6-T7 I switched Medicham out, Incineroar's Knock Off removed Chansey's Eviolite for 190 damage in one hit, and Chansey's Thunder Wave paralysed Incineroar, which then failed to move and died. T8 Sableye's Prankster Taunt landed on Snorlax. T9 was the payoff: Taunt blocks Protect as well as Curse, so a 1 HP Mega Medicham could throw High Jump Kick at Snorlax with no crash risk, and it killed a 138 HP Snorlax outright. T10 Taunt went onto Dubwool and HJK killed the Eviolite-less Chansey; Dubwool's Body Press finished Medicham. T11 Chandelure's Flamethrower killed Dubwool through Fluffy's Fire vulnerability and then died to its own Life Orb at 10 HP. T12 Air Slash finished Komala."}
+  ],
+  "strategy_checks": [
+    {"check": "Taunt is the room's counterplay", "result": "PASS, decisively", "evidence": "Two Taunts, two different jobs. Taunt on Snorlax stopped Curse AND stopped Protect, which is what let a 1 HP Medicham kill it with a crash-vulnerable move. Taunt on Dubwool stopped Cotton Guard and Protect in the same action. The dossier's line 'Taunt shuts Cotton Guard, Curse and Heal Pulse at once' is accurate and it is the correct thing to tell the player."},
+    {"check": "Mega Audino supports rather than attacks", "result": "PARTIAL PASS", "evidence": "Mega Audino's three actions were Protect, Dazzling Gleam and Encore. The Protect was excellent (see ledger). Encore was aimed at my Mega Medicham on the turn I switched it out, so it was wasted - not a bad read, just bad timing against a switch. Heal Pulse was never used, and that is the gap: Audino died on turn 3 without ever healing a partner, which means the 'fortress behind Heal Pulse' half of the room concept did not happen. Audino carries the lowest offset on the team at -1 and is the room's only healer."},
+    {"check": "Fluffy halves contact and doubles Fire", "result": "PASS on both halves", "evidence": "Halving: Kartana's Sacred Sword, a 2x contact move from a 252 Attack Jolly attacker, did only 44 to a 151 HP Dubwool. Doubling: Chandelure's Flamethrower killed Dubwool from 64 HP, and earlier a single Flamethrower was the reason George withdrew it. The ability is a genuine double-edged trade and the room uses it honestly."},
+    {"check": "Dubwool converts Cotton Guard into Body Press", "result": "PASS, and it earned a KO", "evidence": "T1 Cotton Guard to +3 Defense, T2 Body Press off that Defense, which is 4x into Kartana's Grass/Steel and killed it from 96 HP. That is exactly the authored sequence - guard once, then convert - and the dossier's Disposition line 'it must not be allowed to guard indefinitely, the plan requires a damage conversion by turn three' was satisfied on turn two."},
+    {"check": "Chansey's Eviolite decides whether it is a wall", "result": "PASS, and it is the single biggest lever in the room", "evidence": "One Knock Off took 190 of 329 HP off Chansey and removed the Eviolite in the same action. Before that, Chansey was a 329 HP body my party could not meaningfully dent; after it, a single High Jump Kick killed it. Chansey has base 5 Defense, so removing the item is worth more here than anywhere else in my block."},
+    {"check": "Komala Comatose status immunity", "result": "PASS by omission", "evidence": "Komala arrived as the last member with my Sableye holding Will-O-Wisp and Taunt. I did not attempt a burn because Comatose blocks it; the ability shaped my last two commands without needing to fire. Komala's own Wood Hammer recoil plus my Rocky Helmet did more damage to it than I did."},
+    {"check": "Miltank Scrappy", "result": "NOT OBSERVED", "evidence": "Miltank got zero actions - it entered on turn 4 and a Pure Power High Jump Kick removed a full-HP 171 HP body in one hit before it moved. Scrappy was live on the battler and never mattered. Recording honestly: the room's answer to Ghost typing exists on paper and did not survive long enough to be tested."},
+    {"check": "Snorlax Curse clock", "result": "FAIL", "evidence": "Snorlax never used Curse. Its three actions were Body Slam, High Horsepower and High Horsepower - two of which killed my Incineroar - and then it was Taunted and died. The dossier calls Curse Snorlax 'the win condition rather than a sixth wall' and 'the room's actual clock'; in play it was a good attacker that never started the clock. Whether that is correct behaviour is arguable - it was doing real damage - but the authored identity did not appear."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS, and this room has the best guard play in my block", "evidence": "Four Protects, four payoffs, three of which bought crash damage from High Jump Kick or denied a lethal hit. See the ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "AUDINO_MEGA", "payoff": "EXCELLENT. Blocked a Pure Power High Jump Kick on the turn it Mega Evolved, and because High Jump Kick crashes when it fails to connect, the guard also took 57 of my Mega Medicham's 115 HP. A Protect that both denies the biggest attack on the field and deals half the attacker's HP in crash damage is the best possible outcome for the move, and the AI found it on turn one."},
+    {"turn": 4, "battler": "DUBWOOL", "payoff": "GOOD. Blocked Chandelure's Flamethrower, which is doubled against Fluffy and was the specific attack built to kill it. Dubwool was at 64 of 151 at the time, so this was a lethal-range guard."},
+    {"turn": 5, "battler": "CHANSEY", "payoff": "EXCELLENT. Same pattern as Audino: blocked High Jump Kick and crashed Mega Medicham from 58 to 1 HP. Two different battlers punished the same move on two different turns."},
+    {"turn": 9, "battler": "CHANSEY", "payoff": "GOOD, and not a repeat - Chansey had attacked with Seismic Toss in between. It blocked Sableye's Taunt, which would have shut off Soft-Boiled. The Taunt failing is recorded as 'But it failed!' behind the guard."},
+    {"turn": "n/a", "battler": "SNORLAX / DUBWOOL after Taunt", "payoff": "N/A - both were Taunted, which blocks Protect. This is the mechanical reason the room collapses to Taunt and it is worth stating plainly in the ledger."}
+  ],
+  "protect_ledger_note": "Four guards in eleven turns, every one with a concrete payoff, two of them converting my strongest move into self-damage. No empty guards, no failed consecutive repeats. George's room has the best Protect cadence in my block and it is the clearest demonstration I have that the guard scoring works well when it is not asked to price a repeat.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Two Protects timed onto High Jump Kick is the standout. The AI cannot read my pending command, so this is the expected-value model working: a Pure Power attacker with a visible 130 BP move is worth guarding against, and the crash payoff makes the guard doubly correct.",
+    "Chansey's Thunder Wave into my Incineroar was well chosen - Incineroar was the battler that had just removed Chansey's Eviolite, and the paralysis stopped it from moving on the turn it died.",
+    "George withdrawing Dubwool for Snorlax after Dubwool ate a Flamethrower is a correct Fluffy-aware switch.",
+    "The one soft call is Snorlax never using Curse. With Audino dead there was no Heal Pulse to Curse behind, so attacking was defensible; but the room's authored win condition then does not exist. I am recording this as a design observation rather than an AI defect because I cannot show that Curse was the better EV choice on those boards.",
+    "AI decision time peaked at 1.005 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt with 4 of 6 player faints, including my Mega and my Ultra Beast. Brief rule 5 and the AGENTS.md three-faint threshold both say keep. No level change. This room is priced correctly: it took four of my six with a party built specifically around its named counterplay, and the two members that died to it (Kartana to a Cotton-Guard-powered Body Press, Incineroar to a paralysis lock) both died to the room's authored mechanics rather than to raw levels.",
+  "could_this_be_cooler": "Keep the six; the room is doing what it says on the tin and it is the most mechanically educational fight in my block. Two observations from play. First, the room's two named identities both failed to appear and for the same reason: Heal Pulse was never used because Audino died on turn three, and Curse was never used because with Audino dead there was nothing to Curse behind. Mega Audino carries the lowest offset on the team at -1, which the dossier justifies as 'the stone is already a tier of power' - and that is true of its bulk but not of its role. It is the single point the whole fortress rests on, and at level 39 it is also the easiest member to remove. I would not raise it by level alone; I would note that a healer which dies before it heals makes the other five members into ordinary walls. Second, and more positively, the Taunt interaction is better than the dossier realises: Taunt does not just shut Cotton Guard, Curse and Heal Pulse, it also shuts Protect, and Protect is what this room's AI is genuinely good at. My winning turn was a 1 HP Medicham throwing a crash-vulnerable High Jump Kick at a Taunted Snorlax that could not guard. That is a great puzzle and the guide should say so. The one thing I would actively change if asked: Miltank is the room's Scrappy answer to Ghost types and it is a Choice Band attacker with no Protect, so it is the member most likely to die before acting - as it did here. Putting the Scrappy job on a body that survives a turn would make the room's anti-Ghost plan real rather than theoretical."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
