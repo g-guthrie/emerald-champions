@@ -1,0 +1,78 @@
+{
+  "play_order": 44,
+  "e_group": "E0047",
+  "trainer": "TRAINER_DWAYNE",
+  "class": "casual",
+  "location": "Route109_SeashoreHouse",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Pass 1 raised Monferno 2->3 off a one-faint clear. This rerun also re-tests the pass-1 AI defect on this board: Monferno used Mach Punch into a Fighting-immune Hoopa.",
+  "build": "work/agent-battle-build (headless ROM with the pass-1 level changes and the AI fixes)",
+  "level_change_verification": "Confirmed live: Monferno resolved at L25 (was L24 in pass 1). Magby L27, Smoochum L27, Elekid L26 unchanged.",
+  "resolved_opponent_levels": {"MAGBY": 27, "SMOOCHUM": 27, "ELEKID": 26, "MONFERNO": 25},
+  "party_manifest": "work/playtest/44-TRAINER_DWAYNE/party.json",
+  "party_chronology_note": "Unchanged from pass 1: Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Arcanine, all gate <= 24 in work/reference-pools/pool-24.json. No Mega used.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/44-TRAINER_DWAYNE/r1",
+      "seed": 50,
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "narrative": "T1 Magby's Protect blocked a 2x Earth Power that would very likely have KO'd it; Smoochum's Ice Beam KO'd Enamorus, and a critical Air Slash took Smoochum to 18. T2 Arcanine entered on Intimidate; Extreme Speed KO'd Smoochum and Magby's Acid Spray took Togekiss to -2 Sp.Def. T3 I withdrew the weakened Togekiss for Magearna; Magby's Follow Me pulled my Flare Blitz onto itself at 0.5x, saving Elekid at the cost of dropping Magby to 1 HP. T4 Extreme Speed KO'd Magby and a +1 Fleur Cannon KO'd Elekid; Monferno came in at its new L25. T5 I pivoted the 6 HP Arcanine out for Hoopa; Fire Punch caught Hoopa on the way in and a 2x Fleur Cannon left Monferno alive at 8/75 behind its Eviolite. T6 Monferno's Fire Punch took Magearna to 29 and Hoopa's Psychic KO'd it, stealing the Eviolite with Magician. Won with Arcanine at 6/84 and Magearna at 29/94."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "The pass-1 defect does not recur: Monferno must not aim a Fighting move at a Fighting-immune target",
+      "result": "PASS - defect resolved",
+      "evidence": "Turn 5, Hoopa (Psychic/Ghost) switched in directly opposite Monferno. Monferno chose MOVE_FIRE_PUNCH, not Mach Punch, and it landed for 29. Turn 6 it again chose Fire Punch, into Magearna at 2x for 37. In pass 1 the same matchup produced a Mach Punch into a Ghost type for zero effect."
+    },
+    {
+      "check": "Magby's Protect buys something real",
+      "result": "PASS",
+      "evidence": "Turn 1 Protect blocked a Life Orb Earth Power at 2x into a 69 HP Fire type - almost certainly a knockout denied. This is the single best-paid guard in the whole block."
+    },
+    {
+      "check": "Magby uses its support kit rather than only attacking",
+      "result": "PASS - new behaviour",
+      "evidence": "Turn 2 MOVE_ACID_SPRAY took Togekiss to -2 Sp.Def and forced me to withdraw it on turn 3; turn 3 MOVE_FOLLOW_ME redirected my Flare Blitz onto a 0.5x resist and saved Elekid outright. Acid Spray is named in the AI commit message as a support move that never fired before the pricing fix; it fired here and it decided a turn."
+    },
+    {
+      "check": "Monferno's extra level converts into a turn it would not otherwise have had",
+      "result": "PASS",
+      "evidence": "At L25 behind Eviolite it survived a 2x Fleur Cannon at 8/75 and used that extra turn for a Fire Punch that took Magearna from 66 to 29. At L24 in pass 1 it contributed a Mach Punch into an immune target and an Air Slash's worth of chip before dying."
+    },
+    {
+      "check": "Elekid's Electric pressure",
+      "result": "PARTIAL",
+      "evidence": "Thunderbolt on turns 3 and 4, both into a Magearna that resists it at 0.5x. Electroweb, which it used in pass 1 to slow my side, was not selected this run."
+    },
+    {
+      "check": "Smoochum's Focus Sash",
+      "result": "NOT EXERCISED",
+      "evidence": "A critical Air Slash took it from 69 to 18 on turn 1, so the Sash's one-shot condition never arose; Extreme Speed finished it on turn 2."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "MAGBY",
+      "payoff": "REAL - blocked MOVE_EARTH_POWER from a Life Orb Enamorus at 2x into a 69 HP Fire type. Magby went on to contribute Acid Spray, a Follow Me that saved Elekid, and soaked a Flare Blitz. The guard bought three further turns of support."
+    }
+  ],
+  "protect_ledger_note": "One opponent Protect, and it was well paid. Pass 1 recorded this same turn-1 Protect as 'into nothing'; this time the guard denied a super-effective attack, because my lead attacked rather than setting up.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Resolved from pass 1: 'Monferno's Mach Punch hit a Fighting-immune target'. Monferno selected Fire Punch against Hoopa on both turns it faced it.",
+    "Turn 4 Magby at 1 HP selected Flamethrower into Magearna (2x) rather than another Follow Me. With Elekid at full HP and nothing threatening it, taking the damage was the better use of a dying battler's last action; it was KO'd by priority before it resolved.",
+    "Turn 2 Acid Spray into a full-HP Togekiss rather than a direct attack is the kind of support choice the pricing change was meant to unlock. It paid: I spent turn 3 switching Togekiss out, which is a turn the pre-fix team would never have bought."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first attempt in six turns with one player faint, but this was a real fight and not a comfortable clear: Enamorus was KO'd on turn 1, Togekiss was driven off the field at -2 Sp.Def, Arcanine finished at 6/84 and Magearna at 29/94. Four of my six took meaningful damage. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' No level change. The pass-1 Monferno level is doing exactly what it was bought for and the team's support core is now actually executing, so this trainer is calibrated.",
+  "could_this_be_cooler": "No change wanted, and this is now the best-playing team in the block. The three-baby core plus Monferno reads as a coherent gimmick, and with Acid Spray and Follow Me both firing, Magby finally looks like the support piece the set describes rather than a weak attacker. The one thing a future pass might watch is Elekid, which spent both of its turns firing Thunderbolt into a Steel/Fairy that resists it and never reached for Electroweb; that is a target-valuation question rather than a set question.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt, same party manifest as pass 1, levels untouched. No teams-file change for this battle."
+}
