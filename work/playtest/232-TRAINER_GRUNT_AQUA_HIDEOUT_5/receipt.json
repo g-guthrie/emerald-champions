@@ -1,0 +1,56 @@
+{
+  "play_order": 232,
+  "e_group": "E0343",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_5",
+  "class": "grunt",
+  "location": "AquaHideout_B1F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; all four members L74 = 76 + 0 - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_rillaboom.json"],
+  "chronology_note": "Same six members as play_order 229-231; Incineroar beside Rillaboom. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Politoed's Drizzle is up on entry and Damp Rock holds it eight turns",
+    "Politoed's own action is Helping Hand into Barraskewda, or Icy Wind to bank speed",
+    "Barraskewda's Swift Swim doubles its Speed in the rain",
+    "Kilowattrel's Wind Power charges from its own Tailwind",
+    "Kilowattrel's Thunder never misses in rain",
+    "Jellicent absorbs the player's Water attacks and Water Spout is a second spread threat"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 4, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/232-TRAINER_GRUNT_AQUA_HIDEOUT_5/a1",
+      "outcome": "won", "turns": 3, "decisions": 4,
+      "player_faints": 0, "opponent_faints": 4, "ai_decision_seconds_max": 1.005,
+      "why": "The rain engine was up before I moved and it still lost the tempo war in one turn. Fake Out broke Barraskewda's Focus Sash and flinched it, and Rillaboom's Grassy Glide - priority, terrain-boosted, 2x into a pure Water body - finished it the same turn, so the doubled Speed never mattered. Turn 2 Wood Hammer removed Jellicent before it could Will-O-Wisp and Knock Off took Politoed's Damp Rock. Turn 3 I pulled the chipped Rillaboom out for Zapdos and Knock Off left Kilowattrel on 1 HP. Turn 4 Thunderbolt was 2x on Politoed and Knock Off finished the bird. 4-0."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Drizzle up on entry, held by Damp Rock", "result": "PASS", "evidence": "the driver's turn-0 state already read weather B_WEATHER_RAIN_NORMAL with Politoed holding ITEM_DAMP_ROCK, and 'Rain continues to fall.' printed at the end of every turn of the battle. The free-weather half of the room works exactly as authored."},
+    {"check": "Politoed's action is Helping Hand into Barraskewda, or Icy Wind", "result": "PASS (both)", "evidence": "turn 1 native record: HELPING_HAND aimed at battler 3, its own Barraskewda, on the exact turn Barraskewda had selected Liquidation - the authored opening, chosen correctly and unprompted. Turn 2 it used ICY_WIND, which dropped both my leads a stage. Both authored branches fired."},
+    {"check": "Barraskewda's Swift Swim doubles its Speed", "result": "NOT OBSERVED", "evidence": "it selected LIQUIDATION on turn 1, was flinched by Fake Out, and was dead before it ever acted. Swift Swim is presumably applied - it is a native ability - but the room's fastest body never took a turn, which is the point the dossier's own crack makes ('Barraskewda is frail and dies to priority or a spread move')."},
+    {"check": "Kilowattrel's Wind Power charges from Tailwind", "result": "PASS", "evidence": "final turn: 'The opposing Kilowattrel used Tailwind! A tailwind started blowing on the opposing side! Being hit by Tailwind charged the opposing Kilowattrel!'. The ability interaction with the team's own Tailwind is implemented and the AI chose the Tailwind that triggers it. This is the single nicest authored interaction I have seen fire in this block."},
+    {"check": "Thunder never misses in rain", "result": "NOT OBSERVED", "evidence": "Kilowattrel used HURRICANE on turn 3 (into Zapdos, resisted, and it confused it) and TAILWIND on turn 4. It never selected Thunder, which is odd on turn 3 given the board - see AI notes."},
+    {"check": "Jellicent's Water Absorb and Water Spout", "result": "NOT OBSERVED", "evidence": "Jellicent selected WILL_O_WISP on turn 2 and was KOed by Wood Hammer before it resolved. It never acted. Nothing in my party carries a Water move, so Water Absorb was never going to be tested here - which, as with Lumineon at play_order 207, is a general point about absorption abilities in this campaign: a competent player brings no Water attack into an all-Water faction, so the ability is a trap that only springs on a player who was already misplaying."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Politoed", "payoff": "EMPTY but defensible - it guarded at 194/286 on the turn I aimed Knock Off at its partner and switched my other slot. Nothing hit it, so it gained nothing. Against an unread board with a Knock Off user staring at it and a switch incoming, a guard is a reasonable expected-value gamble; it simply lost the gamble. Not repetitive, not consecutive, and it went straight back to attacking (Muddy Water) the following turn."}
+  ],
+  "protect_summary": "1 opponent Protect in the battle, empty in outcome but sound in process, and immediately followed by a real attack. No repetition, no consecutive guarding. Politoed's guard behaviour is healthy.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Kilowattrel chose Hurricane over Thunder on turn 3 into a Zapdos and an Incineroar. In rain both are perfectly accurate, Hurricane was resisted by Zapdos and Thunder would have been neutral on it, and Thunder into Incineroar is also neutral versus Hurricane's neutral. The confusion roll it got is a real upside for Hurricane, so this is a close call rather than a defect - but it is worth noting that the room's advertised 'Thunder never misses in rain' line did not appear, and the scorer may not be pricing the rain accuracy bonus at all. Worth checking against the other rain owners in this faction (Matt's Archaludon and Kingdra at E0348).",
+    "AI decision budget max 1.005 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [
+    {"member": "BARRASKEWDA", "before": 0, "after": 1, "why": "the room's damage, and it died on turn 1 having never acted, to a Fake Out plus a priority Grassy Glide. Its Focus Sash is meant to buy exactly that turn and a chip move broke it first. +1 is the only lever that makes the Sash-plus-Swift-Swim clock survive one exchange."},
+    {"member": "JELLICENT", "before": 0, "after": 1, "why": "the room's bulk, at 301 HP the largest body in it, and it also died without acting. It is the member with the most to gain from one more level and the one whose absence made the second half of the fight trivial."}
+  ],
+  "level_change_rationale": "Brief's clearest '+1' case in this block: won on attempt 1, zero player faints, four turns, and the only damage I took was a resisted Hurricane and one Muddy Water. Two of the four members never took a single action. I raised those two and left the two that executed (Politoed ran Helping Hand, Icy Wind, Protect and Muddy Water; Kilowattrel ran Tailwind into its own Wind Power and a confusing Hurricane). Neither raised member is an ace, Mega or legend; both are +1 of the +-2 allowance. The brief asks for a rerun after a +1 - see rebuild_note, I cannot perform it from this session.",
+  "rebuild_note": "The +1s cannot be re-verified here: the run pinned work/agent-battle-build-5, which predates the edit, and I am not permitted to rebuild. The brief's 'rerun once' step is therefore owed on this battle. Of my whole block, this is the third most worth re-running after play_order 237 (Matt) and 238 (Lila & Roy), because it is the only battle I won without losing anything.",
+  "theme_check": "Yes. Walking into a room that is already raining, from a bottled frog on a shelf, is the most immediately legible piece of staging in the hideout, and the crew reads as one machine rather than four Water types: the frog makes the weather, the fish is fast because of it, the bird charges off its own wind and the ghost soaks. Matt's escalation of the same idea should land well because this room states the pattern cleanly. The dossier's own answer to 'could this be cooler' - that it should stay plain - is correct.",
+  "cooler_note": "Keep it exactly as built; this is the best-constructed of the four hideout grunt rooms so far and it needs levels, not ideas. The one honest observation is that the room's entire plan runs through a single turn: if Barraskewda does not act, there is no rain payoff, because Jellicent is slow, Politoed is support and Kilowattrel is the Tailwind body. Priority beats it for free, and both Fake Out and Grassy Glide are ordinary things to bring. That is a structural fragility that +1 only partly addresses; if it survives the rerun too comfortably, the design-side fix worth considering is giving Politoed or Jellicent a way to punish priority rather than giving the room a fifth trick.",
+  "authored_set_legality": "No legality problem found."
+}
