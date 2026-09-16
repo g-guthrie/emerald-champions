@@ -1,0 +1,69 @@
+{
+  "play_order": 82,
+  "e_group": "E0092",
+  "trainer": "TRAINER_WATTSON_1",
+  "class": "leader",
+  "location": "MauvilleCity_Gym",
+  "cap": 30,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/82-TRAINER_WATTSON_1/receipt.json",
+  "build": "work/agent-battle-build-3",
+  "rom_sha256": "e7de65be122669a85f67ad7c25d12a211d3d53aee0f14f97df843ee75165efe1",
+  "why_rerun": "All six members were raised +3 after the first run (first receipt recorded no changes of its own; the raise was applied afterwards). The rerun confirms whether the gym leader is now a real fight, with the brief's fallback of -1 on the two deciding members if it turned out unwinnable in three optimized attempts.",
+  "cap_confirmation": "Driver state reports level_cap 30 and Electrode L33 / Electivire L34 / Magnezone L33 / Thundurus L32 / Galvantula L33 / Manectric L32 = cap 30 + offset - 2 on Medium with the current offsets 5/6/5/4/5/4. The rerun block's table listed cap 36 for this row, but that is the value the next row's receipt carries and the whole cap column appears shifted by one from play_order 82 onward; the brief instructs trusting the driver's level_cap, the first receipt used 30, the dossier prose says 'Medium cap30', and cap 36 would additionally be chronologically incoherent here because it implies Mt. Chimney is already cleared and unlocks the New Mauville species that this very gym gates. Run at cap 30.",
+  "level_offsets_at_run": {"ELECTRODE": 5, "ELECTIVIRE": 6, "MAGNEZONE": 5, "THUNDURUS_INCARNATE": 4, "GALVANTULA": 5, "MANECTRIC": 4},
+  "resolved_opponent_levels": {"ELECTRODE": 33, "ELECTIVIRE": 34, "MAGNEZONE": 33, "THUNDURUS_INCARNATE": 32, "GALVANTULA": 33, "MANECTRIC": 32},
+  "levels_previous_run": {"ELECTRODE": 30, "ELECTIVIRE": 31, "MAGNEZONE": 30, "THUNDURUS_INCARNATE": 29, "GALVANTULA": 30, "MANECTRIC": 29},
+  "party_manifest": "work/playtest/82-TRAINER_WATTSON_1/party.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 30 and same map, and the first receipt's chronology audit is the one that matters most here: every source map is at or before Route 110, and the New Mauville species (Zapdos, Regieleki, Zekrom, Zeraora) that sit in pool-30 are excluded because the Basement Key comes from Wattson after this battle. Bringing them to the gym that gates them would void the benchmark. One reachable legend (Magearna) and one Mega (Gardevoir) declared; the party was not reported weak or illegal and it won both runs.",
+  "pre_declared_strategy_checks": [
+    "The authored tactic ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE fires: Electrode's Discharge triggers Electivire's Motor Drive before Electivire acts",
+    "Electric Surge terrain is up from Electrode's entry",
+    "Magnezone's Air Balloon grants Ground immunity until it is popped, and Magnet Pull is a real trapping threat to my Magearna",
+    "Mega Manectric Mega-Evolves and Intimidate fires (direct comparison point for the E0071 Kangaskhan Mega defect)",
+    "Thundurus's Prankster and its Ground immunity are used as a real answer to a double-Ground lead",
+    "Galvantula's Choice Specs lock is respected",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/82-TRAINER_WATTSON_1/r1",
+      "seed": 82,
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "narrative": "T1 I led both Sheer Force Ground bodies so the signature activation could fire at no cost to me, and it did: Electrode's Discharge raised Electivire's Speed through Motor Drive and did nothing to either Nidoran evolution. Electivire's Ice Punch then took Nidoking from 98 to 4 - the correct coverage read - but both Earth Powers were 2x and Electivire died before its new Speed mattered. T2 Electrode Protected at 1 HP behind a spent Focus Sash, blanking the Earth Power aimed at it, while Nidoqueen's Flamethrower popped Magnezone's Air Balloon at 2x and Magnezone's Flash Cannon finished the 4 HP Nidoking. T3 Weavile came in, Ice Shard finally removed Electrode and Earth Power removed the now-grounded Magnezone. T4 Thundurus and Galvantula arrived; Thundurus spent its turn on Nasty Plot and died to Triple Axel before cashing it, but Galvantula's Choice-locked Bug Buzz killed Weavile. T5 Mega Manectric entered and Mega-Evolved on the spot, Intimidating both of my slots; its Volt Switch chipped the freshly switched-in Kartana off full HP, which disabled the Focus Sash, and Galvantula's Bug Buzz then killed Kartana outright - the best two-slot sequencing of the fight - while Flamethrower removed Galvantula. T6 Mega Gardevoir came in, Traced Intimidate, and Earth Power plus Hyper Voice finished Mega Manectric."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE fires", "result": "PASS", "evidence": "T1, first decision of the battle: Electrode chose MOVE_DISCHARGE, the log reads 'The opposing Electivire's Speed rose!' followed by 'It doesn't affect Nidoqueen...' and 'It doesn't affect Nidoking...'. Motor Drive activated before Electivire acted, exactly as authored. This is a significant contrast with E0076 TRAINER_AISHA in the same block, whose ACTIVATE line did not fire: the tactic machinery works, so Aisha's failure is specific to the friendly-critical-hit variant rather than to ACTIVATE as such."},
+    {"check": "Electric Surge terrain", "result": "PASS", "evidence": "Driver state at turn 0 reports terrain 'electric' from Electrode's entry, and the log records 'The electricity disappeared from the battlefield' when it expired after T5."},
+    {"check": "Air Balloon / Magnet Pull", "result": "PASS", "evidence": "Magnezone entered with the balloon and the log confirms it floating; my Earth Power was unusable against it until Nidoqueen's Flamethrower popped it on T2, after which Earth Power KO'd it on T3. Magnet Pull was a real constraint on my play - it is the reason I held Magearna in reserve all game and brought Kartana instead on T5, which cost me the Kartana."},
+    {"check": "Mega Manectric Mega-Evolves", "result": "PASS", "evidence": "T5: 'The opposing Manectric's Manectite is reacting...', 'The opposing Manectric has Mega Evolved into Mega Manectric!', then Intimidate dropped both of my Attack stats. Worth recording next to the E0071 Kangaskhan failure in the same block: a Mega whose payoff is an entry ability that resolves immediately is chosen, while Kangaskhan's Parental Bond - whose payoff is a multiplier on moves it was going to use anyway - is not."},
+    {"check": "Thundurus uses Prankster and its Ground immunity", "result": "PARTIAL", "evidence": "Thundurus arrived on T4 facing a Ground lead it is immune to, which is the correct deployment, and chose Nasty Plot. That is the Prankster line in principle, but it was a full-HP setup move thrown on a board where a Life Orb Thundurus at 102 HP was already in Triple Axel range at 2x from a faster Weavile, and it died without ever attacking. Thunder Wave first, or simply attacking, was the better branch. Not a defect - a defensible-but-losing choice."},
+    {"check": "Galvantula's Choice lock respected", "result": "PASS", "evidence": "Galvantula used Bug Buzz on T4 and was correctly locked into Bug Buzz on T5, where it happened to be the right move anyway (it killed Kartana). No illegal second move was attempted."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "One Protect all battle. See ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "ELECTRODE", "payoff": "REAL. Electrode was on 1 HP with its Focus Sash already spent. Protect blocked Nidoking's Earth Power, which was 2x and certain death, and bought Electrode the turn in which it used Volt Switch on T3. It is a slightly thin payoff because Electrode has no way to damage a double-Ground board at all, but guarding 1 HP against a guaranteed kill is the correct use of the move and it was not repeated."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "T5 was the best opposing turn of this fight and it was genuine two-slot coordination: Mega Manectric's Volt Switch was only 0.5x into Kartana but it took Kartana off full HP, which disabled the Focus Sash, and the partner's Choice-locked Bug Buzz then converted for the kill. Whether or not the Sash was explicitly reasoned about, the sequencing was correct.",
+    "Electivire's Ice Punch on T1 was the right coverage read into a Poison/Ground body and was the single hardest hit of the opening.",
+    "No AI defect observed in this battle. The one weak choice was Thundurus's Nasty Plot on a board where it was outsped and in range."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. Three of six lost - Nidoking, Weavile and Kartana - against a six-member Gym leader, which also meets the AGENTS.md bar of roughly three faints against a well-prepared competitive party. The brief's fallback (-1 on the two deciding members if unwinnable in three optimized attempts) does not apply: the battle was won on attempt 1.",
+    "changes": [],
+    "budget_note": "The +3 already applied to all six by the main agent is outside my own +/-2 budget and I have not added to it or reversed it. No member moves in this pass.",
+    "honest_caveat": "The +3 did not measurably change the outcome: the first run was won in seven turns with three player faints and this one in six turns with three player faints. What the extra levels bought was a harder-hitting Electivire and a Galvantula that could kill Kartana outright; what they did not change is that a double Sheer Force Ground lead is a structural answer to five of the six members. This is calibrated, but it is calibrated against a counterteam that exploits the room's mono-typing, not because the levels found the edge."
+  },
+  "verdict": "calibrated",
+  "could_this_be_cooler": "The room is already the best-constructed Electric gym idea in the campaign: a generator-and-motor opening whose activation demonstrably fires, terrain, a trapper, a Ground-immune Prankster, a Choice Specs glass cannon and a Mega that arrives to Intimidate. I would not change the roster. The honest weakness is not coolness but type: six Electric bodies means one Ground lead invalidates five of them, and I won both runs by leading Nidoqueen and Nidoking and never changing plan. The single change I would argue for is giving one member a secondary typing or an answer that survives a Ground lead - Magnezone's Body Press is already reaching for this and is the right instinct. Thundurus is the member that should punish a Ground lead and it spent its only turn on Nasty Plot; a Thunder Wave or an immediate attack there would make the Ground answer cost something. That is an AI tuning note, not a species change.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-3. Not earned campaign traversal, and no badge or story progress was awarded. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}
