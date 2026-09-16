@@ -1,0 +1,58 @@
+{
+  "play_order": 15,
+  "e_group": "E0019",
+  "trainer": "TRAINER_MARLENE",
+  "class": "regular",
+  "location": "Route115",
+  "cap_window": 14,
+  "observed_opponent_levels": {"GOTHITA": 14, "SLOWPOKE": 15, "SPOINK": "16 (offset 4)", "BALTOY": "16 (offset 4)"},
+  "outcome": "WON on attempt 1, 4 turns, 0 player faints",
+  "party_manifest": "work/playtest/15-MARLENE/party.json",
+  "run_dir": "work/playtest/15-MARLENE/a1",
+  "attempts": [
+    {
+      "seed": "0x15AB",
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 5,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 14,
+      "ai_decision_seconds_max": 0.234,
+      "note": "Weavile's Knock Off is super effective on all four members (three Psychic, one Water/Psychic) and removed Sitrus Berry and both Eviolites. It one-shot the 66 HP Slowpoke from full."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room is up by turn 1 or 2", "result": "FAIL", "evidence": "Trick Room was never used. Spoink, the team's only Trick Room carrier, entered on turn 2 after Slowpoke fainted and selected MOVE_PSYCHIC (target 2), not MOVE_TRICK_ROOM, on its entry turn. It fainted on turn 3 before acting again. Marlene's Baltoy does not carry Trick Room (EARTH_POWER/PSYCHIC/ICE_BEAM/PROTECT), so the room had exactly one carrier and it declined to set it."},
+    {"check": "Gothita's Shadow Tag traps the player's active", "result": "PASS (ability present, never tested)", "evidence": "Gothita entered with ABILITY_SHADOW_TAG and was on the field for the whole battle. I never attempted a switch, so the trap was never exercised."},
+    {"check": "Slowpoke Yawn opens a sleep threat", "result": "FAIL (never fired)", "evidence": "Slowpoke chose MOVE_PSYCHIC on turns 1 and 2 and fainted to Knock Off on turn 2. Yawn was never selected."},
+    {"check": "Gothita Fake Tears lowers Sp. Def before a special attack", "result": "FAIL (never fired)", "evidence": "Gothita chose Protect (turn 1), Psychic (turn 2, overridden by Encore) and then was Encore-locked. Fake Tears never appeared. The dossier explicitly does not assume it precedes Slowpoke, so this is a soft fail."},
+    {"check": "Baltoy renews Trick Room if Spoink falls", "result": "N/A - AUTHORING GAP", "evidence": "The E0019 dossier prose says 'reserve Trick Room' and the block is tagged strategy: TRICK_ROOM, but Marlene's Baltoy has no Trick Room in its four moves. Only Sarah's (E0025) Baltoy carries it. Marlene's room has a single point of failure."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS", "evidence": "ai_decision_frames_max = 14 frames = 0.234 s."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Gothita", "payoff": "REAL and excellent - blocked both of my attacks (Weavile Knock Off, super effective, and Whimsicott Moonblast) in one turn while its partner's Psychic took Whimsicott to 21/45."},
+    {"turn": 2, "battler": "Gothita", "payoff": "NOT AN AI CHOICE - Encore forced it and it failed; the AI had selected Psychic."},
+    {"turn": 3, "battler": "Gothita", "payoff": "NOT AN AI CHOICE - Encore forced it. It succeeded but blocked nothing, because both my attacks went to Spoink."},
+    {"turn": 4, "battler": "Gothita", "payoff": "NOT AN AI CHOICE - Encore forced it and it failed. The Encore ended at the end of this turn."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0019-TRICKROOM-NOT-SET",
+      "severity": "medium",
+      "turn": 2,
+      "board": "Marlene had lost Slowpoke. Gothita (49/49) was Encore-locked into Protect and could not act. Spoink (60/60, Eviolite, Thick Fat, the team's only Trick Room carrier) entered against Weavile (48/48) and Whimsicott (21/45), both far faster than her whole team, which is the exact board Trick Room exists for.",
+      "chosen_action": "MOVE_PSYCHIC targeting Whimsicott",
+      "better_action": "MOVE_TRICK_ROOM. Whimsicott was at 21/45 and Psychic would not have killed it; the room would have reversed the speed order for the rest of the battle and is the authored strategy flag for this trainer.",
+      "caveat": "Trick Room is priority -7, so Spoink would have eaten both attacks before the room resolved and in fact died on the following turn. An expected-value scorer could legitimately price that as a wasted turn. I record this as a defect because the trainer is tagged strategy: TRICK_ROOM, Spoink is its only setter, and the room was never even attempted - not because a single -7 priority call is obviously wrong."
+    }
+  ],
+  "authored_set_legality": "No engine legality problem. One authoring inconsistency: the E0019 plan prose promises a 'reserve Trick Room' behind Spoink, but Baltoy's authored moves contain no Trick Room, so the TRICK_ROOM strategy flag rests on a single member. The dossier prose is also stale on levels ('Medium cap34 levels 36/37/38/38' against a live cap-14 window resolving to 14/15/16/16).",
+  "level_changes": [
+    {"member": "GOTHITA", "field": "level offset", "before": 2, "after": 3, "reason": "Brief rule 5: won first try with 0 player faints and no real threat -> +1 on the weakest one or two members. Gothita is the lowest offset."},
+    {"member": "SLOWPOKE", "field": "level offset", "before": 3, "after": 4, "reason": "Second lowest offset; it died to a single Knock Off from full HP."}
+  ],
+  "rerun": "NOT PERFORMED. The level change needs a headless ROM rebuild and this session could not produce one: the host's arm-none-eabi-gcc (Homebrew 16.1.0) has no newlib, so <stdint.h>/<string.h> are unresolvable natively, and the documented Docker path currently fails at link time on undefined FLAG_EC_ITEM_* / FLAG_ITEM_*_ITE symbols coming from another session's in-flight map/flag edits. Recorded as an outstanding item for the main agent.",
+  "cooler_note": "Yes, and this one needs it. As authored the room is a bluff: one setter, no renewal, and four members that all fold to a single Dark-type attacker. Suggestions for a later pass, not applied here: (1) give Marlene's Baltoy Trick Room in place of Ice Beam so the strategy flag has the reserve the prose already claims; (2) Gothita's Shadow Tag is the coolest thing on this team and it did nothing - pair it with a slow, genuinely threatening partner so trapping the player actually hurts, rather than with three more Psychic-types that share her Dark weakness. A single non-Psychic member (a Sableye-style Dark/Ghost or a Bug partner) would remove the one-move sweep.",
+  "not_finished": "Trick Room, Yawn, Fake Tears and Shadow Tag trapping are all still unexercised. The +1/+1 calibration is written to the authored teams file but has not been retested in a rebuilt ROM."
+}
