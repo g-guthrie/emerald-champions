@@ -1,0 +1,42 @@
+{
+  "play_order": 50,
+  "e_group": "E0054",
+  "trainer": "TRAINER_ISABEL_1",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"DELCATTY": 30, "DUNSPARCE": 30, "CLEFABLE": 28, "MAWILE": 31},
+  "cap_window_confirmation": "Dossier seeds 32/32/30/33 are cap+offset; the driver resolved 30/30/28/31, i.e. cap 30 with Medium's -2. Confirms cap 30 for the Route 110 stretch of the 24-36 window.",
+  "party_manifest": "work/playtest/50-TRAINER_ISABEL_1/party.json",
+  "party_pool_audit": "Cap-30 Route 110 core (work/playtest/party-cap30-route110.json). All six gate <= 30 in pool-30.json and every source map is at or before Route 110. One Mega (Gardevoir, stone-window 14) and one reachable legend (Magearna, Devon Corp 2F sign) declared.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/50-TRAINER_ISABEL_1/a1", "seed": 50, "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "T1 I Mega Evolved and went for Pixilate Hyper Voice behind Togekiss' Follow Me; Delcatty's Fake Out picked the Mega and flinched it, and Dunsparce's Headbutt went into the redirect. T2 Hyper Voice plus Air Slash removed Delcatty - but Delcatty had already spent its turn on Helping Hand, and the boosted Headbutt KO'd my 65 HP Mega Gardevoir on the way out. That is the whole team concept landing in one turn. T3 Weavile came in, Knocked Off Dunsparce's Eviolite, and was immediately KO'd by a Life Orb Sheer Force Iron Head from the L31 Mawile that replaced Delcatty; Dunsparce Roosted the Knock Off damage back. T4 Nidoking entered and Earth Power (2x) KO'd Mawile through its Sucker Punch, which failed; Dunsparce Roosted to full. T5 Clefable arrived and Follow Me'd; Earth Power took it to 80 and Dunsparce's Drill Run took Nidoking to 38. T6 I pulled Nidoking for Kartana and used Follow Me, which pulled Drill Run into a Ground-immune Togekiss. T7 Clefable Protected a 2x Smart Strike and Air Slash flinched away Dunsparce's Glare. T8 Smart Strike KO'd Clefable (+1 Beast Boost), Air Slash flinched Dunsparce again, and Sacred Sword finished it."}
+  ],
+  "strategy_checks": [
+    {"check": "Delcatty uses Fake Out on an interruptible threat", "result": "PASS", "evidence": "T1 Fake Out on Mega Gardevoir, the fastest and by far the most dangerous thing on my side, denying the spread Hyper Voice for a turn. It picked the right one of two targets."},
+    {"check": "Delcatty Helping Hand beside a Dunsparce attack", "result": "PASS", "evidence": "T2 Helping Hand into Dunsparce, whose Headbutt then KO'd a Mega Gardevoir sitting at 65/90. Delcatty died the same turn, so it spent its last action buying a trade for my best Pokemon. Best AI decision in this battle."},
+    {"check": "Avoid redundant paralysis (no Thunder Wave stacked on Glare)", "result": "PASS", "evidence": "Thunder Wave was never used and Glare was attempted exactly once (T7, flinched away). No wasted or doubled status."},
+    {"check": "Serene Grace Headbutt flinches only targets that have not moved", "result": "PASS", "evidence": "Both Headbutts (T1, T2) were aimed at battlers that had not yet acted that turn. No Headbutt was thrown at something that had already moved."},
+    {"check": "After control, use Headbutt/Drill Run rather than constant recovery", "result": "PARTIAL", "evidence": "Dunsparce Roosted on T3 and T4 back to back. Both healed real damage (Knock Off had taken it well below half and stripped the Eviolite), so neither was empty, but the T4 Roost came on the turn its partner Mawile was being KO'd, and an attack there was worth more than topping off. It then attacked or statused on T5, T6 and T7, so the pattern did not persist."},
+    {"check": "Clefable redirects for Life Orb Mawile", "result": "FAIL (never possible)", "evidence": "Isabel leads Delcatty + Dunsparce, so Mawile and Clefable are both reserves. Mawile entered on T3 and died on T4; Clefable entered on T4 as its replacement. The two never shared the field, so the authored redirection-for-Mawile partnership cannot occur unless the player lets both leads live a long time. This is a team-construction problem, not an AI problem."},
+    {"check": "Life Orb Sheer Force Mawile applies real pressure", "result": "PASS", "evidence": "It KO'd a full-health Weavile with one Iron Head on the turn it entered. At L31 it is the scariest thing Isabel has, and it is also the reason this fight cost me two Pokemon."}
+  ],
+  "protect_ledger": [
+    {"turn": 7, "battler": "CLEFABLE", "payoff": "REAL: blocked a 2x Smart Strike from a base-181-Attack Kartana, which KO'd it from 80 HP the very next turn. It bought exactly one turn, which is what it was worth."}
+  ],
+  "protect_ledger_note": "One opponent Protect in eight turns, with clear payoff. No repetition, no empty guard.",
+  "ai_defects": [
+    {"turn": 4, "board": "My Nidoking had just switched into b0 (nothing revealed); my Togekiss at b2 had used Follow Me on T3 and used it again on T4. Their Mawile at b1 was at full HP, their Dunsparce at b3 at 76/128.", "chosen": "Mawile used Sucker Punch, targeting Togekiss. 'But it failed!'", "why_wrong": "Sucker Punch does nothing unless the target uses an attacking move. The battler it was aimed at is a dedicated redirector whose last used move was Follow Me - a status move - which is the strongest available signal that it would not be attacking. Mawile got zero value from its only turn on the field and died to Earth Power immediately after.", "better_action": "Play Rough or Iron Head into Togekiss (guaranteed damage on a 119 HP support body), or Sucker Punch aimed at the freshly switched Nidoking, which was far likelier to attack. Note that Follow Me would have redirected either STAB to Togekiss anyway, so the target choice was moot; the move choice was not.", "severity": "low", "note": "Consistent with the opponent never reading pending commands. The missing term is 'this target's last used move was a status move', which is legal knowledge under the September 15 rule."}
+  ],
+  "ai_notes": [
+    "The Delcatty Helping Hand -> boosted Dunsparce Headbutt on T2 is a genuinely good competitive sequence: Delcatty was dying that turn regardless and converted its last action into the removal of my Mega. Isabel's authored 'Fake Out/Helping Hand beside Dunsparce' plan is real and it executed.",
+    "Clefable used Follow Me on T5 and again on T6. The T5 one was correct (it pulled Earth Power onto a Magic Guard body). The T6 one redirected nothing - I switched and used my own Follow Me - and the side dealt zero damage that turn. Not a defect on its own, but consecutive redirection with no partner payoff is the same shape as an empty Protect and is worth the same scrutiny."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two Pokemon, including the Mega this party is built around, and needed four of six members. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. This is a real fight for a roadside trainer. No level change.",
+  "could_this_be_cooler": "Mostly yes already, but the dossier's own headline partnership does not exist in play. Clefable is authored to redirect for Life Orb Mawile, and the lead pair is Delcatty + Dunsparce, so the redirector and its client are both benched and arrive one after the other as replacements. If that partnership is the point of the team, the lead should be Clefable + Mawile, with Delcatty and Dunsparce as the control reserves - the Fake Out/Helping Hand half works from the bench far better than the redirection half does. That is a lead-order change, which is outside this pass's levels-only lever, so no change was made; flagging it for the design side. The species choices themselves are good: Dunsparce with Eviolite, Serene Grace and Roost is a genuinely annoying wall, and stripping that Eviolite with Knock Off was the most satisfying play I made in this block.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
