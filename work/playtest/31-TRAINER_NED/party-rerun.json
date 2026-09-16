@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0033 TRAINER_NED (Route 106 coastal wind-and-current); play_order 31, cap 20, Medium",
+ "availability_audit": "Chronology audit for this rerun. Every member's source map is checked against the book's chapter order (Game Book lines 1-300) and against the live map scripts, not only against the pool file's cap gate. Three species used in the first pass are chronology-ILLEGAL and were removed: WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, reached in C20 at cap 30); MAGEARNA before E0032 (the Devon Corp stairs are blocked until FLAG_RETURNED_DEVON_GOODS, set after Rusturf Tunnel); and ALAKAZAM before the Dewford Gym (Abra's only source is wild:GraniteCave_1F, entered in C12 after Route 106). Assisted acquisition through the native preparation API, ordinary items only, no Mega Stone on the player side (the Ring arrives after Brawly). Not native capture acceptance.",
+ "plan": "Deny Finneon's useful turn with immediate Electric and Grass pressure, and keep a Volt Absorb and a Ground body on the field so Wattrel's Thunderbolt and Soak conversions have no good recipient.",
+ "party": [
+  {
+   "species": "SPECIES_JOLTEON",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_SHADOW_BALL",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast Electric cannon, Volt Absorb",
+   "availability": "Eevee wild:Route101/land_mons + ITEM_THUNDER_STONE (Rustboro Mart, C06)."
+  },
+  {
+   "species": "SPECIES_KARTANA",
+   "moves": [
+    "MOVE_LEAF_BLADE",
+    "MOVE_SACRED_SWORD",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_BEAST_BOOST",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Grass/Steel physical breaker",
+   "availability": "wild:PetalburgWoods_3/land_mons. Petalburg Woods is C05; the third grove needs Cut, licensed in Rustboro and usable after Roxanne, so it is legal from cap 20 onward only. Ultra Beast taken as a preceding-map wild encounter."
+  },
+  {
+   "species": "SPECIES_QUAGSIRE",
+   "moves": [
+    "MOVE_EARTHQUAKE",
+    "MOVE_LIQUIDATION",
+    "MOVE_RECOVER",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_IMPISH",
+   "ability": "ABILITY_UNAWARE",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    4,
+    252,
+    0,
+    0,
+    0
+   ],
+   "role": "Unaware Water/Ground wall that ignores setup",
+   "availability": "Wooper wild:Seaspray_Cave/land_mons (entered from Route 115, Rustboro's north exit)."
+  },
+  {
+   "species": "SPECIES_NIDOKING",
+   "moves": [
+    "MOVE_EARTH_POWER",
+    "MOVE_ICE_BEAM",
+    "MOVE_THUNDERBOLT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_SHEER_FORCE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Sheer Force Ground/coverage cannon",
+   "availability": "Nidoran-M wild:Route101/land_mons -> Nidorino + ITEM_MOON_STONE (Rustboro Mart, C06)."
+  },
+  {
+   "species": "SPECIES_MAGEARNA",
+   "moves": [
+    "MOVE_FLASH_CANNON",
+    "MOVE_FLEUR_CANNON",
+    "MOVE_THUNDERBOLT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_SOUL_HEART",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    0,
+    252,
+    4,
+    0
+   ],
+   "role": "Steel/Fairy wall and Soul-Heart snowball",
+   "availability": "legendary_sign:RustboroCity_DevonCorp_2F. The Devon stairs are blocked until FLAG_RETURNED_DEVON_GOODS (data/maps/RustboroCity_DevonCorp_1F/scripts.inc), i.e. after Rusturf Tunnel, so this is legal only from E0032 onward."
+  },
+  {
+   "species": "SPECIES_LUCARIO",
+   "moves": [
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_BULLET_PUNCH",
+    "MOVE_CRUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_INNER_FOCUS",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Steel/Fighting priority breaker",
+   "availability": "wild:AlteringCave_1F/land_mons (Altering Cave's entrance is a warp on Route 103, C02) -> legal from the first route onward."
+  }
+ ]
+}

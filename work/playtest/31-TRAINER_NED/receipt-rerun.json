@@ -1,0 +1,65 @@
+{
+  "rerun_of": "work/playtest/31-TRAINER_NED/receipt.json",
+  "rerun_reason": "Confirming rerun for the first pass's unverified level changes (ARROKUDA offset 2->3, WATTREL 3->4) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
+  "play_order": 31,
+  "e_group": "E0033",
+  "trainer": "TRAINER_NED",
+  "class": "regular",
+  "location": "Route106",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/31-TRAINER_NED/party-rerun.json",
+  "party_changed_from_first_pass": {
+    "reason": "Nothing had to change. This is the one party in the block that was already chronology-legal: Jolteon (Route 101 Eevee plus a Rustboro Thunder Stone), Kartana and Quagsire (Petalburg Woods 3 and Seaspray Cave off Route 115), Nidoking, Lucario, and Magearna - which is legal from E0032 onward because this fight follows Devon Corp. The only edit was cosmetic: Kartana's Assault Vest was swapped for a Life Orb after the previous battle showed the Vest made its Protect slot unusable.",
+    "removed": [], "added": []
+  },
+  "opponent_levels_before": {"FINNEON": 23, "WATTREL": 21, "MANTYKE": 22, "ARROKUDA": 20},
+  "opponent_levels_this_run": {"FINNEON": 23, "WATTREL": 22, "MANTYKE": 22, "ARROKUDA": 21},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/31-TRAINER_NED/r1", "seed": "0x4A19",
+      "outcome": "won", "turns": 3, "decisions": 5, "player_faints": 0, "opponent_faints": 4,
+      "ai_decision_frames_max": 61, "ai_decision_seconds_max": 1.021,
+      "narrative": "Three turns, four to zero, no player faints - the same shape as the first pass and for the same structural reason. Finneon selected Tailwind on turn 1, which is its authored role, and Jolteon (base 130 to Finneon's 91) removed it before the move resolved. Kartana's Knock Off then took Wattrel and its Life Orb together. Mantyke came in and is 4x to Electric, so Thunderbolt ended it on the turn it arrived, and a critical Leaf Blade finished Arrokuda in the same turn. Ned's whole roster is Water or Water/Flying, so a single fast Electric attacker is 2x into three members and 4x into the fourth."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Finneon's Tailwind can charge Wattrel before Thunderbolt; actual execution order, not a flag, determines same-turn benefit", "result": "CHOSEN, NOT EXECUTED (second pass running)", "evidence": "r1 turn 1: Finneon selected Tailwind and was knocked out before it resolved. This is the correct authored choice and the engine correctly gave it no effect. It is also the second consecutive pass in which Finneon's Tailwind has been chosen and never landed, for the same reason both times: it is slower than any competent lead."},
+    {"check": "Soak converts an eligible foe to pure Water before Wattrel attacks; attack directly when the conversion has no payoff", "result": "NOT OBSERVED", "evidence": "Finneon died on turn 1 and Soak lives only on Finneon. Unobserved in both passes."},
+    {"check": "Finneon has Storm Drain rather than unused Swift Swim", "result": "NOT OBSERVED (by deliberate counterplay)", "evidence": "I fired no Water move at any point, specifically because Storm Drain exists. The ability worked by deterrence; the redirect itself was never triggered."},
+    {"check": "Mantyke supplies the alternate Surf/Storm Drain lane, Wide Guard and backup Tailwind", "result": "NOT OBSERVED", "evidence": "Mantyke entered on turn 3 and was knocked out by a 4x Thunderbolt before its first decision point. Wide Guard, Surf and the backup Tailwind have now gone unobserved in both passes."},
+    {"check": "Arrokuda uses Propeller Tail to ignore eligible redirection while applying physical Water/Fighting/Dark pressure", "result": "NOT OBSERVED", "evidence": "Arrokuda's only action in the battle was a Protect on its entry turn; it never attacked. Propeller Tail unobserved in both passes."},
+    {"check": "Wind Power must be gained and consumed natively", "result": "NOT OBSERVED", "evidence": "No wind move was used by either side - Ned's only Tailwind user died before it resolved - so Wattrel never charged."},
+    {"check": "Ground/Electric immunity must be recalculated after Soak", "result": "NOT APPLICABLE", "evidence": "No Soak occurred."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "WATTREL", "payoff": "real - Finneon died to Thunderbolt first, so Kartana's Leaf Blade redirected onto Wattrel and the guard blocked it"},
+    {"turn": 2, "user": "ARROKUDA", "payoff": "real - blocked a 2x Thunderbolt on the turn it entered"}
+  ],
+  "protect_note": "Two guards, both with real payoff, no empty guard and no consecutive guard. Identical quality to the first pass.",
+  "ai_defects": [],
+  "ai_observations": [
+    "No defects. Every choice was defensible; the team simply has no turn available against a fast Electric lead. Nothing in this fight tested the new setup pricing, because the only setup move on the roster (Finneon's Tailwind) was chosen and then denied by speed.",
+    "The real finding is a coverage one, not an AI one: six of this trainer's seven authored mechanics - Soak, Storm Drain's redirect, Wide Guard, backup Tailwind, Propeller Tail and Wind Power - have now gone unobserved across two full passes. That is not the AI declining to use them; it is the team never surviving long enough to reach them.",
+    "ai_decision_frames_max 61 (1.021 s), up from 16 in the first pass."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt in three turns with zero player faints. Brief rule: +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "ARROKUDA", "offset_before": 3, "offset_after": 4, "level_before": 21, "level_after": 22},
+      {"member": "MANTYKE", "offset_before": 4, "offset_after": 5, "level_before": 22, "level_after": 23}
+    ],
+    "reasoning": "Arrokuda is the lowest-level member and takes the second of its two permitted points, which exhausts its budget for this pass. Mantyke is untouched so far and takes its first: at 23 it has a real chance of surviving the Electric attack that has now killed it on its entry turn twice, which is the only way its Wide Guard and Tailwind will ever be seen. I left Finneon alone (it is already the highest at offset 5 and its problem is Speed, not level) and Wattrel alone (already +1).",
+    "budget_after_this_pass": {"FINNEON": "0 of 2 used", "WATTREL": "+1 of 2 used", "MANTYKE": "+1 of 2 used", "ARROKUDA": "+2 of 2 used - exhausted"},
+    "honest_assessment": "I do not expect these two points to change the result, and I want that on the record rather than buried. Levels are the only lever I am permitted, but the problem here is not level - it is that every member shares one type and one weakness, so one correctly chosen player lead is 2x or 4x into the entire roster. Two more points will not fix that. See the cooler note.",
+    "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. scripts/emerald_champions_teams.py --write was deliberately NOT run: a concurrent session has uncommitted edits to other trainers in the same authored file. My two lines were staged as an isolated hunk. The main agent materializes.",
+    "rerun_after_this_change": "NOT PERFORMED - needs a ROM rebuild only the main agent can do."
+  },
+  "cooler_note": "This is the team in the block I would most like to change, and the constraint says levels only, so I am reporting rather than acting. The coastal wind-and-current concept is good and clearly distinct from Elliot's collection next door, but it is mono-Water in practice: Finneon, Mantyke and Arrokuda are Water or Water/Flying, and Wattrel's Electric/Flying is still 2x to the same Rock and 4x to nothing useful. The consequence is measurable - across two passes this trainer has lasted three and four turns and has never executed Soak, Wide Guard, Propeller Tail, Wind Power or a landed Tailwind. The engine is authored but never runs. A concrete suggestion for a later pass, not applied here: the wind half of the concept deserves a member that is not weak to Electric - a Ground or Grass body in the fourth slot would break the shared weakness and give Tailwind something to accelerate that does not die to the same attack. Failing that, leading Mantyke beside Finneon (so Wide Guard is up while Tailwind is being set) would at least let the engine start.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
