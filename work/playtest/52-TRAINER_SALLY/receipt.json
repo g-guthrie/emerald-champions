@@ -1,0 +1,51 @@
+{
+  "play_order": 52,
+  "e_group": "E0055",
+  "trainer": "TRAINER_SALLY",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle1",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"LOPUNNY": 29, "KIRLIA": 33, "FLORAGATO": 30, "WHIMSICOTT": 28},
+  "cap_window_confirmation": "Dossier seeds 31/35/32/30 resolved to 29/33/30/28. Cap 30, Medium -2.",
+  "party_manifest": "work/playtest/52-TRAINER_SALLY/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json (Magearna's dead Protect slot under Assault Vest replaced with Aura Sphere), reordered to lead Weavile + Gardevoir. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Scrappy Fake Out is used to buy Kirlia a useful Imprison turn, OR Kirlia attacks when no worthwhile shared move exists",
+    "Imprison, if used, denies my Psychic / Dazzling Gleam / Protect while Kirlia stays active, and is not retroactive against an already-executed Protect",
+    "Scrappy lets Lopunny's Fighting move hit Ghost-types (not testable - I brought no Ghost)",
+    "Floragato supplies physical pressure or a U-turn pivot",
+    "Whimsicott's Prankster Encore punishes a suitable remaining choice",
+    "Every opposing Protect has a payoff"
+  ],
+  "note_on_party_choice": "I deliberately kept Protect on three members and Psychic on Gardevoir so that Imprison would have real targets. This room was played to let the authored tactic fire, not to dodge it.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/52-TRAINER_SALLY/a1", "seed": 52, "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Weavile (125 Speed) beat Lopunny (105) to the Fake Out and flinched it, denying Lopunny's own Fake Out, and Mega Gardevoir's Pixilate Hyper Voice took Lopunny to 27 and Kirlia through Eviolite to 42. Kirlia answered with spread Dazzling Gleam, 2x on Weavile. T2 Kirlia Protected, blanking both a 2x Knock Off and a Hyper Voice that were each lethal to it, while Lopunny's Scrappy High Jump Kick hit Weavile for 4x and KO'd it - then Lopunny died to the Hyper Voice anyway. T3 Nidoking came in; Hyper Voice KO'd Kirlia and the Earth Power aimed at it redirected into the incoming Floragato and KO'd that too. T4 Ice Beam (2x) removed Whimsicott before its Prankster kit did anything."}
+  ],
+  "strategy_checks": [
+    {"check": "Fake Out buys Kirlia a useful Imprison turn, or Kirlia attacks when no worthwhile lock exists", "result": "PASS (fallback branch)", "evidence": "Lopunny never got to use Fake Out - Weavile out-sped it and flinched it on T1 - so the setup half was never available. Kirlia took the authored alternative every single turn: spread Dazzling Gleam (T1), Protect (T2), Psychic (T3). Correct, because at no point had I revealed Psychic, Dazzling Gleam or Protect, so Imprison had zero known targets. The AI declined a move that would have been worthless on the information it is allowed to have."},
+    {"check": "Imprison actually denies my Psychic / Dazzling Gleam / Protect", "result": "NOT_EXERCISED", "evidence": "Imprison was never selected in three Kirlia turns. See the design note below - this is not an AI error but it does mean the room's signature mechanic did not appear."},
+    {"check": "Floragato supplies physical attacks or pivoting", "result": "PASS (one turn)", "evidence": "T3 Seed Bomb into Nidoking on the turn it entered, for 40. It was KO'd the same turn by a resisted Earth Power, which says more about its 0.5x matchup into a Sheer Force Life Orb Ground-type than about the choice."},
+    {"check": "Whimsicott's Prankster Encore punishes a suitable choice", "result": "NOT_SELECTED", "evidence": "Whimsicott entered on T3 and used Moonblast on its only turn. Encore had a legal target - my Gardevoir had used Hyper Voice on three consecutive turns and was an obvious lock candidate - and a priority Encore on that would have been the single most disruptive thing Sally could do to me. Choosing a 21-damage Moonblast over it against a party that had just erased three members in three turns is the weakest decision of this battle. I am recording it as a note rather than a defect because Whimsicott was in a 1-vs-2 losing position where nothing saves it."},
+    {"check": "Scrappy Lopunny", "result": "NOT_TESTABLE", "evidence": "No Ghost-type on my side. Lopunny's High Jump Kick did land 4x on Weavile (Dark/Ice) for a clean KO, which is the correct read of the board."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "KIRLIA", "payoff": "REAL, and the best guard in my block so far. At 42/99 it blocked a 2x Knock Off from a Life Orb Weavile AND a Pixilate Hyper Voice from a Mega Gardevoir in the same turn, either of which kills it. It survived a further turn and got a Psychic off."}
+  ],
+  "protect_ledger_note": "One opponent Protect, maximum possible denial, no repetition.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Kirlia declining Imprison every turn is correct play under the September 15 knowledge rule and matches the authored fallback exactly. But it exposes a structural problem with the room: Imprison only pays when the AI knows the opponent shares a move, and the AI is only allowed to know revealed moves. A player who leads with attacks - which is every reasonable player - will have revealed nothing lockable by the time Kirlia acts. The tactic the Trick House room is named after is therefore close to unreachable in practice.",
+    "Whimsicott holding Prankster Encore and using Moonblast instead, against an opponent that had used the same move three turns running, is worth looking at in the Encore scoring. It was in a hopeless position, so I do not weight it heavily, but it is the second time in this block that a support move with an obvious target went unselected in favour of small chip damage (compare Golbat's Taunt in play_order 48)."
+  ],
+  "level_changes": [
+    {"member": "LOPUNNY", "field": "level offset", "before": 1, "after": 2, "reason": "First-attempt win with one player faint in four turns. Lopunny is the opening disruption and it lost the Fake Out race to a 125-Speed lead by 20 points of base Speed; one level does not win that race but it does mean the High Jump Kick that traded for my Weavile arrives from a body that survives the first Hyper Voice. Kirlia (offset 5, L33) is the deliberately over-levelled centrepiece and was left alone."},
+    {"member": "WHIMSICOTT", "field": "level offset", "before": 0, "after": 1, "reason": "Lowest-level opponent at L28 and the team's only disruption reserve. It entered into a 1-vs-2 and died to a single 2x Ice Beam from full 97 HP without its Prankster kit mattering. A Prankster support that cannot survive one hit has no way to demonstrate Encore or Leech Seed."}
+  ],
+  "post_change_rerun": "NOT RUN - requires a headless ROM rebuild of the shared work/agent-battle-build; see the play_order 49 receipt.",
+  "calibration": "Won first try, one faint, four turns, two of six never sent out. Brief rule 5 and the AGENTS three-faint threshold both trigger +1 on the weakest one or two.",
+  "could_this_be_cooler": "The cast is good and the Trick House framing is right, but the room's central idea does not survive contact with a real opponent, and I think that is the thing worth fixing. Imprison is a move that needs information the AI is not permitted to have at the moment it must choose. Two ways out, neither of them a level change: give Kirlia a move that creates the shared-move condition instead of waiting for it, or accept Kirlia as the attacker it actually played as and move the room's identity onto Whimsicott, whose Prankster Encore does the same job - punishing a repeated choice - using only information the AI is allowed to use (last used move). The second option is cheaper and it makes the fourth slot the puzzle rather than a bystander. Separately, the Lopunny opening is a coin-flip on base Speed: anything at 106 or above takes the Fake Out away entirely, and this room has no backup plan when that happens. Nothing changed in this pass beyond levels.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
