@@ -47,4 +47,4 @@
     {MAPSEC_LILYCOVE_CITY, LEGENDARY_SIGN_COUNT, COMPOUND_STRING("After opening the three ruins\nfrom the SEALED CHAMBER, visit\lthe ANCIENT TOMB on ROUTE 120.\lIts puzzle leads to REGISTEEL."), SPECIES_REGISTEEL},
     {MAPSEC_LILYCOVE_CITY, LEGENDARY_SIGN_COUNT, COMPOUND_STRING("The harbor sailor offers island\npasses with six badges.\pSOUTHERN ISLAND and HOENN's routes\nhold LATIAS and LATIOS. NAVEL ROCK\lhas LUGIA below and HO-OH above.\pFind MEW on FARAWAY ISLAND and\nDEOXYS on BIRTH ISLAND."), SPECIES_NONE},
 
-    {MAPSEC_FALLARBOR_TOWN, LEGENDARY_SIGN_MARSHADOW, COMPOUND_STRING("Collect 250 soot, then visit the\nglassmaker on ROUTE 113 to uncover\lMARSHADOW in the ash grass.\lSpending soot keeps your progress."), SPECIES_NONE},
+    {MAPSEC_FALLARBOR_TOWN, LEGENDARY_SIGN_MARSHADOW, COMPOUND_STRING("Collect 250 soot, then visit the\nglassmaker on ROUTE 113 to uncover\lMARSHADOW in the ash grass.\lYour soot total is never spent."), SPECIES_NONE},

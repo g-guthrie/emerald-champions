@@ -234,6 +234,9 @@ void NewGameInitData(void)
     ResetContestLinkResults();
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetItemFlags();
+    // Shoal Cave's tide is ordinary save state now. It starts high; the
+    // Shoalmaster turns it on request.
+    FlagSet(FLAG_SYS_SHOAL_TIDE);
     ResetDexNav();
     ClearFollowerNPCData();
 }

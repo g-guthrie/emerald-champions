@@ -109,30 +109,21 @@ Route123_BerryMastersHouse_Text_DoneForToday:
 	.string "Come again another day.\p"
 	.string "Let flowers fill the world!$"
 
-Route123_BerryMastersHouse_Text_HeardAGoodSayingLately:
+Route123_BerryMastersHouse_Text_RareBerryOffer:
 	.string "The way my husband grows BERRIES,\n"
 	.string "oh, he's the best in the world.\p"
-	.string "He makes me proud, that he does.\p"
-	.string "Incidentally, child, have you heard\n"
-	.string "a good saying lately?$"
+	.string "He keeps asking me for the rare ones.\n"
+	.string "I'd rather you had this one.$"
 
-Route123_BerryMastersHouse_Text_InspirationalTakeThis:
-	.string "Ah! What a remarkable saying!\n"
-	.string "Inspirational, it is!\p"
-	.string "I want you to have this.$"
-
-Route123_BerryMastersHouse_Text_GoodSayingTakeThis:
-	.string "Oh! A good saying it is.\n"
-	.string "You're quite remarkable.\p"
-	.string "I want you to have this.$"
+Route123_BerryMastersHouse_Text_NoMoreRareBerries:
+	.string "That's every rare BERRY I had put by.\p"
+	.string "My husband still wants them, mind.\n"
+	.string "He can grow his own!$"
 
 Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife:
 	.string "Our four grandchildren should become\n"
 	.string "more accomplished than my husband.\p"
 	.string "Joy never goes out of my life!$"
-
-Route123_BerryMastersHouse_Text_Ah:
-	.string "Ah…$"
 
 Route104_PrettyPetalFlowerShop_Text_ThisIsPrettyPetalFlowerShop:
 	.string "Hello!\p"

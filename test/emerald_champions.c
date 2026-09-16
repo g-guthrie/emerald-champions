@@ -2617,6 +2617,20 @@ TEST("Emerald Champions soot alternatives close each finite receipt once")
     ClaimEmeraldChampionsSootMilestone();
     EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    // The Mega tier waits for the caller's checkitem ITEM_MEGA_RING.
+    UnlockLegendarySign(LEGENDARY_SIGN_MARSHADOW);
+    VarSet(VAR_EC_SOOT_PROGRESS, 500 | EC_SOOT_CORD_RECEIVED);
+    FlagClear(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
+    gSpecialVar_0x8004 = FALSE;
+    ClaimEmeraldChampionsSootMilestone();
+    EXPECT_EQ(gSpecialVar_Result, 6);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_HOUNDOOMINITE), 0);
+    gSpecialVar_0x8004 = TRUE;
+    ClaimEmeraldChampionsSootMilestone();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_HOUNDOOMINITE), 1);
+    EXPECT(FlagGet(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE));
+    FlagClear(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
     VarSet(VAR_EC_SOOT_PROGRESS, 0);
     SetMoney(&gSaveBlock1Ptr->money, savedMoney);
     ResetBookItemOwnership();
@@ -2634,21 +2648,56 @@ TEST("Emerald Champions garden refuses owned stones and Shoal substitutes before
     EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_ALREADY_DONE);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_RAZZ_BERRY), 20);
     EXPECT(!FlagGet(FLAG_EC_BERRY_TRADE_BAXCALIBRITE));
+    // An owned Glalitite closes the stone tier; the haul never pays money.
+    FlagClear(FLAG_EC_SHOAL_ICE_CHARTED);
     EXPECT(AddPCItem(ITEM_GLALITITE, 1));
     EXPECT(AddBagItem(ITEM_SHOAL_SALT, 4));
     EXPECT(AddBagItem(ITEM_SHOAL_SHELL, 4));
     BufferEmeraldChampionsShoalReward();
-    EXPECT_EQ(StringCompare(gStringVar1, GetItemName(ITEM_BIG_PEARL)), 0);
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    TradeEmeraldChampionsShoalMaterials();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SALT), 4);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SHELL), 4);
+    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+    ResetBookItemOwnership();
+}
+
+TEST("Emerald Champions Shoal pays Glalitite once, then charts, then decorations")
+{
+    ResetBookItemOwnership();
+    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+    FlagClear(FLAG_EC_SHOAL_ICE_CHARTED);
+    FlagClear(FLAG_EC_SHOAL_ICE_SIGHTING);
+    EXPECT(AddBagItem(ITEM_SHOAL_SALT, 4));
+    EXPECT(AddBagItem(ITEM_SHOAL_SHELL, 4));
+    BufferEmeraldChampionsShoalReward();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(StringCompare(gStringVar1, GetItemName(ITEM_GLALITITE)), 0);
     TradeEmeraldChampionsShoalMaterials();
     EXPECT_EQ(gSpecialVar_Result, 1);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GLALITITE), 1);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SALT), 0);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SHELL), 0);
     EXPECT(FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE));
+    // Tier two is the charting flag, scripted; the special hands out nothing.
+    EXPECT(AddBagItem(ITEM_SHOAL_SALT, 4));
+    EXPECT(AddBagItem(ITEM_SHOAL_SHELL, 4));
+    BufferEmeraldChampionsShoalReward();
+    EXPECT_EQ(gSpecialVar_Result, 1);
     TradeEmeraldChampionsShoalMaterials();
     EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GLALITITE), 1);
+    FlagSet(FLAG_EC_SHOAL_ICE_CHARTED);
+    BufferEmeraldChampionsShoalReward();
+    EXPECT_EQ(gSpecialVar_Result, 2);
+    TradeEmeraldChampionsShoalMaterials();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 0);
     FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+    FlagClear(FLAG_EC_SHOAL_ICE_CHARTED);
+    FlagClear(FLAG_EC_SHOAL_ICE_SIGHTING);
     ResetBookItemOwnership();
 }
 

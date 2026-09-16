@@ -18,12 +18,15 @@ Route113_GlassWorkshop_EventScript_GlassWorker::
 	goto Route113_GlassWorkshop_EventScript_ClaimMilestones
 
 Route113_GlassWorkshop_EventScript_ClaimMilestones:
+	checkitem ITEM_MEGA_RING, 1
+	copyvar VAR_0x8004, VAR_RESULT
 	special ClaimEmeraldChampionsSootMilestone
 	goto_if_eq VAR_RESULT, 1, Route113_GlassWorkshop_EventScript_MilestoneBag
 	goto_if_eq VAR_RESULT, 2, Route113_GlassWorkshop_EventScript_MilestonePC
 	goto_if_eq VAR_RESULT, 3, Route113_GlassWorkshop_EventScript_Marshadow
 	goto_if_eq VAR_RESULT, 4, Route113_GlassWorkshop_EventScript_MilestoneNoRoom
 	goto_if_eq VAR_RESULT, 5, Route113_GlassWorkshop_EventScript_MilestoneOwned
+	goto_if_eq VAR_RESULT, 6, Route113_GlassWorkshop_EventScript_MilestoneNeedRing
 	special BufferEmeraldChampionsSootProgress
 	msgbox Route113_GlassWorkshop_Text_LetsSeeCollectedAshes, MSGBOX_DEFAULT
 	switch VAR_RESULT
@@ -70,9 +73,8 @@ Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike:
 	.string "The shop lists each price in cash.$"
 
 Route113_GlassWorkshop_Text_FunToBlowGlassFlute:
-	.string "It's fun to blow a glass flute while\n"
-	.string "my boss is talking.\p"
-	.string "Huff-huff! Puff-puff!$"
+	.string "Boss only blows glass furniture now.\n"
+	.string "The ash keeps the kiln hot, huff-puff.$"
 
 
 Route113_GlassWorkshop_EventScript_MilestoneBag:
@@ -90,6 +92,9 @@ Route113_GlassWorkshop_EventScript_MilestoneNoRoom:
 	msgbox Route113_GlassWorkshop_Text_MilestoneNoRoom, MSGBOX_DEFAULT
 	release
 	end
+Route113_GlassWorkshop_EventScript_MilestoneNeedRing:
+	msgbox Route113_GlassWorkshop_Text_MilestoneNeedRing, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_BrowseGlass
 Route113_GlassWorkshop_EventScript_Marshadow:
 	msgbox Route113_GlassWorkshop_Text_Marshadow, MSGBOX_DEFAULT
 	goto Route113_GlassWorkshop_EventScript_ClaimMilestones
@@ -124,6 +129,10 @@ Route113_GlassWorkshop_Text_MilestonePC:
 Route113_GlassWorkshop_Text_MilestoneOwned:
 	.string "You already own a {STR_VAR_1}.\n"
 	.string "Your one-time bonus is ¥{STR_VAR_2}!$"
+
+Route113_GlassWorkshop_Text_MilestoneNeedRing:
+	.string "The ash hides a Mega Stone, huff-puff.\n"
+	.string "Come back wearing a MEGA RING.$"
 
 Route113_GlassWorkshop_Text_MilestoneNoRoom:
 	.string "Your collection gift is safe with me.\n"

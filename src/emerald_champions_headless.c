@@ -3033,14 +3033,15 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_BADGE08_GET);
                 FlagClear(FLAG_SYS_CLOCK_SET); // Daily-reset cases seed its earned pending flag below.
                 FlagClear(FLAG_SYS_SHOAL_TIDE);
-                FlagClear(FLAG_SYS_SHOAL_ITEM);
                 FlagClear(FLAG_EC_CAUGHT_ARTICUNO);
                 FlagClear(FLAG_RECEIVED_SHOAL_DEEP_SEA_SCALE);
                 for (slot = 0; slot < ARRAY_COUNT(collectionFlags); slot++)
                     FlagClear(collectionFlags[slot]);
                 if (gEcHeadlessFixtureParam == 174 || gEcHeadlessFixtureParam == 184)
                 {
-                    RtcInitLocalTimeOffset(gEcHeadlessFixtureParam == 174 ? 6 : 0, 0);
+                    // The tide is save state now; 184 approaches at high tide.
+                    if (gEcHeadlessFixtureParam == 184)
+                        FlagSet(FLAG_SYS_SHOAL_TIDE);
                     LoadHeadlessMap(MAP_ROUTE125, 22, 20);
                 }
                 else if (gEcHeadlessFixtureParam >= 185)
@@ -3075,8 +3076,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 {
                     for (slot = 0; slot < ARRAY_COUNT(collectionFlags); slot++)
                         FlagSet(collectionFlags[slot]);
-                    if (gEcHeadlessFixtureParam == 180)
-                        FlagSet(FLAG_SYS_SHOAL_ITEM);
+                    // 180 arrives with the deposits already taken and the tide
+                    // waiting to be turned, which is what restocks them now.
                     LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM, 17, 15);
                 }
                 else if (gEcHeadlessFixtureParam == 181)
@@ -3470,8 +3471,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                         (gEcHeadlessFixtureParam == 102 || gEcHeadlessFixtureParam == 105) ? 100 :
                         gEcHeadlessFixtureParam == 103 ? 250 : 500;
                     VarSet(VAR_EC_SOOT_PROGRESS, total);
-                    VarSet(VAR_ASH_GATHER_COUNT, 250);
-                    VarSet(VAR_GLASS_WORKSHOP_STATE, 2);
                     FlagClear(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
                     AddBagItem(ITEM_SOOT_SACK, 1);
                     if (gEcHeadlessFixtureParam >= 105)

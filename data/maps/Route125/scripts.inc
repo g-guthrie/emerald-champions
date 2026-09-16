@@ -59,8 +59,9 @@ Route125_EventScript_Auron::
 
 
 Route125_Text_NOLEN_LocalConversation:
-	.string "I know a shortcut to the shore.\n"
-	.string "First, decide which shore.$"
+	.string "SHOAL CAVE is just off this water.\p"
+	.string "Ask the SHOALMASTER inside to turn\n"
+	.string "the tide. He does it for anyone.$"
 
 Route125_Text_SHARON_LocalConversation:
 	.string "SLOWBRO never seems rushed.\n"

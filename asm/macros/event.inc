@@ -2881,6 +2881,7 @@
 	.byte \loBerry
 	.byte \hiBerry
 	giveitem VAR_RESULT
+	call EmeraldChampions_EventScript_MintBerryHarvest
 	.endm
 
 @ VS Seeker
