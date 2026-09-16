@@ -1,0 +1,96 @@
+{
+  "play_order": 57,
+  "e_group": "E0064",
+  "trainer": "TRAINER_ANTHONY",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Magneton 0->1 off a three-turn one-faint clear. This is the one confirming run of that level on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Magneton resolved at L29 (L28 in pass 1). Doduo L32, Zebstrika L29 and Linoone L30 unchanged.",
+  "resolved_opponent_levels": {"DODUO": 32, "ZEBSTRIKA": 29, "LINOONE": 30, "MAGNETON": 29},
+  "party_manifest": "work/playtest/57-TRAINER_ANTHONY/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: Nidoking, Gardevoir (Gardevoirite), Kartana, Togekiss, Weavile, Magearna - all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110. One declared reachable legend (Magearna) and one Mega (Gardevoir, evolved turn 1).",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/57-TRAINER_ANTHONY/r1",
+      "seed": 57,
+      "outcome": "won",
+      "turns": 4,
+      "driver_turn_counter": 3,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames": [36, 36, 18, 24, 24],
+      "ai_decision_seconds_max": 0.603,
+      "narrative": "I played turn 1 differently from pass 1, having learned what this team does: instead of leaving Nidoking in front of Zebstrika's High Horsepower, I withdrew it for Togekiss, which is immune to Ground. Zebstrika had already selected High Horsepower and it did nothing; Mega Gardevoir's Pixilate Hyper Voice then KO'd the 91 HP Zebstrika outright and chipped Doduo, whose Brave Bird took Togekiss to 62 before the recoil finished it. Two opponents down in one turn with nothing lost. T2 the rest of the team punished me anyway: Linoone's Choice Band priority Extreme Speed took my Mega Gardevoir from 90 to 20, and Magneton - at its new level, with Analytic - landed a 2x Thunderbolt that KO'd the 62 HP Togekiss before its Air Slash resolved. T3 Magearna came in, Gardevoir Protected away both a second Extreme Speed and a second Thunderbolt, and Aura Sphere (2x) removed Linoone. T4 I made a player error and repeated Gardevoir's Protect, which failed, and Magneton's Thunderbolt finished the 20 HP Mega; Aura Sphere (2x) then ended Magneton. Won with two player faints."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Magneton's extra level makes the support member matter",
+      "result": "PASS",
+      "evidence": "This is the clearest conversion in the pass. At L29 with Analytic it took my 62 HP Togekiss with a 2x Thunderbolt on turn 2 and then finished my Mega Gardevoir on turn 4 - both of the battle's player faints came from Magneton. In pass 1 at L28 it got exactly one Thunderbolt off and died to a critical Aura Sphere with its Reflect unused. The level bought the team its entire damage output after turn 1."
+    },
+    {
+      "check": "Analytic actually fires",
+      "result": "PASS",
+      "evidence": "Magneton is slow enough that Analytic's moving-last boost applied on both of its Thunderbolts, which is why a 77 HP support Pokemon took two of my six. The ability is doing real work on this build."
+    },
+    {
+      "check": "Choice Band Linoone's Extreme Speed pressure",
+      "result": "PASS",
+      "evidence": "Priority Extreme Speed took my Mega Gardevoir from 90 to 20 on turn 2 in one hit and forced me to spend the next turn on Protect. That is exactly the role the Band is for, and it is why I could not simply win the fight with the Mega."
+    },
+    {
+      "check": "Zebstrika's coverage punishes a Ground-type lead",
+      "result": "FAIL this pass, by my counterplay rather than its error",
+      "evidence": "It again selected HIGH_HORSEPOWER - correct against the Nidoking that was in front of it at turn start - but I withdrew Nidoking for a Flying-type and the move did nothing. The AI does not read pending commands, so this is good player counterplay, not an AI fault. Worth recording that the team's turn-1 threat is answerable by one switch once you know it is coming."
+    },
+    {
+      "check": "Doduo's Swords Dance",
+      "result": "FAIL - never selected",
+      "evidence": "Doduo is the team's highest-level member at offset 4 / L32 and it chose BRAVE_BIRD on its only turn, dying to the combination of a spread Hyper Voice and its own recoil. SWORDS_DANCE has not been selected in either pass. On this board Brave Bird was defensible - it was already damaged and it took 57 off Togekiss - but the Eviolite Swords Dance sweeper the set describes has never appeared."
+    },
+    {
+      "check": "Air Balloon buys Magneton a free turn against Ground",
+      "result": "PARTIAL",
+      "evidence": "The Balloon popped to the spread Hyper Voice on turn 2 rather than to a Ground move, so it never did the job it is on the set for - though in fairness my only Ground attacker (Nidoking) was on the bench all battle precisely because of this team."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent used Protect at any point. Both of the battle's Protects were mine. Nothing to review on the opponent side.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Magneton's target selection was correct on both of its turns: the 2x Flying-type first, then the 20 HP Mega. For a support member it made the two most valuable choices available to it.",
+    "Linoone correctly aimed Choice Band Extreme Speed at the Mega rather than at the bulkier body, and it kept attacking the same target once locked.",
+    "Doduo's Brave Bird into Togekiss was a reasonable use of a body that a spread Hyper Voice had already damaged; the recoil knockout is not a blunder in that context.",
+    "Zebstrika's blanked High Horsepower is my switch, not a targeting error.",
+    "Player error to record honestly: I repeated Gardevoir's Protect on turn 4 and it failed, which is how the second faint happened. Gardevoir was on 20 HP against a 2x Analytic Thunderbolt and would very likely have died on that turn regardless, so I do not think it changed the outcome, but the brief is explicit that a player mistake is not a difficulty benchmark and I am not counting that faint as evidence the team needs less levelling.",
+    "AI decision timing peaked at only 36 frames (0.603 s) - the fastest in my block, because the team was down to two battlers from turn 2."
+  ],
+  "level_changes": [],
+  "level_changes_not_made": [
+    {
+      "member": "MAGNETON",
+      "reason": "+1 in pass 1 and it converted completely - both player faints in this battle came from it. Two faints means the rule says keep."
+    },
+    {
+      "member": "ZEBSTRIKA",
+      "reason": "Untouched at offset 1, and deliberately so for the second pass running. It is the team's turn-1 threat and in pass 1 it traded itself for my best attacker; this pass I answered it with a switch. Nothing about its level is wrong."
+    },
+    {
+      "member": "LINOONE",
+      "reason": "Untouched at offset 2. Its Choice Band Extreme Speed took 70 off a Mega in one hit and shaped two of my turns. Working."
+    },
+    {
+      "member": "DODUO",
+      "reason": "The team's level budget at offset 4 / L32. Rule 5 points away from the highest-level member first, and its problem (Swords Dance never selected) is not a level problem."
+    }
+  ],
+  "calibration": "KEEP - no level change. Won on the first attempt in four turns with two player faints, both inflicted by the Magneton that pass 1 raised. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' I am applying that even though one of the two faints was partly my own repeated-Protect error, because the first faint (Togekiss to a 2x Analytic Thunderbolt) was clean and because Magneton's level is demonstrably what turned this team from 'one scary turn then nothing' into a fight that kept threatening after its openers were gone.",
+  "could_this_be_cooler": "Retain. The triathlete's speed-and-priority concept works and pass 1's single level fixed its real weakness - the team used to be one enormous turn 1 followed by nothing, and it now has a back half that takes Pokemon. The one honest observation, unchanged from pass 1 and not implemented here, is Doduo: it is the highest-level member on the roster at offset 4, it carries Swords Dance, and across two passes it has taken exactly two actions, both Brave Bird, and killed itself with recoil both times. An Eviolite Early Bird Doduo that never sets up is just a fragile recoil attacker wearing a defensive item. Either it wants to come in behind something (ordering) or the Swords Dance slot is doing nothing for it - a question for the main agent, not a change I made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. No teams-file change for this battle. Synthetic headless benchmark, not earned campaign play."
+}
