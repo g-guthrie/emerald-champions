@@ -1,0 +1,34 @@
+{
+  "play_order": 149, "e_group": "E0180", "trainer": "TRAINER_JOSUE", "class": "ace",
+  "location": "Route105", "chapter": "Feather Badge - optional Surf backtrack", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - all four at 48+1-2=47, matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/149-TRAINER_JOSUE/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 59, "party": "party-a1.json", "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "note": "Magnezone + Iron Hands + Weavile + Rillaboom + Alakazam + Gengar. Josue read the opening perfectly and double-Protected turn 1, both guards blocking a lethal 4x Electric hit; the same two attacks landed on turn 2 and took Pelipper and Cramorant together. The back pair was the better fight - a critical Muddy Water plus Wild Charge recoil left Iron Hands at 5 HP, and Tornadus and Kilowattrel focused Weavile down the moment it switched in. Magnezone carried the whole battle because Josue's team owns no Ground, Fire or Fighting move."}
+  ],
+  "strategy_checks": [
+    {"check": "Pelipper supplies rain on entry", "result": "PASS", "evidence": "weather read B_WEATHER_RAIN_NORMAL at turn 0 from Drizzle, and a Damp Rock kept it up for the whole four-turn battle."},
+    {"check": "Cramorant's Surf is only fired beside Pelipper, the one partner that resists it", "result": "PASS", "evidence": "turn 2 Surf with Pelipper as its partner. Cramorant never shared the field with Kilowattrel or Tornadus, so the authored pairing constraint was respected by the deployment order itself."},
+    {"check": "Kilowattrel's Wind Power charges off Josue's own weather kit", "result": "PASS", "evidence": "final turn, 'Being hit by Tailwind charged the opposing Kilowattrel' from its own partner's Prankster Tailwind, and then 'Being hit by Icy Wind charged the opposing Kilowattrel' off my Gengar. Both halves of the ability work."},
+    {"check": "Tornadus's priority Tailwind supports Kilowattrel's special pressure", "result": "PASS", "evidence": "Prankster Tailwind on the last turn, used specifically to charge the partner rather than to win a speed race it had already won."},
+    {"check": "Rain-accurate attacks", "result": "PASS", "evidence": "Thunder used twice under rain and hit both times; Hurricane hit and KO'd Weavile."},
+    {"check": "Redundant Tailwind is a fallback after loss or expiry, not a second simultaneous boost", "result": "PASS", "evidence": "only one Tailwind was set in the whole battle, by Tornadus, and only after Pelipper - the other Tailwind owner - was already gone. No stacking."},
+    {"check": "Gulp Missile state is accounted for", "result": "NOT EXERCISED", "evidence": "Cramorant used Surf once and died on that same turn, so no Gulp Missile retaliation board ever came up."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "PELIPPER", "payoff": "REAL - blocked a 4x Thunderbolt that was a clean one-shot on its 157 HP"},
+    {"turn": 1, "battler": "CRAMORANT", "payoff": "REAL - blocked a 4x Wild Charge that was a clean one-shot on its 137 HP"}
+  ],
+  "protect_note": "Both Protects came on the same turn, which normally reads as over-guarding, but here each one independently prevented a guaranteed KO, so the pair of guards bought Josue a whole extra turn for nothing. This is the best Protect decision-making seen anywhere in this block.",
+  "ai_defects": [],
+  "level_changes": [
+    {"trainer": "TRAINER_JOSUE", "member": "PELIPPER", "before": 1, "after": 2},
+    {"trainer": "TRAINER_JOSUE", "member": "CRAMORANT", "before": 1, "after": 2}
+  ],
+  "calibration_reasoning": "First-attempt win with one player faint over four turns, which triggers the '+1 on the weakest one or two members' rule. All four sit at a flat +1, so 'weakest' is decided on the board rather than the sheet: Pelipper and Cramorant are the two that died in a single exchange each to 4x Electric, while Tornadus is a legendary and is excluded from a first increase under the brief, and Kilowattrel is the Wind Power payoff piece and the harder half of the fight. Pelipper and Cramorant both go 1 -> 2.",
+  "rerun_status": "NOT RERUN. The driver reads trainer parties from the prebuilt ROM in work/agent-battle-build-2 and this agent is instructed never to run make; the teams-file edit is left uncommitted for the main agent's wave-boundary rebuild.",
+  "could_this_be_cooler": "Keep. The rain-and-wind concept is coherent and the one thing the dossier singles out - Wind Power turning Josue's own support into Electric damage - demonstrably fires, off both his Tailwind and an opposing wind move. The problem is ordering rather than composition: the memorable interaction lives entirely in the back pair, so it only appeared on the final turn of the battle after the fight was decided, while the lead pair is two Water/Flying bodies that share a 4x Electric weakness and fold to the same attack. Leading Tornadus beside Kilowattrel - the authored alternate deployment - would show the team's best idea first and would not weaken anything, since Pelipper's Damp Rock rain can be set later just as well. That is a deployment note for the AI rather than a set change. No species, move, item or EV change recommended.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}
