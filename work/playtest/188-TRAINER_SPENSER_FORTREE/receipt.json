@@ -1,0 +1,36 @@
+{
+  "play_order": 188,
+  "e_group": "E0282",
+  "trainer": "TRAINER_SPENSER_FORTREE",
+  "class": "brain",
+  "location": "FortreeCity_Mart",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Crobat/Slaking/Lapras/Arcanine/Venusaur (all +1) L53, Mawile (+2) L54 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/188-TRAINER_SPENSER_FORTREE/party_b54_spenser.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_spenser.json (Incineroar/Mamoswine lead)", "outcome": "won", "turns": 9, "player_faints": 4, "opponent_faints": 6,
+     "why": "Won with two Pokemon left. Knock Off did most of the work: it stripped Venusaur's Black Sludge for 115, took the Choice Scarf off Slaking, and removed Arcanine's Sitrus and Lapras's Leftovers. Spore shut down Mega Mawile on the last turn so a 75 HP Mamoswine could finish it with 2x High Horsepower."}
+  ],
+  "strategy_checks": [
+    {"check": "Crobat sets Tailwind, or uses Taunt / Haze, behind Safety Goggles", "result": "FAIL", "evidence": "Crobat chose Brave Bird on turn 1 and was KOed by a 2x Icicle Crash the same turn. None of Tailwind, Taunt or Haze was ever selected, and the Safety Goggles never mattered because Amoonguss was held in reserve. A TAILWIND-flagged team never set Tailwind."},
+    {"check": "Slaking's Choice Scarf covers its Truant downtime", "result": "PASS", "evidence": "Loafed on turn 2 exactly as Truant requires, and its Double-Edge contributed to KOing Zapdos on turn 3. Knock Off removing the Scarf on turn 3 was the turn that defanged it, which is the correct authored counterplay."},
+    {"check": "Lapras uses Freeze-Dry / Icy Wind and Water Absorb", "result": "PARTIAL", "evidence": "Only Hydro Pump and Protect were chosen. Freeze-Dry and Icy Wind were never used and Water Absorb was never tested. Lapras played as a generic Water attacker rather than the speed-control and Freeze-Dry answer the set implies."},
+    {"check": "Arcanine Intimidate plus Extreme Speed priority", "result": "PASS", "evidence": "Intimidate on entry; Extreme Speed removed a 12 HP Mega Gardevoir on turn 6 before it could fire a spread move. Correct priority usage."},
+    {"check": "Venusaur's Thick Fat blunts Fire and Ice", "result": "PASS", "evidence": "Flare Blitz and Icicle Crash were both halved all fight; it survived far longer than its HP suggests and its Sludge Bomb helped KO Zapdos."},
+    {"check": "Mega Mawile converts Huge Power into knockouts", "result": "PASS", "evidence": "Mega Evolved on entry turn 9 and Play Rough (2x on Dark) immediately KOed Incineroar. It is the correct closer for the team."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 4, "battler": "Venusaur", "payoff": "at 49/164 it blocked both a Flare Blitz and a Hyper Voice, either of which was lethal"},
+    {"attempt": 1, "turn": 7, "battler": "Lapras", "payoff": "blocked a 2x Transistor Thunderbolt that would have KOed it from 135"}
+  ],
+  "protect_summary": "2 opponent Protects, both with clear payoff, 0 empty, no consecutive guarding. Given five of the six carry Protect, the team guards conservatively and well.",
+  "ai_defects": [],
+  "ai_notes": "No illegal or nonsensical choice. The Crobat FAIL above is the third team in this block whose authored Tailwind never landed (see E0267 Swanna, E0268 Braviary), which reads as a systematic pattern rather than one bad team: fast frail setters keep choosing an attack on turn 1 and then die. Reported for the main agent as a cross-team observation, not scored as a per-battle defect.",
+  "level_changes": [],
+  "level_change_rationale": "Keep. Four player faints, won with two Pokemon left, and the closing Mega Mawile forced a Spore to answer. That is the right weight for a Battle Frontier brain placed just before the Gym.",
+  "cooler": "Keep. Choice Scarf Truant Slaking is a real idea, Thick Fat Venusaur and Water Absorb Lapras are honest defensive glue, and Mega Mawile as the closer behind two Intimidates is a coherent Palace Maven identity. One concrete improvement: Crobat is carrying Haze, Taunt and Tailwind - three support moves and one attack - on the fastest and frailest body on the team, and it used the attack and died. Give the support role to Lapras or Mandibuzz-style bulk, or give Crobat a Focus Sash instead of the Safety Goggles it never needed, so the disruption package actually reaches the field.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "No level change was made for this battle."
+}
