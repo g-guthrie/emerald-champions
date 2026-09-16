@@ -187,3 +187,31 @@ AI_DOUBLE_BATTLE_TEST("EC starvation: a guard nothing is aimed at is not taken, 
         }
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC starvation: a healing support move is never aimed at the other side")
+{
+    GIVEN {
+        AI_FLAGS(STARVE_FLAGS);
+        // The live Clawitzer board: the foe is missing far more HP than the
+        // partner is, which is the shape that made the other side look like
+        // the better recipient. A move that only helps whoever it lands on
+        // can never be worth landing on them.
+        PLAYER(SPECIES_AMOONGUSS) { Level(30); HP(80); MaxHP(400); Attack(60); Defense(120); SpDefense(120); Speed(200); Ability(ABILITY_EFFECT_SPORE); Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Attack(5); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_CLAWITZER) {
+            Level(30); HP(300); MaxHP(300); SpAttack(40); Defense(120); SpDefense(120); Speed(40);
+            Ability(ABILITY_MEGA_LAUNCHER); Moves(MOVE_HEAL_PULSE, MOVE_WATER_GUN);
+        }
+        OPPONENT(SPECIES_LAPRAS) { Level(30); HP(360); MaxHP(400); Defense(120); SpDefense(120); Speed(30); Ability(ABILITY_SHELL_ARMOR); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+            // Whatever it picks, it must not be a heal for the other side.
+            // The HP check below is the assertion that matters: a Heal Pulse
+            // landing on the player would put that body back up.
+        }
+    } THEN {
+        EXPECT(playerLeft->hp <= 80);
+    }
+}

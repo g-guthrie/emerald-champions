@@ -1490,6 +1490,26 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         }
         return -20;
     }
+    // A move whose whole effect is to help whoever it lands on must never
+    // land on the other side. Heal Pulse aimed at a foe heals the foe; the
+    // engine allows it and no board makes it worth a turn. Pollen Puff is not
+    // in this list because it damages a foe and only heals an ally.
+    if (IsBattlerAlive(action->target) && !IsBattlerAlly(actor, action->target))
+    {
+        switch (effect)
+        {
+        case EFFECT_HEAL_PULSE:
+        case EFFECT_HELPING_HAND:
+        case EFFECT_AFTER_YOU:
+        case EFFECT_INSTRUCT:
+            return -10000;
+        default:
+            break;
+        }
+        if (move == MOVE_COACHING || move == MOVE_DECORATE || move == MOVE_AROMATIC_MIST
+         || move == MOVE_FLORAL_HEALING)
+            return -10000;
+    }
     // A partner that absorbs the move's type takes it instead of the foe, so
     // the attack is not an attack at all - it is a gift of a Special Attack
     // stage to our own side and a wasted turn. Spread moves are exempt: they
