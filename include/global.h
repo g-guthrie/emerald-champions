@@ -285,7 +285,6 @@ struct SaveBlock3
     u32 bagPocketLayoutMagicInverse;
     struct ItemSlot bagPocketMedicine[BAG_MEDICINE_COUNT];
     struct ItemSlot bagPocketBattle[BAG_BATTLE_COUNT];
-    struct ItemSlot bagPocketTMHM[BAG_TMHM_COUNT - BAG_LEGACY_TMHM_COUNT];
     struct ItemSlot bagPocketBerries[BAG_BERRIES_PRIMARY_COUNT - BAG_LEGACY_BERRIES_COUNT];
     struct ItemSlot bagPocketKeyItems[BAG_KEYITEMS_COUNT - BAG_LEGACY_KEYITEMS_COUNT];
     struct ItemSlot bagPocketMegaStones[BAG_MEGASTONES_PRIMARY_COUNT];
@@ -1104,7 +1103,6 @@ struct Bag
     struct ItemSlot items[BAG_LEGACY_ITEMS_COUNT];
     struct ItemSlot keyItems[BAG_LEGACY_KEYITEMS_COUNT];
     struct ItemSlot pokeBalls[BAG_LEGACY_POKEBALLS_COUNT];
-    struct ItemSlot TMsHMs[BAG_LEGACY_TMHM_COUNT];
     struct ItemSlot berries[BAG_LEGACY_BERRIES_COUNT];
 };
 

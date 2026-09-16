@@ -114,15 +114,13 @@ enum Language
 #define BAG_LEGACY_ITEMS_COUNT    30
 #define BAG_LEGACY_KEYITEMS_COUNT 30
 #define BAG_LEGACY_POKEBALLS_COUNT 16
-#define BAG_LEGACY_TMHM_COUNT     64
 #define BAG_LEGACY_BERRIES_COUNT  46
 
-// Inclement Emerald's eight-pocket capacities. Extra slots live in append-only
+// Inclement Emerald's seven-pocket capacities. Extra slots live in append-only
 // SaveBlock1/SaveBlock3 extensions so existing Emerald Champions saves migrate.
 #define BAG_ITEMS_COUNT      93
 #define BAG_MEDICINE_COUNT   44
 #define BAG_BATTLE_COUNT     180
-#define BAG_TMHM_COUNT       108
 #define BAG_BERRIES_PRIMARY_COUNT 66
 #define BAG_BERRIES_COUNT    68
 #define BAG_POKEBALLS_COUNT  27

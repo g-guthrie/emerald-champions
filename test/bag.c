@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "item_menu.h"
 #include "load_save.h"
+#include "strings.h"
 #include "pokemon.h"
 #include "test/overworld_script.h"
 #include "test/test.h"
@@ -24,6 +25,13 @@ TEST("Inclement-style bag routes preparation, battle, and Mega items to dedicate
     EXPECT_EQ(GetItemPocket(ITEM_FIRE_STONE), POCKET_ITEMS);
 }
 
+TEST("The Bag has seven pockets and none of them is a machine case")
+{
+    EXPECT_EQ(POCKETS_COUNT, 7);
+    for (enum Pocket pocket = 0; pocket < POCKETS_COUNT; pocket++)
+        EXPECT(gPocketNamesStringsTable[pocket] != NULL);
+}
+
 TEST("Mega pocket holds the complete Emerald Champions archive and both Primal Orbs")
 {
     ClearBag();
@@ -37,7 +45,7 @@ TEST("Mega pocket holds the complete Emerald Champions archive and both Primal O
     EXPECT_EQ(GetBagItemId(POCKET_MEGA_STONES, BAG_MEGASTONES_COUNT - 1), ITEM_BLUE_ORB);
 }
 
-TEST("Legacy five-pocket saves migrate items into the eight-pocket layout")
+TEST("Legacy five-pocket saves migrate items into the seven-pocket layout")
 {
     ClearBag();
 
@@ -76,8 +84,6 @@ TEST("Emerald Champions link-battle Bag restore preserves every segmented pocket
         {POCKET_ITEMS,       BAG_LEGACY_ITEMS_COUNT,                    ITEM_METAL_COAT,    2},
         {POCKET_MEDICINE,    0,                                         ITEM_POTION,        3},
         {POCKET_BATTLE,      0,                                         ITEM_LEFTOVERS,     4},
-        {POCKET_TM_HM,       0,                                         ITEM_TM01,           5},
-        {POCKET_TM_HM,       BAG_LEGACY_TMHM_COUNT,                     ITEM_TM02,           6},
         {POCKET_BERRIES,     0,                                         ITEM_ORAN_BERRY,     7},
         {POCKET_BERRIES,     BAG_LEGACY_BERRIES_COUNT,                  ITEM_SITRUS_BERRY,   8},
         {POCKET_POKE_BALLS,  0,                                         ITEM_POKE_BALL,      9},
@@ -116,48 +122,6 @@ TEST("Emerald Champions link-battle Bag restore preserves every segmented pocket
         EXPECT_EQ(slot.itemId, cases[i].item);
         EXPECT_EQ(slot.quantity, cases[i].quantity);
     }
-}
-
-TEST("TMs and HMs are sorted correctly in the bag")
-{
-    struct BagPocket *pocket = &gBagPockets[POCKET_TM_HM];
-
-    ASSUME(GetItemPocket(ITEM_HM07) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM25) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM14) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM42) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_HM05) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM05) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM01) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_HM02) == POCKET_TM_HM);
-
-    /*
-     * Note: I would add a test to make sure that TMs are sorted correctly by move name,
-     * but downstream users are likely to rearrange TMs so this would just be a nuisance.
-     */
-
-    RUN_OVERWORLD_SCRIPT(
-        additem ITEM_HM07;
-        additem ITEM_TM25;
-        additem ITEM_TM14;
-        additem ITEM_TM42;
-        additem ITEM_HM05;
-        additem ITEM_TM05;
-        additem ITEM_TM01;
-        additem ITEM_HM02;
-    );
-
-    SortItemsInBag(&gBagPockets[POCKET_TM_HM], SORT_BY_INDEX);
-
-    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_TM01);
-    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_TM05);
-    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_TM14);
-    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_TM25);
-    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_TM42);
-    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_HM02);
-    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_HM05);
-    EXPECT_EQ(pocket->itemSlots[7].itemId, ITEM_HM07);
-    EXPECT_EQ(pocket->itemSlots[8].itemId, ITEM_NONE);
 }
 
 TEST("Berries are sorted correctly in the bag")

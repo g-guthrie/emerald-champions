@@ -719,22 +719,14 @@ static void GiveParentEggMoves(struct Pokemon *egg, enum Move *parentMoves, enum
     }
 }
 
-static void GiveParentTmMoves(struct Pokemon *egg, enum Move *parentMoves, enum Species species)
+static void GiveParentTeachableMoves(struct Pokemon *egg, enum Move *parentMoves, enum Species species)
 {
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
         if (parentMoves[i] == MOVE_NONE)
             break;
-        for (u32 j = 0; j < NUM_ALL_MACHINES; j++)
-        {
-            enum Move moveId = GetTMHMMoveId(j + 1);
-            if (parentMoves[i] == moveId)
-            {
-                if (CanLearnTeachableMove(species, moveId))
-                    ADD_OR_REPLACE_MOVE(parentMoves[i])
-                break;
-            }
-        }
+        if (CanLearnTeachableMove(species, parentMoves[i]))
+            ADD_OR_REPLACE_MOVE(parentMoves[i])
     }
 }
 
@@ -818,7 +810,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
     {
         GiveMonInitialMoveset(egg);
         GiveParentEggMoves(egg, fatherMoves, eggSpecies);
-        GiveParentTmMoves(egg, fatherMoves, eggSpecies);
+        GiveParentTeachableMoves(egg, fatherMoves, eggSpecies);
         GiveParentSharedLevelUpMoves(egg, fatherMoves, motherMoves, eggSpecies);
         GiveMoveIfParentHeldItem(egg, father, mother, eggSpecies);
     }

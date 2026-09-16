@@ -34,11 +34,10 @@
     .overflowSlots = NULL,                  \
 }
 
-#define BAG_POCKET_LAYOUT_MAGIC 0x45434238 // "ECB8"
+#define BAG_POCKET_LAYOUT_MAGIC 0x45434237 // "ECB7"
 #define LEGACY_BAG_SLOT_COUNT (BAG_LEGACY_ITEMS_COUNT     \
                              + BAG_LEGACY_KEYITEMS_COUNT  \
                              + BAG_LEGACY_POKEBALLS_COUNT \
-                             + BAG_LEGACY_TMHM_COUNT      \
                              + BAG_LEGACY_BERRIES_COUNT)
 
 static bool32 CheckPyramidBagHasItem(enum Item itemId, u16 count);
@@ -54,27 +53,6 @@ static EWRAM_DATA struct ItemSlot sLegacyBagMigrationBuffer[LEGACY_BAG_SLOT_COUN
 
 #include "data/pokemon/item_effects.h"
 #include "data/items.h"
-
-#define UNPACK_TM_ITEM_ID(_tm) [CAT(ENUM_TM_HM_, _tm) + 1] = { CAT(ITEM_TM_, _tm), CAT(MOVE_, _tm) },
-#define UNPACK_HM_ITEM_ID(_hm) [CAT(ENUM_TM_HM_, _hm) + 1] = { CAT(ITEM_HM_, _hm), CAT(MOVE_, _hm) },
-
-const struct TmHmIndexKey gTMHMItemMoveIds[NUM_ALL_MACHINES + 1] =
-{
-    [0] = { ITEM_NONE, MOVE_NONE }, // Failsafe
-    FOREACH_TM(UNPACK_TM_ITEM_ID)
-    FOREACH_HM(UNPACK_HM_ITEM_ID)
-    /*
-     * Expands to the following:
-     *
-     * [1] = { ITEM_TM_FOCUS_PUNCH, MOVE_FOCUS_PUNCH },
-     * [2] = { ITEM_TM_DRAGON_CLAW, MOVE_DRAGON_CLAW },
-     * [3] = { ITEM_TM_WATER_PULSE, MOVE_WATER_PULSE },
-     * etc etc
-    */
-};
-
-#undef UNPACK_TM_ITEM_ID
-#undef UNPACK_HM_ITEM_ID
 
 static inline struct ItemSlot *NONNULL BagPocket_GetSlotPointer(struct BagPocket *pocket, u32 pocketPos)
 {
@@ -127,7 +105,6 @@ struct ItemSlot NONNULL BagPocket_GetSlotData(struct BagPocket *pocket, u32 pock
     case POCKET_BATTLE:
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
-    case POCKET_TM_HM:
     case POCKET_BERRIES:
     case POCKET_MEGA_STONES:
         return BagPocket_GetSlotDataGeneric(pocket, pocketPos);
@@ -153,7 +130,6 @@ void NONNULL BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, stru
     case POCKET_BATTLE:
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
-    case POCKET_TM_HM:
     case POCKET_BERRIES:
     case POCKET_MEGA_STONES:
         BagPocket_SetSlotDataGeneric(pocket, pocketPos, newSlot);
@@ -194,12 +170,6 @@ void SetBagItemsPointers(void)
     gBagPockets[POCKET_BATTLE].capacity = BAG_BATTLE_COUNT;
     gBagPockets[POCKET_BATTLE].primaryCapacity = BAG_BATTLE_COUNT;
     gBagPockets[POCKET_BATTLE].id = POCKET_BATTLE;
-
-    gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
-    gBagPockets[POCKET_TM_HM].overflowSlots = gSaveBlock3Ptr->bagPocketTMHM;
-    gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
-    gBagPockets[POCKET_TM_HM].primaryCapacity = BAG_LEGACY_TMHM_COUNT;
-    gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
 
     gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.berries;
     gBagPockets[POCKET_BERRIES].overflowSlots = gSaveBlock3Ptr->bagPocketBerries;
@@ -278,11 +248,10 @@ void MigrateBagPocketsIfNeeded(void)
         return;
 
     // Read the old five-pocket layout before clearing any arrays that the new
-    // eight-pocket layout reuses as its primary storage.
+    // seven-pocket layout reuses as its primary storage.
     count = SnapshotLegacyPocket(sLegacyBagMigrationBuffer, count, gSaveBlock1Ptr->bag.items, BAG_LEGACY_ITEMS_COUNT);
     count = SnapshotLegacyPocket(sLegacyBagMigrationBuffer, count, gSaveBlock1Ptr->bag.keyItems, BAG_LEGACY_KEYITEMS_COUNT);
     count = SnapshotLegacyPocket(sLegacyBagMigrationBuffer, count, gSaveBlock1Ptr->bag.pokeBalls, BAG_LEGACY_POKEBALLS_COUNT);
-    count = SnapshotLegacyPocket(sLegacyBagMigrationBuffer, count, gSaveBlock1Ptr->bag.TMsHMs, BAG_LEGACY_TMHM_COUNT);
     count = SnapshotLegacyPocket(sLegacyBagMigrationBuffer, count, gSaveBlock1Ptr->bag.berries, BAG_LEGACY_BERRIES_COUNT);
 
     ClearBag();
@@ -452,7 +421,6 @@ static bool32 NONNULL BagPocket_AddItem(struct BagPocket *pocket, enum Item item
 
     switch (pocket->id)
     {
-    case POCKET_TM_HM:
     case POCKET_BERRIES:
         for (itemLookupIndex = 0; itemLookupIndex < pocket->capacity && count > 0; itemLookupIndex++)
         {

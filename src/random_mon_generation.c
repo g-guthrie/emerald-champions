@@ -319,8 +319,6 @@ static bool32 IsRandomItemAllowed(const struct RandomItemGeneratorOptions *optio
 
     if (GetItemPocket(item) == POCKET_KEY_ITEMS)
         return FALSE;
-    if (GetItemPocket(item) == POCKET_TM_HM && GetItemPrice(item) == 0)
-        return FALSE;
     for (u32 i = 0; i < options->bannedHoldEffectsCount; i++)
     {
         if (options->bannedHoldEffects[i] == holdEffect)

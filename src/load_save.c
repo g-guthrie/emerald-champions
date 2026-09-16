@@ -282,7 +282,6 @@ static void ApplyNewEncryptionKeyToLegacyBagItems(u32 newKey)
     REKEY_LEGACY_POCKET(items);
     REKEY_LEGACY_POCKET(keyItems);
     REKEY_LEGACY_POCKET(pokeBalls);
-    REKEY_LEGACY_POCKET(TMsHMs);
     REKEY_LEGACY_POCKET(berries);
 
 #undef REKEY_LEGACY_POCKET

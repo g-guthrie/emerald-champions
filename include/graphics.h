@@ -1509,28 +1509,7 @@ extern const u32 gItemIcon_KeeBerry[];
 extern const u16 gItemIconPalette_KeeBerry[];
 extern const u32 gItemIcon_MarangaBerry[];
 extern const u16 gItemIconPalette_MarangaBerry[];
-// TMs/HMs
-extern const u32 gItemIcon_TM[];
-extern const u32 gItemIcon_HM[];
-extern const u16 gItemIconPalette_NormalTMHM[];
-extern const u16 gItemIconPalette_FireTMHM[];
-extern const u16 gItemIconPalette_WaterTMHM[];
-extern const u16 gItemIconPalette_ElectricTMHM[];
-extern const u16 gItemIconPalette_GrassTMHM[];
-extern const u16 gItemIconPalette_IceTMHM[];
-extern const u16 gItemIconPalette_FightingTMHM[];
-extern const u16 gItemIconPalette_PoisonTMHM[];
-extern const u16 gItemIconPalette_GroundTMHM[];
-extern const u16 gItemIconPalette_FlyingTMHM[];
-extern const u16 gItemIconPalette_PsychicTMHM[];
-extern const u16 gItemIconPalette_BugTMHM[];
-extern const u16 gItemIconPalette_RockTMHM[];
-extern const u16 gItemIconPalette_GhostTMHM[];
-extern const u16 gItemIconPalette_DragonTMHM[];
-extern const u16 gItemIconPalette_DarkTMHM[];
-extern const u16 gItemIconPalette_SteelTMHM[];
-extern const u16 gItemIconPalette_MysteryTMHM[];
-extern const u16 gItemIconPalette_FairyTMHM[];
+
 // Charms
 extern const u32 gItemIcon_OvalCharm[];
 extern const u16 gItemIconPalette_OvalCharm[];
@@ -1586,8 +1565,6 @@ extern const u32 gItemIcon_TownMap[];
 extern const u16 gItemIconPalette_TownMap[];
 extern const u32 gItemIcon_VsSeeker[];
 extern const u16 gItemIconPalette_VsSeeker[];
-extern const u32 gItemIcon_TMCase[];
-extern const u16 gItemIconPalette_TMCase[];
 extern const u32 gItemIcon_BerryPouch[];
 extern const u16 gItemIconPalette_BerryPouch[];
 extern const u32 gItemIcon_PokemonBoxLink[];
@@ -1699,8 +1676,6 @@ extern const u16 gItemIconPalette_ScrollOfWaters[];
 extern const u32 gItemIcon_TinyBambooShoot[];
 extern const u16 gItemIconPalette_TinyBambooShoot[];
 
-
-
 extern const u32 gItemIcon_AdamantCrystal[];
 extern const u16 gItemIconPalette_AdamantCrystal[];
 extern const u32 gItemIcon_GriseousCore[];
@@ -1766,7 +1741,6 @@ extern const u32 gBagScreen_Gfx[];
 extern const u32 gBagScreen_GfxTileMap[];
 extern const u16 gBagScreenFemale_Pal[];
 extern const u16 gBagScreenMale_Pal[];
-extern const u8 gBagMenuHMIcon_Gfx[];
 
 // item menu icons graphics
 extern const u32 gBagMaleTiles[];

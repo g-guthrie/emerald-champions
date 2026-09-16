@@ -8,12 +8,6 @@ MoveRelearner_Text_LevelUpMoves:
 MoveRelearner_Text_EggMoves:
 	.string "Egg Moves$"
 
-MoveRelearner_Text_TMMoves:
-	.string "TM Moves$"
-
-MoveRelearner_Text_TutormoveMoves:
-	.string "Tutor Moves$"
-
 MoveRelearner_Text_SeeYa:
 	.string "See ya!$"
 
@@ -41,12 +35,6 @@ MoveRelearner_Text_LevelUpMoveLWR::
 
 MoveRelearner_Text_EggMoveLWR::
 	.string "egg move$"
-
-MoveRelearner_Text_TMMoveLWR::
-	.string "TM move$"
-
-MoveRelearner_Text_TutorMoveLWR::
-	.string "tutor move$"
 
 MoveRelearner_Text_MoveLWR::
 	.string "move$"

@@ -5,15 +5,10 @@
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/tms_hms.h"
 #include "constants/berries.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
 
-/* Each of these TM_HM enums corresponds an index in the list of TMs + HMs item ids in
- * gTMHMItemMoveIds. The index for an item can be retrieved with GetItemTMHMIndex below.
- */
-#define UNPACK_TM_HM_ENUM(_tmHm) CAT(ENUM_TM_HM_, _tmHm),
 // Run & Bun style key item registration: up to one item bound to each of
 // SELECT, L and R, usable directly from the overworld.
 enum RegisterButton
@@ -23,15 +18,6 @@ enum RegisterButton
     REGISTER_BUTTON_R,
     REGISTER_BUTTON_COUNT,
 };
-
-enum TMHMIndex
-{
-    FOREACH_TMHM(UNPACK_TM_HM_ENUM)
-    NUM_ALL_MACHINES,
-    NUM_TECHNICAL_MACHINES = (0 FOREACH_TM(PLUS_ONE)),
-    NUM_HIDDEN_MACHINES = (0 FOREACH_HM(PLUS_ONE)),
-};
-#undef UNPACK_TM_HM_ENUM
 
 enum PACKED ItemSortType
 {
@@ -107,91 +93,9 @@ struct ALIGNED(2) BagPocket
     u16 primaryCapacity;
 };
 
-struct TmHmIndexKey
-{
-    enum Item itemId;
-    enum Move moveId;
-};
-
 extern const u8 gQuestionMarksItemName[];
 extern const struct ItemInfo gItemsInfo[];
 extern struct BagPocket gBagPockets[];
-extern const struct TmHmIndexKey gTMHMItemMoveIds[];
-
-#define UNPACK_ITEM_TO_TM_INDEX(_tm) case CAT(ITEM_TM_, _tm): return CAT(ENUM_TM_HM_, _tm) + 1;
-#define UNPACK_ITEM_TO_HM_INDEX(_hm) case CAT(ITEM_HM_, _hm): return CAT(ENUM_TM_HM_, _hm) + 1;
-#define UNPACK_ITEM_TO_TM_MOVE_ID(_tm) case CAT(ITEM_TM_, _tm): return CAT(MOVE_, _tm);
-#define UNPACK_ITEM_TO_HM_MOVE_ID(_hm) case CAT(ITEM_HM_, _hm): return CAT(MOVE_, _hm);
-#define UNPACK_TM_MOVE_TO_ITEM_ID(_move) case CAT(MOVE_, _move): return CAT(ITEM_TM_, _move);
-#define UNPACK_HM_MOVE_TO_ITEM_ID(_move) case CAT(MOVE_, _move): return CAT(ITEM_HM_, _move);
-
-static inline enum TMHMIndex GetItemTMHMIndex(enum Item item)
-{
-    switch (item)
-    {
-    /* Expands to:
-        * case ITEM_TM_FOCUS_PUNCH:
-        *     return 1;
-        * case ITEM_TM_DRAGON_CLAW:
-        *      return 2;
-        * etc */
-    FOREACH_TM(UNPACK_ITEM_TO_TM_INDEX)
-    FOREACH_HM(UNPACK_ITEM_TO_HM_INDEX)
-    default:
-        return 0;
-    }
-}
-
-static inline enum Move GetItemTMHMMoveId(enum Item item)
-{
-    switch (item)
-    {
-    /* Expands to:
-        * case ITEM_TM_FOCUS_PUNCH:
-        *     return MOVE_FOCUS_PUNCH;
-        * case ITEM_TM_DRAGON_CLAW:
-        *      return MOVE_DRAGON_CLAW;
-        * etc */
-    FOREACH_TM(UNPACK_ITEM_TO_TM_MOVE_ID)
-    FOREACH_HM(UNPACK_ITEM_TO_HM_MOVE_ID)
-    default:
-        return MOVE_NONE;
-    }
-}
-
-static inline enum Item GetTMHMItemIdFromMoveId(enum Move move)
-{
-    switch (move)
-    {
-    /* Expands to:
-        * case MOVE_FOCUS_PUNCH:
-        *     return ITEM_TM_FOCUS_PUNCH;
-        * case MOVE_DRAGON_CLAW:
-        *      return ITEM_TM_DRAGON_CLAW;
-        * etc */
-    FOREACH_TM(UNPACK_TM_MOVE_TO_ITEM_ID)
-    FOREACH_HM(UNPACK_HM_MOVE_TO_ITEM_ID)
-    default:
-        return ITEM_NONE;
-    }
-}
-
-#undef UNPACK_ITEM_TO_TM_INDEX
-#undef UNPACK_ITEM_TO_HM_INDEX
-#undef UNPACK_ITEM_TO_TM_MOVE_ID
-#undef UNPACK_ITEM_TO_HM_MOVE_ID
-#undef UNPACK_TM_MOVE_TO_ITEM_ID
-#undef UNPACK_HM_MOVE_TO_ITEM_ID
-
-static inline enum Item GetTMHMItemId(enum TMHMIndex index)
-{
-    return gTMHMItemMoveIds[index].itemId;
-}
-
-static inline enum Move GetTMHMMoveId(enum TMHMIndex index)
-{
-    return gTMHMItemMoveIds[index].moveId;
-}
 
 #define GET_BERRY_ID(_berry) case ITEM_##_berry##_BERRY: return BERRY_ID_##_berry;
 #define GET_BERRY_ITEM_ID(_berry) case BERRY_ID_##_berry: return ITEM_##_berry##_BERRY;
