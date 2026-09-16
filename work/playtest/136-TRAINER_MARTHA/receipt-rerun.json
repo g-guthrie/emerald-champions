@@ -1,0 +1,87 @@
+{
+  "play_order": 136,
+  "e_group": "E0162",
+  "trainer": "TRAINER_MARTHA",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle3",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/136-TRAINER_MARTHA/receipt.json",
+  "build": "work/agent-battle-build-4",
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "why_rerun": "Meowstic-F was raised from -1 to 0 and Clefable from 0 to +1 after a first-run 4-0 clear in two turns.",
+  "cap_confirmation": "Driver reports level_cap 42 and Meowstic-F L40 / Clefable L41 / Banette L40 / Gourgeist L41 = cap 42 + offset - 2 with the current offsets 0/1/0/1. Matches the first receipt and the brief's table. Note the battle index lists this encounter's window as 48/48 while both runs used 42; the driver's level_cap is the authority per the brief, and 42 is also the live cap for the chapter in which the Trick House puzzle 3 opens.",
+  "level_offsets_at_run": {"MEOWSTIC_F": 0, "CLEFABLE": 1, "BANETTE": 0, "GOURGEIST": 1},
+  "resolved_opponent_levels": {"MEOWSTIC_F": 40, "CLEFABLE": 41, "BANETTE": 40, "GOURGEIST": 41},
+  "levels_previous_run": {"MEOWSTIC_F": 39, "CLEFABLE": 40, "BANETTE": 40, "GOURGEIST": 41},
+  "party_manifest": "work/playtest/136-TRAINER_MARTHA/party.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 42, same map, same chronology anchor: after Ashen Woods and before Norman, no Surf, so Route 118 and New Mauville sources are excluded. Houndoominite's stone window is 42 and the Mega Ring was earned from Steven in C13, so the Mega is legal here. No legendary, mythical, Ultra Beast or Paradox species. Not reported weak or illegal.",
+  "pre_declared_strategy_checks": [
+    "Mega Banette Mega-Evolves and its Prankster makes Will-O-Wisp and Destiny Bond priority moves",
+    "A Dark type is immune to Prankster-boosted status, so Mega Houndoom cannot be Will-O-Wisped",
+    "Magic Guard makes Clefable immune to burn chip and Leech Seed drain",
+    "Gourgeist's Flame Orb activates and Flare Boost raises its Special Attack",
+    "Meowstic-F's Competitive is tested by omission: no stat-lowering move or Intimidate was brought",
+    "Knock Off before Poltergeist sequencing - Poltergeist fails against an itemless target",
+    "ONE designated Calm Mind recipient per board rather than automatic dual Calm Mind (the dossier's explicit disposition)",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/136-TRAINER_MARTHA/r1",
+      "seed": 1136,
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "narrative": "T1 Mega Houndoom's Dark Pulse killed Meowstic-F at 2x on the turn it chose Calm Mind, and Clefable chose Calm Mind on the same turn - both setup moves on the same board, which is exactly what the dossier forbids. Adaptability Tri Attack took Clefable to 73. T2 Banette arrived and Mega-Evolved on the spot, gaining Prankster, and used Poltergeist into Mega Houndoom for 54 - correctly reading that Houndoom was holding an item for Poltergeist to target, and correctly not trying to Will-O-Wisp a Dark type. Flamethrower plus Tri Attack removed Clefable through its +1 Special Defense. T3 Mega Banette used a Prankster-priority Destiny Bond, I killed Gourgeist and Banette with two Dark Pulses at 2x, and Destiny Bond took Porygon-Z down with it - a real, memorable trade and the only player faint of the fight."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Mega Banette Mega-Evolves, Prankster active", "result": "PASS", "evidence": "T2: 'The opposing Banette has Mega Evolved into Mega Banette!' and driver state then reports ability PRANKSTER. T3 its Destiny Bond resolved before both of my attackers, which is Prankster priority on a status move working exactly as authored."},
+    {"check": "Dark type immune to Prankster status", "result": "PASS by omission, and correctly so", "evidence": "Mega Banette never attempted Will-O-Wisp against Mega Houndoom. It chose Poltergeist instead - the move that actually does something into a Dark type. The AI did not waste a turn on a status move it could not land."},
+    {"check": "Knock Off / Poltergeist sequencing", "result": "PASS", "evidence": "Poltergeist was used into Mega Houndoom while it held the Houndoominite ('Houndoom is about to be attacked by its Houndoominite'). The move requires a held item and the target had one. Correct."},
+    {"check": "Magic Guard on Clefable", "result": "NOT EXERCISED", "evidence": "Nothing on my side applied chip damage or Leech Seed, so Magic Guard had nothing to prevent. Untested this run and last."},
+    {"check": "Gourgeist Flame Orb activates and Flare Boost fires", "result": "FAIL - same as the first run", "evidence": "Gourgeist entered as a mid-turn replacement at the end of T2 and was KO'd on T3 before any end-of-turn tick, so the Flame Orb never burned it and Flare Boost never applied. Two runs, two entries, zero activations. Its ability has still never been observed."},
+    {"check": "Meowstic-F Competitive by omission", "result": "PASS", "evidence": "My party deliberately carried no Intimidate and no stat-lowering move, and no Competitive trigger occurred. The ability is untestable against this counterteam, which is the design note from the first run standing unchanged."},
+    {"check": "ONE designated Calm Mind recipient per board", "result": "FAIL", "evidence": "T1, the only turn both setup users were on the field together: Meowstic-F chose MOVE_CALM_MIND and Clefable chose MOVE_CALM_MIND on the same turn. The dossier's disposition line says in as many words 'retain one designated setup recipient per board rather than automatic dual Calm Mind'. Both boosted, neither attacked, and Meowstic-F died on that same turn to a single 2x Dark Pulse having converted nothing. See AI defects."},
+    {"check": "Every opposing Protect has a payoff", "result": "N/A", "evidence": "The opponent used no Protect in this battle. No member of this team carries one."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {
+      "id": "E0162-D1",
+      "status": "observed on work/agent-battle-build-4; the first run recorded the same shape",
+      "severity": "medium",
+      "attempt": 1,
+      "turn": 1,
+      "board": "Meowstic-F 122/122 @LIFE_ORB and Clefable 167/167 @LEFTOVERS, both with Calm Mind, facing a Mega-Evolving Houndoom (Dark/Fire, Dark Pulse is 2x into Meowstic) and an Adaptability Porygon-Z. Neither opposing member had a boost yet.",
+      "chosen": "Both members chose MOVE_CALM_MIND on the same turn.",
+      "why_wrong": "The authored disposition for this trainer explicitly forbids automatic dual Calm Mind and requires one designated setup recipient per board while the other attacks or supports its survival. Beyond the dossier, it is simply bad: the turn produced zero damage and zero pressure, and Meowstic-F - a Life Orb glass cannon that dies to any super-effective hit - spent its only turn of the battle on a boost it never cashed. A doubles board that gives the player a free turn against two setup moves ends quickly, and it did.",
+      "better_action": "Clefable, the bulky Magic Guard body with Leftovers and Moonlight, is the obvious designated recipient; Meowstic-F should have attacked (Psychic or Shadow Ball) or, better, Meowstic-F sets up behind a Clefable that pressures. Either assignment beats both boosting at once.",
+      "note": "I changed no AI C code. This is a setup-assignment question rather than a Protect or Mega scoring one, so it is probably a different code path from the other two defects in this block; the ALLY_COMBO / SETUP designation machinery is the place to look. Any other authored owner with two Calm Mind or two setup users on one board is exposed to the same shape."
+    }
+  ],
+  "ai_notes": [
+    "Mega Banette was played well and is the reason this fight is memorable at all: it Mega-Evolved on arrival, did not waste a turn trying to Will-O-Wisp a Dark type, used Poltergeist into a target that was actually holding an item, and cashed a Prankster Destiny Bond for a real trade on the turn it was going to die anyway. That is four correct decisions in two turns.",
+    "The contrast inside this block is now sharp: Mega Banette, Mega Altaria and Mega Manectric all Mega-Evolved on arrival, while E0071's Kangaskhan declined twice. Every Mega that transformed has an ability whose value is immediate (Prankster, Pixilate, Intimidate); the one that did not has Parental Bond, a multiplier on moves it was going to use anyway."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in three turns with 1 player faint -> +1 on the weakest one or two members, never the ace/Mega/legend first. Applied to one member only, deliberately.",
+    "changes": [
+      {"trainer": "TRAINER_MARTHA", "member": "GOURGEIST", "field": "level offset", "before": 1, "after": 2, "resolved_level_before": 41, "resolved_level_after": 42,
+       "reasoning": "Gourgeist is the only member that is both non-Mega and not implicated in the dual-Calm-Mind defect, and it is the member whose ability has never once activated across two runs because it dies before any end-of-turn tick. One level is the honest smallest lever toward it surviving into the turn where Flare Boost exists. First movement in this pass, so it sits at +1 of the permitted +/-2."}
+    ],
+    "withheld": [
+      {"member": "MEOWSTIC_F", "would_have_been": "0 -> 1", "why_withheld": "Meowstic-F is the lowest non-Mega member and the arithmetic of rule 5 points straight at it. I am withholding it because Meowstic-F is one of the two members that produced AI defect E0162-D1, and it died having spent its only turn on the redundant Calm Mind. AGENTS.md is explicit that a defect is repaired before levels compensate for it; a level given to a member that throws its turn away is a level that buys nothing. Re-benchmark after the setup-assignment defect is fixed. It remains at +1 of its +/-2 budget from the first pass."},
+      {"member": "CLEFABLE", "would_have_been": "1 -> 2", "why_withheld": "Same reason - the other half of the dual Calm Mind. It is also the member that did the most work in the fight (it took two attacks and forced a second turn through its +1 Special Defense), so it is the least in need of help. At +1 of its budget."},
+      {"member": "BANETTE", "would_have_been": "n/a", "why_withheld": "The room's Mega, excluded first by the rule, and it was the best-played member on the field."}
+    ]
+  },
+  "verdict": "still too easy",
+  "could_this_be_cooler": "The ghost-and-fairy pairing is well chosen and is kept - Prankster Destiny Bond as a genuine threat rather than a coin flip, Flare Boost converting the team's own burn into offence, and Magic Guard Clefable sitting immune to the status the rest of the room hands out is quietly clever internal consistency. The concrete problem is that half of that never happens: Gourgeist has now entered and died without a single end-of-turn tick in two runs, so Flare Boost is a design intention rather than a mechanic the player experiences. The change I would argue for is not a level and not a species - it is deployment. Gourgeist wants to be on the field from turn one, beside Banette, so the Flame Orb has a turn to burn and so Will-O-Wisp has a target; Meowstic-F, a Life Orb attacker that dies to everything, is the member that should be the reserve. Swap the lead pair. Separately, Meowstic-F's Competitive still wants the player to lower its stats and nothing in this room encourages that, which is the same note the first receipt left.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-4. Not earned campaign traversal. The Gourgeist offset is edited into the live teams file but is NOT built into this snapshot. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}
