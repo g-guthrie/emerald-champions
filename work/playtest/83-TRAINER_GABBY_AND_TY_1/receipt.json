@@ -1,0 +1,86 @@
+{
+ "play_order": 83,
+ "e_group": "E0093",
+ "trainer": "TRAINER_GABBY_AND_TY_1",
+ "class": "casual",
+ "location": "Global_gabby_and_ty",
+ "cap": 36,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "LOUDRED": 38,
+  "CHATOT": 35,
+  "ROTOM": 35,
+  "DODRIO": 34
+ },
+ "cap_window_confirmation": "My party resolved to L36 and the opponents to 38/35/35/34, which matches the dossier's own 'Medium cap34 levels 38/35/35/34' - i.e. base 34 = cap 36 minus 2. Confirms the cap window steps up from 30 to 36 between play_order 82 and 83, at the Mt. Chimney milestone (FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY).",
+ "party_manifest": "work/playtest/83-TRAINER_GABBY_AND_TY_1/party.json",
+ "party_pool_audit": "Rebuilt for cap 36. New at this cap and the reason the party is stronger: EXCADRILL (Drilbur wild RusturfTunnel gate 20, Rusturf opened with the C18 Rock Smash licence and walked in C20, evolving by level at gate 36). The other five are the audited cap-30 core at L36. Still excluded for chronology: all NewMauville sources (Surf, C28) and all Route 111 desert species, because the Go-Goggles are handed over by the rival outside Flannery's Gym in C23, after this battle. Noted in the manifest but not used: pool-36 newly lists Mega Charizard X, whose Charizardite X sits in the Mt. Chimney meteorite cradle this chapter has just resolved - arguably legal, not needed. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "Chatot's Boomburst fires and is harmless to Soundproof Loudred - the partnership the whole team is named after",
+  "Throat Spray rewards Chatot for a successful sound attack",
+  "The AI does not use Boomburst beside the non-Soundproof Dodrio, which the crack line names as the unsafe pairing",
+  "Rotom is a genuine Ghost/Levitate immunity pivot",
+  "Dodrio's Choice Band lock is respected",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/83-TRAINER_GABBY_AND_TY_1/a1",
+   "seed": 83,
+   "outcome": "won",
+   "turns": 4,
+   "driver_turn_counter": 3,
+   "player_faints": 2,
+   "opponent_faints": 4,
+   "narrative": "My Gardevoir Traced Soundproof off Loudred on entry, which makes it immune to Boomburst, Chatter and Hyper Voice at once, so I deliberately held the Mega Evolution back for a turn to keep that ability - the crack line names Soundproof immunity and it was handed to me for free. T1 Excadrill's spread Rock Slide (4x on Normal/Flying) removed Chatot outright, but Loudred's Flamethrower and Chatot's Heat Wave, both 2x on Steel, KO'd a full 136 HP Excadrill in the same turn and the Heat Wave burned Gardevoir. T2 Magearna replaced Excadrill, Aura Sphere (2x on Normal) removed Loudred, and Dodrio's Choice Band Brave Bird KO'd the burned 78 HP Mega Gardevoir the turn it transformed. T3 Weavile came in and Triple Axel (2x on Flying) removed Dodrio while Rotom Protected away a +2 Fleur Cannon. T4 Knock Off plus a +3 Fleur Cannon closed on Rotom."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "Boomburst beside Soundproof Loudred",
+   "result": "FAIL to exercise",
+   "evidence": "Boomburst was never used. Chatot got exactly one action - Heat Wave on T1 - and was removed by the spread Rock Slide the same turn. The sound partnership that gives this team its identity therefore went entirely unobserved."
+  },
+  {
+   "check": "Throat Spray",
+   "result": "NOT EXERCISED",
+   "evidence": "Consequence of the same thing: Chatot never landed a sound move, so the Throat Spray never triggered."
+  },
+  {
+   "check": "No Boomburst beside the non-Soundproof Dodrio",
+   "result": "PASS (vacuous, but the one related choice was correct)",
+   "evidence": "Chatot and Dodrio were never on the field together, so the unsafe pairing could not arise. The related decision it did make was right: on T1, beside Soundproof Loudred, it chose Heat Wave over Boomburst - and Heat Wave was correct on its merits, 2x on my Steel/Ground Excadrill, and it was half of the KO."
+  },
+  {
+   "check": "Rotom as a Ghost/Levitate pivot",
+   "result": "PARTIAL",
+   "evidence": "Rotom arrived last and got two actions, one of them a well-timed Protect. Its Levitate and Ghost typing never mattered because by then I was attacking with Knock Off and Fleur Cannon. Light Screen was never used."
+  },
+  {
+   "check": "Dodrio Choice Band lock",
+   "result": "PASS",
+   "evidence": "After its first Brave Bird the state listed BRAVE_BIRD as its only move, and it took the recoil honestly. That locked Brave Bird KO'd my Mega Gardevoir on the turn it transformed."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "One Protect in four turns. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 3,
+   "battler": "ROTOM",
+   "payoff": "blocked a +2 Fleur Cannon from a 137 HP Assault Vest Magearna while its partner Dodrio spent the same turn on a free Brave Bird. As the last Pokemon on the team it bought itself an extra turn. Full value, single use."
+  }
+ ],
+ "ai_defects": [],
+ "ai_highlights": [
+  "Two consecutive clean focus-fire kills, both on full-health bodies and both correctly typed. T1: Loudred's Flamethrower and Chatot's Heat Wave, each 2x, removing a 136 HP Steel/Ground Excadrill before it could take a second action. T2: Loudred's Flamethrower and Dodrio's Brave Bird removing a Mega Gardevoir on the turn it Mega Evolved. For a 'casual' class encounter this is markedly better play than the class implies."
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt in four turns, but it cost two player faints and they were my two best pieces - a 136 HP Excadrill and my Mega. That is the 'won after a real fight' case and it is comfortably strong for a casual roadside encounter. Levels kept.",
+ "could_this_be_cooler": "The broadcast concept is good and the Soundproof/Boomburst pairing is a real interaction - but in practice the player never sees it, and the reason is structural rather than a matter of levels. Chatot is the only member that carries the team's signature move, it is 4x weak to Rock, it has 109 HP at this cap, and its item is a Throat Spray, which does nothing until after it has already survived a turn and attacked. Any Rock Slide user - and Rock Slide is a standard answer in this chapter - removes the thesis of the team before turn one ends, which is exactly what happened here. The concrete suggestion (not applied): move the Throat Spray onto Loudred and give Chatot a Focus Sash. Loudred is Soundproof, so its own Hyper Voice can charge the Spray safely and the boost lands on the bulky Eviolite body that will actually still be alive to use it; Chatot then survives one hit guaranteed and gets its Boomburst off, which is the only way the player ever learns that the partner is immune to it. Same six, same moves, two items swapped, and the room finally shows what it is about.",
+ "authored_set_legality": "No legality problem found. All four prepared and ran clean."
+}
