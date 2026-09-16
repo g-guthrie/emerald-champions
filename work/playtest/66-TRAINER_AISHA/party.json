@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "C16 E0076 TRAINER_AISHA, Route 117, cap 30",
+  "availability_audit": "Chronology checked against work/reference-pools/pool-30.json source_detail maps and the Game Book chapter order; every source map is at or before Route 110, so a player who has just left Slateport could hold all six. GARDEVOIR (Ralts wild Route102 gate 14 -> Kirlia L20 -> Gardevoir L30) with ITEM_GARDEVOIRITE (stone-window 14, Mega Ring already earned from Steven after Brawly). MAGEARNA (legendary_sign RustboroCity_DevonCorp_2F, gate 14; reachable legend). KARTANA (wild PetalburgWoods_3, gate 20). TOGEKISS (Togepi Route102 -> Togetic friendship -> Shiny Stone, Slateport Mart, gate 24). WEAVILE (Sneasel wild Seaspray_Cave_B1F gate 14, condition evolution). NIDOKING (Nidoran-M wild Route101 gate 14 -> Nidorino -> Moon Stone, gate 20). Nothing here is sourced from Route 111/117/118, New Mauville, the Mauville Game Corner or Altering Cave, all of which come after this battle's map. One reachable legend (Magearna) and one Mega (Gardevoir) are used and declared. Chronology re-checked for this battle's map (Route 117 / Route 111, both reached from Mauville): every source map used here is at or before Route 110 and Slateport, strictly earlier in play order. Route 117/111 wild stock and the Mauville Game Corner are chronologically open at this point but are deliberately not used, so the party remains the stricter Route 110 set. New Mauville is excluded because its Basement Key comes from Wattson, after the Mauville Gym and therefore after every battle in this block.",
+  "plan": "Aisha's authored tactic is a friendly Frost Breath crit to switch on Anger Point Tauros, so the crack line is special pressure and removing the recipient. Lead Mega Gardevoir + Magearna: Magearna is Steel/Fairy, which resists Normal, Ice and Rock and is the only body on my team that can look at a +6 Tauros, and Pixilate Hyper Voice spreads across both opposing slots so Hitmontop's Wide Guard has something real to answer. Nidoking's Earth Power and Sludge Wave cover Hariyama and Tauros, Togekiss can redirect a boosted physical attack away from a weakened partner, Weavile supplies Fake Out and Kartana is the fast physical closer.",
+  "party": [
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_PSYCHIC",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Mega Pixilate spread attacker",
+      "availability": "pool-30: evolution:level from SPECIES_KIRLIA (gate 30); mega:ITEM_GARDEVOIRITE stone-window=14"
+    },
+    {
+      "species": "SPECIES_MAGEARNA",
+      "moves": [
+        "MOVE_FLEUR_CANNON",
+        "MOVE_FLASH_CANNON",
+        "MOVE_THUNDERBOLT",
+        "MOVE_AURA_SPHERE"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "bulky Steel/Fairy Soul-Heart attacker (Assault Vest, so no Protect slot)",
+      "availability": "pool-30: legendary_sign:RustboroCity_DevonCorp_2F (gate 14); reachable legend"
+    },
+    {
+      "species": "SPECIES_NIDOKING",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_ICE_BEAM",
+        "MOVE_THUNDERBOLT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "recoil-free Sheer Force special coverage: Ground, Poison, Ice, Electric",
+      "availability": "pool-30: evolution:item:ITEM_MOON_STONE from SPECIES_NIDORINO (gate 20), Nidoran-M wild:Route101"
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        132,
+        0,
+        124,
+        0
+      ],
+      "role": "redirection, Tailwind, Serene Grace flinch pressure",
+      "availability": "pool-30: evolution:item:ITEM_SHINY_STONE from SPECIES_TOGETIC (gate 24)"
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Fake Out disruption, item removal and Ice priority",
+      "availability": "pool-30: evolution:level/condition from SPECIES_SNEASEL (gate 14), Sneasel wild:Seaspray_Cave_B1F"
+    },
+    {
+      "species": "SPECIES_KARTANA",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SMART_STRIKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_BEAST_BOOST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fast Grass/Steel/Fighting physical attacker",
+      "availability": "pool-30: wild:PetalburgWoods_3/land_mons (gate 20)"
+    }
+  ]
+}

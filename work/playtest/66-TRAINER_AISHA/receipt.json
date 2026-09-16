@@ -1,0 +1,58 @@
+{
+  "play_order": 66,
+  "e_group": "E0076",
+  "trainer": "TRAINER_AISHA",
+  "class": "casual",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"FROSLASS": 28, "TAUROS": 28, "HARIYAMA": 27, "HITMONTOP": 27},
+  "cap_window_confirmation": "Dossier seeds 30/30/29/29 resolved to 28/28/27/27 = cap 30 + offset - 2 (Medium). Cap 30 confirmed.",
+  "party_manifest": "work/playtest/66-TRAINER_AISHA/party.json",
+  "diagnostic_party_manifest": "work/playtest/66-TRAINER_AISHA/diag/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, led by Mega Gardevoir + Magearna. All source maps precede Route 117. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Froslass uses Frost Breath on its OWN Tauros for the guaranteed critical hit, switching on Anger Point, and only while Tauros survives it",
+    "Once boosted, Tauros attacks rather than repeating the activation",
+    "Hitmontop uses Wide Guard to shield the boosted attacker from spread moves",
+    "Hariyama supplies its own Fake Out / physical line",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/66-TRAINER_AISHA/a1", "seed": 66, "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Froslass and Tauros led as authored. Froslass chose Shadow Ball into my Mega, NOT the Frost Breath activation; Tauros chose Double-Edge. My Pixilate Hyper Voice critted and one-shot Tauros from 106, Froslass's Cursed Body disabled the Hyper Voice on the way through, and Magearna's Fleur Cannon finished Froslass. T2 Hariyama and Hitmontop both entered and both used Fake Out, flinching both of my Pokemon for a completely blank turn - the single most effective turn Aisha played. T3 Hitmontop's Feint critted and Hariyama's Bullet Punch (2x into Fairy) killed my Mega Gardevoir; Fleur Cannon at 2x removed Hitmontop. T4 Nidoking replaced the Mega and Fleur Cannon finished Hariyama."},
+    {"attempt": "diagnostic", "run_dir": "work/playtest/66-TRAINER_AISHA/a2", "seed": 166, "outcome": "not played to completion - deliberately one turn, see below", "turns": 1, "player_faints": 0, "opponent_faints": 0,
+     "narrative": "Because the authored centrepiece did not fire in attempt 1, I re-ran turn 1 on a second seed with a deliberately harmless opening - Togekiss Follow Me and Gardevoir Protect, no Mega Evolution, no damage threatened at all - to give the combo the most favourable board it will ever see: both of Aisha's leads at full HP, nothing threatening either of them, and Tauros able to survive any friendly hit. Froslass chose Shadow Ball again, and Tauros chose Double-Edge. This run was stopped after that one decision because its only purpose was to answer that question; it is a diagnostic, not a second benchmark attempt, and no outcome should be read from it."}
+  ],
+  "strategy_checks": [
+    {"check": "Froslass activates Anger Point Tauros with a friendly Frost Breath", "result": "FAIL", "evidence": "Frost Breath was never selected at any decision point, in either run. Attempt 1 turn 1 and the diagnostic turn 1 are both the exact board the tactic is authored for - Froslass and Tauros side by side, both at full HP, Froslass acting with full knowledge of the field - and in the diagnostic there was not even any incoming pressure to justify choosing an attack instead. It chose Shadow Ball both times. This is the single most distinctive thing about Aisha's team and it does not happen. See AI defects."},
+    {"check": "Once boosted, Tauros attacks rather than repeating activation", "result": "NOT EXERCISED", "evidence": "Tauros was never boosted, so there was nothing to convert. For what it is worth Tauros did choose to attack (Double-Edge) on both observed turn 1s, which is the right unboosted action."},
+    {"check": "Hitmontop uses Wide Guard to shield the boosted attacker", "result": "NOT EXERCISED", "evidence": "Wide Guard was never selected. Hitmontop entered on T2 as a replacement, used Fake Out, then Feint on T3 and died. Wide Guard's authored purpose is to protect a boosted Tauros from spread moves; with Tauros dead before Hitmontop ever entered, the move had nothing to protect. Fake Out and Feint were both better uses of the two turns it had."},
+    {"check": "Hariyama supplies its own Fake Out / physical line", "result": "PASS", "evidence": "Fake Out on T2 the turn it entered (flinching my Mega Gardevoir), then Bullet Punch on T3 - Steel, 2x into my Fairy-type Mega, and it got the kill. Hariyama chose the priority Steel move over its stronger Close Combat specifically because of the type matchup, which is the correct read. It was Aisha's best member."},
+    {"check": "Every opposing Protect has a payoff", "result": "NOT EXERCISED", "evidence": "No opposing Protect. Tauros is the only member with Protect on its sheet and it died on turn 1."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Empty. No opposing Protect across four turns plus the diagnostic turn.",
+  "ai_defects": [
+    {"id": "E0076A-D1", "severity": "high", "attempt": "1 and diagnostic", "turn": "1 in both runs",
+     "board": "Froslass 103/103 and Tauros 106/106 side by side, the authored lead pair, turn 1. In the diagnostic run nothing on my side threatened either of them: my two Pokemon used Follow Me and Protect and no Mega Evolution occurred.",
+     "chosen": "Shadow Ball into my left-hand battler, both times.",
+     "why_wrong": "TRAINER_AISHA carries EC_BATTLE_PLAN_ALLY_COMBO and a bespoke tactic row - src/data/emerald_champions_battle_plans.h line 753, {TRAINER_AISHA, SPECIES_FROSLASS, SPECIES_TAUROS, MOVE_FROST_BREATH, EC_BATTLE_TACTIC_ACTIVATE}. Frost Breath always critically hits, Anger Point maximises Attack on any critical hit, and the entire team - a Clear Amulet on Tauros so its Attack cannot be lowered back down, Hitmontop carrying Wide Guard to shield the boosted body, Froslass built with a 0 Special Attack IV and zero Special Attack EVs specifically so the friendly hit is small - exists to make this one interaction happen. It is authored in the data, it is supported in the AI, and it never fires.",
+     "better_action": "Frost Breath targeting the ally Tauros on turn 1 of the diagnostic board, which is free: nothing was threatening either Pokemon, Tauros was at full HP, and the payoff is a +6 Attack Tauros behind a Wide Guard user.",
+     "where_to_look": "src/battle_ai_pair.c, PairTacticScore at lines 1345-1389, awarding PAIR_TACTIC_REWARD (defined 80, line 91), called from line 4667. I checked this function against this specific board and the tactic should pass both of its stated rejection tests: the effectiveness gate rejects a trigger that is super-effective on the recipient, and Frost Breath is Ice into a pure Normal Tauros, which is exactly 1.0x, not greater; and the survival gate rejects a trigger whose maximum roll is at or above the recipient's HP, and a 0-SpA-IV, 0-SpA-EV, Timid Froslass firing a 60 BP special move into a 106 HP Tauros with 4 SpD EVs is nowhere near lethal. So the authored row is not being rejected by the documented conditions. That leaves two candidates, and I could not distinguish them from outside: either the ally-targeted Frost Breath is never enumerated as a candidate action for the pair evaluator to score in the first place (the gate at the top of PairTacticScore only runs on actions that already exist), or the +80 reward is being outweighed by whatever the surrounding board evaluation charges for aiming a damaging move at your own partner. The second seems more likely to me given the reward is a flat 80 against a full board score.",
+     "affected_team_index_hint": "This is not local to Aisha. PairTacticScore covers EC_BATTLE_TACTIC_ACTIVATE, EC_BATTLE_TACTIC_AFTER_YOU and EC_BATTLE_TACTIC_INSTRUCT together, and the same function is what every authored friendly-activation combo in the campaign depends on. The Instruct branch is also implicated: see my receipt for play_order 61 (E0070 Anna & Meg), where Instruct likewise never became legal, although there the cause looked circumstantial rather than scoring. Every trainer row in sEmeraldChampionsBattleTactics should be re-verified against a live board, and specifically every ACTIVATE row where the trigger is a DAMAGING move aimed at an ally, since that is the case that has to survive the friendly-fire scoring. A behavioural regression for 'Froslass Frost Breath into its own Tauros triggers Anger Point' would be the natural fixture."}
+  ],
+  "ai_notes": [
+    "Setting the tactic aside, Aisha's ordinary decisions were good and turn 2 was excellent: Hariyama and Hitmontop both entered as replacements and both used Fake Out, flinching both of my Pokemon and producing a turn in which I did literally nothing. Double Fake Out off a double replacement is strong doubles play.",
+    "Hariyama picking Bullet Punch over Close Combat into my Fairy-type Mega on T3 is a correct type read, not a default.",
+    "Cursed Body disabling my Hyper Voice on turn 1 was luck rather than a decision, but it is worth noting it cost me my spread move for the rest of the fight and made the Fighting pair meaningfully harder.",
+    "Decision timing comfortable (max 62 frames)."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change - and this is a deliberate departure from the arithmetic of brief rule 5, which on a first-try win with one faint would point at +1. AGENTS.md is explicit that AI defects are repaired before levels compensate for them, and this team fought me without the single interaction it is built around. Tauros's Clear Amulet, Hitmontop's Wide Guard and Froslass's deliberately crippled Special Attack are all dead weight until the ACTIVATE tactic fires, so right now I am benchmarking roughly three quarters of the authored team. Raising levels would bake in a defect. Re-benchmark after the tactic is fixed: a +6 Attack Tauros behind a Wide Guard, at these levels, is a completely different fight and may well need a REDUCTION rather than an increase.",
+    "changes": []
+  },
+  "could_this_be_cooler": "The concept is already one of the coolest in the block and it deserves to actually work. A friendly guaranteed critical hit to switch on Anger Point is a real competitive interaction, it is unusual, it is legible to a player the moment they see it happen, and the counterplay is clean and discoverable - kill the activator, or bring something that shrugs off a +6 Normal attack. Every detail of the build supports it, right down to the Clear Amulet stopping an Intimidate from undoing the boost. I would not change a single species, move or item; the fix is entirely in the AI. The one thing I would ADD once it works is a way for the combo to survive losing Froslass, because right now the activator is a Focus Sash Froslass at offset 0 - the joint-lowest level on the team - and any competent player simply removes it on turn 1, as I did without even meaning to. That is not a reason to change the roster, but it is a reason to think about whether Froslass should be the member carrying the extra levels rather than the one at the floor.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded. The a2 run is a one-turn AI diagnostic and is not a benchmark attempt."
+}
