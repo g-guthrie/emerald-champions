@@ -1,0 +1,63 @@
+{
+  "play_order": 247,
+  "e_group": "E0388",
+  "trainer": "TRAINER_PRESTON",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Xatu / Espeon / Sigilyph / Exeggutor / Grumpig (+1) at L75 and Alakazam (+2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/247-TRAINER_PRESTON/party_gym76.json"],
+  "chronology_note": "Mossdeep Gym before the Space Center, cap 76. Manifest carries the full audit: Incineroar 36, Urshifu-Single 42, Gengar 30 + Gengarite 60, Hydreigon 68, Weavile 14, Zapdos 30; nothing from Shoal Cave, Seafloor Cavern, Sootopolis or later. Two reachable legends (Urshifu, Zapdos); Mt Pyre's Darkrai/Yveltal/Giratina deliberately not used.",
+  "resume_note": "a1 was a previous agent's run cut off mid-battle (turn ~6, 3-4) with no receipt; void per the resume rule and its ROM copies deleted. a2 is the only counted attempt. a2 was started on build-5 before the coordinator's build-6 instruction arrived; it stands as a completed battle.",
+  "pre_play_strategy_checks": [
+    "Xatu sets Tailwind on turn 1 or 2",
+    "Magic Bounce reflects a player status move (only testable if I use one; the crack line says not to)",
+    "Sigilyph's Flame Orb burns it harmlessly and Psycho Shift moves the burn onto a player attacker",
+    "Harvest recycles Exeggutor's Sitrus Berry",
+    "Grumpig's Thick Fat blunts Fire",
+    "Alakazam Mega Evolves and Trace copies an ability",
+    "Protect ledger"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 9,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/247-TRAINER_PRESTON/a2",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Mega Gengar / Hydreigon / Weavile / Zapdos)",
+      "outcome": "won",
+      "turns": 7,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "why": "Fake Out on Espeon turn 1 stopped Calm Mind, but Xatu's Air Slash did 261 to a full-HP Urshifu (sash) and flinched it, then finished it turn 2 after Sucker Punch had removed Espeon. Knock Off broke Xatu's sash without triggering it and Ice Shard finished Xatu before its turn-3 Tailwind resolved. Mega Alakazam (Trace -> Pressure) and Weavile traded: Focus Blast 4x versus Knock Off 2x. My error: Mega Gengar was OHKOed by Assault Vest Grumpig's Psychic (201 HP gone in one hit) while Exeggutor Protected; Hydreigon then took Exeggutor with Dark Pulse and Incineroar's Knock Off KOed Grumpig and removed the Vest on the same turn. Sigilyph burned itself and died to Thunderbolt + Dark Pulse."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Xatu sets Tailwind turn 1 or 2", "result": "FAIL", "evidence": "Xatu chose Air Slash on turns 1 and 2 (both into Urshifu, both sensible: 261 damage and a KO). It chose Tailwind on turn 3 at 1 HP with no sash, and Ice Shard KOed it before the move resolved. Tailwind never went up; the room's plan opener did not happen."},
+    {"check": "Magic Bounce reflects a status move", "result": "NOT TESTED", "evidence": "I used no status move while a Magic Bounce body was on the field, as the crack line prescribes. Both mirrors were gone by turn 3."},
+    {"check": "Sigilyph Flame Orb + Psycho Shift", "result": "SPLIT - burn PASS, Psycho Shift FAIL", "evidence": "turn 6: Sigilyph was burned by Flame Orb at end of turn and Magic Guard dealt it no burn damage (217/217 at start of turn 7). Turn 7, its one burned decision, it chose Air Slash into Hydreigon instead of Psycho Shift. Both my actives were special attackers so there was no physical target, but shifting the burn is still free chip; the move was never selected."},
+    {"check": "Harvest recycles Sitrus", "result": "NOT TESTED", "evidence": "Exeggutor was never damaged before the Dark Pulse that KOed it from full (three Protects and a Leech Seed), so the berry never triggered."},
+    {"check": "Thick Fat blunts Fire", "result": "NOT TESTED", "evidence": "I never sent Fire at Grumpig; Knock Off (2x) was the correct move and it KOed."},
+    {"check": "Alakazam Mega + Trace", "result": "PASS", "evidence": "turn 4: 'Alakazam has Mega Evolved', 'It traced Weavile's Pressure', then Focus Blast erased Weavile (195/216) from full. It died the same turn to Incineroar's Knock Off."},
+    {"check": "Espeon Calm Mind / Light Clay screens", "result": "FAIL (no screens in set)", "evidence": "Espeon holds Light Clay but carries no screen move (Psychic, Dazzling Gleam, Calm Mind, Protect); the item does nothing. Espeon flinched turn 1 and was KOed turn 2 without acting. Legality/design note below."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 3, "battler": "Exeggutor", "payoff": "excellent. Blocked a 2x Flare Blitz that would have KOed it from full"},
+    {"attempt": 1, "turn": 5, "battler": "Exeggutor", "payoff": "excellent. Blocked both a Mega Gengar Sludge Bomb and a Flare Blitz, and Grumpig OHKOed Gengar on the same turn"},
+    {"attempt": 1, "turn": 6, "battler": "Exeggutor", "payoff": "EMPTY - consecutive Protect failed and Exeggutor died to Dark Pulse. See defect E0388-1"}
+  ],
+  "protect_summary": "3 Protects, all Exeggutor; 2 outstanding, 1 failed consecutive attempt. Alakazam never used its Protect (it attacked into a certain-KO board, reasonable).",
+  "ai_defects": [
+    {"id": "E0388-1", "turn": "a2 turn 6", "board": "Exeggutor 298/298 had just Protected on turn 5; Hydreigon (Dark, 2x) and Incineroar (Fire, 2x) both facing it, Grumpig beside it", "chosen": "Protect again (failed)", "better": "Giga Drain or Psychic into Hydreigon's partner, or Leech Seed Hydreigon; a second consecutive Protect succeeds one time in three and the AI should weight that. Result: a free double-target and a KO."},
+    {"id": "E0388-2", "turn": "a2 turns 1-3", "board": "Xatu lead with Focus Sash, room plan is Tailwind first", "chosen": "Air Slash twice, Tailwind only at 1 HP", "better": "Low severity as play (the Air Slashes were the highest-value actions on the board), but the strategy flag TAILWIND never produced a Tailwind; the AI weighted damage over the authored opener even on turn 1 at full HP behind a sash."}
+  ],
+  "observations": ["Xatu (L75 Timid, paper Speed 238) moved before my Urshifu-Single (L76 Jolly, paper Speed 245) on turn 1 with no Tailwind up. I cannot read the prepared party's stats from the driver, so this is unverified; the prep API sets perfect IVs and a hidden nature and the EV order matches the display order, so it may simply be a stat I mis-figured. Worth a one-line stat readout by the main agent."],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won attempt 1 but 3 player faints after a real fight; Air Slash and Focus Blast both one-shot 260-plus HP bodies, and the room punished one misplay (Gengar into Grumpig) with an outright OHKO.",
+  "concept_on_board": "Partly. Magic Guard (Sigilyph burned for free, Alakazam Trace) and the Mega were visible; the room's stated rule - the bounce - never came into play because I never gave it a status move, and the Tailwind opener never happened. A player who follows the crack line sees a strong six-Psychic offense, not the mirror.",
+  "cooler": "The room's thesis is that the player discovers the mirror by breaking it, but a player who reads the gym sign (or simply attacks) never meets Magic Bounce at all, and Xatu itself prefers Air Slash to Tailwind. Two notes, not implemented: (1) give Espeon a screen (Reflect or Light Screen) so Light Clay does something and the Calm Mind slot has cover - currently the Light Clay is dead weight; (2) the Sigilyph Psycho Shift idea needs a physical attacker to matter and the AI did not select it even when burned; if the room wants the burn hand-off to be seen, Sigilyph should lead beside Xatu so its turn-2 Psycho Shift lands on the player's physical lead. Alakazam is the standout: a Trace Mega that one-shots anything Fighting-weak is exactly what a cap-76 gym ace should feel like.",
+  "legality_notes": "Espeon @ Light Clay with no screen move: legal but the item is inert. Everything else inside cap 76; Alakazite stone window not checked by me beyond the ROM accepting the set.",
+  "verification_limit": "No level change here; nothing pending re-verification."
+}
