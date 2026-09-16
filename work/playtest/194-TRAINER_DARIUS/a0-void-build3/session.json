@@ -1,0 +1,34 @@
+{
+  "rom_sha256": "e7de65be122669a85f67ad7c25d12a211d3d53aee0f14f97df843ee75165efe1",
+  "elf_sha256": "d25b30b52eff4fc4f86e1b9508973db7719e97f5c4ed9d38e7fcfa393c8f6c0c",
+  "seed": 1,
+  "trainer_a": "TRAINER_DARIUS",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 54,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/_party/party_fortree54.json",
+  "party_sha256": "4eb2354656411cd13018a99900a8fa06d75e50341d802cd9ed16605ceca4f167",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "Feather Badge chapter cap 54 Fortree Gym party (play_order 193-195, all-Flying rooms)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1184
+  },
+  "replacement_commits": {
+    "turn": 2,
+    "slots": {}
+  }
+}

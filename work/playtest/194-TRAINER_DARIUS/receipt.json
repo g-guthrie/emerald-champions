@@ -1,0 +1,67 @@
+{
+  "play_order": 194,
+  "e_group": "E0288",
+  "trainer": "TRAINER_DARIUS",
+  "class": "gym",
+  "location": "FortreeCity_Gym",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "driver state reported level_cap 54. Tornadus (offset 0) at L52, Braviary-Hisui / Kilowattrel / Togekiss (+2) at L54, Unfezant (+3) at L55, Mega Aerodactyl (-1) at L51 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_fortree54.json"],
+  "chronology_note": "Same audited cap-54 Fortree party as play_order 193; see that manifest's availability_audit. Nothing from Route 121 onward, Lilycove, Mt Pyre or the Southern Island.",
+  "snapshot_note": "An earlier attempt on work/agent-battle-build-3 was abandoned three turns in when the coordinator moved the wave to work/agent-battle-build-4 (AI Protect-scoring crash fix). That partial run is kept as a0-void-build3 and is VOID - it contributes no evidence to this receipt. Every turn below is from a1 on build-4.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "party": "party_fortree54.json (Incineroar/Amoonguss/Regieleki/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 11, "player_faints": 5, "opponent_faints": 6,
+      "why": "Fake Out denied the turn-1 Prankster window and Spore removed Braviary before a single Choice Specs hit landed. Knock Off plus Regieleki's Thunderbolt cleared the front pair by turn 3. From there Mega Aerodactyl alone cost three Pokemon: its Earthquake KOed Regieleki and later Incineroar, its Rock Slide finished Zapdos and Weavile, and it blocked four separate lethal hits with Protect. Mega Metagross survived at 25/167 and closed with Ice Punch."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Tornadus uses Prankster Tailwind before the player's fastest Pokemon can act", "result": "FAIL", "evidence": "Tornadus chose Hurricane on turns 1 and 2 and only used Tailwind on turn 3, at 32/193 and one Knock Off from death. Turn 1 was denied by Fake Out (+3 beats Prankster's +1), which is fair counterplay, but on turn 2 it was unhindered at 156 HP and still picked a 70%-accurate attack off a spread with zero Special Attack investment. See AI defect E0288-2."},
+    {"check": "ALLY_COMBO tactic ACTIVATE TORNADUS TAILWIND KILOWATTREL - Tailwind is a wind move that leaves Kilowattrel Charged via Wind Power", "result": "FAIL", "evidence": "Tornadus set Tailwind on turn 3 while Kilowattrel was still in the back; Kilowattrel only entered after Tornadus fainted, so Wind Power never triggered and its one Thunderbolt (turn 4) was uncharged. The printed tactic did not execute. See AI defect E0288-1."},
+    {"check": "TAILWIND flag has a real user and the speed actually matters", "result": "PASS", "evidence": "Tailwind was up from turn 3 to turn 6. Under it Togekiss and Mega Aerodactyl both moved before Mega Metagross, and the turn it expired ('the opposing side's tailwind petered out', turn 6) is the turn the fight turned."},
+    {"check": "Mega Aerodactyl is the physical mode - Rock Slide and Earthquake from a body that outspeeds everything", "result": "PASS", "evidence": "Mega Evolved on turn 4 and immediately Earthquaked for a KO on Regieleki; Rock Slide on turns 6/8/10 finished Zapdos and Weavile; Earthquake on turn 12 KOed Incineroar. It outsped every player Pokemon in the party, with and without Tailwind."},
+    {"check": "Unfezant is the crit lane - Super Luck plus Scope Lens plus Focus Energy reaches a guaranteed critical hit", "result": "FAIL", "evidence": "Unfezant had three turns (7, 8, 9) and never chose Focus Energy; it used Brave Bird, Protect, Brave Bird. It did land a critical Brave Bird on turn 7 (237 into Amoonguss, an outright KO) off Super Luck + Scope Lens alone, so the item/ability half works, but the authored guaranteed-crit line never assembled. See AI defect E0288-3."},
+    {"check": "Hurricane is not granted accuracy just because Tornadus is present", "result": "PASS", "evidence": "Braviary's turn-1 Hurricane missed ('Incineroar avoided the attack!'). No rain exists on this team and none was invented."},
+    {"check": "Braviary-Hisui is the immediate Choice Specs special breaker", "result": "NOT OBSERVED", "evidence": "Spore landed on turn 1 and Braviary slept until Knock Off removed it on turn 3. It never landed a hit."}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "Mega Aerodactyl", "payoff": "blocked Zapdos's Thunderbolt, a 2x hit that was lethal on its 158 HP"},
+    {"turn": 7, "battler": "Mega Aerodactyl", "payoff": "blocked Mega Metagross's Ice Punch, again lethal at 2x"},
+    {"turn": 8, "battler": "Unfezant", "payoff": "blocked Weavile's Icicle Crash at 64/170, a certain KO"},
+    {"turn": 9, "battler": "Mega Aerodactyl", "payoff": "blocked a third lethal Ice Punch"},
+    {"turn": 11, "battler": "Mega Aerodactyl", "payoff": "blocked both Incineroar's Fake Out (denying the flinch) and the Ice Punch behind it"}
+  ],
+  "protect_summary": "5 opponent Protects, 5 with a concrete payoff, 0 empty. Mega Aerodactyl alternated Protect and attack (turns 5,7,9,11 guard; 6,8,10,12 attack), so it never risked a consecutive-guard failure and never wasted a turn. This is the best Protect discipline seen in this block and needs no tuning.",
+  "ai_defects": [
+    {
+      "id": "E0288-1",
+      "turn": 3,
+      "board": "Tornadus at 32/193 with Kilowattrel and four others still in the back; player side Incineroar 217/217 and a confused Regieleki 94/167.",
+      "chosen": "Tailwind, with Kilowattrel in reserve.",
+      "better": "The block prints tactic: ACTIVATE TORNADUS TAILWIND KILOWATTREL, and the plan's whole point is that Tailwind is a wind move Kilowattrel's Wind Power converts into a Charge. For that to happen Kilowattrel has to be on the field when Tailwind resolves. The AI never co-ordinates the two: it set Tailwind from a slot whose partner was Braviary, and Kilowattrel entered afterwards. Either the tactic should gate Tailwind on the named partner being active, or Kilowattrel should be the authored lead. As built, the room's signature interaction cannot fire from the printed lead pair at all. Severity: high - this is the room's stated concept, and it is a bespoke ACTIVATE tactic, so the fix is local to this trainer's tactic wiring rather than shared."
+    },
+    {
+      "id": "E0288-2",
+      "turn": 2,
+      "board": "Tornadus 156/193, unhindered, partner Braviary asleep; player side Incineroar 217/217 and Amoonguss 237/237.",
+      "chosen": "Hurricane (70% accuracy, and Tornadus's spread is 252 HP / 4 Def / 252 Spe with zero Special Attack investment).",
+      "better": "Tailwind. Its partner was asleep and it was the only member that could act, so the turn had no offensive value; the Hurricane it did fire on turn 2 dealt 143 to a Pokemon that resists Flying. Setting Tailwind here would have started the team's speed engine four turns earlier and with Kilowattrel still available to be brought in under it. The AI appears to be scoring an uninvested STAB attack above its own priority speed-control move. Severity: moderate; this is shared TAILWIND-strategy scoring, so other Tailwind setters in the campaign are plausibly affected."
+    },
+    {
+      "id": "E0288-3",
+      "turn": 7,
+      "board": "Unfezant entering at 170/170 opposite Mega Metagross 87/167 (+1 Atk) and a full-health Amoonguss.",
+      "chosen": "Brave Bird, then Protect, then Brave Bird - Focus Energy never once.",
+      "better": "The dossier justifies Unfezant's +3 offset specifically as 'the crit lane... which ignores the player's Intimidate, Reflect and Defense boosts entirely', and Mega Metagross was standing at +1 Attack from Meteor Mash with Intimidate already applied - the exact board Focus Energy is for. Super Luck + Scope Lens is stage 2; Focus Energy takes it to the guaranteed-crit stage. The AI never values the boost. Severity: moderate; shared setup-move scoring for crit-rate moves, not bespoke."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. This was a 6-5 win - five player faints, the deepest of the block so far, and the party finished on a single Pokemon at 25/167. Mega Aerodactyl at its -1 offset was still the most dangerous single body in the gym. The brief's +1 rule needs a first-try win with 0-1 faints; the -1 rule needs three losses. Neither applies, and no level change is warranted in either direction. Worth stating explicitly: the three failed strategy checks all make the team play WEAKER than authored, so the current levels are calibrated against an under-executing version of the room. If E0288-1 and E0288-2 are fixed, this fight should be re-benchmarked before anyone adds levels.",
+  "cooler": "The roster is right and the Kilowattrel/Tropius substitutions were correct calls, so the answer is no on composition. But the room's single best idea is currently unreachable: Wind Power only pays off if Kilowattrel is on the field when a wind move resolves, and the authored lead pair is Tornadus + Braviary-Hisui. Lead Tornadus beside Kilowattrel and the first turn of the fight becomes exactly the moment the plan describes - a priority Tailwind that buffs the team's Speed and charges a partner's next Thunderbolt in the same action. That is a lead-order change rather than a species change, and it costs the room nothing. Second, smaller note: Tornadus has Hurricane on a spread with zero Special Attack investment, which gives the AI a tempting-looking but near-worthless option that it took twice; replacing it with a second support move would make the wrong choice unavailable.",
+  "legality_notes": "No legality problem in the authored set. All six members and the Aerodactylite are inside the cap-54 window. Tornadus is a legendary at offset 0, which is consistent with the block's own reasoning.",
+  "verification_limit": "No level change was made, so nothing here is pending re-verification. If the main agent fixes the ACTIVATE tactic or the Tailwind scoring, this is the battle in the block most worth re-running - the room's concept never appeared on screen."
+}
