@@ -1,0 +1,39 @@
+{
+  "play_order": 44,
+  "e_group": "E0047",
+  "trainer": "TRAINER_DWAYNE",
+  "class": "casual",
+  "location": "Route109_SeashoreHouse",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"MAGBY": 27, "SMOOCHUM": 27, "ELEKID": 26, "MONFERNO": 24},
+  "party_manifest": "work/playtest/44-TRAINER_DWAYNE/party.json",
+  "party_pool_audit": "Cap-24 core with Kartana swapped for Arcanine (pool-24 gate 20) because Kartana is 4x weak to this team's two Fire attackers. All six gated <= 24. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/44-TRAINER_DWAYNE/a1", "seed": 50, "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Magby Protected into nothing; Moonblast broke Smoochum's Focus Sash, a critical Ice Beam KO'd Enamorus, and Air Slash finished Smoochum. T2 Arcanine entered on Intimidate opposite Elekid. T3 Magby's Follow Me pulled my Flare Blitz onto itself at 0.5x while Electroweb slowed my side. T4 Extreme Speed KO'd Magby; Thunderbolt plus Life Orb recoil left Arcanine at 1 HP. T5 Arcanine pivoted to Hoopa and Monferno's Mach Punch hit a Fighting-immune target; Air Slash took Monferno to 12. T6 Psychic KO'd Monferno and Magician stole its Eviolite; T7 Psychic KO'd Elekid."}
+  ],
+  "strategy_checks": [
+    {"check": "Magby uses Follow Me as redirection for the partner", "result": "PASS", "evidence": "Turn 3 Magby's Follow Me pulled Arcanine's Flare Blitz onto itself. That is a genuinely good redirect: Magby is Fire and resists it (0.5x) while Elekid, the intended target, would have taken it neutral. The dossier's 'redirection or a faster special-defense drop are alternatives' line was honoured with the correct one."},
+    {"check": "Smoochum Fake Out / Nasty Plot / Focus Sash", "result": "PARTIAL", "evidence": "The Focus Sash worked exactly as authored (turn 1: 'The opposing Smoochum hung on using its Focus Sash!') and it converted the survived turn into a critical Ice Beam that KO'd a full-health Enamorus. Fake Out and Nasty Plot were never selected; with Sash already spent and a KO available, attacking was correct."},
+    {"check": "Elekid Electroweb speed control and Static", "result": "PASS_partial", "evidence": "Electroweb was used on turns 3 and 6, lowering my whole side's Speed both times and contributing to Hoopa moving after Monferno. Static never triggered (no contact move reached Elekid)."},
+    {"check": "Monferno Iron Fist Mach Punch / U-turn", "result": "PARTIAL", "evidence": "Mach Punch and Fire Punch were both used, but Mach Punch was aimed at a Fighting-immune Hoopa that had switched in the same turn (see AI notes). U-turn was never used."},
+    {"check": "Magby Flame Body / Acid Spray", "result": "NOT_EXERCISED", "evidence": "No contact move reached Magby and Acid Spray was never selected."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "MAGBY", "payoff": "EMPTY. Both of my actions that turn were aimed at Smoochum (Moonblast and Air Slash). Magby blocked nothing and spent the turn on which its partner's Focus Sash was broken; a Follow Me on that turn would have been far better and it demonstrably knows the move."}
+  ],
+  "protect_ledger_note": "One opponent Protect, empty. Notable because the same Pokemon used Follow Me correctly two turns later, so the guard/redirect choice is inconsistent rather than absent.",
+  "ai_defects": [],
+  "ai_notes": [
+    {"summary": "Mach Punch into a Fighting-immune target", "board": "Turn 5: Hoopa (Psychic/Ghost) switched in that turn opposite Monferno.", "chosen_action": "MACH_PUNCH at Hoopa - 'It doesn't affect Hoopa...'", "better_action": "Fire Punch at Hoopa (neutral) or Mach Punch at Togekiss. Mitigating: Hoopa entered on the same turn, so the AI had no prior knowledge of the typing. Recorded as a watch item, not a defect - this is the second time in the block (after Cobalion's Aura Sphere) that a fresh Hoopa switch-in drew an immune attack, which is worth checking against the AI's same-turn switch-in knowledge handling."}
+  ],
+  "level_changes": [
+    {"member": "MONFERNO", "field": "level offset", "before": 2, "after": 3, "reason": "First-attempt win with a single player faint. Monferno is the lowest-level member at L24 and the only fully-evolved-line member without Eviolite-scale babying; the three babies (offsets 5/5/4) are already carrying this team's level budget and were left alone."}
+  ],
+  "level_change_verification": "Teams file edited, scripts/emerald_champions_teams.py --write then --check all PASS. Generated projections reverted before committing.",
+  "rerun_status": "NOT RERUN - the headless ROM cannot be rebuilt in this session (arm-none-eabi toolchain cannot resolve stdint.h). Rerun owed to whoever rebuilds.",
+  "could_this_be_cooler": "The concept is charming and specific - a hot-battle/cold-soda sailor whose team is the Fire/Ice/Electric baby trio - and the decision to keep Magby/Smoochum/Elekid rather than the evolved Magmar/Jynx/Electabuzz is the right one; the high offsets are the honest way to make babies dangerous and they worked (L27 Smoochum one-shot a legend through a Focus Sash trade). Monferno is the odd one out: it is the only non-baby, it shares Fire with Magby, and its Iron Fist punches overlap with Magby's coverage. Elekid's evolutionary sibling in spirit would be a fourth baby - Cleffa, Igglybuff, Munchlax, Happiny, Tyrogue and Riolu are all in the reachable pool - which would make the room read as 'the nursery' rather than 'three babies and a monkey'. No change made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
