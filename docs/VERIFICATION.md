@@ -457,9 +457,13 @@ moves, damage, faints, weather and the battle text the player would have read.
 `state` never advances the saved state. `start` and `act` both append to
 `events.jsonl`; `--png` adds an optional debugging capture that nothing depends on.
 
-`--cap` puts the campaign into the milestone state for that player level cap
-through the one existing table in `caps.c`, so authored trainer level offsets
-resolve exactly as in play; Medium is the default difficulty. `--trainer` alone
+`--cap` puts the campaign into the milestone state for that player level cap:
+the driver reads `sCampaignMilestones` out of `src/caps.c` and sets the flags at
+or below the cap through the existing Studio flag command, before the party is
+prepared, then asserts the ROM reports that cap. `caps.c` stays the single
+canonical table and this side does not edit it. Only a milestone cap is
+accepted; anything else is rejected with the list. Medium is the default
+difficulty. `--trainer` alone
 resolves the authored two-owner pairs and their partner from the actual map
 script, so `--trainer TRAINER_COURTNEY_MOSSDEEP` starts the E0409 Mossdeep multi
 as `multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, ..., TRAINER_COURTNEY_MOSSDEEP, ...,
@@ -474,6 +478,16 @@ the commands that `act` call actually submitted (`source: submitted`), and adds
 the native record for the other battlers (`source: native`) only when a turn
 resolved; never read a `native` entry as this call's choice. A battler that was
 KOed earlier in the same turn keeps a stale native latch and is omitted.
+
+`switch_blocked_by` in `pending_decision` is the engine's own switch gate, taken
+from the same `CanBattlerEscape` and `IsAbilityPreventingEscape` calls the native
+menu's `B_ACTION_SWITCH` case makes, with the same Shed Shell exceptions: Shadow
+Tag, Arena Trap, Magnet Pull, Mean Look, Block, Spider Web, the Bind-class
+volatiles, Ingrain, No Retreat, Octolock, Jaw Lock, Fairy Lock, Battle Arena and
+Commander all appear there. `act` refuses a blocked switch, and if the engine
+refuses one anyway the bridge answers `PARTY_SIZE` exactly as a cancelled menu
+does, drops the command and halts for a fresh one, reporting it as
+`switch_last_refused`. Never infer switch legality from `switch_slots` alone.
 
 `status` is decoded field by field, not as a plain bitmask: `STATUS1_SLEEP` is
 the low three bits counting turns remaining and `STATUS1_TOXIC_COUNTER` is bits
