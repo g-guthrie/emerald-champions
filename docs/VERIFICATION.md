@@ -413,6 +413,78 @@ native outcomes, failures, meaningful screenshots, measured timing and remaining
 limits. Add broader variants, randomized seeds and alternate player archetypes as
 required by the Game Book playtesting rules; those are not all complete in the current run.
 
+## Headless per-turn battle driver
+
+Synthetic benchmark evidence, never earned play. `scripts/playthrough/battle_driver.py`
+starts one authored trainer battle in the `EC_HEADLESS_FIXTURES` ROM through the
+same native debug battle lifecycle the Studio sandbox uses, and then answers every
+player decision point from a memory mailbox: no controller menus, no button
+decisions and no screenshots. It exists so an agent can play a fight semantically
+instead of pulsing keys and reading pixels. Opponent battlers keep the ordinary AI,
+its ordinary turn-start timing and its ordinary knowledge; an in-game partner (the
+Steven multi) keeps its partner AI and is not commanded.
+
+Build and stamp the headless ROM first (see "Dependencies and portable build").
+Because other sessions rebuild the root ROM, copy the matched triple aside and
+pass `--build-dir` when a run must survive a concurrent rebuild:
+
+```sh
+make -j4 BUILD_NAME=emerald-headless MAP_VERSION=emerald \
+  EC_HEADLESS_FIXTURES=1 TEST=0 pokeemerald-headless.gba
+python3 scripts/stamp_release_inputs.py --stamp pokeemerald-headless.inputs.json
+python3 scripts/stamp_release_inputs.py --check --stamp pokeemerald-headless.inputs.json
+mkdir -p work/agent-battle-build && cp pokeemerald-headless.gba \
+  pokeemerald-headless.elf pokeemerald-headless.inputs.json work/agent-battle-build/
+```
+
+```sh
+python3 scripts/playthrough/battle_driver.py start --trainer TRAINER_CALVIN_1 \
+  --party handoff/benchmarks/driver_e0002_smoke.json --seed 1 --cap 14 \
+  --difficulty medium --build-dir work/agent-battle-build --run-dir work/agent-battle-e0002-s1
+python3 scripts/playthrough/battle_driver.py state  --run-dir work/agent-battle-e0002-s1
+python3 scripts/playthrough/battle_driver.py act "0:move0@1" "2:move3@2" \
+  --run-dir work/agent-battle-e0002-s1
+# A forced replacement halts with phase "await_switch" and one pending battler:
+python3 scripts/playthrough/battle_driver.py act "2:switch3" --run-dir work/agent-battle-e0002-s1
+python3 scripts/playthrough/battle_driver.py result --run-dir work/agent-battle-e0002-s1
+```
+
+A command is `battler:move<i>@<target>[,mega]` or `battler:switch<slot>`.
+Every battler listed in `pending_decision` must be given a command in the same
+`act` call. `act` validates each one against the live state before it reaches the
+mailbox, advances to the next decision point or the end, and returns that turn's
+moves, damage, faints, weather and the battle text the player would have read.
+`state` never advances the saved state. `start` and `act` both append to
+`events.jsonl`; `--png` adds an optional debugging capture that nothing depends on.
+
+`--cap` puts the campaign into the milestone state for that player level cap
+through the one existing table in `caps.c`, so authored trainer level offsets
+resolve exactly as in play; Medium is the default difficulty. `--trainer` alone
+resolves the authored two-owner pairs and their partner from the actual map
+script, so `--trainer TRAINER_COURTNEY_MOSSDEEP` starts the E0409 Mossdeep multi
+as `multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, ..., TRAINER_COURTNEY_MOSSDEEP, ...,
+PARTNER_STEVEN` does. The party comes from a `handoff/benchmarks/*.json` manifest
+through the existing native preparation API, which keeps its own legality
+validation; stage legality remains the caller's audit.
+
+`scripts/playthrough/battle_random_policy.py` takes the same arguments and plays
+a whole battle with a seeded random legal-move policy. It is a regression
+exerciser for the driver, not a difficulty benchmark: random legal play says
+nothing about a trainer.
+
+Reported AI decision frames use the same accounting as
+`scripts/playthrough/time_decisions.py` — `gMain.vblankCounter1` minus
+`gAiLogicData->decisionStartFrame` at the frame every living opponent has
+finished scoring, with `decisionSetupFrames` and `gBattleStruct->aiDelayFrames`
+alongside. They are sampled boards, not a worst-case proof.
+
+Boundaries. The bridge is excluded from the release ROM. A driven battle awards
+no trainer flag, no story receipt and no campaign progress, and it is not earned
+traversal or visual acceptance. Mechanical `A` pulses advance battle text and
+animations only; every actual decision is served from the mailbox. The driver
+does not expose Bag, Run or the battle debug menu, matching this playthrough's
+no-manual-healing rule.
+
 ## Delivery checks
 
 Run applicable source checks and a normal release build from the actual source

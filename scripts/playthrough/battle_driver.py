@@ -360,9 +360,11 @@ def decode_state(session, words):
             'usable_gimmick': (GIMMICKS[(gimmick >> 8) & 0xFF]
                                if ((gimmick >> 8) & 0xFF) < len(GIMMICKS) else '?'),
             'mega_already_used': bool(gimmick & 0x10000),
-            'last_action': ACTIONS.get(last & 0xFF, last & 0xFF),
-            'last_move_index': (last >> 8) & 0xFF,
-            'last_target': (last >> 16) & 0xFF,
+            # This turn's choice so far; "previous_turn" is the authoritative
+            # record of the turn that has actually resolved.
+            'choosing': {'action': ACTIONS.get(last & 0xFF, last & 0xFF),
+                         'move_index': (last >> 8) & 0xFF,
+                         'target': (last >> 16) & 0xFF},
         }
 
     def party(slot):
