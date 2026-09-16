@@ -689,9 +689,9 @@ mega_slots: NONE
 plan: Stunky Taunt/Helping Hand enables Heliolisk immediate damage; Volt Switch only buys a worthwhile entry. Herdier Intimidate supplies physical mitigation and Double-Edge. Ditto is a matchup-dependent revenge entry, not an automatic opener. Dry Skin does not create rain. Stats: Keep fast special Heliolisk, physical Herdier and HP-focused Scarf Ditto. Herdier Double-Edge is an explicit valid custom, not an illegal move. Could it be cooler? Retain the opportunistic roadside team, with Imposter as its unusual reserve. Overrepresented? Billy Ditto serves rain; Timmy serves direct disruption/offense. Later Ben Heliolisk has different special support. Medium incoming cap30 levels33/30/33/30 are unplayed design seeds.
 crack: Ground attacks, special mitigation, denied transformation targets and removing the offensive partner. Dry Skin does not invent rain.
 STUNKY @EVIOLITE AFTERMATH JOLLY 4/252/0/0/0/252 3 | SUCKER_PUNCH, POISON_JAB, HELPING_HAND, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
-HELIOLISK @LIFE_ORB DRY_SKIN TIMID 4/0/0/252/0/252 0 | THUNDERBOLT, HYPER_VOICE, GRASS_KNOT, VOLT_SWITCH | ivs=31/0/31/31/31/31 | friendship=255
+HELIOLISK @LIFE_ORB DRY_SKIN TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, HYPER_VOICE, GRASS_KNOT, VOLT_SWITCH | ivs=31/0/31/31/31/31 | friendship=255
 HERDIER @SITRUS_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 3 | DOUBLE_EDGE, CRUNCH, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DITTO @CHOICE_SCARF IMPOSTER RELAXED 252/0/252/0/4/0 0 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
+DITTO @CHOICE_SCARF IMPOSTER RELAXED 252/0/252/0/4/0 1 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0059 TRAINER_BRENDAN_ROUTE_110_MUDKIP class=rival
 strategy: SETUP
