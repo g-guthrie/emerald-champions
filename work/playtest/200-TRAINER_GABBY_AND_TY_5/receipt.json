@@ -1,0 +1,47 @@
+{
+  "play_order": 200,
+  "e_group": "E0301",
+  "trainer": "TRAINER_GABBY_AND_TY_5",
+  "class": "regular",
+  "location": "Global_gabby_and_ty",
+  "chapter": "Feather Badge (window 48-60)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Toxtricity (-1) at L57, Kommo-o / Primarina / Altaria (0) at L58 = cap + offset - 2 on Medium. The reporters' window is 48-60 and this rematch is played at play_order 200, after the Feather Badge and Route 121, so 60 is the live cap.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 196-199; all gates 54 or lower.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 9, "player_faints": 3, "opponent_faints": 4,
+      "why": "Fake Out plus Spore split the lead pair and Landorus's 4x Earth Power threat forced Gabby & Ty to pivot the sleeping Toxtricity out. Amoonguss's Sludge Bomb poisoned and then finished Kommo-o. The fight turned on Altaria's Tailwind: under it Primarina (252 Speed EVs) outsped Landorus and a Liquid Voice Hyper Voice KOed it, and Altaria's Fire Blast then removed Amoonguss and Primarina's second Hyper Voice removed Zapdos. Incineroar's Fake Out on a re-entering Choice Scarf Toxtricity saved a 17 HP Mega Metagross, which closed with Bullet Punch."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Cloud Nine Altaria suppresses every weather effect on the field", "result": "PASS mechanically, NOT TESTED as a plan", "evidence": "On Altaria's entry (turn 3) the engine printed 'The effects of the weather disappeared.' The ability fires and announces correctly. But my party runs no weather, so the authored payoff - switching off the player's own rain, sun or sand - never happened. This is the one team in the campaign built around that idea and the benchmark cannot confirm it without a weather party; flagging it as the open branch."},
+    {"check": "Punk Rock Toxtricity's Choice Scarf Overdrive is immediate spread sound damage", "result": "PASS", "evidence": "Overdrive on turns 1, 2, 7 and 8 (Choice-locked as intended). Correctly read as 'not very effective on Amoonguss' - Electric into Grass - so the spread is resolving per target. Punk Rock's damage-taken halving was never tested because I brought no sound moves."},
+    {"check": "Primarina's Liquid Voice makes Hyper Voice a Water attack that hits both slots", "result": "PASS", "evidence": "turn 5 Hyper Voice read 'super effective on Landorus' (Water into Ground) and 'not very effective on Amoonguss' (Water into Grass). A Normal-type Hyper Voice would have been neutral on one and neutral on the other, so the conversion is definitely live. Throat Spray also triggered on the same turn for +1 Special Attack."},
+    {"check": "Kommo-o takes Iron Defense only behind a safe board and converts with Body Press", "result": "FAIL - right moves, wrong order", "evidence": "Kommo-o used Body Press on turns 1 (flinched) and 2 (16 into Landorus, which resists Fighting at 0.5x), Protect on turn 3, and only then Iron Defense on turn 4 - at 85/209, poisoned, with Landorus's Sludge Bomb already revealed as its answer. It was KOed by that Sludge Bomb on the same turn. It defended after it had already spent the board rather than before. See AI defect E0301-1."},
+    {"check": "Overcoat Kommo-o ignores powder moves", "result": "NOT OBSERVED", "evidence": "I never aimed Spore or Rage Powder at it, precisely because the printed ability makes that pointless. Correct authoring, untested in play."},
+    {"check": "Tailwind has a real user and matters", "result": "PASS", "evidence": "Altaria set Tailwind on turn 4 and it directly caused two of my three faints - under it Primarina outsped Landorus and the pair double-moved before Zapdos on turn 7. It expired on turn 7, which is the turn I retook the fight."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Kommo-o", "payoff": "blocked Amoonguss's Sludge Bomb at 98/209 while poisoned. A repeat of the previous turn's roll (which had crit for 103) would have been close to lethal, so this is a real payoff rather than an empty guard."}
+  ],
+  "protect_summary": "1 opponent Protect in nine turns, with a genuine payoff, 0 empty.",
+  "ai_defects": [
+    {
+      "id": "E0301-1",
+      "turn": 4,
+      "board": "Kommo-o at 85/209 and poisoned, beside a freshly switched-in Altaria; opposite Landorus 151/196 (which had revealed Sludge Bomb the previous turn) and Amoonguss 236/263.",
+      "chosen": "Iron Defense.",
+      "better": "Flamethrower, Protect or anything that uses the turn. Iron Defense raises Defense, and the two moves actually threatening Kommo-o were both special (Sludge Bomb from Landorus, Sludge Bomb from Amoonguss); the boost could not protect it and it had no turns left to convert the boost with Body Press. It died to the very move it could not defend against, on the turn it boosted. Note this is the mirror image of E0288-3 / E0289-2 / E0299-2, where setup moves were never chosen at all: here the scorer picks setup at precisely the moment it is worthless. The common factor is that setup value is being computed without reference to the damage type actually threatening the battler. Severity: moderate; shared setup scoring."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. A four-member ordinary encounter cost me Landorus, Amoonguss and Zapdos - three faints - and Mega Metagross finished at 17/185. That is comfortably past the 2+ faints threshold and is a striking result for a 'regular' class trainer, which argues the reporters' individual offsets (a -1 on Toxtricity, 0 on the rest) are already well judged. No change in either direction.",
+  "cooler": "The dossier asks the question and answers no, and I agree - with one caveat it should record. The team's stated identity is weather suppression, and against any party that does not use weather (which is most of them) Cloud Nine is a blank ability and Altaria is simply a fast Tailwind setter with Fire Blast. In this fight the Tailwind, not the Cloud Nine, caused two faints. That is not an argument to change the roster; it is an argument that the encounter's memorable moment only exists for the subset of players who show up with rain, sun or sand, and the book should say so plainly rather than describe weather deletion as the thing this battle does. A concrete, non-destructive improvement: Primarina's 252 Speed EVs under Tailwind were the single most dangerous thing on the field and nothing in the plan mentions them - the sound-and-water lane is stronger than the write-up claims and deserves the credit.",
+  "legality_notes": "No legality problem. All four members and items are inside the window.",
+  "verification_limit": "No level change was made, so nothing is pending re-verification."
+}
