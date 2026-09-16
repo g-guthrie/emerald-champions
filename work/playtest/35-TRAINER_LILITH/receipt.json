@@ -1,0 +1,41 @@
+{
+  "play_order": 35, "e_group": "E0036", "trainer": "TRAINER_LILITH", "class": "gym",
+  "location": "DewfordTown_Gym", "cap": 20, "difficulty": "medium",
+  "party_manifest": "work/playtest/35-TRAINER_LILITH/party.json",
+  "opponent_levels_observed": {"HITMONTOP": 20, "SCRAGGY": 22, "PANCHAM": 23, "FLAMIGO": 20, "MEDITITE": 22, "CLOBBOPUS": 24},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/35-TRAINER_LILITH/a1", "seed": "0xA377", "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 6, "ai_decision_frames_max": 15,
+     "narrative": "Fairy damage is 4x into Scraggy and 2x into four more of the six, so Magearna's Fleur Cannon did most of the work. The fight's two real moments were both Lilith's: Scrappy Pancham's Brick Break is 2x into Ghost/Dark and one-shot my 68 HP Spiritomb wall from full, and Meditite's Fake Out into Pancham's Crunch removed Alakazam in a single relay turn. Two player faints against six.",
+     "note": "Played as an independent clear, keeping the authored overlap with Brenden intact. No merged twelve-member party."}
+  ],
+  "strategy_checks": [
+    {"check": "Hitmontop's Intimidate opens the relay", "result": "PASS", "evidence": "Both player leads were at Attack -1 before the first decision point. It cost me real damage because my lead was physical."},
+    {"check": "Fake Out/Feint opens a useful partner turn (the ALLY_COMBO)", "result": "PASS", "evidence": "Turn 5: Meditite's Fake Out flinched Alakazam and Pancham's Crunch (2x into Psychic) killed it on the same turn. That is the authored relay executing cleanly, and with the correct coverage move rather than a STAB Fighting attack."},
+    {"check": "Moxie requires a real knockout", "result": "PASS (negative branch)", "evidence": "Scraggy never scored a knockout and no Moxie boost was ever credited. It also never got a Dragon Dance off, which is the crack the dossier names."},
+    {"check": "Scrappy lets Pancham through a Ghost wall", "result": "PASS, and it is the best thing on this team", "evidence": "Turn 4: Brick Break into Spiritomb printed 'It's super effective!' and dealt 68 - a clean one-shot on the body that had walled the previous two Fighting rooms. Scrappy makes Fighting 1x into the Ghost half while Dark stays 2x. This is a genuinely well-designed answer to the obvious counterplay."},
+    {"check": "Meditite remains the Pure Power breaker", "result": "PASS", "evidence": "Meditite used Fake Out for the relay and Drain Punch otherwise; it never wasted a turn on setup it does not have."},
+    {"check": "Technician Clobbopus uses Feint or phasing only when it benefits the actual board", "result": "PASS (negative branch)", "evidence": "Clobbopus used Circle Throw twice and never selected Feint or Taunt. With a Queenly Majesty lead on the field for the opening turns, Feint would have been blocked anyway, and there was no setup worth Taunting. Correct restraint."},
+    {"check": "Costar copies the active ally's current stages on entry; never force a switch simply to display Costar", "result": "FAIL", "evidence": "Turn 1: Lilith withdrew Scraggy and brought Flamigo in beside an unboosted Hitmontop. Costar had nothing to copy, and Flamigo was knocked out by a 2x Play Rough on the turn it arrived. See AI defects."},
+    {"check": "Pancham's Parting Shot introduces Costar Flamigo beside the boosted partner", "result": "NOT OBSERVED", "evidence": "Parting Shot was never selected. Flamigo was instead hard-switched in on turn 1 and died before Pancham ever appeared, so the authored introduction could not happen."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Lilith's side never used Protect in this battle, despite four of the six carrying it. With a fast Fairy attacker threatening most of the roster there was rarely a turn where guarding beat attacking, and no empty guards occurred.",
+  "ai_defects": [
+    {
+      "severity": "moderate",
+      "turn": "a1 turn 1",
+      "board": "Hitmontop (unboosted, no stat changes) and Scraggy (full HP, Eviolite) against Tsareena and Magearna, with nothing revealed on my side yet",
+      "chosen": "Withdrew Scraggy and sent in Flamigo, the team's Costar body",
+      "better": "Keep Scraggy in and attack or Dragon Dance, or - if the switch is wanted - bring in any member other than Flamigo. Costar copies the active ally's current stat stages on entry; Hitmontop had none, so the ability did literally nothing, and Flamigo arrived into a 2x Fairy attack and fainted immediately.",
+      "note": "The dossier's own rule is 'Never force a switch simply to display Costar' and 'Pancham's Parting Shot can introduce Costar Flamigo beside the boosted partner'. Deploying the Costar body beside an unboosted ally on turn 1 spends the team's most conditional member for zero value and removes the intended Parting Shot relay from the fight entirely. Worth checking whether the switch scorer weighs Costar as a flat entry bonus rather than reading the ally's actual stage total."
+    }
+  ],
+  "ai_observations": [
+    "A clean demonstration of the no-read model, worth recording as evidence rather than a defect: on turn 2 both Meditite and Clobbopus selected Fighting attacks aimed at my Tsareena, I pivoted to Spiritomb in the same turn, and both moves resolved as 'It doesn't affect Spiritomb'. The AI committed to a correct decision against the board it could see and was punished by a pivot it could not see, which is exactly the intended behaviour."
+  ],
+  "source_book_mismatch": "Third instance of the same pattern in this Gym. The plan states 'Medium levels 22/24/25/22/24/26'; the resolved Medium levels are 20/22/23/20/22/24 - two lower across all six. All three Dewford rooms I played (Laura, Brenden, Lilith) show the identical two-level gap, so this is systematic to the room set's prose rather than a one-off typo. Reconciliation item for the team owner.",
+  "level_changes": "none. Won on the first attempt but with two player faints out of six, which is the brief's 'won after a real fight' band. Both faints came from authored mechanics doing exactly what they are designed to do - Scrappy through a Ghost wall, and a Fake Out relay. Keep the authored offsets (2/4/5/2/4/6), subject to the mismatch noted above.",
+  "cooler_note": "Of the three Dewford rooms this is the one with the best individual ideas. Scrappy Pancham is the single best-designed slot I met in the whole block: it is a specific, discoverable answer to the exact wall a player brings to a Fighting gym, and it earned its knockout. Costar Flamigo is the opposite - a genuinely unusual ability whose payoff needs a boosted partner and a Parting Shot to set it up, and in practice the AI spent it on turn 1 for nothing. Asking whether the team could be cooler: the concept is already good and the species should stay, but the relay needs the deployment order to support it. A concrete suggestion for a later pass (not applied here): lead Hitmontop beside Scraggy as authored, but hold Flamigo behind Pancham in the deployment order so the only way it reaches the field is after a Parting Shot or a Dragon Dance exists to copy. That single reordering would turn the team's most distinctive ability from a liability into the finisher it is written to be.",
+  "authored_set_legality": "No illegal set found.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}
