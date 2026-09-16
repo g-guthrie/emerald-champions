@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "play_order": 3,
+  "e_group": "E0003",
+  "trainer": "TRAINER_RICK",
+  "class": "regular",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "SPINARAK L17 @CHOICE_SCARF INSOMNIA JOLLY (Electroweb/String Shot/Poison Jab/Knock Off)",
+    "DWEBBLE L14 @EVIOLITE STURDY ADAMANT (Rock Slide/X-Scissor/Knock Off/Protect)",
+    "KARRABLAST L13 @LIFE_ORB NO_GUARD ADAMANT (Megahorn/Drill Run/Knock Off/Protect)",
+    "DEWPIDER L14 @SITRUS_BERRY WATER_BUBBLE MODEST (Scald/Bug Buzz/Giga Drain/Protect)"
+  ],
+  "authored_strategy_flags": "NONE",
+  "party_manifest": "work/playtest/03-RICK/party-a1.json",
+  "party_summary": "Arcanine + Magearna* leading; Snorlax / Weavile / Whimsicott / Iron Leaves* reserve. Weavile and Snorlax entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 3001, "outcome": "won", "turns": 3, "decisions": 5,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.352,
+      "events": "work/playtest/03-RICK/attempt-1-events.jsonl",
+      "narrative": "T1 Flare Blitz OHKOd the L17 Spinarak but the recoil left Arcanine exactly inside Dwebble's Rock Slide, which killed it; Flash Cannon hit Dwebble into Sturdy at 1 HP. Weavile replaced Arcanine and Karrablast came in. T2 both opponents Protected and both blocks were lethal hits. T3 Triple Axel finally removed Dwebble and Flash Cannon removed Karrablast, whose No Guard Megahorn had put Weavile on its Focus Sash. T4 Weavile pivoted to Snorlax and a Sp.Atk +4 Thunderbolt removed Dewpider."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Choice-Scarf Spinarak picks String Shot when the two-stage Speed drop enables Dwebble/Karrablast, or Electroweb when one stage plus damage is enough",
+     "result": "NOT EXERCISED",
+     "evidence": "Spinarak's only turn was T1, where it used Knock Off and removed Arcanine's Sitrus Berry - a defensible, non-empty choice. Neither speed-control move was ever selected, so the authored control lane is unverified. The reason is level, not logic: a L17 Spinarak with no Speed investment in Def died in one 2x Flare Blitz from a L14 Arcanine."},
+    {"check": "Spinarak switches on turn two when its locked support action stops producing value",
+     "result": "NOT TESTED", "evidence": "It did not survive to a second turn."},
+    {"check": "No repeated empty Choice-locked utility turns",
+     "result": "PASS (vacuously)", "evidence": "One turn, one useful action."},
+    {"check": "Sturdy survives a guaranteed OHKO",
+     "result": "PASS", "evidence": "T1 Dwebble endured a 2x Flash Cannon at 1 HP ('The opposing Dwebble endured the hit!')."},
+    {"check": "No Guard Megahorn never misses",
+     "result": "PASS", "evidence": "T3 Megahorn connected on Weavile for a 2x hit; only the Focus Sash prevented the KO."},
+    {"check": "Water Bubble doubles Dewpider's Scald / its burn lane works",
+     "result": "NOT TESTED", "evidence": "Dewpider was OHKOd by a Sp.Atk +4 Thunderbolt on the turn it arrived and never acted."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.352 s maximum."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "KARRABLAST", "payoff": "EXCELLENT - blocked a Sp.Atk +2 Flash Cannon that was lethal on its 40 HP."},
+    {"turn": 2, "user": "DWEBBLE", "payoff": "EXCELLENT - at 1 HP after Sturdy, it blocked a priority Ice Shard that was lethal by definition, and bought a full extra turn of Rick's offense."}
+  ],
+  "empty_protects": 0,
+  "protect_note": "The cleanest Protect turn seen in this block so far: two simultaneous Protects, both blocking kills, neither repeated into the following turn.",
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "T1 Dwebble correctly picked Rock Slide on Arcanine (2x) over X-Scissor, and it got the KO exactly on the recoil margin.",
+    "T3 Karrablast correctly picked Megahorn on Dark-type Weavile (2x) over Drill Run.",
+    "T1 Spinarak's Knock Off removed the Sitrus Berry that would have kept Arcanine alive through the Rock Slide - the item removal directly enabled the opponent's only KO."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 1 player faint -> +1 on the weakest one or two members, never the ace first. Spinarak (+5, L17) is the ace and is unchanged; Dwebble (+2) earned its keep with Sturdy, a perfect Protect and the fight's only KO, so it is unchanged too.",
+    "changes": [
+      {"member": "KARRABLAST", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14},
+      {"member": "DEWPIDER", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15}
+    ],
+    "reasoning": "Karrablast is the lowest-level member and its Life Orb No Guard Megahorn is the team's real offensive threat - one more level makes it likelier to convert against a Focus Sash. Dewpider is the designated special Water lane and it died before acting; +1 gives it a chance to survive one hit and actually show Water Bubble Scald, which is currently unverified.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "The concept is good; the level distribution is what undercuts it.",
+    "keep": "A Bug Catcher whose gimmick is paired Speed control (Scarf String Shot/Electroweb) feeding two slow heavy hitters is a real doubles idea, and Sturdy Eviolite Dwebble plus No Guard Megahorn is a genuinely nasty pair for a second route fight.",
+    "suggestion": "Spinarak carries the entire concept at +5 and has 40 base Defence and 60 base HP; any super-effective hit ends it before the control lane ever runs. Either give it the bulk to survive one turn (Eviolite instead of Choice Scarf, with Speed investment for the same first-mover role) or move the control lane onto Dwebble, which already has the bulk to use it. As written, the team's whole plan is one frail turn away from never happening - which is exactly what occurred here.",
+    "second_thought": "Three of the four members carry Knock Off. Trading one of them for Sticky Web or Rage Powder would make the support identity distinct instead of triplicated.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": [
+    "Best-played opponent of the block so far: correct type targeting on both KOs, two non-empty simultaneous Protects, and an item removal that directly enabled the kill. The level change here is the brief's mechanical response to a one-faint first-try win, not a criticism of the AI.",
+    "Pool chronology caveat carried from play_order 1."
+  ]
+}

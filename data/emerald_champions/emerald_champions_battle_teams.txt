@@ -79,8 +79,8 @@ plan: First two useful turns: Scarf Spinarak chooses String Shot when the two-st
 crack: Ground immunity blocks Electroweb damage but does not inherently block String Shot. Taunt, Magic Bounce, Clear Amulet, White Herb, speed reversal and punishing switches offer counterplay. Disposition: RETAIN; String Shot replaces Toxic Thread for direct paired speed control, while the Scarf control-and-switch identity remains.
 SPINARAK @CHOICE_SCARF INSOMNIA JOLLY 252/0/4/0/0/252 5 | ELECTROWEB, STRING_SHOT, POISON_JAB, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
 DWEBBLE @EVIOLITE STURDY ADAMANT 68/252/0/0/0/188 2 | ROCK_SLIDE, X_SCISSOR, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-KARRABLAST @LIFE_ORB NO_GUARD ADAMANT 4/252/0/0/0/252 1 | MEGAHORN, DRILL_RUN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DEWPIDER @SITRUS_BERRY WATER_BUBBLE MODEST 252/0/4/252/0/0 2 | SCALD, BUG_BUZZ, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+KARRABLAST @LIFE_ORB NO_GUARD ADAMANT 4/252/0/0/0/252 2 | MEGAHORN, DRILL_RUN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DEWPIDER @SITRUS_BERRY WATER_BUBBLE MODEST 252/0/4/252/0/0 3 | SCALD, BUG_BUZZ, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0004 TRAINER_ALLEN class=regular
 strategy: NONE

@@ -1,0 +1,26 @@
+{
+  "trainer_a": "TRAINER_RICK",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 3001,
+  "difficulty": "medium",
+  "level_cap": 14,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 3,
+  "decisions": 5,
+  "player_faints": 1,
+  "opponent_faints": 0,
+  "ai_decision_frames_max": 21,
+  "ai_decision_seconds_max": 0.352,
+  "ai_decision_frames": [
+    8,
+    11,
+    9,
+    21,
+    21
+  ],
+  "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+  "elf_sha256": "d43f0156f2669176abb19598a1ec55cfc7a82441550e443bfdd1836c41b7be78",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
