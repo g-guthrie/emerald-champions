@@ -1,0 +1,104 @@
+{
+  "play_order": 59,
+  "e_group": "E0068",
+  "trainer": "TRAINER_JACOB",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Cyclizar 0->1 off a five-turn one-faint clear. This is the one confirming run of that level on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Cyclizar resolved at L29 (L28 in pass 1). Ferroseed L30, Druddigon L29 and Lycanroc L28 unchanged.",
+  "resolved_opponent_levels": {"FERROSEED": 30, "DRUDDIGON": 29, "LYCANROC_MIDDAY": 28, "CYCLIZAR": 29},
+  "party_manifest": "work/playtest/59-TRAINER_JACOB/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: Gardevoir (Gardevoirite), Magearna, Togekiss, Nidoking, Kartana, Weavile - all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110. One declared reachable legend (Magearna) and one Mega (Gardevoir, evolved turn 1). Only two of the six were ever sent out.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/59-TRAINER_JACOB/r1",
+      "seed": 59,
+      "outcome": "won",
+      "turns": 3,
+      "driver_turn_counter": 2,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_frames": [61, 21, 21],
+      "ai_decision_seconds_max": 1.021,
+      "narrative": "I knew the turn-1 pivot was coming this time and aimed around it. T1 I Mega Evolved and sent Mystical Fire at Ferroseed; Jacob made the same excellent predictive switch as pass 1, pulling Ferroseed out for Lycanroc, so the 4x landed on a Rock-type at 0.5x instead. But the other half of my turn decided the battle: Magearna's Fleur Cannon (2x into Dragon) KO'd the 122 HP ASSAULT VEST Druddigon outright from full health, before the Iron Head it had selected at my fresh Mega could resolve. In pass 1 that same Druddigon took my Mega from 90 to 12. T2 Cyclizar came in and Knocked Off Magearna's Assault Vest, Lycanroc's Rock Slide was resisted by the Steel, and one Pixilate Hyper Voice double-KO'd BOTH of them - Lycanroc outright and Cyclizar at 2x into Dragon from full 106. T3 Ferroseed returned into a 4x Mystical Fire and died from full 94. Three turns, zero player faints, four of my six never sent out, and the only damage I took all battle was 34 on Gardevoir and 21 on Magearna."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "The predictive pivot that protects Ferroseed from Fire",
+      "result": "PASS",
+      "evidence": "For the second pass running, Jacob withdrew Ferroseed on the exact turn I aimed a 4x Mystical Fire at it and put a Rock-type in the way, turning 4x into 0.5x. This is the best repeated read any trainer in my block makes, and it should be preserved. It is worth noting that it is also the only thing on this team that is working."
+    },
+    {
+      "check": "Cyclizar's extra level lets it use Shed Tail",
+      "result": "FAIL",
+      "evidence": "At L29 it got one action, KNOCK_OFF, stripping Magearna's Assault Vest, and was then KO'd from full 106 HP by the 2x half of a spread Hyper Voice. MOVE_SHED_TAIL has not been selected in either pass. In pass 1 it arrived last with no bench, so Shed Tail was illegal; this pass it arrived third WITH a live bench and still did not use it. That is now a genuine question for the AI owner rather than an ordering artefact - recorded as an ai_note, since one sample of a legal-but-unchosen move is not enough to call a defect."
+    },
+    {
+      "check": "Assault Vest Druddigon survives special attacks",
+      "result": "FAIL",
+      "evidence": "The entire point of the item, and it was one-shot from full 122 HP by a single Fleur Cannon before it could act. This is the clearest calibration failure in the battle: a 122 HP special wall that dies to one special attack is not a wall. In pass 1 it survived that same Fleur Cannon on 6 HP and took my Mega to 12 with Iron Head; one level of the attacker's growth and the roll went the other way."
+    },
+    {
+      "check": "Iron Barbs / Rocky Helmet punish the player",
+      "result": "NOT TESTED",
+      "evidence": "As in pass 1, I attacked exclusively with non-contact special moves, so neither the ability nor the item did anything. Across two passes this Ferroseed's defensive package has never taxed me once - a competitive cap-30 party simply has no reason to make contact with it."
+    },
+    {
+      "check": "Steadfast Lycanroc's priority Accelerock",
+      "result": "FAIL",
+      "evidence": "It was switched in to absorb a Fire move, used ROCK_SLIDE into a Steel/Fairy that resists it, and died to Hyper Voice. ACCELEROCK - the move that took my Mega in pass 1 - was not selected. Fair to note its turn was constrained: it came in on a pivot rather than on its own terms."
+    },
+    {
+      "check": "Leech Seed / Stealth Rock from Ferroseed",
+      "result": "FAIL - never acted",
+      "evidence": "Ferroseed was pivoted out on turn 1 and returned on turn 3 into a 4x Mystical Fire that KO'd it from full. It has not selected LEECH_SEED or STEALTH_ROCK in either pass."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent used Protect. Ferroseed and Lycanroc both carry it and neither reached a turn where it was the right call. Nothing to review.",
+  "ai_defects": [],
+  "ai_notes": [
+    "The turn-1 Ferroseed -> Lycanroc pivot is a genuinely strong repeated read and should not be tuned away. It is the second-best switching decision in my block after Greta's Shedinja -> Gastly.",
+    "Cyclizar arriving on turn 2 with Ferroseed and Lycanroc still alive, and choosing Knock Off rather than SHED_TAIL, is the one line worth a second sample. Shed Tail was legal there for the first time across both passes - it had a live bench to pass the substitute to - and Knock Off on an Assault Vest that my Magearna was about to stop needing was low value. Not raised to a defect on a single observation.",
+    "Lycanroc's Rock Slide into a Steel/Fairy that resists it, when Drill Run (Ground, 2x into Magearna's Steel) was on its sheet, is a weaker target/move choice - but it is also a spread move and its partner slot was occupied, so I am recording it as a note rather than a defect.",
+    "Druddigon's Iron Head was aimed correctly at the freshly Mega-Evolved Gardevoir (2x into Fairy); it simply never got to move.",
+    "AI decision timing peaked at 61 frames (1.021 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "DRUDDIGON",
+      "field": "level offset",
+      "before": 1,
+      "after": 2,
+      "pass_total": "+1 (first level for this member in this pass)",
+      "reason": "Three-turn zero-faint clear with four of my six never sent out - the softest result in my block - so brief rule 5 calls for a raise. Druddigon is the most deserving recipient: it is an ASSAULT VEST special wall with 122 HP that was one-shot from full health by a single special attack before acting, which is a direct failure of the thing its item exists to do. In pass 1 it survived the identical Fleur Cannon on 6 HP and then took my Mega Gardevoir from 90 to 12 with Iron Head, so this is a matter of one HP roll: one level is very likely to put it back on the right side of that line and restore the fight pass 1 had."
+    },
+    {
+      "member": "LYCANROC",
+      "field": "level offset",
+      "before": 0,
+      "after": 1,
+      "pass_total": "+1 (first level for this member in any pass)",
+      "reason": "The second raise the rule allows, and Lycanroc is the lowest-level member on the team at offset 0 / L28 - the only member never raised in either pass. Pass 1 deliberately spared it because it had KO'd my Mega with Accelerock; this pass it was pivoted in to eat a Fire move, got one resisted Rock Slide and died to a spread attack from 61 HP. With Druddigon removed on turn 1 it had no cover at all. One level on the team's only priority attacker is the cheapest way to make the pivot it is used for survive into an Accelerock."
+    }
+  ],
+  "level_changes_not_made": [
+    {
+      "member": "CYCLIZAR",
+      "reason": "+1 in pass 1. Its problem is not level - it is that Shed Tail has never been selected even when legal, which is an AI question I have flagged as a note. Raising it again would spend the ceiling on a member whose authored move has never fired."
+    },
+    {
+      "member": "FERROSEED",
+      "reason": "Highest offset on the team at 2 and the member the whole turn-1 pivot exists to protect. Rule 5 points away from it first, and its problem is that its Iron Barbs/Rocky Helmet package taxes nothing against an all-special party - a design question, not a level."
+    }
+  ],
+  "calibration": "RAISE Druddigon 1 -> 2 and Lycanroc 0 -> 1. Won on the first attempt in three turns with zero player faints, using only two of my six Pokemon, and taking 55 damage in total across the whole battle. Brief rule 5: 'Won first try with 0-1 player faints and no real threat -> +1 on the weakest one or two members.' Two members are raised because this is the softest result of the twelve battles in my block. Recorded honestly: a meaningful part of the difference from pass 1 is that I played the matchup better having seen the pivot once, and one HP roll on Druddigon - it survived the same Fleur Cannon on 6 HP in pass 1 - so these two levels are as much about restoring the pass-1 fight as about escalating it.",
+  "could_this_be_cooler": "Retain the concept, but this team has the block's clearest 'defensive package that taxes nothing' problem. Ferroseed's Iron Barbs plus Rocky Helmet and Druddigon's Rough Skin are three separate contact punishers on a four-Pokemon team, and across two benchmark passes a strong cap-30 party has never once made contact with any of them, because its best answers (Fleur Cannon, Hyper Voice, Mystical Fire, Earth Power) are all special and non-contact. Three of the team's defensive features are therefore invisible. The trainer's actual strength is something else entirely and it is genuinely good: the predictive pivot that turns a 4x Fire move into a 0.5x one, twice running. No species, move or item change is proposed or made here, but the honest note for the main agent is that this team would be far more interesting with something that punishes special attackers - the current package reads as a Rocky-Helmet stall team and plays as a pivot team.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. Teams-file changes are the single DRUDDIGON and LYCANROC offset lines, edited in place; generated projections were not regenerated or committed by this session. Synthetic headless benchmark, not earned campaign play."
+}
