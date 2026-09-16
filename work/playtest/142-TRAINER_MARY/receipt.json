@@ -1,0 +1,55 @@
+{
+  "play_order": 142,
+  "e_group": "E0168",
+  "trainer": "TRAINER_MARY",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "room_thesis": "The price of power - every member pays for its damage with a drawback, and Mega Lopunny is the deliberate exception.",
+  "cap": 42,
+  "difficulty": "medium",
+  "mega_slots": 6,
+  "resolved_opponent_levels": {"DRAMPA": 42, "RUFFLET": 46, "OBSTAGOON": 42, "DUDUNSPARCE": 42, "BEWEAR": 42, "LOPUNNY": 39},
+  "cap_window_confirmation": "Authored offsets 2/6/2/2/2/-1 resolved to 42/46/42/42/42/39, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42.",
+  "party_manifest": "work/playtest/142-TRAINER_MARY/party.json",
+  "pre_declared_strategy_checks": [
+    "Drampa's Berserk is reactive - the opening Choice Specs attack is NOT pre-boosted and the AI must not plan as though it were",
+    "The Choice Specs lock on Drampa is real",
+    "Hustle raises Attack 50 percent and drops accuracy to 80 percent, on both Rufflet and (by Trace) anything copying it",
+    "Obstagoon's Flame Orb activates at end of turn and Guts then doubles Facade",
+    "Dudunsparce's Serene Grace doubles Body Slam paralysis and Rock Slide flinch, and Coil is the setup",
+    "Bewear's Fluffy halves contact damage and DOUBLES Fire damage taken",
+    "Mega Lopunny's Scrappy means its Fighting and Normal moves hit Ghost types",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/142-TRAINER_MARY/a1", "seed": 142, "outcome": "won", "turns": 7, "decisions": 12, "player_faints": 4, "opponent_faints": 6,
+     "narrative": "T1 was a three-for-two trade in one turn: Pixilate Hyper Voice is 2x into Drampa's Dragon half and killed a 130 HP Choice Specs attacker outright, Rufflet's Hustle Brave Bird killed my 122 HP Mega Gardevoir, and Rufflet then died to its own Brave Bird recoil plus the Air Slash that had already landed. T2 Chandelure and Togekiss focused Obstagoon and killed it before its Flame Orb reached end of turn, so Guts never turned on - which also meant my planned Knock Off on the Orb was never needed. T3 Mega Lopunny arrived, Scrappy let its Drain Punch hit my Ghost-type Chandelure and kill it, and Air Slash took Lopunny to 16 of 112. T4 Incineroar's Fake Out finished Lopunny and Togekiss's Air Slash flinched Dudunsparce out of a Coil. T5 Bewear Protected. T6 Air Slash flinched Bewear and a Flare Blitz - doubled by its own Fluffy - killed a 192 HP body in one hit, while a critical Serene Grace Rock Slide killed Togekiss. T7-T9 a +2 Coil Dudunsparce killed Incineroar through Intimidate, Amoonguss put it to sleep, and Sludge Bomb finished it."}
+  ],
+  "strategy_checks": [
+    {"check": "Drampa's Berserk is reactive, not pre-boosted", "result": "PASS", "evidence": "Drampa's single action was Choice Specs Hyper Voice at +0 Special Attack. It died before ever dropping below half HP, so Berserk never activated and the AI never behaved as if it had. The dossier's explicit warning - 'the AI must not plan as though it were' - holds."},
+    {"check": "Choice Specs lock", "result": "NOT TESTED", "evidence": "Drampa got exactly one action. A one-turn battler cannot demonstrate a lock."},
+    {"check": "Hustle", "result": "PASS, emphatically", "evidence": "Rufflet's Hustle Brave Bird killed a 122 HP Mega Gardevoir from full at 1x effectiveness. That is an Eviolite pre-evolution at +6 hitting like a fully evolved attacker, which is exactly what the +6 offset is for. The 80 percent accuracy downside did not bite in this sample - one Brave Bird, one hit. Worth noting that my own Gardevoir Traced Hustle on entry and would have carried the same accuracy penalty had it not Mega Evolved into Pixilate."},
+    {"check": "Obstagoon Flame Orb into Guts Facade", "result": "FAIL - never happened", "evidence": "Obstagoon entered on turn 2 and died on turn 2 before the end-of-turn Flame Orb activation. It got one action, Knock Off. The dossier's signature interaction - 'Obstagoon's burn turning into a Guts Facade the same turn Lopunny's Fake Out denies the answer' - requires Obstagoon to survive one full turn and it did not. This is the same lateness problem I recorded for Gourgeist in Martha's room at play_order 136."},
+    {"check": "Dudunsparce Serene Grace and Coil", "result": "PASS, and it was the room's best member", "evidence": "Two Coils to +2 Attack, +2 Defense and +2 accuracy, a critical Rock Slide that killed Togekiss and chipped Incineroar, and a Body Slam that killed a 171 HP Incineroar through Intimidate. It was also the last member standing and it took three of my six by itself or with help. Serene Grace at +2 Coil is a genuine win condition and this is the one member of the room that fully delivered its authored identity."},
+    {"check": "Bewear Fluffy", "result": "PASS on both halves", "evidence": "Doubling: a single Flare Blitz killed a 192 HP Bewear outright after one Air Slash - Fire is normally 1x into Normal/Fighting, and Fluffy turned it into the hardest hit on my side. Halving: not isolated in this sample, but Bewear took the 2x Air Slash without dying, which is consistent. The dossier calls Fluffy 'a double-edged trade, which is the room's whole thesis' and that is accurate."},
+    {"check": "Mega Lopunny Scrappy", "result": "PASS", "evidence": "Mega Lopunny's Drain Punch killed my Chandelure. Fighting is 0x into Ghost without Scrappy; with it the move connected and healed Lopunny. I declared this in advance as the reason Chandelure was not a safe answer to the ace and it played out exactly that way."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Exactly one opposing Protect in the whole battle, from Bewear, and it blocked both of my attacks. See the ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "BEWEAR", "payoff": "EXCELLENT. Bewear Protected on the turn it arrived and blocked both an Air Slash (2x into Normal/Fighting) and a Flare Blitz (doubled by its own Fluffy). Those two attacks killed it on the very next turn, so the guard denied a full turn of lethal damage. It did not repeat."}
+  ],
+  "protect_ledger_note": "One guard in seven turns from a team with four Protects on it. That is a very low rate, and the one that happened was correct and well-timed. No empty guards, no consecutive repeats.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Dudunsparce's play was excellent throughout: Coil on the turns the board was safe, Rock Slide when a spread move was worth more than a single target, and Body Slam into the Intimidated physical attacker. It correctly kept setting up while its partner absorbed pressure.",
+    "Mega Lopunny choosing Drain Punch into a Ghost type is the same class of decision as Kangaskhan's Scrappy Fake Out in Berke's room - the AI knows Scrappy removes the immunity and selects accordingly.",
+    "Rufflet trading itself for my Mega through Brave Bird recoil is not a mistake: Brave Bird was the correct move and the recoil is the price the room's whole thesis is about.",
+    "AI decision time peaked at 1.038 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt with 4 of 6 player faints including my Mega Evolution. Brief rule 5 and the AGENTS.md three-faint threshold both say keep. No level change. This room is priced correctly and is the second-hardest fight in my block after George's: an Eviolite Rufflet at +6 one-shot my Mega on turn one, and a +2 Coil Dudunsparce at +2 took two more of my six.",
+  "could_this_be_cooler": "Keep the six. The thesis is the clearest of any room in the Gym - six drawbacks and one clean blade - and it is legible in play rather than only on paper: I watched Rufflet kill itself with its own recoil on the turn it killed my Mega, which is the concept in one action. Two notes. First, the same lateness problem I flagged for Martha at play_order 136 applies to Obstagoon here: its entire identity is Flame Orb into Guts Facade, and that requires it to survive one end-of-turn tick, which it did not. Obstagoon is the third member out in a six-member room, so it typically arrives when the player already has board control. If one thing changed, I would lead Obstagoon rather than Drampa - the Orb would be ticking from turn zero, which is also exactly what the dossier says the player should be made to worry about ('a Toxic Orb ticking on turn one while the player is still deciding whether it was a mistake' is Alexia's line, but it applies here). Second, Dudunsparce is the standout and should not be touched: Serene Grace behind Coil is a real clock, it survived to the end, and it is the reason this fight cost me four Pokemon rather than two. Mega Lopunny at -1 is correctly priced - it is frail at 112 HP and it still traded itself for my Chandelure using an ability interaction the player has to know about in advance."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
