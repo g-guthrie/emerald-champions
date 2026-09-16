@@ -1,0 +1,46 @@
+{
+  "play_order": 148,
+  "e_group": "E0176",
+  "trainer": "TRAINER_LUIS",
+  "class": "regular",
+  "location": "Route105",
+  "chapter": "Feather Badge - optional Surf backtrack",
+  "cap": 48,
+  "difficulty": "medium",
+  "resolved_levels_check": "PASS - Lanturn 48-1-2=45, Mantine 48+0-2=46, Sharpedo 48+0-2=46, Arctovish 48+1-2=47, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/148-TRAINER_LUIS/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 53, "party": "party-a1.json", "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4,
+     "note": "Rillaboom + Magnezone + Iron Hands + Alakazam + Gengar + Togekiss. Both leads fell on turn 1 to Wood Hammer and a 4x Thunderbolt, but Mantine got its Tailwind up before dying and that window immediately cost me Rillaboom to Arctovish's Freeze-Dry. Magnezone then removed Arctovish and Sharpedo on consecutive turns. Three turns, so the fight never really developed."}
+  ],
+  "strategy_checks": [
+    {"check": "Mantine sets Tailwind when it creates a better race", "result": "PASS", "evidence": "turn 1, with Lanturn already threatened, Mantine chose Tailwind over attacking, and the Tailwind outlived it - Arctovish entered under it on turn 2 and moved first."},
+    {"check": "Tailwind actually buys Arctovish a move-first opportunity", "result": "PASS", "evidence": "turn 2 Arctovish moved before both of my battlers and KO'd Rillaboom. It correctly chose Freeze-Dry (2x into a Grass-type) rather than the Fishious Rend the plan usually wants, because Water is resisted there - the right read, and evidence the move-first window was real."},
+    {"check": "Surf is never fired beside a non-absorbing partner (Sharpedo)", "result": "NOT EXERCISED", "evidence": "Mantine chose Tailwind on its only turn and died before a second; Sharpedo and Mantine were never on the field together. The constraint was not tested this run."},
+    {"check": "Lanturn attacks rather than idling", "result": "PASS but badly chosen", "evidence": "turn 1 Hydro Pump into Rillaboom. It attacked, but see AI defect P13-D5 - it picked its worst option against that target."},
+    {"check": "Sharpedo's Speed Boost and Protect are distinct timing resources", "result": "PASS", "evidence": "turn 2 Protect blocked a lethal priority Grassy Glide and banked a Speed Boost stage at the same time - the best single decision Luis's side made all battle."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "SHARPEDO", "payoff": "REAL - blocked Rillaboom's Grassy Glide, a 2x priority hit that would have killed it outright, and gained a Speed Boost stage behind the guard"}
+  ],
+  "ai_defects": [
+    {
+      "id": "P13-D5",
+      "severity": "real",
+      "turn": 1,
+      "board": "Lanturn + Mantine vs Rillaboom (Grass) + Magnezone (Electric/Steel)",
+      "chosen": "Lanturn used Hydro Pump on Rillaboom",
+      "problem": "Water is 0.5x into a Grass-type. Lanturn was holding Ice Beam, which is 2x on that exact target, and Dazzling Gleam and Thunderbolt as neutral options; Hydro Pump was strictly its worst of the four against Rillaboom. Effective power was roughly 55 against Ice Beam's 180. Typing is fully visible, so no knowledge flag excuses it.",
+      "better": "Ice Beam into Rillaboom. Hydro Pump would also have been 2x into Magnezone, so even keeping the move, the target was wrong."
+    }
+  ],
+  "level_changes": [
+    {"trainer": "TRAINER_LUIS", "member": "LANTURN", "before": -1, "after": 0},
+    {"trainer": "TRAINER_LUIS", "member": "MANTINE", "before": 0, "after": 1}
+  ],
+  "calibration_reasoning": "First-attempt win in three turns with one player faint, which is the brief's '+1 on the weakest one or two members' condition. There is no Mega or legend to exclude. Lanturn at -1 is plainly the weakest and goes to 0. For the second, Mantine over Sharpedo: Mantine is the support engine the whole team is built around and the dossier's own crack names it as the thing to kill, so a level that helps it survive long enough to pair Tailwind with a Surf is worth more to the encounter than a level on Sharpedo, which already played its one turn well. Arctovish stays at +1; it earned its keep by taking Rillaboom.",
+  "rerun_status": "NOT RERUN. The headless driver reads trainer parties from the prebuilt ROM in work/agent-battle-build-2 and this agent is instructed never to run make, so a level change cannot take effect until the main agent rebuilds at the wave boundary. The teams-file edit is left uncommitted for that step.",
+  "could_this_be_cooler": "Keep the absorption core; three Water Absorb bodies as a deliberate answer to a Water-spamming player is a real idea for a route regular, and the Tailwind into Fishious Rend line is genuinely executable - it fired correctly here even though Arctovish then chose a better move than the combo. The honest weakness the dossier already admits showed up exactly as predicted: against a Grass and Electric lead, Water Absorb is dead weight and the whole team is 2x or 4x weak, so the fight lasted three turns. The specific improvement worth naming is that Luis has no way to stop a Grass or Electric lead from simply going first - one Fake Out, one Wide Guard user, or Mantine keeping its Wide Guard slot as the other authored Mantine on this file does at line 2834 would give the core a turn to exist. Recommended, not applied in this pass.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0176 TRAINER_LUIS (Route105, Feather Badge - optional Surf backtrack, cap 48, Medium)",
+  "availability_audit": "Route 105 is reached by Surf after the Balance Badge; battle index window 48-60, floor 48. Every member is gated at 36 or below in pool-48.json - Thwackey line (36), New Mauville with the Basement Key (30), Granite Cave Abra plus Slateport Linking Cord (20), Haunter plus Linking Cord (30), Togepi Route 102 plus Shiny Stone (24), New Mauville interior (30) - so every source map precedes the first Surf. No legendaries, Ultra Beasts or Paradox species.",
+  "plan": "Luis is an absorption core: three of his four have Water Absorb, so Water damage is worse than useless and the honest answers are Electric and Grass. Magnezone and Iron Hands supply the Electric - Lanturn is the only member that resists it and Mantine takes it 4x - while Rillaboom supplies the Grass and, importantly, priority Grassy Glide, which is the answer to a Tailwind race that Mantine is trying to win for Arctovish. Note Luis's team carries no Ground move at all, which is what makes an Electric/Steel Magnezone safe here where it was a liability against Foster. Gengar's Taunt is aimed at Mantine specifically: it blanks Tailwind and Roost in one move, and Mantine is the member the dossier's own crack names as the target. Togekiss covers the redirection and a Tailwind of my own.",
+  "party": [
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Grass damage plus priority that ignores a Tailwind speed advantage",
+      "availability": "pool-48 gate 36: Thwackey level evolution in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ANALYTIC",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Electric engine; Thunderbolt is 4x on Mantine and 2x on Sharpedo and Arctovish, and Luis has no Ground move to punish it",
+      "availability": "pool-48 gate 30: NewMauville_Entrance land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_WILD_CHARGE",
+        "MOVE_HEAVY_SLAM"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "second Electric body plus Fighting, which is 2x on Sharpedo and Arctovish; Fake Out denies the Tailwind turn",
+      "availability": "pool-48 gate 30: NewMauville_Inside land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest battler; Psychic is 2x on Sharpedo's Dark-resisted slot and Focus Blast covers Arctovish",
+      "availability": "pool-48 gate 20: Abra GraniteCave_1F, Kadabra evolution, Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Taunt blanks Mantine's Tailwind and Roost together; Icy Wind is my own speed control against the Tailwind race",
+      "availability": "pool-48 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "redirection off the Electric attackers plus a Tailwind of my own; Dazzling Gleam is 2x on Sharpedo",
+      "availability": "pool-48 gate 24: Togepi Route 102, friendship evolution, Shiny Stone from the Slateport Mart."
+    }
+  ]
+}
