@@ -1,0 +1,54 @@
+{
+  "play_order": 258,
+  "e_group": "E0399",
+  "trainer": "TRAINER_KATHLEEN",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (room twelve, the examiner)",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; offset-2 members at L76, Latias (offset 3) at L77 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/258-TRAINER_KATHLEEN/party_darksteel76.json"],
+  "chronology_note": "Mossdeep Gym reached, Mind Badge not earned. Incineroar 36, Urshifu-Single 42 (Kubfu Route112), Kingambit 54 (Bisharp), Scizor 30 + Scizorite stone-window 30, Flutter Mane 68 (MtPyre_Summit), Hydreigon 68 (Zweilous, Mt Pyre chapter). No reachable legend, nothing from Mossdeep or later.",
+  "pre_play_strategy_checks": [
+    "Espeon opens with Calm Mind (or Magic Bounce is shown)",
+    "Scarf Analytic Starmie moves first and hits hard",
+    "Reuniclus sets Trick Room and Magic Guard blocks chip",
+    "Medicham Fake Out + Pure Power damage",
+    "Mega Latias Calm Mind / Recover patience",
+    "Beheeyem Expanding Force / Protect"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 9,
+      "build": "work/agent-battle-build-7",
+      "run_dir": "work/playtest/258-TRAINER_KATHLEEN/a1",
+      "party": "party_darksteel76.json (Incineroar / Urshifu-Single / Kingambit / Mega Scizor / Flutter Mane / Hydreigon)",
+      "outcome": "won",
+      "turns": 7,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "Espeon and Starmie led. Turn 1 Fake Out flinched Espeon's Calm Mind attempt (it had chosen Dazzling Gleam), Scarf Starmie's Hydro Pump took Urshifu to its Sash-less 61 (no Sash trigger: 201 of 262), Wicked Blow one-shot Starmie. Turn 2 Urshifu Protected the Dazzling Gleam and Knock Off killed Espeon; Reuniclus Focus Blast into the Protect. Turn 3 Beheeyem Protected and Wicked Blow did only 25 percent through it (Champions-gen Unseen Fist rule, see legality notes); Reuniclus set Trick Room. Turn 4 Sucker Punch killed Beheeyem but Reuniclus' Focus Blast killed Incineroar exactly (219/219). Turn 5 Mega Scizor's U-turn took Reuniclus to 93 while Focus Blast killed the 61-HP Urshifu; Medicham's High Jump Kick crashed into the Flutter Mane that U-turn brought in. Turn 6 Bullet Punch beat Reuniclus' Recover and Moonblast killed Medicham, but Medicham's High Jump Kick had already put Scizor at 37. Turn 7 Kingambit replaced Scizor, Mega Latias' Psychic did nothing to it, Moonblast took Latias to 13, Trick Room ended, and Moonblast finished it. Two faints and a genuine fight; the examiner's Focus Blast Reuniclus and Pure Power Medicham did the damage."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Espeon Calm Mind opener", "result": "FAIL (AI chose to attack)", "evidence": "turn 1 and 2 Espeon chose Dazzling Gleam both times (into two Dark types, Fairy is its correct hit), never Calm Mind; not unreasonable against a Fake Out lead"},
+    {"check": "Scarf Analytic Starmie speed", "result": "PASS", "evidence": "turn 1: Hydro Pump resolved before Wicked Blow, 201 damage on Urshifu"},
+    {"check": "Reuniclus Trick Room + Magic Guard", "result": "PASS", "evidence": "turn 3 'twisted the dimensions', lasted turns 3-7; Life Orb-free Reuniclus took no chip"},
+    {"check": "Medicham Pure Power damage", "result": "PASS", "evidence": "turn 6: High Jump Kick 226 on Mega Scizor; turn 5 it crashed into Flutter Mane"},
+    {"check": "Mega Latias Calm Mind / Recover", "result": "NOT REACHED", "evidence": "Latias Mega-evolved and used Psychic into Kingambit (immune) on turn 7, then died; it chose neither Calm Mind nor Recover at 13 HP versus a faster Flutter Mane"},
+    {"check": "Beheeyem Expanding Force", "result": "NOT SEEN", "evidence": "no terrain, it chose Protect then Thunderbolt; both my battlers were Dark so Expanding Force was correctly not chosen"}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "user": "Beheeyem", "payoff": "cut Wicked Blow to 97 and blocked Knock Off entirely (real payoff)"}
+  ],
+  "protect_summary": "1 Protect, real payoff. No empty guards.",
+  "ai_defects": [],
+  "ai_notes": "Turn 7 Mega Latias chose Psychic into a slot that had just become Kingambit (immune). It committed its move before the switch; confirmed from the battle messages ('It doesn't affect Kingambit'), not the chosen record. Not a defect. Turn 5 Medicham's High Jump Kick into the U-turn-replaced Flutter Mane is the same situation. Reuniclus preferring Focus Blast on my Dark types every turn was correct and won it two knockouts.",
+  "level_changes": [],
+  "level_change_rationale": "Won with 2 faints after a real fight; brief step 5 says keep.",
+  "cooler": "The examiner concept shows: each species felt like the stronger version of the earlier room's copy, and with no field effect to hide behind the room still took two of my six. Kathleen is a keeper. If anything, Espeon could carry Yawn or a screen so its Magic Bounce is tested instead of being the first thing Fake Out removes.",
+  "legality_notes": "Sets legal as authored. Engine rule note for all Urshifu-based benchmarks: src/battle_util.c GetConfig(B_UNSEEN_FIST_PIERCING_DRILL) >= GEN_CHAMPIONS makes Unseen Fist deal 25 percent through a single-target Protect (message 'couldn't fully protect itself') rather than the Gen 8-9 full damage. Deliberate config, not a defect, but earlier receipts that call it 'pierced the guard' mean this reduced hit.",
+  "verification_limit": "No level change, nothing pending re-verification."
+}

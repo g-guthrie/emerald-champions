@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Gym room twelve (Kathleen, the examiner) cap 76 - Dark and Steel answer party",
+  "availability_audit": "Mossdeep Gym reached, Mind Badge not earned, nothing from Sootopolis, the Seafloor Cavern or the Space Center. Per pool-76.json source_detail: Incineroar gate 36 evolution:level from Torracat (Mauville chapter). Urshifu-Single-Strike gate 42, Kubfu legendary_sign:Route112 then EVO_SCRIPT_TRIGGER. Kingambit gate 54, evolution:level/condition from Bisharp. Scizor gate 30 evolution:trade+item Metal Coat from Scyther, ITEM_SCIZORITE stone-window 30 (Mega Ring window). Flutter Mane gate 68, wild:MtPyre_Summit/land_mons. Hydreigon gate 68, evolution:level from Zweilous (Mt Pyre chapter). No reachable legend used; nothing sourced downstream of Mt Pyre.",
+  "plan": "Built off the room's crack line: Dark, Ghost and Bug pressure, Steel and Fairy for Mega Latias. Three Dark attackers (Wicked Blow, Kowtow Cleave / Sucker Punch, Specs Dark Pulse) are immune to Expanding Force and Psychic, Kingambit is immune to Fake Out's Normal typing too and resists Dragon Pulse and Dazzling Gleam. Mega Scizor's Bug is 2x on every Psychic here, Bullet Punch is priority against Analytic Starmie and Scarf speed, and its only weakness (Fire) is absent from the room. Flutter Mane's Moonblast and Shadow Ball are the Fairy and Ghost answers to Mega Latias and Reuniclus. Incineroar Fake Outs the Calm Mind turn and Knock Off removes Life Orb, Choice Scarf, Sitrus and Wise Glasses.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out the Calm Mind opener; Knock Off items; Intimidate on Medicham",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "guaranteed-critical Dark through Protect; crits ignore Calm Mind's Defense side",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_KINGAMBIT",
+      "moves": ["MOVE_KOWTOW_CLEAVE", "MOVE_SUCKER_PUNCH", "MOVE_IRON_HEAD", "MOVE_SWORDS_DANCE"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SUPREME_OVERLORD",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Dark/Steel wall to the whole Psychic and Fairy lane; Sucker Punch priority; Iron Head for Latias",
+      "availability": "pool-76 gate 54, evolution:level/condition from SPECIES_BISHARP."
+    },
+    {
+      "species": "SPECIES_SCIZOR",
+      "moves": ["MOVE_BULLET_PUNCH", "MOVE_U_TURN", "MOVE_SWORDS_DANCE", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TECHNICIAN",
+      "item": "ITEM_SCIZORITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega win condition: Technician Bullet Punch priority, U-turn 2x on every Psychic; no Fire in the room",
+      "availability": "pool-76 gate 30, evolution:trade+item ITEM_METAL_COAT from SPECIES_SCYTHER; ITEM_SCIZORITE stone-window 30."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": ["MOVE_MOONBLAST", "MOVE_SHADOW_BALL", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Fairy and Ghost answer to Mega Latias and Reuniclus; outspeeds everything unscarfed",
+      "availability": "pool-76 gate 68, wild:MtPyre_Summit/land_mons."
+    },
+    {
+      "species": "SPECIES_HYDREIGON",
+      "moves": ["MOVE_DARK_PULSE", "MOVE_DRACO_METEOR", "MOVE_FIRE_BLAST", "MOVE_EARTH_POWER"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_CHOICE_SPECS",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "special Dark lane immune to Psychic; Draco Meteor for Latias",
+      "availability": "pool-76 gate 68, evolution:level from SPECIES_ZWEILOUS (Mt Pyre chapter)."
+    }
+  ]
+}
