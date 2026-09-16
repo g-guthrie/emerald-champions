@@ -1,0 +1,63 @@
+{
+  "play_order": 212,
+  "e_group": "E0323",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_14",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_1R",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members at L57 = 60 + (-1) - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magma_60_air.json"],
+  "chronology_note": "Same six as the hideout party, all pool-60 gates 42 and below; only the lead order changes, so Incineroar (Fake Out, +3 priority) and Zapdos (2x Electric, Ground-immune) are both on the field for the room's turn-1 Tailwind.",
+  "pre_play_strategy_checks": [
+    "Talonflame's Gale Wings gives priority Tailwind at full HP, before my lead moves",
+    "Nidoqueen fires a Sheer Force Earth Power or Sludge Bomb into the Tailwind window",
+    "Houndoom takes a Nasty Plot only behind Tailwind and a survivable board",
+    "Flash Fire makes the obvious Fire answer a mistake",
+    "Skuntank's Aftermath punishes the contact kill; Sucker Punch covers the turn after Tailwind lapses",
+    "Skuntank's Taunt"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/212-TRAINER_GRUNT_MAGMA_HIDEOUT_14/a1",
+      "party": "party_magma_60_air.json (Incineroar/Zapdos/Amoonguss/Mega Gardevoir/Urshifu-Rapid/Swampert)",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "why": "I built the lead specifically for the authored opener - Fake Out is +3 and Gale Wings Tailwind is +1, so Fake Out beats it - and then never needed the answer, because Talonflame did not reach for Tailwind at all. It chose Flare Blitz into a Fire-typed Incineroar instead, was flinched anyway, and died to a 2x Thunderbolt on the same turn. The rest of the room was still dangerous without its speed window: Nidoqueen's Sheer Force Earth Power did 169 to Incineroar through the flinch turn, Skuntank's Gunk Shot finished it, Skuntank Taunted Swampert to shut off its Protect, and Nidoqueen's Ice Beam killed Zapdos. Swampert and Mega Gardevoir closed - Moonblast is 2x into both remaining Dark bodies and Liquidation is 2x into Nidoqueen's Ground and Houndoom's Fire."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Gale Wings priority Tailwind on turn 1", "result": "FAIL", "evidence": "Talonflame was at full HP - the exact condition Gale Wings needs - and selected MOVE_FLARE_BLITZ at my Incineroar, not Tailwind. The room's single stated idea ('a priority Tailwind that the player must answer on turn one or lose the race for four turns') never happened, and it was not because I denied it: Fake Out flinched it, but the choice was already made and recorded. See AI defects; the target choice was independently wrong."},
+    {"check": "Nidoqueen fires Sheer Force damage into the window", "result": "PASS (without the window)", "evidence": "turn 1 Earth Power did 169 to a 240 HP Incineroar - 2x into its Fire half and Sheer Force means the Life Orb recoil is waived. Turn 3 Ice Beam killed Zapdos at 2x. Nidoqueen was the best member in the room by a distance."},
+    {"check": "Houndoom Nasty Plot behind Tailwind and a survivable board", "result": "FAIL (correctly)", "evidence": "Houndoom arrived last, on turn 4, into a board where it was the final Pokemon against two healthy ones. It chose Protect then Dark Pulse. Declining to set up there is right; the authored condition ('only behind Tailwind and a survivable board') was simply never met, because the Tailwind never existed."},
+    {"check": "Flash Fire punishes the obvious Fire answer", "result": "NOT OBSERVED", "evidence": "Gardevoir's Trace read ABILITY_FLASH_FIRE off Houndoom on entry, so it is correctly assigned. I never aimed a Fire move at it - Incineroar was already dead - so the trap never sprang."},
+    {"check": "Skuntank's Taunt", "result": "PASS", "evidence": "turn 3, Taunt on Swampert, which correctly removed Protect from a bulky pivot's options for the rest of its time on the field. Good target - Swampert was the body it could not break."},
+    {"check": "Skuntank's Aftermath and Sucker Punch", "result": "NOT OBSERVED", "evidence": "Skuntank was killed by Mega Gardevoir's Moonblast, a special non-contact move, so Aftermath correctly did not fire - that is the crack working. Sucker Punch was never chosen; the Black Sludge recovery did show up (+12 on turn 3)."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "battler": "Houndoom", "payoff": "real - blocked Swampert's Liquidation, which is 2x into a Fire type and would very likely have killed it outright on the turn it arrived. It survived to act once more."}
+  ],
+  "protect_summary": "1 opponent Protect, with a clean lethal-denying payoff, 0 empty, no consecutive guarding. Nothing to tune.",
+  "ai_defects": [
+    {
+      "severity": "significant",
+      "turn": 1,
+      "board": "Talonflame at 174/174 (full HP, so Gale Wings is live) with partner Nidoqueen; my Incineroar (TYPE_FIRE/TYPE_DARK) at battler 0 and Zapdos at battler 2",
+      "chosen": "MOVE_FLARE_BLITZ at Incineroar",
+      "problem": "Two things wrong in one choice. First, Flare Blitz is a Fire move aimed at a Fire type - resisted, plus recoil on a 174 HP body - when Brave Bird at the same target or U-turn were both better attacks, and Zapdos (Electric/Flying, neutral to Fire) was the other option. Second and more important, this is the one room in the hideout whose entire authored plan is a turn-1 priority Tailwind, the board was the ideal one for it (full HP, a slow Sheer Force partner waiting to spend the window), and the scorer did not take it.",
+      "better": "MOVE_TAILWIND, which is the authored opener and is +1 priority from Gale Wings at full HP.",
+      "note": "Two separable questions for the AI side: does the scorer devalue a team-wide speed move when it has a damaging option, and does it consult the target's typing before picking between two STAB attacks. The first is the one that matters here - Tailwind is the room's reason to exist and it declined it with the best possible board for it."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but it cost Incineroar and Zapdos - two faints, the brief's real-fight case - and the room did that damage with its Tailwind engine switched off. If the Talonflame defect above is fixed, this room gets materially harder for free, so adding levels now would over-correct. Revisit after the AI fix, not before.",
+  "rebuild_note": "No level change, so nothing to re-verify for calibration. The Talonflame defect is unverifiable from this session until the main agent rebuilds.",
+  "theme_check": "Partly. The four members read clearly as Magma lookouts - a fire hawk, a poison drill, a hellhound and a skunk - and the poison lane is genuinely unpleasant. But the room's one clean idea is the priority Tailwind, and the player never saw it, so what actually arrived on the board was four reasonable attackers with no shared engine. The dossier's own line is that 'once the window closes the room has no second engine'; here the window never opened.",
+  "cooler_note": "Keep the concept; this room does not need a redesign, it needs its Tailwind to fire. Two smaller observations for later. Houndoom's Flash Fire is described as the hideout's recurring lesson that Fire attacks feed this faction, but a player raiding a volcano is not bringing Fire attacks in the first place - the lesson has no student. And Skuntank's Aftermath only punishes a contact kill, which is the one way nobody kills a 202 HP Poison/Dark; Destiny Bond or Memento in the Sucker Punch slot would make its death actually cost the player something."
+}
