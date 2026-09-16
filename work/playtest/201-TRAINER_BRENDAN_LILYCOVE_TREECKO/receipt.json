@@ -1,0 +1,57 @@
+{
+  "play_order": 201,
+  "e_group": "E0302",
+  "trainer_played": "TRAINER_BRENDAN_LILYCOVE_TREECKO",
+  "aliases_covered": ["TRAINER_BRENDAN_LILYCOVE_MUDKIP", "TRAINER_BRENDAN_LILYCOVE_TORCHIC", "TRAINER_BRENDAN_LILYCOVE_TREECKO", "TRAINER_MAY_LILYCOVE_MUDKIP", "TRAINER_MAY_LILYCOVE_TORCHIC", "TRAINER_MAY_LILYCOVE_TREECKO"],
+  "class": "rival",
+  "location": "LilycoveCity",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Swellow/Manectric/Breloom/Hariyama (+1) at L59 and Salamence/Blaziken (+2) at L60 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 196-200; all gates 54 or lower, so nothing from Lilycove itself or later is used.",
+  "alias_note": "Played the Treecko-branch Brendan per the brief. No level change was made, so the identical-change rule is satisfied trivially: all six alias blocks are unmodified.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 12, "player_faints": 4, "opponent_faints": 6,
+      "why": "The closest fight in the block - I finished with Amoonguss at 73/263 and a 1 HP Mega Metagross. Landorus carried the middle (OHKOing Blaziken on the switch and later Manectric's partner) and Mega Salamence fell to a 4x Ice Punch. The loss column is almost entirely one mistake: on turn 5 I aimed Zapdos's Thunderbolt at Hariyama, Manectric's Lightning Rod took it and rose to +1 Special Attack, and that boosted Thunderbolt then KOed Zapdos and Incineroar on consecutive turns. A double switch on turn 9 (Weavile at 8 and Mega Metagross at 1, both 4x weak to Breloom's Mach Punch) was what saved the fight."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Manectric's Lightning Rod punishes Electric attacks", "result": "PASS, decisively", "evidence": "turn 5: Zapdos's Thunderbolt was submitted at Hariyama and the log reads 'The opposing Manectric took the attack! The opposing Manectric's Sp. Atk rose!' It then KOed Zapdos (114) on turn 6 and Incineroar (110) on turn 10 with that boost. The crack line 'do not aim Electric attacks at Manectric' is exactly right and punishing it cost me two Pokemon."},
+    {"check": "Guts Swellow converts its Flame Orb burn into a damage boost", "result": "PASS", "evidence": "turn 1 it used Protect, which safely absorbed my Fake Out and let the Flame Orb burn land at end of turn; turn 2 its Brave Bird dealt 234 to a 263 HP Amoonguss. Facade was never needed. Note the Protect-into-burn sequencing is a genuinely good line and the best single AI decision in this fight."},
+    {"check": "Poison Heal Breloom and Spore", "result": "PARTIAL", "evidence": "Toxic Orb activated on turn 9 ('badly poisoned') and Poison Heal ran. Spore was never selected in three turns - correctly, since my only body on the field for most of them was a Grass-type Amoonguss that is immune to powder. Mach Punch priority was the real threat and it KOed Weavile through 4x."},
+    {"check": "Mega Salamence's Dragon Dance gives the rival a second win condition", "result": "FAIL", "evidence": "Salamence Mega Evolved on turn 7 and used Dragon Claw, then Double-Edge on turn 8, and died to Ice Punch. Dragon Dance was never selected even on its Mega turn with a partner alive to cover it. This is the fifth printed setup move in this block that the AI never reached for."},
+    {"check": "Blaziken's Speed Boost is the branch-specific second win condition", "result": "FAIL", "evidence": "Blaziken never got a turn. On turn 4 the AI withdrew the sleeping Manectric and sent Blaziken directly into a healthy Landorus, and Earth Power (2x into Fire/Fighting) OHKOed it before it acted. See AI defect E0302-1."},
+    {"check": "Hariyama's Fake Out and Thick Fat", "result": "PARTIAL", "evidence": "Thick Fat was live and relevant - it is why Incineroar had no good move into it. Fake Out was available on its first action (turn 3) and it chose Close Combat instead, which was defensible because Close Combat was a KO on the 4 HP Amoonguss it was aiming at; I dodged with a switch. Fake Out never appeared in the fight."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Swellow", "payoff": "blocked Incineroar's Fake Out, denying the flinch, and bought the turn its Flame Orb needed to burn it safely. Two payoffs in one guard"},
+    {"turn": 10, "battler": "Breloom", "payoff": "blocked Incineroar's Flare Blitz, 2x into Grass and lethal at 132/158"}
+  ],
+  "protect_summary": "2 opponent Protects, both with concrete payoff, 0 empty. Swellow's turn-1 guard is the single best-timed Protect in this block.",
+  "ai_defects": [
+    {
+      "id": "E0302-1",
+      "turn": 4,
+      "board": "Manectric asleep at 116/170 beside Hariyama 222/294; player side Incineroar 206/240 and a freshly-entered Landorus 115/196 (Ground/Flying, untouched, no move revealed yet).",
+      "chosen": "Withdraw Manectric, send Blaziken.",
+      "better": "Almost any other reserve. Blaziken is Fire/Fighting and Landorus was standing on the field as a visible Ground type - a 2x matchup readable from species alone, before any move is revealed. Blaziken was OHKOed by Earth Power before it acted, which removed the Treecko branch's entire branch-specific win condition (Speed Boost) from the fight for free. Pivoting the sleeping Manectric out was the right idea; the replacement choice ignored the type matchup against the opposing active. Severity: high - a six-Pokemon rival lost a sixth of its team to one switch decision, and switch-in selection is shared logic that affects every trainer with reserves."
+    },
+    {
+      "id": "E0302-2",
+      "turn": 7,
+      "board": "Salamence entering and Mega Evolving at 203/203 beside a healthy Manectric; player side a fresh Weavile 173/173 and Landorus 83/196.",
+      "chosen": "Dragon Claw, then Double-Edge on turn 8.",
+      "better": "Dragon Dance. Same family as E0288-3 (Focus Energy), E0289-2 (Iron Defense), E0299-2 (Dragon Dance) and E0301-1 (Iron Defense at the wrong moment). Across nine battles in this block, every single printed stat-boosting move on an opposing Pokemon either was never selected or was selected on a turn where it could not pay off. I am confident this is one shared scoring constant rather than five bugs. Severity: moderate individually; this is the strongest evidence in the block for the shared fix."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep, and apply nothing to the other five alias blocks. This was a 6-4 win that came down to a 73 HP Amoonguss and a 1 HP Mega Metagross; four player Pokemon fainted. The brief's 2+ faints clause and AGENTS.md's three-faint aim are both comfortably met. It is also worth recording that the fight was this close partly because of my own Lightning Rod mistake and partly because two of the rival's six (Blaziken, Mega Salamence) never executed their win conditions - the team is currently winning on raw quality rather than on plan.",
+  "cooler": "Keeping all six starter branches on one roster is the right call and the fixed five are well chosen - Lightning Rod Manectric in particular is the most educational Pokemon in the fight, because punishing it is an immediate two-Pokemon swing. One concrete improvement, and it is a deployment note rather than a species change: Blaziken is the slot that makes the Treecko branch different, and it is deployed fifth, which in practice means it arrives as a forced pivot into whatever is already winning. Leading the branch starter would make the branch actually matter - as played, a Treecko player and a Mudkip player fight the same battle. Second note: Swellow and Breloom both have their whole identity in a held orb (Flame Orb, Toxic Orb) that takes a turn to activate, and Swellow bought that turn with Protect while Breloom got it for free by entering late. That contrast is good design and the book should say so.",
+  "legality_notes": "No legality problem in the authored set. Salamencite and all six members are inside the cap-60 window.",
+  "verification_limit": "No level change was made to any of the six alias blocks, so nothing is pending re-verification."
+}
