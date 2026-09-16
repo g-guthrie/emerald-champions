@@ -1,0 +1,31 @@
+{
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141",
+  "elf_sha256": "70db6be9e609d4fe1de497fd4620a12369072b83a1e79ed108d6b35460058fc5",
+  "seed": 98,
+  "trainer_a": "TRAINER_DILLON",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 36,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/98-TRAINER_DILLON/party.json",
+  "party_sha256": "49e8fa6bcd95d389c0d306679c3f452ca34e17a65fc91604950592f03d09dbd5",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY"
+  ],
+  "prepared": {
+    "encounter": "E0115 TRAINER_DILLON (Route 113, cap 36 window)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1273
+  },
+  "replacement_commits": {
+    "turn": 4,
+    "slots": {}
+  }
+}

@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0115 TRAINER_DILLON (Route 113, cap 36 window)",
+ "availability_audit": "Chronology anchor: Route 113/114 is reached after Mauville/Wattson (cap 30) via Route 111 -> Route 112 -> Fiery Path, per Game Book C20/C21. Every member below is in work/reference-pools/pool-36.json with gate <= 36 and a source_detail map the player has already passed on the way to Route 113/114: Seaspray Cave B1F (Sneasel), Rusturf Tunnel (Drilbur), Petalburg City Old Rod (Magikarp), Route 102 (Togepi), Mauville Game Corner (Litten), Granite Cave 1F (Abra). No Route 118+, Mt. Pyre, desert-interior or post-Flannery sources are used. Mega Ring earned from Steven after Brawly (C13); Gyaradosite stone window 20. Petalburg Woods (Heracross, Kartana) is on the C05 main path long before Mauville; Heracronite's stone window is 14 and the Mega Ring is earned from Steven after Brawly (C13).",
+ "plan": "Dillon is Garganacl + Baxcalibur with an Avalugg/Arboliva back half. The dossier crack asks for special pressure, denying recovery and setup, removing Loaded Dice, and attacking around Wide Guard. Fighting answers the whole roster: 4x into Rock/Steel Garganacl, 2x into Ice Baxcalibur and Avalugg, 2x into Normal-typed Arboliva. Mega Heracross's Skill Link multi-hits also ignore Focus-Sash-style chip and punish Iron Defense slowly, while Kartana's Sacred Sword ignores Iron Defense outright and Incineroar's Knock Off removes Loaded Dice and Leftovers. Every one of those is single-target, so Avalugg's Wide Guard has nothing to block.",
+ "party": [
+  {
+   "species": "SPECIES_HERACROSS",
+   "moves": [
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_PIN_MISSILE",
+    "MOVE_ROCK_BLAST",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_GUTS",
+   "item": "ITEM_HERACRONITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Mega ace; Skill Link multi-hits and Close Combat are 4x into Garganacl and 2x into the rest of the roster",
+   "availability": "Heracross on PetalburgWoods land (pool gate 14); Heracronite stone window 14 (pool), Mega Ring earned from Steven after Brawly."
+  },
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PARTING_SHOT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Fake Out disruption and Fire pressure into Ribombee/Frosmoth",
+   "availability": "Litten from the Mauville Game Corner (500 coins, pool gate 30), Torracat at 17 and Incineroar at 34 by level (pool gate 36)."
+  },
+  {
+   "species": "SPECIES_KARTANA",
+   "moves": [
+    "MOVE_LEAF_BLADE",
+    "MOVE_SACRED_SWORD",
+    "MOVE_SMART_STRIKE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_BEAST_BOOST",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Sacred Sword ignores Garganacl's Iron Defense boosts; Smart Strike is 2x into Baxcalibur and Avalugg",
+   "availability": "Kartana on PetalburgWoods_3 land (pool gate 20); book preserves this access, Cut license and Roxanne badge earned long before Route 114."
+  },
+  {
+   "species": "SPECIES_EXCADRILL",
+   "moves": [
+    "MOVE_EARTHQUAKE",
+    "MOVE_IRON_HEAD",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_MOLD_BREAKER",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Electric-immune Rock Slide spread answer to the bird pair",
+   "availability": "Drilbur on Rusturf Tunnel land (pool gate 20), level evolution to Excadrill (pool gate 36)."
+  },
+  {
+   "species": "SPECIES_ALAKAZAM",
+   "moves": [
+    "MOVE_PSYCHIC",
+    "MOVE_FOCUS_BLAST",
+    "MOVE_SHADOW_BALL",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_MAGIC_GUARD",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast recoil-free special coverage",
+   "availability": "Abra on Granite Cave 1F land (pool gate 20), level evolution to Kadabra, Linking Cord from the reached evolution stock (gate 20)."
+  },
+  {
+   "species": "SPECIES_TOGEKISS",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_AIR_SLASH",
+    "MOVE_TAILWIND",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_CALM",
+   "ability": "ABILITY_SERENE_GRACE",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    124,
+    0,
+    132,
+    0
+   ],
+   "role": "redirection and my own speed control",
+   "availability": "Togepi on Route 102 land (pool gate 14), friendship evolution to Togetic, Shiny Stone from the reached evolution stock (pool gate 24)."
+  }
+ ]
+}

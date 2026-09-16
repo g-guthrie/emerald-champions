@@ -1,0 +1,35 @@
+{
+  "play_order": 98,
+  "e_group": "E0115",
+  "trainer": "TRAINER_DILLON",
+  "class": "regular",
+  "location": "Route113",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Garganacl/Avalugg at offset 0 resolved to L34, Baxcalibur at -1 to L33, Arboliva at +1 to L35 - all equal 36 + offset - 2 (Medium). No --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/98-TRAINER_DILLON/party.json",
+  "attempts": [
+    {"n": 1, "seed": 98, "run_dir": "work/playtest/98-TRAINER_DILLON/a1", "kind": "optimized", "outcome": "won", "turns": 4, "decisions": 5, "player_faints": 1, "opponent_faints": 4, "note": "Mega Heracross Close Combat OHKOed a 143 HP Garganacl through its own Iron Defense; Incineroar Flare Blitz removed Avalugg and Arboliva; Excadrill Iron Head closed on Baxcalibur. Baxcalibur KOed Mega Heracross with a second Loaded Dice Icicle Spear."}
+  ],
+  "strategy_checks": [
+    {"check": "Garganacl leads with Salt Cure pressure or a useful Iron Defense / Body Press / Recover", "result": "PASS (partial)", "evidence": "T1 Garganacl chose MOVE_IRON_DEFENSE, the authored setup branch, and Purifying Salt was live on its stat block. Salt Cure and Body Press were never reached because it was KOed on the turn it set up; not an AI fault - 4x Fighting from a Mega on turn one is inside the dossier's own crack."},
+    {"check": "Baxcalibur uses Dragon Dance or an immediate Loaded Dice attack", "result": "PASS", "evidence": "T2 Icicle Spear hit 4 times, T3 Icicle Spear hit 3 times and KOed Mega Heracross. It correctly never spent a turn on Dragon Dance while a faster Fighting-type Mega was on the field - the immediate-attack branch was the right one and the AI picked it both times."},
+    {"check": "Avalugg uses Wide Guard / Body Press / Ice Spinner / Recover, with Ice Spinner removing terrain if it connects", "result": "PASS (by absence)", "evidence": "T2 Avalugg chose MOVE_ICE_SPINNER. No spread move was on the board at the time (Close Combat, Flare Blitz, Fake Out and Iron Head are all single-target), so Wide Guard would have been the empty choice; the AI did not take it. Ice Spinner's terrain removal was untestable because Grassy Terrain had not yet been set."},
+    {"check": "Arboliva's reactive Seed Sower sets Grassy Terrain", "result": "PASS", "evidence": "T4: Incineroar's Flare Blitz connected, 'Grass grew to cover the battlefield!' fired from Seed Sower even as Arboliva fainted, terrain read 'grassy' in the following state, and Incineroar was healed by it on the same turn."},
+    {"check": "Grassy Terrain heals eligible foes too (dossier's own caveat)", "result": "PASS", "evidence": "T4 'Incineroar is healed by the grassy terrain!' - the player side got the heal, exactly as the plan warns."},
+    {"check": "Attacking around Wide Guard with single-target damage (dossier crack)", "result": "PASS", "evidence": "Every damaging move my side used except one Iron Head was single-target; Wide Guard was never offered a target and Avalugg died before it could matter."}
+  ],
+  "protect_ledger": [
+    {"turn": "T1", "battler": "BAXCALIBUR", "payoff": "real - blocked Incineroar's Fake Out, denying the flinch that would have cost it its first Icicle Spear turn"},
+    {"turn": "T3", "battler": "ARBOLIVA", "payoff": "real - blocked a 2x Flare Blitz from a full-power Incineroar on its entry turn"},
+    {"turn": "T4", "battler": "BAXCALIBUR", "payoff": "real - blocked Excadrill's Iron Head (2x into Dragon/Ice) while its partner took the Flare Blitz"}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "BAXCALIBUR", "field": "level offset", "before": -1, "after": 0, "resolved_level_before": 33, "resolved_level_after": 34, "reason": "Brief rule 5 / AGENTS.md review threshold: first optimized attempt won in 4 turns with 1 player faint. Baxcalibur is the numerically lowest member of the team at -1 and it is also the only member that did anything - it KOed my Mega and spent three turns at full HP. The -1 was authored to price Loaded Dice, but Loaded Dice is a consistency item, not a power item, and at L33 it sat two levels under Arboliva while carrying the team's whole offence. Bringing it level with Garganacl and Avalugg is the smallest change that makes the fight longer. Deliberately not applied to Garganacl or Avalugg: both died to a single super-effective hit and a level does not change a 4x Fighting weakness."}
+  ],
+  "retest_status": "PENDING REBUILD. The offset change is in data/emerald_champions/emerald_champions_battle_teams.txt but the headless ROM in work/agent-battle-build-2 predates it, so a re-run would still field an L33 Baxcalibur. Per this wave's instructions I do not run make; the main agent should re-materialize, rebuild and re-run seed 98 against this manifest.",
+  "cooler": "The snow/salt-wall concept is good and Arboliva is genuinely unusual - keep it. The real problem is not levels, it is that all four members share the same hole: Garganacl is Rock/Steel (4x Fighting), Baxcalibur and Avalugg are Ice (2x Fighting), and Arboliva is part Normal (2x Fighting). One Fighting-type Mega beat three of them by clicking the same button. Concrete suggestion for a later pass: replace Avalugg - the redundant second Ice wall, which the dossier itself admits has later owners - with a Fighting-resistant partner that keeps the defensive-guard job, for example Cetitan is wrong (also Ice) but a Bronzong or a Sinistcha-style Grass/Ghost would hold the Wide Guard slot, give Garganacl a partner that does not fold to the same move, and make the Levitate/Wide Guard pairing with Garganacl's Salt Cure a real two-move puzzle. Second, smaller idea: Garganacl's Salt Cure never fired in this run because it opened with Iron Defense; Salt Cure first is scarier and is the move nobody else in the campaign has.",
+  "authored_set_legality": "No legality problem found. Purifying Salt, Thermal Exchange, Loaded Dice, Sturdy and Seed Sower were all live and behaved as printed; Arboliva's authored 0 Attack IV is intentional and harmless.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
