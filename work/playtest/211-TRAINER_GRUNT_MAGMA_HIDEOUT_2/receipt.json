@@ -1,0 +1,64 @@
+{
+  "play_order": 211,
+  "e_group": "E0322",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_2",
+  "class": "grunt",
+  "location": "MagmaHideout_1F",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Hippowdon/Golem L56 (offset -2), Sandslash/Donphan L57 (offset -1); both cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magma_60_ground.json"],
+  "chronology_note": "Same six as the hideout party, all pool-60 gates 42 and below (Amoonguss 42, Incineroar 36, Urshifu-Rapid 42, Gardevoir 30 + Gardevoirite stone-window 14, Zapdos 30, Swampert 36); only the lead order differs, because Incineroar and Zapdos both take 2x from this room's paired Rock Slides and should not start on the field.",
+  "pre_play_strategy_checks": [
+    "Hippowdon's Sand Stream is automatic, so its own action is free",
+    "Hippowdon Yawns to force the switch Sandslash wants",
+    "Sandslash attacks at doubled Sand Rush Speed immediately rather than waiting",
+    "Golem's Sturdy plus Weakness Policy turns a resisted-but-super-effective hit into a free +2/+2",
+    "Donphan's Sturdy is the room's second one-turn floor",
+    "Sand chips every non Rock/Ground/Steel body on my side for the whole room"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/211-TRAINER_GRUNT_MAGMA_HIDEOUT_2/a1",
+      "party": "party_magma_60_ground.json (Urshifu-Rapid/Amoonguss/Swampert/Mega Gardevoir/Incineroar/Zapdos)",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "why": "Surging Strikes is the answer the room is built to lose to and I brought it on turn 1: three always-crit Water hits at 2x took 226 off a 239 HP Hippowdon in one action, and on turn 2 the same move went straight through Hippowdon's Protect because Unseen Fist ignores it. But the room made me pay. Sandslash at doubled Sand Rush Speed took 172 off Amoonguss before I could Spore it, and when it woke on turn 3 it killed Urshifu outright. Swampert - the one body sand cannot chip - did the middle of the fight, removing Sandslash and Donphan with Liquidation. Amoonguss then died to Heavy Slam. I closed with Mega Gardevoir specifically so I would not feed Golem's Weakness Policy: Hyper Voice and Psyshock are both neutral into Rock/Ground, and a critical Hyper Voice finished it without the +2/+2 ever existing."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Sand Stream is automatic and free", "result": "PASS", "evidence": "turn-0 board already read B_WEATHER_SANDSTORM before anyone acted, and the Smooth Rock kept it up for the whole six turns."},
+    {"check": "Hippowdon Yawns to force the switch Sandslash wants", "result": "FAIL", "evidence": "Hippowdon had two actions and chose High Horsepower then Protect. Yawn was never selected. The authored 'force the switch, then sweep' sequence did not happen; what happened instead was a straight attack and an empty guard."},
+    {"check": "Sandslash attacks at doubled Speed immediately", "result": "PASS", "evidence": "turn 1 it moved before my 30-base-Speed Amoonguss and did 172 with High Horsepower; turn 3 it woke from Spore and killed a 114 HP Urshifu in the same turn. This is the room's real threat and it worked exactly as authored."},
+    {"check": "Golem's Sturdy plus Weakness Policy", "result": "NOT OBSERVED (denied)", "evidence": "I followed the crack and never aimed a super-effective move at Golem while it was alive and healthy - Mega Gardevoir's Fairy and Psychic moves are both neutral into Rock/Ground, so the Policy had nothing to trigger on. Sturdy also never applied, because Golem took Rocky Helmet and spread chip before the finishing blow and so was never at full HP when a lethal hit landed. Correctly authored, correctly answered; the player just needs one neutral attacker."},
+    {"check": "Donphan's Sturdy as a second floor", "result": "NOT OBSERVED", "evidence": "Donphan was worn to 67/223 by a 2x Liquidation before the killing blow, so Sturdy never had a full-HP hit to stop. Its Assault Vest and Ice Shard were live - a crit Ice Shard opened turn 3 - but the authored floor never mattered."},
+    {"check": "Sand chips the player's whole side", "result": "PASS", "evidence": "five of my six take sand damage; only Swampert's Ground half is exempt, which is exactly why Swampert ended up doing the middle third of the fight. Over six turns the chip was worth roughly a quarter of Amoonguss's bar and it contributed to both of my faints."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "Hippowdon", "payoff": "EMPTY - it guarded against a Urshifu-Rapid-Strike whose Surging Strikes had already been revealed on turn 1. Unseen Fist ignores Protect, the move went through ('couldn't fully protect itself') and Hippowdon died on the same action. See AI defects."},
+    {"turn": 6, "battler": "Golem", "payoff": "real - blocked a Mega Gardevoir Hyper Voice at 174/208 and bought itself a full extra turn. Correct read of the biggest incoming hit."}
+  ],
+  "protect_summary": "2 opponent Protects: 1 with a clean payoff, 1 completely empty and predictably so. No consecutive guarding. The one to fix is the Unseen Fist case.",
+  "ai_defects": [
+    {
+      "severity": "moderate",
+      "turn": 2,
+      "board": "Hippowdon at 13/239 facing Urshifu-Rapid-Strike, whose Surging Strikes and therefore ABILITY_UNSEEN_FIST were revealed on turn 1; its partner Sandslash asleep",
+      "chosen": "MOVE_PROTECT",
+      "problem": "Protect cannot work against an Unseen Fist user, so this guard had exactly zero expected value and the engine confirmed it in the same turn ('The opposing Hippowdon couldn't fully protect itself'). At 13 HP nothing else saved it either, but Yawn or High Horsepower at least did something; Protect did nothing by construction.",
+      "better": "MOVE_YAWN at Swampert (the incoming switch), or MOVE_HIGH_HORSEPOWER.",
+      "note": "The general shape is 'the guard scorer does not zero out Protect/Detect against a known Protect-bypassing attacker'. Unseen Fist, Feint and Phantom Force all bypass. Worth tracing once, because Protect is on roughly three of every four members in this hideout and any team that meets an Unseen Fist attacker will repeat it."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but it cost Urshifu and Amoonguss - two faints, the brief's 'real fight' case - and both losses came from the room's authored engine (a Sand Rush attacker moving first) rather than from luck. The dossier deliberately calls this the simplest engine in the hideout so the later rooms read as escalation, and at two faints it is already doing its share; a +1 would blur that intent.",
+  "rebuild_note": "No level change, so nothing to re-verify for calibration. The Unseen Fist Protect defect is unverifiable from this session until the main agent rebuilds.",
+  "theme_check": "Yes. A pure excavation crew - one weather setter, one Sand Rush sweeper and two Sturdy bodies - reads clearly on the board, and the sand is not decoration: it chipped five of my six and forced Swampert into the lead role because it is the only member the weather cannot touch. The room also correctly feels smaller than the door crew before it, which is what the dossier says it is for.",
+  "cooler_note": "Keep the concept. The gap between the plan and the board is Yawn: the authored sequence is 'Yawn forces the switch Sandslash wants', and Hippowdon never chose it in two chances. That is worth chasing as a scoring question before touching the team, because Yawn landing is what would turn this from four attackers into an actual excavation crew. If a design change is wanted later, the honest one is that both Sturdy bodies currently die to ordinary chip before their floor ever applies - a Custap or a Focus Sash on one of them would make the one-turn floor a thing the player has to plan around rather than a line in the dossier."
+}
