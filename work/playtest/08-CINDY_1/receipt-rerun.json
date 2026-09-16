@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 8,
+  "e_group": "E0008",
+  "trainer": "TRAINER_CINDY_1",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "ai_flag": "Conservative",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable on Route 104.",
+  "opponent_as_played": [
+    "SNUBBULL L16 @LUM_BERRY INTIMIDATE ADAMANT (Play Rough/Fire Punch/Thunder Wave/Helping Hand) offset 4",
+    "MILCERY L16 @EVIOLITE AROMA_VEIL BOLD (Draining Kiss/Dazzling Gleam/Helping Hand/Recover) offset 4",
+    "FURFROU L14 @SITRUS_BERRY FUR_COAT CAREFUL (Double-Edge/U-turn/Sucker Punch/Snarl) offset 2",
+    "SLAKOTH L18 @CHOICE_BAND TRUANT ADAMANT (Body Slam/Hammer Arm/Retaliate/Rock Slide) offset 6"
+  ],
+  "party_manifest": "work/playtest/08-CINDY_1/party-rerun-a1.json",
+  "party_summary": "Growlithe / Roselia / Croagunk / Timburr / Pachirisu / Corphish - Route101/102/103/104 wilds, nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2008,
+      "outcome": "won",
+      "turns": 7,
+      "decisions": 8,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 61,
+      "ai_decision_seconds_max": 1.021,
+      "events": "work/playtest/08-CINDY_1/rerun-attempt-1-events.jsonl",
+      "narrative": "T0 both sides traded Intimidate. T1 Roselia's STAB Sludge Bomb took Milcery from 55 to 6 and Flare Blitz burned Snubbull, whose Lum Berry cured it immediately. T2 the AI withdrew a damaged Snubbull for Furfrou - a sound pivot out of a Fire attacker - my Flare Blitz hit Furfrou instead, and a second Sludge Bomb removed Milcery, which had chosen Draining Kiss over Recover at 6/55. Slakoth replaced it. T3 Growlithe withdrew for Timburr and Furfrou, which is faster than Roselia, removed it with Double-Edge before the Sludge Bomb aimed at Slakoth could land. T4 Croagunk replaced Roselia; Mach Punch plus Drain Punch removed Furfrou through Fur Coat, and Slakoth loafed. Snubbull returned. T5 Snubbull's Helping Hand fed Slakoth's spread Rock Slide while my two Fighting types chipped both. T6 Poison Jab removed Snubbull and Slakoth loafed again. T7 Mach Punch and Poison Jab finished Slakoth. 4-1."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Snubbull's Intimidate softens eligible attackers while Milcery selects Helping Hand or an active Fairy attack",
+      "result": "PASS",
+      "evidence": "Intimidate fired on entry (T0) and again on its T4 re-entry, dropping my Attack both times and visibly slowing my Fighting-type damage. Milcery opened with Dazzling Gleam rather than a support turn, which was right - it was about to die and the spread hit both my leads."
+    },
+    {
+      "check": "Turn two should exploit a damage threshold or heal a relevant slot, not maintain two harmless supports",
+      "result": "PARTIAL - and the one clear mis-selection of the battle",
+      "evidence": "T2 Milcery was at 6/55 holding Recover and chose Draining Kiss into Roselia (Grass/Poison, neutral, tiny drain) instead. Recover would have returned 27 HP and put it back out of Sludge Bomb's one-shot range. It was outsped and died either way on this particular turn, so the practical cost was nil, but 'heal a relevant slot' is exactly the branch the plan names and the AI took the other one at 11% HP."
+    },
+    {
+      "check": "Aroma Veil protects only its enumerated effects and is not a blanket anti-disruption shield",
+      "result": "PASS",
+      "evidence": "No phantom immunity observed; Milcery took full Sludge Bomb damage twice."
+    },
+    {
+      "check": "Snubbull and Furfrou offer a physical-pressure mode with U-turn positioning",
+      "result": "PASS on the pressure, FAIL on U-turn",
+      "evidence": "The T2 pivot from a damaged Snubbull into Furfrou is precisely the alternate deployment the plan describes, and the AI found it - this is a healthy-battler switch that was clearly correct (Snubbull at 36/60 opposite a Fire attacker), which is a good sign that the new switch charge is discriminating rather than blanket. Furfrou then killed Roselia with Double-Edge. U-turn, Sucker Punch and Snarl were never selected; Furfrou chose Double-Edge both turns."
+    },
+    {
+      "check": "Slakoth is a one-hit reserve with an exit",
+      "result": "PASS",
+      "evidence": "Choice Band locked it into Rock Slide, correctly chosen first because it is the only spread move on the set and hits both my battlers. Truant loafed on T4 and T6 exactly as expected. There is no exit on a Choice Band Truant reserve, so the 'with an exit' half of the plan is not implementable on this set - noted for the design side, not an AI fault."
+    },
+    {
+      "check": "Reject any AI trace that values pure durability above protecting an actual threat",
+      "result": "PASS",
+      "evidence": "T5 Snubbull chose Helping Hand to boost Slakoth's spread Rock Slide rather than a self-preserving action at 36/60. That is the disposition being honoured."
+    },
+    {
+      "check": "Snubbull's Thunder Wave",
+      "result": "NOT FIRED",
+      "evidence": "Snubbull chose Play Rough (T1), the switch (T2), Helping Hand (T5) and Play Rough (T6). Thunder Wave never came up. Less clear-cut than the other status omissions in this block - both of its live turns had a better option - but recorded."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "EMPTY BY CONSTRUCTION: not one of Cindy's four authored sets carries Protect, so there was no opponent Protect to evaluate. This is the only team in the opening block with no guard anywhere, and it is worth knowing when reading the block's Protect statistics.",
+  "ai_defects": [
+    {
+      "id": "E0008-W1",
+      "severity": "weak choice, not decisive",
+      "turn": 2,
+      "board": "Milcery 6/55, Eviolite, holding Recover, opposite a Life Orb Roselia that had just taken it from 55 to 6 with a super-effective Sludge Bomb.",
+      "chosen": "Draining Kiss into Roselia",
+      "better": "Recover. It restores 27 HP and survives a second Sludge Bomb; Draining Kiss into a neutral target drained a handful.",
+      "status": "Marginal - Milcery was outsped and would have died on that turn regardless, so this is a scoring observation rather than a demonstrated loss of tempo."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_improvements_observed": [
+    "The T2 switch is the most encouraging single decision of the block for the new switch pricing: a DAMAGED battler pivoting out of a bad matchup was still chosen, while no healthy turn-one pivot has occurred anywhere in twelve battles' worth of turns so far. The charge is discriminating, not blanket.",
+    "Helping Hand selected to boost a spread move that hit both my battlers (T5)."
+  ],
+  "level_changes": {
+    "MILCERY": "4 -> 5",
+    "FURFROU": "2 -> 3"
+  },
+  "level_change_reason": "Won on attempt 1 with one player faint and never in danger of losing. The +1 goes on Milcery, which contributed least (two turns, one of them a mis-selected Draining Kiss at 11% HP) and still has full budget, and on Furfrou, which at L14 is the lowest-level member of the team while being the one that actually traded for a player Pokemon - efficient levels are well spent there. Snubbull (offset 4, +1 in the first pass) and Slakoth (offset 6, already L18) both keep. Cumulative across both passes: Snubbull +1, Milcery +1, Furfrou +2, Slakoth 0 - all within the +-2 cap.",
+  "levels_after": {
+    "SNUBBULL": 4,
+    "MILCERY": 5,
+    "FURFROU": 3,
+    "SLAKOTH": 6
+  },
+  "cooler": "Yes, in a way that would also fix the empty Protect ledger. Slakoth is a Choice Band Truant reserve, which means it is locked into one move AND idle every other turn - two independent forms of turn denial stacked on the same body, and the result is a L18 ace that landed three Rock Slides in seven turns and never threatened anything. Swapping the Choice Band for a Sitrus Berry would let it pick the right move on the turns it is actually awake, which is the whole tension Truant is supposed to create. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found. Truant, Fur Coat, Aroma Veil and the Lum Berry cure all behaved correctly."
+}

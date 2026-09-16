@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0008 TRAINER_CINDY_1; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR ROUTE 104. ROSELIA, CROAGUNK = wild:Route104/land_mons (this battle own route); GROWLITHE, CORPHISH = wild:Route103/land_mons; TIMBURR, PACHIRISU = wild:Route102/land_mons. Petalburg Woods species are excluded. Nothing evolved, nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "The crack list asks for special offense and pressure on Milcery. ROSELIA is the answer to both: its STAB Sludge Bomb is 2x on Snubbull and Milcery, and being special it walks straight through Fur Coat Furfrou, which halves everything my physical members throw. Second Poison lane on TIMBURR and CROAGUNK Poison Jab. Physical mitigation against Choice Band Slakoth and Adamant Snubbull: Growlithe Intimidate plus Croagunk Fake Out. Truant is punished by simply surviving the on-turn: Timburr Mach Punch and Croagunk Drain Punch are both 2x on Normal-type Slakoth and Furfrou. Pachirisu FOLLOW_ME answers a Helping-Hand-stacked single-target burst.",
+ "party": [
+  {
+   "species": "SPECIES_GROWLITHE",
+   "moves": [
+    "MOVE_FLARE_BLITZ",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_WILD_CHARGE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate lead and Fire breaker; Wild Charge is the single-target Electric probe for Lightning Rod / Volt Absorb / Storm Drain redirection",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_ROSELIA",
+   "moves": [
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_ENERGY_BALL",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_NATURAL_CURE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "base-100 special attacker; STAB Sludge Bomb is 2x on the Fairy core and special damage ignores Fur Coat",
+   "availability": "pool-14 wild:Route104/land_mons."
+  },
+  {
+   "species": "SPECIES_CROAGUNK",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_POISON_JAB",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_KNOCK_OFF"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_DRY_SKIN",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "DRY_SKIN is a flat Water immunity that heals off the opposing Water attacks; Fake Out tempo, Poison Jab into Grass and Fairy",
+   "availability": "pool-14 wild:Route104/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_POISON_JAB",
+    "MOVE_KNOCK_OFF",
+    "MOVE_ROCK_SLIDE"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Iron Fist priority, POISON_JAB as the super-effective answer to the Fairy core, Rock Slide spread",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_NUZZLE",
+    "MOVE_SUPER_FANG",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    0,
+    0,
+    252
+   ],
+   "role": "Follow Me redirection, Nuzzle paralysis, Super Fang percentage damage; Volt Absorb is a genuine Electric immunity",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_CORPHISH",
+   "moves": [
+    "MOVE_CRABHAMMER",
+    "MOVE_AQUA_JET",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_ADAPTABILITY",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the block's biggest single hit plus priority and item removal",
+   "availability": "pool-14 wild:Route103/land_mons."
+  }
+ ]
+}
