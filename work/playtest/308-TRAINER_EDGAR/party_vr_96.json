@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0477-E0481 Victory Road aces, cap 96",
+ "availability_audit": "Cap window 96 (driver level_cap; FLAG_DEFEATED_WALLY_VICTORY_ROAD). Victory Road after Wally, League not entered. Sources: Incineroar (36), Urshifu Rapid Strike (Kubfu Route 112 sign, 42), Flutter Mane (Mt Pyre Summit, 68), Landorus (Route 111 ruins sign, 42, reachable legend), Chi-Yu (Ashen Woods sign, 48, reachable legend), Rillaboom (36). No Victory Road-only or League species.",
+ "plan": "Intimidate/Fake Out pivot, Banded Surging Strikes, Ghost/Fairy special, Sheer Force Ground/Psychic, Fire/Dark spread, priority Grass.",
+ "party": [
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_KNOCK_OFF",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_PARTING_SHOT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Intimidate/Fake Out pivot, Psychic-immune",
+   "availability": "pool gate 36 evolution:level from Torracat"
+  },
+  {
+   "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+   "moves": [
+    "MOVE_SURGING_STRIKES",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_AQUA_JET",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_UNSEEN_FIST",
+   "item": "ITEM_CHOICE_BAND",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Protect-ignoring Water/Fighting crits",
+   "availability": "pool gate 42 evolution:EVO_SCRIPT_TRIGGER from Kubfu (legendary_sign Route112)"
+  },
+  {
+   "species": "SPECIES_FLUTTER_MANE",
+   "moves": [
+    "MOVE_SHADOW_BALL",
+    "MOVE_MOONBLAST",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_BOOSTER_ENERGY",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast Ghost/Fairy special attacker, immune to Normal/Fighting and Fake Out",
+   "availability": "pool gate 68 wild:MtPyre_Summit/land_mons"
+  },
+  {
+   "species": "SPECIES_LANDORUS",
+   "moves": [
+    "MOVE_EARTH_POWER",
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_PSYCHIC",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_SHEER_FORCE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Sheer Force Ground/Psychic special coverage",
+   "availability": "pool gate 42 legendary_sign:Route111_RuinsExterior (reachable legend)"
+  },
+  {
+   "species": "SPECIES_CHI_YU",
+   "moves": [
+    "MOVE_HEAT_WAVE",
+    "MOVE_DARK_PULSE",
+    "MOVE_OVERHEAT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_BEADS_OF_RUIN",
+   "item": "ITEM_CHOICE_SCARF",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Psychic-immune Fire/Dark special spread",
+   "availability": "pool gate 48 legendary_sign:AshenWoods (reachable legend)"
+  },
+  {
+   "species": "SPECIES_RILLABOOM",
+   "moves": [
+    "MOVE_GRASSY_GLIDE",
+    "MOVE_WOOD_HAMMER",
+    "MOVE_FAKE_OUT",
+    "MOVE_U_TURN"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_GRASSY_SURGE",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Grassy Surge overwrites Psychic Terrain; priority Grass",
+   "availability": "pool gate 36 evolution:level from Thwackey"
+  }
+ ]
+}
