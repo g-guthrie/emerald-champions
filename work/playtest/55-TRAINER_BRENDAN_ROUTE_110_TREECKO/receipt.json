@@ -1,0 +1,58 @@
+{
+  "play_order": 55,
+  "e_group": "E0059",
+  "trainer": "TRAINER_BRENDAN_ROUTE_110_TREECKO",
+  "class": "rival",
+  "aliases": ["TRAINER_BRENDAN_ROUTE_110_MUDKIP", "TRAINER_BRENDAN_ROUTE_110_TORCHIC", "TRAINER_BRENDAN_ROUTE_110_TREECKO", "TRAINER_MAY_ROUTE_110_MUDKIP", "TRAINER_MAY_ROUTE_110_TORCHIC", "TRAINER_MAY_ROUTE_110_TREECKO"],
+  "alias_note": "Played the Treecko-branch Brendan per the brief. No level change was made, so there is nothing to propagate to the other five aliases; had there been, identical offsets would have been applied to all six.",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"SWELLOW": 28, "MANECTRIC": 28, "BRELOOM": 28, "NUMEL": 31, "COMBUSKEN": 32},
+  "cap_window_confirmation": "Dossier seeds 30/30/30/33/34 resolved to 28/28/28/31/32. Cap 30, Medium -2. Five members, not four.",
+  "party_manifest": "work/playtest/55-TRAINER_BRENDAN_ROUTE_110_TREECKO/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Weavile + Gardevoir. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Swellow Protects to activate the Flame Orb ONLY if Manectric contributes safely that turn; otherwise it attacks",
+    "Guts-boosted Facade damage follows, plus one useful U-turn pivot",
+    "Manectric's Lightning Rod and Focus Sash do their jobs",
+    "Breloom uses Spore / Mach Punch as the alternate partner, with Poison Heal from the Toxic Orb",
+    "Numel offers Yawn or direct Heat Wave / Earth Power",
+    "Combusken accumulates Speed Boost and converts it",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/55-TRAINER_BRENDAN_ROUTE_110_TREECKO/a1", "seed": 55, "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 5,
+     "narrative": "T1 both leads Protected. Swellow's was authored and it worked - the Flame Orb burned it and Guts came online - but Manectric spent the same turn guarding instead of contributing, which is precisely the condition the plan attaches to that Protect. T2 Weavile's Triple Axel (2x) KO'd the burned Swellow before Facade resolved, and Hyper Voice took Manectric to its Focus Sash at 1 HP; Manectric's Thunderbolt took Weavile to 28. T3 Breloom entered and Mach Punch, 4x on Dark/Ice, KO'd Weavile - the right move on sight; Hyper Voice then killed Breloom while Manectric Protected at 1 HP. T4 Numel entered, its spread Heat Wave went around my Follow Me, crit Gardevoir and burned it; Hyper Voice finished Manectric. T5 Numel and Combusken both Protected, and Combusken banked a Speed Boost stage behind the guard. T6 that stage let a Life Orb Fire Punch out-speed and KO my burned Gardevoir; Air Slash (2x) KO'd Combusken in the same turn. T7 Nidoking came in and Earth Power (2x) ended Numel."}
+  ],
+  "strategy_checks": [
+    {"check": "Swellow Protects for the Flame Orb only if Manectric contributes safely", "result": "FAIL (on the condition, not the action)", "evidence": "Swellow Protected on T1 and was burned at end of turn, so the setup half executed exactly as authored. The condition attached to it did not hold: Manectric also Protected that turn and contributed nothing. The plan's own wording makes this the test case, and it failed. See the defect entry."},
+    {"check": "Guts-boosted Facade damage follows", "result": "NOT_EXERCISED", "evidence": "Swellow selected Facade on T2 - correct, and it would have been very large off a burned Guts body - but Weavile out-sped it on the speed tie and Triple Axel KO'd it first. The Orb turn bought nothing because the Pokemon that paid for it died before spending it."},
+    {"check": "Swellow's U-turn pivot", "result": "NOT_SELECTED", "evidence": "Only two Swellow turns existed and both were spent (Protect, then a Facade that never resolved)."},
+    {"check": "Manectric's Focus Sash and Lightning Rod", "result": "PASS (Sash) / NOT_EXERCISED (Lightning Rod)", "evidence": "The Sash held at 1 HP on T2 and directly bought two more Manectric turns, one of which was a Thunderbolt that took Weavile to 28 and set up the Mach Punch KO. Lightning Rod never triggered because I brought no Electric attack - which is the correct player response to it, so the ability did its job by deterrence."},
+    {"check": "Breloom Spore / Mach Punch as the alternate partner", "result": "PASS (Mach Punch) / NOT_SELECTED (Spore)", "evidence": "Breloom had one turn and used Mach Punch, which is 4x into a Dark/Ice Weavile and KO'd it from 28. That is better than Spore on that board and I would have made the same choice. Spore was never needed."},
+    {"check": "Breloom's Poison Heal from the Toxic Orb", "result": "NOT_EXERCISED", "evidence": "Breloom entered at the end of T2 and died during T3, so the Orb never activated and Poison Heal never healed."},
+    {"check": "Numel offers Yawn or direct Heat Wave / Earth Power", "result": "PASS (direct damage) / NOT_SELECTED (Yawn)", "evidence": "Two Heat Waves. The T4 one is the best Numel decision: Heat Wave is a spread move, so it went around my Follow Me entirely, and it crit and burned the Mega Gardevoir that was carrying my offence. The plan's 'direct damage replaces redundant support' branch was taken correctly."},
+    {"check": "Combusken accumulates Speed Boost and converts it", "result": "PASS", "evidence": "It gained a stage behind its T5 Protect and immediately converted it on T6: a Life Orb Fire Punch out-sped and KO'd my Mega Gardevoir. This is a clean example of a guard that was worth the turn."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "SWELLOW", "payoff": "REAL and AUTHORED: blocked a Fake Out and a Pixilate Hyper Voice, and activated the Flame Orb for Guts. The intended opening, executed."},
+    {"turn": 1, "battler": "MANECTRIC", "payoff": "EMPTY IN PURPOSE: it did block its share of one Hyper Voice, so it was not literally free damage denied, but its partner was spending that turn on a setup Protect that the plan explicitly conditions on Manectric contributing. Both slots guarding turned an authored setup turn into a pass."},
+    {"turn": 3, "battler": "MANECTRIC", "payoff": "REAL: at 1 HP behind a spent Focus Sash it blocked a Hyper Voice that was certain death, and survived to take another turn."},
+    {"turn": 5, "battler": "COMBUSKEN", "payoff": "REAL, best guard of the battle: blocked an Air Slash and a Hyper Voice AND banked the Speed Boost stage that let it out-speed and KO my Mega Gardevoir the next turn. The guard directly produced the kill."},
+    {"turn": 5, "battler": "NUMEL", "payoff": "PARTIAL: blocked its share of one Hyper Voice. Simultaneous with Combusken's, so once again the side dealt no damage on a turn it spent both guards. Less objectionable than the T1 pair because Combusken's half genuinely paid."}
+  ],
+  "protect_ledger_note": "Five opponent Protects. Two were excellent (Swellow's Orb activation, Combusken's Speed Boost), one was a correct 1 HP survival guard, and two were the redundant half of a simultaneous pair. No Pokemon guarded on consecutive turns.",
+  "ai_defects": [
+    {"turn": 1, "board": "Opening turn. Their Swellow (b1, Flame Orb, unactivated) and Manectric (b3, Focus Sash) both at full HP against my Weavile and a Gardevoir that Mega Evolved this turn.", "chosen": "Swellow used Protect (authored, to activate the Flame Orb) and Manectric used Protect in the same turn.", "why_wrong": "The authored plan for this team states the condition in as many words: Swellow activates the Orb with Protect 'only if Manectric contributes safely'. Manectric did not contribute - it guarded too. The setup turn therefore bought a Guts activation at the cost of the entire team's turn, and Swellow was KO'd on T2 before Facade ever resolved, so the side paid a full turn for nothing. This is the same partner-correlation gap as play_order 49 and play_order 53, but this is the instance where the authored text makes it unambiguously wrong rather than merely wasteful.", "better_action": "Manectric attacks (Thunderbolt or Snarl) while Swellow Protects. Manectric's Thunderbolt is what eventually took Weavile to 28 and enabled the Breloom KO; having it a turn earlier is strictly better and it is exactly the 'contributes safely' the plan asks for.", "severity": "medium", "note": "Third instance of simultaneous double Protect in this block (play_order 49 turn 3, play_order 53 turn 1, here turn 1), plus a fourth at turn 5 of this battle. For the AI owner: a term in PAIR_GUARD scoring for 'my partner's best action this turn is also a guard' would fix all four. It needs no knowledge of the player's pending commands - only the side's own forecast of its own actions."}
+  ],
+  "ai_notes": [
+    "Three genuinely strong decisions here, and they deserve as much weight as the defect. Breloom's Mach Punch on sight into a Dark/Ice target at 4x. Numel's Heat Wave, which is a spread move and therefore correctly ignored the Follow Me I had just set. And Combusken's Protect-into-Speed-Boost, which is the cleanest guard-with-payoff in my whole block: the stage it banked is the reason my Mega died.",
+    "Swellow's opening is fragile in a way levels cannot fix. It pays a turn for the Orb, and at base 125 Speed it loses or ties against anything at 125 or above, so the Guts payoff turn frequently never arrives. Here it died with Facade selected and unused."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two Pokemon, one of them the Mega, and the fight went seven turns against five opponents. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. This was both. No level change, so nothing to propagate to the other five rival aliases.",
+  "could_this_be_cooler": "This is the best rival team I have played in this block and I would keep the roster as it stands. Taillow grown into a Guts Swellow, Shroomish grown into a Poison Heal Breloom, and the starter the player did not pick appearing as a mid-stage Combusken is exactly the kind of continuity that makes a rival feel like a rival, and Numel as the fifth is a nice regional stranger rather than a sixth starter. The one thing I would change is the ordering of the plan, not the pieces: Swellow's Protect turn is the team's signature and it is spent on the very first turn of the battle, when the opponent is at full strength and most likely to remove it immediately - which is what happened. Leading Manectric + Breloom, and bringing Swellow in later behind a Spore or a Snarl, would let the Orb turn happen on a board where Swellow can actually survive to use Facade. Combusken, by contrast, needs nothing: its Protect-into-Speed-Boost line is already the strongest sequence on the team.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
