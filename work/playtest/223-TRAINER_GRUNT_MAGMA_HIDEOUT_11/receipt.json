@@ -1,0 +1,105 @@
+{
+  "play_order": 223,
+  "e_group": "E0334",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_11",
+  "class": "grunt",
+  "location": "MagmaHideout_4F",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L60 = 60 + 2 - 2 on Medium, matching the authored offset 2. This is the first room in the block at level parity with the player's cap.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217-222.",
+  "pre_play_strategy_checks": [
+    "Orthworm's Earth Eater makes it immune to Ground and heals it a quarter instead",
+    "Coil makes Orthworm a real attacker while it holds the slot",
+    "Pangoro's Iron Fist Drain Punch is the sustain lane and Parting Shot resets a losing board",
+    "Aggron's Heavy Metal doubles its weight for the Heavy Slam maths, and Weakness Policy punishes a super-effective hit that does not kill",
+    "Toedscruel's Mycelium Might Spore always moves last, so the AI should use it as a board-flip and not as an opener",
+    "Protect ledger - all four carry Protect"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 7,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "why": "The longest and most genuinely contested fight in the block, and the only one where my lead pair did not simply delete the room. Turn 1 Pangoro Protected through a 2x Hurricane while Orthworm took Coil and Mega Swampert's Superpower took the worm to 99 - at the price of the Mega's own Attack and Defense. Turn 2 I conceded the Mega was spent and pivoted it out for Tapu Bulu; Hurricane removed Pangoro. Turn 3 Toedscruel's Sludge Bomb hit Tapu Bulu 4x into Grass/Fairy and killed it outright, and Orthworm's Protect blocked Superpower. Turn 4 Urshifu came in, the grunt voluntarily pivoted Orthworm out for Aggron, and Close Combat hit Aggron 4x for an OHKO from full HP while Hurricane plus confusion finished Toedscruel. Turn 5 Orthworm came back and Protected, and Close Combat punched through it for only 25 through Coil-boosted Defense. Turn 6 a second Close Combat finished it for 126."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Orthworm's Earth Eater immunity and quarter heal",
+      "result": "NOT TESTED",
+      "evidence": "I never aimed a Ground attack at it - Landorus's Earth Power was the only one in my party and Landorus did not reach the field until the fight was over. The dossier's claim that 'the player's Ground lane is dead here' is exactly why: the ability, like Palossand's Water Compaction in E0333, shaped my play without ever resolving."
+    },
+    {
+      "check": "Coil makes Orthworm a real attacker while it holds the slot",
+      "result": "PASS on the defensive half, FAIL on the offensive half",
+      "evidence": "Orthworm took Coil on turn 1 ('Attack rose / Defense rose / accuracy rose') and the Defense half mattered enormously - on turn 5 a 2x Close Combat from a Jolly 252 Attack Urshifu did 25 damage to it. But it never converted: it used Body Press once for a resisted hit and otherwise Protected twice. And the AI then threw the boost away itself by switching Orthworm out on turn 4 (see AI defect E0334-1). Orthworm is the best wall in this hideout and the room got about a third of the value out of it."
+    },
+    {
+      "check": "Pangoro's Iron Fist Drain Punch sustain and Parting Shot reset",
+      "result": "PARTIAL",
+      "evidence": "Drain Punch on turn 2 into Mega Swampert, correctly noted 'not very effective' (Fighting into Water/Ground) - it was the only target available and Pangoro died to Hurricane on the same turn. Parting Shot never appeared. The Protect on turn 1 was its best action and it was a good one."
+    },
+    {
+      "check": "Aggron's Heavy Metal and Weakness Policy",
+      "result": "FAIL - never reached",
+      "evidence": "Aggron was switched in on turn 4 and KOed from full HP by a single 4x Close Combat before acting. Heavy Slam was never used, and the Weakness Policy never triggered because the super-effective hit killed it outright rather than leaving it alive. Note the design tension the dossier does not mention: Weakness Policy on a Steel/Rock body that is 4x weak to Fighting and 4x weak to Ground mostly does not get to fire, because the hits that would trigger it are the hits that kill it."
+    },
+    {
+      "check": "Toedscruel's Spore is used as a board-flip, not as an opener",
+      "result": "PASS by omission, and Toedscruel was the room's best member",
+      "evidence": "Toedscruel never used Spore at all - which is correct rather than a failure, because both my actives when it arrived were Grass-typed or Water/Fighting: Tapu Bulu is Grass and immune to powder outright. Instead it picked Sludge Bomb into Tapu Bulu, hit 4x into Grass/Fairy and killed it from 143. That is the single best target read in this block: the AI identified that its status move was blanked by the opposing typing and chose the coverage move that was 4x into that same typing."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS",
+      "evidence": "Four Protects, all with real payoffs, none empty, none consecutive from the same battler. See protect_ledger."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "Pangoro",
+      "payoff": "REAL. Blocked Pelipper's Hurricane, which is 2x into Fighting/Dark and the attack that eventually killed it. Bought the turn in which its partner set up Coil."
+    },
+    {
+      "turn": 3,
+      "battler": "Orthworm",
+      "payoff": "REAL. Blocked Tapu Bulu's Superpower, a 2x hit into Steel from a full-Attack body, at 125/210. Its partner Toedscruel used the same turn to kill Tapu Bulu."
+    },
+    {
+      "turn": 5,
+      "battler": "Orthworm",
+      "payoff": "PARTIAL, denied. Guarded against Urshifu's Close Combat and printed 'The opposing Orthworm couldn't fully protect itself' - Unseen Fist went through - but it did block Pelipper's Hydro Pump on the same turn, so the turn was not wasted."
+    }
+  ],
+  "protect_summary": "3 opponent Protects across 5 turns, all three with a genuine payoff, 0 empty. Together with E0331 this is the best guard discipline in the block.",
+  "ai_defects": [
+    {
+      "id": "E0334-1",
+      "turn": 4,
+      "board": "Orthworm 151/210 with a Coil already banked (+1 Attack, +1 Defense, +1 accuracy) beside Toedscruel 89/222 and confused; opposite Pelipper 198/198 and a just-deployed Urshifu-Rapid-Strike 209/209, whose Fighting typing is visible from its species. Aggron (Steel/Rock, 4x into Fighting, 4x into Ground) was the only reserve.",
+      "chosen": "Voluntarily switched Orthworm out and sent Aggron in.",
+      "better": "Keep Orthworm on the field and attack, or Protect. The pivot cost three things at once: it threw away the Coil boost that was the room's entire defensive plan (Orthworm came back the next turn with no stages), it fed the last reserve to a 4x Close Combat that killed it from full HP before it acted, and it wasted Aggron's Weakness Policy. The switch-in evaluation appears not to be weighting the incoming battler's type disadvantage against the opposing active's TYPE - Urshifu-Rapid-Strike is Water/Fighting on sight, before any move is revealed, and Aggron is 4x into both halves of that. Contrast E0328, where a similar-looking pivot was correct because the withdrawn battler was on 1 HP and the reserve was the only body left; here the withdrawn battler was healthy, boosted and walling. Severity: moderate; shared switch-in scoring. Do not fix AI C code from this receipt."
+    }
+  ],
+  "ai_notes": [
+    "Engine observation, not a defect, for whoever maintains the driver: on turn 5 Urshifu's Close Combat printed 'couldn't fully protect itself' against Orthworm's Protect and dealt 25, while the identical move against an unprotected Orthworm on turn 6 dealt 126. Some of that gap is the Coil Defense boost being present on turn 5 and absent on turn 6 (Orthworm had switched and lost its stages, then re-set nothing), so I am not claiming a partial-damage rule for Unseen Fist - but the two numbers are five times apart and worth a focused check if anyone is auditing Protect-breaking.",
+    "AI decision budget: max 61 frames (1.021 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep, deliberately, even though this was a one-faint first-attempt win and therefore inside the +1 review band. Three reasons. First, it was a real fight by every other measure: five turns, seven decisions, three forced pivots, my Mega spent by turn 2 and Tapu Bulu killed outright by a 4x Sludge Bomb. Second, the only member that underperformed was Aggron, and it underperformed because of an AI switch decision (E0334-1), not because of its level - AGENTS is explicit that AI defects are fixed before they are compensated with levels, and adding a level to a Pokemon that died before acting would hide the defect rather than address it. Third, this room is already at offset 2, level 60, at parity with the player's cap, and it is the room the dossier designates as the first real wall; the correct response to 'the wall worked but the AI threw a piece away' is to repair the throw. If the switch-in scoring is fixed and this room is rerun, Orthworm keeping its Coil and Aggron never entering into a Fighting type would likely have cost me a second member.",
+  "cooler": "The dossier's framing is right and this is the best-constructed grunt team in the hideout: it is a specific, teachable wall aimed at exactly what the previous rooms rewarded. Two things are worth recording. Toedscruel is the standout and it is undersold - the write-up calls it 'the odd one out on purpose' and talks only about Spore, but in play its value was a 4x Sludge Bomb that killed my strongest remaining body, and the AI correctly reached for it precisely because Spore was blanked. That is a better story than the one the plan tells. Aggron, by contrast, is the slot to revisit: Weakness Policy on a body with two 4x weaknesses is a self-cancelling combination, because the attacks that would charge the item are the attacks that remove the holder, and Heavy Metal's Heavy Slam maths only matters against a player who brought weight-based moves. A bulkier Steel with a survivable weakness profile would make the Weakness Policy actually fire. No change made in this pass.",
+  "legality_notes": "No legality problem in the authored set. Orthworm, Toedscruel and Pangoro are all first campaign appearances as the dossier claims.",
+  "reverify_note": "No level change was made here, so nothing in this receipt needs a rebuild to re-verify. This is, however, the battle in my block I would most want rerun once the switch-in scoring behind E0334-1 is addressed, because the room is close to its intended difficulty and a repaired AI would likely push it over the three-faint threshold without any level change at all.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
