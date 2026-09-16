@@ -1761,6 +1761,10 @@ void ChampionsCircuitEnd(void)
         CalculatePlayerPartyCount();
         HealPlayerParty();
     }
+    // D7: a completed Circuit run is the lottery's ticket. The Lilycove clerk spends
+    // the flag on the draw, so a run that ends without one being redeemed keeps it.
+    if (VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE))
+        FlagSet(FLAG_EC_LOTTERY_TICKET_READY);
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
     VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);
 }

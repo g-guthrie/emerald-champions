@@ -79,10 +79,6 @@ static void TrainerHillDummy(void);
 static void SetTimerValue(u32 *dst, u32 val);
 static u32 GetTimerValue(u32 *src);
 #endif //FREE_TRAINER_HILL
-#if FREE_TRAINER_HILL == FALSE
-static enum Item GetPrizeItemId(void);
-#endif //FREE_TRAINER_HILL
-
 // const data
 #include "data/battle_frontier/trainer_hill.h"
 
@@ -148,61 +144,9 @@ struct
     {TRAINER_CLASS_SCHOOL_KID, TRAINER_ENCOUNTER_MUSIC_MALE},
 };
 
-static const enum Item sPrizeListPPMax1[]      = {ITEM_MAX_ETHER,           ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListLuxuryBall1[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListMaxRevive1[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListMaxEther1[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListElixir1[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListLevelBall[]   = {ITEM_LEVEL_BALL,       ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListLureBall[]    = {ITEM_LURE_BALL,        ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListMoonBall[]    = {ITEM_MOON_BALL,        ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListFriendBall[]  = {ITEM_FRIEND_BALL,      ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListLoveBall[]    = {ITEM_LOVE_BALL,        ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-
-static const enum Item sPrizeListLinkingCord[] = {ITEM_LINKING_CORD,     ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListLuxuryBall2[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListMaxRevive2[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListMaxEther2[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListElixir2[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListFastBall[]    = {ITEM_FAST_BALL,        ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListHeavyBall[]   = {ITEM_HEAVY_BALL,       ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListDreamBall[]   = {ITEM_DREAM_BALL,       ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListSportBall[]   = {ITEM_SPORT_BALL,       ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-static const enum Item sPrizeListBeastBall[]   = {ITEM_BEAST_BALL,       ITEM_ETHER, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
-
-static const enum Item *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
-{
-    sPrizeListPPMax1,
-    sPrizeListLuxuryBall1,
-    sPrizeListMaxRevive1,
-    sPrizeListMaxEther1,
-    sPrizeListElixir1,
-    sPrizeListLevelBall,
-    sPrizeListLureBall,
-    sPrizeListMoonBall,
-    sPrizeListFriendBall,
-    sPrizeListLoveBall
-};
-
-static const enum Item *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
-{
-    sPrizeListLinkingCord,
-    sPrizeListLuxuryBall2,
-    sPrizeListMaxRevive2,
-    sPrizeListMaxEther2,
-    sPrizeListElixir2,
-    sPrizeListFastBall,
-    sPrizeListHeavyBall,
-    sPrizeListDreamBall,
-    sPrizeListSportBall,
-    sPrizeListBeastBall
-};
-
-static const enum Item *const *const sPrizeListSets[] =
-{
-    sPrizeLists1,
-    sPrizeLists2
-};
+// Emerald Champions (C5/B6): the Trainer Hill prize lists are gone. Every entry in
+// them was sellable treasure, and the Big Nugget made the Hill the game's only
+// repeatable money faucet. The Hill itself is sealed at the Route 111 door.
 
 static const u16 sEReader_Pal[] = INCGFX_U16("graphics/trainer_hill/ereader.pal", ".gbapal");
 static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
@@ -453,25 +397,8 @@ static void GetOwnerState(void)
 
 static void GiveChallengePrize(void)
 {
-#if FREE_TRAINER_HILL == FALSE
-    enum Item itemId = GetPrizeItemId();
-
-    if (sHillData->challenge.numFloors != NUM_TRAINER_HILL_FLOORS || gSaveBlock1Ptr->trainerHill.receivedPrize)
-    {
-        gSpecialVar_Result = 2;
-    }
-    else if (AddBagItem(itemId, 1) == TRUE)
-    {
-        CopyItemName(itemId, gStringVar2);
-        gSaveBlock1Ptr->trainerHill.receivedPrize = TRUE;
-        gSaveBlock2Ptr->frontier.unk_EF9 = 0;
-        gSpecialVar_Result = 0;
-    }
-    else
-    {
-        gSpecialVar_Result = 1;
-    }
-#endif //FREE_TRAINER_HILL
+    // No prize: the Hill awards nothing now that its money-valued prize lists are gone.
+    gSpecialVar_Result = 2;
 }
 
 // If bestTime > timer, the challenge was completed faster and its a new record
@@ -1003,99 +930,7 @@ static void TrainerHillSetMode(void)
 #endif //FREE_TRAINER_HILL
 }
 
-// Determines which prize list to use from the set of prize lists.
-#if FREE_TRAINER_HILL == FALSE
-static u8 GetPrizeListId(bool8 allowRareBalls)
-{
-    u8 prizeListId, i, modBy;
 
-    // The initial selection depends on the trainer numbers for the completed challenge.
-    // These don't change with the available challenge modes, so Normal/Unique will always
-    // have a prizeListId of 8, and Variety/Expert will have a prizeListId of 24.
-    prizeListId = 0;
-    for (i = 0; i < NUM_TRAINER_HILL_FLOORS; i++)
-    {
-        prizeListId ^= sHillData->floors[i].trainerNum1 & 0x1F;
-        prizeListId ^= sHillData->floors[i].trainerNum2 & 0x1F;
-    }
-
-    // In practice, the conditional below is always true. The second half holds
-    // the rare-Ball grand prizes, while the first half retains basic supplies.
-    if (allowRareBalls)
-        modBy = NUM_TRAINER_HILL_PRIZE_LISTS;
-    else
-        modBy = NUM_TRAINER_HILL_PRIZE_LISTS / 2;
-
-    prizeListId %= modBy;
-    return prizeListId;
-}
-
-static enum Item GetPrizeItemId(void)
-{
-    u8 i;
-    const u16 *prizeList;
-    s32 trainerNumSum = 0, prizeListSetId, minutes, id;
-
-    // First determine which set of prize lists to use. The sets of lists only differ in
-    // which rare Balls they can offer as the grand prize for a time under 12 minutes.
-    // Which set of lists gets used is based on the sum of all the trainer numbers for that
-    // challenge. These don't change with the available challenge modes, so Normal will always
-    // have a prizeListSetId of 0, and Unique/Variety/Expert will have a prizeListSetId of 1.
-    for (i = 0; i < NUM_TRAINER_HILL_FLOORS; i++)
-    {
-        trainerNumSum += sHillData->floors[i].trainerNum1;
-        trainerNumSum += sHillData->floors[i].trainerNum2;
-    }
-    prizeListSetId = trainerNumSum / 256;
-    prizeListSetId %= (int)ARRAY_COUNT(sPrizeListSets);
-
-    // Now get which prize list to use from the set. See GetPrizeListId for details.
-    // The below conditional will always be true, because a Trainer Hill challenge can't be entered
-    // until the player has entered the Hall of Fame (FLAG_SYS_GAME_CLEAR is set) and because all
-    // of the available challenge modes have the full 8 trainers (NUM_TRAINER_HILL_TRAINERS).
-    if (FlagGet(FLAG_SYS_GAME_CLEAR) && sHillData->challenge.numTrainers == NUM_TRAINER_HILL_TRAINERS)
-        i = GetPrizeListId(TRUE);
-    else
-        i = GetPrizeListId(FALSE);
-
-    // 1 is added to Expert mode's prize list selection because otherwise it has the same prizes as Variety
-    if (gSaveBlock1Ptr->trainerHill.mode == HILL_MODE_EXPERT)
-        i = (i + 1) % NUM_TRAINER_HILL_PRIZE_LISTS;
-
-    // After the above (non-random) calculations, the following are the possible prize list selections:
-    // sPrizeListSets[0][8] (Normal)
-    // sPrizeListSets[1][4] (Variety)
-    // sPrizeListSets[1][8] (Unique)
-    // sPrizeListSets[1][5] (Expert)
-    prizeList = sPrizeListSets[prizeListSetId][i];
-
-    // Which prize is given from the list depends on the time scored.
-    // The prize for any time after 12 minutes is the same in every list.
-    // The prizes for a time under 12 minutes are:
-    // - ITEM_FRIEND_BALL      (Normal)
-    // - ITEM_ELIXIR           (Variety)  [medicine fillers were replaced with PP Up / Heart Scale / Big Nugget / Quick Ball / Dusk Ball]
-    // - ITEM_SPORT_BALL       (Unique)
-    // - ITEM_FAST_BALL        (Expert)
-    // As an additional note, if players were allowed to enter a Trainer Hill challenge before
-    // entering the Hall of Fame, there would be 1 additional prize possibility (ITEM_MAX_ETHER)
-    // as Normal / Unique modes would use sPrizeListSets[0][3] / sPrizeListSets[1][3] respectively.
-    minutes = (signed)(gSaveBlock1Ptr->trainerHill.timer) / (60 * 60);
-    if (minutes < 12)
-        id = 0; // Depends on list
-    else if (minutes < 13)
-        id = 1; // ITEM_ETHER
-    else if (minutes < 14)
-        id = 2; // ITEM_HEART_SCALE
-    else if (minutes < 16)
-        id = 3; // ITEM_BIG_NUGGET
-    else if (minutes < 18)
-        id = 4; // ITEM_QUICK_BALL
-    else
-        id = 5; // ITEM_DUSK_BALL
-
-    return prizeList[id];
-}
-#endif //FREE_TRAINER_HILL
 
 void TrainerHillHasPendingPrize(void)
 {

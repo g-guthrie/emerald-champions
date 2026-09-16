@@ -11,13 +11,9 @@
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
 
-static const u16 sLotteryPrizes[] =
-{
-    ITEM_ETHER,
-    ITEM_LINKING_CORD,
-    ITEM_MAX_ETHER,
-    ITEM_MASTER_BALL,
-};
+// Emerald Champions (D7): the draw no longer mints items. The Lilycove clerk reads the
+// match tier out of gSpecialVar_0x8004 and hands out cosmetics, or a Luxury Ball on a
+// full five-digit match. There is no Linking Cord and no Master Ball here any more.
 
 static u8 GetMatchingDigits(u16 winNumber, u32 otId);
 
@@ -103,8 +99,6 @@ void PickLotteryCornerTicket(void)
 
     if (gSpecialVar_0x8004 != 0)
     {
-        gSpecialVar_0x8005 = sLotteryPrizes[gSpecialVar_0x8004 - 1];
-
         if (box == TOTAL_BOXES_COUNT)
         {
             gSpecialVar_0x8006 = 0;

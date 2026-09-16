@@ -172,9 +172,13 @@ def _resolve_price_offers(root,blocks,arrays,source,cost_var,mon_var='VAR_0x8004
 def game_corner_offers(root,blocks,arrays):
     source='data/maps/MauvilleCity_GameCorner/scripts.inc'
     text=(root/source).read_text()
-    coin_vars=set(re.findall(r'(?m)^\s*removecoins\s+(VAR_\w+)',text))
-    if len(coin_vars)!=1:raise ValueError('Game Corner Pokemon coin-debit binding changed; update reader')
-    cost_var=next(iter(coin_vars))
+    # The Game Corner is the Mauville Starter Archive: hatchlings are bought with money
+    # over the counter, never with Coins (design C3 / DECISION 1).
+    if re.search(r'(?m)^\s*(?:removecoins|addcoins|checkcoins)\b',text):
+        raise ValueError('Starter Archive still handles Coins; it is priced in money')
+    debits=set(re.findall(r'(?m)^\s*removemoney\s+(\d+)',text))
+    if '10000' not in debits:raise ValueError('Starter Archive money debit binding changed; update reader')
+    cost_var='VAR_0x8006'
     prizes,result=_resolve_price_offers(root,blocks,arrays,source,cost_var)
     coin_species={r['species'] for r in result}
 
@@ -193,8 +197,8 @@ def game_corner_offers(root,blocks,arrays):
     if coin_species & bp_species:raise ValueError('Species offered through both the Game Corner and the Circuit BP exchange: '+', '.join(sorted(coin_species & bp_species)))
     if (coin_species|bp_species)!=set(prizes):raise ValueError('Game Corner + Circuit BP offer lists differ from native prize list')
     for row in bp_result:row['bp']=row.pop('cost')
-    for row in result:row['coins']=row.pop('cost')
-    return sorted(result,key=lambda r:(r['coins'],r['species'])),sorted(bp_result,key=lambda r:(r['bp'],r['species']))
+    for row in result:row['money']=row.pop('cost')
+    return sorted(result,key=lambda r:(r['money'],r['species'])),sorted(bp_result,key=lambda r:(r['bp'],r['species']))
 
 
 def build_catalog(root=ROOT):
@@ -517,7 +521,7 @@ def render_catalog(catalog):
         lines.append('  Function dependencies: '+', '.join(r['functions']))
     lines+=['\nGAME CORNER POKEMON COUNTER — exact coin prices and native species receipts',
         'One entitlement per offered species; initial-starter/caught-species eligibility and delivery failure are governed by the linked native provider. Cash-to-Coin purchase rates are the separate clerk transaction.']
-    for row in catalog['game_corner_offers']:lines.append(row['species']+' | '+str(row['coins'])+' Coins | '+row['receipt']+' | '+row['source']+' | '+row['native_table'])
+    for row in catalog['game_corner_offers']:lines.append(row['species']+' | ¥'+str(row['money'])+' | '+row['receipt']+' | '+row['source']+' | '+row['native_table'])
     lines+=['\nCIRCUIT BP RARE POKEMON COUNTER — exact Battle Point prices and native species receipts',
         'Offered at the BattleFrontier_ExchangeServiceCorner Evolution/Rare Pokemon clerk. Shares the same native prize/flag table as the Game Corner counter above; a species appears in exactly one of the two counters.']
     for row in catalog['circuit_bp_pokemon_offers']:lines.append(row['species']+' | '+str(row['bp'])+' BP | '+row['receipt']+' | '+row['source']+' | '+row['native_table'])

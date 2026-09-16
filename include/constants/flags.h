@@ -1553,7 +1553,8 @@
 #define FLAG_EC_RECEIVED_EON_TICKET                     (SYSTEM_FLAGS + 0xB7)
 #define FLAG_EC_SHOAL_ICE_CHARTED                   (SYSTEM_FLAGS + 0xB8) // Emerald Champions: Fen has charted the deep ice for the second haul
 #define FLAG_EC_SHOAL_ICE_SIGHTING                  (SYSTEM_FLAGS + 0xB9) // Emerald Champions: one guaranteed ice-room legendary encounter is owed
-#define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag
+// Set when a Champions Circuit run ends; spent by the Lilycove lottery draw (D7).
+#define FLAG_EC_LOTTERY_TICKET_READY                (SYSTEM_FLAGS + 0xBA)
 #define FLAG_UNUSED_0x91B                           (SYSTEM_FLAGS + 0xBB) // Unused Flag
 #define FLAG_UNUSED_0x91C                           (SYSTEM_FLAGS + 0xBC) // Unused Flag
 #define FLAG_UNUSED_0x91D                           (SYSTEM_FLAGS + 0xBD) // Unused Flag

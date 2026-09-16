@@ -5,15 +5,18 @@ LilycoveCity_DepartmentStore_1F_EventScript_Greeter::
 	msgbox LilycoveCity_DepartmentStore_1F_Text_WelcomeToDeptStore, MSGBOX_NPC
 	end
 
+@ Emerald Champions (D7): one ticket per completed CHAMPIONS CIRCUIT run, not one per
+@ day. ChampionsCircuitEnd sets FLAG_EC_LOTTERY_TICKET_READY; drawing clears it. There
+@ is no dotimebasedevents and no FLAG_DAILY_PICKED_LOTO_TICKET here any more.
+@ Prizes are cosmetics, with a Luxury Ball for a full five-digit match.
 LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	lock
 	faceplayer
-	dotimebasedevents
 	goto_if_ne VAR_POKELOT_PRIZE_ITEM, ITEM_NONE, LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier
-	goto_if_set FLAG_DAILY_PICKED_LOTO_TICKET, LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow
+	goto_if_unset FLAG_EC_LOTTERY_TICKET_READY, LilycoveCity_DepartmentStore_1F_EventScript_NoTicket
 	msgbox LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain
-	setflag FLAG_DAILY_PICKED_LOTO_TICKET
+	clearflag FLAG_EC_LOTTERY_TICKET_READY
 	message LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket
 	waitmessage
 	special RetrieveLotteryNumber
@@ -34,14 +37,11 @@ LilycoveCity_DepartmentStore_1F_EventScript_LotteryClerk::
 	incrementgamestat GAME_STAT_WON_POKEMON_LOTTERY
 	call_if_eq VAR_0x8006, 0, LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon
 	call_if_eq VAR_0x8006, 1, LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon
-	bufferitemname STR_VAR_1, VAR_0x8005
-	call_if_eq VAR_0x8004, 1, LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch
-	call_if_eq VAR_0x8004, 2, LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch
-	call_if_eq VAR_0x8004, 3, LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch
-	call_if_eq VAR_0x8004, 4, LilycoveCity_DepartmentStore_1F_EventScript_FullMatch
-	giveitem VAR_0x8005
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom
-	special TryPutLotteryWinnerReportOnAir
+	switch VAR_0x8004
+	case 1, LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch
+	case 2, LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch
+	case 3, LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch
+	case 4, LilycoveCity_DepartmentStore_1F_EventScript_FullMatch
 	goto LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2
 	end
 
@@ -53,8 +53,8 @@ LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon::
 	msgbox LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow::
-	msgbox LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow, MSGBOX_DEFAULT
+LilycoveCity_DepartmentStore_1F_EventScript_NoTicket::
+	msgbox LilycoveCity_DepartmentStore_1F_Text_ComeBackAfterACircuitRun, MSGBOX_DEFAULT
 	release
 	end
 
@@ -74,24 +74,56 @@ LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2::
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch::
+	bufferdecorationname STR_VAR_1, DECOR_BALL_POSTER
 	msgbox LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched, MSGBOX_DEFAULT
-	return
+	bufferdecorationname STR_VAR_2, DECOR_BALL_POSTER
+	checkdecorspace DECOR_BALL_POSTER
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForDecorPrize
+	adddecoration DECOR_BALL_POSTER
+	goto LilycoveCity_DepartmentStore_1F_EventScript_DecorPrizeSentToPC
+	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch::
+	bufferdecorationname STR_VAR_1, DECOR_GLITTER_MAT
 	msgbox LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched, MSGBOX_DEFAULT
-	return
+	bufferdecorationname STR_VAR_2, DECOR_GLITTER_MAT
+	checkdecorspace DECOR_GLITTER_MAT
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForDecorPrize
+	adddecoration DECOR_GLITTER_MAT
+	goto LilycoveCity_DepartmentStore_1F_EventScript_DecorPrizeSentToPC
+	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch::
+	bufferdecorationname STR_VAR_1, DECOR_LAPRAS_DOLL
 	msgbox LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched, MSGBOX_DEFAULT
-	return
+	bufferdecorationname STR_VAR_2, DECOR_LAPRAS_DOLL
+	checkdecorspace DECOR_LAPRAS_DOLL
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForDecorPrize
+	adddecoration DECOR_LAPRAS_DOLL
+	goto LilycoveCity_DepartmentStore_1F_EventScript_DecorPrizeSentToPC
+	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_FullMatch::
+	bufferitemname STR_VAR_1, ITEM_LUXURY_BALL
 	msgbox LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched, MSGBOX_DEFAULT
-	return
+	giveitem ITEM_LUXURY_BALL
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom
+	goto LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2
+	end
+
+LilycoveCity_DepartmentStore_1F_EventScript_DecorPrizeSentToPC::
+	msgbox LilycoveCity_DepartmentStore_1F_Text_SentToYourPC, MSGBOX_DEFAULT
+	goto LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2
+	end
+
+LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForDecorPrize::
+	call Common_EventScript_NoRoomForDecor
+	release
+	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom::
-	copyvar VAR_POKELOT_PRIZE_PLACE, VAR_0x8004
-	copyvar VAR_POKELOT_PRIZE_ITEM, VAR_0x8005
+	setvar VAR_POKELOT_PRIZE_PLACE, 4
+	setvar VAR_POKELOT_PRIZE_ITEM, ITEM_LUXURY_BALL
 	goto LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
 	end
 
@@ -104,9 +136,6 @@ LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier::
 	msgbox LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding, MSGBOX_DEFAULT
 	giveitem VAR_POKELOT_PRIZE_ITEM
 	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
-	copyvar VAR_0x8004, VAR_POKELOT_PRIZE_PLACE
-	copyvar VAR_0x8005, VAR_POKELOT_PRIZE_ITEM
-	special TryPutLotteryWinnerReportOnAir
 	setvar VAR_POKELOT_PRIZE_ITEM, ITEM_NONE
 	setvar VAR_POKELOT_PRIZE_PLACE, 0
 	release

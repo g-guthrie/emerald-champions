@@ -694,6 +694,17 @@ Route111_EventScript_TrainerHillSign::
 	msgbox Route111_Text_TrainerHillSign, MSGBOX_SIGN
 	end
 
+@ Emerald Champions (C5): attach this to the Trainer Hill door once the warp at
+@ Route111 (31, 113) is replaced with a sign bg event.
+Route111_EventScript_TrainerHillSealedDoor::
+	msgbox Route111_Text_TrainerHillSealedDoor, MSGBOX_SIGN
+	end
+
+Route111_Text_TrainerHillSealedDoor:
+	.string "The Hill closed when the Circuit\n"
+	.string "opened; the Frontier ferry sails\l"
+	.string "from Lilycove.$"
+
 Route111_Text_BattleOurFamily:
 	.string "Hello, traveler! How about four\n"
 	.string "family battles back-to-back?\p"
@@ -845,9 +856,9 @@ Route111_Text_MauvilleUncleToldMeToTakeRockSmash:
 	.string "the bike shop in MAUVILLE.$"
 
 Route111_Text_TrainerHillSign:
-	.string "{RIGHT_ARROW} TRAINER HILL ENTRANCE\p"
-	.string "“Scale the heights, you hot-blooded\n"
-	.string "TRAINERS!”$"
+	.string "{RIGHT_ARROW} TRAINER HILL\p"
+	.string "Closed. The CHAMPIONS CIRCUIT took\n"
+	.string "its trainers years ago.$"
 
 @ Emerald Champions: everything north of this point (Route 111 west lane, Route 112,
 @ Fiery Path, Routes 113-114, Meteor Falls, Mt. Chimney, Lavaridge) is authored at

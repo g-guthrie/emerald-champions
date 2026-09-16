@@ -1334,8 +1334,11 @@ enum PlayerSpeed GetPlayerSpeed(void)
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         return machSpeeds[gPlayerAvatar.bikeFrameCounter];
+    // Emerald Champions (C10): there is one Bicycle. It is the Acro frame, so it keeps
+    // the rails, wheelies and hops, and it rides at the Mach bike's top speed so that
+    // ForcedMovement_MuddySlope lets it climb sandy and muddy slopes instead of sliding.
     else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
-        return PLAYER_SPEED_FASTER;
+        return PLAYER_SPEED_FASTEST;
     else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))
         return PLAYER_SPEED_FAST;
     else
