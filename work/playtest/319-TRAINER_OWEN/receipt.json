@@ -1,0 +1,35 @@
+{
+  "play_order": 319, "e_group": "E0488", "trainer": "TRAINER_OWEN", "class": "ace", "location": "VictoryRoad_B2F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Lucario offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/319-TRAINER_OWEN/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Staraptor Intimidate + Scarf picks a target; Final Gambit trade", "Torterra attacks", "Sylveon Pixilate Hyper Voice / Throat Spray, Helping Hand when spread would not kill", "Toxtricity Punk Rock Overdrive", "Mega Lucario Z closer", "Lilligant-H Victory Dance"],
+  "attempts": [
+    {"n": 1, "seed": 9, "run_dir": "a1", "party": "party_vr96_b.json led by Chi-Yu + Landorus", "outcome": "won", "turns": 8, "player_faints": 1, "opponent_faints": 6,
+     "why": "Turn 1 Intimidate on entry; Scarf Staraptor Close Combat put Chi-Yu on its Sash; Torterra Protected; Rock Slide OHKO'd Staraptor. Turn 2 Wood Hammer hit the incoming Kangaskhan for 325 (13 left); Sylveon and Landorus both Protected. Turn 3 Mega Fake Out flinched Torterra, Sludge Bomb took Sylveon to 50 (it had chosen Helping Hand). Turn 4 Torterra Protected the lethal Sludge Bomb; Double-Edge KO'd Sylveon and its recoil KO'd Kangaskhan (the one faint). Turn 5 Mega Lucario Z Close Combat hit Urshifu for 178, Earth Power OHKO'd it, Surging Strikes KO'd Torterra. Turns 6-8 Toxtricity and Lilligant Protected once each; Earth Power 4x OHKO'd Toxtricity, Flare Blitz + Sludge Bomb KO'd Lilligant."}
+  ],
+  "strategy_checks": [
+    {"check": "Staraptor Scarf/Intimidate opener", "result": "PASS (Intimidate, Close Combat), FAIL (Final Gambit never chosen)", "evidence": "turn 0 atk-1 on both player actives; turn 1 Close Combat into Chi-Yu (241, Sash); OHKO'd by Rock Slide"},
+    {"check": "Torterra threat", "result": "PASS", "evidence": "turn 2 Wood Hammer 325 on Kangaskhan; two good Protects"},
+    {"check": "Sylveon Hyper Voice / Throat Spray / Helping Hand", "result": "PARTIAL", "evidence": "Helping Hand chosen turn 3 (partner flinched), Hyper Voice chosen turn 4 but it died first; Throat Spray never fired"},
+    {"check": "Toxtricity Overdrive", "result": "PASS", "evidence": "turn 7 Overdrive (47 on Incineroar, Landorus immune) after a good Protect turn 6"},
+    {"check": "Mega Lucario Z", "result": "PASS (Mega + Close Combat), then OHKO'd", "evidence": "turn 5 Mega Evolved, Close Combat 178 on Urshifu, Earth Power 4x KO"},
+    {"check": "Lilligant Victory Dance", "result": "FAIL (not chosen)", "evidence": "Leaf Blade into Protect, Protect, then died; Chlorophyll irrelevant as authored"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Torterra", "payoff": "blocked Heat Wave (2x) + Rock Slide - good"},
+    {"turn": 2, "user": "Sylveon", "payoff": "empty - nothing was aimed at it (Landorus Protected, Chi-Yu switched)"},
+    {"turn": 4, "user": "Torterra", "payoff": "blocked a lethal Sludge Bomb - good; partner Sylveon died anyway"},
+    {"turn": 6, "user": "Toxtricity", "payoff": "blocked a 4x lethal Earth Power - good"},
+    {"turn": 8, "user": "Lilligant", "payoff": "blocked Fake Out + Sludge Bomb - good, delay only"}
+  ],
+  "protect_summary": "5 Protects: 4 good, 1 empty.",
+  "ai_defects": [],
+  "ai_notes": "Staraptor never considered Final Gambit from full HP into the Sash Chi-Yu (Close Combat was the higher expected value, fair). Sylveon's Helping Hand on a partner about to be Fake Out flinched is a known weakness (it cannot see the Fake Out). No illegal choices.",
+  "level_changes": [],
+  "level_change_rationale": "Won first try with one faint but under real threat: Chi-Yu left at 1 HP turn 1, Mega Kangaskhan at 13 HP turn 2 to a single Wood Hammer, Urshifu to 150 from one Close Combat. Keep.",
+  "cooler": "Threat density works: three different bodies each nearly removed a player Pokemon in one hit. The two pieces that never showed were Final Gambit and Victory Dance; both are AI-choice questions, not set questions. No change suggested.",
+  "legality_notes": "Sets legal.",
+  "verification_limit": "No level change."
+}
