@@ -1,0 +1,27 @@
+{
+  "play_order": 297, "e_group": "E0463", "trainer": "TRAINER_BRIDGET", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/297-TRAINER_BRIDGET/party_reef_84.json",
+  "availability_note": "Sootopolis after the cavern and Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League. Torkoal 42 (Fiery Path), Kartana 20, Rillaboom 36, Raging Bolt 60 (Route 119), Flutter Mane 68, Incineroar 36. No legends; no Sootopolis, Cave of Origin, Underwater or Seafloor species.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/297-TRAINER_BRIDGET/a1", "seed": 1, "outcome": "won", "turns": 7, "decisions": 9, "player_faints": 3, "opponent_faints": 6, "note": "Torkoal's Drought replaced Drizzle at turn 0 and held all fight. T1 Leaf Blade OHKOed Omastar (it chose Hydro Pump, not Shell Smash); Pelipper set Tailwind. T2 Torkoal Protect ate Stone Edge + Hurricane while Smart Strike OHKOed Armaldo. T3 Torkoal pivoted to Incineroar, whose Intimidate did not stop Drednaw's Band Stone Edge from OHKOing it (332); a crit Leaf Blade took Drednaw, Hurricane broke Kartana's Sash. T4 Aqua Jet + Hurricane into Kartana's Protect, crit Thunderbolt took Pelipper, Tailwind ended. T5 Kabutops Aqua Jet took the 1-HP Kartana, Thunderbolt took Kabutops, Mega Swampert's High Horsepower OHKOed Raging Bolt (344). T6 Mega Swampert Protect; T7 Grassy Glide (4x) ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Drizzle live on entry so Omastar is already fast", "result": "PASS (Drizzle) / DENIED (crack)", "evidence": "Drizzle fired at send-out but Torkoal is slower, so Drought resolved last and sun stood for the whole battle; no Swift Swim body ever doubled. This is exactly the dossier's crack line."},
+    {"check": "Pelipper opens with Tailwind / U-turn / Muddy Water", "result": "PASS", "evidence": "T1 Tailwind (up T1-T4), then Hurricane T2-T4 (one into Protect, one broke Kartana's Sash, one into Protect). Under sun it never chose Muddy Water, which is correct."},
+    {"check": "Omastar attacks or Shell Smashes behind White Herb", "result": "PASS (attack branch)", "evidence": "T1 chose Hydro Pump into Torkoal (2x, sun-halved) rather than Smash with a Grass/Steel attacker across; OHKOed by Leaf Blade first."},
+    {"check": "Mega Swampert's post-Mega Swift Swim physical rain mode", "result": "PASS (Mega) / no rain", "evidence": "T5 Mega Evolved on entry and High Horsepower OHKOed Raging Bolt (344) without any speed; T6 Protect blocked Glide + Moonblast; T7 died to the priority 4x Glide. Swift Swim never mattered under sun."},
+    {"check": "Armaldo Swift Swim surprise", "result": "NOT REACHED", "evidence": "Under sun it was ordinary-speed; Stone Edge into Torkoal's Protect T2, OHKOed by 2x Smart Strike."},
+    {"check": "Drednaw Strong Jaw Crunch/Liquidation; Kabutops Aqua Jet when rain is gone", "result": "PARTIAL / PASS", "evidence": "Drednaw chose Band Stone Edge (not a jaw move) and OHKOed Incineroar at -1 - the right click, not the authored one. Kabutops used Aqua Jet twice (into Protect, then KO on the 1-HP Kartana): the no-rain fallback as written."}
+  ],
+  "protect_ledger": [
+    {"turn": 6, "user": "Mega Swampert (last member)", "payoff": "REAL - blocked a lethal 4x Grassy Glide and Moonblast; no partner to convert, bought one turn."}
+  ],
+  "ai_defects": [],
+  "authored_set_legality": "No problem found. Levels L84 x5, Swampert L85.",
+  "theme_note": "Yes, even in defeat of its engine: the fossil reef announced itself with Drizzle, I took the weather away as the crack line says, and the room still cost three bodies through raw Band/Mega physical power and a Tailwind it set in sun. The Swift Swim surprise itself never showed because the counter-weather was on turn 0.",
+  "level_changes": [],
+  "level_changes_unverified": "No changes (won with 3 faints after a real fight).",
+  "cooler": "Already good. If anything, Drednaw's Choice Band Stone Edge is the room's real killer and Strong Jaw never mattered - a Jaw-boosted Crunch/Liquidation set would be truer to the prose, but the Stone Edge OHKO on a -1 Incineroar is the more memorable moment. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun without Torkoal to see the room under its own rain at least once."
+}
