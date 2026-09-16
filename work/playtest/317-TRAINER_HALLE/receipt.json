@@ -1,0 +1,36 @@
+{
+  "play_order": 317, "e_group": "E0486", "trainer": "TRAINER_HALLE", "class": "ace", "location": "VictoryRoad_B1F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Falinks offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/317-TRAINER_HALLE/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Pachirisu Follow Me redirects single-target attacks off Pinsir; Nuzzle paralysis", "Pinsir Mold Breaker attacks", "Naganadel Nasty Plot / Beast Boost after a KO", "Zarude Knock Off / Close Combat", "Lickilicky Cloud Nine and Normal Gem Body Slam", "Mega Falinks No Retreat then sweep"],
+  "attempts": [
+    {"n": 1, "seed": 7, "run_dir": "a1", "party": "party_vr96_b.json led by Chi-Yu + Landorus", "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 6,
+     "why": "Turn 1 Pinsir Protected and Pachirisu Follow Me'd; spread Heat Wave + Rock Slide ignored the redirect and took Pachirisu to 125. Turn 2 the AI switched Pinsir out for Falinks, which was OHKO'd (un-Mega'd, never acted) by the same two spreads alongside Pachirisu. Turn 3 Pinsir Protected again while Lickilicky Stomping Tantrum took Chi-Yu to 62. Turn 4 Lickilicky Protected; Heat Wave OHKO'd Pinsir. Turn 5 Naganadel Draco Meteor OHKO'd Landorus (307 exactly) behind Chi-Yu's Protect; Beast Boost +1 Speed. Turn 6 Mega Kangaskhan Fake Out flinched Naganadel, Overheat KO'd Lickilicky. Turn 7 Sludge Bomb + Close Combat took the incoming Urshifu to 39 and poisoned it; Double-Edge KO'd Naganadel. Turn 8 Zarude Knock Off KO'd Urshifu, Double-Edge KO'd Zarude. Faints: Landorus, Urshifu."}
+  ],
+  "strategy_checks": [
+    {"check": "Follow Me redirection", "result": "PASS", "evidence": "turn 1 and 2 Follow Me; spread attacks went through it as the crack line says"},
+    {"check": "Nuzzle paralysis", "result": "FAIL (not chosen)", "evidence": "Pachirisu used Follow Me both turns and died"},
+    {"check": "Pinsir Mold Breaker offense", "result": "FAIL", "evidence": "Pinsir's four turns on the field: Protect, switch out, Protect, X-Scissor chosen but KO'd first; it never landed a hit"},
+    {"check": "Naganadel Beast Boost", "result": "PASS", "evidence": "turn 5 Draco Meteor OHKO on Landorus, 'Speed rose!'; Nasty Plot never chosen (a KO was available every turn, fair)"},
+    {"check": "Zarude Knock Off / Close Combat", "result": "PASS", "evidence": "turn 7 Close Combat 289-class hit, turn 8 Knock Off KO"},
+    {"check": "Lickilicky Cloud Nine / Normal Gem", "result": "PARTIAL", "evidence": "Cloud Nine announced on entry; Body Slam chosen turn 5 into Protect and the Gem never fired; Stomping Tantrum did 180 to Chi-Yu"},
+    {"check": "Mega Falinks No Retreat", "result": "FAIL", "evidence": "Falinks was switched in on turn 2 into a double spread and fainted without Mega Evolving or acting"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Pinsir", "payoff": "blocked Heat Wave + Rock Slide (both super effective, lethal) - good"},
+    {"turn": 3, "user": "Pinsir", "payoff": "blocked the same lethal pair again - good; partner Lickilicky hit Chi-Yu for 180"},
+    {"turn": 4, "user": "Lickilicky", "payoff": "blocked Earth Power + Heat Wave (~500) - good, but Pinsir died beside it"}
+  ],
+  "protect_summary": "3 Protects, all good; the problem is what happened between them.",
+  "ai_defects": [
+    {"turn": 2, "board": "Pinsir 258/258 (just Protected) + Pachirisu 125/308 vs Chi-Yu 242/242 + Landorus 307/307, both spreading", "chosen": "Pinsir switched out to Falinks (the Mega closer, slot 6)", "better": "Attack (X-Scissor/Close Combat into Chi-Yu, or Rock Slide) or Protect again. The switch put the L96 Mega ace into two super-effective/neutral spreads at 4 HP EVs; it fainted without Mega Evolving or using No Retreat. Pinsir then came back in anyway. The ace was thrown away by a switch with no defensive purpose (Falinks resists neither Fire nor Rock)."}
+  ],
+  "ai_notes": "Follow Me every turn while spread moves were being used was the authored behaviour, not a defect, but the AI did not adapt to spread (Nuzzle on Chi-Yu would have been better on turn 2). Naganadel's Draco Meteor target choice (Landorus over the Protecting Chi-Yu) was right.",
+  "level_changes": [],
+  "level_change_rationale": "Won first try but after a real fight with 2 faints (Draco Meteor and a Knock Off KO). Keep. The result was flattered by the AI throwing away Mega Falinks; the fix is the switch logic, not levels.",
+  "cooler": "The redirection door works as written against single-target play and is punished by spread exactly as the crack says. The memorable piece never appeared: Mega Falinks needs to reach the field late and alive. Consider whether the AI's mid-battle switch should ever bring the last-slot Mega in before slot 5 is gone; that is an AI policy question for the main agent, not a set change.",
+  "legality_notes": "Sets legal.",
+  "verification_limit": "No level change."
+}
