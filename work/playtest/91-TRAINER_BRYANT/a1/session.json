@@ -1,0 +1,31 @@
+{
+  "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "elf_sha256": "ae6ed685cf22c9aeaf141efed91e22b46d284efbe3e3300c07c87c981be29938",
+  "seed": 91,
+  "trainer_a": "TRAINER_BRYANT",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 36,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/91-TRAINER_BRYANT/party.json",
+  "party_sha256": "90b87e080e7a580efb08742d5baa8611d1cd6b0d0f0d24d0cdaa316d41e423af",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY"
+  ],
+  "prepared": {
+    "encounter": "P8 play_order 91 TRAINER_BRYANT (Route 112), cap window 36",
+    "party": 6
+  },
+  "started": {
+    "frames": 1920
+  },
+  "replacement_commits": {
+    "turn": 3,
+    "slots": {}
+  }
+}

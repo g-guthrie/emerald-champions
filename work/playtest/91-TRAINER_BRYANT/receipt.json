@@ -1,0 +1,50 @@
+{
+  "play_order": 91,
+  "e_group": "E0109",
+  "trainer": "TRAINER_BRYANT",
+  "class": "regular",
+  "location": "Route112",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"TYPHLOSION": 34, "ARCANINE_HISUI": 35, "HEATMOR": 36, "MAGCARGO": 36},
+  "cap_window_confirmation": "Offsets 0/1/2/2 resolved to 34/35/36/36 against a level-36 party: cap 36 on Medium, matching the dossier seed line.",
+  "party_manifest": "work/playtest/91-TRAINER_BRYANT/party.json",
+  "party_pool_audit": "Block core led by Gyarados + Incineroar. All six gate <= 36 with source maps passed before Route 112.",
+  "pre_declared_strategy_checks": [
+    "Choice Scarf Typhlosion uses Eruption only when its action-time HP makes it worthwhile",
+    "Hisuian Arcanine supplies Intimidate and either Helping Hand support or physical damage",
+    "Heatmor's Fire Lash supports a physical lane",
+    "Magcargo supplies Yawn, Power Gem and Earth Power with reactive Weak Armor",
+    "The Passho Berry reduces exactly one qualifying Water hit and does not promise survival",
+    "There is no automatic sun in this battle - it is a separate fight from Shayla",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/91-TRAINER_BRYANT/a1", "seed": 91, "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "Arcanine's own Intimidate answered Gyarados's on entry. T1 I used Fake Out on Typhlosion specifically to deny a full-HP Eruption - 150 base power spread from a Choice Scarf user is the single most dangerous action on this team - and Mega Gyarados's Waterfall then killed it outright; Arcanine's Rock Slide hit both of mine for 2x on Incineroar. T2 was the turn that cost me: Waterfall is 4x into Fire/Rock but the Passho Berry cut it to a 110 and left Arcanine alive on 12, and Heatmor's Superpower plus a second Rock Slide killed Incineroar. T3 Excadrill came in and High Horsepower killed Heatmor at 2x, but Arcanine, on 12 HP, chose Flare Blitz for 133 into a Steel type and took Excadrill to 3 before dying to its own recoil. T4 Magcargo arrived behind an Air Balloon and a 4x Waterfall popped the Balloon and killed it in the same action while I pivoted Excadrill to safety."}
+  ],
+  "strategy_checks": [
+    {"check": "Scarf Typhlosion uses Eruption only when its action-time HP makes it worthwhile", "result": "PASS on the decision", "evidence": "Typhlosion selected Eruption at 107 of 107 HP on turn 1, which is the exact condition the plan describes - Eruption is 150 BP at full and decays with HP, so a Scarf user's first turn is the one turn it is worth locking into. Incineroar's Fake Out flinched it before it resolved. The choice was correct even though it never landed; this is the reason I opened with Fake Out rather than with damage."},
+    {"check": "Hisuian Arcanine supplies Intimidate and physical damage or Helping Hand", "result": "PASS, and it was the fight's best performer", "evidence": "Intimidate fired on entry and cancelled my own. It then used Rock Slide twice, which is spread and 2x into Incineroar, and those two Rock Slides plus Heatmor's Superpower are what killed my Incineroar. Finally, on 12 HP, it chose Flare Blitz into Excadrill for 133 - 2x into Steel, three points short of a KO - and died to the recoil. Helping Hand was never used, correctly: it was never behind, and a 122 HP Fire/Rock at level 35 that trades itself for most of a 136 HP Steel type has done its job."},
+    {"check": "Heatmor's Fire Lash supports a physical lane", "result": "PASS on both of its turns", "evidence": "Heatmor came in against a Fire/Dark and chose Superpower, which is 2x into Dark and got the KO on Incineroar - correct, Fire Lash would have been 0.5x into a Fire type. The following turn, against a Steel/Ground, it chose Fire Lash, which is 2x into Steel and drops Defense. Two turns, two correct type reads, two different moves."},
+    {"check": "Magcargo supplies Yawn, Power Gem and Earth Power with Weak Armor", "result": "NOT OBSERVED", "evidence": "Magcargo arrived as the last Pokemon and was KO'd by a 4x Waterfall before selecting an action. The Air Balloon did announce and then pop to that Waterfall, which is the correct interaction - it blocks Ground, not everything."},
+    {"check": "The Passho Berry reduces exactly one qualifying Water hit", "result": "PASS, and it changed the result", "evidence": "T2: 'The opposing Arcanine's Passho Berry lessened the damage.' A 4x Waterfall from a 252-Attack Mega left it on 12 instead of killing it, and that survival bought the turn on which it did 133 damage to my Excadrill. This is the clearest case in my block of a single berry being worth a Pokemon."},
+    {"check": "No automatic sun", "result": "PASS", "evidence": "Weather was ['none'] on every turn of the battle. The dossier is explicit that this is a separate fight from Shayla with no free sun, and that is what the driver reports. Harvest, Chlorophyll and sun-boosted Eruption all correctly did not exist."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opposing Protect occurred. Only Magcargo carries it and it never got a turn. Nothing to assess.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Every opponent action in this fight was correct, including two that look wasteful on the surface. Eruption into a Fake Out is still the right selection at full HP. Flare Blitz at 12 HP with recoil is still right when the alternative, Extreme Speed, does perhaps a third of the damage and the Pokemon dies to the incoming Waterfall either way - it converted a dead Pokemon into 133 damage.",
+    "Heatmor changing from Superpower into a Fire/Dark to Fire Lash into a Steel/Ground on consecutive turns is a genuine per-target evaluation, not a favourite move.",
+    "The team's real problem is the one its own crack line names: Water is 2x into Typhlosion and Heatmor and 4x into Arcanine and Magcargo, so a single Mega Gyarados threatens the whole roster. The Passho Berry is a direct and well-judged answer to exactly that, and it worked - it is the reason this fight cost me a Pokemon while Brice's structurally identical mono-weakness cost me nothing."
+  ],
+  "level_changes": [
+    {"member": "TYPHLOSION", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "Brief rule 5 / AGENTS review threshold: first-attempt win with one player faint. Typhlosion is the lowest member at offset 0. I note that this fight was closer than a 4-1 suggests - Excadrill finished on 3 HP and a second faint was one damage roll away - so I am applying the single permitted bump rather than two, and only to the lowest member."}
+  ],
+  "rerun_status": "NOT RERUN. Opponent levels are compiled into the headless ROM from src/data/trainers.party and this agent may not run make. Pending the main agent's materialization and rebuild.",
+  "could_this_be_cooler": "The dossier says to keep the developed Fire specialist and I agree; of the two mono-typed teams in this block this is much the better one, because it actually plans for its own weakness. Hisuian Arcanine with a Passho Berry is the whole argument - a Fire/Rock that is 4x weak to Water, holding the berry that turns one Water hit into a survivable one, and then cashing that extra turn in for 133 damage. That is a build that thinks. The place I would spend effort is Magcargo: Yawn, Power Gem, Earth Power and Weak Armor is four different ideas on a Pokemon that is 4x weak to both Water and Ground and will usually die on arrival, as it did here. A second Passho-style insurance item, or simply moving Magcargo ahead of Heatmor so it gets a turn while its partner is still alive, would do more for this team than any level. I would not touch Typhlosion, Arcanine or Heatmor - Eruption, Intimidate and a Tough Claws Fire Lash are three distinct Fire identities in one team, which is exactly what a specialist should look like.",
+  "legality_problems_in_authored_set": [],
+  "driver_note": "When Heatmor (right-hand opponent, battler 1) and Arcanine (battler 3) both fainted and Magcargo was sent out, Magcargo took battler slot 1, not the slot 3 its predecessor had occupied. An act targeting @3 was correctly refused with 'cannot target 3; legal=[0, 1, 2]'. Worth knowing: never assume a replacement inherits the slot of the Pokemon that just fainted - re-read state after every opponent replacement.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
