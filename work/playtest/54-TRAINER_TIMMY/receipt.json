@@ -1,0 +1,51 @@
+{
+  "play_order": 54,
+  "e_group": "E0058",
+  "trainer": "TRAINER_TIMMY",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"STUNKY": 31, "HELIOLISK": 28, "HERDIER": 31, "DITTO": 28},
+  "cap_window_confirmation": "Dossier seeds 33/30/33/30 resolved to 31/28/31/28. Cap 30, Medium -2.",
+  "party_manifest": "work/playtest/54-TRAINER_TIMMY/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Nidoking + Magearna. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Stunky's Taunt or Helping Hand enables Heliolisk's immediate damage",
+    "Heliolisk uses Volt Switch only when it buys a worthwhile entry",
+    "Herdier supplies Intimidate mitigation and Double-Edge",
+    "Ditto is a matchup-dependent revenge entry, not an automatic opener",
+    "Dry Skin does not invent rain",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/54-TRAINER_TIMMY/a1", "seed": 54, "outcome": "won", "turns": 5, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 was the dangerous one: Stunky's Sucker Punch caught Nidoking for 86 of its 98 HP, and Heliolisk's spread Hyper Voice added the rest of the chip, while my Earth Power (2x) KO'd Heliolisk from full and Aura Sphere (2x) took Stunky to 23. Ditto came in and Imposter-copied my Nidoking, Choice Scarf and all. T2 I pulled the 12 HP Nidoking for Togekiss - Flying, so Ditto's copied Earth Power was a 0x - and Stunky's second Sucker Punch failed into the switch while Aura Sphere finished it. T3 Herdier entered, Intimidated, and Protected away both my attacks; Ditto's Earth Power hit Magearna for 2x, 62. T4 Togekiss' Follow Me pulled the Choice-locked Earth Power onto its own immunity and Aura Sphere KO'd Herdier from full 110. T5 the same Follow Me blanked Ditto again and a +3 Flash Cannon (2x on the copied Poison typing) ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Stunky's Taunt or Helping Hand enables Heliolisk's damage", "result": "FAIL", "evidence": "Stunky had two turns and used Sucker Punch on both. Neither Taunt nor Helping Hand was ever selected, so the support half of the authored plan did not occur. In fairness the first Sucker Punch was the best turn Timmy had all battle - 86 damage onto a 98 HP Life Orb attacker - and Helping Hand would have been worth less, because Heliolisk's own Hyper Voice was resisted by one target and its Thunderbolt was a 0 into the other."},
+    {"check": "Heliolisk uses Volt Switch only when it buys a worthwhile entry", "result": "CORRECTLY_NOT_USED", "evidence": "Volt Switch was never selected. Against a Ground-type lead it is a 0-damage move that also gives up the slot, so declining it was right. It chose spread Hyper Voice instead, which was the only move on its sheet that touched both of my leads."},
+    {"check": "Dry Skin does not invent rain", "result": "PASS", "evidence": "Weather stayed 'none' for the whole battle. No rain was created and none was assumed."},
+    {"check": "Herdier supplies Intimidate mitigation and Double-Edge", "result": "PARTIAL", "evidence": "Intimidate fired on entry and dropped both of my actives' Attack - worth nothing, because both were special attackers, which is a matchup outcome rather than a decision. It selected Double-Edge on T4 but was KO'd by Aura Sphere before it resolved, so the attack half is unverified."},
+    {"check": "Ditto is a matchup-dependent revenge entry", "result": "PASS, with a structural caveat", "evidence": "It entered as Heliolisk's replacement and copied Nidoking - comfortably the strongest thing on my side of the field at that moment, and with the Choice Scarf on top it out-sped everything I had. That is the correct read. The caveat is in the design note below: the Scarf lock turned the copy into a liability within one turn."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "HERDIER", "payoff": "REAL: blocked a Serene Grace Air Slash and a +2 Aura Sphere, which is 2x on a Normal-type and killed it outright from full 110 HP one turn later. Maximum denial, correct turn, not repeated."}
+  ],
+  "protect_ledger_note": "One opponent Protect, maximal payoff, no repetition. Clean.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No defects. Notably, Ditto using a Choice-locked Earth Power into a Ground-immune Togekiss on T4 and T5 looks like a defect and is not one: by T4 both of Timmy's remaining slots were on the field, so there was no legal switch, and the Choice lock left exactly one legal move. The AI had no alternative to give.",
+    "Stunky's second Sucker Punch failed because I switched. That is the third failed Sucker Punch in this block (compare Mawile in play_order 50). Unlike Mawile's, this one was a defensible gamble: it was aimed at a 12 HP Nidoking that had attacked the previous turn and was the likeliest thing on the board to attack again.",
+    "Heliolisk choosing spread Hyper Voice over single-target Grass Knot deserves a note in its favour. Grass Knot would have been 2x on a heavy Ground/Poison Nidoking, but Hyper Voice touched both slots and Thunderbolt was a literal 0 into the lead. Picking the move that is never blanked was the right shape of decision even though it was resisted by one target."
+  ],
+  "level_changes": [
+    {"member": "HELIOLISK", "field": "level offset", "before": 0, "after": 1, "reason": "First-attempt win with zero player faints. Heliolisk is tied-lowest at L28 and it is the team's damage - the whole authored plan is 'Stunky enables Heliolisk'. It died from full 81 HP to a single Earth Power before it could take a second action, which means the plan can never start. Stunky and Herdier are both already at offset 3 and Stunky in particular earned its level."},
+    {"member": "DITTO", "field": "level offset", "before": 0, "after": 1, "reason": "The other tied-lowest member at L28. Ditto's level is not cosmetic: Imposter copies the target's stats but keeps Ditto's own HP, so its level is the only thing deciding how long the copy survives. At L28 it had 91 HP as a copied Nidoking. One level is the cheapest way to make the gimmick last a turn longer."}
+  ],
+  "post_change_rerun": "NOT RUN - requires a headless ROM rebuild of the shared work/agent-battle-build; see the play_order 49 receipt.",
+  "calibration": "Zero faints in five turns, though Nidoking finished on 12 HP and Magearna on 41, so this was closer than the faint count suggests - Stunky's opening Sucker Punch was a genuine hit. Both the brief rule and the AGENTS threshold still trigger +1 on the weakest one or two.",
+  "could_this_be_cooler": "Keep the roadside-opportunist concept; it is a good use of a low-stakes trainer and Imposter is a real surprise the first time it lands. But Choice Scarf on Ditto is actively working against the idea and I would recommend changing it. Imposter copies the target's whole moveset, which is Ditto's one advantage - it always has perfect coverage against the thing it copied's teammates. The Scarf throws that away: Ditto is locked into the first move it picks, and because it copies the Pokemon standing opposite it, the locked move is very often one the player can simply immunity out of. That is exactly what happened here - it copied my Ground-type, locked into Earth Power, and I answered with a Flying-type and it never touched anything again. A Focus Sash or an Assault Vest would let the copy actually use the four moves it stole, and the speed tie that Imposter already gives it (it copies the target's Speed stat) makes the Scarf much less necessary than it looks. Separately, Stunky is the best member on the team and its authored job is to support a partner that dies first; leading Stunky + Herdier and holding Heliolisk for after the Intimidate has landed would give the plan a chance to exist. Neither change is a level, so nothing beyond the two offsets was touched.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
