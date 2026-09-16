@@ -1,77 +1,30 @@
+@ Emerald Champions: the twelve duplicate boards are collapsed to one Circuit record
+@ board (TowerDoublesRecords) and one Mega register plaque (DomePikeFactoryRecordsSign).
+@ The ten remaining sign objects read the plaque until they are removed from map.json.
 BattleFrontier_RankingHall_MapScripts::
 	.byte 0
-
-BattleFrontier_RankingHall_EventScript_TowerSinglesRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
 
 BattleFrontier_RankingHall_EventScript_TowerDoublesRecords::
 	special ChampionsCircuitBufferRecord
 	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
+BattleFrontier_RankingHall_EventScript_TowerSinglesRecords::
 BattleFrontier_RankingHall_EventScript_TowerMultisRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
 BattleFrontier_RankingHall_EventScript_TowerLinkRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
 BattleFrontier_RankingHall_EventScript_ArenaRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
 BattleFrontier_RankingHall_EventScript_PalaceRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
 BattleFrontier_RankingHall_EventScript_FactoryRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
 BattleFrontier_RankingHall_EventScript_DomeRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
 BattleFrontier_RankingHall_EventScript_PikeRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
 BattleFrontier_RankingHall_EventScript_PyramidRecords::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
-BattleFrontier_RankingHall_EventScript_ShowRecords::
-	special ShowRankingHallRecordsWindow
-	waitbuttonpress
-	special ScrollRankingHallRecordsWindow
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn::
+BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign::
+	msgbox BattleFrontier_RankingHall_Text_MegaRegisterPlaque, MSGBOX_SIGN
 	end
 
 BattleFrontier_RankingHall_EventScript_Attendant::
 	msgbox BattleFrontier_RankingHall_Text_ExplainRankingHall, MSGBOX_NPC
-	end
-
-BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
-	end
-
-BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_RankingHall_EventScript_NinjaBoy::
@@ -93,17 +46,16 @@ BattleFrontier_RankingHall_EventScript_Boy::
 	end
 
 BattleFrontier_RankingHall_Text_ExplainRankingHall:
-	.string "This hall celebrates the\n"
-	.string "Frontier's competitive history.\p"
-	.string "Today's boards show CHAMPIONS\n"
-	.string "CIRCUIT results: the current run,\l"
-	.string "best recorded run, and total wins.$"
-BattleFrontier_RankingHall_Text_DomePikeFactoryRecords:
-	.string "CHAMPIONS CIRCUIT RECORDS Current\n"
-	.string "run, best recorded, total wins$"
-BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords:
-	.string "CHAMPIONS CIRCUIT RECORDS Current\n"
-	.string "run, best recorded, total wins$"
+	.string "One board now, and one plaque.\p"
+	.string "The board shows your CIRCUIT run,\n"
+	.string "your best and your total wins.$"
+
+BattleFrontier_RankingHall_Text_MegaRegisterPlaque:
+	.string "MEGA REGISTER\p"
+	.string "Ninety-nine stones are recorded in\n"
+	.string "HOENN. A RING wakes them; a partner\l"
+	.string "that trusts you does the rest.$"
+
 BattleFrontier_RankingHall_Text_IsYourNameOnThisList:
 	.string "Have you set a Circuit record\n"
 	.string "you're proud of?$"
@@ -118,8 +70,7 @@ BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName:
 	.string "next time.$"
 
 BattleFrontier_RankingHall_Text_MyNamesNotUpThere:
-	.string "I keep checking my records, but I\n"
-	.string "haven't entered a challenge yet.\p"
+	.string "I keep checking the board, but I\n"
+	.string "haven't entered a run yet.\p"
 	.string "Funny how the numbers haven't\n"
 	.string "moved…$"
-

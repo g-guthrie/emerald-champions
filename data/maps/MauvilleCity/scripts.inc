@@ -657,8 +657,8 @@ MauvilleCity_Text_BikeShopSign:
 	.string "RYDEL'S CYCLES$"
 
 MauvilleCity_Text_GameCornerSign:
-	.string "“The play spot for all!”\n"
-	.string "MAUVILLE GAME CORNER$"
+	.string "“Every region's first partner!”\n"
+	.string "MAUVILLE STARTER ARCHIVE$"
 
 MauvilleCity_Text_ExplainTV:
 	.string "Hi, do you check out TV at all?\p"

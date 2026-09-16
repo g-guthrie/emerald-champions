@@ -361,6 +361,10 @@ RETIRED_ITEMS = {
     "ITEM_X_ATTACK", "ITEM_X_DEFENSE", "ITEM_X_SP_ATK", "ITEM_X_SP_DEF",
     "ITEM_X_SPEED", "ITEM_X_ACCURACY", "ITEM_X_SPECIAL",
     "ITEM_GUARD_SPEC", "ITEM_DIRE_HIT",
+    # C3: gambling is gone, so nothing may hand out a Coin Case again.
+    "ITEM_COIN_CASE",
+    # C10: one Bicycle. ITEM_ACRO_BIKE is it; the Mach Bike has no producer.
+    "ITEM_MACH_BIKE",
 }
 
 

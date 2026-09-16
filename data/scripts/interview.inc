@@ -233,79 +233,18 @@ LilycoveCity_ContestLobby_EventScript_ShowContestReporter::
 LilycoveCity_ContestLobby_EventScript_DontShowContestReporter::
 	return
 
+@ Emerald Champions: the Bravo Trainer reporter is retired with the vanilla Battle
+@ Tower challenge. The object stays in map.json until the owner removes it and the
+@ Tower lobby hides it on transition, so this script is unreachable; it keeps a
+@ single line so the map.json reference still resolves.
 BattleFrontier_BattleTowerLobby_EventScript_Reporter::
-	lock
-	faceplayer
-	goto_if_set FLAG_TEMP_2, BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed
-	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
-	special InterviewBefore
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed
-	copyvar VAR_0x8009, VAR_0x8006
-	msgbox BattleFrontier_BattleTowerLobby_Text_InterviewRequest, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview
+	msgbox BattleFrontier_BattleTowerLobby_Text_NoStoryToFile, MSGBOX_NPC
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview::
-	message BattleFrontier_BattleTowerLobby_Text_HowDidBattleTowerTurnOut
-	waitmessage
-	multichoice 20, 8, MULTI_SATISFACTION, TRUE
-	copyvar VAR_0x8008, VAR_RESULT
-	call_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_Satisfied
-	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied
-	msgbox BattleFrontier_BattleTowerLobby_Text_DescribeYourBattle, MSGBOX_DEFAULT
-	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW
-	copyvar VAR_0x8005, VAR_0x8009
-	call Common_ShowEasyChatScreen
-	lock
-	faceplayer
-	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelInterview
-	end
+BattleFrontier_BattleTowerLobby_Text_NoStoryToFile:
+	.string "There is no broadcast to file.\n"
+	.string "The CIRCUIT keeps its own record.$"
 
-BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview::
-	msgbox BattleFrontier_BattleTowerLobby_Text_SorryWeDisturbedYou, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_Satisfied::
-	msgbox BattleFrontier_BattleTowerLobby_Text_ObviousYouHadGreatBattle, MSGBOX_DEFAULT
-	return
-
-BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied::
-	msgbox BattleFrontier_BattleTowerLobby_Text_DifficultToMakeBattleTurnOutAsPlanned, MSGBOX_DEFAULT
-	return
-
-BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse::
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelInterview
-	msgbox BattleFrontier_BattleTowerLobby_Text_ThatsGreatLine, MSGBOX_DEFAULT
-	setflag FLAG_TEMP_2
-	copyvar VAR_0x8004, VAR_0x8008
-	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
-	goto Interview_EventScript_EndInterview
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_CancelInterview::
-	msgbox BattleFrontier_BattleTowerLobby_Text_SilentType, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed::
-	msgbox BattleFrontier_BattleTowerLobby_Text_LookingForwardToNextBattle, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter::
-	goto_if_eq VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0, BattleFrontier_BattleTowerLobby_EventScript_HideReporter
-	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
-	special InterviewBefore
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleTowerLobby_EventScript_HideReporter
-	clearflag FLAG_HIDE_BATTLE_TOWER_REPORTER
-	return
-
-BattleFrontier_BattleTowerLobby_EventScript_HideReporter::
-	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
-	return
 
 @ Unused
 EventScript_ContestLiveInterview::

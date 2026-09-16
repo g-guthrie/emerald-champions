@@ -32,21 +32,30 @@ FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro1:
 	.string "I'm EVIE, and this is my sister, IVY.$"
 
 FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro2:
-	.string "IVY: We run the training programs that\n"
-	.string "seriously beef up your team!$"
+	.string "IVY: We ran the training programs that\n"
+	.string "seriously beefed up your team!$"
 
 FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro3:
-	.string "EVIE: IVY adjusts EVs for free.\p"
-	.string "I help TRAINERS choose moves.\n"
-	.string "HEART SCALES are saleable treasure.\p"
-	.string "Come back as often as you like!$"
+	.string "EVIE: The POKéMON CENTERS took over\n"
+	.string "our programmes, and they charge\l"
+	.string "nothing at all.\p"
+	.string "We just talk shop now!$"
 
+@ Emerald Champions (C7): one EV editor. IVY no longer runs a second copy here; she
+@ points at the free tutor beside every POKéMON CENTER's PC.
 FallarborTown_MoveRelearnersHouse_EventScript_EvTrainer::
 	lockall
 	call FallarborTown_MoveRelearnersHouse_EventScript_IvyEvieIntro
+	applymovement LOCALID_EV_TRAINER, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox FallarborTown_MoveRelearnersHouse_Text_EvRedirect, MSGBOX_DEFAULT
 	releaseall
-	goto Common_EventScript_EmeraldChampionsEvEditor
 	end
+
+FallarborTown_MoveRelearnersHouse_Text_EvRedirect:
+	.string "IVY: I closed my programme.\p"
+	.string "The tutor beside the PC in any\n"
+	.string "POKéMON CENTER sets EVs for free.$"
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
 	lockall
@@ -61,6 +70,4 @@ FallarborTown_MoveRelearnersHouse_Text_PreparationAdvice:
 	.string "The tutors at every POKéMON CENTER\n"
 	.string "teach your POKéMON moves for free.\p"
 	.string "Choose moves that help your partners!\n"
-	.string "An attack is not always the best play.\p"
-	.string "HEART SCALES are collectible treasure.\n"
-	.string "Shops pay ¥1,000 for each one.$"
+	.string "An attack is not always the best play.$"

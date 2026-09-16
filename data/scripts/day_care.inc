@@ -166,26 +166,19 @@ Route117_PokemonDayCare_EventScript_TryRetrieveMon::
 	goto Route117_PokemonDayCare_EventScript_CostPrompt
 	end
 
+@ Emerald Champions (C7): board is free, so there is no fee prompt and no money check.
+@ GetDaycareCostAndPrepareString still buffers the nickname and the levels gained.
 Route117_PokemonDayCare_EventScript_CostPrompt::
 	special GetDaycareCostAndPrepareString
-	msgbox Route117_PokemonDayCare_Text_ItWillCostX, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route117_PokemonDayCare_EventScript_CheckEnoughMoney
+	msgbox Route117_PokemonDayCare_Text_NoChargeTakeItBack, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route117_PokemonDayCare_EventScript_RetrieveMon
 	goto Route117_PokemonDayCare_EventScript_ComeAgain
-	end
-
-Route117_PokemonDayCare_EventScript_CheckEnoughMoney::
-	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
-	goto_if_eq VAR_RESULT, 1, Route117_PokemonDayCare_EventScript_RetrieveMon
-	msgbox Route117_PokemonDayCare_Text_NotEnoughMoney, MSGBOX_DEFAULT
-	release
 	end
 
 Route117_PokemonDayCare_EventScript_RetrieveMon::
 	applymovement LOCALID_DAYCARE_LADY, Route117_PokemonDayCare_Movement_RetrieveDaycareMon
 	waitmovement 0
 	specialvar VAR_RESULT, TakePokemonFromDaycare
-	special SubtractMoneyFromVar0x8005
-	playse SE_SHOP
 	msgbox Route117_PokemonDayCare_Text_HeresYourMon, MSGBOX_DEFAULT
 	waitse
 	playmoncry VAR_RESULT, CRY_MODE_NORMAL
@@ -343,9 +336,6 @@ Route117_PokemonDayCare_Text_FineThenComeAgain:
 	.string "Oh, fine, then.\n"
 	.string "Come again.$"
 
-Route117_PokemonDayCare_Text_NotEnoughMoney:
-	.string "You don't have enough money…$"
-
 Route117_PokemonDayCare_Text_TakeOtherOneBackToo:
 	.string "Will you take back the other one,\n"
 	.string "too?$"
@@ -370,9 +360,11 @@ Route117_PokemonDayCare_Text_YourTeamIsFull:
 Route117_PokemonDayCare_Text_TakeBackWhichMon:
 	.string "Which POKéMON will you take back?$"
 
-Route117_PokemonDayCare_Text_ItWillCostX:
-	.string "If you want your {STR_VAR_1} back,\n"
-	.string "it will cost ¥{STR_VAR_2}.$"
+Route117_PokemonDayCare_Text_NoChargeTakeItBack:
+	.string "{STR_VAR_1} gained {STR_VAR_2} levels\n"
+	.string "with us. No charge; the CHAMPIONS\l"
+	.string "settlement covers board.\p"
+	.string "Will you take it back?$"
 
 Route117_PokemonDayCare_Text_HeresYourMon:
 	.string "Perfect!\n"

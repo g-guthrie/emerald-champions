@@ -1,5 +1,8 @@
+@ Emerald Champions: the Arena is a Champions Circuit registration desk. Its judged
+@ three-turn challenge is retired; the receptionist runs
+@ BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit from map.json.
+@ The strings below the scripts are still read by FallarborTown_BattleTentLobby.
 BattleFrontier_BattleArenaLobby_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleArenaLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleArenaLobby_OnWarp
 	.byte 0
 
@@ -12,277 +15,9 @@ BattleFrontier_BattleArenaLobby_EventScript_TurnPlayerNorth::
 	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattleArenaLobby_OnFrame:
-	.2byte 0
-
-BattleFrontier_BattleArenaLobby_EventScript_GetChallengeStatus::
-	frontier_getstatus
+BattleFrontier_BattleArenaLobby_EventScript_RulesBoard::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
 	end
-
-BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving::
-	lockall
-	msgbox BattleFrontier_BattleArenaLobby_Text_DidntSaveBeforeShuttingDown, MSGBOX_DEFAULT
-	closemessage
-	arena_set ARENA_DATA_WIN_STREAK, 0
-	arena_set ARENA_DATA_WIN_STREAK_ACTIVE, FALSE
-	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
-	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	releaseall
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_WonChallenge::
-	lockall
-	frontier_isbrain
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon
-	msgbox BattleFrontier_BattleArenaLobby_Text_CongratsOnSevenWins, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_GiveBattlePoints
-
-BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon::
-	msgbox BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon, MSGBOX_DEFAULT
-BattleFrontier_BattleArenaLobby_EventScript_GiveBattlePoints::
-	msgbox BattleFrontier_BattleArenaLobby_Text_PleaseAcceptBattlePoints, MSGBOX_DEFAULT
-	frontier_givepoints
-	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
-	message BattleFrontier_BattleArenaLobby_Text_RecordAchievement
-	waitmessage
-	call BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge
-	msgbox BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT
-	closemessage
-	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	releaseall
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_LostChallenge::
-	lockall
-	message BattleFrontier_BattleArenaLobby_Text_ThankYouWaitWhileSave
-	waitmessage
-	arena_set ARENA_DATA_WIN_STREAK_ACTIVE, FALSE
-	call BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge
-	msgbox BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT
-	closemessage
-	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	releaseall
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge::
-	frontier_checkairshow
-	special LoadPlayerParty
-	special HealPlayerParty
-	callnative UpdateFollowingPokemon
-	arena_save 0
-	playse SE_SAVE
-	waitse
-	call BattleFrontier_EventScript_GetCantRecordBattle
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
-	message BattleFrontier_BattleArenaLobby_Text_RecordLastMatch
-	waitmessage
-	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
-	case 1, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
-	case 0, BattleFrontier_BattleArenaLobby_EventScript_RecordMatch
-	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_RecordMatch::
-	call BattleFrontier_EventScript_SaveBattle
-BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge::
-	return
-
-BattleFrontier_BattleArenaLobby_EventScript_ResumeChallenge::
-	lockall
-	message BattleFrontier_BattleArenaLobby_Text_LookingForwardToArrivalSaveGame
-	waitmessage
-	arena_save CHALLENGE_STATUS_SAVING
-	playse SE_SAVE
-	waitse
-	frontier_set FRONTIER_DATA_PAUSED, FALSE
-	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_Attendant::
-	lock
-	faceplayer
-	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_ARENA
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	special SavePlayerParty
-	msgbox BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena, MSGBOX_DEFAULT
-BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge::
-	message BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge
-	waitmessage
-	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
-	case 0, BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge
-	case 1, BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge
-	case 2, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
-	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge::
-	message BattleFrontier_BattleArenaLobby_Text_WhichLevelMode
-	waitmessage
-	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
-	switch VAR_RESULT
-	case FRONTIER_LVL_TENT, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
-	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
-	frontier_checkineligible
-	goto_if_eq VAR_0x8004, TRUE, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons
-	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
-	msgbox BattleFrontier_BattleArenaLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
-	fadescreen FADE_TO_BLACK
-	callnative RemoveFollowingPokemon
-	call BattleFrontier_EventScript_GetLvlMode
-	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
-	special ChoosePartyForBattleFrontier
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
-	msgbox BattleFrontier_BattleArenaLobby_Text_OkayToSave, MSGBOX_YESNO
-	switch VAR_RESULT
-	case NO, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
-	case YES, BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge
-	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge::
-	setvar VAR_TEMP_CHALLENGE_STATUS, 0
-	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	arena_init
-	arena_set ARENA_DATA_WIN_STREAK_ACTIVE, TRUE
-	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
-	frontier_set FRONTIER_DATA_PAUSED, FALSE
-	special LoadPlayerParty
-	closemessage
-	delay 2
-	call Common_EventScript_SaveGame
-	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed
-BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge::
-	special SavePlayerParty
-	frontier_setpartyorder FRONTIER_PARTY_SIZE
-	msgbox BattleFrontier_BattleArenaLobby_Text_GuideYouToArena, MSGBOX_DEFAULT
-	closemessage
-	frontier_get FRONTIER_DATA_LVL_MODE
-	call_if_eq VAR_RESULT, FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50
-	call_if_eq VAR_RESULT, FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen
-	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 9, 13
-	setvar VAR_TEMP_CHALLENGE_STATUS, 0
-	waitstate
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge::
-	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainChallenge, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons::
-	switch VAR_RESULT
-	case FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50
-	case FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLvOpen
-
-BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50::
-	msgbox BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT
-	call BattleFrontier_ShowCaughtBannedSpecies
-	msgbox BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_EndCancelChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLvOpen::
-	msgbox BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT
-	call BattleFrontier_ShowCaughtBannedSpecies
-	msgbox BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_EndCancelChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed::
-	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
-	goto BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
-
-BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge::
-	special LoadPlayerParty
-	callnative UpdateFollowingPokemon
-BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge::
-	msgbox BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge, MSGBOX_DEFAULT
-BattleFrontier_BattleArenaLobby_EventScript_EndCancelChallenge::
-	release
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50::
-	applymovement LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToLeftDoor
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToLeftDoor
-	waitmovement 0
-	opendoor 2, 2
-	waitdooranim
-	applymovement LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor
-	waitmovement 0
-	closedoor 2, 2
-	waitdooranim
-	return
-
-BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToLeftDoor:
-	walk_up
-	walk_up
-	walk_up
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	step_end
-
-BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor:
-	walk_up
-	set_invisible
-	step_end
-
-BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToLeftDoor:
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_in_place_faster_up
-	step_end
-
-BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor:
-	walk_up
-	walk_up
-	set_invisible
-	step_end
-
-BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen::
-	applymovement LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToRightDoor
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor
-	waitmovement 0
-	opendoor 11, 2
-	waitdooranim
-	applymovement LOCALID_ARENA_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor
-	waitmovement 0
-	closedoor 11, 2
-	waitdooranim
-	return
-
-BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToRightDoor:
-	walk_up
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_up
-	step_end
-
-BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor:
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
 
 BattleFrontier_BattleArenaLobby_EventScript_ShowResults::
 	special ChampionsCircuitBufferRecord
@@ -290,220 +25,36 @@ BattleFrontier_BattleArenaLobby_EventScript_ShowResults::
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_Youngster::
-	msgbox BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack, MSGBOX_NPC
+	msgbox BattleFrontier_BattleArenaLobby_Text_NoJudgesAnyMore, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_Man::
-	msgbox BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked, MSGBOX_NPC
+	msgbox BattleFrontier_BattleArenaLobby_Text_WinOrLoseNothingElse, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_Camper::
-	msgbox BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw, MSGBOX_NPC
+	msgbox BattleFrontier_BattleArenaLobby_Text_FerryFromLilycove, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_Woman::
-	msgbox BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant, MSGBOX_NPC
+	msgbox BattleFrontier_BattleArenaLobby_Text_HealBeforeYouRegister, MSGBOX_NPC
 	end
 
-BattleFrontier_BattleArenaLobby_EventScript_RulesBoard::
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
-	end
+BattleFrontier_BattleArenaLobby_Text_NoJudgesAnyMore:
+	.string "There are no judges here now.\n"
+	.string "You win the battle or you don't.$"
 
-BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard::
-	message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
-	waitmessage
-	multichoice 17, 2, MULTI_BATTLE_ARENA_RULES, FALSE
-	switch VAR_RESULT
-	case 0, BattleFrontier_BattleArenaLobby_EventScript_BattleRules
-	case 1, BattleFrontier_BattleArenaLobby_EventScript_MindRules
-	case 2, BattleFrontier_BattleArenaLobby_EventScript_SkillRules
-	case 3, BattleFrontier_BattleArenaLobby_EventScript_BodyRules
-	case 4, BattleFrontier_BattleArenaLobby_EventScript_ExitRules
-	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_ExitRules
-	end
+BattleFrontier_BattleArenaLobby_Text_WinOrLoseNothingElse:
+	.string "One loss ends the run.\n"
+	.string "That is the whole rule.$"
 
-BattleFrontier_BattleArenaLobby_EventScript_BattleRules::
-	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard
-	end
+BattleFrontier_BattleArenaLobby_Text_FerryFromLilycove:
+	.string "The ferry from LILYCOVE is the only\n"
+	.string "way onto this island.$"
 
-BattleFrontier_BattleArenaLobby_EventScript_MindRules::
-	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainMindRules, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_SkillRules::
-	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_BodyRules::
-	msgbox BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_ExitRules::
-	releaseall
-	end
-
-BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena:
-	.string "Where the battling spirit of TRAINERS\n"
-	.string "is put to the test!\p"
-	.string "I welcome you to the BATTLE ARENA!\p"
-	.string "I am your guide to the Set KO Tourney!$"
-
-BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge:
-	.string "Now, do you wish to take\n"
-	.string "the BATTLE ARENA challenge?$"
-
-BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge:
-	.string "We await your challenge on\n"
-	.string "another occasion!$"
-
-BattleFrontier_BattleArenaLobby_Text_ExplainChallenge:
-	.string "In the BATTLE ARENA, we undertake\n"
-	.string "the Set KO Tourney.\p"
-	.string "All participants enter with a team of\n"
-	.string "three POKéMON.\p"
-	.string "The three POKéMON must be lined up in\n"
-	.string "the order in which they are to appear.\p"
-	.string "During battle, the POKéMON will appear\n"
-	.string "one at a time in the preset order.\p"
-	.string "Once a POKéMON enters battle, it must\n"
-	.string "remain out until the match is decided.\p"
-	.string "If a match remains undecided in\n"
-	.string "three turns, it goes to judging.\p"
-	.string "If you wish to interrupt your challenge,\n"
-	.string "please save the game.\p"
-	.string "If you don't save, you will not be able\n"
-	.string "to continue with your challenge.\p"
-	.string "If you pull off the feat of beating\n"
-	.string "seven TRAINERS in succession,\l"
-	.string "we will present you with Battle Points.$"
-
-BattleFrontier_BattleArenaLobby_Text_OkayToSave:
-	.string "Before showing you to the BATTLE\n"
-	.string "ARENA, you must save. Is that okay?$"
-
-BattleFrontier_BattleArenaLobby_Text_WhichLevelMode:
-	.string "The BATTLE ARENA offers two levels\n"
-	.string "of challenge, Level 50 and Open Level.\l"
-	.string "Which is your choice?$"
-
-BattleFrontier_BattleArenaLobby_Text_SelectThreeMons:
-	.string "Very well, now select your\n"
-	.string "three POKéMON, please.$"
-
-BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen:
-	.string "My dear challenger!\p"
-	.string "You do not have the three POKéMON\n"
-	.string "required for entry.\p"
-	.string "To qualify, you must bring three\n"
-	.string "different kinds of POKéMON.\p"
-	.string "They also must not hold the same\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1}.$"
-
-BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsEnd:
-	.string "When you have made your preparations,\n"
-	.string "please do return.$"
-
-BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLv50:
-	.string "My dear challenger!\p"
-	.string "You do not have the three POKéMON\n"
-	.string "required for entry.\p"
-	.string "To qualify, you must bring three\n"
-	.string "different kinds of POKéMON.\p"
-	.string "The three different POKéMON\n"
-	.string "must all be Level 50 or lower.\p"
-	.string "They also must not hold the same\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1}.$"
-
-BattleFrontier_BattleArenaLobby_Text_GuideYouToArena:
-	.string "I shall now guide you to\n"
-	.string "the BATTLE ARENA.$"
-
-BattleFrontier_BattleArenaLobby_Text_DidntSaveBeforeShuttingDown:
-	.string "My dear challenger!\p"
-	.string "You did not save the game before\n"
-	.string "shutting down, did you?\p"
-	.string "It is unfortunate, but that has\n"
-	.string "resulted in your disqualification\l"
-	.string "from your challenge.\p"
-	.string "You may, of course, start with a fresh\n"
-	.string "challenge.$"
-
-BattleFrontier_BattleArenaLobby_Text_CongratsOnSevenWins:
-	.string "We congratulate you for your splendid\n"
-	.string "string of wins over seven TRAINERS!$"
-
-BattleFrontier_BattleArenaLobby_Text_RecordAchievement:
-	.string "Your achievement will be recorded.\n"
-	.string "Please wait while I save the game.$"
-
-@ Unused
-BattleFrontier_BattleArenaLobby_Text_PresentYouWithPrize:
-	.string "In commemoration of your 7-win streak,\n"
-	.string "we present you with this prize.$"
-
-@ Unused
-BattleFrontier_BattleArenaLobby_Text_ReceivedPrize:
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
-
-@ Unused
-BattleFrontier_BattleArenaLobby_Text_BagFullReturnForPrize:
-	.string "Oh?\n"
-	.string "Your BAG seems to be full.\p"
-	.string "I urge you to clear space and\n"
-	.string "return for your prize.$"
-
-BattleFrontier_BattleArenaLobby_Text_ThankYouWaitWhileSave:
-	.string "Thank you so much for participating!\p"
-	.string "Please wait while I save the game.$"
-
-BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2:
-	.string "We await your challenge on\n"
-	.string "another occasion!$"
-
-BattleFrontier_BattleArenaLobby_Text_LookingForwardToArrivalSaveGame:
-	.string "We have been looking forward to\n"
-	.string "your arrival.\p"
-	.string "Before I show you to the BATTLE\n"
-	.string "ARENA, I must save the game.\l"
-	.string "Please wait.$"
-
-BattleFrontier_BattleArenaLobby_Text_RecordLastMatch:
-	.string "Shall I record your last BATTLE ARENA\n"
-	.string "match on your FRONTIER PASS?$"
-
-BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack:
-	.string "I protected every turn and never\n"
-	.string "built a winning position.\p"
-	.string "Next time, my defensive choices\n"
-	.string "need to create an opportunity.$"
-BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked:
-	.string "I kept finding safe chances to\n"
-	.string "land my attacks.\p"
-	.string "That won my last Circuit match!$"
-BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw:
-	.string "The old ARENA judged a match after\n"
-	.string "three turns.\p"
-	.string "The CIRCUIT lets a longer plan\n"
-	.string "play out. You still have to\l"
-	.string "survive those first turns.$"
-BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant:
-	.string "Your first two Pokémon begin the\n"
-	.string "Circuit battle together.\p"
-	.string "Make the opening pair support one\n"
-	.string "another, and keep useful answers\l"
-	.string "in reserve.$"
-BattleFrontier_BattleArenaLobby_Text_RulesAreListed:
-	.string "The Set KO Tourney's rules are listed.$"
-
-BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading:
-	.string "Which heading do you want to read?$"
+BattleFrontier_BattleArenaLobby_Text_HealBeforeYouRegister:
+	.string "Your team is restored between\n"
+	.string "CIRCUIT battles. Held items are not.$"
 
 BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules:
 	.string "The Set KO Tourney has special rules,\n"
@@ -552,13 +103,5 @@ BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules:
 	.string "HP a POKéMON had at the start of\l"
 	.string "battle, and what remained at the end.$"
 
-BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon:
-	.string "A victory snatched from the ARENA\n"
-	.string "TYCOON, and a seven-TRAINER sweep!\p"
-	.string "We congratulate you on your most\n"
-	.string "splendid challenge!$"
-
-BattleFrontier_BattleArenaLobby_Text_PleaseAcceptBattlePoints:
-	.string "My dear challenger, in recognition of\n"
-	.string "your indefatigable spirit, please\l"
-	.string "accept these Battle Point(s).$"
+BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading:
+	.string "Which heading do you want to read?$"

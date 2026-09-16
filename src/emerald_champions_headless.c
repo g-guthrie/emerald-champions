@@ -2352,8 +2352,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         LoadHeadlessMap(MAP_ROUTE111_RUINS_EXTERIOR, 9, 13);
         break;
     case EC_HEADLESS_SCENARIO_GAME_CORNER:
-        AddBagItem(ITEM_COIN_CASE, 1);
-        SetCoins(9999);
+        // The Starter Archive prices its hatchlings and dolls in money.
+        SetMoney(&gSaveBlock1Ptr->money, 999999);
         LoadHeadlessMap(MAP_MAUVILLE_CITY_GAME_CORNER, 13, 3);
         break;
     case EC_HEADLESS_SCENARIO_CIRCUIT_LOBBY:

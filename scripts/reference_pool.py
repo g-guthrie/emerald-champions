@@ -318,7 +318,7 @@ def corner_roots(resolver: MapResolver, catalog: dict) -> tuple[dict, dict]:
     bp: dict[str, tuple[int, str, str]] = {}
     if coin_window is not None:
         for row in catalog["game_corner_offers"]:
-            coins[row["species"]] = (coin_window, "game_corner", f"game_corner:{row['coins']}coins")
+            coins[row["species"]] = (coin_window, "game_corner", f"game_corner:{row['money']}money")
     if bp_window is not None:
         for row in catalog["circuit_bp_pokemon_offers"]:
             bp[row["species"]] = (bp_window, "circuit_bp", f"circuit_bp:{row['bp']}bp")
