@@ -1,0 +1,95 @@
+{
+  "play_order": 244,
+  "e_group": "E0382",
+  "trainer": "TRAINER_KATELYN_1",
+  "class": "regular",
+  "location": "Route128",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Fearow (-1) at L73 and Zebstrika / Butterfree / Corsola-Galar (0) at L74 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/244-TRAINER_KATELYN_1/party_sea76.json"],
+  "chronology_note": "Route 128 is the open water south of Route 127, sailed before Dive is granted at the Space Center. Same cap-76 six; every gate 42 or lower, nothing sourced from Mossdeep, the Space Center, Seafloor Cavern, Route 131 or Pacifidlog. Note that my Grass pair (Rillaboom gate 36, Amoonguss gate 42) is the dossier's own printed counterplay - 'a Grass typing beats both powder moves at once' - and both have been in my party since E0368, so this is not a party built to trivialise this one encounter.",
+  "pre_play_strategy_checks": [
+    "Compound Eyes raises Sleep Powder to a practical certainty and removes a player Pokemon",
+    "Butterfree does the other of Rage Powder / Tailwind on the following turn",
+    "Zebstrika's Lightning Rod pulls an Electric attack and converts it to +1 Special Attack",
+    "Fearow's Intimidate cuts the physical answer on entry",
+    "Galarian Corsola stalls with Strength Sap, Will-O-Wisp and Cursed Body"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 4,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/244-TRAINER_KATELYN_1/a1",
+      "party": "party_sea76.json (Incineroar/Rillaboom/Zapdos/Urshifu-Single/Mega Gardevoir/Amoonguss)",
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "why": "Sleep Powder landed three times in four turns and at one point had both of my active Pokemon asleep at once, which is the most control any ordinary trainer in this block has exerted over me. The answer was the printed one: rotate both slots to Grass types, at which point Butterfree's entire moveset stops functioning. Rillaboom traded itself for the sleep lockdown, and Urshifu's always-crit Wicked Blow cleaned up a Ghost wall that Protect could only delay."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Compound Eyes Sleep Powder removes a player Pokemon from the game",
+      "result": "PASS, decisively - the best-executed disruption in the block",
+      "evidence": "turn 2 'Incineroar fell asleep', turn 3 'Zapdos fell asleep', turn 4 'Incineroar fell asleep' again. Three for three. On turn 4 both of my active Pokemon were asleep simultaneously and I had to spend turn 5 double-switching to the two Grass bodies just to get a legal action. A 1-HP Butterfree behind a Focus Sash dictated four consecutive turns. The dossier's claim that this is 'one of the few things an ordinary trainer owns that can genuinely end a player's battle' is completely fair."
+    },
+    {
+      "check": "Butterfree alternates to Rage Powder or Tailwind once the sleep is spent",
+      "result": "FAIL - both alternates were selected into boards where they did nothing. See AI defect E0382-1",
+      "evidence": "turn 5 and turn 7: Rage Powder, both times while my two active Pokemon were Amoonguss and Rillaboom - both pure Grass, and Grass types ignore Rage Powder redirection entirely. Two completely empty turns. turn 8: Tailwind, on Butterfree's last turn at 1/242 HP, with Zebstrika and Fearow already dead and only a base-30-Speed Galarian Corsola left to benefit. Butterfree died that same turn, so the Tailwind blew for a team of one slow wall."
+    },
+    {
+      "check": "Fearow's Intimidate cuts the physical answer on entry",
+      "result": "PASS",
+      "evidence": "the turn-0 reading shows both Incineroar and Rillaboom at atk -1 before any move, against a board where Incineroar's own Intimidate had put both opponents at -1. Correct and immediate."
+    },
+    {
+      "check": "Zebstrika's Lightning Rod pulls an Electric attack and converts it to +1 Special Attack",
+      "result": "NOT TESTED, by my choice",
+      "evidence": "I deliberately never aimed an Electric move at it, which is what the crack line implies a prepared player does. It died on turn 1 to High Horsepower. Worth recording separately that its one decision was excellent: it chose Overheat into my Grass Rillaboom for 257 damage - a 2x special Fire attack from an Electric horse, correctly picked over its own STAB Thunderbolt. That is the single best individual AI move choice I have seen in this block."
+    },
+    {
+      "check": "Galarian Corsola stalls with Strength Sap, Will-O-Wisp and Cursed Body",
+      "result": "PARTIAL",
+      "evidence": "Will-O-Wisp was used correctly on turn 8 - it burned Urshifu, the only physical attacker on my side and the thing that was killing it, which is exactly right. Protect on turn 9 was also correct. But Strength Sap was never selected across three decisions, including at low HP where the heal-plus-Attack-drop would have been better than Will-O-Wisp on an already-burned target, and Cursed Body never triggered. Night Shade was never used either, so two of its four moves are currently invisible."
+    },
+    {
+      "check": "The crack line's own counterplay works",
+      "result": "PASS",
+      "evidence": "Grass typing beat both powder moves at once exactly as printed: from turn 5 onward, with Amoonguss and Rillaboom in the two slots, Sleep Powder was never selected again and both Rage Powders were void. The encounter is honestly built and its stated answer is the real answer."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 6, "battler": "Fearow", "payoff": "excellent. Blocked Amoonguss's Sludge Bomb at 55/201, which was lethal - it bought Fearow the extra turn in which it killed Rillaboom"},
+    {"attempt": 1, "turn": 6, "battler": "Butterfree", "payoff": "excellent. Blocked Rillaboom's Grassy Glide at 1/242 behind a spent Focus Sash. Anything at all would have killed it; this guard bought it two more turns of board control"},
+    {"attempt": 1, "turn": 9, "battler": "Corsola-Galar", "payoff": "good. Blocked Amoonguss's Sludge Bomb entirely and reduced Urshifu's Wicked Blow to 19 damage through Unseen Fist's 25 percent pierce, at a point where it was the last Pokemon alive"}
+  ],
+  "protect_summary": "3 opponent Protects, 0 empty, all three on genuinely lethal or near-lethal incoming damage, and the double guard on turn 6 was a correctly-read simultaneous save of two Pokemon that were both one hit from death. Katelyn's guarding is excellent and the contrast with her Rage Powder choices is stark.",
+  "ai_defects": [
+    {
+      "id": "E0382-1",
+      "turn": "a1 turns 5 and 7",
+      "board": "Butterfree at 1/242 (Focus Sash spent), partnered with Fearow, opposite Amoonguss (SPECIES_AMOONGUSS, Grass/Poison) in slot 0 and Rillaboom (SPECIES_RILLABOOM, pure Grass) in slot 2. Both of my actives were Grass-typed on both turns, and the reading shows their types.",
+      "chosen": "MOVE_RAGE_POWDER, twice.",
+      "better": "Anything else - Tailwind on turn 5 while Fearow was still alive and could use the speed, or Protect, or simply Sleep Powder at the two non-Grass reserves it could force in. Grass types are immune to Rage Powder's redirection, so with two Grass bodies on the field the move has no possible effect on any target: these were two turns of literally zero value from the Pokemon the plan calls 'the whole encounter'. The AI is clearly not consulting the target's type when scoring a redirection move. This is the same class of bug as a Lightning Rod user redirecting into a Ground type, so it is worth tracing every redirection scorer rather than patching Rage Powder: Rage Powder, Follow Me, Ally Switch and the Storm Drain / Lightning Rod switch-in logic all need the same immunity check. Other encounters in this block that will exercise it: E0390 Blake's two Ally Switch users and E0392's Rage-Powder-free trap room. Severity: moderate - it did not cost Katelyn the fight because Fearow was still attacking, but it turned her best Pokemon into a spectator for two turns."
+    },
+    {
+      "id": "E0382-2",
+      "turn": "a1 turn 8",
+      "board": "Butterfree at 1/242, its partner slot holding Galarian Corsola (base Speed 30), with Zebstrika and Fearow already fainted, opposite Amoonguss and a Jolly Urshifu.",
+      "chosen": "MOVE_TAILWIND.",
+      "better": "Protect, or an attack. Tailwind doubles the Speed of Katelyn's side for four turns, but the only member left to receive it is a 30-base-Speed Eviolite wall whose job is to stall, and Butterfree itself died in the same turn. The speed window was worth nothing to anybody. Severity: low - Butterfree was dead either way - but it is the same root cause as E0382-1: a side-effect move scored without checking who is left to benefit."
+    }
+  ],
+  "level_changes": [
+    {"member": "FEAROW", "field": "level offset", "before": -1, "after": 0, "level_before": 73, "level_after": 74, "reason": "First-attempt win with one player faint. Under the brief that is the +1 case, and under AGENTS.md a first-attempt win with fewer than three faints triggers a level review. Fearow is the lowest-level member and the one furthest from mattering - it is also, notably, the member that actually earned my single faint, so raising it is raising the part of the team that is working. I deliberately did not raise Butterfree: it is already the encounter's whole identity, its two empty Rage Powder turns are an AI defect rather than a design weakness, and a +1 there would be compensating for a bug with levels."}
+  ],
+  "level_change_rationale": "Exactly +1, on one member, the lowest-level one. I did not take the second available bump. The fight was not comfortable - I spent two full turns with both actives asleep - but it never threatened to beat me, and the reason is that I happened to be carrying the dossier's own printed answer. A player without a Grass type or Safety Goggles would have had a very different afternoon, so the encounter's real difficulty is highly bimodal and I do not want to over-correct on the easy branch.",
+  "cooler": "The roster stays and the dossier's judgement is right: Compound Eyes Sleep Powder plus Rage Powder on one frail body is a complete, teachable encounter and it does not need a rarer species. Playing it adds one thing the write-up does not say - the encounter is much more dangerous than its species list suggests, because a Focus Sash means Butterfree survives the turn the player kills it and gets a fourth Sleep Powder off. That is the reason it works and it deserves a sentence in the plan. Three concrete notes, none implemented. (1) Rage Powder and a Grass-immune answer are on a collision course: the plan says the player must 'choose between answering the sleep and answering the redirection', but a single Grass type answers both at once and there is no decision left. Moving Rage Powder onto a partner - Fearow does not want it, but a third body would - would restore the fork the plan describes. (2) Zebstrika's Overheat is the most interesting move on the team and it appears on the one member most likely to die first; it is also the only thing that punishes the Grass answer. Leading Zebstrika beside Butterfree instead of Fearow would make the counterplay cost something. (3) Galarian Corsola is doing nothing the encounter needs - it arrives after the trap is over and stalls a fight that is already decided. A second powder-resistant or Safety-Goggles-punishing body would serve the concept better than a wall.",
+  "legality_notes": "No legality problem in the authored set. All four members, Eviolite, Focus Sash, Life Orb and Wise Glasses are inside the cap-76 window and appropriate for Route 128.",
+  "verification_limit": "The Fearow offset change cannot be re-verified from this session: the levels are baked into the headless ROM and I am not permitted to run make, so the rerun the brief asks for must wait until the main agent re-materializes and rebuilds. Of my block, this is the second most valuable battle to re-run after E0368 - but only because of the level change; the AI defect here (Rage Powder into two Grass bodies) can be reproduced without any rebuild at all."
+}

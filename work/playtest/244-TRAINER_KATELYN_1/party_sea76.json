@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge cap 76 sea-routes generalist party (Routes 126-128 after the Aqua Hideout)",
+  "availability_audit": "Cap resolved from the Game Book chapter ladder: C39 Heatran in Scorched Slab grants cap 76, C40 (submarine theft, Aqua Hideout, eastern sea opened) makes no cap change, C41 Mossdeep/Mind Badge makes no cap change, and cap 84 only arrives with C42 the Space Center. Routes 126-128 and every Mossdeep Gym room therefore sit at cap 76. Chronology of each member against pool-76.json source_detail, all upstream of Route 126: Incineroar gate 36 (Litten, Mauville Game Corner; level evolutions). Rillaboom gate 36 (Grookey, Mauville Game Corner; level evolutions). Urshifu-Single-Strike gate 42 (Kubfu legendary_sign Route112, the Jagged Pass approach used for the Magma Emblem). Gardevoir gate 30 (Ralts Route102 land) with ITEM_GARDEVOIRITE stone-window 14. Zapdos gate 30, legendary_sign NewMauville_Inside. Amoonguss gate 42 (Foongus, Petalburg Woods). One reachable legend (Zapdos). Nothing is sourced from Mossdeep, the Space Center, Route 127-128, Shoal Cave, the Abandoned Ship, Seafloor Cavern, Sootopolis, Pacifidlog or Route 131 - a player who has just sailed east out of Lilycove has reached none of those.",
+  "plan": "Generalist doubles core for the eastern sea routes. Incineroar and Rillaboom both carry Fake Out so the first turn is always controllable, Intimidate blunts the physical Water lanes, Grassy Surge gives Grassy Glide priority and heals through chip. Zapdos is the Electric pressure every Water route trainer invites. Urshifu-Single's Unseen Fist punches through the heavy Protect habit of this stretch. Mega Gardevoir's Pixilate Hyper Voice is the spread that ignores Rage Powder and answers the Dark lane.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out and Intimidate control; Knock Off strips items; physical Fire",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_GRASSY_GLIDE", "MOVE_WOOD_HAMMER", "MOVE_HIGH_HORSEPOWER"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Grass pressure and priority Grassy Glide; terrain heals the team through chip",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_THWACKEY."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "reachable legend: Electric and spread Fire pressure with recovery",
+      "availability": "pool-76 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Unseen Fist ignores Protect; always-crit Wicked Blow; Fighting coverage",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": ["MOVE_HYPER_VOICE", "MOVE_MOONBLAST", "MOVE_PSYSHOCK", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Mega win condition; Pixilate Hyper Voice is the spread that ignores redirection",
+      "availability": "pool-76 gate 30 (Ralts Route102) with ITEM_GARDEVOIRITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Spore removes a threat outright; Rage Powder protects a setup turn",
+      "availability": "pool-76 gate 42, evolution:level from SPECIES_FOONGUS."
+    }
+  ]
+}
