@@ -1,0 +1,29 @@
+{
+  "play_order": 270, "e_group": "E0420", "trainer": "TRAINER_SANTIAGO", "class": "regular", "location": "Route130",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Vanilluxe/Poliwrath/Dewgong offset 1 -> L83, Gastrodon offset 0 -> L82. Confirmed.",
+  "party_manifest": "work/playtest/270-TRAINER_SANTIAGO/party_santiago_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 420, "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "Snow was live at turn 0 from the Vanilluxe lead (the dossier's fix works). T1 Fake Out flinched Vanilluxe out of its chosen Blizzard, Heat Wave OHKOed it; Gastrodon Protected. T2 Grassy Glide 4x OHKO Gastrodon; Poliwrath Close Combat OHKOed Chi-Yu (my misread: Fighting into Dark). T3 Poliwrath Protected the Grassy Glide, Dewgong Icy Wind dropped both my actives' Speed, Zapdos Tailwind. T4 Thunderbolt KO Poliwrath, Wood Hammer 190 into Fur Coat Dewgong, Muddy Water dropped Rillaboom's accuracy. T5 Grassy Glide + Thunderbolt KO Dewgong."}
+  ],
+  "strategy_checks": [
+    {"check": "Snow Warning live before the first attack; Blizzard accurate from turn 1", "result": "PASS", "evidence": "B_WEATHER_SNOW at turn 0; Vanilluxe's native T1 choice was Blizzard (flinched by Fake Out)."},
+    {"check": "Freeze-Dry / Flash Cannon turn-two choice", "result": "NOT EXERCISED", "evidence": "Vanilluxe died T1."},
+    {"check": "Gastrodon Storm Drain / Poliwrath Water Absorb", "result": "NOT EXERCISED", "evidence": "The party used no Water move (crack line honored). Gastrodon's own action was Protect then Earth Power into Chi-Yu (chosen T2, died first)."},
+    {"check": "Dewgong Icy Wind speed control / Encore", "result": "PASS / NOT FIRED", "evidence": "T3 Icy Wind dropped Rillaboom and Zapdos; Encore never had a repeated target (Tailwind was used once)."},
+    {"check": "Muddy Water accuracy drop", "result": "PASS", "evidence": "T4 Rillaboom accuracy -1."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Gastrodon", "payoff": "blocked Heat Wave (~244 of 351); real"},
+    {"turn": 3, "battler": "Poliwrath", "payoff": "blocked a lethal Grassy Glide on its entry turn; real"}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "GASTRODON_EAST", "before": 0, "after": 1, "reason": "won first try with one faint that was my own misread; Gastrodon is the lowest offset and died without attacking"},
+    {"member": "VANILLUXE", "before": 1, "after": 2, "reason": "same rule; the snow setter died T1 to one spread Fire"}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED (needs rebuild).",
+  "could_this_be_cooler": "The lead fix did its job: snow was up from turn 0 and Icy Wind/Muddy Water gave the second wave real texture for a regular. Storm Drain and Water Absorb are both dead against a player who reads the sets (no Water move all fight), which is acceptable for a regular. If one thing changed it would be Vanilluxe holding a Focus Sash instead of Wise Glasses so it survives the obvious Fire lead and Blizzard actually happens once; not applied.",
+  "authored_set_legality": "No problem found (Dewgong's Ice Beam replacement for Freeze-Dry is legal)."
+}
