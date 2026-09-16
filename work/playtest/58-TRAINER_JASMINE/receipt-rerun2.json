@@ -1,0 +1,106 @@
+{
+  "play_order": 58,
+  "e_group": "E0067",
+  "trainer": "TRAINER_JASMINE",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Thwackey 3->4 and Quilava 3->4 off a three-turn clear in which the team dealt zero damage. This is the one confirming run of those levels on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Thwackey resolved at L32 and Quilava at L32 (both L31 in pass 1). Quaxwell L32 and Brionne L32 unchanged - all four members are now on the same level.",
+  "resolved_opponent_levels": {"THWACKEY": 32, "QUAXWELL": 32, "QUILAVA": 32, "BRIONNE": 32},
+  "party_manifest": "work/playtest/58-TRAINER_JASMINE/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: Weavile, Nidoking, Magearna, Togekiss, Gardevoir (Gardevoirite), Kartana - all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110. One declared reachable legend (Magearna); Gardevoir was never sent out, so no Mega was used.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/58-TRAINER_JASMINE/r1",
+      "seed": 58,
+      "outcome": "won",
+      "turns": 5,
+      "driver_turn_counter": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_frames": [61, 32, 24, 24, 24],
+      "ai_decision_seconds_max": 1.021,
+      "narrative": "T1 Grassy Terrain came up on Thwackey's entry. Weavile out-sped it 125 to 65 and Fake Out flinched away Thwackey's own Fake Out, which had been aimed at Nidoking; a critical 2x Thunderbolt then KO'd Quaxwell from full 97 before its selected Low Kick - 4x into Weavile - could resolve, for the second pass running. T2 a three-hit Triple Axel (2x) killed the L32 Eviolite Thwackey and took the terrain's owner off the field, while Brionne spent its entry turn on a Protect that blanked a 2x Thunderbolt aimed at it. T3 Weavile's Knock Off KO'd a full-health Quilava outright, stripping the Choice Specs on the way and denying the Heat Wave it had selected; the Earth Power I had aimed at Quilava redirected into Brionne. Then the fight actually got dangerous for the first time on this team: Brionne's Liquid Voice Hyper Voice is a spread WATER move, it hit my Ground-type Nidoking for 2x and took it from 98 to 12, hit Weavile as well, and the Throat Spray it triggered gave Brionne a Sp.Atk boost. T4 I withdrew the 12 HP Nidoking for Magearna and Brionne Protected away Weavile's Ice Shard. T5 Knock Off finished it. No player faints, but Nidoking finished on 12/98 and Weavile on 37/91 - where in pass 1 this team landed literally zero damage."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Thwackey's extra level lets the terrain setter survive past turn two",
+      "result": "PARTIAL",
+      "evidence": "It survived to turn 2 and selected Wood Hammer, but a three-hit Triple Axel (2x) killed it through the Eviolite before that resolved, so it has still never landed an attack. Grassy Terrain did stay up for the whole battle and healed Brionne each turn, which is more value than pass 1 got from it. The level bought terrain persistence, not an action."
+    },
+    {
+      "check": "Quilava's extra level lets it act",
+      "result": "FAIL",
+      "evidence": "At L32 it was still KO'd from full 89 HP by a single Knock Off - Weavile's Life Orb plus the 1.5x Knock Off bonus for removing its Choice Specs - before the HEAT_WAVE it had selected could resolve. Blaze and Eruption have not been seen in either pass. This is the second consecutive pass in which the team's Choice Specs attacker dies with its item still on."
+    },
+    {
+      "check": "Liquid Voice Brionne converts Hyper Voice into spread Water damage",
+      "result": "PASS - emphatically, and it is the whole reason this pass was not another walkover",
+      "evidence": "Turn 3: a spread Hyper Voice as a WATER move hit my Ground-type Nidoking for 2x, took it from 98 to 12, hit Weavile in the same move, and triggered its own Throat Spray for a Sp.Atk boost. That single turn is the only damage this team has dealt across two benchmark passes, and it very nearly took a Pokemon. The authored ability/item interaction fired exactly as designed."
+    },
+    {
+      "check": "Moxie Quaxwell starts its engine",
+      "result": "FAIL - never acted, second pass running",
+      "evidence": "Selected MOVE_LOW_KICK (4x into my Dark/Ice lead, the correct move) and was KO'd from full 97 HP by a 2x Thunderbolt before it resolved, exactly as in pass 1. Moxie has never triggered and Aqua Cutter and Brave Bird have never been selected."
+    },
+    {
+      "check": "Grassy Terrain supports the team",
+      "result": "PARTIAL",
+      "evidence": "The terrain persisted the whole battle and healed Brionne every turn, which is genuinely why Brionne survived to turn 5. But GRASSY_GLIDE - the priority payoff the surge exists for - has not been selected in either pass, because Thwackey has never survived to a turn where it wanted it."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "BRIONNE",
+      "payoff": "REAL - an entry-turn Protect that blanked a 2x Thunderbolt from a Sheer Force Life Orb Nidoking aimed at a 90 HP Water-type. That is very likely a knockout denied, and the Pokemon it saved went on to deal the only damage this team has ever dealt me."
+    },
+    {
+      "turn": 4,
+      "battler": "BRIONNE",
+      "payoff": "REAL - at 8/90, it blocked Weavile's priority Ice Shard and banked a Grassy Terrain heal, buying itself another turn. Correctly timed at genuinely lethal HP, and not repeated into the following turn."
+    }
+  ],
+  "protect_ledger_note": "Two opponent Protects, both from Brionne, both with clear payoff and neither repeated consecutively. This is well-priced guarding - a notable contrast with Kirlia on Sally (R6-D5), where the same build guarded twice for nothing on a much more resistant body.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 1 Quaxwell selecting Low Kick (4x into a Dark/Ice lead) and Thwackey selecting Fake Out at the other slot is a correct, coordinated opening; it lost to a Fake Out from a faster lead and a critical hit, not to bad decisions.",
+    "Turn 3 Brionne's spread Hyper Voice was the right move at the right moment - it caught my Ground-type at 2x, hit both my battlers, and self-triggered Throat Spray. Best single decision on this team in either pass.",
+    "Turn 3 Quilava selecting HEAT_WAVE (spread) rather than a single-target Flamethrower on a board with a 2x Ice-type in it is at worst arguable; it never resolved, so there is no evidence either way.",
+    "Brionne's two Protects were timed to entry and to 8 HP respectively - exactly the two boards where a shield earns its place.",
+    "AI decision timing peaked at 61 frames (1.021 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "QUAXWELL",
+      "field": "level offset",
+      "before": 4,
+      "after": 5,
+      "pass_total": "+1 (first level for this member in this pass)",
+      "reason": "Zero-faint clear, so brief rule 5 calls for a raise, and Quaxwell is the honest choice. All four members are now level-tied at L32, so 'weakest' has to be read by contribution: Thwackey and Quilava are both already +1 this pass, Brionne is comfortably the best performer and the only member that has ever damaged me, and Quaxwell has taken zero actions across two passes. Unlike the other never-acting members in my block, Quaxwell is not an ordering casualty - it is on the field from turn 1 and simply dies to one super-effective hit from a Life Orb attacker. It is also the team's Moxie engine, so one level is the cheapest route to the snowball the set is built around."
+    }
+  ],
+  "level_changes_not_made": [
+    {
+      "member": "BRIONNE",
+      "reason": "Untouched at offset 4 and by far the best member: it dealt the only damage this team has landed in two passes, triggered its own Throat Spray, and made two correctly-priced Protects. Rule 5 points away from what is working."
+    },
+    {
+      "member": "THWACKEY",
+      "reason": "+1 in pass 1 and it converted partially - the terrain now persists and heals its partner - but it still has not landed an attack. Raising it again would hit the +2 ceiling on a setter whose problem is that it leads into a 125-Speed Fake Out."
+    },
+    {
+      "member": "QUILAVA",
+      "reason": "+1 in pass 1 and it converted nothing - still KO'd from full HP by one Knock Off with its Choice Specs unused. A second level does not save an 89 HP body from a boosted Knock Off, and it would spend the ceiling for no expected gain."
+    }
+  ],
+  "calibration": "RAISE Quaxwell 4 -> 5. Won on the first attempt in five turns with zero player faints, so brief rule 5 applies. Recording clearly that this is a much better fight than pass 1 despite the identical outcome line: in pass 1 the team landed zero damage, and this pass Brionne's Liquid Voice spread Hyper Voice took my Nidoking from 98 to 12 and chipped Weavile in the same move. The pass-1 levels are only partly responsible for that (it came from the untouched member), which is why the new level goes to the member that has still never acted rather than to another +1 on Thwackey or Quilava.",
+  "could_this_be_cooler": "Retain - and note that this team has the best single authored interaction in my block that nobody has commented on: Liquid Voice turning a spread Hyper Voice into spread WATER damage, which is both unusual and genuinely surprising to play against, because the obvious read on a Normal spread move is 'my Ground-type is fine' and it is not. It self-triggers Throat Spray on top. That deserves to be the team's headline rather than its fourth slot. The problem is the opposite end: the Grassy Surge half of the plan has never produced a Grassy Glide in two passes, because the setter leads into the player's fastest attacker and dies, and the Choice Specs Quilava has now died twice with its item still equipped. No species, move or item change is proposed or made. The recommendation to the main agent is again ordering: lead Brionne with Thwackey behind it so the terrain has a body to protect it, rather than sending the setter and the Moxie sweeper into the player's opening turn together.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. Teams-file change is the single QUAXWELL offset line, edited in place; generated projections were not regenerated or committed by this session. Synthetic headless benchmark, not earned campaign play."
+}
