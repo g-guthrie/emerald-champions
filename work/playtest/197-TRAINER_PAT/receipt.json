@@ -1,0 +1,40 @@
+{
+  "play_order": 197,
+  "e_group": "E0298",
+  "trainer": "TRAINER_PAT",
+  "class": "ace",
+  "location": "Route121",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Feraligatr/Bouffalant/Electivire/Sceptile/Simisear (+1) at L59 and Lycanroc-Dusk (+2) at L60 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 196; every member's pool gate is 54 or lower so no source map postdates Route 121.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 6,
+      "why": "Fake Out plus Spore split the lead pair and Zapdos's Thunderbolt removed the sleeping Feraligatr. The two faints were both to coverage the dossier advertises: Bouffalant's Reckless Head Charge took Zapdos from 234 to 77 in one hit, and Electivire's Ice Punch OHKOed Landorus on the switch-in (4x into Ground/Flying - my misplay, and exactly the punish a six-attacker coverage team is built to deliver). Mega Metagross then out-traded the back half and Ice Punch removed Mega Sceptile at 4x on the last turn."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Reckless Bouffalant behind a Clear Amulet cannot be Intimidated out of Head Charge", "result": "PASS", "evidence": "turn 0 board: Feraligatr took the ordinary Intimidate -1, Bouffalant is at no stages. Its Head Charge then dealt 157 to a 234 HP Zapdos on turn 2 and 172-worth of pressure overall. The item does exactly what the dossier says."},
+    {"check": "Sheer Force Feraligatr trades secondary effects for 1.3x damage", "result": "PASS", "evidence": "turn 1 Ice Punch for 153 into Amoonguss (2x) with no Life Orb recoil tick, which is the Sheer Force interaction. It was slept on turn 1 and removed on turn 3, so it only got the one hit."},
+    {"check": "Motor Drive Electivire turns an Electric attack into a Speed boost", "result": "NOT OBSERVED", "evidence": "Confirmed exactly as the dossier's own audit note predicts: no allied Electric hit is authored, and a prepared player simply never aims Electric at it. I withheld Zapdos's Thunderbolt for this reason and Motor Drive never activated. The ability is decorative against competent play."},
+    {"check": "Mega Sceptile is the special Grass/Dragon lane", "result": "PARTIAL", "evidence": "Mega Evolved on its entry turn (8) and fired Leaf Storm for 168 into Weavile - a real hit that took it to 5/173 - but it was KOed by Ice Punch the same turn at 4x. It arrived sixth, which is late for a Mega."},
+    {"check": "Tough Claws Lycanroc-Dusk supplies priority with Accelerock", "result": "FAIL", "evidence": "Lycanroc had one turn and chose Drill Run (2x into Incineroar, 142) rather than Accelerock. Focus Sash correctly survived a 2x Meteor Mash before Knock Off finished it. The priority lane the dossier calls the closer never fired, though Drill Run was the better pick on that specific board."},
+    {"check": "The team is a wall of coverage with no support turn", "result": "PASS", "evidence": "Confirmed and it is the reason the fight was dangerous. Across eight turns the six chose only attacks and two Protects - no Tailwind, no redirection, no speed control. Every player faint came from a coverage move landing super effective rather than from a plan."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Bouffalant", "payoff": "blocked Incineroar's Knock Off at 34/236 - a certain KO"},
+    {"turn": 7, "battler": "Simisear", "payoff": "partial - blocked Mega Metagross's Meteor Mash on its entry turn at full HP. Steel is resisted by Fire, so the guard saved roughly 110 of 176 HP rather than a kill. Defensible (Simisear is frail and had just switched in) but it is the least valuable guard in this block."}
+  ],
+  "protect_summary": "2 opponent Protects, 1 clearly lethal-blocking, 1 partial, 0 empty, no consecutive guarding. No tuning indicated.",
+  "ai_defects": [],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on the first attempt but with two faints and a real fight: Weavile finished at 5/173 and Zapdos spent most of the battle at 91/234 after a single Head Charge. The brief's 2+ faints clause applies. Worth noting against a future review that Electivire's Motor Drive is effectively inert against a prepared player, so one of the six is fighting at less than its printed value - that is an argument for fixing the concept rather than for adding a level.",
+  "cooler": "The dossier's own answer - keep the coverage, flag the missing support turn - is the right one, and playing it confirms the diagnosis rather than changing it. One sharper note: Motor Drive on Electivire and Tough Claws priority on Lycanroc are both abilities that only matter if the player co-operates, and neither did anything in this fight. Electivire earned its keep through raw coverage (Ice Punch and Cross Chop), not through its ability. If Pat is ever revisited, the single highest-value change is not a support Pokemon but giving one member a reason to act on a board the player controls - a Volt Switch on Electivire would turn Motor Drive from a dead ability into a pivot threat without touching the no-support identity. The Choice-free, item-diverse build is otherwise a good contrast to the two Choice users elsewhere on Route 121.",
+  "legality_notes": "No legality problem in the authored set. Sceptilite and all six members are inside the cap-60 window.",
+  "verification_limit": "No level change was made, so nothing is pending re-verification."
+}
