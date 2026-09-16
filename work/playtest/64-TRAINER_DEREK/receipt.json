@@ -1,0 +1,51 @@
+{
+  "play_order": 64,
+  "e_group": "E0074",
+  "trainer": "TRAINER_DEREK",
+  "class": "regular",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"WORMADAM_PLANT": 32, "WORMADAM_SANDY": 31, "WORMADAM_TRASH": 31, "MOTHIM": 30},
+  "cap_window_confirmation": "Dossier seeds 34/33/33/32 resolved to 32/31/31/30 = cap 30 + offset - 2 (Medium). Cap 30 confirmed.",
+  "party_manifest": "work/playtest/64-TRAINER_DEREK/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, reordered to lead Mega Gardevoir + Weavile. All source maps precede Route 117. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Plant Wormadam's Struggle Bug actually lands and blunts my special attackers",
+    "Trash Wormadam uses Metal Burst off real received damage, or an appropriate Toxic instead",
+    "Choice Specs / Tinted Lens Mothim supplies immediate special offense and the U-turn pivot",
+    "Sandy's Earthquake is used when it is safe beside the Flying-type Mothim, and not beside a grounded cloak",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/64-TRAINER_DEREK/a1", "seed": 64, "outcome": "won", "turns": 3, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Mega Gardevoir's Mystical Fire was 4x into Bug/Grass Wormadam-Plant and one-shot a 110 HP Pokemon from full; Weavile's Fake Out flinched away Sandy's Bug Bite. T2 Sandy correctly reached for priority - Sucker Punch into my Mega for 32 - and died to Triple Axel at 2x; Mystical Fire removed Mothim before it could fire the Choice Specs Bug Buzz it had selected. T3 Wormadam-Trash arrived alone, lost its Rocky Helmet to Knock Off (taking its Helmet chip on the way) and died to a 4x Mystical Fire. Three turns, no player faints."}
+  ],
+  "strategy_checks": [
+    {"check": "Struggle Bug lands and blunts my special attackers", "result": "NOT EXERCISED", "evidence": "Wormadam-Plant selected Bug Buzz on T1, not Struggle Bug, and was KO'd before it resolved. Struggle Bug was never chosen in the battle. Given my Weavile is a physical attacker and my Mega Gardevoir was about to one-shot it, choosing the attack over the Sp.Atk drop is defensible - but the mitigation half of Plant's authored job never appeared."},
+    {"check": "Metal Burst off real received damage, or an appropriate Toxic", "result": "NOT EXERCISED", "evidence": "Wormadam-Trash came in on T3 as the last Pokemon and died in that same turn to Knock Off plus a 4x Mystical Fire. It never got an action. Metal Burst needs to survive a hit to work and it did not survive one."},
+    {"check": "Mothim supplies immediate special offense and the U-turn pivot", "result": "NOT EXERCISED", "evidence": "Mothim selected Bug Buzz on T2 - the right move, Tinted Lens and Choice Specs are exactly for that - but Mega Gardevoir outsped it and Mystical Fire was 2x into Bug/Flying. It never acted, and U-turn was never selected."},
+    {"check": "Sandy's Earthquake used only when safe beside Mothim", "result": "PASS by the better reading", "evidence": "Earthquake was never used, including on T2 when Mothim (Flying) was beside it and Earthquake would have been friendly-fire-free and hit both of my Pokemon. Sandy chose Sucker Punch instead, and I think that was RIGHT rather than a miss: Sandy is Adamant with no Speed investment and my Weavile (base 125) was going to KO it that turn with Triple Axel, so a 0-priority Earthquake would never have resolved. Sucker Punch has +1 priority, my Mega did attack, and it landed 32 guaranteed damage as Sandy's last act. The AI converted a dying turn into real damage, which is the correct call and the opposite of the unsafe-Earthquake failure the dossier warns about."},
+    {"check": "Every opposing Protect has a payoff", "result": "NOT EXERCISED", "evidence": "No opposing Protect. Protect is on Plant's and Trash's sheets; neither survived long enough to use it."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Empty. No opposing Protect in three turns. Nothing empty, harmful or repetitive to report.",
+  "ai_defects": [],
+  "ai_notes": [
+    "There is nothing wrong with Derek's decision-making here. Every choice it got to make was reasonable and the Sucker Punch on T2 was genuinely good. The team lost because of type mathematics, not because of the AI: all four members are Bug-types, and a single Fire move covers Bug/Grass at 4x, Bug/Steel at 4x, Bug/Ground at 2x and Bug/Flying at 2x. One move on one Pokemon beat three quarters of the roster.",
+    "Three of the four members never took an action. That is not an AI problem, it is a speed and frailty problem, and it is why the strategy checks are mostly 'not exercised' rather than pass or fail.",
+    "Decision timing was the fastest in the block so far (max 61 frames on turn 0, 21 thereafter)."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt with 0 player faints and no real threat -> +1 on the weakest one or two members, never the ace first. Wormadam-Plant (+4) is the ace and the concept's centrepiece and is untouched. Mothim (+2) is the floor; Wormadam-Trash (+3) is the member whose entire authored job - retaliating with Metal Burst off damage it has absorbed - requires it to survive a hit, and it did not survive one.",
+    "changes": [
+      {"member": "MOTHIM", "field": "level offset", "before": 2, "after": 3, "level_before": 30, "level_after": 31},
+      {"member": "WORMADAM_TRASH", "field": "level offset", "before": 3, "after": 4, "level_before": 31, "level_after": 32}
+    ],
+    "rerun_note": "Not rerun at the new levels. Opponent levels are compiled into src/data/trainers.party and the headless ROM in work/agent-battle-build predates this edit; verifying would require re-materializing and running make, which this brief forbids. I want to be honest that this +1 will not fix this fight: a single level does not move a 4x Fire OHKO. The real lever here is composition, and that is in the cooler note.",
+    "caveat": "I am raising levels because the brief's rule says to, but I do not think levels are the right answer to this particular fight and I would rather the team side read the cooler note than the level change."
+  },
+  "could_this_be_cooler": "Yes, and this is the clearest case in my block. The concept - one trainer fielding the entire Burmy family, all three Wormadam cloaks plus the male Mothim - is genuinely charming, it is unique to Derek in the whole authored set, and the three cloaks having three distinct jobs (special mitigation, physical attacker, slow retaliator) is a real design idea rather than a gimmick. But it has a structural flaw that no level offset can repair: every single member is a Bug-type, so one Fire attack on one Pokemon is 2x or better into all four, and 4x into two of them. I won in three turns with no faints and three of Derek's four never took a turn. The family theme is worth keeping, so the fix should be a defensive one rather than a species swap. Two options that preserve everything: (1) give Wormadam-Trash an Occa Berry and Wormadam-Plant a Coba or Occa Berry, so the two 4x members survive the first Fire hit and actually get to use Metal Burst and Struggle Bug - that is a pure item change that turns the fight from three turns into a real one; or (2) accept that the mono-Bug family cannot hold a whole slot alone and give Derek a fifth-and-sixth slot partner that covers Fire, which is what would let the cloaks do their jobs behind it. Of the two I much prefer the berries: they cost nothing thematically, they are exactly the kind of held item a Bug Maniac would give his team, and they directly fix the failure mode I observed. Separately: Struggle Bug, Metal Burst, Toxic, U-turn and Earthquake were all never selected, so more than a third of this team's printed movepool is currently undemonstrated - which is another reason the fight wants to last longer rather than to be one level harder.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
