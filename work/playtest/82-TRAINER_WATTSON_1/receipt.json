@@ -1,0 +1,132 @@
+{
+ "play_order": 82,
+ "e_group": "E0092",
+ "trainer": "TRAINER_WATTSON_1",
+ "class": "leader",
+ "location": "MauvilleCity_Gym",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "ELECTRODE": 30,
+  "ELECTIVIRE": 31,
+  "MAGNEZONE": 30,
+  "THUNDURUS_INCARNATE": 29,
+  "GALVANTULA": 30,
+  "MANECTRIC": 29
+ },
+ "cap_window_confirmation": "Dossier seeds 32/33/32/31/32/31 resolved to 30/31/30/29/30/29. Cap 30, Medium -2, confirmed at the badge fight itself.",
+ "party_manifest": "work/playtest/82-TRAINER_WATTSON_1/party.json",
+ "party_pool_audit": "Same cap-30 Electric-gym counterteam, leading both Sheer Force Ground bodies. Every source map at or before Route 110; NewMauville (Surf, C28) and Route 111 desert (Go-Goggles, C23) species excluded - which matters most here, because Zapdos, Regieleki, Zekrom and Zeraora all sit in pool-30 sourced from New Mauville and would be absurd to bring to the gym that gates New Mauville. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "Electrode's Electric Surge sets Electric Terrain on entry",
+  "The bespoke tactic ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE fires: a friendly Discharge activates Electivire's Motor Drive for a Speed boost before Electivire acts",
+  "Motor Drive itself turns an Electric hit into a Speed boost - this is the check I deliberately deferred from Kirk's room so it could be paid for by the opponent's own tactic",
+  "Magnet Pull actually traps my Steel types, visible in switch_blocked_by",
+  "Magnezone's Air Balloon is a real Ground immunity and Body Press is a used damage lane",
+  "Thundurus's Prankster priority and Nasty Plot are used, and Grass Knot answers my Ground types",
+  "Galvantula's Compound Eyes Thunder and the Choice Specs lock behave",
+  "Mega Manectric Mega Evolves and Lightning Rod redirection changes to Intimidate on Mega Evolution, as the dossier's own crack line warns",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/82-TRAINER_WATTSON_1/a1",
+   "seed": 82,
+   "outcome": "won",
+   "turns": 7,
+   "driver_turn_counter": 6,
+   "player_faints": 3,
+   "opponent_faints": 6,
+   "narrative": "T1 I led both Ground bodies precisely so the authored Discharge activation could fire for free - and it never came. Electrode spent the turn on Taunt into a Nidoqueen whose four moves are all attacks, Electivire's Ice Punch (2x) took Nidoking to 14, and my two Earth Powers removed Electivire outright; the second one redirected onto Electrode and its Focus Sash left it on 1. T2 Electrode Protected away the Earth Power that would have finished it, my Flamethrower (2x) popped Magnezone's Air Balloon and took it to 28, and Magnezone's Flash Cannon KO'd Nidoking. T3 Magearna replaced it and immediately showed switch_blocked_by: ability_prevents_escape from Magnet Pull; Aura Sphere (2x on Steel) removed Magnezone and Earth Power finally removed Electrode. T4 Thundurus took a Nasty Plot to +2 while Manectric Protected, and my Thunderbolt aimed at Thundurus was pulled into Manectric by Lightning Rod and then blocked by that same Protect - a double-payoff guard. T5 Thundurus threw its whole +2 Life Orb turn into a Thunderbolt that its own partner's Lightning Rod absorbed, and Ice Beam plus Fleur Cannon removed it. T6 Galvantula arrived and correctly used Energy Ball (2x) rather than a useless Thunder into a Ground type, Manectric finally Mega Evolved and its Intimidate dropped Nidoqueen's Attack on the spot, and Mega Manectric's Flamethrower plus that Energy Ball KO'd Magearna. T7 Weavile replaced it, Ice Shard removed the 10 HP Galvantula, Mega Manectric's Flamethrower (2x) KO'd Weavile and Earth Power (2x) closed on the Mega."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "Electric Surge terrain on entry",
+   "result": "PASS",
+   "evidence": "Turn 0 state before any action: terrain=electric, 5 turns. No Terrain Extender on this set, correctly five and not eight, and it expired on schedule at the end of T5 ('The electricity disappeared from the battlefield.')."
+  },
+  {
+   "check": "ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE",
+   "result": "FAIL - the leader's one bespoke tactic never fired",
+   "evidence": "Electrode was alive for three turns and never selected Discharge once: Taunt (T1), Protect (T2), Taunt (T3). Electivire died on T1 having never received a Motor Drive activation. I built the board specifically to make this cheap for the AI - both my actives were Ground types, so Discharge would have dealt literally zero damage to me while still hitting Electivire and granting the Speed boost the tactic exists for. See AI defect WATTSON-2."
+  },
+  {
+   "check": "Motor Drive",
+   "result": "NOT EXERCISED - now untested in two consecutive encounters",
+   "evidence": "Electivire never took an Electric hit. I deferred this check at Kirk's room (Emolga) on the grounds that the only test there was a thrown turn, expecting Wattson's own activation tactic to pay for it. The tactic did not fire, so Motor Drive remains unvalidated across the whole Mauville block. It should be scheduled deliberately - the cheapest honest test is a player Electric move into Emolga or Electivire on a turn where that move was the correct choice anyway."
+  },
+  {
+   "check": "Magnet Pull traps Steel",
+   "result": "PASS - cleanest engine evidence in the block",
+   "evidence": "With Magnezone on the field, the pending_decision for Magearna (Steel/Fairy) read switch_blocked_by: ['ability_prevents_escape'] while the pending_decision for Nidoqueen (Poison/Ground) in the same call read switch_blocked_by: []. Once Magnezone fainted the block cleared on the very next state. Exactly the Steel-only trap, read from the engine's own CanBattlerEscape path."
+  },
+  {
+   "check": "Magnezone Air Balloon and Body Press",
+   "result": "PASS (Balloon), NOT EXERCISED (Body Press)",
+   "evidence": "Magnezone arrived Ground-immune and my Earth Power was off the table until Flamethrower (2x on Steel) popped the Balloon. Body Press was never selected - defensible, since both of my actives were special-leaning and its Flash Cannon was doing the KO work, but the second damage lane the dossier names went unused."
+  },
+  {
+   "check": "Thundurus Prankster and Nasty Plot",
+   "result": "PARTIAL",
+   "evidence": "Nasty Plot fired on T4 and took it to +2. Prankster priority Thunder Wave was never used. And the +2 turn it bought was then thrown away - see AI defect WATTSON-1. Grass Knot, the move the set carries specifically to answer Ground types, was never selected despite a 122 HP Ground type standing in front of it for four turns."
+  },
+  {
+   "check": "Galvantula Compound Eyes and the Choice lock",
+   "result": "PASS",
+   "evidence": "Galvantula arrived facing a Ground type and correctly chose Energy Ball (2x on Nidoqueen, and it landed the Sp.Def drop) rather than locking a Choice Specs into a Thunder that a Ground type is immune to. After that the state listed ENERGY_BALL as its only move - a real lock. This is a good decision and the clean counterexample to WATTSON-1 on the same team."
+  },
+  {
+   "check": "Mega Manectric and the Lightning Rod to Intimidate swap",
+   "result": "PASS - both halves confirmed in one battle",
+   "evidence": "Pre-Mega, Lightning Rod redirected twice and the log says so verbatim: T4 'Magearna used Thunderbolt! / The opposing Manectric took the attack!' and T5 'The opposing Thundurus used Thunderbolt! / The opposing Manectric took the attack! / The opposing Manectric's Sp.Atk rose!'. Then on T6 'Manectric has Mega Evolved into Mega Manectric', the state flipped to ABILITY_INTIMIDATE, and Nidoqueen's Attack dropped on the spot. The dossier's warning that the behaviour changes on Mega Evolution is exactly right and the engine implements it."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "Two Protects, both excellent. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 2,
+   "battler": "ELECTRODE",
+   "payoff": "at 1/85 behind a spent Focus Sash it blocked the Earth Power that would have killed it outright, and survived to act again. Maximum payoff."
+  },
+  {
+   "turn": 4,
+   "battler": "MANECTRIC",
+   "payoff": "double payoff. At 88/88 it blocked a 2x Earth Power from Nidoqueen AND the Thunderbolt that its own Lightning Rod had just dragged onto it. One guard, two attacks absorbed, and it went on to Mega Evolve and KO two of my Pokemon."
+  }
+ ],
+ "ai_defects": [
+  {
+   "id": "WATTSON-1",
+   "severity": "clear",
+   "turn": 5,
+   "battler": "THUNDURUS_INCARNATE",
+   "board": "Thundurus at 94/94, Life Orb, +2 Sp.Atk from its own Nasty Plot the turn before. Its partner was Manectric with Lightning Rod, un-Mega'd, at 88/88. My actives were Nidoqueen (Poison/Ground, 122 HP, Assault Vest - immune to Electric) and Magearna (Steel/Fairy, 116 HP, Assault Vest - resists Electric at 0.5x).",
+   "chosen": "MOVE_THUNDERBOLT targeting b2 (Magearna). The decision record shows the target was my Pokemon, not its own ally, so this was not a deliberate feed.",
+   "why_wrong": "Lightning Rod on its own partner guaranteed the attack would never reach Magearna. The log reads 'The opposing Thundurus used Thunderbolt! / The opposing Manectric took the attack! / The opposing Manectric's Sp.Atk rose!'. A +2 Life Orb turn produced zero damage and handed its partner a single Sp.Atk stage. Worse, Thunderbolt was the one move on the set that could not work against that board at all - 0x into Nidoqueen, 0.5x into Magearna, and redirected in practice.",
+   "better": "MOVE_GRASS_KNOT into Nidoqueen. Grass is 2x on Ground, Nidoqueen is heavy enough to take a high base power, and at +2 with a Life Orb that is a serious hit on the Pokemon that went on to win the battle. Thunder Wave through Prankster was also strictly better than nothing.",
+   "generalization": "This is an ally-ability blind spot in target scoring, not a Thundurus problem: the scorer did not subtract the value of an Electric attack that its own side's Lightning Rod will intercept. The affected shape is any team that pairs an Electric attacker with a Lightning Rod ally. Inside this block Wattson is the worst case - Manectric's Lightning Rod sits beside five Electric attackers (Electrode, Electivire, Magnezone, Thundurus, Galvantula), so any of them can lose a turn this way. The mirror-image cases are NOT defects and must not be swept into the same fix: Motor Drive (Kirk's Emolga), Volt Absorb (Ben's Lanturn, Shawn's Jolteon) and Dry Skin (Ben's Heliolisk) are authored safe pairings where the friendly hit is the point. The distinction the scorer needs is that Lightning Rod and Storm Drain steal the attack and deny the damage, whereas Volt Absorb, Motor Drive and Dry Skin only absorb what was going to hit the ally anyway. I did not touch AI C code."
+  },
+  {
+   "id": "WATTSON-2",
+   "severity": "moderate",
+   "turn": "1 and 3",
+   "battler": "ELECTRODE",
+   "board": "T1 my actives were Nidoqueen and Nidoking, both Poison/Ground with four attacking moves each and no status move between them. T3 my actives were Nidoqueen and Magearna, again eight attacking moves and no status move. Electivire, the Motor Drive partner the leader's bespoke tactic names, was alive and adjacent on T1.",
+   "chosen": "MOVE_TAUNT both times (T1 into Nidoqueen, T3 into Magearna). Discharge was never selected in the whole battle.",
+   "why_wrong": "Taunt blocks status moves, and neither target had one, so both Taunts were completely inert - the only trace either left was a 'Magearna's Taunt wore off!' message. Meanwhile the T1 board was the single best board this tactic will ever see: both of my Pokemon were Ground types, so Discharge would have dealt zero damage to me while still hitting Electivire and granting it the Motor Drive Speed boost for free. The leader's one authored bespoke tactic was available at zero cost and was passed over for a move that did nothing.",
+   "better": "T1: MOVE_DISCHARGE, firing the authored ACTIVATE tactic at no cost. T3: an attack, or Volt Switch to pivot out of a board where Electrode had nothing useful left.",
+   "generalization": "Two separate issues worth indexing. First, Taunt scoring against a revealed or plausibly all-attacking set: the first Taunt against an unrevealed party is a defensible prior, but the T3 repeat came after two turns in which Nidoqueen had used nothing but attacks. Second, and more important for this block, bespoke ACTIVATE tactics do not appear to be weighted above ordinary move scoring when the activation move scores badly on raw damage - which is exactly when the tactic is most valuable, because a zero-damage Discharge into a Ground board is free. Other teams carrying an ally-activation tactic of this shape should be checked for the same silence."
+  }
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt with three player faints - Nidoking, Magearna and Weavile - across seven turns. By the calibration rule I was given ('Won with 2+ faints or after a real fight, keep'), this is a keep, and I have not changed any Wattson offsets. But see the calibration concern: keeping is the correct application of the rule and is still, I think, the wrong outcome for this encounter, and that judgement belongs to the main agent rather than to a lever I am capped at.",
+ "calibration_concern": "The leader is levelled BELOW his own gym trainers, and it shows. Wattson's six resolve to 30/31/30/29/30/29 - his highest member is L31. Every one of the three hard rooms has at least three members at or above that: Vivian resolves to 33/33/34/29/31/32, Kirk to 32/27/31/32/29/28, Angelo to 33/28/33/29/29/29. Measured in the only currency that matters, Wattson cost me three player faints; Vivian cost three, Kirk three, Angelo four. The brief's requirement that 'Wattson must be a major step beyond the rooms' is not met - he is mid-pack, and strictly easier than Angelo. There is also a compositional reason this fight is soft that levels alone will not fix: all six members are mono-Electric or Electric/x, and four of the six are grounded, so a player who simply leads two Ground types walks in immune to the entire team's STAB. My double-Ground lead removed Electivire on turn one while taking zero damage from Electrode. The two things I would recommend the main agent weigh, neither of which I am authorized to do here: raise Wattson's whole budget by two or three so the ace sits above the rooms rather than below them, and give at least one member real coverage against a Ground lead - Magnezone's Flash Cannon and Body Press already do that job, so the gap is on the fast slots.",
+ "could_this_be_cooler": "The generator-and-motor opening is a good idea and the Mega Manectric closer is genuinely well chosen - watching Lightning Rod eat two Thunderbolts and then become Intimidate the moment it transforms is the single most memorable mechanical beat in the whole gym, and the dossier predicted it exactly. The problem is that the leader currently reads as a sixth room rather than a culmination. Two concrete suggestions, neither applied. First, the tactic needs to survive its own opening: Electivire is the centrepiece and it died on turn one to two Earth Powers before Motor Drive ever existed, so the Sitrus Berry should be an Air Balloon. That single item change makes the opening board a real puzzle - the player can no longer answer both leads with Ground, has to spend a turn popping the Balloon, and during that turn the Discharge activation has somewhere to land. Second, Thundurus is the member that feels least like Wattson; it is a reachable legend doing a generic Nasty Plot job, and it spent its big turn feeding its own partner. If the slot is kept, Thunder Wave should be Taunt or Sunny Day-style disruption so Prankster priority means something even when the Electric attack is dead; if it is open to replacement, a Ground-resistant or Levitating body with non-Electric coverage would fix the composition problem and the difficulty problem in the same slot.",
+ "authored_set_legality": "No legality problem found. All six prepared and ran clean, including the Manectite Mega slot 6 and Thundurus's Incarnate forme."
+}
