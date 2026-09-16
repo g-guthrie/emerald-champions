@@ -1,0 +1,118 @@
+{
+ "play_order": 81,
+ "e_group": "E0091",
+ "trainer": "TRAINER_SHAWN",
+ "class": "gym",
+ "location": "MauvilleCity_Gym",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "ELECTRODE_HISUI": 28,
+  "BELLIBOLT": 30,
+  "ROTOM_WASH": 28,
+  "PAWMOT": 28,
+  "JOLTEON": 28,
+  "AMPHAROS": 28
+ },
+ "cap_window_confirmation": "Dossier seeds 30/32/30/30/30/30 resolved to 28/30/28/28/28/28. Cap 30, Medium -2. Note that this is the only Mauville room whose members are all at offset 0 except one.",
+ "party_manifest": "work/playtest/81-TRAINER_SHAWN/party.json",
+ "party_pool_audit": "Same cap-30 Electric-gym counterteam, leading the two Assault Vest bodies. Every source map at or before Route 110; NewMauville (Surf, C28) and Route 111 desert (Go-Goggles, C23) species excluded. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "Hisuian Electrode sets Grassy Terrain and it does what Grassy Terrain actually does - heal grounded Pokemon and halve Earthquake/Bulldoze/Magnitude, NOT Earth Power",
+  "Bellibolt's Electromorphosis charges when it is hit and the charge is spent on an Electric move",
+  "Parabolic Charge is deployed beside the Volt Absorb partner (Jolteon) rather than beside a merely-resistant one, and it drains",
+  "Mega Ampharos actually Mega Evolves and its new Electric/Dragon typing and Mold Breaker matter",
+  "Rotom-Wash's Levitate and Pawmot's Choice Band Iron Fist contribute",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/81-TRAINER_SHAWN/a1",
+   "seed": 81,
+   "outcome": "won",
+   "turns": 6,
+   "driver_turn_counter": 5,
+   "player_faints": 0,
+   "opponent_faints": 6,
+   "narrative": "T1 Hisuian Electrode got its Grassy Terrain up and died to a focused Earth Power plus a 2x Flash Cannon; Bellibolt spent the turn on a Protect that blocked nothing, because both of my attacks were aimed at the support. T2 Rotom-Wash's Hydro Pump plus a charged Muddy Water (2x each on Ground) took Nidoqueen from 122 to 9 - the one genuinely dangerous turn of the fight - while Fleur Cannon removed Rotom-Wash and Earth Power took Bellibolt to 21. T3 I retreated the 9 HP Nidoqueen for Gardevoir, which arrived and Traced Electromorphosis; Pawmot's Choice Band Close Combat (2x on Steel) took Magearna to 68. T4 Mega Gardevoir Mega Evolved and one Pixilate Hyper Voice (2x on Pawmot's Fighting, and it was at -1 Sp.Def from its own Close Combats) removed Pawmot, while Bellibolt's second Protect blocked both the spread and a Flash Cannon. T5 Hyper Voice plus Fleur Cannon removed Bellibolt and Jolteon together. T6 Ampharos Mega Evolved into Electric/Dragon in front of two Fairy attackers and died to Fleur Cannon plus Hyper Voice, both 2x on its brand-new Dragon typing. Zero player faints."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "Grassy Terrain and what it actually mitigates",
+   "result": "PASS, and the room's own crack line is correct",
+   "evidence": "T1 terrain=grassy for five turns. End-of-turn healing fired for every grounded body on both sides - 'Nidoqueen is healed by the grassy terrain!', 'Gardevoir is healed...', 'Magearna is healed...', 'The opposing Bellibolt is healed...'. Critically, my Earth Power was NOT halved: Grassy Terrain only weakens Earthquake, Bulldoze and Magnitude, and the dossier says so explicitly. The room is honest about its own limit, and the terrain actively healed my two Ground attackers all fight."
+  },
+  {
+   "check": "Bellibolt Electromorphosis",
+   "result": "PASS, three separate triggers",
+   "evidence": "'Being hit by Earth Power charged the opposing Bellibolt with power!' (T2), 'Being hit by Flash Cannon charged the opposing Bellibolt...' (T3) and 'Being hit by Hyper Voice charged the opposing Bellibolt...' (T5). The T2 charge was spent on the Muddy Water half of the turn that nearly killed Nidoqueen. Independent confirmation: my Gardevoir Traced Electromorphosis and the engine charged it off Pawmot's Close Combat."
+  },
+  {
+   "check": "Parabolic Charge beside Volt Absorb Jolteon",
+   "result": "FAIL to exercise - and there was one clean opportunity",
+   "evidence": "Parabolic Charge was never selected in six turns. See the decision-quality note for T5, which is the exact board the authored pairing describes."
+  },
+  {
+   "check": "Mega Ampharos",
+   "result": "PASS",
+   "evidence": "'The opposing Ampharos has Mega Evolved into Mega Ampharos!' on T6, and the typing change was immediately real - my Pixilate Hyper Voice read 'It's super effective!' against what had been a pure Electric type one turn earlier, which is only possible against the Mega's Dragon half. Mold Breaker never mattered because nothing on my side had a relevant ability to ignore."
+  },
+  {
+   "check": "Rotom-Wash Levitate and Pawmot Choice Band",
+   "result": "PASS",
+   "evidence": "Rotom-Wash's Levitate took it off my Earth Power target list entirely and its Hydro Pump (2x) was half of the fight's only scary turn. Pawmot locked its Choice Band into Close Combat and did 48 to an Assault Vest Magearna through the Vest, at the cost of the Defence and Sp.Defence drops that then let one Hyper Voice remove it."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "FAIL - one of the two was empty",
+   "evidence": "Two Protects, both from Bellibolt. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 1,
+   "battler": "BELLIBOLT",
+   "payoff": "EMPTY. Both of my actions were aimed at Hisuian Electrode, so the guard blocked nothing at all. Worse, it is anti-synergistic with Bellibolt's own design: Electromorphosis rewards being hit, so a turn-one Protect on a 133 HP Leftovers body is spending the action to refuse the charge the set exists to collect. The AI cannot read my pending commands, so this is an expected-value miss rather than an illegal choice, but it is the one genuinely wasted turn Shawn had."
+  },
+  {
+   "turn": 4,
+   "battler": "BELLIBOLT",
+   "payoff": "real. At 21/133 it blocked both the spread half of a Pixilate Hyper Voice and a targeted Flash Cannon, and survived to force an extra turn. Correct guard, and three turns after the first, so no repetition problem."
+  }
+ ],
+ "ai_defects": [],
+ "ai_decision_quality_notes": [
+  {
+   "turn": 5,
+   "battler": "BELLIBOLT",
+   "note": "The authored safe pairing had finally assembled and was not used. Bellibolt was at 37/133 with Volt Absorb Jolteon freshly beside it - the exact board the plan describes - and chose a single-target Thunderbolt instead of Parabolic Charge. Parabolic Charge would have hit both of my Pokemon, drained roughly half the damage back into a body that was two hits from death, and healed Jolteon through Volt Absorb rather than hurting it. Thunderbolt is more damage to one target, so this is a close call rather than a blunder, but the consequence is that the room's signature interaction never appeared even when the board set it up perfectly. Flagging for the pair-scoring constants rather than as a defect."
+  },
+  {
+   "turn": 5,
+   "battler": "JOLTEON",
+   "note": "Positive. Choice Specs Jolteon locked itself into Shadow Ball rather than its STAB Thunderbolt, because the target was a Psychic/Fairy Mega Gardevoir - 2x instead of 1x. Correct lock reasoning under the Choice commitment."
+  }
+ ],
+ "level_changes": [
+  {
+   "member": "ROTOM_WASH",
+   "field": "level offset",
+   "before": 0,
+   "after": 1,
+   "reason": "Zero player faints in six turns against a Gym room that carries the gym's second Mega and an Ace Pokemon AI tag. That is far past the review threshold. Rotom-Wash is tied-lowest at L28 and got exactly one action before being removed by a single Fleur Cannon; at 74 HP it is too thin to be the mid-game pivot this room needs."
+  },
+  {
+   "member": "JOLTEON",
+   "field": "level offset",
+   "before": 0,
+   "after": 1,
+   "reason": "The other member I am raising: tied-lowest at L28, arrived and was removed inside a single turn, and it is the designated Volt Absorb partner for the room's signature Parabolic Charge - if it cannot survive a turn, that pairing can never happen. Deliberately NOT raised: Hisuian Electrode, because it did its one job perfectly and had Grassy Terrain up before it died; Pawmot, because its Choice Band Close Combat did real damage through an Assault Vest; Bellibolt, already at offset 2 and the room's best performer; and Ampharos, which is the Mega ace and which the calibration rule says never to raise first."
+  }
+ ],
+ "rerun_note": "Not rerun - a level-offset change only reaches the ROM through a re-materialize plus a rebuild, which this block does not perform. Same as play_order 57-59, 73 and 76.",
+ "calibration_concern": "Recording this separately because two +1s do not fix it. Shawn's six sit at offsets 0/2/0/0/0/0, which resolves to five members at L28 and one at L30. The three sibling Mauville rooms run offsets up to 5 and 6 - Vivian resolves to 33/33/34/29/31/32, Kirk to 32/27/31/32/29/28, Angelo to 33/28/33/29/29/29 - and each of those cost me three or four player faints while Shawn cost zero. This is the room designated 'Ace Pokemon' with a Mega ace, and it is by a wide margin the softest of the four. The two +1s I am authorized to make here bring Rotom-Wash and Jolteon to L29; the room would still be the lowest-levelled in the gym. I recommend the main agent look at Shawn's whole level budget against its siblings in a later pass rather than treating this as settled.",
+ "could_this_be_cooler": "The concept is good and distinct - a defensive field and a retaliation identity, rather than Wattson's opening Discharge repeated a room early - and Grassy Terrain healing the player's own grounded Pokemon is an unusual, honest design choice. But the room does not currently show the player its thesis. Parabolic Charge is the move the whole concept is named around and it was never used, including on the one turn the Volt Absorb partner was standing right next to a half-dead Bellibolt. And the Mega ace Mega Evolves into Electric/Dragon, which against any Fairy attacker is strictly worse than staying pure Electric - my Hyper Voice went from neutral to super effective the moment it transformed. The concrete suggestion (not applied): drop Thunderbolt from Bellibolt's set. With Parabolic Charge, Muddy Water and Protect it has no single-target Electric option to prefer, so the charged retaliation it collects has to be spent on the spread drain - which is the interaction the room exists to teach - and Jolteon beside it stops being decorative. The set loses nothing it was actually using.",
+ "authored_set_legality": "No legality problem found. All six prepared and ran clean, including the Hisuian Electrode form and the Ampharosite Mega slot 6."
+}
