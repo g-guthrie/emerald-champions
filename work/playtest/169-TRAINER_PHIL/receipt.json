@@ -1,0 +1,82 @@
+{
+  "play_order": 169,
+  "e_group": "E0238",
+  "trainer": "TRAINER_PHIL",
+  "class": "regular",
+  "location": "Route119",
+  "cap": 48,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/169-TRAINER_PHIL/party.json",
+  "level_verification": "cap 48: Staraptor offset -1 -> L45, Farfetch'd 0 -> L46, Kilowattrel 0 -> L46, Unfezant +1 -> L47. All equal cap + offset - 2. --cap 48 correct.",
+  "attempts": [
+    {
+      "seed": 1,
+      "run_dir": "work/playtest/169-TRAINER_PHIL/run-s1",
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 6,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.038
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "TAILWIND flag is backed: Staraptor or Unfezant actually sets Tailwind",
+      "result": "FAIL",
+      "evidence": "Staraptor (the authored Tailwind lead) was KOed by a sun-boosted Heat Wave before it acted on turn 1; its latched choice that turn was Brave Bird, not Tailwind. Unfezant entered on turn 3 and spent its two turns on Protect and Brave Bird. No Tailwind was set at any point. Not a defect by itself - both Tailwind users died fast - but the flag went unexercised in this run."
+    },
+    {
+      "check": "Feint is used only to open a shield for a partner's useful hit (dossier disposition)",
+      "result": "NOT_EXERCISED",
+      "evidence": "Farfetch'd used Brave Bird twice and Protect once; Feint never came up. No empty Feint observed, so the authored anti-pattern did not fire."
+    },
+    {
+      "check": "Volt Absorb Kilowattrel is deployed as the Electric answer",
+      "result": "PASS",
+      "evidence": "Turn 2: Phil sent Kilowattrel in immediately after Staraptor fell, with Magnezone (Electric) on the field. The AI never fed it a Thunderbolt to absorb only because I withheld one; my own targeting recognised the ability. Kilowattrel used Thunderbolt on turn 5 into Magnezone (super effective) - correct target choice."
+    },
+    {
+      "check": "Defiant Farfetch'd converts an opposing Intimidate into an Attack boost",
+      "result": "NOT_EXERCISED",
+      "evidence": "I deliberately brought no Intimidate, exactly as the crack line recommends. Farfetch'd stayed at +0."
+    },
+    {
+      "check": "Intimidate lands on entry",
+      "result": "PASS",
+      "evidence": "Turn 0 state: both player actives at atk -1 from Staraptor's Intimidate."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Farfetch'd",
+      "call": "Protect",
+      "payoff": "REAL - blocked Magnezone's Analytic Thunderbolt (super effective, lethal at 70/118 HP). Bought Farfetch'd one extra turn."
+    },
+    {
+      "turn": 4,
+      "battler": "Unfezant",
+      "call": "Protect",
+      "payoff": "REAL - blocked Magnezone's Analytic Thunderbolt (super effective on a Normal/Flying body at full HP, would have taken roughly half). Entered on turn 3 and guarded the obvious Electric gun on its first full turn."
+    }
+  ],
+  "consecutive_protect_risk": "none - no battler guarded twice in a row.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Opponent decision time peaked at 1.038 s (62 frames) on the opening turn, against the authored 1.2 s budget. Within budget but with little headroom; worth watching on the six-member fights in this block.",
+    "Turn 5: Kilowattrel at 10/135 chose Thunderbolt into Magnezone (super effective) rather than guarding. Correct - it could not survive anything and trading damage was the higher-EV line."
+  ],
+  "level_changes": [
+    {
+      "member": "STARAPTOR",
+      "before": -1,
+      "after": 0,
+      "reason": "First-attempt win in 4 turns with a single player faint, and that faint came from a critical Brave Bird rather than from pressure. Staraptor is the lowest-level member and it is the Tailwind lead that is supposed to set the tempo; at L45 it died to one spread attack before acting. +1 per the review rule, applied to the weakest member and not to the ace."
+    }
+  ],
+  "rerun": "NOT POSSIBLE IN THIS SESSION - the driver reads opponent levels out of the compiled headless ROM and this agent is forbidden to run make. The level change is recorded for the main agent's rebuild; the confirming rerun is deferred.",
+  "could_this_be_cooler": "The dossier's own answer is right and I will not repeat it, but playing it adds one concrete point: Phil is four Flying types with no answer at all to a single spread Rock or Electric attack, and the fight resolved in four turns because one Pokemon (Magnezone) walled and killed three quarters of the team. The cheapest fix that keeps the bird-keeper theme is to give one member a non-Flying secondary identity - Farfetch'd-Galar (Fighting, Leek + Focus Energy) instead of base Farfetch'd would keep Defiant-adjacent flavour, break the four-way shared Electric/Rock weakness, and stop Magnezone from being a one-Pokemon answer to a whole trainer. Flagged, not changed.",
+  "authored_set_legality": "No legality problem found. All four members, abilities, items and moves resolved as authored in the ROM.",
+  "notes": "Player party: Mega Charizard Y / Togekiss / Magnezone / Excadrill / Amoonguss / Dragonite, all chronologically legal for Route 119 (see party.json availability_audit)."
+}
