@@ -1,0 +1,31 @@
+{
+  "trainer_a": "TRAINER_ALBERT",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 1,
+  "difficulty": "medium",
+  "level_cap": 96,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 7,
+  "decisions": 10,
+  "player_faints": 2,
+  "opponent_faints": 6,
+  "ai_decision_frames_max": 64,
+  "ai_decision_seconds_max": 1.072,
+  "ai_decision_frames": [
+    45,
+    45,
+    62,
+    60,
+    60,
+    61,
+    64,
+    64,
+    30,
+    30
+  ],
+  "rom_sha256": "9349726a62f619a28aad869ab7704b7a13e9c95f7b87d71e811dd80b75c15713",
+  "elf_sha256": "c29c10930aa22d8ae6b6e09b5d1044208ddcc5b15c9204d53cbc3b9aad719770",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
