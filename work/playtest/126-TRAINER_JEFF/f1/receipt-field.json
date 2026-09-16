@@ -1,0 +1,113 @@
+{
+  "play_order": 126,
+  "e_group": "E0149",
+  "trainer": "TRAINER_JEFF",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/126-TRAINER_JEFF/receipt.json (mist-less run at cap 36; left intact)",
+  "build": "work/agent-battle-build-4",
+  "cap_note": "Cap 36 -> 42. Observed levels 40/40/39/40/40/40 = 42 + offset - 2 against the CURRENT offsets, which include the first run's two +1s (Darmanitan -1 -> 0, Cinderace -1 -> 0). The dossier prose still quotes the pre-bump 'Medium cap40 levels 40/40/39/39/39/40'.",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS. Terrain read 'misty' from turn 0 to the end."
+  },
+  "party_manifest": "work/playtest/126-TRAINER_JEFF/f1/party.json",
+  "party_note": "Same rain six, chronology re-checked against pool-42.json; all gate<=36 from maps preceding Lavaridge.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 281,
+      "outcome": "won",
+      "turns": 8,
+      "player_faints": 5,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.021,
+      "events": "work/playtest/126-TRAINER_JEFF/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/126-TRAINER_JEFF/f1/attempt-1-result.json",
+      "notes": "Won 6-5 on the last Pokemon. The hardest fight of the block by margin. Lost Kingdra turn 1 to a critical Brave Bird, Garganacl turn 2 to a Choice Band Libero High Jump Kick, Pelipper turn 3, and both Primarina and Swampert on turn 5 before either could act. Togekiss - which has exactly one attacking move and no Sp.Atk investment - finished the last two on Fairy/Flying resistances. The mist-less run won this room 6-1 with a single faint, so the first run's +1s to Darmanitan and Cinderace are strongly vindicated."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the room's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 0: terrain 'misty', terrain_is_permanent true, authored_by_trainer_a ['misty_terrain'], from_map false."
+    },
+    {
+      "check": "plan: 'A terrain seed can activate on a Flying Pokemon'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn-0 state, before any action: Hawlucha's item read NONE (Misty Seed consumed), its stat stages read spd +1, and its ability read UNBURDEN. Hawlucha is Fighting/Flying, so this is the third distinct grounding case the block now has on record: grounded Flareon's Toxic Orb blocked (E0146), ungrounded Drifblim's Flame Orb allowed (E0148 Jace), and here an ungrounded Pokemon still receiving a terrain SEED. Seeds key off the terrain being present, not off the holder being grounded, and the engine is doing that correctly."
+    },
+    {
+      "check": "plan: 'the consumed seed ... enables Unburden'",
+      "result": "PASS, with a caveat that undercuts the plan",
+      "mist_dependent": true,
+      "evidence": "Unburden was live from turn 0 with the item gone. But Hawlucha's authored EV spread is 252/252/0/0/0/4 - four Speed EVs - so even with Unburden doubling it, my Swift Swim Kingdra moved first on turn 1 and killed it with Ice Beam before it could use the speed for anything. The Unburden payoff is real in the engine and close to worthless on this spread. See could_this_be_cooler."
+    },
+    {
+      "check": "plan: 'and powers Acrobatics'",
+      "result": "NOT ACHIEVED",
+      "mist_dependent": true,
+      "evidence": "Zero occurrences of ACROBATICS in the events log. Hawlucha lived one turn and spent it on Close Combat. The itemless 110 BP Acrobatics the seed exists to enable was never used."
+    },
+    {
+      "check": "plan: 'Flying Hawlucha does not receive Misty status protection'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "No status was attempted against Hawlucha - my party carries no status move and Hawlucha died on turn 1."
+    },
+    {
+      "check": "plan: 'Opposing terrain replacement before seed activation disrupts this opening'",
+      "result": "NOT ACHIEVABLE AS WRITTEN - prose accuracy note",
+      "mist_dependent": true,
+      "evidence": "The seed had already activated at turn 0, before any player action was possible. For a LEAD Hawlucha there is no window in which the player can replace the terrain first, because send-out precedes the first decision point. The sentence is only true for a Hawlucha that comes in later in the battle. Worth correcting in the dossier prose; it is not a code problem."
+    },
+    {
+      "check": "strategy TAILWIND",
+      "result": "NOT ACHIEVED",
+      "mist_dependent": false,
+      "evidence": "Zero occurrences of TAILWIND selected by the opponent. Talonflame is the only member carrying it, it arrived fourth on turn 3, and it was killed that same turn by a doubled Weather Ball and Liquidation after choosing Flare Blitz. The room's named strategy never ran. Roost was never used either."
+    },
+    {
+      "check": "plan: 'Feint supports the other fast physical attackers'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "Zero occurrences of FEINT; Hawlucha died on turn 1."
+    },
+    {
+      "check": "plan: 'Keep Crobat, Infernape, Scarf Darmanitan, Band Cinderace and Gale Wings Talonflame'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "All five present at the authored offsets and all five contributed. Choice Band Libero Cinderace's High Jump Kick killed a full-HP 175 Garganacl through Rock's Fighting weakness; Crobat survived from turn 1 to turn 4 chaining Brave Birds; Infernape's Close Combat killed Swampert."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_summary": "Zero opposing Protects in eight turns - and that is structural rather than a cadence failure. Only one of Jeff's six members (Hawlucha) carries Protect at all, and it died on turn 1. This is the block's one all-out-offence room and it guards accordingly; there is nothing to fault in the cadence because there was almost nothing available to guard with.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 2, Cinderace: High Jump Kick into Garganacl rather than its STAB Pyro Ball. Libero turned it into a Fighting-type STAB, Fighting is 2x into Rock, and Pyro Ball would have been halved by the rain. It one-shot a full-HP 175 HP body. Best single choice of this room.",
+    "Turn 4, Crobat: switched off Brave Bird to Cross Poison into Primarina (Poison, 2x into Fairy) and crit for 152 of 158. Correct coverage read, and it had been taking Brave Bird recoil for three turns.",
+    "Darmanitan selected Superpower on turns 4 through 8 and could not stop: the Choice Scarf locked it in, and from turn 6 onward it had no bench left to switch to. By the end it was at the -6 Attack floor hitting a Fairy/Flying Togekiss for 0.25x and about 5 HP a turn. This is not a defect - the repetition was forced - but it is worth noting that a Choice item plus a self-debuffing move is a trap the scorer walked into on turn 4, when Rock Slide and U-turn were both available and neither would have locked it into a move that became almost useless two turns later.",
+    "AI decision time peaked at 1.021s, inside the 1.2s budget."
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Brief rule: 'Won with 2+ faints or after a real fight -> keep.' Five player faints and the battle finished with a single Pokemon standing that has one attacking move and no offensive investment - this is the hardest room in the block on the evidence. The first run's +1s to Darmanitan and Cinderace turned a 6-1 single-faint win into a 6-5 last-Pokemon win, which is exactly the correction they were meant to be, so nothing further moves. Cumulative across both runs: Darmanitan +1, Cinderace +1, everything else unchanged - inside the +/-2 ceiling.",
+  "could_this_be_cooler": "Keep the roster - six fast physical attackers with no Protect between them is a genuinely distinct room in a Gym full of setup and field control, and it is the one that actually hurt. Two specific notes. First, and most concrete: Hawlucha's EV spread defeats its own gimmick. The dossier builds it around a Misty Seed that enables Unburden, but it carries four Speed EVs, so even doubled it lost the turn-1 speed race to a rain Swift Swim Kingdra and died before using Acrobatics, Feint or the doubled Speed for anything. Moving EVs out of HP into Speed would cost nothing thematically and would make the seed-to-Unburden-to-Acrobatics chain the opening it is described as. Second, the room's named TAILWIND strategy sits entirely on Talonflame, which is the fourth member out and died in one turn; as with Axle's Lava Plume and Jace's Defog, the plan lives on a single body. A second Tailwind holder, or Tailwind on a member that leads, would let the strategy actually run. Neither changed in this pass.",
+  "authored_set_legality": "No legality problem. Unburden, Infiltrator, Iron Fist, Sheer Force, Libero and Gale Wings all resolved as authored, as did the Misty Seed, Rocky Helmet, Life Orb, Choice Scarf, Choice Band and Sitrus.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
