@@ -1328,6 +1328,27 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         }
         if (seen && !matched)
             return -40;
+        // The other half of the same read: a side that has only hit specially
+        // is the one board state where Mirror Coat is a read rather than a
+        // guess, and it was never being chosen.
+        if (matched)
+            return 25;
+    }
+    if (move == MOVE_WIDE_GUARD || move == MOVE_QUICK_GUARD)
+    {
+        // A spread move seen from a living foe last turn is the reason these
+        // exist, and a guard whose denial has not happened yet cannot earn it
+        // from the trial alone.
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            enum Move last = gAiLogicData->lastUsedMove[foe];
+            if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe)
+             || last == MOVE_NONE || last == MOVE_UNAVAILABLE)
+                continue;
+            if (move == MOVE_WIDE_GUARD ? PairSpread(last)
+                : AI_GetMovePriority(foe, gAiLogicData->abilities[foe], last) > 0)
+                return 30;
+        }
     }
     if (move == MOVE_FEINT)
     {
@@ -1354,7 +1375,16 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         enum Move last = gAiLogicData->lastUsedMove[action->target];
         if (last != MOVE_NONE && last != MOVE_UNAVAILABLE
          && !gBattleMons[action->target].volatiles.encoreTimer)
-            return IsBattleMoveStatus(last) ? 35 : 20;
+        {
+            s32 value = IsBattleMoveStatus(last) ? 35 : 20;
+            // A Choice-locked repeater is already committed to that move, so
+            // the lock costs it nothing it had - but it keeps it there after
+            // the item would have let it switch out of the lock.
+            if (IsHoldEffectChoice(gAiLogicData->holdEffects[action->target])
+             && IsBattlerItemEnabled(action->target))
+                value += 15;
+            return value;
+        }
     }
     if (effect == EFFECT_LEECH_SEED && IsBattlerAlive(action->target)
      && !IsBattlerAlly(actor, action->target)

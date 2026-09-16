@@ -210,3 +210,47 @@ AI_DOUBLE_BATTLE_TEST("EC joint conflicts: a spread move does not cost a healthy
         EXPECT_EQ(opponentRight->hp, 200);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC reactive pricing: Mirror Coat is the read against a side that only attacks specially")
+{
+    GIVEN {
+        AI_FLAGS(REACTIVE_FLAGS);
+        PLAYER(SPECIES_ALAKAZAM) { Level(30); HP(300); MaxHP(300); Attack(20); SpAttack(120); Defense(150); SpDefense(150); Speed(120); Moves(MOVE_PSYCHIC); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(300); MaxHP(300); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_WOBBUFFET) {
+            Level(30); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(20);
+            Ability(ABILITY_SHADOW_TAG); Moves(MOVE_COUNTER, MOVE_MIRROR_COAT);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PSYCHIC, target: opponentLeft); MOVE(playerRight, MOVE_SPLASH); }
+        TURN {
+            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentLeft);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_MIRROR_COAT);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC reactive pricing: Wide Guard answers the spread move seen last turn")
+{
+    GIVEN {
+        AI_FLAGS(REACTIVE_FLAGS);
+        // The spread attack has been seen from this slot, so the guard that
+        // exists for it is worth the turn even before the denial happens.
+        PLAYER(SPECIES_MACHOP) { Level(30); HP(300); MaxHP(300); Attack(150); Defense(150); SpDefense(150); Speed(90); Moves(MOVE_ROCK_SLIDE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(300); MaxHP(300); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_HITMONTOP) {
+            Level(30); HP(200); MaxHP(200); Attack(60); Defense(120); SpDefense(120); Speed(50);
+            Ability(ABILITY_INTIMIDATE); Moves(MOVE_WIDE_GUARD, MOVE_FEINT);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_ROCK_SLIDE, hit: TRUE); MOVE(playerRight, MOVE_SPLASH); }
+        TURN {
+            MOVE(playerLeft, MOVE_ROCK_SLIDE, hit: TRUE);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_WIDE_GUARD);
+        }
+    }
+}
