@@ -1,0 +1,43 @@
+{
+  "play_order": 36, "e_group": "E0037", "trainer": "TRAINER_TAKAO", "class": "gym",
+  "location": "DewfordTown_Gym", "cap": 20, "difficulty": "medium",
+  "party_manifest": "work/playtest/36-TRAINER_TAKAO/party.json",
+  "opponent_levels_observed": {"GRAPPLOCT": 20, "WOBBUFFET": 20, "HITMONLEE": 20, "POLIWRATH": 20, "PASSIMIAN": 20, "PAWMO": 23},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/36-TRAINER_TAKAO/a1", "seed": "0xC4D0", "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 6, "ai_decision_frames_max": 10,
+     "narrative": "Turn 1 decided most of it: Takao withdrew a healthy Grapploct and sent Hitmonlee into my Play Rough lead, which one-shot it, while Magearna's Fleur Cannon knocked out a full-HP 124 Wobbuffet before its -5 priority Mirror Coat could resolve. Passimian's Knock Off stripped Tsareena's Life Orb and Grapploct's Drain Punch killed it; Poliwrath's Life Orb Hydro Pump later killed Magearna. Spiritomb closed the fight untouched at 68/68, because Ghost is immune to every Fighting attack in the room. Two player faints against six."}
+  ],
+  "strategy_checks": [
+    {"check": "Octolock's end-turn Defense/Special Defense drops must lead to useful damage rather than two passive slots", "result": "NOT OBSERVED (correct restraint)", "evidence": "Grapploct never selected Octolock. It switched on turn 1 and then used Drain Punch three times. With my side one-shotting its partners it had no board where a two-turn lock would have paid, so declining it was right - but the authored mechanic never appeared."},
+    {"check": "Counter/Mirror Coat must match actual incoming hits", "result": "FAIL IN PRACTICE, not a scoring error", "evidence": "Turn 1 Wobbuffet selected Mirror Coat against a special-heavy opposing pair, which is the correct read. Mirror Coat is -5 priority, and Wobbuffet was knocked out by a single Fleur Cannon from full 124 HP before it could act. See the cooler note - the reactive plan cannot execute at this level."},
+    {"check": "Shadow Tag restricts eligible exits, with Ghost escape routes still legal", "result": "NOT TESTED", "evidence": "Wobbuffet died on turn 1, so no trapping was ever exercised. I brought Spiritomb specifically as the authored Ghost escape route and never needed it for that purpose."},
+    {"check": "Safeguard and Encore must have useful targets", "result": "NOT OBSERVED", "evidence": "Neither was selected. Wobbuffet had exactly one decision and spent it on Mirror Coat."},
+    {"check": "Hitmonlee's White Herb/Close Combat activates Unburden through a real drop", "result": "NOT OBSERVED", "evidence": "Hitmonlee was switched in on turn 1 and one-shot by a 2x Play Rough before acting. White Herb was unconsumed and Unburden never activated - correctly, since no drop had occurred."},
+    {"check": "Special Life Orb Poliwrath answers physical walls and exploits the Special Defense side", "result": "PASS", "evidence": "Poliwrath used Hydro Pump on three consecutive turns and killed Magearna with the third; it took Life Orb recoil each time. It correctly never used Vacuum Wave into the Queenly Majesty lead."},
+    {"check": "Passimian supplies Scarf Defiant pressure", "result": "PASS", "evidence": "Turn 2: Knock Off removed Tsareena's Life Orb, which is real value from a Choice-locked body that was about to die. Defiant had no stat drop to punish because I brought no Intimidate."},
+    {"check": "Pawmo contributes priority/electric control", "result": "PARTIAL", "evidence": "Pawmo used Thunder Punch on both of its turns and never Mach Punch or Nuzzle. By the time it arrived the Queenly Majesty lead was gone, so priority was available and simply not chosen; Thunder Punch was the higher-damage option into Magearna, so this is defensible rather than wrong."},
+    {"check": "Priority is never wasted into the Queenly Majesty blocker", "result": "PASS", "evidence": "While Tsareena was on the field, Grapploct never selected Sucker Punch, Poliwrath never selected Vacuum Wave and Hitmonlee never selected Fake Out. Four separate priority moves across the roster, none thrown into a body that blocks them."},
+    {"check": "There is no invented Perish Song", "result": "PASS", "evidence": "No Perish Song appeared in any message or move list."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "user": "POLIWRATH", "payoff": "EMPTY - both of my attacks were aimed at Grapploct and Poliwrath was at 84/84 with nothing incoming. Under the no-read model this is a forecast bet rather than an illegal choice, but it produced nothing and its partner took both hits."}
+  ],
+  "ai_defects": [
+    {
+      "severity": "moderate",
+      "turn": "a1 turn 1",
+      "board": "Grapploct at 80/80 with Leftovers and Wobbuffet at 124/124, against Tsareena and Magearna with nothing yet revealed",
+      "chosen": "Withdrew the healthy, unthreatened Grapploct and sent in Hitmonlee",
+      "better": "Keep Grapploct in and attack, or switch to a body that is not 2x weak to the lead's typing. Hitmonlee arrived into a Play Rough and was knocked out without acting, so the switch cost a full member and gained nothing - no Regenerator, no pivot damage, no matchup improvement.",
+      "note": "This is the same shape as the defect I recorded for E0036 Lilith, where a healthy Scraggy was withdrawn on turn 1 and the Costar Flamigo was fed to the lead. Two unforced turn-1 switches in consecutive Dewford rooms that each spent a member for zero value suggests the switch scorer may be over-valuing a turn-1 pivot when the active body is at full HP and nothing has been revealed. Worth looking at together rather than as two isolated incidents."
+    }
+  ],
+  "ai_observations": [
+    "The priority-denial read was excellent: four different priority moves existed across Takao's roster and not one was thrown into the Queenly Majesty lead."
+  ],
+  "source_book_mismatch": "Fourth instance of the pattern in this Gym. The plan states 'Medium levels 22/22/22/22/22/25'; the resolved Medium levels are 20/20/20/20/20/23 - two lower across all six, from offsets of 2/2/2/2/2/5. All four Dewford rooms show the identical gap. Reconciliation item for the team owner.",
+  "level_changes": "none. Won on the first attempt with two player faints out of six against six opponent faints, which is the brief's 'won after a real fight' band. Keep the authored offsets (2/2/2/2/2/5), subject to the systematic mismatch noted above.",
+  "cooler_note": "The counterpunch identity is a good idea and Takao is the only room in the Gym that tries a reactive plan, which is worth preserving. But the plan does not survive contact with a cap-20 attacker, and the reason is structural rather than tactical. Wobbuffet is the fight's centrepiece - Shadow Tag, Counter, Mirror Coat, Encore - and at level 20 with full HP and Defense investment it has 124 HP and dies to one Fleur Cannon. Counter and Mirror Coat are -5 priority, so anything that can one-shot Wobbuffet makes all four of its moves unreachable, and a trapper that dies on turn 1 traps nobody. A concrete suggestion for a later pass (not applied here): Wobbuffet is the single clearest case in my whole block for a large positive level offset - it is the one species whose entire kit is gated behind surviving exactly one turn, and it currently sits at the same offset as the five bodies that do not need to survive at all. Give it enough bulk to reach its second turn and the room becomes the puzzle it is written to be. Species-wise the six are well chosen and I would keep all of them.",
+  "authored_set_legality": "No illegal set found.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}

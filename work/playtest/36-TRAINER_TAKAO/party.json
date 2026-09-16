@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0037 TRAINER_TAKAO (Dewford Gym, island grappler/counterpunch room); play_order 36, cap 20, Medium",
+  "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Spiritomb, Whimsicott (Cottonee + Sun Stone) and Magearna are gate-14 entries; Alakazam comes from Kadabra with a Linking Cord, Nidoking from Nidorino with a Moon Stone, and Celebi is a reachable legendary sign at PetalburgWoods_3. Ordinary items only. Assisted acquisition, not native capture acceptance. Tsareena evolves from Steenee by known move (pool-20 gate 20).",
+  "plan": "Queenly Majesty on the lead blanks four of this room's moves at once - Grapploct's Sucker Punch, Hitmonlee's Fake Out, Poliwrath's Vacuum Wave and Pawmo's Mach Punch - which is the 'punish wasted reactive moves' half of the crack. Spiritomb is the authored Ghost escape route against Wobbuffet's Shadow Tag. Fairy and Psychic damage is 2x into five of the six. Against Wobbuffet specifically the plan is to leave it alone rather than feed Mirror Coat, and to remove its partners first.",
+  "party": [
+    {
+      "species": "SPECIES_TSAREENA",
+      "moves": [
+        "MOVE_POWER_WHIP",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUEENLY_MAJESTY",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "lead priority blocker: Queenly Majesty blanks Fake Out and Feint, which are the relay's opening moves",
+      "availability": "Steenee -> Tsareena (known move); pool-20 gate 20."
+    },
+    {
+      "species": "SPECIES_MAGEARNA",
+      "moves": [
+        "MOVE_FLEUR_CANNON",
+        "MOVE_FLASH_CANNON",
+        "MOVE_THUNDERBOLT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        4,
+        0
+      ],
+      "role": "lead Fairy breaker; Fleur Cannon is 2x into all six",
+      "availability": "legendary_sign:RustboroCity_DevonCorp_2F; pool-20 gate 14 (reachable legend)."
+    },
+    {
+      "species": "SPECIES_SPIRITOMB",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_DARK_PULSE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_CALM_MIND"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "lead wall immune to Fake Out and to every Fighting attack on this team",
+      "availability": "pool-20 gate 14."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_SHADOW_BALL",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fast Psychic breaker, 2x into all six",
+      "availability": "Kadabra -> Alakazam (ITEM_LINKING_CORD); pool-20 gate 20."
+    },
+    {
+      "species": "SPECIES_CELEBI",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_NATURAL_CURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "bulky Psychic that resists Fighting",
+      "availability": "legendary_sign:PetalburgWoods_3; pool-20 gate 20 (reachable legend)."
+    },
+    {
+      "species": "SPECIES_WHIMSICOTT",
+      "moves": [
+        "MOVE_TAUNT",
+        "MOVE_TAILWIND",
+        "MOVE_ENCORE",
+        "MOVE_MOONBLAST"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Prankster support denial; Grass/Fairy resists Fighting",
+      "availability": "Cottonee -> Whimsicott (ITEM_SUN_STONE); pool-20 gate 14."
+    }
+  ]
+}
