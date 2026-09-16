@@ -1,0 +1,27 @@
+{
+  "play_order": 155, "e_group": "E0200", "trainer": "TRAINER_GARRISON", "class": "casual",
+  "location": "AbandonedShip_Rooms2_1F", "chapter": "Feather Badge", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - Alolan Golem 48-1-2=45, Carracosta 48+0-2=46, Relicanth 48+0-2=46, Armaldo 48+1-2=47, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/155-TRAINER_GARRISON/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 83, "party": "party-a1.json", "outcome": "won", "turns": 4, "player_faints": 2, "opponent_faints": 4,
+     "note": "Rillaboom + Incineroar + Iron Hands + Gengar + Alakazam + Togekiss. Four turns, but it cost two Pokemon: Armaldo's X-Scissor took Rillaboom and Relicanth's Choice-locked Waterfall took Incineroar. Sturdy did its job - Carracosta survived a 4x priority Grassy Glide at 1 HP - and Grass plus Fighting handled the rest."}
+  ],
+  "strategy_checks": [
+    {"check": "Alolan Golem attacks immediately", "result": "PASS", "evidence": "Double-Edge on turn 1 and Stomping Tantrum on turn 2; no wasted turns."},
+    {"check": "Galvanize genuinely converts Double-Edge into a heavy Electric attack", "result": "PASS", "evidence": "turn 1 Double-Edge into Rillaboom printed 'It's not very effective...'. Normal into Grass is neutral; Electric into Grass is 0.5x, so the message itself is the proof that the conversion fired, and Golem took the recoil as expected."},
+    {"check": "Carracosta uses Shell Smash only behind sufficient survival", "result": "PASS (condition correctly declined) but see the cooler note", "evidence": "it never used Shell Smash. On turn 1 it faced a 4x priority Grassy Glide and chose Rock Slide instead, which was the right call - but it means the SETUP flag produced no setup in the whole battle."},
+    {"check": "Sturdy lets Carracosta survive to reach the boost even from full-power damage", "result": "PASS mechanically", "evidence": "'The opposing Carracosta endured the hit!' against a 4x Grassy Glide that was several times lethal. Sturdy worked exactly as the dossier claims; it just bought a turn that was then spent dying to the partner's follow-up rather than on a Shell Smash."},
+    {"check": "White Herb repairs only a real stat drop, once", "result": "PASS - and it demonstrates the room's problem precisely", "evidence": "at turn 0 Carracosta's item already read NONE and it carried no Attack drop, while its partner Alolan Golem sat at -1. Incineroar's Intimidate fired on entry, Carracosta's White Herb erased that one drop and was consumed. The item behaved exactly as authored - and it was gone before the Shell Smash it exists to support could ever be used."},
+    {"check": "Armaldo is the Swords Dance reserve", "result": "NOT EXERCISED", "evidence": "Armaldo used X-Scissor and then Aqua Jet, both as direct damage - X-Scissor KO'd Rillaboom. It never had a spare turn for Swords Dance."},
+    {"check": "Relicanth's Rock Head makes Head Smash free, and the Choice Band supplies immediate pressure", "result": "PARTIAL", "evidence": "Relicanth locked into Waterfall, which was the correct 2x choice into Incineroar and KO'd it. The pressure half is confirmed; the recoil-free Head Smash never came up."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Garrison's side used no Protect. Only Carracosta carries it, and it had a better action on both of its turns. No empty guarding to report.",
+  "ai_defects": [],
+  "level_changes": [],
+  "calibration_reasoning": "Won on the first attempt with two player faints. AGENTS.md's review threshold at fewer than three faints applies, so I reviewed it and am recording the justified exception: this is a casual-class trainer, the lowest difficulty class in the range, and it still took Rillaboom and Incineroar - two of the six best answers available at cap 48 - off a fully optimized party in four turns. The brief's 'won with 2+ faints or after a real fight - keep' applies and a casual trainer costing two premium bodies does not need a level. No change.",
+  "could_this_be_cooler": "Keep the fossil-and-shell room; for a casual trainer it is tidy and Galvanize is doing honest work rather than sitting unused. But this is the fourth encounter in this block where the designated setup piece never set up, and Garrison shows the sharpest version of it: Carracosta's White Herb was spent on turn zero erasing an opposing Intimidate, before the Shell Smash it exists to enable was ever an option. The dossier already flags the cause - 'four slow bodies with no Fake Out means the boost is always taken in the open' - and this run adds a second, cheaper cause on top: the Herb is a one-shot resource that any opposing Intimidate consumes for free. Either give the room one turn-buying move, or accept that Carracosta is a Sturdy body rather than a setup sweeper and say so in the guide. Flagged rather than changed at this class, exactly as the dossier concluded. No species, move, item or EV change recommended.",
+  "legality_problems_found": "None. Carracosta's item reading NONE at turn 0 is the White Herb correctly consumed by Intimidate on entry, not a materialization fault.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}

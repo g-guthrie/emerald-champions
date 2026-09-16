@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0200 TRAINER_GARRISON (AbandonedShip_Rooms2_1F, Feather Badge, cap 48, Medium)",
+  "availability_audit": "The Abandoned Ship is reached by Surf on Route 108 after the Balance Badge; battle index window 48-60, floor 48. Every member is gated at 36 or below in pool-48.json: Thwackey line (36), Torracat line (36), New Mauville interior via Wattson's Basement Key (30), Haunter plus Linking Cord (30), Granite Cave Abra plus Slateport Linking Cord (20), Togepi Route 102 plus Shiny Stone (24). All precede the first Surf. No legendaries, Ultra Beasts or Paradox species.",
+  "plan": "All four of Garrison's are physical and all four are Rock-types, which decides both halves of the plan. On defence, Incineroar's Intimidate taxes every single attacker on the team on entry, and Gengar's Levitate blanks Alolan Golem's Stomping Tantrum outright. On offence, Grass is 4x on both Carracosta and Relicanth and 2x on Alolan Golem, so Rillaboom is the engine again - and Grassy Glide matters specifically because Carracosta's whole plan is Shell Smash, and priority ignores the Speed it gains. Iron Hands' Fighting is 2x on three of the four. Gengar's Taunt is the cleanest answer to the SETUP flag, since it blanks Shell Smash and Swords Dance at once. Deliberately no Magnezone this time: Alolan Golem carries both Stomping Tantrum and Fire Punch, which are 4x and 2x into an Electric/Steel body.",
+  "party": [
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Grass is 4x on Carracosta and Relicanth; Grassy Glide is priority that beats a post-Shell-Smash Speed boost and the terrain halves Stomping Tantrum",
+      "availability": "pool-48 gate 36: Thwackey level evolution in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DARKEST_LARIAT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Intimidate taxes all four attackers, Fake Out denies the Shell Smash turn, and Flare Blitz is 2x on Armaldo",
+      "availability": "pool-48 gate 36: Torracat level evolution from the Litten line in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_WILD_CHARGE",
+        "MOVE_HEAVY_SLAM"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "second Fake Out; Fighting is 2x on Alolan Golem, Carracosta and Relicanth and Heavy Slam is 2x on Armaldo",
+      "availability": "pool-48 gate 30: NewMauville_Inside land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Levitate blanks Stomping Tantrum; Taunt blanks Shell Smash and Swords Dance in one move",
+      "availability": "pool-48 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest battler; Focus Blast is 2x on three of the four and Magic Guard ignores the Life Orb and any residual chip",
+      "availability": "pool-48 gate 20: Abra GraniteCave_1F, Kadabra evolution, Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "Follow Me can absorb a Choice Band Head Smash on a body that survives it, and Air Slash flinches a slow room",
+      "availability": "pool-48 gate 24: Togepi Route 102, friendship evolution, Shiny Stone from the Slateport Mart."
+    }
+  ]
+}
