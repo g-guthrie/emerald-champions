@@ -1,0 +1,38 @@
+{
+  "play_order": 122,
+  "e_group": "E0146",
+  "trainer": "TRAINER_KEEGAN",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 36,
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/122-TRAINER_KEEGAN/party.json", "work/playtest/122-TRAINER_KEEGAN/party-v2.json"],
+  "level_audit": "PASS. Hitmontop 37 (+3), Flareon 34 (0), Emboar 33 (-1), Typhlosion 34 (0), Magmortar 34 (0), Houndoom 34 (0). All equal cap 36 + offset - 2.",
+  "attempts": [
+    {"seed": 12, "run_dir": "work/playtest/122-TRAINER_KEEGAN/run-s12", "party": "party.json", "outcome": "lost", "turns": 9, "player_faints": 6, "opponent_faints": 5, "note": "Lost 5-6 with the Axle rain party. Two causes: Pelipper carried only 4 SpA EVs so the rain produced no damage, and Choice Band Reckless Wild Charge from Emboar one-shot a full-HP Assault Vest Azumarill (151 damage at level 33)."},
+    {"seed": 22, "run_dir": "work/playtest/122-TRAINER_KEEGAN/run-s22", "party": "party-v2.json", "outcome": "won", "turns": 4, "player_faints": 2, "opponent_faints": 6, "ai_decision_seconds_max": 1.021, "note": "Rebuilt around Swift Swim Kingdra plus a 252-SpA Pelipper; rain Hurricane removed Hitmontop on turn 1 and Hydro Pump cleared the special Fire core."}
+  ],
+  "strategy_checks": [
+    {"check": "Hitmontop receives the Misty Seed special-defense boost from the Gym's Misty Terrain, then Ice Spinner removes the terrain so Flareon's Toxic Orb can activate at the end of that turn", "result": "FAIL (not executable in this harness)", "evidence": "state reports terrain \"none\" at turn 0 in both attempts. With no Misty Terrain there is no seed to consume and nothing for Ice Spinner to remove, so the room's two-turn authored engine collapses to nothing. Hitmontop kept ITEM_MISTY_SEED unconsumed for the whole of attempt 1 (9 turns) and used Ice Spinner exactly once, on turn 4, as a plain attack into a Protecting Togekiss. This is an environment limitation of the driver, but it also shows the room has no fallback plan when the terrain is gone, which is exactly the situation its own crack text tells the player to create."},
+    {"check": "Flareon's Toxic Orb activates and Guts comes online", "result": "PASS", "evidence": "Attempt 1 turn 1 and attempt 2 turn 1: Flareon ends the turn with STATUS1_TOXIC_POISON. Attempt 1 turn 3 Flareon used Facade for 93 damage into a Togekiss behind Follow Me, with Hitmontop's Helping Hand stacked on it."},
+    {"check": "Intimidate applies on Hitmontop's entry", "result": "PASS", "evidence": "Both player battlers show atk -1 at turn 0 in both attempts."},
+    {"check": "Emboar keeps Choice Band Reckless offense and respects the choice lock", "result": "PASS", "evidence": "Attempt 1: Wild Charge on turn 4 (151 damage, KO on a full-HP Assault Vest Azumarill), then locked into Wild Charge on turns 5 and 6, taking 1/4 recoil each time until it died to the recoil plus Salt Cure plus one Weather Ball."},
+    {"check": "Typhlosion runs bulky Assault Vest offense rather than setup", "result": "PASS", "evidence": "ITEM_ASSAULT_VEST reported; chose Flamethrower and Extrasensory, never a setup move."},
+    {"check": "Houndoom Snarl / Flash Fire", "result": "PARTIAL", "evidence": "ABILITY_FLASH_FIRE confirmed. Houndoom chose Dark Pulse both times it attacked and never used Snarl; defensible on those boards, but the authored Snarl line was never exercised."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Flareon", "payoff": "real", "detail": "Blocked both a Weather Ball and a rain-boosted Life Orb Liquidation that would have KOed it, on the exact turn its Toxic Orb activated."},
+    {"attempt": 1, "turn": 5, "battler": "Hitmontop", "payoff": "empty", "detail": "Nothing was aimed at Hitmontop (Garganacl targeted Emboar, Togekiss protected itself). It was at 140/140 HP with no incoming threat; Helping Hand or Close Combat was strictly better."},
+    {"attempt": 1, "turn": 8, "battler": "Houndoom", "payoff": "real", "detail": "Blocked both a Gyarados Waterfall and a Pelipper Hurricane on the turn it entered - a full two-attack turn denied at 105/105 HP."},
+    {"attempt": 2, "turn": 1, "battler": "Flareon", "payoff": "real", "detail": "Same opening as attempt 1: blocked a Life Orb Hydro Pump that would have KOed it, and let Toxic Orb come online."}
+  ],
+  "ai_defects": [
+    {"id": "KEEGAN-1", "severity": "low", "turn": "attempt 1, turn 5", "board": "Hitmontop 140/140 vs Garganacl 151/151 and Togekiss 48/141; partner Emboar Choice-locked into Wild Charge", "chosen": "Protect", "better": "Helping Hand on Emboar, or Close Combat into Garganacl. Nothing threatened Hitmontop, it was at full HP, and it had already spent one Protect.", "note": "Single occurrence. Reported, not fixed; AI C code is out of scope for this pass."}
+  ],
+  "ai_notes": "Focus fire was consistently correct: Flareon's Quick Attack on attempt 1 turn 2 was chosen specifically to finish a 66-HP Swampert ahead of the partner's Close Combat, and the Helping Hand + Guts Facade stack on turn 3 was a genuine two-battler combination. Max opponent decision time 1.038s, inside the 1.2s budget. Structural worry: with the Gym mist absent the room's whole opening plan is dead weight and Hitmontop carries an item it can never consume.",
+  "level_changes": [],
+  "level_decision": "KEEP. One loss and one win, and the win still cost 2 player faints. The raise condition (first-try win, 0-1 faints, no real threat) is not met, and the cut condition (three failed optimized attempts) is not met.",
+  "cooler_note": "The engine idea - a Misty Seed pivot that removes its own team's terrain so a Toxic Orb can fire - is clever and should be kept, but it depends entirely on a field effect the room does not itself set, so it is fragile: remove or replace the terrain first and Hitmontop is holding a dead item while Flareon merely gets Guts a turn early. Concrete suggestion: give the room its own terrain source rather than borrowing the Gym's, or move the Misty Seed onto a member that still profits from the bare special-defense boost. Second observation: five of six are Fire and four of those are special attackers with near-identical coverage. Hitmontop is the only member that makes the room feel designed, and Emboar's Choice Band Wild Charge is the only attack that surprised a prepared team. Flagged, not changed.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}
