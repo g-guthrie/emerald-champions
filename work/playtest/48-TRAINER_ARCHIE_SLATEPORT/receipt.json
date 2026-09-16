@@ -1,0 +1,41 @@
+{
+  "play_order": 48,
+  "e_group": "E0052",
+  "trainer": "TRAINER_ARCHIE_SLATEPORT",
+  "class": "leader",
+  "location": "SlateportCity_OceanicMuseum_2F",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"WINGULL": 26, "LOMBRE": 26, "CORPHISH": 27, "TENTACOOL": 26, "GOLBAT": 23, "CARVANHA": 26},
+  "party_manifest": "work/playtest/48-TRAINER_ARCHIE_SLATEPORT/party.json",
+  "party_pool_audit": "Cap-24 core party, all six gated <= 24 in pool-24.json. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/48-TRAINER_ARCHIE_SLATEPORT/a1", "seed": 54, "outcome": "won", "turns": 10, "player_faints": 5, "opponent_faints": 6,
+     "narrative": "T1 Lombre's Fake Out flinched Enamorus so Wingull could set Damp Rock rain unopposed; Air Slash halved Lombre. T2 Swift Swim Lombre's rain-boosted Hydro Pump KO'd Enamorus and Hurricane critically hit Togekiss. T3 Magearna entered, Air Slash KO'd Lombre and a 4x Thunderbolt KO'd Wingull. T4 A rain Hydro Pump took Magearna to 47; a Serene Grace flinch denied Corphish its only turn and Thunderbolt KO'd it. T5 Magearna dropped to 2 and pivoted out; Golbat's Brave Bird and Tentacool's Icy Wind hit the new Hoopa. T6 Brave Bird KO'd Hoopa before it moved; Air Slash KO'd Golbat. T7 Tentacool Protected a 2x Psychic and Carvanha's Speed Boost began stacking. T8 Carvanha's Liquidation KO'd Alakazam and Tentacool's Hydro Pump KO'd Togekiss; the rain expired after eight turns. T9 Kartana and a 2 HP Magearna came in, Crunch finished Magearna, Tentacool Protected again and Kartana's +1 Leaf Blade KO'd Carvanha. T10 Leaf Blade KO'd Tentacool."}
+  ],
+  "strategy_checks": [
+    {"check": "Wingull sets Rain Dance and Damp Rock extends it to eight turns", "result": "PASS", "evidence": "Rain went up on turn 1 and 'Rain continues to fall' appears through turn 7; 'The rain stopped' lands at the end of turn 8. Exactly the eight-turn Damp Rock duration."},
+    {"check": "Lombre uses Fake Out ONLY when rain pays, not automatically", "result": "PASS", "evidence": "Turn 1 Fake Out flinched Enamorus - my faster attacker and the only thing on my side that could have pressured Wingull that turn - and Wingull set rain unopposed in the same turn. This is the single clearest case in the block of an authored conditional firing for the right reason. Fake Out was never used again."},
+    {"check": "Turn-two Swift Swim Lombre attacks", "result": "PASS", "evidence": "Turn 2 Lombre's Hydro Pump resolved before a 252 Spe Timid Enamorus (base 87 vs Lombre's base 50) and KO'd it from 69 HP. Doubled rain Speed plus rain-boosted Water, precisely as the plan states."},
+    {"check": "Wingull Hurricane is reliable in rain", "result": "PASS", "evidence": "Turn 2 Hurricane hit (critically) with no miss; turn 3 it hit Magearna resisted. No misses across two uses, consistent with rain's 100% accuracy."},
+    {"check": "Corphish Adaptability Crabhammer / Dragon Dance closing", "result": "NOT_EXERCISED", "evidence": "Corphish was flinched by Serene Grace Air Slash on its only turn and KO'd by Thunderbolt in the same turn. Its Focus Sash never triggered because the Air Slash had already taken it off full HP."},
+    {"check": "Carvanha Speed Boost", "result": "PASS", "evidence": "'The opposing Carvanha's Speed rose!' at the end of turns 7 and 8, reaching +2, and it then out-sped and KO'd Alakazam (base 120 Speed)."},
+    {"check": "Tentacool repairs the weather if worthwhile", "result": "CORRECTLY_NOT_USED", "evidence": "Tentacool was on the field from turn 3 and never used its own Rain Dance, because Wingull's Damp Rock rain was still running. After the rain expired on turn 8 it was in a 2v1 losing position where attacking and guarding were better. The 'if worthwhile' condition was respected rather than ignored."},
+    {"check": "Golbat Taunt / U-turn", "result": "NOT_SELECTED", "evidence": "Golbat used Brave Bird twice, taking recoil both times, and fainted. Taunt had a legal target (Togekiss with Follow Me/Tailwind) and U-turn would have preserved it at 41 HP. Same pattern as the museum grunt's Zubat, which also declined both moves on the same shared set."}
+  ],
+  "protect_ledger": [
+    {"turn": 7, "battler": "TENTACOOL", "payoff": "REAL: blocked Alakazam's Life Orb Psychic, a 2x attack into a 65 HP Poison-type that was very likely lethal, while its partner Carvanha banked a Speed Boost stage. Tentacool went on to KO Togekiss the next turn."},
+    {"turn": 9, "battler": "TENTACOOL", "payoff": "REAL: blocked Magearna's 2x Thunderbolt. Magearna was at 2 HP and died that turn regardless, but the guard denied roughly half of Tentacool's health on the turn its partner fell, and Tentacool survived into the final 1v1."}
+  ],
+  "protect_ledger_note": "Two opponent Protects, both with genuine payoff, both from the same Pokemon and not on consecutive turns. Best Protect discipline of any team in this block.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Archie's rain plan executed almost completely: a conditional Fake Out that bought the weather turn, a turn-two Swift Swim payoff, rain-accurate Hurricane, correct restraint on the redundant second Rain Dance, and two Protects that both paid. Together with Edmond and Lola this is the top tier of AI play in the block.",
+    "The one gap is Golbat, which declined both Taunt and U-turn across two turns in favour of recoil Brave Birds - the same behaviour the museum grunt's Zubat showed on the same shared set. Worth a look at how Taunt and U-turn are scored on the Zubat family, though neither instance was clearly losing."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost five of six members over ten turns, and the last turn was a 1v1 with a Focus Sash intact. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. This is comfortably a real fight and the strongest villain-boss benchmark in the block. No level change.",
+  "could_this_be_cooler": "This is the best-designed team in my block and I would not change a piece of it. The reason is that every member has a job in one machine: Wingull buys and extends the weather, Lombre converts it on turn two, Tentacool holds the weather as insurance without wasting turns on it, Corphish and Carvanha are two different physical closers, and Golbat is the disruption. The honest weakness is the same one AGENTS warns about - Golbat at offset 1 is both the lowest-level member and the one carrying the disruption the team never used, so its kit reads as decoration. If a later pass wants this room sharper, the move is to make Golbat's Taunt matter (levels, or a target worth taunting) rather than to touch any of the rain pieces. No change made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
