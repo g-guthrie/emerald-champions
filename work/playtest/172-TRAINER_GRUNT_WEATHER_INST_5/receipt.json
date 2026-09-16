@@ -1,0 +1,100 @@
+{
+  "play_order": 172,
+  "e_group": "E0245",
+  "trainer": "TRAINER_GRUNT_WEATHER_INST_5",
+  "class": "grunt",
+  "location": "Route119_WeatherInstitute_2F",
+  "raid_stage": "3 of 6 - the armoury",
+  "cap": 48,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/172-TRAINER_GRUNT_WEATHER_INST_5/party.json",
+  "level_verification": "cap 48: Toxicroak +1 -> L47; Scizor, Eelektross and Clawitzer +2 -> L48. All equal cap + offset - 2. --cap 48 correct.",
+  "attempts": [
+    {
+      "seed": 31,
+      "run_dir": "work/playtest/172-TRAINER_GRUNT_WEATHER_INST_5/run-s1",
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 8,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 0.938
+    }
+  ],
+  "showcase_escalation_check": {
+    "declared_before_play": "Raid stage 3 must still show NO Aqua weather; the escalation only turns on at stage 4 (Pelipper).",
+    "result": "PASS",
+    "evidence": "weather at turn 0 = none; no opposing action set weather across six turns. Three rooms in, Aqua still has not touched the machines."
+  },
+  "strategy_checks": [
+    {
+      "check": "Toxicroak's Fake Out buys Scizor either a safe Swords Dance or an immediate Bullet Punch",
+      "result": "PASS",
+      "evidence": "Turn 1, exactly as authored: 'The opposing Toxicroak used Fake Out! Charizard flinched and couldn't move!' immediately followed by 'The opposing Scizor used Swords Dance! The opposing Scizor's Attack rose sharply!'. Fake Out correctly targeted the Mega, the biggest threat on the board, and Scizor correctly converted the free turn into setup rather than chip damage. This is the cleanest execution of an authored two-Pokemon tactic in my whole block."
+    },
+    {
+      "check": "SETUP is backed - a real Swords Dance user protected by a real Fake Out user",
+      "result": "PASS_BUT_UNPAID",
+      "evidence": "The setup happened (+2 Attack) but paid nothing: Scizor's single +2 Technician Bullet Punch on turn 2 hit Togekiss's Protect, and Scizor died to Heat Wave on the same turn. Setup fired, payoff was zero. See cooler note."
+    },
+    {
+      "check": "The crew abandons setup outright once Fire pressure appears",
+      "result": "PASS",
+      "evidence": "Turn 3, with Mega Charizard Y and its sun established: 'TEAM AQUA GRUNT withdrew Toxicroak! TEAM AQUA GRUNT sent out Clawitzer!'. The AI voluntarily pivoted the Dry Skin body out of the Fire matchup and brought in the Water attacker. That is the authored disposition executed as a genuine mid-fight switch, not a scripted one."
+    },
+    {
+      "check": "Clawitzer's Mega Launcher multiplies its pulse moves and answers a Steel wall",
+      "result": "PASS",
+      "evidence": "Turn 4: Clawitzer used Aura Sphere into Excadrill (Ground/Steel, 2x Fighting) for a clean OHKO from full HP on a 178 HP body. That is the dossier's stated 'moment to remember' - a 1.5x Aura Sphere from a shrimp answering the Steel type - and it landed on the exact archetype the dossier predicted."
+    },
+    {
+      "check": "Levitate Eelektross has no type weakness while Levitate holds",
+      "result": "PARTIAL",
+      "evidence": "Eelektross entered and immediately used Wild Charge into Mega Charizard Y (Flying, 2x) for the KO - correct target, correct move. It then died to its own Wild Charge recoil. Levitate was never tested because I never aimed Ground damage at it."
+    },
+    {
+      "check": "Technician Bullet Punch is genuinely threatening priority rather than chip",
+      "result": "NOT_MEASURED",
+      "evidence": "The one Bullet Punch thrown hit a Protect."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Toxicroak",
+      "call": "Protect",
+      "payoff": "REAL - blocked Mega Charizard Y's sun-boosted Heat Wave. Dry Skin makes Toxicroak take 1.25x extra from Fire, so this was very likely a lethal hit denied. Correct, high-value guard."
+    },
+    {
+      "turn": 5,
+      "battler": "Toxicroak",
+      "call": "Protect",
+      "payoff": "PARTIAL - blocked both Dragonite's Extreme Speed and Togekiss's 2x Air Slash, so real damage denial. But Toxicroak was the last Pokemon alive with no partner to convert the bought turn, and it simply died on turn 6 instead. Damage denied, no strategic payoff available."
+    }
+  ],
+  "consecutive_protect_risk": "none - Toxicroak's two Protects were three turns apart with a switch in between.",
+  "ai_defects": [
+    {
+      "turn": 2,
+      "board": "Toxicroak 132/150 and Scizor 79/140 at +2 Attack vs Mega Charizard Y 120/148 and Togekiss 184/184. Sun up.",
+      "chosen": "Toxicroak used Protect while Scizor used Bullet Punch into Togekiss.",
+      "why_wrong": "This is a partner-coordination miss rather than a bad individual choice. Toxicroak correctly predicted the spread Heat Wave and guarded. Scizor, on the same turn, spent its one and only +2 attack into a target that also guarded. Neither actor accounted for the other: if Toxicroak was guarding because it expected a spread attack, Scizor's best line was Protect too (surviving to attack under a turn where the Fire user had already spent Heat Wave), and if Scizor was committing to attack, Toxicroak should have attacked alongside it. The authored Fake-Out-into-Swords-Dance pair produced a +2 sweeper that landed exactly zero damage.",
+      "better_action": "Both guard, or both attack. The AI scored each battler's Protect independently against the same forecast and then let the partner walk into the consequence.",
+      "severity": "moderate - this is the kind of empty-partner-turn the campaign's Protect review is meant to catch, and it cost the room its entire setup payoff."
+    }
+  ],
+  "ai_notes": [
+    "The turn-3 voluntary switch (Toxicroak out, Clawitzer in, under Fire pressure) was a genuinely good decision and the best switch I saw in this block.",
+    "Toxicroak re-used Fake Out on turn 4 after being switched back in. Legal - Fake Out's once-per-entry restriction resets on switch-in - and tactically correct: it flinched Excadrill and let Clawitzer's Aura Sphere kill it uncontested. This is the AI chaining two authored tools across a switch and it worked.",
+    "Decision time peaked at 0.938 s, comfortably inside the 1.2 s budget."
+  ],
+  "player_mistakes": [
+    "Turn 4: I replaced Charizard with Excadrill while a Mega Launcher Clawitzer was on the field. Excadrill is Ground/Steel and therefore 2x to Aura Sphere at 1.5x; it died from full HP without acting. That faint is my error, not a difficulty signal, and I have counted it honestly rather than discounting it."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Won with 2 player faints after a real fight (a Mega and a full-HP Excadrill both died). That is the 'keep' band. One of the two faints was my own targeting error, but the other - Eelektross's Wild Charge killing Mega Charizard Y - was earned. No offsets touched.",
+  "rerun": "not needed - no level change.",
+  "could_this_be_cooler": "Keep the Clawitzer swap; it is clearly the right call and it produced the room's signature moment on cue. The improvement worth naming is structural rather than cosmetic: the Fake Out into Swords Dance opening is the best-executed authored tactic in this block and it still earned nothing, because a +2 Technician Bullet Punch is not a win condition against a 48-cap player party - it is 60 base power before the boost. If this room wants its setup to matter, Scizor needs a non-priority payoff move to spend the +2 on (X-Scissor or Close Combat in the Bug Bite slot), so the Swords Dance turn has somewhere to go when Bullet Punch is not enough. Flagged, not changed.",
+  "authored_set_legality": "No legality problem. Clawitzer's Mega Launcher multiplier, Scizor's Technician, Toxicroak's Dry Skin and Eelektross's Levitate all resolved as authored.",
+  "notes": "Player party unchanged."
+}
