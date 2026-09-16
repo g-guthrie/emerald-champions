@@ -631,3 +631,105 @@ the price of comparable scores; the worst case keeps 6 frames of headroom.
    tuned against a test suite rather than play.
 5. `AGENTS.md` line 176 and the Game Book AI policy prose still authorize the
    read; both remain the main agent's to correct.
+
+---
+
+# Round 4: the multi's budget, and the driver's livelock
+
+Commit `46e9c2e51f`. Focused suite with `test/battle/ai/no_pp_struggle.c` added:
+**91 passed, 0 failed, 91 total.**
+
+## Defect 2 (budget): the clock restarted for every actor
+
+`ComputeAiBattlerDecisions` set `decisionStartFrame` on every call. In an
+ordinary doubles battle the pair search scores both opponents together and the
+second call short-circuits, so nothing showed. The E0409 multi has **two groups
+of AI actors** - Maxie's and Courtney's shared opposing pair, then the in-game
+partner Steven - and each group restarted the clock, so each got its own full
+60-frame budget. Worse, the reported figure restarted with it: the honest total
+across the whole opposing decision was **140-165 frames**, not the 88-102 that
+was visible.
+
+Four changes, none of them touching the model's values:
+
+* The clock is set once per turn: a second owner or an in-game partner scoring
+  later in the same turn shares it instead of restarting it.
+* Each group of AI actors gets an equal slice of the shared budget
+  (`PairDecisionBudgetShare`): one group keeps all 60 frames, two groups get 30
+  and then the remainder. This is the per-actor split lever.
+* `PAIR_SHORTLIST` halves to `PAIR_SHORTLIST_CROWDED` = 2 when more than two
+  actors still have to be scored, which bounds the settle stage without changing
+  how any pair is valued. This is the shortlist lever.
+* The optional prediction pass is skipped for an in-game partner - an AI actor
+  whose decision is computed for real this turn, so predicting it is a wasted
+  pass - and abandoned entirely once the mandatory setup has already spent the
+  budget. Setup was 75 of the 129 frames measured on turn one.
+
+E0409, `battle_random_policy.py --trainer TRAINER_COURTNEY_MOSSDEEP --cap 60`:
+
+| Seed | Before (honest total) | After |
+| --- | --- | --- |
+| 11 | 165 | **83** |
+| 3 | 162 | **98** |
+| 5 | 139 | **82** |
+| 13 | - | **92** |
+
+Focused fixtures are unchanged: Dancer 65, Mega 62, Cristian 55/46, Jocelyn 45,
+Darius 23, Nate 14. The multi is down by roughly half but **still over 72** on
+its opening turns; what remains is native setup (`SetBattlerAiMovesData` over
+four battlers and six-mon parties) plus the first uninterruptible refresh per
+group, neither of which the search stop can shorten. Reducing it further means
+changing what the setup computes, which is a larger change than the two levers
+allowed here.
+
+## Defect 1 (livelock): it is not the no-PP re-selection loop
+
+Two real problems were found in AI move selection, both fixed:
+
+* A board whose search is cut short by the budget never wrote `chosen`, and
+  `AI_ComputeDoublesDecisions` copied that into `bestActions`, which was
+  **uninitialised stack memory**. The AI could emit a move index it never chose.
+  It is initialised now, and the emitted index is validated against the live
+  move limitations before it leaves the pair search.
+* When the engine refuses an AI battler's selection
+  (`TrySetCantSelectMoveBattleScript`), the battler is asked again and answers
+  the same forever. The refused slot is now taken out of that battler's options
+  and its choice moves to one the engine still allows.
+
+Neither is the reported livelock. The evidence:
+
+* A regression built for the described case - an AI flank with **zero PP on
+  every move** - passes with *and without* the selection guard, because
+  `AreAllMovesUnusable` already routes that case to Struggle. The described
+  mechanism does not reproduce.
+* Seed 7 does reproduce a freeze, at the same point before and after every fix
+  in this round. Driving it to the freeze and capturing the turn shows what is
+  actually happening:
+
+  ```
+  The opposing Copperajah used Struggle!  /  But it failed!
+  The opposing Heatran used Struggle!     /  But it failed!
+  ... repeating, 14 messages and counting
+  ```
+
+  At that point the board is: player side reduced to one living battler
+  (Alakazam at 1 HP) with the partner's slot permanently absent, both opponents
+  out of usable moves, `player_faints 3`, `opponent_faints 3`, outcome still
+  `ongoing`. Every AI move on that board is selectable or correctly refused; the
+  pending decision belongs to the human, and the freeze happens **during turn
+  execution after the human's command**, with Struggle failing and the same two
+  AI actions running again.
+
+So the owner is not AI move selection and not the no-PP selection path: it is a
+turn that re-runs its actions when Struggle fails on a side with an absent slot.
+That is a separate defect in execution order and end-of-battle detection, and it
+wants its own look with the battle-script owner - I did not change execution
+ordering blind. Seed 17 freezes the same way; seeds 3, 5, 11 and 13 now play to
+completion.
+
+## Verification
+
+Headless ROM rebuilt and `pokeemerald-headless.inputs.json` re-stamped (checked
+`PASS`); `work/agent-battle-build` untouched, with every run in this round
+driven from a private copy under `/tmp`. Focused allowlist plus the new fixture:
+**91 passed, 0 failed, 91 total**. `pokeemerald.gba` builds clean.
