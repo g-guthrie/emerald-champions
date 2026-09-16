@@ -1,0 +1,24 @@
+{
+  "trainer_a": "TRAINER_JASMINE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 58,
+  "difficulty": "medium",
+  "level_cap": 30,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 2,
+  "decisions": 3,
+  "player_faints": 0,
+  "opponent_faints": 0,
+  "ai_decision_frames_max": 61,
+  "ai_decision_seconds_max": 1.021,
+  "ai_decision_frames": [
+    61,
+    31,
+    31
+  ],
+  "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+  "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}

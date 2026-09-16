@@ -1,0 +1,51 @@
+{
+  "play_order": 58,
+  "e_group": "E0067",
+  "trainer": "TRAINER_JASMINE",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"THWACKEY": 31, "QUAXWELL": 32, "QUILAVA": 31, "BRIONNE": 32},
+  "cap_window_confirmation": "Dossier seeds 33/34/33/34 resolved to 31/32/31/32. Cap 30, Medium -2.",
+  "party_manifest": "work/playtest/58-TRAINER_JASMINE/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Weavile + Nidoking. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Grassy Surge puts terrain up on Thwackey's entry",
+    "Thwackey's Fake Out supports a partner attack, and Grassy Glide gets priority while Thwackey is grounded",
+    "Choice Specs Eruption is used while Quilava's HP is high, and the other Fire moves take over once it is damaged",
+    "Brionne converts Liquid Voice Hyper Voice into a Throat Spray Sp.Atk boost",
+    "Quaxwell's Moxie chains off a KO",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/58-TRAINER_JASMINE/a1", "seed": 58, "outcome": "won", "turns": 3, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Grassy Terrain came up on Thwackey's entry. Weavile out-sped it 125 to 65 and its Fake Out flinched away Thwackey's own Fake Out, which had been aimed at Nidoking; Nidoking's Thunderbolt (2x) then KO'd Quaxwell from full 97 HP on a base-85 Speed tie, so Quaxwell's selected Low Kick - which is 4x into Weavile - never resolved. T2 a critical Triple Axel (2x) killed Thwackey and took the terrain's owner off the field, while Brionne spent its entry turn on Protect. T3 Weavile's Knock Off KO'd a full-health Quilava outright, stripping the Choice Specs on the way through, and the Earth Power I had aimed at Quilava redirected into Brionne and KO'd that from full 90. Jasmine's team never landed a single point of damage on me - the only HP I lost all battle was Life Orb recoil."}
+  ],
+  "strategy_checks": [
+    {"check": "Grassy Surge puts terrain up on entry", "result": "PASS", "evidence": "Terrain reported as 'grassy' with 4 turns remaining after T1, and both Weavile and Thwackey took the end-of-turn grassy heal."},
+    {"check": "Thwackey's Fake Out supports a partner attack", "result": "PASS (correct choice, denied)", "evidence": "T1 Fake Out aimed at Nidoking - the correct target, since Nidoking was the slot holding the 2x answer to its partner Quaxwell. It lost the priority race to a faster Fake Out and was flinched. The decision was right; the base-65 Speed was not."},
+    {"check": "Grassy Glide priority while grounded", "result": "NOT_SELECTED", "evidence": "T2 Thwackey chose Wood Hammer and was KO'd before it resolved. Grassy Glide was available with terrain up and would have gone first - into a Weavile that Grass does not hit well, admittedly - so declining it was defensible, but the terrain-priority interaction the team is built around never appeared."},
+    {"check": "Choice Specs Eruption while Quilava's HP is high", "result": "NOT_EXERCISED", "evidence": "Quilava entered at the end of T2 at full 86 HP - the exact state Eruption wants - and was KO'd by a single Knock Off before it took a turn. The dossier's own 'crack' line names 'damaging Quilava before Eruption' as the counterplay; in practice I did not need to damage it, because one unboosted neutral physical attack from a cap-30 party removes it outright."},
+    {"check": "Brionne converts Liquid Voice Hyper Voice into a Throat Spray boost", "result": "FAIL", "evidence": "Brionne had two turns. On the first it Protected instead of firing the sound move its item exists to reward; on the second it was KO'd from full. The Throat Spray never triggered and Liquid Voice never fired. See the Protect ledger."},
+    {"check": "Quaxwell's Moxie chains off a KO", "result": "NOT_EXERCISED", "evidence": "KO'd from full 97 HP on T1 before it moved. Its selected Low Kick would have been 4x into Weavile, so the choice was right and it lost a speed tie."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "BRIONNE", "payoff": "THIN, and arguably harmful. It blocked one Ice Beam, which is 0.5x into a Water-type - perhaps 20 damage on a 90 HP body. In exchange it gave up the only free turn it ever had to use Liquid Voice Hyper Voice, which would have triggered its own Throat Spray for +2 Sp.Atk and set up everything the member is built to do. It was KO'd from full the next turn, so the guard bought nothing and cost the team its one setup opportunity."}
+  ],
+  "protect_ledger_note": "One opponent Protect, the weakest payoff of any guard in my block. Not empty - it did block a real attack - but it was chosen over the member's own authored payoff on the only turn that payoff was available.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Thwackey's Fake Out targeting and Quaxwell's Low Kick selection were both correct reads that simply lost to Speed. There is nothing wrong with Jasmine's decision-making; the team is losing on stats and typing, not on play.",
+    "Brionne's entry Protect is the one choice I would question. A Throat Spray holder using a non-sound move on its free turn is the same shape as Gligar's unused Flying Gem in play_order 53: an item whose whole purpose is to reward one specific action, on a member that guards instead. It might be worth checking whether guard scoring accounts for a held item that only pays out on an attack."
+  ],
+  "level_changes": [
+    {"member": "THWACKEY", "field": "level offset", "before": 3, "after": 4, "reason": "First-attempt win with zero player faints and zero damage taken. Thwackey is tied-lowest at L31 and it is the terrain setter the rest of the team leans on, so it needs to survive past turn two for Grassy Glide to ever matter. It died on turn 2 to one critical Triple Axel through Eviolite."},
+    {"member": "QUILAVA", "field": "level offset", "before": 3, "after": 4, "reason": "The other tied-lowest at L31, and the member whose entire design depends on being at high HP when it acts. It was KO'd from full 86 HP by a single neutral Knock Off before taking a turn, which means the Choice Specs Eruption plan cannot start. Quaxwell and Brionne are already at offset 4."}
+  ],
+  "post_change_rerun": "NOT RUN - requires a headless ROM rebuild of the shared work/agent-battle-build; see the play_order 49 receipt.",
+  "calibration": "Three turns, zero faints, zero damage taken beyond my own Life Orb recoil, and four of my six never left the party. This is the softest fight in my block alongside Kaleb. +1 to the two weakest, but as with Kaleb I do not think levels are the real answer - see below.",
+  "could_this_be_cooler": "The concept - a collector of mid-stage regional starters, with terrain and a sound/Throat Spray line - is charming and I would keep the idea. The execution has a specific structural problem that two levels will not fix: three of the four members are unevolved middle stages, and every one of them is built around a payoff that requires surviving a turn it does not survive. Quilava's Eruption needs high HP, Brionne's Throat Spray needs a free sound move, Thwackey's Grassy Glide needs the terrain it just set. Against a cap-30 party where a single neutral attack kills an 86 HP body from full, none of those conditions is reachable. The cheapest fix is defensive items rather than levels: Eviolite is doing real work on Thwackey and the other three middle stages are holding offensive items (Life Orb, Choice Specs, Throat Spray) on bodies too frail to use them twice. Giving Quilava an Eviolite instead of the Specs would actually make its Eruption happen more often than the Specs multiplier ever will, because a move that never fires has no multiplier. Failing that, this is a team that would be transformed by leading Brionne + Thwackey, so the Fake Out covers the sound-move setup turn rather than being spent on the opening exchange. None of that is a level change, so nothing beyond the two offsets was touched.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}

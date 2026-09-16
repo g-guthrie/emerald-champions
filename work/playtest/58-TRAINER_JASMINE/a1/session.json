@@ -1,0 +1,21 @@
+{
+  "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+  "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+  "seed": 58,
+  "trainer_a": "TRAINER_JASMINE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 30,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/58-TRAINER_JASMINE/party.json",
+  "party_sha256": "89fd24a650945926bbfc1996cffb23535279a86693f188a85c42a5c8c0e35225",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "prepared": {
+    "encounter": "E0067 Jasmine (Route 110), cap 30 - same six, Weavile/Nidoking lead",
+    "party": 6
+  },
+  "started": {
+    "frames": 1139
+  }
+}
