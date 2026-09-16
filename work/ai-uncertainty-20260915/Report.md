@@ -1907,3 +1907,47 @@ wrong target or move until the driver fix lands. Everything I have pinned was
 reproduced natively on a board I built, not read from a record — including the
 Prankster-Encore and absorber vetoes, which were both observed directly in the
 harness before being fixed.
+
+# J2 closed: the Life Orb payment is reached, and the death is priced
+
+No source change. **195 passed, 0 failed** on my allowlist.
+
+I instrumented the multi-hit path as asked, through a temporary global read from
+the fixture. On Cinccino's board at 2 of 128 HP with Tail Slap:
+
+```
+lifeOrb = TRUE   singleContactOrb = FALSE   hp[actor] != 0   orbHitChance = 85
+```
+
+So `if (lifeOrb && orbHitChance && hp[actor])` is entered and the recoil is
+applied at 85%. **My group I conclusion was wrong**: the payment is reached on
+the multi-hit path. What was wrong was my probe. The self-knockout cost I added
+there was guarded by `!hp[actor]`, and the trial carries *expected* HP — 15% of
+2 HP never rounds to a dead body — so raising that cost to 1000 could not move
+anything. It was dead code, which is why the experiment looked like a missing
+payment.
+
+Rewriting the guard to read the payment instead of the HP (`recoil >= hp before
+the payment`, weighted by `orbHitChance`) does work: the multi-hit fixture goes
+green. But at 40, at 20, and with the cost narrowed to bodies that would
+otherwise have survived the turn, it moves `EC Soak forecast: a flinched
+conversion is not assumed to have happened` — an authored Ned board — every
+time. So it is not landed.
+
+**The open question is a value judgement, not a bug.** A body at 2 of 128 HP is
+worth `180 - healthValue` and almost nothing more; five hits of damage is worth
+more than that. Trading a nearly-dead body for real damage is defensible play,
+and the receipts call it a defect because of how it looks, not because the
+arithmetic is wrong. Whether a live body's remaining *turns* should be worth
+more than its remaining HP is a question about `PairMonValue`'s shape, and
+moving it costs an authored fixture. That is the coordinator's call rather than
+mine; the diagnosis, the working patch shape and its cost are all recorded here.
+
+## A mechanic correction on the Stakataka board
+
+Gyro Ball's power is `25 * targetSpeed / userSpeed`, capped at 150: the **slower
+the user, the more power**, which is the opposite of the premise in the report.
+Under Trick Room a minimum-Speed Stakataka is exactly the body Gyro Ball is
+strongest on. So "86 damage from a resisted Gyro Ball" may well be the correct
+power, and what needs checking on that board is only whether Stone Edge's
+knockout was seen — an effectiveness-and-KO question, not a power-formula one.
