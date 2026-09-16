@@ -1,0 +1,41 @@
+{
+  "play_order": 46,
+  "e_group": "E0049",
+  "trainer": "TRAINER_SIMON",
+  "class": "regular",
+  "location": "Route109_SeashoreHouse",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"PRINPLUP": 23, "CHARJABUG": 25, "MUDBRAY": 24, "MORELULL": 25},
+  "party_manifest": "work/playtest/46-TRAINER_SIMON/party.json",
+  "party_pool_audit": "Cap-24 core party, all six gated <= 24 in pool-24.json. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/46-TRAINER_SIMON/a1", "seed": 52, "outcome": "won", "turns": 7, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Moonblast broke Prinplup's Focus Sash and its Sp.Atk drop triggered Competitive for +2, but Air Slash KO'd it the same turn; Charjabug's Spark took Enamorus to 14. T2 Enamorus pivoted to Magearna, Morelull Protected into nothing and a Serene Grace flinch denied Charjabug. T3 Air Slash plus Fleur Cannon KO'd Charjabug; Morelull's Spore put Togekiss to sleep. T4 A critical High Horsepower from Mudbray KO'd Magearna. T5 Kartana came in Spore-immune and Mudbray Protected a 2x Leaf Blade. T6 Leaf Blade KO'd Mudbray; Morelull Protected the Air Slash. T7 Smart Strike KO'd Morelull."}
+  ],
+  "strategy_checks": [
+    {"check": "Prinplup Competitive converts a stat drop into +2 Sp.Atk", "result": "PASS", "evidence": "Turn 1: 'The opposing Prinplup's Sp.Atk fell! The opposing Prinplup's Sp.Atk rose sharply!' from Moonblast's secondary. The ability fired exactly as authored. It died in the same turn, so the boost was never spent."},
+    {"check": "Charjabug Battery boosts the partner's special attacks without spending its action", "result": "NOT_EXERCISED", "evidence": "Prinplup, the intended beneficiary, was KO'd on turn 1 before it used a special attack alongside Charjabug. Charjabug then spent its turns on Spark (and one flinched turn). The team's signature support link never got a turn - the same structural problem as Jocelyn's Dancer relay, but here it is my speed rather than an AI choice that prevented it."},
+    {"check": "Mudbray Stamina raises Defense when hit", "result": "NOT_OBSERVED", "evidence": "Mudbray took exactly one damaging hit (the Leaf Blade that KO'd it) so no Stamina proc could be seen."},
+    {"check": "Morelull Spore and Effect Spore", "result": "PASS", "evidence": "Turn 3 Spore put Togekiss to sleep for two turns. Effect Spore never triggered (no contact move reached it). Correctly, Spore was NOT aimed at Kartana, which is Grass and powder-immune."},
+    {"check": "Morelull Strength Sap", "result": "NOT_SELECTED", "evidence": "Never used, including on turn 6 when Morelull was at 34/78 and facing a +1 Kartana. Strength Sap would have healed it and cut Kartana's Attack; Protect was chosen instead, which did block a likely-lethal Air Slash, so the choice is defensible rather than wrong."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "MORELULL", "payoff": "EMPTY. My actions were a switch (Enamorus to Magearna) and Togekiss' Air Slash at Charjabug. Nothing was aimed at Morelull."},
+    {"turn": 5, "battler": "MUDBRAY", "payoff": "REAL: blocked Kartana's Leaf Blade, a 2x attack into a Ground-type that KO'd it outright the following turn. A full turn of survival bought at the cost of one High Horsepower."},
+    {"turn": 6, "battler": "MORELULL", "payoff": "REAL: at 34/78 it blocked Togekiss' 2x Air Slash, which was very likely lethal, and survived to the next turn."}
+  ],
+  "protect_ledger_note": "Three opponent Protects, two with real payoff and one empty. Reasonable ratio; no consecutive-Protect abuse.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No bad decision observed. Notable good one: Morelull did not waste Spore on the powder-immune Grass-type Kartana after it switched in."
+  ],
+  "level_changes": [
+    {"member": "PRINPLUP", "field": "level offset", "before": 1, "after": 2, "reason": "First-attempt win with a single player faint (and that faint was a critical hit). Prinplup is the lowest-level opponent at L23 and it died on turn 1 having contributed only a Competitive proc it never got to spend. One level is the cheapest way to let the Battery/Competitive partnership actually take a turn. Mudbray, the second-lowest, is left alone because it earned its keep: it KO'd Magearna and used the best Protect of the battle."}
+  ],
+  "level_change_verification": "Teams file edited, scripts/emerald_champions_teams.py --write then --check all PASS. Generated projections reverted before committing.",
+  "rerun_status": "NOT RERUN - the headless ROM cannot be rebuilt in this session (arm-none-eabi toolchain cannot resolve stdint.h). Rerun owed to whoever rebuilds.",
+  "could_this_be_cooler": "The 'small Pokemon collection' theme is coherent and Charjabug's Battery is the right kind of quiet mechanic for a route trainer. The problem is that the whole team is built around a support ability whose beneficiary is its most fragile member: Battery only pays when Prinplup lives to fire a special attack in the same turn, and Prinplup is a 69 HP Focus Sash lead. The plan's own 'Morelull supplies a secondary Battery' line is the tell that this was already a known fragility. Either give Prinplup the levels to survive a turn (done here, one level) or move the special-attacking role onto the bulkier Morelull so Battery has a durable partner. No species, move or item changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
