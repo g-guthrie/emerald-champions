@@ -733,3 +733,120 @@ Headless ROM rebuilt and `pokeemerald-headless.inputs.json` re-stamped (checked
 `PASS`); `work/agent-battle-build` untouched, with every run in this round
 driven from a private copy under `/tmp`. Focused allowlist plus the new fixture:
 **91 passed, 0 failed, 91 total**. `pokeemerald.gba` builds clean.
+
+---
+
+# Round 5: pricing what a turn buys after it ends
+
+Commit `7f794556de`. Focused allowlist with `no_pp_struggle.c` and the new
+`setup_pricing.c`: **98 passed, 0 failed, 98 total.**
+
+## Diagnosis
+
+Every class in the playtest reports fails the same way, and it is structural
+rather than a collection of separate bugs: **the pair search scores one turn,
+and the entire value of these moves arrives on the turns after it.** Tailwind
+changes no HP this turn. Quiver Dance boosts a user whose attack has already
+been spent. Sleep Powder, Thunder Wave, Will-O-Wisp, Screech and Acid Spray only
+pay when the victim next tries to act - and Acid Spray pays nothing at all in
+turn when the sprayer is slower than the partner it is setting up, which is
+exactly Jerry's Koffing. Priced at zero, all of them lose to any direct attack,
+every turn, on every team. The counter-example proves the diagnosis rather than
+contradicting it: Trick Room fires because `PairPlanScore` gives it 70-100
+outright, and weather and Tailwind had the same kind of score but **gated behind
+the trainer's authored flag** - which route teams like Jose's, Johnson's and
+Dawson's do not carry, so their Tailwind was worth literally nothing.
+
+## Fixes, all on values
+
+**Four bounded next-turn values**, paid at the end of the trial and only when
+the effect actually landed and its owner or victim is still standing:
+
+| Term | Value | Covers |
+| --- | --- | --- |
+| `PAIR_SETUP_HORIZON` | 40, scaled by the user's survival | Quiver Dance, Iron Defense, Victory Dance, Bulk Up |
+| `PAIR_SLEEP_HORIZON` | 35 | Sleep Powder, Spore |
+| `PAIR_STATUS_HORIZON` | 20 | Will-O-Wisp, Thunder Wave, Taunt |
+| `PAIR_STAT_DROP_HORIZON` | 12 per stage | Acid Spray, Screech, Icy Wind |
+
+A boost that gets its user killed, and a sleep on something that faints anyway,
+are still worth nothing: the terms are gated on `hp[...]` at the end of the
+trial. They are symmetric - a foe doing the same to us subtracts.
+
+**Tailwind is no longer gated on the authored flag.** The order crossings it
+buys are the value whether or not the trainer carries `TAILWIND`; the flag adds
+20 on top. With no crossings it is still worth nothing, which the fixture pins
+in both directions. **Setup lost its flag gate** for the same reason - safety
+decides, and the trial was already measuring safety.
+
+**Switching pays for the turn it gives up.** A switch preserves board value
+while an attack spends HP, so a one-turn board made withdrawing a healthy lead
+look nearly free and only a flat 35 stood against it - the shape behind
+Lilith's Scraggy, Takao's Grapploct, Brawly's Hariyama and the rival's Pikachu.
+A voluntary switch now also pays the damage the outgoing battler was about to
+deal (capped at 70) and, on turn one from full health with nothing revealed, 60
+more. **A position that genuinely needs to change pays none of it**: the
+pressure test the reserve search already runs (`PairNeedsSwitchSearch`) exempts
+it, so Laura's pivot, Brenden's doomed recipient and the Life Orb exit are
+unchanged - all three still pass.
+
+**A guard that denies less than its user could simply have healed** banks
+nothing beyond the base share. Half the maximum back is permanent; what a shield
+saves is only the part a payoff makes permanent.
+
+## Fixtures added
+
+`test/battle/ai/setup_pricing.c` (6 cases, all passing):
+
+| Fixture | Pins |
+| --- | --- |
+| Tailwind is worth the turn when the side is outsped | wind when it buys crossings, the attack when it does not |
+| a boost is worth a safe turn and not a dangerous one | Quiver Dance on a free turn, Bug Buzz when the turn would kill it |
+| sleep on a healthy threat is worth the turn | Compound Eyes Sleep Powder over the chip attack |
+| Endeavor is the low-HP attack when it can land first | two HP and faster: level the healthy target |
+| a healthy lead does not reset the board on turn one | unpressured full-HP lead attacks instead of withdrawing |
+| recovery beats a shield that banks less than it heals | the empty second guard becomes a heal |
+
+`EC Gym: Jocelyn dances on a safe board with the Dancer relay up` in
+`emerald_champions_plans.c` is the authored acceptance case: the setter dances
+and **Oricorio's Dancer copies it**, so both halves of the room gain. The Acid
+Spray fixture in `primary_support_pair.c` gained a slow-sprayer parametrization:
+a drop that lands after the partner has attacked still pays on later turns, so
+it sprays; only a drop that cannot land at all (Covert Cloak) is the attack's
+turn.
+
+## Numbers
+
+Focused allowlist, `run_focus.py --filter 'EC '`: **98 passed, 0 failed, 98
+total** (91 before this round, +6 setup pricing, +1 Jocelyn relay).
+
+Decision frames, limit 72: Dancer 66, Mega 62, Cristian 57/47, Ned 61/51,
+Jocelyn 46, misty gym 46, Darius 24, Jocelyn relay 24, Nate 14, Brawly 60.
+
+E0409 multi after Round 4's budget work, unchanged by this round's values:
+seeds 11/3/5/13 measure **83, 98, 82, 95** frames against 165 before.
+
+`pokeemerald.gba` builds clean.
+
+## Not reached in this pass, with what is known
+
+* **Known-negligible damage re-selected** (Poochyena's Crunch into a Fairy,
+  Eevee's Quick Attack into Snorlax with Rocky Helmet recoil). Both are single
+  battles, where the pair search does not run at all - this is the upstream
+  per-battler scorer, a different owner from everything above.
+* **Shroomish never using Spore** should now be covered by the sleep horizon,
+  but it is a single battle too, so it needs the same owner checked.
+* **The Conservative trait and the guard model** (Darian never Protecting) -
+  not investigated.
+* **Glimmet's 0.25x versus 0.5x target choice** - not investigated; it is a
+  target-selection question inside the damage comparison rather than a class
+  pricing one.
+* **Corsola's Life Dew at 13/61 into a lethal attack** - the heal-aware guard
+  rule does not cover choosing between a heal and an attack when the heal
+  cannot outrun the incoming damage.
+* The recovery fixture pins the **empty** guard case (nothing incoming). With
+  real damage incoming the model still prefers the shield at low HP; that margin
+  is unresolved.
+* Zubat/Golbat declining Taunt and U-turn, and Brawly's Hariyama withdrawal,
+  were logged as watch items and are partly addressed by the switch cost, but
+  neither has a fixture.
