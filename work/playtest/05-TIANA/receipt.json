@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "play_order": 5,
+  "e_group": "E0005",
+  "trainer": "TRAINER_TIANA",
+  "class": "casual",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "SKITTY L15 @FOCUS_SASH WONDER_SKIN JOLLY (Fake Out/Fake Tears/Helping Hand/Protect)",
+    "SWIRLIX L14 @SITRUS_BERRY UNBURDEN MODEST (Draining Kiss/Dazzling Gleam/Thunderbolt/Protect)",
+    "EEVEE L15 @EVIOLITE ADAPTABILITY ADAMANT (Quick Attack/Double-Edge/Wish/Protect)",
+    "BUNEARY L15 @FLAME_ORB KLUTZ JOLLY (Fake Out/Switcheroo/Encore/Drain Punch)"
+  ],
+  "authored_strategy_flags": "NONE",
+  "party_manifest": "work/playtest/05-TIANA/party-a1.json",
+  "party_summary": "Arcanine + Magearna* leading; Snorlax / Whimsicott / Iron Leaves* / Weavile reserve. Snorlax entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 5001, "outcome": "won", "turns": 5, "decisions": 5,
+      "player_faints": 0, "opponent_faints": 4, "ai_decision_seconds_max": 0.268,
+      "events": "work/playtest/05-TIANA/attempt-1-events.jsonl",
+      "narrative": "T1 Close Combat put Skitty on its Focus Sash while Skitty's Fake Out flinched away my Flash Cannon. T2 Extreme Speed finished Skitty as it used Helping Hand, and Flash Cannon (2x on Fairy) OHKOd Swirlix. T3 Arcanine, down to 22 with its berry gone, pivoted to Snorlax; Buneary's entry Fake Out flinched Magearna. T4 Fleur Cannon OHKOd Eevee. T5 Flash Cannon finished Buneary. No player faints; Magearna ended 37/59."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Skitty uses Fake Out when interruption is necessary, and Fake Tears only when Swirlix can exploit the drop",
+     "result": "PARTIAL PASS",
+     "evidence": "T1 Fake Out correctly targeted Magearna, the battler whose Flash Cannon it could actually deny (Arcanine's Extreme Speed outruns Fake Out). T2, with Swirlix alive, it chose Helping Hand and boosted a Thunderbolt that took 22 off Arcanine. Fake Tears was never selected in the fight, so the RETAIN feature of this set - the whole reason Fake Tears replaced Sing - is still unverified."},
+    {"check": "Do not spend a turn lowering Special Defence after the partner attack has happened",
+     "result": "PASS (vacuously)", "evidence": "Fake Tears was never used at all, so it was never mistimed."},
+    {"check": "Buneary threatens Klutz-assisted Flame Orb Switcheroo",
+     "result": "NOT SELECTED",
+     "evidence": "Buneary was on the field for three turns with a physical Snorlax opposite it and used Fake Out, Drain Punch, Drain Punch. Switcheroo never fired. Not scored as a defect: both Drain Punches were super-effective on Snorlax and healed Buneary, and the only other target, Magearna, is a special attacker that barely cares about a burn. But the set's signature interaction remains unverified."},
+    {"check": "Unburden activates only on an actually consumed Sitrus",
+     "result": "NOT TESTED", "evidence": "Swirlix was OHKOd from full HP on T2 by a 2x Flash Cannon; the Sitrus never triggered, and correctly no Unburden speed was observed."},
+    {"check": "Eevee receives a Wish on a planned switch or keeps itself alive",
+     "result": "FAIL", "evidence": "Wish was never used and Eevee never switched. See AI defect E0005-D1."},
+    {"check": "Wonder Skin blunts low-accuracy status",
+     "result": "NOT TESTED", "evidence": "I used no status moves."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.268 s maximum."}
+  ],
+  "protect_ledger": [],
+  "empty_protects": 0,
+  "protect_note": "No opponent used Protect in this fight, although three of the four sets carry it. Given the fight lasted five turns against two attackers with no incoming spread pressure, declining to guard was reasonable each turn; nothing to fault, but nothing to credit either.",
+  "ai_defects": [
+    {
+      "id": "E0005-D1",
+      "severity": "significant",
+      "turn": "3, 4 and 5",
+      "board": "Eevee L15, Eviolite, ADAPTABILITY, full HP, opposite an 81 HP Snorlax holding a Rocky Helmet, with Magearna as the other target.",
+      "chosen": "Quick Attack on Snorlax, three turns running.",
+      "why_wrong": "Quick Attack did 9, 9 and 0 damage to an 81 HP target and cost Eevee Rocky Helmet recoil on every one of those contact hits, so the move was net negative from turn two onward. Eevee's Double-Edge is 120 BP with ADAPTABILITY doubling the STAB to 2x - roughly five times the output - and Eevee was never in a position where the +1 priority bought anything, since Snorlax is slower than it anyway. It also never used Wish, its only way to undo the chip it was taking.",
+      "better_action": "Double-Edge on Snorlax, or Wish on the turn it was already being chipped for free.",
+      "note": "The repetition is the important part: the same 9-damage move was re-selected twice after its damage had already been revealed, and after Rocky Helmet recoil had already been observed. This mirrors the same pattern recorded as E0002-D1 (Poochyena re-selecting a 6-damage Crunch into a Fairy). Suspect a shared gap: the scorer is not penalising a move whose observed payoff is lower than the self-damage it causes."
+    }
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 0 player faints and no real threat -> +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "SWIRLIX", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15},
+      {"member": "EEVEE", "offset_before": 3, "offset_after": 4, "level_before": 15, "level_after": 16}
+    ],
+    "reasoning": "Swirlix is the single lowest member and the team's only special threat; it was OHKOd from full HP before Unburden or Draining Kiss could ever appear, and +1 gives it a chance to survive one hit and show the set. Eevee is raised for the same reason and not as a punishment for D1 - at L16 with Eviolite it survives the Fleur Cannon that removed it, which is the prerequisite for the Wish/Double-Edge lane ever being seen. Skitty and Buneary carry the disruption identity and are unchanged.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "The concept is charming and coherent; two of its four ideas simply never appear.",
+    "keep": "A 'whimsical support core' - Fake Out/Helping Hand Skitty, an Unburden Fairy, a Wish Eevee and a Klutz Flame Orb trickster - is a genuinely distinct identity for a casual route trainer and is worth keeping as a concept.",
+    "suggestion": "Buneary is carrying two setup-style moves (Switcheroo, Encore) that both need a turn the fight rarely grants, and it used neither. Cutting Encore for Fake Out support it already has, or giving it Trick Room-style value, would be worse; the better fix is to give Buneary a reason to spend turn one on Switcheroo by making the burn matter - pair it with a partner that punishes a halved Attack, such as a bulky Fluffy or Fur Coat body, so the Flame Orb pass is a real combination rather than an optional flourish.",
+    "second_thought": "Three of the four members are Normal type. Swirlix is the only piece that changes the type conversation, and it is also the lowest level. Trading Eevee for a non-Normal support - Togepi, Cleffa, Milcery - would make the Fairy identity the team's actual theme instead of an accident.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": [
+    "Cross-encounter pattern flagged for the AI owner: E0002-D1 and E0005-D1 are the same shape - a low-level member re-selecting a move whose observed damage is negligible (and, here, net negative through Rocky Helmet) while a far stronger legal option sits in the same moveset. Worth one look at the move scorer's handling of already-revealed damage before more of this block is played.",
+    "Pool chronology caveat carried from play_order 1."
+  ]
+}
