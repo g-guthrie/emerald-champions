@@ -1,0 +1,34 @@
+{
+  "play_order": 272, "e_group": "E0423", "trainer": "TRAINER_SUSIE", "class": "ace", "location": "Route131",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Five members offset 1 -> L83, Pidgeot offset 2 -> L84. Confirmed.",
+  "party_manifest": "work/playtest/272-TRAINER_SUSIE/party_susie_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 423, "outcome": "won", "turns": 12, "player_faints": 4, "opponent_faints": 6,
+     "narrative": "The Conservative AI played this like a person. T1 Corviknight switched to Sceptile in front of Thunderbolt and Arcanine Close Combat OHKOed my Tyranitar (my misread: 4x). T2 Arcanine switched to Probopass in front of Moonblast, Sceptile Protected the Hurricane. T3 Shadow Ball crit KO Sceptile, Zapdos Tailwind, Power Gem took Zapdos to 68. T4 Extreme Speed took the Chi-Yu switch-in to 2 HP, Moonblast (resisted) chipped Arcanine. T5 Shadow Ball KO Arcanine. T6 Thunderbolt KO Corviknight (it had chosen Tailwind), Flash Cannon KO Flutter Mane. T7 Probopass switched to Pidgeot to absorb a 4x Sacred Sword; Volcarona crit Bug Buzz KO Chien-Pao. T8 Mega Pidgeot Tailwind, Draco Meteor KO Volcarona through Zapdos' Protect. T9 Pidgeot Protect blocked Thunderclap; T10 Pidgeot Protect failed, Thunderbolt paralyzed Probopass. T11 Thunderclap KO Pidgeot, Power Gem KO Zapdos. T12 Probopass Wide Guard (empty), Thunderbolt KO."}
+  ],
+  "strategy_checks": [
+    {"check": "Arcanine Intimidate + Extreme Speed / Flare Blitz opener", "result": "PASS", "evidence": "Intimidate T0 and again on re-entry T3; Close Combat OHKO T1; Extreme Speed T4 (211 into Chi-Yu) and T5."},
+    {"check": "Corviknight sets Tailwind", "result": "chosen, died first", "evidence": "T6 native choice Tailwind, KOed by Thunderbolt before moving. Mirror Armor not exercised (no stat drops aimed at it)."},
+    {"check": "Probopass Wide Guard / Magnet Pull / Thunder Wave", "result": "PARTIAL", "evidence": "Magnet Pull not exercised (no Steel on my side); Thunder Wave never used; Wide Guard once at T12 with no spread move on the board (empty). Power Gem and Flash Cannon KOed Flutter Mane and Zapdos."},
+    {"check": "Sceptile White Herb Unburden line", "result": "NOT EXERCISED", "evidence": "Leaf Storm chosen T3, KOed first; never fired, so the Herb never triggered."},
+    {"check": "Volcarona Quiver Dance alternative", "result": "NOT USED", "evidence": "Bug Buzz (crit KO Chien-Pao) then Bug Buzz into Protect; no Quiver Dance."},
+    {"check": "Mega Pidgeot No Guard Hurricane", "result": "FAIL (never fired)", "evidence": "Mega Evolved T8 at 65/260 and chose Tailwind, then Protect, then Protect (failed); Thunderclap KOed it T11. Hurricane was never used, so the headline of the team did not appear."},
+    {"check": "Conservative AI switching", "result": "PASS (notable)", "evidence": "Three predictive switches: Corviknight out of Thunderbolt (T1), Arcanine out of Moonblast (T2), Probopass into Sacred Sword's slot via Pidgeot (T7). All three were correct reads."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "Sceptile", "payoff": "blocked Hurricane (lethal); real"},
+    {"turn": 9, "battler": "Pidgeot", "payoff": "blocked/pre-empted Thunderclap (lethal); real"},
+    {"turn": 10, "battler": "Pidgeot", "payoff": "consecutive Protect failed; empty (Thunderclap failed anyway because Protect is a status move, so it survived by accident)"},
+    {"turn": 12, "battler": "Probopass (Wide Guard)", "payoff": "empty: no spread move on the board"}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "T8 Mega Pidgeot at 65 HP chose Tailwind over a No Guard Hurricane that KOs either target; consistent with the authored 'Tailwind then Hurricane' plan but low value at that HP. Not counted as a defect.",
+    "T10 consecutive Protect on Pidgeot (1/3 gamble); T12 Wide Guard with no spread move revealed. Same pattern as Tabitha's Gigalith: Wide Guard scoring seems not to require a known spread move."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Won on attempt 1 with four faints after a long fight (one faint was my Tyranitar misread); real fight -> keep.",
+  "could_this_be_cooler": "The Mega Pidgeot showcase did not show: it arrived at 65 HP after absorbing a switch-in hit and never clicked Hurricane. The AI's switching was excellent, which is exactly why the ace came in damaged. Two options that keep every set: put Pidgeot in the lead slot beside Corviknight so the Tailwind + No Guard Hurricane turn is the opening, or move the 'switch-in sponge' role to Corviknight (Roost) so the Mega enters clean. Not changed in this pass.",
+  "authored_set_legality": "No problem found."
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Route 131, Susie (E0423), cap 84",
+  "availability_audit": "Cap-84 window, Route 131 after Mossdeep; Sootopolis not entered, nothing from Seafloor Cavern, Cave of Origin, Sootopolis, Pacifidlog or Underwater maps. Zapdos gate 30 (New Mauville, reachable legend); Tyranitar gate 60 (Safari Zone NE rock smash, Route 121, before Mossdeep); Chi-Yu gate 48; Chien-Pao gate 60 (Shoal Cave); Flutter Mane gate 68 (Mt Pyre); Raging Bolt gate 60 (Route 119).",
+  "plan": "Rock and Electric into a flying core: Zapdos Thunderbolt removes Corviknight before Tailwind, Assault Vest Tyranitar's Rock Slide is 2x on Arcanine/Pidgeot and 4x on Volcarona while Sand Stream chips the whole roster; Raging Bolt Thunderclap is the priority Electric that ignores Tailwind; Chien-Pao/Flutter Mane outspeed Unburden-less Sceptile and Mega Pidgeot outside Tailwind.",
+  "party": [
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STATIC",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Electric/Flying special attacker",
+      "availability": "pool-84 gate 30, legendary_sign:NewMauville_Inside (C23). Reachable legend."
+    },
+    {
+      "species": "SPECIES_TYRANITAR",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_CRUNCH",
+        "MOVE_LOW_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SAND_STREAM",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Sand Stream weather replacement",
+      "availability": "pool-84 gate 60, wild:SafariZone_Northeast/rock_smash_mons (Route 121, before Mossdeep)."
+    },
+    {
+      "species": "SPECIES_CHI_YU",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_DARK_PULSE",
+        "MOVE_NASTY_PLOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEADS_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "spread Fire, Beads of Ruin",
+      "availability": "pool-84 gate 48, legendary_sign:AshenWoods (C31). Reachable legend."
+    },
+    {
+      "species": "SPECIES_CHIEN_PAO",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SWORD_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fast Ice/Fighting, Sword of Ruin",
+      "availability": "pool-84 gate 60, legendary_sign:ShoalCave_LowTideIceRoom (Route 125, before Mossdeep). Reachable legend."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest special attacker, Icy Wind speed control",
+      "availability": "pool-84 gate 68, wild:MtPyre_Summit/land_mons (C37)."
+    },
+    {
+      "species": "SPECIES_RAGING_BOLT",
+      "moves": [
+        "MOVE_THUNDERCLAP",
+        "MOVE_DRACO_METEOR",
+        "MOVE_THUNDERBOLT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "priority Thunderclap",
+      "availability": "pool-84 gate 60, wild:Route119/land_mons (C36)."
+    }
+  ]
+}
