@@ -24,12 +24,18 @@ def driver(*args):
     return json.loads(result.stdout)
 
 
-def choose(rng, entry, phase):
-    if phase == 'await_switch' or not [m for m in entry['moves'] if m['legal']]:
-        if not entry['switch_slots']:
+def choose(rng, entry, phase, taken):
+    """`taken` collects reserve slots already spent in this act call, so a double
+    faint never sends the same Pokemon out twice."""
+    legal_moves = [m for m in entry['moves'] if m['legal']]
+    if entry.get('replacing') or phase == 'await_switch' or not legal_moves:
+        slots = [s for s in entry['switch_slots'] if s not in taken]
+        if not slots:
             raise SystemExit(f'battler {entry["battler"]} has no legal choice at all')
-        return f'{entry["battler"]}:switch{rng.choice(entry["switch_slots"])}'
-    move = rng.choice([m for m in entry['moves'] if m['legal']])
+        slot = rng.choice(slots)
+        taken.add(slot)
+        return f'{entry["battler"]}:switch{slot}'
+    move = rng.choice(legal_moves)
     return f'{entry["battler"]}:move{move["index"]}@{rng.choice(move["targets"])}'
 
 
@@ -62,7 +68,9 @@ def main():
     for _ in range(args.max_decisions):
         if state['phase'] == 'ended' or not state['pending_decision']:
             break
-        commands = [choose(rng, entry, state['phase']) for entry in state['pending_decision']]
+        taken = set()
+        commands = [choose(rng, entry, state['phase'], taken)
+                    for entry in state['pending_decision']]
         events = driver('act', *commands, '--run-dir', args.run_dir)
         if events['phase'] == 'ended':
             break
