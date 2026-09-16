@@ -174,6 +174,9 @@ def rewrite_trainer_block(block: str, design: Design) -> str:
     header = replace_attribute(header, "Double Battle", "Yes" if design.format in ("double", "multi") else "No")
     header = replace_attribute(header, "AI", ai_flags(design))
     header = replace_attribute(header, "Prize Multiplier", str(design.prize_multiplier))
+    # A re-implemented design must not inherit a retirement's "Party Size: 0"
+    # stamp: trainerproc would compile the authored party as an empty battle.
+    header = re.sub(r"(?m)^Party Size:.*\n?", "", header)
     # Campaign battles are competitive puzzles: no Bag healing on either side.
     header = re.sub(r"(?m)^Items:.*\n?", "", header)
     if design.format == "multi":

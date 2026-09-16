@@ -609,6 +609,14 @@ def main() -> None:
         else:
             print("PASS: strategy coherence: authored strategy flags and ACTIVATE tactics check out")
 
+        size_violations = check_party_size_stamps()
+        if size_violations:
+            for violation in size_violations:
+                print(f"FAIL: party size stamp: {violation}")
+            FAILED_GATES.append("party-size-stamp")
+        else:
+            print("PASS: party size stamps: no authored party carries a retirement 'Party Size: 0'")
+
         if FAILED_GATES:
             raise SystemExit(f"gates failed: {FAILED_GATES}")
         print("PASS: generated master/plans/party match authored teams; configured trainer abilities are valid")
@@ -619,3 +627,15 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+def check_party_size_stamps(party_path: str = "src/data/trainers.party") -> list[str]:
+    """A trainers.party block with an authored SPECIES_ body must never carry
+    a retirement 'Party Size: 0' stamp (it compiles to an empty battle)."""
+    text = open(party_path, encoding="utf-8").read()
+    violations = []
+    for block in re.split(r"(?m)^(?==== TRAINER_)", text):
+        marker = re.match(r"=== (TRAINER_\w+) ===", block)
+        if marker and re.search(r"(?m)^Party Size: 0$", block) and re.search(r"(?m)^SPECIES_", block):
+            violations.append(f"{marker.group(1)}: Party Size: 0 with an authored party body")
+    return violations
