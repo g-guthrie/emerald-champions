@@ -1,0 +1,37 @@
+{
+  "play_order": 154, "e_group": "E0199", "trainer": "TRAINER_JANI", "class": "regular",
+  "location": "AbandonedShip_Rooms2_1F", "chapter": "Feather Badge", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - Clefairy 48+4-2=50, Bibarel 48+0-2=46, Flamigo 48+0-2=46, Pelipper 48+1-2=47, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/154-TRAINER_JANI/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 79, "party": "party-a1.json", "outcome": "won", "turns": 5, "player_faints": 3, "opponent_faints": 4,
+     "note": "Magnezone + Gengar + Weavile + Rillaboom + Alakazam + Togekiss. Jani's turn 1 was the authored plan executed perfectly - Follow Me bought Bibarel a completely safe Swords Dance, which Simple turned into +4 Attack - and it cost me Magnezone to the +4 Aqua Jet a turn later. Flamigo then traded with Weavile via a 4x Close Combat and took Alakazam with a Brave Bird. Gengar's Levitate and Focus Sash carried it, finishing Pelipper and then Flamigo with Psychic."}
+  ],
+  "strategy_checks": [
+    {"check": "Clefairy uses Follow Me when it can preserve Bibarel's Swords Dance, producing the actual Simple boost", "result": "PASS", "evidence": "turn 1, exactly as written: 'The opposing Clefairy became the center of attention' and in the same turn 'The opposing Bibarel's Attack rose drastically'. Simple doubled the two stages to +4, and the resulting Aqua Jet KO'd a 170 HP Assault Vest Magnezone through priority on the next turn."},
+    {"check": "Friend Guard is actually reducing damage aimed at the partner", "result": "PASS by construction", "evidence": "it is why I focused both attacks onto Clefairy on turn 1 rather than at the setup piece - everything aimed at Bibarel while Clefairy lived would have been reduced."},
+    {"check": "Flamigo's Costar copies the ally's stat changes on entry", "result": "PASS mechanically, FAIL as a plan", "evidence": "Costar fired on entry and the log recorded it copying Pelipper's stat changes - which at that moment were a -1 Speed from my Gengar's Icy Wind. The ability works exactly as specified. But see AI defect P13-D7: it copied a debuff, because Flamigo entered as a forced replacement for a dead Bibarel rather than through the support-slot switch the plan requires."},
+    {"check": "Bibarel can attack without waiting for Costar if the switch would lose", "result": "PASS", "evidence": "with Clefairy dead and Bibarel at +4, it immediately used Aqua Jet rather than holding for a pass that was not coming. Correct."},
+    {"check": "Pelipper's rain is an alternate damage mode, not a prerequisite for copying boosts", "result": "PASS", "evidence": "Drizzle set rain on entry and Weather Ball KO'd Magnezone; when the support slot was gone Pelipper fell back to Tailwind on turn 3, which is the authored fallback rather than a redundant second boost."},
+    {"check": "Flamigo's Wide Guard blanks spread damage for a turn", "result": "NOT EXERCISED", "evidence": "Flamigo chose Protect on the one turn it guarded, which was correct - the incoming lethal hit was a single-target Triple Axel that Wide Guard would not have stopped."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "FLAMIGO", "payoff": "REAL - blocked Weavile's Triple Axel, a 2x hit that was lethal, and correctly chose Protect over Wide Guard because the threat was single-target"}
+  ],
+  "ai_defects": [
+    {
+      "id": "P13-D7",
+      "severity": "design gap, not illegal",
+      "turn": "2-3",
+      "board": "Bibarel at +4 Attack beside Pelipper, with Flamigo on the bench",
+      "chosen": "Flamigo was brought in as the forced replacement for a fainted Bibarel, so Costar copied the surviving ally - Pelipper - and inherited its -1 Speed instead of Bibarel's +4 Attack",
+      "problem": "Costar reads the ally that is on the field at the moment of entry. The authored combination therefore requires the SUPPORT slot to switch into Flamigo while Bibarel is still alive and boosted; using Flamigo as a death-replacement for Bibarel guarantees it copies the wrong partner. The dossier's own disposition says exactly this - 'the handoff must encode the support-slot switch' - and in play the AI never sought that switch, so the team's best trick is structurally unreachable.",
+      "better": "On the turn after the Swords Dance lands, switch the support slot (Clefairy, or Pelipper once Clefairy is gone) into Flamigo while Bibarel holds the field. A secondary, cheaper observation for the same defect: because Costar copies negative stages too, an Icy Wind or an Intimidate on the surviving partner is a complete anti-Costar play, and the AI should price that when deciding whether the pass is still worth it."
+    }
+  ],
+  "level_changes": [],
+  "calibration_reasoning": "Won on the first attempt but with three player faints against a fully optimized six, which meets both the brief's 'won with 2+ faints or after a real fight - keep' and AGENTS.md's three-faint threshold. For a regular-class trainer this fight punched well above its class: the Follow Me into Simple Swords Dance sequence is a genuine two-card combination and it immediately cashed a 170 HP body. No change.",
+  "could_this_be_cooler": "Keep. The dossier is right that this hides the best trick on the route, and half of it fired beautifully - Eviolite Friend Guard Clefairy buying a completely free Swords Dance that Simple turns into +4 is a real, memorable route-regular combination and it won Jani a Pokemon on turn two. The other half, the Costar pass, did not fire and structurally cannot fire the way the AI currently deploys Flamigo; see defect P13-D7. There is also a genuinely cool detail the dossier does not mention and should: Costar copies negative stages, so an opposing Icy Wind or Intimidate on Jani's surviving partner poisons the pass. That is a real piece of counterplay, it happened by accident in this run, and it would read as clever rather than unfair if the guide named it. No species, move, item, ability or EV change recommended.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}

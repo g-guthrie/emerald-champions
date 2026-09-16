@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0199 TRAINER_JANI (AbandonedShip_Rooms2_1F, Feather Badge, cap 48, Medium)",
+  "availability_audit": "The Abandoned Ship is reached by Surf on Route 108 after the Balance Badge; battle index window 48-60, floor 48. Every member is gated at 36 or below in pool-48.json: New Mauville entrance via Wattson's Basement Key (30), Haunter plus Linking Cord (30), Granite Cave Abra plus Slateport Linking Cord (20), Sneasel (14), Thwackey line (36), Togepi Route 102 plus Shiny Stone (24). All precede the first Surf. No legendaries, Ultra Beasts or Paradox species.",
+  "plan": "The hidden trick here is Costar: Simple Bibarel's Swords Dance is a four-stage boost, and a Flamigo entering on the support slot's switch copies the whole thing for free - so a Bibarel that sets up and then dies hands Jani a fresh +4 attacker. Two ways to stop it, and I am bringing both. Gengar's Taunt blanks Swords Dance at the source, and it also blanks Clefairy's entire kit, which is four status moves and nothing else. Failing that, kill Bibarel during the setup rather than after: Magnezone's Electric is 2x on Bibarel and Flamigo and 4x on Pelipper, Rillaboom's Grass is 2x on Bibarel and Pelipper, and Weavile's Knock Off removes Clefairy's Eviolite. Clefairy's Friend Guard means everything I aim at its partner is reduced while it lives, so Clefairy is the first target even though it is the highest-level member - and Gengar's Sludge Bomb is 2x into it. The one thing to respect is Flamigo's Wide Guard, which turns off spread damage for a turn.",
+  "party": [
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ANALYTIC",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Electric is 2x on Bibarel and Flamigo and 4x on Pelipper; Flash Cannon is 2x on Clefairy",
+      "availability": "pool-48 gate 30: NewMauville_Entrance land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Taunt is the direct answer to the Swords Dance and to a Clefairy whose four moves are all status; Sludge Bomb is 2x into Clefairy and Psychic is 2x into Flamigo",
+      "availability": "pool-48 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Knock Off strips Clefairy's Eviolite; Fake Out denies the Swords Dance turn and Ice Shard is priority into a +4 Flamigo",
+      "availability": "pool-48 gate 14: Sneasel level/condition evolution."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Grass is 2x on Bibarel and Pelipper, and Grassy Glide is a second priority lane that answers a boosted sweeper without a speed race",
+      "availability": "pool-48 gate 36: Thwackey level evolution in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest battler; Psychic is 2x on Flamigo's Fighting half and the speed is what lets a Taunt or a kill land before a setup turn",
+      "availability": "pool-48 gate 20: Abra GraniteCave_1F, Kadabra evolution, Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "my own redirection against Jani's, plus Fairy that is 2x on Flamigo and Flying that is 2x on it too",
+      "availability": "pool-48 gate 24: Togepi Route 102, friendship evolution, Shiny Stone from the Slateport Mart."
+    }
+  ]
+}
