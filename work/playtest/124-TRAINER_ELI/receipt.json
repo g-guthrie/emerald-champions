@@ -1,0 +1,39 @@
+{
+  "play_order": 124,
+  "e_group": "E0148",
+  "trainer": "TRAINER_ELI",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 36,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/124-TRAINER_ELI/party.json",
+  "level_audit": "PASS. Oranguru 35 (+1), Camerupt 32 (-2), Bronzong 35 (+1), Ninetales 34 (0), Arcanine 33 (-1), Rapidash 34 (0). All equal cap 36 + offset - 2.",
+  "attempts": [
+    {"seed": 14, "run_dir": "work/playtest/124-TRAINER_ELI/run-s14", "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 6, "note": "Comfortable. Only Pelipper was lost, to a Life Orb Wild Charge from Rapidash on turn 5."}
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room is up on turn 1 or turn 2", "result": "PASS", "evidence": "Turn 2, Bronzong: 'The opposing Bronzong used Trick Room! The opposing Bronzong twisted the dimensions!' state field = STATUS_FIELD_TRICK_ROOM. Oranguru selected Trick Room on turn 1 but was KOed by Weather Ball before it acted (it is the slowest of the four actors and the room was not yet up), so the authored backup setter is what actually delivered the room - which is exactly the role the plan assigns Bronzong."},
+    {"check": "INSTRUCT ORANGURU INSTRUCT CAMERUPT - Oranguru repeats Camerupt's Heat Wave/Earth Power", "result": "FAIL (never reached)", "evidence": "Oranguru was KOed on turn 1 without acting and Mega Camerupt was KOed on turn 2 by a rain-boosted Hydro Pump (4x on Fire/Ground, and Mega Camerupt trades Solid Rock for Sheer Force so it loses the super-effective mitigation the base form had). The Instruct turret needs both halves alive and both are individually fragile against Water. Not an AI defect - the tactic was never reachable - but it is the room's central design risk."},
+    {"check": "Mega Camerupt evolves from the slot-2 Mega permission", "result": "PASS", "evidence": "Turn 1 messages: 'The opposing Camerupt's Cameruptite is reacting... has Mega Evolved into Mega Camerupt.' State then reports SPECIES_CAMERUPT_MEGA with ABILITY_SHEER_FORCE."},
+    {"check": "Bronzong is a functioning backup room setter", "result": "PASS", "evidence": "Turn 2 as above. It did not redundantly re-set the room on a later turn, which would have cancelled it."},
+    {"check": "Ancient Power replaces Camerupt's Yawn and is actually used", "result": "PASS", "evidence": "Turn 2, Mega Camerupt used Ancient Power into Pelipper."},
+    {"check": "Faster reserves provide an outside-room plan", "result": "PASS", "evidence": "Choice Band Arcanine opened with Extreme Speed on turn 4 (priority, which functions identically inside Trick Room) and Rapidash used Wild Charge for the fight's only player KO."},
+    {"check": "Misty Terrain protects the grounded room core", "result": "NOT TESTABLE", "evidence": "terrain reported \"none\" at turn 0. Same harness limitation as the other Lavaridge rooms."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Camerupt (Mega)", "payoff": "empty", "detail": "Mega Evolved and Protected, but both player attacks were aimed at Oranguru, so nothing was blocked. Defensible on expected value - a 4x Water weakness facing a rain lead is the single most guard-worthy board in the room - but it produced nothing and cost the turret its first Heat Wave."},
+    {"turn": 3, "battler": "Ninetales", "payoff": "real", "detail": "Blocked a rain-boosted Weather Ball (2x on Fire) at 104/104 HP."},
+    {"turn": 5, "battler": "Ninetales", "payoff": "real", "detail": "Blocked a second rain-boosted Weather Ball, keeping Ninetales at full HP to the last turn. Two Protects, both with real payoff, and never on consecutive turns - good cadence."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "No illegal or nonsensical choices, and notably Bronzong did not re-set an already-active Trick Room at any point. Arcanine's Extreme Speed selection inside Trick Room is correct (priority is unaffected by the room), and Rapidash correctly chose Wild Charge over a Fire move against a Water/Flying target under rain. Max opponent decision time was within budget.",
+  "level_changes": [
+    {"member": "NINETALES", "before": 0, "after": 1, "reason": "Lowest-impact member: it dealt zero damage across the whole battle, spending its turns on two Protects and one Dark Pulse into a switch."},
+    {"member": "ARCANINE", "before": -1, "after": 0, "reason": "Lowest offset on the team excluding the Mega; it got one Extreme Speed off before being KOed."}
+  ],
+  "level_decision": "RAISE. Won on attempt 1 with a single player faint and no point at which the fight was in doubt, which is the brief's raise condition. +1 each to the two weakest non-Mega members (Ninetales and Arcanine). Camerupt was not touched: it is the Mega and already sits at -2.",
+  "rerun_status": "DEFERRED. The headless ROM in work/agent-battle-build-2 is prebuilt, and this pass is not permitted to run make or materialize, so a rerun would have replayed the old levels and proved nothing. The authored offsets are edited in place and left uncommitted for the main agent; the rerun belongs after the next materialize-and-build.",
+  "cooler_note": "The concept is the best in the Gym on paper - a Trick Room caster whose real job is Instruct, pointed at a Mega Fire turret - but as built it is a two-card combo where both cards die to the same thing. Oranguru is slower than everything relevant before the room is up, so on turn 1 it is a 140-HP sitting target, and Mega Camerupt actively loses its Solid Rock mitigation on evolving, turning a 4x Water weakness into an unmitigated one. The combo never fired. The concrete suggestion is not more levels but survivability on the setup turn: a Focus Sash or Mental Herb on Oranguru, or leading Bronzong (Heatproof, Mental Herb, and already the authored backup setter) and bringing Oranguru in once the room is up. Keep the species and the tactic; fix the ordering. Also worth noting that the three Fire reserves - Ninetales, Arcanine, Rapidash - are the same generic Fire attackers that appear in Keegan's and Jace's rooms, so the room's identity rests entirely on a combo that is currently unreliable.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}

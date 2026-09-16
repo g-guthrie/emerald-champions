@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0148 TRAINER_ELI, Lavaridge Gym room 4 (Trick Room + Instruct + Mega Camerupt), cap 36",
+  "availability_audit": "Chronology: the Lavaridge Gym sits at the end of the cap-36 window (C22 Mt. Chimney set the cap, C23 is Flannery). Every source map precedes Lavaridge in book play order: Route 102/103/104 (C02-C05), Dewford (C10-C14), Mauville Game Corner and Route 117 (C18-C20), Altering Cave rock-smash with the C18 Rock Smash license. No Surf-gated water (Surf is C27), no Strength-gated area (Strength is granted only after Flannery), no legendary, no post-badge source. All evolution levels are at or below cap 36.",
+  "plan": "Same validated rain core. Mega Camerupt is Fire/Ground and 4x weak to Water, so a rain-boosted Hydro Pump ends the Instruct turret before it can be repeated; Primarina, Swampert and Garganacl are all slow enough to act first if Trick Room goes up, so the room's speed inversion mostly helps me; Kingdra is held back once Trick Room is active.",
+  "party": [
+    {
+      "species": "SPECIES_PELIPPER",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_WEATHER_BALL",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_DRIZZLE",
+      "item": "ITEM_DAMP_ROCK",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        0,
+        4
+      ],
+      "role": "eight-turn rain setter that now hits: rain Weather Ball is a 100-BP STAB Water attack and rain Hurricane never misses",
+      "availability": "Wingull on the Route103 land table (gate 14), evolves to Pelipper at level 25."
+    },
+    {
+      "species": "SPECIES_KINGDRA",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICE_BEAM",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "rain sweeper; Swift Swim doubles its Speed so it moves before every member of the room, and Water/Dragon resists Fire",
+      "availability": "Horsea on the Route104 good-rod table (gate 30), Seadra at level 32, Kingdra by Dragon Scale trade evolution. Route 104 and the Dragon Scale are both available well before Mt. Chimney."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ICE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Electric-immune physical Water attacker; Assault Vest instead of Life Orb after attempt 1 showed it dying on turn 3",
+      "availability": "Mudkip from the Mauville Game Corner (500 coins, C18), Marshtomp at 16, Swampert at 36."
+    },
+    {
+      "species": "SPECIES_PRIMARINA",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ENERGY_BALL",
+        "MOVE_ICY_WIND"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Water/Fairy special wall-breaker that resists Fighting and Dark, the two coverage types that killed attempt 1",
+      "availability": "Popplio from the Mauville Game Corner (500 coins, C18), Brionne at 17, Primarina at 34."
+    },
+    {
+      "species": "SPECIES_GARGANACL",
+      "moves": [
+        "MOVE_SALT_CURE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_PURIFYING_SALT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        4,
+        0,
+        0,
+        252,
+        0
+      ],
+      "role": "Rock wall immune to burn and to Guts-enabling status; Salt Cure residual against the bulky members",
+      "availability": "Altering Cave 1F rock-smash table (gate 30); the Rock Smash license comes from Mauville (C18)."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        124,
+        0,
+        132,
+        0
+      ],
+      "role": "redirection; Fairy/Flying takes Fighting at 0.25x, which is the safest answer to Hitmontop and Emboar",
+      "availability": "Togepi on the Route102 land table (gate 14), friendship evolution to Togetic, Shiny Stone from the Slateport Mart (C15)."
+    }
+  ]
+}
