@@ -1,0 +1,91 @@
+{
+  "play_order": 38,
+  "e_group": "E0039",
+  "trainer": "TRAINER_JOCELYN",
+  "class": "gym",
+  "location": "DewfordTown_Gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "rerun_reason": "Opponent AI now prices setup/support moves and charges healthy turn-one switches. This encounter was rerun to confirm Hisuian Lilligant actually uses Victory Dance and that Oricorio's Dancer relay fires. No level change was applied to this trainer between passes.",
+  "build": "work/agent-battle-build (headless ROM with the setup-pricing/switch-pricing AI fixes)",
+  "resolved_opponent_levels": {
+    "LILLIGANT_HISUI": 22,
+    "ORICORIO_POM_POM": 24,
+    "WHIMSICOTT": 21,
+    "CRABOMINABLE": 20,
+    "BRELOOM": 20,
+    "SIRFETCHD": 20
+  },
+  "party_manifest": "work/playtest/38-TRAINER_JOCELYN/party.json",
+  "party_chronology_note": "Unchanged from pass 1: Togetic, Enamorus, Arcanine, Alakazam, Hoopa, Magearna, all gate <= 20 in work/reference-pools/pool-20.json. No Mega: the Mega Ring is granted by Steven only after Brawly (play_order 39), so no Mega is chronology-legal here.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/38-TRAINER_JOCELYN/r1",
+      "seed": 42,
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 5,
+      "opponent_faints": 6,
+      "narrative": "T1 Lilligant opened with Victory Dance (+1 Atk/Def/Spe) and Oricorio's Dancer copied it for free before still using Revelation Dance, which took Follow Me Togetic from 70 to 14; Moonblast then KO'd Lilligant. T2 I pivoted Togetic to Magearna; +1 Oricorio outran Enamorus and Acrobatics one-shot it, and Breloom's Spore put Magearna to sleep. Arcanine came in on Intimidate. T3 Oricorio added Tailwind, Breloom Spored Arcanine, and both my actives slept. T4 Arcanine died asleep to Revelation Dance plus Drain Punch without ever acting; Hoopa replaced it. T5 Breloom Spored Hoopa, Magearna woke and a +2 Fleur Cannon KO'd Oricorio; Crabominable came in. T6 Crabominable's Choice Band Ice Punch KO'd the sleeping Hoopa and Breloom re-Spored Magearna. T7 Alakazam's Psychic KO'd Breloom and Crabominable's Ice Punch KO'd Alakazam. T8 Whimsicott entered with Prankster Tailwind, Ice Punch KO'd the 14 HP Togetic through Follow Me, and Magearna woke at +4 to KO Crabominable. T9 a critical Close Combat from Sirfetch'd took Magearna to 30 through its Sitrus, Whimsicott put up Light Screen, and Fleur Cannon KO'd Sirfetch'd. T10 Flash Cannon KO'd Whimsicott through Light Screen. Magearna survived alone at 21/80."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Hisuian Lilligant uses Victory Dance on a board where the dance is worth taking",
+      "result": "PASS",
+      "evidence": "Turn 1, chosen record battler 1 MOVE_VICTORY_DANCE; messages 'The opposing Lilligant's Attack/Defense/Speed rose!'. This is the behaviour the setup-pricing fix was meant to produce: in the previous pass Lilligant never danced."
+    },
+    {
+      "check": "Dancer relay fires - Oricorio copies Victory Dance without spending its own action",
+      "result": "PASS",
+      "evidence": "Turn 1, immediately after Lilligant's dance: 'The opposing Oricorio used Victory~Dance!' with the three stat-rise messages, and Oricorio then still executed its own selected MOVE_REVELATION_DANCE the same turn. Oricorio ended turn 1 at atk+1/def+1/spe+1."
+    },
+    {
+      "check": "The copied Speed boost actually converts - Oricorio outruns a threat it would otherwise lose to",
+      "result": "PASS",
+      "evidence": "Turn 2: +1 Oricorio moved before Timid 252-Spe Enamorus and Acrobatics one-shot it (60 damage on 66 HP) before Moonblast could resolve. The relay directly bought a knockout."
+    },
+    {
+      "check": "Tailwind is used (it went unused on this team in the previous pass)",
+      "result": "PASS",
+      "evidence": "Turn 3 Oricorio MOVE_TAILWIND; turn 8 Whimsicott Prankster MOVE_TAILWIND on the switch-in turn."
+    },
+    {
+      "check": "Prankster Whimsicott gets priority support up",
+      "result": "PASS",
+      "evidence": "Turn 8 Tailwind and turn 9 Light Screen, both at priority, on the turns it entered and the turn Sirfetch'd needed the screen."
+    },
+    {
+      "check": "Poison Heal Breloom brings its Toxic Orb online and uses Spore as the team's disruption",
+      "result": "PASS",
+      "evidence": "Turn 2 'The opposing Breloom was badly poisoned!' with Poison Heal; Spore landed on turns 2, 3, 5 and 6 (Magearna, Arcanine, Hoopa, Magearna). Breloom was never below full HP until it died."
+    },
+    {
+      "check": "Choice Band Crabominable picks a move that stays useful while locked",
+      "result": "PASS",
+      "evidence": "Turn 6 it chose Ice Punch into Psychic/Ghost Hoopa rather than Close Combat, which Hoopa is immune to, and the lock then still produced two more knockouts (Alakazam turn 7, Togetic turn 8)."
+    },
+    {
+      "check": "Hustle / Coba Berry cushion on Lilligant",
+      "result": "NOT EXERCISED",
+      "evidence": "Lilligant was KO'd on turn 1 by a 2x Moonblast (a special Fairy attack), so neither Hustle accuracy nor the Coba Berry's single-hit Flying cushion was ever tested this run."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "The opponent used no Protect at all this battle. Lilligant (Protect) spent its only turn on Victory Dance and Breloom (Protect) spent every turn on Spore, Drain Punch or Bullet Seed - in both cases the non-guard action was the better one, so the empty ledger is correct play rather than a missing behaviour.",
+  "ai_defects": [],
+  "ai_notes": [
+    "The previously reported defect 'Jocelyn's authored Dancer relay never starts' is resolved: the relay fired on turn 1 of this rerun and directly bought the Enamorus knockout on turn 2.",
+    "Turn 3 Oricorio set Tailwind while already at +1 Speed from the relay and while both of my battlers were asleep. The turn bought little immediately and the Tailwind expired on turn 6 before Crabominable or Sirfetch'd could spend it. This is a soft valuation question, not an illegal or nonsensical choice, so it is logged here rather than as a defect.",
+    "Turn 10 Whimsicott chose a 0.5x Moonblast over Encore against a Magearna at 30 HP. Encore had no good lock available (Magearna's last move was a knockout Fleur Cannon), so the attack is defensible."
+  ],
+  "tooling_notes": [
+    "Driver reporting gap, not an AI defect: battle_driver.py decodes STATUS1 with flags_of(), which requires (value & bit) == bit. STATUS1_SLEEP is the 3-bit turn counter (1<<0|1<<1|1<<2), so a sleeping battler reports status [] for every counter value except 7. Four Spores landed this battle and none of them appeared in the state's status field; sleep had to be read from the message log. Sleep-heavy boards cannot be audited from 'status' alone until this is fixed."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first attempt but with five of six player Pokemon KO'd and a single 21/80 survivor. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' No level change. Note that this is a materially harder fight than the same board produced in pass 1 (3 faints then, 5 now) purely because the AI fixes turned on Victory Dance, the Dancer relay and Tailwind; the authored strategy is now actually being played.",
+  "could_this_be_cooler": "The team is now doing what it was written to do, so nothing structural is wanted. The one observation worth passing on: Breloom's Spore, not the dance, was the piece that decided this battle - four Spores removed four of my six Pokemon and two of them died asleep without acting. If a future pass wants the dance partnership to be the identity of this fight rather than the sleep, that is a Breloom question, not a Lilligant one. No species/move/item change made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass only: one attempt, same party manifest as pass 1, levels untouched. Generated projections were not committed."
+}
