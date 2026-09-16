@@ -1,0 +1,78 @@
+{
+  "play_order": 62,
+  "e_group": "E0071",
+  "trainer": "TRAINER_ISAAC_1",
+  "class": "ace",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/62-TRAINER_ISAAC_1/receipt.json",
+  "build": "work/agent-battle-build-3",
+  "rom_sha256": "e7de65be122669a85f67ad7c25d12a211d3d53aee0f14f97df843ee75165efe1",
+  "why_rerun": "No level offsets were changed on this trainer after the first run (the first receipt deliberately kept levels because the authored Mega never activated). The rerun exists to re-benchmark the fight on the rebuilt snapshot and to re-test AI defect E0071-D1 (Mega Kangaskhan declining Mega Evolution).",
+  "cap_confirmation": "Driver state reports level_cap 30 and resolved opponent levels 32/34/32/33/31/27, i.e. cap 30 + offset - 2 on Medium with offsets 4/6/4/5/3/-1. This matches the first run exactly, so the two runs are directly comparable. NOTE: the rerun block's table gave cap 36 for play_order 82 and 42 for 107 while giving the receipt value for every other row; those two rows look like a one-row shift of the cap column. Per the brief's own instruction to trust the driver's level_cap, this battle and the rest of the block were run at the cap the driver and the prior receipts confirm.",
+  "level_offsets_at_run": {"MUNCHLAX": 4, "TOGEPI": 6, "ABRA": 4, "DRATINI": 5, "STARYU": 3, "KANGASKHAN": -1},
+  "resolved_opponent_levels": {"MUNCHLAX": 32, "TOGEPI": 34, "ABRA": 32, "DRATINI": 33, "STARYU": 31, "KANGASKHAN": 27},
+  "party_manifest": "work/playtest/62-TRAINER_ISAAC_1/party.json",
+  "party_reuse_justification": "Reused unchanged from the first run. The first receipt's chronology audit is still valid at the same cap 30 and the same map (Route 117): every member's source map is at or before Route 110/Slateport, strictly earlier in play order. Nothing in the party was reported weak or illegal, and the party won both runs, so no rebuild was warranted.",
+  "pre_declared_strategy_checks": [
+    "RETEST of E0071-D1: does Mega Kangaskhan now Mega-Evolve when it enters holding the Kangaskhanite?",
+    "Togepi's Follow Me / Helping Hand support is chosen sensibly rather than Ancient Power boost fishing",
+    "Munchlax attacks rather than Cursing under spread pressure, with correct type targeting",
+    "Dratini's Protect and Dragon Dance are used as real decisions with payoff",
+    "Abra uses Focus Sash and Magic Guard sensibly",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/62-TRAINER_ISAAC_1/r1",
+      "seed": 62,
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "narrative": "T1 I Mega-Evolved Gardevoir and sent Weavile's Fake Out at Togepi. Togepi answered with Helping Hand at +5 priority, ahead of Fake Out, and the boosted Munchlax Body Slam killed Weavile outright for 91 on the first turn - a strictly better opening than the first run, where Togepi reached for Ancient Power instead. T2 Magearna came in; Hyper Voice killed Togepi and Aura Sphere took Munchlax to 6 HP, but a second Helping Hand meant Munchlax's Body Slam took Mega Gardevoir from 90 to 2. T3 Kangaskhan entered with the Kangaskhanite, did NOT Mega-Evolve, and its base-form Fake Out finished the 2 HP Gardevoir - a genuinely correct kill; Magearna's +2 Aura Sphere then KO'd Kangaskhan through 111 HP. T4 Kartana came in, Sacred Sword removed Munchlax and a paralysing Thunderbolt put Abra on its Sash at 1 HP. T5 Dratini's Protect blocked a +4 Fleur Cannon that would have killed it, while Leaf Blade removed Abra. T6 Leaf Blade KO'd Staryu and Fleur Cannon KO'd Dratini through the Eviolite."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "E0071-D1 RETEST: Mega Kangaskhan Mega-Evolves", "result": "FAIL - defect reproduces", "evidence": "T3 driver state: b3 KANGASKHAN L27 111/111 SCRAPPY @KANGASKHANITE, active_gimmick 'none', usable_gimmick 'mega', mega_already_used false. It chose MOVE_FAKE_OUT in base form and was KO'd the same turn still in base form. Identical to the first run on the previous build. Parental Bond has now never existed in two benchmarked runs of this team."},
+    {"check": "Togepi supports rather than boost-fishes", "result": "PASS - improved over the first run", "evidence": "Togepi selected Helping Hand on both of its turns (T1 into the Body Slam that killed Weavile, T2 into the Body Slam that took Mega Gardevoir from 90 to 2) and never selected Ancient Power. Helping Hand is +5 priority, so it resolved ahead of my +3 Fake Out and the Fake Out could not deny it. That is the correct read of the board twice in a row and it is the single biggest behavioural difference between the two runs."},
+    {"check": "Munchlax attacks instead of Cursing", "result": "PASS", "evidence": "Curse never selected. Body Slam T1 and T2 (correct: the boosted STAB was lethal both turns), Fire Punch T3 into Mega Gardevoir and T4 into the Grass/Steel Kartana at 4x. Correct target and correct type every turn."},
+    {"check": "Dratini Protect / Dragon Dance", "result": "PASS", "evidence": "T5 Protect blocked a Fleur Cannon from a +4 Magearna at 2x into Dragon - certain death. Dratini then used Extreme Speed on T6 rather than a second Protect or a Dragon Dance it would not live to cash. Both choices were correct."},
+    {"check": "Abra Sash / Magic Guard", "result": "PASS", "evidence": "Abra used Psychic on both its turns rather than a status move, survived the Thunderbolt on its Focus Sash exactly as designed, and Magic Guard meant nothing else could chip it. Its Psychic into Magearna was resisted, but with Dazzling Gleam also poor into a Steel/Fairy and Encore useless against an Assault Vest attacker, there was no better option available."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Exactly one Protect in the whole fight (Dratini T5) and it blocked a lethal hit on the turn the lethal hit was thrown. No empty guard, no repetition."}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "DRATINI", "payoff": "EXCELLENT. Blocked MOVE_FLEUR_CANNON from a +4 Special Attack Magearna, super effective into Dragon. Dratini was at 80/80 behind an Eviolite and would still have died to that hit. It bought the turn in which it got to act at all (Extreme Speed on T6)."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0071-D1",
+      "status": "REPRODUCES on work/agent-battle-build-3",
+      "severity": "high",
+      "attempt": 1,
+      "turn": 3,
+      "board": "Kangaskhan 111/111 holding ITEM_KANGASKHANITE enters beside a 6 HP Munchlax, against a 2 HP Mega Gardevoir and a 68/116 Magearna at +3 Special Attack. Driver reports usable_gimmick 'mega', mega_already_used false, active_gimmick 'none'.",
+      "chosen": "MOVE_FAKE_OUT in base form. Kangaskhan then fainted to Aura Sphere still in base form.",
+      "why_wrong": "Mega Evolution costs no action and resolves before moves. Mega Kangaskhan gains a large stat spread and Parental Bond, which turns Fake Out into two hits (a second flinch roll and extra chip) and roughly doubles Sucker Punch. There is no board on which declining it is correct, and this is the second consecutive benchmarked run in which it declined.",
+      "better_action": "Mega-Evolve alongside the Fake Out. The Fake Out itself was correct - it killed the 2 HP Mega Gardevoir - but in Mega form it would also have threatened Magearna on the following turn.",
+      "unchanged_from_first_run": true,
+      "note": "No AI C code was changed by me, as instructed. The first receipt's affected-team index hint still stands: every authored owner with mega_slots set and no EC_BATTLE_PLAN_MEGA_REVEAL whose Mega's value is an ability rather than same-turn damage is exposed to the same scoring."
+    }
+  ],
+  "ai_notes": [
+    "The team plays noticeably better on this build than on the previous one. Double Helping Hand off a Serene Grace support at +5 priority, timed onto the two turns where the partner's Body Slam was lethal, is a far stronger line than the first run's Ancient Power opening, and it cost me a Pokemon on turn one that I did not lose on turn one before.",
+    "Munchlax remains the best-played member: four turns, four correct type reads.",
+    "Kangaskhan's Fake Out target selection was correct (the 2 HP Mega Gardevoir) even though the Mega Evolution decision was not."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. Two of six lost, including the Mega on turn three, and the fight ran six turns. The offsets were not changed after the first run and are not changed now, so no member has moved at all in this pass and the +/-2 budget is untouched.",
+    "changes": []
+  },
+  "verdict": "calibrated",
+  "could_this_be_cooler": "Unchanged from the first run and still a yes-as-built: five babies and one grown mother, with the mother deliberately BELOW the cap at -1 because her Mega is supposed to make up the difference. The concept survives this pass intact. The one roster note stays the same - Togepi's Yawn was again never selected in six turns, and Light Screen or Thunder Wave would give the redirector something to do on turns when Helping Hand is not the best action. But the real improvement is still not a design change: the coolest thing about this team is a Mega that has now failed to happen twice. Fixing E0071-D1 is worth more than any species swap here, and I would re-benchmark for a possible REDUCTION on Togepi (+6) once Parental Bond actually exists.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-3. Not earned campaign traversal, and no story progress was awarded. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}
