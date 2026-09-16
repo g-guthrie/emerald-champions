@@ -1,0 +1,43 @@
+{
+  "play_order": 163,
+  "e_group": "E0228",
+  "trainer": "TRAINER_GABBY_AND_TY_2",
+  "location": "Global_gabby_and_ty (Route 119 era)",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Magnezone 45 (-1), Exploud 46 (0), Chatot 46 (0), Unfezant 47 (+1) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/163-TRAINER_GABBY_AND_TY_2/party.json",
+  "attempts": [
+    {"seed": 71, "run_dir": "work/playtest/163-TRAINER_GABBY_AND_TY_2/run-s71", "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "notes": "Excadrill was lost on turn 1 to Exploud's Fire Blast, but its Earthquake traded for Exploud on the same turn. The rest was a grind through two well-timed Protects."}
+  ],
+  "strategy_checks": [
+    {"check": "Magnezone uses Electroweb when the partner benefits from the speed change", "result": "PASS", "evidence": "Turn 2 Electroweb slowed both player battlers on the exact turn Unfezant was coming in to replace Chatot, and turn 5 it used it again as its last action. Both times the speed drop was in service of a physical partner or a following turn, not filler."},
+    {"check": "Magnezone reads and avoids Ground pressure", "result": "PASS - best AI play of the block", "evidence": "Turn 1, facing an Excadrill that had not yet used a move, Magnezone switched itself out and brought in Chatot - a Flying type immune to Ground - on the exact turn Excadrill used a 4x Earthquake. The switch turned a guaranteed KO into zero damage."},
+    {"check": "Sturdy requires full HP", "result": "NOT_EXERCISED", "evidence": "Magnezone was never hit while at full HP by a lethal move; it died to a 2x Flare Blitz from 116/132, where Sturdy correctly does not apply."},
+    {"check": "Chatot or Unfezant provide Tailwind", "result": "PASS", "evidence": "Chatot selected Tailwind on turn 2 and Unfezant selected and landed it on turn 4. The backup-Tailwind-user structure the dossier describes is real and the AI used both."},
+    {"check": "Scope Lens does not guarantee every Unfezant critical hit", "result": "NOT_EXERCISED", "evidence": "Unfezant never attacked; it Protected on its entry turn and set Tailwind on the next, then died."},
+    {"check": "No Boomburst is present in this reporter version", "result": "PASS", "evidence": "Exploud used Fire Blast and no Boomburst appeared in the log."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Unfezant", "payoff": "REAL: blocked a +1 Attack Mega Metagross Meteor Mash on its entry turn, which was a clean KO. It bought the turn that let it set Tailwind the following turn."},
+    {"turn": 4, "battler": "Magnezone", "payoff": "REAL: blocked a 2x Flare Blitz that would have KOed it from 116/132, on the same turn its partner set Tailwind."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0228-D1",
+      "turn": 2,
+      "board": "Chatot at 41/140 with its Focus Sash already spent, facing a Mega Metagross that had just Mega Evolved and a Togekiss. Magnezone alive behind it.",
+      "chosen": "Chatot used Tailwind",
+      "problem": "Chatot was slower than Mega Metagross and died before Tailwind resolved, so the setup produced nothing. At 41 HP with the Sash gone, the only actions with non-zero expected value were Protect (it carries one) or an attack. The team also had a second Tailwind user in reserve, which is precisely the case where spending a dying turn on the duplicate effect is worst.",
+      "better_action": "Protect, or Hyper Voice/Heat Wave for chip.",
+      "severity": "minor - Tailwind is Chatot's authored job, but the HP threshold for attempting it is not being checked"
+    }
+  ],
+  "level_changes": [
+    {"member": "MAGNEZONE", "before": -1, "after": 0, "reason": "First-attempt win with one player faint. Magnezone was the lowest-level member at 45 and, notably, the one playing best - it deserves to be less fragile rather than less common."},
+    {"member": "CHATOT", "before": 0, "after": 1, "reason": "Joint-lowest and the member that contributed least: it was chipped once and KOed before its Tailwind resolved. Unfezant is left at +1 since it is the Scope Lens body the dossier already flags as the team's weak concept."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM and this agent must not run make.",
+  "could_this_be_cooler": "The dossier's own suggestion is the right one and this run supports it: lean the whole crew into sound moves so Throat Spray and Soundproof become the signature. Exploud's Scrappy Hyper Voice and Chatot's Hyper Voice are already there; what breaks the theme is Unfezant, which is a Brave Bird body with no connection to broadcasting and, as the dossier says, the third near-identical one in this stretch. The concrete swap that would fix theme and duplication at once is Kricketune or Toxtricity in Unfezant's slot - both are literally sound-based, both give the team a second type it currently lacks, and a Throat Spray Toxtricity would make Magnezone's Electroweb read as part of an Electric-and-sound crew rather than an unrelated Steel wall. Keep Magnezone: the turn-1 switch out of a 4x Earthquake was the smartest single decision any AI made in this block. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal; no Boomburst present, consistent with the dossier."
+}
