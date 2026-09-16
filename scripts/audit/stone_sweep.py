@@ -104,12 +104,28 @@ def render(rows, out, rom, elf):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("mode", choices=("header", "render", "list"))
+    parser.add_argument("mode", choices=("header", "render", "list", "spots-header", "spots-render"))
+    parser.add_argument("--spot", action="append", default=[], help="MAP_ID:x:y (player stands here); repeatable")
     parser.add_argument("out", type=Path, nargs="?")
     parser.add_argument("--rom", type=Path)
     parser.add_argument("--elf", type=Path)
     parser.add_argument("--inclement", type=Path, default=ROOT.parent / "inclement-game-source")
     args = parser.parse_args(argv)
+    if args.mode.startswith("spots"):
+        rows = []
+        for spec in args.spot:
+            map_id, x, y = spec.split(":")
+            rows.append({"map": map_id.replace("MAP_", ""), "id": map_id, "x": int(x), "y": int(y) - 1,
+                         "item": "SPOT", "status": "spot"})
+        if args.mode == "spots-header":
+            write_header(rows)
+            print(f"wrote {len(rows)} spot rows")
+            return 0
+        if not (args.out and args.rom and args.elf):
+            parser.error("spots-render needs OUT --rom --elf")
+        for sheet in render(rows, args.out, args.rom.resolve(), args.elf.resolve()):
+            print(sheet)
+        return 0
     rows = stones(args.inclement)
     if args.mode == "list":
         for r in rows:
