@@ -467,6 +467,24 @@ PARTNER_STEVEN` does. The party comes from a `handoff/benchmarks/*.json` manifes
 through the existing native preparation API, which keeps its own legality
 validation; stage legality remains the caller's audit.
 
+An `act` result records `turn_advanced`. A forced replacement and the action that
+ends the battle do not advance the turn counter, so the native previous-turn
+latch still holds the last completed turn there. `chosen` therefore carries only
+the commands that `act` call actually submitted (`source: submitted`), and adds
+the native record for the other battlers (`source: native`) only when a turn
+resolved; never read a `native` entry as this call's choice. A battler that was
+KOed earlier in the same turn keeps a stale native latch and is omitted.
+
+Two reported reading traps in `pending_decision`. `may_switch` is the engine's
+own `CanBattlerSwitch` for that battler, while `switch_slots` is the list of
+slots that actually exist to switch into; a full field or a two-Pokemon party
+leaves `switch_slots` empty even though `may_switch` is true, and `act` rejects
+an illegal switch either way, so treat `switch_slots` as the answer to "can I
+switch". A `may_switch: false` for the right-hand player battler on turn 0 was
+reported but has not reproduced on the sampled boards (E0002, the Mossdeep multi
+and the cap-24 Mega board all report true); if it recurs, capture the run
+directory before continuing.
+
 `scripts/playthrough/battle_random_policy.py` takes the same arguments and plays
 a whole battle with a seeded random legal-move policy. It is a regression
 exerciser for the driver, not a difficulty benchmark: random legal play says

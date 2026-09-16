@@ -723,18 +723,40 @@ def command_act(args):
         session, writes,
         png=(session.dir / f'turn-{state["turn"]:03d}.png') if args.png else None)
     after = decode_state(session, view)
+
+    # A forced replacement, and the action that ends the battle, do not advance
+    # the turn counter, so the native previous-turn latch still holds the last
+    # completed turn. Only the commands this call actually submitted are
+    # authoritative here; the native record is added only when a turn resolved,
+    # and only for battlers this call did not command and that were alive when
+    # it started (a battler KOed earlier in the same turn keeps a stale latch).
+    turn_advanced = after['turn'] != state['turn']
+    chosen = [dict(submitted[battler], battler=battler, source='submitted',
+                   species=state['actives'][battler]['species'])
+              for battler in submitted]
+    if turn_advanced:
+        for record in after['previous_turn']:
+            battler = record['battler']
+            if battler in submitted or record['action'] == 'none':
+                continue
+            if battler >= len(state['actives']) or not state['actives'][battler]['alive']:
+                continue
+            chosen.append(dict(record, source='native',
+                               species=state['actives'][battler]['species']))
+    chosen.sort(key=lambda entry: entry['battler'])
+
     events = {
         'event': 'act',
         'turn_before': state['turn'],
         'turn_after': after['turn'],
+        'turn_advanced': turn_advanced,
         'submitted': submitted,
         'frames': frames_run,
         'halted': stopped,
         'ai_decision_frames': after['ai_decision_frames'],
         'ai_setup_frames': after['ai_setup_frames'],
         'ai_delay_frames': after['ai_delay_frames'],
-        'chosen': [dict(entry, species=state['actives'][entry['battler']]['species'])
-                   for entry in after['previous_turn']],
+        'chosen': chosen,
         'hp_before': {b['battler']: [b['hp'], b['max_hp']] for b in state['actives']},
         'hp_after': {b['battler']: [b['hp'], b['max_hp']] for b in after['actives']},
         'damage': {b['battler']: state['actives'][b['battler']]['hp'] - b['hp']
