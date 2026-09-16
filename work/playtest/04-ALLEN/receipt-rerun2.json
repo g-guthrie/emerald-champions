@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 4,
+  "e_group": "E0004",
+  "trainer": "TRAINER_ALLEN",
+  "class": "regular",
+  "cap": 14,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "PIKACHU L14 offset 2 @LIGHT_BALL LIGHTNING_ROD (was offset 1 before this playtest; +1 landed in R1)",
+    "PARAS L15 offset 3 @EVIOLITE DRY_SKIN",
+    "MIENFOO L14 offset 2 @EVIOLITE REGENERATOR (+1 landed in R1)",
+    "BUNNELBY L14 offset 2 @SITRUS_BERRY HUGE_POWER"
+  ],
+  "confirms": "The R1 Pikachu +1 and Mienfoo +1 are present in this ROM (both resolve to L14).",
+  "party_manifest": "work/playtest/04-ALLEN/party-rerun-a1.json",
+  "party_summary": "Reused the R1 chronology-legal party unchanged: Growlithe / Pachirisu / Timburr / Hoothoot / Corphish / Treecko (Route101/102/103 wilds plus one C01 starter; nothing evolved, no legend).",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "elf_sha256": "ae6ed685cf22c9aeaf141efed91e22b46d284efbe3e3300c07c87c981be29938",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3004,
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 8,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 63,
+      "events": "work/playtest/04-ALLEN/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 Pachirisu's Follow Me pulled Pikachu's Volt Tackle into its own Volt Absorb immunity while Growlithe's Flare Blitz (4x) removed Paras before it ever acted; Mienfoo came in. T2 I pivoted the recoiled Growlithe out for Timburr and called Follow Me again - Mienfoo's Fake Out flinched Pachirisu and cancelled the redirect, and Volt Tackle took Timburr to 30 through Eviolite. T3 Pachirisu's Nuzzle was redirected by Pikachu's Lightning Rod (+1 Sp. Atk) and Pikachu's second Volt Tackle KOed Timburr and then killed itself on recoil; Mienfoo's Knock Off stripped Pachirisu's Sitrus. T4 Hoothoot came in on the Fighting-type, Air Slash took Mienfoo to 11, but Drain Punch plus a super-effective Bunnelby Rock Slide removed Hoothoot. T5 Corphish's Aqua Jet finished Mienfoo while Pachirisu's Protect blocked Bunnelby's Quick Attack. T6 Super Fang plus Crabhammer finished the paralysed Bunnelby. Won 4-2."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Lightning Rod redirects a single-target Electric move aimed elsewhere and raises Sp. Atk",
+      "result": "PASS",
+      "evidence": "T3: Pachirisu's Nuzzle was aimed at Mienfoo and Pikachu took it instead ('The opposing Pikachu took the attack! The opposing Pikachu's Sp. Atk rose!'). It also denied the paralysis I wanted on the Fighting pivot."
+    },
+    {
+      "check": "Pikachu uses Fake Out only on an interruptible threat; otherwise damage",
+      "result": "PASS",
+      "evidence": "Pikachu never wasted a Fake Out; it attacked on both of its turns. Mienfoo supplied the Fake Out instead, on the correct target (below)."
+    },
+    {
+      "check": "Mienfoo supplies Fake Out while Paras acts, or pressures with Knock Off/Drain Punch",
+      "result": "PASS (best AI choice of the fight)",
+      "evidence": "T2 Mienfoo's Fake Out picked Pachirisu - the redirector - not the attacker, and the flinch cancelled a Follow Me that would otherwise have voided Pikachu's Volt Tackle for the second turn running. T3 Knock Off removed Pachirisu's Sitrus Berry; T4 Drain Punch contributed to the Hoothoot KO."
+    },
+    {
+      "check": "Paras selects Wide Guard against real spread pressure (E0004-D1)",
+      "result": "NOT EXERCISED",
+      "evidence": "Paras was removed on turn 1 by a 4x Flare Blitz before it had a decision. No evidence either way this pass; D1 remains open and untested on the new build."
+    },
+    {
+      "check": "Paras lands Spore on a legal powder-vulnerable target",
+      "result": "NOT EXERCISED",
+      "evidence": "Same reason: Paras never acted."
+    },
+    {
+      "check": "Bunnelby picks its real attack rather than reflex Quick Attack (E0004-D2)",
+      "result": "PASS / much improved",
+      "evidence": "T4 it chose Rock Slide, the spread move that is super effective on Hoothoot, and that choice got the KO. Its one Quick Attack (T5) was aimed at a 10 HP Pachirisu where priority is lethal and guaranteed to beat Corphish's Aqua Jet - a defensible pick, blocked only because I Protected. The R1 pattern of Quick Attack over a lethal Frustration did not recur."
+    },
+    {
+      "check": "Regenerator credited only when a switch actually occurs",
+      "result": "NOT EXERCISED (no opponent switch all battle)"
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opponent Protects in the whole battle, on a team where Pikachu and Paras both carry it. Nothing was spent on an empty guard; Pikachu attacked on both its turns instead, which was right.",
+  "ai_defects": [],
+  "ai_defects_still_present": [
+    {
+      "id": "E0004-D1",
+      "status": "UNTESTED this pass - Paras died before acting. Cannot be called fixed."
+    },
+    {
+      "id": "E0004-D3",
+      "status": "UNTESTED this pass - Paras never chose a Leech Life target."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0004-W1",
+      "turn": 3,
+      "board": "Pikachu at 29/38 with a fresh +1 Sp. Atk from Lightning Rod, opposite Timburr at 30/58.",
+      "chosen": "Volt Tackle (KOed Timburr, then killed itself on recoil).",
+      "better": "Arguably correct as played - it traded itself for a KO - but note it spent a Sp. Atk boost it could not use. Recording as an observation, not a defect.",
+      "severity": "observation"
+    }
+  ],
+  "ai_improvements_observed": [
+    "Fake Out aimed at the redirector rather than the attacker - a genuinely good doubles read.",
+    "Bunnelby chose the super-effective spread move over reflex priority, which is the direct opposite of R1's E0004-D2.",
+    "No empty Protects and no voluntary switches."
+  ],
+  "level_changes": {},
+  "level_change_reason": "Won with 2 player faints (Timburr and Hoothoot, both to the opponent's own choices rather than to luck) and with Pachirisu finishing on 10 HP. That is the brief's 'real fight -> keep' band. Pikachu and Mienfoo both justified the +1 they took in R1: Pikachu traded itself for a KO and Mienfoo's Fake Out broke my best line. No offset moved; PARAS and BUNNELBY keep their current offsets 3 and 2.",
+  "levels_after": {"PIKACHU": 2, "PARAS": 3, "MIENFOO": 2, "BUNNELBY": 2},
+  "cooler": "Yes, and the same note as before with more evidence: Paras is a 25-Speed 4x-Fire-weak battler on a team whose whole job is support, and it has now died before acting in a pass where its Wide Guard was the authored centrepiece. The tactic cannot be judged while its owner never gets a turn. Either give the Wide Guard to a member that survives the opening (Bunnelby does not need Quick Attack) or give Paras a Focus Sash so the authored shield gets one guaranteed turn. Recording only - no set change in this pass.",
+  "authored_set_legality": "No legality problem observed; every opponent move was legal on its board."
+}
