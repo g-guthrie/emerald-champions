@@ -1,0 +1,101 @@
+{
+ "play_order": 77,
+ "e_group": "E0089",
+ "trainer": "TRAINER_VIVIAN",
+ "class": "gym",
+ "location": "MauvilleCity_Gym",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "PLUSLE": 33,
+  "MINUN": 33,
+  "KLINK": 34,
+  "RAICHU": 29,
+  "ELECTABUZZ": 31,
+  "DEDENNE": 32
+ },
+ "cap_window_confirmation": "Dossier seeds 35/35/36/31/33/34 resolved to 33/33/34/29/31/32. Cap 30, Medium -2. Six members confirmed for a Gym room.",
+ "party_manifest": "work/playtest/77-TRAINER_VIVIAN/party.json",
+ "party_pool_audit": "Purpose-built cap-30 Electric-gym counterteam: Nidoking and Nidoqueen (both Route 101 Nidoran lines plus a Moon Stone, gate 20) as the two Ground bodies the crack line names, Mega Gardevoir, Magearna, Kartana and Weavile. Every source map is at or before Route 110. Explicitly excluded although pool-30 lists them and they would be strong here: all NewMauville sources (Zapdos, Regieleki, Zekrom, Zeraora, Magnezone, Iron Hands, Eelektross, Meltan/Melmetal) because the Game Book gates New Mauville behind Surf in C28, and all Route 111 desert species because the Go-Goggles arrive in C23. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "Plus/Minus: Plusle and Minun are deployed together and the mutual 1.5x special boost is actually live, with damage evidence",
+  "The pair does not waste both actions on mutual support when attacking wins",
+  "Minun's Light Screen goes up and is a real special mitigation",
+  "Klink extends the Minus mode through replacements - and the dossier's own caveat holds, that only active partners count",
+  "Raichu's Air Balloon grants a real Ground immunity and pops on the first hit; Raichu's Fake Out lands",
+  "Dedenne supplies Eerie Impulse and/or Nuzzle control",
+  "Electabuzz is the physical contrast with Vital Spirit",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/77-TRAINER_VIVIAN/a1",
+   "seed": 77,
+   "outcome": "won",
+   "turns": 9,
+   "driver_turn_counter": 8,
+   "player_faints": 3,
+   "opponent_faints": 6,
+   "narrative": "T1 Plusle and Minun BOTH aimed Grass Knot at Nidoking (2x on Ground) and took it from 98 to 3 in one turn - the pair correctly identified that the Ground immunity was the only thing on my side that mattered. Hyper Voice plus Earth Power removed Plusle. T2 Dedenne came in faster than everything I had, Dazzling Gleam finished the 3 HP Nidoking before its Earth Power resolved, and Psychic took Minun to 32. T3 Nidoqueen replaced Nidoking, Earth Power (2x) removed Dedenne - but not before Dedenne's Eerie Impulse had put Mega Gardevoir on -2 Sp.Atk - and Raichu arrived holding an Air Balloon. T4 Raichu's Fake Out flinched Gardevoir out of the turn entirely, Minun put Light Screen up, and my Ice Beam popped the Balloon. T5 Raichu's Thunderbolt plus Minun's Grass Knot KO'd Mega Gardevoir; Earth Power, now legal again, removed Raichu. T6 Weavile replaced Gardevoir; Electabuzz Protected through both a Fake Out and a 2x Earth Power. T7 Ice Shard finally removed the 8 HP Minun. T8 Electabuzz's Cross Chop (4x on Weavile) missed, Earth Power removed Electabuzz, and Klink's Flash Cannon plus a follow-up Thunder Punch KO'd Weavile. T9 Magearna replaced it and Earth Power plus a 2x Aura Sphere closed on Klink."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "Plus/Minus mutual boost is live",
+   "result": "PASS",
+   "evidence": "Turn 1, with Plus and Minus both on the field, two Grass Knots took a 98 HP Nidoking to 3. My Gardevoir also Traced Plus on entry, which the engine handled cleanly - it did nothing, correctly, since nothing on my side has Minus."
+  },
+  {
+   "check": "The pair does not waste both actions on mutual support",
+   "result": "PASS",
+   "evidence": "Helping Hand was never used once in nine turns by either Plusle or Minun. Every turn went into Grass Knot, Thunderbolt or Light Screen. This is exactly what the authored plan asks for - 'Do not spend both actions on mutual support when attacks win' - and the AI honoured it."
+  },
+  {
+   "check": "Minun Light Screen",
+   "result": "PASS",
+   "evidence": "T4 Light Screen went up and SIDE_STATUS_LIGHTSCREEN was live on the opponent side through T5-T7, expiring naturally. Minun chose it at 32/113 in front of two special attackers, which is the right turn for it."
+  },
+  {
+   "check": "Klink extends the Minus mode",
+   "result": "FAIL in practice, and the dossier already predicts why",
+   "evidence": "Klink arrived as the last member with only Vital Spirit Electabuzz beside it, so its Minus had no Plus partner and was completely inert - it played as a plain Eviolite Flash Cannon body. This is not an AI defect; it is the dossier's own caveat ('Only active partners count') coming true. But it means the room's stated reason for carrying Klink does not survive contact: by the time the reserve arrives, the partner it exists to pair with is dead."
+  },
+  {
+   "check": "Raichu Air Balloon and Fake Out",
+   "result": "PASS",
+   "evidence": "Raichu entered holding the Balloon; Ice Beam popped it ('The opposing Raichu's Air Balloon popped!') and the very next Earth Power KO'd it. T4 Fake Out flinched Mega Gardevoir out of a full turn. Both halves of the Balloon design worked exactly as written."
+  },
+  {
+   "check": "Dedenne control",
+   "result": "PASS",
+   "evidence": "T3 Eerie Impulse put Mega Gardevoir on -2 Sp.Atk, which is the single reason Minun survived at 8 HP for three more turns. Nuzzle was never used - reasonable, since paralysing an already-outsped target was worth less than halving my only special attacker."
+  },
+  {
+   "check": "Electabuzz physical contrast / Vital Spirit",
+   "result": "PASS",
+   "evidence": "Cross Chop was correctly aimed at Weavile (4x on Dark/Ice). It missed at 80 percent accuracy, and on the following turn the AI switched to the 100 percent accurate Thunder Punch to secure the same KO - a genuinely good accuracy-vs-power decision."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "One Protect in nine turns. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 6,
+   "battler": "ELECTABUZZ",
+   "payoff": "blocked BOTH a Weavile Fake Out (which would have flinched it out of the turn) and a 2x Sheer Force Earth Power from a fresh 122 HP Nidoqueen, at 91/91. It is the single Protect of the battle and it bought Electabuzz two extra turns. Full value, no repetition."
+  }
+ ],
+ "ai_defects": [],
+ "ai_highlights": [
+  "T1 double Grass Knot into the Ground type: the pair ignored the Mega and correctly spent both actions removing the one body immune to their entire STAB. The best opening decision I have seen in this block.",
+  "T8 accuracy management: after an 80 percent accurate Cross Chop missed the 4x target, Electabuzz took the 100 percent accurate Thunder Punch for the same kill rather than repeating the miss."
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt but it cost three player faints - Nidoking, Mega Gardevoir and Weavile - across nine turns, and my Mega never got a clean turn after the Eerie Impulse landed. That is at the Gym-room difficulty target, so the room is kept exactly as authored.",
+ "could_this_be_cooler": "Keep the three-component power core; Plus/Minus is a real and under-used mechanic and this room makes it hurt. The flaw is Klink. Its whole stated job is to extend the Minus mode through replacements, but a reserve can only do that if it arrives while a Plus body is still alive, and in practice the AI correctly plays Plusle and Minun as attackers, so they die together and Klink shows up to an empty circuit. The concrete suggestion (not applied): give Klink Plus instead of Minus and lead it beside Minun, with Plusle as the reserve. Then the mode is live from turn one AND it survives the first death in either direction, because the room holds one of each polarity rather than two Minuses. The alternative, if Klink is to stay a reserve, is Volt Switch, so it can at least trade itself back out instead of standing there with a dead ability.",
+ "authored_set_legality": "No legality problem found. All six prepared and ran clean, including Plusle/Minun's paired abilities and Raichu's Air Balloon."
+}
