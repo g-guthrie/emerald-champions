@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "P8 play_order 86 TRAINER_TED (Trick House puzzle 2, Route 110), cap window 36",
+  "availability_audit": "Chronology anchor: every battle in this block sits at or after the player's first arrival in Mauville City (Dynamo Badge / Wattson cleared), on Route 110 (Trick House puzzle 2), Rusturf Tunnel, or Routes 111/112/113. Every member below is drawn from work/reference-pools/pool-36.json with gate <= 36 and a source_detail map that a player standing on those maps has already passed: Route 102/103/104, Petalburg Woods, Rusturf Tunnel, Granite Cave, Seaspray Cave, Altering Cave, Route 110/116/117, New Mauville and the Mauville Game Corner. Route 118 sources are deliberately excluded because Route 118 lies east of Mauville past this block's maps. No legendary, mythical, Ultra Beast or Paradox species is used. Evolution items (Shiny Stone, Linking Cord) come from the Slateport/Mauville evolution stock already reached; the Gyaradosite stone window is 20 and the Mega Ring was earned from Steven after Brawly, both well before this block. Excadrill added for this battle from Drilbur on Rusturf Tunnel land (pool gate 20 / evolution gate 36); Rusturf Tunnel is passed long before Route 110 Trick House.",
+  "plan": "Ted is Fairy/Steel/Dark: Choice Scarf Gardevoir, Prankster Klefki, Fur Coat Alolan Persian and Assault Vest Copperajah. Alakazam is swapped out because three of the four carry Dark damage (two Foul Plays plus Persian STAB) and Psychic is dead weight. Excadrill replaces it: Ground is 2x into Klefki and Copperajah, Steel typing resists Gardevoir and Klefki Fairy STAB, and Mold Breaker is insurance. Incineroar and Rillaboom lead for Fire and Ground pressure on the two Steels.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Intimidate pivot with Fake Out denial, item removal and Parting Shot repositioning",
+      "availability": "Litten from the Mauville Game Corner (500 coins, pool gate 30), Torracat at 17 and Incineroar at 34 by level (pool gate 36). The Game Corner is inside Mauville City, which this whole block sits after."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_HIGH_HORSEPOWER"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "terrain setter and priority breaker; Grassy Glide outspeeds the block's fast leads and the terrain heals the core",
+      "availability": "Grookey from the Mauville Game Corner (500 coins, pool gate 30), Thwackey at 16 and Rillaboom at 35 by level (pool gate 36)."
+    },
+    {
+      "species": "SPECIES_EXCADRILL",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_IRON_HEAD",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SWORDS_DANCE"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Ground/Steel breaker; High Horsepower is single-target so it never hits the partner, Mold Breaker ignores Levitate and Sturdy",
+      "availability": "Drilbur wild on Rusturf Tunnel land (pool gate 20, and Rusturf Tunnel is itself one of this block's battle locations), level evolution to Excadrill (pool gate 36)."
+    },
+    {
+      "species": "SPECIES_GYARADOS",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_CRUNCH",
+        "MOVE_ICE_FANG",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_GYARADOSITE",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "second Intimidate that becomes a Mold Breaker physical breaker ignoring Levitate, Sturdy and Wonder Guard",
+      "availability": "Magikarp on the Petalburg City Old Rod (pool gate 14), level evolution to Gyarados (gate 20); Gyaradosite stone window 20 (pool), Mega Ring earned from Steven after Brawly."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        124,
+        0,
+        132,
+        0
+      ],
+      "role": "redirection and Tailwind support with Serene Grace flinch pressure",
+      "availability": "Togepi on Route 102 land (pool gate 14), friendship evolution to Togetic, Shiny Stone from the reached evolution stock (pool gate 24)."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_LOW_KICK"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fastest member, Ice/Dark coverage, multi-hit Sash and Sturdy breaking, Ice Shard priority",
+      "availability": "Sneasel on Seaspray Cave B1F land (pool gate 14), condition evolution to Weavile (gate 14)."
+    }
+  ]
+}

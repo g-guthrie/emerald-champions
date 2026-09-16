@@ -1,0 +1,47 @@
+{
+  "play_order": 86,
+  "e_group": "E0099",
+  "trainer": "TRAINER_TED",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle2",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"GARDEVOIR": 35, "KLEFKI": 35, "PERSIAN_ALOLA": 35, "COPPERAJAH": 34},
+  "cap_window_confirmation": "Dossier offsets 1/1/1/0 resolved to 35/35/35/34 against a level-36 player party, which is cap 36 on Medium (cap+offset-2). NOTE: work/playtest/battle_index.json gives E0099 a cap window of 42-42, but the authored seeds are written for cap 36 ('Medium cap34 levels 35/35/35/34') and the driver accepted cap 36 and produced exactly those levels. Played at 36 as briefed; the index window and the authored seed disagree for this entry and E0101.",
+  "party_manifest": "work/playtest/86-TRAINER_TED/party.json",
+  "party_pool_audit": "Same block core with Alakazam swapped for Excadrill (Drilbur, Rusturf Tunnel land, pool gate 20; evolution gate 36). Reason: three of Ted's four members carry Dark damage - two Foul Plays plus Persian's STAB - so a Psychic-type is dead weight, while Excadrill's Steel typing resists both Fairy attackers and Ground is 2x into Klefki and Copperajah. All six remain gate <= 36 with source maps passed before Route 110.",
+  "pre_declared_strategy_checks": [
+    "Prankster Klefki acts before Scarf Gardevoir, using Metal Sound to set up the special attack, or establishes a screen / Foul Play instead",
+    "Choice Scarf Gardevoir converts the speed into an immediate special attack, and Trick is available as the disruptive alternative",
+    "Persian supplies Fake Out and pivot disruption when deployed",
+    "Copperajah provides Heavy Metal physical offense",
+    "Klefki's Light Clay and zero Attack IV are real: screens are long, Foul Play uses my Attack not Klefki's",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/86-TRAINER_TED/a1", "seed": 86, "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "Incineroar's Intimidate on entry was immediately answered: Gardevoir's Trace copied Intimidate and dropped my whole side's Attack, so the opening exchange was a wash. T1 Fake Out flinched Klefki and denied the first Reflect while High Horsepower took it to 73; Gardevoir locked itself into Dazzling Gleam. T2 Klefki got Reflect up and I still KO'd it through the screen with Flare Blitz plus High Horsepower. T3 Persian came in, Fake Out flinched Rillaboom - correctly, it was the battler about to hit Gardevoir - and I pivoted Incineroar to Togekiss for special damage, because Fur Coat plus Reflect had made my physical core a quarter-power. T4 Persian U-turned into Copperajah rather than sit in front of a Steel type. T5 Excadrill's Iron Head finished Gardevoir and a Serene Grace Air Slash flinched Copperajah. T6 was the punish: Persian's Foul Play used Excadrill's own 252 Adamant Attack and one-shot it from 71, and Copperajah's Heavy Slam, at maximum weight ratio into a 38 kg Fairy, KO'd Togekiss from 79. T7 Incineroar and Gyarados came in together for a double Intimidate, Gyarados Mega Evolved and Flare Blitz removed Copperajah. T8 Persian Taunted Incineroar, which did nothing because Incineroar was attacking anyway, and Waterfall plus Flare Blitz ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Prankster Klefki acts first and supports Gardevoir, or establishes a screen", "result": "PASS on the screen branch, FAIL on Metal Sound", "evidence": "Klefki chose Reflect on both of its turns (flinched out of the first one by Fake Out, landed on T2) and never considered Metal Sound. Reflect was the right call against a board of Incineroar and Rillaboom - it is the reason the T2 double-attack was as close as it was - so this is correct play, but the plan's headline 'Prankster Metal Sound can precede Scarf Gardevoir's special attack' did not happen and could not have: Gardevoir was already Choice-locked into a spread Fairy move by then, so a Special Defense drop on one target would have been worth little."},
+    {"check": "Choice Scarf Gardevoir converts speed into immediate special attack; Trick available", "result": "PASS on the attack, NOT OBSERVED on Trick", "evidence": "Gardevoir moved first every turn it was alive and used Dazzling Gleam five consecutive times, hitting both my battlers each time for 19-34. That is the Scarf paying off. Trick was never chosen, including on T1 when it was the only turn Trick could have been used before the lock. See ai_notes - I do not think this is a defect, but it is the set's most interesting move and it is unreachable in practice."},
+    {"check": "Persian supplies Fake Out and pivot disruption", "result": "PASS, and it was the best-played member", "evidence": "Four turns, four different and correct actions: Fake Out on T3 flinching the exact battler that was about to attack Gardevoir; U-turn on T4 out of a Steel-type matchup and into Copperajah; Foul Play on T6 for a clean KO on Excadrill; Taunt on T8. No repetition, no wasted turn."},
+    {"check": "Copperajah provides Heavy Metal physical offense", "result": "PASS", "evidence": "Heavy Slam KO'd Togekiss from 79 at 2x - Heavy Metal doubles Copperajah's already enormous weight, so the weight-ratio BP was maximal into a 38 kg Fairy. On T7, at -2 Attack from two Intimidates, it correctly switched lanes to High Horsepower into Incineroar for 2x rather than repeating Heavy Slam into a Fire/Dark."},
+    {"check": "Foul Play uses my Attack, not Klefki's", "result": "PASS, demonstrated exactly as authored", "evidence": "T6 Persian's Foul Play KO'd a 71 HP Excadrill outright. Excadrill is Adamant with 252 Attack EVs and a Life Orb; Foul Play read all of that. This is the single cleanest execution of an authored mechanic in the fight, and it is the reason the plan text bothers to mention the zero Attack IV."},
+    {"check": "Trace", "result": "PASS, unlisted bonus", "evidence": "Gardevoir came in as Trace and immediately showed ABILITY_INTIMIDATE, having copied Incineroar. My own opening Intimidate was cancelled out by my opponent using it against me. The plan text does not mention this and it is the nicest thing the team does."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opposing Protect was possible: not one of Ted's four members carries Protect. Nothing to assess. That is unusual for this campaign and it is a deliberate-looking choice for a disruption team built on screens, Taunt and pivoting.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No illegal or nonsensical opponent choice. Persian in particular played four distinct correct actions in four turns.",
+    "Gardevoir never uses Trick. On T1 Trick is the only turn it can ever be used, because any attack locks the Scarf in permanently; the scorer evidently prefers immediate spread damage. Immediate damage was defensible here (Dazzling Gleam hit both of my battlers for five straight turns), so I am recording this as a set/plan observation rather than a defect: as authored, Trick is a dead move in the fourth slot of every Choice Scarf attacker that the AI is willing to attack with. If the campaign wants Trick to happen, the scorer needs to value the item swap on the first turn, or the set wants a fourth attack instead.",
+    "Klefki flinching to Fake Out on T1 cost it a full Reflect turn and it still recovered by simply using Reflect again on T2 rather than panicking into Foul Play at 73 HP. Correct.",
+    "Copperajah switching from Heavy Slam to High Horsepower at -2 Attack against a Fire/Dark target is a real type read, not a habit."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two Pokemon, both to authored mechanics working exactly as designed (Foul Play reading my own Attack stat, Heavy Metal Heavy Slam into a Fairy). Brief rule 5: won with 2+ faints after a real fight -> keep. No level change.",
+  "could_this_be_cooler": "It is already one of the better route teams in this block and the dossier's own 'Could it be cooler?' answer - replacing a duplicate Bronzong with a Trick House-appropriate Klefki - was the right call; the mischievous-keys theme and the puzzle-room setting fit. The one change I would make is inside a slot rather than across slots: swap Gardevoir's Trick for a fourth attack or for Healing Wish. Trick is unreachable in play (see ai_notes) and the fight would lose nothing, while a Gardevoir that can actually threaten a third type would make the Choice Scarf lock a real decision for the AI instead of a formality. I would keep all four species, both Foul Plays and the Light Clay.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
