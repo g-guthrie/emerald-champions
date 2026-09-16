@@ -17,6 +17,7 @@
 #include "emerald_champions_headless.h"
 #include "emerald_champions_battle_sets.h"
 #include "emerald_champions_agent_prep.h"
+#include "emerald_champions_agent_battle.h"
 #include "coins.h"
 #include "contest.h"
 #include "contest_util.h"
@@ -1186,6 +1187,7 @@ void EmeraldChampionsHeadlessObserve(void)
 {
     EmeraldChampionsStudioPoll();
     EmeraldChampionsAgentPrepPoll();
+    EmeraldChampionsAgentBattlePoll();
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
      && (gEcHeadlessFixtureParam == 275 || gEcHeadlessFixtureParam == 276)
      && gMain.callback2 == CB2_Overworld && !gEcHeadlessFixtureObservedResult)
@@ -2005,6 +2007,27 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         return;
     }
     PrepareHeadlessNewGame();
+    if (scenario == EC_HEADLESS_SCENARIO_AGENT_BATTLE)
+    {
+        // Headless per-turn battle driver. The param packs the requested
+        // campaign level cap (low byte) and difficulty (next byte). The host
+        // then prepares a stage-legal party and asks for one trainer battle.
+        gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_AGENT_BATTLE;
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 5, OTID_STRUCT_PLAYER_ID);
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 5, OTID_STRUCT_PLAYER_ID);
+        CalculatePlayerPartyCount();
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE);
+        EmeraldChampionsAgentBattleBegin(gEcHeadlessFixtureParam & 0xFF,
+                                         (gEcHeadlessFixtureParam >> 8) & 0xFF);
+        // Steven grants the Mega Ring after Brawly, which is the cap-24 stage.
+        // Later caps therefore start this synthetic board with the bracelet.
+        if ((gEcHeadlessFixtureParam & 0xFF) >= 24)
+            AddBagItem(ITEM_MEGA_RING, 1);
+        gEcHeadlessFixtureSetupResult = TRUE;
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 6);
+        return;
+    }
     if (scenario == EC_HEADLESS_SCENARIO_STUDIO_NEW)
     {
         // An explicitly synthetic playground. Battles always resolve natively.
@@ -2364,6 +2387,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             FlagSet(FLAG_SYS_POKEDEX_GET);
             FlagSet(FLAG_SYS_POKEMON_GET);
             FlagSet(FLAG_SYS_POKENAV_GET);
+            // Ground Mega Stone actors only spawn once the Ring is carried.
+            AddBagItem(ITEM_MEGA_RING, 1);
             LoadHeadlessMap(sEcHeadlessMapSweep[index].map, sEcHeadlessMapSweep[index].x, sEcHeadlessMapSweep[index].y);
             gEcHeadlessFixtureSetupResult = TRUE;
         }

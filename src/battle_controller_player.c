@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "emerald_champions_agent_battle.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
 #include "battle_controllers.h"
@@ -2085,6 +2086,14 @@ static void HandleChooseActionAfterDma3(enum BattlerId battler)
 
 static void PlayerHandleChooseAction(enum BattlerId battler)
 {
+#if EC_HEADLESS_FIXTURES
+    if (EmeraldChampionsAgentBattleActive())
+    {
+        EmeraldChampionsAgentBattleChooseAction(battler);
+        return;
+    }
+#endif
+
     s32 i;
 
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
@@ -2181,6 +2190,14 @@ static void PlayerChooseMoveInBattlePalace(enum BattlerId battler)
 
 void PlayerHandleChooseMove(enum BattlerId battler)
 {
+#if EC_HEADLESS_FIXTURES
+    if (EmeraldChampionsAgentBattleActive())
+    {
+        EmeraldChampionsAgentBattleChooseMove(battler);
+        return;
+    }
+#endif
+
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
         gBattleStruct->arenaMindPoints[battler] = 8;
@@ -2236,6 +2253,14 @@ static void PlayerHandleChooseItem(enum BattlerId battler)
 
 static void PlayerHandleChoosePokemon(enum BattlerId battler)
 {
+#if EC_HEADLESS_FIXTURES
+    if (EmeraldChampionsAgentBattleActive())
+    {
+        EmeraldChampionsAgentBattleChoosePokemon(battler);
+        return;
+    }
+#endif
+
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gBattlePartyCurrentOrder); i++)

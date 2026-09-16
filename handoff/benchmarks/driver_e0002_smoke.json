@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "encounter": "E0002 TRAINER_CALVIN_1; headless per-turn battle driver smoke party",
+  "availability_audit": "Route101/102/103 land tables in the opening chapters (see handoff/benchmarks/c15_available_pool.json for the same roots recorded later). Every member is an ordinary early-route wild root at the base level cap of 14; no gifts, evolution stones, HMs or legendary access are claimed. This manifest exists to exercise scripts/playthrough/battle_driver.py, not to benchmark a difficulty verdict.",
+  "plan": "A deliberately plain opening-route pair plus reserves, so the driver's move, target, switch and forced-replacement paths are exercised without a preparation edge deciding the fight.",
+  "party": [
+    {
+      "species": "SPECIES_TAILLOW",
+      "moves": ["MOVE_WING_ATTACK", "MOVE_QUICK_ATTACK", "MOVE_AERIAL_ACE", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_GUTS",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "fast physical Flying attacker",
+      "availability": "MAP_ROUTE101 land table."
+    },
+    {
+      "species": "SPECIES_MAREEP",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_THUNDER_WAVE", "MOVE_COTTON_GUARD", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_STATIC",
+      "item": "ITEM_ORAN_BERRY",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "special Electric attacker and paralysis support",
+      "availability": "MAP_ROUTE103 land table."
+    },
+    {
+      "species": "SPECIES_RALTS",
+      "moves": ["MOVE_CONFUSION", "MOVE_DISARMING_VOICE", "MOVE_CALM_MIND", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SYNCHRONIZE",
+      "item": "ITEM_ORAN_BERRY",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "reserve special attacker for switch testing",
+      "availability": "MAP_ROUTE102 land table."
+    },
+    {
+      "species": "SPECIES_MARILL",
+      "moves": ["MOVE_AQUA_JET", "MOVE_TACKLE", "MOVE_BUBBLE_BEAM", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_ORAN_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "reserve priority attacker for forced-replacement testing",
+      "availability": "MAP_ROUTE102 land table."
+    }
+  ]
+}
