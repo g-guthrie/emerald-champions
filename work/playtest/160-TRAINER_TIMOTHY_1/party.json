@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0218 TRAINER_TIMOTHY_1, Route 115",
+  "availability_audit": "Every member's pool-48 entry was checked for gate and source map. Metagross, Excadrill, Incineroar, Amoonguss and Togekiss are evolution-gated lines whose windows (24-48) all open at or before this battle; Salamence is wild in Meteor Falls B1F back room, which the fresh run reaches before the Fortree stretch. No AshenWoods/gate-48 legendary-sign species and no legendaries at all are used. For the Route 103 Surf-backtrack trio the battle is reached AFTER Norman, so the player legitimately holds the full cap-48 inventory; nothing here is sourced from a map later than Route 115-119. Free Center held-item catalogue supplies the ordinary items; Mega Ring earned from Steven after Brawly.",
+  "plan": "Pre-declared counterplay from the dossier's own crack line: priority denial and double targeting. Incineroar's Fake Out outspeeds Brave Hariyama's and is aimed at Dusclops to deny the turn-1 Trick Room; Knock Off is 2x into the Ghost setter and removes the Eviolite that makes it bulky. Metagross's Zen Headbutt is 2x into both Fighting bodies and is physical, so Hariyama's Assault Vest does not apply. Togekiss is the Fairy answer to Conkeldurr and to Mega Ampharos's Dragon Pulse; Salamence supplies the Draco Meteor if the turret survives. Amoonguss's Spore is held as the second Trick Room denial because it is faster than a 0-Speed-IV Dusclops outside the room.",
+  "party": [
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": [
+        "MOVE_METEOR_MASH",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_BULLET_PUNCH",
+        "MOVE_ICE_PUNCH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Mega Metagross: Tough Claws physical hammer, Bullet Punch priority, Steel/Psychic resistances vs Fairy/Normal/Bug/Psychic teams",
+      "availability": "pool-48 gate 48 evolution:level from SPECIES_METANG (Beldum line already reachable; the gate is the level cap, not a map). Metagrossite stone-window 42, Mega Ring earned from Steven after Brawly. Level-gated only, so legal anywhere in the cap-48 window including a Surf backtrack to Route 103."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Intimidate pivot: Fake Out denies a setup/Fake Out turn, Fire pressure on Grass/Bug/Steel, Knock Off strips Eviolite/Focus Sash/berries",
+      "availability": "pool-48 gate 36 evolution:level from SPECIES_TORRACAT; window 36 precedes this battle's cap-48 window, so it is legal on every map in this block."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_POLLEN_PUFF",
+        "MOVE_SLUDGE_BOMB"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        252,
+        0
+      ],
+      "role": "Spore/Rage Powder redirection control; Grass/Poison body resists Water, Grass, Fairy and Fighting",
+      "availability": "pool-48 gate 42 evolution:level from SPECIES_FOONGUS; window 42 precedes the cap-48 window."
+    },
+    {
+      "species": "SPECIES_EXCADRILL",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_IRON_HEAD",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Ground/Steel breaker: Mold Breaker Earthquake answers Electric and Poison cores, Rock Slide answers Flying/Bug",
+      "availability": "pool-48 gate 36 evolution:level from SPECIES_DRILBUR; window 36 precedes the cap-48 window."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "Redirection and Tailwind speed control; Serene Grace Air Slash flinch pressure, Fairy/Flying answers Fighting, Bug and Dragon",
+      "availability": "pool-48 gate 24 evolution:item ITEM_SHINY_STONE from SPECIES_TOGETIC (Togepi Route102); window 24 precedes the cap-48 window."
+    },
+    {
+      "species": "SPECIES_SALAMENCE",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_FIRE_BLAST",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        0,
+        4,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Second Intimidate plus mixed special breaker; Fire Blast is the answer to Grass/Bug/Steel, Draco Meteor the nuke, Dual Wingbeat breaks Sashes",
+      "availability": "pool-48 gate 42 wild:MeteorFalls_B1F_2R/land_mons; Meteor Falls back room is reached before the Fortree/Route 115-119 stretch and window 42 precedes the cap-48 window."
+    }
+  ]
+}

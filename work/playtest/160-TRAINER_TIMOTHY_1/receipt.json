@@ -1,0 +1,43 @@
+{
+  "play_order": 160,
+  "e_group": "E0218",
+  "trainer": "TRAINER_TIMOTHY_1",
+  "location": "Route115",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Dusclops 47 (+1), Hariyama 47 (+1), Conkeldurr 47 (+1), Ampharos 48 (+2) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/160-TRAINER_TIMOTHY_1/party.json",
+  "attempts": [
+    {"seed": 41, "run_dir": "work/playtest/160-TRAINER_TIMOTHY_1/run-s41", "outcome": "won", "turns": 11, "player_faints": 5, "opponent_faints": 4,
+     "notes": "The hardest fight of the block by a wide margin and the closest to the design brief: won with one Pokemon left standing. Trick Room went up three separate times, Mega Ampharos OHKOed Excadrill through Focus Blast, and a Will-O-Wisp on Mega Metagross removed the player's best attacker from the fight for eight turns."}
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room is up on turn 1 or 2", "result": "PASS", "evidence": "Turn 1: Dusclops used Trick Room. It re-set it on turn 6 after the first room expired and again on turn 11 as the last Pokemon standing."},
+    {"check": "Dusclops moves first under its own Trick Room (the authored 0-Speed-IV fix)", "result": "PASS", "evidence": "Turn 2 under Trick Room the order was Dusclops, then Hariyama, then the player's battlers. Dusclops acted first on every Trick Room turn of the fight. The zeroed Speed IV is doing exactly what the dossier says it should."},
+    {"check": "Hariyama uses Fake Out on a legal interruptible threat", "result": "PASS", "evidence": "Turn 1 Hariyama's Fake Out flinched Mega Metagross - the correct target, since the player's other battler was about to have its own Fake Out fail against a Ghost. The flinch is what let Trick Room resolve unopposed."},
+    {"check": "Dusclops burns when the room is bad", "result": "PASS", "evidence": "Turn 3, with Trick Room already up and Mega Ampharos handling damage, Dusclops chose Will-O-Wisp on Mega Metagross. That halved the player's only remaining physical threat for the rest of the battle and was the single highest-value action available."},
+    {"check": "Conkeldurr's Guts is earned after Orb activation", "result": "PASS", "evidence": "Turn 8 Conkeldurr Protected on its entry turn, took the Flame Orb burn safely behind the shield, and on turn 9 its Guts-boosted Knock Off dealt 134 to a 252 HP/252 SpD Amoonguss that resists Fighting. Turn 10 it KOed the same Amoonguss."},
+    {"check": "Dusclops's Pain Split uses current HP", "result": "NOT_EXERCISED", "evidence": "Dusclops went 138 -> 125 -> 67 -> 0 and never selected Pain Split. At 67/138 against a 126 HP Mega Metagross it would have been a real gain, so this is the one authored tool the AI left on the table; see AI defects."},
+    {"check": "Mega Ampharos is the slow special turret under the room", "result": "PASS", "evidence": "Mega Evolved on turn 3 with the correct Mold Breaker banner, moved before every player battler under Trick Room, KOed Togekiss with Thunderbolt on turn 4 and OHKOed Excadrill with Focus Blast on turn 5."},
+    {"check": "Brave/Quiet members have zeroed Speed IVs so the room favours the right side", "result": "PASS", "evidence": "Under Trick Room the full observed order was Dusclops, Ampharos/Conkeldurr, then every player battler, in every turn of both rooms. The room slowed the player's side, not Timothy's."}
+  ],
+  "protect_ledger": [
+    {"turn": 8, "battler": "Conkeldurr", "payoff": "REAL, and the best Protect seen in this block: it blocked Amoonguss's Spore and Salamence's Dual Wingbeat on Conkeldurr's entry turn, and the Flame Orb burned it safely behind the shield so Guts came online with no exposure. Textbook."},
+    {"turn": "all", "battler": "Ampharos", "payoff": "NOT USED. Mega Ampharos carries Protect and never used it; it was never in danger until the turn it died, so no empty guarding."}
+  ],
+  "ai_defects": [
+    {
+      "id": "E0218-D1",
+      "turn": 11,
+      "board": "Dusclops alone at 67/138 with Eviolite. Player: Salamence 53/164 and Mega Metagross 126/150.",
+      "chosen": "Dusclops used Night Shade (47 fixed)",
+      "problem": "Pain Split against the 126 HP Mega Metagross would have taken Dusclops from 67 to roughly 96 and Metagross from 126 to 96 at the same time - a 29 HP heal and a 30 HP hit, strictly better than a 47 damage Night Shade on that board, and it would have bought at least one more turn for the Trick Room it had just re-set. The dossier calls Pain Split out explicitly as a bulk-independent tool and it was never selected in the whole battle, at any HP.",
+      "better_action": "Pain Split on Mega Metagross.",
+      "severity": "minor - the battle was lost for Dusclops either way, but Pain Split appears to be unreachable in the scoring rather than merely declined, since it was never chosen at 67/138, at 125/138 or at any point between."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "KEEP. Five player faints against a six-member reachable party, won with one Pokemon alive. This is comfortably above the three-faint benchmark and the fight needs nothing.",
+  "could_this_be_cooler": "No change wanted. This is the best-executing team in the block and the dossier's own closing note is confirmed in play - the moment to remember is not the Pain Split it names but the turn-3 Will-O-Wisp, where a Ghost that cannot meaningfully damage a Mega Metagross removes it from the fight anyway. The zeroed Speed IVs are the difference between a working Trick Room team and a broken one and they are correct on all four members. The single honest improvement is not a species change at all: give Dusclops a reason to reach for Pain Split, or check why it never scores, because right now the set is effectively three moves. If a future pass does want more, the natural upgrade is Hariyama's slot: it is a Fake Out body that dies to one super-effective physical hit, and a Brave Ursaring or Rhyperior would swing harder under the room without changing the concept.",
+  "legality_notes": "Authored sets are internally legal. Mega Ampharos correctly announced its Mega Evolution and correctly gained Mold Breaker, which is the counterexample that makes the silent Alakazam mega at E0211 look like a genuine anomaly rather than a missing message everywhere.",
+  "timing": "ai_decision_seconds_max 1.038, inside the 1.2 second opponent decision budget."
+}
