@@ -1,0 +1,42 @@
+{
+  "play_order": 20,
+  "e_group": "E0024",
+  "trainer": "TRAINER_DEVAN",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "ai_profile": "Conservative",
+  "observed_opponent_levels": {"HIPPOPOTAS": 15, "DRILBUR": 14, "ARON": "16 (offset 4)", "SANDILE": "15 (offset 3)"},
+  "outcome": "WON on attempt 1, 5 turns, 3 player faints",
+  "party_manifest": "work/playtest/20-DEVAN/party.json",
+  "run_dir": "work/playtest/20-DEVAN/a1",
+  "attempts": [
+    {"seed": "0x2000", "outcome": "won", "turns": 5, "player_faints": 3, "opponent_faints": 4,
+     "player_faint_detail": "Ludicolo to Drilbur's X-Scissor (2x on Grass) plus sand chip on the switch-in turn; Whimsicott to Aron's Iron Head (2x on Fairy); Snorlax to a Helping-Hand-boosted Body Press plus sand chip. Two of the three were finished by the sandstorm rather than by the attack.",
+     "note": "The sand residual did as much work as the attacks did. Only Lucario (Steel, sand-immune) and Arcanine were left standing."}
+  ],
+  "strategy_checks": [
+    {"check": "Hippopotas establishes sand on entry", "result": "PASS", "evidence": "The battle's opening state already read weather B_WEATHER_SANDSTORM before any command was submitted."},
+    {"check": "Drilbur's Sand Rush gives it the speed window", "result": "PASS - decisive", "evidence": "Drilbur (base 68 Speed) moved before my Jolly 252-Spe Weavile (base 125) on turns 1 and 2, which is only possible with the Sand Rush doubling. It used that window to Protect through a Fake Out plus Energy Ball on turn 1 and to land a 2x X-Scissor on my Ludicolo switch-in on turn 2."},
+    {"check": "Hippopotas uses Yawn or Helping Hand alongside the speed window", "result": "PASS (Helping Hand)", "evidence": "Turn 4: Hippopotas, at 2/59, chose MOVE_HELPING_HAND on Aron. The boosted Body Press then took Snorlax to within sand-chip range and killed it. Yawn was never used."},
+    {"check": "Hippopotas uses Slack Off when it is worth more than an attack", "result": "NOT OBSERVED - judgment call", "evidence": "Hippopotas went from 59/59 to 2/59 in one 2x Energy Ball, so it had exactly one turn at low HP and spent it on the Helping Hand that killed Snorlax. Given Eviolite Slack Off would have restored roughly half and it was about to die to Body Slam anyway, the Helping Hand was defensible. Not scored as a defect."},
+    {"check": "Aron's Sturdy survives a would-be one-shot", "result": "PASS", "evidence": "Turn 4: 'The opposing Aron endured the hit!' against Lucario's Close Combat, which is 4x into Steel/Rock. Aron continued at 1 HP and got its Helping-Hand-boosted Body Press off."},
+    {"check": "Sandile's Moxie does not grant a free opening boost and only triggers on its own knockout", "result": "PASS (correctly did not fire)", "evidence": "Sandile entered on turn 4 and never scored a knockout, so no Attack boost was applied. The authored caveat held."},
+    {"check": "All replacements tolerate the sand chip or justify it", "result": "PASS from the AI side", "evidence": "All four of Devan's members are Ground, Ground, Steel/Rock and Ground/Dark, so none of them takes sand damage. The residual is purely one-directional, which is the point of the lesson."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Drilbur", "payoff": "REAL and large - moving first under Sand Rush, it blocked both Weavile's Fake Out and Whimsicott's 2x Energy Ball in one turn while its partner's High Horsepower took Weavile to 18/48."},
+    {"turn": 5, "battler": "Sandile", "payoff": "REAL - blocked Lucario's Close Combat, which is 2x into Dark and would have killed it from 44/44."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "The cleanest AI performance in the block. Two Protects, both with real payoff; Sand Rush was used for what it is for; Helping Hand was spent on the one turn where it converted into a kill; Sturdy and Moxie both behaved exactly as the authoring describes.",
+    "Sandile entering on the turn its Intimidate-reduced partner was about to die, and then guarding, was a correct way to preserve the last member."
+  ],
+  "level_changes": [],
+  "level_verdict": "KEEP. Brief rule 5: won with 3 player faints after a real fight. Devan is well calibrated as authored - the sand residual plus a Sand Rush attacker forced me through half my party and the strongest member of my team (Ludicolo, brought specifically to answer four Ground types) died on its switch-in turn.",
+  "cooler_note": "Yes, and I would not change it. This is the best-built team in the block: a clean Sand Stream plus Sand Rush lesson where the weather is not decoration - it killed two of my members by itself - and where every member is sand-immune so the pressure runs one way only. Sturdy Aron as the Helping Hand payoff and Moxie Sandile as the clean-up threat give the room two more angles without adding clutter. The only idea worth considering for a later pass is giving Hippopotas a reason to use Yawn (it never did in five turns), but that is an AI-scoring question rather than a composition one.",
+  "authored_set_legality": "No legality problem found.",
+  "not_finished": "Yawn, Slack Off and a Moxie boost were never exercised."
+}
