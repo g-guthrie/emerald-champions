@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0029 TRAINER_MARC (Rustboro Gym, prehistoric snow / Power Spot); play_order 27, cap 14, Medium",
+  "availability_audit": "All six appear in work/reference-pools/pool-14.json at gate 14. Magearna (legendary_sign:RustboroCity_DevonCorp_2F) and Shaymin (legendary_sign:Route102) are reachable legendary signs; Cottonee (VerdanturfMeadow) takes a Sun Stone for Whimsicott; Lucario is an AlteringCave_1F land encounter; Mr. Mime Galar and Lotad (Route102, Water Stone line for Ludicolo) are likewise gate-14 entries. Ordinary items only. Assisted acquisition, not native capture acceptance.",
+  "plan": "Run the authored crack list: Prankster Sunny Day replaces snow before Aurora Veil can be set, Wide Guard blanks the team's Rock Slide and Blizzard spread spam, two Steel bodies resist both Rock and Ice, and the party focuses special damage because every opponent but Amaura is physical. Note: Galarian Mr. Mime's Screen Cleaner was the first choice for screen removal but the native preparation API rejected its Wide Guard as an illegal move (result=8 BAD_MOVE, slot 2), so ordinary Mr. Mime carries Wide Guard instead and weather replacement handles the Veil.",
+  "party": [
+    {
+      "species": "SPECIES_MAGEARNA",
+      "moves": [
+        "MOVE_FLASH_CANNON",
+        "MOVE_FLEUR_CANNON",
+        "MOVE_THUNDERBOLT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        4,
+        0
+      ],
+      "role": "lead Steel/Fairy wall; resists Rock and Ice, immune to Dragon",
+      "availability": "legendary_sign:RustboroCity_DevonCorp_2F; pool-14 gate 14 (reachable legend)."
+    },
+    {
+      "species": "SPECIES_WHIMSICOTT",
+      "moves": [
+        "MOVE_TAUNT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_TAILWIND",
+        "MOVE_MOONBLAST"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "lead Prankster weather replacement and Aurora Veil denial",
+      "availability": "Cottonee wild:VerdanturfMeadow/land_mons -> Whimsicott (ITEM_SUN_STONE); pool-14 gate 14."
+    },
+    {
+      "species": "SPECIES_MR_MIME",
+      "moves": [
+        "MOVE_WIDE_GUARD",
+        "MOVE_PSYCHIC",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_FILTER",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Wide Guard against spread Rock Slide and Blizzard; Fairy STAB into Tyrunt",
+      "availability": "pool-14 gate 14 (Mr. Mime / Mime Jr. line)."
+    },
+    {
+      "species": "SPECIES_LUCARIO",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_METEOR_MASH",
+        "MOVE_BULLET_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INNER_FOCUS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Fighting pressure and Bullet Punch priority",
+      "availability": "wild:AlteringCave_1F/land_mons; pool-14 gate 14."
+    },
+    {
+      "species": "SPECIES_SHAYMIN",
+      "moves": [
+        "MOVE_SEED_FLARE",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NATURAL_CURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Grass and Ground special focus fire into the Rock bodies",
+      "availability": "legendary_sign:Route102; pool-14 gate 14 (reachable legend)."
+    },
+    {
+      "species": "SPECIES_LUDICOLO",
+      "moves": [
+        "MOVE_SURF",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_OWN_TEMPO",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        4,
+        0
+      ],
+      "role": "special Water/Grass reserve, 2x into every Rock body",
+      "availability": "Lotad wild:Route102/land_mons -> Lombre -> Ludicolo (ITEM_WATER_STONE); pool-14 gate 14."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "play_order": 27,
+  "e_group": "E0029",
+  "trainer": "TRAINER_MARC",
+  "class": "gym",
+  "location": "RustboroCity_Gym",
+  "cap": 14,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/27-TRAINER_MARC/party.json",
+  "opponent_levels": {"AMAURA": 16, "STONJOURNER": 13, "TYRUNT": 15, "KLAWF": 13, "ARCHEN": 14, "CRANIDOS": 14},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/27-TRAINER_MARC/a1", "seed": "0x3C11", "outcome": "won", "turns": 6, "player_faints": 3, "opponent_faints": 6, "ai_decision_frames_max": 17,
+     "narrative": "Prankster Sunny Day replaced Amaura's snow on turn 1 before Aurora Veil could ever be set, but Whimsicott paid for it immediately: a Power-Spot-boosted Icy Wind plus Stonjourner's Rock Slide killed it through its Focus Sash on the same turn. Magearna then walled the entire physical half of the team (Steel resists Rock, Ice and the Flying finisher) and rode Soul-Heart from +1 to +6 while Lucario and Ludicolo traded themselves for Amaura and Tyrunt. A missed Fleur Cannon on turn 4 cost a turn. Mr. Mime's Wide Guard came down for the last exchange and its Focus Sash survived Archen's itemless Acrobatics."}
+  ],
+  "strategy_checks": [
+    {"check": "Amaura establishes snow", "result": "PASS", "evidence": "Snow Warning had B_WEATHER_SNOW up before the first decision point."},
+    {"check": "Aurora Veil is chosen only when it completes and improves the exchange", "result": "PASS (negative branch)", "evidence": "Prankster Sunny Day replaced snow on turn 1. Amaura never attempted Aurora Veil afterwards - it used Icy Wind, then Protect, then Blizzard. It correctly refused to spend a turn on a screen that would have failed."},
+    {"check": "Power Spot Stonjourner strengthens its ally's actual attacks", "result": "PASS (indirect)", "evidence": "Turn 1: Amaura's Icy Wind plus Stonjourner's Rock Slide removed a 45 HP Whimsicott through a Focus Sash in one turn, which needed the ally boost. Stonjourner did not incorrectly treat Power Spot as boosting its own move selection."},
+    {"check": "Stonjourner uses Wide Guard against a real spread threat", "result": "NOT OBSERVED", "evidence": "My party never fired a spread move while Stonjourner was alive, so the branch never had a trigger. It attacked instead, which was correct."},
+    {"check": "Do not treat snow as a teamwide Rock-defense boost", "result": "PASS", "evidence": "Rock Slide into Magearna resolved as 'not very effective' and Flash Cannon into Amaura as 'extremely effective' - no phantom defensive modifier appeared."},
+    {"check": "Cranidos obeys the Choice Scarf lock and Mold Breaker applies", "result": "PARTIAL PASS", "evidence": "'The opposing Cranidos breaks the mold!' printed on entry, and it selected Stomping Tantrum (2x into Lucario's Steel) over its STAB Head Smash (0.25x into Fighting/Steel) - a correct coverage read. It died the same turn, so the lock and the Head Smash recoil clause were not re-tested."},
+    {"check": "Tyrunt uses Dragon Dance behind a real opportunity", "result": "NOT OBSERVED (correctly)", "evidence": "Tyrunt used Crunch on both of its turns. It entered opposite a +5 Magearna that would have killed it through Eviolite, so no free setup turn existed and declining Dragon Dance was right."},
+    {"check": "Klawf needs an actual Anger Shell trigger and berry recovery", "result": "NOT OBSERVED", "evidence": "Klawf was knocked out from full HP by a single +6 Flash Cannon, so neither Anger Shell nor the Sitrus Berry could fire."},
+    {"check": "Archen supplies itemless Acrobatics while healthy", "result": "PASS", "evidence": "Final turn: Archen at full HP used Acrobatics (doubled with no held item) and drove Mr. Mime to its Focus Sash. Defeatist was never reached."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "AMAURA", "payoff": "real - at 1 HP behind a spent Focus Sash it blocked Lucario's 4x Close Combat and survived a full extra turn"},
+    {"turn": 4, "user": "KLAWF", "payoff": "low - blocked Ludicolo's 2x Giga Drain, but Klawf was at 53/53 facing nothing lethal and the turn bought its partner no payoff. Not empty, but the weakest guard of the fight."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Cranidos's coverage choice (Stomping Tantrum over Head Smash into a Steel body) and Amaura's refusal to set Aurora Veil under replaced weather were both correct, non-obvious decisions. No defect found in this battle.",
+    "Driver artifact, not an AI issue: the act report's 'chosen' block is read from previous_turn and goes stale for battlers that fainted earlier in the same turn - on the final turn it attributed Crunch to Archen (which actually used Acrobatics) and a Rock Slide to an already-dead Klawf. The battle text is the reliable record."
+  ],
+  "preparation_note": "The native preparation API rejected Galarian Mr. Mime with Wide Guard (result=8 BAD_MOVE, slot 2). Screen Cleaner was therefore unavailable and ordinary Mr. Mime carried Wide Guard instead; weather replacement covered the screen-removal half of the authored crack list.",
+  "level_changes": "none. Won on the first optimized attempt but with three player faints against six, and the fight cost a Whimsicott on turn 1 to the Power Spot combination. That is the 'won after a real fight' band. Keep the authored offsets (4/1/3/1/2/2).",
+  "cooler_note": "The prehistoric-plus-snow identity is strong and Power Spot is a genuinely unusual engine to build a route gym around. The concept weakness is that four of the six bodies are physical Rock attackers, so a single Steel body walls the back half of the fight - Magearna took 'not very effective' from Rock Slide, Head Smash, Acrobatics and Ice alike and never dropped below 52/59. A concrete suggestion for a later pass (not applied here): give one of the two Choice/priority bodies a special or Fighting-flavoured answer so the Steel wall is not a free win condition, and let Klawf arrive earlier where Anger Shell has a chance to actually flip a turn - deployed last, it is simply removed from full HP. Species-wise the six are already unusual and worth preserving.",
+  "authored_set_legality": "No legality problem found in the authored six.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}
