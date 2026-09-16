@@ -1,0 +1,23 @@
+{
+  "agent": "P8",
+  "block": "play_order 85-96 (E0095 Brooke, E0099 Ted, E0101 Georgia, E0102 Mike_2, E0104 Travis, E0105 Brice, E0109 Bryant, E0109 Shayla, E0110 Lawrence, E0110 Lung, E0110 Wyatt, E0111 Jaylen)",
+  "cap": 36,
+  "status": "APPLIED TO THE WORKING TREE, NOT COMMITTED",
+  "why_not_committed": "data/emerald_champions/emerald_champions_battle_teams.txt carried uncommitted edits from other agents' blocks for the whole duration of this session. A pathspec commit of that file is all-or-nothing, so committing my ten lines would have swept theirs in as well, which the git-discipline rule forbids. The edits are live in the working tree, which is what the main agent materializes from. This file is the authoritative list so the changes can be verified or re-applied.",
+  "clobber_warning": "The Lung and Wyatt edits (Weezing, Ninjask, Turtonator) were silently reverted once mid-session by another session rewriting the whole teams file from a stale copy, and had to be re-applied. Verify all ten before materializing.",
+  "changes": [
+    {"e_group": "E0095", "trainer": "TRAINER_BROOKE_1", "member": "INFERNAPE", "offset_before": 0, "offset_after": 1, "level_before": 34, "level_after": 35},
+    {"e_group": "E0101", "trainer": "TRAINER_GEORGIA", "member": "BUTTERFREE", "offset_before": 1, "offset_after": 2, "level_before": 35, "level_after": 36},
+    {"e_group": "E0102", "trainer": "TRAINER_MIKE_2", "member": "GIGALITH", "offset_before": -1, "offset_after": 0, "level_before": 33, "level_after": 34},
+    {"e_group": "E0102", "trainer": "TRAINER_MIKE_2", "member": "DONPHAN", "offset_before": 0, "offset_after": 1, "level_before": 34, "level_after": 35},
+    {"e_group": "E0105", "trainer": "TRAINER_BRICE", "member": "EXCADRILL", "offset_before": 0, "offset_after": 1, "level_before": 34, "level_after": 35},
+    {"e_group": "E0105", "trainer": "TRAINER_BRICE", "member": "CLAYDOL", "offset_before": 0, "offset_after": 1, "level_before": 34, "level_after": 35},
+    {"e_group": "E0109", "trainer": "TRAINER_BRYANT", "member": "TYPHLOSION", "offset_before": 0, "offset_after": 1, "level_before": 34, "level_after": 35},
+    {"e_group": "E0110", "trainer": "TRAINER_LUNG", "member": "WEEZING", "offset_before": 1, "offset_after": 2, "level_before": 35, "level_after": 36},
+    {"e_group": "E0110", "trainer": "TRAINER_LUNG", "member": "NINJASK", "offset_before": 1, "offset_after": 2, "level_before": 35, "level_after": 36},
+    {"e_group": "E0110", "trainer": "TRAINER_WYATT", "member": "TURTONATOR", "offset_before": 1, "offset_after": 2, "level_before": 35, "level_after": 36}
+  ],
+  "unchanged_trainers": ["TRAINER_TED (E0099)", "TRAINER_TRAVIS (E0104)", "TRAINER_SHAYLA (E0109)", "TRAINER_LAWRENCE (E0110)", "TRAINER_JAYLEN (E0111)"],
+  "reruns": "None of the ten changes has been reruns-verified. Opponent levels are compiled into the headless ROM from src/data/trainers.party, so every rerun needs the main agent to materialize and rebuild first.",
+  "index_discrepancy": "work/playtest/battle_index.json gives E0099 (Ted) and E0101 (Georgia) a cap window of 42-42. Both authored seed lines are written for cap 36, and the driver at --cap 36 produced exactly the seeded levels (35/35/35/34 and 38/38/35/38). Played at 36 as briefed; the index entries for those two look wrong."
+}
