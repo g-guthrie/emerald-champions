@@ -1,0 +1,57 @@
+{
+  "play_order": 14,
+  "e_group": "E0017",
+  "trainer": "TRAINER_CYNDY_1",
+  "class": "regular",
+  "location": "Route115",
+  "cap_window": 14,
+  "observed_opponent_levels": {"RIOLU": 14, "MEDITITE": 14, "CRABRAWLER": 15, "CLOBBOPUS": 17},
+  "outcome": "WON on attempt 1",
+  "party_manifest": "work/playtest/14-CYNDY_1/party.json",
+  "run_dir": "work/playtest/14-CYNDY_1/a1",
+  "result_json": "work/playtest/14-CYNDY_1/a1/result.json",
+  "attempts": [
+    {
+      "seed": "0x14C1",
+      "outcome": "won",
+      "turns": 8,
+      "decisions": 11,
+      "player_faints": 2,
+      "player_faint_detail": "Porygon-Z (switched into a Fighting attacker - player error) and Lucario (Steel/Fighting, 2x weak to Fighting) both fell to the same Crabrawler Drain Punch line.",
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 8,
+      "ai_decision_seconds_max": 0.134
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Meditite opens with Fake Out on its entry turn", "result": "PASS", "evidence": "Turn 1 chosen action: battler 3 MOVE_FAKE_OUT -> target 0. It never resolved because my faster Weavile Fake Out flinched it first; the AI made the authored choice."},
+    {"check": "Riolu Prankster Quick Guard answers player priority", "result": "FAIL (never fired)", "evidence": "Weavile used Fake Out on turn 1 and Arcanine used Extreme Speed on turn 5; Riolu chose Protect on turns 1, 6, 8 and 9 and Drain Punch on turn 7, never Quick Guard, across the whole battle."},
+    {"check": "Riolu Screech lowers a target's Defense to enable the physical attackers", "result": "FAIL (never fired)", "evidence": "Screech was never selected in 8 turns, including turns where Riolu was safe behind a Protect-heavy board."},
+    {"check": "Clobbopus Feint breaks a Protect", "result": "NOT OBSERVED", "evidence": "Clobbopus chose Brick Break on turns 3 and 4 and fainted on turn 5. I never used Protect, so Feint had no target; this is not evidence of a defect."},
+    {"check": "Clobbopus Taunt shuts off a support turn", "result": "NOT OBSERVED", "evidence": "Clobbopus was on the field for two turns against an active Prankster Whimsicott (Tailwind/Encore) and never chose Taunt; too small a sample to call a defect."},
+    {"check": "Smart switching: the AI protects a member from a read it can see", "result": "PASS", "evidence": "Turn 2 - Riolu withdrew to Crabrawler and my Encore failed. Turn 5 - Crabrawler, Encore-locked into Protect, withdrew to Riolu to break the lock. Both are strong, legal, non-clairvoyant reads from revealed information."},
+    {"check": "Opponent decision budget 1.2 s", "result": "PASS", "evidence": "ai_decision_frames_max = 8 frames = 0.134 s across 11 decision points."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Riolu", "payoff": "EMPTY - nothing targeted Riolu (Weavile Fake Out hit Meditite, Whimsicott used Tailwind). Quick Guard would have blocked the Fake Out that flinched its partner."},
+    {"turn": 3, "battler": "Crabrawler", "payoff": "REAL - blocked Whimsicott's super-effective Moonblast."},
+    {"turn": 4, "battler": "Crabrawler", "payoff": "NOT AN AI CHOICE - Encore forced it; the AI had selected Drain Punch."},
+    {"turn": 6, "battler": "Riolu", "payoff": "REAL - blocked Whimsicott's super-effective Moonblast."},
+    {"turn": 7, "battler": "Riolu", "payoff": "NOT AN AI CHOICE - Encore forced it and it failed (consecutive use); the AI had selected Drain Punch."},
+    {"turn": 8, "battler": "Riolu", "payoff": "REAL - blocked Snorlax's Body Slam."},
+    {"turn": 9, "battler": "Riolu", "payoff": "EMPTY - chosen freely after two prior Protects and failed on the consecutive-use check; Riolu then fell to Moonblast. Drain Punch was the better action."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Riolu's authored Quick Guard and Screech never fired in a full battle against a lead that used priority on turn 1. Its Protect choices were not illegal and three of them had real payoff, but the two authored support tools are unexercised. Recommend a focused check (or a second attempt from a different lead) before treating the PRESSURE plan as executing.",
+    "Riolu's turn-9 Protect was a free choice taken immediately after two Protects, so it failed the consecutive-use roll and cost the last member its only remaining action. This is the one genuinely poor guard decision in the fight."
+  ],
+  "driver_notes": [
+    "result.json reports player_faints correctly (2) but opponent_faints as 0 because the counter is read from the post-battle state after the field is torn down. The per-turn act records carry the true running count (peaked at 3 before the final KO; all 4 opponents fainted)."
+  ],
+  "level_changes": [],
+  "level_verdict": "KEEP. Brief rule 5: won with 2+ player faints and after a real fight -> keep. Honest caveat: both of my faints were my own type errors (Porygon-Z and Lucario are each weak to Fighting and I put them in front of two Fighting attackers), and Snorlax and Whimsicott finished untouched, so this was less dangerous than the faint count suggests. Under the stricter AGENTS.md threshold ('first-attempt win with fewer than three new player faints triggers review of a level increase, normally +1 to the lowest-level opponent') a +1 on Riolu or Meditite (both at level 14, the block's floor) would be defensible. Deferred to the main agent rather than applied, because the brief's calibration rule is the operative instruction for this pass.",
+  "cooler_note": "Yes, slightly. The four-member all-Fighting squad reads as one type rather than one idea, and Crabrawler carried the fight almost alone. Suggestion for a later pass, not applied here: give Clobbopus a reason to exist before it faints - its Technician Feint plus Riolu's Quick Guard is a genuine priority-control package, but neither half fired. Either lead with Riolu + Clobbopus so the Quick Guard/Feint pair is the opening statement, or swap one slot for a non-Fighting partner (Mienfoo-style pivot or a Psychic-type coach) so the room has a second angle.",
+  "authored_set_legality": "No legality problem found. All four members, abilities, items, moves and EV spreads resolved correctly in the native party; the dossier prose is stale, however - the E0017 block says 'Medium cap34 levels 36/36/37/39' while the live battle_index cap window and the actual materialized levels are cap 14 -> 14/14/15/17.",
+  "not_finished": "Quick Guard and Screech remain unexercised; Feint and Taunt were never given a target."
+}
