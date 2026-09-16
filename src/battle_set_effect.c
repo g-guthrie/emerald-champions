@@ -12,7 +12,6 @@
 #include "battle_controllers.h"
 #include "battle_dynamax.h"
 #include "battle_gimmick.h"
-#include "battle_terastal.h"
 #include "item.h"
 #include "pokemon.h"
 #include "util.h"
@@ -649,19 +648,6 @@ static void HandleSetEffectPsychicNoise(struct BattleCalcValues *cv, struct SetE
         gBattleMons[se->effectBattler].volatiles.healBlockTimer = 2;
         BattleScriptPush(se->script);
         gBattlescriptCurrInstr = BattleScript_MoveEffectPsychicNoise;
-    }
-}
-
-static void HandleSetEffectTeraBlast(struct BattleCalcValues *cv, struct SetEffect *se)
-{
-    if (GetActiveGimmick(se->effectBattler) == GIMMICK_TERA
-     && GetBattlerTeraType(se->effectBattler) == TYPE_STELLAR
-     && !NoAliveMonsForEitherParty())
-    {
-        SetStatChange(se->effectBattler, STAT_ATK, -1);
-        SetStatChange(se->effectBattler, STAT_SPATK, -1);
-        BattleScriptPush(se->script);
-        gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
     }
 }
 
@@ -1347,7 +1333,6 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_FLORAL_HEALING] = HandleSetEffectNone,
     [MOVE_EFFECT_SECRET_POWER] = HandleSetEffectSecretPower,
     [MOVE_EFFECT_PSYCHIC_NOISE] = HandleSetEffectPsychicNoise,
-    [MOVE_EFFECT_TERA_BLAST] = HandleSetEffectTeraBlast,
     [MOVE_EFFECT_ORDER_UP] = HandleSetEffectOrderUp,
     [MOVE_EFFECT_ION_DELUGE] = HandleSetEffectIonDeluge,
     [MOVE_EFFECT_HAZE] = HandleSetEffectHaze,

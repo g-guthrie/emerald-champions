@@ -3321,22 +3321,6 @@ static void DebugSelectionStep_UpdateGigantamaxFactor(u8 taskId, u8 digits, u32 
     DebugSelectionStep_PrintGenericBooleanInput(taskId, COMPOUND_STRING("Gmax Factor:"));
 }
 
-static void DebugSelectionStep_UpdateTeraType(u8 taskId, u8 digits, u32 min, u32 max)
-{
-    if (gTasks[taskId].tInput == TYPE_MYSTERY)
-    {
-        if (JOY_NEW(DPAD_DOWN))
-            gTasks[taskId].tInput--;
-        else
-            gTasks[taskId].tInput++;
-    }
-    ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, digits);
-    StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("Tera Type: {STR_VAR_3}"));
-    StringCopy(gStringVar2, gTypesInfo[gTasks[taskId].tInput].name);
-    StringCopy(gStringVar3, COMPOUND_STRING(""));
-    DebugNativeStep_PrintWindowSelection(taskId);
-}
-
 static const struct DebugSelectionStep sGenderSelectionStep = {
     .stepUpdate = DebugSelectionStep_UpdateGender,
     .stepConfirm = DebugSelectionStep_GenderConfirm,
@@ -3404,14 +3388,6 @@ static const struct DebugSelectionStep sGigantamaxFactorSelectionStep = {
     .digits = 1,
 };
 
-static const struct DebugSelectionStep sTeraTypeSelectionStep = {
-    .stepUpdate = DebugSelectionStep_UpdateTeraType,
-    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
-    .minValue = 1,
-    .maxValue = NUMBER_OF_MON_TYPES - 1,
-    .digits = 2,
-};
-
 static bool32 DebugSelection_GiveComplexPokemon_OnComplete(u8 taskId)
 {
     u16 *monData = (u16 *)GetWordTaskArg(taskId, STEPS_DATA_PTR_ARG);
@@ -3451,7 +3427,6 @@ static bool32 DebugSelection_GiveComplexPokemon_OnComplete(u8 taskId)
 
     SetMonData(&mon, MON_DATA_DYNAMAX_LEVEL, &monData[22]);
     SetMonData(&mon, MON_DATA_GIGANTAMAX_FACTOR, &monData[23]);
-    SetMonData(&mon, MON_DATA_TERA_TYPE, &monData[24]);
 
     CalculateMonStats(&mon);
     GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
@@ -3475,9 +3450,8 @@ static const struct DebugSelection sComplexPokemonSelection = {
         &sEVsSelectionStep,
         &sDynamaxLevelSelectionStep,
         &sGigantamaxFactorSelectionStep,
-        &sTeraTypeSelectionStep,
     },
-    .maxSteps = 12,
+    .maxSteps = 11,
 };
 
 static bool32 DebugSelection_GiveEggPokemon_OnComplete(u8 taskId)

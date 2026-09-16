@@ -4152,8 +4152,7 @@
       "moves": [
         "MOVE_HYDRO_PUMP",
         "MOVE_ICE_BEAM",
-        "MOVE_SHELL_SMASH",
-        "MOVE_TERA_BLAST"
+        "MOVE_SHELL_SMASH"
       ],
       "abilities": [
         "ABILITY_TORRENT"
@@ -4242,7 +4241,6 @@
         "MOVE_FOCUS_BLAST",
         "MOVE_NASTY_PLOT",
         "MOVE_SURF",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDERBOLT"
       ],
       "abilities": [
@@ -4528,7 +4526,6 @@
       "moves": [
         "MOVE_DARK_PULSE",
         "MOVE_NASTY_PLOT",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDERBOLT"
       ],
       "abilities": [
@@ -5070,7 +5067,6 @@
       "role": "Tera Blast user",
       "moves": [
         "MOVE_TAUNT",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDERBOLT",
         "MOVE_VOLT_SWITCH"
       ],
@@ -5465,7 +5461,6 @@
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_EARTHQUAKE",
-        "MOVE_TERA_BLAST",
         "MOVE_WATERFALL"
       ],
       "abilities": [
@@ -5586,7 +5581,6 @@
       "moves": [
         "MOVE_CALM_MIND",
         "MOVE_SUBSTITUTE",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDERBOLT"
       ],
       "abilities": [
@@ -5752,8 +5746,7 @@
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_EARTHQUAKE",
-        "MOVE_OUTRAGE",
-        "MOVE_TERA_BLAST"
+        "MOVE_OUTRAGE"
       ],
       "abilities": [
         "ABILITY_MULTISCALE"
@@ -6052,8 +6045,7 @@
       "moves": [
         "MOVE_GIGA_DRAIN",
         "MOVE_QUIVER_DANCE",
-        "MOVE_STRENGTH_SAP",
-        "MOVE_TERA_BLAST"
+        "MOVE_STRENGTH_SAP"
       ],
       "abilities": [
         "ABILITY_CHLOROPHYLL"
@@ -6795,7 +6787,6 @@
       "moves": [
         "MOVE_RECOVER",
         "MOVE_SHADOW_BALL",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDER_WAVE"
       ],
       "abilities": [
@@ -6821,8 +6812,7 @@
       "moves": [
         "MOVE_CALM_MIND",
         "MOVE_EARTH_POWER",
-        "MOVE_SHADOW_BALL",
-        "MOVE_TERA_BLAST"
+        "MOVE_SHADOW_BALL"
       ],
       "abilities": [
         "ABILITY_INTIMIDATE"
@@ -8704,8 +8694,7 @@
       "moves": [
         "MOVE_NASTY_PLOT",
         "MOVE_SHADOW_BALL",
-        "MOVE_SUBSTITUTE",
-        "MOVE_TERA_BLAST"
+        "MOVE_SUBSTITUTE"
       ],
       "abilities": [
         "ABILITY_LEVITATE"
@@ -9142,8 +9131,7 @@
       "moves": [
         "MOVE_AIR_SLASH",
         "MOVE_BUG_BUZZ",
-        "MOVE_PROTECT",
-        "MOVE_TERA_BLAST"
+        "MOVE_PROTECT"
       ],
       "abilities": [
         "ABILITY_SPEED_BOOST"
@@ -9237,8 +9225,7 @@
       "moves": [
         "MOVE_AGILITY",
         "MOVE_NASTY_PLOT",
-        "MOVE_SHADOW_BALL",
-        "MOVE_TERA_BLAST"
+        "MOVE_SHADOW_BALL"
       ],
       "abilities": [
         "ABILITY_ADAPTABILITY"
@@ -10315,8 +10302,7 @@
         "MOVE_LEAF_STORM",
         "MOVE_LEECH_SEED",
         "MOVE_SUBSTITUTE",
-        "MOVE_SYNTHESIS",
-        "MOVE_TERA_BLAST"
+        "MOVE_SYNTHESIS"
       ],
       "abilities": [
         "ABILITY_CONTRARY"
@@ -10554,8 +10540,7 @@
       "moves": [
         "MOVE_GIGA_DRAIN",
         "MOVE_QUIVER_DANCE",
-        "MOVE_SLEEP_POWDER",
-        "MOVE_TERA_BLAST"
+        "MOVE_SLEEP_POWDER"
       ],
       "abilities": [
         "ABILITY_CHLOROPHYLL"
@@ -11041,8 +11026,7 @@
       "moves": [
         "MOVE_ICE_BEAM",
         "MOVE_RAPID_SPIN",
-        "MOVE_RECOVER",
-        "MOVE_TERA_BLAST"
+        "MOVE_RECOVER"
       ],
       "abilities": [
         "ABILITY_LEVITATE"
@@ -11238,8 +11222,7 @@
         "MOVE_FIERY_DANCE",
         "MOVE_FIRE_BLAST",
         "MOVE_GIGA_DRAIN",
-        "MOVE_QUIVER_DANCE",
-        "MOVE_TERA_BLAST"
+        "MOVE_QUIVER_DANCE"
       ],
       "abilities": [
         "ABILITY_FLAME_BODY",
@@ -11396,7 +11379,6 @@
       "moves": [
         "MOVE_FOCUS_BLAST",
         "MOVE_NASTY_PLOT",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDERBOLT"
       ],
       "abilities": [
@@ -11443,7 +11425,6 @@
       "moves": [
         "MOVE_FOCUS_BLAST",
         "MOVE_NASTY_PLOT",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDERBOLT"
       ],
       "abilities": [
@@ -11526,8 +11507,7 @@
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_ICICLE_SPEAR",
-        "MOVE_SCALE_SHOT",
-        "MOVE_TERA_BLAST"
+        "MOVE_SCALE_SHOT"
       ],
       "abilities": [
         "ABILITY_PRESSURE"
@@ -11592,8 +11572,7 @@
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_ICICLE_SPEAR",
-        "MOVE_SCALE_SHOT",
-        "MOVE_TERA_BLAST"
+        "MOVE_SCALE_SHOT"
       ],
       "abilities": [
         "ABILITY_TERAVOLT"
@@ -11762,8 +11741,7 @@
       "moves": [
         "MOVE_BRAVE_BIRD",
         "MOVE_FLARE_BLITZ",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_TERA_BLAST"
+        "MOVE_SWORDS_DANCE"
       ],
       "abilities": [
         "ABILITY_FLAME_BODY",
@@ -11789,8 +11767,7 @@
       "moves": [
         "MOVE_HURRICANE",
         "MOVE_QUIVER_DANCE",
-        "MOVE_SLEEP_POWDER",
-        "MOVE_TERA_BLAST"
+        "MOVE_SLEEP_POWDER"
       ],
       "abilities": [
         "ABILITY_COMPOUND_EYES"
@@ -11830,8 +11807,7 @@
       "moves": [
         "MOVE_CALM_MIND",
         "MOVE_MOONBLAST",
-        "MOVE_SYNTHESIS",
-        "MOVE_TERA_BLAST"
+        "MOVE_SYNTHESIS"
       ],
       "abilities": [
         "ABILITY_FLOWER_VEIL"
@@ -12524,8 +12500,7 @@
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_MOONBLAST",
-        "MOVE_QUIVER_DANCE",
-        "MOVE_TERA_BLAST"
+        "MOVE_QUIVER_DANCE"
       ],
       "abilities": [
         "ABILITY_SHIELD_DUST"
@@ -12680,8 +12655,7 @@
       "moves": [
         "MOVE_FIRE_BLAST",
         "MOVE_NASTY_PLOT",
-        "MOVE_SLUDGE_WAVE",
-        "MOVE_TERA_BLAST"
+        "MOVE_SLUDGE_WAVE"
       ],
       "abilities": [
         "ABILITY_CORROSION"
@@ -12725,8 +12699,7 @@
         "MOVE_ENCORE",
         "MOVE_GIGA_DRAIN",
         "MOVE_SYNTHESIS",
-        "MOVE_TAUNT",
-        "MOVE_TERA_BLAST"
+        "MOVE_TAUNT"
       ],
       "abilities": [
         "ABILITY_TRIAGE"
@@ -13086,8 +13059,7 @@
       "moves": [
         "MOVE_FLEUR_CANNON",
         "MOVE_IRON_HEAD",
-        "MOVE_SHIFT_GEAR",
-        "MOVE_TERA_BLAST"
+        "MOVE_SHIFT_GEAR"
       ],
       "abilities": [
         "ABILITY_SOUL_HEART"
@@ -13266,8 +13238,7 @@
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_GRAV_APPLE",
-        "MOVE_OUTRAGE",
-        "MOVE_TERA_BLAST"
+        "MOVE_OUTRAGE"
       ],
       "abilities": [
         "ABILITY_HUSTLE"
@@ -13390,8 +13361,7 @@
         "MOVE_SHADOW_BALL",
         "MOVE_SHELL_SMASH",
         "MOVE_STORED_POWER",
-        "MOVE_STRENGTH_SAP",
-        "MOVE_TERA_BLAST"
+        "MOVE_STRENGTH_SAP"
       ],
       "abilities": [
         "ABILITY_CURSED_BODY"
@@ -13499,8 +13469,7 @@
       "moves": [
         "MOVE_ALLURING_VOICE",
         "MOVE_CALM_MIND",
-        "MOVE_RECOVER",
-        "MOVE_TERA_BLAST"
+        "MOVE_RECOVER"
       ],
       "abilities": [
         "ABILITY_AROMA_VEIL"
@@ -13554,8 +13523,7 @@
         "MOVE_BUG_BUZZ",
         "MOVE_GIGA_DRAIN",
         "MOVE_ICE_BEAM",
-        "MOVE_QUIVER_DANCE",
-        "MOVE_TERA_BLAST"
+        "MOVE_QUIVER_DANCE"
       ],
       "abilities": [
         "ABILITY_ICE_SCALES"
@@ -13609,8 +13577,7 @@
       "moves": [
         "MOVE_BELLY_DRUM",
         "MOVE_ICE_SPINNER",
-        "MOVE_LIQUIDATION",
-        "MOVE_TERA_BLAST"
+        "MOVE_LIQUIDATION"
       ],
       "abilities": [
         "ABILITY_ICE_FACE"
@@ -13739,8 +13706,7 @@
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_DRAGON_DARTS",
-        "MOVE_FIRE_BLAST",
-        "MOVE_TERA_BLAST"
+        "MOVE_FIRE_BLAST"
       ],
       "abilities": [
         "ABILITY_CLEAR_BODY"
@@ -13946,7 +13912,6 @@
       "role": "Tera Blast user",
       "moves": [
         "MOVE_RAPID_SPIN",
-        "MOVE_TERA_BLAST",
         "MOVE_THUNDERBOLT",
         "MOVE_VOLT_SWITCH"
       ],
@@ -13973,8 +13938,7 @@
       "moves": [
         "MOVE_DRAGON_CLAW",
         "MOVE_DRAGON_DANCE",
-        "MOVE_EARTHQUAKE",
-        "MOVE_TERA_BLAST"
+        "MOVE_EARTHQUAKE"
       ],
       "abilities": [
         "ABILITY_DRAGONS_MAW"
@@ -14029,7 +13993,6 @@
         "MOVE_NASTY_PLOT",
         "MOVE_SHADOW_BALL",
         "MOVE_SUBSTITUTE",
-        "MOVE_TERA_BLAST",
         "MOVE_WILL_O_WISP"
       ],
       "abilities": [
@@ -15982,8 +15945,7 @@
       "moves": [
         "MOVE_GUNK_SHOT",
         "MOVE_PLAY_ROUGH",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_TERA_BLAST"
+        "MOVE_SWORDS_DANCE"
       ],
       "abilities": [
         "ABILITY_TOXIC_CHAIN"
@@ -16288,11 +16250,10 @@
         "MOVE_CALM_MIND",
         "MOVE_DARK_PULSE",
         "MOVE_RAPID_SPIN",
-        "MOVE_REST",
-        "MOVE_TERA_STARSTORM"
+        "MOVE_REST"
       ],
       "abilities": [
-        "ABILITY_TERA_SHIFT"
+        "ABILITY_TERRA"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -16302,11 +16263,10 @@
         "MOVE_CALM_MIND",
         "MOVE_EARTH_POWER",
         "MOVE_RAPID_SPIN",
-        "MOVE_REST",
-        "MOVE_TERA_STARSTORM"
+        "MOVE_REST"
       ],
       "abilities": [
-        "ABILITY_TERA_SHIFT"
+        "ABILITY_TERRA"
       ],
       "preferred_type": "TYPE_NONE"
     },

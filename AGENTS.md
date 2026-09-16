@@ -196,6 +196,13 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
 - Ordinary adjacent fights retain individual clears. Selected clearly announced
   endurance challenges may restart all legs. Preserve Lilith/Brenden's original
   overlap and individual wins; losing to Brenden does not reset Lilith.
+- Terastallization does not exist in this game (user direction, September 16). There
+  is no Tera gimmick, Tera Orb, Tera Shard, Tera Blast/Tera Starstorm, Tera type or
+  Tera form, and the engine code for all of it is deleted rather than gated. Terapagos
+  stays as an ordinary legendary: it carries the custom ability Terra, which changes it
+  into SPECIES_TERAPAGOS_AWAKENED on switch-in through the plain ability form-change
+  table - no orb, no charge, no Stellar type and no player-side counterpart. Do not
+  reintroduce any of it, and do not "restore" Terra to Tera Shift.
 - Continue on Medium. Difficulty is trainer levels only; preserve its formulas.
   New games initialize Medium, as explicitly directed by the user. Existing
   saves retain their selected difficulty. The earned save is already Medium.

@@ -4657,7 +4657,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "Glimmora's petals are made of\n"
             "crystallized poison energy. It has\n"
             "recently become evident that these\n"
-            "petals resemble Tera Jewels."),
+            "petals resemble cut gemstones."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,
@@ -7980,7 +7980,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #endif //P_FAMILY_FEZANDIPITI
 
 #if P_FAMILY_OGERPON
-#define OGERPON_SPECIES_INFO(Form1, Form2, type, ability, color, frontYOffset, iconpalette, isTeraform)    \
+#define OGERPON_SPECIES_INFO(Form1, Form2, type, ability, color, frontYOffset, iconpalette)                \
     {                                                                                                      \
         .baseHP        = 80,                                                                               \
         .baseAttack    = 120,                                                                              \
@@ -7989,7 +7989,6 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpAttack  = 60,                                                                               \
         .baseSpDefense = 96,                                                                               \
         .types = MON_TYPES(TYPE_GRASS, type),                                                              \
-        .forceTeraType = type,                                                                             \
         .catchRate = 5,                                                                                    \
         .expYield = 275,                                                                                   \
         .evYield_Attack = 3,                                                                               \
@@ -8041,20 +8040,13 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .formSpeciesIdTable = sOgerponFormSpeciesIdTable,                                                  \
         .formChangeTable = sOgerpon##Form1##FormChangeTable,                                               \
         .isSubLegendary = TRUE,                                                                            \
-        .isTeraForm = isTeraform,                                                                          \
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,                                                      \
     }
 
-    [SPECIES_OGERPON_TEAL]             = OGERPON_SPECIES_INFO(Teal,        Teal,            TYPE_GRASS, ABILITY_DEFIANT,                        BODY_COLOR_GREEN, 2, 1, FALSE),
-    [SPECIES_OGERPON_WELLSPRING]       = OGERPON_SPECIES_INFO(Wellspring,  Wellspring,      TYPE_WATER, ABILITY_WATER_ABSORB,                   BODY_COLOR_BLUE,  2, 0, FALSE),
-    [SPECIES_OGERPON_HEARTHFLAME]      = OGERPON_SPECIES_INFO(Hearthflame, Hearthflame,     TYPE_FIRE,  ABILITY_MOLD_BREAKER,                   BODY_COLOR_RED,   2, 0, FALSE),
-    [SPECIES_OGERPON_CORNERSTONE]      = OGERPON_SPECIES_INFO(Cornerstone, Cornerstone,     TYPE_ROCK,  ABILITY_STURDY,                         BODY_COLOR_GRAY,  2, 0, FALSE),
-#if P_TERA_FORMS
-    [SPECIES_OGERPON_TEAL_TERA]        = OGERPON_SPECIES_INFO(Teal,        TealTera,        TYPE_GRASS, ABILITY_EMBODY_ASPECT_TEAL_MASK,        BODY_COLOR_GREEN, 0, 1, TRUE),
-    [SPECIES_OGERPON_WELLSPRING_TERA]  = OGERPON_SPECIES_INFO(Wellspring,  WellspringTera,  TYPE_WATER, ABILITY_EMBODY_ASPECT_WELLSPRING_MASK,  BODY_COLOR_BLUE,  0, 0, TRUE),
-    [SPECIES_OGERPON_HEARTHFLAME_TERA] = OGERPON_SPECIES_INFO(Hearthflame, HearthflameTera, TYPE_FIRE,  ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK, BODY_COLOR_RED,   0, 0, TRUE),
-    [SPECIES_OGERPON_CORNERSTONE_TERA] = OGERPON_SPECIES_INFO(Cornerstone, CornerstoneTera, TYPE_ROCK,  ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK, BODY_COLOR_GRAY,  0, 0, TRUE),
-#endif //P_TERA_FORMS
+    [SPECIES_OGERPON_TEAL]             = OGERPON_SPECIES_INFO(Teal,        Teal,            TYPE_GRASS, ABILITY_DEFIANT,                        BODY_COLOR_GREEN, 2, 1),
+    [SPECIES_OGERPON_WELLSPRING]       = OGERPON_SPECIES_INFO(Wellspring,  Wellspring,      TYPE_WATER, ABILITY_WATER_ABSORB,                   BODY_COLOR_BLUE,  2, 0),
+    [SPECIES_OGERPON_HEARTHFLAME]      = OGERPON_SPECIES_INFO(Hearthflame, Hearthflame,     TYPE_FIRE,  ABILITY_MOLD_BREAKER,                   BODY_COLOR_RED,   2, 0),
+    [SPECIES_OGERPON_CORNERSTONE]      = OGERPON_SPECIES_INFO(Cornerstone, Cornerstone,     TYPE_ROCK,  ABILITY_STURDY,                         BODY_COLOR_GRAY,  2, 0),
 
 #endif //P_FAMILY_OGERPON
 
@@ -8335,7 +8327,6 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpAttack  = 65,
         .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_NORMAL),
-        .forceTeraType = TYPE_STELLAR,
         .catchRate = 255,
         .expYield = 90,
         .evYield_Defense = 1,
@@ -8344,19 +8335,19 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_TERA_SHIFT, ABILITY_NONE, ABILITY_NONE },
+        .abilities = { ABILITY_TERRA, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Terapagos"),
         .cryId = CRY_TERAPAGOS,
         .natDexNum = NATIONAL_DEX_TERAPAGOS,
-        .categoryName = _("Tera"),
+        .categoryName = _("Crystal"),
         .height = 2,
         .weight = 65,
         .description = COMPOUND_STRING(
             "Terapagos protects itself using its\n"
             "power to transform energy into hard\n"
-            "crystals. This Pokémon is the source\n"
-            "of the Terastal phenomenon."),
+            "crystals. Its shell is said to be\n"
+            "harder than any known mineral."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 365,
@@ -8395,7 +8386,9 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .formChangeTable = sTerapagosFormChangeTable,
     },
 
-    [SPECIES_TERAPAGOS_TERASTAL] =
+
+
+    [SPECIES_TERAPAGOS_AWAKENED] =
     {
         .baseHP        = 95,
         .baseAttack    = 95,
@@ -8404,7 +8397,6 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpAttack  = 105,
         .baseSpDefense = 110,
         .types = MON_TYPES(TYPE_NORMAL),
-        .forceTeraType = TYPE_STELLAR,
         .catchRate = 255,
         .expYield = 120,
         .evYield_Defense = 2,
@@ -8414,111 +8406,50 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_TERA_SHELL, ABILITY_NONE, ABILITY_NONE },
+        .abilities = { ABILITY_TERRA, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Terapagos"),
         .cryId = CRY_TERAPAGOS,
         .natDexNum = NATIONAL_DEX_TERAPAGOS,
-        .categoryName = _("Tera"),
+        .categoryName = _("Crystal"),
         .height = 3,
         .weight = 160,
         .description = COMPOUND_STRING(
-            "The shell is made of crystallized\n"
-            "Terastal energy. When struck by a move,\n"
-            "this shell absorbs the move's energy\n"
-            "and transfers it to Terapagos."),
+            "Its awakened shell is grown from pure\n"
+            "crystal. When struck by a move, the\n"
+            "shell absorbs that move's energy and\n"
+            "transfers it to Terapagos."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 365,
         .trainerOffset = 7,
-        .frontPic = gMonFrontPic_TerapagosTerastal,
+        .frontPic = gMonFrontPic_TerapagosAwakened,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .enemyMonElevation = 8,
-        .backPic = gMonBackPic_TerapagosTerastal,
+        .backPic = gMonBackPic_TerapagosAwakened,
         .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 11,
         //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_TerapagosTerastal,
-        .shinyPalette = gMonShinyPalette_TerapagosTerastal,
-        .iconSprite = gMonIcon_TerapagosTerastal,
+        .palette = gMonPalette_TerapagosAwakened,
+        .shinyPalette = gMonShinyPalette_TerapagosAwakened,
+        .iconSprite = gMonIcon_TerapagosAwakened,
         .iconPalIndex = 0,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-4, 8, SHADOW_SIZE_L)
-        FOOTPRINT(TerapagosTerastal)
+        FOOTPRINT(TerapagosAwakened)
         OVERWORLD(
-            sPicTable_TerapagosTerastal,
+            sPicTable_TerapagosAwakened,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
             sAnimTable_Following,
-            gOverworldPalette_TerapagosTerastal,
-            gShinyOverworldPalette_TerapagosTerastal
+            gOverworldPalette_TerapagosAwakened,
+            gShinyOverworldPalette_TerapagosAwakened
         )
         .isRestrictedLegendary = TRUE,
-        .isFrontierBanned = TRUE,
-        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
-        .levelUpLearnset = sTerapagosLevelUpLearnset,
-        .teachableLearnset = sTerapagosTeachableLearnset,
-        .formSpeciesIdTable = sTerapagosFormSpeciesIdTable,
-        .formChangeTable = sTerapagosFormChangeTable,
-    },
-
-    [SPECIES_TERAPAGOS_STELLAR] =
-    {
-        .baseHP        = 160,
-        .baseAttack    = 105,
-        .baseDefense   = 110,
-        .baseSpeed     = 85,
-        .baseSpAttack  = 130,
-        .baseSpDefense = 110,
-        .types = MON_TYPES(TYPE_NORMAL),
-        .forceTeraType = TYPE_STELLAR,
-        .catchRate = 255,
-        .expYield = 140,
-        .evYield_HP = 3,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 5,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_TERAFORM_ZERO, ABILITY_NONE, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Terapagos"),
-        .cryId = CRY_TERAPAGOS,
-        .natDexNum = NATIONAL_DEX_TERAPAGOS,
-        .categoryName = _("Tera"),
-        .height = 17,
-        .weight = 770,
-        .description = COMPOUND_STRING(
-            "An old expedition journal describes the\n"
-            "sight of this Pokémon buried in the,\n"
-            "depths of the earth as resembling a\n"
-            "planet floating in space."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 365,
-        .trainerOffset = 7,
-        .frontPic = gMonFrontPic_TerapagosStellar,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .backPic = gMonBackPic_TerapagosStellar,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
-        .backPicYOffset = 0,
-        //.backAnimId = BACK_ANIM_NONE,
-        .palette = gMonPalette_TerapagosStellar,
-        .shinyPalette = gMonShinyPalette_TerapagosStellar,
-        .iconSprite = gMonIcon_TerapagosStellar,
-        .iconPalIndex = 0,
-        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 12, SHADOW_SIZE_L)
-        FOOTPRINT(TerapagosStellar)
-        .isRestrictedLegendary = TRUE,
-        .isTeraForm = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sTerapagosLevelUpLearnset,

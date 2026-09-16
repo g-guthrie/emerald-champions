@@ -15,7 +15,6 @@
 #include "battle_factory.h"
 #include "battle_setup.h"
 #include "battle_z_move.h"
-#include "battle_terastal.h"
 #include "data.h"
 #include "debug.h"
 #include "event_data.h"
@@ -3047,7 +3046,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         enum Type types[3];
         enum Type typeArg = GetMoveArgType(move);
 
-        GetBattlerTypes(battlerDef, FALSE, types);
+        GetBattlerTypes(battlerDef, types);
         if (PartnerMoveIsSameAsAttacker(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove)
             || (types[0] == typeArg && types[1] == typeArg && types[2] == TYPE_MYSTERY))
             ADJUST_SCORE(-10);    // target is already water-only

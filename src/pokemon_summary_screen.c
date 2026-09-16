@@ -165,7 +165,6 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 sanity;
         u8 OTName[17];
         u32 OTID;
-        enum Type teraType;
         u8 mintNature;
     } summary;
     u16 bgTilemapBuffers[PSS_PAGE_COUNT][2][0x400];
@@ -1568,7 +1567,6 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         break;
     default:
         sum->ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
-        sum->teraType = GetMonData(mon, MON_DATA_TERA_TYPE);
         sum->isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
         return TRUE;
     }
@@ -4273,10 +4271,6 @@ static void SetMonTypeIcons(void)
         else
         {
             SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, TRUE);
-        }
-        if (P_SHOW_TERA_TYPE >= GEN_9)
-        {
-            SetTypeSpritePosAndPal(summary->teraType, 200, 48, SPRITE_ARR_ID_TYPE + 2);
         }
     }
 }

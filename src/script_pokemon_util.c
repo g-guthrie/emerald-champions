@@ -43,10 +43,6 @@ void HealPlayerParty(void)
         HealPokemon(&gParties[B_TRAINER_PLAYER][i]);
     if (OW_PC_HEAL >= GEN_8)
         HealPlayerBoxes();
-
-    // Recharge Tera Orb, if possible.
-    if (!IsTeraOrbCharged() && CheckBagHasItem(ITEM_TERA_ORB, 1))
-        FlagSet(B_FLAG_TERA_ORB_CHARGED);
 }
 
 static void HealPlayerBoxes(void)
@@ -339,29 +335,6 @@ void ToggleGigantamaxFactor(struct ScriptContext *ctx)
     }
 }
 
-void CheckTeraType(struct ScriptContext *ctx)
-{
-    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1);
-
-    gSpecialVar_Result = TYPE_NONE;
-
-    if (partyIndex < PARTY_SIZE)
-        gSpecialVar_Result = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_TERA_TYPE);
-}
-
-void SetTeraType(struct ScriptContext *ctx)
-{
-    enum Type type = ScriptReadByte(ctx);
-    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-
-    if (type < NUMBER_OF_MON_TYPES && partyIndex < PARTY_SIZE)
-        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_TERA_TYPE, &type);
-}
-
 /* Creates a Pokemon via script
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
@@ -451,8 +424,6 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     monTemplate.gmaxFactor   = PARSE_FLAG(22, FALSE);
     if (flags & (1 << 23))
     {
-        monTemplate.teraType = VarGet(ScriptReadHalfword(ctx));
-        monTemplate.doNotUseDefaultTeraType = TRUE;
     }
     monTemplate.dmaxLevel    = PARSE_FLAG(24, 0);
     monTemplate.isEgg        = PARSE_FLAG(25, FALSE);

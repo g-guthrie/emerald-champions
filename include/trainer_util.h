@@ -4,7 +4,6 @@
 struct TrainerGenerator
 {
     u8 gender:6;
-    u8 smartTera:1;
     u8 isFrontier:1;
     u8 trainerClass;
     u8 padding;

@@ -1731,28 +1731,17 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler)
     enum Type type = GetMoveType(move);
     enum BattleMoveEffects effect = GetMoveEffect(move);
 
-    if (effect == EFFECT_TERA_BLAST)
+    if (effect == EFFECT_IVY_CUDGEL)
     {
-        if (IsGimmickSelected(battler, GIMMICK_TERA) || GetActiveGimmick(battler) == GIMMICK_TERA)
-            type = GetBattlerTeraType(battler);
-    }
-    else if (effect == EFFECT_IVY_CUDGEL)
-    {
-        if (speciesId == SPECIES_OGERPON_WELLSPRING || speciesId == SPECIES_OGERPON_WELLSPRING_TERA
-         || speciesId == SPECIES_OGERPON_HEARTHFLAME || speciesId == SPECIES_OGERPON_HEARTHFLAME_TERA
-         || speciesId == SPECIES_OGERPON_CORNERSTONE || speciesId == SPECIES_OGERPON_CORNERSTONE_TERA)
+        if (speciesId == SPECIES_OGERPON_WELLSPRING
+         || speciesId == SPECIES_OGERPON_HEARTHFLAME
+         || speciesId == SPECIES_OGERPON_CORNERSTONE)
             type = GetSpeciesType(speciesId, 1);
     }
     else if (GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS
              && (GetActiveGimmick(battler) == GIMMICK_DYNAMAX || IsGimmickSelected(battler, GIMMICK_DYNAMAX)))
     {
         type = TYPE_NORMAL; // Max Guard is always a Normal-type move
-    }
-    else if (effect == EFFECT_TERA_STARSTORM)
-    {
-        if (speciesId == SPECIES_TERAPAGOS_STELLAR
-        || (IsGimmickSelected(battler, GIMMICK_TERA) && speciesId == SPECIES_TERAPAGOS_TERASTAL))
-            type = TYPE_STELLAR;
     }
     else if (P_SHOW_DYNAMIC_TYPES) // Non-vanilla changes to battle UI showing dynamic types
     {
@@ -1807,7 +1796,7 @@ static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
 
         if (GetBattlerSide(foe) == GetBattlerSide(battler) || !IsBattlerAlive(foe))
             continue;
-        GetBattlerTypes(foe, FALSE, types);
+        GetBattlerTypes(foe, types);
         StringCopy(typeText, gTypesInfo[types[0]].name);
         if (types[1] != types[0] && types[1] != TYPE_MYSTERY)
         {

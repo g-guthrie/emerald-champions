@@ -190,9 +190,6 @@ TEST("Item names fit on Pokemon Storage System")
     // All items explicitly listed here are too big to fit.
     switch (item)
     {
-    case ITEM_ELECTRIC_TERA_SHARD:
-    case ITEM_FIGHTING_TERA_SHARD:
-    case ITEM_PSYCHIC_TERA_SHARD:
     case ITEM_UNREMARKABLE_TEACUP:
     case ITEM_MASTERPIECE_TEACUP:
     case ITEM_TWICE_SPICED_RADISH:
@@ -764,7 +761,6 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_PROTEANTYPECHANGE:
     case STRINGID_THIRDTYPEADDED:
     case STRINGID_ATTACKERLOSTITSTYPE:
-    case STRINGID_PKMNTERASTALLIZEDINTO:
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, longTypeName);
         break;
     // Buffer Species name to B_BUFF1

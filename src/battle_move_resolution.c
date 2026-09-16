@@ -2716,13 +2716,6 @@ static enum CancelerResult CancelerPreAnimActivations(struct BattleCalcValues *c
             if (ShouldSkipBattlerForDamage(cv->battlerAtk, battlerDef))
                 continue;
 
-            if (gSpecialStatuses[battlerDef].teraShellAbilityDone)
-            {
-                gSpecialStatuses[battlerDef].teraShellAbilityDone = FALSE;
-                gBattleScripting.battler = battlerDef;
-                BattleScriptCall(BattleScript_TeraShellDistortingTypeMatchups);
-                return CANCELER_RESULT_RUN_SCRIPT;
-            }
         }
         gBattleStruct->eventState.moveEndBlock++;
     case PRE_ANIM_RESIST_BERRY:
@@ -5192,12 +5185,6 @@ static enum MoveEndResult MoveEndClearBits(struct BattleCalcValues *cv)
     if (gBattleMons[cv->battlerAtk].volatiles.destinyBond > 0)
         gBattleMons[cv->battlerAtk].volatiles.destinyBond--;
 
-    // check if Stellar type boost should be used up
-    if (GetActiveGimmick(cv->battlerAtk) == GIMMICK_TERA
-     && GetBattlerTeraType(cv->battlerAtk) == TYPE_STELLAR
-     && !IsBattleMoveStatus(cv->move)
-     && IsTypeStellarBoosted(cv->battlerAtk, moveType))
-        ExpendTypeStellarBoost(cv->battlerAtk, moveType);
     memset(gQueuedStatBoosts, 0, sizeof(gQueuedStatBoosts));
 
     for (enum BattlerId i = 0; i < gBattlersCount; i++)

@@ -55,7 +55,6 @@ Optional fields for Pokemon:
     - Dynamax Level (Number between 0 and 10, default 10, also sets "shouldDynamax" to True)
     - Gigantamax (Yes/No, sets to Gigantamax factor)
                  (doesn't do anything to Pokemon without a Gigantamax form, also sets "shouldDynamax" to True)
-    - Tera Type (Set to a Type, either Fire or TYPE_FIRE, also sets "shouldTerastal" to True)
 Moves are defined with a - (dash) followed by a single space, then the move name.
 Either "- Tackle" or "- MOVE_TACKLE" works. One move per line.
 Moves have to be the last lines of a Pokemon.
@@ -27634,12 +27633,12 @@ Nature: NATURE_CALM
 SPECIES_TERAPAGOS @ ITEM_LIFE_ORB
 Level: 102
 Level Offset: 2
-Ability: ABILITY_TERA_SHIFT
+Ability: ABILITY_TERRA
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 Nature: NATURE_MODEST
-- MOVE_TERA_STARSTORM
+- MOVE_TRI_ATTACK
 - MOVE_EARTH_POWER
 - MOVE_ICE_BEAM
 - MOVE_PROTECT

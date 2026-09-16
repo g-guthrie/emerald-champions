@@ -746,7 +746,6 @@ UNUSED static const struct BoxPokemon sBoxPokemonConstantsFit =
     .compressedStatus = ARRAY_COUNT(sCompressedStatuses) - 1,
     .secure.substructs[0].type0 = {
         .species = NUM_SPECIES - 1,
-        .teraType = NUMBER_OF_MON_TYPES - 1,
         .heldItem = ITEMS_COUNT - 1,
         .pokeball = POKEBALL_COUNT - 1,
     },
@@ -954,8 +953,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
     value = boxMon->personality & 0x1;
-    enum Type teraType = value == 0 ? GetSpeciesType(species, 0) : GetSpeciesType(species, 1);
-    SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
     //using gen 3-4 ability formula, it was changed in later gens
     if (GetSpeciesAbility(species, 1))
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
@@ -2403,24 +2400,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_GIGANTAMAX_FACTOR:
             retVal = GetSubstruct3(boxMon)->gigantamaxFactor;
             break;
-        case MON_DATA_TERA_TYPE:
-            {
-                struct PokemonSubstruct0 *substruct0 = GetSubstruct0(boxMon);
-                if (gSpeciesInfo[substruct0->species].forceTeraType)
-                {
-                    retVal = gSpeciesInfo[substruct0->species].forceTeraType;
-                }
-                else if (substruct0->teraType == TYPE_NONE) // Tera Type hasn't been modified so we can just use the personality
-                {
-                    const enum Type *types = gSpeciesInfo[substruct0->species].types;
-                    retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
-                }
-                else
-                {
-                    retVal = substruct0->teraType;
-                }
-            }
-            break;
         case MON_DATA_EVOLUTION_TRACKER:
             {
                 struct PokemonSubstruct1 *substruct1 = GetSubstruct1(boxMon);
@@ -2848,9 +2827,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_GIGANTAMAX_FACTOR:
             SET8(GetSubstruct3(boxMon)->gigantamaxFactor);
-            break;
-        case MON_DATA_TERA_TYPE:
-            SET8(GetSubstruct0(boxMon)->teraType);
             break;
         case MON_DATA_EVOLUTION_TRACKER:
         {
@@ -6137,10 +6113,6 @@ enum Species GetFormChangeTargetSpecies_Internal(struct FormChangeContext ctx)
             if (formChanges[i].param1 == ctx.ability)
                 targetSpecies = formChanges[i].targetSpecies;
             break;
-        case FORM_CHANGE_BATTLE_TERASTALLIZATION:
-            if (ctx.teraType == formChanges[i].param1)
-                targetSpecies = formChanges[i].targetSpecies;
-            break;
         case FORM_CHANGE_BATTLE_BEFORE_MOVE:
         case FORM_CHANGE_BATTLE_AFTER_MOVE:
             if (formChanges[i].param1 == gCurrentMove
@@ -6465,7 +6437,6 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 
     bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
     u32 hiddenNature = GetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE);
-    enum Type teraType = GetBoxMonData(boxMon, MON_DATA_TERA_TYPE);
 
     old = *boxMon;
     old0 = &(GetSubstruct(&old, old.personality, SUBSTRUCT_TYPE_0)->type0);
@@ -6488,7 +6459,6 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 
     SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
     SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
-    SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
 }
 
 void HealPokemon(struct Pokemon *mon)
@@ -6655,12 +6625,6 @@ bool32 IsSpeciesForeignRegionalForm(enum Species species, enum Region currentReg
             return TRUE;
     }
     return FALSE;
-}
-
-enum Type GetTeraTypeFromPersonality(struct Pokemon *mon)
-{
-    const u8 *types = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types;
-    return (GetMonData(mon, MON_DATA_PERSONALITY) & 0x1) == 0 ? types[0] : types[1];
 }
 
 struct Pokemon *GetSavedPlayerPartyMon(u32 index)
@@ -6860,15 +6824,6 @@ static bool32 ResolveIsEgg(u32 isEggTemplate)
     return isEggTemplate;
 }
 
-static bool32 ResolveTeraType(u32 teraTypeTemplate)
-{
-    assertf(teraTypeTemplate != TYPE_NONE && teraTypeTemplate != TYPE_MYSTERY && teraTypeTemplate < NUMBER_OF_MON_TYPES, "using invalid tera type %d when creating pokemon", teraTypeTemplate)
-    {
-        return TYPE_STELLAR;
-    }
-    return teraTypeTemplate;
-}
-
 static enum Item ResolveHeldItem(u32 heldItemTemplate)
 {
     assertf(heldItemTemplate < ITEMS_COUNT,"using invalid item %d when creating pokemon", heldItemTemplate)
@@ -6929,12 +6884,6 @@ void CreateMonFromTemplate(struct Pokemon *mon, const struct PokemonTemplate *mo
 
     bool32 gmaxFactor = ResolveGmaxFactor(monTemplate->gmaxFactor);
     SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &gmaxFactor);
-
-    if (monTemplate->doNotUseDefaultTeraType)
-    {
-        enum Type teraType = ResolveTeraType(monTemplate->teraType);
-        SetMonData(mon, MON_DATA_TERA_TYPE, &teraType);
-    }
 
     bool32 isEgg = ResolveIsEgg(monTemplate->isEgg);
     SetMonData(mon, MON_DATA_IS_EGG, &isEgg);

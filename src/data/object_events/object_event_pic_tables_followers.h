@@ -6673,18 +6673,6 @@ static const struct SpriteFrameImage sPicTable_OgerponHearthflame[] = {
 static const struct SpriteFrameImage sPicTable_OgerponCornerstone[] = {
     overworld_ascending_frames(gObjectEventPic_OgerponCornerstone, 4, 4),
 };
-static const struct SpriteFrameImage sPicTable_OgerponTealTera[] = {
-    overworld_ascending_frames(gObjectEventPic_OgerponTeal, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_OgerponWellspringTera[] = {
-    overworld_ascending_frames(gObjectEventPic_OgerponWellspring, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_OgerponHearthflameTera[] = {
-    overworld_ascending_frames(gObjectEventPic_OgerponHearthflame, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_OgerponCornerstoneTera[] = {
-    overworld_ascending_frames(gObjectEventPic_OgerponCornerstone, 4, 4),
-};
 #endif //P_FAMILY_OGERPON
 
 #if P_FAMILY_GOUGING_FIRE
@@ -6715,12 +6703,9 @@ static const struct SpriteFrameImage sPicTable_IronCrown[] = {
 static const struct SpriteFrameImage sPicTable_TerapagosNormal[] = {
     overworld_ascending_frames(gObjectEventPic_TerapagosNormal, 4, 4),
 };
-static const struct SpriteFrameImage sPicTable_TerapagosTerastal[] = {
-    overworld_ascending_frames(gObjectEventPic_TerapagosTerastal, 4, 4),
+static const struct SpriteFrameImage sPicTable_TerapagosAwakened[] = {
+    overworld_ascending_frames(gObjectEventPic_TerapagosAwakened, 4, 4),
 };
-//static const struct SpriteFrameImage sPicTable_TerapagosStellar[] = {
-//    overworld_ascending_frames(gObjectEventPic_TerapagosStellar, 4, 4),
-//};
 #endif //P_FAMILY_TERAPAGOS
 
 #if P_FAMILY_PECHARUNT

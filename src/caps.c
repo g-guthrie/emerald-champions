@@ -129,7 +129,7 @@ u32 GetLevelCapForSpecies(enum Species species, u32 baseline)
     // Temporary battle transformations do not apply a second level penalty.
     // Stable fused/rider forms retain their own configured base-stat budget.
     if (info->isMegaEvolution || info->isPrimalReversion || info->isUltraBurst
-        || info->isGigantamax || info->isTeraForm)
+        || info->isGigantamax)
         species = GET_BASE_SPECIES_ID(species);
     info = &gSpeciesInfo[species];
     if (!(info->isRestrictedLegendary || info->isSubLegendary || info->isMythical))
