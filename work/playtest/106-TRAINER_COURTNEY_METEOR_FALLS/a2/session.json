@@ -1,0 +1,38 @@
+{
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141",
+  "elf_sha256": "70db6be9e609d4fe1de497fd4620a12369072b83a1e79ed108d6b35460058fc5",
+  "seed": 206,
+  "trainer_a": "TRAINER_COURTNEY_METEOR_FALLS",
+  "trainer_b": "TRAINER_GRUNT_METEOR_FALLS",
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 36,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/106-TRAINER_COURTNEY_METEOR_FALLS/party-a2.json",
+  "party_sha256": "b340d6025ce2abbe4bd8c49f6aeccf72ad4db71044e0a1038e91e10da5ca39ce",
+  "script_pairing": {
+    "a": "TRAINER_COURTNEY_METEOR_FALLS",
+    "b": "TRAINER_GRUNT_METEOR_FALLS",
+    "partner": "PARTNER_NONE",
+    "script": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/data/maps/MeteorFalls_1F_1R/scripts.inc"
+  },
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY"
+  ],
+  "prepared": {
+    "encounter": "E0127 TRAINER_COURTNEY_METEOR_FALLS + TRAINER_GRUNT_METEOR_FALLS, one two-owner battle (Meteor Falls 1F 1R, cap 36 window)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1489
+  },
+  "replacement_commits": {
+    "turn": 6,
+    "slots": {
+      "2": 3
+    }
+  }
+}
