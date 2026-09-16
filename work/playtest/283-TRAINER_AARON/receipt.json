@@ -1,0 +1,24 @@
+{
+  "play_order": 283, "e_group": "E0446", "trainer": "TRAINER_AARON", "class": "ace", "location": "Route134",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-7",
+  "party_manifest": "work/playtest/283-TRAINER_AARON/party_route134_84.json",
+  "availability_note": "Route 134 is the last sail lane of the same Pacifidlog-Slateport trip; same gate<=68 pool-84 party (Landorus and Tapu Fini are reachable legends). Nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/283-TRAINER_AARON/a1", "seed": 1, "outcome": "won", "turns": 4, "decisions": 7, "player_faints": 2, "opponent_faints": 4, "note": "Faints: Urshifu (Draco Meteor into Sash + Rock Slide), Incineroar (+1 Dragon Claw / Rock Slide)."}
+  ],
+  "strategy_checks": [
+    {"check": "Noivern chooses Tailwind when it creates a Tyrantrum turn", "result": "PASS", "evidence": "T1 chose Tailwind (Fake Out flinched it); T2 with Tyrantrum already dead it switched to Draco Meteor into Urshifu (broke the Sash) instead of a now-pointless Tailwind - exactly the conditional the plan describes."},
+    {"check": "Tyrantrum attacks turn 1 (Strong Jaw / Rock Slide)", "result": "PASS (selected)", "evidence": "T1 chose Rock Slide; OHKOed by Close Combat (2x) before moving."},
+    {"check": "Mega Dragonite dances or Extreme Speeds; Multiscale removed by chip before the dance", "result": "PASS", "evidence": "T3 Dragonite Mega Evolved and used Dragon Dance behind Druddigon's Protect while my Knock Off took it to 233/273 (Multiscale spent). T4 +1 Dragon Claw KOed Incineroar; Moonblast then removed it. Extreme Speed never chosen because the only remaining targets were Ghost/Fairy - correct."},
+    {"check": "Druddigon Sheer Force coverage / Haban Berry", "result": "PASS (Sheer Force Rock Slide) / NOT EXERCISED (Haban: Knock Off removed it, and no Dragon move was used)", "evidence": "T2 Rock Slide finished sashed Urshifu and hit Incineroar 2x; T4 Rock Slide KOed Incineroar."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "user": "Druddigon", "payoff": "REAL - blocked Flutter Mane's Moonblast (2x) while Mega Dragonite Dragon Danced for free. Textbook partner-cover Protect."},
+    {"turn": "other", "entry": "Noivern and Dragonite carry Protect and did not use it; no empty Protects."}
+  ],
+  "ai_defects": [],
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "The four-dragon spread plays well: the Tailwind-or-attack conditional fired correctly, the Protect covered the dance, and the dance produced a KO. Two faints, keep. What the fight lacks is any way for the Dragons to touch a Ghost/Fairy - once Flutter Mane is on the field, Mega Dragonite has literally no legal damaging move against it (Dragon Claw, Extreme Speed both blanked). A Fire or Steel coverage move on Dragonite (not this pass) would close that hole.",
+  "authored_set_legality": "No problem; all four sets played as written and Dragonite Mega Evolved on T3."
+}
