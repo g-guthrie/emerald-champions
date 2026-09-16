@@ -1,0 +1,67 @@
+{
+  "play_order": 144,
+  "e_group": "E0170",
+  "trainer": "TRAINER_JODY",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "room_thesis": "Normal moves that stopped being Normal, in the other direction - Aerilate converts to Flying and snowballs.",
+  "cap": 42,
+  "difficulty": "medium",
+  "mega_slots": 2,
+  "ai_trait": "Ace Pokemon",
+  "resolved_opponent_levels": {"TAUROS": 42, "PINSIR": 39, "SAWSBUCK": 42, "BOUFFALANT": 42, "DIGGERSBY": 41, "PORYGON_Z": 42},
+  "cap_window_confirmation": "Authored offsets 2/-1/2/2/1/2 resolved to 42/39/42/42/41/42, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42. This is the last encounter in my block and the last before Norman, so cap 42 holds throughout; 48 begins at play_order 146.",
+  "party_manifest": "work/playtest/144-TRAINER_JODY/party.json",
+  "pre_declared_strategy_checks": [
+    "Tauros's Intimidate fires on entry",
+    "Mega Pinsir gains Aerilate and its Double-Edge and Quick Attack become Flying-type",
+    "Base Moxie and post-Mega Aerilate do not coexist, so the AI must not plan a Moxie chain through the transition",
+    "Rock is 4x into Mega Pinsir's Bug/Flying and is the room's named counterplay",
+    "Sawsbuck's Sap Sipper blanks a Grass move and raises Attack (tested by omission - no Grass move was brought)",
+    "Diggersby's Choice Band plus Huge Power is the pure breaker, and the Choice lock is exploitable",
+    "Porygon-Z's Choice Specs Adaptability is the special mode and does not care about Intimidate",
+    "No member of this room has Scrappy, so Ghost typing blanks Tauros's and Bouffalant's Normal moves",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/144-TRAINER_JODY/a1", "seed": 144, "outcome": "won", "turns": 8, "decisions": 12, "player_faints": 3, "opponent_faints": 6,
+     "narrative": "T1 Tauros's Intimidate landed on both of my battlers before I gave a command - and it cost nothing, because Mega Aggron's damage comes from Body Press, which reads Defense. Pinsir Mega Evolved into Aerilate and both opponents threw Close Combat at Mega Aggron, correctly identifying the Steel type as the Fighting-weak target; Filter kept it alive at 80 of 150. My Rock Slide is 4x into Mega Pinsir's new Bug/Flying and took it to 12 HP. T2 Mega Pinsir used Aerilate Double-Edge into my Steel-type Aegislash, which resists Flying, and died to its own recoil - the ace killed itself with the drawback of its own converted move. Rock Slide finished Tauros. T3 Porygon-Z's Choice Specs Adaptability Dark Pulse killed a 47 HP Mega Aggron outright before Body Press resolved, while Diggersby locked itself into High Horsepower against the Togekiss I had just switched in, which is a hard immunity. T4-T5 with both Choice users locked into moves that were 0x and 0.5x into Togekiss, Weavile's Icicle Crash killed Diggersby and its Knock Off killed Porygon-Z. T6-T8 Sawsbuck Protected twice at low HP and eventually killed itself with Double-Edge recoil at 5 HP; Bouffalant's Head Charge and Wild Charge took Weavile and Chandelure, and Knock Off finished it."}
+  ],
+  "strategy_checks": [
+    {"check": "Tauros Intimidate on entry", "result": "PASS", "evidence": "Both of my battlers showed atk -1 at turn 0 before any command. Worth noting for the design record that it achieved nothing here: Mega Aggron attacks with Body Press, which uses Defense, and Aegislash's damage that turn came from Sacred Sword, which ignores stat stages. Two of the standard answers to this room are structurally Intimidate-proof."},
+    {"check": "Mega Pinsir Aerilate", "result": "PASS", "evidence": "Pinsir Mega Evolved on turn 1 and the battler reported ABILITY_AERILATE. On turn 2 it used Double-Edge and the result printed 'It's not very effective...' against my Ghost/Steel Aegislash - Normal would be 0x into a Ghost, so the move was definitively converted to Flying, which Steel resists. The conversion is real and verified."},
+    {"check": "Moxie and Aerilate do not coexist", "result": "PASS", "evidence": "Pinsir entered with ABILITY_MOXIE and became ABILITY_AERILATE on Mega Evolution. It scored no KO before the transition and none after, so no Moxie chain was attempted or possible. The dossier's warning is satisfied."},
+    {"check": "Rock is 4x into Mega Pinsir", "result": "PASS, and it is the fight's decisive move", "evidence": "'It's extremely effective on the opposing Pinsir!' - a single Rock Slide from an Impish, zero-Attack-EV Mega Aggron took a 112 HP Mega Pinsir to 12. The dossier names Rock first in its counterplay list and it is not an overstatement: 4x on the room's ace, from a spread move, off an uninvested attacker."},
+    {"check": "Sawsbuck Sap Sipper", "result": "NOT TESTED, by construction", "evidence": "No Grass move was brought. The ability shaped the party without firing."},
+    {"check": "Diggersby Choice lock is exploitable", "result": "PASS, decisively", "evidence": "Diggersby's first action was High Horsepower into the Togekiss I had just switched in - a Ground move into a Flying type, 'It doesn't affect Togekiss...'. It was then locked into that move for the rest of its life and could not touch Togekiss at all. This is the dossier's own 'exploit the lock' counterplay and it is the reason the back half of the battle was survivable."},
+    {"check": "Porygon-Z Choice Specs Adaptability", "result": "PASS, and it is the room's best member", "evidence": "One Dark Pulse killed a 47 HP Mega Aggron. Adaptability turns Dark Pulse's STAB into a 2x multiplier and Choice Specs adds 50 percent on top; against a Steel type that had already taken two Close Combats it was lethal. The dossier's line that the special mode 'does not care about Intimidate' is exactly right and it is the answer to a player who builds a physical wall room."},
+    {"check": "No Scrappy in this room", "result": "PASS", "evidence": "Bouffalant's Head Charge and Tauros's Double-Edge are both Normal, and my Chandelure took none of them - Bouffalant used Wild Charge and High Horsepower into it instead. This room, like Alexia's, has no Scrappy, unlike Berke's and Mary's."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Two Protects, both from Sawsbuck at low HP, both blocking real damage. See the ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 6, "battler": "SAWSBUCK", "payoff": "EXCELLENT. Sawsbuck Protected on the turn it arrived and blocked both an Icicle Crash (2x into Normal/Grass) and an Air Slash (2x into Grass). Those two attacks would have killed a 132 HP body outright; instead Sawsbuck survived and its partner's Head Charge killed my Weavile in the same turn."},
+    {"turn": 8, "battler": "SAWSBUCK", "payoff": "GOOD, and not a consecutive repeat - Sawsbuck had attacked with High Horsepower in between, killing my Chandelure. At 5 of 132 HP it blocked an Incineroar Fake Out. It then died on the following turn to its own Life Orb Double-Edge recoil."}
+  ],
+  "protect_ledger_note": "Two guards in eight turns, both from the same battler, both at or near lethal range, separated by an attacking turn. No empty guards and no failed consecutive repeats.",
+  "ai_defects": [
+    {"id": "P12-D9", "severity": "low", "turn": 9, "trainer": "TRAINER_JODY", "battler": "SAWSBUCK",
+     "board": "Sawsbuck at 5 of 132 HP holding a Life Orb, with MOVE_PROTECT on its set and having successfully used it the previous turn.",
+     "chosen": "MOVE_DOUBLE_EDGE",
+     "why_wrong": "Double-Edge has 33 percent recoil AND the Life Orb takes a further 10 percent of maximum HP - 13 for this Sawsbuck - so at 5 HP the move was a guaranteed self-KO before the recoil was even counted. The log reads 'The opposing Sawsbuck was damaged by the recoil! / The opposing Sawsbuck fainted!' with no mention of my attacks killing it.",
+     "better_action": "MOVE_HORN_LEECH, which is on the set, drains HP rather than costing it, and would have healed Sawsbuck out of lethal range. MOVE_PROTECT is also better than a self-KO.",
+     "note": "This is the same class of defect as P12-D7 (Cinccino's Life Orb self-KO at 2 HP in Randall's room at play_order 138), and it is the second independent instance in this Gym. The self-damage components of a chosen move - Life Orb recoil and the move's own recoil - do not appear to be subtracted from the move's value when they are lethal to the user. Unlike P12-D7 this one had a drain move available as a strict improvement, which makes it a cleaner test case. I am rating it low severity only because Sawsbuck was at 5 HP against two healthy attackers and was likely dead regardless; the underlying scoring gap is the same one and is worth one shared fix. Not fixed here; the brief forbids editing AI C code in this pass."}
+  ],
+  "ai_notes": [
+    "Turn 1 is a good example of correct target selection under no information: both Tauros and Mega Pinsir independently chose Close Combat and both aimed it at Mega Aggron, the Steel type, rather than at the Ghost/Steel Aegislash which is immune to Fighting. Two battlers, two correct reads.",
+    "Porygon-Z killing a Mega Aggron with one Choice Specs Adaptability Dark Pulse is the cleanest demonstration in my block of why a special attacker belongs in a physical room.",
+    "Sawsbuck's first Protect, on its arrival turn against two super-effective attacks, was excellent.",
+    "Diggersby's opening High Horsepower into a Flying type is not a defect - the opponent cannot read my pending switch, and Togekiss arrived in the same turn. It is simply the Choice lock doing what the dossier says it does.",
+    "AI decision time peaked at 1.021 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt with 3 of 6 player faints including my Mega Evolution. Brief rule 5 and the AGENTS.md three-faint threshold both say keep. No level change. Mega Pinsir at -1 is correctly priced - it is frail at 112 HP and 4x weak to Rock, and the negative offset is the right compensation for a Mega in a room that already has a Choice Band Huge Power breaker and a Choice Specs Adaptability special attacker.",
+  "could_this_be_cooler": "Keep the six. This is the most functional room in the Gym in the sense that every member did something: Tauros landed Intimidate, Mega Pinsir forced me to spend my Mega's turn on a Rock move, Diggersby and Porygon-Z punished the two opposite kinds of wall, Sawsbuck guarded well and Bouffalant took two of my six. The dossier's revision - giving Mega Pinsir Aerilate Quick Attack instead of a Facade with no status source - is clearly right in principle, and I want to flag that I never saw it: Mega Pinsir got one action and spent it on Double-Edge. The priority Flying attack that the dossier calls 'the memorable moment of the room' needs Pinsir to survive a turn, and at 112 HP with a 4x Rock weakness against a cap-42 player who has read the crack list, it does not. That is the same lateness pattern I recorded for Gourgeist at play_order 136 and Obstagoon at play_order 142, and it is now a Gym-wide theme worth raising with the main agent: several rooms' signature interactions sit on their most fragile member. One concrete idea that costs nothing thematically - lead Pinsir beside Sawsbuck rather than beside Tauros. Sap Sipper and a Life Orb Horn Leech give the player something else to answer on turn one, and Tauros's Intimidate is worth more later against a physical attacker that has actually arrived, rather than being spent on turn zero against whatever the player happened to lead."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
