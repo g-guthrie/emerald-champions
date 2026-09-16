@@ -510,6 +510,13 @@ ROM without the native guard reports that side's faints as zero once the battle
 has ended, which is why the final `act` of a won battle can show
 `opponent_faints: 0`.
 
+When an `act` cannot reach the next decision point the driver checks whether the
+ROM has stopped in its crash handler, and if so fails with the captured screen
+rather than spending the whole frame budget. A native `assertf` failure otherwise
+looks exactly like a battle that will not progress. The crash screen carries the
+assertion text, so `crash.png` in the run directory is the evidence. A receipt
+whose run stalled this way is void: the battle never finished.
+
 `field_source` reports where the battle's field state came from. The engine's
 only setup-side channel for weather or terrain is the trainer's authored
 `startingStatus` (`Starting Status:` in `src/data/trainers.party`), which

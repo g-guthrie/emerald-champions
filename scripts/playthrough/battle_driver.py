@@ -315,6 +315,7 @@ class Session:
         self.meta = json.loads(self.meta_path.read_text()) if self.meta_path.exists() else {}
         self.constants = None
         self._syms = None
+        self._sizes = None
 
     @property
     def syms(self):
@@ -336,6 +337,41 @@ class Session:
         for path, key in ((self.rom, 'rom_sha256'), (self.elf, 'elf_sha256')):
             if hashlib.sha256(path.read_bytes()).hexdigest() != self.meta[key]:
                 fail(f'artifact mismatch, this run needs its own saved build: {path}')
+
+    def symbol_sizes(self):
+        """{name: (address, size)} from nm -S, for address-range containment."""
+        if self._sizes is None:
+            out = ui.run([shutil.which('arm-none-eabi-nm'), '-S', str(self.elf)]).stdout
+            self._sizes = {}
+            for line in out.splitlines():
+                parts = line.split()
+                if len(parts) >= 4 and re.fullmatch('[0-9a-fA-F]+', parts[0]) \
+                   and re.fullmatch('[0-9a-fA-F]+', parts[1]):
+                    self._sizes[parts[-1]] = (int(parts[0], 16), int(parts[1], 16))
+        return self._sizes
+
+    def crashed(self, png):
+        """True if the ROM is sitting in its crash handler.
+
+        The fixture ROM's assertf failures stop the game there, which otherwise
+        looks exactly like a battle that will not reach a decision point: the
+        driver spends its whole frame budget and reports no halt. The crash
+        screen carries the assertion text, so capture it as evidence."""
+        sizes = self.symbol_sizes()
+        ranges = [sizes[name] for name in ('CrashScreen', 'HandleExceptionEntry')
+                  if name in sizes]
+        if not ranges:
+            return False
+        runner = ui.build_runner()
+        command = [str(runner), '--rom', str(self.rom), '--rtc', RTC_EPOCH,
+                   '--frames', '2', '--state-in', str(self.state_file),
+                   '--screenshot', str(png)]
+        out = ui.run(command, timeout=300).stdout
+        match = re.search(r'pc=([0-9a-f]+)', out)
+        if not match:
+            return False
+        pc = int(match.group(1), 16) & ~1
+        return any(start <= pc < start + size for start, size in ranges)
 
     def run(self, *, frames, writes=(), reads=(), until=None, advance=True, png=None,
             advance_text=False):
@@ -699,6 +735,11 @@ def advance_to_halt(session, writes, png=None):
         total += frames_run
         if stopped:
             return view, total, True
+    png = session.dir / 'crash.png'
+    if session.crashed(png):
+        fail(f'the ROM stopped in its crash handler after {total} frames. This is a '
+             f'native assertion failure, not a stuck battle; the assertion text is on '
+             f'the captured screen: {png}')
     return view, total, False
 
 
