@@ -1301,6 +1301,75 @@ DOUBLE_BATTLE_TEST("EC Laura pivot mechanics: a faster U-turn preserves the same
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's Frost Breath activates Anger Point")
+{
+    GIVEN {
+        // A deliberately harmless board: nothing can punish the turn, Frost
+        // Breath into a Normal body is neutral and nowhere near lethal, and the
+        // guaranteed critical hit is the whole point of the authored pairing.
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        AuthoredOpponent(TRAINER_AISHA, 3, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_FROST_BREATH, target: opponentRight);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_FROSLASS);
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], MAX_STAT_STAGE);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Georgia's Shadow Sneak arms the Weakness Policy")
+{
+    GIVEN {
+        // The same authored shape with a single-target trigger instead of a
+        // spread one, which is the only difference that stopped it firing.
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        AuthoredOpponent(TRAINER_GEORGIA, 4, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_SHADOW_SNEAK, target: opponentRight);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->species, SPECIES_METANG);
+        EXPECT(opponentRight->hp > 0);
+        EXPECT_GT(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC Mega: the holder evolves on the first turn it acts")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
+            | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE
+            | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE);
+        // Parental Bond is worth far more than one turn of damage, and a form
+        // that never happens is worth nothing at all: the stone was still held
+        // when the base form fainted.
+        PLAYER(SPECIES_MACHOP) { Level(30); HP(300); MaxHP(300); Attack(120); Defense(150); SpDefense(150); Speed(50); Moves(MOVE_BRICK_BREAK); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(300); MaxHP(300); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_KANGASKHAN) {
+            Level(30); HP(250); MaxHP(250); Attack(140); Defense(100); SpDefense(100); Speed(90);
+            Ability(ABILITY_SCRAPPY); Item(ITEM_KANGASKHANITE); Moves(MOVE_BODY_SLAM, MOVE_FAKE_OUT);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_BRICK_BREAK, target: opponentLeft);
+            MOVE(playerRight, MOVE_SPLASH);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_KANGASKHAN_MEGA);
+        EXPECT_EQ(GetBattlerAbility(B_BATTLER_1), ABILITY_PARENTAL_BOND);
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC Laura board: an ordinary four-member route decision finishes inside the budget")
 {
     GIVEN {

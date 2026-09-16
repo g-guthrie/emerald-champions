@@ -89,6 +89,14 @@
 // the same bounded scale as the other authored plans, and only while the
 // recipient is still alive to use what the trigger gives it.
 #define PAIR_TACTIC_REWARD 80
+// A Mega's worth is rarely this turn's damage: Parental Bond, a Speed or bulk
+// jump and the ability that comes with the form all pay over the turns after
+// it. Scored only on the turn's damage, a Kangaskhan holds its stone, takes
+// Fake Out and Sucker Punch and faints in base form with Parental Bond never
+// existing. Evolving is the default once the holder acts; the ordinary board
+// comparison still overrules it when the base form has something the Mega
+// loses, and the existing tie cost still prefers not evolving on a true tie.
+#define PAIR_MEGA_HORIZON 50
 
 // A single turn cannot see what a boost, a sleep or a stat drop is worth,
 // because all of their value arrives on the turns after this one. Without an
@@ -497,6 +505,12 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
                 if (actor != target && IsBattlerAlly(actor, target) && !IsBattleMoveStatus(executedMove)
                  && GetMoveEffect(executedMove) != EFFECT_HIT_ENEMY_HEAL_ALLY
                  && !PairHasCopiedDance(ev, actor, executedMove)
+                 // An authored ACTIVATE is a deliberate hit on your own
+                 // partner, so the isolated opinion of hitting an ally is the
+                 // wrong gate for it: the trigger would never be enumerated and
+                 // the reward that judges it would never be reached. Legality,
+                 // lethality and usefulness are still decided by PairTacticScore.
+                 && !EmeraldChampions_GetTacticKind(actor, target, move)
                  && (score < AI_SCORE_DEFAULT || GetBattlerSide(actor) != ev->side))
                     continue;
                 // Enabling actions are retained even when their independent
@@ -1406,7 +1420,11 @@ static s32 PairTacticScore(enum BattlerId actor, const struct PairAction *action
             cost *= AI_GetBeatUpHitCount(actor);
         else if (GetMoveStrikeCount(action->executedMove) > 1)
             cost *= GetMoveStrikeCount(action->executedMove);
-        if (gAiLogicData->effectiveness[actor][partner][action->index] > UQ_4_12(1.0)
+        // A Weakness Policy recipient is armed by a super-effective hit and
+        // nothing else, so that is the one case where effectiveness above
+        // neutral is the point rather than a cost. Lethality still decides.
+        if ((gAiLogicData->effectiveness[actor][partner][action->index] > UQ_4_12(1.0)
+             && gAiLogicData->holdEffects[partner] != HOLD_EFFECT_WEAKNESS_POLICY)
          || cost >= gBattleMons[partner].hp)
             return 0;
     }
@@ -3035,7 +3053,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // The complete turn owns protection's value. Applying the
             // isolated scorer again can prefer a blocked attack over a shield
             // that saves HP while producing the same damage on both sides.
-            if (!PairSupport(move) && effect != EFFECT_WISH && effect != EFFECT_PROTECT && effect != EFFECT_REFLECT_DAMAGE
+            // An authored activation is judged by its own reward and by what
+            // the trial does with it. The isolated opinion of hitting your own
+            // partner is the wrong gate for it, exactly as it is for the
+            // enumeration filter that would have dropped it.
+            if (!action->tacticScore
+             && !PairSupport(move) && effect != EFFECT_WISH && effect != EFFECT_PROTECT && effect != EFFECT_REFLECT_DAMAGE
              && !PairHasCopiedDance(ev, actor, action->executedMove)
              // The old target/type opinion is stale after Soak. Native damage
              // on this trial's changed board owns the attack's value instead.
@@ -5430,6 +5453,8 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev, mega != 0 || noActionMask != 0, canStop, deadline[0] || deadline[1]);
                 if (score == INT_MIN)
                     continue;
+                if (mega != 0)
+                    score += PAIR_MEGA_HORIZON;
                 // Demand a meaningful improvement before voluntarily giving up
                 // an action; ties and tiny forecast noise must not cause cycling.
                 // A countdown exit is not voluntary, and neither is the
