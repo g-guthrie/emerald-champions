@@ -1,0 +1,37 @@
+{
+  "play_order": 266, "e_group": "E0408", "trainer": "TRAINER_TABITHA_MOSSDEEP", "class": "admin", "location": "MossdeepCity_SpaceCenter_2F",
+  "cap": 84, "difficulty": "medium",
+  "level_formula_check": "All six members offset 2 -> ROM reported L84 (cap+2-2). Confirmed.",
+  "build": "a1 and a2 on work/agent-battle-build-6 (coordinator moved the block to build-7 mid-attempt 2; build-6 was kept for the in-flight run, later battles use build-7).",
+  "party_manifest": "work/playtest/266-TRAINER_TABITHA_MOSSDEEP/party_tabitha_84.json (v2; v1 differed only by Pelipper in place of Mega Swampert)",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 408, "outcome": "lost", "turns": 11, "player_faints": 6, "opponent_faints": 4,
+     "narrative": "T1 Fake Out Landorus + Surging Strikes OHKO Gigalith. T2 I switched Incineroar to Pelipper (rain replaced sand) while Landorus, which outspeeds Urshifu, Earth Powered it for exactly lethal. T3 Landorus Protect blocked Hurricane while Mega Excadrill Iron Head OHKOed Chien-Pao after its Sacred Sword left Excadrill at 9. Grassy Glide/Hurricane cleaned Excadrill and Landorus, Coalossal Protected the double-target turn and then fell to Wood Hammer, but a critical Thunderbolt + Power Gem removed Flutter Mane, Krookodile Crunch KOed Rillaboom (Moxie), Hurricane missed out of rain, and the last Incineroar died to +1 High Horsepower. Player misplays decided it, not levels."},
+    {"attempt": 2, "run_dir": "a2", "seed": 4082, "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 6, "rebuild": "Mega Swampert replaced Pelipper: Mega Excadrill's Mega ability is Piercing Drill, not Sand Rush, so weather replacement bought nothing.",
+     "narrative": "T1 Fake Out + Surging Strikes OHKO Landorus. T2 Incineroar to Swampert, Surging Strikes OHKO Mega Excadrill before it moved. T3 Surging Strikes through Gigalith, Coalossal Protected the Liquidation. T4 Coalossal Protected again (failed) and died 4x to Liquidation. T5 Krookodile Protected on entry against Fake Out + Liquidation. T6 Liquidation OHKO Krookodile, U-turn popped the Balloon, T7 High Horsepower OHKO Magnezone."}
+  ],
+  "strategy_checks": [
+    {"check": "Gigalith Sand Stream, Smooth Rock 8 turns", "result": "PASS", "evidence": "Sand up at turn 0 in both runs; a2 still raging turn 6; a1 it ended only when Drizzle replaced it (T2)."},
+    {"check": "Mega Excadrill Sand Rush doubles Speed under sand", "result": "FAIL (authoring, not AI)", "evidence": "SPECIES_EXCADRILL_MEGA carries ABILITY_PIERCING_DRILL (contact through Protect), base Speed 103; the dossier's 'Sand Rush then doubles its Speed and it outruns the entire roster' is not what the engine does. a1 T3 it moved at 257 Speed (after Chien-Pao), a2 T2 it Mega Evolved and was OHKOed by Urshifu-RS (271) before acting. The crack line 'weather replacement halves Mega Excadrill' is therefore also false; the real threat is Piercing Drill ignoring Protect."},
+    {"check": "Gigalith Wide Guard against spread / Rock Slide otherwise", "result": "PASS with one empty use", "evidence": "Rock Slide a1 T1, a2 T1 (164 on Incineroar), a2 T2; Wide Guard a2 T3 while no spread move had been revealed and it was being KOed by a single-target Surging Strikes (empty)."},
+    {"check": "Coalossal Steam Engine one-hit-or-none trap", "result": "NOT TRIGGERED (crack honored)", "evidence": "a1 it took only neutral Wood Hammer/Knock Off; a2 it took one 4x Liquidation. Steam Engine and Weakness Policy never fired in either run."},
+    {"check": "Landorus Sheer Force Life Orb Earth Power", "result": "PASS", "evidence": "a1 T2 Earth Power 242 = exactly Urshifu's remaining HP (AI picked the guaranteed KO over the 2x target); a1 T3 Protect blocked Hurricane."},
+    {"check": "Magnezone Magnet Pull traps Steel", "result": "NOT EXERCISED", "evidence": "No Steel on the player side (crack: keep a non-Steel pivot). Air Balloon PASS: blocked High Horsepower until Knock Off (a1 T8) / U-turn (a2 T6) popped it."},
+    {"check": "Krookodile Moxie and Clear Amulet", "result": "PASS", "evidence": "a1 T10 Crunch KO -> Attack rose; Clear Amulet refused Intimidate a1 T10 and a2 T6."}
+  ],
+  "protect_ledger": [
+    {"run": "a1", "turn": 3, "battler": "Landorus", "payoff": "blocked Hurricane (~183 of 227 HP)"},
+    {"run": "a1", "turn": 7, "battler": "Coalossal", "payoff": "blocked Knock Off + Wood Hammer, both aimed at it"},
+    {"run": "a2", "turn": 3, "battler": "Coalossal", "payoff": "blocked a lethal 4x Liquidation"},
+    {"run": "a2", "turn": 3, "battler": "Gigalith (Wide Guard)", "payoff": "empty: no spread move on the board"},
+    {"run": "a2", "turn": 4, "battler": "Coalossal", "payoff": "consecutive Protect failed; died to Liquidation. Defensible as a 1/3 gamble since it was slower than Swampert and dead to any line."},
+    {"run": "a2", "turn": 5, "battler": "Krookodile", "payoff": "blocked Fake Out + lethal Liquidation on its entry turn"}
+  ],
+  "ai_defects": [
+    {"run": "a2", "turn": 3, "board": "Gigalith 315/315 + Coalossal vs Mega Swampert + Urshifu-RS (84 HP), no spread move revealed by the player all game", "chosen": "Wide Guard", "better": "Rock Slide (Urshifu at 84 in sand) or Stomping Tantrum; Wide Guard had no spread move to guard against and Gigalith was KOed that turn"}
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Attempt 1 was a genuine loss and attempt 2 a 6-0 after a rebuild; per the brief that is 'won after a real fight' -> keep. Note the 6-0 came from Mega Swampert walling five of six sets; a player without a Water/Ground Mega will find this the hardest non-multi fight of the raid.",
+  "could_this_be_cooler": "The concept (same man, same squad, one visible upgrade) reads well and the Air Balloon / Clear Amulet / Weakness Policy item texture all showed. Two notes. (1) The dossier promises a Sand Rush Mega Excadrill that outruns the roster; the Mega's actual ability is Piercing Drill and it loses Sand Rush on evolving, so the fight's headline speed threat only exists before the Mega. Either rewrite the plan/crack around Piercing Drill (Protect does not save you from it; that is a fine hook) or keep Excadrill un-Mega with Sand Rush and move the stone elsewhere. (2) Coalossal never got to fire Steam Engine in two runs because a player reading the crack line either ignores it or one-shots it; that is the same 'conditional payoff with an easy opt-out' problem as E0407's Cradily. Not changed in this pass.",
+  "authored_set_legality": "No problem found; all six sets resolve and materialize at the reported levels."
+}
