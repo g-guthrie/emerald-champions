@@ -1054,3 +1054,105 @@ headless ROM and its stamp untouched.
 Seeds 7 and 17 of the E0409 multi were confirmed by the coordinator on a
 headless ROM rebuilt from the multi-reserve commit - won in 10 turns and lost in
 9 - which closes the livelock item end to end.
+
+---
+
+# Round 9: the performance ceiling, correlated guards, and last-turn knowledge
+
+Commits `ceba4ad06e` and `82ced61526`. Focused allowlist: **112 passed, 0 failed,
+112 total.**
+
+Preceded by two restorations, `4b14745e1a` and `ca0aab8c88`, after stale-tree
+commits removed this work twice; the recovery is the coordinator's and the
+pathspec-commit rule now in force is what keeps it from recurring.
+
+## (1) The 60-frame ceiling: measured, attributed as far as it can be
+
+`EC Laura board: an ordinary four-member route decision finishes inside the
+budget` now instruments the case the reruns describe: **61 frames** against the
+60-frame stop, beside Ned's 51 and 61. So the ceiling is real and it is reached
+on an ordinary board, not only on six-member authored teams.
+
+Attribution, by rebuilding `src` and `include` at earlier commits:
+
+| Tree | Ned wind / soak |
+| --- | --- |
+| `7f794556de^` (immediately before the setup-pricing values) | 50 / 60 |
+| HEAD | 51 / 61 |
+
+**The setup-pricing values cost about one frame.** They are not the cause.
+Going further back, to before the committed-action read was removed, does not
+compile against the current generated data, so that comparison stays open - but
+the mechanism is visible in the code: with the read each foe had exactly one
+enumerated action, `ChooseJointFoeForecast` returned immediately, and each
+candidate pair cost one cheap trial. Removing it gave every foe a full
+move-by-target enumeration and the three-pattern mixture that the budget stop
+now truncates.
+
+**The shortcut I drafted is not landed, because it is not value-preserving in
+practice.** Selecting the shortlist on the ordinary pass alone buys 10-30%
+(Jocelyn 46 to 36, Dancer 66 to 56, Darius 24 to 18) and moved **six** fixtures,
+every one of them a move whose entire point is an applied effect: Soak's
+conversion, Acid Spray's drop, Eerie Impulse, Taunt. The ordinary pass cannot
+see those, so ranking without it systematically demotes exactly the class this
+project spent two rounds teaching the AI to value. Widening the shortlist to six
+recovered two of the six and no more.
+
+What is landed is exact: two joint forecasts that are the same four actions
+score the same, so the alternative pattern reuses the primary score rather than
+recomputing it. No outcome changes, and no frames on these boards either, since
+identical patterns are rare - it is correctness housekeeping, not the fix.
+
+**The ceiling is still open.** The honest next lever is the enumeration itself
+(how many candidate pairs exist), not the scoring of each pair.
+
+## (4) Correlated guards
+
+Both slots guarding is one decision about the whole turn, and the pair search
+scores the joint pair, so it can charge for it. A double guard now pays
+`PAIR_GUARD_CORRELATED_COST` (45) unless `PairFieldClockExpiring` - a weather,
+Tailwind or Trick Room clock with one turn left - justifies the whole side
+spending the turn. That is the only payoff kind that both slots can spend the
+same turn on; a per-slot payoff such as an Orb activation needs its partner to
+be doing something else, which is exactly the 55-T1 case where Swellow's Flame
+Orb turn wanted Manectric contributing, not guarding beside it.
+
+## (5) and (3) Last turn's move, and Feint
+
+| Class | Rule |
+| --- | --- |
+| Sucker Punch | −25 at a target whose last used move was a status move; a flank that just used Follow Me is the likeliest thing on the board to use one again, and Sucker Punch fails into it |
+| Counter / Mirror Coat / Metal Burst | −40 when nothing the opposing side has actually used belongs to the category the move reflects |
+| Feint | −20 with no shield on the field and none seen last turn: it is a weak attack, not a shield breaker |
+
+## (6) Disruption next-turn values
+
+Encore pays 35 on a foe that just spent its turn on a status move and 20 on any
+other known last move; Leech Seed pays 20 on an unseeded non-Grass foe; and a
+burn is worth `PAIR_BURN_PHYSICAL_HORIZON` (20) more when the victim's best
+usable attack is physical. Item swap (Switcheroo/Trick) is **not** covered.
+
+## Fixtures added
+
+`test/battle/ai/reactive_pricing.c` (6): both slots do not guard the same turn;
+Sucker Punch not aimed at the flank that just redirected; Counter refused
+against a side that only attacks specially; Feint refused with no shield to
+break; the turn spent on a burn; Encore locking in the move the target just
+used. Plus the Laura frame fixture in `emerald_champions_plans.c`.
+
+One honest limit recorded in the burn fixture: the turn being spent on the burn
+is asserted, but **which body it lands on is not**. The physical-attacker term
+scores it, and on that board it did not decide the target by itself.
+
+## Numbers
+
+**112 passed, 0 failed, 112 total** (106 before this round's fixtures).
+`pokeemerald.gba` builds clean. Headless ROM untouched.
+
+## Not reached in this pass
+
+Takao's Unburden-priced turn-one switch; the Josh pivot items; item swap; and
+the whole opening-block list (a)-(e): priority overvalued when the user is
+already faster, Wailmer's Water Spout, Wooloo's Reversal, Shroomish's Spore on
+the **pair** path, Choice Scarf String Shot, Paras's Wide Guard after a seen
+Rock Slide, Klutz Switcheroo, and Poochyena's Helping Hand/Snarl.
