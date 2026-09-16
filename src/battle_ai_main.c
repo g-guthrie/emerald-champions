@@ -426,8 +426,11 @@ void ComputeAiBattlerDecisions(enum BattlerId battler)
 {
     gAiLogicData->aiCalcInProgress = TRUE;
     // Charge native setup, but not intervening UI/controller frames, against
-    // this side's coordinated decision budget.
-    gAiLogicData->decisionStartFrame = gMain.vblankCounter1 - gAiLogicData->decisionSetupFrames;
+    // this side's coordinated decision budget. The budget covers the complete
+    // opposing decision, so a second owner or an in-game partner scoring later
+    // in the same turn shares this clock instead of restarting it.
+    if (gAiLogicData->battlerMovesScored == 0)
+        gAiLogicData->decisionStartFrame = gMain.vblankCounter1 - gAiLogicData->decisionSetupFrames;
 
         AIDebugTimerStart();
 
@@ -904,9 +907,17 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 
     for (enum BattlerId battler = 0; battler < battlersCount; battler++)
     {
-        // Prediction limited to player side but can be expanded to read partners move in the future
-        if (!IsOnPlayerSide(battler))
+        // Prediction limited to player side but can be expanded to read partners move in the future.
+        // An in-game partner on that side is an AI actor whose decision is
+        // computed for real this turn, so predicting it is a wasted pass -
+        // the multi formats are exactly where the setup budget is tightest.
+        if (!IsOnPlayerSide(battler) || BattlerHasAi(battler))
             continue;
+        // Prediction is an optimisation, not a legality requirement: if the
+        // mandatory setup has already spent this side's shared budget, the
+        // remaining predictions are skipped rather than overrunning it.
+        if ((u32)(gMain.vblankCounter1 - aiData->decisionStartFrame) >= 60)
+            break;
 
         BattleAI_SetupAIData(0xF, battler);
         SetupAIPredictionData(battler, SWITCH_MID_BATTLE_OPTIONAL);
@@ -3481,7 +3492,10 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!hasPartner
          || !HasDamagingMove(battlerAtkPartner)
          || aiData->abilities[battlerAtkPartner] == ABILITY_GOOD_AS_GOLD
-         || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove)))
+         || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove))
+         // A fixed or percentage damage move ignores the multiplier entirely,
+         // so boosting it spends the turn for nothing.
+         || (aiData->partnerMove != MOVE_NONE && IsFixedDamageMove(aiData->partnerMove)))
         {
             ADJUST_SCORE(WORST_EFFECT);
         }
@@ -6360,10 +6374,26 @@ static s32 AI_CheckViability(enum BattlerId battlerAtk, enum BattlerId battlerDe
 
     if (GetMovePower(move) != 0)
     {
-        if (GetNoOfHitsToKOBattler(battlerAtk, battlerDef, gAiThinkingStruct->movesetIndex, AI_ATTACKING, CONSIDER_ENDURE) == 0)
+        u32 hitsToKO = GetNoOfHitsToKOBattler(battlerAtk, battlerDef, gAiThinkingStruct->movesetIndex, AI_ATTACKING, CONSIDER_ENDURE);
+        if (hitsToKO == 0)
             ADJUST_AND_RETURN_SCORE(NO_DAMAGE_OR_FAILS); // No point in checking the move further so return early
         else
         {
+            // Damage this small is barely progress, and watching it repeat is
+            // what play actually showed: Crunch into a Fairy twice for six, and
+            // three Quick Attacks into a Rocky Helmet wall for nine, nine and
+            // zero while an Adaptability attack sat unused. Chip that needs
+            // this many turns loses ground; chip the user pays contact damage
+            // for every turn loses more.
+            if (hitsToKO >= NEGLIGIBLE_DAMAGE_HITS)
+            {
+                ADJUST_SCORE(BAD_EFFECT);
+                u32 dealt = aiData->simulatedDmg[battlerAtk][battlerDef][gAiThinkingStruct->movesetIndex].median;
+                u32 selfDamage = AI_GetContactDamage(battlerAtk, battlerDef, move, aiData->abilities[battlerAtk],
+                    aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef], aiData->abilities[battlerDef]);
+                if (selfDamage != 0 && selfDamage * 2 >= dealt)
+                    ADJUST_SCORE(AWFUL_EFFECT);
+            }
             if (gAiThinkingStruct->aiFlags[battlerAtk] & (AI_FLAG_RISKY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE)
                 && IsBestDmgMove(battlerAtk, battlerDef, AI_ATTACKING, move))
                 ADJUST_SCORE(BEST_DAMAGE_MOVE);
