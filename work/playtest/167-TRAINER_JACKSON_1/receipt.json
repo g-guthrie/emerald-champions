@@ -1,0 +1,33 @@
+{
+  "play_order": 167,
+  "e_group": "E0235",
+  "trainer": "TRAINER_JACKSON_1",
+  "location": "Route119",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Tapu Koko 47 (+1), Alolan Raichu 47 (+1), Rotom-Fan 47 (+1), Tangrowth 48 (+2) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/167-TRAINER_JACKSON_1/party.json",
+  "attempts": [
+    {"seed": 111, "run_dir": "work/playtest/167-TRAINER_JACKSON_1/run-s111", "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 4,
+     "notes": "Run on work/agent-battle-build-4. A terrain-boosted Thunderbolt did 99 to a 150 HP Mega Metagross through a Steel resistance on turn 1 and forced it off the field for the whole battle; Amoonguss and Excadrill were both lost. The second-hardest fight in the block."}
+  ],
+  "strategy_checks": [
+    {"check": "Tapu Koko's Electric Surge sets the terrain on entry", "result": "PASS", "evidence": "Electric Terrain was already active at turn 0 before a single command, and when the first terrain expired on turn 5, Koko's re-entry immediately re-set it ('An electric current ran across the battlefield!')."},
+    {"check": "Alolan Raichu's Surge Surfer doubles its Speed while the terrain is up", "result": "PASS", "evidence": "On turn 2 Raichu's Thunderbolt resolved before a 252-Speed Adamant Excadrill's Earthquake, and on turn 3 its Psychic resolved before the same Excadrill. A base-95 body moving before a base-88 one with a Speed-positive nature only happens with the doubling."},
+    {"check": "Raichu uses a legal Fake Out on the right target", "result": "PASS", "evidence": "Turn 1 Fake Out flinched Excadrill - correctly choosing the Ground-type answer over the Mega - and the flinch denied a Rock Slide on the turn Koko needed to land its opening Thunderbolt."},
+    {"check": "Koko pivots only when preserving or resetting terrain is worthwhile", "result": "PASS", "evidence": "Volt Switch was never used as filler. Instead, on turn 2 Jackson hard-switched Koko out on the exact turn Excadrill fired an Earthquake that was 2x into it, and brought it back on turn 5 to refresh the expiring terrain. Both pivots were for a reason."},
+    {"check": "Tangrowth's Rage Powder supports the frail pair", "result": "NOT_USED, correctly", "evidence": "Tangrowth never selected Rage Powder. The one turn it looked wrong - turn 3, with Raichu at 1 HP behind it - is actually right: the incoming move was Rock Slide, a spread move, which Rage Powder cannot redirect. Declining it there is the correct read, not an omission."},
+    {"check": "Stun Spore uses actual target grounding", "result": "NOT_EXERCISED", "evidence": "Never selected. Tangrowth had four turns and used Giga Drain twice and Protect."},
+    {"check": "Rotom-Fan's Motor Drive is reactive because this roster has no Discharge, and no allied trigger is fabricated", "result": "PASS", "evidence": "Rotom-Fan used Will-O-Wisp and Air Slash. No ally Electric move was aimed at it and no Motor Drive activation was credited at any point. Its Will-O-Wisp target was also correct: it burned Excadrill, the physical Ground attacker, which halved the only move on the player's side that threatened Koko."},
+    {"check": "Electric Terrain blocks sleep on grounded targets", "result": "NOT_EXERCISED", "evidence": "Amoonguss was paralysed on turn 2 and KOed on turn 3 before Spore was attempted into the terrain."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "battler": "Tangrowth", "payoff": "REAL: blocked a 2x Flare Blitz and a Rock Slide on the same turn, while its partner Rotom-Fan burned the player's Excadrill behind the shield."},
+    {"turn": 6, "battler": "Tapu Koko", "payoff": "REAL: blocked a Rock Slide and a Flare Blitz on the turn it re-entered as the last Pokemon, on a board where it was at 124/137 and both incoming moves were significant."}
+  ],
+  "ai_defects": [],
+  "level_changes": [],
+  "level_change_rationale": "KEEP. Two player faints and a third body (Mega Metagross) driven off the field at 51/150 on turn 1 and never able to return. This is a real fight and the offsets are doing their job; Tangrowth at +2 is correctly the bulkiest and outlived its whole team's usefulness.",
+  "could_this_be_cooler": "No change. The dossier claims this is the cleanest ability combination in the stretch and the play backs it: Electric Surge is not flavour, it is a Speed button, and the run shows Alolan Raichu moving before a 252-Speed Excadrill because of it. What makes the team genuinely good, though, is the switching, not the abilities - Jackson pivoted Koko out of an Earthquake on turn 2 and back in to refresh an expiring terrain on turn 5, and Rotom-Fan burned the Ground attacker rather than chasing damage. Those are decisions a person would make. The dossier's own honest note stands: Ground damage that Koko cannot switch into is the answer, and it cost the player an Excadrill to deliver it. One small idea for later, not a criticism: Tangrowth's Stun Spore never fires and its Rage Powder is dead against the spread moves the counterplay naturally brings, so its fourth slot could become Knock Off or Sleep Powder and the team would lose nothing.",
+  "legality_notes": "Authored sets are internally legal. Tapu Koko is a reachable legendary (pool-48 legendary_sign Route110, gate 30) and its individual level normalization at +1 looks right against this cap - it was the most dangerous single attacker faced in the block.",
+  "player_pool_note": "No legendary was used on the player's side in this or any battle of this block."
+}
