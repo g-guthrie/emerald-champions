@@ -120,8 +120,8 @@ plan: First two useful turns: Chinchou's Discharge is a safe ally line beside Gr
 crack: Ground/Electric pressure on Tentacool, Grass pressure on the other three, Taunt, immediate damage and revenge priority. Disposition: Approved Corphish replacement removes the universal Grass weakness while preserving the Chinchou/Barboach engine and marine theme. Shared support forecasts honor order and stat-drop blockers; no forced Acid Spray or Discharge script.
 CHINCHOU @SITRUS_BERRY VOLT_ABSORB MODEST 252/0/4/252/0/0 2 | THUNDER_WAVE, MUDDY_WATER, DISCHARGE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BARBOACH @EVIOLITE OBLIVIOUS ADAMANT 252/252/4/0/0/0 3 | DRAGON_DANCE, WATERFALL, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TENTACOOL @EVIOLITE LIQUID_OOZE MODEST 252/0/4/252/0/0 1 | SLUDGE_BOMB, MUDDY_WATER, ACID_SPRAY, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CLAMPERL @DEEP_SEA_TOOTH SHELL_ARMOR MODEST 252/0/4/252/0/0 0 | SHELL_SMASH, MUDDY_WATER, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TENTACOOL @EVIOLITE LIQUID_OOZE MODEST 252/0/4/252/0/0 2 | SLUDGE_BOMB, MUDDY_WATER, ACID_SPRAY, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+CLAMPERL @DEEP_SEA_TOOTH SHELL_ARMOR MODEST 252/0/4/252/0/0 1 | SHELL_SMASH, MUDDY_WATER, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0008 TRAINER_CINDY_1 class=regular
 strategy: NONE

@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "play_order": 7,
+  "e_group": "E0007",
+  "trainer": "TRAINER_DARIAN",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "CHINCHOU L14 @SITRUS_BERRY VOLT_ABSORB MODEST (Thunder Wave/Muddy Water/Discharge/Protect)",
+    "BARBOACH L15 @EVIOLITE OBLIVIOUS ADAMANT (Dragon Dance/Waterfall/High Horsepower/Protect)",
+    "TENTACOOL L13 @EVIOLITE LIQUID_OOZE MODEST (Sludge Bomb/Muddy Water/Acid Spray/Protect)",
+    "CLAMPERL L12 @DEEP_SEA_TOOTH SHELL_ARMOR MODEST (Shell Smash/Muddy Water/Ice Beam/Protect)"
+  ],
+  "authored_strategy_flags": "SETUP,PRESSURE (ai: Conservative)",
+  "party_manifest": "work/playtest/07-DARIAN/party-a1.json",
+  "party_summary": "Iron Leaves* + Whimsicott leading; Magearna* / Snorlax / Arcanine / Weavile reserve. Magearna entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 7001, "outcome": "won", "turns": 4, "decisions": 4,
+      "player_faints": 0, "opponent_faints": 4, "ai_decision_seconds_max": 0.167,
+      "events": "work/playtest/07-DARIAN/attempt-1-events.jsonl",
+      "narrative": "T1 Prankster Taunt locked Chinchou out of Thunder Wave and Protect, and Leaf Blade (4x on Water/Ground) OHKOd Barboach. T2 Psyblade (2x on Poison) OHKOd Tentacool while Whimsicott pivoted to Magearna. T3 Leaf Blade OHKOd Clamperl on the turn it used Shell Smash, and Magearna's Thunderbolt confirmed Volt Absorb immunity on Chinchou. T4 Leaf Blade OHKOd Chinchou. Nothing on Darian's side survived a single Grass attack."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Volt Absorb makes Chinchou immune to Electric",
+     "result": "PASS (immunity leg)",
+     "evidence": "T3 Magearna's Thunderbolt: 'It doesn't affect the opposing Chinchou...'. Chinchou was at 58/58 at the time, so the heal leg of the ability could not be observed - immunity is confirmed, healing is not."},
+    {"check": "Chinchou's Discharge is chosen as the safe ally line beside Ground-type Barboach",
+     "result": "PASS",
+     "evidence": "T1, the one turn Barboach was alive, Chinchou used Discharge - the spread Electric move its Ground partner is immune to. Once Barboach was gone it switched to Muddy Water for the rest of the fight and never used Discharge into a non-immune partner. This is exactly the authored condition."},
+    {"check": "SETUP: Barboach uses Dragon Dance only behind adequate survival",
+     "result": "PASS",
+     "evidence": "T1 Barboach used Waterfall, not Dragon Dance, facing a 4x-effective Grass lead. Declining the setup there was correct and it is the same guard behaviour seen on Zigzagoon in E0002."},
+    {"check": "SETUP: Clamperl's Shell Smash mode",
+     "result": "FIRED, BUT INTO A LOSING BOARD",
+     "evidence": "T3 Clamperl used Shell Smash on the turn it entered, facing a Life Orb Iron Leaves that is 2x on Water and had already OHKOd two teammates with the same move. Shell Smash doubles Speed but Clamperl's base 32 Speed cannot reach Iron Leaves' base 104 even doubled, so the setup could never resolve into an attack. It died in the same turn. This is a softer version of the Barboach guard: the same condition that correctly suppressed Dragon Dance did not suppress Shell Smash."},
+    {"check": "Acid Spray supports an actual special follow-up and lands before the partner attack",
+     "result": "NOT TESTED", "evidence": "Tentacool was OHKOd on the turn it entered and used only Sludge Bomb."},
+    {"check": "Liquid Ooze punishes eligible draining attacks, not all Grass damage",
+     "result": "NOT TESTED", "evidence": "I used no draining move. Correctly, no Liquid Ooze recoil occurred from Leaf Blade or Psyblade."},
+    {"check": "Muddy Water attacks both opponents without allied damage",
+     "result": "PASS", "evidence": "T2, T3 and T4 Chinchou's Muddy Water hit only my side, and its accuracy drops landed on Iron Leaves twice."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.167 s maximum, the fastest in the block."}
+  ],
+  "protect_ledger": [],
+  "empty_protects": 0,
+  "protect_note": "ZERO Protects in the whole fight, from a Conservative-AI team on which all four members carry Protect. See AI observation E0007-O1 - this is the opposite failure mode from the empty guards the review usually looks for, and it is worth one look.",
+  "ai_defects": [],
+  "ai_observations": [
+    {
+      "id": "E0007-O1",
+      "severity": "minor",
+      "turn": "3 and 4",
+      "board": "By T3 a Life Orb Iron Leaves had OHKOd Barboach and Tentacool with single Grass/Psychic hits. Chinchou sat at 58/58 with Protect available and its Taunt expiring at the end of T3.",
+      "observed": "Neither Clamperl (T3) nor Chinchou (T3, T4) selected Protect at any point; no member of the team guarded once.",
+      "why_it_matters": "Against an opponent that has demonstrably one-shot two teammates with the same move, a Protect is close to free expected value: it costs a turn that was going to end in a faint anyway. A Conservative-flagged AI declining to guard four times over is at least worth checking against the PAIR_GUARD_* constants. Recorded as an observation rather than a defect because the fight was already lost on typing by T3 and no single guard would have changed the result."
+    },
+    {
+      "id": "E0007-O2",
+      "severity": "minor",
+      "turn": 3,
+      "observed": "Clamperl used Shell Smash into a 2x-effective attacker that outspeeds it even after the Speed doubling.",
+      "why_it_matters": "The Dragon Dance guard on Barboach worked correctly in the same fight, so the setup-safety evaluation is present but is not accounting for the case where the boosted Speed still loses the order. Pairs with the same question raised by Zigzagoon in E0002, from the other direction."
+    }
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 0 player faints and no real threat -> +1 on the weakest one or two members, never the ace first. Barboach (+3) is the ace; Chinchou (+2) played its authored role correctly.",
+    "changes": [
+      {"member": "CLAMPERL", "offset_before": 0, "offset_after": 1, "level_before": 12, "level_after": 13},
+      {"member": "TENTACOOL", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14}
+    ],
+    "honest_caveat": "As in E0002, levels are not what decided this fight. Iron Leaves is 2x on three of these four and 4x on the fourth, and all four have Eviolite-or-worse special bulk; no plausible +1 changes a one-shot into a two-shot. The change is the brief's prescribed response to a zero-faint first-try win and the two members raised are the two lowest, but the real note is that a mono-Water team at cap 14 has no answer to a single Grass attacker in the reachable pool.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "The marine theme is good; the type monoculture is the problem the disposition line already half-identified.",
+    "keep": "Chinchou's Discharge-beside-a-Ground-partner is a genuinely instructive doubles interaction, and it executed correctly. Volt Absorb plus a Ground partner is a real two-layer Electric answer and deserves to stay.",
+    "suggestion": "The disposition text says the Corphish replacement 'removes the universal Grass weakness', but the team as played is still four Waters, and only Tentacool's Poison typing blunts Grass at all - and it is the lowest-bulk member. One member with a genuine Grass answer (a Water/Ice with Ice Beam priority, or simply moving Tentacool's Sludge Bomb role onto a bulkier Poison body) would turn this from a type check into a fight.",
+    "second_thought": "Three of the four carry Muddy Water. Consolidating that onto one spread user and giving the others distinct lanes - Ice, Poison, priority - would make each slot feel different without touching the theme.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": ["Pool chronology caveat carried from play_order 1."]
+}
