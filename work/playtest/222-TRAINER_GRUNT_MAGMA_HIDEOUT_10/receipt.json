@@ -1,0 +1,104 @@
+{
+  "play_order": 222,
+  "e_group": "E0333",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_10",
+  "class": "grunt",
+  "location": "MagmaHideout_3F_2R",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L59 = 60 + 1 - 2 on Medium, matching the authored offset 1.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217-221.",
+  "pre_play_strategy_checks": [
+    "Palossand's Water Compaction gives +2 Defense every time a Water attack hits it",
+    "Hisuian Typhlosion's Infernal Parade doubles against a statused target",
+    "Mightyena's Intimidate keeps the slower pair alive",
+    "Alolan Dugtrio's Sand Force lane comes online if a previous room's sand is still up",
+    "Shore Up recovers two thirds in sand",
+    "Protect ledger on Palossand and Typhlosion"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "This is the one room in the hideout that is actually built against my party, and it changed my play on turn 1: I pulled my Drizzle lead out for Tapu Bulu specifically so I would have a Grass lane that does not feed Water Compaction. Mega Swampert's Liquidation crit removed Hisuian Typhlosion before it fired Infernal Parade. Turn 2 Liquidation removed Mightyena (which got its Intimidate off and a Crunch in) and Wood Hammer took Palossand to 96. Turn 3 Liquidation removed Alolan Dugtrio on entry and Palossand's Protect blocked the Wood Hammer. Turn 4 Ice Punch plus Wood Hammer finished Palossand. I never aimed a single Water attack at Palossand all fight, which is the authored lesson landing even though the ability itself never triggered."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Palossand's Water Compaction gives +2 Defense per Water hit",
+      "result": "NOT TESTED - and that is the design working",
+      "evidence": "No Water attack was ever aimed at Palossand. The trap did its job at the level above mechanics: with a visible Water Compaction body on the field I switched my Water lead out on turn 1, brought in the Grass answer, and closed with Ice Punch rather than the Liquidation that had killed everything else in this hideout. The ability changed four of my decisions without once resolving. I am recording it as untested rather than passed, because a benchmark should not claim to have verified a trigger it deliberately avoided - the mechanic itself should be confirmed by a focused native test, not by me throwing a Water attack into a wall to make a checkbox green."
+    },
+    {
+      "check": "Hisuian Typhlosion's Infernal Parade doubles against a statused target",
+      "result": "FAIL - not reached",
+      "evidence": "Typhlosion's turn-1 native latch reads INFERNAL_PARADE aimed at my slot, so it did select the signature move, but a critical Liquidation removed it from 174/174 before it executed. The dossier's premise - that the hideout has been applying status since room one so the doubling condition is usually already met - is also not true for a player who enters clean, and my party carried no status into this fight."
+    },
+    {
+      "check": "Mightyena's Intimidate keeps the slower pair alive",
+      "result": "PASS",
+      "evidence": "Intimidate fired on its turn-1 entry and dropped both Tapu Bulu's and Mega Swampert's Attack a stage ('Tapu Bulu's Attack fell! / Swampert's Attack fell!'). It then landed a Crunch for 68 into Mega Swampert before dying. Small but real contribution - and it is worth noting the drop is the reason Wood Hammer left Palossand alive on turn 2 rather than killing it."
+    },
+    {
+      "check": "Alolan Dugtrio's Sand Force lane comes online if sand is still up",
+      "result": "FAIL - structurally unreachable here",
+      "evidence": "There was no sand: the previous sand rooms are E0336 and E0337, which come AFTER this one in play order, and my own Drizzle held the weather the whole fight. Sand Force was dead weight. The dossier's 'if a previous sand room's weather is still up' is chronologically backwards - nothing before room thirteen sets sand, and weather does not persist between battles anyway."
+    },
+    {
+      "check": "Shore Up recovers two thirds in sand",
+      "result": "NOT OBSERVED",
+      "evidence": "Palossand never used Shore Up. It used Protect (turns 1 and 3) and Shadow Ball (turn 2). With no sand on the field Shore Up would have been the ordinary 50 percent, and at 96/224 on turn 3 it chose the guard instead - defensible."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "FAIL - one of two Protects was empty and specifically counterproductive",
+      "evidence": "See protect_ledger and AI defect E0333-1."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "Palossand",
+      "payoff": "EMPTY, and worse than empty. Palossand used Protect at 224/224 on turn 1 and blocked nothing - my two actions were a switch and a Liquidation aimed at its partner. See AI defect E0333-1: this is the one battler in the campaign whose ability rewards being hit by the attack it guarded against."
+    },
+    {
+      "turn": 3,
+      "battler": "Palossand",
+      "payoff": "REAL. At 96/224, with its last partner dying on the same turn, Protect blocked Tapu Bulu's Wood Hammer - a 2x hit that would very likely have killed it. It bought a Leftovers tick and a Grassy Terrain tick. Correct use of the turn."
+    }
+  ],
+  "protect_summary": "2 opponent Protects across 4 turns, 1 with a real payoff, 1 empty. Both from Palossand, two turns apart, so not repetitive - but the empty one is the more instructive of the two.",
+  "ai_defects": [
+    {
+      "id": "E0333-1",
+      "turn": 1,
+      "board": "Palossand 224/224 (Ghost/Ground, Water Compaction, Leftovers) beside Hisuian Typhlosion 174/174; opposite a Pelipper that had just put Drizzle on the field and a Swampert holding a Swampertite. Nothing had yet been aimed at Palossand.",
+      "chosen": "Protect.",
+      "better": "Shadow Ball, Earth Power or Shore Up - any action at all. Two things make this worse than an ordinary empty guard. First, it is the same shape as E0329-1: a full-HP battler with no incoming-damage history spends turn one guarding, which the expected-value forecast in src/battle_ai_pair.c should discount because the opponent has had no opportunity to reveal a threat aimed at that slot. Second, and specific to this battler, Water Compaction converts an incoming Water attack into +2 Defense - Palossand WANTS the Water hit that Protect blocks. The guard scorer is evidently weighting 'incoming damage is likely' without consulting the defending battler's own damage-triggered ability, so it treats a Water attack on a Water Compaction body as a threat rather than as a boost. That is a shared-path issue, not a Palossand quirk: the same blind spot would apply to Weak Armor, Steam Engine, Justified, Rattled, Berserk, Water Absorb, Flash Fire, Lightning Rod, Storm Drain, Motor Drive, Dry Skin and Weakness Policy holders - and this hideout fields Coalossal (Steam Engine + Weakness Policy, E0337), Ceruledge (Weak Armor, E0338), Chandelure (Flash Fire, E0332), Alolan Marowak (Lightning Rod, E0332), Rhydon and Rhyperior (Lightning Rod, E0336 and E0339) and Volcanion (Water Absorb, E0337). Severity: moderate, shared guard scoring. Do not fix AI C code from this receipt - indexing the affected owners is the point."
+    }
+  ],
+  "ai_notes": [
+    "The rest of the room's play was fine. Palossand's turn-3 Protect was a good decision, Mightyena correctly spent its one turn on Crunch into the Mega rather than the Fairy, and Typhlosion had selected its signature move before it was removed.",
+    "Cost of my own tool, for the record: Grassy Terrain healed Palossand at the end of turns 2 and 3 as much as it healed my side. Bringing terrain into a room whose wall is grounded is a real trade.",
+    "AI decision budget: max 62 frames (1.038 s). That is the highest sample in this block and the closest to the 1.2 s budget so far."
+  ],
+  "level_changes": [
+    {"member": "MIGHTYENA", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60},
+    {"member": "DUGTRIO_ALOLA", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60}
+  ],
+  "level_change_rationale": "Won first attempt, zero player faints, so the +1 review applies. I raised Mightyena and Alolan Dugtrio - the two support bodies, one of which died to a single attack and the other of which entered with its defining ability switched off because there was no sand and never could have been. I left Palossand alone because it is the room's whole idea and it genuinely dictated my play, and I left Hisuian Typhlosion alone because the dossier names it the striking pick and it lost to a critical hit rather than to a bad matchup. Both changed members go to offset 2, the cap for this pass.",
+  "cooler": "The room's thesis - punish the habits the hideout has been teaching - is the best-written idea in the block, and one half of it works beautifully: I really did have to stop using the move that had solved every previous room. The other half does not survive contact with the play order. Alolan Dugtrio's Sand Force depends on 'a previous sand room's weather', but the two sand rooms in this hideout (E0336 Tyranitar, E0337 Gigalith) come after this one, and battle weather does not carry between encounters in any case - so the member is authored around a condition that cannot occur. Similarly, Infernal Parade's doubling assumes the player arrives statused, which a player who walks in from a Pokemon Center does not. Concrete suggestion for a later pass: give this room its own status source or its own sand rather than borrowing from rooms the player has not reached, so that two of its four members stop depending on an inherited condition. Mightyena is also the least interesting slot here - the dossier itself calls it 'second and final grunt appearance', which is an argument from bookkeeping, not from design. No change made in this pass.",
+  "legality_notes": "No legality problem in the authored set. Flagging the Sand Force chronology above as a design inconsistency rather than a legality one.",
+  "reverify_note": "The Mightyena and Alolan Dugtrio +1 cannot be re-verified from this session; the change reaches the ROM only after the main agent re-materializes and rebuilds.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
