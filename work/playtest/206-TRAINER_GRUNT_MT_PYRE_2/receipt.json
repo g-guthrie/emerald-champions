@@ -1,0 +1,74 @@
+{
+  "play_order": 206,
+  "e_group": "E0317",
+  "trainer": "TRAINER_GRUNT_MT_PYRE_2",
+  "class": "grunt",
+  "location": "MtPyre_Summit",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members resolved at L56 = 60 + (-2) - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_mtpyre_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 205; every source map (Litten line 36, Foongus 42, Kubfu 42, Kirlia 30 + Gardevoirite stone-window 14, New Mauville sign 30, Route 111 ruins sign 42) precedes the Mt Pyre summit. Nothing from Shoal Cave, Route 124-127, Mossdeep or the Safari Zone.",
+  "pre_play_strategy_checks": [
+    "Weavile's Fake Out buys the turn and Polteageist spends it on Shell Smash",
+    "White Herb restores the Shell Smash defence drops immediately",
+    "Cursed Body disables the player's strongest attack",
+    "Mismagius' Levitate keeps it above Ground attacks",
+    "Weavile's Knock Off strips the White Herb or Focus Sash",
+    "Carracosta's Sturdy guarantees it survives one hit and can Shell Smash behind it"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-4",
+      "run_dir": "work/playtest/206-TRAINER_GRUNT_MT_PYRE_2/a1",
+      "party": "party_mtpyre_60.json (Incineroar/Amoonguss/Urshifu-S/Mega Gardevoir/Zapdos/Landorus)",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "why": "I deliberately did not deny the opening: Fake Out went at Weavile and Sludge Bomb at Polteageist so the authored Shell Smash lane would get its chance. It never took it. Weavile's Fake Out flinched Incineroar, Polteageist spent both of its turns on Shadow Ball, and Cursed Body disabled Amoonguss's Sludge Bomb. Weavile's Knock Off plus a second Shadow Ball killed Amoonguss on turn 2, while Incineroar's Knock Off removed Polteageist. Urshifu replaced it: always-crit Wicked Blow is the answer to this room's whole premise and it two-shot Carracosta while ignoring Weakness Policy entirely. Turn 4 traded Incineroar's recoil for Weavile. Mega Gardevoir came in last and Hyper Voice finished the Focus-Sashed Mismagius."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Fake Out buys the turn and Polteageist Shell Smashes into it", "result": "FAIL", "evidence": "turn 1 Weavile's Fake Out landed and flinched Incineroar - the bought turn existed exactly as authored - and Polteageist chose Shadow Ball at Amoonguss instead of Shell Smash. It chose Shadow Ball again on turn 2 and died without ever setting up. This is the room's entire stated plan and it did not fire; see AI defects."},
+    {"check": "White Herb restores the Shell Smash drops", "result": "FAIL (item absent)", "evidence": "the driver reported Polteageist's held item as ITEM_NONE on the turn-0 board while Weavile's ITEM_LIFE_ORB and Mismagius's ITEM_FOCUS_SASH both read correctly. src/data/trainers.party line 1303 authors 'SPECIES_POLTEAGEIST_ANTIQUE @ ITEM_WHITE_HERB'. Either the item is not reaching the battle or the driver cannot read it on this mon. See AI/engine defects; I re-test the same item on E0325's Magcargo later in this block."},
+    {"check": "Cursed Body disables the player's strongest attack", "result": "PASS", "evidence": "turn 1, Amoonguss's Sludge Bomb was disabled the moment it connected. Amoonguss was reduced to Spore/Rage Powder/Protect for the rest of its life, which is exactly the authored consequence."},
+    {"check": "Levitate on Mismagius", "result": "NOT OBSERVED", "evidence": "confirmed as ABILITY_LEVITATE on entry and Trace copied it onto Gardevoir, but Landorus never came in so no Ground attack tested it."},
+    {"check": "Weavile's Knock Off strips the player's item", "result": "PASS", "evidence": "turn 2 Knock Off removed Amoonguss's Rocky Helmet (and took Rocky Helmet recoil doing it). Correct target choice - the Helmet was the item on the field worth removing."},
+    {"check": "Carracosta Sturdy plus Shell Smash behind it", "result": "FAIL", "evidence": "Carracosta entered on turn 3 and chose Waterfall then Aqua Jet. It never used Shell Smash, and Sturdy never mattered because Wicked Blow's guaranteed critical hit did 99 then 102 to a 201 HP body - two ordinary hits, not a one-shot. Weakness Policy also never triggered because I never aimed a super-effective move at it, which is the authored counterplay working."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Weavile", "payoff": "real - blocked Incineroar's Flare Blitz, which is 2x into its Ice half and would have killed it at 103/162. It survived to act once more."},
+    {"turn": 4, "battler": "Weavile (selected Icicle Crash, not Protect)", "payoff": "n/a - listed only to record that it did not guard twice in a row"}
+  ],
+  "protect_summary": "1 opponent Protect, with a clean payoff, 0 empty, no consecutive guarding. The guarding judgement in this room is fine; the setup judgement is not.",
+  "ai_defects": [
+    {
+      "severity": "significant",
+      "turns": "1 and 2",
+      "board": "Polteageist-Antique (Ghost, 151 HP, Shell Smash / Shadow Ball / Giga Drain / Protect) at battler 1, its partner Weavile having just landed Fake Out on my Incineroar; my side Incineroar (flinched) and Amoonguss",
+      "chosen": "MOVE_SHADOW_BALL at Amoonguss on both turns",
+      "problem": "This room's authored plan is 'Weavile's Fake Out buys the turn and Polteageist spends it on Shell Smash'. Turn 1 was the exact board the plan describes - one player battler flinched, the other a slow Grass/Poison support that cannot threaten a Ghost - and the scorer still preferred an immediate Shadow Ball that did 70 to a 263 HP target. A +2/+2/+2 Polteageist with the White Herb restoring the drops beats that board; instead the room traded its win condition for two mediocre attacks and died to a single Knock Off. The same pattern repeated on turn 2.",
+      "better": "MOVE_SHELL_SMASH on turn 1.",
+      "note": "This may be the same root cause as the missing White Herb: if the engine sees no White Herb, a Shell Smash scorer that weighs the -1/-1 defence drops would rate the setup much worse than it should. Worth checking the item first."
+    },
+    {
+      "severity": "significant",
+      "turns": "turn 0 board",
+      "board": "battle start, E0317",
+      "chosen": "n/a - state read, not a decision",
+      "problem": "Polteageist-Antique's held item reads ITEM_NONE although src/data/trainers.party authors ITEM_WHITE_HERB for it. Other members' items on the same board read correctly. Recorded as an engine/materialization defect to investigate, not an AI scoring defect.",
+      "better": "n/a",
+      "note": "I could not distinguish a materialization bug from a stale headless ROM from this session (I may not run make). The A/B evidence to look at is E0325 TRAINER_GRUNT_MAGMA_HIDEOUT_4, whose Magcargo also holds ITEM_WHITE_HERB, played later in this same block."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but it cost Incineroar and Amoonguss - two faints, which the brief treats as a real fight - and the win leaned on a specific tool (always-crit Wicked Blow) rather than on the room being soft. Raising levels here would paper over the fact that the room's own setup lane never fired; fix the AI first.",
+  "rebuild_note": "No level change was made, so there is nothing to re-verify. The two defects above are unverifiable from this session until the main agent rebuilds.",
+  "theme_check": "Yes, on paper and partly on the board. A haunted teapot, a witch's hat and a fossil turtle looting a graveyard is a clear, distinct look, and Cursed Body disabling my Sludge Bomb is a memorable, location-appropriate moment. But the room's signature - a bought turn becoming a Shell Smash, twice over - did not appear once, from either setter. What the player actually experiences is four ordinary attackers.",
+  "cooler_note": "The concept deserves to be kept and made to work rather than redesigned. The room is currently two Shell Smash lanes that the AI declines to use; fixing that is worth more than any species change. If a change were wanted later, Polteageist would be more frightening with Stored Power over Giga Drain, so a landed Smash visibly escalates instead of just hitting harder once.",
+  "authored_set_legality": "One problem: Polteageist's ITEM_WHITE_HERB does not appear on the battle board (see defects). Levels, moves, abilities and the Medium formula are otherwise correct."
+}
