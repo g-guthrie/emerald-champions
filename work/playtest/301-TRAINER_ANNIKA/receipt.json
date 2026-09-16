@@ -1,0 +1,68 @@
+{
+ "play_order": 301,
+ "e_group": "E0467",
+ "trainer": "TRAINER_ANNIKA",
+ "class": "gym",
+ "location": "SootopolisCity_Gym_B1F",
+ "cap": 84,
+ "cap_source": "driver level_cap",
+ "difficulty": "medium",
+ "build_dir": "work/agent-battle-build-8",
+ "party_manifest": "work/playtest/301-TRAINER_ANNIKA/party_sootopolis_84.json",
+ "availability_note": "Sootopolis after the Cave of Origin, Rain Badge not earned. Tapu Koko/Zapdos (Route 110 / New Mauville signs, reachable legends, gate 30), Iron Hands (New Mauville 30), Kartana (Petalburg Woods 20), Raging Bolt (Route 119, 60), Amoonguss (42). Nothing from Ever Grande or the League.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/301-TRAINER_ANNIKA/a1",
+   "seed": 1,
+   "outcome": "won",
+   "turns": 3,
+   "decisions": 5,
+   "player_faints": 2,
+   "opponent_faints": 6,
+   "note": "Koko Thunderbolt OHKOed Golduck T1 and Quaquaval T2; Iron Hands Drain Punch OHKOed AV Empoleon; Kartana Leaf Blade OHKOed Basculegion, Wild Charge OHKOed Milotic. Lost Koko to Empoleon Hydro Pump (T2) and Kartana (120 HP) to Samurott-H Band Sucker Punch (T4)."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Quaquaval opens with Aqua Step / Protect vs the Fake Out threat",
+   "result": "PASS",
+   "evidence": "T1 Quaquaval Protect blocked Iron Hands' Fake Out (real payoff); T2 it chose Aqua Step into Koko but Koko's Thunderbolt KOed it first."
+  },
+  {
+   "check": "Golduck attacks or Nasty Plots; Cloud Nine present",
+   "result": "PASS (attack)",
+   "evidence": "T1 Golduck chose Hydro Pump into Koko, fainted to Thunderbolt before moving. Cloud Nine had nothing to cancel."
+  },
+  {
+   "check": "Empoleon Competitive not triggered by the player",
+   "result": "n/a",
+   "evidence": "No stat drops offered; Empoleon Hydro Pump OHKOed Koko (215/238) T2, then died to Drain Punch."
+  },
+  {
+   "check": "Milotic Flame Orb / Marvel Scale",
+   "result": "FAIL to show",
+   "evidence": "Milotic entered T3, chose Muddy Water, was OHKOed by Wild Charge before end-of-turn Flame Orb activation. The concept never appeared on the board."
+  },
+  {
+   "check": "Basculegion Specs closer, Samurott-H Sharpness/Sucker Punch",
+   "result": "PASS",
+   "evidence": "Basculegion chose Shadow Ball (died first); Samurott-H T4 Sucker Punch KOed Kartana (correct read on an attacking Kartana)."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "attempt": 1,
+   "turn": 1,
+   "user": "Quaquaval",
+   "payoff": "REAL - blocked Fake Out."
+  }
+ ],
+ "ai_defects": [],
+ "theme_note": "Room concept (three self-boosting mechanisms, no weather) barely showed: every member died the turn it entered or the turn after. Only Quaquaval's Protect-into-Aqua-Step line and Samurott's Sucker Punch registered.",
+ "level_changes": [],
+ "level_changes_unverified": "None. Won with 2 faints per the brief's keep rule, but the fight lasted 3 turns; the room is soft against Electric Terrain + Grass. If the main agent wants the room to bite, +1 Golduck/Milotic would be the first lever.",
+ "cooler": "The idea is good but the bodies are too frail for cap 84 against Tapu Koko: Golduck and Quaquaval both die to one Life Orb Thunderbolt. A Sitrus/Assault Vest Golduck or a Wide Guard user would let Aqua Step actually snowball. Not changed this pass.",
+ "authored_set_legality": "No problem found.",
+ "most_worth_rerunning": "Not needed."
+}
