@@ -1,0 +1,33 @@
+{
+  "play_order": 300, "e_group": "E0466", "trainer": "TRAINER_BETHANY", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/300-TRAINER_BETHANY/party_strike_84.json",
+  "availability_note": "Same Sootopolis party (Rillaboom 36, Raging Bolt 60, Kartana 20, Flutter Mane 68, Incineroar 36, Zapdos 30 reachable legend); Sootopolis after the cavern and Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/300-TRAINER_BETHANY/a1", "seed": 1, "outcome": "won", "turns": 8, "decisions": 10, "player_faints": 1, "opponent_faints": 6, "note": "T1 Palafin Protect blocked Fake Out + Thunderbolt; Barraskewda swapped to Azumarill. T2 Grassy Glide + Thunderclap (both priority) KOed Palafin before its chosen Flip Turn resolved - Hero Form never happened; Azumarill Belly Drummed. T3 Azumarill clicked Belly Drum again at +6 (failed) while Glide did 245; Barraskewda swapped to Greninja. T4 Glide finished Azumarill before Play Rough, Draco Meteor broke Inteleon's Sash on the switch-in. T5 Greninja switched into a 2x Glide and died. T6 Thunderclap took the 16-HP Inteleon and a crit Wood Hammer took the Aqua Jet-locked Barraskewda. T7 Mega Kingler's X-Scissor KOed Rillaboom (201); T8 Protect; T9 Leaf Blade ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Palafin Flip Turn / hard switch only with a healthy receiver, becoming Hero Form on re-entry", "result": "PASS (selected) / DENIED", "evidence": "T1 Protect; T2 chose Flip Turn with five healthy receivers, but two priority attacks (Grassy Glide under terrain, Thunderclap) resolved first and it fainted at 288 HP. Hero Form never appeared - the crack line ('kill Palafin before it leaves') working as written."},
+    {"check": "Barraskewda Propeller Tail attacks beside Palafin", "result": "PARTIAL", "evidence": "It was withdrawn on T1 and T3 (both times for a fresh body) and attacked only on T5-T6 with Band-locked Aqua Jet (24 into a resisting Rillaboom) before a crit Wood Hammer took it. Propeller Tail never mattered because I had no redirection out."},
+    {"check": "Azumarill Belly Drum admitted only after a survival check, then Aqua Jet", "result": "PASS (Drum) / FAIL (follow-up)", "evidence": "T2 Belly Drum at full HP with Sitrus (survival check plausible: my Electric/Grass attackers were both resisted or neutral on it). T3 it chose Belly Drum AGAIN at +6 and the move failed; T4 Play Rough was selected but priority Glide KOed it first. The +6 Aqua Jet was never used."},
+    {"check": "Greninja Protean / Inteleon Sniper lanes", "result": "NOT REACHED / PARTIAL", "evidence": "Greninja was switched in twice and never moved (OHKOed by 2x Glide on the second entry). Inteleon hung on its Sash to Draco Meteor, was withdrawn, re-entered and fired one Ice Beam (115 on Rillaboom) before Thunderclap took it."},
+    {"check": "Mega Kingler closer with Crabhammer", "result": "PASS (Mega + KO)", "evidence": "T7 Mega Evolved and X-Scissor (2x, correct pick over Crabhammer into a Grass type) KOed Rillaboom from 200; T8 Protect blocked Leaf Blade + Thunderbolt; T9 died."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Palafin", "payoff": "REAL - blocked Fake Out + 2x Thunderbolt; partner slot switched Barraskewda for Azumarill."},
+    {"turn": 8, "user": "Mega Kingler (last member)", "payoff": "REAL - blocked a lethal Leaf Blade + Thunderbolt; bought one turn with no partner."}
+  ],
+  "ai_defects": [
+    {"turn": 3, "battler": "Azumarill", "board": "Azumarill (+6 Atk, ~277 HP) + Barraskewda vs Rillaboom + Raging Bolt", "chosen": "Belly Drum (already at +6; the move failed)", "better": "Aqua Jet or Play Rough - at +6 Huge Power either KOs. A stat move whose stat is already maximised must be excluded; this wasted the one turn the Drum had bought and the Glide that followed killed it. High severity for this room's concept."},
+    {"turn": "T1/T3/T5", "battler": "Barraskewda / Greninja / Inteleon (AI switch receivers)", "board": "vs Rillaboom + Raging Bolt", "chosen": "five hard switches in six turns, twice feeding a frail body into a visible 2x attack (Greninja into Glide, Inteleon into Draco Meteor)", "better": "Attack with the Band lead; the switch carousel gave me free priority KOs. Medium severity; same receiver-choice pattern as Olivia (298) and Tiffany (299)."}
+  ],
+  "authored_set_legality": "No problem found. Levels L84 x5, Kingler L85. Note Palafin's Flip Turn was chosen on T2 with reserves available, as the dossier requires.",
+  "theme_note": "Partly. The speed-and-priority idea is visible (Palafin's pivot attempt, Belly Drum, Aqua Jet lock, Mega Kingler's KO), but the memorable moment - meeting Hero Form - is exactly what the crack line prevents and my own priority did prevent it. The Belly Drum repeat is the one thing that made the room feel broken rather than beaten.",
+  "level_changes": [
+    {"member": "GRENINJA", "before": 2, "after": 3, "reason": "first-try 6-1 with no real threat; switched in twice and never moved."},
+    {"member": "INTELEON", "before": 2, "after": 3, "reason": "one Ice Beam in eight turns; Palafin/Azumarill are the concept and Kingler the Mega."}
+  ],
+  "level_changes_unverified": "Not re-run: build-8 ROM predates these offsets; rerun after the main agent rebuilds.",
+  "cooler": "Yes, cheaply: give Palafin a Focus Sash instead of Leftovers so the Flip Turn always survives one priority volley and Hero Form is actually met; and fix the Belly Drum repeat on the AI side. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun to confirm the Belly Drum-at-+6 repeat and to see whether a Sash-less Palafin ever reaches Hero Form against a non-priority lead."
+}
