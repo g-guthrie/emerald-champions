@@ -1,0 +1,93 @@
+{
+  "play_order": 241,
+  "e_group": "E0368",
+  "trainer": "TRAINER_BRENDA",
+  "class": "regular",
+  "location": "Route126",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Glaceon (-1) at L73 and Octillery / Seaking / Alomomola (0) at L74 = cap + offset - 2 on Medium. Cap resolved from the Game Book ladder: C39 Scorched Slab grants 76, C40 (Aqua Hideout, eastern sea) and C41 (Mind Badge) change no cap, and 84 only arrives with C42 the Space Center.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/241-TRAINER_BRENDA/party_sea76.json"],
+  "chronology_note": "Route 126 is reached by sailing east out of Lilycove after the Aqua Hideout, with Dive not yet granted. Every member's pool-76 gate is 42 or lower, so each source map is long behind the player: Incineroar 36, Rillaboom 36, Zapdos 30 (legendary_sign:NewMauville_Inside), Urshifu-Single 42 (Kubfu, legendary_sign:Route112), Gardevoir 30 with ITEM_GARDEVOIRITE stone-window 14, Amoonguss 42. Nothing gated 68 (Mt Pyre / Magma Hideout / Scorched Slab) or 76 (Route 131 / Pacifidlog) was used, and nothing from Mossdeep, Shoal Cave, the Abandoned Ship, Seafloor Cavern or Sootopolis.",
+  "pre_play_strategy_checks": [
+    "SNOW: Glaceon selects Snowscape on a turn where it pays (Slush Rush speed, Ice Defense, perfect-accuracy Blizzard)",
+    "Octillery attacks immediately rather than spending the opening on support",
+    "Blizzard's accuracy in snow is the reason the setup turn is not wasted",
+    "Seaking's Water Veil / Drill Run appear as the alternate deployment when snow is answered",
+    "Alomomola: Regenerator rotation, Wacan Berry on an Electric hit, Safeguard blocking status, Helping Hand"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/241-TRAINER_BRENDA/a1",
+      "party": "party_sea76.json (Incineroar/Rillaboom/Zapdos/Urshifu-Single/Mega Gardevoir/Amoonguss)",
+      "outcome": "won",
+      "turns": 8,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "why": "Turn 2 cost me two Pokemon at once and is the whole story of the fight: Glaceon's Freeze-Dry OHKOed a 309 HP Rillaboom before it moved, and Octillery's Hydro Pump finished a Flare-Blitz-recoiled Incineroar. A Wise Glasses Modest Glaceon at L73 hits far harder than a route trainer looks like it should. From there Zapdos traded into the bulky back half, Amoonguss's Rage Powder and Rocky Helmet held the middle, and Urshifu's Wicked Blow did the actual killing - it is the one move on my side that makes progress through this team's very heavy Protect habit."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "SNOW - Glaceon sets Snowscape on a turn where all three payoffs arrive",
+      "result": "FAIL",
+      "evidence": "Glaceon had exactly two decisions and chose an attack both times: turn 1 MOVE_BLIZZARD (flinched by Fake Out, so the choice is from the native latch) and turn 2 MOVE_FREEZE_DRY. It then died. Snow was never on the field in this battle - the turn-0 and every subsequent reading is weather ['none']. The encounter's single named strategy did not appear. See AI defect E0368-1."
+    },
+    {
+      "check": "Blizzard's perfect accuracy in snow is what makes the Snowscape turn worth spending",
+      "result": "N/A",
+      "evidence": "No snow was ever set, so the payoff could not be observed. Blizzard was selected once, on turn 1, into a board with no weather - i.e. at its 70 percent accuracy, which is precisely the choice the plan says the Snowscape turn exists to avoid."
+    },
+    {
+      "check": "Octillery attacks immediately",
+      "result": "FAIL as written, but the deviation was correct play",
+      "evidence": "Octillery opened with Protect on turn 1, not an attack. It was the right call - it blanked a Life Orb Wood Hammer from a 252 Atk Adamant Rillaboom in Grassy Terrain, which would very likely have killed it outright. The plan line is the thing that is wrong here, not the AI."
+    },
+    {
+      "check": "Seaking's Water Veil and Drill Run are the alternate deployment when the Ice lane is answered",
+      "result": "PARTIAL",
+      "evidence": "Seaking arrived last (turn 7) with only one partner-less turn to act. It used Protect (blocking Spore, a genuinely correct read) and then Waterfall. Drill Run - the move the plan names as its reason to exist, covering the Rock and Electric bodies - was never selected, and Water Veil never mattered because nothing on my side burns."
+    },
+    {
+      "check": "Alomomola's Regenerator and Wacan Berry absorb one Electric attack",
+      "result": "PASS",
+      "evidence": "turn 4: 'The opposing Alomomola's Wacan~Berry lessened the damage' against Zapdos's Thunderbolt - 103 damage on a 397 HP body instead of roughly double that. Regenerator was never exercised because Brenda never rotated Alomomola out."
+    },
+    {
+      "check": "Safeguard blocks the status a stall fight would otherwise lose to",
+      "result": "PASS, decisively",
+      "evidence": "turn 3: Alomomola used Safeguard on the same turn Amoonguss used Spore - 'Amoonguss used Spore! The opposing Alomomola is protected by Safeguard!'. That one action denied me the single best move in my party for five turns and is the reason the fight ran to eight turns. It re-set Safeguard on turn 8 as it was dying, which was pointless, but the first one was excellent."
+    },
+    {
+      "check": "Helping Hand is used to enable a partner's attack",
+      "result": "PARTIAL",
+      "evidence": "turn 7: Alomomola used Helping Hand on Octillery, but Octillery was at 35/264 and died to Wicked Blow before it acted, so the boost was thrown away. Ex ante it is a defensible choice (Alomomola had no good attack and Octillery's Ice Beam was aimed at a 4x-relevant target); ex post it was an empty turn on the turn Brenda could least afford one."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Octillery", "payoff": "blocked Rillaboom's Life Orb Wood Hammer in Grassy Terrain at 264/264 - a hit that was very likely an outright KO. Outstanding"},
+    {"attempt": 1, "turn": 3, "battler": "Octillery", "payoff": "blocked Zapdos's Thunderbolt, super effective on a Water body. Outstanding"},
+    {"attempt": 1, "turn": 5, "battler": "Octillery", "payoff": "blunted Urshifu's Wicked Blow from 192 to about 53 (Unseen Fist pierces for 25 percent damage under B_UNSEEN_FIST_PIERCING_DRILL=GEN_CHAMPIONS). Still a large gain and a correct guess that the attack was coming"},
+    {"attempt": 1, "turn": 8, "battler": "Seaking", "payoff": "blocked Amoonguss's Spore on the turn Seaking entered. Outstanding - sleep on the last Pokemon would have ended the fight"}
+  ],
+  "protect_summary": "4 opponent Protects, 0 empty, every one of them with a real and in three cases decisive payoff. Brenda's guarding is among the best in the block; the AI is clearly not spending Protect on reflex.",
+  "ai_defects": [
+    {
+      "id": "E0368-1",
+      "turn": "a1 turns 1 and 2",
+      "board": "turn 1: Glaceon 201/201 with Snowscape unused, beside a full-HP Octillery, opposite a Fire/Dark Incineroar and a Grass Rillaboom that had just set Grassy Terrain. turn 2: Glaceon 177/201, same board.",
+      "chosen": "MOVE_BLIZZARD (turn 1, at 70 percent accuracy with no weather), then MOVE_FREEZE_DRY (turn 2).",
+      "better": "MOVE_SNOWSCAPE, on either turn. Every one of the three payoffs the dossier names was live and none of them is conditional: Slush Rush would have doubled Glaceon's own Speed (relevant against a 76-Speed-EV Zapdos and a Jolly Urshifu in reserve), snow raises the Defense of Ice types, and Blizzard - which it chose to use anyway on turn 1 - becomes 100 percent accurate. Choosing Blizzard at 70 percent accuracy on the exact turn the setter could make it never miss is the clearest possible statement that the SNOW strategy flag is not reaching the move choice. The mechanic named in the strategy field was never once on the field. Severity: high for this encounter - the whole authored identity of the trainer is invisible, and the dossier itself says the pairing with Gabrielle's automatic Snow Warning is the point."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but with two player faints and a genuine fight to turn 9, which is the brief's explicit 'keep' case. The two faints were not mistakes I could have avoided cheaply - a 309 HP Rillaboom being one-shot by a route trainer's Glaceon is a legitimately hard hit for cap 76. Raising anything here would be compensating for an AI defect (the missing Snowscape) with levels, which the standing rule forbids: if Glaceon actually set snow, this team would be meaningfully harder than it already is, so the correct order is fix the strategy first and re-measure.",
+  "cooler": "The concept is sound and the dossier's self-assessment is honest - a manual snow setter whose own ability profits from the setup turn is a tidier lesson than automatic Snow Warning, and it reads well as a pair with Gabrielle. But playing it exposes that the whole idea currently rests on one frail Pokemon voluntarily spending its only safe turn, and the AI will not do it. Two concrete suggestions, neither of which I have implemented. (1) Snowscape belongs on the bulky member, not the fast one: Alomomola has 397 HP, Regenerator and a spare slot's worth of purpose already, and it survives long enough to set the weather that the two Water bodies do not care about but Glaceon lives on. Glaceon then simply attacks, which is what it wants to do and what the AI already wants to do. (2) The team is three Waters and one Ice, so the snow only ever helps one member; an Ice Body or Slush Rush partner (or Alomomola's Wacan Berry becoming an Icy Rock) would make the weather worth the turn from the team's point of view rather than just Glaceon's. Separately: Seaking's Drill Run is the only Ground/Rock-answering move on the team and it arrived too late to ever be used - Seaking would be a better lead than a fourth-slot reserve.",
+  "legality_notes": "No legality problem in the authored set. All four members and all four items are inside the cap-76 window, the levels resolve exactly to cap + offset - 2, and nothing about the roster is out of chronology for Route 126.",
+  "engine_note": "Unseen Fist dealing 25 percent through a single-target Protect is authored configuration, not a defect: include/config/battle.h sets B_UNSEEN_FIST_PIERCING_DRILL to GEN_LATEST and src/battle_util.c GetMoveAgainstProtectionModifier returns UQ_4_12(0.25) for that case. Measured in this battle as 53 damage through Protect versus 192 on the unguarded turn. Worth knowing for every later receipt that uses Urshifu.",
+  "verification_limit": "No level change was made here, so nothing in this receipt is pending re-verification. If the Snowscape defect is repaired, this is the battle worth re-running in the block after the gym rooms."
+}
