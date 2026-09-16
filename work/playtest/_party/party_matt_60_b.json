@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge chapter cap 60 - E0320 TRAINER_MATT_MT_PYRE, attempt 2 rebuild (sun instead of sand, Psychic answer to Okidogi)",
+  "availability_audit": "All six are pool-60 entries whose source map precedes the Mt Pyre summit. Torkoal gate 42, wild:FieryPath/land_mons (the Fiery Path, cleared before the Heat Badge). Incineroar gate 36 (Litten line). Zapdos gate 30, legendary_sign:NewMauville_Inside. Landorus gate 42, legendary_sign:Route111_RuinsExterior. Amoonguss gate 42 (Foongus line). Gardevoir gate 30 (Kirlia line) with ITEM_GARDEVOIRITE stone-window 14. Two reachable legends, both signed long before Lilycove. Unlike attempt 1 this party uses nothing gated at the current cap - the Safari Zone Tyranitar is gone - so it is legal for any battle in this window, not just the last one.",
+  "plan": "Attempt 1 lost 6-3 to two specific things: Okidogi's Drain Punch, which is 4x on Tyranitar and 2x on both my Dark types and took four KOs by itself, and Mega Golisopod's First Impression, which one-shot Mega Gardevoir. This rebuild answers both. Torkoal's Drought replaces Tyranitar's Sand Stream as the weather answer - it still overwrites Drizzle and switches off Swift Swim, Dry Skin and the rain-boosted Water attacks, but it also halves every Water move outright and it is not Fighting-weak, and its Heat Wave is 2x into both Araquanid and Golisopod's Bug half. Mega Gardevoir's Psyshock is 4x into Okidogi (Psychic on Poison/Fighting) and is the single answer attempt 1 lacked. Landorus and Zapdos are both Flying, so they resist Drain Punch and First Impression, and Landorus's Earth Power is 2x into Okidogi and Heliolisk. Amoonguss keeps the Spore lane. Lead is Torkoal + Incineroar: sun on turn 1 and a Fake Out for Araquanid, which is the fastest threat on the board.",
+  "party": [
+    {
+      "species": "SPECIES_TORKOAL",
+      "moves": ["MOVE_HEAT_WAVE", "MOVE_EARTH_POWER", "MOVE_YAWN", "MOVE_PROTECT"],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_DROUGHT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "weather control: Drought overwrites Drizzle, halves every Water attack and switches off Swift Swim and Dry Skin; Heat Wave is 2x spread into the two Bug bodies",
+      "availability": "pool-60 gate 42, wild:FieryPath/land_mons."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out and Intimidate control, Knock Off strips the Life Orb and the Damp Rock",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": ["MOVE_PSYSHOCK", "MOVE_HYPER_VOICE", "MOVE_MOONBLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Mega win condition and the specific answer to Okidogi: Psyshock is 4x into Poison/Fighting",
+      "availability": "pool-60 gate 30 (Kirlia line) and ITEM_GARDEVOIRITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: Flying half resists Drain Punch and First Impression; Earth Power is 2x into Okidogi and Heliolisk",
+      "availability": "pool-60 gate 42, legendary_sign:Route111_RuinsExterior."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Spore the ace, redirect the single-target pressure, Sludge Bomb is 2x into Ludicolo",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "reachable legend: Electric is 2x into Pelipper, Araquanid and Golisopod; Flying resists both of the moves that beat attempt 1",
+      "availability": "pool-60 gate 30, legendary_sign:NewMauville_Inside."
+    }
+  ]
+}

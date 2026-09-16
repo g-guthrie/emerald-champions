@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge chapter cap 60 - Mt Pyre Summit Aqua crews (play_order 205-209, E0316-E0320)",
+  "availability_audit": "Every member's pool-60 source map precedes the Mt Pyre summit in play order. Incineroar gate 36 (Litten line). Amoonguss gate 42 (Foongus line). Urshifu-Single gate 42 (evolution:other:EVO_SCRIPT_TRIGGER from Kubfu, a pre-Fortree script gift). Gardevoir gate 30 (Kirlia line) with ITEM_GARDEVOIRITE stone-window 14. Zapdos gate 30 legendary_sign:NewMauville_Inside (the New Mauville shutdown, long cleared). Landorus gate 42 legendary_sign:Route111_RuinsExterior (desert ruins). Two reachable legends, both signed on maps the player cleared before the Feather Badge. Nothing here comes from Shoal Cave, Route 124/125/126/127 or Mossdeep, none of which a Mt Pyre climber has reached; Safari Zone species (gate 60, reached from Route 121) were deliberately left out of the core six and held in reserve for the weather war against Matt.",
+  "plan": "The summit is Dark/Ghost/Water with two Shell Smash lanes, one Trick Room and one rain admin. Incineroar is Dark-typed so Liepard's Prankster Encore and Taunt do not touch it, and Fake Out plus Intimidate is the standing answer to a bought setup turn. Amoonguss Spores the setter. Urshifu-Single's Unseen Fist hits through the block-heavy Aqua rooms, and Wicked Blow always crits, so it ignores a Shell Smash or Coil the AI already banked. Mega Gardevoir's Pixilate Hyper Voice is spread Fairy into a mountain made of Dark and Ghost and cannot be redirected by Storm Drain. Zapdos is the Electric answer to the rain crew and is immune to nothing here it needs to be. Landorus supplies Ground into Lanturn, Heliolisk and the Poison bodies.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out and Intimidate control; Dark typing blanks Prankster status",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "sleep the setter, redirect the single-target pressure",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Unseen Fist ignores Protect; Wicked Blow always crits through banked boosts",
+      "availability": "pool-60 gate 42, evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU."
+    },
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": ["MOVE_HYPER_VOICE", "MOVE_MOONBLAST", "MOVE_PSYSHOCK", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Mega win condition: Pixilate Hyper Voice is spread Fairy into Dark and Ghost",
+      "availability": "pool-60 gate 30 (Kirlia line) and ITEM_GARDEVOIRITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "reachable legend: Electric into the whole Aqua roster, Heat Wave spread",
+      "availability": "pool-60 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: Ground into Lanturn and Heliolisk, Poison into the Grass lane",
+      "availability": "pool-60 gate 42, legendary_sign:Route111_RuinsExterior."
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge chapter cap 60 - E0320 TRAINER_MATT_MT_PYRE (rain + Tailwind admin, Mega Golisopod ace)",
+  "availability_audit": "As party_mtpyre_60.json, with Landorus replaced by Tyranitar for the weather war. Tyranitar is pool-60 gate 60, wild:SafariZone_Northeast/rock_smash_mons - the Safari Zone entrance is on Route 121, which the brief's chronology places before the Mt Pyre summit, and Rock Smash is long available by the Feather Badge. It is therefore the one member sourced from inside the current cap window rather than below it, and it is honest for this battle because Matt is fought after Route 121/122. Everything else is unchanged: Incineroar gate 36, Amoonguss gate 42, Urshifu-Single gate 42, Gardevoir gate 30 with Gardevoirite stone-window 14, Zapdos gate 30 (New Mauville sign). Nothing from Shoal Cave, Route 124-127 or Mossdeep.",
+  "plan": "Matt's crew is three-quarters rain-dependent: Pelipper's Drizzle, Ludicolo's Swift Swim, Heliolisk's Dry Skin and every boosted Water move. The dossier's own crack says to change the weather first, so Tyranitar's Sand Stream is the centrepiece - it overwrites Drizzle on entry, turns Swift Swim off, stops Dry Skin healing and takes the 1.5x off the Water attacks, and its Rock lane is 2x into Pelipper. Zapdos is 2x into Pelipper, Araquanid and Golisopod. Amoonguss resists Water and Spores the setup. Incineroar's Intimidate and Fake Out answer the physical half; Urshifu's Unseen Fist ignores the Protects that a six-Pokemon admin leans on, and Mega Gardevoir is the Fairy answer to Okidogi's Fighting half. Lead is Tyranitar + Incineroar so the sand is up on turn 1, before Pelipper's Tailwind decides the speed race.",
+  "party": [
+    {
+      "species": "SPECIES_TYRANITAR",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_CRUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SAND_STREAM",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "weather control: Sand Stream overwrites Drizzle and switches off three of Matt's six engines; Rock Slide is 2x spread into Pelipper",
+      "availability": "pool-60 gate 60, wild:SafariZone_Northeast/rock_smash_mons (Route 121, reached before Mt Pyre)."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Fake Out and Intimidate control; Dark typing blanks Prankster status",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        252,
+        0
+      ],
+      "role": "sleep the setter, redirect the single-target pressure",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_ROOST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        4,
+        0
+      ],
+      "role": "reachable legend: Electric into the whole Aqua roster, Heat Wave spread",
+      "availability": "pool-60 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": [
+        "MOVE_WICKED_BLOW",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Unseen Fist ignores Protect; Wicked Blow always crits through banked boosts",
+      "availability": "pool-60 gate 42, evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU."
+    },
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_MOONBLAST",
+        "MOVE_PSYSHOCK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Mega win condition: Pixilate Hyper Voice is spread Fairy into Dark and Ghost",
+      "availability": "pool-60 gate 30 (Kirlia line) and ITEM_GARDEVOIRITE stone-window 14."
+    }
+  ]
+}

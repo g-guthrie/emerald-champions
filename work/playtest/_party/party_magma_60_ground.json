@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge chapter cap 60 - Magma Hideout excavation/sand rooms (E0322, E0326): same six, lead order changed",
+  "availability_audit": "Every member's pool-60 source map precedes the Magma Hideout, which the brief places after the Mt Pyre summit and before the Aqua Hideout and Mossdeep. Amoonguss gate 42 (Foongus line). Incineroar gate 36 (Litten line). Urshifu-Rapid-Strike gate 42 (evolution:other:EVO_SCRIPT_TRIGGER from Kubfu). Gardevoir gate 30 (Kirlia line) with ITEM_GARDEVOIRITE stone-window 14. Zapdos gate 30, legendary_sign:NewMauville_Inside. Swampert gate 36 (Mudkip line). One reachable legend. Nothing is sourced from Shoal Cave, Route 124-127, Mossdeep, the Aqua Hideout or the Safari Zone, so this party is honest for the first room of the raid as well as the last.",
+  "plan": "Identical six to party_magma_60.json; only the lead order changes. Against a Ground/Rock room the two bodies that must be on the field on turn 1 are Urshifu-Rapid, whose Surging Strikes is a three-hit Water move - it breaks Sturdy and Focus Sash on the same action that does 2x damage, and it always crits so a Coil or a Weakness Policy boost is irrelevant to it - and Amoonguss, which Spores the weather setter. Incineroar and Zapdos both take 2x from the paired Rock Slides, so they start in reserve. Note for E0326: hold Intimidate back, because Bisharp's Defiant turns any stat drop into +2 Attack.",
+  "party": [
+    {
+      "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+      "moves": [
+        "MOVE_SURGING_STRIKES",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_MYSTIC_WATER",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "the raid's main weapon: always-crit Water that ignores banked boosts, Fighting for the Steel and Dark lanes, and Unseen Fist through Protect",
+      "availability": "pool-60 gate 42, evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        252,
+        0
+      ],
+      "role": "lead: Spore the setter before the room's engine turns; Rage Powder pulls the single-target pressure",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ICE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "bulky second Water/Ground; High Horsepower is single-target so it does not hit my own partner",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_MARSHTOMP."
+    },
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": [
+        "MOVE_PSYSHOCK",
+        "MOVE_HYPER_VOICE",
+        "MOVE_MOONBLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Mega win condition: Psyshock is 2x into every Poison body here, Moonblast into the Dark ones, Hyper Voice is the spread answer to a Sturdy pair",
+      "availability": "pool-60 gate 30 (Kirlia line) and ITEM_GARDEVOIRITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "lead: Fake Out buys the turn the setup rooms want for themselves; Knock Off strips White Herb, Weakness Policy and Focus Sash",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_ROOST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        0,
+        252,
+        4,
+        0
+      ],
+      "role": "reachable legend: immune to Ground, which is the hideout's most common attacking type; Heat Wave answers the Steel and Bug lanes",
+      "availability": "pool-60 gate 30, legendary_sign:NewMauville_Inside."
+    }
+  ]
+}
