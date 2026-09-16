@@ -103,8 +103,6 @@ static bool32 SetCorrectAbilityNum(struct Pokemon *mon, enum Species species, en
 void MakeTrainerGenerator(struct TrainerGenerator *trainerGen, const struct Trainer *trainer)
 {
     trainerGen->gender = trainer->gender;
-    if (trainer->aiFlags & AI_FLAG_SMART_TERA)
-        trainerGen->smartTera = TRUE;
     trainerGen->isFrontier = FALSE;
     StringCopyN(trainerGen->name, trainer->trainerName, TRAINER_NAME_LENGTH + 1);
     trainerGen->trainerClass = trainer->trainerClass;
@@ -116,8 +114,6 @@ void MakePartnerGenerator(struct TrainerGenerator *trainerGen, const struct Trai
 {
     u32 otID;
     trainerGen->gender = partner->gender;
-    if (partner->aiFlags & AI_FLAG_SMART_TERA)
-        trainerGen->smartTera = TRUE;
     trainerGen->isFrontier = FALSE;
     StringCopyN(trainerGen->name, partner->trainerName, TRAINER_NAME_LENGTH + 1);
     trainerGen->trainerClass = partner->trainerClass;
@@ -217,16 +213,6 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     {
         data = trainerMon->gigantamaxFactor;
         SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &data);
-    }
-    if (trainerMon->teraType)
-    {
-        data = trainerMon->teraType;
-        SetMonData(mon, MON_DATA_TERA_TYPE, &data);
-    }
-    else if (!trainer->smartTera)
-    {
-        data = TYPE_MYSTERY;
-        SetMonData(mon, MON_DATA_TERA_TYPE, &data);
     }
 
     // EXP tables stop at 100; the opponent level is a transient battle stat.

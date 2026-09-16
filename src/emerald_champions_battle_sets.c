@@ -84,7 +84,6 @@ bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item)
     {
     case ITEM_TYPE_MEGA_STONE:
     case ITEM_TYPE_Z_CRYSTAL:
-    case ITEM_TYPE_TERA_SHARD:
     case ITEM_TYPE_PLATE:
     case ITEM_TYPE_MEMORY:
     case ITEM_TYPE_DRIVE:
@@ -127,8 +126,7 @@ bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species)
         && !gSpeciesInfo[species].isMegaEvolution
         && !gSpeciesInfo[species].isPrimalReversion
         && !gSpeciesInfo[species].isUltraBurst
-        && !gSpeciesInfo[species].isGigantamax
-        && !gSpeciesInfo[species].isTeraForm;
+        && !gSpeciesInfo[species].isGigantamax;
 }
 
 static bool32 FindAbilitySlot(enum Species species, enum Ability ability, u32 *slot)

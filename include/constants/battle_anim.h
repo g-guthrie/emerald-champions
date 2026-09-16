@@ -410,17 +410,13 @@
 #define ANIM_TAG_IVY_CUDGEL_FIRE            (ANIM_SPRITES_START + 395)
 #define ANIM_TAG_IVY_CUDGEL_ROCK            (ANIM_SPRITES_START + 396)
 #define ANIM_TAG_IVY_CUDGEL_WATER           (ANIM_SPRITES_START + 397)
-#define ANIM_TAG_TERA_CRYSTAL               (ANIM_SPRITES_START + 398)
-#define ANIM_TAG_TERA_SHATTER               (ANIM_SPRITES_START + 399)
 #define ANIM_TAG_DREEPY_SHINY               (ANIM_SPRITES_START + 400)
 #define ANIM_TAG_BLOOD_MOON                 (ANIM_SPRITES_START + 401)
 #define ANIM_TAG_BEAM                       (ANIM_SPRITES_START + 402)
 #define ANIM_TAG_RED_EXPLOSION              (ANIM_SPRITES_START + 403)
 #define ANIM_TAG_PURPLE_CHAIN               (ANIM_SPRITES_START + 404)
 #define ANIM_TAG_PINKVIO_ORB                (ANIM_SPRITES_START + 405)
-#define ANIM_TAG_STARSTORM                  (ANIM_SPRITES_START + 406)
 #define ANIM_TAG_SALT_PARTICLE              (ANIM_SPRITES_START + 407)
-#define ANIM_TAG_TERA_SYMBOL                (ANIM_SPRITES_START + 408)
 #define ANIM_TAG_TATSUGIRI_CURLY            (ANIM_SPRITES_START + 409)
 #define ANIM_TAG_TATSUGIRI_DROOPY           (ANIM_SPRITES_START + 410)
 #define ANIM_TAG_TATSUGIRI_STRETCHY         (ANIM_SPRITES_START + 411)
@@ -594,8 +590,6 @@ enum AnimBattler
 #define B_ANIM_MAGIC_ROOM               47
 #define B_ANIM_TAILWIND                 48
 #define B_ANIM_FOG_CONTINUES            49
-#define B_ANIM_TERA_CHARGE              50
-#define B_ANIM_TERA_ACTIVATE            51
 #define B_ANIM_SIMPLE_HEAL              52
 #define B_ANIM_POWER_CONSTRUCT          53
 #define B_ANIM_SWAP_TO_SUBSTITUTE       54

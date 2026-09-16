@@ -916,8 +916,7 @@ bool32 ProteanTryChangeType(enum BattlerId battler, enum Ability ability, enum M
          && !gBattleStruct->bouncedMoveIsUsed
          && (gBattleMons[battler].types[0] != moveType || gBattleMons[battler].types[1] != moveType
              || (gBattleMons[battler].types[2] != moveType && gBattleMons[battler].types[2] != TYPE_MYSTERY))
-         && move != MOVE_STRUGGLE
-         && GetActiveGimmick(battler) != GIMMICK_TERA)
+         && move != MOVE_STRUGGLE)
     {
         SET_BATTLER_TYPE(battler, moveType);
         return TRUE;
@@ -2952,8 +2951,6 @@ static void PlayAnimation(enum BattlerId battler, u8 animId, const u16 *argPtr, 
      || animId == B_ANIM_PRIMAL_REVERSION
      || animId == B_ANIM_POWER_CONSTRUCT
      || animId == B_ANIM_ULTRA_BURST
-     || animId == B_ANIM_TERA_CHARGE
-     || animId == B_ANIM_TERA_ACTIVATE
      || animId == B_ANIM_FORM_CHANGE_INSTANT)
     {
         BtlController_EmitBattleAnimation(battler, B_COMM_TO_CONTROLLER, animId, *argPtr);
@@ -5503,12 +5500,6 @@ static void Cmd_tryconversiontypechange(void)
     u8 moveChecked = 0;
     u8 moveType = 0;
 
-    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-        return;
-    }
-
     if (B_UPDATED_CONVERSION >= GEN_6)
     {
         // Changes user's type to its first move's type
@@ -6047,10 +6038,6 @@ static void Cmd_settypetorandomresistance(void)
 
     if (moveToCheck == MOVE_NONE
         || moveToCheck == MOVE_UNAVAILABLE)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-    else if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -7591,7 +7578,7 @@ static void Cmd_settypetoenvironment(void)
     else
         environmentType = gBattleEnvironmentInfo[gBattleEnvironment].camouflageType;
 
-    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, environmentType) && GetActiveGimmick(gBattlerAttacker) != GIMMICK_TERA)
+    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, environmentType))
     {
         SET_BATTLER_TYPE(gBattlerAttacker, environmentType);
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, environmentType);
@@ -9450,13 +9437,9 @@ void BS_TryReflectType(void)
     NATIVE_ARGS(const u8 *failInstr);
     enum Species targetBaseSpecies = GET_BASE_SPECIES_ID(gBattleMons[gBattlerTarget].species);
     enum Type targetTypes[3];
-    GetBattlerTypes(gBattlerTarget, FALSE, targetTypes);
+    GetBattlerTypes(gBattlerTarget, targetTypes);
 
     if (targetBaseSpecies == SPECIES_ARCEUS || targetBaseSpecies == SPECIES_SILVALLY)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-    else if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -9677,13 +9660,6 @@ void BS_RemoveWeather(void)
 {
     NATIVE_ARGS();
     RemoveAllWeather();
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_ApplyTerastallization(void)
-{
-    NATIVE_ARGS();
-    ApplyBattlerVisualsForTeraAnim(gBattlerAttacker);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -11013,10 +10989,9 @@ void BS_TrySoak(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
     enum Type types[3];
-    GetBattlerTypes(gBattlerTarget, FALSE, types);
+    GetBattlerTypes(gBattlerTarget, types);
     enum Type typeToSet = GetMoveArgType(gCurrentMove);
-    if ((types[0] == typeToSet && types[1] == typeToSet)
-     || GetActiveGimmick(gBattlerTarget) == GIMMICK_TERA)
+    if (types[0] == typeToSet && types[1] == typeToSet)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -11590,7 +11565,7 @@ void BS_TryThirdType(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
     enum Type type = GetMoveArgType(gCurrentMove);
-    if (IS_BATTLER_OF_TYPE(gBattlerTarget, type) || GetActiveGimmick(gBattlerTarget) == GIMMICK_TERA)
+    if (IS_BATTLER_OF_TYPE(gBattlerTarget, type))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }

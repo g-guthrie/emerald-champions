@@ -1474,11 +1474,11 @@ static void CachePairConditionalBoost(struct PairEvaluation *ev, enum BattlerId 
 
 static bool32 PairCanSoak(enum BattlerId actor, enum BattlerId target)
 {
-    if (actor == target || !IsBattlerAlive(target) || GetActiveGimmick(target) == GIMMICK_TERA
+    if (actor == target || !IsBattlerAlive(target)
      || DoesSubstituteBlockMove(actor, target, MOVE_SOAK))
         return FALSE;
     enum Type types[3];
-    GetBattlerTypes(target, FALSE, types);
+    GetBattlerTypes(target, types);
     if (types[0] == TYPE_WATER && types[1] == TYPE_WATER)
         return FALSE;
     enum Ability ability = AI_GetMoldBreakerSanitizedAbility(actor, gAiLogicData->abilities[actor],

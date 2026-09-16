@@ -775,29 +775,6 @@ DOUBLE_BATTLE_TEST("Commander cancels Tatsugiri's pending Dynamax")
     }
 }
 
-DOUBLE_BATTLE_TEST("Commander cancels Tatsugiri's pending Terastallization")
-{
-    GIVEN {
-        PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); TeraType(TYPE_FIRE); }
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_DONDOZO);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN {
-            MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA);
-            SWITCH(playerRight, 2);
-        }
-    } SCENE {
-        ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
-        MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_CHARGE, playerLeft);
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_ACTIVATE, playerLeft);
-        }
-    }
-}
-
 DOUBLE_BATTLE_TEST("Commander clears when Dondozo is replaced and Tatsugiri can be hit")
 {
     GIVEN {

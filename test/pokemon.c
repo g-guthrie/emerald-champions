@@ -11,7 +11,6 @@
 #include "constants/daycare.h"
 #include "constants/move_relearner.h"
 
-
 // One native stat regression, not a battle or trainer-design assertion.
 // Literal expectations cover low-level rounding, EV / 4 rounding at level 50,
 // level-100 scaling, Nature, and default perfect IVs. Explicit IV tuning is covered separately.
@@ -137,52 +136,6 @@ TEST("Nature independent from Hidden Nature")
     SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
     EXPECT_EQ(GetNature(&mon), nature);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), hiddenNature);
-}
-
-TEST("Terastallization type defaults to primary or secondary type")
-{
-    u32 i;
-    enum Type teraType;
-    struct Pokemon mon;
-    for (i = 0; i < 128; i++) PARAMETRIZE {}
-    CreateRandomMonWithIVs(&mon, SPECIES_PIDGEY, 100, 0);
-    teraType = GetMonData(&mon, MON_DATA_TERA_TYPE);
-    EXPECT(teraType == GetSpeciesType(SPECIES_PIDGEY, 0)
-        || teraType == GetSpeciesType(SPECIES_PIDGEY, 1));
-}
-
-TEST("Terastallization type can be set to any type except TYPE_NONE")
-{
-    u32 i;
-    enum Type teraType;
-    struct Pokemon mon;
-    for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
-    {
-        PARAMETRIZE { teraType = i; }
-    }
-    CreateRandomMonWithIVs(&mon, SPECIES_WOBBUFFET, 100, 0);
-    SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
-    EXPECT_EQ(teraType, GetMonData(&mon, MON_DATA_TERA_TYPE));
-}
-
-TEST("Terastallization type is reset to the default types when setting Tera Type back to TYPE_NONE")
-{
-    u32 i;
-    enum Type teraType, typeNone;
-    struct Pokemon mon;
-    for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
-    {
-        PARAMETRIZE { teraType = i; typeNone = TYPE_NONE; }
-    }
-    CreateRandomMonWithIVs(&mon, SPECIES_PIDGEY, 100, 0);
-    SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
-    EXPECT_EQ(teraType, GetMonData(&mon, MON_DATA_TERA_TYPE));
-    if (typeNone == TYPE_NONE)
-        typeNone = GetTeraTypeFromPersonality(&mon);
-    SetMonData(&mon, MON_DATA_TERA_TYPE, &typeNone);
-    typeNone = GetMonData(&mon, MON_DATA_TERA_TYPE);
-    EXPECT(typeNone == GetSpeciesType(SPECIES_PIDGEY, 0)
-        || typeNone == GetSpeciesType(SPECIES_PIDGEY, 1));
 }
 
 TEST("Shininess independent from PID and OTID")
@@ -417,7 +370,7 @@ TEST("givemon [all]")
     ZeroPlayerPartyMons();
 
     RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=BALL_MASTER, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, teraType=TYPE_FIRE, dmaxLevel=7;
+        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=BALL_MASTER, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, dmaxLevel=7;
     );
 
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
@@ -449,7 +402,6 @@ TEST("givemon [all]")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), GetMoveMaxPP(MOVE_EXPLOSION));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_TERA_TYPE), TYPE_FIRE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_DYNAMAX_LEVEL), 7);
 }
 
@@ -458,7 +410,7 @@ TEST("givemon [egg]: properties are preserved after hatching")
     ZeroPlayerPartyMons();
 
     RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=BALL_MASTER, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, teraType=TYPE_FIRE, dmaxLevel=7, isEgg=TRUE;
+        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=BALL_MASTER, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, dmaxLevel=7, isEgg=TRUE;
     );
 
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG), TRUE);
@@ -495,7 +447,6 @@ TEST("givemon [egg]: properties are preserved after hatching")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), GetMoveMaxPP(MOVE_EXPLOSION));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_TERA_TYPE), TYPE_FIRE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_DYNAMAX_LEVEL), 7);
 
     //Let's test hatching specific properties too
@@ -540,7 +491,7 @@ TEST("givemon [vars]")
     VarSet(VAR_TEMP_E, 7);
 
     RUN_OVERWORLD_SCRIPT(
-        givemon VAR_TEMP_C, VAR_TEMP_D, item=VAR_0x8000, ball=VAR_0x8001, nature=VAR_0x8002, abilityNum=VAR_0x8003, gender=VAR_0x8004, hpEv=VAR_0x8005, atkEv=VAR_0x8006, defEv=VAR_0x8007, speedEv=VAR_0x8008, spAtkEv=VAR_0x8009, spDefEv=VAR_0x800A, hpIv=VAR_0x800B, atkIv=VAR_TEMP_0, defIv=VAR_TEMP_1, speedIv=VAR_TEMP_2, spAtkIv=VAR_TEMP_3, spDefIv=VAR_TEMP_4, move1=VAR_TEMP_5, move2=VAR_TEMP_6, move3=VAR_TEMP_7, move4=VAR_TEMP_8, shinyMode=VAR_TEMP_9, gmaxFactor=VAR_TEMP_A, teraType=VAR_TEMP_B, dmaxLevel=VAR_TEMP_E;
+        givemon VAR_TEMP_C, VAR_TEMP_D, item=VAR_0x8000, ball=VAR_0x8001, nature=VAR_0x8002, abilityNum=VAR_0x8003, gender=VAR_0x8004, hpEv=VAR_0x8005, atkEv=VAR_0x8006, defEv=VAR_0x8007, speedEv=VAR_0x8008, spAtkEv=VAR_0x8009, spDefEv=VAR_0x800A, hpIv=VAR_0x800B, atkIv=VAR_TEMP_0, defIv=VAR_TEMP_1, speedIv=VAR_TEMP_2, spAtkIv=VAR_TEMP_3, spDefIv=VAR_TEMP_4, move1=VAR_TEMP_5, move2=VAR_TEMP_6, move3=VAR_TEMP_7, move4=VAR_TEMP_8, shinyMode=VAR_TEMP_9, gmaxFactor=VAR_TEMP_A, dmaxLevel=VAR_TEMP_E;
     );
 
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
@@ -572,24 +523,7 @@ TEST("givemon [vars]")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), GetMoveMaxPP(MOVE_EXPLOSION));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_TERA_TYPE), TYPE_FIRE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_DYNAMAX_LEVEL), 7);
-}
-
-TEST("checkteratype/setteratype work")
-{
-    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_WOBBUFFET, 100, 0);
-
-    RUN_OVERWORLD_SCRIPT(
-        checkteratype 0;
-    );
-    EXPECT(VarGet(VAR_RESULT) == TYPE_PSYCHIC);
-
-    RUN_OVERWORLD_SCRIPT(
-        setteratype TYPE_FIRE, 0;
-        checkteratype 0;
-    );
-    EXPECT(VarGet(VAR_RESULT) == TYPE_FIRE);
 }
 
 TEST("createmon [simple]")

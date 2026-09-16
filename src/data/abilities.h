@@ -2401,48 +2401,28 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .breakable = TRUE,
     },
 
-    [ABILITY_EMBODY_ASPECT_TEAL_MASK] =
+    [ABILITY_301] =
     {
-        .name = _("Embody Aspect"),
-        .description = COMPOUND_STRING("Terastal raises Speed."),
-        .aiRating = 6,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
-        .failsOnImposter = TRUE,
+        .name = _("-------"),
+        .description = COMPOUND_STRING("No special ability."),
     },
 
-    [ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK] =
+    [ABILITY_302] =
     {
-        .name = _("Embody Aspect"),
-        .description = COMPOUND_STRING("Terastal raises Attack."),
-        .aiRating = 6,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
-        .failsOnImposter = TRUE,
+        .name = _("-------"),
+        .description = COMPOUND_STRING("No special ability."),
     },
 
-    [ABILITY_EMBODY_ASPECT_WELLSPRING_MASK] =
+    [ABILITY_303] =
     {
-        .name = _("Embody Aspect"),
-        .description = COMPOUND_STRING("Terastal raises Sp. Def."),
-        .aiRating = 6,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
-        .failsOnImposter = TRUE,
+        .name = _("-------"),
+        .description = COMPOUND_STRING("No special ability."),
     },
 
-    [ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK] =
+    [ABILITY_304] =
     {
-        .name = _("Embody Aspect"),
-        .description = COMPOUND_STRING("Terastal raises Defense."),
-        .aiRating = 6,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
-        .failsOnImposter = TRUE,
+        .name = _("-------"),
+        .description = COMPOUND_STRING("No special ability."),
     },
 
     [ABILITY_TOXIC_CHAIN] =
@@ -2459,10 +2439,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 5,
     },
 
-    [ABILITY_TERA_SHIFT] =
+    [ABILITY_TERRA] =
     {
-        .name = _("Tera Shift"),
-        .description = COMPOUND_STRING("Changes form on entry."),
+        .name = _("Terra"),
+        .description = COMPOUND_STRING("Awakens on entry."),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -2472,25 +2452,16 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .failsOnImposter = TRUE,
     },
 
-    [ABILITY_TERA_SHELL] =
+    [ABILITY_308] =
     {
-        .name = _("Tera Shell"),
-        .description = COMPOUND_STRING("Resists all types at full HP."),
-        .aiRating = 10,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
-        .breakable = TRUE,
+        .name = _("-------"),
+        .description = COMPOUND_STRING("No special ability."),
     },
 
-    [ABILITY_TERAFORM_ZERO] =
+    [ABILITY_309] =
     {
-        .name = _("Teraform Zero"),
-        .description = COMPOUND_STRING("Zeroes weather and terrain."),
-        .aiRating = 10,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
+        .name = _("-------"),
+        .description = COMPOUND_STRING("No special ability."),
     },
 
     [ABILITY_POISON_PUPPETEER] =

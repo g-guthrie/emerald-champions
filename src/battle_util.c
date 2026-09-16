@@ -453,17 +453,6 @@ enum DamageCategory GetReflectDamageMoveDamageCategory(enum BattlerId battler, e
         return DAMAGE_CATEGORY_PHYSICAL;
 }
 
-bool32 ShouldTeraShellDistortTypeMatchups(struct DamageContext *ctx)
-{
-    if (ctx->abilities[ctx->battlerDef] == ABILITY_TERA_SHELL
-     && gBattleMons[ctx->battlerDef].species == SPECIES_TERAPAGOS_TERASTAL
-     && gBattleMons[ctx->battlerDef].hp == gBattleMons[ctx->battlerDef].maxHP
-     && !IsBattleMoveStatus(ctx->move))
-        return TRUE;
-
-    return FALSE;
-}
-
 bool32 IsUnnerveBlocked(enum BattlerId battler, enum Item itemId)
 {
     if (GetItemPocket(itemId) != POCKET_BERRIES)
@@ -3120,21 +3109,6 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
     case ABILITYEFFECT_ON_FORM_CHANGE:
         switch (gLastUsedAbility)
         {
-        case ABILITY_TERAFORM_ZERO:
-            if (gBattleStruct->overworldWeatherPresent)
-            {
-                if (gFieldTimers.terrain != B_TERRAIN_NONE)
-                    BattleScriptCall(BattleScript_ActivateTeraformZeroRemovesOnlyTerrain);
-                else
-                    BattleScriptCall(BattleScript_BlockedByOverworldWeather);
-                effect++;
-            }
-            else if (gBattleWeather != WEATHER_NONE || gFieldTimers.terrain != B_TERRAIN_NONE)
-            {
-                BattleScriptCall(BattleScript_ActivateTeraformZero);
-                effect++;
-            }
-            break;
         default:
             break;
         }
@@ -3596,33 +3570,6 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             {
                 GetBattlerPartyState(battler)->transformZeroToHero = TRUE;
                 BattleScriptCall(BattleScript_ZeroToHeroActivates);
-                effect++;
-            }
-            break;
-        case ABILITY_EMBODY_ASPECT_TEAL_MASK:
-        case ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK:
-        case ABILITY_EMBODY_ASPECT_WELLSPRING_MASK:
-        case ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK:
-            if (shouldAbilityTrigger && !gBattleMons[battler].volatiles.embodyAspectActivated)
-            {
-                enum Stat stat;
-                gBattleMons[battler].volatiles.embodyAspectActivated = TRUE;
-
-                if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK)
-                    stat = STAT_ATK;
-                else if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_WELLSPRING_MASK)
-                    stat = STAT_SPDEF;
-                else if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK)
-                    stat = STAT_DEF;
-                else //ABILITY_EMBODY_ASPECT_TEAL_MASK
-                    stat = STAT_SPEED;
-
-                if (CompareStat(battler, stat, MAX_STAT_STAGE, CMP_EQUAL, gLastUsedAbility))
-                    break;
-
-                gEffectBattler = gBattlerAbility = battler;
-                SetStatChange(battler, stat, 1);
-                BattleScriptCall(BattleScript_AbilityStatChange);
                 effect++;
             }
             break;
@@ -6485,10 +6432,6 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
         if (gBattleStruct->fickleBeamBoosted)
             basePower *= 2;
         break;
-    case EFFECT_TERA_BLAST:
-        if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA && GetBattlerTeraType(battlerAtk) == TYPE_STELLAR)
-            basePower = 100;
-        break;
     case EFFECT_LAST_RESPECTS:
         basePower += (basePower * min(100, gBattleStruct->faintCounter[GetBattlerTrainer(battlerAtk)]));
         break;
@@ -6825,21 +6768,6 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         break;
     default:
         break;
-    }
-
-    // Terastallization boosts weak, non-priority, non-multi hit moves after modifiers to 60 BP.
-    if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA
-        && (moveType == GetBattlerTeraType(battlerAtk)
-        || (GetBattlerTeraType(battlerAtk) == TYPE_STELLAR && IsTypeStellarBoosted(battlerAtk, moveType)))
-        && uq4_12_multiply_by_int_half_down(modifier, basePower) < 60
-        && GetMovePower(move) > 1
-        && GetMoveStrikeCount(move) < 2
-        && !IsMultiHitMove(move)
-        && moveEffect != EFFECT_POWER_BASED_ON_USER_HP
-        && moveEffect != EFFECT_POWER_BASED_ON_TARGET_HP
-        && GetMovePriority(move) == 0)
-    {
-        return 60;
     }
 
     return uq4_12_multiply_by_int_half_down(modifier, basePower);
@@ -7791,10 +7719,7 @@ static inline s32 DoMoveDamageCalcVars(struct DamageContext *ctx)
 
 s32 ApplyModifiersAfterDmgRoll(struct DamageContext *ctx, s32 dmg)
 {
-    if (GetActiveGimmick(ctx->battlerAtk) == GIMMICK_TERA)
-        DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(ctx));
-    else
-        DAMAGE_APPLY_MODIFIER(GetSameTypeAttackBonusModifier(ctx));
+    DAMAGE_APPLY_MODIFIER(GetSameTypeAttackBonusModifier(ctx));
     DAMAGE_APPLY_MODIFIER(ctx->typeEffectivenessModifier);
     DAMAGE_APPLY_MODIFIER(GetBurnOrFrostBiteModifier(ctx));
     DAMAGE_APPLY_MODIFIER(GetMoveAgainstProtectionModifier(ctx));
@@ -8244,8 +8169,6 @@ static inline void MulByTypeEffectiveness(struct DamageContext *ctx, uq4_12_t *m
         mod = UQ_4_12(2.0);
     if (ctx->moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(ctx->battlerDef, ctx->abilities[ctx->battlerDef], ctx->holdEffects[ctx->battlerDef]) && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
-    if (ctx->moveType == TYPE_STELLAR && GetActiveGimmick(ctx->battlerDef) == GIMMICK_TERA)
-        mod = UQ_4_12(2.0);
 
     // B_WEATHER_STRONG_WINDS weakens Super Effective moves against Flying-type Pokémon
     if (ctx->weather & B_WEATHER_STRONG_WINDS && !ctx->isAnticipation)
@@ -8254,15 +8177,6 @@ static inline void MulByTypeEffectiveness(struct DamageContext *ctx, uq4_12_t *m
             mod = UQ_4_12(1.0);
     }
 
-    if (mod > UQ_4_12(0.0) && ShouldTeraShellDistortTypeMatchups(ctx))
-    {
-        mod = UQ_4_12(0.5);
-        if (ctx->updateFlags)
-        {
-            gSpecialStatuses[ctx->battlerDef].teraShellAbilityDone = TRUE;
-            RecordAbilityBattle(ctx->battlerDef, ctx->abilities[ctx->battlerDef]);
-        }
-    }
 
     *modifier = uq4_12_multiply(*modifier, mod);
 }
@@ -8323,7 +8237,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
 {
     enum Species illusionSpecies;
     enum Type types[3];
-    GetBattlerTypes(ctx->battlerDef, FALSE, types);
+    GetBattlerTypes(ctx->battlerDef, types);
 
     MulByTypeEffectiveness(ctx, &modifier, types[0]);
     if (types[1] != types[0])
@@ -8563,7 +8477,7 @@ s32 GetStealthHazardDamageByTypesAndHP(enum TypeSideHazard hazardType, enum Type
 s32 GetStealthHazardDamage(enum TypeSideHazard hazardType, enum BattlerId battler)
 {
     enum Type types[3];
-    GetBattlerTypes(battler, FALSE, types);
+    GetBattlerTypes(battler, types);
     u32 maxHp = gBattleMons[battler].maxHP;
 
     return GetStealthHazardDamageByTypesAndHP(hazardType, types[0], types[1], maxHp);
@@ -8750,14 +8664,6 @@ bool32 IsBattlerUltraBursted(enum BattlerId battler)
     return (gSpeciesInfo[gBattleMons[battler].species].isUltraBurst);
 }
 
-bool32 IsBattlerInTeraForm(enum BattlerId battler)
-{
-    // While Transform does copy stats and visuals, it shouldn't be counted as a true Tera Form.
-    if (gBattleMons[battler].volatiles.transformed)
-        return FALSE;
-    return (gSpeciesInfo[gBattleMons[battler].species].isTeraForm);
-}
-
 enum Species GetBattleFormChangeTargetSpecies(enum BattlerId battler, enum FormChanges method, enum Ability ability)
 {
     enum Species species = gBattleMons[battler].species;
@@ -8776,7 +8682,6 @@ enum Species GetBattleFormChangeTargetSpecies(enum BattlerId battler, enum FormC
         .gmaxFactor = GetMonData(GetBattlerMon(battler), MON_DATA_GIGANTAMAX_FACTOR),
         .hp = gBattleMons[battler].hp,
         .maxHP = gBattleMons[battler].maxHP,
-        .teraType = GetBattlerTeraType(battler),
         .level = gBattleMons[battler].level,
     };
 
@@ -8804,18 +8709,12 @@ static bool32 CanBattlerFormChange(enum BattlerId battler, enum FormChanges meth
          && IsBattlerMegaEvolved(battler)
          && GetConfig(B_MEGA_RETAIN_ON_FAINT) >= GEN_CHAMPIONS)
             return FALSE;
-        if (IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsBattlerInTeraForm(battler) || IsGigantamaxed(battler))
+        if (IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsGigantamaxed(battler))
             return TRUE;
         break;
     case FORM_CHANGE_BATTLE_SWITCH_OUT:
         if (IsGigantamaxed(battler))
             return TRUE;
-        else if (GetActiveGimmick(battler) == GIMMICK_TERA && DoesSpeciesHaveFormChangeMethod(gBattleMons[battler].species, FORM_CHANGE_BATTLE_TURN_END))
-            return FALSE;
-        break;
-    case FORM_CHANGE_BATTLE_TURN_END:
-        if (GetActiveGimmick(battler) == GIMMICK_TERA)
-            return FALSE;
         break;
     default:
         break;
@@ -8900,8 +8799,8 @@ bool32 DoBattlersShareType(enum BattlerId battler1, enum BattlerId battler2)
     s32 i;
     s32 j;
     enum Type types1[3], types2[3];
-    GetBattlerTypes(battler1, FALSE, types1);
-    GetBattlerTypes(battler2, FALSE, types2);
+    GetBattlerTypes(battler1, types1);
+    GetBattlerTypes(battler2, types2);
 
     for (i = 0; i < 3; i++)
     {
@@ -8996,9 +8895,6 @@ u32 GetIllusionMonPartyId(struct Pokemon *party, struct Pokemon *mon, struct Pok
             && GetMonData(&party[id], MON_DATA_HP)
             && !GetMonData(&party[id], MON_DATA_IS_EGG))
         {
-            enum Species species = GetMonData(&party[id], MON_DATA_SPECIES);
-            if (species == SPECIES_TERAPAGOS_STELLAR || (species >= SPECIES_OGERPON_TEAL_TERA && species <= SPECIES_OGERPON_CORNERSTONE_TERA))
-                continue;
             if (&party[id] != mon && &party[id] != partnerMon)
                 return id;
             else // If this Pokémon or its partner is last in the party, ignore Illusion.
@@ -9197,32 +9093,6 @@ void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef
     case EFFECT_SHELL_SIDE_ARM:
         gBattleStruct->dynamicMoveCategory = gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef];
         break;
-    case EFFECT_TERA_BLAST:
-        if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
-        {
-            if (GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL)
-                gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_PHYSICAL;
-            else
-                gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_SPECIAL;
-        }
-        else
-        {
-            gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
-        }
-        break;
-    case EFFECT_TERA_STARSTORM:
-        if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA && GET_BASE_SPECIES_ID(GetMonData(GetBattlerMon(battlerAtk), MON_DATA_SPECIES)) == SPECIES_TERAPAGOS)
-        {
-            if (GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL)
-                gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_PHYSICAL;
-            else
-                gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_SPECIAL;
-        }
-        else
-        {
-            gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
-        }
-        break;
     case EFFECT_PRESENT:
     {
         gBattleStruct->presentBasePower = 0;
@@ -9267,7 +9137,7 @@ static bool32 TryRemoveScreens(enum BattlerId battler)
     return removed;
 }
 
-// Photon Geyser, Light That Burns the Sky, Tera Blast
+// Photon Geyser, Light That Burns the Sky
 enum DamageCategory GetCategoryBasedOnStats(enum BattlerId battler)
 {
     u32 attack = gBattleMons[battler].attack;
@@ -9591,8 +9461,6 @@ enum MoveTarget GetBattlerMoveSelectionTargetType(enum BattlerId battler, enum M
     enum BattleMoveEffects effect = GetMoveEffect(move);
     if (effect == EFFECT_CURSE && !IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return TARGET_USER;
-    if (effect == EFFECT_TERA_STARSTORM && gBattleMons[battler].species == SPECIES_TERAPAGOS_STELLAR)
-        return TARGET_BOTH;
 
     return GetMoveTarget(move);
 }
@@ -9839,26 +9707,14 @@ bool32 CanMonParticipateInSkyBattle(struct Pokemon *mon)
     return FALSE;
 }
 
-void GetBattlerTypes(enum BattlerId battler, bool32 ignoreTera, enum Type types[static 3])
+void GetBattlerTypes(enum BattlerId battler, enum Type types[static 3])
 {
-    // Terastallization.
-    bool32 isTera = GetActiveGimmick(battler) == GIMMICK_TERA;
-    if (!ignoreTera && isTera)
-    {
-        enum Type teraType = GetBattlerTeraType(battler);
-        if (teraType != TYPE_STELLAR)
-        {
-            types[0] = types[1] = types[2] = teraType;
-            return;
-        }
-    }
-
     types[0] = gBattleMons[battler].types[0];
     types[1] = gBattleMons[battler].types[1];
     types[2] = gBattleMons[battler].types[2];
 
     // Roost.
-    if (!isTera && gBattleMons[battler].volatiles.roostActive)
+    if (gBattleMons[battler].volatiles.roostActive)
     {
         if (types[0] == TYPE_FLYING && types[1] == TYPE_FLYING)
             types[0] = types[1] = B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY;
@@ -9872,8 +9728,6 @@ void GetBattlerTypes(enum BattlerId battler, bool32 ignoreTera, enum Type types[
 void RemoveBattlerType(enum BattlerId battler, enum Type type)
 {
     u32 i;
-    if (GetActiveGimmick(battler) == GIMMICK_TERA) // don't remove type if Terastallized
-        return;
     for (i = 0; i < 3; i++)
     {
         if (*(u8 *)(&gBattleMons[battler].types[0] + i) == type)

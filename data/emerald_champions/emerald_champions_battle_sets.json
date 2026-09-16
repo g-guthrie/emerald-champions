@@ -29944,7 +29944,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_TERA_SHIFT",
+      "ability": "ABILITY_TERRA",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "field_dependency": null,
@@ -82864,7 +82864,6 @@
       "name": "Bulletproof Mixed",
       "moves": [
         "MOVE_DRACO_METEOR",
-        "MOVE_TERA_BLAST",
         "MOVE_GRASSY_GLIDE",
         "MOVE_POUNCE"
       ],
@@ -99269,7 +99268,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_TERA_SHIFT",
+      "ability": "ABILITY_TERRA",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "field_dependency": null,
@@ -133721,7 +133720,7 @@
         "MOVE_ICE_BEAM"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_TERA_SHIFT",
+      "ability": "ABILITY_TERRA",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "evs": [
@@ -161872,8 +161871,7 @@
       "moves": [
         "MOVE_THUNDERBOLT",
         "MOVE_VOLT_SWITCH",
-        "MOVE_RAPID_SPIN",
-        "MOVE_TERA_BLAST"
+        "MOVE_RAPID_SPIN"
       ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_TRANSISTOR",

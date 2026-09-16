@@ -75,7 +75,7 @@ enum Gimmick GetActiveGimmick(enum BattlerId battler)
     return gBattleStruct->gimmick.activeGimmick[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]];
 }
 
-// Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
+// Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick.
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
     // There are no trainer party settings in battles, but the AI needs to know which gimmick to use.
@@ -88,8 +88,6 @@ bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmi
 
     // When reading trainer party data, we load invalid values in struct Pokemon to indicate the gimmick should not be used
     struct Pokemon *mon = GetBattlerMon(battler);
-    if (gimmick == GIMMICK_TERA && GetMonData(mon, MON_DATA_TERA_TYPE) != TYPE_MYSTERY)
-        return TRUE;
     if (gimmick == GIMMICK_DYNAMAX && GetMonData(mon, MON_DATA_DYNAMAX_LEVEL) != BLOCK_AI_DYNAMAX)
         return TRUE;
     #endif
@@ -289,7 +287,6 @@ void LoadIndicatorSpritesGfx(void)
 {
     LoadSpritePalette(&sSpritePalette_MiscIndicator);
     LoadSpritePalette(&sSpritePalette_MegaIndicator);
-    LoadSpritePalette(&sSpritePalette_TeraIndicator);
 }
 
 static void SpriteCb_GimmickIndicator(struct Sprite *sprite)
@@ -317,9 +314,6 @@ const u32 *GetIndicatorSpriteSrc(enum BattlerId battler)
         else
             return (u32 *)&sAlphaIndicatorGfx;
     }
-
-    if (gimmick == GIMMICK_TERA) // special case
-        return (u32 *)sTeraIndicatorDataPtrs[GetBattlerTeraType(battler)];
 
     if (gGimmicksInfo[gimmick].indicatorData != NULL)
         return (u32 *)gGimmicksInfo[gimmick].indicatorData;

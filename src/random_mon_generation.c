@@ -213,7 +213,6 @@ static bool32 IsRandomSpeciesFormAllowed(enum Species species, const u16 *formTa
         && !speciesInfo->isTotem
         && !speciesInfo->isUltraBurst
         && !speciesInfo->cannotBeTraded
-        && !speciesInfo->isTeraForm
         && !speciesInfo->isPrimalReversion;
 }
 

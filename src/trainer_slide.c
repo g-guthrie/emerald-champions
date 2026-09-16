@@ -402,11 +402,9 @@ enum TrainerSlideTargets ShouldDoTrainerSlide(enum BattlerId battler, enum Train
         case TRAINER_SLIDE_ATTACKER_MEGA_EVOLUTION:
         case TRAINER_SLIDE_ATTACKER_Z_MOVE:
         case TRAINER_SLIDE_ATTACKER_DYNAMAX:
-        case TRAINER_SLIDE_ATTACKER_TERA:
         case TRAINER_SLIDE_OPPONENT_MEGA_EVOLUTION:
         case TRAINER_SLIDE_OPPONENT_Z_MOVE:
         case TRAINER_SLIDE_OPPONENT_DYNAMAX:
-        case TRAINER_SLIDE_OPPONENT_TERA:
             shouldRun = TRUE;
             break;
         default:

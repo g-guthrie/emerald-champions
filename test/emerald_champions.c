@@ -231,7 +231,6 @@ TEST("Emerald Champions exposes Mega as its only selectable gimmick")
     EXPECT(!IsEmeraldChampionsGimmickAllowed(GIMMICK_Z_MOVE));
     EXPECT(!IsEmeraldChampionsGimmickAllowed(GIMMICK_ULTRA_BURST));
     EXPECT(!IsEmeraldChampionsGimmickAllowed(GIMMICK_DYNAMAX));
-    EXPECT(!IsEmeraldChampionsGimmickAllowed(GIMMICK_TERA));
 }
 
 TEST("Emerald Champions Center preparation lists are complete and isolated")
@@ -255,7 +254,7 @@ TEST("Emerald Champions Center preparation lists are complete and isolated")
         hasPreparationOnlyMove |= !CanLearnTeachableMove(SPECIES_MEW, move);
         canonicalCount++;
     }
-    EXPECT_EQ(canonicalCount, 372);
+    EXPECT_EQ(canonicalCount, 371);
     EXPECT(hasTailwind);
     EXPECT(hasWillOWisp);
     EXPECT(hasPreparationOnlyMove);
@@ -1836,7 +1835,6 @@ TEST("Champions Circuit assembles complete competitive sets across 2048 seeds")
                 }
                 EXPECT(!reachedEmptyMove);
                 moves++;
-                EXPECT_NE(move, MOVE_TERA_BLAST);
                 EXPECT_GT(GetMonData(mon, MON_DATA_PP1 + m), 0);
                 for (u32 earlier = 0; earlier < m; earlier++)
                     EXPECT_NE(move, GetMonData(mon, MON_DATA_MOVE1 + earlier));

@@ -44,37 +44,6 @@ BattleScript_MagnitudeMessage::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_Terastallization::
-	@ TODO: no string prints in S/V, but right now this helps with clarity
-	flushtextbox
-	printstring STRINGID_PKMNSTORINGENERGY
-	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
-	waitanimation
-	applyterastallization
-	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
-	waitanimation
-	printstring STRINGID_PKMNTERASTALLIZEDINTO
-	waitmessage B_WAIT_TIME_LONG
-	end3
-
-BattleScript_TeraFormChange::
-	@ TODO: no string prints in S/V, but right now this helps with clarity
-	flushtextbox
-	printstring STRINGID_PKMNSTORINGENERGY
-	handleformchange BS_ATTACKER, 0, FALSE @ Prevent species name from overriting type name
-	handleformchange BS_ATTACKER, 1
-	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
-	waitanimation
-	applyterastallization
-	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
-	waitanimation
-	printstring STRINGID_PKMNTERASTALLIZEDINTO
-	waitmessage B_WAIT_TIME_LONG
-	switchinabilities BS_ATTACKER
-	abilityonformchange BS_ATTACKER
-	effectsafterformchange
-	end3
-
 BattleScript_EffectStatChange::
 	attackcanceler
 	trymovestatchanges
@@ -4039,10 +4008,6 @@ BattleScript_TargetFormChangeWithStringNoPopup::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_IllusionOffAndTerastallization::
-	call BattleScript_IllusionOff
-	goto BattleScript_Terastallization
-
 BattleScript_IllusionOff::
 	call BattleScript_SwapFromSubstitute
 	playanimation BS_SCRIPTING, B_ANIM_ILLUSION_OFF
@@ -4980,13 +4945,6 @@ BattleScript_ProteanActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_TeraShellDistortingTypeMatchups::
-	pause B_WAIT_TIME_SHORTEST
-	call BattleScript_AbilityPopUpScripting
-	printstring STRINGID_PKMNMADESHELLGLEAM
-	waitmessage B_WAIT_TIME_LONG
-	return
-
 BattleScript_CursedBodyActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_CURSEDBODYDISABLED
@@ -5656,46 +5614,6 @@ BattleScript_AnnounceAirLockCloudNine::
 	printstring STRINGID_AIRLOCKACTIVATES
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ActivateWeatherAbilities
-	return
-
-BattleScript_ActivateTeraformZero::
-	call BattleScript_AbilityPopUp
-	waitmessage B_WAIT_TIME_LONG
-	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_ANY, BattleScript_ActivateTeraformZero_RemoveWeather
-	jumpifterrain CMP_NOT_EQUAL, B_TERRAIN_NONE, BattleScript_ActivateTeraformZero_RemoveTerrain
-	goto BattleScript_ActivateTeraformZero_Ret
-BattleScript_ActivateTeraformZeroRemovesOnlyTerrain::
-	call BattleScript_AbilityPopUp
-	waitmessage B_WAIT_TIME_LONG
-	jumpifterrain CMP_NOT_EQUAL, B_TERRAIN_NONE, BattleScript_ActivateTeraformZero_RemoveTerrain
-	goto BattleScript_ActivateTeraformZero_Ret
-BattleScript_ActivateTeraformZero_RemoveWeather:
-	removeweather
-	printfromtable gWeatherEndsStringIds
-	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_ActivateWeatherAbilities
-	jumpifterrain CMP_NOT_EQUAL, B_TERRAIN_NONE, BattleScript_ActivateTeraformZero_RemoveTerrain
-BattleScript_ActivateTeraformZero_RemoveTerrain:
-	removeterrain
-	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
-	printfromtable gTerrainStringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_ActivateTeraformZeroEffects:
-	saveattacker
-	savetarget
-	tryboosterenergy ON_ANY
-	resetterrainabilityflags
-	setbyte gBattlerAttacker, 0
-	sortbattlers
-BattleScript_ActivateTeraformZeroLoop:
-	copyarraywithindex gBattlerTarget, gBattlersBySpeed, gBattlerAttacker, 1
-	activateterrainchangeabilities BS_TARGET
-	activateweatherchangeabilities BS_TARGET
-	addbyte gBattlerAttacker, 1
-	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateTeraformZeroLoop
-	restoreattacker
-	restoretarget
-BattleScript_ActivateTeraformZero_Ret:
 	return
 
 BattleScript_QuickClawActivation::

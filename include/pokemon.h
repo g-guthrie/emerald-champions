@@ -125,7 +125,6 @@ enum MonData {
     MON_DATA_IS_SHADOW,
     MON_DATA_DYNAMAX_LEVEL,
     MON_DATA_GIGANTAMAX_FACTOR,
-    MON_DATA_TERA_TYPE,
     MON_DATA_EVOLUTION_TRACKER,
 };
 
@@ -134,7 +133,7 @@ enum MonData {
 struct PokemonSubstruct0
 {
     enum Species species:11; // 2047 species.
-    enum Type teraType:5; // 30 types.
+    u16 reserved_00:5; // Reserved; keeps the saved substruct layout stable.
     enum Item heldItem:10; // 1023 items.
     u16 unused_02:6;
     u32 experience:21;
@@ -391,7 +390,6 @@ struct SpeciesInfo /*0xC4*/
     u8 baseSpDefense;
     enum Type types[2];
     u8 catchRate;
-    u8 forceTeraType;
     u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
     u16 evYield_HP:2;
     u16 evYield_Attack:2;
@@ -472,7 +470,6 @@ struct SpeciesInfo /*0xC4*/
     u32 isPrimalReversion:1;
     u32 isUltraBurst:1;
     u32 isGigantamax:1;
-    u32 isTeraForm:1;
     u32 isAlolanForm:1;
     u32 isGalarianForm:1;
     u32 isHisuianForm:1;
@@ -531,7 +528,6 @@ struct PokemonTemplate
     u16 ivs[NUM_STATS];
     u16 moves[MAX_MON_MOVES];
     bool16 gmaxFactor;
-    u16 teraType;
     u16 dmaxLevel;
     bool16 isEgg;
     enum GeneratedMonOrigin origin;
@@ -539,8 +535,7 @@ struct PokemonTemplate
     u8 doNotUseDefaultShinyness:1;
     u8 doNotUseDefaultBall:1;
     u8 doNotUseDefaultAbility:1;
-    u8 doNotUseDefaultTeraType:1;
-    u8 padding:3;
+    u8 padding:4;
 };
 
 struct EggData
@@ -658,7 +653,6 @@ struct FormChangeContext
     u16 hp;
     u16 maxHP;
     u32 gmaxFactor:1;
-    enum Type teraType;
     u32 level:7;
     u32 padding:8;
 };
@@ -967,7 +961,6 @@ enum Type CheckDynamicMoveType(struct Pokemon *mon, enum Move move, enum Battler
 uq4_12_t GetDynamaxLevelHPMultiplier(u32 dynamaxLevel, bool32 inverseMultiplier);
 enum Species GetRegionalFormByRegion(enum Species species, enum Region region);
 bool32 IsSpeciesForeignRegionalForm(enum Species species, enum Region currentRegion);
-enum Type GetTeraTypeFromPersonality(struct Pokemon *mon);
 bool8 ShouldSkipFriendshipChange(void);
 struct Pokemon *GetSavedPlayerPartyMon(u32 index);
 u8 *GetSavedPlayerPartyCount(void);

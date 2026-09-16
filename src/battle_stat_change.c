@@ -143,7 +143,7 @@ static bool32 CheckSpecificMoveCondition(struct BattleCalcValues *cv, struct Sta
         }
         break;
     case EFFECT_TAR_SHOT:
-        if (!gBattleMons[cv->battlerDef].volatiles.tarShot && GetActiveGimmick(cv->battlerDef) != GIMMICK_TERA)
+        if (!gBattleMons[cv->battlerDef].volatiles.tarShot)
         {
             st->additionalEffectTriggers = TRUE;
             if (!st->onlyChecking)

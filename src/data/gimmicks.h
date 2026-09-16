@@ -48,17 +48,5 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
         .ActivateGimmick = ActivateDynamax,
         .attackerSlideType = TRAINER_SLIDE_ATTACKER_DYNAMAX,
         .opponentSlideType = TRAINER_SLIDE_OPPONENT_DYNAMAX,
-    },
-    [GIMMICK_TERA] =
-    {
-        .triggerSheet = &sSpriteSheet_TeraTrigger,
-        .triggerPal = &sSpritePalette_TeraTrigger,
-        .triggerTemplate = &sSpriteTemplate_GimmickTrigger,
-        .indicatorData = NULL, // handled separately
-        .indicatorPalTag = TAG_TERA_INDICATOR_PAL,
-        .CanActivate = CanTerastallize,
-        .ActivateGimmick = ActivateTera,
-        .attackerSlideType = TRAINER_SLIDE_ATTACKER_TERA,
-        .opponentSlideType = TRAINER_SLIDE_OPPONENT_TERA,
     }
 };
