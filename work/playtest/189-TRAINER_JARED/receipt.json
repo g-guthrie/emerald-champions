@@ -1,0 +1,39 @@
+{
+  "play_order": 189,
+  "e_group": "E0283",
+  "trainer": "TRAINER_JARED",
+  "class": "gym",
+  "location": "FortreeCity_Gym",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Noctowl/Swoobat/Bombirdier/Crobat (all +2) L54, Scyther (+5) L57, Murkrow (+6) L58 = cap 54 + offset - 2 on Medium. The two high offsets are the Eviolite NFEs, as intended.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/189-TRAINER_JARED/party_b54_jared.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_jared.json (Incineroar/Regieleki lead)", "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 6,
+     "why": "A mono-Flying room is hard-countered by Electric plus a Fairy spread move. Regieleki OHKOed Swoobat on turn 1, Electroweb hit both for 2x, Knock Off stripped Murkrow's Eviolite and Crobat's Choice Band, and one Mega Gardevoir Hyper Voice on the last turn removed Scyther and Bombirdier together. Lost only Incineroar and Mamoswine."}
+  ],
+  "strategy_checks": [
+    {"check": "Murkrow sets Tailwind at Prankster priority", "result": "PASS", "evidence": "a1 turn 2: Tailwind went up at priority before anything else resolved, and it visibly mattered - under it Scyther moved before Incineroar on turn 5 and OHKOed it. The only team in my block whose Tailwind actually converted."},
+    {"check": "Murkrow uses Haze or Foul Play behind Eviolite", "result": "NOT OBSERVED", "evidence": "Knock Off removed the Eviolite and KOed it on the same turn it set Tailwind."},
+    {"check": "Swoobat converts Simple into a doubled Calm Mind", "result": "FAIL", "evidence": "OHKOed on turn 1 by a 2x Transistor Thunderbolt before it could set up. Worth noting that Simple is a liability on entry as well: Incineroar's Intimidate landed as -2 Attack rather than -1."},
+    {"check": "Noctowl's Tinted Lens makes its resisted attacks matter", "result": "PARTIAL", "evidence": "Air Slash and Hyper Voice were both used and Hyper Voice did 116 to Regieleki, but nothing on my side resisted them, so Tinted Lens was never the reason for any damage."},
+    {"check": "Scyther converts Technician plus Eviolite into a fast breaker", "result": "PASS", "evidence": "At L57 under Tailwind it moved first on turn 5 and Dual Wingbeat OHKOed a 134 HP Incineroar, then X-Scissor removed Mamoswine. The +5 offset is doing exactly what it should."},
+    {"check": "Bombirdier's Rocky Payload boosts its Rock Slide", "result": "PASS", "evidence": "a1 turn 5 critical Rock Slide took Mamoswine from 200 to 71. It is the room's own answer to Rock- and Electric-weak counterplay."},
+    {"check": "Crobat Choice Band Infiltrator pressure", "result": "PARTIAL", "evidence": "Cross Poison and Leech Life were used, but Knock Off removed the Choice Band for 115 on turn 3 and it died on turn 4 before doing anything with Brave Bird."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Noctowl", "payoff": "small but real - blocked a Fake Out, denying the flinch and keeping its own turn"},
+    {"attempt": 1, "turn": 3, "battler": "Noctowl", "payoff": "empty - Knock Off was aimed at Crobat and my other slot was switching. Defensible as a forecast but produced nothing"}
+  ],
+  "protect_summary": "2 opponent Protects, 1 with a small payoff, 1 empty. Both from the same Pokemon on turns 1 and 3, so not consecutive. Given all six members carry Protect, the room guards very little.",
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "SWOOBAT", "field": "offset", "before": 2, "after": 3, "reason": "Gym trainer won on the first attempt with only two player faints; Swoobat is a designated win condition that was OHKOed before setting up"},
+    {"member": "BOMBIRDIER", "field": "offset", "before": 2, "after": 3, "reason": "same review; Bombirdier is the room's built-in answer to Rock/Electric counterplay and needs to survive to use it"}
+  ],
+  "level_change_rationale": "A Gym trainer that falls on the first attempt with two faints is squarely inside the repository's +1 review threshold (three faints against a well-prepared party is the aim). I raised the two weakest members that most need the extra turn rather than the two NFEs, which are already at +5 and +6 and performed exactly as designed. I deliberately did not touch Scyther or Murkrow: Scyther OHKOed my lead under its own Tailwind and Murkrow is the only Tailwind in the block that landed. Change is +1 each, inside the +/-2 cap.",
+  "cooler": "Honest answer: the room is coherent but structurally fragile. Six Flying-types means one Electric attacker and one Pixilate spread move answer the entire team, and that is what happened - two moves accounted for three knockouts. The concept worth keeping is the Eviolite pair (Scyther and Murkrow at +5/+6 is a lovely idea and they were the two best performers). The concrete improvement is to break the shared weakness: one member that is not Electric-weak - a Rock/Flying Aerodactyl-style body, a Ground/Flying, or simply moving Bombirdier's Rock/Dark typing to the lead slot - would force a real second answer instead of letting one Thunderbolt user sweep the room.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "The two +1 changes CANNOT be re-verified in this pass - the headless snapshot predates the edit and I am not permitted to run make. Re-run after the main agent re-materializes and rebuilds."
+}
