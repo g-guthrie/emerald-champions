@@ -25,7 +25,6 @@
 #include "item_menu.h"
 #include "item.h"
 #include "link.h"
-#include "match_call.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "pokemon.h"
@@ -858,8 +857,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         ScriptContext_SetupScript(SSTidalCorridor_EventScript_ReachedStepCount);
         return TRUE;
     }
-    if (TryStartMatchCall())
-        return TRUE;
+    // Match Call is removed; no random calls on the 10th step.
     return FALSE;
 }
 

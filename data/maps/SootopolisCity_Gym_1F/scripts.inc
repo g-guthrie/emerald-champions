@@ -114,9 +114,6 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	call SootopolisCity_Gym_1F_EventScript_OriginsHandoff
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox SootopolisCity_Gym_1F_Text_RegisteredJuan, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_JUAN_MATCH_CALL
@@ -212,10 +209,6 @@ SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "It permits WATERFALL to scale\n"
 	.string "walls of cascading water once\l"
 	.string "you have its license.$"
-SootopolisCity_Gym_1F_Text_RegisteredJuan:
-	.string "Registered GYM LEADER JUAN\n"
-	.string "in the POKéNAV.$"
-
 SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "Eight BADGES open EVER GRANDE.\n"
 	.string "Its challenge is five master\l"

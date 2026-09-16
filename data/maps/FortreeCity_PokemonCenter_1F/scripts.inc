@@ -1,6 +1,5 @@
 FortreeCity_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 FortreeCity_PokemonCenter_1F_OnTransition:
@@ -44,11 +43,9 @@ FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat:
 FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav:
 	.string "Oh, wow, you have a POKéNAV!\n"
 	.string "And it's just like mine!\p"
-	.string "Do you know about POKéNAV's\n"
-	.string "MATCH CALL system?\p"
-	.string "Access it, and you can chat with\n"
-	.string "registered TRAINERS anytime.\p"
-	.string "It also lets TRAINERS share news\n"
-	.string "and training notes with you.\p"
-	.string "It's really nifty! Those DEVON guys\n"
-	.string "sure know what they're doing!$"
+	.string "The map marks every town and route\n"
+	.string "you have walked through.\p"
+	.string "Open it before a long climb and you\n"
+	.string "will never take the wrong pass.\p"
+	.string "Those DEVON people build a fine\n"
+	.string "piece of equipment!$"

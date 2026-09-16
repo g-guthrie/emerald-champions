@@ -49,9 +49,6 @@ GraniteCave_StevensRoom_EventScript_RegisterSteven::
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
@@ -226,13 +223,9 @@ GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge:
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
 	.string "A journey teaches you things you\n"
 	.string "cannot learn in a laboratory.\p"
-	.string "Let's register each other in the\n"
-	.string "POKéNAV. I'll keep studying these\l"
-	.string "unusual POKéMON sightings.$"
-
-GraniteCave_StevensRoom_Text_RegisteredSteven:
-	.string "Registered STEVEN\n"
-	.string "in the POKéNAV.$"
+	.string "I'll keep studying these unusual\n"
+	.string "POKéMON sightings. Look for me\l"
+	.string "wherever the rocks are strange.$"
 
 GraniteCave_StevensRoom_Text_ManorHandoff:
 	.string "The old account continues out to sea.\n"

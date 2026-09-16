@@ -75,8 +75,8 @@ MeteorFalls_1F_2R_Text_NicolasRegidragoCaught:
 	.string "FALLARBOR's CENTER guide knows\n"
 	.string "the legends in the other rooms.$"
 MeteorFalls_1F_2R_Text_NicolasRegister:
-	.string "I want to know more about your power.\n"
-	.string "Let me register you in my POKéNAV.$"
+	.string "I want to know more about your\n"
+	.string "power. I train here every day.$"
 
 MeteorFalls_1F_2R_Text_NicolasRematchIntro:
 	.string "Since we met, we have trained hard\n"

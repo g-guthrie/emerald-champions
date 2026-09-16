@@ -848,8 +848,8 @@ Common_EventScript_EmeraldChampionsResearchPartners::
 	call Common_EventScript_EmeraldChampionsFormGift
 	goto Common_EventScript_EmeraldChampionsResearchPartners
 
-Common_EventScript_EmeraldChampionsContestServices::
-	message EmeraldChampions_Text_ContestServices
+Common_EventScript_EmeraldChampionsStylistServices::
+	message EmeraldChampions_Text_StylistServices
 	waitmessage
 	dynmultipush EmeraldChampions_Text_Appearance, 0
 	dynmultipush EmeraldChampions_Text_CosplayPartner, 1
@@ -860,20 +860,20 @@ Common_EventScript_EmeraldChampionsContestServices::
 	goto_if_ge VAR_RESULT, 3, EmeraldChampions_EventScript_ReturnService
 	goto_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_CosplayGift
 	setvar VAR_0x8006, 0
-	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_ContestAppearance
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_StylistAppearance
 	setvar VAR_0x8006, 1
 	call EmeraldChampions_EventScript_FormChooseMon
-	goto Common_EventScript_EmeraldChampionsContestServices
+	goto Common_EventScript_EmeraldChampionsStylistServices
 
-EmeraldChampions_EventScript_ContestAppearance:
+EmeraldChampions_EventScript_StylistAppearance:
 	msgbox EmeraldChampions_Text_AppearanceInfo, MSGBOX_DEFAULT
 	call EmeraldChampions_EventScript_FormChooseMon
-	goto Common_EventScript_EmeraldChampionsContestServices
+	goto Common_EventScript_EmeraldChampionsStylistServices
 
 EmeraldChampions_EventScript_CosplayGift:
 	setvar VAR_0x8004, 1
 	call Common_EventScript_EmeraldChampionsFormGift
-	goto Common_EventScript_EmeraldChampionsContestServices
+	goto Common_EventScript_EmeraldChampionsStylistServices
 
 Common_EventScript_EmeraldChampionsDeoxysResearch::
 	goto_if_unset FLAG_EC_REPORT_C43_COMPLETE, EmeraldChampions_EventScript_ReturnService
@@ -1004,7 +1004,7 @@ EmeraldChampions_Text_CosmogInfo:
 	.string "This second COSMOG lets you\n"
 	.string "explore both paths. Use your\l"
 	.string "Leveler when ready.$"
-EmeraldChampions_Text_ContestServices:
+EmeraldChampions_Text_StylistServices:
 	.string "Would you like help with your\npartner's appearance or costume?$"
 EmeraldChampions_Text_Appearance:
 	.string "Appearance$"

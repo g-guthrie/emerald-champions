@@ -15,11 +15,11 @@ Route102_Text_CalvinRegister:
 	.string "I've been working hard at this since\n"
 	.string "I saw you before.\p"
 	.string "I want to keep comparing training\n"
-	.string "notes. Register me in your POKéNAV!$"
+	.string "notes. Come find me again!$"
 
 Route102_Text_CalvinRegisterShort:
-	.string "Let's compare training notes.\n"
-	.string "Register me in your POKéNAV!$"
+	.string "Let's compare training notes\n"
+	.string "the next time you pass through!$"
 
 Route102_Text_CalvinRematchIntro:
 	.string "Ever since I lost to you, I desperately\n"
@@ -292,13 +292,13 @@ Route104_Text_WinstonPostBattle:
 
 Route104_Text_WinstonRegister1:
 	.string "Hm?\n"
-	.string "Ah, you've obtained a POKéNAV.\p"
-	.string "I will gladly register you.\n"
+	.string "You battle better than you dress.\p"
+	.string "I will gladly face you again.\n"
 	.string "After all, I have plenty of money.$"
 
 Route104_Text_WinstonRegister2:
 	.string "Hm?\n"
-	.string "Ah, you've obtained a POKéNAV.\p"
+	.string "You battle better than you dress.\p"
 	.string "I will gladly register you.\n"
 	.string "After all, I have plenty of money.$"
 
@@ -328,14 +328,14 @@ Route104_Text_CindyPostBattle:
 
 Route104_Text_CindyRegister1:
 	.string "Hello, we meet again.\p"
-	.string "We seem to be drawn together. Let's\n"
-	.string "register each other in our POKéNAVS.$"
+	.string "We seem to be drawn together.\n"
+	.string "I expect we will meet a third time.$"
 
 Route104_Text_CindyRegister2:
 	.string "We should commemorate how we seem\n"
 	.string "to be drawn to each other.\p"
-	.string "Let's register each other in our\n"
-	.string "POKéNAVS.$"
+	.string "I will wait on this road for our\n"
+	.string "third meeting.$"
 
 Route104_Text_CindyRematchIntro:
 	.string "Hello, we meet again.\n"
@@ -946,7 +946,7 @@ Route111_Text_DustyRegister:
 	.string "I haven't been searching for any\n"
 	.string "tough POKéMON.\p"
 	.string "But, for some reason, I sure do like\n"
-	.string "POKéNAVS.$"
+	.string "digging up this desert.$"
 
 Route111_Text_DustyRematchIntro:
 	.string "For thirty years I have searched for\n"
@@ -1635,13 +1635,13 @@ Route116_Text_JerryPostBattle:
 
 Route116_Text_JerryRegister1:
 	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that a POKéNAV can register TRAINERS.\p"
+	.string "that losing teaches you the most.\p"
 	.string "I don't really get what that means,\n"
-	.string "so can I just try it?$"
+	.string "but I sure am learning today!$"
 
 Route116_Text_JerryRegister2:
 	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that a POKéNAV can register TRAINERS.\p"
+	.string "that losing teaches you the most.\p"
 	.string "I don't really get what that means,\n"
 	.string "so can I just try it?$"
 
@@ -1672,11 +1672,11 @@ Route116_Text_KarenPostBattle:
 
 Route116_Text_KarenRegister1:
 	.string "Oh, wow! Isn't that a POKéNAV?\n"
-	.string "I have one, too! Please register me!$"
+	.string "I have one, too! Ours match!$"
 
 Route116_Text_KarenRegister2:
 	.string "Oh, wow! Isn't that a POKéNAV?\n"
-	.string "I have one, too! Please register me!$"
+	.string "I have one, too! Ours match!$"
 
 Route116_Text_KarenRematchIntro:
 	.string "I studied a whole lot since I saw you.\n"
@@ -1767,7 +1767,7 @@ Route117_Text_IsaacRematchDefeat:
 
 Route117_Text_IsaacPostRematch:
 	.string "Your POKéMON are growing good!\n"
-	.string "You should enter them in CONTESTS.$"
+	.string "You should take them to the CIRCUIT.$"
 
 Route117_Text_LydiaIntro:
 	.string "Please, allow me to evaluate if you\n"
@@ -1793,7 +1793,7 @@ Route117_Text_LydiaRematchDefeat:
 
 Route117_Text_LydiaPostRematch:
 	.string "POKéMON seem to like different kinds\n"
-	.string "of {POKEBLOCK}S, depending on their nature.$"
+	.string "of BERRIES, depending on their nature.$"
 
 Route117_Text_DylanIntro:
 	.string "I'm in the middle of a triathlon, but,\n"
@@ -1992,8 +1992,8 @@ Route118_Text_RosePostBattle:
 	.string "I'll pass.$"
 
 Route118_Text_RoseRegister:
-	.string "Sniff… That odor--it's a POKéNAV!\n"
-	.string "We must register each other!$"
+	.string "Sniff… You smell of sea air and\n"
+	.string "long grass. A real traveler!$"
 
 Route118_Text_RoseRematchIntro:
 	.string "Were you drawn here by the sweet\n"
@@ -2160,7 +2160,7 @@ Route119_Text_CatherineRegister:
 	.string "Do you have a POKéNAV?\n"
 	.string "It's a must-have tool for any TRAINER.\p"
 	.string "Oh, you do have one!\n"
-	.string "Let's register each other, then!$"
+	.string "Then you will never lose this route.$"
 
 Route119_Text_CatherineRematchIntro:
 	.string "How's your journey with POKéMON\n"
@@ -2273,7 +2273,7 @@ Route120_Text_RobertPostBattle:
 
 Route120_Text_RobertRegister:
 	.string "You can be counted on to get better.\n"
-	.string "I'd like to register you in my POKéNAV!$"
+	.string "I'd like to see how far you go!$"
 
 Route120_Text_RobertRematchIntro:
 	.string "A POKéMON that grows steadily is one\n"
@@ -2393,9 +2393,10 @@ Route121_Text_VanessaDefeat:
 	.string "This isn't what I meant!$"
 
 Route121_Text_VanessaPostBattle:
-	.string "I'm going to a CONTEST in LILYCOVE.\p"
+	.string "I'm off to the CIRCUIT desks in\n"
+	.string "LILYCOVE.\p"
 	.string "My POKéMON should have no problem\n"
-	.string "sweeping the MASTER CLASS.$"
+	.string "sweeping the first round.$"
 
 Route121_Text_WalterPostBattle:
 	.string "I would like to circle the globe once\n"
@@ -2433,7 +2434,7 @@ Route121_Text_CristinPostBattle:
 Route121_Text_CristinRegister:
 	.string "That was total humiliation!\n"
 	.string "I won't forget you…\l"
-	.string "Hand over your POKéNAV!$"
+	.string "I will be waiting right here!$"
 
 Route121_Text_CristinRematchIntro:
 	.string "I have this new routine.\n"

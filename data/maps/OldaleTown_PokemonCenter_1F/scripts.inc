@@ -1,6 +1,5 @@
 OldaleTown_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 OldaleTown_PokemonCenter_1F_OnTransition:
@@ -27,13 +26,7 @@ OldaleTown_PokemonCenter_1F_EventScript_Boy::
 OldaleTown_PokemonCenter_1F_EventScript_Girl::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable
 	msgbox OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable, MSGBOX_DEFAULT
-	release
-	end
-
-OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable::
-	msgbox OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub, MSGBOX_DEFAULT
 	release
 	end
 
@@ -61,13 +54,8 @@ OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat:
 	.string "Much quicker on a long walk!$"
 
 OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable:
-	.string "The POKéMON WIRELESS CLUB on\n"
-	.string "the second floor was built recently.\p"
-	.string "But they say they're still making\n"
-	.string "adjustments.$"
-
-OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub:
-	.string "The POKéMON WIRELESS CLUB on\n"
-	.string "the second floor was built recently.\p"
-	.string "I traded POKéMON right away.$"
+	.string "The TUTOR and the VENDOR beside\n"
+	.string "the PC cost nothing at all.\p"
+	.string "I come in here to rebuild a team\n"
+	.string "before every route.$"
 

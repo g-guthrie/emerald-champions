@@ -67,16 +67,16 @@ SSTidalRooms_Text_TakeRestOnBed:
 
 SSTidalRooms_Text_ColtonIntro:
 	.string "I often sail to LILYCOVE CITY.\p"
-	.string "I enjoy attending CONTESTS,\n"
+	.string "I enjoy the BERRY market there,\n"
 	.string "you see.$"
 
 SSTidalRooms_Text_ColtonDefeat:
 	.string "That was an enjoyable match!$"
 
 SSTidalRooms_Text_ColtonPostBattle:
-	.string "I get so excited imagining what kinds\n"
-	.string "of POKéMON I'll get to see in the next\l"
-	.string "CONTEST. The anticipation of it thrills!$"
+	.string "I get so excited imagining which\n"
+	.string "trees will be ripe when I dock.\l"
+	.string "The anticipation of it thrills!$"
 
 SSTidalRooms_Text_MicahIntro:
 	.string "Are your friends strong?$"

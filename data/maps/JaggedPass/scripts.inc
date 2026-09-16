@@ -283,9 +283,9 @@ JaggedPass_Text_EthanPostBattle:
 	.string "jump ledges.$"
 
 JaggedPass_Text_EthanRegister:
-	.string "When I get more used to this bumpiness,\n"
-	.string "I'll send you my best climbing tips!\p"
-	.string "Can you register me in your POKéNAV?$"
+	.string "When I get more used to this\n"
+	.string "bumpiness, I'll have climbing tips\l"
+	.string "for you. Come back up the pass!$"
 
 JaggedPass_Text_EthanRematchIntro:
 	.string "I got used to this bumpiness.\n"

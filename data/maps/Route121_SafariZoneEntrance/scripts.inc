@@ -61,8 +61,6 @@ Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger::
 	end
 
 Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone::
-	checkitem ITEM_POKEBLOCK_CASE
-	goto_if_eq VAR_RESULT, 0, Route121_SafariZoneEntrance_EventScript_NoPokeblockCase
 	call Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon
 	checkmoney 500
 	goto_if_eq VAR_RESULT, 0, Route121_SafariZoneEntrance_EventScript_NotEnoughMoney
@@ -97,11 +95,6 @@ Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon::
 
 Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon::
 	return
-
-Route121_SafariZoneEntrance_EventScript_NoPokeblockCase::
-	msgbox Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase, MSGBOX_DEFAULT
-	goto Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter
-	end
 
 Route121_SafariZoneEntrance_EventScript_NotEnoughMoney::
 	msgbox Route121_SafariZoneEntrance_Text_NotEnoughMoney, MSGBOX_DEFAULT

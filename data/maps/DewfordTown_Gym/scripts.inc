@@ -155,9 +155,6 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	call Common_EventScript_SetGymTrainers
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox DewfordTown_Gym_Text_RegisteredBrawly, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
@@ -391,10 +388,6 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
 	.string "the strength of your partnership.\p"
 	.string "Show it to STEVEN in GRANITE CAVE.\n"
 	.string "He has something to entrust to you.$"
-DewfordTown_Gym_Text_RegisteredBrawly:
-	.string "Registered GYM LEADER BRAWLY\n"
-	.string "in the POKéNAV.$"
-
 DewfordTown_Gym_Text_BrawlyPostBattle:
 	.string "Return to STEVEN in his room deep\n"
 	.string "inside GRANITE CAVE, northwest\l"
