@@ -1,0 +1,62 @@
+{
+  "play_order": 248,
+  "e_group": "E0389",
+  "trainer": "TRAINER_VIRGIL",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Bronzong / Dusclops / Chimecho / Cofagrigus / Porygon2 (+1) at L75, Medicham (+2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/248-TRAINER_VIRGIL/party_gym76.json"],
+  "chronology_note": "Same gym party as 247 (copied manifest, same audit): Mossdeep Gym before the Space Center, cap 76; Incineroar 36, Urshifu-Single 42, Gengar 30 + Gengarite 60, Hydreigon 68, Weavile 14, Zapdos 30. Nothing from Shoal Cave, Seafloor Cavern, Sootopolis or later.",
+  "pre_play_strategy_checks": [
+    "Trick Room goes up on turn 1 or 2 (Bronzong or Dusclops)",
+    "Mental Herb cures a Taunt on Bronzong (only if I Taunt it)",
+    "Mega Medicham: Pure Power damage under Trick Room; Fake Out when the room is already up",
+    "Cofagrigus Mummy replaces the ability of a contact attacker (I intend to avoid contact, as the crack line says)",
+    "Porygon2 Download picks a stat on entry",
+    "Will-O-Wisp cripples a physical attacker",
+    "Protect ledger"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 10,
+      "build": "work/agent-battle-build-6",
+      "run_dir": "work/playtest/248-TRAINER_VIRGIL/a1",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Gengar / Hydreigon / Weavile / Zapdos)",
+      "outcome": "won",
+      "turns": 10,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "Fake Out on Bronzong turn 1 did not stop the room - Dusclops carries Trick Room too and set it immediately. I rode the five room turns with Incineroar (slow enough to be useful) and Urshifu: always-crit Wicked Blow took Eviolite Dusclops in two hits even after Will-O-Wisp burned Urshifu, two Flare Blitzes and a Knock Off removed Bronzong, and Knock Off KOed Chimecho outright on the last room turn. After the room, Knock Off stripped Porygon2's Eviolite and Flare Blitz + Thunderbolt removed it. Turn 8 cost me both actives: I mis-figured Incineroar's speed (0 Speed EVs; 119, not above Mega Medicham's 141) so Pure Power High Jump Kick erased it before Knock Off, and a critical Shadow Ball from Cofagrigus took Zapdos from 148. Weavile's Ice Shard then removed the 57 HP Mega Medicham with priority and Hydreigon's Dark Pulse ended Cofagrigus through one Protect."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room up turn 1 or 2", "result": "PASS", "evidence": "turn 1: Dusclops used Trick Room after Bronzong was Fake Out flinched; STATUS_FIELD_TRICK_ROOM held turns 1-5 and 'The twisted dimensions returned to normal' at the end of turn 5. Bronzong itself chose Body Press on turn 1, not Trick Room; the backup setter is what made the plan robust to Fake Out."},
+    {"check": "Mental Herb cures Taunt", "result": "NOT TESTED", "evidence": "I never Taunted; Knock Off removed the Herb on turn 4 as Bronzong died."},
+    {"check": "Mega Medicham Pure Power under Trick Room / Fake Out when room is up", "result": "SPLIT - Pure Power PASS, room timing FAIL", "evidence": "Medicham is party slot 6 and entered on turn 7, two turns after the room expired, so it never attacked under Trick Room and its Fake Out window (turn 8) was spent on High Jump Kick - the right choice, since it OHKOed Incineroar (154/301, 2x). Fake Out was never selected. The payoff and the room never coincided."},
+    {"check": "Mummy on contact", "result": "NOT TESTED", "evidence": "I made no contact with Cofagrigus (Thunderbolt, Dark Pulse, Ice Shard only), which is the printed counterplay."},
+    {"check": "Download picks a stat", "result": "PASS mechanically, inert in practice", "evidence": "turn 5 entry: 'Porygon2's Attack rose' (my actives' SpD exceeded Def). Porygon2's set is all special (Tri Attack / Ice Beam / Thunderbolt / Recover), so the boost did nothing. Design note below."},
+    {"check": "Will-O-Wisp cripples a physical attacker", "result": "PASS", "evidence": "turn 2: Dusclops burned Urshifu; Wicked Blow on Dusclops fell from 128 to 72."},
+    {"check": "Recover / second Trick Room from Dusclops", "result": "NOT SEEN", "evidence": "Chimecho and Porygon2 never used Recover (Chimecho died in one turn; Porygon2 at 181/283 chose Ice Beam). Dusclops never had a second room to set - it was dead by turn 3."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Bronzong", "payoff": "excellent. Blocked a 2x Flare Blitz (240 on the next turn) at 243/256"},
+    {"attempt": 1, "turn": 4, "battler": "Chimecho", "payoff": "EMPTY. Its first turn out; both my actions went elsewhere (Knock Off on the 3 HP Bronzong, a switch)"},
+    {"attempt": 1, "turn": 6, "battler": "Cofagrigus", "payoff": "EMPTY. Knock Off went to Porygon2 and Zapdos Roosted"},
+    {"attempt": 1, "turn": 9, "battler": "Cofagrigus", "payoff": "excellent. Blocked a Dark Pulse that KOed it from 202 the next turn"}
+  ],
+  "protect_summary": "4 Protects, 2 empty, 2 that each blocked a KO. No consecutive-guard attempt.",
+  "ai_defects": [
+    {"id": "E0389-1", "turn": "a1 turns 4 and 6", "board": "Chimecho fresh in beside a 3 HP Bronzong (t4); Cofagrigus 142/242 beside a fresh Porygon2 with my Zapdos at 115 (t6)", "chosen": "Protect, twice, with nothing aimed at the guarding body", "better": "Low severity. On t4 Chimecho's Psychic into the 25 HP burned Urshifu was a free KO; on t6 Shadow Ball into the 115 HP Zapdos was a likely KO before Roost resolved (Zapdos outsped, so Roost first - still, chip on the Roosted Zapdos beats a blank turn). Same 'guard on the first turn out with no read' shape logged on E0384."}
+  ],
+  "observations": ["turn 2: 'The opposing Dusclops couldn't fully protect itself' printed after Wicked Blow although Dusclops has no Protect move and had not used one; damage was the burned-halved 72. Looks like an Unseen Fist text path firing without a guard; cosmetic."],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 with two faints after a genuine ten-turn fight; both losses were to the room's real payoffs (Pure Power HJK, Cofagrigus special damage) and one was a crit.",
+  "concept_on_board": "Yes for the room itself: Trick Room went up turn 1 through a backup setter and everything Virgil owned moved first for five turns. No for the finisher: Mega Medicham arrived after the room expired, so the 'first and doubled' moment never happened; Mummy and Mental Herb were invisible because I played around them.",
+  "cooler": "The room is coherent and it played like its description. The one structural miss is deployment order: Medicham is slot 6 and enters last, by which point the first Trick Room is long gone and Dusclops (the only other setter) is usually dead. Putting Medicham in slot 3 or 4 - so it arrives around turn 3 inside the room - would make the Pure Power payoff the memory the room leaves, without touching a level. Also: Porygon2's Download raised Attack against a Dark/Electric pair whose SpD exceeds Def, and its set is all special, so the ability is a coin the room usually loses; a mixed Porygon2 (Return or Body Slam) would make Download a real threat. Cofagrigus was excellent in practice: it forced me off contact for the whole fight and its Protect saved a KO.",
+  "legality_notes": "None found.",
+  "verification_limit": "No level change here; nothing pending re-verification."
+}

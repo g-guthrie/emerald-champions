@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge cap 76 Mossdeep Gym party - three Dark bodies, one Ghost, spread damage and Taunt",
+  "availability_audit": "Cap 76: C39 Scorched Slab grants it, C40 (Aqua Hideout) and C41 (Mossdeep, Mind Badge) change no cap, C42 the Space Center grants 84. The Gym is challenged before the Space Center, so every room in this block is cap 76. Chronology against pool-76.json source_detail, all upstream of Mossdeep: Incineroar gate 36 (Litten, Mauville Game Corner; level evolutions). Urshifu-Single gate 42 (Kubfu, legendary_sign:Route112). Gengar gate 30 (Gastly wild:DewfordManor_1F, Haunter by level, Gengar by ITEM_LINKING_CORD) with ITEM_GENGARITE stone-window 60. Hydreigon gate 68 (Deino wild:GraniteCave_B2F at 20, Zweilous wild:MeteorFalls_B1F_1R at 42, Hydreigon by level). Weavile gate 14 (Sneasel wild:Seaspray_Cave_B1F, evolution by level/condition). Zapdos gate 30 (legendary_sign:NewMauville_Inside). Nothing is sourced from the Mossdeep Space Center, Shoal Cave, the Abandoned Ship, Seafloor Cavern, Sootopolis, Route 131 or Pacifidlog, and nothing needs Dive.",
+  "reachable_legends": "Two: Urshifu-Single (Kubfu, gate 42) and Zapdos (gate 30). No Mythical, no Ultra Beast, no restricted legendary. Darkrai, Yveltal and Giratina are all in the cap-76 pool at gate 68 and would be the obvious way to flatten a Psychic gym; I am deliberately not using them, because a six-room gym is supposed to be the campaign's difficulty benchmark and beating it with Mt Pyre's legendaries would tell the design nothing.",
+  "plan": "Built once for all six Mossdeep rooms rather than per room, because the gym's shared problem is one type. Three Dark bodies (Incineroar, Urshifu, Hydreigon) are immune to Psychic STAB outright, which is most of what this building throws. Gengar is the Ghost: it ignores Shadow Tag, which is the stated answer to rooms five and six, and Mega Gengar's own Shadow Tag turns the trap around. Weavile is the fast Knock Off - Eviolite, Light Clay, Assault Vest, Focus Sash and Sitrus are load-bearing in four of the six rooms - plus Ice Shard priority. Zapdos supplies spread damage, which is the stated answer to Ally Switch, and Electric for the Water-Psychic bodies in rooms three and six. Incineroar carries Taunt rather than Parting Shot: Trick Room, Perish Song, the screens and Calm Mind are all one Taunt away from not happening. Known hazards to respect: Xatu and Espeon bounce status, so Taunt must not be aimed at them; Cofagrigus has Mummy, so contact moves cost an ability; Farigiraf's Armor Tail switches off Sucker Punch and Ice Shard while it is on the field.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_TAUNT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Dark body immune to Psychic; Taunt for Trick Room, Perish Song and screens; Fake Out and Intimidate control",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "always-crit Wicked Blow ignores Calm Mind, Contrary and Diamond-Storm-style Defense boosts; Unseen Fist goes through the gym's Protect habit",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": ["MOVE_SHADOW_BALL", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_CURSED_BODY",
+      "item": "ITEM_GENGARITE",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Mega win condition and the Ghost body: immune to Shadow Tag, and Mega Gengar's own Shadow Tag reverses the trap rooms",
+      "availability": "pool-76 gate 30 (Gastly, Dewford Manor) with ITEM_GENGARITE stone-window 60."
+    },
+    {
+      "species": "SPECIES_HYDREIGON",
+      "moves": ["MOVE_DARK_PULSE", "MOVE_DRACO_METEOR", "MOVE_FLASH_CANNON", "MOVE_EARTH_POWER"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "special Dark that is immune to Psychic and, through Levitate, to Ground; Flash Cannon answers the Fairy bodies",
+      "availability": "pool-76 gate 68 (Deino GraniteCave_B2F at 20, Zweilous MeteorFalls_B1F_1R at 42, level evolution)."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": ["MOVE_KNOCK_OFF", "MOVE_TRIPLE_AXEL", "MOVE_ICE_SHARD", "MOVE_LOW_KICK"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "fast Knock Off against a gym that runs on Eviolite, Light Clay, Assault Vest and berries; Ice Shard is priority",
+      "availability": "pool-76 gate 14 (Sneasel, Seaspray_Cave_B1F), evolution:level/condition."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "reachable legend: Heat Wave is the spread that defeats Ally Switch and redirection; Thunderbolt answers the Water-Psychic bodies",
+      "availability": "pool-76 gate 30, legendary_sign:NewMauville_Inside."
+    }
+  ]
+}
