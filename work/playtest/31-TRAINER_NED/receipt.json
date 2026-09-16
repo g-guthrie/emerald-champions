@@ -1,0 +1,41 @@
+{
+  "play_order": 31, "e_group": "E0033", "trainer": "TRAINER_NED", "class": "regular",
+  "location": "Route106", "cap": 20, "difficulty": "medium",
+  "party_manifest": "work/playtest/31-TRAINER_NED/party.json",
+  "opponent_levels_before": {"FINNEON": 23, "WATTREL": 21, "MANTYKE": 22, "ARROKUDA": 20},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/31-TRAINER_NED/a1", "seed": "0x4A19", "outcome": "won", "turns": 3, "player_faints": 0, "opponent_faints": 4, "ai_decision_frames_max": 9,
+     "narrative": "Three turns, four to zero, no player damage beyond Life Orb recoil and one Air Slash. Jolteon's Thunderbolt removed Finneon before its Tailwind resolved, then Wattrel, then Mantyke at 4x; Kartana's Leaf Blade closed on Arrokuda. Every member of this team is Water or Water/Flying except the bird, so a single Electric special attacker covers the whole roster."}
+  ],
+  "strategy_checks": [
+    {"check": "Finneon's Tailwind can charge Wattrel before Thunderbolt; execution order, not a flag, decides the same-turn benefit", "result": "CHOSEN, NOT EXECUTED", "evidence": "Turn 1 Finneon selected Tailwind - the correct opening for the authored plan - but a 2x Thunderbolt knocked it out before the move resolved. Correctly, no Wind Power charge was granted to Wattrel from a Tailwind that never happened."},
+    {"check": "Wind Power must be gained and consumed natively", "result": "PASS (negative branch)", "evidence": "No wind move ever landed, and Wattrel never behaved as though charged. Its Air Slash on turn 2 did ordinary damage."},
+    {"check": "Soak conversion is used only when it has a payoff, and never merely to weaken Arrokuda's Water damage", "result": "NOT OBSERVED", "evidence": "Finneon died on turn 1 and Soak was never selected. My leads were Electric and Grass/Steel, neither of which has a Ground typing worth removing, so declining Soak would have been correct in any case."},
+    {"check": "Mantyke supplies Wide Guard and the alternate Surf/Storm Drain lane; Surf must be reconsidered beside every partner", "result": "NOT OBSERVED", "evidence": "Mantyke entered on turn 2 and was knocked out by a 4x Thunderbolt on turn 3 before acting. Notably it did NOT select Surf beside a Water-typed Arrokuda partner that does not absorb Water, which is the error the dossier warns against - it chose Air Slash."},
+    {"check": "Arrokuda uses Propeller Tail to ignore eligible redirection while applying physical pressure", "result": "NOT OBSERVED", "evidence": "Arrokuda chose Protect on both of its turns and never attacked. See AI observations."},
+    {"check": "Storm Drain and Water Absorb hold the Water lane", "result": "NOT TESTED", "evidence": "I deliberately brought no Water attack, so neither absorber had anything to absorb. Both abilities were present and correctly did nothing."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "WATTREL", "payoff": "real - Finneon died to Thunderbolt first, so Kartana's Leaf Blade redirected onto Wattrel and the guard blocked it"},
+    {"turn": 2, "user": "ARROKUDA", "payoff": "real - blocked a 2x Leaf Blade on the turn it entered"},
+    {"turn": 3, "user": "ARROKUDA", "payoff": "EMPTY - the second consecutive Protect failed and Arrokuda was knocked out by the same Leaf Blade it had guarded against the previous turn, having never attacked"}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Arrokuda spent both of its turns on Protect, the second consecutively at full HP, and contributed nothing to the battle. Under the no-read expected-value model the first guard is defensible; repeating it into the known reduced success rate, while holding a Mystic Water Liquidation and Propeller Tail specifically authored to punch through redirection, is the weakest sequence I saw. Worth a look at the PAIR_GUARD constants for a full-HP attacker whose partner is also unthreatened.",
+    "Mantyke correctly declined Surf beside a non-absorbing Water partner, which is the exact ally-damage trap the dossier flags."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt in three turns with zero faints. Brief rule: +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "ARROKUDA", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21},
+      {"member": "WATTREL", "offset_before": 3, "offset_after": 4, "level_before": 21, "level_after": 22}
+    ],
+    "verification": "Offset-only edits; move legality and strategy coherence are unaffected. --write deliberately not run because a concurrent session has unrelated authored edits in the same tree.",
+    "rerun": "NOT PERFORMED - this machine's arm-none-eabi toolchain cannot build the ROM, so work/agent-battle-build holds the pre-change image.",
+    "note": "Two levels will not change this result. The problem is type coverage, not numbers - see the cooler note."
+  },
+  "cooler_note": "The coastal wind-and-current concept is genuinely distinctive and a clear improvement on the rain quartet it replaced; Soak plus Wind Power plus Propeller Tail is three real mechanics in a four-member route team, which is more than most route trainers attempt. The fatal flaw is that all four members are Water or Water/Flying, so one Electric attacker is 2x or 4x into the entire roster and the fight is over in three turns before any of those three mechanics can fire. A concrete suggestion for a later pass (not applied here): swap one member for a non-Water body that still fits the sea-breeze theme and punishes the obvious Electric answer - a Ground or Grass coastal species would make the player pay for bringing a single Electric sweeper, and would give Finneon's Soak a target whose typing is actually worth converting. Keep Finneon, Wattrel and the Soak plan; the roster needs a body that is not on the Electric menu.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}
