@@ -1,0 +1,76 @@
+{
+  "play_order": 134,
+  "e_group": "E0160",
+  "trainer": "TRAINER_ELMER",
+  "class": "ace",
+  "location": "AshenWoods",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/134-TRAINER_ELMER/receipt.json",
+  "build": "work/agent-battle-build-4",
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "why_rerun": "Clawitzer was raised from 0 to +1 after a first-run 4-1 clear in five turns. This rerun tests whether the fight is now a real one.",
+  "cap_confirmation": "Driver reports level_cap 42 and Wo-Chien L40 / Masquerain L41 / Araquanid L41 / Clawitzer L41 = cap 42 + offset - 2 with the current offsets 0/1/1/1. Matches the first receipt and the brief's table for this row.",
+  "level_offsets_at_run": {"WO_CHIEN": 0, "MASQUERAIN": 1, "ARAQUANID": 1, "CLAWITZER": 1},
+  "resolved_opponent_levels": {"WO_CHIEN": 40, "MASQUERAIN": 41, "ARAQUANID": 41, "CLAWITZER": 41},
+  "levels_previous_run": {"WO_CHIEN": 40, "MASQUERAIN": 41, "ARAQUANID": 41, "CLAWITZER": 40},
+  "party_manifest": "work/playtest/134-TRAINER_ELMER/party.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 42, same map. The manifest's chronology anchor still holds: Ashen Woods is entered in C24 right after Flannery's Heat Badge raises the cap to 42, every member's source map is already walked by then, and Route 118 and New Mauville sources are deliberately excluded because they sit after Norman grants Surf in C27 - which is why Mega Manectric, the single best answer to this team, is not used. No legendary, mythical, Ultra Beast or Paradox species. Not reported weak or illegal.",
+  "pre_declared_strategy_checks": [
+    "Tablets of Ruin lowers the Attack of every other Pokemon on the field by 25 percent",
+    "Masquerain's Intimidate fires on entry and again on re-entry after a switch",
+    "Masquerain uses Quiver Dance behind a protected turn rather than as a free turn-one action",
+    "Araquanid's Water Bubble doubles its Water damage",
+    "Araquanid's Wide Guard blocks a spread move and is NOT used on a board with no spread threat",
+    "Clawitzer's Mega Launcher boosts its pulse moves",
+    "Hydro Pump's accuracy is a real cost",
+    "Every opposing Protect and Wide Guard has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/134-TRAINER_ELMER/r1",
+      "seed": 1134,
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "narrative": "A completely different battle from the first run - nine turns instead of five. T1 both my 2x attacks went into Masquerain and its Protect blanked both, while Wo-Chien seeded Togekiss. T2 the AI withdrew Masquerain rather than eat a second double-attack and sent Clawitzer, which walked into Jolteon's 2x Thunderbolt for 119 and was paralysed at 2 HP - the switch saved the right Pokemon but chose the worst possible replacement in front of a revealed Electric attacker. T3 a critical Air Slash removed Clawitzer while Wo-Chien's Giga Drain ground Jolteon down. T4 Araquanid entered and Protected on its arrival turn, blanking both attacks, and Giga Drain finished Jolteon. T5 Mega Gardevoir came in and Traced Tablets of Ruin; Togekiss used Follow Me and Araquanid's Water Bubble Hydro Pump killed the redirector through it - the correct answer to Follow Me. T6 Incineroar's Intimidate dropped both, its Fake Out flinched Araquanid, Wo-Chien Protected a 2x Hyper Voice, and Araquanid was left on 1 HP. T7 Araquanid's Wide Guard blocked Hyper Voice and saved its own 1 HP while Flare Blitz removed Wo-Chien at 2x. T8 a second Wide Guard caught nothing, Masquerain Protected, and Knock Off finally removed Araquanid. T9 Masquerain finally got its Quiver Dance off and died to Flare Blitz on the same turn."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Tablets of Ruin", "result": "PASS", "evidence": "Both of my battlers show atk -1 in driver state from turn 0 onward, and when Mega Gardevoir entered on T5 it Traced the ability: 'It traced the opposing Wo-Chien's Tablets of Ruin!' and 'Gardevoir's Tablets of Ruin weakened the Attack of...'. The ability is live and it is the reason my damage was almost entirely special."},
+    {"check": "Masquerain Intimidate on entry and re-entry", "result": "PASS", "evidence": "Fired at battle start, and again on T7 when Masquerain returned from the bench ('Incineroar's Attack fell!', 'Gardevoir's Attack fell!'). Re-entry Intimidate confirmed."},
+    {"check": "Quiver Dance behind a protected turn, not a free turn-one action", "result": "PASS", "evidence": "Masquerain used Protect on T1 and T8 and Quiver Dance only on T9, the last turn of the battle. It never reached for setup on a turn where it was exposed. The dossier's rule is honoured exactly - although in this case it waited so long that the boost was worthless."},
+    {"check": "Water Bubble doubles Water damage", "result": "PASS", "evidence": "T5: Araquanid's Hydro Pump killed a 122 HP Togekiss outright through Follow Me. That is the largest single hit either side landed and it is the Water Bubble multiplier doing exactly what the dossier says."},
+    {"check": "Wide Guard used on a spread threat, not on an empty board", "result": "PASS then MARGINAL", "evidence": "T7 is a textbook use: Wide Guard blocked a Pixilate Hyper Voice from a Mega Gardevoir and preserved a 1 HP Araquanid that would otherwise have died. T8 it used Wide Guard again and caught nothing, because I chose a single-target Mystical Fire that turn. I do not count the second one as a defect - the opponent does not read my pending commands, and with a revealed Hyper Voice user on the field guarding is a defensible expected-value call - but it is the thinner of the two and it is the turn Araquanid died."},
+    {"check": "Mega Launcher", "result": "NOT DEMONSTRATED", "evidence": "Clawitzer got exactly one action, a Water Pulse on T3 into Togekiss, before dying. The ability presumably applied but no clean evidence was produced. Clawitzer has now contributed almost nothing in both runs."},
+    {"check": "Hydro Pump accuracy is a real cost", "result": "PASS by omission", "evidence": "Araquanid used Hydro Pump twice and both connected, so the accuracy risk did not bite this run. No evidence of the AI treating it as guaranteed - it also chose Wide Guard and Protect on turns where a miss would have been fatal."},
+    {"check": "Every opposing Protect / Wide Guard has a payoff", "result": "PASS, with one thin guard", "evidence": "Five guarding actions, four with clear payoff. See ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "MASQUERAIN", "payoff": "EXCELLENT. Blocked both a 2x Air Slash and a 2x Thunderbolt aimed at the same battler on turn one. It denied the focus-fire opening that killed this team quickly in the first run, and it is the single reason the fight ran nine turns."},
+    {"turn": 4, "battler": "ARAQUANID", "payoff": "EXCELLENT. Used on its arrival turn, the turn a fresh switch-in is most exposed, and it blanked both a 2x Air Slash and a 2x Thunderbolt from a Life Orb Jolteon. Araquanid went on to kill Togekiss the following turn because of it."},
+    {"turn": 6, "battler": "WO_CHIEN", "payoff": "REAL. Blocked a Pixilate Hyper Voice that was 2x into Dark. Wo-Chien was at 75/155 and that hit was a large fraction of what remained."},
+    {"turn": 7, "battler": "ARAQUANID", "payoff": "EXCELLENT (Wide Guard). Blocked the same 2x-into-Wo-Chien Hyper Voice for the whole side while Araquanid itself sat on 1 HP. This is Wide Guard used precisely as authored: a side-wide answer to a revealed spread attacker, protecting a partner as well as itself."},
+    {"turn": 8, "battler": "ARAQUANID", "payoff": "EMPTY in outcome, defensible in expectation (Wide Guard). I used a single-target Mystical Fire that turn so nothing was blocked, and Araquanid died to the Knock Off it could not guard against. Since the AI decides at turn start without reading my commands and a Pixilate Hyper Voice user was on the field, I record this as a thin call rather than a defect - but it is the guarding action I would tune first."},
+    {"turn": 8, "battler": "MASQUERAIN", "payoff": "REAL. Blocked a 2x Mystical Fire from Mega Gardevoir on the turn it re-entered, and Masquerain survived to take its Quiver Dance turn."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "This team guards extremely well. Four of the six guarding actions blocked a super-effective attack, two of them on an arrival turn, and none of them was a repeat from the same battler on consecutive turns except the Araquanid Wide Guard pair.",
+    "T5 was the best decision of the fight: Araquanid answered a Follow Me by simply killing the redirector through it with a Water Bubble Hydro Pump, rather than trying to play around the redirection.",
+    "The one weak decision was the T2 switch. Withdrawing Masquerain out of a double 2x focus was right, but the replacement chosen was Clawitzer, a Water type, in front of a revealed Life Orb Jolteon; it arrived into a 2x Thunderbolt for 119 of its 147 HP and was dead a turn later. A Wo-Chien-side switch or Araquanid (which at least has Wide Guard and a Protect) would both have been better. Worth noting as a switch-target scoring observation rather than a defect: the switch itself was correct."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. This was both - Togekiss and Jolteon lost, nine turns, and the opponent's guarding denied four separate super-effective attacks.",
+    "changes": [],
+    "budget_note": "Clawitzer is at +1 of the permitted +/-2 from the first pass and is not moved again. No member moves in this rerun.",
+    "comparison": "The first run was five turns and one faint; this one was nine turns and two faints against the same party. The Clawitzer +1 is not what did it - Clawitzer died early again - so the honest attribution is mostly to the opponent's guarding and switching on this build. The level change is still worth keeping: a 147 HP Assault Vest body that dies to one Thunderbolt was the thing the first receipt objected to, and at 41 it now takes a 2x Life Orb Thunderbolt and survives on 2 HP rather than dying outright."
+  },
+  "verdict": "calibrated",
+  "could_this_be_cooler": "Yes as built, and the rerun strengthens the case: this is a guard-and-punish room, and it plays that way. Wo-Chien's Tablets of Ruin turning the whole fight special, Araquanid's Water Bubble killing a redirector through Follow Me, and Wide Guard shielding a 1 HP partner are three distinct, memorable interactions and I would not touch the roster. The one member that has now contributed nothing across two runs is Clawitzer - it arrived, took one action and died in both. Its problem is not its level but that it is the only member without a guarding move, so it is the one the player is always allowed to kill. Giving Clawitzer Protect in place of Ice Beam (it already has Water Pulse, Aura Sphere and Dark Pulse for coverage) would let the Mega Launcher actually be seen. Flagged, not changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-4. Not earned campaign traversal. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}
