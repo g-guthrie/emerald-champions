@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 30,
+  "e_group": "E0032",
+  "trainer": "TRAINER_BRENDAN_RUSTBORO_TREECKO",
+  "alias_note": "Played the Treecko-branch Brendan as the brief directs. No level change this pass, so nothing needs mirroring to the other five aliases.",
+  "class": "rival",
+  "cap": 20,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "TAILLOW L22 offset 4 @FLAME_ORB GUTS (pass-1 +1)",
+    "ELECTRIKE L23 offset 5 @FOCUS_SASH LIGHTNING_ROD (R1 raised it 4 -> 5; confirmed present)",
+    "SHROOMISH L22 offset 4 @EVIOLITE EFFECT_SPORE",
+    "COMBUSKEN L21 offset 3 @EVIOLITE SPEED_BOOST (R1 raised it 2 -> 3; confirmed present, now at the +-2 ceiling)"
+  ],
+  "confirms": "Both R1 level changes are in this ROM: Electrike at L23 and the starter slot at L21.",
+  "party_manifest": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/party-rerun.json",
+  "party_summary": "Reused the R1 party unchanged: Kartana / Nidoking / Tsareena / Lucario / Magearna / Reuniclus.",
+  "party_caveat": "Recording a reservation I did not resolve: this manifest's audit justifies Kartana as an ordinary wild encounter in the Cut-gated third Petalburg Woods grove and Magearna as the Devon Corp 2F legendary sign that unlocks exactly at this battle. The Magearna case matches the brief's 'static encounter that precedes the battle's map' allowance. Kartana is an Ultra Beast taken as a wild catch, which is at the edge of the brief's rule for windows at or below 24. I reused the party unchanged for comparability with the R1 measurement rather than rebuilding it, but a cap-20 benchmark resting on an Ultra Beast should be treated as an upper bound on player power, not a typical one - and note that Kartana was in fact removed by Taillow's Facade.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3032,
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 9,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 62,
+      "events": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 I aimed Knock Off at Taillow's Flame Orb and a 2x Earth Power at Electrike's Focus Sash. Both opponents Protected. Taillow's guard denied the Knock Off and let the Flame Orb burn it safely - the exact 'useful Orb-turn payoff' its plan names - and Electrike's denied the Earth Power. T2 the now-burned Guts Facade one-shot a full-HP 68 HP Nidoking before it could move, and Knock Off left Electrike on its Sash at 1. T3 Leaf Blade removed Electrike, Facade removed the Life Orb-worn Kartana, and a Soul-Heart-boosted Fleur Cannon removed Taillow. T4 Tsareena came in (Grass, so Spore-immune), Combusken's Fire Punch took 39 off Magearna, Fleur Cannon removed Combusken, and Shroomish's Spore put Magearna to sleep. T5 I switched the sleeping Magearna out for Lucario and took a Leech Seed. T6 Shroomish Protected both a 2x Triple Axel and a Close Combat. T7 the same pair finished it. Won 4-2."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff",
+      "result": "PASS - textbook",
+      "evidence": "Its single Protect (T1) simultaneously denied the Knock Off that was aimed at its Flame Orb and covered the turn the Orb burned it. It then used Facade on both remaining turns, one-shotting a healthy 68 HP Nidoking and removing Kartana. That is exactly the authored branch, executed in the right order."
+    },
+    {
+      "check": "Electrike's Eerie Impulse can suppress a relevant special attack before it lands",
+      "result": "NOT USED",
+      "evidence": "Electrike Protected on T1 (denying a 2x Earth Power on its Sash) and used Thunderbolt on T2 into a Grass/Steel Kartana that resists it, for 43. Given the other slot was a Ground type immune to Electric, Thunderbolt was still its best damage, and Eerie Impulse into a physical Kartana would have been worthless - so this is a defensible decline rather than a miss, but neither Eerie Impulse nor Thunder Wave has now appeared in any pass."
+    },
+    {
+      "check": "Shroomish's Spore lands on a legal target",
+      "result": "PASS",
+      "evidence": "T4 Spore put Magearna to sleep for the rest of the fight; I had to spend a switch to get it off the field. Leech Seed followed on T5. The powder plan worked and was only blunted because Tsareena is Grass."
+    },
+    {
+      "check": "Combusken converts as the starter slot",
+      "result": "PASS",
+      "evidence": "Fire Punch into the Steel/Fairy Magearna for 39 on its only turn - correct type read against the best target on the board."
+    },
+    {
+      "check": "Lightning Rod redirection",
+      "result": "NOT EXERCISED (I used no single-target Electric moves)"
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "TAILLOW",
+      "payoff": "Denied a Knock Off aimed at its Flame Orb and covered the Orb's activation turn. The best single Protect in my whole block - it is the reason the Guts sweep happened at all."
+    },
+    {
+      "turn": 1,
+      "battler": "ELECTRIKE",
+      "payoff": "Denied a 2x Earth Power that would have consumed its Focus Sash a turn early."
+    },
+    {
+      "turn": 6,
+      "battler": "SHROOMISH",
+      "payoff": "Blocked a 2x Triple Axel and a Close Combat in the same turn while Leech Seed kept draining. Large payoff."
+    }
+  ],
+  "protect_ledger_note": "Three opponent Protects, all three with a real, nameable payoff, none repeated into an empty turn. This is the cleanest guard pricing in my block.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [],
+  "ai_improvements_observed": [
+    "The turn-one double Protect was not guard spam: each guard denied a specific move that was aimed at a specific item, and one of them bought the Flame Orb turn the plan is built around.",
+    "No voluntary switches, no wasted setup, correct type reads on every attack."
+  ],
+  "level_changes": {},
+  "level_change_reason": "Won with 2 player faints, where the previous pass on the pre-change levels was a 4-0 zero-faint clear. The R1 starter +1 and Electrike +1 are confirmed to have converted a walkover into a real fight: Taillow at L22 now one-shots a full-HP 68 HP attacker. Brief band: keep. Combusken is at the +-2 ceiling in any case.",
+  "levels_after": {"TAILLOW": 4, "ELECTRIKE": 5, "SHROOMISH": 4, "COMBUSKEN": 3},
+  "cooler": "Only a small one, and it is an improvement rather than a complaint: Electrike now has two support moves (Eerie Impulse, Thunder Wave) that have never been chosen in three passes, because on most boards its Thunderbolt is still the higher-scoring line. Trading one of them for Volt Switch would give the slot a use on the turns where its damage is resisted, without weakening the Lightning Rod identity. Recording only.",
+  "authored_set_legality": "No legality problem observed."
+}
