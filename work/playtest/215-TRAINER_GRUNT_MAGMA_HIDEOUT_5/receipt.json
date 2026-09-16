@@ -1,0 +1,64 @@
+{
+  "play_order": 215,
+  "e_group": "E0326",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_5",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_1R",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members at L58 = 60 + 0 - 2 on Medium. This is the first grunt room in my block whose whole roster sits at offset 0.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magma_60_ground.json"],
+  "chronology_note": "Same six as the hideout party, all pool-60 gates 42 and below, Ground/Rock lead order. Incineroar was deliberately kept off the field for this room: its Intimidate would hand Bisharp a free +2 Attack through Defiant, which is the dossier's own crack.",
+  "pre_play_strategy_checks": [
+    "Sandaconda opens with Coil or Glare and lets the player's incoming hit set the sand",
+    "Sand Spit sets the weather when Sandaconda is attacked, not on a wasted turn",
+    "Bisharp's Defiant answers any stat drop with +2 Attack",
+    "Venomoth takes Quiver Dance behind a safe board; Tinted Lens makes resisted hits land for neutral",
+    "Drapion's Sniper plus Scope Lens turns Cross Poison's high crit rate into a real threat",
+    "Drapion is immune to the Toxic Spikes lane"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/215-TRAINER_GRUNT_MAGMA_HIDEOUT_5/a1",
+      "party": "party_magma_60_ground.json (Urshifu-Rapid/Amoonguss/Swampert/Mega Gardevoir/Incineroar/Zapdos)",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "why": "I played the crack precisely and it held: no stat drops at all (Incineroar stayed benched, and Close Combat only lowers my own stats), no attack aimed at Sandaconda until turn 5, and Spore is a status move so it put Sandaconda to sleep without setting the sand. Close Combat is 4x into Bisharp and removed it on turn 1. Surging Strikes is a three-hit move, so it went through Venomoth's Focus Sash on turn 2 before Quiver Dance ever happened. Then the room hit back hard: Drapion's Sniper Cross Poison critted Urshifu for 199 of its remaining 209, leaving it on 10. I withdrew it, Sandaconda woke and Coiled to +4, and a High Horsepower through that boost killed Amoonguss. Swampert - the one body the sand cannot chip - finished a +4 Sandaconda with two 2x Liquidations."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Sandaconda opens with Coil and lets the incoming hit set the sand", "result": "PASS in shape, over-committed in practice", "evidence": "Coil on every single turn it was awake and able (turns 1, 3 and 4), reaching +4/+4/+4, and it never chose Glare. The authored 'do not spend a turn setting the weather' idea is right and it worked. But by turn 4 it was the last healthy member and a fourth Coil was a worse use of the turn than an attack; see AI defects."},
+    {"check": "Sand Spit sets the weather when Sandaconda is attacked", "result": "PASS", "evidence": "the field read 'none' for four turns while I deliberately avoided it, and on turn 5 - the first attack aimed at it, Amoonguss's Sludge Bomb - 'A sandstorm kicked up!'. This is the cleanest demonstration of an authored ability in my whole block: the player can genuinely choose when the weather arrives, and choosing wrong costs them."},
+    {"check": "Bisharp's Defiant answers a stat drop with +2 Attack", "result": "NOT OBSERVED (denied)", "evidence": "I never lowered its stats, which is exactly the authored counterplay, and it was KOed by a 4x Close Combat on turn 1. The trap is well built - Intimidate is the single most common lead ability in this game and bringing it here is punished - but it does mean a player who reads the room gets a free turn-1 kill."},
+    {"check": "Venomoth Quiver Dance and Tinted Lens", "result": "FAIL", "evidence": "Venomoth had exactly one action, chose Bug Buzz, and was removed through its Focus Sash by a three-hit move before it resolved. Quiver Dance was never selected and Tinted Lens never mattered. Its Focus Sash is worth nothing against any multi-hit attacker."},
+    {"check": "Drapion's Sniper plus Scope Lens crit lane", "result": "PASS, and it is the best thing in the room", "evidence": "turn 3, Cross Poison critted Urshifu for 199 - a Sniper critical hit is 2.25x, and it took my main attacker from 209 to 10 in one action. That is the single biggest hit anything landed on me in the hideout."},
+    {"check": "Drapion is immune to the Toxic Spikes lane", "result": "N/A this battle", "evidence": "no Toxic Spikes were on the field in this room; the immunity is real (Poison type) but untested here."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects, although Bisharp, Venomoth and Drapion all carry it. Bisharp and Venomoth each had only one turn, so there was little opportunity. Drapion had two turns and attacked with a crit-fishing move both times, which was right - it nearly won the trade. No complaint, but this room's guarding behaviour is effectively untested.",
+  "ai_defects": [
+    {
+      "severity": "minor",
+      "turn": 4,
+      "board": "Sandaconda at 206/206 with +3 Attack, +3 Defense, +3 accuracy from three previous Coils, its partner Drapion at 17/167 and asleep; my Urshifu at 10/209 and Amoonguss at 263/263",
+      "chosen": "MOVE_COIL (a fourth one)",
+      "problem": "A 10 HP Urshifu was on the field and Sandaconda's High Horsepower would have killed it outright. Instead it took a fourth Coil, which added a boost it never spent - it attacked exactly once in the whole battle, on turn 7, and then died. The setup scorer does not appear to cap a repeated boosting move once a kill is available.",
+      "better": "MOVE_HIGH_HORSEPOWER at Urshifu (10 HP, a guaranteed KO), or Glare on Amoonguss.",
+      "note": "Minor because it did not change the result and because three Coils on a bulky body is defensible. It is the mirror image of the Shell Smash defect elsewhere in this block - there the scorer would not take a setup move it should have; here it would not stop taking one. Both point at the same place."
+    }
+  ],
+  "level_changes": [
+    {"member": "BISHARP", "before": 0, "after": 1, "why": "won on attempt 1 with a single faint; Bisharp is the room's advertised trap and it died to one turn-1 attack at 161 HP, so it currently never gets to threaten anything"},
+    {"member": "VENOMOTH", "before": 0, "after": 1, "why": "same; it got one action and died through its Focus Sash to a multi-hit move before Quiver Dance"}
+  ],
+  "level_change_rationale": "First-attempt win with one faint, which is the brief's +1 case. I put the points on the two members that died before doing anything rather than on Drapion, which nearly took my best Pokemon out by itself, or Sandaconda, which reached +4 and killed something. Both are +1 from offset 0 to offset 1 and within the +-2 limit. Note that levels only partly address the real issue: Bisharp and Venomoth are both frail bodies whose gimmicks are conditional on the player making a specific mistake, and a level does not change that.",
+  "rebuild_note": "The level changes cannot be re-verified from this session - the run pinned work/agent-battle-build-5, which predates the edit. The main agent must rebuild.",
+  "theme_check": "Yes, and this is the cleverest room in the hideout. The dossier's claim - that every safe opening move the player has is the wrong one somewhere - is literally true on the board: Intimidate feeds Defiant, attacking the snake hands the room its weather, and I had to consciously bench a Pokemon and pick a status move over an attack to avoid both. That the sand arrived on turn 5, the exact turn I finally chose to attack Sandaconda, is a design working as written.",
+  "cooler_note": "Keep it; the two-sided trap is a genuinely good idea and it is the room I most enjoyed playing around. The honest weakness is that both traps are all-or-nothing: a player who knows them takes zero damage from either, and a player who does not takes both at once. Venomoth is the slot that contributes least - its Focus Sash is dead weight against any multi-hit attacker and its Quiver Dance needs a safe board this room cannot give it - so if this team is ever revisited, that is where a change would earn the most. Drapion needs nothing at all."
+}
