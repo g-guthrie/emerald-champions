@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0004 TRAINER_ALLEN; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR ROUTE 102. Everything is a Route101, Route102 or Route103 land encounter plus one C01 starter; the player has walked all three routes by this battle. GROWLITHE, HOOTHOOT, CORPHISH = wild:Route103/land_mons; TIMBURR, PACHIRISU = wild:Route102/land_mons (this battle own route); TREECKO = book C01 starter. Nothing evolved, nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "Three explicit probes plus the crack list. (1) LIGHTNING ROD: Pachirisu NUZZLE is a single-target Electric move with almost no damage cost, so aiming it at Pikachu partner is a near-free test of whether Lightning Rod redirects. (2) WIDE GUARD: Timburr ROCK_SLIDE is the spread attack Paras authored Wide Guard is supposed to answer, so every Rock Slide turn asks that question directly. (3) SPORE: Hoothoot INSOMNIA and Grass-type Treecko are both powder/sleep immune, and Growlithe, Timburr, Pachirisu and Corphish are all legal Spore targets, so the AI always has a legal sleep available. Crack list proper: powder immunity (Treecko, Hoothoot), Volt Absorb Pachirisu as a flat Electric immunity against Volt Tackle and Electroweb, Intimidate against Huge Power Bunnelby, Knock Off against the three Eviolite/Light Ball/Sitrus items, and Psychic/Fairy pressure on Mienfoo substituted with Growlithe Flare Blitz and Hoothoot Air Slash, both super effective on Paras.",
+ "party": [
+  {
+   "species": "SPECIES_GROWLITHE",
+   "moves": [
+    "MOVE_FLARE_BLITZ",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_WILD_CHARGE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate lead and Fire breaker; Wild Charge is the single-target Electric probe for Lightning Rod / Volt Absorb / Storm Drain redirection",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_NUZZLE",
+    "MOVE_SUPER_FANG",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    0,
+    0,
+    252
+   ],
+   "role": "Follow Me redirection, Nuzzle paralysis, Super Fang percentage damage; Volt Absorb is a genuine Electric immunity",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_KNOCK_OFF",
+    "MOVE_WIDE_GUARD"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Iron Fist priority, Rock Slide spread, and WIDE_GUARD as the declared check on the opponent's spread control moves",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_HOOTHOOT",
+   "moves": [
+    "MOVE_AIR_SLASH",
+    "MOVE_TAILWIND",
+    "MOVE_HYPNOSIS",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_INSOMNIA",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    164,
+    0,
+    8,
+    204,
+    0,
+    132
+   ],
+   "role": "Insomnia sleep-proof body, super-effective Flying special damage, player-side Tailwind",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_CORPHISH",
+   "moves": [
+    "MOVE_CRABHAMMER",
+    "MOVE_AQUA_JET",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_ADAPTABILITY",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the block's biggest single hit plus priority and item removal",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_TREECKO",
+   "moves": [
+    "MOVE_SEED_BOMB",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_SWORDS_DANCE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_OVERGROW",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "powder-immune, Leech-Seed-immune Grass body",
+   "availability": "book C01 starter."
+  }
+ ]
+}
