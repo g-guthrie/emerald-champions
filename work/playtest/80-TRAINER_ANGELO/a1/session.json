@@ -1,0 +1,30 @@
+{
+  "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "elf_sha256": "ae6ed685cf22c9aeaf141efed91e22b46d284efbe3e3300c07c87c981be29938",
+  "seed": 80,
+  "trainer_a": "TRAINER_ANGELO",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 30,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/80-TRAINER_ANGELO/party.json",
+  "party_sha256": "f97ad4158f634be5fa4db1084df83fc1f7ae286efb657629b04a42dee310d62c",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET"
+  ],
+  "prepared": {
+    "encounter": "C19 E0091 Mauville Gym (Angelo, Wind Power room); cap 30 Electric-gym counterteam",
+    "party": 6
+  },
+  "started": {
+    "frames": 956
+  },
+  "replacement_commits": {
+    "turn": 6,
+    "slots": {}
+  }
+}

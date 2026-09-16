@@ -1,0 +1,95 @@
+{
+ "play_order": 80,
+ "e_group": "E0091",
+ "trainer": "TRAINER_ANGELO",
+ "class": "gym",
+ "location": "MauvilleCity_Gym",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "WATTREL": 33,
+  "KILOWATTREL": 28,
+  "JOLTIK": 33,
+  "ROTOM": 29,
+  "TOXTRICITY_AMPED": 29,
+  "LUXRAY": 29
+ },
+ "cap_window_confirmation": "Dossier seeds 35/30/35/31/31/31 resolved to 33/28/33/29/29/29. Cap 30, Medium -2.",
+ "party_manifest": "work/playtest/80-TRAINER_ANGELO/party.json",
+ "party_pool_audit": "Same cap-30 Electric-gym counterteam, reordered to lead the two Assault Vest bodies. Note the matchup shift: three of Angelo's six are Ground-immune (both Wind Power birds are Electric/Flying, Rotom Levitates), so Earth Power covers only half this room and Ice Beam carries the leads. Every source map at or before Route 110; NewMauville (Surf, C28) and Route 111 desert (Go-Goggles, C23) species excluded. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "A single Tailwind charges BOTH Wind Power birds, not just the caster",
+  "Kilowattrel spends its charge on its following action while Wattrel banks its own for a later Electric attack - the authored 'one wind action, two attack timings'",
+  "The AI does not pointlessly renew Tailwind, which the crack line names as the punishable mistake",
+  "Joltik's Compound Eyes makes Thunder actually land",
+  "Toxtricity's Throat Spray fires off a sound move and Punk Rock is live",
+  "Luxray's Intimidate lands and the Choice Band lock is respected, with a sensible locked move against Ground types",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/80-TRAINER_ANGELO/a1",
+   "seed": 80,
+   "outcome": "won",
+   "turns": 7,
+   "driver_turn_counter": 6,
+   "player_faints": 4,
+   "opponent_faints": 6,
+   "narrative": "The hardest room in the gym and the one whose engine fires most cleanly. T1 Wattrel's Tailwind charged both birds at once and Kilowattrel immediately cashed its charge into a Choice Specs Thunderbolt that took a 116 HP Assault Vest Magearna to 44 through a Steel resistance; my Ice Beam (2x) removed Kilowattrel and a redirected Fleur Cannon broke Wattrel down to its Focus Sash. T2 Wattrel spent its banked charge on Thunderbolt and a critical Shadow Ball from Rotom finished Magearna before it could act - Tailwind speed decided the turn. T3 Weavile came in, Knock Off (2x on Ghost) removed Rotom, but two Thunderbolts KO'd Weavile. T4 Nidoking replaced it and both Earth Powers removed Choice Band Luxray, while Joltik's Energy Ball (2x) plus Luxray's Ice Fang (2x) KO'd a full 98 HP Nidoking; the Tailwind expired. T5 Kartana came in and died the same turn from full 85 through its Focus Sash to Joltik's Compound Eyes Thunder plus a Throat-Spray-charging Snarl. T6 Mega Gardevoir finally entered, Mega Evolved and removed Toxtricity with a 2x Psychic while Joltik Protected away an Earth Power. T7 Mystical Fire (2x) closed on Joltik."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "One Tailwind charges both Wind Power birds",
+   "result": "PASS - the headline design works exactly as authored",
+   "evidence": "T1 battle log, consecutive lines: 'The opposing Wattrel used Tailwind!' / 'A tailwind started blowing on the opposing side!' / 'Being hit by Tailwind charged the opposing Wattrel with power!' / 'Being hit by Tailwind charged the opposing Kilowattrel with power!'. One support action, two charges, plus the speed. This is the best-executed engine in my whole block."
+  },
+  {
+   "check": "Two different attack timings from one charge",
+   "result": "PASS",
+   "evidence": "Kilowattrel spent its charge on the same turn it was granted - the T1 Thunderbolt did 72 to a 116 HP Assault Vest Magearna that resists Electric at 0.5x. Wattrel did NOT spend its charge on T1; it banked it and cashed it on the T2 Thunderbolt that helped KO that same Magearna. Immediate cash-in and stored cash-in, both observed in one battle, exactly as the plan describes."
+  },
+  {
+   "check": "No pointless Tailwind renewal",
+   "result": "PASS",
+   "evidence": "Tailwind was cast once, on T1. Wattrel survived on 1 HP for two more turns with Tailwind PP still available and chose Thunderbolt both times instead of a second cast. The crack line names pointless renewal as the thing to punish and the AI never offered it."
+  },
+  {
+   "check": "Joltik Compound Eyes Thunder",
+   "result": "PASS",
+   "evidence": "T5 Thunder landed against Kartana. It was 0.25x into Grass/Steel, but combined with Snarl it still broke an 85 HP Focus Sash body in one turn. Joltik also correctly used Energy Ball (2x) against my Ground types on T4 and switched to Thunder only once the Ground types were gone."
+  },
+  {
+   "check": "Toxtricity Throat Spray and Punk Rock",
+   "result": "PASS",
+   "evidence": "T5 'The Throat Spray boosted the opposing Toxtricity's Sp.Atk!' after Snarl, and the state showed it at +1. Separate confirmation of the ability: my Gardevoir Traced Punk Rock on entry."
+  },
+  {
+   "check": "Luxray Intimidate and Choice Band discipline",
+   "result": "PASS",
+   "evidence": "Intimidate dropped both my active Pokemon to -1 Attack on entry (harmless against two special attackers, but it fired). More importantly, facing two Ground types that are flatly immune to its STAB Wild Charge, the Choice Band Luxray locked itself into Ice Fang instead - 2x on Ground, and it KO'd Nidoking. That is the correct lock choice, not a default."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "Exactly one Protect in seven turns. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 6,
+   "battler": "JOLTIK",
+   "payoff": "at 22/86 it blocked a 2x Sheer Force Earth Power that would have killed it outright, and forced a seventh turn. Only guard of the battle, maximal payoff."
+  }
+ ],
+ "ai_defects": [],
+ "ai_highlights": [
+  "Three separate clean focus-fire kills on bodies at full HP: Magearna on T2, a full 98 HP Nidoking on T4 (Energy Ball 2x plus Ice Fang 2x) and a full 85 HP Focus Sash Kartana on T5 (Thunder plus Snarl breaking the Sash and then killing). The room understands that two resisted hits beat one neutral one.",
+  "Luxray choosing to lock a Choice Band into Ice Fang rather than its STAB Wild Charge, because both of my active Pokemon were Ground types immune to Electric."
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt but it cost four player faints - Magearna, Weavile, Nidoking and Kartana - out of six, and I finished with two Pokemon standing, one of them on 64/122. This is the most demanding room in Mauville Gym and comfortably past the benchmark. Levels kept exactly as authored; if anything this room is the calibration reference for the other three.",
+ "could_this_be_cooler": "Kept, and I would hold this room up as the model for the rest of the gym. Wind Power is an obscure ability and the pairing makes it legible in one turn: the player watches a support move hand out two charges and then immediately eats one of them from a Choice Specs body. The only refinement I would name is that the room's whole engine depends on Wattrel surviving to cast, and Wattrel is a Focus Sash body in a format full of spread damage - in my run it got the cast off, but a single spread attack on turn one takes the Sash and the second half of any double-target removes it before the Tailwind exists. The concrete suggestion (not applied): give Wattrel Tailwind plus a Covert Cloak instead of the Focus Sash. The Cloak blanks the flinch and secondary-effect disruption that is the realistic way a player denies the cast, it does not make Wattrel meaningfully tankier against honest damage, and it keeps the room's counterplay exactly where the crack line says it should be - deny the caster with real damage, not with a Fake Out.",
+ "authored_set_legality": "No legality problem found. All six prepared and ran clean, including both Wind Power holders and Toxtricity's Amped form."
+}
