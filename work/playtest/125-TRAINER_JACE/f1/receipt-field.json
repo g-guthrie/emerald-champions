@@ -1,0 +1,116 @@
+{
+  "play_order": 125,
+  "e_group": "E0148",
+  "trainer": "TRAINER_JACE",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/125-TRAINER_JACE/receipt.json (mist-less run at cap 36; left intact)",
+  "build": "work/agent-battle-build-4",
+  "cap_note": "Cap 36 -> 42. Observed levels 43/41/46/38/39/40 match the dossier's 'Medium cap40 levels 43/41/46/38/39/40' exactly.",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS. Terrain read 'misty' from turn 0 to the end - Defog was never selected, so nothing removed it."
+  },
+  "party_manifest": "work/playtest/125-TRAINER_JACE/f1/party.json",
+  "party_note": "Same rain six, chronology re-checked against pool-42.json; all gate<=36 from maps preceding Lavaridge. Togekiss was never sent out.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 271,
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "events": "work/playtest/125-TRAINER_JACE/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/125-TRAINER_JACE/f1/attempt-1-result.json",
+      "notes": "Won 6-3. Lost Pelipper on turn 1 to Air Slash plus Sludge Bomb, Kingdra on turn 3 to a third Sludge Bomb, and Garganacl on turn 4 to a critical Rock Slide stacked with Bonemerang (Ground, 2x into Rock). Same 6-3 line as the mist-less run."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the room's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 0: terrain 'misty', terrain_is_permanent true, authored_by_trainer_a ['misty_terrain'], from_map false."
+    },
+    {
+      "check": "plan: 'Drifblim can receive its own Flame Orb burn while airborne even under Misty Terrain'",
+      "result": "PASS - and this is the exact complement to Keegan's blocked Toxic Orb",
+      "mist_dependent": true,
+      "evidence": "End of turn 1, with the terrain still reading 'misty': 'The opposing Drifblim was burned!' and the turn-1 state shows status ['STATUS1_BURN'] on Drifblim with its Flame Orb consumed. Drifblim is Ghost/Flying and therefore ungrounded, so the mist did not protect it and Flare Boost came online. Put beside E0146, where grounded Flareon's Toxic Orb was blocked for seven straight turns, this is a clean two-sided demonstration that the engine is applying the mist by grounding rather than blanket-blocking status."
+    },
+    {
+      "check": "plan: 'it can use Defog when clearing the terrain makes the team's status attacks worthwhile'",
+      "result": "NOT USED",
+      "mist_dependent": true,
+      "evidence": "Drifblim never selected Defog - zero occurrences of DEFOG in the events log. It lived two turns and used Air Slash both times, including turn 1 at full 222 HP before it was burned, when clearing the mist would have switched on Salazzle's Toxic and Hisuian Typhlosion's Will-O-Wisp against my four grounded bodies. See ai_defects JACE-1."
+    },
+    {
+      "check": "plan: 'Until it clears, do not use grounded-target Toxic/Will-O-Wisp as if the mist were absent'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Zero occurrences of MOVE_TOXIC and zero of WILL_O_WISP in the events log. Salazzle spent all three of its turns on Sludge Bomb and Hisuian Typhlosion used Infernal Parade, so neither wasted a turn on a status move the mist would have blocked. Whether the AI withheld them because of the terrain or simply because damage scored higher cannot be distinguished from the log, but the observed behaviour is exactly what the plan asks for."
+    },
+    {
+      "check": "plan: 'poison/burn and Hex/Infernal Parade pay off only after their actual events'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 6: Infernal Parade hit an unstatused Primarina for 67 of 158 - base power, not the doubled figure, because nothing on my side could be given a status under the mist. Drifblim's Hex never appeared at all. The room's two status-scaling attacks were both held to base power for the whole battle, which is precisely the cost the mist imposes on this team."
+    },
+    {
+      "check": "plan: 'Salazzle Corrosion does not bypass Misty Terrain or make Poison attacks hit Steel'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "Salazzle never attempted Toxic, and my party contained no Steel type, so neither half of this claim was put to the test."
+    },
+    {
+      "check": "plan: 'Preserve Larvesta, Alolan Marowak, Hisuian Arcanine and Hisuian Typhlosion'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "All four present at the authored offsets; Alolan Marowak's Thick Club Bonemerang killed Garganacl and Hisuian Arcanine's Choice Band Rock Slide crit contributed to the same faint."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "battler": "Alolan Marowak",
+      "payoff": "REAL - on its first turn on the field it blocked BOTH Kingdra's rain-boosted Hydro Pump (2x into Fire/Ghost) and its half of Garganacl's spread Rock Slide (also 2x). A full double blanked, and it went on to kill Garganacl the following turn."
+    }
+  ],
+  "protect_ledger_summary": "One opposing Protect in five turns, with a large real payoff. Drifblim, Salazzle, Larvesta and Hisuian Typhlosion all carry Protect and none used it - the same under-guarding pattern as Axle's and Eli's rooms. Nothing empty, but the room is leaving guard value on the table.",
+  "ai_defects": [
+    {
+      "id": "JACE-1",
+      "severity": "suspected scoring gap, not an illegal choice",
+      "turn": 1,
+      "board": "Misty Terrain up, rain up. Opponent: Drifblim L43 at full 222 HP, Flame Orb not yet triggered, beside Salazzle L41 (Corrosion, holding Toxic). Player: Pelipper (airborne) and Kingdra (grounded), both full HP; Swampert, Primarina and Garganacl grounded on the bench.",
+      "chosen": "Drifblim selected Air Slash into Pelipper.",
+      "better": "Defog. Clearing the mist would have unlocked Salazzle's Toxic and Hisuian Typhlosion's Will-O-Wisp against four grounded bodies and doubled Hex and Infernal Parade for the rest of the battle. The dossier names this decision explicitly: 'it can use Defog when clearing the terrain makes the team's status attacks worthwhile'.",
+      "assessment": "Air Slash is a reasonable damage choice and it did contribute to killing Pelipper that turn, so this is not an illegal or absurd selection. But Defog was never selected at all, in either of Drifblim's two turns, and the room's entire status/Hex identity stayed switched off as a result. This is the third instance in this block of a field-control or ally-enabling move losing to raw damage scoring - see AXLE-1 (Lava Plume never chosen) and KEEGAN-1 (Ice Spinner chosen only once, too late). I did not touch AI C code.",
+      "shared_pattern": "AXLE-1, KEEGAN-1 and JACE-1 look like one issue with three faces: the scorer does not price a move's effect on the FIELD or on an ALLY's ability/item, only its own damage. All three of these rooms are built around exactly that kind of move, which is why all three played below their design in this block."
+    }
+  ],
+  "ai_notes": [
+    "Salazzle and Hisuian Typhlosion both correctly declined status moves that the mist would have blocked, spending their turns on Sludge Bomb and Infernal Parade instead. Whatever the cause, the outcome is the behaviour the plan asks for.",
+    "Turn 1: Drifblim and Salazzle focused the same target (Pelipper) and killed it on turn 1 - correct focus fire on the Drizzle setter.",
+    "Turn 4: Alolan Marowak used Bonemerang into Garganacl (Ground, 2x into Rock) rather than its STAB Shadow Bone, which Purifying Salt would have halved. Correct read of the ability."
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Brief rule: 'Won with 2+ faints or after a real fight -> keep.' Three player faints, the same line as the mist-less run, and the room removed my weather setter on turn 1. Jace's offsets are untouched across both runs. As with Axle and Keegan, levels are the wrong lever while JACE-1 keeps the room's status identity switched off.",
+  "could_this_be_cooler": "Keep the concept - a Flare Boost Drifblim that can burn itself in a Gym whose mist stops everyone else from being burned is a lovely piece of design, and this run proved the mechanic works exactly as intended. The problem is the same fragility seen elsewhere in the block, plus one thing specific to this room: Drifblim is simultaneously the field controller, the Flare Boost attacker and the only member that can turn the rest of the team's status plan on, and it has 222 HP but no way to survive being focused. It died on turn 2 having never cast Defog, and with it went Toxic, Will-O-Wisp, Hex and half of Infernal Parade's power. The concrete suggestion is to decouple the roles: let a second member carry the terrain removal (Hisuian Typhlosion is the natural holder, since Will-O-Wisp is the move that most wants the mist gone), so the room's plan does not live and die with one balloon. Alternatively, if the AI-side fix to the AXLE-1/KEEGAN-1/JACE-1 pattern lands and Drifblim reliably opens with Defog, re-run this room before changing anything - the intended version, where turn 2 onward my whole grounded team is burnable and poisonable, is a substantially harder fight than the one I played.",
+  "authored_set_legality": "No legality problem. Flare Boost, Corrosion, Flame Body, Lightning Rod, Intimidate and Blaze all resolved as authored, as did Flame Orb, Focus Sash, Eviolite, Thick Club, Choice Band and Life Orb.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
