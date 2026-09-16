@@ -1,0 +1,39 @@
+{
+  "play_order": 157,
+  "e_group": "E0210",
+  "trainer": "TRAINER_DAISY",
+  "location": "Route103 (Surf backtrack after Norman)",
+  "cap": 48,
+  "cap_confirmation": "battle_index listed cap window 24-36; resolved opponent levels are Roselia 49 (+3), Deerling 51 (+5), Flabebe 52 (+6), Gloom 50 (+4) = cap 48 + offset - 2 for every member, so the live milestone cap at this Surf-era backtrack is 48, not 30.",
+  "party_manifest": "work/playtest/157-TRAINER_DAISY/party.json",
+  "attempts": [
+    {
+      "seed": 11,
+      "run_dir": "work/playtest/157-TRAINER_DAISY/run-s11",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "notes": "Two player misses (Meteor Mash 90% on T2, Fire Blast 85% on T5) and a Sleep Powder on Mega Metagross kept it honest; Incineroar was KOed by a Helping Hand Double-Edge."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Roselia's Petal Blizzard feeds Sap Sipper Deerling rather than hitting Flabebe", "result": "NOT_EXERCISED", "evidence": "Roselia never had Deerling beside it after turn 1: the AI switched Deerling out for Flabebe on turn 1 and Roselia used Protect then Sludge Bomb then died. Petal Blizzard was never selected. Consistent with the dossier's 'do not hit Flabebe with Petal Blizzard' rule, but the positive half of the combo did not fire in this run."},
+    {"check": "Flabebe supports its ally rather than taking an empty turn", "result": "PASS", "evidence": "Turn 2 Helping Hand -> Roselia Sludge Bomb dealt 110 to a 194 HP Assault Vest Incineroar; turn 4 Helping Hand -> Deerling Double-Edge KOed Incineroar outright."},
+    {"check": "Gloom supplies independent sleep/special pressure on a legal target", "result": "PASS", "evidence": "Turn 5 Sleep Powder on Mega Metagross (grounded, non-Grass, legal) landed for 3 turns and cost the player its best attacker for the rest of the fight; turn 6 it selected Moonblast on the Dragon."},
+    {"check": "No self-damaging spread choice beside the frail Flabebe", "result": "PASS", "evidence": "No spread move was used while Flabebe was on the field."},
+    {"check": "Sensible target selection", "result": "PASS", "evidence": "Deerling chose Play Rough (Fairy) into Salamence rather than Double-Edge, and Gloom queued Moonblast at the same Dragon."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Roselia", "payoff": "REAL: blocked Fake Out and a Mega Metagross Meteor Mash that would have KOed it, on the same turn Daisy pivoted Deerling out for Flabebe."},
+    {"turn": 3, "battler": "Flabebe", "payoff": "REAL: blocked Knock Off, preserving the Eviolite that is the whole point of the set."},
+    {"turn": 5, "battler": "Deerling", "payoff": "REAL: blocked a Mega Metagross Meteor Mash while Gloom landed Sleep Powder behind it."}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "ROSELIA", "before": 3, "after": 4, "reason": "First-attempt win with only one player faint. Roselia is the lowest-level member and died on turn 3 having contributed one Protect and one Sludge Bomb; +1 is the smallest honest increase and does not touch the Flabebe/Deerling combo pieces."}
+  ],
+  "rerun_after_change": "DEFERRED: opponent levels are baked into the headless ROM, and this agent is instructed never to run make. The retest belongs to the main agent's wave rebuild.",
+  "could_this_be_cooler": "The concept is genuinely nice - Petal Blizzard as an ally-feeding move for Sap Sipper Deerling and Flower Veil Flabebe protecting the Grass allies - but this run shows the combo is fragile in practice: the AI correctly refuses Petal Blizzard whenever Flabebe is on the field, and the AI's own turn-1 pivot to Flabebe therefore switched the combo off permanently. The cheap fix that would make it fire is a second Sap Sipper/Grass-immune body, or moving Flower Veil's partner off the field slot Petal Blizzard wants. A concrete suggestion for a later pass: give Flabebe Grassy Terrain instead of Pollen Puff so the Grass theme has a field effect the whole team shares and Deerling's Seed Bomb gets a real payoff, and let Petal Blizzard be safe because Flower Veil already blanks the ally hit conceptually. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal. Flabebe resolves to FLABEBE_RED and Deerling to DEERLING_SPRING; both forms materialized correctly."
+}
