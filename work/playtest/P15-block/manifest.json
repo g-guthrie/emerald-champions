@@ -1,0 +1,50 @@
+{
+  "agent": "P15",
+  "block": "play_order 169-180 (E0238 Phil, the Weather Institute Aqua raid E0243-E0248, the Route 119 rival E0249, E0251 Hideo, E0253 Colin, E0255 Lorenzo, E0256 Jenna)",
+  "date": "2026-09-16",
+  "caps_used": {
+    "48": "E0238 through E0248 (Phil, five grunts, Shelly)",
+    "54": "E0249 onward (rival, Hideo, Colin, Lorenzo, Jenna) - the survey milestone raise",
+    "verification": "Every battle's resolved opponent levels were checked against cap + authored offset - 2 before playing and all 12 matched. No --cap adjustment was needed."
+  },
+  "build_dirs": {
+    "work/agent-battle-build-2": "play_order 169-175 (E0238 through E0248)",
+    "work/agent-battle-build-4": "play_order 176-180 (E0249 onward), after the mid-block snapshot switch"
+  },
+  "stalled_attempts_voided": "none - no battle in this block stalled with an empty awaiting_now. All 12 ran to a clean outcome and every attempt has a result.json.",
+  "results": [
+    {"play_order": 169, "trainer": "TRAINER_PHIL", "attempts": "1W", "player_faints": 1, "level_change": "STARAPTOR -1 -> 0"},
+    {"play_order": 170, "trainer": "TRAINER_GRUNT_WEATHER_INST_1", "attempts": "1W", "player_faints": 0, "level_change": "CRAWDAUNT 1 -> 2; TENTACRUEL 1 -> 2"},
+    {"play_order": 171, "trainer": "TRAINER_GRUNT_WEATHER_INST_4", "attempts": "1W", "player_faints": 2, "level_change": "none"},
+    {"play_order": 172, "trainer": "TRAINER_GRUNT_WEATHER_INST_5", "attempts": "1W", "player_faints": 2, "level_change": "none"},
+    {"play_order": 173, "trainer": "TRAINER_GRUNT_WEATHER_INST_2", "attempts": "1W", "player_faints": 1, "level_change": "PELIPPER 2 -> 3; FERROTHORN 2 -> 3"},
+    {"play_order": 174, "trainer": "TRAINER_GRUNT_WEATHER_INST_3", "attempts": "1W", "player_faints": 0, "level_change": "MIGHTYENA 2 -> 3; QWILFISH 2 -> 3"},
+    {"play_order": 175, "trainer": "TRAINER_SHELLY_WEATHER_INSTITUTE", "attempts": "2W", "player_faints": "3 and 3", "level_change": "none"},
+    {"play_order": 176, "trainer": "TRAINER_BRENDAN_ROUTE_119_TREECKO", "attempts": "1L then 1W", "player_faints": "6 then 2", "level_change": "none (all six aliases unchanged)"},
+    {"play_order": 177, "trainer": "TRAINER_HIDEO", "attempts": "1W", "player_faints": 3, "level_change": "none"},
+    {"play_order": 178, "trainer": "TRAINER_COLIN", "attempts": "1W", "player_faints": 0, "level_change": "DODRIO -1 -> 0; XATU 0 -> 1"},
+    {"play_order": 179, "trainer": "TRAINER_LORENZO", "attempts": "1L then 1W", "player_faints": "6 then 1", "level_change": "none"},
+    {"play_order": 180, "trainer": "TRAINER_JENNA", "attempts": "1L then 1W", "player_faints": "6 then 2", "level_change": "none"}
+  ],
+  "teams_file_edits": [
+    {"trainer": "TRAINER_PHIL", "member": "STARAPTOR", "before": -1, "after": 0},
+    {"trainer": "TRAINER_GRUNT_WEATHER_INST_1", "member": "CRAWDAUNT", "before": 1, "after": 2},
+    {"trainer": "TRAINER_GRUNT_WEATHER_INST_1", "member": "TENTACRUEL", "before": 1, "after": 2},
+    {"trainer": "TRAINER_GRUNT_WEATHER_INST_2", "member": "PELIPPER", "before": 2, "after": 3},
+    {"trainer": "TRAINER_GRUNT_WEATHER_INST_2", "member": "FERROTHORN", "before": 2, "after": 3},
+    {"trainer": "TRAINER_GRUNT_WEATHER_INST_3", "member": "MIGHTYENA", "before": 2, "after": 3},
+    {"trainer": "TRAINER_GRUNT_WEATHER_INST_3", "member": "QWILFISH", "before": 2, "after": 3},
+    {"trainer": "TRAINER_COLIN", "member": "DODRIO", "before": -1, "after": 0},
+    {"trainer": "TRAINER_COLIN", "member": "XATU", "before": 0, "after": 1}
+  ],
+  "teams_file_commit_status": "NOT COMMITTED BY THIS AGENT, as instructed. All nine member lines are edited in place in data/emerald_champions/emerald_champions_battle_teams.txt and left uncommitted for the main agent to verify and commit at the wave boundary. No other line in that file was touched by P15.",
+  "reruns_outstanding": "Every level change in this block is untested. The driver reads opponent levels out of the compiled headless ROM and this agent is forbidden to run make, so the brief's 'rerun once' step could not be performed for any of the five trainers with changes. All five need a confirming replay after the main agent rebuilds: E0238 Phil, E0243 grunt 1, E0246 grunt 2, E0247 grunt 3, E0253 Colin.",
+  "showcase_escalation_summary": {
+    "verdict": "PASS - the Weather Institute raid's authored escalation is mechanically real end to end",
+    "stage_1_to_3_no_weather": "E0243, E0244, E0245 all opened with weather ['none'] and no Aqua action set weather in any of them.",
+    "stage_4_stolen_rain": "E0246 opened with live weather ['B_WEATHER_RAIN_NORMAL'] while field_source.weather_at_turn_0 was ['none'] and from_map was false - the rain is Pelipper's Drizzle firing on entry, not a room effect.",
+    "stage_5_no_weather": "E0247 back to ['none'].",
+    "stage_6_shellys_snow": "E0248 opened with live weather ['B_WEATHER_SNOW'] while field_source.weather_at_turn_0 was ['none'] - the snow is Alolan Ninetales's Snow Warning on entry.",
+    "shelly_as_boss": "PASS on pressure - six members at L49-L51 against a cap of 48, and the only fight in the block that cost three Pokemon on two structurally different lines. But two authored centrepieces do not actually occur: Castform never reaches its Ice form (deployment order outlasts Snow Warning's five turns) and Mega Feraligatr's ability resolves as Dragonize rather than the Sheer Force the dossier describes, on a set with no Normal-type move for Dragonize to convert. Both are detailed in work/playtest/175-TRAINER_SHELLY_WEATHER_INSTITUTE/receipt.json."
+  }
+}
