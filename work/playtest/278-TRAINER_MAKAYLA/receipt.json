@@ -1,0 +1,28 @@
+{
+  "play_order": 278, "e_group": "E0435", "trainer": "TRAINER_MAKAYLA", "class": "ace", "location": "Route132",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium",
+  "party_manifest": "work/playtest/278-TRAINER_MAKAYLA/party_route132_84.json",
+  "availability_note": "Same Route 132 party as E0434: gate<=68 pool-84 entries only (Incineroar 36, Urshifu-S 42, Amoonguss 42, Landorus 42 legend, Tapu Fini 60 legend, Flutter Mane 68 Mt Pyre Summit); nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/278-TRAINER_MAKAYLA/a1", "seed": 1, "outcome": "won", "turns": 2, "decisions": 4, "player_faints": 1, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "Snow Warning active on entry, no turn spent on Snowscape", "result": "PASS", "evidence": "'It started to snow!' in the send-out messages; weather B_WEATHER_SNOW at turn 0."},
+    {"check": "Abomasnow attacks turn 1 instead of setting weather", "result": "PASS", "evidence": "T1 Abomasnow chose Ice Shard at Urshifu (34 dmg) while under -1 Atk from Intimidate."},
+    {"check": "Medicham opens with Fake Out or Close Combat", "result": "PASS", "evidence": "T1 Medicham chose Close Combat at Incineroar; it was KOed by Urshifu's Wicked Blow before moving."},
+    {"check": "Beartic uses Slush Rush speed under snow", "result": "PASS", "evidence": "T2 Beartic moved before both L84 player actives and KOed Incineroar (227/227) with Superpower."},
+    {"check": "Flareon Toxic Orb -> Guts", "result": "PASS", "evidence": "End of T2 'The opposing Flareon was badly poisoned!'; T3 Guts Quick Attack did 98 to Urshifu."},
+    {"check": "Charti Berry on Beartic", "result": "NOT EXERCISED", "evidence": "No Rock move was used against it."}
+  ],
+  "protect_ledger": [{"turn": "all", "entry": "No opponent Protect used. Abomasnow and Flareon carry Protect; neither was selected, which was correct: no turn offered a stall payoff."}],
+  "ai_defects": [
+    {"severity": "minor", "turn": 3, "board": "Flareon (Guts, toxic) alone vs Flutter Mane 213/213 and Urshifu 214/288 (-1 Def); Flareon is slower than both and about to die", "chosen": "Quick Attack at Urshifu (98 dmg)", "better": "Flare Blitz at Urshifu (Guts+STAB 120 BP, roughly double the damage, plausible KO range); priority buys nothing when the move cannot KO and the user dies regardless."}
+  ],
+  "level_changes": [
+    {"member": "ABOMASNOW", "before": 1, "after": 2, "why": "Won first try in 2 turns with one faint; Abomasnow died to one Flare Blitz on T1 having contributed only a 34-damage Ice Shard. Weakest member."},
+    {"member": "MEDICHAM", "before": 1, "after": 2, "why": "Died on T1 to a single Wicked Blow before acting; the snow-independent physical mode never got a turn."}
+  ],
+  "level_changes_unverified": "Cannot be re-verified until the main agent rebuilds the headless ROM; attempt 1 was played at offsets 1/1/1/2.",
+  "cooler": "The snow-on-entry plus Slush Rush pacing works exactly as authored: Beartic moved first and took a KO on T2. The fight is short because the leads are 4x/2x weak to the obvious Fire/Fighting answer, which the crack line already admits. A Focus Sash or Sitrus on Medicham (not in this pass) would let Fake Out actually happen; no species change needed.",
+  "authored_set_legality": "No problem; all four sets materialized as written (Beartic L84 at offset 2, others L83)."
+}
