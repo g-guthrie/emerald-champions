@@ -1,0 +1,44 @@
+{
+  "play_order": 116,
+  "e_group": "E0138",
+  "trainer": "TRAINER_LUCY_LAVARIDGE",
+  "class": "brain",
+  "location": "LavaridgeTown_PokemonCenter_1F",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Milotic L35 (36+1-2), Drapion L34 (36+0-2), Shuckle L37 (36+3-2), Seviper L36 (36+2-2), Absol L32 (36-2-2).",
+  "party_manifest": "work/playtest/116-LUCY_LAVARIDGE/party-a1.json",
+  "attempts": [
+    {"seed": 81, "attempt": 1, "outcome": "won", "turns": 9, "player_faints": 3, "opponent_faints": 5,
+     "notes": "The authored ALLY_COMBO fired on turn 1 and one-shot a 141 HP Togekiss. Shuckle then ran a genuine support game - Sticky Web, two Encores on my Mega and my Huge Power attacker, and three Helping Hands. Won on Alakazam surviving a Knock Off with its Focus Sash and Focus Blasting the Mega Absol."}
+  ],
+  "strategy_checks": [
+    {"check": "Milotic opens with Dragon Cheer on Drapion (ALLY_COMBO)", "result": "PASS", "evidence": "Turn 1, Milotic's first action: 'The opposing Milotic used Dragon Cheer!' / 'The opposing Drapion is getting pumped!' - aimed at its partner, not wasted."},
+    {"check": "Drapion with Scope Lens + high-crit Cross Poison reaches the guaranteed-crit stage under Dragon Cheer, and Sniper multiplies the payoff", "result": "PASS - the best-executed authored tactic in this block", "evidence": "Same turn: 'The opposing Drapion used Cross Poison!' / 'A critical hit!' / 'It's super effective!' - and a full-HP 141 HP Togekiss was KOed outright by a L34 Drapion. Cross Poison's own high crit ratio plus Scope Lens plus Dragon Cheer reached guaranteed crit exactly as the dossier describes, and Sniper turned it into a one-shot. The whole combo landed on the first turn of the battle."},
+    {"check": "Shuckle lays Sticky Web and it slows later entries", "result": "PASS", "evidence": "Turn 3 Sticky Web laid; turn 8 Excadrill entered and 'Excadrill was caught in a sticky web! Excadrill's Speed fell!' The state confirms spe -1. It only affected entries after the web, as the dossier notes."},
+    {"check": "Shuckle uses Encore to lock a threat into a bad move", "result": "PASS", "evidence": "Turn 4 Encored Mega Blastoise into Dark Pulse; turn 5 Encored Azumarill into Play Rough. Both targets were my two best attackers and both locks held for three turns, which is why Milotic survived as long as it did."},
+    {"check": "Shuckle's Helping Hand converts its bulk into partner damage", "result": "PASS with one empty use", "evidence": "Turn 7 Helping Hand boosted Seviper's Sludge Bomb into a KO on a full-HP Assault Vest Azumarill; turn 8 it boosted Seviper's Flamethrower into a KO on Excadrill. Turn 6 was wasted - see defect P10-D12."},
+    {"check": "Milotic's Competitive raises Special Attack when a stat is lowered", "result": "NOT TRIGGERED", "evidence": "Play Rough's 10% Attack drop never rolled on Milotic and I used nothing else that lowers stats. Untested, not failed."},
+    {"check": "Milotic uses Recover to extend the fight", "result": "PASS", "evidence": "Recover on turns 4, 5 and 6, each time restoring around 72. It took two attackers hitting simultaneously to out-pace it, which is the correct answer and made the middle of the fight a genuine race."},
+    {"check": "Absol Mega-evolves and holds Magic Bounce", "result": "PASS", "evidence": "Turn 9: 'The opposing Absol has Mega Evolved into Mega Absol!'; state shows ABSOL_MEGA with ability MAGIC_BOUNCE."},
+    {"check": "Shuckle uses Infestation as a productive attack (dossier: 'Shuckle gains Infestation over Protect so it has a productive attack')", "result": "FAIL", "evidence": "Shuckle had five decision points and chose Sticky Web, Encore, Encore, Helping Hand, Helping Hand, Helping Hand. Infestation was never selected. In practice its support moves were better than Infestation every turn, so this is a mild miss rather than a broken set - but the move the dossier added specifically so Shuckle would have an attack is dead weight."}
+  ],
+  "protect_ledger": [
+    {"turn": 9, "battler": "ABSOL_MEGA", "payoff": "REAL - blocked Alakazam's Focus Blast (2x) on the turn it Mega-evolved, which is the single most valuable turn to Protect."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P10-D12",
+      "severity": "medium",
+      "turn": 6,
+      "board": "Shuckle L37 partnered with Milotic at 27/144; Milotic selected Recover that turn",
+      "chosen": "MOVE_HELPING_HAND aimed at Milotic.",
+      "why_wrong": "Helping Hand multiplies the power of the partner's attacking move. Milotic used Recover, so the boost applied to nothing and Shuckle's turn was spent for zero effect - on the turn Milotic died. The ally-support scorer is choosing Helping Hand without checking whether the ally has actually selected an attacking move, even though the engine resolves both choices in the same turn. The other two Helping Hands (turns 7 and 8) each converted directly into a KO, so this is a conditional bug, not a bad move.",
+      "better_action": "Encore on one of my two attackers (it had 6 PP left and both previous Encores were excellent), or Infestation into Milotic's target."
+    }
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Won on attempt 1 but lost three of six, including a full-HP Togekiss to the turn-1 combo and a full-HP Assault Vest Azumarill to a Helping Hand chain. Squarely 'won after a real fight'. The offset spread here is also visibly well-judged: Shuckle at +3 is the support anchor that made the fight hard, and Mega Absol at -2 is correctly discounted for being a Mega.",
+  "could_this_be_cooler": "Honestly, no - this is the reference battle of the block and the rest of it could learn from this one. Dragon Cheer into a Sniper Scope Lens Drapion is a real competitive line that lands on turn 1, reads instantly at the table, and has a clean documented crack (Battle Armor, or removing Milotic first). The Shuckle support shell then changes what the player is allowed to do rather than just adding HP. The only loose thread is Infestation, which the AI will never choose over its three support moves; that slot could be Protect again, or something that pairs with Sticky Web, without touching what makes the fight good.",
+  "authored_set_legality": "No legality problems. Sniper, Competitive, Sturdy, Shed Skin, Magic Bounce, Scope Lens and the Absolite Mega all behaved as printed.",
+  "notes": "Turn-1 evidence is the headline: a L34 Drapion removing a full-HP L36 Togekiss in one move because the combo resolved correctly."
+}
