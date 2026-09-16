@@ -1,0 +1,33 @@
+{
+  "play_order": 123,
+  "e_group": "E0147",
+  "trainer": "TRAINER_DANIELLE",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 36,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/123-TRAINER_DANIELLE/party.json",
+  "level_audit": "PASS. Volcarona 32 (-2), Oricorio-Baile 34 (0), Kubfu 40 (+6), Rotom-Heat 34 (0), Delphox 34 (0), Blaziken 32 (-2). All equal cap 36 + offset - 2.",
+  "attempts": [
+    {"seed": 13, "run_dir": "work/playtest/123-TRAINER_DANIELLE/run-s13", "outcome": "won", "turns": 7, "player_faints": 5, "opponent_faints": 6, "ai_decision_seconds_max": 1.021, "note": "Won on the last Pokemon. Primarina's Moonblast OHKOed the level-40 Eviolite Kubfu through Eviolite on the final turn with five of six of my party already down."}
+  ],
+  "strategy_checks": [
+    {"check": "Volcarona leads beside Baile Oricorio and uses Fiery Dance so Oricorio's Dancer copies it", "result": "FAIL (never attempted)", "evidence": "Volcarona chose Bug Buzz on turn 1 and again on turn 2, then Giga Drain on turn 3. It never used Fiery Dance while Oricorio was alive, so Dancer never copied anything and the room's signature interaction did not occur. The choice is individually correct - against a rain team of Water types, Fiery Dance is 0.25x while Bug Buzz is neutral - which is exactly the problem: any rain lead disables the whole dancer engine for free. Not scored as an AI defect; scored as a team-design fragility."},
+    {"check": "Oricorio has Roost, not Quiver Dance (authored change)", "result": "PASS", "evidence": "Never got to use it - Oricorio was KOed by one rain Weather Ball on turn 1 (126 HP at level 34) - but the authored moveset is the one in the dossier."},
+    {"check": "Mega Blaziken evolves and shows Speed Boost", "result": "PASS", "evidence": "Blaziken entered on turn 6 as SPECIES_BLAZIKEN with ITEM_BLAZIKENITE, and by turn 7 the state reports SPECIES_BLAZIKEN_MEGA with ABILITY_SPEED_BOOST. It used the authored Thunder Punch (the move that replaced Swords Dance) to KO Togekiss on the same turn."},
+    {"check": "Kubfu Helping Hand (authored addition)", "result": "FAIL (never used)", "evidence": "Kubfu attacked or guarded on every one of its five turns (Brick Break, Iron Head, Protect x2) and never used Helping Hand. Defensible each time - its partner was either faster or already dying - but the authored support line was never exercised."},
+    {"check": "Rotom-Heat Choice Specs / Levitate", "result": "PASS", "evidence": "ITEM_CHOICE_SPECS and ABILITY_LEVITATE reported; it used Thunderbolt twice and respected the choice lock, killing Pelipper on turn 2."},
+    {"check": "Misty Terrain (the Gym's natural starting mist) present", "result": "NOT TESTABLE", "evidence": "terrain reported \"none\" at turn 0. Same harness limitation as the other Lavaridge rooms."}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "Kubfu", "payoff": "real", "detail": "Blocked a Primarina Moonblast, which is 2x on Kubfu and (as turn 8 proved) a clean OHKO through Eviolite. This single Protect is most of the reason the fight went to the last Pokemon."},
+    {"turn": 7, "battler": "Kubfu", "payoff": "real", "detail": "Blocked a Togekiss Air Slash aimed at it while its partner Mega Blaziken took the player's other attack; Kubfu stayed at 100/110 and became the last opponent standing."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "No illegal or nonsensical choices. Both Kubfu Protects had genuine payoff and neither was repeated into a third consecutive turn. Delphox correctly picked Grass Knot into the heavy Water/Ground Swampert (4x) rather than a Fire move under rain, which is a good weather-aware read. Max opponent decision time 1.021s, inside the 1.2s budget.",
+  "level_changes": [],
+  "level_decision": "KEEP. Won on attempt 1 but with 5 player faints and the win landing on the last surviving Pokemon. This is comfortably the 'won after a real fight' case; no raise and no cut.",
+  "cooler_note": "The level-40 Eviolite Kubfu is the best thing in this room and it is not the Mega - an unevolved Pokemon six levels over cap that outlived a Mega Blaziken and two Fire specialists is a genuinely memorable opponent, and its two Protects were played like a real VGC player. The dancer concept is the weak half: Volcarona and Oricorio are a lovely pairing on paper, but Fiery Dance is the only move that triggers Dancer and it is the first move any prepared team makes worthless, so in practice the room is Kubfu plus four Fire attackers. The concrete suggestion is to give Oricorio a second reason to be there that does not depend on the ally choosing one specific move - Revelation Dance is already on it and is itself a Dance move, so leading Oricorio and letting Volcarona's Dancer-less half copy nothing is backwards; a Quiver Dance or Feather Dance user would make Dancer fire off a move the AI actually wants to click. Flagged, not changed.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}
