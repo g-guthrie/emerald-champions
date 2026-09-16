@@ -1,0 +1,36 @@
+{
+  "play_order": 43,
+  "e_group": "E0046",
+  "trainer": "TRAINER_CHANDLER",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"PHIONE": 22, "JOLTIK": 26, "BUIZEL": 25, "QUAGSIRE": 21},
+  "party_manifest": "work/playtest/43-TRAINER_CHANDLER/party.json",
+  "party_pool_audit": "Cap-24 core party, all six gated <= 24 in pool-24.json. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/43-TRAINER_CHANDLER/a1", "seed": 49, "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "T1 Joltik fired Compound Eyes Thunder before rain and missed; Moonblast plus a 2x Air Slash KO'd it, and Phione then set Rain Dance. T2 Togekiss pivoted to Kartana and a rain-boosted Hydro Pump KO'd Enamorus outright. T3 Magearna came in; Kartana's Leaf Blade one-shot Quagsire at 4x, a critical Hydro Pump KO'd Kartana, and Thunderbolt finished Phione. T4-T5 Buizel came in, Togekiss redirected its Liquidation and a +3 Thunderbolt KO'd it."}
+  ],
+  "strategy_checks": [
+    {"check": "Phione sets manual Rain Dance", "result": "PASS", "evidence": "Turn 1: 'The opposing Phione used Rain Dance! It started to rain!' and the state shows B_WEATHER_RAIN_NORMAL for the rest of the battle."},
+    {"check": "Phione attacks immediately when setup is unsafe / converts rain into damage", "result": "PASS", "evidence": "It set rain once and then spent every following turn on Hydro Pump, one of which KO'd a full-health 77 HP Enamorus and one of which (critical) removed Kartana. Correct pacing, not a second redundant weather turn."},
+    {"check": "Joltik Compound Eyes Thunder is used outside rain", "result": "PASS_with_miss", "evidence": "Turn 1 Joltik chose Thunder before rain was up, exactly as the plan describes (Compound Eyes lifts 70% to ~91%). It missed. The choice was correct even though the roll was not."},
+    {"check": "Buizel Swift Swim doubles Speed in rain", "result": "NOT_DEMONSTRATED", "evidence": "Buizel entered on the last turn and used Liquidation, but my only other actor that turn was a base-65 Magearna, so no speed comparison proves the doubling. Not a defect; simply never exercised."},
+    {"check": "Phione Hydration / Rest recovery", "result": "NOT_EXERCISED", "evidence": "Phione was never statused, so Hydration had nothing to clear and Rest was never the right call."},
+    {"check": "Quagsire Unaware ignores stat boosts", "result": "NOT_EXERCISED", "evidence": "Quagsire was KO'd by an unboosted 4x Leaf Blade before any of my attackers had a boost for it to ignore. Yawn was also never used."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect in this battle. Note that only Joltik and Buizel carry Protect on this team, and both were on the field for a single turn each.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No bad decision observed. Phione's rain-then-attack pacing and Joltik's pre-rain Thunder are both exactly what the dossier asks for.",
+    "Structural observation rather than an AI fault: Joltik is the team's highest-level member (offset 4, L26) and it died on turn 1 to a Moonblast plus a 2x Air Slash. A 70 HP Eviolite Bug/Electric is 2x to Flying, 2x to Fire and 2x to Rock, and the rain it wants does not help it at all - it is the only member the rain plan does not support."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost Enamorus and Kartana, both to rain-boosted Hydro Pumps. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. No level change.",
+  "could_this_be_cooler": "The idea - a rain answer to the sun trainer standing next to him on the same route - is a good piece of route composition and should stay. The weak link is Joltik: it is the biggest level investment on the team and the member that benefits least from the weather it is built around (Compound Eyes Thunder is at its best OUTSIDE rain, which is the opposite of the team's plan). A Swift Swim or Hydration-adjacent Electric, or simply moving those levels onto Phione so the setter survives to use Rest, would make the rain read as one machine instead of three rain users plus an accuracy gimmick. Quagsire at offset -1 is a nice touch and should be left alone. No change made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
