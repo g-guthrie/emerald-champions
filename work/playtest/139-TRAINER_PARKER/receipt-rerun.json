@@ -1,0 +1,83 @@
+{
+  "play_order": 139,
+  "e_group": "E0165",
+  "trainer": "TRAINER_PARKER",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/139-TRAINER_PARKER/receipt.json",
+  "build": "work/agent-battle-build-4",
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "why_rerun": "No level change was made on this trainer. The open item from the first run was Armor Tail: the first pass could only test it by omission, so this rerun was required to CARRY and USE a priority move against Farigiraf and confirm the block.",
+  "cap_confirmation": "Driver reports level_cap 42 and Oranguru L42 / Farigiraf L42 / Lickilicky L42 / Spinda L44 / Wyrdeer L42 / Girafarig L46 = cap 42 + offset - 2 with the unchanged offsets 2/2/2/4/2/6. Identical to the first run.",
+  "level_offsets_at_run": {"ORANGURU": 2, "FARIGIRAF": 2, "LICKILICKY": 2, "SPINDA": 4, "WYRDEER": 2, "GIRAFARIG": 6},
+  "resolved_opponent_levels": {"ORANGURU": 42, "FARIGIRAF": 42, "LICKILICKY": 42, "SPINDA": 44, "WYRDEER": 42, "GIRAFARIG": 46},
+  "party_manifest": "work/playtest/139-TRAINER_PARKER/party.json",
+  "party_reuse_justification": "Reused unchanged across both attempts. Same cap 42, same map. Petalburg Gym is challenged in C27 and the cap is still 42 because Norman's Balance Badge is awarded at the END of this Gym; no Surf, so Route 118 and New Mauville sources stay excluded. Houndoominite stone-window 42 with the Mega Ring from Steven in C13. No legendary or mythical. The manifest already carried TWO priority moves - Weavile's Ice Shard and Incineroar's Fake Out - so the Armor Tail check needed no rebuild, only a deliberate use.",
+  "pre_declared_strategy_checks": [
+    "OPEN CHECK, the reason for this rerun: carry and USE a priority move against Farigiraf and confirm Armor Tail blocks it",
+    "Oranguru sets Trick Room on turn 1 or 2",
+    "Oranguru uses Instruct to repeat an ally's already-used move",
+    "Telepathy makes Oranguru immune to Lickilicky's Instructed Earthquake",
+    "The Brave/Quiet members carry 0 Speed IVs so Trick Room actually reverses them",
+    "Girafarig's Sap Sipper (tested by omission: no Grass move was brought)",
+    "Wyrdeer's Intimidate fires on entry",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/139-TRAINER_PARKER/r1",
+      "seed": 1139,
+      "outcome": "LOST",
+      "turns": 8,
+      "player_faints": 6,
+      "opponent_faints": 2,
+      "narrative": "I led Weavile and Houndoom and spent turn one on the open check - Weavile's Ice Shard at Farigiraf - which is exactly what I came to test and cost me the tempo. Oranguru got Trick Room up. T2 was the fight: Farigiraf used Hyper Voice, Oranguru Instructed it, and the repeated spread move killed both of my leads before either acted. T3 I brought Aegislash and Chandelure, both Ghost and therefore immune to Hyper Voice - so Farigiraf simply switched to Psychic and the Instructed double Psychic killed Chandelure. T5 Lickilicky arrived and the authored centrepiece landed in full: Choice Band Earthquake, no effect on Oranguru through Telepathy, super effective on both of mine, then Instructed and repeated - Aegislash and Incineroar died on the same turn. That left a lone Togekiss against four; it flinched its way through three turns on Serene Grace, killed Oranguru, and then Spinda's Fake Out plus a Body Slam paralysis finished it. Lost 2-6."
+    },
+    {
+      "attempt": 2,
+      "run_dir": "work/playtest/139-TRAINER_PARKER/r2",
+      "seed": 2139,
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "rebuild": "No party rebuild - same six. The change was entirely tactical: kill Oranguru on turn one before the room lands, because the whole gym's damage output is the Instruct loop rather than any individual member.",
+      "narrative": "T1 both leads focus-fired Oranguru instead of testing anything: Weavile's Knock Off, 2x into Psychic and boosted for removing the Sitrus Berry, KO'd a 167 HP Oranguru outright before it could finish Trick Room, and Mega Houndoom's Dark Pulse flinched Farigiraf. No Trick Room, no Instruct, and the fight became winnable in one decision. T2 Knock Off removed Farigiraf and its Assault Vest; Lickilicky's Choice Band Hammer Arm killed Weavile at 4x - correct targeting into a Dark/Ice body. T3 Aegislash came in as a hard wall (Ghost is immune to both Body Slam and Hammer Arm) and Sacred Sword removed a Choice-locked Lickilicky. T4-T5 Spinda's Fake Out flinched my Mega on the turn I needed it, but King's Shield kept Aegislash alive and Dark Pulse removed Spinda. T6-T7 Chandelure replaced the worn Aegislash, Dark Pulse removed Girafarig, and a critical Body Slam killed Mega Houndoom. T8 Wyrdeer Protected at 19 HP and blanked both attacks; T9 Dark Pulse finished it. Won 6-2."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "OPEN CHECK - Armor Tail blocks a priority move aimed at Parker's side", "result": "PASS - directly confirmed", "evidence": "Attempt 1, turn 1. I submitted '0:move2@3', Weavile's MOVE_ICE_SHARD (+1 priority) targeting Farigiraf. The driver accepted the command and the battle log reads: 'Weavile used Ice Shard!' immediately followed by 'Weavile cannot use Ice Shard!'. The move was consumed as the turn's action and did nothing. This is Armor Tail blocking a priority move as authored, demonstrated by use rather than by omission. Corroborated in the negative later in the same battle and in attempt 2: once Farigiraf was KO'd (attempt 2, turn 2), priority worked again - Spinda's own Fake Out resolved normally against my side on attempts 1 and 2, and my Incineroar's Fake Out became legal again only after Farigiraf was gone."},
+    {"check": "Oranguru sets Trick Room turn 1 or 2", "result": "PASS", "evidence": "Attempt 1 turn 1: 'The opposing Oranguru twisted the dimensions!' and driver field reports STATUS_FIELD_TRICK_ROOM. It selected Trick Room as its first action again in attempt 2 and only failed to land it because Weavile killed it first, which is the dossier's own named counterplay."},
+    {"check": "Instruct repeats an ally's already-used move", "result": "PASS, and it is the strongest thing this gym does", "evidence": "Attempt 1 turns 2, 3 and 5: 'The opposing Oranguru used Instruct!' / 'The opposing Farigiraf followed the opposing Oranguru's instructions!' followed by a second Hyper Voice, then a second Psychic, then a second Earthquake. Three Instructs, three doubled spread moves, six of my Pokemon dead. Each time the repeated move was the correct one for the board - Hyper Voice into two non-Ghosts, Psychic once I answered with two Ghosts, Earthquake once my side was Steel and Fire."},
+    {"check": "Telepathy blanks the Instructed Earthquake", "result": "PASS", "evidence": "Attempt 1 turn 5: 'The opposing Lickilicky used Earthquake!' / 'It doesn't affect the opposing Oranguru...' / 'It's super effective on Incineroar and Aegislash!', and then the identical sequence again after the Instruct. The authored interaction - a spread Ground move that hits everything except its own setter - worked exactly as written and won the AI that attempt."},
+    {"check": "Brave/Quiet members carry 0 Speed IVs so Trick Room reverses them", "result": "PASS", "evidence": "Under Trick Room in attempt 1, Farigiraf, Lickilicky and Oranguru all resolved before my Weavile (base 125 Speed), Mega Houndoom and Chandelure on every turn. The room genuinely inverted the order rather than being cosmetic."},
+    {"check": "Girafarig Sap Sipper by omission", "result": "PASS by omission", "evidence": "No Grass move was brought and no Sap Sipper trigger occurred. Untestable against this counterteam, unchanged from the first run."},
+    {"check": "Wyrdeer Intimidate on entry", "result": "PASS", "evidence": "Attempt 2, turn 5: 'The opposing Wyrdeer's Attack fell!' on my side as it entered, and again the Intimidate message when Incineroar switched in opposite it."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Three Protects across two attempts, all with real payoff. See ledger."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 4, "battler": "ORANGURU", "payoff": "REAL. Oranguru was on 17/167 and Protect blocked a Sacred Sword from a Blade-form Aegislash, 2x into Normal and certain death. It bought the turn on which it landed the Instructed Earthquake that killed two of my Pokemon on turn 5. Arguably the highest-value Protect in this entire block."},
+    {"attempt": 2, "turn": 8, "battler": "WYRDEER", "payoff": "EXCELLENT. At 19/178 as the last Pokemon standing, Protect blocked both a Life Orb Dark Pulse at 2x and a Knock Off, and Wyrdeer survived to take another turn. Correct and not repeated - it attacked on the following turn rather than guarding again."},
+    {"attempt": 2, "turn": 5, "battler": "SPINDA", "payoff": "N/A - not a Protect, but recorded for completeness: Spinda's Fake Out flinch on my Mega Houndoom on the turn I most needed its damage was the correct disruption choice."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "This is the best-executed opposing team in my block and the only battle in it that I lost. The gym's plan is not a collection of good members - it is one engine, Oranguru's Instruct, and every member is a barrel for it. Farigiraf supplies a spread Normal move, then a spread Psychic move when the player answers with Ghosts, and Lickilicky supplies a spread Ground move that the setter is immune to. The AI selected the correct barrel for the board three times in a row.",
+    "Armor Tail is doing real work beyond the check: it denied my Ice Shard on the turn I needed tempo, and it meant Incineroar's Fake Out was not even a legal option while Farigiraf was alive. The room genuinely has to be solved without priority.",
+    "Farigiraf switching from Hyper Voice to Psychic the moment I answered with two Ghost types is a correct revealed-set read and it is what killed attempt 1.",
+    "No defect observed across two full attempts."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change - and the brief specified no level change for this row in any case. Across two optimized attempts the record is one loss and one win with two player faints; the 'lost three optimized attempts' trigger for a reduction is not met, and the win came with 2+ faints, which is the keep case. No member is touched, so nothing is spent from the +/-2 budget.",
+    "changes": []
+  },
+  "verdict": "calibrated",
+  "difficulty_note": "This encounter is at the top of its range and is the hardest fight in my block by a wide margin. It beat a fully optimized cap-42 party outright on the first attempt and only fell to a specific, findable line - kill the setter before the room lands, which is the first sentence of the dossier's own crack text. That is exactly what a Gym room should be: it demands a plan rather than better stats, and the plan is discoverable. I would not raise it and I would not lower it.",
+  "could_this_be_cooler": "It is already the coolest team in this block and I would change nothing. Leading Armor Tail beside the setter turns the room into a puzzle the player must solve without priority, the Telepathy Earthquake loop is a genuine interaction rather than a stat check, and keeping Girafarig and Farigiraf side by side doing opposite jobs is a deliberate, legible piece of design. The one thing worth recording for the book rather than changing: the room's entire threat is concentrated in one member, so a player who finds the Oranguru line goes from losing 2-6 to winning 6-2 with the same six Pokemon and no rebuild. That swing is a feature here because the counterplay is honestly telegraphed, but it should not be copied into a room where the answer is less discoverable.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-4. Not earned campaign traversal, and no badge was awarded. Run-dir scene.gba/scene.elf deleted from both attempts after they were recorded; logs kept."
+}

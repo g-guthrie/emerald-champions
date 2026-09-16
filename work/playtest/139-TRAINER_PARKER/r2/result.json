@@ -1,0 +1,32 @@
+{
+  "trainer_a": "TRAINER_PARKER",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 2139,
+  "difficulty": "medium",
+  "level_cap": 42,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 8,
+  "decisions": 11,
+  "player_faints": 2,
+  "opponent_faints": 6,
+  "ai_decision_frames_max": 60,
+  "ai_decision_seconds_max": 1.005,
+  "ai_decision_frames": [
+    60,
+    60,
+    38,
+    51,
+    45,
+    24,
+    23,
+    23,
+    21,
+    20,
+    20
+  ],
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "elf_sha256": "34d3c6af9a6b7bbbb5b8c62ee62078c83eac6634733af6c44fe42f7863ec53af",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
