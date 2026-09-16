@@ -1,0 +1,51 @@
+{
+  "play_order": 117,
+  "e_group": "E0139",
+  "trainer": "TRAINER_SHELBY_1",
+  "class": "ace",
+  "location": "MtChimney",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Wobbuffet L35 (36+1-2), Slowbro L34 (36+0-2), Aegislash L34 (36+0-2), Medicham L32 (36-2-2).",
+  "party_manifest": "work/playtest/117-SHELBY_1/party-a1.json",
+  "attempts": [
+    {"seed": 91, "attempt": 1, "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 4,
+     "notes": "Shadow Tag locked my whole party out of switching for the entire battle - I fought the first five turns with the two leads and no outs. Mega Blastoise's Mega Launcher Dark Pulse is 2x into three of the four members and carried the fight until Wobbuffet's Encore-then-Mirror-Coat sequence killed it."}
+  ],
+  "strategy_checks": [
+    {"check": "Wobbuffet's Shadow Tag traps the player's active battlers", "result": "PASS", "evidence": "From turn 0 the driver reported switch_blocked_by ['ability_prevents_escape'] and may_switch false for both of my battlers, and it held every turn Wobbuffet was alive. I could only change a battler by losing one. This completely shaped the battle - it is the single most restrictive authored effect in the block."},
+    {"check": "Wobbuffet retaliates with Mirror Coat", "result": "PASS, but only on its fifth attempt", "evidence": "Turn 6: Wobbuffet aimed Mirror Coat at Mega Blastoise, which Wobbuffet itself had Encored into Dark Pulse the previous turn - so it knew exactly what was coming, took a 2x Dark Pulse for 144, and returned double to KO a full-HP Mega Blastoise. That is a genuinely excellent two-turn read. See defect P10-D13 for turns 1 through 4."},
+    {"check": "Wobbuffet's Encore locks a threat", "result": "PASS", "evidence": "Turn 5 Encore on Mega Blastoise into Dark Pulse, which set up the Mirror Coat kill on turn 6. Encore and Mirror Coat used together as a combo is a real competitive line and the AI found it."},
+    {"check": "Aegislash holds Shield Form until it attacks (Stance Change)", "result": "PASS", "evidence": "It entered as AEGISLASH_SHIELD, took a Dark Pulse in Shield Form, and the state read AEGISLASH_BLADE immediately after it used Flash Cannon. Its zero Speed IV kept it acting last, exactly as the dossier intends."},
+    {"check": "Aegislash's Weakness Policy fires on a super-effective hit", "result": "PASS", "evidence": "Turn 5: 'The Weakness Policy sharply boosted the opposing Aegislash' twice; state confirms atk +2 and spa +2. The boosted Flash Cannon then KOed a 73 HP Togekiss at 2x through its own Follow Me."},
+    {"check": "Aegislash's Wide Guard blocks spread moves", "result": "NOT REACHED", "evidence": "My party had no spread moves in the slots that saw play (Excadrill's Rock Slide never came in - Shadow Tag meant I could not bring it). Untested."},
+    {"check": "Aegislash uses King's Shield to revert to Shield Form", "result": "FAIL", "evidence": "Aegislash had two decision points (Flash Cannon, Shadow Ball) and never used King's Shield, so it stayed in Blade Form at 50/50 defenses and died to a single Shadow Ball at 18 HP. King's Shield after committing to Blade Form is the whole point of the set; without it, Stance Change is a one-way downgrade."},
+    {"check": "Mega Medicham opens with Fake Out behind Pure Power", "result": "PASS", "evidence": "Turn 3: Mega-evolved on entry and Fake Out flinched Togekiss. Its follow-up Ice Punch on turn 4 was correctly aimed at the 2x Togekiss rather than the Water-type."},
+    {"check": "Slowbro's Regenerator and Colbur Berry extend it", "result": "PASS", "evidence": "Colbur Berry visibly lessened the first 2x Dark Pulse ('The opposing Slowbro's Colbur Berry lessened the damage') and it chose Slack Off at 12 HP. Regenerator never applied because Shadow Tag means its own side also had no reason to pivot."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {
+      "id": "P10-D13",
+      "severity": "medium",
+      "turns": "1, 2, 3, 4",
+      "board": "Wobbuffet L35 at full HP each turn; on none of those turns did any of my moves target it",
+      "chosen": "MOVE_MIRROR_COAT four turns running, each one resolving as 'But it failed!'",
+      "why_wrong": "Four consecutive wasted turns from the Pokemon that is trapping my whole team - the most valuable turns in the battle, because Shadow Tag meant I had no outs and Wobbuffet was free to dictate. Encore was available the whole time and was devastating the moment it was finally used on turn 5. The retaliation scorer appears to select Mirror Coat on the mere presence of special attackers rather than on any read of whether it will be targeted; on turn 6 it clearly could reason about a committed move (it Mirror Coated an Encore-locked target), so the capability exists and is simply not applied on an open board.",
+      "better_action": "Encore on turn 1 or 2 against either lead, which is what it eventually did to winning effect, or Destiny Bond once it was in range."
+    },
+    {
+      "id": "P10-D14",
+      "severity": "medium",
+      "turn": 6,
+      "board": "Aegislash in Blade Form at 18/116 with +2 Atk and +2 SpA, holding King's Shield, against Alakazam and an Encore-locked Mega Blastoise",
+      "chosen": "MOVE_SHADOW_BALL",
+      "why_wrong": "At 18 HP in Blade Form its defenses are 50/50 and literally any hit kills it. King's Shield both blocks the incoming attacks and returns it to Shield Form at 140/140, preserving a Pokemon that had just been handed +2/+2 by its own Weakness Policy. Instead it attacked, died before its move resolved, and the Weakness Policy boost it had earned was spent on nothing.",
+      "better_action": "King's Shield, then attack from Shield Form the following turn with the +2 Special Attack still banked."
+    }
+  ],
+  "level_changes": [],
+  "level_change_decision": "KEEP. Won on attempt 1 with two faints, including the Mega. That is the 'won with 2+ faints' band. The fight is also harder than its faint count suggests because Shadow Tag removes switching entirely - I had five members in reserve and could not use any of them until something died.",
+  "could_this_be_cooler": "The shell is strong and the Shadow Tag pressure is the most distinctive thing in the block - being unable to switch changes every decision, which is exactly what an ace trainer should do. Two notes, neither applied: (1) Wobbuffet is only as good as the AI's willingness to use Encore, and right now it spends most of the battle on failed Mirror Coats; if the scorer cannot be taught to open with Encore, Wobbuffet's turns are mostly blank and the trap does the work by itself. (2) Aegislash never using King's Shield means the Weakness Policy is a gift to the player rather than a threat - the intended loop is 'get hit, boost, attack, King's Shield back to safety', and without the last step the set is strictly worse than a plain attacker. Both of these are AI-side rather than set-side, which is a good sign for the design.",
+  "authored_set_legality": "No legality problems. Shadow Tag, Stance Change, Pure Power, Regenerator, Mental Herb, Colbur Berry, Weakness Policy and the Medichamite Mega all behaved as printed.",
+  "notes": "The driver's switch_blocked_by reporting was essential here and matched the engine exactly - worth recording as working evidence for the documented Shadow Tag case in docs/VERIFICATION.md."
+}
