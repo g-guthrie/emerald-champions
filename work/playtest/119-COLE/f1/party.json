@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0144 TRAINER_COLE (Lavaridge Gym room 1) cap 42 Medium - MIST RERUN f1",
+  "availability_audit": "Chronology: every source map precedes Jagged Pass in book play order (Route 101-104, 111, 116, 117, Petalburg Woods, Granite Cave, Rusturf Tunnel, Seaspray Cave, Mauville Game Corner). Togepi Route102 land g14 -> friendship Togetic -> Shiny Stone Togekiss g24. Squirtle Mauville Game Corner 500 coins g30 -> Wartortle -> Blastoise g36; Blastoisinite stone-window=14, base-window=36, Mega Ring earned from Steven after Brawly. Marill Petalburg City old_rod g14 -> Azumarill g20. Swinub Seaspray_Cave_B1F land g14 -> Piloswine -> Mamoswine known-move g36. Abra GraniteCave_1F g20 -> Kadabra -> Alakazam Linking Cord g20. Drilbur RusturfTunnel land g20 -> Excadrill level g36. No legendaries, mythicals, Ultra Beasts or Paradox species; single Mega slot. Ordinary held items from the free Center held-item catalogue. Cap-42 re-check for this rerun: the cap window moved from 36 to 42 (FLAG_BADGE04_GET), which is the window the authored plan targets ('Medium cap40 levels' = 42 + offset - 2). Every member above is still sourced from a gate<=36 map that precedes Lavaridge in book play order, so nothing here depends on the Heat Badge, Strength, Surf or any post-Lavaridge area; the only change is that the party may now be levelled to 42. No gate-42 species was added. No legendaries, mythicals, Ultra Beasts or Paradox species.",
+  "plan": "Same six as the rest of the cap-36 block, reordered Water-first for a six-member mono-Fire gym room. Mega Blastoise and Azumarill lead because both resist Fire and both threaten the Rock/Fire Coalossal at 4x. Mamoswine's Thick Fat is the third Fire sponge and its Ground damage answers Numel and Coalossal. Excadrill is deliberately last: it is 2x weak to Fire and only comes in if something needs a Steel answer. Expect Tar Shot on the lead to raise the Fire damage, so the plan is to remove Coalossal before Tar Shot compounds. MIST RERUN: the room now authors Misty Terrain as a starting field. That is a net gain for this party - every grounded member is immune to Coalossal's and Fletchinder's Flame Body burn - and it costs Mega Blastoise nothing, since Water Pulse's confusion chance was never the point and grounded foes are now immune to it anyway. Tar Shot, Intimidate, Stockpile and flinching all still work through the mist, so the opening read is unchanged.",
+  "party": [
+    {
+      "species": "SPECIES_BLASTOISE",
+      "moves": [
+        "MOVE_WATER_PULSE",
+        "MOVE_AURA_SPHERE",
+        "MOVE_DARK_PULSE",
+        "MOVE_ICE_BEAM"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_BLASTOISINITE",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Mega win condition; Mega Launcher pulse coverage behind real bulk",
+      "availability": "Squirtle Mauville Game Corner 500 coins g30; Wartortle and Blastoise level evolutions g36; Blastoisinite stone-window=14, base-window=36."
+    },
+    {
+      "species": "SPECIES_AZUMARILL",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_AQUA_JET",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Fire-resistant Huge Power attacker with priority and item removal",
+      "availability": "Marill Petalburg City old_rod g14; level20 evolution, pool g20."
+    },
+    {
+      "species": "SPECIES_MAMOSWINE",
+      "moves": [
+        "MOVE_ICE_SHARD",
+        "MOVE_ICICLE_CRASH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Thick Fat Fire sponge with Ice priority and single-target Ground damage",
+      "availability": "Swinub Seaspray_Cave_B1F land g14; Piloswine level evolution; Mamoswine known-move evolution, pool g36."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        124,
+        0,
+        132,
+        0
+      ],
+      "role": "redirection and Tailwind",
+      "availability": "Togepi Route102 land g14; friendship evolution; Shiny Stone g24."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fast special breaker; Sash survives one priority hit",
+      "availability": "Abra GraniteCave_1F g20; Linking Cord from the Slateport evolution stock, pool g20."
+    },
+    {
+      "species": "SPECIES_EXCADRILL",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_IRON_HEAD",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SWORDS_DANCE"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Mold Breaker Ground/Steel lane that ignores Levitate, Air Balloon and Sturdy",
+      "availability": "Drilbur RusturfTunnel land g20; Excadrill level evolution, pool g36."
+    }
+  ]
+}

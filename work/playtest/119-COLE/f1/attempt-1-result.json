@@ -1,0 +1,28 @@
+{
+  "trainer_a": "TRAINER_COLE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 211,
+  "difficulty": "medium",
+  "level_cap": 42,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 6,
+  "decisions": 7,
+  "player_faints": 0,
+  "opponent_faints": 6,
+  "ai_decision_frames_max": 62,
+  "ai_decision_seconds_max": 1.038,
+  "ai_decision_frames": [
+    62,
+    62,
+    60,
+    62,
+    31,
+    22,
+    22
+  ],
+  "rom_sha256": "e7de65be122669a85f67ad7c25d12a211d3d53aee0f14f97df843ee75165efe1",
+  "elf_sha256": "d25b30b52eff4fc4f86e1b9508973db7719e97f5c4ed9d38e7fcfa393c8f6c0c",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}

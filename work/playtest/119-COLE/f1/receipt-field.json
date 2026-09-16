@@ -1,0 +1,144 @@
+{
+  "play_order": 119,
+  "e_group": "E0144",
+  "trainer": "TRAINER_COLE",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/119-COLE/receipt.json (mist-less run at cap 36; that receipt is left intact)",
+  "cap_note": "Cap moved 36 -> 42 for this rerun. 42 is the window the authored plan targets: 'Medium cap40 levels 41/44/45/46/46/41' = 42 + offset - 2. Driver asserted level_cap 42; observed opponent levels 41/44/45/46/46/41 match the dossier exactly.",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "weather_at_turn_0": [
+        "none"
+      ],
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS - the room authored the mist and the driver reported it before the first decision."
+  },
+  "party_manifest": "work/playtest/119-COLE/f1/party.json",
+  "party_note": "Reused the mist-less run's six (Mega Blastoise / Azumarill / Mamoswine / Togekiss / Alakazam / Excadrill) after re-checking chronology against pool-42.json. Every member is sourced from a gate<=36 map that precedes Lavaridge in book play order (Route 102/103/104, Petalburg City, Granite Cave, Rusturf Tunnel, Seaspray Cave, Mauville Game Corner); nothing depends on the Heat Badge, Strength, Surf or any post-Lavaridge area. No gate-42 species was added, so the higher cap only raises party levels to 42. No legendaries, mythicals, Ultra Beasts or Paradox species; one Mega, stone window 14 / base window 36.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 211,
+      "run_dir": "work/playtest/119-COLE/f1/run",
+      "events": "work/playtest/119-COLE/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/119-COLE/f1/attempt-1-result.json",
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 7,
+      "player_faints": 0,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.038,
+      "notes": "Won 6-0 without losing a Pokemon. Mega Launcher Water Pulse is 2x into every member of a six-member mono-Fire room and 4x into Coalossal and Numel; Azumarill's Aqua Jet mopped up. The mist made the room safer for the player, not harder: two Flame Body bodies and repeated contact produced no burn on any grounded player member all battle."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the room's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "turn 0 state: terrain 'misty', terrain_is_permanent true, field_source.authored_by_trainer_a ['misty_terrain'], from_map false."
+    },
+    {
+      "check": "plan: 'Misty Terrain does not prevent ... flinching'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 1, mist live: Torracat's Fake Out hit Azumarill and 'Azumarill flinched and couldn't move!' - the flinch landed on a grounded target under the mist, as the plan says it should."
+    },
+    {
+      "check": "plan: 'Misty Terrain does not prevent ... Intimidate'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Torracat's Intimidate applied on send-out; both player actives read atk -1 in the turn-0 state, before any move was chosen."
+    },
+    {
+      "check": "plan: 'Flame Body remains conditional against eligible airborne foes rather than a guaranteed grounded burn'",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 7 Azumarill's Aqua Jet made contact with Flame Body Coalossal and no burn message appeared; Azumarill is grounded and the mist was still up. Single clean sample - contact on a Flame Body body was otherwise Protected away on turns 2 and 4 - but it is the expected result and no player member carried any status at any point in the battle.",
+      "caveat": "one sample"
+    },
+    {
+      "check": "plan: 'Misty Terrain does not prevent Tar Shot'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "Coalossal never chose Tar Shot. It spent its four living turns on Protect (T1), switch (T2), Protect (T4), switch (T5), Protect (T6) - correctly, because it was staring at a 4x Mega Launcher Water Pulse every single turn. The authored Tar Shot opening cannot be observed against a party that threatens a 4x OHKO on the Tar Shot user."
+    },
+    {
+      "check": "plan: 'Numel gets Eviolite/Simple Stockpile'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "Numel was sent out on turn 5 and KOed on turn 6 after a single Earth Power. Simple Stockpile never got a turn."
+    },
+    {
+      "check": "plan: 'Torracat gains Fake Out: the two-step opening can protect Tar Shot then exploit the Fire vulnerability'",
+      "result": "PARTIAL",
+      "mist_dependent": false,
+      "evidence": "Fake Out fired on turn 1 and did flinch Azumarill, but Coalossal spent that same turn on Protect rather than Tar Shot, so the authored two-step never completed. The AI's choice was still the right one on the board."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "Coalossal",
+      "payoff": "REAL - blocked a Mega Launcher Water Pulse at 4x (Rock/Fire). That attack later dealt 136 to a neutral-ish Heatmor; on Coalossal it was the difference between 179 HP and roughly none."
+    },
+    {
+      "turn": 2,
+      "battler": "Torracat",
+      "payoff": "REAL - blocked Azumarill's Huge Power Liquidation, which is 2x into a 125-HP body and was very likely an OHKO. Its partner Coalossal used the same turn to pivot out of the 4x Water Pulse into Heatmor."
+    },
+    {
+      "turn": 4,
+      "battler": "Coalossal",
+      "payoff": "REAL - blocked a second 4x Water Pulse."
+    },
+    {
+      "turn": 6,
+      "battler": "Coalossal",
+      "payoff": "EMPTY - both player attacks went into Numel that turn, so Protect blocked nothing and Numel died. Not a defect under the September 15 rule (the AI never reads committed moves and Coalossal had eaten a 4x Water Pulse aimed at it on two of the previous three turns, so guarding was the correct expected-value call), but it is the one guard in this room with no payoff."
+    }
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "Four Protects, three with real payoff, none consecutive-spammed: T1, T4, T6 on Coalossal with a switch between T4 and T6, and one on Torracat. Cadence is good.",
+    "Turn 2: Coalossal switched itself out to Heatmor rather than eat a third 4x hit, and Heatmor absorbed the Water Pulse at 136/159. Correct sacrifice read.",
+    "Turn 5: Coalossal switched out again and Litleo came in and was immediately KOed by Water Pulse. This is the weakest choice of the battle - Litleo is 2x to Water with 4 HP EVs and Choice Specs - but with Coalossal at 4x and Fletchinder about to die anyway, there was no safe body to bring in. Judgment call, not a defect.",
+    "AI decision time peaked at 1.038s, inside the 1.2s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "COALOSSAL",
+      "before": 1,
+      "after": 2,
+      "reason": "Won on the first attempt with zero player faints. Coalossal and Heatmor share the lowest offset on the team (+1, level 41) and Cole has no ace, Mega or legend, so they are the correct targets. Coalossal in particular earned it: it was the best actor in the room, guarding and pivoting correctly every turn, and one more level widens the window in which it survives a 4x hit long enough to actually use Tar Shot - which is the authored opening this run never got to see.",
+      "cumulative_this_pass": 1,
+      "first_run_change": 0
+    },
+    {
+      "member": "HEATMOR",
+      "before": 1,
+      "after": 2,
+      "reason": "Joint-lowest offset (+1, level 41) and it contributed nothing: it came in as a pivot absorber on turn 2, ate 136 of its 159 HP from one Water Pulse, and was finished by an Aqua Jet before it ever moved.",
+      "cumulative_this_pass": 1,
+      "first_run_change": 0
+    }
+  ],
+  "level_change_decision": "Brief rule: 'Won first try with 0-1 player faints and no real threat -> +1 on the opponent's weakest one or two members (never the ace/Mega/legend first)'. The mist-less run at cap 36 made no change to Cole, so both members move by 1 here and the +/-2 across-both-runs ceiling is untouched. No rerun-of-the-rerun was performed; +1 on two 41s against a party that OHKOs them at 4x regardless is a bookkeeping correction, not a fix.",
+  "honest_limit": "Levels are not the real lever for this room. A six-member mono-Fire team with two 4x-Water bodies loses to a single Mega Launcher Water Pulse user no matter what the levels are; the room only becomes a fight if something on it can survive or punish a Water lead.",
+  "could_this_be_cooler": "The Coalossal/Torracat opening is a genuinely good idea - Tar Shot to make the Fire vulnerability worse, Fake Out to buy the turn that sets it up - and it is worth keeping. But it is undermined by the room being six Fire types in a Fire gym's first room: a Water lead invalidates the whole plan before it starts, and this run is the proof (Tar Shot was never cast). The concrete suggestion is to give Cole one member that punishes the obvious Water answer rather than folding to it - the room already has the right shape for it, since Coalossal is the Rock half of a Rock/Fire pair. A Water-absorbing or Water-immune body (a Fire type paired with a Dry Skin/Water Absorb or Storm Drain partner, or simply one member carrying a strong Electric or Grass attack) would make the Tar Shot opening survivable and turn the room from 'bring Water, win' into a real read. Do not change anything in this pass; this is a recommendation.",
+  "authored_set_legality": "No legality problem found. Levels resolve 41/44/45/46/46/41 at cap 42 Medium exactly as the plan states. Abilities, items and moves all matched the dossier in play: Flame Body on Coalossal and Fletchinder, Intimidate on Torracat, Simple on Numel, Tough Claws on Heatmor, Weak Armor nowhere in this room.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play, no trainer flag, no story progress."
+}
