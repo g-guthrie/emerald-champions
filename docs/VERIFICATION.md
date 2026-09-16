@@ -517,6 +517,44 @@ looks exactly like a battle that will not progress. The crash screen carries the
 assertion text, so `crash.png` in the run directory is the evidence. A receipt
 whose run stalled this way is void: the battle never finished.
 
+`damage` is keyed by the Pokemon, not by the slot it stood in: `owner:party_index`,
+as in `player:3` or `opponent_a:1`. A battler index is a position, so comparing a
+slot's HP before and after a turn that switched or replaced its occupant subtracts
+two different Pokemon. The owner belongs in the key because a multi partner
+indexes its own party and a second opposing owner has its own. An entry appears
+only when that identity is in both readings and the species still matches, so a
+changed occupant yields no entry rather than an invented one; negative means
+genuinely healed. Player reserves are included, so a Pokemon that switched out
+keeps its own damage instead of donating it to its replacement. `faints` uses the
+same identity, because a slot whose occupant fainted and was replaced within one
+act holds a live Pokemon afterwards and would otherwise hide the faint.
+`occupant_changed` names any slot that changed hands. `hp_before` and `hp_after`
+stay slot-keyed and are only raw readings.
+
+Regression on Gerald (E0144), whose rooms switch often, at the encounter's own
+cap and seed:
+
+```sh
+python3 scripts/playthrough/battle_random_policy.py --trainer TRAINER_GERALD \
+  --party work/playtest/120-GERALD/party-a1.json --seed 121 --cap 36 \
+  --run-dir work/agent-battle-gerald
+```
+
+Every replacement act reports the change and no damage, and the damage acts
+attribute to the individual mon:
+
+```
+turn 1 -> 1  occupant_changed {'0': Blastoise (player:0) -> Alakazam (player:3)}
+             damage {}
+turn 2 -> 3  occupant_changed {'3': Victreebel (opponent_a:1) -> Simisear (opponent_a:2)}
+             damage {'player:2': 28}
+turn 10 -> 10 damage {'player:5': 136, 'opponent_a:3': 45, 'player:4': 50}
+             faints ['player:4', 'player:5']
+```
+
+Before this change those replacement acts reported the arriving Pokemon's full HP
+as negative damage, for example `damage {'2': -136, '3': -105}`.
+
 A battler's `species` becomes the Mega form the moment the engine applies it, and
 `mega_evolved` says so outright. Note what a Mega Alakazam looks like: its ability
 reads as whatever Trace copied, not `ABILITY_TRACE`, so a traced ability is

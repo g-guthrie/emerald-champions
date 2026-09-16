@@ -894,6 +894,35 @@ def record_commits(session, state, submitted):
     session.meta['replacement_commits'] = {'turn': state['turn'], 'slots': slots}
     session.meta_path.write_text(json.dumps(session.meta, indent=2) + '\n')
 
+def occupant_key(state, active):
+    """A stable identity for the Pokemon standing in a slot.
+
+    A battler index is a position, not a Pokemon: after a switch or a faint
+    replacement the same index holds someone else. Keying on the owner's party
+    index instead follows the individual mon. In a multi battle the partner
+    indexes its own party and the second opposing owner has its own too, so the
+    owner has to be part of the key."""
+    if active['side'] == 'player':
+        owner = 'player' if active['agent_controlled'] else 'partner'
+    elif 'BATTLE_TYPE_TWO_OPPONENTS' in state['battle_type'] and active['battler'] == 3:
+        owner = 'opponent_b'
+    else:
+        owner = 'opponent_a'
+    return f"{owner}:{active['party_slot']}"
+
+
+def occupants(state):
+    """{identity: (species, hp)} for everything whose HP this state can see.
+
+    Player reserves are included, so a Pokemon that switched out mid-turn still
+    has its damage attributed to it rather than to whoever replaced it."""
+    seen = {}
+    for active in state['actives']:
+        seen[occupant_key(state, active)] = (active['species'], active['hp'], active['battler'])
+    for mon in state['player_reserves']:
+        seen.setdefault(f"player:{mon['slot']}", (mon['species'], mon['hp'], None))
+    return seen
+
 COMMAND_RE = re.compile(r'^(\d+)\s*:\s*(?:move(\d+)@(\d+)(,mega)?|switch(\d+))$')
 
 
@@ -993,6 +1022,28 @@ def command_act(args):
                                species=state['actives'][battler]['species']))
     chosen.sort(key=lambda entry: entry['battler'])
 
+    before_occupants, after_occupants = occupants(state), occupants(after)
+    damage = {}
+    for key, (species, hp, _) in after_occupants.items():
+        if key not in before_occupants:
+            continue
+        was_species, was_hp, _ = before_occupants[key]
+        if was_species == species and was_hp != hp:
+            damage[key] = was_hp - hp
+    fainted = sorted(
+        key for key, (species, hp, _) in after_occupants.items()
+        if hp == 0 and key in before_occupants and before_occupants[key][1] > 0
+        and before_occupants[key][0] == species)
+    occupant_changed = {}
+    for active in after['actives']:
+        key = occupant_key(after, active)
+        previous = next((a for a in state['actives'] if a['battler'] == active['battler']), None)
+        if previous is not None and occupant_key(state, previous) != key:
+            occupant_changed[active['battler']] = {
+                'from': f"{previous['species']} ({occupant_key(state, previous)})",
+                'to': f"{active['species']} ({key})",
+            }
+
     events = {
         'event': 'act',
         'turn_before': state['turn'],
@@ -1007,10 +1058,12 @@ def command_act(args):
         'chosen': chosen,
         'hp_before': {b['battler']: [b['hp'], b['max_hp']] for b in state['actives']},
         'hp_after': {b['battler']: [b['hp'], b['max_hp']] for b in after['actives']},
-        'damage': {b['battler']: state['actives'][b['battler']]['hp'] - b['hp']
-                   for b in after['actives'] if b['battler'] < len(state['actives'])},
-        'faints': [b['battler'] for b in after['actives']
-                   if not b['alive'] and state['actives'][b['battler']]['alive']],
+        # Keyed by the Pokemon, not the slot it stood in. Negative means healed.
+        'damage': damage,
+        'occupant_changed': occupant_changed,
+        # Also by identity: a slot whose occupant was replaced mid-turn holds a
+        # live Pokemon afterwards and would otherwise hide the faint.
+        'faints': fainted,
         'weather': after['weather'],
         'field': after['field'],
         'messages': decode_messages(session, view, state['message_serial']),
