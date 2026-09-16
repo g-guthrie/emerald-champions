@@ -1,0 +1,94 @@
+{
+  "play_order": 177,
+  "e_group": "E0251",
+  "trainer": "TRAINER_HIDEO",
+  "class": "ace",
+  "location": "Route119",
+  "cap": 54,
+  "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-4",
+  "party_manifest": "work/playtest/177-TRAINER_HIDEO/party.json",
+  "level_verification": "cap 54: Bisharp +1 -> L53, Muk +1 -> L53, Salazzle +1 -> L53, Gengar +2 -> L54. All equal cap + offset - 2. --cap 54 correct.",
+  "attempts": [
+    {
+      "seed": 81,
+      "run_dir": "work/playtest/177-TRAINER_HIDEO/run-s1",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 3,
+      "opponent_faints": 4
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Bisharp attacks while Muk uses Helping Hand or its own Poison damage at a real threshold",
+      "result": "PASS",
+      "evidence": "Turn 1: Bisharp used Sucker Punch into Mega Swampert (86 damage off a Life Orb) - correct, because both my leads had committed to attacking, which is exactly when Sucker Punch succeeds. Turn 2: 'The opposing Muk is ready to help the opposing Salazzle' - Helping Hand on the partner. The authored attacker/supporter split executed on consecutive turns."
+    },
+    {
+      "check": "Mega Gengar's trapping turns the fight into a cage",
+      "result": "PASS - verified directly in the engine",
+      "evidence": "After Gengar Mega Evolved, pending_decision for BOTH my battlers reported switch_blocked_by = ['ability_prevents_escape'] and the switch_slots list shrank accordingly. Shadow Tag is real, the driver surfaces it, and it removed switching from my options for the rest of the fight. Combined with Icy Wind this is genuinely the cage the dossier describes."
+    },
+    {
+      "check": "Mega Gengar's Icy Wind is speed control",
+      "result": "PASS AND BETTER THAN AUTHORED",
+      "evidence": "Turn 3: Icy Wind into Garchomp was 4x ('It's extremely effective on Garchomp!') and KOed a 122 HP Garchomp outright. The AI found a use for its speed-control move as its highest-damage option and took it. Turn 5 it used Icy Wind again into Azumarill (0.5x) purely for the speed drop while trapped with it. Correct both times."
+    },
+    {
+      "check": "Salazzle's Fake Out supports Gengar's special pressure (the alternate deployment)",
+      "result": "FAIL",
+      "evidence": "Salazzle entered at the end of turn 1, so turn 2 was its genuine Fake Out turn. It used Heat Wave instead - into Mega Swampert (Water/Ground, 0.5x) and Garchomp (Dragon/Ground, 0.5x), i.e. the worst possible spread target pair. Fake Out was on the set and available. It never used Fake Out at any point. See ai_defects."
+    },
+    {
+      "check": "Salazzle's Corrosion lets it badly poison Steel and Poison types that are normally immune",
+      "result": "CONFIRMED DEAD - the dossier's own flagged build note is correct",
+      "evidence": "Salazzle's set is Fake Out / Heat Wave / Sludge Bomb / Protect. There is no Toxic and no other status move, so Corrosion - the single most distinctive thing a Poison specialist can do, and the reason the dossier says Salazzle is kept - has nothing whatsoever to corrode. I confirm the build note from play: the ability is inert on this set."
+    },
+    {
+      "check": "Muk's Poison Touch plus Helping Hand is the support anchor",
+      "result": "PARTIAL",
+      "evidence": "Helping Hand fired (see above). Poison Touch never triggered because Muk landed no contact move - its two actions were Protect and Helping Hand before it was KOed by a 2x Earthquake."
+    },
+    {
+      "check": "Bisharp's Defiant punishes the Intimidate or Snarl a player naturally brings",
+      "result": "NOT_EXERCISED",
+      "evidence": "My party carried no Intimidate and no stat-dropping move, per the crack line."
+    },
+    {
+      "check": "Mega Gengar's trapping does not make this a Perish team without a song (dossier disposition)",
+      "result": "CONFIRMED",
+      "evidence": "No Perish Song on the set and none attempted. The trapping is used as a pressure tool, which is the authored intent."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "Muk",
+      "call": "Protect",
+      "payoff": "EXCELLENT - blocked Mega Swampert's Earthquake, which was 2x into Muk and KOed its partner Bisharp on the same turn. A correctly predicted spread Ground attack from a Water/Ground Mega is about as good a Protect read as this campaign asks for, and it kept a 191 HP body alive for another turn."
+    }
+  ],
+  "consecutive_protect_risk": "none.",
+  "ai_defects": [
+    {
+      "turn": 2,
+      "board": "Salazzle (Poison/Fire, Focus Sash) on its genuine entry turn beside Muk, facing Mega Swampert (Water/Ground) and Garchomp (Dragon/Ground). Salazzle's set: Fake Out, Heat Wave, Sludge Bomb, Protect.",
+      "chosen": "Salazzle used Heat Wave.",
+      "why_wrong": "Heat Wave is 0.5x into BOTH targets (Fire into Water/Ground and into Dragon/Ground), so it was the lowest-damage option on the set against that board - the log confirms 'It's not very effective on Garchomp'. Meanwhile Fake Out was available on the only turn it is ever legal, against a board where Salazzle was 4x weak to the Earthquake that both my Pokemon threatened; denying one of those two attackers a turn was worth far more than a resisted spread attack. Sludge Bomb would also have been better damage into Garchomp.",
+      "better_action": "Fake Out on Garchomp (the faster Ground attacker), or Sludge Bomb.",
+      "severity": "moderate - the same pattern as the Breloom/Spore miss at E0249: a high-value disruption move losing to a low-value damage move in the scoring. Fake Out did fire correctly for other trainers in my block (Liepard at E0243, Toxicroak at E0245), so this looks like a per-board expected-value problem rather than Fake Out being unreachable."
+    }
+  ],
+  "ai_notes": [
+    "Sucker Punch on turn 1 succeeded because both my battlers were attacking - correct use of a move that fails against non-attacking turns.",
+    "Hideo's team made no mis-targeted attacks other than the Salazzle Heat Wave above.",
+    "Mega Evolution triggered on Gengar's first turn on the field, and the Shadow Tag switch gate was correctly reported by the driver."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Won with 3 player faints - a Mega, a Garchomp and an Excadrill all died - which meets the campaign's three-faint bar and sits in the 'won after a real fight' band. No offsets touched. Mega Gengar in particular is doing its job at +2.",
+  "rerun": "not needed - no level change.",
+  "could_this_be_cooler": "Keep the concept; the cage is real and Mega Gengar plus Icy Wind is genuinely oppressive once Shadow Tag locks the player in. But the dossier's own flagged build note should be promoted from a note to the fix, because playing it makes the problem concrete: Salazzle is on this team specifically because Corrosion is the most distinctive thing a Poison specialist can do, and its set cannot use Corrosion at all. Toxic in the Fake Out slot would make Salazzle the one Pokemon in the campaign that can badly poison a Steel wall - which is a memorable, unusual and thematically perfect moment - and it would simultaneously remove the Fake Out slot the AI does not use anyway. That is a single move change that turns a dead ability into the team's signature. Second, smaller note: three of Hideo's four are 2x or 4x to Ground, so a Ground-heavy player answers three quarters of the trainer with one move; a non-Ground-weak partner for Mega Gengar would spread that risk. Flagged, not changed.",
+  "authored_set_legality": "No legality problem in the engine. One design-level issue: Salazzle's Corrosion is inert because the set carries no status move (recorded above and already flagged in the dossier).",
+  "notes": "Player party: the anti-rival v2 team carried over from E0249. Its three Electric-immune Ground types happen to be an excellent Hideo answer too, which is why Bisharp, Muk and Salazzle all folded quickly; Mega Gengar was not affected and did most of the damage."
+}
