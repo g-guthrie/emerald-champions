@@ -68,9 +68,15 @@ def main():
     for _ in range(args.max_decisions):
         if state['phase'] == 'ended' or not state['pending_decision']:
             break
+        # Answer only what the engine is actually asking. Commanding a battler
+        # that merely owes a replacement is legal, but it claims a reserve slot
+        # before the engine has resolved a partner's switch that would free
+        # another one, which can leave the mandatory replacement with nothing.
         taken = set()
-        commands = [choose(rng, entry, state['phase'], taken)
-                    for entry in state['pending_decision']]
+        asked = [e for e in state['pending_decision'] if e.get('awaiting_now', True)]
+        commands = [choose(rng, entry, state['phase'], taken) for entry in asked]
+        if not commands:
+            break
         events = driver('act', *commands, '--run-dir', args.run_dir)
         if events['phase'] == 'ended':
             break
