@@ -78,6 +78,11 @@
 // to keep - and a turn-one guard from full health was still winning the safest
 // setup or status turn its side would get.
 #define PAIR_GUARD_EMPTY_COST 30
+// Two guards on the same turn are one decision about the whole turn, not two
+// independent ones. Each can look right alone while together they pass the
+// turn and halve both guards next turn, so the pair pays unless the payoff is
+// a whole-turn one: a weather, Tailwind or Trick Room clock running out.
+#define PAIR_GUARD_CORRELATED_COST 45
 
 // An authored signature interaction (ACTIVATE / INSTRUCT / AFTER_YOU) is the
 // point of the trainer, not an accident of the damage arithmetic. Reward it on
@@ -96,6 +101,10 @@
 #define PAIR_SLEEP_HORIZON 35
 #define PAIR_STATUS_HORIZON 20
 #define PAIR_STAT_DROP_HORIZON 12
+// A burn halves physical damage as well as ticking, so which body it goes on
+// matters as much as landing it: four turns of an unused Will-O-Wisp in front
+// of a Life Orb physical attacker is the case this exists for.
+#define PAIR_BURN_PHYSICAL_HORIZON 20
 // A switch preserves board value while an attack spends HP, so a one-turn
 // board makes withdrawing a healthy lead look nearly free. Charge it for the
 // turn it actually gives up - the damage the outgoing battler was about to
@@ -299,6 +308,7 @@ struct PairEvaluation
     enum Type revelationType[MAX_BATTLERS_COUNT][2];
     u8 protectChance[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     bool8 waitingPayoff; // Evaluating side has a concrete reason to spend a turn waiting.
+    bool8 wholeTurnPayoff; // ...and it is a field clock, which one turn of waiting spends for both slots.
     u8 encoreGuardIndex[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // Move slot + 1; zero is ineligible.
     s8 encoreGuardPriority[MAX_BATTLERS_COUNT];
     bool8 sleepClause;
@@ -1090,6 +1100,24 @@ static u32 PairGuardBankedShare(const struct PairEvaluation *ev, enum BattlerId 
     return min(100, banked);
 }
 
+// Whether a burn on this body takes anything off its offence.
+static bool32 PairAttacksPhysically(enum BattlerId battler)
+{
+    u32 physical = 0, special = 0;
+    for (u32 index = 0; index < MAX_MON_MOVES; index++)
+    {
+        enum Move move = gBattleMons[battler].moves[index];
+        if (move == MOVE_NONE || IsBattleMoveStatus(move)
+         || IsMoveUnusable(index, move, gAiLogicData->moveLimitations[battler]))
+            continue;
+        if (IsBattleMovePhysical(move))
+            physical = max(physical, GetMovePower(move));
+        else
+            special = max(special, GetMovePower(move));
+    }
+    return physical != 0 && physical >= special;
+}
+
 // Two joint forecasts that are the same four actions score the same.
 static bool32 PairSameForecast(const struct PairAction left[2], const struct PairAction right[2])
 {
@@ -1109,6 +1137,16 @@ static bool32 PairIsPassiveGuard(const struct PairAction *action)
     return method == PROTECT_NORMAL || method == PROTECT_MAX_GUARD
         || method == PROTECT_WIDE_GUARD || method == PROTECT_QUICK_GUARD
         || method == PROTECT_CRAFTY_SHIELD || method == PROTECT_MAT_BLOCK;
+}
+
+// A clock that one turn of waiting runs out. Unlike a per-slot payoff, this
+// justifies the whole side spending the turn, both slots included.
+static bool32 PairFieldClockExpiring(enum BattlerId actor)
+{
+    u32 foeSide = GetBattlerSide(actor) ^ 1;
+    return ((gSideStatuses[foeSide] & SIDE_STATUS_TAILWIND) && gSideTimers[foeSide].tailwindTimer == 1)
+        || ((gFieldStatuses & STATUS_FIELD_TRICK_ROOM) && ShouldClearFieldStatus(actor, STATUS_FIELD_TRICK_ROOM))
+        || (gBattleWeather && gBattleStruct->weatherDuration == 1);
 }
 
 static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum BattlerId actor)
@@ -1180,10 +1218,7 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
                         return TRUE;
         }
     }
-    u32 foeSide = GetBattlerSide(actor) ^ 1;
-    return ((gSideStatuses[foeSide] & SIDE_STATUS_TAILWIND) && gSideTimers[foeSide].tailwindTimer == 1)
-        || ((gFieldStatuses & STATUS_FIELD_TRICK_ROOM) && ShouldClearFieldStatus(actor, STATUS_FIELD_TRICK_ROOM))
-        || (gBattleWeather && gBattleStruct->weatherDuration == 1);
+    return PairFieldClockExpiring(actor);
 }
 
 static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
@@ -1243,6 +1278,68 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
          || ((plan & EC_BATTLE_PLAN_SETUP) && effect == EFFECT_BELLY_DRUM))
      && AI_CanAnyStatChange(actor, actor, move))
         return (plan & EC_BATTLE_PLAN_SETUP) ? 35 : 0;
+    // Last turn's move is legal knowledge on every difficulty, and these four
+    // classes live or die on it.
+    if (effect == EFFECT_SUCKER_PUNCH && IsBattlerAlive(action->target))
+    {
+        // A redirector that just used Follow Me is the likeliest thing on the
+        // board to use a status move again, and Sucker Punch fails into one.
+        enum Move last = gAiLogicData->lastUsedMove[action->target];
+        if (last != MOVE_NONE && last != MOVE_UNAVAILABLE && IsBattleMoveStatus(last))
+            return -25;
+    }
+    if (effect == EFFECT_REFLECT_DAMAGE)
+    {
+        // Counter and Mirror Coat reflect one damage category. If nothing the
+        // opposing side has actually used belongs to it, this is a guess, not
+        // a read.
+        u32 categories = GetMoveReflectDamage_DamageCategories(move);
+        bool32 seen = FALSE, matched = FALSE;
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            enum Move last = gAiLogicData->lastUsedMove[foe];
+            if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe)
+             || last == MOVE_NONE || last == MOVE_UNAVAILABLE || IsBattleMoveStatus(last))
+                continue;
+            seen = TRUE;
+            if (categories & (1u << (IsBattleMovePhysical(last) ? DAMAGE_CATEGORY_PHYSICAL : DAMAGE_CATEGORY_SPECIAL)))
+                matched = TRUE;
+        }
+        if (seen && !matched)
+            return -40;
+    }
+    if (move == MOVE_FEINT)
+    {
+        // Feint's point is breaking a shield. Nothing on the field has guarded
+        // and nothing is known to be about to, so it is a weak attack.
+        bool32 guarding = FALSE;
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            enum Move last = gAiLogicData->lastUsedMove[foe];
+            if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+                continue;
+            if (gProtectStructs[foe].protected != PROTECT_NONE
+             || (last != MOVE_NONE && last != MOVE_UNAVAILABLE && GetMoveEffect(last) == EFFECT_PROTECT))
+                guarding = TRUE;
+        }
+        if (!guarding)
+            return -20;
+    }
+    if (effect == EFFECT_ENCORE && IsBattlerAlive(action->target)
+     && !IsBattlerAlly(actor, action->target))
+    {
+        // Locking a foe into the move it just used is worth a turn, and worth
+        // more when that move is one it cannot hurt anybody with.
+        enum Move last = gAiLogicData->lastUsedMove[action->target];
+        if (last != MOVE_NONE && last != MOVE_UNAVAILABLE
+         && !gBattleMons[action->target].volatiles.encoreTimer)
+            return IsBattleMoveStatus(last) ? 35 : 20;
+    }
+    if (effect == EFFECT_LEECH_SEED && IsBattlerAlive(action->target)
+     && !IsBattlerAlly(actor, action->target)
+     && !gBattleMons[action->target].volatiles.leechSeed
+     && !IS_BATTLER_OF_TYPE(action->target, TYPE_GRASS))
+        return 20;
     s32 score = EC_PerishPlanScore(actor, move);
     if (effect == EFFECT_PROTECT
      && GetProtectType(GetMoveProtectMethod(move)) == PROTECT_TYPE_SINGLE)
@@ -4314,6 +4411,18 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
               && !PairGuardPartnerPayoff(actor, actions))
             score -= PAIR_GUARD_EMPTY_COST;
     }
+    if (!ev->wholeTurnPayoff)
+    {
+        for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+        {
+            enum BattlerId partner = GetPartnerBattler(actor);
+            if (GetBattlerSide(actor) != ev->side || !(guardUsed & (1u << actor))
+             || !IsBattlerAlive(partner) || !(guardUsed & (1u << partner)))
+                continue;
+            score -= PAIR_GUARD_CORRELATED_COST;
+            break;
+        }
+    }
     // Next-turn value that a one-turn board cannot see. Each term is paid only
     // when the effect actually landed in this trial and its owner or victim is
     // still standing at the end of it, so a boost that gets its user killed and
@@ -4343,7 +4452,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (newParalysisTargets & (1u << target))
             score += sign * PAIR_STATUS_HORIZON;
         if (newBurnTargets & (1u << target))
+        {
             score += sign * PAIR_STATUS_HORIZON;
+            if (PairAttacksPhysically(target))
+                score += sign * PAIR_BURN_PHYSICAL_HORIZON;
+        }
         if (newTauntTargets & (1u << target))
             score += sign * PAIR_STATUS_HORIZON;
         static const u8 stats[4] = {STAT_ATK, STAT_DEF, STAT_SPDEF, STAT_SPATK};
@@ -4589,6 +4702,7 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     enum BattlerId secondFoe = GetPartnerBattler(firstFoe);
     bool32 canWait = PairWaitingHasPayoff(ev, actor);
     ev->waitingPayoff = canWait;
+    ev->wholeTurnPayoff = PairFieldClockExpiring(actor);
     bool32 emptySoloGuard = !canWait && !IsBattlerAlive(partner)
         && ev->board.reserveValue[ev->side] == 0;
     bool32 hasAlternative = FALSE;
