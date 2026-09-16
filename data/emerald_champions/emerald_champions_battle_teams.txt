@@ -1847,8 +1847,8 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Seadra uses Focus Energy only when Feraligatr's pressure buys a survivable turn; Feraligatr attacks immediately. Turn two uses the actual critical stage and Sniper rather than presuming every attack crits. Alternate deployment: Milotic's Icy Wind supports Feraligatr without a setup action. Reserves & disruption: Arctibax supplies physical Dragon/Ice coverage. Critical hits bypass particular modifiers, not all defensive effects or immunities. Counterplay & audit: Grass/Electric pressure, Taunt, priority and removing Seadra before Focus Energy pays. Disposition: Keep; exact critical probability is a configured-mechanics benchmark, not an anecdotal strategy label. Could this team be cooler? It already contains one of the sharpest small builds in the range and it stays: Sniper Seadra with Focus Energy and a Scope Lens reaches a guaranteed critical hit, and Sniper multiplies that crit to 2.25x - a route regular carrying a genuinely competitive three-card combination. Arctibax's Thermal Exchange makes it immune to burn and gives it an Attack boost whenever a Fire move hits it, which is exactly the right Eviolite body to stand beside a Water team. Milotic's Competitive and Feraligatr's Sheer Force round out four distinct ability payoffs. What would be cooler is Focus Energy having a partner that benefits from the turn it costs. Offsets individual: Arctibax +4 as the Eviolite pre-evolution.
 crack: Grass/Electric pressure, Taunt, priority and removing Seadra before Focus Energy pays. Disposition: Keep; exact critical probability is a configured-mechanics benchmark, not an anecdotal strategy label.
-SEADRA @SCOPE_LENS SNIPER MODEST 4/0/0/252/0/252 0 | FOCUS_ENERGY, HYDRO_PUMP, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-FERALIGATR @LIFE_ORB SHEER_FORCE ADAMANT 4/252/0/0/0/252 1 | LIQUIDATION, ICE_PUNCH, CRUNCH, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+SEADRA @SCOPE_LENS SNIPER MODEST 4/0/0/252/0/252 1 | FOCUS_ENERGY, HYDRO_PUMP, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+FERALIGATR @LIFE_ORB SHEER_FORCE ADAMANT 4/252/0/0/0/252 2 | LIQUIDATION, ICE_PUNCH, CRUNCH, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 ARCTIBAX @EVIOLITE THERMAL_EXCHANGE JOLLY 4/252/0/0/0/252 4 | ICICLE_CRASH, DRAGON_CLAW, IRON_HEAD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MILOTIC @LEFTOVERS COMPETITIVE BOLD 252/0/252/0/4/0 1 | HYDRO_PUMP, ICE_BEAM, RECOVER, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -1900,20 +1900,20 @@ mega_slots: 2
 ai: Prefer Baton Pass
 plan: First two useful turns: Illumise chooses Tailwind/Encore or Helping Hand to enable Butterfree's attack or safe Quiver Dance. Turn two attacks through the window rather than start an unnecessary second setup chain. Alternate deployment: Volbeat can pass actual Tail Glow boosts to a legal special receiver while Dustox holds the other slot. Reserves & disruption: Baton Pass requires an available receiver, correct switch ownership and preserved passable stages; the incoming receiver does not also attack on that switch turn. Counterplay & audit: Taunt, phazing where supported, strong spread attacks and pressure on the pass receiver. Disposition: Keep; make the Baton Pass branch explicit rather than overcounting four setup/support members as one automatic combo. Could this team be cooler? It is one of the more inventive multi-battle teams in the range and is kept: two Prankster bugs, one passing Tailwind and Encore at priority and the other using Prankster Tail Glow for a three-stage Special Attack boost and then Baton Passing it to a Compound Eyes Mega Butterfree whose Hurricane and Sleep Powder then cannot miss. That is a genuine four-card chain. The Prefer Baton Pass trait is added because the loadout is explicitly built around the pass and the AI should value it rather than treat it as a switch. Dustox is the survivor that makes the chain work twice. Honest counterplay: Taunt, a Dark-type lead that ignores Prankster, and Rock or Fire coverage on a team of four bugs. Offsets individual and low; Mega Butterfree stays at 0 because the stone is already a tier.
 crack: Taunt, phazing where supported, strong spread attacks and pressure on the pass receiver. Disposition: Keep; make the Baton Pass branch explicit rather than overcounting four setup/support members as one automatic combo.
-ILLUMISE @FOCUS_SASH PRANKSTER TIMID 4/0/0/252/0/252 0 | TAILWIND, ENCORE, HELPING_HAND, DAZZLING_GLEAM | ivs=31/31/31/31/31/31 | friendship=255
+ILLUMISE @FOCUS_SASH PRANKSTER TIMID 4/0/0/252/0/252 1 | TAILWIND, ENCORE, HELPING_HAND, DAZZLING_GLEAM | ivs=31/31/31/31/31/31 | friendship=255
 BUTTERFREE @BUTTERFRENITE COMPOUND_EYES TIMID 4/0/0/252/0/252 0 | QUIVER_DANCE, BUG_BUZZ, HURRICANE, GIGA_DRAIN | ivs=31/31/31/31/31/31 | friendship=255
 VOLBEAT @LEFTOVERS PRANKSTER MODEST 4/0/0/252/0/252 2 | TAIL_GLOW, BUG_BUZZ, BATON_PASS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DUSTOX @BLACK_SLUDGE SHIELD_DUST MODEST 252/0/252/0/4/0 1 | QUIVER_DANCE, SLUDGE_BOMB, BUG_BUZZ, ROOST | ivs=31/31/31/31/31/31 | friendship=255
+DUSTOX @BLACK_SLUDGE SHIELD_DUST MODEST 252/0/252/0/4/0 2 | QUIVER_DANCE, SLUDGE_BOMB, BUG_BUZZ, ROOST | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0210 TRAINER_DAISY class=regular
 strategy: ALLY_COMBO
 mega_slots: NONE
 plan: Roselia Petal Blizzard can damage foes and feed slower Sap Sipper Deerling before its physical attack. Recheck board: otherwise Roselia uses special STAB. Flabebe supports Grass allies with Flower Veil/Helping Hand or Pollen Puff healing; do not hit Flabebe with Petal Blizzard for a nonexistent immunity. Gloom supplies independent sleep/special pressure. Stats: Fast special Roselia85 precedes bulky physical Deerling68. Petal Blizzard is deliberately low-damage support; tiny Flabebe receives Eviolite, physical bulk and levels. Could it be cooler? Yes: Petal Blizzard feeds Sap Sipper Deerling; Flower Veil Flabebe protects Grass allies and supplies healing. Overrepresented? Remove the nearby Lola Flower Gift/Chlorophyll copy. Roselia overlaps Wally but has a different role; Petal Blizzard had no prior authored campaign owner. Medium incoming cap30 levels33/35/36/34 are unplayed design seeds.
 crack: Fire/Flying/Poison pressure, hostile Grass/wind absorption, spread damage and removing the useful recipient. Do not use Petal Blizzard freely beside vulnerable Flabebe.
-ROSELIA @FOCUS_SASH NATURAL_CURE TIMID 4/0/0/252/0/252 4 | PETAL_BLIZZARD, SLUDGE_BOMB, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ROSELIA @FOCUS_SASH NATURAL_CURE TIMID 4/0/0/252/0/252 5 | PETAL_BLIZZARD, SLUDGE_BOMB, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 DEERLING @SITRUS_BERRY SAP_SIPPER ADAMANT 252/252/4/0/0/0 5 | DOUBLE_EDGE, SEED_BOMB, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 FLABEBE @EVIOLITE FLOWER_VEIL BOLD 252/0/252/0/4/0 6 | MOONBLAST, POLLEN_PUFF, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GLOOM @BLACK_SLUDGE STENCH MODEST 252/0/4/252/0/0 4 | SLEEP_POWDER, GIGA_DRAIN, SLUDGE_BOMB, MOONBLAST | ivs=31/0/31/31/31/31 | friendship=255
+GLOOM @BLACK_SLUDGE STENCH MODEST 252/0/4/252/0/0 5 | SLEEP_POWDER, GIGA_DRAIN, SLUDGE_BOMB, MOONBLAST | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0211 TRAINER_AMY_AND_LIV_1 class=ace
 strategy: REDIRECTION
@@ -1921,9 +1921,9 @@ mega_slots: 3
 plan: Togetic redirects for Wigglytuff Hyper Voice and Throat Spray; turn two cash the boost or apply meaningful Icy Wind. Mega Alakazam is the fast single-target alternative. Blissey screens/paralyzes only relevant targets and can finish with Seismic Toss. Do not stall with both passive supports. Stats: Togetic/Blissey gain physical bulk; Wigglytuff trades Speed for HP; Mega Alakazam receives a lower individual level seed. Could it be cooler? Retain nurturing support into two special threats; Seismic Toss gives Blissey a useful finishing action. Overrepresented? Isabel loses Wigglytuff, reducing the direct copy. Johanna sound support remains nearby but lacks this fast Mega alternative. Medium incoming cap30 levels32/32/29/30 are unplayed design seeds.
 crack: Wide Guard, spread damage, physical offense, Taunt and removing the actual attacker before two supports prolong the ending.
 TOGETIC @EVIOLITE SERENE_GRACE BOLD 252/0/252/0/4/0 3 | FOLLOW_ME, DAZZLING_GLEAM, THUNDER_WAVE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-WIGGLYTUFF @THROAT_SPRAY COMPETITIVE MODEST 252/0/4/252/0/0 2 | HYPER_VOICE, DAZZLING_GLEAM, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+WIGGLYTUFF @THROAT_SPRAY COMPETITIVE MODEST 252/0/4/252/0/0 3 | HYPER_VOICE, DAZZLING_GLEAM, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 ALAKAZAM @ALAKAZITE MAGIC_GUARD TIMID 4/0/0/252/0/252 -1 | PSYCHIC, DAZZLING_GLEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BLISSEY @LIGHT_CLAY NATURAL_CURE BOLD 252/0/252/0/4/0 1 | SOFT_BOILED, SEISMIC_TOSS, THUNDER_WAVE, LIGHT_SCREEN | ivs=31/0/31/31/31/31 | friendship=255
+BLISSEY @LIGHT_CLAY NATURAL_CURE BOLD 252/0/252/0/4/0 2 | SOFT_BOILED, SEISMIC_TOSS, THUNDER_WAVE, LIGHT_SCREEN | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0213 TRAINER_MIGUEL_1 class=casual
 strategy: NONE
@@ -2668,8 +2668,8 @@ strategy: TRICK_ROOM
 mega_slots: NONE
 plan: Room four, the relic dig, and the hideout's junior Trick Room - deliberately a smaller rehearsal of the room Maxie himself runs at the bottom. First two useful turns: Claydol sets Trick Room only when it survives the turn and at least one of Bronzong, Runerigus or Garbodor is on the field to spend it; otherwise it attacks with Earth Power. Bronzong under reversed order fires Gyro Ball at its real 33 Speed, which is close to maximum power. Alternate deployment: Runerigus' Wandering Spirit swaps abilities with a contact attacker, which can strand a Guts, Speed Boost or Protean sweeper with a useless ability for the rest of the fight. Reserves & disruption: Garbodor lays Toxic Spikes only if the door crew's set was removed, otherwise it attacks; Aftermath punishes the contact finish. Counterplay & audit: Taunt the setter, run out the five turns behind Protect, or use Fighting and Fire pressure that does not need contact. Could this team be cooler? The old block was Claydol/Garbodor/Umbreon/Camerupt - a second Camerupt in the same hideout and an Umbreon, which is a moonlight Eeveelution and about as un-Magma as a Pokemon gets. It is cooler now because every member is something the crew dug out of the volcano - a clay idol, a temple bell, a cursed coffin lid and the base's own garbage - and because Wandering Spirit gives the room a signature the player will remember: punching Runerigus can cost you your ability for the rest of the battle.
 crack: Taunt or KO Claydol before the room turns; Protect through the five turns; Wandering Spirit only triggers on contact, so spread and special attacks are safe answers.
-CLAYDOL @MENTAL_HERB LEVITATE QUIET 252/0/4/252/0/0 -1 | TRICK_ROOM, EARTH_POWER, PSYCHIC, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
-BRONZONG @LEFTOVERS LEVITATE SASSY 252/0/252/0/4/0 -1 | GYRO_BALL, HEAVY_SLAM, TRICK_ROOM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+CLAYDOL @MENTAL_HERB LEVITATE QUIET 252/0/4/252/0/0 0 | TRICK_ROOM, EARTH_POWER, PSYCHIC, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+BRONZONG @LEFTOVERS LEVITATE SASSY 252/0/252/0/4/0 0 | GYRO_BALL, HEAVY_SLAM, TRICK_ROOM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 RUNERIGUS @ROCKY_HELMET WANDERING_SPIRIT BRAVE 252/0/252/0/4/0 -1 | EARTHQUAKE, POLTERGEIST, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 GARBODOR @CLEAR_AMULET AFTERMATH BRAVE 252/252/4/0/0/0 0 | GUNK_SHOT, STOMPING_TANTRUM, TOXIC_SPIKES, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 
@@ -2760,8 +2760,8 @@ plan: Room thirteen, the ash pit. First two useful turns: Palossand's Water Comp
 crack: Grass and Ice attacks beat Palossand where Water does not; enter clean of status to halve Infernal Parade; Fighting and Ground pressure on the rest.
 PALOSSAND @LEFTOVERS WATER_COMPACTION BOLD 252/0/252/0/4/0 1 | SHADOW_BALL, EARTH_POWER, SHORE_UP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 TYPHLOSION_HISUI @WISE_GLASSES BLAZE TIMID 4/0/0/252/0/252 1 | INFERNAL_PARADE, HEAT_WAVE, FOCUS_BLAST, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MIGHTYENA @LIFE_ORB INTIMIDATE JOLLY 4/252/0/0/0/252 1 | CRUNCH, PLAY_ROUGH, SUCKER_PUNCH, HOWL | ivs=31/31/31/31/31/31 | friendship=255
-DUGTRIO_ALOLA @CLEAR_AMULET SAND_FORCE JOLLY 4/252/0/0/0/252 1 | EARTHQUAKE, IRON_HEAD, SUCKER_PUNCH, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
+MIGHTYENA @LIFE_ORB INTIMIDATE JOLLY 4/252/0/0/0/252 2 | CRUNCH, PLAY_ROUGH, SUCKER_PUNCH, HOWL | ivs=31/31/31/31/31/31 | friendship=255
+DUGTRIO_ALOLA @CLEAR_AMULET SAND_FORCE JOLLY 4/252/0/0/0/252 2 | EARTHQUAKE, IRON_HEAD, SUCKER_PUNCH, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0334 TRAINER_GRUNT_MAGMA_HIDEOUT_11 class=grunt
 strategy: SETUP
@@ -2869,9 +2869,9 @@ mega_slots: NONE
 plan: The rain callers, and the first automatic weather in the hideout. First two useful turns: Politoed's Drizzle is free and Damp Rock holds it eight turns, so Politoed's own action is Helping Hand into Barraskewda's Swift Swim Liquidation or Icy Wind to bank a speed advantage for after the rain. Barraskewda at doubled Speed outruns essentially the entire player roster at this stage and its rain-boosted Water attacks are the room's damage. Alternate deployment: Kilowattrel's Wind Power charges from Tailwind and its Thunder never misses in rain, so the room can layer speed control on top of weather. Reserves & disruption: Jellicent absorbs the Water attacks the player brings against a rain team and Water Spout under rain is a second spread threat. Counterplay & audit: weather replacement is the single best answer, followed by Electric and Grass pressure and Taunt on the Tailwind. Could this team be cooler? It was already the strongest Aqua block and it survives largely intact - the concrete change is that Politoed is now the hideout's only Drizzle user, because Matt was also carrying one and a faction reads as orchestrated only when the engine has a single owner per room. Asked again after the revision: the room could add a fifth trick, but it should not; this is the plain, correct statement of the rain engine that Matt then escalates, and its value is that the player learns the pattern here and pays for it later.
 crack: Replace the weather; Electric and Grass pressure; Taunt Politoed before Helping Hand; Barraskewda is frail and dies to priority or a spread move.
 POLITOED @DAMP_ROCK DRIZZLE BOLD 252/0/252/0/4/0 0 | MUDDY_WATER, ICY_WIND, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BARRASKEWDA @FOCUS_SASH SWIFT_SWIM JOLLY 4/252/0/0/0/252 0 | LIQUIDATION, CLOSE_COMBAT, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BARRASKEWDA @FOCUS_SASH SWIFT_SWIM JOLLY 4/252/0/0/0/252 1 | LIQUIDATION, CLOSE_COMBAT, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 KILOWATTREL @LIFE_ORB WIND_POWER TIMID 4/0/0/252/0/252 0 | THUNDER, HURRICANE, TAILWIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-JELLICENT @SITRUS_BERRY WATER_ABSORB BOLD 252/0/252/0/4/0 0 | WATER_SPOUT, SHADOW_BALL, WILL_O_WISP, RECOVER | ivs=31/0/31/31/31/31 | friendship=255
+JELLICENT @SITRUS_BERRY WATER_ABSORB BOLD 252/0/252/0/4/0 1 | WATER_SPOUT, SHADOW_BALL, WILL_O_WISP, RECOVER | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0344 TRAINER_GRUNT_AQUA_HIDEOUT_7 class=grunt
 strategy: RAIN,SETUP
