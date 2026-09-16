@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "play_order": 9,
+  "e_group": "E0009",
+  "trainer": "TRAINER_LYLE",
+  "class": "casual",
+  "location": "PetalburgWoods",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "NYMBLE L14 @FOCUS_SASH TINTED_LENS JOLLY (First Impression/Leech Life/Sucker Punch/U-turn)",
+    "SEWADDLE L16 @EVIOLITE OVERCOAT ADAMANT (Bug Bite/Seed Bomb/Struggle Bug/Protect)",
+    "ANORITH L13 @LIFE_ORB BATTLE_ARMOR JOLLY (Rock Blast/X-Scissor/Aqua Jet/Protect)",
+    "DOTTLER L15 @LEFTOVERS SWARM MODEST (Psychic/Struggle Bug/Reflect/Helping Hand)"
+  ],
+  "authored_strategy_flags": "PRESSURE",
+  "party_manifest": "work/playtest/09-LYLE/party-a1.json",
+  "party_summary": "Arcanine + Magearna* leading; Snorlax / Weavile / Iron Leaves* / Whimsicott reserve. Weavile entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 9001, "outcome": "won", "turns": 7, "decisions": 8,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.352,
+      "events": "work/playtest/09-LYLE/attempt-1-events.jsonl",
+      "narrative": "T1 Nymble opened with First Impression and Sewaddle Protected away a 4x Flare Blitz; Flash Cannon put Nymble on its Sash. T2 Extreme Speed removed Nymble, Ice Beam chipped Sewaddle and Sewaddle's Bug Bite stole Arcanine's Sitrus Berry. T3 Sewaddle Protected a second lethal Flare Blitz while Dottler's Psychic took Arcanine to 8. T4 Sewaddle pivoted out to Anorith, absorbing my Extreme Speed on a Rock body, and a critical Flash Cannon removed Dottler. T5 a critical Aqua Jet removed Arcanine and Flash Cannon removed Anorith. T6 Sewaddle at 1 HP Protected away both an Ice Shard and a Flash Cannon. T7 Triple Axel finally finished it."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Nymble uses First Impression only on its eligible entry turn",
+     "result": "PASS",
+     "evidence": "T1 (its entry turn) it used First Impression. T2, still on the field, it correctly used Leech Life instead. The entry-only restriction is respected rather than re-attempted."},
+    {"check": "The second turn accounts for the entry-only restriction",
+     "result": "PASS", "evidence": "Same evidence - T2 was a normal attack, not a wasted First Impression."},
+    {"check": "U-turn can renew a First Impression opportunity through a real switch and re-entry",
+     "result": "NOT TESTED", "evidence": "Nymble was removed on T2 by a priority Extreme Speed after its Focus Sash had already been broken. The recycling lane the disposition calls 'the defining intent' never happened."},
+    {"check": "Tinted Lens restores resisted Bug damage to neutral",
+     "result": "INCONCLUSIVE",
+     "evidence": "T1 First Impression on Fire-type Arcanine reported 'It's not very effective...' and dealt 14 from an Intimidated Attack. That number sits between the Tinted-Lens and non-Tinted-Lens estimates for this board, so the run does not settle it either way. Needs a deliberate probe against a cleanly resisted target with a known damage roll."},
+    {"check": "Overcoat protects Sewaddle from powder and weather chip",
+     "result": "NOT TESTED", "evidence": "No powder move or weather was used against it."},
+    {"check": "Battle Armor prevents critical hits against Anorith",
+     "result": "NOT TESTED", "evidence": "No critical hit landed on Anorith. Note the irony that Anorith itself scored the fight's decisive critical Aqua Jet."},
+    {"check": "Swarm boosts Dottler's Bug damage below one third HP",
+     "result": "NOT TESTED", "evidence": "Dottler went from 54 to 17 to fainted without using a Bug move in the Swarm window."},
+    {"check": "Dottler's Reflect or Helping Hand supports Anorith's Rock pressure",
+     "result": "FAIL (never attempted)",
+     "evidence": "Dottler had both moves and used Psychic on both of its turns. Not scored as a defect: each Psychic did 25 to a 53 HP Arcanine and the second took it to 8, which is real pressure and arguably better than a Reflect for a member that was about to die. But the authored support pairing with Anorith never occurred."},
+    {"check": "Anorith handles targets that resist the Bug opening",
+     "result": "PASS", "evidence": "T5 Anorith used Aqua Jet - its only answer to the Fire lead that had been walling the Bug attacks all fight - and the critical hit removed Arcanine. This is exactly the role the plan assigns it."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.352 s maximum."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "SEWADDLE", "payoff": "EXCELLENT - blocked a Flare Blitz that is 4x on Bug/Grass and a guaranteed OHKO on its 55 HP."},
+    {"turn": 3, "user": "SEWADDLE", "payoff": "EXCELLENT - blocked a second lethal 4x Flare Blitz, and not consecutively with the T1 guard."},
+    {"turn": 6, "user": "SEWADDLE", "payoff": "EXCELLENT - at 1 HP it blocked BOTH a priority Ice Shard and a Sp.Atk +4 Flash Cannon in the same turn, buying a full extra turn while it was the last Pokemon standing."}
+  ],
+  "empty_protects": 0,
+  "protect_note": "Three Protects, three lethal blocks, none consecutive. This is the best Protect record in the block and it is worth stating plainly: Sewaddle personally extended the fight by three turns.",
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "T4 Sewaddle pivoted out at 14 HP and brought Anorith in, which absorbed my Extreme Speed on a Rock body that resists it. A pivot that trades a resisted hit for a fresh attacker is a real doubles play, and it directly set up Anorith's Aqua Jet the following turn.",
+    "T2 Bug Bite was chosen over Seed Bomb against a Fire type it resists, because Bug Bite steals the target's berry - it took Arcanine's Sitrus, which mattered when Arcanine was later killed from 8 HP.",
+    "Three lethal Protects, each on a different turn, on the one member with the bulk to make them pay."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 1 player faint, and that faint came from a critical hit rather than sustained pressure -> +1 on the weakest one or two members, never the ace first.",
+    "changes": [
+      {"member": "ANORITH", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14},
+      {"member": "NYMBLE", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15}
+    ],
+    "unchanged": [
+      {"member": "SEWADDLE", "offset": 4, "reason": "the standout of the fight - three lethal Protects, a correct pivot and a berry theft - and already the highest member"},
+      {"member": "DOTTLER", "offset": 3, "reason": "did 50 damage to Arcanine across two turns; its unused support moves are a design question, not a level question"}
+    ],
+    "reasoning": "Anorith is the lowest member and it is the team's designated answer to the Fire lead that otherwise walls the whole roster; a level makes that answer more reliable than one critical hit. Nymble is raised because its Focus Sash was broken and it was then removed by priority before the U-turn recycling lane - which the disposition calls the defining intent - could ever be shown.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "The core idea is sharp. One member is the whole team and the other three barely interact.",
+    "keep": "First Impression as a resource you spend on entry and have to pay a U-turn to get back is a genuinely good teaching mechanic for a Petalburg Woods bug catcher, and the disposition is right to name it the defining intent.",
+    "suggestion": "The recycling lane needs a partner that survives long enough to enable it. As built, Nymble is the frailest member and the one carrying the concept - the same failure this block has now seen three times (Spinarak in E0003, Lotad in E0006). Giving Nymble the Eviolite and Sewaddle the Focus Sash, or pairing Nymble with a Follow Me/Rage Powder body so the U-turn has cover, would make the intent reachable without touching a species.",
+    "second_thought": "Four Bugs and a single Fire lead deleted three of them. Anorith's Rock half is the only non-Bug typing and it arrives last. Moving Anorith to the lead pair would make the team's own answer to its worst matchup something the player has to play through rather than something that shows up after the fight is decided.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": [
+    "Cross-block pattern worth the design side's attention: in E0003, E0006 and E0009 the member carrying the team's defining concept is also the frailest member on the team, and in all three the concept never executed. This is a composition pattern, not an AI fault.",
+    "Pool chronology caveat carried from play_order 1."
+  ]
+}

@@ -139,9 +139,9 @@ strategy: PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Nymble uses First Impression only on its eligible entry turn and otherwise attacks or pivots; Sewaddle supplies Bug/Grass damage or Struggle Bug mitigation. The second turn must account for Nymble's entry-only restriction. Alternate deployment: Dottler Reflect or Helping Hand supports Anorith's Rock pressure. Reserves & disruption: U-turn can renew a later First Impression opportunity only through a real switch and re-entry. Anorith handles targets that resist the Bug opening. Counterplay & audit: Protect on the entry burst, priority denial, Fire attacks, and forcing inefficient pivots. Disposition: Keep; First Impression availability and the cost of recycling it are the defining intent.
 crack: Protect on the entry burst, priority denial, Fire attacks, and forcing inefficient pivots. Disposition: Keep; First Impression availability and the cost of recycling it are the defining intent.
-NYMBLE @FOCUS_SASH TINTED_LENS JOLLY 4/252/0/0/0/252 2 | FIRST_IMPRESSION, LEECH_LIFE, SUCKER_PUNCH, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+NYMBLE @FOCUS_SASH TINTED_LENS JOLLY 4/252/0/0/0/252 3 | FIRST_IMPRESSION, LEECH_LIFE, SUCKER_PUNCH, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 SEWADDLE @EVIOLITE OVERCOAT ADAMANT 252/252/4/0/0/0 4 | BUG_BITE, SEED_BOMB, STRUGGLE_BUG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ANORITH @LIFE_ORB BATTLE_ARMOR JOLLY 4/252/0/0/0/252 1 | ROCK_BLAST, X_SCISSOR, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ANORITH @LIFE_ORB BATTLE_ARMOR JOLLY 4/252/0/0/0/252 2 | ROCK_BLAST, X_SCISSOR, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 DOTTLER @LEFTOVERS SWARM MODEST 252/0/4/252/0/0 3 | PSYCHIC, STRUGGLE_BUG, REFLECT, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0010 TRAINER_GRUNT_PETALBURG_WOODS class=grunt
