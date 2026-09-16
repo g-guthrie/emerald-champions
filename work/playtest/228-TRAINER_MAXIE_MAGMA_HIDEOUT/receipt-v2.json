@@ -1,0 +1,159 @@
+{
+ "play_order": 228,
+ "e_group": "E0339",
+ "trainer": "TRAINER_MAXIE_MAGMA_HIDEOUT",
+ "class": "leader",
+ "location": "MagmaHideout_4F",
+ "chapter": "Mind Badge (index window 60-84)",
+ "cap": 60,
+ "difficulty": "medium",
+ "pass": "v2 replay of the rebuilt room (Stakataka/Torterra/Runerigus/Rhyperior/Copperajah/Mega Camerupt)",
+ "first_pass_receipt": "work/playtest/228-TRAINER_MAXIE_MAGMA_HIDEOUT/receipt.json",
+ "build": "work/agent-battle-build-8",
+ "rom_sha256": "9349726a62f619a28aad869ab7704b7a13e9c95f7b87d71e811dd80b75c15713",
+ "cap_confirmation": "driver state reported level_cap 60. Stakataka and Runerigus arrived at L62 = 60 + 4 - 2; Torterra, Rhyperior and Copperajah at L61 = 60 + 3 - 2; Camerupt at L60 = 60 + 2 - 2, matching the current authored offsets 4/3/4/3/3/2.",
+ "party_manifests": [
+  "work/playtest/228-TRAINER_MAXIE_MAGMA_HIDEOUT/party-v2.json"
+ ],
+ "chronology_note": "Pool-60 with Lilycove and Routes 121-123 legal and nothing from Mossdeep onward. Pelipper gate 30, Swampert gate 36 with Swampertite stone-window 14, Rillaboom gate 36 (Thwackey line), Urshifu-Rapid-Strike gate 42 (Kubfu script trigger), Tornadus gate 60 (legendary_sign:Route119), Amoonguss gate 42. Excluded: Suicune, Tapu Fini, Keldeo, the stone-window-60 sea-route Megas, Shoal Cave, Routes 124-127, the Abandoned Ship, Mossdeep.",
+ "party_rationale": "Built to the crack line: Surf as the spread hit through the Sash, Superpower/Aqua Jet/Surging Strikes to finish the setter, three priority moves that ignore the room (Fake Out, Grassy Glide, Aqua Jet), Knock Off to strip Runerigus's Mental Herb and Prankster Taunt behind it, Ice Punch 4x into Torterra, Water and Grass into Rhyperior and Camerupt, rain to halve Eruption, Amoonguss as the one slow body that benefits from the opponent's room.",
+ "pre_play_strategy_checks": [
+  "Does Stakataka survive turn 1 on the Focus Sash and actually SELECT Trick Room (open item E0339-1 from the first pass)?",
+  "Does Runerigus set a second room after the first expires?",
+  "Does Torterra Curse under the room?",
+  "Does Mega Camerupt's Eruption fire FIRST under the room?",
+  "Does Mental Herb cure a Taunt / is Knock Off the answer?",
+  "Is Maxie a clear step above Tabitha (E0337)?",
+  "Protect ledger across six members"
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 1,
+   "run_dir": "work/playtest/228-TRAINER_MAXIE_MAGMA_HIDEOUT/v2-a1",
+   "party": "party-v2.json (Pelipper/Swampert lead)",
+   "outcome": "won",
+   "turns": 9,
+   "decisions": 12,
+   "player_faints": 2,
+   "opponent_faints": 6,
+   "why": "T1: Torterra's latch read Wood Hammer at Swampert (a 4x KO), so I killed Torterra first - Hurricane (2x) plus Mega Ice Punch (4x) removed it from 244/244 - and let Stakataka act: 'The opposing Stakataka used Trick Room!' with the room up at end of turn. T2 (room): Pelipper pivoted to Rillaboom (Grassy Surge), Swampert Protected; Stakataka's Stone Edge and Runerigus's Poltergeist both landed on the incoming Rillaboom for 221. T3: Fake Out flinched Stakataka but Normal is 0.25x into Rock/Steel and the Sash survived (my error); Runerigus's Body Press KOed Rillaboom; Liquidation took Runerigus to 40 and Wandering Spirit swapped Swift Swim for it. T4: Urshifu's Aqua Jet into Runerigus's Protect did 25% (Unseen Fist rule, see engine_notes); Stakataka's Gyro Ball hit Urshifu for 103; Superpower broke the Sash ('hung on using its Focus Sash'). T5 (last room turn): Aqua Jet removed the 13-HP Stakataka before it moved; Liquidation removed Runerigus; room expired. T6: Liquidation (4x) OHKOed Rhyperior from 268 as Copperajah's Heavy Slam took the incoming Amoonguss to 77. T7: Camerupt Mega Evolved and Protected a lethal Liquidation; Spore put Copperajah to sleep. T8: Mega Camerupt tried to Protect again, failed, and died to Liquidation without ever using Eruption. T9: Superpower took Copperajah to 6 and fired its Weakness Policy, it woke and Heavy Slam KOed Amoonguss through a failed second Protect (my error). Ice Punch finished it."
+  },
+  {
+   "n": 2,
+   "seed": 2,
+   "run_dir": "work/playtest/228-TRAINER_MAXIE_MAGMA_HIDEOUT/v2-a2",
+   "party": "party-v2.json (same six, same lead) - verification-leaning line: let the room and the second setter live to observe Curse, the second room and Eruption under it",
+   "outcome": "won",
+   "turns": 11,
+   "decisions": 14,
+   "player_faints": 2,
+   "opponent_faints": 6,
+   "why": "T1: Swampert Mega-Protected the Wood Hammer, Hurricane took Torterra to 88, Stakataka set Trick Room. T2 (room): Pelipper Protected the Stone Edge, Swampert pivoted to Amoonguss and Torterra's Wood Hammer into it was resisted (Rocky Helmet plus recoil left Torterra at 50). T3: Spore put Stakataka to sleep for three turns; Torterra's High Horsepower hit Amoonguss for 113. T4: Torterra Protected the Grassy Glide. T5 (last room turn): Grassy Glide removed Torterra; Superpower broke the Sash on the sleeping setter; room expired; Runerigus entered. T6: Runerigus Protected on entry (blocking Knock Off), Liquidation removed the 13-HP Stakataka. T7: Runerigus 'used Trick Room! twisted the dimensions!' - the SECOND ROOM - after Knock Off stripped its Mental Herb and swapped Grassy Surge onto it; Liquidation (4x) OHKOed Rhyperior. T8 (room 2): Copperajah's Heavy Slam plus Runerigus's Poltergeist KOed Rillaboom from 237; Liquidation removed Runerigus; the rain expired. T9: Camerupt Mega Evolved and, moving FIRST under its room, used Sheer Force Earth Power on Mega Swampert, and Copperajah's High Horsepower finished it from 246/246 - the room's one real kill. T10: 'The opposing Camerupt used Eruption!' first in the turn - blocked on Tornadus by Protect, 45 on Pelipper through rain and resistance - then Surf (4x) removed Mega Camerupt from 210 and took Copperajah to 75. T11: Pelipper Protected, Tornadus pivoted to Urshifu (Heavy Slam resisted, 70). T12 (room over): Close Combat removed Copperajah. Won 6-2 in eleven turns."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Stakataka survives turn 1 and SELECTS Trick Room",
+   "result": "PASS - open item E0339-1 is closed",
+   "evidence": "Both attempts, turn 1: native latch 'MOVE_TRICK_ROOM, target self' for Stakataka with the turn resolved and 'The opposing Stakataka used Trick Room!' in the messages; field = STATUS_FIELD_TRICK_ROOM at end of turn. The first pass's Stone Edge reading was the stale latch of a battler KOed before acting, exactly as docs/VERIFICATION.md warns. The Sash was tested on attempt 1 turn 4 ('hung on using its Focus Sash!' against Superpower) and attempt 2 turn 5. Its Beast Boost never fired (no KOs)."
+  },
+  {
+   "check": "Runerigus sets a second room",
+   "result": "PASS",
+   "evidence": "Attempt 2 turn 7, room 1 having expired at the end of turn 5: 'The opposing Runerigus used Trick Room! twisted the dimensions!' with the field reading STATUS_FIELD_TRICK_ROOM through turn 11. Under room 2 the AI got its only clean kill of the fight (Mega Swampert, turn 9). In attempt 1 Runerigus entered while room 1 was up, correctly attacked instead of re-setting, and died on the last room turn, so no second room existed there."
+  },
+  {
+   "check": "Torterra Curses under the room",
+   "result": "NOT OBSERVED - Curse never chosen in 5 Torterra decisions",
+   "evidence": "Turn 1 both attempts: Wood Hammer at Mega Swampert (a 4x KO) - the right call, and the dossier's 'Wood Hammer punishes the Swampert' line exactly. Attempt 2 turns 2-5: Wood Hammer, High Horsepower, Protect, Wood Hammer, all with a KO or a Protect read on the board and none at more than 88/244 HP. There was never a turn on which Curse was the better action, so this is not a defect, but the payoff the dossier describes (+2/+2 for free under the room) did not appear in either run."
+  },
+  {
+   "check": "Mega Camerupt's Eruption fires FIRST under the room",
+   "result": "PASS (attempt 2), FAIL (attempt 1: never deployed under a room)",
+   "evidence": "Attempt 2 turn 10 under room 2: Mega Camerupt moved first in the turn and 'used Eruption!' (blocked on Tornadus by Protect, 45 through rain on Pelipper). On turn 9 it had also moved first and chosen Sheer Force Earth Power, which with Copperajah's follow-up KOed Mega Swampert from full - a better pick than Eruption into two Water bodies under rain. Attempt 1: both rooms had expired before Camerupt reached the field; it Protected on its Mega turn, tried to Protect again, and died without using Eruption. The Mega form's ability reads ABILITY_SHEER_FORCE, not Solid Rock (the dossier line describes the base form), which is why Earth Power hit as hard as it did."
+  },
+  {
+   "check": "Mental Herb and the Taunt answer",
+   "result": "NOT TESTED as Taunt; Knock Off PASS",
+   "evidence": "I never had Tornadus on the field with Runerigus. Rillaboom's Knock Off removed the Mental Herb on attempt 2 turn 7 ('knocked off the opposing Runerigus's Mental Herb') and Wandering Spirit swapped abilities on the contact, which handed Runerigus Grassy Surge and Rillaboom Wandering Spirit - a real cost of using a contact move on it. Runerigus set the room the same turn it lost the Herb, so a Prankster Taunt on turn 7 would have stopped room 2; the crack line is right that Taunt after the Herb is the answer."
+  },
+  {
+   "check": "Maxie a clear step above Tabitha (E0337)",
+   "result": "PARTIAL - clearly above the first-pass Maxie; roughly level with Tabitha, not clearly above",
+   "evidence": "Tabitha (work/playtest/226-TRAINER_TABITHA_MAGMA_HIDEOUT) lost me a full attempt 6-4 and only fell 6-1 to a party rebuilt against her. Maxie fell 6-2 twice to a general anti-Magma six played two different ways, took nine and eleven turns, set the room in both runs and a second room in one, and killed a full-HP Mega Swampert under it. That is a real leader fight - the first pass was a four-turn 6-0 with none of the plan firing - but by outcome it is not clearly harder than Tabitha's."
+  },
+  {
+   "check": "Does the redesign achieve its goal",
+   "result": "YES",
+   "evidence": "The room is now something the player has to break twice: the Sash guaranteed the first setter acted in both runs, the Ghost second setter re-set it once, and under the second room the Mega finally moved first and fired Eruption. Every mechanic the dossier promises was seen except Torterra's Curse."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "attempt": 1,
+   "turn": 4,
+   "battler": "Runerigus (40 HP)",
+   "payoff": "REAL, partial - Urshifu's Aqua Jet went through for 25% under the Unseen Fist rule instead of the full 2x hit that would have KOed it; the guard bought one turn."
+  },
+  {
+   "attempt": 1,
+   "turn": 7,
+   "battler": "Camerupt (Mega turn)",
+   "payoff": "REAL - blocked Mega Swampert's Liquidation, a 4x KO."
+  },
+  {
+   "attempt": 1,
+   "turn": 8,
+   "battler": "Mega Camerupt",
+   "payoff": "EMPTY - second consecutive Protect, failed, then died to the same Liquidation. See AI defect E0339-v2-1."
+  },
+  {
+   "attempt": 2,
+   "turn": 4,
+   "battler": "Torterra (70 HP)",
+   "payoff": "REAL - blocked Rillaboom's Grassy Glide, which KOed it the next turn."
+  },
+  {
+   "attempt": 2,
+   "turn": 6,
+   "battler": "Runerigus (entry turn)",
+   "payoff": "REAL - blocked Rillaboom's Knock Off (2x plus item removal); it set the second room the following turn."
+  }
+ ],
+ "protect_summary": "5 opponent Protects across 20 turns and 26 decisions: 4 with a real payoff, 1 empty (a failed repeat). Stakataka, Rhyperior (no Protect authored) and Copperajah never guarded; Copperajah never needed to.",
+ "ai_defects": [
+  {
+   "id": "E0339-v2-1",
+   "attempt": 1,
+   "turn": 8,
+   "board": "Mega Camerupt 210/210 (Sheer Force, Eruption/Earth Power/Heat Wave/Protect, Protected the previous turn) beside a sleeping Copperajah 248/277, under rain, opposite Amoonguss 77/263 (Grass/Poison) and Mega Swampert 246/246 (-1 Atk, -1 Def).",
+   "chosen": "Protect (failed - consecutive) and it was KOed by Liquidation.",
+   "better": "Earth Power at Amoonguss: 2x with Sheer Force, a certain KO from 77 HP (my estimate 280+). Even Eruption (about 70 into Amoonguss through rain) or Heat Wave were better than a one-in-three guard. A second consecutive Protect with a guaranteed KO on the board is the wrong read. Severity: mild-moderate; shared Protect-repeat scoring."
+  },
+  {
+   "id": "E0339-v2-2",
+   "attempt": 1,
+   "turn": 5,
+   "board": "Stakataka 13/205 (Sash spent, Brave, moves first under its own room) opposite Urshifu-Rapid-Strike 106/209 (Water/Fighting, Life Orb, Aqua Jet revealed) and Mega Swampert 246/246; Stakataka's speed about 25, Urshifu's about 238.",
+   "chosen": "Gyro Ball at Urshifu - Steel is resisted by Water/Fighting, so 150 effective power became 75; it did 86 the previous turn and was chosen again (Stakataka died to Aqua Jet before acting).",
+   "better": "Stone Edge at Urshifu: neutral 100 power, about 140 damage by my estimate, a KO on the 106-HP body that was about to remove it with priority; 80% accuracy is worth that. Severity: mild; resisted-STAB preference over a neutral KO."
+  }
+ ],
+ "ai_notes": [
+  "Torterra's turn-1 Wood Hammer at Mega Swampert in both attempts was the correct KO read and is why the setter has to be left alone on turn 1 - the redesign's stated intent.",
+  "Runerigus in attempt 1 entered under room 1 and attacked (Poltergeist, Body Press, Protect) instead of re-setting a live room; in attempt 2 it Protected on entry with the room down and set room 2 the next turn. Both correct.",
+  "Stakataka's native latch read Trick Room on attempt 2 turns 5 and 6 while it was asleep: on turn 6 the room was down (a correct re-set); on turn 5 the room was on its last turn and re-selecting it would have ended it a turn early. Asleep both times, so no action resulted - a note for whoever looks at Trick Room scoring on an expiring room, not a defect.",
+  "Copperajah's Heavy Slam targeting (KO on the slot-0 body each time) and Mega Camerupt's turn-9 Earth Power over Eruption into two rain-covered Water bodies were both right.",
+  "Wide Guard was again never chosen (Stakataka, 4 decisions across both runs), including on attempt 2 turn 2 where a spread Surf from a revealed Pelipper was the obvious threat; it Stone Edged instead. Fifth authored Wide Guard in this hideout never seen.",
+  "AI decision budget: max 62 frames (1.038 s) in both attempts, inside the 1.2 s budget."
+ ],
+ "level_changes": [],
+ "level_change_rationale": "Keep. Both attempts were won 6-2 after real fights (nine and eleven turns, the Mega Swampert lost from full under room 2 in attempt 2, Rillaboom lost from 237 in both). Under the brief's rule that is a keep, and the current offsets (Stakataka 4, Torterra 3, Runerigus 4, Rhyperior 3, Copperajah 3, Camerupt 2) are unchanged.",
+ "cooler": "Yes, and it now plays the way the dossier says. Keep all six. Three notes for a later pass. (1) Torterra's Curse never happens because the AI always has a better attack; if the Curse turn matters, the write-up should sell Wood Hammer's turn-1 KO read instead, which is the thing the player actually meets. (2) Camerupt only pays off if it reaches the field while a room is up; in attempt 1 the AI sent Rhyperior and Copperajah on the last room turn and Camerupt arrived with no room, so the deployment order is the fight's real variance. (3) Runerigus's Wandering Spirit punishes the crack line's own Knock Off by handing it Grassy Surge - a good hidden interaction worth a sentence in the plan. The dossier's ability lines for Mega Camerupt (Sheer Force, not Solid Rock, once Mega) should be corrected.",
+ "legality_notes": "No legality problem in the authored set. Stakataka is an Ultra Beast at a cap-60 villain-leader climax, inside the rule for this window.",
+ "engine_notes": [
+  "Unseen Fist against a single-target Protect deals 25% rather than full damage in this ruleset: src/battle_util.c GetMoveAgainstProtectionModifier returns 0.25 when B_UNSEEN_FIST_PIERCING_DRILL >= GEN_CHAMPIONS, and the log printed 'couldn't fully protect itself and got hurt' (attempt 1 turn 4). Authored engine behaviour, not a defect; my manifest's 'Protect breaker' role for Urshifu overstated it."
+ ],
+ "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py on work/agent-battle-build-8. Not earned campaign play."
+}

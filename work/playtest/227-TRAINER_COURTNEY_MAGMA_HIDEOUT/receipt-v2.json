@@ -1,0 +1,136 @@
+{
+ "play_order": 227,
+ "e_group": "E0338",
+ "trainer": "TRAINER_COURTNEY_MAGMA_HIDEOUT",
+ "class": "admin",
+ "location": "MagmaHideout_4F",
+ "chapter": "Mind Badge (index window 60-84)",
+ "cap": 60,
+ "difficulty": "medium",
+ "pass": "v2 replay of the rebuilt room (Torkoal/Gastrodon/Great Tusk/Ninetales/Turtonator/Mega Pyroar)",
+ "first_pass_receipt": "work/playtest/227-TRAINER_COURTNEY_MAGMA_HIDEOUT/receipt.json",
+ "build": "work/agent-battle-build-8",
+ "rom_sha256": "9349726a62f619a28aad869ab7704b7a13e9c95f7b87d71e811dd80b75c15713",
+ "cap_confirmation": "driver state reported level_cap 60. Torkoal, Ninetales and Turtonator arrived at L61 = 60 + 3 - 2; Gastrodon, Great Tusk and Pyroar at L60 = 60 + 2 - 2, matching the current authored offsets 3/2/2/3/3/2.",
+ "party_manifests": [
+  "work/playtest/227-TRAINER_COURTNEY_MAGMA_HIDEOUT/party-v2.json",
+  "work/playtest/227-TRAINER_COURTNEY_MAGMA_HIDEOUT/party-v2b.json (same six, Landorus/Tapu Bulu lead)"
+ ],
+ "chronology_note": "Pool-60 with Lilycove and Routes 121-123 legal and nothing from Mossdeep onward. Pelipper gate 30 (Wingull line), Ludicolo gate 14 (Water Stone on Lombre), Kingdra gate 36 (Dragon Scale on Seadra), Swampert gate 36 with Swampertite stone-window 14, Tapu Bulu gate 60 (legendary_sign:Route123), Landorus gate 42 (legendary_sign:Route111_RuinsExterior). Excluded: Suicune (Route125), Tapu Fini (Route126), Keldeo (Route127), Kingdra-Mega/Milotic-Mega/Lapras-Mega (stone-window 60 sea-route items), anything from Shoal Cave, Routes 124-127, the Abandoned Ship or Mossdeep.",
+ "party_rationale": "Built to the crack line: spread Water (Muddy Water on Ludicolo and Kingdra) that goes around Storm Drain, Grass into Gastrodon (Wood Hammer, Giga Drain), Ground into the four Fire bodies (Landorus Earth Power), Dragon into Turtonator before the Smash (Kingdra Draco Meteor), and the weather war carried twice (Pelipper re-entry Drizzle, Ludicolo Rain Dance) because Torkoal's base-20 Drought now wins turn 0.",
+ "pre_play_strategy_checks": [
+  "Does the sun survive a Drizzle/Pelipper lead (Torkoal's Drought applies last)?",
+  "Does Ninetales re-set the sun when it enters after the rain?",
+  "Does Storm Drain redirect a single-target Water attack aimed at Torkoal and bank +1 Sp. Atk?",
+  "Does Turtonator Shell Smash (and does White Herb restore the drops)?",
+  "Does Great Tusk's Protosynthesis trigger on the sun and does the Attack boost matter?",
+  "Does Mega Pyroar Mega Evolve and act as the spread finisher?",
+  "Protect ledger across six members"
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 1,
+   "run_dir": "work/playtest/227-TRAINER_COURTNEY_MAGMA_HIDEOUT/v2-a1",
+   "party": "party-v2.json (Pelipper/Ludicolo lead; Kingdra, Mega Swampert, Tapu Bulu, Landorus)",
+   "outcome": "won",
+   "turns": 7,
+   "decisions": 9,
+   "player_faints": 1,
+   "opponent_faints": 6,
+   "why": "Turn 0 opened in SUN: Torkoal's Drought applied after Pelipper's Drizzle. T1 Ludicolo Fake Out flinched Torkoal (its latch read Eruption) while Pelipper set Tailwind; Gastrodon Ice Beam took Ludicolo to 111. T2 was spent ON PURPOSE to observe Storm Drain: Ludicolo Rain Dance, then Pelipper Hydro Pump aimed at Torkoal - 'The opposing Gastrodon took the attack! Sp. Atk rose!' - and the +1 Ice Beam plus a rain-halved Eruption took Pelipper to 52. T3 Giga Drain (4x) removed Gastrodon from 259/259 and rain Hydro Pump removed Torkoal from 200/213 before it moved; Ninetales entered and 'The sunlight turned harsh!', Great Tusk's Protosynthesis raised Attack. T4 Pelipper pivoted to Landorus, Ludicolo re-set rain, but Great Tusk's +Atk Close Combat KOed Ludicolo (167 from 167) and Ninetales began charging Solar Beam. T5 Mega Swampert's rain Liquidation OHKOed Great Tusk (227) and Landorus's Earth Power OHKOed Ninetales (179) after its half-power Solar Beam landed. T6 Mega Pyroar Protected on its Mega turn (blocking a lethal Earth Power) while Turtonator Shell Smashed and White Herb restored its defences; Liquidation left it at 63. T7 Turtonator Protected a lethal Liquidation while Mega Pyroar's crit Hyper Voice took Landorus to 28; Earth Power removed Mega Pyroar. T8 Liquidation removed Turtonator. Ludicolo lost; Pelipper (52) and Landorus (28) were one hit from following it."
+  },
+  {
+   "n": 2,
+   "seed": 2,
+   "run_dir": "work/playtest/227-TRAINER_COURTNEY_MAGMA_HIDEOUT/v2-a2",
+   "party": "party-v2b.json (Landorus/Tapu Bulu lead, same six) - reordered to play the crack line straight with no verification turn",
+   "outcome": "won",
+   "turns": 4,
+   "decisions": 6,
+   "player_faints": 2,
+   "opponent_faints": 6,
+   "why": "T1 Torkoal PROTECTED (blocking a lethal Earth Power) while Wood Hammer (4x, Grassy Terrain) OHKOed Gastrodon from 259; Great Tusk entered and Protosynthesis fired again. T2 Earth Power OHKOed Torkoal before its Eruption; Tusk's +Atk Headlong Rush into Bulu was resisted (59) and a crit Horn Leech OHKOed Tusk. T3 Ninetales' sun Heat Wave was blocked by Bulu's Protect and missed Landorus; Earth Power OHKOed Ninetales; Turtonator's Protect was empty. T4 the sun team finally hit: Mega Pyroar's Heat Wave OHKOed Tapu Bulu from 210/210 ('super effective on Tapu Bulu') and Turtonator's sun Heat Wave (it chose the attack over Shell Smash) OHKOed Landorus from 176 after Life Orb; Earth Power removed Mega Pyroar in the same turn. T5 Pelipper's re-entry Drizzle took the sun, and Specs Draco Meteor removed Turtonator from 201/201. Won 6-2 in four turns with both faints in one turn."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Sun survives a Drizzle/Pelipper lead",
+   "result": "PASS",
+   "evidence": "Both attempts opened with weather_at_turn_0 = B_WEATHER_SUN_NORMAL against a Drizzle Pelipper on the field in attempt 1 (the first pass opened in rain against the old base-100 Ninetales). The Heat Rock made it eight turns; in attempt 1 I had to spend a Rain Dance to take it and Ninetales took it straight back."
+  },
+  {
+   "check": "Ninetales re-sets the sun",
+   "result": "PASS",
+   "evidence": "Attempt 1 turn 3: after Torkoal and Gastrodon fell under my Rain Dance rain, Ninetales entered and 'The sunlight turned harsh!' - Drought overwrote the rain on entry and Great Tusk's Protosynthesis fired on it. Sunny Day was never needed and never chosen; a second Rain Dance retook the weather on turn 4."
+  },
+  {
+   "check": "Storm Drain redirects a single-target Water attack and banks +1",
+   "result": "PASS",
+   "evidence": "Attempt 1 turn 2: Pelipper's Hydro Pump was aimed at Torkoal (battler 1, target_kind foe); the log reads 'The opposing Gastrodon took the attack!' then 'The opposing Gastrodon's Sp. Atk rose!' and the state showed spa +1 on Gastrodon. The +1 Ice Beam that followed took Pelipper 198 to 52. Deliberate cost paid to observe it; a straight line (attempt 2) never fires a single-target Water at her side while Gastrodon stands."
+  },
+  {
+   "check": "Turtonator Shell Smashes",
+   "result": "PASS (attempt 1), NOT CHOSEN (attempt 2)",
+   "evidence": "Attempt 1 turn 6: 'The opposing Turtonator used Shell Smash!' with Attack, Sp. Atk and Speed rising sharply and 'returned its stats to normal' from the White Herb; it was at +2/+2/+2 with 63 HP and then Protected a lethal hit before dying without attacking. Attempt 2 turn 4: at full HP beside Mega Pyroar it chose sun Heat Wave over the Smash and OHKOed a chipped Landorus - the better call on that board."
+  },
+  {
+   "check": "Great Tusk's Protosynthesis triggers on the sun",
+   "result": "PASS",
+   "evidence": "'The harsh sunlight activated the opposing Great Tusk / Attack was heightened!' on entry in both attempts. In attempt 1 the +Atk Close Combat OHKOed Ludicolo from 167; in attempt 2 the +Atk Headlong Rush into a Grass body did 59."
+  },
+  {
+   "check": "Mega Pyroar Mega Evolves and finishes",
+   "result": "PASS",
+   "evidence": "Mega Evolved on entry turn in both attempts. Attempt 1: Protected on the Mega turn, then a crit Hyper Voice took Landorus 152 to 28 (124 with Life Orb). Attempt 2: sun Heat Wave OHKOed Tapu Bulu from 210/210 the turn it arrived. The Mega form's ability reads ABILITY_FIRE_MANE, not Competitive - the dossier's Competitive line describes the base form only, so 'never lower Pyroar's stats' applies before it Mega Evolves."
+  },
+  {
+   "check": "Does the redesign achieve its goal",
+   "result": "YES",
+   "evidence": "The first-pass fight lost its weather on turn 0 and five of six died from full HP without acting. This time the sun arrived, was retaken, the trap converted a Water attack into +1, Protosynthesis and the Mega both took a body, and the straight-line attempt cost two faints in one turn. It is now a real admin fight rather than the least threatening six in the block."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "attempt": 1,
+   "turn": 6,
+   "battler": "Pyroar (Mega turn)",
+   "payoff": "REAL - blocked Landorus's Earth Power, which OHKOed it from full the next turn."
+  },
+  {
+   "attempt": 1,
+   "turn": 7,
+   "battler": "Turtonator (+2, 63 HP)",
+   "payoff": "REAL - blocked Mega Swampert's Liquidation, which had taken it from 201 to 63 the turn before; it did not repeat the guard and died on turn 8."
+  },
+  {
+   "attempt": 2,
+   "turn": 1,
+   "battler": "Torkoal",
+   "payoff": "REAL - blocked Landorus's Earth Power, which OHKOed it (213) on turn 2."
+  },
+  {
+   "attempt": 2,
+   "turn": 3,
+   "battler": "Turtonator (entry turn)",
+   "payoff": "EMPTY - Earth Power went to Ninetales and Tapu Bulu Protected; nothing targeted it. Defensible as an entry read beside a body that was about to die, but it bought nothing."
+  }
+ ],
+ "protect_summary": "4 opponent Protects across 11 turns and 15 decisions: 3 with a real payoff (two of them saved a body from a lethal hit for one turn), 1 empty. Torkoal's turn-1 Protect in attempt 2 was the single best AI decision of the replay.",
+ "ai_defects": [],
+ "ai_notes": [
+  "Torkoal chose Eruption on turns 1 and 2 of attempt 1 at 213/213 and 200/213 - correct - and Yawn on turn 3 at 200/213 into a Ludicolo that could not be put to sleep usefully; it died before acting. Minor.",
+  "Ninetales' turn-4 Solar Beam (attempt 1) was chosen under sun and then my Rain Dance resolved first, turning it into a two-turn charge that landed at half power on turn 5. Not a defect: the weather changed after selection.",
+  "Gastrodon targeted Ice Beam at Ludicolo (neutral) on turn 1 and at Pelipper (2x, after the +1) on turn 2 - both the right target for the board.",
+  "The first pass filed E0338-1 (Heat Wave into two Water bodies under rain). No comparable choice appeared here: every Fire attack was chosen under sun, and under my rain Ninetales chose Solar Beam and Turtonator chose Protect.",
+  "AI decision budget: max 63 frames (1.055 s) in attempt 1, 61 frames (1.021 s) in attempt 2, inside the 1.2 s budget."
+ ],
+ "level_changes": [],
+ "level_change_rationale": "Keep. Attempt 1 won 6-1 but only with a deliberately thrown verification turn and two more bodies at 52 and 28 HP; attempt 2, played straight, won 6-2 with both faints coming from full HP in a single turn of sun Heat Waves. That is a real fight under the brief's rule, and this is the first time this room has cost a strong pool-60 party anything. No offset touched: Torkoal 3, Gastrodon 2, Great Tusk 2, Ninetales 3, Turtonator 3, Pyroar 2 unchanged.",
+ "cooler": "The redesign is the cooler version and it shows on the board; keep it. Two small notes for a later pass, not for this one. (1) Gastrodon is the trap and the crack (Grass) removes it turn 1 from full every time - a Rindo Berry or a Sitrus would let it survive one Grass hit and actually fire the +1 on a second turn. (2) Turtonator's Shell Smash only happened when the AI had nothing better; with sun Heat Wave available it attacks, which is right, so the Smash is a luxury the dossier over-sells. Mega Pyroar's Fire Mane (the Mega ability) is the piece the write-up should describe, since Competitive is gone the moment it Mega Evolves.",
+ "legality_notes": "No legality problem in the authored set. Great Tusk is a Paradox species at a cap-60 villain-base climax; the campaign rule restricts it only in windows at or below 24. Noted: the Mega forms' abilities differ from the dossier prose (Pyroar-Mega reads ABILITY_FIRE_MANE).",
+ "engine_notes": [
+  "Unseen Fist against a single-target Protect deals 25% in this ruleset (B_UNSEEN_FIST_PIERCING_DRILL >= GEN_CHAMPIONS in src/battle_util.c GetMoveAgainstProtectionModifier) - observed in the Maxie replay, recorded here because the same Urshifu was in reserve for this room."
+ ],
+ "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py on work/agent-battle-build-8. Not earned campaign play."
+}

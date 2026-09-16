@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0339 Maxie (Magma Hideout, cap 60) v2 replay against the rebuilt Stakataka/Torterra/Runerigus/Rhyperior/Copperajah/Mega Camerupt Trick Room team",
+  "availability_audit": "Every member's pool-60 gate is 60 or lower and its source map lies at or before the Magma Hideout in play order (Lilycove and Routes 121-123 legal, nothing from Mossdeep onward). Pelipper gate 30, evolution:level from SPECIES_WINGULL. Swampert gate 36, evolution:level from SPECIES_MARSHTOMP (Littleroot starter) with ITEM_SWAMPERTITE stone-window 14. Rillaboom gate 36, evolution:level from SPECIES_THWACKEY (Grookey line). Urshifu-Rapid-Strike gate 42, evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU (the tower quest that gates at 42, pre-Fortree). Tornadus gate 60, legendary_sign:Route119 (Fortree). Amoonguss gate 42, evolution:level from SPECIES_FOONGUS. Explicitly excluded as post-hideout: Suicune (Route125), Tapu Fini (Route126), Keldeo (Route127), every stone-window-60 Mega on the sea routes, and anything from Shoal Cave, Routes 124-127, the Abandoned Ship or Mossdeep.",
+  "plan": "Built to the crack line. Turn 1: Pelipper's Surf is the spread hit that breaks Stakataka's Focus Sash (2x into Rock/Steel, rain-boosted) so a partner's attack can then kill it; the allies chosen beside Pelipper all resist Surf (Swampert 1/4, Rillaboom and Urshifu 1/2). Against the room itself the party carries three priority moves that ignore Trick Room - Rillaboom's Fake Out and Grassy Glide, Urshifu's Aqua Jet - and a Prankster Taunt on Tornadus for Runerigus after its Mental Herb is spent (or after Rillaboom's Knock Off removes the Herb). Amoonguss is the one slow body that benefits from the room: Spore and Rage Powder move early under it. Pelipper's rain halves Mega Camerupt's Eruption and Wide Guard blocks it outright. Ice Punch is 4x into Torterra, Surging Strikes and Grassy Glide are 4x into Rhyperior and 2x/4x into Camerupt, Superpower is 4x into Stakataka. No Electric anywhere, so Lightning Rod has nothing to draw.",
+  "party": [
+    {
+      "species": "SPECIES_PELIPPER",
+      "moves": ["MOVE_SURF", "MOVE_HURRICANE", "MOVE_WIDE_GUARD", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_DRIZZLE",
+      "item": "ITEM_DAMP_ROCK",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "rain halves Eruption; Surf is the spread hit through Stakataka's Sash; Hurricane 2x into Torterra; Wide Guard against Eruption, Heat Wave and Rock Slide",
+      "availability": "pool-60 gate 30, evolution:level from SPECIES_WINGULL."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": ["MOVE_LIQUIDATION", "MOVE_ICE_PUNCH", "MOVE_SUPERPOWER", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_SWAMPERTITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega win condition; Superpower 4x into Stakataka after the Sash is broken; Ice Punch 4x into Torterra; Liquidation 4x into Rhyperior and Camerupt",
+      "availability": "pool-60 gate 36 (Marshtomp line) with ITEM_SWAMPERTITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_GRASSY_GLIDE", "MOVE_WOOD_HAMMER", "MOVE_KNOCK_OFF"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "priority that ignores Trick Room: Fake Out and Grassy Glide; Knock Off strips Runerigus's Mental Herb (and is 2x into Ghost); Grass is 4x into Rhyperior and 2x into Camerupt",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_THWACKEY."
+    },
+    {
+      "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+      "moves": ["MOVE_SURGING_STRIKES", "MOVE_CLOSE_COMBAT", "MOVE_AQUA_JET", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Protect and Wide Guard breaker; Aqua Jet is priority under the room; Surging Strikes 4x into Rhyperior and Camerupt, 2x into Stakataka",
+      "availability": "pool-60 gate 42, evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU."
+    },
+    {
+      "species": "SPECIES_TORNADUS",
+      "moves": ["MOVE_TAUNT", "MOVE_HURRICANE", "MOVE_TAILWIND", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: Prankster Taunt on Runerigus after its Mental Herb; Flying body immune to High Horsepower; Hurricane 2x into Torterra",
+      "availability": "pool-60 gate 60, legendary_sign:Route119."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "the slow body that benefits from Maxie's own room: Spore and Rage Powder move early under Trick Room; Sludge Bomb 2x into Torterra",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    }
+  ]
+}

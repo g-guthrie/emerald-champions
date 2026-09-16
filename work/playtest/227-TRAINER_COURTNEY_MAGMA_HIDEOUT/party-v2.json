@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0338 Courtney (Magma Hideout, cap 60) v2 replay against the rebuilt Torkoal/Gastrodon/Great Tusk/Ninetales/Turtonator/Mega Pyroar sun team",
+  "availability_audit": "Every member's pool-60 gate is 60 or lower and its source map lies at or before the Magma Hideout in play order (Lilycove and Routes 121-123 legal, nothing from Mossdeep onward). Pelipper gate 30, evolution:level from SPECIES_WINGULL (Route 103/104 shore bird). Ludicolo gate 14, evolution:item:ITEM_WATER_STONE from SPECIES_LOMBRE (Lotad is a Route 102 wild). Kingdra gate 36, evolution:trade+item:ITEM_DRAGON_SCALE from SPECIES_SEADRA (Horsea line, Route 105/Dewford waters). Swampert gate 36, evolution:level from SPECIES_MARSHTOMP (Littleroot starter) with ITEM_SWAMPERTITE stone-window 14. Tapu Bulu gate 60, legendary_sign:Route123 (the Lilycove-side stretch walked before Mt Pyre and this hideout). Landorus gate 42, legendary_sign:Route111_RuinsExterior (desert ruins, pre-Fortree). Explicitly excluded as post-hideout: Suicune (Route125), Tapu Fini (Route126), Keldeo (Route127), Kingdra-Mega/Milotic-Mega/Lapras-Mega (stone-window 60 items on the sea routes), Toxapex (Lilycove water is arguably legal but not needed), anything from Shoal Cave, Routes 124-127, the Abandoned Ship or Mossdeep.",
+  "plan": "The crack line names it and this party is built to it: the sun now comes from a base-20 Torkoal so Drizzle loses turn 0, therefore the party carries the weather war twice over - Pelipper re-sets rain on every re-entry, Ludicolo carries Rain Dance by hand - and three Swift Swim/rain attackers who fire SPREAD Water (Muddy Water from Ludicolo and Kingdra) that goes around Storm Drain instead of into it. Tapu Bulu and Ludicolo are the Grass answer to Gastrodon (Wood Hammer and Giga Drain are 4x into Water/Ground). Landorus is the Ground answer to Torkoal, Ninetales, Turtonator and Pyroar and is immune to Torkoal's Earth Power and Great Tusk's Headlong Rush. Kingdra resists both Fire and Water, so it is the body that stands in sun Eruption, and Draco Meteor is the Dragon answer to Turtonator before it Smashes. Pelipper's Hydro Pump is kept deliberately single-target so one Storm Drain redirect can be observed on purpose. Wide Guard on Pelipper is for Eruption, Heat Wave and Hyper Voice.",
+  "party": [
+    {
+      "species": "SPECIES_PELIPPER",
+      "moves": ["MOVE_HURRICANE", "MOVE_HYDRO_PUMP", "MOVE_WIDE_GUARD", "MOVE_TAILWIND"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_DRIZZLE",
+      "item": "ITEM_DAMP_ROCK",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "weather war: Drizzle re-sets rain on every entry after Torkoal's turn-0 sun; Wide Guard against Eruption/Heat Wave/Hyper Voice; Hydro Pump is the single-target Water kept to observe Storm Drain",
+      "availability": "pool-60 gate 30, evolution:level from SPECIES_WINGULL."
+    },
+    {
+      "species": "SPECIES_LUDICOLO",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_MUDDY_WATER", "MOVE_GIGA_DRAIN", "MOVE_RAIN_DANCE"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Fake Out tempo on Torkoal or Turtonator; Rain Dance by hand when Ninetales brings the sun back; Muddy Water is spread Water around Storm Drain and Giga Drain is 4x into Gastrodon",
+      "availability": "pool-60 gate 14, evolution:item:ITEM_WATER_STONE from SPECIES_LOMBRE."
+    },
+    {
+      "species": "SPECIES_KINGDRA",
+      "moves": ["MOVE_MUDDY_WATER", "MOVE_DRACO_METEOR", "MOVE_ICE_BEAM", "MOVE_HYDRO_PUMP"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_CHOICE_SPECS",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "resists Fire and Water so it stands in the sun Eruption; Specs Muddy Water is the spread Water that goes around Storm Drain; Draco Meteor kills Turtonator before it Smashes",
+      "availability": "pool-60 gate 36, evolution:trade+item:ITEM_DRAGON_SCALE from SPECIES_SEADRA."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": ["MOVE_LIQUIDATION", "MOVE_ICE_PUNCH", "MOVE_SUPERPOWER", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_SWAMPERTITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega win condition; Swift Swim in rain; Superpower for Great Tusk and Pyroar, Ice Punch for Great Tusk",
+      "availability": "pool-60 gate 36 (Marshtomp line) with ITEM_SWAMPERTITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_TAPU_BULU",
+      "moves": ["MOVE_WOOD_HAMMER", "MOVE_HORN_LEECH", "MOVE_SUPERPOWER", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "reachable legend: the Grass answer to Gastrodon (Wood Hammer 4x) and Great Tusk (2x); Grassy Terrain halves Torkoal's and Tusk's Ground attacks",
+      "availability": "pool-60 gate 60, legendary_sign:Route123."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: special Ground into Torkoal, Ninetales, Turtonator and Pyroar; immune to Earth Power and Headlong Rush",
+      "availability": "pool-60 gate 42, legendary_sign:Route111_RuinsExterior."
+    }
+  ]
+}
