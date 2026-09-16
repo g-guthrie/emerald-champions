@@ -1303,3 +1303,99 @@ No fixture: the case needs the AI itself to choose a switch for the partner,
 which a fixture cannot script. The neighbouring case - Helping Hand in front of
 damage the multiplier cannot touch - is pinned by `EC setup pricing: Helping
 Hand is not spent on damage it cannot multiply`.
+
+# Group B — last-move and reactive
+
+Commit `ed14b8c7f8`. Suite green at the end of the group.
+
+**Already covered.** Counter against a side that has only ever hit specially was
+refused before this pass (`82ced61526`); the Wobbuffet sighting predates that
+commit and its fixture passes untouched. Destiny Bond, Sucker Punch and the
+Feint reads were likewise already priced.
+
+**Fixed: Mirror Coat had no read.** The other half of the Counter rule was
+missing. A side that has only hit specially is the one board state where Mirror
+Coat is a read rather than a coin flip, and nothing rewarded it. It now earns
+that read, on the same evidence the Counter refusal uses.
+
+**Fixed: Encore against a Choice-locked foe.** A locked repeater is already
+committed to the move this turn, so the lock costs it nothing it had — but it
+keeps it there after the item would have let it switch out. Worth 15 more than
+an ordinary Encore (20 status / 35 attacking base).
+
+**Fixed: the side guards needed evidence.** Wide Guard and Quick Guard answer
+something already seen — a spread move, or a priority move, from a living foe
+last turn. Their denial has not happened yet, so the trial alone cannot earn
+them the turn; the sighting does (+30).
+
+Fixtures: `EC reactive pricing: Mirror Coat is a read after special hits only`,
+`EC reactive pricing: Wide Guard answers the spread move it has seen`.
+
+# Group C — signature-power underpricing
+
+Commit `1467c08c97`. Suite green at the end of the group.
+
+**Already covered, now pinned.** Three of the four reports reproduce as correct
+behaviour and are held by new fixtures in `test/battle/ai/power_pricing.c`:
+Water Spout at full health beats the small reliable attack; a max-power Reversal
+at five HP beats waiting behind a shield; recoil is aimed at the neutral body
+rather than the one that resists it and pays the user back for nothing.
+
+**Fixed: priority paid for a step the user already had.** Priority buys exactly
+one thing — striking first — and a user that already outspeeds its target has
+that for free, so the extra step is worth nothing and the comparison belongs to
+the damage. That is how a Huge Power body took a forty-power priority attack
+twice over the move that would have ended the same target. A priority attack
+aimed at a target the user already outspeeds now carries −45, with Trick Room
+folded into the speed comparison.
+
+Fake Out and First Impression are exempt: their worth is the flinch and the
+first-turn window, not the step in the order. Without that exemption the rule
+moved Laura's pivot board, which is the check that caught it.
+
+# Group D — next-turn values for setup and support
+
+Commit `50bcf8c54a`. Six new fixtures in `test/battle/ai/next_turn_values.c`.
+
+**Already covered, now pinned.** Shell Smash is taken behind a White Herb (the
+Herb's undo was already modelled in the trial, so the pair sees the +2 Speed it
+keeps); a Wish at full health is refused, because the Wish branch is capped by
+missing HP and there is none. Protect on a full-HP resist body and Spore on the
+pair path were fixed earlier in the pass and still hold.
+
+**Fixed: a speed drop is worth the order it buys.** `PAIR_STAT_DROP_HORIZON`
+priced a drop as chip only. A drop that puts one of ours in front of the target
+is speed control — the whole point of spending a slow partner's turn on it — and
+now adds `PAIR_SPEED_CROSSING_HORIZON` (25) when a crossing actually appears.
+That is the Choice Scarf String Shot case. The fixture holds both directions:
+the same two stages on a target nobody can cross keep losing to the attack.
+
+**Fixed: a boost nothing can cash is not a boost.** Howl on a body whose only
+damaging move is special raised Attack into an empty hand and still collected
+the full setup horizon. An Attack raise with no physical attack on the set now
+earns nothing unless some other raised stat does.
+
+**Fixed: item swaps were unpriced.** A swap is now the difference between the
+two items: a dead item (Klutz, or one whose hold effect is suppressed) for a
+working one is 45; a Choice item stuck on a foe that can hold it is 30; any
+upgrade is 15; handing a working item into an empty hand is −25. Orbs, a Sticky
+Barb and an Iron Ball are excluded from that last penalty and left to the
+per-battler scorer, which knows the recipient's ability and immunities — that
+is the logic the Klutz Flame Orb fixture in `ai_doubles.c` already pins, and
+duplicating it at pair level broke it before I deferred.
+
+**Fixed: Destiny Bond had no value at all.** It is now worth 55 when a *known*
+move from a foe that moves first kills through the lowest roll, and −20
+otherwise. The knowledge condition is load-bearing and the fixture asserts it:
+on turn one, against a set the AI has not been shown, the bond is refused; after
+the fixed-damage move has been seen once, the same board takes the trade.
+
+**Frames.** Worst reported decision 65 of the 72-frame budget
+(`DANCER_FULL_BENCH`), unchanged by this group; Brawly 61, Ned Soak 61, Laura 60.
+
+**Pre-existing red outside my suite.** Building the wider allowlist surfaced 12
+failures in `test/battle/ai/ai_doubles.c` ("EC expert pair: …"). They fail
+identically at `HEAD` with my working tree reverted, so they are not mine; that
+file is another agent's. I verified against that baseline rather than assuming,
+and one of my group D drafts did add a 13th (the Klutz case above) before I
+deferred orb pricing back to the scorer.
