@@ -1,0 +1,33 @@
+{
+  "play_order": 125,
+  "e_group": "E0148",
+  "trainer": "TRAINER_JACE",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 36,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/125-TRAINER_JACE/party.json",
+  "level_audit": "PASS. Drifblim 37 (+3), Salazzle 35 (+1), Larvesta 40 (+6), Alolan Marowak 32 (-2), Hisuian Arcanine 33 (-1), Hisuian Typhlosion 34 (0). All equal cap 36 + offset - 2.",
+  "attempts": [
+    {"seed": 15, "run_dir": "work/playtest/125-TRAINER_JACE/run-s15", "outcome": "won", "turns": 6, "player_faints": 3, "opponent_faints": 6}
+  ],
+  "strategy_checks": [
+    {"check": "Drifblim receives its own Flame Orb burn while airborne and Flare Boost comes online", "result": "PASS", "evidence": "End of turn 1: Drifblim shows STATUS1_BURN with ITEM_FLAME_ORB and ABILITY_FLARE_BOOST. It is Flying, so this works whether or not the mist is present, exactly as the plan says."},
+    {"check": "Drifblim uses Defog only when clearing the terrain is worth it, and does not use grounded-target status as if the mist were absent", "result": "PASS (vacuously)", "evidence": "With no terrain on the field, Drifblim never used Defog across three turns. Correct restraint - it did not spend a turn clearing nothing."},
+    {"check": "Salazzle Corrosion Toxic", "result": "FAIL (never used)", "evidence": "Salazzle chose Sludge Bomb on both of its turns and never used Toxic. Sludge Bomb was the higher-damage choice against Pelipper and Kingdra, and Corrosion's whole point (poisoning Steel and Poison types) had no target on my team, so this is defensible - but the authored Corrosion line was never exercised."},
+    {"check": "Hex and Infernal Parade pay off only after their actual status events", "result": "FAIL", "evidence": "Drifblim used Hex on turns 2 and 3 against an unstatused Kingdra, i.e. at half power. Nothing on Jace's side had inflicted status: Salazzle never used Toxic and Hisuian Typhlosion never used Will-O-Wisp. See ai_defects JACE-1."},
+    {"check": "Alolan Marowak Lightning Rod and Thick Club", "result": "PASS", "evidence": "ABILITY_LIGHTNING_ROD and ITEM_THICK_CLUB reported. It correctly chose Bonemerang (Ground) over Shadow Bone against Garganacl, whose Purifying Salt halves Ghost damage - a genuinely good ability read."},
+    {"check": "Hisuian Arcanine Choice Band / Intimidate", "result": "PASS", "evidence": "Intimidate applied atk -1 to both player battlers on entry; it used Rock Slide from the band before being KOed by a 4x Liquidation."},
+    {"check": "Misty Terrain present", "result": "NOT TESTABLE", "evidence": "terrain reported \"none\" at turn 0. Same harness limitation as the other Lavaridge rooms."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {"id": "JACE-1", "severity": "medium", "turn": "turns 2 and 3", "board": "Drifblim (burned, Flare Boost active) vs an unstatused Kingdra; Drifblim's own team had inflicted no status and had no status move queued", "chosen": "Hex, twice", "better": "Air Slash. Both are special (so Flare Boost applies equally) and both are STAB with the same 1x type matchup against Water/Dragon, but Air Slash is 75 base power against Hex's 65 when the target has no status, and Air Slash additionally carries a flinch chance. Hex only overtakes Air Slash once the target is statused, and nothing on this team had statused anything. The scorer appears not to be discounting Hex's power for the no-status case.", "note": "Worth checking as a shared path - any AI team holding a status-conditional move (Hex, Infernal Parade, Facade, Venoshock, Barb Barrage) could be mispricing it the same way. Not fixed here; AI C code is out of scope for this pass."}
+  ],
+  "ai_notes": "No opposing Protect occurred in this battle at all, despite four of the six members carrying it - the room played pure offense throughout. Marowak's Bonemerang-over-Shadow-Bone choice against Purifying Salt was the standout correct decision. Alongside JACE-1, the notable pattern is that this room's two status-payoff members (Salazzle's Toxic, Hisuian Typhlosion's Will-O-Wisp) never set up the status their partners' moves are priced on, so Hex and Infernal Parade both fired at base value.",
+  "level_changes": [],
+  "level_decision": "KEEP. Won on attempt 1 but cost 3 player faints, which is the brief's 'won after a real fight' case and also meets the AGENTS.md three-faint benchmark. No raise, no cut.",
+  "cooler_note": "Keep the room - a Flare Boost Drifblim that burns itself and a Corrosion Salazzle beside three regional Fire forms is a strong, distinctive identity, and Alolan Marowak plus Hisuian Arcanine and Hisuian Typhlosion is exactly the kind of rare-form lineup the Gym brief asks for. The design flaw is internal wiring, not species: the team is built around status-conditional damage (Hex, Infernal Parade) but has no reliable way to apply status to the opponent. Salazzle's Toxic and Hisuian Typhlosion's Will-O-Wisp are the only sources and both sit on members that would rather attack. Concrete suggestion: make Drifblim's burn do double duty - it already carries Defog, so pairing it with a partner that actually clicks Will-O-Wisp first, or giving Salazzle a reason to lead with Toxic (a bulkier item than Focus Sash), would let Hex fire at full power at least once. As played, the room's signature move was a 65-BP filler twice in a row.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}
