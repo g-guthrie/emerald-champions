@@ -1,0 +1,64 @@
+{
+  "play_order": 259,
+  "e_group": "E0400",
+  "trainer": "TRAINER_TATE_AND_LIZA_1",
+  "class": "leader",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (leaders, played as one battle)",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; offset-3 members at L77, Gardevoir (offset 4) at L78 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/259-TRAINER_TATE_AND_LIZA_1/party_steeldark76.json"],
+  "chronology_note": "Mossdeep Gym reached, Mind Badge not earned. Kingambit 54 (Bisharp), Ting-Lu 42 (DesertUnderpass sign - one reachable legend, used for Vessel of Ruin against an all-special team), Metagross 48 + Metagrossite stone-window 42, Gholdengo 48, Amoonguss 42, Urshifu-Single 42 (Kubfu Route112). Nothing from Mossdeep or later.",
+  "pre_play_strategy_checks": [
+    "Solrock sets Trick Room turn 1 (Mental Herb beats Taunt)",
+    "Lunatone Power Herb Meteor Beam fires instantly turn 1",
+    "Tapu Lele's Psychic Surge blocks priority against grounded targets",
+    "Hatterene / Cresselia re-set Trick Room",
+    "Pixilate Hyper Voice from Mega Gardevoir",
+    "Helping Hand support from Cresselia / Solrock"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 10,
+      "build": "work/agent-battle-build-7",
+      "run_dir": "work/playtest/259-TRAINER_TATE_AND_LIZA_1/a1",
+      "party": "party_steeldark76.json (Kingambit / Ting-Lu / Mega Metagross / Gholdengo / Amoonguss / Urshifu-Single)",
+      "outcome": "won",
+      "turns": 8,
+      "player_faints": 1,
+      "opponent_faints": 6,
+      "why": "Solrock and Lunatone led into Kingambit and Ting-Lu, both slower than every twin. Turn 1 Solrock chose Will-O-Wisp instead of Trick Room and Kowtow Cleave one-shot it (297 HP) before it moved; Lunatone Protected. Turn 2 Cresselia Helping Hand + Lunatone's Power Herb Meteor Beam did 122 to Kingambit (resisted); Kowtow + Throat Chop took Cresselia to 46. Turn 3 Cresselia Helping Hand again while Lunatone Protected (empty), Kowtow killed Cresselia; Tapu Lele entered, terrain up. Turn 4 Kingambit out for Gholdengo, Lele's Specs Focus Blast did nothing to it, Ruination halved Lele, +1 Lunatone Ice Beam 186 on Ting-Lu. Turn 5 Make It Rain killed Lele and took Lunatone to 79; Ting-Lu Protected the second Ice Beam. Turn 6 Lunatone Protected Shadow Ball, Ruination missed Hatterene, Life Orb Dazzling Gleam killed Ting-Lu (231) - the one faint. Turn 7 the AI withdrew Lunatone for Gardevoir into a 2x Shadow Ball; Mega Metagross' Meteor Mash one-shot Hatterene before its Trick Room. Turn 8 Mega Gardevoir Protected Meteor Mash, Shadow Ball killed Lunatone, terrain ended. Turn 9 Meteor Mash finished Gardevoir. Trick Room was never set in nine turns."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room turn 1 from Solrock", "result": "FAIL (deliberate AI refusal)", "evidence": "turn 1 Solrock chose Will-O-Wisp; both player leads were slower than every twin so Trick Room would have helped the player. Sensible, but it means the leaders' headline machine never ran once in the fight"},
+    {"check": "Power Herb Meteor Beam instant", "result": "PASS", "evidence": "turn 2: 'overflowing with space power', Sp. Atk rose, 'became fully charged due to its Power Herb', 122 on Kingambit with Helping Hand"},
+    {"check": "Psychic Surge terrain", "result": "PASS", "evidence": "turn 3 'The battlefield got weird!', terrain=psychic 5 turns; priority never attempted by either side while it stood"},
+    {"check": "Cresselia / Hatterene re-set Trick Room", "result": "FAIL / NOT REACHED", "evidence": "Cresselia used Helping Hand three times and never Trick Room or Moonlight; Hatterene chose Trick Room on turn 7 but was one-shot before moving"},
+    {"check": "Pixilate Hyper Voice", "result": "NOT REACHED", "evidence": "Mega Gardevoir Protected on its first turn and died on its second, never attacked"},
+    {"check": "Helping Hand support", "result": "PASS (once useful)", "evidence": "turn 2 Helping Hand boosted Meteor Beam; turn 3 Helping Hand into a partner Protect was wasted"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Lunatone", "payoff": "blocked Throat Chop (real, but cost the authored instant Meteor Beam turn)"},
+    {"turn": 3, "user": "Lunatone", "payoff": "blocked Ruination, 148 HP saved (real)"},
+    {"turn": 5, "user": "Lunatone", "payoff": "none - it attacked; listed for clarity, no Protect"},
+    {"turn": 6, "user": "Lunatone", "payoff": "blocked a lethal Shadow Ball at 79 HP (real)"},
+    {"turn": 8, "user": "Mega Gardevoir", "payoff": "blocked a lethal Meteor Mash (real), but the partner Lunatone died the same turn and Gardevoir had no follow-up next turn"}
+  ],
+  "protect_summary": "4 Protects (Lunatone 3, Gardevoir 1), all with a real blocked hit; no consecutive guards. Lunatone's turn-1 Protect traded the plan's instant Meteor Beam for a blocked 35 percent hit, a debatable opener.",
+  "ai_defects": [
+    {"turn": 3, "board": "Cresselia 46/344 (Sitrus used) beside Lunatone 297/297 (+0) versus Kingambit 187/309 and Ting-Lu 393/393, no Trick Room", "chosen": "Cresselia Helping Hand while Lunatone Protect", "better": "Helping Hand into a Protecting partner is an empty action; Cresselia should attack (Psychic into Ting-Lu is immune, so Moonlight or Trick Room) or Lunatone should not Protect when its partner is boosting it. Minor pair-coordination defect: the pair evaluator does not seem to veto Helping Hand when the partner's chosen action is Protect."},
+    {"turn": 7, "board": "Lunatone 79/297 (+1 SpA) and Hatterene 247/247 versus Gholdengo (-2 SpA) and fresh Metagross", "chosen": "withdrew Lunatone for Gardevoir, the ace, which then took a 2x Shadow Ball (102) on entry; Lunatone came back on turn 8 and died anyway", "better": "either keep Lunatone in and attack (its +1 Ice Beam was the only thing hurting me) or switch to something that resists Ghost; sending the Mega ace into a known Ghost attacker for no gain is the wrong switch."}
+  ],
+  "ai_notes": "Turn 1 Solrock declining Trick Room against slower leads is good play, and Lele's Focus Blast into the Kingambit slot on turn 4 was the right target before my switch (confirmed from messages, 'It doesn't affect Gholdengo'). Both leaders' slots never coordinated the two-mechanic machine: terrain came up on turn 3 but Trick Room never did.",
+  "level_changes": [
+    {"member": "SOLROCK", "field": "level offset", "before": 3, "after": 4, "why": "won attempt 1 with one faint; Solrock died turn 1 to a single Kowtow Cleave without acting"},
+    {"member": "CRESSELIA", "field": "level offset", "before": 3, "after": 4, "why": "used Helping Hand three times and died turn 3; the twins' durability piece did nothing durable"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try win with 0-1 faints. Gardevoir (Mega ace) and Tapu Lele untouched; +1 on the two supports that were removed before contributing. The leaders were not a step above room twelve (Kathleen took two of my six, the twins took one).",
+  "cooler": "The concept is right and it is the best-written plan in the building, but it did not show: a slow Steel/Dark lead makes the AI (correctly) refuse Trick Room, and without Trick Room the twins are just six special attackers that Vessel of Ruin and a Steel core wall. To make the machine fire against its own crack, give Solrock a second reason to exist when Trick Room is wrong (Rock Slide flinches were never tried, Helping Hand was), and consider Cresselia carrying Icy Wind or Ally Switch instead of the redundant third Helping Hand/Trick Room so the room has a speed answer that is not Trick Room. Also consider Lunatone's Protect: it spent the instant Meteor Beam turn on a guard. Suggestion only.",
+  "legality_notes": "All sets legal as authored. Two-owner battle played as a single battle per brief.",
+  "verification_limit": "The +1 on Solrock and Cresselia cannot be re-verified until the main agent rebuilds."
+}

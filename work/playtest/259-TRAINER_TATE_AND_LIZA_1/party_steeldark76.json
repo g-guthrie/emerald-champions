@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Gym leaders Tate and Liza (Trick Room + Psychic Terrain) cap 76 - Steel and Dark slow-core party",
+  "availability_audit": "Mossdeep Gym reached, Mind Badge not earned, nothing from Sootopolis, the Seafloor Cavern or the Space Center. Per pool-76.json source_detail: Kingambit gate 54, evolution:level/condition from Bisharp. Ting-Lu gate 42, legendary_sign:DesertUnderpass (the Route 111 desert chapter, far upstream of Lilycove) - one reachable legend, taken because Vessel of Ruin cuts the Special Attack of an all-special leader team and its Dark/Ground typing is immune to the entire Psychic lane. Metagross gate 48 evolution:level from Metang, ITEM_METAGROSSITE stone-window 42 (Mega Ring window). Gholdengo gate 48 evolution:level from Gimmighoul-Chest. Amoonguss gate 42 evolution:level from Foongus. Urshifu-Single-Strike gate 42, Kubfu legendary_sign:Route112 then EVO_SCRIPT_TRIGGER. Nothing sourced downstream of Mt Pyre.",
+  "plan": "Built off the leaders' crack line. The twins' machine is Trick Room plus Psychic Terrain, so the party is deliberately slow and Steel or Dark: under Trick Room a 45-50 base Speed Kingambit and Ting-Lu move before every twin, Steel resists both Pixilate Hyper Voice and Expanding Force, and Dark is immune to the Psychic half outright. Meteor Mash and Make It Rain are 2x on Tapu Lele, Hatterene and Mega Gardevoir. Vessel of Ruin is a permanent 25 percent cut to Meteor Beam, Specs Psychic and Hyper Voice. Amoonguss' Spore is not stopped by Psychic Terrain (only Electric Terrain blocks sleep) and Rage Powder targets itself so the priority block does not apply; it is the answer to Cresselia's second Trick Room. Urshifu is the fast closer once the five turns lapse. No Wide Guard user was needed: every spread move the twins own is resisted or nullified by the Steel/Dark core.",
+  "party": [
+    {
+      "species": "SPECIES_KINGAMBIT",
+      "moves": ["MOVE_KOWTOW_CLEAVE", "MOVE_IRON_HEAD", "MOVE_SUCKER_PUNCH", "MOVE_SWORDS_DANCE"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SUPREME_OVERLORD",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Dark/Steel lead immune to Psychic, resists Fairy, slow enough to move first under Trick Room; Kowtow Cleave never misses",
+      "availability": "pool-76 gate 54, evolution:level/condition from SPECIES_BISHARP."
+    },
+    {
+      "species": "SPECIES_TING_LU",
+      "moves": ["MOVE_RUINATION", "MOVE_STOMPING_TANTRUM", "MOVE_THROAT_CHOP", "MOVE_PROTECT"],
+      "nature": "NATURE_IMPISH",
+      "ability": "ABILITY_VESSEL_OF_RUIN",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 4, 252, 0, 0, 0],
+      "role": "reachable legend: Vessel of Ruin cuts every twin's Special Attack; Dark/Ground immune to Psychic; Throat Chop stops Hyper Voice; Ruination halves the Calm Mind bodies",
+      "availability": "pool-76 gate 42, legendary_sign:DesertUnderpass."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": ["MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_ICE_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega win condition: Tough Claws Meteor Mash is 2x on Lele, Hatterene and Gardevoir; quarter damage from Expanding Force",
+      "availability": "pool-76 gate 48, evolution:level from SPECIES_METANG; ITEM_METAGROSSITE stone-window 42."
+    },
+    {
+      "species": "SPECIES_GHOLDENGO",
+      "moves": ["MOVE_MAKE_IT_RAIN", "MOVE_SHADOW_BALL", "MOVE_NASTY_PLOT", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_GOOD_AS_GOLD",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "Steel/Ghost special lane: Make It Rain is a 2x spread on the three Fairies; Good as Gold refuses Will-O-Wisp; Shadow Ball for Solrock, Lunatone and Cresselia",
+      "availability": "pool-76 gate 48, evolution:level from SPECIES_GIMMIGHOUL_CHEST."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_POLLEN_PUFF", "MOVE_PROTECT"],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 0, 252, 0, 4, 0],
+      "role": "Spore the second Trick Room setter under the twins' own Trick Room (it moves first at 30 base Speed); Rage Powder redirects Specs Psychic away from the Mega",
+      "availability": "pool-76 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "fast Dark closer after the five Trick Room turns; crits ignore Calm Mind",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    }
+  ]
+}
