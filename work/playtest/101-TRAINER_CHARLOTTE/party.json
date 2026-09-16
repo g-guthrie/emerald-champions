@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0118 TRAINER_CHARLOTTE (Route 114, cap 36 window)",
+ "availability_audit": "Chronology anchor: Route 113/114 is reached after Mauville/Wattson (cap 30) via Route 111 -> Route 112 -> Fiery Path, per Game Book C20/C21. Every member below is in work/reference-pools/pool-36.json with gate <= 36 and a source_detail map the player has already passed on the way to Route 113/114: Seaspray Cave B1F (Sneasel), Rusturf Tunnel (Drilbur), Petalburg City Old Rod (Magikarp), Route 102 (Togepi), Mauville Game Corner (Litten), Granite Cave 1F (Abra). No Route 118+, Mt. Pyre, desert-interior or post-Flannery sources are used. Mega Ring earned from Steven after Brawly (C13); Gyaradosite stone window 20. Route 114 is reached from Fallarbor per Game Book C20/C21, so every source map listed above is behind the player. Adds Petalburg Woods (Heracross gate 14, Heracronite window 14; Kartana gate 20) and NewMauville_Entrance (Magnezone gate 30).",
+ "plan": "Charlotte is a Trick Room team: Farigiraf or Armarouge sets the room and all four members carry 0 Speed IVs to abuse it, with Armor Tail on Farigiraf shutting off priority for the whole side. I am deliberately not racing to deny Trick Room, because the room going up is the check this review exists to verify; instead the party is built to win inside it. Three of the four opponents are part Normal, so Mega Heracross's Close Combat is 2x into Komala and Bouffalant, and Incineroar's Knock Off is 2x into both Psychic types while stripping Farigiraf's Sitrus and Armarouge's Weakness Policy. Excadrill's Earthquake is 2x into Armarouge. Magnezone is on the team specifically because it is slow: at base 60 it is an asset once the room is up rather than a liability. No Fire move will be aimed at Armarouge - Flash Fire would eat it - and I will avoid feeding the Weakness Policy except with a hit that kills.",
+ "party": [
+  {
+   "species": "SPECIES_HERACROSS",
+   "moves": [
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_PIN_MISSILE",
+    "MOVE_ROCK_BLAST",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_GUTS",
+   "item": "ITEM_HERACRONITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Mega ace; Skill Link multi-hits and Close Combat are 4x into Garganacl and 2x into the rest of the roster",
+   "availability": "Heracross on PetalburgWoods land (pool gate 14); Heracronite stone window 14 (pool), Mega Ring earned from Steven after Brawly."
+  },
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PARTING_SHOT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Fake Out disruption and Fire pressure into Ribombee/Frosmoth",
+   "availability": "Litten from the Mauville Game Corner (500 coins, pool gate 30), Torracat at 17 and Incineroar at 34 by level (pool gate 36)."
+  },
+  {
+   "species": "SPECIES_EXCADRILL",
+   "moves": [
+    "MOVE_EARTHQUAKE",
+    "MOVE_IRON_HEAD",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_MOLD_BREAKER",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Electric-immune Rock Slide spread answer to the bird pair",
+   "availability": "Drilbur on Rusturf Tunnel land (pool gate 20), level evolution to Excadrill (pool gate 36)."
+  },
+  {
+   "species": "SPECIES_MAGNEZONE",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_FLASH_CANNON",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_ANALYTIC",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "special pressure into the physical wall; Thunderbolt is 2x into every Flying member including Corviknight",
+   "availability": "Magnezone on NewMauville_Entrance land (pool gate 30); New Mauville is opened out of Mauville after Wattson, which this whole block sits after."
+  },
+  {
+   "species": "SPECIES_KARTANA",
+   "moves": [
+    "MOVE_LEAF_BLADE",
+    "MOVE_SACRED_SWORD",
+    "MOVE_SMART_STRIKE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_BEAST_BOOST",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Sacred Sword ignores Garganacl's Iron Defense boosts; Smart Strike is 2x into Baxcalibur and Avalugg",
+   "availability": "Kartana on PetalburgWoods_3 land (pool gate 20); book preserves this access, Cut license and Roxanne badge earned long before Route 114."
+  },
+  {
+   "species": "SPECIES_WEAVILE",
+   "moves": [
+    "MOVE_TRIPLE_AXEL",
+    "MOVE_KNOCK_OFF",
+    "MOVE_ICE_SHARD",
+    "MOVE_LOW_KICK"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_PRESSURE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "fast Ice breaker with priority against both Oricorio",
+   "availability": "Sneasel on Seaspray Cave B1F land (pool gate 14), condition evolution to Weavile (gate 14)."
+  }
+ ]
+}

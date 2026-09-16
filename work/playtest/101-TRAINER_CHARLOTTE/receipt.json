@@ -1,0 +1,34 @@
+{
+  "play_order": 101,
+  "e_group": "E0118",
+  "trainer": "TRAINER_CHARLOTTE",
+  "class": "casual",
+  "location": "Route114",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Farigiraf and Armarouge at offset 0 -> L34, Bouffalant +1 -> L35, Komala +2 -> L36, all equal 36 + offset - 2 (Medium). No --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/101-TRAINER_CHARLOTTE/party.json",
+  "attempts": [
+    {"n": 1, "seed": 101, "run_dir": "work/playtest/101-TRAINER_CHARLOTTE/a1", "kind": "optimized", "outcome": "won", "turns": 6, "decisions": 7, "player_faints": 4, "opponent_faints": 4, "note": "Won on the last two Pokemon. Trick Room went up on turn 1 and cost me Mega Heracross, Incineroar, Excadrill and Weavile in four consecutive turns. Kartana's Beast Boost stacking to +2 Attack is what turned it: a +1 Sacred Sword OHKOed a full-HP 144 HP Assault Vest Bouffalant."}
+  ],
+  "strategy_checks": [
+    {"check": "Trick Room goes up on turn 1 or 2", "result": "PASS", "evidence": "T1 Farigiraf used Trick Room - 'The opposing Farigiraf twisted the dimensions!'. It expired on schedule at the end of T5, 'The twisted dimensions returned to normal!'."},
+    {"check": "Armor Tail protects the slow partners from priority", "result": "PASS", "evidence": "T1 Incineroar's Fake Out was refused outright: 'Incineroar cannot use Fake~Out!'. This is the whole reason the dossier swapped Gothorita for Farigiraf and it works exactly as printed - my standard turn-1 disruption tool was dead for as long as Farigiraf stood."},
+    {"check": "All four members use 0 Speed IVs to exploit the room", "result": "PASS", "evidence": "Inside Trick Room the opponent moved first in every single turn of T2-T5 with every member, including against my Excadrill (base 88) and Incineroar (base 60). T2 Farigiraf's Psychic KOed Mega Heracross before it could act."},
+    {"check": "Komala uses legal Body Slam and immediate Wood Hammer instead of Return/Swords Dance", "result": "PASS", "evidence": "T3 Body Slam KOed a 148 HP Incineroar (behind Helping Hand); T4 Wood Hammer KOed Excadrill, correctly choosing the 2x Grass move into a Ground type over its Normal STAB. Neither Return nor Swords Dance appeared."},
+    {"check": "Armarouge is the special backup and Flash Fire / Weakness Policy shape the counterplay", "result": "PASS", "evidence": "T2 Armor Cannon into Incineroar, with the authored Defense and Sp.Def drops firing. Flash Fire and Weakness Policy both changed my play without needing to activate: I aimed no Fire move at it and used a deliberately neutral Pin Missile rather than a super-effective hit, and the Weakness Policy was ultimately removed by Knock Off rather than fed."},
+    {"check": "ALLY_COMBO - Helping Hand converts into a partner's kill", "result": "PASS", "evidence": "T3 Farigiraf used Helping Hand on Komala and Komala's boosted Body Slam then KOed a full 148 HP Intimidate Incineroar in one hit. That is the combo working, not a coincidence of damage rolls."},
+    {"check": "The AI makes a positional switch rather than sitting in a bad matchup", "result": "PASS (unscripted, worth noting)", "evidence": "T1, before anything resolved, Charlotte withdrew Komala - a pure Normal type with a Life Orb - and sent Armarouge in against my Mega Heracross. Getting the 2x Fighting target off the field on the turn the Mega appeared is a strong read and it is not something the plan text promises."}
+  ],
+  "protect_ledger": [
+    {"turn": "T6", "battler": "FARIGIRAF", "payoff": "real - at 26/157 it blocked Magnezone's Flash Cannon, which would have KOed it, and survived to force one more turn"}
+  ],
+  "protect_note": "Only one Protect in the whole battle and it was correct. Farigiraf attacked or supported on every other turn including several where it was at full HP and could have guarded reflexively. No empty or repetitive guarding to report.",
+  "ai_defects": [],
+  "level_changes": [],
+  "level_decision": "KEEP. Brief rule 5: won with 4 player faints after a genuinely close fight - I finished on two Pokemon, one of them at 49/100. This is the hardest fight in my block so far and it is nominally a 'casual' class trainer, which is worth flagging upward rather than compensating downward: no reduction is warranted (the win came on attempt 1) and no increase is remotely justified.",
+  "retest_status": "n/a - no level change.",
+  "cooler": "Keep it. This is a model Trick Room room: the setter also carries the ability that turns off the natural answer to Trick Room teams (priority), the two attackers are built to move first inside it, and the second setter means removing Farigiraf does not end the plan. Komala with Comatose is a genuinely inspired pick for a Trick Room team - a permanently-asleep Pokemon that cannot be slept, statused or woken, which quietly removes the other standard answer. One idea if this is ever revisited: Bouffalant and Komala are both pure Normal physical attackers and they died to the same move (Sacred Sword) on consecutive turns. Trading Bouffalant - the less distinctive of the two, with Soundproof doing nothing all battle - for a slow Ghost or Steel body would break up the shared Fighting weakness and give the room a second typing to defend. Farigiraf, Komala and Armarouge are all keepers.",
+  "authored_set_legality": "No legality problem found. Armor Tail, Comatose, Soundproof and Flash Fire were all live with the printed items, and the authored 0 Speed IVs on all four members behaved as intended under Trick Room.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
