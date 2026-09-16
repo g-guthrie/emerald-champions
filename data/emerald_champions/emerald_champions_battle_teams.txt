@@ -108,9 +108,9 @@ mega_slots: NONE
 plan: First two useful turns: Lotad chooses Rain Dance only when Ducklett's next attack and its own rain turns repay the support action; Ducklett can use Icy Wind or a safe attack while weather is established. Turn two exploits rain instead of resetting it unnecessarily. Alternate deployment: Lotad and Tandemaus combine weather pressure with Encore/Population Bomb rather than another Water attacker. Reserves & disruption: Ditto is a reactive reserve, not an arbitrary turn-one transformation. Ducklett Surf still hits Lotad despite its resistance; use a safe attack when ally damage loses the exchange. Counterplay & audit: Weather replacement, Wide Guard, Grass/Electric pressure, and denying a favorable Ditto target. Disposition: Preserve the rain lesson; attach an ally-damage decision to Surf rather than claiming rain partners are immune.
 crack: Weather replacement, Wide Guard, Grass/Electric pressure, and denying a favorable Ditto target. Disposition: Preserve the rain lesson; attach an ally-damage decision to Surf rather than claiming rain partners are immune.
 LOTAD @EVIOLITE SWIFT_SWIM TIMID 4/0/0/252/0/252 3 | RAIN_DANCE, MUDDY_WATER, GIGA_DRAIN, ICE_BEAM | ivs=31/31/31/31/31/31 | friendship=255
-DUCKLETT @EVIOLITE HYDRATION MODEST 252/0/4/252/0/0 2 | HURRICANE, SURF, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DUCKLETT @EVIOLITE HYDRATION MODEST 252/0/4/252/0/0 3 | HURRICANE, SURF, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 DITTO @CHOICE_SCARF IMPOSTER RELAXED 252/0/252/0/4/0 0 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
-TANDEMAUS @WIDE_LENS OWN_TEMPO JOLLY 4/252/0/0/0/252 1 | POPULATION_BOMB, SUPER_FANG, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TANDEMAUS @WIDE_LENS OWN_TEMPO JOLLY 4/252/0/0/0/252 2 | POPULATION_BOMB, SUPER_FANG, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0007 TRAINER_DARIAN class=regular
 strategy: SETUP,PRESSURE

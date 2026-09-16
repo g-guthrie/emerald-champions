@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "play_order": 6,
+  "e_group": "E0006",
+  "trainer": "TRAINER_BILLY",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "LOTAD L15 @EVIOLITE SWIFT_SWIM TIMID (Rain Dance/Muddy Water/Giga Drain/Ice Beam)",
+    "DUCKLETT L14 @EVIOLITE HYDRATION MODEST (Hurricane/Surf/Icy Wind/Protect)",
+    "DITTO L12 @CHOICE_SCARF IMPOSTER RELAXED (Transform)",
+    "TANDEMAUS L13 @WIDE_LENS OWN_TEMPO JOLLY (Population Bomb/Super Fang/Encore/Protect)"
+  ],
+  "authored_strategy_flags": "RAIN",
+  "party_manifest": "work/playtest/06-BILLY/party-a1.json",
+  "party_summary": "Magearna* + Snorlax leading; Arcanine / Iron Leaves* / Whimsicott / Weavile reserve. Iron Leaves entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 6001, "outcome": "won", "turns": 5, "decisions": 6,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.385,
+      "events": "work/playtest/06-BILLY/attempt-1-events.jsonl",
+      "narrative": "T1 Lotad set Rain Dance and Ducklett Protected away a 4x Thunderbolt; Body Slam took Lotad to 7. T2 Thunderbolt removed Ducklett and Body Slam removed Lotad, and Billy sent Tandemaus and Ditto, which Impostered my Magearna. T3 the Choice-Scarf Ditto clone opened with Fleur Cannon and OHKOd an 81 HP Snorlax while Population Bomb hit ten times; my Thunderbolt left the clone on 3 and paralysed. T4 Iron Leaves replaced Snorlax, Tandemaus Protected away a 2x Sacred Sword and Thunderbolt finished the clone. T5 Sacred Sword removed Tandemaus."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "RAIN: Rain Dance is established and the rain turns are repaid",
+     "result": "PASS (set up), WEAK (payoff)",
+     "evidence": "T1 Lotad used Rain Dance with both halves of the core healthy, which is the authored condition. The rain then lasted the whole fight but bought very little: Ducklett got exactly one rain-boosted turn before dying, and Lotad's own Muddy Water did 19 to a Thick Fat Snorlax. Set-up behaviour is correct; the rain core is too fragile to collect on it."},
+    {"check": "Turn two exploits the rain instead of resetting it",
+     "result": "PASS", "evidence": "T2 Lotad used Muddy Water, not a second Rain Dance."},
+    {"check": "Hurricane is 100% accurate in rain",
+     "result": "PASS", "evidence": "T2 Ducklett's Hurricane connected on Magearna for 15 with rain up."},
+    {"check": "Swift Swim doubles Lotad's Speed in rain",
+     "result": "PASS (weak evidence)", "evidence": "T2 Lotad moved before Snorlax. Snorlax is slow enough that Lotad would have outrun it anyway, so this is consistent with Swift Swim rather than proof of it."},
+    {"check": "Hydration cures status in rain",
+     "result": "NOT TESTED", "evidence": "Ducklett was never statused."},
+    {"check": "Ditto is a reactive reserve, not an arbitrary turn-one transformation",
+     "result": "PASS, and it was the best AI play of the block",
+     "evidence": "Ditto was held back and entered on T2 as a forced replacement, Impostered my Magearna including the Soul-Heart Sp.Atk +2 it had already accumulated, and then used its Choice Scarf to move first and OHKO an 81 HP Snorlax with Fleur Cannon. The dossier's counterplay line 'denying a favourable Ditto target' is exactly the lesson, and I failed it by leaving a boosted Magearna in the slot Ditto would copy."},
+    {"check": "Ducklett does not Surf into its own Lotad when ally damage loses the exchange",
+     "result": "PASS", "evidence": "Surf was never selected while Lotad was alive; Ducklett used Protect then single-target Hurricane. This is the specific behaviour the disposition line asks for."},
+    {"check": "Population Bomb reaches full multi-hit with Wide Lens",
+     "result": "PASS", "evidence": "T3 'The Pokemon was hit 10 times!' against Snorlax."},
+    {"check": "Encore is used when a locked or wasted opposing move is available",
+     "result": "NOT TESTED", "evidence": "Tandemaus never selected Encore in its three turns. No clearly correct Encore target existed - neither of my battlers was locked - so this is not scored as a defect."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.385 s maximum, the highest measured in the block so far."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "DUCKLETT", "payoff": "EXCELLENT - blocked a Thunderbolt that was 4x on Water/Flying and a guaranteed OHKO."},
+    {"turn": 4, "user": "TANDEMAUS", "payoff": "EXCELLENT - blocked a 2x Sacred Sword from a 130-base-Attack Iron Leaves, which was lethal on its 40 HP."}
+  ],
+  "empty_protects": 0,
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "The Imposter sequence (hold Ditto back, copy the opponent's boosted attacker, convert the Choice Scarf into a first-mover OHKO) is a genuinely strong piece of play and is the only thing in this block that has taken a full-HP party member off the board in one action.",
+    "Both Protects blocked guaranteed kills and neither was repeated into the following turn.",
+    "Ducklett declining Surf while its Lotad partner was alive is precisely the ally-damage decision the disposition line asks for, and it held even when Surf would have hit both my battlers."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Borderline case. One player faint and a genuine threat moment argue for keep; a five-turn win in which half the team contributed nothing argues for +1. Split the difference: raise the two members that died before their sets could appear, leave the two that performed.",
+    "changes": [
+      {"member": "DUCKLETT", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15},
+      {"member": "TANDEMAUS", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14}
+    ],
+    "unchanged": [
+      {"member": "DITTO", "offset": 0, "reason": "functionally the ace - it made the only KO of the fight. The brief says not to raise the ace first, and Ditto's level is also the one number that silently scales the clone's HP."},
+      {"member": "LOTAD", "offset": 3, "reason": "already the highest member and it did its authored job (Rain Dance on turn one, exploit on turn two)."}
+    ],
+    "reasoning": "Ducklett is the rain payoff piece and it got exactly one rain-boosted turn before dying; +1 is the minimum needed for Hurricane, Icy Wind and Hydration to appear at all. Tandemaus is the lowest non-Ditto member and it played well enough to deserve the extra level rather than be written off.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "Yes, and the fix is structural rather than cosmetic.",
+    "keep": "A Choice Scarf Imposter Ditto held in reserve, turning the player's own best attacker against them at the moment of a forced switch, is the single coolest idea in this block. It teaches a real lesson - do not leave your boosted sweeper in the slot Ditto will copy - and it landed.",
+    "suggestion": "The rain half and the Ditto half do not talk to each other. Lotad and Ducklett spend two turns setting weather that Ditto and Tandemaus cannot use, and the fight is effectively two separate two-mon teams played in sequence. Giving Tandemaus or Ditto's likely copy target a rain payoff - or replacing Ducklett with a Swift Swim partner that threatens immediately rather than needing a turn - would make the whole team one idea instead of two.",
+    "second_thought": "Rain Dance on the lowest-bulk member is the recurring problem in this block (compare Spinarak in E0003): the piece that carries the concept is the piece that dies first. Moving Rain Dance onto Ducklett, which has Eviolite and 54 HP, and giving Lotad an immediate Swift Swim attacking role, would protect the concept without changing a single species.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": [
+    "Player-side note for later agents: do not lead a Soul-Heart Magearna against this trainer without a plan for Ditto. The clone inherits every accumulated Sp.Atk stage, and the Choice Scarf makes it move first.",
+    "Pool chronology caveat carried from play_order 1."
+  ]
+}
