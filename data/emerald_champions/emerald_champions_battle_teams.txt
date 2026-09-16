@@ -3633,11 +3633,11 @@ mega_slots: 6
 ai: Double Ace Pokemon
 plan: Concept: room six - the artillery room. Mega Launcher pulses, a Water Bubble spider that doubles its own Water damage, and a cormorant that spits its catch back at whoever hit it. First two useful turns: Carracosta takes a Shell Smash only when Araquanid's attack or Wide Guard buys a survivable window; unlike every other Shell Smash in the gym this one holds a Weakness Policy rather than a White Herb, so the Defence drops stay and the gamble is real - the payoff is that a super-effective hit raises both attacking stats by two more stages on top. Turn two uses the actual boosts and Policy state. Alternate deployment: Tentacruel's Liquid Ooze punishes Giga Drain, Leech Life and Draining Kiss by damaging the drainer instead of healing it, which is a specific and nasty answer to the Grass types brought to beat a Water gym; it fronts for Choice Specs Clawitzer, whose Mega Launcher raises every pulse move by half again. Reserves & disruption: Cramorant is the room's signature - after it uses Surf it holds a catch, and the next attacker to strike it takes damage and either a Defence drop or paralysis in return, whichever form it swallowed. Relicanth-free Rock coverage comes from Carracosta's Stone Edge. Note Surf also hits the ally slot, which is why Cramorant is paired with the Water-resistant members rather than the frail ones. Could this team be cooler? Yes, and this is the room that gained the most. Carracosta's Policy gamble and Clawitzer's pulse artillery were good, but the roster around them was the campaign's third and fourth Tentacruel-and-Relicanth pairing, and Relicanth's Choice Band anvil belonged in the Trick Room room instead. Cramorant is the concrete upgrade: Gulp Missile is one of the most distinctive doubles mechanics in the series and appears nowhere else in this campaign, it gives the player a real reason to think before attacking a seemingly harmless bird, and it turns a generic bulky-Water room into the one room people will describe afterwards. Overrepresented? Cramorant and Clawitzer appear only here; Araquanid's other owner is the route trainer Linda with a Sticky Web set; Tentacruel keeps this Liquid Ooze slot and is removed from Archie and from Owen in Victory Road; Relicanth moves to Brianna. Levels: cap 84, offsets 2/2/2/2/2/3.
 crack: Grass and Electric attacks cover the room, but do not drain against Liquid Ooze. Attack Carracosta with a neutral hit so the Weakness Policy never fires, and finish it with priority once the Defence drops land. Do not strike Cramorant after it has surfaced; kill it from range or let it waste the catch. Wide Guard blanks Surf and Muddy Water.
-CARRACOSTA @WEAKNESS_POLICY SOLID_ROCK ADAMANT 252/252/4/0/0/0 2 | SHELL_SMASH, LIQUIDATION, STONE_EDGE, AQUA_JET | ivs=31/31/31/31/31/31 | friendship=255
+CARRACOSTA @WEAKNESS_POLICY SOLID_ROCK ADAMANT 252/252/4/0/0/0 3 | SHELL_SMASH, LIQUIDATION, STONE_EDGE, AQUA_JET | ivs=31/31/31/31/31/31 | friendship=255
 ARAQUANID @SITRUS_BERRY WATER_BUBBLE ADAMANT 252/252/4/0/0/0 2 | LIQUIDATION, LEECH_LIFE, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CRAMORANT @MYSTIC_WATER GULP_MISSILE MODEST 252/0/4/252/0/0 2 | SURF, HURRICANE, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 TENTACRUEL @BLACK_SLUDGE LIQUID_OOZE CALM 252/0/4/0/252/0 2 | MUDDY_WATER, SLUDGE_BOMB, RAPID_SPIN, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-CLAWITZER @CHOICE_SPECS MEGA_LAUNCHER MODEST 4/0/0/252/0/252 2 | WATER_PULSE, DARK_PULSE, AURA_SPHERE, DRAGON_PULSE | ivs=31/0/31/31/31/31 | friendship=255
+CLAWITZER @CHOICE_SPECS MEGA_LAUNCHER MODEST 4/0/0/252/0/252 3 | WATER_PULSE, DARK_PULSE, AURA_SPHERE, DRAGON_PULSE | ivs=31/0/31/31/31/31 | friendship=255
 BLASTOISE @BLASTOISINITE TORRENT MODEST 4/0/0/252/0/252 3 | WATER_PULSE, AURA_SPHERE, DARK_PULSE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0465 TRAINER_TIFFANY class=gym
@@ -3647,8 +3647,8 @@ plan: Concept: room seven - the tide pool, built entirely on Water Absorb. Three
 crack: Grass attacks ignore the whole absorption plan and hit almost everything twice as hard; Electric answers Vaporeon and Mantine. Taunt stops Wish and Shell Smash. Attack Barbaracle or Feraligatr and the engine's own Surf becomes a liability the AI has to route around.
 VAPOREON @LEFTOVERS WATER_ABSORB CALM 252/0/4/0/252/0 2 | SURF, ICE_BEAM, WISH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 SEISMITOAD @SITRUS_BERRY WATER_ABSORB MODEST 252/0/4/252/0/0 2 | HYDRO_PUMP, EARTH_POWER, SLUDGE_BOMB, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MANTINE @ASSAULT_VEST WATER_ABSORB CALM 252/0/4/0/252/0 2 | SCALD, AIR_SLASH, ICE_BEAM, HELPING_HAND | ivs=31/0/31/31/31/31 | friendship=255
-WHISCASH @ASSAULT_VEST OBLIVIOUS ADAMANT 252/252/4/0/0/0 2 | LIQUIDATION, STOMPING_TANTRUM, ZEN_HEADBUTT, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
+MANTINE @ASSAULT_VEST WATER_ABSORB CALM 252/0/4/0/252/0 3 | SCALD, AIR_SLASH, ICE_BEAM, HELPING_HAND | ivs=31/0/31/31/31/31 | friendship=255
+WHISCASH @ASSAULT_VEST OBLIVIOUS ADAMANT 252/252/4/0/0/0 3 | LIQUIDATION, STOMPING_TANTRUM, ZEN_HEADBUTT, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 BARBARACLE @WHITE_HERB TOUGH_CLAWS ADAMANT 4/252/0/0/0/252 2 | SHELL_SMASH, LIQUIDATION, STONE_EDGE, CROSS_CHOP | ivs=31/31/31/31/31/31 | friendship=255
 FERALIGATR @LIFE_ORB SHEER_FORCE JOLLY 4/252/0/0/0/252 3 | LIQUIDATION, ICE_PUNCH, CRUNCH, DRAGON_DANCE | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -3660,8 +3660,8 @@ crack: Kill Palafin before it ever leaves the field and Hero Form never happens.
 PALAFIN @LEFTOVERS ZERO_TO_HERO JOLLY 4/252/0/0/0/252 2 | JET_PUNCH, WAVE_CRASH, FLIP_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BARRASKEWDA @CHOICE_BAND PROPELLER_TAIL JOLLY 4/252/0/0/0/252 2 | LIQUIDATION, CLOSE_COMBAT, AQUA_JET, CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
 AZUMARILL @SITRUS_BERRY HUGE_POWER ADAMANT 252/252/4/0/0/0 2 | BELLY_DRUM, AQUA_JET, PLAY_ROUGH, ICE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-GRENINJA @LIFE_ORB PROTEAN TIMID 4/0/0/252/0/252 2 | HYDRO_PUMP, DARK_PULSE, ICE_BEAM, U_TURN | ivs=31/0/31/31/31/31 | friendship=255
-INTELEON @FOCUS_SASH SNIPER TIMID 4/0/0/252/0/252 2 | HYDRO_PUMP, ICE_BEAM, DARK_PULSE, U_TURN | ivs=31/0/31/31/31/31 | friendship=255
+GRENINJA @LIFE_ORB PROTEAN TIMID 4/0/0/252/0/252 3 | HYDRO_PUMP, DARK_PULSE, ICE_BEAM, U_TURN | ivs=31/0/31/31/31/31 | friendship=255
+INTELEON @FOCUS_SASH SNIPER TIMID 4/0/0/252/0/252 3 | HYDRO_PUMP, ICE_BEAM, DARK_PULSE, U_TURN | ivs=31/0/31/31/31/31 | friendship=255
 KINGLER @KINGLERITE HYPER_CUTTER ADAMANT 4/252/0/0/0/252 3 | CRABHAMMER, KNOCK_OFF, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0467 TRAINER_ANNIKA class=gym
