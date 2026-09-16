@@ -1,0 +1,69 @@
+{
+  "play_order": 141,
+  "e_group": "E0167",
+  "trainer": "TRAINER_BERKE",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "room_thesis": "The cold room - where Normal moves stop being Normal. Snow Warning plus Refrigerate.",
+  "cap": 42,
+  "difficulty": "medium",
+  "mega_slots": 2,
+  "ai_trait": "Double Ace Pokemon",
+  "resolved_opponent_levels": {"AURORUS": 42, "GLALIE": 39, "EXPLOUD": 42, "CETITAN": 42, "STOUTLAND": 42, "KANGASKHAN": 42},
+  "cap_window_confirmation": "Authored offsets 2/-1/2/2/2/2 resolved to 42/39/42/42/42/42, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42.",
+  "party_manifest": "work/playtest/141-TRAINER_BERKE/party.json",
+  "pre_declared_strategy_checks": [
+    "Snow Warning sets snow the moment Aurorus enters",
+    "Blizzard is 100 percent accurate in snow",
+    "Snow raises every Ice type's Defense by 50 percent and deals no chip damage",
+    "Mega Glalie gains Refrigerate and its Double-Edge becomes Ice-type; Ice Shard is already Ice and gains only priority",
+    "Cetitan's Slush Rush doubles its Speed in snow",
+    "Exploud's Throat Spray fires on its first sound move",
+    "Scrappy on Exploud and Kangaskhan lets their Normal and Fighting moves hit Ghost types",
+    "Replacing the weather removes Blizzard accuracy, Slush Rush and the Ice Defense boost in one move - the dossier's named counterplay",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/141-TRAINER_BERKE/a1", "seed": 141, "outcome": "won", "turns": 7, "decisions": 10, "player_faints": 2, "opponent_faints": 6,
+     "narrative": "T0 the board already showed B_WEATHER_SNOW before I gave a command - Snow Warning fires on entry. T1 Aurorus Protected a 4x Adaptability Meteor Mash while Mega Glalie came online and used Ice Shard; Kartana's Sacred Sword took Mega Glalie to 27 of 123. T2 Meteor Mash killed a 194 HP Aurorus outright, and Glalie Protected the Sacred Sword aimed at it at 27 HP. T3 was the room's best turn: Cetitan's Slush Rush doubled its base 73 Speed in the snow, so it moved before my base 112 Mega Lucario and High Horsepower - 2x into Steel/Fighting - killed my Mega from full. Sacred Sword finished Glalie. T4 I sent Torkoal purely to test the weather replacement and the board flipped to B_WEATHER_SUN_NORMAL on its entry; Stoutland's Intimidate landed and then Stoutland and Cetitan killed Torkoal before it could use Eruption. From there the fight was Kartana's Sacred Sword, which is 2x into five of Berke's six and gains a Beast Boost Attack stage on every KO: it reached +3 and removed Stoutland, Cetitan and Exploud on consecutive turns while Chandelure covered the sun-boosted Fire damage. Kangaskhan got one Fake Out before dying."}
+  ],
+  "strategy_checks": [
+    {"check": "Snow Warning on entry", "result": "PASS", "evidence": "Weather read B_WEATHER_SNOW at turn 0, before any command was submitted."},
+    {"check": "Blizzard 100 percent accurate in snow", "result": "NOT OBSERVED", "evidence": "Aurorus selected MOVE_BLIZZARD on turn 2 and died to Meteor Mash before it resolved. The selection is correct; the accuracy claim is untested because Aurorus never landed one."},
+    {"check": "Snow raises Ice-type Defense and deals no chip", "result": "PASS on chip, INFERRED on Defense", "evidence": "'Snow continues to fall.' printed every turn with no damage message for any battler, on either side. The Defense boost cannot be isolated from a single sample, but it is consistent with Cetitan surviving a +0 Sacred Sword at 2x for 158 of 234."},
+    {"check": "Mega Glalie Refrigerate", "result": "PASS on the ability, NOT OBSERVED on Double-Edge", "evidence": "Glalie Mega Evolved on turn 1 and the battler reported ABILITY_REFRIGERATE. It used Ice Shard twice and never got to Double-Edge - which, as the dossier itself notes, is the move Refrigerate actually converts. Ice Shard gained only priority, exactly as the dossier says it would. The signature line of the room therefore did not appear."},
+    {"check": "Cetitan Slush Rush", "result": "PASS, and it cost me my Mega", "evidence": "Turn 3: Cetitan moved before a base 112 Mega Lucario and killed it with a 2x High Horsepower. Cetitan's base Speed is 73; doubled in snow it beats 112. This is the single most effective thing Berke's room did and it is precisely what the ability is for."},
+    {"check": "Exploud Throat Spray", "result": "NOT OBSERVED", "evidence": "Exploud entered last, used Protect twice and died to a +3 Sacred Sword without ever using Hyper Voice. Throat Spray was still held at the moment it died."},
+    {"check": "Scrappy on Exploud and Kangaskhan", "result": "PASS, partially", "evidence": "Kangaskhan's Fake Out hit and flinched my Chandelure - a Ghost type - with a critical hit. Without Scrappy that move is 0x. This is the room's designed answer to the Ghost counterplay and it worked on its one opportunity. Exploud never attacked."},
+    {"check": "Weather replacement is real counterplay", "result": "PASS", "evidence": "Torkoal's Drought overwrote Snow Warning on the switch-in: the board went from B_WEATHER_SNOW to B_WEATHER_SUN_NORMAL in the same message block as 'Go! Torkoal!'. From that point Cetitan was an ordinary base 73 Speed battler, Blizzard would have been 70 percent accurate, and the Ice Defense boost was gone. The sun then boosted my own Fire damage for the rest of the fight - it persisted for five turns and outlived the Torkoal that set it, which is the same pattern I saw with Cryogonal's snow at play_order 96. The dossier's crack line is accurate and the trade is honest: Torkoal is 2x to Ground and this room has two Ground moves, so it paid for the weather with its life."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS, all four", "evidence": "See the ledger. Four guards, four payoffs, no consecutive repeats."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "AURORUS", "payoff": "EXCELLENT. Blocked a 4x Adaptability Meteor Mash on turn one - Steel is 4x into Rock/Ice and that exact move killed Aurorus from full HP the following turn. Guarding against the single lethal attack on the board is correct even though it only delayed it by a turn."},
+    {"turn": 2, "battler": "GLALIE_MEGA", "payoff": "EXCELLENT. At 27 of 123 HP, blocked the 2x Sacred Sword aimed at it. Lethal-range guard, not a repeat, and it bought Glalie the turn in which it used Ice Shard."},
+    {"turn": 5, "battler": "CETITAN", "payoff": "GOOD. At 90 of 234 HP with the sun up, blocked a sun-boosted Flamethrower, which is 2x into Ice. Another lethal-range guard."},
+    {"turn": 7, "battler": "EXPLOUD", "payoff": "GOOD. Blocked a sun-boosted Flamethrower on its arrival turn. It died to the Sacred Sword it could not block, but the guard itself denied real damage."}
+  ],
+  "protect_ledger_note": "Four guards in seven turns from four different battlers, every one of them at or near lethal range against the specific attack that would have killed the user. No empty guards, no consecutive repeats. Together with George's room this is the best guard play in my block.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Cetitan outspeeding a Mega Lucario through Slush Rush and choosing the 2x Ground move is the room's high point and is worth preserving exactly as it is.",
+    "Kangaskhan's Scrappy Fake Out into a Ghost type shows the AI is aware that Scrappy removes the immunity - it chose the move that would otherwise have been illegal to select profitably.",
+    "Four different battlers each made one well-timed guard and none of them repeated. This room did not reproduce the consecutive-Protect defect from Alan's team at play_order 137.",
+    "AI decision time peaked at 1.038 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"trainer": "TRAINER_BERKE", "member": "AURORUS", "offset_before": 2, "offset_after": 3, "level_before": 42, "level_after": 43,
+     "rule_applied": "Brief rule 5 / AGENTS.md Gym scrutiny: won on the first optimized attempt with only 2 player faints against a six-member Gym room, which triggers review of a level increase on the weakest one or two members, never the Mega first. Mega Glalie is at -1 and is excluded as the Mega.",
+     "reasoning": "Aurorus is the room's entire weather engine and it died on turn two to a single attack without landing a Blizzard. Every other member's identity - Cetitan's Slush Rush, Glalie's snow-boosted Defense, Blizzard accuracy - depends on it surviving. It has 194 HP and base 73 Special Defense with no Special Defense investment, which is not enough to take one super-effective hit from a cap-42 Mega. One level will not save it from a 4x Meteor Mash, and I say that plainly, but of the five members tied at +2 it is the one whose survival most changes the room."},
+    {"trainer": "TRAINER_BERKE", "member": "EXPLOUD", "offset_before": 2, "offset_after": 3, "level_before": 42, "level_after": 43,
+     "rule_applied": "Same rule, second of the two weakest.",
+     "reasoning": "Exploud got two actions, both Protect, and died without ever using an attacking move or triggering its Throat Spray. It is the alternate-deployment half of the room ('Exploud beside Kangaskhan is the pure-Normal mode') and it contributed nothing. Cetitan, Stoutland and Kangaskhan all did their jobs and are left alone; Cetitan in particular killed my Mega and should not be touched."}
+  ],
+  "rerun": "Not performed in this pass. Level offsets only reach the battle through scripts/emerald_champions_teams.py --write plus a ROM rebuild, and this brief forbids running make. The rerun belongs to the main agent's post-materialization pass.",
+  "calibration": "Won on the first optimized attempt with 2 of 6 player faints - one of them my Mega Evolution - which sits just under the AGENTS.md three-faint threshold and triggers review rather than an automatic change. I have raised the two members that contributed least, but I want to be clear that levels are not this room's problem and the +2 above will not change the outcome. The problem is structural and is described below.",
+  "could_this_be_cooler": "The concept is strong and the dossier's own revision - replacing a Steel-type Perrserker with Aurorus to give the room a real weather engine - was clearly the right call. But the room has a uniform weakness that a level cannot touch: Aurorus, Glalie and Cetitan are Ice, and Exploud, Stoutland and Kangaskhan are Normal, so FIGHTING is 2x into all six and 4x into Aurorus. My Kartana's Sacred Sword is a single move that hits every member of the room super-effectively, ignores stat changes, and feeds Beast Boost an Attack stage on every KO; it reached +3 and removed the last three members on consecutive turns. That is not a clever line, it is the only line, and any cap-42 player who notices that Ice and Normal share a Fighting weakness gets the same result. Two concrete suggestions, neither implemented. First, the room wants one member that punishes a Fighting attacker - a Flying, Psychic or Fairy type would break the single-move answer without touching the cold theme, and Aurorus's Rock half already hints at the space. Second, and more important for the room's own identity: the two things the player is supposed to remember - an always-accurate Blizzard from a fossil and a Mega Glalie throwing Ice-type Double-Edges - both failed to appear, because Aurorus died before its first Blizzard and Glalie only ever reached Ice Shard. Mega Glalie is at -1 with 123 HP; it is the room's signature and it is also its second-most-fragile body. Cetitan is the member that actually delivered: Slush Rush turning a slow whale into something that outspeeds a Mega Lucario is a genuinely memorable moment and it should be protected in any revision."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
