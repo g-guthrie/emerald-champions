@@ -1,0 +1,55 @@
+{
+  "play_order": 156, "e_group": "E0208", "trainer": "TRAINER_MEL_AND_PAUL", "class": "regular",
+  "location": "Route109", "chapter": "Feather Badge - optional Surf backtrack", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - Illumise 48-1-2=45, Mega Butterfree 48+0-2=46, Volbeat 48+1-2=47, Dustox 48+1-2=47, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/156-TRAINER_MEL_AND_PAUL/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 89, "party": "party-a1.json", "outcome": "driver stall", "turns": 1, "player_faints": 0, "opponent_faints": 1,
+     "note": "Turn 1 resolved normally and Mega Butterfree fainted to a Flare Blitz while its partner Illumise survived. The driver then sat at phase 'running' with an empty awaiting_now and an empty pending_decision, and refused further act calls with 'not at a decision point'. Run directory kept at run-a1 and its log copied to stalled-a1-events.jsonl. See defect P13-D8."},
+    {"attempt": 2, "seed": 97, "party": "party-a1.json", "outcome": "driver stall", "turns": 1, "player_faints": 0, "opponent_faints": 1,
+     "note": "Same line on a different seed, identical stall at the identical point. Reproducible, not RNG. Log copied to stalled-a2-events.jsonl."},
+    {"attempt": 3, "seed": 101, "party": "party-a1.json", "outcome": "won", "turns": 7, "player_faints": 1, "opponent_faints": 4,
+     "note": "Same party, opening changed to avoid a single opponent faint on turn 1 (Fake Out plus Flash Cannon instead of Flare Blitz). The battle then ran to completion with no further trouble, including a turn where both opponents fainted at once and both replacements arrived cleanly. Fire being 2x on all four bugs decided it; my only faint was Incineroar to its own Flare Blitz recoil."}
+  ],
+  "strategy_checks": [
+    {"check": "Illumise chooses Tailwind, Encore or Helping Hand to enable the partner", "result": "PASS", "evidence": "turn 1 Helping Hand onto Butterfree; turn 2 a Prankster Encore that locked my Assault Vest Magnezone into Flash Cannon at priority. Encoring the wall rather than the attacker is a genuinely good use of the move. Tailwind was never needed."},
+    {"check": "Butterfree takes a safe Quiver Dance when the turn is bought", "result": "PASS", "evidence": "turn 1 Quiver Dance behind Illumise's Helping Hand, reaching +1/+1/+1; Dustox did the same later and reached +2 across two turns."},
+    {"check": "Volbeat passes actual Tail Glow boosts to a legal receiver", "result": "FAIL", "evidence": "Volbeat never used Tail Glow and never used Baton Pass. It spent its two turns on Protect and Bug Buzz. The Prefer Baton Pass trait produced no pass at any point in the battle - see AI defect P13-D9."},
+    {"check": "Baton Pass requires an available receiver, correct ownership and preserved stages", "result": "NOT EXERCISED", "evidence": "the precondition never existed because no Tail Glow was ever used."},
+    {"check": "Dustox is the survivor that makes the chain work twice", "result": "PARTIAL", "evidence": "Dustox was genuinely the last one standing and Quiver Danced twice behind Shield Dust, so the survivor half is real - but there was no chain for it to repeat."},
+    {"check": "Compound Eyes makes Mega Butterfree's Hurricane unmissable", "result": "NOT EXERCISED", "evidence": "Butterfree used Quiver Dance and then Bug Buzz; Hurricane never came up on either board."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "VOLBEAT", "payoff": "REAL - blocked Incineroar's Flare Blitz, a 2x hit that was a clean one-shot, and Volbeat survived to attack on the following turn"}
+  ],
+  "ai_defects": [
+    {
+      "id": "P13-D8",
+      "severity": "DRIVER defect, not AI - reproducible",
+      "turn": 1,
+      "board": "two-owner battle. Mega Butterfree (B3) faints as the last action of turn 1 while its partner Illumise (B1) survives",
+      "chosen": "n/a - the driver stops responding",
+      "problem": "After that single opponent faint, battle_driver.py reports phase 'running' with awaiting_now empty and pending_decision empty, and every subsequent act call is refused with 'not at a decision point (phase=running)'. state never advances past it and the battle cannot be continued. Reproduced on two independent seeds (89 and 97) with identical inputs, so it is deterministic rather than RNG.",
+      "better": "The narrowing evidence: a turn in which BOTH opponents fainted at once resolved cleanly and both replacements arrived (attempt 3, turn 2), and turns with no opponent faint resolved cleanly. The trigger therefore looks like exactly one owner in a two-owner battle needing a replacement while the other owner's battler is still on the field. The E0409 two-owner smoke fixture is the obvious place to check. Per the brief I recorded the failure and worked around it rather than touching the driver; run-a1 and run-a2 are preserved with their logs for whoever picks this up.",
+      "workaround_used": "Changed the turn-1 line so no opponent fainted that turn; the battle then completed normally."
+    },
+    {
+      "id": "P13-D9",
+      "severity": "design gap, not illegal",
+      "turn": "3-5",
+      "board": "Volbeat beside Dustox, both healthy, against a board where a Tail Glow would have been survivable behind Volbeat's own Protect",
+      "chosen": "Volbeat used Protect and then Bug Buzz; it never used Tail Glow or Baton Pass",
+      "problem": "Tail Glow plus Baton Pass into a Compound Eyes Mega Butterfree is the four-card chain the dossier says the team is explicitly built around, and it is why the Prefer Baton Pass trait was added. Across a complete battle the trait produced neither half of it. This is the third encounter in this block where a printed signature interaction never fired - Norman's Follow Me and Jani's Costar pass are the other two - and all three are voluntary support decisions rather than damage choices.",
+      "better": "Worth looking at how setup-and-pass moves are scored for a support-slot Pokemon that has a legal receiver on the bench. Not an illegal choice, so recorded as a gap."
+    }
+  ],
+  "level_changes": [
+    {"trainer": "TRAINER_MEL_AND_PAUL", "member": "ILLUMISE", "before": -1, "after": 0},
+    {"trainer": "TRAINER_MEL_AND_PAUL", "member": "VOLBEAT", "before": 1, "after": 2}
+  ],
+  "calibration_reasoning": "The completed attempt was a win with one player faint, and that faint was Incineroar killing itself on Flare Blitz recoil rather than anything Mel and Paul did, so the brief's '+1 on the weakest one or two members' condition applies. The two driver stalls are not losses and are not counted as attempts against the encounter. Mega Butterfree is excluded from a first increase as the Mega. Illumise at -1 is the lowest offset and goes to 0. Volbeat takes the second level at 1 -> 2 because it is the piece the whole authored chain depends on and it needs to survive a turn it currently does not get.",
+  "rerun_status": "NOT RERUN. The driver reads trainer parties from the prebuilt ROM in work/agent-battle-build-2 and this agent is instructed never to run make; the teams-file edit is left uncommitted for the main agent's wave-boundary rebuild.",
+  "could_this_be_cooler": "Keep the composition - two Prankster bugs, a Tail Glow passer and a Compound Eyes Mega receiver is one of the more inventive ideas in the range, and one half of it is excellent in play: Illumise's Prankster Encore locking an Assault Vest wall into a single move at priority is exactly the kind of thing a multi-battle regular should be doing, and Mega Butterfree did get a free Quiver Dance behind a Helping Hand. The other half did not happen at all (defect P13-D9), and there is a structural reason as well as an AI one: every member of this team is 2x to Fire and 2x to Flying, so one Incineroar one-shots the entire roster and nobody survives long enough to set up, pass, or receive. The cheapest fix that preserves the concept is ordering rather than composition - lead Volbeat beside Dustox, the two bodies that can actually take a hit, and hold Illumise and Mega Butterfree as the payoff pair rather than the opening pair. Recommended, not applied in this pass.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}

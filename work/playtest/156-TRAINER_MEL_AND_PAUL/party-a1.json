@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0208 TRAINER_MEL_AND_PAUL (Route109, Feather Badge - optional Surf backtrack, cap 48, Medium)",
+  "availability_audit": "Route 109 is the Slateport beach, reachable on the Surf backtrack after the Balance Badge; battle index window 48-60, floor 48. Every member is gated at 36 or below in pool-48.json: Torracat line (36), New Mauville entrance via Wattson's Basement Key (30), Sneasel (14), Togepi Route 102 plus Shiny Stone (24), AlteringCave_1F (14), Granite Cave Abra plus Slateport Linking Cord (20). All precede the Surf backtrack. No legendaries, Ultra Beasts or Paradox species.",
+  "plan": "Four bugs behind two Pranksters and a Baton Pass chain. The single most important fact is that Prankster's priority does not apply to status moves aimed at a Dark-type, so Incineroar, Weavile and Spiritomb each turn off the Encore and the priority half of Illumise's and Volbeat's kit by existing. Incineroar is also the damage answer - Fire is 2x on all four - and its Fake Out denies the opening Tailwind or Tail Glow turn. Magnezone is the wall: Steel resists Bug Buzz, Hurricane, Giga Drain and Dazzling Gleam and is outright immune to Sludge Bomb, so nothing Mel and Paul own hits it for even neutral damage, while Thunderbolt is 2x back into Mega Butterfree. Togekiss's Flying is 2x on the whole team. The thing to break is the chain: Volbeat's Prankster Tail Glow is a three-stage Special Attack boost that Baton Passes into a Compound Eyes Mega Butterfree whose Hurricane then cannot miss, so the pass receiver - not the passer - is where the pressure belongs.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DARKEST_LARIAT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Dark typing turns off Prankster priority against it; Fire is 2x on all four and Fake Out denies the first setup turn",
+      "availability": "pool-48 gate 36: Torracat level evolution from the Litten line in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ANALYTIC",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Steel resists or is immune to every attacking move on Mel and Paul's four; Thunderbolt is 2x on Mega Butterfree",
+      "availability": "pool-48 gate 30: NewMauville_Entrance land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "second Dark body and second Fake Out; Ice is 2x on Mega Butterfree and Ice Shard is priority onto a boosted pass receiver",
+      "availability": "pool-48 gate 14: Sneasel level/condition evolution."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "Flying is 2x on all four and Serene Grace Air Slash flinches; a Tailwind of my own answers theirs",
+      "availability": "pool-48 gate 24: Togepi Route 102, friendship evolution, Shiny Stone from the Slateport Mart."
+    },
+    {
+      "species": "SPECIES_SPIRITOMB",
+      "moves": [
+        "MOVE_WILL_O_WISP",
+        "MOVE_DARK_PULSE",
+        "MOVE_FOUL_PLAY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "third Prankster-proof Dark body; a bulky answer to a passed Tail Glow that does not fold to one Bug Buzz",
+      "availability": "pool-48 gate 14: AlteringCave_1F land table."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest battler; Psychic is 2x on Dustox and the speed is what removes a pass receiver before it moves",
+      "availability": "pool-48 gate 20: Abra GraniteCave_1F, Kadabra evolution, Linking Cord from the Slateport evolution stock."
+    }
+  ]
+}
