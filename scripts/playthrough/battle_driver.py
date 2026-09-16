@@ -58,6 +58,8 @@ GIMMICKS = ['none', 'mega', 'ultra_burst', 'z_move', 'dynamax', 'tera']
 OUTCOMES = {0: 'ongoing', 1: 'won', 2: 'lost', 3: 'drew', 4: 'ran', 5: 'player_teleported',
             6: 'mon_fled', 7: 'caught', 8: 'no_safari_balls', 9: 'forfeited', 10: 'mon_teleported'}
 TERRAINS = ['none', 'grassy', 'misty', 'electric', 'psychic']
+# Mirrors enum EmeraldChampionsAgentSwitchBlock; index 0 means the switch is legal.
+SWITCH_BLOCKS = ['', 'battle_arena', 'commander', 'trapped', 'ability_prevents_escape']
 MOVE_TARGETS = ['none', 'selected', 'smart', 'depends', 'opponent', 'random', 'both', 'user',
                 'ally', 'user_and_ally', 'user_or_ally', 'foes_and_ally', 'field',
                 'opponents_field', 'all_battlers']
@@ -136,7 +138,9 @@ def parse_enum(path, prefix):
                 continue
         counter = value + 1
         values[name] = value
-        if name.startswith(prefix) and 'COUNT' not in name:
+        # Skip only the plural sentinels (MOVES_COUNT, MOVES_COUNT_GEN2), never a
+        # real member whose name merely starts that way, such as MOVE_COUNTER.
+        if name.startswith(prefix) and not re.search(r'_COUNT(_|$)', name):
             names.setdefault(value, name)
     return names, values
 
@@ -459,10 +463,17 @@ def decode_state(session, words):
                                 else str(target_type)),
                 'targets': sorted({t for t in range(4) if (mask >> t) & 1} | {index}),
             })
+        blocker = (switch >> 16) & 0xFF
+        refused = (switch >> 24) & 0xFF
         return {
             'battler': index,
             'species': actives[index]['species'],
             'may_switch': bool(switch & 0x100),
+            # The engine's own switch gate: Shadow Tag and friends, the trapping
+            # moves and volatiles, Battle Arena and Commander. Empty means legal.
+            'switch_blocked_by': ([SWITCH_BLOCKS[blocker]] if blocker else []),
+            # Set when the engine refused the switch this driver last submitted.
+            'switch_last_refused': SWITCH_BLOCKS[refused] if refused else None,
             'switch_slots': [s for s in range(6) if (switch >> s) & 1],
             'moves': moves,
         }
@@ -719,8 +730,11 @@ def command_act(args):
             if slot not in entry['switch_slots']:
                 fail(f'battler {battler} cannot switch to slot {slot}; '
                      f'legal={entry["switch_slots"]}')
+            if state['phase'] == 'await_action' and entry['switch_blocked_by']:
+                fail(f'battler {battler} cannot switch this turn: '
+                     f'{entry["switch_blocked_by"][0]}')
             if state['phase'] == 'await_action' and not entry['may_switch']:
-                fail(f'battler {battler} is trapped and cannot switch this turn')
+                fail(f'battler {battler} cannot switch this turn')
             writes += [(syms['gEcAgentBattleSwitchSlot'] + 4 * battler, slot),
                        (syms['gEcAgentBattleAction'] + 4 * battler, 2)]
             submitted[battler] = {'action': 'switch', 'slot': slot}

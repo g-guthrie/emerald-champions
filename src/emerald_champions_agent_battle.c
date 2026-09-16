@@ -9,6 +9,7 @@
 #include "battle_script_commands.h"
 #include "battle_setup.h"
 #include "battle_util.h"
+#include "item.h"
 #include "battle_partner.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -70,6 +71,8 @@ static EWRAM_DATA u16 sRevealed[MAX_BATTLE_TRAINERS] = {0};
 static EWRAM_DATA u32 sMessageSerial = 0;
 static EWRAM_DATA u8 sPendingSwitchSlot[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u8 sLevelCap = 0;
+// The engine's own refusal of the last submitted switch, per battler.
+static EWRAM_DATA u8 sSwitchRefused[MAX_BATTLERS_COUNT] = {0};
 // Latched while the battle is live; the parties are restored once it ends.
 static EWRAM_DATA u8 sPlayerFaints = 0;
 static EWRAM_DATA u8 sOpponentFaints = 0;
@@ -106,6 +109,7 @@ void EmeraldChampionsAgentBattleBegin(u32 levelCap, u32 difficulty)
         gEcAgentBattleAction[i] = EC_AGENT_BATTLE_ACTION_NONE;
         sPendingSwitchSlot[i] = NO_PENDING_SWITCH;
         sLastAction[i] = B_ACTION_NONE;
+        sSwitchRefused[i] = EC_AGENT_SWITCH_ALLOWED;
     }
     for (u32 i = 0; i < MAX_BATTLE_TRAINERS; i++)
         sRevealed[i] = 0;
@@ -184,7 +188,23 @@ static void ServeChooseMove(enum BattlerId battler)
 
 static void ServeChoosePokemon(enum BattlerId battler)
 {
+    u32 caseId = gBattleResources->bufferA[battler][1];
     u32 slot;
+
+    // The engine refuses the switch here exactly as it does to the native menu,
+    // which answers PARTY_SIZE and is sent back to action selection. Drop the
+    // command so the bridge halts for a fresh one instead of resubmitting it.
+    if (caseId == PARTY_ACTION_CANT_SWITCH || caseId == PARTY_ACTION_ABILITY_PREVENTS)
+    {
+        sSwitchRefused[battler] = (caseId == PARTY_ACTION_ABILITY_PREVENTS)
+            ? EC_AGENT_SWITCH_BLOCKED_ABILITY : EC_AGENT_SWITCH_BLOCKED_TRAPPED;
+        sPendingSwitchSlot[battler] = NO_PENDING_SWITCH;
+        ClearCommand(battler);
+        BtlController_EmitChosenMonReturnValue(battler, B_COMM_TO_ENGINE, PARTY_SIZE, NULL);
+        BtlController_Complete(battler);
+        return;
+    }
+    sSwitchRefused[battler] = EC_AGENT_SWITCH_ALLOWED;
 
     if (sPendingSwitchSlot[battler] != NO_PENDING_SWITCH)
     {
@@ -286,6 +306,28 @@ static bool32 IsAgentControlled(enum BattlerId battler)
      && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)
         return FALSE;
     return TRUE;
+}
+
+// The one switch gate, shared by the observation view and the serving
+// controller. It calls the same engine functions as the B_ACTION_SWITCH case in
+// HandleTurnActionSelectionState rather than restating their logic, so
+// Shadow Tag, Arena Trap, Magnet Pull, Mean Look, Block, Spider Web, the
+// Bind-class volatiles, Ingrain, No Retreat, Octolock, Jaw Lock and Fairy Lock
+// all reach the mailbox exactly as they reach the native menu.
+static u32 AgentSwitchBlocker(enum BattlerId battler)
+{
+    if (!IsBattlerAlive(battler))
+        return EC_AGENT_SWITCH_ALLOWED; // a fainted battler owes a replacement
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        return EC_AGENT_SWITCH_BLOCKED_ARENA;
+    if (gBattleStruct->battlerState[battler].commanderSpecies != SPECIES_NONE)
+        return EC_AGENT_SWITCH_BLOCKED_COMMANDER;
+    if (!CanBattlerEscape(battler) && GetBattlerHoldEffect(battler) != HOLD_EFFECT_SHED_SHELL)
+        return EC_AGENT_SWITCH_BLOCKED_TRAPPED;
+    if (GetItemHoldEffect(gBattleMons[battler].item) != HOLD_EFFECT_SHED_SHELL
+     && IsAbilityPreventingEscape(battler))
+        return EC_AGENT_SWITCH_BLOCKED_ABILITY;
+    return EC_AGENT_SWITCH_ALLOWED;
 }
 
 static void WriteBattlers(void)
@@ -411,8 +453,11 @@ static void WriteLegality(void)
             gEcAgentBattleView[base + 1 + i] = mask;
         }
 
-        // A fainted battler owes a replacement; trapping does not apply to it.
-        u32 switchable = (!IsBattlerAlive(battler) || CanBattlerSwitch(battler)) ? 0x100 : 0;
+        u32 blocker = AgentSwitchBlocker(battler);
+        u32 switchable = (blocker == EC_AGENT_SWITCH_ALLOWED && CanBattlerSwitch(battler))
+                       ? 0x100 : 0;
+        switchable |= blocker << 16;
+        switchable |= sSwitchRefused[battler] << 24;
         for (u32 slot = 0; slot < PARTY_SIZE; slot++)
         {
             struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];

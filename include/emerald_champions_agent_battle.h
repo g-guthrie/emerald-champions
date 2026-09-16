@@ -45,6 +45,17 @@ enum EmeraldChampionsAgentBattleResult
     EC_AGENT_BATTLE_NOT_READY,
 };
 
+// Why the engine will refuse a switch for this battler right now. These mirror
+// the branches of HandleTurnActionSelectionState's B_ACTION_SWITCH gate.
+enum EmeraldChampionsAgentSwitchBlock
+{
+    EC_AGENT_SWITCH_ALLOWED,
+    EC_AGENT_SWITCH_BLOCKED_ARENA,
+    EC_AGENT_SWITCH_BLOCKED_COMMANDER,
+    EC_AGENT_SWITCH_BLOCKED_TRAPPED,
+    EC_AGENT_SWITCH_BLOCKED_ABILITY,
+};
+
 // Per-battler command kinds written by the host into the mailbox.
 enum EmeraldChampionsAgentBattleAction
 {
