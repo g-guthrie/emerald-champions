@@ -1,0 +1,62 @@
+{
+  "play_order": 214,
+  "e_group": "E0325",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_4",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_1R",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Magcargo/Scrafty/Revavroom L57 (offset -1) and Heatmor L58 (offset 0); both cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magma_60_ground.json"],
+  "chronology_note": "Same six as the hideout party, all pool-60 gates 42 and below, Ground/Rock lead order. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Scrafty's Fake Out buys exactly one turn and Magcargo spends it on Shell Smash",
+    "Simple doubles every stat change on Magcargo",
+    "The White Herb immediately restores the Shell Smash defence drops",
+    "If Magcargo is not safe, Revavroom takes Shift Gear instead",
+    "Heatmor's Tough Claws Fire Lash cuts Defense on the target every hit"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/214-TRAINER_GRUNT_MAGMA_HIDEOUT_4/a1",
+      "party": "party_magma_60_ground.json (Urshifu-Rapid/Amoonguss/Swampert/Mega Gardevoir/Incineroar/Zapdos)",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "why": "The hardest grunt room in the hideout on the board, and it got there without using either of its setup lanes. I let the authored opening happen on purpose - Urshifu went at Scrafty, not at Magcargo - and Scrafty's Fake Out did buy the turn exactly as written; Magcargo spent it on Heat Wave, which burned Urshifu and halved my main attacker's Attack for the whole battle. The crew then out-traded me: it withdrew Magcargo the moment a 4x Water threat was aimed at it, Scrafty's Knock Off removed Amoonguss's Rocky Helmet, Revavroom's Iron Head one-shot Mega Gardevoir on the turn it switched in, and Heatmor's Fire Lash plus a Power Gem killed Zapdos. Swampert - untouched all battle - and a late Incineroar finished a Magcargo that had been returned to full health and to neutral stats by its White Herb."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Fake Out buys the turn and Magcargo spends it on Shell Smash", "result": "FAIL", "evidence": "turn 1 Scrafty's Fake Out landed and flinched Urshifu - the bought turn was real and on the exact board the plan describes. Magcargo chose MOVE_HEAT_WAVE, and chose it again on turn 2. Shell Smash was never selected in the whole battle. This is the second time in my block that an authored 'Fake Out buys the turn for the Shell Smash' room declined the Shell Smash (see E0317); reported as a shared defect below."},
+    {"check": "Simple doubles every stat change", "result": "PASS", "evidence": "turn 6, Incineroar's Intimidate on entry produced 'The opposing Magcargo's Attack harshly fell' - a -2, not a -1. Simple is live and correctly implemented."},
+    {"check": "The White Herb restores the drops immediately", "result": "PASS", "evidence": "same turn: 'The opposing Magcargo returned its stats to normal using its White Herb', triggered by the Simple-doubled Intimidate. The item works, it is held, and it reads correctly on the board from turn 0. This is a deliberate A/B against E0317, where Polteageist's authored ITEM_WHITE_HERB reads as ITEM_NONE - the item itself is fine, so that defect is specific to that Pokemon or that trainer entry, not to White Herb."},
+    {"check": "Revavroom takes Shift Gear when Magcargo is not safe", "result": "FAIL", "evidence": "Revavroom came in on turn 2 precisely because Magcargo was not safe - the AI withdrew Magcargo from a 4x threat, which is the authored condition - and then chose Iron Head rather than Shift Gear. To be fair the Iron Head was excellent: it one-shot my switching-in Mega Gardevoir. But the room's second setup lane never appeared either, so neither of the two authored engines fired."},
+    {"check": "Heatmor's Fire Lash cuts Defense every hit", "result": "PASS", "evidence": "turn 5, Fire Lash into Zapdos: 'Zapdos's Defense fell'. It is the follow-up lane the dossier describes and it worked; Zapdos died to the Power Gem that followed."},
+    {"check": "Smart switching", "result": "PASS (unprompted, worth recording)", "evidence": "turn 2 the trainer withdrew a 4x-threatened Magcargo for Revavroom, and brought Magcargo back on turn 5 once the Water threats were dead or burned. That is the best switching sequence in my block and it is the main reason this room cost me three Pokemon."}
+  ],
+  "protect_ledger": [
+    {"turn": 6, "battler": "Magcargo", "payoff": "excellent - blocked Incineroar's Fake Out AND Swampert's Liquidation, which is 4x into Fire/Rock and certainly lethal, in one action. It was the last Pokemon alive and it bought itself the only extra turn available to it."}
+  ],
+  "protect_summary": "1 opponent Protect, with the best single payoff in my block, 0 empty, no consecutive guarding. The guarding judgement in this room is excellent; the setup judgement is the problem.",
+  "ai_defects": [
+    {
+      "severity": "significant",
+      "turns": "1 and 2",
+      "board": "Magcargo (ABILITY_SIMPLE, ITEM_WHITE_HERB, Shell Smash / Heat Wave / Power Gem / Protect) at 153/153, its partner Scrafty having just landed Fake Out on my Urshifu; my other battler a slow Amoonguss that had used Rage Powder",
+      "chosen": "MOVE_HEAT_WAVE at Amoonguss on both turns",
+      "problem": "Simple Shell Smash is +4 Attack, +4 Special Attack, +4 Speed in one action with the defence drops immediately undone by the White Herb, and the dossier states plainly that 'the room's whole plan is to survive to that second turn'. Turn 1 was that second turn: one of my battlers was flinched and the other had just committed to a redirection move. The scorer took an ordinary Heat Wave instead, and Magcargo finished the battle having never used the move it is built around.",
+      "better": "MOVE_SHELL_SMASH on turn 1.",
+      "note": "This is the same shape as the E0317 Polteageist defect, on a different trainer, a different species, a different ability and a different turn - and here the White Herb is definitely present, which rules out my earlier theory that the missing item was depressing the Shell Smash score. Two independent instances make this look like a general problem with how the scorer values a large multi-stat setup move on a bought turn. Revavroom declining Shift Gear on turn 2 is likely the same root cause, which would make three instances in one block."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep, comfortably. Won on attempt 1 but it cost Mega Gardevoir, Urshifu and Zapdos - three faints, which is AGENTS.md's stated aim against a well-prepared party, and the first room in my block to reach it. It did that with both authored setup lanes switched off, which means it is if anything under-credited at its current levels. Fix the setup scoring before anyone considers a level here.",
+  "rebuild_note": "No level change, so nothing to re-verify for calibration. The Shell Smash defect is unverifiable from this session until the main agent rebuilds. Of the Magma rooms this is the one most worth re-running after that fix, because a landed Simple Shell Smash would change the fight completely and I have no evidence of what it looks like.",
+  "theme_check": "Yes, and it is the room where the hideout stops being polite exactly as advertised - three player faints says so. But the thing the room is built to be remembered for did not happen: 'Magcargo going from a joke to a +4 attacker in one turn is the memory the room is built to leave', and the player instead remembers a Magcargo that used Heat Wave twice and then hid behind Protect. The escalation the four members are supposed to spell out - buy a turn, explode, back it with a second engine - was invisible; what won turns instead was ordinary good play (a well-timed switch, a Knock Off, a lucky burn).",
+  "cooler_note": "Keep the concept exactly as it is - it is a genuinely good idea and the room is already hard enough without it working. Nothing about the species, moves or items needs changing; what it needs is for the AI to take the Shell Smash. One small observation for later: Heatmor at offset 0 is the most ordinary member of the four and the only one with no gimmick at all, so if this room ever wants a fifth idea, that is the slot to spend it on."
+}
