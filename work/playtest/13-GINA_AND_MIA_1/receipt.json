@@ -5,47 +5,105 @@
   "class": "regular",
   "location": "Route104",
   "cap_window": 14,
-  "outcome": "NOT PLAYABLE - blocked by a content defect",
+  "outcome": "WON on attempt 1, 7 turns, 2 player faints - a real fight. Levels kept.",
+  "supersedes": "The previous receipt recorded outcome 'NOT PLAYABLE - blocked by a content defect' (E0014-PARTYSIZE-0). That defect is repaired: TRAINER_GINA_AND_MIA_1 now compiles with a four-member party and the battle started and ran to completion. This receipt is the first real play of E0014.",
   "party_manifest": "work/playtest/13-GINA_AND_MIA_1/party.json",
-  "run_dir": "work/playtest/13-GINA_AND_MIA_1/a1",
+  "party_manifest_note": "The manifest was rebuilt for this run. The earlier one (Weavile/Whimsicott/Lucario/Arcanine/Porygon-Z/Snorlax) was chronology-illegal for a Route 104 battle: Sneasel is wild:Seaspray_Cave_B1F, Cottonee is wild:VerdanturfMeadow, Lucario and Porygon-Z are wild:AlteringCave_1F and Munchlax is wild:Route116, all of which are maps a player reaches AFTER Route 104 (Verdanturf Meadow only after RusturfTunnel at play_order 29, cap 20). The replacement party uses only Route101/102/103/104/PetalburgWoods roots.",
+  "run_dir": "work/playtest/13-GINA_AND_MIA_1/r1",
+  "opponent_levels_medium": "PLUSLE 14, MINUN 14, VOLBEAT 16, ILLUMISE 16 (cap 14; offsets 2/2/4/4, Medium -2)",
   "attempts": [
     {
-      "seed": "0x13A1",
-      "outcome": "start_rejected",
-      "turns": 0,
-      "player_faints": 0,
-      "opponent_faints": 0,
-      "detail": "scripts/playthrough/battle_driver.py start reached native preparation successfully (the six-member cap-14 party was built and verified in the run state), then the native agent battle lifecycle refused the trainer: gEcAgentBattleResult = 3 (EC_AGENT_BATTLE_BAD_TRAINER), gEcAgentBattlePhase stayed IDLE, no decision point in 80000 frames."
+      "seed": 4660,
+      "outcome": "won",
+      "turns": 7,
+      "decisions": 10,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 55,
+      "ai_decision_seconds_max": 0.921,
+      "player_faint_detail": "Arcanine (53/53, full HP, Intimidate already applied) was KOed on turn 1 by focused Plus/Minus-boosted Thunderbolts from both rodents. Jolteon was KOed on turn 6 by Illumise's Bug Buzz after Volbeat's +2 Bug Buzz had already taken it to 3/46.",
+      "note": "A genuine fight. A 2-HP Volbeat survived four extra turns on Prankster Roost and one Protect, and the twins traded two of my six for four of their four."
     }
   ],
   "strategy_checks": [
-    {"check": "Plusle/Minun Plus+Minus shared special-attack boost while both are active", "result": "NOT RUN", "evidence": "battle could not start"},
-    {"check": "Helping Hand chosen only when it beats two attacks", "result": "NOT RUN", "evidence": "battle could not start"},
-    {"check": "Minun Light Screen / Encore only against a relevant threat", "result": "NOT RUN", "evidence": "battle could not start"},
-    {"check": "Volbeat priority Tail Glow converted into Bug Buzz damage", "result": "NOT RUN", "evidence": "battle could not start"},
-    {"check": "Illumise priority Encore / Helping Hand in the firefly mode", "result": "NOT RUN", "evidence": "battle could not start"}
-  ],
-  "protect_ledger": [],
-  "ai_defects": [],
-  "content_defects": [
     {
-      "id": "E0014-PARTYSIZE-0",
-      "severity": "high",
-      "summary": "TRAINER_GINA_AND_MIA_1 materializes with .partySize = 0 while carrying .poolSize = 4 and a full four-member party body, so the trainer fights with an EMPTY party in the compiled ROM.",
-      "evidence": [
-        "src/data/trainers.party, TRAINER_GINA_AND_MIA_1 block: header line 'Party Size: 0' immediately followed by SPECIES_PLUSLE / SPECIES_MINUN / SPECIES_VOLBEAT / SPECIES_ILLUMISE.",
-        "src/data/trainers.h [DIFFICULTY_NORMAL][TRAINER_GINA_AND_MIA_1]: '.partySize = 0, .poolSize = 4'.",
-        "src/battle_setup.c CreateNPCTrainerPartyFromTrainer(): 'monsCount = trainer->partySize' then generates monsCount mons, so monsCount == 0 produces no battle party.",
-        "src/emerald_champions_agent_battle.c StartRequestedBattle() correctly rejects it via 'GetTrainerStructFromId(trainerA)->partySize == 0' -> EC_AGENT_BATTLE_BAD_TRAINER."
-      ],
-      "reproducible": "Yes. 'python3 scripts/emerald_champions_teams.py --write' regenerates src/data/trainers.party byte-identically, so this is a live materialization defect, not a stale checkout.",
-      "scope": "Exactly one trainer in the whole file. A scan of src/data/trainers.party found TRAINER_GINA_AND_MIA_1 is the only block that has both 'Party Size: 0' and a SPECIES_ body; the other 148 'Party Size: 0' blocks are correctly retired metadata-only stubs with no party.",
-      "suspected_root_cause": "scripts/implement_emerald_champions_master_battles.py implement() stamps 'Party Size: 0' onto retired trainers (replace_attribute(header, 'Party Size', '0')) but rewrite_trainer_block() never resets 'Party Size' when a design is (re-)implemented. A trainer that was retired in one pass and re-authored in a later pass keeps the stale 0.",
-      "owner": "trainer-teams / materialization side; not repaired here (outside this playtest agent's edit scope, which is level offsets only)."
+      "check": "Plusle/Minun Plus+Minus shared special-attack boost while both are active",
+      "result": "PASS - decisive",
+      "evidence": "Turn 1: both L14 rodents chose MOVE_THUNDERBOLT into battler 0 and the pair killed a full-HP 53 HP L14 Arcanine outright (Fire takes Electric neutrally, and Intimidate does nothing to a special attack). Two unboosted L14 Thunderbolts do not reach 53; the shared Plus/Minus 1.5x is the only way that board resolves."
+    },
+    {
+      "check": "Helping Hand chosen only when it beats two attacks",
+      "result": "PASS (correctly never chosen)",
+      "evidence": "Helping Hand never appeared across the whole battle. On turn 1 two attacks scored a clean KO, which is exactly the condition the dossier sets; afterwards the pair was never both alive and both able to attack the same target."
+    },
+    {
+      "check": "Minun Light Screen / Encore only against a relevant threat",
+      "result": "PASS (with one soft note)",
+      "evidence": "Turn 2: Minun chose MOVE_LIGHT_SCREEN with my two remaining bodies being special attackers (Jolteon Thunderbolt/Shadow Ball, Sylveon Hyper Voice/Mystical Fire). The screen measurably worked - Sylveon's Mystical Fire fell from 19 to ~13 per hit and Volbeat survived several turns behind it. Soft note: the final turn 8 Light Screen was near-worthless (Minun alone at 12/45, no partner to protect, killed by Rock Slide the same turn). Encore never fired; nothing on my side was ever locked into a move worth Encoring."
+    },
+    {
+      "check": "Volbeat priority Tail Glow converted into Bug Buzz damage",
+      "result": "PASS - textbook",
+      "evidence": "Turn 2: Volbeat entered and immediately used Prankster MOVE_TAIL_GLOW ('Sp. Atk rose drastically', +3) before anything else on the board moved. Turn 3: MOVE_BUG_BUZZ into Jolteon did 43 of 46 HP. That is the authored engine firing on the first two turns it was on the field, and it cost me a Pokemon."
+    },
+    {
+      "check": "Illumise priority Encore / Helping Hand in the firefly mode",
+      "result": "NOT OBSERVED",
+      "evidence": "Illumise only entered on turn 5 (switched in for a 12/45 Minun) with the board already decided. It chose MOVE_BUG_BUZZ (KO on the 3 HP Jolteon, turn 6) and MOVE_DAZZLING_GLEAM (spread, super effective on Heracross, turn 7). Both are the correct direct-damage choices on those boards; Prankster Encore had no target locked into anything and Helping Hand had no partner able to convert it. Declining them was right, so this is 'no opportunity', not a failure."
+    },
+    {
+      "check": "Roost/Protect must buy useful future damage rather than sustain an empty setup loop",
+      "result": "PASS - the best guard play in this block",
+      "evidence": "See the Protect ledger. Volbeat at 2/61 survived turns 4, 5, 6 and 7 on priority Roost plus one Protect, and it took Rock Slide plus Hyper Voice together to finish it."
+    },
+    {
+      "check": "Ground attacks / Electric immunity / priority denial / Taunt as counterplay (the authored crack)",
+      "result": "PASS - the crack works as documented",
+      "evidence": "Volt Absorb Jolteon changed the AI's targeting immediately: from turn 3 on Minun aimed every Thunderbolt at Sylveon (battler 2) and never once fed the immunity. Fairy and Rock spread damage from Sylveon and Heracross is what actually ended the fight - Rock Slide was 2x on both fireflies and killed Illumise and Minun."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 6,
+      "battler": "VOLBEAT (2/61, +1 Sp. Atk)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - saved its life twice over. It blocked Jolteon's Thunderbolt (which had been doing ~32 a hit, lethal from 2 HP) and Sylveon's Hyper Voice. Volbeat then got two more turns of Roost out of the reprieve and forced me to spend a double spread attack to remove it."
+    },
+    {
+      "turn": "4, 5, 7",
+      "battler": "VOLBEAT",
+      "action": "MOVE_ROOST (Prankster, +1 priority)",
+      "payoff": "NOT EMPTY. Turn 4 Roost from 6 HP outpaced Thunderbolt; turn 5 Roost from 4 HP did the same; turn 7 Roost from 2 HP forced the KO to come from two attacks in the same turn. Three heals off a 61 HP body kept the trainer's setup piece alive from turn 4 to turn 7."
+    },
+    {
+      "turn": 5,
+      "battler": "MINUN (12/45) - switch, not Protect",
+      "action": "switch to ILLUMISE",
+      "payoff": "NOT EMPTY. A genuine escape: Minun was in Hyper Voice range and was preserved to come back as the last body. The new turn-one healthy-switch charge did not suppress a switch that was actually needed, which is the intended shape."
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    {
+      "id": "E0014-SCREEN-ON-LAST-BODY",
+      "severity": "low",
+      "turn": 8,
+      "board": "Minun alone at 12/45, no partner, facing Heracross (26/50) and Sylveon (36/63). Rock Slide was lethal to it whatever it did.",
+      "chosen_action": "MOVE_LIGHT_SCREEN",
+      "better_action": "MOVE_THUNDERBOLT into Sylveon for ~14 chip.",
+      "assessment": "Not scored as a defect. Both actions lose, and the new next-turn pricing is supposed to pay a screen only when its owner survives the turn - here it did not, so the value banked should have been zero. Worth one look at whether a side-status effect is being priced for a battler that is about to be the last faint; the damage line was strictly better by a small margin."
     }
   ],
   "level_changes": [],
-  "cooler_note": "The authored Plusle/Minun + Volbeat/Illumise twin concept is already a good early-route idea (two different paired-ability modes on one trainer). Suggestion for a later pass, not applied here: give Illumise Struggle Bug or Baton Pass so the firefly mode can hand Volbeat's Tail Glow boost somewhere, which would make the second mode a real engine instead of a softer copy of the rodent mode.",
-  "authored_set_legality": "Not verifiable in battle. On paper the four members, abilities, items and moves are all legal for the cap-14 window.",
-  "not_finished": "The E0014 battle itself is unplayed. It must be replayed once the partySize defect is repaired and re-materialized."
+  "level_rationale": "Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' Two of my six died, one of them a full-HP lead on turn 1, and the trainer's authored engine (Tail Glow -> Bug Buzz) executed and earned one of those kills. PLUSLE 2 / MINUN 2 / VOLBEAT 4 / ILLUMISE 4 are correct as authored.",
+  "cooler_note": "Yes, and it is close already. The two paired modes genuinely played differently: the rodents are a burst-damage lead that killed something on turn one, and the fireflies are a priority setup-and-sustain core that refused to die. The weak half is Illumise, which is a softer copy of Volbeat rather than a second idea - it arrived, used two attacking moves and added nothing the trainer did not already have. Suggestion for a later pass, not applied here (unchanged from the previous receipt and now confirmed in play): give Illumise Baton Pass or Struggle Bug so the firefly mode can move Volbeat's Tail Glow boost, which would turn the Roost stall into a genuine relay instead of a delay.",
+  "authored_set_legality": "Clean. All four members, abilities, items and moves resolve correctly at cap 14 and every move in every set is present and usable in the compiled party. No legality problem found.",
+  "content_defects_resolved": [
+    {
+      "id": "E0014-PARTYSIZE-0",
+      "status": "FIXED and verified in play",
+      "evidence": "src/data/trainers.party TRAINER_GINA_AND_MIA_1 now carries a four-member body that the ROM instantiates: Plusle L14, Minun L14, Volbeat L16, Illumise L16 all appeared on the field in run work/playtest/13-GINA_AND_MIA_1/r1."
+    }
+  ],
+  "not_finished": "Illumise's Prankster Encore and Helping Hand are still unobserved - it only ever entered on a decided board. A future run that removes the rodents first and leaves the fireflies a live partner would exercise the second mode properly."
 }

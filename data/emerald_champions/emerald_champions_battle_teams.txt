@@ -636,8 +636,8 @@ mega_slots: NONE
 ai: Ace Pokemon
 plan: Heracross attacks beside Umbreon Snarl/Foul Play; Wish only with a viable next-turn recipient. Alternate Gastly/Shedinja permits Sludge Wave only while Wonder Guard remains effective. Protect buys Wish or a real ally attack, not an automatic loop. Stats: Scarf physical offense, defensive Umbreon, Sash Shedinja and fast special Gastly fit; the fragile ghost gets extra levels. Could it be cooler? Keep the unusual Gastly/Shedinja partnership rather than force a Mega to match the Gengarite reward. Overrepresented? Heracross repeats Brawly as a Scarf cleaner, not a protected Mega; preserve the conditional Wonder Guard/Sludge Wave alternative. Medium incoming cap24 levels25/24/26/29 are unplayed design seeds.
 crack: Super-effective or residual damage, ability bypass and removing the active Wish/mitigation partner.
-HERACROSS @CHOICE_SCARF MOXIE JOLLY 4/252/0/0/0/252 1 | CLOSE_COMBAT, MEGAHORN, ROCK_SLIDE, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-UMBREON @LEFTOVERS INNER_FOCUS CALM 252/0/4/0/252/0 0 | FOUL_PLAY, SNARL, WISH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+HERACROSS @CHOICE_SCARF MOXIE JOLLY 4/252/0/0/0/252 2 | CLOSE_COMBAT, MEGAHORN, ROCK_SLIDE, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+UMBREON @LEFTOVERS INNER_FOCUS CALM 252/0/4/0/252/0 1 | FOUL_PLAY, SNARL, WISH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 SHEDINJA @FOCUS_SASH WONDER_GUARD ADAMANT 4/252/0/0/0/252 2 | SHADOW_SNEAK, X_SCISSOR, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 GASTLY @LIFE_ORB LEVITATE TIMID 4/0/0/252/0/252 5 | SHADOW_BALL, SLUDGE_WAVE, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 

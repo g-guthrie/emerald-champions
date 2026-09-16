@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "encounter": "C15 Route 109 / Slateport block, cap 24 core party",
+  "availability_audit": "All six appear in work/reference-pools/pool-24.json with gate <= 24: TOGEKISS (Shiny Stone evo, gate 24), ENAMORUS (legendary_sign:VerdanturfMeadow, gate 14, reachable legend), HOOPA (gate 20), MAGEARNA (gate 20), ALAKAZAM (Linking Cord evo, gate 20), KARTANA (wild PetalburgWoods_3, gate 20). No Mega is used even though the Mega Ring is now available, because no legal stone in this window improves the party.",
+  "plan": "Togekiss redirects, sets Tailwind and threatens Serene Grace flinches; Enamorus and Magearna are the Fairy nukes and carry Ground/Electric coverage; Hoopa is the Fighting/Normal-immune special attacker; Alakazam is the fast recoil-free Psychic; Kartana is the Grass/Steel physical answer to the Water teams on this route.",
+  "party": [
+    {"species":"SPECIES_TOGEKISS","moves":["MOVE_FOLLOW_ME","MOVE_AIR_SLASH","MOVE_TAILWIND","MOVE_PROTECT"],"nature":"NATURE_CALM","ability":"ABILITY_SERENE_GRACE","item":"ITEM_SITRUS_BERRY","evs":[252,0,132,0,124,0],"role":"redirection, Tailwind and flinch pressure","availability":"pool-24: evolution:item:ITEM_SHINY_STONE from SPECIES_TOGETIC (gate 24)"},
+    {"species":"SPECIES_ENAMORUS","moves":["MOVE_MOONBLAST","MOVE_EARTH_POWER","MOVE_SUPERPOWER","MOVE_PROTECT"],"nature":"NATURE_TIMID","ability":"ABILITY_CONTRARY","item":"ITEM_LIFE_ORB","evs":[4,0,0,252,0,252],"role":"Fairy special nuke with Ground coverage","availability":"pool-24: legendary_sign:VerdanturfMeadow (gate 14); reachable legend"},
+    {"species":"SPECIES_HOOPA","moves":["MOVE_PSYCHIC","MOVE_SHADOW_BALL","MOVE_NASTY_PLOT","MOVE_PROTECT"],"nature":"NATURE_MODEST","ability":"ABILITY_MAGICIAN","item":"ITEM_SITRUS_BERRY","evs":[252,0,0,252,4,0],"role":"Fighting/Normal-immune special attacker","availability":"pool-24: gate 20"},
+    {"species":"SPECIES_MAGEARNA","moves":["MOVE_FLEUR_CANNON","MOVE_FLASH_CANNON","MOVE_THUNDERBOLT","MOVE_PROTECT"],"nature":"NATURE_MODEST","ability":"ABILITY_SOUL_HEART","item":"ITEM_SITRUS_BERRY","evs":[252,0,4,252,0,0],"role":"bulky Steel/Fairy Soul-Heart attacker with Electric coverage","availability":"pool-24: gate 20"},
+    {"species":"SPECIES_ALAKAZAM","moves":["MOVE_PSYCHIC","MOVE_FOCUS_BLAST","MOVE_SHADOW_BALL","MOVE_PROTECT"],"nature":"NATURE_TIMID","ability":"ABILITY_MAGIC_GUARD","item":"ITEM_LIFE_ORB","evs":[4,0,0,252,0,252],"role":"fast recoil-free special attacker","availability":"pool-24: evolution:item:ITEM_LINKING_CORD from SPECIES_KADABRA (gate 20)"},
+    {"species":"SPECIES_KARTANA","moves":["MOVE_LEAF_BLADE","MOVE_SACRED_SWORD","MOVE_SMART_STRIKE","MOVE_PROTECT"],"nature":"NATURE_JOLLY","ability":"ABILITY_BEAST_BOOST","item":"ITEM_FOCUS_SASH","evs":[4,252,0,0,0,252],"role":"fast Grass/Steel physical attacker","availability":"pool-24: wild:PetalburgWoods_3/land_mons (gate 20)"}
+  ]
+}

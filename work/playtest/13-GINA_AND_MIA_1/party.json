@@ -1,39 +1,9 @@
 {
   "schema_version": 1,
-  "encounter": "E0014 TRAINER_GINA_AND_MIA_1 (play_order 13); P2 cap-14 standing benchmark party",
-  "availability_audit": "Every member's root and evolution provider is listed in work/reference-pools/pool-14.json at gate 14: Riolu (wild:Route116) -> Lucario also appears directly as wild:AlteringCave_1F; Growlithe (wild:Route103) -> Arcanine via ITEM_FIRE_STONE; Cottonee (wild:VerdanturfMeadow) -> Whimsicott via ITEM_SUN_STONE; Porygon-Z (wild:AlteringCave_1F); Sneasel (wild:Seaspray_Cave_B1F) -> Weavile via level/condition; Munchlax (wild:Route116) -> Snorlax via friendship. Items are ordinary stage-available held items. No legendary, no Mega stone, no unreached gate is claimed. Assisted acquisition through the authorized native preparation API; not a native capture receipt.",
-  "plan": "Speed control (Prankster Tailwind) plus Fake Out pressure in front of two high-damage physical attackers, one Adaptability special attacker and a bulky Ground-move pivot. Built as the strongest practical legal cap-14 doubles party for the Rustboro-area block.",
+  "encounter": "E0014 TRAINER_GINA_AND_MIA_1 (play_order 13); Route 104, cap 14",
+  "availability_audit": "CHRONOLOGY-CHECKED for Route 104. Battle index first-appearance order inside the cap-14 window is Route103 (1), Route102 (2), Route104 (6), PetalburgWoods (9), Route115 (14), Route116 (16), RustboroCity_Gym (25). A player who has just reached this Route 104 battle has walked Route 101/103/102/PetalburgCity/Route104/PetalburgWoods and nothing later, so only those source maps are used here. Every member: Growlithe wild:Route103/land_mons -> Arcanine via ITEM_FIRE_STONE (pool-14); Eevee wild:Route101/land_mons -> Sylveon via friendship and -> Jolteon via ITEM_THUNDER_STONE (pool-14); Heracross wild:PetalburgWoods/land_mons (pool-14, already final); Shroomish wild:PetalburgWoods/land_mons (pool-14); Roselia wild:Route104/land_mons (pool-14). No Verdanturf Meadow, Seaspray Cave, Altering Cave or Route 115/116 species, no legendary, no Mega stone. Assisted acquisition through the authorized native preparation API; not a native capture receipt.",
+  "plan": "The E0014 crack is Ground attacks, Electric immunity, priority denial, Taunt and pressure during Tail Glow. Volt Absorb Jolteon is the Electric immunity; Arcanine's Fire is 2x on both fireflies; Heracross takes 0.25x from Bug attacks and hits back through Rock Slide spread; Roselia and Shroomish are Grass bodies that resist Thunderbolt, with Spore as the priority-denial/Tail-Glow answer.",
   "party": [
-    {
-      "species": "SPECIES_WEAVILE",
-      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_ICE_SHARD", "MOVE_ICICLE_CRASH"],
-      "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_PRESSURE",
-      "item": "ITEM_FOCUS_SASH",
-      "evs": [4, 252, 0, 0, 0, 252],
-      "role": "Fake Out pressure, item removal and Ice priority",
-      "availability": "Sneasel wild:Seaspray_Cave_B1F/land_mons, evolution:level/condition (pool-14 gate 14)."
-    },
-    {
-      "species": "SPECIES_WHIMSICOTT",
-      "moves": ["MOVE_TAILWIND", "MOVE_ENCORE", "MOVE_MOONBLAST", "MOVE_PROTECT"],
-      "nature": "NATURE_TIMID",
-      "ability": "ABILITY_PRANKSTER",
-      "item": "ITEM_FOCUS_SASH",
-      "evs": [4, 0, 0, 252, 0, 252],
-      "role": "Prankster speed control and Encore lock",
-      "availability": "Cottonee wild:VerdanturfMeadow/land_mons, evolution:item:ITEM_SUN_STONE (pool-14 gate 14)."
-    },
-    {
-      "species": "SPECIES_LUCARIO",
-      "moves": ["MOVE_CLOSE_COMBAT", "MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_PROTECT"],
-      "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_INNER_FOCUS",
-      "item": "ITEM_LIFE_ORB",
-      "evs": [4, 252, 0, 0, 0, 252],
-      "role": "primary physical breaker with Steel priority",
-      "availability": "wild:AlteringCave_1F/land_mons (pool-14 gate 14)."
-    },
     {
       "species": "SPECIES_ARCANINE",
       "moves": ["MOVE_FLARE_BLITZ", "MOVE_EXTREME_SPEED", "MOVE_CRUNCH", "MOVE_PROTECT"],
@@ -41,28 +11,58 @@
       "ability": "ABILITY_INTIMIDATE",
       "item": "ITEM_SITRUS_BERRY",
       "evs": [4, 252, 0, 0, 0, 252],
-      "role": "Intimidate support and priority Normal/Fire offense",
-      "availability": "Growlithe wild:Route103/land_mons, evolution:item:ITEM_FIRE_STONE (pool-14 gate 14)."
+      "role": "Intimidate support, Fire pressure on the fireflies, Normal priority",
+      "availability": "Growlithe wild:Route103/land_mons, evolution:item:ITEM_FIRE_STONE (pool-14)."
     },
     {
-      "species": "SPECIES_PORYGON_Z",
-      "moves": ["MOVE_TRI_ATTACK", "MOVE_DARK_PULSE", "MOVE_THUNDERBOLT", "MOVE_PROTECT"],
-      "nature": "NATURE_TIMID",
-      "ability": "ABILITY_ADAPTABILITY",
-      "item": "ITEM_LIFE_ORB",
-      "evs": [4, 0, 0, 252, 0, 252],
-      "role": "Adaptability special attacker",
-      "availability": "wild:AlteringCave_1F/land_mons (pool-14 gate 14)."
-    },
-    {
-      "species": "SPECIES_SNORLAX",
-      "moves": ["MOVE_BODY_SLAM", "MOVE_EARTHQUAKE", "MOVE_CRUNCH", "MOVE_PROTECT"],
-      "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_THICK_FAT",
+      "species": "SPECIES_SYLVEON",
+      "moves": ["MOVE_HYPER_VOICE", "MOVE_MYSTICAL_FIRE", "MOVE_HELPING_HAND", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PIXILATE",
       "item": "ITEM_LEFTOVERS",
-      "evs": [252, 252, 4, 0, 0, 0],
-      "role": "bulky Ground-move pivot against Electric and Steel cores",
-      "availability": "Munchlax wild:Route116/land_mons, evolution:friendship (pool-14 gate 14)."
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "Pixilate spread damage against four frail bodies",
+      "availability": "Eevee wild:Route101/land_mons, evolution:friendship (pool-14)."
+    },
+    {
+      "species": "SPECIES_JOLTEON",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_SHADOW_BALL", "MOVE_VOLT_SWITCH", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_VOLT_ABSORB",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Volt Absorb Electric immunity and fast special offence",
+      "availability": "Eevee wild:Route101/land_mons, evolution:item:ITEM_THUNDER_STONE (pool-14)."
+    },
+    {
+      "species": "SPECIES_HERACROSS",
+      "moves": ["MOVE_CLOSE_COMBAT", "MOVE_MEGAHORN", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GUTS",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "physical breaker that takes 0.25x from Bug attacks; Rock Slide spread",
+      "availability": "wild:PetalburgWoods/land_mons (pool-14)."
+    },
+    {
+      "species": "SPECIES_ROSELIA",
+      "moves": ["MOVE_SLUDGE_BOMB", "MOVE_GIGA_DRAIN", "MOVE_LEECH_SEED", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_NATURAL_CURE",
+      "item": "ITEM_EVIOLITE",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "Electric-resistant special attacker",
+      "availability": "wild:Route104/land_mons (pool-14)."
+    },
+    {
+      "species": "SPECIES_SHROOMISH",
+      "moves": ["MOVE_SPORE", "MOVE_GIGA_DRAIN", "MOVE_LEECH_SEED", "MOVE_PROTECT"],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_EFFECT_SPORE",
+      "item": "ITEM_EVIOLITE",
+      "evs": [252, 0, 252, 0, 4, 0],
+      "role": "Spore denial against Tail Glow and the paired rodent lead",
+      "availability": "wild:PetalburgWoods/land_mons (pool-14)."
     }
   ]
 }
