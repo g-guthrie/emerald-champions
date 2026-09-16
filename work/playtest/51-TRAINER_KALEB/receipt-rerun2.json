@@ -1,0 +1,118 @@
+{
+  "play_order": 51,
+  "e_group": "E0054",
+  "trainer": "TRAINER_KALEB",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Boltund 0->1 and Dachsbun 1->2 off a three-turn zero-faint clear. This is the one confirming run of those levels on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Boltund resolved at L29 and Dachsbun at L30 (L28 and L29 in pass 1). Audino L29 and Granbull L30 unchanged.",
+  "resolved_opponent_levels": {"AUDINO": 29, "GRANBULL": 30, "BOLTUND": 29, "DACHSBUN": 30},
+  "party_manifest": "work/playtest/51-TRAINER_KALEB/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: Nidoking, Magearna, Togekiss, Gardevoir, Kartana, Weavile, all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110. One declared reachable legend (Magearna); Gardevoir carries the Gardevoirite but was never sent out, so no Mega was used this battle.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/51-TRAINER_KALEB/r1",
+      "seed": 51,
+      "outcome": "won",
+      "turns": 5,
+      "driver_turn_counter": 4,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_frames": [50, 46, 46, 35, 35, 21, 21],
+      "ai_decision_seconds_max": 0.837,
+      "narrative": "Two levels, two player faints - a completely different fight from pass 1. T1 Granbull's Intimidate again dropped both my attackers for nothing (two special attackers), and Nidoking's Sheer Force Life Orb Sludge Wave hit both slots for 2x into Fairy; Audino Protected itself out of it, Magearna took nothing as a Steel, and Granbull fell from full 122 before its Close Combat (correctly aimed at the Steel) resolved. T2 Boltund entered and Protected on its entry turn, blanking a 2x Earth Power that would very likely have killed it, while Audino's spread Hyper Voice chipped Nidoking and Flash Cannon took Audino to 48. T3 was Kaleb's turn: Audino used HELPING_HAND on Boltund and the boosted Strong Jaw Crunch KO'd my 79 HP Nidoking before its Earth Power resolved - the authored support plan executing exactly as written - while Flash Cannon finished Audino. T4 I sent Kartana in and it was punished: Boltund's Fire Fang hit the Grass/Steel for 4x (Focus Sash held) and Dachsbun's Body Press, which is 2x into Steel, finished it. My Flash Cannon removed Boltund. T5 Dachsbun, alone against two, used HOWL (see defect R6-D4) and died to a +5 Flash Cannon. Won with Nidoking and Kartana dead and everything else untouched."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "The Howl/support plan the team is named for executes",
+      "result": "PASS for the support half, FAIL for Howl itself",
+      "evidence": "Audino's Helping Hand into Boltund's Strong Jaw Crunch on turn 3 is the plan working perfectly - it converted a non-lethal hit into a knockout on my best attacker. Dachsbun's Howl, though, came on the last turn at 1-vs-2 and boosted an Attack stat that none of its useful moves on that board scale from (see R6-D4)."
+    },
+    {
+      "check": "Boltund's extra level buys it a turn",
+      "result": "PASS - emphatically",
+      "evidence": "At L29 it survived its entry turn behind a Protect that blanked a 2x Earth Power, then took a player Pokemon with a Helping-Hand-boosted Crunch, then hit a Grass/Steel switch-in with the 4x Fire Fang on its sheet. In pass 1 at L28 it got one Crunch off and died. Its level is fully converted - this is the member that decided the fight."
+    },
+    {
+      "check": "Dachsbun's extra level lets the setter survive to act",
+      "result": "PASS",
+      "evidence": "At L30 with 102 HP it survived its entry turn, used Body Press (2x into my Steel) to KO Kartana, and got a second action. In pass 1 at L29 it was KO'd from full 99 HP before its Howl resolved. The level did what it was bought for; what it did with the extra turn is a separate AI problem."
+    },
+    {
+      "check": "Intimidate Granbull",
+      "result": "FAIL - as in pass 1",
+      "evidence": "Intimidate dropped both of my battlers' Attack, which is worth exactly nothing against Nidoking and Magearna (both special). It then chose Close Combat into Magearna, which is the right move on its sheet, and was KO'd from full 122 by the spread Sludge Wave before it resolved. Its problem is a matchup, not a level: it is a Fairy at offset 2 leading into a Poison-type spread attacker."
+    },
+    {
+      "check": "Regenerator Audino sustains the team",
+      "result": "PASS",
+      "evidence": "Protected a lethal-ish turn away on turn 1, chipped with spread Hyper Voice on turn 2, and spent its last turn on the Helping Hand that took my Nidoking. Three turns, three useful actions. The best-played support in my block after Umbreon's Snarl."
+    },
+    {
+      "check": "Well-Baked Body",
+      "result": "NOT TESTED",
+      "evidence": "I used no Fire moves, so the ability never came up. Not a fault."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "AUDINO",
+      "payoff": "REAL - blocked two attacks in one turn: the spread Sludge Wave (which killed its partner Granbull outright on the same turn) and a 2x Flash Cannon. A 126 HP Leftovers/Regenerator body that then went on to take three useful turns. Correct guard."
+    },
+    {
+      "turn": 2,
+      "battler": "BOLTUND",
+      "payoff": "REAL and probably decisive - an entry-turn Protect that blanked a 2x Earth Power from a Sheer Force Life Orb Nidoking aimed at an 88 HP Electric type. That is very likely a knockout denied, and the Pokemon it saved took my Nidoking the following turn."
+    }
+  ],
+  "protect_ledger_note": "Two opponent guards, both with real payoff and neither repeated. The entry-turn Boltund Protect is the single best-priced guard in my block: it was made by a frail fast attacker walking into a known 2x spread threat, which is exactly the board where a shield should win on expected value. No empty guards.",
+  "ai_defects": [
+    {
+      "id": "R6-D4",
+      "turn": 5,
+      "trainer": "TRAINER_KALEB",
+      "battler": "DACHSBUN (102/102, alone, last Pokemon)",
+      "board": "Dachsbun 102/102 is Kaleb's only remaining Pokemon, facing a full-health Togekiss (Fairy/Flying) and a Magearna (Steel/Fairy) sitting on +4 special attack from Soul-Heart that had one-shot two of its team-mates.",
+      "chosen": "MOVE_HOWL",
+      "problem": "Howl raises Attack. Dachsbun's only Attack-scaling attack is PLAY_ROUGH, which is 0.5x into Togekiss (Fairy) and 0.5x into Magearna (Steel) - so the boost could not improve its damage against either opponent on the field, whatever happened next. Meanwhile BODY_PRESS scales off Defense, ignores Howl entirely, and is 2x into Magearna: the exact move it had just used to KO my Kartana. The team also has no partner left for Howl to support and no turn in which to spend the boost - it died from full HP to a single Flash Cannon on the same turn.",
+      "better_action": "MOVE_BODY_PRESS at Magearna. It is 2x, it is the move Dachsbun's Impish 252 HP / 252 Def spread is actually built around, and it had just produced a knockout with it.",
+      "scope_note": "This is not simply 'setup while about to die' - the boost was type-dead as well. Two things for the AI owner: (a) a setup move should be scored against whether the boosted stat feeds a move that can actually damage what is on the field, and (b) the 1-vs-2 case where there is no partner to support and no expected surviving turn. Affected-team index candidates: every authored team with Howl / Swords Dance / Calm Mind / Nasty Plot on a member whose best move ignores the boosted stat, and every last-Pokemon board. Doduo's Swords Dance on E0064 and Swoobat's Calm Mind on E0063 are the nearest in my block. Not fixing AI C code from this session."
+    }
+  ],
+  "ai_notes": [
+    "Turn 3 Audino Helping Hand into Boltund's Crunch is the best-executed authored combination in my whole block and should be preserved exactly as it is. It turned a non-lethal attack into a knockout on the player's strongest attacker.",
+    "Turn 4 Boltund choosing FIRE_FANG the moment a Grass/Steel Kartana switched in (4x) rather than repeating Crunch is correct coverage selection off a fresh board read.",
+    "Turn 1 Granbull choosing Close Combat into the Steel/Fairy Magearna (2x) rather than into the Poison/Ground Nidoking was the right target and the right move; it simply died first.",
+    "Driver reporting note, not an AI matter: Magearna holds an Assault Vest, and the driver reports its PROTECT as illegal with blocked_by ['MOVE_LIMITATION_TORMENTED']. The legality is correct (Assault Vest blocks status moves) but the reason string is wrong and could mislead a future agent into thinking a Torment was in play. Worth a one-word fix in the driver's limitation decoding by whoever owns scripts/playthrough/battle_driver.py.",
+    "AI decision timing peaked at 50 frames (0.837 s), comfortably inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "level_changes_not_made": [
+    {
+      "member": "BOLTUND",
+      "reason": "+1 in pass 1 and it converted completely - an entry-turn Protect that denied a likely knockout, then a Helping-Hand-boosted Crunch that took my Nidoking, then correct 4x coverage into a switch-in. Two player faints means the rule says keep."
+    },
+    {
+      "member": "DACHSBUN",
+      "reason": "+1 in pass 1 and it converted: it survived to act where it previously died before acting, and its Body Press took Kartana. Its remaining failure (Howl) is AI defect R6-D4, not a level problem."
+    },
+    {
+      "member": "AUDINO",
+      "reason": "Three turns, three useful actions, including the Helping Hand that decided the fight. Working."
+    },
+    {
+      "member": "GRANBULL",
+      "reason": "Highest offset on the team at 2 and the team's damage. It dies to a spread Poison attack from full HP, which is a matchup problem a level does not solve, and rule 5 points away from the team's damage first."
+    }
+  ],
+  "calibration": "KEEP - no level change. Won on the first attempt but in five turns with TWO player faints (Nidoking to a Helping-Hand-boosted Crunch, Kartana to Fire Fang plus Body Press), where pass 1 was a three-turn zero-faint walkover. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' Both pass-1 levels are demonstrably the reason for the difference, so this encounter is now calibrated and should be left alone.",
+  "could_this_be_cooler": "Retain as authored - and this is the clearest case in my block of levels doing exactly their job. The concept (a Pokefan's dog-and-support team: Intimidate Granbull, a Regenerator healer feeding Helping Hand to a Strong Jaw sprinter, and a Well-Baked Body Body Press wall behind them) went from a three-turn walkover to a two-faint fight on two levels, with no change to species, moves, items or strategy. The one thing that would make it cooler is not a species swap but a genuine use for Well-Baked Body: nothing in a normal cap-30 player party is obliged to throw a Fire move at this team, so the ability has never once triggered in two passes. If the main agent ever wants a third distinguishing hook here, pairing Dachsbun with a partner that WANTS to fire a spread Fire move into its own side (the Well-Baked Body redirect trick) would turn a dead ability into a real interaction. Not proposed as a change in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. No teams-file change for this battle. Synthetic headless benchmark, not earned campaign play."
+}
