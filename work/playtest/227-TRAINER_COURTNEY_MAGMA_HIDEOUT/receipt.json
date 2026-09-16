@@ -1,0 +1,110 @@
+{
+  "play_order": 227,
+  "e_group": "E0338",
+  "trainer": "TRAINER_COURTNEY_MAGMA_HIDEOUT",
+  "class": "admin",
+  "location": "MagmaHideout_4F",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Ninetales, Chi-Yu, Great Tusk, Ceruledge and Salazzle arrived at L60 = 60 + 2 - 2, and Pyroar at L61 = 60 + 3 - 2, matching the authored offsets 2/2/2/2/2/3.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "The same cap-60 rain six used for the grunt rooms, brought back deliberately for this fight - see that manifest's availability_audit. Nothing in it is sourced past the Mt Pyre summit.",
+  "pre_play_strategy_checks": [
+    "Ninetales' Drought is automatic and puts the fight in sun",
+    "Encore locks a player who took a setup or protect turn into repeating it",
+    "Great Tusk's Protosynthesis triggers on that sun and raises its Attack",
+    "Chi-Yu's Beads of Ruin cuts every other Pokemon's Special Defense by 25 percent, invisibly",
+    "Salazzle's Corrosion poisons Steel and Poison types, and Fake Out buys a turn",
+    "Ceruledge's Bitter Blade heals half the damage dealt and Weak Armor turns the physical answer into +2 Speed",
+    "Mega Pyroar's Competitive turns any stat drop into +2 Special Attack",
+    "Does the analyst-and-sun theme actually show on the board, and is Maxie a real step above this?",
+    "Protect ledger across six members"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 3,
+      "decisions": 5,
+      "player_faints": 1,
+      "opponent_faints": 6,
+      "why": "Three turns. The fight was decided before anyone acted: Ninetales has base 100 Speed and Pelipper base 65, so Drizzle resolved AFTER Drought and the battle opened in rain rather than sun. That single fact turned off the entire team - every Fire attack halved, Protosynthesis never triggered, Solar Beam unusable - while leaving all six of her members 2x into the Water attacks my party is built from. Turn 1 a rain-boosted Liquidation OHKOed Chi-Yu from 155/155 and a Hydro Pump OHKOed Ninetales from 176/176, and her Heat Wave missed both of my Water bodies. Turn 2 Mega Pyroar Mega Evolved and was OHKOed by one Liquidation from 195/195, while Hyper Voice plus Sludge Bomb removed Pelipper. Turn 3 Liquidation OHKOed Great Tusk from 227/227 and Surging Strikes OHKOed Salazzle from 170/170. Turn 4 a priority Aqua Jet OHKOed Ceruledge from 179/179. Five of her six died from full HP to a single attack."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Ninetales' Drought is automatic and puts the fight in sun",
+      "result": "FAIL as an engine - the sun never existed",
+      "evidence": "The opening state reported B_WEATHER_RAIN_NORMAL. Both weather abilities fired on turn 0 and the slower battler's applies last; Ninetales at base 100 is much faster than Pelipper at base 65, so my Drizzle overwrote her Drought before the first action and the Heat Rock never got to matter. This is the exact inverse of E0335, where Torkoal's base 20 Speed meant its Drought won. The mechanic is working correctly - the problem is that Courtney's sun setter is the fastest Drought user in the game, which makes her weather the easiest in the campaign to steal."
+    },
+    {
+      "check": "Encore locks a player into repeating a setup or protect turn",
+      "result": "NOT OBSERVED",
+      "evidence": "Ninetales used Heat Wave on its only turn (see AI defect E0338-1) and was KOed before it acted again. Encore never appeared."
+    },
+    {
+      "check": "Great Tusk's Protosynthesis triggers on the sun",
+      "result": "FAIL - structurally dead in this fight",
+      "evidence": "Protosynthesis needs sun or a Booster Energy; Great Tusk holds an Assault Vest and there was no sun at any point. It entered on turn 3 with its defining ability switched off and was OHKOed by a rain-boosted Liquidation from 227/227. Its entire identity in this battle depended on a weather condition that my lead removed for free on turn 0."
+    },
+    {
+      "check": "Chi-Yu's Beads of Ruin cuts Special Defense field-wide",
+      "result": "NOT OBSERVED",
+      "evidence": "Chi-Yu was on the field for exactly one turn and was the first thing to die, to one Liquidation from 155/155. The dossier's crack line says 'Kill Chi-Yu first' and that is precisely what happened, on the opening action, with no cost to me at all. The invisible Special Defense cut the write-up calls 'the fight's best hidden interaction' was live for zero of my attacks, all of which were physical or aimed elsewhere."
+    },
+    {
+      "check": "Salazzle's Corrosion and Fake Out",
+      "result": "PARTIAL",
+      "evidence": "Salazzle landed a Sludge Bomb poison on Urshifu, but Urshifu is Water/Fighting, so that is ordinary poison, not Corrosion doing anything it could not otherwise do. Fake Out never appeared - it entered on turn 2 alongside Mega Pyroar, which is a Fake Out turn if ever there was one, and chose Sludge Bomb instead. The authored answer to a Steel wall is real but my party carried no Steel, so Corrosion had nothing to prove."
+    },
+    {
+      "check": "Ceruledge's Bitter Blade, Swords Dance and Weak Armor",
+      "result": "FAIL - never acted",
+      "evidence": "Ceruledge entered last, on turn 3, and was KOed from 179/179 by a priority Aqua Jet before it took a single action. None of the three authored interactions - the half-damage heal, the Swords Dance, the Weak Armor Speed conversion - appeared."
+    },
+    {
+      "check": "Mega Pyroar's Competitive",
+      "result": "Mega PASS, ability NOT TESTED",
+      "evidence": "'The opposing Pyroar has Mega Evolved into Mega Pyroar!' on turn 2, at L61, confirmed. Competitive was untested because my party contains no Intimidate and no stat-lowering move - which is itself the authored counterplay ('never lower Pyroar's stats') working. It then died to a single rain-boosted Liquidation from 195/195, on the turn it Mega Evolved. The ace lasted one action."
+    },
+    {
+      "check": "Does the theme show, and is Maxie a step above?",
+      "result": "THEME: partially, and only on paper. See the cooler note.",
+      "evidence": "On the roster sheet Courtney's team is a strong idea: a sun setter, a Ruin legendary, a Paradox digger, a blade spirit, a Corrosion lizard and a Mega lion. On the board, in this fight, the player sees six Fire-coloured Pokemon die one per attack in rain. The analyst-and-sun identity is entirely contingent on holding the weather, and she does not hold it against the most obvious weather answer in the game. The Maxie comparison is recorded in the E0339 receipt."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS by vacuum",
+      "evidence": "Zero opponent Protects in the entire battle, from four members that carry it. Nothing empty and nothing repetitive - but also nothing to judge. The fight was too short for a guard to be worth a turn."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_summary": "0 opponent Protects across 3 turns and 5 decisions, from a six-member team with four Protect users. No empty guards, but no data either: five of her six died from full HP in a single action and never reached a turn where Protect was the right call.",
+  "ai_defects": [
+    {
+      "id": "E0338-1",
+      "turn": 1,
+      "board": "Ninetales 176/176 beside Chi-Yu 155/155, under B_WEATHER_RAIN_NORMAL that had been established before the first action by the opposing Pelipper's visible Drizzle; opposite Pelipper (Water/Flying) 198/198 and Swampert (Water/Ground) 246/246. Ninetales' moves: Heat Wave, Solar Beam, Encore, Protect.",
+      "chosen": "Heat Wave (it missed, so no damage figure exists).",
+      "better": "Encore, or Protect. Heat Wave into that board is about as bad as a move can be: rain halves Fire damage, and both targets are Water types that resist it, so the spread attack lands at roughly a quarter of its printed power against each slot. Solar Beam is also wrong (no sun means a charge turn), which leaves Encore - a genuinely useful action against a lead pair - or a guard. The reason I am confident this is a scorer issue rather than a coin flip is the contrast with E0328, where Magmortar under my rain correctly abandoned its Fire STAB for Thunderbolt against two Water bodies. So the weather multiplier IS reachable by the move scorer in some paths; here it was not applied, or was outweighed. Possible common factor: Magmortar was choosing between two attacking moves, while Ninetales was choosing between an attack and a status move, which may use a different comparison path. Severity: moderate; shared move scoring under adverse weather. Do not fix AI C code from this receipt."
+    }
+  ],
+  "ai_notes": [
+    "There is little else to judge - the AI got five decisions in the entire fight. Salazzle choosing Sludge Bomb over Fake Out on its entry turn alongside the Mega is the other questionable pick, but with the board already 2-0 down it is defensible as trying to trade damage rather than tempo.",
+    "AI decision budget: max 63 frames (1.055 s), the highest sample in my block and the closest to the 1.2 s budget. Both six-member admin boards sit around 1.02-1.06 s, which leaves roughly 12 percent headroom before the budget is breached - worth noting for whoever tunes the scorer, since the fixes suggested elsewhere in this block would add work to the same path."
+  ],
+  "level_changes": [
+    {"member": "NINETALES", "field": "level_offset", "before": 2, "after": 3, "medium_level_before": 60, "medium_level_after": 61},
+    {"member": "CERULEDGE", "field": "level_offset", "before": 2, "after": 3, "medium_level_before": 60, "medium_level_after": 61}
+  ],
+  "level_change_rationale": "Won first attempt in three turns with one player faint against a six-member admin at a story climax, which is far past the +1 review threshold. I raised Ninetales - whose Drought lost the weather race outright, so the engine it exists to provide never ran - and Ceruledge, which entered last and died to a priority attack without acting. I left Chi-Yu, Great Tusk, Salazzle and Mega Pyroar alone: Pyroar is the ace, and the other three failed for reasons a level cannot touch. I want to be completely plain that this +1 is compliance with the rule, not a fix. Five of Courtney's six were one-shot from full HP; a level adds a few HP and a few points of defence to bodies that are losing by a factor of two on type. The finding the main agent should act on is in the cooler note, not in these two offsets.",
+  "cooler": "It could be much cooler, and this is the most important note in my block. Courtney's problem is structural, not numerical, and it has two parts. First, her entire team is one weather and one type: all six are Fire or Fire-adjacent, all six are 2x into Water, and two of them (Great Tusk's Protosynthesis, Ninetales' Solar Beam) additionally stop functioning without the sun. Second, her sun setter is base 100 Speed, which in this engine means her Drought is applied BEFORE any slower weather ability and is therefore overwritten for free by a Pelipper - the single most common weather lead in doubles. Put together, one legal cap-60 Pokemon walking onto the field turned off her ability, her Paradox ability, one of her moves, and halved her damage, before either side chose an action. Compare Tabitha in E0337, whose Gigalith is base 25 and therefore keeps its sand against anything: she beat my first party outright. The dossier asks 'could this team be cooler' and answers by discussing the sixth slot; the sixth slot is not the issue. Two concrete, non-destructive suggestions for a later pass: give the sun to a slow setter (or give Ninetales a partner that can re-establish it), and break the mono-Water-weakness with one member that punishes the Water answer - the faction already owns the perfect piece for this, since Tabitha's Coalossal turns an incoming Water attack into +6 Speed. As authored, the analyst's fight is the least threatening six-member encounter in this block by a wide margin, including against several four-member grunt rooms.",
+  "legality_notes": "No legality problem in the authored set. Chi-Yu is a legendary and Great Tusk is a Paradox species; both are at a cap-60 villain-base climax, and the campaign's rule restricts them only in windows at or below 24, so both are inside the rules for this window.",
+  "reverify_note": "The Ninetales and Ceruledge +1 cannot be re-verified from this session; the change reaches the ROM only after the main agent re-materializes and rebuilds. Of everything in my block, this is the battle I would least want rerun on levels alone and most want revisited on composition - a rerun at +1 will produce the same three-turn result.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
