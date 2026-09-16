@@ -1,0 +1,71 @@
+{
+ "play_order": 74,
+ "e_group": "E0083",
+ "trainer": "TRAINER_TYRON",
+ "class": "regular",
+ "location": "Route111",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "SCYTHER": 29,
+  "KABUTO": 33,
+  "BEEDRILL": 25,
+  "SCOLIPEDE": 29
+ },
+ "cap_window_confirmation": "Dossier seeds 31/35/27/31 resolved to 29/33/25/29. Cap 30, Medium -2, confirmed again.",
+ "party_manifest": "work/playtest/74-TRAINER_TYRON/party.json",
+ "party_pool_audit": "Same audited cap-30 Route 110 six as play_order 73, reordered to lead Mega Gardevoir + Nidoking. Every source map is at or before Route 110. NewMauville sources and Route 111 desert species remain excluded for chronology (Surf in C28, Go-Goggles in C23). One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_strategy_checks": [
+  "Scyther actually uses Quick Guard as the escort role the plan names, and the guard has a payoff rather than being an empty turn",
+  "Kabuto's Weak Armor triggers on a physical hit and Aqua Jet priority is used as a finisher, not as a default",
+  "Beedrill Mega Evolves and its 145 Speed decides the turn order",
+  "Scolipede's Speed Boost actually accumulates and Focus Sash survives one hit",
+  "Every opposing Protect has a payoff - three of the four members carry it"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/74-TRAINER_TYRON/a1",
+   "seed": 74,
+   "outcome": "won",
+   "turns": 4,
+   "driver_turn_counter": 3,
+   "player_faints": 3,
+   "opponent_faints": 4,
+   "narrative": "T1 Tyron focus-fired my Ground type off the board before it acted: Kabuto's priority Aqua Jet (2x on Nidoking) plus Technician Dual Wingbeat KO'd Nidoking from full 98. My Mystical Fire took Scyther to 32. Magearna replaced Nidoking. T2 Hyper Voice removed Scyther while Kabuto's Stone Edge KO'd the full-HP 90 Mega Gardevoir outright; Magearna's Flash Cannon (2x) then removed Kabuto, and Soul-Heart had already climbed to +3. T3 Togekiss came in and never moved: Mega Beedrill and Scolipede both used Poison Jab into the Fairy (2x each) and KO'd it from 119 before its Air Slash; Magearna's Flash Cannon at +4 removed Mega Beedrill. T4 Kartana replaced Togekiss, Smart Strike plus a +5 Flash Cannon closed on the Sash'd Scolipede."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Scyther Quick Guard escort role",
+   "result": "NOT EXERCISED (correctly)",
+   "evidence": "Scyther chose Dual Wingbeat (T1) and Quick Attack (T2) and never used Quick Guard. I deliberately used no priority move in the two turns it was alive, so a Quick Guard would have been an empty turn - the AI declining it is the right call, not a defect. The consequence is that the encounter's single named support tactic is still unproven; it needs a run where the player leads with Fake Out or Aqua Jet."
+  },
+  {
+   "check": "Kabuto Weak Armor and Aqua Jet priority",
+   "result": "PASS (Aqua Jet), NOT EXERCISED (Weak Armor)",
+   "evidence": "T1 Aqua Jet was aimed at Nidoking (2x on Ground) as the second half of a genuine focus-fire kill, not as a default - that is a correct priority finisher. T2 Stone Edge removed a full-HP Mega Gardevoir. Weak Armor never triggered because my whole team attacked specially; that is my build, not an AI fault. Kabuto was comfortably the best member on the field."
+  },
+  {
+   "check": "Beedrill Mega Evolves and its Speed decides the turn",
+   "result": "PASS",
+   "evidence": "Battle log: 'The opposing Beedrill's Beedrillite is reacting' / 'The opposing Beedrill has Mega Evolved'. Mega Beedrill then moved before a Timid 80-base-Speed Togekiss and took half of the KO."
+  },
+  {
+   "check": "Scolipede Speed Boost and Focus Sash",
+   "result": "PASS",
+   "evidence": "'The opposing Scolipede's Speed rose!' at the end of T3; it was still at full 83/83 when T4 opened, so the Sash was intact and it needed both Smart Strike and a +5 Flash Cannon to remove."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS (vacuous)",
+   "evidence": "Not a single Protect was used in the whole battle despite Kabuto, Beedrill and Scolipede all carrying it. Every one of those turns was spent on a move that contributed to an actual kill. Empty ledger, no empty guarding."
+  }
+ ],
+ "protect_ledger": [],
+ "ai_defects": [],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt but with three player faints including a full-HP Mega Gardevoir and a full-HP Togekiss, and only Magearna's runaway Soul-Heart stack saved the game. That is the 'won after a real fight' case, so the team is kept exactly as authored. The focus-fire quality here was the best I have seen in this block - Tyron's AI identified and removed my Ground type on turn one before it could act.",
+ "could_this_be_cooler": "Kept, and this is a better team than its 'regular' class suggests - a genuine arthropod collection where the slow fossil and the 145-Speed Mega cover opposite ends of the speed tier and the Sash'd Speed Boost body closes. The one flaw is the piece the plan is named after: Scyther's Quick Guard is a dead slot against any player who does not bring priority, which means the encounter's signature move is a coin flip on the player's build. The concrete suggestion (not applied) is to give Scyther Feint instead of Quick Attack. Feint keeps the priority identity, it breaks a Protect, and it turns Scyther into a genuine escort for Mega Beedrill's one enormous turn - Feint the guard, then Adaptability Poison Jab lands - which is a plan that fires against every player instead of only the ones who brought Fake Out. Quick Guard stays as the reactive half.",
+ "authored_set_legality": "No legality problem found; all four members prepared and ran clean, and the Beedrillite Mega slot 3 resolved correctly."
+}
