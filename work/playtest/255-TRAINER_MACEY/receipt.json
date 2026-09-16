@@ -1,0 +1,88 @@
+{
+  "play_order": 255,
+  "e_group": "E0396",
+  "trainer": "TRAINER_MACEY",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (Mossdeep Gym, room nine)",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Metang, Girafarig, Duosion, Kadabra and Elgyem (offset 1) at L75 and Victini (offset 2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/255-TRAINER_MACEY/party_gym76.json"],
+  "chronology_note": "Same six and same audit as E0394 and E0395: every member gate 68 or lower, nothing sourced from Mossdeep or later, cap 76.",
+  "pre_play_strategy_checks": [
+    "Five of six hold Eviolite and are far bulkier than their stat lines suggest",
+    "Metang opens with Earthquake and Elgyem's Telepathy makes it immune to that Earthquake - the room's one clean doubles interaction",
+    "Duosion's Magic Guard plus Eviolite lets it Calm Mind through Life Orb, poison, hazards and weather",
+    "Girafarig's Sap Sipper turns a Grass attack into +1 Attack",
+    "Kadabra's Encore locks a player who spent a turn setting up",
+    "Victini is the ace; Victory Star raises the accuracy of every move on Macey's side by 1.3x and V-create is the largest single attack any non-leader in the gym owns"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 5,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/255-TRAINER_MACEY/a1",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Metagross / Gholdengo / Flutter Mane / Amoonguss)",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 1,
+      "opponent_faints": 6,
+      "why": "The room's own crack line is the whole story and it is not an exaggeration: 'Knock Off removes Eviolite and the room collapses.' One Adamant Incineroar Knock Off, at 2x into Psychic with the item-removal bonus, one-shot Girafarig (260 HP, Eviolite), Elgyem (Eviolite) and Duosion (Eviolite) from full HP on three separate turns. The Eviolite is calculated out of the damage on the same hit that removes it, so an item designed to make these bodies durable instead makes them worth 50 percent more damage to the single most obvious move in the matchup. Urshifu's Wicked Blow took Metang to 45 on turn 1 and Incineroar finished it on turn 2. The only thing that hurt me was Victini: a critical V-create killed a 262 HP Urshifu outright on turn 2, which is exactly the ace behaving as designed. Flutter Mane then outsped the Choice-locked, -1 Speed Victini and killed it with Shadow Ball. Four turns, one player faint."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Eviolite makes the five apprentices un-knockable for long enough for the room to work",
+      "result": "FAIL, decisively",
+      "evidence": "Three of the five Eviolite holders were one-shot from full HP by a single Knock Off (Girafarig turn 1, Elgyem turn 4, Duosion turn 5 for 253). Metang survived one Wicked Blow at 45 of 245 and died to the next attack. Kadabra survived only because it Protected twice. The plan's premise - that the room lasts long enough for Victory Star to matter - did not survive contact with the move its own crack line nominates."
+    },
+    {
+      "check": "Metang opens with Earthquake and Elgyem's Telepathy makes it immune",
+      "result": "PARTIAL - Earthquake yes, the interaction never happened",
+      "evidence": "turn 1: 'The opposing Metang used Earthquake!' hitting Incineroar for 128 at 2x and Urshifu for 175. But Metang's partner at that moment was Girafarig, not Elgyem, and Girafarig is a grounded Normal/Psychic that takes Earthquake normally - it was only spared because it had already fainted to Knock Off earlier in the turn. Elgyem did not reach the field until turn 4, by which time Metang was dead. The room's one clean doubles interaction is authored but unreachable from the default lead pair, exactly as at E0395."
+    },
+    {
+      "check": "Duosion Calm Minds behind Magic Guard and Eviolite",
+      "result": "FAIL - never acted",
+      "evidence": "Duosion entered on turn 5 as the last replacement and was knocked out by Knock Off for 253 before it took a single action. Magic Guard, Calm Mind and Recover were all untested."
+    },
+    {
+      "check": "Girafarig's Sap Sipper converts a Grass attack into +1 Attack",
+      "result": "UNTESTED",
+      "evidence": "I brought no Grass move (Amoonguss's damaging move is Sludge Bomb), so Sap Sipper had nothing to absorb. It is worth noting that Sap Sipper is a narrow ability to hang a slot on in a gym whose obvious answers are Dark, Ghost and Bug, not Grass."
+    },
+    {
+      "check": "Kadabra's Encore punishes a setup turn",
+      "result": "FAIL - never selected",
+      "evidence": "Kadabra had two decisions and spent both on Protect (turns 4 and 5). I never spent a setup turn for it to punish, which is fair, but it also never threatened anything: it dealt zero damage and died to a Shadow Ball at 2x for 169."
+    },
+    {
+      "check": "Victini's Victory Star raises the side's accuracy 1.3x",
+      "result": "PASS (present, unmeasurable)",
+      "evidence": "Victini's ability shows on the reading and every opponent move that was aimed in its presence connected. With only 4 turns and no low-accuracy move on Macey's side (the highest miss chance in the room is Meteor Mash at 90), there was nothing for the boost to visibly rescue. The ability is correctly on the set but this roster gives it almost nothing to do."
+    },
+    {
+      "check": "V-create is the largest non-leader attack in the gym",
+      "result": "PASS",
+      "evidence": "turn 2: 'The opposing Victini used V-create! A critical hit!' killed a 262 HP Urshifu outright, with the authored Defense, Sp. Def and Speed drops all firing afterwards. This is the one moment in the room that felt like a Gym trainer. It also demonstrated the drawback honestly - the Speed drop let a Flutter Mane that had just switched in outspeed and kill it on the next turn."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 3, "battler": "Elgyem", "payoff": "marginal. It blocked an Incineroar Darkest Lariat that had been submitted at Victini and only redirected to Elgyem because Victini died first - so the AI could not have known what it was blocking. It did prevent real damage on a body with no other defence, but it also spent the turn Elgyem could have used to start Trick Room while Victini was still alive, which was the room's best remaining line. Call it break-even."},
+    {"attempt": 1, "turn": 4, "battler": "Kadabra", "payoff": "good. Blocked a Flutter Mane Shadow Ball at 2x that would have killed it outright. Kadabra is 4/0/0/252/0/252 with Eviolite and a Ghost attack at 2x is lethal, so this is a life saved and a correct read."},
+    {"attempt": 1, "turn": 5, "battler": "Kadabra", "payoff": "empty, and the one guard I would flag. Kadabra Protected on consecutive turns and this one blocked nothing - Flutter Mane's Shadow Ball resolved and killed it on the same turn the guard was chosen. Note the turn-5 message order: 'The opposing Kadabra used Protect! ... Flutter Mane used Shadow Ball! It's super effective! The opposing Kadabra fainted!' - the Protect did not hold. Consecutive Protect carries the standard failure chance, and spending it there rather than attacking cost Kadabra its only chance to contribute damage in the entire fight."}
+  ],
+  "protect_summary": "3 opponent Protects across 4 turns, which is a high rate. 1 good (Kadabra turn 4, a saved life), 1 break-even (Elgyem turn 3, blocked a redirected attack but cost the room its Trick Room turn), 1 empty (Kadabra turn 5, consecutive, failed, and Kadabra died anyway). The consecutive Kadabra guard is the one decision here worth tuning - the expected value of a second straight Protect against a board where both of my attackers were faster and one attack was already lethal was near zero.",
+  "ai_defects": [],
+  "ai_notes": "No hard defect. Two soft observations. (1) Elgyem chose Trick Room on turn 4 with Victini already dead, Metang already dead and only Kadabra (a fast Timid body) beside it - reversing the turn order would have helped my slow Incineroar as much as it helped Macey. It died before the move resolved, so the choice cost nothing, but Trick Room on a board with no slow attacker left is close to an anti-play. (2) The replacement order sent Victini out as the very first replacement, on turn 1, when Macey still had four unrevealed bodies. Leading the ace into a full-health player team meant it got exactly two actions - one kill and one death. Holding the Choice Scarf ace until the player's fast Ghost and Dark answers had been spent would have been stronger. Neither is illegal or nonsensical enough to call a defect.",
+  "level_changes": [
+    {"member": "DUOSION", "field": "level offset", "before": 1, "after": 2, "why": "Won on attempt 1 with a single player faint. Duosion contributed literally nothing - it entered on the last turn and was one-shot before acting - and it is not the ace, not a Mega and not a legend, so it is the correct first candidate."},
+    {"member": "ELGYEM", "field": "level offset", "before": 1, "after": 2, "why": "The second weakest contributor: one Protect, one Trick Room that never resolved, zero damage, one-shot through its Eviolite. It also owns the room's advertised Telepathy interaction, so it is the member most worth making harder to remove."}
+  ],
+  "level_change_rationale": "Won in four turns with one faint against a Gym trainer that is supposed to be an exceptional difficulty benchmark. That is well short of the standing expectation. I deliberately left Victini (ace), Metang (the only member that took two attacks to remove) and Kadabra alone and raised the two members that never contributed. I want to be explicit, though: +1 will not fix this room. The problem is not levels, it is that every defensive stat in it is routed through one removable item and the player's best move against a Psychic gym removes it. See the cooler note.",
+  "cooler": "The concept - a room of unevolved apprentices who are individually far bulkier than they look - is a genuinely good idea and it is the only room in the gym with a story reason for its composition. It does not show on the board, and the reason is structural rather than a matter of levels. Hanging five of six defensive profiles on Eviolite means the room has exactly one point of failure, and the move that hits it is Knock Off: the move every competent player brings into a Psychic gym anyway, the move that gets a 50 percent power bonus for removing the item, and the move that therefore one-shots the very bodies the item was meant to protect. Three separate Eviolite holders died to one Knock Off each from full HP. Two concrete suggestions. (1) Split the item spread - keep Eviolite on two or three (Metang and Duosion earn it most), and give the rest items that survive a Knock Off or punish it: Rocky Helmet, a Sitrus Berry that is eaten early, or Kadabra's Magic Guard paired with a Life Orb it never takes recoil from. That keeps the apprentice theme and removes the single switch. (2) Lead Metang beside Elgyem rather than Girafarig, so the Earthquake-plus-Telepathy interaction the plan calls 'the room's one clean doubles interaction' actually happens on turn 1 instead of never. That costs nothing and is the difference between a stated concept and a shown one. I am changing neither in this pass.",
+  "legality_notes": "No legality problem in the authored set. Every level matched cap + offset - 2 and Victini is a mythical used as a Gym ace, which the gym rules authorize for type-appropriate cases at a balanced individual level. One observation for the record: Victini at offset 2 is the same offset as several of the plain apprentices after this pass's changes, which understates its role; if the room is revisited, the ace deserves the wider gap rather than more levels on the chaff.",
+  "verification_limit": "The two +1 offsets cannot be re-verified from this session - the driver runs work/agent-battle-build-5, a ROM built before this edit - so a rerun now would replay the old levels. The main agent must re-materialize and rebuild first. Within my block, E0395 is the run most worth repeating; this one is worth repeating only if the Eviolite spread is revisited, since two levels will not change the Knock Off arithmetic."
+}

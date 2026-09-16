@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Gym (Psychic) cap 76 anti-Psychic doubles core - same six used for every gym room in this block",
+  "availability_audit": "Cap ladder: C39 (Scorched Slab Heatran) grants cap 76; C40 (submarine theft / Aqua Hideout) and C41 (Mossdeep, Mind Badge) move no cap; cap 84 only arrives with C42 the Space Center. A player standing in the Mossdeep Gym has therefore just sailed east from Lilycove past Mt Pyre and Routes 123-128, holds no Mind Badge, and has not seen Sootopolis, the Seafloor Cavern or the Space Center. Per-member chronology against pool-76.json source_detail: Incineroar gate 36, evolution:level from Torracat (Litten, Mauville Game Corner) - Mauville is chapter C22. Urshifu-Single-Strike gate 42, EVO_SCRIPT_TRIGGER from Kubfu, legendary_sign:Route112 (the Jagged Pass / Magma Emblem approach, C26). Metagross gate 48, evolution:level from Metang (Beldum line, upstream of Lilycove); ITEM_METAGROSSITE stone-window 42, inside the Mega Ring window. Gholdengo gate 48, evolution:level from Gimmighoul-Chest. Flutter Mane gate 68, wild:MtPyre_Summit/land_mons - Mt Pyre is chapter C37, immediately before the Aqua Hideout and two chapters before Mossdeep, so it is genuinely behind the player. Amoonguss gate 42, evolution:level from Foongus (Petalburg Woods). No member is sourced from Mossdeep, the Space Center, Route 127-128 water, Shoal Cave, the Abandoned Ship, the Seafloor Cavern, Sootopolis, Pacifidlog or Route 131. No reachable legend is used; Flutter Mane is a Paradox species, which the brief bars only in windows at or below cap 24.",
+  "plan": "Six bodies built for a Psychic gym. Dark and Steel typing means most of the gym's STAB is resisted or void: Incineroar, Urshifu and Gholdengo all ignore or resist the Psychic lane. Urshifu's Unseen Fist is the answer to a gym where every authored set carries Protect, and Wicked Blow's guaranteed critical ignores Calm Mind, Iron Defense, Commander and every other boost the rooms set up. Knock Off on Incineroar is the crack line for Macey's five Eviolites. Flutter Mane and Gholdengo supply two spread moves for Disguise, Illusion and Focus Sash boards. Mega Metagross is the physical win condition whose Steel typing resists the gym's whole type. Amoonguss carries Spore and Rage Powder for redirection and to punish the slow setup rooms.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_DARKEST_LARIAT", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Intimidate and Fake Out control; Knock Off strips Eviolite, Life Orb and Terrain Extender; Darkest Lariat ignores the gym's stat boosts",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Unseen Fist ignores Protect; Wicked Blow always crits and so ignores every defensive boost in the gym; Dark STAB into a Psychic gym",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": ["MOVE_METEOR_MASH", "MOVE_ZEN_HEADBUTT", "MOVE_ICE_PUNCH", "MOVE_BULLET_PUNCH"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega win condition; Steel resists the gym's entire STAB lane and Tough Claws Meteor Mash is the largest physical number on my side",
+      "availability": "pool-76 gate 48, evolution:level from SPECIES_METANG; ITEM_METAGROSSITE stone-window 42."
+    },
+    {
+      "species": "SPECIES_GHOLDENGO",
+      "moves": ["MOVE_MAKE_IT_RAIN", "MOVE_SHADOW_BALL", "MOVE_NASTY_PLOT", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_GOOD_AS_GOLD",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "Good as Gold refuses Will-O-Wisp, Thunder Wave, Hypnosis, Yawn, Encore and Follow Me-adjacent status; Make It Rain is a spread move; Ghost STAB into Psychic",
+      "availability": "pool-76 gate 48, evolution:level from SPECIES_GIMMIGHOUL_CHEST."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": ["MOVE_MOONBLAST", "MOVE_SHADOW_BALL", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "fastest body on the field; Ghost STAB and a second spread move for Disguise and Sash boards",
+      "availability": "pool-76 gate 68, wild:MtPyre_Summit/land_mons."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Spore removes a setup body for the fight; Rage Powder redirects the single-target payoff turns",
+      "availability": "pool-76 gate 42, evolution:level from SPECIES_FOONGUS."
+    }
+  ]
+}
