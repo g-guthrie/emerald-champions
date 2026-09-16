@@ -1818,3 +1818,38 @@ N, O, P, Q. Three consecutive-Protect boards are now on file and all three are
 cleaner than Alan's: Jared's Noctowl (E0283 r2), Foster's Runerigus alone at
 full HP (E0175 r2) and Drifblim (E0318). That is the K(1) fixture I could not
 build, three times over.
+
+# R(1) and K(1): both hold natively
+
+Commit in this section: `git log` shows it against
+`test/battle/ai/support_starvation.c`. **193 passed, 0 failed** on my
+allowlist.
+
+**R(1), ally targeting — not an AI defect.** Clawitzer's Heal Pulse resolves to
+its own injured partner and heals it, with two foes on the board and a damaging
+move on the same set. The `target 0` in that receipt is a property of the
+record, not of the choice; the receipt writer is the place to look. The same
+fixture shape can be extended to Helping Hand, After You, Instruct and Pollen
+Puff cheaply if you want the whole class pinned.
+
+**K(1), the empty consecutive guard — still does not reproduce.** On Jared's
+Noctowl shape (full health, both player attacks aimed at the other slot, a real
+attack on the set) the AI attacks on both turns. Three boards have now been
+offered for this and none of them reproduces in a fixture.
+
+**Why, and what it means for the family.** Since the omniscience removal the AI
+cannot see which slot the player committed to. "Nothing was actually aimed at
+it" is a fact about the turn as played, not a fact the AI had. A full-health
+body opposite two live attackers is, in its own frame of reference, a credible
+target, and a guard there is priced against that forecast — which is the model
+working as designed, not a bug. What can still be wrong is the *repeat*: a
+second guard is worth a third of the first, and that discount exists and is
+reached (`ev->protectChance` from `GetConsecutiveMoveSuccessDenominator`, plus
+the −35 in `PairPlanScore`).
+
+So for the receipts to be actionable I need what the AI knew, not what
+happened: the pre-decision forecast on that turn. If a receipt can record the
+AI's own expected incoming damage on the guard holder at decision time, an
+empty guard becomes falsifiable. Without it, every one of these boards reads as
+"it guarded against a threat that did not come", which is a different claim
+from "it guarded against nothing".
