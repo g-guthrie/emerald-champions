@@ -1,0 +1,106 @@
+{
+  "play_order": 56,
+  "e_group": "E0063",
+  "trainer": "TRAINER_JACLYN",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "FULL REPLAY, not a level confirmation. The pass-1 benchmark for this trainer is VOID: the driver let me switch a 21 HP Weavile out from under Wobbuffet's Shadow Tag on turn 3, which is illegal, and the pass-1 receipt itself flagged the switch as one that 'should have been blocked'. The rebuilt ROM enforces trapping abilities on player switches, so this is a clean first benchmark played under the real constraint. No levels were changed in pass 1, so nothing here is confirming a previous change.",
+  "supersedes": "work/playtest/56-TRAINER_JACLYN/receipt.json (void - illegal switch out of Shadow Tag)",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "No prior level change to verify. Resolved levels match the authored offsets unchanged: Wobbuffet 0, Swoobat 1, Kadabra 2, Musharna 0.",
+  "resolved_opponent_levels": {"WOBBUFFET": 28, "SWOOBAT": 29, "KADABRA": 30, "MUSHARNA": 28},
+  "switch_legality_verification": "CONFIRMED ENFORCED. From turn 0 the driver reported BOTH of my battlers with may_switch=false and switch_blocked_by ['ability_prevents_escape'], and they stayed blocked for every turn Wobbuffet was on the field. I made no switch at all while it was alive; the only switch in the battle was the forced replacement after Magearna fainted, which trapping does not prevent. The illegal line that made pass 1 void cannot be repeated on this build.",
+  "party_manifest": "work/playtest/56-TRAINER_JACLYN/party.json",
+  "party_chronology_note": "Reused unchanged from the void pass: Weavile, Magearna, Kartana, Togekiss, Nidoking, Gardevoir (Gardevoirite) - all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110, per the manifest's own availability audit. One declared reachable legend (Magearna); Gardevoir was never sent out, so no Mega was used. The party is chronology-legal and is deliberately the same six, so the honest replay is comparable to the void run.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/56-TRAINER_JACLYN/r1",
+      "seed": 56,
+      "outcome": "won",
+      "turns": 4,
+      "driver_turn_counter": 3,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames": [62, 39, 39, 18, 18],
+      "ai_decision_seconds_max": 1.038,
+      "narrative": "Played honestly under the trap this time: single-target moves only, never feed the wall, and accept that I cannot rotate out. T1 Weavile's Fake Out flinched Swoobat out of the Calm Mind it had selected and Magearna's 2x Thunderbolt KO'd it from full 87; Wobbuffet used Safeguard. T2 Jaclyn pivoted Musharna out for Kadabra, which walked into both of my attacks aimed at that slot - Knock Off broke its Focus Sash and Flash Cannon finished it - while Wobbuffet's Mirror Coat failed, since I had put no special damage on it. T3 was the turn the set is built for: Weavile's Knock Off KO'd the returning Musharna, so the Flash Cannon I had aimed at Musharna REDIRECTED onto Wobbuffet, and Wobbuffet's Mirror Coat returned double and KO'd my 116 HP Magearna outright. That is the authored trap firing exactly as designed, and it is what the void pass never got to show. T4 Togekiss replaced Magearna and Weavile's 2x Knock Off finished the 59 HP Wobbuffet before it could Counter. Won with one player faint - my bulkiest attacker - and Weavile on 55/91."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Shadow Tag actually traps the player (the reason for this replay)",
+      "result": "PASS",
+      "evidence": "Both player battlers reported may_switch=false with switch_blocked_by ['ability_prevents_escape'] from turn 0 until Wobbuffet fainted. I could not rotate a damaged attacker out, could not bring a resist in, and had to solve the board with the two Pokemon I led with. This is a completely different and much better encounter than the void pass, where I simply switched away from the problem."
+    },
+    {
+      "check": "Mirror Coat punishes the player's special damage",
+      "result": "PASS - decisively",
+      "evidence": "Turn 3. My Flash Cannon was aimed at Musharna; Weavile KO'd Musharna first, the attack redirected onto Wobbuffet, and Mirror Coat returned double and KO'd a 116 HP Assault Vest Magearna from full health. The trap caught me through a redirect I could not fully control, which is the most honest way for it to land. In the void pass Wobbuffet's Mirror Coat and Counter both failed and it never landed a hit."
+    },
+    {
+      "check": "Counter punishes physical damage",
+      "result": "NOT TESTED",
+      "evidence": "Wobbuffet was KO'd by Weavile's physical Knock Off on turn 4 before it could act, so Counter was never selected. Not a fault - it had one turn left and lost the speed race by about 90 base points."
+    },
+    {
+      "check": "Simple Calm Mind Swoobat turns over",
+      "result": "FAIL - never resolved",
+      "evidence": "It selected CALM_MIND on turn 1, was flinched by Fake Out, and was KO'd from full 87 HP by a 2x Thunderbolt in the same turn. Same outcome as the void pass. Simple doubles every boost, so this is the scariest thing on the roster on paper and it has now never got a single stage."
+    },
+    {
+      "check": "Musharna's Yawn forces the player to respect the sleep clock",
+      "result": "PARTIAL",
+      "evidence": "It got one Yawn off at Weavile on turn 3 - and under the trap that is genuinely threatening, because I could not switch to clear the drowse. It died to the Knock Off that same turn before the Yawn could resolve into sleep. With Shadow Tag enforced, Yawn is a much better move on this team than it looked in the void pass."
+    },
+    {
+      "check": "Safeguard protects the team's own status",
+      "result": "EMPTY but defensible",
+      "evidence": "Wobbuffet used Safeguard on turn 1 against a Weavile and a Magearna that between them carry no status move at all, so it protected against nothing for the whole battle. On turn 1 the AI has not seen my sets, and Safeguard is a reasonable blind opener for a wall whose other options are pure gambles, so I am not scoring it as a defect."
+    },
+    {
+      "check": "Encore",
+      "result": "FAIL - never selected",
+      "evidence": "MOVE_ENCORE was not chosen in either the void pass or this one. It is arguably Wobbuffet's best move against a trapped opponent - locking my Weavile into Fake Out or my Magearna into a resisted move would have been worth more than the failed Mirror Coat on turn 2. Recorded as an AI note rather than a defect because the Mirror Coat gamble did eventually pay off enormously."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent used Protect in this battle - Musharna had it and chose Yawn instead, which was the better move. No empty guards to report.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 3 Mirror Coat is the best single opposing action in my entire block. It was selected on a turn when Wobbuffet had taken no damage at all, which makes it a gamble, and it caught a redirected Flash Cannon and returned it for a clean knockout on my strongest body. Do not tune this away.",
+    "Turn 2 Jaclyn pivoted a 129 HP Leftovers Musharna out for a Focus Sash Kadabra and lost Kadabra - her highest-offset member - to two attacks that were aimed at the slot. The opponent does not read my pending commands, so this is not a defect; but swapping the durable body out for the glass cannon into an unknown turn is the one pivot in my block that clearly cost the AI material, in contrast to Greta's excellent Shedinja->Gastly pivot.",
+    "Wobbuffet's move record across the battle was Safeguard (blank), Mirror Coat (failed - no damage taken), Mirror Coat (knockout). Two blanks for one huge payoff is the authored risk profile of a Counter/Mirror Coat wall with no attacking move, and on this evidence it is priced about right. Encore was never reached for, which is the one line worth a second look.",
+    "AI decision timing peaked at 62 frames (1.038 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "MUSHARNA",
+      "field": "level offset",
+      "before": 0,
+      "after": 1,
+      "pass_total": "+1 (first level for this member in any pass)",
+      "reason": "First-attempt win in four turns with one player faint, and four of my six were never sent out, so brief rule 5 applies. Musharna is the correct recipient: it is tied-lowest at L28, it is the team's bulky body, and with Shadow Tag enforced its Yawn is genuinely dangerous - a drowsing player battler cannot switch the drowse off. It got exactly one Yawn off and was then KO'd by a single 2x Knock Off from 129 HP. One level of a Leftovers wall is the most likely of any change here to convert into a surviving turn and a landed sleep."
+    }
+  ],
+  "level_changes_not_made": [
+    {
+      "member": "WOBBUFFET",
+      "reason": "Also tied-lowest at L28 and offset 0, but it is the fight's decisive member and the reason the encounter works: its Mirror Coat took my best Pokemon. Rule 5 points away from raising what is already working, and a tougher 153 HP untargetable wall would make the fight longer rather than harder."
+    },
+    {
+      "member": "SWOOBAT",
+      "reason": "It has now been removed on turn 1 without acting in both passes, so on paper it is the failing member. Not raised: it dies from full 87 HP to a 2x Thunderbolt, which one level does not change, and its real problem is that a Simple Calm Mind sweeper is sent out first into the player's opening damage. Ordering, not levels."
+    },
+    {
+      "member": "KADABRA",
+      "reason": "Highest offset on the team at 2. Its loss this pass was a trainer pivot into two incoming attacks, not a level problem."
+    }
+  ],
+  "calibration": "RAISE Musharna 0 -> 1. Won on the first attempt in four turns with one player faint. The faint matters - it was a full-health 116 HP Assault Vest Magearna removed in one move by the authored trap - and under enforced Shadow Tag this encounter is far better than the void pass suggested. But it is still a four-turn clear with four of my six untouched, so brief rule 5's 'won first try with 0-1 player faints -> +1 on the weakest one or two' applies. One member only, because Wobbuffet is the member that is working and Swoobat's failure is an ordering problem. IMPORTANT for the main agent: this receipt, not receipt.json, is the benchmark of record for E0063.",
+  "could_this_be_cooler": "Retain, and this replay materially raises my opinion of the team. Under enforced Shadow Tag, Jaclyn's concept is one of the sharpest in my block: a wall with no attacking move that punishes the player for the damage they have to deal, next to partners the player must remove, while the player cannot rotate a damaged attacker out or bring in a resist. The trap even caught me through a redirect I could not fully control. Two honest observations, neither implemented: Swoobat is the team's most exciting idea (Simple doubles every Calm Mind stage) and it has never got a single boost in two attempts because it leads into the player's opening damage - it belongs behind the wall, not beside it; and Encore has never been selected, which is a shame, because Encore plus Shadow Tag is exactly the lock this archetype exists to produce. The first is a send-out order note for the main agent and the second is for the AI owner.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Full replay, one attempt (three are allowed only on a loss), same party manifest as the void pass so the two are comparable. Teams-file change is the single MUSHARNA offset line, edited in place; generated projections were not regenerated or committed by this session. Synthetic headless benchmark, not earned campaign play."
+}
