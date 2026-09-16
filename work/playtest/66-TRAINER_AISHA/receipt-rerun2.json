@@ -1,0 +1,125 @@
+{
+  "play_order": 66,
+  "e_group": "E0076",
+  "trainer": "TRAINER_AISHA",
+  "class": "casual",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "run_kind": "rerun2",
+  "prior_receipts": [
+    "work/playtest/66-TRAINER_AISHA/receipt.json",
+    "work/playtest/66-TRAINER_AISHA/receipt-rerun.json"
+  ],
+  "build": "work/agent-battle-build-5",
+  "why_rerun": "The previous rerun raised Hariyama and Hitmontop from -1 to 0 (their second +1 of this pass). Those offsets are now built into work/agent-battle-build-5, so the fight is re-benchmarked on the levels that were actually changed. The block note also asks explicitly whether the authored ACTIVATE Frost Breath tactic, which has never fired, fires on this build.",
+  "cap_confirmation": "Driver state reports level_cap 30. Resolved opponent levels read off the live board: Froslass 28, Tauros 28, Hariyama 28, Hitmontop 28. Current authored offsets at run time were 0/0/0/0, and cap 30 + 0 - 2 = 28 for every member on Medium. Verified BEFORE the level changes below were written. Hariyama and Hitmontop came in at 28 rather than the 27 of the previous rerun, which confirms the changed offsets are present in this build.",
+  "level_offsets_at_run": {"FROSLASS": 0, "TAUROS": 0, "HARIYAMA": 0, "HITMONTOP": 0},
+  "resolved_opponent_levels": {"FROSLASS": 28, "TAUROS": 28, "HARIYAMA": 28, "HITMONTOP": 28},
+  "party_manifest": "work/playtest/66-TRAINER_AISHA/party.json",
+  "party_reuse_justification": "Reused unchanged, and legal to reuse chronologically. Same cap 30 and same map (Route 117). Checked against work/reference-pools/pool-30.json for this run: Gardevoir gate 30 (evolution from Kirlia) with Gardevoirite stone-window 14, Magearna gate 14 (legendary_sign:RustboroCity_DevonCorp_2F), Kartana gate 20 (wild:PetalburgWoods_3), Nidoking gate 20 (Moon Stone on Nidorino), Togekiss gate 24 (Shiny Stone on Togetic), Weavile gate 14 (Sneasel). Every source map - Devon Corp 2F, Petalburg Woods, Route 102/104 - is passed before Route 117 in book play order, and no Route 118+, Mt. Pyre or post-Wattson-key source is used. Magearna and Kartana are a mythical and an Ultra Beast but this is a cap-30 window, above the brief's 24 threshold, and both are pool entries gated at or below 20. The party was never reported weak or illegal.",
+  "pre_declared_strategy_checks": [
+    "THIRD RETEST: does `tactic: ACTIVATE FROSLASS FROST_BREATH TAUROS` fire - Froslass using Frost Breath on its OWN Tauros for the guaranteed critical hit into Anger Point?",
+    "Once boosted, Tauros attacks rather than repeating the activation",
+    "Hitmontop uses Wide Guard to shield the boosted attacker from spread moves",
+    "Hariyama supplies its own Fake Out / physical line",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/66-TRAINER_AISHA/r2",
+      "seed": 2066,
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "log": "work/playtest/66-TRAINER_AISHA/r2/events.jsonl",
+      "narrative": "T1 Mega Gardevoir Hyper Voice (Pixilate spread) + Magearna Fleur Cannon at Tauros. Froslass answered with Icy Wind at Magearna, Tauros with Double-Edge at Gardevoir; Tauros fainted to the combined damage plus its own recoil and Froslass fainted to a critical Fleur Cannon through its Focus Sash. T2 Gardevoir (6 HP) switched to Togekiss; both Hariyama and Hitmontop fired Fake Out at that same slot; Magearna's Fleur Cannon (2x on Fighting) KOed Hariyama. T3 Togekiss Air Slash + Magearna Fleur Cannon KOed Hitmontop. Zero player faints; Mega Gardevoir survived at 6 HP behind the switch."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "ACTIVATE FROSLASS FROST_BREATH TAUROS fires",
+      "result": "FAIL - third consecutive reproduction",
+      "evidence": "Turn 1 was again the only board on which the tactic was available with every dossier precondition met: Froslass 103/103 with Frost Breath legal, its own Tauros 106/106 at zero stat stages holding a Clear Amulet with Anger Point. Froslass selected MOVE_ICY_WIND targeting Magearna. Frost Breath has now not been selected in any of the three completed runs of this trainer."
+    },
+    {
+      "check": "Boosted Tauros attacks rather than repeating activation",
+      "result": "NOT REACHED",
+      "evidence": "Anger Point never activated, so the branch is untested for the third run running."
+    },
+    {
+      "check": "Hitmontop Wide Guard",
+      "result": "NOT REACHED",
+      "evidence": "Hitmontop entered on T2, chose Fake Out, then Close Combat on T3 and died. With no boosted ally to shield, both choices are individually defensible, but the move that justifies the set has still never been used."
+    },
+    {
+      "check": "Hariyama's own Fake Out / physical line",
+      "result": "PASS with a targeting flaw",
+      "evidence": "T2 Hariyama used Fake Out. The choice of move is correct on entry. See AI defect E0076-D2 for the target collision with Hitmontop's Fake Out on the same turn."
+    },
+    {
+      "check": "Every opposing Protect has a payoff",
+      "result": "N/A",
+      "evidence": "The opponent used no Protect in this battle. Tauros is the only Protect holder and it died on turn 1."
+    }
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {
+      "id": "E0076-D1",
+      "status": "REPRODUCES on work/agent-battle-build-5 - third consecutive run",
+      "severity": "high",
+      "attempt": 1,
+      "turn": 1,
+      "board": "Froslass 103/103 @FOCUS_SASH with MOVE_FROST_BREATH legal, beside its own Tauros 106/106 @CLEAR_AMULET with ABILITY_ANGER_POINT at zero stat stages, against Gardevoir 90/90 (pre-Mega) and Magearna 116/116. The authored line is `tactic: ACTIVATE FROSLASS FROST_BREATH TAUROS`.",
+      "chosen": "MOVE_ICY_WIND targeting Magearna.",
+      "better_action": "MOVE_FROST_BREATH targeting the ally Tauros - a guaranteed critical hit and therefore a guaranteed Anger Point +6 Attack.",
+      "why_wrong": "Unchanged from the previous two receipts: this is the only board in the fight on which the team's single authored centrepiece can fire, all of its preconditions held, and the AI picked a generic support move instead. Tauros's Clear Amulet, Hitmontop's Wide Guard and Froslass's deliberately zeroed Special Attack IV are all dead weight until it fires, so about three quarters of the authored design is still unreachable in play. No AI C code was changed here.",
+      "cross_owner_note": "The ACTIVATE machinery is shared. E0092 TRAINER_WATTSON_1 carries `ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE` and is the second data point; that owner's rerun receipt should be read beside this one."
+    },
+    {
+      "id": "E0076-D2",
+      "status": "NEW this run",
+      "severity": "low",
+      "attempt": 1,
+      "turn": 2,
+      "board": "Hariyama and Hitmontop both entered on T2 and both hold Fake Out. Player side was Gardevoir-Mega at 6/90 in slot b0 and Magearna at 113/116 in slot b2.",
+      "chosen": "Both Hariyama and Hitmontop used MOVE_FAKE_OUT targeting b0.",
+      "better_action": "One Fake Out at b0 and the other at b2 (Magearna), or one Fake Out plus one attack.",
+      "why_wrong": "Two Fake Outs on one target can only flinch that target once, so the second is pure chip damage and a wasted flinch. Choosing b0 was correct at decision time for whichever moved first - it was the 6 HP Mega and the spread threat - but the pair should not duplicate a flinch onto a single slot when the other slot is undisrupted. This is an ally-coordination miss in Fake Out target selection rather than a wrong move choice, and it would affect any owner fielding two Fake Out users, which is common.",
+      "mitigating": "My switch resolved before either Fake Out, so both landed on a Togekiss that had just come in. The choice was made against the pre-switch board and the AI does not read pending commands, so the target choice is not evidence of any omniscience defect - only of the duplication."
+    }
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in three turns with ZERO player faints and no real threat -> +1 on the opponent's weakest one or two members, never the ace/Mega/legend first. This team has no ace, Mega or legend.",
+    "budget_note": "Baseline offsets at the start of this playtest pass were Froslass 0, Tauros 0, Hariyama -1, Hitmontop -1. Hariyama and Hitmontop have each already taken +1 this pass and sit at 0; Froslass and Tauros have taken nothing. Nobody exceeds the +-2 per-member limit after this change.",
+    "changes": [
+      {
+        "trainer": "TRAINER_AISHA",
+        "member": "FROSLASS",
+        "field": "level offset",
+        "before": 0,
+        "after": 1,
+        "resolved_level_before": 28,
+        "resolved_level_after": 29,
+        "reasoning": "All four members are now level 28, so 'weakest' cannot be decided by level and is decided by evidence instead. Froslass is the activator and it has died on turn 1 in every run, which is also the reason the fight collapses in three turns. It has full +-2 budget remaining. Raising it does not repair defect E0076-D1 and is not offered as a substitute for that repair - it buys the activator one more point of bulk against the turn-1 alpha strike that has ended this fight three times."
+      },
+      {
+        "trainer": "TRAINER_AISHA",
+        "member": "TAUROS",
+        "field": "level offset",
+        "before": 0,
+        "after": 1,
+        "resolved_level_before": 28,
+        "resolved_level_after": 29,
+        "reasoning": "The second of the two. Tauros is the activation recipient and the other half of the lead pair that has never survived to turn 2. Full budget remaining. Deliberately NOT applied to Hariyama or Hitmontop: both already absorbed a +1 this pass, they are the two members that actually functioned, and a third pass on them would inflate the back half of a team whose front half is the problem."
+      }
+    ]
+  },
+  "cooler_note": "Unchanged and now urgent. The concept - a Froslass with a surgically weakened Special Attack throwing a guaranteed-crit Frost Breath at its own Clear Amulet Tauros to hand it +6 Attack, with Wide Guard behind it - is one of the most memorable small ideas in the range, and no player has ever seen it. The cooler team is this exact team with the tactic working; no composition change is warranted or proposed. If E0076-D1 proves unfixable on the shared path, the fallback worth considering in a later pass is giving Froslass a reason to survive turn 1 that is not levels, for example moving the Focus Sash's job onto a Custap-style resource or leading Hariyama beside Froslass so Fake Out covers the activation turn. Flagged, not applied - this pass changes levels only.",
+  "authored_set_legality": "No legality problem found. All four sets validate and no member exceeds the cap window.",
+  "verdict": "still too easy",
+  "note_on_teams_file": "Per this block's override the teams file was edited in place by targeted line replacement and is deliberately NOT staged or committed by this receipt. The two changed lines are recorded above and in the final report."
+}
