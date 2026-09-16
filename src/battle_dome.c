@@ -3906,15 +3906,6 @@ static bool32 IsDomeLuckyMove(enum Move move)
 
 static bool32 IsDomePopularMove(enum Move move)
 {
-    u8 i;
-    for (i = 0; i < NUM_ALL_MACHINES; i++)
-    {
-        if (GetTMHMMoveId(i + 1) == move)
-            return TRUE;
-    }
-    if (i == NUM_ALL_MACHINES)
-        return FALSE;
-    // Filter in TMs/HMs
     if (GetMovePower(move) >= 90)
         return TRUE;
 

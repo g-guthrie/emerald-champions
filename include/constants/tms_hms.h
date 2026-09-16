@@ -1,6 +1,12 @@
 #ifndef GUARD_CONSTANTS_TMS_HMS_H
 #define GUARD_CONSTANTS_TMS_HMS_H
 
+// TMs and HMs do not exist in Emerald Champions: there are no machine items,
+// no Bag pocket and no teaching device. These lists survive only as move data.
+// tools/learnset_helpers/make_teachables.py reads them to build
+// SpeciesInfo.teachableLearnset (load-bearing for field-move compatibility),
+// and FOREACH_HM still names the eight former field moves.
+
 #define FOREACH_TM(F) \
     F(FOCUS_PUNCH) \
     F(DRAGON_CLAW) \

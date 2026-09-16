@@ -2274,23 +2274,8 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     }
     else if (move)
     {
-        enum Item TMHMItemId = ITEM_NONE;
-        for (u32 i = 0; i < NUM_ALL_MACHINES; i++)
-        {
-            if (move == GetTMHMMoveId(i + 1))
-                TMHMItemId = GetTMHMItemId(i + 1);
-        }
-        if (TMHMItemId)
-        {
-            CopyItemName(TMHMItemId, gStringVar1); //TM name
-            PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 9);
-            item = TMHMItemId;
-        }
-        else
-        {
-            PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
-            item = ITEM_TEACHY_TV;
-        }
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
+        item = ITEM_TEACHY_TV;
     }
     else
     {

@@ -1928,18 +1928,10 @@ bool32 HasAnyRelearnableMoves(enum MoveRelearnerStates state)
 
 static void UpdateMoveRelearnerState(void)
 {
-    u32 state;
-    sMonSummaryScreen->hasRelearnableMoves = FALSE;
-    for (u32 i = 0; i < MOVE_RELEARNER_COUNT; i++)
-    {
-        state = (gMoveRelearnerState + i) % MOVE_RELEARNER_COUNT;
-        if (HasAnyRelearnableMoves(state))
-        {
-            sMonSummaryScreen->hasRelearnableMoves = TRUE;
-            gMoveRelearnerState = state;
-            break;
-        }
-    }
+    // One legality rule for the whole game: the Summary relearner offers the
+    // same complete list the Poke Center tutor does.
+    gMoveRelearnerState = MOVE_RELEARNER_ALL_MOVES;
+    sMonSummaryScreen->hasRelearnableMoves = HasAnyRelearnableMoves(MOVE_RELEARNER_ALL_MOVES);
     UpdateRelearnPrompt();
 }
 

@@ -1716,50 +1716,6 @@ const u16 gItemIconPalette_KeeBerry[] = INCGFX_U16("graphics/items/icon_palettes
 const u32 gItemIcon_MarangaBerry[] = INCGFX_U32("graphics/items/icons/maranga_berry.png", ".4bpp.smol");
 const u16 gItemIconPalette_MarangaBerry[] = INCGFX_U16("graphics/items/icon_palettes/maranga_berry.pal", ".gbapal");
 
-// TMs/HMs
-
-const u32 gItemIcon_TM[] = INCGFX_U32("graphics/items/icons/tm.png", ".4bpp.smol");
-
-const u32 gItemIcon_HM[] = INCGFX_U32("graphics/items/icons/hm.png", ".4bpp.smol");
-
-const u16 gItemIconPalette_NormalTMHM[] = INCGFX_U16("graphics/items/icon_palettes/normal_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_FireTMHM[] = INCGFX_U16("graphics/items/icon_palettes/fire_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_WaterTMHM[] = INCGFX_U16("graphics/items/icon_palettes/water_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_ElectricTMHM[] = INCGFX_U16("graphics/items/icon_palettes/electric_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_GrassTMHM[] = INCGFX_U16("graphics/items/icon_palettes/grass_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_IceTMHM[] = INCGFX_U16("graphics/items/icon_palettes/ice_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_FightingTMHM[] = INCGFX_U16("graphics/items/icon_palettes/fighting_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_PoisonTMHM[] = INCGFX_U16("graphics/items/icon_palettes/poison_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_GroundTMHM[] = INCGFX_U16("graphics/items/icon_palettes/ground_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_FlyingTMHM[] = INCGFX_U16("graphics/items/icon_palettes/flying_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_PsychicTMHM[] = INCGFX_U16("graphics/items/icon_palettes/psychic_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_BugTMHM[] = INCGFX_U16("graphics/items/icon_palettes/bug_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_RockTMHM[] = INCGFX_U16("graphics/items/icon_palettes/rock_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_GhostTMHM[] = INCGFX_U16("graphics/items/icon_palettes/ghost_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_DragonTMHM[] = INCGFX_U16("graphics/items/icon_palettes/dragon_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_DarkTMHM[] = INCGFX_U16("graphics/items/icon_palettes/dark_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_SteelTMHM[] = INCGFX_U16("graphics/items/icon_palettes/steel_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_MysteryTMHM[] = INCGFX_U16("graphics/items/icon_palettes/mystery_tm_hm.pal", ".gbapal");
-
-const u16 gItemIconPalette_FairyTMHM[] = INCGFX_U16("graphics/items/icon_palettes/fairy_tm_hm.pal", ".gbapal");
-
 // Charms
 
 const u32 gItemIcon_OvalCharm[] = INCGFX_U32("graphics/items/icons/oval_charm.png", ".4bpp.smol");
@@ -1846,9 +1802,6 @@ const u16 gItemIconPalette_TownMap[] = INCGFX_U16("graphics/items/icon_palettes/
 
 const u32 gItemIcon_VsSeeker[] = INCGFX_U32("graphics/items/icons/vs_seeker.png", ".4bpp.smol");
 const u16 gItemIconPalette_VsSeeker[] = INCGFX_U16("graphics/items/icon_palettes/vs_seeker.pal", ".gbapal");
-
-const u32 gItemIcon_TMCase[] = INCGFX_U32("graphics/items/icons/tm_case.png", ".4bpp.smol");
-const u16 gItemIconPalette_TMCase[] = INCGFX_U16("graphics/items/icon_palettes/tm_case.pal", ".gbapal");
 
 const u32 gItemIcon_BerryPouch[] = INCGFX_U32("graphics/items/icons/berry_pouch.png", ".4bpp.smol");
 const u16 gItemIconPalette_BerryPouch[] = INCGFX_U16("graphics/items/icon_palettes/berry_pouch.pal", ".gbapal");
@@ -2013,13 +1966,10 @@ const u16 gItemIconPalette_ScrollOfDarkness[] = INCGFX_U16("graphics/items/icon_
 const u32 gItemIcon_ScrollOfWaters[] = INCGFX_U32("graphics/items/icons/scroll_of_waters.png", ".4bpp.smol");
 const u16 gItemIconPalette_ScrollOfWaters[] = INCGFX_U16("graphics/items/icon_palettes/scroll_of_waters.pal", ".gbapal");
 
-
 const u32 gItemIcon_TinyBambooShoot[] = INCGFX_U32("graphics/items/icons/tiny_bamboo_shoot.png", ".4bpp.smol");
 const u16 gItemIconPalette_TinyBambooShoot[] = INCGFX_U16("graphics/items/icon_palettes/tiny_bamboo_shoot.pal", ".gbapal");
 
 // Tera Shards
-
-
 
 // Mochi
 

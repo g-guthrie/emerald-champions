@@ -3,6 +3,7 @@ Common_EventScript_EmeraldChampionsMoveTutor::
 	faceplayer
 	setvar VAR_0x8007, EC_BATTLE_FORMAT_DOUBLES
 	setvar VAR_0x8009, 0
+	call_if_unset FLAG_EC_TUTOR_MACHINES_LINE_SEEN, EmeraldChampions_EventScript_MoveTutorNoMachines
 
 EmeraldChampions_EventScript_MoveTutorMain:
 	message EmeraldChampions_Text_MoveTutorHowCanHelp
@@ -26,6 +27,11 @@ EmeraldChampions_EventScript_MoveTutorMain:
 	case 4, EmeraldChampions_EventScript_OtherServices
 	case 5, EmeraldChampions_EventScript_MoveTutorExit
 	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorExit
+
+EmeraldChampions_EventScript_MoveTutorNoMachines:
+	setflag FLAG_EC_TUTOR_MACHINES_LINE_SEEN
+	msgbox EmeraldChampions_Text_MoveTutorNoMachines, MSGBOX_DEFAULT
+	return
 
 EmeraldChampions_EventScript_TrainingType:
 	message EmeraldChampions_Text_TrainingType
@@ -536,6 +542,12 @@ EmeraldChampions_Text_Back:
 
 EmeraldChampions_Text_MoveTutorHowCanHelp:
 	.string "How can I help prepare your Pokémon?$"
+
+EmeraldChampions_Text_MoveTutorNoMachines:
+	.string "There's no need for machines any\n"
+	.string "more.\p"
+	.string "Bring me any Pokémon and I'll teach\n"
+	.string "it anything it can legally learn.$"
 
 EmeraldChampions_Text_BuildBattleSet:
 	.string "Build a Battle Set$"

@@ -1194,19 +1194,12 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
         if (gPartyMenu.action != PARTY_ACTION_USE_ITEM)
             return FALSE;
 
-        switch (CheckIfItemIsTMHMOrEvolutionStone(item))
-        {
-        default:
+        if (!IsItemEvolutionStone(item))
             return FALSE;
-        case ITEM_IS_TM_HM: // TM/HM
-            DisplayPartyPokemonDataToTeachMove(slot, ItemIdToBattleMoveId(item));
-            break;
-        case ITEM_IS_EVOLUTION_STONE: // Evolution stone
-            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL, NULL, CHECK_EVO) != SPECIES_NONE)
-                return FALSE;
-            DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
-            break;
-        }
+
+        if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL, NULL, CHECK_EVO) != SPECIES_NONE)
+            return FALSE;
+        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
     }
     return TRUE;
 }
@@ -4764,10 +4757,7 @@ void CB2_ShowPartyMenuForItemUse(void)
     }
     else
     {
-        if (GetItemPocket(gSpecialVar_ItemId) == POCKET_TM_HM)
-            msgId = PARTY_MSG_TEACH_WHICH_MON;
-        else
-            msgId = PARTY_MSG_USE_ON_WHICH_MON;
+        msgId = PARTY_MSG_USE_ON_WHICH_MON;
 
         task = Task_HandleChooseMonInput;
     }
@@ -5565,11 +5555,6 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
     gTasks[taskId].func = Task_HandleWhichMoveInput;
 }
 
-enum Move ItemIdToBattleMoveId(enum Item item)
-{
-    return (GetItemPocket(item) == POCKET_TM_HM) ? GetItemTMHMMoveId(item) : MOVE_NONE;
-}
-
 static void DisplayLearnMoveMessage(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
@@ -5581,46 +5566,6 @@ static void DisplayLearnMoveMessageAndClose(u8 taskId, const u8 *str)
 {
     DisplayLearnMoveMessage(str);
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-}
-
-// move[1] doesn't use constants cause I don't know if it's actually a move ID storage
-
-void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
-{
-    struct Pokemon *mon;
-    enum Item item = gSpecialVar_ItemId;
-    enum Move move = ItemIdToBattleMoveId(item);
-
-    gPartyMenu.data1 = move;
-    gPartyMenu.learnMoveState = 0;
-
-    PlaySE(SE_SELECT);
-    mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
-
-    GetMonNickname(mon, gStringVar1);
-    StringCopy(gStringVar2, GetMoveName(move));
-
-    switch (CanTeachMove(mon, move))
-    {
-    case CANNOT_LEARN_MOVE:
-        DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
-        return;
-    case ALREADY_KNOWS_MOVE:
-        DisplayLearnMoveMessageAndClose(taskId, gText_PkmnAlreadyKnows);
-        return;
-    default:
-        break;
-    }
-
-    if (GiveMoveToMon(mon, move) != MON_HAS_MAX_MOVES)
-    {
-        gTasks[taskId].func = Task_LearnedMove;
-    }
-    else
-    {
-        DisplayLearnMoveMessage(gText_PkmnNeedsToReplaceMove);
-        gTasks[taskId].func = Task_ReplaceMoveYesNo;
-    }
 }
 
 static void Task_LearnedMove(u8 taskId)

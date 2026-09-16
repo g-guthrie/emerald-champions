@@ -9157,15 +9157,7 @@ enum DamageCategory GetCategoryBasedOnStats(enum BattlerId battler)
 
 static u32 GetFlingPowerFromItemId(enum Item itemId)
 {
-    if (gItemsInfo[itemId].pocket == POCKET_TM_HM)
-    {
-        u32 power = GetMovePower(ItemIdToBattleMoveId(itemId));
-        if (power > 1)
-            return power;
-        return 10; // Status moves and moves with variable power always return 10 power.
-    }
-    else
-        return GetItemFlingPower(itemId);
+    return GetItemFlingPower(itemId);
 }
 
 bool32 CanFling(enum BattlerId battlerAtk, enum Ability abilityAtk)
@@ -9176,7 +9168,6 @@ bool32 CanFling(enum BattlerId battlerAtk, enum Ability abilityAtk)
       || (GetConfig(B_KLUTZ_FLING_INTERACTION) >= GEN_5 && abilityAtk == ABILITY_KLUTZ)
       || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
       || gBattleMons[battlerAtk].volatiles.embargoTimer
-      || (GetItemTMHMIndex(item) != 0 && GetItemImportance(item) == 1) // don't fling reusable TMs
       || GetFlingPowerFromItemId(item) == 0
       || !CanBattlerGetOrLoseItem(battlerAtk, battlerAtk, item)) // defender being a paradox mon doesn't matter
         return FALSE;

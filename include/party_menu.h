@@ -96,8 +96,6 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task);
 void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task);
 void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task);
 void ItemUseCB_PPUp(u8 taskId, TaskFunc task);
-enum Move ItemIdToBattleMoveId(enum Item item);
-void ItemUseCB_TMHM(u8 taskId, TaskFunc task);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task);
 void StartLevelerPartySequence(MainCallback exitCallback);
 void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task);

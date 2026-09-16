@@ -1855,7 +1855,6 @@ const u16 gMenuInfoElements2_Pal[] = INCGFX_U16("graphics/interface/menu_info2.p
 const u16 gMenuInfoElements3_Pal[] = INCGFX_U16("graphics/interface/menu_info3.pal", ".gbapal");
 const u8 gMenuInfoElements_Gfx[] = INCGFX_U8("graphics/interface/menu_info.png", ".4bpp");
 
-const u8 gBagMenuHMIcon_Gfx[] = INCGFX_U8("graphics/bag/hm.png", ".4bpp");
 
 // contest results screen
 

@@ -37,15 +37,10 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 #define P_PRE_EVO_MOVES                  TRUE    // Legally inherited pre-evolution moves remain available.
 #define P_ENABLE_ALL_LEVEL_UP_MOVES      TRUE    // Level does not gate preparation at the tutor.
 
-// TM Relearner
-#define P_TM_MOVES_RELEARNER             TRUE    // TM moves are part of the complete preparation service.
-#define P_ENABLE_ALL_TM_MOVES            TRUE    // Owning the physical TM is never required.
-
 // Relearner flags - Redundant if P_ENABLE_MOVE_RELEARNERS is TRUE, but still added here incase you don't want all relearners unlocked at the same time.
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
 #define P_FLAG_EGG_MOVES                 0       // If this flag is set, enables egg move relearner.
-#define P_FLAG_TUTOR_MOVES               0       // If this flag is set, enables tutor move relearner.
 
 // Move Relearner summary screen
 #define P_SUMMARY_SCREEN_MOVE_RELEARNER  FALSE  // Complete move preparation belongs to the Center specialist's single, consistent flow.

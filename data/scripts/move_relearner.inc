@@ -13,17 +13,13 @@ MoveRelearner_EventScript_TeachAllMoves::
 Common_EventScript_MoveRelearnerDynMultiChoice::
 	dynmultipush MoveRelearner_Text_LevelUpMoves, 0
 	dynmultipush MoveRelearner_Text_EggMoves, 1
-	dynmultipush MoveRelearner_Text_TMMoves, 2
-	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
-	dynmultipush MoveRelearner_Text_SeeYa, 4
-	dynmultistack 0, 0, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultipush MoveRelearner_Text_SeeYa, 2
+	dynmultistack 0, 0, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, MoveRelearner_EventScript_TeachLevelUpMoves
 	case 1, MoveRelearner_EventScript_TeachEggMoves
-	case 2, MoveRelearner_EventScript_TeachTMMoves
-	case 3, MoveRelearner_EventScript_TeachTutorMoves
-	case 4, MoveRelearner_EventScript_PleaseComeAgain
+	case 2, MoveRelearner_EventScript_PleaseComeAgain
 MoveRelearner_EventScript_PleaseComeAgain:
 	msgbox MoveRelearner_Text_ThankYouComeAgain, MSGBOX_DEFAULT
 	releaseall
@@ -31,14 +27,6 @@ MoveRelearner_EventScript_PleaseComeAgain:
 
 MoveRelearner_EventScript_PushEggMoves:
 	dynmultipush MoveRelearner_Text_EggMoves, 1
-	return
-
-MoveRelearner_EventScript_PushTMMoves:
-	dynmultipush MoveRelearner_Text_TMMoves, 2
-	return
-
-MoveRelearner_EventScript_PushTutorMoves:
-	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
 	return
 
 MoveRelearner_EventScript_TeachLevelUpMoves:
@@ -50,18 +38,6 @@ MoveRelearner_EventScript_TeachLevelUpMoves:
 MoveRelearner_EventScript_TeachEggMoves:
 	setmoverelearnerstate MOVE_RELEARNER_EGG_MOVES
 	bufferstring STR_VAR_3, MoveRelearner_Text_EggMoveLWR
-	goto MoveRelearner_EventScript_TeachMove
-	end
-
-MoveRelearner_EventScript_TeachTMMoves:
-	setmoverelearnerstate MOVE_RELEARNER_TM_MOVES
-	bufferstring STR_VAR_3, MoveRelearner_Text_TMMoveLWR
-	goto MoveRelearner_EventScript_TeachMove
-	end
-
-MoveRelearner_EventScript_TeachTutorMoves:
-	setmoverelearnerstate MOVE_RELEARNER_TUTOR_MOVES
-	bufferstring STR_VAR_3, MoveRelearner_Text_TutorMoveLWR
 	goto MoveRelearner_EventScript_TeachMove
 	end
 

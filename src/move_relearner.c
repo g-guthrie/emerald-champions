@@ -32,7 +32,6 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "data/tutor_moves.h"
 
 // The different versions of hearts are selected using animation
 // commands.
@@ -259,18 +258,12 @@ static void FreeMoveRelearnerResources(void);
 static void RemoveScrollArrows(void);
 static bool32 IsLevelUpMoveRelearnerActive(void);
 static bool32 IsEggMoveRelearnerActive(void);
-static bool32 IsTMMoveRelearnerActive(void);
-static bool32 IsTutorMoveRelearnerActive(void);
 static bool32 IsAllMoveRelearnerActive(void);
 static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon);
-static bool32 HasRelearnerTMMoves(struct BoxPokemon *boxMon);
-static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerAllMoves(struct BoxPokemon *boxMon);
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
-static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves);
-static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves);
 
 static void Task_MoveRelearner_HandleInput(u8 taskId);
 static void Task_MoveRelearner_LearnMove(u8 taskId);
@@ -291,18 +284,6 @@ static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
         .hasMoveToRelearn = HasRelearnerEggMoves,
         .getMoves = GetRelearnerEggMoves,
         .moveText = MoveRelearner_Text_EggMoveLWR
-    },
-    [MOVE_RELEARNER_TM_MOVES] = {
-        .isActive = IsTMMoveRelearnerActive,
-        .hasMoveToRelearn = HasRelearnerTMMoves,
-        .getMoves = GetRelearnerTMMoves,
-        .moveText = MoveRelearner_Text_TMMoveLWR
-    },
-    [MOVE_RELEARNER_TUTOR_MOVES] = {
-        .isActive = IsTutorMoveRelearnerActive,
-        .hasMoveToRelearn = HasRelearnerTutorMoves,
-        .getMoves = GetRelearnerTutorMoves,
-        .moveText = MoveRelearner_Text_TutorMoveLWR
     },
     [MOVE_RELEARNER_ALL_MOVES] = {
         .isActive = IsAllMoveRelearnerActive,
@@ -434,21 +415,9 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     SetMainCallback2(CB2_InitLearnMove_Basic);
 }
 
-static bool32 GameHasDifferentRelearners(void)
-{
-    if (P_ENABLE_MOVE_RELEARNERS || P_TM_MOVES_RELEARNER)
-        return TRUE;
-    if (P_FLAG_EGG_MOVES || P_FLAG_TUTOR_MOVES)
-        return TRUE;
-    return FALSE;
-}
-
 static void StoreMoveText(void)
 {
-    if (GameHasDifferentRelearners() || gRelearnMode == RELEARN_MODE_SCRIPT)
-        StringCopy(gStringVar3, sRelearnTypes[gMoveRelearnerState].moveText);
-    else
-        StringCopy(gStringVar3, MoveRelearner_Text_MoveLWR);
+    StringCopy(gStringVar3, sRelearnTypes[gMoveRelearnerState].moveText);
 }
 
 static void InitMoveRelearnerBackgroundLayers(void)
@@ -473,15 +442,6 @@ static void CB2_MoveRelearnerMain(void)
     RunTextPrinters();
     DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
-}
-
-static bool32 ShouldConsumeTmItem(enum Move move)
-{
-    if (gMoveRelearnerState != MOVE_RELEARNER_TM_MOVES || gRelearnMode == RELEARN_MODE_SCRIPT)
-        return FALSE;
-    if (I_REUSABLE_TMS || P_ENABLE_ALL_TM_MOVES)
-        return FALSE;
-    return TRUE;
 }
 
 static void FreeMoveRelearnerResources(void)
@@ -537,12 +497,6 @@ static void RedrawMoveList(void)
 
 static void UIEndTask(u8 taskId)
 {
-    if (gSpecialVar_Result == TRUE && ShouldConsumeTmItem(gTasks[taskId].tMove))
-    {
-        enum Item item = GetTMHMItemIdFromMoveId(gTasks[taskId].tMove);
-        if (!GetItemImportance(item))
-            RemoveBagItem(item, 1);
-    }
     if (gRelearnMode == RELEARN_MODE_SCRIPT && gSpecialVar_Result == TRUE)
     {
         gTasks[taskId].func = Task_MoveRelearner_Quit;
@@ -661,7 +615,7 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
                 sMoveRelearnerScrollState.listRow = 0;
                 RedrawMoveList();
             }
-            else if (GameHasDifferentRelearners())
+            else
             {
                 PlaySE(SE_FAILURE);
             }
@@ -710,15 +664,7 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
         gTasks[taskId].func = Task_MoveRelearner_LearnMove;
         gTasks[taskId].tMove = GetCurrentSelectedMove();
         gTasks[taskId].tState = GetLearnMoveStartAfterPromptState();
-        const u8 *message = gText_MoveRelearnerTeachMoveConfirm;
-        if (ShouldConsumeTmItem(gTasks[taskId].tMove))
-        {
-            enum Item item = GetTMHMItemIdFromMoveId(gTasks[taskId].tMove);
-            StringCopy(gStringVar3, GetItemName(item));
-            if (!GetItemImportance(item))
-                message = gText_MoveRelearnerTeachMoveConfirmUseTm;
-        }
-        UIPrintMessage(message);
+        UIPrintMessage(gText_MoveRelearnerTeachMoveConfirm);
         break;
     }
 }
@@ -911,15 +857,6 @@ static void SortMovesAlphabetically(u16 *moves, u32 numMoves)
         QuickSortMoves(moves, 0, numMoves - 1);
 }
 
-static bool32 IsTmAvailable(enum Item item)
-{
-    if (P_ENABLE_ALL_TM_MOVES)
-        return TRUE;
-    if (gRelearnMode == RELEARN_MODE_SCRIPT)
-        return TRUE;
-    return CheckBagHasItem(item, 1);
-}
-
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
 {
     enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
@@ -969,51 +906,6 @@ static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves)
     {
         if (!BoxMonKnowsMove(mon, eggMoves[i]))
             moves[numMoves++] = eggMoves[i];
-    }
-
-    return numMoves;
-}
-
-static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves)
-{
-    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
-    u32 numMoves = 0;
-
-    for (u32 i = 0; i < NUM_ALL_MACHINES; i++)
-    {
-        enum Item item = GetTMHMItemId(i + 1);
-        enum Move move = GetTMHMMoveId(i + 1);
-
-        if (move == MOVE_NONE)
-            continue;
-
-        if (!IsTmAvailable(item))
-            continue;
-
-        if (!CanLearnTeachableMove(species, move))
-            continue;
-
-        if (!BoxMonKnowsMove(mon, move))
-            moves[numMoves++] = move;
-    }
-
-    return numMoves;
-}
-
-static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
-{
-    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
-    u32 numMoves = 0;
-
-    for (u32 i = 0; gTutorMoves[i] != MOVE_UNAVAILABLE; i++)
-    {
-        enum Move move = gTutorMoves[i];
-
-        if (!CanLearnTeachableMove(species, move))
-            continue;
-
-        if (!BoxMonKnowsMove(mon, move))
-            moves[numMoves++] = move;
     }
 
     return numMoves;
@@ -1087,48 +979,6 @@ static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon)
     return FALSE;
 }
 
-static bool32 HasRelearnerTMMoves(struct BoxPokemon *boxMon)
-{
-    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
-    for (u32 i = 0; i < NUM_ALL_MACHINES; i++)
-    {
-        enum Item item = GetTMHMItemId(i + 1);
-        enum Move move = GetTMHMMoveId(i + 1);
-
-        if (move == MOVE_NONE)
-            continue;
-
-        bool32 tmAvailable = IsTmAvailable(item);
-        if (!tmAvailable)
-            continue;
-
-        if (!CanLearnTeachableMove(species, move))
-            continue;
-
-        if (!BoxMonKnowsMove(boxMon, move))
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon)
-{
-    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
-    for (u32 i = 0; gTutorMoves[i] != MOVE_UNAVAILABLE; i++)
-    {
-        enum Move move = gTutorMoves[i];
-
-        if (!CanLearnTeachableMove(species, move))
-            continue;
-
-        if (!BoxMonKnowsMove(boxMon, move))
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
 static bool32 HasRelearnerAllMoves(struct BoxPokemon *boxMon)
 {
     return GetEmeraldChampionsPreparationMovesToLearn(boxMon, NULL) != 0;
@@ -1142,16 +992,6 @@ static bool32 IsLevelUpMoveRelearnerActive(void)
 static bool32 IsEggMoveRelearnerActive(void)
 {
     return (FlagGet(P_FLAG_EGG_MOVES) || P_ENABLE_MOVE_RELEARNERS);
-}
-
-static bool32 IsTMMoveRelearnerActive(void)
-{
-    return (P_TM_MOVES_RELEARNER || P_ENABLE_MOVE_RELEARNERS);
-}
-
-static bool32 IsTutorMoveRelearnerActive(void)
-{
-    return (FlagGet(P_FLAG_TUTOR_MOVES) || P_ENABLE_MOVE_RELEARNERS);
 }
 
 static bool32 IsAllMoveRelearnerActive(void)

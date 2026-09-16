@@ -143,8 +143,7 @@ const u8 *const gPocketNamesStringsTable[] =
 {
     [POCKET_ITEMS]       = COMPOUND_STRING("Items"),
     [POCKET_MEDICINE]    = COMPOUND_STRING("Medicine"),
-    [POCKET_BATTLE]      = COMPOUND_STRING("Battle Items"),
-    [POCKET_TM_HM]       = COMPOUND_STRING("TMs & HMs"),
+    [POCKET_BATTLE]      = COMPOUND_STRING("Held Items"),
     [POCKET_BERRIES]     = COMPOUND_STRING("Berries"),
     [POCKET_POKE_BALLS]  = COMPOUND_STRING("Poké Balls"),
     [POCKET_KEY_ITEMS]   = COMPOUND_STRING("Key Items"),
@@ -152,7 +151,6 @@ const u8 *const gPocketNamesStringsTable[] =
 };
 
 const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 3}{STR_VAR_2}");
-const u8 gText_NumberItem_HM[] = _("{CLEAR_TO 17}{STR_VAR_1}{CLEAR 5}{STR_VAR_2}");
 
 const u8 gText_ShopBuy[] = _("BUY");
 const u8 gText_ShopSell[] = _("SELL");
@@ -1057,7 +1055,6 @@ const u8 gText_TrainerHill3F[] = _("3F");
 const u8 gText_TrainerHill4F[] = _("4F");
 const u8 gText_TeachWhichMoveToPkmn[] = _("Teach which {STR_VAR_3} to\n{STR_VAR_1}?");
 const u8 gText_MoveRelearnerTeachMoveConfirm[] = _("Teach {STR_VAR_2}?");
-const u8 gText_MoveRelearnerTeachMoveConfirmUseTm[] = _("Teach {STR_VAR_2}?\nThis will consume one {STR_VAR_3}.");
 const u8 gText_MoveRelearnerPkmnLearnedMove[] = _("{STR_VAR_1} learned\n{STR_VAR_2}!");
 const u8 gText_MoveRelearnerPkmnTryingToLearnMove[] = _("{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can't learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?");
 const u8 gText_MoveRelearnerStopTryingToTeachMove[] = _("Stop trying to teach\n{STR_VAR_2}?");

@@ -224,7 +224,6 @@ extern const u8 gText_LinkStandby2[];
 
 // item menu screen text
 extern const u8 gText_CloseBag[];
-extern const u8 gText_NumberItem_HM[];
 extern const u8 gText_NumberItem_TMBerry[];
 extern const u8 gText_xVar1[];
 extern const u8 gText_ReturnToVar1[];
@@ -560,7 +559,6 @@ extern const u8 gText_TeachWhichMoveToPkmn[];
 extern const u8 gText_MoveRelearnerGiveUp[];
 extern const u8 gText_MoveRelearnerStop[];
 extern const u8 gText_MoveRelearnerTeachMoveConfirm[];
-extern const u8 gText_MoveRelearnerTeachMoveConfirmUseTm[];
 extern const u8 gText_MoveRelearnerBattleMoves[];
 extern const u8 gText_MoveRelearnerPP[];
 extern const u8 gText_MoveRelearnerPower[];

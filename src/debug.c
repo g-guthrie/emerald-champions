@@ -303,7 +303,6 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
-static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
 static void DebugAction_PCBag_ClearBag(u8 taskId);
@@ -611,7 +610,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_PCBag_Fill[] =
     { COMPOUND_STRING("Fill PC Items") ,            DebugAction_PCBag_Fill_PCItemStorage },
     { COMPOUND_STRING("Fill Pocket Items"),         DebugAction_PCBag_Fill_PocketItems },
     { COMPOUND_STRING("Fill Pocket Poké Balls"),    DebugAction_PCBag_Fill_PocketPokeBalls },
-    { COMPOUND_STRING("Fill Pocket TMHM"),          DebugAction_PCBag_Fill_PocketTMHM },
     { COMPOUND_STRING("Fill Pocket Berries"),       DebugAction_PCBag_Fill_PocketBerries },
     { COMPOUND_STRING("Fill Pocket Key Items"),     DebugAction_PCBag_Fill_PocketKeyItems },
     { NULL }
@@ -3141,16 +3139,6 @@ static void DebugSelectionStep_UpdateItem(u8 taskId, u8 digits, u32 min, u32 max
     ConvertIntToDecimalStringN(gStringVar3, itemId, STR_CONV_MODE_LEADING_ZEROS, digits);
     StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("Item ID: {STR_VAR_3}"));
     u8* end = CopyItemName(itemId, gStringVar2);
-    enum Move moveId = ItemIdToBattleMoveId(itemId);
-    if (moveId != MOVE_NONE)
-    {
-        end = StringCopy(end, gText_Space);
-        end = StringCopy(end, GetMoveName(moveId));
-    }
-    else if (CheckIfItemIsTMHMOrEvolutionStone(itemId) == ITEM_IS_TM_HM)
-    {
-        end = StringCopy(end, COMPOUND_STRING(" None"));
-    }
     WrapFontIdToFit(gStringVar2, end, DEBUG_MENU_FONT, WindowWidthPx(gTasks[taskId].tSubWindowId));
     StringCopy(gStringVar3, COMPOUND_STRING(""));
     DebugNativeStep_PrintWindowSelection(taskId);
@@ -3695,18 +3683,6 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
     {
         if (CheckBagHasSpace(gPokeBalls[ballId].itemId, MAX_BAG_ITEM_CAPACITY))
             AddBagItem(gPokeBalls[ballId].itemId, MAX_BAG_ITEM_CAPACITY);
-    }
-}
-
-static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
-{
-    u16 index, itemId;
-
-    for (index = 0; index < NUM_ALL_MACHINES; index++)
-    {
-        itemId = GetTMHMItemId(index + 1);
-        if (CheckBagHasSpace(itemId, 1) && ItemIdToBattleMoveId(itemId) != MOVE_NONE)
-            AddBagItem(itemId, 1);
     }
 }
 

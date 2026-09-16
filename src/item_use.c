@@ -73,10 +73,6 @@ static void ItemUseOnFieldCB_Berry(u8);
 static void ItemUseOnFieldCB_WailmerPailBerry(u8);
 static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8);
 static bool8 TryToWaterSudowoodo(void);
-static void BootUpSoundTMHM(u8);
-static void Task_ShowTMHMContainedMessage(u8);
-static void UseTMHMYesNo(u8);
-static void UseTMHM(u8);
 static void Task_StartUseRepel(u8);
 static bool32 TryEndRepelSprayForAttractant(void);
 static void Task_StartUseLure(u8 taskId);
@@ -99,9 +95,6 @@ static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe ITEMFINDER's shaking wildl
 static const u8 sText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CoinCase[] = _("Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PowderQty[] = _("POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
-static const u8 sText_BootedUpTM[] = _("Booted up a TM.");
-static const u8 sText_BootedUpHM[] = _("Booted up an HM.");
-static const u8 sText_TMHMContainedVar1[] = _("It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?");
 static const u8 sText_UsedVar2WildLured[] = _("{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_UsedVar2WildRepelled[] = _("{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PlayedPokeFluteCatchy[] = _("Played the POKé FLUTE.\pNow, that's a catchy tune!{PAUSE_UNTIL_PRESS}");
@@ -133,12 +126,6 @@ static const MainCallback sItemUseCallbacks[] =
 };
 
 static const u8 sClockwiseDirections[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST};
-
-static const struct YesNoFuncTable sUseTMHMYesNoFuncTable =
-{
-    .yesFunc = UseTMHM,
-    .noFunc = CloseItemMessage,
-};
 
 #define tEnigmaBerryType data[4]
 static void SetUpItemUseCallback(u8 taskId)
@@ -239,14 +226,9 @@ static void Task_CloseCantUseKeyItemMessage(u8 taskId)
     UnlockPlayerFieldControls();
 }
 
-u8 CheckIfItemIsTMHMOrEvolutionStone(enum Item itemId)
+bool32 IsItemEvolutionStone(enum Item itemId)
 {
-    if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_TMHM)
-        return ITEM_IS_TM_HM;
-    else if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone)
-        return ITEM_IS_EVOLUTION_STONE;
-    else
-        return ITEM_IS_OTHER;
+    return GetItemFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone;
 }
 
 // Mail in the bag menu can't have a message but it can be checked (view the mail background, no message)
@@ -940,41 +922,6 @@ void ItemUseOutOfBattle_RareCandy(u8 taskId)
 void ItemUseOutOfBattle_DynamaxCandy(u8 taskId)
 {
     gItemUseCB = ItemUseCB_DynamaxCandy;
-    SetUpItemUseCallback(taskId);
-}
-
-void ItemUseOutOfBattle_TMHM(u8 taskId)
-{
-    if (GetItemTMHMIndex(gSpecialVar_ItemId) > NUM_TECHNICAL_MACHINES)
-        DisplayItemMessage(taskId, FONT_NORMAL, sText_BootedUpHM, BootUpSoundTMHM); // HM
-    else
-        DisplayItemMessage(taskId, FONT_NORMAL, sText_BootedUpTM, BootUpSoundTMHM); // TM
-}
-
-static void BootUpSoundTMHM(u8 taskId)
-{
-    PlaySE(SE_PC_LOGIN);
-    gTasks[taskId].func = Task_ShowTMHMContainedMessage;
-}
-
-static void Task_ShowTMHMContainedMessage(u8 taskId)
-{
-    if (JOY_NEW(A_BUTTON | B_BUTTON))
-    {
-        StringCopy(gStringVar1, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_ItemId)));
-        StringExpandPlaceholders(gStringVar4, sText_TMHMContainedVar1);
-        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, UseTMHMYesNo);
-    }
-}
-
-static void UseTMHMYesNo(u8 taskId)
-{
-    BagMenu_YesNo(taskId, ITEMWIN_YESNO_HIGH, &sUseTMHMYesNoFuncTable);
-}
-
-static void UseTMHM(u8 taskId)
-{
-    gItemUseCB = ItemUseCB_TMHM;
     SetUpItemUseCallback(taskId);
 }
 
