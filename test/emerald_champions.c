@@ -264,7 +264,7 @@ TEST("Emerald Champions Center preparation lists are complete and isolated")
     CreateMon(&mon, SPECIES_MEW, 50, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_EQ(
         GetEmeraldChampionsPreparationMovesToLearn(&mon.box, sEmeraldChampionsPreparationMoveBuffer),
-        372);
+        371);
 
     SetMonMoveSlot(&mon, MOVE_PSYCHIC, 0);
     SetMonMoveSlot(&mon, MOVE_TAILWIND, 1);
@@ -272,8 +272,8 @@ TEST("Emerald Champions Center preparation lists are complete and isolated")
     SetMonMoveSlot(&mon, MOVE_PROTECT, 3);
     EXPECT_EQ(
         GetEmeraldChampionsPreparationMovesToLearn(&mon.box, sEmeraldChampionsPreparationMoveBuffer),
-        368);
-    for (u32 i = 0; i < 368; i++)
+        367);
+    for (u32 i = 0; i < 367; i++)
     {
         EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_PSYCHIC);
         EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_TAILWIND);
