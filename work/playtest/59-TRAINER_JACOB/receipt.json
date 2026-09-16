@@ -1,0 +1,53 @@
+{
+  "play_order": 59,
+  "e_group": "E0068",
+  "trainer": "TRAINER_JACOB",
+  "class": "regular",
+  "location": "Route110",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"FERROSEED": 30, "DRUDDIGON": 29, "LYCANROC_MIDDAY": 28, "CYCLIZAR": 28},
+  "cap_window_confirmation": "Dossier seeds 32/31/30/30 resolved to 30/29/28/28. Cap 30, Medium -2.",
+  "party_manifest": "work/playtest/59-TRAINER_JACOB/party.json",
+  "party_pool_audit": "Same six as work/playtest/party-cap30-route110.json, reordered to lead Gardevoir + Magearna. Pool and chronology audit unchanged.",
+  "pre_declared_strategy_checks": [
+    "Ferroseed applies Leech Seed plus the Iron Barbs / Rocky Helmet contact tax",
+    "Stealth Rock is set only if likely switches repay the turn",
+    "Gyro Ball benefits from the deliberate zero Speed IV",
+    "Cyclizar uses Shed Tail only with an actual receiver, accepting the HP cost, and only with a remaining bench",
+    "Druddigon attacks from behind the Assault Vest and taxes contact with Rough Skin",
+    "Lycanroc supplies faster pressure and Accelerock priority",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/59-TRAINER_JACOB/a1", "seed": 59, "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 I Mega Evolved and aimed Mystical Fire (4x) at Ferroseed - and Jacob pivoted Ferroseed out to Lycanroc in the same turn, so the 4x landed on a Rock-type at 0.5x instead. That is the best predictive switch anyone made against me in this block. Druddigon's Iron Head (2x) then took my fresh Mega from 90 to 12, while Fleur Cannon (2x) took Druddigon to 6. T2 Gardevoir Protected, blanking both Lycanroc's Accelerock and Druddigon's Fire Punch, and Flash Cannon finished Druddigon; Ferroseed came back in. T3 Accelerock finished my 12 HP Mega before its Mystical Fire resolved, and Aura Sphere (2x) KO'd Lycanroc. T4 Nidoking replaced Gardevoir - chosen specifically because all four of its moves are non-contact, so Iron Barbs and the Rocky Helmet tax nothing - Cyclizar entered and Knocked Off Nidoking's Life Orb, and Ferroseed Protected both my attacks. T5 Ice Beam (2x) KO'd Cyclizar and Fleur Cannon finished Ferroseed."}
+  ],
+  "strategy_checks": [
+    {"check": "Ferroseed applies Leech Seed and the contact tax", "result": "FAIL (Leech Seed) / NOT_EXERCISED (contact tax)", "evidence": "Leech Seed was never selected across Ferroseed's three available turns (it switched out on T1, used Gyro Ball on T3 and Protect on T4). Iron Barbs and the Rocky Helmet never triggered either, but that is my doing rather than the AI's - I led two special attackers and replaced my Mega with Nidoking specifically because every one of its four moves is non-contact. The contact tax is a real design idea that a player can simply decline to pay."},
+    {"check": "Stealth Rock only if switches repay", "result": "CORRECTLY_NOT_USED", "evidence": "Never set. I switched twice in five turns, both times as forced replacements after a faint, which hazards do not punish. Declining was right."},
+    {"check": "Gyro Ball benefits from the zero Speed IV", "result": "PASS", "evidence": "T3 Gyro Ball into Magearna for 30. The zero Speed IV is doing what it is there for - Ferroseed is the slowest thing on the field by design."},
+    {"check": "Cyclizar uses Shed Tail only with a real receiver and a remaining bench", "result": "CORRECTLY_NOT_USED - the condition was properly respected", "evidence": "Cyclizar entered on T4 as the last member of the team. Its only living partner was Ferroseed and the bench was empty, so there was no one to pass a substitute to and no one to bring in behind it. It used Knock Off instead, stripping Nidoking's Life Orb. This is the authored precondition being checked and honoured rather than a move being fired reflexively, and it is the cleanest conditional-declined in my block."},
+    {"check": "Druddigon attacks from behind the Assault Vest", "result": "PASS", "evidence": "T1 Iron Head - the one move on its sheet that is 2x into a Psychic/Fairy Mega Gardevoir, chosen over its Dragon STAB which Magearna is outright immune to - for 78 of 90 HP. T2 Fire Punch at the same target. Correct target and correct move both turns."},
+    {"check": "Lycanroc supplies faster pressure and Accelerock priority", "result": "PASS", "evidence": "T3 Accelerock KO'd my 12 HP Mega Gardevoir before its Mystical Fire could resolve. Exactly what a priority Rock move on a fast body is for, and it denied me the 4x hit I had queued."},
+    {"check": "Rough Skin", "result": "NOT_EXERCISED", "evidence": "Same reason as Iron Barbs - I made no contact all battle."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "battler": "FERROSEED", "payoff": "REAL: blocked an Earth Power and a 2x Aura Sphere in the same turn, on a body that ended up dying to a single Fleur Cannon. Maximum denial, correct turn, its partner Cyclizar spent the same turn on a useful Knock Off rather than guarding alongside it - which is precisely the shape the three earlier double-Protect incidents in this block did not have."}
+  ],
+  "protect_ledger_note": "One opponent Protect in five turns, maximal payoff, and - notably - it was the guarding half of a proper one-guards-one-acts turn. Jacob is the only trainer in my block whose Protect turn was correctly paired with a partner action.",
+  "ai_defects": [],
+  "ai_notes": [
+    "The T1 Ferroseed pivot is the standout. I had a Mega Gardevoir with Mystical Fire pointed at a Grass/Steel type for 4x, and Jacob withdrew it into Lycanroc, turning a likely KO into a 0.5x chip with a Sp.Atk drop. The AI does not read pending commands, so this came out of scoring the position rather than seeing my move, which makes it more impressive rather than less.",
+    "Druddigon choosing Iron Head over Dragon Claw against a Steel/Fairy Magearna and a Psychic/Fairy Gardevoir is the correct answer to a board where its STAB is one immunity and one resistance. Together with Zebstrika's High Horsepower in play_order 57, that is two clean examples of coverage being preferred over a blanked STAB.",
+    "Leech Seed never firing is the one gap. Ferroseed's whole identity is residual damage plus a contact tax, and against a party that makes no contact the residual half is all it has. Three turns, no Leech Seed."
+  ],
+  "level_changes": [
+    {"member": "CYCLIZAR", "field": "level offset", "before": 0, "after": 1, "reason": "First-attempt win with one player faint, which puts this over the review threshold. Cyclizar is tied-lowest at L28 and is the only member that contributed nothing beyond a single Knock Off - it arrived last, with no bench left, so its Shed Tail could never be legal. Lycanroc is deliberately NOT raised despite also being L28: it KO'd my Mega Gardevoir with Accelerock and comfortably earned its level. Ferroseed (offset 2) and Druddigon (offset 1) both performed."}
+  ],
+  "post_change_rerun": "NOT RUN - requires a headless ROM rebuild of the shared work/agent-battle-build; see the play_order 49 receipt.",
+  "calibration": "Won on the first attempt but it cost me my Mega and Jacob's AI outplayed me on turn 1. One faint is still under the three-faint threshold, so the review applies, but I have kept the increase to a single level on the single member that could not contribute. I would not raise this team further.",
+  "could_this_be_cooler": "I would keep this team as it is - it is the best-played and most internally coherent roster in my block after Archie's rain. The thorny board is real (two contact punishers plus a Rocky Helmet), the Shed Tail is used conditionally and correctly rather than as a reflex, and the AI demonstrated genuine positional play with the turn-one pivot. Two honest observations for the design side. First, the contact tax is entirely optional for the player: I declined it for free by leading two special attackers and then choosing Nidoking, whose four moves are all non-contact, as my replacement. A team built on punishing contact needs at least one member that punishes not making contact - something that pressures a special attacker specifically - or the tax is a tax on players who did not think about it. Second, Cyclizar's Shed Tail is in the same position as Linoone's Switcheroo in play_order 57: it is the fourth member, so by the time it arrives the bench it needs is gone. Leading Cyclizar, passing a substitute to Druddigon and bringing Ferroseed in behind the screen would make the team's signature move actually happen. Neither is a level change, so nothing beyond Cyclizar's offset was touched.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
