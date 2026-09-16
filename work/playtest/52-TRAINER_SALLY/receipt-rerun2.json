@@ -1,0 +1,117 @@
+{
+  "play_order": 52,
+  "e_group": "E0055",
+  "trainer": "TRAINER_SALLY",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle1",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Lopunny 1->2 and Whimsicott 0->1 off a four-turn one-faint clear. This is the one confirming run of those levels on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Lopunny resolved at L30 and Whimsicott at L29 (L29 and L28 in pass 1). Kirlia L33 and Floragato L30 unchanged.",
+  "resolved_opponent_levels": {"LOPUNNY": 30, "KIRLIA": 33, "FLORAGATO": 30, "WHIMSICOTT": 29},
+  "party_manifest": "work/playtest/52-TRAINER_SALLY/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: Weavile, Gardevoir (Gardevoirite), Nidoking, Magearna, Togekiss, Kartana - all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110. One declared reachable legend (Magearna) and one Mega (Gardevoir, evolved on turn 1).",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/52-TRAINER_SALLY/r1",
+      "seed": 52,
+      "outcome": "won",
+      "turns": 4,
+      "driver_turn_counter": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_frames": [61, 37, 31, 31],
+      "ai_decision_seconds_max": 1.021,
+      "narrative": "A softer fight than pass 1 despite the two extra levels. T1 Weavile (125 Speed) again beat Lopunny (105) to the Fake Out and flinched away Lopunny's own High Jump Kick, which had been selected at Weavile; Mega Gardevoir's Pixilate Hyper Voice then KO'd the L30 Lopunny outright from full 88 HP, where in pass 1 the same move only took it to 27. Kirlia Protected on its entry turn, blanking the 0.5x half of that spread move. T2 Weavile's Triple Axel (2x) KO'd Whimsicott from full 101 before its Moonblast resolved - Whimsicott has now contributed nothing in two passes - and Mystical Fire redirected into Kirlia for 33 plus a Sp.Atk drop; Kirlia's spread Dazzling Gleam took Weavile (2x on Dark) to 43. T3 I pulled the damaged Weavile for Magearna, Kirlia Protected into a completely empty turn (nothing was aimed at it), and Mystical Fire (2x) took the Eviolite Floragato from 86 to 20. T4 Floragato's Protean Quick Attack went off, Mystical Fire finished it, Kirlia's Dazzling Gleam was resisted by the Steel, and a +1 Flash Cannon (2x) ended the L33 Kirlia. Zero player faints; Gardevoir finished on 46/90 and Weavile on 43/91, and Nidoking, Togekiss and Kartana were never sent out."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Lopunny's extra level wins or survives the Fake Out race",
+      "result": "FAIL",
+      "evidence": "Neither. At L30 it is still 20 points of base Speed behind a 125-Speed lead, so it was flinched out of a correctly-chosen High Jump Kick for the second pass running, and this time it did not even survive the follow-up: one Pixilate Hyper Voice KO'd it from full 88 HP, where at L29 it lived on 27. The +1 changed nothing that matters. Its problem is the speed tier, and the brief forbids fixing that with levels."
+    },
+    {
+      "check": "Prankster Whimsicott gets its disruption off",
+      "result": "FAIL - never acted, second pass running",
+      "evidence": "Selected MOVE_MOONBLAST and was KO'd from full 101 HP by a two-hit Triple Axel before it resolved. LEECH_SEED and ENCORE - the entire reason a Prankster is on this team - have not been selected once in two passes. The +1 it took in pass 1 bought nothing because it enters fourth into a board that is already 2-vs-1."
+    },
+    {
+      "check": "Eviolite Kirlia is the over-levelled centrepiece that has to be answered",
+      "result": "PARTIAL",
+      "evidence": "It survived to the final turn, landed two spread Dazzling Gleams (one of which was 2x into Weavile and forced a switch) and used its bulk well. But IMPRISON - the move that makes this Kirlia distinctive and is the reason it is at offset 5 - has still not been selected in either pass, and two of its four turns went to Protect, one of them empty. The centrepiece is functioning as a bulky spread attacker, not as the Imprison puzzle it was authored to be."
+    },
+    {
+      "check": "Protean Floragato pivots",
+      "result": "FAIL",
+      "evidence": "Two actions, Seed Bomb (0.5x into a Steel, Protean turning it Grass) and Quick Attack (Protean turning it Normal). MOVE_U_TURN - the pivot the Protean set is built around - was not selected in either pass. It is the member that survives long enough to matter and does the least with the turns."
+    },
+    {
+      "check": "Scrappy is relevant",
+      "result": "PASS, incidentally",
+      "evidence": "My Gardevoir's Trace copied Scrappy off Lopunny at the start, which is a nice interaction, and Lopunny's own Scrappy High Jump Kick would have hit my Ghost-less party normally anyway. Not a fault; recorded for completeness."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "KIRLIA",
+      "payoff": "MINIMAL - blanked the half of a spread Pixilate Hyper Voice that was aimed at it. Hyper Voice is Fairy against a Psychic/Fairy Kirlia behind an Eviolite, so 0.5x into heavy resistance: the guard denied a small fraction of one spread move on a 99/99 body on its entry turn. Not empty, but close to it."
+    },
+    {
+      "turn": 3,
+      "battler": "KIRLIA",
+      "payoff": "EMPTY - nothing was aimed at Kirlia. Mystical Fire went to Floragato and I switched Weavile out for Magearna, so the guard denied zero damage. Kirlia was at 66/99 with an Eviolite, which is not the sort of pressure that justifies a shield."
+    }
+  ],
+  "protect_ledger_note": "Two of Kirlia's four actions were Protect, one near-empty and one completely empty, on a heavily resistant Eviolite body that was under no real threat. This is the repetitive/low-value guarding the brief asks to be reviewed, and it is the weakest guard behaviour I saw in my block - a sharp contrast with the same build's excellent guards on Kaleb and Greta. Flagged as R6-D5 rather than merely noted because it recurred within one battle.",
+  "ai_defects": [
+    {
+      "id": "R6-D5",
+      "turn": "1 and 3",
+      "trainer": "TRAINER_SALLY",
+      "battler": "KIRLIA (L33, Eviolite, Psychic/Fairy)",
+      "board": "Turn 1: Kirlia 99/99 on its entry turn, partner Lopunny 88/88, facing Weavile and a freshly Mega-Evolved Gardevoir. Turn 3: Kirlia 66/99, partner Floragato 86/86, facing a Mega Gardevoir and a Magearna that had just switched in; my two commands that turn were an attack aimed at Floragato and a switch.",
+      "chosen": "MOVE_PROTECT on both turns",
+      "problem": "Kirlia spent half its actions on guards that bought nothing. The turn-1 guard blocked only the resisted half of one spread move on a full-health Eviolite body; the turn-3 guard blocked nothing at all. Meanwhile its spread DAZZLING_GLEAM - which, the one turn it was used offensively, hit Weavile for 2x and forced a switch - sat unused, and IMPRISON was never selected at all. A heavily resistant Eviolite wall at 99/99 and then 66/99 is precisely the body that should be attacking through pressure rather than shielding from it.",
+      "better_action": "MOVE_DAZZLING_GLEAM on both turns (2x into Weavile on turn 1, chip plus pressure on turn 3), or MOVE_IMPRISON, which is the authored hook and has never been selected in two passes.",
+      "scope_note": "For the AI owner: guard pricing appears to over-value Protect on high-resistance / Eviolite bodies - the expected-value forecast may be reading incoming spread moves at neutral rather than at the resisted multiplier, and it does not seem to discount the guard when the battler's own offensive option is super-effective. Note this is the SAME build that priced guards correctly on Kaleb (a lethal entry-turn Boltund Protect) and Greta (a perfect 1 HP Shedinja Protect), so this is a specific mispricing, not a general regression. Affected-team index candidates: every Eviolite or heavily-resistant support body carrying Protect. Not fixing AI C code from this session."
+    }
+  ],
+  "ai_notes": [
+    "Turn 1 Lopunny selecting High Jump Kick at Weavile was the right move at the right target; it simply lost the speed race, as it did in pass 1.",
+    "Turn 2 Kirlia's spread Dazzling Gleam was well chosen: 2x into Weavile, and it did force me to withdraw Weavile the following turn. When this Kirlia attacks, it is good.",
+    "Floragato's Protean transformations resolved correctly (Grass on Seed Bomb, Normal on Quick Attack); no mechanical fault, just weak move selection.",
+    "AI decision timing peaked at 61 frames (1.021 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "FLORAGATO",
+      "field": "level offset",
+      "before": 2,
+      "after": 3,
+      "pass_total": "+1 (first level for this member in this pass)",
+      "reason": "Zero-faint four-turn clear, so brief rule 5 calls for a raise, and Floragato is the correct recipient. It is the only member other than the ace that reliably survives long enough to take turns - it got two actions this pass - and it is an Eviolite Protean pivot that was taken from 86 to 20 by a single Mystical Fire. One level of bulk is the honest lever for a member whose problem is surviving its own pivot turn, unlike Lopunny (loses a speed race a level cannot win) and Whimsicott (arrives fourth into a decided board)."
+    }
+  ],
+  "level_changes_not_made": [
+    {
+      "member": "LOPUNNY",
+      "reason": "+1 in pass 1 and it converted nothing: it is still 20 base Speed short of the lead that flinches it, and this pass it died to one Hyper Voice where before it survived on 27. A second level does not win the speed race and would spend the ceiling on the member the brief's own rule says levels cannot fix."
+    },
+    {
+      "member": "WHIMSICOTT",
+      "reason": "+1 in pass 1 and it has now taken zero actions in two passes, dying from full HP to a single 2x Triple Axel. A level of a 101 HP Grass/Fairy does not change that, and its real problem is that it enters fourth into a 2-vs-1. Ordering, not levels - recorded in the cooler note."
+    },
+    {
+      "member": "KIRLIA",
+      "reason": "The deliberately over-levelled centrepiece at offset 5 / L33. Rule 5 says never the ace first, and its failures this pass (two wasted Protects, Imprison never used) are AI defect R6-D5, not a level problem."
+    }
+  ],
+  "calibration": "RAISE Floragato 2 -> 3. Won on the first attempt in four turns with ZERO player faints, which is a regression from pass 1's one faint despite two extra opponent levels - both of those levels went to members that could not convert them. Brief rule 5: 'Won first try with 0-1 player faints and no real threat -> +1 on the weakest one or two members.' Only one member is raised, because Lopunny and Whimsicott both fail for reasons a level provably does not address and Kirlia is the ace. Note for the main agent: if this encounter is still a zero-faint clear next pass, the lever is no longer levels - it is Kirlia's guard behaviour (R6-D5) and the send-out order.",
+  "could_this_be_cooler": "The concept is good but it is not currently being played, and that is now the honest answer after two passes. This is supposed to be an Imprison team - a Kirlia that locks the player out of shared moves from behind an Eviolite, with a Scrappy Fake Out lead, a Prankster disruptor and a Protean pivot around it. In two battles Imprison has never been selected, Leech Seed and Encore have never been selected, and U-turn has never been selected. What actually happens is a Fake Out that loses a speed race, two Pokemon that die before acting, and a bulky Kirlia that spends half its turns behind Protect. None of that is a species or set problem - the set is genuinely interesting - so no change was made. Two concrete recommendations to the main agent, neither implemented here: (1) the Imprison line needs the AI to value it, which is defect R6-D5's neighbourhood, and (2) the send-out order should lead Kirlia alongside Lopunny so the Eviolite body is on the field while the disruption pieces still have partners, instead of arriving to clean up alone.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. Teams-file change is the single FLORAGATO offset line, edited in place; generated projections were not regenerated or committed by this session. Synthetic headless benchmark, not earned campaign play."
+}
