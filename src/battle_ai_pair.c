@@ -55,10 +55,6 @@
 // settle the shortlist on expected value. A shield still reaches the
 // shortlist: it scores well against the pattern it is meant to answer.
 #define PAIR_SHORTLIST 4
-// A multi shares one decision budget between three AI actors. Halving the
-// shortlist keeps the settle stage bounded without changing how a pair is
-// valued, which must stay identical across every board of one decision.
-#define PAIR_SHORTLIST_CROWDED 2
 
 // Guard policy. A shield's simulated HP saving is not all permanent: with no
 // payoff the same threat simply returns next turn and the foes can focus the
@@ -80,54 +76,9 @@ static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MO
 // Stop optional comparisons after one second, leaving room under the 1.2s
 // complete-decision limit for the current native calculation and restoration.
 // Always establish a legal fallback; urgent Perish exits retain their search.
-// AI battlers that still have to be scored out of this turn's shared budget.
-static u32 PairPendingDecisionActors(void)
-{
-    u32 actors = 0;
-    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
-        if (IsBattlerAlive(battler) && BattlerHasAi(battler)
-         && !(gAiLogicData->battlerMovesScored & (1u << battler)))
-            actors++;
-    return actors;
-}
-
-static u32 PairShortlistSize(void)
-{
-    return PairPendingDecisionActors() > 2 ? PAIR_SHORTLIST_CROWDED : PAIR_SHORTLIST;
-}
-
-// One turn's opposing decision can involve more than one group of AI actors:
-// a two-owner multi scores both opponents together and then the in-game
-// partner separately, and every one of them spends the same shared budget.
-// Give each group an equal slice of it, measured from the shared start, so the
-// complete decision still lands inside the limit however many groups there are.
-static u32 PairDecisionBudgetShare(void)
-{
-    u32 groups = 0, pending = 0;
-    for (u32 side = 0; side < NUM_BATTLE_SIDES; side++)
-    {
-        bool32 present = FALSE, unscored = FALSE;
-        for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
-        {
-            if (!IsBattlerAlive(battler) || !BattlerHasAi(battler) || GetBattlerSide(battler) != side)
-                continue;
-            present = TRUE;
-            if (!(gAiLogicData->battlerMovesScored & (1u << battler)))
-                unscored = TRUE;
-        }
-        if (present)
-            groups++;
-        if (unscored)
-            pending++;
-    }
-    if (groups <= 1)
-        return 60;
-    return 60 * (groups - pending + 1) / groups;
-}
-
 static bool32 PairDecisionBudgetExpired(void)
 {
-    return (u32)(gMain.vblankCounter1 - gAiLogicData->decisionStartFrame) >= PairDecisionBudgetShare();
+    return (u32)(gMain.vblankCounter1 - gAiLogicData->decisionStartFrame) >= 60;
 }
 
 enum PairAccuracyWeather
@@ -1179,25 +1130,8 @@ static s32 PairTacticScore(enum BattlerId actor, const struct PairAction *action
     if (!(EmeraldChampions_GetTacticKind(actor, partner, action->move)
           & (EC_BATTLE_TACTIC_ACTIVATE | EC_BATTLE_TACTIC_AFTER_YOU | EC_BATTLE_TACTIC_INSTRUCT)))
         return 0;
-    // A trigger that can be aimed at a single foe has to be aimed at the
-    // authored recipient. A side or field trigger - Darius's Tailwind into
-    // Wind Power - reaches its own side by construction.
-    switch (GetMoveTarget(action->executedMove))
-    {
-    case TARGET_USER:
-    case TARGET_USER_AND_ALLY:
-    case TARGET_USER_OR_ALLY:
-    case TARGET_ALLY:
-    case TARGET_FIELD:
-    case TARGET_ALL_BATTLERS:
-    case TARGET_BOTH:
-    case TARGET_FOES_AND_ALLY:
-        break;
-    default:
-        if (action->target != partner)
-            return 0;
-        break;
-    }
+    if (!PairSpread(action->executedMove) && action->target != partner)
+        return 0;
     // The authored rule is explicit: friendly fire that kills the recipient is
     // not the interaction. A super-effective trigger is a cost however the
     // roll lands - Beat Up is Dark, which feeds a Steel recipient's Justified
@@ -4462,7 +4396,7 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
         u8 left;
         u8 right;
     } shortlist[PAIR_SHORTLIST];
-    u32 shortCount = 0, shortLimit = PairShortlistSize();
+    u32 shortCount = 0;
     bool32 mixed = FALSE;
     for (u32 left = 0; left < ev->count[actor]; left++)
     {
@@ -4493,14 +4427,14 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             u32 slot = shortCount;
             while (slot > 0 && shortlist[slot - 1].score < primary)
             {
-                if (slot < shortLimit)
+                if (slot < PAIR_SHORTLIST)
                     shortlist[slot] = shortlist[slot - 1];
                 slot--;
             }
-            if (slot < shortLimit)
+            if (slot < PAIR_SHORTLIST)
             {
                 shortlist[slot] = (struct PairShortlistEntry){primary, left, right};
-                if (shortCount < shortLimit)
+                if (shortCount < PAIR_SHORTLIST)
                     shortCount++;
             }
         }
@@ -4509,11 +4443,7 @@ settle:
     // Expected value over the weighted opponent model, with a bounded
     // pessimism share. Taking the minimum instead made every credible
     // knockout pattern demand a shield.
-    // The scoring rule has to be the same for every board in one decision,
-    // or a switch candidate evaluated after the budget expired is compared
-    // against a stay board that was scored on the full mixture. The budget
-    // controls how many pairs are searched, never how a pair is valued.
-    mixed = forecastCount > 1;
+    mixed = forecastCount > 1 && (mustFinish || !PairDecisionBudgetExpired());
     for (u32 entry = 0; entry < shortCount; entry++)
     {
         s32 total = shortlist[entry].score * 100, worst = shortlist[entry].score;
@@ -5048,11 +4978,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
             if (index == 1 && deadline[0] && deadline[1] && secondRank != INT_MIN)
                 count[index] = 3;
         }
-    // A board that runs out of budget before its first pair leaves nothing
-    // behind, so start from a defined legal action rather than stack contents.
     struct PairAction chosen[2], bestActions[2];
-    for (u32 index = 0; index < 2; index++)
-        bestActions[index] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actors[index]};
     u32 bestReserves[2] = {PARTY_SIZE, PARTY_SIZE};
     u32 bestMega = 0, bestTieCost = UINT_MAX;
     u32 activeMega = 0;
@@ -5134,21 +5060,12 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     continue;
                 // Demand a meaningful improvement before voluntarily giving up
                 // an action; ties and tiny forecast noise must not cause cycling.
-                // A countdown exit is not voluntary, and neither is the
-                // authored early pivot that leaves while the partner still
-                // holds the trap: both are the plan, not a change of mind.
-                // Everything else must still earn its lost action.
-                bool32 forcedExit = FALSE, plannedExit = FALSE;
-                for (u32 index = 0; index < 2; index++)
-                {
-                    if (slots[index] >= PARTY_SIZE)
-                        continue;
-                    if (deadline[index])
-                        forcedExit = TRUE;
-                    if (deadline[index] || earlyPivot[index])
-                        plannedExit = TRUE;
-                }
-                if (noActionMask && !plannedExit)
+                // A countdown exit is not voluntary: this is the last turn the
+                // singer can leave, and no forecast changes that. Everything
+                // else must still earn its lost action.
+                bool32 forcedExit = (deadline[0] && slots[0] < PARTY_SIZE)
+                    || (deadline[1] && slots[1] < PARTY_SIZE);
+                if (noActionMask && !forcedExit)
                     score -= 35;
                 if (forcedExit)
                     score += 200;
@@ -5193,22 +5110,7 @@ decisionReady:
         gBattleStruct->AI_monToSwitchIntoId[battler] = bestReserves[index];
         if (bestReserves[index] < PARTY_SIZE && !attackPivot[index])
             gAiLogicData->shouldSwitch |= 1u << battler;
-        // Never hand the controller a move it cannot select: the selection
-        // script would reject it and ask again, and the answer never changes.
-        // With every move unusable, slot zero is the native Struggle path.
-        u32 chosenIndex = bestActions[index].index == PAIR_IDLE ? 0 : bestActions[index].index;
-        u32 limitations = IsBattlerAlive(battler)
-            ? CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL) : 0;
-        if (limitations != (1u << MAX_MON_MOVES) - 1 && (limitations & (1u << chosenIndex)))
-        {
-            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-                if (!(limitations & (1u << slot)))
-                {
-                    chosenIndex = slot;
-                    break;
-                }
-        }
-        gAiBattleData->chosenMoveIndex[battler] = chosenIndex;
+        gAiBattleData->chosenMoveIndex[battler] = bestActions[index].index == PAIR_IDLE ? 0 : bestActions[index].index;
         gAiBattleData->chosenTarget[battler] = bestActions[index].target;
         SetAIUsingGimmick(battler, bestMega & (1u << index) ? USE_GIMMICK : NO_GIMMICK);
         gAiLogicData->battlerMovesScored |= 1u << battler;

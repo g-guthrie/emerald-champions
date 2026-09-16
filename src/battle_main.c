@@ -4205,36 +4205,6 @@ static void HandleTurnActionSelectionState(void)
                         }
                         else if (TrySetCantSelectMoveBattleScript(battler))
                         {
-                            // A human picks again from the menu. An AI battler
-                            // is asked again and answers the same, forever, so
-                            // take the refused slot out of its options and move
-                            // its choice to one that is still selectable. Four
-                            // refusals exhaust the set and the no-moves path
-                            // below sends it to Struggle, which terminates.
-                            if (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                             && gAiLogicData != NULL)
-                            {
-                                u32 refused = gBattleResources->bufferB[battler][2] & ~RET_GIMMICK;
-                                if (refused < MAX_MON_MOVES)
-                                    gAiLogicData->moveLimitations[battler] |= 1u << refused;
-                                // Only the engine decides that nothing is left:
-                                // forcing Struggle here would make it fail on a
-                                // battler that still has a selectable move. Move
-                                // the choice within what the engine allows and
-                                // let AreAllMovesUnusable route the empty case.
-                                u32 engine = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
-                                u32 usable = ((1u << MAX_MON_MOVES) - 1) & ~engine;
-                                if (usable & ~gAiLogicData->moveLimitations[battler])
-                                    usable &= ~gAiLogicData->moveLimitations[battler];
-                                for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-                                {
-                                    if (usable & (1u << slot))
-                                    {
-                                        gAiBattleData->chosenMoveIndex[battler] = slot;
-                                        break;
-                                    }
-                                }
-                            }
                             RecordedBattle_ClearBattlerAction(battler, 1);
                             gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
                             gBattleStruct->battlerState[battler].selectionScriptFinished = FALSE;

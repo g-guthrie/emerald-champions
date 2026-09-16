@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 10,
+  "e_group": "E0010",
+  "trainer": "TRAINER_GRUNT_PETALBURG_WOODS",
+  "class": "grunt",
+  "location": "PetalburgWoods",
+  "cap": 14,
+  "difficulty": "medium",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable in Petalburg Woods.",
+  "opponent_as_played": [
+    "CARVANHA L13 @FOCUS_SASH SPEED_BOOST ADAMANT (Crunch/Aqua Jet/Waterfall/Protect) offset 1",
+    "WAILMER L15 @SITRUS_BERRY OBLIVIOUS MODEST (Water Spout/Scald/Icy Wind/Protect) offset 3",
+    "GRIMER L15 @EVIOLITE POISON_TOUCH ADAMANT (Poison Jab/Drain Punch/Shadow Sneak/Protect) offset 3",
+    "POOCHYENA L16 @EVIOLITE RATTLED CALM (Foul Play/Helping Hand/Snarl/Protect) offset 4"
+  ],
+  "party_manifest": "work/playtest/10-GRUNT_PETALBURG_WOODS/party-rerun-a1.json",
+  "party_summary": "Electrike / Roselia / Timburr / Heracross / Pachirisu / Growlithe - Route101/102/103/104 wilds plus Petalburg Woods Heracross. Nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2010,
+      "outcome": "won",
+      "turns": 8,
+      "decisions": 11,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 60,
+      "ai_decision_seconds_max": 1.005,
+      "events": "work/playtest/10-GRUNT_PETALBURG_WOODS/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 Wailmer Protected a lethal 2x Thunderbolt while Carvanha's Crunch took Electrike to 5 and banked a Speed Boost; Roselia's Energy Ball broke Carvanha's Focus Sash. T2 Electrike withdrew for Timburr and Energy Ball removed Wailmer, which had chosen Scald over a full-HP Water Spout. Grimer replaced it. T3 Carvanha Protected the Mach Punch that was lethal at 1 HP and Grimer's Poison Jab, 2x on Grass, removed Roselia. T4 Heracross replaced her; its Rock Slide removed Carvanha and Moxie banked an Attack stage, Timburr knocked Grimer's Eviolite away, and Grimer's Poison Jab plus Life Orb recoil removed Heracross. T5 Growlithe came in and died in the same turn to Poison Touch poison plus Poochyena's Foul Play. T6 Pachirisu replaced it; Grimer Protected the Mach Punch that was lethal at 7 HP. T7 Poochyena Protected the next lethal Mach Punch while Thunderbolt finished Grimer. T8 Mach Punch removed Poochyena. 4-3."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Carvanha attacks or protects only if the earned Speed Boost changes a relevant matchup",
+      "result": "PASS",
+      "evidence": "Crunch on T1 and T2 while healthy behind a Focus Sash, Protect on T3 at exactly 1 HP against a lethal priority move, Waterfall on T4. It never guarded from a comfortable position and never attacked when the guard was the survival play. Speed Boost reached +3."
+    },
+    {
+      "check": "Wailmer selects Water Spout using its HP at execution",
+      "result": "FAIL",
+      "evidence": "Wailmer's only attacking decision, T2, came at 74/74 - the exact HP at which Water Spout is a 150 BP spread move - and it chose Scald (80 BP, single target). Even after the doubles spread penalty, Water Spout is ~112 effective power on the primary target plus a second hit, against Scald's 80. See defect E0010-D1 for the one defensible reading."
+    },
+    {
+      "check": "Turn two converts the speed gain or shifts to Scald/Icy Wind after damage",
+      "result": "PASS for Carvanha",
+      "evidence": "Carvanha converted the Speed Boost turns into Crunch and then Waterfall rather than stalling. Icy Wind never came up because Wailmer had one attacking turn."
+    },
+    {
+      "check": "Do not sacrifice Wailmer merely to preserve Carvanha at full HP",
+      "result": "PASS",
+      "evidence": "No such sacrifice. The AI made no voluntary switch at all, and Wailmer took its own guard turn on T1 rather than being fed to my attackers."
+    },
+    {
+      "check": "Poochyena's Snarl/Helping Hand supports Grimer's physical pressure",
+      "result": "FAIL (never fired)",
+      "evidence": "Poochyena had three decisions - Foul Play (T5), Foul Play (T6), Protect (T7) - and never used Snarl or Helping Hand, although on T5 and T6 Grimer was alive beside it and a Helping Hand would have turned Grimer's Poison Jab into a kill on Timburr. Foul Play is not a bad move (it uses MY Attack stat and killed Growlithe outright on T5), so this is the weakest of the block's support omissions, but the authored support half of this set went entirely unused."
+    },
+    {
+      "check": "Grimer and the support reserve provide a useful line when Water pressure is resisted",
+      "result": "PASS",
+      "evidence": "Grimer was the best member on the team: Poison Jab removed Roselia (2x on Grass) and then Heracross, Poison Touch poisoned Growlithe on the turn it entered, Shadow Sneak was chosen as priority when it needed to act before a faster battler, and its T6 Protect at 7 HP denied a certain KO. This is the Water-resisted fallback line working exactly as the plan describes."
+    },
+    {
+      "check": "Rattled is an opponent-dependent bonus, not an activation plan",
+      "result": "PASS",
+      "evidence": "Rattled fired once, off Growlithe's Intimidate on T5, and the extra Speed stage was incidental. No behaviour depended on it."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "WAILMER",
+      "payoff": "Blocked a Life Orb Thunderbolt that is 2x on a pure Water type and was lethal from 74/74. Large payoff."
+    },
+    {
+      "turn": 3,
+      "battler": "CARVANHA",
+      "payoff": "Blocked an Iron Fist Mach Punch, 2x on Water/Dark, at exactly 1 HP - a certain KO denied - and its partner Grimer used the same turn to remove Roselia. Large payoff."
+    },
+    {
+      "turn": 6,
+      "battler": "GRIMER",
+      "payoff": "Blocked a lethal Mach Punch at 7/63 and survived into the next turn. Large payoff."
+    },
+    {
+      "turn": 7,
+      "battler": "POOCHYENA",
+      "payoff": "Blocked a Mach Punch that is 2x on Dark and lethal from 27/52. Large payoff; it cost me a whole turn."
+    }
+  ],
+  "protect_ledger_note": "Four opponent Protects in eight turns and every single one denied a kill. This is the densest and best-timed guard usage in the block - no empty guard, no repeat into a guaranteed failure, and three of the four were made at single-digit or lethal-range HP. The 'guard that denies less than its user could have healed banks nothing' change has clearly not made the AI gun-shy about guards that actually matter.",
+  "ai_defects": [
+    {
+      "id": "E0010-D1",
+      "severity": "probable mis-selection",
+      "turn": 2,
+      "board": "Wailmer at 74/74 (full HP, i.e. Water Spout at its maximum 150 BP), Sitrus intact, opposite Electrike at 5/39 and a slot that was switching to Timburr, with Grass-type Roselia in the other player slot.",
+      "chosen": "Scald on the left player slot",
+      "better": "Water Spout. At full HP it is 150 BP; even at the 0.75 doubles spread multiplier that is ~112 effective power on the primary target plus a second hit on Roselia, against Scald's 80 on one target.",
+      "defensible_reading": "Scald carries a 30% burn, and the AI may be valuing burn on a slot it expected to hold a physical attacker. That is a real consideration, but the target it actually picked held a special attacker at 5 HP that either move kills.",
+      "status": "NEWLY OBSERVED. Water Spout is the move this set is built around and its HP-scaling is the whole point; it never fired."
+    },
+    {
+      "id": "E0010-D2",
+      "severity": "authored tactic never fires",
+      "turns": "5, 6",
+      "board": "Poochyena beside a live Grimer whose Poison Jab was the team's best damage.",
+      "chosen": "Foul Play twice",
+      "better": "Helping Hand on at least one of those turns turns Grimer's Poison Jab into a kill on Timburr, my last real body. Snarl would also have cut Pachirisu's Thunderbolt.",
+      "status": "Weakest of the block's support omissions - Foul Play did kill Growlithe - but neither authored support move was ever selected."
+    }
+  ],
+  "ai_defects_newly_introduced": [
+    "E0010-D1 (Water Spout never selected at full HP). Bunnelby's Quick Attack in E0004 is the same shape: a lower-power move winning scoring against the set's signature high-power move."
+  ],
+  "ai_improvements_observed": [
+    "Four for four on Protect payoff, including three at lethal range.",
+    "Shadow Sneak correctly chosen as priority when Grimer needed to move first.",
+    "Zero voluntary opponent switches."
+  ],
+  "level_changes": "NONE. Won on attempt 1 with 3 of 6 player faints, which the brief treats as keep. The first pass also made no change here and that still looks right: this grunt is appropriately nasty for a mandatory Petalburg Woods encounter, and the only reason it is not harder is the unfired Water Spout.",
+  "levels_after": {
+    "CARVANHA": 1,
+    "WAILMER": 3,
+    "GRIMER": 3,
+    "POOCHYENA": 4
+  },
+  "cooler": "Yes, and it is the same point as D1. Wailmer's identity is Water Spout, a move whose power is its remaining HP, and it is carrying both Scald and Icy Wind as alternatives that will out-score it on most boards. Dropping Icy Wind for Protect-plus-nothing is not the answer; giving it an Assault Vest instead of Sitrus, so the HP it keeps is bulk rather than a one-time heal, would make the Water Spout arithmetic the actual decision the fight turns on. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found. Speed Boost, Poison Touch and Oblivious all behaved correctly."
+}

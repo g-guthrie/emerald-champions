@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0010 TRAINER_GRUNT_PETALBURG_WOODS; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR PETALBURG WOODS. HERACROSS = wild:PetalburgWoods/land_mons (this battle own map); ELECTRIKE, GROWLITHE = wild:Route103/land_mons; TIMBURR, PACHIRISU = wild:Route102/land_mons; ROSELIA = wild:Route104/land_mons. Nothing evolved (Rustboro is beyond the woods), nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "The crack list names early Electric/Grass tools, priority, special mitigation and damaging Wailmer before it attacks - all four are buildable here. ELECTRIKE and PACHIRISU Thunderbolt and ROSELIA Energy Ball are each 2x on Carvanha and Wailmer; Roselia base-100 special attack plus Electrike speed is the burst that beats a full-HP Water Spout. Special mitigation and spread denial: TIMBURR WIDE_GUARD blocks WATER_SPOUT, Muddy Water and Snarl outright, which is the direct test of whether the AI reads a guard on the field. Priority: Timburr Mach Punch, 2x on Dark Poochyena. Pachirisu VOLT_ABSORB is also the answer if anything tries to trade Electric with me.",
+ "party": [
+  {
+   "species": "SPECIES_ELECTRIKE",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_FLAMETHROWER",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_LIGHTNING_ROD",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast special Electric breaker; its own LIGHTNING_ROD is an Electric immunity and its Thunderbolt is a single-target Electric redirection probe",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_ROSELIA",
+   "moves": [
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_ENERGY_BALL",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_NATURAL_CURE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "base-100 special attacker; STAB Sludge Bomb is 2x on the Fairy core and special damage ignores Fur Coat",
+   "availability": "pool-14 wild:Route104/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_KNOCK_OFF",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_WIDE_GUARD"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "WIDE_GUARD against the stacked Muddy Water / Discharge spread lanes, plus Iron Fist priority and item removal",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_HERACROSS",
+   "moves": [
+    "MOVE_MEGAHORN",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_KNOCK_OFF"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_MOXIE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the strongest physical attacker Petalburg Woods offers; Moxie snowballs and Rock Slide is the spread",
+   "availability": "pool-14 wild:PetalburgWoods/land_mons."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_THUNDERBOLT",
+    "MOVE_NUZZLE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Follow Me redirection onto a Volt Absorb body, plus a second special Electric lane",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_GROWLITHE",
+   "moves": [
+    "MOVE_FLARE_BLITZ",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_WILD_CHARGE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate lead and Fire breaker; Wild Charge is the single-target Electric probe for Lightning Rod / Volt Absorb / Storm Drain redirection",
+   "availability": "pool-14 wild:Route103/land_mons."
+  }
+ ]
+}
