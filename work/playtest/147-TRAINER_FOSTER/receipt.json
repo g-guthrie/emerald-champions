@@ -1,0 +1,39 @@
+{
+  "play_order": 147,
+  "e_group": "E0175",
+  "trainer": "TRAINER_FOSTER",
+  "class": "ace",
+  "location": "Route105",
+  "chapter": "Feather Badge - optional Surf backtrack",
+  "cap": 48,
+  "difficulty": "medium",
+  "resolved_levels_check": "PASS - Omastar 48+1-2=47, Runerigus 48+1-2=47, Mega Slowbro 48+0-2=46, Relicanth 48+2-2=48, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/147-TRAINER_FOSTER/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 47, "party": "party-a1.json", "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 4,
+     "note": "Rillaboom + Magnezone + Alakazam + Weavile + Gengar + Spiritomb. Lost Magnezone on turn 1 to a critical Earth Power - a 4x hit into an Electric/Steel body that was my own build error rather than a difficulty signal. After that the room folded fast: Wood Hammer 4x one-shot Omastar, priority Grassy Glide 4x one-shot Choice Band Relicanth before it could use its second Head Smash, and one Dark Pulse removed Mega Slowbro. Runerigus was the only member that put up a fight, stalling two turns behind Protect."}
+  ],
+  "strategy_checks": [
+    {"check": "Omastar takes a safe Shell Smash when the board allows, and White Herb erases the drops", "result": "FAIL/NOT EXERCISED", "evidence": "Omastar never used Shell Smash. On turn 1 it chose Earth Power into Magnezone, which was the correct read and got a critical KO, and it died to Wood Hammer on that same turn. The dossier's own note that 'nothing protects Omastar's Shell Smash turn' is confirmed in play: against any Grass lead it simply does not survive to set up."},
+    {"check": "Runerigus burns or attacks the relevant threat rather than guarding emptily", "result": "MOSTLY PASS", "evidence": "turn 2 Will-O-Wisp burned Rillaboom, my only physical attacker and the member killing its whole team - an excellent read. Turn 3 Poltergeist into Spiritomb was real damage. The turn-1 and turn-4 Protects are the exception, see protect ledger and AI defect."},
+    {"check": "Wandering Spirit's contact-triggered ability exchange actually threatens the player's abilities", "result": "PASS (by deterrence)", "evidence": "the threat was real enough to shape my whole plan - Rillaboom never attacked Runerigus because losing Grassy Surge to a swap would have cost the terrain, and I routed its U-turn into Mega Slowbro instead. No exchange fired because I respected it."},
+    {"check": "Mega Slowbro has a separate Calm Mind endgame", "result": "NOT EXERCISED", "evidence": "Slowbro Mega Evolved on entry and chose Ice Beam, then died to a single 2x Dark Pulse before a second turn. Its 186 HP at level 46 is not enough to reach the Calm Mind plan against cap-48 special Dark damage."},
+    {"check": "Choice Band Relicanth applies immediate physical pressure", "result": "PASS", "evidence": "turn 2 Head Smash into Rillaboom, which is exactly the authored alternate deployment; it just lost the speed race to priority Grassy Glide."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "RUNERIGUS", "payoff": "EMPTY - both of my attacks that turn were aimed at Omastar and nothing was ever directed at Runerigus. Mitigating: under the no-command-reads rule the AI was forecasting against two attackers with a 2x Grass option, so a guard was not unreasonable, but the realised payoff was zero."},
+    {"turn": 4, "battler": "RUNERIGUS", "payoff": "REAL - blocked Gengar's Psychic and Spiritomb's Dark Pulse, the latter a 2x hit on a 77 HP body, and bought a full turn plus a Leftovers and grassy-terrain heal."}
+  ],
+  "ai_defects": [],
+  "ai_defect_note": "No illegal or nonsensical choice. The turn-1 Runerigus Protect produced no payoff but is defensible as an expected-value guard on an opening board; it is logged in the Protect ledger rather than raised as a defect because the same battler's turn-4 Protect was correctly timed and it never guarded twice in a row.",
+  "level_changes": [
+    {"trainer": "TRAINER_FOSTER", "member": "OMASTAR", "before": 1, "after": 2},
+    {"trainer": "TRAINER_FOSTER", "member": "RUNERIGUS", "before": 1, "after": 2}
+  ],
+  "calibration_reasoning": "First-attempt win with a single player faint, and that faint was a critical hit into a type error of my own rather than pressure Foster applied. That triggers the brief's '+1 on the opponent's weakest one or two members, never the ace/Mega/legend first' rule. Mega Slowbro sits at offset 0 but is excluded as the Mega, so the two +1 members are Omastar and Runerigus, both moving 1 -> 2. Relicanth is left at +2 because a Choice Band Rock Head body is already the room's hardest hitter.",
+  "rerun_status": "NOT RERUN. The level change cannot take effect in this benchmark: the headless driver reads trainer parties out of the prebuilt ROM in work/agent-battle-build-2, and rebuilding is explicitly the main agent's step (this agent is instructed never to run make). The teams-file edit is left in the working tree uncommitted for the wave-boundary rebuild and rerun.",
+  "could_this_be_cooler": "Keep the fossil-diver concept - White Herb Shell Smash, Rock Head Head Smash and a Wandering Spirit body are three genuinely distinct ideas for one route ace. But this run confirms the dossier's own flagged weakness sharply rather than softly: Omastar is the designated setup piece and it died on turn 1 without ever setting up, because every single member of this team is 2x or 4x weak to Grass and nothing on the team can deny a Grass lead a turn. The concrete improvement I would recommend is the one already flagged - give the room one Fake Out or redirection body so Omastar's Shell Smash turn is bought rather than hoped for. Relicanth is the natural candidate to lose a slot for it, since Choice Band Head Smash and post-Smash Omastar are doing the same job. Recommended, not applied in this pass.",
+  "legality_problems_found": "None. All four authored sets resolved cleanly.",
+  "notes": "Player-side note: Magnezone is 4x weak to Ground and Omastar carries Earth Power, so it is a poor lead into this room despite being the obvious Electric answer to three Water-types.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0175 TRAINER_FOSTER (Route105, Feather Badge - optional Surf backtrack, cap 48, Medium)",
+  "availability_audit": "Route 105 is reached by Surf after the Balance Badge; the battle index gives this encounter a 48-60 window and 48 is the floor. Every member is gated at 36 or below in work/reference-pools/pool-48.json, so each source map - Granite Cave, the Slateport evolution stock, New Mauville via Wattson's Basement Key, Altering Cave, Sneasel's habitat, the Thwackey line in the Heat Badge window - is entered before the player can Surf to Route 105. No legendaries, no Ultra Beasts, no Paradox species.",
+  "plan": "Foster is a fossil diver: four Water/Rock/Ground bodies, three of which are 2x or 4x weak to Grass, behind a Shell Smash and a Calm Mind. Rillaboom is the centrepiece - Grassy Glide is priority Grass damage that answers a post-Smash Omastar without needing to outspeed it, and Grassy Surge heals the side. Magnezone's Electric hits every Water, Alakazam's Focus Blast is 2x on both Rock bodies, Weavile and Spiritomb are Dark answers to Mega Slowbro and Runerigus, and Gengar's Taunt is aimed squarely at the SETUP flag: it blanks Shell Smash, Calm Mind, Slack Off and Will-O-Wisp in one move. The named hazard is Runerigus's Wandering Spirit, which swaps abilities with anything that makes contact, so nothing on my side attacks it with a contact move - Rillaboom in particular must never trade Grassy Surge away.",
+  "party": [
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "priority Grass damage that beats a Shell Smash speed boost, plus side healing from the terrain",
+      "availability": "pool-48 gate 36: Thwackey level evolution, available in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ANALYTIC",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Electric answer to all three Water bodies; Analytic pays off against a slow fossil team",
+      "availability": "pool-48 gate 30: NewMauville_Entrance land table, entered with Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest battler; Focus Blast is 2x on Omastar and Relicanth, Shadow Ball is 2x on Runerigus",
+      "availability": "pool-48 gate 20: Abra GraniteCave_1F, Kadabra evolution, Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Knock Off is 2x on Mega Slowbro and Runerigus and strips Relicanth's Choice Band; Fake Out denies a Shell Smash turn",
+      "availability": "pool-48 gate 14: Sneasel level/condition evolution."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Taunt blanks Shell Smash, Calm Mind, Slack Off and Will-O-Wisp at once; Levitate ignores Runerigus's Ground damage",
+      "availability": "pool-48 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_SPIRITOMB",
+      "moves": [
+        "MOVE_WILL_O_WISP",
+        "MOVE_DARK_PULSE",
+        "MOVE_FOUL_PLAY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "immune to Runerigus's Body Press and to Relicanth's Double-Edge; Dark Pulse is 2x on Mega Slowbro and Runerigus and needs no contact",
+      "availability": "pool-48 gate 14: AlteringCave_1F land table."
+    }
+  ]
+}
