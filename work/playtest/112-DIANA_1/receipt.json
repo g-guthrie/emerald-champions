@@ -1,0 +1,43 @@
+{
+  "play_order": 112,
+  "e_group": "E0135",
+  "trainer": "TRAINER_DIANA_1",
+  "class": "regular",
+  "location": "JaggedPass",
+  "cap": 36,
+  "cap_confirmation": "Resolved opponent levels equal cap+offset-2 at cap 36: Delibird L40 (36+6-2), Eelektross L34 (36+0-2), Gourgeist L35 (36+1-2), Jumpluff L35 (36+1-2).",
+  "party_manifest": "work/playtest/112-DIANA_1/party-a1.json",
+  "attempts": [
+    {"seed": 41, "attempt": 1, "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 4,
+     "notes": "Delibird opened with Tailwind and died to a second Ice Beam. Excadrill's Mold Breaker High Horsepower went straight through Eelektross' Levitate while Excadrill itself was immune to the Choice-locked Thunderbolt. Gourgeist was the real fight: its Flare-Boosted Giga Drain took Azumarill and it dodged two Rock Slides."}
+  ],
+  "strategy_checks": [
+    {"check": "Delibird sets Tailwind (TAILWIND strategy flag)", "result": "PASS", "evidence": "Turn 1, Delibird's very first action: 'A tailwind started blowing on the opposing side!' Side status SIDE_STATUS_TAILWIND held for four turns. It correctly preferred Tailwind to Fake Out on the opening turn, which is what the dossier asks for ('Tailwind replacing Water Pulse')."},
+    {"check": "Delibird's Fake Out is used on an interruptible threat", "result": "NOT REACHED", "evidence": "Delibird had two actions (Tailwind, Freeze-Dry) and was KOed on turn 2. Fake Out was never selected - reasonable, since turn 1 went to Tailwind and Fake Out is dead after that."},
+    {"check": "Eelektross' Choice Specs locks it into one move", "result": "PASS", "evidence": "It used Thunderbolt on turns 1, 2 and 3 and never selected another move; the lock is real and observable in `chosen`."},
+    {"check": "Eelektross' Levitate ignores Ground", "result": "PASS (and correctly bypassed)", "evidence": "Excadrill's Mold Breaker High Horsepower read 'It's super effective!' and KOed it from full, which is the documented Mold Breaker interaction rather than a Levitate failure."},
+    {"check": "Gourgeist's Flame Orb self-burn activates Flare Boost", "result": "PASS", "evidence": "End of turn 4: 'The opposing Gourgeist was burned!'; state then shows STATUS1_BURN with ability FLARE_BOOST. The boosted Giga Drain went from chip to a 104-damage 2x hit that KOed a full-HP Assault Vest Azumarill over two turns while healing Gourgeist."},
+    {"check": "Gourgeist's configured Special Attack is higher than ordinary external data suggests", "result": "PASS", "evidence": "Flare-Boosted Giga Drain out of a L35 Gourgeist removing a 151 HP Azumarill is well above a stock Gourgeist's output; the authored Modest 252 SpA spread is doing what the dossier claims."},
+    {"check": "Jumpluff uses Flying Gem with Acrobatics for the doubled-power hit", "result": "FAIL", "evidence": "Jumpluff had exactly one action (turn 3) and chose Seed Bomb into Mega Blastoise. Seed Bomb is 2x on a Water-type so the target choice was right, but the Flying Gem was never consumed and Acrobatics never appeared. Weak evidence - one action only - but the Gem went to waste."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {
+      "id": "P10-D8",
+      "severity": "low",
+      "turn": 2,
+      "board": "Eelektross Choice-locked into Thunderbolt, facing Excadrill (Ground/Steel, fully immune to Electric) and Mega Blastoise",
+      "chosen": "MOVE_THUNDERBOLT at Excadrill - 'It doesn't affect Excadrill...'",
+      "why_wrong": "A guaranteed zero-damage turn. The lock meant it could not pick a different move, but it could still have switched, and Mega Blastoise was standing right there as a legal 1x target for the same locked Thunderbolt. On turn 3 it did aim at Blastoise, so the target scorer can get this right - it just did not check immunity here.",
+      "better_action": "Thunderbolt at Mega Blastoise (as it did the following turn), or switch out of the lock."
+    }
+  ],
+  "level_changes": [
+    {"member": "EELEKTROSS", "before": 0, "after": 1, "reason": "Won on attempt 1 with one faint. Eelektross is the weakest member by offset and contributed almost nothing - one Thunderbolt into a Follow Me and one into a full immunity."},
+    {"member": "JUMPLUFF", "before": 1, "after": 2, "reason": "Second point. It lasted one turn and never got its Flying Gem online. Delibird (+6) is the lead centrepiece and Gourgeist earned its level outright, so neither moves."}
+  ],
+  "level_change_verification": "NOT RERUN - prebuilt ROM, no level override, no make. Needs the main agent's rebuild.",
+  "could_this_be_cooler": "Gourgeist is the star here and nothing else on the team supports it. The Flare Boost + Flame Orb + Leech Seed + Will-O-Wisp shell is a genuinely good attrition engine, but it arrives fourth, after three members that fold in a turn each. Suggestion, not applied: bring Gourgeist forward to lead beside Delibird so the Tailwind actually serves the member that wants extra turns, and let Delibird's Icy Wind be the speed control for the slow attrition plan rather than a lead that Tailwinds and dies. As played, Tailwind expired before the only Pokemon that needed it ever appeared.",
+  "authored_set_legality": "No legality problems. Flare Boost, Levitate, Vital Spirit, Infiltrator and the Choice Specs lock all behaved as printed.",
+  "notes": "Two Rock Slides missed against Gourgeist, which extended the fight by two turns; that is variance, not a level signal."
+}
