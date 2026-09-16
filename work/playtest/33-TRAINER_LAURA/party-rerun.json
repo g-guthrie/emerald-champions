@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0035 TRAINER_LAURA (Dewford Gym, six-member dojo); play_order 33, cap 20, Medium",
+ "availability_audit": "Chronology audit for this rerun. Every member's source map is checked against the book's chapter order (Game Book lines 1-300) and against the live map scripts, not only against the pool file's cap gate. Three species used in the first pass are chronology-ILLEGAL and were removed: WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, reached in C20 at cap 30); MAGEARNA before E0032 (the Devon Corp stairs are blocked until FLAG_RETURNED_DEVON_GOODS, set after Rusturf Tunnel); and ALAKAZAM before the Dewford Gym (Abra's only source is wild:GraniteCave_1F, entered in C12 after Route 106). Assisted acquisition through the native preparation API, ordinary items only, no Mega Stone on the player side (the Ring arrives after Brawly). Not native capture acceptance.",
+ "plan": "Psychic and Fairy pressure into six Fighting bodies, Wide Guard for the spread turns, and a Ghost body that blanks Fake Out relays and Close Combat.",
+ "party": [
+  {
+   "species": "SPECIES_SPIRITOMB",
+   "moves": [
+    "MOVE_DARK_PULSE",
+    "MOVE_SHADOW_BALL",
+    "MOVE_WILL_O_WISP",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_INFILTRATOR",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Dark/Ghost body with no weaknesses; Infiltrator ignores screens",
+   "availability": "wild:AlteringCave_1F/land_mons (Route 103 entrance, C02)."
+  },
+  {
+   "species": "SPECIES_MAGEARNA",
+   "moves": [
+    "MOVE_FLASH_CANNON",
+    "MOVE_FLEUR_CANNON",
+    "MOVE_THUNDERBOLT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_SOUL_HEART",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    0,
+    252,
+    4,
+    0
+   ],
+   "role": "Steel/Fairy wall and Soul-Heart snowball",
+   "availability": "legendary_sign:RustboroCity_DevonCorp_2F. The Devon stairs are blocked until FLAG_RETURNED_DEVON_GOODS (data/maps/RustboroCity_DevonCorp_1F/scripts.inc), i.e. after Rusturf Tunnel, so this is legal only from E0032 onward."
+  },
+  {
+   "species": "SPECIES_ALAKAZAM",
+   "moves": [
+    "MOVE_PSYCHIC",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_SHADOW_BALL",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_MAGIC_GUARD",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast Psychic breaker",
+   "availability": "Abra wild:GraniteCave_1F/land_mons -> Kadabra -> ITEM_LINKING_CORD. Granite Cave is entered in C12, before Brawly's Gym but after Route 106, so this is legal only for the Dewford Gym rooms."
+  },
+  {
+   "species": "SPECIES_CELEBI",
+   "moves": [
+    "MOVE_PSYCHIC",
+    "MOVE_GIGA_DRAIN",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_NATURAL_CURE",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "bulky Grass/Psychic support attacker",
+   "availability": "legendary_sign:PetalburgWoods_3 (static sign; grove needs Cut, so legal from cap 20 onward) - reachable mythical on a preceding map."
+  },
+  {
+   "species": "SPECIES_MR_MIME",
+   "moves": [
+    "MOVE_WIDE_GUARD",
+    "MOVE_PSYCHIC",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_FILTER",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Wide Guard against spread Rock/Ground/Water and a Psychic/Fairy lane",
+   "availability": "Mime Jr. wild:Route116/land_mons (Rustboro's east exit, open on arrival) -> known-move evolution."
+  },
+  {
+   "species": "SPECIES_NIDOKING",
+   "moves": [
+    "MOVE_EARTH_POWER",
+    "MOVE_ICE_BEAM",
+    "MOVE_THUNDERBOLT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_SHEER_FORCE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Sheer Force Ground/coverage cannon",
+   "availability": "Nidoran-M wild:Route101/land_mons -> Nidorino + ITEM_MOON_STONE (Rustboro Mart, C06)."
+  }
+ ]
+}

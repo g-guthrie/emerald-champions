@@ -784,9 +784,9 @@ strategy: NONE
 mega_slots: NONE
 plan: Thwackey Fake Out supports Quaxwell attack or fresh Quilava Eruption; turn two use terrain priority when grounded. Brionne supplies a Water-typed Liquid Voice/Throat Spray special alternative. Preserve meaningful coverage when HP makes Eruption weak. No manual weather implied. Stats: Physical Thwackey/Quaxwell and special Quilava/Brionne fit. Specs Eruption needs preserved HP; other Fire moves remain useful after damage. Could it be cooler? Replace unsupported Scorching Sands with Eruption, giving Fake Out a clear alternate payoff without evolving away the starter collection. Overrepresented? Terrain/Moxie/sound pressure differs from Dwayne elemental redirection and Simon Battery; regional starter appearances are alternatives. Medium incoming cap30 levels33/34/33/34 are unplayed design seeds.
 crack: Terrain denial, Flying pressure, Wide Guard and damaging Quilava before Eruption; no weather engine is implied.
-THWACKEY @EVIOLITE GRASSY_SURGE ADAMANT 4/252/0/0/0/252 3 | GRASSY_GLIDE, KNOCK_OFF, WOOD_HAMMER, FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
+THWACKEY @EVIOLITE GRASSY_SURGE ADAMANT 4/252/0/0/0/252 4 | GRASSY_GLIDE, KNOCK_OFF, WOOD_HAMMER, FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
 QUAXWELL @LIFE_ORB MOXIE JOLLY 4/252/0/0/0/252 4 | AQUA_CUTTER, BRAVE_BIRD, LOW_KICK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-QUILAVA @CHOICE_SPECS BLAZE TIMID 4/0/0/252/0/252 3 | HEAT_WAVE, FLAMETHROWER, EXTRASENSORY, ERUPTION | ivs=31/0/31/31/31/31 | friendship=255
+QUILAVA @CHOICE_SPECS BLAZE TIMID 4/0/0/252/0/252 4 | HEAT_WAVE, FLAMETHROWER, EXTRASENSORY, ERUPTION | ivs=31/0/31/31/31/31 | friendship=255
 BRIONNE @THROAT_SPRAY LIQUID_VOICE MODEST 4/0/0/252/0/252 4 | HYPER_VOICE, MOONBLAST, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0068 TRAINER_JACOB class=regular

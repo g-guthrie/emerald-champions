@@ -1,0 +1,61 @@
+{
+  "rerun_of": "work/playtest/33-TRAINER_LAURA/receipt.json",
+  "rerun_reason": "Confirming rerun for the first pass's unverified level change (MANKEY offset 4->5) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
+  "play_order": 33,
+  "e_group": "E0035",
+  "trainer": "TRAINER_LAURA",
+  "class": "gym",
+  "location": "DewfordTown_Gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/33-TRAINER_LAURA/party-rerun.json",
+  "party_changed_from_first_pass": {
+    "reason": "Chronology. WHIMSICOTT was removed - Cottonee's only source is wild:VerdanturfMeadow, which is C20 at cap 30, ten chapters after Dewford. Everything else was already legal: Alakazam is fine here, because the Dewford Gym follows Granite Cave (C12) in the book's own handoff order, and this is the first battle in the block where Abra is obtainable.",
+    "removed": ["SPECIES_WHIMSICOTT"], "added": ["SPECIES_MR_MIME"],
+    "kept": ["SPECIES_SPIRITOMB", "SPECIES_MAGEARNA", "SPECIES_ALAKAZAM", "SPECIES_CELEBI", "SPECIES_NIDOKING"]
+  },
+  "opponent_levels_before": {"MIENFOO": 24, "TIMBURR": 23, "CROAGUNK": 23, "MAKUHITA": 24, "MANKEY": 22, "TYROGUE": 25},
+  "opponent_levels_this_run": {"MIENFOO": 24, "TIMBURR": 23, "CROAGUNK": 23, "MAKUHITA": 24, "MANKEY": 23, "TYROGUE": 25},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/33-TRAINER_LAURA/r1", "seed": "0x1F84",
+      "outcome": "won", "turns": 8, "decisions": 12, "player_faints": 3, "opponent_faints": 6,
+      "ai_decision_frames_max": 60, "ai_decision_seconds_max": 1.005,
+      "narrative": "The best-played opponent in this block, and a nine-turn grind. I led Spiritomb specifically because a Dark/Ghost body is immune to Fighting and Normal, which blanks most of a Fighting dojo - and Laura's answer was to route every relay through the other slot instead. Turn 1: Mienfoo Fake Out into Magearna (the non-Ghost) flinched away my Fleur Cannon while Timburr Protected and banked its Flame Orb burn. Turn 3: Choice Scarf Mankey's Close Combat killed Magearna outright, and Timburr's second Protect blocked both of my attacks at 35/89. Turn 5 was the authored relay executed exactly: Makuhita's Fake Out flinched Celebi and Croagunk's Sludge Bomb killed it at 2x in the same turn. Turn 6 Croagunk Protected a lethal 4x Psychic. Turn 8 the relay ran again - Tyrogue's Fake Out flinched Alakazam, Makuhita's Knock Off finished it. I won on the back of a spread Dazzling Gleam that took Mankey and Timburr together, and Spiritomb's Will-O-Wisp chip, with three of six down."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Mienfoo uses Fake Out or Regenerator/U-turn positioning to create a useful Timburr turn", "result": "PASS", "evidence": "r1 turn 1: Mienfoo chose Fake Out and correctly aimed it at Magearna rather than Spiritomb, which is Ghost and immune to Normal. The flinch cancelled the 2x Fleur Cannon that was aimed at Timburr, and Timburr used the turn to Protect and burn itself. That is precisely 'create a useful Timburr turn', and the target choice shows the AI is checking immunity before committing its priority move."},
+    {"check": "Flame Orb must actually activate before Guts is credited", "result": "PASS", "evidence": "r1 turn 1: Timburr Protected and the burn landed at end of turn ('The opposing Timburr was burned!'). Guts was not claimed before that. On turn 4 it fired Facade with the burn live."},
+    {"check": "Croagunk is the special Nasty Plot/Sludge Bomb/Vacuum Wave lane", "result": "PARTIAL", "evidence": "Sludge Bomb was chosen twice and killed Celebi at 2x on turn 5. Nasty Plot was never used, which is defensible on a board where it was being focused, and Vacuum Wave was never needed. The special lane exists and worked; the setup half of it did not appear."},
+    {"check": "Makuhita's Wide Guard and Tyrogue's Feint/Helping Hand/Counter make different commitments; Counter needs the right incoming hit", "result": "PARTIAL / PASS on the negative branch", "evidence": "Neither Wide Guard nor Counter was used, and both refusals are correct: I fired exactly one spread move all battle, and every attack I made was special, so Counter would have failed every time it was chosen. The AI declining Counter against an all-special party is the right read. Makuhita instead used Fake Out and two Knock Offs, both of which were 2x into my Psychic bodies."},
+    {"check": "Scarf Defiant Mankey punishes eligible stat drops and must respect its lock", "result": "PASS", "evidence": "r1 turn 3: Mankey chose Close Combat and killed Magearna; on turn 4 it was locked into Close Combat and used it again, into Celebi, where it was 0.5x. That is the lock behaving correctly and costing the AI a turn, which is the authored trade. Defiant never triggered because I used no stat-lowering move on it."},
+    {"check": "Avoid repeated Fake Out/pivot/Protect turns with no payoff", "result": "PASS - the strongest result in this block", "evidence": "Three Fake Outs were used, by three different members, and all three landed on the non-Ghost slot and all three bought a partner's payoff: turn 1 cancelled a Fleur Cannon, turn 5 set up Croagunk's killing Sludge Bomb on Celebi, turn 8 set up Makuhita's killing Knock Off on Alakazam. Three Protects, all with real payoff. Zero empty guards and zero wasted pivots in a nine-turn fight with six members. This is the authored warning being honoured."},
+    {"check": "The youngsters remain deliberately unevolved and the dojo identity earns retention", "result": "PASS", "evidence": "All six fielded as authored at the resolved Medium levels."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "TIMBURR", "payoff": "real - the authored Orb turn. It banked the Flame Orb burn that switched Guts on. It blocked no damage only because its partner's Fake Out had already cancelled the attack aimed at it, which makes the pair of choices better rather than worse."},
+    {"turn": 3, "user": "TIMBURR", "payoff": "real - at 35/89 it blocked both Spiritomb's Shadow Ball and Magearna's Flash Cannon in one turn"},
+    {"turn": 6, "user": "CROAGUNK", "payoff": "real - blocked a 4x Psychic from Alakazam that was lethal"}
+  ],
+  "protect_note": "Three guards, three real payoffs, no empty guard and no consecutive guard, across nine turns and six members. Same clean result as the first pass.",
+  "ai_defects": [],
+  "ai_observations": [
+    "No defects, and this is the trainer that most clearly demonstrates the AI playing its authored plan rather than merely making legal moves. The recurring decision worth naming for the AI owner: I led a Dark/Ghost body that is immune to Fighting and Normal, and not one of the three Fake Outs, nor Makuhita's Drain Punch, nor Mankey's locked Close Combat was ever aimed at it after the immunity was established. The AI routed around the wall instead of feeding it.",
+    "Turn 7 pivot: Laura withdrew Makuhita at 45/91 with a burn and sent Tyrogue, which absorbed a Shadow Ball. That is a DAMAGED pivot, not the healthy turn-one withdrawal defect - Makuhita was at half HP and taking burn chip, and it came back later to make the kill on Alakazam. Recorded here so the contrast with the Lilith and Takao cases is explicit.",
+    "ai_decision_frames_max 60 (1.005 s), consistent with the rest of the block."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt but lost three of six members in a nine-turn fight against a six-member Gym team. That is squarely the brief's 'won with 2+ faints or after a real fight' band. Keep.",
+    "changes": [],
+    "verdict": "The first pass's MANKEY +1 is CONFIRMED and should stand - at 23 its Choice Scarf Close Combat now one-shots an 80 HP Magearna, which is exactly the threat the point was meant to buy. No further change. Budget remaining: +1 on Mankey, +2 on every other member, all unspent.",
+    "note": "I would resist raising this room further in a later pass without a reason beyond the band. It is already the hardest fight in the block after Roxanne, and its difficulty comes from decision quality rather than numbers."
+  },
+  "cooler_note": "The first pass called this a good dojo; this run showed it is better than that. The Fake Out relay is not decoration - three different members used it, always into the slot that could be flinched, and twice it directly bought a knockout. That is a genuine authored engine that executes. The honest weakness is monotype: six Fighting bodies means one Psychic or Fairy attacker is 2x into the entire room and a single Ghost body blanks most of their damage. Croagunk's Poison half is the only thing breaking that pattern and it is the member I most wanted to keep alive. A concrete suggestion for a later pass, not applied here: Croagunk is the one member whose typing and special lane make the room harder to solve with one answer, and it is deployed fifth. Bringing it forward - or giving Makuhita's fourth slot something that is not Fighting or Normal - would stop a Dark/Ghost lead from switching off half the team's damage. Species-wise the unevolved dojo is a strong concept and should be preserved exactly as is.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
