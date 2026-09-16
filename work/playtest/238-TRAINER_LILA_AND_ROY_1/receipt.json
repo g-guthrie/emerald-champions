@@ -1,0 +1,55 @@
+{
+  "play_order": 238,
+  "e_group": "E0354",
+  "trainer": "TRAINER_LILA_AND_ROY_1",
+  "class": "ace",
+  "location": "Route124",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Rillaboom, Amoonguss and Tsareena L74 = 76 + 0 - 2; Hawlucha L75 = 76 + 1 - 2. Chronology: Route 124 is the sea crossing east of Lilycove that opens only after the Aqua Hideout (Game Book C40, 'Leave Lilycove east across Route 124 and sail to Mossdeep'), and the cap does not move again until C42, so 76 is correct for this battle as well.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_zapdos.json"],
+  "chronology_note": "Same six members as the hideout block; Incineroar beside Zapdos, because Heat Wave is 2x on three of these four and Thunderbolt is 2x on the fourth. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Rillaboom's Grassy Surge covers the field on entry and immediately consumes Hawlucha's Grassy Seed",
+    "The Seed gives Hawlucha +1 Defense and triggers Unburden for doubled Speed",
+    "A Swords Dance behind that doubled Speed is the pair's win condition",
+    "Rillaboom's own opening is Fake Out or a terrain-boosted priority Grassy Glide",
+    "If Hawlucha is threatened, Amoonguss uses Rage Powder to pull the attack away",
+    "Tsareena's Queenly Majesty blocks every priority move aimed at this side"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 10, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/238-TRAINER_LILA_AND_ROY_1/a1",
+      "outcome": "won", "turns": 6, "decisions": 9,
+      "player_faints": 2, "opponent_faints": 4, "ai_decision_seconds_max": 1.005,
+      "why": "The best opening turn any opponent has played against me in this block. I led Fake Out plus Thunderbolt at Hawlucha to deny the setup - and their Rillaboom used Fake Out on MY Fake Out user, flinching Incineroar, while Hawlucha Protected through the Thunderbolt. Both of my actions were blanked by one turn of correct play. It cost them anyway: Hawlucha spent turn 2 on Close Combat instead of Swords Dance and a second Thunderbolt is 2x into a Fighting/Flying body. Their Rillaboom's critical High Horsepower then killed Incineroar. The back half is three Grass types and Zapdos' Heat Wave is 2x on all three, so I lost Mega Gardevoir to a Wood Hammer plus Trop Kick and then ground them out with Heat Wave and Close Combat. Along the way Queenly Majesty refused my Sucker Punch outright."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Grassy Surge on entry consumes Hawlucha's Grassy Seed for +1 Defense and Unburden", "result": "PASS", "evidence": "the turn-0 state already read terrain=grassy with Hawlucha at ITEM_NONE, ABILITY_UNBURDEN and a Defense stage of +1. The entire chain - surge, seed, boost, ability - resolves before the player's first input. This is the cleanest authored engine I have verified in the whole block."},
+    {"check": "A Swords Dance behind doubled Speed is the win condition", "result": "FAIL (never selected)", "evidence": "Hawlucha chose PROTECT on turn 1 and CLOSE_COMBAT on turn 2, then died. It never selected Swords Dance. The Protect was a good decision on its own terms (see the Protect ledger) but it meant the pair spent its free turn not setting up, and once my second Thunderbolt was coming there was no longer a setup window. The engine assembles perfectly and then is never used."},
+    {"check": "Rillaboom opens with Fake Out or terrain-boosted Grassy Glide", "result": "PASS (and better than authored)", "evidence": "turn 1 native record: Rillaboom's FAKE_OUT was aimed at battler 0, my Incineroar - i.e. at the opposing Fake Out user, on the one turn where flinching it denies a Fake Out of my own. It later used Grassy Glide twice. Both authored branches fired and the target choice on the first was excellent."},
+    {"check": "Amoonguss uses Rage Powder to pull attacks off Hawlucha", "result": "NOT OBSERVED", "evidence": "Amoonguss was the fourth Pokemon out and entered on turn 6, long after Hawlucha died. It used Protect and then was KOed. Rage Powder and Spore were never selected. Structurally this is the problem with the slot: the redirection body is behind the sweeper in the order, so it can only protect Hawlucha if Hawlucha survives three turns."},
+    {"check": "Tsareena's Queenly Majesty blocks priority aimed at this side", "result": "PASS", "evidence": "turn 4: 'Urshifu used Sucker Punch! Urshifu cannot use Sucker Punch!' - and the target was Rillaboom, not Tsareena, so the ability is correctly protecting the whole side rather than only its holder. It also means Grassy Glide and Aqua Jet are off the table while Tsareena lives, which is exactly the anti-priority insurance the dossier describes."},
+    {"check": "Trop Kick lowers the target's Attack on every hit", "result": "PARTIAL", "evidence": "Tsareena used TROP_KICK on turn 3 and it took the KO on Mega Gardevoir, so the Attack drop had no visible target left to apply to. The move fired; the secondary effect was not observable."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Hawlucha", "payoff": "FULL - blanked a Thunderbolt that is 2x into it from a 294 HP Zapdos, on the exact turn I had committed both of my actions to removing it. Combined with its partner's Fake Out this was a complete turn denial. Its only cost was the Swords Dance turn it did not take."},
+    {"turn": 4, "battler": "Tsareena", "payoff": "FULL - at 63/260 it Protected through a Heat Wave that is 2x into it and would certainly have killed it. It survived to act again. Textbook."},
+    {"turn": 6, "battler": "Amoonguss", "payoff": "PARTIAL - blocked Zapdos' Heat Wave (2x) but Urshifu's Unseen Fist Close Combat went through it. Against any attacker without that ability this is a clean full-payoff guard."}
+  ],
+  "protect_summary": "3 opponent Protects across a six-turn fight, on three different battlers, none consecutive, every one of them on a turn where a super-effective attack was actually incoming, and two of the three saved the Pokemon outright. This is the best guard behaviour in my whole block and it is worth holding up as the reference for what the PAIR_GUARD forecast should look like when it is working.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 1 is the standout: Rillaboom's Fake Out went at my Fake Out user rather than at the bigger threat, which is the correct doubles read and denied me the turn I needed, while Hawlucha independently guarded against the attack that was coming for it. Two battlers reaching complementary conclusions without reading my commands is exactly what the September 15 no-omniscience decision was supposed to produce.",
+    "AI decision budget max 1.005 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Two player faints including a Mega, six turns, and the two deaths came from the opponent's own damage - a critical High Horsepower and a Wood Hammer plus Trop Kick - not from my error. That is the brief's 'won after a real fight' case. I considered a +1 on Amoonguss, which contributed nothing, but its problem is party order rather than level: it is the fourth Pokemon on a team whose first two are the engine, so it arrives after the fight it was built to influence. A level does not change that and I would rather flag the ordering than inflate a slot.",
+  "rebuild_note": "No level change, so nothing needs re-verification for levels. This is still the second most valuable rerun in my block after Matt, because the pair's declared win condition - a Swords Dance behind Unburden - has never been observed. A rerun that does not lead Fake Out would let Hawlucha reach the setup turn and would tell us whether this fight is actually much harder than the 4-2 scoreline suggests.",
+  "theme_check": "Yes, emphatically, and it is the most elegant single idea in my block. The whole engine assembles before the player's first input - terrain down, seed eaten, Defense up, Unburden live - so the player's first decision is already being made against a doubled-Speed sweeper. It is also a completely different flavour from the twelve Water Pokemon that precede it on the way out of Lilycove, which makes Route 124 feel like leaving the hideout rather than continuing it. The dossier's reason for replacing the Tatsugiri/Dondozo pair (not to spoil the Mossdeep gym's showcase) is sound and this is the better couple for the slot.",
+  "cooler_note": "Keep the roster; the chain is real, all four members participate in one plan, and Queenly Majesty plus Rage Powder genuinely are two different honest ways of protecting the sweeper. The demonstrated weakness is the party order. Hawlucha is slot 2, so the moment it is threatened on turn 1 its protection (Amoonguss' Rage Powder, Tsareena's Queenly Majesty) is still in the back half and cannot help - and the AI correctly reached for Protect instead of Swords Dance, which means the engine assembles and never fires. The concrete suggestion for a later pass, not made here: lead Rillaboom beside Tsareena and hold Hawlucha in reserve. Queenly Majesty then blanks the Fake Out and priority answers from turn 0, the Seed still triggers the moment Hawlucha comes in, and Hawlucha arrives on a board that is already safe - which is the fight this team is designed to have.",
+  "authored_set_legality": "No legality problem found."
+}
