@@ -1,0 +1,39 @@
+{
+  "play_order": 33, "e_group": "E0035", "trainer": "TRAINER_LAURA", "class": "gym",
+  "location": "DewfordTown_Gym", "cap": 20, "difficulty": "medium",
+  "party_manifest": "work/playtest/33-TRAINER_LAURA/party.json",
+  "opponent_levels_observed": {"MIENFOO": 24, "TIMBURR": 23, "CROAGUNK": 23, "MAKUHITA": 24, "MANKEY": 22, "TYROGUE": 25},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/33-TRAINER_LAURA/a1", "seed": "0x1F84", "outcome": "won", "turns": 9, "player_faints": 1, "opponent_faints": 6, "ai_decision_frames_max": 7,
+     "narrative": "Nine turns and the most contested fight of my block so far. Spiritomb walled the Fighting half outright, but Laura's side still landed two Fake Out flinches that each cost me a full attack, knocked the Leftovers off both Spiritomb and Celebi, blocked my spread Dazzling Gleam with a correctly timed Wide Guard, and killed Celebi with a Helping-Hand-supported coverage read. Magearna's Fleur Cannon and Celebi's Psychic carried the Fairy/Psychic lane and Nidoking's Earth Power closed on Croagunk. One player faint against six."}
+  ],
+  "strategy_checks": [
+    {"check": "Mienfoo uses Fake Out or Regenerator/U-turn positioning to create a useful Timburr turn", "result": "PASS", "evidence": "Turn 1: Fake Out flinched Magearna, which denied a 2x Fleur Cannon and gave Timburr a completely free turn to Protect and activate its Flame Orb. That is the authored entry-pressure lesson executing exactly."},
+    {"check": "Flame Orb must actually activate before Guts is credited", "result": "PASS", "evidence": "Turn 1: Timburr Protected, and only at end of turn did 'The opposing Timburr was burned!' print. No Guts-boosted damage appeared before the burn existed; its Facade on turn 4 came after."},
+    {"check": "Croagunk is the special Nasty Plot/Sludge Bomb/Vacuum Wave lane", "result": "PARTIAL", "evidence": "Croagunk entered last, on turn 9, and used Vacuum Wave (the priority special option) on the turn it died. Nasty Plot was correctly declined with no safe turn available. The special lane existed but never got a turn to matter."},
+    {"check": "Makuhita's Wide Guard is a different commitment from Tyrogue's Feint/Helping Hand/Counter", "result": "PASS", "evidence": "Turn 6: Makuhita used Wide Guard and blocked Celebi's spread Dazzling Gleam for both allies, on the turn immediately after I first revealed that move. Tyrogue meanwhile spent its turns on Fake Out, Feint and Helping Hand and never on a guard - genuinely different commitments, as authored."},
+    {"check": "Counter needs the right incoming hit, not just an enemy physical moveset", "result": "PASS (negative branch)", "evidence": "My entire party attacked specially. Tyrogue never selected Counter across four turns on the field, which is the correct restraint the dossier asks for."},
+    {"check": "Tyrogue's Helping Hand has a genuine payoff", "result": "PASS", "evidence": "Turn 8: Helping Hand into Mankey's Night Slash took Spiritomb from 34 to 10 and forced me to spend a switch."},
+    {"check": "Scarf Defiant Mankey punishes eligible stat drops and respects its lock", "result": "PASS", "evidence": "Turn 7: Mankey chose Night Slash into Celebi - Dark is 2x into Psychic where its STAB Close Combat would have been 0.5x - and killed it. It then stayed locked on Night Slash for the rest of its life, including into a Magearna that resists it at 0.25x, which is correct Choice behaviour rather than a defect. Defiant had no stat drop to punish because I brought no Intimidate or stat-lowering move."},
+    {"check": "Avoid repeated Fake Out/pivot/Protect turns with no payoff", "result": "PASS", "evidence": "Only one Protect was used in the whole battle (Timburr turn 1, for the Orb). Both Fake Outs landed flinches on different turns from different users. There were no empty pivot cycles."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "TIMBURR", "payoff": "real - blocked nothing incoming but converted the free turn into the Flame Orb burn that turned Guts on, which is precisely the authored Orb-turn payoff"},
+    {"turn": 6, "user": "MAKUHITA (Wide Guard)", "payoff": "real - blocked a spread Dazzling Gleam that was 2x into both allies, one turn after that move was first revealed"}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "This was the best-played opposing side in my block. Three decisions stand out as correct and non-obvious: the turn-1 Fake Out that bought the Orb turn rather than chasing damage, the turn-6 Wide Guard timed off a revealed spread move, and Mankey choosing Night Slash over its STAB Close Combat against a Psychic/Grass target. No defect found."
+  ],
+  "source_book_mismatch": "The authored plan text for E0035 states 'individual Medium levels 26/25/25/26/24/27 at cap20' and separately that 'Mienfoo alone rises to 26'. The actual resolved Medium levels in the ROM are 24/23/23/24/22/25 - exactly two lower across the board, because the offsets are 6/5/5/6/4/7 and Medium subtracts 2 from cap+offset. Either the plan prose was written against cap+offset without the Medium subtraction, or the offsets were never raised to match the stated seeds. This is a book-versus-source reconciliation item for the team owner and it materially understates the fight's intended difficulty. I did not resolve it myself: raising every member by 2 is a six-member change well beyond the calibration this pass authorises, and the brief restricts me to rule-driven level adjustments.",
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with one player faint, which puts this in the brief's 0-1 faint band. It was however a genuine nine-turn grind with two flinches, two items knocked off and a blocked spread move, so I applied the minimum: +1 to the single weakest member rather than two.",
+    "changes": [{"member": "MANKEY", "offset_before": 4, "offset_after": 5, "level_before": 22, "level_after": 23}],
+    "verification": "Offset-only edit; move legality and strategy coherence unaffected.",
+    "rerun": "NOT PERFORMED - this machine's arm-none-eabi toolchain cannot build the ROM.",
+    "note": "The far more significant adjustment is the two-level gap described in source_book_mismatch above. If the plan's stated seeds are the intent, this team should be fighting at 26/25/25/26/24/27 and my single +1 is noise by comparison."
+  },
+  "cooler_note": "This is the strongest team I have played in the block and it should be kept as-is. The deliberately unevolved dojo is a real identity rather than a gimmick, the six members make genuinely different commitments - Fake Out entry pressure, an Orb turn, Wide Guard, Helping Hand, a Choice Scarf revenge body and a lone special lane - and the AI played all of them well. Asking whether it could be cooler: the one slot that never earns its place is Croagunk. It is the team's only special attacker and its Nasty Plot lane is the most interesting thing on the roster, but deploying it sixth means it arrives with no partner left to buy it a setup turn and it dies having used one priority move. A concrete suggestion for a later pass (not applied here): deploy Croagunk beside Makuhita, whose Wide Guard and Fake Out are exactly the cover a Nasty Plot turn needs, and hold Mankey back as the Scarf revenge body it is built to be. That change costs nothing in species, moves or theme and would let the team's most distinctive plan actually happen.",
+  "authored_set_legality": "No illegal set found.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}
