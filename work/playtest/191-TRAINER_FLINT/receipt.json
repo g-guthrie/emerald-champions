@@ -1,0 +1,35 @@
+{
+  "play_order": 191,
+  "e_group": "E0285",
+  "trainer": "TRAINER_FLINT",
+  "class": "gym",
+  "location": "FortreeCity_Gym",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Yanmega (+2) L54, Archeops (+3) L55, Tropius (+3) L55, Flygon (+2) L54, Dragonite (+1) L53, Salamence (-1) L51 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/191-TRAINER_FLINT/party_b54_flint.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_flint.json (Incineroar/Mamoswine lead)", "outcome": "won", "turns": 13, "player_faints": 5, "opponent_faints": 6,
+     "why": "Thirteen turns and won with one Pokemon left. Icicle Crash removed Archeops turn 1, but Mamoswine died to Bug Buzz on turn 2 and with it my 4x Ice coverage. Mega Gardevoir traded a perfect Protect turn for Mega Salamence, then was OHKOed by a Dragonite Extreme Speed. The finish was a 58 HP Zapdos, immune to Earthquake and resisting both of Tropius's attacks, grinding out a 225 HP Harvest wall through two Heat Wave misses."}
+  ],
+  "strategy_checks": [
+    {"check": "ALLY_COMBO: Flygon's Earthquake is safe next to Levitate and Flying partners", "result": "PASS", "evidence": "The single best-executed combo in this block. Flygon spammed Earthquake on turns 3-9 and every message read 'It doesn't affect the opposing Salamence / Dragonite / Tropius' while hitting my grounded slots. The whole room is built so its own spread Ground move is one-sided, and the AI used it that way unprompted."},
+    {"check": "Yanmega Speed Boost behind a Focus Sash", "result": "PARTIAL", "evidence": "Speed Boost ticked on turns 1 and 2 and Bug Buzz OHKOed a 78 HP Mamoswine. The Sash never triggered because Fake Out chip preceded the killing blow."},
+    {"check": "Archeops plays around Defeatist", "result": "NOT TESTED", "evidence": "Acrobatics (unheld item, so full power) did 122 to Mamoswine on turn 1, then Archeops was OHKOed by a 2x Icicle Crash. Defeatist never came into play."},
+    {"check": "Tropius sustains with Harvest, Sitrus and Leech Seed", "result": "PASS", "evidence": "Sitrus restored 56 mid-fight, Leech Seed landed on Zapdos on turn 8, and Tropius survived from turn 7 to turn 13 as the last Pokemon standing. It also Protected a double attack at the right moment."},
+    {"check": "Dragonite Multiscale / Lum Berry / Dragon Dance / Extreme Speed", "result": "PARTIAL", "evidence": "Lum Berry correctly woke it from Spore on turn 6, and Extreme Speed OHKOed a full-HP Mega Gardevoir on turn 5. Dragon Dance was never selected; it went straight to Outrage and locked itself in."},
+    {"check": "Mega Salamence sets up with Dragon Dance", "result": "FAIL", "evidence": "Mega Evolved on entry turn 2 but only ever chose Earthquake and Double-Edge. Dragon Dance never selected. Its -1 offset (L51) makes it the lowest-level member and it died to two Thunderbolts."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 11, "battler": "Tropius", "payoff": "blocked both a Life Orb Thunderbolt (2x) and a Heat Wave (4x) in the same turn - comfortably the highest-value single Protect in my block"}
+  ],
+  "protect_summary": "1 opponent Protect in thirteen turns, with a very large payoff. Three of the six carry Protect; the room under-guards but the one guard was correct.",
+  "ai_defects": [],
+  "ai_notes": "Two observations, neither scored as a defect. (1) Flygon stayed Choice-locked into Earthquake until its PP ran out under Zapdos's Pressure and then Struggled twice, killing itself on recoil plus Rocky Helmet. Switching out would have reset the lock, but by then Tropius was the only reserve, so keeping it in is defensible. It is still worth knowing that Pressure plus a Choice item can self-destruct an opponent. (2) Neither Dragon Dancer ever used Dragon Dance, which is the same 'setup move not selected' shape as the Aurora Veil and Rage Powder cases elsewhere in my block.",
+  "level_changes": [],
+  "level_change_rationale": "Keep. Five player faints and a win with one Pokemon left, over thirteen turns, is exactly the benchmark a Gym trainer should be. The offset spread here is also the most thoughtful in the block - Archeops and Tropius at +3, Mega Salamence at -1 - and it produced the right result without adjustment.",
+  "cooler": "Keep, and this is the best room in the Fortree Gym. The Levitate-and-Flying Earthquake combo is a real doubles idea that the AI executed correctly, and pairing it with a Harvest Tropius that outlasts everything gives the room two completely different ways to win. The one improvement worth naming: two of the six carry Dragon Dance and neither ever used it, so the SETUP half of the strategy flag is currently decorative. Since Mega Salamence at -1 is already the cheapest slot, giving it a Dragon Dance-enabling turn - a Focus Sash partner lead, or swapping Double-Edge for Roost so it can afford the setup turn - would make the ace feel like an ace instead of a fast attacker that died to two Thunderbolts.",
+  "legality_notes": "No legality problem in the authored set. Archeops correctly carries no held item so Acrobatics is at full power; that is intentional, not an omission.",
+  "verification_limit": "No level change was made for this battle."
+}
