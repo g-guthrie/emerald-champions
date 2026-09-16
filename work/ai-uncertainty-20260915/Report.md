@@ -947,3 +947,59 @@ assertion here.
 
 `run_focus.py --filter 'EC '`: **103 passed, 0 failed, 103 total** (98 before).
 `pokeemerald.gba` builds clean. Headless ROM and its stamp untouched this round.
+
+---
+
+# Round 7: two small pricing items
+
+Commit `1c6ef92bc8`. Focused allowlist: **105 passed, 0 failed, 105 total.**
+
+## Helping Hand into damage it cannot multiply
+
+Helping Hand multiplies an attack's power, so a move whose damage is a fixed
+number, a fraction of the target's HP, or a reflection of damage taken ignores
+it completely. The pair trial applied the 3/2 multiplier regardless
+(`boost[partner]`), and the per-battler scorer rewarded the pairing, which is
+how Shinx spent a turn boosting its partner's Endeavor.
+
+`IsFixedDamageMove` now covers `EFFECT_FIXED_HP_DAMAGE`,
+`EFFECT_FIXED_PERCENT_DAMAGE` (Super Fang), `EFFECT_LEVEL_DAMAGE` (Night Shade,
+Seismic Toss), `EFFECT_PSYWAVE`, `EFFECT_ENDEAVOR`, `EFFECT_FINAL_GAMBIT`,
+`EFFECT_REFLECT_DAMAGE` (Counter, Mirror Coat, Metal Burst), `EFFECT_OHKO` and
+`EFFECT_BIDE`. The trial skips the boost for those, and the scorer treats the
+pairing exactly as it already treated boosting a status move
+(`WORST_EFFECT`). Dragon Rage and Sonic Boom resolve through the fixed-HP
+effect, so they are covered by the same entry.
+
+Fixture: `EC setup pricing: Helping Hand is not spent on damage it cannot
+multiply` - declined in front of Endeavor, taken in front of an ordinary attack
+on the identical board.
+
+## A guard that denies nothing
+
+The banked share prices what a shield **keeps**, so it has nothing to say about
+a shield with nothing to keep. A turn-one guard from full health that blocked no
+damage at all paid only the flat 10-point tempo, which was little enough to win
+the safest status or setup turn its side would get - the Slowpoke that guarded
+instead of yawning. A guard that denies nothing in a trial, with no waiting
+payoff and no partner turn to buy, now pays `PAIR_GUARD_EMPTY_COST` (30) on top
+of the tempo. The cost is per trial, so a guard that denies nothing in one
+forecast pattern and something in another is charged only in the pattern where
+it bought nothing, which is the right accounting under the mixed model.
+
+No existing guard expectation moved: all 103 previously passing cases still
+pass, because the guards they assert either deny something or have a payoff.
+
+Fixture: `EC setup pricing: a guard that denies nothing loses the turn to a
+status move`.
+
+## Numbers
+
+**105 passed, 0 failed, 105 total.** Decision frames unchanged: Dancer 66, Mega
+62, Ned 61/51, Brawly 60, Cristian 57/47, Jocelyn 46, misty gym 46, Darius 24,
+Jocelyn relay 24, Nate 13. `pokeemerald.gba` builds clean; the headless ROM and
+its stamp are untouched.
+
+Confirmed in play by the coordinator's reruns from the previous rounds: Trick
+Room, Iron Defense, Endeavor, Acid Spray, Sleep Powder, Tailwind and the
+Victory Dance/Dancer relay all fire, and healthy-lead withdrawals are gone.
