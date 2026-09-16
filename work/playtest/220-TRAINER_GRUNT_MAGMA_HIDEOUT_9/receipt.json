@@ -1,0 +1,91 @@
+{
+  "play_order": 220,
+  "e_group": "E0331",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_9",
+  "class": "grunt",
+  "location": "MagmaHideout_3F_1R",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L59 = 60 + 1 - 2 on Medium, matching the authored offset 1.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217-219.",
+  "pre_play_strategy_checks": [
+    "Power Spot raises every ally attack by 30 percent with no action spent",
+    "Choice Band Sheer Force Darmanitan lands a doubled-up opening hit because of it",
+    "Stonjourner's own action is Wide Guard against a spread answer, or Rock Slide",
+    "If Darmanitan is removed, Camerupt takes the boosted slot and Heat Wave becomes the spread threat",
+    "Crustle's Shell Armor denies critical hits",
+    "Protect ledger on Stonjourner, Crustle and Camerupt"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 3,
+      "decisions": 5,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "why": "The room's opening is genuinely frightening and then the matchup ends it. Turn 1 I went for the battery - Mega Swampert's rain-boosted Liquidation took Stonjourner from 242 to 35 - and Darmanitan answered with a Choice Band, Sheer Force, Power Spot Rock Slide that killed a full-HP 198 Pelipper outright and chipped the Mega through its resistance. Stonjourner's own High Horsepower then missed. Turn 2 Urshifu came in resisting the now-locked Rock Slide, Mega Swampert's Liquidation removed Darmanitan and Surging Strikes punched through Stonjourner's Protect to finish it. Turn 3 Liquidation removed Crustle and three guaranteed crits through Camerupt's Protect left it on 5 HP behind Solid Rock. Turn 4 Aqua Jet closed it."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Power Spot raises every ally attack by 30 percent with no action spent",
+      "result": "PASS - the best authored interaction in the hideout so far",
+      "evidence": "Turn 1, with Stonjourner alive in the paired slot, Darmanitan's Rock Slide one-shot a 198/198 Pelipper (2x into Water/Flying) and still did meaningful damage to Mega Swampert through a resistance on the same action. That is Choice Band x1.5, Sheer Force x1.3 (Rock Slide's flinch chance traded away) and Power Spot x1.3 stacking on one spread move. The dossier's claim of 'roughly double a normal grunt's damage on turn one' is if anything modest. The mechanic fired without Stonjourner spending an action, exactly as authored."
+    },
+    {
+      "check": "Stonjourner's own action is Wide Guard or Rock Slide",
+      "result": "PARTIAL",
+      "evidence": "Stonjourner used High Horsepower on turn 1 (into Mega Swampert - a sensible pick, Ground is neutral there and it is the bigger body) and it missed. On turn 2, at 35/242, it used Protect. It never used Wide Guard. That is defensible rather than wrong: I had no spread move on the board for Wide Guard to catch, and the AI does not read my commands. Recording as partial because the authored alternative action never appeared."
+    },
+    {
+      "check": "If Darmanitan is removed, Camerupt takes the boosted slot and Heat Wave becomes the spread threat",
+      "result": "FAIL - not reached",
+      "evidence": "Camerupt and Crustle came in together on turn 2 after both leads died in the same turn, so the battery was already gone and there was no boosted slot left to take. Camerupt then spent its only action on Protect and was KOed on turn 4 without ever using Heat Wave. The authored fallback needs Stonjourner to outlive Darmanitan, which a rain party makes very unlikely - Stonjourner is 2x into Water and sits on 20 base Special Defense."
+    },
+    {
+      "check": "Crustle's Shell Armor denies critical hits",
+      "result": "NOT OBSERVED",
+      "evidence": "Crustle was KOed by a single Mega Swampert Liquidation (202 of 207) on turn 3 before any critical-hit roll mattered. Its Rocky Helmet did fire for 41 on the contact. The ability is correctly authored and simply never came up."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS on judgment, both denied by one ability",
+      "evidence": "See protect_ledger. Two Protects, both correct choices, both defeated by Unseen Fist."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Stonjourner",
+      "payoff": "CORRECT CHOICE, DENIED. At 35/242 with its partner about to die, Protect is the right action. It printed 'The opposing Stonjourner couldn't fully protect itself' twice and died to Urshifu's Surging Strikes anyway - Unseen Fist ignores Protect. Scoring this as a good decision that lost to a specific ability, not an empty guard."
+    },
+    {
+      "turn": 3,
+      "battler": "Camerupt",
+      "payoff": "CORRECT CHOICE, DENIED. Camerupt is Fire/Ground, which is 4x into the Water attack that had just killed three of its teammates, and it guarded on its entry turn. Unseen Fist punched through three times ('couldn't fully protect itself' x3). Solid Rock and 252 HP left it alive on 5. Again a good decision beaten by an ability, not an empty guard."
+    }
+  ],
+  "protect_summary": "2 opponent Protects across 3 turns, both well-judged, both nullified by Unseen Fist, 0 empty. This is the cleanest Protect behaviour I have seen in this block: the AI guarded exactly twice, both times on a battler that was about to be removed by a super-effective attack.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 1 target selection was excellent: Darmanitan chose the spread Rock Slide (killing the Drizzle setter and chipping the Mega) over a single-target Flare Blitz that my rain would have halved. That is the AI correctly recognising the weather and picking the move that ignores it.",
+    "Stonjourner's High Horsepower into Mega Swampert rather than Pelipper was also right - Ground is neutral on Water/Ground but the Mega was the durable threat, and its partner's spread move was already covering the other slot.",
+    "AI decision budget: max 59 frames (0.988 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"member": "CRUSTLE", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60},
+    {"member": "CAMERUPT", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60}
+  ],
+  "level_change_rationale": "Won on the first attempt with one player faint, which is inside the +1 review band. I raised the two reserves: Crustle, which died to one attack and contributed only Rocky Helmet chip, and Camerupt, whose entire contribution was a guard. I left Stonjourner and Darmanitan alone deliberately - between them they killed a full-HP member of my party on turn one using the room's signature mechanic, and raising the battery or the Choice Band body would push a grunt room past its class. Both changed members go to offset 2, the cap for this pass. Honest caveat: the reserves did nothing because both leads died on the same turn to 2x Water under rain, and a level will not change that.",
+  "cooler": "This is the best-designed grunt room in the block and I would not touch the concept. Power Spot is legible, it needs no action, and the player sees its effect as a corpse rather than as a stat message - which is the right way to make an invisible ability memorable. Two observations for the record rather than changes. First, the dossier's fallback ('if Darmanitan is removed, Camerupt takes the boosted slot') is structurally unreachable against any party that threatens Stonjourner, because the battery is 2x into Water and Grass with 20 base Special Defense, so it dies before or with Darmanitan every time; if that fallback is meant to be a real second act, the battery needs to survive the first one. Second, Crustle is the room's least interesting slot - it is a third Rock body whose Shell Armor matters only against a crit-fishing player - and the room's own thesis ('protect the battery') would be far better served by a member that can actually keep Stonjourner alive. No change made in this pass.",
+  "legality_notes": "No legality problem in the authored set.",
+  "reverify_note": "The Crustle and Camerupt +1 cannot be re-verified from this session; the change reaches the ROM only after the main agent re-materializes and rebuilds.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
