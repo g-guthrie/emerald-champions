@@ -1,0 +1,137 @@
+{
+  "play_order": 147,
+  "e_group": "E0175",
+  "trainer": "TRAINER_FOSTER",
+  "class": "ace",
+  "location": "Route105",
+  "cap": 48,
+  "difficulty": "medium",
+  "run_kind": "rerun2",
+  "prior_receipts": ["work/playtest/147-TRAINER_FOSTER/receipt.json"],
+  "build": "work/agent-battle-build-5",
+  "why_rerun": "The first pass raised Omastar and Runerigus from +1 to +2. Those offsets are now built into work/agent-battle-build-5 and this run re-benchmarks the fight on them. The receipt suffix is rerun2 to keep the block's receipt naming consistent; this is this trainer's second completed run.",
+  "cap_confirmation": "Driver reports level_cap 48. Resolved levels read off the live board as each member appeared: Omastar 48 and Runerigus 48 (turn 0), Relicanth 48 (turn 1), Slowbro 46 (turn 2). Current authored offsets +2/+2/0/+2 give cap 48 + offset - 2 = 48/48/46/48 on Medium. All four match; Omastar and Runerigus came in at 48 rather than the 47 of the first run, confirming the changed offsets are in this build.",
+  "level_offsets_at_run": {"OMASTAR": 2, "RUNERIGUS": 2, "SLOWBRO": 0, "RELICANTH": 2},
+  "resolved_opponent_levels": {"OMASTAR": 48, "RUNERIGUS": 48, "SLOWBRO": 46, "RELICANTH": 48},
+  "party_manifest": "work/playtest/147-TRAINER_FOSTER/party-a1.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 48, same map (Route 105), same encounter. The first receipt recorded no legality problem and the party won its one attempt, so it was not reported weak or illegal and no rebuild is warranted. The first receipt's one player-side caveat - that Magnezone is a poor lead into a room holding an Earth Power Omastar, because it is 4x weak to Ground - was addressed by playing around it rather than by rebuilding: I opened with a priority Grassy Glide that removed Omastar before Earth Power could resolve. That is a play adjustment, not a party change.",
+  "pre_declared_strategy_checks": [
+    "RETEST: Omastar takes a safe Shell Smash and White Herb erases the drops",
+    "Runerigus burns or attacks the relevant threat rather than guarding emptily, and its Protect cadence is sane",
+    "Wandering Spirit's contact ability swap actually fires and is visible in the log",
+    "Mega Slowbro reaches its Calm Mind endgame",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/147-TRAINER_FOSTER/r1",
+      "seed": 2147,
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "log": "work/playtest/147-TRAINER_FOSTER/r1/events.jsonl",
+      "damage_note": "Damage read from the driver's new identity-keyed `damage` map, not slot arithmetic.",
+      "narrative": "T1 Rillaboom's Grassy Glide (priority under its own Grassy Surge terrain, 4x on Rock/Water) OHKOed Omastar before its Earth Power - which it had correctly aimed at my 4x-weak Magnezone - could resolve; Runerigus Protected through Magnezone's Flash Cannon. Relicanth entered. T2 Grassy Glide OHKOed Relicanth (4x) before its Stomping Tantrum, again correctly aimed at Magnezone, resolved; Runerigus used Body Press into Magnezone (2x on Steel) for 46. Slowbro entered. T3 Slowbro Mega Evolved and was KOed by Wood Hammer (2x) before its Psyshock resolved; Runerigus Protected again and the block caught Magnezone's Thunderbolt, which redirected to it when Slowbro fainted. T4 Runerigus tried Protect a third time and it FAILED; Grassy Glide swapped abilities with it through Wandering Spirit, and Flash Cannon finished it. No player faints; Rillaboom ended near full on grassy-terrain recovery."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Omastar takes a safe Shell Smash; White Herb erases the drops",
+      "result": "FAIL / NOT EXERCISED - reproduces from the first run",
+      "evidence": "Omastar never selected Shell Smash in either run. Here it died on turn 1 to a priority attack before it acted at all. The dossier's own line - 'nothing protects Omastar's Shell Smash turn' - is now confirmed twice: against any Grass lead with priority, Omastar does not survive to set up, and its White Herb has never been consumed."
+    },
+    {
+      "check": "Runerigus attacks or burns the relevant threat rather than guarding emptily",
+      "result": "MIXED - good target selection, bad Protect cadence",
+      "evidence": "Move choice was good: T2 Body Press into Magnezone is the correct read (Fighting 2x on Steel, and Body Press scales off Runerigus's own 252 Defense investment, which is the whole point of the set). But three Protects in four turns, the last of them consecutive and a straight failure, is the cadence problem. See defect E0175-D1."
+    },
+    {
+      "check": "Wandering Spirit's ability swap fires",
+      "result": "PASS - first time observed",
+      "evidence": "T4, 'The opposing Runerigus swapped Abilities with its target' when Rillaboom's contact Grassy Glide hit it. The authored rare trigger works and is visible in the log. It arrived on the turn Runerigus died, so it changed nothing, but the mechanic is confirmed rather than assumed."
+    },
+    {
+      "check": "Mega Slowbro reaches its Calm Mind endgame",
+      "result": "FAIL / NOT REACHED",
+      "evidence": "T3 'The opposing Slowbro has Mega Evolved into Mega Slowbro' - the Mega path is confirmed on this build - and it selected Psyshock, not Calm Mind, then was KOed by the Wood Hammer that resolved first. Calm Mind and Slack Off have not been selected in either run. Slowbro arriving fourth into a decided board is the reason."
+    },
+    {
+      "check": "Every opposing Protect has a payoff",
+      "result": "FAIL on the third",
+      "evidence": "Ledgered below: two real, one failed outright."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "RUNERIGUS (b3)",
+      "payoff": "REAL - blocked Magnezone's Flash Cannon and kept Runerigus at a full 158/158 on the opening turn.",
+      "verdict": "good",
+      "note": "Better than the first run, where the turn-1 Protect was ledgered as empty because nothing was aimed at Runerigus at all."
+    },
+    {
+      "turn": 3,
+      "battler": "RUNERIGUS (b3)",
+      "payoff": "REAL - blocked Magnezone's Thunderbolt, which redirected onto Runerigus when Slowbro fainted before it resolved.",
+      "verdict": "good",
+      "note": "Non-consecutive with the turn-1 Protect, so the success odds were full."
+    },
+    {
+      "turn": 4,
+      "battler": "RUNERIGUS (b3)",
+      "payoff": "EMPTY - 'The opposing Runerigus used Protect! But it failed!' It then ate both of my attacks and died.",
+      "verdict": "harmful",
+      "note": "Consecutive with the successful turn-3 Protect. Runerigus was the last Pokemon standing at 106/158 against two healthy attackers; a Protect that fails there costs the only turn it had left."
+    }
+  ],
+  "ai_defects": [
+    {
+      "id": "E0175-D1",
+      "status": "NEW this run",
+      "severity": "medium",
+      "attempt": 1,
+      "turn": 4,
+      "board": "Runerigus 106/158 alone as the opponent's last Pokemon, against Rillaboom 185/199 and Magnezone 124/170 under grassy terrain. Runerigus had used Protect successfully on the immediately preceding turn.",
+      "chosen": "MOVE_PROTECT, which failed.",
+      "better_action": "Body Press into Magnezone (2x on Steel, and it had already done 46 with it), or Will-O-Wisp on Rillaboom, my only physical attacker and the member that had taken three of its partners.",
+      "why_wrong": "Protect immediately after a successful Protect carries the native consecutive-use failure roll, and this one lost it. As the last Pokemon on the field with no partner to buy a turn for, Runerigus had nothing to gain from a successful guard either - there was no partner payoff, no expiring effect to run out and no incoming status to dodge. It is the classic empty repeated guard AGENTS.md asks to be reviewed: the expected value of the attempt was negative before the roll, not just unlucky after it.",
+      "note": "No AI C code was changed. The relevant tuning surface named by AGENTS.md is PAIR_GUARD_* / PAIR_FORECAST_* in src/battle_ai_pair.c - specifically that the consecutive-use failure probability and the absence of any partner to protect should both be priced into the guard's expected value. Any owner whose last surviving Pokemon holds Protect could show this."
+    }
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in four turns with ZERO player faints -> +1 on the opponent's weakest one or two members, never the ace/Mega/legend first.",
+    "budget_note": "Baselines at the start of this pass were Omastar +1, Runerigus +1, Slowbro 0, Relicanth +2. Used so far: Omastar +1, Runerigus +1, Slowbro none, Relicanth none. After the changes below Omastar stands at +2 used and is closed out for this pass; Relicanth has taken its first +1 and has one left. Nobody exceeds the +-2 limit.",
+    "changes": [
+      {
+        "trainer": "TRAINER_FOSTER",
+        "member": "OMASTAR",
+        "field": "level offset",
+        "before": 2,
+        "after": 3,
+        "resolved_level_before": 48,
+        "resolved_level_after": 49,
+        "reasoning": "Slowbro at 46 is the lowest member but it is the Mega, which the brief excludes from a first bump, so the choice is among the three at 48. Omastar is the member that has contributed least across both runs: it has died on turn 1 in each, has never used the Shell Smash its White Herb exists to support, and has never consumed that item. This exhausts its +-2 budget for the pass. Said plainly: a level does not change the fact that a 4x Grass weakness meets a priority Grassy Glide, so this is the rule's lever applied honestly rather than a claim of a fix."
+      },
+      {
+        "trainer": "TRAINER_FOSTER",
+        "member": "RELICANTH",
+        "field": "level offset",
+        "before": 2,
+        "after": 3,
+        "resolved_level_before": 48,
+        "resolved_level_after": 49,
+        "reasoning": "The second of the two. Relicanth is joint-lowest of the eligible members, has taken nothing this pass, and it died on turn 2 before its Choice Band Head Smash ever resolved - its target choice (Stomping Tantrum at the 4x-weak Magnezone) was correct and it simply never got to act. Deliberately not Runerigus: Runerigus is the one member that functioned, and its problem is a Protect cadence defect, which AGENTS.md says to fix before compensating with levels."
+      }
+    ],
+    "not_changed": [
+      {"member": "SLOWBRO", "reason": "The Mega. Excluded from a first bump by the brief and still holding its full +-2."},
+      {"member": "RUNERIGUS", "reason": "The team's functioning member. It has +1 of budget left but its demonstrated flaw is defect E0175-D1, not its level."}
+    ]
+  },
+  "cooler_note": "The fossil-diver theme is still right and I would keep every species. Two runs have now shown the same structural problem, though, and it is worth stating clearly: this team's two most interesting pieces both need a turn they never get. Omastar's White Herb Shell Smash has never happened and Mega Slowbro's Calm Mind has never happened, so what the player actually fights is a Body Press wall and two fossils that die in the turn they arrive. The dossier already flags the fix and it is still the right one - 'nothing protects Omastar's Shell Smash turn; a Fake Out or redirection partner would turn a good setup piece into a great one'. This run adds a second, cheaper option: Runerigus is holding a Protect it is misusing anyway, and leading Runerigus beside Omastar would let the wall body-block the setup turn instead. That is a lead-order note, not a composition change, and nothing is applied in this pass. The one genuinely cool thing that DID fire is worth recording: Wandering Spirit swapping abilities off a contact move, seen in the log for the first time.",
+  "authored_set_legality": "No legality problem found.",
+  "verdict": "still too easy",
+  "note_on_teams_file": "Per this block's override the teams file was edited in place by targeted line replacement and is deliberately NOT staged or committed by this receipt."
+}
