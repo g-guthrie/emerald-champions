@@ -1,0 +1,32 @@
+{
+  "play_order": 132,
+  "e_group": "E0157",
+  "trainer": "TRAINER_ALANNAH",
+  "class": "ace",
+  "location": "AshenWoods",
+  "cap": 42,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/132-TRAINER_ALANNAH/party.json",
+  "level_audit": "PASS. Trevenant 41 (+1), Sceptile 40 (0), Venusaur 38 (-2), Celebi 39 (-1). All equal cap 42 + offset - 2.",
+  "attempts": [
+    {"seed": 22, "run_dir": "work/playtest/132-TRAINER_ALANNAH/run-s22", "outcome": "won", "turns": 4, "player_faints": 2, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "Trevenant's Grassy Surge sets Grassy Terrain on entry", "result": "PASS", "evidence": "Turn 0 state reports terrain \"grassy\" with ABILITY_GRASSY_SURGE on Trevenant. This is the only seed-and-terrain combination in the whole block that worked, precisely because the team sets its own terrain rather than borrowing the map's."},
+    {"check": "Sceptile consumes its Grassy Seed for a Defense boost, enabling Unburden and a full-power Acrobatics", "result": "PASS - the full chain", "evidence": "Turn 0: Sceptile already shows def +1, item ITEM_NONE and ABILITY_UNBURDEN, i.e. the seed was consumed on entry. Acrobatics then landed at full power (no item held) for 65 into a 0.5x-resisting Charizard on turn 1 and 51 more on turn 2, and Unburden's doubled Speed let it move before my entire party both turns. Every clause of the authored combo fired."},
+    {"check": "Mega Venusaur occupies slot 3 and evolves", "result": "PASS", "evidence": "Venusaur entered on turn 2 as SPECIES_VENUSAUR with ITEM_VENUSAURITE, and by turn 3 state reports SPECIES_VENUSAUR_MEGA with ABILITY_THICK_FAT - which immediately mattered, halving the Fire damage my lead was built around."},
+    {"check": "Celebi is the special reserve", "result": "PASS", "evidence": "Celebi was held back to third and its Psychic OHKOed a full-HP 136-HP Crobat on the turn it switched in - the single most damaging attack Alannah made. Natural Cure and Leftovers confirmed."},
+    {"check": "Trevenant Leech Seed / Horn Leech", "result": "PARTIAL", "evidence": "Trevenant chose Poltergeist on its only turn and was KOed by one Flamethrower before a second. Leech Seed did appear on the team, from Mega Venusaur on turn 4 - correctly aimed at Weavile, though Venusaur died on the same turn so it never ticked."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "Celebi", "payoff": "real", "detail": "Blocked a Life Orb Flamethrower, which is 2x on Grass/Psychic and would have taken most of its 139 HP, on the turn it entered."},
+    {"turn": 4, "battler": "Celebi", "payoff": "real", "detail": "Blocked a Gengar Shadow Ball (2x on Psychic) at full HP. Two Protects, both with genuine payoff, and not consecutive - good cadence."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "The best-executed team in the whole block. The Grassy Surge -> Grassy Seed -> Unburden chain came online before the first command was entered, Celebi was correctly held in reserve and then aimed at the one member of my party it could one-shot, Mega Venusaur evolved on schedule and its Thick Fat blunted my primary answer, and both Celebi Protects blocked real super-effective attacks. No illegal or nonsensical choices and no empty guards.",
+  "level_changes": [],
+  "level_decision": "KEEP. Won on attempt 1 but with 2 player faints, one of which (Crobat) was a clean one-shot from full HP. That is the brief's 'won after a real fight' case: the raise condition (0-1 faints) is not met and the cut condition is not met.",
+  "cooler_note": "Keep this one unchanged - it is the model the rest of the block should follow. The reason it works is structural rather than flashy: every piece of its engine is self-supplied. Trevenant brings the terrain, the terrain charges Sceptile's seed, the seed turns into Defense plus Unburden plus a full-power Acrobatics, and none of it depends on a field effect the team did not set. Compare Keegan's Hitmontop, Jeff's Hawlucha and Flannery's Lilligant, all of which carry a Misty Seed for a terrain their own team does not provide and all of which held an unconsumed item until they died. The only soft spot is that four mono-Grass Pokemon fold to a single Fire or Flying lead, and Mega Venusaur's Thick Fat is the team's one concession to that - which is a good design instinct worth extending: a second member with a non-Grass secondary typing (Trevenant's Ghost half already does some of this work) would make the type answer cost something. The moment to remember is Sceptile moving before everything on the board with a doubled Speed it earned on turn zero.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}
