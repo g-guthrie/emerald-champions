@@ -1,0 +1,39 @@
+{
+  "play_order": 182,
+  "e_group": "E0267",
+  "trainer": "TRAINER_WENDY",
+  "class": "ace",
+  "location": "Route123",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Roserade/Swanna/Hydreigon/Mienshao/Drifblim (all offset +1) at L53, Scizor (+2) at L54 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_b54.json", "work/playtest/182-TRAINER_WENDY/party_b54_wendy.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54.json (Incineroar/Amoonguss lead)", "outcome": "lost", "turns": 10, "player_faints": 6, "opponent_faints": 3,
+     "why": "Player error, not a difficulty reading: I used Rage Powder against a Grass-type Roserade on turns 2 and 3, which cannot redirect, and Sludge Bomb went through into Mega Gardevoir and killed it before it ever fired. Swanna's Hydro Pump and Roserade's Leaf Storm then removed Incineroar, Zapdos and Regieleki."},
+    {"n": 2, "seed": 2, "party": "party_b54_wendy.json (Incineroar/Regieleki lead)", "outcome": "won", "turns": 4, "player_faints": 3, "opponent_faints": 6,
+     "why": "Correct line: Fake Out denies Roserade turn 1 while Regieleki threatens Swanna at 4x; Mega Gardevoir's Hyper Voice double-KOed Hydreigon (4x) and Mienshao (2x); Zapdos Heat Wave removed Mega Scizor at 4x on the turn it transformed, with Gardevoir Protecting the Bullet Punch."}
+  ],
+  "strategy_checks": [
+    {"check": "Roserade chooses Sleep Powder or direct pressure, backed by Focus Sash and Natural Cure", "result": "PASS", "evidence": "a1 turn 4 Sleep Powder put Zapdos to sleep before it could act; Leaf Storm did 167 and OHKOed Regieleki in both runs. Focus Sash never triggered because chip damage always preceded the big hit."},
+    {"check": "Swanna sets Tailwind or attacks on the opening turns", "result": "FAIL", "evidence": "Swanna never chose Tailwind in either attempt. a1: Hydro Pump, Hydro Pump, Hurricane, Hurricane. a2: Protect, then Hydro Pump. It is played purely as an attacker, so the 'two Tailwind users' redundancy the dossier claims never appeared on Swanna's side."},
+    {"check": "Drifblim supplies the backup Tailwind", "result": "PASS-BUT-LATE", "evidence": "a2 turn 4: Tailwind set, but by then Mega Scizor was fainting the same turn and Drifblim was the last Pokemon, so the speed control bought nothing. Never used in a1."},
+    {"check": "Mienshao's Fake Out supports Mega Scizor's attack or a safe Swords Dance", "result": "FAIL", "evidence": "Mienshao chose Close Combat every time it acted (a1 turns 10-11, a2 turn 3) and never used Fake Out or U-turn; it never shared the field with Scizor in either run, so the authored alternate deployment never occurred."},
+    {"check": "Mega Scizor transforms and uses Technician Bullet Punch as the priority closer", "result": "PARTIAL", "evidence": "Mega Evolution on entry both runs; Bullet Punch KOed Amoonguss in a1 turn 9 and was Protected in a2 turn 4. Swords Dance was never chosen."},
+    {"check": "Drifblim's berry-triggered Unburden mode", "result": "NOT OBSERVED", "evidence": "Sitrus Berry was never consumed in either attempt."},
+    {"check": "Hydreigon is immediate special coverage", "result": "PASS", "evidence": "a1 Draco Meteor OHKOed Zapdos from 134; a2 Dark Pulse into Mega Gardevoir."}
+  ],
+  "protect_ledger": [
+    {"attempt": 2, "turn": 1, "battler": "Swanna", "payoff": "blocked a 4x Transistor Thunderbolt that would have KOed it outright - the single best Protect seen in this block"},
+    {"attempt": 2, "turn": 4, "battler": "Mega Gardevoir (player)", "payoff": "n/a, player Protect"}
+  ],
+  "protect_summary": "1 opponent Protect across both attempts, with a clear payoff. No empty or repetitive guarding. Opponent Protect usage is if anything under-used for a six-Pokemon team where five members carry it.",
+  "ai_defects": [],
+  "ai_notes": "Two good non-Protect decisions worth recording: a1 turn 9 Wendy withdrew a sleeping Hydreigon for Mienshao (Regenerator pivot out of a dead turn), and a2 turn 1 Swanna Protected against an unrevealed Regieleki purely on type threat. The two FAILs above are plan/AI-selection mismatches rather than illegal or nonsensical choices, so they are not counted as defects.",
+  "level_changes": [],
+  "level_change_rationale": "Keep. The winning attempt still cost three Pokemon including the Mega, and every loss lever (Leaf Storm, Hydro Pump, Close Combat, Bullet Punch) was a real one. Attempt 1 was lost to my own misplay, so it is not counted as evidence of overtuning.",
+  "cooler": "The dossier's own self-criticism is confirmed by play: three of the six are support and only two are win conditions, and in two full runs neither Tailwind user ever converted the speed control into anything. Concretely: Swanna's Tailwind slot is dead weight as the AI plays it, so either give Swanna a win-condition move in that slot (Nasty Plot, or Weather Ball if a rain partner ever joins) and leave Tailwind to Drifblim, or lead Drifblim + Mienshao so the Fake Out plus Tailwind plus Unburden sequence actually gets a turn. As played, the team is six good sets that never form the combo the plan describes.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "No level change was made, so nothing needs re-verification for this battle."
+}
