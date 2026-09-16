@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "play_order": 1,
+  "e_group": "E0001",
+  "trainer": "TRAINER_BRENDAN_ROUTE_103_TREECKO",
+  "aliases_sharing_this_change": [
+    "TRAINER_BRENDAN_ROUTE_103_MUDKIP",
+    "TRAINER_BRENDAN_ROUTE_103_TORCHIC",
+    "TRAINER_BRENDAN_ROUTE_103_TREECKO",
+    "TRAINER_MAY_ROUTE_103_MUDKIP",
+    "TRAINER_MAY_ROUTE_103_TORCHIC",
+    "TRAINER_MAY_ROUTE_103_TREECKO"
+  ],
+  "class": "rival",
+  "location": "Route103",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "TORCHIC L13 @LIFE_ORB SPEED_BOOST TIMID (Flamethrower/Heat Wave/Will-O-Wisp/Protect)",
+    "PIKACHU L13 @LIGHT_BALL LIGHTNING_ROD TIMID (Fake Out/Thunderbolt/Electroweb/Helping Hand)",
+    "SHROOMISH L14 @EVIOLITE EFFECT_SPORE BOLD (Spore/Leech Seed/Giga Drain/Protect)",
+    "TAILLOW L13 @TOXIC_ORB GUTS JOLLY (Facade/Brave Bird/Quick Attack/Protect)"
+  ],
+  "party_manifest": "work/playtest/01-BRENDAN_ROUTE_103_TREECKO/party-a1.json",
+  "party_summary": "Arcanine (Intimidate) / Whimsicott (Prankster) / Weavile / Iron Leaves* / Magearna* / Snorlax (Thick Fat). *reachable legends listed in work/reference-pools/pool-14.json; neither entered the field this attempt.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+    "elf_sha256": "d43f0156f2669176abb19598a1ec55cfc7a82441550e443bfdd1836c41b7be78",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 1001,
+      "outcome": "won",
+      "turns": 8,
+      "decisions": 10,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 19,
+      "ai_decision_seconds_max": 0.318,
+      "events": "work/playtest/01-BRENDAN_ROUTE_103_TREECKO/attempt-1-events.jsonl",
+      "narrative": "T1 Pikachu Fake Out flinched Arcanine and denied a Close Combat KO; Torchic Flamethrower broke Whimsicott's Focus Sash and the Will-O-Wisp-free burn from Flamethrower finished it end-of-turn (only player faint). Snorlax replaced it. T2 the AI pivoted a healthy Pikachu out for Taillow, which died immediately to the Close Combat already aimed at that slot; Torchic Protected a lethal Body Slam. T3 Arcanine Protect absorbed a re-entry Fake Out; Torchic burned Snorlax with Will-O-Wisp. T4 Extreme Speed removed Pikachu before its Thunderbolt. T5 Close Combat removed Torchic; Shroomish chose Leech Seed over Spore. T6 Shroomish Protected a lethal Flare Blitz. T7 Flare Blitz connected but Effect Spore slept Arcanine. T8 Arcanine pivoted out at 4 HP and Weavile's Triple Axel finished Shroomish."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Pikachu uses Fake Out only on an interruptible threat (not reflexively)",
+      "result": "PASS",
+      "evidence": "T1 Fake Out targeted battler 0 Arcanine, the physical lead that had committed a Close Combat aimed at Pikachu; the flinch denied that KO outright."
+    },
+    {
+      "check": "On its second useful turn Pikachu exploits the created advantage instead of repeating Fake Out",
+      "result": "PARTIAL",
+      "evidence": "T2 Pikachu did not repeat Fake Out (it switched itself out). After re-entry it used Fake Out again on T3 straight into Arcanine's Protect - an empty priority turn - and then died on T4 to Extreme Speed having never landed a single Light Ball Thunderbolt. The authored intent ('exploit the created speed/position advantage') never produced a payoff turn."
+    },
+    {
+      "check": "Lightning Rod redirects a single-target Electric move aimed at its partner",
+      "result": "NOT TESTED",
+      "evidence": "The probe carriers (Iron Leaves Wild Charge, Magearna Thunderbolt) never reached the field; Pikachu died on T4. Carry this check forward - it is still unverified for E0001."
+    },
+    {
+      "check": "Shroomish lands Spore on a legal, powder-vulnerable target",
+      "result": "FAIL",
+      "evidence": "Shroomish was on the field T4-T8 and never used Spore once, although Arcanine was status-free and powder-vulnerable on T5. It chose Leech Seed (T5), Protect (T6), Giga Drain (T7, T8). Its sleep did land, but only through the passive Effect Spore contact roll on T7."
+    },
+    {
+      "check": "Effect Spore fires on contact",
+      "result": "PASS",
+      "evidence": "T7 Arcanine's Flare Blitz made contact and Arcanine fell asleep."
+    },
+    {
+      "check": "Taillow is deployed as an Orb-activation finisher, not thrown out early",
+      "result": "FAIL",
+      "evidence": "T2 the AI withdrew a completely healthy 36/36 Pikachu and sent Taillow into an untouched four-mon board. Taillow fainted in the same turn without acting and without ever activating its Toxic Orb, converting the team's Guts finisher into a free opponent faint."
+    },
+    {
+      "check": "Torchic's Will-O-Wisp targets a physical attacker",
+      "result": "PASS",
+      "evidence": "T3 Will-O-Wisp burned Snorlax, the physical attacker. The halved Attack was the single most impactful opposing move of the fight: Snorlax's Body Slam fell from a Torchic-KO roll to roughly 8-12 against Eviolite Shroomish."
+    },
+    {
+      "check": "Speed Boost accumulates and is used",
+      "result": "PASS",
+      "evidence": "Torchic reached Speed +4 by T5 and outsped both player battlers every turn it lived."
+    },
+    {
+      "check": "Opponent decision budget stays under 1.2 s",
+      "result": "PASS",
+      "evidence": "ai_decision_frames_max 19 = 0.318 s across ten decision points."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "user": "TORCHIC",
+      "payoff": "GOOD - blocked Snorlax's unburned Body Slam, a likely KO at 35/38 HP, and banked a Speed Boost."
+    },
+    {
+      "turn": 4,
+      "user": "TORCHIC",
+      "payoff": "MODEST - blocked a burned Body Slam (~12) and banked another Speed Boost; the block itself was small but it was not empty and Torchic was at 35/38 with Life Orb recoil pending."
+    },
+    {
+      "turn": 6,
+      "user": "SHROOMISH",
+      "payoff": "EXCELLENT - blocked Arcanine's 2x-effective Flare Blitz (lethal on a 53 HP Shroomish) and Snorlax's Body Slam in the same turn."
+    }
+  ],
+  "empty_protects": 0,
+  "ai_defects": [
+    {
+      "id": "E0001-D1",
+      "severity": "significant",
+      "turn": 2,
+      "board": "Player Arcanine 48/53 + Snorlax 81/81 (both untouched) vs Torchic 35/38 (Speed +1) + Pikachu 36/36 (full HP, no status).",
+      "chosen": "Opponent switched Pikachu out and sent in Taillow.",
+      "why_wrong": "Pikachu was at full health, held the team's strongest offensive item (Light Ball) and its only redirection ability; nothing on the board threatened it more than it threatened the board. Taillow is the frailest member and its Toxic Orb/Guts plan needs a turn to come online. The pivot handed over a free faint and removed Lightning Rod from the field permanently.",
+      "better_action": "Keep Pikachu in and use Thunderbolt or Electroweb; if a pivot is genuinely wanted, Shroomish (Eviolite, 252 Def) is the member that can absorb a turn.",
+      "note": "Not illegal, and not a player-read violation - this is a switch-evaluation quality defect in the reserve-deployment scoring. It directly contradicts the authored plan line 'Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker'."
+    },
+    {
+      "id": "E0001-D2",
+      "severity": "significant",
+      "turn": 5,
+      "board": "Shroomish 53/53 (Eviolite, just sent out) vs Arcanine 39/53 status-free and Snorlax 58/81 burned. Arcanine had just KOd Torchic and threatens Shroomish with a 2x-effective Flare Blitz.",
+      "chosen": "Shroomish used Leech Seed on Arcanine.",
+      "why_wrong": "Spore was available, legal against Arcanine (no status, not Grass, no Overcoat/Safety Goggles) and would have removed the only battler that could KO Shroomish, for multiple turns. Leech Seed on a Fire type about to Flare Blitz recovers a trickle and changes nothing. Snorlax was already burned, so Spore's only legal target was exactly the right one.",
+      "better_action": "Spore on Arcanine (battler 0).",
+      "note": "Shroomish never used Spore across five turns on the field. The authored plan's sleep line therefore did not execute in this fight at all; only the passive Effect Spore roll produced sleep."
+    },
+    {
+      "id": "E0001-D3",
+      "severity": "minor",
+      "turn": 3,
+      "board": "Pikachu 36/36 re-entered on T2, Arcanine 48/53, Snorlax 81/81.",
+      "chosen": "Pikachu used Fake Out (legal again after re-entry) into Arcanine's Protect.",
+      "why_wrong": "Legal, and the AI does not read pending commands, so a Protect collision is not by itself a defect. It is listed because combined with D1 it meant a Light Ball Pikachu spent its entire life on two Fake Outs and one unresolved Thunderbolt - the scoring never valued its actual win condition.",
+      "better_action": "Thunderbolt on Snorlax or Arcanine on the re-entry turn."
+    }
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 1 player faint -> +1 on the weakest one or two members, never the ace first. Torchic is the starter/ace, so the two lowest-offset non-ace members were raised.",
+    "changes": [
+      {"member": "PIKACHU", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14},
+      {"member": "TAILLOW", "offset_before": 1, "offset_after": 2, "level_before": 13, "level_after": 14}
+    ],
+    "unchanged": [
+      {"member": "TORCHIC/TREECKO/MUDKIP (starter slot)", "offset": "1 (Torchic/Mudkip), 3 (Treecko)", "reason": "ace slot, not raised first"},
+      {"member": "SHROOMISH", "offset": 2, "reason": "already the highest-offset member and it performed well (Eviolite bulk, a perfect Protect, forced a sleep)"}
+    ],
+    "applied_to_all_six_aliases": true,
+    "materialization": "scripts/emerald_champions_teams.py --write then --check: all gates PASS (move legality, strategy coherence, generated master/plans/party match). Generated projections reverted before commit per the brief; the main agent materializes.",
+    "rerun": "NOT PERFORMED - blocked. The calibrated levels only reach the driver through a rebuilt pokeemerald-headless.gba, and this host cannot currently build it: Homebrew arm-none-eabi-gcc 16.1.0 is installed without newlib (fatal error: stdint.h: No such file or directory) and the Docker images cannot run the macOS-built tools/ binaries (Exec format error). Reported to the coordinator; the +1/+1 needs one confirming rerun after the next successful headless build."
+  },
+  "could_this_be_cooler": {
+    "answer": "Yes, in one specific way, and no in general.",
+    "keep": "The concept is right for a first fight: a starter, a Light Ball Pikachu that teaches Fake Out and redirection, an Eviolite Shroomish that teaches powder and Protect, and a Guts orb bird. That is a genuine four-lesson tutorial in doubles and it should stay.",
+    "suggestion": "Give Pikachu Nuzzle or Volt Switch in place of Helping Hand. Helping Hand never got used and is the least interesting line on the set, while Nuzzle would make Lightning Rod's partner-protection role legible and Volt Switch would make the T2 pivot the AI clearly wants to make an actual play instead of a sacrifice. This would also give the Lightning Rod check something to react to.",
+    "second_thought": "Shroomish would be cooler as the team's Rage Powder/redirection partner rather than a second Protect user, which would contrast with Pikachu's Lightning Rod redirection instead of duplicating Torchic's Protect.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": [
+    "Pool chronology caveat: work/reference-pools/pool-14.json gates several cap-14 species behind areas that sit later than Route 103 in campaign order (VerdanturfMeadow, RustboroCity_DevonCorp_2F, Route115/116, AlteringCave). They are legal under the brief's cap-window rule and were used as such, but a Route 103 player cannot literally hold Iron Leaves or Magearna. Flagged for the pool owner.",
+    "Leading Grass/Fairy Whimsicott into a Fire starter was a player error, not a difficulty signal; it cost the only faint. The +1/+1 above is justified by the rest of the fight (the opponent never threatened a second KO), not by that faint."
+  ]
+}
