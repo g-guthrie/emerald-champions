@@ -1,0 +1,54 @@
+{
+  "play_order": 198,
+  "e_group": "E0299",
+  "trainer": "TRAINER_MARCEL",
+  "class": "ace",
+  "location": "Route121",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Zeraora/Shiftry/Stoutland (+1) at L59 and Haxorus (+2) at L60 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 196-197; all gates 54 or lower, no post-Route-121 source map used.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-4",
+      "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 7, "player_faints": 3, "opponent_faints": 4,
+      "why": "The authored opening worked exactly as written - Shiftry's Fake Out flinched Incineroar and Zeraora's Close Combat took 106 off it. Spore then forced Marcel to pivot the sleeping Zeraora out for Stoutland, which cost him the Intimidate turn but saved the ace. Sludge Bomb plus Amoonguss removed Shiftry through its Focus Sash; Mega Metagross walled Haxorus (Steel resists Dragon Claw and is immune to Poison Jab) and Ice Punched it out. Landorus, Amoonguss and Zapdos were all lost to Tailwind-boosted physical pressure."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Shiftry buys Zeraora a useful action with Fake Out", "result": "PASS", "evidence": "turn 1: Shiftry's Fake Out (faster than my own Incineroar's) flinched Incineroar, and Zeraora's Close Combat landed for 106. This is the printed first-turn plan, executed precisely."},
+    {"check": "Shiftry's Wind Rider takes a free Attack boost from its own Tailwind", "result": "PASS, and it confirms the dossier's own build note", "evidence": "turn 3: 'The opposing Shiftry used Tailwind!' immediately followed by 'The opposing Shiftry's Attack rose!' The mechanic fires correctly. It is also worthless exactly as the dossier flags - Shiftry is Timid with Leaf Storm and Dark Pulse, it had no physical move to spend the boost on, and it fainted on the same turn. The Tailwind itself was the valuable half and it decided three player faints."},
+    {"check": "Plasma Fists' same-turn Normal-to-Electric conversion", "result": "PASS mechanically, FAIL as a combo", "evidence": "turn 7: 'A deluge of ions showers the battlefield!' - the conversion fires and STATUS_FIELD_ION_DELUGE is set on the field. But Stoutland, the team's only Normal attacker and the sole reason the conversion matters, had already fainted on turn 6. Zeraora and Stoutland shared the field for exactly zero turns after turn 2, so the authored interaction can never pay off from this deployment order."},
+    {"check": "Intimidate Stoutland is the team's only defensive turn", "result": "PASS", "evidence": "turn 2: Marcel withdrew the sleeping Zeraora and sent Stoutland, dropping both Incineroar's and Amoonguss's Attack. Pivoting a slept ace out for the Intimidate body is a genuinely good decision and is the best AI play in this block."},
+    {"check": "Haxorus's Mold Breaker and Dragon Dance", "result": "PARTIAL", "evidence": "Mold Breaker announced on entry ('The opposing Haxorus breaks the mold!') and the Lum Berry correctly woke it from my Spore on turn 4. But Dragon Dance - the move that justifies its +2 ace offset - was never selected in two turns; it used Dragon Claw both times. See AI defect E0299-2."},
+    {"check": "Zeraora's Volt Absorb makes it a free switch-in to Electric attacks", "result": "NOT OBSERVED", "evidence": "I never aimed an Electric move at it, for exactly that reason; Zapdos used Heat Wave instead. Like Electivire's Motor Drive in E0298, this is an ability that only rewards a player mistake."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Stoutland", "payoff": "EMPTY. Stoutland guarded at 188/188 on the turn after it entered; both of my attacks that turn were aimed at Shiftry, and nothing on the board was threatening it. It gave up a free Double-Edge turn. See AI defect E0299-1."}
+  ],
+  "protect_summary": "1 opponent Protect in seven turns, and it was empty. This is the only wasted guard recorded anywhere in this block - the Protect discipline in E0287-E0298 was otherwise good, which suggests a board-specific scoring case rather than a general regression.",
+  "ai_defects": [
+    {
+      "id": "E0299-1",
+      "turn": 3,
+      "board": "Stoutland 188/188, one turn after switching in, beside a full-health Shiftry; opposite Landorus 196/196 and Amoonguss 263/263 with no revealed move yet aimed at Stoutland.",
+      "chosen": "Protect.",
+      "better": "Double-Edge or Crunch. Stoutland was at full health, had taken no damage, and the only Pokemon under visible pressure was its partner. The guard blocked nothing and cost the team its single hardest-hitting turn while Tailwind was about to go up. AGENTS.md requires demonstrated empty guarding to be fixed; this is the one clean example in the block. Severity: low-moderate - one wasted turn, and it is shared PAIR_GUARD_ expected-value scoring rather than anything bespoke to Marcel."
+    },
+    {
+      "id": "E0299-2",
+      "turn": 4,
+      "board": "Haxorus entering at 180/180 with its own Tailwind up, Lum Berry intact, opposite Landorus 196/196 and Amoonguss 263/263.",
+      "chosen": "Dragon Claw, then Dragon Claw again on turn 5.",
+      "better": "Dragon Dance. This is the exact board the move exists for - fresh ace, Tailwind already covering the speed, a Lum Berry covering the status answer, and a partner alive to absorb a turn. The dossier gives Haxorus its +2 offset as 'the ace' on the strength of a Dragon Dance sweep. This is the third battle in this block where a printed setup move was never selected (see E0288-3 Focus Energy, E0289-2 Iron Defense), so I am reporting it as one shared scoring family rather than three unrelated bugs: the AI appears to undervalue stat-boost moves whenever any attack would deal damage. Severity: moderate individually, high as a pattern."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but three of six player Pokemon fainted (Landorus, Amoonguss, Zapdos) and a four-member team took four turns of Tailwind pressure to beat. The brief's 2+ faints clause applies and AGENTS.md's three-faint aim is met. Note this is a four-Pokemon ace fighting a six, and it still cost three - the individual offsets are doing their job.",
+  "cooler": "The concept holds and Zeraora is a genuinely well-chosen rare legendary for the slot, but playing it exposes a structural problem the dossier half-sees. Marcel has two printed combos - Shiftry's Wind Rider boost and Zeraora's Plasma Fists Normal-to-Electric conversion - and both are dead on arrival. Wind Rider boosts Attack on a Timid special attacker, and Plasma Fists converts Normal moves for a Stoutland that is never on the field at the same time as Zeraora. Two concrete fixes that keep every species: make Shiftry physical (or replace the Attack-boost ability rationale in the prose with the honest 'Tailwind plus Fake Out' one, since the Tailwind is what actually won him three kills), and lead Zeraora beside Stoutland so the ion-deluge conversion is a turn-one threat rather than a last-Pokemon flourish. With four members and two dead combos this fight is currently carried by raw Tailwind pressure; fixing either combo would make it memorable instead of merely dangerous.",
+  "legality_notes": "No legality problem in the authored set. All four are inside the cap-60 window. One prose note: the block's crack line says 'Ground immunity' as counterplay, which reads ambiguously - what actually matters on the board is Ground PRESSURE against Zeraora (2x), which is how I played it, not bringing a Ground-immune body.",
+  "verification_limit": "No level change was made, so nothing is pending re-verification."
+}
