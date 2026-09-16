@@ -1,0 +1,39 @@
+{
+  "play_order": 42,
+  "e_group": "E0045",
+  "trainer": "TRAINER_LOLA_1",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"CHERRIM": 23, "LEAFEON": 22, "LUVDISC": 26, "PONYTA": 25},
+  "party_manifest": "work/playtest/42-TRAINER_LOLA_1/party.json",
+  "party_pool_audit": "Cap-24 core with Kartana swapped for Gyarados (pool-24 gate 20) because Kartana is 4x weak to a sun-boosted Fire attack. All six gated <= 24. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/42-TRAINER_LOLA_1/a1", "seed": 48, "outcome": "won", "turns": 7, "player_faints": 3, "opponent_faints": 4,
+     "narrative": "T1 Leafeon Protected a Moonblast that would have killed it, Cherrim set Sunny Day and transformed. T2 Cherrim Helping Hand into a Chlorophyll Life Orb Double-Edge one-shot a full-health Enamorus; a critical Air Slash then KO'd Leafeon. T3 Gyarados came in on Intimidate; Luvdisc used Charm to strip its Attack and Cherrim fired a sun Weather Ball. T4 Cherrim fell to Air Slash and Luvdisc's Soul-Heart banked a Sp.Atk stage; Icy Wind slowed my whole side. T5 Ponyta's sun-boosted Flare Blitz KO'd Hoopa before it moved. T6 Togekiss took a critical Flare Blitz on a Follow Me while Alakazam KO'd Luvdisc. T7 Psychic finished Ponyta."}
+  ],
+  "strategy_checks": [
+    {"check": "Cherrim sets Sunny Day and Flower Gift transforms it", "result": "PASS", "evidence": "Turn 1: 'The sunlight turned harsh! The opposing Cherrim transformed!' and the state changes SPECIES_CHERRIM_OVERCAST to SPECIES_CHERRIM_SUNSHINE."},
+    {"check": "Flower Gift boosts the ally's Attack in sun", "result": "PASS_inferred", "evidence": "Turn 2 Leafeon's Double-Edge one-shot a 77 HP Enamorus from full. That required the stack the plan describes: Flower Gift Attack boost plus Helping Hand plus Life Orb. No single one of those produces that number."},
+    {"check": "Chlorophyll doubles Leafeon's Speed in sun", "result": "PASS", "evidence": "Turn 2 Leafeon (base 95 Speed, L22) moved before a L24 Timid 252 Spe Enamorus (base 87), which only happens with the doubled sun Speed."},
+    {"check": "Weather Ball becomes a Fire attack in sun", "result": "PASS", "evidence": "Turn 3 Cherrim's Weather Ball hit Togekiss for 21 with no effectiveness message, consistent with Fire into Fairy/Flying at neutral; it is a Normal 50 BP move outside weather and would not have scaled that way."},
+    {"check": "Cherrim chooses Helping Hand over a redundant second Sunny Day", "result": "PASS", "evidence": "Sunny Day was used exactly once (turn 1); the following turns were Helping Hand, Weather Ball, Helping Hand. This is precisely the pacing the plan asks for and is the opposite of the failure mode the dossier warns about."},
+    {"check": "Luvdisc Soul-Heart banks Sp.Atk on a faint", "result": "PASS", "evidence": "Turn 4 'The opposing Luvdisc's Sp.Atk rose!' as Cherrim fainted; the state then shows spa +1 and later +2."},
+    {"check": "Luvdisc support: Icy Wind speed control and Charm", "result": "PASS", "evidence": "Turn 3 Charm dropped Gyarados to -2 Attack and took it out of the fight for the rest of the battle; Icy Wind on turns 4 and 5 put my whole side to -2 Speed, which is what let Ponyta move before Hoopa on turn 5."},
+    {"check": "Ponyta Flash Fire", "result": "NOT_EXERCISED", "evidence": "No Fire attack was aimed at it. Its Eviolite bulk and sun-boosted Flare Blitz were both demonstrated instead."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "LEAFEON", "payoff": "REAL: blocked a Life Orb Moonblast from Enamorus into a 67 HP Leafeon. Leafeon survived to deliver the Helping Hand Double-Edge that KO'd Enamorus the next turn, so the guard directly bought the team its best turn."}
+  ],
+  "protect_ledger_note": "One opponent Protect, and it was the pivot of the battle. No empty guarding.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Lola's AI executed the full authored sun plan without a single wasted action: one Sunny Day, then Helping Hand amplification, Weather Ball when setup was not useful, Charm and Icy Wind as the support layer. Together with Edmond this is the strongest AI play in the block."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost three of six members, including a full-health Enamorus to a single turn-2 combination. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. Kept, and this one is comfortably inside the rule rather than at its edge.",
+  "could_this_be_cooler": "It is already good and the Cherubi-to-Cherrim revision was the right call: the transformation is visible, the Attack and Sp.Def boost is felt, and it makes the partner rather than itself the threat. The one honest weakness is that Luvdisc, at offset 4, is the highest-level member and yet contributes only Charm and Icy Wind - the team's biggest level investment sits on its least memorable Pokemon. A more interesting use of that slot would be a second sun beneficiary or a Fire/Grass-adjacent oddity that rewards the weather directly, so the room reads as 'a garden in the sun' rather than 'a sun setter, a sweeper and two others'. Ponyta-Galar is also in the reachable pool if a Psychic/Fairy twist on the horse were ever wanted. No change made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
