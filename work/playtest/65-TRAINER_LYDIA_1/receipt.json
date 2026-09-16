@@ -1,0 +1,59 @@
+{
+  "play_order": 65,
+  "e_group": "E0075",
+  "trainer": "TRAINER_LYDIA_1",
+  "class": "ace",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"FROAKIE": 35, "HAPPINY": 35, "MIME_JR": 34, "MAGBY": 33, "GIBLE": 33, "LARVESTA": 33},
+  "cap_window_confirmation": "Dossier seeds 37/37/36/35/35/35 resolved to 35/35/34/33/33/33 = cap 30 + offset - 2 (Medium). Cap 30 confirmed. Note this is the highest-levelled team in my block: every member is 3 to 5 levels above the player cap, which is the deliberate 'themed baby team may need levels substantially above the player cap' case from AGENTS.md and it is justified here.",
+  "party_manifest": "work/playtest/65-TRAINER_LYDIA_1/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, reordered to lead Mega Gardevoir + Weavile. All source maps precede Route 117. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Froakie and Happiny actually lead, so Friend Guard is active from turn 1 rather than arriving late",
+    "Friend Guard reduces damage to the partner and NOT to Happiny itself",
+    "Mime Jr does the Fake Out / Icy Wind / Encore disruption job that replaced Smoochum",
+    "Gible's Earthquake is used only when it is safe beside its allies, not beside a grounded unprotected partner",
+    "Larvesta's recoil moves are used and the recoil is not reduced by Friend Guard",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/65-TRAINER_LYDIA_1/a1", "seed": 65, "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 6,
+     "narrative": "T1 Froakie Protected - blocking both my Fake Out and a Pixilate Hyper Voice - while Happiny put up Light Screen behind it. That is a textbook protected support turn and it cost me my whole opening. T2 I went at Happiny directly, which is the crack line: its Defense is its worst stat even with Eviolite, and Triple Axel plus Hyper Voice removed it, taking Friend Guard off the board. T3 Mime Jr entered and immediately Fake Out'd my Mega while Triple Axel finished Froakie. T4 Ice Shard was 4x into Gible and killed it before the Earthquake it had selected could resolve. T5 was Lydia's best turn: Mime Jr's SECOND Icy Wind put Weavile at -2 Speed, which made a base-125 Weavile slower than a base-60 Choice Band Larvesta, and Larvesta's Bug Bite at 2x KO'd it. T6 a third Icy Wind and another Bug Bite - now 2x into Psychic - killed my Mega Gardevoir, while Magearna's Flash Cannon removed Mime Jr. T7-T8 Nidoking's Earth Power cleaned up Larvesta and Magby."}
+  ],
+  "strategy_checks": [
+    {"check": "Froakie and Happiny lead so Friend Guard is active", "result": "PASS", "evidence": "Confirmed from the turn-0 board: FROAKIE and HAPPINY are the two actives, exactly as the plan line specifies. This is the authored lead order and it was honoured."},
+    {"check": "Friend Guard protects the partner, not Happiny", "result": "PASS by outcome", "evidence": "I could not read the multiplier directly, but the behaviour is consistent: I removed Happiny on T2 by attacking it directly with a physical move plus a spread move, exactly as the crack line prescribes ('Friend Guard does not protect Happiny itself'), and it died in one turn from 147 HP. Meanwhile Froakie survived my T1 Hyper Voice (behind Protect, so inconclusive) and my T2 Hyper Voice at 40/84. The intended asymmetry - the shield never covers the shield-bearer - held."},
+    {"check": "Mime Jr does the Fake Out / Icy Wind / Encore job", "result": "PASS, and it was the best-played member of the fight", "evidence": "Fake Out on T3 the turn it entered, flinching my Mega Gardevoir and costing me a full Hyper Voice. Then Icy Wind on T4, T5 and T6. The third one mattered enormously: after two drops my Weavile (base 125 Speed) was moving AFTER a Choice Band Larvesta (base 60), which is what killed it. Encore was never selected, which is fair - I never gave it a setup or status move worth locking. Cumulative speed control converting into two KOs for a slow Choice Band partner is exactly the kind of two-slot interaction this campaign is supposed to showcase."},
+    {"check": "Gible's Earthquake is safe beside its allies", "result": "FAIL at selection (never executed)", "evidence": "T4: Gible selected Earthquake while its ally Mime Jr was on the field at full HP, grounded (Psychic/Fairy, no Levitate, no Air Balloon), and had itself selected Icy Wind rather than Protect. Earthquake hits every adjacent Pokemon including the ally, so this would have put real damage into its own partner. Gible died to a 4x Ice Shard before it resolved, so no friendly fire actually happened. See AI defects - I am logging it at low severity precisely because it did not execute."},
+    {"check": "Larvesta's recoil moves used, recoil not reduced by Friend Guard", "result": "NOT EXERCISED", "evidence": "Larvesta selected Bug Bite as its first move on T5 - correct, 2x into my Dark-type Weavile - and the Choice Band then locked it into Bug Bite for the rest of the battle. Flare Blitz and Wild Charge were never used, so the recoil clause could not be tested. Nothing wrong with the choice: Bug Bite was the right pick on the board it saw."},
+    {"check": "Every opposing Protect has a payoff", "result": "PARTIAL - one excellent, one marginal", "evidence": "See the Protect ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "FROAKIE", "payoff": "EXCELLENT. It blocked a Fake Out and a Pixilate Hyper Voice from a freshly Mega-Evolved Gardevoir on the same turn, and its partner Happiny used the turn it bought to set Light Screen. That is the complete pattern the campaign wants from a guard: damage denied, partner action enabled, and the screen it protected then halved every special attack I threw for the next five turns. It is also a clean use of Protean - Froakie became Normal-type on the Protect, which changed what could threaten it afterwards."},
+    {"turn": 7, "battler": "MAGBY", "payoff": "MARGINAL. Magby had just entered as the last Pokemon on a board where its partner Larvesta was at 24/89 and about to die. Protect blocked one Flash Cannon, which is 0.5x into a Fire-type and was the smallest attack on the field, and it did not save Larvesta (my Earth Power was aimed there and killed it). The turn bought nothing: no partner survived, no effect expired, and the alternative - Fire Punch into my Nidoking, which is what it did the following turn for 66 damage into Magearna - was worth substantially more. Not an empty guard in the strict sense, because it did deny damage, but it is the weakest Protect in my block so far."}
+  ],
+  "ai_defects": [
+    {"id": "E0075-D1", "severity": "low", "attempt": 1, "turn": 4,
+     "board": "Gible 91/91 beside Mime Jr 89/89. Mime Jr is Psychic/Fairy, grounded, has no Levitate or Air Balloon, and had selected Icy Wind rather than Protect on the same turn. Opposing me: Mega Gardevoir 52/90 and Weavile 73/91.",
+     "chosen": "Earthquake, targeting battler 0.",
+     "why_wrong": "Earthquake in a double battle hits every adjacent Pokemon including the user's own partner. Mime Jr was at full HP, grounded and not protecting, so this selection would have put a neutral Ground hit into Lydia's own disruption engine - the member that went on to be the most valuable Pokemon on her team. The dossier anticipates exactly this: 'Gible's legal Earthquake is situational beside vulnerable allies; use the other attacks or an appropriate protected-partner line when necessary', and the crack line names 'unsafe Earthquake' as counterplay. Rock Slide was available and is strictly better here: it is spread but hits only the two FOES, it was 2x into my Weavile, and it costs the partner nothing.",
+     "better_action": "Rock Slide.",
+     "caveat": "It never executed - Gible was KO'd by a 4x Ice Shard before its turn - so no friendly damage actually occurred, and I am reporting the selection rather than an outcome. That is why I have it at low severity. It is still a real reading of the scoring, because the choice was made with full knowledge of the board.",
+     "affected_team_index_hint": "Any authored owner running a spread Ground or Earthquake-class move beside a grounded partner. Worth checking whether ally damage is weighted at all in spread-move scoring, or only foe damage."}
+  ],
+  "ai_notes": [
+    "This is the best-played opposing team in my block so far and it is not close. Three separate things went right for Lydia: a protected support turn on T1 that landed Light Screen for free, a Fake Out the turn Mime Jr entered, and then a genuine cumulative speed-control plan across T4-T6 that inverted the speed order between my fastest Pokemon and her slowest. Two of my six died to that plan.",
+    "The repeated Icy Wind is worth defending explicitly, because a naive read of 'repetitive support' would flag it: the first one did nothing visible, the second one is what killed Weavile, the third is what killed my Mega. Each repetition was buying a further speed tier for a Choice Band attacker that could not otherwise move first. This is the opposite of empty repetition.",
+    "Happiny dying on T2 is not an AI failure - I targeted it directly with a physical attack because its Defense is base 5, which is precisely the counterplay the dossier names. It got its Light Screen up first, which is the most valuable thing it could have done in two turns of life.",
+    "Decision timing was comfortable throughout (max 63 frames, ~1.05 s)."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. Two player faints including my Mega, six opposing faints, eight turns, and a genuine multi-turn plan that executed. This also satisfies the AGENTS.md expectation for an ace-class encounter. Lydia is already the highest-levelled team in my block (offsets +7/+7/+6/+5/+5/+5) and she earns those levels - the babies are individually fragile and the offsets are what let the interactions happen at all.",
+    "changes": []
+  },
+  "could_this_be_cooler": "No - keep this one exactly as it is, and I would hold it up as the model for the rest of the block. The reason it works where Isaac's nursery and Derek's bagworms do not is that the level offsets are spent on making the FRAGILE support pieces survive long enough to act, rather than on making an attacker hit harder. Happiny at +7 lives two turns and gets a Light Screen up; Mime Jr at +6 lives four turns and stacks three Icy Winds; the attackers behind them sit at +5 and convert. That is a coherent use of the only lever the campaign allows, and it produces a fight with an actual arc instead of a damage race. The theme holds too: six unevolved Pokemon that beat a Mega Gardevoir by being annoying rather than strong is a genuinely memorable idea for a Pokemon Breeder. The only thing I would even consider is Encore on Mime Jr, which was never selected in eight turns and probably never will be against a party with no setup moves - Helping Hand or Trick Room in that slot would be live more often. But I would rather leave a dead slot on a team that plays this well than risk the balance, and Encore is genuinely scary against the setup-heavy parties a player might bring. Keep.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
