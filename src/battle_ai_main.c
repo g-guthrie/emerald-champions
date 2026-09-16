@@ -112,7 +112,7 @@ static s32 (*const sBattleAiFuncTable[])(enum BattlerId, enum BattlerId, enum Mo
     [24] = NULL,                     // AI_FLAG_PREDICT_INCOMING_MON
     [25] = AI_CheckPpStall,          // AI_FLAG_PP_STALL_PREVENTION
     [26] = NULL,                     // AI_FLAG_PREDICT_MOVE
-    [27] = NULL,                     // AI_FLAG_SMART_TERA
+    [27] = NULL,                     // unused
     [28] = NULL,                     // AI_FLAG_ASSUME_STAB
     [29] = NULL,                     // AI_FLAG_ASSUME_STATUS_MOVES
     [30] = AI_AttacksPartner,        // AI_FLAG_ATTACKS_PARTNER
@@ -475,9 +475,6 @@ void ReconsiderGimmick(enum BattlerId battlerAtk, enum BattlerId battlerDef, enu
 
     if (gBattleStruct->gimmick.usableGimmick[battlerAtk] == GIMMICK_Z_MOVE && !ShouldUseZMove(battlerAtk, battlerDef, move))
         SetAIUsingGimmick(battlerAtk, NO_GIMMICK);
-
-    if (gBattleStruct->gimmick.usableGimmick[battlerAtk] == GIMMICK_TERA && GetMoveEffect(move) == EFFECT_PROTECT)
-        SetAIUsingGimmick(battlerAtk, NO_GIMMICK);
 }
 
 static bool32 IsThinkingBeforePartner(enum BattlerId battler, enum BattlerId battlerPartner)
@@ -609,9 +606,6 @@ u32 BattleAI_ChooseMoveIndex(enum BattlerId battler)
 {
     SetAIUsingGimmick(battler, USE_GIMMICK);
     SetupRandomRollsForAIMoveSelection(battler);
-
-    if (gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_TERA && (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_SMART_TERA))
-        DecideTerastal(battler);
 
     struct ChosenAction chosen = ChooseMoveOrAction(battler);
     gAiBattleData->chosenTarget[battler] = chosen.target;
@@ -3060,7 +3054,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         break;
     }
     case EFFECT_THIRD_TYPE:
-        if (IS_BATTLER_OF_TYPE(battlerDef, GetMoveArgType(move)) || PartnerMoveIsSameAsAttacker(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove) || GetActiveGimmick(battlerDef) == GIMMICK_TERA)
+        if (IS_BATTLER_OF_TYPE(battlerDef, GetMoveArgType(move)) || PartnerMoveIsSameAsAttacker(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
             ADJUST_SCORE(-10);
         break;
     case EFFECT_HEAL_PULSE: // and floral healing
@@ -4070,7 +4064,7 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             case EFFECT_SOAK:
                 if (atkPartnerAbility == ABILITY_WONDER_GUARD
                  && !IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_WATER)
-                 && GetActiveGimmick(battlerAtkPartner) != GIMMICK_TERA)
+                 )
                 {
                     RETURN_SCORE_PLUS(WEAK_EFFECT);
                 }

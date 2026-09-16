@@ -104,9 +104,6 @@
 #define PREDICT_SWITCH_CHANCE                                   50
 #define PREDICT_MOVE_CHANCE                                     100
 
-// AI Terastalization chances
-#define AI_CONSERVE_TERA_CHANCE_PER_MON                         10 // Chance for AI with smart tera flag to decide not to tera before considering defensive benefit is this*(X-1), where X is the number of alive Pokémon that could tera
-#define AI_TERA_PREDICT_CHANCE                                  40 // Chance for AI with smart tera flag to tera in the situation where tera would save it from a KO, but could be punished by a KO from a different move.
 
 // AI_FLAG_PP_STALL_PREVENTION settings
 #define PP_STALL_DISREGARD_MOVE_PERCENTAGE                      50 // Detection chance per roll
