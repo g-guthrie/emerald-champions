@@ -361,6 +361,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	message PetalburgCity_Gym_Text_ReceivedBalanceBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	buffermilestonetext FLAG_BADGE05_GET
 	msgbox PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
@@ -1283,7 +1284,7 @@ PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 
 PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
 	.string "DAD: The BALANCE BADGE lets your\n"
-	.string "LEVELER train a party up to Lv. 50.\p"
+	.string "LEVELER train a party up to Lv. {STR_VAR_1}.\p"
 	.string "It permits SURF to carry you\n"
 	.string "across water once you have\l"
 	.string "its license.$"

@@ -44,5 +44,8 @@ DewfordManor_1F_Text_Historian:
 DewfordManor_1F_EventScript_RecordResearch::
 	goto_if_set FLAG_EC_REPORT_C14_COMPLETE, DewfordManor_1F_EventScript_ResearchRecorded
 	completemilestone FLAG_EC_REPORT_C14_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C14_COMPLETE
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_PrintMilestoneCapLine
 DewfordManor_1F_EventScript_ResearchRecorded:
 	return

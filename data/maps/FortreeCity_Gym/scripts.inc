@@ -32,6 +32,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	message FortreeCity_Gym_Text_ReceivedFeatherBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	buffermilestonetext FLAG_BADGE06_GET
 	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	completemilestone FLAG_BADGE06_GET
@@ -231,7 +232,7 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge:
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 	.string "The FEATHER BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 60.\p"
+	.string "train a party up to Lv. {STR_VAR_1}.\p"
 	.string "It also enables FLY outside battle.\n"
 	.string "Your FLIGHT BEACON works now, too!$"
 FortreeCity_Gym_Text_PyreHandoff:

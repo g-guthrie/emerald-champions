@@ -50,6 +50,8 @@ Route117_EventScript_Woman::
 	lock
 	faceplayer
 	goto_if_set FLAG_ITEM_ROUTE_115_AUDINITE, Route117_EventScript_AudiniteAfter
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, Route117_EventScript_AudiniteAfter
 	msgbox Route117_Text_AudiniteGift, MSGBOX_DEFAULT
 	giveuniqueitem ITEM_AUDINITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull

@@ -74,6 +74,50 @@ Open design items: none blocking. Mew's authored set uses Rest (Soft-Boiled is
 not in its learnset). 31 Mega Stones show "unmapped" player family access in
 the register under its current rules (regional starters, gift-only legendaries).
 
+## Cohesion audit — September 15, 2026 (twelve read-only Sonnet auditors)
+
+Reports and JSON findings: `work/cohesion-audit/01..12-*.md/json` (ignored dir;
+the fixes below are what matters). Seams: gates, shops, rewards, traversal,
+directions, habitats/evolution, trainers-in-world, caps, legendaries, services,
+book-vs-source, map objects.
+
+Fixed in this session's commit:
+- Blocker: Golurkite's relocated object sat inside a wall in Desert Underpass;
+  moved to (104,4), a walkable tile beside the Master Ball.
+- Major: legendary BST cap reduction (floor(cap×600/BST)) was defined but never
+  applied on sign, static or wild legendary creation; `GetSignLevelForSpecies`
+  now feeds every path, including the Arceus gift and wild legendary clamps.
+- Major: six Gym badge speeches hardcoded caps (three wrong); all read the
+  milestone table through `buffermilestonetext` now.
+- Major: four Mega Stone NPC gifts (Audinite, Kangaskhanite, Manectite,
+  Clefablite) lacked the Mega Ring check; added.
+- Major: the Sandshrew clues for Dig and Rock Smash named a species that does
+  not live in Hoenn; Trapinch (Route 111 desert, ROM-compatible with both)
+  replaces it in Stern's, the Sealed Chamber's and Desert Ruins' text and the book.
+- Major: Chest-form Gimmighoul was sealed-only; it now also lives at the
+  elevated ruins (replacing a duplicated Meditite slot); collapse warnings and
+  the book no longer call it lost.
+- Major: the cable-club Eon Ticket path set its ship flag without a delivery
+  check; Mom's S.S. Ticket handoff now sets the earned flag so a nurse retries
+  a full-Bag/PC case.
+- Minor: C14, C39 and C42 now print their cap line; four dead Mega Stone
+  `.price` values zeroed; the Wallace bike sentence and Slateport stone wording
+  fixed in the guide; a stale Route 111 comment corrected.
+
+Handed to the team/AI side (not edited here):
+- Gabrielle (E0311) `mega_slots: 6` authorizes Avalugg, but Abomasite is in
+  slot 1; Mega Abomasnow can never trigger. Fix: `mega_slots: 1`.
+- Test "authored Dragapult keeps its deliberate zero special Attack IV" fails
+  against the current uncommitted team edits; update the set or the test.
+
+Verified consistent by the auditors: the C14–C50 gate chain, League door,
+badge/license table, Sandstrewn sealing, all 71 ground Mega Stone objects,
+427 reward flags, shop prices and stock, retired-item exclusion, Center
+services and bounds, save layout, seven mandatory legendary scenes, book
+sentences sampled against source. Audit 02 could not verify shop timing versus
+family availability (interior shop maps lack a window); audit 11 sampled the
+handoff quotes rather than walking all fifty.
+
 ## Decisions log — September 15, 2026 (was docs/CONSOLIDATION_PLAN.md)
 
 Locked: protected pillars (roster, doubles, six-member Gyms, all Megas, two-Mega

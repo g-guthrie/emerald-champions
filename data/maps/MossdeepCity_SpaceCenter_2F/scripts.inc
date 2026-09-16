@@ -350,6 +350,9 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
 	waitfanfare
 	completemilestone FLAG_EC_REPORT_C42_COMPLETE
+	buffermilestonetext FLAG_EC_REPORT_C42_COMPLETE
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_PrintMilestoneCapLine
 	setflag FLAG_EC_EARNED_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	setflag FLAG_RECEIVED_HM_DIVE

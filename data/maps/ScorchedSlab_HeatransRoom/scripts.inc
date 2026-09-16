@@ -74,6 +74,9 @@ ScorchedSlab_HeatransRoom_EventScript_Report::
 	setflag FLAG_EC_RESOLVED_HEATRAN
 	completemilestone FLAG_EC_REPORT_C39_COMPLETE
 	msgbox ScorchedSlab_HeatransRoom_Text_StoneCools, MSGBOX_DEFAULT
+	buffermilestonetext FLAG_EC_REPORT_C39_COMPLETE
+	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
+	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_PrintMilestoneCapLine
 	return
 
 ScorchedSlab_HeatransRoom_Text_StoneAnswers:

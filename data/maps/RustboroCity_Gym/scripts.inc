@@ -21,6 +21,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 	message RustboroCity_Gym_Text_ReceivedStoneBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	buffermilestonetext FLAG_BADGE01_GET
 	msgbox RustboroCity_Gym_Text_StoneBadgeInfoTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	completemilestone FLAG_BADGE01_GET
@@ -383,7 +384,7 @@ RustboroCity_Gym_Text_ReceivedStoneBadge:
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
 	.string "The STONE BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 20.\p"
+	.string "train a party up to Lv. {STR_VAR_1}.\p"
 	.string "It also enables POKéMON to use\n"
 	.string "CUT outside of battle.\p"
 	.string "It also marks your first true\n"

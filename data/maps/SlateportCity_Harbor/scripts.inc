@@ -648,7 +648,7 @@ SlateportCity_Harbor_Text_SealedChamberRoute:
 	.string "DIVE at its deep-water opening.\n"
 	.string "Follow the underwater passage,\l"
 	.string "then surface into SEALED CHAMBER.\p"
-	.string "SANDSHREW in ROUTE 111's desert\n"
+	.string "TRAPINCH in ROUTE 111's desert\n"
 	.string "can learn DIG free at any CENTER.\p"
 	.string "Bring it with DIG learned.\n"
 	.string "Use DIG at the rear inscription,\l"

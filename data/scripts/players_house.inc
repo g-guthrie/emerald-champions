@@ -446,6 +446,7 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_DadApproachPlayerMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_DadApproachPlayerFemale
 	msgbox PlayersHouse_1F_Text_TicketFromBrineyCameForYou, MSGBOX_DEFAULT
+	setflag FLAG_EC_EARNED_SS_TICKET
 	setvar VAR_0x8004, ITEM_SS_TICKET
 	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, PlayersHouse_1F_EventScript_SSTicketDelivered

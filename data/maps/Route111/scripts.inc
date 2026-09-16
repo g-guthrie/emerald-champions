@@ -851,8 +851,8 @@ Route111_Text_TrainerHillSign:
 
 @ Emerald Champions: everything north of this point (Route 111 west lane, Route 112,
 @ Fiery Path, Routes 113-114, Meteor Falls, Mt. Chimney, Lavaridge) is authored at
-@ chapter cap 40, the Dynamo Badge chapter. Vanilla never gated it, so a two-badge
-@ player could walk into cap-40 trainers. A road worker holds the trail until Wattson
+@ the Dynamo Badge chapter (cap 30). Vanilla never gated it, so a two-badge
+@ player could walk into post-Wattson trainers. A road worker holds the trail until Wattson
 @ certifies the player; the three trigger tiles beside him push the player back.
 Route111_EventScript_CheckDynamoGuard::
 	goto_if_unset FLAG_BADGE03_GET, Route111_EventScript_CheckDynamoGuardEnd

@@ -108,6 +108,8 @@ FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
 FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE::
 	msgbox FallarborTown_CozmosHouse_Text_HisuianGoomy, MSGBOX_NPC
 	goto_if_set FLAG_EC_MEGA_GIFT_CLEFABLITE, FallarborTown_CozmosHouse_EventScript_CozmosWife
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, FallarborTown_CozmosHouse_EventScript_CozmosWife
 	lock
 	faceplayer
 	msgbox FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE_Text, MSGBOX_DEFAULT

@@ -100,6 +100,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	buffermilestonetext FLAG_BADGE08_GET
 	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	completemilestone FLAG_BADGE08_GET
@@ -207,7 +208,7 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "The RAIN BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 90.\p"
+	.string "train a party up to Lv. {STR_VAR_1}.\p"
 	.string "It permits WATERFALL to scale\n"
 	.string "walls of cascading water once\l"
 	.string "you have its license.$"

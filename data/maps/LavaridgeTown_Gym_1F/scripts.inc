@@ -57,6 +57,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	buffermilestonetext FLAG_BADGE04_GET
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
@@ -314,7 +315,7 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
 	.string "The HEAT BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 44.\p"
+	.string "train a party up to Lv. {STR_VAR_1}.\p"
 	.string "It also permits STRENGTH outside\n"
 	.string "battle once you have its license.$"
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery:

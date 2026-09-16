@@ -103,6 +103,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	buffermilestonetext FLAG_BADGE03_GET
 	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
@@ -129,10 +130,15 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	end
 
 MauvilleCity_Gym_EventScript_GiveManectite::
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_Gym_EventScript_GiveManectiteNoRing
 	giveuniqueitem ITEM_MANECTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainManectite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_WATTSON_MANECTITE
+	return
+
+MauvilleCity_Gym_EventScript_GiveManectiteNoRing::
 	return
 
 MauvilleCity_Gym_EventScript_CompletedNewMauville::
@@ -372,7 +378,7 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 	.string "The DYNAMO BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. 34.\p"
+	.string "train a party up to Lv. {STR_VAR_1}.\p"
 	.string "It also enables ROCK SMASH outside\n"
 	.string "of battle.\p"
 	.string "Hmm…\n"

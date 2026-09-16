@@ -107,7 +107,7 @@ SealedChamber_OuterRoom_EventScript_BrailleDigHere::
 
 SealedChamber_OuterRoom_Text_DigDirections:
 	.string "Use DIG at this rear wall.\p"
-	.string "SANDSHREW in ROUTE 111's desert\n"
+	.string "TRAPINCH in ROUTE 111's desert\n"
 	.string "can learn DIG free at any CENTER.\l"
 	.string "Bring it with DIG learned.\p"
 	.string "Go through the opening and read\n"
