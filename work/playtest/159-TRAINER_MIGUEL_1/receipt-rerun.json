@@ -1,0 +1,71 @@
+{
+  "play_order": 159,
+  "e_group": "E0213",
+  "trainer": "TRAINER_MIGUEL_1",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; Delcatty 49 (+3), Stantler 49 (+3), Lickitung 49 (+3), Munchlax 50 (+4) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Delcatty and Stantler",
+  "party_manifest": "work/playtest/159-TRAINER_MIGUEL_1/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Unchanged core six from receipt 1; stage-legal for this window and the receipt raised no strength or legality complaint.",
+  "attempts": [
+    {
+      "seed": 131,
+      "run_dir": "work/playtest/159-TRAINER_MIGUEL_1/r2",
+      "outcome": "won",
+      "turns": 8,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "notes": "Doubled from four turns to eight and cost a Pokemon. Delcatty's Fake Out flinched a Mega Metagross on turn 1 and denied the opening KO; Stantler's Thunder Wave paralysed Incineroar, which then missed two turns to full paralysis and was worn down by Lickitung and Munchlax Body Slams. Two Protects at low HP each bought a full extra turn."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Delcatty Fake Out on a legal interruptible threat",
+      "result": "PASS",
+      "evidence": "Turn 1: Delcatty out-sped the mega-evolving Metagross with Fake Out and flinched it, costing the player the turn-1 KO on Delcatty itself."
+    },
+    {
+      "check": "Stantler applies Thunder Wave / Psyshield Bash control",
+      "result": "PASS",
+      "evidence": "Turn 2 Thunder Wave paralysed Incineroar; that paralysis directly caused the only player faint."
+    },
+    {
+      "check": "Lickitung strips an important item",
+      "result": "PASS",
+      "evidence": "Turn 6 Knock Off removed Amoonguss's Sitrus Berry."
+    },
+    {
+      "check": "Munchlax Recycle creates another useful attack",
+      "result": "FAIL",
+      "evidence": "Munchlax used Body Slam on all four of its turns and never chose Recycle; its Figy Berry was still held when it fainted."
+    },
+    {
+      "check": "No repeated empty recovery or all-support pivot",
+      "result": "PASS",
+      "evidence": "Every opponent turn was an attack, a status move that landed, or a Protect with payoff."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "user": "Stantler",
+      "payoff": "real - at 23/146 it blocked a Mega Metagross Bullet Punch that was lethal, surviving a full extra turn"
+    },
+    {
+      "turn": 7,
+      "user": "Lickitung",
+      "payoff": "real - at 24/193 it blocked a lethal Bullet Punch and lived to act again"
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Both Protects were used at exactly the HP where they were worth a turn, and the Fake Out was aimed at the mega-evolving threat rather than the safer target. This is the best AI play in the block."
+  ],
+  "level_changes": [],
+  "verdict": "calibrated",
+  "rerun_after_change": "n/a - no change made.",
+  "could_this_be_cooler": "Munchlax's Recycle never fires because Body Slam is always at least as attractive and the berry never gets consumed under pressure; the snack-recycling idea would need Gluttony to actually trigger (lower HP, or a pinch berry that the AI values). Worth revisiting, but the team plays well as-is. Not changed in this pass.",
+  "legality_notes": "None.",
+  "driver_note": "Per-turn damage in this run's log uses the identity-keyed `damage`/`faints` and `occupant_changed` fields introduced mid-block."
+}

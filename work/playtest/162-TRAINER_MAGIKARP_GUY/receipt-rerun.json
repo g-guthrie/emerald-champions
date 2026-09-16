@@ -1,0 +1,71 @@
+{
+  "play_order": 162,
+  "e_group": "E0227",
+  "trainer": "TRAINER_MAGIKARP_GUY",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; Ditto 47 (+1), Milotic 48 (+2), Magikarp 47 (+1), Feebas 49 (+3), Gyarados 47 (+1) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Milotic",
+  "party_manifest": "work/playtest/162-TRAINER_MAGIKARP_GUY/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Unchanged party from receipt 1 (Amoonguss/Rillaboom lead into the Water team); stage-legal for this window.",
+  "attempts": [
+    {
+      "seed": 161,
+      "run_dir": "work/playtest/162-TRAINER_MAGIKARP_GUY/r2",
+      "outcome": "won",
+      "turns": 8,
+      "player_faints": 1,
+      "opponent_faints": 5,
+      "notes": "Eight turns, one faint, and the Mega ended at 42/150. Ditto's Imposter copied Rillaboom on entry and Fake Out'd through Grassy Terrain; Mega Gyarados got its Dragon Dance and KOed Rillaboom with Crunch. Milotic at its new level survived the first Grassy Glide and got two Icy Winds and a Muddy Water off before dying."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Imposter Ditto copies the player's lead and uses it",
+      "result": "PASS",
+      "evidence": "Turn 0 Ditto entered as SPECIES_RILLABOOM at L47 with Choice Scarf and out-sped the player's own Rillaboom to Fake Out it."
+    },
+    {
+      "check": "Mega Gyarados sets up with Dragon Dance and converts",
+      "result": "PASS",
+      "evidence": "Turn 4 Dragon Dance (asleep, did not resolve), turn 3 Crunch KOed Rillaboom outright; it survived four turns of Spore and Meteor Mash before Bullet Punch finished it."
+    },
+    {
+      "check": "Milotic applies Competitive / Icy Wind pressure",
+      "result": "PASS",
+      "evidence": "Turns 1 and 2 Icy Wind dropped both player leads' Speed; Muddy Water hit on turn 2. It was Spored on turn 1 and still contributed."
+    },
+    {
+      "check": "Feebas is the Eviolite survivor with Hypnosis and Protect",
+      "result": "PASS",
+      "evidence": "Feebas survived five turns, chose Protect three times and Hypnosis twice, and only died to residual poison."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 4,
+      "user": "Feebas",
+      "payoff": "real - blocked Amoonguss's Sludge Bomb"
+    },
+    {
+      "turn": 6,
+      "user": "Feebas",
+      "payoff": "real - blocked a second Sludge Bomb while poison ticked; bought the turn that let Gyarados land Crunch on Mega Metagross for 108"
+    },
+    {
+      "turn": 8,
+      "user": "Feebas",
+      "payoff": "real - blocked a Mega Metagross Meteor Mash that would have KOed it; it died to its own poison instead"
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Not a defect but a set problem worth reporting: Ditto holds a Choice Scarf and copied a Rillaboom whose first move it selected was Fake Out. Fake Out is only legal on the turn a Pokemon enters, so from turn 2 the Choice lock left Ditto with no legal move and it was forced to Struggle, taking recoil until Amoonguss killed it. Any Imposter copy of a Fake Out user has this failure mode; it is a consequence of Choice Scarf on Imposter, not of a bad AI choice."
+  ],
+  "level_changes": [],
+  "verdict": "calibrated",
+  "rerun_after_change": "n/a - no change made.",
+  "could_this_be_cooler": "The joke team already lands - the Imposter reveal and the Magikarp-to-Mega-Gyarados arc are the best parts. The one honest improvement is the Choice Scarf on Ditto: it converts the copy into a Struggling body within two turns. A Focus Sash or nothing at all would let the Imposter actually mirror the player's whole set, which is the joke. Not changed in this pass.",
+  "legality_notes": "Authored set is legal. Flagging the Choice Scarf + Imposter + copied Fake Out interaction above as a design fragility rather than a rules problem.",
+  "driver_note": "Per-turn damage in this run's log uses the identity-keyed `damage`/`faints` and `occupant_changed` fields introduced mid-block."
+}

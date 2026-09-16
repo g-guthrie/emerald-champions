@@ -1,0 +1,71 @@
+{
+  "play_order": 165,
+  "e_group": "E0231",
+  "trainer": "TRAINER_TAYLOR",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; Vivillon 45 (-1), Ribombee 47 (+1), Araquanid 48 (+2), Pinsir 48 (+2) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Araquanid and Pinsir",
+  "party_manifest": "work/playtest/165-TRAINER_TAYLOR/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Unchanged party from receipt 1; stage-legal for this window.",
+  "attempts": [
+    {
+      "seed": 191,
+      "run_dir": "work/playtest/165-TRAINER_TAYLOR/r2",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "notes": "Three player faints - by some distance the hardest fight in the block. Vivillon slept two different attackers, Araquanid's Water Bubble Liquidation KOed a sleeping Excadrill and then crit a full-HP Togekiss to death, and Amoonguss died to a critical Hurricane. The win came down to Mega Metagross plus a half-health Salamence."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Vivillon Compound Eyes Sleep Powder lands and matters",
+      "result": "PASS",
+      "evidence": "Turn 2 slept Incineroar (taking it out of the fight entirely), turn 4 slept Excadrill, which was then KOed by Liquidation while asleep. Two sleeps, two removed attackers."
+    },
+    {
+      "check": "Ribombee Quiver Dance setup",
+      "result": "PASS",
+      "evidence": "Quiver Dance on turns 1 and 3 reached +2; it died to its own residual poison before cashing, but the setup lane fired."
+    },
+    {
+      "check": "Araquanid Water Bubble offence",
+      "result": "PASS",
+      "evidence": "Liquidation KOed Excadrill on turn 4 and critically KOed a full-HP 184 HP Togekiss on turn 5; Lunge dropped Mega Metagross's Attack on turn 6."
+    },
+    {
+      "check": "Araquanid Wide Guard blocks spread damage",
+      "result": "FAIL",
+      "evidence": "Wide Guard was never chosen, including on turn 4 when Excadrill selected Rock Slide. The spread-defence half of the REDIRECTION,SETUP concept still has not appeared."
+    },
+    {
+      "check": "Rage Powder redirection",
+      "result": "FAIL",
+      "evidence": "Vivillon never chose Rage Powder; it preferred Sleep Powder and Hurricane, both of which paid off, so this is a reasonable preference rather than a defect."
+    },
+    {
+      "check": "Pinsir Moxie snowball",
+      "result": "FAIL",
+      "evidence": "Pinsir landed one super-effective Stone Edge on Togekiss and was then held at 2 HP; it never scored a KO so Moxie never triggered."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 6,
+      "user": "Pinsir",
+      "payoff": "real - at 2/135 it blocked a Mega Metagross Bullet Punch that was certainly lethal and survived a full extra turn"
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Sweet Veil on Ribombee gave the whole opposing side sleep immunity while it was alive, which is why Amoonguss's Spore was never worth using here. That is the ability working as intended and it shaped the whole fight."
+  ],
+  "level_changes": [],
+  "verdict": "calibrated",
+  "rerun_after_change": "n/a - no change made.",
+  "could_this_be_cooler": "Araquanid's Wide Guard has now gone unused across both runs while Liquidation carries the fight. If the spread-defence idea is meant to be part of the concept the AI needs a reason to value it, otherwise the slot is effectively a three-move set. Noted, not changed.",
+  "legality_notes": "Vivillon resolves to VIVILLON_ICY_SNOW in the ROM; that is a cosmetic pattern form, not a legality problem.",
+  "driver_note": "Per-turn damage in this run's log uses the identity-keyed `damage`/`faints` and `occupant_changed` fields."
+}

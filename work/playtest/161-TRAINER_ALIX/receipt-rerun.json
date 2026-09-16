@@ -1,0 +1,67 @@
+{
+  "play_order": 161,
+  "e_group": "E0222",
+  "trainer": "TRAINER_ALIX",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; Munkidori 47 (+1), Jynx 48 (+2), Musharna 48 (+2), Chimecho 48 (+2) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Jynx and Musharna",
+  "party_manifest": "work/playtest/161-TRAINER_ALIX/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Unchanged core six from receipt 1; stage-legal for this window.",
+  "attempts": [
+    {
+      "seed": 151,
+      "run_dir": "work/playtest/161-TRAINER_ALIX/r2",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "notes": "Same turn count as the first run but a completely different fight: Munkidori's Choice Specs Focus Blast took Mega Metagross from 150 to 51 on turn 1, Jynx froze it with Ice Beam on turn 3, and Chimecho's Psychic finished it on turn 4. The player's Mega died. Excadrill came in to clean up a 4 HP Chimecho."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Munkidori attacks under the Choice lock",
+      "result": "PASS",
+      "evidence": "Locked into Focus Blast from turn 1 and kept firing it; the turn-1 hit was the single largest damage roll against the player all block."
+    },
+    {
+      "check": "Jynx uses Lovely Kiss only when the accuracy risk is justified",
+      "result": "FAIL",
+      "evidence": "Lovely Kiss was NEVER chosen - zero occurrences in the whole run log. Jynx picked Ice Beam on turns 1 and 3 and Protect on turn 2. See the dedicated finding below."
+    },
+    {
+      "check": "Musharna supplies speed control / Helping Hand without sleep dependence",
+      "result": "PASS",
+      "evidence": "Turn 3 Thunder Wave paralysed Incineroar; turn 4 Helping Hand boosted Chimecho, which then KOed Mega Metagross."
+    },
+    {
+      "check": "Chimecho supplies Heal Pulse / Helping Hand for a worthwhile attacker, not a two-support endgame",
+      "result": "PASS",
+      "evidence": "Chimecho attacked with Psychic on entry and scored the KO rather than stalling."
+    },
+    {
+      "check": "Toxic Chain badly poisons on top of damage",
+      "result": "FAIL",
+      "evidence": "Munkidori landed two Focus Blasts and neither rolled the 30% badly-poison proc. Not a defect, just variance."
+    }
+  ],
+  "lovely_kiss_finding": "Lovely Kiss was not selected on any of Jynx's three turns, in a run where a sleeping Mega Metagross would have been decisive. Incineroar and Metagross were both legal sleep targets the whole time. The AI appears to discount the 75%-accuracy sleep move against the guaranteed damage of a STAB Ice Beam. The dossier explicitly sells Lovely Kiss as half the lead's identity, so either the AI's sleep valuation or the move choice needs revisiting. Flagged, not fixed - this pass does not touch AI C code or sets.",
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "user": "Jynx",
+      "payoff": "real - blocked Incineroar's Knock Off (Dark, 2x into Jynx) and kept Jynx alive to act on turn 3"
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Helping Hand on turn 4 was correctly aimed at Chimecho, whose boosted Psychic then finished Mega Metagross - a genuine two-card play by a team the dossier describes as support-heavy."
+  ],
+  "level_changes": [],
+  "verdict": "calibrated",
+  "rerun_after_change": "n/a - no change made.",
+  "could_this_be_cooler": "Yes, and the dossier already names it: Synchronize on Musharna wants the player to inflict status, and nothing on this team makes that likely. Swapping Synchronize's slot for something the team can actually trigger, or giving Jynx a reason to pick Lovely Kiss (Focus Sash already covers the downside), would make the psychic-support concept land. Not changed in this pass.",
+  "legality_notes": "None.",
+  "driver_note": "Per-turn damage in this run's log uses the identity-keyed `damage`/`faints` and `occupant_changed` fields introduced mid-block."
+}

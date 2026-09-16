@@ -1,0 +1,81 @@
+{
+  "play_order": 157,
+  "e_group": "E0210",
+  "trainer": "TRAINER_DAISY",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; resolved opponent levels Roselia 50 (+4), Deerling 51 (+5), Flabebe 52 (+6), Gloom 50 (+4) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Roselia",
+  "party_manifest": "work/playtest/157-TRAINER_DAISY/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Receipt 1 party won without legality or strength complaint; every member's pool-48 gate opens at or before this Route 118/119-era encounter, so the manifest is chronologically legal unchanged.",
+  "attempts": [
+    {
+      "seed": 111,
+      "run_dir": "work/playtest/157-TRAINER_DAISY/r2",
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "notes": "Faster and cleaner than the pre-raise run. Fake Out broke Roselia's Focus Sash on turn 1; Zen Headbutt missed once and then killed it on turn 2 while Flare Blitz removed Deerling in the same turn. Flabebe's Protect bought one turn and Gloom never got a Sleep Powder off. No player Pokemon dropped below full except Incineroar (Double-Edge + two Flare Blitz recoils)."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Petal Blizzard feeds Sap Sipper Deerling",
+      "result": "FAIL",
+      "evidence": "Roselia never chose Petal Blizzard; it picked Giga Drain on turn 1 (flinched) and was KOed on turn 2. The authored ALLY_COMBO never appeared in two runs."
+    },
+    {
+      "check": "Flabebe supports with Flower Veil / Helping Hand / Pollen Puff",
+      "result": "FAIL",
+      "evidence": "Flabebe entered on turn 2 and chose Protect on turn 3 and nothing else before dying on turn 4; no Helping Hand or Pollen Puff was ever selected."
+    },
+    {
+      "check": "Gloom supplies independent sleep pressure",
+      "result": "FAIL",
+      "evidence": "Gloom selected Sleep Powder on turn 3 targeting Metagross but was KOed by Flare Blitz before it resolved."
+    },
+    {
+      "check": "Deerling Protect used as real speed-control",
+      "result": "PASS",
+      "evidence": "Turn 1 Deerling Protect, though empty - see Protect ledger."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "user": "Deerling",
+      "payoff": "empty - both player attacks were aimed at Roselia; Protect blocked nothing"
+    },
+    {
+      "turn": 3,
+      "user": "Flabebe",
+      "payoff": "real - blocked a Mega Metagross Meteor Mash that would have KOed it, buying Flabebe one extra turn"
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "The team has no way to open with its authored combo: Roselia is the fastest member and the AI prefers a damaging Giga Drain over the support Petal Blizzard, so the Sap Sipper feed the dossier is built around has now failed to appear in two separate runs. This is a set/AI-valuation mismatch, not an illegal choice."
+  ],
+  "level_changes": [
+    {
+      "member": "ROSELIA",
+      "before": 4,
+      "after": 5,
+      "pass_total": 2,
+      "reason": "Second consecutive first-attempt win, this time with zero player faints and in three turns - the earlier +1 changed nothing. Roselia is joint-lowest at L50 and is the combo starter; this takes it to the +2 ceiling for the pass."
+    },
+    {
+      "member": "GLOOM",
+      "before": 4,
+      "after": 5,
+      "pass_total": 1,
+      "reason": "Joint-lowest at L50 and the only member that has never acted in either run - it was KOed before its Sleep Powder resolved both times. First change for this member, so well inside the +-2 ceiling. Flabebe (+6) and Deerling (+5) are left alone: Flabebe is already the highest member and Deerling is the intended payoff piece."
+    }
+  ],
+  "rerun_after_change": "not run - this receipt is itself the rerun of the first change, and the brief allows one rerun per change.",
+  "could_this_be_cooler": "The concept is good but the AI will not play it. Petal Blizzard only makes sense if Roselia is the slower partner or if the set loses its other special STAB; as authored, a fast Timid Roselia with Sludge Bomb and Giga Drain will always prefer damage. Moving Petal Blizzard onto the bulky slot, or giving Roselia a slow spread relative to Deerling, would make the authored ALLY_COMBO actually fire. Not changed in this pass.",
+  "legality_notes": "No legality problem in the authored set. Deerling resolves to DEERLING_SPRING and Flabebe to FLABEBE_RED in the ROM; both are the ordinary default forms.",
+  "driver_note": "Per-turn damage figures in this run's log predate the identity-keyed damage/faints change; outcomes, faint totals and HP readings from `state` are unaffected.",
+  "verdict": "still too easy"
+}

@@ -1,0 +1,66 @@
+{
+  "play_order": 163,
+  "e_group": "E0228",
+  "trainer": "TRAINER_GABBY_AND_TY_2",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; Magnezone 46 (0), Exploud 46 (0), Chatot 47 (+1), Unfezant 47 (+1) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Magnezone and Chatot",
+  "party_manifest": "work/playtest/163-TRAINER_GABBY_AND_TY_2/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Unchanged party from receipt 1 (Excadrill/Togekiss lead); stage-legal for this window.",
+  "attempts": [
+    {
+      "seed": 171,
+      "run_dir": "work/playtest/163-TRAINER_GABBY_AND_TY_2/r2",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "notes": "Two player faints, both to the opposing team playing correctly. Excadrill died to Exploud's Fire Blast, Incineroar to a critical Brave Bird before its own Flare Blitz resolved, and Salamence and Mega Metagross both finished under half. Magnezone's Sturdy held the last Fire Blast at 1 HP and forced an extra turn."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Tailwind goes up and is used",
+      "result": "PASS",
+      "evidence": "Turn 2 Chatot Tailwind; it was still running when Unfezant's Brave Bird out-sped and KOed Incineroar on turn 5."
+    },
+    {
+      "check": "Magnezone survives to apply Electric pressure",
+      "result": "PASS",
+      "evidence": "Turn 3 Thunderbolt (blocked by Protect), turns 5 and 6 Electroweb dropped Mega Metagross's Speed twice. Sturdy held a super-effective Fire Blast at 1 HP on turn 6."
+    },
+    {
+      "check": "Exploud converts with Scrappy / Fire Blast coverage",
+      "result": "PASS",
+      "evidence": "Turn 1 Fire Blast into a Follow Me'd Togekiss (burned it), turn 2 Fire Blast KOed Excadrill through Life Orb recoil."
+    },
+    {
+      "check": "Unfezant's Scope Lens / Super Luck actually crits",
+      "result": "PASS",
+      "evidence": "Turn 5 Brave Bird landed a critical hit and KOed a 134 HP Assault Vest Incineroar outright."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 3,
+      "user": "Unfezant",
+      "payoff": "n/a - Unfezant was not yet out"
+    },
+    {
+      "turn": 4,
+      "user": "Unfezant",
+      "payoff": "real - blocked a Mega Metagross Ice Punch (Ice, 2x into Normal/Flying) that was very likely lethal, and Unfezant lived to land the Brave Bird that KOed Incineroar the following turn"
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "The single best AI decision in the whole block: on turn 1 the player's Excadrill selected Earthquake and the AI pre-emptively switched Magnezone (Electric/Steel, 4x weak to Ground) out for Chatot (Flying, immune), eating zero damage. It later brought Magnezone back once the Ground attacker was dead. The driver confirms the AI never reads committed player moves, so this was a matchup-based switch, not omniscience."
+  ],
+  "level_changes": [],
+  "verdict": "calibrated",
+  "rerun_after_change": "n/a - no change made.",
+  "could_this_be_cooler": "The dossier flags Unfezant's Scope Lens body as the weak concept; this run is evidence against that - the crit is exactly what made the fight. No change suggested.",
+  "legality_notes": "None.",
+  "driver_note": "Per-turn damage in this run's log uses the identity-keyed `damage`/`faints` and `occupant_changed` fields."
+}

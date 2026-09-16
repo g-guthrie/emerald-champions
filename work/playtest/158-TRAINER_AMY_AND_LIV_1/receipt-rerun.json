@@ -1,0 +1,92 @@
+{
+  "play_order": 158,
+  "e_group": "E0211",
+  "trainer": "TRAINER_AMY_AND_LIV_1",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; resolved Togetic 49 (+3), Wigglytuff 48 (+2), Alakazam 45 (-1), Blissey 47 (+1) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Blissey and Togetic",
+  "party_manifest": "work/playtest/158-TRAINER_AMY_AND_LIV_1/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Receipt 1's reordered party (Amoonguss in the left slot so Intimidate never feeds Competitive Wigglytuff) is still the right answer and is stage-legal unchanged.",
+  "attempts": [
+    {
+      "seed": 121,
+      "run_dir": "work/playtest/158-TRAINER_AMY_AND_LIV_1/r2",
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "notes": "Six turns instead of four - the +1 mattered exactly once, when Togetic survived a Mega Metagross Meteor Mash at 44/158 on turn 1. Still a zero-faint win: Amoonguss ate one Hyper Voice crit and was otherwise untouched, and Metagross never dropped below 125/150."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Togetic redirects for Wigglytuff",
+      "result": "PASS",
+      "evidence": "Turn 1 Follow Me became the center of attention and pulled Amoonguss's Spore off Wigglytuff onto Togetic."
+    },
+    {
+      "check": "Wigglytuff Hyper Voice triggers Throat Spray",
+      "result": "PASS",
+      "evidence": "Turn 1: Hyper Voice, then 'The Throat Spray boosted the opposing Wigglytuff's Sp. Atk' - Wigglytuff carried +1 SpA for the rest of the fight."
+    },
+    {
+      "check": "Mega Alakazam is the fast single-target alternative",
+      "result": "FAIL",
+      "evidence": "Alakazam was sent in as a mid-turn replacement on turn 2 and was OHKOed by Meteor Mash before it could Mega Evolve. It never acted in either run."
+    },
+    {
+      "check": "Blissey screens and paralyzes relevant targets",
+      "result": "PASS",
+      "evidence": "Turn 3 Light Screen, turn 4 Thunder Wave paralysing Amoonguss, turn 5 Seismic Toss. Blissey played its authored role and absorbed three Meteor Mashes."
+    },
+    {
+      "check": "Icy Wind used as meaningful speed control",
+      "result": "PASS",
+      "evidence": "Turns 2 and 3 Icy Wind dropped Amoonguss's Speed twice."
+    }
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {
+      "id": "AMYLIV-1",
+      "turn": 2,
+      "board": "Togetic 44/158 and asleep in the left slot, Wigglytuff healthy on the right; player has an untouched Mega Metagross that had just used Meteor Mash and a Spore-carrying Amoonguss. Reserves: Alakazam (Alakazite, frail) and Blissey (340 HP wall).",
+      "chosen": "Switched Togetic out for Alakazam.",
+      "better": "Switching the sleeping Togetic was defensible, but the replacement should have been Blissey. Alakazam is Psychic-typed, 4x-ish frail to the Meteor Mash it was walking into, and is the team's Mega - it was OHKOed on entry without Mega Evolving, throwing the encounter's signature piece away for nothing.",
+      "severity": "high - it discards the authored Mega"
+    },
+    {
+      "id": "AMYLIV-2",
+      "turn": 3,
+      "board": "Wigglytuff asleep at 237/237, Blissey healthy; reserve was a sleeping Togetic at 44/158 facing a Poison-type attacker.",
+      "chosen": "Switched the sleeping Wigglytuff out for the sleeping Togetic.",
+      "better": "Sleep does not clear on a switch, so this traded one sleeping body for a nearly-dead sleeping body and put a Fairy in front of Amoonguss's Sludge Bomb, which immediately took it to 4 HP. Keeping Wigglytuff in (its 237 HP absorbs more) or bringing nothing at all was better.",
+      "severity": "medium"
+    }
+  ],
+  "ai_observations": [
+    "Both defects are the same underlying thing: the replacement chooser is not weighting the incoming Pokemon's matchup against the attacker that just fired, and it is not protecting the Mega slot."
+  ],
+  "level_changes": [
+    {
+      "member": "BLISSEY",
+      "before": 1,
+      "after": 2,
+      "pass_total": 2,
+      "reason": "Second first-attempt win with zero player faints. Blissey at L47 is the lowest non-Mega member and it is also the one doing real work (three Meteor Mashes, a Light Screen, a Thunder Wave that stuck) - it deserves the bulk. Takes it to the +2 ceiling."
+    },
+    {
+      "member": "WIGGLYTUFF",
+      "before": 2,
+      "after": 3,
+      "pass_total": 1,
+      "reason": "Second-lowest non-Mega at L48 and the team's actual win condition: it got its Throat Spray boost on turn 1 and then spent the rest of the fight asleep at full HP without converting. First change for this member. Togetic is left at +3 - the previous +1 is the one thing that visibly changed this run, and Alakazam is excluded as the Mega."
+    }
+  ],
+  "rerun_after_change": "not run - this receipt is the rerun of the first change.",
+  "could_this_be_cooler": "The Mega is the problem, not the concept. Mega Alakazam is never alive long enough to matter behind two passive supports, and the AI keeps pivoting it into physical attacks. Either the Mega should sit on the bulky slot or Togetic needs Wide Guard-proof coverage so the redirection actually protects a threat that survives. Not changed in this pass.",
+  "legality_notes": "None. Alakazam's post-Mega ability reads as the traced ability, which is the documented Mega Alakazam behaviour, not a dropped form change.",
+  "driver_note": "Per-turn damage figures in this run's log predate the identity-keyed damage/faints change; outcomes, faint totals and HP readings from `state` are unaffected.",
+  "verdict": "still too easy"
+}

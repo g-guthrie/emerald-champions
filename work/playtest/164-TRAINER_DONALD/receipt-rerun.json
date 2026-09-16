@@ -1,0 +1,61 @@
+{
+  "play_order": 164,
+  "e_group": "E0230",
+  "trainer": "TRAINER_DONALD",
+  "cap": 48,
+  "cap_confirmation": "driver level_cap=48; Leavanny 48 (+2), Galvantula 48 (+2), Heracross 46 (0), Vespiquen 48 (+2) all equal cap+authored offset-2. PASS.",
+  "pass_kind": "rerun after +1 on Leavanny and Galvantula",
+  "party_manifest": "work/playtest/164-TRAINER_DONALD/party.json",
+  "party_manifest_reused": true,
+  "party_reuse_justification": "Unchanged party from receipt 1; stage-legal for this window.",
+  "attempts": [
+    {
+      "seed": 181,
+      "run_dir": "work/playtest/164-TRAINER_DONALD/r2",
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "notes": "Three turns but two player faints - a fast, violent fight rather than an easy one. Galvantula at its new level survived the whole battle at full HP behind a turn-1 Protect and killed Incineroar (via paralysis) and Salamence (via a Helping Hand'd Thunder). Only a double-KO turn on Heracross and Galvantula ended it."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Galvantula Compound Eyes Thunder lands",
+      "result": "PASS",
+      "evidence": "Thunder hit on turns 2 and 3; the turn-3 hit was Helping Hand boosted and OHKOed a full-HP Salamence."
+    },
+    {
+      "check": "Vespiquen supports with Helping Hand / Attack Order",
+      "result": "PASS",
+      "evidence": "Turn 2 Attack Order finished a paralysed Incineroar; turn 3 Helping Hand into Galvantula's Thunder produced the Salamence KO."
+    },
+    {
+      "check": "Mega Heracross Moxie / Swords Dance setup",
+      "result": "FAIL",
+      "evidence": "Heracross Mega Evolved on entry on turn 3 and was OHKOed by Zen Headbutt before it acted. Base species and authored ability are correct - it simply never got a turn."
+    },
+    {
+      "check": "Leavanny converts before dying",
+      "result": "PASS",
+      "evidence": "Turn 1 X-Scissor on Incineroar; it was then KOed by Meteor Mash (4x) on the same turn."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "user": "Galvantula",
+      "payoff": "real - blocked Incineroar's Flare Blitz (Fire, 2x into Bug/Electric), which was very likely a KO; Galvantula survived at full HP and went on to score two KOs"
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Galvantula's turn-1 Protect against a Fire attacker is the decision that turned this from a sweep into a two-faint fight."
+  ],
+  "level_changes": [],
+  "verdict": "calibrated",
+  "rerun_after_change": "n/a - no change made.",
+  "could_this_be_cooler": "Mega Heracross has now failed to act in both runs because it arrives last against a healthy Mega Metagross. A negative offset would make that worse; what it needs is to arrive earlier or behind a Protect body, which is a composition question rather than a level one. Noted, not changed.",
+  "legality_notes": "None.",
+  "driver_note": "Per-turn damage in this run's log uses the identity-keyed `damage`/`faints` and `occupant_changed` fields."
+}
