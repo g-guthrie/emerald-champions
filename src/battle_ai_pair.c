@@ -1421,7 +1421,14 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         // Locking a foe into the move it just used is worth a turn, and worth
         // more when that move is one it cannot hurt anybody with.
         enum Move last = gAiLogicData->lastUsedMove[action->target];
-        if (last != MOVE_NONE && last != MOVE_UNAVAILABLE
+        // Prankster's priority is what makes a Dark body immune to the move,
+        // so the lock cannot happen at all and the turn buys nothing. The
+        // trial already refuses to model it; the plan score has to agree, or
+        // it pays for an interaction that never occurs.
+        bool32 pranksterBlocked = GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7
+            && gAiLogicData->abilities[actor] == ABILITY_PRANKSTER
+            && IS_BATTLER_OF_TYPE(action->target, TYPE_DARK);
+        if (last != MOVE_NONE && last != MOVE_UNAVAILABLE && !pranksterBlocked
          && !gBattleMons[action->target].volatiles.encoreTimer)
         {
             s32 value = IsBattleMoveStatus(last) ? 35 : 20;
@@ -1482,6 +1489,22 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
                 return 55;
         }
         return -20;
+    }
+    // A partner that absorbs the move's type takes it instead of the foe, so
+    // the attack is not an attack at all - it is a gift of a Special Attack
+    // stage to our own side and a wasted turn. Spread moves are exempt: they
+    // still reach the foes.
+    if (!IsBattleMoveStatus(move) && !PairSpread(move)
+     && IsBattlerAlive(action->target) && !IsBattlerAlly(actor, action->target)
+     && !IsMoveRedirectionPrevented(actor, move, gAiLogicData->abilities[actor]))
+    {
+        enum Ability absorbs = GetMoveType(move) == TYPE_WATER ? ABILITY_STORM_DRAIN
+            : GetMoveType(move) == TYPE_ELECTRIC ? ABILITY_LIGHTNING_ROD : ABILITY_NONE;
+        if (absorbs != ABILITY_NONE && B_REDIRECT_ABILITY_ALLIES >= GEN_4)
+            for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
+                if (ally != actor && IsBattlerAlive(ally) && IsBattlerAlly(actor, ally)
+                 && gAiLogicData->abilities[ally] == absorbs)
+                    return -10000;
     }
     if (effect == EFFECT_TAUNT)
     {
