@@ -517,6 +517,29 @@ looks exactly like a battle that will not progress. The crash screen carries the
 assertion text, so `crash.png` in the run directory is the evidence. A receipt
 whose run stalled this way is void: the battle never finished.
 
+A battler's `species` becomes the Mega form the moment the engine applies it, and
+`mega_evolved` says so outright. Note what a Mega Alakazam looks like: its ability
+reads as whatever Trace copied, not `ABILITY_TRACE`, so a traced ability is
+evidence the Mega happened rather than a mis-read. Regression on Amy & Liv
+(E0211), whose opposing Alakazam holds an Alakazite:
+
+```sh
+python3 scripts/playthrough/battle_driver.py start --trainer TRAINER_AMY_AND_LIV_1 \
+  --party work/playtest/158-TRAINER_AMY_AND_LIV_1/party.json --seed 21 --cap 48 \
+  --run-dir work/agent-battle-e0211
+```
+
+Driven on to turn 3 it reports, with "The opposing Alakazam has Mega Evolved into
+Mega Alakazam!" in that turn's messages:
+
+```
+turn 2: SPECIES_ALAKAZAM       ability=ABILITY_MAGIC_GUARD  mega_evolved=False usable=mega
+turn 3: SPECIES_ALAKAZAM_MEGA  ability=ABILITY_REGENERATOR  mega_evolved=True  usable=none
+```
+
+A battler that faints before it acts never Mega Evolves, so base species and the
+authored ability at that point are correct, not a dropped form change.
+
 `field_source` reports where the battle's field state came from. The engine's
 only setup-side channel for weather or terrain is the trainer's authored
 `startingStatus` (`Starting Status:` in `src/data/trainers.party`), which

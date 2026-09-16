@@ -471,6 +471,10 @@ def decode_state(session, words):
                        'move': name_of(move_t, words[base + 17 + i], 'MOVE_'),
                        'pp': words[base + 21 + i]}
                       for i in range(4) if words[base + 17 + i]],
+            # species already carries the Mega form once the engine applies it
+            # (SPECIES_ALAKAZAM_MEGA and friends resolve), but state it outright
+            # so "no Mega happened" is never read as a naming gap.
+            'mega_evolved': (gimmick & 0xFF) == GIMMICKS.index('mega'),
             'active_gimmick': GIMMICKS[gimmick & 0xFF] if (gimmick & 0xFF) < len(GIMMICKS) else '?',
             'usable_gimmick': (GIMMICKS[(gimmick >> 8) & 0xFF]
                                if ((gimmick >> 8) & 0xFF) < len(GIMMICKS) else '?'),
