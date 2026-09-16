@@ -159,8 +159,8 @@ strategy: RAIN,PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Surskit can set rain while Dewpider applies immediate Water pressure; if rain would be denied or unnecessary, use Icy Wind/Struggle Bug instead. Turn two attacks through the created opening rather than repeatedly rebuilding weather. Alternate deployment: Surskit control plus Kricketune Taunt prevents the opponent from freely setting up. Reserves & disruption: Venipede converts Speed Boost into Poison Jab/Bug Bite pressure; Struggle Bug is special mitigation, not its main damage lane. Counterplay & audit: Weather control, Water immunity, Taunt and focused attacks on the rain lead. Disposition: Keep the aquatic woodland insects and Technician Kricketune; no hazard turn is required.
 crack: Weather control, Water immunity, Taunt and focused attacks on the rain lead. Disposition: Keep the aquatic woodland insects and Technician Kricketune; no hazard turn is required.
-SURSKIT @FOCUS_SASH SWIFT_SWIM TIMID 4/0/0/252/0/252 2 | STRUGGLE_BUG, RAIN_DANCE, HYDRO_PUMP, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
-DEWPIDER @EVIOLITE WATER_BUBBLE ADAMANT 252/252/4/0/0/0 2 | LIQUIDATION, LUNGE, LEECH_LIFE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SURSKIT @FOCUS_SASH SWIFT_SWIM TIMID 4/0/0/252/0/252 3 | STRUGGLE_BUG, RAIN_DANCE, HYDRO_PUMP, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
+DEWPIDER @EVIOLITE WATER_BUBBLE ADAMANT 252/252/4/0/0/0 3 | LIQUIDATION, LUNGE, LEECH_LIFE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 VENIPEDE @EVIOLITE SPEED_BOOST JOLLY 156/156/0/0/56/140 5 | PROTECT, POISON_JAB, STRUGGLE_BUG, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
 KRICKETUNE @LIFE_ORB TECHNICIAN JOLLY 4/252/0/0/0/252 3 | BUG_BITE, AERIAL_ACE, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 

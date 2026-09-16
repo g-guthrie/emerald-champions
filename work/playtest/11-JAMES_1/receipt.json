@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "play_order": 11,
+  "e_group": "E0011",
+  "trainer": "TRAINER_JAMES_1",
+  "class": "regular",
+  "location": "PetalburgWoods",
+  "cap": 14,
+  "difficulty": "medium",
+  "opponent_as_played": [
+    "SURSKIT L14 @FOCUS_SASH SWIFT_SWIM TIMID (Struggle Bug/Rain Dance/Hydro Pump/Icy Wind)",
+    "DEWPIDER L14 @EVIOLITE WATER_BUBBLE ADAMANT (Liquidation/Lunge/Leech Life/Protect)",
+    "VENIPEDE L17 @EVIOLITE SPEED_BOOST JOLLY (Protect/Poison Jab/Struggle Bug/Bug Bite)",
+    "KRICKETUNE L15 @LIFE_ORB TECHNICIAN JOLLY (Bug Bite/Aerial Ace/Taunt/Protect)"
+  ],
+  "authored_strategy_flags": "RAIN,PRESSURE",
+  "party_manifest": "work/playtest/11-JAMES_1/party-a1.json",
+  "party_summary": "Magearna* + Arcanine leading; Snorlax / Weavile / Whimsicott / Iron Leaves* reserve. Snorlax entered.",
+  "driver": {"tool": "scripts/playthrough/battle_driver.py", "build_dir": "work/agent-battle-build",
+             "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+             "scope": "Synthetic headless benchmark, native AI. Not earned campaign play."},
+  "attempts": [
+    {
+      "attempt": 1, "seed": 11001, "outcome": "won", "turns": 4, "decisions": 5,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 0.167,
+      "events": "work/playtest/11-JAMES_1/attempt-1-events.jsonl",
+      "narrative": "T1 Surskit set rain while Dewpider attacked - the authored opening pair - and its Water Bubble Liquidation, doubled again by the new rain, killed a recoil-damaged Arcanine outright. T2 Snorlax replaced it; the AI withdrew a 1 HP Surskit and sent Venipede to eat my Flash Cannon, preserving the rain setter, and Dewpider Protected away both my attacks. T3 Thunderbolt removed Dewpider and a critical Body Slam removed Venipede. T4 the saved Surskit fired a rain-boosted Hydro Pump that took Snorlax to 3 while Flash Cannon and Body Slam closed the fight."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "RAIN: Surskit sets rain while Dewpider applies immediate Water pressure",
+     "result": "PASS, and it converted immediately",
+     "evidence": "T1 is the authored opening exactly: Rain Dance from Surskit, Liquidation from Dewpider. The rain went up before the Liquidation resolved, so the attack got both the Water Bubble doubling and the rain boost, and it killed a 53 HP Arcanine through Intimidate. This is the only turn-one KO any opponent has scored in the block."},
+    {"check": "Turn two attacks through the created opening rather than rebuilding weather",
+     "result": "PASS", "evidence": "Rain Dance was used once. No opponent ever re-set the weather, and the rain was still up at the end of the fight."},
+    {"check": "Swift Swim converts the rain into speed",
+     "result": "PASS", "evidence": "T4 a 1 HP Surskit moved before both Magearna and Snorlax and landed a rain-boosted Hydro Pump for 72 on an 81 HP Snorlax. Without Swift Swim, Surskit's base 65 Speed does not outrun that board."},
+    {"check": "Water Bubble doubles Dewpider's Water damage",
+     "result": "PASS", "evidence": "The T1 Liquidation on Arcanine - see above. A L14 Adamant Dewpider does not otherwise kill a 41 HP Arcanine through an Intimidate drop."},
+    {"check": "Struggle Bug is special mitigation, not a damage lane",
+     "result": "PASS",
+     "evidence": "Both Struggle Bugs were aimed into a Steel/Fairy Magearna that takes 0.25x from Bug. The battle text reads 'It's mostly ineffective on Magearna' followed by the Sp.Atk drops on both my battlers. The AI is selecting it for the spread debuff, which is precisely what the disposition line asks."},
+    {"check": "Venipede converts Speed Boost into Poison Jab/Bug Bite pressure",
+     "result": "FAIL",
+     "evidence": "Venipede, the team's +5 member at L17, was spent as a switch-in shield on T2 to save a 1 HP Surskit, absorbed a 40-damage Flash Cannon, used one Struggle Bug and then died to a critical Body Slam at 9 HP. It never attacked, never banked a Speed Boost stage and never used Protect. Not scored as an AI defect - the pivot that spent it was a reasonable trade that did save the rain setter - but the authored role did not happen."},
+    {"check": "Technician boosts Kricketune's <=60 BP moves",
+     "result": "NOT CLEANLY TESTED", "evidence": "Kricketune got one turn and used Bug Bite into an 81 HP Snorlax before being OHKOd by a Sp.Atk +2 Flash Cannon. Taunt and Aerial Ace were never used."},
+    {"check": "Kricketune Taunt prevents the opponent from freely setting up",
+     "result": "NOT TESTED", "evidence": "I set up nothing, and Kricketune had one turn."},
+    {"check": "Opponent decision budget under 1.2 s",
+     "result": "PASS", "evidence": "0.167 s maximum."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "DEWPIDER", "payoff": "EXCELLENT - at 11/47 it blocked both a Sp.Atk +1 Flash Cannon and a Snorlax Body Slam in the same turn, either of which was lethal, and it survived to land another Liquidation."}
+  ],
+  "empty_protects": 0,
+  "ai_defects": [],
+  "ai_positive_notes": [
+    "T1 is the cleanest execution of an authored strategy flag seen in this block: set the weather and cash it in on the same turn, with the partner's ability already doubling the move the weather boosts.",
+    "T2 the AI withdrew a 1 HP Surskit rather than lose it, and sent in the member with Eviolite bulk to take the hit. That preserved the Swift Swim rain abuser, which two turns later took 72 off an 81 HP Snorlax. The trade cost it Venipede's authored role but it was the correct call for the team's win condition."
+  ],
+  "driver_caveats": [
+    "The stale-`chosen` behaviour recorded in play_order 8 reproduced here: the final act reported 'Kricketune used Liquidation', a move Kricketune does not own, carried over from Dewpider in the same battler slot. The `messages` list correctly shows Bug Bite."
+  ],
+  "illegal_actions": 0,
+  "authored_set_legality_problems": [],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with 1 player faint. The pressure was real but front-loaded - Magearna finished 58/59 and the near-death of Snorlax happened on the turn the fight was already decided - so this is the +1 case rather than the keep case.",
+    "changes": [
+      {"member": "SURSKIT", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15},
+      {"member": "DEWPIDER", "offset_before": 2, "offset_after": 3, "level_before": 14, "level_after": 15}
+    ],
+    "unchanged": [
+      {"member": "VENIPEDE", "offset": 5, "reason": "the ace by level, and its problem is role rather than level - it was spent as a pivot shield, not outclassed"},
+      {"member": "KRICKETUNE", "offset": 3, "reason": "mid-pack and it arrived last with one turn to act"}
+    ],
+    "reasoning": "Surskit and Dewpider are the two lowest members and they are also the two that carry the rain plan, which executed well enough to score the block's only turn-one KO. +1 on both makes the engine that works more dangerous rather than propping up the slots that did not appear - the opposite of the usual pattern in this block, and deliberate.",
+    "rerun": "NOT PERFORMED - blocked by the host headless-ROM build failure recorded in play_order 1."
+  },
+  "could_this_be_cooler": {
+    "answer": "The rain engine is the best-built one in the block. The back half does not belong to it.",
+    "keep": "Swift Swim rain setter plus Water Bubble attacker is a genuinely dangerous two-card opening at this cap, and unlike E0006 it converts on the turn it is played. Keep both.",
+    "suggestion": "Venipede at +5 and Kricketune are a Poison bruiser and a Technician Bug that neither benefit from the rain nor protect it. The team reads as a rain core with two unrelated bodies behind it - the same split diagnosed in E0006. Giving Venipede Aqua Tail or a Rain Dish/Swift Swim partner in that slot, or simply replacing it with a second Water/Bug, would make all four members part of one plan and would give the +5 slot something to do other than absorb a hit.",
+    "second_thought": "Kricketune's Taunt is the most interesting unused move in this fight - it is the team's only answer to a setup or support lead, and it sits on the member that arrives last. Moving Taunt onto the lead pair would let the rain plan defend itself against the exact counterplay the dossier names.",
+    "not_changed_in_this_pass": true
+  },
+  "notes": ["Pool chronology caveat carried from play_order 1."]
+}
