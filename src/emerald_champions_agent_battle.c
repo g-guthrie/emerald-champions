@@ -14,7 +14,7 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "script.h"
-#include "caps.h"
+#include "caps.h" // GetCurrentLevelCap for the observation view
 #include "difficulty.h"
 #include "event_data.h"
 #include "main.h"
@@ -115,7 +115,10 @@ void EmeraldChampionsAgentBattleBegin(u32 levelCap, u32 difficulty)
         sRevealed[i] = 0;
     if (difficulty < DIFFICULTY_COUNT)
         SetCurrentDifficultyLevel(difficulty);
-    ApplyCampaignLevelCapMilestones(levelCap);
+    // The campaign cap is milestone flags, and the one milestone table lives in
+    // caps.c. The host reads that table and sets the flags through the existing
+    // Studio flag command before preparing the party, so this bridge neither
+    // copies the table nor edits a file the trainer side owns.
     SeedRng(gEcAgentBattleSeed);
     SeedRng2(gEcAgentBattleSeed ^ 0x9E3779B9);
 }

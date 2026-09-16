@@ -35,6 +35,7 @@ from prepare_party import protocol as prepare_protocol
 RTC_EPOCH = '946684800'
 BOOT_FRAMES = 2400
 PREP_FRAMES = 240
+BASE_LEVEL_CAP = 14  # GetCurrentLevelCap with no milestone flag set
 TURN_FRAMES = 10000
 MAX_CHUNKS = 8  # long multi-battle faint/exit sequences need more than one chunk
 # Mechanical text/animation advance; the runner accepts at most 512 key events.
@@ -338,6 +339,19 @@ class Session:
         stopped = 'stop_matched=1' in result.stdout
         return values, frames_run, stopped
 
+    def run_at_frames(self, *, frames, writes):
+        """Like run(), but each write carries its own frame so a command mailbox
+        that is consumed once per frame can be driven several times in one go."""
+        runner = ui.build_runner()
+        target = self.dir / 'next.ss1'
+        command = [str(runner), '--rom', str(self.rom), '--rtc', RTC_EPOCH,
+                   '--frames', str(frames), '--state-in', str(self.state_file),
+                   '--state-out', str(target)]
+        for frame, address, value in writes:
+            command += ['--write', f'{frame}:4:0x{address:x}:{value & 0xffffffff}']
+        ui.run(command, timeout=900)
+        target.replace(self.state_file)
+
     def read_view(self, *, advance=False, frames=1, writes=(), until=None, png=None,
                   advance_text=False):
         base = self.syms['gEcAgentBattleView']
@@ -571,6 +585,44 @@ def script_pairings():
     return pairs
 
 
+MILESTONE_RE = re.compile(r'\{\s*(FLAG_[A-Z0-9_]+)\s*,\s*(\d+)\s*,\s*\d+\s*\}')
+
+
+def campaign_milestones():
+    """The one cap table, read from its owner rather than copied.
+
+    GetCurrentLevelCap walks sCampaignMilestones in src/caps.c, so a requested
+    cap is reproduced by setting exactly the flags at or below it. Parsing keeps
+    caps.c canonical and keeps this bridge out of a file the trainer side owns."""
+    text = (ROOT / 'src/caps.c').read_text()
+    block = text.split('sCampaignMilestones[] =')[1].split('};')[0]
+    rows = [(name, int(cap)) for name, cap in MILESTONE_RE.findall(block) if int(cap)]
+    if not rows:
+        fail('could not read sCampaignMilestones from src/caps.c')
+    return rows
+
+
+def apply_level_cap(session, cap):
+    """Set the milestone flags for `cap` through the existing Studio command."""
+    syms = session.syms
+    rows = [(name, value) for name, value in campaign_milestones() if value <= cap]
+    known = {value for _, value in campaign_milestones()}
+    if cap not in known and cap != BASE_LEVEL_CAP:
+        fail(f'--cap {cap} is not a campaign milestone cap; choose one of '
+             f'{sorted(known | {BASE_LEVEL_CAP})}')
+    flags = resolve_defines([('constants/flags.h', name) for name, _ in rows]) if rows else {}
+    writes = []
+    for index, (name, _) in enumerate(rows):
+        frame = index * 4
+        writes.append((frame, syms['gEcStudioArgs'], flags[name]))
+        writes.append((frame, syms['gEcStudioArgs'] + 4, 1))
+        writes.append((frame, syms['gEcStudioCommand'], 6))
+    session.run_at_frames(frames=len(rows) * 4 + 30, writes=writes)
+    view, _, _ = session.read_view(advance=False)
+    if view[22] != cap:
+        fail(f'campaign cap did not reach {cap}; the ROM reports {view[22]}')
+    return [name for name, _ in rows]
+
 def advance_to_halt(session, writes, png=None):
     """Run in bounded chunks until the ROM parks at the next decision or the end.
 
@@ -659,7 +711,11 @@ def command_start(args):
     if 'stop_matched=1' not in output.stdout:
         fail('the headless boot never reached an unlocked field state\n' + output.stdout[-2000:])
 
-    # 2. The existing native preparation API owns party legality.
+    # 2. Put the campaign at the requested cap before preparing the party, so
+    #    native species caps and authored level offsets both read the real value.
+    session.meta['milestones'] = apply_level_cap(session, args.cap)
+
+    # 3. The existing native preparation API owns party legality.
     spec, words = prepare_protocol(Path(args.party), ROOT)
     writes = [(syms[name] + offset, value) for name, offset, value in words]
     writes.append((syms['gEcAgentPrepCommand'], 1))
@@ -670,7 +726,7 @@ def command_start(args):
              f'{values[syms["gEcAgentPrepResult"]]} slot={values[syms["gEcAgentPrepErrorSlot"]]}')
     session.meta['prepared'] = {'encounter': spec['encounter'], 'party': len(spec['party'])}
 
-    # 3. Start the battle through the native debug lifecycle.
+    # 4. Start the battle through the native debug lifecycle.
     battle_writes = [
         (syms['gEcAgentBattleTrainerA'], trainers[name_a]),
         (syms['gEcAgentBattleTrainerB'], trainers[name_b] if name_b else 0),
