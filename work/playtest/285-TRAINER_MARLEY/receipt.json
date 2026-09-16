@@ -1,0 +1,23 @@
+{
+  "play_order": 285, "e_group": "E0450", "trainer": "TRAINER_MARLEY", "class": "ace", "location": "Route134",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-7",
+  "party_manifest": "work/playtest/285-TRAINER_MARLEY/party_route134_84.json",
+  "availability_note": "Route 134 sail lane; same gate<=68 pool-84 party (Landorus and Tapu Fini are reachable legends). Nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/285-TRAINER_MARLEY/a1", "seed": 1, "outcome": "won", "turns": 7, "decisions": 11, "player_faints": 3, "opponent_faints": 4, "note": "Faints: Flutter Mane (Tailwind Life Orb Flare Blitz), Amoonguss (Brave Bird), Tapu Fini (two Sludge Bombs). Incineroar and Urshifu both spent the middle of the fight asleep; Landorus's Sheer Force Psychic won it from 60 HP."}
+  ],
+  "strategy_checks": [
+    {"check": "Venusaur Sleep Powders a legal target or attacks", "result": "PASS", "evidence": "T1 chose Sleep Powder (Fake Out flinch); T2 slept Incineroar; T3 under Tailwind outsped and slept Urshifu; T4-T6 Sludge Bomb once the Grass-type Amoonguss and Misty Terrain made powder pointless - it never wasted a powder into an immune target."},
+    {"check": "Escavalier's first Megahorn is Bug Gem boosted", "result": "PASS", "evidence": "T1 'The Bug Gem strengthened the opposing Escavalier's power' - Megahorn into Incineroar for 115 at -1 Atk."},
+    {"check": "Talonflame Gale Wings priority / Tailwind when the board is a speed race", "result": "PASS", "evidence": "T3 Tailwind on entry (both my leads slower once asleep); T4 Flare Blitz OHKOed Flutter Mane; T5 Brave Bird OHKOed Amoonguss. Gale Wings priority itself was not observed because Talonflame had taken recoil before its first Brave Bird."},
+    {"check": "Mega Chesnaught slow physical pressure, Bulletproof", "result": "PASS (attack) / NOT EXERCISED (Bulletproof)", "evidence": "T6 Mega Evolved and Wood Hammer'd Landorus for 210 (2x). I used Psychic (not a ball/bomb) so Bulletproof never came up; Spiky Shield not used."}
+  ],
+  "protect_ledger": [
+    {"turn": 7, "user": "Venusaur", "payoff": "EMPTY - nothing was aimed at it (Incineroar was asleep, Landorus targeted Chesnaught). Defensible only as a scout against a wake-up Flare Blitz; recorded as empty."}
+  ],
+  "ai_defects": [],
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "This was the hardest Route fight of the block and it earned it: a powder-plus-Tailwind sequence put two of my six to sleep, then Talonflame converted the speed window into two OHKOs. Three faints, keep. The Bug Gem showcase fires once and reads well. Nothing needs changing; if anything the Venusaur could carry Protect less and Leech Seed more, but that is taste, not a defect.",
+  "authored_set_legality": "No problem; all four sets played as written and Chesnaught Mega Evolved on T6."
+}
