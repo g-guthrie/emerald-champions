@@ -1,0 +1,41 @@
+{
+  "play_order": 292, "e_group": "E0458", "trainer": "TRAINER_ARCHIE", "class": "leader", "location": "SeafloorCavern_Room9",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/292-TRAINER_ARCHIE/party_archie_84_v2.json (attempt 2); attempt 1 used party_archie_84.json",
+  "availability_note": "Seafloor Cavern after the Space Center, Sootopolis not entered, Kyogre not awakened. Attempt 1: Torkoal 42, Flutter Mane 68, Rillaboom 36, Raging Bolt 60, Kartana 20, Amoonguss 42 (no legends). Attempt 2: Flutter Mane 68, Iron Bundle 60 (Shoal Cave), Incineroar 36, Rillaboom 36, Zapdos 30 and Landorus 42 (reachable legends, New Mauville / Route 111 ruins). No Underwater, Seafloor or Cave of Origin species.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/292-TRAINER_ARCHIE/a1", "seed": 1, "outcome": "lost", "turns": 9, "decisions": 14, "player_faints": 6, "opponent_faints": 2, "note": "Torkoal's Drought replaced Drizzle on entry, but Archie switched Pelipper out for Seismitoad on T1 (dodging Thunderbolt) and Seismitoad's Earth Power OHKOed Torkoal T2 before Heat Wave. Pelipper re-entered T3 and Drizzle re-set the rain for 8 turns; from then on Seismitoad (L86, Swift Swim) OHKOed Kartana and Raging Bolt with Earth Power, Muk's Gunk Shot OHKOed Rillaboom and Amoonguss, and a Draco Meteor miss on Muk sealed it. Only Toxicroak and Pelipper fell."},
+    {"attempt": 2, "run_dir": "work/playtest/292-TRAINER_ARCHIE/a2", "seed": 2, "outcome": "won", "turns": 12, "decisions": 16, "player_faints": 3, "opponent_faints": 6, "note": "Rebuilt (why: attempt 1 showed the weather war is lost the moment Pelipper re-enters, and that Earth Power beats Fire/Steel/Electric answers). Thunderbolt OHKOed Pelipper T1; Seismitoad still OHKOed Iron Bundle with Earth Power T2 before Freeze-Dry. Fake Out + Shadow Ball removed Toxicroak T3-4; Archie again switched Seismitoad out of Grassy Glide into Muk. Landorus was Knock Off-poisoned and then Hydro Pumped; rain expired end of T8, a crit Grassy Glide took Seismitoad T9, Wood Hammer + Thunderbolt took Muk T10, Mega Sharpedo transformed and died to Grassy Glide T11, Heat Wave + Wood Hammer took Dhelmise T12 (Rillaboom fell to its own recoil). Lost Iron Bundle, Landorus, Rillaboom."}
+  ],
+  "strategy_checks": [
+    {"check": "Drizzle live on entry, Damp Rock holds 8 turns", "result": "PASS", "evidence": "a2: rain from turn 0, 'The rain stopped' at end of T8. a1: Torkoal's Drought replaced it (crack line), but Pelipper's re-entry on T3 re-set rain for 8 more turns - the sun plan is only as good as Pelipper staying out."},
+    {"check": "Pelipper opens with Wide Guard / Tailwind / Hurricane by board", "result": "PASS", "evidence": "a1 T1 the AI withdrew Pelipper from a Thunderbolt into Ground-type Seismitoad (Thunderbolt did nothing) and Pelipper set Tailwind on its T4 re-entry; a2 T1 it chose Hurricane and was OHKOed by a 4x Thunderbolt first."},
+    {"check": "Toxicroak Fake Out lead beside Pelipper", "result": "PASS", "evidence": "Fake Out on turn 1 in both attempts (Torkoal a1, Iron Bundle a2). Dry Skin's sun liability showed in a1 (HP loss each sun turn); Sucker Punch reads were correct (a2 T4 into Flutter Mane, 130)."},
+    {"check": "Seismitoad's Swift Swim Hydro Pump / Earth Power lands before the player's answers", "result": "PASS (dominant)", "evidence": "Earth Power OHKOed Torkoal (252), Kartana (220), Raging Bolt (282 after a SpD drop) and Iron Bundle (165); Hydro Pump OHKOed Landorus and Flutter Mane. Protect alternated with attacks and the AI switched it out of Grassy Glide twice (a1 T4, a2 T4). It is the fight."},
+    {"check": "Dhelmise Anchor Shot traps the switch", "result": "PASS", "evidence": "a2 T10-T11 Anchor Shot on Rillaboom (169, 132) and the trap flag; Rillaboom could not pivot out."},
+    {"check": "Alolan Muk weather-independent lane (Gunk Shot, Knock Off, Poison Touch)", "result": "PASS", "evidence": "a1 T5 Gunk Shot OHKOed Rillaboom (285), T8 OHKOed Amoonguss; a2 T5 Knock Off removed Landorus's Life Orb and Poison Touch poisoned it. Protect blocked Earth Power (a2 T6) and Thunderbolt (a2 T9)."},
+    {"check": "Mega Sharpedo earns Speed Boost before transforming", "result": "FAIL", "evidence": "a2 T11: Sharpedo Mega Evolved on its first turn on the field, with zero Speed Boosts, chose Crunch and was KOed by priority Grassy Glide before moving. The closer never closed."},
+    {"check": "Kyogre absent (chronology repair)", "result": "PASS", "evidence": "Six-member roster as authored; no legend."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 3, "user": "Seismitoad", "payoff": "REAL - blocked a 4x Grassy Glide; Toxicroak died beside it anyway."},
+    {"attempt": 1, "turn": 5, "user": "Seismitoad", "payoff": "REAL - blocked a 4x Grassy Glide while Muk's Gunk Shot OHKOed Rillaboom."},
+    {"attempt": 1, "turn": 6, "user": "Muk", "payoff": "EMPTY - nothing targeted Muk (I switched); Seismitoad OHKOed Kartana beside it."},
+    {"attempt": 1, "turn": 7, "user": "Seismitoad", "payoff": "REAL - blocked Spore and Draco Meteor at once."},
+    {"attempt": 2, "turn": 3, "user": "Seismitoad", "payoff": "EMPTY - I targeted Toxicroak; but a 4x Glide user had just entered, so the read was defensible."},
+    {"attempt": 2, "turn": 5, "user": "Seismitoad (re-entry)", "payoff": "EMPTY - both my battlers switched; Muk's Knock Off poisoned Landorus."},
+    {"attempt": 2, "turn": 6, "user": "Muk", "payoff": "REAL - blocked Landorus's 2x Earth Power."},
+    {"attempt": 2, "turn": 8, "user": "Seismitoad", "payoff": "EMPTY - I targeted Muk; rain expired that turn."},
+    {"attempt": 2, "turn": 9, "user": "Muk", "payoff": "REAL - blocked Thunderbolt; Seismitoad died beside it."}
+  ],
+  "ai_defects": [
+    {"turn": "a2 T11", "battler": "Sharpedo", "board": "Sharpedo + Dhelmise vs Rillaboom (Grassy Terrain, ~190 HP) + Zapdos", "chosen": "Mega Evolve immediately + Crunch", "better": "Protect first to bank a Speed Boost (as the dossier requires), or Protect to scout the priority Grassy Glide; transforming on entry throws away the one thing that makes this Mega a closer."},
+    {"turn": "a2 T3/T5/T8", "battler": "Seismitoad", "board": "various", "chosen": "Protect on 4 of 7 turns on the field, 3 of them untargeted", "better": "Low severity: each was against a visible 4x Grassy Glide user, but Protecting on both the entry turn and the re-entry turn let me double-switch for free (T5) and burned a rain turn (T8)."}
+  ],
+  "authored_set_legality": "No problem found. Levels reported L85/85/86/85/85/87 (offsets 3/3/4/3/3/5).",
+  "theme_note": "Yes, emphatically. Archie is the best fight in the cavern and a clear step above Shelly: the same kind of anti-rain team that beat her 6-4 lost to him 2-6, and the rebuilt team with two reachable legends won 6-3 only after rain expired. The AI's Pelipper/Seismitoad switch reads twice dodged a 4x hit, Muk punished every Grass body, Dhelmise trapped the pivot. The one flat note is the instant Mega: the closer arrives and dies in the same turn.",
+  "level_changes": [],
+  "level_changes_unverified": "No changes (lost attempt 1, won attempt 2 after a real fight with 3 faints).",
+  "cooler": "Already the pirate-king fight. Two later-pass notes: the Sharpedo instant-Mega is an AI behaviour, not a set problem, but if it cannot be fixed a Focus Sash Sharpedo or a Protect-first script would make the closer real; and Toxicroak's Dry Skin heal never visibly fired in rain because Life Orb recoil masked it - Black Sludge or Sitrus would show the rain synergy on the board.",
+  "most_worth_rerunning": "Not needed for levels. A rerun seeded differently would confirm whether Sharpedo ever Protects before Mega Evolving."
+}

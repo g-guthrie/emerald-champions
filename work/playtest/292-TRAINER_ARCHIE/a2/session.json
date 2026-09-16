@@ -1,0 +1,38 @@
+{
+  "rom_sha256": "9349726a62f619a28aad869ab7704b7a13e9c95f7b87d71e811dd80b75c15713",
+  "elf_sha256": "c29c10930aa22d8ae6b6e09b5d1044208ddcc5b15c9204d53cbc3b9aad719770",
+  "seed": 2,
+  "trainer_a": "TRAINER_ARCHIE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 84,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/292-TRAINER_ARCHIE/party_archie_84_v2.json",
+  "party_sha256": "c04fdd5eedf389e67e0e910c8788e4cd7671a3819a74af6c1454298f5e8c8133",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "E0458 TRAINER_ARCHIE, Seafloor Cavern Aqua leader, cap 84 doubles - attempt 2 rebuild",
+    "party": 6
+  },
+  "started": {
+    "frames": 1212
+  },
+  "replacement_commits": {
+    "turn": 11,
+    "slots": {}
+  }
+}
