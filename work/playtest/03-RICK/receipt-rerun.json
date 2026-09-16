@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 3,
+  "e_group": "E0003",
+  "trainer": "TRAINER_RICK",
+  "class": "regular",
+  "location": "Route102",
+  "cap": 14,
+  "difficulty": "medium",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable on Route 102.",
+  "opponent_as_played": [
+    "SPINARAK L17 @CHOICE_SCARF INSOMNIA JOLLY (Electroweb/String Shot/Poison Jab/Knock Off) offset 5",
+    "DWEBBLE L14 @EVIOLITE STURDY ADAMANT (Rock Slide/X-Scissor/Knock Off/Protect) offset 2",
+    "KARRABLAST L14 @LIFE_ORB NO_GUARD ADAMANT (Megahorn/Drill Run/Knock Off/Protect) offset 2",
+    "DEWPIDER L15 @SITRUS_BERRY WATER_BUBBLE MODEST (Scald/Bug Buzz/Giga Drain/Protect) offset 3"
+  ],
+  "party_manifest": "work/playtest/03-RICK/party-rerun-a1.json",
+  "party_summary": "Growlithe / Mienfoo / Timburr / Hoothoot / Pachirisu / Corphish - Route101, Route102 and Route103 wilds only, nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2003,
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 10,
+      "player_faints": 4,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 62,
+      "ai_decision_seconds_max": 1.038,
+      "events": "work/playtest/03-RICK/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 Spinarak (Choice Scarf, fastest thing on the field) chose Poison Jab rather than either of its authored control moves; Mienfoo's Knock Off stripped Dwebble's Eviolite and Growlithe's Flare Blitz removed Spinarak, but Dwebble's Rock Slide plus Flare Blitz recoil removed Growlithe in the same turn. T2 Dwebble Protected a lethal Adaptability Crabhammer while Dewpider's Water Bubble Scald removed Mienfoo, which had just knocked Dewpider's Sitrus away. T3 Timburr replaced Mienfoo; Crabhammer removed Dewpider and Rock Slide left Dwebble on 1. T4 Dwebble Protected again, this time denying the Mach Punch that was lethal at 1 HP, and No Guard Megahorn removed Corphish. T5 Hoothoot came in and was removed inside one turn by a well-built double: Karrablast's Knock Off took the Eviolite off specifically so its partner's Rock Slide could kill through the Flying weakness. Timburr's own Rock Slide crit finished Dwebble. T6 Pachirisu replaced Hoothoot and Timburr's Mach Punch finished a 4 HP Karrablast. A 4-4 scoreline: the hardest fight of the block so far."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Scarf Spinarak chooses String Shot when the two-stage Speed drop lets Dwebble or Karrablast act usefully first",
+      "result": "FAIL (never fired)",
+      "evidence": "Spinarak made exactly one decision in the battle - T1 Poison Jab on Mienfoo for 16 - and died to Flare Blitz on the same turn. String Shot was never selected. The board was the one the plan describes almost exactly: base-25 Dwebble was slower than both my leads, and a two-stage drop on Growlithe (34 -> 17) would have let Dwebble's Rock Slide land before the Flare Blitz that killed Spinarak, which is the whole point of the set. Caveat: this is a single sampled decision, so it is weaker evidence than the Shroomish Spore result, but String Shot has now gone unused across both passes."
+    },
+    {
+      "check": "Electroweb is chosen for damaging one-stage control when that is enough",
+      "result": "NOT TESTED",
+      "evidence": "Spinarak had one decision and spent it on Poison Jab."
+    },
+    {
+      "check": "Spinarak switches out when its Choice-locked support action stops producing value",
+      "result": "NOT TESTED",
+      "evidence": "It never survived to a second turn. No Choice-lock empty-turn loop occurred, which is at least the failure mode the disposition warns against not recurring."
+    },
+    {
+      "check": "Dwebble's Sturdy and Protect make it the durable pivot",
+      "result": "PASS",
+      "evidence": "Sturdy never triggered (it was chipped below full before any lethal hit), but Dwebble personally absorbed four of my attacks, blocked two lethal ones with Protect, and traded into Growlithe and Hoothoot. It was the best member on the team."
+    },
+    {
+      "check": "Dewpider supplies the special Water lane when physical attacks are contained",
+      "result": "PASS",
+      "evidence": "T2 Water Bubble Scald removed a 25 HP Eviolite Mienfoo outright; T3 it chose Giga Drain into Corphish (super effective on a Water type) rather than repeating Scald."
+    },
+    {
+      "check": "Karrablast converts with No Guard Megahorn",
+      "result": "PASS",
+      "evidence": "T4 Megahorn removed Corphish through Life Orb recoil. T5 it correctly did NOT use Megahorn into Normal/Flying Hoothoot, which resists Bug, and chose Knock Off instead."
+    },
+    {
+      "check": "Re-evaluate both targets and turn order rather than repeating a fixed script",
+      "result": "PASS",
+      "evidence": "T5 is the best AI sequence of the block so far: Karrablast used Knock Off on Hoothoot purely to remove the Eviolite, and Dwebble's Rock Slide then killed the now-unboosted Flying type through its 2x Rock weakness. That is an authored-quality two-battler combination the AI found on its own."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "DWEBBLE",
+      "payoff": "Blocked an Adaptability Life Orb Crabhammer - super effective on Bug/Rock and lethal from 31/44. Large payoff; its partner spent the same turn removing Mienfoo."
+    },
+    {
+      "turn": 4,
+      "battler": "DWEBBLE",
+      "payoff": "Blocked an Iron Fist Mach Punch at 1 HP, i.e. denied a certain KO, and its partner's Megahorn removed Corphish behind the guard. Large payoff."
+    }
+  ],
+  "protect_ledger_note": "Two opponent Protects, both from Dwebble, both lethal denials with partner conversion behind them. No empty guard anywhere in the battle. Karrablast and Dewpider also carry Protect and never spent a turn on it.",
+  "ai_defects": [
+    {
+      "id": "E0003-D1",
+      "severity": "authored tactic never fires",
+      "turns": "1",
+      "board": "Choice Scarf Spinarak at 51 effective Speed, faster than my whole party, opposite Intimidate Growlithe (34) and Mienfoo (41), with its own base-25 Dwebble partner needing to move first to matter.",
+      "chosen": "Poison Jab on Mienfoo (16 damage)",
+      "better": "String Shot on Growlithe. The two-stage drop puts Growlithe under Dwebble, which then lands Rock Slide - super effective on a Fire type - before the Flare Blitz that actually killed Spinarak. Electroweb is the damaging version of the same idea.",
+      "status": "STILL PRESENT after the setup-pricing change, on one sampled decision. Same family as the Shroomish Spore omission in E0001: a pure support move losing to a mediocre direct attack."
+    }
+  ],
+  "ai_defects_newly_introduced": [],
+  "ai_improvements_observed": [
+    "No voluntary opponent switch. No repeated empty guard. The T5 Knock-Off-then-spread-KO combination is a clear step up in partner-aware scoring."
+  ],
+  "level_changes": "NONE. Won on attempt 1 but 4 of 6 player faints and a 4-4 scoreline - a real fight by the brief's rule, so keep. The first pass's +1 on Karrablast and Dewpider is validated: Dewpider's L15 Water Bubble Scald one-shot an Eviolite wall and Karrablast's Megahorn one-shot a Life Orb attacker.",
+  "levels_after": {
+    "SPINARAK": 5,
+    "DWEBBLE": 2,
+    "KARRABLAST": 2,
+    "DEWPIDER": 3
+  },
+  "cooler": "Yes, and it is the same point as the defect. Spinarak is a Choice Scarf support that dies to one super-effective hit before it ever gets a second turn, so its authored identity depends entirely on a first-turn choice the AI does not make. Giving the slot Focus Sash instead of Choice Scarf would guarantee it the two turns the plan is written around, and would let a String Shot turn actually be followed by the pay-off turn. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found."
+}

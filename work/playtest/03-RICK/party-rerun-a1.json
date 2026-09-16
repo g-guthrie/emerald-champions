@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0003 TRAINER_RICK; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR ROUTE 102. Book play order puts Route101, Oldale, Route103 (rival), the Birch send-off (Mom gives the Old Rod and names the Route102/103 ponds) and then Route102 before this battle. GROWLITHE, CORPHISH, HOOTHOOT = wild:Route103/land_mons; MIENFOO = wild:Route101/land_mons; TIMBURR, PACHIRISU = wild:Route102/land_mons - this battle own route. Nothing evolved (Rustboro stone shop and every friendship line lie many chapters ahead, and no level evolution of these species completes at or below cap 14), no fished member needed, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "Rick is four Bugs, so Fire and Flying are the levers: Growlithe Flare Blitz and Hoothoot Air Slash are both super effective on three of the four. The authored control engine is Choice Scarf Spinarak String Shot / Electroweb, so the counterplay is (a) Timburr WIDE_GUARD, which blocks Electroweb outright and is the direct test of whether the spread control move is priced, (b) Mienfoo and Timburr Knock Off to strip the Choice Scarf, the Eviolite and the Life Orb the team runs on, and (c) Pachirisu FOLLOW_ME plus a Volt Absorb body that is flatly immune to Electroweb damage. Dwebble Sturdy means one guaranteed survivor, so Mach Punch and Aqua Jet priority are the follow-ups.",
+ "party": [
+  {
+   "species": "SPECIES_GROWLITHE",
+   "moves": [
+    "MOVE_FLARE_BLITZ",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_WILD_CHARGE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate lead and Fire breaker; Wild Charge is the single-target Electric probe for Lightning Rod / Volt Absorb / Storm Drain redirection",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_MIENFOO",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_KNOCK_OFF",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_U_TURN"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_REGENERATOR",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Fake Out tempo, Knock Off item denial, Regenerator pivot",
+   "availability": "pool-14 wild:Route101/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_KNOCK_OFF",
+    "MOVE_WIDE_GUARD"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Iron Fist priority, Rock Slide spread, and WIDE_GUARD as the declared check on the opponent's spread control moves",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_HOOTHOOT",
+   "moves": [
+    "MOVE_AIR_SLASH",
+    "MOVE_TAILWIND",
+    "MOVE_HYPNOSIS",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_INSOMNIA",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    164,
+    0,
+    8,
+    204,
+    0,
+    132
+   ],
+   "role": "Insomnia sleep-proof body, super-effective Flying special damage, player-side Tailwind",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_NUZZLE",
+    "MOVE_SUPER_FANG",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    0,
+    0,
+    252
+   ],
+   "role": "Follow Me redirection, Nuzzle paralysis, Super Fang percentage damage; Volt Absorb is a genuine Electric immunity",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_CORPHISH",
+   "moves": [
+    "MOVE_CRABHAMMER",
+    "MOVE_AQUA_JET",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_ADAPTABILITY",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the block's biggest single hit plus priority and item removal",
+   "availability": "pool-14 wild:Route103/land_mons."
+  }
+ ]
+}
