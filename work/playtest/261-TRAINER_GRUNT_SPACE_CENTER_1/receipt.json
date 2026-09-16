@@ -1,0 +1,45 @@
+{
+  "play_order": 261,
+  "e_group": "E0402",
+  "trainer": "TRAINER_GRUNT_SPACE_CENTER_1",
+  "class": "grunt",
+  "location": "MossdeepCity_SpaceCenter_1F",
+  "chapter": "Team Magma Space Center raid (fuel bay)",
+  "cap": 84,
+  "cap_confirmation": "driver state reported level_cap 84; all four members at offset 0 = L82 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/261-TRAINER_GRUNT_SPACE_CENTER_1/party_raid84.json"],
+  "chronology_note": "Same raid party and audit as E0401: Mind Badge earned, before the Seafloor Cavern; no pool-84 addition used (all are Seafloor / Underwater / Cave of Origin sources). Landorus is the one reachable legend.",
+  "pre_play_strategy_checks": [
+    "Rampardos Mold Breaker Head Smash fires and ignores Sturdy/Sash",
+    "Emboar Reckless recoil attacks",
+    "Arbok Intimidate and Glare paralysis",
+    "Honchkrow Moxie snowball / Sucker Punch close"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 12, "build": "work/agent-battle-build-7", "run_dir": "work/playtest/261-TRAINER_GRUNT_SPACE_CENTER_1/a1",
+      "party": "party_raid84.json (Incineroar / Urshifu-Rapid / Mega Swampert / Great Tusk / Landorus / Gholdengo)",
+      "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+      "why": "Rampardos and Emboar led into double Intimidate. Turn 1 Fake Out flinched Rampardos' Head Smash and Close Combat one-shot it; Emboar's Flare Blitz did 104 to Incineroar. Turn 2 Surging Strikes (crits ignore Urshifu's -1) killed Emboar, Arbok's Gunk Shot did 216 to Urshifu, Knock Off took Arbok's Leftovers. Turn 3 Urshifu out for Landorus (Sucker Punch failed into the switch, Stomping Tantrum immune), Flare Blitz took Honchkrow to 63. Turn 4 Earth Power killed Arbok and Flare Blitz killed Honchkrow after its Brave Bird."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Head Smash fires", "result": "FAIL", "evidence": "turn 1 Rampardos chose Head Smash but was Fake Outed and killed before moving"},
+    {"check": "Reckless recoil attacks", "result": "PASS", "evidence": "turn 1 Flare Blitz (104 + recoil), turn 2 Double-Edge chosen (died first)"},
+    {"check": "Intimidate + Glare", "result": "PASS / NOT SEEN", "evidence": "Arbok's Intimidate hit both on entry; it chose Gunk Shot and Stomping Tantrum, never Glare"},
+    {"check": "Moxie / Sucker Punch", "result": "PARTIAL", "evidence": "Sucker Punch chosen turn 3 (failed into a switch), Brave Bird turn 4; no knockouts, no Moxie"}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "No opponent Protect (Emboar holds Protect, chose attacks). Nothing to fault.",
+  "ai_defects": [],
+  "ai_notes": "Sensible targeting throughout; Sucker Punch into the slot I switched is a read, not a defect. Head Smash was the right pick turn 1 and only lost to priority.",
+  "level_changes": [
+    {"member": "ARBOK", "field": "level offset", "before": 0, "after": 1, "why": "won attempt 1 with zero faints; Arbok got one Gunk Shot off then died to one Earth Power"},
+    {"member": "HONCHKROW", "field": "level offset", "before": 0, "after": 1, "why": "never scored a knockout, died in two hits"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 4-0 with zero faints. Rampardos is the room's star and Emboar its partner; the two support members go +1.",
+  "cooler": "The two-recoil-brawlers idea is legible and Head Smash is scary on paper, but a 58 base Speed Band user dies to Fake Out plus any Fighting move before it swings. Cooler: Arbok's Glare should be the lead action with Rampardos in the back, or Honchkrow's Tailwind-less speed could be traded for a Quick Claw / Custap Rampardos so the one Head Smash actually happens. Suggestion only.",
+  "legality_notes": "Sets legal as authored.",
+  "verification_limit": "The +1 on Arbok and Honchkrow cannot be re-verified until the main agent rebuilds."
+}
