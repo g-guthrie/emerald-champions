@@ -1,0 +1,64 @@
+{
+  "play_order": 213,
+  "e_group": "E0324",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_3",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_1R",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Claydol/Bronzong/Runerigus L57 (offset -1) and Garbodor L58 (offset 0); both cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magma_60_ground.json"],
+  "chronology_note": "Same six as the hideout party, all pool-60 gates 42 and below; lead order is the Ground/Rock one (Urshifu-Rapid + Amoonguss) because this room is two Ground bodies and a Steel one.",
+  "pre_play_strategy_checks": [
+    "Claydol sets Trick Room only when it survives the turn and a slow partner is on the field to spend it",
+    "Bronzong under reversed order fires Gyro Ball at close to maximum power",
+    "Bronzong is the backup Trick Room setter",
+    "Runerigus' Wandering Spirit swaps abilities with a contact attacker",
+    "Garbodor lays Toxic Spikes only if the door crew's set was removed, otherwise it attacks",
+    "Garbodor's Aftermath punishes the contact finish"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/213-TRAINER_GRUNT_MAGMA_HIDEOUT_3/a1",
+      "party": "party_magma_60_ground.json (Urshifu-Rapid/Amoonguss/Swampert/Mega Gardevoir/Incineroar/Zapdos)",
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "One Pokemon beat this room. Surging Strikes is a three-hit always-crit Water move at 2x into Claydol and Runerigus and neutral into the other two, and it removed Claydol on turn 1 before Trick Room could resolve, Bronzong on turn 3 and Runerigus and Garbodor on turns 4 and 5. Amoonguss's Spore did the rest of the work, taking Bronzong out of turn 2 and Garbodor out of turns 2 through 5. Trick Room was selected twice by Bronzong and never once resolved, because it was asleep both times. Urshifu finished on 107 of 209 and nothing else on my side was touched."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Claydol sets Trick Room only when it survives and a slow partner can spend it", "result": "NOT OBSERVED", "evidence": "Claydol chose Psychic on turn 1 and was KOed by Surging Strikes before it resolved. It never got a second decision, so the authored condition was never tested. To be fair to the scorer, Psychic into a Fighting-typed Urshifu is 2x and a defensible turn-1 choice."},
+    {"check": "Bronzong is the backup Trick Room setter", "result": "PASS in selection, FAIL in effect", "evidence": "Bronzong selected MOVE_TRICK_ROOM on turns 1 and 3 - correct behaviour, it stepped into the setter role the moment Claydol was threatened - but it was asleep from Spore on both turns, so the room never turned. Nothing wrong with the AI here; Spore simply beats a two-setter plan that has no Safety Goggles, Covert Cloak or Grass type in it."},
+    {"check": "Gyro Ball at close to maximum power under reversed order", "result": "FAIL", "evidence": "Gyro Ball was selected once, on turn 2, with no Trick Room up - so it was firing at its ordinary, weak value - and it did not resolve because Bronzong was asleep. The authored payoff never existed."},
+    {"check": "Runerigus' Wandering Spirit swaps with a contact attacker", "result": "PASS", "evidence": "turn 4, Surging Strikes made contact and 'The opposing Runerigus swapped Abilities with its target' - Urshifu lost Unseen Fist for the rest of the battle. The Rocky Helmet then chipped it on all three hits. This is the room's signature and it is the one authored idea here that fully worked. It cost me 102 HP and my best ability; it did not save Runerigus, which died in the same action."},
+    {"check": "Garbodor lays Toxic Spikes when there is no existing set", "result": "PASS", "evidence": "turn 2 Toxic Spikes, correctly, since this trainer's field had none. It selected Toxic Spikes again on turn 3 while asleep. The hazard never mattered - I made no further switches - but the condition was read correctly."},
+    {"check": "Garbodor's Aftermath punishes the contact finish", "result": "FAIL (did not fire)", "evidence": "Garbodor was killed on the final turn by Surging Strikes, which is a contact move, and no Aftermath damage appeared in the log or in Urshifu's HP (107/209 before and after). Flagged below as a possible defect - it may be that Aftermath does not fire when the fainting hit is one of several from a multi-hit move, or that the final blow was scored to Amoonguss's Sludge Bomb, which is non-contact and resolved after. Low confidence, but it is the one authored ability in this room that had its exact trigger condition met and produced nothing."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects, although all four members carry it. Two of the four spent most of the battle asleep, so there was little chance to guard; I have no complaint. It does mean this room's Protect behaviour is untested.",
+  "ai_defects": [
+    {
+      "severity": "minor",
+      "turn": 5,
+      "board": "Garbodor (ABILITY_AFTERMATH) at 179/215 asleep, KOed by Urshifu-Rapid-Strike's Surging Strikes, a contact multi-hit move; Amoonguss's non-contact Sludge Bomb resolved after",
+      "chosen": "n/a - this is an ability-resolution observation, not an AI choice",
+      "problem": "Aftermath's authored payoff ('punishes the contact finish') did not fire: Urshifu's HP was 107/209 before and after the KO turn. Either Aftermath does not trigger off a multi-hit contact move's final strike, or the faint was attributed to the later non-contact move.",
+      "better": "n/a",
+      "note": "Worth a focused behavioural check rather than a fix on my word - I could not distinguish the two explanations from the log. Aftermath also appears on Skuntank (E0323) and Drifblim (E0318) in my block, so if it is a real gap it affects more than this room."
+    }
+  ],
+  "level_changes": [
+    {"member": "CLAYDOL", "before": -1, "after": 0, "why": "won on attempt 1 with zero faints; Claydol is the primary setter and died on turn 1 before making a second decision, so the room's engine needs to survive longer"},
+    {"member": "BRONZONG", "before": -1, "after": 0, "why": "same; it is the backup setter and correctly reached for Trick Room twice, so it is the member most worth keeping on the field"}
+  ],
+  "level_change_rationale": "Zero-faint first-attempt win, which is the brief's +1 case. I put both points on the two Trick Room setters rather than on Runerigus, whose Wandering Spirit already lands and already costs the player something, or Garbodor, which is the only member already at offset 0. Both are +1 and within the +-2 limit. I want to be honest that levels are the weaker half of the fix here: what actually beat this room is that both setters are asleep-able and neither carries a Covert Cloak, Safety Goggles or a Grass typing, so one Spore switches off a two-setter plan. That is a design observation, reported rather than acted on, since this pass changes levels only.",
+  "rebuild_note": "The level changes cannot be re-verified from this session - the run pinned work/agent-battle-build-5, which predates the edit. The main agent must rebuild.",
+  "theme_check": "On paper yes, on the board barely. A clay idol, a temple bell, a cursed coffin lid and the base's own garbage is a good, coherent 'things we dug out of the volcano' crew, and Wandering Spirit genuinely delivered its promised moment - punching Runerigus cost me my ability for the rest of the fight, and I noticed. But the room is billed as the junior Trick Room and the player never saw a Trick Room, so what arrived was four slow bodies with no reason to be slow.",
+  "cooler_note": "The concept is right and the Runerigus slot is genuinely memorable; keep both. The room's real problem is fragility of the engine, not coolness. The cheapest fix, not applied in this pass, is to give one of the two setters a Covert Cloak or Safety Goggles so a single Spore cannot switch off the whole room - and Claydol already holds a Mental Herb for a Taunt that a sleeping Pokemon will never be able to use anyway. As a second thought: if this is deliberately a rehearsal for the Trick Room Maxie runs at the bottom of the hideout, the player needs to have actually seen it here for the rehearsal to mean anything."
+}
