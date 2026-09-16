@@ -1,0 +1,23 @@
+{
+  "play_order": 287, "e_group": "E0453", "trainer": "TRAINER_GRUNT_SEAFLOOR_CAVERN_2", "class": "grunt", "location": "SeafloorCavern_Room1",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-7",
+  "party_manifest": "work/playtest/287-TRAINER_GRUNT_SEAFLOOR_CAVERN_2/party_seafloor_84.json",
+  "availability_note": "Seafloor Cavern via Dive from Route 128 after the Space Center; same gate<=68 pool-84 party (Landorus and Tapu Fini are reachable legends). No Underwater/Seafloor species used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/287-TRAINER_GRUNT_SEAFLOOR_CAVERN_2/a1", "seed": 1, "outcome": "won", "turns": 4, "decisions": 7, "player_faints": 2, "opponent_faints": 4, "note": "Faints: Incineroar (Waterfall flinch + Close Combat), Urshifu (Gunk Shot). Landorus finished at 4/270 after a Helping Hand Power Gem."}
+  ],
+  "strategy_checks": [
+    {"check": "Scrafty Fake Out buys Huntail a Shell Smash", "result": "PASS (Fake Out) / FAIL (Smash never attempted)", "evidence": "T1 Scrafty Fake Out flinched Urshifu (the attacker). Huntail chose Waterfall on T1 and T2 and never selected Shell Smash. Root cause is in the set, not the AI: Incineroar's Intimidate on entry consumed Huntail's White Herb ('returned its stats to normal') before any Smash, so the herb-cushioned Smash the plan describes was impossible from turn 0."},
+    {"check": "Scrafty attacks when the boost cannot survive", "result": "PASS", "evidence": "T2 Close Combat KOed Incineroar (332) after Huntail's Waterfall flinch."},
+    {"check": "AI switch reads", "result": "PASS (bonus)", "evidence": "T3 the AI withdrew Huntail for Muk into Urshifu's Close Combat, which Muk resisted; Huntail returned for the fainted Scrafty. A genuinely good doubles switch."},
+    {"check": "Muk Helping Hand / Poison Touch pressure", "result": "PASS", "evidence": "T4 Gunk Shot OHKOed Urshifu from 263/288 (Sash already broken); T5 Helping Hand into Nihilego's Power Gem left Landorus at 4/270 - a KO-threshold read that missed by four points."},
+    {"check": "Nihilego Beast Boost / immediate special coverage", "result": "PASS (coverage) / NOT REACHED (Beast Boost)", "evidence": "T5 Power Gem into Landorus (2x, 266) - correct target; it died to a 4x Earth Power before any KO."}
+  ],
+  "protect_ledger": [{"turn": "all", "entry": "No opponent Protect used (Muk, Nihilego carry it). No empty Protects."}],
+  "ai_defects": [],
+  "authored_set_legality": "Design fragility, not illegality: Huntail's White Herb is consumed by any Intimidate on entry (Incineroar, Landorus, Gyarados leads are common at this cap), which deletes the Fake Out + White Herb Shell Smash line the plan is built on before turn 1. Report for the team side; not changed in this pass.",
+  "theme_note": "Reads as a pirate crew (thug, deep-sea fish, sludge tank, stolen Ultra Beast) and the AI's Muk switch-in and Helping Hand KO read gave it real menace; two faints and a 4-HP Landorus. No rain, which is by design for a grunt.",
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "Good grunt fight and the correct level. The one thing worth fixing later is the White Herb versus Intimidate problem above - a Focus Sash or Lum on Huntail would make the Smash line survive an Intimidate lead."
+}
