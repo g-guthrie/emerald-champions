@@ -550,9 +550,13 @@ So `authored_by_trainer_a` / `_b` list exactly what the encounter asked for, and
 an empty list with a bare `terrain_at_turn_0` means the encounter authored
 nothing - not that the driver dropped a field. `from_map` is always false and is
 there to make that explicit. Do not add a driver-side field effect to match book
-prose; that would make the headless ROM disagree with the release ROM. As of this
-writing no trainer in the game authors a starting status
-(`grep -c startingStatus src/data/trainers.h` is 0).
+prose; that would make the headless ROM disagree with the release ROM. A room
+that needs a field authors it in the teams file with `field: <STARTING_STATUS
+suffix>` (the nine Lavaridge Gym rooms author `MISTY_TERRAIN`), which
+materializes as `Starting Status:` and shows up here as
+`authored_by_trainer_a: ['misty_terrain']` with `terrain_is_permanent: true`
+(no countdown; still replaced by any terrain setter and cleared by Defog, Ice
+Spinner or Steel Roller).
 
 `status` is decoded field by field, not as a plain bitmask: `STATUS1_SLEEP` is
 the low three bits counting turns remaining and `STATUS1_TOXIC_COUNTER` is bits
