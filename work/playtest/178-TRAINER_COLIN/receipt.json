@@ -1,0 +1,78 @@
+{
+  "play_order": 178,
+  "e_group": "E0253",
+  "trainer": "TRAINER_COLIN",
+  "class": "regular",
+  "location": "Route120",
+  "cap": 54,
+  "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-4",
+  "party_manifest": "work/playtest/178-TRAINER_COLIN/party.json",
+  "level_verification": "cap 54: Dodrio -1 -> L51, Xatu 0 -> L52, Oricorio-Pa'u 0 -> L52, Braviary-Hisui +1 -> L53. All equal cap + offset - 2. --cap 54 correct.",
+  "attempts": [
+    {
+      "seed": 91,
+      "run_dir": "work/playtest/178-TRAINER_COLIN/run-s1",
+      "outcome": "won",
+      "turns": 3,
+      "decisions": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 0.536
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Magic Bounce Xatu reflects Taunt, Will-O-Wisp, Thunder Wave, Leech Seed and hazards back at the sender - the reason this regular is dangerous",
+      "result": "NOT_EXERCISED",
+      "evidence": "Xatu was KOed on turn 1 by a spread Rock Slide (2x) plus an Ice Punch (2x) before it acted. Its latched choice that turn was Psychic, not Tailwind. My party's only status move was Amoonguss's Spore and Amoonguss never reached the field. The ability that the dossier says makes this trainer dangerous went completely untested."
+    },
+    {
+      "check": "Xatu sets Tailwind only when it improves the race",
+      "result": "NOT_EXERCISED",
+      "evidence": "Xatu chose Psychic on its one turn and died. Defensible - my two leads were both faster than it anyway, so Tailwind would not have improved the race - but TAILWIND went unobserved."
+    },
+    {
+      "check": "Oricorio-Pa'u's Dancer copies a player's Quiver Dance, Dragon Dance or Swords Dance for free",
+      "result": "NOT_EXERCISED",
+      "evidence": "My party carried no dance move, which is exactly the dossier's own stated gap: 'Dancer has no dancer of its own to copy, so it only triggers on the player's terms'. Confirmed from play - against a party with no dance moves, Dancer is a blank ability. Oricorio used Revelation Dance twice as an ordinary attack."
+    },
+    {
+      "check": "Sheer Force Braviary-Hisui is the Choice Specs breaker with Esper Wing",
+      "result": "PASS",
+      "evidence": "Braviary-Hisui used Esper Wing on turns 2, 3 and 4 and the Choice lock held correctly (its revealed move list stayed at exactly ['MOVE_ESPER_WING']). It was the only member that did sustained damage, taking Excadrill from 200 to 28 in partnership with Oricorio despite Esper Wing reading 'not very effective' into a Steel type."
+    },
+    {
+      "check": "Dodrio's Early Bird",
+      "result": "NOT_EXERCISED",
+      "evidence": "No sleep was inflicted. Dodrio used Brave Bird into Mega Swampert and died to its own recoil plus Rock Slide on turn 1."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opposing Protects. Three of Colin's four members carry Protect (Dodrio, Xatu, Oricorio) and none used it, including on turn 1 where a spread Rock Slide from a visible Garchomp was about to be 2x into both leads. The fight was short enough that I do not want to over-read this, but it is the same never-guards pattern I saw on Shelly.",
+  "consecutive_protect_risk": "n/a.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Braviary-Hisui's Choice lock behaved correctly.",
+    "Oricorio's Revelation Dance target selection (Mega Swampert, the more damaged body) was reasonable.",
+    "Decision time peaked at 0.536 s - by far the most comfortable in my block, on a four-member team."
+  ],
+  "level_changes": [
+    {
+      "member": "DODRIO",
+      "before": -1,
+      "after": 0,
+      "reason": "Zero-faint first-attempt win in three turns. Dodrio at -1 was the lowest-level opponent and died on turn 1 to a spread attack plus its own Brave Bird recoil. +1 per the review rule, applied to the weakest member and not to the Choice Specs breaker."
+    },
+    {
+      "member": "XATU",
+      "before": 0,
+      "after": 1,
+      "reason": "Same trigger, second-weakest. More importantly, Xatu is the member the dossier builds the trainer's identity around - Magic Bounce is 'the reason this regular is dangerous' - and at L52 it died before acting, so the ability was never tested. +1 gives the Magic Bounce body a realistic chance to survive an opening turn and actually reflect something."
+    }
+  ],
+  "rerun": "NOT POSSIBLE IN THIS SESSION - opponent levels come from the compiled headless ROM and this agent must not run make. Deferred to the main agent's rebuild.",
+  "could_this_be_cooler": "The Magic Bounce and Dancer ideas are both good and I agree they should be retained, but playing it exposes a structural problem the dossier does not mention: all four of Colin's members are Flying types, and three of the four are Psychic/Flying. One spread Rock Slide from one Pokemon was super effective against the entire trainer, every turn, and it won the fight in three turns without costing me a single Pokemon. That is not a level problem - raising the offsets just means the same Rock Slide takes four turns instead of three. The fix is one non-Flying body, and Colin's own theme supplies the obvious candidate: Oricorio has four forms, and Oricorio-Baile (Fire/Flying) or Oricorio-Sensu (Ghost/Flying) would keep the dancer concept while... those are still Flying. The honest answer is that a bird keeper whose entire roster shares a 2x Rock weakness needs either a Rock-resistant partner (a Steel/Flying like Skarmory, which resists Rock outright) or one member that is simply not a bird. I would add Skarmory: it resists Rock, it keeps the theme perfectly, and Sturdy plus Magic Bounce is a far more annoying support pair than Dodrio contributes. Flagged, not changed.\n\nSecond note, on Dancer: the dossier already identifies that Dancer has nothing to copy, and I can now confirm it is a blank ability against a party that does not set up. Giving Oricorio's partner a dance move of its own - Xatu cannot learn one, but Dodrio has no useful fourth slot - would make Dancer fire on Colin's own terms rather than only as a punish.",
+  "authored_set_legality": "No legality problem. Magic Bounce, Dancer, Sheer Force with Choice Specs, Early Bird and the ORICORIO_PAU and BRAVIARY_HISUI form aliases all resolved as authored.",
+  "notes": "Player party: the anti-rival v2 team. Garchomp's spread Rock Slide alone accounted for three of the four KOs."
+}
