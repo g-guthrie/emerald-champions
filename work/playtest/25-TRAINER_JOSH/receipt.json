@@ -1,0 +1,87 @@
+{
+  "play_order": 25,
+  "e_group": "E0027",
+  "trainer": "TRAINER_JOSH",
+  "class": "gym",
+  "location": "RustboroCity_Gym",
+  "cap": 14,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/25-TRAINER_JOSH/party.json",
+  "opponent_levels": {"GLIMMET": 15, "NOSEPASS": 16, "DWEBBLE": 17, "GEODUDE_ALOLA": 16, "NACLSTACK": 13, "ONIX": 16},
+  "attempts": [
+    {
+      "id": "shakedown-discarded",
+      "seed": "0x51A1",
+      "outcome": "abandoned",
+      "note": "Driver shakedown before the coordinator's --build-dir instruction arrived, and compromised on turn 1 by a player error: Ludicolo's spread Surf hit its own Whimsicott partner for 37 of 45 HP and Ludicolo was then one-shot by Glimmet's Sludge Bomb. Not counted as an optimized attempt. Log retained at work/playtest/25-TRAINER_JOSH/shakedown-discarded/.",
+      "rebuild_reason": "Both original leads (Ludicolo, Whimsicott) are Grass and 2x weak to Glimmet's Sludge Bomb, and Surf cannot be fired next to a Grass partner. Rebuilt around Steel leads (Poison-immune, Rock-resistant) plus a Skill Link multi-hit breaker for the team's three Sturdy/Sash bodies."
+    },
+    {
+      "id": "a1",
+      "run_dir": "work/playtest/25-TRAINER_JOSH/a1",
+      "seed": "0x51A1",
+      "outcome": "won",
+      "turns": 7,
+      "decisions": 11,
+      "player_faints": 3,
+      "opponent_faints": 6,
+      "ai_decision_frames_max": 13,
+      "ai_decision_seconds_max": 0.218,
+      "narrative": "Magearna + Lucario focused Glimmet down on turn 1 (Close Combat 4x broke the Focus Sash, Flash Cannon finished it) but Close Combat triggered Toxic Debris and Nosepass's Earth Power killed Lucario the same turn. Reuniclus (Magic Guard, immune to the Toxic Spikes chip) traded into Onix and Dwebble, both of which survived on Sturdy, then died to a Body Press crit. Cloyster's Rock Blast finished Dwebble through Sturdy and Magearna, riding Soul-Heart to +6, cleaned Geodude, Nosepass and Naclstack. Three player faints against six opponent faints."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Toxic Debris scatters Toxic Spikes on a qualifying physical hit", "result": "PASS", "evidence": "a1 turn 1: Lucario's Close Combat hit Glimmet and the log printed 'Toxic spikes were scattered on the ground all around'. Every later grounded switch-in (Reuniclus, Cloyster, Shaymin) entered poisoned."},
+    {"check": "Acid Spray is never claimed through Poison immunity, and never applied after Nosepass already acted", "result": "PASS (negative branch)", "evidence": "a1 turn 1: both player leads were Steel (Poison-immune). Glimmet did not attempt Acid Spray; it selected Power Gem instead. The positive branch (Acid Spray enabling Nosepass's special attack) was not observed because Glimmet was removed on turn 1."},
+    {"check": "Galvanize converts Geodude-Alola's Double-Edge into an Electric attack, and it still takes recoil", "result": "PASS", "evidence": "a1 turn 5: Double-Edge into Cloyster printed 'It's super effective on Cloyster' (Water/Ice takes Normal neutrally, so the move was Electric) and Geodude took 3 recoil damage the same turn."},
+    {"check": "Dwebble uses Shell Smash only with a surviving useful follow-up; White Herb is consumed only when the drops actually trigger", "result": "PASS (negative branch)", "evidence": "Dwebble entered on turn 2 at 1 HP behind Sturdy and never used Shell Smash; it chose X-Scissor, Rock Slide and Protect. White Herb was still held when it fainted, which is correct because no defensive drop ever fired."},
+    {"check": "Sturdy cannot promise survival against two attacks", "result": "PASS", "evidence": "a1 turns 2-5: Onix and Dwebble both survived the first hit at 1 HP via Sturdy and both died to the following attack."},
+    {"check": "Onix offers Taunt, Rock Tomb and Defense-powered Body Press", "result": "PARTIAL", "evidence": "Body Press fired three times and was the single biggest damage source on Josh's side (killed Lucario in the shakedown run and Reuniclus in a1, on a crit). Taunt and Rock Tomb were never selected. That is defensible - both player actives were pure attackers with no support move worth Taunting - but the Taunt branch remains unobserved."},
+    {"check": "Naclstack resists eligible status plans (Purifying Salt) and uses Salt Cure's residual threat with purposeful recovery", "result": "PARTIAL/FAIL", "evidence": "Purifying Salt was present but never tested (no status was aimed at it). Naclstack never used Salt Cure and never used Recover across three turns on the field; at 25/50 behind a Protect it chose Protect a second time rather than Recover. See AI defects."},
+    {"check": "Magnet Pull traps Steel opponents", "result": "PARTIAL", "evidence": "a1 turn 0: Lucario (Steel) reported may_switch=false while Nosepass was active. Magearna, also Steel and also adjacent, reported may_switch=true in the same state. See AI defects for the inconsistency."}
+  ],
+  "protect_ledger": [
+    {"attempt": "shakedown", "turn": 3, "user": "GEODUDE_ALOLA", "payoff": "real - blocked Lucario's Bullet Punch, which was lethal at 14/53 HP"},
+    {"attempt": "shakedown", "turn": 4, "user": "ONIX", "payoff": "real - blocked both Shaymin's 4x Seed Flare and Magearna's 2x Flash Cannon in one turn"},
+    {"attempt": "shakedown", "turn": 5, "user": "GEODUDE_ALOLA", "payoff": "real - blocked Dazzling Gleam while at 1 HP"},
+    {"attempt": "a1", "turn": 4, "user": "GEODUDE_ALOLA", "payoff": "real - blocked a +4 Flash Cannon that was lethal"},
+    {"attempt": "a1", "turn": 4, "user": "DWEBBLE", "payoff": "real - blocked Rock Blast while at 1 HP behind a spent Sturdy"},
+    {"attempt": "a1", "turn": 6, "user": "NOSEPASS", "payoff": "real - blocked a +6 Flash Cannon (2x on Rock) that was lethal"},
+    {"attempt": "a1", "turn": 7, "user": "NACLSTACK", "payoff": "partial - blocked Cloyster's Icicle Spear, but Naclstack was at 25/50 holding Recover and blocked nothing lethal; the turn bought no partner payoff because Nosepass died anyway"},
+    {"attempt": "a1", "turn": 8, "user": "NACLSTACK", "payoff": "empty - the second consecutive Protect failed and Seed Flare killed it; Recover was the better action from 25/50"}
+  ],
+  "ai_defects": [
+    {
+      "severity": "minor",
+      "turn": "a1 turn 1",
+      "board": "Glimmet (L15) and Nosepass (L16) versus Magearna (b0, Steel/Fairy) and Lucario (b2, Fighting/Steel)",
+      "chosen": "Power Gem into Lucario, where Rock is resisted twice (0.25x)",
+      "better": "Power Gem into Magearna, where Rock is resisted once (0.5x). Both Poison moves were 0x against either target, so Power Gem was correct; only the target choice was strictly worse.",
+      "note": "The choice cost nothing this game because Lucario died to Earth Power regardless, but the target scorer preferred the doubly-resisted body."
+    },
+    {
+      "severity": "moderate",
+      "turn": "a1 turns 7 and 8",
+      "board": "Naclstack at 25/50 holding Leftovers, Recover and Salt Cure, facing Magearna at +6 SpA and Shaymin",
+      "chosen": "Protect on turn 7 (blocked a non-lethal Icicle Spear), then Protect again on turn 8, which failed, and Naclstack died without ever using Recover or Salt Cure",
+      "better": "Recover on turn 7 or 8. The dossier explicitly authors 'Salt Cure's real residual threat with purposeful recovery'; across the whole battle Naclstack used neither of its two authored tools.",
+      "note": "This is the repetitive-guarding pattern AGENTS.md asks to review: the second consecutive Protect was an empty turn against an opponent that could not be outlasted."
+    },
+    {
+      "severity": "low / possible engine rather than AI",
+      "turn": "a1 turn 0",
+      "board": "Nosepass (Magnet Pull) active against Magearna at b0 and Lucario at b2, both Steel",
+      "chosen": "Lucario reported may_switch=false (trapped) while Magearna reported may_switch=true",
+      "better": "Magnet Pull should trap every adjacent Steel foe; in doubles both opposing slots are adjacent, so both player battlers should have been trapped.",
+      "note": "Reported as an observation only - this is native trapping/adjacency code, not an AI scoring decision, and I did not touch C source."
+    }
+  ],
+  "level_changes": "none. The battle was won on the first optimized attempt but cost three player faints (Lucario, Reuniclus, Cloyster) out of six against a six-strong opponent, which is the 'won after a real fight' band in the brief and meets the AGENTS.md three-faint expectation. Josh's Sturdy/Sash/Protect layer made every kill cost two turns. Keep the authored offsets (3/4/5/4/1/4).",
+  "cooler_note": "The living-minerals concept is already strong and the Sturdy-plus-Protect texture is the most memorable thing about the fight - three separate bodies surviving at 1 HP forces real focus-fire discipline. The weakest link is Naclstack: Salt Cure plus Recover wants a partner that stalls for it, but it is deployed last alongside Nosepass and never gets to use either move. A concrete suggestion for a later pass (not applied here): move Naclstack up the deployment order so it appears beside Onix, whose Taunt and Rock Tomb actually create the slow, grindy turns Salt Cure is written for. Species-wise the team does not need rarer members; a Glimmet that survives to evolve into Glimmora as the ace would be the cooler escalation, but that is a Gym-leader-tier idea, not a Youngster's.",
+  "authored_set_legality": "No legality problem found. All six members, their moves, abilities, items and EV spreads materialized and battled without complaint at the resolved Medium levels.",
+  "evidence": {
+    "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+    "elf_sha256": "d43f0156f2669176abb19598a1ec55cfc7a82441550e443bfdd1836c41b7be78",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0027 TRAINER_JOSH (Rustboro Gym, living minerals); play_order 25, cap 14, Medium",
+  "availability_audit": "Every member is traced to work/reference-pools/pool-14.json with gate <= 14. Lucario, Reuniclus and Cloyster's root Shellder are AlteringCave_1F / route land encounters; Cottonee (VerdanturfMeadow land table) takes a Sun Stone for Whimsicott; Shaymin (legendary_sign:Route102) and Magearna (legendary_sign:RustboroCity_DevonCorp_2F) are reachable legendary signs at this cap and are used because Steel and Grass are the honest strongest answers to a Rock/Poison mineral gym. Items are ordinary stock (Life Orb, Focus Sash, Leftovers, Eviolite not used). Assisted acquisition, not native capture acceptance.",
+  "plan": "Steel leads are immune to Glimmet's Sludge Bomb and resist Power Gem/Rock Slide; Flash Cannon and Close Combat both hit Rock super effectively. Skill Link Cloyster exists to punch through Focus Sash, Sturdy Onix and Sturdy Dwebble with multi-hit moves. Whimsicott supplies Prankster Taunt/Encore against Shell Smash and Taunt, and Reuniclus's Magic Guard blanks Salt Cure residual and Toxic Debris.",
+  "party": [
+    {
+      "species": "SPECIES_MAGEARNA",
+      "moves": ["MOVE_FLASH_CANNON", "MOVE_FLEUR_CANNON", "MOVE_THUNDERBOLT", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "lead Steel/Fairy special breaker, Poison-immune into Glimmet",
+      "availability": "legendary_sign:RustboroCity_DevonCorp_2F; pool-14 gate 14 (reachable legend)."
+    },
+    {
+      "species": "SPECIES_LUCARIO",
+      "moves": ["MOVE_CLOSE_COMBAT", "MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INNER_FOCUS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "lead physical Fighting/Steel answer with priority cleanup",
+      "availability": "wild:AlteringCave_1F/land_mons; pool-14 gate 14."
+    },
+    {
+      "species": "SPECIES_SHAYMIN",
+      "moves": ["MOVE_SEED_FLARE", "MOVE_DAZZLING_GLEAM", "MOVE_EARTH_POWER", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NATURAL_CURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Grass special attacker; 4x into Onix and spread Fairy damage",
+      "availability": "legendary_sign:Route102; pool-14 gate 14 (reachable legend)."
+    },
+    {
+      "species": "SPECIES_CLOYSTER",
+      "moves": ["MOVE_ICICLE_SPEAR", "MOVE_ROCK_BLAST", "MOVE_SHELL_SMASH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SKILL_LINK",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Skill Link multi-hit breaker for Focus Sash and Sturdy",
+      "availability": "pool-14 gate 14 (Shellder line)."
+    },
+    {
+      "species": "SPECIES_WHIMSICOTT",
+      "moves": ["MOVE_TAILWIND", "MOVE_ENCORE", "MOVE_TAUNT", "MOVE_MOONBLAST"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Prankster speed control and setup denial",
+      "availability": "Cottonee wild:VerdanturfMeadow/land_mons -> Whimsicott (ITEM_SUN_STONE); pool-14 gate 14."
+    },
+    {
+      "species": "SPECIES_REUNICLUS",
+      "moves": ["MOVE_PSYCHIC", "MOVE_FOCUS_BLAST", "MOVE_SHADOW_BALL", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "Magic Guard reserve immune to Salt Cure and Toxic Debris",
+      "availability": "wild:AlteringCave_1F/land_mons; pool-14 gate 14."
+    }
+  ]
+}
