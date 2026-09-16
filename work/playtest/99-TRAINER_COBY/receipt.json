@@ -1,0 +1,32 @@
+{
+  "play_order": 99,
+  "e_group": "E0116",
+  "trainer": "TRAINER_COBY",
+  "class": "regular",
+  "location": "Route113",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Corviknight/Toucannon/Honchkrow at offset 1 resolved to L35 and Kilowattrel at offset 0 to L34 - both equal 36 + offset - 2 (Medium). No --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/99-TRAINER_COBY/party.json",
+  "attempts": [
+    {"n": 1, "seed": 99, "run_dir": "work/playtest/99-TRAINER_COBY/a1", "kind": "optimized", "outcome": "won", "turns": 4, "decisions": 5, "player_faints": 3, "opponent_faints": 4, "note": "Won, but it cost Weavile, Excadrill and Mega Heracross. Two Honchkrow Night Slash criticals and a 4x Body Press did the damage. My one clear mistake: bringing Mega Heracross (4x Flying) in against a Tailwinded Honchkrow on the last turn - it died before acting. The win came from Magnezone, which the whole plan was built around."}
+  ],
+  "strategy_checks": [
+    {"check": "Corviknight uses Body Press / Taunt / Tailwind / Roost behind Mirror Armor", "result": "PASS", "evidence": "Corviknight selected MOVE_BODY_PRESS on three consecutive turns and used it correctly: T2 Body Press into Weavile was 4x (Fighting into Dark/Ice) and KOed it outright; T3 it re-aimed at Excadrill, which is also 4x. It picked the right target both times rather than pressing the same slot."},
+    {"check": "Toucannon supplies Beak Blast contact-burn and Skill Link multi-hit attacks", "result": "PASS (partial)", "evidence": "T1 Toucannon selected MOVE_ROCK_BLAST, the Skill Link branch, aimed at Weavile. It was KOed by Triple Axel before the move resolved, so the 5-hit count and Beak Blast's burn were not observed in this run."},
+    {"check": "Honchkrow's Super Luck + Scope Lens + Night Slash reaches critical stage 3", "result": "PASS", "evidence": "T3 Night Slash into Excadrill: 'A critical hit!'. T4 Night Slash into Excadrill: 'A critical hit!' and the KO. Two criticals from two Night Slashes is exactly the authored stage-3 behaviour, and it is what actually won Coby a Pokemon."},
+    {"check": "Kilowattrel supplies useful speed control", "result": "PASS", "evidence": "T4 Kilowattrel used Tailwind on its entry turn; SIDE_STATUS_TAILWIND was live for the opponent for the rest of the battle and it is the reason Honchkrow moved first on the last turn."},
+    {"check": "Mirror Armor reflects a stat drop and Competitive punishes one, making indiscriminate Intimidate a poor answer", "result": "NOT TESTED (by design)", "evidence": "The dossier names this as the trap, so I benched Incineroar and Gyarados and brought no Intimidate and no stat-lowering secondary at all. The check that matters - that the printed abilities change what a strong player brings - passed at team-building time: this is the only battle in my block where my two best Fire/Water attackers stayed home."},
+    {"check": "Electric / special pressure into the physical wall (dossier crack)", "result": "PASS", "evidence": "T3 Magnezone Thunderbolt was super effective into Corviknight (Electric is neutral on Steel, 2x on Flying) and KOed a 146 HP Body Press wall from 114 in one hit. Excadrill's Ground typing also made Kilowattrel's Thunderbolt a dead move for two turns."}
+  ],
+  "protect_ledger": [
+    {"turn": "T2", "battler": "HONCHKROW", "payoff": "real and large - blocked both of my attacks in the same turn (Weavile Triple Axel, 2x, and Excadrill Rock Slide, 2x) on its entry turn, while its partner Corviknight KOed Weavile with Body Press. Best single Protect in my block so far."}
+  ],
+  "ai_defects": [],
+  "level_changes": [],
+  "level_decision": "KEEP. Brief rule 5: won with 3 player faints after a real fight, which is at the AGENTS.md target of at least three faints against a well-prepared party. No member is under-levelled: Kilowattrel at offset 0 is the lowest but it still got its Tailwind up before dying, and the fight's difficulty comes from Honchkrow's critical engine and Corviknight's 4x Body Press coverage, neither of which is a level problem.",
+  "retest_status": "n/a - no level change.",
+  "cooler": "Keep this one as authored; it is the best-constructed team I have played in this block. Corviknight/Toucannon/Honchkrow/Kilowattrel is a coherent bird-keeper roster where each member punishes a different lazy answer - Mirror Armor punishes Intimidate, Competitive punishes Icy Wind and Parting Shot, Super Luck punishes trying to wall it, and Skill Link punishes Focus Sash and Sturdy. That is four distinct counterplay lessons in a four-slot route trainer. The only thing I would consider is giving Toucannon a reason to survive to turn two, because it is the one member that died before demonstrating anything: it is the slowest member and holds a -3-priority Beak Blast, so it never gets to show the contact burn. A Sitrus-to-Eviolite-style bulk change is not available, but moving its Speed EVs is already done in the dossier; if this team is ever revisited, leading Toucannon beside Corviknight instead of exposing it to the faster lead would let the Beak Blast trap actually happen.",
+  "authored_set_legality": "No legality problem found. Mirror Armor, Skill Link, Super Luck with Scope Lens, and Competitive were all live on the correct members with the printed items.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
