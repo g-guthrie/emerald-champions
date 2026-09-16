@@ -1675,3 +1675,85 @@ addendum and the group I smaller list), J4 (the remaining eleven `ai_doubles.c`
 fixtures — note that the twelfth, the cache one, is a real bug per above), J5
 (signature starvation), and all of K including the Alan events.jsonl read and
 the downgraded Mega item.
+
+# The depth fix (reordered item 1) and a slice of group M
+
+Commit `88f3005f96`. **186 passed, 0 failed** on my allowlist; `ai_doubles.c`
+is down to **ten** reds from twelve.
+
+## What was wrong
+
+`EvaluatePairBoard`'s inner loop stopped on
+`(canStop || shortCount != 0) && PairDecisionBudgetExpired()`.
+`AI_EvaluateDoublesCandidate` passes `canStop = FALSE` precisely so a candidate
+board is searched in full — but `shortCount != 0` re-admitted the wall clock the
+moment one pair was shortlisted. A switch candidate was therefore searched to
+whatever depth the frames allowed and compared against a stay board searched to
+a different one. The instrumented cache fixture showed the same position
+scoring **16 then 9**, the second evaluation spending 12 frames where the first
+spent 18.
+
+## What it is now
+
+* **A per-decision work allowance.** `PairWorkAllowance` fixes a pair count
+  once, from the first board of the decision — the one the AI is standing on —
+  and every candidate board reuses it unchanged. No wall-clock term decides
+  which pairs are searched, so a position always scores the same.
+* **The clock is a safety stop with a different job.** It no longer shortens
+  one side of a comparison. On a candidate board it abandons the evaluation
+  outright and returns `INT_MIN`, which cannot beat the stay score, so the turn
+  is played from where it stands. It sets `gAiPairBudgetTruncated` (declared in
+  `include/battle_ai_util.h`) so a playtest receipt can show that a comparison
+  was cut instead of the cut being silent.
+* **`AI_EvaluateDoublesPosition` gets its own clock** and restores the turn's,
+  because asking the same question twice must give the same answer.
+
+## Frames
+
+Better, not worse. Dancer full bench **65 → 60** of 72, Laura 61 → 60, Brawly
+61, Ned 61/51, Cristian 47/57, Jocelyn 47/25, Darius 25, Nate 14. `pokeemerald.gba`
+builds clean.
+
+## Tuning history, for whoever revisits it
+
+| Shape | Dancer frames | Suite |
+| --- | --- | --- |
+| require `canStop` only | 79 | cache fixture green, budget red |
+| flat candidate cap 64 / 48 / 32 | 79 / 79 / 67 | 32 moved Cristian, Laura, Charm, Cherubi |
+| total 160 split across arms | 68 | moved Cristian and Laura |
+| allowance from the stay board + clock abandons the candidate | **60** | all green |
+
+The last shape is the one that works, and it is also the simplest: keep the
+depth, drop the comparison when there is no time for it.
+
+## Group M slice
+
+Landed in the same commit because it is the same file:
+
+* **Fixed — Taunt against a body whose only status move is Protect.** Denying a
+  shield is not what the turn is for. Group F's rule now ignores
+  `EFFECT_PROTECT` when it looks for something worth taking. This also turned
+  `EC expert pair: Feint opens partner damage through Protect` green, which is
+  the second of the twelve to come back on its own.
+* **Already covered, now pinned — Weather Ball.** Its type resolves under the
+  weather actually on the field: under the AI's own rain it is Water and the
+  strongest move on the set; under the player's sun it is Fire into a Fire body
+  and loses to the STAB attack. (The coordinator has since withdrawn the
+  report — the receipt was the player's Drought flipping the sky after the AI
+  committed, which is correct behaviour under no-omniscience. The fixture is
+  worth keeping as the pin.)
+* **Already covered, now pinned — Foul Play** is valued on the target's Attack:
+  decisive against a 300-Attack body, refused against a 5-Attack one. My first
+  two attempts at the control were wrong (a Steel body resisting the
+  alternative, then a near-tie), not the AI.
+
+## Queue
+
+Next by the reordered list: re-run the L(1) boards (Wendy Tailwind, Flint
+Dragon Dance, Ninetales Aurora Veil, Jumpluff Rage Powder, Breloom Spore) on
+this build **before** touching any setup constant, and report which of them the
+depth fix alone changes. Then J2, J3, J4 (the other ten reds), J5, K, L, M, N,
+O. Two consecutive-Protect fixture boards have arrived since — Jared's Noctowl
+(E0283 r2) and Foster's Runerigus alone at full HP (E0175 r2) — which is the
+fixture K(1) asked for and I could not build; both are guards with no lethal
+threat, which is a much cleaner board than Alan's.
