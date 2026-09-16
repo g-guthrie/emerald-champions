@@ -1,0 +1,112 @@
+{
+ "play_order": 189,
+ "e_group": "E0283",
+ "trainer": "TRAINER_JARED",
+ "class": "gym",
+ "location": "FortreeCity_Gym",
+ "chapter": "Feather Badge",
+ "cap": 54,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/189-TRAINER_JARED/receipt.json",
+ "party_manifest": "work/playtest/189-TRAINER_JARED/party_b54_jared.json",
+ "party_reuse_justification": "Reused unchanged. No weakness or legality problem recorded last pass; the manifest was audited against pool-54.json with source_detail checked against the Fortree arrival point, which is exactly this battle's location.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "NOCTOWL": "offset 2 -> L54",
+   "SWOOBAT": "offset 3 -> L55",
+   "SCYTHER": "offset 5 -> L57",
+   "MURKROW": "offset 6 -> L58",
+   "BOMBIRDIER": "offset 3 -> L55",
+   "CROBAT": "offset 2 -> L54"
+  },
+  "result": "PASS - all six match 54 + offset - 2; driver reported level_cap 54."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 1,
+   "run_dir": "work/playtest/189-TRAINER_JARED/r2",
+   "outcome": "won",
+   "turns": 7,
+   "decisions": 11,
+   "player_faints": 4,
+   "opponent_faints": 6,
+   "ai_decision_seconds_max": 1.055,
+   "why": "Won 6-4 with only Zapdos and a chipped Mamoswine left standing. A turn-1 double Protect blanked my opening, Scyther U-turned out of a spread Electroweb to deny it, and on turn 5 Crobat's Choice Band Cross Poison OHKOed Mega Gardevoir while Bombirdier's Rock Slide OHKOed a full-HP Incineroar in the same turn. Spore on a Choice Band Crobat and Mamoswine's Ice attacks salvaged it."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Murkrow sets Tailwind at Prankster priority",
+   "result": "PASS",
+   "evidence": "Turn 3: Tailwind went up at priority before anything else resolved, and it converted twice - Scyther U-turned out under it on turn 4 and Crobat outsped and OHKOed Mega Gardevoir on turn 5."
+  },
+  {
+   "check": "Murkrow uses Haze or Foul Play behind Eviolite",
+   "result": "NOT_OBSERVED",
+   "evidence": "Electroweb plus a Knock Off removed the Eviolite and KOed it on the turn after it set Tailwind. Same outcome as the previous pass."
+  },
+  {
+   "check": "Swoobat converts Simple into a doubled Calm Mind",
+   "result": "FAIL_BUT_IMPROVED",
+   "evidence": "Swoobat's turn-1 Protect blocked the 2x Transistor Thunderbolt that OHKOed it in the previous pass, so at L55 it survived the opening turn - a real improvement - but it was then KOed by the same Thunderbolt on turn 2 without setting up. Note again that Simple is a liability on entry: Incineroar's Intimidate landed as -2 Attack."
+  },
+  {
+   "check": "Noctowl's Tinted Lens makes its resisted attacks matter",
+   "result": "NOT_EXERCISED",
+   "evidence": "Noctowl spent both its turns on Protect and never attacked. Nothing on my side resisted Flying or Normal anyway."
+  },
+  {
+   "check": "Scyther converts Technician plus Eviolite into a fast breaker",
+   "result": "PASS",
+   "evidence": "Two separate correct decisions. Turn 4: under Tailwind it chose U-turn, which both denied my spread Electroweb a target and brought Bombirdier in to eat the Flare Blitz I had aimed at Scyther - a genuinely strong pivot. Turn 7: Dual Wingbeat OHKOed a 237 HP Amoonguss through Rocky Helmet chip. The +5 offset is well earned."
+  },
+  {
+   "check": "Bombirdier's Rocky Payload boosts its Rock Slide",
+   "result": "PASS",
+   "evidence": "Turn 5: Rock Slide OHKOed a full-HP 217 Incineroar (2x on Fire/Dark). It is the room's own answer to the Electric counterplay and it landed the fight's second-biggest hit."
+  },
+  {
+   "check": "Crobat Choice Band Infiltrator pressure",
+   "result": "PASS",
+   "evidence": "Massive upgrade on the previous pass. Cross Poison contributed to the Regieleki KO on turn 4 and then OHKOed a full-HP Mega Gardevoir on turn 5 under Tailwind. It kept its Choice Band the whole fight and only fell to a Spore plus two Ice attacks."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 1,
+   "battler": "Swoobat",
+   "call": "Protect",
+   "payoff": "REAL - blocked a 2x Transistor Thunderbolt that was lethal. This is precisely the hit that OHKOed it on turn 1 of the previous pass."
+  },
+  {
+   "turn": 1,
+   "battler": "Noctowl",
+   "call": "Protect",
+   "payoff": "PARTIAL - blocked an Incineroar Fake Out, i.e. a flinch and no damage. Low value, but not empty, and it was made without any knowledge of my commitment."
+  },
+  {
+   "turn": 2,
+   "battler": "Noctowl",
+   "call": "Protect",
+   "payoff": "EMPTY - FAILED. Consecutive guard on the turn immediately after a successful one; 'But it failed!'. Noctowl then ate a 138-damage Knock Off. This is the one poor guard in the whole block: a second consecutive Protect at full HP with no incoming lethal threat wasted the turn outright."
+  }
+ ],
+ "protect_summary": "3 opposing Protects: 1 real, 1 partial, 1 empty-and-failed (Noctowl turn 2, consecutive). One instance of consecutive guarding, and it is the one that failed.",
+ "consecutive_protect_risk": "PRESENT - Noctowl guarded on turns 1 and 2 back to back and the second one failed. Flagged for the AI owner as a PAIR_GUARD_* expected-value question: the consecutive-use success penalty does not appear to be discounting the second guard enough. Not a rule violation and not fixed here.",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 1.055 s (63 frames), inside the 1.2 s budget.",
+  "Scyther's turn-4 U-turn is the best single opposing decision in the block: it dodged a spread move, preserved the room's best breaker, and repositioned a healthy Bombirdier into my committed Flare Blitz - all without reading my commands.",
+  "Turn 5's double KO (Crobat on Mega Gardevoir, Bombirdier on Incineroar) was correct independent target selection by two battlers, not a coincidence."
+ ],
+ "level_changes": [],
+ "level_change_rationale": "Won with 4 new player faints - Regieleki, Mega Gardevoir, Incineroar and Amoonguss - which is above the three-faint aim for a well-prepared competitive party, and I finished on two Pokemon with one of them chipped. That is the 'keep' branch of the calibration rule and comfortably past the Gym-trainer review threshold. The +1 applied to Swoobat and Bombirdier in the previous pass converted precisely: Swoobat now survives turn 1, and Bombirdier now OHKOs a full-HP Incineroar. No further change.",
+ "verdict": "calibrated",
+ "could_this_be_cooler": "The Eviolite pair is confirmed as the best thing in the room - Scyther and Murkrow at +5/+6 were again the two standouts, and Scyther's U-turn pivot is genuinely memorable. The structural criticism from the previous pass is softened but not withdrawn: six Flying types means one Electric attacker is 2x into everything, and my Regieleki still accounted for the two fastest knockouts. The difference this time is that the room punished the Electric answer for bringing it - Bombirdier's Rock Slide killed my lead and Crobat killed my Mega - so the shared weakness is no longer a free win. I would still take one non-Electric-weak body over a sixth bird, but this is now a preference rather than a defect.",
+ "authored_set_legality": "No legality problem in the authored set.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic."
+}

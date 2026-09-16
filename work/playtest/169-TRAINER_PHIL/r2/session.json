@@ -1,0 +1,33 @@
+{
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783",
+  "elf_sha256": "5f4e01bfe2259972778c09af3069d6feb6890b68915bc4206245a00649ea04f1",
+  "seed": 1,
+  "trainer_a": "TRAINER_PHIL",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 48,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/169-TRAINER_PHIL/party.json",
+  "party_sha256": "619ab778d41a902fe0895a9bffaeb97c300fe426c5c40b75d3cd3bc8e4e419d0",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET"
+  ],
+  "prepared": {
+    "encounter": "P15 Feather-window core party (cap 48), Route 119 / Weather Institute chronology",
+    "party": 6
+  },
+  "started": {
+    "frames": 1381
+  },
+  "replacement_commits": {
+    "turn": 1,
+    "slots": {}
+  }
+}

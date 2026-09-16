@@ -1,0 +1,124 @@
+{
+ "play_order": 174,
+ "e_group": "E0247",
+ "trainer": "TRAINER_GRUNT_WEATHER_INST_3",
+ "class": "grunt",
+ "location": "Route119_WeatherInstitute_2F",
+ "raid_stage": "5 of 6 - the last door before Shelly",
+ "cap": 48,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/174-TRAINER_GRUNT_WEATHER_INST_3/receipt.json",
+ "party_manifest": "work/playtest/174-TRAINER_GRUNT_WEATHER_INST_3/party.json",
+ "party_reuse_justification": "Reused unchanged; no weakness or legality problem recorded last pass and the availability audit still holds.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "MIGHTYENA": "offset 3 -> L49",
+   "GOLISOPOD": "offset 3 -> L49",
+   "MUK_ALOLA": "offset 3 -> L49",
+   "QWILFISH": "offset 3 -> L49"
+  },
+  "result": "PASS - all four match 48 + offset - 2; driver reported level_cap 48."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 51,
+   "run_dir": "work/playtest/174-TRAINER_GRUNT_WEATHER_INST_3/r2",
+   "outcome": "won",
+   "turns": 5,
+   "decisions": 7,
+   "player_faints": 1,
+   "opponent_faints": 4,
+   "ai_decision_seconds_max": 0.921,
+   "why": "Sun Heat Wave removed Mightyena and forced Golisopod out via Emergency Exit on turn 1. Qwilfish and Muk then ground Mega Charizard Y down with Poison Jabs behind a double Intimidate and a well-timed Protect, and Charizard fell on turn 3. Excadrill - immune to Poison Jab, Mold Breaker Earthquake 2x on Muk - closed the fight with Togekiss."
+  }
+ ],
+ "showcase_escalation_check": {
+  "declared_before_play": "Raid stage 5 must still show NO Aqua weather - the escalation is none (stages 1-3) -> stolen rain (stage 4) -> Shelly's snow (stage 6).",
+  "result": "PASS",
+  "evidence": "weather at turn 0 = none; no opposing action set weather at any point. The only weather was my own Drought, which faded on turn 5."
+ },
+ "strategy_checks": [
+  {
+   "check": "Mightyena's Intimidate lands on entry and Qwilfish's Intimidate stacks with it",
+   "result": "PASS",
+   "evidence": "Turn 0: both my actives at atk -1 from Mightyena. End of turn 1, when Qwilfish replaced it: 'Charizard's Attack fell! Togekiss's Attack fell!' taking both to atk -2. The double-Intimidate stack is again the most visible thing the trainer does."
+  },
+  {
+   "check": "Howl raises the Attack of both Mightyena and its partner",
+   "result": "NOT_EXERCISED",
+   "evidence": "Mightyena's latched turn-1 choice was Crunch and it was KOed by the sun Heat Wave before acting. At L49 it still does not survive one spread Fire attack, so the Howl half of the SETUP flag has now gone unobserved in two consecutive runs."
+  },
+  {
+   "check": "Golisopod uses First Impression only on its genuine entry turn",
+   "result": "NOT_EXERCISED_THIS_RUN",
+   "evidence": "Golisopod was removed by its own Emergency Exit on turn 1 before acting and re-entered on turn 4 as a non-entry replacement, where it correctly chose Protect and then died. No misfired First Impression."
+  },
+  {
+   "check": "Emergency Exit pulls Golisopod out below half whether Aqua wanted it or not",
+   "result": "PASS",
+   "evidence": "Turn 1: the spread Heat Wave took Golisopod below half and 'TEAM AQUA GRUNT sent out Muk!' immediately, before Golisopod could execute its latched Liquidation. The dossier's 'moment to remember' fired on turn 1 again - and this time it cost Aqua its best attacker for three turns rather than being a minor inconvenience."
+  },
+  {
+   "check": "Muk-Alola's Gluttony converts the Figy Berry early",
+   "result": "PASS",
+   "evidence": "Muk ate its Figy Berry on turn 2 and healed from 155 to 173 out of 207, then went on to KO Mega Charizard Y with Poison Jab on turn 3."
+  },
+  {
+   "check": "Curse / Spikes do not both burn a turn",
+   "result": "PASS",
+   "evidence": "Neither Curse nor Spikes was selected; every turn went to an attack or a Protect. The dossier's own caution against spending both is respected."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 3,
+   "battler": "Qwilfish",
+   "call": "Protect",
+   "payoff": "REAL - at 45/168 it blocked a 2x Solar Beam from Mega Charizard Y that was lethal, and its partner's Poison Jab KOed Charizard on the same turn. The single best opposing decision in the block."
+  },
+  {
+   "turn": 4,
+   "battler": "Muk-Alola",
+   "call": "Protect",
+   "payoff": "REAL - blocked a Mold Breaker Earthquake (2x on Poison/Dark) and a Togekiss Air Slash in the same turn, at 118/207."
+  },
+  {
+   "turn": 5,
+   "battler": "Golisopod",
+   "call": "Protect",
+   "payoff": "REAL - on its re-entry turn at 71/148 it blocked an Earthquake and an Air Slash (2x on Bug) and bought itself a full extra turn."
+  }
+ ],
+ "protect_summary": "3 opposing Protects, all three with real payoff, 0 empty, no battler guarded twice in a row. This is the best Protect discipline observed anywhere in the block.",
+ "consecutive_protect_risk": "none",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 0.921 s (55 frames), inside the 1.2 s budget.",
+  "Qwilfish's turn-3 Protect is a textbook expected-value guard under the no-omniscience rule: a revealed Mega with a 2x special attack, lethal damage on the board, and a partner able to convert the saved turn."
+ ],
+ "level_changes": [
+  {
+   "member": "MIGHTYENA",
+   "field": "offset",
+   "before": 3,
+   "after": 4,
+   "reason": "First-attempt win with 1 player faint against the room the dossier calls the raid boss's antechamber, below the three-faint aim. Mightyena is the support lead whose authored Howl has now gone unexecuted in two runs because it dies to one spread attack before acting. This is the second and final step of its +/-2 budget."
+  },
+  {
+   "member": "GOLISOPOD",
+   "field": "offset",
+   "before": 3,
+   "after": 4,
+   "reason": "Same trigger. Golisopod had its full +/-2 budget unspent. It has been removed by its own Emergency Exit on turn 1 in both runs; one more level raises the chip threshold the player has to clear to force that, which is exactly the interaction the dossier wants to be a deliberate player choice rather than a free one."
+  }
+ ],
+ "level_change_rationale": "A first-attempt win with only 1 new player faint is inside the +1 review threshold, and this room is explicitly meant to be the hardest grunt in the building. Muk-Alola and Qwilfish are left alone: Muk killed my Mega and Qwilfish produced the best Protect in the block, so both are correctly weighted. Mightyena and Golisopod are the two members whose authored tactics have never once executed.",
+ "verdict": "still too easy",
+ "could_this_be_cooler": "The previous pass's structural point is confirmed and I will restate it rather than replace it: all four members are physical attackers behind two stacked Intimidates, so a player who follows the room's own crack line and brings special damage faces a team that has halved its own offence for free. The room needs one member whose damage does not care about Intimidate - Sludge Bomb instead of Poison Jab on Qwilfish is the single cheapest move-level change that closes the hole, and Alolan Muk's bulky body could carry Dark Pulse for the same purpose. Keep Emergency Exit exactly as it is; it is the most interesting readable mechanic in the raid and it fired again on turn 1.",
+ "authored_set_legality": "No legality problem. Emergency Exit, double Intimidate, Gluttony with Figy Berry and the MUK_ALOLA form all resolved as authored.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic."
+}

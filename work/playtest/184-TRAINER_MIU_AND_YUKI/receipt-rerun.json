@@ -1,0 +1,130 @@
+{
+ "play_order": 184,
+ "e_group": "E0272",
+ "trainer": "TRAINER_MIU_AND_YUKI",
+ "class": "regular",
+ "location": "Route123",
+ "chapter": "Feather Badge",
+ "cap": 54,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/184-TRAINER_MIU_AND_YUKI/receipt.json",
+ "party_manifest": "work/playtest/184-TRAINER_MIU_AND_YUKI/party_b54_miu.json",
+ "party_reuse_justification": "Reused unchanged. The previous receipt recorded no weakness and no legality problem; the manifest was audited against pool-54.json with source_detail checked against the Fortree arrival point, which precedes Route 123 in book play order.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "NINETALES": "offset 0 -> L52",
+   "WEEPINBELL": "offset 1 -> L53",
+   "NINETALES_ALOLA": "offset 1 -> L53",
+   "TORTERRA": "offset 1 -> L53"
+  },
+  "result": "PASS - all four match 54 + offset - 2; driver reported level_cap 54."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 1,
+   "run_dir": "work/playtest/184-TRAINER_MIU_AND_YUKI/r2",
+   "outcome": "won",
+   "turns": 7,
+   "decisions": 10,
+   "player_faints": 2,
+   "opponent_faints": 4,
+   "ai_decision_seconds_max": 1.055,
+   "why": "High Horsepower removed the Drought Ninetales on turn 1, but its one-turn Solar Beam had already taken Mamoswine from 200 to 26. Alolan Ninetales set snow and then Aurora Veil, Weepinbell's Sleep Powder shut Incineroar down for two turns, Torterra's Wood Hammer KOed Mega Gardevoir and Torterra's High Horsepower KOed Regieleki. Zapdos finally closed it by Heat Wave."
+  }
+ ],
+ "aurora_veil_check": {
+  "question": "Is Aurora Veil ever chosen?",
+  "result": "PASS - YES",
+  "evidence": "Turn 4: 'The opposing Ninetales used Aurora Veil! Aurora Veil made the opposing side stronger against...' with SIDE_STATUS_AURORA_VEIL confirmed on the opponent side in the following state, behind its own Snow Warning snow and its Light Clay. It then mattered: on turn 5 Mystical Fire and Flare Blitz both had to go through the Veil, and Ninetales-Alola survived at 73/157 behind it.",
+  "delta_from_previous_pass": "This is the direct reversal of the previous pass's FAIL and of AI defect E0272-1. That defect had Alolan Ninetales choosing a resisted Blizzard over its signature screen on its only turn. In this run it chose Blizzard on turns 2 and 3 as well - so the scoring preference the defect describes is still visible - but on turn 4, once the AI had switched Weepinbell out for Torterra and a fresh partner was on the field worth protecting, it did select Aurora Veil. I would downgrade E0272-1 from 'screen moves score below even a bad attack' to 'screen moves score below attacks until the board makes the screen clearly worth it', which is much closer to correct behaviour. Still worth the AI owner's eye, because turns 2 and 3 were both turns where the Veil was the better call.",
+  "turn_by_turn": [
+   {
+    "turn": 2,
+    "board": "Ninetales-Alola L53 157/157, Light Clay, own snow up, partner Weepinbell 120/148 healthy",
+    "chosen": "MOVE_BLIZZARD at Incineroar (a Fire type that resists it)",
+    "assessment": "wrong - Aurora Veil was available and clearly better"
+   },
+   {
+    "turn": 3,
+    "board": "same, partner Weepinbell still alive, Mega Gardevoir switching in",
+    "chosen": "MOVE_BLIZZARD at Gardevoir",
+    "assessment": "defensible damage, but the Veil was still the higher-value turn"
+   },
+   {
+    "turn": 4,
+    "board": "Weepinbell withdrawn for Torterra, Ninetales-Alola still 157/157",
+    "chosen": "MOVE_AURORA_VEIL",
+    "assessment": "correct - the authored payoff, on the correct turn, behind the correct item"
+   }
+  ]
+ },
+ "strategy_checks": [
+  {
+   "check": "Ninetales establishes sun on entry",
+   "result": "PASS",
+   "evidence": "Drought fires at turn 0; state weather reads B_WEATHER_SUN_NORMAL before the first command."
+  },
+  {
+   "check": "Sun makes Solar Beam a one-turn move",
+   "result": "PASS",
+   "evidence": "Turn 1: 'The opposing Ninetales absorbed light!' and Solar Beam resolved the same turn, taking Mamoswine from 200 to 26 (2x into Ground/Ice). At L52 this is now the hardest single hit the pair lands."
+  },
+  {
+   "check": "Weepinbell exploits Chlorophyll under sun",
+   "result": "PARTIAL",
+   "evidence": "The sun was gone by turn 2 so doubled Speed never mattered, but the support half worked twice: Sleep Powder put Incineroar to sleep on turn 3 and again on turn 7, costing me two full turns from my lead. Its turn-2 Protect also blocked a 2x Flare Blitz."
+  },
+  {
+   "check": "The two Ninetales are never deployed together",
+   "result": "PASS",
+   "evidence": "Alolan Ninetales entered only into the slot the Kantonian Ninetales vacated on fainting. The two weather setters were never simultaneously on the field."
+  },
+  {
+   "check": "The snow/Veil mode actually flips the sky",
+   "result": "PASS",
+   "evidence": "'It started to snow!' the instant Alolan Ninetales entered on turn 1, and snow held until turn 7."
+  },
+  {
+   "check": "Alolan Ninetales sets Aurora Veil behind Light Clay",
+   "result": "PASS",
+   "evidence": "See the Aurora Veil check above. Reversal of the previous pass's FAIL."
+  },
+  {
+   "check": "Torterra is the grounded Solid Rock body that ignores the weather",
+   "result": "PASS",
+   "evidence": "Wood Hammer KOed Mega Gardevoir on turn 5 and High Horsepower KOed Regieleki on turn 6, taking Life Orb and Wood Hammer recoil as designed. Torterra alone accounted for both of my faints."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 2,
+   "battler": "Weepinbell",
+   "call": "Protect",
+   "payoff": "REAL - blocked Incineroar's Flare Blitz (2x on Grass/Poison) at 120/148."
+  },
+  {
+   "turn": 5,
+   "battler": "Ninetales-Alola",
+   "call": "Protect",
+   "payoff": "REAL - at 73/157 it blocked BOTH a Mega Gardevoir Mystical Fire (2x) and an Incineroar Flare Blitz (2x) in the same turn, and its partner Torterra converted the saved turn into a Wood Hammer KO on Mega Gardevoir. Best single guard of the fight."
+  }
+ ],
+ "protect_summary": "2 opposing Protects, both with real payoff, 0 empty, no consecutive guarding.",
+ "consecutive_protect_risk": "none",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 1.055 s (63 frames), inside the 1.2 s budget.",
+  "The pair made a mid-battle switch on turn 4 (Weepinbell withdrawn for Torterra) which was new behaviour versus the previous pass and which set up the Aurora Veil turn. Good sequencing.",
+  "AI defect E0272-1 from the previous pass is partially not-reproduced: the Veil was chosen, though two earlier turns still preferred a resisted Blizzard. Reassessment recorded in aurora_veil_check.delta_from_previous_pass. No AI C code touched."
+ ],
+ "level_changes": [],
+ "level_change_rationale": "Won with 2 player faints (Mega Gardevoir and Regieleki, both to Torterra) after a genuine 8-turn fight in which Mamoswine was reduced to 26/200 on turn 1 and Incineroar spent two turns asleep. That is the 'keep' branch. The +1 applied to both Ninetales in the previous pass did exactly what it was intended to do: the sun setter now lands a crippling Solar Beam before dying, and the snow setter now survives long enough to set Aurora Veil.",
+ "verdict": "calibrated",
+ "could_this_be_cooler": "Keep, enthusiastically. The two-Ninetales weather relay is the best idea in this block and the whole of it fired this time - sun, one-turn Solar Beam, the sky flipping to snow on entry, and then the Veil. The improvement I would still name is the one from the previous pass: Encore on the Alolan half is redundant with the Kantonian Ninetales's own Encore and was never used in either run; a momentum or defensive option there would make the Veil turn cheaper to afford. Species, partnership and theme all earn retention.",
+ "authored_set_legality": "No legality problem. Weepinbell holding Eviolite while Victreebel exists is intentional per the dossier.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic."
+}

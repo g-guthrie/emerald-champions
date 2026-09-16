@@ -1,0 +1,107 @@
+{
+ "play_order": 170,
+ "e_group": "E0243",
+ "trainer": "TRAINER_GRUNT_WEATHER_INST_1",
+ "class": "grunt",
+ "location": "Route119_WeatherInstitute_1F",
+ "raid_stage": "1 of 6 - the lobby (no weather)",
+ "cap": 48,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/170-TRAINER_GRUNT_WEATHER_INST_1/receipt.json",
+ "party_manifest": "work/playtest/170-TRAINER_GRUNT_WEATHER_INST_1/party.json",
+ "party_reuse_justification": "Reused unchanged. No weakness or legality problem was recorded last pass; the manifest's availability audit places every source map before Route 119 in book play order.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "GOLBAT": "offset 5 -> L51",
+   "CRAWDAUNT": "offset 2 -> L48",
+   "LIEPARD": "offset 1 -> L47",
+   "TENTACRUEL": "offset 2 -> L48"
+  },
+  "result": "PASS - all four match 48 + offset - 2; driver reported level_cap 48."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 11,
+   "run_dir": "work/playtest/170-TRAINER_GRUNT_WEATHER_INST_1/r2",
+   "outcome": "won",
+   "turns": 4,
+   "decisions": 5,
+   "player_faints": 0,
+   "opponent_faints": 4,
+   "ai_decision_seconds_max": 1.005,
+   "why": "Mega Charizard Y's one-turn Solar Beam removed Crawdaunt (4x) on turn 1. Golbat then took Charizard from 148 to 32 across two Brave Birds, forcing a retreat to Magnezone; Togekiss's Air Slash finished Golbat and then Liepard, and Analytic Thunderbolt closed on Tentacruel."
+  }
+ ],
+ "showcase_escalation_check": {
+  "declared_before_play": "Raid stage 1 must show NO weather: weather_at_turn_0 == none in field_source and no opposing action may set weather.",
+  "result": "PASS",
+  "evidence": "start state weather=['none'], field_source.weather_at_turn_0=['none'], terrain_is_permanent=false, from_map=false. Across five turns no opposing action set weather; the only weather was my own Mega Charizard Y Drought on turn 1."
+ },
+ "strategy_checks": [
+  {
+   "check": "Golbat opens with Taunt on a support target or U-turns out",
+   "result": "PASS",
+   "evidence": "At L51 Golbat now lives long enough to matter and it spent its turns attacking: Brave Bird on turns 1, 2 and 3, doing 116 to Mega Charizard Y and forcing it off the field. No repeat of the previous pass's low-value Taunt into a Protect-only target. The authored 'Taunt or U-turn' line went unused, but attacking was the higher-value choice on every one of those turns."
+  },
+  {
+   "check": "Crawdaunt swings Adaptability Crabhammer / Knock Off, and a turn-one Knock Off strips an item",
+   "result": "FAIL",
+   "evidence": "Crawdaunt's latched turn-1 choice was Crabhammer at Charizard - the correct 2x target - but at L48 it still does not survive a single sun-boosted 4x Solar Beam and was KOed before executing. The authored 'Knock Off on turn one is what makes the rest of the raid harder' line has now failed to happen in two consecutive runs."
+  },
+  {
+   "check": "Liepard's Prankster Fake Out and Encore support the partner / lock a player into a support move",
+   "result": "PASS",
+   "evidence": "Turn 2: Fake Out flinched Mega Charizard Y (the correct target, the biggest threat) and denied it a Heat Wave outright. Turn 4: Encore locked Togekiss into Air Slash before Liepard died. Both halves of the authored Prankster support package fired this time, which is a clear improvement on the previous pass's Foul-Play-into-Magnezone misjudgement."
+  },
+  {
+   "check": "Tentacruel's Acid Spray is the room's setup move",
+   "result": "PASS_MECHANICALLY_EMPTY_TACTICALLY",
+   "evidence": "Turn 5: Acid Spray hit Togekiss for a two-stage Sp. Def drop. It was again the last member alive with no partner left to convert the drop, so the interaction is structurally unreachable as ordered. Same finding as the previous pass; see the cooler note."
+  },
+  {
+   "check": "Liquid Ooze punishes drain recovery",
+   "result": "NOT_EXERCISED",
+   "evidence": "I brought no drain move, as the crack line advises."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 4,
+   "battler": "Tentacruel",
+   "call": "Protect",
+   "payoff": "REAL - blocked Magnezone's Analytic Thunderbolt (2x on Water/Poison, the single biggest hit on the board) on its entry turn at full HP."
+  }
+ ],
+ "protect_summary": "1 opposing Protect, real payoff, 0 empty, no consecutive guarding.",
+ "consecutive_protect_risk": "none",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 1.005 s (60 frames), inside the 1.2 s budget.",
+  "Both AI defects reported in the previous pass (Golbat's low-value Taunt, Liepard's Foul Play into a low-Attack Magnezone) did NOT recur. Golbat attacked correctly and Liepard used Fake Out and Encore. Neither is fixed C code as far as this side knows, so treat this as not-reproduced on this seed rather than repaired."
+ ],
+ "level_changes": [
+  {
+   "member": "CRAWDAUNT",
+   "field": "offset",
+   "before": 2,
+   "after": 3,
+   "reason": "Zero-faint first-attempt win. Crawdaunt is the authored engine of the room and has now been KOed before acting in two consecutive runs. +1 (second and final step of its +/-2 budget) is the last level lever available to give it an opening turn."
+  },
+  {
+   "member": "LIEPARD",
+   "field": "offset",
+   "before": 1,
+   "after": 2,
+   "reason": "Zero-faint first-attempt win; Liepard is the lowest-level member at offset 1 and had its full +/-2 budget unspent. It was also the best performer in the room, so an extra level converts directly into more Fake Out / Encore pressure."
+  }
+ ],
+ "level_change_rationale": "Zero player faints on the first attempt, so the +1 review applies. Charizard was reduced to 32/148 and had to retreat, which is real pressure and much better than the previous pass, but zero faints against the raid opener is still short. Crawdaunt takes its last permitted +1; Liepard, untouched last pass, takes its first. Golbat (+5) and Tentacruel (+2, already raised once) are left alone.",
+ "verdict": "still too easy",
+ "could_this_be_cooler": "The previous pass's lead-order recommendation is confirmed by a second run and I want to restate it rather than replace it: Tentacruel is the setup piece and it is still the LAST member deployed, so Acid Spray's two-stage Special Defense drop again had no partner left to convert it. Leading Tentacruel + Crawdaunt (Acid Spray into Adaptability Crabhammer on turn one) would make the room's signature interaction reachable without touching a single species, move or item. That is a lead-order change, not a composition change, and it is the highest-value improvement available here.",
+ "authored_set_legality": "No legality problem. Adaptability, Prankster, Liquid Ooze, Eviolite on Golbat, Black Sludge and Acid Spray all resolved as authored.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic, so none of them depend on the old unreliable representation."
+}

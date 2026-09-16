@@ -1,0 +1,113 @@
+{
+ "play_order": 190,
+ "e_group": "E0284",
+ "trainer": "TRAINER_EDWARDO",
+ "class": "gym",
+ "location": "FortreeCity_Gym",
+ "chapter": "Feather Badge",
+ "cap": 54,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/190-TRAINER_EDWARDO/receipt.json",
+ "party_manifest": "work/playtest/190-TRAINER_EDWARDO/party_b54_edwardo.json",
+ "party_reuse_justification": "Reused unchanged. No weakness or legality problem recorded last pass; the manifest was audited against pool-54.json against the Fortree arrival point, which is this battle's location.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "HONCHKROW": "offset 2 -> L54",
+   "JUMPLUFF": "offset 3 -> L55",
+   "VESPIQUEN": "offset 3 -> L55",
+   "MANDIBUZZ": "offset 2 -> L54",
+   "TOUCANNON": "offset 2 -> L54",
+   "BRAVIARY": "offset 2 -> L54"
+  },
+  "result": "PASS - all six match 54 + offset - 2; driver reported level_cap 54."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 1,
+   "run_dir": "work/playtest/190-TRAINER_EDWARDO/r2",
+   "outcome": "won",
+   "turns": 7,
+   "decisions": 11,
+   "player_faints": 5,
+   "opponent_faints": 6,
+   "ai_decision_seconds_max": 1.038,
+   "why": "Won 6-5 on the last Pokemon. Turn 3 cost me both actives at once - Honchkrow's Moxie Sucker Punch KOed Regieleki and Braviary's Choice Band Close Combat OHKOed a full-HP 217 Incineroar. Toucannon's Skill Link Rock Blast then 5-hit a 194 HP Zapdos to death and Brave Bird OHKOed a 237 HP Amoonguss. Mamoswine's Ice Shard finished a 48 HP Toucannon with nothing else left on my side."
+  }
+ ],
+ "rage_powder_check": {
+  "question": "Is Rage Powder ever chosen?",
+  "result": "PASS - YES, and it worked",
+  "evidence": "Turn 2: 'The opposing Jumpluff used Rage Powder! The opposing Jumpluff became the center of attention.' It then redirected Regieleki's Transistor Thunderbolt away from Honchkrow - Honchkrow's only HP loss that turn was its own Life Orb and Brave Bird recoil, and the Thunderbolt went into Jumpluff, which survived behind its Focus Sash before Incineroar's Knock Off finished it.",
+  "how_it_was_tested": "I deliberately did not Fake Out Jumpluff on turn 1 (I used Fake Out on Honchkrow instead, which is also the stronger play against a Moxie Sucker Punch user), and on turn 2 I pointed both of my attacks at Honchkrow specifically to give Rage Powder a reason to exist. Under that board the AI selected it.",
+  "delta_from_previous_pass": "Direct reversal of the previous pass's FAIL and of AI defect E0284-1, which recorded Rage Powder never being selected and Jumpluff choosing Sleep Powder twice instead. In this run Jumpluff still opened with Sleep Powder on turn 1 (a reasonable choice with no partner under threat), then switched to Rage Powder the moment its partner was the one being attacked. That is correct, board-sensitive behaviour, and I would downgrade E0284-1 to not-reproduced. The broader worry in that defect note - that ally-protecting and field-setting support moves score systematically below attacks - is not supported by this run."
+ },
+ "strategy_checks": [
+  {
+   "check": "Jumpluff redirects with Rage Powder - the team's declared REDIRECTION strategy",
+   "result": "PASS",
+   "evidence": "See rage_powder_check. Chosen on turn 2, resolved, and it actually absorbed the attack aimed at its partner."
+  },
+  {
+   "check": "Mandibuzz sets Tailwind - the team's declared TAILWIND strategy",
+   "result": "FAIL",
+   "evidence": "Mandibuzz was switched in on turn 4 and KOed by a 2x Thunderbolt before acting, so Tailwind again went unselected. This is now two runs with no Tailwind from this trainer, though this time it is a survivability outcome rather than a choice, and the switch that brought it in was the AI's own."
+  },
+  {
+   "check": "Honchkrow converts Moxie with Sucker Punch priority",
+   "result": "PASS",
+   "evidence": "Turn 1 its Protect blanked my Fake Out and half my Electroweb. Turn 3 Sucker Punch KOed Regieleki at priority and Moxie raised its Attack. A correct priority read against a much faster attacker, made without seeing my commands."
+  },
+  {
+   "check": "Braviary Choice Band pressure and Defiant",
+   "result": "PASS",
+   "evidence": "Turn 3 Close Combat OHKOed a full-HP 217 Incineroar - the hardest hit in either Fortree room. Defiant never triggered because I never pointed an Intimidate or a stat drop at it, which is the correct way to play around it."
+  },
+  {
+   "check": "Toucannon Skill Link multi-hits behind an Assault Vest",
+   "result": "PASS",
+   "evidence": "Complete reversal of the previous pass, where Toucannon never used a move. Turn 6: Rock Blast hit 5 times for exactly lethal damage on a 194/211 Zapdos (4x on Electric/Flying). Turn 7: Brave Bird OHKOed a 237 HP Amoonguss through Rocky Helmet recoil. Toucannon alone took two of my last three Pokemon."
+  },
+  {
+   "check": "Vespiquen Attack Order / Defend Order behind Pressure",
+   "result": "PARTIAL",
+   "evidence": "Pressure applied on entry, one Attack Order into Mamoswine, and a Protect on turn 6 that blocked two attacks and directly enabled Toucannon's Zapdos kill. Defend Order still never used, but Vespiquen was no longer the dead weight the previous pass described."
+  },
+  {
+   "check": "The room makes its own mid-battle switches sensibly",
+   "result": "PARTIAL",
+   "evidence": "On turn 4 Edwardo withdrew a healthy Choice Band Braviary for Mandibuzz on the same turn I was replacing two fainted battlers. Mandibuzz (Dark/Flying) then walked into a 2x Thunderbolt and a 2x Pixilate Hyper Voice and died immediately. Switching away from Incineroar's Intimidate and Knock Off is defensible and the AI could not know what I was bringing in, so I am logging this as a questionable switch rather than a defect - but it cost the room its Tailwind user for nothing."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 1,
+   "battler": "Honchkrow",
+   "call": "Protect",
+   "payoff": "REAL - blocked an Incineroar Fake Out and its half of a 2x spread Electroweb, including the Speed drop, at full HP on turn 1."
+  },
+  {
+   "turn": 6,
+   "battler": "Vespiquen",
+   "call": "Protect",
+   "payoff": "REAL - at 135/193 it blocked BOTH a 2x Icicle Crash and a 2x Heat Wave in the same turn, and its partner Toucannon converted the saved turn into a 5-hit Rock Blast that KOed my Zapdos."
+  }
+ ],
+ "protect_summary": "2 opposing Protects, both with real payoff, 0 empty, no consecutive guarding.",
+ "consecutive_protect_risk": "none",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 1.038 s (62 frames), inside the 1.2 s budget.",
+  "AI defect E0284-1 from the previous pass did not reproduce; reassessment recorded in rage_powder_check.delta_from_previous_pass. No AI C code touched.",
+  "Turn 3 was the strongest opposing turn in the whole block: two independent battlers each selected the correct target and each removed a full-HP Pokemon, one of them at priority."
+ ],
+ "level_changes": [],
+ "level_change_rationale": "Won 6-5 on the last Pokemon with 5 new player faints - Regieleki, Incineroar, Mega Gardevoir, Zapdos and Amoonguss. That is well past the three-faint aim and past any Gym review threshold; the fight was one bad turn away from a loss. Clear 'keep'. The +1 applied to Jumpluff and Vespiquen in the previous pass converted: Jumpluff now survives to redirect, and Vespiquen's Protect turn directly bought Toucannon a knockout.",
+ "verdict": "calibrated",
+ "could_this_be_cooler": "I am withdrawing most of the previous pass's criticism. The room's own idea - Rage Powder redirection feeding a Moxie sweeper behind Choice Band pressure - fired this time and it is good. The all-Flying shared Electric weakness is still real, but the room punished it hard: my Electric attacker died on turn 3 to a priority Sucker Punch and my Electric-immune answers died to Rock Blast and Brave Bird. If anything is worth changing it is Mandibuzz, which has now failed to set Tailwind in two runs and died on entry in both; the declared TAILWIND strategy flag is the one part of this team that still has no evidence behind it. Either give the Tailwind to a body that survives entry, or drop the flag and let the room be a pure redirection-and-breaker package, which is what it actually plays like.",
+ "authored_set_legality": "No legality problem in the authored set.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic."
+}

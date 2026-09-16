@@ -1,0 +1,100 @@
+{
+ "play_order": 173,
+ "e_group": "E0246",
+ "trainer": "TRAINER_GRUNT_WEATHER_INST_2",
+ "class": "grunt",
+ "location": "Route119_WeatherInstitute_2F",
+ "raid_stage": "4 of 6 - the machine room",
+ "cap": 48,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/173-TRAINER_GRUNT_WEATHER_INST_2/receipt.json",
+ "party_manifest": "work/playtest/173-TRAINER_GRUNT_WEATHER_INST_2/party.json",
+ "party_reuse_justification": "Reused unchanged; no weakness or legality problem recorded last pass and the availability audit still holds for the Weather Institute.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "PELIPPER": "offset 3 -> L49",
+   "FERROTHORN": "offset 3 -> L49",
+   "INTELEON": "offset 2 -> L48",
+   "LUDICOLO": "offset 2 -> L48"
+  },
+  "result": "PASS - all four match 48 + offset - 2; driver reported level_cap 48."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 41,
+   "run_dir": "work/playtest/173-TRAINER_GRUNT_WEATHER_INST_2/r2",
+   "outcome": "won",
+   "turns": 5,
+   "decisions": 8,
+   "player_faints": 2,
+   "opponent_faints": 4,
+   "ai_decision_seconds_max": 0.887,
+   "why": "I deliberately held the Mega back on turn 1 so the room kept its own rain and the Weather Ball check could be made honestly. Ferrothorn converted Iron Defense into a Body Press that OHKOed a 170 HP Magnezone on turn 2; Mega Charizard Y then flipped the sky and a 4x Heat Wave removed Pelipper and Ferrothorn together, but Inteleon and Ludicolo focus-fired Charizard down on the next turn. Dragonite's Extreme Speed cleaned up."
+  }
+ ],
+ "showcase_escalation_check": {
+  "declared_before_play": "Rain must be present at turn 0 and must come from Pelipper's Drizzle, not from the room.",
+  "result": "PASS",
+  "evidence": "start state weather=['B_WEATHER_RAIN_NORMAL'] while field_source.weather_at_turn_0=['none'], from_map=false. The rain is the ability, not a room effect. Stage 1 (none) -> stage 4 (rain) escalation is mechanically real."
+ },
+ "weather_ball_check": {
+  "question": "Is Weather Ball fired under the correct weather?",
+  "result": "PASS",
+  "evidence": [
+   "Turn 1, under Pelipper's OWN rain and with no player weather on the field, Pelipper's latched choice was MOVE_WEATHER_BALL targeting battler 0, the Fire/Flying Mega-candidate Charizard. In rain Weather Ball is a Water move, so that is the correct type at the correct 2x target. It did not resolve only because Togekiss's Serene Grace Air Slash flinched it.",
+   "Turn 3 Pelipper again chose Weather Ball at Charizard. That turn my Mega Evolution resolved Drought BEFORE moves, flipping rain to sun, so the move executed as a FIRE attack into a Fire/Flying body and read 'not very effective'."
+  ],
+  "assessment": "This is the same observation the previous pass logged as a major AI defect, and having now seen the turn-1 case I do not agree it is one. The opponent decides at turn start and, per the September 15 no-omniscience rule, cannot read my pending Mega Evolution; the weather it scored against was the weather that existed when it chose. Under the weather it actually knew about, Weather Ball was selected correctly both times. I am downgrading the previous 'type-resolution bug in the scoring of a weather-dependent move' finding to 'not a defect - a consequence of the no-omniscience design'. Reported for the AI owner rather than asserted as a bug."
+ },
+ "strategy_checks": [
+  {
+   "check": "RAIN flag is backed by an automatic setter",
+   "result": "PASS",
+   "evidence": "Pelipper's Drizzle set rain at battle start."
+  },
+  {
+   "check": "TAILWIND flag is backed by a real user",
+   "result": "PASS_RESOLVED",
+   "evidence": "Turn 2: 'The opposing Pelipper used Tailwind! A tailwind started blowing on the opposing side.' At L49 Pelipper now survives long enough to actually set it - in the previous pass the choice was latched but never resolved. The Tailwind then mattered: it let Ferrothorn move before Magnezone the same turn and land the Body Press that KOed it."
+  },
+  {
+   "check": "SETUP flag is backed by a real Iron Defense",
+   "result": "PASS_RESOLVED_AND_CONVERTED",
+   "evidence": "Turn 1: 'The opposing Ferrothorn used Iron Defense! Defense rose sharply' (+2). Turn 2 it converted that boost into Body Press for a clean OHKO on a full-HP 170 HP Magnezone. This is the single biggest change from the previous pass, where Ferrothorn died on turn 1 without acting. The authored Iron Defense -> Body Press plan is now demonstrably real at L49."
+  },
+  {
+   "check": "Pelipper uses Wide Guard when that is what protects Ferrothorn's turn",
+   "result": "NOT_EXERCISED",
+   "evidence": "No spread move was aimed at the pair while Pelipper was alive this run, so Wide Guard had no case to answer. The previous pass's Wide Guard criticism is not re-testable from this run."
+  },
+  {
+   "check": "Inteleon's Snipe Shot / Sniper pressure",
+   "result": "PASS",
+   "evidence": "Turn 4: Inteleon opened with Snipe Shot into Mega Charizard Y for super-effective damage and, together with Ludicolo's Hydro Pump, KOed it in one turn. Clean focus fire."
+  },
+  {
+   "check": "Swift Swim Ludicolo is the fast-rain mode",
+   "result": "FAIL_BY_PLAYER_COUNTERPLAY",
+   "evidence": "Ludicolo entered after my Drought had replaced the rain and spent the whole fight at normal speed - exactly what the dossier's crack line predicts. It still contributed a Hydro Pump to the Charizard KO and an Ice Beam at Dragonite. Not an AI fault."
+  }
+ ],
+ "protect_ledger": [],
+ "protect_summary": "Zero opposing Protects across the whole battle, and none of them were obviously missed: the room spent every turn either setting up (Iron Defense, Tailwind) or focus-firing, and both of those were higher value than guarding on the turns concerned.",
+ "consecutive_protect_risk": "none",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 0.887 s (53 frames), inside the 1.2 s budget.",
+  "The previous pass's two recorded defects did not reproduce: Wide Guard had no spread move to answer, and the Weather Ball type issue is reassessed above as correct behaviour under the no-omniscience rule.",
+  "Turn-2 focus fire (Pelipper Tailwind into Ferrothorn Body Press) and turn-4 focus fire (Snipe Shot plus Hydro Pump into the Mega) were both genuinely good doubles decisions."
+ ],
+ "level_changes": [],
+ "level_change_rationale": "Won with 2 player faints after a real fight (Magnezone OHKOed by the authored Iron Defense -> Body Press line, Mega Charizard Y focus-fired down the following turn). That is the 'keep' branch of the calibration rule. The +1 applied to Pelipper and Ferrothorn in the previous pass did exactly what it was meant to do - both members now survive long enough to execute their authored tactics - so no further change.",
+ "verdict": "calibrated",
+ "could_this_be_cooler": "Retain the composition; the defensive-Steel-mode versus fast-Water-mode contrast now demonstrably plays out, which it did not before. The one structural note from the previous pass still stands and is worth keeping on the list: the room's identity is rain and its rain has exactly one source with no backup, so a single Drought or Sand Stream turn deletes the theme permanently. Giving Pelipper Rain Dance in the Weather Ball slot would let the room take its own weather back once, make the Damp Rock matter, and turn the player's weather swap into a two-turn argument. Flagged, not changed.",
+ "authored_set_legality": "No legality problem. Drizzle, Damp Rock, Iron Barbs, Sniper, Scope Lens and Swift Swim all resolved as authored.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic."
+}

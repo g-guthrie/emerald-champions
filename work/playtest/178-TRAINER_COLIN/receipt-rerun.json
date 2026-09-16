@@ -1,0 +1,99 @@
+{
+ "play_order": 178,
+ "e_group": "E0253",
+ "trainer": "TRAINER_COLIN",
+ "class": "regular",
+ "location": "Route120",
+ "cap": 54,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/178-TRAINER_COLIN/receipt.json",
+ "party_manifest": "work/playtest/178-TRAINER_COLIN/party.json",
+ "party_reuse_justification": "Reused unchanged. The previous receipt recorded no weakness and no legality problem; the manifest is the cap-54 Route 119 rebuild, and every source map precedes Route 120 in book play order, so it remains chronologically legal here.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "DODRIO": "offset 0 -> L52",
+   "XATU": "offset 1 -> L53",
+   "ORICORIO_PAU": "offset 0 -> L52",
+   "BRAVIARY_HISUI": "offset 1 -> L53"
+  },
+  "result": "PASS - all four match 54 + offset - 2; driver reported level_cap 54."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 91,
+   "run_dir": "work/playtest/178-TRAINER_COLIN/r2",
+   "outcome": "won",
+   "turns": 3,
+   "decisions": 5,
+   "player_faints": 1,
+   "opponent_faints": 4,
+   "ai_decision_seconds_max": 1.021,
+   "why": "Colin won the turn-1 exchange this time: Dodrio's Brave Bird plus Xatu's Psychic KOed a 197 HP Garchomp before it could Rock Slide. Mega Swampert's Ice Punch traded for Xatu, and Excadrill's Rock Slide handled the rest - but Braviary-Hisui's Heat Wave took Azumarill from 222 to 70 and Mega Swampert finished the fight on 7/189."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Magic Bounce Xatu reflects status back at the sender",
+   "result": "NOT_EXERCISED",
+   "evidence": "At L53 Xatu now survives to act - it used Psychic on turn 1 and helped KO Garchomp - but my party's only status move was Amoonguss's Spore and Amoonguss never reached the field. Magic Bounce still has not been put to the test in either run, this time through party composition rather than through Xatu dying first."
+  },
+  {
+   "check": "Xatu sets Tailwind only when it improves the race",
+   "result": "NOT_EXERCISED",
+   "evidence": "Xatu chose Psychic on its one turn, which was correct: it and Dodrio combined for a KO on my faster Garchomp, and Tailwind would not have improved that. Defensible omission, not a defect."
+  },
+  {
+   "check": "Oricorio-Pa'u's Dancer copies a player dance move",
+   "result": "NOT_EXERCISED",
+   "evidence": "My party carried no dance move - the dossier's own stated gap. Oricorio used Revelation Dance as an ordinary attack and was KOed on the same turn by a Rock Slide plus an Ice Punch."
+  },
+  {
+   "check": "Sheer Force Braviary-Hisui is the Choice Specs breaker",
+   "result": "PASS",
+   "evidence": "Braviary-Hisui chose Heat Wave into Azumarill on its entry turn for 152 damage out of 222 - the single hardest hit Colin landed in either run - and the Choice lock then held. It is clearly the most dangerous member of the trainer."
+  },
+  {
+   "check": "Dodrio's Early Bird",
+   "result": "NOT_EXERCISED",
+   "evidence": "No sleep was inflicted. Dodrio used Brave Bird three times, contributed to the Garchomp KO, and died to its own Life Orb plus recoil chip on turn 3."
+  },
+  {
+   "check": "Colin focus-fires rather than splitting damage",
+   "result": "PASS",
+   "evidence": "Turn 1 both members attacked Garchomp and KOed it; turn 2 both attacked Swampert and took it from 189 to 7. Two clean focus-fire turns in a row."
+  }
+ ],
+ "protect_ledger": [],
+ "protect_summary": "Zero opposing Protects again. Three of Colin's four members carry Protect. Unlike the previous pass I am willing to call this a mild pattern rather than a short-fight artifact: on turn 3 Dodrio was at 29/161 in front of a revealed spread Rock Slide user and still chose Brave Bird, dying to its own recoil. A Protect there was clearly better than a suicide attack. Logged as a note, not a defect, because the Brave Bird still contributed damage and the AI cannot read my committed commands.",
+ "consecutive_protect_risk": "none",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 1.021 s (61 frames), inside the 1.2 s budget.",
+  "The +1 on Xatu converted directly: at L52 it died before acting, at L53 it acted and helped take a Pokemon off me on turn 1."
+ ],
+ "level_changes": [
+  {
+   "member": "DODRIO",
+   "field": "offset",
+   "before": 0,
+   "after": 1,
+   "reason": "First-attempt win with 1 player faint, inside the +1 review threshold. Dodrio is one of the two joint-lowest members at offset 0. This is the second and final step of its +/-2 budget (it began the pass series at -1)."
+  },
+  {
+   "member": "ORICORIO_PAU",
+   "field": "offset",
+   "before": 0,
+   "after": 1,
+   "reason": "Same trigger, same band, and its full +/-2 budget was unspent. Oricorio has been KOed in one turn in both runs, so Dancer and Quiver Dance remain entirely unobserved; one more level is the only lever available to buy it a turn."
+  }
+ ],
+ "level_change_rationale": "Won on the first attempt with 1 new player faint, below the three-faint aim, so the review applies. This is genuinely closer than the previous pass - Garchomp was lost outright on turn 1, Mega Swampert finished on 7/189 and Azumarill on 70/222 - so I am raising only the two members still sitting at offset 0 while the cap is 54, and leaving Xatu (+1) and the Choice Specs Braviary-Hisui (+1) exactly where they are. Braviary-Hisui in particular is correctly weighted and is not the problem.",
+ "verdict": "still too easy",
+ "could_this_be_cooler": "Unchanged from the previous pass and now better evidenced: all four members are Flying types and three are Psychic/Flying, so one spread Rock Slide from one Pokemon is super effective against the entire trainer every single turn. Raising offsets makes that Rock Slide take one more turn; it does not change the shape of the fight. The fix is one Rock-resistant body that still fits a bird keeper - Skarmory is the obvious candidate: Steel/Flying resists Rock outright, and Sturdy beside Magic Bounce is a far more annoying support pair than Dodrio contributes. Flagged, not changed.",
+ "authored_set_legality": "No legality problem. Magic Bounce, Dancer, Sheer Force with Choice Specs, Early Bird and the ORICORIO_PAU and BRAVIARY_HISUI form aliases all resolved as authored.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic."
+}

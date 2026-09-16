@@ -1,0 +1,94 @@
+{
+ "play_order": 169,
+ "e_group": "E0238",
+ "trainer": "TRAINER_PHIL",
+ "class": "regular",
+ "location": "Route119",
+ "cap": 48,
+ "difficulty": "medium",
+ "pass": "rerun",
+ "build_dir": "work/agent-battle-build-5",
+ "supersedes": "work/playtest/169-TRAINER_PHIL/receipt.json",
+ "party_manifest": "work/playtest/169-TRAINER_PHIL/party.json",
+ "party_reuse_justification": "Reused the prior run's manifest unchanged. The previous receipt recorded no weakness and no legality problem; every member's source map precedes Route 119 in book play order per the manifest's availability_audit, so it remains chronologically legal for this battle.",
+ "level_verification": {
+  "expected_rule": "resolved level == cap + current authored offset - 2 (Medium)",
+  "observed": {
+   "STARAPTOR": "offset 0 -> L46",
+   "FARFETCHD": "offset 0 -> L46",
+   "KILOWATTREL": "offset 0 -> L46",
+   "UNFEZANT": "offset 1 -> L47"
+  },
+  "result": "PASS - all four resolved levels equal 48 + offset - 2; driver reported level_cap 48."
+ },
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 1,
+   "run_dir": "work/playtest/169-TRAINER_PHIL/r2",
+   "outcome": "won",
+   "turns": 1,
+   "decisions": 2,
+   "player_faints": 0,
+   "opponent_faints": 4,
+   "ai_decision_seconds_max": 0.603,
+   "why": "Mega Charizard Y evolved on turn 1; its Drought sun-boosted Heat Wave OHKOed Staraptor and Farfetch'd together. Turn 2 a second sun Heat Wave OHKOed Kilowattrel and Unfezant together. Two spread attacks ended the trainer."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "TAILWIND flag is backed - Staraptor or Unfezant actually sets Tailwind",
+   "result": "FAIL",
+   "evidence": "Staraptor's latched turn-1 choice was Brave Bird, not Tailwind, and it was KOed before executing. Unfezant entered on turn 2 and was KOed before acting. Tailwind was not set at any point in either the original run or this rerun. At +1 the Tailwind lead still does not survive one spread Fire attack."
+  },
+  {
+   "check": "Farfetch'd Feint is used only to open a shield for a partner's useful hit",
+   "result": "NOT_EXERCISED",
+   "evidence": "Farfetch'd's latched turn-1 choice was Brave Bird; it was KOed before acting. No empty Feint observed."
+  },
+  {
+   "check": "Volt Absorb Kilowattrel is deployed as the Electric answer",
+   "result": "PASS",
+   "evidence": "Kilowattrel entered on turn 2 and chose Thunderbolt into Mega Charizard Y (2x on Fire/Flying) - the correct target. It executed the attack and then fell to the same turn's Heat Wave."
+  },
+  {
+   "check": "Defiant Farfetch'd converts an opposing Intimidate into an Attack boost",
+   "result": "NOT_EXERCISED",
+   "evidence": "Party carried no Intimidate, exactly as the crack line recommends."
+  },
+  {
+   "check": "Intimidate lands on entry",
+   "result": "PASS",
+   "evidence": "Turn 0 state: Charizard and Togekiss both at atk -1 from Staraptor's Intimidate."
+  }
+ ],
+ "protect_ledger": [],
+ "protect_summary": "Zero opposing Protects. All four members carry Protect and none used one, but neither side reached a second decision point against a live opponent, so there is no basis to call this poor guarding.",
+ "consecutive_protect_risk": "none",
+ "ai_defects": [],
+ "ai_notes": [
+  "Opponent decision time peaked at 0.603 s (36 frames), inside the 1.2 s budget.",
+  "Every latched opponent choice observed was an attack at a legal, sensible target. Nothing nonsensical occurred; the trainer simply never got a full turn."
+ ],
+ "level_changes": [
+  {
+   "member": "FARFETCHD",
+   "field": "offset",
+   "before": 0,
+   "after": 1,
+   "reason": "Zero-faint, two-turn first-attempt win. Farfetch'd is one of the two joint-lowest bodies at offset 0 and had its full +/-2 budget unspent (the earlier pass raised only Staraptor). +1 is the correct minimum step under the review rule."
+  },
+  {
+   "member": "KILOWATTREL",
+   "field": "offset",
+   "before": 0,
+   "after": 1,
+   "reason": "Same trigger, same band. Kilowattrel is the only member that landed an attack in either run and is the authored Electric answer; one more level is the cheapest way to buy it a second turn."
+  }
+ ],
+ "level_change_rationale": "Won on the first attempt in two turns with zero player faints, which is squarely the +1 review trigger. I deliberately did not raise Staraptor again: it is already at +1 total (from -1) after the previous pass, and the honest finding from both runs is that a single spread Fire attack under self-made sun removes any member of this trainer regardless of level, so spending the last of Staraptor's budget would buy nothing. Farfetch'd and Kilowattrel were both untouched at offset 0 and each takes +1, well inside the +/-2 cap.",
+ "verdict": "still too easy",
+ "could_this_be_cooler": "The previous pass's answer stands and this rerun sharpens it: four Flying types with a shared Rock/Electric weakness, and now demonstrably a shared Fire weakness too, means one spread attack from one Pokemon ends the trainer in two turns. Levels cannot fix a four-way shared weakness. The concrete suggestion is unchanged - swap base Farfetch'd for Farfetch'd-Galar (Fighting, Leek + Focus Energy), which keeps the bird-keeper theme, preserves the Defiant-adjacent flavour, and breaks the mono-Flying wall so a single spread move stops being a whole answer. Flagged, not changed.",
+ "authored_set_legality": "No legality problem. All four members, abilities, items and moves resolved as authored in the work/agent-battle-build-5 ROM.",
+ "driver_note": "Driver note: per-turn `damage`/`faints` are keyed by Pokemon identity (player:N / opponent_a:N) as of the mid-session driver update, and `occupant_changed` names slots that changed hands. All HP figures in this receipt were read from `state` and from battle text, not from slot-keyed per-turn damage arithmetic, so none of them depend on the old unreliable representation."
+}
