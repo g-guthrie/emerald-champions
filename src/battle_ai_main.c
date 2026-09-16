@@ -3492,7 +3492,10 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (!hasPartner
          || !HasDamagingMove(battlerAtkPartner)
          || aiData->abilities[battlerAtkPartner] == ABILITY_GOOD_AS_GOLD
-         || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove)))
+         || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove))
+         // A fixed or percentage damage move ignores the multiplier entirely,
+         // so boosting it spends the turn for nothing.
+         || (aiData->partnerMove != MOVE_NONE && IsFixedDamageMove(aiData->partnerMove)))
         {
             ADJUST_SCORE(WORST_EFFECT);
         }

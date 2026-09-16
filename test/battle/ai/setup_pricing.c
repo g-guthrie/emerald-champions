@@ -173,3 +173,54 @@ AI_DOUBLE_BATTLE_TEST("EC setup pricing: recovery beats a shield that banks less
         EXPECT(opponentLeft->hp > 10);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC setup pricing: Helping Hand is not spent on damage it cannot multiply")
+{
+    bool32 fixed;
+    PARAMETRIZE { fixed = TRUE; }
+    PARAMETRIZE { fixed = FALSE; }
+    GIVEN {
+        AI_FLAGS(SETUP_FLAGS);
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Defense(150); SpDefense(150); Speed(10); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(300); MaxHP(300); Speed(5); Moves(MOVE_SPLASH); }
+        // Endeavor's damage is the difference in HP and Seismic Toss's is the
+        // level: neither can be multiplied, so the boost buys nothing. Bite can.
+        OPPONENT(SPECIES_SHINX) {
+            Level(30); HP(150); MaxHP(150); Attack(70); Speed(80);
+            Ability(ABILITY_RIVALRY); Moves(MOVE_HELPING_HAND, MOVE_SPARK);
+        }
+        OPPONENT(SPECIES_DODUO) {
+            Level(30); HP(20); MaxHP(150); Attack(80); Speed(60);
+            Ability(ABILITY_RUN_AWAY); Moves(fixed ? MOVE_ENDEAVOR : MOVE_DRILL_PECK, MOVE_PROTECT);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_SPLASH);
+            if (fixed)
+                NOT_EXPECT_MOVE(opponentLeft, MOVE_HELPING_HAND);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC setup pricing: a guard that denies nothing loses the turn to a status move")
+{
+    GIVEN {
+        AI_FLAGS(SETUP_FLAGS);
+        // Full health, turn one, and nothing on the board can be blocked: the
+        // safest turn this side will get belongs to the status move.
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(300); MaxHP(300); Defense(150); SpDefense(150); Speed(60); Moves(MOVE_SPLASH); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(300); MaxHP(300); Defense(150); SpDefense(150); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_SLOWPOKE) {
+            Level(30); HP(69); MaxHP(69); Defense(80); SpDefense(60); Speed(15);
+            Ability(ABILITY_OBLIVIOUS); Moves(MOVE_YAWN, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+        }
+    }
+}

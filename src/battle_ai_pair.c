@@ -73,6 +73,11 @@
 // no contact with the guard model at all, which is why a team whose four
 // members all carried Protect never used it.
 #define PAIR_GUARD_BANKED_CONSERVATIVE 20
+// A guard that denies nothing at all bought nothing at all. The banked share
+// prices what a shield keeps, so it says nothing about a shield with no denial
+// to keep - and a turn-one guard from full health was still winning the safest
+// setup or status turn its side would get.
+#define PAIR_GUARD_EMPTY_COST 30
 
 // An authored signature interaction (ACTIVATE / INSTRUCT / AFTER_YOU) is the
 // point of the trainer, not an accident of the damage arithmetic. Reward it on
@@ -525,6 +530,28 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
             ev->choices[actor][ev->count[actor]++] = (struct PairAction){MOVE_STRUGGLE, AI_SCORE_DEFAULT, 0, IsBattlerAlive(GetOppositeBattler(actor)) ? GetOppositeBattler(actor) : GetOppositeBattler(GetPartnerBattler(actor)), .executedMove = MOVE_STRUGGLE};
         else
             ev->choices[actor][ev->count[actor]++] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actor};
+    }
+}
+
+// Helping Hand multiplies an attack's power. A move whose damage is a fixed
+// number, a fraction of the target's HP, or a reflection of damage taken
+// ignores that multiplier, so the turn spent boosting it buys nothing.
+bool32 IsFixedDamageMove(enum Move move)
+{
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_FIXED_HP_DAMAGE:
+    case EFFECT_FIXED_PERCENT_DAMAGE:
+    case EFFECT_LEVEL_DAMAGE:
+    case EFFECT_PSYWAVE:
+    case EFFECT_ENDEAVOR:
+    case EFFECT_FINAL_GAMBIT:
+    case EFFECT_REFLECT_DAMAGE:
+    case EFFECT_OHKO:
+    case EFFECT_BIDE:
+        return TRUE;
+    default:
+        return FALSE;
     }
 }
 
@@ -2724,6 +2751,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     // that chose the guard. Measured inside the trial, so turn order, misses,
     // redirection and an ally that removes the attacker first all apply.
     s32 guardDenied[MAX_BATTLERS_COUNT] = {0};
+    u32 guardUsed = 0;
     s32 tacticReward[MAX_BATTLERS_COUNT] = {0};
     u8 sideGuardUser[NUM_BATTLE_SIDES][2];
     memset(sideGuardUser, MAX_BATTLERS_COUNT, sizeof(sideGuardUser));
@@ -2957,6 +2985,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 continue;
             if (chance < 100)
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+            guardUsed |= 1u << actor;
             if (move == MOVE_WIDE_GUARD)
             {
                 wideGuard |= 1u << GetBattlerSide(actor);
@@ -3027,7 +3056,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (effect == EFFECT_HELPING_HAND)
         {
             if (hp[partner] && !(acted & (1u << partner))
-             && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD)
+             && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD
+             && !IsFixedDamageMove(other->executedMove))
                 boost[partner] = boost[partner] * 3 / 2;
             // A wasted boost already produces no damage in this trial. An
             // extra penalty here makes Helping Hand + Protect look worse than
@@ -4265,8 +4295,15 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     // threat returns next turn and the foes can focus the unprotected ally, so
     // bank only the share a payoff makes real.
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+    {
+        if (GetBattlerSide(actor) != ev->side)
+            continue;
         if (guardDenied[actor])
             score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions, guardDenied[actor])) / 100;
+        else if ((guardUsed & (1u << actor)) && !ev->waitingPayoff
+              && !PairGuardPartnerPayoff(actor, actions))
+            score -= PAIR_GUARD_EMPTY_COST;
+    }
     // Next-turn value that a one-turn board cannot see. Each term is paid only
     // when the effect actually landed in this trial and its owner or victim is
     // still standing at the end of it, so a boost that gets its user killed and
