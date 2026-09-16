@@ -1,0 +1,36 @@
+{
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "elf_sha256": "34d3c6af9a6b7bbbb5b8c62ee62078c83eac6634733af6c44fe42f7863ec53af",
+  "seed": 1,
+  "trainer_a": "TRAINER_ASHLEY",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 54,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/192-TRAINER_ASHLEY/party_b54_ashley.json",
+  "party_sha256": "e6fcafa29da702a86ec3d848eea6013b1e77f96617f360f2b039c9de79d45f84",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "Feather Badge chapter cap 54 benchmark party B (play_order 181-192) | lead order: REGIELEKI, ZAPDOS",
+    "party": 6
+  },
+  "started": {
+    "frames": 1748
+  },
+  "replacement_commits": {
+    "turn": 6,
+    "slots": {
+      "0": 3
+    }
+  }
+}

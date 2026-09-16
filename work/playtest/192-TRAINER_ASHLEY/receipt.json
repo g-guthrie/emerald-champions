@@ -1,0 +1,36 @@
+{
+  "play_order": 192,
+  "e_group": "E0286",
+  "trainer": "TRAINER_ASHLEY",
+  "class": "gym",
+  "location": "FortreeCity_Gym",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Pelipper/Mantine/Cramorant/Swanna (all +2) L54, Gyarados (+1) L53, Pidgeot (-1) L51 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/192-TRAINER_ASHLEY/party_b54_ashley.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_ashley.json (Regieleki/Zapdos lead)", "outcome": "won", "turns": 6, "player_faints": 4, "opponent_faints": 6,
+     "why": "Double Electric lead removed Pelipper and Gyarados at 4x in two turns, but rain then took both Electrics back: a rain-boosted Waterfall OHKOed Regieleki and two rain-boosted Hydro Pumps OHKOed a 211 HP Zapdos on the same turn. The rest was Mega Gardevoir spread damage behind Amoonguss's Rage Powder, finished by Ice Shard priority on a 29 HP Mega Pidgeot."}
+  ],
+  "strategy_checks": [
+    {"check": "Pelipper's Drizzle establishes rain and Damp Rock extends it", "result": "PASS", "evidence": "Rain was already up at turn 0 and held for the entire six-turn battle despite Pelipper dying on turn 1, which is the Damp Rock doing its job. Rain-boosted Water moves scored three of my four faints."},
+    {"check": "Pelipper sets Tailwind", "result": "FAIL", "evidence": "Selected on turn 1 but Pelipper was KOed by a 4x Thunderbolt before the move resolved. Fourth team in my block whose authored Tailwind never landed."},
+    {"check": "Gyarados sets up with Dragon Dance behind Intimidate and Lum", "result": "FAIL", "evidence": "Intimidate landed on entry, but Gyarados chose Protect on turn 1 and Waterfall on turn 2 and never selected Dragon Dance. Its Waterfall did OHKO a 167 HP Regieleki, so the slot still earned its place."},
+    {"check": "Mantine converts Swift Swim under its partner's rain", "result": "PASS", "evidence": "Doubled Speed let it move before both Zapdos and Mega Gardevoir; its rain-boosted Hydro Pump on turn 3 was half of what removed a full-HP Zapdos. Exactly the intended rain payoff."},
+    {"check": "Cramorant's Gulp Missile fires off Surf", "result": "NOT OBSERVED", "evidence": "Cramorant selected Surf on turns 4 and 5 but Rage Powder pulled the move and no Gulp Missile message ever appeared. The signature ability was never seen."},
+    {"check": "Mega Pidgeot's No Guard makes Hurricane unmissable", "result": "PASS", "evidence": "Mega Evolved on entry turn 6 and its Hurricane landed and finished Amoonguss. Worth noting the ability is partly redundant here - rain already makes Hurricane 100% accurate, and Mantine's and Swanna's Hurricanes never missed either."},
+    {"check": "Swanna Hydration / Weather Ball", "result": "PARTIAL", "evidence": "Weather Ball became Water in rain and was 2x on Mamoswine, KOing it on the last turn. Hydration was never needed because nothing statused it."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Gyarados", "payoff": "blocked a 4x Transistor Thunderbolt on the opening turn - a correct read of the obvious Electric threat before it had fired"},
+    {"attempt": 1, "turn": 2, "battler": "Cramorant", "payoff": "blocked a 4x Thunderbolt on the turn it entered, which would have been an outright knockout"}
+  ],
+  "protect_summary": "2 opponent Protects, both blocking a 4x Electric attack that would have been lethal, 0 empty, no consecutive guarding. Correct and disciplined guarding from a team that knows its shared weakness.",
+  "ai_defects": [],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Four player faints including both Electric attackers and a win with two Pokemon left is the right weight for the last Gym room before Winona. The -1 on Mega Pidgeot is also correctly judged: No Guard Hurricane is largely redundant under its own team's rain, so the ace is not worth a positive offset.",
+  "cooler": "Keep. This is the strongest-built room in the Gym: the rain is genuinely load-bearing (it turned two 4x-weak Water/Flying bodies into the things that killed both of my Electric attackers), Swift Swim and Hydration and Weather Ball all key off it, and Damp Rock means killing the setter does not end the plan. Two concrete improvements. First, Mega Pidgeot's No Guard duplicates what the rain already provides; Heat Wave plus Hurricane on a body that is not Water-typed is the room's only non-Water angle, so leaning into that - or giving the slot to a Mega that gains something the rain does not already grant - would sharpen the ace. Second, Cramorant's Gulp Missile is the most charming thing in the room and it never fired in six turns; making Surf its only Water move (it currently has Surf, Hydro Pump and Hurricane competing) would make the missile far more likely to appear.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "No level change was made for this battle."
+}
