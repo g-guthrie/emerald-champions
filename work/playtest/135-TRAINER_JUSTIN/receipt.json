@@ -1,0 +1,53 @@
+{
+  "play_order": 135,
+  "e_group": "E0161",
+  "trainer": "TRAINER_JUSTIN",
+  "class": "casual",
+  "location": "Route110_TrickHousePuzzle3",
+  "cap": 42,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"KECLEON": 39, "MALAMAR": 40, "BOUFFALANT": 40, "CACTURNE": 41},
+  "cap_window_confirmation": "Authored offsets -1/0/0/1 resolved to 39/40/40/41, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42. Note that work/playtest/battle_index.json lists this battle's cap window as 48/48, but its play_order (135) places it before Norman at play_order 145, and 48 only becomes the live cap once Norman's Balance Badge is earned in C27. Played at 42 per the block instruction; if the index's 48 is the intended window this battle should be replayed at 48 and the resolved levels would be 45/46/46/47.",
+  "party_manifest": "work/playtest/135-TRAINER_JUSTIN/party.json",
+  "pre_declared_strategy_checks": [
+    "Kecleon's Protean changes its type to the move it uses, before the move lands",
+    "Kecleon opens with Fake Out or attacks, rather than wasting the turn",
+    "Malamar's Contrary makes Superpower a boosting move rather than a self-debuff",
+    "Contrary also inverts Intimidate, so my own Incineroar should RAISE Malamar's Attack",
+    "Bouffalant's Soundproof blocks sound moves - specifically Mega Gardevoir's Pixilate Hyper Voice and Vikavolt's Bug Buzz",
+    "Cacturne's Water Absorb (no Water move brought, so untestable) and Spiky Shield as a contact-punishing guard",
+    "Topsy-Turvy is used only when reversing the target's stages actually helps Justin",
+    "Every opposing Protect / Spiky Shield has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/135-TRAINER_JUSTIN/a1", "seed": 135, "outcome": "won", "turns": 3, "decisions": 6, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "The board told me the Contrary interaction before I gave a command: Incineroar's Intimidate landed and Malamar's Attack went UP a stage while Kecleon's went down. T1 I used Fake Out on Kecleon rather than on Malamar, specifically to deny Kecleon's own Fake Out - Incineroar is faster, so mine resolved first and Kecleon's never happened, which protected Mega Gardevoir's turn. Pixilate Hyper Voice then killed a full-HP 156 HP Malamar outright at 2x into its Dark half. T2 cost me Gardevoir: Kecleon used Shadow Sneak, became Ghost through Protean, and hit Mega Gardevoir for 2x priority damage, then Bouffalant's Head Charge finished it - and in the same turn Hyper Voice printed 'It doesn't affect the opposing Bouffalant' against Soundproof, exactly as declared. A critical Knock Off killed Kecleon. T3 cost me Incineroar: Cacturne is Adamant with 252 Speed EVs and moved first, Drain Punch is 2x into Incineroar's Dark half, and then Bouffalant's Close Combat finished it - my Flare Blitz killed Cacturne in between and Amoonguss landed Spore on Bouffalant. T4 Rillaboom's Wood Hammer, critical, removed the sleeping Bouffalant."}
+  ],
+  "strategy_checks": [
+    {"check": "Kecleon Protean", "result": "PASS", "evidence": "T2: 'The opposing Kecleon used Shadow Sneak!' immediately followed by 'The opposing Kecleon transformed into the Ghost type' and then 'It's super effective!'. The type change resolved before the move landed, so Shadow Sneak got same-type damage and hit Mega Gardevoir's Psychic half for 2x. This is the dossier's headline interaction and it fired correctly on the only turn Kecleon got to act."},
+    {"check": "Kecleon's opening turn is not wasted", "result": "PASS in intent, denied in practice", "evidence": "Kecleon selected Fake Out on turn 1 - the correct opening - but my Incineroar is faster at the same +3 priority and flinched it first. Choosing Fake Out was right; it simply lost the priority race. Worth recording that Kecleon's base 40 Speed means its Fake Out loses to most of the common Fake Out users a player will bring."},
+    {"check": "Malamar Contrary makes Superpower a boost", "result": "PASS on selection, NOT OBSERVED on payoff", "evidence": "Malamar selected MOVE_SUPERPOWER on turn 1 - the right move, because Contrary turns its Attack and Defense drops into +1/+1 - but Pixilate Hyper Voice killed it before the move resolved. The selection proves the AI is not treating Superpower as a cost."},
+    {"check": "Contrary inverts Intimidate", "result": "PASS, and it is the best thing in this fight", "evidence": "Turn 0, before any command: Kecleon at atk -1 and Malamar at atk +1. My own Incineroar handed Malamar a free Attack boost. This is a genuine trap for the single most common support ability in doubles and the room deserves credit for it - it is not mentioned in the dossier's plan text, which is an omission worth fixing in the prose."},
+    {"check": "Bouffalant Soundproof blocks sound moves", "result": "PASS, declared in advance and confirmed verbatim", "evidence": "T2: 'Gardevoir used Hyper Voice!' / 'It doesn't affect the opposing Bouffalant...'. Pixilate Hyper Voice is my strongest spread attack and Soundproof made it a complete blank against that slot. It would also have blocked Vikavolt's Bug Buzz, which is why I never sent Vikavolt in. A real, board-changing ability on a casual trainer."},
+    {"check": "Cacturne Water Absorb", "result": "NOT TESTED", "evidence": "My party deliberately carried no Water move - Water is 0.5x into Grass/Dark before the ability even matters, so an absorbing target is never worth attacking with Water. The ability is live on the battler; the check is untestable against a correctly built party rather than failed."},
+    {"check": "Cacturne Spiky Shield", "result": "NOT USED", "evidence": "Cacturne got one action and spent it on Drain Punch into Incineroar, which was 2x, healed it, and was correct - it had no information that a 2x Flare Blitz was already aimed at it. Recording as a defensible aggressive choice, not an empty guard."},
+    {"check": "Topsy-Turvy used only when beneficial", "result": "NOT OBSERVED", "evidence": "Malamar died on turn 1 before a second action. The dossier's own warning that Topsy-Turvy can undo the wrong side's boosts remains untested."},
+    {"check": "Every opposing guard has a payoff", "result": "VACUOUS PASS", "evidence": "Justin's side used no Protect and no Spiky Shield in the entire battle. Kecleon carries Protect and Cacturne carries Spiky Shield; both spent their single action attacking instead. There is no empty guard to report because there is no guard at all."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opposing Protects and zero Spiky Shields across three turns. Both guard holders got exactly one action each and both attacked. Nothing to criticise, but also no evidence about this trainer's guard cadence - the fight was too short to produce any.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Every one of the four selected moves was the right move for its board. Kecleon's Fake Out opening, Malamar's Superpower under Contrary, Cacturne's 2x Drain Punch into a Dark type with the healing attached, and Bouffalant's Close Combat into that same Dark type are all correct.",
+    "Bouffalant in particular played well: Head Charge into a Psychic/Fairy Mega on T2 to finish what Shadow Sneak started, then Close Combat into the Dark type on T3. Two different moves, two correct type reads, two KOs.",
+    "Cacturne's Speed is worth flagging for anyone reading this receipt: the authored spread is Adamant 4/252/0/0/0/252, so it has full Speed investment and moved before my uninvested Incineroar. It is not the slow Grass wall its typing suggests.",
+    "AI decision time peaked at 1.005 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt but lost two of six, including my Mega, to a casual-class trainer. Brief rule 5: won with 2+ faints after a real fight -> keep. No change. This is the correct outcome for the class: Justin is punching above 'casual' without being unfair, and both of my faints came from correct opponent type reads rather than from levels. Raising anything here would push a casual Trick House trainer past route aces in the same cap window.",
+  "could_this_be_cooler": "Keep all four, and fix the dossier prose rather than the team. The dossier's own 'could this be cooler' note says the Contrary and Protean pieces are 'two good solo ideas sharing a field' and that it is flagged, not changed. Having played it, I disagree with the pessimism in one specific way: the room already has a third idea that the prose does not mention and that mattered more than either of the named two - Contrary Malamar inverts Intimidate, so the most standard support lead in competitive doubles hands Justin a free Attack boost on turn 0. That is a teaching moment for a puzzle-room trainer and the plan text should say so, because right now a reader of the dossier would not know it is intentional. The real structural weakness is different from the one flagged: three of the four are slow-to-medium physical attackers with no speed control and no redirection, so a faster team simply removes them in order - I killed a full-health Malamar before it ever moved. If one slot is ever revisited, the thing this room lacks is a reason for the player to not just go fast. Soundproof Bouffalant is the member I would least want touched: blanking Hyper Voice and Bug Buzz on a casual trainer is a genuinely memorable surprise and it is the only ability here that changed which of my six I was willing to send in."
+  ,
+  "legality_problems_in_authored_set": [],
+  "open_question_for_main_agent": "battle_index.json gives this battle cap_window_min/max 48/48 while the block instruction sets cap 42 for everything before Norman. I played at 42. The two readings differ by 6 levels on every member, so this one needs a ruling before the receipt is treated as calibration evidence.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
