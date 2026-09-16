@@ -1,0 +1,85 @@
+{
+ "play_order": 302,
+ "e_group": "E0468",
+ "trainer": "TRAINER_DAPHNE",
+ "class": "gym",
+ "location": "SootopolisCity_Gym_B1F",
+ "cap": 84,
+ "cap_source": "driver level_cap",
+ "difficulty": "medium",
+ "build_dir": "work/agent-battle-build-8",
+ "party_manifest": "work/playtest/302-TRAINER_DAPHNE/party_sootopolis_84_sun.json",
+ "availability_note": "As 301 plus Torkoal (Fiery Path, gate 42), Zapdos (New Mauville sign, reachable legend). Nothing from Ever Grande or the League.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/302-TRAINER_DAPHNE/a1",
+   "seed": 1,
+   "outcome": "won",
+   "turns": 6,
+   "decisions": 8,
+   "player_faints": 1,
+   "opponent_faints": 6,
+   "note": "Torkoal Drought on entry; Lapras Snowscape overwrote it T1 (Lapras is faster). Koko Thunderbolt OHKOed Walrein T1 and Lapras T2; Heat Wave 2HKOed Cryogonal; Dewgong Muddy Water (2x in snow-less sun? sun was gone) took Torkoal 249->49 and KOed Koko (Icy Wind -2 made Koko slower than Dewgong). Raging Bolt Thunderbolt OHKOed Dewgong, Kartana Leaf Blade crit OHKOed Samurott and Rotom-W. Note: scene.gba/elf were deleted early by mistake after turn 6 and restored from the build dir's identical triple before the final turn; the log is continuous."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Lapras Snowscape T1 (weather war)",
+   "result": "PASS",
+   "evidence": "T1 Snowscape replaced Torkoal's sun: 'It started to snow!'. Snow lasted 5 turns (Light Clay is not Icy Rock, so 5)."
+  },
+  {
+   "check": "Freeze-Dry / Blizzard under snow",
+   "result": "FAIL to show",
+   "evidence": "Walrein chose Hydro Pump into Torkoal T1 and died before moving; Lapras chose Hydro Pump T2 and died. No Freeze-Dry or Blizzard was ever selected (no Water target on my side)."
+  },
+  {
+   "check": "Cryogonal Icy Wind speed control",
+   "result": "PASS",
+   "evidence": "T2 and T3 Icy Wind dropped Torkoal/Koko to -2, which is exactly what let Dewgong outspeed and KO Koko T3."
+  },
+  {
+   "check": "Dewgong Encore / Protect",
+   "result": "PASS",
+   "evidence": "T4 Protect blocked Sacred Sword (real); T5 Encore on Raging Bolt failed (Bolt's last move was Booster activation/none)."
+  },
+  {
+   "check": "Samurott physical line, Rotom-W closer",
+   "result": "PASS (selected)",
+   "evidence": "Aqua Jet twice (T4 into Raging Bolt resisted, T5 into Kartana resisted); Rotom-W Protect on entry T6 then died."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "attempt": 1,
+   "turn": 4,
+   "user": "Dewgong",
+   "payoff": "REAL - blocked Kartana Sacred Sword (2x)."
+  },
+  {
+   "attempt": 1,
+   "turn": 6,
+   "user": "Rotom-Wash (last mon)",
+   "payoff": "EMPTY - blocked Leaf Blade + Draco Meteor but bought nothing; died next turn."
+  }
+ ],
+ "ai_defects": [],
+ "theme_note": "Room concept (snow, Freeze-Dry vs Water) showed only as Snowscape + Icy Wind; Freeze-Dry never fired because my party had no Water type, which is the intended crack.",
+ "level_changes": [
+  {
+   "member": "WALREIN",
+   "before": 2,
+   "after": 3
+  },
+  {
+   "member": "CRYOGONAL",
+   "before": 2,
+   "after": 3
+  }
+ ],
+ "level_changes_unverified": "+1 on the two members that died fastest (Walrein OHKOed before moving; Cryogonal 2HKOed). Cannot be re-verified until the main agent rebuilds.",
+ "cooler": "Lapras Snowscape into Freeze-Dry is a strong idea; Walrein on Choice Specs Hydro Pump into a Fire type is where the room loses tempo. A Slush Rush member (Arctozolt/Beartic) would make the snow matter for speed too. Not changed this pass.",
+ "authored_set_legality": "No problem found (Light Clay on Lapras does nothing for Snowscape; the dossier says 'Light Clay' but there are no screens - cosmetic set oddity, not illegality).",
+ "most_worth_rerunning": "E0468 Daphne after the rebuild to confirm Walrein/Cryogonal at offset 3."
+}

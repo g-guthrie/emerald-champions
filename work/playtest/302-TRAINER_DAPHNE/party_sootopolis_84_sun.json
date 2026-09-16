@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0468 TRAINER_DAPHNE Sootopolis gym room 10, cap 84",
+ "availability_audit": "Cap window 84 (driver level_cap). Sootopolis after the Cave of Origin, Rain Badge not earned; nothing from Ever Grande or the League. Every member's source map precedes Sootopolis in chapter order: Tapu Koko/Zapdos/Raikou line (Route 110 / New Mauville, gate 30), Iron Hands (New Mauville, 30), Kartana (Petalburg Woods, 20), Raging Bolt (Route 119, 60), Amoonguss (Foongus line, 42), Torkoal (Fiery Path, 42), Whimsicott (Cottonee line, 14). Reachable legends: Tapu Koko, Zapdos.",
+ "plan": "Torkoal Drought replaces Snowscape; Kartana Sacred Sword/Smart Strike and Iron Hands Drain Punch break the Ice core; Electric for the Waters.",
+ "party": [
+  {
+   "species": "SPECIES_TORKOAL",
+   "moves": [
+    "MOVE_HEAT_WAVE",
+    "MOVE_EARTH_POWER",
+    "MOVE_YAWN",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_QUIET",
+   "ability": "ABILITY_DROUGHT",
+   "item": "ITEM_HEAT_ROCK",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Drought replaces snow/rain (slower than the setters so its weather resolves last)",
+   "availability": "pool gate 42 wild:FieryPath/land_mons"
+  },
+  {
+   "species": "SPECIES_TAPU_KOKO",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_ELECTRIC_SURGE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Electric Surge lead, fast Electric/Fairy damage",
+   "availability": "pool gate 30 legendary_sign:Route110 (reachable legend, Route 110 precedes Mauville)"
+  },
+  {
+   "species": "SPECIES_IRON_HANDS",
+   "moves": [
+    "MOVE_WILD_CHARGE",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_FAKE_OUT",
+    "MOVE_ICE_PUNCH"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_QUARK_DRIVE",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Fake Out + Quark Drive bruiser under Koko's terrain",
+   "availability": "pool gate 30 wild:NewMauville_Inside/land_mons"
+  },
+  {
+   "species": "SPECIES_KARTANA",
+   "moves": [
+    "MOVE_LEAF_BLADE",
+    "MOVE_SACRED_SWORD",
+    "MOVE_SMART_STRIKE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_BEAST_BOOST",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "fast Grass/Steel sweeper, resists Water/Ice-neutral",
+   "availability": "pool gate 20 wild:PetalburgWoods_3/land_mons"
+  },
+  {
+   "species": "SPECIES_RAGING_BOLT",
+   "moves": [
+    "MOVE_THUNDERCLAP",
+    "MOVE_THUNDERBOLT",
+    "MOVE_DRACO_METEOR",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_BOOSTER_ENERGY",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "priority Electric via Thunderclap, Booster Energy SpA",
+   "availability": "pool gate 60 wild:Route119/land_mons"
+  },
+  {
+   "species": "SPECIES_ZAPDOS",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_HURRICANE",
+    "MOVE_TAILWIND",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_STATIC",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Tailwind + Electric/Flying damage",
+   "availability": "pool gate 30 legendary_sign:NewMauville_Inside (reachable legend)"
+  }
+ ]
+}
