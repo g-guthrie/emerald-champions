@@ -1,0 +1,103 @@
+{
+  "play_order": 170,
+  "e_group": "E0243",
+  "trainer": "TRAINER_GRUNT_WEATHER_INST_1",
+  "class": "grunt",
+  "location": "Route119_WeatherInstitute_1F",
+  "raid_stage": "1 of 6 - the lobby (no weather)",
+  "cap": 48,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/170-TRAINER_GRUNT_WEATHER_INST_1/party.json",
+  "level_verification": "cap 48: Golbat +5 -> L51, Crawdaunt +1 -> L47, Liepard +1 -> L47, Tentacruel +1 -> L47. All equal cap + offset - 2. --cap 48 correct.",
+  "attempts": [
+    {
+      "seed": 11,
+      "run_dir": "work/playtest/170-TRAINER_GRUNT_WEATHER_INST_1/run-s1",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 0,
+      "opponent_faints": 4
+    }
+  ],
+  "showcase_escalation_check": {
+    "declared_before_play": "Raid stage 1 must show NO weather: weather_at_turn_0 == none in field_source, and no opponent action may set weather at any point in the fight.",
+    "result": "PASS",
+    "evidence": "start state weather=['none'], field_source.weather_at_turn_0=['none'], terrain_is_permanent=false, from_map=false. Across five turns no opposing action set weather; the only weather in the battle was my own Mega Charizard Y Drought on turn 1. The lobby is mechanically weatherless exactly as authored."
+  },
+  "strategy_checks": [
+    {
+      "check": "Golbat opens with Taunt on a support target or U-turns out",
+      "result": "PASS_WITH_QUALIFICATION",
+      "evidence": "Golbat used Brave Bird on turns 1-3 and Taunt on turn 4. The Taunt landed on Magnezone, whose only status move is Protect, at a point where Golbat could not survive the incoming Analytic Thunderbolt. The authored move fired, but on the wrong turn and the wrong target (see ai_defects)."
+    },
+    {
+      "check": "Crawdaunt swings Adaptability Crabhammer / Knock Off, and a turn-one Knock Off strips an item",
+      "result": "FAIL",
+      "evidence": "Crawdaunt's latched turn-1 choice was Crabhammer targeted at Charizard (the correct 2x target) but it was KOed by Solar Beam before executing. It never got a Knock Off turn. The authored 'Knock Off on turn one is what makes the rest of the raid harder' line did not happen because Crawdaunt at L47 does not survive a single sun-boosted 2x Solar Beam."
+    },
+    {
+      "check": "Liepard's Prankster Fake Out and Encore support Crawdaunt / lock a player into a support move",
+      "result": "PARTIAL",
+      "evidence": "Turn 2: Liepard entered and used Fake Out on Mega Charizard (the correct target - the biggest threat), flinching it and denying a Heat Wave. That is a clean, correct Fake Out. Encore never came up; Liepard chose Foul Play on turn 3 into Magnezone, which is a sensible use of Magnezone's own low Attack... Foul Play uses the TARGET's Attack, and Magnezone's Attack is 70 base, so this was a weak choice - Encore or Taunt would have been better. Partial."
+    },
+    {
+      "check": "Tentacruel's Acid Spray is the room's setup move (two-stage SpD drop into a spread Water attack)",
+      "result": "PASS_MECHANICALLY_EMPTY_TACTICALLY",
+      "evidence": "Turn 5: Tentacruel used Acid Spray on Togekiss, 'Togekiss's Sp. Def harshly fell'. The move works and the AI reached for it. But Tentacruel was the last Pokemon alive with no partner to convert the drop, so the two-stage drop bought nothing. The dossier's own memorable interaction (Acid Spray then partner spread Water) needs Tentacruel on the field WITH a partner; see ai_defects."
+    },
+    {
+      "check": "Liquid Ooze punishes drain recovery",
+      "result": "NOT_EXERCISED",
+      "evidence": "I brought no drain move, per the crack line."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 4,
+      "battler": "Tentacruel",
+      "call": "Protect",
+      "payoff": "MODEST - blocked Togekiss's Air Slash (neutral, roughly 40 damage plus a 60% Serene Grace flinch chance) on Tentacruel's entry turn. Real value but small; Tentacruel was at full HP and in no danger."
+    }
+  ],
+  "consecutive_protect_risk": "none.",
+  "ai_defects": [
+    {
+      "turn": 4,
+      "board": "Golbat 89/153 (Eviolite, L51) and Tentacruel 176/176 vs Magnezone 118/170 and Togekiss 100/184. Sun is up. Magnezone's revealed moves at this point: Thunderbolt (used turn 3 for a 2x KO on Golbat's partner slot).",
+      "chosen": "Golbat used Taunt on Magnezone.",
+      "why_wrong": "Magnezone's only status move is Protect, so the Taunt's entire payoff was denying one Protect. Golbat was at 58% HP in front of a revealed super-effective Electric attacker that had just KOed with it, and it died to that attack on the same turn. U-turn (on Golbat's own set, and the authored 'U-turns out' line) would have preserved a L51 Eviolite body and brought in Tentacruel safely; Protect would have bought a turn. Taunt was the lowest-value of its four options.",
+      "better_action": "U-turn, or Protect.",
+      "severity": "minor - a wasted turn on a Pokemon that was about to die anyway, but it is exactly the 'Taunts a support' heuristic firing without checking whether the target actually has support moves worth denying."
+    },
+    {
+      "turn": 3,
+      "board": "Liepard 67/161 (Focus Sash intact) and Golbat vs Magnezone (just switched in) and Togekiss.",
+      "chosen": "Liepard used Foul Play on Magnezone.",
+      "why_wrong": "Foul Play scales off the TARGET's Attack stat. Magnezone is a 70-base-Attack special wall with zero Attack EVs, so Foul Play was close to the weakest move Liepard could have picked into that target. Encore or Taunt (both on the set, both Prankster-boosted to +1 priority) were strictly better, and the dossier names Encore as the intended support line.",
+      "better_action": "Encore or Taunt on Magnezone; or Foul Play aimed at a physical attacker instead.",
+      "severity": "moderate - Foul Play target selection does not appear to weight the target's Attack stat."
+    }
+  ],
+  "ai_notes": [
+    "Crawdaunt's turn-1 target choice (Charizard, 2x Water) was correct. The AI reads type effectiveness for its own attacks well.",
+    "Liepard's Fake Out target (Mega Charizard, the field's biggest threat) was correct and cost me a full Heat Wave."
+  ],
+  "level_changes": [
+    {
+      "member": "CRAWDAUNT",
+      "before": 1,
+      "after": 2,
+      "reason": "Zero-faint first-attempt win. Crawdaunt is the authored engine of this room - the Knock Off that is supposed to strip an item and make the whole raid harder - and at L47 it died to one attack before ever moving. +1 gives it a realistic chance to survive an opening hit and actually execute the tactic the dossier builds the room around."
+    },
+    {
+      "member": "TENTACRUEL",
+      "before": 1,
+      "after": 2,
+      "reason": "Zero-faint first-attempt win; Tentacruel is the authored anchor and it came in last with no partner left, so its Acid Spray setup was structurally dead. +1 with no other change; the real fix is ordering, which is a composition question I am not allowed to touch in this pass (flagged under cooler)."
+    }
+  ],
+  "rerun": "NOT POSSIBLE IN THIS SESSION - opponent levels come from the compiled headless ROM and this agent must not run make. Deferred to the main agent's rebuild.",
+  "could_this_be_cooler": "The concept is right and the Acid Spray fix in the dossier is a genuine improvement, but playing it exposes an ordering problem the dossier does not address: Tentacruel is the setup piece and it is also the LAST member sent out, so Acid Spray's two-stage Special Defense drop has nobody left to convert it. The room's signature interaction can only ever happen if Tentacruel shares the field with Liepard or Crawdaunt. Moving Tentacruel into the lead pair (Tentacruel + Crawdaunt leading, Golbat and Liepard in reserve) would make the authored moment reachable on turn one - Acid Spray into Adaptability Crabhammer - without touching a single species, move or item. That is the change I would recommend, and it is a lead-order change rather than a composition change.",
+  "authored_set_legality": "No legality problem. Acid Spray, Black Sludge, Liquid Ooze, Eviolite on Golbat and Adaptability Crawdaunt all resolved as authored.",
+  "notes": "Mega Charizard Y is an unusually hard counter to this room: Drought halves Water damage, so Adaptability Crabhammer stops being lethal, and sun-boosted one-turn Solar Beam is 2x into Crawdaunt. A player who does not bring weather will find this fight materially harder than my log suggests."
+}
