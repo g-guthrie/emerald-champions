@@ -1,0 +1,37 @@
+{
+  "play_order": 128,
+  "e_group": "E0151",
+  "trainer": "TRAINER_DREW",
+  "class": "regular",
+  "location": "Route111",
+  "cap": 42,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/128-TRAINER_DREW/party.json",
+  "level_audit": "PASS. Stakataka 39 (-1), Golurk 41 (+1), Cacturne 41 (+1), Perrserker 41 (+1). All equal cap 42 + offset - 2. Cap flipped correctly to 42 for the post-badge Route 111 block.",
+  "attempts": [
+    {"seed": 18, "run_dir": "work/playtest/128-TRAINER_DREW/run-s18", "outcome": "won", "turns": 5, "player_faints": 0, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "The Speed-IV bug called out in the dossier is actually fixed - a Trick Room team should not be carrying 31 Speed IVs", "result": "PASS", "evidence": "All four member lines now read ivs=31/31/31/31/31/0, i.e. Speed IV 0 with Brave natures. The room they set now works for them rather than against them."},
+    {"check": "Stakataka chooses Trick Room or Wide Guard according to survival and the expected spread threat", "result": "PASS (Trick Room)", "evidence": "Turn 1: Stakataka used Trick Room and the field flag went up; it was then KOed by the two special attacks. Wide Guard was never chosen, which is correct - neither of my leads had a spread move on their sets, so there was nothing to guard."},
+    {"check": "Golurk attacks while Stakataka sets the room", "result": "PASS", "evidence": "Turn 1 Golurk used Protect rather than attacking - a defensible guard on the turn its partner needs to survive to set the room - then attacked with Iron Fist Drain Punch on turns 2, 3 and 5."},
+    {"check": "Perrserker's Fake Out supports Stakataka's room turn and Steely Spirit boosts a real Steel attack", "result": "PARTIAL", "evidence": "Fake Out was used, but on turn 3 (after Stakataka had already died), aimed at Pelipper - it did flinch the weather setter and blanked its Weather Ball, which is good value, just not the authored ordering. Steely Spirit was confirmed as the live ability and Iron Head was used once on turn 5, but Perrserker's best damage that fight came from Close Combat (92 into Swampert), not from the Steel line the ability amplifies."},
+    {"check": "Cacturne is a Water-immune priority reserve", "result": "PARTIAL", "evidence": "ABILITY_WATER_ABSORB and ITEM_FOCUS_SASH confirmed - and it did cleanly invalidate my whole Water offence, which is exactly the point. But it used Seed Bomb rather than Sucker Punch and was removed in a single turn by Hurricane plus Ice Beam (both 2x), so the priority half never mattered."},
+    {"check": "Steely Spirit does not amplify unrelated Rock/Ghost moves", "result": "PASS", "evidence": "No non-Steel move showed an unexplained boost; Golurk's Shadow Punch was never used and Close Combat's damage was consistent with an unboosted Choice-less attack."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Golurk", "payoff": "empty (but justified)", "detail": "Both player attacks were aimed at Stakataka, so nothing was blocked. However the guard was the correct read on a turn where the partner had to survive to set Trick Room and Golurk itself was the obvious alternative target."},
+    {"turn": 4, "battler": "Golurk", "payoff": "real", "detail": "Blocked both a rain-boosted Weather Ball and a rain-boosted Liquidation (2x on Ground) at 146/162 HP. A clean two-attack denial."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "Sound play throughout, and the guard cadence was good - two Protects from Golurk on turns 1 and 4, never consecutive, one of them a clean double block. Perrserker's Fake Out correctly targeted the weather setter rather than the higher-HP body. No illegal or nonsensical choices.",
+  "level_changes": [
+    {"member": "STAKATAKA", "before": -1, "after": 0, "reason": "Lowest offset on the team and the piece the whole concept rests on; it set the room and was immediately KOed by two special attacks because its enormous Defense does nothing against special damage. One extra level is the honest minimum for the setter of a four-Pokemon Trick Room team."},
+    {"member": "CACTURNE", "before": 1, "after": 2, "reason": "Contributed the least: one Seed Bomb before being removed in a single turn by two 2x attacks. Its Water Absorb is genuinely valuable, so it deserves to be on the field longer."}
+  ],
+  "level_decision": "RAISE. Won on attempt 1 with zero player faints, which is the brief's raise condition and is also well under the AGENTS.md three-faint benchmark for a route fight. +1 each to the two weakest-contributing members. Golurk and Perrserker were left alone - they both played well and Perrserker survived to the last turn at full HP.",
+  "rerun_status": "DEFERRED. The headless ROM in work/agent-battle-build-2 is prebuilt and this pass may not run make or materialize, so a rerun would replay the old levels. Offsets edited in place and left uncommitted for the main agent.",
+  "cooler_note": "The dossier's own verdict was right and the fix landed: with Speed IVs zeroed this is a real Trick Room team rather than four slow Pokemon that happen to own the move, and Wide Guard plus Beast Boost on Stakataka is a genuinely unusual route encounter. What keeps it from landing is that the team has no answer to special damage - Stakataka is 133 HP with 101 special defense and dies before the room it set can be used, and Cacturne's Focus Sash is spent on the first of two easy super-effective hits. The concrete suggestion is defensive rather than offensive: an Assault Vest or Chople-class berry on Stakataka, or simply leading Perrserker's Fake Out on the turn Stakataka sets the room (the plan already describes this ordering, but the AI chose it two turns late), would let the Trick Room actually be spent. The moment worth keeping is the one the dossier names - Wide Guard blanking a spread attack on the turn the room goes up - and it still has never happened, because nothing has brought a spread move into the fight.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}
