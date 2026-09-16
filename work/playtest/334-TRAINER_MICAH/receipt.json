@@ -1,0 +1,31 @@
+{
+ "play_order": 334, "e_group": "E0505", "trainer": "TRAINER_MICAH", "class": "regular", "location": "SSTidalRooms", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; Jolteon offset 0 L98, others offset 1 L99 = cap+offset-2 on Medium.",
+ "difficulty": "medium",
+ "party_manifests": ["work/playtest/334-TRAINER_MICAH/party_pg100_core.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open; same core party as 333 (one reachable legend, Chi-Yu). See the manifest availability audit.",
+ "pre_play_strategy_checks": ["Jolteon Specs Thunderbolt / Volt Switch turn 1", "Lapras sets Snowscape or attacks; Freeze-Dry chosen into a Water target", "Lapras Mega Evolves", "Luxray Intimidate + Snarl before Clawitzer's Mega Launcher pulses", "Clawitzer pulses (Water/Aura/Dark) boosted by Mega Launcher"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_pg100_core.json", "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+   "why": "t1 Fake Out flinched Lapras, Jolteon Specs Thunderbolt hit Incineroar (207, Sitrus), Overheat OHKO'd Jolteon. t2 Chi-Yu out for Rillaboom; Lapras Snowscape; Clawitzer (252 Spe) outsped Incineroar and Mega Launcher Water Pulse OHKO'd it from 285 before Parting Shot. t3 Clawitzer Protected Close Combat (Unseen Fist quarter 67), Wood Hammer OHKO'd Mega Lapras before it moved. t4 Close Combat KO'd Clawitzer, Wood Hammer 186 on Luxray, Wild Charge KO'd -1 Def Urshifu. t5 Luxray Protect; t6 Grassy Glide + crit Moonblast KO. Faints: Incineroar, Urshifu."}
+ ],
+ "strategy_checks": [
+  {"check": "Jolteon Specs Thunderbolt turn 1", "result": "PASS", "evidence": "a1 t1 Thunderbolt 207 into Incineroar (died to Overheat the same turn)"},
+  {"check": "Lapras Snowscape", "result": "PASS", "evidence": "a1 t2 Snowscape after being Fake Out flinched t1"},
+  {"check": "Lapras Mega Evolution", "result": "PASS", "evidence": "opponent party shows LAPRAS_MEGA fainted; it chose Freeze-Dry into Urshifu (Water) t3 - the Freeze-Dry-on-Water read fired, but Wood Hammer KO'd it first"},
+  {"check": "Luxray Intimidate + Snarl", "result": "PARTIAL", "evidence": "Intimidate on entry t3 dropped Urshifu and Rillaboom; it chose Wild Charge (KO on Urshifu) over Snarl, a fine choice"},
+  {"check": "Clawitzer Mega Launcher pulses", "result": "PASS", "evidence": "t2 Water Pulse OHKO'd Incineroar (285); t3 Protect; t4 Aura Sphere chosen (died first)"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 3, "user": "Clawitzer", "payoff": "blocked Close Combat (would have KO'd; Unseen Fist still dealt 67); partner Lapras still died"},
+  {"run": "a1", "turn": 5, "user": "Luxray", "payoff": "empty - last Pokemon, blocked Grassy Glide + Moonblast for one turn of terrain healing only"}
+ ],
+ "protect_summary": "2 Protects: one good, one empty (last-mon stall).",
+ "ai_defects": [],
+ "ai_notes": "Sensible throughout; the Clawitzer Water Pulse into the Fire lead rather than the switching slot was the correct kill.",
+ "level_changes": [],
+ "level_change_rationale": "Won first try 4-2 in 5 turns with two real KOs taken (Water Pulse OHKO, Wild Charge). Keep.",
+ "cooler": "Compact and sharp as authored; Mega Lapras died before Freeze-Dry landed, so the joke never played. A Sitrus/bulk spread on Lapras (it carries 4 HP EVs) would let it survive to fire the move it exists for. Levels only in this pass; no set change.",
+ "legality_notes": "Sets legal; driver accepted the party.",
+ "verification_limit": "No level change."
+}
