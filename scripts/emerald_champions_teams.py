@@ -114,6 +114,13 @@ class Branch:
     strategy: list[str] = field(default_factory=list)
     tactics: list[tuple[str, str, str, str]] = field(default_factory=list)
     mega_slots: int | None = None
+    field: list[str] = field(default_factory=list)
+
+
+def starting_statuses() -> set[str]:
+    """STARTING_STATUS_* names the engine accepts as a trainer's authored field."""
+    text = (ROOT / "include/constants/battle.h").read_text()
+    return set(re.findall(r"F\(STARTING_STATUS_([A-Z_]+),", text))
 
 
 def parse_evs(text: str, where: str) -> str:
@@ -175,6 +182,13 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             if len(values) != len(set(values)) or any(not 1 <= value <= 6 for value in values):
                 raise SystemExit(f"{where}: Mega slots must be distinct party positions 1..6")
             current.mega_slots = sum(1 << (value - 1) for value in values)
+            continue
+        if line.startswith("field:"):
+            values = [value.strip() for value in line[6:].split(",") if value.strip() and value.strip() != "NONE"]
+            unknown = set(values) - starting_statuses()
+            if unknown or len(values) != len(set(values)):
+                raise SystemExit(f"{where}: unknown or duplicate starting field {sorted(unknown) or values}; see STARTING_STATUS_* in include/constants/battle.h")
+            current.field = values
             continue
         if line.startswith("tactic:"):
             fields = line[7:].split()
@@ -309,7 +323,10 @@ def render_branch(block_branch: str, branch: Branch) -> str:
     head = re.sub(r"(?m)^ai_extra:.*\n", "", head)
     head = re.sub(r"(?m)^strategy:.*\n", "", head)
     head = re.sub(r"(?m)^tactic:.*\n", "", head)
+    head = re.sub(r"(?m)^field:.*\n", "", head)
     head = set_field(head, "strategy", ", ".join(branch.strategy) or "NONE", after="format")
+    if branch.field:
+        head = set_field(head, "field", ", ".join(branch.field), after="format")
     if branch.tactics:
         head = head.rstrip() + "\n" + "\n".join("tactic: " + " ".join(tactic) for tactic in branch.tactics) + "\n"
     if branch.ai:

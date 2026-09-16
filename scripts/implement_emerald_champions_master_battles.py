@@ -71,6 +71,7 @@ class Design:
     ai_extra: list[str]
     mons: list[Mon]
     prize_multiplier: int
+    field: list[str]
 
 
 def split_by_markers(text: str, pattern: re.Pattern[str]) -> tuple[str, list[tuple[re.Match[str], str]]]:
@@ -126,7 +127,9 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
                 rate = 40
             elif encounter_number == 497:
                 rate = 50
-            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons, rate)
+            field_line = line_value(branch, "field")
+            field = [value.strip() for value in field_line.split(",") if value.strip()] if field_line else []
+            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons, rate, field)
     return designs
 
 
@@ -179,6 +182,12 @@ def rewrite_trainer_block(block: str, design: Design) -> str:
     header = re.sub(r"(?m)^Party Size:.*\n?", "", header)
     # Campaign battles are competitive puzzles: no Bag healing on either side.
     header = re.sub(r"(?m)^Items:.*\n?", "", header)
+    # The authored starting field (Gym terrain) is the engine's only setup-side
+    # weather/terrain channel; trainerproc takes the human form of STARTING_STATUS_*.
+    header = re.sub(r"(?m)^Starting Status:.*\n?", "", header)
+    if design.field:
+        header = replace_attribute(header, "Starting Status",
+                                   " / ".join(value.replace("_", " ").title() for value in design.field))
     if design.format == "multi":
         header = replace_attribute(header, "Multi Party", "Half")
     else:
