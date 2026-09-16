@@ -1,0 +1,58 @@
+{
+  "play_order": 229,
+  "e_group": "E0340",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_1",
+  "class": "grunt",
+  "location": "AquaHideout_1F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76 and every member resolved to L72 = 76 + (-2) - 2 on Medium. Cap chosen from the Game Book chapter ladder: C39 (Heatran) grants 76, C40 (submarine theft and Aqua Hideout) makes no cap change, and 84 only arrives at C42 (Space Center). The whole block is cap 76.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76.json"],
+  "chronology_note": "Incineroar (Game Corner Litten), Amoonguss (Petalburg Woods Foongus), Urshifu-S (Route 112 Kubfu), Mega Gardevoir (Route 102 Ralts, stone-window 14), Zapdos (New Mauville sign), Rillaboom (Game Corner Grookey). Every source map precedes the Lilycove coastal cave. One reachable legend. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Wailord opens with Water Spout at full HP",
+    "Mantine's Wide Guard covers a spread turn",
+    "Mantine's Tailwind is the alternative when the crew is behind on speed",
+    "Tentacruel applies Icy Wind for speed control or Sludge Bomb",
+    "Dhelmise's Steelworker Heavy Slam punishes a Fairy or Ice answer"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/229-TRAINER_GRUNT_AQUA_HIDEOUT_1/a1",
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 7,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 0.887,
+      "why": "I played the dossier's own crack. Fake Out went at Wailord on turn 1 and the AI had in fact selected Water Spout, so the room's opening was denied by exactly one turn of priority; Amoonguss then Spored the whale behind the flinch. Tentacruel missed its first Hydro Pump, hit the second into Incineroar for 123, and died to Knock Off plus Giga Drain. Zapdos came in over the item-less Incineroar and Thunderbolt is 4x on Mantine. The room bit back on turn 5: an awake Wailord's Ice Beam plus Dhelmise's Heavy Slam removed Amoonguss in a single turn while Zapdos was finishing Wailord. Urshifu replaced it and a critical Wicked Blow ended Dhelmise."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Wailord opens with Water Spout at full HP", "result": "PASS (selected, denied)", "evidence": "turn 1 native record: b1 use_move WATER_SPOUT at battler 0, from full 394 HP, before it flinched to Fake Out. It selected Water Spout again on turn 3 while asleep. The authored opening is real; the authored crack (act first) beats it cleanly."},
+    {"check": "Mantine's Wide Guard covers a spread turn", "result": "FAIL (never resolved)", "evidence": "Mantine selected WIDE_GUARD on turn 4, but it was asleep from turn 3's Spore and the move never executed. Nothing on my side was spreading that turn either, so the selection was also speculative rather than a read."},
+    {"check": "Mantine's Tailwind when the crew is behind on speed", "result": "PASS", "evidence": "turn 3, Mantine's first action out was TAILWIND; the opponent side carried SIDE_STATUS_TAILWIND from turn 3 to the end. Correct branch: it entered against a Zapdos switch-in it could not outrun."},
+    {"check": "Tentacruel applies Icy Wind or Sludge Bomb", "result": "FAIL", "evidence": "Tentacruel used HYDRO_PUMP on both of its turns (turn 1 missed, turn 2 hit Incineroar for 123, super effective). It never reached for Icy Wind speed control even though its partner Wailord is a 60-base-Speed body that wanted the turn. Defensible - Hydro Pump was 2x on the Fire lead - but the authored speed-control lane did not appear."},
+    {"check": "Dhelmise's Steelworker Heavy Slam punishes", "result": "PASS", "evidence": "turn 5, Dhelmise's HEAVY_SLAM finished Amoonguss - a light Grass/Poison body against a 210 kg anchor is the maximum-weight-ratio case, and the STAB Steelworker gives a Ghost/Grass Pokemon is exactly the trap the dossier advertises. It ate Rocky Helmet and Life Orb recoil doing it."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects in the whole battle, despite three of the four members carrying it. Nothing to fault: every guard-worthy turn was one where the battler was asleep or already had a better action. This is the clean end of the Protect spectrum.",
+  "ai_defects": [],
+  "ai_good_notes": [
+    "Turn 2: with Wailord asleep and Tentacruel about to be focused, the AI withdrew the sleeping Wailord and sent Mantine. That is a correct sleep pivot, it cost me the tempo of my Spore, and it is a better decision than most of this campaign's grunt AI has shown.",
+    "AI decision budget max 0.887 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [
+    {"member": "TENTACRUEL", "before": -2, "after": -1, "why": "won on attempt 1 in five turns; Tentacruel contributed one landed attack and never used its authored Icy Wind lane. It is one of the four joint-lowest members and the one whose absence from the fight was most complete."},
+    {"member": "MANTINE", "before": -2, "after": -1, "why": "got Tailwind up and then died to a single 4x Thunderbolt at 272 HP. A dedicated Wide Guard/Tailwind support that cannot survive one attack never gets to run the support plan twice; +1 buys it the second turn the room is built around."}
+  ],
+  "level_change_rationale": "Brief case 'won first try with 0-1 player faints': one faint, five turns, 4-1. AGENTS.md's three-faint aspiration was not met, so a +1 review is triggered. I raised the two members that folded without executing their plan and left Wailord and Dhelmise alone - those two did the real work (Wailord's Ice Beams did 128 to Zapdos and half of Amoonguss; Dhelmise's Heavy Slam took the KO) and raising them would punish the parts of the room that are already correct. Neither raised member is an ace, Mega or legend. Both are +1 of the +-2 allowance.",
+  "rebuild_note": "The level changes cannot be re-verified from this session: attempt 1 pinned work/agent-battle-build-5, which predates the edit. The main agent must rebuild before a rerun. Of this block, this battle is worth re-running only after the harder rooms - see play_order 237 (Matt) and 238 (Lila & Roy), which are the two most worth re-running.",
+  "theme_check": "Yes, and immediately. A whale, a jellyfish, a haunted anchor and a manta is a flooded hold you can picture, and the fight states the faction's thesis in its first action - the AI genuinely reached for Water Spout on turn 1 at full HP. The Steelworker anchor is the piece that reads as a hideout rather than a route: it is the one member whose damage does not come from being wet. Nothing here is a 'rare equals cool' import.",
+  "cooler_note": "Keep the roster; the concept is right and it is correctly the easiest room in the hideout. The one honest weakness is Tentacruel, which is the only member without a stated job - Wailord is the spout, Mantine is the cover, Dhelmise is the trap, and Tentacruel is a fourth Water attacker. A concrete suggestion for a later pass (not made here): give Tentacruel the room's real support role by swapping Hydro Pump for Rain Dance or Haze, so the bilge watch either powers the whale's Spout or answers the setup the player brings, instead of throwing a second 80%-accuracy special attack.",
+  "authored_set_legality": "No legality problem found. All four sets materialize and the driver accepted them at cap 76."
+}

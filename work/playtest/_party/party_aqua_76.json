@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge chapter cap 76 - Aqua Hideout and Routes 124-126 (play_order 229-240, E0340-E0367)",
+  "availability_audit": "Cap window resolved from the Game Book chapter ladder: C39 Heatran in Scorched Slab grants cap 76, C40 (the submarine theft, Aqua Hideout, opening the eastern sea) makes no cap change, and cap 84 only arrives with C42 the Space Center. Every battle in this block therefore sits at cap 76. Chronology of each member against pool-76.json source_detail, all of which precede the Lilycove coastal cave in play order: Incineroar gate 36 (Litten from the Mauville Game Corner at 500 coins, Torracat/Incineroar by level). Amoonguss gate 42 (Foongus, Petalburg Woods land table). Urshifu-Single-Strike gate 42 (Kubfu, legendary_sign Route112 - the Jagged Pass approach the player already used for the Magma Emblem - then EVO_SCRIPT_TRIGGER). Gardevoir gate 30 (Ralts Route102 land, Kirlia/Gardevoir by level) with ITEM_GARDEVOIRITE stone-window 14, long inside the Mega Ring window. Zapdos gate 30, legendary_sign NewMauville_Inside, the New Mauville shutdown cleared before the Feather Badge. Rillaboom gate 36 (Grookey from the Mauville Game Corner, Thwackey/Rillaboom by level). One reachable legend (Zapdos); nothing here is sourced from Mossdeep, Shoal Cave, the Space Center, Route 127-128, Seafloor Cavern, Sootopolis or anything else downstream of this block.",
+  "plan": "Built against a faction that is eight-tenths Water with heavy Protect, Wide Guard and rain. Incineroar's Intimidate and Fake Out blunt the physical crews (Sharpedo's Speed Boost, Gyarados' Dragon Dance, Crawdaunt, Beartic, Kingler, Golisopod) and deny the free setup turn. Urshifu-Single's Unseen Fist is the direct structural answer to the faction's Protect and Wide Guard habit - Wicked Blow and Close Combat both land through a guard - and Wicked Blow is an always-crit, so Shell Armor Drednaw and stat-boosted bodies are the only exceptions worth tracking. Mega Gardevoir's Pixilate Hyper Voice is the spread answer to Dark, Dragon, Fighting and Poison bodies. Zapdos carries the Electric lane and is Ground-immune. Rillaboom supplies the Grass lane, priority Grassy Glide through a rain-doubled Swift Swim sweeper, and Grassy Terrain halves the Earthquakes and cuts Grassy Seed access for the Route 124 couple. Amoonguss is Spore plus Rage Powder, the general-purpose way to steal the turn a setup room needs.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Intimidate pivot; Fake Out denies setup turns, Knock Off strips Focus Sash and Damp Rock, Parting Shot resets a bad board",
+      "availability": "pool-76 gate 36. Litten, Mauville Game Corner 500 coins; level evolutions. Held item from the free Center catalogue."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_GIGA_DRAIN", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Spore and Rage Powder support; Grass damage into the Water bodies and Regenerator recovery on the rotation",
+      "availability": "pool-76 gate 42. Foongus, PetalburgWoods land table. Held item from the free Center catalogue."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Unseen Fist attacker that hits through Protect and Wide Guard; always-crit Wicked Blow ignores defensive boosts",
+      "availability": "pool-76 gate 42. Kubfu, legendary_sign Route112, then the script evolution. Held item from the free Center catalogue."
+    },
+    {
+      "species": "SPECIES_GARDEVOIR",
+      "moves": ["MOVE_HYPER_VOICE", "MOVE_MOONBLAST", "MOVE_PSYSHOCK", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_GARDEVOIRITE",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "Mega slot; Pixilate Hyper Voice is the spread Fairy answer to the Dark, Dragon, Fighting and Poison bodies",
+      "availability": "pool-76 gate 30; Ralts Route102. ITEM_GARDEVOIRITE stone-window 14, inside the earned Mega Ring window."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "Electric lane against a Water faction; Ground-immune, Heat Wave is the spread answer to the Ice and Steel bodies",
+      "availability": "pool-76 gate 30, legendary_sign NewMauville_Inside; a reachable legend cleared long before this block."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_GRASSY_GLIDE", "MOVE_WOOD_HAMMER", "MOVE_HIGH_HORSEPOWER"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Grass lane and priority; Grassy Glide outspeeds a rain-doubled Swift Swim sweeper, terrain halves Earthquake and heals the side",
+      "availability": "pool-76 gate 36. Grookey, Mauville Game Corner 500 coins; level evolutions. Held item from the free Center catalogue."
+    }
+  ]
+}
