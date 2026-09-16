@@ -1,0 +1,33 @@
+{
+  "play_order": 296, "e_group": "E0462", "trainer": "TRAINER_CONNIE", "class": "gym", "location": "SootopolisCity_Gym_B1F",
+  "cap": 84, "cap_source": "driver level_cap (Rain Badge not earned)", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/296-TRAINER_CONNIE/party_redirect_84.json",
+  "availability_note": "Same Sootopolis party (Rillaboom 36, Kartana 20, Flutter Mane 68, Incineroar 36, Raging Bolt 60, Zapdos 30 reachable legend); Sootopolis after the cavern and Cave of Origin, Rain Badge not earned, nothing from Ever Grande or the League. Only the two Grass leads were used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/296-TRAINER_CONNIE/a1", "seed": 1, "outcome": "won", "turns": 4, "decisions": 4, "player_faints": 0, "opponent_faints": 6, "note": "I deliberately let Lumineon (faster than Rillaboom) act on T1 to see the Surf tactic: it Protected instead while Gastrodon chose Surf (the mirror direction of the tactic) and died to a 4x Leaf Blade first. T2 Leaf Blade took Lumineon (after it set Tailwind) and Wood Hammer took Seaking. T3 Huntail Shell Smashed (White Herb repaired) and died to Wood Hammer; Octillery Protected. T4 Grassy Glide took Octillery and a +2 Leaf Blade took Starmie after its Ice Beam broke Kartana's Sash (219)."}
+  ],
+  "strategy_checks": [
+    {"check": "Authored tactic: Lumineon Surf into the board so Gastrodon's Storm Drain grows", "result": "FAIL (not fired)", "evidence": "T1 Lumineon chose Protect while Gastrodon (the intended receiver) chose Surf - the AI ran the engine backwards (Gastrodon Surf would have fed Lumineon's Storm Drain instead) and neither resolved because Gastrodon was OHKOed first. Against a double-Grass lead, Surf into two resists is also a poor click, so the tactic being skipped is defensible; the receiver-side Surf pick is the odd part."},
+    {"check": "Gastrodon boosted Earth Power / Recover by state", "result": "NOT REACHED", "evidence": "OHKOed by 4x Leaf Blade on T1."},
+    {"check": "Seaking Choice Band line / Lightning Rod redirection", "result": "PASS (choice) / NOT REACHED (Rod)", "evidence": "T2 Megahorn into Rillaboom (correct 2x pick, 80 through Assault Vest); no Electric move was ever clicked, so Lightning Rod was never tested. OHKOed by Wood Hammer the same turn."},
+    {"check": "Huntail Shell Smash + White Herb, no Water attack", "result": "PASS", "evidence": "T3 Shell Smash, 'returned its stats to normal' (White Herb), then died to Wood Hammer before attacking; it never fed a Storm Drain partner."},
+    {"check": "Octillery Sniper coverage", "result": "NOT REACHED", "evidence": "T3 Protect (blocked a 2x Leaf Blade), T4 OHKOed by priority Grassy Glide before moving."},
+    {"check": "Starmie Analytic when it moves last / Tailwind not preventing it", "result": "PARTIAL", "evidence": "Tailwind was up (T2) so Starmie moved first and Ice Beam (219, no Analytic) broke Kartana's Sash; a +2 Leaf Blade KOed it."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Lumineon", "payoff": "REAL - blocked Wood Hammer; but it spent the tactic turn, and Gastrodon died beside it."},
+    {"turn": 3, "user": "Octillery", "payoff": "REAL - blocked a lethal Leaf Blade; Huntail Smashed beside it and died anyway."}
+  ],
+  "ai_defects": [
+    {"turn": 1, "battler": "Gastrodon / Lumineon", "board": "Gastrodon + Lumineon vs Rillaboom + Kartana (both Grass)", "chosen": "Gastrodon Surf, Lumineon Protect", "better": "The authored tactic is Lumineon Surf -> Gastrodon; the AI selected the reverse (receiver Surfs, setter Protects). With two Grass foes the right click was Gastrodon Ice Beam / Lumineon Icy Wind or Tailwind; Surf into a double Grass board is the worst option. Tactic wiring worth checking: it may be firing on the wrong battler."}
+  ],
+  "authored_set_legality": "No problem found. Levels L84 x5, Starmie L85.",
+  "theme_note": "No - the redirection lesson never appeared, because the crack line (Grass ignores the matrix) is exactly what a player brings to a Water gym, and the engine's two bodies died on turns 1 and 2. The room reads as six Waters that fold to Grass; the clever part is only visible if the player leads something else.",
+  "level_changes": [
+    {"member": "SEAKING", "before": 2, "after": 3, "reason": "first-try 6-0 with no faints; OHKOed T2 after one resisted-by-Vest Megahorn."},
+    {"member": "OCTILLERY", "before": 2, "after": 3, "reason": "never attacked; OHKOed by Grassy Glide. Gastrodon/Lumineon are the concept pair and Starmie the ace, so the two filler bodies take the levels."}
+  ],
+  "level_changes_unverified": "Not re-run: build-8 ROM predates these offsets; rerun after the main agent rebuilds.",
+  "cooler": "The idea is great and unseen. Two later-pass thoughts: give Gastrodon a Focus Sash or Sitrus instead of Leftovers so it survives one Grass hit and the Surf turn happens; and check the ACTIVATE tactic wiring, since the receiver picked Surf while the setter Protected. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun with a non-Grass lead (e.g. Incineroar + Flutter Mane) to see whether Lumineon actually Surfs into Gastrodon."
+}
