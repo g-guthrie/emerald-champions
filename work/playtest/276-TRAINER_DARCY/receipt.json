@@ -1,0 +1,31 @@
+{
+  "play_order": 276, "e_group": "E0433", "trainer": "TRAINER_DARCY", "class": "ace", "location": "Route132",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Torkoal/Lilligant/Porygon-Z offset 1 -> L83, Charizard offset 2 -> L84. Confirmed.",
+  "party_manifest": "work/playtest/276-TRAINER_DARCY/party_darcy_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 433, "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "Sun at turn 0 (Torkoal's Drought resolves after the faster Pelipper's Drizzle, so a lead rain setter loses the weather war here). T1 Pelipper Wide Guard; Lilligant chose Leaf Storm (OHKO Pelipper, 273) instead of the authored After You; Rillaboom U-turned into Tyranitar, sand replaced sun, Torkoal's Eruption hit Wide Guard. T2 Icicle Crash into Lilligant's Sash, Lilligant Sunny Day (the authored emergency reclaim), Rock Slide KO Lilligant and flinched Torkoal. T3 Porygon-Z Protected both attacks, Rock Slide KO Torkoal. T4 Charizard Mega Evolved (Drought), Heat Wave burned Tyranitar through Chien-Pao's Protect, Rock Slide 4x OHKO Mega Charizard Y. T5 Porygon-Z Protected both attacks again. T6 Sacred Sword KO."}
+  ],
+  "strategy_checks": [
+    {"check": "Torkoal Drought at turn 0", "result": "PASS", "evidence": "B_WEATHER_SUN_NORMAL at turn 0 despite my Drizzle lead (speed order favours the slower Torkoal)."},
+    {"check": "Authored tactic AFTER_YOU Lilligant -> Torkoal lands a full-power Eruption first", "result": "NOT FIRED", "evidence": "T1 was the only turn both were on the field under sun with Torkoal at full HP; Lilligant chose Leaf Storm (a KO on Pelipper) and Torkoal chose Eruption on its own, which Wide Guard blanked. Defensible KO preference, but the tactic line was never observed executing; worth a rerun with a lead that offers Lilligant no KO."},
+    {"check": "Lilligant Sunny Day as emergency reclaim", "result": "PASS", "evidence": "T2, immediately after Sand Stream replaced the sun."},
+    {"check": "Sleep Powder", "result": "NOT USED", "evidence": "Only Grass-type Rillaboom (immune) and Pelipper were on the field T1; T2 it chose Sunny Day at 1 HP."},
+    {"check": "Mega Charizard Y second Drought", "result": "PASS", "evidence": "T4 Mega Evolved on its first action turn, Drought refreshed the sun, Heat Wave burned Tyranitar; OHKOed by 4x Rock Slide the same turn."},
+    {"check": "Porygon-Z Adaptability Tri Attack / Nasty Plot when the sun is gone", "result": "PARTIAL", "evidence": "Protect T3, Tri Attack T4 (into Chien-Pao's Protect), Protect T5; no Nasty Plot."},
+    {"check": "Crack: Wide Guard blanks Eruption", "result": "PASS", "evidence": "T1 Eruption into Wide Guard, zero damage."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "Porygon-Z", "payoff": "blocked Sacred Sword (lethal) + Rock Slide; real"},
+    {"turn": 5, "battler": "Porygon-Z", "payoff": "blocked Sacred Sword (lethal) + Low Kick; real"}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "TORKOAL", "before": 1, "after": 2, "reason": "won first try 4-1 with one faint; Torkoal's only Eruption was blanked, then it flinched and died"},
+    {"member": "PORYGON_Z", "before": 1, "after": 2, "reason": "same rule; two Protects and one Tri Attack into a Protect. Charizard is the Mega; Lilligant OHKOed Pelipper and did its job."}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED (needs rebuild).",
+  "could_this_be_cooler": "The two-setter idea worked exactly as written: sand took the sun and Lilligant took it straight back, then Charizard Y took it a third time. What did not show is the After You engine, because the AI (reasonably) preferred a KO. If the tactic is meant to be the showcase, its scoring needs to outrank an ordinary KO on turn 1 when Torkoal is at full HP under sun; otherwise it will only fire against boards where Lilligant has nothing better, which a player will rarely offer. Not changed in this pass.",
+  "authored_set_legality": "No problem found."
+}
