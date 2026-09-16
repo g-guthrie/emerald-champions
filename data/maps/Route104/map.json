@@ -624,8 +624,8 @@
       "x": 16,
       "y": 64,
       "elevation": 3,
-      "item": "ITEM_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_HEART_SCALE"
+      "item": "ITEM_NET_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_NET_BALL"
     }
   ]
 }

@@ -178,24 +178,24 @@
       "x": 49,
       "y": 9,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_1"
+      "item": "ITEM_LURE_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_LURE_BALL"
     },
     {
       "type": "hidden_item",
       "x": 57,
       "y": 21,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_2"
+      "item": "ITEM_LEVEL_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_LEVEL_BALL"
     },
     {
       "type": "hidden_item",
       "x": 31,
       "y": 33,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_3"
+      "item": "ITEM_HEAVY_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEAVY_BALL"
     }
   ]
 }

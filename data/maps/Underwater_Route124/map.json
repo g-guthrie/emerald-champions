@@ -34,8 +34,8 @@
       "x": 42,
       "y": 51,
       "elevation": 0,
-      "item": "ITEM_PEARL_STRING",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL_STRING"
+      "item": "ITEM_PRISM_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PRISM_SCALE"
     },
     {
       "type": "hidden_item",
@@ -50,40 +50,40 @@
       "x": 66,
       "y": 34,
       "elevation": 3,
-      "item": "ITEM_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL"
+      "item": "ITEM_DIVE_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_DIVE_BALL"
     },
     {
       "type": "hidden_item",
       "x": 64,
       "y": 54,
       "elevation": 3,
-      "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL"
+      "item": "ITEM_DEEP_SEA_TOOTH",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_DEEP_SEA_TOOTH"
     },
     {
       "type": "hidden_item",
       "x": 70,
       "y": 64,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_1"
+      "item": "ITEM_FAST_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_FAST_BALL"
     },
     {
       "type": "hidden_item",
       "x": 42,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL_2"
+      "item": "ITEM_DEEP_SEA_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_DEEP_SEA_SCALE"
     },
     {
       "type": "hidden_item",
       "x": 45,
       "y": 36,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_2"
+      "item": "ITEM_LOVE_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_LOVE_BALL"
     }
   ]
 }

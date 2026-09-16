@@ -42,16 +42,16 @@
       "x": 38,
       "y": 19,
       "elevation": 3,
-      "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_BIG_PEARL"
+      "item": "ITEM_DRAGON_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_DRAGON_SCALE"
     },
     {
       "type": "hidden_item",
       "x": 69,
       "y": 18,
       "elevation": 3,
-      "item": "ITEM_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_PEARL"
+      "item": "ITEM_DIVE_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_DIVE_BALL"
     }
   ]
 }

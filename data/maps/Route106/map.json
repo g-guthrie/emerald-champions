@@ -189,8 +189,8 @@
       "x": 68,
       "y": 15,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_106_HEART_SCALE"
+      "item": "ITEM_LURE_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_106_LURE_BALL"
     },
     {
       "type": "sign",

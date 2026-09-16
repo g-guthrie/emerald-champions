@@ -54,24 +54,24 @@
       "x": 12,
       "y": 42,
       "elevation": 3,
-      "item": "ITEM_STAR_PIECE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_STAR_PIECE"
+      "item": "ITEM_DEEP_SEA_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_DEEP_SEA_SCALE"
     },
     {
       "type": "hidden_item",
       "x": 50,
       "y": 36,
       "elevation": 3,
-      "item": "ITEM_PEARL_STRING",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_PEARL_STRING"
+      "item": "ITEM_PRISM_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_PRISM_SCALE"
     },
     {
       "type": "hidden_item",
       "x": 34,
       "y": 72,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_HEART_SCALE"
+      "item": "ITEM_MOON_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_MOON_BALL"
     },
     {
       "type": "hidden_item",

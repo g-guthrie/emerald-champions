@@ -515,8 +515,8 @@
       "x": 36,
       "y": 31,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_HEART_SCALE"
+      "item": "ITEM_LOVE_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_LOVE_BALL"
     },
     {
       "type": "hidden_item",

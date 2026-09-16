@@ -47,8 +47,8 @@
       "x": 30,
       "y": 17,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_HEART_SCALE"
+      "item": "ITEM_FRIEND_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_FRIEND_BALL"
     },
     {
       "type": "hidden_item",
@@ -63,24 +63,24 @@
       "x": 63,
       "y": 19,
       "elevation": 3,
-      "item": "ITEM_STARDUST",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_STARDUST"
+      "item": "ITEM_WATER_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_WATER_STONE"
     },
     {
       "type": "hidden_item",
       "x": 10,
       "y": 36,
       "elevation": 3,
-      "item": "ITEM_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL"
+      "item": "ITEM_DIVE_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_DIVE_BALL"
     },
     {
       "type": "hidden_item",
       "x": 11,
       "y": 39,
       "elevation": 3,
-      "item": "ITEM_PEARL_STRING",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL_STRING"
+      "item": "ITEM_DRAGON_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_DRAGON_SCALE"
     },
     {
       "type": "hidden_item",
@@ -95,8 +95,8 @@
       "x": 65,
       "y": 60,
       "elevation": 3,
-      "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BIG_PEARL"
+      "item": "ITEM_DEEP_SEA_TOOTH",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_DEEP_SEA_TOOTH"
     },
     {
       "type": "hidden_item",

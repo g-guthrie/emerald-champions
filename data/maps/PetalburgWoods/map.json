@@ -287,16 +287,16 @@
       "x": 26,
       "y": 6,
       "elevation": 3,
-      "item": "ITEM_TINY_MUSHROOM",
-      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_TINY_MUSHROOM_1"
+      "item": "ITEM_LEAF_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_LEAF_STONE"
     },
     {
       "type": "hidden_item",
       "x": 40,
       "y": 29,
       "elevation": 3,
-      "item": "ITEM_TINY_MUSHROOM",
-      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_TINY_MUSHROOM_2"
+      "item": "ITEM_NET_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_NET_BALL"
     },
     {
       "type": "hidden_item",

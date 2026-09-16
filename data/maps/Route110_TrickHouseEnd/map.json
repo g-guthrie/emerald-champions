@@ -63,8 +63,8 @@
       "x": 4,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET"
+      "item": "ITEM_SHINY_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_TRICK_HOUSE_SHINY_STONE"
     }
   ]
 }

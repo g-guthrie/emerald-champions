@@ -1149,8 +1149,8 @@
       "x": 26,
       "y": 70,
       "elevation": 0,
-      "item": "ITEM_STARDUST",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_STARDUST"
+      "item": "ITEM_SUN_STONE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_SUN_STONE"
     },
     {
       "type": "secret_base",
@@ -1186,8 +1186,8 @@
       "x": 19,
       "y": 55,
       "elevation": 0,
-      "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_NUGGET"
+      "item": "ITEM_RAZOR_CLAW",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_RAZOR_CLAW"
     },
     {
       "type": "hidden_item",

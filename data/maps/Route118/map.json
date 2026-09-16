@@ -422,8 +422,8 @@
       "x": 12,
       "y": 14,
       "elevation": 3,
-      "item": "ITEM_HEART_SCALE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_118_HEART_SCALE"
+      "item": "ITEM_MOON_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_118_MOON_BALL"
     }
   ]
 }

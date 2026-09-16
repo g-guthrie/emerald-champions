@@ -863,8 +863,8 @@
       "x": 17,
       "y": 82,
       "elevation": 3,
-      "item": "ITEM_BIG_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_BIG_NUGGET"
+      "item": "ITEM_KINGS_ROCK",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_KINGS_ROCK"
     },
     {
       "type": "hidden_item",

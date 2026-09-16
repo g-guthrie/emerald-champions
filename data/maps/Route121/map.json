@@ -535,16 +535,16 @@
       "x": 23,
       "y": 10,
       "elevation": 3,
-      "item": "ITEM_BIG_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_BIG_NUGGET"
+      "item": "ITEM_DUBIOUS_DISC",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_DUBIOUS_DISC"
     },
     {
       "type": "hidden_item",
       "x": 58,
       "y": 3,
       "elevation": 3,
-      "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_NUGGET"
+      "item": "ITEM_WHIPPED_DREAM",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_WHIPPED_DREAM"
     },
     {
       "type": "hidden_item",
