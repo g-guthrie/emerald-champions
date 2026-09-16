@@ -55,10 +55,7 @@ OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat:
 	.string "One use restores the whole party\l"
 	.string "outside battle!\p"
 	.string "The nurse refills its one dose\n"
-	.string "whenever I stop for healing.\p"
-	.string "Register a Key Item in your BAG,\n"
-	.string "then press SELECT to use it.\l"
-	.string "Much quicker on a long walk!$"
+	.string "whenever I stop for healing.$"
 
 OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable:
 	.string "The POKéMON WIRELESS CLUB on\n"

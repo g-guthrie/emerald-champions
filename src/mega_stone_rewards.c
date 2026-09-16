@@ -158,3 +158,44 @@ void GiveEmeraldChampionsBerryPair(void)
     }
     gSpecialVar_Result = TRUE;
 }
+
+// The Champions archive is exactly the Mega Stones the campaign distributes,
+// so one bit per entry is also the "every Mega seen" test.
+static const u16 sMegaStoneArchive[] =
+{
+#include "data/emerald_champions_mega_stones.h"
+};
+
+STATIC_ASSERT(ARRAY_COUNT(sMegaStoneArchive) == 99, MegaArchiveIsNinetyNine);
+STATIC_ASSERT(sizeof(((struct SaveBlock1 *)0)->megasWitnessed) * 8 >= ARRAY_COUNT(sMegaStoneArchive), MegasWitnessedFitsSaveBlock);
+
+u32 EmeraldChampions_GetMegaArchiveCount(void)
+{
+    return ARRAY_COUNT(sMegaStoneArchive);
+}
+
+void EmeraldChampions_RecordMegaWitnessed(u32 item)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sMegaStoneArchive); i++)
+    {
+        if (sMegaStoneArchive[i] != item)
+            continue;
+        gSaveBlock1Ptr->megasWitnessed[i / 8] |= 1u << (i % 8);
+        return;
+    }
+}
+
+u32 EmeraldChampions_CountMegasWitnessed(void)
+{
+    u32 count = 0;
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sMegaStoneArchive); i++)
+    {
+        if (gSaveBlock1Ptr->megasWitnessed[i / 8] & (1u << (i % 8)))
+            count++;
+    }
+    return count;
+}

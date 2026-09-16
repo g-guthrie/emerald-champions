@@ -25,7 +25,9 @@
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
+#include "caps.h"
 #include "contest_util.h"
+#include "mega_stone_rewards.h"
 #include "decompress.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
@@ -33,6 +35,8 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/union_room.h"
+#include "constants/flags.h"
+#include "constants/vars.h"
 
 enum {
     WIN_MSG,
@@ -63,15 +67,11 @@ struct TrainerCardData
     u8 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH][13];
     u8 textPlayersCard[70];
     u8 textHofTime[70];
-    u8 textLinkBattleType[140];
-    u8 textLinkBattleWins[70];
-    u8 textLinkBattleLosses[140];
-    u8 textNumTrades[140];
-    u8 textBerryCrushPts[140];
-    u8 textUnionRoomStats[70];
-    u8 textNumLinkPokeblocks[70];
-    u8 textNumLinkContests[70];
-    u8 textBattleFacilityStat[70];
+    u8 textBadges[16];
+    u8 textLeaders[16];
+    u8 textMegas[16];
+    u8 textCircuitStreak[16];
+    u8 textLevelCap[16];
     u16 monIconPal[16 * PARTY_SIZE];
     s8 flipBlendY;
     bool8 timeColonNeedDraw;
@@ -135,26 +135,18 @@ static void PrintProfilePhraseOnCard(void);
 static bool8 PrintAllOnCardBack(void);
 static void PrintNameOnCardBack(void);
 static void PrintHofDebutTimeOnCard(void);
-static void PrintLinkBattleResultsOnCard(void);
-static void PrintTradesStringOnCard(void);
-static void PrintBerryCrushStringOnCard(void);
-static void PrintPokeblockStringOnCard(void);
-static void PrintUnionStringOnCard(void);
-static void PrintContestStringOnCard(void);
 static void PrintPokemonIconsOnCard(void);
-static void PrintBattleFacilityStringOnCard(void);
 static void PrintStickersOnCard(void);
 static void BufferTextsVarsForCardPage2(void);
 static void BufferNameForCardBack(void);
 static void BufferHofDebutTime(void);
-static void BufferLinkBattleResults(void);
-static void BufferNumTrades(void);
-static void BufferBerryCrushPoints(void);
-static void BufferUnionRoomStats(void);
-static void BufferLinkPokeblocksNum(void);
-static void BufferLinkContestNum(void);
-static void BufferBattleFacilityStats(void);
 static void PrintStatOnBackOfCard(u8 top, const u8 *str1, u8 *str2, const u8 *color);
+static u32 CountPlayerBadges(void);
+static u32 CountLeadersDefeated(void);
+static void BufferChampionsRecord(void);
+static void PrintBadgesAndLeadersOnCard(void);
+static void PrintMegasAndCircuitOnCard(void);
+static void PrintLevelCapOnCard(void);
 static void LoadStickerGfx(void);
 static u8 SetCardBgsAndPals(void);
 static void DrawCardBackStats(void);
@@ -660,31 +652,20 @@ static bool8 HasAllFrontierSymbols(void)
     return TRUE;
 }
 
+// The four Champions stars: every badge, the Hall of Fame, the regional
+// Pokedex and every Mega in the archive seen at least once.
 u32 CountPlayerTrainerStars(void)
 {
-    u8 stars = 0;
+    u32 stars = 0;
 
+    if (CountPlayerBadges() == NUM_BADGES)
+        stars++;
     if (GetGameStat(GAME_STAT_ENTERED_HOF))
         stars++;
     if (HasAllRegionalMons())
         stars++;
-
-    if (IS_FRLG)
-    {
-        if (HasAllMons())
-            stars++;
-#if FREE_POKEMON_JUMP == FALSE
-        if (gSaveBlock2Ptr->berryPick.berriesPicked >= 200 && gSaveBlock2Ptr->pokeJump.jumpsInRow >= 200)
-            stars++;
-#endif // FREE_POKEMON_JUMP
-    }
-    else
-    {
-        if (CountPlayerMuseumPaintings() >= CONTEST_CATEGORIES_COUNT)
-            stars++;
-        if (HasAllFrontierSymbols())
-            stars++;
-    }
+    if (EmeraldChampions_CountMegasWitnessed() >= EmeraldChampions_GetMegaArchiveCount())
+        stars++;
 
     return stars;
 }
@@ -969,27 +950,21 @@ static bool8 PrintAllOnCardBack(void)
         PrintNameOnCardBack();
         break;
     case 1:
-        PrintHofDebutTimeOnCard();
+        PrintBadgesAndLeadersOnCard();
         break;
     case 2:
-        PrintLinkBattleResultsOnCard();
+        PrintMegasAndCircuitOnCard();
         break;
     case 3:
-        PrintTradesStringOnCard();
+        PrintHofDebutTimeOnCard();
         break;
     case 4:
-        PrintBerryCrushStringOnCard();
-        PrintPokeblockStringOnCard();
+        PrintLevelCapOnCard();
         break;
     case 5:
-        PrintUnionStringOnCard();
-        PrintContestStringOnCard();
+        PrintPokemonIconsOnCard();
         break;
     case 6:
-        PrintPokemonIconsOnCard();
-        PrintBattleFacilityStringOnCard();
-        break;
-    case 7:
         PrintStickersOnCard();
         break;
     default:
@@ -1004,13 +979,7 @@ static void BufferTextsVarsForCardPage2(void)
 {
     BufferNameForCardBack();
     BufferHofDebutTime();
-    BufferLinkBattleResults();
-    BufferNumTrades();
-    BufferBerryCrushPoints();
-    BufferUnionRoomStats();
-    BufferLinkPokeblocksNum();
-    BufferLinkContestNum();
-    BufferBattleFacilityStats();
+    BufferChampionsRecord();
 }
 
 static void PrintNameOnCardFront(void)
@@ -1215,142 +1184,80 @@ static void PrintStatOnBackOfCard(u8 top, const u8 *statName, u8 *stat, const u8
     AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, stat, widths[sData->isHoenn]), top * 16 + 33, color, TEXT_SKIP_DRAW, stat);
 }
 
+static u32 CountPlayerBadges(void)
+{
+    u32 i, count = 0;
+
+    for (i = 0; i < NUM_BADGES; i++)
+    {
+        if (FlagGet(FLAG_BADGE01_GET + i))
+            count++;
+    }
+    return count;
+}
+
+// The eight Gym Leaders and the Elite Four; the Champion is added by the
+// Hall of Fame, which is the only way past her.
+static const u16 sLeaderDefeatFlags[] =
+{
+    FLAG_DEFEATED_RUSTBORO_GYM,
+    FLAG_DEFEATED_DEWFORD_GYM,
+    FLAG_DEFEATED_MAUVILLE_GYM,
+    FLAG_DEFEATED_LAVARIDGE_GYM,
+    FLAG_DEFEATED_PETALBURG_GYM,
+    FLAG_DEFEATED_FORTREE_GYM,
+    FLAG_DEFEATED_MOSSDEEP_GYM,
+    FLAG_DEFEATED_SOOTOPOLIS_GYM,
+    FLAG_DEFEATED_ELITE_4_SIDNEY,
+    FLAG_DEFEATED_ELITE_4_PHOEBE,
+    FLAG_DEFEATED_ELITE_4_GLACIA,
+    FLAG_DEFEATED_ELITE_4_DRAKE,
+};
+
+static u32 CountLeadersDefeated(void)
+{
+    u32 i, count = 0;
+
+    for (i = 0; i < ARRAY_COUNT(sLeaderDefeatFlags); i++)
+    {
+        if (FlagGet(sLeaderDefeatFlags[i]))
+            count++;
+    }
+    if (GetGameStat(GAME_STAT_ENTERED_HOF))
+        count++;
+    return count;
+}
+
+static void BufferChampionsRecord(void)
+{
+    ConvertIntToDecimalStringN(sData->textBadges, CountPlayerBadges(), STR_CONV_MODE_LEFT_ALIGN, 1);
+    ConvertIntToDecimalStringN(sData->textLeaders, CountLeadersDefeated(), STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(sData->textMegas, EmeraldChampions_CountMegasWitnessed(), STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(sData->textCircuitStreak, VarGet(VAR_EC_CIRCUIT_BEST_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
+    ConvertIntToDecimalStringN(sData->textLevelCap, GetCurrentLevelCap(), STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+static void PrintBadgesAndLeadersOnCard(void)
+{
+    PrintStatOnBackOfCard(0, gText_TrainerCardBadges, sData->textBadges, sTrainerCardStatColors);
+    PrintStatOnBackOfCard(1, gText_TrainerCardLeadersDefeated, sData->textLeaders, sTrainerCardStatColors);
+}
+
+static void PrintMegasAndCircuitOnCard(void)
+{
+    PrintStatOnBackOfCard(2, gText_TrainerCardMegasWitnessed, sData->textMegas, sTrainerCardStatColors);
+    PrintStatOnBackOfCard(3, gText_TrainerCardCircuitBestStreak, sData->textCircuitStreak, sTrainerCardStatColors);
+}
+
 static void PrintHofDebutTimeOnCard(void)
 {
     if (sData->hasHofResult)
-        PrintStatOnBackOfCard(0, gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(4, gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
 }
 
-static const u8 *const sLinkBattleTexts[] =
+static void PrintLevelCapOnCard(void)
 {
-    [CARD_TYPE_FRLG]    = gText_LinkBattles,
-    [CARD_TYPE_RS]      = gText_LinkCableBattles,
-    [CARD_TYPE_EMERALD] = gText_LinkBattles
-};
-
-static void BufferLinkBattleResults(void)
-{
-    if (sData->hasLinkResults)
-    {
-        StringCopy(sData->textLinkBattleType, sLinkBattleTexts[sData->cardType]);
-        ConvertIntToDecimalStringN(sData->textLinkBattleWins, sData->trainerCard.linkBattleWins, STR_CONV_MODE_LEFT_ALIGN, 4);
-        ConvertIntToDecimalStringN(sData->textLinkBattleLosses, sData->trainerCard.linkBattleLosses, STR_CONV_MODE_LEFT_ALIGN, 4);
-    }
-}
-
-static void PrintLinkBattleResultsOnCard(void)
-{
-    if (sData->hasLinkResults)
-    {
-        StringCopy(gStringVar1, sData->textLinkBattleWins);
-        StringCopy(gStringVar2, sData->textLinkBattleLosses);
-        StringExpandPlaceholders(gStringVar4, gText_WinsLosses);
-        PrintStatOnBackOfCard(1, sData->textLinkBattleType, gStringVar4, sTrainerCardTextColors);
-    }
-}
-
-static void BufferNumTrades(void)
-{
-    if (sData->hasTrades)
-        ConvertIntToDecimalStringN(sData->textNumTrades, sData->trainerCard.pokemonTrades, STR_CONV_MODE_RIGHT_ALIGN, 5);
-}
-
-static void PrintTradesStringOnCard(void)
-{
-    if (sData->hasTrades)
-        PrintStatOnBackOfCard(2, gText_PokemonTrades, sData->textNumTrades, sTrainerCardStatColors);
-}
-
-static void BufferBerryCrushPoints(void)
-{
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.linkPoints.berryCrush)
-        ConvertIntToDecimalStringN(sData->textBerryCrushPts, sData->trainerCard.linkPoints.berryCrush, STR_CONV_MODE_RIGHT_ALIGN, 5);
-}
-
-static void PrintBerryCrushStringOnCard(void)
-{
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.linkPoints.berryCrush)
-        PrintStatOnBackOfCard(4, gText_BerryCrush, sData->textBerryCrushPts, sTrainerCardStatColors);
-}
-
-static void BufferUnionRoomStats(void)
-{
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.unionRoomNum)
-        ConvertIntToDecimalStringN(sData->textUnionRoomStats, sData->trainerCard.unionRoomNum, STR_CONV_MODE_RIGHT_ALIGN, 5);
-}
-
-static void PrintUnionStringOnCard(void)
-{
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.unionRoomNum)
-        PrintStatOnBackOfCard(3, gText_UnionTradesAndBattles, sData->textUnionRoomStats, sTrainerCardStatColors);
-}
-
-static void BufferLinkPokeblocksNum(void)
-{
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.pokeblocksWithFriends)
-    {
-        ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
-        StringExpandPlaceholders(sData->textNumLinkPokeblocks, gText_NumPokeblocks);
-    }
-}
-
-static void PrintPokeblockStringOnCard(void)
-{
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.pokeblocksWithFriends)
-        PrintStatOnBackOfCard(3, gText_PokeblocksWithFriends, sData->textNumLinkPokeblocks, sTrainerCardStatColors);
-}
-
-static void BufferLinkContestNum(void)
-{
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.contestsWithFriends)
-        ConvertIntToDecimalStringN(sData->textNumLinkContests, sData->trainerCard.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
-}
-
-static void PrintContestStringOnCard(void)
-{
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.contestsWithFriends)
-        PrintStatOnBackOfCard(4, gText_WonContestsWFriends, sData->textNumLinkContests, sTrainerCardStatColors);
-}
-
-static void BufferBattleFacilityStats(void)
-{
-    switch (sData->cardType)
-    {
-    case CARD_TYPE_RS:
-        if (sData->hasBattleTowerWins)
-        {
-            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.battleTowerWins, STR_CONV_MODE_RIGHT_ALIGN, 4);
-            ConvertIntToDecimalStringN(gStringVar2, sData->trainerCard.battleTowerStraightWins, STR_CONV_MODE_RIGHT_ALIGN, 4);
-            StringExpandPlaceholders(sData->textBattleFacilityStat, gText_WinsStraight);
-        }
-        break;
-    case CARD_TYPE_EMERALD:
-        if (sData->trainerCard.frontierBP)
-        {
-            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.frontierBP, STR_CONV_MODE_RIGHT_ALIGN, 5);
-            StringExpandPlaceholders(sData->textBattleFacilityStat, gText_NumBP);
-        }
-        break;
-    case CARD_TYPE_FRLG:
-        break;
-    }
-}
-
-static void PrintBattleFacilityStringOnCard(void)
-{
-    switch (sData->cardType)
-    {
-    case CARD_TYPE_RS:
-        if (sData->hasBattleTowerWins)
-            PrintStatOnBackOfCard(5, gText_BattleTower, sData->textBattleFacilityStat, sTrainerCardTextColors);
-        break;
-    case CARD_TYPE_EMERALD:
-        if (sData->trainerCard.frontierBP)
-            PrintStatOnBackOfCard(5, gText_BattlePtsWon, sData->textBattleFacilityStat, sTrainerCardStatColors);
-        break;
-    case CARD_TYPE_FRLG:
-        break;
-    }
+    PrintStatOnBackOfCard(5, gText_TrainerCardLevelCap, sData->textLevelCap, sTrainerCardStatColors);
 }
 
 static void PrintPokemonIconsOnCard(void)

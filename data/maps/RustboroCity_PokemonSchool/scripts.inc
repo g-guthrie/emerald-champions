@@ -286,14 +286,8 @@ RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems:
 	.string "conditions, then use the LEVELER.$"
 
 RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself:
-	.string "I changed Difficulty in OPTIONS\n"
-	.string "while trying a new team.\p"
-	.string "Easy lowers opponent levels by\n"
-	.string "four, Medium by two, and Hard\l"
-	.string "uses their full battle levels.\p"
-	.string "Their plans stay just as clever!\n"
-	.string "I still have to learn how my\l"
-	.string "partners work together.$"
+	.string "Difficulty lives in OPTIONS, and\n"
+	.string "the screen explains each setting.$"
 
 RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry:
 	.string "My partner ate its held BERRY…\n"
