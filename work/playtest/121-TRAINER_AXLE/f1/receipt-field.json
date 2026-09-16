@@ -1,0 +1,136 @@
+{
+  "play_order": 121,
+  "e_group": "E0145",
+  "trainer": "TRAINER_AXLE",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
+  "supersedes": "work/playtest/121-TRAINER_AXLE/receipt.json (mist-less run at cap 36; left intact)",
+  "build": "work/agent-battle-build-4",
+  "cap_note": "Cap 36 -> 42. Observed levels 43/39/42/44/41/39 match the dossier's 'Medium cap40 levels 43/39/42/44/41/39' exactly (42 + offset - 2).",
+  "mist_confirmation": {
+    "checked_at": "turn 0, before any action",
+    "field_source": {
+      "authored_by_trainer_a": [
+        "misty_terrain"
+      ],
+      "authored_by_trainer_b": [],
+      "terrain_at_turn_0": "misty",
+      "terrain_is_permanent": true,
+      "from_map": false
+    },
+    "state_terrain": "misty",
+    "verdict": "PASS. Note the turn-0 weather already read B_WEATHER_RAIN_NORMAL from my own Pelipper's Drizzle, with terrain still 'misty' - a second confirmation that the authored terrain and a player-set weather are independent."
+  },
+  "party_manifest": "work/playtest/121-TRAINER_AXLE/f1/party.json",
+  "party_note": "Reused the mist-less run's rain six (Pelipper / Swampert / Azumarill / Garganacl / Gyarados / Togekiss) after re-checking chronology against pool-42.json. All six are gate<=36 from maps preceding Lavaridge in book play order. Chronology-legal gate-42 species (Skarmory Route113, Turtonator JaggedPass, Drampa MeteorFalls_1F_1R) were available and not used; the Surf-gated Meteor Falls rooms are not legal here (Surf is C27).",
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 231,
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.038,
+      "events": "work/playtest/121-TRAINER_AXLE/f1/attempt-1-events.jsonl",
+      "result": "work/playtest/121-TRAINER_AXLE/f1/attempt-1-result.json",
+      "notes": "Won 6-2 in five turns with four reserves untouched (Garganacl and Togekiss never entered). Lost Swampert on turn 3 to Dachsbun's Body Press stacked on Centiskorch's Rocky Helmet and its own Life Orb, and Pelipper on turn 4 to a 4x Thunder Punch from Magmar. The decisive fact is that Magcargo - the entire engine of the room - died on turn 1 before it acted."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Misty Terrain is the room's authored starting field and is live before turn 1",
+      "result": "PASS",
+      "mist_dependent": true,
+      "evidence": "Turn 0: terrain 'misty', terrain_is_permanent true, field_source.authored_by_trainer_a ['misty_terrain'], from_map false - alongside my own Drizzle rain."
+    },
+    {
+      "check": "tactic: ACTIVATE MAGCARGO LAVA_PLUME ARMAROUGE / DACHSBUN / CENTISKORCH / CERULEDGE - Magcargo's Lava Plume lights up an allied Flash Fire or Well-Baked Body",
+      "result": "FAIL (did not fire)",
+      "mist_dependent": true,
+      "evidence": "Magcargo never selected Lava Plume. grep for LAVA_PLUME across the whole events log returns 0. On turn 1 its named ally Armarouge was on the field beside it - precisely the authored trigger condition - and it chose Power Gem into Pelipper instead. This is the second consecutive run in which this room's entire authored tactic went unobserved. See ai_defects."
+    },
+    {
+      "check": "plan: 'Misty Terrain blocks new grounded status conditions, not the Flash Fire or Well-Baked Body ability boosts'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": true,
+      "evidence": "No Lava Plume was ever cast and no other move in the room applies a status, so neither half of this claim could be tested. The mist's grounded-status block was not exercised at all in this room, in either direction."
+    },
+    {
+      "check": "plan: 'Use the actual configured Weak Armor ability on Magcargo'",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "Magcargo's Focus Sash did fire correctly ('The opposing Magcargo hung on using its Focus Sash!') against Pelipper's special Weather Ball, but Weak Armor triggers on contact/physical hits and the only physical hit it took - Swampert's Liquidation in the same turn - killed it. No +2 Speed / -1 Defence was ever observed."
+    },
+    {
+      "check": "Flash Fire on Armarouge, Centiskorch and Ceruledge",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "No Fire attack was aimed at any of them, by either side, at any point."
+    },
+    {
+      "check": "Well-Baked Body on Dachsbun",
+      "result": "NOT EXERCISED",
+      "mist_dependent": false,
+      "evidence": "Same - no Fire attack was directed at Dachsbun."
+    },
+    {
+      "check": "plan: 'Magcargo78 precedes Dachsbun75 and Quiet Armarouge56 at these seeds'",
+      "result": "PASS",
+      "mist_dependent": false,
+      "evidence": "Speed order held: Magcargo was selected to act before Armarouge on turn 1 (it was still slower than my Pelipper, which is what killed it), and Dachsbun consistently moved before Armarouge and Centiskorch."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "Armarouge",
+      "payoff": "EMPTY - and this one is worth attention. Both of my turn-1 attacks went into Magcargo, so Armarouge's Protect blocked nothing, while its partner Magcargo - the room's entire tactical engine, sitting at 4x to Water in rain against two Water attackers - died that same turn. Armarouge's Protect could not have saved Magcargo whatever it did, so this is not a defect under the no-command-reading rule; but it is a guard spent on the wrong half of a board where one member was obviously about to be doubled."
+    }
+  ],
+  "protect_ledger_summary": "Exactly one opposing Protect in the whole battle, and it was empty. Magcargo, Dachsbun, Centiskorch and Magmar all carry Protect and none of them used it, including Magcargo on the turn it was facing a lethal 4x double. Under-guarding rather than over-guarding is the pattern in this room.",
+  "ai_defects": [
+    {
+      "id": "AXLE-1",
+      "severity": "suspected tactic-wiring defect, not an illegal choice",
+      "turn": 1,
+      "board": "Rain (my Pelipper's Drizzle, set before turn 1). Opponent: Magcargo L43 (Focus Sash, Weak Armor) in the left slot with its named tactic ally Armarouge L39 (Flash Fire) in the right slot. Player: Pelipper L42 (Water/Flying) and Swampert L42 (Water/Ground), both at full HP.",
+      "chosen": "Magcargo selected Power Gem into Pelipper.",
+      "better": "Lava Plume. The dossier authors four explicit 'tactic: ACTIVATE MAGCARGO LAVA_PLUME <ally>' lines, one of which names Armarouge, and Armarouge was on the field beside it. Lava Plume is the only move that realises the room's stated concept ('Mega-independent thermal activation'), and turn 1 with a named ally adjacent is exactly the authored trigger.",
+      "assessment": "Power Gem is not an illegal or absurd choice - Rock is 2x into Pelipper and Lava Plume's raw damage into two Water types in rain is poor - so this may be correct damage scoring rather than a bug. But the tactic lines exist specifically to override raw damage scoring here, and they produced no effect. Across two runs of this room (the mist-less run and this one) Lava Plume has now been selected zero times. Worth tracing whether the ACTIVATE tactic is reaching the scorer for this trainer at all. I did not touch AI C code.",
+      "affected_teams_hint": "Any other trainer using an ACTIVATE-style ally-ability tactic should be checked for the same symptom; the parallel the dossier itself draws is Tabitha's Steam Engine speed trigger."
+    }
+  ],
+  "ai_notes": [
+    "Turn 4, Magmar: Thunder Punch into Pelipper for a 4x OHKO, correctly picking the Electric coverage move over its STAB Fire Punch against a Water/Flying target in rain. Sharp.",
+    "Turns 5-6, Ceruledge: Choice Band locked into Shadow Sneak. Ghost is 1x into both Gyarados and Azumarill, and Close Combat would have been 1x into Gyarados with far more base power; the priority was worth little at full HP on both of my bodies. Weak but defensible - a mild target/move-quality note, not a defect.",
+    "Turn 3, Dachsbun: Body Press into Swampert finished it through the Rocky Helmet and Life Orb chip. Correct read of the one body that was actually low.",
+    "AI decision time peaked at 1.038s, inside the 1.2s budget."
+  ],
+  "level_changes": [
+    {
+      "member": "ARMAROUGE",
+      "before": -1,
+      "after": 0,
+      "reason": "First-attempt win, five turns, two player faints, four reserves never used. Armarouge and Ceruledge share the lowest offset on the team (-1, level 39) and Axle declares no ace and no Mega slot, so they are the correct targets. Armarouge in particular was removed by a single rain Weather Ball from full HP without ever attacking twice.",
+      "cumulative_this_pass": 1,
+      "first_run_change": 0
+    },
+    {
+      "member": "CERULEDGE",
+      "before": -1,
+      "after": 0,
+      "reason": "Joint-lowest offset (-1, level 39). It arrived last, spent both of its turns on a Choice-Band-locked Shadow Sneak, and was removed by one Waterfall.",
+      "cumulative_this_pass": 1,
+      "first_run_change": 0
+    }
+  ],
+  "level_change_decision": "+1 on the two joint-lowest members. This sits between the brief's two bands: two player faints is nominally 'keep', but the win was five turns with four reserves untouched and no moment of real danger, which AGENTS.md treats as triggering a level review for a Gym room ('Every Gym trainer should be an exceptional difficulty benchmark. A comfortable win deserves scrutiny'). The mist-less run made no change here, so this is the first movement for these members and stays inside the +/-2 ceiling. Deliberately NOT raising Magcargo: it is at +3 already and more levels cannot help a 4x-to-Water Fire/Rock body that dies on turn 1 before it acts. AGENTS.md is explicit that AI defects are fixed before compensating with levels, so AXLE-1 above should be resolved before this room is judged on difficulty again.",
+  "honest_limit": "This room has now been played twice and its authored strategy has fired zero times in either run. The 6-2 scoreline is therefore not a measurement of Axle's design - it is a measurement of what happens when the design does not execute. Do not read the level bump as a verdict on the concept.",
+  "could_this_be_cooler": "The concept is genuinely good and should be kept: Magcargo deliberately hitting its own side with Lava Plume to switch on three Flash Fires and a Well-Baked Body is a far more interesting engine than a weather setter, and the dossier is right that it contrasts well with Tabitha's Steam Engine trigger. The problem is structural rather than creative. Every single activation target is a Fire type whose ability only matters once a Fire attack lands, and the activator itself is Fire/Rock - 4x to Water - holding a Focus Sash, in a Gym the player walks into expecting to bring Water. Against any rain lead Magcargo dies on turn 1 and the room becomes six ordinary Fire types. The concrete suggestion is to move the activation off the fragile slot: give the Lava Plume to a body that survives a Water lead (Dachsbun already has Well-Baked Body and Relaxed 252/4/252 bulk and could carry the spread Fire move itself), or give Magcargo a way to act on the turn it arrives. Keep the species and keep the tactic; change which member is holding the match. Not changed in this pass.",
+  "authored_set_legality": "No legality problem. Levels, abilities and items all resolved as authored, including the configured Weak Armor on Magcargo (ability slot correct, simply never triggered) and Focus Sash, Life Orb, Sitrus, Eviolite, Rocky Helmet and Choice Band on the rest.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
