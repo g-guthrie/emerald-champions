@@ -1,0 +1,81 @@
+{
+  "rerun_of": "work/playtest/36-TRAINER_TAKAO/receipt.json",
+  "rerun_reason": "AI check commissioned by the main agent: re-test the turn-one healthy-lead withdrawal defect recorded in the first pass ('Withdrew the healthy, unthreatened Grapploct and sent in Hitmonlee') against the rebuilt headless ROM, which now charges healthy turn-one switches.",
+  "play_order": 36,
+  "e_group": "E0037",
+  "trainer": "TRAINER_TAKAO",
+  "class": "gym",
+  "location": "DewfordTown_Gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/36-TRAINER_TAKAO/party-rerun.json",
+  "party_changed_from_first_pass": {
+    "reason": "Chronology only. WHIMSICOTT was removed (Cottonee is Verdanturf Meadow, C20) and replaced by Mr. Mime, which never entered. The leads were deliberately kept identical to the first pass - Tsareena and Magearna - so the turn-one board the defect was recorded on would be reproduced as exactly as possible.",
+    "removed": ["SPECIES_WHIMSICOTT"], "added": ["SPECIES_MR_MIME"],
+    "kept": ["SPECIES_TSAREENA", "SPECIES_MAGEARNA", "SPECIES_SPIRITOMB", "SPECIES_ALAKAZAM", "SPECIES_CELEBI"]
+  },
+  "opponent_levels_this_run": {"GRAPPLOCT": 20, "WOBBUFFET": 20, "HITMONLEE": 20, "POLIWRATH": 20, "PASSIMIAN": 20, "PAWMO": 23},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/36-TRAINER_TAKAO/r1", "seed": "0xC4D0",
+      "outcome": "won", "turns": 6, "decisions": 10, "player_faints": 1, "opponent_faints": 6,
+      "ai_decision_frames_max": 64, "ai_decision_seconds_max": 1.072,
+      "narrative": "The defect reproduced on turn 1 and cost Takao two members immediately. He withdrew a completely healthy, unthreatened Grapploct at 80/80 and sent Hitmonlee into it; Tsareena's Play Rough, which had been aimed at Grapploct, hit the replacement instead at 2x and knocked it out on arrival, and Magearna's Fleur Cannon then redirected onto Wobbuffet and knocked out a 124 HP body before its Mirror Coat could resolve. Two members for nothing, on the first turn, without either of them acting. From there the fight was straightforward Fairy pressure into a room where five of six members are Fighting-typed. Grapploct and Poliwrath both bought real turns with Protect, Poliwrath's Ice Beam took Tsareena, and Pawmo's Nuzzle paralysed it first, but one player faint against six was never in doubt."
+    }
+  ],
+  "commissioned_check": {
+    "defect": "turn-one healthy-lead withdrawal (first pass, a1 turn 1: Takao withdrew a healthy Grapploct and sent Hitmonlee)",
+    "result": "REPRODUCED - still present on the rebuilt ROM",
+    "evidence": "r1 turn 1, same trainer, same leads, same opening HP as the first pass. Grapploct was at 80/80 with no status, no stat drops and nothing on the field threatening it - my leads had not yet acted. Takao withdrew it and sent Hitmonlee, which was knocked out by the 2x Play Rough that would otherwise have hit a Grapploct with 80 HP. The chosen record for battler 1 is {'action': 'switch', 'source': 'native'} with no move. This is the same shape and the same trainer as the first pass.",
+    "contrast": "The identical check at E0036 Lilith, run immediately before this one on the same ROM and with the same player leads, did NOT reproduce: both of Lilith's leads attacked on turn 1. So the charge is being applied, but it is not yet large enough to deter the switch on Takao's board. The two boards differ in one obvious way: Takao's switch-in candidate (Hitmonlee, Unburden/White Herb) is a setup-adjacent body, and Grapploct's own best move is Octolock, a support move that the new pricing should also be discounting. It is worth the AI owner checking whether the switch is being scored as a route to a cheap Unburden activation.",
+    "cost_measured": "Two of six members, both removed on turn 1 without acting, out of a total of six opponent faints. Roughly a third of the team was spent on one bad decision."
+  },
+  "strategy_checks": [
+    {"check": "Grapploct Octolock restricts eligible exits and the end-turn drops must lead to useful damage", "result": "NOT OBSERVED", "evidence": "Octolock was never selected in either pass. Grapploct chose Drain Punch twice and Protect once. Given that it spent turn 1 switching out, it never had a board where a multi-turn trap could pay off."},
+    {"check": "Wobbuffet's Shadow Tag restricts eligible exits; Counter/Mirror Coat must match actual incoming hits; Encore must have a useful target", "result": "CHOSEN, NOT EXECUTED", "evidence": "Wobbuffet selected Mirror Coat on turn 1, which was the correct category read - both of my leads' relevant attacks were special - but Mirror Coat is -5 priority and Wobbuffet was knocked out by the Fleur Cannon before it could resolve. Encore and Safeguard were never used. Shadow Tag never mattered because I never wanted to switch."},
+    {"check": "Special Life Orb Poliwrath exploits Octolock's Special Defense side and answers physical walls", "result": "PASS", "evidence": "Poliwrath was the best-played member. It Protected a 2x Thunderbolt on its entry turn, then chose Ice Beam into Tsareena twice - correctly picking the 2x Ice over its own 0.5x Water STAB against a Grass body - and killed it. Life Orb recoil was paid each time."},
+    {"check": "Hitmonlee's White Herb/Close Combat activates Unburden through a real drop", "result": "NOT OBSERVED", "evidence": "Hitmonlee was knocked out on the turn it was switched in, before any decision. Unobserved in both passes, for the same reason both times - see the commissioned check."},
+    {"check": "Passimian supplies Scarf Defiant pressure", "result": "PASS", "evidence": "Passimian entered and immediately chose Close Combat into Magearna for a large chunk. Defiant never triggered because I used no stat-lowering move on it, and the Choice lock was not tested because it died to a 2x Fleur Cannon on its second turn."},
+    {"check": "Pawmo contributes priority/electric control", "result": "PASS", "evidence": "Pawmo's first action was Nuzzle into Tsareena - correctly choosing the guaranteed paralysis over damage, since Nuzzle is 0.5x into a Grass body and the paralysis is the point. It then used Thunder Punch. That is the authored control role played properly."},
+    {"check": "There is no invented Perish Song", "result": "PASS", "evidence": "No Perish Song appeared in any move list or message."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "user": "GRAPPLOCT", "payoff": "real - at 47/80 it blocked a 2x Play Rough that was lethal"},
+    {"turn": 3, "user": "POLIWRATH", "payoff": "real - blocked a 2x Thunderbolt on the turn it entered"}
+  ],
+  "protect_note": "Two guards, both with real payoff, no empty guard and no consecutive guard. This is a clear improvement on the first pass, which recorded an empty Poliwrath Protect at full HP beside a focused partner. The guard economy on this trainer looks fixed even though the switch economy does not.",
+  "ai_defects": [
+    {
+      "severity": "moderate",
+      "status": "UNRESOLVED - reproduced from the first pass on the rebuilt ROM",
+      "turn": "r1 turn 1",
+      "board": "Grapploct at 80/80, no status, no drops, beside Wobbuffet at 124/124, against Tsareena and Magearna before either had acted",
+      "chosen": "Withdrew Grapploct and sent Hitmonlee, which was knocked out by the incoming 2x Play Rough without acting; the redirected Fleur Cannon then also removed Wobbuffet",
+      "better": "Attack, or at minimum do not volunteer a 2x-weak body into an unrevealed board. Grapploct at full HP was in no danger it could identify, and the pivot handed me two knockouts on turn 1 for one attack each.",
+      "note": "This is the defect the rerun was commissioned to re-test, and it is still here. The healthy-turn-one-switch charge did suppress the equivalent switch at E0036 Lilith on the same ROM, so the mechanism exists but the price is too low for this board. Precise cost: two of six members, neither of which ever took an action."
+    }
+  ],
+  "ai_observations": [
+    "Apart from turn 1 the AI played this room well: Poliwrath's Ice Beam over its own Water STAB into a Grass body, Pawmo opening with Nuzzle rather than a resisted attack, Wobbuffet reading the special category correctly for Mirror Coat, and two Protects that each denied a lethal attack. The contrast with turn 1 is stark, which is why I am confident the switch scoring is the isolated problem rather than general play.",
+    "ai_decision_frames_max 64 (1.072 s), the highest sampled in this block."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with one player faint. The brief's 0-1 faint band calls for +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "WOBBUFFET", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21},
+      {"member": "HITMONLEE", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21}
+    ],
+    "reasoning": "Five of the six members sit at offset 2, which resolves to level 20 - exactly the player's cap - in a Gym room at play order 36, so there is no single lowest member to pick by level. I chose the two that have now contributed nothing across two passes: Hitmonlee, which has been knocked out before acting both times, and Wobbuffet, whose 124 HP body was removed by a single neutral special attack before its -5 priority reactive move could resolve. A point on each makes both marginally more likely to survive to act at all.",
+    "IMPORTANT_CAVEAT": "I want this recorded plainly rather than buried: this result is contaminated by the AI defect above. Takao lost two of six members on turn 1 to a bad switch, not to a level deficit, and my one faint reflects a fight that was effectively five-on-six from the first turn. The band is what the brief says to apply and I have applied it, but if the turn-one switch scoring is fixed, these two points should be re-evaluated rather than assumed correct, and I would not be surprised if they need to come back off. The first pass reached the 'keep' band on the same trainer with the same defect present and two faints.",
+    "budget_after_this_pass": {"GRAPPLOCT": "0 of 2 used", "WOBBUFFET": "+1 of 2 used", "HITMONLEE": "+1 of 2 used", "POLIWRATH": "0 of 2 used", "PASSIMIAN": "0 of 2 used", "PAWMO": "0 of 2 used"},
+    "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. scripts/emerald_champions_teams.py --write was deliberately NOT run: a concurrent session has uncommitted edits to other trainers in the same authored file. My two lines were staged as an isolated hunk. The main agent materializes.",
+    "rerun_after_this_change": "NOT PERFORMED - needs a ROM rebuild only the main agent can do."
+  },
+  "cooler_note": "The counterpuncher identity is the most distinctive in the Dewford Gym and it is the one that least gets to happen. Wobbuffet's Counter and Mirror Coat are both -5 priority reactive moves on a body with 58/58 defences, so it has to survive a turn to do anything, and it has now failed to survive one twice. Grapploct's Octolock has the same problem in slower form - it is a two-turn investment on a trainer whose fights last six. A concrete suggestion for a later pass, not applied here: Wobbuffet's value is entirely in outlasting one attack, and its Sitrus Berry is the wrong item for that; nothing about the set needs changing, but it wants a partner that guards it on the entry turn rather than Grapploct, which spends that turn on its own plan. Pairing Wobbuffet with Poliwrath - the member that actually uses Protect well - would give the counterpunch a turn to exist. Species-wise the island grappler roster is good and clearly distinct from Lilith's footwork team next door.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
