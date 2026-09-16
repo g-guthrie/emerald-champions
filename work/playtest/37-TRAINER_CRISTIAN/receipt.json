@@ -1,0 +1,38 @@
+{
+  "play_order": 37,
+  "e_group": "E0038",
+  "trainer": "TRAINER_CRISTIAN",
+  "class": "gym",
+  "location": "DewfordTown_Gym",
+  "cap": 20,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"FALINKS": 22, "GALLADE": 19, "ANNIHILAPE": 19, "LUCARIO": 19, "HITMONCHAN": 20, "MACHAMP": 19},
+  "party_manifest": "work/playtest/party-cap20-antifighting.json",
+  "party_pool_audit": "All six from work/reference-pools/pool-20.json: TOGETIC (friendship evo from Togepi, gate 14), ENAMORUS (legendary_sign:VerdanturfMeadow, gate 14, reachable legend), HOOPA (gate 20), MAGEARNA (gate 20), ALAKAZAM (Linking Cord evo, gate 20), AZUMARILL (level evo, gate 20). No Mega used: the Mega Ring is granted by Steven only after Brawly.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/37-TRAINER_CRISTIAN/a1", "seed": 41, "outcome": "won", "turns": 7, "decisions": 12, "player_faints": 5, "opponent_faints": 6, "ai_decision_seconds_max": 0.184,
+     "narrative": "T1 Follow Me + Moonblast; Gallade Protect blocked Moonblast, Falinks Beat Up into redirected Togetic. T2 Moonblast broke Falinks' Sash, Togetic Air Slash KO'd Falinks. T3 Togetic pivoted to Magearna and Blitz Boxer Ice Punch KO'd Enamorus before it moved. T4 Mach Punch + Close Combat focus-fired Magearna down before it acted. T5 Aqua Jet KO'd Hitmonchan, Psycho Cut KO'd Azumarill, Shadow Ball KO'd Gallade. T6 Alakazam Psychic KO'd Annihilape, Lucario Crunch KO'd Alakazam, Hoopa's Shadow Ball retargeted onto Lucario. T7 Togetic Follow Me absorbed Crunch, Hoopa KO'd Lucario, No Guard Stone Edge KO'd Togetic. T8 Hoopa Psychic KO'd Choice-locked Machamp."}
+  ],
+  "strategy_checks": [
+    {"check": "tactic ACTIVATE FALINKS BEAT_UP GALLADE/LUCARIO/ANNIHILAPE fires on a qualifying ally", "result": "NOT_FIRED", "evidence": "Turn 1 Falinks used Beat Up at battler 0 (my side, redirected by Follow Me, 7 damage through Eviolite); turn 2 Beat Up at battler 2 Enamorus (Dark 0.5x vs Fairy). Neither Gallade nor Annihilape was ever the recipient. Consistent with the plan's own guardrail (`reject friendly fire that kills the recipient`): Beat Up is Dark and would hit Psychic-type Gallade for 2x, so the authored tactic is self-defeating against its own named Gallade recipient. Annihilape was not yet on the field. Design finding, not an engine defect."},
+    {"check": "Hitmonchan Blitz Boxer adds priority to punches", "result": "PASS", "evidence": "Turn 3 Ice Punch moved before Enamorus (base 87 Spe, Timid) and KO'd it; turn 4 Mach Punch resolved first in the Magearna focus-fire."},
+    {"check": "Machamp No Guard Dynamic Punch/Stone Edge never misses, Choice Band locks", "result": "PASS", "evidence": "Turn 7 Stone Edge hit Togetic for a KO; turn 8 state shows Machamp still on Stone Edge only (Choice Band lock honoured)."},
+    {"check": "Annihilape selects Rage Fist into a Fighting-immune target", "result": "PASS", "evidence": "Turn 6 previous_turn records Annihilape choosing RAGE_FIST at battler 2 (Hoopa, Psychic/Ghost, immune to Fighting, weak to Ghost). It was KO'd by Alakazam before the move resolved."},
+    {"check": "Justified on Gallade/Lucario", "result": "NOT_EXERCISED", "evidence": "The party carried no Dark move, so no Justified trigger was possible. Lucario's own Crunch does not feed its ability."},
+    {"check": "Focus fire and speed discipline", "result": "PASS", "evidence": "Turns 3 and 4 the pair concentrated on one target each turn and removed Enamorus and Magearna before either acted."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "GALLADE", "payoff": "REAL: blocked Enamorus' Life Orb Moonblast (2x on Psychic/Fighting), which would otherwise have been a likely KO on a 62 HP Gallade, while Falinks acted freely."}
+  ],
+  "protect_ledger_note": "One opponent Protect in the whole battle, and it paid. No empty or repetitive guarding observed.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Falinks preferring Beat Up (Dark, 0.5x) into a Fairy/Flying pair over Coaching was mildly suboptimal, but no legal line was strongly better: Close Combat is 0.25x into the same pair and the authored ally recipient would take 2x. Reported as a team-design finding rather than an AI defect.",
+    "result.json reports opponent_faints 0 for a won battle although all six opponents fainted (the live state showed of=5 mid-battle and reset at victory). Driver reporting nit, not a battle defect; the receipt records the true count."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first optimized attempt, but with 5 of 6 player faints and only one survivor at full health after 8 turns of genuine pressure. Brief rule 'won with 2+ faints or after a real fight -> keep'. No level change.",
+  "could_this_be_cooler": "The six-member all-Fighting roster reads as a strong gym benchmark, but Falinks is the only member with a genuinely distinctive interaction and its authored Beat Up relay cannot fire on the named Psychic-type Gallade without hitting it for 2x. Concrete suggestion for a later authoring pass (NOT changed here): move the Beat Up relay onto a Dark-resistant or Dark-immune beneficiary - a Justified Dark-resistant partner, or pair Falinks with a Normal-type/Ghost-immune recipient - or replace Gallade's slot with a Fighting-type that actually wants the chip, so the room's signature mechanic can legally execute. Blitz Boxer Hitmonchan, No Guard Choice Band Machamp and Rage Fist Annihilape all showcased cleanly and should be kept.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}

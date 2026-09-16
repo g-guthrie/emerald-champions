@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "encounter": "C15 Dewford Gym block, cap 20 anti-Fighting core",
+  "availability_audit": "Every member appears in work/reference-pools/pool-20.json with gate <= 20. No Mega (Mega Ring is granted by Steven after Brawly). Items from the free Center held-item catalogue/preparation system.",
+  "plan": "Togetic redirects and sets Tailwind behind 0.25x Fighting resistance; Hoopa is immune to Normal (Beat Up/Extreme Speed) and Fighting; Enamorus and Magearna supply Fairy nukes; Alakazam is the fast recoil-free special attacker; Azumarill supplies Huge Power priority and Knock Off.",
+  "party": [
+    {"species":"SPECIES_TOGETIC","moves":["MOVE_FOLLOW_ME","MOVE_AIR_SLASH","MOVE_TAILWIND","MOVE_PROTECT"],"nature":"NATURE_CALM","ability":"ABILITY_SERENE_GRACE","item":"ITEM_EVIOLITE","evs":[252,0,132,0,124,0],"role":"redirection and Tailwind support","availability":"pool-20: evolution:friendship from SPECIES_TOGEPI (gate 14)"},
+    {"species":"SPECIES_ENAMORUS","moves":["MOVE_MOONBLAST","MOVE_EARTH_POWER","MOVE_SUPERPOWER","MOVE_PROTECT"],"nature":"NATURE_TIMID","ability":"ABILITY_CONTRARY","item":"ITEM_LIFE_ORB","evs":[4,0,0,252,0,252],"role":"Fairy/Flying special nuke, Contrary Superpower","availability":"pool-20: legendary_sign:VerdanturfMeadow (gate 14); reachable legend"},
+    {"species":"SPECIES_HOOPA","moves":["MOVE_PSYCHIC","MOVE_SHADOW_BALL","MOVE_NASTY_PLOT","MOVE_PROTECT"],"nature":"NATURE_MODEST","ability":"ABILITY_MAGICIAN","item":"ITEM_SITRUS_BERRY","evs":[252,0,0,252,4,0],"role":"Normal/Fighting-immune special attacker","availability":"pool-20: gate 20"},
+    {"species":"SPECIES_MAGEARNA","moves":["MOVE_FLEUR_CANNON","MOVE_FLASH_CANNON","MOVE_AURA_SPHERE","MOVE_PROTECT"],"nature":"NATURE_MODEST","ability":"ABILITY_SOUL_HEART","item":"ITEM_SITRUS_BERRY","evs":[252,0,4,252,0,0],"role":"bulky Steel/Fairy Soul-Heart attacker","availability":"pool-20: gate 20"},
+    {"species":"SPECIES_ALAKAZAM","moves":["MOVE_PSYCHIC","MOVE_FOCUS_BLAST","MOVE_SHADOW_BALL","MOVE_PROTECT"],"nature":"NATURE_TIMID","ability":"ABILITY_MAGIC_GUARD","item":"ITEM_LIFE_ORB","evs":[4,0,0,252,0,252],"role":"fast recoil-free special attacker","availability":"pool-20: evolution:item:ITEM_LINKING_CORD from SPECIES_KADABRA (gate 20)"},
+    {"species":"SPECIES_AZUMARILL","moves":["MOVE_LIQUIDATION","MOVE_PLAY_ROUGH","MOVE_AQUA_JET","MOVE_KNOCK_OFF"],"nature":"NATURE_ADAMANT","ability":"ABILITY_HUGE_POWER","item":"ITEM_ASSAULT_VEST","evs":[252,252,4,0,0,0],"role":"Huge Power priority and item removal","availability":"pool-20: evolution:level from SPECIES_MARILL (gate 20)"}
+  ]
+}
