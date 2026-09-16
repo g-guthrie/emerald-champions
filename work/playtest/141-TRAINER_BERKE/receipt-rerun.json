@@ -1,0 +1,73 @@
+{
+  "play_order": 141,
+  "e_group": "E0167",
+  "trainer": "TRAINER_BERKE",
+  "class": "gym",
+  "location": "PetalburgCity_Gym",
+  "cap": 42,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/141-TRAINER_BERKE/receipt.json",
+  "build": "work/agent-battle-build-4",
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "why_rerun": "Aurorus and Exploud were each raised from +2 to +3 after a first-run 6-2 clear in seven turns. Aurorus was raised because it is the room's whole weather engine and died on turn two without landing a Blizzard; Exploud because it got two actions, both Protect, and never triggered its Throat Spray.",
+  "cap_confirmation": "Driver reports level_cap 42 and Aurorus L43 / Glalie L39 / Exploud L43 / Cetitan L42 / Stoutland L42 / Kangaskhan L42 = cap 42 + offset - 2 with the current offsets 3/-1/3/2/2/2. Matches the brief's table.",
+  "level_offsets_at_run": {"AURORUS": 3, "GLALIE": -1, "EXPLOUD": 3, "CETITAN": 2, "STOUTLAND": 2, "KANGASKHAN": 2},
+  "resolved_opponent_levels": {"AURORUS": 43, "GLALIE": 39, "EXPLOUD": 43, "CETITAN": 42, "STOUTLAND": 42, "KANGASKHAN": 42},
+  "levels_previous_run": {"AURORUS": 42, "GLALIE": 39, "EXPLOUD": 42, "CETITAN": 42, "STOUTLAND": 42, "KANGASKHAN": 42},
+  "party_manifest": "work/playtest/141-TRAINER_BERKE/party.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 42, same map. Petalburg Gym is challenged in C27 and the cap is still 42 because Norman's badge comes at the end of the Gym; no Surf, so Route 118 and New Mauville sources stay excluded. Lucarionite stone-window 14 with the Mega Ring from Steven in C13. Kartana is an Ultra Beast but is native to Petalburg Woods from C05 and this window is far above cap 24. Not reported weak or illegal. The party already carried Torkoal specifically to test the dossier's named weather counterplay, so no rebuild was needed.",
+  "pre_declared_strategy_checks": [
+    "Snow Warning sets snow the moment Aurorus enters",
+    "Mega Glalie gains Refrigerate",
+    "Cetitan's Slush Rush doubles its Speed in snow",
+    "Exploud's Throat Spray fires on its first sound move (FAILED in the first run)",
+    "Scrappy on Exploud and Kangaskhan",
+    "Replacing the weather removes Blizzard accuracy, Slush Rush and the Ice Defense boost in one move - the dossier's named counterplay, tested by actually bringing Drought",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/141-TRAINER_BERKE/r1",
+      "seed": 1141,
+      "outcome": "won",
+      "turns": 9,
+      "player_faints": 4,
+      "opponent_faints": 6,
+      "narrative": "Snow was already up at turn 0 from Snow Warning. T1 Glalie Mega-Evolved and led with Ice Shard while Aurorus Protected a 4x Close Combat from a freshly Mega-Evolved Lucario; a critical Smart Strike removed Mega Glalie early, which was luck rather than plan. T2 Aurorus fell to the second Close Combat and Cetitan Protected the Smart Strike aimed at it; snow persisted through the Icy Rock as it should. T3 was the room's best turn and it cost me both leads at once: Cetitan's High Horsepower was 2x into a Mega Lucario whose Defense was already -1 from its own Close Combats, and Stoutland's Choice Band Fire Fang was 4x into Kartana - two correct type reads on the same turn. T4 Incineroar and Chandelure came in, Cetitan Protected away the Fake Out, and a critical Flamethrower removed Stoutland. T5 Exploud arrived and its Hyper Voice killed Chandelure and DID trigger the Throat Spray this time, though Flare Blitz removed it before the boost could be spent. T6 I brought Torkoal, whose Drought replaced the snow with sun, and Kangaskhan immediately Fake Out'd the Eruption user - the correct target. T7 Eruption killed Kangaskhan and took a 234 HP Cetitan to 32; Cetitan's High Horsepower finished Incineroar. T8 Cetitan Protected both attacks at 32 HP. T9 Aegislash's Sacred Sword finally removed it."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Snow Warning sets snow on entry", "result": "PASS", "evidence": "Driver state at turn 0 already reports weather ['B_WEATHER_SNOW'], and 'Snow continues to fall.' appears at the end of every turn until Drought replaced it. The Icy Rock extension held - snow survived Aurorus's death on T2 and was still up on T5."},
+    {"check": "Mega Glalie gains Refrigerate", "result": "PASS on the Mega, NOT DEMONSTRATED on Refrigerate", "evidence": "T1: 'The opposing Glalie has Mega Evolved into Mega Glalie!' - it took the free transformation on the first turn, unlike E0071's Kangaskhan. It then used Ice Shard, which is already Ice and gains nothing from Refrigerate but priority, and died to a critical Smart Strike before it could use Double-Edge. So the ability itself produced no evidence. Note the Mega decision is the check that matters here and it passed."},
+    {"check": "Cetitan's Slush Rush in snow", "result": "PASS", "evidence": "Cetitan moved before my Incineroar and before Torkoal on every snow turn, and its High Horsepower resolved ahead of both of my leads on T3. Once Drought replaced the snow on T5 it stopped outspeeding - on T8 and T9 it was still moving first only because both of my remaining bodies are deliberately slow."},
+    {"check": "Exploud's Throat Spray fires", "result": "PASS - fixed relative to the first run", "evidence": "T5: 'The opposing Exploud used Hyper Voice!' / 'Chandelure fainted!' / 'The Throat Spray boosted the opposing Exploud's Sp. Atk!'. In the first run Exploud got two actions, both Protect, and never triggered it. This run it attacked immediately, killed a Pokemon with the sound move and banked the boost. The +1 is not the cause - the behaviour is - but this is the check the first receipt left open and it now passes."},
+    {"check": "Scrappy", "result": "NOT EXERCISED", "evidence": "My party's only Ghost was Aegislash, which arrived on T8 against a Cetitan locked into Ground and Ice moves. No Normal or Fighting move was aimed at a Ghost, so Scrappy had nothing to ignore. Untested for the second run running."},
+    {"check": "Replacing the weather is real counterplay", "result": "PASS - confirmed by actually doing it", "evidence": "T5, Torkoal switched in: 'The sunlight turned harsh!' and driver weather changed from B_WEATHER_SNOW to B_WEATHER_SUN_NORMAL in one action. Cetitan's Slush Rush stopped applying from that point, and sun additionally boosted my own Eruption, which then killed Kangaskhan and took 202 off a 234 HP Cetitan in a single hit. The dossier's crack line is accurate and the swing is large - this is the honest answer to the room and it is worth a book note that it is this strong."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Four Protects, all with real payoff and none repeated back-to-back by the same battler except Cetitan's T8, which was its third of the battle but its first in two turns. See ledger."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "AURORUS", "payoff": "EXCELLENT. Blocked a 4x Close Combat from a just-Mega-Evolved Adaptability Lucario - a guaranteed kill on the room's weather engine. It bought Aurorus the turn on which it used Freeze-Dry and, more importantly, kept the snow's setter alive for an extra turn."},
+    {"turn": 2, "battler": "CETITAN", "payoff": "REAL. Blocked Kartana's Smart Strike, 2x into Ice. Cetitan was at full HP so it was not lethal, but it was a large chunk off the room's biggest body and the guard was free - Cetitan had nothing better to do on a turn when both of my attackers were committed to Aurorus."},
+    {"turn": 4, "battler": "CETITAN", "payoff": "REAL. Blocked Incineroar's Fake Out, denying the flinch on a turn when the flinch was the whole point of the move. Cetitan then acted normally on the following turn."},
+    {"turn": 8, "battler": "CETITAN", "payoff": "EXCELLENT. At 32/234 as the last Pokemon standing, Protect blocked both a Sacred Sword at 2x and a sun-boosted Heat Wave at 2x, either of which was lethal. It bought a full extra turn and a Leftovers tick."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "T3 was the best opposing turn of this fight and it was two correct type reads landing together: High Horsepower into a Mega Lucario whose Defense was self-lowered to -1 by its own Close Combats, and a Choice Band Fire Fang at 4x into a Grass/Steel Kartana. It killed both of my leads in one turn and it is why this rerun cost me four Pokemon instead of two.",
+    "Kangaskhan's Fake Out on T6 correctly targeted Torkoal, the Eruption user that had just replaced the weather, rather than the visibly weaker Incineroar. That is a threat assessment, not a default.",
+    "Cetitan is the anchor of this room and it played like one: 234 HP, three well-timed Protects, and the kills on both my Mega and my Incineroar. It should not be touched.",
+    "No AI defect observed. Note for the block index: this Kangaskhan holds a Sitrus Berry, not the Kangaskhanite, so it is not a second instance of the E0071 Mega defect."
+  ],
+  "level_changes": {
+    "rule_applied": "KEEP, no change. Brief rule 5: 'won with 2+ faints or after a real fight -> keep'. Four of six lost against a six-member Gym room over nine turns, which is comfortably past the AGENTS.md three-faint bar for a well-prepared party.",
+    "changes": [],
+    "budget_note": "Aurorus and Exploud are each at +1 of the permitted +/-2 from the first pass and are not moved again. No member moves in this rerun.",
+    "comparison": "First run: seven turns, two player faints. This run: nine turns, four player faints, against the same six-member party at the same cap. Both raised members justified themselves - Aurorus Protected away a guaranteed 4x kill and held the snow one turn longer, and Exploud finally attacked, killed a Pokemon and banked its Throat Spray. The room is now where a Gym room should be."
+  },
+  "verdict": "calibrated",
+  "could_this_be_cooler": "Kept as built, and the rerun confirms the first receipt's read: replacing Perrserker with Aurorus gave Berke a real weather engine and the room now has a memorable identity - an always-accurate Blizzard from a fossil beside a Mega Glalie throwing Ice-type Double-Edges. What the rerun exposes is how cheap the named counterplay is: one Drought switch-in removed Blizzard accuracy, Slush Rush and the snow Defense boost simultaneously, AND boosted my own Eruption, so the answer to the room is a single Pokemon rather than a plan. That is a fair trade for a player who thinks of it, but it means the room's entire identity rests on the opponent not being weather-answered, and both of Berke's weather-dependent members (Cetitan, Glalie) go quiet the moment it happens. The suggestion I would flag, not change: give one member an item or move that punishes a weather swap - Aurorus's Icy Rock already tries to outlast it, but a Cetitan that carried Ice Shard would still have priority damage in sun. Also worth recording: Refrigerate has still never been demonstrated, because Mega Glalie has died early in both runs; its -1 offset is doing exactly what the dossier intended for a Mega, but it may be one level too generous to itself.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-4. Not earned campaign traversal, and no badge was awarded. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}
