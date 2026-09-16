@@ -1,0 +1,31 @@
+{
+  "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "elf_sha256": "ae6ed685cf22c9aeaf141efed91e22b46d284efbe3e3300c07c87c981be29938",
+  "seed": 94,
+  "trainer_a": "TRAINER_LUNG",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 36,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/94-TRAINER_LUNG/party.json",
+  "party_sha256": "268a3b0d8d249adb98a9c352e6124b624d805808fcbc736e1b58a1cc195f1410",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY"
+  ],
+  "prepared": {
+    "encounter": "P8 play_order 94 TRAINER_LUNG (Route 113), cap window 36",
+    "party": 6
+  },
+  "started": {
+    "frames": 1621
+  },
+  "replacement_commits": {
+    "turn": 4,
+    "slots": {}
+  }
+}

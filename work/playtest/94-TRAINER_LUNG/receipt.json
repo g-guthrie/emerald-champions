@@ -1,0 +1,50 @@
+{
+  "play_order": 94,
+  "e_group": "E0110",
+  "trainer": "TRAINER_LUNG",
+  "class": "regular",
+  "location": "Route113",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"WEEZING": 35, "NINJASK": 35, "SHEDINJA": 35, "VENOMOTH": 36},
+  "cap_window_confirmation": "Offsets 1/1/1/2 resolved to 35/35/35/36 against a level-36 party: cap 36 on Medium, matching the dossier seed line.",
+  "party_manifest": "work/playtest/94-TRAINER_LUNG/party.json",
+  "party_pool_audit": "Block core led by Incineroar + Gyarados. All six gate <= 36 with source maps passed before Route 113.",
+  "pre_declared_strategy_checks": [
+    "Weezing retains Levitate and is never the allied-Wonder-Guard-suppressing Neutralizing Gas",
+    "Ninjask attacks or takes a genuinely useful Speed Boost / setup turn",
+    "Safety Goggles Shedinja is protected from indirect damage and super-effective attacks, and Wonder Guard holds",
+    "Venomoth trades Quiver Dance for Disable, and Disable requires a suitable revealed last move",
+    "Route 113 ash is clear weather, not damaging sand or snow",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/94-TRAINER_LUNG/a1", "seed": 94, "outcome": "won", "turns": 5, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Ninjask Protected, which blocked a 2x Flare Blitz that would have killed it and banked a free Speed Boost in the same turn - the best single guard in my block. Weezing Taunted my Incineroar, which cost it almost nothing since Parting Shot is its only status move, and a critical Waterfall took Weezing to 51. T2 Ninjask spent its bought turn on Swords Dance and was killed by Flare Blitz before ever attacking, so it finished the battle with +2 Attack and zero damage dealt. T3 Waterfall finished Weezing and Venomoth arrived and put Incineroar to sleep. T4 Venomoth slept my Gyarados too - two Sleep Powders, two hits - while Shedinja's X-Scissor took 72 off the Mega at 2x into its Dark half; Incineroar woke up and Flare Blitz killed Venomoth. T5 Shedinja, on its 1 HP, correctly used priority Shadow Sneak to get a last action in, and Mega Gyarados's Waterfall killed it - a neutral Water move connecting with Wonder Guard because Mold Breaker ignores the ability entirely."}
+  ],
+  "strategy_checks": [
+    {"check": "Weezing retains Levitate, never Neutralizing Gas", "result": "PASS, verified in state on turn 0", "evidence": "The driver reports ab=LEVITATE for Weezing at battler 1 before any action was taken. This matters because Neutralizing Gas would suppress its own partner Shedinja's Wonder Guard and destroy the team's centrepiece; the dossier flags it and the live data is correct."},
+    {"check": "Ninjask attacks or takes a genuinely useful setup turn", "result": "FAIL on the second half", "evidence": "Ninjask had exactly two turns and used neither on damage. T1 Protect was excellent - it denied a lethal 2x Flare Blitz and Speed Boost ticked during it. T2 it then chose Swords Dance, went to +2 Attack, and was killed by the identical Flare Blitz it had already seen aimed at it on the previous turn. A +2 Attack Ninjask that never attacks contributed nothing. This is precisely the failure mode the dossier's own crack line names - 'punishing an unproductive setup' - and the information was on the board: the same Fire attacker at the same position had targeted it the turn before."},
+    {"check": "Shedinja's Safety Goggles and Wonder Guard", "result": "PASS on Wonder Guard, NOT TESTED on Safety Goggles, and the Mold Breaker bypass is confirmed", "evidence": "Shedinja survived on 1 HP and took two turns. Safety Goggles never mattered because Venomoth's Sleep Powder was aimed at my side, not at its own partner. The interesting result is the kill: Mega Gyarados's Waterfall is a neutral move into Bug/Ghost and Wonder Guard should have blocked it outright, but Mold Breaker ignores Wonder Guard and it connected. That is the dossier's 'ability bypass' crack working exactly as written, and it means any Mega Gyarados owner answers this Shedinja with any move at all."},
+    {"check": "Venomoth trades Quiver Dance for Disable", "result": "PASS on the trade, Disable NOT OBSERVED, and I think the AI was right", "evidence": "Venomoth never used Quiver Dance and never used Disable. It used Sleep Powder on both of its turns and landed both, putting my Incineroar to sleep on T3 and my Mega Gyarados to sleep on T4. Disable would have needed a suitable revealed last move and would have shut off one move on one target; sleeping both of my active battlers on consecutive turns is worth far more, and it is the only reason Shedinja survived to take a second turn."},
+    {"check": "Route 113 ash is clear weather", "result": "PASS", "evidence": "Weather was ['none'] on every turn. No chip damage, no Safety Goggles interaction, nothing. The dossier's note that the ash visuals are cosmetic is correct in the live engine."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "NINJASK", "payoff": "EXCELLENT, and then wasted. The guard blocked Incineroar's Flare Blitz, which is 2x into Bug/Flying and would have killed a 98 HP Ninjask outright, and Speed Boost ticked during the protected turn so it came out at +1 Speed. Two payoffs in one action. The criticism belongs to what Ninjask did with the turn it bought - Swords Dance instead of an attack - not to the guard."}
+  ],
+  "protect_ledger_note": "One opposing Protect in five turns, from the one member best suited to use it, with genuine denial plus a free ability tick, and no repetition. Shedinja also carries Protect and never used it; at 1 HP with Wonder Guard that is defensible either way, and on its last turn it preferred priority Shadow Sneak so that it got an action in before dying, which was right.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Shedinja's last turn deserves defending. On 1 HP with an Incineroar and a Gyarados both able to kill it, it chose Shadow Sneak - 0.5x into Dark and much weaker than its X-Scissor - because Shadow Sneak is priority and it moved first. Picking the weaker move that actually resolves over the stronger move that never would is correct, and it is a subtler decision than it looks.",
+    "Venomoth choosing Sleep Powder twice over Disable and Quiver Dance was the strongest sequence on this team. Two sleeps on two different battlers on consecutive turns is what kept the fight alive.",
+    "Ninjask is the problem and it is a scoring problem, not a level problem. It correctly identified that it was about to die and guarded; it then failed to draw the obvious conclusion that the same threat would still be there next turn, and set up instead of attacking. A level will not change that decision."
+  ],
+  "level_changes": [
+    {"member": "WEEZING", "field": "level offset", "before": 1, "after": 2, "resolved_level_before": 35, "resolved_level_after": 36, "reason": "Brief rule 5: first-attempt win with zero player faints. Weezing is one of three members tied at the lowest offset of 1, and it was the most functional of the three - Taunt, Sludge Bomb and a body that took two Waterfalls - so a level here buys real turns."},
+    {"member": "NINJASK", "field": "level offset", "before": 1, "after": 2, "resolved_level_before": 35, "resolved_level_after": 36, "reason": "Second of the two permitted bumps, on the second of the tied-lowest members. Shedinja is the third tied member and is deliberately left alone: it has 1 HP at every level, so a level offset does nothing for it at all. I record that the +1 on Ninjask does not address its actual failure, which is spending a bought turn on Swords Dance - see the strategy check."}
+  ],
+  "rerun_status": "NOT RERUN. Opponent levels are compiled into the headless ROM from src/data/trainers.party and this agent may not run make. Pending the main agent's materialization and rebuild.",
+  "could_this_be_cooler": "The buried-ninja concept is good and the pieces are unusually well chosen - Levitate rather than Neutralizing Gas next to a Wonder Guard partner is a genuine piece of care, and Safety Goggles on Shedinja shows the author thought about powder and weather. Two things hold it back. First, Shedinja's 1 HP means it is answered by any of Fire, Flying, Rock, Ghost or Dark, and Mega Gyarados answers it with literally any move through Mold Breaker; it is a coin that lands heads or tails on team preview rather than in play. Second, Ninjask's four slots are Protect, Swords Dance and two attacks, which invites exactly the wasted-turn sequence that happened here. The change I would make keeps both species: give Ninjask Baton Pass in place of one slot so that the Speed Boost and Swords Dance the AI clearly wants to take actually transfer to Shedinja or Venomoth, turning the guard-and-boost turns into the team's plan rather than its failure. That would also give Shedinja a reason to arrive on a board where it can do something other than trade 1 HP for one attack.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
