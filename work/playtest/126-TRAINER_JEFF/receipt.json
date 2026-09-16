@@ -1,0 +1,37 @@
+{
+  "play_order": 126,
+  "e_group": "E0149",
+  "trainer": "TRAINER_JEFF",
+  "class": "gym",
+  "location": "LavaridgeTown_Gym_1F",
+  "cap": 36,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/126-TRAINER_JEFF/party.json",
+  "level_audit": "PASS. Hawlucha 34 (0), Crobat 34 (0), Infernape 33 (-1), Darmanitan 33 (-1), Cinderace 33 (-1), Talonflame 34 (0). All equal cap 36 + offset - 2.",
+  "attempts": [
+    {"seed": 16, "run_dir": "work/playtest/126-TRAINER_JEFF/run-s16", "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 6}
+  ],
+  "strategy_checks": [
+    {"check": "Hawlucha consumes its Misty Seed, gaining special defense, enabling Unburden and powering a full-strength Acrobatics", "result": "FAIL (not executable in this harness)", "evidence": "terrain reported \"none\" at turn 0, so there is no Misty Terrain to consume the seed. Hawlucha still held ITEM_MISTY_SEED when it fainted on turn 3. Consequence: Unburden never activated, and because Acrobatics doubles only when the user holds no item, Hawlucha's signature attack stayed at 55 base power for the whole fight (44 damage into Gyarados on turn 1). This is the single largest gap between the authored room and what the driver could execute."},
+    {"check": "Talonflame sets Tailwind", "result": "PASS", "evidence": "Turn 2: Talonflame used Tailwind and state shows opponent sides = [SIDE_STATUS_TAILWIND]. It spent its support turn before dying rather than attacking into a losing matchup - correct."},
+    {"check": "Gale Wings priority Brave Bird", "result": "FAIL (never used)", "evidence": "Talonflame chose Tailwind on its only turn and was KOed before a second. Correct prioritisation, but the Gale Wings line was not exercised."},
+    {"check": "Crobat Taunt", "result": "PASS", "evidence": "Turn 1: Crobat used Taunt on Pelipper - accurately identifying the only support/weather piece on the board and the Tailwind mirror. Infiltrator confirmed. Best single decision of the fight."},
+    {"check": "Hawlucha Feint supports the other fast physical attackers", "result": "PARTIAL", "evidence": "Turn 3: Hawlucha used Feint into Gyarados, which was not protecting, so it functioned as a 30-BP priority chip rather than a guard-break. Its partner Darmanitan was attacking the same target, so there was some focus-fire logic to it, but the authored purpose (breaking a Protect for a partner) did not occur."},
+    {"check": "Darmanitan Choice Scarf Sheer Force and Cinderace Choice Band Libero", "result": "PASS", "evidence": "Both reported with the correct items and abilities; Darmanitan used Rock Slide (spread, super effective on both of my Flying-types), Cinderace used a Libero-converted Sucker Punch that left Pelipper on 4 HP."},
+    {"check": "Misty Terrain present", "result": "NOT TESTABLE", "evidence": "terrain reported \"none\" at turn 0."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "Hawlucha", "payoff": "empty", "detail": "Both player attacks were aimed at Talonflame that turn, so nothing was blocked and the partner gained nothing. Hawlucha was at 129/129 HP. Defensible as a forecast hedge on a board where it was the obvious focus-fire target, but it produced nothing and cost Hawlucha its only free attacking turn."}
+  ],
+  "ai_defects": [],
+  "ai_notes": "Clean play overall. Crobat's turn-1 Taunt on the weather setter and Talonflame's decision to spend its single turn on Tailwind rather than a doomed attack are both strong. Only one Protect was used across the whole battle despite two members carrying it, so there is no repetitive-guarding problem here.",
+  "level_changes": [
+    {"member": "DARMANITAN", "before": -1, "after": 0, "reason": "Weakest-offset member that contributed least: one Rock Slide before being KOed by a critical Waterfall."},
+    {"member": "CINDERACE", "before": -1, "after": 0, "reason": "Also at the weakest offset; got a single Sucker Punch off and was then OHKOed by one rain-boosted Liquidation."}
+  ],
+  "level_decision": "RAISE, modestly. Won on attempt 1 with a single player faint, which is the brief's raise condition. +1 each to the two weakest members, bringing both to offset 0. Hawlucha (the ace, per the 'ai: Ace Pokemon' flag) and Talonflame were deliberately not touched. Caveat recorded: Hawlucha's seed/Unburden/Acrobatics line was completely inert in this harness, so the room played one member below its designed strength; the raise is kept to +1 on two members rather than more for exactly that reason.",
+  "rerun_status": "DEFERRED. The headless ROM in work/agent-battle-build-2 is prebuilt and this pass may not run make or materialize, so a rerun would replay the old levels. Offsets are edited in place and left uncommitted for the main agent.",
+  "cooler_note": "This is the most coherent room in the Gym - six genuinely fast physical attackers with two different speed engines (Tailwind from Talonflame, Unburden from Hawlucha) and a Taunt user to stop the mirror - and it should be kept as is. The one structural note is the same one that hurts Keegan: Hawlucha's whole build is priced on a terrain it does not set, and the failure mode is severe rather than graceful, because an unconsumed Misty Seed also halves Acrobatics. If the Gym's mist is ever not guaranteed at battle start, Hawlucha should carry a normal item and let Unburden come from elsewhere. Also worth flagging that four of six are Fire or Fire-adjacent and the room folds very fast to a single rain lead; Crobat is the only member that does not care about weather, and it is the one that played best.",
+  "legality_findings": [],
+  "scope": "Synthetic headless benchmark, not earned campaign play."
+}
