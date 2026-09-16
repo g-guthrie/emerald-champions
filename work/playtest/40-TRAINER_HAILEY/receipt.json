@@ -1,0 +1,43 @@
+{
+  "play_order": 40,
+  "e_group": "E0042",
+  "trainer": "TRAINER_HAILEY",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "cap_inference": "The driver resolved Flaaffy to L24 (offset 2) and Wartortle to L23 (offset 1), i.e. cap 24 with the Medium -2, confirming this encounter sits after the manor song milestone.",
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"FLAAFFY": 24, "WARTORTLE": 23, "MARILL": 27, "PALPITOAD": 24},
+  "party_manifest": "work/playtest/40-TRAINER_HAILEY/party.json",
+  "party_pool_audit": "All six in work/reference-pools/pool-24.json with gate <= 24 (Togekiss 24, Enamorus 14 reachable legend, Hoopa 20, Magearna 20, Alakazam 20, Kartana 20). No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/40-TRAINER_HAILEY/a1", "seed": 46, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Follow Me plus Earth Power one-shot Flaaffy (2x) before a single screen went up; Wartortle Protected into nothing. T2 Hailey withdrew Wartortle for Marill, which took my Moonblast through its Sitrus; Palpitoad's Sludge Bomb plus Life Orb and poison left Enamorus at 4 HP. T3 Enamorus pivoted out to Magearna, Palpitoad Protected into nothing, Kartana's Leaf Blade KO'd Marill. T4 Kartana's +1 Leaf Blade one-shot the Eviolite Palpitoad at 4x and Magearna's Thunderbolt KO'd Wartortle."}
+  ],
+  "strategy_checks": [
+    {"check": "Flaaffy sets Light Screen / Reflect with Light Clay", "result": "FAIL_no_opportunity", "evidence": "Flaaffy was KO'd on turn 1 by a 2x Earth Power before acting. Not an AI fault: at L24 with 90 HP it simply cannot survive a Ground attack from a cap-legal special attacker, so the screens half of this team is effectively unreachable against any party that carries Ground coverage."},
+    {"check": "Wartortle Shell Smash into White Herb restoration", "result": "NOT_EXERCISED", "evidence": "Wartortle spent its two turns on Protect (turn 1) and Ice Beam (turn 4) and never used Shell Smash; the White Herb was still held when it fainted."},
+    {"check": "Marill Huge Power priority Aqua Jet", "result": "PASS", "evidence": "Turn 3 Marill used Aqua Jet into Magearna before Kartana moved, confirming the priority alternative the plan describes."},
+    {"check": "Palpitoad Water Absorb", "result": "NOT_EXERCISED", "evidence": "No Water attack was aimed at it. Its Eviolite bulk was real but a 4x Leaf Blade at +1 still one-shot it."},
+    {"check": "Electroweb speed control", "result": "NOT_EXERCISED", "evidence": "Flaaffy died before acting."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "WARTORTLE", "payoff": "EMPTY. Nothing on my side targeted Wartortle that turn (Togekiss used Follow Me, Enamorus used Earth Power at Flaaffy). Its partner was simultaneously KO'd, so the guard bought no partner action and no expiring effect either."},
+    {"turn": 3, "battler": "PALPITOAD", "payoff": "EMPTY. My actions that turn were a switch (Enamorus to Magearna) and Kartana's Leaf Blade aimed at Marill. Palpitoad blocked nothing and gave up a turn of Sludge Bomb pressure on a board where it was the healthiest member left."}
+  ],
+  "protect_ledger_note": "Two opponent Protects in a four-turn battle, both completely empty. On a four-member team that is a meaningful share of its total actions. Flagged for the PAIR_GUARD_* expected-value constants rather than fixed here.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Two of the four opponent Protects-worth of actions were empty (see the Protect ledger). The AI does not read my commands, so a single empty guard is expected variance; two out of the team's ~7 total actions on boards where it was clearly behind is worth watching.",
+    "Turn 2 the AI withdrew Wartortle for Marill into a Fairy attacker. Marill is Water/Fairy so Moonblast was resisted, making this a defensible pivot."
+  ],
+  "level_changes": [
+    {"member": "WARTORTLE", "field": "level offset", "before": 1, "after": 2, "reason": "First-attempt win with zero player faints in four turns; brief rule 5 raises the weakest one or two members. Wartortle was the lowest-level opponent at L23."},
+    {"member": "PALPITOAD", "field": "level offset", "before": 2, "after": 3, "reason": "Second-weakest member and the one that actually applied pressure (Sludge Bomb nearly removed Enamorus). Marill (offset 5) is the ace and was left untouched per the rule."}
+  ],
+  "level_change_verification": "data/emerald_champions/emerald_champions_battle_teams.txt edited, then scripts/emerald_champions_teams.py --write and --check both PASS ('strategy coherence' and 'generated master/plans/party match authored teams'). Generated projections were reverted before committing per the brief.",
+  "rerun_status": "NOT RERUN. The calibration rerun requires a headless ROM rebuilt from the edited teams file, and `make ... pokeemerald-headless.gba` fails in this session's environment with a toolchain include error (arm-none-eabi-gcc 16.1.0 cannot resolve stdint.h). The driver runs against the pre-change ROM in work/agent-battle-build, so a rerun here would have re-measured the old levels. Handing the rerun to whoever materializes and rebuilds.",
+  "could_this_be_cooler": "The concept - a beach kid whose screens buy her Shell Smash sweeper a free turn - is fine for a route trainer, but neither half of it happened. Flaaffy is the problem: a Light Clay screen setter with no Protect, no Ground resistance and no priority is a one-hit target for every cap-legal special attacker, so the screens never go up. A concrete suggestion for a later authoring pass (NOT changed here): give the Flaaffy slot Protect over one of Electroweb/Thunderbolt, or move the screens onto the bulkier Palpitoad, so that the Shell Smash payoff the plan describes can actually be set up. The Marill/Palpitoad half is genuinely fine.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
