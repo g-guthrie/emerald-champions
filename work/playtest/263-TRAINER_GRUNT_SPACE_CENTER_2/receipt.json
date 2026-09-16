@@ -1,0 +1,44 @@
+{
+  "play_order": 263,
+  "e_group": "E0404",
+  "trainer": "TRAINER_GRUNT_SPACE_CENTER_2",
+  "class": "grunt",
+  "location": "MossdeepCity_SpaceCenter_1F",
+  "chapter": "Team Magma Space Center invasion (hangar, support room)",
+  "cap": 84,
+  "cap_confirmation": "driver state reported level_cap 84; all four members at offset 1 = L83 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/263-TRAINER_GRUNT_SPACE_CENTER_2/party_raid84.json"],
+  "chronology_note": "Same raid party and audit as E0401: Mind Badge earned, before the Seafloor Cavern; no pool-84 addition used. Landorus is the one reachable legend.",
+  "pre_play_strategy_checks": [
+    "Prankster Reflect / Light Screen before the first attack",
+    "Aerodactyl Tailwind; Unnerve stops Berries",
+    "Skarmory Sturdy + Iron Defense + Body Press",
+    "Obstagoon Guts / Flame Orb / Obstruct"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 14, "build": "work/agent-battle-build-7", "run_dir": "work/playtest/263-TRAINER_GRUNT_SPACE_CENTER_2/a1",
+      "party": "party_raid84.json (Incineroar / Urshifu-Rapid / Mega Swampert / Great Tusk / Landorus / Gholdengo)",
+      "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 4,
+      "why": "Turn 1 Fake Out flinched Klefki's Reflect, Aerodactyl set Tailwind, Surging Strikes killed Aerodactyl. Turn 2 Reflect went up under Tailwind, Skarmory Iron Defense, Surging Strikes + Flare Blitz took Skarmory to 113 at the cost of three Rocky Helmet hits on Urshifu (144 lost). Turn 3 I pulled Urshifu for Gholdengo; Skarmory's +2 Body Press one-shot Incineroar (256) before Flare Blitz - faint one. Turn 4 Landorus in, Light Screen went up, Earth Power killed Klefki, Gholdengo Nasty Plot, Tailwind ended. Turn 5 Obstagoon Obstructed Earth Power, +2 Shadow Ball killed Skarmory through Light Screen, Flame Orb burned Obstagoon. Turn 6 Guts Knock Off one-shot Gholdengo (319) - faint two - while Earth Power took Obstagoon to 58. Turn 7 Earth Power finished it. A real fight: the screens, the Rocky Helmet tax and the Guts Knock Off all did what the plan says."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Prankster screens", "result": "PASS", "evidence": "Reflect turn 2 (turn-1 attempt flinched by Fake Out), Light Screen turn 4; both changed damage rolls (Flare Blitz on Skarmory, Shadow Ball 147 not ~220)"},
+    {"check": "Tailwind / Unnerve", "result": "PASS", "evidence": "turn 1 'A tailwind started blowing'; petered out end of turn 4; no Berry of mine was in a position to activate so Unnerve was not tested"},
+    {"check": "Sturdy + Iron Defense + Body Press", "result": "PASS", "evidence": "turn 2 Iron Defense, turn 3 +2 Body Press 256 one-shot on Incineroar"},
+    {"check": "Guts / Flame Orb / Obstruct", "result": "PASS", "evidence": "turn 5 Obstruct blocked Earth Power and Flame Orb burned it; turn 6 Guts Knock Off 319 one-shot Gholdengo"}
+  ],
+  "protect_ledger": [
+    {"turn": 5, "user": "Obstagoon", "payoff": "Obstruct blocked a ~90 Earth Power (real) and let Flame Orb activate before it attacked"}
+  ],
+  "protect_summary": "1 Obstruct with real payoff. Aerodactyl held Protect and chose Tailwind instead; fine.",
+  "ai_defects": [],
+  "ai_notes": "Klefki's Thunder Wave was never chosen into two Dark/Good-as-Gold slots, which is correct. Skarmory's Body Press targeting the Dark-type Incineroar rather than the Fighting-resistant slot was right. Obstagoon Knock Off on the Ghost/Steel Gholdengo was the best move on the board.",
+  "level_changes": [],
+  "level_change_rationale": "Won with 2 faints after a real fight; brief step 5 says keep.",
+  "cooler": "This is the raid's best room and it plays like the plan reads: screens, Tailwind, a Body Press wall and a Guts closer. The Berry-denial hook could not be felt because my party had no Berry that mattered by then. Keep as is; if anything, Klefki's fourth move could be Foul Play so it threatens something after its two screens are up.",
+  "legality_notes": "Sets legal as authored.",
+  "verification_limit": "No level change, nothing pending re-verification."
+}
