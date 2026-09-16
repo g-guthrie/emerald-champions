@@ -1,0 +1,101 @@
+{
+  "play_order": 253,
+  "e_group": "E0394",
+  "trainer": "TRAINER_SYLVIA",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (Mossdeep Gym, room seven)",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Indeedee-F / Tatsugiri / Wyrdeer / Musharna / Hypno (offset 1) at L75 and Dondozo (offset 2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/253-TRAINER_SYLVIA/party_gym76.json"],
+  "chronology_note": "Mossdeep Gym sits after Mt Pyre and the Aqua Hideout and before the Mind Badge, so cap 76 with nothing from Sootopolis, the Seafloor Cavern or the Space Center. Every member is gate 68 or lower and no source map is downstream of Mt Pyre: Incineroar 36 (Mauville), Urshifu-Single 42 (Kubfu, Route 112), Amoonguss 42 (Petalburg Woods), Metagross 48 + Metagrossite stone-window 42, Gholdengo 48, Flutter Mane 68 (wild MtPyre_Summit, the chapter immediately before the hideout). No reachable legend used.",
+  "pre_play_strategy_checks": [
+    "Commander fires the moment Tatsugiri and Dondozo share the field: Tatsugiri becomes untargetable and Dondozo gains +2 in every stat at once",
+    "Order Up gains an extra boost from the Curly form inside Dondozo",
+    "Indeedee-F's Psychic Surge is up from switch-in and Terrain Extender holds it eight turns",
+    "Psychic Terrain blocks priority against grounded targets, so Fake Out and Sucker Punch fail",
+    "Expanding Force becomes a 120 BP spread move under Psychic Terrain",
+    "Indeedee's Follow Me redirects a committed attack away from Dondozo",
+    "After You hands Dondozo the turn order it lacks",
+    "Wyrdeer's Intimidate cuts the physical answers on entry",
+    "Musharna's Telepathy makes it immune to spread damage from its own partner"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 3,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/253-TRAINER_SYLVIA/a1",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Mega Metagross / Gholdengo / Flutter Mane / Amoonguss)",
+      "outcome": "won",
+      "turns": 10,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "why": "Indeedee led beside Tatsugiri with Dondozo still in the back, so the pairing had not happened yet. Follow Me on turn 1 pulled Urshifu's Wicked Blow onto Indeedee and the guaranteed critical at 2x killed the terrain setter outright, but the terrain stayed up for its full eight turns anyway and Incineroar's redirected Knock Off only stripped Tatsugiri's Choice Specs instead of killing it. Dondozo then entered, Commander fired, and a +2 Adamant whale one-shot a 301 HP Incineroar with Wave Crash and killed Urshifu with Order Up. What actually broke the room was Amoonguss: Psychic Terrain does not block sleep, Spore is 100 percent accurate, and a sleeping +2 Dondozo is just a large body. After that Mega Metagross and Gholdengo cleaned up Wyrdeer, Musharna and Hypno, with Flutter Mane walling Hypno completely (immune to Psychic, and Foul Play off Flutter Mane's own 55 base Attack is nothing)."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Commander fires immediately when the pair share the field",
+      "result": "PASS",
+      "evidence": "turn 1, the moment Dondozo replaced the fainted Indeedee: 'The opposing Tatsugiri was swallowed by Dondozo' followed by five separate 'rose sharply' lines. The turn-1 reading shows Dondozo at atk/def/spa/spd/spe +2 and Tatsugiri marked in slot 3 but never targetable. Exactly as authored."
+    },
+    {
+      "check": "Order Up gains the extra boost from the Curly form",
+      "result": "PASS",
+      "evidence": "turn 3: 'The opposing Dondozo used Order Up! The opposing Dondozo's Attack rose!' and the next reading shows atk +3 against def/spa/spd/spe still +2 - the extra single stage is the Curly bonus on top of Commander's +2. It killed Urshifu on the same turn."
+    },
+    {
+      "check": "Psychic Surge with Terrain Extender holds eight turns",
+      "result": "PASS",
+      "evidence": "turn-0 reading: terrain psychic, 8 turns, field_source terrain_at_turn_0 'psychic', terrain_is_permanent false. It counted down 8-7-6-5-4-1 across the fight and expired on turn 8 ('The weirdness disappeared from the battlefield!') even though Indeedee died on turn 1 - the Extender duration correctly outlived its setter."
+    },
+    {
+      "check": "Psychic Terrain blocks priority against grounded targets",
+      "result": "UNTESTED, not a defect",
+      "evidence": "I brought Fake Out and Sucker Punch precisely because the plan advertises this, then never got to spend either into the terrain: Incineroar's turn-1 action was Knock Off and by turn 1 Fake Out was already flagged MOVE_LIMITATION_ZEROMOVE for the ordinary switch-in-turn reason, not the terrain. Urshifu died before a Sucker Punch turn existed. The claim is standard engine behaviour and the terrain was demonstrably live; I simply never produced the evidence."
+    },
+    {
+      "check": "Expanding Force becomes a spread move under Psychic Terrain",
+      "result": "PASS",
+      "evidence": "turn 7: Musharna's Expanding Force was chosen with target 2 and the damage entry lists both player:3 (Gholdengo, 114 through a critical hit) and player:2 (Metagross, 36) from that single move, with 'It's mostly ineffective on Metagross' as the second-target line. One move, two targets - the terrain conversion fired."
+    },
+    {
+      "check": "Follow Me redirects a committed attack away from the Commander pair",
+      "result": "PASS",
+      "evidence": "turn 1: Indeedee chose Follow Me and Urshifu's Wicked Blow, submitted at Tatsugiri (target 3), resolved on Indeedee instead ('A critical hit! It's super effective! The opposing Indeedee fainted!'). The redirection is real and it did its job: Tatsugiri survived the turn and made it into Dondozo's mouth. Indeedee paid for it with its life, which is the correct trade for the room."
+    },
+    {
+      "check": "After You hands Dondozo the turn order",
+      "result": "FAIL (never selected)",
+      "evidence": "Indeedee had exactly one decision in the fight and spent it on Follow Me, which was the right call with Dondozo not yet on the field - After You with no ally worth accelerating would have been empty. The move is untested rather than misplayed, but see the cooler note: Indeedee dying on turn 1 to the player's obvious opening means After You may essentially never fire in this room."
+    },
+    {
+      "check": "Wyrdeer's Intimidate cuts the physical answers",
+      "result": "PASS",
+      "evidence": "turn 5 on entry: 'Amoonguss's Attack fell! Metagross's Attack fell!' The Metagross drop mattered - it had already Mega Evolved, so Clear Body was gone and Tough Claws does not refuse the drop. Every subsequent Meteor Mash was at -1 until Meteor Mash's own boost clawed one stage back on turn 9."
+    },
+    {
+      "check": "Musharna's Telepathy makes it immune to its partner's spread damage",
+      "result": "UNTESTED",
+      "evidence": "Musharna was only ever on the field beside Wyrdeer and Hypno, neither of which owns a spread move, so the interaction had no chance to occur. The ability is correctly on the set."
+    },
+    {
+      "check": "Dondozo's Unaware ignores the player's boosts",
+      "result": "UNTESTED, and worth noting",
+      "evidence": "Unaware is listed on the reading. Nothing on my side boosted while Dondozo was alive, so it never mattered. The more relevant interaction went the other way: Wicked Blow's guaranteed critical ignored Dondozo's +2 Defense for 142 and 106, and Darkest Lariat would have ignored it too. The room's boost-stacking has a clean, legal answer at this cap."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 8, "battler": "Musharna", "payoff": "excellent - the single best Protect I have seen in this block. It blocked Mega Metagross's Meteor Mash AND a +2 Gholdengo Make It Rain on the same turn, and Make It Rain is a spread move so the block cost me the better half of a 120 BP boosted attack. Musharna came out of that turn at full HP."}
+  ],
+  "protect_summary": "1 opponent Protect across 10 turns, 0 empty, 1 excellent. Dondozo and Wyrdeer both carry Protect and never used it - correctly, since Dondozo was winning the damage race outright and Wyrdeer was racing to get value before it died. No repetition, no consecutive guarding, no empty guards.",
+  "ai_defects": [],
+  "ai_notes": "No defect found. Two choices deserve an explicit defence rather than a flag. (1) turn 6, Wyrdeer used Double-Edge into the slot I switched Gholdengo into and hit a Ghost type for nothing. The AI decides at turn start and Amoonguss was standing there; it cannot read my pending switch, so this is the September 15 no-omniscience rule working as intended, not a defect. (2) turn 1, Indeedee spent its only turn on Follow Me and died to the redirected attack. With Dondozo still in the back, protecting Tatsugiri was the correct priority and the pair did form. The one thing I would watch across the rest of the gym is that Sylvia's replacement order sent Musharna before Wyrdeer, which put the Intimidate body on the field after the physical attacker it was meant to blunt had already killed two of my Pokemon.",
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on attempt 1 but lost two Pokemon - Incineroar one-shot by a +2 Wave Crash and Urshifu by an Order Up at +3 - which is squarely the brief's 'won after a real fight' keep case. The room is doing what a super-elite gym room should: the whale is a genuine problem, it demands either a boost-ignoring attack or a status answer, and the player who brings neither loses. The engine is also fragile in a legible, fair way: Tatsugiri is the pivot and if it dies before Dondozo lands, the room has no plan B, which is exactly the counterplay the dossier advertises.",
+  "cooler": "The concept absolutely shows on the board and this is the room I would keep unchanged. The Commander turn is the most spectacular thing in the gym - five stat-up messages in one line - and Order Up visibly paying an extra stage for the Curly form is a detail a player will notice and go read about. Two honest observations. (1) The room has a single point of failure the dossier already names, and playing it confirms the failure is very easy to reach: Indeedee led without Dondozo behind it, so my opening removed the terrain setter for free on turn 1 while Follow Me was still spent protecting the fish. If the intent is that the player must beat a formed Commander pair, Tatsugiri and Dondozo should be the lead pair and Indeedee the reserve; that costs nothing in levels and makes the room's whole idea mandatory rather than optional. (2) Hypno is the one member with no relationship to either engine - Insomnia, Thunder Wave and Foul Play are a generic bulk slot, and it was the last thing standing so it decided nothing. A second Commander-adjacent body, or simply Indeedee-M so the room keeps a terrain setter after the first one dies, would serve the plan better than Hypno does. I am not changing it in this pass.",
+  "legality_notes": "No legality problem in the authored set. Every member's level matched cap + offset - 2 exactly, Terrain Extender and Choice Specs behaved normally, and Tatsugiri's Curly form is the one Order Up wants. One note for the record: Knock Off removed Tatsugiri's Choice Specs normally, and Dondozo's Leftovers survived because I never targeted it with Knock Off.",
+  "verification_limit": "No level change was made here, so nothing in this receipt is pending re-verification."
+}
