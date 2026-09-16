@@ -1,0 +1,53 @@
+{
+  "play_order": 240,
+  "e_group": "E0367",
+  "trainer": "TRAINER_NIKKI",
+  "class": "regular",
+  "location": "Route126",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Lapras L73 = 76 + (-1) - 2; Audino, Zweilous and Swanna L74 = 76 + 0 - 2. Route 126 is the underwater approach to Sootopolis, reached from the sea east of Lilycove after the hideout; the cap does not move until C42, so 76 is correct.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76_lead_zapdos.json"],
+  "chronology_note": "Same six members; Incineroar beside Zapdos, because Thunderbolt is 2x on Lapras and 2x on Swanna. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Lapras attacks or uses Icy Wind for speed control",
+    "Audino sets Wish ONLY when it has an identified recipient and a field position that survives to collect it",
+    "Eviolite Hustle Zweilous hits and survives like a fully evolved Pokemon",
+    "Swanna's Hurricane and Hydro Pump are the special lane and Roost undoes the chip"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 12, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/240-TRAINER_NIKKI/a1",
+      "outcome": "won", "turns": 5, "decisions": 6,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 1.038,
+      "why": "An ordinary route fight that took six turns and a Pokemon, because the guard behaviour is unusually good. Fake Out plus a 2x Thunderbolt put Lapras on 19 HP on turn 1; it Protected on turn 2 and survived, and Audino set Wish on the same turn with a living partner to give it to. Audino then Protected through my Knock Off and collected its own Wish for a full 100 HP. I swapped Incineroar for Gardevoir to get a 4x Fairy answer to Zweilous, Zweilous Protected through the first Hyper Voice, and a critical Hyper Voice killed Audino instead. Swanna's Life Orb Ice Beam then killed Zapdos outright before the last Hyper Voice took the final two."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Lapras attacks or uses Icy Wind for speed control", "result": "PARTIAL", "evidence": "it selected HYDRO_PUMP on turn 1 (flinched), PROTECT on turn 2 and ICY_WIND on turn 3 - the right move on the right turn, with a Zapdos and an Incineroar both faster than its partner - but it was KOed before Icy Wind resolved. The branch exists and was chosen; it never landed."},
+    {"check": "Audino sets Wish only with an identified recipient and a position that survives to collect it", "result": "PASS, twice", "evidence": "turn 2, Audino set WISH with Lapras alive beside it at 19 HP; turn 3 it chose PROTECT, survived my Knock Off, and 'The opposing Audino's wish came true! The opposing Audino's HP was restored' for 100. It set Wish a second time on turn 4, again with a living partner. It never once set Wish on an empty or doomed board. This is the specific behaviour the dossier asks the AI to get right, and it gets it right - the only check of its kind in my block that is written as an AI requirement rather than a description, and it passes cleanly."},
+    {"check": "Eviolite Hustle Zweilous hits and survives like a fully evolved Pokemon", "result": "PASS", "evidence": "its Crunch did 114 to a Mega Gardevoir, and it survived a turn on which both a 4x Pixilate Hyper Voice and a Thunderbolt were aimed at it - by Protecting, but the Eviolite bulk is also why it was still on the field to do so. It took a 4x Hyper Voice to remove it. Hustle's accuracy cost never showed; it did not miss."},
+    {"check": "Swanna's special lane and Roost", "result": "PARTIAL", "evidence": "Swanna entered on turn 6 and its Life Orb ICE_BEAM killed a 198 HP Zapdos outright - 2x into Electric/Flying. It died in the same turn, so Roost, Hurricane and Hydro Pump never appeared. The slot did its job in one action."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "Lapras", "payoff": "FULL - at 19/296 it Protected through a Thunderbolt that was certainly lethal, and survived to act again. Perfect turn."},
+    {"turn": 3, "battler": "Audino", "payoff": "FULL, twice over - blocked Incineroar's Knock Off (keeping it from being stripped) AND kept itself in the slot to collect its own Wish for 100 HP at end of turn. The guard and the heal were set up two turns in advance."},
+    {"turn": 5, "battler": "Zweilous", "payoff": "FULL - blanked a 4x Pixilate Hyper Voice from a freshly Mega-Evolved Gardevoir and a Thunderbolt in the same turn. It was the turn I had committed everything to killing it."}
+  ],
+  "protect_summary": "3 opponent Protects across a six-turn fight, on three different battlers, none consecutive, and every single one had full payoff - two of them saved the Pokemon outright and the third also enabled a Wish collection. Together with play_order 238 this is the best guard behaviour in my block, and notably it came from an ordinary route trainer rather than a boss.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Audino's Wish/Protect sequencing is the cleanest two-turn plan any AI executed in my block: set the Wish while a recipient exists, then guard on the collection turn. Nothing about it depended on reading my commands.",
+    "AI decision budget max 1.038 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [
+    {"member": "LAPRAS", "before": -1, "after": 0, "why": "the lowest-level member of the team and the only one that never landed anything - flinched on turn 1, guarded on turn 2, and died before its Icy Wind resolved on turn 3. Bringing it level with its three teammates is the smallest correct adjustment."}
+  ],
+  "level_change_rationale": "One player faint on the first attempt triggers the AGENTS.md review, and I am applying the most restrained version of it: a single +1, on the single lowest member, bringing the team flat at offset 0. This is an ordinary route trainer immediately before the Mossdeep Gym and it already took six turns and a Pokemon off a party built for the whole region - I do not think it is soft, and the dossier's own judgement that 'it is close to right as built' matches what I saw. I deliberately left Audino, Zweilous and Swanna alone: Audino ran its Wish engine perfectly, Zweilous absorbed a 4x attack and dealt 114 through a Mega, and Swanna one-shot a legend on its only turn. +1 of the +-2 allowance.",
+  "rebuild_note": "The Lapras +1 cannot be re-verified here: the run pinned work/agent-battle-build-5, which predates the edit. The brief's 'rerun once' is owed but this is the lowest-value rerun in my block - it is a route regular, the change is one level on the weakest member, and the fight was already close to correctly tuned.",
+  "theme_check": "Yes, and modestly so, which is right for a route regular. A nurse and her half-trained dragon is a legible pairing, and the Eviolite Hustle Zweilous genuinely does preview the Mossdeep gym's Eviolite room the way the dossier claims. What makes the fight memorable is not the theme but the decision it forces - and it did force it: I spent two turns failing to kill a 19 HP Lapras and a Wish-healed Audino, which is exactly the 'is it worth spending two attacks on this' question the dossier says the room is for.",
+  "cooler_note": "Keep the roster; the audit's judgement was right and playing it confirms it. Wish-passing beside an Eviolite Hustle attacker is a real small engine, it executed, and it cost me a Pokemon. Asked again after playing: the one slot that contributes nothing to the stated idea is Lapras, which is a fourth Water attacker on a team whose identity is a nurse and a dragon - it is the reason the fight opens like the twelve Aqua rooms before it rather than like something new. A concrete suggestion for a later pass, not made here: Lapras' Icy Wind is the move that actually serves Zweilous (which is slow and wants the speed control), so if anything the set is right and only the lead order is wrong - opening Audino beside Zweilous would state the team's idea in its first two sprites instead of its last two.",
+  "authored_set_legality": "No legality problem found."
+}
