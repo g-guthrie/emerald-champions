@@ -1,0 +1,41 @@
+{
+  "play_order": 47,
+  "e_group": "E0050",
+  "trainer": "TRAINER_GRUNT_MUSEUM_1",
+  "class": "grunt",
+  "location": "SlateportCity_OceanicMuseum_2F",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"RATTATA_ALOLA": 27, "WAILMER": 25, "ZUBAT": 25, "CARVANHA": 26},
+  "party_manifest": "work/playtest/47-TRAINER_GRUNT_MUSEUM_1/party.json",
+  "party_pool_audit": "Cap-24 core party, all six gated <= 24 in pool-24.json. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/47-TRAINER_GRUNT_MUSEUM_1/a1", "seed": 53, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 Follow Me absorbed the turn while a 2x Moonblast one-shot the L27 Alolan Rattata before it acted. T2 Enamorus pivoted to Magearna, Wailmer Protected into nothing, Zubat's Poison Fang hit a Steel-type, Air Slash halved Zubat. T3 Brave Bird was resisted by Togekiss, Air Slash KO'd Zubat and a 2x Thunderbolt one-shot the 123 HP Wailmer. T4 Carvanha's Liquidation did not break Magearna and a single Air Slash KO'd it."}
+  ],
+  "strategy_checks": [
+    {"check": "Rattata's Super Fang softens a target for Wailmer", "result": "NOT_EXERCISED", "evidence": "Rattata was KO'd on turn 1 by a 2x Moonblast before acting. At L27 with 78 HP and a Dark typing, it is one Fairy attack away from dying to any cap-legal special attacker, so the authored 'Rattata lowers, Wailmer finishes' opening is very hard to reach."},
+    {"check": "Rattata's unmodified Speed precedes Wailmer", "result": "NOT_OBSERVED", "evidence": "Neither acted in the same turn before Rattata fell."},
+    {"check": "Zubat Taunt / U-turn pivoting", "result": "NOT_SELECTED", "evidence": "Zubat used Poison Fang and Brave Bird. Taunt would have had a legal target (Togekiss carries Follow Me and Tailwind) and U-turn would have preserved it at 30 HP; neither was chosen."},
+    {"check": "Carvanha Speed Boost physical cleanup", "result": "NOT_EXERCISED", "evidence": "Carvanha entered on turn 3 and was KO'd on turn 4 after one Liquidation, so only the base Speed Boost turn elapsed."},
+    {"check": "Rattata Gluttony + Figy Berry early activation", "result": "NOT_EXERCISED", "evidence": "It was KO'd from full HP, so the berry never triggered."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "WAILMER", "payoff": "EMPTY. My actions were a switch (Enamorus to Magearna) and Togekiss' Air Slash at Zubat. Wailmer blocked nothing, and it was at full 123 HP with a Sitrus Berry - the one member on this team that did not need to guard."}
+  ],
+  "protect_ledger_note": "One opponent Protect, empty, and from the bulkiest member on the field. Same pattern as Hailey's Palpitoad on the same cap window.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Zubat's Poison Fang hit a Steel-type it cannot poison, and earlier in the block Cobalion's Aura Sphere and Monferno's Mach Punch hit a Fighting-immune Hoopa. In ALL THREE cases the immune target had switched in during the same turn, so the AI chose at turn start against the Pokemon that was actually there. Per the September 15 decision that the opponent never reads pending commands, this is correct behaviour and NOT a defect. Recording the pattern only so it is not mistaken for one later.",
+    "No genuinely bad opponent decision observed, but also almost no decision of consequence: three of the four members acted once or not at all."
+  ],
+  "level_changes": [
+    {"member": "WAILMER", "field": "level offset", "before": 3, "after": 4, "reason": "First-attempt win with zero player faints in four turns. Wailmer is tied-lowest at L25 and is the intended beneficiary of Rattata's Super Fang; a 123 HP Water-type that dies to one neutral-to-2x special attack cannot anchor that plan."},
+    {"member": "ZUBAT", "field": "level offset", "before": 3, "after": 4, "reason": "The other tied-lowest member at L25. It is the team's only disruption piece (Taunt, U-turn) and it was halved by a single unboosted Air Slash before it could use either."}
+  ],
+  "level_change_verification": "Teams file edited, scripts/emerald_champions_teams.py --write then --check all PASS. Generated projections reverted before committing.",
+  "rerun_status": "NOT RERUN - the headless ROM cannot be rebuilt in this session (arm-none-eabi toolchain cannot resolve stdint.h). Rerun owed to whoever rebuilds.",
+  "could_this_be_cooler": "As a story ambush in a museum this does its job and does not need to be a showcase, but it is currently the flattest fight in the block: four turns, zero faints, and not one of its four authored ideas (Super Fang setup, Taunt, U-turn pivoting, Speed Boost cleanup) reached the board. The honest read is that it is a level problem rather than a concept problem, which is why two members were raised. If a later pass wants more character, the Alolan Rattata is the interesting piece and it is also the one that dies first; its Sucker Punch and Super Fang would both matter far more on a bulkier member of the family or with the levels currently sitting on Carvanha. No species, move or item changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
