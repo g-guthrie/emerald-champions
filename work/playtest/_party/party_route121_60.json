@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mind Badge chapter cap 60 core party (play_order 196-204: Route 121 aces, Lilycove, Mt Pyre)",
+  "availability_audit": "Deliberately built only from species whose pool gate is 54 or lower, so every member is a source map the player has already cleared before walking Route 121 with the Feather Badge: Incineroar gate 36 (Litten line), Amoonguss gate 42 (Foongus line), Weavile gate 14 (Sneasel, Seaspray_Cave_B1F), Metagross gate 48 (Beldum/Metang line) with ITEM_METAGROSSITE stone-window 42, and the three reachable legends' signs - Zapdos and Regieleki at legendary_sign:NewMauville_Inside gate 30 (the New Mauville shutdown) and Landorus at legendary_sign:Route111_RuinsExterior gate 42 (the desert ruins, reached long before Fortree). Nothing in this party comes from a cap-60-gated map: no Shoal Cave, no Route 123/124/126/127, no Safari Zone, no Abandoned Ship and no Lilycove or Mt Pyre source, all of which a Route 121 traveller has not yet reached. That keeps the benchmark honest for the first battle of the window as well as the last.",
+  "plan": "Broad control-plus-coverage six for a stretch of route aces built around redirection (Myles, Buffel), raw coverage (Pat), speed control (Marcel, Cristin) and weather (Cristin, Gabrielle). Incineroar's Intimidate plus Fake Out and Amoonguss's Spore/Rage Powder are the two turn-buying tools that beat a Follow Me or a Tailwind opening. Landorus is the Ground answer every Electric ace in the stretch fears and Sheer Force Earth Power ignores the drawback its Life Orb would normally impose. Zapdos covers Water/Flying and supplies special Fire. Weavile is fast Ice into the Dragons and Ice Shard priority under enemy Tailwind. Mega Metagross is the Steel/Fairy-breaking win condition with Bullet Punch priority.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out and Intimidate control, Knock Off item removal, Parting Shot reset",
+      "availability": "pool-60 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "sleep and redirection; the answer to Follow Me, Tailwind and setup leads",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: the Ground answer to the stretch's Electric aces, plus Poison damage into the Fairy/Grass lanes",
+      "availability": "pool-60 gate 42, legendary_sign:Route111_RuinsExterior (desert ruins, pre-Fortree)."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "reachable legend: bulky Electric/Fire spread with recovery",
+      "availability": "pool-60 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": ["MOVE_ICICLE_CRASH", "MOVE_KNOCK_OFF", "MOVE_ICE_SHARD", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "fast Ice into the Dragon lanes, Ice Shard priority under enemy Tailwind, Dark coverage",
+      "availability": "pool-60 gate 14, evolution:level/condition from SPECIES_SNEASEL (Seaspray_Cave_B1F)."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": ["MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_ICE_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition; Steel breaks the Fairy lanes, Bullet Punch is priority",
+      "availability": "pool-60 gate 48 (Beldum/Metang line) and ITEM_METAGROSSITE stone-window 42."
+    }
+  ]
+}
