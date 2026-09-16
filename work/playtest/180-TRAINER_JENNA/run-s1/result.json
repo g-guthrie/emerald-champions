@@ -1,0 +1,33 @@
+{
+  "trainer_a": "TRAINER_JENNA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 111,
+  "difficulty": "medium",
+  "level_cap": 54,
+  "phase": "ended",
+  "outcome": "lost",
+  "turns": 7,
+  "decisions": 12,
+  "player_faints": 6,
+  "opponent_faints": 3,
+  "ai_decision_frames_max": 55,
+  "ai_decision_seconds_max": 0.921,
+  "ai_decision_frames": [
+    55,
+    55,
+    29,
+    29,
+    28,
+    28,
+    32,
+    32,
+    31,
+    15,
+    14,
+    14
+  ],
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "elf_sha256": "34d3c6af9a6b7bbbb5b8c62ee62078c83eac6634733af6c44fe42f7863ec53af",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}

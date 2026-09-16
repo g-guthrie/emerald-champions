@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "P15 anti-Jenna party (cap 54), Route 120",
+  "availability_audit": "Every member's source map precedes Route 119 in book play order. Charmander: Mauville Game Corner 500 coins (gate 30); Charizardite Y stone-window 30 (Mauville era). Togepi: Route 102 land (gate 14) -> friendship Togetic -> Shiny Stone Togekiss (gate 24). Magnezone: New Mauville Entrance land (gate 30). Drilbur -> Excadrill (gate 36, pre-Route-118 sources). Foongus -> Amoonguss (gate 42). Dratini/Dragonair line and Dragonite from Meteor Falls B1F 2R land (gate 42, Meteor Falls reached in the Mt. Chimney chapter, well before Route 119). No legendaries, mythicals, Ultra Beasts or Paradox species. Items from the free Center held-item catalogue / preparation system. Re-checked at cap 54: every member's gate is 48 or lower, so all six remain legal in the 54 window; no member's source map is later than Route 119 in book play order. Azumarill and Alakazam carried from the cap-54 audit in work/playtest/176-TRAINER_BRENDAN_ROUTE_119_TREECKO/party-v2.json (Azurill Route 104 gate 14; Abra Granite Cave 1F gate 20). All six gates are 48 or lower and every source map precedes Route 120 in book play order.",
+  "plan": "Rebuilt after attempt 1 lost 6-3. Two lessons from attempt 1, both mechanical. (1) Shiftry's Wind Rider ABSORBS Heat Wave - Heat Wave is a wind move, so my opening spread attack did zero damage and handed Shiftry a free +1 Attack. Attempt 2 attacks Shiftry with Air Slash and Play Rough, neither of which is a wind move. (2) Sheer Force Life Orb Earth Power from Nidoking is 2x into both Magnezone and Excadrill and OHKOed each of them before they acted; this party leads with two Ground-immune or Ground-neutral bodies instead. Charizard (Flying) is outright immune to Earth Power, Azumarill resists Icicle Spear and is 2x into both Shiftry (Fairy) and Nidoking (Water), Alakazam's Psychic is 2x into both Poison types, and Magnezone is held in reserve purely as the 2x Electric answer to Cloyster once Nidoking is gone.",
+  "party": [
+    {
+      "species": "SPECIES_CHARIZARD",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_AIR_SLASH",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BLAZE",
+      "item": "ITEM_CHARIZARDITE_Y",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "Drought Mega: weather control plus spread Fire",
+      "availability": "Charmander from the Mauville Game Corner (500 coins, gate 30); Charizardite Y stone-window 30."
+    },
+    {
+      "species": "SPECIES_AZUMARILL",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_AQUA_JET",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Huge Power priority and Fire/Fighting resistance; Knock Off strips the orbs this team runs on",
+      "availability": "Azurill on Route 104 (gate 14), Marill, Azumarill (gate 20)."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_SHADOW_BALL",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fast special breaker; Psychic is 2x into both Fighting types and Magic Guard ignores Life Orb recoil",
+      "availability": "Abra on Granite Cave 1F (gate 20), Kadabra, Linking Cord (gate 20)."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_POLLEN_PUFF"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        156,
+        0,
+        100,
+        0
+      ],
+      "role": "Grass type, so Breloom's Spore cannot land on it; supplies Rage Powder and its own Spore for the ace",
+      "availability": "Foongus in Petalburg Woods (gate 14), Amoonguss (gate 42)."
+    },
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ANALYTIC",
+      "item": "ITEM_WISE_GLASSES",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "slow Analytic Electric gun against the Water and Flying cores",
+      "availability": "New Mauville Entrance land table (gate 30)."
+    },
+    {
+      "species": "SPECIES_DRAGONITE",
+      "moves": [
+        "MOVE_EXTREME_SPEED",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_EARTHQUAKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_MULTISCALE",
+      "item": "ITEM_LUM_BERRY",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Multiscale priority cleaner",
+      "availability": "Meteor Falls B1F 2R land (gate 42); Meteor Falls is reached in the Mt. Chimney chapter."
+    }
+  ]
+}

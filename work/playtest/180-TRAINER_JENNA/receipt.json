@@ -1,0 +1,112 @@
+{
+  "play_order": 180,
+  "e_group": "E0256",
+  "trainer": "TRAINER_JENNA",
+  "class": "ace",
+  "location": "Route120",
+  "cap": 54,
+  "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-4",
+  "party_manifests": ["work/playtest/180-TRAINER_JENNA/party.json (attempt 1)", "work/playtest/180-TRAINER_JENNA/party-v2.json (attempt 2)"],
+  "level_verification": "cap 54: Shiftry +1 -> L53, Seviper +1 -> L53, Nidoking +1 -> L53, Cloyster +2 -> L54. All equal cap + offset - 2. --cap 54 correct.",
+  "attempts": [
+    {
+      "seed": 111,
+      "run_dir": "work/playtest/180-TRAINER_JENNA/run-s1",
+      "party": "Fire/Flying pressure (Mega Charizard Y / Togekiss / Magnezone / Excadrill / Amoonguss / Dragonite)",
+      "outcome": "lost",
+      "turns": 7,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "why_lost": "Two mechanical facts I did not know going in. (1) Heat Wave is a WIND move, so Shiftry's Wind Rider absorbed my opening spread attack completely and gave it a free +1 Attack - my strongest move did zero damage to the lead. (2) Sheer Force Life Orb Earth Power from Nidoking is 2x into both Magnezone and Excadrill and OHKOed each of them before they acted. Cloyster then cleaned up with 5-hit Icicle Spear into my Flying types."
+    },
+    {
+      "seed": 112,
+      "run_dir": "work/playtest/180-TRAINER_JENNA/run-s2",
+      "party": "Anti-Jenna rebuild (Mega Charizard Y / Azumarill / Alakazam / Amoonguss / Magnezone / Dragonite), rebuild reason in party-v2.json",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.038
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Shiftry's Wind Rider gives it a free Attack boost whenever a Tailwind goes up on its side - including its own - so the support turn and the setup turn are the same turn",
+      "result": "PASS, AND IT DOES MORE THAN THE DOSSIER CLAIMS",
+      "evidence": "Attempt 1 turn 1, in order: 'Charizard used Heat Wave! The opposing Shiftry's Attack rose! The opposing Seviper fainted!' - Heat Wave is a wind move, so Wind Rider made Shiftry IMMUNE to it and raised its Attack, while the same spread attack KOed its partner. Then 'The opposing Shiftry used Tailwind! A tailwind started blowing on the opposing side! The opposing Shiftry's Attack rose!' - the authored self-Tailwind boost, exactly as described. Shiftry finished the turn at +2 Attack having taken zero damage from my strongest move. The dossier only documents the Tailwind half; the wind-move immunity is the bigger effect in practice and it is the single most interesting mechanical interaction I found in this block."
+    },
+    {
+      "check": "Shiftry chooses Tailwind or Fake Out",
+      "result": "PARTIAL",
+      "evidence": "Tailwind fired on turn 1 of attempt 1 exactly as authored. Fake Out never fired in either attempt, including on Shiftry's genuine entry turn in both runs (it chose Tailwind in attempt 1 and Leaf Blade in attempt 2). Both choices were defensible - Tailwind was clearly right, and in attempt 2 Leaf Blade was 2x into Azumarill and helped KO it - so I am not logging this as a defect, but Fake Out is 0-for-2."
+    },
+    {
+      "check": "Seviper's Glare is 100%-accurate paralysis",
+      "result": "PASS",
+      "evidence": "Attempt 2 turn 3: 'The opposing Seviper used Glare! Charizard is paralyzed, so it may be unable to move!' - aimed at the fastest and most dangerous thing on my side, a Mega Charizard Y. The paralysis then cost Charizard the speed tier on turn 4 and it was KOed by Cloyster's Rock Blast. Correct move, correct target, decisive effect."
+    },
+    {
+      "check": "Skill Link Cloyster's Shell Smash into five-hit Icicle Spear behind a Clear Amulet is the closer",
+      "result": "SPLIT - Skill Link PASS, Shell Smash barely observed",
+      "evidence": "Skill Link is unambiguous: every Icicle Spear read 'The Pokemon was hit 5 times!' and every Rock Blast read 'hit 3 times' or more. A single critical 5-hit Icicle Spear took Togekiss from 206 to 63 in attempt 1 and Rock Blast (4x) OHKOed Mega Charizard Y in attempt 2. Shell Smash, however, was only ever CHOSEN once - attempt 1 turn 6, where the previous-turn latch reads MOVE_SHELL_SMASH but Cloyster was asleep from my Spore and could not execute. Across eight other Cloyster turns it always attacked. So the closer is real but it closes with raw Skill Link damage rather than with the authored Smash."
+    },
+    {
+      "check": "Clear Amulet prevents specified opposing drops but does not restore Shell Smash's own defensive drops (dossier disposition)",
+      "result": "NOT_EXERCISED",
+      "evidence": "Shell Smash never resolved, so there were no self-inflicted drops to observe, and neither of my parties carried a stat-dropping move for the Amulet to block. The disposition remains correct on paper and untested in play."
+    },
+    {
+      "check": "Sheer Force Nidoking is the special breaker",
+      "result": "PASS - and it is the most dangerous member of this team",
+      "evidence": "Attempt 1: Earth Power OHKOed a full-HP Magnezone (190 HP) and then a full-HP Excadrill (200 HP), both 2x, on consecutive turns; Sludge Bomb KOed Togekiss. Nidoking alone accounted for three of my six. Its target selection was correct every single time - Earth Power into the two Steel types, Sludge Bomb into the Fairy."
+    },
+    {
+      "check": "Infiltrator on Seviper",
+      "result": "NOT_EXERCISED",
+      "evidence": "I set no screens or substitutes for it to bypass."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "attempt": 2,
+      "turn": 2,
+      "battler": "Seviper",
+      "call": "Protect",
+      "payoff": "REAL - blocked Alakazam's Life Orb Psychic (2x into Poison, very likely lethal on a 157 HP body). Good guard on the turn a fast Psychic attacker had just switched in."
+    },
+    {
+      "attempt": 2,
+      "turn": 5,
+      "battler": "Cloyster",
+      "call": "Protect",
+      "payoff": "REAL - blocked Magnezone's Analytic Thunderbolt (2x into Water/Ice, the single move on my side that could kill it)."
+    },
+    {
+      "attempt": 2,
+      "turn": 5,
+      "battler": "Seviper",
+      "call": "Protect (same turn as Cloyster's)",
+      "payoff": "REAL ON DENIAL, WEAK IN CONTEXT - blocked Alakazam's 2x Psychic. But both opponents guarded on the same turn, so Jenna's side did zero damage that turn while I lost nothing, and on the following turn neither could guard again and both died. Two simultaneous guards against a two-attacker board is the mirror image of the E0245 problem: instead of one partner walking into a guard, both partners gave up the turn together."
+    }
+  ],
+  "consecutive_protect_risk": "Cloyster and Seviper both guarded on attempt 2 turn 5 and both were attacked successfully on turn 6; neither attempted a second consecutive guard, so the reduced-success rule was respected.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Attempt 2 turn 1: Jenna focus-fired a 222 HP Assault Vest Azumarill down in one turn with Leaf Blade (2x into Water) and Sludge Bomb (2x into Fairy) from two different Pokemon. That is correct, coordinated doubles target selection and it is the best thing this trainer does.",
+    "Glare's target choice (the Mega, the fastest threat) was correct and it decided the turn that followed.",
+    "The simultaneous double Protect on attempt 2 turn 5 is worth watching. It was not empty - both guards denied a super-effective hit - but scoring each battler's guard independently against the same forecast produced a turn where Jenna's side did nothing at all while holding the stronger board.",
+    "Decision time peaked at 1.038 s."
+  ],
+  "player_mistakes": [
+    "Attempt 1: opening with Heat Wave into a Wind Rider lead. I did not check that Heat Wave is a wind move; Shiftry took zero damage and gained an Attack stage. Entirely my error and the single biggest reason attempt 1 was lost.",
+    "Attempt 1: bringing two Pokemon that are 2x to Earth Power against a Sheer Force Life Orb Nidoking."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Jenna wiped a fully competitive six 6-3 on attempt 1 and still took two Pokemon off a party built specifically to answer her. Nidoking and Cloyster are both doing more than their +1/+2 offsets suggest, and Wind Rider makes Shiftry genuinely awkward to open against. That is comfortably the 'won after a real fight' band and there is no case for raising it. No offsets touched.",
+  "rerun": "not needed - no level change.",
+  "could_this_be_cooler": "Keep the composition; the dossier's claim that Wind Rider makes the support turn and the setup turn the same turn is correct, and in play it is even better than advertised because Wind Rider also blanks the player's wind moves outright - Heat Wave, Hurricane, Blizzard, Icy Wind and Bleakwind Storm all do nothing to this lead while feeding it Attack. That is a genuinely memorable, teachable trap and the book should say so explicitly, because the dossier currently describes only the Tailwind half and a player (or an agent) reading it will walk into exactly the mistake I made.\n\nTwo improvements worth naming. First, Shiftry's Fake Out did not fire in either attempt and its Tailwind turn is clearly the better opener anyway; the Fake Out slot is doing nothing, and a wind-absorbing lead would be far scarier with a wind move of its own to fire back (Shiftry cannot learn one worth using, so the honest alternative is Sucker Punch or Swords Dance to convert the Wind Rider boosts). Second, Cloyster is the authored win condition and it never actually Shell Smashed - it wins on Skill Link damage alone, which means the Clear Amulet is protecting boosts that never happen. If Shell Smash is meant to be the plan, Cloyster needs a turn where setting up is clearly better than attacking, and beside three attackers it never gets one; pairing it with a redirection or Fake Out partner on the field at the same time would create that turn. Flagged, not changed.",
+  "authored_set_legality": "No legality problem. Wind Rider, Infiltrator, Sheer Force with Life Orb, Skill Link with Clear Amulet and Glare's 100% accuracy all resolved as authored.",
+  "notes": "Two attempts on two different parties; the rebuild rationale is recorded in party-v2.json as the brief requires."
+}
