@@ -1,0 +1,36 @@
+{
+  "play_order": 318, "e_group": "E0487", "trainer": "TRAINER_VITO", "class": "ace", "location": "VictoryRoad_B2F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Raichu offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/318-TRAINER_VITO/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used.",
+  "pre_play_strategy_checks": ["Drought on entry, Solar Beam with no charge or Encore", "Bisharp Defiant punishes stat drops (none offered)", "Lurantis Contrary Leaf Storm snowball / Synthesis in sun", "Dodrio Choice Band Early Bird", "Flygon Tailwind / Yache Berry", "Mega Raichu X Fake Out / Knock Off closer"],
+  "attempts": [
+    {"n": 1, "seed": 8, "run_dir": "a1", "party": "party_vr96_b.json led by Chi-Yu + Landorus (Incineroar benched to deny Defiant)", "outcome": "won", "turns": 7, "player_faints": 0, "opponent_faints": 6,
+     "why": "Turn 1 Drought was live; Bisharp Sucker Punched Landorus (168), then Rock Slide + sun-boosted Heat Wave KO'd both Bisharp and Ninetales before Ninetales moved. Turn 2 Lurantis Protected, Dodrio Knock Off hit Landorus' Protect, Heat Wave OHKO'd the Choice-locked Dodrio (287, neutral, in the sun the team set). Turn 3 Flygon Protected, Heat Wave OHKO'd Lurantis (Leaf Storm chosen, never fired). Turn 4 Raichu Fake Out flinched Chi-Yu, Earth Power OHKO'd Raichu before it Mega Evolved; Flygon Tailwind. Turns 5-8 Flygon: Earth Power 188 on Chi-Yu, Overheat missed, Protect once, Sludge Bomb finished it. Zero faints."}
+  ],
+  "strategy_checks": [
+    {"check": "Drought / sun opening", "result": "PASS (weather), FAIL (payload)", "evidence": "B_WEATHER_SUN_NORMAL at turn 0; Ninetales chose Heat Wave turn 1 and died before moving; Solar Beam and Encore never used; the sun boosted the player's Chi-Yu Heat Wave to OHKO Dodrio and Lurantis"},
+    {"check": "Defiant", "result": "N/A", "evidence": "no stat drop offered; Bisharp Sucker Punched Landorus then died turn 1"},
+    {"check": "Contrary Leaf Storm / Synthesis", "result": "FAIL", "evidence": "Lurantis: Protect turn 2, Leaf Storm chosen turn 3 but OHKO'd first; Synthesis never used"},
+    {"check": "Dodrio Band / Early Bird", "result": "PARTIAL", "evidence": "Knock Off chosen into Landorus' Protect turn 2; OHKO'd turn 2 by one neutral Heat Wave (4 HP EVs, sun)"},
+    {"check": "Flygon Tailwind / Yache", "result": "PASS (Tailwind)", "evidence": "turn 4 Tailwind; Yache never relevant (no Ice)"},
+    {"check": "Mega Raichu X closer", "result": "FAIL", "evidence": "turn 4 Fake Out on entry without Mega Evolving, then OHKO'd by Earth Power; Mega never happened"}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Lurantis", "payoff": "blocked a lethal sun Heat Wave - good; it died to the same move next turn"},
+    {"turn": 3, "user": "Flygon", "payoff": "blocked Sludge Bomb (resisted) + Heat Wave (~250) - fine"},
+    {"turn": 7, "user": "Flygon", "payoff": "blocked lethal Double-Edge + Sludge Bomb - good, delay only (tailwind expired the same turn)"}
+  ],
+  "protect_summary": "3 Protects, all reasonable, all delays.",
+  "ai_defects": [],
+  "ai_notes": "Raichu using Fake Out without Mega Evolving on its entry turn is a legitimate choice (Fake Out only works on the first turn) but it means the Mega never existed; a Mega-on-entry rule for Fake Out users would fix it. Nothing illegal.",
+  "level_changes": [
+    {"member": "NINETALES", "field": "level offset", "before": 1, "after": 2, "why": "died turn 1 before acting"},
+    {"member": "DODRIO", "field": "level offset", "before": 1, "after": 2, "why": "OHKO'd by one neutral Heat Wave on turn 2"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 6-0 with zero faints. The two frailest bodies go +1; the Mega, Bisharp and Lurantis keep their offsets.",
+  "cooler": "The Contrary/Defiant identity is good on paper, but neither trigger appeared and the sun the team sets is a gift to any opposing Fire attacker (Chi-Yu OHKO'd three members with sun-boosted Heat Wave). The sun team lacks a Water-immune/Fire-resist body: a sun-team Fire type that resists the sun-boosted Fire the player brings (or a Flash Fire Ninetales instead of Drought with Torkoal... no, Drought is the point) - the honest suggestion is one Rock/Water-resist body such as a Chlorophyll-free bulky partner. Sets unchanged.",
+  "legality_notes": "Sets legal.",
+  "verification_limit": "The +1 on Ninetales and Dodrio cannot be re-verified until the main agent rebuilds."
+}
