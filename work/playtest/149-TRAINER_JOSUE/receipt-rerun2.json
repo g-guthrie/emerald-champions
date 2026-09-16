@@ -1,0 +1,87 @@
+{
+  "play_order": 149,
+  "e_group": "E0180",
+  "trainer": "TRAINER_JOSUE",
+  "class": "ace",
+  "location": "Route105",
+  "cap": 48,
+  "difficulty": "medium",
+  "run_kind": "rerun2",
+  "prior_receipts": ["work/playtest/149-TRAINER_JOSUE/receipt.json"],
+  "build": "work/agent-battle-build-5",
+  "why_rerun": "The first pass raised Pelipper and Cramorant from +1 to +2. Those offsets are now built into work/agent-battle-build-5 and this run re-benchmarks the fight on them.",
+  "cap_confirmation": "Driver reports level_cap 48. Resolved levels read off the live board as each member appeared: Pelipper 48 and Cramorant 48 (turn 0), Tornadus 47 (turn 1), Kilowattrel 47 (turn 2). Current authored offsets +2/+2/+1/+1 give cap 48 + offset - 2 = 48/48/47/47 on Medium. All four match; Pelipper and Cramorant at 48 rather than the 47 of the first run confirm the changed offsets are in this build.",
+  "level_offsets_at_run": {"PELIPPER": 2, "CRAMORANT": 2, "KILOWATTREL": 1, "TORNADUS": 1},
+  "resolved_opponent_levels": {"PELIPPER": 48, "CRAMORANT": 48, "KILOWATTREL": 47, "TORNADUS": 47},
+  "party_manifest": "work/playtest/149-TRAINER_JOSUE/party-a1.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 48, same map (Route 105), same encounter. The first receipt recorded no legality problem and the party won its one attempt, so it was not reported weak or illegal and no rebuild is warranted. Iron Hands is a Paradox species, which the brief permits in a cap-48 window - its restriction applies at or below 24.",
+  "pre_declared_strategy_checks": [
+    "Pelipper supplies rain on entry and the Damp Rock holds it",
+    "Cramorant's Surf is only fired beside Pelipper, the one partner that resists it - and never beside Kilowattrel or Tornadus",
+    "Kilowattrel's Wind Power charges off Josue's own weather kit",
+    "Tailwind is a fallback after loss or expiry, not a second simultaneous boost",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/149-TRAINER_JOSUE/r1",
+      "seed": 2149,
+      "outcome": "won",
+      "turns": 4,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "log": "work/playtest/149-TRAINER_JOSUE/r1/events.jsonl",
+      "damage_note": "Damage read from the driver's new identity-keyed `damage` map, not slot arithmetic.",
+      "narrative": "T1 rain was already up from Drizzle at turn 0. Cramorant Protected and caught Iron Hands' 4x Wild Charge; Pelipper's spread Muddy Water hit Iron Hands for 94 and missed Magnezone; Magnezone's Thunderbolt (4x) KOed Pelipper. Tornadus entered. T2 Tornadus and Cramorant both fired rain-accurate Hurricane at Iron Hands (2x on Fighting) and KOed it outright - clean focus fire; Magnezone's Thunderbolt KOed Cramorant. Weavile replaced Iron Hands and Kilowattrel entered. T3 the showcase fired: Tornadus used priority Prankster Tailwind, 'Being hit by Tailwind charged the opposing Kilowattrel', and the Wind-Power-doubled, rain-accurate Thunder OHKOed Weavile; Magnezone's Thunderbolt left Tornadus on 1 HP through its Focus Sash. Rillaboom replaced Weavile. T4 Rillaboom's priority Grassy Glide finished Tornadus, Kilowattrel's Hurricane (2x on Grass) KOed Rillaboom, and Magnezone's Thunderbolt finished Kilowattrel. Won 4-3 with Magnezone, untouched all battle, as the last one standing."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Pelipper supplies rain on entry and the Damp Rock holds it",
+      "result": "PASS",
+      "evidence": "weather read B_WEATHER_RAIN_NORMAL at turn 0 from Drizzle, and 'Rain continues to fall' at the end of every turn through the end of the battle, three turns after Pelipper itself died. The Damp Rock did its job."
+    },
+    {
+      "check": "Cramorant's Surf only beside Pelipper; never beside Kilowattrel or Tornadus",
+      "result": "PASS",
+      "evidence": "Cramorant never selected Surf. Critically, on T2 it shared the field with Tornadus - the exact board the dossier flags as unsafe - and chose Hurricane instead. The authored pairing constraint was respected by an actual decision, not just by deployment order."
+    },
+    {
+      "check": "Kilowattrel's Wind Power charges off Josue's own weather kit",
+      "result": "PASS - the best single sequence in this block",
+      "evidence": "T3, 'Being hit by Tailwind charged the opposing Kilowattrel' from its own partner's Prankster Tailwind, and the charged, rain-accurate Thunder then OHKOed a 140 HP Weavile. Two of Josue's own support pieces combined to double his Electric damage on the turn it mattered. This is the interaction the dossier says is better than it looks, and it is."
+    },
+    {
+      "check": "Tailwind is a fallback, not a redundant second boost",
+      "result": "PASS",
+      "evidence": "Only one Tailwind was set all battle - Tornadus on T3. Pelipper, which also carries Tailwind, spent its single turn on Muddy Water instead and died before any expiry. No double-stacking."
+    },
+    {
+      "check": "Every opposing Protect has a payoff",
+      "result": "PASS",
+      "evidence": "One Protect this battle, ledgered below. Real payoff, not repeated."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "CRAMORANT (b3)",
+      "payoff": "REAL - blocked Iron Hands' Wild Charge, a 4x hit on a 140 HP body that was a clean one-shot. Cramorant survived at full and lived to trade a Hurricane into Iron Hands on the following turn, which is what actually killed it.",
+      "verdict": "good",
+      "note": "Not repeated. Cramorant attacked on its second turn rather than guarding again."
+    }
+  ],
+  "ai_defects": [],
+  "ai_defect_note": "No defects observed, and two choices are worth recording as positively good rather than merely defensible. First, the T2 double Hurricane: both surviving opponents independently selected the same move at the same target and removed a 250 HP Iron Hands in one turn - correct focus fire onto the 2x-weak body rather than splitting damage. Second, the T3 Tailwind: Tornadus was at full HP against a board it could have attacked, and it chose the support move that doubled its partner's damage output on the turn its partner could convert it. Neither choice needed to read my commands to be right.",
+  "level_changes": {
+    "rule_applied": "Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' Three player faints - Iron Hands, Weavile and Rillaboom - on the first attempt. No change.",
+    "budget_note": "Pelipper and Cramorant have each used +1 of this pass's +-2 (from +1 to +2) and have one left; Kilowattrel and Tornadus have used nothing. None of that budget is spent here, because the fight does not call for it.",
+    "changes": [],
+    "reasoning": "This is the first battle in this block that met AGENTS.md's stated aim of about three player faints against a well-prepared competitive party, and it met it exactly. It cost me a 250 HP Iron Hands, a Weavile and a Rillaboom, and I finished with a single Pokemon standing. Raising anything here would push a correctly tuned fight past the line. The previous +1s on Pelipper and Cramorant were the right calls and they landed."
+  },
+  "cooler_note": "Keep it as is; this is the best-executing team I have played in this block and I would not change a species. Every authored piece fired: Drizzle with a Damp Rock that outlived its holder, the pairing constraint respected by an actual decision rather than by luck, and the Tailwind-into-Wind-Power-into-rain-accurate-Thunder chain that took my Weavile off the board in one move. The one thing that has still never happened across both runs is Gulp Missile: it only triggers off Surf or Dive, and the AI - correctly, per its own pairing constraint - keeps declining to fire Surf beside a partner that does not resist it. So Cramorant's signature ability is structurally near-unreachable in a doubles room where only one of its three possible partners is a safe neighbour. That is a real design tension worth a later look, and the honest options are to give Cramorant a partner set that makes Surf safe more often, or to accept Gulp Missile as flavour. Not changed in this pass, and not a reason to touch a team that is otherwise working.",
+  "authored_set_legality": "No legality problem found. Tornadus is a legendary and is authored here deliberately; at level 47 in a cap-48 window it is within the normalization this pass is not asked to revisit.",
+  "verdict": "calibrated",
+  "note_on_teams_file": "No teams-file edit was made for this trainer."
+}
