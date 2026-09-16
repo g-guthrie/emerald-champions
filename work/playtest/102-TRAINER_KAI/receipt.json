@@ -1,0 +1,35 @@
+{
+  "play_order": 102,
+  "e_group": "E0118",
+  "trainer": "TRAINER_KAI",
+  "class": "casual",
+  "location": "Route114",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Greninja offset 0 -> L34, Chesnaught +1 -> L35, Grapploct +3 -> L37, Sealeo +5 -> L39, all equal 36 + offset - 2 (Medium). No --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/102-TRAINER_KAI/party.json",
+  "attempts": [
+    {"n": 1, "seed": 102, "run_dir": "work/playtest/102-TRAINER_KAI/a1", "kind": "optimized", "outcome": "won", "turns": 6, "decisions": 7, "player_faints": 5, "opponent_faints": 4, "note": "Won on my last Pokemon with Weavile at 87/107. Hardest fight in the block. I made one clear targeting error on T5 - Magnezone's Thunderbolt went into Chesnaught (Grass/Fighting, 0.5x) when Sealeo (Water/Ice, 2x) was the intended target - and it cost me Magnezone. Recorded because it inflates the faint count by roughly one."}
+  ],
+  "strategy_checks": [
+    {"check": "Grapploct keeps up Octolock pressure (the trainer's headline tactic)", "result": "NOT OBSERVED", "evidence": "Grapploct had two decision turns. T1 it chose Protect; T2 it chose Drain Punch and was KOed by Psychic before acting. Octolock was never selected. It is a Conservative-AI trainer and Drain Punch into a 70 HP Mega Alakazam is not absurd, but the one move that defines this trainer's plan did not appear in the battle at all. See AI defect 1."},
+    {"check": "Sealeo's Yawn / Icy Wind / Brine pressure lane", "result": "PASS (partial)", "evidence": "Icy Wind was excellent: T1 and T2 it spread -1 Speed onto both of my battlers, which is also the correct read against the Follow Me I had just used, since a spread move is not redirected. Brine KOed Incineroar on T6. Yawn never appeared, and I could not confirm the sub-50% Brine doubling because the targets were above the threshold when it connected."},
+    {"check": "Greninja's Protean changes its type on move use", "result": "PASS", "evidence": "T3 'The opposing Greninja transformed into the Ice type!' before Ice Beam KOed Togekiss. The typing change is live, not cosmetic."},
+    {"check": "Chesnaught's Bulletproof blanks ball and bomb moves", "result": "NOT TESTED (by design)", "evidence": "I dropped Focus Blast and Shadow Ball from Alakazam's set for Dazzling Gleam specifically because Bulletproof blocks both. The ability changed the build even though it never had to fire - which is the point of printing it."},
+    {"check": "Chesnaught uses Spiky Shield / Body Press / Iron Defense behind Rocky Helmet", "result": "PASS (partial)", "evidence": "Body Press was chosen twice and was the right move both times - it KOed Magnezone through 2x Fighting. Rocky Helmet did real work: it finished Excadrill on T4 after Focus Sash had saved it. Spiky Shield and Iron Defense never appeared, but Chesnaught only had three turns and attacked correctly in all of them."},
+    {"check": "The AI makes a positional switch under pressure", "result": "PASS (unscripted)", "evidence": "T4 Kai withdrew Sealeo and brought Chesnaught in against my incoming Magnezone/Excadrill pair. Sealeo is 2x into Thunderbolt and Chesnaught is 0.5x into it, so this was the correct body to present."}
+  ],
+  "protect_ledger": [
+    {"turn": "T1", "battler": "GRAPPLOCT", "payoff": "real - blocked a 2x Psychic from a freshly Mega-Evolved Alakazam on turn one, which would have taken roughly half its HP, while its partner set up the Icy Wind speed drops"}
+  ],
+  "protect_note": "One Protect in the battle, with payoff. No empty, repetitive or harmful guarding. Notably the AI did not reflexively Protect with Grapploct on turn two when it was still at full HP - it attacked instead. Good cadence.",
+  "ai_defects": [
+    {"id": 1, "severity": "moderate", "turn": "T1 and T2", "board": "Grapploct (L37, Limber, Sitrus, full HP) versus a Mega Alakazam it cannot outspeed or KO, with Togekiss using Follow Me beside it", "chosen": "T1 Protect, T2 Drain Punch", "better": "MOVE_OCTOLOCK on either turn. Octolock is the trainer's authored strategy, it traps the target and drops its Defense and Sp.Def every turn, and against a frail Mega Alakazam that had just committed to staying in it is strictly better than a Drain Punch that does not KO. Grapploct is the only Octolock user in this stretch of the campaign and it spent its whole appearance not using it.", "note": "This trainer is flagged ai: Conservative. Worth checking whether the Conservative profile is down-weighting trapping/stat-drop moves relative to direct damage, because the same profile is on Lenny and Lucas in this block and on the Meteor Falls grunt."}
+  ],
+  "level_changes": [],
+  "level_decision": "KEEP. Brief rule 5: won with 5 player faints on the last surviving Pokemon. No increase is defensible. I also considered a reduction and rejected it: the brief only opens that review after three lost optimized attempts, and I won on the first. Flagging upward rather than changing it: Sealeo at offset +5 (L39, three levels over the player cap, with Eviolite and Thick Fat) is doing an enormous amount of the work here for a trainer whose class is 'casual', and it survived to be the last opponent standing. If the campaign-wide calibration pass ever reviews class-versus-offset consistency, this is the line to look at - but it is a good fight and I am not touching it on one battle's evidence.",
+  "retest_status": "n/a - no level change.",
+  "cooler": "Keep the concept. The Grapploct/Sealeo/Greninja/Chesnaught quartet has a real identity - a fisherman whose team is built around not letting you leave (Octolock, Yawn, trapping chip) - and Protean Greninja is a genuine threat at this stage. Two honest observations. First, the trainer's signature move never fired, and a trapping team that does not trap is just four Water types; if Octolock is meant to be the identity, Grapploct needs to reach it (see AI defect 1) rather than needing a level. Second, and this is the cooler question proper: the most memorable thing this team actually did was Icy Wind into my Follow Me turn, which is a speed-control read, not a trapping read. If the team is ever revisited, leaning into that - Sealeo is already the best member - would be more distinctive than a second bulky Fighting type. Chesnaught and Grapploct overlap heavily: both are slow, physically bulky, part Fighting, and both died to the same kinds of answers. Replacing Chesnaught with something that punishes the switch Octolock is supposed to prevent would make the trapping plan mean something.",
+  "authored_set_legality": "No legality problem found. Limber, Thick Fat with Eviolite, Protean with Life Orb and Bulletproof with Rocky Helmet were all live on the correct members.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
