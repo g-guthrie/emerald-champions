@@ -1,0 +1,124 @@
+{
+  "play_order": 18,
+  "e_group": "E0023",
+  "trainer": "TRAINER_CLARK",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "ai_profile": "Conservative",
+  "pass": "rerun (pass 2) after the +1 offsets from pass 1 and the opponent-AI setup/support pricing fix",
+  "outcome": "WON on attempt 1, 5 turns, 0 player faints. ARCHEN +1 (2 -> 3), GEODUDE +1 (4 -> 5).",
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_manifest_note": "New chronology-checked party; the pass-1 party used Seaspray Cave, Verdanturf Meadow and Altering Cave species that a player has not reached at Route 116.",
+  "run_dir": "work/playtest/18-CLARK/r1",
+  "opponent_levels_medium": "ROGGENROLA 18, ARCHEN 14, GEODUDE 18, MUDBRAY 18 (cap 14; offsets 4/2/4/4 before this pass's change)",
+  "attempts": [
+    {
+      "seed": 5818,
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 5,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.021,
+      "note": "Nothing on my side dropped below 38/53. Shiftry's Leaf Blade is 4x on Roggenrola and Geodude and 2x on Mudbray, and Heracross's Close Combat covered Archen. A single correctly-typed Grass attacker answers the whole room, which is the same structural verdict as pass 1."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Roggenrola converts Iron Defense into Body Press damage (the SETUP strategy flag)",
+      "result": "PASS - the pass-1 defect is FIXED",
+      "evidence": "Turn 1: 'The opposing Roggenrola used Iron Defense! Defense rose sharply!' (+2) from full HP behind Eviolite and Sturdy, which is the safest setup turn on the board. Turn 2: it chose MOVE_BODY_PRESS targeting Shiftry - the correct target, because Fighting is 2x on Dark and 0.25x on my Bug/Fighting lead. The full authored sequence was selected on consecutive turns. The move did not resolve only because Shiftry is faster and killed it first. In pass 1 Iron Defense was never chosen at all and Body Press was spammed from turn 1."
+    },
+    {
+      "check": "Roggenrola's Wide Guard answers meaningful spread pressure",
+      "result": "NOT OBSERVED (correctly declined)",
+      "evidence": "I opened turn 1 with Rock Slide, a spread move, and Roggenrola chose Iron Defense instead of Wide Guard. That is the right call: Rock is 0.5x on Rock, so my spread move was the least threatening thing on the board and the setup turn was worth more. Roggenrola died on turn 2 before any real spread pressure (Sylveon's Hyper Voice) ever appeared."
+    },
+    {
+      "check": "Archen attacks with itemless Acrobatics",
+      "result": "PASS (chosen, doubled-power condition confirmed)",
+      "evidence": "Turn 3 chosen action: MOVE_ACROBATICS targeting Heracross, with ITEM_NONE confirmed in the battler state so the doubled power held, and Flying is 4x on Bug/Fighting. Heracross was faster and killed it with Close Combat before it resolved. Archen has now chosen correctly and died before acting in both passes."
+    },
+    {
+      "check": "Archen is preserved above its Defeatist threshold where useful",
+      "result": "PASS - through Protect, which is new",
+      "evidence": "Archen chose Protect on turns 1 and 2 (both succeeded) and kept itself at a full 43/43 rather than taking chip damage into Defeatist range, then attacked on turn 3 at full power. That is exactly the authored 'preserve Archen above its Defeatist threshold' line, and it is the first time this trainer's fragile member has bought itself any turns at all."
+    },
+    {
+      "check": "Defeatist halves Archen's output below 50% HP",
+      "result": "NOT OBSERVED",
+      "evidence": "Archen never took damage - it Protected twice and was then one-shot from full HP. It has never crossed the threshold in either pass."
+    },
+    {
+      "check": "Mudbray's Stamina raises Defense after it survives a hit",
+      "result": "NOT OBSERVED this pass",
+      "evidence": "Mudbray entered on turn 4, Protected, and was killed on turn 5 by a critical Close Combat before taking a surviving hit. Stamina did fire correctly in pass 1, so the ability itself is confirmed working."
+    },
+    {
+      "check": "Geodude's Rock Head prevents Double-Edge recoil",
+      "result": "NOT OBSERVED",
+      "evidence": "Geodude chose Protect (turn 3) and Rock Tomb (turn 4) and was killed by a 4x Leaf Blade before Double-Edge was ever selected. Unobserved in both passes."
+    },
+    {
+      "check": "The authored crack (special attacks, Water/Grass coverage, targeted attacks around Wide Guard)",
+      "result": "PASS - decisively",
+      "evidence": "Grass coverage alone won the fight: Leaf Blade is 4x on Roggenrola and Geodude and 2x on Mudbray. Three of the four members share a 4x Grass and Water weakness, which is the structural problem pass 1 identified and levels cannot fix."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "ARCHEN (43/43, full HP, turn one)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - blocked Heracross's Rock Slide, a neutral spread hit, and kept Archen out of Defeatist range at exactly the moment its partner was spending a turn on Iron Defense. A modest but real denial on a body that halves its own damage the moment it drops below half."
+    },
+    {
+      "turn": 2,
+      "battler": "ARCHEN (43/43)",
+      "action": "MOVE_PROTECT (second consecutive, succeeded)",
+      "payoff": "NOT EMPTY - blocked Heracross's Close Combat, which is neutral on Rock/Flying off 252 Adamant Attack and would have pushed Archen well past the Defeatist line. It bought Archen its full-power Acrobatics turn."
+    },
+    {
+      "turn": 3,
+      "battler": "GEODUDE (43/43, entry turn)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - saved its life. It blocked Shiftry's Leaf Blade, which is 4x on Rock/Ground and killed it outright the very next turn."
+    },
+    {
+      "turn": 4,
+      "battler": "MUDBRAY (63/63, entry turn)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - blocked Heracross's Close Combat. Every one of Clark's four Protects this pass denied a real hit, which is a marked change from the pattern elsewhere in this block."
+    }
+  ],
+  "ai_defects": [],
+  "ai_defects_resolved": [
+    {
+      "id": "E0023-CLARK-IRONDEFENSE-NOT-SET",
+      "status": "RESOLVED",
+      "evidence": "Pass 1 recorded 'Roggenrola chose Body Press on turns 1 and 2 and never Iron Defense, including turn 1 when it was at full HP behind Eviolite and Sturdy - the safest setup turn it would ever get.' Pass 2: Iron Defense on turn 1 from exactly that board, Body Press on turn 2 into the correct 2x target. The setup pricing change reached this trainer."
+    }
+  ],
+  "level_changes": [
+    {
+      "member": "ARCHEN",
+      "field": "level offset",
+      "before": 2,
+      "after": 3,
+      "reason": "Brief rule 5: won first try with 0 player faints -> +1 on the weakest one or two members. Archen is the unique floor of the team at L14 against a cap of 14, four levels under the other three, and Defeatist already halves its damage by design. This is the second and final step inside the +-2 total (original 1 -> 2 in pass 1 -> 3 now); it must not be moved again in this review."
+    },
+    {
+      "member": "GEODUDE",
+      "field": "level offset",
+      "before": 4,
+      "after": 5,
+      "reason": "Second bump for the zero-faint clear. Geodude is the member that has contributed nothing across two passes - it has never landed an attack, never used Double-Edge and never demonstrated Rock Head - and it is the slot with a 4x weakness to both of the coverage types that beat this team. It is also the only member with no pass-1 change, so +1 is its first step inside the +-2 cap. Roggenrola and Mudbray are left alone because both executed their authored abilities."
+    }
+  ],
+  "commit_note": "The teams-file hunk for these two offsets landed in commit 49e313fb85 rather than this receipt's own commit: a concurrently running session committed from the shared index while this agent had its hunk staged. The change is correct and present in history at data/emerald_champions/emerald_champions_battle_teams.txt lines 235-236; only the commit attribution is wrong.",
+  "rerun_note": "The brief's step 5 asks for one rerun after a bump. This rerun agent was instructed to take one attempt per trainer, so the two +1s are recorded for the next pass rather than replayed here.",
+  "cooler_note": "The AI fix makes this team read much better than it did - Iron Defense into Body Press is a real two-turn plan now, and all four Protects denied real damage. The composition problem is untouched and levels will not solve it: Roggenrola, Geodude and Mudbray all take 4x or 2x from Grass and Water, so one correctly built partner still ends the fight in five turns. Suggestion for a later pass, not applied here (unchanged from pass 1): Geodude is the redundant slot - a third Rock body with a double 4x weakness whose Life Orb offence never fires. A Ferroseed or a Bug/Rock partner keeps the hiker theme, removes the single-answer sweep, and finally gives Wide Guard something worth protecting.",
+  "authored_set_legality": "Clean. Archen's ITEM_NONE (required for the Acrobatics doubling) was confirmed in the battler state; Sturdy, Rock Head and Stamina were all present.",
+  "not_finished": "Wide Guard, Defeatist, Rock Head and Double-Edge are all still unobserved after two passes. Wide Guard in particular needs a party whose best action is genuinely a spread move against a non-Rock target, which this team's own typing makes hard to arrange."
+}
