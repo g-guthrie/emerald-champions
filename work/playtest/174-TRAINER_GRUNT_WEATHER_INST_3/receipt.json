@@ -1,0 +1,94 @@
+{
+  "play_order": 174,
+  "e_group": "E0247",
+  "trainer": "TRAINER_GRUNT_WEATHER_INST_3",
+  "class": "grunt",
+  "location": "Route119_WeatherInstitute_2F",
+  "raid_stage": "5 of 6 - the last door before Shelly",
+  "cap": 48,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/174-TRAINER_GRUNT_WEATHER_INST_3/party.json",
+  "level_verification": "cap 48: Mightyena +2 -> L48, Golisopod +3 -> L49, Muk-Alola +3 -> L49, Qwilfish +2 -> L48. All equal cap + offset - 2. --cap 48 correct.",
+  "attempts": [
+    {
+      "seed": 51,
+      "run_dir": "work/playtest/174-TRAINER_GRUNT_WEATHER_INST_3/run-s1",
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 6,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 0.904
+    }
+  ],
+  "showcase_escalation_check": {
+    "declared_before_play": "Raid stage 5 must still show NO Aqua weather - the escalation is none (stages 1-3) -> stolen rain (stage 4) -> Shelly's snow (stage 6). Stage 5 is the antechamber and sets nothing.",
+    "result": "PASS",
+    "evidence": "weather at turn 0 = none; no opposing action set weather. The only weather was my own Drought. The escalation shape holds."
+  },
+  "strategy_checks": [
+    {
+      "check": "Mightyena's Intimidate lands on entry, and Qwilfish's Intimidate stacks with it",
+      "result": "PASS",
+      "evidence": "Turn 0 state: both my actives at atk -1 from Mightyena. Turn 1, when Qwilfish replaced Mightyena: 'Charizard's Attack fell! Togekiss's Attack fell!' taking both to atk -2. The authored double-Intimidate stack is real and was the single most visible thing this trainer did."
+    },
+    {
+      "check": "Howl raises the Attack of both Mightyena and its partner (a doubles support move, not a selfish boost)",
+      "result": "NOT_EXERCISED",
+      "evidence": "Mightyena was KOed by a sun-boosted Heat Wave on turn 1 before acting. Its latched choice that turn was Crunch, not Howl. The SETUP flag's Howl half went unobserved."
+    },
+    {
+      "check": "Golisopod uses First Impression only on its genuine entry turn",
+      "result": "PASS",
+      "evidence": "Golisopod entered twice. On its first entry (turn 1) its latched choice was Liquidation, not First Impression - and that was CORRECT, because Bug is 0.25x into Fire/Flying while Water is 2x. On its second entry (turn 3) it used First Impression, targeting Magnezone (0.5x) rather than Togekiss (0.25x) - again the correct target of the two. The AI is picking First Impression by expected value on the entry turn rather than reflexively, which is better behaviour than the dossier asks for."
+    },
+    {
+      "check": "Emergency Exit pulls Golisopod out below half whether Aqua wanted it or not",
+      "result": "PASS",
+      "evidence": "Turn 1: Togekiss's Air Slash was super effective into Golisopod (Bug, 2x) and immediately 'TEAM AQUA GRUNT sent out Muk!' - Golisopod was yanked off the field before it could execute its Liquidation. This is the dossier's 'moment to remember' (deliberately damaging Golisopod to force it out of a winning position) happening on turn one, and it is a genuinely readable, forceable drawback exactly as advertised."
+    },
+    {
+      "check": "Sucker Punch fails against any non-attacking turn",
+      "result": "NOT_EXERCISED",
+      "evidence": "Mightyena died before using Sucker Punch."
+    },
+    {
+      "check": "Spikes and Curse do not both burn a turn in the same battle",
+      "result": "PASS_VACUOUSLY",
+      "evidence": "Neither was used. Qwilfish spent its one turn on Poison Jab and Muk on Poison Jab, Protect and Poison Jab. No wasted setup turn occurred, but the check was not really tested."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 5,
+      "battler": "Muk-Alola",
+      "call": "Protect",
+      "payoff": "PARTIAL - blocked Togekiss's Air Slash and Magnezone's 2x Flash Cannon, so real damage denial, and it also outlasted my sun by one turn. But Muk was the last Pokemon alive with nothing to convert the turn into; it died on the next turn regardless. Damage denied, no strategic payoff available."
+    }
+  ],
+  "consecutive_protect_risk": "none.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 3, Muk used Poison Jab into Magnezone and 'It doesn't affect Magnezone'. This is NOT a defect. The opponent decides at turn start, when Mega Charizard Y was still in the slot; my switch to a Steel type happened afterward. This is exactly the authored no-pending-command-reads behaviour working as intended, and I am recording it so it is not mistaken for an immunity-checking bug later.",
+    "Golisopod's move choice on its two entry turns (Liquidation first, First Impression second) shows correct expected-value reasoning about its own priority move rather than a scripted opener. Good.",
+    "Decision time peaked at 0.904 s, the most comfortable margin in the raid."
+  ],
+  "level_changes": [
+    {
+      "member": "MIGHTYENA",
+      "before": 2,
+      "after": 3,
+      "reason": "Zero-faint first-attempt win against the trainer the dossier calls the ugliest crew in the building and the raid boss's antechamber. Mightyena is the Intimidate-and-Howl support lead and it died on turn 1 to a single spread attack without acting, so the Howl half of the SETUP flag could not even be observed. +1 is the correct small individual step for the weakest member of a room that should be the hardest grunt."
+    },
+    {
+      "member": "QWILFISH",
+      "before": 2,
+      "after": 3,
+      "reason": "Same trigger, same band (+2 was the joint-lowest offset). Qwilfish got exactly one action before dying to a 2x Air Slash. Raising it to +3 also has a design payoff: the second Intimidate is this room's signature, and the longer Qwilfish lives the more that stacking matters."
+    }
+  ],
+  "rerun": "NOT POSSIBLE IN THIS SESSION - opponent levels come from the compiled headless ROM and this agent must not run make. Deferred to the main agent's rebuild.",
+  "could_this_be_cooler": "The dossier's answer - composition retained, presentation was the problem, offsets raised - was the right call but it did not go far enough, and playing it shows why. This room is supposed to be the hardest grunt in the raid and it was the only one of the five I beat without losing a single Pokemon, in six turns. The reason is structural: all four members are physical attackers that stack two Intimidates on a board where Intimidate does nothing to a special attacker, so a player who brings special damage - which the dossier's own crack line tells them to do - faces a team that has voluntarily halved its own offence. The room needs one member whose damage does not care about Intimidate. Alolan Muk already has the stats for it (base 65 SpA is poor, but Sludge Wave or Dark Pulse off a 105/100 bulky body would at least punish the special-attacker answer), or Qwilfish could carry Sludge Bomb instead of Poison Jab. That single move change would close the hole the crack line opens. Flagged, not changed. The Emergency Exit drawback should stay exactly as it is - it is the most interesting readable mechanic in the raid.",
+  "authored_set_legality": "No legality problem. Emergency Exit, double Intimidate, Gluttony with Figy Berry and MUK_ALOLA's form all resolved as authored.",
+  "notes": "Player party unchanged. Magnezone's Poison immunity made Alolan Muk almost harmless once it was on the field; that is a legitimate player answer but it is also the hole described above."
+}
