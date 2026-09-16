@@ -1,0 +1,107 @@
+{
+ "play_order": 303,
+ "e_group": "E0469",
+ "trainer": "TRAINER_JUAN_1",
+ "class": "leader",
+ "location": "SootopolisCity_Gym_1F",
+ "cap": 84,
+ "cap_source": "driver level_cap",
+ "difficulty": "medium",
+ "build_dir": "work/agent-battle-build-8",
+ "party_manifest": "work/playtest/303-TRAINER_JUAN_1/party_juan_84.json",
+ "availability_note": "As 301/302 plus Whimsicott (Cottonee line, gate 14). Sootopolis after the Cave of Origin, Rain Badge not earned; nothing from Ever Grande or the League.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/303-TRAINER_JUAN_1/a1",
+   "seed": 1,
+   "outcome": "won",
+   "turns": 10,
+   "decisions": 14,
+   "player_faints": 2,
+   "opponent_faints": 6,
+   "note": "Torkoal Drought beat Drizzle on entry. T1 both foes Ice Beamed Whimsicott through its Sash (dead T1, Taunt landed on Politoed first). Yawn on Suicune was wasted by my own Electric Terrain (player error). Suicune Tailwind T2, Snarl T3; Politoed 2HKOed by Earth Power+Thunderbolt; Suicune Volt Switch chip then Thunderclap. Manaphy Protected on entry, chose Tail Glow T7 but Kartana Leaf Blade KOed it first. Juan withdrew Toxapex for Gyarados (Intimidate) T8; Kingdra Specs Ice Beam into a Protect; Mega Gyarados Protected on its Mega turn, Crunch KOed Kartana T10, died to Thunderbolt; Toxapex (4 SpD EVs) OHKOed by +1 Thunderbolt."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Drizzle live on entry with Damp Rock",
+   "result": "PASS (then lost the weather war)",
+   "evidence": "Drizzle fired; Torkoal's Drought resolved after it (Torkoal slower) - the crack line."
+  },
+  {
+   "check": "Politoed Encore / spread Muddy Water",
+   "result": "PASS",
+   "evidence": "Prankster Taunt T1 removed Encore; Politoed then Ice Beamed Whimsicott (with Suicune - a correct double-target on the Sash) and Muddy Watered Torkoal T2-T3 (2x in sun-halved: 80 and 116)."
+  },
+  {
+   "check": "Suicune Tailwind / Snarl by board",
+   "result": "PASS",
+   "evidence": "T2 Tailwind, T3 Snarl (-1 SpA on both my attackers), T4 Scald."
+  },
+  {
+   "check": "Turn two introduces a real attacker (anti-passivity)",
+   "result": "PASS",
+   "evidence": "Toxapex came in only after Politoed fell; Manaphy, Kingdra and Gyarados followed. Juan also withdrew Toxapex T8 to bring Intimidate Gyarados onto Kartana - a real tempo switch."
+  },
+  {
+   "check": "Manaphy Tail Glow under Hydration",
+   "result": "PASS (selected, denied)",
+   "evidence": "T6 Protect on entry, T7 chose Tail Glow; Kartana (faster) KOed it. No rain by then, Hydration moot."
+  },
+  {
+   "check": "Kingdra Swift Swim / Specs",
+   "result": "PASS (selected)",
+   "evidence": "T8 Ice Beam into Raging Bolt's Protect (locked), T9 Ice Beam again; died to Thunderclap. No rain so no Swift Swim."
+  },
+  {
+   "check": "Mega Gyarados Dragon Dance / Protect",
+   "result": "PASS",
+   "evidence": "T9 Mega Evolved and Protected (blocked Leaf Blade), T10 Crunch KOed Kartana (134 HP) instead of DDing into two super-effective attackers - correct."
+  },
+  {
+   "check": "Toxapex Wide Guard / Baneful Bunker",
+   "result": "PASS",
+   "evidence": "Baneful Bunker T5, T7, T10 each blocked one attack; Acid Spray -2 SpD on Raging Bolt T6. Wide Guard never chosen (no spread moves on my side)."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "attempt": 1,
+   "turn": 5,
+   "user": "Toxapex (Baneful Bunker)",
+   "payoff": "REAL - blocked Kartana Leaf Blade."
+  },
+  {
+   "attempt": 1,
+   "turn": 6,
+   "user": "Manaphy",
+   "payoff": "REAL - blocked Leaf Blade + Thunderbolt on entry."
+  },
+  {
+   "attempt": 1,
+   "turn": 7,
+   "user": "Toxapex (Baneful Bunker)",
+   "payoff": "REAL - blocked Raging Bolt Thunderbolt (2x)."
+  },
+  {
+   "attempt": 1,
+   "turn": 9,
+   "user": "Mega Gyarados",
+   "payoff": "REAL - blocked Leaf Blade on the Mega turn."
+  },
+  {
+   "attempt": 1,
+   "turn": 10,
+   "user": "Toxapex (Baneful Bunker)",
+   "payoff": "PARTIAL - blocked Sacred Sword aimed at Gyarados? no: Sacred Sword hit Gyarados; Bunker blocked nothing aimed at Toxapex. EMPTY."
+  }
+ ],
+ "ai_defects": [],
+ "theme_note": "Juan is clearly a step above both rooms: 10 turns, every member used its authored tool (Tailwind, Snarl, Protect timing, Bunker, a mid-fight Intimidate switch, Mega + Protect), and it took the anti-weather party plus two faints. Passivity was not observed.",
+ "level_changes": [],
+ "level_changes_unverified": "None (won with 2 faints after a real fight).",
+ "cooler": "Already the gym's best fight. Toxapex with 4 SpD EVs is OHKOed by one boosted Thunderbolt, which makes the 'walk past it' crack trivial; 252/4/252 vs 252/252/4 is worth revisiting. Not changed this pass.",
+ "authored_set_legality": "No problem found.",
+ "most_worth_rerunning": "Not needed."
+}
