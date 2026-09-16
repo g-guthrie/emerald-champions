@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "encounter": "C15 E0040 Brawly (Dewford Gym leader), cap 20",
+  "availability_audit": "All six appear in work/reference-pools/pool-20.json with gate <= 20. No Mega: the Mega Ring is granted by Steven only after Brawly. Items from the free Center held-item catalogue/preparation system.",
+  "plan": "Jocelyn fields four Fighting-types and two Grass-types, so Fairy, Psychic, Fire and Flying all bite. Togetic redirects and answers Tailwind with its own; Enamorus and Magearna are the Fairy nukes; Arcanine's Heat Wave is the spread answer to Lilligant/Breloom/Whimsicott and Intimidate blunts the Hustle physical core; Alakazam is the fast Psychic; Hoopa is immune to Close Combat, Drain Punch and Mach Punch.",
+  "party": [
+    {"species":"SPECIES_TOGETIC","moves":["MOVE_FOLLOW_ME","MOVE_AIR_SLASH","MOVE_TAILWIND","MOVE_PROTECT"],"nature":"NATURE_CALM","ability":"ABILITY_SERENE_GRACE","item":"ITEM_EVIOLITE","evs":[252,0,132,0,124,0],"role":"redirection and Tailwind mirror","availability":"pool-20: evolution:friendship from SPECIES_TOGEPI (gate 14)"},
+    {"species":"SPECIES_ENAMORUS","moves":["MOVE_MOONBLAST","MOVE_EARTH_POWER","MOVE_SUPERPOWER","MOVE_PROTECT"],"nature":"NATURE_TIMID","ability":"ABILITY_CONTRARY","item":"ITEM_LIFE_ORB","evs":[4,0,0,252,0,252],"role":"Fairy special nuke into four Fighting-types","availability":"pool-20: legendary_sign:VerdanturfMeadow (gate 14); reachable legend"},
+    {"species":"SPECIES_ARCANINE","moves":["MOVE_FLARE_BLITZ","MOVE_HEAT_WAVE","MOVE_EXTREME_SPEED","MOVE_PROTECT"],"nature":"NATURE_JOLLY","ability":"ABILITY_INTIMIDATE","item":"ITEM_LIFE_ORB","evs":[4,252,0,0,0,252],"role":"Intimidate plus Fire spread and priority","availability":"pool-20: gate 20"},
+    {"species":"SPECIES_ALAKAZAM","moves":["MOVE_PSYCHIC","MOVE_FOCUS_BLAST","MOVE_SHADOW_BALL","MOVE_PROTECT"],"nature":"NATURE_TIMID","ability":"ABILITY_MAGIC_GUARD","item":"ITEM_LIFE_ORB","evs":[4,0,0,252,0,252],"role":"fast recoil-free Psychic pressure","availability":"pool-20: evolution:item:ITEM_LINKING_CORD from SPECIES_KADABRA (gate 20)"},
+    {"species":"SPECIES_HOOPA","moves":["MOVE_PSYCHIC","MOVE_SHADOW_BALL","MOVE_NASTY_PLOT","MOVE_PROTECT"],"nature":"NATURE_MODEST","ability":"ABILITY_MAGICIAN","item":"ITEM_SITRUS_BERRY","evs":[252,0,0,252,4,0],"role":"Fighting-immune special attacker","availability":"pool-20: gate 20"},
+    {"species":"SPECIES_MAGEARNA","moves":["MOVE_FLEUR_CANNON","MOVE_FLASH_CANNON","MOVE_THUNDERBOLT","MOVE_PROTECT"],"nature":"NATURE_MODEST","ability":"ABILITY_SOUL_HEART","item":"ITEM_SITRUS_BERRY","evs":[252,0,4,252,0,0],"role":"bulky Steel/Fairy Soul-Heart attacker","availability":"pool-20: gate 20"}
+  ]
+}
