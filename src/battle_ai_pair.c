@@ -59,6 +59,11 @@
 // shortlist keeps the settle stage bounded without changing how a pair is
 // valued, which must stay identical across every board of one decision.
 #define PAIR_SHORTLIST_CROWDED 2
+// One decision searches the same number of pairs on every arm. The allowance
+// is fixed once per decision from the board in front of the AI, so a switch
+// candidate is never compared against a stay board that was searched deeper.
+#define PAIR_WORK_MIN 24
+#define PAIR_WORK_MAX 96
 
 // Guard policy. A shield's simulated HP saving is not all permanent: with no
 // payoff the same threat simply returns next turn and the foes can focus the
@@ -1245,6 +1250,28 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
     return PairFieldClockExpiring(actor);
 }
 
+// The work allowance for one decision. It is taken from the first board the
+// AI looks at this turn and reused by every candidate board afterwards, so the
+// comparison between staying and switching is made at one depth. It is a count
+// of pairs, never a length of time: the same position must always produce the
+// same answer.
+bool8 gAiPairBudgetTruncated;
+static u32 sPairWorkAllowance;
+static u32 sPairWorkDecision;
+
+static u32 PairWorkAllowance(u32 pairs)
+{
+    // Fixed by the first board of the decision - the one the AI is standing
+    // on - and reused unchanged by every candidate board compared against it.
+    if (sPairWorkDecision != gAiLogicData->decisionStartFrame || sPairWorkAllowance == 0)
+    {
+        sPairWorkDecision = gAiLogicData->decisionStartFrame;
+        sPairWorkAllowance = pairs < PAIR_WORK_MIN ? PAIR_WORK_MIN
+            : pairs > PAIR_WORK_MAX ? PAIR_WORK_MAX : pairs;
+    }
+    return sPairWorkAllowance;
+}
+
 static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
 {
     if (action->index == PAIR_IDLE)
@@ -1470,7 +1497,11 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
             for (u32 index = 0; index < MAX_MON_MOVES; index++)
             {
                 enum Move known = gBattleMons[foe].moves[index];
-                if (known != MOVE_NONE && known != MOVE_UNAVAILABLE && IsBattleMoveStatus(known))
+                // A shield is not what Taunt is for. Denying a guard the body
+                // may not even want costs the whole turn, and the receipts
+                // that produced this rule were bodies holding Protect alone.
+                if (known != MOVE_NONE && known != MOVE_UNAVAILABLE && IsBattleMoveStatus(known)
+                 && GetMoveEffect(known) != EFFECT_PROTECT)
                     worthTaking = TRUE;
             }
         }
@@ -4922,17 +4953,31 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
         u8 left;
         u8 right;
     } shortlist[PAIR_SHORTLIST];
-    u32 shortCount = 0, shortLimit = PairShortlistSize();
+    u32 shortCount = 0, shortLimit = PairShortlistSize(), examined = 0;
+    u32 allowance = PairWorkAllowance(ev->count[actor] * ev->count[partner]);
     bool32 mixed = FALSE;
     for (u32 left = 0; left < ev->count[actor]; left++)
     {
         for (u32 right = 0; right < ev->count[partner]; right++)
         {
-            // One shortlisted pair is already a legal action, so the search
-            // can respect the budget even on a board that has no fallback yet.
-            // An urgent Perish exit still finishes its own search.
-            if (!mustFinish && (canStop || shortCount != 0) && PairDecisionBudgetExpired())
+            // Deterministic first: every arm of one decision searches the same
+            // number of pairs, so a candidate board and the stay board are
+            // always compared at equal depth.
+            if (!mustFinish && shortCount != 0 && examined >= allowance)
                 goto settle;
+            // The clock is only a safety stop now. For the board the AI is
+            // standing on it settles with what it has; for a candidate board
+            // it abandons the comparison outright, because half a candidate
+            // scored against a whole stay board is the bug this replaced.
+            if (!mustFinish && PairDecisionBudgetExpired())
+            {
+                gAiPairBudgetTruncated = TRUE;
+                if (!canStop)
+                    goto done;
+                if (shortCount != 0)
+                    goto settle;
+            }
+            examined++;
             ev->action[actor] = ev->choices[actor][left];
             ev->action[partner] = ev->choices[partner][right];
             // Preserving the same board for one turn is not progress. Keep
@@ -5033,6 +5078,16 @@ static void FreePairEvaluation(struct PairEvaluation *ev)
 
 s32 AI_EvaluateDoublesCandidate(enum BattlerId battler, u32 noActionMask)
 {
+    // The clock is the safety stop, and it stops the comparison rather than
+    // shortening one side of it. Once it has run out, every board - including
+    // the one the AI is standing on - scores INT_MIN, no reserve can beat the
+    // position, and the turn is played from where it already is. A truncated
+    // comparison is recorded so a receipt can say so; it is never silent.
+    if (PairDecisionBudgetExpired())
+    {
+        gAiPairBudgetTruncated = TRUE;
+        return INT_MIN;
+    }
     struct PairEvaluation *ev = AllocZeroed(sizeof(*ev));
     s32 score = EvaluatePairBoard(battler, noActionMask, NULL, ev, TRUE, FALSE, FALSE);
     FreePairEvaluation(ev);
@@ -5042,7 +5097,16 @@ s32 AI_EvaluateDoublesCandidate(enum BattlerId battler, u32 noActionMask)
 s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask)
 {
     struct SwitchCandidateSnapshot *state = AI_SaveCandidateState();
+    // Scoring a position on request is not part of a turn's decision, so it
+    // gets its own clock and leaves the turn's untouched. The same position
+    // asked twice has to answer the same thing.
+    u32 decisionStart = gAiLogicData->decisionStartFrame;
+    u32 allowance = sPairWorkAllowance, allowanceDecision = sPairWorkDecision;
+    gAiLogicData->decisionStartFrame = gMain.vblankCounter1;
     s32 score = AI_EvaluateDoublesCandidate(battler, noActionMask);
+    gAiLogicData->decisionStartFrame = decisionStart;
+    sPairWorkAllowance = allowance;
+    sPairWorkDecision = allowanceDecision;
     AI_RestoreCandidateState(state);
     AI_FreeCandidateState(state);
     return score;

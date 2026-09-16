@@ -146,6 +146,9 @@ u32 GetWeatherDamage(enum BattlerId battler);
 
 s32 AI_WhoStrikesFirst(enum BattlerId battlerAI, enum BattlerId battler, enum Move aiMoveConsidered, enum Move playerMoveConsidered, enum ConsiderPriority considerPriority);
 bool32 CanTargetFaintAi(enum BattlerId battlerDef, enum BattlerId battlerAtk);
+// Set when the wall-clock safety stop truncated a pair search. Never cleared
+// by the search itself: a playtest driver reads it to mark the receipt.
+extern bool8 gAiPairBudgetTruncated;
 u32 NoOfHitsForTargetToFaintBattler(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure);
 void GetBestDmgMovesFromBattler(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum DamageCalcContext calcContext, enum Move *bestMoves);
 u32 GetMoveIndex(enum BattlerId battler, enum Move move);
