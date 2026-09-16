@@ -1,0 +1,33 @@
+{
+  "trainer": "TRAINER_GLACIA", "e_group": "E0495", "play_order": 326, "cap": 96, "difficulty": "medium",
+  "party_manifest": "work/playtest/326-TRAINER_GLACIA/party_league96_v2.json",
+  "league_run_note": "Third room. a1 used party v1 (325's manifest, copied as party_league96.json) and lost; a2 used the rebuilt v2 (Incineroar/Chi-Yu/Kingambit/Xerneas/Rillaboom/Raging Bolt). Rebuild reason: v1's Flutter Mane (Sucker Punch/Shadow Ball fodder), Iron Bundle (Ice into Ice) and Urshifu-SS (4x Fairy) were liabilities in the snow room; v2 keeps the Phoebe answers (Dark, Fake Out, Intimidate). Xerneas enters at L84 - the preparation API applies a legend penalty (cap 96 -> 84). Real-run carry after this room with v2: Incineroar, Chi-Yu, Xerneas fainted (Revives); Rillaboom 20/388; Kingambit and Raging Bolt full. Chi-Yu Heat Wave and Xerneas Geomancy (Power Herb consumed - no second Geomancy in Drake's room without a Center) are the carry costs.",
+  "attempts": [
+    {"seed": 1, "outcome": "lost", "turns": 8, "player_faints": 6, "opponent_faints": 3, "run_dir": "work/playtest/326-TRAINER_GLACIA/a1", "party": "v1",
+     "notes": "AI switched Kyurem out on T1 into Sandslash to dodge Moonblast (Sandslash resists Fairy); Ninetales set Aurora Veil T1. Urshifu OHKO'd on a switch-in by Ninetales Moonblast (4x). Specs Kyurem Earth Power OHKO'd Incineroar. Chien-Pao Sacred Sword OHKO'd Chi-Yu, Mega Froslass reset snow and swept with Blizzard/Shadow Ball. Baxcalibur never needed."},
+    {"seed": 2, "outcome": "won", "turns": 8, "player_faints": 3, "opponent_faints": 6, "run_dir": "work/playtest/326-TRAINER_GLACIA/a2", "party": "v2",
+     "notes": "Fake Out on Ninetales + Heat Wave crit KO'd Ninetales before Aurora Veil; Kyurem Earth Power OHKO'd Incineroar from full (378). Power Herb Geomancy Xerneas + Dark Pulse removed Kyurem; Dazzling Gleam KO'd Mega Froslass and broke Chien-Pao's Sash, Sandslash Iron Head OHKO'd Xerneas (2x, Sword of Ruin). Kingambit (Supreme Overlord +40%) Sucker Punch and Raging Bolt Thunderclap closed on Sandslash and Baxcalibur."}
+  ],
+  "strategy_checks": [
+    {"check": "Snow live on entry; Aurora Veil turn 1", "result": "PASS", "evidence": "a1 T1 Aurora Veil (Light Clay, lasted through T8). a2: Ninetales was Fake Out-flinched and KO'd T1; chosen move was Aurora Veil."},
+    {"check": "Kyurem Specs offense / Blizzard accuracy in snow", "result": "PASS", "evidence": "Kyurem never used Blizzard while I had a Fire type on the board; it chose Earth Power twice (OHKO on Incineroar a1 T5 and a2 T1) and a T1 switch-out in a1 to dodge Moonblast. Sensible reads."},
+    {"check": "Mega Froslass second snow phase", "result": "PASS", "evidence": "a1 T7 and a2 T3: Froslass Mega Evolved and Snow Warning restarted snow after the first snow had expired (a1) / was still up (a2)."},
+    {"check": "Slush Rush Sandslash uses doubled speed", "result": "PASS", "evidence": "a1 T2-T5 Sandslash moved first every turn under snow (Iron Head, Icicle Crash); a2 T5 Iron Head OHKO'd Xerneas."},
+    {"check": "Chien-Pao Sword of Ruin + Sash + Sucker Punch", "result": "PASS", "evidence": "Sacred Sword KO reads on Chi-Yu both attempts; Sucker Punch KO'd Flutter Mane a1 T8; Sash saved it a2 T3."},
+    {"check": "Mega Baxcalibur Glaive Rush / High Horsepower", "result": "FAIL (Mega)", "evidence": "a2: Baxcalibur (slot 6) entered with usable_gimmick=mega, mega_already_used=true after Froslass's Mega; never Mega Evolved (same defect as 325 #1). Its Icicle Crash into Rillaboom (368) was the right read."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 3, "battler": "Sandslash", "payoff": "blocked Fake Out (would have flinched it)"},
+    {"attempt": 1, "turn": 8, "battler": "Chien-Pao", "payoff": "blocked Fake Out"},
+    {"attempt": 2, "turn": 4, "battler": "Chien-Pao (1 HP)", "payoff": "blocked Kowtow Cleave (KO); Xerneas also Protected so Sandslash's Iron Head was wasted"},
+    {"attempt": 2, "turn": 8, "battler": "Baxcalibur (58 HP)", "payoff": "blocked Thunderclap + Kowtow Cleave (both KOs); grassy terrain +21"}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "engine", "description": "Second authored Mega (Baxcalibur, mega_slots 4,6) never fired after Froslass Mega Evolved - same root cause as 325 defect 1 (HasTrainerUsedGimmick position-marking in src/battle_gimmick.c:120-126 gates the AI at src/battle_controllers.c:3304)."}
+  ],
+  "level_changes": [],
+  "calibration": "Lost a1 (party v1), won a2 (party v2) with 3 faints; real fight - keep all offsets (100/95/96/97/100/96 seeds -> medium 98/93/94/95/98/94).",
+  "cooler": "Already cool: the Kyurem switch-out to dodge Fairy and the Mega Froslass re-snow both fired. It would be cooler still with the Baxcalibur Mega actually firing (engine defect). Ninetales' Encore was never used - Fake Out or a KO removed it both times; consider whether Icy Rock on Ninetales would make the first snow phase last long enough for Sandslash to matter more.",
+  "legality": "No legality problem found in the authored set.",
+  "step_up": "Yes - a clear step above Phoebe. Specs Kyurem's Earth Power OHKOs a 252 HP Incineroar from full, Slush Rush Sandslash outspeeds a +2 Geomancy Xerneas... (it does not: Xerneas +2 is faster, but Sandslash OHKOs it), and the Sash/Sword-of-Ruin Chien-Pao plus a re-snow Mega make the back half as dangerous as the front. v1 lost 3-6; v2 won 6-3."
+}
