@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Magma Hideout block, cap 60 (play_order 217-228: E0328-E0339)",
+  "availability_audit": "Every member's pool-60 gate is 60 or lower AND its source map lies at or before the Magma Hideout in play order (after Mt Pyre summit, before the Aqua Hideout and Mossdeep). Pelipper gate 30 (evolution:level from Wingull, a Route 103/104 shore bird). Swampert gate 36 (evolution:level from Marshtomp, the Littleroot starter) with ITEM_SWAMPERTITE stone-window 14. Urshifu-Rapid-Strike gate 42 (evolution:other:EVO_SCRIPT_TRIGGER from Kubfu, the tower quest that gates at 42, well before Fortree). Landorus gate 42, legendary_sign:Route111_RuinsExterior - the desert ruins, reached before Fortree and long before this hideout. Amoonguss gate 42 (evolution:level from Foongus). Tapu Bulu gate 60, legendary_sign:Route123 - Route 123 is the Lilycove-side stretch the player crosses on the way to Mt Pyre, which is immediately before this hideout in the campaign, so the sign is reachable here. Explicitly EXCLUDED as chronologically illegal for this map even though pool-60 lists them: Suicune (legendary_sign:Route125), Tapu Fini (Route126), Keldeo (Route127), Milotic-Mega/Kingdra-Mega/Starmie-Mega/Tyranitarite (stone-window 60 items placed on the sea routes and Mossdeep side), and anything sourced from Shoal Cave, Route 124/126/127, the Abandoned Ship or Mossdeep - all of which come after this hideout. Tyranitar (SafariZone_Northeast rock_smash) was also left out: the Safari Zone gate is on Route 121 and is arguably open, but its northeast rock-smash pocket is not a confirmed pre-hideout walk, so the benchmark does not lean on it.",
+  "plan": "A deliberate anti-Magma six. Pelipper's Drizzle is the weather war: it overwrites Torkoal's and Ninetales' Drought and Tyranitar's and Gigalith's Sand Stream, halves every Fire attack in a hideout built out of them, blanks Eruption's sun bonus, and turns off Chlorophyll, Sand Rush and sun Protosynthesis. Mega Swampert's Swift Swim turns that same rain into the fight's speed control without a Tailwind. Urshifu-Rapid-Strike's Unseen Fist is the answer to a dungeon whose every room carries Protect and two of whose rooms carry Wide Guard - Surging Strikes goes through both, always crits (so Shell Armor bodies are the one exception to plan for), and Water/Fighting is exactly the type pair a Fire/Rock/Ground faction fears. Tapu Bulu is the Grass lane for Palossand, Gigalith, Stonjourner, Mudsdale, Garganacl, Rhyperior and Camerupt, and its Grassy Terrain is also a quiet 50% cut to the hideout's constant Ground attacks. Landorus is the special Ground lane that goes through Assault Vest walls' physical bulk and around Intimidate. Amoonguss is the turn-buyer, and because it is Grass-typed it is immune to both Rage Powder rooms (Ariados, Scovillain) and to Toedscruel's Spore.",
+  "party": [
+    {
+      "species": "SPECIES_PELIPPER",
+      "moves": ["MOVE_HURRICANE", "MOVE_HYDRO_PUMP", "MOVE_TAILWIND", "MOVE_WIDE_GUARD"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_DRIZZLE",
+      "item": "ITEM_DAMP_ROCK",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "weather war: Drizzle overwrites Drought and Sand Stream; Wide Guard against Eruption/Heat Wave/Rock Slide; Tailwind when the room out-speeds me",
+      "availability": "pool-60 gate 30, evolution:level from SPECIES_WINGULL."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": ["MOVE_LIQUIDATION", "MOVE_ICE_PUNCH", "MOVE_SUPERPOWER", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_SWAMPERTITE",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Mega win condition; Swift Swim in Pelipper's rain is the speed control, Water/Ground/Fighting/Ice covers the whole faction",
+      "availability": "pool-60 gate 36 (Marshtomp line) with ITEM_SWAMPERTITE stone-window 14."
+    },
+    {
+      "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+      "moves": ["MOVE_SURGING_STRIKES", "MOVE_CLOSE_COMBAT", "MOVE_AQUA_JET", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Protect and Wide Guard breaker; rain-boosted Surging Strikes is the single-target answer the hideout cannot guard",
+      "availability": "pool-60 gate 42, evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU."
+    },
+    {
+      "species": "SPECIES_TAPU_BULU",
+      "moves": ["MOVE_WOOD_HAMMER", "MOVE_HORN_LEECH", "MOVE_SUPERPOWER", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "reachable legend: the Grass lane for every Rock and Ground body in the hideout; Grassy Terrain halves the faction's Ground attacks and Horn Leech sustains",
+      "availability": "pool-60 gate 60, legendary_sign:Route123 (the Lilycove-side stretch walked immediately before Mt Pyre and this hideout)."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: special Ground into the Fire and Rock bodies, around Intimidate and through Assault Vest physical bulk",
+      "availability": "pool-60 gate 42, legendary_sign:Route111_RuinsExterior (desert ruins, pre-Fortree)."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "turn-buyer; Grass typing is immune to the hideout's two Rage Powder rooms and to Toedscruel's Spore",
+      "availability": "pool-60 gate 42, evolution:level from SPECIES_FOONGUS."
+    }
+  ]
+}

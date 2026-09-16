@@ -1,0 +1,102 @@
+{
+  "play_order": 221,
+  "e_group": "E0332",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_16",
+  "class": "grunt",
+  "location": "MagmaHideout_3F_1R",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L59 = 60 + 1 - 2 on Medium, matching the authored offset 1.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217-220.",
+  "pre_play_strategy_checks": [
+    "Gliscor's Toxic Orb activates at the end of turn 1",
+    "Poison Heal then restores an eighth of Gliscor's HP each turn and blocks further status",
+    "Gliscor sets Tailwind when the slower members need the window",
+    "Scolipede's Speed Boost compounds with that window",
+    "Chandelure behind Tailwind is the spread damage and Flash Fire punishes the Fire answer",
+    "Alolan Marowak's Thick Club spikes damage and Lightning Rod absorbs Electric",
+    "Protect ledger - all four members carry Protect"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 3,
+      "decisions": 4,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "Turn 1 Gliscor read the board and Protected, which blocked a 4x Mega Swampert Ice Punch - the single best defensive decision any AI has made in this block - while Scolipede's Poison Jab chipped Pelipper and Hurricane broke its Focus Sash and confused it. Toxic Orb activated on schedule and Speed Boost ticked. Turn 2 Gliscor got its Tailwind up and then died to the Ice Punch it could not Protect twice against, and Scolipede killed itself in confusion at 1 HP. Turn 3 Liquidation removed Chandelure outright and Marowak Protected on its entry turn, blocking a 2x Hydro Pump. Turn 4 Liquidation removed Marowak. Zero faints; Pelipper finished on 132/198."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Gliscor's Toxic Orb activates at the end of turn 1",
+      "result": "PASS",
+      "evidence": "End of turn 1: 'The opposing Gliscor was badly poisoned!' - exactly the authored timing."
+    },
+    {
+      "check": "Poison Heal restores an eighth per turn",
+      "result": "NOT OBSERVED",
+      "evidence": "The orb activated at the end of turn 1 and Gliscor was KOed during turn 2, so no end-of-turn Poison Heal tick ever resolved. The status immunity half was also untested. The sustain engine the room is named for never actually ran."
+    },
+    {
+      "check": "Gliscor sets Tailwind",
+      "result": "PASS",
+      "evidence": "Turn 2: 'The opposing Gliscor used Tailwind!' It chose the window on the turn after it had bought itself a free turn with Protect, which is correct sequencing - guard first while the partner's Speed Boost climbs, then hand the room the speed window. It died on the same turn, so the window outlived its setter, as in E0330."
+    },
+    {
+      "check": "Scolipede's Speed Boost compounds",
+      "result": "PARTIAL",
+      "evidence": "One tick: 'The opposing Scolipede's Speed rose!' at the end of turn 1. It never reached a second because Hurricane's confusion killed it at 1 HP on turn 2 ('It hurt itself in its confusion! The opposing Scolipede fainted!'). The dossier's 'by turn three it is faster than almost anything the player owns' was not reachable in a three-turn fight."
+    },
+    {
+      "check": "Chandelure behind Tailwind is the spread damage; Flash Fire punishes the Fire answer",
+      "result": "FAIL - not reached",
+      "evidence": "Chandelure entered on turn 3 and was KOed by one rain-boosted Liquidation from 158/158 before it acted. Its native latch reads SHADOW_BALL, so it had selected a single-target attack rather than the spread Heat Wave - a reasonable pick given rain halves Fire - but it never executed. Flash Fire was never tested; I brought no Fire move to this hideout on purpose."
+    },
+    {
+      "check": "Alolan Marowak's Thick Club and Lightning Rod",
+      "result": "FAIL - not reached",
+      "evidence": "Marowak spent its only action on Protect (a correct one, see the ledger) and was KOed on turn 4. It never attacked, so the Thick Club spike the dossier calls 'hits like a legendary' never appeared, and Lightning Rod was untested because my party carries no Electric move."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS - both Protects were excellent",
+      "evidence": "See protect_ledger."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "Gliscor",
+      "payoff": "OUTSTANDING. Blocked Mega Swampert's Ice Punch - a 4x hit into Ground/Flying that KOed Gliscor outright the moment it connected on turn 2. Protect on turn 1 from a full-HP body is normally the shape of an empty guard, and this one was the opposite: it correctly anticipated that the Water/Ground Mega in front of it was the thing most likely to carry Ice, and it bought the turn in which its partner's Speed Boost ticked and its own Toxic Orb activated. Best single AI decision in this block."
+    },
+    {
+      "turn": 3,
+      "battler": "Marowak-Alola",
+      "payoff": "REAL. Protected on its entry turn and blocked Pelipper's Hydro Pump ('The opposing Marowak protected itself!' on the Hydro Pump line), a 2x hit into Fire/Ghost. Its partner Chandelure died on the same turn, so the guard preserved the last body on the board for a further turn."
+    }
+  ],
+  "protect_summary": "2 opponent Protects across 3 turns, both with a real payoff, 0 empty. Scolipede and Chandelure also carry Protect and correctly never used it.",
+  "ai_defects": [],
+  "ai_notes": [
+    "This room played its hand better than any other in the block. The turn-1 Gliscor Protect is worth calling out to the AI side as a positive sample: a full-HP guard on turn one that was NOT empty, because the expected-value forecast correctly weighted a 4x coverage move from a revealed Mega. It is the mirror image of the empty Weezing guard in E0329, and both came from the same scorer, which suggests the constants are roughly right and the E0329 case is about the missing discount for a battler with no incoming-damage history.",
+    "Chandelure selecting Shadow Ball over Heat Wave under my rain was also right, even though it never got to fire it.",
+    "AI decision budget: max 60 frames (1.005 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"member": "SCOLIPEDE", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60},
+    {"member": "CHANDELURE", "field": "level_offset", "before": 1, "after": 2, "medium_level_before": 59, "medium_level_after": 60}
+  ],
+  "level_change_rationale": "Won first attempt, zero player faints, so the +1 review applies. I raised Scolipede and Chandelure - the two frailest members and the two whose authored jobs never happened. I left Gliscor and Marowak alone: Gliscor played the room correctly and is the member the design hangs on, and Marowak's one decision was also correct. Both changed members go to offset 2, the cap for this pass. The caveat is the same as the rest of this hideout: three of the four are 2x into Water and Gliscor is 4x into Ice, so a rain-and-Ice lead beats this room on type rather than on level.",
+  "cooler": "The concept - compounding speed rather than a pile of Poison types - is good and the dossier is right that it reads better than the old Dustox build. But there is a real structural problem the play exposed: the room's two engines are both slow burns (Poison Heal sustain, Speed Boost compounding) and both need three or four turns to matter, while every member except Scolipede dies to one super-effective hit. The room is authored as a war of attrition and statted as a glass cannon squad. The single change that would make it match its own description is bulk on Gliscor rather than a level, so the Poison Heal actually gets to tick - that is the interaction the room is named for and it has now gone entirely unseen. Alolan Marowak remains the right kind of pick and Lightning Rod quietly blanking the obvious Flying answer is a genuinely clever bit of authoring, even though my party never offered it an Electric move to eat. No change made in this pass.",
+  "legality_notes": "No legality problem in the authored set.",
+  "reverify_note": "The Scolipede and Chandelure +1 cannot be re-verified from this session; the change reaches the ROM only after the main agent re-materializes and rebuilds.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
