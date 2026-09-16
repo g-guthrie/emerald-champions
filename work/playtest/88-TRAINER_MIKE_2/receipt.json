@@ -1,0 +1,51 @@
+{
+  "play_order": 88,
+  "e_group": "E0102",
+  "trainer": "TRAINER_MIKE_2",
+  "class": "regular",
+  "location": "RusturfTunnel",
+  "cap": 36,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"GIGALITH": 33, "GRAVELER": 38, "PRIMEAPE": 35, "DONPHAN": 34},
+  "cap_window_confirmation": "Offsets -1/4/1/0 resolved to 33/38/35/34 against a level-36 party: cap 36 on Medium. The dossier text still says 'Medium cap30 levels29/34/31/30', which is a stale line - the live encounter is a cap-36 fight.",
+  "party_manifest": "work/playtest/88-TRAINER_MIKE_2/party.json",
+  "party_pool_audit": "Block core led by Rillaboom + Gyarados; Alakazam restored for special damage that walks past Iron Defense and Body Press, Excadrill retained. All six gate <= 36 with source maps passed before Rusturf Tunnel - and Excadrill's own source is Rusturf Tunnel, this battle's map.",
+  "pre_declared_strategy_checks": [
+    "Gigalith supplies real sand from the Pokemon, not from an assumed cave weather, and Smooth Rock extends it",
+    "Gigalith chooses between Body Press, direct damage and a useful Iron Defense",
+    "Graveler's Wide Guard supports the active partner - and is NOT used when there is no spread move to block",
+    "Primeape supplies speed and Defiant; my two Intimidate users are a liability here",
+    "Donphan supplies priority (Ice Shard) and Rocky Helmet punishment",
+    "Sand Veil is a chance interaction, not reliable protection",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/88-TRAINER_MIKE_2/a1", "seed": 88, "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "Sand was up before the first command. T1 Gigalith used Iron Defense and was killed in the same turn by Waterfall plus Wood Hammer, both 2x; Graveler landed a critical Stone Edge on my freshly Mega-Evolved Gyarados for 69. T2 was the fight's one real decision: Primeape came in with Defiant, so I could not bring either Intimidate user in, and my 56 HP Mega Gyarados was in front of a Close Combat. I Protected with Gyarados and killed Primeape with Wood Hammer; the Protect blocked both Close Combat and Graveler's Body Press. T3 Waterfall and Wood Hammer are each 4x into Graveler's Rock/Ground, so it died from full through its Eviolite and Sturdy without acting. T4 Donphan took a Grassy Glide and a Waterfall, both 2x, and the Rocky Helmet took my Rillaboom to 6 on the way out."}
+  ],
+  "strategy_checks": [
+    {"check": "Gigalith supplies real sand with Smooth Rock", "result": "PASS", "evidence": "B_WEATHER_SANDSTORM was already set at turn 0 from Sand Stream on entry, and it was still raging on turn 4 - a full turn after Gigalith itself had fainted - which is the Smooth Rock extension doing its job. Both of my non-Steel leads were chipped every turn. The dossier's point that 'sand comes from the Pokemon, not an assumption about cave weather' is correct and verified."},
+    {"check": "Gigalith chooses between Body Press, direct damage and a useful Iron Defense", "result": "FAIL on this board", "evidence": "Turn 1, facing a Grass type and a Water type that both threaten it at 2x, at full HP with no partner protection available, Gigalith chose Iron Defense and died in the same turn without dealing damage. Iron Defense is the setup half of its Body Press plan, but the plan needs a turn to exist and this board never offered one. See ai_notes; I am recording this as a decision weakness rather than a defect because Iron Defense does at least feed Body Press and the AI cannot see my exact damage rolls."},
+    {"check": "Graveler's Wide Guard supports the partner, and is not used when there is nothing to block", "result": "PASS, and this is the best AI decision in the fight", "evidence": "Every attack my party used in this battle was single-target: Waterfall, Wood Hammer, Grassy Glide. Wide Guard would have blocked none of them. Graveler was on the field for three turns and never once used it, choosing Stone Edge and Body Press instead. That is exactly the right restraint - a lesser scorer guards on reflex because the move is in the set."},
+    {"check": "Primeape supplies speed and Defiant", "result": "PARTIAL - correct action, one turn only", "evidence": "Primeape came in on T2 and immediately used Close Combat into the weakened Mega Gyarados, which is 2x into Water/Dark and would have KO'd from 56. It was blocked by Protect and then died to Wood Hammer. The right move at the right target; it simply lost the guessing game. Defiant was never triggered because I deliberately kept both Intimidate users off the field while Primeape was out - that is the threat working without ever firing."},
+    {"check": "Donphan supplies Ice Shard priority and Rocky Helmet", "result": "PASS, both", "evidence": "Donphan used Ice Shard on both of its turns, correctly - it is 2x into Rillaboom, and as priority it is the only way a level-34 Ground type gets damage onto a faster board. The Rocky Helmet took Rillaboom from 41 to 6 and chipped Gyarados on the final turn. Sand Veil never came up."},
+    {"check": "Sand Veil is a chance interaction", "result": "NOT OBSERVED", "evidence": "No miss occurred against Donphan in two turns of attacks."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opposing Protect was possible: none of Gigalith, Graveler, Primeape or Donphan carries it. The only Protect in the fight was mine, on T2, and it blocked a Close Combat and a Body Press aimed at a 56 HP Mega.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Gigalith's turn-1 Iron Defense is the weakest opponent decision in my block so far. The board was a visible Grass type and a visible Water type, both physical, both 2x into a Rock/Ground with no Protect and no partner redirection. Doubling Defense does not survive two super-effective hits, and Gigalith had Stone Edge and Stomping Tantrum available. The authored profile is 'ai: Conservative', and if the Conservative profile biases toward defensive setup on turn 1 this is the kind of board where that bias costs the whole Pokemon. Worth a look next to the E0105 Brice Conservative team, which is the other Conservative profile in this block.",
+    "Graveler declining Wide Guard for three turns against an entirely single-target board is a genuinely good negative result and deserves to be recorded as such. The move is in the set, the flag is on the team, and the AI still correctly valued it at zero.",
+    "Primeape's Defiant shaped my entire play without ever activating. I could not bring Incineroar or Gyarados in on a switch while it was on the field, which cost me my normal pivot. That is an unusually elegant piece of team construction for an ordinary route Hiker."
+  ],
+  "level_changes": [
+    {"member": "GIGALITH", "field": "level offset", "before": -1, "after": 0, "resolved_level_before": 33, "resolved_level_after": 34, "reason": "Brief rule 5: won on the first optimized attempt with zero player faints. Gigalith is the lowest member at offset -1 and is not a Mega or a legend. It is also the member whose death ends the sand plan, so a level on it is the level most likely to buy the team a turn."},
+    {"member": "DONPHAN", "field": "level offset", "before": 0, "after": 1, "resolved_level_before": 34, "resolved_level_after": 35, "reason": "Second of the two permitted bumps, on the second-lowest member. Zero player faints across four turns is a wide enough margin to justify both. Graveler (offset 4) and Primeape (offset 1) are untouched."}
+  ],
+  "rerun_status": "NOT RERUN. Opponent levels are compiled into the headless ROM from src/data/trainers.party and this agent may not run make. Pending the main agent's materialization and rebuild.",
+  "could_this_be_cooler": "Keep the composition; the problem here is a move slot, not a species. The 'dusty tunnel defense formation' reads well, the Defiant Primeape is a real piece of design that changed how I was allowed to play, and Wide Guard on Graveler is correct even though it never fired. What undercuts it is that Gigalith, Graveler and Donphan are all Rock and/or Ground, so one Grass attacker and one Water attacker hit the whole team for 2x or 4x and the fight is over in four turns regardless of levels. The team needs one member that punishes the obvious answer. The cheapest version that keeps the tunnel theme and the sand: give Gigalith's Iron Defense slot a Sandstorm-synergistic answer to Water/Grass, or swap Graveler's redundant Stomping Tantrum for a coverage move that threatens a Grass switch-in. I would not remove Primeape or Donphan - the Payapa Berry and the Rocky Helmet are both thoughtful - and I would not add a fifth Rock type.",
+  "legality_problems_in_authored_set": [],
+  "stale_dossier_text": "The plan line ends 'Medium cap30 levels29/34/31/30', but the live battle resolves at cap 36 to 33/38/35/34. The seed note is stale relative to the index and the driver.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}
