@@ -1456,6 +1456,27 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         }
         return -20;
     }
+    if (effect == EFFECT_TAUNT)
+    {
+        // Taunt spends the whole turn to take a move away. If nothing on the
+        // other side is holding a status move - or everything that is has
+        // already been taunted - there is nothing on the board to take.
+        bool32 worthTaking = FALSE;
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe)
+             || gBattleMons[foe].volatiles.tauntTimer)
+                continue;
+            for (u32 index = 0; index < MAX_MON_MOVES; index++)
+            {
+                enum Move known = gBattleMons[foe].moves[index];
+                if (known != MOVE_NONE && known != MOVE_UNAVAILABLE && IsBattleMoveStatus(known))
+                    worthTaking = TRUE;
+            }
+        }
+        if (!worthTaking)
+            return -80;
+    }
     if (effect == EFFECT_LEECH_SEED && IsBattlerAlive(action->target)
      && !IsBattlerAlly(actor, action->target)
      && !gBattleMons[action->target].volatiles.leechSeed

@@ -1978,3 +1978,23 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Takao's healthy lead does not withdraw on turn on
         EXPECT_EQ(opponentLeft->species, SPECIES_GRAPPLOCT);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC Gym: Wattson's Discharge activates Motor Drive before Electivire acts")
+{
+    GIVEN {
+        // The authored engine of the room: Electrode's spread attack is the
+        // trigger, and the partner's Motor Drive turns it into speed. It has
+        // to beat the moves that only deal damage.
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(10); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_WATTSON_1, 3, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_DISCHARGE);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 1);
+    }
+}
