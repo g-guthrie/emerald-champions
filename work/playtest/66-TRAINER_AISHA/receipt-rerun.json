@@ -1,0 +1,78 @@
+{
+  "play_order": 66,
+  "e_group": "E0076",
+  "trainer": "TRAINER_AISHA",
+  "class": "casual",
+  "location": "Route117",
+  "cap": 30,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/66-TRAINER_AISHA/receipt.json",
+  "build": "work/agent-battle-build-3",
+  "why_rerun": "No level offsets were changed on this trainer after the first run; the first receipt deliberately kept levels because the authored ACTIVATE tactic never fired. The rerun re-tests the tactic on the rebuilt snapshot and re-benchmarks the fight.",
+  "cap_confirmation": "Driver state reports level_cap 30 and resolved opponent levels 28/28/27/27 = cap 30 + offset - 2 on Medium with offsets 0/0/-1/-1. Identical to the first run, so the runs are directly comparable.",
+  "level_offsets_at_run": {"FROSLASS": 0, "TAUROS": 0, "HARIYAMA": -1, "HITMONTOP": -1},
+  "resolved_opponent_levels": {"FROSLASS": 28, "TAUROS": 28, "HARIYAMA": 27, "HITMONTOP": 27},
+  "party_manifest": "work/playtest/66-TRAINER_AISHA/party.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 30, same map (Route 117), and the first receipt's chronology audit still holds: every source map is at or before Route 110/Slateport, and New Mauville is excluded because its Basement Key comes from Wattson. The party was not reported weak or illegal.",
+  "pre_declared_strategy_checks": [
+    "RETEST: does the authored tactic ACTIVATE FROSLASS FROST_BREATH TAUROS fire - i.e. does Froslass use Frost Breath on its OWN Tauros for the guaranteed critical hit to switch on Anger Point?",
+    "Once boosted, Tauros attacks rather than repeating the activation",
+    "Hitmontop uses Wide Guard to shield the boosted attacker from spread moves",
+    "Hariyama supplies its own Fake Out / physical line",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/66-TRAINER_AISHA/r1",
+      "seed": 66,
+      "outcome": "won",
+      "turns": 3,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "narrative": "T1 I Mega-Evolved Gardevoir into a spread Pixilate Hyper Voice across both leads and followed with Magearna's Flash Cannon, super effective into Froslass. At turn start Froslass chose Icy Wind into Magearna rather than Frost Breath on its own Tauros, so the activation never happened; Tauros chose Double-Edge into Mega Gardevoir for 85, and the recoil finished a Tauros already chipped by Hyper Voice. Flash Cannon then killed Froslass, which had been taken off full HP by the same Hyper Voice and so could not use its Focus Sash. Both leads died on turn one having never performed the combination the team is built around. T2 Hariyama and Hitmontop came in and both threw Fake Out at the 5 HP Mega Gardevoir; I had Protected, so both were blanked, while Fleur Cannon KO'd Hitmontop at 2x. T3 Hariyama's Bullet Punch finally finished Gardevoir and Fleur Cannon KO'd Hariyama."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "RETEST: ACTIVATE FROSLASS FROST_BREATH TAUROS fires", "result": "FAIL - reproduces from the first run", "evidence": "Turn 1, the only turn on which the tactic was available and its preconditions were met (Froslass 103/103 with Frost Breath legal, Tauros 106/106 holding a Clear Amulet with Anger Point, no prior boost), Froslass selected MOVE_ICY_WIND targeting Magearna. Frost Breath was never selected in this run or the previous one. Tauros then died to its own Double-Edge recoil without ever being boosted."},
+    {"check": "Boosted Tauros attacks rather than repeating activation", "result": "NOT REACHED", "evidence": "Anger Point never activated, so this branch was never exercised. Untested for the second run in a row."},
+    {"check": "Hitmontop Wide Guard", "result": "NOT REACHED", "evidence": "Hitmontop entered on T2 and chose Fake Out, then died on the same turn. Wide Guard was never selected. With no boosted partner to shield, Fake Out was a defensible choice on the turn it had - but the move that justifies Hitmontop's presence has now gone unused in both runs."},
+    {"check": "Hariyama's own Fake Out / physical line", "result": "PASS", "evidence": "T2 Fake Out at the weakened Mega Gardevoir (correct target - 5 HP, and a flinch would have denied the spread attacker), T3 Bullet Punch, correctly chosen as priority Steel into a Psychic/Fairy at 2x, and it did secure the kill. Hariyama was the only member that played its authored role."},
+    {"check": "Every opposing Protect has a payoff", "result": "N/A", "evidence": "The opponent used no Protect in this battle. Tauros holds Protect and did not reach a turn where it could use it."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {
+      "id": "E0076-D1",
+      "status": "REPRODUCES on work/agent-battle-build-3",
+      "severity": "high",
+      "attempt": 1,
+      "turn": 1,
+      "board": "Froslass 103/103 @FOCUS_SASH with MOVE_FROST_BREATH legal, beside its own Tauros 106/106 @CLEAR_AMULET with ABILITY_ANGER_POINT at zero stat stages, against Gardevoir 90/90 and Magearna 116/116. The authored line is `tactic: ACTIVATE FROSLASS FROST_BREATH TAUROS`.",
+      "chosen": "MOVE_ICY_WIND targeting Magearna.",
+      "why_wrong": "This is the only board in the battle on which the team's single authored centrepiece could fire, and every precondition the dossier names was satisfied: the activator was healthy, the recipient was at full HP and would survive a deliberately weakened friendly Frost Breath (Froslass carries a 0 Special Attack IV and no special EVs precisely so the friendly crit does not kill), and Tauros had no boost yet. Icy Wind's spread Speed drop is not worthless, but it is a generic support move chosen over the interaction that defines the trainer. Tauros's Clear Amulet, Hitmontop's Wide Guard and Froslass's crippled Special Attack are all dead weight unless this fires, so roughly three quarters of the authored team is unreachable.",
+      "better_action": "MOVE_FROST_BREATH targeting the ally Tauros, which is a guaranteed critical hit and therefore a guaranteed Anger Point +6 Attack.",
+      "unchanged_from_first_run": true,
+      "note": "I did not change any AI C code. The ACTIVATE tactic machinery is shared, so other owners with an `ACTIVATE` line (E0092 TRAINER_WATTSON_1 carries `ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE`) should be checked on the same path - see this block's Wattson rerun receipt for that second data point."
+    }
+  ],
+  "ai_notes": [
+    "The double Fake Out on T2 into a 5 HP Mega Gardevoir was correct: it was the right target, a flinch would have denied the spread attacker, and my Protect was a read rather than a refutation.",
+    "Tauros killing itself on Double-Edge recoil is not an AI defect in isolation - Double-Edge was its strongest option into a Psychic/Fairy - but it is a symptom: an unboosted Anger Point Tauros has no good turns, which is the entire reason the activation tactic exists."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in three turns with 1 player faint (a Mega Gardevoir already at 5 HP) and no real threat -> +1 on the weakest one or two members, never the ace/Mega/legend first. There is no ace, Mega or legend on this team.",
+    "changes": [
+      {"trainer": "TRAINER_AISHA", "member": "HARIYAMA", "field": "level offset", "before": -1, "after": 0, "resolved_level_before": 27, "resolved_level_after": 28,
+       "reasoning": "Hariyama and Hitmontop are the joint-lowest members at -1. Hariyama is the one member that actually executed its authored role (correct Fake Out target, correct priority Steel kill) and a level makes its Thick Fat / Sitrus body harder to remove, which is the honest way to make this fight longer without touching the broken centrepiece."},
+      {"trainer": "TRAINER_AISHA", "member": "HITMONTOP", "field": "level offset", "before": -1, "after": 0, "resolved_level_before": 27, "resolved_level_after": 28,
+       "reasoning": "Second of the two joint-lowest. It died to a single Fleur Cannon on the turn it arrived without reaching its Wide Guard, and at 105 HP it should survive one super-effective special hit from a cap-30 attacker. Froslass and Tauros are deliberately NOT raised: they are the two members whose failure is the tactic defect, and AGENTS.md is explicit that an AI defect is repaired before levels compensate for it. Raising the activator would bake the defect in."}
+    ],
+    "budget_note": "Both members move by exactly +1, their first and only movement in this pass, so each is at +1 of the permitted +/-2 total."
+  },
+  "verdict": "still too easy",
+  "could_this_be_cooler": "The concept is genuinely cool and I would not touch the roster: a friendly guaranteed critical hit as a deliberate activation, with the activator's Special Attack crippled on purpose so the crit does not kill its own partner, is one of the more memorable ideas in this stretch. But it has now failed to appear in two benchmarked runs, and a centrepiece that never happens is not a centrepiece. The concrete suggestion is unchanged and is not a species change: fix the ACTIVATE path, then re-benchmark, because a +6 Attack Tauros behind a Wide Guard at these levels is a completely different fight that may want a REDUCTION rather than the small increase I have just applied. If the tactic proves unfixable, the honest fallback is to give Froslass a reason to act - it is the only member whose whole build is an investment in something that does not occur.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-3. Not earned campaign traversal. The level offsets recorded above are edited into the live teams file but are NOT built into this snapshot, so they are not re-verified by play in this session; the main agent materializes and rebuilds. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}

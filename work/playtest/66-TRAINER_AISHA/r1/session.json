@@ -1,0 +1,30 @@
+{
+  "rom_sha256": "e7de65be122669a85f67ad7c25d12a211d3d53aee0f14f97df843ee75165efe1",
+  "elf_sha256": "d25b30b52eff4fc4f86e1b9508973db7719e97f5c4ed9d38e7fcfa393c8f6c0c",
+  "seed": 66,
+  "trainer_a": "TRAINER_AISHA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 30,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/66-TRAINER_AISHA/party.json",
+  "party_sha256": "5a79fed775b4918bef40e860758b33aeccae1c92d623a99c9e79b1fbaa54c1f2",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET"
+  ],
+  "prepared": {
+    "encounter": "C16 E0076 TRAINER_AISHA, Route 117, cap 30",
+    "party": 6
+  },
+  "started": {
+    "frames": 1075
+  },
+  "replacement_commits": {
+    "turn": 2,
+    "slots": {}
+  }
+}
