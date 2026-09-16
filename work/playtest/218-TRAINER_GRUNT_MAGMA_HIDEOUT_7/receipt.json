@@ -1,0 +1,98 @@
+{
+  "play_order": 218,
+  "e_group": "E0329",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_7",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_2R",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60; all four members arrived at L58 = 60 + 0 - 2 on Medium, matching the authored offset 0.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Same cap-60 anti-Magma six as play_order 217; see that manifest's availability_audit. Nothing in it is sourced past the Mt Pyre summit.",
+  "pre_play_strategy_checks": [
+    "Centiskorch takes Coil behind a safe board, or attacks immediately",
+    "Coil's +1 accuracy visibly makes Fire Lash reliable",
+    "Larvesta is a real Eviolite wall: Flame Body punishes contact, Morning Sun undoes chip",
+    "Arcanine's Intimidate lands on entry and it uses Extreme Speed or Flare Blitz",
+    "Weezing's Levitate ignores Ground and Will-O-Wisp plus Black Sludge grinds physical attackers",
+    "Protect ledger on Arcanine and Weezing"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 2,
+      "decisions": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "why": "A rain team walks through an all-Fire room. Drizzle was up before the first action, halving every Fire attack the room owns. Turn 1 a rain-boosted Mega Swampert Liquidation OHKOed Centiskorch from 238/238 before it could Coil, and Larvesta's Will-O-Wisp burned the Mega in exchange - the room's one real success. Turn 2 I pulled the burned Mega out for Urshifu and Hurricane (no-miss in rain, 2x into Bug) removed the Eviolite Larvesta in one action. Turn 3 Urshifu's Surging Strikes crit-KOed Arcanine through the Intimidate drop and Pelipper's Hydro Pump removed Weezing. Zero faints."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Centiskorch takes Coil behind a safe board, or attacks immediately",
+      "result": "PASS (attacked), Coil NOT OBSERVED",
+      "evidence": "Centiskorch's turn-1 native latch reads KNOCK_OFF - it chose to attack rather than set up, which is the correct half of the authored either/or given both my actives were healthy Water bodies. It was KOed by Liquidation before the move executed, so the Coil line and the +1 accuracy payoff never appeared in this run."
+    },
+    {
+      "check": "Coil's +1 accuracy makes Fire Lash reliable",
+      "result": "NOT OBSERVED",
+      "evidence": "Centiskorch never acted. The combo the dossier calls the room's standout interaction did not get a turn."
+    },
+    {
+      "check": "Larvesta is a real Eviolite wall and Flame Body punishes contact",
+      "result": "PASS - the best thing the room did",
+      "evidence": "Turn 1 Larvesta chose Will-O-Wisp on Mega Swampert and landed it; that halved my Mega's Attack and forced me to pivot it out on turn 2, removing my strongest attacker from the rest of the fight. It also dodged a Hydro Pump on the same turn. The authored idea - punish the physical answer - worked exactly as written. Morning Sun was NOT OBSERVED: Hurricane removed it from 186/186 in one action on turn 2, so the Eviolite bulk never got to matter."
+    },
+    {
+      "check": "Arcanine's Intimidate lands on entry and it uses Extreme Speed or Flare Blitz",
+      "result": "PASS",
+      "evidence": "Intimidate fired on its turn-2 entry and dropped Pelipper's and Urshifu's Attack ('Pelipper's Attack fell! / Urshifu's Attack fell!'). Turn 3 it used Extreme Speed into Urshifu for 90 with Life Orb recoil - priority, correctly chosen against a faster opponent it could not outrun. Note the interaction that undid it: Surging Strikes always crits, and a critical hit ignores the attacker's negative Attack stages, so the Intimidate drop bought nothing against that specific move."
+    },
+    {
+      "check": "Weezing's Levitate / Will-O-Wisp / Black Sludge grind",
+      "result": "NOT OBSERVED",
+      "evidence": "Weezing was on the field for two turns and its only action was an empty Protect (turn 2). It never used Will-O-Wisp, Sludge Bomb or Heat Wave, and it was KOed by Hydro Pump on turn 3. Levitate was never tested because my Ground lane (Landorus) was never deployed."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "FAIL - one empty guard",
+      "evidence": "See protect_ledger and AI defect E0329-1."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "Weezing",
+      "payoff": "EMPTY. Weezing used Protect at 197/197, on the first turn after its own switch-in, and blocked nothing - neither of my two actions was aimed at it. Meanwhile its partner Larvesta, the member actually under 2x Water pressure, was KOed on the same turn. A Protect from a full-HP body that has just arrived, while the partner is the one about to die, is the textbook empty guard."
+    }
+  ],
+  "protect_summary": "1 opponent Protect across 3 turns, 0 with a payoff, 1 empty. Arcanine, which also carries Protect, never used it and had no turn where it should have.",
+  "ai_defects": [
+    {
+      "id": "E0329-1",
+      "turn": 2,
+      "board": "Weezing 197/197 (Poison/Levitate, freshly switched in the previous turn) beside Larvesta 186/186 (Bug/Fire, 2x weak to both of my actives' STAB under rain); opposite Pelipper 198/198 and an incoming switch.",
+      "chosen": "Protect.",
+      "better": "Will-O-Wisp or Sludge Bomb into the player's slot, or anything that uses the turn. Weezing was at full HP, had taken no damage, had just arrived, and was the member of the pair NOT under type pressure. The expected-value forecast should score Protect very low for a full-HP battler on the turn after its own switch-in, because the opponent has had no opportunity to reveal a threat aimed at it and the partner is the visibly threatened slot. This is the guard-scoring family in src/battle_ai_pair.c (PAIR_GUARD_*): the forecast appears not to discount Protect for a battler with no incoming-damage history and full HP. Severity: moderate - it cost this team its only chance to apply the room's signature burn to my replacement."
+    }
+  ],
+  "ai_notes": [
+    "Everything else the AI did was sensible. Larvesta correctly spent its one turn on Will-O-Wisp into my physical Mega rather than attacking it, which is the single best action available to this team against my party, and Arcanine correctly picked priority Extreme Speed over Flare Blitz against a faster opponent under rain.",
+    "AI decision budget: max 61 frames (1.021 s), inside the 1.2 s budget but the highest sample in this block so far."
+  ],
+  "level_changes": [
+    {"member": "LARVESTA", "field": "level_offset", "before": 0, "after": 1, "medium_level_before": 58, "medium_level_after": 59},
+    {"member": "WEEZING", "field": "level_offset", "before": 0, "after": 1, "medium_level_before": 58, "medium_level_after": 59}
+  ],
+  "level_change_rationale": "Won first attempt in three turns with zero player faints and no real threat, which is squarely in the '+1 to the weakest one or two members' band. I raised Larvesta and Weezing, the two passive walls, and deliberately left Centiskorch and Arcanine alone: the dossier names Centiskorch the room's standout and Arcanine is its only priority lane, and the brief forbids starting with the ace. I want to be honest about what +1 will and will not fix, though: the room lost because it is four Fire-adjacent bodies against a Drizzle lead, and two levels do not change a 2x type matchup under permanent rain. This is a difficulty result that argues the room is fragile to one specific preparation, not that it is under-levelled by much.",
+  "cooler": "The dossier's claim is that the room is 'the hideout's purest single idea - every member burns'. That purity is exactly the problem: a single Drizzle lead turns the whole room off at once, because rain halves Fire damage AND the same Water moves that beat Fire are 2x into three of the four bodies. The concept is good; the execution has no off-ramp. The cooler version keeps the burn thesis and adds one member the rain answer does not beat - the obvious candidate is a Water-resistant or Water-absorbing body that still burns, so the player who leads Pelipper does not get a free room. I am not changing the set in this pass, but I want the record to say plainly that Larvesta is the most interesting member here (an Eviolite pre-evolution used as a deliberate wall is a genuinely unusual and confident choice, and its one turn was the best turn the room had) while Weezing contributed nothing but an empty Protect in two turns on the field.",
+  "legality_notes": "No legality problem in the authored set.",
+  "reverify_note": "The Larvesta and Weezing +1 cannot be re-verified from this session: the level change only reaches the ROM after the main agent re-materializes the teams file and rebuilds, and this block's runs all used work/agent-battle-build-5 as it stood before the edit. Of the two battles I changed levels on in this block, this is the less urgent rerun - the type matchup, not the level, decided it.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
