@@ -9,6 +9,7 @@
 #include "emerald_champions_battle_plan.h"
 #include "battle_util.h"
 #include "item.h"
+#include "mega_stone_rewards.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "sprite.h"
@@ -120,7 +121,11 @@ u32 GetRemainingMegaEvolutions(enum BattlerId battler)
 void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick)
 {
     if (gimmick == GIMMICK_MEGA)
+    {
         gBattleStruct->gimmick.megaEvolutionsUsed[GetBattlerTrainer(battler)]++;
+        // The Trainer Card records every Mega the player watches, either side.
+        EmeraldChampions_RecordMegaWitnessed(gBattleMons[battler].item);
+    }
     gBattleStruct->gimmick.activated[battler][gimmick] = TRUE;
     if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
         gBattleStruct->gimmick.activated[GetPartnerBattler(battler)][gimmick] = TRUE;

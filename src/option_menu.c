@@ -26,9 +26,11 @@
 #define tSound data[3]
 #define tButtonMode data[4]
 #define tWindowFrameType data[5]
+#define tTextSpeed data[6]
 
 enum
 {
+    MENUITEM_TEXTSPEED,
     MENUITEM_DIFFICULTY,
     MENUITEM_BATTLESCENE,
     MENUITEM_SOUND,
@@ -40,10 +42,23 @@ enum
 
 enum
 {
-    WIN_HEADER,
-    WIN_OPTIONS
+    WIN_OPTIONS,
+    WIN_DESCRIPTION
 };
 
+// Both windows' tiles now run past the stock frame base, so the frame tiles
+// sit at the top of the shared char block instead.
+#define TILE_FRAME_BASE   0x1E0
+#define TILE_TOP_CORNER_L (TILE_FRAME_BASE + 0)
+#define TILE_TOP_EDGE     (TILE_FRAME_BASE + 1)
+#define TILE_TOP_CORNER_R (TILE_FRAME_BASE + 2)
+#define TILE_LEFT_EDGE    (TILE_FRAME_BASE + 3)
+#define TILE_RIGHT_EDGE   (TILE_FRAME_BASE + 5)
+#define TILE_BOT_CORNER_L (TILE_FRAME_BASE + 6)
+#define TILE_BOT_EDGE     (TILE_FRAME_BASE + 7)
+#define TILE_BOT_CORNER_R (TILE_FRAME_BASE + 8)
+
+#define YPOS_TEXTSPEED    (MENUITEM_TEXTSPEED * 16)
 #define YPOS_DIFFICULTY   (MENUITEM_DIFFICULTY * 16)
 #define YPOS_BATTLESCENE  (MENUITEM_BATTLESCENE * 16)
 #define YPOS_SOUND        (MENUITEM_SOUND * 16)
@@ -55,6 +70,8 @@ static void Task_OptionMenuProcessInput(u8 taskId);
 static void Task_OptionMenuSave(u8 taskId);
 static void Task_OptionMenuFadeOut(u8 taskId);
 static void HighlightOptionMenuItem(u8 selection);
+static u8 TextSpeed_ProcessInput(u8 selection);
+static void TextSpeed_DrawChoices(u8 selection);
 static u8 Difficulty_ProcessInput(u8 selection);
 static void Difficulty_DrawChoices(u8 selection);
 static u8 BattleScene_ProcessInput(u8 selection);
@@ -65,59 +82,74 @@ static u8 FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
 static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
-static void DrawHeaderText(void);
+static void DrawDescriptionText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
 
 EWRAM_DATA static bool8 sArrowPressed = FALSE;
 
-static const u8 gText_Option[]             = _("OPTION");
-static const u8 gText_DifficultyHard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}HARD");
-static const u8 gText_DifficultyMedium[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}MEDIUM");
-static const u8 gText_DifficultyEasy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EASY");
-static const u8 gText_BattleSceneOn[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}ON");
-static const u8 gText_BattleSceneOff[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF");
-static const u8 gText_SoundMono[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}MONO");
-static const u8 gText_SoundStereo[]        = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}STEREO");
-static const u8 gText_FrameType[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}TYPE");
+static const u8 gText_TextSpeedSlow[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Slow");
+static const u8 gText_TextSpeedMid[]       = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Mid");
+static const u8 gText_TextSpeedFast[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Fast");
+static const u8 gText_TextSpeedInstant[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Instant");
+static const u8 gText_DifficultyHard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Hard");
+static const u8 gText_DifficultyMedium[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Medium");
+static const u8 gText_DifficultyEasy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Easy");
+static const u8 gText_BattleSceneOn[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}On");
+static const u8 gText_BattleSceneOff[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Off");
+static const u8 gText_SoundMono[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Mono");
+static const u8 gText_SoundStereo[]        = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Stereo");
+static const u8 gText_FrameType[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Type");
 static const u8 gText_FrameTypeNumber[]    = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}");
-static const u8 gText_ButtonTypeNormal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL");
+static const u8 gText_ButtonTypeNormal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Normal");
 static const u8 gText_ButtonTypeLR[]       = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}LR");
 static const u8 gText_ButtonTypeLEqualsA[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}L=A");
 
 static const u16 sOptionMenuText_Pal[] = INCGFX_U16("graphics/interface/option_menu_text.pal", ".gbapal");
 // note: this is only used in the Japanese release
+// The offsets these lines quote are GetCampaignTrainerLevel's, in
+// src/difficulty.c: cap-relative Easy -4, Medium -2, Hard 0.
+static const u8 *const sDifficultyDescription[] =
+{
+    COMPOUND_STRING("Easy: opponents 4 levels lower."),
+    COMPOUND_STRING("Medium: 2 lower. Hard: as designed."),
+    COMPOUND_STRING("Teams never change."),
+};
+
 static const u8 sEqualSignGfx[] = INCGFX_U8("graphics/interface/option_menu_equals_sign.png", ".4bpp");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
-    [MENUITEM_DIFFICULTY]  = COMPOUND_STRING("DIFFICULTY"),
-    [MENUITEM_BATTLESCENE] = COMPOUND_STRING("BATTLE SCENE"),
-    [MENUITEM_SOUND]       = COMPOUND_STRING("SOUND"),
-    [MENUITEM_BUTTONMODE]  = COMPOUND_STRING("BUTTON MODE"),
-    [MENUITEM_FRAMETYPE]   = COMPOUND_STRING("FRAME"),
-    [MENUITEM_CANCEL]      = COMPOUND_STRING("CANCEL"),
+    [MENUITEM_TEXTSPEED]   = COMPOUND_STRING("Text speed"),
+    [MENUITEM_DIFFICULTY]  = COMPOUND_STRING("Difficulty"),
+    [MENUITEM_BATTLESCENE] = COMPOUND_STRING("Battle scene"),
+    [MENUITEM_SOUND]       = COMPOUND_STRING("Sound"),
+    [MENUITEM_BUTTONMODE]  = COMPOUND_STRING("Button mode"),
+    [MENUITEM_FRAMETYPE]   = COMPOUND_STRING("Frame"),
+    [MENUITEM_CANCEL]      = COMPOUND_STRING("Cancel"),
 };
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
-    [WIN_HEADER] = {
-        .bg = 1,
-        .tilemapLeft = 2,
-        .tilemapTop = 1,
-        .width = 26,
-        .height = 2,
-        .paletteNum = 1,
-        .baseBlock = 2
-    },
+    // Seven rows leave no room for a title bar, so the list runs from the top
+    // and shares its bottom frame edge with the description strip.
     [WIN_OPTIONS] = {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 5,
+        .tilemapTop = 1,
         .width = 26,
-        .height = 12,
+        .height = 14,
         .paletteNum = 1,
-        .baseBlock = 0x36
+        .baseBlock = 2
+    },
+    [WIN_DESCRIPTION] = {
+        .bg = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 16,
+        .width = 26,
+        .height = 3,
+        .paletteNum = 1,
+        .baseBlock = 2 + 26 * 14
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -207,7 +239,7 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 3:
-        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1A2);
+        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, TILE_FRAME_BASE);
         gMain.state++;
         break;
     case 4:
@@ -220,8 +252,8 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 6:
-        PutWindowTilemap(WIN_HEADER);
-        DrawHeaderText();
+        PutWindowTilemap(WIN_DESCRIPTION);
+        DrawDescriptionText();
         gMain.state++;
         break;
     case 7:
@@ -245,7 +277,9 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
+        gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
 
+        TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         Difficulty_DrawChoices(gTasks[taskId].tDifficulty);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
         Sound_DrawChoices(gTasks[taskId].tSound);
@@ -304,6 +338,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
         switch (gTasks[taskId].tMenuSelection)
         {
+        case MENUITEM_TEXTSPEED:
+            previousOption = gTasks[taskId].tTextSpeed;
+            gTasks[taskId].tTextSpeed = TextSpeed_ProcessInput(gTasks[taskId].tTextSpeed);
+
+            if (previousOption != gTasks[taskId].tTextSpeed)
+                TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
+            break;
         case MENUITEM_DIFFICULTY:
             previousOption = gTasks[taskId].tDifficulty;
             gTasks[taskId].tDifficulty = Difficulty_ProcessInput(gTasks[taskId].tDifficulty);
@@ -359,6 +400,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
+    gSaveBlock2Ptr->optionsTextSpeed = gTasks[taskId].tTextSpeed;
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -377,7 +419,7 @@ static void Task_OptionMenuFadeOut(u8 taskId)
 static void HighlightOptionMenuItem(u8 index)
 {
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(16, DISPLAY_WIDTH - 16));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(index * 16 + 40, index * 16 + 56));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(index * 16 + 8, index * 16 + 24));
 }
 
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
@@ -396,6 +438,65 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 
     dst[i] = EOS;
     AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, dst, x, y + 1, TEXT_SKIP_DRAW, NULL);
+}
+
+// Four choices need the whole row, so they start left of the usual 104.
+#define TEXTSPEED_LEFT  72
+#define TEXTSPEED_RIGHT 198
+
+static u8 TextSpeed_ProcessInput(u8 selection)
+{
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (selection < OPTIONS_TEXT_SPEED_INSTANT)
+            selection++;
+        else
+            selection = OPTIONS_TEXT_SPEED_SLOW;
+
+        sArrowPressed = TRUE;
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (selection != OPTIONS_TEXT_SPEED_SLOW)
+            selection--;
+        else
+            selection = OPTIONS_TEXT_SPEED_INSTANT;
+
+        sArrowPressed = TRUE;
+    }
+    return selection;
+}
+
+static void TextSpeed_DrawChoices(u8 selection)
+{
+    static const u8 *const choices[] =
+    {
+        [OPTIONS_TEXT_SPEED_SLOW]    = gText_TextSpeedSlow,
+        [OPTIONS_TEXT_SPEED_MID]     = gText_TextSpeedMid,
+        [OPTIONS_TEXT_SPEED_FAST]    = gText_TextSpeedFast,
+        [OPTIONS_TEXT_SPEED_INSTANT] = gText_TextSpeedInstant,
+    };
+    s32 widths[ARRAY_COUNT(choices)];
+    s32 total = 0;
+    s32 gap, x;
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(choices); i++)
+    {
+        widths[i] = GetStringWidth(FONT_NORMAL, choices[i], 0);
+        total += widths[i];
+    }
+
+    gap = (TEXTSPEED_RIGHT - TEXTSPEED_LEFT - total) / (s32)(ARRAY_COUNT(choices) - 1);
+    if (gap < 2)
+        gap = 2;
+
+    x = TEXTSPEED_LEFT;
+    for (i = 0; i < ARRAY_COUNT(choices); i++)
+    {
+        DrawOptionMenuChoice(choices[i], x, YPOS_TEXTSPEED, selection == i);
+        x += widths[i] + gap;
+    }
 }
 
 static u8 Difficulty_ProcessInput(u8 selection)
@@ -503,7 +604,7 @@ static u8 FrameType_ProcessInput(u8 selection)
         else
             selection = 0;
 
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
+        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, TILE_FRAME_BASE);
         LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         sArrowPressed = TRUE;
     }
@@ -514,7 +615,7 @@ static u8 FrameType_ProcessInput(u8 selection)
         else
             selection = WINDOW_FRAMES_COUNT - 1;
 
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
+        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, TILE_FRAME_BASE);
         LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         sArrowPressed = TRUE;
     }
@@ -598,11 +699,14 @@ static void ButtonMode_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[2]);
 }
 
-static void DrawHeaderText(void)
+static void DrawDescriptionText(void)
 {
-    FillWindowPixelBuffer(WIN_HEADER, PIXEL_FILL(1));
-    AddTextPrinterParameterized(WIN_HEADER, FONT_NORMAL, gText_Option, 8, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(WIN_HEADER, COPYWIN_FULL);
+    u32 i;
+
+    FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(1));
+    for (i = 0; i < ARRAY_COUNT(sDifficultyDescription); i++)
+        AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, sDifficultyDescription[i], 4, i * 8, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_FULL);
 }
 
 static void DrawOptionMenuTexts(void)
@@ -615,34 +719,24 @@ static void DrawOptionMenuTexts(void)
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
 
-#define TILE_TOP_CORNER_L 0x1A2
-#define TILE_TOP_EDGE     0x1A3
-#define TILE_TOP_CORNER_R 0x1A4
-#define TILE_LEFT_EDGE    0x1A5
-#define TILE_RIGHT_EDGE   0x1A7
-#define TILE_BOT_CORNER_L 0x1A8
-#define TILE_BOT_EDGE     0x1A9
-#define TILE_BOT_CORNER_R 0x1AA
-
 static void DrawBgWindowFrames(void)
 {
     //                     bg, tile,              x, y, width, height, palNum
-    // Draw title window frame
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 27,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1,  2,  7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1,  2,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1,  3,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2,  3, 27,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28,  3,  1,  1,  7);
-
     // Draw options list window frame
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  4,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  4, 26,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  4,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  5,  1, 18,  7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  5,  1, 18,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 26,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1, 14,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1, 14,  7);
+
+    // The divider doubles as the description strip's top edge
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 15,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 15, 26,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 15,  1,  1,  7);
+
+    // Draw description window frame
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1, 16,  1,  3,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28, 16,  1,  3,  7);
     FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
     FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  7);
     FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);

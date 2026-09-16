@@ -364,15 +364,64 @@ TEST("Emerald Champions disables the Bag only in competitive trainer battles")
     EXPECT(IsAllowedToUseBag());
 }
 
-TEST("Emerald Champions forces instant text for legacy option values")
+// E3 hands Text Speed back to the player, so the saved value is now obeyed
+// instead of being overridden to Instant; Instant is only the new-game default.
+TEST("Emerald Champions Options owns the text speed setting")
 {
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_SLOW;
-    EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_INSTANT);
-    EXPECT_EQ(GetPlayerTextSpeedDelay(), 1);
+    EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_SLOW);
+    EXPECT_EQ(GetPlayerTextSpeedDelay(), 8);
+    EXPECT(!IsPlayerTextSpeedInstant());
 
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+    EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_FAST);
+    EXPECT(!IsPlayerTextSpeedInstant());
+
+    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
     EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_INSTANT);
     EXPECT(IsPlayerTextSpeedInstant());
+}
+
+TEST("Emerald Champions tops basic Balls back up to ten at every Center visit")
+{
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+
+    // An empty Bag comes back with exactly ten.
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
+
+    // A visit that needs no top-up neither adds Balls nor reports a gift.
+    gSpecialVar_Result = 0xFF;
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
+
+    // A spent stack is topped up, and a surplus is never taken away.
+    EXPECT(RemoveBagItem(ITEM_POKE_BALL, 6));
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 4);
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
+    EXPECT(AddBagItem(ITEM_POKE_BALL, 5));
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 15);
+
+    // Balls already in PC storage count toward the ten.
+    ClearBag();
+    EXPECT(AddPCItem(ITEM_POKE_BALL, 7));
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 3);
+
+    // Only the basic Ball is free; better Balls are not a substitute.
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+    EXPECT(AddBagItem(ITEM_GREAT_BALL, 30));
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
+
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
 }
 
 TEST("Emerald Champions catch transfers preserve both held-item loadouts")

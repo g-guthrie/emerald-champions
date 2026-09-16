@@ -21,6 +21,7 @@ Common_EventScript_PkmnCenterNurse::
 	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	special RestockEmeraldChampionsBasicBalls
 	message gText_EmeraldChampionsExplainTools
 	waitmessage
 	waitbuttonpress

@@ -16095,9 +16095,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Repel Spray"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Keeps wild Pokémon\n"
-            "away for 500 steps.\n"
-            "Reusable forever."),
+            "Wild Pokémon avoid\n"
+            "you for 500 steps.\n"
+            "Sweet Scent works."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
