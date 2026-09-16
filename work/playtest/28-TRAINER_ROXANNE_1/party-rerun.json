@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0030 TRAINER_ROXANNE_1 (Rustboro Gym leader, fast fossil offense, Mega Aerodactyl reveal); play_order 28, cap 14, Medium",
+ "availability_audit": "Chronology audit for this rerun. Every member's source map is checked against the book's chapter order (Game Book lines 1-300) and against the live map scripts, not only against the pool file's cap gate. Three species used in the first pass are chronology-ILLEGAL and were removed: WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, reached in C20 at cap 30); MAGEARNA before E0032 (the Devon Corp stairs are blocked until FLAG_RETURNED_DEVON_GOODS, set after Rusturf Tunnel); and ALAKAZAM before the Dewford Gym (Abra's only source is wild:GraniteCave_1F, entered in C12 after Route 106). Assisted acquisition through the native preparation API, ordinary items only, no Mega Stone on the player side (the Ring arrives after Brawly). Not native capture acceptance.",
+ "plan": "Hit the authored crack list with what is actually obtainable before the Stone Badge: Wide Guard against Rock Slide, Muddy Water and Earthquake; Steel and Fighting bodies that resist Rock; Water/Grass/Ice special pressure into six Rock-typed members; Bullet Punch priority into a Focus Sash or a Sturdy remnant.",
+ "party": [
+  {
+   "species": "SPECIES_LUCARIO",
+   "moves": [
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_BULLET_PUNCH",
+    "MOVE_CRUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_INNER_FOCUS",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Steel/Fighting priority breaker",
+   "availability": "wild:AlteringCave_1F/land_mons (Altering Cave's entrance is a warp on Route 103, C02) -> legal from the first route onward."
+  },
+  {
+   "species": "SPECIES_MR_MIME",
+   "moves": [
+    "MOVE_WIDE_GUARD",
+    "MOVE_PSYCHIC",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_FILTER",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Wide Guard against spread Rock/Ground/Water and a Psychic/Fairy lane",
+   "availability": "Mime Jr. wild:Route116/land_mons (Rustboro's east exit, open on arrival) -> known-move evolution."
+  },
+  {
+   "species": "SPECIES_CLOYSTER",
+   "moves": [
+    "MOVE_ICICLE_SPEAR",
+    "MOVE_ROCK_BLAST",
+    "MOVE_RAZOR_SHELL",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_SKILL_LINK",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Skill Link multi-hit breaker for Sturdy and Focus Sash bodies",
+   "availability": "Shellder wild:Route115/old_rod (Route 115 is Rustboro's north exit, open on arrival) + ITEM_WATER_STONE from the Rustboro Mart (C06)."
+  },
+  {
+   "species": "SPECIES_LUDICOLO",
+   "moves": [
+    "MOVE_SURF",
+    "MOVE_GIGA_DRAIN",
+    "MOVE_ICE_BEAM",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_RAIN_DISH",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    0,
+    252,
+    4,
+    0
+   ],
+   "role": "Water/Grass special pressure; Surf only beside a non-Grass partner",
+   "availability": "Lotad wild:Route102/land_mons -> Lombre -> ITEM_WATER_STONE (Rustboro Mart, C06)."
+  },
+  {
+   "species": "SPECIES_SHAYMIN",
+   "moves": [
+    "MOVE_SEED_FLARE",
+    "MOVE_AIR_SLASH",
+    "MOVE_EARTH_POWER",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_NATURAL_CURE",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast Grass special attacker",
+   "availability": "legendary_sign:Route102 (C03/C04 static sign, precedes Rustboro) - reachable legend."
+  },
+  {
+   "species": "SPECIES_REUNICLUS",
+   "moves": [
+    "MOVE_PSYCHIC",
+    "MOVE_FOCUS_BLAST",
+    "MOVE_RECOVER",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_MAGIC_GUARD",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    0,
+    252,
+    4,
+    0
+   ],
+   "role": "Magic Guard body immune to Toxic Spikes and residual chip",
+   "availability": "wild:AlteringCave_1F/land_mons (Route 103 entrance, C02)."
+  }
+ ]
+}

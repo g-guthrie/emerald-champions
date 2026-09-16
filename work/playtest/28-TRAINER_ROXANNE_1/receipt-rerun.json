@@ -1,0 +1,67 @@
+{
+  "rerun_of": "work/playtest/28-TRAINER_ROXANNE_1/receipt.json",
+  "rerun_reason": "Confirming rerun for the level changes the first pass authored but could not verify (that machine could not rebuild the ROM). Since the first pass: TYRANTRUM offset 1->2, OMASTAR 2->3, and AERODACTYL 0->2 - the follow-up the first pass recommended and the main agent approved. The headless ROM also now carries the AI setup/support pricing and the healthy-turn-one-switch charge.",
+  "play_order": 28,
+  "e_group": "E0030",
+  "trainer": "TRAINER_ROXANNE_1",
+  "class": "leader",
+  "location": "RustboroCity_Gym",
+  "cap": 14,
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/28-TRAINER_ROXANNE_1/party-rerun.json", "work/playtest/28-TRAINER_ROXANNE_1/party-rerun-a2.json"],
+  "party_changed_from_first_pass": {
+    "reason": "Chronology, not difficulty. The first-pass party used MAGEARNA (legendary_sign:RustboroCity_DevonCorp_2F - the Devon stairs are blocked until FLAG_RETURNED_DEVON_GOODS, which is set after Rusturf Tunnel, i.e. after this battle) and WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, C20 at cap 30). Neither is holdable by a player standing in Rustboro Gym. Removing them is what made this fight honest: Magearna was the body that resisted or was immune to Rock, Flying, Dragon, Normal and Fairy simultaneously and single-handedly swept the first pass.",
+    "removed": ["SPECIES_MAGEARNA", "SPECIES_WHIMSICOTT"],
+    "r1_party": ["LUCARIO", "MR_MIME", "CLOYSTER", "LUDICOLO", "SHAYMIN", "REUNICLUS"],
+    "r2_party": ["CLOYSTER", "ARCANINE", "SHAYMIN", "LUDICOLO", "REUNICLUS", "MR_MIME"]
+  },
+  "opponent_levels_before": {"AERODACTYL": 12, "CARBINK": 15, "RELICANTH": 15, "TYRANTRUM": 13, "OMASTAR": 14, "BOMBIRDIER": 15},
+  "opponent_levels_now": {"AERODACTYL": 14, "CARBINK": 15, "RELICANTH": 15, "TYRANTRUM": 14, "OMASTAR": 15, "BOMBIRDIER": 15},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/28-TRAINER_ROXANNE_1/r1", "seed": "0x9B33",
+      "outcome": "lost", "turns": 5, "decisions": 10, "player_faints": 6, "opponent_faints": 2,
+      "ai_decision_frames_max": 61, "ai_decision_seconds_max": 1.021,
+      "narrative": "Mega Aerodactyl still died on turn 1 (Bullet Punch plus Psychic), but Carbink's Body Press took Lucario with it. Relicanth then decided the fight on its own: Choice Band, Rock Head, 252 Speed and a 150 BP Head Smash, which outsped and one-shot Ludicolo (59 HP, neutral), then Shaymin, then Reuniclus on three consecutive turns. Mr. Mime was down to 4 HP from the Mega's Dual Wingbeat and Cloyster was the last body standing when Omastar and Carbink finished it. Six to two."
+    },
+    {
+      "id": "r2", "run_dir": "work/playtest/28-TRAINER_ROXANNE_1/r2", "seed": "0x9B34",
+      "outcome": "won", "turns": 7, "decisions": 12, "player_faints": 4, "opponent_faints": 6,
+      "ai_decision_frames_max": 62, "ai_decision_seconds_max": 1.038,
+      "rebuild_reason": "Relicanth, not the Mega, is the member that decides the fight, and the r1 party carried no Intimidate and nothing that resisted Rock. Arcanine (Growlithe from Route 103 plus the Rustboro Fire Stone) was added for Intimidate and 95 base Speed, and Cloyster was moved to the lead so a 4x Icicle Spear answers the Mega without spending the Psychic lane.",
+      "narrative": "Intimidate on entry changed the first turn completely - see the strategy checks. Cloyster put the Mega to 5 HP and Extreme Speed finished it on turn 2. Carbink's Body Press under its own Reflect was the real grinder, killing Cloyster and half of Ludicolo and Arcanine; Omastar under Tailwind outsped and removed Ludicolo. Shaymin's Earth Power cleared Carbink and a 4x Seed Flare cleared Relicanth before it ever chose a second move. Bombirdier's Knock Off removed Reuniclus. Arcanine came back in for a second Intimidate and a spread Dazzling Gleam finished Tyrantrum and Bombirdier together. Four player faints out of six against a full six-member sweep."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "MEGA_REVEAL - Aerodactyl reveals Mega Aerodactyl on first entry, before the player's Ring unlock", "result": "PASS", "evidence": "Both runs, turn 1: 'Aerodactylite is reacting' then 'has Mega Evolved into Mega Aerodactyl', with no Mega Stone in either player manifest."},
+    {"check": "Aerodactyl chooses immediate Rock Slide or Tough Claws Dual Wingbeat when stronger than Tailwind", "result": "PASS - both branches now observed, and the branch point is correct", "evidence": "r1 turn 1, no Intimidate on the field: it chose Dual Wingbeat, the contact move Tough Claws boosts, and took Mr. Mime from 39 to 4. r2 turn 1, after Arcanine's Intimidate had already dropped it to -1 Attack: it chose Tailwind instead, and then used Rock Slide on turn 2 once the speed was banked. That is exactly the authored condition - attack when the attack is stronger than Tailwind, set Tailwind when it is not - and it is the clearest evidence in this block that the new setup/support pricing is working. The first pass could only see the attack branch."},
+    {"check": "Carbink selects the relevant screen and never wastes successive screen turns against the wrong damage profile", "result": "PASS", "evidence": "r1, against an all-special player pair: Light Screen first (turn 3), Reflect later (turn 4) once Cloyster was the remaining physical threat. r2, against Cloyster and Arcanine (both physical): Reflect first, on turn 1. The screen choice tracked the actual damage profile in both runs, in opposite orders. Carbink also alternated to Rock Tomb and Body Press rather than repeating a screen."},
+    {"check": "Roxanne switches to clear a Taunt rather than burning turns under it", "result": "NOT OBSERVED", "evidence": "Neither rerun party carried Taunt - the only Prankster Taunt body available at cap 14 was Whimsicott, which is chronology-illegal here. The first pass confirmed this branch; nothing contradicts it."},
+    {"check": "NO Trick Room move or intent on this team", "result": "PASS", "evidence": "No Trick Room selected or present in any field state across both runs."},
+    {"check": "Relicanth honors Choice Band; Tyrantrum has no status move through Assault Vest", "result": "PASS - now properly tested", "evidence": "r1: Relicanth used Head Smash on four consecutive turns and never attempted another move, which is the lock behaving correctly, and Rock Head meant no recoil. Tyrantrum in r2 chose Head Smash and never attempted a status move. The first pass could only record this as PARTIAL because both died before a second decision."},
+    {"check": "Aerodactyl and Bombirdier are airborne partners for Tyrantrum's Earthquake; recheck grounding before every spread attack", "result": "NOT OBSERVED - and now suspicious", "evidence": "r2 turn 7 was the exact authored board: Tyrantrum beside Bombirdier, a Flying partner that is immune to Earthquake, against two grounded player bodies. Tyrantrum chose Head Smash into a single target instead of the spread Earthquake. That is not illegal (Head Smash is 150 BP against Earthquake's 100, and Mr. Mime was at full HP), but the one deliberately authored airborne pairing has now failed to produce an Earthquake in two passes. See AI observations."},
+    {"check": "Rocky Payload Bombirdier attacks and provides a second Tailwind source", "result": "PARTIAL", "evidence": "r2 turn 7: Bombirdier chose Knock Off into Reuniclus, correctly reading the 2x Dark matchup against a Psychic body and removing its Leftovers. Tailwind was never selected from this slot; by the time Bombirdier entered, Aerodactyl's Tailwind had already run and expired."},
+    {"check": "Do not count base Unnerve after Mega transformation", "result": "PASS (no contrary evidence)", "evidence": "No Unnerve-attributed behaviour after either transformation."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Roxanne's side used Protect zero times across both runs, as in the first pass. Aerodactyl and Omastar both carry it; Aerodactyl spent its turns on Tailwind and Rock Slide and Omastar on Muddy Water and Ice Beam, in every case because an attack or the speed move scored better than guarding. There is no empty guarding to report on this trainer.",
+  "ai_defects": [],
+  "ai_observations": [
+    "The AI played this trainer well in both runs and there is no decision I would call a defect. The Intimidate-conditional Tailwind on r2 turn 1 is the best single AI choice I saw anywhere in this block: the same battler, on the same turn of the same fight, attacked when its Attack was untouched and set Tailwind when its Attack had been dropped.",
+    "Standing question for the AI owner, carried over and now sharpened: Tyrantrum has still never fired Earthquake beside an airborne partner across two passes, although r2 turn 7 presented exactly that board. Either the authored pairing needs Earthquake to score higher than a same-target Head Smash, or the plan line should stop describing it as a signature of this team.",
+    "ai_decision_frames_max was 61-62 (about 1.03 s) in both runs. The first pass on this trainer measured 8 frames. That is roughly an 8x increase on the same boards. Correctness looks better; the cost is a visible pause. Reported as a sampled measurement, not a worst case."
+  ],
+  "level_changes": {
+    "rule_applied": "Lost one optimized attempt, then won the second with four player faints out of six. That is emphatically the brief's 'won after a real fight' band, and it is the first loss recorded anywhere in this block. Keep the current offsets.",
+    "changes": [],
+    "verdict": "The three level changes carried into this rerun (Tyrantrum 1->2, Omastar 2->3, Aerodactyl 0->2) are CONFIRMED CORRECT and should stand. The Mega now enters at the player's cap instead of two levels under it, survives long enough to choose between attacking and setting Tailwind, and the fight no longer resolves as a one-body sweep. No further change; the per-member +/-2 budget for this pass is now spent on Aerodactyl (+2) and half spent on Tyrantrum and Omastar (+1 each).",
+    "honest_caveat": "Part of the difficulty swing between passes comes from the party, not the levels: removing the chronology-illegal Magearna removed the body that resisted five of this team's six attacking types. The levels and the legal-party correction are both real, and I cannot separate their contributions from two runs. What is certain is that at these levels, against a party a player could actually field in Rustboro, this leader is a genuine fight rather than a sweep."
+  },
+  "cooler_note": "The first pass called out type monotony and recommended putting Ground pressure on the field early. This rerun says something more specific: the team's problem was never the concept, it was that one illegal Steel body hid how good the team already is. Against a legal party, Carbink's Body Press under its own Reflect and Relicanth's Choice Band Head Smash are two genuinely distinct pressure engines, and the Tailwind branch gives the Mega a real second life. The one weak note remains Tyrantrum: it is the team's Earthquake carrier and its airborne partners exist to make that safe, but it has now twice chosen a single-target Head Smash instead. If the Earthquake line is meant to be the team's signature, that pairing wants to be set up earlier - leading Tyrantrum beside Bombirdier rather than deploying both last would give the tactic a board to happen on. Species-wise the six are well chosen and worth preserving.",
+  "authored_set_legality": "No legality problem found in the authored opponent set.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
