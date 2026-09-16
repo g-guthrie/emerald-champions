@@ -1,0 +1,62 @@
+{
+  "play_order": 234,
+  "e_group": "E0345",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_4",
+  "class": "grunt",
+  "location": "AquaHideout_B2F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; all four members L75 = 76 + 1 - 2 on Medium. This is the first Aqua room above the cap-minus-one line and the only grunt in either hideout with a Mega slot.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_aqua_76.json"],
+  "chronology_note": "Same six members; Incineroar beside Amoonguss, chosen because Spore is the reachable equivalent of the dossier's own crack ('Taunt, Encore or Knock Off the Clawitzer') and nothing in my legal pool carries Taunt. See the manifest's availability_audit.",
+  "pre_play_strategy_checks": [
+    "Clawitzer's Mega Launcher doubles Heal Pulse, restoring half an ally's maximum HP",
+    "The crew keeps Mega Eelektross alive through damage the player expected to be lethal",
+    "Crobat Taunts the setup or support the player needs, or pivots with U-turn",
+    "Mega Eelektross has no weaknesses while Levitate holds",
+    "Alolan Muk's Knock Off strips the item the player was relying on"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 6, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/234-TRAINER_GRUNT_AQUA_HIDEOUT_4/a1",
+      "outcome": "won", "turns": 7, "decisions": 10,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 1.072,
+      "why": "The whole room hinges on the shrimp and I removed it on turn 1: Fake Out flinched Crobat on the exact turn it had selected Taunt at my Amoonguss, and Amoonguss then Spored Clawitzer. Clawitzer spent the rest of the battle asleep or pivoted out and the doubled Heal Pulse never resolved once. It still hurt me first - an awake Clawitzer's Mega Launcher Water Pulse did 201 to a full-health 301 HP Incineroar, which is a startling number off a grunt. Parting Shot swapped the wreck of Incineroar for Zapdos, Rage Powder ate a Brave Bird, and Thunderbolt was 2x on Crobat. Alolan Muk's Gunk Shot then killed Amoonguss. Urshifu came in and Close Combat is 2x on Muk and enough to one-shot a Mega Eelektross that had already taken Wild Charge recoil. I stalled a turn at the end with two Protects specifically to watch Clawitzer wake up."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Mega Launcher doubles Heal Pulse for half an ally's max HP", "result": "FAIL (never resolved)", "evidence": "Clawitzer selected MOVE_HEAL_PULSE twice - once on the turn after it was Spored, with a healthy Crobat beside it, and once as the last Pokemon alive - and both selections are recorded with target 0, a PLAYER battler, not an ally. Neither resolved because it was asleep both times. The room's stated centrepiece was never seen working, and the targeting is a suspicion I could not close; see AI defects."},
+    {"check": "The crew keeps Mega Eelektross alive through lethal damage", "result": "FAIL", "evidence": "Mega Eelektross entered on turn 4, Mega Evolved, used one Wild Charge, slept to Spore, and died to a single Close Combat on turn 6. Not one point of healing was ever applied to it."},
+    {"check": "Crobat Taunts the support the player needs", "result": "PASS (selected, denied)", "evidence": "turn 1 native record: b1 use_move TAUNT at battler 2, my Amoonguss - precisely the right target, chosen before I had revealed anything, and the single most dangerous thing it could have done to my plan. Fake Out denied it by one priority tier. This is correct AI behaviour and I want it on record as such."},
+    {"check": "Crobat pivots with U-turn", "result": "NOT OBSERVED", "evidence": "it chose Cross Poison twice and Brave Bird once. The Brave Bird was pulled by Rage Powder and cost it Rocky Helmet damage plus recoil, which is how it died."},
+    {"check": "Mega Eelektross has no weaknesses while Levitate holds", "result": "PASS (in effect)", "evidence": "the driver reported it as SPECIES_EELEKTROSS_MEGA after the Mega message, and my Thunderbolt into it read 'It's not very effective'. Nothing in my party could hit it super-effectively, which is the authored claim. It died to a neutral 120 BP Fighting move from a 262 HP attacker, which tells you the defensive profile is a typing trick rather than actual bulk."},
+    {"check": "Alolan Muk's Knock Off strips an item", "result": "FAIL (move never chosen)", "evidence": "Muk used GUNK_SHOT twice, killing Amoonguss with the first. It never chose Knock Off in the two turns it had, despite my side holding a Sitrus Berry, Leftovers, a Rocky Helmet and a Focus Sash. Gunk Shot took a KO, so the choice was not wrong; the authored item-stripping role simply did not appear."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects. Muk and Eelektross both carry it and neither reached for it, including on the turn Mega Eelektross was asleep at a level where a guard could not help it anyway. Nothing to fault.",
+  "ai_defects": [
+    {
+      "severity": "low-moderate (unresolved - needs a focused test)",
+      "turns": "2 and 6",
+      "board": "turn 2: Clawitzer asleep at 262/262, ally Crobat alive at 219/236, my Zapdos at 294/294 and Amoonguss at 330/330. Turn 6: Clawitzer asleep at 128/262 as the last Pokemon alive.",
+      "chosen": "MOVE_HEAL_PULSE with target 0 on both occasions",
+      "problem": "Target 0 is a player battler. Every other opponent selection in this battle that names 0 or 2 is an attack aimed at my side, so the target index is being read consistently - which means the AI selected a move that restores half of maximum HP and pointed it at an enemy. Neither selection resolved (it was asleep both times), so I cannot state as fact that it would have healed my Zapdos, and I am flagging this as a suspicion rather than a confirmed defect.",
+      "better": "On turn 2, with a 93%-health ally, Heal Pulse is near-worthless whatever it targets; AURA_SPHERE or DARK_PULSE was the turn. On turn 6, alone, Heal Pulse should score below every attack it owns.",
+      "note": "The focused test is two turns long and worth running: start this trainer, damage Crobat or Muk to roughly half without touching Clawitzer, and see where an awake Clawitzer's Heal Pulse lands. If it resolves on a foe, this is a serious defect and it affects every ally-targeting support move in the campaign, not just this one - the same selection path would govern Helping Hand, Wish, Rage Powder-adjacent support and the After You/Instruct family. If it resolves on the ally, the only finding is that Heal Pulse is being scored too highly against healthy allies."
+    }
+  ],
+  "engine_notes": [
+    "The AI pivoted its Spored Clawitzer out for Muk on turn 3 and brought it back once Muk died - the same correct sleep-pivot behaviour I logged at play_order 229. Two hideout grunts have now done this unprompted.",
+    "AI decision budget max 1.072 s against the 1.2 s ceiling."
+  ],
+  "level_changes": [
+    {"member": "CROBAT", "before": 1, "after": 2, "why": "the only member that contributed nothing to the damage. Its one genuinely excellent decision (a turn-1 Taunt at my Amoonguss) was denied by Fake Out, its Brave Bird was eaten by Rage Powder, and it died to a single Thunderbolt at 236 HP. It is the frailest body in a room whose difficulty is supposed to come from the crew keeping each other alive."}
+  ],
+  "level_change_rationale": "One player faint on attempt 1 triggers the AGENTS.md review, and I am applying the smaller version of it: +1 to one member rather than two. This was a real fight in the parts that worked - a doubled Water Pulse did two-thirds of Incineroar's health in one action and Gunk Shot took a 330 HP Pokemon off the board - so I do not think the room is soft; I think its declared engine did not run. I deliberately did not touch Clawitzer (its damage output is already alarming and its healing has never been tested), Eelektross (it is the Mega and the brief says not to raise the ace first) or Muk (it took a KO). Crobat is +1 of the +-2 allowance, which is the whole allowance for this pass since it started at +1.",
+  "rebuild_note": "The Crobat +1 cannot be re-verified here: the run pinned work/agent-battle-build-5, which predates the edit. The main agent must rebuild first. More importantly, this trainer owns the block's most consequential open question - where a Mega Launcher Heal Pulse actually lands - and that test should be run before any further level work on this room. After Matt (play_order 237), this is the battle most worth re-running in my block.",
+  "theme_check": "Yes on the board, and the 'grunt with a Mega' spike is real - walking into the quartermaster's cabin and seeing a Mega Evolution message from an ordinary Aqua grunt is exactly the memorable difficulty bump the dossier wants. The theme does show: a shrimp with a cannon, a sludge pile, a cave bat and an electric eel is a smuggler's back room rather than a pirate crew, which distinguishes it from the three rooms before it. What did not show is the reason the room exists - the healing - so what the player actually meets is four separately dangerous Pokemon rather than a crew that protects its ace.",
+  "cooler_note": "Keep the roster; the concept is the best-argued in the hideout and the counterplay is exactly as teachable as the dossier claims - I answered it with Spore instead of Taunt and it worked identically, which is a good sign that the room's lesson generalises. The demonstrated weakness is that the entire room is one status move away from being ordinary: sleep, Taunt or Encore on Clawitzer on turn 1 removes the healing, the Mega has no bulk to fall back on, and the fight becomes four solo Pokemon. A concrete suggestion for a later pass, not made here: Clawitzer's fourth slot is Aura Sphere, which overlaps with Dark Pulse as a second special attack it rarely needs - a Mental Herb or a Safety Goggles on Clawitzer, or moving the healing onto a second body, would make the cabin survive its own crack instead of folding to it.",
+  "authored_set_legality": "No legality problem found. Eelektross Mega-Evolves correctly from ITEM_EELEKTROSSITE and the driver reported SPECIES_EELEKTROSS_MEGA."
+}
