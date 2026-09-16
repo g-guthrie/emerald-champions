@@ -1,0 +1,131 @@
+{
+  "play_order": 176,
+  "e_group": "E0249",
+  "trainer_played": "TRAINER_BRENDAN_ROUTE_119_TREECKO",
+  "alias_set": ["TRAINER_BRENDAN_ROUTE_119_MUDKIP", "TRAINER_BRENDAN_ROUTE_119_TORCHIC", "TRAINER_BRENDAN_ROUTE_119_TREECKO", "TRAINER_MAY_ROUTE_119_MUDKIP", "TRAINER_MAY_ROUTE_119_TORCHIC", "TRAINER_MAY_ROUTE_119_TREECKO"],
+  "alias_policy": "Played the Treecko-branch Brendan alias per the brief. No level change was warranted, so no identical changes needed to be propagated to the other five aliases; all six remain at their authored offsets.",
+  "class": "rival",
+  "location": "Route119",
+  "cap": 54,
+  "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-4 (snapshot switch mid-block; both attempts ran on build-4)",
+  "party_manifests": ["work/playtest/176-TRAINER_BRENDAN_ROUTE_119_TREECKO/party.json (attempt 1)", "work/playtest/176-TRAINER_BRENDAN_ROUTE_119_TREECKO/party-v2.json (attempt 2)"],
+  "level_verification": "cap 54: Swellow, Manectric, Breloom, Camerupt and Mimikyu all authored +2 and all resolved to L54 = 54 + 2 - 2; Blaziken authored +4 and resolved to L56 = 54 + 4 - 2. The survey milestone's raise from 48 to 54 is correctly in effect from this battle onward. --cap 54 correct.",
+  "attempts": [
+    {
+      "seed": 71,
+      "run_dir": "work/playtest/176-TRAINER_BRENDAN_ROUTE_119_TREECKO/run-s1",
+      "party": "v1 (Mega Charizard Y / Togekiss / Magnezone / Excadrill / Amoonguss / Dragonite)",
+      "outcome": "lost",
+      "turns": 8,
+      "decisions": 13,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "ai_decision_seconds_max": 1.038,
+      "why_lost": "Party-level error, not a difficulty verdict. Three of my six were Flying types into a rival holding Manectric's Thunderbolt and Blaziken's spread Rock Slide, and Mega Charizard Y's own Drought boosted Camerupt's Heat Wave by 1.5x. Manectric outsped and KOed my Mega on turn 1 before it acted; Guts Facade KOed Togekiss on turn 2; Blaziken's Rock Slide was 4x into Dragonite. I record this as my mistake."
+    },
+    {
+      "seed": 72,
+      "run_dir": "work/playtest/176-TRAINER_BRENDAN_ROUTE_119_TREECKO/run-s2",
+      "party": "v2, rebuilt (Mega Swampert / Garchomp / Excadrill / Alakazam / Amoonguss / Azumarill) - rebuild reason recorded in party-v2.json",
+      "outcome": "won",
+      "turns": 7,
+      "decisions": 10,
+      "player_faints": 2,
+      "opponent_faints": 6,
+      "ai_decision_seconds_max": 1.038
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Swellow's Flame Orb lands at the end of turn one and from turn two Guts Facade is a 140-power attack",
+      "result": "PASS - and it is the best single authored payoff in my whole block",
+      "evidence": "Attempt 1, end of turn 1: 'The opposing Swellow was burned!'. Turn 2: 'The opposing Swellow used Facade! Togekiss fainted!' - a 206 HP Togekiss at 122 HP deleted in one hit by a 16-HP burned bird. The two-turn setup, the self-inflicted status, and the payoff all resolved exactly as authored. Attempt 2 confirmed the crack line in the other direction: I killed Swellow on turn 1 before the Orb resolved and it did nothing at all."
+    },
+    {
+      "check": "Manectric's Lightning Rod is the reason the lead pair can stand together - it draws the Electric attacks that would otherwise delete Swellow",
+      "result": "PASS",
+      "evidence": "The ability shaped my play in both attempts: I never once aimed an Electric move at either lead because Lightning Rod would have absorbed it and raised Manectric's Special Attack. In attempt 1 that cost me my best answer to Swellow (Magnezone's Thunderbolt was 2x into it and unusable), which is precisely the umbrella the dossier describes. Manectric's own play was excellent - turn-1 Thunderbolt for a clean KO on a 2x Mega, then Snarl twice for cumulative special drops."
+    },
+    {
+      "check": "Breloom's Toxic Orb Poison Heal is the second, opposite orb - self-inflicted status converted into recovery",
+      "result": "PASS",
+      "evidence": "Attempt 1, end of turn 4: 'The opposing Breloom was badly poisoned!' and thereafter it gained HP each turn (56 -> 74 while I was attacking it). The two-orb symmetry the dossier is proud of is real and readable."
+    },
+    {
+      "check": "A 100%-accurate Spore plus priority Mach Punch is the disruption mode",
+      "result": "FAIL",
+      "evidence": "Breloom got six turns across two attempts and NEVER used Spore once - Mach Punch, Seed Bomb, Seed Bomb, Protect, Seed Bomb, Seed Bomb. In attempt 1 my party contained no Grass type and no Safety Goggles for Breloom's first three turns, so Spore was fully available and would have been devastating. See ai_defects."
+    },
+    {
+      "check": "Mimikyu's Disguise guarantees it one free turn for Will-O-Wisp or Taunt",
+      "result": "PASS",
+      "evidence": "Attempt 2: Mimikyu entered on turn 3 with Disguise intact and kept it for three turns, spending them on Shadow Sneak, Play Rough and - on turn 6 - Will-O-Wisp aimed at Azumarill, my only physical attacker on the field. Correct target for a burn. Disguise only broke on turn 7 to Azumarill's Play Rough. The free-turn guarantee worked exactly as designed."
+    },
+    {
+      "check": "Mental Herb covers a Taunt of the player's own",
+      "result": "NOT_EXERCISED",
+      "evidence": "Neither of my parties carried Taunt."
+    },
+    {
+      "check": "Speed Boost Blaziken is the ace and the AI's Ace Pokemon flag points at it",
+      "result": "PASS",
+      "evidence": "Blaziken was deployed last in both attempts and at L56 is four levels above the rest of the team. Attempt 1: it reached +2 Speed, used spread Rock Slide for a 4x KO on Dragonite plus a flinch on Amoonguss that denied my Spore, then Close Combat to finish Excadrill. It personally ended attempt 1. Attempt 2 it was answered by a 2x Liquidation from a Huge Power body before it could boost."
+    },
+    {
+      "check": "Camerupt's Solid Rock reduces super-effective damage",
+      "result": "PASS",
+      "evidence": "Attempt 2 turn 5: Azumarill's Liquidation into a Fire/Ground body reads 'It's extremely effective!' (4x) and still needed the full Huge Power Adamant number to KO a 190 HP frame through the reduction and the Sitrus Berry."
+    },
+    {
+      "check": "The branch-specific fourth member threatens the starter the player did NOT pick (Camerupt and Blaziken against a Treecko player)",
+      "result": "PASS_BY_CONSTRUCTION",
+      "evidence": "The Treecko alias fields Camerupt and Blaziken, which is the authored Fire answer to a Grass starter. I did not play a starter, so the matchup itself was not exercised, but the roster resolved as authored."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "attempt": 1,
+      "turn": 5,
+      "battler": "Breloom",
+      "call": "Protect",
+      "payoff": "REAL - blocked Dragonite's Dual Wingbeat (2x into Grass, a two-hit move that would very likely have KOed it at 56 HP) and let one more Poison Heal tick land. Good guard."
+    },
+    {
+      "attempt": 2,
+      "turn": 1,
+      "battler": "Manectric",
+      "call": "Protect",
+      "payoff": "MODEST - blocked Garchomp's spread Rock Slide (neutral, roughly a third of its HP). Real damage denial, but Manectric held an unbroken Focus Sash so it was in no danger of dying, and the guard did nothing for its partner: Swellow ate the Rock Slide and then my Liquidation and died on the same turn. A Snarl (which it used to good effect on later turns) would have cut my two physical attackers' special damage AND been a free action."
+    }
+  ],
+  "consecutive_protect_risk": "none - no battler guarded twice in a row in either attempt.",
+  "ai_defects": [
+    {
+      "attempt": 1,
+      "turn": 4,
+      "board": "Breloom 146/146 with Spore, Mach Punch, Seed Bomb and Protect, facing Magnezone (Steel/Electric) and a freshly switched-in Dragonite (Dragon/Flying). Neither is a Grass type; neither holds Safety Goggles. I had three Pokemon left.",
+      "chosen": "Breloom used Mach Punch into Dragonite (0.5x).",
+      "why_wrong": "Spore is a 100%-accurate sleep with no immunity present on the board, on a team that was already winning, against a player down to three Pokemon. It is also the move the dossier names as Breloom's whole reason for existing ('a 100%-accurate Spore plus priority Mach Punch is the disruption mode'). Instead Breloom chose a 0.5x priority attack. Across six Breloom turns in two attempts it never once reached for Spore, including three turns where no powder immunity existed on my side at all.",
+      "better_action": "Spore on Dragonite (my only healthy attacker), then Mach Punch or Seed Bomb freely.",
+      "severity": "major - a 100%-accurate sleep move appears to be scored far below its real value. This is very likely shared: any campaign team with Spore, Sleep Powder, Hypnosis or Lovely Kiss should be checked, not just Breloom."
+    }
+  ],
+  "ai_notes": [
+    "Manectric's turn-1 Thunderbolt into Mega Charizard Y (2x, outsped, clean KO before my Mega acted) was the sharpest opening any opponent made in my block.",
+    "Manectric's repeated Snarl was correct and cumulative - it dropped my Special Attack four stages across the fight and directly reduced Magnezone's damage output.",
+    "Blaziken's spread Rock Slide into a board holding a 4x Dragonite and a Flying-type Amoonguss partner-flinch was excellent doubles play.",
+    "Mimikyu correctly aimed Will-O-Wisp at the only physical attacker on the field.",
+    "No mis-targeting observed in either attempt. Decision time peaked at 1.038 s on a six-member team against the 1.2 s budget."
+  ],
+  "player_mistakes": [
+    "Attempt 1: bringing three Flying types into Manectric plus Blaziken, and using a Drought Mega that boosts Camerupt's Heat Wave. Recorded as my error and the reason for the rebuild.",
+    "Attempt 2 turn 2: I left Mega Swampert (Water/Ground, 4x Grass) in front of Breloom and it was OHKOed by Seed Bomb. Also my error."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "No change, in either direction. The loss in attempt 1 was a party-construction mistake of mine, not three optimized failed attempts, so the '-1 after three losses' rule does not apply. Attempt 2 was a win with 2 player faints against a six-member rival where the ace, the Guts bird and the Lightning Rod lead all did real work - that is the 'won after a real fight' band. I want to record positively that the dossier's own decision to move this rival off a blanket zero to +2 across the board and +4 on the ace was correct: at these levels the Route 119 rival is measurably harder than the route aces around it and it beat a competitively built party once. Offsets for all six aliases stay as authored.",
+  "rerun": "not needed - no level change.",
+  "could_this_be_cooler": "The composition earns retention and I agree with the dossier that it should not be churned; two orbs paying off in opposite directions plus a redirection ability protecting the member that needs it is a genuinely tight design, and it reads as a rival the moment Swellow's burn lands. Two notes from play. First, the deferred Mega-stone idea is the right instinct but there is a cheaper escalation available: the rival is the only trainer in this stretch with no held-item denial and no way to stop a player simply removing Swellow on turn one, which is what both the crack line and my attempt 2 did. Giving Manectric a Volt Switch-out into a healthier board, or moving Swellow out of the lead so the burn lands while the player is busy, would protect the team's best moment from a single well-aimed turn - without changing a species. Second, and more important, Breloom's Spore is the team's scariest move and the AI never uses it (see defects); fixing that scoring will make this rival meaningfully harder at the SAME levels, which is a better outcome than any offset change. I would fix the AI first and only then revisit levels.",
+  "authored_set_legality": "No legality problem. Guts with Flame Orb, Poison Heal with Toxic Orb, Lightning Rod, Disguise with Mental Herb, Solid Rock and Speed Boost all resolved as authored, and the Treecko alias correctly fields Camerupt and Blaziken.",
+  "notes": "Two attempts, two different parties. The rebuild between attempts is documented in party-v2.json's plan field as the brief requires."
+}
