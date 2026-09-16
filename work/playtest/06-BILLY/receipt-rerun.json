@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R1 (post AI setup/support pricing fix; chronology-legal party)",
+  "play_order": 6,
+  "e_group": "E0006",
+  "trainer": "TRAINER_BILLY",
+  "class": "regular",
+  "location": "Route104",
+  "cap": 14,
+  "difficulty": "medium",
+  "voids_previous_receipt": "receipt.json is void: its party used species unreachable on Route 104. Its headline ('won attempt 1, 5 turns, 1 player faint') is badly wrong for a legal party - see below.",
+  "opponent_as_played": [
+    "LOTAD L15 @EVIOLITE SWIFT_SWIM TIMID (Rain Dance/Muddy Water/Giga Drain/Ice Beam) offset 3",
+    "DUCKLETT L15 @EVIOLITE HYDRATION MODEST (Hurricane/Surf/Icy Wind/Protect) offset 3",
+    "DITTO L12 @CHOICE_SCARF IMPOSTER RELAXED (Transform) offset 0",
+    "TANDEMAUS L14 @WIDE_LENS OWN_TEMPO JOLLY (Population Bomb/Super Fang/Encore/Protect) offset 2"
+  ],
+  "party_manifest": [
+    "work/playtest/06-BILLY/party-rerun-a1.json",
+    "work/playtest/06-BILLY/party-rerun-a2.json"
+  ],
+  "party_summary": "Attempt 1: Croagunk / Electrike / Timburr / Pachirisu / Mienfoo / Corphish. Attempt 2 (rebuilt): Electrike / Shinx / Pachirisu / Rockruff / Growlithe / Corphish. All Route101/102/103/104 wilds, nothing evolved, no legend.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "elf_sha256": "0db7f04c115137192dcc7464b7c0c6125e0288139df9e92ecec09231a77cfc7c",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 2006,
+      "outcome": "LOST",
+      "turns": 6,
+      "decisions": 11,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "ai_decision_frames_max": 60,
+      "ai_decision_seconds_max": 1.005,
+      "events": "work/playtest/06-BILLY/rerun-attempt-1-events.jsonl",
+      "narrative": "T1 Lotad set rain, Croagunk's Poison Jab removed it, and Ducklett Protected a 4x lethal Thunderbolt. Ditto replaced Lotad and transformed into my Electrike. T2 Ducklett's Hurricane - now 100% accurate under its own partner's rain - one-shot the 50 HP Dry Skin Croagunk through its 2x Flying weakness, and Ditto's Flamethrower burned Timburr. T3 Corphish removed Ditto but a critical Hurricane removed Timburr. T4 Ducklett Protected both my attacks, including a second lethal Thunderbolt, while Tandemaus's Wide Lens Population Bomb hit six times and removed Electrike. T5 Tandemaus Protected a lethal Crabhammer behind a Follow Me. T6 Crabhammer finally removed Tandemaus but Population Bomb removed Pachirisu through Follow Me and Hurricane removed Corphish. T7 Mienfoo alone knocked Ducklett's Eviolite away and died to Hurricane. 3-6 LOSS.",
+      "why_lost": "Three of my six (Croagunk, Timburr, Mienfoo) were Fighting types and Hurricane is 2x on Fighting. Under Hydration Ducklett's own partner rain, Hurricane is 100% accurate, so the team's single best move had no drawback and no miss chance against half my party. That is a party-construction error on my side, not a level problem."
+    },
+    {
+      "attempt": 2,
+      "seed": 2016,
+      "outcome": "won",
+      "turns": 5,
+      "decisions": 10,
+      "player_faints": 4,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 59,
+      "ai_decision_seconds_max": 0.988,
+      "events": "work/playtest/06-BILLY/rerun-attempt-2-events.jsonl",
+      "rebuild_reason": "Removed every Flying weakness; added Growlithe SUNNY_DAY as the explicit weather-replacement counter from the crack list, Rockruff as a Flying-resistant Rock body, and a second Electric lane on Pachirisu.",
+      "narrative": "T1 Electrike's Thunderbolt removed Ducklett before it could act - the whole fight turns on this - while Lotad set rain and my own Shinx's Spark was redirected into my Electrike's Lightning Rod for a free +1 Sp.Atk. Ditto replaced Ducklett and copied Electrike. T2 Lotad's rain-boosted Muddy Water removed Shinx and Ditto's copied Life Orb Flamethrower removed my Electrike; the Choice Scarf then locked Ditto into Flamethrower for the rest of the battle. T3 Growlithe and Corphish came in; SUNNY_DAY replaced the rain, and Crabhammer took Ditto to 8. T4 Flare Blitz under sun removed Lotad (which correctly re-set Rain Dance the same turn), Corphish missed its Aqua Jet through a Muddy Water accuracy drop and died. T5 Population Bomb removed Growlithe; Rockruff's Rock Slide removed Ditto and critically hit Tandemaus. T6 Tandemaus used Encore on Rockruff and Pachirisu's Thunderbolt finished it. 4-4 win."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Lotad chooses Rain Dance only when Ducklett's next attack and its own rain turns repay it",
+      "result": "PASS",
+      "evidence": "Rain Dance on T1 in both attempts, and it paid immediately in attempt 1 (100%-accurate Hurricane, Swift Swim, boosted Muddy Water). In attempt 2 T4 it re-set Rain Dance the turn after my Sunny Day replaced it - correct weather-war play, not an idle reset - and it never re-set rain while rain was already up."
+    },
+    {
+      "check": "Turn two exploits rain instead of resetting it unnecessarily",
+      "result": "PASS",
+      "evidence": "Attempt 2 T2 and T3 Lotad used Muddy Water under its own rain rather than re-setting; the T2 one killed a 41 HP Shinx outright."
+    },
+    {
+      "check": "Ducklett Surf still hits Lotad despite its resistance; use a safe attack when ally damage loses the exchange",
+      "result": "PASS",
+      "evidence": "Ducklett selected Surf exactly once (attempt 2 T1, where it was KOed before it resolved) and otherwise chose Hurricane every time it attacked, which damages only my side. Attempt 1 T2/T3/T7 were all Hurricane while Lotad or Tandemaus stood beside it. The ally-damage decision the disposition asks for is being made correctly."
+    },
+    {
+      "check": "Ditto is a reactive reserve, not an arbitrary turn-one transformation",
+      "result": "PASS",
+      "evidence": "In both attempts Ditto entered only as the forced replacement for a fainted partner and immediately copied a live threat. In attempt 2 the copy of my Life Orb Electrike (including the +1 Sp.Atk my own Lightning Rod had just banked) killed my real Electrike. That is the authored 'favorable Ditto target' punishment working exactly as written, and it is a strong argument for keeping this species."
+    },
+    {
+      "check": "Tandemaus Population Bomb and Encore both function",
+      "result": "PASS",
+      "evidence": "Population Bomb hit 6 times (attempt 1 T4, attempt 2 T5) and 8 times with two criticals (attempt 1 T6, killing a 53 HP Pachirisu through Follow Me). Encore fired on attempt 2 T6 against Rockruff. Both authored moves selected."
+    },
+    {
+      "check": "Hydration is credited honestly",
+      "result": "NOT TESTED",
+      "evidence": "Ducklett was never statused, so Hydration never had a status to clear."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": "a1 T1",
+      "battler": "DUCKLETT",
+      "payoff": "Blocked a Life Orb Thunderbolt that is 4x on Water/Flying and was lethal. Large payoff - it then won the battle."
+    },
+    {
+      "turn": "a1 T4",
+      "battler": "DUCKLETT",
+      "payoff": "Blocked BOTH my attacks - Corphish's Crabhammer and a second lethal 4x Thunderbolt - while its partner Tandemaus used the same turn to remove Electrike with Population Bomb. The best single guard in the block."
+    },
+    {
+      "turn": "a1 T5",
+      "battler": "TANDEMAUS",
+      "payoff": "Blocked a rain-boosted Adaptability Crabhammer that was lethal from 42/42. Large payoff."
+    }
+  ],
+  "protect_ledger_note": "Three opponent Protects across the two attempts, all in attempt 1, every one of them denying a kill and two of them with partner conversion behind the guard. Zero empty guards. No opponent Protect at all in attempt 2, where the guards would have been worth less - Ducklett died on T1 and the remaining members were converting.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_improvements_observed": [
+    "This is the cleanest AI performance of the block: every Protect paid, the weather was set once and only re-set after I replaced it, Hurricane was preferred over ally-damaging Surf, Ditto's copy was punishing, and both of Tandemaus's authored moves fired.",
+    "Zero voluntary opponent switches across thirteen turns."
+  ],
+  "level_changes": "NONE. Lost attempt 1 outright 3-6 and won attempt 2 only 4-4 after rebuilding the party around the crack list. The brief cuts levels only after three lost optimized attempts; one loss plus a hard-won rebuild is a 'real fight', which is keep. The first pass's +1 on Ducklett and Tandemaus is emphatically validated - L15 Ducklett personally won attempt 1 and L14 Tandemaus killed two members through a Follow Me. If anything this is now the hardest fight in the opening block and I would not add to it.",
+  "levels_after": {
+    "LOTAD": 3,
+    "DUCKLETT": 3,
+    "DITTO": 0,
+    "TANDEMAUS": 2
+  },
+  "difficulty_note": "Flagging for the main agent: this is the first forced-ish Route 104 trainer and it beat a competently built, chronology-legal party. The previous receipt's '1 player faint' figure came from an illegal party containing Magearna and Iron Leaves and should not be used as evidence that Billy is easy.",
+  "cooler": "Yes, though the team is already the best-designed one in the block. Ditto at offset 0 is L12 and copies a L14 player battler, so the copy is strictly worse than the original in HP - which is the one thing that stops the Imposter punish from being genuinely frightening. It is already the cheapest member to raise. Recording only - no change in this pass.",
+  "authored_set_legality": "No legality problem found. Imposter, Swift Swim, Hydration, Wide Lens and the Choice Scarf lock on a transformed Ditto all behaved correctly."
+}

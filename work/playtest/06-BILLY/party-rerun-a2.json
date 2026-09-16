@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0006 TRAINER_BILLY; playtest rerun R1, cap 14, attempt 2 (rebuilt after losing attempt 1 3-6)",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR ROUTE 104. ELECTRIKE, SHINX, GROWLITHE, ROCKRUFF, CORPHISH = wild:Route103/land_mons; PACHIRISU = wild:Route102/land_mons. Every member is a base-form wild encounter from a route the player has already walked; Petalburg Woods species are excluded because the woods lie north of this battle. Nothing evolved, nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "REBUILD REASON: attempt 1 lost 3-6. Three of its six members were Fighting types and Hydration Ducklett Hurricane - 100% accurate under its own partner rain - is 2x on Fighting, so it simply swept. Attempt 2 removes every Flying weakness and doubles down on the two things that actually beat this team: Electric damage (4x on Water/Flying Ducklett) and weather replacement. GROWLITHE SUNNY_DAY is the explicit crack-list answer - it ends the rain, halves Surf/Muddy Water and puts Hurricane back to 70% accuracy. ROCKRUFF resists Flying and its Rock Slide is 2x on Ducklett. PACHIRISU keeps FOLLOW_ME on a Volt Absorb body and now carries Thunderbolt as a second Electric lane so the Ditto copy cannot simply out-trade me.",
+ "party": [
+  {
+   "species": "SPECIES_ELECTRIKE",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_FLAMETHROWER",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_LIGHTNING_ROD",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast special Electric breaker; its own LIGHTNING_ROD is an Electric immunity and its Thunderbolt is a single-target Electric redirection probe",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_SHINX",
+   "moves": [
+    "MOVE_SPARK",
+    "MOVE_CRUNCH",
+    "MOVE_ICE_FANG",
+    "MOVE_HELPING_HAND"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate plus a physical Electric lane",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_THUNDERBOLT",
+    "MOVE_NUZZLE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Follow Me redirection onto a Volt Absorb body, plus a second special Electric lane",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_ROCKRUFF",
+   "moves": [
+    "MOVE_ROCK_SLIDE",
+    "MOVE_SUCKER_PUNCH",
+    "MOVE_CRUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_STEADFAST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Rock body that resists Flying and Normal-neutral; Rock Slide is the spread and is super effective on Water/Flying",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_GROWLITHE",
+   "moves": [
+    "MOVE_FLARE_BLITZ",
+    "MOVE_WILD_CHARGE",
+    "MOVE_SUNNY_DAY",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Intimidate, and SUNNY_DAY is the weather replacement the crack list names - it ends rain, halves the opposing Water attacks and drops Hurricane back to 70% accuracy",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_CORPHISH",
+   "moves": [
+    "MOVE_CRABHAMMER",
+    "MOVE_AQUA_JET",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_ADAPTABILITY",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the block's biggest single hit plus priority and item removal",
+   "availability": "pool-14 wild:Route103/land_mons."
+  }
+ ]
+}

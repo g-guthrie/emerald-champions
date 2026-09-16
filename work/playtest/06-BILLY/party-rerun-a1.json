@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0006 TRAINER_BILLY; playtest rerun R1, cap 14, attempt 1",
+ "availability_audit": "CHRONOLOGY-LEGAL FOR ROUTE 104. Book play order: Route101 -> Oldale -> Route103 rival -> Littleroot send-off (Old Rod) -> Route102 -> Petalburg Gym -> west onto Route104, which is where this battle sits and which the player is walking now. CROAGUNK = wild:Route104/land_mons (this battle own route); ELECTRIKE, GROWLITHE, CORPHISH = wild:Route103/land_mons; MIENFOO = wild:Route101/land_mons; TIMBURR, PACHIRISU = wild:Route102/land_mons. Petalburg Woods species are deliberately excluded - the woods lie north of here and the player has not entered them yet. Nothing evolved, nothing fished, no legendary/mythical/Ultra Beast/Paradox species.",
+ "plan": "Billy is a rain team, so the answers are the ones the crack list names, built out of what Route 101-104 actually has. Grass/Electric pressure: ELECTRIKE Thunderbolt is 4x on Ducklett and its own Lightning Rod makes it immune to nothing Billy has, but it is the fastest breaker available. Water denial: CROAGUNK DRY_SKIN is a flat immunity to Surf, Muddy Water and Scald that HEALS instead - the single best answer to a rain team this early, and it also means Ducklett Surf hitting its own Lotad is the only ally-damage decision left on the board. Denying a favourable Ditto target: my two leads are a defensive Dry Skin body and a frail special attacker rather than my bulkiest sweeper. Speed control: Pachirisu Nuzzle paralyses a Swift Swim Lotad through rain.",
+ "party": [
+  {
+   "species": "SPECIES_CROAGUNK",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_POISON_JAB",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_KNOCK_OFF"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_DRY_SKIN",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "DRY_SKIN is a flat Water immunity that heals off the opposing Water attacks; Fake Out tempo, Poison Jab into Grass and Fairy",
+   "availability": "pool-14 wild:Route104/land_mons."
+  },
+  {
+   "species": "SPECIES_ELECTRIKE",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_FLAMETHROWER",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_LIGHTNING_ROD",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fast special Electric breaker; its own LIGHTNING_ROD is an Electric immunity and its Thunderbolt is a single-target Electric redirection probe",
+   "availability": "pool-14 wild:Route103/land_mons."
+  },
+  {
+   "species": "SPECIES_TIMBURR",
+   "moves": [
+    "MOVE_MACH_PUNCH",
+    "MOVE_POISON_JAB",
+    "MOVE_KNOCK_OFF",
+    "MOVE_ROCK_SLIDE"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_IRON_FIST",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Iron Fist priority, POISON_JAB as the super-effective answer to the Fairy core, Rock Slide spread",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_PACHIRISU",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_NUZZLE",
+    "MOVE_SUPER_FANG",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_VOLT_ABSORB",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    0,
+    0,
+    252
+   ],
+   "role": "Follow Me redirection, Nuzzle paralysis, Super Fang percentage damage; Volt Absorb is a genuine Electric immunity",
+   "availability": "pool-14 wild:Route102/land_mons."
+  },
+  {
+   "species": "SPECIES_MIENFOO",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_KNOCK_OFF",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_U_TURN"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_REGENERATOR",
+   "item": "ITEM_EVIOLITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Fake Out tempo, Knock Off item denial, Regenerator pivot",
+   "availability": "pool-14 wild:Route101/land_mons."
+  },
+  {
+   "species": "SPECIES_CORPHISH",
+   "moves": [
+    "MOVE_CRABHAMMER",
+    "MOVE_AQUA_JET",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_ADAPTABILITY",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "the block's biggest single hit plus priority and item removal",
+   "availability": "pool-14 wild:Route103/land_mons."
+  }
+ ]
+}
