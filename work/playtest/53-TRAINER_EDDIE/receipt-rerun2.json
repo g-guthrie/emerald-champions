@@ -1,0 +1,123 @@
+{
+  "play_order": 53,
+  "e_group": "E0056",
+  "trainer": "TRAINER_EDDIE",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle1",
+  "cap": 30,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass (agent R6). Pass 1 raised Dugtrio 0->1 and Carnivine 2->3 off a six-turn zero-faint clear, and flagged a turn-1 double-Protect defect. This is the one confirming run of those levels on the rebuilt ROM, and a re-test of that defect.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Dugtrio resolved at L29 and Carnivine at L31 (L28 and L30 in pass 1). Misdreavus L30 and Gligar L30 unchanged.",
+  "resolved_opponent_levels": {"DUGTRIO": 29, "MISDREAVUS": 30, "CARNIVINE": 31, "GLIGAR": 30},
+  "party_manifest": "work/playtest/53-TRAINER_EDDIE/party.json",
+  "party_chronology_note": "Reused unchanged from pass 1: Weavile, Gardevoir (Gardevoirite), Togekiss, Nidoking, Kartana, Magearna - all gates <= 30 in work/reference-pools/pool-30.json with every source map at or before Route 110. One declared reachable legend (Magearna) and one Mega (Gardevoir, evolved turn 1).",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/53-TRAINER_EDDIE/r1",
+      "seed": 53,
+      "outcome": "won",
+      "turns": 5,
+      "driver_turn_counter": 4,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames": [60, 60, 60, 40, 21, 21],
+      "ai_decision_seconds_max": 1.005,
+      "narrative": "T1 both opponents Protected on the same turn again (see R6-D6), blanking a Triple Axel and a Pixilate Hyper Voice and making no progress of their own. T2 Weavile out-sped Dugtrio (125 to 120) and a two-hit Triple Axel broke the Focus Sash and killed it in the same move, so the Rock Slide it had selected never resolved - identical to pass 1 despite the extra level; Misdreavus' Shadow Ball hit my Mega Gardevoir for 2x and took it from 90 to 36. T3 was Eddie's best turn: Carnivine's Rage Powder pulled BOTH of my attacks onto itself, losing its Sitrus to Knock Off and dying to the 2x Mystical Fire, but genuinely saving a 27 HP Misdreavus, which then KO'd my Mega Gardevoir with a second Shadow Ball. T4 Gligar entered and Protected away an Air Slash, while Knock Off (2x) removed Misdreavus and stripped its Eviolite. T5 a 4x Triple Axel ended Gligar. One player faint - the Mega, my best attacker - where pass 1 lost nothing."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Arena Trap actually holds the player in (new enforcement)",
+      "result": "PASS",
+      "evidence": "From turn 0 the driver reported Weavile with may_switch=false and switch_blocked_by ['ability_prevents_escape'], and it stayed blocked while Dugtrio was on the field. Worth noting for the mechanic's sake: my Gardevoir's Trace copied Misdreavus' Levitate at the start, which would have exempted it, but Mega Evolution replaced that with Pixilate and the driver correctly reported it as trapped from turn 1 onward. The trapping ability is enforced and is a real cost to the player."
+    },
+    {
+      "check": "Dugtrio's extra level buys it a turn",
+      "result": "FAIL",
+      "evidence": "At L29 it is still 5 points of base Speed behind a 125-Speed lead, and a two-hit Triple Axel broke the Focus Sash and killed it inside the same move, so its selected Earthquake/Rock Slide died with it for the second pass running. The level cannot win that race. What it did get this pass was a turn-1 Protect, which bought it one extra turn but no damage."
+    },
+    {
+      "check": "Carnivine's Rage Powder redirection works and its extra level lets it survive to use it",
+      "result": "PASS",
+      "evidence": "Turn 3 Rage Powder pulled a Knock Off and a 2x Mystical Fire off a 27 HP Misdreavus onto a 116 HP Carnivine. It cost Carnivine its Sitrus and its life, and it directly bought the knockout on my Mega Gardevoir the same turn. That is textbook redirection and the single reason this pass cost me a Pokemon where pass 1 did not."
+    },
+    {
+      "check": "Misdreavus is the damage the redirection protects",
+      "result": "PASS",
+      "evidence": "Two Shadow Balls (2x into a Psychic Mega Gardevoir) took my strongest attacker from 90 to 0, the second one only possible because Carnivine had absorbed the turn that would have killed it. It also correctly switched to Thunderbolt once Togekiss (Flying) replaced the Psychic target."
+    },
+    {
+      "check": "Gligar's Flying Gem Acrobatics",
+      "result": "FAIL - never acted offensively",
+      "evidence": "Entered on turn 4, spent its only real turn on Protect, and was KO'd by a 4x Triple Axel on turn 5. ACROBATICS, HIGH_HORSEPOWER and U_TURN have not been selected in either pass, so the Flying Gem has never been consumed. It arrives fourth into a decided board - the same ordering problem as Rattata, Krabby and Whimsicott elsewhere in my block."
+    },
+    {
+      "check": "Stun Spore disruption",
+      "result": "FAIL - never selected",
+      "evidence": "Carnivine chose Rage Powder (correctly) and Knock Off was never needed; MOVE_STUN_SPORE has not been selected in either pass."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "DUGTRIO",
+      "payoff": "PARTIAL - blocked a Triple Axel that, as turn 2 proved, was lethal to it, plus the spread half of a Hyper Voice. So it did deny a knockout. But it bought Dugtrio only one extra turn in which it did nothing, because it died to the same move the next turn anyway, and its partner guarded simultaneously so nothing was bought for the partner either. See R6-D6."
+    },
+    {
+      "turn": 1,
+      "battler": "MISDREAVUS",
+      "payoff": "PARTIAL - blocked the other half of the Pixilate Hyper Voice on a full-health 85 HP Eviolite body. Real damage denied, but small, and again with no partner payoff because the partner was guarding at the same time."
+    },
+    {
+      "turn": 4,
+      "battler": "GLIGAR",
+      "payoff": "REAL but small - an entry-turn Protect that blanked Togekiss' Air Slash on an 88 HP body. Defensible on entry against an unknown board; it did not, however, buy anything for a partner, because its partner was KO'd the same turn."
+    }
+  ],
+  "protect_ledger_note": "Three opponent Protects, none of them empty in the strict sense - every one blocked real damage. The problem is structural rather than per-guard: two of the three were entry-turn or simultaneous guards that bought a turn for the guarder without buying anything for the partner, which is what a guard in doubles is usually for.",
+  "ai_defects": [
+    {
+      "id": "R6-D6",
+      "turn": 1,
+      "trainer": "TRAINER_EDDIE",
+      "battler": "DUGTRIO and MISDREAVUS, simultaneously",
+      "board": "Turn 1, everything at full health. Dugtrio 68/68 (Focus Sash) and Misdreavus 85/85 (Eviolite) versus Weavile 91/91 and a Gardevoir that Mega Evolved that turn.",
+      "chosen": "MOVE_PROTECT on BOTH opponents in the same turn",
+      "problem": "This is the same defect pass 1 recorded on this trainer, and it is still present on the rebuilt ROM. Each guard individually blocked real damage, so neither is 'empty' - but the team spent its entire turn shielding and dealt zero damage, with no partner left unguarded to convert the bought turn into anything. The point of Protect in doubles is normally to buy the PARTNER a free action or to survive into a partner's payoff; when both slots guard at once, the trade is two opponent actions for two player actions in a fight where the opponent is the side that needs to make progress. It also gave me a free turn to work out the board.",
+      "better_action": "At most one guard. Dugtrio's Protect is the defensible one (Focus Sash plus a lethal incoming Triple Axel); Misdreavus should have used SHADOW_BALL into the freshly Mega-Evolved Gardevoir for 2x, which is the attack it used to kill it two turns later anyway.",
+      "scope_note": "For the AI owner: the guard expected-value forecast appears to be scored per-battler without a same-turn team term, so two battlers can independently conclude that shielding is correct and produce a turn with no offence at all. Recurrence is the key finding here - pass 1 flagged it, the pricing work since then cleared the empty guards on Hailey, Edmond, Johanna, Simon and the museum grunt, but the simultaneous-guard case survived. Affected-team index candidates: any pair where both members carry Protect, which is most authored doubles teams. Not fixing AI C code from this session."
+    }
+  ],
+  "ai_notes": [
+    "Turn 3 Carnivine's Rage Powder is the best single decision Eddie's team made and should be preserved exactly: it converted a dying redirector into a knockout on the player's Mega. The extra level pass 1 gave Carnivine is what let it be alive to do it.",
+    "Turn 4 Misdreavus switching from Shadow Ball to Thunderbolt the moment a Flying-type replaced the Psychic target is correct coverage selection.",
+    "Turn 2 Dugtrio's Rock Slide selection was the right move; it simply lost the speed race and the Focus Sash and the Pokemon died inside one multi-hit move.",
+    "Driver behaviour worth recording for other agents: Trace copied Levitate onto my Gardevoir, which would have exempted it from Arena Trap, but Mega Evolution replaced Levitate with Pixilate and the trap correctly applied from the next turn. The driver's switch_blocked_by tracked that change accurately.",
+    "AI decision timing peaked at 60 frames (1.005 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "level_changes_not_made": [
+    {
+      "member": "CARNIVINE",
+      "reason": "+1 in pass 1 and it converted completely - it survived to use Rage Powder and that redirection produced the fight's player faint. Nothing to add."
+    },
+    {
+      "member": "DUGTRIO",
+      "reason": "+1 in pass 1 and it converted nothing: it is still behind a 125-Speed lead and still dies inside one multi-hit move with its Focus Sash. A second level does not change either fact, and the brief says not to spend levels where they provably cannot convert."
+    },
+    {
+      "member": "MISDREAVUS",
+      "reason": "Untouched at offset 2 and it took my Mega Gardevoir. It is working; its one bad decision was the turn-1 guard, which is defect R6-D6."
+    },
+    {
+      "member": "GLIGAR",
+      "reason": "Untouched at offset 2. It has now never used an offensive move in two passes, but that is because it arrives fourth into a decided board, which is ordering rather than levels."
+    }
+  ],
+  "calibration": "KEEP - no level change, with the reason recorded explicitly. Won on the first attempt in five turns with one player faint, and that faint was my Mega Gardevoir - my best attacker - taken by a Rage-Powder-protected Misdreavus. That is a real fight and a clear improvement on pass 1's zero-faint six-turn clear, and Carnivine's pass-1 level is directly responsible. The reason I am not raising anyone despite the one-faint result: the opponent spent its ENTIRE first turn on a double Protect (R6-D6, recurring from pass 1) and dealt zero damage that turn. Adding levels now would be compensating for a logged AI defect, which the brief explicitly forbids. Recommend re-testing this encounter after the simultaneous-guard pricing is addressed, and calibrating then.",
+  "could_this_be_cooler": "Retain - the redirection concept is genuinely good and it is now demonstrably working. Levitate Carnivine holding Rage Powder next to a Levitate Misdreavus, behind an Arena Trap Dugtrio that stops the player from switching out of the trap, is a coherent and unusual doubles idea, and the Arena Trap enforcement on this build makes it bite for the first time. Two honest observations rather than proposals: Gligar is the team's fourth slot and has never taken an offensive action in two passes, so its Flying Gem has never been used - it would earn its place better as the lead, in front of the redirector, than as cleanup; and Stun Spore has never been chosen, so if Carnivine is only ever going to Rage Powder, that slot is doing nothing. Neither is a species/move/item change and neither was made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt (three are allowed only on a loss), same party manifest as pass 1. No teams-file change for this battle. Synthetic headless benchmark, not earned campaign play."
+}
