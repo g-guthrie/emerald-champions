@@ -1,0 +1,67 @@
+{
+  "play_order": 46,
+  "e_group": "E0049",
+  "trainer": "TRAINER_SIMON",
+  "class": "regular",
+  "location": "Route109_SeashoreHouse",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Pass 1 raised Prinplup 1->2 because it died on turn 1 having contributed only a Competitive proc it never got to spend, and the level was meant to let the Battery/Competitive partnership actually take a turn.",
+  "build": "work/agent-battle-build (headless ROM with the pass-1 level changes and the AI fixes)",
+  "level_change_verification": "Confirmed live: Prinplup resolved at L24 (was L23 in pass 1). Charjabug L25, Mudbray L24, Morelull L25 unchanged.",
+  "resolved_opponent_levels": {"PRINPLUP": 24, "CHARJABUG": 25, "MUDBRAY": 24, "MORELULL": 25},
+  "party_manifest": "work/playtest/46-TRAINER_SIMON/party.json",
+  "party_chronology_note": "Unchanged cap-24 core: Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana, all gate <= 24 in work/reference-pools/pool-24.json. No Mega used.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/46-TRAINER_SIMON/r1",
+      "seed": 52,
+      "outcome": "won",
+      "turns": 6,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "narrative": "T1 I deliberately avoided Moonblast so as not to hand Prinplup a Competitive boost; a critical 2x Earth Power took Charjabug to 18 and Air Slash flinched it, while Prinplup's Icy Wind hit both my leads at 2x. T2 Earth Power KO'd Charjabug and a second Icy Wind took Togekiss to -2 Speed and Enamorus to 5 HP. T3 I withdrew Enamorus for Kartana, which was immediately critically hit by Ice Beam down to its Focus Sash and then finished by Mudbray's Rock Slide. T4 Hoopa replaced it; a critical Psychic took Mudbray to 3 and Rock Slide plus Ice Beam KO'd the now-slowest Togekiss, whose Air Slash never resolved. T5 Magearna came in; Psychic KO'd Mudbray and Magician stole its Eviolite, and Flash Cannon finished the 3 HP Prinplup after it had spent five turns on speed control. T6 a +2 Flash Cannon KO'd the incoming Morelull at 2x before it could act."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Prinplup survives long enough to be the speed-control piece its level was bought for",
+      "result": "PASS",
+      "evidence": "At L24 it lasted from turn 1 to turn 5 and got five actions: Icy Wind on turns 1, 2 and 5 and Ice Beam on turns 3 and 4. It put Togekiss to -2 Speed, which is what got Togekiss killed on turn 4 with its Air Slash unresolved, and its critical Ice Beam on turn 3 is what stripped Kartana to its Focus Sash. In pass 1 it died on turn 1. This is the clearest level payoff in the block."
+    },
+    {
+      "check": "Competitive punishes a Sp.Atk drop",
+      "result": "NOT EXERCISED - deliberately",
+      "evidence": "I avoided Moonblast all battle precisely because its Sp.Atk drop hands Prinplup +2. The mechanic is real and it shaped my whole move selection, which is what a deterrent is supposed to do. Its Focus Sash also never came up, because it was never hit from full HP."
+    },
+    {
+      "check": "Battery Charjabug boosts its partner's special attacks",
+      "result": "PARTIAL",
+      "evidence": "Charjabug was alive for Prinplup's turn-1 and turn-2 Icy Winds, which are special, and those two turns did 39 and 33 to Enamorus. The ability produces no battle message, so the boost cannot be confirmed from the log alone; the damage is consistent with it. Charjabug itself used Spark (flinched away on turn 1) and Bug Bite."
+    },
+    {
+      "check": "Mudbray's Stamina and spread Rock Slide",
+      "result": "PASS",
+      "evidence": "Rock Slide on turns 3 and 4, hitting Togekiss at 2x both times and finishing it on turn 4, while being 0.5 into Kartana. Stamina raised its Defense when Hoopa's Psychic hit it on turn 4."
+    },
+    {
+      "check": "Morelull's Spore",
+      "result": "NOT EXERCISED",
+      "evidence": "It arrived at the end of turn 5 as the last member and was KO'd by a +2 2x Flash Cannon on turn 6 before taking an action. In pass 1 it Spored Togekiss and used two Protects; this run it never moved."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect this battle. In pass 1 Mudbray Protected a 2x Leaf Blade and Morelull Protected twice. This run Mudbray spent both of its turns on Rock Slide, which killed Togekiss, and Morelull never acted. Empty ledger is correct play here rather than a missing behaviour.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Worth watching, not a defect: Prinplup's Icy Wind is a spread move and Enamorus has Contrary, so every Icy Wind simultaneously slowed Togekiss and made Enamorus faster (Enamorus finished at +2 Speed). The AI kept selecting it anyway. On this board that was still correct - the same move did 39 and 33 damage and set up the Togekiss knockout - but a Contrary target on the far side of a spread stat-drop is a sharp edge for the new stat-drop pricing, and a board where the drop is the only value would expose it.",
+    "Turn 5 Prinplup at 3 HP chose Icy Wind (0.5 into Magearna) over Ice Beam. With no knockout available to it either way, taking the speed control was reasonable.",
+    "Turn 5 Mudbray at 3 HP chose High Horsepower into Hoopa for 42 rather than Protect. Correct: the guard would only have delayed a knockout it could not avoid."
+  ],
+  "level_changes": [],
+  "calibration": "Won on the first attempt in six turns but with two player faints (Togekiss and Kartana) where pass 1 cost one, and Enamorus survived at 5/77 and Hoopa at 29/94. Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' No level change. The pass-1 Prinplup level converted exactly as intended - it went from dying on turn 1 to controlling five turns of the battle - so this trainer is calibrated.",
+  "could_this_be_cooler": "No change wanted; this team improved more between passes than any other in the block. One observation for a later pass: Morelull is the designated Spore/Protect disruption piece and it now arrives last on a four-member team, so whether it does anything at all depends entirely on how long the first three survive. It was the battle's whole disruption plan in pass 1 and a zero-action bystander here. That is a send-order sensitivity rather than a set problem, and nothing was changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass: one attempt, same party manifest as pass 1, levels untouched. No teams-file change for this battle."
+}
