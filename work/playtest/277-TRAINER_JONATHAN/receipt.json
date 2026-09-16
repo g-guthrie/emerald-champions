@@ -1,0 +1,36 @@
+{
+  "play_order": 277,
+  "e_group": "E0434",
+  "trainer": "TRAINER_JONATHAN",
+  "class": "ace",
+  "location": "Route132",
+  "cap": 84,
+  "cap_source": "driver level_cap from the ROM (dossier prose still says 'cap 76' and is stale)",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/277-TRAINER_JONATHAN/party_route132_84.json",
+  "availability_note": "Routes 132-134 are sailed after Mossdeep with Dive earned, Sootopolis not entered. Party uses only gate<=68 pool-84 entries (Incineroar 36, Urshifu-S 42, Amoonguss 42, Landorus 42, Tapu Fini 60, Flutter Mane 68); no gate-84 Underwater/Seafloor species. Landorus and Tapu Fini are reachable legends per the brief and are noted as such.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/277-TRAINER_JONATHAN/a1", "seed": 1, "outcome": "won", "turns": 5, "decisions": 7, "player_faints": 1, "opponent_faints": 4}
+  ],
+  "strategy_checks": [
+    {"check": "Aerodactyl selects Tailwind in the first two turns", "result": "PASS", "evidence": "T1 Aerodactyl chose MOVE_TAILWIND (flinched by Fake Out); T2 it chose Tailwind again and it resolved - 'A tailwind started blowing on the opposing side!'"},
+    {"check": "Rampardos attacks under Sheer Force while the support sets up", "result": "PASS (untested payoff)", "evidence": "T1 Rampardos chose Rock Slide at battler 0; it was KOed by Close Combat before the move resolved, so no Sheer Force / Life Orb recoil-cancel damage was observed."},
+    {"check": "Base Sableye uses Prankster support before the Mega transition", "result": "PASS", "evidence": "T2 base Sableye used priority Fake Out on Urshifu (flinch denied my attack); T3 it Mega Evolved into Mega Sableye with Magic Bounce and from then on moved at normal speed (Will-O-Wisp resolved after Wicked Blow)."},
+    {"check": "Mega transition timed so Prankster is spent first, not wasted", "result": "PASS", "evidence": "The AI held the Mega until after Fake Out was used, exactly the 'deliberate Mega transition' the plan describes."},
+    {"check": "Will-O-Wisp burns a physical attacker", "result": "PASS", "evidence": "T3 Will-O-Wisp burned Urshifu; the halved Attack is what let Mega Sableye survive the follow-up Wicked Blow and Recover."},
+    {"check": "Sawsbuck's Sap Sipper / Clear Amulet matter", "result": "NOT EXERCISED", "evidence": "I deliberately brought no Grass move and Clear Amulet blocked nothing because Incineroar's Intimidate had already fired before Sawsbuck entered."},
+    {"check": "Mega Sableye uses Recover at a sensible threshold", "result": "PASS", "evidence": "T4 at 101/290 it used Recover back to full while its partner Sawsbuck traded a KO."}
+  ],
+  "protect_ledger": [
+    {"turn": "all", "entry": "No opponent used Protect in this battle. Rampardos, Aerodactyl and Sawsbuck each carry Protect and never selected it; the AI attacked or set Tailwind instead, which was correct every time because it was never facing a predictable lethal it could stall out."}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "RAMPARDOS", "before": 1, "after": 2, "why": "It never landed a hit: at offset 1 it is L83 with 280 HP and dies to one Intimidated Close Combat before the Tailwind it depends on is even up. The whole concept needs it to survive to turn 2."},
+    {"member": "AERODACTYL", "before": 1, "after": 2, "why": "Two Dark attacks removed it on turn 3 with its Focus Sash knocked off, one turn after the Tailwind landed. A durability step lets the speed window actually be spent."}
+  ],
+  "level_changes_unverified": "Level changes cannot be re-verified until the main agent rebuilds the headless ROM; the reported attempt was played at the pre-change offsets (Rampardos/Aerodactyl L83).",
+  "most_worth_rerunning": "E0434 attempt at the new offsets - specifically whether Rampardos survives an Intimidated super-effective Fighting hit on turn 1, which is the single fact the whole Tailwind concept rests on.",
+  "cooler": "The fight works and the base-Prankster-then-Mega sequencing is genuinely nice to watch the AI perform. The concept's real gap is that Tailwind arrives a turn after Rampardos is already dead, so the player never has to respect the speed window. Nothing here needs a species change; what it wants (not in this pass) is Rampardos holding something that buys the first turn - the dossier's own Focus Sash idea belongs on the glass cannon rather than on the setter that survives anyway.",
+  "authored_set_legality": "No legality problem found. All four sets materialized and played as written; Mega Sableye correctly lost Prankster on evolving and its Sablenite correctly resisted Knock Off."
+}
