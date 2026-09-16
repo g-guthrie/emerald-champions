@@ -1,0 +1,47 @@
+{
+  "play_order": 185,
+  "e_group": "E0274",
+  "trainer": "TRAINER_FREDRICK",
+  "class": "ace",
+  "location": "Route123",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "Resolved levels: Aegislash/Comfey/Milotic (all +1) at L53, Tyranitar (+2) at L54 = cap 54 + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/185-TRAINER_FREDRICK/party_b54_fredrick.json"],
+  "attempts": [
+    {"n": 1, "seed": 1, "party": "party_b54_fredrick.json (Incineroar/Mamoswine lead)", "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+     "why": "Fake Out denied Trick Room on turn 1 and focused fire removed Comfey on turn 2 before it could try a third time; Mega Gardevoir's 2x Hyper Voice then removed Mega Tyranitar and Milotic, and Heat Wave closed on a Spored Aegislash. Lost Mamoswine to a Blade-form Flash Cannon and Mega Gardevoir to Shadow Ball plus sand chip."}
+  ],
+  "strategy_checks": [
+    {"check": "Comfey sets Trick Room", "result": "SELECTED BUT NEVER LANDED", "evidence": "Trick Room chosen on turn 1 (flinched by Fake Out) and again on turn 2 (KOed by Flare Blitz before the -7 priority move resolved). The AI's priorities were right; the set is simply fragile to Fake Out plus focus fire. Trick Room was never up at any point."},
+    {"check": "Aegislash Stance Change and King's Shield cycle", "result": "PASS", "evidence": "Best-executed tactic in the block. King's Shield turn 1 blocked a 2x High Horsepower and dropped Mamoswine to -1 Atk; turn 3 blocked both a Flare Blitz and a Hyper Voice and dropped Incineroar to -1 Atk; Blade form Flash Cannon OHKOed Mamoswine (200) on turn 2 and Shadow Ball removed Mega Gardevoir on turn 5. Form reverted to Shield correctly after each guard."},
+    {"check": "Aegislash uses Wide Guard against spread moves", "result": "FAIL", "evidence": "Never chosen. See AI defect E0274-1."},
+    {"check": "Tyranitar Sand Stream and Mega Evolution", "result": "PASS", "evidence": "Sandstorm on entry turn 2, Mega Evolution turn 3, and Rock Slide hit both player slots on turns 3 and 4. Sand chip on Gardevoir, Amoonguss and Incineroar was real pressure."},
+    {"check": "Milotic Competitive / Haze / Recover as the stat-control answer", "result": "PARTIAL", "evidence": "Recover on turn 5 only. Haze never chosen and Competitive never triggered, because nothing on my side lowered its stats. Milotic died to a critical Hyper Voice before showing anything else."},
+    {"check": "Comfey Triage priority healing / Helping Hand", "result": "NOT OBSERVED", "evidence": "Comfey only ever selected Trick Room before it fainted."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Aegislash (King's Shield)", "payoff": "blocked a 2x High Horsepower and cut Mamoswine to -1 Attack"},
+    {"attempt": 1, "turn": 3, "battler": "Aegislash (King's Shield)", "payoff": "blocked both a 2x Flare Blitz and a Hyper Voice and cut Incineroar to -1 Attack; also returned Aegislash to Shield form out of the exposed Blade form"},
+    {"attempt": 1, "turn": 4, "battler": "Aegislash (King's Shield)", "payoff": "marginal - it blocked only the resisted half of a Hyper Voice that was aimed at Tyranitar. A third consecutive guard is the one genuinely risky choice in the run, and it is also the turn Wide Guard would have saved its partner."}
+  ],
+  "protect_summary": "3 opponent guards, all King's Shield, on three consecutive turns. Two had large payoffs including the Attack drop, the third was near-empty. No plain Protect was used by the team (Tyranitar carries it and never chose it), and no guard was wasted at full health against nothing.",
+  "ai_defects": [
+    {
+      "id": "E0274-1",
+      "severity": "medium",
+      "turns": "a1 turn 3 (and again turn 4)",
+      "board": "Aegislash L53 176/176 Shield form, partner Mega Tyranitar L54 222/222. Opposite: a Mega Gardevoir with Pixilate that had already been seen and a Fire-type Incineroar. Gardevoir selected Hyper Voice, a spread move, which is 2x on Tyranitar.",
+      "chosen": "MOVE_KINGS_SHIELD (self-protect only)",
+      "outcome": "Aegislash was safe, but Hyper Voice hit Mega Tyranitar for 120 of its 222 HP, and the same thing on turn 4 finished it. Tyranitar is the ace and it died to two spread hits.",
+      "better_action": "MOVE_WIDE_GUARD. It is in Aegislash's authored four moves for exactly this, and against a revealed Pixilate spread attacker it would have protected the ace both turns. King's Shield only ever guards one slot. The AI appears to score Wide Guard purely as a self-protect and therefore always below King's Shield, which additionally lowers the attacker's Attack, so the ally-protecting move is never reachable.",
+      "note": "Reported only. No AI C code was touched. Wide Guard appears on several teams, so this is worth tracing as a shared scoring issue rather than a one-team fix."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on the first attempt but with two player faints including the Mega, plus constant sand chip - that is the 'real fight' band, not the 0-1 faint +1 trigger. Raising levels here would also paper over the Wide Guard defect rather than fix it; the honest note is that this team gets meaningfully harder once Wide Guard actually fires.",
+  "cooler": "Keep. Aegislash plus Comfey Trick Room under a Brave Mega Tyranitar is a real competitive archetype and the Aegislash play was the sharpest AI in this block. Two concrete improvements. First, Trick Room on Comfey is the entire plan and Comfey is the single easiest target on the field: Fake Out denied it twice. Mental Herb or a Focus Sash in place of Sitrus would make the Trick Room turn actually happen, and the whole team becomes far scarier once Brave Tyranitar moves first. Second, Milotic's Haze is dead weight against a team that does not set up; Icy Wind in that slot would give the squad a second, non-Trick-Room way to fix its Speed.",
+  "legality_notes": "No legality problem in the authored set.",
+  "verification_limit": "No level change was made for this battle."
+}
