@@ -39,15 +39,14 @@ AI_SINGLE_BATTLE_TEST("EC single scorer: sleep on a healthy threat beats the chi
         }
     } WHEN {
         TURN {
-            MOVE(player, MOVE_BITE);
+            // Bite's flinch is what was swallowing the Spore: EXPECT_MOVE
+            // matches the chosen command, so a flinched sleeper still looked
+            // like it had moved. Hold the secondary off and the powder lands.
+            MOVE(player, MOVE_BITE, secondaryEffect: FALSE);
             EXPECT_MOVE(opponent, MOVE_SPORE);
         }
     } THEN {
-        // The subject is what the scorer is willing to spend the turn on. That
-        // the sleep itself lands is covered in doubles by
-        // "EC setup pricing: sleep on a healthy threat is worth the turn";
-        // this single-battle board does not resolve the status, which is worth
-        // a separate look at the powder path rather than a weaker assertion here.
+        EXPECT(player->status1 & STATUS1_SLEEP);
         EXPECT(opponent->hp > 0);
     }
 }
