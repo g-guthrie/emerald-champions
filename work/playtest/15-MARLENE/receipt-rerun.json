@@ -37,8 +37,8 @@
     },
     {
       "check": "Gothita's Shadow Tag traps the player's active",
-      "result": "PASS (partially) - the trap is real and reported",
-      "evidence": "On the turn-0 decision, the right-hand player battler (b2, Shiftry) reported may_switch=false and switch_slots=[], i.e. trapped, while Gothita was on the field. That is Shadow Tag working. Caveat: the left-hand battler (b0, Heracross) reported may_switch=true with switch_slots [2,3,4,5] on the same turn, which is inconsistent for a Shadow Tag board; I did not attempt the switch to see whether act would have rejected it, so I cannot say whether that is the documented may_switch reading trap or a real asymmetry. Flagged below."
+      "result": "INCONCLUSIVE - the reported trap was the driver's known reading trap, not Shadow Tag",
+      "evidence": "On the turn-0 decision the right-hand player battler (b2) reported may_switch=false and switch_slots=[] while Gothita was on the field, which I first read as Shadow Tag. CORRECTION after playing the rest of the block: the identical may_switch=false / switch_slots=[] appears on b2 at turn 0 in every battle of this block, including Joey, Jose, Clark, Johnson and Jerry, none of which has a trapping ability. It is the reading trap documented in docs/VERIFICATION.md, not Shadow Tag. Gothita's Shadow Tag therefore remains untested: it died on turn 1 and I never attempted a switch while it was alive."
     },
     {
       "check": "Slowpoke Yawn opens a sleep threat",
@@ -109,15 +109,15 @@
     },
     {
       "id": "E0019-SHADOWTAG-MAYSWITCH-ASYMMETRY",
-      "severity": "low",
+      "severity": "withdrawn",
       "turn": 0,
       "observed": "With Gothita (Shadow Tag) on the field, pending_decision reported may_switch=false / switch_slots=[] for player battler 2 but may_switch=true / switch_slots=[2,3,4,5] for player battler 0.",
-      "assessment": "This may be the exact reading trap documented in docs/VERIFICATION.md, or a genuine asymmetry in how Shadow Tag is applied to the two player slots. I did not spend an attempt probing it. Capture-worthy if it recurs on another Shadow Tag or Arena Trap board; the run directory is preserved."
+      "assessment": "WITHDRAWN. The same b2 may_switch=false / switch_slots=[] at turn 0 occurs in every battle of this block regardless of the opponent's abilities (verified on E0020 Joey, E0021 Jose, E0023 Clark, E0023 Johnson and E0026 Jerry). This is the turn-0 reading trap already documented in docs/VERIFICATION.md and has nothing to do with Shadow Tag. No asymmetry to report."
     }
   ],
   "level_changes": [],
   "level_rationale": "Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' Two of my six died and both faints were bought by the trainer's own authored engine now that Trick Room fires. The pass-1 bumps (GOTHITA 2->3, SLOWPOKE 3->4) stand and no further change is made, which keeps this member inside the +-2 total cap with room to spare.",
   "cooler_note": "The pass-1 complaint is half-answered by the AI fix: the room is no longer a bluff, it fires and it wins turns. What is still true is that the room has exactly one setter and no renewal, and that four Psychic-or-Psychic-adjacent members all fold to a single Dark attacker - one Knock Off user took two of them from full HP. Suggestions for a later pass, not applied here: (1) give Baltoy Trick Room in place of Ice Beam so the prose's 'reserve Trick Room' is real; (2) replace one of the three surplus Psychics with a partner that does not share the Dark weakness, so that Shadow Tag - the coolest thing on this team - traps the player next to something that actually punishes them.",
   "authored_set_legality": "Clean, with one authoring gap already noted: the block is tagged strategy: TRICK_ROOM and the prose promises a reserve room, but only Spoink carries the move. Not a legality error.",
-  "not_finished": "Slowpoke's Yawn and Gothita's Fake Tears are still unobserved across two passes; both members die too fast to reach their support turn. Gothita's Shadow Tag trap was reported but never exercised against an actual switch attempt."
+  "not_finished": "Slowpoke's Yawn and Gothita's Fake Tears are still unobserved across two passes; both members die too fast to reach their support turn. Gothita's Shadow Tag was never exercised against an actual switch attempt - see the corrected strategy check."
 }
