@@ -1,0 +1,99 @@
+{
+  "play_order": 17,
+  "e_group": "E0021",
+  "trainer": "TRAINER_JOSE",
+  "class": "regular",
+  "location": "Route116",
+  "cap_window": 14,
+  "pass": "rerun (pass 2) after the +1 on Beautifly from pass 1 and the opponent-AI setup/support pricing fix",
+  "outcome": "WON on attempt 1, 8 turns, 3 player faints - the hardest fight in this block. Levels KEPT.",
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_manifest_note": "New chronology-checked party; the pass-1 party used Seaspray Cave, Verdanturf Meadow and Altering Cave species that a player has not reached at Route 116.",
+  "run_dir": "work/playtest/17-JOSE/r1",
+  "opponent_levels_medium": "BEAUTIFLY 15, VENONAT 16, DUSTOX 16, KRICKETUNE 16 (cap 14; offsets 3/4/4/4)",
+  "attempts": [
+    {
+      "seed": 5717,
+      "outcome": "won",
+      "turns": 8,
+      "decisions": 10,
+      "player_faints": 3,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.021,
+      "player_faint_detail": "Shiftry to Beautifly's Bug Buzz on turn 1 (Bug is 4x on Grass/Dark - my build error, and the AI found it immediately). Cloyster and Tangrowth to consecutive Kricketune Fell Stingers on turns 7 and 8, each of which was a genuine knockout and each of which raised its Attack three stages. Kricketune finished the battle at +6 Attack having eaten two of my six.",
+      "note": "This went from a 5-turn, 1-faint walkover in pass 1 to a fight I won with three of six standing and only because Mystical Fire is 2x on a Bug. Venonat's Compound Eyes Sleep Powder put three different Pokemon to sleep."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Venonat's Rage Powder protects the setup partner",
+      "result": "NOT USED this pass (it PASSED in pass 1)",
+      "evidence": "Venonat chose Struggle Bug (turn 1), Protect (turns 2 and 5) and Sleep Powder (turns 3, 4 and 6). Rage Powder never appeared. Declining it was mostly right: my left-hand battler was a powder-immune Grass type for the second half of the fight, and by the time the fireflies needed protecting Beautifly was already at 1 HP. Recorded as no-opportunity rather than a failure, and pass 1 already demonstrated the redirection working correctly including the Grass-immunity bypass."
+    },
+    {
+      "check": "Venonat's Compound Eyes Sleep Powder actually lands",
+      "result": "PASS - new this pass, and it nearly won the battle",
+      "evidence": "Turn 3 Sleep Powder put Heracross to sleep, turn 4 put Arcanine to sleep, turn 6 put Cloyster to sleep. Three separate sleeps off a 6 HP body. At one point BOTH of my active Pokemon were asleep at once and I had to double-switch out of it, which handed Jose two free turns. In pass 1 Sleep Powder never fired at all. This is the single most visible improvement from the setup/support pricing change: a sleep that persists is now worth a turn."
+    },
+    {
+      "check": "Beautifly gets a safe Quiver Dance behind the powder",
+      "result": "FAIL - never fired, second pass running",
+      "evidence": "Beautifly chose MOVE_BUG_BUZZ on turn 1 and MOVE_AIR_CUTTER on turn 2 before dying. Quiver Dance never appeared. Unlike pass 1 this is defensible on the merits: the turn-1 Bug Buzz was 4x on Shiftry and killed it outright, which is plainly better than a boost, and by turn 2 Beautifly was at 1 HP behind a spent Focus Sash and had no safe turn left. The move is still unobserved across two passes, but I would not call the choices wrong here."
+    },
+    {
+      "check": "Dustox supplies the alternate Tailwind window",
+      "result": "PASS - resolved this time",
+      "evidence": "Turn 3: 'The opposing Dustox used Tailwind! A tailwind started blowing on the opposing side!' and SIDE_STATUS_TAILWIND held through turns 3-6. In pass 1 Dustox chose Tailwind and was killed before it moved; here it got the move off and its side outsped me for four turns, which is how Venonat landed two of its three sleeps. Tailwind is no longer flag-gated and it is being taken on the board that actually wants it."
+    },
+    {
+      "check": "Kricketune's Fell Stinger earns the Attack boost only on a genuine knockout",
+      "result": "PASS - twice, and correctly refused once",
+      "evidence": "Turn 6: Fell Stinger into a healthy Cloyster did NOT knock out and no boost message appeared. Turn 7: Fell Stinger killed Cloyster and 'The opposing Kricketune's Attack rose drastically!' (+3). Turn 8: Fell Stinger killed Tangrowth, another +3. The boost fired on exactly the genuine knockouts and on nothing else."
+    },
+    {
+      "check": "Kricketune's Knock Off is a useful direct action when a finishing hit is unavailable",
+      "result": "PASS",
+      "evidence": "Turn 5: Kricketune knocked off Cloyster's Focus Sash on the turn Cloyster switched in - which is precisely what made the turn-7 Fell Stinger a kill rather than a Sash survival. The two moves were sequenced correctly by the AI without any scripting."
+    },
+    {
+      "check": "Kricketune Taunt",
+      "result": "NOT USED",
+      "evidence": "Never selected. Reasonable: Tangrowth and Sylveon were both attacking every turn and had no status move worth taunting, and Kricketune's damage was clearly its best action once it was at +3."
+    },
+    {
+      "check": "The authored crack (powder immunity, spread damage, priority, denying the finishing target)",
+      "result": "PASS - and I needed all of it",
+      "evidence": "Rock Slide is 4x on Beautifly and 2x on the other three; Grass-type Tangrowth was completely immune to Sleep Powder and Rage Powder and was the only thing that stopped the sleep chain; Extreme Speed's priority took Dustox out before it could act again; Mystical Fire (2x) finished a +6 Kricketune. Every single documented counterplay line was load-bearing."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 2,
+      "battler": "VENONAT (6/60, no item, already Knocked Off)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - the best guard in the block. It blocked BOTH Arcanine's Extreme Speed and Heracross's Rock Slide, either of which was lethal from 6 HP. Venonat then survived four more turns and landed three Sleep Powders. One Protect turned a dead 6 HP body into the member that nearly won Jose the battle."
+    },
+    {
+      "turn": 5,
+      "battler": "VENONAT (6/60)",
+      "action": "MOVE_PROTECT",
+      "payoff": "EMPTY. I double-switched that turn and threw no attack at all, so Protect denied nothing. It cost Venonat a Sleep Powder on one of my two switch-ins. Defensible at decision time from 6 HP, but it is a real empty guard and it is recorded as one."
+    }
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    {
+      "id": "E0021-QUIVERDANCE-STILL-UNSEEN",
+      "severity": "low",
+      "turn": 1,
+      "board": "Beautifly 55/55 with a Focus Sash, partner Venonat 60/60 with Rage Powder available.",
+      "chosen_action": "MOVE_BUG_BUZZ into Shiftry - a 4x hit that killed it outright.",
+      "assessment": "NOT a defect this pass. Killing a Pokemon on turn one beats a boost by any honest measure, and the pricing change is supposed to prefer the direct result when it is this large. Recorded only so the block's history is accurate: Quiver Dance has now gone unobserved in two passes, but for different and increasingly legitimate reasons."
+    }
+  ],
+  "level_changes": [],
+  "level_rationale": "Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' Three of my six died, a 6 HP Venonat controlled four turns of the battle through sleep, Tailwind went up and held, and Kricketune finished at +6 Attack off two genuine Fell Stinger knockouts. The pass-1 bump (BEAUTIFLY 2 -> 3) stands; nothing further is warranted and nothing should be taken off either.",
+  "cooler_note": "Pass 1 said this team was a good concept that a single Fire attacker answered. That is still structurally true - Mystical Fire is what ended it - but the fight is now genuinely interesting because the support half works: Compound Eyes Sleep Powder from a 6 HP body, a Tailwind that holds, and a finisher that converts knockouts into a +6 Attack stat. Dustox is still the most redundant slot on paper, but its Tailwind resolving this pass is the difference between the old walkover and this fight, so I withdraw the pass-1 suggestion to replace it. The remaining suggestion for a later pass, not applied here: Beautifly is the only member the plan describes as a setup piece and it is also the one that never gets a safe turn; swapping its Focus Sash for something that survives a neutral hit, or leading it behind Venonat instead of beside it, would let Quiver Dance actually happen.",
+  "authored_set_legality": "Clean. All four sets resolve at cap 14; Compound Eyes, Shield Dust, Swarm, Technician, the Black Sludge and both Focus Sashes were all present and behaved correctly.",
+  "not_finished": "Quiver Dance and Kricketune's Taunt remain unobserved across two passes. Rage Powder fired in pass 1 but not this one."
+}
