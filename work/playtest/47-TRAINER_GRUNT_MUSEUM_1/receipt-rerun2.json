@@ -1,0 +1,111 @@
+{
+  "play_order": 47,
+  "e_group": "E0050",
+  "trainer": "TRAINER_GRUNT_MUSEUM_1",
+  "class": "grunt",
+  "location": "SlateportCity_OceanicMuseum_2F",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass 2 (agent R6). The rerun-1 pass raised Carvanha 4->5 after it had taken zero actions in two passes. This is the one confirming run of that level on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Carvanha resolved at L27 (L26 in the rerun-1 pass). Alolan Rattata L27, Wailmer L26 and Zubat L26 unchanged.",
+  "resolved_opponent_levels": {"RATTATA_ALOLA": 27, "WAILMER": 26, "ZUBAT": 26, "CARVANHA": 27},
+  "party_manifest": "work/playtest/47-TRAINER_GRUNT_MUSEUM_1/party.json",
+  "party_chronology_note": "Reused unchanged: the cap-24 core (Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana), all gates <= 24 in work/reference-pools/pool-24.json, all source maps at or before the Oceanic Museum. One declared reachable legend (Enamorus); no Mega. Identical to the party of both earlier passes.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/47-TRAINER_GRUNT_MUSEUM_1/r2",
+      "seed": 53,
+      "outcome": "won",
+      "turns": 4,
+      "driver_turn_counter": 3,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "ai_decision_frames": [62, 62, 23, 23],
+      "ai_decision_seconds_max": 1.038,
+      "narrative": "T1 Follow Me pulled Wailmer's Hydro Pump onto the bulky Togekiss (31) instead of Enamorus, while a 2x Moonblast one-shot the L27 Alolan Rattata before its selected Super Fang resolved - the third pass in a row in which Rattata dies without acting. T2 I withdrew Enamorus for Magearna; Zubat's Poison Fang was aimed at Enamorus and hit the Poison-immune Steel switch-in for nothing, Air Slash halved Zubat, and Wailmer's Hydro Pump critically hit Magearna for 35 through its Sitrus. T3 Zubat, at 28/65, used Reckless-free Brave Bird into that same Steel/Fairy Magearna at 0.5x and took recoil (see defect R6-D2) before Air Slash KO'd it; Wailmer's second Hydro Pump took Magearna from 59 to 5 and a +1 Thunderbolt (2x) finally removed the 128 HP Wailmer. T4 I pulled the 5 HP Magearna for Kartana; Carvanha at L27 got its first action in three passes - Liquidation into Kartana at 0.25x for 21 with a Defense drop, plus Life Orb recoil - and Air Slash KO'd it. Zero player faints, but Magearna finished on 5/94 and three of my six were never sent out."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Carvanha's extra level buys it an action",
+      "result": "PASS (narrowly)",
+      "evidence": "At L27 with 69 HP it survived its entry turn and used Liquidation - the first action it has taken in three passes, where at L26 it was KO'd by a single unboosted Air Slash before acting. The level did exactly what it was bought for. Speed Boost still never turned over, because the action was also its last."
+    },
+    {
+      "check": "Alolan Rattata's Super Fang",
+      "result": "FAIL - never acted, third pass running",
+      "evidence": "Selected MOVE_SUPER_FANG on turn 1 and was KO'd by a 2x Moonblast from full 78 HP before it resolved, identically to both earlier passes. At offset 5 / L27 it is the joint-highest-level member of the team and it has now never taken an action in twelve sampled turns. Taunt has likewise never been seen."
+    },
+    {
+      "check": "Wailmer anchors the fight",
+      "result": "PASS - emphatically",
+      "evidence": "At L26 with 128 HP it acted on every one of its three turns and was the only real threat in the battle: Hydro Pump onto Togekiss (31), a critical Hydro Pump onto Magearna (35, through Sitrus) and a third that took Magearna from 59 to 5. It came within a few points of the fight's first player faint. Its pass-1 level is fully converted."
+    },
+    {
+      "check": "Zubat gets to use its disruption kit (Taunt, U-turn)",
+      "result": "FAIL",
+      "evidence": "Two actions, both attacks: Poison Fang (into a Poison immunity my switch created - not its fault) and Brave Bird into a 0.5x resist with recoil at 28/65 (its fault - see R6-D2). MOVE_TAUNT and MOVE_U_TURN have not been selected once in three passes, so the team's only disruption piece has never disrupted anything."
+    },
+    {
+      "check": "Wailmer discriminates between spread and single-target",
+      "result": "NOT TESTED this pass",
+      "evidence": "It chose single-target Hydro Pump on all three turns, which was correct every time - it was always trying to remove one specific body. The spread Icy Wind that the rerun-1 pass praised did not come up because the fight never presented two healthy targets worth slowing. No fault."
+    },
+    {
+      "check": "Any opponent Protect",
+      "result": "NONE SELECTED",
+      "evidence": "No opponent used Protect in this battle at all, where pass 1 and the rerun-1 pass each logged an empty Wailmer Protect on turn 2. On this one sample the empty guard the earlier passes flagged did not recur."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opponent Protects in four turns. This is the first pass on this team with no guard at all, and notably no empty one: the turn-2 Wailmer Protect that both earlier passes recorded as empty was replaced by a Hydro Pump that critically hit for 35. That is a clear improvement and the best evidence in my block that the guard pricing change is landing.",
+  "ai_defects": [
+    {
+      "id": "R6-D2",
+      "turn": 3,
+      "trainer": "TRAINER_GRUNT_MUSEUM_1",
+      "battler": "ZUBAT (28/65, Eviolite, Inner Focus)",
+      "board": "Zubat 28/65 and Wailmer 128/128 versus Togekiss 66/97 (Fairy/Flying) and Magearna 59/94 (Steel/Fairy).",
+      "chosen": "MOVE_BRAVE_BIRD targeting Magearna",
+      "problem": "Brave Bird is 0.5x into Steel/Fairy and 1x into Togekiss, so the AI picked the resisting target over the neutral one - and Brave Bird carries recoil, on a 28 HP body. It did chip damage, took recoil, and died to Air Slash on the same turn. Two strictly better options were on the sheet: U_TURN (no recoil, pivots the 28 HP body out for the healthy Carvanha) or TAUNT (shuts off my Follow Me/Protect/Tailwind, which is the disruption role Zubat is on this team to play).",
+      "better_action": "MOVE_U_TURN, or MOVE_BRAVE_BIRD aimed at Togekiss if it was going to attack at all.",
+      "scope_note": "Two separate sub-issues for the AI owner: (a) recoil-move target selection preferring a resist over an available neutral target, and (b) a low-HP pivot declining U-turn. Affected-team index candidates: every team with a recoil attacker (Staravia on E0043 next door, Doduo on E0064, Quaxwell on E0067) and every U-turn/Volt Switch pivot at low HP. Not fixing AI C code from this session."
+    }
+  ],
+  "ai_notes": [
+    "Turn 2 Zubat's Poison Fang resolving into a Poison-immune Magearna is NOT a fault: it was aimed at Enamorus (2x) at turn start and my switch put the Steel in the way. Same event logged in both earlier passes.",
+    "Wailmer's three Hydro Pumps were all correctly aimed at the body that would break first, and the choice of Hydro Pump over the spread Icy Wind was right on every one of those boards. The best-played member on this team.",
+    "Carvanha's single action, Liquidation into a Grass/Steel that takes Water at 0.25x, was the wrong move on the sheet - CRUNCH is 1x into Kartana and Liquidation is 0.25x. It is a one-sample observation on a battler that had never acted before, and Kartana had only just switched in, so I am not raising it to a defect; but it is the second questionable target/move choice on this team in one battle and is worth a second sample.",
+    "AI decision timing peaked at 62 frames (1.038 s) on the two-living-opponent turns, inside the 1.2 s budget but the highest sample in my block."
+  ],
+  "level_changes": [
+    {
+      "member": "WAILMER",
+      "field": "level offset",
+      "before": 4,
+      "after": 5,
+      "pass_total": "+2 (3 -> 4 in pass 1, 4 -> 5 here); this member is now at the pass ceiling and must not move again",
+      "reason": "Third consecutive zero-faint clear, this one in four turns with three of my six never sent out, so brief rule 5 calls for a raise. Wailmer is the correct recipient rather than the lowest level on paper: it is the only member converting anything, it took Magearna from 94 to 5 and Togekiss to 66 across three turns, and it finished a few points short of forcing the first player faint this team has ever caused. One more level of a 128 HP special attacker is the change most likely to turn this from a clean win into a real fight. Raising Zubat instead would spend a level on a member whose failure this pass was a decision defect (R6-D2), and the brief says to fix defects before compensating with levels."
+    }
+  ],
+  "level_changes_not_made": [
+    {
+      "member": "ZUBAT",
+      "reason": "+1 in pass 1 and it survives to act now. Its remaining failure - never using Taunt or U-turn, and this pass attacking into a resist with recoil - is AI defect R6-D2, not a level problem. Left at offset 4 deliberately so the defect is not papered over."
+    },
+    {
+      "member": "CARVANHA",
+      "reason": "+1 in the rerun-1 pass and it converted from zero actions to one. Raising it again would hit the ceiling on a member that has only just started participating."
+    },
+    {
+      "member": "RATTATA_ALOLA",
+      "reason": "The ace at offset 5 and joint-highest at L27. Rule 5: never the ace first. It is also the member that has never acted, which is an ordering problem - it leads into a cap-24 Fairy nuke that out-damages its entire HP bar - and levels are not the lever for that."
+    }
+  ],
+  "calibration": "RAISE Wailmer 4 -> 5 (its second and last level in this pass). Won on the first attempt in four turns with zero player faints for the third pass running; brief rule 5's 'won first try with 0-1 player faints -> +1 on the weakest one or two' applies. Only one member is raised, not two, because the other three each have a specific reason not to be: Carvanha just converted its first level, Zubat's problem is a logged AI defect, and Rattata is the ace. The fight was not a walkover - Magearna finished on 5/94 - but zero faints with half my party unused is not the benchmark this cap deserves.",
+  "could_this_be_cooler": "Unchanged answer, now with three passes behind it, and it has become the clearest ordering problem in my whole block. The two most interesting members - Super Fang/Taunt Alolan Rattata and Speed Boost Carvanha - have between them produced exactly one action in three battles, because Rattata leads into the player's Fairy attacker and Carvanha arrives fourth against a board that is already lost. The two that carry the fight, Wailmer and Zubat, are the ones the pass has been levelling. No species/move/item change is wanted: the Aqua grunt's mix of a 128 HP artillery whale, an Eviolite disruption bat and a Life Orb shark is a good, thematic set. The fix is which two are sent out first - lead Rattata alongside Wailmer only if something absorbs the opening Fairy attack, or better, lead Wailmer + Zubat and hold Rattata's Super Fang for a board where it can actually halve something. Levels cannot buy that, and this pass did not attempt to.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass 2: one attempt (three are allowed only on a loss), same party manifest as both earlier passes. Teams-file change is the single WAILMER offset line, edited in place and committed by pathspec; generated projections were not regenerated or committed by this session. Synthetic headless benchmark, not earned campaign play."
+}
