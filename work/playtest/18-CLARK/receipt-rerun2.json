@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
+  "play_order": 18,
+  "e_group": "E0023",
+  "trainer": "TRAINER_CLARK",
+  "class": "regular",
+  "location": "Route116",
+  "cap": 14,
+  "difficulty": "medium",
+  "levels_as_played": [
+    "ROGGENROLA L16 offset 4 @EVIOLITE STURDY",
+    "ARCHEN L15 offset 3 @NONE DEFEATIST (R1 raised it 2 -> 3; confirmed present, now at the +-2 ceiling)",
+    "GEODUDE L17 offset 5 @LIFE_ORB ROCK_HEAD (R1 raised it 4 -> 5; confirmed present)",
+    "MUDBRAY L16 offset 4 @SITRUS_BERRY STAMINA"
+  ],
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_summary": "Reused the shared cap-14 chronology party unchanged (Heracross / Shiftry / Arcanine / Sylveon / Tangrowth / Cloyster). Route 116 at play_order 18 is after every source map in that manifest's audit.",
+  "driver": {
+    "tool": "scripts/playthrough/battle_driver.py",
+    "build_dir": "work/agent-battle-build",
+    "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+    "scope": "Synthetic headless benchmark, native AI and native debug battle lifecycle. Not earned campaign play."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "seed": 3018,
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 11,
+      "player_faints": 4,
+      "opponent_faints": 4,
+      "ai_decision_frames_max": 63,
+      "events": "work/playtest/18-CLARK/rerun2-attempt-1-events.jsonl",
+      "narrative": "T1 Archen's itemless Acrobatics one-shot a 53 HP Shiftry while my Close Combat took Roggenrola to 22; Roggenrola answered with Iron Defense. T2 Cloyster came in, Archen's Rock Slide hit both my slots and flinched Cloyster out of its Icicle Spear, and Close Combat removed Roggenrola. Geodude came in. T3 I pivoted the -2/-2 Heracross out for Tangrowth; Archen's second Rock Slide removed Cloyster and Geodude's Rock Tomb cut Tangrowth's Speed. T4 Rock Slide plus a Life Orb Double-Edge removed a full-HP 63 Sylveon in one turn while a 4x Power Whip removed Geodude. T5 Arcanine came in, Intimidate landed on both, and Crunch plus Power Whip removed Archen - but Acrobatics and High Horsepower had already taken Arcanine and Tangrowth to 16 and 18. T6 Mudbray's Rock Tomb removed Arcanine; Power Whip took it to 17 through two Stamina boosts. T7 Heracross came back and Close Combat finished it. Won 4-4."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Wide Guard only against meaningful spread pressure, otherwise attack or a worthwhile Iron Defense play",
+      "result": "NOT EXERCISED for Wide Guard; the Iron Defense half was a poor turn (see E0023-W1)",
+      "evidence": "I opened with two single-target moves, so there was no spread to block on turn 1 and declining Wide Guard was right. Roggenrola instead used Iron Defense at 22/58 and died the next turn without attacking or using the Body Press that the boost exists to feed."
+    },
+    {
+      "check": "Itemless Acrobatics converts the Archen slot into damage",
+      "result": "PASS - decisively",
+      "evidence": "T1 Acrobatics one-shot a 53 HP Shiftry. Archen also flinched Cloyster with Rock Slide on T2, removed it on T3, and contributed to the one-turn removal of a 63 HP Sylveon on T4. It was the best member on the field and it never used Protect or a wasted turn."
+    },
+    {
+      "check": "Defeatist is respected (attack halves below 50%)",
+      "result": "NOT EXERCISED",
+      "evidence": "Archen was never left alive below half; it went from 46/46 to fainted in one turn."
+    },
+    {
+      "check": "Geodude supplies direct Rock Head offense",
+      "result": "PASS",
+      "evidence": "Life Orb Double-Edge with no recoil (Rock Head) took half of Sylveon's bar on T4; Rock Tomb's Speed drop on T3 is what let Mudbray outrun Tangrowth later."
+    },
+    {
+      "check": "Mudbray supplies Stamina-backed physical pressure",
+      "result": "PASS",
+      "evidence": "Stamina raised its Defense twice, High Horsepower took Tangrowth to 18 and a super-effective Rock Tomb removed Arcanine. It survived to the last turn at +2 Defense."
+    },
+    {
+      "check": "Body Press belongs to the Iron Defense plan",
+      "result": "FAIL (never used)",
+      "evidence": "Roggenrola boosted its Defense and then died without pressing once. The setup and the payoff were never connected."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Zero opponent Protects, on a team where all four members carry Protect. On this board that was correct - every turn they had a real attack worth more - but it means the guard branch is again untested for this trainer.",
+  "ai_defects": [],
+  "ai_defects_newly_introduced": [],
+  "ai_weak_choices": [
+    {
+      "id": "E0023-W1",
+      "turn": 1,
+      "board": "Roggenrola at 22/58 after a super-effective Close Combat, opposite a Heracross holding Close Combat and a Shiftry holding Leaf Blade (both super effective on Rock), with Rock Slide and Body Press in its own kit.",
+      "chosen": "Iron Defense.",
+      "better": "Rock Slide (spread, and my two actives were at full HP) or Body Press. At 38% opposite two super-effective physical attackers, a single Defense boost does not survive the next turn - it died to the following Close Combat having dealt zero damage. Iron Defense is worth a turn at high HP, not as a last act.",
+      "severity": "weak choice, not a defect. The setup branch fired at the wrong HP threshold."
+    }
+  ],
+  "ai_improvements_observed": [
+    "Archen never spent a turn on Protect and converted every one of its turns into damage or a flinch.",
+    "The pair removed a full-HP 63 Sylveon in a single turn by stacking Rock Slide and Double-Edge on it.",
+    "No voluntary switches and no empty guards."
+  ],
+  "level_changes": {},
+  "level_change_reason": "Won with 4 player faints after a real fight; the previous pass on this trainer was a zero-faint clear, so the R1 Archen +1 and Geodude +1 are confirmed to have done exactly what they were meant to do. Brief band: keep. Archen is at the +-2 ceiling; Geodude and Mudbray both have budget left but do not need it on this evidence.",
+  "levels_after": {"ROGGENROLA": 4, "ARCHEN": 3, "GEODUDE": 5, "MUDBRAY": 4},
+  "cooler": "Yes: Roggenrola is the only member that has never contributed in either pass, and its two authored jobs (Wide Guard, Iron Defense into Body Press) both need it to survive two turns that a Sturdy Eviolite body at cap+2 does not get against super-effective coverage. Giving the Wide Guard and Body Press pair to Mudbray - which reliably survives and already boosts its own Defense with Stamina - would make the authored bulk plan actually happen, and would let Roggenrola be a plain Sturdy attacker. Recording only.",
+  "authored_set_legality": "No legality problem observed."
+}
