@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0031 TRAINER_GRUNT_RUSTURF_TUNNEL (Aqua cave smuggler); play_order 29, cap 20, Medium",
+ "availability_audit": "Chronology audit for this rerun. Every member's source map is checked against the book's chapter order (Game Book lines 1-300) and against the live map scripts, not only against the pool file's cap gate. Three species used in the first pass are chronology-ILLEGAL and were removed: WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, reached in C20 at cap 30); MAGEARNA before E0032 (the Devon Corp stairs are blocked until FLAG_RETURNED_DEVON_GOODS, set after Rusturf Tunnel); and ALAKAZAM before the Dewford Gym (Abra's only source is wild:GraniteCave_1F, entered in C12 after Route 106). Assisted acquisition through the native preparation API, ordinary items only, no Mega Stone on the player side (the Ring arrives after Brawly). Not native capture acceptance.",
+ "plan": "Execute the authored crack directly: remove Alolan Grimer first with Ground pressure so Power of Alchemy never has a corpse, then Psychic and Ice into the remaining grounded Poisons and the 4x-weak Noibat.",
+ "party": [
+  {
+   "species": "SPECIES_NIDOKING",
+   "moves": [
+    "MOVE_EARTH_POWER",
+    "MOVE_ICE_BEAM",
+    "MOVE_THUNDERBOLT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_SHEER_FORCE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Sheer Force Ground/coverage cannon",
+   "availability": "Nidoran-M wild:Route101/land_mons -> Nidorino + ITEM_MOON_STONE (Rustboro Mart, C06)."
+  },
+  {
+   "species": "SPECIES_REUNICLUS",
+   "moves": [
+    "MOVE_PSYCHIC",
+    "MOVE_FOCUS_BLAST",
+    "MOVE_RECOVER",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_MAGIC_GUARD",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    0,
+    252,
+    4,
+    0
+   ],
+   "role": "Magic Guard body immune to Toxic Spikes and residual chip",
+   "availability": "wild:AlteringCave_1F/land_mons (Route 103 entrance, C02)."
+  },
+  {
+   "species": "SPECIES_CLOYSTER",
+   "moves": [
+    "MOVE_ICICLE_SPEAR",
+    "MOVE_ROCK_BLAST",
+    "MOVE_RAZOR_SHELL",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_SKILL_LINK",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Skill Link multi-hit breaker for Sturdy and Focus Sash bodies",
+   "availability": "Shellder wild:Route115/old_rod (Route 115 is Rustboro's north exit, open on arrival) + ITEM_WATER_STONE from the Rustboro Mart (C06)."
+  },
+  {
+   "species": "SPECIES_KARTANA",
+   "moves": [
+    "MOVE_LEAF_BLADE",
+    "MOVE_SACRED_SWORD",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_BEAST_BOOST",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Grass/Steel physical breaker",
+   "availability": "wild:PetalburgWoods_3/land_mons. Petalburg Woods is C05; the third grove needs Cut, licensed in Rustboro and usable after Roxanne, so it is legal from cap 20 onward only. Ultra Beast taken as a preceding-map wild encounter."
+  },
+  {
+   "species": "SPECIES_GYARADOS",
+   "moves": [
+    "MOVE_WATERFALL",
+    "MOVE_CRUNCH",
+    "MOVE_ICE_FANG",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Intimidate body and physical Water pressure",
+   "availability": "Magikarp wild:PetalburgCity/old_rod (Old Rod from Mom, C02) -> level evolution."
+  },
+  {
+   "species": "SPECIES_LUCARIO",
+   "moves": [
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_BULLET_PUNCH",
+    "MOVE_CRUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_INNER_FOCUS",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Steel/Fighting priority breaker",
+   "availability": "wild:AlteringCave_1F/land_mons (Altering Cave's entrance is a warp on Route 103, C02) -> legal from the first route onward."
+  }
+ ]
+}

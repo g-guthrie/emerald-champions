@@ -1,0 +1,61 @@
+{
+  "rerun_of": "work/playtest/29-TRAINER_GRUNT_RUSTURF_TUNNEL/receipt.json",
+  "rerun_reason": "Confirming rerun for the first pass's unverified level changes (QWILFISH offset 2->3, SKRELP 3->4) on the rebuilt headless ROM, which also carries the AI setup/support pricing and the healthy-turn-one-switch charge.",
+  "play_order": 29,
+  "e_group": "E0031",
+  "trainer": "TRAINER_GRUNT_RUSTURF_TUNNEL",
+  "class": "grunt",
+  "location": "RusturfTunnel",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/29-TRAINER_GRUNT_RUSTURF_TUNNEL/party-rerun.json",
+  "party_changed_from_first_pass": {
+    "reason": "Chronology. The first-pass party used MAGEARNA, ALAKAZAM and WHIMSICOTT, none of which a player standing in Rusturf Tunnel can hold. Magearna is behind Devon Corp 2F, whose stairs open only on FLAG_RETURNED_DEVON_GOODS - and the goods are recovered in this very tunnel, after this battle. Abra's only source is wild:GraniteCave_1F, which is C12, two chapters and a sea voyage later. Cottonee is Verdanturf Meadow, C20.",
+    "removed": ["SPECIES_MAGEARNA", "SPECIES_ALAKAZAM", "SPECIES_WHIMSICOTT"],
+    "added": ["SPECIES_REUNICLUS", "SPECIES_CLOYSTER", "SPECIES_LUCARIO"],
+    "kept": ["SPECIES_NIDOKING", "SPECIES_KARTANA", "SPECIES_GYARADOS"],
+    "note": "Removing Alakazam is the material change: the first pass's four-turn 4-0 was driven by a Life Orb Alakazam one-shotting two Poison bodies with Psychic. Reuniclus keeps the Psychic lane but is slow, so the same plan now costs turns."
+  },
+  "opponent_levels_before": {"GRIMER_ALOLA": 22, "QWILFISH": 20, "SKRELP": 21, "NOIBAT": 23},
+  "opponent_levels_now": {"GRIMER_ALOLA": 22, "QWILFISH": 21, "SKRELP": 22, "NOIBAT": 23},
+  "attempts": [
+    {
+      "id": "r1", "run_dir": "work/playtest/29-TRAINER_GRUNT_RUSTURF_TUNNEL/r1", "seed": "0x2E55",
+      "outcome": "won", "turns": 5, "decisions": 10, "player_faints": 4, "opponent_faints": 4,
+      "ai_decision_frames_max": 63, "ai_decision_seconds_max": 1.055,
+      "narrative": "A completely different fight from the first pass. Grimer Protected the turn-1 Earth Power - the authored crack line - so it survived, and a critical Waterfall from Qwilfish took Nidoking. Reuniclus removed Qwilfish and the corpse was immediately inherited: 'The opposing Qwilfish's Intimidate was taken over', and Reuniclus dropped to -2 Attack. Turn 2 cost me two bodies at once: Noibat's spread Heat Wave is 4x on Kartana and Grimer's Knock Off is 2x on Reuniclus. Lucario and Gyarados came in behind a second Intimidate; Grimer Protected both of their attacks on turn 3 and died to Waterfall on turn 4. Skrelp's Muddy Water then ground Lucario down before Cloyster and Gyarados finished it. Four to four."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Power of Alchemy copies a fainted ally's ability only while Grimer survives beside it", "result": "PASS - POSITIVE BRANCH, first time observed", "evidence": "r1 turn 1: Reuniclus knocked out Qwilfish, and the log immediately printed 'The opposing Qwilfish's Intimidate was taken over!' followed by 'Reuniclus's Attack fell!'. Grimer was alive and adjacent at the time, which is the authored precondition. The first pass could only record the negative branch, because the crack (removing Grimer first) worked there. This time Grimer's own Protect defeated the crack and the headline mechanic actually fired."},
+    {"check": "Do not value Power of Alchemy as an ability that stacks or persists through an ordinary switch", "result": "PASS", "evidence": "Only one inheritance occurred and no stacking or re-application was claimed; Grimer never switched after inheriting, so the persistence rule was not exercised in the other direction."},
+    {"check": "Qwilfish's Intimidate activates on entry", "result": "PASS", "evidence": "Both player leads were at Attack -1 before the first decision point."},
+    {"check": "Noibat is the sonar-cave Tailwind reserve and special Fire/Dragon coverage", "result": "PASS - correct override of the authored reserve role", "evidence": "r1 turn 2: Noibat entered against Kartana (Grass/Steel, 4x to Fire) and chose Heat Wave rather than Tailwind, knocking Kartana out in one hit. The plan line names Tailwind as the reserve role, but the coverage read was plainly the better turn, and this is the setup-pricing change working - the first pass's Noibat chose Tailwind on a board where it then died before the move resolved."},
+    {"check": "Acid Spray is used only when a subsequent special attack benefits", "result": "PASS (negative branch)", "evidence": "Skrelp was the last member alive for its entire time on the field and chose Muddy Water on every turn. With no ally to receive the Sp. Def drop, declining Acid Spray is correct."},
+    {"check": "The usually faster Noibat cannot receive a retroactive same-turn boost", "result": "PASS (no contrary evidence)", "evidence": "No Acid Spray was fired at any point."},
+    {"check": "Eviolite bulk supports immediate Knock Off / Poison / Water pressure", "result": "PASS - now fully executed", "evidence": "Grimer's Knock Off killed Reuniclus at 2x on turn 2 and removed its Leftovers; Kartana's Knock Off in the same turn removed Noibat's Eviolite, so the item lane worked in both directions. Qwilfish's Waterfall killed Nidoking on turn 1. The first pass recorded this as PARTIAL because the pressure plan never got a turn; here it got four."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "GRIMER_ALOLA", "payoff": "real - blocked Nidoking's Sheer Force Life Orb Earth Power at 2x, which is the dossier's own named counterplay. This single guard is what made the Power of Alchemy branch possible at all."},
+    {"turn": 3, "user": "GRIMER_ALOLA", "payoff": "real - blocked both Lucario's Close Combat and Gyarados's Waterfall in one turn, at full HP against two attackers that had just entered"}
+  ],
+  "protect_note": "Two Protects, both with real payoff, no consecutive guard, and no empty guard anywhere. The first pass's one empty guard (turn-1 Qwilfish Protect at full HP beside a focused partner) did NOT recur: this time Qwilfish attacked on turn 1 and scored a critical knockout. That is a direct improvement on the rebuilt ROM.",
+  "ai_defects": [],
+  "ai_observations": [
+    "No defects. Every choice was defensible and several were better than defensible: the turn-1 Grimer Protect that beat the dossier's named crack, Noibat overriding its authored Tailwind role for a 4x Heat Wave, both Knock Offs aimed at the right item and the right type matchup, and Skrelp correctly declining Acid Spray with no ally to feed.",
+    "ai_decision_frames_max 63 (1.055 s) against 16 frames in the first pass on this trainer - about a 4x increase. Same note as elsewhere in this block: a sampled measurement, reported for the AI owner."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt but lost four of six members to a four-member team. That is the 'won after a real fight' band. Keep.",
+    "changes": [],
+    "verdict": "The first pass's QWILFISH +1 and SKRELP +1 are CONFIRMED and should stand. Per-member budget remaining in this pass: +1 each on Qwilfish and Skrelp, untouched on Grimer and Noibat. I am not spending any of it - this grunt has gone from a four-turn 4-0 to a four-for-four trade, which is more than a route grunt needs to be.",
+    "honest_caveat": "As with Roxanne, part of the swing is the legal-party correction rather than the two levels: Alakazam was doing most of the first pass's work and cannot be held here. Both corrections are real and I cannot separate their contributions from one run."
+  },
+  "cooler_note": "The first pass's suggestion is now answered by the game itself and should be withdrawn. I recommended either protecting Grimer or moving it to the back, on the grounds that the headline mechanic is the thing a prepared player removes on turn 1. This run shows the team already solves that: Grimer's own Protect beat the Ground attack aimed at it, its partner died, and the inheritance landed. The four-member roster is still the honest weakness - it is outnumbered before types are considered - but the plan is sound and I would not touch it. If anything wants sharpening it is Skrelp, which spent the endgame alone firing a 0.5x Muddy Water into a Gyarados; its Acid Spray lane only exists while it has a partner, so it may want to be deployed third rather than last.",
+  "authored_set_legality": "No legality problem found in the authored opponent set. One note on my own manifest, not the trainer's: I gave Kartana an Assault Vest alongside Protect, and the driver correctly reported Protect as illegal for it (MOVE_LIMITATION_TORMENTED). That is my build error, caught by the engine, and it cost nothing.",
+  "evidence": {
+    "rom_sha256": "e7c4b44642b821b9a3d59182ef293c10fff1a48fb623df9b1af20089802481ef",
+    "build_dir": "work/agent-battle-build",
+    "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign play."
+  }
+}
