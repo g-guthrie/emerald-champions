@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "E0192 TRAINER_TARA (Route108, Feather Badge, cap 48, Medium)",
+  "availability_audit": "Route 108 is the sea route to the Abandoned Ship, reached by Surf after the Balance Badge; battle index window 48-60, floor 48. Every member is gated at 36 or below in pool-48.json: New Mauville entrance and interior via Wattson's Basement Key (30), Thwackey line (36), Haunter plus Linking Cord (30), Sneasel (14), Togepi Route 102 plus Shiny Stone (24). All precede the first Surf. No legendaries, Ultra Beasts or Paradox species.",
+  "plan": "Tara is three Water bodies plus an Eviolite Arctibax, and the sharp part is Seadra: Focus Energy plus a Scope Lens is a guaranteed critical hit, and Sniper multiplies that crit to 2.25x. The dossier's crack is exactly right - remove Seadra before the Focus Energy pays, or Taunt the turn it wants to spend. Gengar carries the Taunt and is fast enough to land it first; Weavile and Rillaboom carry priority so a Seadra that does set up still cannot pick its turn safely. Magnezone's Electric is 2x on all three Waters and Tara owns no Ground, Fire or Fighting move to answer it. Iron Hands' Fighting is 2x on Arctibax and Togekiss's Fairy is 2x on its Dragon half, which is what gets through an Eviolite. One deliberate restriction: Milotic has Competitive, so nothing on my side uses Icy Wind or any other stat-lowering move on it - that would hand it a Special Attack boost.",
+  "party": [
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ANALYTIC",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "Electric is 2x on Seadra, Feraligatr and Milotic; Steel resists Ice and Dragon from Arctibax and Tara has no Ground, Fire or Fighting",
+      "availability": "pool-48 gate 30: NewMauville_Entrance land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Grass is 2x on the three Waters, Grassy Glide is priority onto a set-up Seadra, and Knock Off strips the Scope Lens or the Eviolite",
+      "availability": "pool-48 gate 36: Thwackey level evolution in the Heat Badge window."
+    },
+    {
+      "species": "SPECIES_IRON_HANDS",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_WILD_CHARGE",
+        "MOVE_HEAVY_SLAM"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Fake Out denies the Focus Energy turn; Drain Punch is 2x on Arctibax and Wild Charge is 2x on every Water",
+      "availability": "pool-48 gate 30: NewMauville_Inside land table via Wattson's Basement Key."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PSYCHIC",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "the Taunt that blanks Focus Energy and Recover in one move; fast enough to land it before Seadra acts",
+      "availability": "pool-48 gate 30: Haunter plus Linking Cord from the Slateport evolution stock."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_SHARD",
+        "MOVE_TRIPLE_AXEL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "second Fake Out and a priority lane; Knock Off is the clean way to remove Arctibax's Eviolite",
+      "availability": "pool-48 gate 14: Sneasel level/condition evolution."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_AIR_SLASH",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        0,
+        4,
+        0,
+        0,
+        252
+      ],
+      "role": "Fairy is 2x on Arctibax's Dragon half, and Follow Me can eat a guaranteed Sniper critical hit on a body that survives it",
+      "availability": "pool-48 gate 24: Togepi Route 102, friendship evolution, Shiny Stone from the Slateport Mart."
+    }
+  ]
+}

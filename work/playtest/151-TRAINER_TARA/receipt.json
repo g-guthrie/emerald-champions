@@ -1,0 +1,33 @@
+{
+  "play_order": 151, "e_group": "E0192", "trainer": "TRAINER_TARA", "class": "regular",
+  "location": "Route108", "chapter": "Feather Badge", "cap": 48, "difficulty": "medium",
+  "resolved_levels_check": "PASS - Seadra 48-1-2=45, Feraligatr 48+0-2=46, Arctibax 48+4-2=50, Milotic 48+1-2=47, all matching the driver at level_cap 48. No --cap adjustment.",
+  "party_manifests": ["work/playtest/151-TRAINER_TARA/party-a1.json"],
+  "attempts": [
+    {"attempt": 1, "seed": 67, "party": "party-a1.json", "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+     "note": "Magnezone + Rillaboom + Iron Hands + Gengar + Weavile + Togekiss. Priority Grassy Glide removed Feraligatr on turn 1 before it could act twice, which collapsed the Seadra plan by itself. Seadra guarded a lethal Thunderbolt on turn 1 and then landed a natural Scope Lens critical Ice Beam that took Rillaboom - my only faint. Magnezone's Electric handled the three Waters and its Flash Cannon is 4x on Arctibax, which is what got through the Eviolite."}
+  ],
+  "strategy_checks": [
+    {"check": "Seadra uses Focus Energy only when Feraligatr's pressure buys a survivable turn", "result": "PASS (condition correctly declined)", "evidence": "Seadra never used Focus Energy in the whole battle. Feraligatr died on turn 1 and from then on no turn was survivable, so the AI correctly refused the setup and spent its turns on Protect and then damage. This is the authored condition behaving exactly as written rather than a failed check - but see the cooler note, because it means the three-card combination never assembled."},
+    {"check": "Turn two uses the actual critical stage rather than presuming every attack crits", "result": "PASS", "evidence": "turn 2 Seadra chose Ice Beam into a Grass-type at its base Scope Lens crit rate with no Focus Energy banked; the critical hit that followed was the item's natural rate, not an assumption the AI had planned around."},
+    {"check": "Feraligatr attacks immediately", "result": "PASS", "evidence": "turn 1 Ice Punch into Rillaboom - 2x on Grass, and the correct Sheer Force plus Life Orb option. It simply lost to priority."},
+    {"check": "Milotic's Icy Wind supports without a setup action", "result": "NOT EXERCISED", "evidence": "Milotic only entered after Feraligatr had died, so the supported partner was never there. It used Ice Beam and then Recover."},
+    {"check": "Milotic's Recover is real sustain", "result": "PASS", "evidence": "turn 3 Recover restored it from low HP; it then died to a 2x Thunderbolt, which is the fight going as designed rather than a bad decision."},
+    {"check": "Arctibax is the Eviolite body supplying physical Dragon/Ice coverage", "result": "PASS", "evidence": "at level 50 with an Eviolite it was genuinely hard to move - Icicle Crash on turn 4, and it took a 4x Flash Cannon plus a 2x Drain Punch in the same turn to fall. Thermal Exchange never came up because nothing on my side used Fire."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "SEADRA", "payoff": "REAL - blocked Magnezone's Thunderbolt, a 2x hit that was a clean one-shot on its 118 HP, and it survived to land the critical Ice Beam that got my only KO"},
+    {"turn": 3, "battler": "ARCTIBAX", "payoff": "REAL - blocked Iron Hands' Wild Charge on its entry turn, buying its partner Milotic a free Recover"}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"trainer": "TRAINER_TARA", "member": "SEADRA", "before": -1, "after": 0},
+    {"trainer": "TRAINER_TARA", "member": "FERALIGATR", "before": 0, "after": 1}
+  ],
+  "calibration_reasoning": "First-attempt win with one player faint, which is the brief's '+1 on the weakest one or two members' condition; there is no Mega or legend to exclude. Seadra at -1 and Feraligatr at 0 are the two lowest offsets and are also the two that the board actually exposed: Feraligatr died to a single priority move before its second turn, and Seadra at level 45 cannot survive a cap-48 special attack long enough to reach the setup its whole design depends on. Seadra goes -1 -> 0 and Feraligatr 0 -> 1. Arctibax stays at +4; at level 50 behind an Eviolite it was already the hardest thing in the room to remove.",
+  "rerun_status": "NOT RERUN. The driver reads trainer parties from the prebuilt ROM in work/agent-battle-build-2 and this agent is instructed never to run make; the teams-file edit is left uncommitted for the main agent's wave-boundary rebuild.",
+  "could_this_be_cooler": "Keep the composition - four distinct ability payoffs on a four-member route team is genuinely tidy, and Thermal Exchange Arctibax standing beside three Waters is a real idea. But this run confirms the dossier's own closing sentence very sharply, and it is worth restating as the main finding: Focus Energy plus Scope Lens plus Sniper is the sharpest small combination in the range, and it did not happen, because Seadra correctly judged that it never had a turn to spare. The combination needs a partner that makes the setup turn free - a redirection body, a Fake Out, or simply pairing Seadra with Milotic rather than Feraligatr so that Recover and Icy Wind can buy the turn. That is a deployment change as much as a composition one: leading Seadra beside Milotic instead of Feraligatr would let the three-card line actually assemble. Recommended, not applied in this pass.",
+  "legality_problems_found": "None.",
+  "notes": "Player-side note: Milotic's Competitive meant no stat-lowering move could be used on it; Gengar's Icy Wind was deliberately withheld for the whole battle for that reason.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal."
+}
