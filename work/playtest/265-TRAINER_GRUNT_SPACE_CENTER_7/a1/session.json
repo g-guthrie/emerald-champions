@@ -1,0 +1,38 @@
+{
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783",
+  "elf_sha256": "5f4e01bfe2259972778c09af3069d6feb6890b68915bc4206245a00649ea04f1",
+  "seed": 407,
+  "trainer_a": "TRAINER_GRUNT_SPACE_CENTER_7",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 84,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/265-TRAINER_GRUNT_SPACE_CENTER_7/party_spacecenter_84.json",
+  "party_sha256": "6b19e7552b60b8247a6868b0637965e71f41bc6ef157b3c213d78ef3e169750f",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "Mossdeep Space Center raid, cap 84 doubles core for the Magma gantry crew (E0407-E0409)",
+    "party": 6
+  },
+  "started": {
+    "frames": 1369
+  },
+  "replacement_commits": {
+    "turn": 9,
+    "slots": {}
+  }
+}

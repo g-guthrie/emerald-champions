@@ -1,0 +1,78 @@
+{
+  "play_order": 265,
+  "e_group": "E0407",
+  "trainer": "TRAINER_GRUNT_SPACE_CENTER_7",
+  "class": "grunt",
+  "location": "MossdeepCity_SpaceCenter_2F",
+  "cap": 84,
+  "difficulty": "medium",
+  "level_formula_check": "Medium = cap + offset - 2: Metagross offset 2 reported L84, Duraludon offset 1 reported L83, Cradily/Armaldo offset 1 reported L83. Confirmed against the ROM.",
+  "party_manifest": "work/playtest/265-TRAINER_GRUNT_SPACE_CENTER_7/party_spacecenter_84.json",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/265-TRAINER_GRUNT_SPACE_CENTER_7/a1",
+      "seed": 407,
+      "outcome": "won",
+      "turns": 9,
+      "decisions": 11,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.055,
+      "narrative": "Turn 1 Fake Out flinched Metagross and Close Combat outsped and one-shot Duraludon before it could fire the Draco Meteor it had selected. Turn 2 Metagross answered with Stomping Tantrum and OHKOed a full-HP Incineroar (332) while Armaldo's X-Scissor took Urshifu from 288 to 15; that was the fight's real turn. Landorus replaced Incineroar, Urshifu's Protect ate both Bullet Punch and Stone Edge on turn 3 while Earth Power removed Metagross, and two more Earth Powers removed Armaldo. Cradily then stalled Landorus to 55 with Giga Drain and Recover; Chi-Yu came in, Beads of Ruin dropped its Sp.Def and a critical Heat Wave ended it on turn 9."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Metagross Clear Body refuses Intimidate",
+      "result": "PASS",
+      "evidence": "Turn 0 state after Incineroar's entry: Duraludon carried atk -1, Metagross carried no stat stages."
+    },
+    {
+      "check": "Duraludon Stalwart ignores redirection",
+      "result": "NOT EXERCISED",
+      "evidence": "Duraludon fainted to Close Combat on turn 1 before Amoonguss ever entered, so no Rage Powder was live while it was on the field. The authored check is untested by this run and is the single best reason to replay this battle."
+    },
+    {
+      "check": "Cradily Storm Drain redirects Water",
+      "result": "NOT EXERCISED",
+      "evidence": "The party carried no Water move; the ability had nothing to redirect. Design note: Storm Drain is a dead ability against any party that simply declines Water, which a player reading the crack line will do."
+    },
+    {
+      "check": "Cradily Suction Cups / Recover sustain",
+      "result": "PASS",
+      "evidence": "Turn 7 Cradily used Recover; turns 6-10 it alternated Giga Drain and Recover and forced a Landorus withdrawal at 55/270."
+    },
+    {
+      "check": "Armaldo Battle Armor denies critical hits",
+      "result": "PASS (inferred)",
+      "evidence": "No critical hit was reported on Armaldo across four incoming attacks; Urshifu's always-crit Wicked Blow was never spent on it, so this is consistent rather than proven. Chi-Yu's Heat Wave did crit Cradily, which has no crit protection."
+    },
+    {
+      "check": "Armaldo Weakness Policy triggers",
+      "result": "FAIL (dormant)",
+      "evidence": "Armaldo took Earth Power (Ground vs Rock/Bug = 1x) twice and fainted with the Policy unspent. Rock/Bug has only Rock, Steel and Water as super-effective lanes, so the item is easy to dodge; noted as a design observation, not an AI defect."
+    },
+    {
+      "check": "Rage Powder redirection",
+      "result": "PASS",
+      "evidence": "Amoonguss became the center of attention on turns 5, 6, 7, 8 and 10; Cradily (Rock/Grass) correctly ignored it every time, since Grass types are immune to powder redirection. That is engine-correct, not a defect."
+    }
+  ],
+  "protect_ledger": [
+    {"turn": 5, "battler": "Armaldo", "action": "X-Scissor (not Protect)", "note": "no opposing Protect was used at any point in this battle"},
+    {"summary": "Zero opposing Protects across nine turns. Cradily and Armaldo both carry Protect and neither ever used it, including on the turn Armaldo sat at 57/295 in front of a Landorus that had just dealt 238. A Protect there would have been the correct play and would have bought Cradily a free Recover. This is the one soft AI observation from the fight."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Metagross picking Stomping Tantrum into Incineroar on turn 2 was an excellent read: Ground is the only super-effective lane it had against a Fire/Dark body, and it converted a full-HP 332 Pokemon into a faint.",
+    "Armaldo declined Protect at 57/295 with a lethal Earth Power obviously incoming (turn 5). Not illegal, but it is a missed guard rather than an empty one."
+  ],
+  "level_changes": [
+    {"member": "DURALUDON", "before": 1, "after": 2, "reason": "died on turn 1 without acting; +1 does not fix the speed tier but makes the free kill cost more"},
+    {"member": "CRADILY", "before": 1, "after": 2, "reason": "lowest real contribution; more bulk behind Recover makes the stall leg matter"}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED. Level offsets only reach the ROM after the main agent re-materializes the teams and rebuilds, so these two +1s are unplayed. If one battle from this block is re-run, it should be E0409 (see that receipt); within E0407 the untested item is Duraludon's Stalwart-versus-redirection check.",
+  "could_this_be_cooler": "The concept is already strong and the dossier's own answer is right: a meteorite, an alloy tower and two revived fossils on a launch gantry is exactly the right imagery for the Magma finale. Two concrete notes. (1) The theme is legible only if the player fights the room rather than deleting it: Duraludon died before it acted, so the Stalwart detail the dossier calls the sharpest single idea never showed. Duraludon sits at base 85 Speed and dies to any Fighting move; giving it the room's Protect slot, or moving Stalwart onto a body that survives a turn, would let the idea land. (2) Cradily's Storm Drain is a dead draw against a party with no Water move, and Armaldo's Weakness Policy is dead against anything that attacks it neutrally. Both are conditional payoffs with easy opt-outs, so the room's two reserves are quieter than its leads. Suggestion, not applied in this pass: swap Cradily's Power Gem for a spread Water move so Storm Drain has something to talk about on its own side, or give Armaldo Rock Slide so its Weakness Policy is at least paid for by pressure.",
+  "authored_set_legality": "No problem found. All four members resolve, all moves are legal on their species, EV totals are 508, and the offsets materialize to the levels the ROM reported."
+}

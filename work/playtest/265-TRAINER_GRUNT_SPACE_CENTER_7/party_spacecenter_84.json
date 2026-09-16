@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Space Center raid, cap 84 doubles core for the Magma gantry crew (E0407-E0409)",
+  "availability_audit": "Cap ladder: FLAG_EC_REPORT_C42_COMPLETE grants cap 84 and FLAG_BADGE08_GET grants 90, so the Space Center raid is the cap-84 window. Chronology: the Mind Badge is earned, Magma has seized the Space Center, and the Seafloor Cavern, Cave of Origin and Sootopolis are all still ahead. Every gate-84 pool entry is sourced from Underwater/SeafloorCavern/CaveOfOrigin maps, which the player has not reached, so this party uses only gate<=68 species. Per member against pool-84 source_detail: Incineroar gate 36 evolution:level from Torracat (Litten, Mauville C22). Urshifu-Single-Strike gate 42, legendary_sign Kubfu on Route 112 then EVO_SCRIPT_TRIGGER (C26 Jagged Pass). Flutter Mane gate 68 wild:MtPyre_Summit - Mt Pyre is C37, two chapters before Mossdeep; a Paradox species, which the brief bars only at or below cap 24. Landorus gate 42 legendary_sign:Route111_RuinsExterior (Desert Ruins, C25) - a reachable legend, used because Sheer Force Earth Power is the honest single-target Ground answer to a Steel room without hitting my own partner. Chi-Yu gate 48 legendary_sign:AshenWoods (C31) - a reachable legend, used for spread Fire. Amoonguss gate 42 evolution:level from Foongus (Petalburg Woods C08). No member is sourced from Mossdeep Space Center, the Seafloor Cavern, Sootopolis, Pacifidlog, Route 130-132 or any Underwater map.",
+  "plan": "Fire and Fighting into a Steel/Rock fossil room, with Ground that does not hit my own partner. Chi-Yu's Heat Wave is the spread Fire lane that melts Metagross, Duraludon, Armaldo and Cradily at once and bypasses nothing important; Beads of Ruin drops the room's special bulk. Incineroar's Intimidate blunts Meteor Mash and Stone Edge, Fake Out buys the first Heat Wave, Knock Off removes the Assault Vest and the Weakness Policy before it can trigger. Urshifu's Unseen Fist ignores Cradily's and Armaldo's Protect, and Wicked Blow's guaranteed crit ignores Cradily's Recover math and any Meteor Mash Attack boosts. Amoonguss Spore removes one body and Rage Powder redirects - except against Duraludon, whose Stalwart is the authored check. Flutter Mane outspeeds the whole room.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Intimidate and Fake Out control; Knock Off strips Assault Vest, Wise Glasses, Leftovers and Weakness Policy; Fire STAB into the Steel pair",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Unseen Fist ignores the room's Protects; Close Combat is the Fighting crack on Armaldo, Cradily, Metagross and Duraludon",
+      "availability": "pool-84 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_CHI_YU",
+      "moves": ["MOVE_HEAT_WAVE", "MOVE_DARK_PULSE", "MOVE_NASTY_PLOT", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEADS_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "spread Fire into a room of Steel, Rock, Grass and Bug; Beads of Ruin lowers the whole room's Special Defense",
+      "availability": "pool-84 gate 48, legendary_sign:AshenWoods. Reachable legend, used as the honest strongest spread-Fire answer."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_PSYCHIC", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "single-target Ground that spares my own partner; Sheer Force Life Orb Earth Power is the crack line on Metagross and Duraludon",
+      "availability": "pool-84 gate 42, legendary_sign:Route111_RuinsExterior. Reachable legend."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_GIGA_DRAIN", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "Spore removes a body for the fight; Rage Powder is the redirection the room is authored to punish",
+      "availability": "pool-84 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": ["MOVE_MOONBLAST", "MOVE_SHADOW_BALL", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "fastest body available; second spread move and the Focus Sash breaker",
+      "availability": "pool-84 gate 68, wild:MtPyre_Summit/land_mons (Mt Pyre, C37)."
+    }
+  ]
+}
