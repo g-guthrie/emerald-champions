@@ -143,7 +143,7 @@ Fallarbor and Meteor Falls characters: "Go west from Fallarbor onto Route 114 an
 C22 Meteor Falls and Mt. Chimney. Magma's meteorite interest and the summit operation (Courtney's two-owner battle at the Falls; Tabitha, Maxie and the one retained sun grunt at the summit). The failure leaves a local disturbance, not a region-wide apocalypse. Cap 36.
 Summit resolution and cable car: "Descend Mt. Chimney through Jagged Pass to Route 112. Go west into Lavaridge and challenge Flannery. The woodland disturbance will be your next stop after the badge."
 
-C23 Flannery. Heat Badge, cap 42; the Gym keeps sun and Misty Terrain with distinct rooms (Mega Chandelure for Flannery; Gerald Mega Charizard X, Eli Mega Camerupt, Danielle Mega Blaziken). Flannery and both rivals direct the rescue first; the optional Wynaut Egg stays.
+C23 Flannery. Heat Badge, cap 42; the Gym's steam keeps permanent Misty Terrain under every room (authored per trainer as a starting field), each room brings its own sun, with distinct rooms (Mega Chandelure for Flannery; Gerald Mega Charizard X, Eli Mega Camerupt, Danielle Mega Blaziken). Flannery and both rivals direct the rescue first; the optional Wynaut Egg stays.
 Flannery and the Go-Goggles rival: "Collect the Go-Goggles from your rival outside the Gym. To reach Ashen Woods, go east to Route 112, take the cable car to Mt. Chimney, descend Jagged Pass and take its western entrance into Ember Path. Follow Ember Path's western passage into Ashen Woods to find Chansey, then return to its nurse on southern Route111."
 
 C24 The Ashen Woods rescue. The Chansey chase; the Route111 nurse upgrades the Vial to two charges once and keeps repeatable directions to Moltres and then the archaeologist.
