@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "E0150 TRAINER_FLANNERY_1, Lavaridge Gym leader (sun + After You Eruption + Mega Chandelure), cap 36",
+  "availability_audit": "Chronology: the Heat Badge fight is the last encounter of the cap-36 window (C22 Mt. Chimney raised the cap to 36, C23 is Flannery). Every source map precedes Lavaridge in book play order: Route 102/103/104 (C02-C05), Petalburg City ponds with the C02 Old Rod (C02), Dewford (C10-C14), Slateport Mart (C15), Mauville Game Corner and the C18 Rock Smash license (C18). No Surf-gated water (Surf is C27), no Strength-gated area (Strength comes only after this badge), no legendary, no post-badge source. All evolution levels are at or below cap 36.",
+  "plan": "Win the weather war, then punish. Pelipper is deliberately NOT led: ability order on entry is by Speed, so a leading Pelipper's Drizzle resolves first and Torkoal's Drought simply overwrites it into sun. Pelipper is instead switched in on turn 1, which makes rain the newer weather and cancels Drought - halving every Fire attack including a sun-boosted Eruption and doubling my own Water damage. Every member except Primarina resists Grass, so Chlorophyll Lilligant's Leaf Storm has no easy target; Swampert is deliberately left out because it is 4x weak to it. Garganacl's Purifying Salt blanks Sacred Fire and Will-O-Wisp burns and halves Mega Chandelure's and Skeledirge's Ghost damage. Gyarados's Intimidate answers Incineroar and Band Entei.",
+  "party": [
+    {
+      "species": "SPECIES_KINGDRA",
+      "moves": ["MOVE_HYDRO_PUMP", "MOVE_ICE_BEAM", "MOVE_DRAGON_PULSE", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "primary rain sweeper; Water/Dragon resists Fire, Water AND Grass, which is every offensive type on Flannery's team",
+      "availability": "Horsea on the Route104 good-rod table (gate 30), Seadra at level 32, Kingdra by Dragon Scale trade evolution."
+    },
+    {
+      "species": "SPECIES_GYARADOS",
+      "moves": ["MOVE_WATERFALL", "MOVE_ICE_FANG", "MOVE_DRAGON_DANCE", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Intimidate against Incineroar and Choice Band Entei; Water/Flying resists Fire and Grass",
+      "availability": "Magikarp on the Petalburg City old-rod table (gate 14), evolves at level 20."
+    },
+    {
+      "species": "SPECIES_PELIPPER",
+      "moves": ["MOVE_HURRICANE", "MOVE_WEATHER_BALL", "MOVE_TAILWIND", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_DRIZZLE",
+      "item": "ITEM_DAMP_ROCK",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "weather answer, switched in rather than led so its Drizzle lands after Drought",
+      "availability": "Wingull on the Route103 land table (gate 14), evolves to Pelipper at level 25."
+    },
+    {
+      "species": "SPECIES_GARGANACL",
+      "moves": ["MOVE_SALT_CURE", "MOVE_ROCK_SLIDE", "MOVE_RECOVER", "MOVE_PROTECT"],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_PURIFYING_SALT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 4, 0, 0, 252, 0],
+      "role": "Rock Slide is 2x on five of Flannery's six; Purifying Salt is immune to Sacred Fire burn and halves Ghost damage from Mega Chandelure and Skeledirge",
+      "availability": "Altering Cave 1F rock-smash table (gate 30); Rock Smash license from Mauville (C18)."
+    },
+    {
+      "species": "SPECIES_TOGEKISS",
+      "moves": ["MOVE_FOLLOW_ME", "MOVE_AIR_SLASH", "MOVE_HELPING_HAND", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_SERENE_GRACE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 0, 124, 0, 132, 0],
+      "role": "redirection; Fairy/Flying resists Grass and is the safest switch into Lilligant",
+      "availability": "Togepi on the Route102 land table (gate 14), friendship evolution to Togetic, Shiny Stone from the Slateport Mart (C15)."
+    },
+    {
+      "species": "SPECIES_PRIMARINA",
+      "moves": ["MOVE_MOONBLAST", "MOVE_HYDRO_PUMP", "MOVE_ENERGY_BALL", "MOVE_ICY_WIND"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "Assault Vest special wall and second Water breaker; Icy Wind is the speed answer if the sun stays up and Chlorophyll turns on",
+      "availability": "Popplio from the Mauville Game Corner (500 coins, C18), Brionne at 17, Primarina at 34."
+    }
+  ]
+}
