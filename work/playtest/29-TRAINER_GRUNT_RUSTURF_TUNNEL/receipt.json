@@ -1,0 +1,46 @@
+{
+  "play_order": 29,
+  "e_group": "E0031",
+  "trainer": "TRAINER_GRUNT_RUSTURF_TUNNEL",
+  "class": "grunt",
+  "location": "RusturfTunnel",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/29-TRAINER_GRUNT_RUSTURF_TUNNEL/party.json",
+  "opponent_levels_before": {"GRIMER_ALOLA": 22, "QWILFISH": 20, "SKRELP": 21, "NOIBAT": 23},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/29-TRAINER_GRUNT_RUSTURF_TUNNEL/a1", "seed": "0x2E55", "outcome": "won", "turns": 4, "player_faints": 0, "opponent_faints": 4, "ai_decision_frames_max": 16,
+     "narrative": "Four turns, four to zero, no damage taken. Nidoking's Earth Power removed Alolan Grimer on turn 1, which is the authored crack line - Power of Alchemy never had a corpse to inherit from for the rest of the fight. Alakazam's Psychic then one-shot Qwilfish and later Skrelp, and Ice Beam took Noibat at 4x through Eviolite. The only thing that went wrong on my side was a missed Focus Blast."}
+  ],
+  "strategy_checks": [
+    {"check": "Qwilfish's Intimidate activates on entry", "result": "PASS", "evidence": "Both player leads were at Attack -1 before the first decision point."},
+    {"check": "Power of Alchemy copies a fainted ally's ability only while Grimer survives beside it", "result": "PASS (negative branch, by the authored crack)", "evidence": "Grimer was the first body removed (turn 1, Earth Power at 2x through Eviolite). No inheritance occurred at any later point, and none was claimed. The dossier's own counterplay note - 'denying the inheritance by removing Grimer first' - is exactly what happened."},
+    {"check": "Noibat is the sonar-cave Tailwind reserve", "result": "CHOSEN, NOT EXECUTED", "evidence": "Turn 3 Noibat selected Tailwind, which is the authored reserve role, but a 4x Ice Beam knocked it out before the move resolved."},
+    {"check": "Acid Spray is used only when a subsequent special attack benefits", "result": "NOT OBSERVED", "evidence": "Skrelp entered last on turn 2 and only ever selected Protect before dying; Acid Spray was never chosen, which is correct because after Noibat fell there was no faster ally to receive the drop."},
+    {"check": "The usually faster Noibat cannot receive a retroactive same-turn boost", "result": "PASS (no contrary evidence)", "evidence": "No Acid Spray was fired, so no illegal retroactive boost could be claimed."},
+    {"check": "Eviolite bulk supports immediate Knock Off / Poison / Water pressure", "result": "PARTIAL", "evidence": "Grimer selected Knock Off into Alakazam on turn 1 - the correct target and the correct 2x move - but died first. Qwilfish selected Waterfall on turn 2 and also died first. The pressure plan was chosen correctly every time; it simply never got a turn."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "QWILFISH", "payoff": "EMPTY - both player attacks were aimed at Grimer, and Qwilfish was at 74/74 with nothing incoming. It guarded while its partner was focused down and died. See AI observations."},
+    {"turn": 2, "user": "NOIBAT", "payoff": "real - blocked a 4x Ice Beam that was lethal"},
+    {"turn": 3, "user": "SKRELP", "payoff": "real - blocked a 2x Psychic on the turn it entered"}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Turn 1 Qwilfish Protect was empty: it was at full HP, unthreatened, and its partner Grimer was the one being focused and the one that died. Under the September 15 no-read rule the AI cannot see my targets, so a first-turn guard is a forecast bet rather than an illegal choice, and I am recording it as an empty guard rather than a defect. It is worth noting to the AI owner that Qwilfish held Thunder Wave, which would have been a strictly better turn-1 forecast play against an unrevealed opposing pair - a speed-control move has value against every branch of the forecast, whereas Protect at full HP beside a threatened partner has value against only some.",
+    "Every other opposing choice was sensible: correct targets, correct type reads (Knock Off into the Psychic lead), and two Protects with real payoff."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt in four turns with zero player faints and zero damage taken. Brief rule: +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "QWILFISH", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21},
+      {"member": "SKRELP", "offset_before": 3, "offset_after": 4, "level_before": 21, "level_after": 22}
+    ],
+    "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. scripts/emerald_champions_teams.py --check currently reports the generated master as stale because other authored edits from a concurrent session are also in the working tree; I deliberately did not run --write so as not to clobber that session's in-flight generation. The main agent materializes. For E0030 earlier in this block I did run --write then --check and all three gates passed.",
+    "rerun": "NOT PERFORMED. The driver reads opponent levels from the compiled ROM and this machine's arm-none-eabi toolchain cannot build one (fatal error: stdint.h: No such file or directory), so work/agent-battle-build still holds the pre-change image.",
+    "note": "These two +1s are the rule-mandated minimum and I do not expect them to change the result. The structural issue is that this grunt fields four members against a six-member optimized party, so it is outnumbered before type matchups are considered - see the cooler note."
+  },
+  "cooler_note": "The Aqua smuggler identity is good and Alolan Grimer as the campaign's first is a real upgrade over another Mightyena. The Power of Alchemy plan is also genuinely interesting on paper. The problem is that it is a four-member team whose whole gimmick is conditional on one specific member surviving, and that member is the obvious first target for any Ground or Psychic attacker - the dossier itself names the counterplay. So the headline mechanic is, by construction, the thing a prepared player removes on turn 1. A concrete suggestion for a later pass (not applied here): either give Grimer a partner that protects it (Qwilfish already has Protect and Thunder Wave and could be authored to buy Grimer a turn), or move Grimer to the back so the inheritance has a corpse waiting for it when it arrives, which is what Power of Alchemy actually wants. Species-wise the four are well chosen for a cave-smuggler theme.",
+  "authored_set_legality": "No legality problem found.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}
