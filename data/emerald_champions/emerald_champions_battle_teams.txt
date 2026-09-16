@@ -875,8 +875,8 @@ plan: Froslass can use a genuine Frost Breath critical hit to activate Anger Poi
 crack: Remove or disable the activator, stop the boost or its recipient, exploit critical-hit prevention, use special pressure or bypass the selected guard.
 FROSLASS @FOCUS_SASH CURSED_BODY TIMID 252/0/4/0/0/252 0 | FROST_BREATH, ICY_WIND, TAUNT, SHADOW_BALL | ivs=31/0/31/0/31/31 | friendship=255
 TAUROS @CLEAR_AMULET ANGER_POINT ADAMANT 252/252/0/0/4/0 0 | DOUBLE_EDGE, HIGH_HORSEPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-HARIYAMA @SITRUS_BERRY THICK_FAT ADAMANT 4/252/124/0/128/0 -1 | FAKE_OUT, CLOSE_COMBAT, KNOCK_OFF, BULLET_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-HITMONTOP @ROCKY_HELMET INTIMIDATE ADAMANT 252/252/4/0/0/0 -1 | FAKE_OUT, CLOSE_COMBAT, FEINT, WIDE_GUARD | ivs=31/31/31/31/31/31 | friendship=255
+HARIYAMA @SITRUS_BERRY THICK_FAT ADAMANT 4/252/124/0/128/0 0 | FAKE_OUT, CLOSE_COMBAT, KNOCK_OFF, BULLET_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+HITMONTOP @ROCKY_HELMET INTIMIDATE ADAMANT 252/252/4/0/0/0 0 | FAKE_OUT, CLOSE_COMBAT, FEINT, WIDE_GUARD | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0076 TRAINER_BRANDI class=casual
 strategy: TRICK_ROOM
@@ -1328,8 +1328,8 @@ strategy: SETUP
 mega_slots: 4
 plan: First two useful turns: Alolan Exeggutor uses Helping Hand only when Dracozolt's selected attack benefits more than a second attack; otherwise it supplies special coverage. Turn two can introduce Dragonair's Thunder Wave to create an actual move-first opportunity. Alternate deployment: Dragonair control supports Altaria's Dragon Dance/Mega mode. Reserves & disruption: Hustle accuracy and Bolt Beak's moved-first condition are real risks. Do not claim Tailwind or guaranteed accuracy from Wide Lens. Counterplay & audit: Ground immunity, speed reversal, Fairy/Ice pressure and denying a safe Dragon Dance. Disposition: Keep; calculate the actual Bolt Beak order rather than treating its doubled power as permanent. Could this team be cooler? The concept is strong and kept: Wide Lens is the correct and slightly clever answer to Dracozolt's Hustle, so Bolt Beak actually lands, and Alolan Exeggutor's Harvest recycles its own Sitrus while it throws Draco Meteor and supports with Helping Hand. Mega Altaria is the right ace for a dragon-tamer and Altarianite's home in the campaign. What was wrong was purely the levels: a flat zero left the Eviolite Dragonair - a pre-evolution whose whole job is to survive long enough to Thunder Wave - at the same level as a fully evolved Mega holder. Dragonair goes to +5. The interaction to remember is a Hustle-boosted Bolt Beak from full Speed on a switch-in.
 crack: Ground immunity, speed reversal, Fairy/Ice pressure and denying a safe Dragon Dance. Disposition: Keep; calculate the actual Bolt Beak order rather than treating its doubled power as permanent.
-EXEGGUTOR_ALOLA @SITRUS_BERRY HARVEST QUIET 252/0/4/252/0/0 2 | HELPING_HAND, DRACO_METEOR, GIGA_DRAIN, FLAMETHROWER | ivs=31/31/31/31/31/31 | friendship=255
-DRACOZOLT @WIDE_LENS HUSTLE JOLLY 4/252/0/0/0/252 2 | BOLT_BEAK, DRAGON_CLAW, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+EXEGGUTOR_ALOLA @SITRUS_BERRY HARVEST QUIET 252/0/4/252/0/0 3 | HELPING_HAND, DRACO_METEOR, GIGA_DRAIN, FLAMETHROWER | ivs=31/31/31/31/31/31 | friendship=255
+DRACOZOLT @WIDE_LENS HUSTLE JOLLY 4/252/0/0/0/252 3 | BOLT_BEAK, DRAGON_CLAW, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 DRAGONAIR @EVIOLITE SHED_SKIN CALM 252/0/4/0/252/0 5 | THUNDER_WAVE, DRAGON_PULSE, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ALTARIA @ALTARIANITE NATURAL_CURE ADAMANT 252/252/4/0/0/0 1 | DRAGON_DANCE, DOUBLE_EDGE, PROTECT, ROOST | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -1458,12 +1458,12 @@ mega_slots: NONE
 ai: Conservative
 plan: Coalossal replaces Magcargo as a Defense/Tar Shot bulwark. Torracat gains Fake Out: the two-step opening can protect Tar Shot then exploit the Fire vulnerability. Numel gets Eviolite/Simple Stockpile instead of Amnesia, contrasting with the summit grunt's Flame Charge. Keep Fletchinder/Litleo/Heatmor and compensate the unevolved members individually. Misty Terrain does not prevent Tar Shot, Intimidate, Stockpile or flinching. Flame Body remains conditional against eligible airborne foes rather than a guaranteed grounded burn. Medium cap40 levels 41/44/45/46/46/41. Source implementation; full native battle calibration and Protect cadence remain pending.
 crack: Use the documented type, speed, item and support dependencies; no combination is guaranteed against interruption or incompatible targets.
-COALOSSAL @SITRUS_BERRY FLAME_BODY BOLD 252/0/252/4/0/0 1 | TAR_SHOT, BODY_PRESS, HEAT_WAVE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+COALOSSAL @SITRUS_BERRY FLAME_BODY BOLD 252/0/252/4/0/0 2 | TAR_SHOT, BODY_PRESS, HEAT_WAVE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 TORRACAT @ROCKY_HELMET INTIMIDATE ADAMANT 4/252/0/0/0/252 4 | FLARE_BLITZ, FAKE_OUT, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 FLETCHINDER @EVIOLITE FLAME_BODY JOLLY 4/252/0/0/0/252 5 | FLARE_BLITZ, AERIAL_ACE, ROOST, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 NUMEL @EVIOLITE SIMPLE MODEST 252/0/4/252/0/0 6 | HEAT_WAVE, EARTH_POWER, STOCKPILE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 LITLEO @CHOICE_SPECS UNNERVE MODEST 4/0/0/252/0/252 6 | FLAMETHROWER, HYPER_VOICE, SNARL, OVERHEAT | ivs=31/31/31/31/31/31 | friendship=255
-HEATMOR @ASSAULT_VEST TOUGH_CLAWS ADAMANT 252/252/4/0/0/0 1 | FIRE_LASH, THUNDER_PUNCH, BODY_SLAM, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
+HEATMOR @ASSAULT_VEST TOUGH_CLAWS ADAMANT 252/252/4/0/0/0 2 | FIRE_LASH, THUNDER_PUNCH, BODY_SLAM, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0144 TRAINER_GERALD class=gym
 strategy: SUN,SETUP
@@ -1489,11 +1489,11 @@ tactic: ACTIVATE MAGCARGO LAVA_PLUME CERULEDGE
 plan: Magcargo Lava Plume activates allied Flash Fire or Dachsbun Well-Baked Body. Use the actual configured Weak Armor ability on Magcargo. Magcargo78 precedes Dachsbun75 and Quiet Armarouge56 at these seeds. Dachsbun replaces Turtonator; Ceruledge changes to Flash Fire; Centiskorches Flash Fire remains. Magmar is not immune to friendly Lava Plume. Mega-independent thermal activation contrasts with Tabitha's Steam Engine speed trigger. Misty Terrain blocks new grounded status conditions, not the Flash Fire or Well-Baked Body ability boosts. Retain the natural starting mist; Lava Plume burns only eligible targets outside its protection. Medium cap40 levels 43/39/42/44/41/39. Source implementation; full native battle calibration and Protect cadence remain pending.
 crack: Use the documented type, speed, item and support dependencies; no combination is guaranteed against interruption or incompatible targets.
 MAGCARGO @FOCUS_SASH WEAK_ARMOR TIMID 4/0/0/252/0/252 3 | LAVA_PLUME, POWER_GEM, EARTH_POWER, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-ARMAROUGE @LIFE_ORB FLASH_FIRE QUIET 252/0/4/252/0/0 -1 | ARMOR_CANNON, PSYCHIC, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+ARMAROUGE @LIFE_ORB FLASH_FIRE QUIET 252/0/4/252/0/0 0 | ARMOR_CANNON, PSYCHIC, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 DACHSBUN @SITRUS_BERRY WELL_BAKED_BODY RELAXED 252/4/252/0/0/0 2 | BODY_PRESS, PLAY_ROUGH, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 MAGMAR @EVIOLITE VITAL_SPIRIT ADAMANT 4/252/0/0/0/252 4 | FIRE_PUNCH, THUNDER_PUNCH, CROSS_CHOP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CENTISKORCH @ROCKY_HELMET FLASH_FIRE ADAMANT 252/252/4/0/0/0 1 | FIRE_LASH, POWER_WHIP, COIL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CERULEDGE @CHOICE_BAND FLASH_FIRE ADAMANT 4/252/0/0/0/252 -1 | BITTER_BLADE, SHADOW_SNEAK, CLOSE_COMBAT, POISON_JAB | ivs=31/31/31/31/31/31 | friendship=255
+CERULEDGE @CHOICE_BAND FLASH_FIRE ADAMANT 4/252/0/0/0/252 0 | BITTER_BLADE, SHADOW_SNEAK, CLOSE_COMBAT, POISON_JAB | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0146 TRAINER_KEEGAN class=gym
 strategy: ALLY_COMBO
@@ -1669,7 +1669,7 @@ crack: Taunt, Steel/Poison/Dark pressure, Haze and concentrated attacks before t
 MEOWSTIC_F @LIFE_ORB COMPETITIVE TIMID 4/0/0/252/0/252 0 | PSYCHIC, SHADOW_BALL, THUNDERBOLT, CALM_MIND | ivs=31/31/31/31/31/31 | friendship=255
 CLEFABLE @LEFTOVERS MAGIC_GUARD BOLD 252/0/4/0/252/0 1 | MOONBLAST, CALM_MIND, FLAMETHROWER, MOONLIGHT | ivs=31/31/31/31/31/31 | friendship=255
 BANETTE @BANETTITE INSOMNIA ADAMANT 4/252/0/0/0/252 0 | POLTERGEIST, KNOCK_OFF, WILL_O_WISP, DESTINY_BOND | ivs=31/31/31/31/31/31 | friendship=255
-GOURGEIST @FLAME_ORB FLARE_BOOST MODEST 4/0/0/252/0/252 1 | SHADOW_BALL, GIGA_DRAIN, WILL_O_WISP, LEECH_SEED | ivs=31/31/31/31/31/31 | friendship=255
+GOURGEIST @FLAME_ORB FLARE_BOOST MODEST 4/0/0/252/0/252 2 | SHADOW_BALL, GIGA_DRAIN, WILL_O_WISP, LEECH_SEED | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0163 TRAINER_ALAN class=regular
 strategy: NONE
@@ -1953,8 +1953,8 @@ mega_slots: NONE
 plan: First two useful turns: Munkidori attacks while Jynx uses Lovely Kiss only when the accuracy risk is justified or attacks directly. Turn two respects the Choice lock and actual Toxic Chain/status outcomes. Alternate deployment: Musharna's speed control/Helping Hand supports Munkidori without sleep dependence. Reserves & disruption: Chimecho supplies Heal Pulse/Helping Hand for a worthwhile attacker, not a two-support endgame. There is no Trick Room in Musharna's listed set. Counterplay & audit: Dark pressure, sleep immunity, Taunt and special mitigation. Disposition: Keep; neither Toxic Chain nor Lovely Kiss is a guaranteed disable. Could this team be cooler? Kept, and the lead is the reason: Munkidori's Toxic Chain gives every attack a 30% chance to badly poison on top of its damage, which turns Choice Specs Psychic into a spread-format clock rather than a single number, and Jynx's Lovely Kiss is 75%-accurate sleep with Dry Skin bulk behind a Focus Sash. Musharna and Chimecho are the support half - Light Screen, Thunder Wave, Helping Hand and Heal Pulse - so this is genuinely a psychic-support team rather than four attackers. The improvement worth naming is that Synchronize on Musharna wants the player to inflict status and nothing here makes that likely. Offsets individual: +1 across the evolved three, Chimecho +2 as the fragile support that has to survive to matter.
 crack: Dark pressure, sleep immunity, Taunt and special mitigation. Disposition: Keep; neither Toxic Chain nor Lovely Kiss is a guaranteed disable.
 MUNKIDORI @CHOICE_SPECS TOXIC_CHAIN TIMID 4/0/0/252/0/252 1 | PSYCHIC, SLUDGE_BOMB, FOCUS_BLAST, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-JYNX @FOCUS_SASH DRY_SKIN TIMID 4/0/0/252/0/252 1 | LOVELY_KISS, ICE_BEAM, PSYCHIC, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MUSHARNA @MENTAL_HERB SYNCHRONIZE SASSY 252/0/4/0/252/0 1 | THUNDER_WAVE, PSYCHIC, HELPING_HAND, LIGHT_SCREEN | ivs=31/31/31/31/31/31 | friendship=255
+JYNX @FOCUS_SASH DRY_SKIN TIMID 4/0/0/252/0/252 2 | LOVELY_KISS, ICE_BEAM, PSYCHIC, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MUSHARNA @MENTAL_HERB SYNCHRONIZE SASSY 252/0/4/0/252/0 2 | THUNDER_WAVE, PSYCHIC, HELPING_HAND, LIGHT_SCREEN | ivs=31/31/31/31/31/31 | friendship=255
 CHIMECHO @LEFTOVERS LEVITATE CALM 252/0/4/0/252/0 2 | PSYCHIC, HEAL_PULSE, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0227 TRAINER_MAGIKARP_GUY class=ace
@@ -1964,7 +1964,7 @@ ai: Conservative
 plan: First two useful turns: Ditto transforms only into a worthwhile eligible target while Milotic attacks or controls speed. Turn two exploits the actual copied set and item rather than assume a perfect counter. Alternate deployment: Milotic and Mega Gyarados are the genuine competitive pressure mode. Reserves & disruption: Magikarp's two moves and Feebas's utility are deliberate identity choices, not missing data. They still cost slots and should not be rated as high-pressure threats. Counterplay & audit: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled. Could this team be cooler? No - and that is the point, so it is kept exactly as built. This is the campaign's one joke team and it commits: a bare Magikarp with Flail and Tackle, an Eviolite Feebas that actually does something (Chilling Water, Icy Wind and Hypnosis off 116/140 defensive EVs), and a Choice Scarf Imposter Ditto that copies the player's best Pokemon and outspeeds it. The gag lands because Milotic and Mega Gyarados are waiting behind the two fish nobody respects. Changing any of it would break the joke; what it needed was levels, so the Feebas that has to survive to be funny goes to +3 while the rest sit at +1. The moment to remember is Ditto turning into the player's own ace and moving first.
 crack: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled.
 DITTO @CHOICE_SCARF IMPOSTER BOLD 252/0/252/0/4/0 1 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
-MILOTIC @LEFTOVERS COMPETITIVE BOLD 252/0/252/0/4/0 1 | MUDDY_WATER, ICE_BEAM, RECOVER, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
+MILOTIC @LEFTOVERS COMPETITIVE BOLD 252/0/252/0/4/0 2 | MUDDY_WATER, ICE_BEAM, RECOVER, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
 MAGIKARP @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 1 | FLAIL, TACKLE | ivs=31/31/31/31/31/31 | friendship=255
 FEEBAS @EVIOLITE OBLIVIOUS BOLD 252/0/116/0/140/0 3 | CHILLING_WATER, ICY_WIND, HYPNOSIS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 GYARADOS @GYARADOSITE INTIMIDATE JOLLY 4/252/0/0/0/252 1 | WATERFALL, CRUNCH, DRAGON_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
@@ -1975,9 +1975,9 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Magnezone uses Electroweb when Exploud benefits from the speed change; otherwise both attack complementary targets. Turn two attacks through the new order or pivots to a backup Tailwind user. Alternate deployment: Chatot and Unfezant provide the more mobile speed-control mode. Reserves & disruption: Sturdy requires full HP and Scope Lens does not guarantee every Unfezant critical hit. No Boomburst is present in this reporter version. Counterplay & audit: Wide Guard, Ground pressure, special mitigation and speed reversal. Disposition: Keep distinct from both the first reporter fight and the later Boomburst version. Could this team be cooler? The sound-and-broadcast theme is exactly right for a news crew and it stays: Scrappy Exploud's Hyper Voice ignores Ghost immunity, Chatot is a 'talking bird' with Tailwind support, and Sturdy Magnezone guarantees a turn no matter what hits it. The unit's honest weakness is Unfezant, which is the third near-identical Brave Bird body in this stretch of the campaign (it also appears on Phil at E0238 and now in the Fortree gym); it is left here and differentiated in the gym instead. What would be cooler is leaning the whole team into sound moves so Throat Spray and Soundproof interactions become the crew's signature. Flagged. Offsets stay low and individual for a regular pair.
 crack: Wide Guard, Ground pressure, special mitigation and speed reversal. Disposition: Keep distinct from both the first reporter fight and the later Boomburst version.
-MAGNEZONE @SITRUS_BERRY STURDY MODEST 4/0/0/252/0/252 -1 | THUNDERBOLT, FLASH_CANNON, ELECTROWEB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MAGNEZONE @SITRUS_BERRY STURDY MODEST 4/0/0/252/0/252 0 | THUNDERBOLT, FLASH_CANNON, ELECTROWEB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 EXPLOUD @LIFE_ORB SCRAPPY MODEST 4/0/0/252/0/252 0 | HYPER_VOICE, FOCUS_BLAST, FIRE_BLAST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CHATOT @FOCUS_SASH BIG_PECKS TIMID 4/0/0/252/0/252 0 | HYPER_VOICE, HEAT_WAVE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+CHATOT @FOCUS_SASH BIG_PECKS TIMID 4/0/0/252/0/252 1 | HYPER_VOICE, HEAT_WAVE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 UNFEZANT @SCOPE_LENS SUPER_LUCK JOLLY 4/252/0/0/0/252 1 | BRAVE_BIRD, TAILWIND, PROTECT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0230 TRAINER_DONALD class=ace
@@ -1985,8 +1985,8 @@ strategy: SETUP
 mega_slots: 3
 plan: First two useful turns: Leavanny uses Electroweb only when it enables Galvantula's attack or the next reserve; otherwise both apply pressure. Turn two chooses a safe Mega Heracross entry rather than repeatedly slowing already slower targets. Alternate deployment: Vespiquen's Intimidate/Helping Hand supports Mega Heracross's multi-hit physical mode. Reserves & disruption: Galvantula Thunder accuracy follows actual Compound Eyes/weather rules. Heracross's base Moxie does not coexist with an unrelated post-Mega ability. Counterplay & audit: Fire/Flying pressure, priority, Taunt and contact/physical mitigation. Disposition: Keep; the support turn must produce a real attack threshold or speed benefit. Could this team be cooler? Kept: Mega Heracross's Skill Link turns Pin Missile and Rock Blast into guaranteed five-hit moves that shred Focus Sash, Substitute and Disguise, Compound Eyes Galvantula makes Thunder a 91%-accurate move without any weather at all, and Leavanny's Electroweb is speed control that sets its partners up. That is three abilities each doing something the others cannot. Vespiquen's Intimidate plus Taunt is the support anchor. The improvement worth naming is that Moxie on Mega Heracross is overwritten by the Mega ability, so the AI must not plan a Moxie chain through the transition. Offsets individual: Mega Heracross 0, Vespiquen +2 as the support that must survive.
 crack: Fire/Flying pressure, priority, Taunt and contact/physical mitigation. Disposition: Keep; the support turn must produce a real attack threshold or speed benefit.
-LEAVANNY @LIFE_ORB SWARM JOLLY 4/252/0/0/0/252 1 | LEAF_BLADE, X_SCISSOR, ELECTROWEB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-GALVANTULA @WISE_GLASSES COMPOUND_EYES TIMID 4/0/0/252/0/252 1 | THUNDER, BUG_BUZZ, VOLT_SWITCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+LEAVANNY @LIFE_ORB SWARM JOLLY 4/252/0/0/0/252 2 | LEAF_BLADE, X_SCISSOR, ELECTROWEB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GALVANTULA @WISE_GLASSES COMPOUND_EYES TIMID 4/0/0/252/0/252 2 | THUNDER, BUG_BUZZ, VOLT_SWITCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 HERACROSS @HERACRONITE MOXIE ADAMANT 4/252/0/0/0/252 0 | PIN_MISSILE, ROCK_BLAST, CLOSE_COMBAT, SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
 VESPIQUEN @LEFTOVERS INTIMIDATE CAREFUL 252/0/4/0/252/0 2 | ATTACK_ORDER, PROTECT, HELPING_HAND, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -1997,16 +1997,16 @@ plan: First two useful turns: Vivillon uses Rage Powder or Sleep Powder only aga
 crack: Powder immunity, spread damage, Taunt and Fire/Flying pressure. Disposition: Keep; both supports must retain an offensive or partner-preservation payoff.
 VIVILLON @MENTAL_HERB COMPOUND_EYES TIMID 252/0/4/0/0/252 -1 | HURRICANE, RAGE_POWDER, SLEEP_POWDER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 RIBOMBEE @FOCUS_SASH SWEET_VEIL TIMID 4/0/0/252/0/252 1 | POLLEN_PUFF, DAZZLING_GLEAM, QUIVER_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ARAQUANID @SITRUS_BERRY WATER_BUBBLE BRAVE 252/252/4/0/0/0 1 | LIQUIDATION, LUNGE, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PINSIR @LIFE_ORB MOXIE JOLLY 4/252/0/0/0/252 1 | X_SCISSOR, CLOSE_COMBAT, STONE_EDGE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ARAQUANID @SITRUS_BERRY WATER_BUBBLE BRAVE 252/252/4/0/0/0 2 | LIQUIDATION, LUNGE, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PINSIR @LIFE_ORB MOXIE JOLLY 4/252/0/0/0/252 2 | X_SCISSOR, CLOSE_COMBAT, STONE_EDGE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0232 TRAINER_DOUG class=regular
 strategy: REDIRECTION,SETUP
 mega_slots: NONE
 plan: First two useful turns: Ariados redirects when it can preserve Masquerain's setup or attack; Masquerain does not need Quiver Dance when immediate pressure is stronger. Turn two spends the earned boost. Alternate deployment: Orbeetle's relevant screen supports Lokix's entry burst. Reserves & disruption: Sticky Web and dual screens require a damage horizon; First Impression is entry-only. Do not set a web into a battle that will end before another grounded enemy enters. Counterplay & audit: Powder immunity, spread attacks, Taunt and priority denial. Disposition: Keep but prioritize support/action-economy tests so several defensive moves do not become several empty turns. Could this team be cooler? Kept, and it is deliberately the darker mirror of Taylor's team a few trainers earlier: Ariados sets Sticky Web to halve the player's Speed and uses Rage Powder to protect the setter, Orbeetle puts both screens up behind Light Clay, and Lokix's Tinted Lens First Impression hits for neutral damage through resistances on its entry turn. Masquerain's Intimidate plus Quiver Dance is the setup lane. Sticky Web plus screens is a genuinely oppressive shell for a route regular. The improvement worth naming is that Swarm on Orbeetle is dead weight on a purely defensive set. Offsets individual and low, matching the class.
 crack: Powder immunity, spread attacks, Taunt and priority denial. Disposition: Keep but prioritize support/action-economy tests so several defensive moves do not become several empty turns.
-MASQUERAIN @FOCUS_SASH INTIMIDATE TIMID 4/0/0/252/0/252 -1 | QUIVER_DANCE, BUG_BUZZ, HYDRO_PUMP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ARIADOS @SITRUS_BERRY INSOMNIA IMPISH 252/0/252/0/4/0 0 | RAGE_POWDER, STICKY_WEB, POISON_JAB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MASQUERAIN @FOCUS_SASH INTIMIDATE TIMID 4/0/0/252/0/252 0 | QUIVER_DANCE, BUG_BUZZ, HYDRO_PUMP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ARIADOS @SITRUS_BERRY INSOMNIA IMPISH 252/0/252/0/4/0 1 | RAGE_POWDER, STICKY_WEB, POISON_JAB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 LOKIX @LIFE_ORB TINTED_LENS ADAMANT 4/252/0/0/0/252 1 | FIRST_IMPRESSION, SUCKER_PUNCH, LEECH_LIFE, AXE_KICK | ivs=31/31/31/31/31/31 | friendship=255
 ORBEETLE @LIGHT_CLAY SWARM CALM 252/0/4/0/252/0 1 | LIGHT_SCREEN, REFLECT, BUG_BUZZ, PSYCHIC | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -2086,10 +2086,10 @@ strategy: SETUP
 mega_slots: NONE
 plan: Raid stage 5 - the last door before Shelly, and the ugliest crew in the building. First two useful turns: Mightyena's Intimidate lands on entry and Howl raises the Attack of both Mightyena and its partner, which is what makes this a doubles support move rather than a selfish boost; Golisopod uses First Impression only on its genuine entry turn, because the move is dead from turn two onward. Turn two must account for Emergency Exit - if Golisopod drops below half it is pulled out whether Aqua wanted it or not, which can end a planned boosted attack before it happens. Alternate deployment: Alolan Muk and Qwilfish are the slower poison-control mode - Muk's Poison/Dark typing resists most of what a player brings to a Ghost-free room, and Qwilfish's second Intimidate stacks with Mightyena's. Reserves & disruption: Spikes and Curse should not both burn a turn in the same battle; one of them is the plan and the other is a concession. Sucker Punch fails against any non-attacking turn. AI executability: SETUP is backed by Howl and Curse. Could this team be cooler? The composition is retained and deliberately so - Mightyena, Golisopod, Alolan Muk and Qwilfish is the strongest pure Aqua-flavour roster in the raid (a wrecked beach's worth of Dark, Poison and Water bruisers) and the Emergency Exit risk is a real, readable drawback the player can force rather than a hidden coin flip. The honest answer to "could it be cooler" is that its weakness was presentation, not species: a raid boss's antechamber was running the same flat offsets as the lobby. It now sits at +2 to +3, the highest of the grunts, and the moment to remember is deliberately damaging Golisopod to force it out of a winning position. Honest counterplay: special damage bypasses two Intimidates, priority denial blanks First Impression and Sucker Punch, and controlled chip damage weaponises Emergency Exit against its owner.
 crack: Chip Golisopod below half on purpose - Emergency Exit will remove it from a board it was winning. Special attackers ignore both Intimidates entirely; Ground and Psychic coverage answer the Poison half; and every Sucker Punch fails on a turn you spend setting up or guarding instead of attacking.
-MIGHTYENA @LIFE_ORB INTIMIDATE JOLLY 4/252/0/0/0/252 2 | SUCKER_PUNCH, PLAY_ROUGH, CRUNCH, HOWL | ivs=31/31/31/31/31/31 | friendship=255
+MIGHTYENA @LIFE_ORB INTIMIDATE JOLLY 4/252/0/0/0/252 3 | SUCKER_PUNCH, PLAY_ROUGH, CRUNCH, HOWL | ivs=31/31/31/31/31/31 | friendship=255
 GOLISOPOD @SITRUS_BERRY EMERGENCY_EXIT ADAMANT 4/252/0/0/0/252 3 | FIRST_IMPRESSION, LIQUIDATION, THROAT_CHOP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MUK_ALOLA @FIGY_BERRY GLUTTONY BRAVE 252/252/4/0/0/0 3 | KNOCK_OFF, POISON_JAB, CURSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-QWILFISH @BLACK_SLUDGE INTIMIDATE ADAMANT 252/252/4/0/0/0 2 | LIQUIDATION, POISON_JAB, SPIKES, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+QWILFISH @BLACK_SLUDGE INTIMIDATE ADAMANT 252/252/4/0/0/0 3 | LIQUIDATION, POISON_JAB, SPIKES, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0248 TRAINER_SHELLY_WEATHER_INSTITUTE class=admin
 strategy: SNOW,REDIRECTION,SETUP
@@ -2196,8 +2196,8 @@ strategy: SETUP,TAILWIND
 mega_slots: NONE
 plan: First two useful turns: Dodrio attacks while Xatu sets Tailwind only when it improves the race; turn two uses the speed or pivots to the special attacker. Alternate deployment: Xatu and Pa'u Oricorio support a Quiver Dance special mode. Reserves & disruption: Hisuian Braviary offers Choice Specs pressure with Esper Wing; its speed effect depends on actual move execution. Oricorio can use its own dance without an external dance partner. Counterplay & audit: Rock/Electric pressure, Taunt where Magic Bounce does not protect the action, and room reversal. Disposition: Keep; no need to invent a second dancing species for Oricorio to have a useful set. Could this team be cooler? Retained: Magic Bounce Xatu is the reason this regular is dangerous - it reflects Taunt, Will-O-Wisp, Thunder Wave, Leech Seed and hazards straight back at the sender, so the usual answers to a Tailwind team all fail against the Pokemon setting the Tailwind. Oricorio-Pa'u's Dancer copies a player's Quiver Dance, Dragon Dance or Swords Dance for free, which is an unusual and memorable punish for setting up. Sheer Force Braviary-Hisui is the Choice Specs breaker. The honest gap is that Dancer has no dancer of its own to copy, so it only triggers on the player's terms. Offsets stay low and individual.
 crack: Rock/Electric pressure, Taunt where Magic Bounce does not protect the action, and room reversal. Disposition: Keep; no need to invent a second dancing species for Oricorio to have a useful set.
-DODRIO @LIFE_ORB EARLY_BIRD JOLLY 4/252/0/0/0/252 -1 | BRAVE_BIRD, KNOCK_OFF, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-XATU @SITRUS_BERRY MAGIC_BOUNCE TIMID 4/0/0/252/0/252 0 | TAILWIND, PSYCHIC, HEAT_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DODRIO @LIFE_ORB EARLY_BIRD JOLLY 4/252/0/0/0/252 0 | BRAVE_BIRD, KNOCK_OFF, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+XATU @SITRUS_BERRY MAGIC_BOUNCE TIMID 4/0/0/252/0/252 1 | TAILWIND, PSYCHIC, HEAT_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ORICORIO_PAU @WISE_GLASSES DANCER TIMID 4/0/0/252/0/252 0 | REVELATION_DANCE, AIR_SLASH, QUIVER_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BRAVIARY_HISUI @CHOICE_SPECS SHEER_FORCE MODEST 4/0/0/252/0/252 1 | HURRICANE, ESPER_WING, HEAT_WAVE, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -2264,9 +2264,9 @@ strategy: SUN,SNOW
 mega_slots: NONE
 plan: First two useful turns: Ninetales establishes sun while Weepinbell attacks or uses a legal Sleep Powder; turn two exploits Chlorophyll before considering a switch. Alternate deployment: Alolan Ninetales and Torterra form the separate snow/Veil matchup mode. Reserves & disruption: Switching to Alolan Ninetales replaces sun and removes Weepinbell's Chlorophyll advantage. Veil is not an additional benefit layered on permanent sun. Counterplay & audit: Weather control, Taunt, Fire/Flying pressure and exploiting the setter switch. Disposition: Keep as a genuine two-weather puzzle only with explicit mutually exclusive modes and a reason to change them. Could this team be cooler? It is kept exactly because of what looks like a bug: two sisters, two Ninetales, two incompatible weathers. Kantonian Ninetales's Drought and Alolan Ninetales's Snow Warning overwrite each other, and the deployment order is the design - the lead pair is sun (Drought plus Chlorophyll Weepinbell), and the Alolan half with Aurora Veil is the second mode after the first falls. The player therefore fights the same trainer under two different skies, and the memorable moment is the weather flipping when the second sister's Ninetales comes out. Torterra's Solid Rock is the grounded body that does not care either way. The honest caution is that the AI must never send both Ninetales out together, which would waste one of them. Offsets individual: the Eviolite Weepinbell at +1, the rest low.
 crack: Weather control, Taunt, Fire/Flying pressure and exploiting the setter switch. Disposition: Keep as a genuine two-weather puzzle only with explicit mutually exclusive modes and a reason to change them.
-NINETALES @HEAT_ROCK DROUGHT TIMID 4/0/0/252/0/252 -1 | HEAT_WAVE, SOLAR_BEAM, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+NINETALES @HEAT_ROCK DROUGHT TIMID 4/0/0/252/0/252 0 | HEAT_WAVE, SOLAR_BEAM, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 WEEPINBELL @EVIOLITE CHLOROPHYLL MODEST 4/0/0/252/0/252 1 | SLEEP_POWDER, GIGA_DRAIN, SLUDGE_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-NINETALES_ALOLA @LIGHT_CLAY SNOW_WARNING TIMID 4/0/0/252/0/252 0 | BLIZZARD, AURORA_VEIL, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+NINETALES_ALOLA @LIGHT_CLAY SNOW_WARNING TIMID 4/0/0/252/0/252 1 | BLIZZARD, AURORA_VEIL, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TORTERRA @LIFE_ORB SOLID_ROCK ADAMANT 252/252/4/0/0/0 1 | WOOD_HAMMER, HIGH_HORSEPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0274 TRAINER_FREDRICK class=ace
