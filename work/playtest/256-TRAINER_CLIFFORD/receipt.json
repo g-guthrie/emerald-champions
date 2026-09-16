@@ -1,0 +1,65 @@
+{
+  "play_order": 256,
+  "e_group": "E0397",
+  "trainer": "TRAINER_CLIFFORD",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (room ten, Electric Terrain)",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; offset-1 members at L75, Magearna and Porygon-Z (offset 2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/256-TRAINER_CLIFFORD/party_ground76.json"],
+  "chronology_note": "Mossdeep Gym reached, Mind Badge not earned, nothing from Sootopolis, the Seafloor Cavern or the Space Center. Incineroar 36 (Mauville), Garchomp 48 + Garchompite stone-window 30, Landorus 42 (Route111_RuinsExterior sign, a reachable legend used deliberately because it is the only Ground attacker in the window immune to its partner's Earthquake), Urshifu-Single 42 (Kubfu Route112), Flutter Mane 68 (MtPyre_Summit), Gholdengo 48. No Mossdeep-or-later source.",
+  "pre_play_strategy_checks": [
+    "Electric Surge fires on entry and Terrain Extender makes it 8 turns",
+    "Surge Surfer Raichu moves first while terrain stands",
+    "Terrain blocks sleep (not testable with this party) and, per plan text, priority - test with Fake Out / Sucker Punch",
+    "Magearna Soul-Heart rises on each faint and Mega-evolves",
+    "Aegislash Stance Change / King's Shield behaviour",
+    "Rotom-Mow Levitate keeps it out of Earthquake"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 6,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/256-TRAINER_CLIFFORD/a1",
+      "outcome": "VOID - previous agent cut off mid-battle at turn 6 (4-4 on faints, Gholdengo 256/289 and Incineroar 98/301 versus a full Aegislash). Kept for context only; the earlier player lost Landorus to a critical Fleur Cannon, Urshifu to its own partner's Earthquake breaking the Sash before Leaf Storm, Garchomp and Flutter Mane to Ice Beam / critical Leaf Storm."
+    },
+    {
+      "n": 2,
+      "seed": 7,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/256-TRAINER_CLIFFORD/a2",
+      "party": "party_ground76.json (Incineroar / Mega Garchomp / Landorus / Urshifu-Single / Flutter Mane / Gholdengo)",
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 0,
+      "opponent_faints": 6,
+      "why": "Turn 1: Incineroar out for Landorus (both Raichu's Thunderbolt and Garchomp's Earthquake do nothing to it), Mega Garchomp Earthquake; Pincurchin Protected, Raichu died to the spread hit before its Nasty Plot. Turn 2: Magearna Mega-evolved and got +1 from Pincurchin's faint but was outsped by both Ground attackers and died to Earthquake + Earth Power before firing Fleur Cannon. Turn 3: Porygon-Z killed by Earth Power + Dragon Claw before its 4x Ice Beam (Rotom Protected, untargeted). Turn 4: Earthquake triggered Aegislash's Weakness Policy and Earth Power removed it in the same turn; Rotom's Leaf Storm took Landorus to 21. Turn 5: Sludge Bomb + Dragon Claw ended Rotom. Two Ground types immune to the whole Electric lane and faster than every Electric-Terrain-independent member made the room's engine irrelevant."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Electric Surge on entry, Terrain Extender 8 turns", "result": "PASS", "evidence": "turn 0 state: terrain=electric, terrain_turns=8"},
+    {"check": "Surge Surfer Raichu moves first in terrain", "result": "PASS", "evidence": "turn 1: Raichu's Thunderbolt resolved before Mega Garchomp's Earthquake (it hit the incoming Landorus, immune)"},
+    {"check": "Terrain blocks priority against grounded targets (plan text claim)", "result": "FAIL - plan text is wrong, engine is right", "evidence": "a1 turn 1: Incineroar's Fake Out flinched grounded Raichu under Electric Terrain; a2 turn 2: Pincurchin's own Sucker Punch hit Landorus (not grounded, but the AI also chose priority into terrain). Electric Terrain blocks sleep, Psychic Terrain blocks priority; the dossier plan sentence 'blocks priority against grounded targets - so the player's Fake Out, Sucker Punch and Extreme Speed answers simply fail' describes Psychic Terrain."},
+    {"check": "Magearna Soul-Heart rises per faint and Mega-evolves", "result": "PASS", "evidence": "turn 2: 'Magearna has Mega Evolved', 'Magearna's Sp. Atk rose!' after Pincurchin fainted; killed before it could use the boost"},
+    {"check": "Aegislash Weakness Policy / Stance Change", "result": "PASS (partial)", "evidence": "turn 4: Weakness Policy fired on the super-effective Earthquake, then Earth Power removed it in Shield Forme before it moved; never reached Blade Forme"},
+    {"check": "Rotom-Mow Levitate avoids Earthquake", "result": "PASS", "evidence": "turn 4: 'It doesn't affect the opposing Rotom'"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Pincurchin", "payoff": "blocked Mega Garchomp's Earthquake (real payoff; Raichu still died beside it)"},
+    {"turn": 3, "user": "Rotom-Mow", "payoff": "empty - both player attacks went into Porygon-Z; acceptable expected-value guard on the turn a 4x-weak partner was the obvious target"}
+  ],
+  "protect_summary": "2 Protects, 1 with real payoff, 1 empty but defensible. No repetitive guarding.",
+  "ai_defects": [],
+  "ai_notes": "Sensible choices throughout: Raichu attacked rather than Nasty Plot into two Ground types (its Thunderbolt was still wasted into the Incineroar slot that became Landorus - it cannot read the switch). Magearna Fleur Cannon target was Mega Garchomp (2x), correct. Rotom targeted Landorus with Leaf Storm (its best neutral hit) rather than Thunderbolt into an immune board.",
+  "level_changes": [
+    {"member": "PINCURCHIN", "field": "level offset", "before": 1, "after": 2, "why": "won attempt 1 (the only valid attempt) with zero faints and no real threat; the engine did nothing but Protect and a Sucker Punch"},
+    {"member": "RAICHU_ALOLA", "field": "level offset", "before": 1, "after": 2, "why": "the room's sweeper died turn 1 before acting; one more level on the two cheapest members, never the Mega"}
+  ],
+  "level_change_rationale": "Brief step 5, first-try win with 0 faints. Magearna and Porygon-Z already sit at offset 2 and are the room's real damage; the +1s go to the terrain engine and the terrain sweeper.",
+  "cooler": "The concept shows: terrain visibly up for 8 turns, Surge Surfer speed real, Soul-Heart visibly ticking. But a Psychic gym's Electric room is fully answered by any two Ground types, and the plan's headline claim (priority denial) is simply not what Electric Terrain does. Cooler and more honest: have the room actually own the sleep-immunity angle it does provide (an opposing Amoonguss/Spore is the gym's cheapest counter elsewhere) and give Raichu Grass Knot or Surf, or give Rotom-Mow a second Ground-immune partner move, so a Garchomp+Landorus lead is not a free 6-0. Suggestion only, no set changes made.",
+  "legality_notes": "Plan text inaccuracy: Electric Terrain does not block priority (Psychic Terrain does). Sets are legal. Magearna Mega-evolved via Magearnite (a hack-added Mega) as authored.",
+  "verification_limit": "The +1 on Pincurchin and Raichu-Alola cannot be re-verified until the main agent rebuilds; this is the battle in the block most worth re-running with the same Ground party."
+}

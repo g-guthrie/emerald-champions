@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Gym room ten (Clifford, Electric Terrain) cap 76 - Ground-and-Fire answer party",
+  "availability_audit": "Same cap-76 resolution as E0394: Mossdeep Gym is the Mind Badge chapter, after Mt Pyre and the Aqua Hideout, before the Space Center. Per-member chronology against pool-76.json source_detail: Incineroar gate 36, evolution:level from Torracat (Mauville). Garchomp gate 48, evolution:level from Gabite, with ITEM_GARCHOMPITE stone-window 30 - both inside the Mega Ring window. Landorus gate 42, legendary_sign:Route111_RuinsExterior, the desert ruins reached in the Route 111 chapter, well upstream of Lilycove. Urshifu-Single-Strike gate 42, Kubfu legendary_sign:Route112 then EVO_SCRIPT_TRIGGER. Gholdengo gate 48, evolution:level from Gimmighoul-Chest. Flutter Mane gate 68, wild:MtPyre_Summit/land_mons, the chapter immediately before the Aqua Hideout. Nothing is sourced from Mossdeep, the Space Center, Shoal Cave, the Seafloor Cavern, Sootopolis or any later map. One reachable legend is used and it is named: Landorus, taken deliberately because Ground is this room's stated crack and Landorus is the only Ground attacker in the window that is itself immune to Ground, so my partner's Earthquake does not hit it.",
+  "plan": "Built directly off the room's own crack line. Ground pressure from two directions: Mega Garchomp's Earthquake (and Garchomp is itself Ground/Dragon, so Pincurchin's terrain-boosted Electric attacks do nothing to it) and Landorus' single-target Earth Power, which lets me hit a Ground target without damaging my own partner. Incineroar supplies Fire for Aegislash and Magearna and Knock Off for Terrain Extender and Life Orb, and is my test of the plan's claim that Electric Terrain blocks priority. Urshifu's Close Combat is the Fighting half of the Steel answer and Unseen Fist ignores both Protect and King's Shield. Flutter Mane outspeeds Surge Surfer Alolan Raichu even in terrain. Gholdengo's Good as Gold refuses Rotom-Mow's Will-O-Wisp outright.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_FLARE_BLITZ", "MOVE_KNOCK_OFF", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Intimidate; Fire pressure on Aegislash and Magearna; Knock Off strips Terrain Extender and Life Orb; Fake Out tests the terrain's priority claim",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_GARCHOMP",
+      "moves": ["MOVE_EARTHQUAKE", "MOVE_DRAGON_CLAW", "MOVE_STONE_EDGE", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ROUGH_SKIN",
+      "item": "ITEM_GARCHOMPITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition; Ground typing is immune to the room's entire Electric lane and Earthquake is the crack line's headline answer",
+      "availability": "pool-76 gate 48, evolution:level from SPECIES_GABITE; ITEM_GARCHOMPITE stone-window 30."
+    },
+    {
+      "species": "SPECIES_LANDORUS",
+      "moves": ["MOVE_EARTH_POWER", "MOVE_SLUDGE_BOMB", "MOVE_PSYCHIC", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: single-target Ground damage that does not hit my own partner, and a Flying typing that is immune to Garchomp's Earthquake",
+      "availability": "pool-76 gate 42, legendary_sign:Route111_RuinsExterior."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Unseen Fist ignores Protect and King's Shield; Close Combat is the Fighting answer to the Steel pair",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": ["MOVE_MOONBLAST", "MOVE_SHADOW_BALL", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "outspeeds Surge Surfer Alolan Raichu even under its own terrain; Ghost damage on Aegislash and a spread move for Focus Sash boards",
+      "availability": "pool-76 gate 68, wild:MtPyre_Summit/land_mons."
+    },
+    {
+      "species": "SPECIES_GHOLDENGO",
+      "moves": ["MOVE_MAKE_IT_RAIN", "MOVE_SHADOW_BALL", "MOVE_NASTY_PLOT", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_GOOD_AS_GOLD",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 0, 4],
+      "role": "Good as Gold refuses Rotom-Mow's Will-O-Wisp; Ghost damage on Aegislash; a second spread move",
+      "availability": "pool-76 gate 48, evolution:level from SPECIES_GIMMIGHOUL_CHEST."
+    }
+  ]
+}
