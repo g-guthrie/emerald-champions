@@ -1,0 +1,48 @@
+{
+  "play_order": 30,
+  "e_group": "E0032",
+  "trainer": "TRAINER_BRENDAN_RUSTBORO_TREECKO",
+  "aliases": ["TRAINER_BRENDAN_RUSTBORO_MUDKIP", "TRAINER_BRENDAN_RUSTBORO_TORCHIC", "TRAINER_BRENDAN_RUSTBORO_TREECKO", "TRAINER_MAY_RUSTBORO_MUDKIP", "TRAINER_MAY_RUSTBORO_TORCHIC", "TRAINER_MAY_RUSTBORO_TREECKO"],
+  "class": "rival",
+  "location": "Route104; RustboroCity",
+  "cap": 20,
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/party.json",
+  "opponent_levels_before": {"TAILLOW": 21, "ELECTRIKE": 22, "SHROOMISH": 22, "COMBUSKEN": 19},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/a1", "seed": "0x6D77", "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 4, "ai_decision_frames_max": 9,
+     "narrative": "Both opponents Protected on turn 1, which cost me a turn but bought Taillow a clean Flame Orb activation. Kartana removed Taillow on turn 2 and Electrike's Focus Sash on turn 3, while Eerie Impulse correctly found the only special attacker on my side. Combusken then did exactly what it is built to do: Protect for a free Speed Boost, then Fire Punch the Grass/Steel body for 4x and kill Kartana outright. Lucario's Bullet Punch finished Combusken at 2 HP and Close Combat closed out Shroomish. One player faint, four opponent faints."}
+  ],
+  "strategy_checks": [
+    {"check": "Taillow's Protect needs actual survival or a useful Orb-turn payoff", "result": "PASS", "evidence": "Turn 1 Protect blocked Kartana's Smart Strike and the Flame Orb burned Taillow at end of turn, turning Guts on. The guard produced both halves of the authored requirement."},
+    {"check": "Taillow attacks immediately when that is better than waiting for Flame Orb", "result": "PASS", "evidence": "Turn 2, already burned and facing a faster Kartana that would kill it, Taillow chose Quick Attack rather than Facade. That looks weak at a glance but is correct: it was going to be knocked out before a normal-priority move resolved, so the Guts-boosted priority move was the only way to cash the Orb turn at all. It dealt 22 to Nidoking."},
+    {"check": "Electrike's Eerie Impulse suppresses a relevant special attack before it lands", "result": "PASS", "evidence": "Turn 2: Eerie Impulse targeted Nidoking, the only special attacker on my side (the other three actives were physical), and dropped it two stages before its Earth Power resolved. Correct target and correct timing - it was not used against the physical Kartana."},
+    {"check": "Shroomish supplies a deliberate sleep/recovery mode, not empty Protect cycles", "result": "PARTIAL", "evidence": "Shroomish used Giga Drain for real recovery on turn 4 and one Protect on turn 5 that blocked a 2x Ice Beam. It never got to Spore because both of my Grass bodies were powder-immune and it entered late. No empty Protect cycle occurred."},
+    {"check": "Combusken's Eviolite/Speed Boost build converts a guard turn into position", "result": "PASS", "evidence": "Turn 3 Protect blocked a 2x Earth Power and banked a Speed Boost; turn 4 it used the speed to Fire Punch Kartana for 4x and kill the sweeper. This is the cleanest piece of play by any opponent in my block so far."},
+    {"check": "Lightning Rod and the Focus Sash hold the Electric lane", "result": "PASS", "evidence": "Electrike survived Earth Power at 1 HP on the Sash, then fired Thunderbolt the following turn. My Ground lead meant Lightning Rod never had an Electric attack to redirect."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "TAILLOW", "payoff": "real - blocked Smart Strike and produced the Flame Orb burn that turned Guts on"},
+    {"turn": 1, "user": "ELECTRIKE", "payoff": "real - blocked a 2x Earth Power at full HP"},
+    {"turn": 3, "user": "COMBUSKEN", "payoff": "real - blocked a 2x Earth Power and banked a Speed Boost that decided the next turn"},
+    {"turn": 5, "user": "SHROOMISH", "payoff": "real - blocked a 2x Ice Beam at 31/79"}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "No defect found. Every guard had a payoff, Eerie Impulse found the correct target, Fire Punch found the 4x body, and Taillow's Quick Attack over Facade was a correct dying-turn priority read rather than a mistake."
+  ],
+  "level_changes": {
+    "rule_applied": "Won on the first attempt with one player faint. The brief's 0-1 faint rule applies: +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "starter slot (COMBUSKEN / GROVYLE / MARSHTOMP depending on branch)", "offset_before": 1, "offset_after": 2, "level_before": 19, "level_after": 20},
+      {"member": "TAILLOW", "offset_before": 3, "offset_after": 4, "level_before": 21, "level_after": 22}
+    ],
+    "alias_scope": "Applied identically to all six aliases (BRENDAN and MAY x MUDKIP/TORCHIC/TREECKO), twelve authored lines in total, per the brief's rival rule. The fourth slot is the unchosen regional starter and carries offset 1 in every branch, so the same +1 lands on Combusken, Grovyle and Marshtomp alike.",
+    "verification": "Offset-only edits, which cannot change move legality or strategy coherence. --write was deliberately not run because a concurrent session has unrelated authored edits in the same working tree; the main agent materializes.",
+    "rerun": "NOT PERFORMED. This machine's arm-none-eabi toolchain cannot build the ROM (fatal error: stdint.h: No such file or directory), so work/agent-battle-build still holds the pre-change image.",
+    "justification": "The starter slot at offset 1 was the lowest level on the team and yet was the member that actually killed something, so raising it is the right call on both the rule and the merits - it is the one body whose Eviolite bulk and Speed Boost reward an extra level. Taillow at offset 3 got two turns and contributed 22 damage; +1 gives its Guts turn a little more weight."
+  },
+  "cooler_note": "The rival is well built for continuity: the Flame Orb Taillow, the Lightning Rod Electrike and the Spore Shroomish are all recognisable, and Eerie Impulse is a much better use of Electrike's turn than the Helping Hand it replaced. The concept weakness is that three of the four members are support or setup bodies whose plans are all conditional - powder, Electric redirection and a special-attack debuff - so a party built from physical, powder-immune, Ground-typed pieces turns off three quarters of the team at once, which is exactly what happened here. A concrete suggestion for a later pass (not applied here): Shroomish deployed last is the least effective it can possibly be, because by the time it arrives its sleep mode has no target worth removing. Leading Shroomish beside Taillow, with Electrike held back as the revenge body, would make Spore a real turn-1 threat and force the player to bring powder immunity rather than merely benefit from it. Species-wise the four should stay; this rival should feel familiar.",
+  "authored_set_legality": "No legality problem found in any of the six aliases.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Treecko branch played; level changes applied to all six aliases. Not earned campaign play."}
+}
