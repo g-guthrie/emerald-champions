@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Trick House puzzle 6, Sebastian (E0412), cap 84",
+  "availability_audit": "Same window and chronology as E0410 (Mind Badge, puzzle 6). Incineroar gate 36; Chi-Yu gate 48 (Ashen Woods C31, reachable legend); Rillaboom gate 36 (Grookey line); Chien-Pao gate 60 (Shoal Cave); Flutter Mane gate 68 (Mt Pyre Summit); Urshifu-RS gate 42. Nothing from Seafloor Cavern, Sootopolis, Pacifidlog, Routes 130-132 or Underwater maps.",
+  "plan": "Fire spread goes around Rage Powder and erases Scizor (4x) and Amoonguss together; Fake Out on Amoonguss denies the turn-1 Spore; Rillaboom is a Grass type that ignores Spore and Rage Powder and brings a second Fake Out for the Dunsparce Coil phase. Chien-Pao/Urshifu answer Donphan and Dunsparce.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Intimidate, Fake Out, Knock Off",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_TORRACAT (Litten, Mauville C22)."
+    },
+    {
+      "species": "SPECIES_CHI_YU",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_DARK_PULSE",
+        "MOVE_NASTY_PLOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEADS_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "spread Fire, Beads of Ruin",
+      "availability": "pool-84 gate 48, legendary_sign:AshenWoods (C31). Reachable legend."
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "item": "ITEM_ASSAULT_VEST",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Fake Out, priority Grass, terrain replacement",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_THWACKEY (Grookey line)."
+    },
+    {
+      "species": "SPECIES_CHIEN_PAO",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SWORD_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "fast Ice/Fighting, Sword of Ruin",
+      "availability": "pool-84 gate 60, legendary_sign:ShoalCave_LowTideIceRoom (Route 125, before Mossdeep). Reachable legend."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest special attacker, Icy Wind speed control",
+      "availability": "pool-84 gate 68, wild:MtPyre_Summit/land_mons (C37)."
+    },
+    {
+      "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+      "moves": [
+        "MOVE_SURGING_STRIKES",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "Water/Fighting through Protect",
+      "availability": "pool-84 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER (Jagged Pass C26)."
+    }
+  ]
+}

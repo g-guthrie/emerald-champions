@@ -1,0 +1,29 @@
+{
+  "play_order": 269, "e_group": "E0412", "trainer": "TRAINER_SEBASTIAN", "class": "ace", "location": "Route110_TrickHousePuzzle6",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "Scizor/Amoonguss/Donphan offset 1 -> L83, Dunsparce offset 2 -> L84. Confirmed.",
+  "party_manifest": "work/playtest/269-TRAINER_SEBASTIAN/party_sebastian_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 412, "outcome": "won", "turns": 7, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 the AI chose exactly the authored opening (Scizor Swords Dance behind Amoonguss Rage Powder); Fake Out flinched Amoonguss and one Beads-of-Ruin Heat Wave OHKOed Scizor (4x) and Amoonguss (360 HP) together. T2 Knock Off removed Dunsparce's Eviolite; Serene Grace Body Slam paralyzed the incoming Rillaboom. T3 Grassy Glide + Flare Blitz KOed Donphan (Sturdy never triggered because the priority hit came first). T4-T6 Dunsparce alternated Protect (blocked Flare Blitz), Roost, Protect (blocked Flare Blitz + Wood Hammer, both aimed at it) and died T7. It never used Coil."}
+  ],
+  "strategy_checks": [
+    {"check": "Rage Powder protects a Swords Dance", "result": "PASS (chosen), denied by Fake Out + spread", "evidence": "T1 native choices: Scizor Swords Dance, Amoonguss Rage Powder. Crack line (Fake Out the redirector, spread Fire) worked exactly as written."},
+    {"check": "Spore on a legal target", "result": "NOT EXERCISED", "evidence": "Amoonguss flinched T1 and died the same turn."},
+    {"check": "Donphan no-setup mode", "result": "PASS", "evidence": "T2 High Horsepower into the Rillaboom switch (resisted), T3 High Horsepower into Incineroar (missed)."},
+    {"check": "Dunsparce Coil + Serene Grace Body Slam endgame", "result": "PARTIAL", "evidence": "Body Slam paralysis landed T2 (60% via Serene Grace); Coil was never selected across five turns alone; it Protected/Roosted instead."},
+    {"check": "Sturdy denies the OHKO", "result": "NOT TRIGGERED", "evidence": "Grassy Glide chipped first, then Flare Blitz finished."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "battler": "Dunsparce", "payoff": "blocked Flare Blitz (~235) while Rillaboom was fully paralyzed; real"},
+    {"turn": 6, "battler": "Dunsparce", "payoff": "blocked Flare Blitz + Wood Hammer at 68 HP; real, bought a Roost tick from terrain"}
+  ],
+  "ai_defects": [],
+  "level_changes": [
+    {"member": "AMOONGUSS", "before": 1, "after": 2, "reason": "won first try 4-0 with zero faints; Amoonguss died to one spread Fire before acting"},
+    {"member": "DONPHAN", "before": 1, "after": 2, "reason": "same rule; lowest impact non-ace member (one resisted hit, one miss)"}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED (needs rebuild).",
+  "could_this_be_cooler": "The opening is authored well and the AI executes it; the problem is that it is the textbook 'Fake Out the Amoonguss, Heat Wave' board and Scizor/Amoonguss both fold to the same move. The Eviolite Dunsparce endgame is the memorable part, but it never Coiled. If the AI's Coil scoring only fires when unpressured, this team's third phase will rarely show; worth a look at the setup-move heuristic for Coil under two attackers. Not changed in this pass.",
+  "authored_set_legality": "No problem found."
+}
