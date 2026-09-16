@@ -1090,6 +1090,16 @@ static u32 PairGuardBankedShare(const struct PairEvaluation *ev, enum BattlerId 
     return min(100, banked);
 }
 
+// Two joint forecasts that are the same four actions score the same.
+static bool32 PairSameForecast(const struct PairAction left[2], const struct PairAction right[2])
+{
+    for (u32 index = 0; index < 2; index++)
+        if (left[index].index != right[index].index || left[index].move != right[index].move
+         || left[index].target != right[index].target)
+            return FALSE;
+    return TRUE;
+}
+
 static bool32 PairIsPassiveGuard(const struct PairAction *action)
 {
     if (action->index == PAIR_IDLE || GetMoveEffect(action->move) != EFFECT_PROTECT)
@@ -4661,6 +4671,14 @@ settle:
             total = shortlist[entry].score * forecastWeights[0];
             for (u32 forecast = 1; forecast < forecastCount; forecast++)
             {
+                // The alternative patterns can coincide with the primary one,
+                // and scoring the same four actions again cannot change the
+                // answer. Exact reuse, not an approximation.
+                if (PairSameForecast(forecasts[forecast], forecasts[0]))
+                {
+                    total += shortlist[entry].score * forecastWeights[forecast];
+                    continue;
+                }
                 ev->action[firstFoe] = forecasts[forecast][0];
                 ev->action[secondFoe] = forecasts[forecast][1];
                 s32 forecastScore = ScorePairWithImmediateEffects(ev);

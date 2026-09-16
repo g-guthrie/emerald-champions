@@ -1301,6 +1301,26 @@ DOUBLE_BATTLE_TEST("EC Laura pivot mechanics: a faster U-turn preserves the same
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC Laura board: an ordinary four-member route decision finishes inside the budget")
+{
+    GIVEN {
+        // The instrumented counterpart to the Ned board: a four-member route
+        // team with nothing exotic on it, which is where a search that runs to
+        // the stop every turn is a quality problem and not only a pause.
+        PLAYER(SPECIES_TOGETIC) { Level(20); HP(70); MaxHP(70); Defense(62); SpDefense(53); Speed(27); Ability(ABILITY_SERENE_GRACE); Item(ITEM_EVIOLITE); Moves(MOVE_HELPING_HAND, MOVE_AIR_SLASH); }
+        PLAYER(SPECIES_SYLVEON) { Level(20); HP(86); MaxHP(86); Defense(37); SpAttack(73); SpDefense(63); Speed(35); Ability(ABILITY_PIXILATE); Item(ITEM_COVERT_CLOAK); Moves(MOVE_HYPER_VOICE, MOVE_PROTECT); }
+        AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HELPING_HAND, target: playerRight);
+            MOVE(playerRight, MOVE_HYPER_VOICE, criticalHit: FALSE);
+        }
+    } THEN {
+        Test_MgbaPrintf("LAURA_BOARD_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC Laura pivot: use the guaranteed faster exit but keep an immediate escape from a faster attack")
 {
     bool32 fastPlayer;
