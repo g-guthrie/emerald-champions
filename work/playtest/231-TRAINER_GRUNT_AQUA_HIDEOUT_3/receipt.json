@@ -1,0 +1,87 @@
+{
+  "play_order": 231,
+  "e_group": "E0342",
+  "trainer": "TRAINER_GRUNT_AQUA_HIDEOUT_3",
+  "class": "grunt",
+  "location": "AquaHideout_B1F",
+  "chapter": "Mind Badge",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; all four members L73 = 76 + (-1) - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": [
+    "work/playtest/_party/party_aqua_76_lead_rillaboom.json",
+    "work/playtest/_party/party_aqua_76_lead_gardevoir.json"
+  ],
+  "chronology_note": "Same six members as play_order 229-230; attempt 1 led Incineroar beside Rillaboom for the Grass lane, attempt 2 led Incineroar beside Gardevoir specifically to put a revealed spread move on the board and force the room's Wide Guard.",
+  "pre_play_strategy_checks": [
+    "Barbaracle takes Shell Smash behind Toxapex's Wide Guard or Seismitoad's damage",
+    "Tough Claws makes a +2 Razor Shell and Stone Edge lethal in one turn",
+    "Drednaw's Shell Armor denies the critical hit that would end the setup plan",
+    "Drednaw can take the second Shell Smash if the first is answered",
+    "Toxapex protects the side with Wide Guard rather than itself",
+    "Toxapex's Regenerator plus Recover is the fallback attrition line"
+  ],
+  "attempts": [
+    {
+      "n": 1, "seed": 3, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/231-TRAINER_GRUNT_AQUA_HIDEOUT_3/a1",
+      "party": "party_aqua_76_lead_rillaboom.json",
+      "outcome": "won", "turns": 3, "decisions": 5,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 1.005,
+      "why": "Rillaboom is the structural answer to this room and it showed: Wood Hammer is 4x on Seismitoad, 4x on Barbaracle and 4x on Drednaw, and Grassy Glide is 4x priority that beats a +2 Shell Smash outright. Fake Out denied Barbaracle's turn-1 Shell Smash, a critical Wood Hammer removed Seismitoad the same turn, Barbaracle traded itself for Incineroar with Razor Shell on turn 2, and a priority Grassy Glide killed Drednaw on its entry turn before it acted at all. Toxapex fell to Wicked Blow."
+    },
+    {
+      "n": 2, "seed": 13, "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/231-TRAINER_GRUNT_AQUA_HIDEOUT_3/a2",
+      "party": "party_aqua_76_lead_gardevoir.json",
+      "outcome": "won", "turns": 3, "decisions": 5,
+      "player_faints": 1, "opponent_faints": 4, "ai_decision_seconds_max": 1.038,
+      "why": "Run to resolve the Wide Guard check that attempt 1 never produced. Two Pixilate Hyper Voices did 205/195 and then 200-plus into the back half. The room answered the revealed spread only on its very last turn. Incineroar died to a critical Surf. Urshifu closed it through a Wide Guard."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Barbaracle takes Shell Smash behind cover", "result": "PASS (selected once, denied)", "evidence": "attempt 1 turn 1 native record: b3 use_move SHELL_SMASH, flinched by Fake Out. It did not reach for it again on either seed once the board was hostile, which is the correct read - on attempt 1 turn 2 it chose RAZOR_SHELL and took the KO on Incineroar instead of setting up into a Grass type. The authored line exists and the AI abandons it sensibly."},
+    {"check": "Tough Claws +2 Razor Shell or Stone Edge is lethal in one turn", "result": "NOT OBSERVED", "evidence": "the Shell Smash never resolved on either seed, so a +2 turn never happened. The unboosted Razor Shell still killed a 134 HP Incineroar (attempt 1 turn 2), so the claw damage is real; the two-turn plan is not what beats the player here."},
+    {"check": "Drednaw's Shell Armor denies the critical hit", "result": "NOT TESTED", "evidence": "I pointed Wicked Blow (an always-crit move) at Drednaw on attempt 1 turn 3 specifically to test this, but Rillaboom's priority Grassy Glide killed Drednaw first and the attack redirected to Toxapex, where it did crit. On attempt 2 Drednaw died on its entry turn. The check is genuinely unresolved and is the single most valuable focused test to run against this trainer after the rebuild."},
+    {"check": "Drednaw takes the second Shell Smash", "result": "FAIL (never survived a turn)", "evidence": "across two full battles Drednaw never once got to act. Attempt 1: KOed by a priority Grassy Glide on its entry turn. Attempt 2: switched in by the AI on turn 2 and KOed by Hyper Voice plus Knock Off in that same turn. A 237 HP Shell Armor body that is the room's declared setup insurance has a zero percent action rate over two runs."},
+    {"check": "Toxapex uses Wide Guard for the side", "result": "PASS (late)", "evidence": "attempt 2, final turn: 'The opposing Toxapex used Wide Guard! Wide Guard now protects the opposing side!' and it did block the incoming Hyper Voice. So the move is in the repertoire and the AI will reach for it against a revealed spread attacker. It did not reach for it on the turn where it mattered most - see AI defects."},
+    {"check": "Regenerator plus Recover attrition", "result": "FAIL", "evidence": "Toxapex never used Recover on either seed despite taking 75 and then 145 damage, and never used Toxic. It chose SURF on every turn of attempt 1 (three consecutive) including two turns where its only viable target was a Grass type that resists it. The advertised stall lane does not appear in play."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects across two battles. Seismitoad, Drednaw and Toxapex all carry a guard move (Protect, Protect, Wide Guard) and only one Wide Guard was ever chosen. Nothing here is an empty or repetitive guard; the failure mode in this room is the opposite one.",
+  "ai_defects": [
+    {
+      "severity": "low-moderate",
+      "attempt": 2,
+      "turn": 3,
+      "board": "Toxapex 224/224 with Wide Guard available, beside a Seismitoad at 54/259. My side: Mega Gardevoir, which had already used Pixilate Hyper Voice on turns 1 and 2 (so the spread move was revealed), and Incineroar at 119.",
+      "chosen": "MOVE_SURF at my slot 2",
+      "problem": "Wide Guard was worth a whole teammate on that board. A revealed spread attacker plus a partner one Hyper Voice from death is the textbook Wide Guard turn, and the ability the dossier explicitly builds this Toxapex around. It guarded instead on the following turn, when it was the last Pokemon alive and there was no partner left to protect - i.e. the cheapest possible version of the same action.",
+      "better": "MOVE_WIDE_GUARD. Seismitoad survives, Hyper Voice is blanked, and the room keeps two bodies.",
+      "note": "This is the lost-opportunity half of the AGENTS.md guard review rather than an empty guard. The forecast appears to weight 'a guard is worth more when I am the one being threatened' over 'a side guard saves my partner'; Wide Guard's value is almost entirely partner-side and should be scored on the partner's survival odds, not the user's. Worth tracing against every other Wide Guard owner in this faction - Mantine (E0340) and Pelipper (E0348) both carry it."
+    },
+    {
+      "severity": "low",
+      "attempt": 1,
+      "turns": "2, 3 and 4",
+      "board": "Toxapex against a board containing Rillaboom (Grass, resists Water) and, after turn 2, Urshifu",
+      "chosen": "MOVE_SURF three times in a row",
+      "problem": "Three consecutive resisted spread attacks from a Pokemon holding Toxic and Recover, while taking damage it could have undone. Surf is defensible on the turn Incineroar (a Fire type) was on the board; it is not defensible twice more against a Grass type and a Fighting type with Toxic available.",
+      "better": "MOVE_TOXIC on Urshifu, or MOVE_RECOVER once it was below half.",
+      "note": "Low severity because the room was already lost by then, but it is the same 'the stall set never stalls' pattern as the strategy check above."
+    }
+  ],
+  "engine_notes": [
+    "Barbaracle's ITEM_WHITE_HERB was consumed on turn 0 of both runs by Incineroar's Intimidate - the driver reports its item as ITEM_NONE and its Attack stage as 0 while the unheld Seismitoad beside it sits at -1. This is correct engine behaviour and I checked src/data/trainers.party to confirm the item is materialized. It is worth stating in the dossier as real counterplay: leading any Intimidate body burns Barbaracle's Shell Smash insurance before the Smash ever happens, which is a cleaner answer to this room than Haze or Taunt.",
+    "AI decision budget max 1.038 s against the 1.2 s ceiling - the highest I have measured in this block so far."
+  ],
+  "level_changes": [
+    {"member": "DREDNAW", "before": -1, "after": 0, "why": "two full battles, zero turns acted. It is the room's declared insurance against a critical hit and it has never survived to prove it. +1 is the only lever available to buy it the turn the design assumes."},
+    {"member": "TOXAPEX", "before": -1, "after": 0, "why": "the room's support body and the joint-lowest member. It spent both battles at full or near-full HP doing nothing useful, and its one correct action (Wide Guard) came when it was alone. +1 does not fix the scoring, but it keeps the wall on the field long enough for the guard turn to exist at all."}
+  ],
+  "level_change_rationale": "Brief's '+1' case, twice over: won on the first attempt with one player faint, and won again on a second attempt with a completely different lead and the same score. I raised the two members that never executed their authored roles and left Seismitoad and Barbaracle alone - Seismitoad's Earth Power did 167 and 182 to Incineroar and Barbaracle took a KO with Razor Shell, so those two are already pulling their weight. Neither raised member is an ace, Mega or legend. Both are +1 of the +-2 allowance. I want to be explicit that the levels are not this room's real problem: a 4x Grass lane and a priority Grassy Glide beat the setup plan on tempo, and Toxapex's guard scoring is what actually costs the room its structure.",
+  "rebuild_note": "The Drednaw and Toxapex changes cannot be re-verified from this session; both runs pinned work/agent-battle-build-5, which predates the edit. The main agent must rebuild first. If only one battle in this block is re-run, it should not be this one - see play_order 237 (Matt) and 238 (Lila & Roy). But this trainer does own the block's one unresolved mechanical question (Shell Armor versus an always-crit Wicked Blow), which is worth a focused two-turn test rather than a full replay.",
+  "theme_check": "Partly. The concept reads on paper - two Shell Smash shells behind a Wide Guard - but it does not read on the board, because the setup turn was denied on every attempt and the guard fired once, alone, at the end. What the player actually experiences is four Water bodies that are collectively 4x weak to the Grass move any competent party brings to a pirate hideout. Compared with play_order 230, which stated its idea in one visible form change, this room's idea stayed invisible.",
+  "cooler_note": "Keep the roster; the setup-room concept is the right slot in the hideout's sequence and Drednaw's Shell Armor is a genuinely clever anti-crit choice. The demonstrated weakness is that all four members share a 2x or 4x Grass weakness, so one Rillaboom answers the entire room and the Wide Guard never gets to matter. A concrete suggestion for a later pass, not made here: give exactly one member a reason to survive the Grass answer - Barbaracle already has Cross Chop and Stone Edge, so the cheapest change is Toxapex, whose Poison STAB would punish the Grass lane the room currently invites. Swapping its unused Surf for Sludge Bomb or Gunk Shot would make the fourth slot the room's answer to its own crack instead of a fourth resisted Water attack.",
+  "authored_set_legality": "No legality problem found. Barbaracle's White Herb materializes correctly; its immediate consumption is Intimidate, not a missing item."
+}
