@@ -1,0 +1,73 @@
+{
+  "play_order": 107,
+  "e_group": "E0128",
+  "trainer": "TRAINER_NICOLAS_1",
+  "class": "ace",
+  "location": "MeteorFalls_1F_2R",
+  "cap": 36,
+  "difficulty": "medium",
+  "run_kind": "rerun",
+  "prior_receipt": "work/playtest/107-TRAINER_NICOLAS_1/receipt.json",
+  "build": "work/agent-battle-build-4",
+  "rom_sha256": "b92dbcca50e1b59f8d5dd16f1395a14c589b33542fe0bb6f2523c97a4ea9eb33",
+  "why_rerun": "Exeggutor-Alola and Dracozolt were each raised from +1 to +2 after a first-run 4-0 clear with zero player faints. This rerun tests whether the two extra levels changed anything.",
+  "cap_confirmation": "Driver reports level_cap 36 and Exeggutor L36 / Dracozolt L36 / Dragonair L39 / Altaria L35 = cap 36 + offset - 2 with the current offsets 2/2/5/1. The rerun block's table listed 42 for this row; that is the next row's value and the cap column appears shifted by one from play_order 82 onward, so per the brief's instruction the driver's level_cap governs. Cap 36 also matches the first receipt and the party's chronology anchor (Meteor Falls is reached after Wattson, before the Heat Badge).",
+  "level_offsets_at_run": {"EXEGGUTOR_ALOLA": 2, "DRACOZOLT": 2, "DRAGONAIR": 5, "ALTARIA": 1},
+  "resolved_opponent_levels": {"EXEGGUTOR_ALOLA": 36, "DRACOZOLT": 36, "DRAGONAIR": 39, "ALTARIA": 35},
+  "levels_previous_run": {"EXEGGUTOR_ALOLA": 35, "DRACOZOLT": 35, "DRAGONAIR": 39, "ALTARIA": 35},
+  "party_manifest": "work/playtest/107-TRAINER_NICOLAS_1/party.json",
+  "party_reuse_justification": "Reused unchanged. Same cap 36, same map, and the manifest's chronology anchor still holds: every source map (Seaspray Cave, Rusturf Tunnel, Petalburg City Old Rod, Route 102, Mauville Game Corner, Granite Cave, Petalburg Woods, New Mauville Entrance) is passed on the way to Meteor Falls via Route 111/112/Fiery Path, and no Route 118+, Mt. Pyre, desert-interior or post-Flannery source is used. Gyaradosite stone window 20 with the Mega Ring earned from Steven after Brawly. Not reported weak or illegal.",
+  "pre_declared_strategy_checks": [
+    "Mega Altaria Mega-Evolves and Pixilate is active",
+    "Alolan Exeggutor's Harvest recycles its own Sitrus Berry",
+    "Dracozolt's Hustle accuracy is a real cost and Bolt Beak's moved-first condition is respected rather than treated as permanent",
+    "Dragonair's Thunder Wave is used to create a real move-first opportunity (this was AI defect 1 in the first run)",
+    "Helping Hand is chosen only when it beats a second attack",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/107-TRAINER_NICOLAS_1/r1",
+      "seed": 1107,
+      "outcome": "won",
+      "turns": 5,
+      "player_faints": 0,
+      "opponent_faints": 4,
+      "narrative": "T1 I led Mold Breaker Excadrill beside Togekiss so Earthquake was free (Togekiss is Flying) and Dazzling Gleam was 2x into both Dragons. Dracozolt's Bolt Beak MISSED through Hustle despite the Wide Lens, which is the authored risk behaving correctly, and it died to the Earthquake/Dazzling Gleam pair on turn one for the second run running. Exeggutor's Flamethrower, however, took Excadrill from 136 to 18 - a genuine hit that the extra level helped land, and the clearest difference from the first run. T2 Altaria arrived, Mega-Evolved and Protected on the same turn, blanking both of my spread moves, while Dazzling Gleam flinched Exeggutor through Serene Grace. T3 the AI made its best decision of the fight: it voluntarily withdrew Mega Altaria out of the Fairy spread and sent Dragonair in, which is a real doubles read. Dazzling Gleam killed Exeggutor and took Dragonair to 42. T4 Altaria Protected a second consecutive turn, blocking a super-effective Iron Head, while a critical Dazzling Gleam removed Dragonair. T5 Iron Head plus Dazzling Gleam finished Mega Altaria at full HP."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Mega Altaria Mega-Evolves, Pixilate active", "result": "PASS", "evidence": "T2: 'The opposing Altaria's Altarianite is reacting...' and 'has Mega Evolved into Mega Altaria!'. Driver state then reports ability PIXILATE and active_gimmick 'mega'. Recorded deliberately as the counter-example to E0071's Kangaskhan, which declined the same free transformation in the same block."},
+    {"check": "Harvest recycles Sitrus", "result": "PASS", "evidence": "Twice: 'The opposing Exeggutor harvested its Sitrus Berry!' at the end of T1 and again at the end of T2. The loop works exactly as the dossier describes and it is why Exeggutor took two turns to remove rather than one."},
+    {"check": "Hustle accuracy is a real cost", "result": "PASS", "evidence": "T1: 'The opposing Dracozolt used Bolt Beak!' followed by 'Togekiss avoided the attack!'. Hustle's 80% accuracy missed through the Wide Lens, which is precisely the risk the dossier says must not be assumed away. The AI selected Bolt Beak against a target it had not yet moved after, i.e. it did not treat the doubled power as guaranteed - the move was simply the best available."},
+    {"check": "Dragonair Thunder Wave (first run's AI defect 1)", "result": "FAIL - still not selected", "evidence": "Dragonair entered on T3 as a mid-turn replacement and had exactly one decision, on T4, where it chose MOVE_ICE_BEAM into Excadrill rather than Thunder Wave. It then died. This is a weaker repeat of the first run's finding than a clean reproduction, because Dragonair only ever got one turn and it was already at 42/133 in range of the spread move that killed it - at that HP an attack is defensible. Recorded as unresolved rather than as a confirmed defect."},
+    {"check": "Helping Hand chosen only when it beats a second attack", "result": "PASS", "evidence": "Helping Hand was never selected. On T1 Exeggutor chose Flamethrower into a Steel body for 118 instead, which is plainly better than doubling a Bolt Beak that then missed. Correct."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS, with a repetition note", "evidence": "See ledger. Both Protects blocked real damage, but they were on consecutive turns from the same battler."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "ALTARIA_MEGA", "payoff": "EXCELLENT. Used on the turn it Mega-Evolved, which is the turn a Mega is most exposed. It blocked Excadrill's Rock Slide (2x into the pre-Mega Dragon/Flying) and Togekiss's Dazzling Gleam, and it brought Altaria to the other side of the transformation at full HP. Textbook."},
+    {"turn": 4, "battler": "ALTARIA_MEGA", "payoff": "REAL but repetitive. It blocked a super-effective Iron Head from Mold Breaker Excadrill and a resisted Dazzling Gleam, so it was not empty. But it was the second consecutive Protect from the same battler, it accepted the halved-success risk, and its partner Dragonair died on that turn anyway. Altaria was at 130/130 and could have afforded to act. I would call this the weaker of the two and a candidate for the Protect cadence tuning AGENTS.md asks for, not a defect."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "T3 was the best opposing decision I have seen in this block: Nicolas voluntarily withdrew Mega Altaria out of a Fairy spread attack it had just watched hit for super effective damage, and brought in a body that could absorb it. That is a real doubles read, not a shuffle - and it is the reason Altaria reached the last turn at full HP.",
+    "The AI did not fall into any of the traps the dossier warns about: no assumed Bolt Beak order, no Helping Hand into a worse attack, no claimed Tailwind or guaranteed accuracy.",
+    "No defect observed on this build. The first run's Thunder Wave finding is unresolved rather than reproduced - Dragonair simply never got a turn where Thunder Wave was clearly right."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt in five turns with ZERO player faints against an ace-class trainer -> +1 on the weakest one or two members, never the ace/Mega/legend first.",
+    "changes": [
+      {"trainer": "TRAINER_NICOLAS_1", "member": "EXEGGUTOR_ALOLA", "field": "level offset", "before": 2, "after": 3, "resolved_level_before": 36, "resolved_level_after": 37,
+       "reasoning": "Joint-lowest non-Mega member. Unlike the first run it earned this: its Flamethrower did 118 to my Excadrill and its Harvest loop made it a two-turn problem. It is the member the extra level most visibly converted into pressure, so it gets the second one."},
+      {"trainer": "TRAINER_NICOLAS_1", "member": "DRACOZOLT", "field": "level offset", "before": 2, "after": 3, "resolved_level_before": 36, "resolved_level_after": 37,
+       "reasoning": "Joint-lowest non-Mega member and the dossier's named centrepiece, which has now died on turn one in both runs without landing its Bolt Beak. Applied as the honest smallest lever, but recorded with a plain caveat below: I do not believe a level fixes this member."}
+    ],
+    "budget_note": "Both members were at +1 of the permitted +/-2 coming into this rerun and are now at +2, i.e. their budget is EXHAUSTED for this pass. Only Altaria (unmoved, the Mega, excluded first) and Dragonair (unmoved, already +5 and it did its job) still have room, so a further pass cannot keep reaching for these two.",
+    "honest_caveat": "Levels are running out of road here. Dracozolt is Electric/Dragon with 4 HP EVs, a 2x Ground weakness and a signature move that needs it to move first; a turn-one spread Earthquake from a Mold Breaker lead removes it at 35, at 36 and will at 37. The reason this fight is a zero-faint win is structural, not numeric: a Ground + Flying lead makes Earthquake free, and Fairy spread damage is 2x into three of the four members. That is the dossier's own crack line being unusually cheap to execute."
+  },
+  "verdict": "still too easy",
+  "could_this_be_cooler": "The concept is kept and is good - Wide Lens as the honest answer to Hustle, Harvest recycling its own Sitrus, and Mega Altaria as the right ace for a dragon tamer in the chapter where Altarianite lives. The team also plays well: it Megas, it Protects on the transformation turn, and it made a genuinely smart voluntary switch. What holds it back is that all four members share a Dragon typing, so one Fairy spread attacker answers the whole room, and two of them additionally fold to Ground. The concrete suggestion is not a level: give the room one member that punishes a Fairy lead - a Steel/Dragon or a Poison partner - so that Dazzling Gleam is not a free button. Failing that, Dracozolt wants defensive EVs rather than 4 HP, because its interaction cannot happen from the graveyard. Flagged, not changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-4. Not earned campaign traversal. The level offsets recorded above are edited into the live teams file but are NOT built into this snapshot, so they are not re-verified by play in this session. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
+}
