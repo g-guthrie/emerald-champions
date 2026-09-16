@@ -1605,3 +1605,73 @@ before it, and whoever owns that file has to decide case by case whether the
 fixture or the value is wrong. Three more are **a guard expected and an attack
 chosen** (offensive drops, Feint), one is **a switch where a move was expected**
 (Trace), and the remaining HP equalities follow whichever action changed.
+
+# Group J item 1 — the immune-move family, and what is actually shared
+
+Commit `a3122da86c`, fixtures only. **181 passed, 0 failed** on my allowlist.
+
+**The tie-break is not needed, because the tie does not happen.** Three more
+receipt boards are now fixtures and all three are green with no source change:
+
+* Randall's board over three turns, with both Ghost targets alternating a
+  shield and a burn so that every attack's guarded expectation collapses —
+  Greedent still takes Crunch every turn.
+* Luis's board — Lanturn takes the doubled Ice Beam over the halved Hydro Pump.
+* Norman's board — Meloetta takes Shadow Ball over Psychic into a fresh
+  Spiritomb.
+
+So my group I hypothesis was wrong. The trial reads damage from `simulatedDmg`
+and a zero there is a zero in the board value, guard forecast or not.
+
+**What is shared is non-determinism, and the cache fixture proves it.** I
+instrumented `EC expert pair: candidate evaluation restores board caches field
+and RNG`, which evaluates the *same* position twice and compares. Four of its
+five arms return identical scores. The fifth — the Dancer arm, the most
+expensive board in the file — returns **16 then 9**, with the second evaluation
+consuming 12 frames where the first took 18. The board did not change; the
+search depth did.
+
+The mechanism is one clause. `EvaluatePairBoard`'s inner loop stops on
+`if (!mustFinish && (canStop || shortCount != 0) && PairDecisionBudgetExpired())`.
+`AI_EvaluateDoublesCandidate` deliberately passes `canStop = FALSE`, but
+`shortCount != 0` re-admits the wall clock as soon as one pair is shortlisted.
+A switch candidate is therefore scored to whatever depth the frames allow, and
+compared against a stay board scored to a different depth — the comparison the
+comment at `settle:` says must never happen. In a twenty-turn battle with full
+benches that is every turn; in a two-turn fixture it is never, which is exactly
+the distribution of the receipts.
+
+**The bounded fix is not landed, and here is why.** Requiring `canStop` makes
+the cache fixture pass — it is the only thing that has — but the Dancer budget
+board goes from 65 to **79 frames**, over the 1.2 s limit. Replacing the clock
+with a deterministic pair count for candidate searches trades one against the
+other and I could not find a value that holds both: at 64 pairs my whole suite
+is green and the Dancer board is still 79; at 48, 79 and Laura's pivot moves;
+at 32 the Dancer board comes back to 67 but Cristian, Laura, Charm and Cherubi
+all move. A flat cap is the wrong shape. The right one is to give a candidate
+board the same depth the stay board used — count the pairs the stay search
+examined and hand that number to each candidate — which needs the two searches
+to share a counter and is a proper change rather than a constant.
+
+Until then: `EC expert pair: candidate evaluation restores board caches field
+and RNG` is a real defect in the search, not a stale fixture, and it should be
+fixed before the other eleven in that file are re-derived.
+
+# Terastallization removed from the AI files
+
+Commit `2c5df8a726`. Deleted `DecideTerastal`, `ShouldTeraFromCalcs`,
+`struct AltTeraCalcs` and its four macros, the whole tera damage-alternative
+pass, the `AI_FLAG_SMART_TERA` table entry and call site, the `GIMMICK_TERA`
+arm of `ReconsiderGimmick`, the two `GIMMICK_TERA` checks in the scorer, the
+one in the pair search, and both tera chance constants — 277 lines. `GIMMICK_MEGA`
+and the Z-move path are untouched; `ReconsiderGimmick` keeps its Z-move body and
+the pair search still enumerates mega masks with `PAIR_MEGA_HORIZON`. No AI
+fixture Terastallized, so none needed removing. 181 passed, ROM clean.
+
+## Still open from J and K
+
+J2 (multi-hit Life Orb, isolated in group I but not fixed), J3 (the 145–156
+addendum and the group I smaller list), J4 (the remaining eleven `ai_doubles.c`
+fixtures — note that the twelfth, the cache one, is a real bug per above), J5
+(signature starvation), and all of K including the Alan events.jsonl read and
+the downgraded Mega item.
