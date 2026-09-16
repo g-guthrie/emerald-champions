@@ -1,0 +1,36 @@
+{
+  "play_order": 105,
+  "e_group": "E0126",
+  "trainer": "TRAINER_LUCAS_1",
+  "class": "casual",
+  "location": "Route114",
+  "cap": 36,
+  "cap_confirmation": "driver reported level_cap 36; Ninetales-Alola offset 0 -> L34, Beartic / Sandslash-Alola / Froslass +1 -> L35, all equal 36 + offset - 2 (Medium). No --cap adjustment needed.",
+  "difficulty": "medium",
+  "party_manifest": "work/playtest/105-TRAINER_LUCAS_1/party.json",
+  "attempts": [
+    {"n": 1, "seed": 105, "run_dir": "work/playtest/105-TRAINER_LUCAS_1/a1", "kind": "optimized", "outcome": "won", "turns": 5, "decisions": 6, "player_faints": 3, "opponent_faints": 4, "note": "Fake Out denied Aurora Veil on turn one and a 4x Iron Head removed the caster in the same turn, but the snow stayed up for four more turns and the two Slush Rush attackers moved first against my whole side throughout. Lost Excadrill, Magnezone and Mega Heracross."}
+  ],
+  "strategy_checks": [
+    {"check": "Snow Warning puts snow up automatically", "result": "PASS", "evidence": "The battle's turn-0 state already read weather B_WEATHER_SNOW before any command was issued, and 'Snow continues to fall.' printed at the end of every turn until it expired after T5."},
+    {"check": "Ninetales sets Light Clay Aurora Veil", "result": "FAIL (denied, not absent)", "evidence": "Ninetales's selected move on T1 was Blizzard, not Aurora Veil, and it was flinched by Fake Out and then KOed by a 4x Iron Head before acting. Aurora Veil never went up. Two separate observations here: the caster picked an attack over the screen on the one turn it had, and it is removable on turn one by priority plus a 4x Steel move despite its base 109 Speed."},
+    {"check": "Two Slush Rush attackers convert the snow into speed", "result": "PASS", "evidence": "T1 Beartic moved before my Excadrill (base 88, Adamant) and took 120 of its 136 HP with Close Combat. T4 and T5 Sandslash moved before Mega Heracross (base 75 Mega, effectively ~92) and before Incineroar, flinching Heracross with Icicle Crash on T4 and KOing it with Iron Head on T5. Slush Rush is doing exactly its job and it is the reason this fight cost me three Pokemon."},
+    {"check": "Froslass's Cursed Body disables a move", "result": "PASS", "evidence": "T4 'Incineroar's Knock~Off was disabled!' after Knock Off connected. The pending_decision then correctly reported Knock Off as illegal with MOVE_LIMITATION_DISABLED for the rest of the battle."},
+    {"check": "Froslass remains a fast special / disruption reserve", "result": "PASS", "evidence": "Ice Beam KOed Excadrill on T2 and Shadow Ball contributed the killing damage on Magnezone on T3. It also survived on its Focus Sash and forced two extra turns."},
+    {"check": "Froslass uses Destiny Bond", "result": "FAIL", "evidence": "Froslass sat at exactly 1 HP behind a spent Focus Sash for three consecutive turns (T4, T5, T6) with Destiny Bond available, and chose Ice Beam every time. See AI defect 1."},
+    {"check": "Will-O-Wisp cripples a physical attacker", "result": "NOT OBSERVED", "evidence": "Never selected. Defensible in part - my lead Incineroar is a Fire type and cannot be burned - but Mega Heracross and Excadrill were both burnable physical attackers on the field for several turns."}
+  ],
+  "protect_ledger": [
+    {"turn": "T2", "battler": "BEARTIC", "payoff": "real - blocked Incineroar's 2x Flare Blitz and the Beartic half of Excadrill's Rock Slide in the same turn, while its partner Froslass KOed Excadrill"}
+  ],
+  "protect_note": "One Protect across the battle, with a genuine two-move payoff, and Beartic attacked on its other turns rather than guarding reflexively. Good cadence, and notably it did NOT repeat the Protect on the following turn - the opposite of the Alolan Graveler behaviour I logged at E0123.",
+  "ai_defects": [
+    {"id": 1, "severity": "moderate", "turn": "T4, T5 and T6", "board": "Froslass at 1/105 HP with its Focus Sash already spent and its item knocked off, facing Mega Heracross at 17/115 and Incineroar at 108/148, with Destiny Bond in its moveset", "chosen": "MOVE_ICE_BEAM on all three turns", "better": "MOVE_DESTINY_BOND. A Pokemon at 1 HP that will die to literally any contact is the single clearest Destiny Bond board in the game - it was guaranteed to be KOed on the following turn and could have traded itself for Mega Heracross or Incineroar. Instead it threw a resisted Ice Beam three times and died for free.", "note": "Destiny Bond is the only reason Froslass carries a Focus Sash, so the two items on its set are meant to work together and the second half never fires. Worth checking whether the scorer evaluates Destiny Bond at all, or whether it is being valued as a damage move with 0 power. This is likely a shared path - any Destiny Bond or Memento holder elsewhere in the campaign would show the same behaviour."}
+  ],
+  "level_changes": [],
+  "level_decision": "KEEP. Brief rule 5: won with 3 player faints, which is at the AGENTS.md target for a well-prepared party. No increase is warranted and no reduction is available (won on attempt 1). Worth noting for the record that this team performed better than its offsets suggest - three members at +1 and a caster at 0 took three of my six - because Slush Rush in self-made snow is a genuine speed advantage rather than a level advantage.",
+  "retest_status": "n/a - no level change.",
+  "cooler": "Keep the formation; the dossier is right that this is a complete snow package and it should not be diluted. Alolan Ninetales, two Slush Rush bodies and a Cursed Body ghost is a real VGC skeleton and it plays like one. The honest weakness is the same one every auto-weather team has and it is worth naming: the whole plan is one Pokemon, that Pokemon is the lowest-level member of the team, and it is removable on turn one by a priority flinch plus a 4x hit. The snow outlived it, which saved the fight, but Aurora Veil - the actual payoff, and the reason it holds a Light Clay - never existed. Concrete suggestion for a later pass: Aurora Veil is worth more than Blizzard on turn one and the caster should reach for it; failing that, giving Froslass or one of the Slush Rush pair a redundant way to protect the caster (Fake Out, Icy Wind, a Focus Sash on Ninetales instead of Light Clay) would make the Veil actually happen. On species: the team is four Ice types with no answer to a Fire attacker, and Incineroar alone accounted for three KOs. Alolan Sandslash's Steel half is the only thing resembling a second typing, and it is 4x to Fire and 4x to Fighting, which makes it the worst-placed member rather than the safest. A Water or Ground partner that also enjoys snow would give the team a body that does not fold to the obvious answer.",
+  "authored_set_legality": "No legality problem found. Snow Warning with Light Clay, both Slush Rush holders, and Cursed Body with Focus Sash were all live on the correct members and behaved as printed.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
