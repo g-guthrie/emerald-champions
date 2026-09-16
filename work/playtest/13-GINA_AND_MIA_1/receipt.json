@@ -1,0 +1,51 @@
+{
+  "play_order": 13,
+  "e_group": "E0014",
+  "trainer": "TRAINER_GINA_AND_MIA_1",
+  "class": "regular",
+  "location": "Route104",
+  "cap_window": 14,
+  "outcome": "NOT PLAYABLE - blocked by a content defect",
+  "party_manifest": "work/playtest/13-GINA_AND_MIA_1/party.json",
+  "run_dir": "work/playtest/13-GINA_AND_MIA_1/a1",
+  "attempts": [
+    {
+      "seed": "0x13A1",
+      "outcome": "start_rejected",
+      "turns": 0,
+      "player_faints": 0,
+      "opponent_faints": 0,
+      "detail": "scripts/playthrough/battle_driver.py start reached native preparation successfully (the six-member cap-14 party was built and verified in the run state), then the native agent battle lifecycle refused the trainer: gEcAgentBattleResult = 3 (EC_AGENT_BATTLE_BAD_TRAINER), gEcAgentBattlePhase stayed IDLE, no decision point in 80000 frames."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Plusle/Minun Plus+Minus shared special-attack boost while both are active", "result": "NOT RUN", "evidence": "battle could not start"},
+    {"check": "Helping Hand chosen only when it beats two attacks", "result": "NOT RUN", "evidence": "battle could not start"},
+    {"check": "Minun Light Screen / Encore only against a relevant threat", "result": "NOT RUN", "evidence": "battle could not start"},
+    {"check": "Volbeat priority Tail Glow converted into Bug Buzz damage", "result": "NOT RUN", "evidence": "battle could not start"},
+    {"check": "Illumise priority Encore / Helping Hand in the firefly mode", "result": "NOT RUN", "evidence": "battle could not start"}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [],
+  "content_defects": [
+    {
+      "id": "E0014-PARTYSIZE-0",
+      "severity": "high",
+      "summary": "TRAINER_GINA_AND_MIA_1 materializes with .partySize = 0 while carrying .poolSize = 4 and a full four-member party body, so the trainer fights with an EMPTY party in the compiled ROM.",
+      "evidence": [
+        "src/data/trainers.party, TRAINER_GINA_AND_MIA_1 block: header line 'Party Size: 0' immediately followed by SPECIES_PLUSLE / SPECIES_MINUN / SPECIES_VOLBEAT / SPECIES_ILLUMISE.",
+        "src/data/trainers.h [DIFFICULTY_NORMAL][TRAINER_GINA_AND_MIA_1]: '.partySize = 0, .poolSize = 4'.",
+        "src/battle_setup.c CreateNPCTrainerPartyFromTrainer(): 'monsCount = trainer->partySize' then generates monsCount mons, so monsCount == 0 produces no battle party.",
+        "src/emerald_champions_agent_battle.c StartRequestedBattle() correctly rejects it via 'GetTrainerStructFromId(trainerA)->partySize == 0' -> EC_AGENT_BATTLE_BAD_TRAINER."
+      ],
+      "reproducible": "Yes. 'python3 scripts/emerald_champions_teams.py --write' regenerates src/data/trainers.party byte-identically, so this is a live materialization defect, not a stale checkout.",
+      "scope": "Exactly one trainer in the whole file. A scan of src/data/trainers.party found TRAINER_GINA_AND_MIA_1 is the only block that has both 'Party Size: 0' and a SPECIES_ body; the other 148 'Party Size: 0' blocks are correctly retired metadata-only stubs with no party.",
+      "suspected_root_cause": "scripts/implement_emerald_champions_master_battles.py implement() stamps 'Party Size: 0' onto retired trainers (replace_attribute(header, 'Party Size', '0')) but rewrite_trainer_block() never resets 'Party Size' when a design is (re-)implemented. A trainer that was retired in one pass and re-authored in a later pass keeps the stale 0.",
+      "owner": "trainer-teams / materialization side; not repaired here (outside this playtest agent's edit scope, which is level offsets only)."
+    }
+  ],
+  "level_changes": [],
+  "cooler_note": "The authored Plusle/Minun + Volbeat/Illumise twin concept is already a good early-route idea (two different paired-ability modes on one trainer). Suggestion for a later pass, not applied here: give Illumise Struggle Bug or Baton Pass so the firefly mode can hand Volbeat's Tail Glow boost somewhere, which would make the second mode a real engine instead of a softer copy of the rodent mode.",
+  "authored_set_legality": "Not verifiable in battle. On paper the four members, abilities, items and moves are all legal for the cap-14 window.",
+  "not_finished": "The E0014 battle itself is unplayed. It must be replayed once the partySize defect is repaired and re-materialized."
+}
