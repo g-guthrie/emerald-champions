@@ -1,0 +1,27 @@
+{
+  "play_order": 284, "e_group": "E0448", "trainer": "TRAINER_HUDSON", "class": "regular", "location": "Route134",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-7",
+  "party_manifest": "work/playtest/284-TRAINER_HUDSON/party_route134_84.json",
+  "availability_note": "Route 134 sail lane; same gate<=68 pool-84 party (Landorus and Tapu Fini are reachable legends). Nothing from Underwater/Seafloor maps.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/284-TRAINER_HUDSON/a1", "seed": 1, "outcome": "won", "turns": 5, "decisions": 7, "player_faints": 1, "opponent_faints": 4, "note": "Incineroar OHKOed T1 by Life Orb Close Combat + Facade before it could Knock Off the Flame Orb; Urshifu left at 24/288 after a Guts Facade."}
+  ],
+  "strategy_checks": [
+    {"check": "Poliwrath attacks turn 1", "result": "PASS", "evidence": "T1 Close Combat into Incineroar (2x) - combined with Facade it was a full-HP OHKO. T2 Close Combat at Urshifu (beaten by Sucker Punch)."},
+    {"check": "Raticate takes its Flame Orb turn then Guts Facade / U-turn pivots", "result": "PASS (Facade) / NOT EXERCISED (U-turn)", "evidence": "Flame Orb burned it end of T1; T3 Guts Facade did 264 to Urshifu. It never U-turned - it attacked or Protected instead, which was correct with a KO on the board."},
+    {"check": "Cloud Nine Golduck suppresses weather", "result": "NOT EXERCISED", "evidence": "My party brought no weather; on entry the text 'The effects of the weather disappeared.' printed with no weather active (cosmetic)."},
+    {"check": "Volt Absorb Lanturn answers Electric", "result": "PASS (respected)", "evidence": "I never fired Thunderbolt at Lanturn; the absorber shaped my targeting (Giga Drain/Moonblast instead)."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Raticate", "payoff": "REAL - blocked Flutter Mane's Moonblast; Poliwrath still died to Sucker Punch."},
+    {"turn": 3, "user": "Golduck", "payoff": "REAL - blocked a 2x Thunderbolt on the turn it entered while Raticate's Facade took Urshifu to 24 HP."}
+  ],
+  "ai_defects": [
+    {"severity": "minor", "turn": 6, "board": "Lanturn 32/327 alone vs Flutter Mane 164/213 (Spe -2) and Amoonguss 302/364 (Spe -2); Lanturn already outsped both after two Icy Winds", "chosen": "Icy Wind a third time (48 + 56 chip)", "better": "Hydro Pump into Flutter Mane or Thunderbolt into Amoonguss - speed control that no longer changes turn order is wasted damage; the first two Icy Winds were fine."}
+  ],
+  "engine_notes": [{"turn": 2, "note": "Cloud Nine entry printed 'The effects of the weather disappeared.' with no weather set. Cosmetic."}],
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "As a positional anti-weather sailor it is fine, and Poliwrath's Life Orb Close Combat plus a burned Facade gave it real teeth (an OHKO and a near-OHKO). One faint but Urshifu was at 24 HP, so it was a real fight; keep. Against a player who brings no weather the concept simply does not appear, which is inherent to the design and acceptable for a regular trainer between two rain teams.",
+  "authored_set_legality": "No problem; all four sets played as written."
+}
