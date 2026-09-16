@@ -1,0 +1,46 @@
+{
+  "play_order": 193,
+  "e_group": "E0287",
+  "trainer": "TRAINER_HUMBERTO",
+  "class": "gym",
+  "location": "FortreeCity_Gym",
+  "chapter": "Feather Badge",
+  "cap": 54,
+  "cap_confirmation": "driver state reported level_cap 54. Gliscor/Corviknight/Rotom-Fan/Hawlucha/Sigilyph (offset +2) all resolved at L54 and Shedinja (+4) at L56 = cap + offset - 2 on Medium. Cap window 48-60; C30 (Weather Institute) is done so 54 is live and Badge06 (60) is not yet earned.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_fortree54.json"],
+  "chronology_note": "Party built only from species whose source map precedes Fortree City in play order: Litten line (gate 36), Foongus line (42), Beldum line (48) with Metagrossite stone-window 42, Sneasel/Weavile from Seaspray_Cave_B1F (14), and Regieleki + Zapdos from legendary_sign:NewMauville_Inside (30, the New Mauville shutdown). Nothing from Route 121 onward, Lilycove, Mt Pyre or the Southern Island.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1,
+      "party": "party_fortree54.json (Incineroar/Amoonguss/Regieleki/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 6, "player_faints": 2, "opponent_faints": 6,
+      "why": "Fake Out + Spore denied both leads turn 1; Weavile's 4x Icicle Crash removed Gliscor before the +2 Swords Dance could be spent; Incineroar traded itself to Hawlucha's Close Combat; Zapdos Thunderbolt removed the Unburden Hawlucha and crit Sigilyph; Mega Metagross Ice Punch removed Rotom-Fan; Heat Wave was the only move on the field that could touch Shedinja and it closed the fight."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Corviknight's Mirror Armor returns the Intimidate drop to the sender", "result": "PASS", "evidence": "turn 0 board: Incineroar itself is at atk-1 and Corviknight is at no stages, while Gliscor (no Mirror Armor) took the ordinary -1."},
+    {"check": "Gliscor lets its Toxic Orb land and converts to Poison Heal", "result": "PASS", "evidence": "end of turn 1: 'The opposing Gliscor was badly poisoned!' Toxic Orb activated on schedule; Knock Off on turn 2 removed the spent orb without removing the status, which is correct."},
+    {"check": "SETUP is backed by a real Swords Dance", "result": "PASS", "evidence": "Gliscor chose Swords Dance on turn 1 (flinched by Fake Out) and again on turn 2, reaching +2 (net +1 after Intimidate)."},
+    {"check": "Hawlucha's Close Combat drops consume the White Herb, which triggers Unburden", "result": "PASS", "evidence": "turn 4: 'The opposing Hawlucha returned its stats to normal' immediately after the Def/SpD drops; on turn 5 Hawlucha acted before Weavile (base 125 Speed), which only doubled Speed explains. This is the room's cleverest authored line and it fires exactly as written."},
+    {"check": "Shedinja's Wonder Guard forces a specific answer", "result": "PASS", "evidence": "Shedinja entered on turn 6 at 1 HP and was untouchable by Mega Metagross's entire moveset (Steel/Ice are not super effective on Bug/Ghost); only Zapdos's Heat Wave could remove it, on turn 7."},
+    {"check": "Sigilyph takes Life Orb recoil for free through Magic Guard", "result": "NOT OBSERVED", "evidence": "Sigilyph used exactly one move (Heat Wave, turn 6) and was KOed by a critical Thunderbolt the same turn; no recoil tick was ever due."},
+    {"check": "Rotom-Fan is the Levitate/Will-O-Wisp pivot", "result": "PARTIAL", "evidence": "Rotom-Fan used Thunderbolt on both of its turns (5 and 6) and never chose Will-O-Wisp, even with a physical Weavile and a physical Metagross on the field. Its printed ability is MOTOR_DRIVE, not Levitate as the plan prose says (see legality_notes)."}
+  ],
+  "protect_ledger": [],
+  "protect_summary": "Zero opponent Protects in six turns, although four of the six members carry it. Nothing to fault - the fight never reached a board where a guard was the right expected-value choice, and no empty or repetitive guarding occurred.",
+  "ai_defects": [
+    {
+      "id": "E0287-1",
+      "turn": 2,
+      "board": "Gliscor (195/195, +0 after Intimidate) and a sleeping Corviknight vs Incineroar 217/217 and Amoonguss at 45/237.",
+      "chosen": "Swords Dance (second consecutive setup turn).",
+      "better": "Earthquake. Amoonguss was at 45/237 and Ground is super effective on Poison, so Earthquake was a guaranteed KO on one of the two player slots plus chip on the other. The AI traded a certain knockout for a stat boost it never got to spend - Gliscor was removed the following turn. Severity: moderate; this is a scoring question (KO value vs setup value) rather than an illegal choice, and it is a shared SETUP-strategy path rather than anything bespoke to Humberto."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. The win cost two player faints (Incineroar to Hawlucha's Close Combat, Weavile to the same move the following turn) and the room was genuinely dangerous: Corviknight's Brave Bird took Amoonguss from 237 to 45 on turn 1 and the Unburden Hawlucha outsped a base-125 Weavile. The brief's +1 rule requires a first-try win with 0-1 faints and no real threat; neither clause holds. The brief's -1 rule needs three losses. No change.",
+  "cooler": "The concept is already one of the best-argued rooms in the gym and the Shedinja substitution earns its slot - it genuinely converted a sixth attacker into a puzzle. Two concrete notes rather than a redesign. (1) Rotom-Fan is the weak link as played: it picked Thunderbolt twice into a field with two physical attackers and never used Will-O-Wisp, so the 'Levitate pivot with Will-O-Wisp' role never appeared. It is also the one member whose drawback-denial ability (Motor Drive) only matters if the player happens to aim an Electric move at it, which a prepared player never will. Something whose denial is unconditional - a Magic Bounce or Unaware body - would state the room's thesis more reliably. (2) Shedinja is removed by any one of five move types, so in practice it dies to whatever Fire or Dark move the player already had; pairing it with a partner that punishes the specific answer (a Flash Fire or Justified body) would make the puzzle cost the player something.",
+  "legality_notes": "One prose/source mismatch in the authored block, not a legality failure: the plan says 'Levitate ignores the ground' and calls Rotom-Fan 'the Levitate pivot', but the printed set is ROTOM_FAN @SITRUS_BERRY MOTOR_DRIVE. Rotom-Fan's Electric/Flying typing is already Ground-immune, so the board behaves as described, but the ability named in the room's six-ability thesis is not the ability on the line. Either the prose or the ability should be reconciled. All six members and all six items are inside the cap-54 window.",
+  "verification_limit": "No level change was made for this battle, so there is nothing pending re-verification here. In general the level edits recorded in this block's receipts cannot be re-verified until the main agent re-materializes the teams and rebuilds the headless ROM."
+}

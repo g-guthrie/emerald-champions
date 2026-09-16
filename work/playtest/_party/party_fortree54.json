@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Feather Badge chapter cap 54 Fortree Gym party (play_order 193-195, all-Flying rooms)",
+  "availability_audit": "Every member audited against work/reference-pools/pool-54.json and its source_detail checked against the Fortree arrival point: Weather Institute (C30) is done, Route 120 explored, Winona unfought, and nothing from Route 121 onward, Lilycove, Mt Pyre or the Southern Island is used. Incineroar gate 36 (Litten line, pre-Mauville habitat). Amoonguss gate 42 (Foongus line, Route 119-era habitat). Metagross gate 48 (Beldum/Metang line, post-Norman) with ITEM_METAGROSSITE stone-window 42. Regieleki and Zapdos are both legendary_sign:NewMauville_Inside at gate 30, i.e. the New Mauville shutdown, a C24-era chapter that precedes Route 119/120 in play order. Weavile gate 14, evolution:level/condition from SPECIES_SNEASEL whose habitat is Seaspray_Cave_B1F, an early-chapter cave long before Fortree. All six are legal for cap 54 and chronologically available on arrival at Fortree City.",
+  "plan": "Deliberate anti-Flying control six for a three-room Flying gym. Incineroar opens with Intimidate plus Fake Out and carries Knock Off (Dark) and Flare Blitz (Fire) as the two move types that can touch Wonder Guard Shedinja. Amoonguss Spore/Rage Powder buys turns against setup leads. Regieleki's Transistor Thunderbolt is the single hardest hit available into any Flying body and Electroweb is the answer to Tailwind. Zapdos adds bulky Electric plus special Heat Wave, the exact damage type Mega Skarmory is weak to. Weavile supplies fast Ice, Ice Shard priority under enemy Tailwind and a second Dark move for Shedinja. Mega Metagross resists Flying, Fairy, Rock and Ice and closes with Meteor Mash and Bullet Punch priority.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out and Intimidate control; Dark and Fire coverage for Wonder Guard bodies",
+      "availability": "pool-54 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_AMOONGUSS",
+      "moves": ["MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_ROCKY_HELMET",
+      "evs": [252, 0, 4, 0, 252, 0],
+      "role": "sleep and redirection, the answer to Swords Dance / Tailwind leads",
+      "availability": "pool-54 gate 42, evolution:level from SPECIES_FOONGUS."
+    },
+    {
+      "species": "SPECIES_REGIELEKI",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_ELECTROWEB", "MOVE_VOLT_SWITCH", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TRANSISTOR",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "reachable legend: the Electric answer to Flying plus Electroweb speed control",
+      "availability": "pool-54 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "moves": ["MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 0, 252, 4, 0],
+      "role": "reachable legend: bulky spread Electric/Fire with recovery; the special Fire answer to Steel",
+      "availability": "pool-54 gate 30, legendary_sign:NewMauville_Inside."
+    },
+    {
+      "species": "SPECIES_WEAVILE",
+      "moves": ["MOVE_ICICLE_CRASH", "MOVE_KNOCK_OFF", "MOVE_ICE_SHARD", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRESSURE",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "fast Ice coverage, Ice Shard priority under enemy Tailwind, second Dark move",
+      "availability": "pool-54 gate 14, evolution:level/condition from SPECIES_SNEASEL (Seaspray_Cave_B1F)."
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "moves": ["MOVE_METEOR_MASH", "MOVE_BULLET_PUNCH", "MOVE_ICE_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CLEAR_BODY",
+      "item": "ITEM_METAGROSSITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition; resists Flying/Fairy/Rock/Ice, Bullet Punch priority",
+      "availability": "pool-54 gate 48 (Beldum/Metang line) and ITEM_METAGROSSITE stone-window 42."
+    }
+  ]
+}
