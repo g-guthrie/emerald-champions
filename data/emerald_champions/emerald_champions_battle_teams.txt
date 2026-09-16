@@ -430,10 +430,10 @@ mega_slots: NONE
 ai: Conservative
 plan: Elliot's sea-and-stream collection retains Specs Mega Launcher Clauncher, Frillish, Skill Link Shellder and Band Adaptability Corphish. Clauncher is the immediate pulse cannon; Mega Launcher is its normal ability, not Mega Evolution. Frillish replaces unsupported Helping Hand with Will-O-Wisp and trades redundant Scald for Hex: burn can weaken physical attackers before a later hit, Icy Wind can open a relevant speed window, and Recover must preserve useful support. Cursed Body replaces unexploited Water Absorb; a disable is a probabilistic native response, never an assumed outcome. Frillish supports a safe Shellder Shell Smash or a direct attack, while Corphish provides priority Aqua Jet and item removal if setup is denied. Its Ghost identity complements the crustacean/shellfish attackers and separates this fisherman's plan from Ned's wind engine. Respect Choice locks, Focus Sash disruption and the cost of setup. Counterplay: Grass/Electric offense, special pressure through burn, status prevention, Water absorption and priority into a damaged Shellder. Individual Medium level seeds reflect the actual items and roles; native difficulty and full Protect cadence remain pending.
 crack: Special/Grass/Electric pressure, Water absorption, denied status, Choice-lock exploitation, and priority after Sash or Shell Smash.
-CLAUNCHER @CHOICE_SPECS MEGA_LAUNCHER MODEST 4/0/0/252/0/252 2 | WATER_PULSE, DRAGON_PULSE, DARK_PULSE, AURA_SPHERE | ivs=31/31/31/31/31/31 | friendship=255
+CLAUNCHER @CHOICE_SPECS MEGA_LAUNCHER MODEST 4/0/0/252/0/252 3 | WATER_PULSE, DRAGON_PULSE, DARK_PULSE, AURA_SPHERE | ivs=31/31/31/31/31/31 | friendship=255
 FRILLISH @EVIOLITE CURSED_BODY BOLD 252/0/252/0/4/0 4 | HEX, ICY_WIND, WILL_O_WISP, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
 SHELLDER @FOCUS_SASH SKILL_LINK JOLLY 4/252/0/0/0/252 4 | SHELL_SMASH, ICICLE_SPEAR, ROCK_BLAST, RAZOR_SHELL | ivs=31/31/31/31/31/31 | friendship=255
-CORPHISH @CHOICE_BAND ADAPTABILITY ADAMANT 4/252/0/0/0/252 2 | CRABHAMMER, KNOCK_OFF, AQUA_JET, X_SCISSOR | ivs=31/31/31/31/31/31 | friendship=255
+CORPHISH @CHOICE_BAND ADAPTABILITY ADAMANT 4/252/0/0/0/252 3 | CRABHAMMER, KNOCK_OFF, AQUA_JET, X_SCISSOR | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0035 TRAINER_LAURA class=gym
 strategy: SETUP

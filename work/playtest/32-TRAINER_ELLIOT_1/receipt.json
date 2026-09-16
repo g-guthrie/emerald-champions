@@ -1,0 +1,39 @@
+{
+  "play_order": 32, "e_group": "E0034", "trainer": "TRAINER_ELLIOT_1", "class": "regular",
+  "location": "Route106", "cap": 20, "difficulty": "medium",
+  "party_manifest": "work/playtest/32-TRAINER_ELLIOT_1/party.json",
+  "opponent_levels_before": {"CLAUNCHER": 20, "FRILLISH": 22, "SHELLDER": 22, "CORPHISH": 20},
+  "attempts": [
+    {"id": "a1", "run_dir": "work/playtest/32-TRAINER_ELLIOT_1/a1", "seed": "0x8C21", "outcome": "won", "turns": 3, "player_faints": 1, "opponent_faints": 4, "ai_decision_frames_max": 13,
+     "narrative": "Three turns. A critical-hit Thunderbolt removed Clauncher before it could fire a second pulse; Cursed Body then disabled Magearna's Thunderbolt, which is a real cost. Shellder's Skill Link Icicle Spear killed Jolteon on turn 2 and survived Fleur Cannon on its Focus Sash, then Kartana's Leaf Blade finished it and Magearna's Flash Cannon closed on Corphish. One player faint, four opponent faints."}
+  ],
+  "strategy_checks": [
+    {"check": "Clauncher is the immediate pulse cannon and Mega Launcher is an ordinary ability, not Mega Evolution", "result": "PASS", "evidence": "Turn 1 Clauncher attacked immediately with Water Pulse - correct, since all four of its moves were neutral into my Electric and Steel/Fairy leads, so the STAB option boosted by both Mega Launcher and Choice Specs was the highest-damage pick. No Mega Evolution was attempted or claimed."},
+    {"check": "Cursed Body is a probabilistic native response, never an assumed outcome", "result": "PASS", "evidence": "Turn 1: 'Magearna's Thunderbolt was disabled!' fired natively off a real contact-free special hit, and Magearna had to change move for the rest of the fight. It did not fire on every hit."},
+    {"check": "Frillish trades Scald for Hex; burn weakens PHYSICAL attackers before a later hit", "result": "PASS on the condition, WEAK in execution", "evidence": "Both of my actives were special attackers, so Frillish correctly declined Will-O-Wisp. It then used unboosted Hex twice for 22 and 16 damage. Correct per the authored condition, but Icy Wind's speed window was the better of the two remaining options against a faster opposing pair. Recorded as an observation, not a defect."},
+    {"check": "Frillish supports a safe Shellder Shell Smash or a direct attack; respect the cost of setup", "result": "PASS", "evidence": "Shellder never attempted Shell Smash. It entered on turn 1 into a board where both of my actives outdamaged it and chose Icicle Spear twice instead, killing Jolteon. Declining setup with no safe turn is exactly what the dossier asks for."},
+    {"check": "Skill Link makes Icicle Spear a guaranteed five-hit move", "result": "PASS", "evidence": "Turn 2: 'The Pokemon was hit 5 times!' - 40 damage through Jolteon, enough to kill it outright."},
+    {"check": "Corphish provides priority Aqua Jet and respects its Choice lock", "result": "PASS", "evidence": "Final turn: Corphish entered and immediately used Aqua Jet, the priority option, rather than a slower Choice-Banded attack it would not survive to land. One move, no lock violation."},
+    {"check": "Focus Sash disruption", "result": "PASS", "evidence": "Turn 2: Shellder survived a +1 Fleur Cannon on its Sash at 1 HP and got a full extra turn out of it."}
+  ],
+  "protect_ledger": [],
+  "protect_note": "Elliot's side never used Protect. Only Corphish carries it, and Corphish holds a Choice Band - see the authored-set note below.",
+  "ai_defects": [],
+  "ai_observations": [
+    "No defect. The one soft call was Frillish choosing unboosted Hex over Icy Wind against a faster pair it could not burn usefully; Hex at half power into a neutral target is the lowest-value line of the three, and a speed drop would have mattered to its Shellder partner.",
+    "Clauncher's move choice under Choice Specs was correct: it picked the STAB pulse that Mega Launcher boosts rather than a coverage pulse with the same effectiveness."
+  ],
+  "authored_set_note": "CORPHISH is authored with CHOICE_BAND and PROTECT in the same set. Under a Choice lock, Protect is only ever usable as the mon's first action, and choosing it locks Corphish into Protect for the rest of the battle. That is not illegal and the AI correctly never picked it, but the slot is effectively dead weight - a fourth attack, or dropping the Band, would give the set a real fourth option. Flagging for the team owner; I did not change it, since the brief restricts me to levels.",
+  "level_changes": {
+    "rule_applied": "Won on the first attempt in three turns with one player faint. Brief rule: +1 on the weakest one or two members.",
+    "changes": [
+      {"member": "CLAUNCHER", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21},
+      {"member": "CORPHISH", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21}
+    ],
+    "verification": "Offset-only edits; move legality and strategy coherence unaffected. --write deliberately not run because a concurrent session has unrelated authored edits in the same tree.",
+    "rerun": "NOT PERFORMED - this machine's arm-none-eabi toolchain cannot build the ROM."
+  },
+  "cooler_note": "Elliot is a better-constructed fight than his Route 106 neighbour Ned: Cursed Body actually cost me a move, Skill Link actually killed something, and the Sash actually bought a turn, so three of the four mechanics landed in three turns. The shared problem remains that all four members are mono-Water, so one Electric attacker threatens the entire roster and the fight is decided by whether that attacker survives. Having two consecutive Route 106 trainers both field four pure Water bodies also makes the pair feel like one encounter played twice, which is a bigger loss than either team's individual weakness. A concrete suggestion for a later pass (not applied here): Frillish's Ghost half is the interesting part of this team and the dossier says so - leaning further into it, with a second non-pure-Water body to break the Electric sweep, would separate Elliot from Ned far more than the current Water/Ghost single-slot split does. Keep Clauncher and the Mega Launcher pulse identity; it is the most distinctive set of the four.",
+  "authored_set_legality": "No illegal set found; see the Corphish Choice Band plus Protect note above.",
+  "evidence": {"scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build. Not earned campaign play."}
+}
