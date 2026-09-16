@@ -149,6 +149,17 @@ bool32 CanTargetFaintAi(enum BattlerId battlerDef, enum BattlerId battlerAtk);
 // Set when the wall-clock safety stop truncated a pair search. Never cleared
 // by the search itself: a playtest driver reads it to mark the receipt.
 extern bool8 gAiPairBudgetTruncated;
+// Why the joint pair search did not run for the last decision that skipped it.
+// OWNER_MISMATCH means the two owners on one side carry different
+// AI_FLAG_SMART_MON_CHOICES settings, which disables the joint search - and
+// with it the Mega election and every pair-level judgement - for both of them.
+#define AI_PAIR_SKIP_NOT_DOUBLE     (1 << 0)
+#define AI_PAIR_SKIP_NO_PARTNER_AI  (1 << 1)
+#define AI_PAIR_SKIP_ACTOR_FLAGS    (1 << 2)
+#define AI_PAIR_SKIP_PARTNER_FLAGS  (1 << 3)
+#define AI_PAIR_SKIP_PREDICTION     (1 << 4)
+#define AI_PAIR_SKIP_OWNER_MISMATCH (1 << 5)
+extern u32 gAiPairSkipReason;
 u32 NoOfHitsForTargetToFaintBattler(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure);
 void GetBestDmgMovesFromBattler(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum DamageCalcContext calcContext, enum Move *bestMoves);
 u32 GetMoveIndex(enum BattlerId battler, enum Move move);

@@ -1256,6 +1256,8 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
 // of pairs, never a length of time: the same position must always produce the
 // same answer.
 bool8 gAiPairBudgetTruncated;
+// Why the joint search did not run for this decision, if it did not.
+u32 gAiPairSkipReason;
 static u32 sPairWorkAllowance;
 static u32 sPairWorkDecision;
 
@@ -5591,11 +5593,34 @@ static bool32 PairTryAttackBeforeSwitch(enum BattlerId actor, u32 reserve,
 bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
 {
     enum BattlerId partner = GetPartnerBattler(actor);
-    if (!IsDoubleBattle() || !IsBattlerAlive(actor) || !BattlerHasAi(partner)
-        || gAiLogicData->aiPredictionInProgress
-        || !(gAiThinkingStruct->aiFlags[actor] & AI_FLAG_SMART_MON_CHOICES)
-        || (IsBattlerAlive(partner) && !(gAiThinkingStruct->aiFlags[partner] & AI_FLAG_SMART_MON_CHOICES)))
+    u32 skip = 0;
+    if (!IsDoubleBattle())
+        skip |= AI_PAIR_SKIP_NOT_DOUBLE;
+    if (!BattlerHasAi(partner))
+        skip |= AI_PAIR_SKIP_NO_PARTNER_AI;
+    if (!(gAiThinkingStruct->aiFlags[actor] & AI_FLAG_SMART_MON_CHOICES))
+        skip |= AI_PAIR_SKIP_ACTOR_FLAGS;
+    if (IsBattlerAlive(partner) && !(gAiThinkingStruct->aiFlags[partner] & AI_FLAG_SMART_MON_CHOICES))
+        skip |= AI_PAIR_SKIP_PARTNER_FLAGS;
+    if (gAiLogicData->aiPredictionInProgress)
+        skip |= AI_PAIR_SKIP_PREDICTION;
+    // Two owners on one side each load their own flag word. A difference
+    // between them disables the joint search for both, which is invisible
+    // from outside; record it so a receipt can say so.
+    if ((skip & (AI_PAIR_SKIP_ACTOR_FLAGS | AI_PAIR_SKIP_PARTNER_FLAGS))
+     && (skip & (AI_PAIR_SKIP_ACTOR_FLAGS | AI_PAIR_SKIP_PARTNER_FLAGS))
+        != (AI_PAIR_SKIP_ACTOR_FLAGS | AI_PAIR_SKIP_PARTNER_FLAGS))
+        skip |= AI_PAIR_SKIP_OWNER_MISMATCH;
+    gAiPairSkipReason = skip;
+    if (!IsBattlerAlive(actor) || skip != 0)
+    {
+        // The joint search is the only thing in doubles that elects a Mega.
+        // When it does not run, the per-battler path has to keep that job
+        // rather than silently leaving a usable Mega unused.
+        if (IsBattlerAlive(actor) && CanMegaEvolve(actor))
+            SetAIUsingGimmick(actor, USE_GIMMICK);
         return FALSE;
+    }
     if (gAiLogicData->battlerMovesScored & (1u << actor))
         return TRUE;
     struct SwitchCandidateSnapshot *state = AI_SaveCandidateState();
