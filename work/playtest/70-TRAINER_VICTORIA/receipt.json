@@ -1,0 +1,54 @@
+{
+  "play_order": 70,
+  "e_group": "E0078",
+  "trainer": "TRAINER_VICTORIA",
+  "class": "ace",
+  "location": "Route111",
+  "cap": 30,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"LILLIGANT": 27, "ORICORIO_BAILE": 27, "BLISSEY": 26, "ROSERADE": 27},
+  "cap_window_confirmation": "Dossier seeds 29/29/28/29 resolved to 27/27/26/27 = cap 30 + offset - 2 (Medium). Cap 30 confirmed. This is the LOWEST-levelled team in my block: every member is three or four levels below the player cap.",
+  "party_manifest": "work/playtest/70-TRAINER_VICTORIA/party.json",
+  "party_pool_audit": "Same audited six as work/playtest/party-cap30-route110.json, led by Mega Gardevoir + Weavile. All source maps precede Route 111. New Mauville excluded (post-Wattson Basement Key).",
+  "pre_declared_strategy_checks": [
+    "Lilligant uses Quiver Dance and Dancer Oricorio copies it without spending its own selected action",
+    "Own Tempo covers Lilligant's Petal Dance confusion risk",
+    "Blissey uses Helping Hand and Light Screen (not Thunder Wave) and its support buys actual damage rather than a passive ending",
+    "Roserade supplies independent special offense",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/70-TRAINER_VICTORIA/a1", "seed": 70, "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 was the single best-constructed opposing turn in my whole block: Oricorio Protected, blocking a 2x Triple Axel AND a Pixilate Hyper Voice, and then Dancer copied Lilligant's Quiver Dance anyway - so Victoria ended turn 1 with both of her leads at +1/+1/+1, having taken one attack between them, from behind a shield. My Hyper Voice did reach Lilligant for 79 through the spread. T2 Weavile's Ice Shard finished Lilligant before it could use its boost, and Oricorio's +1 Revelation Dance took my Mega from 90 to 39. T3 Triple Axel removed Oricorio; Blissey entered and put up Light Screen. T4 Roserade Protected through both a 2x Triple Axel and a 2x Mystical Fire, and Seismic Toss put my Mega to 13. T5 I retreated the Mega for Magearna and Triple Axel killed Roserade. T6 Knock Off - physical, into a base-10 Defense - removed a 132 HP Blissey in one hit and took its Light Clay with it."}
+  ],
+  "strategy_checks": [
+    {"check": "Lilligant Quiver Dances and Dancer Oricorio copies it free", "result": "PASS - completely, on turn 1", "evidence": "'The opposing Lilligant used Quiver Dance!' followed immediately by 'The opposing Oricorio used Quiver Dance!' with all three stats rising on both. Oricorio's own selected action that turn was Protect, and it still got the copied dance - which is exactly the dossier's claim that 'successful copied moves do not spend Oricorio's selected action'. This is the authored partnership working perfectly, and it is the first bespoke ally interaction in my block that fired at all."},
+    {"check": "Own Tempo covers Petal Dance confusion", "result": "NOT EXERCISED", "evidence": "Petal Dance was never selected - Lilligant chose Quiver Dance on T1 and Pollen Puff on T2, then died. So the confusion risk the ability exists to cover never arose. I note Pollen Puff on T2 was aimed at my Weavile, i.e. used as an attack rather than as the ally-heal it also can be, which was correct with no damaged ally to heal."},
+    {"check": "Blissey uses Helping Hand and Light Screen, support buys damage", "result": "PARTIAL", "evidence": "Light Screen went up on T3 the turn Blissey entered - correct, and it did halve my special damage for the rest of the fight. Helping Hand was never selected. Blissey then spent T4 and T5 on Seismic Toss, which is 26 fixed damage a turn - an attack rather than a passive ending, so it avoids the failure mode the dossier warns about, but 26 a turn is not enough to threaten anything. The honest summary is that Blissey did its screen job and then had nothing meaningful to do."},
+    {"check": "Roserade supplies independent special offense", "result": "PARTIAL", "evidence": "Roserade selected Leaf Storm on T5 - a real independent attack, correct - but it was aimed at a slot I had just vacated by switching, and it was KO'd by Triple Axel in the same turn. Its T4 Protect was excellent (below). Two turns, one great guard and one attack that missed its window."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS - both were excellent", "evidence": "See the Protect ledger. Two Protects, both blocking multiple attacks, one of them also enabling a free copied setup. No repetition, nothing empty. This is the best Protect record of any trainer in my block."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "ORICORIO_BAILE", "payoff": "OUTSTANDING - the best guard I have seen in this block. It blocked a Triple Axel that was 2x into its Flying half (three hits from a Life Orb Weavile) and a Pixilate Hyper Voice from a freshly Mega-Evolved Gardevoir, and because Dancer triggers off the ally's dance independently of Oricorio's own action, it ALSO came out of the turn at +1 Sp.Atk / +1 Sp.Def / +1 Speed. Damage denied, setup gained, action not spent. That is a guard turn that produced strictly more than an attack would have."},
+    {"turn": 4, "battler": "ROSERADE", "payoff": "EXCELLENT. Roserade was at 78/78 but both of my attacks that turn were super-effective into Grass - a 2x Triple Axel and a 2x Mystical Fire - and either could plausibly have killed it. Protect blocked both. It bought a turn in which its partner Blissey's Seismic Toss put my Mega Gardevoir to 13 HP and forced me to retreat it. Real damage denied, partner action enabled, no repetition."}
+  ],
+  "ai_defects": [],
+  "ai_notes": [
+    "No defects at all. Victoria is the cleanest-played team in my block: two perfect Protects, the authored Dancer partnership firing on turn 1, a screen the turn its setter entered, and no wasted support turns except Blissey's late Seismic Tosses, which were the best of a bad set of options.",
+    "I want to record the contrast explicitly, because it is the most useful thing in this receipt: Aisha's ACTIVATE tactic and Anna & Meg's Instruct both failed to fire, while Victoria's Dancer partnership fired immediately and for free. The difference is that Dancer is a native ABILITY that triggers automatically off the ally's move, whereas the other two require the AI to CHOOSE a move aimed at its own ally. Every authored combo that depends on the AI voluntarily targeting a teammate is the fragile kind; every one that rides a native ability trigger is robust. That is worth knowing when auditing the rest of sEmeraldChampionsBattleTactics.",
+    "Knock Off removing a 193 HP Blissey from 132 in a single hit is the fight's other lesson: Blissey's base 10 Defense means any physical attacker erases it regardless of its HP, so its Light Clay screens are the only thing it really contributes.",
+    "Decision timing comfortable (max 62 frames)."
+  ],
+  "level_changes": {
+    "rule_applied": "Brief rule 5: won on the first optimized attempt with 0 player faints -> +1 on the weakest one or two members, never the ace first. Lilligant and Oricorio are the partnership the whole team is built around and both are untouched. Blissey at -2 is the level floor of the entire block and contributed one screen; Roserade at -1 got two turns and neither changed the outcome.",
+    "changes": [
+      {"member": "BLISSEY", "field": "level offset", "before": -2, "after": -1, "level_before": 26, "level_after": 27},
+      {"member": "ROSERADE", "field": "level offset", "before": -1, "after": 0, "level_before": 27, "level_after": 28}
+    ],
+    "rerun_note": "Not rerun at the new levels. Opponent levels are compiled into src/data/trainers.party and the headless ROM in work/agent-battle-build predates this edit; verifying would require re-materializing and running make, which this brief forbids.",
+    "recommendation_beyond_this_pass": "I think this team is under-levelled by more than the one level I am allowed to add here, and I want that on the record. It is an ace-class encounter whose every member sits three to four levels BELOW the player cap, and it played better than anything else I faced - it simply did not have the stats to convert. A +1/+1/+1/+1 across the board, or Lilligant and Oricorio moved to the cap, would likely turn a zero-faint win into a real fight without touching a single species, move or item. I have deliberately not done that myself because the brief limits me to raising one or two members; I am flagging it for the team side rather than doing it unilaterally."
+  },
+  "could_this_be_cooler": "No - and of the twelve teams in my block this is the one I would change least. A Quiver Dance user beside a Dancer copier is a real, legible, competitively sound partnership: the player sees two Pokemon get +1/+1/+1 off one move and immediately understands both the threat and the answer (remove one dancer, or use spread damage that a single Protect cannot blank). It fired on turn 1 without any help from me, which after Aisha and Anna & Meg is genuinely reassuring. The theme is right too - a Winstrate who fights with flowers and a dancing bird is a good counterpoint to Victor's blunt Normal-type household. I would leave Lilligant, Oricorio and Roserade completely alone. The only member I would reconsider is Blissey, and only its moveset rather than its presence: Helping Hand was never selected in the whole battle and Seismic Toss is 26 fixed damage a turn into a party with 90-to-120 HP bodies, so once Light Screen is up Blissey has nothing left to do. Swapping Seismic Toss for Reflect would let it lay the second screen behind the first and make the dancers genuinely hard to remove, which is the direction the team already wants to go. That is a small change and I would only make it alongside the level look described above, not instead of it.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal, and no story progress was awarded."
+}

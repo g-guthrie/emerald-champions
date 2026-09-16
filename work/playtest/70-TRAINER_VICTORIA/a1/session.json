@@ -1,0 +1,30 @@
+{
+  "rom_sha256": "dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "elf_sha256": "ae6ed685cf22c9aeaf141efed91e22b46d284efbe3e3300c07c87c981be29938",
+  "seed": 70,
+  "trainer_a": "TRAINER_VICTORIA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 30,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/70-TRAINER_VICTORIA/party.json",
+  "party_sha256": "63cc4a78f43b31488a690b90af40922873f9bacca124b355e8a2da562e0d72ba",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET"
+  ],
+  "prepared": {
+    "encounter": "C16 E0078 TRAINER_VICTORIA, Route 111, cap 30",
+    "party": 6
+  },
+  "started": {
+    "frames": 1123
+  },
+  "replacement_commits": {
+    "turn": 5,
+    "slots": {}
+  }
+}
