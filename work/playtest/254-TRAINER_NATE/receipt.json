@@ -1,0 +1,96 @@
+{
+  "play_order": 254,
+  "e_group": "E0395",
+  "trainer": "TRAINER_NATE",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (Mossdeep Gym, room eight)",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76. Oranguru, Beheeyem, Mimikyu, Uxie and Alolan Exeggutor (offset 1) at L75 and Delphox (offset 2) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/254-TRAINER_NATE/party_gym76.json"],
+  "chronology_note": "Same six as E0394 and the same audit: every member gate 68 or lower, nothing sourced from Mossdeep or later. Mossdeep Gym is the Mind Badge chapter at cap 76.",
+  "pre_play_strategy_checks": [
+    "Oranguru Instructs Mega Delphox or Beheeyem only after that partner has already moved this turn, and only when the repeated move is worth repeating",
+    "Instruct must never be spent on a Protect or a failed move",
+    "Analytic adds 30 percent to Beheeyem when it moves last; Choice Specs on top is the biggest non-leader number in the gym",
+    "Mimikyu's Disguise absorbs the first hit and Swords Dance follows behind that free turn",
+    "Uxie sets Light Screen or Yawn",
+    "Alolan Exeggutor's Harvest recycles its Sitrus Berry and its Dragon lane covers the Dark answers",
+    "Delphox Mega Evolves (watch for the late-Mega deferral seen at E0377)"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 4,
+      "build": "work/agent-battle-build-5",
+      "run_dir": "work/playtest/254-TRAINER_NATE/a1",
+      "party": "party_gym76.json (Incineroar / Urshifu-Single / Metagross / Gholdengo / Flutter Mane / Amoonguss)",
+      "outcome": "won",
+      "turns": 8,
+      "player_faints": 0,
+      "opponent_faints": 6,
+      "why": "The crack line tells the player exactly how to break this room and it works on the first two turns. Oranguru and Beheeyem led together, which is the one board where Instruct cannot fire, and a single Adamant Knock Off at 2x with the item bonus one-shot a 268 HP Beheeyem outright. Urshifu's Wicked Blow then killed Oranguru on turn 2 through a Protect on turn 1 - Unseen Fist pierced the guard for 90 and the follow-up finished it. With the ape gone by turn 2 the room's entire authored mechanic was off the board and the remaining four are individually strong but unconnected: Mimikyu lost its Disguise and its Life Orb to one Knock Off, Alolan Exeggutor spent itself down to -6 Special Attack, Uxie put up a Light Screen that never mattered against a physical Dark attacker, and Mega Delphox arrived alone against a full team. Zero player faints."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Oranguru Instructs a partner that has already moved",
+      "result": "FAIL - never fired, structurally",
+      "evidence": "Oranguru had exactly two decisions: turn 1 Protect, turn 2 Foul Play. On neither turn was Instruct even a sensible option. Oranguru is the fastest of the two leads, so on turn 1 and turn 2 its partner had not yet moved when Oranguru acted, and Instruct with no already-moved partner does nothing. The AI correctly declined to waste it - that part is right, and it never Instructed a Protect or a failed move. But the consequence is that the gym's signature mechanic never appeared: Delphox did not reach the field until turn 8, by which point Oranguru had been dead for six turns. See the cooler note - this is a lead-order problem, not an AI problem."
+    },
+    {
+      "check": "Instruct is never spent on a Protect or a failed move",
+      "result": "PASS (by omission)",
+      "evidence": "Zero Instructs were selected. The AI never threw the move away, which is the half of the authored requirement that could be tested."
+    },
+    {
+      "check": "Analytic plus Choice Specs makes Beheeyem the biggest non-leader number",
+      "result": "FAIL - never landed",
+      "evidence": "Beheeyem chose Thunderbolt on turn 1 targeting Urshifu but was knocked out by Incineroar's Knock Off before it resolved (Incineroar is faster). It dealt zero damage in the fight and its Choice Specs were knocked off in the same action that killed it. A 268 HP body with 252 HP EVs but no defensive investment and a Psychic typing is not durable enough to ever take its turn against a Dark lead."
+    },
+    {
+      "check": "Mimikyu's Disguise absorbs the first hit; Swords Dance behind it",
+      "result": "PARTIAL",
+      "evidence": "turn 3: 'The opposing Mimikyu's disguise was busted!' - Disguise worked exactly as designed, absorbing Knock Off and taking the standard 1/8 chip. But the same action also knocked off its Life Orb, so the free turn Disguise bought was spent on Shadow Sneak instead of Swords Dance, and Swords Dance was never selected in the fight. Reasonable: with a busted Disguise and no item, setting up in front of two Dark attackers would have been a losing choice."
+    },
+    {
+      "check": "Uxie sets Light Screen or Yawn",
+      "result": "PASS, but empty",
+      "evidence": "turn 6 Light Screen, turn 7 Yawn ('Incineroar grew drowsy!' and Incineroar did fall asleep on turn 8). Both authored moves fired on their proper turns. The payoff was nil through no fault of the AI: my only remaining damage was physical Dark and special Ghost from a Pokemon that was about to win anyway, so Light Screen halved nothing that mattered and the sleep landed on turn 8 with one opponent left alive. Uxie itself died to a single Darkest Lariat at 2x after its Mental Herb had already been knocked off."
+    },
+    {
+      "check": "Alolan Exeggutor's Harvest recycles its Sitrus Berry",
+      "result": "FAIL (untestable as built)",
+      "evidence": "Incineroar knocked the Sitrus Berry off on turn 2, before Exeggutor had ever eaten it. Harvest can only recycle a Berry that was consumed, not one that was removed, so the ability was dead from turn 2 onward and the reading confirms item NONE for the rest of the fight. This is a legitimate interaction rather than a bug, but it means Harvest is one Knock Off away from being a blank ability, and Knock Off is the single most obvious move to bring into a Psychic gym."
+    },
+    {
+      "check": "Delphox Mega Evolves",
+      "result": "PASS, and notably better than E0377",
+      "evidence": "turn 8, the very turn it was sent out: 'The opposing Delphox's Delphoxite is reacting... The opposing Delphox has Mega Evolved into Mega Delphox!' and it attacked with Mystical Fire on the same turn, dropping Flutter Mane's Special Attack. No deferral. This is a clean counter-example to the late-Mega pattern flagged at E0377 - when the Mega holder is sent out as a replacement rather than led with, the evolution happens immediately."
+    }
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 1, "battler": "Oranguru", "payoff": "partial, and defeated by the player's tool. It guarded correctly against the obvious focus-fire turn, but Urshifu's Unseen Fist pierced it - 'The opposing Oranguru couldn't fully protect itself' - for 90. It did blunt the hit and Oranguru survived the turn, so not empty, but it also cost Oranguru the one turn in the fight where an Instruct setup line might have been started."},
+    {"attempt": 1, "turn": 5, "battler": "Alolan Exeggutor", "payoff": "excellent. Blocked a Sludge Bomb at 2x into a body that had 142 of 298 HP left. That is a saved life, made on the turn its partner Mimikyu was dying, which is exactly when a Protect should be spent."},
+    {"attempt": 1, "turn": 7, "battler": "Alolan Exeggutor", "payoff": "excellent again. It was at 33 HP and blocked a second 2x Sludge Bomb that was lethal. Two Protects in three turns from the same battler is the pattern the standing rule asks me to scrutinise, and in this case both were correct reads on a Pokemon that was one hit from death with no other way to survive - the turn in between (turn 6) it attacked rather than guarding, so it was not repetitive guarding."}
+  ],
+  "protect_summary": "3 opponent Protects across 8 turns, 0 empty. One partial (pierced by Unseen Fist) and two excellent, both life-saving. Exeggutor guarded on turns 5 and 7 but attacked on turn 6, so no consecutive guarding and no quota behaviour. Mimikyu, Uxie and Delphox all carry Protect and none of them used it; each died or won its exchange without needing it. The guarding in this room is good.",
+  "ai_defects": [
+    {
+      "id": "E0395-1",
+      "turn": "a1 turns 2, 3 and 4",
+      "board": "Alolan Exeggutor (Grass/Dragon, Harvest, Quiet 252 HP / 252 SpA) against Urshifu-Single-Strike (Dark/Fighting) on turn 2 and turn 3, then Amoonguss (Grass/Poison) on turn 4. Its four moves are Draco Meteor, Psychic, Giga Drain and Protect.",
+      "chosen": "Draco Meteor on all three turns, driving its own Special Attack from 0 to -2 to -4 to -6.",
+      "better": "Draco Meteor once is correct - the first one dealt 259 to Urshifu and nearly killed it. The second and third are the defect. Draco Meteor's harsh self-drop applies to every special move the user owns, so after the first cast, Psychic and Giga Drain are equally penalised while Draco Meteor keeps digging. Turn 4 is the clearest case: the target was Amoonguss, a Grass/Poison body that takes Psychic at 2x and Draco Meteor at 1x, and Exeggutor chose the 1x move that also took it from -4 to -6. Psychic there is better on raw damage AND costs no further stages. By turn 6 the Giga Drain it finally chose healed Incineroar's worth of nothing - 15 damage. Severity: moderate, and likely shared. The AI appears to score a harsh self-drop move on this turn's damage alone without pricing the stages it spends. Every authored set in the campaign that owns Draco Meteor, Overheat, Leaf Storm, Fleur Cannon or Psycho Boost beside a same-category alternative is exposed to this; E0397's Rotom-Mow (Leaf Storm), E0397's Magearna (Fleur Cannon) and E0395's own Delphox are the nearest cases to check. This should be fixed in the AI, not compensated with levels."
+    }
+  ],
+  "level_changes": [
+    {"member": "ORANGURU", "field": "level offset", "before": 1, "after": 2, "why": "Won on attempt 1 with zero player faints, which is the brief's explicit +1 case. Oranguru is the room's engine and the crack line correctly names it as the thing to remove first - but it died on turn 2 to two attacks without ever getting an Instruct off, which means the fight the dossier describes never happened. One level will not change that on its own (see the cooler note), but it is the right member to raise because it is the one the player must actually get through."},
+    {"member": "BEHEEYEM", "field": "level offset", "before": 1, "after": 2, "why": "The weakest member on the board by a distance: one-shot by a single Knock Off from full HP before it ever moved. It is a 252 HP / 252 SpA glass cannon with a Psychic typing in a gym where the obvious player answer is Dark. +1 is the minimum, and I deliberately did not touch Mega Delphox (the ace), Uxie (the legend) or Mimikyu."}
+  ],
+  "level_change_rationale": "Won first attempt, six opponent faints to zero player faints, and no member other than Exeggutor ever forced me to spend a turn defensively. That is well under the standing three-faint expectation for a Gym trainer, let alone one that is meant to be an exceptional difficulty benchmark. +1 each on the two weakest and most structurally important members (Oranguru and Beheeyem), staying inside the ±2 cap for this pass and leaving the ace, the legend and the Disguise body alone.",
+  "cooler": "The Instruct concept is genuinely the best idea in the gym and I did not get to see it once, which is the whole problem. The mechanic needs two specific bodies on the field at the same time, and the authored party order puts Oranguru beside Beheeyem with Delphox in slot six. Both leads are slow, frail Psychic types that die to the first Dark attack; the fox arrives as the last replacement. Concretely: lead Oranguru beside Delphox. That is the pairing the plan describes in its own first sentence, it makes the room's headline turn happen on turn 2 instead of never, and it forces the player to choose between killing the ape and killing the Mega rather than getting both for free. Beheeyem then becomes the reserve Instruct target it is described as, which is where it belongs. Second note: Alolan Exeggutor's Harvest is dead the moment anything Knocks Off its Sitrus Berry, and in a Psychic gym every competent player brings Knock Off. A Berry the AI actually eats early - or Leftovers plus a different fourth slot - would make that ability real. I am changing neither in this pass.",
+  "legality_notes": "No legality problem in the authored set. Every level matched cap + offset - 2, Delphoxite behaved normally, and Uxie is a type-appropriate legendary the gym rules permit. One structural note rather than a legality one: the 'ai: Ace Pokemon' flag is on Delphox, which is correct, but the tactic line 'INSTRUCT ORANGURU INSTRUCT DELPHOX' names a pairing the party order makes almost impossible to reach.",
+  "verification_limit": "The two +1 offsets cannot be re-verified from this session: the driver runs work/agent-battle-build-5, a ROM built before this edit, so a rerun now would replay the old levels. The main agent must re-materialize and rebuild first. This is the battle in my block most worth re-running afterwards - not because of the levels, which will change little, but because the room's authored mechanic has still never been observed firing, and any lead-order change would need a fresh run to confirm."
+}
