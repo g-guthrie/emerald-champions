@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0128 TRAINER_NICOLAS_1 (Meteor Falls 1F 2R, cap 36 window)",
+ "availability_audit": "Chronology anchor: Route 113/114 and Meteor Falls is reached after Mauville/Wattson (cap 30) via Route 111 -> Route 112 -> Fiery Path, per Game Book C20/C21. Every member below is in work/reference-pools/pool-36.json with gate <= 36 and a source_detail map the player has already passed on the way to Route 113/114 and Meteor Falls: Seaspray Cave B1F (Sneasel), Rusturf Tunnel (Drilbur), Petalburg City Old Rod (Magikarp), Route 102 (Togepi), Mauville Game Corner (Litten), Granite Cave 1F (Abra). No Route 118+, Mt. Pyre, desert-interior or post-Flannery sources are used. Mega Ring earned from Steven after Brawly (C13); Gyaradosite stone window 20. Meteor Falls is reached west along Route 114 from Fallarbor per Game Book C21. Adds Petalburg Woods (Kartana gate 20) and NewMauville_Entrance (Magnezone gate 30). Gyaradosite stone window 20; the Mega Ring is earned from Steven after Brawly (C13).",
+ "plan": "Nicolas is the dragon-tamer ace and his dossier names the counterplay itself: Ground immunity, speed reversal, Fairy/Ice pressure, and denying a safe Dragon Dance. Excadrill leads because a Ground type is flatly immune to Dracozolt's Bolt Beak, which is the single scariest move on the team - a Hustle-boosted Bolt Beak from full Speed on a switch-in is the interaction the dossier says to remember, and I intend to make it a dead move rather than survive it. Togekiss is the second lead: it is immune to High Horsepower, it redirects with Follow Me, and its Dazzling Gleam is 2x into all four members while Altaria is still Dragon/Flying. The moment Altaria Megas it becomes Dragon/Fairy and my Fairy damage stops mattering, so the Steel lane takes over: Excadrill's Iron Head, Magnezone's Flash Cannon and Kartana's Smart Strike are all 2x into Mega Altaria. Mega Gyarados is my ace and is chosen for Intimidate as much as for damage - it is the cheapest answer to both a Dragon Dance sweep and a physical Hustle attacker - and its Ice Fang is 4x into Alolan Exeggutor. I will not try to kill Altaria before it Mega Evolves; the Mega is the showcase and it should be allowed to happen.",
+ "party": [
+  {
+   "species": "SPECIES_EXCADRILL",
+   "moves": [
+    "MOVE_EARTHQUAKE",
+    "MOVE_IRON_HEAD",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_MOLD_BREAKER",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Electric-immune Rock Slide spread answer to the bird pair",
+   "availability": "Drilbur on Rusturf Tunnel land (pool gate 20), level evolution to Excadrill (pool gate 36)."
+  },
+  {
+   "species": "SPECIES_TOGEKISS",
+   "moves": [
+    "MOVE_FOLLOW_ME",
+    "MOVE_DAZZLING_GLEAM",
+    "MOVE_ROOST",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_CALM",
+   "ability": "ABILITY_SERENE_GRACE",
+   "item": "ITEM_LEFTOVERS",
+   "evs": [
+    252,
+    0,
+    124,
+    0,
+    132,
+    0
+   ],
+   "role": "Ground-immune redirector whose Dazzling Gleam is 2x into all four of Nicolas\u2019s Dragons before Altaria Megas",
+   "availability": "Togepi on Route 102 land (pool gate 14), friendship evolution to Togetic, Shiny Stone from the reached evolution stock (pool gate 24)."
+  },
+  {
+   "species": "SPECIES_GYARADOS",
+   "moves": [
+    "MOVE_WATERFALL",
+    "MOVE_CRUNCH",
+    "MOVE_ICE_FANG",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_GYARADOSITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Mega ace, Intimidate on entry, Ice Fang for the back half",
+   "availability": "Magikarp on the Petalburg City Old Rod (pool gate 14), level evolution to Gyarados (gate 20); Gyaradosite stone window 20; Mega Ring earned from Steven after Brawly."
+  },
+  {
+   "species": "SPECIES_WEAVILE",
+   "moves": [
+    "MOVE_TRIPLE_AXEL",
+    "MOVE_KNOCK_OFF",
+    "MOVE_ICE_SHARD",
+    "MOVE_LOW_KICK"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_PRESSURE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "fast Ice breaker with priority against both Oricorio",
+   "availability": "Sneasel on Seaspray Cave B1F land (pool gate 14), condition evolution to Weavile (gate 14)."
+  },
+  {
+   "species": "SPECIES_MAGNEZONE",
+   "moves": [
+    "MOVE_THUNDERBOLT",
+    "MOVE_FLASH_CANNON",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_ANALYTIC",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "special pressure into the physical wall; Thunderbolt is 2x into every Flying member including Corviknight",
+   "availability": "Magnezone on NewMauville_Entrance land (pool gate 30); New Mauville is opened out of Mauville after Wattson, which this whole block sits after."
+  },
+  {
+   "species": "SPECIES_KARTANA",
+   "moves": [
+    "MOVE_LEAF_BLADE",
+    "MOVE_SACRED_SWORD",
+    "MOVE_SMART_STRIKE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_BEAST_BOOST",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Sacred Sword ignores Garganacl's Iron Defense boosts; Smart Strike is 2x into Baxcalibur and Avalugg",
+   "availability": "Kartana on PetalburgWoods_3 land (pool gate 20); book preserves this access, Cut license and Roxanne badge earned long before Route 114."
+  }
+ ]
+}
