@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0454 TRAINER_SHELLY_SEAFLOOR_CAVERN, Seafloor Cavern admin, cap 84 doubles (Drizzle rain, Specs Keldeo, Mega Dragalge)",
+ "availability_audit": "Cap window 84 (FLAG_EC_REPORT_C42_COMPLETE). Seafloor Cavern is entered by Dive from Route 128 after the Space Center and before Sootopolis, so the same Mossdeep-era party applies: Incineroar gate 36, Urshifu-S 42, Amoonguss 42, Landorus 42 (legendary_sign Route111_RuinsExterior, reachable legend), Tapu Fini 60 (legendary_sign Route126, reachable legend), Flutter Mane 68 (wild MtPyre_Summit). No gate-84 Underwater/Seafloor species are used even though Underwater is now reachable.",
+ "plan": "Cannot take the rain away (no weather of my own), so win the speed/priority war: Fake Out Politoed's support turn, Close Combat Hisuian Qwilfish (2x), Flutter Mane is immune to Secret Sword and Moonblasts Dragalge/Keldeo... (Keldeo Water/Fighting: Fairy 2x); Tapu Fini's Misty Terrain halves Dragalge's Draco Meteor and resists Water; Amoonguss Giga Drain/Spore for Ludicolo and Crawdaunt; Landorus Earth Power for Qwilfish and Dragalge (neutral) only when safe.",
+ "party": [
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_KNOCK_OFF",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_PARTING_SHOT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Intimidate pivot, Fake Out denial, Knock Off strips Life Orb and Focus Sash",
+   "availability": "pool-84 gate 36 evolution:level from SPECIES_TORRACAT"
+  },
+  {
+   "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+   "moves": [
+    "MOVE_WICKED_BLOW",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_SUCKER_PUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_UNSEEN_FIST",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Protect-ignoring always-crit Dark attacker, priority Sucker Punch",
+   "availability": "pool-84 gate 42 evolution:other:EVO_SCRIPT_TRIGGER from SPECIES_KUBFU"
+  },
+  {
+   "species": "SPECIES_FLUTTER_MANE",
+   "moves": [
+    "MOVE_MOONBLAST",
+    "MOVE_SHADOW_BALL",
+    "MOVE_THUNDERBOLT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fastest special attacker, Fairy and Ghost coverage",
+   "availability": "pool-84 gate 68 wild:MtPyre_Summit/land_mons"
+  },
+  {
+   "species": "SPECIES_AMOONGUSS",
+   "moves": [
+    "MOVE_SPORE",
+    "MOVE_RAGE_POWDER",
+    "MOVE_GIGA_DRAIN",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_CALM",
+   "ability": "ABILITY_REGENERATOR",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    0,
+    252,
+    0
+   ],
+   "role": "redirection and sleep control",
+   "availability": "pool-84 gate 42 evolution:level from SPECIES_FOONGUS"
+  },
+  {
+   "species": "SPECIES_LANDORUS",
+   "moves": [
+    "MOVE_EARTH_POWER",
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_PSYCHIC",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_SHEER_FORCE",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Sheer Force special Ground, answers Rock bodies",
+   "availability": "pool-84 gate 42 legendary_sign:Route111_RuinsExterior (reachable legend)"
+  },
+  {
+   "species": "SPECIES_TAPU_FINI",
+   "moves": [
+    "MOVE_MUDDY_WATER",
+    "MOVE_MOONBLAST",
+    "MOVE_ICY_WIND",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_MISTY_SURGE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    0,
+    252,
+    4,
+    0
+   ],
+   "role": "bulky Water spread, Misty Terrain status immunity, Icy Wind speed control",
+   "availability": "pool-84 gate 60 legendary_sign:Route126 (reachable legend)"
+  }
+ ]
+}

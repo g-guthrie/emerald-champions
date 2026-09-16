@@ -1,0 +1,37 @@
+{
+  "play_order": 288, "e_group": "E0454", "trainer": "TRAINER_SHELLY_SEAFLOOR_CAVERN", "class": "admin", "location": "SeafloorCavern_Room3",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-7",
+  "party_manifest": "work/playtest/288-TRAINER_SHELLY_SEAFLOOR_CAVERN/party_seafloor_84_antirain.json (attempt 2); attempt 1 used party_seafloor_84.json",
+  "availability_note": "Seafloor Cavern via Dive from Route 128 after the Space Center, before Sootopolis. Attempt 2 party: Torkoal gate 42 (Fiery Path), Rillaboom 36, Gastrodon 68 (Scorched Slab, Route 120), Flutter Mane 68 (Mt Pyre Summit), Tapu Koko 30 and Zapdos 30 (reachable legends, Route 110 / New Mauville). No Underwater/Seafloor species.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/288-TRAINER_SHELLY_SEAFLOOR_CAVERN/a1", "seed": 1, "outcome": "lost", "turns": 7, "decisions": 12, "player_faints": 6, "opponent_faints": 3, "note": "Generic Route party (Incineroar/Urshifu/Flutter Mane/Amoonguss/Landorus/Tapu Fini). No way to remove the rain; Helping Hand Giga Drain OHKOed Tapu Fini, Swift Swim Hydro Pump OHKOed Landorus, Band Knock Off OHKOed Amoonguss. Player error: Rage Powder cannot redirect the Grass-type Ludicolo."},
+    {"attempt": 2, "run_dir": "work/playtest/288-TRAINER_SHELLY_SEAFLOOR_CAVERN/a2", "seed": 2, "outcome": "won", "turns": 10, "decisions": 15, "player_faints": 4, "opponent_faints": 6, "note": "Rebuilt as an anti-rain party (why: attempt 1 showed the fight is unwinnable without answering Drizzle). Torkoal's Drought overwrote the rain on turn 0; Flutter Mane OHKOed Keldeo again; Tapu Koko's Thunderbolts took Crawdaunt and Politoed. Lost Rillaboom (doubled Barb Barrage after poison), Torkoal (Helping Hand Hydro Pump), Flutter Mane (Helping Hand Sludge Bomb), Gastrodon (Helping Hand Adaptability Draco Meteor, 359 from full)."}
+  ],
+  "strategy_checks": [
+    {"check": "Drizzle live on entry, Damp Rock", "result": "PASS", "evidence": "'It started to rain!' in both send-outs; a1 rain persisted all 7 turns. a2: Torkoal's Drought resolved after Drizzle and replaced it ('The sunlight turned harsh!'), which is the crack line working."},
+    {"check": "Politoed supports Keldeo with Helping Hand / Icy Wind", "result": "PASS", "evidence": "a1 T6 Helping Hand -> Ludicolo Giga Drain OHKO on Tapu Fini; a2 T4 HH -> Hydro Pump OHKO Torkoal, T7 HH -> Sludge Bomb OHKO Flutter Mane, T8 HH -> Draco Meteor OHKO Gastrodon; Icy Wind a2 T3 and T10. Politoed is the engine of this team and the AI uses it exactly as authored."},
+    {"check": "Specs Keldeo fires and respects its lock", "result": "PASS (selected) / never survived to fire", "evidence": "a1 T5 and a2 T3 Keldeo chose Hydro Pump; both times Flutter Mane's Moonblast (2x) OHKOed it first. Keldeo at offset 3 (L85, 276 HP) does not survive one Fairy hit."},
+    {"check": "Swift Swim Ludicolo sweeps in rain", "result": "PASS (a1) / denied (a2)", "evidence": "a1 T6-T8 Ludicolo outsped everything and took two KOs (Giga Drain on Fini, Hydro Pump on Landorus). a2 under sun it still KOed Torkoal via Helping Hand."},
+    {"check": "Hisuian Qwilfish Intimidate/Eviolite front, Barb Barrage doubling on poisoned targets", "result": "PASS", "evidence": "a2 T1 Barb Barrage poisoned Rillaboom (197), T2 the doubled Barb Barrage KOed it from 143. Eviolite bulk let it take two Close Combats in a1."},
+    {"check": "Crawdaunt Adaptability priority reserve", "result": "PASS", "evidence": "a1 T7 Band Knock Off OHKOed Amoonguss (364); a2 T6 Aqua Jet into Flutter Mane's Protect."},
+    {"check": "Mega Dragalge special Dragon/Poison lane", "result": "PASS", "evidence": "a2 T7 Mega Evolved and OHKOed Flutter Mane with HH Sludge Bomb; T8 HH Draco Meteor OHKOed Gastrodon (359/359). Dragon moves were correctly not used into my Fairies."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 3, "user": "Qwilfish-Hisui", "payoff": "REAL - blocked a rain-boosted Muddy Water that would have KOed it at 114 HP."},
+    {"attempt": 1, "turn": 4, "user": "Politoed", "payoff": "MOSTLY EMPTY - blocked a resisted Muddy Water (~30 dmg) while Qwilfish died beside it."},
+    {"attempt": 2, "turn": 1, "user": "Politoed", "payoff": "REAL - blocked Rillaboom's Fake Out; Qwilfish landed the poisoning Barb Barrage."},
+    {"attempt": 2, "turn": 5, "user": "Politoed", "payoff": "REAL - blocked Tapu Koko's 2x Thunderbolt in Electric Terrain."},
+    {"attempt": 2, "turn": 9, "user": "Politoed (31 HP)", "payoff": "REAL - blocked Dazzling Gleam; Dragalge's Sludge Bomb took Koko to 56."},
+    {"attempt": 2, "turn": 10, "user": "Mega Dragalge (3 HP)", "payoff": "PARTIAL - blocked Zapdos's Thunderbolt but Politoed died and Dragalge fell next turn; bought one turn, converted nothing."}
+  ],
+  "ai_defects": [],
+  "engine_notes": [
+    {"note": "Spread moves with one foe left (Muddy Water, Dazzling Gleam) take target 0 and print 'It doesn't affect <user>...' before hitting the foe. Driver/target cosmetic quirk seen in E0442 and here."}
+  ],
+  "authored_set_legality": "Dossier/ROM mismatch, not illegality: the plan text says 'Mega Dragalge is the special Dragon/Poison lane with Adaptability behind it', but on Mega Evolution the ROM gave Mega Dragalge REGENERATOR (base Dragalge kept Adaptability until then). The Mega still OHKOed Gastrodon with a Helping Hand Draco Meteor, so the lane works; the prose should say Regenerator (or the Mega's ability table should be checked).",
+  "theme_note": "Yes, the theme shows and Shelly is a clear step above her grunts. Rain is live from turn 0, every member cashes it (Weather Ball, Swift Swim, Hydro Pump, Aqua Jet), and Politoed's Helping Hand turns four different partners into one-shot KOs. The generic Route party that beat both grunts 4-0 and 4-2 lost to her 3-6; it took a purpose-built weather-war team (Drought + Storm Drain + two Electrics + Fairy) to win 6-4. That is exactly what an Aqua admin at the climax should demand.",
+  "level_changes": [],
+  "level_changes_unverified": "No changes.",
+  "cooler": "Already the best fight in the block. Two small things (not this pass): Keldeo at L85 with 4 HP EVs dies to any Fairy hit before its Specs matter - a Focus Sash or bulk would let the lock actually be seen; and the dossier's Adaptability claim for the Mega should be corrected to Regenerator.",
+  "most_worth_rerunning": "Not needed for levels; if anything, re-run to see whether Keldeo ever fires a Secret Sword when the player does not lead a Fairy."
+}
