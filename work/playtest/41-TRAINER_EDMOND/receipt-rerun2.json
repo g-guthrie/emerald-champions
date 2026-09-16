@@ -1,0 +1,100 @@
+{
+  "play_order": 41,
+  "e_group": "E0043",
+  "trainer": "TRAINER_EDMOND",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "difficulty": "medium",
+  "rerun_reason": "Rerun pass 2 (agent R6). The rerun-1 pass raised Mantyke 2->3 because it had failed to land Tailwind in two consecutive passes. This is the one confirming run of that level on the rebuilt ROM.",
+  "build": "work/agent-battle-build; rom_sha256 dfd9f7a52f635914c40fd8424b6a5cdd47eeef9f81d273a0eb96b871a989c4e8",
+  "level_change_verification": "Confirmed live: Mantyke resolved at L25 (L24 in the rerun-1 pass). Krabby L24, Koffing L24 and Staravia L24 unchanged.",
+  "resolved_opponent_levels": {"MANTYKE": 25, "KRABBY": 24, "KOFFING": 24, "STARAVIA": 24},
+  "party_manifest": "work/playtest/41-TRAINER_EDMOND/party.json",
+  "party_chronology_note": "Reused unchanged: the same cap-24 core as both earlier passes (Togekiss, Enamorus, Hoopa, Magearna, Alakazam, Kartana), every gate <= 24 in work/reference-pools/pool-24.json and every source map at or before Route 109. One declared reachable legend (Enamorus); no Mega. Identical party across all three passes, which is what makes them comparable.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_dir": "work/playtest/41-TRAINER_EDMOND/r2",
+      "seed": 47,
+      "outcome": "won",
+      "turns": 6,
+      "driver_turn_counter": 5,
+      "player_faints": 1,
+      "opponent_faints": 4,
+      "ai_decision_frames": [57, 52, 47, 38, 38, 20, 20],
+      "ai_decision_seconds_max": 0.954,
+      "narrative": "The level bought the thing it was bought for. T1 Moonblast KO'd Krabby before its selected Rock Slide resolved (third pass running) and Air Slash flinched Mantyke out of Tailwind again. T2 I withdrew Enamorus for Poison-immune Magearna; Air Slash MISSED and Mantyke landed Tailwind - the first time this team has had Tailwind up in three passes - while Koffing's Sludge Bomb hit the Steel switch-in for nothing. T3 a 4x Thunderbolt did NOT kill the L25 Eviolite Mantyke: it survived on 17/81 and Scalded Magearna for 21, and Koffing's Sludge Bomb poisoned Togekiss. At L24 in the previous pass the same Thunderbolt was a clean knockout. T4 the second Thunderbolt finished Mantyke; Koffing Protected away an Air Slash. T5 was the payoff turn for Edmond: under Tailwind, Staravia's Reckless Brave Bird plus Koffing's 2x Sludge Bomb combined to KO Togekiss from 67 HP, and a +2 Thunderbolt took Staravia. T6 Kartana replaced Togekiss and a critical Smart Strike plus a +3 Flash Cannon ended Koffing. One player faint; Enamorus 70/77, Hoopa and Alakazam never sent out."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Mantyke lands Tailwind now that it is L25",
+      "result": "PASS",
+      "evidence": "Turn 2, after a missed Air Slash - the first Tailwind this team has got up across three benchmark passes. It then stayed up through turn 5 and materially changed that turn: Staravia moved before both of my battlers and its Brave Bird plus Koffing's Sludge Bomb took Togekiss. The Tailwind was a real contributor to the only player faint of the fight."
+    },
+    {
+      "check": "Mantyke survives long enough to support",
+      "result": "PASS",
+      "evidence": "At L25 with Eviolite it survived a 4x Thunderbolt on 17/81 where at L24 it was one-shot by the identical move, and used the extra turn on Scald into Magearna. It acted on all four of its turns (Tailwind, Tailwind, Scald, Scald)."
+    },
+    {
+      "check": "Sheer Force Life Orb Krabby gets its spread turn",
+      "result": "FAIL - never acted",
+      "evidence": "Selected MOVE_ROCK_SLIDE on turn 1 and was KO'd by a single Moonblast from full 56 HP before it resolved, for the third pass in a row. The +1 it took in pass 1 has never bought it an action. It is a 56 HP Life Orb glass cannon leading into a cap-24 Fairy nuke."
+    },
+    {
+      "check": "Helping Hand converts into a Krabby payoff turn",
+      "result": "FAIL - never selected",
+      "evidence": "MOVE_HELPING_HAND was never chosen. Mantyke's payoff piece was dead by the end of turn 1, so the support half of the plan had nothing to support - Mantyke correctly reached for Tailwind and Scald instead. That is right play from a broken board, not a decision fault."
+    },
+    {
+      "check": "Wide Guard blanks spread pressure",
+      "result": "NOT TESTED",
+      "evidence": "I used only single-target moves (Moonblast, Air Slash, Thunderbolt, Flash Cannon, Smart Strike), so MOVE_WIDE_GUARD was correctly never selected. Not scoring this as a failure: the crack line explicitly says Wide Guard does not stop single-target attacks, and the AI declining to guard against a board with no spread moves on it is the right call."
+    },
+    {
+      "check": "Reckless Staravia converts under Tailwind",
+      "result": "PASS",
+      "evidence": "Turn 5, under the Tailwind Mantyke had bought, Staravia moved first and its Brave Bird did most of the work on the player faint of the battle. This is the first pass in which the Tailwind/Staravia half of the plan has actually executed as authored."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 4,
+      "battler": "KOFFING",
+      "payoff": "REAL but modest - blocked an Air Slash aimed at a 45/75 Koffing (the previous Air Slash had done 30 to it, so roughly a third of its remaining HP). It kept Koffing alive to deliver the 2x Sludge Bomb that finished Togekiss on turn 5, so the guard is traceable to the fight's only player faint. Not lethal on its own, but not empty."
+    }
+  ],
+  "protect_ledger_note": "One opponent Protect in six turns, with a traceable payoff. No empty guards; the pass-1 empty Krabby Protect has not recurred in either rerun.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 2 Koffing's Sludge Bomb resolving into Magearna for nothing is my switch, not a targeting error: it was aimed at Enamorus (Fairy, 2x) at turn start.",
+    "Turn 1 Mantyke choosing Tailwind while its only Tailwind beneficiary (Krabby) was about to die is the closest thing to a questionable call here, but it is defensible: Staravia is also a Tailwind beneficiary, the AI does not read my pending commands, and the Tailwind demonstrably paid off three turns later on Staravia's turn. Recording it as sound, in contrast to the Hailey R6-D1 screen case where the setter provably could not survive to act.",
+    "Turn 3 and 4 Mantyke choosing Scald over a second Tailwind while Tailwind was already up is correct - no wasted re-set.",
+    "Driver observation, not an AI matter: on turn 0 the right-hand player battler (b2, Enamorus) reported may_switch=false with an empty switch_slots and an empty switch_blocked_by, then reported may_switch=true from turn 1 onward. docs/VERIFICATION.md records this exact symptom as reported-but-not-reproduced and asks for the run directory to be captured if it recurs. It recurred here: work/playtest/41-TRAINER_EDMOND/r2. It cost nothing (I did not want to switch on turn 0) and did not recur in any other battle in my block."
+  ],
+  "level_changes": [],
+  "level_changes_not_made": [
+    {
+      "member": "MANTYKE",
+      "reason": "+1 in the rerun-1 pass and it converted completely: Tailwind up for the first time, survived a 4x Thunderbolt it used to die to, acted on every turn, and its Tailwind is directly traceable to the player faint. Raising it again would take the team's supporter to the +2 ceiling for no demonstrated need."
+    },
+    {
+      "member": "KRABBY",
+      "reason": "+1 in pass 1 and still dies on turn 1 without acting, so on the letter of the rule it is the weakest member. Not raised, for two reasons: the level would not fix it (it dies from full 56 HP to one Moonblast, which one level does not change), and its problem is that it leads. The honest lever here is send-out order, and levels are explicitly not the tool for that. Recorded in the cooler note instead."
+    },
+    {
+      "member": "KOFFING",
+      "reason": "Acted on four of its five turns, poisoned Togekiss, Protected with a traceable payoff and contributed to the faint. Working as designed."
+    },
+    {
+      "member": "STARAVIA",
+      "reason": "Executed the authored Tailwind plan and took the player faint. Earned its keep."
+    }
+  ],
+  "calibration": "KEEP - no level change. Won on the first attempt in six turns with one player faint, but this was the first genuinely authored-plan win the team has produced: Tailwind up, a Tailwind-accelerated Staravia turn that actually took a player Pokemon, and a Mantyke that survived what used to kill it. Brief rule 5's 'won after a real fight -> keep' applies, and the brief is also explicit that a member that fails for an ordering reason (Krabby) should not be papered over with levels.",
+  "could_this_be_cooler": "Concept is good and unchanged; the problem is identical to Hailey's next door on the same route, which makes it a route-level observation rather than a team-level one. Both teams lead with the fragile payoff piece into a cap-24 Fairy attacker and it dies on turn 1 without acting, three passes running. Krabby is a 56 HP Life Orb Sheer Force attacker whose whole purpose is one big spread turn, and it has never had one. No species/move/item change is wanted or was made - the Wide Guard manta plus offensive crab is genuinely distinct from Ned's shoreline team. The recommendation to the main agent is the send-out order: lead Mantyke + Koffing so the Eviolite wall and the supporter absorb the opening, set Tailwind behind them, and bring Krabby in to a board where its one turn is worth something.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Rerun pass 2: one attempt (the brief allows up to three only on a loss), same party manifest as both earlier passes. No teams-file change for this battle. Synthetic headless benchmark, not earned campaign play."
+}
