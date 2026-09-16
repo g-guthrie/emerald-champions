@@ -2387,6 +2387,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             FlagSet(FLAG_SYS_POKEDEX_GET);
             FlagSet(FLAG_SYS_POKEMON_GET);
             FlagSet(FLAG_SYS_POKENAV_GET);
+            // Ground Mega Stone actors only spawn once the Ring is carried.
+            AddBagItem(ITEM_MEGA_RING, 1);
             LoadHeadlessMap(sEcHeadlessMapSweep[index].map, sEcHeadlessMapSweep[index].x, sEcHeadlessMapSweep[index].y);
             gEcHeadlessFixtureSetupResult = TRUE;
         }
