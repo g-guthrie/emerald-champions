@@ -1,0 +1,72 @@
+{
+  "play_order": 136,
+  "e_group": "E0162",
+  "trainer": "TRAINER_MARTHA",
+  "class": "regular",
+  "location": "Route110_TrickHousePuzzle3",
+  "cap": 42,
+  "difficulty": "medium",
+  "mega_slots": 3,
+  "resolved_opponent_levels": {"MEOWSTIC_F": 39, "CLEFABLE": 40, "BANETTE": 40, "GOURGEIST": 41},
+  "cap_window_confirmation": "Authored offsets -1/0/0/1 resolved to 39/40/40/41, i.e. cap 42 + offset - 2 on Medium; the driver reported level_cap 42. The same battle_index.json 48/48 discrepancy noted at play_order 135 applies here.",
+  "party_manifest": "work/playtest/136-TRAINER_MARTHA/party.json",
+  "pre_declared_strategy_checks": [
+    "Mega Banette gains Prankster and its Will-O-Wisp and Destiny Bond become priority moves",
+    "A Dark type is immune to Prankster-boosted status, so Mega Houndoom cannot be Will-O-Wisped by Banette",
+    "Magic Guard makes Clefable immune to burn chip and Leech Seed drain",
+    "Gourgeist's Flame Orb activates and Flare Boost then raises its Special Attack by 50 percent",
+    "Meowstic-F's Competitive turns an opponent-caused stat drop into +2 Special Attack (tested by omission: no stat-lowering move or Intimidate was brought)",
+    "Knock Off before Poltergeist sequencing - Poltergeist fails against an itemless target",
+    "One designated Calm Mind recipient per board rather than automatic dual Calm Mind",
+    "Every opposing Protect has a payoff"
+  ],
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/136-TRAINER_MARTHA/a1", "seed": 136, "outcome": "won", "turns": 2, "decisions": 3, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "A 4-0 in three decisions. T1 Mega Houndoom's Dark Pulse is 2x into Meowstic-F and removed a 119 HP Life Orb attacker before it acted; Adaptability Tri Attack took 91 off Clefable and burned it, and Clefable used Calm Mind. T2 Banette Mega Evolved and used Poltergeist into Houndoom for 0.5x while Flamethrower plus a second Tri Attack finished Clefable. T3 Mega Banette used Prankster Will-O-Wisp on Porygon-Z - a wholly special attacker that had revealed only special moves - and missed; Flamethrower is 2x into Gourgeist's Grass half and killed it from full, and Dark Pulse is 2x into Banette and killed it from full. The room never landed a status, never used Destiny Bond, and never took one of my six."}
+  ],
+  "strategy_checks": [
+    {"check": "Mega Banette gains Prankster", "result": "PASS", "evidence": "Banette entered with ABILITY_INSOMNIA, Mega Evolved on T2, and the battler then reported ABILITY_PRANKSTER. On T3 its Will-O-Wisp resolved before both of my battlers despite Mega Banette's base 75 Speed against Houndoom's 115 and Porygon-Z's 90. The priority is real."},
+    {"check": "Dark types are immune to Prankster status", "result": "NOT DEMONSTRATED, but the design intent held", "evidence": "Banette aimed its one Will-O-Wisp at Porygon-Z, not at Houndoom, so the Dark immunity was never printed. Houndoom is also a Fire type and therefore cannot be burned at all, so the slot was doubly safe. I declared this in advance as the reason Houndoom was the Mega; it was never tested because the AI did not try."},
+    {"check": "Magic Guard on Clefable", "result": "PASS", "evidence": "Tri Attack burned Clefable on T1 and Clefable took zero chip damage from the burn across the following turn - its HP moved only by my direct attacks and by Leftovers. Magic Guard also made the burn nearly worthless offensively, since Clefable's entire attacking kit is special. This is a correct and quietly good piece of the design: the one member handing out burns has a partner who cannot be punished by them."},
+    {"check": "Gourgeist Flame Orb / Flare Boost", "result": "NOT OBSERVED", "evidence": "Gourgeist entered on T2 end and was killed by a 2x Flamethrower on T3 before the Flame Orb reached its end-of-turn activation. The battler carried ITEM_FLAME_ORB and ABILITY_FLARE_BOOST with no burn status at the moment it died. The authored payoff needs Gourgeist to survive one full turn and it did not get one. This is the single biggest gap in the room's execution."},
+    {"check": "Meowstic-F Competitive", "result": "NOT TESTED, by design", "evidence": "I deliberately built a party with no Intimidate, no Icy Wind, no Snarl, no Parting Shot and no Mystical Fire, because +2 Special Attack on a Life Orb Psychic attacker is a worse outcome than whatever the drop would have bought. Recording it as a successful deterrent rather than a pass: the ability changed my team construction without ever activating, which is the most an ability like that can do."},
+    {"check": "Knock Off before Poltergeist sequencing", "result": "FAIL / NOT OBSERVED", "evidence": "Banette used Poltergeist on T2 and Will-O-Wisp on T3 and never used Knock Off at all, so the authored sequencing the dossier's Disposition line calls for ('Add Knock Off/Poltergeist sequencing') did not appear. On T2 the choice between them mattered: see the AI defect section."},
+    {"check": "One designated Calm Mind recipient", "result": "PASS", "evidence": "Clefable used Calm Mind on T1 and Meowstic-F did not - it attacked instead, with Psychic into the one target it was not 0x against. The dossier explicitly asks for this ('should not both use Calm Mind into dangerous damage; choose one setup threat while the other attacks') and the AI did exactly that. It is the best decision the room made."},
+    {"check": "Every opposing Protect has a payoff", "result": "VACUOUS PASS", "evidence": "No member of this team carries Protect - the four sets are Calm Mind, Moonlight, Destiny Bond and Leech Seed instead. There were no guards to evaluate. Worth noting as a deliberate and unusual design choice for a Trick House room."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "Martha's four sets contain no Protect at all, which is rare in this campaign and is the correct call for a room built on Prankster priority and passive recovery. Nothing to report.",
+  "ai_defects": [
+    {"id": "P12-D3", "severity": "medium", "turn": 3, "trainer": "TRAINER_MARTHA", "battler": "BANETTE_MEGA",
+     "board": "Player: Mega Houndoom (76/128, revealed Dark Pulse and Flamethrower - both special) and Porygon-Z (110/136, revealed Tri Attack and Dark Pulse - both special, holding a Life Orb). Opponent: Mega Banette (114/114) and a freshly arrived Gourgeist (117/117).",
+     "chosen": "MOVE_WILL_O_WISP targeting Porygon-Z",
+     "why_wrong": "Burn halves physical Attack and deals chip damage. Porygon-Z had used two moves across two turns and both were special; its revealed set gave the AI no reason to think it had a physical attack at all. The chip damage is also the least valuable part of the move against a Life Orb holder that is already damaging itself. Against a revealed all-special attacker, Will-O-Wisp is close to a wasted turn - and it was Mega Banette's last turn.",
+     "better_action": "MOVE_KNOCK_OFF into Porygon-Z. It is 1x, gets the 1.5x boost for removing an item, removes the Life Orb that is the source of Porygon-Z's damage, and does real damage from base 165 Attack. MOVE_DESTINY_BOND is also defensible and is the authored threat - Banette was facing two attackers that between them could kill it, and the dossier's own text calls Prankster Destiny Bond 'a genuine threat rather than a coin flip'. It was never used in the entire battle.",
+     "note": "The general shape: Will-O-Wisp appears to be scored without discounting for the target's revealed damage category. The opponent is explicitly allowed to use revealed sets and last used moves, so the information needed to reject this choice was available. This is a shared-AI path - Will-O-Wisp appears on many authored sets, including Gourgeist in this same room - not a Martha-specific bug. Not fixed here; the brief forbids editing AI C code in this pass."},
+    {"id": "P12-D4", "severity": "low", "turn": 2, "trainer": "TRAINER_MARTHA", "battler": "BANETTE_MEGA",
+     "board": "Player: Mega Houndoom (128/128, Fire/Dark, holding Houndoominite) and Porygon-Z (123/136, Normal, holding a Life Orb). Opponent: Banette Mega Evolving and Clefable (72/163).",
+     "chosen": "MOVE_POLTERGEIST targeting Houndoom",
+     "why_wrong": "Poltergeist is Ghost. It is 0x into Porygon-Z, so Houndoom was the only legal target, but Ghost is 0.5x into Dark - it did 52 of 128. Knock Off into Porygon-Z would have been 1x off the same base 165 Attack with the 1.5x item-removal multiplier, and it would have taken the Life Orb off the battler that then dealt the most damage in the fight. Mega stones cannot be removed by Knock Off, so Houndoom was the wrong target for that move and Porygon-Z was the right one.",
+     "better_action": "MOVE_KNOCK_OFF targeting Porygon-Z.",
+     "note": "This is the exact sequencing the dossier asks for in its own Disposition line - 'Add Knock Off/Poltergeist sequencing' and 'Banette's Knock Off can remove the item that a later Poltergeist wants to target'. The authored intent is present in the prose and absent in the selection. Low severity because both options do something; the choice was simply the smaller one twice in a row."}
+  ],
+  "ai_notes": [
+    "Clefable's solo Calm Mind while Meowstic attacked is a genuinely good decision and is the one place this room's AI clearly followed its authored plan.",
+    "Meowstic-F's Psychic correctly went into Porygon-Z rather than into Mega Houndoom, which is a Dark type and 0x to Psychic. Target discipline was right.",
+    "The room's problem is not decision quality, it is that three of its four members need a turn they did not get: Gourgeist needs one end-of-turn tick to arm Flare Boost, Banette needs to have used Knock Off before Poltergeist, and Meowstic needs someone to lower a stat. A faster, Ghost-resistant party denies all three at once.",
+    "AI decision time peaked at 1.038 s, inside the 1.2 s budget."
+  ],
+  "level_changes": [
+    {"trainer": "TRAINER_MARTHA", "member": "MEOWSTIC_F", "offset_before": -1, "offset_after": 0, "level_before": 39, "level_after": 40,
+     "rule_applied": "Brief rule 5: won on the first optimized attempt with 0 player faints and no real threat -> +1 on the weakest one or two members, never the ace/Mega/legend first.",
+     "reasoning": "Meowstic-F is the lowest member at -1 and the one that contributed least - one Psychic before dying to a single 2x attack. A Life Orb special attacker with base 104 Speed and base 83 Special Attack at level 39 dies to anything that resists Psychic and hits back, which is most of what a cap-42 player can build."},
+    {"trainer": "TRAINER_MARTHA", "member": "CLEFABLE", "offset_before": 0, "offset_after": 1, "level_before": 40, "level_after": 41,
+     "rule_applied": "Same rule, second of the two weakest.",
+     "reasoning": "Clefable shares the lowest surviving offset with Banette, and Banette is the room's Mega and is excluded by the rule. Clefable is also the member whose set most rewards one extra level: it is the designated Calm Mind recipient with Magic Guard and Moonlight, so its whole job is to survive long enough to cash a boost, and it died on the turn after its first Calm Mind. Gourgeist is already at +1 and is left alone - its problem is that it never got an end-of-turn tick, which a level does not fix."}
+  ],
+  "rerun": "Not performed in this pass. Level offsets only reach the battle through scripts/emerald_champions_teams.py --write plus a ROM rebuild, and this brief forbids running make; work/agent-battle-build-2 still carries the old levels. The rerun belongs to the main agent's post-materialization pass.",
+  "could_this_be_cooler": "The theme is one of the better small-trainer concepts in my block and I would keep all four species, but the room is currently built so that its own payoffs arrive a turn late. Three of the four need setup that a fast opponent denies: Gourgeist must survive an end-of-turn tick before Flare Boost exists, Banette wants to Knock Off before it Poltergeists, and Meowstic-F's Competitive needs the player to volunteer a stat drop. The dossier already spots the Meowstic problem ('Competitive wants the player to lower its stats and nothing here encourages that') and it is right; what it misses is that the same lateness affects Gourgeist. The concrete improvement I would make is to the lead pair rather than the species list: leading Gourgeist beside Banette instead of Meowstic beside Clefable would put the Flame Orb on the clock from turn zero and give Banette a partner whose Will-O-Wisp threat makes its own Knock Off meaningful, and it would let Meowstic arrive later, when the player has already committed to an Intimidate or an Icy Wind. Magic Guard Clefable being immune to the burns its own team hands out is the cleverest thing here and should not be touched. I would also record that this room has no Protect on any of its four sets, which is unusual and, for a Prankster room, correct - it should stay that way."
+  ,
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-2. Not earned campaign traversal; no story progress awarded."
+}
