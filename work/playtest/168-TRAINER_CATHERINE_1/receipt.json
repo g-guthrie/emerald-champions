@@ -1,0 +1,37 @@
+{
+  "play_order": 168,
+  "e_group": "E0236",
+  "trainer": "TRAINER_CATHERINE_1",
+  "location": "Route119",
+  "cap": 48,
+  "cap_confirmation": "Resolved levels Castform 47 (+1), Noivern 47 (+1), Goodra 47 (+1), Seismitoad 48 (+2) = cap 48 + offset - 2 throughout.",
+  "party_manifest": "work/playtest/168-TRAINER_CATHERINE_1/party.json",
+  "attempts": [
+    {"seed": 121, "run_dir": "work/playtest/168-TRAINER_CATHERINE_1/run-s121", "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 4,
+     "notes": "Run on work/agent-battle-build-4. Noivern OHKOed a 199 HP Rillaboom on turn 1 and Swift Swim Seismitoad OHKOed a 150 HP Mega Metagross on turn 3. The fight was decided by rain running out on turn 6 while Goodra was still at full HP. Salamence finished at 2 HP."}
+  ],
+  "strategy_checks": [
+    {"check": "Castform chooses Rain Dance when Noivern's Hurricane and its own Weather Ball justify it", "result": "PASS", "evidence": "Turn 1 Castform used Rain Dance on the same turn Noivern fired Hurricane, and on turn 2 - now in rain - it selected Weather Ball. The authored sequencing is exactly what happened."},
+    {"check": "Forecast changes the form and the Weather Ball type", "result": "PASS", "evidence": "The log shows 'The opposing Castform transformed!' immediately after Rain Dance, and the species in state changed from SPECIES_CASTFORM_NORMAL to SPECIES_CASTFORM_RAINY. The one move doing three jobs that the dossier describes is real."},
+    {"check": "Goodra's Hydration is a status-management benefit", "result": "PASS, and its limit is demonstrated", "evidence": "Amoonguss's Spore on turn 6 - the turn the rain stopped - stuck, and Goodra stayed asleep for two turns. While the rain was up, no status was ever on it to scrub, so the positive case is untested, but the negative case is clean: Hydration is worth nothing the moment the manual weather lapses."},
+    {"check": "Thunder's accuracy follows the actual weather", "result": "PASS", "evidence": "Goodra's Thunder hit on turns 4 and 5 while it was raining and missed on turn 6 immediately after the rain stopped. The accuracy dependency is live, not cosmetic."},
+    {"check": "Swift Swim Seismitoad is the payoff sweeper", "result": "PASS - the best moment in this fight", "evidence": "Turn 3, in rain, Seismitoad moved before a Jolly 252-Speed Mega Metagross and OHKOed it from 150/150 with a Life Orb Earth Power. That is the authored plan landing perfectly."},
+    {"check": "Noivern's Super Fang is fixed damage that ignores bulk", "result": "NOT_EXERCISED", "evidence": "Noivern used Hurricane on its only turn - correctly, since Hurricane was 2x into a 199 HP Rillaboom and KOed it outright, which Super Fang could not have done."},
+    {"check": "Goodra's Assault Vest forbids no listed move", "result": "PASS", "evidence": "Goodra selected Draco Meteor, Thunder and was never blocked from any of its four moves; all four are attacks, so the Vest is legal on this set."},
+    {"check": "A lost setter does not remove all weather-independent attacks", "result": "PASS", "evidence": "Castform died on turn 2 and Goodra and Seismitoad both kept attacking through turn 8 with Draco Meteor, Muddy Water and Earth Power. Seismitoad in particular got its KO after the setter was already dead, on rain the setter had banked."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "battler": "Seismitoad", "payoff": "REAL: at 124/174 it blocked both an Air Slash and a 4x Pollen Puff on the same turn, while Goodra's rain-accurate Thunder took 52 off Togekiss behind the shield. It then survived to threaten for three more turns."},
+    {"turn": "all", "battler": "Noivern", "payoff": "NOT USED. Noivern carries Protect and died on turn 1 without using it, but it also KOed a 199 HP body on that turn, so attacking was clearly right."}
+  ],
+  "ai_defects": [],
+  "ai_observations": [
+    "Turn 6, with the rain gone, Goodra still selected Thunder (70% accuracy) into a 41 HP Togekiss and missed. Thunder is 2x into Fairy/Flying so the expected damage probably still favoured it over Muddy Water, and Goodra was at -2 Special Attack, so this is defensible rather than a defect - but it is the one place where the AI's weather-accuracy awareness could show up as a move-choice change and did not.",
+    "Goodra chose Draco Meteor on turn 8 at -2 Special Attack and still did 158 to a 164 HP Salamence. Correct: 2x into Dragon beat any of its neutral options even at -2."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "KEEP. Two player faints, both of them OHKOs on healthy 150+ HP bodies, and the fight was won with a Salamence on 2 HP. Seismitoad at +2 is earning its offset outright - it is the member that KOed the Mega.",
+  "could_this_be_cooler": "Keep it as authored. The dossier's framing is exactly right and the run proves both halves of it: Rain Dance genuinely does three jobs on one turn (Water STAB Weather Ball, 100% Thunder, Swift Swim), and manual rain genuinely is the team's honest weakness - the battle turned on the rain lapsing on turn 6 with Goodra still at full HP and no way to bring it back. Castform is the right lead for a Castform lesson. The one improvement worth naming is a second Rain Dance user so the lesson does not end when the setter dies on turn 2: Goodra can learn Rain Dance, and giving it that over one of its four attacks would cost almost nothing (it spent the late fight throwing -2 Special Attack Draco Meteors) while letting Seismitoad's Swift Swim matter for the whole battle instead of three turns. That would make the team harder without touching a single level, a species or the theme. Not changed in this pass.",
+  "legality_notes": "Authored sets are internally legal. Castform resolves to CASTFORM_NORMAL and transforms to CASTFORM_RAINY under Forecast; Assault Vest Goodra's four attacking moves are all legal under the Vest.",
+  "timing": "ai_decision_seconds_max 1.055, inside the 1.2 second budget."
+}
