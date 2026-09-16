@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Standing cap-14 party for the Route 115/116 block (play_order 15-24), chronology-checked to Route 115",
+  "availability_audit": "Battle-index first-appearance order inside the cap-14 window: Route103 (1), Route102 (2), Route104 (6), PetalburgWoods (9), Route115 (14), Route116 (16), RustboroCity_Gym (25). Every root below is on a map at or before Route 115, so this party is legal for every battle from play_order 14 onward in this window. Growlithe wild:Route103/land_mons -> Arcanine via ITEM_FIRE_STONE; Eevee wild:Route101/land_mons -> Sylveon via friendship; Heracross wild:PetalburgWoods/land_mons (final stage); Seedot wild:Route102/land_mons -> Nuzleaf (level) -> Shiftry via ITEM_LEAF_STONE; Tangela wild:Route115/land_mons -> Tangrowth via known-move; Shellder wild:Route115/old_rod -> Cloyster via ITEM_WATER_STONE. All six appear at gate 14 in work/reference-pools/pool-14.json. Deliberately excluded as later-map species: Sneasel/Weavile (Seaspray Cave), Cottonee/Whimsicott (Verdanturf Meadow, only reachable after RusturfTunnel at play_order 29), Riolu, Lucario, Porygon-Z and Aipom (Altering Cave), Munchlax/Snorlax and Mime Jr. (Route 116, later than Route 115). No legendary, no Mega stone. Assisted acquisition through the authorized native preparation API; not a native capture receipt.",
+  "plan": "Two Dark/Bug breakers (Shiftry Knock Off + Sucker Punch, Heracross Megahorn + Rock Slide) for the Psychic and Bug trainers, Intimidate Arcanine as the Fire and priority answer, Sylveon for Pixilate spread damage against frail four-member rooms, Tangrowth as the bulky Regenerator pivot and Cloyster as the Skill Link multi-hit finisher that ignores Focus Sash and Sturdy.",
+  "party": [
+    {
+      "species": "SPECIES_HERACROSS",
+      "moves": ["MOVE_MEGAHORN", "MOVE_CLOSE_COMBAT", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GUTS",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Bug/Fighting breaker; Rock Slide spread",
+      "availability": "wild:PetalburgWoods/land_mons (pool-14)."
+    },
+    {
+      "species": "SPECIES_SHIFTRY",
+      "moves": ["MOVE_LEAF_BLADE", "MOVE_KNOCK_OFF", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Dark item-removal and priority",
+      "availability": "Seedot wild:Route102/land_mons -> Nuzleaf evolution:level -> Shiftry evolution:item:ITEM_LEAF_STONE (pool-14)."
+    },
+    {
+      "species": "SPECIES_ARCANINE",
+      "moves": ["MOVE_FLARE_BLITZ", "MOVE_EXTREME_SPEED", "MOVE_CRUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Intimidate support, Fire pressure, Normal priority",
+      "availability": "Growlithe wild:Route103/land_mons, evolution:item:ITEM_FIRE_STONE (pool-14)."
+    },
+    {
+      "species": "SPECIES_SYLVEON",
+      "moves": ["MOVE_HYPER_VOICE", "MOVE_MYSTICAL_FIRE", "MOVE_HELPING_HAND", "MOVE_PROTECT"],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PIXILATE",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 0, 4, 252, 0, 0],
+      "role": "Pixilate spread damage and Helping Hand",
+      "availability": "Eevee wild:Route101/land_mons, evolution:friendship (pool-14)."
+    },
+    {
+      "species": "SPECIES_TANGROWTH",
+      "moves": ["MOVE_POWER_WHIP", "MOVE_KNOCK_OFF", "MOVE_GIGA_DRAIN", "MOVE_SLUDGE_BOMB"],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 100, 156, 0, 0, 0],
+      "role": "bulky Regenerator pivot and Grass damage",
+      "availability": "Tangela wild:Route115/land_mons, evolution:known-move (pool-14)."
+    },
+    {
+      "species": "SPECIES_CLOYSTER",
+      "moves": ["MOVE_ICICLE_SPEAR", "MOVE_ROCK_BLAST", "MOVE_SHELL_SMASH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SKILL_LINK",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Skill Link multi-hit finisher that breaks Focus Sash and Sturdy",
+      "availability": "Shellder wild:Route115/old_rod, evolution:item:ITEM_WATER_STONE (pool-14)."
+    }
+  ]
+}

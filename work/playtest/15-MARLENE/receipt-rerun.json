@@ -1,0 +1,123 @@
+{
+  "play_order": 15,
+  "e_group": "E0019",
+  "trainer": "TRAINER_MARLENE",
+  "class": "regular",
+  "location": "Route115",
+  "cap_window": 14,
+  "pass": "rerun (pass 2) after the +1 offsets from pass 1 and the opponent-AI setup/support pricing fix",
+  "outcome": "WON on attempt 1, 6 turns, 2 player faints. Levels KEPT at the pass-1 values.",
+  "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
+  "party_manifest_note": "New chronology-checked party. Pass 1 used Weavile (Seaspray Cave), Whimsicott (Verdanturf Meadow, only reachable after RusturfTunnel at play_order 29) and Lucario/Porygon-Z (Altering Cave) - all later maps than Route 115, so that benchmark was void under the brief's chronology rule. Every root in the replacement is on Route 101/102/103/104/PetalburgWoods/Route115.",
+  "run_dir": "work/playtest/15-MARLENE/r1",
+  "opponent_levels_medium": "GOTHITA 15, SLOWPOKE 16, SPOINK 16, BALTOY 16 (cap 14; offsets 3/4/4/4 after pass 1's +1 on Gothita and Slowpoke)",
+  "attempts": [
+    {
+      "seed": 5515,
+      "outcome": "won",
+      "turns": 6,
+      "decisions": 8,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "ai_decision_seconds_max": 1.021,
+      "player_faint_detail": "Heracross (50/50) was killed on turn 4 by Baltoy's Psychic followed by Spoink's Psychic, both of which moved first because Trick Room was up. Shiftry was killed on turn 5 by Baltoy's Ice Beam (4x on Grass/Dark) under the same Trick Room.",
+      "note": "Materially harder than pass 1 (4 turns, 0 faints, Trick Room never set). The room alone is worth both of those faints."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Trick Room is up by turn 1 or 2 (the authored TRICK_ROOM strategy flag)",
+      "result": "PASS - the pass-1 defect is FIXED",
+      "evidence": "Turn 3: 'The opposing Spoink used Trick Room! The opposing Spoink twisted the dimensions!' and STATUS_FIELD_TRICK_ROOM appears in the field state from that point on. Spoink chose it on the first turn where it was the right call: it had spent its entry turn on a Protect that blocked a lethal Megahorn, and by turn 3 my two attackers (Heracross 85 base, Shiftry 80 base) were both faster than its whole side. In pass 1 Spoink entered on exactly this kind of board and chose Psychic instead. It is up by turn 3 rather than turn 1 or 2 only because Spoink was the THIRD member sent out; measured from its own arrival it set the room on its second action."
+    },
+    {
+      "check": "Trick Room actually pays for itself",
+      "result": "PASS - it bought the trainer both of its kills",
+      "evidence": "Turn 4 under the room: Baltoy (Psychic) and Spoink (Psychic) both moved before Heracross and killed it before it could swing. Turn 5 under the room: Baltoy's Ice Beam moved first and killed Shiftry before Shiftry's Knock Off resolved. Without the room, Heracross and Shiftry outspeed the entire team and neither faint happens."
+    },
+    {
+      "check": "Gothita's Shadow Tag traps the player's active",
+      "result": "PASS (partially) - the trap is real and reported",
+      "evidence": "On the turn-0 decision, the right-hand player battler (b2, Shiftry) reported may_switch=false and switch_slots=[], i.e. trapped, while Gothita was on the field. That is Shadow Tag working. Caveat: the left-hand battler (b0, Heracross) reported may_switch=true with switch_slots [2,3,4,5] on the same turn, which is inconsistent for a Shadow Tag board; I did not attempt the switch to see whether act would have rejected it, so I cannot say whether that is the documented may_switch reading trap or a real asymmetry. Flagged below."
+    },
+    {
+      "check": "Slowpoke Yawn opens a sleep threat",
+      "result": "FAIL (never fired, second pass running)",
+      "evidence": "Slowpoke acted twice - Protect (turn 1) and Psychic (turn 2) - and was killed by Knock Off on turn 2. Yawn never appeared, including turn 1 from full HP with Regenerator and a Sitrus Berry, which is the safest Yawn turn it will ever get. Yawn is a persisting-effect move and the new pricing is supposed to pay for a sleep that sticks, so this one is still not being reached."
+    },
+    {
+      "check": "Gothita Fake Tears lowers Sp. Def before a special attack",
+      "result": "FAIL (never fired)",
+      "evidence": "Gothita chose MOVE_PSYCHIC on turn 1 and was killed the same turn by Megahorn + Knock Off. The dossier explicitly does not assume Fake Tears precedes Slowpoke, so this remains a soft fail; with a two-move life it had no room to support."
+    },
+    {
+      "check": "Baltoy renews Trick Room if Spoink falls",
+      "result": "N/A - AUTHORING GAP (unchanged from pass 1)",
+      "evidence": "Marlene's Baltoy carries EARTH_POWER/PSYCHIC/ICE_BEAM/PROTECT. There is no second Trick Room setter on the team, so the room could not be renewed after Spoink died on turn 4. It happened to last long enough anyway."
+    },
+    {
+      "check": "The authored crack (Dark damage, breaking the paired lead, priority denial) works",
+      "result": "PASS",
+      "evidence": "Knock Off is 2x on all four members and did the heavy lifting: it killed a full-HP 69 HP Slowpoke outright on turn 2 and a full-HP Spoink on turn 4, and removed Slowpoke's Sitrus, Spoink's Eviolite and Baltoy's Eviolite along the way. The team's shared Dark weakness is still its defining vulnerability."
+    }
+  ],
+  "protect_ledger": [
+    {
+      "turn": 1,
+      "battler": "SLOWPOKE (69/69, full HP, turn one, nothing revealed)",
+      "action": "MOVE_PROTECT",
+      "payoff": "EMPTY. Both of my turn-1 attacks went to Gothita; Protect blocked nothing at all. Slowpoke spent its only safe turn - the one the dossier wants used on Yawn - on a guard that denied zero damage and banked no effect. This is the clearest remaining instance of the turn-one guard the AI still overvalues."
+    },
+    {
+      "turn": 2,
+      "battler": "SPOINK (60/60, entry turn)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY - excellent. It blocked Heracross's Megahorn, which is 2x on Psychic off a 252 Atk Adamant Heracross into a 35-base-Defence body and was comfortably lethal. Spoink survived to set Trick Room the following turn, which is the entire trainer plan. This single Protect is worth the whole fight."
+    },
+    {
+      "turn": 3,
+      "battler": "BALTOY (53/53)",
+      "action": "MOVE_PROTECT",
+      "payoff": "NOT EMPTY. It blocked Shiftry's Knock Off, denying both 2x Dark damage and the removal of its Eviolite, and it kept Baltoy at full HP to be the body that carried the Trick Room turns after Spoink died."
+    }
+  ],
+  "ai_defects": [],
+  "ai_defects_resolved": [
+    {
+      "id": "E0019-TRICKROOM-NOT-SET",
+      "status": "RESOLVED",
+      "evidence": "Pass 1: Spoink entered on a board where every opponent outsped its whole team and chose MOVE_PSYCHIC; Trick Room was never attempted. Pass 2 on the same trainer with the setup/support pricing change: Spoink chose MOVE_TRICK_ROOM on turn 3 and the room then bought its side two kills. The -7 priority is now being priced against what the following turns buy, which is the correct shape."
+    }
+  ],
+  "ai_observations": [
+    {
+      "id": "E0019-TURNONE-GUARD-STILL-EMPTY",
+      "severity": "low",
+      "turn": 1,
+      "board": "Slowpoke 69/69, full HP, turn one, partner Gothita 52/52 with a Focus Sash, nothing on my side revealed.",
+      "chosen_action": "MOVE_PROTECT",
+      "better_action": "MOVE_YAWN into either of my two physical attackers, which is the authored opening and would have banked a persisting sleep threat.",
+      "assessment": "Recorded as an observation rather than a defect because a turn-one guard from full HP behind a Focus Sash partner is a defensible read. But it denied zero damage, and the new rule that a guard denying less than its user could have healed banks nothing should be catching this case too. Slowpoke never got another safe turn."
+    },
+    {
+      "id": "E0019-TRICKROOM-ORDER-ANOMALY",
+      "severity": "low (engine, not AI scoring; unverified)",
+      "turn": 5,
+      "board": "Trick Room active. Tangrowth (base 50 Speed, Relaxed, 0 Speed EVs, L14) and Shiftry (base 80, L14, 252 Speed EVs) against Baltoy (base 55, Quiet, 0 Speed EVs, L16).",
+      "observed": "Baltoy acted BEFORE Tangrowth. Under Trick Room the slower battler moves first, and by the ordinary formula Tangrowth's Speed (about 20) is below Baltoy's (about 24), so Tangrowth should have gone first. Turn 4's order (Baltoy -> Spoink -> Shiftry) matched Trick Room exactly, so the room was clearly working in general.",
+      "assessment": "Reported honestly as unverified. The driver does not expose raw Speed stats, so I could not confirm Tangrowth's actual Speed and cannot rule out my own arithmetic. Not an AI choice defect either way. Worth one check on the engine side if anyone is already in Trick Room turn-order code."
+    },
+    {
+      "id": "E0019-SHADOWTAG-MAYSWITCH-ASYMMETRY",
+      "severity": "low",
+      "turn": 0,
+      "observed": "With Gothita (Shadow Tag) on the field, pending_decision reported may_switch=false / switch_slots=[] for player battler 2 but may_switch=true / switch_slots=[2,3,4,5] for player battler 0.",
+      "assessment": "This may be the exact reading trap documented in docs/VERIFICATION.md, or a genuine asymmetry in how Shadow Tag is applied to the two player slots. I did not spend an attempt probing it. Capture-worthy if it recurs on another Shadow Tag or Arena Trap board; the run directory is preserved."
+    }
+  ],
+  "level_changes": [],
+  "level_rationale": "Brief rule 5: 'Won with 2+ faints or after a real fight -> keep.' Two of my six died and both faints were bought by the trainer's own authored engine now that Trick Room fires. The pass-1 bumps (GOTHITA 2->3, SLOWPOKE 3->4) stand and no further change is made, which keeps this member inside the +-2 total cap with room to spare.",
+  "cooler_note": "The pass-1 complaint is half-answered by the AI fix: the room is no longer a bluff, it fires and it wins turns. What is still true is that the room has exactly one setter and no renewal, and that four Psychic-or-Psychic-adjacent members all fold to a single Dark attacker - one Knock Off user took two of them from full HP. Suggestions for a later pass, not applied here: (1) give Baltoy Trick Room in place of Ice Beam so the prose's 'reserve Trick Room' is real; (2) replace one of the three surplus Psychics with a partner that does not share the Dark weakness, so that Shadow Tag - the coolest thing on this team - traps the player next to something that actually punishes them.",
+  "authored_set_legality": "Clean, with one authoring gap already noted: the block is tagged strategy: TRICK_ROOM and the prose promises a reserve room, but only Spoink carries the move. Not a legality error.",
+  "not_finished": "Slowpoke's Yawn and Gothita's Fake Tears are still unobserved across two passes; both members die too fast to reach their support turn. Gothita's Shadow Tag trap was reported but never exercised against an actual switch attempt."
+}
