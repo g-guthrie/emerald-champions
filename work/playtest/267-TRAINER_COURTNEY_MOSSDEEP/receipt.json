@@ -1,0 +1,38 @@
+{
+  "play_order": 267, "e_group": "E0409", "trainer": "TRAINER_COURTNEY_MOSSDEEP + TRAINER_MAXIE_MOSSDEEP (multi, partner PARTNER_STEVEN)", "class": "leader", "location": "MossdeepCity_SpaceCenter_2F",
+  "cap": 84, "difficulty": "medium", "build": "work/agent-battle-build-7",
+  "level_formula_check": "All six opposing members offset 2 -> ROM reported L84. Confirmed.",
+  "party_manifest": "work/playtest/267-TRAINER_COURTNEY_MOSSDEEP/party_multi_84.json",
+  "attempts": [
+    {"attempt": 1, "run_dir": "a1", "seed": 409, "outcome": "won", "turns": 7, "player_faints": 0, "opponent_faints": 6, "partner_faints": 1,
+     "narrative": "Actual opening board: Maxie's Rhyperior beside Courtney's Ninetales (not Camerupt as the plan says). Pelipper's Drizzle resolved after Drought, so the whole fight ran under my rain. T1 Wide Guard blocked Heat Wave; Rhyperior's High Horsepower missed Metagross. T2 Steven's Metagross crit-KOed Ninetales, Rhyperior KOed Metagross. T3 Pelipper to Swampert while both Rhyperior and Great Tusk fired Ground moves into Steven's Skarmory. T4 Mega Swampert Liquidation OHKO Rhyperior, Skarmory Brave Bird KO Great Tusk (which repeated Headlong Rush into Skarmory). T5 High Horsepower OHKO Heatran before it acted or Mega Evolved. T6 High Horsepower OHKO Copperajah. T7 Liquidation OHKO Camerupt before it acted or Mega Evolved."}
+  ],
+  "strategy_checks": [
+    {"check": "Ninetales Drought powers both halves (Heat Wave, Protosynthesis, Eruption 1.5x)", "result": "PASS then removed", "evidence": "Sun set at turn 0 and was replaced by Drizzle in the same entry sequence; Protosynthesis never activated and Eruption never fired. The crack line (replace the sun, both halves weaken) is exactly what happened."},
+    {"check": "Opening board is Ninetales + Camerupt", "result": "FAIL (authoring)", "evidence": "Maxie leads Rhyperior (party slot 0); Camerupt is slot 2 and was the last Pokemon sent out. The plan's 'first decision is whether you survive Eruption' never occurs; Eruption arrives after four other members are down."},
+    {"check": "Ninetales Encore on a turn-one setup/Protect", "result": "NOT FIRED", "evidence": "I used Wide Guard on turn 1; Ninetales used Heat Wave on turns 1 and 2 (into a Water type under rain) and died turn 2. Heat Wave into rain + Water resist was its weakest option; Encore on Wide Guard was available."},
+    {"check": "Mega Heatran Magma Storm trap", "result": "FAIL (not exercised: no Mega)", "evidence": "Heatran entered end of T4 with usable_gimmick=mega and chose Magma Storm on T5 but did NOT Mega Evolve; Swampert (Swift Swim) OHKOed it with High Horsepower first."},
+    {"check": "Mega Camerupt Eruption", "result": "FAIL (not exercised: no Mega)", "evidence": "Camerupt entered end of T6 with usable_gimmick=mega, no Mega Evolution message on T7, OHKOed by Liquidation."},
+    {"check": "Rhyperior Lightning Rod covers Courtney's half", "result": "NOT EXERCISED", "evidence": "No Electric move on the player/partner side."},
+    {"check": "Great Tusk Headlong Rush / Knock Off physical lane", "result": "FAIL (targeting)", "evidence": "Headlong Rush into Ground-immune Skarmory on T3 and again on T4; Knock Off/Rock Slide were available."},
+    {"check": "Copperajah Heavy Metal anchor", "result": "PASS (weak)", "evidence": "T5 Heavy Slam into Mega Swampert (resisted, 93). Died T6."}
+  ],
+  "protect_ledger": [
+    {"summary": "No opposing Protect or Wide Guard was used across seven turns (Ninetales, Heatran, Copperajah, Camerupt all carry Protect). Player Wide Guard T1 blocked Heat Wave on both allied slots."}
+  ],
+  "ai_defects": [
+    {"run": "a1", "turn": 3, "battler": "Rhyperior (Maxie)", "board": "vs Pelipper (Water/Flying) and partner Skarmory (Steel/Flying), rain", "chosen": "High Horsepower into Skarmory (immune)", "better": "Rock Slide: 2x on both Flying targets"},
+    {"run": "a1", "turn": 3, "battler": "Great Tusk (Courtney)", "board": "same", "chosen": "Headlong Rush into Skarmory (immune)", "better": "Rock Slide or Knock Off"},
+    {"run": "a1", "turn": 4, "battler": "Great Tusk (Courtney)", "board": "vs Swampert + Skarmory, Tusk at 96/314", "chosen": "Headlong Rush into Skarmory (immune) again", "better": "Close Combat/Headlong Rush into Swampert or Rock Slide"},
+    {"run": "a1", "turn": 5, "battler": "Heatran (Courtney)", "board": "first action turn, Heatranite held, usable_gimmick=mega", "chosen": "Magma Storm without Mega Evolving", "better": "Mega Evolve (Mega Evolution resolves before moves). Tabitha's Excadrill Mega Evolved on its first action turn in a normal double, so this looks specific to the two-owner multi: check the per-owner gimmick/Mega allocation for trainer B and for trainer A's later slots."},
+    {"run": "a1", "turn": 7, "battler": "Camerupt (Maxie)", "board": "first action turn, Cameruptite held, usable_gimmick=mega", "chosen": "no Mega Evolution", "better": "Mega Evolve; same suspected multi-battle cause. Both authored Megas of the Magma finale never appeared."}
+  ],
+  "level_changes": [
+    {"owner": "TRAINER_COURTNEY_MOSSDEEP", "member": "NINETALES", "before": 2, "after": 3, "reason": "won first try 6-0 with zero faints; Ninetales is the weakest contributor (two Heat Waves into rain, died T2) and is neither ace nor Mega"},
+    {"owner": "TRAINER_MAXIE_MOSSDEEP", "member": "COPPERAJAH", "before": 2, "after": 3, "reason": "same rule; one resisted Heavy Slam then died, not ace/Mega"}
+  ],
+  "level_change_verification": "NOT RE-VERIFIED (needs the main agent's rebuild). This is the battle most worth re-running from the block, but the reason is the missing Megas, not the levels: until Heatran and Camerupt actually Mega Evolve, the finale is being tested without its two headline pieces, and +1 on two supports cannot fix that.",
+  "theme_and_step_above_tabitha": "Theme: partially shows. The sun-plus-Eruption idea is legible from the sets, and Rhyperior's Assault Vest / Copperajah's Weakness Policy / Heatran's Flash Fire all read as a Magma engine room; but the player never saw sun after turn 0, never saw either Mega, never saw Eruption or Magma Storm, and the plan's promised Ninetales+Camerupt opening does not exist. Step above Tabitha: NO as played. Tabitha took a 6-mon party to a loss once, Protected with real payoff four times and had one dead ability; the pair lost 6-0 with zero opposing Protects, three immune-target Ground moves and zero Megas. The multi format also hands the player Steven's Metagross/Skarmory, which did two of the six KOs. Structural suggestion (not applied): put Camerupt in Maxie's slot 0 so the authored Eruption opening is real, and fix the multi Mega so Heatran/Camerupt transform.",
+  "could_this_be_cooler": "Yes, cheaply: lead Camerupt as the plan already describes (party order, no set change) and the fight opens with the sun/Eruption decision it was written around. Rhyperior's Lightning Rod cross-owner support is a good idea but needs the player to have a reason to click Electric; against a Ground/Fire/Steel half they will not. The Wide Guard answer the crack line names is satisfying to execute and should stay the intended counterplay.",
+  "authored_set_legality": "No problem found; all six sets resolve and materialize at the reported levels."
+}

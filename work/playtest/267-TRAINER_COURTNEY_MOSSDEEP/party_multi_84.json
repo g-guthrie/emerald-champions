@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Space Center, Courtney + Maxie multi with Steven (E0409), cap 84",
+  "availability_audit": "Cap-84 window, Space Center raid; nothing from Seafloor Cavern, Sootopolis, Pacifidlog, Routes 130-132 or Underwater maps. Pelipper gate 30 (Wingull, Route 104). Swampert gate 36 (Mudkip line), Swampertite stone-window 14. Urshifu-RS gate 42 (Kubfu Route112 + Jagged Pass script). Incineroar gate 36, Chien-Pao gate 60 (Shoal Cave, Route 125), Flutter Mane gate 68 (Mt Pyre Summit) are the bench in case the multi uses more than three.",
+  "plan": "Rain replaces the sun on turn 0 (Pelipper is slower than Ninetales, so Drizzle resolves last). Wide Guard on turn 1 blanks Eruption and Heat Wave for both allied slots; then Mega Swampert with Swift Swim outspeeds everything and Liquidation/High Horsepower is super effective on all six opposing sets. Urshifu-RS is the Protect-ignoring closer.",
+  "party": [
+    {
+      "species": "SPECIES_PELIPPER",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_DRIZZLE",
+      "item": "ITEM_DAMP_ROCK",
+      "evs": [
+        252,
+        0,
+        4,
+        252,
+        0,
+        0
+      ],
+      "role": "lead: Drizzle enters after Ninetales' Drought and replaces the sun for both halves; Wide Guard covers Steven and me on the Eruption turn",
+      "availability": "pool-84 gate 30, evolution:level from SPECIES_WINGULL (Route 104)."
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_ICE_PUNCH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TORRENT",
+      "item": "ITEM_SWAMPERTITE",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Swift Swim sweeper under my own rain: Water is super effective on all six opposing sets, Ground 4x on Heatran",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_MARSHTOMP; Swampertite stone-window 14."
+    },
+    {
+      "species": "SPECIES_URSHIFU_RAPID_STRIKE",
+      "moves": [
+        "MOVE_SURGING_STRIKES",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "rain-boosted Surging Strikes through Heatran's and Copperajah's Protect",
+      "availability": "pool-84 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [
+        252,
+        252,
+        4,
+        0,
+        0,
+        0
+      ],
+      "role": "Intimidate + Fake Out; Knock Off strips Life Orb/Smooth Rock/Weakness Policy",
+      "availability": "pool-84 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_CHIEN_PAO",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SWORD_OF_RUIN",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        252,
+        0,
+        0,
+        0,
+        252
+      ],
+      "role": "4x Ice on Landorus, Fighting on Excadrill/Krookodile/Gigalith, Sword of Ruin lowers the room's Defense",
+      "availability": "pool-84 gate 60, legendary_sign:ShoalCave_LowTideIceRoom (Route 125). Reachable legend."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [
+        4,
+        0,
+        0,
+        252,
+        0,
+        252
+      ],
+      "role": "fastest body outside sand; Fairy on Krookodile",
+      "availability": "pool-84 gate 68, wild:MtPyre_Summit/land_mons (C37)."
+    }
+  ]
+}
