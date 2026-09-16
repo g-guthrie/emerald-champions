@@ -1490,3 +1490,118 @@ Cristian 47/57, Jocelyn 47, Jocelyn dance 25, Darius 25, Nate 15.
 
 `pokeemerald.gba` builds clean at 33,554,432 bytes. The headless ROM and
 `work/agent-battle-build` were not touched.
+
+# Group I — the Petalburg and Mt. Chimney receipts
+
+Commit `f2f66dbf71`, fixtures only. **178 passed, 0 failed** on my allowlist
+(190 total including the 12 pre-existing `ai_doubles.c` failures). No source
+change: nothing here proved a mispricing that a constant should move, and two
+edits that did not prove out were reverted rather than landed.
+
+## 1. Consecutive Protect
+
+The path exists and is reached. `ev->protectChance[actor][index]` is
+`100 / GetConsecutiveMoveSuccessDenominator(uses)` — the native capped
+denominator, 33/11/3 for repeated modern guards — and `EvaluatePairBoard` both
+charges `PAIR_GUARD_TEMPO` for the spent action *and* skips the whole denial
+when the roll fails. `PairPlanScore` adds a further −35 for a repeat after a
+successful guard. Wide/Quick Guard and Crafty Shield correctly reset `uses`.
+
+What I could not build is a stable fixture. On every board where the second
+guard is the AI's choice, the first guard is also a coin-flip against an
+attack, and the board flips between "guard twice" and "never guard" on
+changes as small as adding a parametrization. The two Alan cases (Rhydon T1→T2,
+Golem T4→T5) share a shape I could not separate from correct play: when the
+incoming attack is lethal every turn, a 33% shield is worth more than any
+attack the body has, and the AI is choosing the gamble rather than ignoring the
+odds. I would want the actual pre-decision board state from the receipt — both
+sides' HP, the AI's alternatives and what was known — to say whether those two
+decisions were wrong rather than unlucky.
+
+## 2. A move the target is immune to, over coverage that is not
+
+**Does not reproduce**, and the fixture is now green: Greedent with Body Slam
+and Crunch, facing a Cofagrigus and a Sableye that are both guarding, chooses
+Crunch. My first attempt failed only because I left a one-HP Magikarp on the
+board — Body Slam aimed at the killable Normal target, which is correct.
+
+So the common cause the receipts point at is not target-effectiveness scoring:
+the trial reads damage from `simulatedDmg`, and a zero there is a zero in the
+board value. What the Randall board has that mine does not is that the only
+target was **alternating Protect and Will-O-Wisp**. Against a foe forecast to
+guard, every attack's expected damage collapses toward zero, the actions tie,
+and a tie is settled by terms that have nothing to do with the type chart. That
+is my best reading of the shared cause behind Randall, Dhelmise, the
+Choice-locked Thunderbolt, Meloetta into Spiritomb and Lanturn's Hydro Pump,
+and it predicts the receipts' common feature: they are all boards where the
+chosen move was *also* worth roughly nothing that turn. The fix would be to
+break attack-versus-attack ties on unconditional expected damage — the value
+the action would have if the guard fails — rather than on the guarded
+expectation alone. I did not land it; it touches the ranking every fixture in
+the suite depends on, and it deserves its own pass.
+
+## 3. Self-damage that kills the user
+
+Half fixed already, half a real bug, now isolated exactly:
+
+* A **single-hit** Life Orb attack that the orb would kill the user with is
+  already refused at two HP, and taken with room to pay. Both arms are pinned.
+* A **multi-hit** attack from the same body on the same board is still taken,
+  and the user dies. This is Cinccino's Bullet Seed and Tail Slap, and Skill
+  Link sets are where it will keep showing up. It is not an underpriced death:
+  I raised the self-knockout cost to 1000 and the choice did not move, so the
+  orb payment is **not reached at all** on the multi-hit path. The accumulation
+  it depends on is `if (lifeOrb && damage.affectsTarget)` in the target loop of
+  `EvaluatePairBoard`; widening it to `damage.maximum` for non-single-hit moves
+  did not change the outcome either, so the gap is further upstream than that
+  flag. Next step for whoever picks this up: instrument `orbHitChance` and
+  `singleContactOrb` on a multi-hit action rather than guessing, as I was.
+
+## 4. The asserting-getter audit
+
+`abf52611d3` is pulled into my working view. Every other
+`GetMoveProtectMethod` call in `battle_ai_main.c`, `battle_ai_util.c`,
+`battle_ai_pair.c` and `battle_ai_switch.c` is already guarded by an
+`EFFECT_PROTECT` (or protect-family) check on the same move before the call —
+including the two that look unguarded at first read: the Encore branch in the
+pair trial rejects a non-protect last move a few lines above, and
+`ProtectChecks` receives the guard move itself. `GetMoveWeatherType` and
+`GetMoveTerrainType` are switch-based and do not assert. New fixture:
+`EC lethal choice: a guard is scored after an ordinary attack without asking it
+for a method`.
+
+## 5. Not reached in this group
+
+Signature-move starvation (Coalossal/Salandit, Thievul, Cyclizar, Alcremie,
+Numel, Scovillain), the smaller list (Araquanid's Wide Guard, Mega Banette's
+Will-O-Wisp, Aegislash at 18 HP in Blade form, Shuckle's Helping Hand, Stunfisk
+and Wobbuffet), and the whole 145–156 addendum (Indeedee's Helping Hand and
+Follow Me, Type: Null's U-turn, Duncan's lead Mega, Volbeat). The Araquanid and
+Indeedee items look like group B and group A shapes respectively and should be
+cheap; the lead-Mega horizon and Follow Me are new ground.
+
+## The 12 pre-existing `ai_doubles.c` failures, one line each
+
+| Line | Fixture | Shape |
+| --- | --- | --- |
+| 309 | Rock Tomb earns a partner crossing 2/2 | expected the Cloak target untouched, took 182 — a drop was aimed where it cannot land |
+| 351 | Iron Defense mitigates only later physical attacks 2/2 | HP 334 vs 704 — the setup was taken on the turn the fixture wants the attack |
+| 393 | prevent a priority hit from activating Defeatist 1/3 | HP 512 vs 98 — the priority hit was taken into the Defeatist threshold |
+| 483 | Quiver Dance mitigates only later special attacks 2/2 | expected Bug Buzz, got Quiver Dance — setup chosen on the dangerous turn |
+| 576 | offensive drops protect a slower partner 3/6 | expected Protect, got Psychic — the guard lost to damage |
+| 690 | candidate Trace copies deterministic abilities 2/3 | expected a MOVE, got a SWITCH — the candidate search left instead |
+| 854 | Cotton Guard earns only timely mitigation 2/3 | expected Double-Edge, got Cotton Guard — setup on the wrong turn again |
+| 906 | Feint opens partner damage through Protect 1/3 | expected Protect, got Double-Edge |
+| 1181 | Acid Spray enables a later special attack 2/3 | expected Sludge Bomb, got Acid Spray — the drop beat the attack |
+| 2659 | candidate evaluation restores board caches 5/5 | HP 9 vs 16 — restoration leak or a different chosen action |
+| 2878 | damage-based recoil distinguishes unsafe attacks 2/3 | HP 85 vs 98 |
+| 2978 | preserve the Plus Minus partner 1/2 | HP 269 vs 364 |
+
+Six of the twelve are one shape — **a setup or support move now beats the
+direct attack on a board that was written to expect the attack** (Quiver Dance,
+Cotton Guard, Acid Spray, Iron Defense, and the two HP mismatches that follow
+from the same substitution). That is my setup pricing meeting fixtures written
+before it, and whoever owns that file has to decide case by case whether the
+fixture or the value is wrong. Three more are **a guard expected and an attack
+chosen** (offensive drops, Feint), one is **a switch where a move was expected**
+(Trace), and the remaining HP equalities follow whichever action changed.
