@@ -1,0 +1,125 @@
+{
+ "play_order": 79,
+ "e_group": "E0090",
+ "trainer": "TRAINER_BEN",
+ "class": "gym",
+ "location": "MauvilleCity_Gym",
+ "cap": 30,
+ "difficulty": "medium",
+ "resolved_opponent_levels": {
+  "CHARJABUG": 33,
+  "LANTURN": 30,
+  "STUNFISK": 30,
+  "EELEKTROSS": 29,
+  "HELIOLISK": 28,
+  "VIKAVOLT": 28
+ },
+ "cap_window_confirmation": "Dossier seeds 35/32/32/31/30/30 resolved to 33/30/30/29/28/28. Cap 30, Medium -2.",
+ "party_manifest": "work/playtest/79-TRAINER_BEN/party.json",
+ "party_pool_audit": "Same cap-30 Electric-gym counterteam, leading the two Assault Vest bodies (Nidoqueen + Magearna) instead of the Mega, specifically because a Battery-boosted spread Discharge is what kills Mega Gardevoir. Every source map at or before Route 110; NewMauville (Surf, C28) and Route 111 desert (Go-Goggles, C23) species excluded. One reachable legend (Magearna) and one Mega (Gardevoir) declared.",
+ "pre_declared_engine_checks": [
+  "Charjabug's Battery actually boosts its ally's special attacks",
+  "The Discharge-beside-Volt-Absorb-Lanturn safe pairing is chosen and the friendly spread Electric heals rather than hurts",
+  "The Lanturn-Surf-beside-Dry-Skin-Heliolisk safe pairing is chosen and the friendly spread Water heals rather than hurts",
+  "Levitate on Eelektross and Vikavolt is a real Ground immunity that shuts off my two Earth Powers",
+  "Stunfisk contributes Yawn or Static control",
+  "Vikavolt uses Volt Switch as a pivot, not as a worse attack",
+  "Every opposing Protect has a payoff"
+ ],
+ "attempts": [
+  {
+   "attempt": 1,
+   "run_dir": "work/playtest/79-TRAINER_BEN/a1",
+   "seed": 79,
+   "outcome": "won",
+   "turns": 9,
+   "driver_turn_counter": 8,
+   "player_faints": 3,
+   "opponent_faints": 6,
+   "narrative": "T1 Charjabug's Eerie Impulse put Nidoqueen on -2 Sp.Atk and Lanturn's Ice Beam (2x on Ground) took it to 66 - the room disarmed my main nuke on turn one without dealing a KO, which is the smartest opening in the gym. T2 I pulled Nidoqueen out to reset the drop and brought Gardevoir in, and it arrived into a Bug Bite (2x on Psychic) plus an Ice Beam for 66 damage. T3 Charjabug Protected away the 2x Mystical Fire that would have killed it and Lanturn's Thunderbolt KO'd my Mega Gardevoir before it had ever Mega Evolved - I lost the Mega for the whole battle without using it once. T4 a critical Earth Power removed Charjabug and Fleur Cannon removed Lanturn. T5 Stunfisk Protected away another lethal Earth Power and Eelektross's Knock Off finished the 16 HP Nidoqueen. T6 Kartana replaced it and Leaf Blade plus Magearna removed both Stunfisk and Eelektross. T7 two resisted Electric hits - Heliolisk's Thunderbolt and Vikavolt's Volt Switch, each 0.25x - still killed an 85 HP Kartana through its Focus Sash, and Flash Cannon took Vikavolt to 10. T8 Weavile replaced Kartana, Ice Shard removed Vikavolt, Heliolisk Protected. T9 Triple Axel plus a +4 Aura Sphere closed through the Sash."
+  }
+ ],
+ "engine_checks": [
+  {
+   "check": "Charjabug Battery boosts ally special attacks",
+   "result": "PASS",
+   "evidence": "Direct engine confirmation: my Gardevoir Traced Battery on entry ('It traced the opposing Charjabug's Battery!') and the state showed ABILITY_BATTERY live on my side. While Charjabug was alive, Lanturn's Ice Beam did 56 to a 122 HP Assault Vest Nidoqueen and its Thunderbolt KO'd a 24 HP Gardevoir; once Charjabug died, Lanturn died before attacking again, so the clean before/after comparison is not available, but the ability itself is confirmed present and transferable."
+  },
+  {
+   "check": "Discharge beside Volt Absorb Lanturn",
+   "result": "CHOSEN, NOT RESOLVED",
+   "evidence": "T4 Charjabug's decision record is MOVE_DISCHARGE with Volt Absorb Lanturn beside it - exactly the authored safe pairing, and the right call. It never resolved: my Earth Power critically hit and KO'd Charjabug first. The choice is correct; the heal itself is still unproven."
+  },
+  {
+   "check": "Lanturn Surf beside Dry Skin Heliolisk",
+   "result": "FAIL to exercise",
+   "evidence": "The two halves of this named pairing were never on the field together. Lanturn led and Heliolisk arrived as the last member, three faints later. Lanturn did use Surf once - but beside Charjabug, not Heliolisk. See the AI defect note."
+  },
+  {
+   "check": "Levitate blanks the Ground attacks",
+   "result": "PASS by effect, not directly hit",
+   "evidence": "I never aimed a single Earth Power at Eelektross or Vikavolt across nine turns, because both Levitate. That is the ability doing its job: it removed the best move on my two best attackers from the board entirely and forced me onto much weaker coverage. Eelektross in particular went untouched by Ground damage and KO'd Nidoqueen."
+  },
+  {
+   "check": "Stunfisk Yawn / Static",
+   "result": "NOT EXERCISED",
+   "evidence": "Stunfisk used Protect and Earth Power and then died. Yawn was never selected - defensible, since it arrived to a board where I had two attackers already in range of a KO and a sleep two turns later was worth nothing. Static never triggered because nothing I used against it makes contact."
+  },
+  {
+   "check": "Vikavolt Volt Switch as a pivot",
+   "result": "FAIL - see AI defect 1",
+   "evidence": "T7 Vikavolt chose Volt Switch with a completely empty bench (its four other teammates were already fainted and Heliolisk was on the field), so there was nothing to pivot into, and Electric is 0.25x against a Grass/Steel Kartana. On T9 it used Bug Buzz, proving the move was available. Bug Buzz is 90 BP STAB at 1x into the same target versus 70 BP at 0.25x - roughly a fivefold damage difference, thrown away for pivot value that could not exist."
+  },
+  {
+   "check": "Every opposing Protect has a payoff",
+   "result": "PASS",
+   "evidence": "Three Protects, all with real payoff, none consecutive. See the ledger."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 3,
+   "battler": "CHARJABUG",
+   "payoff": "at 33/111 it blocked a 2x Mystical Fire that would have killed it, and its partner Lanturn used the same turn to KO my Mega Gardevoir. The single best Protect in the gym."
+  },
+  {
+   "turn": 5,
+   "battler": "STUNFISK",
+   "payoff": "at 133/133 it blocked a 2x Earth Power from Nidoqueen while Eelektross used the turn to finish that same 16 HP Nidoqueen. Full value."
+  },
+  {
+   "turn": 8,
+   "battler": "HELIOLISK",
+   "payoff": "blocked a +3 Aura Sphere (2x on Normal) that would have broken its Focus Sash. It survived to force a ninth turn. Real payoff."
+  }
+ ],
+ "ai_defects": [
+  {
+   "id": "BEN-1",
+   "severity": "clear",
+   "turn": 7,
+   "battler": "VIKAVOLT",
+   "board": "Ben had zero Pokemon on the bench - Charjabug, Lanturn, Stunfisk and Eelektross were all fainted and his only other living member, Heliolisk, was already on the field. My active pair was Kartana (Grass/Steel, 85/85, Focus Sash) and Magearna (Steel/Fairy).",
+   "chosen": "MOVE_VOLT_SWITCH targeting Kartana.",
+   "why_wrong": "Volt Switch's entire value is the free pivot, and no pivot was legally possible with an empty bench, so it resolved as a plain 70 BP Electric attack at 0.25x into a Grass/Steel body. Vikavolt's Bug Buzz is 90 BP, STAB, and 1x against Grass/Steel - it used exactly that move two turns later, so the option was live.",
+   "better": "MOVE_BUG_BUZZ into Kartana, for roughly five times the damage.",
+   "generalization": "This is a pivot-move valuation problem, not a Vikavolt problem. Any authored set carrying Volt Switch, U-turn, Flip Turn or Parting Shot can hit it whenever the bench is empty or every benched member is a worse matchup. Inside this block alone the same shape exists on Angelo's Kilowattrel (Volt Switch), Shawn's Hisuian Electrode and Jolteon (Volt Switch), and Wattson's Electrode, Magnezone and Galvantula (Volt Switch) - Wattson carries three of them, so the leader is the most exposed encounter. The fix belongs in the shared scoring: a pivot move should lose its pivot bonus outright when no legal switch target exists, and should be compared on raw expected damage instead. I did not touch AI C code."
+  }
+ ],
+ "ai_decision_quality_notes": [
+  {
+   "turn": 4,
+   "battler": "LANTURN",
+   "note": "Lanturn chose the spread Surf while its own Charjabug partner was still standing at 33/111. Charjabug is Bug/Electric and takes Surf at 1x, so this was a friendly-fire pick, and the dossier's own text names the safe Surf pairing as 'Lanturn Surf beside Dry Skin Heliolisk' - which was not the board. It escaped consequence only because my critical Earth Power removed Charjabug before the Surf landed. Single-target Ice Beam into Nidoqueen (2x) was available and strictly better. I am recording this as a decision-quality note rather than a defect because the partner was one hit from death anyway and the AI cannot read my pending command."
+  },
+  {
+   "turn": 1,
+   "battler": "CHARJABUG",
+   "note": "Positive. Eerie Impulse into Nidoqueen rather than an attack was the correct opening - it halved the only move on my side that threatened the whole room, without needing to win a damage race it could not win."
+  }
+ ],
+ "level_changes": [],
+ "level_change_reasoning": "Won on the first attempt, but it cost three player faints and, more tellingly, my Mega Gardevoir died at 24 HP having never Mega Evolved - the room removed my single strongest resource before I could spend it. Nine turns, and both Assault Vest bodies were needed to close. This is at the Gym-room benchmark. Levels kept exactly as authored.",
+ "could_this_be_cooler": "Keep the storage-and-healing circuit; the two named safe pairings are a genuinely good idea and Eerie Impulse on the Battery body is a much sharper opening than a fourth Electric attack. The problem is deployment, not composition: the room is built around two pairings and only ever gets to show one of them, because Lanturn leads beside Charjabug and Dry Skin Heliolisk arrives last, by which point the Surf partner is long dead. In my run the second pairing never shared the field for a single turn. The concrete suggestion (not applied): lead Charjabug beside Heliolisk rather than Lanturn. Then the Battery is boosting the Dry Skin body from turn one, Lanturn arrives as the mid-game reserve whose Surf finally has a partner that drinks it, and the player meets both halves of the circuit in the order that teaches them. It costs nothing - same six, same sets - and it turns a room whose thesis is invisible into one where the first spread attack the player sees heals the opponent.",
+ "authored_set_legality": "No legality problem found. All six prepared and ran clean."
+}
