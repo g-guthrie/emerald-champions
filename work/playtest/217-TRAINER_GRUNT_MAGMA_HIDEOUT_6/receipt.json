@@ -1,0 +1,88 @@
+{
+  "play_order": 217,
+  "e_group": "E0328",
+  "trainer": "TRAINER_GRUNT_MAGMA_HIDEOUT_6",
+  "class": "grunt",
+  "location": "MagmaHideout_2F_2R",
+  "chapter": "Mind Badge (index window 60-84)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60 and every member came in at L58 = 60 + 0 - 2 on Medium, matching the authored offset 0 on all four. The master design's strict_cap for E0328 is also 60.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_magmahideout_60.json"],
+  "chronology_note": "Magma Hideout sits after the Mt Pyre summit and before the Aqua Hideout and Mossdeep. Every party member's source map is at or before that point: Pelipper (gate 30, Wingull line), Swampert + Swampertite (gate 36 / stone-window 14, Littleroot starter), Urshifu-Rapid-Strike (gate 42, Kubfu script trigger), Landorus (gate 42, Route111 ruins sign), Amoonguss (gate 42, Foongus line), Tapu Bulu (gate 60, Route123 sign - the Lilycove-side stretch walked immediately before Mt Pyre). Suicune/Tapu Fini/Keldeo and every stone-window-60 Mega on the sea routes were excluded as post-hideout, and Safari Zone Tyranitar was left out as an unconfirmed pre-hideout walk.",
+  "pre_play_strategy_checks": [
+    "Ariados picks exactly one of Sticky Web / Rage Powder as its useful opening action",
+    "Rage Powder actually redirects a single-target attack aimed at the partner",
+    "Insomnia is live (sleep cannot shortcut the Ariados choice)",
+    "Infernape uses Fake Out only when the bought turn beats immediate damage",
+    "Magmortar behind redirection is the room's damage, with Heat Wave into both slots",
+    "Nidoking's Sheer Force Earth Power appears as the answer to Fire-immune / Rock bodies",
+    "Protect ledger on Ariados, Magmortar and Nidoking (all three carry it)"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 1,
+      "build": "work/agent-battle-build-5",
+      "party": "party_magmahideout_60.json (Pelipper/Mega Swampert/Urshifu-RS/Tapu Bulu/Landorus/Amoonguss)",
+      "outcome": "won",
+      "turns": 4,
+      "decisions": 7,
+      "player_faints": 2,
+      "opponent_faints": 4,
+      "why": "Pelipper's Drizzle was up before the first action, which halved every Fire attack in a Fire room and turned Mega Swampert into a Swift Swim sweeper. Turn 1 Mega Swampert's Liquidation broke Infernape's Focus Sash while Ariados laid Sticky Web and Infernape's Fake Out flinched Pelipper. Turn 2 Rage Powder pulled Liquidation off Infernape and Hurricane (no-miss in rain, 2x into Bug) removed Ariados. Turn 3 the grunt withdrew the 1 HP Infernape for Nidoking, which died to a rain-boosted Liquidation in one action, and Magmortar's Thunderbolt - 4x into Water/Flying - removed Pelipper outright. Turn 4 Infernape came back, Fake Out flinched Mega Swampert, Urshifu's Aqua Jet finished Infernape and Magmortar's Thunderbolt then removed Urshifu at full HP (2x into Water/Fighting). Landorus came in Ground-immune to the Thunderbolt and Liquidation closed it out."
+    }
+  ],
+  "strategy_checks": [
+    {
+      "check": "Ariados picks one of Sticky Web / Rage Powder as its useful opening action",
+      "result": "PASS, and stronger than the dossier claims",
+      "evidence": "Sticky Web on turn 1, Rage Powder on turn 2. The plan's sentence says Ariados 'does not do both'; in play the AI fitted both in before it died, which is the better line, not a defect. The web was not cosmetic - it dropped Urshifu's Speed a stage on its turn-3 switch-in, which is visible in the turn-4 state."
+    },
+    {
+      "check": "Rage Powder redirects a single-target attack aimed at the partner",
+      "result": "PASS",
+      "evidence": "Turn 2: Mega Swampert's Liquidation was submitted at battler 3 (Infernape, sitting on 1 HP after the Focus Sash) and resolved into battler 1 (Ariados) for 30 - the damage dict credits slot 1, not slot 3, and Infernape stayed at exactly 1 HP. The redirection is mechanically live and it did its job: it denied the kill on Infernape for a turn."
+    },
+    {
+      "check": "Insomnia is live",
+      "result": "NOT OBSERVED",
+      "evidence": "I never aimed Spore at it - Amoonguss was never deployed in a four-turn fight - so the ability is correctly authored but untested here."
+    },
+    {
+      "check": "Infernape uses Fake Out only when the bought turn beats immediate damage",
+      "result": "PASS",
+      "evidence": "Two Fake Outs, both with real payoff. Turn 1 it flinched Pelipper, which denied the Hydro Pump that would have broken the Focus Sash a turn early. Turn 4, on re-entry at 1 HP, it flinched Mega Swampert - that denied 22 damage to Magmortar and, more importantly, kept Magmortar alive to fire the Thunderbolt that KOed Urshifu. That second Fake Out is the better of the two and it was made from a 1 HP body that was going to die anyway. Good use of a dying turn."
+    },
+    {
+      "check": "Magmortar behind redirection is the room's damage, with Heat Wave into both slots",
+      "result": "FAIL as written, PASS as AI judgment",
+      "evidence": "Magmortar never used Heat Wave. It used Thunderbolt on turns 3 and 4 and killed a full-HP Pelipper (4x) and a full-HP Urshifu (2x) with it. That is exactly right: Drizzle was up, which halves Fire, and both of my actives were Water. The authored line is a plan written for a board that did not occur, and the AI correctly abandoned it. Recording it as a plan FAIL rather than an AI FAIL - the dossier's 'Heat Wave into both slots' sentence should be read as conditional."
+    },
+    {
+      "check": "Nidoking's Sheer Force Earth Power appears",
+      "result": "NOT OBSERVED",
+      "evidence": "Nidoking entered on turn 3 as the only remaining reserve and was KOed from full HP by one rain-boosted Liquidation before it acted. The Ground lane never fired. This is matchup, not an AI error - see the note under ai_defects."
+    },
+    {
+      "check": "Protect ledger",
+      "result": "PASS (no misuse to report)",
+      "evidence": "Zero opponent Protects in the whole battle, from three members that carry it. Nothing empty, nothing repetitive."
+    }
+  ],
+  "protect_ledger": [],
+  "protect_summary": "0 opponent Protects across 4 turns and 7 decisions, from a team with three Protect users. No empty guards, no repetition. The room simply never had a turn where Protect beat attacking, and the AI agreed.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Turn 3's withdrawal of the 1 HP Infernape looked at first like a bad switch - it put a 2x-Water-weak Nidoking into a slot facing a Mega Swampert that had used Liquidation on each of the previous two turns under its own rain. It is not a defect: Nidoking was the only reserve left, and preserving a 1 HP Infernape that would die to anything in order to land a second Fake Out later is a correct trade, which it then actually cashed on turn 4. Recording it as a good decision that looked bad.",
+    "Target selection was excellent throughout. Magmortar picked Thunderbolt over its STAB into two Water bodies under rain, twice, and both times it was a clean KO from full HP.",
+    "AI decision budget: max 57 frames (0.954 s), inside the 1.2 s budget."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Won on the first attempt but it cost Pelipper and Urshifu outright - two faints, which is the dossier's 'real fight' band, and both faints were full-HP one-shots rather than chip. The rule text for +1 requires 0-1 faints and no real threat; this was neither. Offsets stay at 0 on all four.",
+  "cooler": "Yes, and the dossier already half-admits it. The room's stated signature is the Rage Powder dilemma, but the member that actually threatened me was Magmortar, whose Life Orb Thunderbolt one-shot two of my six from full health - and Thunderbolt is the one move on this team the plan never mentions. Two honest observations rather than changes: (1) the Rage Powder question is much weaker than authored against any Grass-typed or airborne lead, and my party happened to hold both answers (Amoonguss, Pelipper) without trying, so the dilemma is closer to a tax than a puzzle; (2) Nidoking is the weak link in practice, not on paper - it is the only member with no interaction with either Ariados's redirection or the Fire pair's pressure, and it will usually arrive last into a board that has already resolved. If this room is ever revisited, the interesting version is Nidoking with a redirection payoff (something that wants a free turn) rather than a fourth independent attacker. No change made in this pass.",
+  "legality_notes": "No legality problem in the authored set. All four species, items and abilities are inside the window, and the driver's own preparation validation accepted the opposing party without complaint.",
+  "reverify_note": "No level change was made for this battle, so there is nothing here that needs a rebuild to re-verify.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py. Not earned campaign play; no trainer flag, no story receipt.",
+  "rom_sha256": "b87c79211d4d51fb8eca808ead8dbd5ce854d2821d2e9bcf485356c8d8182783"
+}
