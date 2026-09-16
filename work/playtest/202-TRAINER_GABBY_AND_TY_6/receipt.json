@@ -1,0 +1,63 @@
+{
+  "play_order": 202,
+  "e_group": "E0303",
+  "trainer": "TRAINER_GABBY_AND_TY_6",
+  "class": "regular",
+  "location": "Global_gabby_and_ty",
+  "chapter": "Feather Badge (window 48-60)",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Exploud (-1) at L57, Noivern / Gardevoir / Sylveon (0) at L58 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 196-201; all gates 54 or lower.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-5",
+      "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 4,
+      "why": "Fake Out flinched the Boomburst out of Exploud on turn 1 and Spore removed Noivern before it landed anything. The single faint was Incineroar to a Choice Blast: I left it in on turn 2 and Exploud's Focus Blast (2x into Fire/Dark) OHKOed it. Zapdos then cleaned Noivern and Exploud and Mega Metagross's 2x Meteor Mash removed the Fairy pair."
+    },
+    {
+      "n": 2, "seed": 2, "build": "work/agent-battle-build-5",
+      "party": "same party, improved line",
+      "outcome": "won", "turns": 5, "player_faints": 0, "opponent_faints": 4,
+      "why": "Rerun to check whether attempt 1 was seed luck. It was not - the fight is simply answerable. The one correction was on turn 2: Rage Powder has +2 priority, so Amoonguss can redirect Exploud's single-target Focus Blast onto itself (Grass/Poison resists Fighting at 0.5x) before Exploud moves, and Incineroar then OHKOs Exploud with Flare Blitz. That one line removes the team's best turn and the fight is over five turns later with no faints and Mega Metagross still at 93/185."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Telepathy makes Noivern and Gardevoir immune to Exploud's Boomburst, so it can spam its best move for free", "result": "NOT DEMONSTRATED", "evidence": "Exploud selected Boomburst exactly once across both attempts (a1 turn 1) and was flinched out of it by Fake Out before it resolved. Every other Exploud turn was Focus Blast. The team's stated centrepiece - the ally-immune spread engine - never fired a single time in eleven turns of play. See AI defect E0303-1."},
+    {"check": "Scrappy lets Boomburst and Hyper Voice hit Ghost types", "result": "NOT OBSERVED", "evidence": "I brought no Ghost type. Correct authoring, untested."},
+    {"check": "Sylveon's Pixilate makes Hyper Voice a Fairy spread attack and Throat Spray raises its Special Attack on the first sound move", "result": "FAIL", "evidence": "Sylveon had five turns across the two attempts and never once used Hyper Voice. It chose Psyshock four times and Helping Hand once, so Pixilate never converted anything and Throat Spray never triggered. Both the ability and the item on this set are currently inert. See AI defect E0303-2."},
+    {"check": "Super Fang from Noivern halves a wall the sound lane cannot break", "result": "PASS", "evidence": "a2 turn 5: Super Fang took Mega Metagross from 185 to 93. Correctly aimed at the bulkiest body on the field and the only thing Noivern could meaningfully do to it."},
+    {"check": "Noivern sets Tailwind or attacks", "result": "PASS", "evidence": "a2 turn 4: Tailwind the turn it woke up. a1: Draco Meteor on turn 1 (correctly, into a full board) which harshly dropped its own Special Attack and left it a passive body afterwards."},
+    {"check": "Gardevoir's Calm Mind", "result": "PASS", "evidence": "a1 turn 5: Calm Mind for +1/+1 on the turn it entered beside a paralysed partner. This is the one printed setup move anywhere in this block that the AI selected on a sensible turn, and it is worth recording as the counter-example to the setup-scoring pattern in E0288/E0289/E0299/E0301/E0302."}
+  ],
+  "protect_ledger": [
+    {"attempt": 2, "turn": 5, "battler": "Gardevoir", "payoff": "blocked Mega Metagross's +1 Meteor Mash at 165/165 - 2x into Psychic/Fairy and an outright KO"}
+  ],
+  "protect_summary": "1 opponent Protect across both attempts, with a clear payoff, 0 empty.",
+  "ai_defects": [
+    {
+      "id": "E0303-1",
+      "turn": "a1 turns 2-4, a2 turn 2",
+      "board": "Exploud (Choice Specs, Scrappy) with a Telepathy partner on the field, opposite two player Pokemon.",
+      "chosen": "Focus Blast on every free turn after the first.",
+      "better": "Boomburst. Boomburst is 140 base power, spread, and thanks to the partner's Telepathy it is free - it hits both player slots and does nothing to its own ally. Focus Blast is 120 base power, single target, and 70% accurate. Focus Blast did KO Incineroar in a1 because Fighting is 2x on Fire/Dark, so the scorer is not wrong about that one target - but by choosing it the AI also Choice-locked Exploud out of the move the encounter is built around, permanently. The block's plan says the Telepathy pair exists 'specifically so that Boomburst is free, and that is the thing a player should notice and steal', and a player cannot notice it if it never happens. The scorer appears to compare single-target expected damage against one battler rather than spread damage across both, and a Choice item makes the first such decision permanent. Severity: high - it deletes the encounter's identity, and the spread-vs-single scoring is shared."
+    },
+    {
+      "id": "E0303-2",
+      "turn": "a1 turns 4-6, a2 turns 3-4",
+      "board": "Sylveon at full or near-full HP with two player Pokemon on the field.",
+      "chosen": "Psyshock (single target) four times out of five turns; Hyper Voice never.",
+      "better": "Hyper Voice. With Pixilate it is a Fairy-type spread move that hits both player slots, gets the 1.2x Pixilate boost, and triggers Throat Spray for +1 Special Attack on first use - three separate printed mechanics, none of which occurred. Psyshock is a single-target Psychic move on a Pokemon with no Psychic STAB. This is the same spread-versus-single scoring problem as E0303-1, on a different Pokemon in the same team, which is strong evidence it is one shared constant rather than a per-trainer issue. Severity: high."
+    }
+  ],
+  "level_changes": [
+    {"member": "EXPLOUD", "before": -1, "after": 0, "why": "lowest-offset member and therefore the weakest by the brief's rule"},
+    {"member": "SYLVEON", "before": 0, "after": 1, "why": "second weakest in practice - it contributed nothing across eleven turns in either attempt"}
+  ],
+  "level_change_rationale": "The brief's +1 rule applies: won on the first attempt with one player faint, and the rerun on a different seed won with zero faints in five turns while Mega Metagross was still above half. Neither win needed a rebuild of the party or an unusual answer. Per the rule I raised the weakest one or two members and left everything else alone: Exploud from -1 to 0 and Sylveon from 0 to 1. Neither is an ace, Mega or legend. Species, moves, items, abilities, EVs and the strategy flags are untouched. Both changes are +1, well inside the +/-2 cap for this pass. I want to be explicit that this is a levels-only response to a genuinely comfortable fight and NOT an endorsement of the current difficulty: two of the four members never used their signature spread move (see the two AI defects), so if E0303-1 and E0303-2 are fixed this encounter will get substantially harder on its own and these two +1s should be reviewed before anything further is added.",
+  "cooler": "The dossier says no and the roster deserves that answer - the Telepathy-plus-Boomburst combination is one of the best ideas in the campaign's ordinary encounters. The problem found by playing it is that the idea is invisible: Boomburst resolved zero times and Pixilate Hyper Voice resolved zero times, so what a player actually experiences is four Pokemon using single-target moves. Nothing about the build needs to change. The one non-AI improvement worth naming: Exploud carries Boomburst AND Hyper Voice, and with a Choice Specs lock the AI only ever gets one of them - dropping the redundant Hyper Voice for a non-sound option would at least make the locked choice matter less, or removing the Choice Specs would let Boomburst come back after a bad first pick. Also worth recording for the book: Rage Powder's +2 priority lets a slow Grass-type redirect Exploud's single-target answer before it moves, which is the cleanest counterplay to this team and is not currently in the crack line.",
+  "legality_notes": "No legality problem in the authored set. All four members and items are inside the window.",
+  "verification_limit": "The two +1 offsets recorded here cannot be re-verified in this pass: the driver plays the ROM in work/agent-battle-build-5, which was materialized before this edit, so a rerun now would replay the old levels. Attempt 2 above is a second sample at the OLD levels and is what justifies the change, not a test of it. This battle needs one confirming run after the main agent re-materializes and rebuilds; of everything in this block it is the one whose level change most needs that follow-up, although E0288 TRAINER_DARIUS remains the single most valuable re-run overall because its room concept never appeared at all."
+}
