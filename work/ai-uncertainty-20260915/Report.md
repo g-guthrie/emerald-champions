@@ -2007,3 +2007,24 @@ the *staged* version rather than HEAD's and the experiment stayed in the
 binary. `git checkout HEAD -- <path>` is the form that actually reverts, and
 `git status --short` shows the difference in the first column. Worth knowing on
 a shared tree.
+
+## Both E0409 follow-ups landed
+
+Commit `0670e3eb9f`. **196 passed, 0 failed**; `pokeemerald.gba` clean.
+
+* **The Mega election survives a skipped joint search.** When the gate closes,
+  the per-battler path now elects a usable Mega instead of dropping it. That
+  was the missing fallback: in doubles nothing else ever elects one.
+* **`gAiPairSkipReason`** (declared in `include/battle_ai_util.h`) records why
+  the search did not run — not a double battle, no AI on the partner, either
+  side's flags, a prediction pass — and raises
+  `AI_PAIR_SKIP_OWNER_MISMATCH` when exactly one of two owners on a side lacks
+  the flag. The bridge can read the word; the host side is the driver agent's.
+
+The Mossdeep owners carry identical flags, so this is not the live cause there.
+The real-encounter reproduction is the next step and it needs an **instrumented
+headless build**, which is the one thing I have not done unilaterally: the
+Makefile writes `pokeemerald-headless.gba` and its ELF and stamp at the repo
+root, and other agents drive battles from those artifacts on this shared tree.
+Overwriting them mid-run would corrupt someone else's session, so I have
+stopped short of it and asked instead.
