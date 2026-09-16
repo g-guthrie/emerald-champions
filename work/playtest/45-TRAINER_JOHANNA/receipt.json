@@ -1,0 +1,38 @@
+{
+  "play_order": 45,
+  "e_group": "E0048",
+  "trainer": "TRAINER_JOHANNA",
+  "class": "regular",
+  "location": "Route109_SeashoreHouse",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"BUDEW": 25, "SYLVEON": 21, "FEEBAS": 29, "QWILFISH": 22},
+  "party_manifest": "work/playtest/45-TRAINER_JOHANNA/party.json",
+  "party_pool_audit": "Cap-24 core party, all six gated <= 24 in pool-24.json. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/45-TRAINER_JOHANNA/a1", "seed": 51, "outcome": "won", "turns": 4, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Earth Power took Budew off full HP so its Focus Sash could not save it from a 2x Air Slash; a critical Sludge Bomb KO'd Enamorus; Sylveon's Pixilate Hyper Voice triggered Throat Spray. T2 Magearna came in resisting Fairy, Qwilfish's Intimidate hit both my actives, Poison Jab took Togekiss to 12 and Flash Cannon KO'd Sylveon. T3 Togekiss pivoted to a Poison-immune Kartana, Feebas' Icy Wind slowed my side and Thunderbolt KO'd Qwilfish. T4 Leaf Blade broke Feebas' Focus Sash and Thunderbolt finished it."}
+  ],
+  "strategy_checks": [
+    {"check": "Sylveon Pixilate Hyper Voice earns Throat Spray", "result": "PASS", "evidence": "Turn 1: 'The opposing Sylveon used Hyper Voice! The Throat Spray boosted the opposing Sylveon's Sp.Atk!' and the state then shows spa +1 with item NONE. The full authored chain fired on the first opportunity."},
+    {"check": "Budew Sleep Powder as an inaccurate opportunity", "result": "NOT_SELECTED", "evidence": "Budew chose Sludge Bomb instead, which critically KO'd Enamorus. Given a 2x Poison attack into a Fairy was available and lethal, attacking was the better read than a 75%-accuracy sleep; correct AI choice even though the authored plan highlights the powder."},
+    {"check": "Feebas Adaptability with Icy Wind / Chilling Water speed and damage control", "result": "PASS", "evidence": "Turn 3 Icy Wind hit both my actives and dropped Kartana's and Magearna's Speed; turn 4 Muddy Water was the spread attack. Both are the support role the plan describes rather than a lone Hydro Pump."},
+    {"check": "Qwilfish Intimidate", "result": "PASS", "evidence": "Turn 2 on entry: 'Togekiss's Attack fell! Magearna's Attack fell!'. Thunder Wave was never selected (my actives were a Steel and a Flying-type; only Togekiss was a legal paralysis target and it was already at 12 HP)."},
+    {"check": "Wide Guard-type counterplay note", "result": "N/A", "evidence": "This team carries two spread attacks (Hyper Voice, Muddy Water) and my party had no Wide Guard, so the dossier's own crack line could not be exercised from my side."}
+  ],
+  "protect_ledger": [],
+  "protect_ledger_note": "No opponent Protect at all, despite every one of the four members carrying Protect. Across four turns each Pokemon instead attacked or applied support. Not criticised: with two of my six already removed and the AI behind on board position most turns, attacking was defensible each time. Recorded because it is the opposite extreme from Hailey's two empty guards on the same route.",
+  "ai_defects": [],
+  "ai_notes": [
+    "No bad decision observed. The AI correctly preferred a lethal 2x Sludge Bomb over Sleep Powder, and used Feebas as a speed-control support rather than as a fourth attacker."
+  ],
+  "level_changes": [
+    {"member": "SYLVEON", "field": "level offset", "before": -1, "after": 0, "reason": "First-attempt win with one player faint; Sylveon was the lowest-level opponent at L21. Its Throat Spray chain fired perfectly and still only produced one resisted Hyper Voice before it was KO'd, which is a level problem rather than a design problem."},
+    {"member": "QWILFISH", "field": "level offset", "before": 0, "after": 1, "reason": "Second-lowest at L22, and the member that actually applied pressure (Intimidate on entry plus a Poison Jab that took Togekiss from 67 to 12). The Feebas ace (offset 7) is untouched per the rule."}
+  ],
+  "level_change_verification": "Teams file edited, scripts/emerald_champions_teams.py --write then --check all PASS. Generated projections reverted before committing.",
+  "rerun_status": "NOT RERUN - the headless ROM cannot be rebuilt in this session (arm-none-eabi toolchain cannot resolve stdint.h). Rerun owed to whoever rebuilds.",
+  "could_this_be_cooler": "The 'beauty and potential' framing is legible and the Feebas-at-offset-7 joke - the ugly fish is the strongest thing she owns - is genuinely good design and should be protected. What undercuts it is that Sylveon, the fully-evolved showpiece, sat at offset -1 and was the first thing to die; the team reads as three support pieces and one secret ace, when the interesting version is a Sylveon that survives long enough to use the Throat Spray boost it just earned. The level change above is the right first lever. If a later pass wants more, Draining Kiss on a Sylveon that has already banked a Sp.Atk stage is the natural payoff and it is already on the set. No species, move or item changed in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
