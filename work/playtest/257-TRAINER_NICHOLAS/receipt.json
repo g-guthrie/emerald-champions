@@ -1,0 +1,56 @@
+{
+  "play_order": 257,
+  "e_group": "E0398",
+  "trainer": "TRAINER_NICHOLAS",
+  "class": "gym",
+  "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (room eleven, Gravity)",
+  "cap": 76,
+  "cap_confirmation": "driver state reported level_cap 76; offset-1 members at L75, offset-2 (Mr. Mime-Galar, Dusknoir, Necrozma) at L76 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/257-TRAINER_NICHOLAS/party_dark76.json"],
+  "chronology_note": "Mossdeep Gym reached, Mind Badge not earned. Incineroar 36, Urshifu-Single 42 (Kubfu Route112), Annihilape 42 (Primeape + Rage Fist), Hydreigon 68 (Zweilous, Mt Pyre chapter), Flutter Mane 68 (MtPyre_Summit), Gyarados 20 + Gyaradosite stone-window 20. No reachable legend, nothing from Mossdeep or later.",
+  "pre_play_strategy_checks": [
+    "Prankster Gravity from Sableye on turn 1, or Bronzor re-sets it",
+    "Hypnosis lands under Gravity",
+    "Galarian Mr. Mime's Vital Spirit / never-miss Blizzard-Focus Blast under Gravity",
+    "Necrozma Photon Geyser as ace damage, Prism Armor on super-effective hits",
+    "Banette Cursed Body / Destiny Bond, Dusknoir Choice Band Ground lane"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "seed": 8,
+      "build": "work/agent-battle-build-6",
+      "run_dir": "work/playtest/257-TRAINER_NICHOLAS/a1",
+      "party": "party_dark76.json (Incineroar / Urshifu-Single / Annihilape / Hydreigon / Flutter Mane / Mega Gyarados)",
+      "outcome": "won",
+      "turns": 7,
+      "player_faints": 1,
+      "opponent_faints": 6,
+      "why": "Sableye and Bronzor led. Turn 1 Sableye Protected into my Fake Out while Bronzor set Gravity and Wicked Blow took Bronzor to 59. Turn 2 my Sucker Punch failed into Bronzor's Hypnosis (status move - my misread) and Gravity Hypnosis put Incineroar to sleep; Knock Off stripped Sableye's Sash. Turn 3 the sleeper went out for Vital Spirit Annihilape and Wicked Blow killed Bronzor; Sableye's Foul Play hit Annihilape for 124 off its own Attack. Turn 4 Annihilape Protected the Will-O-Wisp and Shadow Claw while Wicked Blow killed Sableye. Turn 5 Wicked Blow one-shot Galarian Mr. Mime before its Focus Blast; a 100 BP Rage Fist killed Banette through Rocky Helmet, and Cursed Body disabled Rage Fist. Gravity expired. Turn 6 Annihilape out for Gyarados (double Intimidate) while Wicked Blow plus Life Orb recoil killed Necrozma; Photon Geyser and a -1 Band Poltergeist both landed on the incoming Gyarados and killed it - the one faint. Turn 7 Hydreigon's Dark Pulse ended Dusknoir."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Gravity up on turn 1", "result": "PASS", "evidence": "turn 1: Bronzor used Gravity (Sableye chose Protect against the Fake Out threat instead of Prankster Gravity; the backup setter covered exactly as the plan says)"},
+    {"check": "Hypnosis lands under Gravity", "result": "PASS", "evidence": "turn 2: Bronzor Hypnosis, 'Incineroar fell asleep!'"},
+    {"check": "Mr. Mime-Galar Vital Spirit / Gravity-accurate Focus Blast", "result": "NOT REACHED", "evidence": "turn 5: it chose Focus Blast on Urshifu but was one-shot by Wicked Blow before moving"},
+    {"check": "Necrozma Photon Geyser ace damage", "result": "PASS", "evidence": "turn 6: Photon Geyser into slot 0 helped kill the switched-in Gyarados; Prism Armor visibly reduced Wicked Blow (231 of 257, needed Life Orb recoil to finish)"},
+    {"check": "Cursed Body / Rocky Helmet / Destiny Bond", "result": "PASS (partial)", "evidence": "turn 5: Rocky Helmet chip and 'Annihilape's Rage Fist was disabled!'; Destiny Bond never chosen (Banette used Shadow Claw both turns)"},
+    {"check": "Dusknoir Band Ground lane", "result": "PASS (locked)", "evidence": "turn 6: Choice Band Poltergeist, not Earthquake, was the lock; Earthquake never seen"}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Sableye", "payoff": "blocked Incineroar's Fake Out (real payoff), at the cost of not setting Prankster Gravity - Bronzor set it anyway"}
+  ],
+  "protect_summary": "1 Protect, real payoff. No empty guards.",
+  "ai_defects": [],
+  "ai_notes": "Sensible: Sableye Foul Play targeting the highest-Attack player battler; Will-O-Wisp aimed at the non-Dark Annihilape rather than the Prankster-immune Dark types; Necrozma and Dusknoir focus-fired the same slot. Engine text note (not AI): turn 1 printed 'The opposing Bronzor couldn't fully protect itself' when Bronzor had used Gravity, not Protect, and took full damage (182); a stray Unseen Fist string, cosmetic.",
+  "level_changes": [
+    {"member": "SABLEYE", "field": "level offset", "before": 1, "after": 2, "why": "won attempt 1 with one faint; Sableye never set Gravity and died turn 4 after a Protect and two Foul Plays"},
+    {"member": "BANETTE", "field": "level offset", "before": 1, "after": 2, "why": "Shadow Claw into a Protect, then one-shot; the room's cheapest body"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try win with 0-1 faints. Necrozma is the ace and untouched; the +1s go to the two offset-1 supports that contributed least.",
+  "cooler": "The concept shows clearly - Gravity went up turn 1, Hypnosis landed, the grounded-for-both-sides discipline is real. It is a good room. The one weakness is that Sableye's Prankster is neutralised by any Dark-type lead (Prankster Will-O-Wisp fails into Dark types, and Fake Out beats Prankster Gravity), so the room's opener collapses into 'Bronzor sets it, slowly'. Cooler: give Sableye Fake Out or Quash of its own, or swap Sableye's Protect for Taunt so it can stop the player's own setup under the Gravity it created. Suggestion only.",
+  "legality_notes": "All sets legal as authored. Dusknoir's Choice Band lock chose Poltergeist over the plan's Earthquake lane; not a defect, just the higher-value move on the board.",
+  "verification_limit": "The +1 on Sableye and Banette cannot be re-verified until the main agent rebuilds."
+}

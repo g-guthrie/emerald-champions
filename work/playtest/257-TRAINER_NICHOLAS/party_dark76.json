@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "encounter": "Mossdeep Gym room eleven (Nicholas, Gravity) cap 76 - Dark, Ghost and sleep-immune answer party",
+  "availability_audit": "Mossdeep Gym reached, Mind Badge not earned, nothing from Sootopolis, the Seafloor Cavern or the Space Center. Per pool-76.json source_detail: Incineroar gate 36 evolution:level from Torracat (Mauville chapter). Urshifu-Single-Strike gate 42, Kubfu legendary_sign:Route112 then EVO_SCRIPT_TRIGGER. Annihilape gate 42, evolution:known-move (Rage Fist) from Primeape. Hydreigon gate 68, evolution:level from Zweilous, the Mt Pyre chapter immediately before the Aqua Hideout. Flutter Mane gate 68, wild:MtPyre_Summit/land_mons. Gyarados gate 20 evolution:level from Magikarp, ITEM_GYARADOSITE stone-window 20 (Mega Ring window). No reachable legend used; nothing sourced downstream of Mt Pyre.",
+  "plan": "Built off the room's crack line. Fake Out beats Prankster Gravity on speed (+3 over +1) and Prankster Taunt would fail into a Dark-type Sableye, so Incineroar's Fake Out is the honest turn-one denial. Dark pressure from three directions (Wicked Blow, Crunch, Dark Pulse) for Sableye, Banette, Dusknoir and Necrozma; Fighting and Ghost from Urshifu and Annihilape for Bronzor, whose Heatproof halves the Fire I would otherwise use. Annihilape's Vital Spirit is the sleep answer to a Gravity Hypnosis, and Rage Fist grows off the Sucker Punches the room is built on. Gyarados brings a second Intimidate before it Megas into a Mold Breaker Crunch that ignores Prism Armor. Flutter Mane is the fast Ghost for Mr. Mime and Necrozma.",
+  "party": [
+    {
+      "species": "SPECIES_INCINEROAR",
+      "moves": ["MOVE_FAKE_OUT", "MOVE_KNOCK_OFF", "MOVE_FLARE_BLITZ", "MOVE_PARTING_SHOT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Fake Out the Prankster Gravity turn; Knock Off strips Sash, Eviolite, Life Orb and Choice Band; Intimidate on Banette and Dusknoir",
+      "availability": "pool-76 gate 36, evolution:level from SPECIES_TORRACAT."
+    },
+    {
+      "species": "SPECIES_URSHIFU_SINGLE_STRIKE",
+      "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_FOCUS_SASH",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "guaranteed-critical Dark damage through Protect; Close Combat for Bronzor and Necrozma's Steel-neutral body",
+      "availability": "pool-76 gate 42, legendary_sign:Route112 (Kubfu) then EVO_SCRIPT_TRIGGER."
+    },
+    {
+      "species": "SPECIES_ANNIHILAPE",
+      "moves": ["MOVE_RAGE_FIST", "MOVE_DRAIN_PUNCH", "MOVE_BULK_UP", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_VITAL_SPIRIT",
+      "item": "ITEM_LEFTOVERS",
+      "evs": [252, 252, 4, 0, 0, 0],
+      "role": "Vital Spirit is immune to the Gravity Hypnosis; Ghost and Fighting hit five of the six super-effectively; Rage Fist grows off Sucker Punch",
+      "availability": "pool-76 gate 42, evolution:known-move from SPECIES_PRIMEAPE."
+    },
+    {
+      "species": "SPECIES_HYDREIGON",
+      "moves": ["MOVE_DARK_PULSE", "MOVE_DRACO_METEOR", "MOVE_FIRE_BLAST", "MOVE_EARTH_POWER"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_CHOICE_SPECS",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "special Dark lane; Levitate will be grounded by Gravity so it is played as a fast attacker, not a Ground immunity",
+      "availability": "pool-76 gate 68, evolution:level from SPECIES_ZWEILOUS (Mt Pyre chapter)."
+    },
+    {
+      "species": "SPECIES_FLUTTER_MANE",
+      "moves": ["MOVE_SHADOW_BALL", "MOVE_MOONBLAST", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT"],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "evs": [4, 0, 0, 252, 0, 252],
+      "role": "fastest Ghost in the window for Mr. Mime, Bronzor and Necrozma; Fairy for the Dark bodies",
+      "availability": "pool-76 gate 68, wild:MtPyre_Summit/land_mons."
+    },
+    {
+      "species": "SPECIES_GYARADOS",
+      "moves": ["MOVE_WATERFALL", "MOVE_CRUNCH", "MOVE_DRAGON_DANCE", "MOVE_PROTECT"],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_GYARADOSITE",
+      "evs": [4, 252, 0, 0, 0, 252],
+      "role": "Mega win condition: Intimidate on entry, then Mold Breaker Crunch that ignores Prism Armor and Cursed Body's owner's Rocky Helmet is the only cost",
+      "availability": "pool-76 gate 20, evolution:level from SPECIES_MAGIKARP; ITEM_GYARADOSITE stone-window 20."
+    }
+  ]
+}

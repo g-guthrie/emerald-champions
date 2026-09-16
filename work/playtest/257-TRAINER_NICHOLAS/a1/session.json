@@ -1,0 +1,39 @@
+{
+  "rom_sha256": "6619c208ca5009bb976c265221426d1edbd6367dd7b204d9fa2feae5735f8ba4",
+  "elf_sha256": "8e0be54c56310979f9166cc814c6b5586333d1d0057767cb84c6be2ff9ce9d97",
+  "seed": 8,
+  "trainer_a": "TRAINER_NICHOLAS",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 76,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/257-TRAINER_NICHOLAS/party_dark76.json",
+  "party_sha256": "827f0cb7ee0cd39ebb28a67b8ac2a46a4c6343c838f0097e1dae8646e27d80ec",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE"
+  ],
+  "prepared": {
+    "encounter": "Mossdeep Gym room eleven (Nicholas, Gravity) cap 76 - Dark, Ghost and sleep-immune answer party",
+    "party": 6
+  },
+  "started": {
+    "frames": 1211
+  },
+  "replacement_commits": {
+    "turn": 6,
+    "slots": {
+      "0": 3
+    }
+  }
+}
