@@ -1,0 +1,34 @@
+{
+  "play_order": 290, "e_group": "E0456", "trainer": "TRAINER_GRUNT_SEAFLOOR_CAVERN_3", "class": "grunt", "location": "SeafloorCavern_Room4",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/290-TRAINER_GRUNT_SEAFLOOR_CAVERN_3/party_whale_84.json",
+  "availability_note": "Same Seafloor Cavern party as 289 (Rillaboom 36, Raging Bolt 60 Route 119, Flutter Mane 68, Kartana 20, Incineroar 36, Amoonguss 42); Seafloor Cavern reached by Dive after the Space Center, Sootopolis not entered. No legends, no Underwater/Seafloor species.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/290-TRAINER_GRUNT_SEAFLOOR_CAVERN_3/a1", "seed": 1, "outcome": "won", "turns": 6, "decisions": 8, "player_faints": 1, "opponent_faints": 4, "note": "T1 both opponents Protected (Wailord's blocked Fake Out + Thunderbolt). T2 Wailord fired full-HP Water Spout (130 on Rillaboom) but Wood Hammer OHKOed it first; the AI withdrew Seaking for Drapion, which ate the redirected Thunderbolt and was OHKOed (238 HP, ~241-284 damage). T3 Seaking Protect blocked Grassy Glide; Morpeko crit Crunch 142. T4 Grassy Glide OHKOed Seaking; Hangry Aura Wheel KOed the 68-HP Rillaboom. T5 Morpeko Protect blocked Sacred Sword + Draco Meteor; T6 Sacred Sword ended it."}
+  ],
+  "strategy_checks": [
+    {"check": "Drizzle live on entry", "result": "PASS", "evidence": "weather B_WEATHER_RAIN_NORMAL at turn 0, lasted 5 turns (Sitrus, no Damp Rock)."},
+    {"check": "Wailord chooses Water Spout from execution-time HP while healthy", "result": "PASS", "evidence": "T2 Water Spout at 458/458 into Rillaboom (130 after Assault Vest). It never reached the low-HP Hydro Pump branch because Wood Hammer OHKOed it that turn."},
+    {"check": "Seaking attacks under Swift Swim", "result": "PASS", "evidence": "T4 Waterfall (resisted) on Rillaboom, moving first in rain. T2 it was withdrawn for Drapion in front of Raging Bolt, a sensible switch that went wrong only because the Thunderbolt aimed at the fainting Wailord redirected into the switch-in."},
+    {"check": "Drapion Sniper/Scope Lens removals", "result": "NOT REACHED", "evidence": "OHKOed by the redirected Thunderbolt on the switch-in turn; Sniper never acted."},
+    {"check": "Morpeko Hunger Switch flips Aura Wheel type each turn; Parting Shot pivot", "result": "PASS (form flip) / NOT USED (Parting Shot)", "evidence": "Entered Full Belly T2, Crunch T3 (crit), Hangry Dark Aura Wheel T4 KOed Rillaboom, flipped back to Full Belly T5 and used Protect, Electric Aura Wheel T6 (Speed rose). The alternating type was visible in the driver's species names."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "user": "Wailord", "payoff": "REAL - blocked Fake Out and a super-effective Thunderbolt; the Fake Out turn was wasted."},
+    {"turn": 1, "user": "Seaking", "payoff": "EMPTY - nothing targeted Seaking; a double Protect on turn 1 left the team with no offence while its rain turns ticked."},
+    {"turn": 3, "user": "Seaking", "payoff": "REAL - blocked Grassy Glide and made Thunderclap fail; partner's Crunch crit landed."},
+    {"turn": 5, "user": "Morpeko (last member)", "payoff": "REAL but pointless - blocked Sacred Sword + Draco Meteor with no partner to convert it; delayed the loss one turn."}
+  ],
+  "ai_defects": [
+    {"turn": 1, "battler": "Seaking (with Wailord also Protecting)", "board": "Wailord + Seaking vs Rillaboom + Raging Bolt, rain up, turn 1", "chosen": "Protect on both", "better": "Seaking Waterfall/Drill Run while Wailord Protects; a double Protect on the first rain turn spends one of five weather turns and blocks nothing on Seaking's side. Low severity."}
+  ],
+  "authored_set_legality": "No problem found. All four at L84 (offset 2). Note Wailord's Sitrus Berry means rain lasts 5 turns, which the double Protect on T1 wasted one of.",
+  "theme_note": "Yes: the whale fired its cannon from full HP exactly as authored and the Morpeko form flip was visible and decided a KO. Drapion never got to act; the room is a two-piece plus reserves.",
+  "level_changes": [
+    {"member": "SEAKING", "before": 2, "after": 3, "reason": "first-try win with one faint (crit-assisted); Seaking never landed a meaningful hit and fell to one Grassy Glide."},
+    {"member": "DRAPION", "before": 2, "after": 3, "reason": "OHKOed by a single neutral Thunderbolt on entry (238 HP); a level makes the Sniper lane survive an unboosted hit."}
+  ],
+  "level_changes_unverified": "Not re-run: build-8 ROM predates these offsets; rerun after the main agent rebuilds.",
+  "cooler": "The cannon idea works. Two notes for a later pass: Wailord with Sitrus instead of Damp Rock gives only five rain turns, and the team's own AI spent one on a double Protect; Drapion at 4 HP EVs dies to any full-power neutral special hit, so the Sniper 'removal' idea rarely gets a turn. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun to see whether L85 Drapion survives a Raging Bolt Thunderbolt and gets a Sniper crit off."
+}

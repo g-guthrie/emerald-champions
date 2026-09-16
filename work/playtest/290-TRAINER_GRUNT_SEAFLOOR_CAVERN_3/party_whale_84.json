@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0456 TRAINER_GRUNT_SEAFLOOR_CAVERN_3, Seafloor Cavern whale room grunt, cap 84 doubles",
+ "availability_audit": "Cap window 84. Seafloor Cavern via Dive from Route 128 after the Space Center, before Sootopolis. Incineroar gate 36 (Torracat evolution), Rillaboom gate 36 (Thwackey evolution), Kartana gate 20 (wild PetalburgWoods_3), Raging Bolt gate 60 (wild Route119), Flutter Mane gate 68 (wild MtPyre_Summit), Amoonguss gate 42 (Foongus evolution). No legends, no Underwater/Seafloor/Cave of Origin species.",
+ "plan": "Lead Rillaboom + Raging Bolt: Fake Out Wailord so Water Spout never fires from full HP, Thunderbolt/Grassy Glide focus Wailord first (crack line); Thunderclap punishes Swift Swim Seaking; Kartana's Sacred Sword answers Drapion, Amoonguss Spore the Morpeko/Drapion lane.",
+ "party": [
+  {
+   "species": "SPECIES_RILLABOOM",
+   "moves": [
+    "MOVE_GRASSY_GLIDE",
+    "MOVE_WOOD_HAMMER",
+    "MOVE_FAKE_OUT",
+    "MOVE_U_TURN"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_GRASSY_SURGE",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "priority Grass under Grassy Terrain",
+   "availability": "pool-84 gate 36 evolution:level from SPECIES_THWACKEY"
+  },
+  {
+   "species": "SPECIES_RAGING_BOLT",
+   "moves": [
+    "MOVE_THUNDERCLAP",
+    "MOVE_THUNDERBOLT",
+    "MOVE_DRACO_METEOR",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    252,
+    0,
+    0,
+    252,
+    4,
+    0
+   ],
+   "role": "priority Electric, answers Water/Flying",
+   "availability": "pool-84 gate 60 wild:Route119/land_mons"
+  },
+  {
+   "species": "SPECIES_FLUTTER_MANE",
+   "moves": [
+    "MOVE_MOONBLAST",
+    "MOVE_SHADOW_BALL",
+    "MOVE_THUNDERBOLT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "fastest special attacker, immune to Fake Out and Sucker Punch bait",
+   "availability": "pool-84 gate 68 wild:MtPyre_Summit/land_mons"
+  },
+  {
+   "species": "SPECIES_KARTANA",
+   "moves": [
+    "MOVE_LEAF_BLADE",
+    "MOVE_SACRED_SWORD",
+    "MOVE_SMART_STRIKE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_BEAST_BOOST",
+   "item": "ITEM_LIFE_ORB",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "fast Grass/Steel/Fighting physical pressure",
+   "availability": "pool-84 gate 20 wild:PetalburgWoods_3/land_mons"
+  },
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_KNOCK_OFF",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_PARTING_SHOT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Intimidate pivot, Fake Out denial",
+   "availability": "pool-84 gate 36 evolution:level from SPECIES_TORRACAT"
+  },
+  {
+   "species": "SPECIES_AMOONGUSS",
+   "moves": [
+    "MOVE_SPORE",
+    "MOVE_RAGE_POWDER",
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_CALM",
+   "ability": "ABILITY_REGENERATOR",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    0,
+    4,
+    0,
+    252,
+    0
+   ],
+   "role": "redirection and sleep control",
+   "availability": "pool-84 gate 42 evolution:level from SPECIES_FOONGUS"
+  }
+ ]
+}
