@@ -1,0 +1,48 @@
+{
+  "play_order": 203,
+  "e_group": "E0304",
+  "trainer": "TRAINER_BUFFEL",
+  "class": "ace",
+  "location": "LilycoveCity_CoveLilyMotel_2F",
+  "chapter": "Mind Badge",
+  "cap": 60,
+  "cap_confirmation": "driver state reported level_cap 60. Mienshao / Mega Milotic / Haxorus / Klinklang / Togekiss (0) at L58 and Volcarona (+1) at L59 = cap + offset - 2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/_party/party_route121_60.json"],
+  "chronology_note": "Same cap-60 party as play_order 196-202; every gate is 54 or lower, so nothing from Lilycove itself is used even though this battle is in Lilycove.",
+  "attempts": [
+    {
+      "n": 1, "seed": 1, "build": "work/agent-battle-build-5",
+      "party": "party_route121_60.json (Incineroar/Amoonguss/Landorus/Zapdos/Weavile/Mega Metagross)",
+      "outcome": "won", "turns": 10, "player_faints": 4, "opponent_faints": 6,
+      "why": "Buffel punished my lead before the first move: Incineroar's Intimidate handed Mega Milotic +2 Special Attack through Competitive, and a Moonblast from that boost plus Mienshao's Close Combat OHKOed Incineroar on turn 1 and later killed Zapdos. Spore did most of the work from there - it neutralised Milotic, Volcarona twice, Mienshao and Haxorus - while Landorus's Sludge Bomb broke the Fairy half and Mega Metagross's Ice Punch removed Haxorus. Metagross was the only survivor, untouched at 185/185."
+    }
+  ],
+  "strategy_checks": [
+    {"check": "Mega Milotic with Competitive is the redirection payoff - any stat drop aimed at it returns +2 Special Attack", "result": "PASS, decisively and before turn 1", "evidence": "The turn-0 board already shows Milotic at spa+2: Incineroar's Intimidate on entry triggered Competitive. Milotic then Mega Evolved on turn 1 and its boosted Moonblast contributed to KOing Incineroar (turn 1) and Zapdos (turn 3). This is the single most effective authored punish in the whole block - it cost me a Pokemon for the crime of bringing the most standard doubles ability in the game."},
+    {"check": "Mienshao's Fake Out buys the turn and Regenerator lets it pivot out and come back healed", "result": "PASS", "evidence": "Withdrawn on turn 2 at 161/161, returned on turn 4 at 161/161, and used Fake Out on turn 5 to flinch Landorus. Both halves of the printed role fired. Knock Off on turn 6 also removed Landorus's Life Orb, which measurably reduced its damage for the rest of the fight."},
+    {"check": "Togekiss uses Follow Me to pull single-target attacks off whichever partner is setting up", "result": "PARTIAL", "evidence": "Follow Me was selected once, on turn 5. It redirected nothing, because both of my attacks that turn were already aimed at Togekiss. On turn 6 it chose Air Slash instead and died to Sludge Bomb. Crucially it was never on the field at the same time as Haxorus or Klinklang, the two Pokemon it exists to cover - see the note on deployment below."},
+    {"check": "Haxorus takes Swords Dance behind Follow Me and Klinklang takes Shift Gear behind it", "result": "FAIL", "evidence": "Haxorus and Klinklang entered together as the final pair on turn 8, two turns after Togekiss had already fainted, so Follow Me cover was impossible. Neither ever used its setup move: Haxorus chose Scale Shot and Close Combat, Klinklang chose Protect and Gear Grind twice. The team's stated principle - 'buy a turn, protect the turn, spend the turn' - never completed once."},
+    {"check": "Volcarona is the Quiver Dance win condition if the physical lane is answered", "result": "FAIL", "evidence": "Volcarona was on the field for four turns across two entries and used Heat Wave twice and nothing else; Quiver Dance was never selected. It spent most of its time asleep from Spore and died to Earth Power at 10 HP."},
+    {"check": "Serene Grace Togekiss's Air Slash flinches 60 percent of the time", "result": "NOT DEMONSTRATED", "evidence": "One Air Slash, on turn 6, for 78 into Landorus with no flinch. One sample."},
+    {"check": "Spread moves ignore Follow Me and are the correct answer", "result": "PARTIAL", "evidence": "I could not test this properly - my party's only spread move was Zapdos's Heat Wave and Zapdos died on turn 3. What did beat the redirection was Spore: Follow Me only redirects moves aimed at the partner, and Amoonguss simply aimed Spore at Togekiss's partner on the turns Follow Me was not up. The crack line should probably name sleep alongside spread damage."}
+  ],
+  "protect_ledger": [
+    {"turn": 9, "battler": "Klinklang", "payoff": "blocked Landorus's Earth Power at 156/156 - 2x into Steel and lethal"}
+  ],
+  "protect_summary": "1 opponent Protect in ten turns, with a clear payoff, 0 empty.",
+  "ai_defects": [
+    {
+      "id": "E0304-1",
+      "turn": 8,
+      "board": "Both remaining reserves sent out together as the final pair - Haxorus 174/174 and Klinklang 156/156 - opposite Landorus 86/196 and a full-health Amoonguss. Togekiss, the team's redirector, fainted on turn 6.",
+      "chosen": "Scale Shot (Haxorus) and Protect then Gear Grind (Klinklang) - no setup move from either.",
+      "better": "This is the shared setup-scoring pattern again (see E0288-3, E0289-2, E0299-2, E0301-1, E0302-2), and here it is decisive twice in one fight, because Buffel's entire team concept is 'take a free turn'. Haxorus at full HP on its entry turn with a partner alive is the textbook Swords Dance board; Klinklang guarded on that turn instead of using Shift Gear, which is arguably the correct guard but means the boost never happens at all. Across ten battles in this block I count nine printed stat-boost moves on opposing Pokemon and exactly one of them (Gardevoir's Calm Mind, E0303) was selected on a turn where it could pay off. Severity: high in aggregate; this single shared constant is the biggest quality issue found in this block."
+    }
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Keep. Four player faints - Incineroar, Zapdos, Landorus and Amoonguss - with only Mega Metagross surviving. That is the deepest faint count in the block alongside the Lilycove rival and is far past the brief's 2+ threshold. No change in either direction. As elsewhere in this block, note that three of the six never executed their authored role, so the current levels are calibrated against a team playing below its design.",
+  "cooler": "The dossier says no and the concept genuinely is a clean statement of one doubles principle, so I would not touch the roster. But playing it exposes that the principle is stated and never demonstrated: Togekiss's Follow Me and the two Pokemon it is supposed to cover were never on the field together for a single turn, because Mienshao and Milotic lead, Volcarona and Togekiss are the middle, and Haxorus and Klinklang arrive last as a pair. Every member does either the buying or the spending, and they are sorted so the two halves never meet. Leading Togekiss beside Haxorus would make turn 1 the demonstration - Follow Me, Swords Dance, then a +2 attacker - which is the picture the plan paints and the thing the dossier says a player should learn here shortly before the Psychic gym punishes the habit. Second, smaller finding worth recording in the crack: the real answer to this team at this cap is not spread damage (a cap-60 party has very little of it) but sleep, because Follow Me cannot protect a partner from a status move aimed at the partner when the redirector is not guarding.",
+  "legality_notes": "No legality problem in the authored set. Miloticite and all six members are inside the cap-60 window. Worth recording in the book: Competitive on a Mega with a stat-drop trigger means Intimidate - the most common doubles lead ability in the game - actively helps this trainer, which is excellent design and is currently only implied by the plan text.",
+  "verification_limit": "No level change was made, so nothing is pending re-verification."
+}
