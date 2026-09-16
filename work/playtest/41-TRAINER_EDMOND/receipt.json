@@ -1,0 +1,42 @@
+{
+  "play_order": 41,
+  "e_group": "E0043",
+  "trainer": "TRAINER_EDMOND",
+  "class": "regular",
+  "location": "Route109",
+  "cap": 24,
+  "difficulty": "medium",
+  "resolved_opponent_levels": {"MANTYKE": 24, "KRABBY": 23, "KOFFING": 24, "STARAVIA": 24},
+  "party_manifest": "work/playtest/41-TRAINER_EDMOND/party.json",
+  "party_pool_audit": "Cap-24 core party, all six gated <= 24 in work/reference-pools/pool-24.json. No Mega used.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/41-TRAINER_EDMOND/a1", "seed": 47, "outcome": "won", "turns": 5, "player_faints": 1, "opponent_faints": 4,
+     "narrative": "T1 Krabby Protected a Moonblast that would very likely have killed it while Mantyke set Tailwind. T2 Mantyke Helping Hand into a Sheer Force Life Orb Rock Slide KO'd Enamorus and took Togekiss from 97 to 46; my own Tailwind went up. T3 Magearna came in, Togekiss' Air Slash KO'd Krabby and a 4x Thunderbolt KO'd Mantyke. T4 Reckless Brave Bird took Togekiss from 46 to 1, Koffing Protected the Air Slash, Thunderbolt KO'd Staravia. T5 Flash Cannon (2x into Poison) KO'd Koffing."}
+  ],
+  "strategy_checks": [
+    {"check": "Mantyke Tailwind", "result": "PASS", "evidence": "Turn 1 Tailwind went up and the state shows SIDE_STATUS_TAILWIND on the opponent side; it inverted the speed order so a base-50 Krabby moved before a 252 Spe Timid Enamorus on turn 2."},
+    {"check": "Mantyke Helping Hand supports the partner's attack", "result": "PASS", "evidence": "Turn 2 Helping Hand preceded Krabby's Rock Slide in the same turn, and the boosted spread attack KO'd Enamorus outright and halved Togekiss. This is the single best-executed opponent combination in the block so far: speed control on turn 1, damage amplification on turn 2."},
+    {"check": "Krabby Sheer Force with Life Orb", "result": "PASS", "evidence": "Turn 2 Rock Slide dealt Sheer-Force-scale damage with no recorded Life Orb recoil message, consistent with the Sheer Force/Life Orb interaction, and no flinch secondary was applied."},
+    {"check": "Staravia Reckless Brave Bird", "result": "PASS", "evidence": "Turn 4 Brave Bird took Togekiss from 46 to 1 and Staravia took recoil ('The opposing Staravia was damaged by the recoil!')."},
+    {"check": "Mantyke Wide Guard blocks a spread attack", "result": "NOT_TESTABLE_this_party", "evidence": "My cap-24 party carries no spread move, so Wide Guard could not be baited. Worth noting positively: the AI did NOT waste a turn on Wide Guard against a single-target-only opponent, which is the correct expected-value read. A dedicated retest with a spread attacker is still owed."},
+    {"check": "Koffing Levitate / Will-O-Wisp / Clear Smog", "result": "NOT_EXERCISED", "evidence": "Koffing spent both of its turns on Protect and was KO'd by Flash Cannon."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "KRABBY", "payoff": "REAL: blocked a Life Orb Moonblast from a 252 Spe Enamorus into a 54 HP Krabby - almost certainly a KO - and Krabby survived to deliver the Helping Hand Rock Slide double-hit the very next turn. The single highest-value Protect observed in this block."},
+    {"turn": 4, "battler": "KOFFING", "payoff": "PARTIAL: blocked Togekiss' Air Slash and its 60% Serene Grace flinch chance. The blocked damage was small (1x into Eviolite bulk), but the flinch denial was real and its partner Staravia got a free Brave Bird that nearly removed Togekiss."}
+  ],
+  "protect_ledger_note": "Two opponent Protects, one excellent and one defensible. No empty guarding.",
+  "ai_defects": [],
+  "ai_notes": [
+    "Edmond played his authored plan better than any opponent in this block: Tailwind, then Helping Hand into a spread attack that exploited my two Flying-types, then a Protect that preserved the payoff piece. No suboptimal choice observed."
+  ],
+  "level_changes": [
+    {"member": "KRABBY", "field": "level offset", "before": 1, "after": 2, "reason": "First-attempt win with only one player faint, and Krabby was the lowest-level opponent at L23. It is also the team's payoff piece: the whole Tailwind/Helping Hand plan exists to give it one big spread turn, and at L23 with Life Orb recoil-free Sheer Force it gets exactly one before dying to a neutral hit. One extra level buys it the second turn the plan is built around."}
+  ],
+  "level_change_note": "Only one member raised, not two. Edmond did produce a real threat (a double-target KO turn that also left Togekiss at 1 HP), so this is a nudge rather than a full application of the zero-faint rule.",
+  "level_change_verification": "Teams file edited, scripts/emerald_champions_teams.py --write then --check all PASS. Generated projections reverted before committing.",
+  "rerun_status": "NOT RERUN - the headless ROM cannot be rebuilt in this session (arm-none-eabi toolchain cannot resolve stdint.h), so the driver would re-measure the pre-change levels. Rerun owed to whoever rebuilds.",
+  "could_this_be_cooler": "This team is already cooler than its stat line suggests, and the answer is to leave it alone. A Mantyke that spends its turns on Tailwind, Helping Hand and Wide Guard rather than on Scald damage is a genuinely instructive support lesson for this point in the campaign, and pairing it with a Sheer Force Life Orb Krabby whose Rock Slide punishes exactly the Flying-types a player brings to a Fighting gym is a sharp, specific idea. If anything deserves a second look it is Koffing, which contributed two Protects and nothing else; a Koffing carrying Wide Guard or Memento instead of one of Will-O-Wisp/Clear Smog would give the sailor a second support beat. No change made in this pass.",
+  "legality_problems_in_authored_set": [],
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py. Not earned campaign traversal."
+}
