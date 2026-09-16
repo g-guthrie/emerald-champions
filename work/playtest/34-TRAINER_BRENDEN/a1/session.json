@@ -1,0 +1,21 @@
+{
+  "rom_sha256": "b8571c96e7076ff07138ca1f9ff6f59ef5e1de4011122e95d2db5ada85f49407",
+  "elf_sha256": "d43f0156f2669176abb19598a1ec55cfc7a82441550e443bfdd1836c41b7be78",
+  "seed": 23522,
+  "trainer_a": "TRAINER_BRENDEN",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 20,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/34-TRAINER_BRENDEN/party.json",
+  "party_sha256": "a210953d2dc06e746210c816f201d4b9cad1b42f3ad8274b9f93db6d8d5494a0",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "prepared": {
+    "encounter": "E0036 TRAINER_BRENDEN (Dewford Gym, sailor-coach physical school, six members); play_order 34, cap 20, Medium",
+    "party": 6
+  },
+  "started": {
+    "frames": 1084
+  }
+}
