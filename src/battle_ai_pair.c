@@ -68,6 +68,11 @@
 #define PAIR_GUARD_BANKED_BASE 45
 #define PAIR_GUARD_BANKED_WAIT 40
 #define PAIR_GUARD_BANKED_PARTNER 25
+// The Conservative trait is a stated preference for the safe line, and the
+// banked share is exactly where safety is valued. Without this the trait had
+// no contact with the guard model at all, which is why a team whose four
+// members all carried Protect never used it.
+#define PAIR_GUARD_BANKED_CONSERVATIVE 20
 
 // An authored signature interaction (ACTIVATE / INSTRUCT / AFTER_YOU) is the
 // point of the trainer, not an accident of the damage arithmetic. Reward it on
@@ -1053,7 +1058,8 @@ static u32 PairGuardBankedShare(const struct PairEvaluation *ev, enum BattlerId 
         return PAIR_GUARD_BANKED_BASE;
     u32 banked = PAIR_GUARD_BANKED_BASE
         + (ev->waitingPayoff ? PAIR_GUARD_BANKED_WAIT : 0)
-        + (PairGuardPartnerPayoff(user, actions) ? PAIR_GUARD_BANKED_PARTNER : 0);
+        + (PairGuardPartnerPayoff(user, actions) ? PAIR_GUARD_BANKED_PARTNER : 0)
+        + ((gAiThinkingStruct->aiFlags[user] & AI_FLAG_CONSERVATIVE) ? PAIR_GUARD_BANKED_CONSERVATIVE : 0);
     return min(100, banked);
 }
 
