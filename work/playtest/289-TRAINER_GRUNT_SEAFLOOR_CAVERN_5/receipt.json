@@ -1,0 +1,33 @@
+{
+  "play_order": 289, "e_group": "E0455", "trainer": "TRAINER_GRUNT_SEAFLOOR_CAVERN_5", "class": "grunt", "location": "SeafloorCavern_Room3",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium", "build_dir": "work/agent-battle-build-8",
+  "party_manifest": "work/playtest/289-TRAINER_GRUNT_SEAFLOOR_CAVERN_5/party_brig_84.json",
+  "availability_note": "Seafloor Cavern via Dive from Route 128 after the Space Center, before Sootopolis. Incineroar 36, Rillaboom 36, Kartana 20 (Petalburg Woods), Raging Bolt 60 (Route 119), Flutter Mane 68 (Mt Pyre Summit), Amoonguss 42. No legends; no Underwater, Seafloor or Cave of Origin species.",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/289-TRAINER_GRUNT_SEAFLOOR_CAVERN_5/a1", "seed": 1, "outcome": "won", "turns": 7, "decisions": 9, "player_faints": 0, "opponent_faints": 4, "note": "Fake Out flinched Mandibuzz's Taunt on T1 while Gyarados Dragon Danced into Raging Bolt's 4x Thunderbolt and died. T2 Tailwind went up but Mandibuzz fell T3 to a second Thunderbolt after a Knock Off. Draco Meteor OHKOed Skuntank (293) T4 while Flutter Mane's Protect ate Poison Jab and Liquidation. Toxapex alone alternated Baneful Bunker and Liquidation for four turns before two Thunderbolt volleys finished it. Only real damage taken: a Toxapex Liquidation crit on Incineroar (111) and Life Orb chip."}
+  ],
+  "strategy_checks": [
+    {"check": "Mandibuzz sets Tailwind or Taunts the support in its first two useful turns", "result": "PASS", "evidence": "T1 chose Taunt on Incineroar (flinched by Fake Out); T2 Tailwind up; T3 Knock Off removed Raging Bolt's Life Orb."},
+    {"check": "Gyarados attacks after Intimidate or dances only when the board is safe", "result": "FAIL", "evidence": "T1 Dragon Dance with a Raging Bolt (visible Electric type, 4x) directly across; Thunderbolt OHKOed it the same turn. The board was not safe and the boost never paid."},
+    {"check": "Toxapex Baneful Bunker / Haze attrition mode", "result": "PASS (Bunker) / NOT REACHED (Haze)", "evidence": "Bunker T2, T5, T7; T5 and T7 each blanked two Thunderbolts. Haze was never needed because I never boosted."},
+    {"check": "Skuntank Sucker Punch priority and Aftermath", "result": "NOT REACHED", "evidence": "T4 Skuntank chose Poison Jab (2x on Flutter Mane) into Protect - a sensible read against a Fairy - and was OHKOed by Draco Meteor before Sucker Punch or Aftermath could matter."},
+    {"check": "Foul Play into physical attackers", "result": "NOT REACHED", "evidence": "Mandibuzz preferred Taunt/Tailwind/Knock Off against a special-heavy board; it faced Incineroar at -1 Attack, so skipping Foul Play was correct."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "user": "Toxapex Baneful Bunker", "payoff": "EMPTY - nothing targeted it; both my attacks went into Mandibuzz. Partner's Tailwind went up regardless."},
+    {"turn": 5, "user": "Toxapex Baneful Bunker", "payoff": "REAL - blocked two super-effective Thunderbolts (would have been ~228 on a 256 HP body). Cadence alternated correctly with Liquidation."},
+    {"turn": 7, "user": "Toxapex Baneful Bunker", "payoff": "REAL - blocked two Thunderbolts at 44 HP; it was dead next turn anyway with no partner to convert the turn."}
+  ],
+  "ai_defects": [
+    {"turn": 1, "battler": "Gyarados", "board": "Gyarados + Mandibuzz vs Incineroar (-1 Atk) + Raging Bolt (Electric/Dragon, full HP)", "chosen": "Dragon Dance", "better": "Protect or Waterfall into Incineroar; a setup turn in front of a visible Electric type that hits it 4x is never safe. The setup-safety check should weigh a foe's STAB super-effective typing, not only the foe's Attack stat."}
+  ],
+  "authored_set_legality": "No problem found. Levels reported as Mandibuzz L83 (offset 1), Gyarados/Toxapex/Skuntank L84 (offset 2), consistent with Medium = cap + offset - 2.",
+  "theme_note": "The brig reads as intended: Taunt/Tailwind support, a Dragon Dance threat, a Bunker wall, a Sucker Punch skunk. On this run Toxapex was the only member that lasted, and its Bunker/Liquidation alternation was the memorable part. It is not a step up from Shelly; it is a grunt.",
+  "level_changes": [
+    {"member": "MANDIBUZZ", "before": 1, "after": 2, "reason": "first-try win, 0 faints; weakest member (offset 1, fell to Thunderbolt + Knock Off in two turns)."},
+    {"member": "SKUNTANK", "before": 2, "after": 3, "reason": "first-try win, 0 faints; OHKOed by Draco Meteor without acting usefully."}
+  ],
+  "level_changes_unverified": "Not re-run: the headless ROM in work/agent-battle-build-8 predates these offsets; the main agent must rebuild before a rerun can verify them.",
+  "cooler": "Yes, mildly: Gyarados with Lum Berry is fine, but the room's Dragon Dance is a liability against the Electric answers the crack line itself recommends; Taunt on Mandibuzz never had a target because the player brought no support. A Roost or Snarl on Mandibuzz would give the support slot something to do after Tailwind. Not changed in this pass.",
+  "most_worth_rerunning": "Rerun with the new offsets to see whether Gyarados still dances into an Electric lead; also confirms Mandibuzz L84 survives Thunderbolt + Knock Off."
+}
