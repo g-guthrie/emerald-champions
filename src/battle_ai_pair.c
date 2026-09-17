@@ -1258,6 +1258,10 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
 bool8 gAiPairBudgetTruncated;
 // Why the joint search did not run for this decision, if it did not.
 u32 gAiPairSkipReason;
+// Per battler: what the joint search decided about Mega Evolution, so a driven
+// battle can say whether the search ran, whether the candidate was legal, and
+// what it chose - none of which is visible from the outside otherwise.
+u32 gAiPairMegaTrace[MAX_BATTLERS_COUNT];
 static u32 sPairWorkAllowance;
 static u32 sPairWorkDecision;
 
@@ -5631,6 +5635,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     u32 count[2] = {1, 1};
     enum BattlerId actors[2] = {actor, partner};
     u32 canMega = (CanMegaEvolve(actor) ? 1u : 0u) | (IsBattlerAlive(partner) && CanMegaEvolve(partner) ? 2u : 0u);
+    gAiPairMegaTrace[actor] = AI_PAIR_MEGA_RAN | (canMega << 4);
     bool32 deadline[2] = {EC_PerishMustEscape(actor), EC_PerishMustEscape(partner)};
     bool32 earlyPivot[2] = {EC_PerishShouldPivotEarly(actor), EC_PerishShouldPivotEarly(partner)};
     // A position that needs to change is not paying for the turn it gives up:
@@ -5705,7 +5710,15 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 // choices and partner pivots, not hiding the story's reveal.
                 // If native form application fails, ordinary boards remain
                 // available; this directive never grants Mega eligibility.
-                u32 mega = megaChoice ^ revealMega;
+                // Evaluate the board where every usable Mega evolves first.
+                // Ordinarily both orders are compared, but a decision that
+                // runs out of budget keeps whichever board it saw, and in a
+                // multi - three actors sharing one clock - the stop landed
+                // immediately after the plain board every time, so an
+                // available Mega was never once considered. Singles elect a
+                // usable Mega by default; this makes doubles agree when the
+                // comparison cannot be afforded.
+                u32 mega = megaChoice ^ (revealMega ? revealMega : canMega);
                 if (revealMega && best != INT_MIN && (bestMega & revealMega)
                  && !(mega & revealMega))
                     continue;
@@ -5752,14 +5765,29 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 bool32 valid = TRUE;
                 for (u32 index = 0; index < 2; index++)
                     if ((mega & (1u << index)) && !AI_ApplyMegaCandidate(actors[index], FALSE))
+                    {
                         valid = FALSE;
+                        gAiPairMegaTrace[actor] |= AI_PAIR_MEGA_APPLY_FAILED;
+                    }
                 if (!valid)
                     continue;
-                s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev, mega != 0 || noActionMask != 0, canStop, deadline[0] || deadline[1]);
+                // A Mega board needs its damage caches rebuilt around the new
+                // form, and that refresh is abandoned when the clock has run
+                // out - which in a multi is always, because three actors share
+                // one budget and the Mega masks come after the plain board. So
+                // every Mega board scored INT_MIN and no Mega ever evolved in
+                // a two-owner multi. The refresh a form change requires is not
+                // optional work: it is what makes the comparison meaningful.
+                s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev,
+                    mega != 0 || noActionMask != 0, mega != 0 ? FALSE : canStop,
+                    deadline[0] || deadline[1]);
                 if (score == INT_MIN)
                     continue;
                 if (mega != 0)
+                {
                     score += PAIR_MEGA_HORIZON;
+                    gAiPairMegaTrace[actor] |= AI_PAIR_MEGA_SCORED;
+                }
                 // Demand a meaningful improvement before voluntarily giving up
                 // an action; ties and tiny forecast noise must not cause cycling.
                 // A countdown exit is not voluntary, and neither is the
@@ -5854,6 +5882,8 @@ decisionReady:
         }
         gAiBattleData->chosenMoveIndex[battler] = chosenIndex;
         gAiBattleData->chosenTarget[battler] = bestActions[index].target;
+        gAiPairMegaTrace[actor] = (gAiPairMegaTrace[actor] & ~AI_PAIR_MEGA_BEST_MASK)
+            | ((bestMega & 3) << 6);
         SetAIUsingGimmick(battler, bestMega & (1u << index) ? USE_GIMMICK : NO_GIMMICK);
         gAiLogicData->battlerMovesScored |= 1u << battler;
     }
