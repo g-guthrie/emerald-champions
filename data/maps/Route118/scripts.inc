@@ -202,7 +202,6 @@ Route118_EventScript_RegisterRose::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route118_Text_RoseRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ROSE_1
 	release
 	end
 

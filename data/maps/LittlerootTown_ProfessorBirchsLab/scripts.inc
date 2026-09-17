@@ -350,8 +350,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	call Common_EventScript_EmeraldChampionsResearchPartners
 	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting
 	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
-	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
-	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	end
 
@@ -366,17 +364,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
 	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, ProfBirch_EventScript_RatePokedexOrRegister
 	goto_if_eq VAR_BIRCH_LAB_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT
-	release
-	end
-
-EventScript_RegisterProfBirch::
-	msgbox MatchCall_Text_BirchRegisterCall, MSGBOX_DEFAULT
-	closemessage
-	delay 30
-	closemessage
-	delay 30
-	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
-	setvar VAR_REGISTER_BIRCH_STATE, 2
 	release
 	end
 

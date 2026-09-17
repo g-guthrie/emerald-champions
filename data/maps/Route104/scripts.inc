@@ -98,7 +98,6 @@ Route104_EventScript_MayEncounter::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	applymovement LOCALID_PLAYER, Route104_Movement_PlayerFaceRival
 	applymovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalWalkSlowLeft
 	msgbox Route104_Text_MayHowsYourPokedex, MSGBOX_DEFAULT
@@ -182,7 +181,6 @@ Route104_EventScript_BrendanEncounter::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	applymovement LOCALID_PLAYER, Route104_Movement_PlayerFaceRival
 	applymovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalWalkSlowLeft
 	msgbox Route104_Text_BrendanHowsYourPokedex, MSGBOX_DEFAULT
@@ -347,8 +345,8 @@ Route104_EventScript_SailToDewford::
 	waitmovement 0
 	hideobjectat LOCALID_PLAYER, MAP_ROUTE104
 	call Common_EventScript_PlayBrineysBoatMusic
-	goto_if_set FLAG_ENABLE_NORMAN_MATCH_CALL, Route104_EventScript_SailToDewfordNoCall
-	goto_if_unset FLAG_ENABLE_NORMAN_MATCH_CALL, Route104_EventScript_SailToDewfordDadCalls
+	goto_if_set FLAG_RECEIVED_NORMAN_POKENAV_CALL, Route104_EventScript_SailToDewfordNoCall
+	goto_if_unset FLAG_RECEIVED_NORMAN_POKENAV_CALL, Route104_EventScript_SailToDewfordDadCalls
 	end
 
 Route104_EventScript_SailToDewfordNoCall::
@@ -366,7 +364,7 @@ Route104_EventScript_SailToDewfordDadCalls::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_NORMAN_MATCH_CALL
+	setflag FLAG_RECEIVED_NORMAN_POKENAV_CALL
 	applymovement LOCALID_PLAYER, Route104_Movement_SailToDewfordAfterDadCalls
 	applymovement LOCALID_ROUTE104_BOAT, Route104_Movement_SailToDewfordAfterDadCalls, MAP_ROUTE104
 	waitmovement LOCALID_ROUTE104_BOAT, MAP_ROUTE104
@@ -851,9 +849,6 @@ Route104_EventScript_Winston::
 	trainerbattle_double TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterWinstonAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchWinston
-	setvar VAR_0x8004, TRAINER_WINSTON_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterWinston
 	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -861,25 +856,6 @@ Route104_EventScript_Winston::
 Route104_EventScript_TryRegisterWinstonAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinstonAfterBattle
-	release
-	end
-
-Route104_EventScript_RegisterWinstonAfterBattle::
-	msgbox Route104_Text_WinstonRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_WINSTON_1
-	release
-	end
-
-Route104_EventScript_TryRegisterWinston::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinston
-	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_RegisterWinston::
-	msgbox Route104_Text_WinstonRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_WINSTON_1
 	release
 	end
 
@@ -892,9 +868,6 @@ Route104_EventScript_Cindy::
 	trainerbattle_double TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterCindyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchCindy
-	setvar VAR_0x8004, TRAINER_CINDY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterCindy
 	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -902,25 +875,6 @@ Route104_EventScript_Cindy::
 Route104_EventScript_TryRegisterCindyAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindyAfterBattle
-	release
-	end
-
-Route104_EventScript_RegisterCindyAfterBattle::
-	msgbox Route104_Text_CindyRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CINDY_1
-	release
-	end
-
-Route104_EventScript_TryRegisterCindy::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindy
-	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_RegisterCindy::
-	msgbox Route104_Text_CindyRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CINDY_1
 	release
 	end
 

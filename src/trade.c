@@ -22,7 +22,7 @@
 #include "item.h"
 #include "main.h"
 #include "mystery_gift.h"
-#include "mystery_gift_menu.h"
+#include "link_menu_text.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"

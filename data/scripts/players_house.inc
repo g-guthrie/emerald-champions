@@ -303,7 +303,6 @@ PlayersHouse_1F_EventScript_Mom::
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
 	goto_if_set FLAG_RECEIVED_RUNNING_SHOES, PlayersHouse_1F_EventScript_CheckOldRodPending
 PlayersHouse_1F_EventScript_MomAfterOldRodCheck::
-	goto_if_set FLAG_HAS_MATCH_CALL, PlayersHouse_1F_EventScript_TryRegisterMom
 	goto_if_set FLAG_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
 	goto_if_eq VAR_TEMP_1, 1, PlayersHouse_1F_EventScript_SeeYouHoney
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, PlayersHouse_1F_EventScript_DidYouMeetProfBirch
@@ -329,30 +328,8 @@ PlayersHouse_1F_EventScript_DontPushYourselfTooHard::
 	release
 	end
 
-PlayersHouse_1F_EventScript_TryRegisterMom::
-	goto_if_set FLAG_ENABLE_MOM_MATCH_CALL, PlayersHouse_1F_EventScript_CheckMomBadgePraise
-	msgbox PlayersHouse_1F_Text_IsThatAPokenav, MSGBOX_DEFAULT
-	closemessage
-	delay 30
-	closemessage
-	delay 30
-	setflag FLAG_ENABLE_MOM_MATCH_CALL
-	release
-	end
-
-PlayersHouse_1F_EventScript_CheckMomBadgePraise::
-	goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_MomBadgePraise
-	goto PlayersHouse_1F_EventScript_MomHealsParty
-
 @ MOM has nothing to hand over: money is not a reward in this campaign. The flag
 @ only records that she has already said her piece about DAD's BADGE.
-PlayersHouse_1F_EventScript_MomBadgePraise::
-	goto_if_set FLAG_RECEIVED_AMULET_COIN, PlayersHouse_1F_EventScript_MomHealsParty
-	msgbox PlayersHouse_1F_Text_GotDadsBadge, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_AMULET_COIN
-	release
-	end
-
 PlayersHouse_1F_EventScript_MomHealsParty::
 	msgbox PlayersHouse_1F_Text_YouShouldRestABit, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_HealParty

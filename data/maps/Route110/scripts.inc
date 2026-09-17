@@ -212,7 +212,6 @@ Route110_EventScript_IsabelRegisterMatchCallAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route110_Text_IsabelRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ISABEL_1
 	release
 	end
 
@@ -659,7 +658,6 @@ Route110_EventScript_BirchScene::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
 	msgbox Route110_Text_KeepAnEyeOutForRival, MSGBOX_DEFAULT
 	closemessage
 	call_if_eq VAR_0x8008, 1, Route110_EventScript_BirchExit1

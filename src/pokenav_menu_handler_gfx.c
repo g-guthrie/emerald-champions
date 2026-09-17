@@ -17,10 +17,8 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-#define GFXTAG_BLUE_LIGHT 1
 #define GFXTAG_OPTIONS    3
 
-#define PALTAG_BLUE_LIGHT 3
 #define PALTAG_OPTIONS_DEFAULT 4 // Includes green for Smart/Region Map and yellow for Tough
 #define PALTAG_OPTIONS_BLUE 5
 #define PALTAG_OPTIONS_PINK 6
@@ -45,7 +43,6 @@ struct Pokenav_MenuGfx
     u8 numIconsBlending;
     bool8 pokenavAlreadyOpen;
     bool32 iconVisible[MAX_POKENAV_MENUITEMS];
-    struct Sprite *blueLightSprite;
     struct Sprite *iconSprites[MAX_POKENAV_MENUITEMS][NUM_OPTION_SUBSPRITES];
     u8 bg1TilemapBuffer[BG_SCREEN_SIZE];
 };
@@ -74,9 +71,6 @@ static void SetOptionInvisibility(struct Sprite **, bool32);
 static void SpriteCB_OptionSlide(struct Sprite *);
 static void SpriteCB_OptionZoom(struct Sprite *);
 static void Task_OptionBlend(u8);
-static void CreateMatchCallBlueLightSprite(void);
-static void SpriteCB_BlinkingBlueLight(struct Sprite *);
-static void DestroyRematchBlueLightSprite(void);
 static void AddOptionDescriptionWindow(void);
 static void PrintCurrentOptionDescription(void);
 static void PrintNoRibbonWinners(void);
@@ -102,8 +96,6 @@ static const u32 sPokenavBgDotsTilemap[] = INCGFX_U32("graphics/pokenav/bg_dots.
 static const u16 sPokenavDeviceBgPal[] = INCGFX_U16("graphics/pokenav/device_outline.png", ".gbapal");
 static const u32 sPokenavDeviceBgTiles[] = INCGFX_U32("graphics/pokenav/device_outline.png", ".4bpp.smol", "-num_tiles 53 -Wnum_tiles");
 static const u32 sPokenavDeviceBgTilemap[] = INCGFX_U32("graphics/pokenav/device_outline_map.bin", ".smolTM");
-static const u16 sMatchCallBlueLightPal[] = INCGFX_U16("graphics/pokenav/blue_light.png", ".gbapal");
-static const u32 sMatchCallBlueLightTiles[] = INCGFX_U32("graphics/pokenav/blue_light.png", ".4bpp.smol");
 
 static const u8 gText_NoRibbonWinners[] = _("There are no RIBBON winners.");
 
@@ -151,11 +143,6 @@ static const struct CompressedSpriteSheet sPokenavOptionsSpriteSheets[] =
         .data = gPokenavOptions_Gfx,
         .size = 0x3400,
         .tag = GFXTAG_OPTIONS
-    },
-    {
-        .data = sMatchCallBlueLightTiles,
-        .size = 0x0100,
-        .tag = GFXTAG_BLUE_LIGHT
     }
 };
 
@@ -166,13 +153,11 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
     {&gPokenavOptions_Pal[0x20], PALTAG_OPTIONS_PINK},
     {&gPokenavOptions_Pal[0x30], PALTAG_OPTIONS_BEIGE},
     {&gPokenavOptions_Pal[0x40], PALTAG_OPTIONS_RED},
-    {sMatchCallBlueLightPal, PALTAG_BLUE_LIGHT},
     {}
 };
 
 // Tile number, palette tag offset
 static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
 
@@ -192,16 +177,7 @@ struct
             sOptionsLabelGfx_SwitchOff
         }
     },
-    [POKENAV_MENU_TYPE_UNLOCK_MC] =
-    {
-        .yStart = 42,
-        .deltaY = 20,
-        .gfx = {
-            sOptionsLabelGfx_RegionMap,
-            sOptionsLabelGfx_SwitchOff
-        }
-    },
-    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] =
+    [POKENAV_MENU_TYPE_RIBBONS] =
     {
         .yStart = 42,
         .deltaY = 20,
@@ -227,7 +203,6 @@ static const struct WindowTemplate sOptionDescWindowTemplate =
 static const u8 *const sPageDescriptions[] =
 {
     [POKENAV_MENUITEM_MAP]                     = COMPOUND_STRING("Check the map of the HOENN region"),
-    [POKENAV_MENUITEM_MATCH_CALL]              = COMPOUND_STRING("Call a registered TRAINER."),
     [POKENAV_MENUITEM_RIBBONS]                 = COMPOUND_STRING("Check obtained RIBBONS."),
     [POKENAV_MENUITEM_SWITCH_OFF]              = COMPOUND_STRING("Put away the POKéNAV.")
 };
@@ -276,27 +251,6 @@ static const struct SpriteTemplate sMenuOptionSpriteTemplate =
     .affineAnims = sAffineAnims_MenuOption,
 };
 
-static const struct OamData sBlueLightOamData =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(32x16),
-    .x = 0,
-    .size = SPRITE_SIZE(32x16),
-    .tileNum = 0,
-    .priority = 2,
-    .paletteNum = 0,
-};
-
-static const struct SpriteTemplate sMatchCallBlueLightSpriteTemplate =
-{
-    .tileTag = GFXTAG_BLUE_LIGHT,
-    .paletteTag = PALTAG_BLUE_LIGHT,
-    .oam = &sBlueLightOamData,
-};
-
 static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
 {
     &REG_WIN0H,
@@ -304,23 +258,6 @@ static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
     1,
     0
 };
-
-static bool32 AreAnyTrainerRematchesNearby(void)
-{
-#if FREE_MATCH_CALL == FALSE
-    s32 i;
-
-    for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
-    {
-        if (GetMatchTableMapSectionId(i) == gMapHeader.regionMapSectionId
-            && IsRematchEntryRegistered(i)
-            && gSaveBlock1Ptr->trainerRematches[i])
-            return TRUE;
-    }
-#endif //FREE_MATCH_CALL
-
-    return FALSE;
-}
 
 bool32 OpenPokenavMenuInitial(void)
 {
@@ -435,7 +372,6 @@ static u32 LoopedTask_OpenMenu(s32 state)
     case 5:
         PrintCurrentOptionDescription();
         CreateMenuOptionSprites();
-        CreateMatchCallBlueLightSprite();
         DrawCurrentMenuOptionLabels();
         return LT_INC_AND_PAUSE;
     case 6:
@@ -609,15 +545,12 @@ static void LoadPokenavOptionPalettes(void)
 static void FreeAndDestroyMainMenuSprites(void)
 {
     FreeSpriteTilesByTag(GFXTAG_OPTIONS);
-    FreeSpriteTilesByTag(GFXTAG_BLUE_LIGHT);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_DEFAULT);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_BLUE);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_PINK);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_BEIGE);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_RED);
-    FreeSpritePaletteByTag(PALTAG_BLUE_LIGHT);
     DestroyMenuOptionSprites();
-    DestroyRematchBlueLightSprite();
 }
 
 static void CreateMenuOptionSprites(void)
@@ -987,34 +920,6 @@ static void Task_OptionBlend(u8 taskId)
 #undef tBlendTarget1
 #undef tBlendTarget2
 #undef tBlendCounter
-
-// Blue light that blinks if there are available rematches nearby
-static void CreateMatchCallBlueLightSprite(void)
-{
-    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    u8 spriteId = CreateSprite(&sMatchCallBlueLightSpriteTemplate, 0x10, 0x60, 4);
-    gfx->blueLightSprite = &gSprites[spriteId];
-    if (AreAnyTrainerRematchesNearby())
-        gfx->blueLightSprite->callback = SpriteCB_BlinkingBlueLight;
-    else
-        gfx->blueLightSprite->invisible = TRUE;
-}
-
-static void DestroyRematchBlueLightSprite(void)
-{
-    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    DestroySprite(gfx->blueLightSprite);
-}
-
-static void SpriteCB_BlinkingBlueLight(struct Sprite *sprite)
-{
-    sprite->data[0]++;
-    if (sprite->data[0] > 8)
-    {
-        sprite->data[0] = 0;
-        sprite->invisible ^= 1;
-    }
-}
 
 static void AddOptionDescriptionWindow(void)
 {

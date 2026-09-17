@@ -8,7 +8,6 @@ EventScript_Questionnaire::
 	faceplayer
 	specialvar VAR_0x8008, GetMartEmployeeObjectEventId
 	goto_if_eq VAR_0x8004, 1, Questionnaire_EventScript_PlayerInputMysteryEventPhrase
-	goto_if_eq VAR_0x8004, 2, Questionnaire_EventScript_PlayerInputMysteryGiftPhrase
 	goto_if_eq VAR_RESULT, 0, Questionnaire_EventScript_Release
 	goto_if_eq VAR_RESULT, 1, Questionnaire_EventScript_ThankYou
 	end
@@ -27,11 +26,6 @@ Questionnaire_EventScript_PlayerInputMysteryEventPhrase::
 	setflag FLAG_SYS_MYSTERY_EVENT_ENABLE
 	msgbox Questionnaire_Text_YouCanAccessMysteryEvent, MSGBOX_DEFAULT
 	releaseall
-	end
-
-@ MYSTERY GIFT can deliver nothing here, so the title stays New Game / Continue / Option.
-Questionnaire_EventScript_PlayerInputMysteryGiftPhrase::
-	goto Questionnaire_EventScript_ThankYou
 	end
 
 Questionnaire_EventScript_Release::

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "pokenav_call.h"
 #include "menu.h"
 #include "bg.h"
 #include "window.h"
@@ -12,7 +13,6 @@
 #include "script.h"
 #include "field_name_box.h"
 #include "event_data.h"
-#include "match_call.h"
 #include "malloc.h"
 #include "constants/speaker_names.h"
 #include "data/speaker_names.h"
@@ -59,7 +59,7 @@ void PrepareNamebox(u32 tileNum)
         RedrawDialogueFrame();
     }
 
-    bool32 matchCall = IsMatchCallTaskActive();
+    bool32 matchCall = IsPokenavCallTaskActive();
 
     struct WindowTemplate template =
     {
@@ -123,7 +123,7 @@ u32 GetNameboxWidth(void)
 
 static const u32 *GetNameboxGraphics(void)
 {
-    if (IsMatchCallTaskActive())
+    if (IsPokenavCallTaskActive())
         return sNameBoxPokenavGfx;
     else
         return sNameBoxDefaultGfx;

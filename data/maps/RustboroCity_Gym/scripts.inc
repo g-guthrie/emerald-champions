@@ -122,7 +122,6 @@ RustboroCity_Gym_EventScript_RegisterRoxanne::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_ROXANNE_MATCH_CALL
 	clearflag FLAG_ENABLE_ROXANNE_FIRST_CALL
 	releaseall
 	end

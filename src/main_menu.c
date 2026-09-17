@@ -16,7 +16,6 @@
 #include "main_menu.h"
 #include "menu.h"
 #include "list_menu.h"
-#include "mystery_event_menu.h"
 #include "naming_screen.h"
 #include "oak_speech.h"
 #include "option_menu.h"
@@ -39,7 +38,6 @@
 #include "text_window.h"
 #include "title_screen.h"
 #include "window.h"
-#include "mystery_gift_menu.h"
 
 /*
  * Main menu state machine
@@ -77,9 +75,7 @@
  *    to be pressed.
  *
  * Task_DisplayMainWindow
- *  - Display the buttons to the user. If the menu is in HAS_MYSTERY_EVENTS
- *    mode, there are too many buttons for one screen and a scrollbar is added,
- *    and the scrollbar task is spawned (Task_ScrollIndicatorArrowPairOnMainMenu).
+ *  - Display the buttons to the user.
  *
  * Task_HighlightSelectedMainMenuItem
  *  - Update the UI to match the currently selected item.
@@ -87,25 +83,20 @@
  * Task_HandleMainMenuInput
  *  - If A is pressed, advance to Task_HandleMainMenuAPressed.
  *  - If B is pressed, return to the title screen via CB2_InitTitleScreen.
- *  - If Up or Down is pressed, handle scrolling if there is a scroll bar, change
- *    the selection, then go back to Task_HighlightSelectedMainMenuItem.
+ *  - If Up or Down is pressed, change the selection, then go back to
+ *    Task_HighlightSelectedMainMenuItem.
  *
  * Task_HandleMainMenuAPressed
  *  - If the user selected New Game, advance to Task_NewGameBirchSpeech_Init.
  *  - If the user selected Continue, advance to CB2_ContinueSavedGame.
  *  - If the user selected the Options menu, advance to CB2_InitOptionMenu.
- *  - If the user selected Mystery Gift, advance to CB2_InitMysteryGift. However,
- *    if the wireless adapter was removed, instead advance to
- *    Task_DisplayMainMenuInvalidActionError.
- *  - Code to start a Mystery Event is present here, but is unreachable in this
- *    version.
  *
  * Task_HandleMainMenuBPressed
  *  - Clean up the main menu and go back to CB2_InitTitleScreen.
  *
  * Task_DisplayMainMenuInvalidActionError
- *  - Print one of three different error messages, wait for the text to stop
- *    printing, and then wait for A or B to be pressed.
+ *  - Print the error message, wait for the text to stop printing, and then
+ *    wait for A or B to be pressed.
  * - Then advance to Task_HandleMainMenuBPressed.
  *
  * Task_NewGameBirchSpeech_Init
@@ -264,12 +255,7 @@ static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nTh
 static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
 static const u8 gText_MainMenuContinue[] = _("CONTINUE");
 static const u8 gText_MainMenuOption[] = _("OPTION");
-static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryGift2[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryEvents[] = _("MYSTERY EVENTS");
 static const u8 gText_WirelessNotConnected[] = _("The Wireless Adapter is not\nconnected.");
-static const u8 gText_MysteryGiftCantUse[] = _("MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.");
-static const u8 gText_MysteryEventsCantUse[] = _("MYSTERY EVENTS can't be used while\nthe Wireless Adapter is attached.");
 
 static const u8 gText_ContinueMenuPlayer[] = _("PLAYER");
 static const u8 gText_ContinueMenuTime[] = _("TIME");
@@ -531,8 +517,6 @@ enum
 {
     HAS_NO_SAVED_GAME,  //NEW GAME, OPTION
     HAS_SAVED_GAME,     //CONTINUE, NEW GAME, OPTION
-    HAS_MYSTERY_GIFT,   //CONTINUE, NEW GAME, MYSTERY GIFT, OPTION
-    HAS_MYSTERY_EVENTS, //CONTINUE, NEW GAME, MYSTERY GIFT, MYSTERY EVENTS, OPTION
 };
 
 enum
@@ -540,8 +524,6 @@ enum
     ACTION_NEW_GAME,
     ACTION_CONTINUE,
     ACTION_OPTION,
-    ACTION_MYSTERY_GIFT,
-    ACTION_MYSTERY_EVENTS,
     ACTION_INVALID
 };
 
@@ -661,8 +643,6 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
         {
         case SAVE_STATUS_OK:
             tMenuType = HAS_SAVED_GAME;
-            if (IsMysteryGiftEnabled())
-                tMenuType++;
             gTasks[taskId].func = Task_MainMenuCheckBattery;
             break;
         case SAVE_STATUS_CORRUPT:
@@ -674,8 +654,6 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
             CreateMainMenuErrorWindow(gText_SaveFileCorrupted);
             gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;
             tMenuType = HAS_SAVED_GAME;
-            if (IsMysteryGiftEnabled() == TRUE)
-                tMenuType++;
             break;
         case SAVE_STATUS_EMPTY:
         default:
@@ -695,12 +673,6 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
             case HAS_NO_SAVED_GAME:
             case HAS_SAVED_GAME:
                 sCurrItemAndOptionMenuCheck = tMenuType + 1;
-                break;
-            case HAS_MYSTERY_GIFT:
-                sCurrItemAndOptionMenuCheck = 3;
-                break;
-            case HAS_MYSTERY_EVENTS:
-                sCurrItemAndOptionMenuCheck = 4;
                 break;
             }
         }
@@ -829,66 +801,6 @@ static void Task_DisplayMainMenu(u8 taskId)
             DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[3], MAIN_MENU_BORDER_TILE);
             DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
             break;
-        case HAS_MYSTERY_GIFT:
-            FillWindowPixelBuffer(2, PIXEL_FILL(0xA));
-            FillWindowPixelBuffer(3, PIXEL_FILL(0xA));
-            FillWindowPixelBuffer(4, PIXEL_FILL(0xA));
-            FillWindowPixelBuffer(5, PIXEL_FILL(0xA));
-            AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
-            AddTextPrinterParameterized3(3, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
-            AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift);
-            AddTextPrinterParameterized3(5, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
-            MainMenu_FormatSavegameText();
-            PutWindowTilemap(2);
-            PutWindowTilemap(3);
-            PutWindowTilemap(4);
-            PutWindowTilemap(5);
-            CopyWindowToVram(2, COPYWIN_GFX);
-            CopyWindowToVram(3, COPYWIN_GFX);
-            CopyWindowToVram(4, COPYWIN_GFX);
-            CopyWindowToVram(5, COPYWIN_GFX);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[2], MAIN_MENU_BORDER_TILE);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[3], MAIN_MENU_BORDER_TILE);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[5], MAIN_MENU_BORDER_TILE);
-            break;
-        case HAS_MYSTERY_EVENTS:
-            FillWindowPixelBuffer(2, PIXEL_FILL(0xA));
-            FillWindowPixelBuffer(3, PIXEL_FILL(0xA));
-            FillWindowPixelBuffer(4, PIXEL_FILL(0xA));
-            FillWindowPixelBuffer(5, PIXEL_FILL(0xA));
-            FillWindowPixelBuffer(6, PIXEL_FILL(0xA));
-            AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
-            AddTextPrinterParameterized3(3, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
-            AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift2);
-            AddTextPrinterParameterized3(5, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryEvents);
-            AddTextPrinterParameterized3(6, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
-            MainMenu_FormatSavegameText();
-            PutWindowTilemap(2);
-            PutWindowTilemap(3);
-            PutWindowTilemap(4);
-            PutWindowTilemap(5);
-            PutWindowTilemap(6);
-            CopyWindowToVram(2, COPYWIN_GFX);
-            CopyWindowToVram(3, COPYWIN_GFX);
-            CopyWindowToVram(4, COPYWIN_GFX);
-            CopyWindowToVram(5, COPYWIN_GFX);
-            CopyWindowToVram(6, COPYWIN_GFX);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[2], MAIN_MENU_BORDER_TILE);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[3], MAIN_MENU_BORDER_TILE);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[5], MAIN_MENU_BORDER_TILE);
-            DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[6], MAIN_MENU_BORDER_TILE);
-            tScrollArrowTaskId = AddScrollIndicatorArrowPair(&sScrollArrowsTemplate_MainMenu, &sCurrItemAndOptionMenuCheck);
-            gTasks[tScrollArrowTaskId].func = Task_ScrollIndicatorArrowPairOnMainMenu;
-            if (sCurrItemAndOptionMenuCheck == 4)
-            {
-                ChangeBgY(0, 0x2000, BG_COORD_ADD);
-                ChangeBgY(1, 0x2000, BG_COORD_ADD);
-                tIsScrolled = TRUE;
-                gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = TRUE;
-            }
-            break;
         }
         gTasks[taskId].func = Task_HighlightSelectedMainMenuItem;
     }
@@ -921,24 +833,12 @@ static bool8 HandleMainMenuInput(u8 taskId)
     }
     else if ((JOY_NEW(DPAD_UP)) && tCurrItem > 0)
     {
-        if (tMenuType == HAS_MYSTERY_EVENTS && tIsScrolled == TRUE && tCurrItem == 1)
-        {
-            ChangeBgY(0, 0x2000, BG_COORD_SUB);
-            ChangeBgY(1, 0x2000, BG_COORD_SUB);
-            gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = tIsScrolled = FALSE;
-        }
         tCurrItem--;
         sCurrItemAndOptionMenuCheck = tCurrItem;
         return TRUE;
     }
     else if ((JOY_NEW(DPAD_DOWN)) && tCurrItem < tItemCount - 1)
     {
-        if (tMenuType == HAS_MYSTERY_EVENTS && tCurrItem == 3 && tIsScrolled == FALSE)
-        {
-            ChangeBgY(0, 0x2000, BG_COORD_ADD);
-            ChangeBgY(1, 0x2000, BG_COORD_ADD);
-            gTasks[tScrollArrowTaskId].tArrowTaskIsScrolled = tIsScrolled = TRUE;
-        }
         tCurrItem++;
         sCurrItemAndOptionMenuCheck = tCurrItem;
         return TRUE;
@@ -959,8 +859,6 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (gTasks[taskId].tMenuType == HAS_MYSTERY_EVENTS)
-            RemoveScrollIndicatorArrowPair(gTasks[taskId].tScrollArrowTaskId);
         ClearStdWindowAndFrame(0, TRUE);
         ClearStdWindowAndFrame(1, TRUE);
         ClearStdWindowAndFrame(2, TRUE);
@@ -1000,76 +898,6 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 break;
             }
             break;
-        case HAS_MYSTERY_GIFT:
-            switch (gTasks[taskId].tCurrItem)
-            {
-            case 0:
-            default:
-                action = ACTION_CONTINUE;
-                break;
-            case 1:
-                action = ACTION_NEW_GAME;
-                break;
-            case 2:
-                action = ACTION_MYSTERY_GIFT;
-                if (!wirelessAdapterConnected)
-                {
-                    action = ACTION_INVALID;
-                    gTasks[taskId].tMenuType = HAS_NO_SAVED_GAME;
-                }
-                break;
-            case 3:
-                action = ACTION_OPTION;
-                break;
-            }
-            break;
-        case HAS_MYSTERY_EVENTS:
-            switch (gTasks[taskId].tCurrItem)
-            {
-            case 0:
-            default:
-                action = ACTION_CONTINUE;
-                break;
-            case 1:
-                action = ACTION_NEW_GAME;
-                break;
-            case 2:
-                if (gTasks[taskId].tWirelessAdapterConnected)
-                {
-                    action = ACTION_MYSTERY_GIFT;
-                    if (!wirelessAdapterConnected)
-                    {
-                        action = ACTION_INVALID;
-                        gTasks[taskId].tMenuType = HAS_NO_SAVED_GAME;
-                    }
-                }
-                else if (wirelessAdapterConnected)
-                {
-                    action = ACTION_INVALID;
-                    gTasks[taskId].tMenuType = HAS_SAVED_GAME;
-                }
-                else
-                {
-                    action = ACTION_INVALID;
-                    gTasks[taskId].tMenuType = HAS_SAVED_GAME;
-                }
-                break;
-            case 3:
-                if (wirelessAdapterConnected)
-                {
-                    action = ACTION_INVALID;
-                    gTasks[taskId].tMenuType = HAS_MYSTERY_GIFT;
-                }
-                else
-                {
-                    action = ACTION_MYSTERY_EVENTS;
-                }
-                break;
-            case 4:
-                action = ACTION_OPTION;
-                break;
-            }
-            break;
         }
         ChangeBgY(0, 0, BG_COORD_SET);
         ChangeBgY(1, 0, BG_COORD_SET);
@@ -1104,14 +932,6 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             SetMainCallback2(CB2_InitOptionMenu);
             DestroyTask(taskId);
             break;
-        case ACTION_MYSTERY_GIFT:
-            SetMainCallback2(CB2_InitMysteryGift);
-            DestroyTask(taskId);
-            break;
-        case ACTION_MYSTERY_EVENTS:
-            SetMainCallback2(CB2_InitMysteryEventMenu);
-            DestroyTask(taskId);
-            break;
         case ACTION_INVALID:
             gTasks[taskId].tCurrItem = 0;
             gTasks[taskId].func = Task_DisplayMainMenuInvalidActionError;
@@ -1138,8 +958,6 @@ static void Task_HandleMainMenuBPressed(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (gTasks[taskId].tMenuType == HAS_MYSTERY_EVENTS)
-            RemoveScrollIndicatorArrowPair(gTasks[taskId].tScrollArrowTaskId);
         sCurrItemAndOptionMenuCheck = 0;
         FreeAllWindowBuffers();
         SetMainCallback2(CB2_InitTitleScreen);
@@ -1157,12 +975,6 @@ static void Task_DisplayMainMenuInvalidActionError(u8 taskId)
         {
         case 0:
             CreateMainMenuErrorWindow(gText_WirelessNotConnected);
-            break;
-        case 1:
-            CreateMainMenuErrorWindow(gText_MysteryGiftCantUse);
-            break;
-        case 2:
-            CreateMainMenuErrorWindow(gText_MysteryEventsCantUse);
             break;
         }
         gTasks[taskId].tCurrItem++;
@@ -1226,54 +1038,6 @@ static void HighlightSelectedMainMenuItem(enum PartyMenuType menuType, u8 select
             break;
         case 2:
             SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(4));
-            break;
-        }
-        break;
-    case HAS_MYSTERY_GIFT:
-        switch (selectedMenuItem)
-        {
-        case 0:
-        default:
-            SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(2));
-            break;
-        case 1:
-            SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(3));
-            break;
-        case 2:
-            SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(4));
-            break;
-        case 3:
-            SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(5));
-            break;
-        }
-        break;
-    case HAS_MYSTERY_EVENTS:
-        switch (selectedMenuItem)
-        {
-        case 0:
-        default:
-            SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(2));
-            break;
-        case 1:
-            if (isScrolled)
-                SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(3) - MENU_SCROLL_SHIFT);
-            else
-                SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(3));
-            break;
-        case 2:
-            if (isScrolled)
-                SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(4) - MENU_SCROLL_SHIFT);
-            else
-                SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(4));
-            break;
-        case 3:
-            if (isScrolled)
-                SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(5) - MENU_SCROLL_SHIFT);
-            else
-                SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(5));
-            break;
-        case 4:
-            SetGpuReg(REG_OFFSET_WIN0V, MENU_WIN_VCOORDS(6) - MENU_SCROLL_SHIFT);
             break;
         }
         break;

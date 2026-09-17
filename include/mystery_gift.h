@@ -54,4 +54,6 @@ void MysteryGift_DisableStats(void);
 bool32 MysteryGift_TryEnableStatsByFlagId(u16 flagId);
 void MysteryGift_TryIncrementStat(u32 stat, u32 trainerId);
 
+u16 WonderNews_GetRewardInfo(void);
+
 #endif //GUARD_MYSTERY_GIFT_H

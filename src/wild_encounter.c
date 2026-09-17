@@ -498,36 +498,6 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemon *mons, enum WildPokemo
 
 // Mostly equivalent to ChooseWildMonIndex_Land
 // NUM_LAND_MONS_ENCOUNTER_SLOTS
-u8 GetLandEncounterSlotForMatchCall(void)
-{
-    int rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
-
-    if (rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_0)
-        return 0;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_1)
-        return 1;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_2)
-        return 2;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_3)
-        return 3;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_3 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_4)
-        return 4;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_4 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_5)
-        return 5;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_5 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_6)
-        return 6;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_6 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_7)
-        return 7;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_7 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_8)
-        return 8;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
-        return 9;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_9 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_10)
-        return 10;
-    else
-        return 11;
-}
-
 // NUM_WATER_MONS_ENCOUNTER_SLOTS
 u32 ChooseWildMonIndex_Water(void)
 {
@@ -558,23 +528,6 @@ u32 ChooseWildMonIndex_Water(void)
 
 // Mostly equivalent to ChooseWildMonIndex_WaterRock
 // NUM_WATER_MONS_ENCOUNTER_SLOTS
-u8 GetWaterEncounterSlotForMatchCall(void)
-{
-    int rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
-
-    if (rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_0)
-        return 0;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_1)
-        return 1;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_2)
-        return 2;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_3)
-        return 3;
-    else
-        return 4;
-}
-
-
 // NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS
 u32 ChooseWildMonIndex_Rocks(void)
 {

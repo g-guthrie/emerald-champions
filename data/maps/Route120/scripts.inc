@@ -308,14 +308,6 @@ Route120_EventScript_Robert::
 	msgbox Route120_Text_ROBERT_1_LocalConversation, MSGBOX_NPC
 	end
 
-Route120_EventScript_RegisterRobert::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route120_Text_RobertRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ROBERT_1
-	release
-	end
-
 Route120_EventScript_RematchRobert::
 	msgbox Route120_Text_ROBERT_1_LocalConversation, MSGBOX_NPC
 	end

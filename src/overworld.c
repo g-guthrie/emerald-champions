@@ -41,7 +41,6 @@
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "map_preview_screen.h"
-#include "match_call.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "mirage_tower.h"
@@ -904,10 +903,6 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetDexNavSearch();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-#if FREE_MATCH_CALL == FALSE
-    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
-#endif //FREE_MATCH_CALL
-
     if (I_VS_SEEKER_CHARGING != 0)
         MapResetTrainerRematches(mapGroup, mapNum);
 
@@ -965,10 +960,6 @@ static void LoadMapFromWarp(bool32 a1)
     // reset hours override on every warp
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-#if FREE_MATCH_CALL == FALSE
-    TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-#endif //FREE_MATCH_CALL
-
     if (I_VS_SEEKER_CHARGING != 0)
          MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
 
@@ -2137,7 +2128,6 @@ void CB2_ContinueSavedGame(void)
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gExitStairsMovementDisabled = TRUE;
-    InitMatchCallCounters();
     if (UseContinueGameWarp() == TRUE)
     {
         ClearContinueGameWarpStatus();

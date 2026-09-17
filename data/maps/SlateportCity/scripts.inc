@@ -124,7 +124,6 @@ SlateportCity_EventScript_ScottScene::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_SCOTT_MATCH_CALL
 	msgbox SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_SLATEPORT_SCOTT, SlateportCity_Movement_ScottExit
