@@ -1,0 +1,103 @@
+{
+  "play_order": 182,
+  "e_group": "E0267",
+  "trainer": "TRAINER_WENDY",
+  "class": "ace",
+  "cap": 54,
+  "difficulty": "medium",
+  "pass": "build-16 AI rerun",
+  "purpose": "Measure commits 738e5a8809 (pair search no longer stops with only Protect boards scored for a body) and d50e8337c8 (no authored ACTIVATE trigger on the turn the recipient shields) against the prior receipt's Protect ledger.",
+  "build": {
+    "build_dir": "work/agent-battle-build-16",
+    "inputs_sha256": "448b369f7a06b9f64b7662605c2d39d2bb6a33a5ddfa60ccd7a6bb4d7007f1ab",
+    "stale_build_check": "PASS - driver asserted level_cap 54 from the ROM; no 'campaign cap did not reach N; the ROM reports 0' report."
+  },
+  "prior_receipt": "work/playtest/182-TRAINER_WENDY/receipt.json",
+  "reused_from_prior": {
+    "party_manifest": "work/playtest/182-TRAINER_WENDY/party_b54_wendy.json",
+    "seed": 2,
+    "why": "party_b54_wendy.json / seed 2 is the prior receipt's decisive attempt (attempt 2, the win; attempt 1 was a recorded player error)."
+  },
+  "resolved_levels_check": "PASS - live board matched cap + offset - 2: Roserade 53, Swanna 53, Hydreigon 53, Mienshao 53, Drifblim 53, Mega Scizor 54.",
+  "attempt": {
+    "n": 1,
+    "run_dir": "work/playtest/182-TRAINER_WENDY/b16",
+    "seed": 2,
+    "party": "party_b54_wendy.json",
+    "outcome": "won",
+    "turns": 4,
+    "decisions": 7,
+    "player_faints": 3,
+    "opponent_faints": 6,
+    "ai_decision_seconds_max": 1.038,
+    "ai_decision_budget": "PASS - 1.038s against the 1.2s complete opponent decision budget.",
+    "result_vs_prior": "Identical headline to the prior receipt's decisive attempt: won 6-3 in 4 turns.",
+    "player_faints_detail": [
+      "Regieleki turn 2 (Roserade Leaf Storm)",
+      "Incineroar turn 3 (Mienshao Close Combat, 2x)",
+      "Mega Gardevoir turn 5 (Drifblim Shadow Ball, 2x, at 94 HP)"
+    ],
+    "opponent_faints_detail": [
+      "Swanna turn 2 (Transistor Thunderbolt, 4x, the turn after its Protect)",
+      "Roserade turn 2 (Knock Off - its Focus Sash was already inert at 105/143 and was knocked off after the damage)",
+      "Hydreigon turn 3 (Pixilate Hyper Voice, 4x)",
+      "Mienshao turn 3 (the same Hyper Voice, 2x)",
+      "Mega Scizor turn 4 (Zapdos Heat Wave, 4x, on its Mega Evolution turn)",
+      "Drifblim turn 5 (Thunderbolt, 2x)"
+    ],
+    "narrative": "The prior receipt's winning line reproduced almost exactly. Fake Out denied Roserade turn 1 while Swanna correctly Protected the 4x Thunderbolt; turn 2 that Thunderbolt landed and Knock Off removed a Roserade whose Focus Sash was no longer at full HP, but Leaf Storm took Regieleki with it. Mega Gardevoir's Pixilate Hyper Voice then double-KOed Hydreigon (4x) and Mienshao (2x) in one turn while Mienshao's Close Combat removed Incineroar. Zapdos's Heat Wave took Mega Scizor at 4x on its transformation turn, behind a Gardevoir Protect that blocked the Technician Bullet Punch. Drifblim spent that turn on Tailwind and then traded itself for Gardevoir."
+  },
+  "protect_ledger_build16": [
+    {
+      "turn": 1,
+      "battler": "SWANNA (159/159)",
+      "call": "Protect",
+      "verdict": "REAL - excellent",
+      "payoff": "Blocked Regieleki's Life Orb Transistor Thunderbolt, which is 4x into Water/Flying. Lethality is proven rather than estimated: the identical attack KOed Swanna from full 159 HP on the very next turn. Its partner Roserade attacked on that same turn, so the guard cost the pair nothing."
+    }
+  ],
+  "protect_summary_build16": {
+    "opponent_guards_total": 1,
+    "empty": 0,
+    "consecutive_same_battler": 0,
+    "note": "Five of Wendy's six members carry Protect (Roserade, Swanna, Hydreigon, Drifblim, Mega Scizor) and all five had live turns. Only Swanna guarded. Roserade chose Leaf Storm twice, Hydreigon chose Dark Pulse, Mega Scizor chose Bullet Punch on its transformation turn, and Drifblim chose Tailwind."
+  },
+  "comparison_to_prior_receipt": {
+    "prior_ledger_scope": "receipt.json recorded two ledger entries across two attempts, one of which was my own player Protect and is not an opponent guard.",
+    "empty_protects_before": 0,
+    "empty_protects_after": 0,
+    "consecutive_protects_before": 0,
+    "consecutive_protects_after": 0,
+    "total_opponent_guards_before": 1,
+    "total_opponent_guards_after": 1,
+    "verdict": "Exact reproduction, and a no-regression result. The prior receipt called Swanna's turn-1 guard 'the single best Protect seen in this block'; build-16 makes the same call on the same turn against the same threat, and adds no guard anywhere else. Wendy was already clean on this axis, so this room is a control rather than a repair measurement. The fixes did not introduce a guard on any of the four other Protect carriers.",
+    "drifblim_note": "Drifblim is the body this rerun was asked to watch. It did not guard. On turn 4, with its partner Mega Scizor about to be removed, it chose Tailwind - a real action, not an empty Protect. See ai_defects for the separate question of whether Tailwind was the best of its four options there."
+  },
+  "strategy_checks": [
+    {"check": "Roserade chooses Sleep Powder or direct pressure rather than stalling", "result": "PASS", "evidence": "Turns 1 and 2 it chose Leaf Storm into Regieleki both times (turn 1 was denied by Fake Out's flinch, so the first selection never resolved). Direct pressure, and it KOed my fastest attacker with the second one."},
+    {"check": "Swanna sets Tailwind or attacks, and turn two cashes the window rather than wasting it on defensive switches", "result": "PASS", "evidence": "Turn 1 Protect against a proven-lethal 4x hit, turn 2 Hydro Pump into Incineroar (2x). No defensive switching, and it never repeated the guard."},
+    {"check": "TAILWIND: two Tailwind users so the speed control survives a knockout", "result": "PASS mechanically", "evidence": "Swanna never got to set it, and Drifblim did on turn 4: 'A tailwind started blowing on the opposing side!' with SIDE_STATUS_TAILWIND on the opponent side. The second user existed and used it, which is the authored point."},
+    {"check": "Mienshao's Fake Out supports Mega Scizor's attack or a safe Swords Dance", "result": "FAIL - not executed", "evidence": "Mienshao entered on turn 3 holding Fake Out and chose Close Combat instead. Close Combat KOed Incineroar and was a good choice on its own terms, but the printed Fake Out + Scizor pairing did not appear; Scizor was not on the field on Mienshao's only turn, so the combination had no chance to form. Recorded as deployment sequencing, not a bad selection."},
+    {"check": "Hydreigon is immediate special coverage", "result": "PASS", "evidence": "Turn 3: Dark Pulse into the Gardevoir slot. Correct type read at turn start - Gardevoir was still pure Psychic when the decision was made, so Dark Pulse was 2x, and Draco Meteor would have been 0x once it Mega Evolved into Dragon-immune Fairy."},
+    {"check": "Drifblim has a berry-triggered Unburden mode", "result": "UNTESTED", "evidence": "Drifblim took one 1x Heat Wave (238 -> 159) and never fell below its Sitrus threshold, so the berry was never consumed and Unburden never activated."},
+    {"check": "Mega Scizor's Technician Bullet Punch is the priority closer", "result": "PASS", "evidence": "Turn 4: Mega Evolved on entry+1 and immediately used Bullet Punch into the 94 HP Mega Gardevoir, which is 2x into Fairy and would have been lethal. My Protect is what stopped it."},
+    {"check": "Every opponent Protect has a payoff (the object of this pass)", "result": "PASS", "evidence": "1 of 1 with concrete payoff; see protect_ledger_build16."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P16-W1",
+      "severity": "judgment, not illegal",
+      "turn": 4,
+      "board": "Drifblim 238/238 and Scizor 156/156 (Wendy's last two) versus Mega Gardevoir on 94/154 and a full-HP Zapdos",
+      "chosen": "Drifblim used Tailwind",
+      "problem": "Shadow Ball is 2x into Mega Gardevoir's Psychic/Fairy and the target was on 94 of 154 HP, which is inside Drifblim's one-hit range - it proved so on the very next turn, where the same Shadow Ball KOed that same Gardevoir outright. Spending the turn on four turns of team Speed instead, with only two members left and a partner that was about to be removed by a revealed 4x Heat Wave, bought nothing: Scizor died that turn and Drifblim died the next, so the Tailwind never moved a single action order.",
+      "better": "Shadow Ball into the Mega Gardevoir slot, taking the opposing Mega off the board while its own Mega was still alive.",
+      "note": "Not a defect in the strict sense - Tailwind is authored, the second Tailwind user is a deliberate design point, and the AI could not know I was about to Protect. Recorded because the same evaluation that now correctly stops empty guards should also be pricing a setup move against an available KO on the opponent's Mega."
+    }
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NOT APPLIED, explicitly. The prior receipt's decision was KEEP and this rerun does not flip it. The result is identical - won 6-3 in four turns - and 3 player faints satisfies the brief's keep condition ('won with 2+ faints or after a real fight') and meets the AGENTS.md benchmark of roughly three faints against a well-prepared competitive party. No opponent line in the teams file was touched.",
+  "could_this_be_cooler": "Unchanged from the prior receipt, and this run supports its one criticism sharply. The dossier already notes that three of the six carry support and only two are real win conditions; turn 4 is that problem in miniature, with Drifblim setting Tailwind for a team that had one Pokemon left. Drifblim's Unburden mode has now gone untested in two recorded runs because nothing ever pushes it past its Sitrus threshold before it dies. A Nasty Plot or Swords Dance user in one of the support slots - the improvement the dossier itself names - would give those turns something to buy. No species, move, item, ability or EV change made in this pass.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-16. Not earned campaign traversal."
+}
