@@ -43835,7 +43835,7 @@
     },
     {
       "species": "SPECIES_MEGANIUM",
-      "name": "Mega Sol Healer",
+      "name": "Mega Triage Healer",
       "moves": [
         "MOVE_HEAL_PULSE",
         "MOVE_GIGA_DRAIN",
@@ -43843,7 +43843,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_MEGA_SOL",
+      "ability": "ABILITY_TRIAGE",
       "item": "ITEM_NONE",
       "required_item": "ITEM_MEGANIUMITE",
       "field_dependency": null,

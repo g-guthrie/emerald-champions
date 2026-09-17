@@ -491,7 +491,7 @@ static const u8 sEmeraldChampionsSetName_594[] = _("Flower Veil Guard");
 static const u8 sEmeraldChampionsSetName_595[] = _("Triage Offense");
 static const u8 sEmeraldChampionsSetName_596[] = _("Physical Garden");
 static const u8 sEmeraldChampionsSetName_597[] = _("Mega Sol Cannon");
-static const u8 sEmeraldChampionsSetName_598[] = _("Mega Sol Healer");
+static const u8 sEmeraldChampionsSetName_598[] = _("Mega Triage Healer");
 static const u8 sEmeraldChampionsSetName_599[] = _("Mega Sol Coverage");
 static const u8 sEmeraldChampionsSetName_600[] = _("Mega Sol Control");
 static const u8 sEmeraldChampionsSetName_6909[] = _("Scarf Eruption");
@@ -9497,7 +9497,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .requiredItem = ITEM_MEGANIUMITE,
         .requiredMove = MOVE_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_MEGA_SOL,
+        .ability = ABILITY_TRIAGE,
         .evs = {252, 0, 252, 0, 4, 0},
     }},
     {.name = sEmeraldChampionsSetName_599, .preset = {
