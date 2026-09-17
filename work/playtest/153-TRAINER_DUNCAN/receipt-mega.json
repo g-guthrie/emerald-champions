@@ -1,0 +1,32 @@
+{
+  "play_order": 153, "e_group": "E0197", "trainer": "TRAINER_DUNCAN", "cap": 48, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Does lead Mega Machamp now Mega-Evolve on turn 1 instead of holding a turn (P13-D6 retest)?",
+  "party_manifest": "work/playtest/153-TRAINER_DUNCAN/party-a1.json",
+  "party_reuse": "Unchanged from receipt.json; same cap 48, same location, chronology audit unchanged.",
+  "level_offsets_at_run": {"MACHAMP": -1, "GHOLDENGO": 0, "DHELMISE": 0, "DECIDUEYE": 1},
+  "resolved_opponent_levels": {"MACHAMP": 45, "GHOLDENGO": 46, "DHELMISE": 46, "DECIDUEYE": 47},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/153-TRAINER_DUNCAN/m1", "seed": 73, "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 4,
+     "narrative": "T1 MACHAMP MEGA-EVOLVED BEFORE ITS FIRST ACTION; Incineroar Fake Out flinched it (the prior run's Fake Out into the Ghost Gholdengo was the mistake I did not repeat), Scarf Gholdengo Shadow Ball broke Gengar's Sash, Gengar Shadow Ball KO'd Gholdengo. T2 Gengar (1 HP) out to Spiritomb, which took Bullet Punch; Dhelmise Protect blocked Flare Blitz. T3 Mega Drain Punch took Incineroar 194->57, Flare Blitz KO'd Dhelmise, Will-O-Wisp burned Mega Machamp. T4 Incineroar out to Togekiss; Decidueye Protect blocked Dark Pulse; Drain Punch into Togekiss was 'mostly ineffective'. T5 Air Slash + Dark Pulse KO'd Decidueye; Knock Off took Spiritomb's Leftovers, Spirit Shackle 78 into Spiritomb. T6 Air Slash + Dark Pulse KO'd the burned Mega Machamp (Ice Punch 36 into Togekiss)."}
+  ],
+  "mega_check": {"evolved": true, "turn": 1, "first_action": true, "board": "Lead Machamp @Machampite beside Gholdengo vs Gengar + Incineroar (Intimidated). Mega Evolution resolved before Fake Out flinched it. P13-D6 no longer reproduces."},
+  "strategy_checks": [
+    {"check": "Machamp Mega-Evolves turn 1", "result": "PASS", "evidence": "T1 messages 'Machampite is reacting' / 'has Mega Evolved'; state shows MACHAMP_MEGA POWER_FISTS before any move."},
+    {"check": "Gholdengo picks a useful locked attack", "result": "PASS", "evidence": "T1 Shadow Ball into Gengar (2x, Sash-break), not Make It Rain."},
+    {"check": "Machamp targets sensibly", "result": "PASS", "evidence": "Bullet Punch into the 1-HP Gengar slot T2, Drain Punch into Incineroar (2x) T3, Knock Off Leftovers T5, Ice Punch into Togekiss (2x) T6. Drain Punch into Togekiss T4 was resisted (Flying) but Spiritomb is immune, so the target choice was the only Fighting-legal one."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Dhelmise T2 blocked a lethal-range Flare Blitz (4x); Decidueye T4 blocked a 2x Dark Pulse. Neither repeated."}
+  ],
+  "protect_ledger": [
+    {"turn": 2, "battler": "DHELMISE", "payoff": "Blocked Flare Blitz (2x) that KO'd it a turn later."},
+    {"turn": 4, "battler": "DECIDUEYE", "payoff": "Blocked Dark Pulse (2x) on its entry turn."}
+  ],
+  "ai_defects": [],
+  "difficulty_reading": "The Mega now fires on turn 1, but the fight got EASIER in my hands: zero faints in six turns because the prior run's two losses came from a Fake Out into a Ghost and a Sash left exposed. Gengar to 1 HP and Incineroar to 57 were the only pressure. Brief rule: won first try with 0-1 faints -> +1 on the weakest one or two members.",
+  "level_changes": {"rule_applied": "+1 on the two 0-offset members (never the Mega first). Budget: no prior change on any member.",
+    "changes": [{"member": "GHOLDENGO", "before": 0, "after": 1}, {"member": "DHELMISE", "before": 0, "after": 1}],
+    "rerun": "NOT PERFORMED on build-10: authored offsets are compiled into the headless ROM, and this block may not run make. The rerun at 47/47 belongs to the next snapshot."},
+  "could_this_be_cooler": "Unchanged from receipt.json: four strong solos, now with the Mega actually online from turn 1.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}
