@@ -2104,3 +2104,22 @@ clock, rather than one that was considered and declined.
 reserve is not sent into the attack the player has already shown. It passes as
 written, so that six-room family does not reproduce this way either, and the
 fixture stands as a pin while I build a board that does.
+
+## The switch-in family does not reproduce on constructed boards either
+
+Two more fixtures from E0464 and E0466, both green as written: a reserve is not
+sent into an attack the player has already shown, and the frail cannon is not
+chosen over the bulky body when a revealed priority attack is doubled against
+it.
+
+That is four constructed boards now across six reported rooms, all passing. The
+E0409 lesson applies directly: **that defect was invisible to fixtures because
+it lived in the shared decision budget**, which a two-turn fixture never
+exhausts. "Five hard switches in six turns" is a lot of decisions taken under
+a clock, and the candidate comparison is exactly the part of the search the
+clock cuts. So the next step for this family is the instrumented live run, not
+more boards — with a trace recording, per switch actually emitted, which path
+produced it (the pair search's own reserve enumeration or the candidate
+comparison) and whether the budget had already expired when it did.
+
+The workflow for that is now in `docs/VERIFICATION.md` and takes one build.
