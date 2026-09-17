@@ -40,3 +40,34 @@ AI_DOUBLE_BATTLE_TEST("EC switch-in: a reserve is not sent into the attack that 
         EXPECT_NE(opponentLeft->species, SPECIES_MANECTRIC);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC switch-in: the reserve that hits hardest is not the one that dies first")
+{
+    GIVEN {
+        AI_FLAGS(ENTRY_FLAGS);
+        // Olivia's and Bethany's shape: the lead is under pressure, so leaving
+        // is free, and the most attractive reserve on offence is a frail
+        // special attacker that the revealed priority attack removes before it
+        // can use any of it. The bulky body on the same bench survives and
+        // attacks next turn.
+        PLAYER(SPECIES_RILLABOOM) { Level(50); HP(400); MaxHP(400); Attack(200); Defense(150); SpDefense(150); Speed(80); Ability(ABILITY_GRASSY_SURGE); Moves(MOVE_GRASSY_GLIDE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_ARAQUANID) { Level(50); HP(90); MaxHP(300); Defense(90); SpDefense(90); Speed(40); Ability(ABILITY_WATER_BUBBLE); Moves(MOVE_LIQUIDATION); }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_INTELEON) { Level(50); HP(80); MaxHP(260); Defense(50); SpDefense(50); SpAttack(220); Speed(140); Ability(ABILITY_TORRENT); Moves(MOVE_ICE_BEAM); }
+        OPPONENT(SPECIES_TOXAPEX) { Level(50); HP(300); MaxHP(300); Defense(180); SpDefense(180); Speed(20); Ability(ABILITY_REGENERATOR); Moves(MOVE_SCALD); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_GRASSY_GLIDE, target: opponentLeft);
+            MOVE(playerRight, MOVE_SPLASH);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_GRASSY_GLIDE, target: opponentLeft);
+            MOVE(playerRight, MOVE_SPLASH);
+        }
+    } THEN {
+        // The frail cannon may not be the answer to a revealed priority attack
+        // that is doubled against it.
+        EXPECT_NE(opponentLeft->species, SPECIES_INTELEON);
+    }
+}
