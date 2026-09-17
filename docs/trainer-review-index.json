@@ -6,7 +6,7 @@
   "previously_reviewed_access_deferred": [],
   "current_review_indices": null,
   "within_unlock_order": "A chosen coherent review route among simultaneously available branches, not a claim every trainer is mandatory or the order is forced.",
-  "source_sha256": "aa95903c0f3211b26649b2b984a0b40c2b30109074c1a529a34408b2338df2eb",
+  "source_sha256": "5c47a69912a231fea698f367d4b491c4314c5c3543dbdefdd973ace588ff5920",
   "encounters": [
     {
       "key": "TRAINER_BRENDAN_ROUTE_103_MUDKIP|TRAINER_BRENDAN_ROUTE_103_TORCHIC|TRAINER_BRENDAN_ROUTE_103_TREECKO|TRAINER_MAY_ROUTE_103_MUDKIP|TRAINER_MAY_ROUTE_103_TORCHIC|TRAINER_MAY_ROUTE_103_TREECKO",
@@ -11688,7 +11688,7 @@
       ],
       "ladder": {
         "L0_authored": true,
-        "L1_ai_fixtures": false,
+        "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
       },
@@ -12026,7 +12026,7 @@
       ],
       "ladder": {
         "L0_authored": true,
-        "L1_ai_fixtures": false,
+        "L1_ai_fixtures": true,
         "L2_benchmark": false,
         "L3_earned_clear": false
       },

@@ -740,7 +740,7 @@ static const u8 sEmeraldChampionsMegaPermissions[TRAINERS_COUNT] =
     [TRAINER_NAOMI] = 0x84,
     [TRAINER_WALLACE_DOUBLES_LEGENDS] = 0x80,
     [TRAINER_LEAF_ALTERING_CAVE] = 0xA0,
-    [TRAINER_STEVEN] = 0xA0,
+    [TRAINER_STEVEN] = 0xA4,
     [TRAINER_CYNTHIA_1] = 0xA0,
 };
 
