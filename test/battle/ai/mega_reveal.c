@@ -90,3 +90,54 @@ AI_DOUBLE_BATTLE_TEST("EC Mega election: the stone is spent on a status turn as 
         EXPECT_EQ(opponentLeft->species, SPECIES_ALTARIA_MEGA);
     }
 }
+
+// Champion Wallace's Mega Starmie sat four turns across three builds reporting
+// the Mega as usable and never evolving. One activation marks both partner
+// slots as having used the gimmick, and the gate the AI controller consults on
+// its way to executing a choice asked only that, never the trainer's allowance.
+// Drake is the cheap board for it: his authored stones are party slots 1 and 6,
+// so the lead evolves immediately and the reserve has to evolve after it.
+AI_DOUBLE_BATTLE_TEST("EC Mega budget: a licensed trainer's reserve still evolves after its partner")
+{
+    GIVEN {
+        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_DRAKE;
+        AI_FLAGS(MEGA_ELECTION_FLAGS);
+        PLAYER(SPECIES_WEAVILE) {
+            Level(50); HP(400); MaxHP(400); Attack(60); Defense(200);
+            SpAttack(200); SpDefense(200); Speed(200);
+            Moves(MOVE_BLIZZARD, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_WOBBUFFET) {
+            Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5);
+            Moves(MOVE_PROTECT);
+        }
+        // Slot 1: licensed, and bulky enough to stand through the sweep.
+        OPPONENT(SPECIES_KANGASKHAN) {
+            Level(50); HP(400); MaxHP(400); Attack(120); Defense(200);
+            SpDefense(200); Speed(100); Item(ITEM_KANGASKHANITE);
+            Moves(MOVE_DOUBLE_EDGE, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { Level(5); HP(1); MaxHP(1); Speed(1); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_MAGIKARP) { Level(5); HP(1); MaxHP(1); Speed(1); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_MAGIKARP) { Level(5); HP(1); MaxHP(1); Speed(1); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_MAGIKARP) { Level(5); HP(1); MaxHP(1); Speed(1); Moves(MOVE_SPLASH); }
+        // Slot 6: the reserve the defect silenced.
+        OPPONENT(SPECIES_SALAMENCE) {
+            Level(50); HP(300); MaxHP(300); Attack(130); Defense(120);
+            SpDefense(120); Speed(110); Item(ITEM_SALAMENCITE);
+            Moves(MOVE_DRAGON_CLAW, MOVE_PROTECT);
+        }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_BLIZZARD); MOVE(playerRight, MOVE_PROTECT); }
+        TURN { MOVE(playerLeft, MOVE_BLIZZARD); MOVE(playerRight, MOVE_PROTECT); }
+        TURN { MOVE(playerLeft, MOVE_BLIZZARD); MOVE(playerRight, MOVE_PROTECT); }
+        TURN { MOVE(playerLeft, MOVE_BLIZZARD); MOVE(playerRight, MOVE_PROTECT); }
+        TURN { MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT); }
+    } THEN {
+        // The lead spent the side's first stone.
+        EXPECT_EQ(opponentLeft->species, SPECIES_KANGASKHAN_MEGA);
+        // And the licensed reserve still evolved behind it.
+        EXPECT_EQ(opponentRight->species, SPECIES_SALAMENCE_MEGA);
+        EXPECT_EQ(gBattleStruct->gimmick.megaEvolutionsUsed[B_TRAINER_OPPONENT_A], 2);
+    }
+}
