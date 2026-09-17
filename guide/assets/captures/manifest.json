@@ -8,7 +8,37 @@
     "file": "guide/assets/captures/petalburg-city-gym-door.png",
     "x": 15,
     "y": 9,
-    "battle": false
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 15,
+        "y": 9,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 26,
+        "x": 16,
+        "y": 18,
+        "invisible": false
+      },
+      {
+        "local_id": 4,
+        "graphic": 48,
+        "x": 20,
+        "y": 11,
+        "invisible": false
+      },
+      {
+        "local_id": 6,
+        "graphic": 59,
+        "x": 19,
+        "y": 2,
+        "invisible": false
+      }
+    ]
   },
   {
     "id": "petalburg-city-mart",
@@ -19,7 +49,30 @@
     "file": "guide/assets/captures/petalburg-city-mart.png",
     "x": 25,
     "y": 13,
-    "battle": false
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 25,
+        "y": 13,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 26,
+        "x": 16,
+        "y": 18,
+        "invisible": false
+      },
+      {
+        "local_id": 4,
+        "graphic": 48,
+        "x": 20,
+        "y": 10,
+        "invisible": false
+      }
+    ]
   },
   {
     "id": "petalburg-city-pond",
@@ -30,40 +83,118 @@
     "file": "guide/assets/captures/petalburg-city-pond.png",
     "x": 9,
     "y": 24,
-    "battle": false
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 2,
+        "x": 9,
+        "y": 24,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 26,
+        "x": 16,
+        "y": 18,
+        "invisible": false
+      },
+      {
+        "local_id": 3,
+        "graphic": 7,
+        "x": 8,
+        "y": 22,
+        "invisible": false
+      },
+      {
+        "local_id": 7,
+        "graphic": 59,
+        "x": 3,
+        "y": 28,
+        "invisible": false
+      }
+    ]
   },
   {
     "id": "petalburg-gym-entrance",
     "map": "PetalburgCity_Gym",
-    "caption": "Inside the Gym, looking up the challenge hall",
+    "caption": "Inside the Gym, the challenge hall runs north",
     "chapter": 4,
     "ok": true,
     "file": "guide/assets/captures/petalburg-gym-entrance.png",
     "x": 4,
-    "y": 106,
-    "battle": false
+    "y": 110,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 4,
+        "y": 110,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 129,
+        "x": 4,
+        "y": 107,
+        "invisible": false
+      }
+    ]
   },
   {
     "id": "petalburg-gym-norman",
     "map": "PetalburgCity_Gym",
-    "caption": "Norman waits at the top of the hall",
+    "caption": "Norman greets you inside the Gym door",
     "chapter": 4,
     "ok": true,
     "file": "guide/assets/captures/petalburg-gym-norman.png",
     "x": 4,
-    "y": 5,
-    "battle": false
+    "y": 108,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 4,
+        "y": 108,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 129,
+        "x": 4,
+        "y": 107,
+        "invisible": false
+      }
+    ]
   },
   {
     "id": "petalburg-gym-norman-talk",
     "map": "PetalburgCity_Gym",
-    "caption": "Norman will not battle you until four badges are on the case",
+    "caption": "He will not battle you until four badges are on the case",
     "chapter": 4,
     "ok": true,
     "file": "guide/assets/captures/petalburg-gym-norman-talk.png",
     "x": 4,
-    "y": 2,
-    "battle": false
+    "y": 108,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 4,
+        "y": 108,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 129,
+        "x": 4,
+        "y": 107,
+        "invisible": false
+      }
+    ]
   },
   {
     "id": "petalburg-mart-counter",
@@ -74,7 +205,44 @@
     "file": "guide/assets/captures/petalburg-mart-counter.png",
     "x": 1,
     "y": 4,
-    "battle": false
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 1,
+        "y": 4,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 83,
+        "x": 1,
+        "y": 3,
+        "invisible": false
+      },
+      {
+        "local_id": 2,
+        "graphic": 19,
+        "x": 9,
+        "y": 4,
+        "invisible": false
+      },
+      {
+        "local_id": 3,
+        "graphic": 7,
+        "x": 6,
+        "y": 3,
+        "invisible": false
+      },
+      {
+        "local_id": 4,
+        "graphic": 20,
+        "x": 5,
+        "y": 5,
+        "invisible": false
+      }
+    ]
   },
   {
     "id": "petalburg-woods-stone",
@@ -85,6 +253,15 @@
     "file": "guide/assets/captures/petalburg-woods-stone.png",
     "x": 45,
     "y": 16,
-    "battle": false
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 45,
+        "y": 16,
+        "invisible": false
+      }
+    ]
   }
 ]

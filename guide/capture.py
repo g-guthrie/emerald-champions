@@ -20,9 +20,13 @@ Shot file format (JSON list):
 
       {"id": "petalburg-gym",
        "map": "MAP_PETALBURG_CITY_GYM", "x": 4, "y": 8,
+       "flags": {"FLAG_HIDE_PETALBURG_GYM_NORMAN": false},
        "steps": [{"hold": "UP", "frames": 40}, {"press": "A", "frames": 90}],
        "caption": "Norman will not battle you yet"}
     ]
+
+Shot keys: id, map, x, y, facing, settle, chapter, flags, vars, items, steps,
+caption. flags/vars/items are applied before the warp.
 """
 import argparse
 import asyncio
@@ -62,6 +66,8 @@ async def run_steps(studio, steps):
             await studio.core.tick(keys=keys(step["press"]), frames=6)
             packet = await hold(studio, 0, max(1, frames - 6))
         else:
+            # A step with only `frames` just waits. Dialogue shots use this:
+            # the text printer is slow, so give a box 500-600 frames to finish.
             packet = await hold(studio, 0, frames)
     return packet
 
@@ -99,6 +105,22 @@ async def capture(shots, out_dir, scale, chapter):
                 studio.core, packet = await studio.boot(build, chapter=want)
                 studio.packet = packet
                 current_chapter = want
+            # Stage story state before the warp, so the map loads with the right
+            # actors standing on it. Flags decide who is visible.
+            const = studio.cat.constants
+            for name, value in (shot.get("flags") or {}).items():
+                if name not in const:
+                    raise KeyError(f"unknown flag {name}")
+                studio.ingest(await studio.core.field_command(6, [const[name], 1 if value else 0]))
+            for name, value in (shot.get("vars") or {}).items():
+                if name not in const:
+                    raise KeyError(f"unknown var {name}")
+                studio.ingest(await studio.core.field_command(7, [const[name], int(value)]))
+            for name, count in (shot.get("items") or {}).items():
+                if name not in const:
+                    raise KeyError(f"unknown item {name}")
+                studio.ingest(await studio.core.field_command(8, [const[name], int(count)]))
+
             m = studio.cat.maps[shot["map"]]
             args = [m["group"], m["num"], int(shot["x"]), int(shot["y"]), int(shot.get("facing", 1))]
             studio.ingest(await studio.core.field_command(2, args))
@@ -116,8 +138,17 @@ async def capture(shots, out_dir, scale, chapter):
 
             path = out_dir / f"{shot['id']}.png"
             save(packet, path, scale)
-            entry.update(ok=True, file=str(path.relative_to(ROOT)),
-                         x=state["x"], y=state["y"], battle=state["battle"])
+            try:
+                shown = str(path.relative_to(ROOT))
+            except ValueError:
+                shown = str(path)
+            entry.update(ok=True, file=shown,
+                         x=state["x"], y=state["y"], battle=state["battle"],
+                         actors=[dict(local_id=a["local_id"], graphic=a["graphic"],
+                                      x=a["x"], y=a["y"], invisible=a["invisible"])
+                                 for a in state["actors"]])
+            if shot.get("debug"):
+                print(f"       actors: {entry['actors']}")
             print(f"  ok   {shot['id']:<34} {shot['map']} ({state['x']},{state['y']})")
         except Exception as exc:                      # noqa: BLE001 - reported, not raised
             entry.update(ok=False, error=f"{type(exc).__name__}: {exc}")
@@ -139,7 +170,7 @@ def main():
 
     shots = json.loads(args.shots.read_text())
     print(f"{len(shots)} shots -> {args.out}")
-    results = asyncio.run(capture(shots, args.out, args.scale, args.chapter))
+    results = asyncio.run(capture(shots, args.out.resolve(), args.scale, args.chapter))
 
     manifest = args.out / "manifest.json"
     manifest.write_text(json.dumps(results, indent=2) + "\n")

@@ -30,40 +30,39 @@
     "id": "petalburg-gym-entrance",
     "map": "PetalburgCity_Gym",
     "x": 4,
-    "y": 106,
-    "facing": 1,
+    "y": 110,
+    "facing": 2,
     "settle": 120,
-    "caption": "Inside the Gym, looking up the challenge hall",
+    "caption": "Inside the Gym, the challenge hall runs north",
     "chapter": 4
   },
   {
     "id": "petalburg-gym-norman",
     "map": "PetalburgCity_Gym",
     "x": 4,
-    "y": 5,
-    "facing": 1,
+    "y": 108,
+    "facing": 2,
     "settle": 120,
-    "caption": "Norman waits at the top of the hall",
+    "caption": "Norman greets you inside the Gym door",
     "chapter": 4
   },
   {
     "id": "petalburg-gym-norman-talk",
     "map": "PetalburgCity_Gym",
     "x": 4,
-    "y": 5,
-    "facing": 1,
+    "y": 108,
+    "facing": 2,
     "settle": 110,
     "steps": [
       {
-        "hold": "UP",
-        "frames": 64
+        "press": "A",
+        "frames": 40
       },
       {
-        "press": "A",
-        "frames": 160
+        "frames": 600
       }
     ],
-    "caption": "Norman will not battle you until four badges are on the case",
+    "caption": "He will not battle you until four badges are on the case",
     "chapter": 4
   },
   {
