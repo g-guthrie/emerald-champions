@@ -555,3 +555,39 @@ td.rar-r  { color: #ff9a6e; }
 
 /* two stacked event screenshots, as the original does for a conversation */
 .ev .pair { display: grid; grid-template-columns: 1fr; gap: 6px; }
+
+/* four-column location grid, for a route with two shops' worth of tables */
+.loc-grid4 {
+  display: grid;
+  grid-template-columns: 1.12in 1.26in 1.52in 2.10in;
+  gap: 0.10in;
+  align-items: start;
+}
+/* The named areas belong to .loc-grid; clear them so this grid flows in order. */
+.loc-grid4 .items,
+.loc-grid4 .tbl,
+.loc-grid4 .mapplate,
+.loc-grid4 .loc-blurb { grid-area: auto; align-self: stretch; }
+
+/* two map plates side by side, for a route folded around a landmark */
+.plates { display: grid; grid-template-columns: 1fr 1fr; gap: 0.14in; margin-top: 0.14in; }
+/* .mapplate carries grid-area: map for the location grid; clear it here. */
+.plates .mapplate { grid-area: auto; }
+.mapplate.half .plate img { width: 100%; }
+.mapplate.half .note {
+  color: #9fd9ef; font-size: 6.6pt; text-align: center;
+  padding-top: 5px; letter-spacing: 0.07em; font-weight: 800;
+}
+
+/* two small screenshots inside a callout, as the original's NOTE does */
+.note-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 7px; max-width: 5.1in; }
+.note-shots .mini { border: 1.5px solid #6a4ea8; border-radius: 3px; overflow: hidden; }
+.note-shots .mini img { display: block; width: 100%; image-rendering: pixelated; }
+
+.loc-grid4 .items li { font-size: 7.6pt; padding: 1.8px 0 1.8px 15px; }
+.loc-grid4 td { font-size: 7.2pt; padding: 1.4px 3px; }
+.loc-grid4 th { font-size: 6.4pt; }
+.loc-grid4 .tbl h3, .loc-grid4 .items h3 { font-size: 8.6pt; }
+.loc-grid4 .foot { font-size: 6.0pt; }
+.plates .mapplate.half .plate img { max-height: 2.20in; width: auto; margin: 0 auto; }
+.plates .mapplate.half { text-align: center; }

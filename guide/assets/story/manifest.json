@@ -1,210 +1,535 @@
 [
   {
-    "id": "woods-lyle",
-    "map": "PetalburgWoods",
-    "caption": "Lyle blocks the southern path",
+    "id": "r104-briney",
+    "map": "Route104",
+    "caption": "Mr. Briney's cottage, with the boat at the dock",
     "chapter": 3,
     "ok": true,
-    "file": "guide/assets/story/woods-lyle.png",
-    "x": 7,
-    "y": 33,
+    "file": "guide/assets/story/r104-briney.png",
+    "x": 17,
+    "y": 51,
     "battle": false,
     "actors": [
       {
         "local_id": 255,
         "graphic": 0,
-        "x": 7,
-        "y": 33,
+        "x": 17,
+        "y": 51,
         "invisible": false
       },
       {
-        "local_id": 9,
+        "local_id": 1,
         "graphic": 36,
-        "x": 7,
-        "y": 32,
+        "x": 15,
+        "y": 60,
+        "invisible": false
+      },
+      {
+        "local_id": 2,
+        "graphic": 10,
+        "x": 24,
+        "y": 49,
+        "invisible": false
+      },
+      {
+        "local_id": 7,
+        "graphic": 88,
+        "x": 12,
+        "y": 54,
+        "invisible": false
+      },
+      {
+        "local_id": 26,
+        "graphic": 20,
+        "x": 11,
+        "y": 44,
+        "invisible": false
+      },
+      {
+        "local_id": 33,
+        "graphic": 50,
+        "x": 15,
+        "y": 59,
         "invisible": false
       }
     ]
   },
   {
-    "id": "woods-james",
-    "map": "PetalburgWoods",
-    "caption": "James guards the northern clearing",
+    "id": "r104-briney-talk",
+    "map": "Route104",
+    "caption": "Mr. Briney will not sail until you have helped him",
     "chapter": 3,
     "ok": true,
-    "file": "guide/assets/story/woods-james.png",
-    "x": 4,
-    "y": 15,
+    "file": "guide/assets/story/r104-briney-talk.png",
+    "x": 12,
+    "y": 52,
     "battle": false,
     "actors": [
       {
         "local_id": 255,
         "graphic": 0,
-        "x": 4,
+        "x": 12,
+        "y": 52,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 36,
+        "x": 15,
+        "y": 60,
+        "invisible": false
+      },
+      {
+        "local_id": 7,
+        "graphic": 88,
+        "x": 12,
+        "y": 54,
+        "invisible": false
+      },
+      {
+        "local_id": 33,
+        "graphic": 50,
+        "x": 15,
+        "y": 59,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "r104-flowershop",
+    "map": "Route104",
+    "caption": "The Pretty Petal flower shop, north half",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/r104-flowershop.png",
+    "x": 5,
+    "y": 19,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 5,
+        "y": 19,
+        "invisible": false
+      },
+      {
+        "local_id": 17,
+        "graphic": 60,
+        "x": 3,
+        "y": 22,
+        "invisible": true
+      },
+      {
+        "local_id": 18,
+        "graphic": 62,
+        "x": 3,
+        "y": 23,
+        "invisible": false
+      },
+      {
+        "local_id": 19,
+        "graphic": 60,
+        "x": 3,
+        "y": 24,
+        "invisible": true
+      },
+      {
+        "local_id": 20,
+        "graphic": 62,
+        "x": 3,
+        "y": 25,
+        "invisible": false
+      },
+      {
+        "local_id": 22,
+        "graphic": 34,
+        "x": 7,
+        "y": 19,
+        "invisible": false
+      },
+      {
+        "local_id": 32,
+        "graphic": 9,
+        "x": 5,
+        "y": 26,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "r104-florist",
+    "map": "Route104",
+    "caption": "The florist outside hands over a Leaf Stone",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/r104-florist.png",
+    "x": 8,
+    "y": 20,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 8,
+        "y": 20,
+        "invisible": false
+      },
+      {
+        "local_id": 17,
+        "graphic": 60,
+        "x": 3,
+        "y": 22,
+        "invisible": true
+      },
+      {
+        "local_id": 18,
+        "graphic": 62,
+        "x": 3,
+        "y": 23,
+        "invisible": false
+      },
+      {
+        "local_id": 19,
+        "graphic": 60,
+        "x": 3,
+        "y": 24,
+        "invisible": true
+      },
+      {
+        "local_id": 20,
+        "graphic": 62,
+        "x": 3,
+        "y": 25,
+        "invisible": false
+      },
+      {
+        "local_id": 22,
+        "graphic": 34,
+        "x": 8,
+        "y": 19,
+        "invisible": false
+      },
+      {
+        "local_id": 32,
+        "graphic": 9,
+        "x": 5,
+        "y": 26,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "r104-twins",
+    "map": "Route104",
+    "caption": "Gina and Mia hold the bridge",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/r104-twins.png",
+    "x": 27,
+    "y": 17,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 2,
+        "x": 27,
+        "y": 17,
+        "invisible": false
+      },
+      {
+        "local_id": 3,
+        "graphic": 47,
+        "x": 31,
+        "y": 24,
+        "invisible": false
+      },
+      {
+        "local_id": 23,
+        "graphic": 6,
+        "x": 27,
         "y": 15,
         "invisible": false
       },
       {
-        "local_id": 10,
-        "graphic": 36,
-        "x": 4,
-        "y": 14,
+        "local_id": 24,
+        "graphic": 6,
+        "x": 28,
+        "y": 15,
+        "invisible": false
+      },
+      {
+        "local_id": 25,
+        "graphic": 15,
+        "x": 21,
+        "y": 25,
+        "invisible": false
+      },
+      {
+        "local_id": 29,
+        "graphic": 59,
+        "x": 37,
+        "y": 22,
+        "invisible": false
+      },
+      {
+        "local_id": 30,
+        "graphic": 82,
+        "x": 35,
+        "y": 22,
         "invisible": false
       }
     ]
   },
   {
-    "id": "woods-scolipite",
-    "map": "PetalburgWoods",
-    "caption": "Scolipite, behind the eastern cut trees",
+    "id": "r104-twins-battle",
+    "map": "Route104",
+    "caption": "The twins offer the first double battle on the road",
     "chapter": 3,
     "ok": true,
-    "file": "guide/assets/story/woods-scolipite.png",
-    "x": 45,
+    "file": "guide/assets/story/r104-twins-battle.png",
+    "x": 27,
     "y": 16,
     "battle": false,
     "actors": [
       {
         "local_id": 255,
         "graphic": 0,
-        "x": 45,
+        "x": 27,
         "y": 16,
+        "invisible": false
+      },
+      {
+        "local_id": 3,
+        "graphic": 47,
+        "x": 31,
+        "y": 24,
+        "invisible": false
+      },
+      {
+        "local_id": 23,
+        "graphic": 6,
+        "x": 27,
+        "y": 15,
+        "invisible": false
+      },
+      {
+        "local_id": 24,
+        "graphic": 6,
+        "x": 28,
+        "y": 15,
+        "invisible": false
+      },
+      {
+        "local_id": 25,
+        "graphic": 15,
+        "x": 21,
+        "y": 25,
+        "invisible": false
+      },
+      {
+        "local_id": 29,
+        "graphic": 59,
+        "x": 37,
+        "y": 22,
+        "invisible": false
+      },
+      {
+        "local_id": 30,
+        "graphic": 82,
+        "x": 35,
+        "y": 22,
         "invisible": false
       }
     ]
   },
   {
-    "id": "woods-heracronite",
-    "map": "PetalburgWoods",
-    "caption": "Heracronite in the middle of the wood",
+    "id": "r104-swampertite",
+    "map": "Route104",
+    "caption": "Swampertite on the northern shore",
     "chapter": 3,
     "ok": true,
-    "file": "guide/assets/story/woods-heracronite.png",
-    "x": 35,
-    "y": 21,
+    "file": "guide/assets/story/r104-swampertite.png",
+    "x": 39,
+    "y": 16,
     "battle": false,
     "actors": [
       {
         "local_id": 255,
         "graphic": 0,
-        "x": 35,
-        "y": 21,
+        "x": 39,
+        "y": 16,
         "invisible": false
       },
       {
         "local_id": 3,
-        "graphic": 117,
-        "x": 26,
-        "y": 17,
+        "graphic": 47,
+        "x": 31,
+        "y": 24,
         "invisible": false
       },
       {
-        "local_id": 4,
-        "graphic": 23,
-        "x": 26,
-        "y": 20,
+        "local_id": 29,
+        "graphic": 59,
+        "x": 37,
+        "y": 22,
+        "invisible": false
+      },
+      {
+        "local_id": 30,
+        "graphic": 82,
+        "x": 35,
+        "y": 22,
         "invisible": false
       }
     ]
   },
   {
-    "id": "woods-butterfrenite",
-    "map": "PetalburgWoods",
-    "caption": "Butterfrenite at the north-west corner",
+    "id": "r104-sceptilite",
+    "map": "Route104",
+    "caption": "Sceptilite at the top of the route",
     "chapter": 3,
     "ok": true,
-    "file": "guide/assets/story/woods-butterfrenite.png",
-    "x": 4,
+    "file": "guide/assets/story/r104-sceptilite.png",
+    "x": 5,
     "y": 9,
     "battle": false,
     "actors": [
       {
         "local_id": 255,
         "graphic": 0,
-        "x": 4,
+        "x": 5,
         "y": 9,
-        "invisible": false
-      },
-      {
-        "local_id": 10,
-        "graphic": 36,
-        "x": 4,
-        "y": 14,
         "invisible": false
       }
     ]
   },
   {
-    "id": "woods-lopunnite",
-    "map": "PetalburgWoods",
-    "caption": "Lopunnite on the western track",
+    "id": "r104-berries",
+    "map": "Route104",
+    "caption": "Berry soil south of the woods entrance",
     "chapter": 3,
     "ok": true,
-    "file": "guide/assets/story/woods-lopunnite.png",
-    "x": 4,
-    "y": 27,
+    "file": "guide/assets/story/r104-berries.png",
+    "x": 23,
+    "y": 42,
     "battle": false,
     "actors": [
       {
         "local_id": 255,
         "graphic": 0,
-        "x": 4,
-        "y": 27,
+        "x": 23,
+        "y": 42,
         "invisible": false
       },
       {
-        "local_id": 9,
-        "graphic": 36,
-        "x": 7,
-        "y": 32,
+        "local_id": 2,
+        "graphic": 10,
+        "x": 25,
+        "y": 50,
+        "invisible": false
+      },
+      {
+        "local_id": 5,
+        "graphic": 20,
+        "x": 30,
+        "y": 49,
+        "invisible": false
+      },
+      {
+        "local_id": 13,
+        "graphic": 62,
+        "x": 22,
+        "y": 41,
+        "invisible": false
+      },
+      {
+        "local_id": 14,
+        "graphic": 60,
+        "x": 23,
+        "y": 41,
+        "invisible": true
+      },
+      {
+        "local_id": 15,
+        "graphic": 62,
+        "x": 24,
+        "y": 41,
         "invisible": false
       }
     ]
   },
   {
-    "id": "woods-cut-trees",
-    "map": "PetalburgWoods",
-    "caption": "Cut opens the eastern half of the wood",
+    "id": "r104-billy",
+    "map": "Route104",
+    "caption": "Billy, first trainer on the southern beach",
     "chapter": 3,
     "ok": true,
-    "file": "guide/assets/story/woods-cut-trees.png",
+    "file": "guide/assets/story/r104-billy.png",
     "x": 18,
-    "y": 10,
+    "y": 68,
     "battle": false,
     "actors": [
       {
         "local_id": 255,
         "graphic": 0,
         "x": 18,
-        "y": 10,
+        "y": 68,
         "invisible": false
       },
       {
-        "local_id": 1,
-        "graphic": 82,
-        "x": 19,
-        "y": 10,
+        "local_id": 4,
+        "graphic": 7,
+        "x": 27,
+        "y": 63,
         "invisible": false
       },
       {
-        "local_id": 2,
-        "graphic": 82,
-        "x": 19,
-        "y": 11,
+        "local_id": 6,
+        "graphic": 14,
+        "x": 28,
+        "y": 74,
+        "invisible": false
+      },
+      {
+        "local_id": 28,
+        "graphic": 35,
+        "x": 18,
+        "y": 67,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "r104-winston",
+    "map": "Route104",
+    "caption": "Winston guards the northern path",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/r104-winston.png",
+    "x": 21,
+    "y": 26,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 21,
+        "y": 26,
         "invisible": false
       },
       {
         "local_id": 3,
-        "graphic": 117,
-        "x": 26,
-        "y": 17,
+        "graphic": 47,
+        "x": 31,
+        "y": 24,
         "invisible": false
       },
       {
-        "local_id": 8,
-        "graphic": 9,
-        "x": 15,
-        "y": 18,
+        "local_id": 25,
+        "graphic": 15,
+        "x": 21,
+        "y": 25,
         "invisible": false
       }
     ]
