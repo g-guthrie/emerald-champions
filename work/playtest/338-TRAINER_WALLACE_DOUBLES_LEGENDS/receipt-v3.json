@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "trainer": "TRAINER_WALLACE_DOUBLES_LEGENDS",
+  "encounter": "E0510",
+  "play_order": 338,
+  "class": "elite",
+  "location": "CaveOfOrigin_DianciesRoom",
+  "cap": 100,
+  "difficulty": "medium",
+  "opponent_levels_observed": "all six members L104 (cap 100 + authored offset 6 - 2 for Medium); teams file NOT edited in this pass",
+  "iteration": 2,
+  "builds": {
+    "v3-a1..v3-a5": {
+      "note": "previous agent's run, killed by a usage limit; reconstructed from events.jsonl/result.json, not replayed",
+      "rom_sha256": "ca7ee500c1688436bffee5a9532a9a7792e529f3d14cc5c83707af4a9d99502b",
+      "elf_sha256": "bead80c443dbb6366003d6bd1f570662e3562acaa6dba5301242940baecca504"
+    },
+    "v3-a6..v3-a7": {
+      "note": "played fresh this session on the current snapshot work/agent-battle-build-16",
+      "inputs_stamp_sha256": "448b369f7a06b9f64b7662605c2d39d2bb6a33a5ddfa60ccd7a6bb4d7007f1ab",
+      "rom_sha256": "8f2abbcb06f92816f59864ddd03036fd12345175d2db33ad484261e2078fcdae",
+      "elf_sha256": "2b73cfab517165ade29ebc20a369adfdd45a81e5b60a56c28bdcd414801ce0d5"
+    }
+  },
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "attempts": [
+    {
+      "run_dir": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/v3-a1",
+      "party_manifest": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v2_a1_wideguard_grass.json",
+      "party": "Mega Gallade (Wide Guard) + Assault Vest Tapu Bulu, Chien-Pao, Great Tusk, Ting-Lu, Rillaboom",
+      "seed": 1,
+      "outcome": "lost",
+      "turns": 4,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "opponent_killed": [
+        "KYOGRE_PRIMAL",
+        "LUCARIO",
+        "ZAMAZENTA_CROWNED"
+      ],
+      "door_targeted": "Wide Guard + Grass: blank Water Spout with Mega Gallade's Wide Guard, OHKO Kyogre with Grassy Terrain Wood Hammer",
+      "authored_member_that_should_close_it": "LUCARIO (Follow Me turn 1, Feint lifting Wide Guard)",
+      "did_it_close": "PARTIAL. Lucario DID use Follow Me on turn 1 (act turn 0->1) - the only one of the six openers where it did. But Mega Gallade is faster than Lucario and Close Combat killed the redirector outright (357 damage into 357 HP) before Tapu Bulu moved, so Wood Hammer went through and also OHKOd Kyogre (419 into 419). Both leads died on turn 1. Wide Guard was never actually used by the player (Gallade clicked Close Combat), so Feint was never needed.",
+      "what_decided_it": "the second wave. Zapdos (Hurricane) and Zamazenta (Body Press) took four player Pokemon in three turns; Zamazenta never needed Iron Defense because Body Press was already KOing every turn, and Melmetal closed with Double Iron Bash.",
+      "protect_ledger": [],
+      "notes": "Zapdos Tailwind fired on turn 3 (act turn 2->3), payoff: it survived the whole game. Static paralysed Chien-Pao; Rocky Helmet collected on Gallade, Rillaboom and Chien-Pao. Rillaboom's Fake Out flinched Zapdos (legal: Zapdos holds Rocky Helmet, not the Covert Cloak)."
+    },
+    {
+      "run_dir": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/v3-a2",
+      "party_manifest": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v2_a2_trick_room.json",
+      "party": "Cresselia (Trick Room) + Booster Iron Hands, Melmetal, Marowak-Alola, Hatterene, Amoonguss",
+      "seed": 2,
+      "outcome": "lost",
+      "turns": 10,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "opponent_killed": [
+        "KYOGRE_PRIMAL",
+        "LUCARIO",
+        "ZAMAZENTA_CROWNED"
+      ],
+      "door_targeted": "Trick Room: invert Kyogre, Zapdos and Zamazenta and win the speed war",
+      "authored_member_that_should_close_it": "MELMETAL (0 Speed IVs, 67 Speed, moves first under the player's own Trick Room; Iron Fist Double Iron Bash is two 30% flinches a turn)",
+      "did_it_close": "NOT EXERCISED. Trick Room was up twice (Cresselia turn 1, Hatterene turn 7) and the opponent's Melmetal never entered the battle at all. The authored Trick Room door has still never been tested in six attempts.",
+      "what_decided_it": "Lucario's Close Combat, used on seven consecutive turns, plus a full-HP Water Spout on turn 1 that took Iron Hands from 512 to 0 together with that Close Combat. Marowak-Alola (Fire/Ghost) walled Body Press and Close Combat exactly as the crack promises and got the fight to 1-vs-2 before Hurricane finished it.",
+      "protect_ledger": [
+        {
+          "turn": 10,
+          "user": "ZAMAZENTA_CROWNED",
+          "hp_at_use": "43/403",
+          "payoff": "REAL - blocked Marowak-Alola's Bonemerang, which had done 88 the turn before and was lethal; Zamazenta survived one more turn and Hurricane missed Marowak the same turn"
+        }
+      ],
+      "notes": "Zamazenta used Iron Defense on two consecutive turns against a Ground physical attacker and the incoming Bonemerang fell from 272 to 88 - correct, not repetitive guarding. It never used Body Press because Marowak-Alola is a Ghost and Body Press is 0x into it; Heavy Slam is 0.5x, so Iron Defense/Protect was the right stall. Zapdos used Hurricane every single turn and never used Roost."
+    },
+    {
+      "run_dir": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/v3-a3",
+      "party_manifest": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v2_a3_perish_trap.json",
+      "party": "Mega Gengar (Shadow Tag, Perish Song) + Hitmontop (Wide Guard, Intimidate), Ting-Lu, Great Tusk, Chien-Pao, Kingambit",
+      "seed": 3,
+      "outcome": "lost",
+      "turns": 7,
+      "player_faints": 6,
+      "opponent_faints": 2,
+      "opponent_killed": [
+        "KYOGRE_PRIMAL",
+        "LUCARIO"
+      ],
+      "door_targeted": "Shadow Tag + Perish Song behind Wide Guard",
+      "authored_member_that_should_close_it": "LUCARIO's Feint (lift Wide Guard) and MARSHADOW (a Ghost, so Shadow Tag cannot hold it)",
+      "did_it_close": "FEINT YES, MARSHADOW NO. Feint fired on turn 3 (act turn 2->3) and turn 4: Hitmontop had Wide Guard up, Lucario's Feint lifted it at +2 priority and Water Spout then KOd Ting-Lu and Hitmontop in the same turn. That is the authored combination executing exactly as written. Marshadow never did its job: it entered only on the final turn and took no action. The AI answered Perish Song a different and better way - it withdrew Zapdos at perish count 1 (turn 7 messages, 'CHAMPION~WALLACE withdrew Zapdos!'), which cleared the count; Zamazenta was left on 1 and would have fainted to it if the battle had not ended first.",
+      "what_decided_it": "Perish Song traded Kyogre and Lucario for Mega Gengar and Great Tusk, then Zapdos's Hurricane and Zamazenta's Heavy Slam took the rest; Zamazenta's Body Press KOd Kingambit on the last turn.",
+      "protect_ledger": [],
+      "notes": "Zapdos Tailwind fired turn 5. Zamazenta correctly used Heavy Slam rather than Body Press into Mega Gengar (Ghost). No opponent Protect in the whole game."
+    },
+    {
+      "run_dir": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/v3-a4",
+      "party_manifest": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v2_a4_hyper_offense.json",
+      "party": "Rillaboom + Choice Band Urshifu-Rapid-Strike, Raging Bolt, Chien-Pao, Great Tusk, Whimsicott",
+      "seed": 4,
+      "outcome": "lost",
+      "turns": 8,
+      "player_faints": 6,
+      "opponent_faints": 4,
+      "opponent_killed": [
+        "KYOGRE_PRIMAL",
+        "LUCARIO",
+        "ZAPDOS",
+        "ZAMAZENTA_CROWNED"
+      ],
+      "door_targeted": "Choice Band priority hyper-offense that abuses the opponent's own rain",
+      "authored_member_that_should_close_it": "ZAPDOS (resists Close Combat, neutral to Surging Strikes, Rocky Helmet + Static punishes three contact hits)",
+      "did_it_close": "YES, and better than authored. On turn 1 the AI pre-emptively switched Lucario out for Zapdos so that Urshifu's Surging Strikes (three guaranteed crits) landed on the Rocky Helmet body instead of the redirector: Zapdos took 346, Urshifu took three Helmet procs and was paralysed by Static, and Kyogre's Water Spout then KOd it. Lucario's Quick Guard also blanked Raging Bolt's Thunderclap and Rillaboom's Grassy Glide in the same turn (act turn 2->3).",
+      "what_decided_it": "Zamazenta's Body Press and Melmetal's Double Iron Bash after Whimsicott's Encore had locked Zamazenta into Iron Defense; Marshadow's Spectral Thief ended it.",
+      "protect_ledger": [
+        {
+          "turn": 3,
+          "user": "LUCARIO",
+          "move": "QUICK_GUARD",
+          "payoff": "REAL - blocked Raging Bolt's Thunderclap ('But it failed!') and Rillaboom's Grassy Glide in the same turn"
+        },
+        {
+          "turn": "3 (second decision point in the same turn index)",
+          "user": "LUCARIO",
+          "move": "QUICK_GUARD",
+          "payoff": "EMPTY - the only player actions that turn were Icicle Crash and Volt Switch, neither of them priority"
+        }
+      ],
+      "notes": "A third Quick Guard appears as a native latch on the act turn 3->4 record; per docs/VERIFICATION.md a 'native' entry on a call that did not resolve a turn is a stale latch and is not counted. Zamazenta's Iron Defense on turns 6 and 7 was forced by Whimsicott's Encore, not an AI choice."
+    },
+    {
+      "run_dir": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/v3-a5",
+      "party_manifest": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v3_a5_sunless_storm.json",
+      "party": "Choice Band Toxicroak (Dry Skin) + Tapu Bulu, Chi-Yu, Landorus, Whimsicott, Zekrom",
+      "seed": 5,
+      "outcome": "incomplete - run interrupted after one turn by the previous agent's usage limit; no result.json",
+      "turns": 1,
+      "player_faints": 0,
+      "opponent_faints": 0,
+      "door_targeted": "kill the redirector before Kyogre moves, Wood Hammer the sea, then Fire and Ground on the three Steels under the player's own Tailwind",
+      "did_it_close": "N/A - one turn only. Recorded because its single turn carries real Protect evidence.",
+      "protect_ledger": [
+        {
+          "turn": 1,
+          "user": "KYOGRE_PRIMAL",
+          "hp_at_use": "419/419",
+          "payoff": "REAL - blocked Tapu Bulu's Grassy Terrain Wood Hammer, which is a guaranteed OHKO on Kyogre; the AI also switched Lucario out for Zapdos the same turn so that Choice Band Toxicroak's Close Combat hit a resist instead of the redirector"
+        }
+      ],
+      "notes": "Kept rather than discarded; its party was superseded by v3-a6/v3-a7 because Landorus is 4x weak to Kyogre's Ice Beam."
+    },
+    {
+      "run_dir": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/v3-a6",
+      "party_manifest": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v3_a6_sacred_sword.json",
+      "party": "Choice Band Kartana + Storm Drain Gastrodon, Landorus, Chi-Yu, Whimsicott, Gholdengo",
+      "seed": 6,
+      "outcome": "lost",
+      "turns": 9,
+      "player_faints": 6,
+      "opponent_faints": 5,
+      "opponent_killed": [
+        "LUCARIO",
+        "MARSHADOW",
+        "KYOGRE_PRIMAL",
+        "ZAPDOS",
+        "ZAMAZENTA_CROWNED"
+      ],
+      "opponent_survivor": "MELMETAL at 59/492",
+      "door_targeted": "the crack read literally: special Ground on Lucario/Melmetal/Zamazenta, remove Kyogre first through the redirect, a Ghost to wall Body Press and Close Combat, Prankster Taunt on Iron Defense and Protect",
+      "did_it_close": "Lucario's Follow Me fired on turn 1 and was a liability: it dragged Gastrodon's Earth Power onto a 183 Sp. Def redirector and Lucario died on turn 1 for free. Kyogre's Protect on turn 2 blanked Choice Band Kartana's guaranteed OHKO and decided the game. Zamazenta's Protect on turn 8 blanked a lethal Moonblast + Heat Wave. Melmetal arrived on turn 8 and closed.",
+      "what_decided_it": "two player errors and two Protects. Kartana's 98 Sp. Def meant Kyogre's Thunder alone took it to 11/260 on turn 1; Landorus is 4x weak to Ice Beam and evaporated the turn it entered (turn 5). After that Chi-Yu alone killed Marshadow, Kyogre, Zapdos and Zamazenta in four turns and lost to Melmetal by one Pokemon.",
+      "protect_ledger": [
+        {
+          "turn": 2,
+          "user": "KYOGRE_PRIMAL",
+          "hp_at_use": "419/419",
+          "payoff": "REAL and decisive - blocked Choice Band Kartana's Leaf Blade, 467-549 into 419 HP, a guaranteed OHKO"
+        },
+        {
+          "turn": 8,
+          "user": "ZAMAZENTA_CROWNED",
+          "hp_at_use": "403/403",
+          "payoff": "REAL - blocked Whimsicott's Moonblast plus Chi-Yu's Heat Wave, together 452-532 into 403 HP, a guaranteed KO; Heat Wave still killed Zapdos through it"
+        }
+      ],
+      "notes": "The AI withdrew a frozen 210/398 Zapdos for Marshadow on turn 3 rather than let Power Gem (4x) finish it - a correct read. Kyogre never once used Water Spout while Storm Drain Gastrodon was on the field (0 of 2 opportunities) and used it on the first turn Gastrodon was gone."
+    },
+    {
+      "run_dir": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/v3-a7",
+      "party_manifest": "work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v3_a7_two_seas.json",
+      "party": "Storm Drain Gastrodon + Assault Vest Tapu Bulu, Choice Band Kartana, Chi-Yu, Gholdengo, Whimsicott",
+      "seed": 7,
+      "outcome": "lost",
+      "turns": 7,
+      "player_faints": 6,
+      "opponent_faints": 3,
+      "opponent_killed": [
+        "LUCARIO",
+        "ZAPDOS",
+        "KYOGRE_PRIMAL"
+      ],
+      "opponent_survivors": "ZAMAZENTA_CROWNED at 110/403, MELMETAL at 492/492, MARSHADOW never entered",
+      "door_targeted": "same crack, two independent guaranteed OHKOs on Kyogre (Grassy Terrain Wood Hammer and Choice Band Leaf Blade) behind a lead pair Water Spout cannot profitably hit",
+      "did_it_close": "NO. Both Kyogre answers were consumed without ever landing. Follow Me on turn 1 ate the Wood Hammer (Lucario died to Gastrodon's Earth Power anyway); Zapdos's Hurricane killed Tapu Bulu on turn 2 before it could swing again; and Kyogre then Protected on two consecutive turns (4 and 5), the second one on the 1/3 consecutive-use roll, blanking Kartana's guaranteed OHKO twice in a row. Kyogre finally died on turn 7 to Gholdengo's Thunderbolt, by which point only a 5-HP Gholdengo was left.",
+      "what_decided_it": "Kyogre's two consecutive Protects and Zamazenta's Body Press, which KOd both Kartana (turn 5) and Chi-Yu (turn 7) before Chi-Yu could use a single Fire move.",
+      "protect_ledger": [
+        {
+          "turn": 4,
+          "user": "KYOGRE_PRIMAL",
+          "hp_at_use": "419/419",
+          "payoff": "REAL and decisive - blocked Choice Band Kartana's Leaf Blade, a guaranteed OHKO"
+        },
+        {
+          "turn": 5,
+          "user": "KYOGRE_PRIMAL",
+          "hp_at_use": "419/419",
+          "payoff": "REAL and decisive - second consecutive Protect, succeeded on the 1/3 roll (sGen5ProtectFailChances, src/battle_util.c:10978), blocked the same guaranteed OHKO again"
+        }
+      ],
+      "notes": "Kyogre used Ice Beam rather than Water Spout on all three turns Storm Drain Gastrodon was on the field and used Water Spout on turn 6, the first turn Gastrodon was gone."
+    }
+  ],
+  "protect_ledger_summary": {
+    "opponent_protect_uses_total": 6,
+    "by_user": {
+      "KYOGRE_PRIMAL": 4,
+      "ZAMAZENTA_CROWNED": 2
+    },
+    "empty_protects": 0,
+    "harmful_protects": 0,
+    "consecutive_protect_sequences": 1,
+    "consecutive_detail": "v3-a7 turns 4 and 5, Kyogre. Both succeeded; the second is a legitimate 1/3 roll under the engine's own consecutive-use table (GetConsecutiveMoveSuccessDenominator / sGen5ProtectFailChances, src/battle_util.c:10978-11003). Both blocked a guaranteed OHKO, so the expected value of the attempt was strongly positive even at 1/3.",
+    "verdict": "The Protect ledger is clean. Every one of the six opponent Protects blocked a move that would have KOd the user outright, and none was thrown on a turn where nothing was coming. There is no empty, harmful or repetitive guarding to fix on this roster.",
+    "side_guards": {
+      "wide_guard": "the roster carries none",
+      "quick_guard": "LUCARIO, 2 real uses, both in v3-a4: one with a double payoff (blocked Thunderclap and Grassy Glide in the same turn) and one empty (the turn's player actions were Icicle Crash and Volt Switch, neither priority). 1 empty of 2 is the only guard blemish in six games."
+    }
+  },
+  "engine_checks": [
+    {
+      "check": "Primordial Sea is on the field at turn 0 with Kyogre already in its Primal form",
+      "result": "PASS",
+      "evidence": "every start event in v3-a1, a2, a3, a4, a5, a6, a7 records weather ['B_WEATHER_RAIN_PRIMAL'] at turn 0, awaiting the player's first action, with opponent slot 0 = SPECIES_KYOGRE_PRIMAL, ability ABILITY_PRIMORDIAL_SEA, item ITEM_COVERT_CLOAK, before any battler has moved"
+    },
+    {
+      "check": "authored levels materialize as cap 100 + offset 6 - 2 (Medium)",
+      "result": "PASS",
+      "evidence": "KYOGRE_PRIMAL, LUCARIO, ZAPDOS, ZAMAZENTA_CROWNED, MELMETAL and MARSHADOW all read L104 in the active snapshots across the seven runs"
+    },
+    {
+      "check": "authored items and abilities",
+      "result": "PASS",
+      "evidence": "Kyogre Covert Cloak / Primordial Sea (419 HP); Lucario Rocky Helmet / Inner Focus (357); Zapdos Rocky Helmet / Static (398); Zamazenta-Crowned Covert Cloak / Dauntless Shield (403); Melmetal Assault Vest / Iron Fist (492); Marshadow Assault Vest / Technician (398)"
+    },
+    {
+      "check": "Dauntless Shield raises Defence on entry",
+      "result": "PASS",
+      "evidence": "'The opposing Zamazenta's Defense rose!' on every Zamazenta entry (v3-a1 t1, a2 t7, a3 t4, a4 t4, a6 t7, a7 t3)"
+    },
+    {
+      "check": "Static and Rocky Helmet punish contact",
+      "result": "PASS",
+      "evidence": "Chien-Pao paralysed in v3-a1, Urshifu paralysed in v3-a4, Gholdengo paralysed in v3-a6 t4 and a7 t7; Rocky Helmet chip recorded on Gallade, Rillaboom, Chien-Pao, Kartana, Tapu Bulu and Amoonguss"
+    },
+    {
+      "check": "Feint lifts a side's Wide Guard",
+      "result": "PASS",
+      "evidence": "v3-a3 turn 3: Hitmontop put Wide Guard up at +3, Lucario's Feint at +2 lifted it ('Hitmontop fell for the feint!') and Water Spout then KOd Ting-Lu and Hitmontop in the same turn"
+    },
+    {
+      "check": "Covert Cloak blocks Fake Out on Kyogre / Zamazenta",
+      "result": "NOT EXERCISED",
+      "evidence": "no Fake Out was ever aimed at either Cloak holder in the seven runs; the only Fake Out that landed was Rillaboom's on Zapdos in v3-a1, which correctly flinched because Zapdos holds Rocky Helmet"
+    },
+    {
+      "check": "Fire fails while Primordial Sea stands",
+      "result": "NOT EXERCISED",
+      "evidence": "Chi-Yu was deliberately held in reserve in both fresh attempts and its first Fire move (v3-a6 turn 8 Heat Wave) came after 'The heavy rain has lifted!'; the rule was respected in planning but never tested against the engine"
+    },
+    {
+      "check": "opponent decision budget <= 1.2 s including setup and both actors",
+      "result": "PASS",
+      "evidence": "v3-a6 max 62 frames = 1.038 s; v3-a7 max 60 frames = 1.005 s; the worst reading anywhere in the seven runs is 62 frames"
+    },
+    {
+      "check": "AI does not read the player's committed actions",
+      "result": "PASS with a note",
+      "evidence": "No behaviour in any run required knowledge of a pending command. Kyogre avoided Water Spout on all 5 turns a Storm Drain Gastrodon was on the field and threw it on the first turn Gastrodon was gone, in both fresh attempts; that is authored knowledge, not a command read - TRAINER_WALLACE_DOUBLES_LEGENDS carries AI_FLAG_OMNISCIENT (src/data/trainers.h:61993), which makes IsAiBattlerAware() true and AI_DecideKnownAbilityForTurn() return the real ability (src/battle_ai_util.c:167-173, 2472-2486)"
+    },
+    {
+      "check": "Wide Guard / Quick Guard never fail on consecutive use at GEN_6+",
+      "result": "CONFIRMED IN SOURCE",
+      "evidence": "src/battle_move_resolution.c:1265-1289 exempts PROTECT_WIDE_GUARD and PROTECT_QUICK_GUARD from CanUseMoveConsecutively; only single-target Protect/Endure decay"
+    }
+  ],
+  "authored_door_audit": {
+    "lucario_follow_me_turn_1": "fired in 3 of 6 completed openers (v3-a1, v3-a6, v3-a7). In v3-a2 and v3-a3 Lucario opened with Close Combat instead; in v3-a4 and v3-a5 the AI switched it out on turn 1 to protect it. In all three games where it fired, the redirected move was the one that killed Lucario, because a special Ground attack into a 183 Sp. Def redirector is an OHKO. Follow Me is real but it is now a liability against special Ground.",
+    "lucario_feint_lifts_wide_guard": "CLOSED - demonstrated twice in v3-a3.",
+    "melmetal_moves_first_under_player_trick_room": "NEVER EXERCISED in six completed games. The only player Trick Room (v3-a2, up on turns 1 and 7) came and went without the opponent's Melmetal ever entering the battle.",
+    "zapdos_tailwind": "fired in 2 of 6 (v3-a1 turn 3, v3-a3 turn 5). In v3-a6 turn 8 Zapdos selected Tailwind and died to Heat Wave before it resolved - a doomed turn either way against a faster Chi-Yu. Zapdos never used Roost in any of the seven runs.",
+    "zamazenta_iron_defense_then_body_press": "fires, and Body Press is the roster's single most destructive move (it KOd four player Pokemon across the six games). But see AI defect 2: it reaches for Iron Defense when Body Press already has a guaranteed KO and when the board it is buffing against is entirely special.",
+    "marshadow_vs_perish_shadow_tag": "NEVER DID ITS AUTHORED JOB. Marshadow reached the field in 3 of 6 games and took 4 actions total. Against the actual Perish Song party (v3-a3) it entered on the last turn and never moved; the AI answered Perish Song instead by withdrawing Zapdos at perish count 1, which is a better answer than the dossier's. Marshadow earned its slot in v3-a6, where the AI brought it in early and it KOd Gastrodon and Gholdengo.",
+    "zapdos_vs_choice_band_urshifu": "CLOSED, and better than authored - see the v3-a4 entry."
+  },
+  "ai_defects": [
+    {
+      "id": "AID-1",
+      "severity": "moderate",
+      "title": "pivot-then-immediately-resend: the faint replacement chooser re-sends the member the AI had just deliberately withdrawn at 13% HP",
+      "run": "v3-a4",
+      "turn_evidence": "act turn_before 1 -> turn_after 2. Board: Zapdos at 52/398 (it had absorbed three Surging Strikes crits on turn 1), Kyogre 419, bench Zamazenta 403 / Melmetal 492 / Marshadow 398 all untouched. The AI first switched Zapdos out for Lucario mid-turn ('CHAMPION~WALLACE withdrew Zapdos! CHAMPION~WALLACE sent out Lucario!'), which was correct. Raging Bolt's Thunderclap then KOd Kyogre in the same turn, and the faint replacement sent that same 52-HP Zapdos straight back in ('CHAMPION~WALLACE sent out Zapdos!'). Chien-Pao's Icicle Crash KOd it on turn 3.",
+      "better_action": "answer the faint with Zamazenta or Melmetal and leave the 13%-HP Zapdos on the bench it was just moved to. The mid-turn pivot decision and the end-of-turn replacement decision do not appear to share state.",
+      "affected_paths": "the faint-replacement chooser, not the pair AI. Any trainer whose AI pivots a low-HP member out and loses a partner in the same turn can repeat it."
+    },
+    {
+      "id": "AID-2",
+      "severity": "moderate",
+      "title": "Iron Defense chosen over an available guaranteed KO, and against an all-special board where Defence does nothing",
+      "run": "v3-a7",
+      "turn_evidence": "Turn 4: Zamazenta at 403/403 and +1 Def faced Kartana (260 HP, Grass/Steel, 2x to Fighting - Body Press at +1 is roughly 474, a guaranteed OHKO) and Gholdengo (a Ghost, immune to Body Press, attacking with Shadow Ball, i.e. special). It chose Iron Defense. The KO was still there on turn 5 and it took it, but the free turn let Kartana attempt its own guaranteed OHKO on Kyogre, which Kyogre had to spend a 1/3 consecutive Protect to survive. Turn 8 (final act): Zamazenta, already at +3 or better, faced a single 5-HP Gholdengo that it is physically immune to and that was attacking specially; it used Iron Defense again. Heavy Slam - its only move that can damage a Ghost - would have KOd outright.",
+      "better_action": "Body Press on turn 4 for the immediate KO; Heavy Slam on turn 8 for the immediate KO. The setup score should be gated on (a) no KO already available and (b) at least one physical attacker on the opposing board.",
+      "affected_paths": "the shared setup-move scoring, not a bespoke tactic. Every authored Iron Defense / Cosmic Power / Bulk Up owner can reach the same branch; the second case in particular (raising physical Defence against a board with no physical attacker left) is the one worth a focused regression."
+    },
+    {
+      "id": "AID-3",
+      "severity": "low, observational",
+      "title": "one empty Quick Guard",
+      "run": "v3-a4",
+      "turn_evidence": "Lucario put Quick Guard up on the second decision point of turn 3; the player's actions that turn were Chien-Pao's Icicle Crash and Raging Bolt's Volt Switch, neither of them priority, so it blocked nothing. Its other use, on the turn before, blocked Thunderclap and Grassy Glide together.",
+      "better_action": "Close Combat or Feint. 1 empty in 2 uses is within the expected-value tuning of PAIR_GUARD_* rather than a bug; recorded so the ledger is complete.",
+      "affected_paths": "PAIR_GUARD_* forecast constants in src/battle_ai_pair.c"
+    }
+  ],
+  "ai_behaviour_credits": [
+    "v3-a3 turn 7: withdrew Zapdos at perish count 1 to clear Perish Song, a better answer than the dossier's authored one.",
+    "v3-a4 turn 1: pre-emptively switched Lucario out for Zapdos so Choice Band Urshifu's three-crit Surging Strikes hit the Rocky Helmet / Static body instead of the redirector.",
+    "v3-a5 turn 1 and v3-a6 turn 2 and v3-a7 turns 4-5: Kyogre Protected exactly and only on the turns a guaranteed OHKO was incoming.",
+    "v3-a6 turn 3: withdrew a frozen 210-HP Zapdos for Marshadow rather than let a 4x Power Gem finish it.",
+    "v3-a6 turn 5: Ice Beam into a freshly switched-in Landorus (Ground/Flying, 4x) for the immediate KO.",
+    "v3-a2 turns 8-9: Iron Defense against Marowak-Alola's Bonemerang cut the incoming damage from 272 to 88, with Body Press correctly withheld because the target was a Ghost."
+  ],
+  "level_changes": "NONE. data/emerald_champions/emerald_champions_battle_teams.txt was not edited in this pass, by instruction; the authored offsets stay 6/6/6/6/6/6.",
+  "verdict": {
+    "is_this_now_the_hardest_fight_in_the_game": {
+      "answer": "Yes, on the evidence available.",
+      "support": "Six completed optimized cap-100 attempts, six losses. The four parties that went 4-0 against the previous roster went 0-4 against this one (6-3, 6-3, 6-2, 6-4), and two parties built from scratch against the rebuilt roster's own crack line also lost (6-5 and 6-3). No other encounter in this block has produced an 0-for-6 against optimized preparation. The roster's structural claims all hold up in play: the weather cannot be taken while Kyogre stands, neither lead can be flinched, Body Press and Close Combat are answered only by a Ghost, and the two win conditions (Kyogre's spread special offence and Zamazenta's single-target physical offence) genuinely require opposite answers."
+    },
+    "is_it_winnable_by_a_party_built_against_it": {
+      "answer": "NOT DEMONSTRATED. The nearest miss was v3-a6 at 6-5 with Melmetal alive at 59/492 - one member and about one turn short. I would call it winnable-in-principle and currently unproven; on the brief's own escalation rule (three failed optimized attempts) six failures justify opening a level review.",
+      "what_that_party_needed": [
+        "A body Water Spout cannot profitably hit. Storm Drain Gastrodon is the single biggest swing in the fight: Kyogre threw Water Spout 0 times in 5 opportunities while it was on the field and reverted to it the turn it died, in both games. Water Absorb (Jellicent, Clodsire, Vaporeon, Seismitoad) and Dry Skin (Toxicroak) do the same job.",
+        "A special Ground move on turn 1. Lucario's 183 Sp. Def means Earth Power OHKOs it, so Follow Me stops being a wall and becomes the thing that drags the OHKO onto the redirector. Lucario died on turn 1 in both fresh attempts, for free, whether or not Follow Me was up. Special Ground is also the only lane that ignores Iron Defense entirely.",
+        "A Ghost. Gholdengo took zero from Body Press and Close Combat, resisted Heavy Slam, Double Iron Bash, Water Spout, Ice Beam and Hurricane, and - because the roster carries no Ground and no usable Fire - had no super-effective matchup on the board except Marshadow. It was the last player Pokemon standing in both attempts.",
+        "Chi-Yu, held in reserve until Primordial Sea lifts. At 328 Speed it is faster than Zamazenta's 324; Beads of Ruin cuts every opposing Sp. Def by a quarter, and Life Orb Overheat or Heat Wave then OHKOs Lucario, Zapdos, Zamazenta, Melmetal and Marshadow. In v3-a6 one Chi-Yu killed Marshadow, contributed the lethal blow on Kyogre, and killed Zapdos and Zamazenta on consecutive turns.",
+        "Two independent guaranteed OHKOs on Kyogre, and even that is not enough. Grassy Terrain Wood Hammer (462-543) and Choice Band Leaf Blade from 348 Speed (467-549) are the two the cap-100 pool offers. v3-a6 had one and it was Protected away; v3-a7 had both and lost them to one Hurricane and two consecutive Protects."
+      ],
+      "what_it_still_lacks": "a way to make Kyogre's Protect cost something. Protect is +4, Prankster Taunt is +1, so the player can never pre-empt the first one, and a 419-HP / 290-Def / 370-Sp.Def body behind Follow Me is not 2HKOd by anything in the pool that is also fast enough to matter. Both of my games were decided by that one move slot."
+    },
+    "door_still_open": {
+      "which": "Wide Guard held by a Ghost, on a board where BOTH actives are immune to Normal. The crack line already names it ('Wide Guard plus a Ghost so Feint cannot lift it') and no party in seven runs has actually built it.",
+      "why_it_is_open": "Feint is .effect = EFFECT_HIT with .type = TYPE_NORMAL (src/data/moves_info.h:8511), so a Ghost target takes no damage and MOVE_EFFECT_FEINT never runs. Wide Guard and Quick Guard are exempt from the consecutive-use failure table at GEN_6+ (src/battle_move_resolution.c:1275-1283), so a Ghost can hold Wide Guard up every single turn forever. The cap-100 pool supplies Ghosts that learn it: AEGISLASH gate 42 (wild:SandstrewnRuins_B1F), DOUBLADE gate 42, LUNALA gate 54 (evolution from Cosmoem). Paired with a second Normal-immune active such as Gholdengo or Jellicent, that board blanks Water Spout and Hurricane permanently, takes zero from Body Press and Close Combat, and leaves Kyogre with nothing but a single-target Ice Beam.",
+      "important_caveat_the_crack_gets_wrong": "one Ghost is not enough. HandleSetEffectFeint (src/battle_set_effect.c:393-417) clears the Feint target's own protection AND any side-type protection on the target's PARTNER. So Feint aimed at a non-Ghost partner still lifts the side's Wide Guard even when the Wide Guard user itself is a Ghost. The crack: line should be corrected to say both actives must be Normal-immune, or it will send a player into exactly the trap v3-a3 fell into.",
+      "single_change_that_closes_it": "MARSHADOW's move order in the party, not its set. Marshadow is the roster's only answer to a Ghost wall - Spectral Thief and Technician Shadow Sneak are Ghost-type single-target moves that a Wide Guard slot never touches and that hit a Ghost for 2x - but as the sixth member it reached the field in only 3 of 6 games and took 4 actions in total, twice arriving on the final turn. Swapping MARSHADOW and MELMETAL in the authored order (Marshadow fifth, Melmetal sixth) puts the Ghost-breaker on the field while a Ghost wall is still doing work, costs nothing else, and does not touch a single species, move, item, ability, EV or level. Melmetal is the better last body anyway: it closed three of the six games from the sixth slot and is the roster's slowest member, so it also keeps the authored Trick Room answer in reserve where it belongs.",
+      "second_option_if_a_set_change_is_preferred": "replace MARSHADOW's FEINT - a second copy of a move Lucario already carries, which fired zero times in seven runs and which is Normal, so it cannot break the very Ghost wall it is meant to answer - with POLTERGEIST or another Ghost/Fighting lane. FEINT is the roster's only genuinely redundant slot."
+    }
+  },
+  "could_this_team_be_cooler": "It already is, and the six games earned the claim rather than asserting it: the sea that is Primal from the first frame, a lead pair that cannot be flinched, a redirector whose Rocky Helmet punishes the very move it pulls, and two win conditions with opposite answers all showed up in play. The one slot that does not pull its weight is MARSHADOW's FEINT, a second copy of Lucario's move that never fired; and the one authored promise that has still never been tested is MELMETAL moving first under the player's Trick Room, because Melmetal is buried in the sixth slot. Both are fixed by the same reordering. No species change is warranted."
+}

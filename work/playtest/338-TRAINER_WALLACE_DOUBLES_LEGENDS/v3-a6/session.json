@@ -1,0 +1,41 @@
+{
+  "rom_sha256": "8f2abbcb06f92816f59864ddd03036fd12345175d2db33ad484261e2078fcdae",
+  "elf_sha256": "2b73cfab517165ade29ebc20a369adfdd45a81e5b60a56c28bdcd414801ce0d5",
+  "seed": 6,
+  "trainer_a": "TRAINER_WALLACE_DOUBLES_LEGENDS",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 100,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v3_a6_sacred_sword.json",
+  "party_sha256": "3a5c576e9be24e0ba006b309096d31dae5606640dda03c63daa7e44e70232d32",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD",
+    "FLAG_IS_CHAMPION"
+  ],
+  "prepared": {
+    "encounter": "E0510 Wallace legends (Cave of Origin, Diancie's room) - post-game cap 100, v3 attempt 6: outspeed and OHKO Primal Kyogre on turn 1 with Choice Band Kartana behind a Storm Drain body that cannot be touched by Water Spout, then special Ground and Fire through the three Steels",
+    "party": 6
+  },
+  "started": {
+    "frames": 2182
+  },
+  "replacement_commits": {
+    "turn": 9,
+    "slots": {}
+  }
+}

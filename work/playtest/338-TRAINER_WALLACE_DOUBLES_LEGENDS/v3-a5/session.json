@@ -1,0 +1,41 @@
+{
+  "rom_sha256": "ca7ee500c1688436bffee5a9532a9a7792e529f3d14cc5c83707af4a9d99502b",
+  "elf_sha256": "bead80c443dbb6366003d6bd1f570662e3562acaa6dba5301242940baecca504",
+  "seed": 5,
+  "trainer_a": "TRAINER_WALLACE_DOUBLES_LEGENDS",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 100,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/338-TRAINER_WALLACE_DOUBLES_LEGENDS/party_v3_a5_sunless_storm.json",
+  "party_sha256": "1499f81131043be8c6ba79e54c78ac34476c582deac79f5fa26d498c200e9d4c",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD",
+    "FLAG_IS_CHAMPION"
+  ],
+  "prepared": {
+    "encounter": "E0510 Wallace legends (Cave of Origin, Diancie's room) - post-game cap 100, v3 attempt 5: kill the redirector before Kyogre moves, Wood Hammer the sea, then Fire and Ground on the three Steels under my own Tailwind",
+    "party": 6
+  },
+  "started": {
+    "frames": 2747
+  },
+  "replacement_commits": {
+    "turn": 0,
+    "slots": {}
+  }
+}

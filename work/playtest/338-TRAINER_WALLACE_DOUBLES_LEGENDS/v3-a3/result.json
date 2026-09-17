@@ -1,0 +1,32 @@
+{
+  "trainer_a": "TRAINER_WALLACE_DOUBLES_LEGENDS",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 3,
+  "difficulty": "medium",
+  "level_cap": 100,
+  "phase": "ended",
+  "outcome": "lost",
+  "turns": 7,
+  "decisions": 11,
+  "player_faints": 6,
+  "opponent_faints": 2,
+  "ai_decision_frames_max": 41,
+  "ai_decision_seconds_max": 0.686,
+  "ai_decision_frames": [
+    24,
+    22,
+    22,
+    24,
+    24,
+    23,
+    21,
+    20,
+    20,
+    41,
+    41
+  ],
+  "rom_sha256": "ca7ee500c1688436bffee5a9532a9a7792e529f3d14cc5c83707af4a9d99502b",
+  "elf_sha256": "bead80c443dbb6366003d6bd1f570662e3562acaa6dba5301242940baecca504",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
