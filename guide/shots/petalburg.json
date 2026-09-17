@@ -1,0 +1,87 @@
+[
+  {
+    "id": "petalburg-city-gym-door",
+    "map": "PetalburgCity",
+    "x": 15,
+    "y": 9,
+    "facing": 1,
+    "settle": 100,
+    "caption": "Petalburg City, at the Gym door"
+  },
+  {
+    "id": "petalburg-city-mart",
+    "map": "PetalburgCity",
+    "x": 25,
+    "y": 13,
+    "facing": 1,
+    "settle": 90,
+    "caption": "The Mart on the east side of town"
+  },
+  {
+    "id": "petalburg-city-pond",
+    "map": "PetalburgCity",
+    "x": 9,
+    "y": 24,
+    "facing": 2,
+    "settle": 90,
+    "caption": "The western pond, where Surf opens the far bank"
+  },
+  {
+    "id": "petalburg-gym-entrance",
+    "map": "PetalburgCity_Gym",
+    "x": 4,
+    "y": 106,
+    "facing": 1,
+    "settle": 120,
+    "caption": "Inside the Gym, looking up the challenge hall",
+    "chapter": 4
+  },
+  {
+    "id": "petalburg-gym-norman",
+    "map": "PetalburgCity_Gym",
+    "x": 4,
+    "y": 5,
+    "facing": 1,
+    "settle": 120,
+    "caption": "Norman waits at the top of the hall",
+    "chapter": 4
+  },
+  {
+    "id": "petalburg-gym-norman-talk",
+    "map": "PetalburgCity_Gym",
+    "x": 4,
+    "y": 5,
+    "facing": 1,
+    "settle": 110,
+    "steps": [
+      {
+        "hold": "UP",
+        "frames": 64
+      },
+      {
+        "press": "A",
+        "frames": 160
+      }
+    ],
+    "caption": "Norman will not battle you until four badges are on the case",
+    "chapter": 4
+  },
+  {
+    "id": "petalburg-mart-counter",
+    "map": "PetalburgCity_Mart",
+    "x": 1,
+    "y": 4,
+    "facing": 1,
+    "settle": 90,
+    "caption": "The Mart counter"
+  },
+  {
+    "id": "petalburg-woods-stone",
+    "map": "PetalburgWoods",
+    "x": 45,
+    "y": 16,
+    "facing": 1,
+    "settle": 110,
+    "caption": "Petalburg Woods, at the Scolipite"
+  }
+]

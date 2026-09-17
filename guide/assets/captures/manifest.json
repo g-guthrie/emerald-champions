@@ -1,0 +1,90 @@
+[
+  {
+    "id": "petalburg-city-gym-door",
+    "map": "PetalburgCity",
+    "caption": "Petalburg City, at the Gym door",
+    "chapter": 7,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-city-gym-door.png",
+    "x": 15,
+    "y": 9,
+    "battle": false
+  },
+  {
+    "id": "petalburg-city-mart",
+    "map": "PetalburgCity",
+    "caption": "The Mart on the east side of town",
+    "chapter": 7,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-city-mart.png",
+    "x": 25,
+    "y": 13,
+    "battle": false
+  },
+  {
+    "id": "petalburg-city-pond",
+    "map": "PetalburgCity",
+    "caption": "The western pond, where Surf opens the far bank",
+    "chapter": 7,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-city-pond.png",
+    "x": 9,
+    "y": 24,
+    "battle": false
+  },
+  {
+    "id": "petalburg-gym-entrance",
+    "map": "PetalburgCity_Gym",
+    "caption": "Inside the Gym, looking up the challenge hall",
+    "chapter": 4,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-gym-entrance.png",
+    "x": 4,
+    "y": 106,
+    "battle": false
+  },
+  {
+    "id": "petalburg-gym-norman",
+    "map": "PetalburgCity_Gym",
+    "caption": "Norman waits at the top of the hall",
+    "chapter": 4,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-gym-norman.png",
+    "x": 4,
+    "y": 5,
+    "battle": false
+  },
+  {
+    "id": "petalburg-gym-norman-talk",
+    "map": "PetalburgCity_Gym",
+    "caption": "Norman will not battle you until four badges are on the case",
+    "chapter": 4,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-gym-norman-talk.png",
+    "x": 4,
+    "y": 2,
+    "battle": false
+  },
+  {
+    "id": "petalburg-mart-counter",
+    "map": "PetalburgCity_Mart",
+    "caption": "The Mart counter",
+    "chapter": 7,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-mart-counter.png",
+    "x": 1,
+    "y": 4,
+    "battle": false
+  },
+  {
+    "id": "petalburg-woods-stone",
+    "map": "PetalburgWoods",
+    "caption": "Petalburg Woods, at the Scolipite",
+    "chapter": 7,
+    "ok": true,
+    "file": "guide/assets/captures/petalburg-woods-stone.png",
+    "x": 45,
+    "y": 16,
+    "battle": false
+  }
+]

@@ -29,11 +29,26 @@ Render:
     data/emerald_champions/..._teams.txt   all 341 authored trainer parties
     work/playtest/battle_index.json        campaign order, class, cap window, location
 
+## Captures
+
+Every picture in the book is taken from the running game. `guide/capture.py`
+boots the headless build, warps to a map and tile, optionally walks and presses
+buttons, and saves the framebuffer:
+
+    .venv-studio/bin/python guide/capture.py guide/shots/petalburg.json
+
+A shot names a map directory (`PetalburgCity`, not the MAP_ constant), a tile, a
+facing, how long to settle, and optionally `chapter` for the campaign state it
+needs and `steps` for input. Failures are reported per shot and written to the
+manifest, so this pass doubles as a sweep of the game: a map that will not load,
+a warp into a wall, or an actor who is not where the book says all surface here.
+
 ## Still to build
 
-    1. Map plate renderer   composite data/layouts tiles into a town plate, then
+    1. Flag staging         a shot option to set or clear story flags, so an
+                            event can be photographed in the state it happens in.
+                            Norman is hidden in every fixture chapter today.
+    2. Map plate renderer   composite data/layouts tiles into a town plate, then
                             label the buildings the way the original does
-    2. Capture pipeline     a scene recipe per event, rendered through
-                            tools/studio/run_scene.py against the release ROM
     3. Page compiler        location JSON -> HTML, so 240 pages are generated
                             rather than hand-set
