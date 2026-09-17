@@ -1,0 +1,28 @@
+{
+  "play_order": 318, "e_group": "E0487", "trainer": "TRAINER_VITO", "cap": 96, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Does Mega Raichu X now Mega-Evolve on its first action?",
+  "party_manifest": "work/playtest/318-TRAINER_VITO/party_vr96_b.json",
+  "party_reuse": "Unchanged from receipt.json (seed 8); same cap 96 and location, chronology audit unchanged.",
+  "level_offsets_at_run": {"BISHARP": 1, "NINETALES": 2, "DODRIO": 2, "LURANTIS": 1, "FLYGON": 1, "RAICHU": 2},
+  "resolved_opponent_levels": {"BISHARP": 95, "NINETALES": 96, "DODRIO": 96, "LURANTIS": 95, "FLYGON": 95, "RAICHU": 96},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/318-TRAINER_VITO/m1", "seed": 8, "outcome": "won", "turns": 3, "player_faints": 2, "opponent_faints": 6,
+     "narrative": "T1 Bisharp Sucker Punch + a sun Heat Wave from the now-L96 Ninetales (it survived Rock Slide this time) KO'd Landorus; Rock Slide + Heat Wave KO'd Bisharp and Ninetales. Kangaskhan in. T2 Mega Kangaskhan Fake Out flinched the Choice-locked Dodrio; Heat Wave in sun OHKO'd Dodrio and Lurantis (Leaf Storm chosen, never fired). T3 RAICHU MEGA-EVOLVED ON ITS FIRST ACTION (Electric Terrain came up) and Wild Charged into Chi-Yu's Protect; Double-Edge OHKO'd it; Flygon Tailwind. T4 (no advance) Flygon Earth Power KO'd Chi-Yu, Double-Edge KO'd Flygon."}
+  ],
+  "mega_check": {"evolved": true, "turn": 3, "first_action": true, "board": "Raichu 251/251 @Raichunite X enters end of T2 beside Flygon 288/288 vs Chi-Yu 173/242 and Mega Kangaskhan 338/338, sun up. Mega Evolution, terrain set, Wild Charge into Chi-Yu (Protected)."},
+  "strategy_checks": [
+    {"check": "Mega Raichu X Mega-Evolves on first action", "result": "PASS", "evidence": "T3 'Raichu has Mega Evolved' and 'An electric current ran across the battlefield'; opponent party RAICHU_MEGA_X."},
+    {"check": "Ninetales sun on entry, Solar Beam/Heat Wave", "result": "PASS", "evidence": "Drought at turn 0; T1 Heat Wave (sun) contributed to the Landorus KO."},
+    {"check": "Bisharp attacks", "result": "PASS", "evidence": "T1 Sucker Punch into Landorus (168) before it moved."},
+    {"check": "Flygon Tailwind", "result": "PASS", "evidence": "T3 Tailwind, then T4 Earth Power KO'd Chi-Yu under it."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS (none used)", "evidence": "No opposing Protect."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [],
+  "difficulty_reading": "Changed for the better: the first pass's +1 on Ninetales let it survive Rock Slide and its Heat Wave, with Sucker Punch, KO'd Landorus on turn 1; Flygon then took Chi-Yu. Two faints in three turns is a real fight for a short one. Keep; the Mega itself still dies to the first Parental Bond Double-Edge.",
+  "level_changes": {"rule_applied": "KEEP (won with 2 faints).", "changes": []},
+  "could_this_be_cooler": "Unchanged from receipt.json.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}
