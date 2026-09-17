@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "1a41d156b5dd51bc2f31e27f58a4bfd8bfb70fa25d8ac50108a37406464fca82",
+  "input_count": 28914,
+  "artifacts": {
+    "pokeemerald-headless.gba": "53e0f936f54c1410be36cc9471c5f705edb08d8a4a3ef589fb3eee9c62bda8cd",
+    "pokeemerald-headless.elf": "0c36a0a97220147d71a9db6913b519742fe90c3fa5add8fc255c8d239eda7b25"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "rom_sha256": "53e0f936f54c1410be36cc9471c5f705edb08d8a4a3ef589fb3eee9c62bda8cd",
+  "elf_sha256": "0c36a0a97220147d71a9db6913b519742fe90c3fa5add8fc255c8d239eda7b25",
+  "seed": 1,
+  "trainer_a": "TRAINER_STEVEN",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 100,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/340-TRAINER_STEVEN/party_steel_breaker.json",
+  "party_sha256": "7f5aa221f0c8ed0459e2d678cc702f7b69a8d2ffe8b34193f75ea124f0017335",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD",
+    "FLAG_IS_CHAMPION"
+  ],
+  "prepared": {
+    "encounter": "E0512 Steven (Meteor Falls, Steven's Cave) - post-game cap 100",
+    "party": 6
+  },
+  "started": {
+    "frames": 3693
+  },
+  "replacement_commits": {
+    "turn": 7,
+    "slots": {}
+  }
+}
