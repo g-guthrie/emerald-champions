@@ -401,7 +401,7 @@ void InitTrainerTowerBattleStruct(void)
     sTrainerTowerOpponent->facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
     sTrainerTowerOpponent->textColor = CURR_FLOOR.trainers[trainerId].textColor;
 #if FREE_TRAINER_TOWER == FALSE && IS_FRLG
-    SetTrainerHillVBlankCounter(&TRAINER_TOWER.timer);
+    SetFacilityTimerVBlankCounter(&TRAINER_TOWER.timer);
 #endif //FREE_TRAINER_TOWER
     FreeTrainerTowerDataStruct();
 }
@@ -665,7 +665,7 @@ static void DoTrainerTowerBattle(void)
     BuildEnemyParty();
     CreateTask(Task_DoTrainerTowerBattle, 1);
     PlayMapChosenOrBattleBGM(0);
-    BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_HILL));
+    BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_TOWER));
 }
 
 static void TrainerTowerGetChallengeType(void)
@@ -705,7 +705,7 @@ static void StartTrainerTowerChallenge(void)
     ValidateOrResetCurTrainerTowerRecord();
     TRAINER_TOWER.validated = TRUE;
     TRAINER_TOWER.floorsCleared = 0;
-    SetTrainerHillVBlankCounter(&TRAINER_TOWER.timer);
+    SetFacilityTimerVBlankCounter(&TRAINER_TOWER.timer);
     TRAINER_TOWER.timer = 0;
     TRAINER_TOWER.spokeToOwner = FALSE;
     TRAINER_TOWER.checkedFinalTime = FALSE;
@@ -715,7 +715,7 @@ static void StartTrainerTowerChallenge(void)
 static void GetOwnerState(void)
 {
 #if FREE_TRAINER_TOWER == FALSE && IS_FRLG
-    ClearTrainerHillVBlankCounter();
+    ClearFacilityTimerVBlankCounter();
     gSpecialVar_Result = 0;
 
     if (TRAINER_TOWER.spokeToOwner)
@@ -784,7 +784,7 @@ static void TrainerTowerResumeTimer(void)
         if (TRAINER_TOWER.timer >= TRAINER_TOWER_MAX_TIME)
             TRAINER_TOWER.timer = TRAINER_TOWER_MAX_TIME;
         else
-            SetTrainerHillVBlankCounter(&TRAINER_TOWER.timer);
+            SetFacilityTimerVBlankCounter(&TRAINER_TOWER.timer);
     }
 #endif //FREE_TRAINER_TOWER
 }
@@ -839,7 +839,7 @@ static void GetCurrentTime(void)
 #if FREE_TRAINER_TOWER == FALSE && IS_FRLG
     if (TRAINER_TOWER.timer >= TRAINER_TOWER_MAX_TIME)
     {
-        ClearTrainerHillVBlankCounter();
+        ClearFacilityTimerVBlankCounter();
         TRAINER_TOWER.timer = TRAINER_TOWER_MAX_TIME;
     }
 

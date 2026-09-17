@@ -20,7 +20,6 @@
 #include "sprite.h"
 #include "sound.h"
 #include "task.h"
-#include "trainer_hill.h"
 #include "wild_encounter.h"
 #include "constants/battle_frontier.h"
 #include "constants/event_objects.h"
@@ -244,7 +243,7 @@ void UpdateOverworldWildEncounter(void)
      || FlagGet(DN_FLAG_SEARCHING)
      || (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && !WE_OWE_BATTLE_PIKE)
      || (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR && !WE_OWE_BATTLE_PYRAMID)
-     || InTrainerHillChallenge())
+     )
     {
         if (sOWESpawnCountdown != OWE_NO_ENCOUNTER_SET)
         {

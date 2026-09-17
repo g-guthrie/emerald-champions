@@ -597,12 +597,6 @@
     "FarawayIsland_Interior",
     "BirthIsland_Exterior",
     "BirthIsland_Harbor",
-    "TrainerHill_Entrance",
-    "TrainerHill_1F",
-    "TrainerHill_2F",
-    "TrainerHill_3F",
-    "TrainerHill_4F",
-    "TrainerHill_Roof",
     "NavelRock_Exterior",
     "NavelRock_Harbor",
     "NavelRock_Entrance",
@@ -624,8 +618,7 @@
     "NavelRock_Down09",
     "NavelRock_Down10",
     "NavelRock_Down11",
-    "NavelRock_Bottom",
-    "TrainerHill_Elevator"
+    "NavelRock_Bottom"
   ],
   "gMapGroup_IndoorRoute104Prototype": [
     "Route104_Prototype",

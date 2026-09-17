@@ -34,7 +34,6 @@
 
 // Special trainer battles.
 #define SPECIAL_BATTLE_SECRET_BASE 1
-#define SPECIAL_BATTLE_EREADER 2
 #define SPECIAL_BATTLE_MULTI 3
 
 // Facility trainer Battles
@@ -46,7 +45,6 @@
 #define FACILITY_BATTLE_PIKE_SINGLE     5
 #define FACILITY_BATTLE_PIKE_DOUBLE     6
 #define FACILITY_BATTLE_PYRAMID         7
-#define FACILITY_BATTLE_TRAINER_HILL    8
 
 #define MAX_BATTLE_FRONTIER_POINTS 9999
 #define MAX_STREAK 9999

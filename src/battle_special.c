@@ -20,7 +20,6 @@
 
 static void HandleSpecialTrainerBattleEnd(void);
 static void Task_StartBattleAfterTransition(u8 taskId);
-static void CopyEReaderTrainerFarewellMessage(void);
 
 #if FREE_BATTLE_TOWER_E_READER == FALSE
 #endif //FREE_BATTLE_TOWER_E_READER
@@ -38,9 +37,6 @@ static void HandleSpecialTrainerBattleEnd(void)
             enum Item itemBefore = GetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM);
             SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM, &itemBefore);
         }
-        break;
-    case SPECIAL_BATTLE_EREADER:
-        CopyEReaderTrainerFarewellMessage();
         break;
     case SPECIAL_BATTLE_MULTI:
         if (!AreMultiPartiesFullTeams())
@@ -84,27 +80,10 @@ void DoSpecialTrainerBattle(void)
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_SECRET_BASE));
         break;
-    case SPECIAL_BATTLE_EREADER:
-    #if FREE_BATTLE_TOWER_E_READER == FALSE
-        ZeroEnemyPartyMons();
-        for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.ereaderTrainer.party); i++)
-            CreateBattleTowerMon(&gParties[B_TRAINER_OPPONENT_A][i], &gSaveBlock2Ptr->frontier.ereaderTrainer.party[i]);
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_EREADER_TRAINER;
-        TRAINER_BATTLE_PARAM.opponentA = 0;
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_E_READER));
-    #endif //FREE_BATTLE_TOWER_E_READER
-        break;
     case SPECIAL_BATTLE_MULTI:
     default:
         errorf("Unknown special battle type %d", gSpecialVar_0x8004);
     }
-}
-
-void SetEReaderTrainerGfxId(void)
-{
-    SetBattleFacilityTrainerGfxId(TRAINER_EREADER, 0);
 }
 
 u8 GetEreaderTrainerFrontSpriteId(void)
@@ -187,21 +166,3 @@ void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
-void CopyEReaderTrainerGreeting(void)
-{
-#if FREE_BATTLE_TOWER_E_READER == FALSE
-    FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
-#endif //FREE_BATTLE_TOWER_E_READER
-}
-
-static void CopyEReaderTrainerFarewellMessage(void)
-{
-#if FREE_BATTLE_TOWER_E_READER == FALSE
-    if (gBattleOutcome == B_OUTCOME_DREW)
-        gStringVar4[0] = EOS;
-    else if (gBattleOutcome == B_OUTCOME_WON)
-        FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerWon);
-    else
-        FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerLost);
-#endif //FREE_BATTLE_TOWER_E_READER
-}

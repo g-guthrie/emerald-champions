@@ -235,7 +235,7 @@ enum {
     MB_BLUEPRINT,
     MB_CABLE_BOX_RESULTS_2,
     MB_WIRELESS_BOX_RESULTS,
-    MB_TRAINER_HILL_TIMER,
+    MB_TRAINER_HILL_TIMER, // Retired Trainer Hill; kept so the metatile behavior values after it do not shift.
     MB_SKY_PILLAR_CLOSED_DOOR,
     MB_UP_RIGHT_STAIR_WARP,
     MB_UP_LEFT_STAIR_WARP,

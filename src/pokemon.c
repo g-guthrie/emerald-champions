@@ -57,7 +57,6 @@
 #include "test_runner.h"
 #include "text.h"
 #include "trainer.h"
-#include "trainer_hill.h"
 #include "util.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
@@ -4803,8 +4802,6 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 {
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         return GetTrainerEncounterMusicIdInBattlePyramid(trainerOpponentId);
-    else if (InTrainerHillChallenge())
-        return GetTrainerEncounterMusicIdInTrainerHill(trainerOpponentId);
     else
         return GetTrainerStructFromId(trainerOpponentId)->encounterMusic;
 }

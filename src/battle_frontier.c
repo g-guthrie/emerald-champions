@@ -54,7 +54,6 @@ static void HandleFacilityTrainerBattleEnd(void)
             gSaveBlock2Ptr->frontier.battlesCount = 0xFFFFFF;
         }
         break;
-    case FACILITY_BATTLE_TRAINER_HILL:
     default:
         break;
     }
@@ -166,7 +165,6 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID));
         break;
-    case FACILITY_BATTLE_TRAINER_HILL:
     default:
         break;
     }

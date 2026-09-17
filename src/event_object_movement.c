@@ -38,7 +38,6 @@
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
-#include "trainer_hill.h"
 #include "util.h"
 #include "wild_encounter.h"
 #include "wild_encounter_ow.h"
@@ -2807,8 +2806,6 @@ void TrySpawnLightSprites(s16 camX, s16 camY)
 
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         objectCount = GetNumBattlePyramidObjectEvents();
-    else if (InTrainerHill())
-        objectCount = 2;
     else
         objectCount = gMapHeader.events->objectEventCount;
 
@@ -2839,8 +2836,6 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
 
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             objectCount = GetNumBattlePyramidObjectEvents();
-        else if (InTrainerHill())
-            objectCount = HILL_TRAINERS_PER_FLOOR;
         else
             objectCount = gMapHeader.events->objectEventCount;
 

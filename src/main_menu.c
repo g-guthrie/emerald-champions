@@ -542,7 +542,6 @@ enum
     ACTION_OPTION,
     ACTION_MYSTERY_GIFT,
     ACTION_MYSTERY_EVENTS,
-    ACTION_EREADER,
     ACTION_INVALID
 };
 
@@ -1051,7 +1050,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 }
                 else
                 {
-                    action = ACTION_EREADER;
+                    action = ACTION_INVALID;
+                    gTasks[taskId].tMenuType = HAS_SAVED_GAME;
                 }
                 break;
             case 3:
@@ -1110,10 +1110,6 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             break;
         case ACTION_MYSTERY_EVENTS:
             SetMainCallback2(CB2_InitMysteryEventMenu);
-            DestroyTask(taskId);
-            break;
-        case ACTION_EREADER:
-            SetMainCallback2(CB2_InitEReader);
             DestroyTask(taskId);
             break;
         case ACTION_INVALID:

@@ -536,14 +536,6 @@ Movement_PlayerEnterMinigameRoom_Frlg::
 	walk_up
 	step_end
 
-CableClub_EventScript_ShowBattleRecords_Frlg::
-	lockall
-	fadescreen FADE_TO_BLACK
-	setvar VAR_0x8004, 0
-	special ShowTrainerHillRecords
-	releaseall
-	end
-
 BattleColosseum_2P_EventScript_PlayerSpot0::
 	setvar VAR_0x8005, 0
 	textcolor NPC_TEXT_COLOR_NEUTRAL

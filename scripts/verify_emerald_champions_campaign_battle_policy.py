@@ -39,8 +39,6 @@ CASES = (
     ("frontier-factory", ("BATTLE_TYPE_TRAINER", "BATTLE_TYPE_FACTORY"), 2, WIN, "rental-party callback requires WON"),
     ("frontier-pike-wild", ("BATTLE_TYPE_PIKE",), 2, WIN, "Pike room callback requires a normal completed battle"),
     ("frontier-pyramid", ("BATTLE_TYPE_TRAINER", "BATTLE_TYPE_PYRAMID"), 2, WIN, "Pyramid floor callback requires WON"),
-    ("trainer-hill", ("BATTLE_TYPE_TRAINER", "BATTLE_TYPE_TRAINER_HILL"), 2, WIN, "Hill timer and result callback require WON"),
-    ("ereader-trainer", ("BATTLE_TYPE_TRAINER", "BATTLE_TYPE_EREADER_TRAINER"), 2, WIN, "special trainer callback requires WON"),
     ("secret-base", ("BATTLE_TYPE_TRAINER", "BATTLE_TYPE_SECRET_BASE"), 2, WIN, "secret-base callback requires WON"),
     ("partner-multi-trainer", ("BATTLE_TYPE_TRAINER", "BATTLE_TYPE_DOUBLE", "BATTLE_TYPE_MULTI", "BATTLE_TYPE_INGAME_PARTNER"), 1, WIN, "partner restoration must use normal victory cleanup"),
     ("partner-multi-wild", ("BATTLE_TYPE_DOUBLE", "BATTLE_TYPE_MULTI", "BATTLE_TYPE_INGAME_PARTNER"), 1, WIN, "the partner battle is not the opening ordinary catch"),

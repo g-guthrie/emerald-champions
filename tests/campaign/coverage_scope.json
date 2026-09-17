@@ -232,11 +232,6 @@
       "evidence": [{"path": "data/maps/LilycoveCity_ContestLobby/scripts.inc", "contains": "LilycoveCity_ContestLobby_MapScripts"}]
     },
     {
-      "id": "optional.trainer_hill",
-      "classification": "optional",
-      "evidence": [{"path": "data/maps/TrainerHill_Entrance/scripts.inc", "contains": "TrainerHill_Entrance_MapScripts"}]
-    },
-    {
       "id": "optional.legendary_signs",
       "classification": "optional",
       "evidence": [{"path": "src/legendary_signs.c", "contains": "gLegendarySignDefinitions"}]

@@ -25,7 +25,7 @@
 // Save Slot 1: 0-13;  Save Slot 2: 14-27
 #define SECTOR_ID_HOF_1              28
 #define SECTOR_ID_HOF_2              29
-#define SECTOR_ID_TRAINER_HILL       30
+#define SECTOR_ID_TRAINER_HILL       30 // Retired Trainer Hill; nothing writes it, but the sector stays reserved so the save sector map does not shift.
 #define SECTOR_ID_RECORDED_BATTLE    31
 #define SECTORS_COUNT                32
 
