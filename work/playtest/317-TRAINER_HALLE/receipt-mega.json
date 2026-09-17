@@ -1,0 +1,29 @@
+{
+  "play_order": 317, "e_group": "E0486", "trainer": "TRAINER_HALLE", "cap": 96, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Does last-slot Mega Falinks now Mega-Evolve on its first action?",
+  "party_manifest": "work/playtest/317-TRAINER_HALLE/party_vr96_b.json",
+  "party_reuse": "Unchanged from receipt.json (seed 7); same cap 96 and location, chronology audit unchanged.",
+  "level_offsets_at_run": {"PINSIR": 1, "PACHIRISU": 1, "LICKILICKY": 1, "NAGANADEL": 1, "ZARUDE": 1, "FALINKS": 2},
+  "resolved_opponent_levels": {"PINSIR": 95, "PACHIRISU": 95, "LICKILICKY": 95, "NAGANADEL": 95, "ZARUDE": 95, "FALINKS": 96},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/317-TRAINER_HALLE/m1", "seed": 7, "outcome": "won", "turns": 6, "player_faints": 0, "opponent_faints": 6,
+     "narrative": "T1 Pinsir Protect blocked both spreads; Pachirisu Super Fang halved Chi-Yu. T2 Pachirisu Follow Me (ignored by spreads); Heat Wave + Rock Slide KO'd Pinsir and Pachirisu together (no ace-switch this time). T3 Chi-Yu out to Kangaskhan, Landorus Protect ate Draco Meteor; Normal Gem Body Slam 186 into Kangaskhan. T4 Mega Kangaskhan Fake Out (two hits) flinched Naganadel, Earth Power KO'd it; Body Slam took Kangaskhan to 43. T5 Kangaskhan out to Incineroar (Intimidate: Lickilicky -1, Zarude's Clear Amulet held); Zarude Close Combat 267 into Incineroar; crit Sludge Bomb KO'd Zarude. T6 FALINKS MEGA-EVOLVED ON ITS FIRST ACTION (entered end of T5); Incineroar out to Whimsicott; Earth Power KO'd Mega Falinks before its Close Combat resolved. T7 (no advance) Moonblast + Earth Power KO'd Lickilicky."}
+  ],
+  "mega_check": {"evolved": true, "turn": 6, "first_action": true, "board": "Falinks 261/261 enters end of T5 beside Lickilicky 344/344 (-1 Atk) vs Incineroar 111/378 (switching to Whimsicott) and Landorus 307/307. Mega Evolution, then Close Combat chosen into slot 0; Sheer Force Earth Power KO'd it first."},
+  "strategy_checks": [
+    {"check": "Mega Falinks Mega-Evolves on first action", "result": "PASS", "evidence": "T6 'Falinks has Mega Evolved'; opponent party FALINKS_MEGA. The prior receipt's ace-switch defect did not recur: Falinks entered only as the last replacement."},
+    {"check": "No Retreat snowball", "result": "NOT EXERCISED", "evidence": "Falinks chose Close Combat, not No Retreat, into a 111-HP Incineroar (a correct kill attempt); it was KO'd before acting."},
+    {"check": "Pachirisu Follow Me / Nuzzle", "result": "PASS", "evidence": "T1 Super Fang into Chi-Yu, T2 Follow Me; the crack (spreads) is what beat it."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Pinsir T1 blocked Heat Wave (2x) + Rock Slide; no repetition."}
+  ],
+  "protect_ledger": [{"turn": 1, "battler": "PINSIR", "payoff": "Blocked Heat Wave (2x) and Rock Slide."}],
+  "ai_defects": [],
+  "difficulty_reading": "Easier than the prior receipt (2 faints there came from a Draco Meteor I Protected this time). Zero faints in six turns; the Mega now exists but at 4 HP EVs it is OHKO'd by one Sheer Force Earth Power on its entry turn, so it changed nothing. Rule: +1 on the weakest one or two non-Mega members.",
+  "level_changes": {"rule_applied": "+1 on Pinsir (Protect, then died without attacking) and Naganadel (flinched, then KO'd), 1->2 each; both untouched before.",
+    "changes": [{"member": "PINSIR", "before": 1, "after": 2}, {"member": "NAGANADEL", "before": 1, "after": 2}],
+    "rerun": "NOT PERFORMED on build-10: offsets are compiled into the headless ROM and this block may not run make."},
+  "could_this_be_cooler": "Unchanged from receipt.json. The closer needs to survive an entry turn to ever cash No Retreat; the crack line says 'let No Retreat happen' but it never gets the chance.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}
