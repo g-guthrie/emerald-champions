@@ -11,7 +11,6 @@
 #include "hall_of_fame.h"
 #include "item.h"
 #include "pokemon_storage_system.h"
-#include "trainer_hill.h"
 #include "link.h"
 #include "constants/game_stat.h"
 
@@ -721,9 +720,9 @@ static void UpdateSaveAddresses(void)
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
-    u32 *backupVar = gTrainerHillVBlankCounter;
+    u32 *backupVar = gFacilityTimerVBlankCounter;
 
-    gTrainerHillVBlankCounter = NULL;
+    gFacilityTimerVBlankCounter = NULL;
     UpdateSaveAddresses();
     switch (saveType)
     {
@@ -774,7 +773,7 @@ u8 HandleSavingData(u8 saveType)
         WriteSaveSectorOrSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         break;
     }
-    gTrainerHillVBlankCounter = backupVar;
+    gFacilityTimerVBlankCounter = backupVar;
     return 0;
 }
 

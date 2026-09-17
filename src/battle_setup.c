@@ -44,7 +44,6 @@
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
-#include "trainer_hill.h"
 #include "trainer_pools.h"
 #include "trainer_see.h"
 #include "trainer_util.h"
@@ -61,7 +60,6 @@
 #include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-#include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
 enum TransitionType
@@ -512,12 +510,9 @@ void EmeraldChampions_RebuildTrainerBattleParties(void)
     CreateTrainerBattleOpponentParties();
 }
 
-static void DoBattlePyramidTrainerHillBattle(void)
+static void DoBattlePyramidBattle(void)
 {
-    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
-        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID), 0);
-    else
-        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_HILL), 0);
+    CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID), 0);
 
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
@@ -972,7 +967,6 @@ enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id)
     {
         switch (id)
         {
-        case B_TRANSITION_GROUP_TRAINER_HILL:
         case B_TRANSITION_GROUP_SECRET_BASE:
         case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_POKEBALLS_TRAIL;
@@ -991,7 +985,6 @@ enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id)
     {
         switch (id)
         {
-        case B_TRANSITION_GROUP_TRAINER_HILL:
         case B_TRANSITION_GROUP_SECRET_BASE:
         case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_BIG_POKEBALL;
@@ -1321,9 +1314,6 @@ static void SetFacilityOpponent(u8 facility, u8 localId, bool8 isTrainerA)
         case FACILITY_BATTLE_PYRAMID:
             trainerId = LocalIdToPyramidTrainerId(localId);
             break;
-        case FACILITY_BATTLE_TRAINER_HILL:
-            trainerId = LocalIdToHillTrainerId(localId);
-            break;
         default:
             errorf("Invalid facility: %d", facility);
     } 
@@ -1426,8 +1416,6 @@ bool8 GetTrainerFlag(void)
 {
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         return GetBattlePyramidTrainerFlag(gSelectedObjectEvent);
-    else if (InTrainerHill())
-        return GetHillTrainerFlag(gSelectedObjectEvent);
     else
         return FlagGet(GetTrainerAFlag());
 }
@@ -1506,20 +1494,6 @@ void BattleSetup_StartTrainerBattle(void)
 
         MarkApproachingPyramidTrainersAsBattled();
     }
-    else if (InTrainerHillChallenge())
-    {
-        gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
-        TRAINER_BATTLE_PARAM.opponentB = TRAINER_BATTLE_PARAM.opponentA == 1 ? 2 : 1;
-        if (!FillHillTrainersParties())
-        {
-            AbortTrainerHillChallenge();
-            gNoOfApproachingTrainers = 0;
-            ScriptContext_SetupScript(TrainerHill_EventScript_GenerationFailed);
-            ScriptContext_Enable();
-            return;
-        }
-        SetHillTrainerFlag();
-    }
     else if (GetTrainerBattleType(TRAINER_BATTLE_PARAM.opponentA) == TRAINER_BATTLE_TYPE_DOUBLES)
     {
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
@@ -1531,8 +1505,8 @@ void BattleSetup_StartTrainerBattle(void)
     gWhichTrainerToFaceAfterBattle = 0;
     gMain.savedCallback = CB2_EndTrainerBattle;
 
-    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge())
-        DoBattlePyramidTrainerHillBattle();
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+        DoBattlePyramidBattle();
     else
         DoTrainerBattle();
 
@@ -1665,7 +1639,7 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome))
     {
-        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge() || FlagGet(B_FLAG_NO_WHITEOUT))
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(B_FLAG_NO_WHITEOUT))
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
@@ -1674,7 +1648,7 @@ static void CB2_EndTrainerBattle(void)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         DowngradeBadPoison();
-        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InTrainerHillChallenge())
+        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
         {
             RegisterTrainerInMatchCall();
             SetBattledTrainersFlags();
@@ -1722,15 +1696,6 @@ void ShowTrainerIntroSpeech(void)
             CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gSpecialVar_LastTalked));
         else
             CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gObjectEvents[gApproachingTrainers[gApproachingTrainerId].objectEventId].localId));
-
-        ShowFieldMessageFromBuffer();
-    }
-    else if (InTrainerHillChallenge())
-    {
-        if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gSpecialVar_LastTalked));
-        else
-            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gObjectEvents[gApproachingTrainers[gApproachingTrainerId].objectEventId].localId));
 
         ShowFieldMessageFromBuffer();
     }

@@ -22,7 +22,6 @@
 #include "text.h"
 #include "intro.h"
 #include "main.h"
-#include "trainer_hill.h"
 #include "test_runner.h"
 #include "constants/rgb.h"
 #if EC_HEADLESS_FIXTURES
@@ -65,6 +64,9 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
+// Counts VBlanks for a facility challenge timer (Trainer Tower). Defined here because
+// the VBlank handler owns it; the retired Trainer Hill used to define it.
+COMMON_DATA u32 *gFacilityTimerVBlankCounter = NULL;
 COMMON_DATA u16 gKeyRepeatStartDelay = 0;
 COMMON_DATA bool8 gLinkTransferringData = 0;
 COMMON_DATA struct Main gMain = {0};
@@ -185,7 +187,7 @@ static void UpdateLinkAndCallCallbacks(void)
 static void InitMainCallbacks(void)
 {
     gMain.vblankCounter1 = 0;
-    gTrainerHillVBlankCounter = NULL;
+    gFacilityTimerVBlankCounter = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
 #if EC_HEADLESS_FIXTURES
@@ -368,8 +370,8 @@ static void VBlankIntr(void)
 
     gMain.vblankCounter1++;
 
-    if (gTrainerHillVBlankCounter && *gTrainerHillVBlankCounter < 0xFFFFFFFF)
-        (*gTrainerHillVBlankCounter)++;
+    if (gFacilityTimerVBlankCounter && *gFacilityTimerVBlankCounter < 0xFFFFFFFF)
+        (*gFacilityTimerVBlankCounter)++;
 
     if (gMain.vblankCallback)
         gMain.vblankCallback();
@@ -446,14 +448,14 @@ static void WaitForVBlank(void)
     }
 }
 
-void SetTrainerHillVBlankCounter(u32 *counter)
+void SetFacilityTimerVBlankCounter(u32 *counter)
 {
-    gTrainerHillVBlankCounter = counter;
+    gFacilityTimerVBlankCounter = counter;
 }
 
-void ClearTrainerHillVBlankCounter(void)
+void ClearFacilityTimerVBlankCounter(void)
 {
-    gTrainerHillVBlankCounter = NULL;
+    gFacilityTimerVBlankCounter = NULL;
 }
 
 void DoSoftReset(void)

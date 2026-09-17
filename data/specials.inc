@@ -254,7 +254,6 @@ gSpecials::
 	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
 	def_special CallBattlePalaceFunction
-	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle, waitstate=1
 	def_special CallBattleArenaFunction
 	def_special CallBattleFactoryFunction
@@ -302,7 +301,6 @@ gSpecials::
 	def_special DoOrbEffect
 	def_special FadeOutOrbEffect, waitstate=1
 	def_special WaitWeather, waitstate=1
-	def_special BufferEReaderTrainerName
 	def_special GetSlotMachineId
 	def_special GetPlayerFacingDirection, requests_effects=TRUE
 	def_special FoundAbandonedShipRoom1Key
@@ -336,7 +334,6 @@ gSpecials::
 	def_special DoFallWarp, waitstate=1
 	def_special ShowContestEntryMonPic
 	def_special HideContestEntryMonPic
-	def_special SetEReaderTrainerGfxId
 	def_special BattleSetup_StartLatiBattle, waitstate=1
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather
@@ -552,7 +549,6 @@ gSpecials::
 	def_special ChampionsTentHandleBattleResult
 	def_special ChampionsTentEnd
 	def_special ChampionsTentTryGivePrize
-	def_special TrainerHillHasPendingPrize
 	def_special CheckChampionsLinkBattleParty
 	def_special BufferEmeraldChampionsFormGift
 	def_special BuildEmeraldChampionsResearchPartnerChoices
@@ -582,7 +578,6 @@ gSpecials::
 	def_special ShouldDistributeEonTicket
 	def_special LinkRetireStatusWithBattleTowerPartner, waitstate=1
 	def_special BattleTowerReconnectLink
-	def_special CallTrainerHillFunction
 	def_special Script_DoRayquazaScene, waitstate=1 @ Listed twice
 	def_special LoopWingFlapSE
 	def_special DestroyMewEmergingGrassSprite
@@ -590,10 +585,9 @@ gSpecials::
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen, waitstate=1
 	def_special TryGetWallpaperWithWaldaPhrase
-	def_special PlayerNotAtTrainerHillEntrance
 	def_special GetBattlePyramidHint
 	def_special LoadLinkContestPlayerPalettes
-	def_special ShowTrainerHillRecords, waitstate=1
+	def_special ShowTrainerTowerRecords, waitstate=1
 	def_special PlayerFaceTrainerAfterBattle
 	def_special ResetHealLocationFromDewford
 	def_special CountPartyAliveNonEggMons

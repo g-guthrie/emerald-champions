@@ -2258,10 +2258,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             gFieldCallback2 = NULL;
             SetMainCallback2(CB2_LoadMap);
         }
-        else if (gEcHeadlessFixtureParam == 5)
-        {
-            LoadHeadlessMap(MAP_TRAINER_HILL_ENTRANCE, 4, 10);
-        }
         else
         {
             LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
