@@ -169,6 +169,12 @@ extern u32 gAiPairSkipReason;
 #define AI_PAIR_MEGA_CAN_MASK     (3 << 4)
 #define AI_PAIR_MEGA_BEST_MASK    (3 << 6)
 extern u32 gAiPairMegaTrace[MAX_BATTLERS_COUNT];
+// Per battler switch provenance, for a driven battle.
+#define AI_SWITCH_FROM_PAIR   (1 << 0)
+#define AI_SWITCH_BUDGET_GONE (1 << 1)
+#define AI_SWITCH_TRUNCATED   (1 << 2)
+#define AI_SWITCH_SLOT_SHIFT  8
+extern u32 gAiSwitchTrace[MAX_BATTLERS_COUNT];
 u32 NoOfHitsForTargetToFaintBattler(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure);
 void GetBestDmgMovesFromBattler(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum DamageCalcContext calcContext, enum Move *bestMoves);
 u32 GetMoveIndex(enum BattlerId battler, enum Move move);

@@ -1262,6 +1262,10 @@ u32 gAiPairSkipReason;
 // battle can say whether the search ran, whether the candidate was legal, and
 // what it chose - none of which is visible from the outside otherwise.
 u32 gAiPairMegaTrace[MAX_BATTLERS_COUNT];
+// Per battler: how a voluntary switch came to be emitted, so a driven battle
+// can tell the joint search's own reserve enumeration from the per-battler
+// path, and say whether the decision clock had already run out when it did.
+u32 gAiSwitchTrace[MAX_BATTLERS_COUNT];
 static u32 sPairWorkAllowance;
 static u32 sPairWorkDecision;
 
@@ -5873,7 +5877,13 @@ decisionReady:
         gAiLogicData->monToSwitchInId[battler] = bestReserves[index];
         gBattleStruct->AI_monToSwitchIntoId[battler] = bestReserves[index];
         if (bestReserves[index] < PARTY_SIZE && !attackPivot[index])
+        {
             gAiLogicData->shouldSwitch |= 1u << battler;
+            gAiSwitchTrace[battler] = AI_SWITCH_FROM_PAIR
+                | (PairDecisionBudgetExpired() ? AI_SWITCH_BUDGET_GONE : 0)
+                | (gAiPairBudgetTruncated ? AI_SWITCH_TRUNCATED : 0)
+                | ((bestReserves[index] & 7) << 8);
+        }
         // Never hand the controller a move it cannot select: the selection
         // script would reject it and ask again, and the answer never changes.
         // With every move unusable, slot zero is the native Struggle path.
