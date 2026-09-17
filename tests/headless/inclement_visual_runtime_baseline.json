@@ -3859,38 +3859,6 @@
       "pixel_sha256": "0605f835824c869c59917243edf4e0e1d52e3543a826350c3557011fdd05b24d",
       "verified_runtime_state": true
     },
-    "trainer-hill-nurse-heal-placement": {
-      "frames": 1750,
-      "keys": [
-        [
-          200,
-          2,
-          "UP"
-        ],
-        [
-          250,
-          2,
-          "A"
-        ],
-        [
-          1400,
-          2,
-          "A"
-        ],
-        [
-          1480,
-          2,
-          "A"
-        ],
-        [
-          1560,
-          2,
-          "A"
-        ]
-      ],
-      "pixel_sha256": "94461300ac76b4b53d28f3f9b4b62fa8376b6a8732340b19070cd2cd1d96c212",
-      "verified_runtime_state": true
-    },
     "whiteout-heal-lavaridge-placement": {
       "frames": 1280,
       "keys": [

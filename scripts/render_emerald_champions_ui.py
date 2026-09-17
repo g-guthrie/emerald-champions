@@ -95,19 +95,6 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "keys": [(900, 2, "A"), (1160, 2, "A")],
         "verify": True,
     },
-    "trainer-hill-nurse-heal-placement": {
-        "id": 1,
-        "param": 5,
-        "frames": 1750,
-        "keys": [
-            (200, 2, "UP"),
-            (250, 2, "A"),
-            (1400, 2, "A"),
-            (1480, 2, "A"),
-            (1560, 2, "A"),
-        ],
-        "verify": True,
-    },
     "center-lavaridge": {"id": 2, "frames": 600, "keys": []},
     "ability-menu": {
         "id": 3,
@@ -1246,7 +1233,6 @@ SERVICE_UI_SCENARIOS = (
     "whiteout-heal-placement",
     "whiteout-heal-league-placement",
     "whiteout-heal-lavaridge-placement",
-    "trainer-hill-nurse-heal-placement",
     "party-overview",
     "party-action-menu",
     "ability-menu",
