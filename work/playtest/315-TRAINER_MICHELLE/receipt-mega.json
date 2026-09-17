@@ -1,0 +1,37 @@
+{
+  "play_order": 315, "e_group": "E0484", "trainer": "TRAINER_MICHELLE", "cap": 96, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Does lead Mega Meganium now Mega-Evolve on its first action? (ROM ability after Mega: Mega Sol 'acts like under sun', not Triage.)",
+  "party_manifest": "work/playtest/315-TRAINER_MICHELLE/party_vr96_b.json",
+  "party_reuse": "Unchanged from receipt.json attempt 1 (seed 4); same cap 96 and location, chronology audit unchanged.",
+  "level_offsets_at_run": {"MEGANIUM": 2, "MACHAMP": 1, "CHANSEY": 2, "HYDREIGON": 1, "PROBOPASS": 2, "UMBREON": 1},
+  "resolved_opponent_levels": {"MEGANIUM": 96, "MACHAMP": 95, "CHANSEY": 96, "HYDREIGON": 95, "PROBOPASS": 96, "UMBREON": 95},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/315-TRAINER_MICHELLE/m1", "seed": 4, "outcome": "won", "turns": 7, "player_faints": 1, "opponent_faints": 6,
+     "narrative": "T1 Meganium (base form, Mega unused) Protected Chi-Yu's Overheat; Fake Out flinched Machamp. T2 MEGANIUM MEGA-EVOLVED (second action) and set Light Screen; Machamp's Dynamic Punch OHKO'd Incineroar (378) before Flare Blitz; Chi-Yu out to Landorus. T3 Urshifu in; Meganium Protect blocked Sludge Bomb; Close Combat KO'd Machamp. T4 Meganium switched out to Hydreigon, which ate Sludge Bomb (310->196); Close Combat OHKO'd Chansey (676 through Eviolite); Meganium came back in. T5 Meganium switched out again to Umbreon (ate Sludge Bomb 374->329); Close Combat KO'd Hydreigon before Draco Meteor; Meganium back in. T6 Meganium Protect blocked Sludge Bomb; Close Combat KO'd Umbreon; Light Screen expired. T7 Earth Power OHKO'd Probopass; Close Combat 61 into Meganium; MEGA MEGANIUM HEAL PULSE INTO MY FULL-HP URSHIFU ('Urshifu's HP is full!'). T8 (no advance) Sludge Bomb KO'd Meganium."}
+  ],
+  "mega_check": {"evolved": true, "turn": 2, "first_action": false, "first_action_board": "T1: lead Meganium 349/349 @Meganiumite beside Machamp 306/306 vs Incineroar 378/378 (Intimidate applied) and Chi-Yu 242/242. It chose Protect without Mega-Evolving; Mega Evolution came on T2 with Light Screen. Same pattern as receipt.json attempt 1 on the old build."},
+  "strategy_checks": [
+    {"check": "Mega Meganium Mega-Evolves on its first action", "result": "FAIL", "evidence": "T1 Protect in base form (usable_gimmick mega, mega_already_used false); 'has Mega Evolved' only on T2. Lead Megas that open with Protect still hold the stone a turn (Duncan's Machamp, which opened with an attack, evolved T1)."},
+    {"check": "Heal Pulse priority wall", "result": "FAIL (design vs ROM)", "evidence": "Base ability Triage is replaced by Mega Sol on Mega Evolution, so Heal Pulse has no priority. The one Heal Pulse of the fight (T7) targeted my full-HP Urshifu."},
+    {"check": "Machamp No Guard Dynamic Punch", "result": "PASS", "evidence": "T2 Dynamic Punch OHKO'd Incineroar at -1 Atk; T3 chosen again (KO'd first)."},
+    {"check": "Do not stall with both passive supports", "result": "FAIL", "evidence": "Mega Meganium's seven actions: Protect, Light Screen, Protect, switch, switch, Protect, Heal Pulse (into a foe). Giga Drain was never chosen; the Mega dealt 0 damage."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Meganium T1 blocked Overheat, T3 and T6 blocked Sludge Bomb (2x). Never consecutive. All three blocked real hits, though the pattern is pure stalling."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "MEGANIUM", "payoff": "Blocked Chi-Yu Overheat (2x)."},
+    {"turn": 3, "battler": "MEGANIUM", "payoff": "Blocked Landorus Sludge Bomb (2x)."},
+    {"turn": 6, "battler": "MEGANIUM", "payoff": "Blocked Landorus Sludge Bomb (2x)."}
+  ],
+  "ai_defects": [
+    {"id": "E0484-M1", "severity": "high", "turn": 7, "board": "Mega Meganium 349/349 beside Probopass 311/311 vs Urshifu 328/328 (-4 Def/SpD) and Landorus 307/307.", "chosen": "Heal Pulse, native record target 0 (Urshifu), target_kind foe; message 'Urshifu's HP is full!'", "why_wrong": "Neither the ally nor either foe was below full HP when the action was chosen, so Heal Pulse had no legitimate target; the record shows it aimed at the player's Pokemon. Giga Drain into Landorus or Urshifu was available. Same shape as the documented Clawitzer Heal Pulse case."},
+    {"id": "E0484-M2", "severity": "medium", "turns": "1", "board": "Lead Mega holder opening with Protect", "chosen": "Protect without Mega Evolution", "why_wrong": "Mega Evolution is free and resolves before Protect; delaying it gave up a turn of Mega stats. Reproduces receipt.json's T1 on the new build, so the Mega-board fix does not cover a Protect turn."}
+  ],
+  "difficulty_reading": "Unchanged: one faint (Incineroar OHKO'd by Dynamic Punch), seven turns, the rest a cruise; the Mega spent the whole fight Protecting, switching and healing a foe. Rule: won with 0-1 faints -> +1 on the weakest one or two non-Mega members.",
+  "level_changes": {"rule_applied": "+1 on Hydreigon (KO'd before acting) and Umbreon (did nothing), 1->2 each; Machamp took a KO and is left at 1. Chansey and Probopass already took +1 in the first pass.",
+    "changes": [{"member": "HYDREIGON", "before": 1, "after": 2}, {"member": "UMBREON", "before": 1, "after": 2}],
+    "rerun": "NOT PERFORMED on build-10: offsets are compiled into the headless ROM and this block may not run make."},
+  "could_this_be_cooler": "The plan text is written around Triage Heal Pulse priority; the ROM's Mega Meganium has Mega Sol instead, so the concept as authored does not exist in play. Either the plan needs rewriting around Mega Sol (Solar Beam / Growth / sun-boosted partner) or the Mega should have Triage in the ROM. Reported only.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}
