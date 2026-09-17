@@ -5786,7 +5786,12 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     continue;
                 AI_RestoreCandidateState(state);
                 u32 noActionMask = 0;
-                u32 tieCost = (mega != 0) + (slots[0] < PARTY_SIZE) + (slots[1] < PARTY_SIZE);
+                // Evolving is free. Counting it as a tie-break cost made a
+                // lead Mega decline on any board where the Mega and base
+                // boards scored the same - a Mega that opens with Protect,
+                // for instance, stayed in base form and evolved a turn later
+                // for nothing. Switching still costs a tie.
+                u32 tieCost = (slots[0] < PARTY_SIZE) + (slots[1] < PARTY_SIZE);
                 for (u32 index = 0; index < 2; index++)
                 {
                     if (slots[index] < PARTY_SIZE)
@@ -5953,7 +5958,24 @@ decisionReady:
                 }
         }
         gAiBattleData->chosenMoveIndex[battler] = chosenIndex;
-        gAiBattleData->chosenTarget[battler] = bestActions[index].target;
+        // The fallback action this search starts from carries the actor as its
+        // own target, which is a placeholder and not a decision. If nothing
+        // ever replaced it - a second owner's battler in a multi whose actions
+        // were never enumerated - the engine was handed an ordinary attack
+        // aimed at the body using it, and the turn did nothing at all.
+        enum BattlerId chosenTarget = bestActions[index].target;
+        if (chosenTarget == battler && bestActions[index].index != PAIR_IDLE
+         && !IsBattleMoveStatus(gBattleMons[battler].moves[chosenIndex])
+         && AI_GetBattlerMoveTargetType(battler, gBattleMons[battler].moves[chosenIndex]) == TARGET_SELECTED)
+        {
+            for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+                if (IsBattlerAlive(foe) && !IsBattlerAlly(battler, foe))
+                {
+                    chosenTarget = foe;
+                    break;
+                }
+        }
+        gAiBattleData->chosenTarget[battler] = chosenTarget;
         gAiPairMegaTrace[actor] = (gAiPairMegaTrace[actor] & ~AI_PAIR_MEGA_BEST_MASK)
             | ((bestMega & 3) << 6);
         SetAIUsingGimmick(battler, bestMega & (1u << index) ? USE_GIMMICK : NO_GIMMICK);

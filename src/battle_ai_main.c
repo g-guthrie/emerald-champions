@@ -3057,11 +3057,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     case EFFECT_HEAL_PULSE: // and floral healing
-        if (!IsTargetingPartner(battlerAtk, battlerDef)) // Don't heal enemies
-        {
-            ADJUST_SCORE(-10);
-            break;
-        }
+        // Healing the other side is never the move. A relative penalty is not
+        // enough: on a board where everything else scores badly - a last body
+        // whose attacks are all resisted - the least bad option was a full-HP
+        // heal for the player. It cannot be selected at all.
+        if (!IsTargetingPartner(battlerAtk, battlerDef))
+            return 0;
         // fallthrough
     case EFFECT_HIT_ENEMY_HEAL_ALLY:    // pollen puff
         if (IsTargetingPartner(battlerAtk, battlerDef))

@@ -215,3 +215,30 @@ AI_DOUBLE_BATTLE_TEST("EC starvation: a healing support move is never aimed at t
         EXPECT(playerLeft->hp <= 80);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC starvation: the per-battler path also refuses to heal the other side")
+{
+    GIVEN {
+        // Deliberately without AI_FLAG_SMART_MON_CHOICES, so the joint search
+        // does not run and the per-battler scorer decides. That is the path
+        // the Mega Meganium sighting came from: a body whose attacks are all
+        // resisted, where a full-HP heal for the player was the least bad
+        // score on the board.
+        AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_HP_AWARE
+            | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_SKARMORY) { Level(50); HP(200); MaxHP(300); Defense(200); SpDefense(200); Speed(200); Ability(ABILITY_STURDY); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_MEGANIUM) { Level(50); HP(300); MaxHP(300); SpAttack(80); Speed(60); Ability(ABILITY_OVERGROW); Moves(MOVE_HEAL_PULSE, MOVE_ENERGY_BALL); }
+        OPPONENT(SPECIES_MAGIKARP) { Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_SPLASH);
+        }
+    } THEN {
+        // A heal for the other side would put this body back up; damage from
+        // the attack is fine and expected.
+        EXPECT(playerLeft->hp <= 200);
+        EXPECT(playerRight->hp <= 400);
+    }
+}
