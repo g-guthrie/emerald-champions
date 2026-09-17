@@ -3,8 +3,8 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "match_call.h"
 #include "field_message_box.h"
+#include "pokenav_call.h"
 #include "text_window.h"
 #include "script.h"
 #include "field_name_box.h"
@@ -82,7 +82,7 @@ bool8 ShowFieldMessage(const u8 *str)
 
 static void Task_HidePokenavMessageWhenDone(u8 taskId)
 {
-    if (!IsMatchCallTaskActive())
+    if (!IsPokenavCallTaskActive())
     {
         sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
         DestroyTask(taskId);
@@ -95,7 +95,7 @@ bool8 ShowPokenavFieldMessage(const u8 *str)
         return FALSE;
     StringExpandPlaceholders(gStringVar4, str);
     CreateTask(Task_HidePokenavMessageWhenDone, 0);
-    StartMatchCallFromScript(str);
+    StartPokenavCallFromScript(str);
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_NORMAL;
     return TRUE;
 }

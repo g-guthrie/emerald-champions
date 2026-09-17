@@ -90,16 +90,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnMatchCall,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
     [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
@@ -159,16 +149,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .isLoopTaskActive = IsSearchResultLoopedTaskActive,
         .free1 = FreeSearchResultSubstruct1,
         .free2 = FreeSearchResultSubstruct2,
-    },
-    [POKENAV_MATCH_CALL - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MatchCall,
-        .callback = GetMatchCallCallback,
-        .open = OpenMatchCall,
-        .createLoopTask = CreateMatchCallLoopedTask,
-        .isLoopTaskActive = IsMatchCallLoopedTaskActive,
-        .free1 = FreeMatchCallSubstruct1,
-        .free2 = FreeMatchCallSubstruct2,
     },
     [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
     {

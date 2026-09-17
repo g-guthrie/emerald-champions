@@ -121,7 +121,6 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
 	call MauvilleCity_Gym_EventScript_NextNorthernStop
 	release
 	end

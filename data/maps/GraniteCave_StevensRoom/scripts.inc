@@ -44,15 +44,6 @@ GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt::
 GraniteCave_StevensRoom_EventScript_ArchiveOpen::
 	msgbox GraniteCave_StevensRoom_Text_ArchiveOpen, MSGBOX_DEFAULT
 
-GraniteCave_StevensRoom_EventScript_RegisterSteven::
-	goto_if_set FLAG_REGISTERED_STEVEN_POKENAV, GraniteCave_StevensRoom_EventScript_Finish
-	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
-	closemessage
-	delay 30
-	closemessage
-	delay 30
-	setflag FLAG_REGISTERED_STEVEN_POKENAV
-
 GraniteCave_StevensRoom_EventScript_Finish::
 	call_if_unset FLAG_DELIVERED_DEVON_GOODS, GraniteCave_StevensRoom_EventScript_ManorHandoff
 	call GraniteCave_StevensRoom_EventScript_CobalionFarewell
@@ -219,13 +210,6 @@ GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge:
 	.string "here with the KNUCKLE BADGE.\p"
 	.string "I'll entrust you with a MEGA RING\n"
 	.string "before you explore the manor.$"
-
-GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
-	.string "A journey teaches you things you\n"
-	.string "cannot learn in a laboratory.\p"
-	.string "I'll keep studying these unusual\n"
-	.string "POKéMON sightings. Look for me\l"
-	.string "wherever the rocks are strange.$"
 
 GraniteCave_StevensRoom_Text_ManorHandoff:
 	.string "The old account continues out to sea.\n"

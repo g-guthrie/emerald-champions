@@ -43,7 +43,6 @@ Route115_EventScript_RegisterTimothy::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route115_Text_TimothyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_TIMOTHY_1
 	release
 	end
 
@@ -58,14 +57,6 @@ Route115_EventScript_Koichi::
 
 Route115_EventScript_Nob::
 	msgbox Route115_Text_NOB_1_LocalConversation, MSGBOX_NPC
-	end
-
-Route115_EventScript_RegisterNob::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route115_Text_NobRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_NOB_1
-	release
 	end
 
 Route115_EventScript_RematchNob::
@@ -84,7 +75,6 @@ Route115_EventScript_RegisterCyndy::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route115_Text_CyndyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CYNDY_1
 	release
 	end
 

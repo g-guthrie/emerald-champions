@@ -205,9 +205,6 @@ static const struct EmeraldChampionsReviewedMoveAccess sReviewedMoveAccess[] =
 
 TEST("Emerald Champions disables Match Call and Gym rematches")
 {
-#if FREE_MATCH_CALL == FALSE
-    gSaveBlock1Ptr->trainerRematches[REMATCH_ROSE] = 1;
-#endif
 
     EXPECT_EQ(ShouldTryRematchBattleForTrainerId(TRAINER_ROSE_1), FALSE);
     EXPECT_EQ(GetCurrentGymLeaderRematchLevel(), 0);

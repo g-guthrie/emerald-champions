@@ -499,7 +499,6 @@ gSpecials::
 	def_special StartMirageTowerFossilFallAndSink, waitstate=1
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
-	def_special SetMatchCallRegisteredFlag
 	def_special DoDomeConfetti
 	def_special CreateAbnormalWeatherEvent
 	def_special GetAbnormalWeatherMapNameAndType
@@ -572,7 +571,6 @@ gSpecials::
 	def_special SaveForBattleTowerLink, waitstate=1
 	def_special Unused_SetWeatherSunny
 	def_special SetUnlockedPokedexFlags
-	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice, waitstate=1

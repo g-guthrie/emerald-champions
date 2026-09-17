@@ -12357,415 +12357,8 @@
       }
     },
     {
-      "id": "main-12-pokenav-upgrade-menu",
-      "parent": "main-12-devon-ground-floor",
-      "chapter": "A Letter for Dewford",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "walk_to",
-          "position": [
-            14,
-            2
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            13,
-            2
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            13,
-            5
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            5,
-            5
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            5,
-            7
-          ]
-        },
-        {
-          "type": "step",
-          "direction": "DOWN"
-        },
-        {
-          "type": "step",
-          "direction": "DOWN",
-          "allow_map_change": true
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "screenshot",
-          "name": "pokenav-upgrade-menu"
-        }
-      ],
-      "coverage": {
-        "maps": [
-          "MAP_RUSTBORO_CITY"
-        ]
-      },
-      "expected": {
-        "map": "MAP_RUSTBORO_CITY",
-        "flags": {
-          "FLAG_HAS_MATCH_CALL": 1,
-          "FLAG_ADDED_MATCH_CALL_TO_POKENAV": 1
-        },
-        "vars": {
-          "VAR_RESULT": 255
-        }
-      }
-    },
-    {
-      "id": "main-12-first-match-call",
-      "parent": "main-12-pokenav-upgrade-menu",
-      "chapter": "A Letter for Dewford",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "press",
-          "keys": [
-            "DOWN"
-          ],
-          "frames": 40,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "DOWN"
-          ],
-          "frames": 40,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "DOWN"
-          ],
-          "frames": 40,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 180,
-          "duration": 2
-        },
-        {
-          "type": "screenshot",
-          "name": "pokenav-tutorial-main"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "DOWN"
-          ],
-          "frames": 40,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "DOWN"
-          ],
-          "frames": 40,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 180,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 90,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 240,
-          "duration": 2
-        },
-        {
-          "type": "screenshot",
-          "name": "mr-stone-first-call"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120,
-          "duration": 2
-        },
-        {
-          "type": "wait_stable_overworld"
-        },
-        {
-          "type": "screenshot",
-          "name": "pokenav-tutorial-complete"
-        }
-      ],
-      "interactive_mode": "stateful_service",
-      "battle_automation": "native",
-      "coverage": {
-        "maps": [
-          "MAP_RUSTBORO_CITY"
-        ],
-        "labels": [
-          "native_pokenav_tutorial"
-        ]
-      },
-      "expected": {
-        "map": "MAP_RUSTBORO_CITY",
-        "position": [
-          11,
-          17
-        ],
-        "flags": {
-          "FLAG_ENABLE_MR_STONE_POKENAV": 1,
-          "FLAG_ADDED_MATCH_CALL_TO_POKENAV": 1
-        },
-        "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 7
-        },
-        "stable_overworld": true
-      }
-    },
-    {
       "id": "main-12-rustboro-south",
-      "parent": "main-12-first-match-call",
+      "parent": "main-12-devon-ground-floor",
       "chapter": "Briney and the Dewford Crossing",
       "frames": 1,
       "semantic_actions": [
@@ -13462,7 +13055,7 @@
           "ITEM_OLD_ROD": 0
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-oldrod-gift",
@@ -13518,7 +13111,7 @@
           "ITEM_OLD_ROD": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-oldrod-revisit",
@@ -13574,7 +13167,7 @@
           "ITEM_OLD_ROD": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-route106-entry",
@@ -13650,7 +13243,7 @@
           "ITEM_DEVON_PARTS": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-route106-cave",
@@ -13774,7 +13367,7 @@
           "ITEM_DEVON_PARTS": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-flash-hiker",
@@ -13850,7 +13443,7 @@
           "FLAG_BADGE02_GET": 0
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-granite-first-ladder",
@@ -13966,7 +13559,7 @@
           "ITEM_DEVON_PARTS": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-granite-b1f-west-east",
@@ -14082,7 +13675,7 @@
           "ITEM_DEVON_PARTS": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-granite-b2f-east-north",
@@ -14230,7 +13823,7 @@
           "ITEM_DEVON_PARTS": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-granite-b1f-upper-exit",
@@ -14266,7 +13859,7 @@
           "ITEM_DEVON_PARTS": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-granite-steven-door",
@@ -14346,7 +13939,7 @@
           "ITEM_DEVON_PARTS": 1
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-13-steven-letter",
@@ -14398,7 +13991,7 @@
           "FLAG_BADGE02_GET": 0
         }
       },
-      "chapter": "Granite Cave and Steven\u2019s Letter"
+      "chapter": "Granite Cave and Steven’s Letter"
     },
     {
       "id": "main-14-leave-steven",
@@ -16655,10 +16248,6 @@
           11,
           17
         ],
-        "flags": {
-          "FLAG_ENABLE_MR_STONE_POKENAV": 1,
-          "FLAG_ADDED_MATCH_CALL_TO_POKENAV": 1
-        },
         "vars": {
           "VAR_RUSTBORO_CITY_STATE": 7
         },
@@ -20963,7 +20552,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-knuckle-route106",
@@ -21042,7 +20631,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-knuckle-route106-cave",
@@ -21169,7 +20758,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-knuckle-granite-first-ladder",
@@ -21296,7 +20885,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-knuckle-granite-b1f-west-east",
@@ -21415,7 +21004,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-knuckle-granite-b2f-east-north",
@@ -21566,7 +21155,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-knuckle-granite-b1f-upper-exit",
@@ -21605,7 +21194,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-knuckle-granite-steven-door",
@@ -21688,7 +21277,7 @@
           "ITEM_LUCARIONITE": 1
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-17-steven-ring",
@@ -21759,8 +21348,7 @@
         "flags": {
           "FLAG_BADGE02_GET": 1,
           "FLAG_DELIVERED_STEVEN_LETTER": 1,
-          "FLAG_HIDE_GRANITE_CAVE_STEVEN": 1,
-          "FLAG_REGISTERED_STEVEN_POKENAV": 1
+          "FLAG_HIDE_GRANITE_CAVE_STEVEN": 1
         },
         "items": {
           "ITEM_MEGA_RING": 1,
@@ -21772,7 +21360,7 @@
           "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-return-leave-steven",
@@ -21819,7 +21407,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-return-granite-steven-door-reverse",
@@ -21882,7 +21470,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-return-granite-b1f-upper-exit-reverse",
@@ -21929,7 +21517,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-return-granite-b2f-east-north-reverse",
@@ -22064,7 +21652,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-return-granite-b1f-west-east-reverse",
@@ -22215,7 +21803,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-return-granite-first-ladder-reverse",
@@ -22338,7 +21926,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-return-route106-dewford",
@@ -22473,7 +22061,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-slateport-sail",
@@ -22567,7 +22155,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-ring-slateport-city",
@@ -22638,7 +22226,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-route110-open",
@@ -22725,7 +22313,7 @@
         },
         "stable_overworld": true
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-route110-save-menu",
@@ -22763,7 +22351,7 @@
           "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
         }
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-route110-save",
@@ -22865,7 +22453,7 @@
           99
         ]
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "main-18-route110-cold-continue",
@@ -22903,7 +22491,7 @@
           99
         ]
       },
-      "chapter": "Steven\u2019s Gift and the Road to Mauville"
+      "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
       "id": "optional-slateport-greta-offer",

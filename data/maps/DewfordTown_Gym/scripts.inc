@@ -157,7 +157,6 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	delay 30
 	closemessage
 	delay 30
-	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 0
 	setflag FLAG_ENABLE_ROXANNE_FIRST_CALL

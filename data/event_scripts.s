@@ -124,7 +124,7 @@ gStdScripts::
 	.4byte Std_MsgboxYesNo             @ MSGBOX_YESNO
 	.4byte Std_MsgboxAutoclose         @ MSGBOX_AUTOCLOSE
 	.4byte Std_ObtainDecoration        @ STD_OBTAIN_DECORATION
-	.4byte Std_RegisteredInMatchCall   @ STD_REGISTER_MATCH_CALL
+	.4byte 0                          @ unused slot 8 (was STD_REGISTER_MATCH_CALL)
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
 	.4byte Std_MsgboxPokenav           @ MSGBOX_POKENAV
 	.4byte Std_PutItemAway             @ STD_PUT_ITEM_AWAY
@@ -1771,7 +1771,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/text/check_furniture.inc"
 	.include "data/scripts/cave_hole.inc"
 	.include "data/scripts/lilycove_lady.inc"
-	.include "data/text/match_call.inc"
 	.include "data/scripts/apprentice.inc"
 	.include "data/text/apprentice.inc"
 	.include "data/scripts/battle_pike.inc"

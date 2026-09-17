@@ -40,7 +40,6 @@ Route124_EventScript_Lila::
 
 Route124_EventScript_RegisterLila::
 	msgbox Route124_Text_LilaRoyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_LILA_AND_ROY_1
 	release
 	end
 
@@ -59,7 +58,6 @@ Route124_EventScript_Roy::
 
 Route124_EventScript_RegisterRoy::
 	msgbox Route124_Text_LilaRoyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_LILA_AND_ROY_1
 	release
 	end
 

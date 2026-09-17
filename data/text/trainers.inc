@@ -11,16 +11,6 @@ Route102_Text_CalvinPostBattle:
 	.string "Listen, you. If you're strong,\n"
 	.string "you should have told me before!$"
 
-Route102_Text_CalvinRegister:
-	.string "I've been working hard at this since\n"
-	.string "I saw you before.\p"
-	.string "I want to keep comparing training\n"
-	.string "notes. Come find me again!$"
-
-Route102_Text_CalvinRegisterShort:
-	.string "Let's compare training notes\n"
-	.string "the next time you pass through!$"
-
 Route102_Text_CalvinRematchIntro:
 	.string "Ever since I lost to you, I desperately\n"
 	.string "trained my POKéMON.\l"
@@ -290,18 +280,6 @@ Route104_Text_WinstonPostBattle:
 	.string "There are some things money can't buy.\n"
 	.string "That's POKéMON…$"
 
-Route104_Text_WinstonRegister1:
-	.string "Hm?\n"
-	.string "You battle better than you dress.\p"
-	.string "I will gladly face you again.\n"
-	.string "After all, I have plenty of money.$"
-
-Route104_Text_WinstonRegister2:
-	.string "Hm?\n"
-	.string "You battle better than you dress.\p"
-	.string "I will gladly register you.\n"
-	.string "After all, I have plenty of money.$"
-
 Route104_Text_WinstonRematchIntro:
 	.string "After I lost to you, I learned a bunch\n"
 	.string "of things about POKéMON.$"
@@ -325,17 +303,6 @@ Route104_Text_CindyDefeat:
 Route104_Text_CindyPostBattle:
 	.string "“Hello” is the beginning of “good-bye.”\n"
 	.string "I hope we meet again.$"
-
-Route104_Text_CindyRegister1:
-	.string "Hello, we meet again.\p"
-	.string "We seem to be drawn together.\n"
-	.string "I expect we will meet a third time.$"
-
-Route104_Text_CindyRegister2:
-	.string "We should commemorate how we seem\n"
-	.string "to be drawn to each other.\p"
-	.string "I will wait on this road for our\n"
-	.string "third meeting.$"
 
 Route104_Text_CindyRematchIntro:
 	.string "Hello, we meet again.\n"
@@ -1472,10 +1439,6 @@ Route115_Text_NobPostBattle:
 	.string "It looks like they'll get a lot better\n"
 	.string "than me. I'm excited about that.$"
 
-Route115_Text_NobRegister:
-	.string "You impress me! Let me share how\n"
-	.string "our training develops!$"
-
 Route115_Text_NobRematchIntro:
 	.string "After you beat me, we trained hard to\n"
 	.string "improve our skills.\l"
@@ -1633,18 +1596,6 @@ Route116_Text_JerryPostBattle:
 	.string "the TRAINER'S SCHOOL.\l"
 	.string "If I don't, ROXANNE will be steamed.$"
 
-Route116_Text_JerryRegister1:
-	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that losing teaches you the most.\p"
-	.string "I don't really get what that means,\n"
-	.string "but I sure am learning today!$"
-
-Route116_Text_JerryRegister2:
-	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that losing teaches you the most.\p"
-	.string "I don't really get what that means,\n"
-	.string "so can I just try it?$"
-
 Route116_Text_JerryRematchIntro:
 	.string "I've been studying seriously at the\n"
 	.string "TRAINER'S SCHOOL.\l"
@@ -1669,14 +1620,6 @@ Route116_Text_KarenDefeat:
 Route116_Text_KarenPostBattle:
 	.string "Awww, I'll never become an elegant\n"
 	.string "TRAINER like ROXANNE this way!$"
-
-Route116_Text_KarenRegister1:
-	.string "Oh, wow! Isn't that a POKéNAV?\n"
-	.string "I have one, too! Ours match!$"
-
-Route116_Text_KarenRegister2:
-	.string "Oh, wow! Isn't that a POKéNAV?\n"
-	.string "I have one, too! Ours match!$"
 
 Route116_Text_KarenRematchIntro:
 	.string "I studied a whole lot since I saw you.\n"
@@ -1806,10 +1749,6 @@ Route117_Text_DylanPostBattle:
 	.string "I may have blown it…\p"
 	.string "I might have dropped to last during\n"
 	.string "that battle…$"
-
-Route117_Text_DylanRegister:
-	.string "POKéMON have to be strong, too?\n"
-	.string "I'd like you to train me!$"
 
 Route117_Text_DylanRematchIntro:
 	.string "I'm smack in the middle of a triathlon,\n"
@@ -2270,10 +2209,6 @@ Route120_Text_RobertDefeat:
 Route120_Text_RobertPostBattle:
 	.string "A POKéMON that grows steadily is one\n"
 	.string "you can count on.$"
-
-Route120_Text_RobertRegister:
-	.string "You can be counted on to get better.\n"
-	.string "I'd like to see how far you go!$"
 
 Route120_Text_RobertRematchIntro:
 	.string "A POKéMON that grows steadily is one\n"

@@ -95,9 +95,6 @@ static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
     [HELPBAR_CONDITION_MON_LIST]    = COMPOUND_STRING("{A_BUTTON}CONDITION {B_BUTTON}CANCEL"),
     [HELPBAR_CONDITION_MON_STATUS]  = COMPOUND_STRING("{A_BUTTON}MARKINGS {B_BUTTON}CANCEL"),
     [HELPBAR_CONDITION_MARKINGS]    = COMPOUND_STRING("{A_BUTTON}SELECT MARK {B_BUTTON}CANCEL"),
-    [HELPBAR_MC_TRAINER_LIST]       = COMPOUND_STRING("{A_BUTTON}MENU {B_BUTTON}CANCEL"),
-    [HELPBAR_MC_CALL_MENU]          = COMPOUND_STRING("{A_BUTTON}OK {B_BUTTON}CANCEL"),
-    [HELPBAR_MC_CHECK_PAGE]         = COMPOUND_STRING("{B_BUTTON}CANCEL"),
     [HELPBAR_RIBBONS_MON_LIST]      = COMPOUND_STRING("{A_BUTTON}RIBBONS {B_BUTTON}CANCEL"),
     [HELPBAR_RIBBONS_LIST]          = COMPOUND_STRING("{A_BUTTON}CHECK {B_BUTTON}CANCEL"),
     [HELPBAR_RIBBONS_CHECK]         = COMPOUND_STRING("{B_BUTTON}CANCEL"),
@@ -149,11 +146,6 @@ static const struct CompressedSpriteSheet sMenuLeftHeaderSpriteSheets[] =
         .data = gPokenavLeftHeaderRibbons_Gfx,
         .size = 0x20,
         .tag = 2
-    },
-    [POKENAV_GFX_MATCH_CALL_MENU] = {
-        .data = gPokenavLeftHeaderMatchCall_Gfx,
-        .size = 0x20,
-        .tag = 4
     },
     [POKENAV_GFX_MAP_MENU_ZOOMED_OUT] = {
         .data = gPokenavLeftHeaderHoennMap_Gfx,
