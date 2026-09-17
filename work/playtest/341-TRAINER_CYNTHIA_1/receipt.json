@@ -1,0 +1,33 @@
+{
+ "play_order": 341, "e_group": "E0513", "trainer": "TRAINER_CYNTHIA_1", "class": "leader", "location": "MossdeepCity_House1", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; Milotic/Togekiss offset 2 L100, Spiritomb/Lucario/Miraidon offset 3 L101, Garchomp offset 4 L102 = cap+offset-2 on Medium.",
+ "difficulty": "medium", "build_dir": "work/agent-battle-build-9",
+ "party_manifests": ["work/playtest/341-TRAINER_CYNTHIA_1/party_sinnoh_answer.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open; no gate-100 species. Three reachable legends (Ting-Lu, Chien-Pao, Chi-Yu); no Intimidate/Snarl brought so Competitive never fires. See the manifest availability audit.",
+ "pre_play_strategy_checks": ["Togekiss Follow Me pulls single-target attacks; Air Slash 60% flinch; Thunder Wave", "Milotic Competitive punishes stat drops; Recover", "Spiritomb Foul Play / Will-O-Wisp / Snarl, no weaknesses", "Scarf Lucario mixed speed tier", "Miraidon Hadron Engine Electric Terrain on entry, Specs Electro Drift", "Mega Garchomp Z custom form (source: pure Dragon, 130/85/151 Atk/Def/Spe, Rough Skin)"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_sinnoh_answer.json (Ting-Lu/Flutter Mane/Chien-Pao/Rillaboom/Chi-Yu/Urshifu)", "outcome": "won", "turns": 10, "player_faints": 1, "opponent_faints": 6,
+   "why": "t1-t2 spread Rock Slide + Dazzling Gleam through Follow Me did little: Milotic Recovered and Togekiss Thunder Waved Flutter Mane. t3 Ruination halved Togekiss, Scald 202 on Ting-Lu. t4 Togekiss and Ting-Lu both Protected. t5 Overheat KO'd Togekiss (Follow Me pulled it anyway); Scald 195 on Chi-Yu. t6 Milotic Protected Wood Hammer, Foul Play 215 on Rillaboom. t7 Milotic's second Protect failed and Grassy Glide KO'd it; Icicle Crash flinched Spiritomb. t8 AI switched Spiritomb for Miraidon into Wood Hammer (Electric Terrain replaced Grassy), Sacred Sword OHKO'd Scarf Lucario. t9 Specs Electro Drift KO'd Rillaboom, Icicle Crash OHKO'd Miraidon. t10 Mega Garchomp Z (151 Speed) outsped Chien-Pao and Rock Slided both, Icicle Crash KO'd Spiritomb, crit Surging Strikes (resisted: the Z form is pure Dragon) took Garchomp to 144. t11 Ice Shard KO'd it. Faints: Rillaboom."}
+ ],
+ "strategy_checks": [
+  {"check": "Togekiss Follow Me / Air Slash / Thunder Wave", "result": "PASS (Follow Me t1, t3, t5; Thunder Wave t2), Air Slash never chosen", "evidence": "Follow Me every attacking turn; the player's spread damage ignored it as the crack says; Protect t4 blocked an Overheat"},
+  {"check": "Milotic Competitive / Recover", "result": "PASS (Recover t2; Competitive never triggered because no drop was aimed at it)", "evidence": "Scald 136/202/195, Recover to full t2, Protect t6 then a failed consecutive Protect t7"},
+  {"check": "Spiritomb Foul Play / WoW / Snarl", "result": "PASS (Foul Play)", "evidence": "Foul Play 215 on Rillaboom t6, resisted on Chien-Pao t9/t10; never Will-O-Wisp or Snarl"},
+  {"check": "Scarf Lucario", "result": "FAIL (no window)", "evidence": "t8 Close Combat chosen into Rillaboom; Sacred Sword (Sword of Ruin) OHKO'd it first"},
+  {"check": "Miraidon Hadron Engine + Specs Electro Drift", "result": "PASS", "evidence": "t8 Electric Terrain on entry replaced Grassy Terrain; t9 Electro Drift KO'd Rillaboom through a resistance and Assault Vest"},
+  {"check": "Mega Garchomp Z custom form", "result": "PASS", "evidence": "Mega Evolved t10 and moved before Chien-Pao (base 151 Speed); Rock Slide double hit; Surging Strikes 'not very effective' confirms pure Dragon typing"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 4, "user": "Togekiss", "payoff": "blocked Overheat (an OHKO); partner Scald into Ting-Lu's Protect - even"},
+  {"run": "a1", "turn": 6, "user": "Milotic", "payoff": "blocked Wood Hammer (an OHKO); partner Foul Play 215"},
+  {"run": "a1", "turn": 7, "user": "Milotic", "payoff": "consecutive Protect failed; KO'd by Grassy Glide"}
+ ],
+ "protect_summary": "3 Protects: two good, one failed consecutive attempt.",
+ "ai_defects": [],
+ "ai_notes": "Sound: Follow Me every turn a single-target threat existed, Recover at the right time, the Spiritomb-for-Miraidon switch absorbed a Wood Hammer at a resistance and set Electric Terrain over Grassy. Togekiss never clicked Air Slash (the plan's 'highest-value click') in five turns - it preferred Follow Me/Thunder Wave/Protect, all reasonable.",
+ "level_changes": [{"member": "MILOTIC", "before": 2, "after": 3}, {"member": "TOGEKISS", "before": 2, "after": 3}],
+ "level_change_rationale": "Won first try 6-1 in 10 turns with a single faint. Per the brief, +1 on the two weakest members (the offset-2 support lead); Spiritomb/Lucario/Miraidon and the Mega untouched.",
+ "cooler": "The final boss is coherent and every phase appeared. Togekiss carrying Air Slash but never using it is the one gap - if the AI will not click it, Follow Me + Thunder Wave + Protect + Air Slash is effectively a three-move set. Species/sets unchanged in this pass.",
+ "legality_notes": "Sets legal; driver accepted the party. Mega Garchomp Z read from source: gen_4_families.h, pure Dragon, base 130 Atk / 85 Def / 151 Spe, Rough Skin.",
+ "verification_limit": "Milotic 2->3 and Togekiss 2->3 cannot be re-verified until the main agent rebuilds."
+}

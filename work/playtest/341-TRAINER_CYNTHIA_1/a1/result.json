@@ -1,0 +1,33 @@
+{
+  "trainer_a": "TRAINER_CYNTHIA_1",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 1,
+  "difficulty": "medium",
+  "level_cap": 100,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 10,
+  "decisions": 12,
+  "player_faints": 1,
+  "opponent_faints": 6,
+  "ai_decision_frames_max": 63,
+  "ai_decision_seconds_max": 1.055,
+  "ai_decision_frames": [
+    61,
+    53,
+    62,
+    62,
+    62,
+    61,
+    63,
+    61,
+    61,
+    62,
+    23,
+    23
+  ],
+  "rom_sha256": "53e0f936f54c1410be36cc9471c5f705edb08d8a4a3ef589fb3eee9c62bda8cd",
+  "elf_sha256": "0c36a0a97220147d71a9db6913b519742fe90c3fa5add8fc255c8d239eda7b25",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
