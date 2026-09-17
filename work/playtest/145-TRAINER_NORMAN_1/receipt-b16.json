@@ -1,0 +1,105 @@
+{
+  "play_order": 145,
+  "e_group": "E0171",
+  "trainer": "TRAINER_NORMAN_1",
+  "class": "leader",
+  "cap": 42,
+  "difficulty": "medium",
+  "pass": "build-16 AI rerun",
+  "purpose": "Measure commits 738e5a8809 (pair search no longer stops with only Protect boards scored for a body) and d50e8337c8 (no authored ACTIVATE trigger on the turn the recipient shields) against the prior receipt's Protect ledger.",
+  "build": {
+    "build_dir": "work/agent-battle-build-16",
+    "inputs_sha256": "448b369f7a06b9f64b7662605c2d39d2bb6a33a5ddfa60ccd7a6bb4d7007f1ab",
+    "rom_sha256": "8f2abbcb06f92816f59864ddd03036fd12345175d2db33ad484261e2078fcdae",
+    "elf_sha256": "2b73cfab517165ade29ebc20a369adfdd45a81e5b60a56c28bdcd414801ce0d5",
+    "stale_build_check": "PASS - driver asserted level_cap 42 from the ROM; no 'campaign cap did not reach N; the ROM reports 0' report."
+  },
+  "prior_receipt": "work/playtest/145-TRAINER_NORMAN_1/receipt.json",
+  "reused_from_prior": {
+    "party_manifest": "work/playtest/145-TRAINER_NORMAN_1/party-a3.json",
+    "seed": 37,
+    "why": "party-a3 / seed 37 is the prior receipt's decisive attempt (attempt 3, the only win)."
+  },
+  "resolved_levels_check": "PASS - every opponent level equals cap + authored offset - 2 and matches the live board: Weezing-Galar 42+3-2=43, Slaking 42+4-2=44, Indeedee-F 42+3-2=43, Porygon2 42+4-2=44, Meloetta 42+3-2=43, Mega Staraptor 42+1-2=41.",
+  "attempt": {
+    "n": 1,
+    "run_dir": "work/playtest/145-TRAINER_NORMAN_1/run-b16",
+    "seed": 37,
+    "party": "party-a3.json",
+    "outcome": "won",
+    "turns": 10,
+    "decisions": 13,
+    "player_faints": 1,
+    "opponent_faints": 6,
+    "player_faints_detail": ["Alakazam - turn 4, critical High Horsepower from the -2 Attack Slaking"],
+    "opponent_faints_detail": [
+      "Weezing-Galar turn 2 (Life Orb Psychic)",
+      "Indeedee-F turn 4 (Focus Blast, redirected into it by its own Follow Me)",
+      "Porygon2 turn 7 (Dark Pulse, after Taunt shut off Recover)",
+      "Meloetta turn 9 (Knock Off, 2x)",
+      "Mega Staraptor turn 10 (Triple Axel, 2x, on its Mega Evolution turn)",
+      "Slaking turn 11/decision 13 (critical Mega Scizor Knock Off, burned and at -2 Attack)"
+    ],
+    "ai_decision_seconds_max": 1.038,
+    "ai_decision_budget": "PASS - 1.038s against the 1.2s complete opponent decision budget.",
+    "narrative": "Cleaner line than the prior win. T1 Fake Out flinched Slaking while Weezing Protected the Psychic. T2 that same Psychic killed Weezing from full, Intimidate finally resolved as the Gas dropped, and Parting Shot took Slaking to -2 Attack / -1 Sp. Atk and pivoted Incineroar out for Spiritomb. Indeedee arrived with Psychic Terrain; Shadow Ball whiffed on it (my error - Indeedee-F is Psychic/NORMAL, so Ghost is 0x) but Dark Pulse took it to 61. T4 Indeedee used Follow Me, pulled Focus Blast off Slaking and died to it, and Slaking's critical High Horsepower removed Alakazam. Gengar answered Porygon2's slot; Taunt denied Recover and Dark Pulse finished it on T7, though Thunderbolt left Gengar on 3 HP and paralyzed. Weavile replaced Gengar, Knock Off removed Meloetta and its Life Orb on T9 while Will-O-Wisp burned the loafing Slaking, Triple Axel removed Mega Staraptor on its transformation turn, and a Mega Scizor Knock Off ended a burned, -2, Choice-stripped Slaking."
+  },
+  "protect_ledger_build16": [
+    {
+      "turn": 1,
+      "battler": "WEEZING_GALAR (149/149)",
+      "call": "Protect",
+      "verdict": "REAL - excellent",
+      "payoff": "Blocked Alakazam's Life Orb Psychic. Lethality is proven, not estimated: the identical attack KOed Weezing from full 149 HP on the very next turn. The guard bought the Gas one more turn, which is exactly the printed SUPPRESS tactic."
+    }
+  ],
+  "protect_summary_build16": {
+    "opponent_guards_total": 1,
+    "empty": 0,
+    "consecutive_same_battler": 0,
+    "note": "One opponent Protect in eleven decision points. Weezing did not guard a second time; when it was about to die anyway on T2 it had no chance to choose, and Indeedee, Porygon2, Meloetta and Mega Staraptor - all four of which carry Protect - chose an action every single turn instead. No Wide Guard or Quick Guard exists on this team."
+  },
+  "comparison_to_prior_receipt": {
+    "prior_ledger_scope": "receipt.json recorded six opponent Protects across three attempts (two losses and one win).",
+    "empty_protects_before_all_attempts": 0,
+    "empty_protects_before_decisive_attempt": 0,
+    "empty_protects_after": 0,
+    "consecutive_protects_before_all_attempts": 0,
+    "consecutive_protects_before_decisive_attempt": 0,
+    "consecutive_protects_after": 0,
+    "decisive_attempt_detail": "Prior attempt 3 (same party, same seed) had three opponent Protects - Weezing T1, Meloetta T6, Indeedee T8 - all with payoff, none empty, none consecutive. This rerun produced one, also with payoff. Norman was already clean on this axis before the fixes, so this room is a no-regression check rather than a repair measurement, and it passes: the fixes did not turn a guard-free body into a guarding one, and they did not remove the one guard that was correct.",
+    "prior_defects_retested": [
+      {
+        "id": "P13-D1 (prior receipt): Indeedee's Helping Hand aimed at a Meloetta that Protected on the same turn",
+        "status": "NOT REPRODUCED - but untested. Helping Hand was never selected in this run, and no opponent support move and opponent guard landed on the same turn, so the exact board that d50e8337c8 targets never recurred under this seed. No negative evidence either way beyond the absence."
+      },
+      {
+        "id": "P13-D3 (prior receipt): Indeedee never once selected Follow Me in three complete attempts",
+        "status": "RESOLVED in this run. Decision 5 / turn 4: Indeedee-F chose Follow Me at 61/153 beside a Choice-locked Slaking, drew Alakazam's Focus Blast off Slaking and ate it. That is the printed ALLY_COMBO/REDIRECTION plan firing for the first time in this room. Plausibly a side effect of 738e5a8809 - the pair search no longer stops early with only guard boards scored for the support body, so its non-guard support options now reach scoring."
+      },
+      {
+        "id": "P13-D2 (prior receipt): Meloetta used Psychic into a Dark type",
+        "status": "NOT REPRODUCED. Superficially it looks like it recurred - on turn 8 Meloetta chose Psychic at slot b0 and the log printed 'It doesn't affect Weavile...'. It did not recur: at turn start b0 held a 3 HP paralyzed Gengar, against which Psychic is 2x and lethal. I switched Gengar out for Weavile in the same turn. The opponent never reads committed player moves, so this is the no-omniscience rule behaving correctly and is explicitly NOT scored as a defect."
+      }
+    ]
+  },
+  "strategy_checks": [
+    {"check": "Galarian Weezing leads and Neutralizing Gas suppresses every ability on the field", "result": "PASS", "evidence": "Turn 1: Incineroar entered with no Intimidate message and no stat stage moved. Turn 2, on Weezing's KO: 'The effects of the neutralizing gas wore off!' immediately followed by 'The opposing Slaking's Attack fell!' - Intimidate resolving the instant the Gas left."},
+    {"check": "Choice Band Slaking attacks every turn while the Gas is up (no Truant loaf)", "result": "PASS", "evidence": "Turns 1 and 2, the only two turns Weezing was alive, Slaking selected High Horsepower both times (turn 1 it was flinched by Fake Out) and printed no loaf message."},
+    {"check": "Truant returns mid-battle once Weezing is gone", "result": "PASS", "evidence": "'The opposing Slaking is loafing around!' on turns 3, 5, 7 and 9 - strict alternation from the turn after the Gas ended."},
+    {"check": "Indeedee-F sets Psychic Terrain on entry and only arrives after the Gas has left", "result": "PASS", "evidence": "Entered as Weezing's replacement; 'The battlefield got weird!' with terrain_turns 8 from the Terrain Extender, and 'The weirdness disappeared from the battlefield!' on turn 10, i.e. the full eight."},
+    {"check": "Expanding Force becomes a spread attack under Psychic Terrain", "result": "PASS", "evidence": "Turn 3: one Expanding Force resolved against both of my slots in the same message block ('It doesn't affect Spiritomb...' and 'It's not very effective on Alakazam.'). Spread mode fired; my Dark and Psychic bodies blanked the damage, which is the dossier's own crack line."},
+    {"check": "Indeedee uses Follow Me or Helping Hand to protect and enable the pair", "result": "PASS (upgraded from PARTIAL)", "evidence": "Turn 4: Follow Me, 'The opposing Indeedee became the center of attention', which redirected a Fighting-type Focus Blast away from the 138 HP Slaking. The prior receipt recorded Follow Me as never chosen in three complete attempts."},
+    {"check": "Mega Staraptor Mega-Evolves and the AI reads the live suppression state", "result": "PASS", "evidence": "Turn 10: Mega Evolved on its first acting turn; the ability field flipped RECKLESS -> CONTRARY, and it selected Close Combat into Weavile, which Contrary turns into a stat gain and which is 4x on Dark/Ice. Correct choice; it simply died to a faster Triple Axel first."},
+    {"check": "Porygon2's Download activates only once the Gas has gone", "result": "PASS", "evidence": "Entered after Weezing's KO: 'The opposing Porygon2's Attack rose!'"},
+    {"check": "SUPPRESS tactic: Weezing spends its turns keeping Slaking's output alive, not on empty guarding", "result": "PASS", "evidence": "Its one and only action was the turn-1 Protect that blocked a proven-lethal Psychic. It never guarded an unthreatened slot."},
+    {"check": "Every opponent Protect has a payoff (the object of this pass)", "result": "PASS", "evidence": "1 of 1 with concrete payoff; see protect_ledger_build16."}
+  ],
+  "ai_defects": [],
+  "ai_defects_note": "No AI defect observed in this run. Every opponent selection was defensible on the board as it stood at turn start: Slaking stayed Choice-correct, Porygon2 used Icy Wind as speed control while healthy and switched to Thunderbolt for the kill, Indeedee redirected rather than guarded, and Mega Staraptor picked the 4x Contrary attack. Two candidate 'defects' were inspected and rejected: Meloetta's Psychic whiff on turn 8 (caused by my own switch, see comparison_to_prior_receipt) and Indeedee dying to its own Follow Me on turn 4 (it pulled a Fighting-type attack off the ace, which is the point of the move).",
+  "level_changes": [],
+  "level_rule_statement": "NOT APPLIED, and here is why explicitly. The prior receipt's decision was KEEP. The rerun does not flip it. The brief's increase trigger is a first-attempt win with 0-1 player faints AND no real threat; the second half fails. Norman traded a critical High Horsepower KO on my Alakazam, took Gengar to 3 HP with a paralysis, took Spiritomb from 133 to 31, and the fight ran eleven decision points. The prior receipt also has two full optimized losses to this leader on the same lineage, which the brief's keep condition ('after a real fight') covers directly. The lower faint count versus the prior win is explained by a better player line - Parting Shot to -2 Attack plus a Will-O-Wisp on a loafing Slaking neutered the ace - not by the AI getting weaker. No opponent line in the teams file was touched.",
+  "could_this_be_cooler": "Unchanged judgment from the prior receipt: keep the concept exactly. One genuine improvement did land since that receipt, and it matters for this question - with Follow Me now actually firing, the second half of the fight finally reads as the Psychic Terrain pair the dossier describes rather than as a Meloetta solo. That was the one thing the prior receipt named as making the leader read less well than it designs. No species, move, item, ability or EV change recommended.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-16. Not earned campaign traversal."
+}
