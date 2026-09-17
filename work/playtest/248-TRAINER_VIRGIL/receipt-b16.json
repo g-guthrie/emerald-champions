@@ -1,0 +1,128 @@
+{
+  "play_order": 248,
+  "e_group": "E0389",
+  "trainer": "TRAINER_VIRGIL",
+  "class": "gym",
+  "cap": 76,
+  "difficulty": "medium",
+  "pass": "build-16 AI rerun",
+  "purpose": "Measure commits 738e5a8809 (pair search no longer stops with only Protect boards scored for a body) and d50e8337c8 (no authored ACTIVATE trigger on the turn the recipient shields) against the prior receipt's Protect ledger. This room carried two of the block's empty guards.",
+  "build": {
+    "build_dir": "work/agent-battle-build-16",
+    "inputs_sha256": "448b369f7a06b9f64b7662605c2d39d2bb6a33a5ddfa60ccd7a6bb4d7007f1ab",
+    "stale_build_check": "PASS - driver asserted level_cap 76 from the ROM; no 'campaign cap did not reach N; the ROM reports 0' report."
+  },
+  "prior_receipt": "work/playtest/248-TRAINER_VIRGIL/receipt.json (run against work/agent-battle-build-6)",
+  "reused_from_prior": {
+    "party_manifest": "work/playtest/248-TRAINER_VIRGIL/party_gym76.json",
+    "seed": 10,
+    "why": "party_gym76.json / seed 10 is the prior receipt's decisive (and only) attempt."
+  },
+  "resolved_levels_check": "PASS - live board matched cap + offset - 2: Bronzong 75, Dusclops 75, Chimecho 75, Cofagrigus 75, Porygon2 75, Mega Medicham 76.",
+  "attempt": {
+    "n": 1,
+    "run_dir": "work/playtest/248-TRAINER_VIRGIL/b16",
+    "seed": 10,
+    "party": "party_gym76.json",
+    "outcome": "won",
+    "turns": 8,
+    "decisions": 10,
+    "player_faints": 1,
+    "opponent_faints": 6,
+    "ai_decision_seconds_max": 1.038,
+    "ai_decision_budget": "PASS - 1.038s against the 1.2s complete opponent decision budget.",
+    "result_vs_prior": "Better than the prior receipt's decisive attempt: 6-1 in 8 turns against 6-2 in 10.",
+    "player_faints_detail": ["Zapdos turn 6 (Porygon2 Ice Beam, 2x, at 107 HP after a Shadow Ball and a Psychic)"],
+    "player_damage_not_counted_as_faints": "Urshifu was burned on turn 2 and driven to 15/262, and had to be withdrawn; Incineroar finished on 57/301; Mega Gengar on 118/201. Four of my six took real damage.",
+    "opponent_faints_detail": [
+      "Dusclops turn 3 (third always-crit Wicked Blow, 2x)",
+      "Bronzong turn 4 (Knock Off, after a 2x Flare Blitz left it on 1)",
+      "Chimecho turn 5 (one Incineroar Knock Off from full 283 HP - a clean OHKO)",
+      "Cofagrigus turn 7 (Mega Gengar Shadow Ball, 2x)",
+      "Mega Medicham turn 8 (one Mega Gengar Shadow Ball, 2x, on its Mega Evolution turn)",
+      "Porygon2 turn 9 (Focus Blast, 2x, after Knock Off had removed its Eviolite)"
+    ],
+    "narrative": "Fake Out denied Bronzong turn 1 but Dusclops set Trick Room anyway, which is the room working as designed. Under the room Dusclops burned Urshifu, which cost me my best breaker for the rest of the fight, and Bronzong's Body Press plus Night Shade drove it to 15. Three always-crit Wicked Blows removed Dusclops. Trick Room ran its full five turns. Knock Off one-shot Chimecho from full HP, Porygon2 arrived with Download and traded Zapdos for itself, and Mega Gengar - immune to High Jump Kick, immune to Tri Attack, and carrying a Ghost attack that is 2x into four of the six - closed the room by one-shotting Mega Medicham on its transformation turn."
+  },
+  "protect_ledger_build16": [
+    {
+      "turn": 2,
+      "battler": "BRONZONG (243/256)",
+      "call": "Protect",
+      "verdict": "REAL - excellent",
+      "payoff": "Blocked Incineroar's Flare Blitz, 2x into Steel/Psychic. Magnitude is proven, not estimated: the same Flare Blitz landed on turn 3 and took Bronzong from 243 to 1. The guard bought the setter a full extra turn under its own Trick Room."
+    },
+    {
+      "turn": 4,
+      "battler": "CHIMECHO (283/283, its first turn out)",
+      "call": "Protect",
+      "verdict": "EMPTY - no payoff",
+      "payoff": "Nothing was aimed at Chimecho. My Knock Off went to the 1 HP Bronzong and my other slot spent the turn switching a burned 15 HP Urshifu out for Zapdos. The guard blocked zero damage and produced zero progress.",
+      "forecast_defence": "Stronger than the prior receipt allowed for, and it should be recorded. Incineroar's Knock Off was already a revealed move and it is a genuine ONE-SHOT on this Chimecho - proven on turn 5, where it KOed Chimecho from a full 283 HP in a single hit. So a freshly entered Chimecho was guarding against a revealed, lethal, adjacent attack under a mixed forecast, which is exactly what the no-omniscience design asks it to price. It is empty in outcome, not obviously wrong in expectation. Counted as empty for the before/after number all the same."
+    },
+    {
+      "turn": 6,
+      "battler": "COFAGRIGUS (167/242)",
+      "call": "Protect",
+      "verdict": "REAL - excellent",
+      "payoff": "Blocked two attacks in one turn: Incineroar's Knock Off, which is 2x into Ghost and was aimed directly at it, and Zapdos's Heat Wave, a spread move that would have hit it as well. This is the same battler and the same turn number that the prior receipt recorded as EMPTY."
+    }
+  ],
+  "protect_summary_build16": {
+    "opponent_guards_total": 3,
+    "empty": 1,
+    "consecutive_same_battler": 0,
+    "note": "Five of the six carry Protect (Bronzong, Chimecho, Cofagrigus, Porygon2 does not, Mega Medicham does not). Porygon2 attacked on all three of its turns and Mega Medicham opened with Fake Out. No body guarded twice."
+  },
+  "comparison_to_prior_receipt": {
+    "prior_ledger_scope": "receipt.json, same party and same seed on build-6, recorded four opponent Protects: Bronzong T2 (excellent), Chimecho T4 (EMPTY), Cofagrigus T6 (EMPTY), Cofagrigus T9 (excellent).",
+    "empty_protects_before": 2,
+    "empty_protects_after": 1,
+    "consecutive_protects_before": 0,
+    "consecutive_protects_after": 0,
+    "total_guards_before": 4,
+    "total_guards_after": 3,
+    "verdict": "Half fixed. Cofagrigus's empty guard is gone and was replaced by a genuinely excellent one - on the same turn number, the same battler now guards a board where both of my actions were actually aimed at it, and it blocked a 2x Knock Off and a spread Heat Wave together. Chimecho's turn-4 empty guard recurred unchanged: same turn, same first-turn-out board, same zero payoff. This is the one place in my whole block where a prior empty guard was reproduced, and it is the concrete residual finding of this pass.",
+    "chimecho_residual_analysis": "Worth being precise about, because it may not be a scoring bug at all. The board on turn 4 was: Chimecho fresh at 283/283 with Rocky Helmet, its partner Bronzong on 1 HP and certain to die, Trick Room active, and opposite it an Incineroar whose Knock Off had already been revealed and is a proven one-shot on Chimecho. Guarding a lethal revealed threat on a freshly entered body is defensible expected value under a mixed forecast; what made it empty is that I spent Knock Off finishing the 1 HP partner instead. If this is to be tuned, the lever is probably the forecast's weighting of an opponent that has an obvious higher-value target elsewhere on the board (a 1 HP ally), not the guard scoring itself. Recorded as a finding for the AI side rather than as an illegal choice."
+  },
+  "strategy_checks": [
+    {"check": "TRICK_ROOM: Bronzong sets the room only when something slow is standing beside it, and Dusclops carries it as a second setter", "result": "PASS", "evidence": "Turn 1: I flinched Bronzong with Fake Out and Dusclops set the room anyway - 'The opposing Dusclops twisted the dimensions!'. It ran its full five turns and expired on turn 5, 'The twisted dimensions returned to normal!'. The redundancy is the design and it defeated the obvious counterplay."},
+    {"check": "Under reversed order everything Virgil owns moves first", "result": "PASS", "evidence": "Turns 2-5 every opponent action resolved before both of mine, including Dusclops's Will-O-Wisp landing before Urshifu could act on turn 2, and Bronzong's Body Press before Incineroar's Flare Blitz on turn 3."},
+    {"check": "Dusclops is the bulkiest thing in the gym and Pressure drains PP through the stall", "result": "PASS on bulk, UNTESTED on PP", "evidence": "It took three always-crit 2x Wicked Blows to remove an Eviolite Dusclops. The battle was too short for Pressure's PP drain to bite."},
+    {"check": "Will-O-Wisp turns a physical attacker into a non-threat", "result": "PASS - the room's best single action", "evidence": "Turn 2: Dusclops burned Urshifu. That halved the Attack of my only always-crit breaker, chipped it every turn, and combined with Body Press and Night Shade it forced Urshifu out at 15/262 on turn 4. Urshifu never returned. One status move removed my best Pokemon from the fight."},
+    {"check": "Cofagrigus's Mummy erases the ability of anything that makes contact", "result": "UNTESTED", "evidence": "I deliberately followed the dossier's own crack line and never made contact with it - Cofagrigus took a Shadow Ball and a redirected Thunderbolt, both non-contact. The counterplay the room advertises is real and I used it."},
+    {"check": "Eviolite Porygon2 with Download picks whichever offensive stat the player is weaker against", "result": "PASS", "evidence": "'The opposing Porygon2's Attack rose!' on entry, and it went on to KO a 107 HP Zapdos with Ice Beam (2x) and dodge a Heat Wave. It was the last opponent standing and only died after Knock Off removed its Eviolite."},
+    {"check": "Mega Medicham is the payoff - first and doubled under Trick Room, with Fake Out as its opening when the room is already up", "result": "FAIL - not executed, and this is a deployment problem", "evidence": "Medicham entered on turn 8, three turns AFTER Trick Room expired. It Mega Evolved and correctly opened with Fake Out (flinching Incineroar), but with the room gone it was the slowest thing on the field and a single Shadow Ball removed it before it ever used Pure Power on an attacking move. The dossier's centrepiece - 'under Trick Room it is both first and doubled' - has now failed to happen in both recorded runs of this room."},
+    {"check": "Every opponent Protect has a payoff (the object of this pass)", "result": "PARTIAL", "evidence": "2 of 3 with substantial payoff; 1 empty (Chimecho, turn 4). See protect_ledger_build16 and comparison_to_prior_receipt."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P16-V1",
+      "severity": "real, but small in this battle",
+      "turn": 4,
+      "board": "Chimecho 283/283 freshly entered with Rocky Helmet, its partner Bronzong on 1/256, Trick Room active, facing Incineroar 222/301 (Knock Off revealed) and a burned Urshifu on 15/262",
+      "chosen": "Chimecho used Protect",
+      "problem": "Nothing was aimed at it. Both of my actions went elsewhere - Knock Off into the 1 HP Bronzong and a switch. The guard blocked nothing and produced nothing, and it is the same empty guard, on the same turn, that the prior receipt recorded on build-6.",
+      "better": "Dazzling Gleam, which is 2x into Incineroar's Fire/Dark and also hits the second slot, or Psychic into Urshifu. Either converts a wasted turn into damage.",
+      "mitigation": "The forecast case for guarding was genuinely strong - Incineroar's revealed Knock Off is a one-shot on this Chimecho, proven the following turn - so this is a weighting question rather than an obviously wrong pick. The thing the scoring appears not to be pricing is that the opposing attacker had a far more attractive target available (a partner on 1 HP), which sharply lowers the probability that the lethal attack comes at Chimecho this turn.",
+      "cost": "One opponent turn out of roughly thirteen. It did not change the outcome: a Dazzling Gleam instead would not have produced a second player faint."
+    }
+  ],
+  "level_changes": [
+    {
+      "trainer": "TRAINER_VIRGIL",
+      "member": "CHIMECHO",
+      "field": "level offset",
+      "before": 1,
+      "after": 2,
+      "resolved_level_before": 75,
+      "resolved_level_after": 76,
+      "reason": "See level_rule_statement."
+    }
+  ],
+  "level_rule_statement": "APPLIED, and this is the one room in my block where the outcome flips the prior receipt's decision, so I am stating it explicitly. The prior receipt decided KEEP on the strength of a 6-2 win. This rerun, on the same party and the same seed, won 6-1 in 8 turns instead of 10 - a first-attempt win with a single player faint. That is the brief's rule 5 trigger ('won first try with 0-1 player faints') and AGENTS.md's Gym standard reinforces it: 'Every Gym trainer should be an exceptional difficulty benchmark' and 'A comfortable win deserves scrutiny', against a stated aim of roughly three player faints. Two of my six were never touched at all. I have applied the minimum permitted lever: +1 on ONE member, the maximum of the plus-or-minus-1 allowed this pass. Chimecho is the choice because the brief says the weakest one or two members and never the ace or Mega first: all five non-Mega members share the lowest offset (+1), and among them Chimecho is plainly the weakest build - no Eviolite, 4 Def EVs, and it was the only member one-shot from full HP. Mega Medicham (+2) was excluded as the ace. Honest caveats, both of which the main agent should weigh: (a) I cannot retest this, because a level change needs a rebuild and this brief forbids me from running make, so the +1 is recorded for materialization and native retest by the main agent; (b) AGENTS.md says fix AI defects before compensating with levels, and this room still has one - Chimecho's empty turn-4 guard, P16-V1. I judged the win comfortable independently of that defect, because a Dazzling Gleam on turn 4 instead of the guard would not have produced a second faint; but if the AI side would rather fix P16-V1 first and re-measure, reverting this single line is the correct call and I would not argue with it.",
+  "could_this_be_cooler": "The concept is excellent and no composition change is recommended - the dossier's claim that every non-setter is chosen for what it does to the player holds up, and Dusclops's Will-O-Wisp removing my Urshifu from the fight with one status move is the memory the room actually leaves. The real problem is not coolness, it is ordering: Mega Medicham, the advertised payoff, has now arrived AFTER Trick Room expired in both recorded runs, so Pure Power under reversed order - the whole point of the room - has never once happened. It came in fifth and sixth respectively. That is a switch-order and deployment question for the AI side rather than a design change, and fixing it would do far more for this room than any level would. Second, smaller note: Cofagrigus's Mummy also went untested for the second time, because the dossier publishes the counterplay ('do not make contact') clearly enough that a prepared player simply never touches it.",
+  "legality_problems_found": "None.",
+  "materialization_note": "Per the brief I did not materialize. The main agent should run scripts/emerald_champions_teams.py --write and --check, and native-retest the Chimecho +1.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-16. Not earned campaign traversal."
+}
