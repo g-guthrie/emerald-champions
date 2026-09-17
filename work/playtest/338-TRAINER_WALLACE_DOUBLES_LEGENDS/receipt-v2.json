@@ -1,0 +1,317 @@
+{
+ "play_order": 338,
+ "e_group": "E0510",
+ "trainer": "TRAINER_WALLACE_DOUBLES_LEGENDS",
+ "location": "CaveOfOrigin_DianciesRoom",
+ "cap": 100,
+ "difficulty": "medium",
+ "build_dir": "work/agent-battle-build-11",
+ "rom_sha256": "c82ae05b9fc302a463a3c3cadd9664f5a33b0a345fb2a83a36aadda366499b23",
+ "elf_sha256": "b51564ca18621be12f2ab3089f1e1bd01685910106589216c7512ff6fb6152fd",
+ "cap_confirmation": "driver state level_cap 100; opponents Kyogre L104 (offset 6), Zeraora/Magearna L103 (5), Tornadus/Thundurus/Landorus L102 (4) = cap+offset-2 on Medium; player party L100.",
+ "rebuilt_block": "Primal Kyogre @Blue Orb (Water Spout/Ice Beam/Thunder/Protect), Prankster Tornadus @Covert Cloak (Tailwind/Rain Dance/Bleakwind Storm/Protect), Zeraora @Zeraorite Volt Absorb (Fake Out/Plasma Fists/Close Combat/Protect), Thundurus-T Volt Absorb @Life Orb (Wildbolt Storm/Weather Ball/Sludge Bomb/Protect), Landorus Sheer Force @Life Orb (Sandsear Storm/Earth Power/Sludge Bomb/Protect), Magearna Soul-Heart @Leftovers (Calm Mind/Flash Cannon/Dazzling Gleam/Protect).",
+ "chronology_note": "Post-game after the Champion (play order 338); pool-100 open. Gate-100 species (Mewtwo, Steven's Cave Iron Boulder/Iron Crown) excluded because their sources are the Leaf (E0511) and Steven (E0512) maps later in play order. Reachable legends used deliberately, as the brief allows: Tapu Bulu (Route 123 sign), Chien-Pao (Shoal Cave), Ting-Lu (Desert Underpass), Cresselia (Meteor Falls), Melmetal (Meltan sign, New Mauville), Urshifu (Kubfu sign, Route 112). Paradox wilds: Great Tusk, Iron Hands, Raging Bolt. Megas: Galladite (stone window 14), Gengarite (60).",
+ "party_manifests": {
+  "a1": "party_v2_a1_wideguard_grass.json (Mega Gallade / Tapu Bulu AV / Chien-Pao / Great Tusk / Ting-Lu / Rillaboom)",
+  "a2": "party_v2_a2_trick_room.json (Cresselia / Iron Hands Booster / Melmetal AV / Alolan Marowak / Hatterene / Amoonguss)",
+  "a3": "party_v2_a3_perish_trap.json (Mega Gengar / Hitmontop / Ting-Lu / Great Tusk / Chien-Pao / Kingambit)",
+  "a4": "party_v2_a4_hyper_offense.json (Rillaboom LO / Urshifu-RS Band / Raging Bolt / Chien-Pao / Great Tusk / Whimsicott)"
+ },
+ "pre_play_strategy_checks": [
+  "Primordial Sea on the field before anything moves (weather at turn 0)",
+  "Prankster Tailwind turn 1, through a Fake Out attempt (Covert Cloak)",
+  "Water Spout at full HP / Ice Beam / Thunder chosen sensibly; Thunder or Ice Beam picked into Water resists",
+  "Storm moves (Bleakwind/Wildbolt/Sandsear) fired at 100% while rain is up",
+  "Zeraora Mega Evolves on its first action and Fake Outs the biggest threat",
+  "Magearna Calm Mind behind cover, Soul-Heart snowball",
+  "Tornadus Prankster Rain Dance retakes the sky once Kyogre is gone",
+  "Single-target lanes (Ice Beam, Thunder, Earth Power, Sludge Bomb, Weather Ball, Plasma Fists, Close Combat, Flash Cannon) carry the fight when Wide Guard is visible"
+ ],
+ "attempts": [
+  {
+   "n": 1,
+   "seed": 1,
+   "run_dir": "v2-a1",
+   "line": "Wide Guard + Grass into Kyogre, Ice/Ground cleanup (the dossier's own crack)",
+   "party": "Mega Gallade (Wide Guard/Leaf Blade/Close Combat/Protect), Tapu Bulu AV (Wood Hammer/Horn Leech/Stone Edge/Close Combat), Chien-Pao Sash, Great Tusk Booster (Adamant), Ting-Lu, Rillaboom LO",
+   "outcome": "won",
+   "turns": 9,
+   "driver_turns": 8,
+   "player_faints": 3,
+   "opponent_faints": 6,
+   "faints_player_list": [
+    "Mega Gallade (t4, Bleakwind Storm + Weather Ball at -1 SpD)",
+    "Chien-Pao (t6, Sandsear Storm under the second Tailwind)",
+    "Rillaboom (t9, Life Orb recoil on the winning Grassy Glide)"
+   ],
+   "narrative": "t1 Wide Guard blanked Water Spout while Tornadus set Tailwind; AV Bulu Wood Hammer OHKO'd Primal Kyogre (388) before it ever hit anything - the heavy rain lifted on turn 1. t2 Zeraora Mega Evolved and Fake Outed Bulu (Gallade has Inner Focus), Tornadus Rain Dance retook the rain, Mega Gallade Close Combat OHKO'd Mega Zeraora (STAB CC into 75 base Def). t3 Wide Guard blanked Bleakwind again; Bulu out for Ting-Lu (Vessel of Ruin), Thundurus Sludge Bomb crit into Ting-Lu resisted. t4 I attacked instead of guarding: Bleakwind + Weather Ball killed Gallade; Ting-Lu Rock Slide 146/130 on both genies. t5 Tornadus at 239 chose a second Tailwind and died to a crit Icicle Crash; Rock Slide finished Thundurus. t6 Landorus (Tailwind) Sandsear killed the sashless Chien-Pao before it moved; Magearna Calm Mind (+2 with Soul-Heart), Ruination halved it. t7 Rillaboom Fake Out flinched Magearna, Stomping Tantrum 157; Landorus Sludge Bomb 363 on Rillaboom. t8 priority Grassy Glide KO'd Magearna (53), Ruination halved Landorus; Landorus Earth Power went into Ting-Lu instead of the 41-HP Rillaboom. t9 Grassy Glide 163 KO'd Landorus (top roll), Rillaboom fainted to recoil."
+  },
+  {
+   "n": 2,
+   "seed": 2,
+   "run_dir": "v2-a2",
+   "line": "Trick Room (invert the Tailwind team)",
+   "party": "Cresselia Sitrus (Trick Room/Icy Wind/Lunar Dance/Helping Hand), Iron Hands Booster Energy Brave (Fake Out/Wild Charge/Drain Punch/Ice Punch), Melmetal AV Iron Fist, Alolan Marowak Thick Club, Hatterene, Amoonguss",
+   "outcome": "won",
+   "turns": 11,
+   "driver_turns": 10,
+   "player_faints": 1,
+   "opponent_faints": 6,
+   "faints_player_list": [
+    "Amoonguss (t6, crit Bleakwind Storm + Sandsear Storm on the switch-in; survives without the crit)"
+   ],
+   "narrative": "t1 Fake Out flinched Kyogre (no Protect), Tornadus chose Bleakwind Storm over Tailwind, Cresselia set Trick Room at 374/444. t2 Iron Hands moved first and Booster Wild Charge OHKO'd Primal Kyogre from 305 - Water Spout was chosen and never fired; Tornadus Protected with nothing aimed at it. t3 Zeraora Mega + Fake Out flinched Iron Hands; Tornadus Rain Dance retook the rain. t4 Helping Hand Drain Punch OHKO'd Mega Zeraora; Tornadus Protected empty again. t5 Helping Hand Ice Punch OHKO'd Thundurus (it had chosen Weather Ball on Iron Hands); Trick Room expired. t6 Cresselia reset Trick Room; Iron Hands out for Amoonguss, which died to a crit Bleakwind + Sandsear. t7 Melmetal Ice Punch OHKO'd Landorus (4x) before its Earth Power; Tornadus Protected empty a third time. t8 Magearna Calm Mind, Helping Hand Double Iron Bash OHKO'd it from full. t9-t10 Tornadus Protected twice in a row (the second succeeded) then died t11 to Ice Punch. Kyogre never dealt a point of damage; Marowak and Hatterene never entered."
+  },
+  {
+   "n": 3,
+   "seed": 3,
+   "run_dir": "v2-a3",
+   "line": "Shadow Tag + Perish Song behind Wide Guard",
+   "party": "Mega Gengar (Perish Song/Protect/Shadow Ball/Sludge Bomb), Hitmontop Intimidate (Fake Out/Wide Guard/Close Combat/Helping Hand), Ting-Lu, Great Tusk Jolly, Chien-Pao (Ice Shard), Kingambit",
+   "outcome": "won",
+   "turns": 12,
+   "driver_turns": 11,
+   "player_faints": 3,
+   "opponent_faints": 6,
+   "faints_player_list": [
+    "Hitmontop (t4, its own Perish count, kept in to Wide Guard the last Perish turn)",
+    "Great Tusk (t7, crit Close Combat + Earth Power before it moved - Landorus 307 outspeeds Jolly Tusk 300)",
+    "Chien-Pao (t9, Weather Ball after Ice Shard KO'd Landorus)"
+   ],
+   "narrative": "t1 Intimidate on both, Fake Out flinched Kyogre, Tailwind went up, Mega Gengar's Perish Song caught Kyogre and Tornadus under Shadow Tag. t2-t3 Hitmontop Wide Guard blanked Water Spout and Bleakwind Storm both turns while Gengar Protected then Sludge Bombed Tornadus (213); the AI clicked the blanked spread moves every turn and never went to Ice Beam or Thunder. t4 Gengar out for Ting-Lu, Hitmontop Wide Guarded once more; the Perish count hit 0 - Kyogre and Tornadus fainted having dealt zero damage, Hitmontop with them; Tailwind expired. t5 Zeraora Mega + Fake Out and Weather Ball into Tusk's Protect, Ting-Lu Tantrum 254 on Zeraora. t6 Zeraora Protected the double Rock Slide (real) and Thundurus switched to Landorus - good AI. t7 crit CC + Earth Power killed Tusk; Ting-Lu's Rock Slide missed Zeraora. t8 Landorus Protected Ice Shard (real), Zeraora CC into Chien-Pao's Sash, Tantrum KO'd Zeraora. t9 Ice Shard OHKO'd Landorus (4x), Thundurus Weather Ball KO'd the 1-HP Chien-Pao. t10 Thundurus Protected Sucker Punch + Rock Slide (real), Magearna Calm Mind. t11 Thundurus's consecutive Protect failed, Kowtow Cleave KO'd it; Magearna Calm Mind again while eating Tantrum. t12 Kowtow Cleave + Tantrum KO'd +3 Magearna before it attacked."
+  },
+  {
+   "n": 4,
+   "seed": 4,
+   "run_dir": "v2-a4",
+   "line": "Priority hyper-offense abusing their own rain",
+   "party": "Rillaboom LO (Fake Out/Grassy Glide/Wood Hammer/U-turn), Urshifu-RS Choice Band (Surging Strikes/CC/Aqua Jet/U-turn), Raging Bolt Booster, Chien-Pao Sash (Ice Shard), Great Tusk Jolly, Whimsicott Sash (Tailwind/Encore)",
+   "outcome": "won",
+   "turns": 11,
+   "driver_turns": 10,
+   "player_faints": 3,
+   "opponent_faints": 6,
+   "faints_player_list": [
+    "Rillaboom (t4, Plasma Fists after t1 Bleakwind 311)",
+    "Chien-Pao (t7, Dazzling Gleam after its Sash)",
+    "Whimsicott (t8, Weather Ball after Prankster Tailwind)"
+   ],
+   "narrative": "t1 Fake Out flinched Kyogre (it had chosen Ice Beam into the double Water-resist lead - correct), Tornadus chose Bleakwind Storm over Tailwind (311 on Rillaboom, 279 on Urshifu) and Band Surging Strikes in the heavy rain OHKO'd it through anything. t2 Zeraora Mega Evolved but chose Plasma Fists on the 63-HP Urshifu slot (Raging Bolt switched in and resisted it) instead of Fake Out; Kyogre read the Grassy Glide and Protected (real). t3 Grassy Glide + priority Thunderclap KO'd Kyogre before its Water Spout; Zeraora CC 159 on Bolt. t4 Bolt Protect, Glide 305 on -1 Def Zeraora, Plasma Fists KO'd Rillaboom; Thundurus Protected empty. t5 Thundurus switched to Magearna to absorb Draco Meteor and Zeraora Protected Ice Shard - both good AI reads. t6 Ice Shard KO'd Zeraora, Magearna Gleam broke Chien-Pao's Sash. t7 Thundurus Protected Icicle Crash (real), Gleam KO'd Chien-Pao; Magearna +2. t8 Whimsicott Prankster Tailwind, Magearna Protected Headlong Rush (real), Weather Ball KO'd Whimsicott; Magearna +3. t9 Magearna switched to Landorus to absorb the second Headlong Rush (good), Surging Strikes OHKO'd Thundurus. t10 Tusk Protected Earth Power, Band Surging Strikes OHKO'd Landorus through its Protect; Magearna Protected empty. t11 Surging Strikes + Headlong Rush KO'd Magearna under my Tailwind. Rain never came back after t3 because Tornadus died t1."
+  }
+ ],
+ "engine_checklist": {
+  "primordial_sea_on_entry": {
+   "a1": "PASS - B_WEATHER_RAIN_PRIMAL at turn 0",
+   "a2": "PASS",
+   "a3": "PASS",
+   "a4": "PASS"
+  },
+  "tailwind_through_fake_out": {
+   "a1": "PASS - t1 Prankster Tailwind (no Fake Out on my side); t5 second Tailwind before dying",
+   "a2": "FAIL - Tornadus chose Bleakwind t1 and never used Tailwind in 11 turns (Fake Out went to Kyogre, not Tornadus)",
+   "a3": "PASS - t1 Tailwind while Fake Out flinched Kyogre",
+   "a4": "FAIL - Tornadus chose Bleakwind t1 and was OHKO'd; no Tailwind all game. Covert Cloak vs Fake Out was never exercised in any attempt because no rational player Fake Outs the Cloak holder."
+  },
+  "water_spout": {
+   "a1": "chosen t1, blanked by Wide Guard; Kyogre died t1",
+   "a2": "never fired (t1 flinch, t2 KO'd first under Trick Room)",
+   "a3": "chosen t1 (flinched), t2/t3/t4 into Wide Guard - 0 damage",
+   "a4": "chosen t3, KO'd first by priority. Across four games Water Spout dealt zero damage."
+  },
+  "storm_moves_at_100": {
+   "a1": "Bleakwind t3 (blanked), t4 (killed Gallade), Sandsear t6 (killed Chien-Pao); no misses in rain",
+   "a2": "Bleakwind t1, t5, t6 (crit KO on Amoonguss); Sandsear t6; no misses",
+   "a3": "Bleakwind t2-t4 all into Wide Guard; Sandsear t9 hit; no misses",
+   "a4": "Bleakwind t1 311/279 - the only Storm that mattered; Wildbolt chosen t9 but Thundurus died first; Sandsear never chosen. Wildbolt Storm never landed in any attempt."
+  },
+  "mega_zeraora_on_entry": {
+   "a1": "PASS - Mega + Fake Out on Bulu t2 (correct target beside Inner Focus Gallade), flinch",
+   "a2": "PASS - Mega + Fake Out on Iron Hands t3, flinch",
+   "a3": "PASS - Mega + Fake Out t5 into Great Tusk's Protect",
+   "a4": "PARTIAL - Mega on t2 but Plasma Fists (KO attempt on 63-HP Urshifu) instead of Fake Out; Bolt switch-in resisted it"
+  },
+  "magearna_calm_mind_snowball": {
+   "a1": "CM t6 (+2 with Soul-Heart), Gleam t7/t8; KO'd t8 by priority Glide after Ruination + Tantrum",
+   "a2": "CM t8 then OHKO'd by Double Iron Bash under Trick Room",
+   "a3": "CM t10 and t11 while being 2HKO'd by Stomping Tantrum; +3/+2 when KO'd t12 without attacking",
+   "a4": "never Calm Minded; Gleam x2, Protect x2 (one real), switched out to dodge Headlong Rush; Soul-Heart to +3 then reset by the switch"
+  },
+  "rain_dance_retake": {
+   "a1": "PASS - t2, the turn after Kyogre fell",
+   "a2": "PASS - t3 and again t8",
+   "a3": "N/A - Tornadus fainted with Kyogre (Perish)",
+   "a4": "N/A - Tornadus died t1, before Kyogre"
+  },
+  "single_target_lanes_vs_wide_guard": {
+   "a1": "FAIL - Bleakwind into Wide Guard t3 after t1 showed it",
+   "a3": "FAIL - six spread attacks into Wide Guard on t2-t4 (Water Spout x3, Bleakwind x3) with Ice Beam/Thunder able to 2HKO Mega Gengar",
+   "a2": "n/a",
+   "a4": "n/a"
+  }
+ },
+ "protect_ledger": [
+  {
+   "run": "a1",
+   "opponent_protects": "none in 9 turns"
+  },
+  {
+   "run": "a2",
+   "turn": 2,
+   "user": "Tornadus",
+   "payoff": "empty (nothing targeted it; Kyogre died beside it)"
+  },
+  {
+   "run": "a2",
+   "turn": 4,
+   "user": "Tornadus",
+   "payoff": "empty"
+  },
+  {
+   "run": "a2",
+   "turn": 7,
+   "user": "Tornadus",
+   "payoff": "empty (Landorus died beside it)"
+  },
+  {
+   "run": "a2",
+   "turn": 9,
+   "user": "Tornadus",
+   "payoff": "real - blocked Helping Hand Ice Punch (a KO)"
+  },
+  {
+   "run": "a2",
+   "turn": 10,
+   "user": "Tornadus",
+   "payoff": "real, consecutive success - blocked Ice Punch + Icy Wind"
+  },
+  {
+   "run": "a3",
+   "turn": 6,
+   "user": "Mega Zeraora",
+   "payoff": "real - blocked a double Rock Slide that would have KO'd it at 73 HP; partner Thundurus switched to Landorus the same turn"
+  },
+  {
+   "run": "a3",
+   "turn": 8,
+   "user": "Landorus",
+   "payoff": "real - blocked Ice Shard (a 4x KO)"
+  },
+  {
+   "run": "a3",
+   "turn": 10,
+   "user": "Thundurus",
+   "payoff": "real - blocked Sucker Punch + Rock Slide at 115 HP; partner Calm Mind"
+  },
+  {
+   "run": "a3",
+   "turn": 11,
+   "user": "Thundurus",
+   "payoff": "failed (consecutive) and died"
+  },
+  {
+   "run": "a4",
+   "turn": 2,
+   "user": "Primal Kyogre",
+   "payoff": "real - blocked Grassy Glide (a probable KO)"
+  },
+  {
+   "run": "a4",
+   "turn": 4,
+   "user": "Thundurus",
+   "payoff": "empty"
+  },
+  {
+   "run": "a4",
+   "turn": 5,
+   "user": "Mega Zeraora",
+   "payoff": "real - blocked Ice Shard at 22 HP; partner switched Thundurus -> Magearna to absorb Draco Meteor"
+  },
+  {
+   "run": "a4",
+   "turn": 7,
+   "user": "Thundurus",
+   "payoff": "real - blocked Icicle Crash (a KO); partner Gleam KO'd Chien-Pao"
+  },
+  {
+   "run": "a4",
+   "turn": 8,
+   "user": "Magearna",
+   "payoff": "real - blocked Headlong Rush (a KO); partner Weather Ball KO'd Whimsicott"
+  },
+  {
+   "run": "a4",
+   "turn": 10,
+   "user": "Magearna",
+   "payoff": "empty (Tusk was Protecting, Urshifu targeted Landorus)"
+  }
+ ],
+ "ai_defects": [
+  {
+   "id": "D1",
+   "severity": "high",
+   "what": "Spread attacks into a revealed Wide Guard, every turn",
+   "evidence": "a3 t2, t3, t4: Kyogre Water Spout and Tornadus Bleakwind Storm all six blanked by Hitmontop's Wide Guard after t2 revealed it; Kyogre's Ice Beam (177) or Thunder (216) would have 2HKO'd Mega Gengar (262) and broken the Perish trap. a1 t3: Bleakwind into Wide Guard after t1 revealed it.",
+   "better": "After a foe's Wide Guard has been seen, weight the single-target lanes the dossier lists (Ice Beam, Thunder, Earth Power, Sludge Bomb, Weather Ball, Flash Cannon); battle_ai_pair.c only tracks Wide Guard inside the current turn's simulation (wideGuard mask near line 3716).",
+   "affects": "every authored spread-heavy team; the dossier's own audit assumes the AI sees Wide Guard."
+  },
+  {
+   "id": "D2",
+   "severity": "medium",
+   "what": "Empty Protects with nothing aimed at the user",
+   "evidence": "a2 Tornadus t2, t4, t7 (three wasted turns under Trick Room while its partner died each time; Bleakwind or Rain Dance were free); a4 Thundurus t4, Magearna t10.",
+   "better": "Protect only when the simulated incoming damage on the user is non-trivial or a partner payoff exists."
+  },
+  {
+   "id": "D3",
+   "severity": "low",
+   "what": "Landorus passed on a guaranteed KO",
+   "evidence": "a1 t8: Earth Power (104) into 461-HP Ting-Lu instead of Sludge Bomb on the 41-HP Life Orb Rillaboom that then priority-KO'd Magearna and Landorus itself.",
+   "better": "prefer the KO on the priority user."
+  },
+  {
+   "id": "D4",
+   "severity": "low",
+   "what": "Magearna Calm Minds into a physical 2HKO",
+   "evidence": "a3 t10-t11 two Calm Minds while Stomping Tantrum took 159 each; died at +3/+2 without attacking.",
+   "better": "attack or Protect when the visible physical damage exceeds half HP per turn."
+  },
+  {
+   "id": "note",
+   "severity": "dossier mismatch, not a defect",
+   "what": "'Kyogre Protects the Fake Out turn' never happened",
+   "evidence": "a2/a3/a4 t1 Kyogre was flinched by Fake Out each time (it chose Water Spout, Water Spout, Ice Beam). Consistent with the no-omniscience rule: the AI cannot know Fake Out is coming."
+  }
+ ],
+ "ai_good_plays": [
+  "a3 t6 Thundurus switched to Landorus into a double Rock Slide read while Zeraora Protected",
+  "a4 t5 Thundurus switched to Magearna to absorb Draco Meteor; a4 t9 Magearna switched to Landorus to absorb Headlong Rush",
+  "a4 t1 Kyogre chose Ice Beam into a Rillaboom/Urshifu lead (both resist Water)",
+  "a4 t2 Kyogre Protected the Grassy Glide",
+  "a3 t8 / a4 t5,t7,t8 Protects on the exact KO turns"
+ ],
+ "level_changes": [],
+ "level_rationale": "Per the brief's rules for this battle: no party lost, so nothing is reduced; a party (Trick Room) won with 1 faint, so the composition tweak is proposed below, not applied. Levels untouched; the teams file was not edited.",
+ "never_mattered_in_the_1_faint_win": {
+  "player_side": [
+   "Alolan Marowak (never entered)",
+   "Hatterene (never entered)",
+   "Amoonguss (entered once, died to a crit, did nothing)"
+  ],
+  "opponent_side": [
+   "Primal Kyogre (flinched t1, KO'd first t2 - zero damage dealt)",
+   "Landorus (KO'd the turn after entry by Ice Punch; only its Sandsear on the switch-in mattered)",
+   "Magearna (one Calm Mind, then OHKO'd)"
+  ],
+  "what_did_the_work": "Cresselia (Trick Room x2, Helping Hand x6), Iron Hands (Kyogre, Zeraora, Thundurus), Melmetal (Landorus, Magearna, Tornadus)"
+ },
+ "proposed_tweaks_not_applied": [
+  "Stop Trick Room and Perish Song alike: give Tornadus Taunt in place of Protect (Prankster Taunt on the setter turn 1 beats Cresselia/Hatterene Trick Room and Gengar Perish Song; the empty-Protect ledger shows Protect is its least valuable slot). Rain Dance retake and Tailwind stay.",
+  "Stop the physical Kyogre answers (Bulu Wood Hammer, Iron Hands Wild Charge, Grassy Glide): Kyogre's 132/0/0/252/0/124 spread leaves 90 base Defence naked; 252 HP / 4 Def would not save it, but a 0-Speed-IV Kyogre that moves last under its own Tailwind is not the answer either - the real fix is AI D1 so Wide Guard leads eat Ice Beam/Thunder instead of blanked Spouts.",
+  "Stop Urshifu: nothing on the team is bulky on the physical side except Magearna; a Covert Cloak does not stop Unseen Fist. Accept it - Choice Band Urshifu in their own rain is the strongest legal answer and it still cost three faints.",
+  "Give the genies 252 HP instead of 4: Tornadus/Thundurus/Landorus each died to one Ice attack in every game (Icicle Crash, Ice Punch, Ice Shard); Life Orb Modest 4 HP legends at L102 are the softest bodies in the fight."
+ ],
+ "verdict": "Beatable by every named line; not yet the hardest fight in the game by the evidence of this session. Four distinct optimized post-game parties went 4-0: Wide Guard + AV Tapu Bulu (won 6-3, 9 turns), Trick Room with Booster Iron Hands and AV Melmetal (won 6-1, 11 turns; 6-0 without a Bleakwind crit), Shadow Tag Perish Song behind Hitmontop Wide Guard (won 6-3, 12 turns), priority hyper-offense with Choice Band Urshifu (won 6-3, 11 turns). What beat it, exactly: (1) Primal Kyogre's 90 base Defence - AV Tapu Bulu Wood Hammer OHKO'd it from full on turn 1, Booster Iron Hands Wild Charge OHKO'd it under Trick Room, and Fake Out chip + Grassy Glide + Thunderclap killed it turn 3; Water Spout never dealt a point of damage in four games. (2) Wide Guard blanks its whole spread arsenal and the AI never adapts (defect D1). (3) An all-fast team is a Trick Room team's dream; Tornadus's Tailwind is a liability there and it spent three turns on empty Protects. (4) Life Orb 4-HP genies die to any Ice attack, so Chien-Pao / Ice Punch Melmetal / Ice Shard clear the middle for free. (5) Unseen Fist Surging Strikes in their own heavy rain OHKOs every non-Kyogre member through Protect and through Calm Mind. The AI did show real reads (Protect on KO turns, two smart switches), and three of the four wins cost three faints, so the fight is a serious one - but a competent Trick Room player loses one Pokemon to a crit and nothing else.",
+ "not_finished": "Levels untouched by instruction. Covert Cloak vs Fake Out and Wildbolt Storm never fired in any game (no rational reason to trigger either). Comparison against Cynthia (E0513) as 'hardest' is by dossier levels only, not played here.",
+ "scope": "Synthetic headless benchmark on work/agent-battle-build-11; native AI; user-authorized stage-legal preparation. Not earned campaign play. scene.gba/scene.elf deleted after result; events.jsonl, result.json, session.json, constants.json, inputs.json kept.",
+ "class": "elite"
+}
