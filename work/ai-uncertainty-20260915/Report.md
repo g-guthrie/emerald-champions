@@ -2197,3 +2197,43 @@ The instrumented live replay found both in one build each, after four
 constructed boards had found nothing. For any report that says "the AI kept
 doing X across a whole battle", that is now the first tool I reach for, not the
 last.
+
+# Group W: healing the enemy, declining a free Mega, and attacking yourself
+
+Commit `4b72954cd3`. **199 passed, 0 failed**; `pokeemerald.gba` clean.
+
+**W(1) — the veto had a second door.** My ally-only refusal lives in
+`PairPlanScore`, which only runs when the joint search runs. When it is skipped
+the per-battler scorer decides, and there a foe-targeted Heal Pulse only took a
+relative penalty — so on a body whose attacks are all resisted it was still the
+best score on the board. That is how a Mega Meganium healed a full-HP Urshifu
+on a build that already had the pair-level fix. It is unselectable there now.
+The new fixture drives that path on purpose, by leaving
+`AI_FLAG_SMART_MON_CHOICES` off so the joint search does not run — worth
+copying for anything else that needs the per-battler path pinned.
+
+**W(2) — a free Mega lost every tie.** `tieCost` counted using a Mega as a
+cost, so whenever the Mega and base boards scored the same the base board won.
+A lead Mega that opens with Protect stayed in base form and evolved a turn
+later for nothing. Evolving is free; only switching still costs a tie.
+
+**The self-targeting attacks in the two-owner multi.** The fallback action the
+search starts from carries the actor as its own target — a placeholder, not a
+decision. If nothing ever replaced it, and in a multi a second owner's battler
+can go unenumerated, the engine was handed an ordinary attack aimed at the body
+using it. No damage line, no damage, turn gone. A selected-target attack that
+comes out aimed at its own user is now pointed at a living foe.
+
+This is very likely **every** "0x into a Flying target" report from E0409:
+Rhyperior's High Horsepower, Great Tusk's Headlong Rush and Mega Heatran's
+Magma Storm were not mis-priced against a Flying body, they were aimed at
+themselves.
+
+## Blocked, not skipped
+
+The live E0409 confirmation of that last fix is pending because the shared tree
+currently has an **unresolved merge conflict in
+`scripts/render_emerald_champions_ui.py`** (`UU`), and `battle_driver.py` does
+not parse. Every driven run is blocked for everyone until that is resolved —
+worth knowing beyond my own queue. The fix is committed and the native suite
+covers it; I will re-run the E0409 replay as soon as the driver parses.
