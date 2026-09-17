@@ -12856,8 +12856,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Coin Case"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "A case that holds\n"
-            "up to 9,999 Coins."),
+            "Lets you play the\n"
+            "GAME CORNER. A coin\n"
+            "is worth ¥20."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

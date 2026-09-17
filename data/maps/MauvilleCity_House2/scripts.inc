@@ -12,14 +12,31 @@ MauvilleCity_House2_Text_MoveSpecialist:
 	.string "teach all six now, free of charge.$"
 
 MauvilleCity_House2_EventScript_Woman::
-	msgbox MauvilleCity_House2_Text_ArchiveAcrossTheWay, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_ReceivedCoinCase
+	msgbox MauvilleCity_House2_Text_TakeMyCoinCase, MSGBOX_DEFAULT
+	giveitem ITEM_COIN_CASE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_COIN_CASE
+	goto MauvilleCity_House2_EventScript_ReceivedCoinCase
 	end
 
-MauvilleCity_House2_Text_ArchiveAcrossTheWay:
-	.string "The hall across the way is the\n"
-	.string "STARTER ARCHIVE now.\p"
-	.string "No coins, no tables. You pay at the\n"
-	.string "counter like anywhere else.$"
+MauvilleCity_House2_EventScript_ReceivedCoinCase::
+	msgbox MauvilleCity_House2_Text_MachinesPayInMoney, MSGBOX_DEFAULT
+	release
+	end
+
+MauvilleCity_House2_Text_TakeMyCoinCase:
+	.string "I don't sit at the GAME CORNER\n"
+	.string "machines any more.\p"
+	.string "Take my old COIN CASE. They won't\n"
+	.string "let you play without one.$"
+
+MauvilleCity_House2_Text_MachinesPayInMoney:
+	.string "The machines pay straight into your\n"
+	.string "wallet. Every coin on the counter\l"
+	.string "is worth twenty.$"
 
 MauvilleCity_House2_EventScript_MegaGift_AMPHAROSITE::
 	checkitem ITEM_MEGA_RING, 1
