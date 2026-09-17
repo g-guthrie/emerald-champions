@@ -2237,3 +2237,27 @@ currently has an **unresolved merge conflict in
 not parse. Every driven run is blocked for everyone until that is resolved —
 worth knowing beyond my own queue. The fix is committed and the native suite
 covers it; I will re-run the E0409 replay as soon as the driver parses.
+
+## The E0409 replay after group W
+
+Rebuilt the instrumented ROM from the current tree and replayed E0409 at seed
+409. On the same board that produced the report:
+
+* **Mega Heatran evolves** (turn 5 shows `SPECIES_HEATRAN_MEGA`), so the Mega
+  fix holds on the current build.
+* **No voluntary switch trace fires** across the replay — the carousel is quiet
+  with the entry charge in.
+* The battle progresses turn by turn with both sides losing HP, where the
+  reported run had turns that "produced no damage line".
+
+What I have **not** done is read `gBattleStruct->moveTarget` back directly to
+confirm the self-target clamp field by field; the clamp is covered by the
+native suite and by the battle progressing, and I would rather say that plainly
+than claim a measurement I did not take.
+
+Two rebuilds were lost to the shared tree while doing this: one to an
+in-flight edit of `src/emerald_champions_headless.c` that did not compile, and
+one to a ROM built against a half-written data state, which made every driven
+battle fail with "campaign cap did not reach 84; the ROM reports 0". Neither
+was an AI change. If a playtest agent sees that cap message, a rebuild is the
+answer, not a bug report.
