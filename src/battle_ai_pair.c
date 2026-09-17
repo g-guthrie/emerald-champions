@@ -1271,6 +1271,11 @@ u32 gAiPairMegaTrace[MAX_BATTLERS_COUNT];
 // can tell the joint search's own reserve enumeration from the per-battler
 // path, and say whether the decision clock had already run out when it did.
 u32 gAiSwitchTrace[MAX_BATTLERS_COUNT];
+// Per battler: whether the chosen action was a guard, and by how much the
+// winning board beat the best board in which that battler attacked instead.
+// An empty guard that wins by a hair is a different story from one that wins
+// by a mile, and a receipt cannot tell them apart.
+u32 gAiGuardTrace[MAX_BATTLERS_COUNT];
 static u32 sPairWorkAllowance;
 static u32 sPairWorkDecision;
 
@@ -5018,6 +5023,20 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     } shortlist[PAIR_SHORTLIST];
     u32 shortCount = 0, shortLimit = PairShortlistSize(), examined = 0;
     u32 allowance = PairWorkAllowance(ev->count[actor] * ev->count[partner]);
+    // A stop must never leave a battler with nothing but guards scored. The
+    // enumeration can reach its allowance while every pair examined so far has
+    // this body shielding, and then the guard wins by default against nothing
+    // - which is exactly what an empty guard looks like from the outside. A
+    // body that has an attacking action gets one of them scored first.
+    bool32 scoredAttack[2] = {TRUE, TRUE};
+    const enum BattlerId pairActors[2] = {actor, partner};
+    for (u32 side = 0; side < 2; side++)
+        for (u32 choice = 0; choice < ev->count[pairActors[side]]; choice++)
+        {
+            const struct PairAction *option = &ev->choices[pairActors[side]][choice];
+            if (option->index != PAIR_IDLE && GetMoveEffect(option->move) != EFFECT_PROTECT)
+                scoredAttack[side] = FALSE;
+        }
     bool32 mixed = FALSE;
     for (u32 left = 0; left < ev->count[actor]; left++)
     {
@@ -5026,7 +5045,8 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             // Deterministic first: every arm of one decision searches the same
             // number of pairs, so a candidate board and the stay board are
             // always compared at equal depth.
-            if (!mustFinish && shortCount != 0 && examined >= allowance)
+            if (!mustFinish && scoredAttack[0] && scoredAttack[1]
+             && shortCount != 0 && examined >= allowance)
                 goto settle;
             // The clock is only a safety stop now. For the board the AI is
             // standing on it settles with what it has; for a candidate board
@@ -5038,12 +5058,18 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
                 gAiPairDecisionTruncated = TRUE;
                 if (!canStop)
                     goto done;
-                if (shortCount != 0)
+                if (shortCount != 0 && scoredAttack[0] && scoredAttack[1])
                     goto settle;
             }
             examined++;
             ev->action[actor] = ev->choices[actor][left];
             ev->action[partner] = ev->choices[partner][right];
+            if (ev->action[actor].index != PAIR_IDLE
+             && GetMoveEffect(ev->action[actor].move) != EFFECT_PROTECT)
+                scoredAttack[0] = TRUE;
+            if (ev->action[partner].index != PAIR_IDLE
+             && GetMoveEffect(ev->action[partner].move) != EFFECT_PROTECT)
+                scoredAttack[1] = TRUE;
             // Preserving the same board for one turn is not progress. Keep
             // guards beside an acting/pivoting partner and real waiting plans;
             // retain a legal fallback if both actors can only protect.
@@ -5732,6 +5758,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     u32 bestReserves[2] = {PARTY_SIZE, PARTY_SIZE};
     u32 bestMega = 0, bestTieCost = UINT_MAX;
     s32 bestStay = INT_MIN; // Best board that keeps both bodies, for the trace.
+    s32 bestNonGuard[2] = {INT_MIN, INT_MIN}; // Best board where each attacked.
     u32 activeMega = 0;
     s32 best = INT_MIN;
     for (u32 left = 0; left < count[0]; left++)
@@ -5900,6 +5927,11 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                         score += 70;
                 if (slots[0] >= PARTY_SIZE && slots[1] >= PARTY_SIZE && score > bestStay)
                     bestStay = score;
+                for (u32 index = 0; index < 2; index++)
+                    if (chosen[index].index != PAIR_IDLE
+                     && GetMoveEffect(chosen[index].move) != EFFECT_PROTECT
+                     && score > bestNonGuard[index])
+                        bestNonGuard[index] = score;
                 if (score > best || (score == best && tieCost < bestTieCost))
                 {
                     best = score;
@@ -5961,6 +5993,17 @@ decisionReady:
                     chosenIndex = slot;
                     break;
                 }
+        }
+        if (bestActions[index].index != PAIR_IDLE
+         && GetMoveEffect(bestActions[index].move) == EFFECT_PROTECT)
+        {
+            s32 margin = bestNonGuard[index] == INT_MIN ? 4095 : best - bestNonGuard[index];
+            gAiGuardTrace[battler] = 1
+                | ((u32)(margin < 0 ? 0 : margin > 4095 ? 4095 : margin) << 16);
+        }
+        else
+        {
+            gAiGuardTrace[battler] = 0;
         }
         gAiBattleData->chosenMoveIndex[battler] = chosenIndex;
         // The fallback action this search starts from carries the actor as its
