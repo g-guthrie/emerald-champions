@@ -2581,3 +2581,57 @@ a single lever under two reports.
 Drake's Zekrom at 111 and Wallace's Kyogre at 194 do not need that lever. Both
 are guards the model defends by a wide margin against a live lethal threat, and
 neither should be tuned away.
+
+# The forecast knockout weighting: tried, measured, reverted
+
+The shape looked right — a free knockout already on the board should not be
+priced below a swing at a full-health slot — so `PairJointFoeForecast` was
+changed to pay a knockout the whole body (100 + `PAIR_FORECAST_KO`) instead of
+only the health it happened to remove plus the flat credit. Under the old
+formula, finishing a 1 HP Bronzong scored about 80 where an OHKO on a
+full-health Chimecho scored 180.
+
+**Built, run, reverted. It is not landed.** Three reasons, in the order they
+came up.
+
+**It does not clearly address the case it was built for.** The forecast chooses
+*both* foes' actions jointly. With two attackers, the best joint action under
+the old pricing was already "one finishes Bronzong, the other kills Chimecho" —
+the cheap knockout was never actually left on the table, because the second
+attacker was free to take it. The premise that the forecast assumes the player
+declines the free knockout does not survive reading the enumeration: it assumes
+no such thing when a second foe is available to do it.
+
+**No fixture moves.** 209 passed, 6 failed, identical failures, frames
+unchanged (Dancer 60, Mega 62, Laura 61). The suite gives neither support nor
+objection, which means it does not cover this at all.
+
+**It churns live boards with no measurable sign.** Wallace's Kyogre held at
+exactly 194, as required. But Drake's turn-1 decision moved the guard from
+Reshiram at 119 to Salamence at 141 — a board the standing instruction says to
+leave alone — and Virgil's line diverged from turn 1.
+
+## Why the live replay cannot settle this, which is the useful part
+
+Virgil's turn-1 AI choices are **identical** on both builds (Bronzong Body
+Press, Dusclops Trick Room), yet Dusclops finishes the turn at 83/215 before
+and 75/215 after. Same seed, same commands, same decisions, different damage:
+the AI's own scoring consumes battle RNG, so any change that alters how many
+pairs are scored shifts every subsequent roll. Within two turns the boards are
+no longer comparable and "the guard disappeared" cannot be attributed to the
+change rather than to eight points of damage.
+
+**So a driven replay can confirm a defect but cannot A/B a single decision.**
+That is a general limit on this method and it applies to every forecast or
+scoring constant, not just this one. The instrument work above is unaffected —
+reading a trace off one build is fine; it is the before/after that breaks.
+
+## What the next attempt needs
+
+A fixture, built first, not a replay: an authored board where the AI holds one
+body at 1 HP beside a healthy one, with a revealed attacker opposite that
+provably one-shots the healthy one and a second live foe that can take the free
+knockout. Assert what the healthy body does. A fixture pins the state, so the
+same decision can be read on both builds without RNG between them — which is
+the only way this particular question gets an answer. The board must be able to
+fight back, per the rule above.
