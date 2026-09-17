@@ -2762,3 +2762,67 @@ either way.
 
 **210 passed, 6 failed, 216 total** — one new test, the six pre-existing
 `ai_doubles.c` reds unchanged, frames unchanged.
+
+# The Mega election on non-attack turns: not a skip, and Meganium is a data bug
+
+Two reported cases, two different answers, and neither is the hypothesis.
+
+## Altaria: does not reproduce at HEAD
+
+New fixture in `test/battle/ai/mega_reveal.c` — **EC Mega election: the stone
+is spent on a status turn as readily as on an attack.** Nicolas's authored
+Altaria with its Altarianite, a Dracozolt partner that attacks, and two foes
+that can kill, so the board fights back. Two arms: one keeps Double-Edge so the
+AI may attack, the other removes it so whatever it picks is a status move.
+**Both arms Mega Evolve.** The election does not care what the action is.
+
+Live confirmation on Nicolas E0128 at its own seed and party, reading
+`gAiPairMegaTrace` — a single-build read, so the frames rule does not bite:
+
+```
+can=1  scored=1  best=1     and the species becomes SPECIES_ALTARIA_MEGA
+```
+
+Altaria's build-16 observation does not reproduce. The most likely explanation
+is that it was already closed by the Mega work earlier in this audit
+(`0670e3eb9f`, `bbec900713`, `255ccff771`), which §7 listed as an unverified
+belief pending reruns. It can now be moved to verified on this board.
+
+## Meganium: the election runs, scores, and correctly declines
+
+Michelle E0484, seed 4, its own party, four consecutive decisions:
+
+```
+can=1  scored=1  best=0
+```
+
+The Mega board is available and **is** scored. It loses. That is a pricing
+outcome, not a suppressed election, and `PAIR_MEGA_HORIZON` already adds 50 in
+the Mega's favour — so the base board is winning by more than fifty.
+
+The reason is in the data, not the AI:
+
+| | type | ability | SpA / Def |
+| --- | --- | --- | --- |
+| `SPECIES_MEGANIUM` | Grass | Overgrow / Flower Veil / **Triage** | 93 / 100 |
+| `SPECIES_MEGANIUM_MEGA` | Grass, Fairy | **Mega Sol** ("acts like under sun") | 143 / 115 |
+
+The authored team gives Meganium **Triage**, and the room's whole plan is built
+on it — "a Mega Meganium whose Triage gives Heal Pulse priority", a priority
+full heal every turn that the player has to out-damage. **Mega Meganium does not
+have Triage.** Evolving trades away the priority Heal Pulse for permanent sun on
+a team with no Fire attacker, plus a new Steel and Poison weakness.
+
+So the AI is declining a form change that would cost it the room's entire
+strategy, and it is right to. The defect is that the book describes a Pokemon
+that does not exist as implemented: Triage belongs to the base form only.
+
+**This is a teams/book reconciliation, not mine to land** — it changes a trainer
+and the plan prose, which is chat-level design. Flagging it with the evidence.
+The choice is between rewriting the plan around a base-form Triage Meganium that
+never evolves and gives its Meganiumite to somebody else, or giving Mega
+Meganium the ability its own design document says it has. Either way the AI
+needs no change, and `mega_slots: 1` on this team is currently buying nothing.
+
+**211 passed, 6 failed, 217 total** — one new test, the six pre-existing
+`ai_doubles.c` reds unchanged.
