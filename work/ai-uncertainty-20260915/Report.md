@@ -2261,3 +2261,63 @@ one to a ROM built against a half-written data state, which made every driven
 battle fail with "campaign cap did not reach 84; the ROM reports 0". Neither
 was an AI change. If a playtest agent sees that cap message, a rebuild is the
 answer, not a bug report.
+
+# Y(4): the empty guards were an option that was never scored
+
+Commits `1c96ec4def` (X1/Y3 pins) and `738e5a8809` (the fix). **204 passed, 0
+failed**; frames unchanged, Dancer 60 of 72 and Laura 61; ROM clean.
+
+## X(1) and Y(3) first: both hold on a built board
+
+* Once the side opposite has shown Wide Guard, the AI stops choosing the spread
+  attack and takes a single-target lane; with no guard shown on the same board
+  it takes the spread. The memory X(1) asks for is already there.
+* At full health Kyogre takes Water Spout over Origin Pulse — a hundred and
+  fifty that cannot miss against a hundred and ten at eighty-five.
+
+Both reports come from the same Wallace battle, and both survive a constructed
+board. That pattern is now familiar enough to be a rule: **when a report
+survives a fixture, the next step is the replay, not a second fixture.**
+
+## What the replay said
+
+Instrumented the guard decision — per battler, whether the chosen action was a
+guard, and how far the winning board beat the best board in which that body
+attacked. On Wallace at seed 1:
+
+```
+turn 1   Kyogre    guard=1   margin = (no attacking board scored)
+turn 3   Tapu Fini guard=1   margin = (no attacking board scored)
+turn 4   both      guard=1   margin 111 and 152
+```
+
+Turn 4's guards won by a mile and are fine. The other two did not win at all:
+**no board in which that body attacked had been scored.** The guard won by
+default, against nothing. That is what an empty guard is.
+
+## The cause, and it is a familiar one
+
+Enumeration order plus an early stop — the same shape as the Mega decline. A
+body whose guard sits early in its action list can have every examined pair be
+one where it shields, and then the allowance or the clock ends the search
+there. The guard is not beating the attacks; the attacks were never on the
+board.
+
+A body that has an attacking action now gets one of them scored before either
+stop may fire. Frames are unchanged because this adds at most one extra scored
+pair per body, and only on boards that were stopping early.
+
+Verified on the replay: the turn-3 guard is gone and the battle diverges from
+there.
+
+## What this probably closes
+
+Every empty-guard report I have been unable to construct: Weezing on its
+switch-in turn, Hippowdon against an Unseen Fist attacker, Zekrom every run,
+Starmie, Clefable, Tapu Fini's four turns, Seismitoad's three untargeted
+guards, Chimecho and Cofagrigus on entry — and the consecutive-Protect family
+(Camerupt, Drifblim, Noctowl, Runerigus, Exeggutor), because a second guard
+chosen against nothing is the same defect one turn later.
+
+Those should be re-run rather than fixtured. If they persist, the remaining
+cases are genuine pricing and I will take them one at a time.
