@@ -20116,8 +20116,8 @@ Nature: NATURE_BRAVE
 - MOVE_HAMMER_ARM
 
 SPECIES_COPPERAJAH @ ITEM_WEAKNESS_POLICY
-Level: 63
-Level Offset: 3
+Level: 64
+Level Offset: 4
 Ability: ABILITY_HEAVY_METAL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
