@@ -517,6 +517,36 @@ looks exactly like a battle that will not progress. The crash screen carries the
 assertion text, so `crash.png` in the run directory is the evidence. A receipt
 whose run stalled this way is void: the battle never finished.
 
+`blocked_by` names the limitation that actually blocked a move slot. Note that
+`CheckMoveLimitations` answers "which move slots", so its result is a slot mask;
+decoding it as a reason mask made an unusable fourth slot report
+`MOVE_LIMITATION_TORMENTED`, because slot 3 and that limitation are both bit 3.
+The bridge now asks once per limitation as well and carries the real reasons in
+the high half of each move's word. `legal` was never affected by this, so no legal
+move was ever refused; only the stated reason was wrong. Disregard `blocked_by` in
+receipts taken before this.
+
+Fixture, one board carrying both cases - Incineroar leads holding an Assault Vest,
+which forbids status moves, beside a Kingambit that holds Safety Goggles:
+
+```sh
+python3 scripts/playthrough/battle_driver.py start --trainer TRAINER_HOPE \
+  --party work/playtest/310-TRAINER_HOPE/party_hope_96_a2.json --seed 2 --cap 96 \
+  --run-dir work/agent-battle-lim
+```
+
+```
+battler 0 SPECIES_INCINEROAR   slot-mask 0x8
+  0 MOVE_FAKE_OUT     legal True   blocked_by []
+  3 MOVE_PROTECT      legal False  blocked_by ['MOVE_LIMITATION_ASSAULT_VEST']
+battler 2 SPECIES_KINGAMBIT    slot-mask 0x0
+  0 MOVE_IRON_HEAD    legal True   blocked_by []
+  3 MOVE_PROTECT      legal True   blocked_by []
+```
+
+A four-move lead with nothing restricting it shows all four legal and every
+`blocked_by` empty, as Kingambit does here.
+
 A `previous_turn` / `chosen` entry's `target` is the target the battler chose as
 its action was confirmed, and `target_kind` says whether that battler is the
 actor's `self`, `ally` or `foe`. Chosen is not always resolved: if the chosen

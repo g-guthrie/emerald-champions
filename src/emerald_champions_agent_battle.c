@@ -457,8 +457,27 @@ static void WriteLegality(void)
         if (!IsAgentControlled(battler))
             continue;
 
+        // CheckMoveLimitations answers "which move slots", not "why", so its
+        // result is a slot mask and decoding it as a reason mask made an
+        // unusable fourth slot read as MOVE_LIMITATION_TORMENTED. Ask once per
+        // limitation as well, so each slot can name what actually blocked it.
+        // Only while parked for a command: that is the only time legality is
+        // read, and this is 17 passes per battler.
+        u32 reasons[MAX_MON_MOVES] = {0};
         gEcAgentBattleView[base + 0] = IsBattlerAlive(battler)
-            ? CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL) : MOVE_LIMITATIONS_ALL;
+            ? CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL) : 0xF;
+        if (IsBattlerAlive(battler) && gEcAgentBattleNeedMask != 0)
+        {
+            for (u32 reason = 0; reason < 16; reason++)
+            {
+                u32 slots = CheckMoveLimitations(battler, 0, 1u << reason);
+                for (u32 i = 0; i < MAX_MON_MOVES; i++)
+                {
+                    if (slots & (1u << i))
+                        reasons[i] |= 1u << reason;
+                }
+            }
+        }
         for (u32 i = 0; IsBattlerAlive(battler) && i < MAX_MON_MOVES; i++)
         {
             enum Move move = gBattleMons[battler].moves[i];
@@ -473,7 +492,7 @@ static void WriteLegality(void)
                 }
                 mask |= (GetBattlerMoveSelectionTargetType(battler, move) << 8);
             }
-            gEcAgentBattleView[base + 1 + i] = mask;
+            gEcAgentBattleView[base + 1 + i] = mask | (reasons[i] << 16);
         }
 
         u32 blocker = AgentSwitchBlocker(battler);

@@ -547,7 +547,9 @@ def decode_state(session, words):
             moves.append({
                 'index': i, 'move': move_name,
                 'legal': not (limits >> i) & 1,
-                'blocked_by': flags_of(limits, c['limitation']) if (limits >> i) & 1 else [],
+                # The reason bits ride in the high half of the move's word;
+                # `limits` is a slot mask and must never be decoded as reasons.
+                'blocked_by': flags_of((mask >> 16) & 0xFFFF, c['limitation']),
                 'target_type': target_name,
                 # For these the engine ignores the target byte and picks for
                 # itself, so offering a choice invites a misleading record of
