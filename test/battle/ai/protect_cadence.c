@@ -246,3 +246,68 @@ AI_DOUBLE_BATTLE_TEST("EC Protect cadence: a shield that buys the partner's Tric
         }
     }
 }
+
+// Michelle E0484, build-16 turn 4: Machamp at 66/306 repeated Wide Guard into
+// two single-target attacks and died, which the receipt called empty and
+// consecutive together. Ex post it was; ex ante Chi-Yu had used a lethal Heat
+// Wave the turn before and was still alive, which is exactly the condition
+// Wide Guard exists for. The question a replay cannot answer - the AI's own
+// scoring consumes frames, and the battle burns RNG per frame - is whether the
+// choice rests on that live spread threat or on nothing. So: the same board
+// twice, once with the spread threat on the record and once with every spread
+// move removed from both foes, and the guard has to tell the difference.
+AI_DOUBLE_BATTLE_TEST("EC Protect cadence: Wide Guard rests on a live spread threat, not on habit")
+{
+    bool32 spreadThreat;
+    PARAMETRIZE { spreadThreat = TRUE; }
+    PARAMETRIZE { spreadThreat = FALSE; }
+    GIVEN {
+        AI_FLAGS(CADENCE_FLAGS);
+        // Both foes hit hard enough to kill either body next turn, so the AI
+        // always has a real competing use for the turn: this board fights back.
+        PLAYER(SPECIES_CHI_YU) {
+            Level(50); HP(260); MaxHP(260); Attack(60); Defense(100);
+            SpAttack(190); SpDefense(110); Speed(180); Ability(ABILITY_BEADS_OF_RUIN);
+            // Fire Blast is the control because it is the *harsher* move on
+            // the guard user: 110 base power onto Machamp alone against Heat
+            // Wave's 95 split across the pair. So the arm without a spread
+            // threat leaves Machamp lower, not higher, and if the guard were
+            // habit rather than an answer to Heat Wave that arm is the one
+            // that should reach for it hardest. Neither move drops the user's
+            // Special Attack, so turn two is identical in both arms.
+            Moves(spreadThreat ? MOVE_HEAT_WAVE : MOVE_FIRE_BLAST, MOVE_FLAMETHROWER);
+        }
+        PLAYER(SPECIES_KANGASKHAN) {
+            Level(50); HP(300); MaxHP(300); Attack(150); Defense(110);
+            SpAttack(60); SpDefense(110); Speed(120); Ability(ABILITY_PARENTAL_BOND);
+            Moves(MOVE_DOUBLE_EDGE);
+        }
+        OPPONENT(SPECIES_MACHAMP) {
+            Level(50); HP(306); MaxHP(306); Attack(160); Defense(100);
+            SpAttack(60); SpDefense(90); Speed(70);
+            Ability(ABILITY_NO_GUARD); Item(ITEM_CLEAR_AMULET);
+            Moves(MOVE_DYNAMIC_PUNCH, MOVE_WIDE_GUARD, MOVE_STONE_EDGE, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_MEGANIUM) {
+            Level(50); HP(349); MaxHP(349); Attack(70); Defense(140);
+            SpAttack(90); SpDefense(140); Speed(80);
+            Moves(MOVE_GIGA_DRAIN, MOVE_PROTECT);
+        }
+    } WHEN {
+        TURN {
+            // Turn one puts the foe's move on the record. Wide Guard's plan
+            // score keys off a spread move seen from a living foe last turn,
+            // so this is the turn that arms it in one arm and not the other.
+            MOVE(playerLeft, spreadThreat ? MOVE_HEAT_WAVE : MOVE_FIRE_BLAST, target: opponentLeft);
+            MOVE(playerRight, MOVE_DOUBLE_EDGE, target: opponentRight);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_FLAMETHROWER, target: opponentLeft);
+            MOVE(playerRight, MOVE_DOUBLE_EDGE, target: opponentLeft);
+            if (spreadThreat)
+                EXPECT_MOVE(opponentLeft, MOVE_WIDE_GUARD);
+            else
+                NOT_EXPECT_MOVE(opponentLeft, MOVE_WIDE_GUARD);
+        }
+    }
+}

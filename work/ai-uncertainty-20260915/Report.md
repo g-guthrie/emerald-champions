@@ -2703,3 +2703,62 @@ would make every damage figure in a receipt unrepresentative of the game people
 actually play, which is what level calibration rests on.
 
 **Recommendation: do not build it. Fixture-first, as planned.**
+
+# Michelle E0484 is not a regression
+
+The only room where empty guards went up, zero to two, with a consecutive guard
+alongside. Both halves come apart under the ex ante rule.
+
+## Turn 4's Wide Guard: fixture-tested, and the AI is discriminating correctly
+
+New fixture, `test/battle/ai/protect_cadence.c`: **EC Protect cadence: Wide
+Guard rests on a live spread threat, not on habit.** Michelle's real Machamp —
+No Guard, Clear Amulet, Dynamic Punch / Wide Guard / Stone Edge / Protect —
+beside Meganium, against a Chi-Yu and a Parental Bond Kangaskhan that can both
+kill either body. Two arms, differing only in whether the foes own a spread move
+at all.
+
+The control arm is deliberately the **harsher** one for the guard user: Fire
+Blast puts 110 base power onto Machamp alone where Heat Wave splits 95 across
+the pair, so the arm with no spread threat leaves Machamp on *less* health. If
+the guard were habit, that is the arm that should reach for it hardest.
+
+Both arms pass. With a spread move on the record from a living foe, Machamp
+takes Wide Guard; with every spread move gone, it does not — while standing on
+less health. The discrimination is real and it is already there.
+
+That settles turn 4. Chi-Yu used a Heat Wave lethal to both bodies on turn 3 and
+was alive when turn 4 was decided, which is precisely the condition
+`PairPlanScore` credits (`src/battle_ai_pair.c:1435`: a spread move seen from a
+living foe last turn). The player then chose two single-target attacks. That is
+the receipt observing luck, not a mispriced guard — the same shape as Virgil's
+Bronzong at 17 against Chimecho at 19.
+
+## The consecutive half costs nothing the engine will charge
+
+Verified in source rather than assumed, `src/battle_move_resolution.c:1276`:
+
+```c
+bool32 canUseWideGuard = (GetConfig(B_WIDE_GUARD) >= GEN_6 && protectMethod == PROTECT_WIDE_GUARD);
+```
+
+Wide Guard is exempt from consecutive-use failure, so a repeat carries no
+failure risk at all. "Consecutive" on this move is not the risk the standing
+Protect rule is about; the repeat costs the turn and nothing else, and against a
+live spread threat that turn is bought, not spent.
+
+## Turn 5's Chansey
+
+Full health, nothing aimed at it, the one real attack committed elsewhere and
+the other foe switching. Same ex-post class, and nothing the AI could have known
+at turn start. Not examined further.
+
+**Conclusion: Michelle is not a regression.** The empty-guard count rose because
+the player's line changed, not because the AI got worse. One inference is worth
+naming: I have not read Michelle's own forecast, only the plan-score condition
+and the fixture, so the claim is that the AI *does* discriminate, not that this
+particular turn's forecast was inspected. A replay could not have attributed it
+either way.
+
+**210 passed, 6 failed, 216 total** — one new test, the six pre-existing
+`ai_doubles.c` reds unchanged, frames unchanged.
