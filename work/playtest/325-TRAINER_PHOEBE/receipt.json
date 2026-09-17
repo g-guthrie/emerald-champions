@@ -1,31 +1,103 @@
 {
-  "trainer": "TRAINER_PHOEBE", "e_group": "E0494", "play_order": 325, "cap": 96, "difficulty": "medium",
-  "party_manifest": "work/playtest/325-TRAINER_PHOEBE/party_league96.json",
-  "league_run_note": "Second room of the League run (Sidney E0493 belongs to another block). Played with party v1 (Flutter Mane/Iron Bundle/Chi-Yu/Urshifu-SS/Rillaboom/Incineroar). After Glacia a1 the party was rebuilt to v2 (see 326); Phoebe was not replayed with v2 - v2 swaps in Kingambit and Xerneas, both better into Ghosts than what they replace, so this result is if anything an upper bound on Phoebe's difficulty. Real-run carry after this room: Flutter Mane, Iron Bundle, Chi-Yu, Urshifu fainted (Revives, field medicine); Incineroar 106/378 (Full Restore); Urshifu Wicked Blow 1/8 PP left - PP is the binding carry cost.",
-  "attempts": [
-    {"seed": 1, "outcome": "won", "turns": 7, "player_faints": 4, "opponent_faints": 6, "run_dir": "work/playtest/325-TRAINER_PHOEBE/a1",
-     "notes": "Lunala Moongeist Beam OHKO'd Flutter Mane T1 and Iron Bundle T2 (Bundle was Icy-Winded to -1 Speed and no longer at full HP, so no Sash). Marshadow CC on Incineroar for 272, Marshadow then OHKO'd by Wicked Blow. Giratina Protect twice with real payoffs. Gengar Sludge Bomb + Spectrier Shadow Ball KO'd Chi-Yu on a switch-in; Urshifu Wicked Blow crit swept Lunala/Marshadow/Banette/Gengar/Spectrier. Urshifu fell to Specs Shadow Ball (resisted) + Life Orb on the last turn."}
-  ],
-  "strategy_checks": [
-    {"check": "Mega Gengar Mega Evolves and traps with Shadow Tag", "result": "FAIL", "evidence": "T6-T7: Gengar entered with usable_gimmick=mega but mega_already_used=true (Banette had used the Mega on T5/T6); it attacked as base Gengar and never Mega Evolved. The two-Mega League rule (EmeraldChampions_GetMegaEvolutionLimit=2) never fired for the second slot. See ai_defects."},
-    {"check": "Mega Banette Mega Evolves; Encore / Will-O-Wisp / Poltergeist", "result": "PASS (partial)", "evidence": "Banette became BANETTE_MEGA (party list) and used Encore on Urshifu T5 (locked it into Wicked Blow - harmless vs Ghosts) and Protect T6. Will-O-Wisp was never attempted into my two Dark types, which is correct (Prankster is blocked by Dark)."},
-    {"check": "Lunala Wide Guard vs spread", "result": "NOT TESTED", "evidence": "Lunala chose Moongeist Beam both turns (both were KOs); no spread move was on my board while it lived."},
-    {"check": "Marshadow Spectral Thief / Close Combat lane", "result": "PASS", "evidence": "T4 Close Combat on Incineroar (272, the KO read after Sitrus); no boosts existed to steal."},
-    {"check": "Giratina Icy Wind speed control + Poltergeist", "result": "PASS with one defect", "evidence": "Icy Wind T1, T2, T4 (Speed drops on Bundle, Chi-Yu, Incineroar); Poltergeist T6 into itemless Incineroar failed (defect 2)."},
-    {"check": "Spectrier Specs Grim Neigh", "result": "PASS", "evidence": "Shadow Ball chosen into resisted targets because nothing else was legal; KO'd Urshifu with resisted Shadow Ball + Life Orb recoil."}
-  ],
-  "protect_ledger": [
-    {"turn": 3, "battler": "Giratina (32 HP)", "payoff": "blocked Dark Pulse that would have KO'd; Leftovers +29"},
-    {"turn": 5, "battler": "Giratina (64 HP)", "payoff": "reduced Wicked Blow (KO) to a quarter (55) via Unseen Fist rule; Leftovers +29"},
-    {"turn": 6, "battler": "Banette (17 HP)", "payoff": "empty in effect - Wicked Blow still dealt a quarter through Protect and KO'd"}
-  ],
-  "ai_defects": [
-    {"id": 1, "severity": "engine", "description": "Second authored Mega never fires. Phoebe's mega_slots 4,6: Banette Mega Evolved; Gengar (slot 6) entered T6 with usable_gimmick=mega and mega_already_used=true, chose Sludge Bomb and was KO'd as base Gengar. EmeraldChampions_GetMegaEvolutionLimit returns 2 for the Elite Four (src/emerald_champions_battle_plan.c:54) and CanBattlerMegaEvolve honours it (src/battle_util.c:8536-8555), but the AI gimmick gate in src/battle_controllers.c:3304 uses HasTrainerUsedGimmick(), which reads gBattleStruct->gimmick.activated[battler] - and SetGimmickAsActivated (src/battle_gimmick.c:120-126) marks the same-trainer partner POSITION as activated when the first Mega fires, so whatever later occupies that position is treated as already used. Same symptom on Glacia (Baxcalibur, see 326)."},
-    {"id": 2, "severity": "minor", "description": "T6 Giratina used Poltergeist on Incineroar whose Sitrus Berry had already been eaten (item shown as none since T4); the move failed. Better: Icy Wind or Poltergeist on Urshifu (Life Orb)."}
-  ],
-  "level_changes": [],
-  "calibration": "Won attempt 1 with 4 faints after a real fight; keep all offsets (97/96/96/100/97/95 seeds -> medium 95/94/94/98/95/93).",
-  "cooler": "The room already has a clear identity. It would be cooler if the Gengar Mega actually fired (defect 1) - as played the trap never existed and the room was carried by Lunala's Moongeist Beam and Kyurem-style raw damage. Suggest Encore be authored to prefer a non-Dark target, and Giratina's Poltergeist to check the target's item.",
-  "legality": "No legality problem found in the authored set.",
-  "step_up": "A step above Sidney? Cannot compare directly (Sidney is another block's), but Phoebe cost four Pokemon of a six-member cap-96 party built to beat Ghosts; it is a serious room."
+ "trainer": "TRAINER_PHOEBE",
+ "e_group": "E0494",
+ "play_order": 325,
+ "cap": 96,
+ "difficulty": "medium",
+ "party_manifest": "work/playtest/325-TRAINER_PHOEBE/party_league96.json",
+ "league_run_note": "Second room of the League run (Sidney E0493 belongs to another block). Played with party v1 (Flutter Mane/Iron Bundle/Chi-Yu/Urshifu-SS/Rillaboom/Incineroar). After Glacia a1 the party was rebuilt to v2 (see 326); Phoebe was not replayed with v2 - v2 swaps in Kingambit and Xerneas, both better into Ghosts than what they replace, so this result is if anything an upper bound on Phoebe's difficulty. Real-run carry after this room: Flutter Mane, Iron Bundle, Chi-Yu, Urshifu fainted (Revives, field medicine); Incineroar 106/378 (Full Restore); Urshifu Wicked Blow 1/8 PP left - PP is the binding carry cost.",
+ "attempts": [
+  {
+   "seed": 1,
+   "outcome": "won",
+   "turns": 7,
+   "player_faints": 4,
+   "opponent_faints": 6,
+   "run_dir": "work/playtest/325-TRAINER_PHOEBE/a1",
+   "notes": "Lunala Moongeist Beam OHKO'd Flutter Mane T1 and Iron Bundle T2 (Bundle was Icy-Winded to -1 Speed and no longer at full HP, so no Sash). Marshadow CC on Incineroar for 272, Marshadow then OHKO'd by Wicked Blow. Giratina Protect twice with real payoffs. Gengar Sludge Bomb + Spectrier Shadow Ball KO'd Chi-Yu on a switch-in; Urshifu Wicked Blow crit swept Lunala/Marshadow/Banette/Gengar/Spectrier. Urshifu fell to Specs Shadow Ball (resisted) + Life Orb on the last turn.",
+   "build": "work/agent-battle-build-8 (pre-fix: second Mega could not evolve)"
+  },
+  {
+   "seed": 2,
+   "outcome": "won",
+   "turns": 13,
+   "player_faints": 2,
+   "opponent_faints": 6,
+   "run_dir": "work/playtest/325-TRAINER_PHOEBE/a2",
+   "build": "work/agent-battle-build-10 (Mega fix)",
+   "party": "League party v3 (work/playtest/325-TRAINER_PHOEBE/party_league96_v3.json)",
+   "notes": "Replay ordered by the coordinator after the build-10 Mega fix. T1 my Mega Evolution cost Kangaskhan its Scrappy so Fake Out failed on Lunala and Moongeist Beam + Icy Wind KO'd Whimsicott; the AI switched Lunala out into Kowtow Cleave (Marshadow ate it, then died to Sucker Punch) and switched Giratina out for Gengar into a second Kowtow Cleave - Gengar (the slot-6 Mega) fainted on entry without ever getting a turn to Mega Evolve; Giratina's Will-O-Wisp burned both Kingambit and Kangaskhan; Lunala Protected three times (T2, T5, T9) and used Wide Guard once; Knock Off removed Covert Cloak, Leftovers and Choice Specs in turn; Banette Mega Evolved on its first action (T11) and Protected twice before Draco Meteor + Knock Off ended it. Won 6-2."
+  }
+ ],
+ "strategy_checks": [
+  {
+   "check": "Mega Gengar Mega Evolves and traps with Shadow Tag",
+   "result": "FAIL on build-8 (engine); NOT REACHED on build-10",
+   "evidence": "Build-8: Gengar entered with mega_already_used=true after Banette's Mega and never evolved. Build-10: Gengar was hard-switched into Kingambit's Kowtow Cleave (T4) and fainted on the switch-in turn, so it never had a first action to Mega Evolve on - an AI switch-choice defect, not the Mega gate."
+  },
+  {
+   "check": "Mega Banette Mega Evolves on its first action; Encore / Will-O-Wisp / Poltergeist",
+   "result": "PASS on build-10",
+   "evidence": "a2 T11: 'Banette has Mega Evolved' on its first action; Protect T11/T13, Poltergeist T12 (into Sitrus Incineroar), Will-O-Wisp T14 on Raging Bolt. Build-8 a1: evolved but timing unverifiable in the truncated text."
+  },
+  {
+   "check": "Lunala Wide Guard vs spread",
+   "result": "PASS (chosen)",
+   "evidence": "a2 T6 Wide Guard selected (nothing spread was coming - empty), plus Protect T2/T5/T9 blocking KO-range Kowtow Cleaves."
+  },
+  {
+   "check": "Marshadow Spectral Thief / Close Combat lane",
+   "result": "PASS",
+   "evidence": "T4 Close Combat on Incineroar (272, the KO read after Sitrus); no boosts existed to steal."
+  },
+  {
+   "check": "Giratina Icy Wind speed control + Poltergeist",
+   "result": "PASS with one defect",
+   "evidence": "Icy Wind T1, T2, T4 (Speed drops on Bundle, Chi-Yu, Incineroar); Poltergeist T6 into itemless Incineroar failed (defect 2)."
+  },
+  {
+   "check": "Spectrier Specs Grim Neigh",
+   "result": "PASS",
+   "evidence": "Shadow Ball chosen into resisted targets because nothing else was legal; KO'd Urshifu with resisted Shadow Ball + Life Orb recoil."
+  }
+ ],
+ "protect_ledger": [
+  {
+   "turn": 3,
+   "battler": "Giratina (32 HP)",
+   "payoff": "blocked Dark Pulse that would have KO'd; Leftovers +29"
+  },
+  {
+   "turn": 5,
+   "battler": "Giratina (64 HP)",
+   "payoff": "reduced Wicked Blow (KO) to a quarter (55) via Unseen Fist rule; Leftovers +29"
+  },
+  {
+   "turn": 6,
+   "battler": "Banette (17 HP)",
+   "payoff": "empty in effect - Wicked Blow still dealt a quarter through Protect and KO'd"
+  }
+ ],
+ "ai_defects": [
+  {
+   "id": 1,
+   "severity": "engine",
+   "description": "Second authored Mega never fires. Phoebe's mega_slots 4,6: Banette Mega Evolved; Gengar (slot 6) entered T6 with usable_gimmick=mega and mega_already_used=true, chose Sludge Bomb and was KO'd as base Gengar. EmeraldChampions_GetMegaEvolutionLimit returns 2 for the Elite Four (src/emerald_champions_battle_plan.c:54) and CanBattlerMegaEvolve honours it (src/battle_util.c:8536-8555), but the AI gimmick gate in src/battle_controllers.c:3304 uses HasTrainerUsedGimmick(), which reads gBattleStruct->gimmick.activated[battler] - and SetGimmickAsActivated (src/battle_gimmick.c:120-126) marks the same-trainer partner POSITION as activated when the first Mega fires, so whatever later occupies that position is treated as already used. Same symptom on Glacia (Baxcalibur, see 326). BUILD-10 UPDATE: the gate is fixed - Banette evolved on its first action in a2. Gengar still never evolved because the AI switched it into a super-effective attack (defect 3)."
+  },
+  {
+   "id": 2,
+   "severity": "minor",
+   "description": "T6 Giratina used Poltergeist on Incineroar whose Sitrus Berry had already been eaten (item shown as none since T4); the move failed. Better: Icy Wind or Poltergeist on Urshifu (Life Orb)."
+  },
+  {
+   "id": 3,
+   "severity": "AI",
+   "description": "a2 T3/T4 (build-10): the AI hard-switched Lunala out into Kowtow Cleave (Marshadow took 229 and died next turn) and then Giratina out for Gengar into a second Kowtow Cleave; Gengar, the Mega ace, fainted on entry. Same switch-into-super-effective family as 327/328/329."
+  }
+ ],
+ "level_changes": [],
+ "calibration": "Build-8: won 6-4. Build-10 replay with the final League party: won 6-2 with both Megas now able to fire (Banette did; Gengar was thrown away by a switch). Keep all offsets.",
+ "cooler": "The room already has a clear identity. It would be cooler if the Gengar Mega actually fired (defect 1) - as played the trap never existed and the room was carried by Lunala's Moongeist Beam and Kyurem-style raw damage. Suggest Encore be authored to prefer a non-Dark target, and Giratina's Poltergeist to check the target's item.",
+ "legality": "No legality problem found in the authored set.",
+ "step_up": "A step above Sidney? Cannot compare directly. On build-10 with the final League party Phoebe cost two Pokemon; it is the gentlest of the four rooms I played, and its danger is concentrated in Lunala's Moongeist Beam and Giratina's burns."
 }
