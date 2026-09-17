@@ -47,7 +47,7 @@ static void Task_RunLoopedTask_LinkMode(u8);
 static void Task_RunLoopedTask(u8);
 static void Task_Pokenav(u8);
 
-const struct PokenavCallbacks PokenavMenuCallbacks[9] =
+const struct PokenavCallbacks PokenavMenuCallbacks[7] =
 {
     [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
     {
@@ -62,13 +62,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[9] =
     [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnMap,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
         .callback = GetMenuHandlerCallback,
         .open = OpenPokenavMenuNotInitial,
         .createLoopTask = CreateMenuHandlerLoopedTask,
@@ -95,7 +88,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[9] =
         .isLoopTaskActive = IsRegionMapLoopedTaskActive,
         .free1 = FreeRegionMapSubstruct1,
         .free2 = FreeRegionMapSubstruct2,
-    },
     },
     [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
     {

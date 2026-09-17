@@ -3910,7 +3910,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
                     FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
                     FlagSet(FLAG_DELIVERED_DEVON_GOODS);
-                    FlagSet(FLAG_REGISTERED_STEVEN_POKENAV);
                     AddBagItem(ITEM_MEGA_RING, 1);
                     if (gEcHeadlessFixtureParam == 18)
                         MarkLegendarySignCaughtBySpecies(SPECIES_COBALION);
