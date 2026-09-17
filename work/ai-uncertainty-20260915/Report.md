@@ -2347,3 +2347,57 @@ competing use for the turn, so every joint conflict disappears. Several of my
 earlier authored-tactic fixtures are built that way — the Wattson one included
 — and they should be re-pointed at boards with live threats before they are
 trusted.
+
+# Y(3) at 322/322: the power formula is right, the HP it is fed is not
+
+Read on the live board with your repro, before submitting anything. Kyogre's
+authored order is `WATER_SPOUT, ICE_BEAM, ORIGIN_PULSE, PROTECT`, confirmed
+from the state rather than assumed, and the trace at full health is:
+
+```
+slot 0  Water Spout   484
+slot 1  Ice Beam      250
+slot 2  Origin Pulse  355
+slot 3  Protect         0
+```
+
+Water Spout is **36% ahead**, exactly as you predicted a correct formula would
+read, and it is also the accurate one. Kyogre then chose **slot 2, Origin
+Pulse** — the strictly worse move on every axis the cache can see. So the HP
+scaling is right and the reversal happens after it.
+
+## Where it happens
+
+The trial does not use that cache for an HP-scaled move. It recomputes the
+power from `actionHp`, the expected HP of the user at the moment it acts:
+
+```c
+u32 actionHp = hp[actor];
+...
+damage = PairHpPowerDamage(ev, actor, target, action->index, move, actionHp);
+```
+
+`hp[actor]` is a probability-weighted blend over the forecast, and on this
+board the forecast includes Mega Kangaskhan's **Fake Out** — priority, and a
+flinch. In the branches where Fake Out lands, Kyogre is chipped *and does not
+act at all*. Those branches drag the expected HP down, which drags Water
+Spout's power down with it, even though Water Spout never happens in them.
+
+The model already accounts for not acting, separately and correctly, through
+`actionChance`. Feeding the same branches into the power as well counts them
+twice: once as "you probably will not act" and again as "and when you do, you
+will be weaker".
+
+## The fix, and why I have not landed it tonight
+
+An HP-scaled move should be priced on the HP its user has **in the branches
+where it acts** — not on the unconditional blend. That is a change to the
+trial's HP model, it interacts with `actionChance` and with the conditional-HP
+handling group C added, and it is the kind of edit I would rather make at the
+start of a session than the end of this one. The evidence is complete enough
+that the next person can go straight at it: the numbers above, the mapping, the
+chosen slot, and the two lines that carry it.
+
+It also predicts the receipt's shape exactly: Water Spout was skipped at full
+health with a priority flincher opposite, and taken at 58 and 70 percent on
+build-13 when no flincher was on the field.
