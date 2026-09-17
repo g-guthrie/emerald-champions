@@ -1,0 +1,48 @@
+{
+  "trainer": "TRAINER_WALLACE", "e_group": "E0497", "play_order": 328, "cap": 96, "difficulty": "medium",
+  "party_manifest": "work/playtest/328-TRAINER_WALLACE/party_league96_v3.json",
+  "build_dir": "work/agent-battle-build-9 (coordinator snapshot change before this battle; a1 was restarted on build-9 before any turn was played)",
+  "league_run_note": "Fifth and last room, same League party v3 that beat Drake. Three attempts, all with v3 and the same leads (Kangaskhan + Whimsicott): a1 lost 2-6 (my errors: Hydro Pump into Ferrothorn, Raging Bolt left seeded on the field), a2 lost 5-6 (two consecutive Starmie Protects at the end), a3 won 6-1. Real-run carry at the end of the League with v3: Incineroar fainted; Kangaskhan 64/338; Whimsicott 95/251 (Sash gone); Kingambit 155/388; Raging Bolt 256/436; Iron Bundle untouched. With field medicine and Revives between rooms every room of the League was entered with six; PP was never the binding constraint over four rooms (Whimsicott Moonblast and Tailwind, Kangaskhan Double-Edge and Bolt Draco Meteor are the deepest-drawn moves).",
+  "attempts": [
+    {"seed": 1, "outcome": "lost", "turns": 14, "player_faints": 6, "opponent_faints": 2, "run_dir": "work/playtest/328-TRAINER_WALLACE/a1", "notes": "Fake Out denied Kyogre T1; Kyogre Protected T2 and was switched into Ferrothorn on T3 to absorb Double-Edge; the AI later switched Fini out for Kyogre to restart the rain and Kyogre died to the Thunderbolt aimed at Fini. Fini Protected on T5, T7 and T8 (three of four turns) then fell to Thunderclap. Mega Milotic's Ice Beam and rain Muddy Water removed Raging Bolt and Incineroar; Ferrothorn's Leech Seed on Kingambit and my resisted Hydro Pump handed it the endgame; Starmie never needed to Mega Evolve."},
+    {"seed": 2, "outcome": "lost", "turns": 14, "player_faints": 6, "opponent_faints": 5, "run_dir": "work/playtest/328-TRAINER_WALLACE/a2", "notes": "Kyogre Protect T2 (empty), Double-Edge KO'd Kyogre T3; the AI switched Fini out for Milotic into my Intimidate (Competitive +2 fired) and Milotic died at full HP to the Thunderbolt aimed at Fini before it could Mega Evolve. Fini Protected T5/T7/T8 and fell T9; Draco Meteor KO'd Palkia; Mega Starmie (its Mega fired because Milotic never used the trainer's first) Psycho Cut OHKO'd Raging Bolt and Liquidation KO'd Kingambit; Starmie Protected T11 and T13, then Encore into its Protect let Double-Edge KO it; Ferrothorn finished the 13-HP Kangaskhan."},
+    {"seed": 3, "outcome": "won", "turns": 9, "player_faints": 1, "opponent_faints": 6, "run_dir": "work/playtest/328-TRAINER_WALLACE/a3", "notes": "Same opening; Kyogre KO'd T3 by Double-Edge, Thunderbolt KO'd Fini T4 as Palkia entered, Fake Out + Draco Meteor removed Palkia T5, Flare Blitz KO'd Ferrothorn T7 (Incineroar died to Muddy Water + recoil + Leech Seed), Thunderbolt + Iron Head took Mega Milotic to 9, then Thunderbolt KO'd base Starmie and Iron Head finished Milotic while it used Helping Hand on Starmie."}
+  ],
+  "strategy_checks": [
+    {"check": "Kyogre rain and Tapu Fini Misty Terrain live on entry", "result": "PASS", "evidence": "Rain + Misty Terrain at turn 0 in all three attempts; a1 T6 the AI switched Fini out for Kyogre specifically to restart rain after it expired (rain restarted on the switch)."},
+    {"check": "Kyogre Water Spout at full HP", "result": "FAIL (choice)", "evidence": "At full HP on T1 of every attempt Kyogre's chosen move was Origin Pulse, not Water Spout (defect 3). It never used Water Spout in three attempts."},
+    {"check": "Tapu Fini Icy Wind speed control / Protect reads", "result": "PASS", "evidence": "Icy Wind T1 every attempt (undoing Tailwind in effect); Protects on T5/T7/T8 (a1), T5/T7/T8 (a2) each blocked a KO-range Thunderbolt/Thunderclap or Fake Out - but see defect 4 on cadence."},
+    {"check": "Ferrothorn Leech Seed / Iron Barbs attrition", "result": "PASS", "evidence": "Leech Seed on Kingambit, Raging Bolt and Incineroar across attempts; the AI switched Ferrothorn in to absorb Double-Edge (a1 T3, a3 T3) and Flare Blitz (a1 T8 switched it out for Milotic)."},
+    {"check": "Palkia rain Thunder / no Dragon STAB into Misty grounded targets", "result": "PASS", "evidence": "Palkia used Hydro Pump on Incineroar (a2 T8, a KO) and never selected a Dragon move; it was KO'd by Draco Meteor in a2 and a3."},
+    {"check": "Milotic: Competitive punishes a stat drop before Mega; Prism Scales after; Recover when it buys progress; Helping Hand for Starmie", "result": "PASS", "evidence": "a2 T4 Competitive +2 fired on my Intimidate; Mega Evolution a1 T9, a3 T6 (Prism Scales confirmed); a1 T13 Recover at 152/378 instead of attacking; a3 T9 Helping Hand for Starmie's Liquidation."},
+    {"check": "Mega Starmie Huge Power Liquidation/Psycho Cut/Aqua Jet", "result": "PASS (only when the first Mega was never used)", "evidence": "a2 T10: Starmie Mega Evolved (Milotic had died un-evolved) and Psycho Cut OHKO'd Raging Bolt, Liquidation KO'd Kingambit. a1/a3: after Milotic's Mega, Starmie stayed base (defect 1)."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Kyogre", "payoff": "blocked Double-Edge (KO range)"},
+    {"attempt": 1, "turn": 5, "battler": "Tapu Fini (89 HP)", "payoff": "blocked Thunderclap (KO)"},
+    {"attempt": 1, "turn": 7, "battler": "Tapu Fini", "payoff": "blocked Thunderclap (KO)"},
+    {"attempt": 1, "turn": 8, "battler": "Tapu Fini", "payoff": "empty - I attacked Ferrothorn/Milotic instead; nothing aimed at Fini"},
+    {"attempt": 1, "turns": "12-14", "battler": "Ferrothorn", "payoff": "T12 blocked Double-Edge; T13/T14 Encored into Protect (forced)"},
+    {"attempt": 2, "turn": 2, "battler": "Kyogre", "payoff": "empty - I hit Fini"},
+    {"attempt": 2, "turn": 5, "battler": "Tapu Fini", "payoff": "blocked Fake Out + Thunderbolt (KO)"},
+    {"attempt": 2, "turn": 6, "battler": "Tapu Fini + Ferrothorn", "payoff": "Fini's failed (consecutive); Ferrothorn's blocked Flare Blitz (KO)"},
+    {"attempt": 2, "turn": 7, "battler": "Tapu Fini", "payoff": "blocked Thunderbolt (KO)"},
+    {"attempt": 2, "turn": 8, "battler": "Tapu Fini", "payoff": "blocked Knock Off (chip only)"},
+    {"attempt": 2, "turn": 11, "battler": "Mega Starmie (entry)", "payoff": "blocked Freeze-Dry (KO)"},
+    {"attempt": 2, "turn": 13, "battler": "Mega Starmie", "payoff": "blocked Sucker Punch + Freeze-Dry (KO)"},
+    {"attempt": 3, "turn": 2, "battler": "Kyogre", "payoff": "empty - I hit Fini"},
+    {"attempt": 3, "turn": 6, "battler": "Ferrothorn", "payoff": "blocked Flare Blitz (KO)"},
+    {"attempt": 3, "turn": 8, "battler": "Starmie (entry, base)", "payoff": "empty - nothing aimed at it"}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "engine", "description": "Second authored Mega never fires once the first has been used (Starmie stayed base in a1 and a3 after Milotic's Mega). Confirmed by contrast: in a2 Milotic died un-evolved and Starmie DID Mega Evolve. Same root cause as 325 defect 1."},
+    {"id": 2, "severity": "AI", "description": "Switching the Mega ace into a super-effective attack aimed at the slot: a2 T4 the AI hard-switched Tapu Fini out for Milotic while my Thunderbolt was selected into that slot; Milotic (Water/Fairy) took it at full HP and fainted before Mega Evolving. a1 T6 the same pattern put Kyogre into a Thunderbolt to restart rain. Same family as 327 defect 2."},
+    {"id": 3, "severity": "AI", "description": "Kyogre at full HP with rain active chose Origin Pulse (85% acc, 110 BP) over Water Spout (100% acc, 150 BP) on T1 of all three attempts, and never selected Water Spout at all. The plan text names Water Spout as the opening threat."},
+    {"id": 4, "severity": "AI (Protect cadence)", "description": "Tapu Fini attempted Protect on four consecutive turns in a2 (T5 success, T6 failed, T7 success, T8 success - the engine's consecutive-Protect odds allowed it) and three of four turns in a1, spending its whole mid-game on Protect at 89-199 HP with Muddy Water/Moonblast available; Kyogre (a2/a3 T2) and Starmie (a3 T8) Protected on turns nothing was aimed at them. Same make-or-break cadence concern as 327 defect 3."}
+  ],
+  "level_changes": [],
+  "calibration": "Lost 2-6, lost 5-6, won 6-1 on the third attempt with the League party that beat Drake; the win came from the same opening executed cleanly plus two AI switch-ins into my attacks. A real fight: keep all offsets (96/100/100/96/98/97 seeds -> medium 94/98/98/94/96/95).",
+  "cooler": "It is the most tactically alive room in the League: the AI switches to reset its fields and to absorb Double-Edge/Flare Blitz on Ferrothorn, Milotic Recovers at the right moment and Helping Hands Starmie, Ferrothorn's Leech Seed grinds. Cooler still if Kyogre actually opened with Water Spout (defect 3), if the Mega switch-ins stopped walking into super-effective hits (defect 2), and if both Megas could fire (defect 1). With those three fixed this is clearly the campaign's hardest room without touching a level.",
+  "legality": "No legality problem found in the authored set.",
+  "step_up": "Is Wallace the hardest fight in the campaign? With the right party: yes by attempts - it took three tries with the party that beat Drake in one (post-rebuild), and each loss came from its own decisions rather than raw OHKOs. Drake is more punishing to a party built wrong (it cost a full rebuild), but Wallace's AI is the sharpest and its Protect/switch reads cost me two attempts. The League ramps Phoebe < Glacia < Drake ~ Wallace, with Wallace the deserved summit."
+}
