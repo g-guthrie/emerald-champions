@@ -1,0 +1,42 @@
+{
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "elf_sha256": "7cb4b4533332dea3d8fc3041ce601ed5206316bd1282a9b0ea6b10db1adebce8",
+  "seed": 4,
+  "trainer_a": "TRAINER_GLACIA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 96,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/326-TRAINER_GLACIA/party_league96_v3_glacia_leads.json",
+  "party_sha256": "c7c2c5d208d658c978425abf5b5697368acc595232ce995c2f193a8a3be4e909",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD"
+  ],
+  "prepared": {
+    "encounter": "League run E0494-E0497 cap 96, party v3 (rebuilt after Drake a1/a2 losses with v2: Chi-Yu and Rillaboom were resisted by every Drake member, Xerneas enters at L84 under the legend penalty and never got a second turn) | Glacia a4: same six, Incineroar + Kingambit lead (both resist Ice; Fake Out Ninetales, Iron Head Kyurem)",
+    "party": 6
+  },
+  "started": {
+    "frames": 3499
+  },
+  "replacement_commits": {
+    "turn": 8,
+    "slots": {
+      "0": 0
+    }
+  }
+}

@@ -22,7 +22,6 @@ enum PartyMenuType
 {
     PARTY_MENU_TYPE_FIELD,
     PARTY_MENU_TYPE_IN_BATTLE,
-    PARTY_MENU_TYPE_CONTEST,
     PARTY_MENU_TYPE_CHOOSE_MON,
     PARTY_MENU_TYPE_CHOOSE_HALF,                // multi battles, eReader battles, and some battle facilities
     PARTY_MENU_TYPE_MULTI_SHOWCASE,
@@ -126,7 +125,6 @@ void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void ChooseMonForDaycare(void);
 bool8 CB2_FadeFromPartyMenu(void);
 void CB2_ReturnToPartyMenuFromSummaryScreen(void);
-void ChooseContestMon(void);
 void ChoosePartyMon(void);
 void ChooseMonForMoveRelearner(void);
 void IsSelectedMonEgg(void);

@@ -1205,18 +1205,11 @@ const u16 gItemIconPalette_LuckIncense[] = INCGFX_U16("graphics/items/icon_palet
 const u32 gItemIcon_PureIncense[] = INCGFX_U32("graphics/items/icons/pure_incense.png", ".4bpp.smol");
 const u16 gItemIconPalette_PureIncense[] = INCGFX_U16("graphics/items/icon_palettes/pure_incense.pal", ".gbapal");
 
-// Contest Scarves
 
-const u32 gItemIcon_Scarf[] = INCGFX_U32("graphics/items/icons/scarf.png", ".4bpp.smol");
-const u16 gItemIconPalette_RedScarf[] = INCGFX_U16("graphics/items/icon_palettes/red_scarf.pal", ".gbapal");
 
-const u16 gItemIconPalette_BlueScarf[] = INCGFX_U16("graphics/items/icon_palettes/blue_scarf.pal", ".gbapal");
 
-const u16 gItemIconPalette_PinkScarf[] = INCGFX_U16("graphics/items/icon_palettes/pink_scarf.pal", ".gbapal");
 
-const u16 gItemIconPalette_GreenScarf[] = INCGFX_U16("graphics/items/icon_palettes/green_scarf.pal", ".gbapal");
 
-const u16 gItemIconPalette_YellowScarf[] = INCGFX_U16("graphics/items/icon_palettes/yellow_scarf.pal", ".gbapal");
 
 // EV Gain Modifiers
 
@@ -1887,8 +1880,6 @@ const u16 gItemIconPalette_Meteorite[] = INCGFX_U16("graphics/items/icon_palette
 const u32 gItemIcon_MagmaEmblem[] = INCGFX_U32("graphics/items/icons/magma_emblem.png", ".4bpp.smol");
 const u16 gItemIconPalette_MagmaEmblem[] = INCGFX_U16("graphics/items/icon_palettes/magma_emblem.pal", ".gbapal");
 
-const u32 gItemIcon_ContestPass[] = INCGFX_U32("graphics/items/icons/contest_pass.png", ".4bpp.smol");
-const u16 gItemIconPalette_ContestPass[] = INCGFX_U16("graphics/items/icon_palettes/contest_pass.pal", ".gbapal");
 
 const u32 gItemIcon_Parcel[] = INCGFX_U32("graphics/items/icons/parcel.png", ".4bpp.smol");
 const u16 gItemIconPalette_Parcel[] = INCGFX_U16("graphics/items/icon_palettes/parcel.pal", ".gbapal");

@@ -791,17 +791,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_FALLARBOR_TOWN_LEFTOVER_RSCONTEST_HALL",
-      "name": "FallarborTown_LeftoverRSContestHall_Layout",
-      "width": 21,
-      "height": 18,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/FallarborTown_LeftoverRSContestHall/border.bin",
-      "blockdata_filepath": "data/layouts/FallarborTown_LeftoverRSContestHall/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_LILYCOVE_CITY_HOUSE2",
       "name": "LilycoveCity_House2_Layout",
       "width": 8,
@@ -1151,17 +1140,6 @@
       "secondary_tileset": "gTileset_Contest",
       "border_filepath": "data/layouts/LilycoveCity_ContestLobby/border.bin",
       "blockdata_filepath": "data/layouts/LilycoveCity_ContestLobby/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_LILYCOVE_CITY_CONTEST_HALL",
-      "name": "LilycoveCity_ContestHall_Layout",
-      "width": 51,
-      "height": 33,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/LilycoveCity_ContestHall/border.bin",
-      "blockdata_filepath": "data/layouts/LilycoveCity_ContestHall/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -2457,138 +2435,6 @@
       "secondary_tileset": "gTileset_CableClub",
       "border_filepath": "data/layouts/BattleColosseum_4P/border.bin",
       "blockdata_filepath": "data/layouts/BattleColosseum_4P/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_CONTEST_HALL",
-      "name": "ContestHall_Layout",
-      "width": 15,
-      "height": 11,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/ContestHall/border.bin",
-      "blockdata_filepath": "data/layouts/ContestHall/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_UNUSED_CONTEST_HALL1",
-      "name": "UnusedContestHall1_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/UnusedContestHall1/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedContestHall1/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_UNUSED_CONTEST_HALL2",
-      "name": "UnusedContestHall2_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/UnusedContestHall2/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedContestHall2/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_UNUSED_CONTEST_HALL3",
-      "name": "UnusedContestHall3_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/UnusedContestHall3/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedContestHall3/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_UNUSED_CONTEST_HALL4",
-      "name": "UnusedContestHall4_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/UnusedContestHall4/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedContestHall4/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_UNUSED_CONTEST_HALL5",
-      "name": "UnusedContestHall5_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/UnusedContestHall5/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedContestHall5/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_UNUSED_CONTEST_HALL6",
-      "name": "UnusedContestHall6_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/UnusedContestHall6/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedContestHall6/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_CONTEST_HALL_BEAUTY",
-      "name": "ContestHallBeauty_Layout",
-      "width": 15,
-      "height": 11,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/ContestHallBeauty/border.bin",
-      "blockdata_filepath": "data/layouts/ContestHallBeauty/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_CONTEST_HALL_TOUGH",
-      "name": "ContestHallTough_Layout",
-      "width": 15,
-      "height": 11,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/ContestHallTough/border.bin",
-      "blockdata_filepath": "data/layouts/ContestHallTough/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_CONTEST_HALL_COOL",
-      "name": "ContestHallCool_Layout",
-      "width": 15,
-      "height": 11,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/ContestHallCool/border.bin",
-      "blockdata_filepath": "data/layouts/ContestHallCool/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_CONTEST_HALL_SMART",
-      "name": "ContestHallSmart_Layout",
-      "width": 15,
-      "height": 11,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/ContestHallSmart/border.bin",
-      "blockdata_filepath": "data/layouts/ContestHallSmart/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_CONTEST_HALL_CUTE",
-      "name": "ContestHallCute_Layout",
-      "width": 15,
-      "height": 11,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Contest",
-      "border_filepath": "data/layouts/ContestHallCute/border.bin",
-      "blockdata_filepath": "data/layouts/ContestHallCute/map.bin",
       "layout_version": "emerald"
     },
     {

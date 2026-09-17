@@ -87,12 +87,9 @@ struct PokeblockSavedData
 
 enum
 {
-    PKBL_USE_ON_FIELD,
     PKBL_TOSS,
     PKBL_CANCEL,
     PKBL_USE_IN_BATTLE,
-    PKBL_USE_ON_FEEDER,
-    PKBL_GIVE_TO_LADY
 };
 
 static void CB2_InitPokeblockMenu(void);
@@ -110,12 +107,9 @@ static void DrawPokeblockMenuTitleText(void);
 static void DrawPokeblockMenuHighlight(u16, u16);
 static void PutPokeblockListMenuString(u8 *, u16);
 static void Task_HandlePokeblockMenuInput(u8);
-static void PokeblockAction_UseOnField(u8);
 static void PokeblockAction_Toss(u8);
 static void PokeblockAction_Cancel(u8);
 static void PokeblockAction_UseInBattle(u8);
-static void PokeblockAction_UseOnPokeblockFeeder(u8);
-static void PokeblockAction_GiveToContestLady(u8);
 static void TossedPokeblockMessage(u8);
 static void CloseTossPokeblockWindow(u8);
 static void Task_FreeDataAndExitPokeblockCase(u8);
@@ -125,8 +119,6 @@ static void Task_HandlePokeblocksSwapInput(u8);
 static void SpriteCB_ShakePokeblockCase(struct Sprite *);
 static void DrawPokeblockInfo(s32);
 static void UpdatePokeblockSwapMenu(u8, bool8);
-static void UsePokeblockOnField(void);
-static void ReturnToPokeblockCaseOnField(void);
 static void CreateTossPokeblockYesNoMenu(u8);
 static void TossPokeblock(u8);
 
@@ -220,18 +212,13 @@ const u8 *const gPokeblockNames[] =
 
 static const struct MenuAction sPokeblockMenuActions[] =
 {
-    [PKBL_USE_ON_FIELD]  = {gMenuText_Use, {PokeblockAction_UseOnField}},
     [PKBL_TOSS]          = {gMenuText_Toss, {PokeblockAction_Toss}},
     [PKBL_CANCEL]        = {gText_Cancel2, {PokeblockAction_Cancel}},
     [PKBL_USE_IN_BATTLE] = {gMenuText_Use, {PokeblockAction_UseInBattle}},
-    [PKBL_USE_ON_FEEDER] = {gMenuText_Use, {PokeblockAction_UseOnPokeblockFeeder}},
-    [PKBL_GIVE_TO_LADY]  = {gMenuText_Give2, {PokeblockAction_GiveToContestLady}},
 };
 
-static const u8 sActionsOnField[] = {PKBL_USE_ON_FIELD, PKBL_TOSS, PKBL_CANCEL};
+static const u8 sActionsOnField[] = {PKBL_TOSS, PKBL_CANCEL};
 static const u8 sActionsInBattle[] = {PKBL_USE_IN_BATTLE, PKBL_CANCEL};
-static const u8 sActionsOnPokeblockFeeder[] = {PKBL_USE_ON_FEEDER, PKBL_CANCEL};
-static const u8 sActionsWhenGivingToLady[] = {PKBL_GIVE_TO_LADY, PKBL_CANCEL};
 
 static const struct YesNoFuncTable sTossYesNoFuncTable = {TossedPokeblockMessage, CloseTossPokeblockWindow};
 
@@ -460,14 +447,6 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void))
         sPokeblockMenu->pokeblockActionIds = sActionsInBattle;
         sPokeblockMenu->numActions = ARRAY_COUNT(sActionsInBattle);
         break;
-    case PBLOCK_CASE_FEEDER:
-        sPokeblockMenu->pokeblockActionIds = sActionsOnPokeblockFeeder;
-        sPokeblockMenu->numActions = ARRAY_COUNT(sActionsOnPokeblockFeeder);
-        break;
-    case PBLOCK_CASE_GIVE:
-        sPokeblockMenu->pokeblockActionIds = sActionsWhenGivingToLady;
-        sPokeblockMenu->numActions = ARRAY_COUNT(sActionsWhenGivingToLady);
-        break;
     default: // PBLOCK_CASE_FIELD
         sPokeblockMenu->pokeblockActionIds = sActionsOnField;
         sPokeblockMenu->numActions = ARRAY_COUNT(sActionsOnField);
@@ -480,11 +459,6 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void))
 void OpenPokeblockCaseInBattle(void)
 {
     OpenPokeblockCase(PBLOCK_CASE_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
-}
-
-void OpenPokeblockCaseOnFeeder(void)
-{
-    OpenPokeblockCase(PBLOCK_CASE_FEEDER, CB2_ReturnToField);
 }
 
 static void CB2_PokeblockMenu(void)
@@ -983,9 +957,6 @@ static void Task_FreeDataAndExitPokeblockCase(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (sPokeblockMenu->caseId == PBLOCK_CASE_FEEDER || sPokeblockMenu->caseId == PBLOCK_CASE_GIVE)
-            gFieldCallback = FieldCB_ContinueScriptHandleMusic;
-
         DestroyListMenuTask(tListTaskId, &sSavedPokeblockData.scrollOffset, &sSavedPokeblockData.selectedRow);
         DestroyScrollArrows();
         ResetSpriteData();
@@ -1183,22 +1154,6 @@ static void Task_HandlePokeblockActionsInput(u8 taskId)
     }
 }
 
-static void PokeblockAction_UseOnField(u8 taskId)
-{
-    sPokeblockMenu->callbackOnUse = UsePokeblockOnField;
-    FadePaletteAndSetTaskToClosePokeblockCase(taskId);
-}
-
-static void UsePokeblockOnField(void)
-{
-    ChooseMonToGivePokeblock(&gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId], ReturnToPokeblockCaseOnField);
-}
-
-static void ReturnToPokeblockCaseOnField(void)
-{
-    OpenPokeblockCase(PBLOCK_CASE_FIELD, sSavedPokeblockData.callback);
-}
-
 static void PokeblockAction_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -1270,25 +1225,6 @@ static void PokeblockAction_UseInBattle(u8 taskId)
     else
         gSpecialVar_ItemId += 3;
 
-    FadePaletteAndSetTaskToClosePokeblockCase(taskId);
-}
-
-static void PokeblockAction_UseOnPokeblockFeeder(u8 taskId)
-{
-    SafariZoneActivatePokeblockFeeder(gSpecialVar_ItemId);
-    StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);
-    gSpecialVar_Result = gSpecialVar_ItemId;
-    TryClearPokeblock(gSpecialVar_ItemId);
-    gSpecialVar_ItemId = 0;
-    FadePaletteAndSetTaskToClosePokeblockCase(taskId);
-}
-
-static void PokeblockAction_GiveToContestLady(u8 taskId)
-{
-    gSpecialVar_0x8004 = GivePokeblockToContestLady(&gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId]);
-    gSpecialVar_Result = gSpecialVar_ItemId;
-    TryClearPokeblock(gSpecialVar_ItemId);
-    gSpecialVar_ItemId = 0;
     FadePaletteAndSetTaskToClosePokeblockCase(taskId);
 }
 

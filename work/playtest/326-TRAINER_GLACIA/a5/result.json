@@ -1,0 +1,33 @@
+{
+  "trainer_a": "TRAINER_GLACIA",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 5,
+  "difficulty": "medium",
+  "level_cap": 96,
+  "phase": "ended",
+  "outcome": "lost",
+  "turns": 7,
+  "decisions": 12,
+  "player_faints": 6,
+  "opponent_faints": 3,
+  "ai_decision_frames_max": 61,
+  "ai_decision_seconds_max": 1.021,
+  "ai_decision_frames": [
+    61,
+    44,
+    44,
+    45,
+    45,
+    41,
+    58,
+    61,
+    56,
+    56,
+    28,
+    28
+  ],
+  "rom_sha256": "b1df7d639bf416388afda5f2e371664f0c9b63eaece962f5b0252ceabd8883bc",
+  "elf_sha256": "8b058ef305937ffce1cdf49cf58bff36088d9527c5d0bb2881d32e334f52863c",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}

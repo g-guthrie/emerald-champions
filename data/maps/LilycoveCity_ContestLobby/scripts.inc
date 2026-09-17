@@ -7,7 +7,6 @@ LilycoveCity_ContestLobby_MapScripts::
 @ data/scripts/berry_blender.
 
 LilycoveCity_ContestLobby_OnTransition:
-	call LilycoveCity_ContestLobby_EventScript_TryShowContestReporter
 	call LilycoveCity_ContestLobby_EventScript_TryShowBlendMaster
 	end
 

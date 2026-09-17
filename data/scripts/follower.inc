@@ -21,8 +21,12 @@ EventScript_FollowerEnd::
 	release
 	end
 
+Follower_Movement_Heart:
+	emote_heart
+	step_end
+
 EventScript_FollowerLovesYou::
-	applymovement OBJ_EVENT_ID_FOLLOWER, ContestHall_Movement_Heart
+	applymovement OBJ_EVENT_ID_FOLLOWER, Follower_Movement_Heart
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	waitmoncry
 	msgbox gText_FollowerLovesYou, MSGBOX_DEFAULT

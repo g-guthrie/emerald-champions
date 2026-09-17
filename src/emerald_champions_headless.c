@@ -18,8 +18,6 @@
 #include "emerald_champions_agent_prep.h"
 #include "emerald_champions_agent_battle.h"
 #include "coins.h"
-#include "contest.h"
-#include "contest_util.h"
 #include "event_data.h"
 #include "item_use.h"
 #include "berry.h"
@@ -49,7 +47,6 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "play_time.h"
-#include "pokeblock.h"
 #include "pokedex.h"
 #include "save.h"
 #include "pokedex_common.h"
@@ -68,7 +65,6 @@
 #include "trainer_card.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
-#include "constants/contest.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/lilycove_lady.h"
@@ -1041,24 +1037,12 @@ static void PrepareHeadlessSafariBattle(void)
     SetMainCallback2(CB2_InitBattle);
 }
 
-static void PrepareHeadlessPokeblock(void)
-{
-    struct Pokeblock *pokeblock = &gSaveBlock1Ptr->pokeblocks[0];
-
-    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MILOTIC, 40, OTID_STRUCT_PLAYER_ID);
-    CalculatePlayerPartyCount();
-    *pokeblock = (struct Pokeblock){PBLOCK_CLR_GOLD, 40, 35, 30, 25, 20, 10};
-    ChooseMonToGivePokeblock(pokeblock, gInitialMainCB2);
-}
-
 static void PrepareHeadlessGoldTrainerCard(void)
 {
     SetGameStat(GAME_STAT_ENTERED_HOF, 1);
     EnableNationalPokedex();
     for (enum NationalDexOrder dex = 1; dex < NATIONAL_DEX_COUNT; dex++)
         GetSetPokedexFlag(dex, FLAG_SET_CAUGHT);
-    for (u32 i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
-        gSaveBlock1Ptr->contestWinners[MUSEUM_CONTEST_WINNERS_START + i].species = SPECIES_MILOTIC;
     for (u32 i = 0; i < NUM_FRONTIER_FACILITIES; i++)
     {
         FlagSet(FLAG_SYS_TOWER_SILVER + 2 * i);
@@ -1067,39 +1051,6 @@ static void PrepareHeadlessGoldTrainerCard(void)
     ShowPlayerTrainerCard(gInitialMainCB2);
 }
 
-static void PrepareHeadlessContestResults(void)
-{
-    static const enum Species species[CONTESTANT_COUNT] =
-    {
-        SPECIES_MILOTIC,
-        SPECIES_PIKACHU,
-        SPECIES_ALTARIA,
-        SPECIES_ROSERADE,
-    };
-    static const u8 *const names[CONTESTANT_COUNT] =
-    {
-        COMPOUND_STRING("AQUA"),
-        COMPOUND_STRING("SPARK"),
-        COMPOUND_STRING("ARIA"),
-        COMPOUND_STRING("ROSE"),
-    };
-
-    gContestPlayerMonIndex = 0;
-    gSpecialVar_ContestCategory = CONTEST_CATEGORY_BEAUTY;
-    gSpecialVar_ContestRank = CONTEST_RANK_MASTER;
-    for (u32 i = 0; i < CONTESTANT_COUNT; i++)
-    {
-        memset(&gContestMons[i], 0, sizeof(gContestMons[i]));
-        gContestMons[i].species = species[i];
-        StringCopy(gContestMons[i].nickname, names[i]);
-        StringCopy(gContestMons[i].trainerName, i == 0 ? sEcHeadlessPlayerName : names[i]);
-        gContestMons[i].personality = 0x12340000 + i;
-        gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_BRENDAN_NORMAL;
-        gContestFinalStandings[i] = i;
-        gContestMonRound1Points[i] = 400 - i * 50;
-        gContestMonRound2Points[i] = 400 - i * 40;
-        gContestMonTotalPoints[i] = gContestMonRound1Points[i] + gContestMonRound2Points[i];
-    }
 }
 
 static void PrepareHeadlessFairySummary(void)
@@ -1159,8 +1110,6 @@ static bool32 IsHeadlessSummaryStateObserved(void)
         return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_SKILLS, FALSE);
     case EC_HEADLESS_SUMMARY_BATTLE_MOVES:
         return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_BATTLE_MOVES, FALSE);
-    case EC_HEADLESS_SUMMARY_CONTEST_MOVES:
-        return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_CONTEST_MOVES, FALSE);
     case EC_HEADLESS_SUMMARY_MOVE_DETAILS:
         return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_BATTLE_MOVES, TRUE);
     case EC_HEADLESS_SUMMARY_PARTY_ROUNDTRIP:
@@ -1712,14 +1661,6 @@ void EmeraldChampionsHeadlessObserve(void)
         gEcHeadlessFixtureSetupResult = TRUE;
         if (FieldEffectActiveListContains(FLDEFF_POKECENTER_HEAL))
             gEcHeadlessFixtureObservedResult = TRUE;
-        return;
-    }
-    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CONTEST_RESULTS
-     && !gEcHeadlessFixtureSetupResult
-     && gMain.callback2 == CB2_Overworld)
-    {
-        ShowContestResults();
-        gEcHeadlessFixtureSetupResult = TRUE;
         return;
     }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SLOT_MACHINE
@@ -3281,15 +3222,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 else if (gEcHeadlessFixtureParam == 142 || gEcHeadlessFixtureParam == 143)
                 {
                     VarSet(VAR_LILYCOVE_MUSEUM_2F_STATE, gEcHeadlessFixtureParam == 143);
-                    if (gEcHeadlessFixtureParam == 143)
-                    {
-                        PrepareHeadlessContestResults();
-                        gSpecialVar_ContestCategory = CONTEST_CATEGORY_COOL;
-                        gContestMons[0].isShiny = TRUE;
-                        gLinkContestFlags = 0;
-                        SaveContestWinner(CONTEST_SAVE_FOR_MUSEUM);
-                        FlagSet(FLAG_COOL_PAINTING_MADE);
-                    }
                     LoadHeadlessMap(MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11,
                         gEcHeadlessFixtureParam == 142 ? 8 : 7);
                 }
@@ -3306,9 +3238,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else
                 {
-                    FlagClear(FLAG_RECEIVED_POKEBLOCK_CASE);
-                    RemoveBagItem(ITEM_POKEBLOCK_CASE, 1);
-                    VarSet(VAR_CONTEST_PRIZE_PICKUP, gEcHeadlessFixtureParam == 145 ? 4 : 0);
                     VarSet(VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0);
                     LoadHeadlessMap(MAP_LILYCOVE_CITY_CONTEST_LOBBY, 14, 4);
                 }
@@ -3373,8 +3302,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (gEcHeadlessFixtureParam >= 125 && gEcHeadlessFixtureParam <= 128)
             {
                 SetMoney(&gSaveBlock1Ptr->money, gEcHeadlessFixtureParam == 127 ? 499 : 3000);
-                if (gEcHeadlessFixtureParam != 126)
-                    AddBagItem(ITEM_POKEBLOCK_CASE, 1);
                 if (gEcHeadlessFixtureParam == 128)
                 {
                     for (slot = 2; slot < PARTY_SIZE; slot++)
@@ -4245,15 +4172,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     case EC_HEADLESS_SCENARIO_BIRCH:
         SetMainCallback2(CB2_InitMainMenu);
         break;
-    case EC_HEADLESS_SCENARIO_POKEBLOCK:
-        PrepareHeadlessPokeblock();
-        break;
     case EC_HEADLESS_SCENARIO_TRAINER_CARD:
         PrepareHeadlessGoldTrainerCard();
         break;
-    case EC_HEADLESS_SCENARIO_CONTEST_RESULTS:
-        PrepareHeadlessContestResults();
-        LoadHeadlessMap(MAP_CONTEST_HALL, 7, 10);
         break;
     case EC_HEADLESS_SCENARIO_SLOT_MACHINE:
         SetCoins(5000);

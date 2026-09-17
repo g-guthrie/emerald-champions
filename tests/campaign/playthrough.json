@@ -20626,13 +20626,6 @@
         "flags": {
           "FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN": 1,
           "FLAG_ENTERED_CONTEST": 0
-        },
-        "items": {
-          "ITEM_RED_SCARF": 0,
-          "ITEM_BLUE_SCARF": 0,
-          "ITEM_PINK_SCARF": 0,
-          "ITEM_GREEN_SCARF": 0,
-          "ITEM_YELLOW_SCARF": 0
         }
       }
     },

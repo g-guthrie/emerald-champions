@@ -556,9 +556,6 @@ extern const u8 gText_MoveRelearnerBattleMoves[];
 extern const u8 gText_MoveRelearnerPP[];
 extern const u8 gText_MoveRelearnerPower[];
 extern const u8 gText_MoveRelearnerAccuracy[];
-extern const u8 gText_MoveRelearnerContestMovesTitle[];
-extern const u8 gText_MoveRelearnerAppeal[];
-extern const u8 gText_MoveRelearnerJam[];
 
 extern const u8 gText_DadsAdvice[];
 extern const u8 gText_PlayerUsedVar2[];
@@ -572,7 +569,6 @@ extern const u8 gText_LevelSymbol[];
 extern const u8 gText_PkmnInfo[];
 extern const u8 gText_PkmnSkills[];
 extern const u8 gText_BattleMoves[];
-extern const u8 gText_ContestMoves[];
 extern const u8 gText_Info[];
 extern const u8 gText_Switch[];
 extern const u8 gText_RentalPkmn[];
@@ -588,8 +584,6 @@ extern const u8 gText_NextLv[];
 extern const u8 gText_Status[];
 extern const u8 gText_Power[];
 extern const u8 gText_Accuracy2[];
-extern const u8 gText_Appeal[];
-extern const u8 gText_Jam[];
 extern const u8 gText_OTSlash[];
 extern const u8 gText_IDNumber2[];
 extern const u8 gText_XNature[];
@@ -711,7 +705,6 @@ extern const u8 gText_BattleSwapSingleResults[];
 extern const u8 gText_BattleSwapDoubleResults[];
 extern const u8 gText_FloorsCleared[];
 extern const u8 gText_BattleQuestResults[];
-extern const u8 gText_LinkContestResults[];
 extern const u8 gText_4th[];
 extern const u8 gText_3rd[];
 extern const u8 gText_2nd[];
@@ -1633,7 +1626,6 @@ extern const u8 gText_CommunicationStandby[];
 extern const u8 gText_AnnouncingResults[];
 extern const u8 gText_PreliminaryResults[];
 extern const u8 gText_Round2Results[];
-extern const u8 gText_ContestantsMonWon[];
 
 // Trainer Card
 extern const u8 gText_LinkCableBattles[];
@@ -1660,7 +1652,6 @@ extern const u8 gText_BerryCrush[];
 extern const u8 gText_UnionTradesAndBattles[];
 extern const u8 gText_NumPokeblocks[];
 extern const u8 gText_PokeblocksWithFriends[];
-extern const u8 gText_WonContestsWFriends[];
 extern const u8 gText_WinsStraight[];
 extern const u8 gText_NumBP[];
 extern const u8 gText_BattleTower[];
@@ -2020,11 +2011,6 @@ extern const u8 gText_NeatnessRankings[];
 extern const u8 gText_CoopRankings[];
 extern const u8 gText_PressingPowerRankings[];
 
-extern const u8 gText_CoolnessContest[];
-extern const u8 gText_BeautyContest[];
-extern const u8 gText_CutenessContest[];
-extern const u8 gText_SmartnessContest[];
-extern const u8 gText_ToughnessContest[];
 
 // use_pokeblock
 extern const u8 gText_Coolness[];

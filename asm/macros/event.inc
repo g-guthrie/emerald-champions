@@ -1045,12 +1045,6 @@
 	.byte SCR_OP_HIDEMONPIC
 	.endm
 
-	@ Draws an image of the winner of the contest. winnerId is any CONTEST_WINNER_* constant.
-	.macro showcontestpainting winnerId:req
-	.byte SCR_OP_SHOWCONTESTPAINTING
-	.byte \winnerId
-	.endm
-
 	@ Displays the given string as braille text in a standard message box. The string should use the .braille directive
 	@ to convert text to braille, and be preceded by brailleformat. The brailleformat data is skipped over (in RS, these
 	@ bytes determined the box's size and position, but in Emerald these are calculated automatically).
@@ -1362,26 +1356,6 @@
 	.byte \treeId
 	.byte \berryId
 	.byte \growthStage
-	.endm
-
-	@ Opens the party menu to select a Pokemon for a contest.
-	.macro choosecontestmon
-	.byte SCR_OP_CHOOSECONTESTMON
-	.endm
-
-	@ Starts the appeals round of a contest.
-	.macro startcontest
-	.byte SCR_OP_STARTCONTEST
-	.endm
-
-	@ Shows the results screen of a contest.
-	.macro showcontestresults
-	.byte SCR_OP_SHOWCONTESTRESULTS
-	.endm
-
-	@ Starts communication to initialize a link contest.
-	.macro contestlinktransfer
-	.byte SCR_OP_CONTESTLINKTRANSFER
 	.endm
 
 	@ Stores a random integer between 0 and limit (exclusive of limit) in VAR_RESULT.
@@ -1940,14 +1914,6 @@
 	.macro warpwhitefade map:req, a, b, c
 	.byte SCR_OP_WARPWHITEFADE
 	formatwarp \map, \a, \b, \c
-	.endm
-
-	@ Buffers the name of the contest category to the buffer.
-	@ For example a category of CONTEST_CATEGORY_COOL will buffer the string "COOLNESS CONTEST".
-	.macro buffercontestname stringVarId:req, category:req
-	.byte SCR_OP_BUFFERCONTESTNAME
-	stringvar \stringVarId
-	.2byte \category
 	.endm
 
 	@ Writes the name of the specified item to the specified buffer. If 'item' is a Berry or ITEM_POKE_BALL

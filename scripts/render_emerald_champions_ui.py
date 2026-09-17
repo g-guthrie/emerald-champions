@@ -95,6 +95,19 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "keys": [(900, 2, "A"), (1160, 2, "A")],
         "verify": True,
     },
+    "trainer-hill-nurse-heal-placement": {
+        "id": 1,
+        "param": 5,
+        "frames": 1750,
+        "keys": [
+            (200, 2, "UP"),
+            (250, 2, "A"),
+            (1400, 2, "A"),
+            (1480, 2, "A"),
+            (1560, 2, "A"),
+        ],
+        "verify": True,
+    },
     "center-lavaridge": {"id": 2, "frames": 600, "keys": []},
     "ability-menu": {
         "id": 3,
@@ -396,16 +409,16 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-set-long-top": {
-        "id": 57, "param": 0, "frames": 900, "trigger_frame": 600,
+        "id": 55, "param": 0, "frames": 900, "trigger_frame": 600,
         "keys": [], "verify": True,
     },
     "battle-set-long-middle": {
-        "id": 57, "param": 1, "frames": 1300, "trigger_frame": 600,
+        "id": 55, "param": 1, "frames": 1300, "trigger_frame": 600,
         "keys": [(800, 2, "DOWN"), (900, 2, "DOWN"), (1000, 2, "DOWN"), (1100, 2, "DOWN")],
         "verify": True,
     },
     "battle-set-long-bottom": {
-        "id": 57, "param": 2, "frames": 1500, "trigger_frame": 600,
+        "id": 55, "param": 2, "frames": 1500, "trigger_frame": 600,
         "keys": [
             (800, 2, "DOWN"), (900, 2, "DOWN"), (1000, 2, "DOWN"),
             (1100, 2, "DOWN"), (1200, 2, "DOWN"), (1300, 2, "DOWN"),
@@ -413,7 +426,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-to-party": {
-        "id": 59,
+        "id": 57,
         "frames": 3000,
         "keys": [
             (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
@@ -424,7 +437,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-to-pc": {
-        "id": 60,
+        "id": 58,
         "frames": 3000,
         "keys": [
             (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
@@ -435,7 +448,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-quest-diancie": {
-        "id": 61,
+        "id": 59,
         "frames": 4200,
         "keys": [
             (300, 20, "UP"), (380, 2, "A"),
@@ -449,7 +462,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-quest-registeel": {
-        "id": 62,
+        "id": 60,
         "frames": 4200,
         "keys": [
             (300, 20, "UP"), (380, 2, "A"),
@@ -463,7 +476,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-quest-latios": {
-        "id": 63,
+        "id": 61,
         "frames": 5000,
         "keys": [
             (300, 20, "UP"), (380, 2, "A"),
@@ -479,7 +492,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-ordinary-first": {
-        "id": 64,
+        "id": 62,
         "frames": 3200,
         "keys": [
             (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
@@ -491,14 +504,14 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "roxanne-victory": {
-        "id": 65,
+        "id": 63,
         "frames": 6500,
         "keys": [(300, 20, "UP"), (380, 2, "A")],
         "repeat_key": (420, 6460, 40, 2, "A"),
         "verify": True,
     },
     "first-center-acquisition": {
-        "id": 66,
+        "id": 64,
         "frames": 7500,
         "keys": [(300, 20, "UP"), (380, 2, "A")],
         "repeat_key": (420, 7460, 40, 2, "A"),
@@ -730,27 +743,27 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "keys": [(400, 3000, "DOWN")],
     },
     "all-legal-move-replacement": {
-        "id": 53,
+        "id": 51,
         "frames": 1000,
         "keys": [(400, 2, "A")],
         "verify": True,
         "stop_on_observed": True,
     },
     "dewford-gym-entry": {
-        "id": 54,
+        "id": 52,
         "frames": 1000,
         "keys": [(300, 120, "UP")],
         "verify": True,
     },
-    "start-menu-full": {"id": 55, "frames": 700, "keys": [(400, 2, "START")]},
+    "start-menu-full": {"id": 52, "frames": 700, "keys": [(400, 2, "START")]},
     "start-menu-scroll-bottom": {
-        "id": 55,
+        "id": 53,
         "frames": 900,
         "keys": [(400, 2, "START"), (480, 2, "DOWN"), (492, 2, "DOWN"), (504, 2, "DOWN"), (516, 2, "DOWN"), (528, 2, "DOWN"), (540, 2, "DOWN"), (552, 2, "DOWN"), (564, 2, "DOWN")],
     },
-    "start-menu-wrap-up": {"id": 55, "frames": 800, "keys": [(400, 2, "START"), (480, 2, "UP")]},
+    "start-menu-wrap-up": {"id": 52, "frames": 800, "keys": [(400, 2, "START"), (480, 2, "UP")]},
     "start-menu-wrap-down": {
-        "id": 55,
+        "id": 53,
         "frames": 900,
         "keys": [(400, 2, "START"), (480, 2, "DOWN"), (492, 2, "DOWN"), (504, 2, "DOWN"), (516, 2, "DOWN"), (528, 2, "DOWN"), (540, 2, "DOWN"), (552, 2, "DOWN"), (564, 2, "DOWN"), (576, 2, "DOWN")],
     },
@@ -761,7 +774,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "wild-foe-types": {
-        "id": 51,
+        "id": 49,
         "frames": 1500,
         "keys": [(900, 2, "A"), (1100, 2, "A"), (1300, 2, "L")],
         "verify": True,
@@ -773,7 +786,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "move-foe-types": {
-        "id": 52,
+        "id": 50,
         "frames": 1750,
         "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "L")],
         "verify": True,
@@ -938,23 +951,16 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
         "verify": True,
     },
-    "summary-contest-moves": {
+        "summary-move-detail": {
         "id": 24,
         "param": 3,
-        "frames": 1500,
-        "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT"), (1160, 2, "RIGHT")],
-        "verify": True,
-    },
-    "summary-move-detail": {
-        "id": 24,
-        "param": 4,
         "frames": 1400,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT"), (1160, 2, "A")],
         "verify": True,
     },
     "summary-party-roundtrip": {
         "id": 24,
-        "param": 5,
+        "param": 4,
         "frames": 1200,
         "keys": [(820, 2, "B")],
         "verify": True,
@@ -1096,40 +1102,38 @@ SCENARIOS: dict[str, dict[str, object]] = {
     },
     "title-live": {"id": 33, "frames": 900, "keys": []},
     "birch-introduction": {"id": 34, "frames": 1500, "keys": [(600, 2, "A")]},
-    "pokeblock-condition": {"id": 35, "frames": 1000, "keys": []},
-    "trainer-card-gold": {"id": 36, "frames": 1000, "keys": []},
-    "contest-results": {"id": 38, "frames": 1800, "keys": []},
-    "slot-machine": {"id": 39, "frames": 1200, "keys": []},
+    "trainer-card-gold": {"id": 35, "frames": 1000, "keys": []},
+    "slot-machine": {"id": 36, "frames": 1200, "keys": []},
     "fairy-summary-info": {
-        "id": 40,
+        "id": 38,
         "param": 0,
         "frames": 900,
         "keys": [],
         "verify": True,
     },
     "fairy-summary-moves": {
-        "id": 40,
+        "id": 38,
         "param": 2,
         "frames": 1200,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
         "verify": True,
     },
     "magma-sparkle-placement": {
-        "id": 42,
+        "id": 40,
         "frames": 608,
         "keys": [],
         "trigger_frame": 600,
         "verify": True,
     },
     "furfrou-trims": {
-        "id": 43,
+        "id": 41,
         "param": 0,
         "frames": 700,
         "keys": [],
         "verify": True,
     },
     "furfrou-trims-scrolled": {
-        "id": 43,
+        "id": 41,
         "param": 1,
         "frames": 1550,
         "keys": [
@@ -1147,14 +1151,14 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "furfrou-trims-b-cancel": {
-        "id": 43,
+        "id": 41,
         "param": 2,
         "frames": 1000,
         "keys": [(800, 2, "B")],
         "verify": True,
     },
     "furfrou-trims-back": {
-        "id": 43,
+        "id": 41,
         "param": 3,
         "frames": 1750,
         "keys": [
@@ -1173,27 +1177,27 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "hall-of-fame-record-1": {
-        "id": 45, "param": 1, "frames": 1600, "keys": [],
+        "id": 43, "param": 1, "frames": 1600, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "hall-of-fame-record-6": {
-        "id": 45, "param": 6, "frames": 1600, "keys": [],
+        "id": 43, "param": 6, "frames": 1600, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-left-open": {
-        "id": 46, "param": 0, "frames": 1000, "keys": [],
+        "id": 44, "param": 0, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-right-open": {
-        "id": 46, "param": 1, "frames": 1000, "keys": [],
+        "id": 44, "param": 1, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-left-close": {
-        "id": 46, "param": 2, "frames": 1000, "keys": [],
+        "id": 44, "param": 2, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-right-close": {
-        "id": 46, "param": 3, "frames": 1000, "keys": [],
+        "id": 44, "param": 3, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     # Field moves without HM carriers: a Zigzagoon that could learn the move
@@ -1201,24 +1205,24 @@ SCENARIOS: dict[str, dict[str, object]] = {
     # face the obstacle; A advances the obstacle text, confirms Yes, and
     # dismisses the used-move text where required before the showcase starts.
     "field-move-cut-fallback": {
-        "id": 47, "frames": 900,
+        "id": 45, "frames": 900,
         "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     "field-move-rock-smash-fallback": {
-        "id": 48, "frames": 900,
+        "id": 46, "frames": 900,
         "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     "field-move-strength-fallback": {
-        "id": 49, "frames": 900,
+        "id": 47, "frames": 900,
         "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     # The Flight Beacon: the trigger opens the fly map, A picks the current
     # town, and the boxed Wingull that knows Fly is the one shown flying.
     "flight-beacon-fly": {
-        "id": 50, "frames": 1500,
+        "id": 48, "frames": 1500,
         "keys": [(560, 2, "A")],
         "trigger_frame": 300, "verify": True, "stop_on_observed": True,
     },
@@ -1232,6 +1236,7 @@ SERVICE_UI_SCENARIOS = (
     "whiteout-heal-placement",
     "whiteout-heal-league-placement",
     "whiteout-heal-lavaridge-placement",
+    "trainer-hill-nurse-heal-placement",
     "party-overview",
     "party-action-menu",
     "ability-menu",
@@ -1379,7 +1384,7 @@ for fixture in HOENN_HEAL_FIXTURES:
     slug = str(fixture["id"]).removeprefix("HEAL_LOCATION_").lower().replace("_", "-")
     name = f"heal-whiteout-{slug}"
     SCENARIOS[name] = {
-        "id": 44,
+        "id": 42,
         "param": fixture["heal_location_id"],
         "frames": 1280,
         "keys": [(900, 2, "A"), (1160, 2, "A")],
@@ -1406,7 +1411,6 @@ INCLEMENT_SEAM_SCENARIOS = tuple(dict.fromkeys((
     "summary-info",
     "summary-skills",
     "summary-moves",
-    "summary-contest-moves",
     "summary-move-detail",
     "summary-party-roundtrip",
     "fairy-summary-info",
