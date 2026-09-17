@@ -1,0 +1,28 @@
+{
+  "play_order": 62, "e_group": "E0071", "trainer": "TRAINER_ISAAC_1", "cap": 30, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Does Mega Kangaskhan now Mega-Evolve on its first action (E0071-D1 retest after the pair-search Mega-board fix)?",
+  "party_manifest": "work/playtest/62-TRAINER_ISAAC_1/party.json",
+  "party_reuse": "Unchanged from receipt.json / receipt-rerun.json; same cap 30 and Route 117, chronology audit unchanged.",
+  "level_offsets_at_run": {"MUNCHLAX": 4, "TOGEPI": 6, "ABRA": 4, "DRATINI": 5, "STARYU": 3, "KANGASKHAN": -1},
+  "resolved_opponent_levels": {"MUNCHLAX": 32, "TOGEPI": 34, "ABRA": 32, "DRATINI": 33, "STARYU": 31, "KANGASKHAN": 27},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/62-TRAINER_ISAAC_1/m1", "seed": 62, "outcome": "won", "turns": 7, "player_faints": 3, "opponent_faints": 6,
+     "narrative": "T1 Mega Gardevoir Hyper Voice + Weavile Fake Out Togepi; Munchlax Fire Punch left Weavile at 6. T2 Togepi Follow Me pulled Knock Off, Hyper Voice KO'd Togepi, Body Slam KO'd Weavile (Gardevoir to 30). T3 Abra Protect blocked Hyper Voice; Aura Sphere KO'd Munchlax before it moved. T4 Gardevoir Protect ate Extreme Speed + Psychic; Fleur Cannon missed Dratini. T5 Gardevoir out to Kartana (resisted Extreme Speed), Fleur Cannon KO'd Dratini; Abra Encore failed. T6 Leaf Blade KO'd Staryu, Flash Cannon put Abra on its Sash; Ice Beam took Kartana to 18. T7 KANGASKHAN MEGA-EVOLVED ON ITS FIRST ACTION and its Sucker Punch KO'd Kartana (Parental Bond: 'hit 1 time' because the first hit KO'd); Aura Sphere KO'd Mega Kangaskhan. Final decision: I carelessly sent Nidoking into the 1-HP Abra's Psychic (lost it), crit Flash Cannon ended it."}
+  ],
+  "mega_check": {"evolved": true, "turn": 7, "first_action": true, "board": "Kangaskhan 111/111 enters T6 beside Abra 1/68 (Sash spent) vs Kartana 18/85 (+1 Atk) and Magearna 116/116 (+1 SpA). T7: Mega Evolution, Sucker Punch into Kartana (KO)."},
+  "strategy_checks": [
+    {"check": "Mega Kangaskhan Mega-Evolves on first action", "result": "PASS", "evidence": "T7 messages: 'The opposing Kangaskhan's Kangaskhanite is reacting' / 'has Mega Evolved'; opponent party shows KANGASKHAN_MEGA. E0071-D1 no longer reproduces."},
+    {"check": "Togepi Follow Me / Helping Hand support", "result": "PASS", "evidence": "T1 Ancient Power into Ice-type Weavile (flinched by Fake Out), T2 Follow Me pulled Knock Off away from Munchlax."},
+    {"check": "Munchlax attacks instead of Cursing", "result": "PASS", "evidence": "Fire Punch T1 into Weavile, Body Slam T2 (KO Weavile), Body Slam T3 aimed at 30-HP Gardevoir; never Curse."},
+    {"check": "Dratini Protect/Dragon Dance", "result": "PASS", "evidence": "Extreme Speed at the 30-HP Mega Gardevoir on T4 and T5, the correct kill attempt both times; no wasted setup."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "One Protect (Abra T3) blocked a Hyper Voice that would have broken its Sash; used exactly once."}
+  ],
+  "protect_ledger": [{"turn": 3, "battler": "ABRA", "payoff": "Blocked Hyper Voice (would have consumed the Focus Sash); preserved the Sash for the T6 Flash Cannon."}],
+  "ai_defects": [],
+  "difficulty_reading": "The Mega now happens, but it enters last with the babies already gone, so its one turn (Sucker Punch KO on an 18-HP Kartana) is the same single KO the base form scored before. Won with 3 faints (one of them my own misplay on the last decision); real fight. Reading unchanged from receipt-rerun: calibrated.",
+  "level_changes": {"rule_applied": "KEEP (won with 3 faints). Budget on every member still untouched.", "changes": []},
+  "could_this_be_cooler": "Unchanged from the prior receipts; the Mega now fires, so the concept is finally whole.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}

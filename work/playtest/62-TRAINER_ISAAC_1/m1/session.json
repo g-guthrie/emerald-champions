@@ -1,0 +1,32 @@
+{
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "elf_sha256": "7cb4b4533332dea3d8fc3041ce601ed5206316bd1282a9b0ea6b10db1adebce8",
+  "seed": 62,
+  "trainer_a": "TRAINER_ISAAC_1",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 30,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/62-TRAINER_ISAAC_1/party.json",
+  "party_sha256": "ca32a26fb9d355c5f5e535ac4f686a7657766373dff9691869429db2c346bfd9",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET"
+  ],
+  "prepared": {
+    "encounter": "C16 E0071 TRAINER_ISAAC_1, Route 117, cap 30",
+    "party": 6
+  },
+  "started": {
+    "frames": 2666
+  },
+  "replacement_commits": {
+    "turn": 7,
+    "slots": {
+      "0": 5
+    }
+  }
+}
