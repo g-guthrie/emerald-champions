@@ -1111,7 +1111,6 @@ SCENARIOS: dict[str, dict[str, object]] = {
     "birch-introduction": {"id": 34, "frames": 1500, "keys": [(600, 2, "A")]},
     "pokeblock-condition": {"id": 35, "frames": 1000, "keys": []},
     "trainer-card-gold": {"id": 36, "frames": 1000, "keys": []},
-    "battle-dome-info-card": {"id": 37, "frames": 1500, "keys": []},
     "contest-results": {"id": 38, "frames": 1800, "keys": []},
     "slot-machine": {"id": 39, "frames": 1200, "keys": []},
     "fairy-summary-info": {

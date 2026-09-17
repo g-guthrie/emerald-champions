@@ -7,7 +7,6 @@
 
 #include "battle.h"
 #include "battle_anim.h"
-#include "battle_dome.h"
 #include "battle_gimmick.h"
 #include "battle_interface.h"
 #include "battle_main.h"
@@ -133,7 +132,6 @@ static EWRAM_DATA bool8 sEcHeadlessAutoCaptureInProgress = FALSE;
 static const u8 sEcHeadlessPlayerName[] = _("BRENDAN");
 extern void gInitialMainCB2(void);
 extern const u8 Common_EventScript_ChooseStarterRegion[];
-extern void CallBattleDomeFunction(void);
 
 bool32 EmeraldChampionsHeadlessBattleAutomationActive(void)
 {
@@ -1067,18 +1065,6 @@ static void PrepareHeadlessGoldTrainerCard(void)
         FlagSet(FLAG_SYS_TOWER_GOLD + 2 * i);
     }
     ShowPlayerTrainerCard(gInitialMainCB2);
-}
-
-static void PrepareHeadlessDomeInfo(void)
-{
-    VarSet(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES);
-    gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
-    gSpecialVar_0x8004 = BATTLE_DOME_FUNC_INIT;
-    CallBattleDomeFunction();
-    gSpecialVar_0x8004 = BATTLE_DOME_FUNC_INIT_TRAINERS;
-    CallBattleDomeFunction();
-    gSpecialVar_0x8004 = BATTLE_DOME_FUNC_SHOW_OPPONENT_INFO;
-    CallBattleDomeFunction();
 }
 
 static void PrepareHeadlessContestResults(void)
@@ -4268,9 +4254,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         break;
     case EC_HEADLESS_SCENARIO_TRAINER_CARD:
         PrepareHeadlessGoldTrainerCard();
-        break;
-    case EC_HEADLESS_SCENARIO_DOME_INFO:
-        PrepareHeadlessDomeInfo();
         break;
     case EC_HEADLESS_SCENARIO_CONTEST_RESULTS:
         PrepareHeadlessContestResults();
