@@ -1,0 +1,37 @@
+{
+  "play_order": 323, "e_group": "E0492", "trainer": "TRAINER_DIANNE", "class": "ace", "location": "VictoryRoad_B2F",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; offset-1 members L95, Barbaracle offset 2 L96.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/323-TRAINER_DIANNE/party_vr96_b.json"],
+  "chronology_note": "Same audit as E0482 (party_vr96_b); two reachable legends (Chi-Yu, Landorus), no window-90 addition used. An earlier partial run of this battle was voided at the session-limit stop (no receipt); this a1 is a fresh attempt on the same build-8 snapshot.",
+  "pre_play_strategy_checks": ["Snow Warning on entry", "Froslass Aurora Veil immediately (needs snow)", "Abomasnow Blizzard never misses in snow", "Froslass Destiny Bond when threatened", "Kingambit Supreme Overlord scales with fallen allies; Sucker Punch priority", "Mega Barbaracle Shell Smash under the veil", "Magmortar / Virizion off-type answers"],
+  "attempts": [
+    {"n": 1, "seed": 15, "run_dir": "a1", "party": "party_vr96_b.json led by Chi-Yu + Landorus", "outcome": "won", "turns": 6, "player_faints": 1, "opponent_faints": 6,
+     "why": "Snow live at turn 0. Turn 1 the AI switched Abomasnow out for Barbaracle (the Mega) into Heat Wave + Rock Slide - Barbaracle resists Fire, a good read; Froslass chose Blizzard over Aurora Veil and 4x OHKO'd Landorus; Rock Slide broke her Sash. Turn 2 Aqua Jet KO'd the 1-HP Froslass before she moved (Cursed Body disabled Aqua Jet), Dark Pulse flinched the now-Mega Barbaracle. Turn 3 Abomasnow Protected; Close Combat KO'd Mega Barbaracle through a Protect it did not use (Unseen Fist message on a normal hit). Turn 4 Heat Wave 4x OHKO'd Abomasnow, Surging Strikes KO'd Magmortar (Flame Body burned Urshifu). Turn 5 Kingambit entered at +4 Supreme Overlord beside Virizion; Chi-Yu Protected and Urshifu was withdrawn for Kangaskhan (Sucker Punch had no target). Turn 6 Mega Fake Out flinched Virizion, Heat Wave OHKO'd Virizion and burned Kingambit, which fell to Heat Wave + its own burn. Faint: Landorus."}
+  ],
+  "strategy_checks": [
+    {"check": "Snow Warning", "result": "PASS", "evidence": "B_WEATHER_SNOW from turn 0 to turn 5"},
+    {"check": "Aurora Veil immediately", "result": "FAIL (never chosen)", "evidence": "Froslass' only action was Blizzard (turn 1, a 4x KO on Landorus - a fair pick, but the veil never went up in this run or the voided one)"},
+    {"check": "Blizzard in snow", "result": "PASS", "evidence": "turn 1 Blizzard hit both targets, OHKO on Landorus"},
+    {"check": "Destiny Bond", "result": "FAIL (no window)", "evidence": "Froslass at 1 HP was KO'd by priority Aqua Jet before it could choose"},
+    {"check": "Supreme Overlord / Sucker Punch", "result": "PASS (Overlord), Sucker Punch never fired", "evidence": "'gained strength from the fallen' on entry at +4; Iron Head chosen twice (turn 5 into Protect, turn 6 into Chi-Yu resisted) - Sucker Punch never chosen even with an attacking Chi-Yu opposite on turn 6"},
+    {"check": "Mega Barbaracle Shell Smash", "result": "FAIL", "evidence": "Mega Evolved turn 2, chose Liquidation both turns, flinched then KO'd"},
+    {"check": "Magmortar / Virizion", "result": "PASS (chosen), both OHKO'd", "evidence": "Heat Wave / Giga Drain chosen; Virizion Close Combat chosen twice into Protects"}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "user": "Abomasnow", "payoff": "blocked a 4x Heat Wave (lethal) - good; it died to the same move next turn"}
+  ],
+  "protect_summary": "1 Protect, good.",
+  "ai_defects": [
+    {"turn": 6, "board": "Kingambit 384/384 (+4 Supreme Overlord, Muscle Band) beside Virizion vs Chi-Yu 199/242 (attacking) + Mega Kangaskhan", "chosen": "Iron Head -> Chi-Yu (resisted, 73)", "better": "Sucker Punch into the attacking Chi-Yu is resisted too, but Iron Head into Kangaskhan (neutral, ~250) or Sucker Punch into Kangaskhan was strictly more damage; the choice of a resisted Iron Head on the Fire type was the worst option on the board. Also turn 5: Iron Head into Chi-Yu's Protect while Sucker Punch would have failed anyway - fine."}
+  ],
+  "ai_notes": "The turn-1 Abomasnow -> Barbaracle switch was a good Fire read even though it exposed the Mega early (it survived on 228 and Mega Evolved). Froslass' Blizzard KO over Aurora Veil is defensible but means the veil identity never appeared across two runs.",
+  "level_changes": [
+    {"member": "FROSLASS", "field": "level offset", "before": 1, "after": 2, "why": "never set the veil, KO'd by priority at 1 HP"},
+    {"member": "MAGMORTAR", "field": "level offset", "before": 1, "after": 2, "why": "OHKO'd by Surging Strikes without acting"}
+  ],
+  "level_change_rationale": "Brief step 5: first-try 6-1; the one faint was a 4x Blizzard and the rest was comfortable once the veil never appeared. The two members that contributed least go +1; Abomasnow, Kingambit, Virizion and the Mega keep theirs.",
+  "cooler": "The veil-plus-Destiny-Bond trap is right but the AI prefers Blizzard KOs to Aurora Veil, so the door plays as a plain snow-offense team. Two suggestions without set changes: (1) Froslass' AI should weight Aurora Veil on turn 1 when snow is up and both foes are alive; (2) Kingambit at +4 should reach for Sucker Punch. Both are AI-side notes for the main agent.",
+  "legality_notes": "Sets legal. The driver's item names in this snapshot display some held items by raw id (Barbaracite as '849', Clear Amulet as 'GOLISOPITE') - a driver constants drift, not an authored-set problem; the Mega Evolutions confirm the real items.",
+  "verification_limit": "The +1 on Froslass and Magmortar cannot be re-verified until the main agent rebuilds."
+}
