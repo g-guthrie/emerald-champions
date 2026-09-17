@@ -1,0 +1,65 @@
+{
+  "trainer": "TRAINER_RANDALL", "e_group": "E0164", "play_order": 138, "class": "gym", "location": "PetalburgCity_Gym",
+  "cap": 42, "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-16 (inputs stamp 448b369f7a06..., rom 8f2abbcb..., elf 2b73cfab...)",
+  "purpose": "Rerun after AI commits 738e5a8809 (empty-Protect cause) and d50e8337c8 (no ACTIVATE on the turn the recipient shields). This room's standing defects were P12-D7 (Cinccino Life Orb self-KO) and P12-D8 (Greedent/Dunsparce selecting 0x Normal moves into a Ghost for twelve turns).",
+  "party_manifest": "work/playtest/138-TRAINER_RANDALL/party.json (unchanged)",
+  "replay_of": "work/playtest/138-TRAINER_RANDALL/receipt.json, attempt 1 (seed 138, same party, build-2: won 6-5 in 21 turns)",
+  "attempts": [
+    {
+      "seed": 138, "run_dir": "work/playtest/138-TRAINER_RANDALL/b16-a1",
+      "outcome": "won", "turns": 16, "turns_reported_by_result": 15, "decisions": 17,
+      "player_faints": 1, "opponent_faints": 6,
+      "faints_player": ["Chandelure (T12, Dunsparce's Serene Grace Rock Slide, 2x)"],
+      "survivors_note": "The 6-1 flatters the margin badly. At the end Incineroar was 20/171 and paralysed, Aegislash was 8/141, and Amoonguss was 32/187 and paralysed - three more bodies one hit from fainting. Only Sableye (116/150) and the never-deployed Cofagrigus were healthy.",
+      "faints_opponent": [
+        "Cinccino (T1, Sacred Sword 2x after a Prankster Will-O-Wisp landed)",
+        "Ambipom (T3, Sacred Sword 2x)",
+        "Dodrio (T8, Flare Blitz, after four turns of burn chip and three Attack drops)",
+        "Greedent (T12, Flamethrower plus Sludge Bomb poison)",
+        "Maushold (T13, Knock Off plus burn)",
+        "Dunsparce (T16, Sludge Bomb while asleep, after two Foul Plays)"
+      ],
+      "ai_decision_seconds_max": 1.038,
+      "player_line": "Same party as the prior run, played differently: the prior agent's own receipt calls its build 'a construction error I have to own' because Ghost STAB is 0x into Normal. I used the moves that are not 0x - Aegislash's Sacred Sword (2x on every Normal), Incineroar's Flare Blitz, Chandelure's Flamethrower, Amoonguss's Sludge Bomb and Sableye's Dark moves - and used King's Shield and Prankster burns for tempo. T1 the burn landed and Sacred Sword removed Cinccino. T2 King's Shield ate a Knock Off and a Brave Bird and dropped both attackers. T3 Sacred Sword removed Ambipom. T6 a double switch reset a double Encore. T8 Flare Blitz removed Dodrio and Spore put Dunsparce down. T10-T13 the Fire/Poison pair ground Greedent and Maushold out. T14-T16 Sableye and Amoonguss finished a re-Spored Dunsparce."
+    }
+  ],
+  "guard_ledger_b16": [
+    {"turn": 7, "battler": "Dodrio (66/129, burned, Attack -3)", "move": "Protect", "payoff": "blocked Incineroar's Flare Blitz. The same attack KO'd Dodrio from 58 HP one turn later, so this was a lethal-turn block"},
+    {"turn": 11, "battler": "Greedent (93/192, poisoned)", "move": "Protect", "payoff": "blocked Flamethrower AND Sludge Bomb. Flamethrower KO'd it from 69 HP the next turn, so this was also a lethal-turn block"}
+  ],
+  "guard_comparison": {
+    "prior_ledger": ["T3 Dodrio Protect - blocked a Prankster Will-O-Wisp on its arrival turn (recorded EXCELLENT)", "Maushold chose Follow Me rather than Protect on the turn its partner was the more valuable body"],
+    "guard_count_before_after": "1 -> 2",
+    "empty_guards_before_after": "0 -> 0",
+    "consecutive_guards_before_after": "0 -> 0",
+    "note": "Randall's guard cadence was already the cleanest in the block and it stayed clean. Both guards this run blocked an attack that was lethal on the very next turn. No empty guard, no repeat, and no guard from a body that had nothing to fear. Note one behavioural difference worth recording rather than scoring: on build-2 Dodrio guarded on its arrival turn against a Prankster burn; on build-16 it attacked on arrival (Brave Bird) and saved its guard for the turn a Flare Blitz was actually lethal. That is the better of the two."
+  },
+  "strategy_checks": [
+    {"check": "Maushold Follow Me protecting a multi-hit partner", "result": "PASS", "evidence": "T6: 'The opposing Maushold used Follow Me! / became the center of attention' on the turn it stood beside a burned Dodrio that was still the team's damage. Redirection chosen over guarding, correctly."},
+    {"check": "Maushold Encore as disruption", "result": "PASS, three times, and it is the best thing the room does", "evidence": "T4 Encore locked Sableye into Will-O-Wisp, blanking the Knock Off it had selected. T5 Encore locked Aegislash into King's Shield, which then FAILED on the consecutive use - the AI turned my own guard into a wasted turn. T13 Encore locked Amoonguss into Spore against an already-sleeping target. Three Encores, three correct targets. None of this is in the dossier's plan text."},
+    {"check": "Ambipom opens with Technician Fake Out", "result": "FAIL, and correctly so (same as prior)", "evidence": "Ambipom never used Fake Out; it used Knock Off twice, 2x into Ghost/Steel Aegislash, and stripped its Leftovers on T1. Fake Out is Normal and 0x into my Ghost leads. The authored check is written for a board without Ghosts; the behaviour is right."},
+    {"check": "Skill Link fixes the hit count at 5", "result": "PASS", "evidence": "T1 'The Pokemon was hit 5 times!' on Bullet Seed (and it critted)."},
+    {"check": "Friend Guard reduces damage to the partner only", "result": "NOT ISOLATED (same as prior)", "evidence": "Maushold's partners changed too often to get a clean before/after. The ability was live on the battler."},
+    {"check": "Serene Grace doubles Dunsparce's secondary effects", "result": "PASS, three procs", "evidence": "T8 Body Slam paralysed Incineroar (which then never acted again and had to be withdrawn at 20 HP), T11 Rock Slide flinched Amoonguss out of a Spore, T15 Body Slam paralysed Amoonguss. The +6 offset on Dunsparce is earned by play, again."},
+    {"check": "Greedent Cheek Pouch recycling", "result": "PARTIAL - the berry fired, the loop still cannot exist", "evidence": "Greedent entered at 192/192 on T10, took Flamethrower plus Sludge Bomb poison, and the next reading is 93/192 with item NONE - the Sitrus was eaten. The extra Cheek Pouch heal is not isolable from that single reading. The prose mismatch flagged in receipt.json stands: the set has one Sitrus and no Recycle or Harvest, so 'recycles its own Sitrus' describes a loop the loadout cannot perform."},
+    {"check": "Every opposing guard has a payoff", "result": "PASS (2 of 2, both lethal-turn blocks)", "evidence": "See guard ledger."},
+    {"check": "AI decision budget <= 1.2s", "result": "PASS", "evidence": "ai_decision_seconds_max 1.038, peak on the opening six-member board as before."}
+  ],
+  "ai_defects": [
+    {"id": "P12-D8", "severity": "high", "status": "NOT REPRODUCED on build-16 - this is the headline finding of the rerun", "description": "The prior run recorded twelve turns of Greedent and Dunsparce selecting Normal moves into a Ghost for exactly zero damage while they burned to death. Nothing like it happened here. Positive evidence, not just absence: on T13 Maushold stood opposite Sableye (Ghost/Dark, so Population Bomb is 0x) and Amoonguss, and it chose ENCORE on Amoonguss rather than the 0x spread. Dunsparce's Body Slams every turn targeted Amoonguss (Grass/Poison, 1x), never a Ghost, and against Chandelure it used Rock Slide (2x) instead. The one 0x resolution in the whole battle was T9 Maushold Population Bomb landing on a Chandelure that was NOT on the field when the move was chosen - Incineroar (Fire/Dark, Normal 1x) occupied that slot at turn start and I switched. Since the AI never reads my pending commands, that is correct behaviour meeting an unlucky redirect, not a type-chart failure.",
+     "caveat": "Greedent and Dunsparce were never left alone against a Ghost-only board this run, so the exact board of the prior stall was not re-created. Call it strong evidence rather than proof."},
+    {"id": "P12-D7", "severity": "medium", "status": "NOT EXERCISED", "description": "Cinccino's Life Orb self-KO could not recur: the Will-O-Wisp that missed on build-2 landed on build-16 and Sacred Sword removed Cinccino on turn 1, so it never reached the 2-HP board. Neither confirmed nor cleared. The underlying question - does the damage scorer subtract lethal Life Orb recoil from an attack's value - remains open and still deserves the broad index the prior receipt asked for."}
+  ],
+  "ai_choices_that_were_correct": [
+    "T5 Encore on Aegislash's King's Shield, forcing a consecutive guard that failed - the sharpest single decision in the room",
+    "T7 Dodrio Protect and T11 Greedent Protect, both on the exact turn the incoming attack was lethal",
+    "T10 withdrawing a 55 HP burned Maushold and sending Greedent to absorb the Flamethrower, then bringing Maushold back once the board had changed",
+    "Ambipom continuing to prefer Knock Off over its signature Fake Out against Ghosts"
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NO LEVEL CHANGE, and this is the one room in the set where that call is genuinely close, so here is the reasoning in full. The prior receipt decided 'keep' and explicitly deferred any level judgment until P12-D8 was resolved; P12-D8 is now resolved, so the deferral condition is met and the result is eligible to flip. The result is a first-attempt 6-1, which is inside the brief's '0-1 player faints' trigger. I am still keeping, because the trigger is '0-1 faints AND no real threat' and the second half is not satisfied: the room finished with one of my six dead and three more at 20/171, 8/141 and 32/187, two of them paralysed, over sixteen turns. Four of six were taken out of the fight. The entire delta from the prior 6-5 is player-side - the prior agent's own receipt calls its party usage 'a construction error I have to own' for putting Ghost STAB on three members against six Normals - so a 6-1 here is evidence that the room was mis-played before, not that it is now soft. Offsets stay 2/2/1/2/2/6 (medium levels 42/42/41/42/42/46). FOR THE MAIN AGENT: if you want the rule applied by the letter instead, the minimal defensible change is +1 on Dodrio (offset 1 -> 2), the lowest-level member and not the ace; I have deliberately not made it, and it would need a rebuild and a retest that this pass cannot run.",
+  "could_this_be_cooler": "The prior receipt's recommendation is now weaker, and I want to say so honestly. It argued the room has almost no answer to the Ghost immunity its own crack list names first. That was true of the battle the prior agent played, but this run shows the AI answering Ghosts competently through move selection (Knock Off, Rock Slide, Encore, Follow Me) rather than through raw coverage. I would not add a coverage slot on that evidence alone. The stronger and smaller note stands unchanged: Maushold's triple Encore is the most interesting thing this room does and the plan text does not mention Encore at all - the dossier describes a swarm, but what actually beat me down was a disruption piece. Worth writing into the plan. The Greedent Cheek Pouch prose is still wrong.",
+  "legality": "No legality problem in the authored set. The Greedent 'recycles its own Sitrus' prose/loadout mismatch flagged in receipt.json is unchanged.",
+  "verdict": "The room is materially better on build-16: the twelve-turn 0x stall that made the prior receipt's verdict unusable did not happen, both guards were lethal-turn blocks, and Maushold's Encores turned my own Protect into a wasted turn. It remains a real Gym benchmark - one faint and three crippled survivors over sixteen turns - and I kept its levels."
+}
