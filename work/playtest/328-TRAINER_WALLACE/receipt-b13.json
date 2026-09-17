@@ -1,0 +1,50 @@
+{
+  "trainer": "TRAINER_WALLACE", "e_group": "E0497", "play_order": 328, "cap": 96, "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-13 (rom 649f95bc..., elf 5f32e3af...)",
+  "party_manifest": "work/playtest/328-TRAINER_WALLACE/party_league96_v3.json",
+  "replay_of": "work/playtest/328-TRAINER_WALLACE/receipt.json (build-9: lost, lost, won 6-1)",
+  "attempts": [
+    {"seed": 1, "run_dir": "work/playtest/328-TRAINER_WALLACE/b13-a1", "outcome": "won", "turns": 10, "player_faints": 2, "opponent_faints": 6,
+     "faints_player": ["Whimsicott (T3, Fini Moonblast after Icy Wind broke the Sash)", "Kingambit (T9, Muddy Water + Leech Seed)"],
+     "faints_opponent": ["Kyogre T3 Double-Edge", "Tapu Fini T5 Fake Out at 7 HP", "Palkia T6 Draco Meteor", "Mega Milotic T9 Sucker Punch crit at 31 HP", "Starmie T10 Freeze-Dry on its entry turn (un-evolved)", "Ferrothorn T10 Flare Blitz"],
+     "engines": {"drizzle": "PASS (rain on entry; expired T5 after Kyogre fainted)", "misty_terrain": "PASS (on entry; expired T5)", "mega_milotic": "PASS (T7, first opponent turn with Milotic out; Prism Scales confirmed)", "mega_starmie": "NOT OBSERVED - Starmie entered T9 as a replacement with usable_gimmick=mega and was OHKO'd by Freeze-Dry on its only turn without Mega Evolving; Mega Evolution resolves before moves, so it did not elect the Mega; its move choice for that turn is unrecoverable (battle-ending turn, no native latch)", "water_spout": "PARTIAL - Origin Pulse at full HP on T1 (flinched by Fake Out); Water Spout chosen T3 at 189/322 (Kyogre was KO'd before it moved)", "helping_hand_recover": "FAIL - Milotic never used Helping Hand (Starmie was never beside it) and never Recovered; it chose Ice Beam at 149/378 and Muddy Water at 31/378"},
+     "notes": "Same opening as build-9 (Mega Fake Out on Kyogre + Tailwind, Kyogre Protects T2 while I hit Fini, Double-Edge KOs Kyogre T3). Switched Kangaskhan out into Incineroar on T4 (Ferrothorn Power Whip resisted) and Incineroar out into Kingambit on T6 to absorb Palkia's Hydro Pump (247 on Assault Vest Kingambit). Raging Bolt frozen by Ice Beam T7 and thawed the same turn; Incineroar frozen T8 and thawed itself with Flare Blitz T9."},
+    {"seed": 2, "run_dir": "work/playtest/328-TRAINER_WALLACE/b13-a2", "outcome": "won", "turns": 17, "player_faints": 4, "opponent_faints": 6,
+     "faints_player": ["Whimsicott (T6, sacked at 1 HP into Palkia's Hydro Pump)", "Iron Bundle (T8, my error: Muddy Water + Ferrothorn Power Whip 2x)", "Incineroar (T13, Muddy Water 2x + Flare Blitz recoil)", "Kingambit (T14, Starmie Liquidation + Leech Seed)"],
+     "faints_opponent": ["Kyogre T3 Double-Edge", "Tapu Fini T5 Thunderbolt (Encored into Icy Wind, could not Protect)", "Palkia T6 Draco Meteor", "Ferrothorn T13 Flare Blitz", "Mega Milotic T14 Thunderbolt + Iron Head through a fourth Recover", "Starmie T17 Thunderbolt (un-evolved after four turns on the field)"],
+     "engines": {"drizzle": "PASS", "misty_terrain": "PASS", "mega_milotic": "PASS (T7)", "mega_starmie": "FAIL - Starmie entered T13 as Ferrothorn's replacement with usable_gimmick=mega, then used Liquidation T14, Protect T15, Aqua Jet T16 and Aqua Jet T17 all in base form; the second authored Mega never fired once Milotic's had been used", "water_spout": "PARTIAL - Origin Pulse at full HP T1 (flinched), Water Spout chosen T3 at 227/322 (KO'd first)", "helping_hand_recover": "PARTIAL - Recover used four times (T9 at 51 HP, T10 at 132, T12 at 85, T14 at 45), each one bought a full extra turn against Iron Head + Freeze-Dry/Thunderbolt and forced me to bring Bolt back fresh; Helping Hand never used (Starmie never stood beside Milotic)"},
+     "notes": "Encore on Fini's Icy Wind T3 locked it out of Protect and Moonblast and let Thunderbolt KO it T5. Starmie's Aqua Jet T16 outsped my Sucker Punch + Thunderclap read (both failed because the target had already moved) - a genuinely good AI choice; Protect on Kangaskhan T17 then let Thunderbolt finish it."}
+  ],
+  "engine_checklist": {
+    "drizzle_on_entry": "PASS both attempts",
+    "misty_terrain_on_entry": "PASS both attempts",
+    "mega_milotic": "PASS both attempts (fires on Milotic's first turn out; Prism Scales active)",
+    "mega_starmie": "FAIL - not observed in either attempt after Milotic's Mega: 0 of 5 Starmie turns on the field elected the Mega (a1 T10; a2 T14-T17). Build-13's Mega-election fix does not cover the second authored Mega, or the engine still allows one Mega per trainer (same as build-9 defect 1).",
+    "water_spout": "PARTIAL both attempts - chosen only at 58-70% HP on T3, never at full HP (T1 was Origin Pulse both times)",
+    "helping_hand_plus_recover": "Recover PASS (a2, four uses, each correctly timed), Helping Hand never observed (never had Starmie beside it)"
+  },
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Kyogre (189/322)", "payoff": "empty - I hit Fini with both attacks"},
+    {"attempt": 1, "turn": 4, "battler": "Tapu Fini (7 HP)", "payoff": "blocked Thunderbolt (KO)"},
+    {"attempt": 1, "turn": 5, "battler": "Ferrothorn (full)", "payoff": "blocked Draco Meteor (~50% damage)"},
+    {"attempt": 1, "turn": 9, "battler": "Ferrothorn (full)", "payoff": "blocked Flare Blitz (KO)"},
+    {"attempt": 2, "turn": 2, "battler": "Kyogre (227/322)", "payoff": "empty - I hit Fini with both attacks"},
+    {"attempt": 2, "turn": 12, "battler": "Ferrothorn (full)", "payoff": "blocked Flare Blitz (KO)"},
+    {"attempt": 2, "turn": 15, "battler": "Starmie (full, entry+1)", "payoff": "blocked Sucker Punch + Thunderclap (KO)"}
+  ],
+  "protect_summary": "7 Protects in two attempts, 5 with a real payoff (4 blocked KOs, 1 blocked a heavy hit) and 2 empty (Kyogre T2 both times). No consecutive-Protect attempts and no Fini Protect spam this time (Fini Protected once in a1, was Encored in a2). Cadence is much healthier than build-9's.",
+  "ai_defects": [
+    {"id": 1, "severity": "engine", "status": "PERSISTS on build-13", "description": "Second authored Mega never fires once the first has been used. a2: Starmie sat on the field for four turns (T14 Liquidation, T15 Protect, T16 Aqua Jet, T17 Aqua Jet) with usable_gimmick=mega reported every turn and never Mega Evolved; a1: same on its single turn. Build-9 a2 proved Starmie does Mega when Milotic dies un-evolved, so the block is the one-Mega-per-trainer path, not Starmie's set."},
+    {"id": 3, "severity": "AI", "status": "PERSISTS", "description": "Kyogre at full HP under rain chose Origin Pulse over Water Spout on T1 in both attempts (it was Fake Out flinched both times so the choice cost nothing here). Water Spout was chosen on T3 at 58-70% HP, when Origin Pulse would have been the stronger move; the selection looks inverted relative to HP."},
+    {"id": 5, "severity": "AI (minor)", "status": "new", "description": "Kyogre Protect T2 both attempts at 58-70% HP with nothing aimed at it - an empty Protect on a repeatable cadence (T2 after being Fake Out flinched T1). Consistent with build-9's a2/a3."},
+    {"id": 2, "severity": "AI", "status": "NOT REPRODUCED", "description": "No switch-ins into super-effective attacks this time: the AI made no voluntary switches in either attempt (build-13's switch-in charging fix or simply no trigger)."},
+    {"id": 4, "severity": "AI (Protect cadence)", "status": "NOT REPRODUCED", "description": "No consecutive Protects and no Fini Protect spam; every Ferrothorn/Fini/Starmie Protect except Kyogre's T2 blocked a real hit."}
+  ],
+  "good_ai_choices": ["a1 T4/T9 and a2 T12 Ferrothorn Protect exactly on the KO turn", "a2 T9-T14 Milotic Recover loop at 45-132 HP bought four extra turns", "a2 T16 Starmie Aqua Jet beat my Sucker Punch + Thunderclap priority read", "Leech Seed kept draining Kingambit after Ferrothorn fainted"],
+  "level_changes": [],
+  "calibration": "Won 6-2 on the first attempt (two faints, one of them the Kingambit trade into the Milotic/Ferrothorn core) and 6-4 on the second (Milotic's Recover loop plus my Iron Bundle misplay). Both were real fights: keep all offsets (seeds 96/100/100/96/98/97 -> medium 94/98/98/94/96/95).",
+  "driver_notes": "damage/faints in this build's act output are keyed by slot (opponent_a:<slot>, player:<slot>), not by species; the battle-ending turn carries no native choices, so Starmie's move on a1's last turn is unknown.",
+  "cooler": "Unchanged from receipt.json: the room is the campaign's most tactically alive (Protect reads, the Recover loop, Aqua Jet beating priority). It would be cooler still with the second Mega actually firing and Water Spout opening at full HP.",
+  "legality": "No legality problem found in the authored set.",
+  "verdict": "Wallace is still the hardest fight of the League on build-13, but by a narrower margin than on build-9: with the party that beat Drake first try it now falls in one attempt with two faints, and the second attempt cost four. Its difficulty comes from decision density (Protect timing, Milotic's Recover, Ferrothorn's seed attrition) rather than raw damage, and it is being held back by the un-firing Mega Starmie; with defect 1 fixed the Huge Power Starmie in the back would make it clearly the summit."
+}
