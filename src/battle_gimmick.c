@@ -117,6 +117,31 @@ u32 GetRemainingMegaEvolutions(enum BattlerId battler)
     return used < limit ? limit - used : 0;
 }
 
+// Whether this battler may still activate `gimmick` right now. Mega asks the
+// trainer's authored allowance instead of the one-per-side default, so a team
+// licensed for two stones can still evolve after its partner already has.
+bool32 CanTrainerStillActivateGimmick(enum BattlerId battler, enum Gimmick gimmick)
+{
+    u32 reserved = 0;
+    enum BattlerId partner;
+
+    if (gimmick != GIMMICK_MEGA || EmeraldChampions_GetMegaEvolutionLimit(battler) == 1)
+        return !HasTrainerUsedGimmick(battler, gimmick);
+
+    if (GetActiveGimmick(battler) == GIMMICK_MEGA)
+        return FALSE;
+
+    // A partner that has already committed to Mega this turn holds one charge.
+    partner = GetPartnerBattler(battler);
+    if (IsDoubleBattle() && IsPartnerMonFromSameTrainer(battler)
+     && (gBattleStruct->gimmick.toActivate & (1u << partner))
+     && gBattleStruct->gimmick.usableGimmick[partner] == GIMMICK_MEGA
+     && GetActiveGimmick(partner) != GIMMICK_MEGA)
+        reserved = 1;
+
+    return GetRemainingMegaEvolutions(battler) > reserved;
+}
+
 // Sets a gimmick as used by a trainer with checks for Multi Battles.
 void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick)
 {

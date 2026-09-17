@@ -1874,6 +1874,23 @@ DOUBLE_BATTLE_TEST("EC Mega budget: native activations consume two uses for one 
         EXPECT_EQ(gBattleStruct->gimmick.megaEvolutionsUsed[B_TRAINER_OPPONENT_A], 2);
         EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);
         EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_3), 0);
+        // The gate the AI controller actually consults on the way to executing
+        // its choice. It used to ask only whether the side had ever Mega
+        // Evolved, so a licensed second stone was refused after the first: the
+        // reserve reported the Mega as usable every turn and never evolved.
+        gBattleStruct->gimmick.megaEvolutionsUsed[B_TRAINER_OPPONENT_A] = 1;
+        gBattleStruct->gimmick.activeGimmick[B_TRAINER_OPPONENT_A][gBattlerPartyIndexes[B_BATTLER_3]] = GIMMICK_NONE;
+        gBattleStruct->gimmick.activated[B_BATTLER_1][GIMMICK_MEGA] = TRUE;
+        gBattleStruct->gimmick.activated[B_BATTLER_3][GIMMICK_MEGA] = TRUE;
+        EXPECT(HasTrainerUsedGimmick(B_BATTLER_3, GIMMICK_MEGA));
+        EXPECT(CanTrainerStillActivateGimmick(B_BATTLER_3, GIMMICK_MEGA));
+        // A trainer on the ordinary one-per-side rule is unaffected.
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_MICHELLE;
+        EXPECT(!CanTrainerStillActivateGimmick(B_BATTLER_3, GIMMICK_MEGA));
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_SIDNEY;
+        // Spending the licensed second stone closes the door for good.
+        gBattleStruct->gimmick.megaEvolutionsUsed[B_TRAINER_OPPONENT_A] = 2;
+        EXPECT(!CanTrainerStillActivateGimmick(B_BATTLER_3, GIMMICK_MEGA));
         u8 savedIndex = gBattlerPartyIndexes[B_BATTLER_1];
         gBattlerPartyIndexes[B_BATTLER_1] = 2;
         EXPECT_EQ(GetRemainingMegaEvolutions(B_BATTLER_1), 0);

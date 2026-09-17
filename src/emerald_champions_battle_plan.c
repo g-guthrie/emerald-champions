@@ -51,20 +51,26 @@ bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
 
 // Explicit endgame exceptions. Player, ordinary trainer and foreign battle
 // namespaces retain the native one-Mega rule through GetCampaignTrainer.
+// How many Mega Evolutions this battler's trainer may actually perform.
+// One per side is the rule; a team that authors more than one Mega slot is
+// licensed to use them all, which is how the Elite Four and the Champion get
+// to break it. The count comes from the authored mega_slots line rather than a
+// list here, so licensing a trainer is a data change.
 u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler)
 {
-    switch (GetCampaignTrainer(battler))
-    {
-    case TRAINER_SIDNEY:
-    case TRAINER_PHOEBE:
-    case TRAINER_GLACIA:
-    case TRAINER_DRAKE:
-    case TRAINER_WALLACE:
-    case TRAINER_STEVEN: // Final optional former-Champion exhibition.
-        return 2;
-    default:
+    u32 trainer = GetCampaignTrainer(battler);
+    u32 permissions = trainer < ARRAY_COUNT(sEmeraldChampionsMegaPermissions)
+        ? sEmeraldChampionsMegaPermissions[trainer] : 0;
+    u32 slots, limit;
+
+    // Unauthored/facility/player parties keep the native one-per-side rule.
+    if (!(permissions & 0x80))
         return 1;
-    }
+
+    for (slots = permissions & 0x3F, limit = 0; slots != 0; slots &= slots - 1)
+        limit++;
+
+    return limit > 0 ? limit : 1;
 }
 
 u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species species, enum Species partnerSpecies)

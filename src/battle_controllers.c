@@ -1,5 +1,6 @@
 #include "global.h"
 #include "emerald_champions_opening.h"
+#include "battle_gimmick.h"
 #include "battle.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
@@ -3301,7 +3302,7 @@ void SetFinalChosenTarget(enum BattlerId battler, bool32 checkPartner)
 
     enum Gimmick usableGimmick = gBattleStruct->gimmick.usableGimmick[battler];
     bool32 isAIUsingGimmick = gAiBattleData->aiUsingGimmick & (1u << battler);
-    if (usableGimmick != GIMMICK_NONE && isAIUsingGimmick && !HasTrainerUsedGimmick(battler, usableGimmick))
+    if (usableGimmick != GIMMICK_NONE && isAIUsingGimmick && CanTrainerStillActivateGimmick(battler, usableGimmick))
     {
         gBattleStruct->gimmick.toActivate |= 1u << battler;
         BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, (chosenMoveIndex) | (RET_GIMMICK) | (chosenTarget << 8));
