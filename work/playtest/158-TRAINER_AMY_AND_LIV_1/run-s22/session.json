@@ -1,0 +1,33 @@
+{
+  "rom_sha256": "070ab01c7e69b2f49e1b6a8e33894c60ecb8e6055d2d5cab2feed9ea8ee3d141",
+  "elf_sha256": "70db6be9e609d4fe1de497fd4620a12369072b83a1e79ed108d6b35460058fc5",
+  "seed": 22,
+  "trainer_a": "TRAINER_AMY_AND_LIV_1",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 48,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/158-TRAINER_AMY_AND_LIV_1/party.json",
+  "party_sha256": "13fe59c8284d90ab50780771a64fc016e77bd784a8e7ce7d01c7eeea6d5a75e9",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET"
+  ],
+  "prepared": {
+    "encounter": "E0211 TRAINER_AMY_AND_LIV_1, Route 103 Surf backtrack",
+    "party": 6
+  },
+  "started": {
+    "frames": 897
+  },
+  "replacement_commits": {
+    "turn": 3,
+    "slots": {}
+  }
+}
