@@ -3804,8 +3804,8 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_NINETALES @ ITEM_CHARCOAL
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_DROUGHT
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -3817,8 +3817,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_DODRIO @ ITEM_CHOICE_BAND
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_EARLY_BIRD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -4821,8 +4821,8 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_CHANSEY @ ITEM_EVIOLITE
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_NATURAL_CURE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -4847,8 +4847,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_PROBOPASS @ ITEM_SITRUS_BERRY
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_MAGNET_PULL
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -5600,8 +5600,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_SEAKING @ ITEM_CHOICE_BAND
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_LIGHTNING_ROD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -5613,8 +5613,8 @@ Nature: NATURE_ADAMANT
 - MOVE_ICY_WIND
 
 SPECIES_OCTILLERY @ ITEM_EXPERT_BELT
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_SNIPER
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -5750,8 +5750,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 10
 
 SPECIES_CARRACOSTA @ ITEM_WEAKNESS_POLICY
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_SOLID_ROCK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -5802,8 +5802,8 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 SPECIES_CLAWITZER @ ITEM_CHOICE_SPECS
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_MEGA_LAUNCHER
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -5864,8 +5864,8 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_MANTINE @ ITEM_ASSAULT_VEST
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_WATER_ABSORB
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -5877,8 +5877,8 @@ Nature: NATURE_CALM
 - MOVE_HELPING_HAND
 
 SPECIES_WHISCASH @ ITEM_ASSAULT_VEST
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_OBLIVIOUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -8898,8 +8898,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 5
 
 SPECIES_INDEEDEE_F @ ITEM_PSYCHIC_SEED
-Level: 80
-Level Offset: 0
+Level: 81
+Level Offset: 1
 Ability: ABILITY_PSYCHIC_SURGE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -8924,8 +8924,8 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_REUNICLUS @ ITEM_ASSAULT_VEST
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_MAGIC_GUARD
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9048,8 +9048,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 5
 
 SPECIES_WEAVILE @ ITEM_FOCUS_SASH
-Level: 100
-Level Offset: 0
+Level: 101
+Level Offset: 1
 Ability: ABILITY_PRESSURE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9061,8 +9061,8 @@ Nature: NATURE_JOLLY
 - MOVE_TAUNT
 
 SPECIES_ARMAROUGE @ ITEM_LIFE_ORB
-Level: 101
-Level Offset: 1
+Level: 102
+Level Offset: 2
 Ability: ABILITY_WEAK_ARMOR
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -10758,8 +10758,8 @@ Nature: NATURE_ADAMANT
 - MOVE_ICE_PUNCH
 
 SPECIES_GRENINJA @ ITEM_LIFE_ORB
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_PROTEAN
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -10771,8 +10771,8 @@ Nature: NATURE_TIMID
 - MOVE_U_TURN
 
 SPECIES_INTELEON @ ITEM_FOCUS_SASH
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_SNIPER
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -11591,8 +11591,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 10
 
 SPECIES_AUDINO @ ITEM_SITRUS_BERRY
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -11656,8 +11656,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_CENTISKORCH @ ITEM_LIFE_ORB
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -17341,8 +17341,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 10
 
 SPECIES_SHIINOTIC @ ITEM_MENTAL_HERB
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_EFFECT_SPORE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -17354,8 +17354,8 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 SPECIES_GOTHITELLE @ ITEM_WIKI_BERRY
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_SHADOW_TAG
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20602,8 +20602,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 10
 
 SPECIES_LANTURN @ ITEM_ASSAULT_VEST
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_VOLT_ABSORB
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20628,8 +20628,8 @@ Nature: NATURE_TIMID
 - MOVE_ROOST
 
 SPECIES_ALOMOMOLA @ ITEM_LEFTOVERS
-Level: 72
-Level Offset: 2
+Level: 73
+Level Offset: 3
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -27592,8 +27592,8 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_TORNADUS_THERIAN @ ITEM_FOCUS_SASH
-Level: 102
-Level Offset: 2
+Level: 103
+Level Offset: 3
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -27605,8 +27605,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_ZAPDOS @ ITEM_LIFE_ORB
-Level: 102
-Level Offset: 2
+Level: 103
+Level Offset: 3
 Ability: ABILITY_PRESSURE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -28439,8 +28439,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 5
 
 SPECIES_LAPRAS @ ITEM_LEFTOVERS
-Level: 80
-Level Offset: 0
+Level: 81
+Level Offset: 1
 Ability: ABILITY_WATER_ABSORB
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -28452,8 +28452,8 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 SPECIES_WOBBUFFET @ ITEM_SITRUS_BERRY
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_SHADOW_TAG
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
