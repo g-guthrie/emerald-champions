@@ -84,3 +84,60 @@ AI_DOUBLE_BATTLE_TEST("EC joint conflicts: a boost is not handed to a partner th
         }
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC joint conflicts: a spread move loses to a single lane once Wide Guard has been shown")
+{
+    bool32 shown;
+    PARAMETRIZE { shown = TRUE; }
+    PARAMETRIZE { shown = FALSE; }
+    GIVEN {
+        AI_FLAGS(JOINT_FLAGS);
+        // Wallace's board: the side opposite has used Wide Guard, and modern
+        // Wide Guard is freely repeatable, so the spread attack is likely to
+        // blank again. The single-target lane still gets through.
+        PLAYER(SPECIES_MAGEARNA) { Level(50); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(140); Ability(ABILITY_SOUL_HEART); Moves(shown ? MOVE_WIDE_GUARD : MOVE_CELEBRATE, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_KYOGRE) {
+            Level(50); HP(400); MaxHP(400); SpAttack(180); Defense(150); SpDefense(150); Speed(90);
+            Ability(ABILITY_DRIZZLE); Moves(MOVE_ORIGIN_PULSE, MOVE_ICE_BEAM);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, shown ? MOVE_WIDE_GUARD : MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            // Either slot is a fair lane; what matters is that the spread
+            // attack is no longer the choice.
+            if (shown)
+                EXPECT_MOVE(opponentLeft, MOVE_ICE_BEAM);
+            else
+                EXPECT_MOVE(opponentLeft, MOVE_ORIGIN_PULSE);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC joint conflicts: the HP-scaled spread wins at full health")
+{
+    GIVEN {
+        AI_FLAGS(JOINT_FLAGS);
+        // Kyogre's board: at full health Water Spout is a hundred and fifty
+        // that cannot miss, against a hundred and ten at eighty-five accuracy.
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(300); MaxHP(300); Attack(20); Defense(120); SpDefense(120); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(50); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(10); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_KYOGRE) {
+            Level(50); HP(400); MaxHP(400); SpAttack(180); Defense(150); SpDefense(150); Speed(90);
+            Ability(ABILITY_DRIZZLE); Moves(MOVE_WATER_SPOUT, MOVE_ORIGIN_PULSE);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_WATER_SPOUT);
+        }
+    }
+}
