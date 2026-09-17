@@ -1051,7 +1051,6 @@ static void PrepareHeadlessGoldTrainerCard(void)
     ShowPlayerTrainerCard(gInitialMainCB2);
 }
 
-}
 
 static void PrepareHeadlessFairySummary(void)
 {
