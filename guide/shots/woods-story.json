@@ -1,0 +1,168 @@
+[
+ {
+  "id": "PetalburgWoods-aqua",
+  "map": "PetalburgWoods",
+  "x": 26,
+  "y": 25,
+  "facing": 2,
+  "chapter": 3,
+  "settle": 100,
+  "vars": {
+   "VAR_PETALBURG_WOODS_STATE": 0
+  },
+  "flags": {
+   "FLAG_HIDE_PETALBURG_WOODS_AQUA_GRUNT": false,
+   "FLAG_HIDE_PETALBURG_WOODS_DEVON_EMPLOYEE": false
+  },
+  "caption": "Petalburg Woods: the Devon researcher and Team Aqua",
+  "sequence": [
+   {
+    "steps": [
+     {
+      "hold": "UP",
+      "frames": 120
+     },
+     {
+      "frames": 420
+     }
+    ],
+    "caption": "beat 1"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 2"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 3"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 4"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 5"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 6"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 7"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 8"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 9"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 10"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 11"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 12"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 13"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 14"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 15"
+   },
+   {
+    "steps": [
+     {
+      "press": "A",
+      "frames": 430
+     }
+    ],
+    "caption": "beat 16"
+   }
+  ]
+ }
+]

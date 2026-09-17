@@ -1,0 +1,212 @@
+[
+  {
+    "id": "woods-lyle",
+    "map": "PetalburgWoods",
+    "caption": "Lyle blocks the southern path",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/woods-lyle.png",
+    "x": 7,
+    "y": 33,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 7,
+        "y": 33,
+        "invisible": false
+      },
+      {
+        "local_id": 9,
+        "graphic": 36,
+        "x": 7,
+        "y": 32,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "woods-james",
+    "map": "PetalburgWoods",
+    "caption": "James guards the northern clearing",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/woods-james.png",
+    "x": 4,
+    "y": 15,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 4,
+        "y": 15,
+        "invisible": false
+      },
+      {
+        "local_id": 10,
+        "graphic": 36,
+        "x": 4,
+        "y": 14,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "woods-scolipite",
+    "map": "PetalburgWoods",
+    "caption": "Scolipite, behind the eastern cut trees",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/woods-scolipite.png",
+    "x": 45,
+    "y": 16,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 45,
+        "y": 16,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "woods-heracronite",
+    "map": "PetalburgWoods",
+    "caption": "Heracronite in the middle of the wood",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/woods-heracronite.png",
+    "x": 35,
+    "y": 21,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 35,
+        "y": 21,
+        "invisible": false
+      },
+      {
+        "local_id": 3,
+        "graphic": 117,
+        "x": 26,
+        "y": 17,
+        "invisible": false
+      },
+      {
+        "local_id": 4,
+        "graphic": 23,
+        "x": 26,
+        "y": 20,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "woods-butterfrenite",
+    "map": "PetalburgWoods",
+    "caption": "Butterfrenite at the north-west corner",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/woods-butterfrenite.png",
+    "x": 4,
+    "y": 9,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 4,
+        "y": 9,
+        "invisible": false
+      },
+      {
+        "local_id": 10,
+        "graphic": 36,
+        "x": 4,
+        "y": 14,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "woods-lopunnite",
+    "map": "PetalburgWoods",
+    "caption": "Lopunnite on the western track",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/woods-lopunnite.png",
+    "x": 4,
+    "y": 27,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 4,
+        "y": 27,
+        "invisible": false
+      },
+      {
+        "local_id": 9,
+        "graphic": 36,
+        "x": 7,
+        "y": 32,
+        "invisible": false
+      }
+    ]
+  },
+  {
+    "id": "woods-cut-trees",
+    "map": "PetalburgWoods",
+    "caption": "Cut opens the eastern half of the wood",
+    "chapter": 3,
+    "ok": true,
+    "file": "guide/assets/story/woods-cut-trees.png",
+    "x": 18,
+    "y": 10,
+    "battle": false,
+    "actors": [
+      {
+        "local_id": 255,
+        "graphic": 0,
+        "x": 18,
+        "y": 10,
+        "invisible": false
+      },
+      {
+        "local_id": 1,
+        "graphic": 82,
+        "x": 19,
+        "y": 10,
+        "invisible": false
+      },
+      {
+        "local_id": 2,
+        "graphic": 82,
+        "x": 19,
+        "y": 11,
+        "invisible": false
+      },
+      {
+        "local_id": 3,
+        "graphic": 117,
+        "x": 26,
+        "y": 17,
+        "invisible": false
+      },
+      {
+        "local_id": 8,
+        "graphic": 9,
+        "x": 15,
+        "y": 18,
+        "invisible": false
+      }
+    ]
+  }
+]

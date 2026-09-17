@@ -146,34 +146,48 @@ def encounters_block(loc):
         </div>'''
 
 
+def first_sentence(text, limit=240):
+    """The crack line's opening clause is the counterplay worth printing."""
+    if not text:
+        return ""
+    cut = re.split(r"(?<=[.;])\s", text)
+    out = cut[0] if cut else text
+    if len(out) > limit:
+        out = out[:limit].rsplit(" ", 1)[0] + "…"
+    return out
+
+
+def trainer_card(t):
+    name = t["trainer"].replace("TRAINER_", "").replace("_", " ").title()
+    rows = []
+    for mon in t["party"]:
+        moves = ", ".join(mon["moves"])
+        rows.append(
+            f'          <tr><td class="lv">L{mon["level"]}</td><td>{esc(mon["species"])}</td>'
+            f'<td>{esc(mon["item"])}</td><td>{esc(mon["ability"])}</td>'
+            f'<td class="mv">{esc(moves)}</td></tr>')
+    mega = ""
+    if t.get("mega") and t["mega"] not in ("NONE", ""):
+        mega = f'<span class="mega">MEGA SLOT {esc(t["mega"])}</span>'
+    crack = first_sentence(t.get("crack", ""))
+    crack_html = f'<div class="crack"><b>HOW TO BEAT IT:</b> {esc(crack)}</div>' if crack else ""
+    return f"""    <div class="tcard">
+      <div class="who"><span class="name">{esc(name)}</span>
+        <span class="cls">{esc(t["cls"])}</span>{mega}</div>
+      <table>
+        <tr><th>LV</th><th>POKÉMON</th><th>ITEM</th><th>ABILITY</th><th>MOVES</th></tr>
+{chr(10).join(rows)}
+      </table>
+{crack_html}
+    </div>"""
+
+
 def trainers_block(loc):
     if not loc["trainers"]:
         return ""
-    rows = []
-    for t in loc["trainers"]:
-        name = t["trainer"].replace("TRAINER_", "").replace("_", " ").title()
-        team = ", ".join(m["species"] for m in t["party"][:6]) or "—"
-        rows.append(f'            <tr><td>{esc(name)}</td><td>{esc(t["cls"])}</td>'
-                    f'<td class="num">{t["cap"]}</td><td class="team">{esc(team)}</td></tr>')
-    return f'''    <div class="tbl roster">
-      <h3>TRAINERS HERE</h3>
-      <table>
-        <tr><th>TRAINER</th><th>CLASS</th><th style="text-align:right">CAP</th><th>TEAM</th></tr>
-{chr(10).join(rows)}
-      </table>
-    </div>'''
-
-
-def strip_block(shot, pretty):
-    """A pan: several viewpoints stitched into one picture of the whole place."""
-    rel = Path(shot["file"]).name
-    frames = shot.get("frames") or []
-    tall = "tall" if "vertical" in rel or shot.get("direction") == "vertical" else ""
-    return f'''    <div class="strip {tall}">
-      <h4>{esc(pretty).upper()} END TO END</h4>
-      <img src="../assets/captures/{esc(rel)}" alt="{esc(pretty)}">
-      <div class="cap">{len(frames) or "Several"} viewpoints, stitched in order of travel</div>
-    </div>'''
+    cards = "\n".join(trainer_card(t) for t in loc["trainers"])
+    return f"""    <h3 class="section">TRAINERS IN THIS AREA</h3>
+{cards}"""
 
 
 def events_block(shots):

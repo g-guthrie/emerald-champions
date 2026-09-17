@@ -110,23 +110,43 @@ def encounters_for(map_constant):
 def trainers_for(location):
     index = json.loads((ROOT / "work/playtest/battle_index.json").read_text())["battles"]
     teams = (ROOT / "data/emerald_champions/emerald_champions_battle_teams.txt").read_text()
+    member = re.compile(
+        r"^([A-Z0-9_]+) @(\w+) (\w+) (\w+) (\S+) (-?\d+) \| ([^|]+)\|", re.M)
     blocks = {}
     for block in re.split(r"\n(?=## )", teams):
         head = re.match(r"## (E\d+) (\S+)(?: class=(\w+))?", block)
-        if head:
-            blocks[head.group(2)] = dict(
-                e_group=head.group(1), cls=head.group(3) or "",
-                party=[dict(species=title(m.group(1)), item=title(m.group(2)))
-                       for m in re.finditer(r"^([A-Z0-9_]+) @(\w+) ", block, re.M)])
+        if not head:
+            continue
+        plan = re.search(r"^plan: (.+)$", block, re.M)
+        crack = re.search(r"^crack: (.+)$", block, re.M)
+        mega = re.search(r"^mega_slots: (.+)$", block, re.M)
+        party = []
+        for m in member.finditer(block):
+            party.append(dict(
+                species=title(m.group(1)), item=title(m.group(2)),
+                ability=title(m.group(3)), nature=m.group(4).capitalize(),
+                evs=m.group(5), offset=int(m.group(6)),
+                moves=[title(x.strip()) for x in m.group(7).split(",") if x.strip()]))
+        blocks[head.group(2)] = dict(
+            e_group=head.group(1), cls=head.group(3) or "", party=party,
+            plan=plan.group(1) if plan else "",
+            crack=crack.group(1) if crack else "",
+            mega=mega.group(1).strip() if mega else "NONE")
     out = []
     for row in index:
         if row["location"] != location:
             continue
         for tid in row["trainer_ids"]:
             info = blocks.get(tid, {})
+            cap = row["cap_window_max"]
+            party = []
+            for mon in info.get("party", []):
+                # Medium difficulty is the cap plus the member's offset, less two.
+                party.append(dict(mon, level=max(2, cap + mon["offset"] - 2)))
             out.append(dict(trainer=tid, play_order=row["play_order"],
-                            cls=row["class"], cap=row["cap_window_max"],
-                            e_group=info.get("e_group"), party=info.get("party", [])))
+                            cls=row["class"], cap=cap, e_group=info.get("e_group"),
+                            plan=info.get("plan", ""), crack=info.get("crack", ""),
+                            mega=info.get("mega", "NONE"), party=party))
     return sorted(out, key=lambda r: r["play_order"])
 
 

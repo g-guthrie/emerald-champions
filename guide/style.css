@@ -135,6 +135,7 @@ p { margin: 0 0 6pt; font-size: 9.0pt; line-height: 1.32; }
 
 .location {
   position: relative;
+  overflow: visible;
   margin: 0.10in 0 0.18in;
   background: linear-gradient(180deg, var(--panel) 0%, var(--panel-deep) 100%);
   border: 2px solid var(--panel-edge);
@@ -420,3 +421,137 @@ tr:nth-child(even) td { background: rgba(255,255,255,0.045); }
 }
 .strip.tall img { width: auto; max-height: 3.1in; margin: 0 auto; }
 .strip .cap { color: #9fd9ef; font-size: 6.6pt; text-align: center; padding-top: 5px; }
+
+/* ---------- two-column editorial flow ---------- */
+
+.flow { column-count: 2; column-gap: 0.26in; }
+.flow > * { break-inside: avoid; }
+
+/* ---------- event block, the original's shape ---------- */
+
+.ev { margin: 0 0 0.16in; break-inside: avoid; }
+.ev h4 {
+  margin: 0 0 6px; display: block;
+  background: linear-gradient(180deg, var(--event-a), var(--event-b));
+  color: #fff; font-size: 11pt; font-weight: 800;
+  padding: 5px 20px 6px 10px;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
+  text-shadow: 0 2px 2px rgba(0,0,0,0.45);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+}
+.ev p { font-size: 8.6pt; line-height: 1.32; margin: 0 0 6pt; }
+.ev .plate-shot {
+  margin: 0 0 7px;
+  padding: 5px; background: linear-gradient(180deg, #6a4ea8, #35225e);
+  border: 2px solid #c9b6ef; border-radius: 5px;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.28);
+}
+.ev .plate-shot img { display: block; width: 100%; image-rendering: pixelated; }
+.ev .plate-shot .cap { color: #efe6ff; font-size: 6.6pt; text-align: center; padding-top: 4px; }
+
+/* ---------- trainer dissection card ---------- */
+
+.tcard {
+  margin: 0 0 0.14in;
+  background: linear-gradient(180deg, #0f3446, #071c27);
+  border: 1px solid #2b6a85; border-radius: 6px;
+  padding: 7px 8px 8px; break-inside: avoid;
+}
+.tcard .who {
+  display: flex; align-items: baseline; gap: 6px;
+  border-bottom: 1px solid #3c86a4; padding-bottom: 4px; margin-bottom: 5px;
+}
+.tcard .who .name {
+  color: #eaffd0; font-size: 11pt; font-weight: 900; font-style: italic;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.45);
+}
+.tcard .who .cls {
+  color: var(--gold); font-size: 7pt; font-weight: 800; letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+.tcard .who .mega {
+  margin-left: auto; color: #ffd34d; font-size: 6.6pt; font-weight: 800;
+  border: 1px solid #b8801a; border-radius: 3px; padding: 1px 4px;
+}
+.tcard table { width: 100%; border-collapse: collapse; }
+.tcard th {
+  color: #cfefff; font-size: 6.4pt; letter-spacing: 0.07em; text-align: left;
+  padding: 1px 3px 3px; border-bottom: 1px solid #2b6a85;
+}
+.tcard td {
+  color: #fff; font-size: 7.4pt; font-weight: 700; padding: 2px 3px;
+  border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top;
+}
+.tcard td.lv { color: var(--gold); text-align: right; white-space: nowrap; }
+.tcard td.mv { font-weight: 600; color: #d6ecf7; }
+.tcard .crack {
+  margin-top: 6px; color: #ffe08a; font-size: 7.2pt; line-height: 1.30;
+  border-top: 1px solid rgba(255,255,255,0.14); padding-top: 5px;
+}
+.tcard .crack b { color: var(--gold); letter-spacing: 0.06em; }
+
+h3.section {
+  margin: 0.06in 0 0.09in;
+  color: #14210f; font-size: 11pt; font-weight: 900; font-style: italic;
+  letter-spacing: 0.03em;
+  border-bottom: 3px solid var(--rule); padding-bottom: 3px;
+}
+
+/* ---------- outer section tab, as on the original's fore-edge ---------- */
+
+.tab {
+  position: absolute; z-index: 5;
+  right: -0.02in; top: 0.55in;
+  writing-mode: vertical-rl;
+  background: linear-gradient(90deg, #2f6b26, #1a4516);
+  color: var(--gold);
+  font-size: 12pt; font-weight: 900; font-style: italic;
+  letter-spacing: 0.04em;
+  padding: 0.22in 5px 0.22in 6px;
+  border: 2px solid #12330f; border-right: none;
+  border-radius: 6px 0 0 6px;
+  text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+  box-shadow: -2px 3px 0 rgba(0,0,0,0.25);
+}
+
+/* NOTE box: the original's second callout colour */
+.callout.note .cap { background: linear-gradient(180deg, #4e8fd6, #1d4e8f); }
+.callout.caution .cap { background: linear-gradient(180deg, #d64e4e, #8f1d1d); }
+.callout { position: relative; }
+.callout .art {
+  position: absolute; right: 6px; bottom: -2px;
+  height: 0.70in; width: auto; image-rendering: pixelated;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.55));
+}
+.callout .body.with-art { padding-right: 0.95in; }
+
+/* artwork floating off a panel, the way the original overlaps its plates */
+.panel-art {
+  position: absolute; right: 0.10in; bottom: -0.34in;
+  height: 1.25in; image-rendering: pixelated;
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.5));
+  z-index: 4;
+}
+
+/* map edge labels for the roads in and out */
+.plate .exit {
+  position: absolute;
+  background: #0e2432; color: #eaf6ff;
+  border: 1.5px solid #4fb4d6; border-radius: 3px;
+  font-size: 6.2pt; font-weight: 800; letter-spacing: 0.04em;
+  padding: 1px 5px 2px; white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+.plate .exit.side { writing-mode: vertical-rl; padding: 5px 1px 5px 2px; }
+
+/* footnote under a table */
+.tbl .foot { color: #9fd9ef; font-size: 6.4pt; line-height: 1.30; padding-top: 5px; }
+
+/* rarity colouring */
+td.rar-vc { color: #7ef0a0; }
+td.rar-c  { color: #cfefff; }
+td.rar-u  { color: #ffd34d; }
+td.rar-r  { color: #ff9a6e; }
+
+/* two stacked event screenshots, as the original does for a conversation */
+.ev .pair { display: grid; grid-template-columns: 1fr; gap: 6px; }

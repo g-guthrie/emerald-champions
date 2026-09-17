@@ -1,0 +1,28 @@
+[
+  {"id": "woods-lyle", "map": "PetalburgWoods", "x": 7, "y": 33, "facing": 2, "chapter": 3,
+   "settle": 110, "steps": [{"press": "A", "frames": 460}],
+   "caption": "Lyle blocks the southern path"},
+
+  {"id": "woods-james", "map": "PetalburgWoods", "x": 4, "y": 15, "facing": 2, "chapter": 3,
+   "settle": 110, "steps": [{"press": "A", "frames": 460}],
+   "caption": "James guards the northern clearing"},
+
+  {"id": "woods-scolipite", "map": "PetalburgWoods", "x": 45, "y": 16, "facing": 2, "chapter": 3,
+   "settle": 110, "steps": [{"press": "A", "frames": 460}],
+   "caption": "Scolipite, behind the eastern cut trees"},
+
+  {"id": "woods-heracronite", "map": "PetalburgWoods", "x": 35, "y": 21, "facing": 2, "chapter": 3,
+   "settle": 110, "steps": [{"press": "A", "frames": 460}],
+   "caption": "Heracronite in the middle of the wood"},
+
+  {"id": "woods-butterfrenite", "map": "PetalburgWoods", "x": 4, "y": 9, "facing": 2, "chapter": 3,
+   "settle": 110, "steps": [{"press": "A", "frames": 460}],
+   "caption": "Butterfrenite at the north-west corner"},
+
+  {"id": "woods-lopunnite", "map": "PetalburgWoods", "x": 4, "y": 27, "facing": 2, "chapter": 3,
+   "settle": 110, "steps": [{"press": "A", "frames": 460}],
+   "caption": "Lopunnite on the western track"},
+
+  {"id": "woods-cut-trees", "map": "PetalburgWoods", "x": 18, "y": 10, "facing": 4, "chapter": 3,
+   "settle": 110, "caption": "Cut opens the eastern half of the wood"}
+]
