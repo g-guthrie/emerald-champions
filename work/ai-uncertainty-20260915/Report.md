@@ -2028,3 +2028,79 @@ Makefile writes `pokeemerald-headless.gba` and its ELF and stamp at the repo
 root, and other agents drive battles from those artifacts on this shared tree.
 Overwriting them mid-run would corrupt someone else's session, so I have
 stopped short of it and asked instead.
+
+# E0409 solved on the real encounter: the Mega board was being cancelled
+
+Commits `bbec900713` (first attempt, wrong lever) and `255ccff771` (the fix).
+**197 passed, 0 failed**; frames unchanged (Dancer 60 of 72, Laura 61, Brawly
+60); `pokeemerald.gba` clean.
+
+## The instrumented-headless workflow needs no Makefile change
+
+`BUILD_NAME` already names the artifact, and the stamper hashes whatever sits
+next to the stamp, so:
+
+```sh
+make -j4 BUILD_NAME=emerald-instrumented MAP_VERSION=emerald \
+  EC_HEADLESS_FIXTURES=1 TEST=0 pokeemerald-instrumented.gba
+mv pokeemerald-instrumented.{gba,elf} work/ai-uncertainty-20260915/instrumented/  # as pokeemerald-headless.*
+python3 scripts/stamp_release_inputs.py --stamp .../instrumented/pokeemerald-headless.inputs.json
+python3 scripts/playthrough/battle_driver.py start … --build-dir .../instrumented
+```
+
+The root triple is never touched, so a concurrent session is never disturbed.
+Reading AI state out of a running battle needs no bridge change either: the
+driver already resolves ELF symbols, and the runner takes `--read WIDTH:ADDR`,
+so any global in my files can be sampled between turns from the session's
+savestate.
+
+## What the live battle said
+
+Per-battler trace on the turn Camerupt and Heatran arrive (turn 5, seed 409):
+
+```
+RAN=1  canMega=3  APPLY_FAILED=0  SCORED=0  best=0
+```
+
+The search ran, both of the pair could evolve, nothing failed to apply — and
+**no Mega board was ever scored**. Not allocation, not flags, not the party
+index: the boards were being thrown away before they could be compared.
+
+## Why
+
+A Mega board must rebuild the damage caches around the new form, and both of
+the search's stops discard that board when the clock is gone — the refresh is
+abandoned, and (since the group J depth fix) a board the caller may not stop on
+abandons itself entirely and returns `INT_MIN`. In an ordinary double the clock
+still has room when the Mega masks come up. In a two-owner multi three actors
+share one budget and it never does, so **every** Mega board scored `INT_MIN`.
+That is exactly why Excadrill and Crabominable evolved in the same session and
+Heatran and Camerupt did not.
+
+My first attempt passed `canStop = FALSE` for Mega boards, which made it
+strictly worse for the reason above — a good reminder that the depth fix
+changed what that argument means. The flag that means "this board finishes" is
+`mustFinish`, the one a countdown exit already uses.
+
+Also landed: the board where every usable Mega evolves is evaluated before the
+plain one, so a truncated decision keeps the Mega rather than losing it.
+Singles elect a usable Mega by default; doubles now agree when the comparison
+cannot be afforded.
+
+## Verified
+
+Same encounter, same seed, after the fix: the trace shows a Mega board scored
+and chosen for both owners, and turn six has **SPECIES_CAMERUPT_MEGA and
+SPECIES_HEATRAN_MEGA** on the field.
+
+This very likely also covers the K items — Kangaskhan, Machamp's lead Mega —
+and group V's last-slot Megas (Absol, Falinks, Raichu X): every one of them is
+a Mega that was never *considered*, on a board heavy enough to exhaust the
+clock, rather than one that was considered and declined.
+
+## Also in this pass
+
+`test/battle/ai/switch_in_forecast.c` pins the L(2)/O(4)/Q(3) shape: a frail
+reserve is not sent into the attack the player has already shown. It passes as
+written, so that six-room family does not reproduce this way either, and the
+fixture stands as a pin while I build a board that does.
