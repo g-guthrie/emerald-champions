@@ -160,6 +160,13 @@ python3 scripts/stamp_release_inputs.py --stamp pokeemerald-headless.inputs.json
 python3 scripts/stamp_release_inputs.py --check --stamp pokeemerald-headless.inputs.json
 ```
 
+To instrument the AI without disturbing a concurrent session, build the same
+ROM under another `BUILD_NAME` (`pokeemerald-instrumented.gba`), move the
+ROM/ELF into a scratch directory as `pokeemerald-headless.*`, stamp them there
+and pass that directory to the driver's `--build-dir`; the root triple is never
+written, and the driver's ELF symbol lookup plus the runner's `--read` sample
+any engine global between turns.
+
 Production explicitly excludes the fixture bridge. The headless ROM is for
 native development and separately labeled synthetic fixtures; do not present it
 as the normal player release. Keep each ROM, ELF and input stamp together.
