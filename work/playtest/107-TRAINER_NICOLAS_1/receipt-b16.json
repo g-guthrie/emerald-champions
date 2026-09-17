@@ -1,0 +1,108 @@
+{
+  "play_order": 107,
+  "e_group": "E0128",
+  "trainer": "TRAINER_NICOLAS_1",
+  "class": "ace",
+  "cap": 36,
+  "difficulty": "medium",
+  "pass": "build-16 AI rerun",
+  "purpose": "Measure commits 738e5a8809 (pair search no longer stops with only Protect boards scored for a body) and d50e8337c8 (no authored ACTIVATE trigger on the turn the recipient shields) against the prior receipt's Protect ledger.",
+  "build": {
+    "build_dir": "work/agent-battle-build-16",
+    "inputs_sha256": "448b369f7a06b9f64b7662605c2d39d2bb6a33a5ddfa60ccd7a6bb4d7007f1ab",
+    "stale_build_check": "PASS - driver asserted level_cap 36 from the ROM; no 'campaign cap did not reach N; the ROM reports 0' report."
+  },
+  "prior_receipt": "work/playtest/107-TRAINER_NICOLAS_1/receipt-rerun2.json (the most recent of three; receipt.json and receipt-rerun.json precede it)",
+  "reused_from_prior": {
+    "party_manifest": "work/playtest/107-TRAINER_NICOLAS_1/party.json",
+    "seed": 2107,
+    "why": "party.json / seed 2107 is receipt-rerun2's decisive (and only) attempt."
+  },
+  "not_a_pure_ab_note": "receipt-rerun2 itself raised Altaria's offset from +1 to +2, and that change is materialized in this build. So Altaria fought at L36 here against L35 in the run being compared. Every other member is unchanged: Exeggutor +3 (L37), Dracozolt +3 (L37), Dragonair +5 (L39).",
+  "resolved_levels_check": "PASS - live board matched cap + offset - 2 exactly: Exeggutor-Alola 37, Dracozolt 37, Dragonair 39, Altaria 36.",
+  "attempt": {
+    "n": 1,
+    "run_dir": "work/playtest/107-TRAINER_NICOLAS_1/b16",
+    "seed": 2107,
+    "party": "party.json",
+    "outcome": "won",
+    "turns": 4,
+    "decisions": 7,
+    "player_faints": 3,
+    "opponent_faints": 4,
+    "ai_decision_seconds_max": 1.021,
+    "ai_decision_budget": "PASS - 1.021s against the 1.2s complete opponent decision budget.",
+    "player_faints_detail": [
+      "Togekiss turn 1 (Hustle Bolt Beak, OHKO from full 141 HP on a switch-in board)",
+      "Excadrill turn 2 (Dragonair Dragon Pulse, at 2 HP after Flamethrower)",
+      "Weavile turn 2 (Exeggutor Draco Meteor, after Triple Axel rolled only one of its three hits)"
+    ],
+    "opponent_faints_detail": [
+      "Dracozolt turn 1 (Mold Breaker Earthquake, 2x)",
+      "Exeggutor-Alola turn 3 (Mega Gyarados Ice Fang, 4x)",
+      "Altaria turn 4 (Ice Fang, 4x - it was still Dragon/Flying because it never Mega Evolved)",
+      "Dragonair turn 5 (Ice Fang, 2x)"
+    ],
+    "narrative": "Turn 1 reproduced the prior run exactly: Bolt Beak OHKOed Togekiss before Earthquake removed Dracozolt, and Flamethrower left Excadrill on 2. Turn 2 diverged - Dragonair came in rather than Altaria, Triple Axel rolled one hit of three so Exeggutor lived on 75, and Draco Meteor plus Dragon Pulse took both of my remaining actives. Gyarados and Magnezone replaced them; Mega Gyarados's Mold Breaker Ice Fang then did all the remaining work at 4x, 4x and 2x, through a Thunder Wave paralysis, while Magnezone chipped. Three faints, which is the first time this room has cost that much."
+  },
+  "protect_ledger_build16": [],
+  "protect_summary_build16": {
+    "opponent_guards_total": 0,
+    "empty": 0,
+    "consecutive_same_battler": 0,
+    "note": "Zero opponent Protects in the whole battle. Three of Nicolas's four members carry Protect (Dracozolt, Dragonair, Altaria) and all three had live turns: Dracozolt attacked on turn 1, Dragonair chose Dragon Pulse, Thunder Wave and Dragon Pulse on its three turns, and Altaria chose Dragon Dance. Every one of those turns went to a real action instead of a guard."
+  },
+  "comparison_to_prior_receipt": {
+    "prior_ledger_scope": "receipt-rerun2.json (same party, same seed) recorded one opponent Protect: Altaria, turn 2, judged 'real, if modest' - a scouting guard on the turn after a forced switch-in that cost it the Dragon Dance turn.",
+    "empty_protects_before": 0,
+    "empty_protects_after": 0,
+    "consecutive_protects_before": 0,
+    "consecutive_protects_after": 0,
+    "total_guards_before": 1,
+    "total_guards_after": 0,
+    "verdict": "No regression, and the one guard that the prior receipt criticised on opportunity-cost grounds is gone. receipt-rerun2's own note on that Protect was that 'it cost Altaria the turn it could have spent on Dragon Dance, which is arguably the larger loss'. On build-16, on the same seed and the same party, Altaria spent that turn on Dragon Dance instead. Across the room's three prior receipts the worst guard was receipt-rerun's turn-4 Altaria Protect, the second consecutive one from the same battler at full HP, flagged there as 'a candidate for the Protect cadence tuning'; neither a repeat nor an empty guard occurred here.",
+    "caveat": "A zero-guard sample is weak evidence on its own. The battle lasted four turns and Nicolas has only four members, so the total number of opponent decisions was eight. Read this room as 'no empty or repeated guard, on a small sample' rather than as a strong confirmation.",
+    "prior_defects_retested": [
+      {
+        "id": "receipt.json AI defect 1: Dragonair did not use Thunder Wave",
+        "status": "RESOLVED. Turn 3: 'The opposing Dragonair used Thunder Wave!' and it paralyzed Mega Gyarados. That is the dossier's printed line ('Turn two can introduce Dragonair's Thunder Wave to create an actual move-first opportunity') firing for the first time in this room across four recorded runs."
+      }
+    ]
+  },
+  "strategy_checks": [
+    {"check": "Hustle-boosted Bolt Beak from full Speed on a switch-in is the centrepiece interaction", "result": "PASS - emphatically", "evidence": "Turn 1: Dracozolt moved first and Bolt Beak OHKOed a full-HP 141 Togekiss. This is the second run running where the centrepiece landed, and it is the single biggest hit the room has ever produced."},
+    {"check": "Wide Lens answers Hustle's accuracy drop", "result": "UNTESTED", "evidence": "Dracozolt got exactly one turn and did not miss. No accuracy evidence either way."},
+    {"check": "Exeggutor uses Helping Hand only when Dracozolt's attack benefits more than a second attack", "result": "PASS by absence", "evidence": "Dracozolt died on turn 1, and Exeggutor never selected Helping Hand on any of its three turns afterwards. It did not throw a support move at a partner that could not use it."},
+    {"check": "Dragonair's Thunder Wave creates an actual move-first opportunity", "result": "PASS", "evidence": "Turn 3: Thunder Wave paralyzed Mega Gyarados, quartering the Speed of the fastest thing on the field. It was late to matter, but it was the correct target and the correct move."},
+    {"check": "Altaria has a Dragon Dance / Mega mode", "result": "PARTIAL - the Dragon Dance fired, the Mega did not", "evidence": "Turn 4: 'The opposing Altaria used Dragon Dance!' with Attack and Speed up. It held the Altarianite for the whole battle and never transformed; it died the same turn as a Dragon/Flying body to a 4x Ice Fang. See AI defect P16-N2."},
+    {"check": "Harvest recycles Exeggutor's own Sitrus Berry", "result": "UNTESTED", "evidence": "Sitrus was consumed (item read as NONE from turn 2) but Exeggutor died on turn 3 before a Harvest roll could be observed."},
+    {"check": "Every opponent Protect has a payoff (the object of this pass)", "result": "PASS vacuously", "evidence": "No opponent Protect was selected; see protect_summary_build16."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P16-N1",
+      "severity": "real",
+      "turn": 3,
+      "board": "Exeggutor-Alola 75/152 at Sp. Atk -2, beside Dragonair, facing Gyarados (Water/Flying, not yet Mega) 125/125 and Magnezone (Electric/Steel) 107/107",
+      "chosen": "Draco Meteor, targeting Gyarados - a second Draco Meteor from a body whose Sp. Atk was already at -2 from its own first one",
+      "problem": "Draco Meteor is 1x into Water/Flying and the user is already at -2 Sp. Atk, so the effective output is roughly a quarter of a neutral hit, and using it again would have taken the attacker to -4 for the rest of the battle. The self-inflicted drop is a known, visible state of the user, not a hidden read.",
+      "better": "Giga Drain into the same target: Grass is 2x into Water/Flying, it is unaffected by the Sp. Atk drop's stacking problem, it heals a body sitting at half HP, and it does not debuff further. Flamethrower into Magnezone (2x into Electric/Steel) was also strictly better than a -2 Draco Meteor.",
+      "note": "Exeggutor died to Ice Fang before the move resolved, so no damage was lost in practice, but the selection is the AI's and is what is being scored. This is a move-repetition/self-debuff accounting issue, not a Protect issue."
+    },
+    {
+      "id": "P16-N2",
+      "severity": "real",
+      "turn": 4,
+      "board": "Altaria 133/133 holding ALTARIANITE, its trainer's authored Mega slot (mega_slots: 4), facing a Mega Gyarados that had revealed Ice Fang on the previous turn by KOing Exeggutor with it at 4x",
+      "chosen": "Dragon Dance, without Mega Evolving. Species stayed SPECIES_ALTARIA and no Mega Evolution message was printed for Nicolas at any point in the battle.",
+      "problem": "Mega Evolution is free - it costs no action and stacks with the chosen move. Transforming on that turn would have changed Altaria from Dragon/FLYING to Dragon/FAIRY, taking the revealed Ice Fang from 4x to 2x, and raised its bulk at the same time. Instead it set up in a typing that made the opposing Mega's revealed attack quadruple effective and died to it on that very turn without ever attacking. Ice Fang's effectiveness against it needed no committed-move read: it was a revealed move used on the immediately preceding turn, which AGENTS.md lists as knowledge the AI does have.",
+      "better": "Dragon Dance WITH Mega Evolution on the same turn, or Protect with Mega Evolution. Either keeps the ace alive.",
+      "note": "The AI is capable of this - receipt-rerun and receipt-rerun2 both record Altaria Mega Evolving. So this is an inconsistent selection rather than a missing capability, and it is worth tracing whether the Mega decision is being suppressed when the chosen action is a status move."
+    }
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NOT APPLIED, explicitly. The prior receipt's decision was +1 on Altaria (offset 1 -> 2), and that change is already materialized and was in force for this run. The rerun does not flip it. The brief's increase trigger needs a first-try win with 0-1 player faints and no real threat; this win cost 3 player faints, which is the AGENTS.md benchmark for a properly pressuring fight and the most this room has ever taken. The keep condition ('won with 2+ faints or after a real fight') applies directly. receipt-rerun2 also recorded that Exeggutor and Dracozolt have exhausted their +/-2 budget for this pass, so they were never candidates. No opponent line in the teams file was touched.",
+  "could_this_be_cooler": "The concept holds and needs no composition change; the +1 that receipt-rerun2 put on Altaria has visibly done its job, because this is the first run where the room took three Pokemon off a competent party rather than zero or one. Two things would make it read better, and both are AI rather than design: the ace should actually transform (defect P16-N2), and Exeggutor should stop feeding itself Draco Meteor drops (P16-N1). With those fixed, the intended shape - Bolt Beak opens, Thunder Wave reverses the race, Mega Altaria dances behind it - would finally appear in one battle. Right now the room's best moment is still the turn-1 OHKO, which is a fine opening but not a whole encounter.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-16. Not earned campaign traversal."
+}
