@@ -160,6 +160,15 @@ extern bool8 gAiPairBudgetTruncated;
 #define AI_PAIR_SKIP_PREDICTION     (1 << 4)
 #define AI_PAIR_SKIP_OWNER_MISMATCH (1 << 5)
 extern u32 gAiPairSkipReason;
+// Per battler Mega trace for a driven battle: whether the joint search ran,
+// which of the pair could evolve, whether a candidate failed to apply, whether
+// a mega board was scored at all, and what the search finally chose.
+#define AI_PAIR_MEGA_RAN          (1 << 0)
+#define AI_PAIR_MEGA_APPLY_FAILED (1 << 1)
+#define AI_PAIR_MEGA_SCORED       (1 << 2)
+#define AI_PAIR_MEGA_CAN_MASK     (3 << 4)
+#define AI_PAIR_MEGA_BEST_MASK    (3 << 6)
+extern u32 gAiPairMegaTrace[MAX_BATTLERS_COUNT];
 u32 NoOfHitsForTargetToFaintBattler(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure);
 void GetBestDmgMovesFromBattler(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum DamageCalcContext calcContext, enum Move *bestMoves);
 u32 GetMoveIndex(enum BattlerId battler, enum Move move);
