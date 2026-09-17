@@ -13393,8 +13393,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_FROSLASS @ ITEM_FOCUS_SASH
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_CURSED_BODY
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -13406,8 +13406,8 @@ Nature: NATURE_TIMID
 - MOVE_DESTINY_BOND
 
 SPECIES_MAGMORTAR @ ITEM_LIFE_ORB
-Level: 81
-Level Offset: 1
+Level: 82
+Level Offset: 2
 Ability: ABILITY_FLAME_BODY
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -26851,8 +26851,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 25
 
 SPECIES_MILOTIC @ ITEM_LEFTOVERS
-Level: 102
-Level Offset: 2
+Level: 103
+Level Offset: 3
 Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -26864,8 +26864,8 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_TOGEKISS @ ITEM_SITRUS_BERRY
-Level: 102
-Level Offset: 2
+Level: 103
+Level Offset: 3
 Ability: ABILITY_SERENE_GRACE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -27578,82 +27578,82 @@ Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
 Prize Multiplier: 25
 
-SPECIES_KYOGRE @ ITEM_MYSTIC_WATER
-Level: 102
-Level Offset: 2
+SPECIES_KYOGRE @ ITEM_BLUE_ORB
+Level: 106
+Level Offset: 6
 Ability: ABILITY_DRIZZLE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+EVs: 132 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 124 Spe
 Nature: NATURE_MODEST
-- MOVE_ORIGIN_PULSE
+- MOVE_WATER_SPOUT
 - MOVE_ICE_BEAM
 - MOVE_THUNDER
 - MOVE_PROTECT
 
-SPECIES_TORNADUS_THERIAN @ ITEM_FOCUS_SASH
-Level: 103
-Level Offset: 3
-Ability: ABILITY_REGENERATOR
+SPECIES_TORNADUS @ ITEM_COVERT_CLOAK
+Level: 104
+Level Offset: 4
+Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_TIMID
-- MOVE_BLEAKWIND_STORM
-- MOVE_HEAT_WAVE
 - MOVE_TAILWIND
+- MOVE_RAIN_DANCE
+- MOVE_BLEAKWIND_STORM
 - MOVE_PROTECT
 
-SPECIES_ZAPDOS @ ITEM_LIFE_ORB
-Level: 103
-Level Offset: 3
-Ability: ABILITY_PRESSURE
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
-Nature: NATURE_TIMID
-- MOVE_THUNDER
-- MOVE_HURRICANE
-- MOVE_HEAT_WAVE
-- MOVE_PROTECT
-
-SPECIES_LUGIA @ ITEM_LEFTOVERS
-Level: 102
-Level Offset: 2
-Ability: ABILITY_MULTISCALE
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
-Nature: NATURE_CALM
-- MOVE_AEROBLAST
-- MOVE_ICE_BEAM
-- MOVE_CALM_MIND
-- MOVE_PROTECT
-
-SPECIES_TERAPAGOS @ ITEM_LIFE_ORB
-Level: 102
-Level Offset: 2
-Ability: ABILITY_TERRA
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
-Nature: NATURE_MODEST
-- MOVE_TRI_ATTACK
-- MOVE_EARTH_POWER
-- MOVE_ICE_BEAM
-- MOVE_PROTECT
-
-SPECIES_MEWTWO @ ITEM_MEWTWONITE_X
-Level: 103
-Level Offset: 3
-Ability: ABILITY_UNNERVE
+SPECIES_ZERAORA @ ITEM_ZERAORITE
+Level: 105
+Level Offset: 5
+Ability: ABILITY_VOLT_ABSORB
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_ADAMANT
-- MOVE_DRAIN_PUNCH
-- MOVE_ZEN_HEADBUTT
-- MOVE_ICE_PUNCH
+Nature: NATURE_JOLLY
+- MOVE_FAKE_OUT
+- MOVE_PLASMA_FISTS
+- MOVE_CLOSE_COMBAT
+- MOVE_PROTECT
+
+SPECIES_THUNDURUS_THERIAN @ ITEM_LIFE_ORB
+Level: 104
+Level Offset: 4
+Ability: ABILITY_VOLT_ABSORB
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_MODEST
+- MOVE_WILDBOLT_STORM
+- MOVE_WEATHER_BALL
+- MOVE_SLUDGE_BOMB
+- MOVE_PROTECT
+
+SPECIES_LANDORUS @ ITEM_LIFE_ORB
+Level: 104
+Level Offset: 4
+Ability: ABILITY_SHEER_FORCE
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_MODEST
+- MOVE_SANDSEAR_STORM
+- MOVE_EARTH_POWER
+- MOVE_SLUDGE_BOMB
+- MOVE_PROTECT
+
+SPECIES_MAGEARNA @ ITEM_LEFTOVERS
+Level: 105
+Level Offset: 5
+Ability: ABILITY_SOUL_HEART
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_MODEST
+- MOVE_CALM_MIND
+- MOVE_FLASH_CANNON
+- MOVE_DAZZLING_GLEAM
 - MOVE_PROTECT
 
 === TRAINER_GRETA_SLATEPORT ===
