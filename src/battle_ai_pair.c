@@ -3268,7 +3268,22 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // authored interaction, so the reward is only paid if the recipient
             // is still standing when the turn ends.
             if (action->tacticScore)
-                tacticReward[actor] = action->tacticScore;
+            {
+                // The recipient's own shield blocks the activation this pair
+                // just chose. Three runs of an authored friendly critical hit
+                // never firing were this: Frost Breath aimed at a Tauros that
+                // was spending the same turn behind Protect. The pair picks
+                // both actions together, so it has no excuse for emitting a
+                // trigger its own partner will block.
+                enum BattlerId recipient = action->target;
+                if (recipient < gBattlersCount && recipient != actor
+                 && IsBattlerAlly(actor, recipient)
+                 && GetMoveEffect(actions[recipient].move) == EFFECT_PROTECT
+                 && actions[recipient].index != PAIR_IDLE)
+                    tacticReward[actor] = 0;
+                else
+                    tacticReward[actor] = action->tacticScore;
+            }
             // The complete turn owns protection's value. Applying the
             // isolated scorer again can prefer a blocked attack over a shield
             // that saves HP while producing the same damage on both sides.

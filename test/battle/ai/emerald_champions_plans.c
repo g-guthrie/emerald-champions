@@ -1998,3 +1998,26 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Wattson's Discharge activates Motor Drive before 
         EXPECT_EQ(opponentRight->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 1);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's activation survives a board that can fight back")
+{
+    GIVEN {
+        // The same authored pairing on a board with real attackers opposite,
+        // which is where the receipts say it stops firing: three runs chose
+        // Icy Wind instead, with every precondition for the activation held.
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(200); MaxHP(200); Attack(90); Defense(60); SpDefense(60); Speed(70); Ability(ABILITY_TELEPATHY); Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Attack(90); Defense(60); SpDefense(60); Speed(60); Moves(MOVE_TACKLE); }
+        AuthoredOpponent(TRAINER_AISHA, 3, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentLeft);
+            EXPECT_MOVE(opponentLeft, MOVE_FROST_BREATH, target: opponentRight);
+            // The recipient must not spend the same turn behind a shield: its
+            // own guard blocks the activation the pair just chose.
+            NOT_EXPECT_MOVE(opponentRight, MOVE_PROTECT);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], MAX_STAT_STAGE);
+    }
+}
