@@ -1,0 +1,140 @@
+{
+ "schema_version": 1,
+ "encounter": "E0498 Wally VR2 cap 100, party v2: Gholdengo swapped for Chi-Yu after a1 (Make It Rain's self-drop left it useless and Assault Vest Magearna walled the team; Chi-Yu's Overheat KOs Gallade, Heat Wave hits Magearna 2x, Dark is immune to the Psychic half)",
+ "availability_audit": "Champion (FLAG_IS_CHAMPION, cap 100). pool-100 gates: Chi-Yu 48 (legendary_sign AshenWoods, reachable legend; not level-penalised by the preparation API), others as in the League manifest (Kangaskhan 60 + Kangaskhanite 30, Whimsicott 14, Kingambit 54, Incineroar 36, Raging Bolt 60). No box legends (legend level penalty). Items are free ordinary held items.",
+ "plan": "Prankster Tailwind/Encore and Scrappy Fake Out open; Gholdengo Make It Rain/Shadow Ball and Kingambit Kowtow Cleave/Iron Head answer the Psychic and Fairy half; Incineroar Knock Off/Flare Blitz answer Magearna and Gallade; Raging Bolt Draco Meteor/Thunderbolt for Altaria before it dances.",
+ "party": [
+  {
+   "species": "SPECIES_KANGASKHAN",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_DOUBLE_EDGE",
+    "MOVE_SUCKER_PUNCH",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_JOLLY",
+   "ability": "ABILITY_SCRAPPY",
+   "item": "ITEM_KANGASKHANITE",
+   "evs": [
+    4,
+    252,
+    0,
+    0,
+    0,
+    252
+   ],
+   "role": "Scrappy Fake Out (hits Ghosts) then Mega Parental Bond closer",
+   "availability": "pool-96 gate 60, wild:SafariZone_East_Frlg; ITEM_KANGASKHANITE stone-window 30."
+  },
+  {
+   "species": "SPECIES_WHIMSICOTT",
+   "moves": [
+    "MOVE_TAILWIND",
+    "MOVE_MOONBLAST",
+    "MOVE_ENCORE",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_PRANKSTER",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Prankster Tailwind and Encore; Fairy chip on Dragons",
+   "availability": "pool-96 gate 14, evolution:item:ITEM_SUN_STONE from SPECIES_COTTONEE."
+  },
+  {
+   "species": "SPECIES_CHI_YU",
+   "moves": [
+    "MOVE_HEAT_WAVE",
+    "MOVE_DARK_PULSE",
+    "MOVE_OVERHEAT",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_TIMID",
+   "ability": "ABILITY_BEADS_OF_RUIN",
+   "item": "ITEM_FOCUS_SASH",
+   "evs": [
+    4,
+    0,
+    0,
+    252,
+    0,
+    252
+   ],
+   "role": "Beads of Ruin special attacker; Fire for Magearna/Gallade, Dark for the Psychics",
+   "availability": "pool-100 gate 48, legendary_sign:AshenWoods (reachable legend)."
+  },
+  {
+   "species": "SPECIES_KINGAMBIT",
+   "moves": [
+    "MOVE_KOWTOW_CLEAVE",
+    "MOVE_SUCKER_PUNCH",
+    "MOVE_IRON_HEAD",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_SUPREME_OVERLORD",
+   "item": "ITEM_ASSAULT_VEST",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Dark/Steel wall and late-game closer",
+   "availability": "pool-96 gate 54, evolution:level/condition from SPECIES_BISHARP."
+  },
+  {
+   "species": "SPECIES_INCINEROAR",
+   "moves": [
+    "MOVE_FAKE_OUT",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_KNOCK_OFF",
+    "MOVE_PARTING_SHOT"
+   ],
+   "nature": "NATURE_ADAMANT",
+   "ability": "ABILITY_INTIMIDATE",
+   "item": "ITEM_SITRUS_BERRY",
+   "evs": [
+    252,
+    252,
+    4,
+    0,
+    0,
+    0
+   ],
+   "role": "Intimidate/Fake Out pivot",
+   "availability": "pool-96 gate 36, evolution:level from SPECIES_TORRACAT."
+  },
+  {
+   "species": "SPECIES_RAGING_BOLT",
+   "moves": [
+    "MOVE_THUNDERCLAP",
+    "MOVE_THUNDERBOLT",
+    "MOVE_DRACO_METEOR",
+    "MOVE_PROTECT"
+   ],
+   "nature": "NATURE_MODEST",
+   "ability": "ABILITY_PROTOSYNTHESIS",
+   "item": "ITEM_BOOSTER_ENERGY",
+   "evs": [
+    252,
+    0,
+    4,
+    252,
+    0,
+    0
+   ],
+   "role": "Draco Meteor vs Dragons, Electric vs Waters, priority Thunderclap",
+   "availability": "pool-96 gate 60, wild:Route119/land_mons."
+  }
+ ]
+}

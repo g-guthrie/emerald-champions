@@ -1,0 +1,33 @@
+{
+  "trainer": "TRAINER_WALLY_VR_2", "e_group": "E0498", "play_order": 329, "cap": 100, "difficulty": "medium",
+  "party_manifest": "work/playtest/329-TRAINER_WALLY_VR_2/party_wally100_v2_leads.json",
+  "build_dir": "a1/a2 on work/agent-battle-build-9 (pre-fix), a3 on work/agent-battle-build-10; Mega Altaria evolved on its first action on both builds, so no Mega-related replay is required",
+  "attempts": [
+    {"seed": 1, "outcome": "lost", "turns": 11, "player_faints": 6, "opponent_faints": 4, "run_dir": "work/playtest/329-TRAINER_WALLY_VR_2/a1", "party": "v1 (Gholdengo)", "notes": "Psychic Terrain blocked Fake Out and Sucker Punch; Indeedee Follow Me + Gallade Sharpness Sacred Sword OHKO'd Mega Kangaskhan on T2; Make It Rain + Draco Meteor removed Indeedee/Gallade, Iron Head/Knock Off removed Gardevoir/Lele, then Assault Vest Magearna (+3 Soul-Heart) walled the -4 SpA Gholdengo and Fleur Cannon/Aura Sphere took the rest; my Thunderclap into Mega Altaria was a misread (Dragon resists Electric)."},
+    {"seed": 2, "outcome": "lost", "turns": 9, "player_faints": 6, "opponent_faints": 4, "run_dir": "work/playtest/329-TRAINER_WALLY_VR_2/a2", "party": "v2 (Chi-Yu)", "notes": "Same Kangaskhan-for-Indeedee trade; Overheat KO'd Gallade and Thunderbolt/Moonblast trades removed Gardevoir, but two Moonblasts KO'd Kingambit, Aura Sphere OHKO'd Incineroar from full (394) and Magearna at +3 then Mega Altaria finished a 1-HP Whimsicott."},
+    {"seed": 3, "outcome": "won", "turns": 8, "player_faints": 2, "opponent_faints": 6, "run_dir": "work/playtest/329-TRAINER_WALLY_VR_2/a3", "party": "v2, Chi-Yu + Whimsicott leads", "notes": "T1 Protect + Tailwind; T2-T3 two spread Heat Waves through Follow Me KO'd Gallade and (with Double-Edge) Indeedee while Whimsicott's Sash absorbed Psycho Cut; the AI switched Gardevoir out for Magearna into a 2x Heat Wave, which then KO'd Magearna T5 as Double-Edge OHKO'd Gardevoir; Lele Protected one Double-Edge and died to the next; Kingambit Iron Head (2x) KO'd Mega Altaria as it KO'd Kangaskhan with Pixilate Return."}
+  ],
+  "strategy_checks": [
+    {"check": "Indeedee Psychic Terrain on entry + Follow Me protecting Gallade", "result": "PASS", "evidence": "Terrain at turn 0 every attempt; Follow Me T1-T4 in all attempts redirected every single-target attack; only spread Heat Wave/Make It Rain reached Gallade. Terrain blocked my Fake Out and Sucker Punch (a1 T2, a3 T6)."},
+    {"check": "Gallade Sharpness Sacred Sword / Psycho Cut", "result": "PASS", "evidence": "Sacred Sword OHKO'd Mega Kangaskhan a1/a2 T2 (352); Psycho Cut on Whimsicott a3 T1-T2 (KO reads); Protect a2 T3 blocked a Heat Wave + Draco KO."},
+    {"check": "Gardevoir Trace copies the most valuable ability", "result": "PASS", "evidence": "Traced Good as Gold (a1) and Beads of Ruin (a2, a3) on entry."},
+    {"check": "Tapu Lele Psychic Surge re-establishes terrain, boosted Psychic/Psyshock", "result": "PASS", "evidence": "a3 T5 terrain reset to 5 turns on entry; Psychic chosen into Kangaskhan (a3 T7, would have KO'd); Protect a2 T6 / a3 T6 blocked KOs."},
+    {"check": "Magearna Soul-Heart snowball + Fleur Cannon", "result": "PASS", "evidence": "+1 per faint observed to +3 (a1); Fleur Cannon OHKO ranges on Raging Bolt forced two Protects; Aura Sphere OHKO'd Incineroar (a2 T7) and Kingambit's 4x weakness was correctly targeted with Mystical Fire on Gardevoir instead."},
+    {"check": "Mega Altaria Pixilate Return + Dragon Dance closer", "result": "PASS", "evidence": "Mega Evolved on first action all three attempts; Dragon Dance a1 T8 then +1 Return KO'd Whimsicott/Bolt; a3 Return chosen every turn (KO reads) and KO'd Kangaskhan on the last turn."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 6, "battler": "Indeedee", "payoff": "n/a (Protect not chosen)"},
+    {"attempt": 2, "turn": 3, "battler": "Gallade", "payoff": "blocked Heat Wave + Draco Meteor (KO)"},
+    {"attempt": 2, "turn": 6, "battler": "Tapu Lele (entry)", "payoff": "blocked Fake Out (chip)"},
+    {"attempt": 2, "turn": 8, "battler": "Tapu Lele", "payoff": "blocked Dark Pulse (KO)"},
+    {"attempt": 3, "turn": 3, "battler": "Indeedee", "payoff": "blocked Heat Wave + Double-Edge (KO)"},
+    {"attempt": 3, "turn": 6, "battler": "Tapu Lele (entry)", "payoff": "blocked Double-Edge (KO)"}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "AI", "description": "a3 T4: the AI hard-switched Gardevoir out for Magearna while Chi-Yu's spread Heat Wave was selected; Magearna (Steel/Fairy) took it 2x on entry and died to the next Heat Wave before acting. Same switch-into-super-effective family as 327/328."}
+  ],
+  "level_changes": [],
+  "calibration": "Lost twice (4-6, 4-6), won 6-2 on the third attempt after changing leads; two faints in the win. A real post-League fight - keep offsets 1/2/2/2/2/3.",
+  "cooler": "The rival arc lands: Follow Me + Sharpness Gallade is a genuinely hard opening and the Altaria payoff is memorable. Cooler still if the AI did not switch Magearna into a spread Fire attack; Gallade's Night Slash was never chosen even into Gholdengo (2x), where it was the KO.",
+  "legality": "No legality problem found in the authored set."
+}
