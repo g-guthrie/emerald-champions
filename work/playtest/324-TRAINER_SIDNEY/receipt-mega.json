@@ -1,0 +1,37 @@
+{
+  "play_order": 324, "e_group": "E0493", "trainer": "TRAINER_SIDNEY", "cap": 96, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Does Mega Absol Z now Mega-Evolve on its first action, and does Yveltal set Tailwind?",
+  "party_manifest": "work/playtest/324-TRAINER_SIDNEY/party_sidney96.json",
+  "party_reuse": "Unchanged from receipt.json (seed 16); same cap 96 and location, chronology audit unchanged.",
+  "level_offsets_at_run": {"INCINEROAR": 4, "YVELTAL": 0, "GRIMMSNARL": 4, "URSHIFU": 1, "SHARPEDO": 2, "ABSOL": 0},
+  "resolved_opponent_levels": {"INCINEROAR": 98, "YVELTAL": 94, "GRIMMSNARL": 98, "URSHIFU": 95, "SHARPEDO": 96, "ABSOL": 94},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/324-TRAINER_SIDNEY/m1", "seed": 16, "outcome": "won", "turns": 8, "player_faints": 5, "opponent_faints": 6,
+     "narrative": "T1 Psychic Terrain denied Fake Out; two Moonblasts KO'd Yveltal before its Oblivion Wing; Flare Blitz put Flutter Mane on its Sash. T2 Flutter Mane out to Urshifu; Grimmsnarl Light Screen; Moonblast 277 into Grimmsnarl. T3 Grimmsnarl Reflect; Close Combat KO'd Incineroar, Moonblast KO'd Grimmsnarl. T4 SHARPEDO MEGA-EVOLVED ON ITS FIRST ACTION and Psychic Fangs hit Urshifu's Protect; Tapu Lele out to Sylveon, which took a crit Wicked Blow (138). T5 Mega Sharpedo Psychic Fangs OHKO'd Sylveon (240) before Hyper Voice; my Close Combat KO'd Mega Sharpedo; Sidney's Urshifu Close Combat KO'd my Urshifu. T6 Incineroar + Kangaskhan in; ABSOL ENTERED (Intimidated) AND DID NOT MEGA-EVOLVE: the trainer's one Mega was already spent on Sharpedo (state: mega_already_used true). Fake Out flinched Urshifu, Mega Double-Edge took it to 33; Absol Close Combat 2x into Kangaskhan. T7 Sucker Punch (Parental Bond) 69 into Absol; Urshifu's crit Close Combat OHKO'd Incineroar (378); Absol Close Combat KO'd Kangaskhan. T8 Tapu Lele + Flutter Mane back in (terrain reset); Flutter Mane Moonblast KO'd Absol; Wicked Blow KO'd Tapu Lele before Dazzling Gleam. T9 (no advance) Flutter Mane at 1 HP Moonblast KO'd the 33-HP Urshifu under Psychic Terrain (Sucker Punch blocked)."}
+  ],
+  "mega_check": [
+    {"species": "SHARPEDO", "evolved": true, "turn": 4, "first_action": true, "board": "Sharpedo 271/271 enters end of T3 beside Urshifu 325/325 vs Tapu Lele 190/271 (switching to Sylveon) and Urshifu 244/328. Mega Evolution then Psychic Fangs."},
+    {"species": "ABSOL", "evolved": false, "turn": 6, "first_action": false, "board": "Absol 256/256 @Absolite Z enters end of T5 beside Urshifu 325/325 (-1 Def/SpD) vs Incineroar 378/378 and Kangaskhan 338/338 (Mega unused). Driver: usable_gimmick 'mega', mega_already_used TRUE. The trainer had already Mega-Evolved Sharpedo on T4, so Absol was never eligible; it chose Close Combat into Kangaskhan on T6, Close Combat again on T7 and Knock Off on T8, and was KO'd by Moonblast. This is the one-Mega-per-trainer rule, not the pair-search fix failing: the authored line carries two stones (mega_slots 5,6) and only the first holder to act can ever evolve."}
+  ],
+  "strategy_checks": [
+    {"check": "Mega Absol Z Mega-Evolves on first action", "result": "FAIL (rules, not AI)", "evidence": "See mega_check. With Sharpedo evolving first every time (it is party slot 5 and enters first), Absol's stone can never fire. Reported as a legality/design problem in the authored set."},
+    {"check": "Sharpedo Mega timing", "result": "PASS", "evidence": "T4 Mega on its first action (no Speed Boost turn taken first); Strong Jaw Psychic Fangs OHKO'd Sylveon T5."},
+    {"check": "Yveltal Tailwind / Dark Aura", "result": "FAIL", "evidence": "T1 Yveltal chose Oblivion Wing into Tapu Lele and was KO'd by two Moonblasts before moving; Tailwind was never selected. Same as receipt.json."},
+    {"check": "Grimmsnarl Prankster screens", "result": "PASS", "evidence": "T2 Light Screen, T3 Reflect, both up for the whole fight."},
+    {"check": "Urshifu Wicked Blow protection-breaking", "result": "PASS", "evidence": "Crit Wicked Blow into Sylveon T4 and KO on Tapu Lele T8; crit Close Combat OHKO'd Incineroar T7."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS (none used)", "evidence": "No opposing Protect; Absol attacked on entry instead of the prior run's empty Protect."}
+  ],
+  "protect_ledger": [],
+  "ai_defects": [
+    {"id": "E0493-M1", "severity": "medium", "turn": 1, "battler": "YVELTAL", "board": "Lead Yveltal 370/370 beside Incineroar vs Tapu Lele + Flutter Mane (two Fairies, Psychic Terrain).", "chosen": "Oblivion Wing into Tapu Lele", "better": "Tailwind (the authored TAILWIND strategy) so Incineroar and the reserves outspeed the two 135/95-speed Fairies; Yveltal cannot win the damage race into two Fairies and died before acting in both benchmarked runs."}
+  ],
+  "legality_problems_in_authored_set": [
+    "mega_slots 5,6 gives Sidney two Mega stones; the engine allows one Mega Evolution per trainer per battle, so Absolite Z is dead weight whenever Sharpedo enters first (it always does: slot 5 precedes slot 6). Either give Absol a different item or make Absol the sole Mega."
+  ],
+  "difficulty_reading": "Harder than the prior receipt (3 faints there): five faints in eight turns, decided by Sharpedo's Mega on its first action (Sylveon OHKO'd before Hyper Voice) and two crit Urshifu hits. The Elite Four fight is at or above the three-faint bar. Keep.",
+  "level_changes": {"rule_applied": "KEEP (won with 5 faints after a real fight).", "changes": []},
+  "could_this_be_cooler": "Unchanged from receipt.json, plus: the second Mega stone is a design error, not a flourish - Absol needs a real item (Life Orb / Focus Sash) or Sharpedo loses its stone so Mega Absol Z is the finale.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}

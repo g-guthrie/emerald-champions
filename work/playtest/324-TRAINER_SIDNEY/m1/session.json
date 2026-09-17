@@ -1,0 +1,40 @@
+{
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "elf_sha256": "7cb4b4533332dea3d8fc3041ce601ed5206316bd1282a9b0ea6b10db1adebce8",
+  "seed": 16,
+  "trainer_a": "TRAINER_SIDNEY",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 96,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/324-TRAINER_SIDNEY/party_sidney96.json",
+  "party_sha256": "39b60810d44dc4b259a47422b666d68e2e8ed48d60af1c8ca411d4fff22482b5",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD"
+  ],
+  "prepared": {
+    "encounter": "E0493 Sidney (Elite Four room 1) cap 96 - Fairy pressure party",
+    "party": 6
+  },
+  "started": {
+    "frames": 3261
+  },
+  "replacement_commits": {
+    "turn": 8,
+    "slots": {}
+  }
+}
