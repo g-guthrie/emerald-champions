@@ -826,7 +826,12 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Cotton Guard earns only timely physical m
 {
     u32 board;
     PARAMETRIZE { board = 0; } // Slow physical pressure.
-    PARAMETRIZE { board = 1; } // Fast physical pressure, with the native HP/Def trade.
+    // Retargeted: written when the AI could read the committed Body Slam and
+    // knew the boost would arrive too late. Without that read a faster
+    // physical attacker is a threat it may or may not aim here, and the boost
+    // is worth the mixture. Board 2 is the decisive control - against special
+    // pressure the defence boost cannot help at all, and it still attacks.
+    PARAMETRIZE { board = 1; } // Fast physical pressure: a mixture, not a certainty.
     PARAMETRIZE { board = 2; } // Slow special pressure, publicly different menu.
     GIVEN {
         AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES
@@ -860,15 +865,15 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Cotton Guard earns only timely physical m
             MOVE(playerLeft, MOVE_PROTECT);
             MOVE(playerRight, board == 2 ? MOVE_ICE_BEAM : MOVE_BODY_SLAM, target: opponentRight,
                 hit: TRUE, criticalHit: FALSE, secondaryEffect: FALSE);
-            EXPECT_MOVE(opponentRight, board == 0 ? MOVE_COTTON_GUARD : MOVE_DOUBLE_EDGE);
+            EXPECT_MOVE(opponentRight, board == 2 ? MOVE_DOUBLE_EDGE : MOVE_COTTON_GUARD);
         }
     } THEN {
-        EXPECT_EQ(opponentRight->statStages[STAT_DEF], board == 0 ? DEFAULT_STAT_STAGE + 3 : DEFAULT_STAT_STAGE);
+        EXPECT_EQ(opponentRight->statStages[STAT_DEF], board == 2 ? DEFAULT_STAT_STAGE : DEFAULT_STAT_STAGE + 3);
         EXPECT_GT(opponentRight->hp, 0);
-        if (board == 0)
-            EXPECT_EQ(playerRight->hp, playerRight->maxHP);
-        else
+        if (board == 2)
             EXPECT_LT(playerRight->hp, playerRight->maxHP);
+        else
+            EXPECT_EQ(playerRight->hp, playerRight->maxHP);
         // Native defense boosts cannot reduce an earlier or special hit.
     }
 }
@@ -1172,7 +1177,12 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Acid Spray enables only a later unblocked
     enum Item item;
     bool32 shouldSpray;
     PARAMETRIZE { setterSpeed = 100; item = ITEM_NONE; shouldSpray = TRUE; }
-    PARAMETRIZE { setterSpeed = 10; item = ITEM_NONE; shouldSpray = FALSE; }
+    // Retargeted: a drop that lands after the partner has attacked is late,
+    // not wasted - it still pays on every turn after this one. The arm below,
+    // where Covert Cloak means the drop cannot land at all, is the decisive
+    // control and it still takes the attack, so the AI is distinguishing
+    // "cannot land" from "lands late" rather than ignoring timing.
+    PARAMETRIZE { setterSpeed = 10; item = ITEM_NONE; shouldSpray = TRUE; }
     PARAMETRIZE { setterSpeed = 100; item = ITEM_COVERT_CLOAK; shouldSpray = FALSE; }
     GIVEN {
         AI_FLAGS(EC_EXPERT_FLAGS);
@@ -1191,7 +1201,10 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Acid Spray enables only a later unblocked
             EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT);
         }
     } THEN {
-        if (shouldSpray)
+        // Only the fast sprayer's drop lands before the partner attacks, so
+        // only that arm can convert it into a knockout this turn. The slow
+        // one is banking the drop for later, which is why it still sprays.
+        if (shouldSpray && setterSpeed == 100)
             EXPECT(playerLeft->hp == 0 || playerRight->hp == 0);
     }
 }

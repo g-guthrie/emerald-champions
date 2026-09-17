@@ -1132,6 +1132,27 @@ static u32 PairGuardBankedShare(const struct PairEvaluation *ev, enum BattlerId 
     return min(100, banked);
 }
 
+// Whether anything on the other side can still hit this body on the given
+// side of the damage split. A Defense boost against a purely special board
+// buys the turn nothing, exactly as an Attack boost does on a special set.
+static bool32 PairFacesCategory(enum BattlerId battler, enum DamageCategory category)
+{
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(battler, foe))
+            continue;
+        for (u32 index = 0; index < MAX_MON_MOVES; index++)
+        {
+            enum Move move = gBattleMons[foe].moves[index];
+            if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IsBattleMoveStatus(move))
+                continue;
+            if (GetBattleMoveCategory(move) == category)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 // Whether a burn on this body takes anything off its offence.
 static bool32 PairAttacksPhysically(enum BattlerId battler)
 {
@@ -4739,6 +4760,23 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 || statStage[actor][1] > gBattleMons[actor].statStages[STAT_DEF]
                 || statStage[actor][2] > gBattleMons[actor].statStages[STAT_SPDEF]
                 || statStage[actor][3] > gBattleMons[actor].statStages[STAT_SPATK];
+        // The same rule on the defensive half: a Defense boost with nothing
+        // physical on the other side, or a Special Defense boost with nothing
+        // special, mitigates damage that is not coming. A Cotton Guard against
+        // a purely special board was still collecting the full horizon.
+        if (raised && !(speedStage[actor] > gBattleMons[actor].statStages[STAT_SPEED])
+         && !(statStage[actor][0] > gBattleMons[actor].statStages[STAT_ATK])
+         && !(statStage[actor][3] > gBattleMons[actor].statStages[STAT_SPATK]))
+        {
+            bool32 useful = FALSE;
+            if (statStage[actor][1] > gBattleMons[actor].statStages[STAT_DEF]
+             && PairFacesCategory(actor, DAMAGE_CATEGORY_PHYSICAL))
+                useful = TRUE;
+            if (statStage[actor][2] > gBattleMons[actor].statStages[STAT_SPDEF]
+             && PairFacesCategory(actor, DAMAGE_CATEGORY_SPECIAL))
+                useful = TRUE;
+            raised = useful;
+        }
         if (raised)
             score += sign * PAIR_SETUP_HORIZON * (s32)survival[actor] / 100;
     }
