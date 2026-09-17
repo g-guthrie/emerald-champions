@@ -2401,3 +2401,76 @@ chosen slot, and the two lines that carry it.
 It also predicts the receipt's shape exactly: Water Spout was skipped at full
 health with a priority flincher opposite, and taken at 58 and 70 percent on
 build-13 when no flincher was on the field.
+
+# Y(3), taken up next session: the diagnosis does not survive the replay
+
+Measured on the same board, same build, same seed as the section above, with a
+probe build that records — per forecast — the HP fed to the HP-scaled power,
+the user's `survival` and `actionChance` at that moment, whether it was
+`stopped`, the forecast's actual foe moves, and the best board score for each
+of Kyogre's four slots.
+
+Board reproduced first, independently: Wallace E0497, seed 1, cap 96, Mega
+Kangaskhan + Whimsicott against Kyogre + Tapu Fini. At 322/322 the damage cache
+reads Water Spout 484, Ice Beam 250, Origin Pulse 355, and Kyogre chooses
+Origin Pulse. All of that is exactly as reported.
+
+## What the probe says
+
+| | forecast 0 (55) | forecast 1 (30) | forecast 2 (15) | foes idle (diagnostic) |
+| --- | --- | --- | --- | --- |
+| foe moves | Double-Edge + Moonblast | Double-Edge + Moonblast | Protect + Tailwind | none |
+| Kyogre HP when it acts | 51 | 139 | 322 | 322 |
+| `survival` / `actionChance` | 100 / 10000 | 100 / 10000 | 100 / 10000 | 100 / 10000 |
+| `stopped` | none | none | none | none |
+| Water Spout | 129 | 91 | 140 | **408** |
+| Ice Beam | 175 | 176 | 196 | 242 |
+| Origin Pulse | **313** | **314** | **186** | 395 |
+
+Forecast 0's row and the idle row are exhaustive over every pair; forecast 1
+and 2's are restricted to the shortlist, so read those two as indicative only.
+
+## Three things that follow
+
+**Fake Out is not in the forecast, and no branch fails to act.** `stopped` is
+never set on any battler in any forecast; the two forecasts that attack use
+Double-Edge and Moonblast. `survival[Kyogre]` is 100 and `actionChance[Kyogre]`
+is 10000 throughout — the damage lands in `PairApplyDamage`'s non-lethal branch,
+so 51 and 139 are *certain* HP, not a blend over anything. There is no
+not-acting mass in `hp[actor]` to remove, and the proposed change would be a
+no-op on this board. The receipt correlation was real but the cause was
+misattributed: Mega Kangaskhan is both the priority flincher and the only large
+physical threat, and it is the threat that does the work.
+
+**The power formula and its consumers are right at full health.** With the foes
+idle and Kyogre certain to act at 322/322, Water Spout wins on its own merits,
+408 against Origin Pulse's 395. `power_pricing.c` and the re-pointed
+`joint_conflicts.c` pin agree.
+
+**What actually reverses it is the forecast's damage, and it is defensible.**
+Both attacking forecasts put Double-Edge on Kyogre — the alternate mask moves
+Moonblast off it, never Double-Edge — so 85% of the weight sits on branches
+where Kyogre has lost between 57% and 84% of its HP before it moves. At 51 HP
+Water Spout's power is 150 → 23 and it does about 74; Origin Pulse still does
+355 and still removes Kangaskhan. Origin Pulse is the better move in those
+branches. The full-health branch is the only one that favours Water Spout, and
+it carries 15%.
+
+The asymmetry is structural rather than buggy: Water Spout's downside under an
+assume-they-hit-me forecast is enormous, while its upside on this particular
+board is tiny, because Whimsicott's Focus Sash survives either spread and
+Kangaskhan dies to either. Water Spout's real edge here is that its KO is
+guaranteed at 100% accuracy where Origin Pulse's is neither — and that edge is
+priced at 13 points. Whether a guaranteed KO on a Mega is worth only 13 is a
+separate and much smaller question than the one reported, and it is the only
+thread out of Y(3) I would still pull.
+
+**No source change.** 209 passed, 6 failed on the allowlist (every
+`test/battle/ai/*.c`, `--filter 'EC '`), the six being the known pre-existing
+`ai_doubles.c` reds. Nothing was landed, so nothing moved.
+
+One adjacent gap worth recording, not fixed: `ChooseJointFoeForecast` picks the
+foes' highest-damage joint action without pricing what that action costs them.
+Double-Edge into a 322-HP Kyogre costs Kangaskhan about a third of its own
+health. The trial charges that recoil once the forecast is chosen; the chooser
+does not see it.
