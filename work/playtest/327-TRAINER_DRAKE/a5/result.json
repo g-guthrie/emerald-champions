@@ -1,0 +1,33 @@
+{
+  "trainer_a": "TRAINER_DRAKE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 5,
+  "difficulty": "medium",
+  "level_cap": 96,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 9,
+  "decisions": 12,
+  "player_faints": 3,
+  "opponent_faints": 6,
+  "ai_decision_frames_max": 61,
+  "ai_decision_seconds_max": 1.021,
+  "ai_decision_frames": [
+    52,
+    56,
+    38,
+    57,
+    54,
+    54,
+    61,
+    61,
+    61,
+    32,
+    16,
+    16
+  ],
+  "rom_sha256": "b1df7d639bf416388afda5f2e371664f0c9b63eaece962f5b0252ceabd8883bc",
+  "elf_sha256": "8b058ef305937ffce1cdf49cf58bff36088d9527c5d0bb2881d32e334f52863c",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}

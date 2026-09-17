@@ -1,0 +1,40 @@
+{
+  "rom_sha256": "b1df7d639bf416388afda5f2e371664f0c9b63eaece962f5b0252ceabd8883bc",
+  "elf_sha256": "8b058ef305937ffce1cdf49cf58bff36088d9527c5d0bb2881d32e334f52863c",
+  "seed": 5,
+  "trainer_a": "TRAINER_DRAKE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 96,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/327-TRAINER_DRAKE/party_league96_v3.json",
+  "party_sha256": "59ce47ebb579b68466887555886daedd8707a3eda9915612ed0bb87d3cbfcdf0",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD"
+  ],
+  "prepared": {
+    "encounter": "League run E0494-E0497 cap 96, party v3 (rebuilt after Drake a1/a2 losses with v2: Chi-Yu and Rillaboom were resisted by every Drake member, Xerneas enters at L84 under the legend penalty and never got a second turn)",
+    "party": 6
+  },
+  "started": {
+    "frames": 2978
+  },
+  "replacement_commits": {
+    "turn": 9,
+    "slots": {}
+  }
+}
