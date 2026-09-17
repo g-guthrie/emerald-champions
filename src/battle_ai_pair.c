@@ -1293,9 +1293,14 @@ u32 gAiPairMegaTrace[MAX_BATTLERS_COUNT];
 // path, and say whether the decision clock had already run out when it did.
 u32 gAiSwitchTrace[MAX_BATTLERS_COUNT];
 // Per battler: whether the chosen action was a guard, and by how much the
-// winning board beat the best board in which that battler attacked instead.
-// An empty guard that wins by a hair is a different story from one that wins
-// by a mile, and a receipt cannot tell them apart.
+// winning board beat the best scored pair in which that battler attacked
+// instead. An empty guard that wins by a hair is a different story from one
+// that wins by a mile, and a receipt cannot tell them apart. The margin now
+// comes from every pair the final scoring reached, on every candidate board;
+// reading it off the winning pair alone made a board whose best pair shielded
+// report the 4095 sentinel even though attacking pairs had been scored and
+// lost, which is a completely different defect. 4095 now means what it says:
+// no pair in which this body attacked reached the final scoring at all.
 u32 gAiGuardTrace[MAX_BATTLERS_COUNT];
 // Per battler, per move slot: the largest simulated damage that move has
 // against anything on the other side, as the decision saw it. Enough to tell a
@@ -4944,8 +4949,15 @@ static bool32 RefreshPairMoveData(u32 noActionMask, bool32 canStop)
 }
 
 
-static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct PairAction *chosen, struct PairEvaluation *ev, bool32 refresh, bool32 canStop, bool32 mustFinish)
+// nonGuard, when supplied, comes back holding the best final score this board
+// reached with each of the two bodies doing something other than shielding -
+// the comparison the guard trace's margin is asking for. It is INT_MIN when no
+// such pair reached the final scoring, which is itself the answer to a
+// different question and is reported separately rather than folded in.
+static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct PairAction *chosen, struct PairEvaluation *ev, bool32 refresh, bool32 canStop, bool32 mustFinish, s32 *nonGuard)
 {
+    if (nonGuard != NULL)
+        nonGuard[0] = nonGuard[1] = INT_MIN;
     s32 best = INT_MIN;
     struct PairDefenderItemCache *defenderItem[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
     struct PairRageCache *rage[MAX_BATTLERS_COUNT];
@@ -5192,6 +5204,19 @@ settle:
             }
         }
         s32 score = (total / 100 * (100 - PAIR_RISK_AVERSION) + worst * PAIR_RISK_AVERSION) / 100;
+        if (nonGuard != NULL)
+        {
+            // Every scored pair, not just the one that won. The old margin was
+            // fed only the winning pair of each outer candidate board, so a
+            // board whose best pair shielded reported "nothing attacked" even
+            // when attacking pairs had been scored and lost.
+            const struct PairAction *entry[2] = {&ev->action[actor], &ev->action[partner]};
+            for (u32 index = 0; index < 2; index++)
+                if (entry[index]->index != PAIR_IDLE
+                 && GetMoveEffect(entry[index]->move) != EFFECT_PROTECT
+                 && score > nonGuard[index])
+                    nonGuard[index] = score;
+        }
         if (score > best)
         {
             best = score;
@@ -5236,7 +5261,7 @@ s32 AI_EvaluateDoublesCandidate(enum BattlerId battler, u32 noActionMask)
         return INT_MIN;
     }
     struct PairEvaluation *ev = AllocZeroed(sizeof(*ev));
-    s32 score = EvaluatePairBoard(battler, noActionMask, NULL, ev, TRUE, FALSE, FALSE);
+    s32 score = EvaluatePairBoard(battler, noActionMask, NULL, ev, TRUE, FALSE, FALSE, NULL);
     FreePairEvaluation(ev);
     return score;
 }
@@ -5922,11 +5947,16 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 // and it never does, so every Mega board scored INT_MIN and no
                 // Mega ever evolved. A form change is not optional work, so
                 // the Mega boards finish the way a countdown exit does.
+                s32 boardNonGuard[2];
                 s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev,
                     mega != 0 || noActionMask != 0, canStop,
-                    deadline[0] || deadline[1] || mega != 0);
+                    deadline[0] || deadline[1] || mega != 0, boardNonGuard);
                 if (score == INT_MIN)
                     continue;
+                // The adjustments below belong to the whole board, so they
+                // apply equally to its attacking pairs. Carry them across so
+                // the margin compares two numbers on one scale.
+                s32 boardRaw = score;
                 if (mega != 0)
                 {
                     score += PAIR_MEGA_HORIZON;
@@ -5985,10 +6015,9 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 if (slots[0] >= PARTY_SIZE && slots[1] >= PARTY_SIZE && score > bestStay)
                     bestStay = score;
                 for (u32 index = 0; index < 2; index++)
-                    if (chosen[index].index != PAIR_IDLE
-                     && GetMoveEffect(chosen[index].move) != EFFECT_PROTECT
-                     && score > bestNonGuard[index])
-                        bestNonGuard[index] = score;
+                    if (boardNonGuard[index] != INT_MIN
+                     && boardNonGuard[index] + (score - boardRaw) > bestNonGuard[index])
+                        bestNonGuard[index] = boardNonGuard[index] + (score - boardRaw);
                 if (score > best || (score == best && tieCost < bestTieCost))
                 {
                     best = score;

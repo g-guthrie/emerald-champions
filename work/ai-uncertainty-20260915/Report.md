@@ -2474,3 +2474,50 @@ foes' highest-damage joint action without pricing what that action costs them.
 Double-Edge into a 322-HP Kyogre costs Kangaskhan about a third of its own
 health. The trial charges that recoil once the forecast is chosen; the chooser
 does not see it.
+
+# The guard margin was measuring the wrong thing
+
+`gAiGuardTrace`'s margin was fed from one place only: the winning pair of each
+outer candidate board (`bestNonGuard`, written from `chosen[index]`).
+`EvaluatePairBoard` never reported a within-board attacking runner-up. So when
+a board's best pair shielded — and the stay board is usually the only candidate
+— `bestNonGuard` stayed `INT_MIN` and the margin came out as the 4095 sentinel,
+**whether or not attacking pairs had been scored**. The sentinel could not
+distinguish "no attacking board was scored" from "attacking boards were scored
+and lost", which are different defects with different fixes.
+
+`EvaluatePairBoard` now returns, per body, the best **final** score it reached
+with that body doing something other than shielding, collected over every pair
+the settle loop scored rather than the one that won. The outer loop carries the
+board's own adjustments (Mega horizon, switch commitment, forced-exit and
+early-pivot credit) across, so the margin still compares two numbers on one
+scale. 4095 now means what it says: no pair in which that body attacked reached
+the final scoring.
+
+Instrumentation only; no scoring path changed. **209 passed, 6 failed** on the
+allowlist — the same six pre-existing `ai_doubles.c` reds, byte for byte the
+same failures as before the change. Budget fixtures unchanged: Dancer 60,
+Mega 62, Laura 61, Ned wind 51, Misty 46, Darius 25, Nate 14, all of 72.
+
+## Y(4) re-read on Wallace: the guard is defended, by a lot
+
+Same board, same seed, the fixed instrument:
+
+```
+turn 1   Kyogre   guard=0
+turn 2   Kyogre   guard=1   margin 194
+```
+
+Kyogre is at 231/322 and both player actions went to Tapu Fini, so the receipt
+is right that nothing was aimed at it. But **194** is not a guard that scraped
+in; it beats the two turn-4 guards the previous pass measured at 111 and 152 and
+judged correct. Mega Kangaskhan's Parental Bond Double-Edge is live and lethal
+into 231, and under the no-read rule the AI cannot know it was aimed elsewhere.
+That is a guard the model defends, not an empty one.
+
+The old 4095 reading on this turn was the artifact described above, not a
+surviving instance of the `738e5a8809` defect.
+
+**This invalidates the three-board pattern** (Kyogre turn 2 on Wallace, Zekrom
+turn 3 on Drake, Chimecho turn 4 on Virgil) until Drake and Virgil are re-read
+with the fixed instrument. One of the three has now come back defensible.
