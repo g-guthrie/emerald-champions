@@ -640,7 +640,6 @@ struct SaveBlock2
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
-    /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
     // Append-only overflow keeps the original SaveBlock2 offsets intact.
     struct ItemSlot bagPocketPokeBalls[BAG_POKEBALLS_COUNT - BAG_LEGACY_POKEBALLS_COUNT];
@@ -852,19 +851,6 @@ struct RecordMixingGift
     struct RecordMixingGiftData data;
 };
 
-struct ContestWinner
-{
-    u32 personality;
-    u32 trainerId;
-    enum Species species;
-    u8 contestCategory;
-    u8 monName[VANILLA_POKEMON_NAME_LENGTH + 1];
-    u8 trainerName[PLAYER_NAME_LENGTH + 1];
-    u8 contestRank:7;
-    bool8 isShiny:1;
-    //u8 padding;
-};
-
 struct Mail
 {
     /*0x00*/ u16 words[MAIL_WORDS_COUNT];
@@ -928,23 +914,10 @@ struct LilycoveLadyFavor
     /*0x013*/ //u8 padding2;
 };
 
-struct LilycoveLadyContest
-{
-    /*0x000*/ u8 id;
-    /*0x001*/ bool8 givenPokeblock;
-    /*0x002*/ u8 numGoodPokeblocksGiven;
-    /*0x003*/ u8 numOtherPokeblocksGiven;
-    /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x00C*/ u8 maxSheen;
-    /*0x00D*/ u8 category;
-    /*0x00E*/ u8 language;
-};
-
 typedef union // 3b58
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavor favor;
-    struct LilycoveLadyContest contest;
     u8 id;
     u8 filler[0x40];
 } LilycoveLady;
@@ -1197,7 +1170,6 @@ struct SaveBlock1
     /*0x2E25*/ //u8 padding5[3];
     /*0x2E28*/ OldMan oldMan;
     /*0x2e64*/ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
-    /*0x2e90*/ struct ContestWinner contestWinners[NUM_CONTEST_WINNERS]; // see CONTEST_WINNER_*
     /*0x3030*/ struct DayCare daycare;
 #if FREE_LINK_BATTLE_RECORDS == FALSE
     /*0x3150*/ struct LinkBattleRecords linkBattleRecords;

@@ -1,7 +1,6 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
-#include "contest_effect.h"
 #include "sprite.h"
 #include "wild_encounter_ow.h"
 #include "constants/battle.h"
@@ -16,7 +15,6 @@
 #include "constants/map_groups.h"
 #include "constants/battle.h"
 #include "constants/abilities.h"
-#include "contest_effect.h"
 #include "constants/trainers.h"
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_8) ? 160 : 220)

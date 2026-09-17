@@ -15,24 +15,6 @@ static const struct MenuAction MultichoiceList_EnterInfo[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_ContestInfo[] =
-{
-    {COMPOUND_STRING("What's a CONTEST?")},
-    {COMPOUND_STRING("Types of CONTESTS")},
-    {COMPOUND_STRING("Ranks")},
-    {gText_Cancel2},
-};
-
-static const struct MenuAction MultichoiceList_ContestType[] =
-{
-    {gText_CoolnessContest},
-    {gText_BeautyContest},
-    {gText_CutenessContest},
-    {gText_SmartnessContest},
-    {gText_ToughnessContest},
-    {gText_Exit},
-};
-
 const u8 gText_Decoration2[] = _("DECORATION");
 const u8 gText_PackUp[] = _("PACK UP");
 const u8 gText_Registry[] = _("REGISTRY");
@@ -633,34 +615,10 @@ static const struct MenuAction MultichoiceList_LinkLeader[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_ContestRank[] =
-{
-    {COMPOUND_STRING("NORMAL RANK")},
-    {COMPOUND_STRING("SUPER RANK")},
-    {COMPOUND_STRING("HYPER RANK")},
-    {COMPOUND_STRING("MASTER RANK")},
-    {gText_Exit},
-};
-
 static const struct MenuAction MultichoiceList_FrontierItemChoose[] =
 {
     {COMPOUND_STRING("BATTLE BAG")},
     {COMPOUND_STRING("HELD ITEM")},
-    {gText_Exit},
-};
-
-static const struct MenuAction MultichoiceList_LinkContestInfo[] =
-{
-    {COMPOUND_STRING("LINK CONTEST")},
-    {COMPOUND_STRING("ABOUT E-MODE")},
-    {COMPOUND_STRING("ABOUT G-MODE")},
-    {gText_Cancel2},
-};
-
-static const struct MenuAction MultichoiceList_LinkContestMode[] =
-{
-    {COMPOUND_STRING("E-MODE")},
-    {COMPOUND_STRING("G-MODE")},
     {gText_Exit},
 };
 
@@ -1215,8 +1173,6 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_BRINEY_ON_DEWFORD]          = MULTICHOICE(MultichoiceList_BrineyOnDewford),
     [MULTI_PC]                         = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_ENTERINFO]                  = MULTICHOICE(MultichoiceList_EnterInfo),
-    [MULTI_CONTEST_INFO]               = MULTICHOICE(MultichoiceList_ContestInfo),
-    [MULTI_CONTEST_TYPE]               = MULTICHOICE(MultichoiceList_ContestType),
     [MULTI_BASE_PC_NO_REGISTRY]        = MULTICHOICE(MultichoiceList_BasePCNoRegistry),
     [MULTI_BASE_PC_WITH_REGISTRY]      = MULTICHOICE(MultichoiceList_BasePCWithRegistry),
     [MULTI_REGISTER_MENU]              = MULTICHOICE(MultichoiceList_RegisterMenu),
@@ -1306,10 +1262,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_WIRELESS_ALL_SERVICES]      = MULTICHOICE(MultichoiceList_LinkServicesAll),
     [MULTI_WIRELESS_MINIGAME]          = MULTICHOICE(MultichoiceList_WirelessMinigame),
     [MULTI_LINK_LEADER]                = MULTICHOICE(MultichoiceList_LinkLeader),
-    [MULTI_CONTEST_RANK]               = MULTICHOICE(MultichoiceList_ContestRank),
     [MULTI_FRONTIER_ITEM_CHOOSE]       = MULTICHOICE(MultichoiceList_FrontierItemChoose),
-    [MULTI_LINK_CONTEST_INFO]          = MULTICHOICE(MultichoiceList_LinkContestInfo),
-    [MULTI_LINK_CONTEST_MODE]          = MULTICHOICE(MultichoiceList_LinkContestMode),
     [MULTI_FRONTIER_GAMBLER_BET]       = MULTICHOICE(MultichoiceList_FrontierGamblerBet),
     [MULTI_TENT]                       = MULTICHOICE(MultichoiceList_Tent),
     [MULTI_UNUSED_SSTIDAL_1]           = MULTICHOICE(MultichoiceList_UnusedSSTidal1),

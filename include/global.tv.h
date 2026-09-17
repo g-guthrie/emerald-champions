@@ -92,23 +92,6 @@ typedef union // size = 0x24
         /*0x1F*/ u8 pokemonNameLanguage;
     } nameRaterShow;
 
-    // TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE (contest)
-    struct {
-        /*0x00*/ u8 kind;
-        /*0x01*/ bool8 active;
-        /*0x02*/ enum Species species;
-        /*0x04*/ u16 words[2];
-        /*0x08*/ u8 pokemonNickname[VANILLA_POKEMON_NAME_LENGTH + 1];
-        /*0x13*/ u8 contestCategory:3;
-                 u8 contestRank:2;
-                 u8 contestResult:2;
-                 //u8 padding:1;
-        /*0x14*/ enum Move move;
-        /*0x16*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-        /*0x1E*/ u8 language;
-        /*0x1F*/ u8 pokemonNameLanguage;
-    } bravoTrainer;
-
     // TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
     struct {
         /*0x00*/ u8 kind;
@@ -126,39 +109,6 @@ typedef union // size = 0x24
         /*0x1E*/ u8 opponentLanguage;
         /*0x1F*/ //u8 padding;
     } bravoTrainerTower;
-
-    // TVSHOW_CONTEST_LIVE_UPDATES
-    struct {
-        /*0x00*/ u8 kind;
-        /*0x01*/ bool8 active;
-        /*0x02*/ enum Species losingSpecies;
-        /*0x04*/ u8 losingTrainerName[PLAYER_NAME_LENGTH + 1];
-        /*0x0C*/ u8 loserAppealFlag;
-        /*0x0D*/ u8 round1Placing;
-        /*0x0E*/ u8 round2Placing;
-        /*0x0F*/ u8 winnerAppealFlag;
-        /*0x10*/ enum Move move;
-        /*0x12*/ enum Species winningSpecies;
-        /*0x14*/ u8 winningTrainerName[PLAYER_NAME_LENGTH + 1];
-        /*0x1C*/ u8 category;
-        /*0x1D*/ u8 winningTrainerLanguage;
-        /*0x1E*/ u8 losingTrainerLanguage;
-        /*0x1F*/ //u8 padding;
-    } contestLiveUpdates;
-
-    // TVSHOW_3_CHEERS_FOR_POKEBLOCKS
-    struct {
-        /*0x00*/ u8 kind;
-        /*0x01*/ bool8 active;
-        /*0x02*/ u8 sheen;
-        /*0x03*/ enum Flavor flavor:3;
-                 u8 color:2;
-                 //u8 padding:3;
-        /*0x04*/ u8 worstBlenderName[PLAYER_NAME_LENGTH + 1];
-        /*0x0C*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-        /*0x14*/ u8 language;
-        /*0x15*/ u8 worstBlenderLanguage;
-    } threeCheers;
 
     // TVSHOW_BATTLE_UPDATE
     struct {
@@ -189,18 +139,6 @@ typedef union // size = 0x24
         /*0x18*/ u8 idolNameLanguage;
         /*0x19*/ //u8 padding;
     } fanClubSpecial;
-
-    // TVSHOW_LILYCOVE_CONTEST_LADY
-    struct {
-        /*0x00*/ u8 kind;
-        /*0x01*/ bool8 active;
-        /*0x02*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-        /*0x0A*/ u8 contestCategory;
-        /*0x0B*/ u8 nickname[VANILLA_POKEMON_NAME_LENGTH + 1];
-        /*0x16*/ u8 pokeblockState;
-        /*0x17*/ u8 language;
-        /*0x18*/ u8 pokemonNameLanguage;
-    } contestLady;
 
     // Record Mixing Shows
     // TVSHOW_POKEMON_TODAY_CAUGHT

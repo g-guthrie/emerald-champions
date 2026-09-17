@@ -19,7 +19,6 @@
 #include "constants/cable_club.h"
 #include "constants/coins.h"
 #include "constants/comparison_operators.h"
-#include "constants/contest.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
 #include "constants/difficulty.h"
@@ -104,8 +103,8 @@ gSpecialVars::
 	.4byte gSpecialVar_Result
 	.4byte gSpecialVar_ItemId
 	.4byte gSpecialVar_LastTalked
-	.4byte gSpecialVar_ContestRank
-	.4byte gSpecialVar_ContestCategory
+	.4byte gSpecialVar_Unused_0x8010
+	.4byte gSpecialVar_Unused_0x8011
 	.4byte gSpecialVar_MonBoxId
 	.4byte gSpecialVar_MonBoxPos
 	.4byte gSpecialVar_Unused_0x8014
@@ -297,7 +296,6 @@ gStdScripts_End::
 	.include "data/maps/LilycoveCity_LilycoveMuseum_1F/scripts.inc"
 	.include "data/maps/LilycoveCity_LilycoveMuseum_2F/scripts.inc"
 	.include "data/maps/LilycoveCity_ContestLobby/scripts.inc"
-	.include "data/maps/LilycoveCity_ContestHall/scripts.inc"
 	.include "data/maps/LilycoveCity_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/LilycoveCity_PokemonCenter_2F/scripts.inc"
 	.include "data/maps/LilycoveCity_UnusedMart/scripts.inc"
@@ -483,7 +481,6 @@ gStdScripts_End::
 	.include "data/maps/TradeCenter/scripts.inc"
 	.include "data/maps/RecordCorner/scripts.inc"
 	.include "data/maps/BattleColosseum_4P/scripts.inc"
-	.include "data/maps/ContestHall/scripts.inc"
 	.include "data/maps/InsideOfTruck/scripts.inc"
 	.include "data/maps/SSTidalCorridor/scripts.inc"
 	.include "data/maps/SSTidalLowerDeck/scripts.inc"
@@ -1742,7 +1739,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/secret_base.inc"
 	.include "data/scripts/cable_club.inc"
 	.include "data/text/cable_club.inc"
-	.include "data/scripts/contest_hall.inc"
 	.include "data/scripts/tv.inc"
 	.include "data/text/tv.inc"
 	.include "data/scripts/interview.inc"

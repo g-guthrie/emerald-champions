@@ -160,79 +160,6 @@ SlateportCity_PokemonFanClub_EventScript_AlreadyInterviewed::
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_Reporter::
-	lock
-	faceplayer
-	goto_if_set FLAG_TEMP_2, LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed
-	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE
-	special InterviewBefore
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed
-	copyvar VAR_0x8009, VAR_0x8006
-	msgbox LilycoveCity_ContestLobby_Text_InterviewRequest, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_ContestLobby_EventScript_AcceptInterview
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_ContestLobby_EventScript_DeclineInterview
-	end
-
-LilycoveCity_ContestLobby_EventScript_AcceptInterview::
-	msgbox LilycoveCity_ContestLobby_Text_DescribeContest, MSGBOX_DEFAULT
-	setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
-	copyvar VAR_0x8005, VAR_0x8009
-	setvar VAR_0x8006, 0
-	call Common_ShowEasyChatScreen
-	lock
-	faceplayer
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_ContestLobby_EventScript_SubmitResponse
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_ContestLobby_EventScript_DeclineInterview
-	end
-
-LilycoveCity_ContestLobby_EventScript_DeclineInterview::
-	msgbox LilycoveCity_ContestLobby_Text_PleaseDoShareStoryWithMe, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_ContestLobby_EventScript_SubmitResponse::
-	setvar VAR_0x8004, 24
-	special SetContestCategoryStringVarForInterview
-	msgbox LilycoveCity_ContestLobby_Text_WhatImageWhenYouHearX, MSGBOX_DEFAULT
-	setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
-	copyvar VAR_0x8005, VAR_0x8009
-	setvar VAR_0x8006, 1
-	call Common_ShowEasyChatScreen
-	lock
-	faceplayer
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_ContestLobby_EventScript_DeclineInterview
-	msgbox LilycoveCity_ContestLobby_Text_ThatsAllForInterview, MSGBOX_DEFAULT
-	setflag FLAG_TEMP_2
-	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE
-	goto Interview_EventScript_EndInterview
-	end
-
-LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed::
-	msgbox LilycoveCity_ContestLobby_Text_LookingForwardToNextContest, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_ContestLobby_EventScript_TryShowContestReporter::
-	goto_if_ne VAR_CONTEST_HALL_STATE, 2, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
-	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE
-	special InterviewBefore
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
-	switch VAR_CONTEST_TYPE
-	case 0, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
-	case 2, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
-	case 1, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
-	case 3, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
-	case 4, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
-	case 5, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
-	end
-
-LilycoveCity_ContestLobby_EventScript_ShowContestReporter::
-	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
-	return
-
-LilycoveCity_ContestLobby_EventScript_DontShowContestReporter::
-	return
-
 @ Emerald Champions: the Bravo Trainer reporter is retired with the vanilla Battle
 @ Tower challenge. The object stays in map.json until the owner removes it and the
 @ Tower lobby hides it on transition, so this script is unreachable; it keeps a
@@ -246,14 +173,3 @@ BattleFrontier_BattleTowerLobby_Text_NoStoryToFile:
 	.string "The CIRCUIT keeps its own record.$"
 
 
-@ Unused
-EventScript_ContestLiveInterview::
-	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
-	special InterviewBefore
-	goto_if_eq VAR_RESULT, TRUE, EventScript_ContestLiveInterviewEnd
-	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
-	special InterviewAfter
-	return
-
-EventScript_ContestLiveInterviewEnd::
-	return

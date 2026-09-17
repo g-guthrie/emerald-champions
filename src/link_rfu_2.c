@@ -1,7 +1,6 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle.h"
-#include "berry_blender.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -992,20 +991,6 @@ void StartSendingKeysToRfu(void)
 void ClearLinkRfuCallback(void)
 {
     gRfu.callback = NULL;
-}
-
-static void Rfu_BerryBlenderSendHeldKeys(void)
-{
-    RfuPrepareSendBuffer(RFUCMD_BLENDER_SEND_KEYS);
-    if (GetMultiplayerId() == 0)
-        gSendCmd[BLENDER_COMM_ARROW_POS] = GetBlenderArrowPosition();
-    gBerryBlenderKeySendAttempts++;
-}
-
-void Rfu_SetBerryBlenderLinkCallback(void)
-{
-    if (gRfu.callback == NULL)
-        gRfu.callback = Rfu_BerryBlenderSendHeldKeys;
 }
 
 static void RfuHandleReceiveCommand(u8 unused)

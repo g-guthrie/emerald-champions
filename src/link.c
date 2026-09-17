@@ -90,7 +90,6 @@ COMMON_DATA struct Link gLink = {0};
 COMMON_DATA u8 gLastRecvQueueCount = 0;
 COMMON_DATA u16 gLinkSavedIme = 0;
 
-EWRAM_DATA u32 gBerryBlenderKeySendAttempts = 0;
 EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
 EWRAM_DATA u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE] = {};
 static EWRAM_DATA bool8 sLinkOpen = FALSE;
@@ -449,9 +448,6 @@ static void ProcessRecvCmds(u8 unused)
         case LINKCMD_READY_EXIT_STANDBY:
             gReadyToExitStandby[i] = TRUE;
             break;
-        case LINKCMD_BLENDER_NO_PBLOCK_SPACE:
-            SetBerryBlenderLinkCallback();
-            break;
         case LINKCMD_SEND_BLOCK_REQ:
             SendBlock(0, sBlockRequests[gRecvCmds[i][1]].address, sBlockRequests[gRecvCmds[i][1]].size);
             break;
@@ -789,22 +785,6 @@ static void LinkCB_BlockSend(void)
 static void LinkCB_BlockSendEnd(void)
 {
     gLinkCallback = NULL;
-}
-
-static void LinkCB_BerryBlenderSendHeldKeys(void)
-{
-    GetMultiplayerId();
-    BuildSendCmd(LINKCMD_BLENDER_SEND_KEYS);
-    gBerryBlenderKeySendAttempts++;
-}
-
-void SetBerryBlenderLinkCallback(void)
-{
-    gBerryBlenderKeySendAttempts = 0;
-    if (gWirelessCommType)
-        Rfu_SetBerryBlenderLinkCallback();
-    else
-        gLinkCallback = LinkCB_BerryBlenderSendHeldKeys;
 }
 
 u8 GetMultiplayerId(void)

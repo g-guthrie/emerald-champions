@@ -163,17 +163,7 @@ LilycoveCity_EventScript_MotelSign::
 	end
 
 LilycoveCity_EventScript_MuseumSign::
-	lockall
-	specialvar VAR_0x8004, CountPlayerMuseumPaintings
-	switch VAR_0x8004
-	case 0, LilycoveCity_EventScript_MuseumSignNoPaintings
-	msgbox LilycoveCity_Text_MuseumSignPlayersExhibit, MSGBOX_DEFAULT
-	releaseall
-	end
-
-LilycoveCity_EventScript_MuseumSignNoPaintings::
-	msgbox LilycoveCity_Text_MuseumSign, MSGBOX_DEFAULT
-	releaseall
+	msgbox LilycoveCity_Text_MuseumSign, MSGBOX_SIGN
 	end
 
 LilycoveCity_EventScript_HarborSign::
@@ -584,11 +574,6 @@ LilycoveCity_Text_MotelSign:
 LilycoveCity_Text_MuseumSign:
 	.string "LILYCOVE MUSEUM\p"
 	.string "“POKéMON Masterpiece Collection\n"
-	.string "on exhibit!”$"
-
-LilycoveCity_Text_MuseumSignPlayersExhibit:
-	.string "LILYCOVE MUSEUM\p"
-	.string "“{PLAYER}'s POKéMON Collection\n"
 	.string "on exhibit!”$"
 
 LilycoveCity_Text_HarborSignUnderConstruction:

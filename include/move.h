@@ -2,7 +2,6 @@
 #define GUARD_MOVES_H
 
 #include "config_changes.h"
-#include "contest_effect.h"
 #include "constants/battle.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_move_effects.h"
@@ -221,10 +220,6 @@ struct MoveInfo
     const struct AdditionalEffect *additionalEffects;
 
     // contest parameters
-    u8 contestEffect;
-    u8 contestCategory:3;
-    u8 contestComboStarterId;
-    u8 contestComboMoves[MAX_COMBO_MOVES];
     const u8 *battleAnimScript;
 };
 
@@ -821,26 +816,6 @@ static inline enum BattleTerrain GetMoveTerrainType(enum Move move)
 static inline const struct AdditionalEffect *GetMoveAdditionalEffectById(enum Move moveId, u32 effect)
 {
     return &gMovesInfo[SanitizeMoveId(moveId)].additionalEffects[effect];
-}
-
-static inline u32 GetMoveContestEffect(enum Move moveId)
-{
-    return gMovesInfo[SanitizeMoveId(moveId)].contestEffect;
-}
-
-static inline enum ContestCategories GetMoveContestCategory(enum Move moveId)
-{
-    return gMovesInfo[SanitizeMoveId(moveId)].contestCategory;
-}
-
-static inline u32 GetMoveContestComboStarter(enum Move moveId)
-{
-    return gMovesInfo[SanitizeMoveId(moveId)].contestComboStarterId;
-}
-
-static inline u32 GetMoveContestComboMoves(enum Move moveId, u32 comboMove)
-{
-    return gMovesInfo[SanitizeMoveId(moveId)].contestComboMoves[comboMove];
 }
 
 static inline const u8 *GetMoveAnimationScript(enum Move moveId)

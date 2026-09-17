@@ -46,29 +46,6 @@ TEST("Move names fit on Battle Screen")
     EXPECT_LE(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
 }
 
-TEST("Move names fit on Contest Screen")
-{
-    u32 i;
-    const u32 fontId = FONT_NARROWER, widthPx = 59;
-    enum Move move = MOVE_NONE;
-    for (i = 1; i < MOVES_COUNT; i++)
-    {
-        PARAMETRIZE_LABEL("%S", GetMoveName(i)) { move = i; }
-    }
-    // All moves explicitly listed here are too big to fit.
-    switch (move)
-    {
-    case MOVE_STOMPING_TANTRUM:
-    case MOVE_NATURES_MADNESS:
-    case MOVE_DOUBLE_IRON_BASH:
-        EXPECT_GT(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
-        break;
-    default:
-        EXPECT_LE(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
-        break;
-    }
-}
-
 TEST("Move names fit on Move Relearner Screen")
 {
     u32 i;
@@ -329,36 +306,6 @@ TEST("Species names fit on Pokemon Storage System")
     }
     EXPECT_LE(GetStringWidth(FONT_NARROWER, gSpeciesInfo[species].speciesName, 0), 66);
     EXPECT_LE(GetStringWidth(FONT_SHORT_NARROWER, gSpeciesInfo[species].speciesName, 0), 60);
-}
-
-TEST("Species names fit on Contest Screen")
-{
-    enum Species i;
-    const u32 fontId = FONT_NARROWER, widthPx = 50;
-    enum Species species = SPECIES_NONE;
-    for (i = SPECIES_NONE + 1; i < NUM_SPECIES; i++)
-    {
-        if (IsSpeciesEnabled(i))
-        {
-            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
-        }
-    }
-    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
-}
-
-TEST("Species names fit on Contest Screen - Rankings")
-{
-    enum Species i;
-    const u32 fontId = FONT_NARROWER, widthPx = 49;
-    enum Species species = SPECIES_NONE;
-    for (i = SPECIES_NONE + 1; i < NUM_SPECIES; i++)
-    {
-        if (IsSpeciesEnabled(i))
-        {
-            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
-        }
-    }
-    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
 }
 
 TEST("Species names fit on Battle Dome Screen")

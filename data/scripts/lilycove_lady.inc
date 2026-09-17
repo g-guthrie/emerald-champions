@@ -3,7 +3,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_LilycoveLady::
 	switch VAR_RESULT
 	case LILYCOVE_LADY_QUIZ, LilycoveCity_PokemonCenter_1F_EventScript_QuizLady
 	case LILYCOVE_LADY_FAVOR, LilycoveCity_PokemonCenter_1F_EventScript_FavorLady
-	case LILYCOVE_LADY_CONTEST, LilycoveCity_PokemonCenter_1F_EventScript_ContestLady
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_FavorLady::
@@ -320,100 +319,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz::
 	release
 	end
 
-LilycoveCity_PokemonCenter_1F_EventScript_ContestLady::
-	lock
-	faceplayer
-	msgbox LilycoveCity_PokemonCenter_1F_Text_ImTheContestLady, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon:
-	face_right
-	delay_8
-	step_end
-
-LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady:
-	face_left
-	delay_8
-	step_end
-
-@ Unused
-LilycoveCity_PokemonCenter_1F_Movement_MonFaceDown:
-	face_down
-	step_end
-
-LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer:
-	face_player
-	step_end
-
-LilycoveCity_PokemonCenter_1F_Movement_MonJump:
-	disable_jump_landing_ground_effect
-	jump_in_place_left
-	disable_jump_landing_ground_effect
-	jump_in_place_left
-	step_end
-
-LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon::
-	specialvar VAR_RESULT, GetContestLadyCategory
-	special Script_BufferContestLadyCategoryAndMonName
-	special GetContestLadyMonSpecies
-	goto_if_eq VAR_RESULT, CONTEST_CATEGORY_COOL, LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon
-	goto_if_eq VAR_RESULT, CONTEST_CATEGORY_BEAUTY, LilycoveCity_PokemonCenter_1F_EventScript_Skitty
-	goto_if_eq VAR_RESULT, CONTEST_CATEGORY_CUTE, LilycoveCity_PokemonCenter_1F_EventScript_Poochyena
-	goto_if_eq VAR_RESULT, CONTEST_CATEGORY_SMART, LilycoveCity_PokemonCenter_1F_EventScript_Kecleon
-	goto_if_eq VAR_RESULT, CONTEST_CATEGORY_TOUGH, LilycoveCity_PokemonCenter_1F_EventScript_Pikachu
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon::
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, CRY_MODE_NORMAL
-	msgbox LilycoveCity_PokemonCenter_1F_Text_Zigzagoon, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_Skitty::
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, CRY_MODE_NORMAL
-	msgbox LilycoveCity_PokemonCenter_1F_Text_Skitty, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_Poochyena::
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, CRY_MODE_NORMAL
-	msgbox LilycoveCity_PokemonCenter_1F_Text_Poochyena, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_Kecleon::
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, CRY_MODE_NORMAL
-	msgbox LilycoveCity_PokemonCenter_1F_Text_Kecleon, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_Pikachu::
-	lock
-	faceplayer
-	waitse
-	playmoncry VAR_0x8005, CRY_MODE_NORMAL
-	msgbox LilycoveCity_PokemonCenter_1F_Text_Pikachu, MSGBOX_DEFAULT
-	waitmoncry
-	release
-	end
-
 LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady:
 	.string "I'm the FAVOR LADY…$"
 
@@ -599,22 +504,3 @@ LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger:
 	.string "I'll go look for someone who'll take\n"
 	.string "your quiz challenge right away.$"
 
-LilycoveCity_PokemonCenter_1F_Text_ImTheContestLady:
-	.string "I keep a BERRY row behind the\n"
-	.string "CENTER. Ask the clerk in the hobby\l"
-	.string "wing which of mine are ripe!$"
-
-LilycoveCity_PokemonCenter_1F_Text_Zigzagoon:
-	.string "{STR_VAR_1}: Guguuh!$"
-
-LilycoveCity_PokemonCenter_1F_Text_Kecleon:
-	.string "{STR_VAR_1}: Igigigiiih!$"
-
-LilycoveCity_PokemonCenter_1F_Text_Poochyena:
-	.string "{STR_VAR_1}: Baaarun…$"
-
-LilycoveCity_PokemonCenter_1F_Text_Pikachu:
-	.string "{STR_VAR_1}: Pikka!$"
-
-LilycoveCity_PokemonCenter_1F_Text_Skitty:
-	.string "{STR_VAR_1}: Umyaaaan!$"

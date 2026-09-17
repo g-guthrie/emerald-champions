@@ -22,6 +22,9 @@ EWRAM_DATA u16 gSpecialVar_0x800B = 0;
 EWRAM_DATA u16 gSpecialVar_Result = 0;
 EWRAM_DATA u16 gSpecialVar_LastTalked = 0;
 EWRAM_DATA u16 gSpecialVar_Facing = 0;
+// Retired contest special vars; the slots stay so the special-var table keeps its indices.
+EWRAM_DATA u16 gSpecialVar_Unused_0x8010 = 0;
+EWRAM_DATA u16 gSpecialVar_Unused_0x8011 = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_Unused_0x8014 = 0;
