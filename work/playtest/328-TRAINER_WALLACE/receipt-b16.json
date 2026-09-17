@@ -1,0 +1,72 @@
+{
+  "trainer": "TRAINER_WALLACE", "e_group": "E0497", "play_order": 328, "cap": 96, "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-16 (inputs stamp 448b369f7a06..., rom 8f2abbcb..., elf 2b73cfab...)",
+  "purpose": "Rerun after AI commits 738e5a8809 (pair search no longer stops with only Protect boards scored for a body - the cause of empty Protects) and d50e8337c8 (no authored ACTIVATE trigger on the same turn the recipient shields).",
+  "party_manifest": "work/playtest/328-TRAINER_WALLACE/party_league96_v3.json (unchanged from the build-13 replay)",
+  "replay_of": "work/playtest/328-TRAINER_WALLACE/receipt-b13.json, attempt 1 (seed 1, same party, build-13: won 6-2 in 10 turns)",
+  "attempts": [
+    {
+      "seed": 1, "run_dir": "work/playtest/328-TRAINER_WALLACE/b16-a1",
+      "outcome": "won", "turns": 10, "turns_reported_by_result": 9,
+      "player_faints": 1, "opponent_faints": 6,
+      "faints_player": ["Mega Kangaskhan (T5, Double-Edge recoil after the hit that KO'd Palkia - a deliberate trade at 28 HP)"],
+      "faints_opponent": [
+        "Kyogre (T3, Parental Bond Double-Edge)",
+        "Tapu Fini (T4, Double-Edge, Encored into Icy Wind since T3)",
+        "Palkia (T5, Double-Edge after Incineroar's Fake Out flinch)",
+        "Ferrothorn (T7, Flare Blitz 4x in clear weather)",
+        "Starmie (T8, +1 Thunderbolt on its second turn out, still un-evolved)",
+        "Mega Milotic (T10, Thunderbolt after a third Recover)"
+      ],
+      "survivors_note": "Not a clean sweep: Whimsicott finished at 1/251 and Incineroar at 37/378, so three of six were spent or nearly spent.",
+      "ai_decision_seconds_max": 1.021,
+      "player_line": "T1 Mega Kangaskhan Fake Out Kyogre + Whimsicott Tailwind. T2 Double-Edge + Moonblast into Tapu Fini (Kyogre Protected). T3 Double-Edge KO Kyogre, Prankster Encore locked Tapu Fini into Icy Wind. T4 Double-Edge KO Tapu Fini, Whimsicott (1 HP) pivoted to Incineroar for Intimidate. T5 Fake Out flinched Palkia, Double-Edge KO'd it and the recoil finished Kangaskhan; Raging Bolt replaced it (Booster Energy +1 SpAtk). T6 Thunderbolt crit Mega Milotic to 25, Flare Blitz was Protected. T7 Thunderclap failed into Recover (my error), Flare Blitz KO'd Ferrothorn. T8 Incineroar pivoted to Kingambit, Thunderbolt KO'd Starmie. T9-T10 Thunderbolt + Iron Head out-damaged the Recover loop (352 per turn vs 189 healed)."
+    }
+  ],
+  "protect_ledger_b16": [
+    {"turn": 2, "battler": "Kyogre (231/322)", "choice": "Protect", "payoff": "empty - both of my attacks went into Tapu Fini; nothing was aimed at Kyogre"},
+    {"turn": 6, "battler": "Ferrothorn (345/345)", "choice": "Protect", "payoff": "blocked Incineroar's Flare Blitz - 4x in clear weather, and the identical attack KO'd Ferrothorn from full HP on the very next turn, so this Protect bought a whole extra turn and a Leech Seed attempt"}
+  ],
+  "protect_comparison": {
+    "prior_receipt": "receipt-b13.json attempt 1 (seed 1, same party)",
+    "prior_ledger": [
+      "T2 Kyogre (189/322) Protect - empty",
+      "T4 Tapu Fini (7 HP) Protect - blocked Thunderbolt (KO)",
+      "T5 Ferrothorn (full) Protect - blocked Draco Meteor",
+      "T9 Ferrothorn (full) Protect - blocked Flare Blitz (KO)"
+    ],
+    "protect_count_before_after": "4 -> 2",
+    "empty_protects_before_after": "1 -> 1",
+    "consecutive_protects_before_after": "0 -> 0",
+    "note": "The one empty Protect is the same one: Kyogre's turn-2 guard. It has now reproduced on build-9, build-13 and build-16 with the same party and seed, so commit 738e5a8809 did not remove it. The board shrank (Tapu Fini died on T4 here instead of T5, and Ferrothorn got three turns instead of six), so the raw Protect count fell for board reasons, not cadence reasons; the payoff rate per Protect is what matters and it went 3/4 -> 1/2 with the same single empty guard.",
+    "b13_both_attempts_for_context": "7 Protects, 2 empty (Kyogre T2 in both attempts), 0 consecutive."
+  },
+  "strategy_checks": [
+    {"check": "Drizzle on entry", "result": "PASS", "evidence": "turn 0 state reports weather B_WEATHER_RAIN_NORMAL; 'Rain continues to fall' T1-T4; 'The rain stopped' at the end of T5 after Kyogre had fainted."},
+    {"check": "Misty Surge on entry", "result": "PASS", "evidence": "turn 0 state reports terrain misty(5); 'The mist disappeared from the battlefield' at the end of T5."},
+    {"check": "Kyogre chooses Water Spout at full HP on turn 1 rather than Origin Pulse (claimed fixed)", "result": "FAIL", "evidence": "T1 native latch: Kyogre chose MOVE_ORIGIN_PULSE at 322/322 (100%) and was Fake Out flinched. It chose ORIGIN_PULSE again on T3 at 231/322 (72%) and was KO'd before moving. Water Spout was never selected in this attempt. Under rain at 100% HP Water Spout is 150 BP / 100% accuracy spread against Origin Pulse's 110 BP / 85%, so the full-HP choice is strictly worse. Same defect as build-13 (which at least chose Water Spout at 58-70% HP); here the inversion is total."},
+    {"check": "Mega Starmie evolves after Mega Milotic has used the side's Mega (known engine gate - record only)", "result": "NOT OBSERVED", "evidence": "Milotic Mega Evolved on T6, its first turn out. Starmie entered T7 as Ferrothorn's replacement and its active record reported usable_gimmick=mega on both T7 and T8 with mega_already_used true for the side. It acted once (T8 Aqua Jet into Kingambit) in base form and fainted to Thunderbolt the same turn. Third build in a row with the second authored Mega not firing. Held for the user as an engine matter, not fixed here."},
+    {"check": "Mega Milotic fires", "result": "PASS", "evidence": "T6: 'The opposing Milotic has Mega Evolved into Mega Milotic'; ability switched COMPETITIVE -> PRISM_SCALES on its first turn out."},
+    {"check": "Milotic Recover timing", "result": "PASS", "evidence": "T7 Recover at 25/378 (restored to 214), T9 Recover at 214/378, T10 Recover at 26/378. Each one was the correct read: the T7 Recover also made my Thunderclap fail, because priority Thunderclap needs the target to be using an attacking move."},
+    {"check": "Milotic Helping Hand for Starmie (authored plan)", "result": "NOT OBSERVED", "evidence": "T8 was the only turn Starmie stood beside Milotic. Milotic chose ICE_BEAM into Kingambit - Ice is 0.5x on Dark/Steel and Kingambit holds an Assault Vest - rather than Helping Hand for Starmie's Aqua Jet. Minor, but Helping Hand has now never been observed in three builds."},
+    {"check": "Ferrothorn Leech Seed attrition", "result": "PARTIAL", "evidence": "Ferrothorn selected LEECH_SEED at Raging Bolt on T7 (native latch) but was KO'd by Flare Blitz before it moved; it never resolved. Sensible choice, no defect."},
+    {"check": "AI decision budget <= 1.2s", "result": "PASS", "evidence": "ai_decision_seconds_max 1.021 (max 61 frames)."}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "engine", "status": "PERSISTS on build-16", "description": "Second authored Mega still never fires once the first has been used. Starmie held usable_gimmick=mega on T7 and T8 and acted in base form. Held for the user."},
+    {"id": 2, "severity": "AI", "status": "PERSISTS on build-16, worse", "description": "Kyogre's Water Spout / Origin Pulse selection is inverted with respect to HP. T1 at 322/322 it chose Origin Pulse (110 BP, 85% acc) over Water Spout (150 BP, 100% acc at full HP), both spread Water specials under its own rain. On build-13 it at least chose Water Spout at 58-70%; on build-16 it chose Origin Pulse at 72% too, so Water Spout was never selected at all."},
+    {"id": 3, "severity": "AI (minor)", "status": "PERSISTS on build-16", "description": "Empty Protect: Kyogre T2 at 231/322 with nothing aimed at it (both of my attacks went into Tapu Fini). Defensible under a mixed forecast - Mega Kangaskhan's Parental Bond Double-Edge is a real threat to it - but this is the same turn-2 guard on the same board on builds 9, 13 and 16, so commit 738e5a8809 did not reach it. Cost: Kyogre's only free turn."},
+    {"id": 4, "severity": "AI (minor)", "status": "new observation", "description": "T8 Milotic chose Ice Beam into an Assault Vest Kingambit (Ice 0.5x into Dark/Steel, special into a special wall) while its own partner Starmie was beside it and the authored plan calls for priority Helping Hand. Helping Hand or the spread Muddy Water were both better."}
+  ],
+  "ai_choices_that_were_correct": [
+    "T6 Ferrothorn Protect against a 4x Flare Blitz that KO'd it from full HP one turn later - the single best guard in the fight",
+    "T7/T9/T10 Milotic Recover, each at a genuine threshold, and the T7 one incidentally blanked my Thunderclap",
+    "T5 Palkia selected Hydro Pump at the correct target before the Fake Out flinch",
+    "No consecutive Protects, no Protect from any body that was about to be activated by a partner (the d50e8337c8 case never arose on this board - Wallace has no authored ACTIVATE pair)"
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NO LEVEL CHANGE. The brief's level rule is applied only if the outcome flips the prior receipt's decision, and it does not. The build-13 receipt decided 'keep all offsets' after a 6-2 win; this run is a 6-1 win on the same party and seed, which is the same 'won after a real fight' bucket: I had to trade Mega Kangaskhan to remove Palkia, Whimsicott finished at 1/251 and Incineroar at 37/378, and Mega Milotic's Recover loop needed 352 damage a turn to break. One faint plus two near-faints is not 'won first try with no real threat'. Offsets stay at 0/4/4/0/2/1 (medium levels 94/98/98/94/96/95).",
+  "cooler": "Unchanged: this is still the campaign's most tactically alive room. The one thing holding it back is defect 1 - the Huge Power physical Mega Starmie in the back is the whole point of the reserve and it has never once transformed.",
+  "legality": "No legality problem found in the authored set.",
+  "verdict": "Wallace still wins on decision density rather than damage. The two AI fixes in this build did not change anything observable in this room: the only empty Protect in the ledger is the same Kyogre turn-2 guard as before, and the ACTIVATE-versus-shield case does not occur here because Wallace authors no ACTIVATE pair. The Protect cadence itself remains healthy (2 guards, 1 of them a textbook KO block, 0 consecutive)."
+}
