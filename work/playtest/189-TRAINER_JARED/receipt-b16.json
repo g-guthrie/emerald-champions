@@ -1,0 +1,119 @@
+{
+  "play_order": 189,
+  "e_group": "E0283",
+  "trainer": "TRAINER_JARED",
+  "class": "gym",
+  "cap": 54,
+  "difficulty": "medium",
+  "pass": "build-16 AI rerun",
+  "purpose": "Measure commits 738e5a8809 (pair search no longer stops with only Protect boards scored for a body) and d50e8337c8 (no authored ACTIVATE trigger on the turn the recipient shields) against the prior receipt's Protect ledger. This is the room whose prior receipt carried the block's clearest empty guard.",
+  "build": {
+    "build_dir": "work/agent-battle-build-16",
+    "inputs_sha256": "448b369f7a06b9f64b7662605c2d39d2bb6a33a5ddfa60ccd7a6bb4d7007f1ab",
+    "stale_build_check": "PASS - driver asserted level_cap 54 from the ROM; no 'campaign cap did not reach N; the ROM reports 0' report."
+  },
+  "prior_receipt": "work/playtest/189-TRAINER_JARED/receipt-rerun.json (the more recent of two; receipt.json precedes it and is where Swoobat +1 and Bombirdier +1 were applied)",
+  "reused_from_prior": {
+    "party_manifest": "work/playtest/189-TRAINER_JARED/party_b54_jared.json",
+    "seed": 1,
+    "why": "party_b54_jared.json / seed 1 is receipt-rerun's decisive (and only) attempt."
+  },
+  "resolved_levels_check": "PASS - live board matched cap + offset - 2: Noctowl 54 (+2), Swoobat 55 (+3), Scyther 57 (+5), Murkrow 58 (+6), Bombirdier 55 (+3), Crobat 54 (+2).",
+  "attempt": {
+    "n": 1,
+    "run_dir": "work/playtest/189-TRAINER_JARED/b16",
+    "seed": 1,
+    "party": "party_b54_jared.json",
+    "outcome": "won",
+    "turns": 6,
+    "decisions": 10,
+    "player_faints": 4,
+    "opponent_faints": 6,
+    "ai_decision_seconds_max": 1.021,
+    "ai_decision_budget": "PASS - 1.021s against the 1.2s complete opponent decision budget.",
+    "result_vs_prior": "Same result as the prior receipt, one turn faster: won 6-4 in 6 turns against 6-4 in 7.",
+    "player_faints_detail": [
+      "Regieleki turn 4 (Scyther X-Scissor, at 29 HP after two Tinted Lens Hyper Voices)",
+      "Incineroar turn 5 (Bombirdier Rocky Payload Rock Slide, 2x, plus a Murkrow Foul Play)",
+      "Zapdos turn 6 (Murkrow Foul Play plus Bombirdier Knock Off; its Roost was too slow under Tailwind)",
+      "Mega Gardevoir turn 7 (Choice Band Crobat Cross Poison, 2x into Fairy)"
+    ],
+    "opponent_faints_detail": [
+      "Swoobat turn 2 (Transistor Thunderbolt, 2x, the turn after its Protect)",
+      "Noctowl turn 3 (Electroweb, 2x)",
+      "Scyther turn 4 (Incineroar Flare Blitz, 2x)",
+      "Murkrow turn 6 (Pixilate Hyper Voice, 2x)",
+      "Bombirdier turn 6 (the same Hyper Voice, 2x)",
+      "Crobat turn 7 (Mamoswine Icicle Crash, 2x)"
+    ],
+    "narrative": "Turn 1 reproduced exactly: a double Protect blanked my Fake Out and my Thunderbolt. Turn 2 is where the build-16 behaviour diverges, and it is the point of this pass - Noctowl did NOT guard a second time. It chose Hyper Voice, which hit both my actives, while Swoobat died to the Thunderbolt it had guarded against and Knock Off stripped Noctowl's Sitrus. Scyther's turn-3 guard was worth more than either of turn 1's, blocking a 2x Electroweb and a Knock Off aimed at its Eviolite in the same turn. Murkrow's Prankster Tailwind then handed the room its speed, and turn 5 was Jared's best: a Rocky Payload Rock Slide KOed Incineroar and flinched Zapdos on the same turn. One Mega Gardevoir Hyper Voice removed Murkrow and Bombirdier together, and Mamoswine's Icicle Crash closed on a Crobat that had just taken Gardevoir."
+  },
+  "protect_ledger_build16": [
+    {
+      "turn": 1,
+      "battler": "SWOOBAT (156/156)",
+      "call": "Protect",
+      "verdict": "REAL",
+      "payoff": "Blocked Regieleki's Life Orb Transistor Thunderbolt, 2x into Psychic/Flying. Lethality is proven, not estimated: the identical attack KOed Swoobat from full 156 HP on the very next turn."
+    },
+    {
+      "turn": 1,
+      "battler": "NOCTOWL (222/222)",
+      "call": "Protect",
+      "verdict": "PARTIAL - low value, not empty",
+      "payoff": "Blocked Incineroar's Fake Out, denying the flinch and nothing else - zero damage prevented. Classified exactly as the prior receipt classified the same guard on the same turn, so the before/after comparison is like for like. Noted below as the room's one surviving cadence question, because its partner guarded on the same turn."
+    },
+    {
+      "turn": 3,
+      "battler": "SCYTHER (165/165, entry+1 turn)",
+      "call": "Protect",
+      "verdict": "REAL - excellent",
+      "payoff": "Blocked two things at once: Regieleki's Electroweb, which is 2x into Bug/Flying and was aimed at both opponents, and Incineroar's Knock Off, which was specifically aimed at removing Scyther's Eviolite. Keeping the Eviolite is what let Scyther survive to KO Regieleki on the following turn."
+    }
+  ],
+  "protect_summary_build16": {
+    "opponent_guards_total": 3,
+    "empty": 0,
+    "consecutive_same_battler": 0,
+    "simultaneous_double_guards": 1,
+    "simultaneous_double_guard_detail": "Turn 1, Noctowl and Swoobat both guarded. Swoobat's was correct and lethal-blocking; Noctowl's blocked only a Fake Out. The pair therefore made no progress that turn, which is the same pattern the prior receipt described as 'a turn-1 double Protect blanked my opening'. It is the one guard-cadence question this room still has."
+  },
+  "comparison_to_prior_receipt": {
+    "prior_ledger_scope": "receipt-rerun.json, same party and same seed, recorded three opponent Protects: Swoobat T1 (REAL), Noctowl T1 (PARTIAL), Noctowl T2 (EMPTY and FAILED).",
+    "empty_protects_before": 1,
+    "empty_protects_before_detail": "Noctowl, turn 2: 'EMPTY - FAILED. Consecutive guard on the turn immediately after a successful one; But it failed!. Noctowl then ate a 138-damage Knock Off. This is the one poor guard in the whole block: a second consecutive Protect at full HP with no incoming lethal threat wasted the turn outright.'",
+    "empty_protects_after": 0,
+    "consecutive_protects_before": 1,
+    "consecutive_protects_after": 0,
+    "total_guards_before": 3,
+    "total_guards_after": 3,
+    "verdict": "FIXED, and this is the cleanest single piece of evidence in my block. Same seed, same party, same turn-1 board, same turn-1 double Protect - and then on turn 2 Noctowl chose Hyper Voice instead of a second consecutive Protect. The empty, failed, wasted guard that the prior receipt singled out as 'the one poor guard in the whole block' did not recur, and Noctowl's non-guard action hit both of my actives. The guard count is unchanged at three because the guard that disappeared was replaced by a genuinely better one: Scyther's turn-3 Protect, which blocked a 2x spread attack and an item-removal Knock Off together. This is exactly the shape 738e5a8809 predicts - a body whose non-guard boards are now scored no longer defaults to Protect.",
+    "residual": "The turn-1 simultaneous double guard persists and is unchanged from the prior receipt. Noctowl's half of it is still low-value (a Fake Out block) and the pair produced no damage that turn. If any further Protect tuning happens in this room, that is the board to look at - not because either guard is empty, but because both halves of a pair guarding at once against a two-attack opening costs the pair its whole turn."
+  },
+  "strategy_checks": [
+    {"check": "TAILWIND has a real user with priority access to it - Murkrow uses Prankster Tailwind before anything else moves", "result": "PASS", "evidence": "Turn 4, its entry+1 turn: 'The opposing Murkrow used Tailwind!' resolved before every other action in the turn, and SIDE_STATUS_TAILWIND appeared on the opponent side. It mattered immediately - Bombirdier outsped Incineroar and Zapdos on turn 5, and Zapdos's Roost was too slow on turn 6."},
+    {"check": "Noctowl's Tinted Lens turns the resists that normally wall Air Slash and Hyper Voice into neutral damage", "result": "PASS", "evidence": "Turns 2 and 3 it chose Hyper Voice, a spread move, both times. The turn-2 one took Regieleki from 167 to 45 and Incineroar from 217 to 156 in a single action."},
+    {"check": "SETUP: Simple makes one Swoobat Calm Mind a +2/+2", "result": "FAIL - not executed", "evidence": "Swoobat had exactly one acting turn (turn 2) and chose Psychic rather than Calm Mind. Defensible on its own terms - Regieleki had revealed a 2x Thunderbolt on turn 1 and Swoobat is a 156 HP Life Orb body that dies to it - but the printed 'turn two is Swoobat's' setup never happened. This is a deployment problem, not a scoring error: Swoobat's protected turn was turn 1, and it spent it guarding rather than setting up behind the guard."},
+    {"check": "Scyther is the immediate physical mode with Eviolite and Technician", "result": "PASS", "evidence": "Turn 3 Protect preserved the Eviolite against a Knock Off aimed at it; turn 4 X-Scissor KOed Regieleki."},
+    {"check": "Bombirdier is the inversion - Rocky Payload boosts Rock Slide so a Flying gym answers Flying and Ice switch-ins", "result": "PASS - emphatically", "evidence": "Turn 5: one Rocky Payload Rock Slide, 2x into both of my Flying/Electric bodies, KOed a 156 HP Incineroar and flinched Zapdos from 211 to 92. That is the single best turn the room produced and it is exactly the designed inversion."},
+    {"check": "Prankster Haze erases a player's setup before Tailwind expires", "result": "UNTESTED", "evidence": "I never set a boost, so Murkrow correctly never chose Haze. It spent its other two turns on Foul Play."},
+    {"check": "Every opponent Protect has a payoff (the object of this pass)", "result": "PASS", "evidence": "3 of 3 non-empty; 2 of 3 with substantial payoff, 1 partial (a Fake Out block). See protect_ledger_build16."}
+  ],
+  "ai_defects": [
+    {
+      "id": "P16-J1",
+      "severity": "judgment, not illegal",
+      "turn": 6,
+      "board": "Bombirdier 193/193 beside Murkrow, facing a freshly switched-in Gardevoir (154/154, still pure Psychic at turn start) and a Zapdos on 92/211",
+      "chosen": "Bombirdier used Knock Off, single target, into Zapdos",
+      "problem": "Rock Slide was available and is the member's whole identity here: Rocky Payload boosts it, it is 2x into Zapdos's Electric/Flying and 1x into Gardevoir, and it hits both slots. Knock Off is 1x into Zapdos and hits one slot. Bombirdier had used Rock Slide to devastating effect on the previous turn against a comparable board.",
+      "better": "Rock Slide, which very likely KOes the 92 HP Zapdos anyway at 2x and puts roughly a third of Gardevoir's HP on the board for free.",
+      "note": "Not a bad outcome in practice - Knock Off did KO Zapdos and removed its Leftovers - and Knock Off's 100% accuracy against Rock Slide's 90% is a real consideration. Recorded as an efficiency observation rather than a defect, but it is the same family of question as guard cadence: single-target certainty being preferred over strictly larger spread value."
+    }
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NOT APPLIED, explicitly. The prior receipt (receipt-rerun.json) decided KEEP and this rerun does not flip it. The win cost 4 player faints, which is above the AGENTS.md benchmark of roughly three against a well-prepared competitive party and squarely inside the brief's keep condition ('won with 2+ faints or after a real fight'). Swoobat and Bombirdier already took their +1 in receipt.json, so their budget for this pass is spent, and both earned it here - Swoobat forced the Thunderbolt that the whole opening was built around, and Bombirdier produced the best turn in the room. No opponent line in the teams file was touched.",
+  "could_this_be_cooler": "Keep as written. The Murkrow/Bombirdier rewrite the dossier describes is doing real work - a Prankster Tailwind on turn one and a Rock-typed answer from inside a bird gym are both memorable, and the Rock Slide turn is what made this a four-faint fight instead of a two-faint one. The honest remaining gap is Swoobat: across two recorded runs it has now spent its protected turn on Protect and its acting turn on an attack, so Simple's +2/+2 Calm Mind - the thing the plan calls the room's real threat - has never once appeared. That is a deployment and cadence question rather than a composition one, and it is the specific thing worth watching in the next AI pass. No species, move, item, ability or EV change recommended.",
+  "legality_problems_found": "None.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-16. Not earned campaign traversal."
+}
