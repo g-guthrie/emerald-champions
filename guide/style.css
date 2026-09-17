@@ -1,0 +1,322 @@
+/* Emerald Champions Official Field Guide
+   Print design system. Page grammar follows the 2005 Prima Emerald guide's
+   information architecture; every mark, colour and asset here is our own. */
+
+@page { size: 8.5in 11in; margin: 0; }
+
+:root {
+  --ink:            #14210f;
+  --ink-soft:       #2c3a24;
+  --panel:          #123a4d;
+  --panel-deep:     #0a2534;
+  --panel-edge:     #3ea7c9;
+  --rule:           #7ec242;
+  --gold:           #ffd34d;
+  --gold-deep:      #b8801a;
+  --tip-a:          #f3a01c;
+  --tip-b:          #d2600f;
+  --event-a:        #2f5fa8;
+  --event-b:        #17356a;
+  --table-head:     #0d2f3f;
+  --table-row:      #16465c;
+  --table-alt:      #113a4d;
+  --paper:          #f4f7ec;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: #555;
+}
+
+.page {
+  position: relative;
+  width: 8.5in;
+  height: 11in;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 85% at 22% 0%, #ffffff 0%, #f2f7e4 38%, #dcebc0 62%, #bcd98f 100%);
+  page-break-after: always;
+}
+
+/* Foliage rays, drawn rather than photographed. */
+.page::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-conic-gradient(from 200deg at 14% -12%,
+      rgba(124,183,53,0.20) 0deg 3deg,
+      rgba(124,183,53,0)    3deg 9deg);
+  pointer-events: none;
+}
+
+/* Left spine band */
+.page::after {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0.42in;
+  background: linear-gradient(180deg, #1d4d1c 0%, #2f6b26 45%, #1b4718 100%);
+  box-shadow: inset -3px 0 0 rgba(0,0,0,0.35), 2px 0 7px rgba(0,0,0,0.30);
+}
+
+.sheet {
+  position: relative;
+  z-index: 3;
+  padding: 0.30in 0.46in 0.55in 0.72in;
+  height: 100%;
+}
+
+/* ---------- running head ---------- */
+
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 0.18in;
+  height: 0.86in;
+  margin: -0.06in 0 0.16in 0;
+}
+.masthead .plaque {
+  background: linear-gradient(180deg, #2f6b26, #1a4516);
+  border: 2px solid #12330f;
+  border-radius: 6px;
+  padding: 7px 13px 8px;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.30);
+}
+.masthead img {
+  display: block; height: 0.42in; width: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.5));
+}
+.masthead .kicker {
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  font-size: 15.5pt;
+  color: #ffffff;
+  text-shadow: 0 2px 2px rgba(0,0,0,0.42);
+}
+.masthead .kicker b { color: var(--gold); }
+
+/* ---------- body copy ---------- */
+
+.cols { column-count: 2; column-gap: 0.30in; }
+p { margin: 0 0 6pt; font-size: 9.0pt; line-height: 1.32; }
+.lede { font-style: italic; font-weight: 600; color: var(--ink-soft); }
+
+/* ---------- tip / warning callouts ---------- */
+
+.callout {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.25);
+  margin-bottom: 0.16in;
+}
+.callout .cap {
+  background: linear-gradient(180deg, var(--tip-a), var(--tip-b));
+  color: #fff;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  font-size: 12pt;
+  padding: 4px 0 5px;
+  border-bottom: 2px solid rgba(0,0,0,0.35);
+  text-shadow: 0 2px 2px rgba(0,0,0,0.45);
+}
+.callout .body {
+  background: linear-gradient(180deg, #2b2b2b, #151515);
+  color: #f3f3ea;
+  padding: 7px 11px 8px;
+  font-size: 8.6pt;
+  line-height: 1.34;
+}
+
+/* ---------- location panel ---------- */
+
+.location {
+  position: relative;
+  margin: 0.10in 0 0.18in;
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-deep) 100%);
+  border: 2px solid var(--panel-edge);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.30);
+  /* clipped corners, the way the original panels are bevelled */
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  padding: 0.38in 0.15in 0.15in;
+}
+.location h2 {
+  position: absolute;
+  top: -0.055in; left: 0.14in;
+  margin: 0;
+  font-size: 23pt;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.01em;
+  color: #eaffd0;
+  -webkit-text-stroke: 3px #14320f;
+  paint-order: stroke fill;
+  text-shadow: 0 3px 0 rgba(0,0,0,0.45);
+}
+.needed {
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 10.5pt;
+  border-bottom: 2px solid rgba(255,255,255,0.28);
+  padding-bottom: 5px;
+  margin-bottom: 9px;
+}
+.needed span { color: #fff; font-weight: 700; }
+
+.loc-grid {
+  display: grid;
+  grid-template-columns: 1.18in 1.30in 2.28in 1.46in;
+  grid-template-areas:
+    "blurb items map  mart"
+    "water water water mart";
+  gap: 0.11in;
+  align-items: start;
+}
+.loc-blurb { grid-area: blurb; }
+.items     { grid-area: items; }
+.mapplate  { grid-area: map; }
+.mart      { grid-area: mart; align-self: stretch; }
+.water     { grid-area: water; }
+
+.loc-blurb {
+  color: #eaf6ff;
+  font-size: 8.3pt;
+  line-height: 1.30;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* item checklist */
+.items {
+  background: linear-gradient(180deg, #0c2a38, #061923);
+  border: 1px solid #2b6a85;
+  border-radius: 6px;
+  padding: 7px 9px 8px;
+}
+.items h3, .tbl h3 {
+  margin: 0 0 6px;
+  text-align: center;
+  color: var(--gold);
+  font-size: 10pt;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+}
+.items li {
+  list-style: none;
+  color: #fff;
+  font-size: 8.2pt;
+  font-weight: 700;
+  padding: 2.5px 0 2.5px 17px;
+  position: relative;
+}
+.items ul { margin: 0; padding: 0; }
+.items li::before {
+  content: "";
+  position: absolute; left: 0; top: 4px;
+  width: 10px; height: 10px;
+  background: linear-gradient(180deg, #7fd0ea, #2b6a85);
+  border: 1px solid #0a1f2a;
+  border-radius: 2px;
+}
+.items li.hidden::before { background: linear-gradient(180deg, #d9d9d9, #7d7d7d); }
+
+/* map plate */
+.mapplate {
+  background: #0a1f2a;
+  border: 2px solid #4fb4d6;
+  border-radius: 4px;
+  padding: 5px;
+}
+.mapplate img { display: block; width: 100%; image-rendering: pixelated; }
+.mapplate .note {
+  color: #9fd9ef;
+  font-size: 7pt;
+  text-align: center;
+  padding-top: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* tables */
+.tbl {
+  background: linear-gradient(180deg, #0c2a38, #061923);
+  border: 1px solid #2b6a85;
+  border-radius: 6px;
+  padding: 7px 8px 8px;
+}
+table { width: 100%; border-collapse: collapse; }
+th {
+  color: #cfefff;
+  font-size: 7.0pt;
+  letter-spacing: 0.08em;
+  text-align: left;
+  padding: 2px 4px 4px;
+  border-bottom: 1px solid #3c86a4;
+}
+td {
+  color: #fff;
+  font-size: 8.0pt;
+  font-weight: 700;
+  padding: 1.9px 4px;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+}
+td.num { text-align: right; color: var(--gold); }
+tr:nth-child(even) td { background: rgba(255,255,255,0.045); }
+
+.wide { grid-column: 1 / span 2; margin-top: 0.12in; }
+
+/* ---------- event blocks ---------- */
+
+.event { break-inside: avoid; margin-bottom: 0.14in; }
+.event h4 {
+  margin: 0 0 7px;
+  display: inline-block;
+  min-width: 2.6in;
+  background: linear-gradient(180deg, var(--event-a), var(--event-b));
+  color: #fff;
+  font-size: 12pt;
+  font-weight: 800;
+  padding: 5px 16px 6px 11px;
+  clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 50%, calc(100% - 13px) 100%, 0 100%);
+  text-shadow: 0 2px 2px rgba(0,0,0,0.45);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+}
+.shot {
+  float: left;
+  margin: 2px 11px 6px 0;
+  padding: 6px;
+  background: linear-gradient(180deg, #6a4ea8, #35225e);
+  border: 2px solid #c9b6ef;
+  border-radius: 5px;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.30);
+}
+.shot img { display: block; width: 1.85in; image-rendering: pixelated; }
+.shot .cap {
+  color: #efe6ff; font-size: 7pt; text-align: center; padding-top: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- folio ---------- */
+
+.folio {
+  position: absolute;
+  left: 0.20in; bottom: 0.30in;
+  z-index: 4;
+  text-align: center;
+  width: 0.42in;
+}
+.folio .n {
+  font-size: 15pt; font-weight: 900; color: #14210f;
+  border-bottom: 2px solid #14210f;
+  padding-bottom: 2px;
+}
+.folio .ball {
+  width: 16px; height: 16px; margin: 5px auto 0;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #e04a3f 0 47%, #14210f 47% 53%, #f6f6f6 53% 100%);
+  border: 1.5px solid #14210f;
+}
