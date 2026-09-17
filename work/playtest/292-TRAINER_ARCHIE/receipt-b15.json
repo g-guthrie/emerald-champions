@@ -1,0 +1,58 @@
+{
+  "play_order": 292, "e_group": "E0458", "trainer": "TRAINER_ARCHIE", "class": "leader", "location": "SeafloorCavern_Room9",
+  "cap": 84, "cap_source": "driver level_cap", "difficulty": "medium",
+  "pass": "build-15 rerun after AI commit 738e5a8809; question: are Seismitoad's untargeted guards gone?",
+  "prior_receipt": "work/playtest/292-TRAINER_ARCHIE/receipt.json (build-8: lost 2-6 with party v1, won 6-3 with party v2 seed 2)",
+  "build_dir": "work/agent-battle-build-15",
+  "inputs_sha256": "79d93754eb41441ff049f79649f07110649a48233ae925788aa7e646353f0b8d",
+  "rom_sha256": "7e270fe4f94f3801502604a4f46e21e3f2a167a5dcf62d8ac0ac798e17704bf9",
+  "party_manifest": "work/playtest/292-TRAINER_ARCHIE/party_archie_84_v2.json (unchanged: Flutter Mane/Iron Bundle lead, Incineroar, Rillaboom, Zapdos, Landorus)",
+  "cap_confirmation": "Levels L85/85/86/85/85/87 as in the prior receipt (offsets 3/3/4/3/3/5).",
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/292-TRAINER_ARCHIE/b15-a1", "seed": 2, "outcome": "won", "turns": 10, "decisions": 14, "player_faints": 3, "opponent_faints": 6,
+     "faints_player": ["Iron Bundle T2 (Sucker Punch + Earth Power double)", "Rillaboom T4 (Gunk Shot 2x after Seismitoad Protected the Glide)", "Flutter Mane T8 (Dhelmise Liquidation at 27 HP, Sash already spent on Knock Off)"],
+     "faints_opponent": ["Pelipper T1 (Thunderbolt 4x)", "Toxicroak T3 (Fake Out at 52 HP)", "Muk T8 (Moonblast + Thunderbolt)", "Dhelmise T9 (Knock Off 2x, item-boosted)", "Seismitoad T10 (Knock Off before it moved under Tailwind)", "Mega Sharpedo T11 (Thunderbolt 2x)"],
+     "note": "T1 Iron Bundle Protected the Fake Out and Thunderbolt OHKOed Pelipper; Seismitoad entered. T2 Earth Power plus Sucker Punch removed Iron Bundle before Freeze-Dry; Moonblast took Toxicroak to 52 (Life Orb). Rillaboom replaced Bundle (Grassy Terrain). T3 the AI WITHDREW Seismitoad into Muk (dodging the 4x Glide it had not yet seen), Fake Out KOed Toxicroak, Seismitoad came straight back. T4 Seismitoad Protected the Grassy Glide (a KO) while Muk's Gunk Shot OHKOed Rillaboom (426-range into 340). Zapdos in. T5 Zapdos Tailwind, Moonblast 167 on Seismitoad, Hydro Pump missed Mane, Muk Protected with nothing aimed at it. T6 Seismitoad Protected the KO Moonblast; Muk's Knock Off took Mane to 14 and its Sash. T7 the AI withdrew Seismitoad again into Dhelmise (dodging the KO Moonblast) and Muk Protected the Thunderbolt. T8 Moonblast + Thunderbolt KOed Muk, Dhelmise's Liquidation KOed Mane; rain expired (8 turns) and Tailwind ended. Incineroar in (Intimidate on Seismitoad and Dhelmise). T9 Tailwind again, Knock Off OHKOed Dhelmise, Hydro Pump (no rain) hit Incineroar for 231. T10 Sharpedo PROTECTED ON ENTRY and banked a Speed Boost while Knock Off removed Seismitoad before it moved. T11 Sharpedo Mega Evolved at +1 and Thunderbolt OHKOed it before it acted (438 Tailwind Zapdos vs 403)."}
+  ],
+  "strategy_checks": [
+    {"check": "Drizzle live on entry, Damp Rock holds 8 turns", "result": "PASS", "evidence": "Rain from turn 0; 'The rain stopped' at the end of T8."},
+    {"check": "Pelipper opens with Wide Guard / Tailwind / Hurricane by board", "result": "PASS", "evidence": "T1 Hurricane at Iron Bundle chosen; it was OHKOed by the 4x Thunderbolt first."},
+    {"check": "Toxicroak Fake Out lead", "result": "PASS", "evidence": "T1 Fake Out at Iron Bundle (into Protect); T2 Sucker Punch into Bundle was the correct double with Earth Power."},
+    {"check": "Seismitoad Swift Swim Hydro Pump / Earth Power lands before the player's answers", "result": "PASS", "evidence": "T2 Earth Power (with Sucker Punch) removed Iron Bundle before Freeze-Dry; two voluntary pivots (T3, T7) each dodged a KO; T9 Hydro Pump 231 on Incineroar without rain."},
+    {"check": "Dhelmise Anchor Shot traps the switch", "result": "NOT OBSERVED", "evidence": "Dhelmise chose Liquidation twice (T8 at the 27-HP Mane, a KO either way; T9 at Incineroar, 2x and correct) and died T9. Anchor Shot never selected in 2 decisions - no trap opportunity mattered."},
+    {"check": "Alolan Muk weather-independent lane", "result": "PASS", "evidence": "T4 Gunk Shot OHKOed Rillaboom; T6 Knock Off removed Flutter Mane's Sash (199); Protect T7 blocked Thunderbolt."},
+    {"check": "Mega Sharpedo earns Speed Boost before transforming", "result": "PASS (was FAIL on build-8)", "evidence": "T10 entry turn: Protect, 'The opposing Sharpedo's Speed rose!'; T11 Mega Evolved at +1. It was still outsped under Tailwind and died, but the authored sequence executed."},
+    {"check": "Kyogre absent (chronology repair)", "result": "PASS", "evidence": "Six-member roster as authored."}
+  ],
+  "protect_ledger": [
+    {"turn": 4, "user": "Seismitoad (304/304, re-entry turn)", "payoff": "REAL - blocked a 4x Grassy Glide KO; Muk's Gunk Shot KOed Rillaboom beside it."},
+    {"turn": 5, "user": "Muk (140/353)", "payoff": "EMPTY - nothing aimed at it (Moonblast went to Seismitoad, Zapdos set Tailwind). Forecast-defensible: the previous two Moonblasts had both gone into Muk."},
+    {"turn": 6, "user": "Seismitoad (137/304)", "payoff": "REAL - blocked a KO Moonblast (167-199 range)."},
+    {"turn": 7, "user": "Muk (154/353)", "payoff": "REAL - blocked Zapdos's Thunderbolt (74); Seismitoad pivoted out beside it. Not consecutive (Knock Off on T6)."},
+    {"turn": 10, "user": "Sharpedo (246/246, entry turn)", "payoff": "REAL - blocked a 2x Thunderbolt OHKO and banked +1 Speed (the authored Speed Boost-before-Mega line)."}
+  ],
+  "protect_comparison": {
+    "before_build8_decisive_attempt_2": {"protects": 5, "empty": 3, "consecutive": 0, "seismitoad_empty": "3 of 4 (T3, T5 re-entry, T8)"},
+    "before_build8_both_attempts": {"protects": 9, "empty": 4, "consecutive": 0},
+    "after_build15": {"protects": 5, "empty": 1, "consecutive": 0, "seismitoad_empty": "0 of 2 (T4 blocked the Glide KO, T6 blocked the Moonblast KO)"},
+    "empty_before_to_after": "3 -> 1 (decisive attempt), 4 -> 1 (all prior attempts)",
+    "consecutive_before_to_after": "0 -> 0",
+    "note": "Seismitoad's untargeted guards are gone: where build-8 Protected on entry and re-entry with nothing coming, build-15 Protected exactly on the two KO turns and instead PIVOTED OUT (T3 into Muk, T7 into Dhelmise) when the read was a switch rather than a guard. Both pivots dodged a KO."
+  },
+  "ai_defects": [
+    {"id": "E0458-b15-1", "severity": "minor", "turn": 5, "battler": "Muk 140/353", "board": "Muk + Seismitoad (304) vs Flutter Mane 213 (Sash) + Zapdos 324 (just entered)", "chosen": "Protect with nothing aimed at it", "better": "Knock Off or Gunk Shot at Flutter Mane (both eventually landed and both mattered). The empty guard cost Muk a turn; it is the only empty Protect of the run and the forecast (two consecutive Moonblasts into Muk) makes it a reasonable miss rather than a search defect."}
+  ],
+  "good_ai_choices": [
+    "T2 Sucker Punch + Earth Power double on Iron Bundle (neither alone was a KO).",
+    "T3 withdrawing Seismitoad into Muk on the turn Rillaboom appeared (a 4x Glide user), and returning it the moment Toxicroak fell.",
+    "T4 Seismitoad Protect on the Glide turn while Muk took the Rillaboom KO.",
+    "T7 withdrawing Seismitoad into Dhelmise on the KO-Moonblast turn.",
+    "T10 Sharpedo Protect on entry: banked the Speed Boost and blocked an OHKO."
+  ],
+  "level_changes": [],
+  "level_change_rationale": "Won 6-3 after a real fight (three faints, the AI dodged two KOs by switching). Same outcome class as the prior receipt's decisive attempt; keep all offsets (3/3/4/3/3/5). No flip, so the brief's level rule is not applied.",
+  "cooler": "Unchanged: the pirate-king fight. The two late-pass notes shrink to one: Sharpedo now Protects first, so the closer sequence is real; it simply arrived into a Tailwind and a 2x Thunderbolt. Dhelmise's Anchor Shot has still never been seen in three attempts across two builds; if the trap is the signature, the plan may want Anchor Shot scored above Liquidation when the target could switch.",
+  "legality": "No legality problem found in the authored set.",
+  "ai_budget": "max 63 frames (1.055 s), inside 1.2 s.",
+  "scope": "Synthetic headless benchmark via scripts/playthrough/battle_driver.py on work/agent-battle-build-15 (stamp 79d93754eb41). Not earned play. scene.gba/scene.elf deleted; logs kept."
+}
