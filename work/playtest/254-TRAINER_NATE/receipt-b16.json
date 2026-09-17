@@ -1,0 +1,66 @@
+{
+  "trainer": "TRAINER_NATE", "e_group": "E0395", "play_order": 254, "class": "gym", "location": "MossdeepCity_Gym",
+  "chapter": "Mind Badge (Mossdeep Gym, room eight)", "cap": 76, "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-16 (inputs stamp 448b369f7a06..., rom 8f2abbcb..., elf 2b73cfab...)",
+  "purpose": "Rerun after AI commits 738e5a8809 (empty-Protect cause) and d50e8337c8 (no ACTIVATE on the turn the recipient shields). This is also the first run on a ROM that carries receipt.json's +1 on Oranguru and Beheeyem, which the prior session could not retest.",
+  "party_manifest": "work/playtest/254-TRAINER_NATE/party_gym76.json (unchanged)",
+  "replay_of": "work/playtest/254-TRAINER_NATE/receipt.json, attempt 1 (seed 4, same party, build-5: won 6-0 in 8 turns)",
+  "levels_this_run": "Oranguru and Beheeyem now resolve to L76 (offset 2), Mimikyu/Uxie/Exeggutor-Alola L75 (offset 1), Delphox L76 (offset 2). receipt.json's level change is live in this ROM.",
+  "attempts": [
+    {
+      "seed": 4, "run_dir": "work/playtest/254-TRAINER_NATE/b16-a1",
+      "outcome": "won", "turns": 10, "turns_reported_by_result": 9, "decisions": 11,
+      "player_faints": 1, "opponent_faints": 6,
+      "faints_player": ["Urshifu-Single-Strike (T3, Alolan Exeggutor's Draco Meteor for 262 - Mimikyu's Shadow Sneak had already broken it off full HP, so the Focus Sash could not fire)"],
+      "faints_opponent": [
+        "Beheeyem (T1, one Knock Off before it acted - unchanged by the +1)",
+        "Mimikyu (T3, Wicked Blow, at +2 Attack with its Disguise busted)",
+        "Oranguru (T5, Meteor Mash - it lasted to turn 5 this time instead of turn 2)",
+        "Uxie (T7, Meteor Mash at +1 Attack)",
+        "Alolan Exeggutor (T8, Ice Punch 4x)",
+        "Mega Delphox (T10, two Shadow Balls)"
+      ],
+      "ai_decision_seconds_max": 1.021,
+      "player_line": "Replicated the prior run's opening (Knock Off into Beheeyem, Wicked Blow into Oranguru). From turn 2 the board diverged because the AI saved Oranguru, and the fight became a real one: Mega Metagross was taken from 279 to 39 by a single Mystical Fire, Flutter Mane to 93/193, and Incineroar was Yawned to sleep and had to be withdrawn."
+    }
+  ],
+  "guard_ledger_b16": [
+    {"turn": 1, "battler": "Oranguru (294/294)", "move": "Protect", "payoff": "none in effect, but the decision was right - Urshifu's Unseen Fist pierced it ('The opposing Oranguru couldn't fully protect itself') for 93. It was the only attack aimed at Oranguru, so the guard bought nothing, yet guarding against the obvious focus-fire turn is correct play and Unseen Fist is not something the AI can price. Same outcome as the prior run."},
+    {"turn": 4, "battler": "Oranguru (201/294)", "move": "Protect", "payoff": "EXCELLENT - blocked a Tough Claws Meteor Mash from a just-Mega-Evolved Metagross AND a 2x Darkest Lariat in the same turn. Two attacks, both aimed at it, both stopped. It is why Oranguru lived to turn 5."},
+    {"turn": 5, "battler": "Alolan Exeggutor (224/298)", "move": "Protect", "payoff": "real - blocked Incineroar's Darkest Lariat and banked another Harvest proc"},
+    {"turn": 7, "battler": "Alolan Exeggutor (224/298)", "move": "Protect", "payoff": "real, and well chosen - blocked Incineroar's Knock Off, which was aimed specifically at the Sitrus Berry that its Harvest loop depends on. Guarding to keep an item is a good reason to guard."}
+  ],
+  "guard_comparison": {
+    "prior_ledger": ["T1 Oranguru Protect - pierced by Unseen Fist (partial)", "T5 Exeggutor Protect - blocked a 2x Sludge Bomb at 142/298 (excellent)", "T7 Exeggutor Protect - blocked a lethal 2x Sludge Bomb at 33 HP (excellent)"],
+    "guard_count_before_after": "3 -> 4",
+    "empty_guards_before_after": "0 -> 0",
+    "consecutive_guards_before_after": "0 -> 0",
+    "note": "Exeggutor again guarded on turns 5 and 7 and attacked on turn 6 in between, so the alternating pattern held and is not repetitive guarding. The added guard is Oranguru's turn-4 double block, which is the single best guard in the room across both builds. This room's cadence was already clean and stayed clean."
+  },
+  "strategy_checks": [
+    {"check": "Oranguru Instructs a partner that has already moved", "result": "FAIL - never fired, third observation, and still structural", "evidence": "Oranguru's three actions were Protect (T1), Protect (T4) and Foul Play (T5, selected but it was KO'd first). It also spent T2 being switched out. Instruct needs an ally that has ALREADY moved this turn, and Oranguru is faster than every partner it stood beside (Beheeyem and Alolan Exeggutor are both Quiet, and Oranguru acted first in every shared turn). The AI is not wasting the move - it is never in a position to use it. The lead-order fix recommended in receipt.json (lead Oranguru beside Delphox) is still the only thing that would make the gym's signature mechanic exist."},
+    {"check": "Instruct is never spent on a Protect or a failed move", "result": "PASS (by omission)", "evidence": "Zero Instructs selected across three Oranguru decisions."},
+    {"check": "Analytic plus Choice Specs makes Beheeyem the biggest non-leader number", "result": "FAIL - never landed, unchanged by the +1", "evidence": "T1 Beheeyem selected Thunderbolt at Urshifu and was KO'd from full HP by one Incineroar Knock Off before it resolved, exactly as on build-5. The extra level did not move it out of one-shot range. This is a typing and role problem (a 252 HP / 252 SpA Psychic glass cannon in a gym whose named counterplay is Dark), not a level problem."},
+    {"check": "Mimikyu's Disguise absorbs the first hit and Swords Dance follows behind it", "result": "PASS - upgraded from PARTIAL", "evidence": "T2: 'The opposing Mimikyu's Attack rose sharply!' - it used SWORDS DANCE while its Disguise was still intact, and the Disguise busted to Knock Off in the same turn. On build-5 it never selected Swords Dance at all. It then had +2 Attack and used Shadow Sneak on T3 before dying. The authored line fired this time."},
+    {"check": "Uxie sets Light Screen or Yawn", "result": "PARTIAL, but it mattered this time", "evidence": "Yawn twice - T6 at Incineroar ('Incineroar grew drowsy!', asleep on T7 and I had to withdraw it) and T7 at Metagross. Light Screen was never selected. On build-5 the Light Screen was described as empty; the Yawn here actually removed a body from the fight."},
+    {"check": "Alolan Exeggutor's Harvest recycles its Sitrus Berry", "result": "PASS - first time observed", "evidence": "'The opposing Exeggutor harvested its Sitrus Berry!' on T3, T4 and T5. The prior run never saw it because Exeggutor's berry was knocked off. Knock Off was aimed at the berry on T7 and Exeggutor Protected it."},
+    {"check": "Delphox Mega Evolves (watching for the late-Mega deferral seen at E0377)", "result": "PASS", "evidence": "T8: 'The opposing Delphox has Mega Evolved into Mega Delphox' on its first turn out, no deferral, and its Mystical Fire took Mega Metagross from 279 to 39 in one hit."},
+    {"check": "AI decision budget <= 1.2s", "result": "PASS", "evidence": "ai_decision_seconds_max 1.021."}
+  ],
+  "ai_defects": [
+    {"id": "E0395-1", "severity": "low (downgraded from moderate)", "status": "PARTIALLY REPRODUCED - the clear case did not recur", "description": "Alolan Exeggutor selected Draco Meteor on T3, T4, T6 and T8, taking its own Special Attack 0 -> -2 -> -4 -> -6. The prior receipt's decisive evidence was a turn where a 2x Psychic was available and it chose the 1x Draco Meteor anyway; that did NOT happen here. On every one of these turns Draco Meteor was genuinely its best damage: against Incineroar (Fire/Dark) Psychic is 0x and Giga Drain is 0.5x, and against Mega Metagross (Steel/Psychic) Psychic is 0.25x and Giga Drain 0.5x. What is still visible is that the scorer does not price the stage cost - by T6 it was at -6 with no offence left and a 70-damage hit to show for it, where Protect (which it does own, and used well twice) would have preserved more total output. Keep the broad index the prior receipt asked for (Overheat, Leaf Storm, Fleur Cannon, Psycho Boost owners), but this room no longer demonstrates a wrong choice."},
+    {"id": "E0395-2", "severity": "low", "status": "new, reporting only", "description": "Reading oddity, not a battle decision. Alolan Exeggutor's state item field read ITEM_NONE on its entry turn (209/298, 70% HP, above the Sitrus threshold) and again on T4 at 224/298, while reading ITEM_SITRUS_BERRY on T5, and the engine printed 'harvested its Sitrus Berry' on T3, T4 and T5. I could not reconcile the NONE readings with its HP. Same shape as the a4 Zekrom Clear Amulet read glitch recorded in work/playtest/327-TRAINER_DRAKE/receipt.json defect 4 (item field for a battler that entered mid-battle). Recording it for the main agent rather than asserting a bug; nothing in the ledger depends on it."}
+  ],
+  "ai_choices_that_were_correct": [
+    "T2 withdrawing Oranguru at 201/294 - it is the room's engine and the crack line names it as the thing to kill first, and the AI got it off the board before my focus fire landed. On build-5 Oranguru died on turn 2; here it lived to turn 5 and produced the fight's best guard.",
+    "T4 Oranguru Protect blocking a Mega Metagross Meteor Mash and a 2x Darkest Lariat in one action",
+    "T7 Exeggutor Protect specifically saving the Sitrus Berry its Harvest loop runs on",
+    "T2 Mimikyu Swords Dance behind an intact Disguise",
+    "T6/T7 Uxie Yawn rather than a screen that would not have mattered against physical Dark and Steel attackers"
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NO LEVEL CHANGE this pass. receipt.json's +1 on Oranguru and Beheeyem is live in this ROM and this is its first retest; the outcome is a first-attempt 6-1, so the brief's '0-1 faints' trigger fires again and a further +1 would be the mechanical response. I am not taking it, for three reasons and I want them on the record. First, the parent instruction for this pass is to move levels only when the result flips the prior receipt's decision, and this result repeats it rather than flipping it. Second, the +1 demonstrably did not fix what is wrong: Beheeyem was still one-shot from full HP by a single Knock Off before acting, at L76 instead of L75, and another level will not change that - it is a 252 HP / 252 SpA Psychic body in a gym whose own crack line tells the player to bring Dark. Third, AGENTS.md is explicit that AI and design defects are fixed before levels compensate, and the defect here is structural: the gym's signature Instruct has now failed to fire in three separate observations because Oranguru is faster than every partner it is ever placed beside. Offsets stay 2/2/1/1/1/2 (medium levels 76/76/75/75/75/76). The room did get harder in practice - one faint, Mega Metagross at 39/279, Flutter Mane at 93/193 and Incineroar slept - and that came from the AI playing better, not from the extra level.",
+  "could_this_be_cooler": "receipt.json's recommendation stands and this run strengthens it: lead Oranguru beside Delphox. Instruct has now been unobserved across three runs on three builds for the same reason every time, and no level change can reach it. The second note from receipt.json is now partly answered - Harvest DID recycle the Sitrus three times here, so the ability is real when the berry survives, and the AI even spent a Protect to defend it on T7. That is a nice interaction and I would leave Exeggutor alone. New note: Uxie's Light Screen has never been chosen in either run while Yawn has been chosen three times; if the screen is not wanted, the slot could carry something the room actually needs.",
+  "legality": "No legality problem in the authored set. The structural note from receipt.json stands: the tactic line 'INSTRUCT ORANGURU INSTRUCT DELPHOX' names a pairing the party order makes almost impossible to reach.",
+  "verdict": "Better room than build-5 recorded, and none of the improvement is level-driven. The AI saved its own engine with a switch, guarded twice to protect it, finally used Mimikyu's Swords Dance behind the Disguise, and kept its Harvest loop alive through a Knock Off. Guards stayed clean at 0 empty and 0 consecutive. The one thing that has never happened is the mechanic the room is named after."
+}
