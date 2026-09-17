@@ -1,0 +1,113 @@
+{
+  "play_order": 106,
+  "e_group": "E0127",
+  "trainer": "TRAINER_COURTNEY_METEOR_FALLS + TRAINER_GRUNT_METEOR_FALLS (one two-owner battle, twelve opponents)",
+  "class": "admin",
+  "cap": 36,
+  "difficulty": "medium",
+  "pass": "build-16 AI rerun",
+  "purpose": "Measure commits 738e5a8809 (pair search no longer stops with only Protect boards scored for a body) and d50e8337c8 (no authored ACTIVATE trigger on the turn the recipient shields) against the prior receipt's Protect ledger.",
+  "build": {
+    "build_dir": "work/agent-battle-build-16",
+    "inputs_sha256": "448b369f7a06b9f64b7662605c2d39d2bb6a33a5ddfa60ccd7a6bb4d7007f1ab",
+    "stale_build_check": "PASS - driver asserted level_cap 36 from the ROM; no 'campaign cap did not reach N; the ROM reports 0' report."
+  },
+  "prior_receipt": "work/playtest/106-TRAINER_COURTNEY_METEOR_FALLS/receipt.json",
+  "reused_from_prior": {
+    "party_manifest": "work/playtest/106-TRAINER_COURTNEY_METEOR_FALLS/party-a3.json",
+    "seed": 306,
+    "why": "party-a3 / seed 306 is the prior receipt's decisive attempt (attempt 3, the only win: 12-4 in 18 turns)."
+  },
+  "attempt": {
+    "n": 1,
+    "run_dir": "work/playtest/106-TRAINER_COURTNEY_METEOR_FALLS/b16",
+    "seed": 306,
+    "party": "party-a3.json",
+    "outcome": "lost",
+    "turns": 10,
+    "decisions": 15,
+    "player_faints": 6,
+    "opponent_faints": 7,
+    "ai_decision_seconds_max": 1.055,
+    "ai_decision_budget": "PASS - 1.055s against the 1.2s complete opponent decision budget.",
+    "opponent_faints_detail": [
+      "Hippowdon turn 3 (Earthquake)",
+      "Claydol turn 4 (Earthquake, the turn after its Protect)",
+      "Solrock turn 5 (Dazzling Gleam)",
+      "Lunatone turn 8 (Life Orb recoil after its own Power Gem)",
+      "Houndoom turn 8 (Dazzling Gleam)",
+      "Minior turn 9 (Thunderbolt, immediately after its Shell Smash)",
+      "Mega Aerodactyl turn 10 (Thunderbolt, 2x, on its Mega Evolution turn)"
+    ],
+    "player_faints_detail": [
+      "Excadrill turn 4 (Solrock Rock Slide, at 1 HP behind a spent Focus Sash)",
+      "Incineroar turn 5 (Solrock Helping Hand into Lunatone's Life Orb Power Gem - a clean OHKO on a full 148 HP body)",
+      "Alakazam turn 8 (Heat Wave then Power Gem on its entry turn, before it acted)",
+      "Togekiss turn 9 (Mightyena Play Rough at 25 HP)",
+      "Kartana turn 10 (Mightyena Sucker Punch plus Mega Aerodactyl Dual Wingbeat)",
+      "Magnezone turn 11 (Sigilyph Heat Wave plus Mightyena Crunch)"
+    ],
+    "narrative": "The prior receipt won this with the Excadrill/Togekiss opening: Follow Me absorbed the lead pair's combination turn for two turns while Mold Breaker Earthquake worked on the Levitate bodies. That opening did not reproduce, for two separate reasons. First, the AI answered it: on turn 1 the grunt voluntarily withdrew Solrock and brought Hippowdon in for Sand Stream, and on turn 2 Courtney withdrew Lunatone and let Claydol - the body Earthquake hits for 1x rather than 2x - eat the spread. Second, I misplayed twice. On turn 4 I kept a 1 HP sash-spent Excadrill in to land one more Earthquake and lost it to Rock Slide, and on turn 8 I switched a 97 HP Alakazam into a live Houndoom Heat Wave plus a Life Orb Power Gem and it died on entry without acting. From there two survivors could not clear seven opponents. The AI's own best moment was turn 5: Solrock's Helping Hand into Lunatone's Power Gem OHKOed a full-HP Incineroar, which is the printed ALLY_COMBO doing exactly what it is authored to do."
+  },
+  "protect_ledger_build16": [
+    {
+      "turn": 1,
+      "battler": "LUNATONE (119/119)",
+      "call": "Protect",
+      "verdict": "REAL",
+      "payoff": "Blocked Excadrill's Mold Breaker Earthquake, which is 2x into Rock/Psychic and ignores Lunatone's Levitate outright. It also covered its partner's turn: Solrock used that same turn to pivot out to Hippowdon and set sand, so the guard bought a free switch as well as its own HP."
+    },
+    {
+      "turn": 3,
+      "battler": "CLAYDOL (38/119)",
+      "call": "Protect",
+      "verdict": "REAL - excellent",
+      "payoff": "Blocked Earthquake and Dazzling Gleam in the same turn at 38 HP. Lethality is proven rather than estimated: the identical pair of attacks had taken it from 119 to 38 on the previous turn, and the same Earthquake KOed it one turn later. It also survived long enough for its partner Hippowdon's death to be the only faint that turn."
+    },
+    {
+      "turn": 6,
+      "battler": "HOUNDOOM (105/105, its entry turn)",
+      "call": "Protect",
+      "verdict": "REAL - excellent",
+      "payoff": "Blocked Kartana's Sacred Sword (Fighting, 2x into Dark, from a 181-base-Attack body) and Togekiss's Dazzling Gleam (Fairy, 2x into Dark) on the turn it was forced in. Houndoom's defences are its worst stats and either attack was plausibly lethal; it survived to turn 8 and its Heat Waves did most of the damage that lost me the fight."
+    }
+  ],
+  "protect_summary_build16": {
+    "opponent_guards_total": 3,
+    "empty": 0,
+    "consecutive_same_battler": 0,
+    "simultaneous_double_guards": 0,
+    "non_guards_worth_recording": "Four other Protect carriers had live turns and chose an action instead: Solrock (turn 1 pivot, turn 5 Helping Hand), Minior (turn 9 Shell Smash into a healthy Magnezone that threatened it 2x), Mega Aerodactyl (turn 10, Mega Evolved and used Dual Wingbeat on its entry turn) and Camerupt/Magcargo/Crobat, which never entered."
+  },
+  "comparison_to_prior_receipt": {
+    "prior_ledger_scope": "receipt.json recorded roughly sixteen opponent Protects across three attempts; several entries are written as multi-turn groups, so the exact count of a few of them is ambiguous in the prior receipt's own wording.",
+    "empty_protects_before_all_attempts": 1,
+    "empty_protects_before_all_attempts_detail": "a2 turn 2, CAMERUPT: 'empty - nothing was aimed at Camerupt that turn; both of my attacks went at Hippowdon'.",
+    "empty_protects_before_decisive_attempt": 0,
+    "empty_protects_after": 0,
+    "consecutive_protects_before_all_attempts": 1,
+    "consecutive_protects_before_all_attempts_detail": "a3 'T12/T14/T15 MINIOR' contains a same-battler pair on consecutive turns (T14 then T15). Separately, a1 turn 3 had Lunatone and Solrock guarding SIMULTANEOUSLY, which the prior receipt itself flagged as 'the one cadence pattern in this battle I would look at' because it produced zero opponent damage and zero progress.",
+    "consecutive_protects_before_decisive_attempt": 1,
+    "consecutive_protects_after": 0,
+    "simultaneous_double_guards_before": 1,
+    "simultaneous_double_guards_after": 0,
+    "verdict": "Improved on both axes measured, with a coverage caveat. Three guards, three concrete payoffs, no empty guard, no same-battler repeat and no simultaneous double-guard. The one empty guard the prior receipt recorded belonged to Camerupt, and Camerupt never entered this run, so that exact case is NOT retested - the loss ended the battle at 10 turns against the prior win's 18, and Camerupt, Magcargo, Crobat and Sigilyph's guard turns never happened. Treat this room's empty-guard result as 0 of 3 observed rather than as a clean bill for all twelve opponents.",
+    "d50e8337c8_evidence": "POSITIVE, and this room is the best evidence in my block. Turn 5, Solrock used Helping Hand on Lunatone while Lunatone ATTACKED with Power Gem, and the boosted Life Orb hit OHKOed a full-HP 148 Incineroar. That is the same authored-activation-into-an-ally board that produced the defect the commit targets (Norman's receipt.json P13-D1: Helping Hand aimed at an ally that Protected the same turn), resolving the correct way round."
+  },
+  "strategy_checks": [
+    {"check": "SAND: the lead pair does not automatically start sand; Hippowdon must actually enter for it", "result": "PASS", "evidence": "Turn 1, the grunt withdrew Solrock and sent Hippowdon: 'A sandstorm kicked up!'. This was a voluntary pivot into the ability, not a start-of-battle field flag, and field_source recorded no authored weather."},
+    {"check": "ALLY_COMBO: Solrock supports Lunatone with Helping Hand", "result": "PASS", "evidence": "Turn 5: 'The opposing Solrock used Helping Hand!' into Lunatone's Power Gem, which OHKOed a full-HP 148 Incineroar (Rock 2x into Fire/Dark). The partner attacked rather than guarding, so the boost converted."},
+    {"check": "SETUP: Magcargo/Minior use the configured Simple or Shields Down Shell Smash with the White Herb, not an invented ability", "result": "PARTIAL", "evidence": "Minior fired it on turn 9: Shell Smash, then 'The opposing Minior returned its stats to normal using its White Herb', leaving a clean +2/+2/+2. Ability read as SHIELDS_DOWN and the form flipped METEOR -> CORE. Magcargo never entered, so its Simple Shell Smash is untested this pass."},
+    {"check": "Mega Aerodactyl Mega-Evolves and picks a sensible attack", "result": "PASS", "evidence": "Turn 10, entry turn: Mega Evolved and chose Dual Wingbeat into Kartana. That is the correct pick of its four - Rock Slide is 0.5x into Grass/Steel and Ice Fang is 1x once, while Dual Wingbeat is 1x twice - and it KOed Kartana."},
+    {"check": "Opponents use switching as a real resource rather than standing in a bad matchup", "result": "PASS", "evidence": "Two voluntary pivots against the Mold Breaker Earthquake opening: Solrock -> Hippowdon on turn 1 and Lunatone -> Claydol on turn 2, the second of which deliberately traded a 2x body for a 1x body into a known spread attack. This is new behaviour relative to the prior receipt, where the same seed and party went four turns without losing anything."},
+    {"check": "Every opponent Protect has a payoff (the object of this pass)", "result": "PASS", "evidence": "3 of 3 with concrete payoff; see protect_ledger_build16."}
+  ],
+  "ai_defects": [],
+  "ai_defects_note": "No AI defect observed. Every opponent selection was defensible: two correct pivots, a Helping Hand that converted into an OHKO, three guards with payoff, a Sucker Punch on a turn its target did attack (turn 10, into Kartana's Sacred Sword), and a Mega that picked the right one of four attacks on its entry turn. The only choice I considered flagging was Minior's turn-9 Shell Smash in front of a healthy Magnezone that threatens it 2x - it died to the Thunderbolt that followed. I am recording it as a design observation rather than a defect: Shell Smash plus White Herb is the member's whole authored purpose, and the AI cannot know my move at turn start.",
+  "level_changes": [],
+  "level_rule_statement": "NOT APPLIED, explicitly. The prior receipt's decision was KEEP and this rerun does not flip it. A single loss is not the brief's decrease trigger, which requires three lost optimized attempts; the prior receipt already worked through its own two losses and resolved them with a win, and that sequence is not restarted by one rerun. I also will not convert my own mistakes into a level cut: two of the six faints were straightforward player errors (holding a 1 HP Excadrill on turn 4, and switching a 97 HP Alakazam into a live Heat Wave plus Power Gem on turn 8), and AGENTS.md is explicit that a player mistake is not a difficulty benchmark. The rest of the swing is the AI playing better than it did on the prior build - two correct pivots out of the Earthquake opening and a converted Helping Hand - which is the intended direction, not a reason to weaken the room. Per the brief I ran one attempt; a second was not triggered because the level decision did not change. No opponent line in the teams file was touched.",
+  "could_this_be_cooler": "The twelve-opponent two-owner gauntlet remains the right shape and no composition change is recommended. One observation this run earns: the room is much better than the prior receipt made it look, because the two Levitate Psychic rocks now actively dodge a Mold Breaker Ground lead instead of standing in it, and the Helping Hand plus Life Orb Power Gem OHKO is a genuinely memorable turn. The honest weak spot is still the back half - Camerupt, Magcargo and Crobat have now failed to appear in two of four recorded attempts, so a third of the grunt's roster has almost no play evidence.",
+  "legality_problems_found": "None.",
+  "coverage_caveat": "Because the battle was lost at turn 10, five of the twelve opponents (Camerupt, Magcargo, Crobat, and the guard turns of Sigilyph and Minior) contributed little or no Protect evidence. The empty-guard measurement for this room is therefore narrower than the prior receipt's.",
+  "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py against work/agent-battle-build-16. Not earned campaign traversal."
+}
