@@ -5778,9 +5778,18 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 // every Mega board scored INT_MIN and no Mega ever evolved in
                 // a two-owner multi. The refresh a form change requires is not
                 // optional work: it is what makes the comparison meaningful.
+                // A Mega board has to rebuild the damage caches around the new
+                // form, and both of this search's stops would otherwise throw
+                // that board away: the clock abandons the refresh, and a board
+                // the caller may not stop on returns nothing at all. In an
+                // ordinary double the clock still has room when the Mega masks
+                // come up; in a two-owner multi three actors share one budget
+                // and it never does, so every Mega board scored INT_MIN and no
+                // Mega ever evolved. A form change is not optional work, so
+                // the Mega boards finish the way a countdown exit does.
                 s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev,
-                    mega != 0 || noActionMask != 0, mega != 0 ? FALSE : canStop,
-                    deadline[0] || deadline[1]);
+                    mega != 0 || noActionMask != 0, canStop,
+                    deadline[0] || deadline[1] || mega != 0);
                 if (score == INT_MIN)
                     continue;
                 if (mega != 0)
