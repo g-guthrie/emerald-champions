@@ -3404,11 +3404,16 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         {
             if (hp[partner] && !(acted & (1u << partner))
              && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD
-             && !IsFixedDamageMove(other->executedMove))
+             && !IsFixedDamageMove(other->executedMove)
+             // A partner spending its own turn behind a shield has no damage
+             // to multiply, and this pair is choosing both actions together,
+             // so it knows that before it commits.
+             && GetMoveEffect(other->executedMove) != EFFECT_PROTECT)
                 boost[partner] = boost[partner] * 3 / 2;
             else if (sign > 0 && !copy)
                 // Nothing to boost: the partner is leaving, has already acted,
-                // or is holding a move the multiplier cannot touch. Watching a
+                // is guarding, or is holding damage the multiplier cannot
+                // touch. Watching a
                 // Helping Hand announce itself and fail into a partner that was
                 // switching out is the turn this costs.
                 score -= PAIR_SUPPORT_WASTED_COST;
