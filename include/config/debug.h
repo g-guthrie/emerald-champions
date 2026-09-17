@@ -14,4 +14,8 @@
 // Pokémon Debug
 #define DEBUG_POKEMON_SPRITE_VISUALIZER DISABLED_ON_RELEASE // Enables a debug menu for Pokémon sprites and icons, accessed by pressing Select in the summary screen.
 
+// Emerald Champions testing aid
+#define EC_DEBUG_INSTANT_WIN            TRUE                // If TRUE, holding L and R together during a battle ends it as an immediate win, for skipping fights while testing the campaign.
+#define EC_DEBUG_INSTANT_WIN_KEYS       (L_BUTTON | R_BUTTON) // Both keys must be held at once.
+
 #endif // GUARD_CONFIG_DEBUG_H

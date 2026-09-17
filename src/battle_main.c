@@ -1771,6 +1771,33 @@ static void CB2_HandleStartMultiBattle(void)
     }
 }
 
+#if EC_DEBUG_INSTANT_WIN
+// Emerald Champions testing aid: hold L and R together during a battle to end it
+// as an immediate win, so the campaign can be walked through without playing
+// every fight. Progression reads gBattleOutcome afterwards, so a trainer beaten
+// this way records as defeated exactly as if the battle had been fought.
+static bool32 EmeraldChampions_TryInstantWin(void)
+{
+    if ((gMain.heldKeys & EC_DEBUG_INSTANT_WIN_KEYS) != EC_DEBUG_INSTANT_WIN_KEYS)
+        return FALSE;
+
+    // A link or recorded battle has to stay in step with the other side, and the
+    // test runner supplies its own outcomes.
+    if (TESTING || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_RECORDED))
+        return FALSE;
+
+    // Only once, only after the intro has handed control to the turn loop, and
+    // only while no controller is mid-animation, so nothing is cut off partway.
+    if (gBattleOutcome != 0 || gBattleMainFunc == DoBattleIntro || gBattleControllerExecFlags != 0)
+        return FALSE;
+
+    BattleStopLowHpSound();
+    gBattleOutcome = B_OUTCOME_WON;
+    gBattleMainFunc = HandleEndTurn_BattleWon;
+    return TRUE;
+}
+#endif // EC_DEBUG_INSTANT_WIN
+
 void BattleMainCB2(void)
 {
     AnimateSprites();
@@ -1778,6 +1805,10 @@ void BattleMainCB2(void)
     RunTextPrinters();
     UpdatePaletteFade();
     RunTasks();
+
+#if EC_DEBUG_INSTANT_WIN
+    EmeraldChampions_TryInstantWin();
+#endif
 
     if (JOY_HELD(B_BUTTON) && gBattleTypeFlags & BATTLE_TYPE_RECORDED && RecordedBattle_CanStopPlayback())
     {
