@@ -2321,3 +2321,29 @@ chosen against nothing is the same defect one turn later.
 
 Those should be re-run rather than fixtured. If they persist, the remaining
 cases are genuine pricing and I will take them one at a time.
+
+# K: the friendly activation was blocked by its own recipient
+
+Commit `d50e8337c8`. **205 passed, 0 failed**; ROM clean.
+
+Three runs of `ACTIVATE FROSLASS FROST_BREATH TAUROS` never firing, against a
+Wattson `ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE` that fires every time. The
+difference turned out to be neither the trigger nor the recipient: **the pair
+was emitting the trigger and the recipient's own Protect on the same turn**, so
+the friendly critical hit was blocked by the body it was meant to arm.
+
+My existing Aisha fixture passed throughout, because its board is deliberately
+harmless — two Magikarp that do nothing, so the recipient never wants to
+shield. Rebuilt on the same authored trainer with real attackers opposite, it
+fails immediately, and the assertion that catches it is on the *recipient's*
+move rather than the trigger's.
+
+The reward is now withheld when the recipient's own action in that pair is a
+guard, so the pair has to pick a turn on which the activation can happen.
+
+**This is the same lesson as the empty guards, one level up.** A fixture whose
+board cannot fight back does not test a pair decision at all: the AI has no
+competing use for the turn, so every joint conflict disappears. Several of my
+earlier authored-tactic fixtures are built that way — the Wattson one included
+— and they should be re-pointed at boards with live threats before they are
+trusted.
