@@ -4794,7 +4794,7 @@ Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
 Prize Multiplier: 10
 
-SPECIES_MEGANIUM @ ITEM_MEGANIUMITE
+SPECIES_MEGANIUM @ ITEM_LEFTOVERS
 Level: 82
 Level Offset: 2
 Ability: ABILITY_TRIAGE
