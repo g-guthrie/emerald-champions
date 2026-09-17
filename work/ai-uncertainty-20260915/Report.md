@@ -2635,3 +2635,71 @@ knockout. Assert what the healthy body does. A fixture pins the state, so the
 same decision can be read on both builds without RNG between them — which is
 the only way this particular question gets an answer. The board must be able to
 fight back, per the rule above.
+
+# Can the AI's scoring be given its own RNG stream? No, and it would not help
+
+Asked whether isolating the AI's random draws would make same-seed replays
+comparable across builds. The answer is no, because the AI's draws are not what
+couples it to the battle.
+
+## The coupling is frames, not draws
+
+```c
+// src/battle_main.c:1851, VBlankCB_Battle
+// Change gRngSeed every vblank unless the battle could be recorded.
+if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
+    AdvanceRandom();
+```
+
+An ordinary battle burns one `Random32()` out of `gRngValue` **every vblank**.
+The AI's decision takes a variable number of frames by design — that is the
+whole point of the 1.2-second budget, `decisionStartFrame` and `aiDelayFrames`.
+So scoring more or fewer pairs advances the battle RNG by that many draws and
+every later damage roll moves.
+
+Measured on Virgil turn 1, the two builds from the reverted experiment, same
+seed, same party, same commands, **identical AI choices** (Bronzong Body Press,
+Dusclops Trick Room):
+
+| | `ai_decision_frames` | turn frames | Dusclops after |
+| --- | --- | --- | --- |
+| before | 61 | 3133 | 83/215 |
+| after | 63 | 3007 | 75/215 |
+
+Two frames of extra scoring is the whole cause. A separate stream for the AI's
+own draws leaves every one of those per-vblank burns exactly where it is.
+
+## The three questions, answered
+
+**Separable?** Trivially, and irrelevant. Every AI draw already carries an
+`RNG_AI_*` tag and they all live in `src/battle_ai_switch.c`;
+`battle_ai_pair.c`, `battle_ai_main.c` and `battle_ai_util.c` make **no draws at
+all**. The pair scorer this audit is changing consumes nothing.
+
+**Would it invalidate the suite?** It would change which values the
+`RNG_AI_SWITCH_*` calls return in the release ROM, so any live behaviour resting
+on a switch-chance roll moves — a real behaviour change, bought for no benefit
+while the frame coupling stands.
+
+**Desync risk?** Both `AdvanceRandom()` sites already exclude LINK, FRONTIER and
+RECORDED, so link and recorded determinism is preserved by construction. A new
+stream would have to derive its seed from the recorded seed to keep that, which
+is avoidable risk for nothing.
+
+## The property already exists, in fixtures
+
+`test/test_runner.c:1078` defines a strong `RandomUniform` that overrides the
+weak default at `src/random.c:163`, so under the test runner every tagged roll
+comes from the runner's own controlled sequence rather than `gRngValue`; battle
+tests additionally run as recorded battles, which both `AdvanceRandom()` sites
+skip outright. **A fixture is already frame-independent, and A/B across builds
+on a fixture is already sound.** That is exactly the property wanted, and it is
+available today on the one kind of board where it can be had.
+
+The only way to get it on a driven replay is to stop the per-vblank advance in
+the headless ROM, which would make that ROM's rolls disagree with the release
+ROM's — the thing `docs/VERIFICATION.md` forbids the driver from doing — and
+would make every damage figure in a receipt unrepresentative of the game people
+actually play, which is what level calibration rests on.
+
+**Recommendation: do not build it. Fixture-first, as planned.**
