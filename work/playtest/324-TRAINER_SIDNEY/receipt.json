@@ -1,0 +1,33 @@
+{
+  "play_order": 324, "e_group": "E0493", "trainer": "TRAINER_SIDNEY", "class": "elite", "location": "EverGrandeCity_SidneysRoom",
+  "cap": 96, "cap_confirmation": "driver state level_cap 96; Incineroar and Grimmsnarl (offset 4) L98, Sharpedo (2) L96, Urshifu (1) L95, Yveltal and Absol (0) L94 = cap+offset-2 on Medium.",
+  "difficulty": "medium",
+  "party_manifests": ["work/playtest/324-TRAINER_SIDNEY/party_sidney96.json"],
+  "chronology_note": "League entered with six full-HP Pokemon (first room, no Center needed yet). One reachable legend (Tapu Lele, Mt. Pyre exterior sign) for Psychic Terrain against a Fake Out / Sucker Punch / Prankster room; Flutter Mane (Mt. Pyre summit wild), Sylveon, Urshifu-Rapid, Incineroar and Kangaskhan (Safari Zone, Kangaskhanite window 30) are all far-upstream sources. No window-90 addition used. An earlier partial run was voided at the session-limit stop; this a1 is a fresh attempt on build-8 (the build-9 instruction arrived while it was in progress; its ROM is pinned in the run dir).",
+  "pre_play_strategy_checks": ["Incineroar Fake Out / Intimidate / Parting Shot opening", "Yveltal Tailwind and Dark Aura special pressure", "Grimmsnarl Prankster Reflect + Light Screen (Light Clay), Thunder Wave", "Urshifu Wicked Blow through Protect", "Sharpedo Speed Boost then Mega (Strong Jaw Psychic Fangs removes screens)", "Mega Absol Z Magic Bounce / Sucker Punch"],
+  "attempts": [
+    {"n": 1, "seed": 16, "run_dir": "a1", "party": "party_sidney96.json led by Tapu Lele + Flutter Mane", "outcome": "won", "turns": 6, "player_faints": 3, "opponent_faints": 6,
+     "why": "Turn 1 Psychic Terrain shut Incineroar's Fake Out off the table; two Moonblasts OHKO'd Yveltal before its Tailwind; Flare Blitz put Flutter Mane on its Sash (240). Turn 2 Grimmsnarl Light Screen; Moonblast 283 on Grimmsnarl; Flutter Mane pivoted out for Urshifu. Turn 3 Grimmsnarl Reflect; Close Combat OHKO'd Incineroar, a crit Moonblast KO'd Grimmsnarl through its own screen. Turn 4 Sharpedo Mega Evolved and Strong Jaw Psychic Fangs OHKO'd Urshifu-Rapid (253); Urshifu-Single-Strike outsped Tapu Lele by one point and Wicked Blow KO'd it (190). Turn 5 Flutter Mane Moonblast OHKO'd Mega Sharpedo through Light Screen, Wicked Blow KO'd the 2-HP Flutter Mane, Pixilate Hyper Voice 4x OHKO'd Urshifu. Turn 6 Absol Protected the Fake Out + Moonblast without Mega Evolving; turn 7 Close Combat 182 on Incineroar, then a crit Flare Blitz OHKO'd Absol (still un-Mega'd). Faints: Urshifu-Rapid, Tapu Lele, Flutter Mane."}
+  ],
+  "strategy_checks": [
+    {"check": "Incineroar Fake Out opening", "result": "FAIL (denied by Psychic Terrain)", "evidence": "turn 1 chosen Flare Blitz - the AI correctly did not attempt Fake Out into terrain; Intimidate applied on entry; Parting Shot never chosen"},
+    {"check": "Yveltal Tailwind / Dark Aura", "result": "FAIL", "evidence": "turn 1 chose Oblivion Wing into Tapu Lele, was OHKO'd by two Moonblasts before moving"},
+    {"check": "Grimmsnarl Prankster screens", "result": "PASS", "evidence": "turn 2 Light Screen, turn 3 Reflect, both up for the rest of the fight (Light Clay); Thunder Wave never chosen - correct, Psychic Terrain blocked priority status onto grounded targets"},
+    {"check": "Urshifu Wicked Blow", "result": "PASS", "evidence": "turn 4 crit Wicked Blow KO'd Tapu Lele, turn 5 KO'd Flutter Mane"},
+    {"check": "Sharpedo Speed Boost then Mega timing", "result": "PARTIAL", "evidence": "Mega Evolved on its first turn (no un-Mega'd Speed Boost turn); Strong Jaw Psychic Fangs OHKO'd Urshifu-Rapid turn 4; OHKO'd by Moonblast turn 5"},
+    {"check": "Mega Absol Z", "result": "FAIL", "evidence": "Absol Protected on entry and used Close Combat the next turn, never Mega Evolved; KO'd by a crit Flare Blitz"}
+  ],
+  "protect_ledger": [
+    {"turn": 6, "user": "Absol", "payoff": "blocked Fake Out + a lethal Moonblast - good; but spent without Mega Evolving, so its Magic Bounce never existed"}
+  ],
+  "protect_summary": "1 Protect, good.",
+  "ai_defects": [
+    {"turn": "6-7", "board": "Absol 256/256 (Absolite Z, last Pokemon, Intimidated) alone vs Incineroar + Sylveon", "chosen": "Protect (no Mega), then Close Combat (no Mega)", "better": "Mega Evolve on the first available turn: Mega Absol Z's 151 Speed and Magic Bounce were the point of the slot, and Mega Evolution is free. Two turns on the field and the Mega never happened, so the ace died as a base Absol."}
+  ],
+  "ai_notes": "Sharpedo Mega Evolving immediately is defensible (the dossier's 'earn a Speed Boost first' timing is optional). Urshifu targeting the 190-HP Tapu Lele for the KO over the fresh Urshifu-Rapid was right. The room is a clear step above Victory Road in play: three of the player's six fell and every opposing attack that landed was a one-hit KO.",
+  "level_changes": [],
+  "level_change_rationale": "Won first try 6-3 after a real fight against a hand-crafted room. Keep. The un-Mega'd Absol is an AI issue, not a level issue.",
+  "cooler": "Dark Aura plus Fairy weakness across five members is the intended crack and it worked exactly as written: Fairy spread and Moonblast decided the fight. The room would be nastier if Yveltal's Tailwind went up (it never moved) - leading Grimmsnarl beside Yveltal (screens first) instead of Incineroar would give the Tailwind a turn. The Absol Mega timing is the only real gap. No set change.",
+  "legality_notes": "Sets legal. Driver item names in this snapshot show Absolite Z as raw id 861 and Clear Amulet as GOLISOPITE (constants drift in the modified driver vs the build-8 ROM); Mega Evolutions confirm the real items.",
+  "verification_limit": "No level change. If the main agent re-runs one battle from this block after a rebuild, Sidney is the one most worth re-running (the ace never Mega Evolved and Yveltal never set Tailwind, so the room's ceiling is untested)."
+}
