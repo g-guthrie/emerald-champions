@@ -1,0 +1,37 @@
+{
+  "play_order": 267, "e_group": "E0409", "trainer": "TRAINER_COURTNEY_MOSSDEEP + TRAINER_MAXIE_MOSSDEEP (multi, partner Steven)", "cap": 84, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Do Mega Heatran (Courtney) and Mega Camerupt (Maxie) now Mega-Evolve on their first action in the two-owner multi?",
+  "party_manifest": "work/playtest/267-TRAINER_COURTNEY_MOSSDEEP/party_multi_84.json",
+  "party_reuse": "Unchanged from receipt.json; same cap 84 and location, chronology audit unchanged.",
+  "level_offsets_at_run": {"COURTNEY": {"NINETALES": 3, "GREAT_TUSK": 2, "HEATRAN": 2}, "MAXIE": {"RHYPERIOR": 2, "COPPERAJAH": 3, "CAMERUPT": 2}},
+  "resolved_opponent_levels": {"NINETALES": 85, "GREAT_TUSK": 84, "HEATRAN": 84, "RHYPERIOR": 84, "COPPERAJAH": 85, "CAMERUPT": 84},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/267-TRAINER_COURTNEY_MOSSDEEP/m1", "seed": 409, "outcome": "won", "turns": 9, "player_faints": 0, "partner_faints": 2, "opponent_faints": 6,
+     "narrative": "Opening board Rhyperior + Ninetales under my rain (Drizzle replaced Drought). T1 Wide Guard blocked Heat Wave; Steven's Stomping Tantrum 128 into Rhyperior. T2 Hurricane KO'd Ninetales. T3 Great Tusk Headlong Rush KO'd Metagross; Hurricane KO'd Great Tusk; Skarmory and HEATRAN entered. T4 HEATRAN MEGA-EVOLVED ON ITS FIRST ACTION and Flash Cannoned the incoming Swampert; Skarmory Tailwind; Rock Slide missed both. T5 Mega Swampert High Horsepower OHKO'd Mega Heatran before Magma Storm resolved. T6 Liquidation OHKO'd Rhyperior. T7 Copperajah Protect on entry blocked High Horsepower (and ran out Tailwind). T8 High Horsepower OHKO'd Copperajah; rain ended; CAMERUPT entered. T9 CAMERUPT MEGA-EVOLVED ON ITS FIRST ACTION; I Protected Swampert to let it act: Eruption took Skarmory 282->1 (Sturdy). T10 (no advance) Liquidation OHKO'd Mega Camerupt; Skarmory's crit Brave Bird recoil KO'd itself."}
+  ],
+  "mega_check": [
+    {"owner": "COURTNEY", "species": "HEATRAN", "evolved": true, "turn": 4, "first_action": true, "board": "Heatran 273/273 enters end of T3 beside Rhyperior 238/366 vs Pelipper 246/273 (switching to Swampert) and Skarmory 282/282. Mega Evolution then Flash Cannon (Swampert resisted)."},
+    {"owner": "MAXIE", "species": "CAMERUPT", "evolved": true, "turn": 9, "first_action": true, "board": "Camerupt 290/290 enters end of T8 alone vs Mega Swampert 251/340 and Skarmory 282/282, no weather. Mega Evolution then Eruption (Swampert Protected, Skarmory to Sturdy)."}
+  ],
+  "strategy_checks": [
+    {"check": "Both authored Megas evolve on first action in the two-owner multi", "result": "PASS", "evidence": "T4 'Heatran has Mega Evolved', T9 'Camerupt has Mega Evolved'; opponent party shows HEATRAN_MEGA and CAMERUPT_MEGA. The previous receipt's suspected per-owner Mega allocation problem no longer reproduces."},
+    {"check": "Mega Camerupt Eruption", "result": "PASS (exercised once)", "evidence": "T9 full-HP Sheer Force Eruption, 281 into Skarmory (Sturdy); without sun and into a Protect it could not do more."},
+    {"check": "Mega Heatran Magma Storm trap", "result": "NOT EXERCISED", "evidence": "Chosen on T5 but OHKO'd by 4x High Horsepower first."},
+    {"check": "Ninetales Drought powers both halves", "result": "PASS then removed", "evidence": "Drizzle replaced Drought at entry, exactly the crack line."},
+    {"check": "Rhyperior Lightning Rod / sensible targeting", "result": "FAIL", "evidence": "High Horsepower into Ground-immune targets four times: T1, T2, T3 into Pelipper (Flying) and T5 into Skarmory (Steel/Flying). Rock Slide was 2x into both Flying targets and was only chosen on T4 and T6."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Copperajah T7 Protect on entry blocked a 2x High Horsepower and let Tailwind expire."}
+  ],
+  "protect_ledger": [{"turn": 7, "battler": "COPPERAJAH", "payoff": "Blocked 2x High Horsepower; Tailwind petered out during the turn."}],
+  "ai_defects": [
+    {"id": "E0409-M1", "severity": "high", "turns": "1, 2, 3, 5", "battler": "Rhyperior (Maxie)", "board": "vs Pelipper (Water/Flying) + Metagross, then vs Swampert + Skarmory (Steel/Flying)", "chosen": "High Horsepower into a Ground-immune Flying target four times", "better": "Rock Slide (2x on Pelipper and Skarmory, spread) or Ice Punch; the prior receipt recorded the same pattern on T3 for Rhyperior and Great Tusk. Reported only; no AI code touched."},
+    {"id": "E0409-M2", "severity": "driver-observation", "note": "In this multi the native `chosen` record for the opposing battlers reads `target_kind: self` with `target` equal to their own index (Rhyperior T1/T2/T3/T5, Great Tusk T3, Heatran T5, Copperajah T8) while the messages show the move hitting a foe. The messages were used as truth; the latch looks wrong for opponent battlers in multi_2_vs_2."}
+  ],
+  "difficulty_reading": "Unchanged: still a zero-player-faint win (partner lost two). Both Megas now evolve, but Mega Swampert under my rain OHKOs Heatran before it acts and Camerupt after one Eruption; the Megas being real did not make the fight harder for the player's own side. Brief rule: +1 on the weakest one or two non-Mega members.",
+  "level_changes": {"rule_applied": "+1 on Great Tusk and Rhyperior (2->3 each; both untouched before, neither ace/Mega). Ninetales and Copperajah already took +1 in the first pass and are left at 3. Rhyperior's real problem is E0409-M1, not its level.",
+    "changes": [{"owner": "TRAINER_COURTNEY_MOSSDEEP", "member": "GREAT_TUSK", "before": 2, "after": 3}, {"owner": "TRAINER_MAXIE_MOSSDEEP", "member": "RHYPERIOR", "before": 2, "after": 3}],
+    "rerun": "NOT PERFORMED on build-10: offsets are compiled into the headless ROM and this block may not run make."},
+  "could_this_be_cooler": "Unchanged from receipt.json. Now that both Megas fire, the design's real gap is the opening board (Rhyperior + Ninetales, not Camerupt + Ninetales) which the plan text still describes.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}
