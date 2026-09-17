@@ -16,7 +16,7 @@
 #include "task.h"
 #include "text.h"
 #include "save.h"
-#include "mystery_gift_menu.h"
+#include "link_menu_text.h"
 
 enum {
     RFUSTATE_INIT,
@@ -1924,7 +1924,7 @@ static void RfuCheckErrorStatus(void)
 {
     if (gRfu.errorState == RFU_ERROR_STATE_OCCURRED && lman.childClockSlave_flag == 0)
     {
-        if (gMain.callback2 == CB2_MysteryGiftEReader || lman.init_param->mboot_flag)
+        if (lman.init_param->mboot_flag) // the Mystery Gift e-Reader screen is removed
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
