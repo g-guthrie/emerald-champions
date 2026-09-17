@@ -110,3 +110,4 @@ playtests/*.zip
 
 # Studio virtualenv created by the guide capture pipeline
 .venv-studio/
+guide/out/pv-*.png

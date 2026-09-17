@@ -1,0 +1,4624 @@
+[
+ {
+  "id": "Route103-pan",
+  "map": "Route103",
+  "x": 6,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 59,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 11,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route103 end to end"
+ },
+ {
+  "id": "Route102-pan",
+  "map": "Route102",
+  "x": 5,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 5,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 43,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route102 end to end"
+ },
+ {
+  "id": "Route104-pan",
+  "map": "Route104",
+  "x": 21,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 21,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 28,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 59,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route104 end to end"
+ },
+ {
+  "id": "PetalburgWoods-pan",
+  "map": "PetalburgWoods",
+  "x": 4,
+  "y": 19,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 4,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 32,
+    "y": 22,
+    "settle": 70
+   },
+   {
+    "x": 42,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "PetalburgWoods end to end"
+ },
+ {
+  "id": "Route115-pan",
+  "map": "Route115",
+  "x": 20,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 14,
+    "y": 32,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 45,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 60,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route115 end to end"
+ },
+ {
+  "id": "Route116-pan",
+  "map": "Route116",
+  "x": 7,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 25,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 41,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 56,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 75,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 97,
+    "y": 16,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route116 end to end"
+ },
+ {
+  "id": "RustboroCity_Gym-view",
+  "map": "RustboroCity_Gym",
+  "x": 5,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "RustboroCity_Gym"
+ },
+ {
+  "id": "RusturfTunnel-pan",
+  "map": "RusturfTunnel",
+  "x": 3,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 3,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 15,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 15,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "RusturfTunnel end to end"
+ },
+ {
+  "id": "Route106-pan",
+  "map": "Route106",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 60,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 72,
+    "y": 9,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route106 end to end"
+ },
+ {
+  "id": "DewfordTown_Gym-pan",
+  "map": "DewfordTown_Gym",
+  "x": 8,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 9,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "DewfordTown_Gym end to end"
+ },
+ {
+  "id": "Route109-pan",
+  "map": "Route109",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 31,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 44,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 56,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route109 end to end"
+ },
+ {
+  "id": "Route109_SeashoreHouse-view",
+  "map": "Route109_SeashoreHouse",
+  "x": 7,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route109_SeashoreHouse"
+ },
+ {
+  "id": "SlateportCity_OceanicMuseum_2F-view",
+  "map": "SlateportCity_OceanicMuseum_2F",
+  "x": 10,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SlateportCity_OceanicMuseum_2F"
+ },
+ {
+  "id": "SlateportCity-pan",
+  "map": "SlateportCity",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 16,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 30,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 41,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 53,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SlateportCity end to end"
+ },
+ {
+  "id": "Route110-pan",
+  "map": "Route110",
+  "x": 19,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 19,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 25,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 41,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 57,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 75,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 91,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route110 end to end"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle1-view",
+  "map": "Route110_TrickHousePuzzle1",
+  "x": 7,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle1"
+ },
+ {
+  "id": "MauvilleCity-pan",
+  "map": "MauvilleCity",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MauvilleCity end to end"
+ },
+ {
+  "id": "Route117-pan",
+  "map": "Route117",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 54,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route117 end to end"
+ },
+ {
+  "id": "Route111-pan",
+  "map": "Route111",
+  "x": 21,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 21,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 34,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 58,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 81,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 105,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 128,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route111 end to end"
+ },
+ {
+  "id": "Route118-pan",
+  "map": "Route118",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 60,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route118 end to end"
+ },
+ {
+  "id": "MauvilleCity_Gym-view",
+  "map": "MauvilleCity_Gym",
+  "x": 4,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MauvilleCity_Gym"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle2-view",
+  "map": "Route110_TrickHousePuzzle2",
+  "x": 7,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle2"
+ },
+ {
+  "id": "Route112-pan",
+  "map": "Route112",
+  "x": 22,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 22,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 29,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 41,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 54,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route112 end to end"
+ },
+ {
+  "id": "Route113-pan",
+  "map": "Route113",
+  "x": 8,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 25,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 41,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 58,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 75,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 91,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route113 end to end"
+ },
+ {
+  "id": "Route114-pan",
+  "map": "Route114",
+  "x": 18,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 18,
+    "y": 5,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 60,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 71,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route114 end to end"
+ },
+ {
+  "id": "MeteorFalls_1F_1R-pan",
+  "map": "MeteorFalls_1F_1R",
+  "x": 14,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 14,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 13,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 14,
+    "y": 35,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MeteorFalls_1F_1R end to end"
+ },
+ {
+  "id": "MeteorFalls_1F_2R-pan",
+  "map": "MeteorFalls_1F_2R",
+  "x": 14,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 14,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 14,
+    "y": 24,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MeteorFalls_1F_2R end to end"
+ },
+ {
+  "id": "MtChimney-pan",
+  "map": "MtChimney",
+  "x": 14,
+  "y": 12,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 14,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 23,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 38,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MtChimney end to end"
+ },
+ {
+  "id": "JaggedPass-pan",
+  "map": "JaggedPass",
+  "x": 14,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 14,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 13,
+    "y": 22,
+    "settle": 70
+   },
+   {
+    "x": 14,
+    "y": 38,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "JaggedPass end to end"
+ },
+ {
+  "id": "LavaridgeTown_PokemonCenter_1F-view",
+  "map": "LavaridgeTown_PokemonCenter_1F",
+  "x": 8,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LavaridgeTown_PokemonCenter_1F"
+ },
+ {
+  "id": "LavaridgeTown_Gym_1F-view",
+  "map": "LavaridgeTown_Gym_1F",
+  "x": 8,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LavaridgeTown_Gym_1F"
+ },
+ {
+  "id": "AshenWoods-pan",
+  "map": "AshenWoods",
+  "x": 16,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 16,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 15,
+    "y": 24,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 38,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "AshenWoods end to end"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle3-view",
+  "map": "Route110_TrickHousePuzzle3",
+  "x": 7,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle3"
+ },
+ {
+  "id": "PetalburgCity_Gym-pan",
+  "map": "PetalburgCity_Gym",
+  "x": 2,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 2,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 4,
+    "y": 28,
+    "settle": 70
+   },
+   {
+    "x": 4,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 2,
+    "y": 67,
+    "settle": 70
+   },
+   {
+    "x": 4,
+    "y": 84,
+    "settle": 70
+   },
+   {
+    "x": 0,
+    "y": 98,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "PetalburgCity_Gym end to end"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle4-view",
+  "map": "Route110_TrickHousePuzzle4",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle4"
+ },
+ {
+  "id": "Route105-pan",
+  "map": "Route105",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 60,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route105 end to end"
+ },
+ {
+  "id": "Route107-pan",
+  "map": "Route107",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 42,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 54,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route107 end to end"
+ },
+ {
+  "id": "Route108-pan",
+  "map": "Route108",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 42,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 54,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route108 end to end"
+ },
+ {
+  "id": "AbandonedShip_Corridors_B1F-view",
+  "map": "AbandonedShip_Corridors_B1F",
+  "x": 6,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "AbandonedShip_Corridors_B1F"
+ },
+ {
+  "id": "AbandonedShip_Rooms2_1F-view",
+  "map": "AbandonedShip_Rooms2_1F",
+  "x": 4,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "AbandonedShip_Rooms2_1F"
+ },
+ {
+  "id": "Route119-pan",
+  "map": "Route119",
+  "x": 20,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 35,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 56,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 82,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 105,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 128,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route119 end to end"
+ },
+ {
+  "id": "Route119_WeatherInstitute_1F-view",
+  "map": "Route119_WeatherInstitute_1F",
+  "x": 10,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route119_WeatherInstitute_1F"
+ },
+ {
+  "id": "Route119_WeatherInstitute_2F-view",
+  "map": "Route119_WeatherInstitute_2F",
+  "x": 10,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route119_WeatherInstitute_2F"
+ },
+ {
+  "id": "Route120-pan",
+  "map": "Route120",
+  "x": 20,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 24,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 39,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 58,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 75,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 91,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route120 end to end"
+ },
+ {
+  "id": "Route123-pan",
+  "map": "Route123",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 10,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 35,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 58,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 81,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 106,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 128,
+    "y": 9,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route123 end to end"
+ },
+ {
+  "id": "FortreeCity_Mart-view",
+  "map": "FortreeCity_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "FortreeCity_Mart"
+ },
+ {
+  "id": "FortreeCity_Gym-view",
+  "map": "FortreeCity_Gym",
+  "x": 9,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "FortreeCity_Gym"
+ },
+ {
+  "id": "Route121-pan",
+  "map": "Route121",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 31,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 59,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route121 end to end"
+ },
+ {
+  "id": "LilycoveCity-pan",
+  "map": "LilycoveCity",
+  "x": 5,
+  "y": 19,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 5,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 45,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 59,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 20,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "LilycoveCity end to end"
+ },
+ {
+  "id": "LilycoveCity_CoveLilyMotel_2F-view",
+  "map": "LilycoveCity_CoveLilyMotel_2F",
+  "x": 6,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LilycoveCity_CoveLilyMotel_2F"
+ },
+ {
+  "id": "MtPyre_3F-view",
+  "map": "MtPyre_3F",
+  "x": 5,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MtPyre_3F"
+ },
+ {
+  "id": "MtPyre_Summit-pan",
+  "map": "MtPyre_Summit",
+  "x": 5,
+  "y": 18,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 5,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 31,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 43,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MtPyre_Summit end to end"
+ },
+ {
+  "id": "MagmaHideout_1F-pan",
+  "map": "MagmaHideout_1F",
+  "x": 21,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 21,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 21,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 28,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MagmaHideout_1F end to end"
+ },
+ {
+  "id": "MagmaHideout_2F_1R-pan",
+  "map": "MagmaHideout_2F_1R",
+  "x": 16,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 16,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 32,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MagmaHideout_2F_1R end to end"
+ },
+ {
+  "id": "MagmaHideout_2F_2R-pan",
+  "map": "MagmaHideout_2F_2R",
+  "x": 7,
+  "y": 12,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 15,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 29,
+    "y": 14,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 11,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MagmaHideout_2F_2R end to end"
+ },
+ {
+  "id": "MagmaHideout_3F_1R-pan",
+  "map": "MagmaHideout_3F_1R",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 11,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MagmaHideout_3F_1R end to end"
+ },
+ {
+  "id": "MagmaHideout_3F_2R-view",
+  "map": "MagmaHideout_3F_2R",
+  "x": 10,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MagmaHideout_3F_2R"
+ },
+ {
+  "id": "MagmaHideout_4F-pan",
+  "map": "MagmaHideout_4F",
+  "x": 6,
+  "y": 13,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 13,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 17,
+    "settle": 70
+   },
+   {
+    "x": 49,
+    "y": 15,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MagmaHideout_4F end to end"
+ },
+ {
+  "id": "AquaHideout_1F-pan",
+  "map": "AquaHideout_1F",
+  "x": 14,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 14,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 14,
+    "y": 22,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "AquaHideout_1F end to end"
+ },
+ {
+  "id": "AquaHideout_B1F-pan",
+  "map": "AquaHideout_B1F",
+  "x": 6,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 32,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 44,
+    "y": 11,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AquaHideout_B1F end to end"
+ },
+ {
+  "id": "AquaHideout_B2F-pan",
+  "map": "AquaHideout_B2F",
+  "x": 8,
+  "y": 12,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 25,
+    "y": 12,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AquaHideout_B2F end to end"
+ },
+ {
+  "id": "Route124-pan",
+  "map": "Route124",
+  "x": 40,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 40,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 33,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 41,
+    "y": 59,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route124 end to end"
+ },
+ {
+  "id": "Route125-pan",
+  "map": "Route125",
+  "x": 6,
+  "y": 20,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 36,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 59,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 20,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route125 end to end"
+ },
+ {
+  "id": "Route126-pan",
+  "map": "Route126",
+  "x": 38,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 38,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 38,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 37,
+    "y": 32,
+    "settle": 70
+   },
+   {
+    "x": 38,
+    "y": 40,
+    "settle": 70
+   },
+   {
+    "x": 37,
+    "y": 61,
+    "settle": 70
+   },
+   {
+    "x": 38,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route126 end to end"
+ },
+ {
+  "id": "Route127-pan",
+  "map": "Route127",
+  "x": 40,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 40,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 33,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 60,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route127 end to end"
+ },
+ {
+  "id": "Route128-pan",
+  "map": "Route128",
+  "x": 10,
+  "y": 19,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 10,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 50,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 70,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 89,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 109,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route128 end to end"
+ },
+ {
+  "id": "MossdeepCity_Gym-pan",
+  "map": "MossdeepCity_Gym",
+  "x": 8,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 5,
+    "settle": 70
+   },
+   {
+    "x": 9,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 7,
+    "y": 30,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MossdeepCity_Gym end to end"
+ },
+ {
+  "id": "MossdeepCity_SpaceCenter_1F-view",
+  "map": "MossdeepCity_SpaceCenter_1F",
+  "x": 8,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MossdeepCity_SpaceCenter_1F"
+ },
+ {
+  "id": "MossdeepCity_SpaceCenter_2F-view",
+  "map": "MossdeepCity_SpaceCenter_2F",
+  "x": 8,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MossdeepCity_SpaceCenter_2F"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle6-view",
+  "map": "Route110_TrickHousePuzzle6",
+  "x": 7,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle6"
+ },
+ {
+  "id": "Route130-pan",
+  "map": "Route130",
+  "x": 5,
+  "y": 18,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 5,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 60,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route130 end to end"
+ },
+ {
+  "id": "Route131-pan",
+  "map": "Route131",
+  "x": 6,
+  "y": 20,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 43,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 54,
+    "y": 20,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route131 end to end"
+ },
+ {
+  "id": "Route132-pan",
+  "map": "Route132",
+  "x": 6,
+  "y": 20,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 60,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 20,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route132 end to end"
+ },
+ {
+  "id": "Route133-pan",
+  "map": "Route133",
+  "x": 6,
+  "y": 20,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 60,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 20,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route133 end to end"
+ },
+ {
+  "id": "Route134-pan",
+  "map": "Route134",
+  "x": 6,
+  "y": 19,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 60,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 20,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route134 end to end"
+ },
+ {
+  "id": "SeafloorCavern_Room1-view",
+  "map": "SeafloorCavern_Room1",
+  "x": 9,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SeafloorCavern_Room1"
+ },
+ {
+  "id": "SeafloorCavern_Room3-view",
+  "map": "SeafloorCavern_Room3",
+  "x": 7,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SeafloorCavern_Room3"
+ },
+ {
+  "id": "SeafloorCavern_Room4-view",
+  "map": "SeafloorCavern_Room4",
+  "x": 9,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SeafloorCavern_Room4"
+ },
+ {
+  "id": "SeafloorCavern_Room9-pan",
+  "map": "SeafloorCavern_Room9",
+  "x": 12,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 12,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 13,
+    "y": 23,
+    "settle": 70
+   },
+   {
+    "x": 13,
+    "y": 38,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SeafloorCavern_Room9 end to end"
+ },
+ {
+  "id": "SootopolisCity_Gym_B1F-pan",
+  "map": "SootopolisCity_Gym_B1F",
+  "x": 8,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 8,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SootopolisCity_Gym_B1F end to end"
+ },
+ {
+  "id": "SootopolisCity_Gym_1F-pan",
+  "map": "SootopolisCity_Gym_1F",
+  "x": 8,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 8,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SootopolisCity_Gym_1F end to end"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle7-view",
+  "map": "Route110_TrickHousePuzzle7",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle7"
+ },
+ {
+  "id": "VictoryRoad_1F-pan",
+  "map": "VictoryRoad_1F",
+  "x": 8,
+  "y": 22,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 22,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 22,
+    "settle": 70
+   },
+   {
+    "x": 39,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "VictoryRoad_1F end to end"
+ },
+ {
+  "id": "VictoryRoad_B1F-pan",
+  "map": "VictoryRoad_B1F",
+  "x": 9,
+  "y": 13,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 9,
+    "y": 13,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 15,
+    "settle": 70
+   },
+   {
+    "x": 38,
+    "y": 15,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "VictoryRoad_B1F end to end"
+ },
+ {
+  "id": "VictoryRoad_B2F-pan",
+  "map": "VictoryRoad_B2F",
+  "x": 7,
+  "y": 14,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 14,
+    "settle": 70
+   },
+   {
+    "x": 24,
+    "y": 13,
+    "settle": 70
+   },
+   {
+    "x": 38,
+    "y": 14,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "VictoryRoad_B2F end to end"
+ },
+ {
+  "id": "EverGrandeCity_SidneysRoom-view",
+  "map": "EverGrandeCity_SidneysRoom",
+  "x": 6,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "EverGrandeCity_SidneysRoom"
+ },
+ {
+  "id": "EverGrandeCity_PhoebesRoom-view",
+  "map": "EverGrandeCity_PhoebesRoom",
+  "x": 6,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "EverGrandeCity_PhoebesRoom"
+ },
+ {
+  "id": "EverGrandeCity_GlaciasRoom-view",
+  "map": "EverGrandeCity_GlaciasRoom",
+  "x": 6,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "EverGrandeCity_GlaciasRoom"
+ },
+ {
+  "id": "EverGrandeCity_DrakesRoom-view",
+  "map": "EverGrandeCity_DrakesRoom",
+  "x": 6,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "EverGrandeCity_DrakesRoom"
+ },
+ {
+  "id": "EverGrandeCity_ChampionsRoom-view",
+  "map": "EverGrandeCity_ChampionsRoom",
+  "x": 6,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "caption": "EverGrandeCity_ChampionsRoom"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle8-view",
+  "map": "Route110_TrickHousePuzzle8",
+  "x": 8,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle8"
+ },
+ {
+  "id": "SSTidalRooms-pan",
+  "map": "SSTidalRooms",
+  "x": 7,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 7,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "SSTidalRooms end to end"
+ },
+ {
+  "id": "CaveOfOrigin_DianciesRoom-view",
+  "map": "CaveOfOrigin_DianciesRoom",
+  "x": 8,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "CaveOfOrigin_DianciesRoom"
+ },
+ {
+  "id": "AlteringCave_B1F-pan",
+  "map": "AlteringCave_B1F",
+  "x": 4,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 4,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AlteringCave_B1F end to end"
+ },
+ {
+  "id": "MeteorFalls_StevensCave-pan",
+  "map": "MeteorFalls_StevensCave",
+  "x": 15,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 15,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 24,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MeteorFalls_StevensCave end to end"
+ },
+ {
+  "id": "MossdeepCity_House1-view",
+  "map": "MossdeepCity_House1",
+  "x": 4,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MossdeepCity_House1"
+ },
+ {
+  "id": "AbandonedShip_CaptainsOffice-view",
+  "map": "AbandonedShip_CaptainsOffice",
+  "x": 4,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "AbandonedShip_CaptainsOffice"
+ },
+ {
+  "id": "AbandonedShip_HiddenFloorCorridors-view",
+  "map": "AbandonedShip_HiddenFloorCorridors",
+  "x": 4,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "AbandonedShip_HiddenFloorCorridors"
+ },
+ {
+  "id": "AbandonedShip_HiddenFloorRooms-pan",
+  "map": "AbandonedShip_HiddenFloorRooms",
+  "x": 7,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 22,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 36,
+    "y": 6,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AbandonedShip_HiddenFloorRooms end to end"
+ },
+ {
+  "id": "AbandonedShip_Room_B1F-view",
+  "map": "AbandonedShip_Room_B1F",
+  "x": 3,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "AbandonedShip_Room_B1F"
+ },
+ {
+  "id": "AbandonedShip_Rooms2_B1F-view",
+  "map": "AbandonedShip_Rooms2_B1F",
+  "x": 9,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "AbandonedShip_Rooms2_B1F"
+ },
+ {
+  "id": "AbandonedShip_Rooms_1F-view",
+  "map": "AbandonedShip_Rooms_1F",
+  "x": 10,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "AbandonedShip_Rooms_1F"
+ },
+ {
+  "id": "AbandonedShip_Rooms_B1F-pan",
+  "map": "AbandonedShip_Rooms_B1F",
+  "x": 6,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 4,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 4,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AbandonedShip_Rooms_B1F end to end"
+ },
+ {
+  "id": "AlteringCave-pan",
+  "map": "AlteringCave",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AlteringCave end to end"
+ },
+ {
+  "id": "AlteringCave_1F-pan",
+  "map": "AlteringCave_1F",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 11,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AlteringCave_1F end to end"
+ },
+ {
+  "id": "ArtisanCave_1F-view",
+  "map": "ArtisanCave_1F",
+  "x": 8,
+  "y": 12,
+  "facing": 1,
+  "settle": 90,
+  "caption": "ArtisanCave_1F"
+ },
+ {
+  "id": "ArtisanCave_B1F-pan",
+  "map": "ArtisanCave_B1F",
+  "x": 23,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 23,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 33,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 46,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "ArtisanCave_B1F end to end"
+ },
+ {
+  "id": "BattleFrontier_Mart-view",
+  "map": "BattleFrontier_Mart",
+  "x": 4,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "BattleFrontier_Mart"
+ },
+ {
+  "id": "CaveOfOrigin_1F-view",
+  "map": "CaveOfOrigin_1F",
+  "x": 8,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "CaveOfOrigin_1F"
+ },
+ {
+  "id": "CaveOfOrigin_B1F-view",
+  "map": "CaveOfOrigin_B1F",
+  "x": 8,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "CaveOfOrigin_B1F"
+ },
+ {
+  "id": "CaveOfOrigin_Entrance-pan",
+  "map": "CaveOfOrigin_Entrance",
+  "x": 9,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 9,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 9,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "CaveOfOrigin_Entrance end to end"
+ },
+ {
+  "id": "DesertUnderpass-pan",
+  "map": "DesertUnderpass",
+  "x": 11,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 11,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 34,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 57,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 81,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 104,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 127,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "DesertUnderpass end to end"
+ },
+ {
+  "id": "DewfordManor_1F-view",
+  "map": "DewfordManor_1F",
+  "x": 12,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "DewfordManor_1F"
+ },
+ {
+  "id": "DewfordMeadow-pan",
+  "map": "DewfordMeadow",
+  "x": 6,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 9,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "DewfordMeadow end to end"
+ },
+ {
+  "id": "DewfordTown-view",
+  "map": "DewfordTown",
+  "x": 9,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "caption": "DewfordTown"
+ },
+ {
+  "id": "EmberPath-pan",
+  "map": "EmberPath",
+  "x": 21,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 21,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 32,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "EmberPath end to end"
+ },
+ {
+  "id": "EverGrandeCity-pan",
+  "map": "EverGrandeCity",
+  "x": 18,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 18,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 34,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 60,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "EverGrandeCity end to end"
+ },
+ {
+  "id": "EverGrandeCity_PokemonLeague_1F-view",
+  "map": "EverGrandeCity_PokemonLeague_1F",
+  "x": 9,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "caption": "EverGrandeCity_PokemonLeague_1F"
+ },
+ {
+  "id": "FallarborTown-view",
+  "map": "FallarborTown",
+  "x": 10,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "FallarborTown"
+ },
+ {
+  "id": "FallarborTown_Mart-view",
+  "map": "FallarborTown_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "FallarborTown_Mart"
+ },
+ {
+  "id": "FieryPath-pan",
+  "map": "FieryPath",
+  "x": 18,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 18,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 24,
+    "y": 25,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "FieryPath end to end"
+ },
+ {
+  "id": "FortreeCity-pan",
+  "map": "FortreeCity",
+  "x": 6,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 11,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "FortreeCity end to end"
+ },
+ {
+  "id": "GraniteCave_1F-pan",
+  "map": "GraniteCave_1F",
+  "x": 7,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 36,
+    "y": 6,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "GraniteCave_1F end to end"
+ },
+ {
+  "id": "GraniteCave_B1F-pan",
+  "map": "GraniteCave_B1F",
+  "x": 8,
+  "y": 13,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 13,
+    "settle": 70
+   },
+   {
+    "x": 24,
+    "y": 13,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "GraniteCave_B1F end to end"
+ },
+ {
+  "id": "GraniteCave_B2F-pan",
+  "map": "GraniteCave_B2F",
+  "x": 8,
+  "y": 12,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 24,
+    "y": 12,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "GraniteCave_B2F end to end"
+ },
+ {
+  "id": "GraniteCave_StevensRoom-view",
+  "map": "GraniteCave_StevensRoom",
+  "x": 7,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "GraniteCave_StevensRoom"
+ },
+ {
+  "id": "LavaridgeTown-view",
+  "map": "LavaridgeTown",
+  "x": 10,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LavaridgeTown"
+ },
+ {
+  "id": "LavaridgeTown_HerbShop-view",
+  "map": "LavaridgeTown_HerbShop",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LavaridgeTown_HerbShop"
+ },
+ {
+  "id": "LavaridgeTown_Mart-view",
+  "map": "LavaridgeTown_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LavaridgeTown_Mart"
+ },
+ {
+  "id": "LilycoveCity_DepartmentStore_2F-view",
+  "map": "LilycoveCity_DepartmentStore_2F",
+  "x": 9,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LilycoveCity_DepartmentStore_2F"
+ },
+ {
+  "id": "LilycoveCity_DepartmentStore_3F-view",
+  "map": "LilycoveCity_DepartmentStore_3F",
+  "x": 9,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "LilycoveCity_DepartmentStore_3F"
+ },
+ {
+  "id": "MagmaHideout_2F_3R-pan",
+  "map": "MagmaHideout_2F_3R",
+  "x": 9,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 9,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 13,
+    "settle": 70
+   },
+   {
+    "x": 34,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 42,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 53,
+    "y": 12,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MagmaHideout_2F_3R end to end"
+ },
+ {
+  "id": "MagmaHideout_3F_3R-pan",
+  "map": "MagmaHideout_3F_3R",
+  "x": 10,
+  "y": 13,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 10,
+    "y": 13,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 11,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MagmaHideout_3F_3R end to end"
+ },
+ {
+  "id": "MauvilleCity_Mart-view",
+  "map": "MauvilleCity_Mart",
+  "x": 4,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MauvilleCity_Mart"
+ },
+ {
+  "id": "MeteorFalls_B1F_1R-pan",
+  "map": "MeteorFalls_B1F_1R",
+  "x": 14,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 14,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 14,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 29,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MeteorFalls_B1F_1R end to end"
+ },
+ {
+  "id": "MeteorFalls_B1F_2R-view",
+  "map": "MeteorFalls_B1F_2R",
+  "x": 5,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MeteorFalls_B1F_2R"
+ },
+ {
+  "id": "MirageTower_1F-view",
+  "map": "MirageTower_1F",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MirageTower_1F"
+ },
+ {
+  "id": "MirageTower_2F-view",
+  "map": "MirageTower_2F",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MirageTower_2F"
+ },
+ {
+  "id": "MirageTower_3F-view",
+  "map": "MirageTower_3F",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MirageTower_3F"
+ },
+ {
+  "id": "MirageTower_4F-view",
+  "map": "MirageTower_4F",
+  "x": 6,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MirageTower_4F"
+ },
+ {
+  "id": "MirageTower_B1F-view",
+  "map": "MirageTower_B1F",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MirageTower_B1F"
+ },
+ {
+  "id": "MossdeepCity-pan",
+  "map": "MossdeepCity",
+  "x": 6,
+  "y": 20,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 21,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 62,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 74,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "MossdeepCity end to end"
+ },
+ {
+  "id": "MossdeepCity_Mart-view",
+  "map": "MossdeepCity_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MossdeepCity_Mart"
+ },
+ {
+  "id": "MtPyre_1F-view",
+  "map": "MtPyre_1F",
+  "x": 11,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MtPyre_1F"
+ },
+ {
+  "id": "MtPyre_2F-view",
+  "map": "MtPyre_2F",
+  "x": 5,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MtPyre_2F"
+ },
+ {
+  "id": "MtPyre_4F-view",
+  "map": "MtPyre_4F",
+  "x": 4,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MtPyre_4F"
+ },
+ {
+  "id": "MtPyre_5F-view",
+  "map": "MtPyre_5F",
+  "x": 5,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MtPyre_5F"
+ },
+ {
+  "id": "MtPyre_6F-view",
+  "map": "MtPyre_6F",
+  "x": 5,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "MtPyre_6F"
+ },
+ {
+  "id": "MtPyre_Exterior-pan",
+  "map": "MtPyre_Exterior",
+  "x": 16,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 16,
+    "y": 5,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 14,
+    "y": 28,
+    "settle": 70
+   },
+   {
+    "x": 17,
+    "y": 44,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MtPyre_Exterior end to end"
+ },
+ {
+  "id": "NavelRock_Top-pan",
+  "map": "NavelRock_Top",
+  "x": 12,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 12,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 12,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "NavelRock_Top end to end"
+ },
+ {
+  "id": "NewMauville_Entrance-view",
+  "map": "NewMauville_Entrance",
+  "x": 4,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "NewMauville_Entrance"
+ },
+ {
+  "id": "NewMauville_Inside-pan",
+  "map": "NewMauville_Inside",
+  "x": 18,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 18,
+    "y": 5,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 34,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "NewMauville_Inside end to end"
+ },
+ {
+  "id": "OldaleTown-view",
+  "map": "OldaleTown",
+  "x": 10,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "OldaleTown"
+ },
+ {
+  "id": "OldaleTown_Mart-view",
+  "map": "OldaleTown_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "OldaleTown_Mart"
+ },
+ {
+  "id": "PacifidlogTown-pan",
+  "map": "PacifidlogTown",
+  "x": 7,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 10,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 7,
+    "y": 30,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "PacifidlogTown end to end"
+ },
+ {
+  "id": "PetalburgCity-pan",
+  "map": "PetalburgCity",
+  "x": 13,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 13,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 15,
+    "y": 22,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "PetalburgCity end to end"
+ },
+ {
+  "id": "PetalburgCity_Mart-view",
+  "map": "PetalburgCity_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "PetalburgCity_Mart"
+ },
+ {
+  "id": "PetalburgWoods_2-pan",
+  "map": "PetalburgWoods_2",
+  "x": 6,
+  "y": 18,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 41,
+    "y": 17,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "PetalburgWoods_2 end to end"
+ },
+ {
+  "id": "PetalburgWoods_3-pan",
+  "map": "PetalburgWoods_3",
+  "x": 6,
+  "y": 22,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 22,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 22,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 22,
+    "settle": 70
+   },
+   {
+    "x": 39,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "PetalburgWoods_3 end to end"
+ },
+ {
+  "id": "Route110_TrickHouseEnd-view",
+  "map": "Route110_TrickHouseEnd",
+  "x": 5,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHouseEnd"
+ },
+ {
+  "id": "Route110_TrickHousePuzzle5-view",
+  "map": "Route110_TrickHousePuzzle5",
+  "x": 8,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Route110_TrickHousePuzzle5"
+ },
+ {
+  "id": "Route111_RuinsExterior-pan",
+  "map": "Route111_RuinsExterior",
+  "x": 13,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 13,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 13,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route111_RuinsExterior end to end"
+ },
+ {
+  "id": "RustboroCity-pan",
+  "map": "RustboroCity",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 30,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 42,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 53,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "RustboroCity end to end"
+ },
+ {
+  "id": "RustboroCity_Mart-view",
+  "map": "RustboroCity_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "RustboroCity_Mart"
+ },
+ {
+  "id": "SSTidalLowerDeck-view",
+  "map": "SSTidalLowerDeck",
+  "x": 7,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SSTidalLowerDeck"
+ },
+ {
+  "id": "SafariZone_North-pan",
+  "map": "SafariZone_North",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SafariZone_North end to end"
+ },
+ {
+  "id": "SafariZone_Northeast-pan",
+  "map": "SafariZone_Northeast",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SafariZone_Northeast end to end"
+ },
+ {
+  "id": "SafariZone_Northwest-pan",
+  "map": "SafariZone_Northwest",
+  "x": 16,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 16,
+    "y": 4,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SafariZone_Northwest end to end"
+ },
+ {
+  "id": "SafariZone_South-pan",
+  "map": "SafariZone_South",
+  "x": 19,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 19,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 33,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SafariZone_South end to end"
+ },
+ {
+  "id": "SafariZone_Southeast-pan",
+  "map": "SafariZone_Southeast",
+  "x": 19,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 19,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 32,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SafariZone_Southeast end to end"
+ },
+ {
+  "id": "SafariZone_Southwest-pan",
+  "map": "SafariZone_Southwest",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SafariZone_Southwest end to end"
+ },
+ {
+  "id": "SandstrewnRuins-pan",
+  "map": "SandstrewnRuins",
+  "x": 4,
+  "y": 12,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 4,
+    "y": 12,
+    "settle": 70
+   },
+   {
+    "x": 5,
+    "y": 33,
+    "settle": 70
+   },
+   {
+    "x": 5,
+    "y": 56,
+    "settle": 70
+   },
+   {
+    "x": 3,
+    "y": 76,
+    "settle": 70
+   },
+   {
+    "x": 5,
+    "y": 100,
+    "settle": 70
+   },
+   {
+    "x": 4,
+    "y": 124,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SandstrewnRuins end to end"
+ },
+ {
+  "id": "SandstrewnRuins_2F-view",
+  "map": "SandstrewnRuins_2F",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SandstrewnRuins_2F"
+ },
+ {
+  "id": "SandstrewnRuins_3F-view",
+  "map": "SandstrewnRuins_3F",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SandstrewnRuins_3F"
+ },
+ {
+  "id": "SandstrewnRuins_B1F-pan",
+  "map": "SandstrewnRuins_B1F",
+  "x": 6,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 5,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 5,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 5,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "SandstrewnRuins_B1F end to end"
+ },
+ {
+  "id": "ScorchedSlab-view",
+  "map": "ScorchedSlab",
+  "x": 7,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "ScorchedSlab"
+ },
+ {
+  "id": "ScorchedSlab_B1F-pan",
+  "map": "ScorchedSlab_B1F",
+  "x": 13,
+  "y": 7,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 13,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 13,
+    "y": 22,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "ScorchedSlab_B1F end to end"
+ },
+ {
+  "id": "ScorchedSlab_B2F-pan",
+  "map": "ScorchedSlab_B2F",
+  "x": 6,
+  "y": 16,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 16,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 16,
+    "settle": 70
+   },
+   {
+    "x": 30,
+    "y": 16,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "ScorchedSlab_B2F end to end"
+ },
+ {
+  "id": "ScorchedSlab_HeatransRoom-view",
+  "map": "ScorchedSlab_HeatransRoom",
+  "x": 10,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "ScorchedSlab_HeatransRoom"
+ },
+ {
+  "id": "SeafloorCavern_Entrance-view",
+  "map": "SeafloorCavern_Entrance",
+  "x": 10,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SeafloorCavern_Entrance"
+ },
+ {
+  "id": "SeafloorCavern_Room6-view",
+  "map": "SeafloorCavern_Room6",
+  "x": 12,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SeafloorCavern_Room6"
+ },
+ {
+  "id": "Seaspray_Cave-pan",
+  "map": "Seaspray_Cave",
+  "x": 6,
+  "y": 18,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 32,
+    "y": 17,
+    "settle": 70
+   },
+   {
+    "x": 41,
+    "y": 16,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Seaspray_Cave end to end"
+ },
+ {
+  "id": "Seaspray_Cave_B1F-pan",
+  "map": "Seaspray_Cave_B1F",
+  "x": 6,
+  "y": 15,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 15,
+    "settle": 70
+   },
+   {
+    "x": 19,
+    "y": 15,
+    "settle": 70
+   },
+   {
+    "x": 32,
+    "y": 15,
+    "settle": 70
+   },
+   {
+    "x": 45,
+    "y": 15,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Seaspray_Cave_B1F end to end"
+ },
+ {
+  "id": "ShoalCave_LowTideEntranceRoom-pan",
+  "map": "ShoalCave_LowTideEntranceRoom",
+  "x": 18,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 18,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 26,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "ShoalCave_LowTideEntranceRoom end to end"
+ },
+ {
+  "id": "ShoalCave_LowTideIceRoom-pan",
+  "map": "ShoalCave_LowTideIceRoom",
+  "x": 9,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 9,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 11,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "ShoalCave_LowTideIceRoom end to end"
+ },
+ {
+  "id": "ShoalCave_LowTideInnerRoom-pan",
+  "map": "ShoalCave_LowTideInnerRoom",
+  "x": 8,
+  "y": 17,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 17,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 38,
+    "y": 19,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "ShoalCave_LowTideInnerRoom end to end"
+ },
+ {
+  "id": "ShoalCave_LowTideLowerRoom-pan",
+  "map": "ShoalCave_LowTideLowerRoom",
+  "x": 7,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 3,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "ShoalCave_LowTideLowerRoom end to end"
+ },
+ {
+  "id": "ShoalCave_LowTideStairsRoom-view",
+  "map": "ShoalCave_LowTideStairsRoom",
+  "x": 9,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "caption": "ShoalCave_LowTideStairsRoom"
+ },
+ {
+  "id": "SkyPillar_1F-view",
+  "map": "SkyPillar_1F",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SkyPillar_1F"
+ },
+ {
+  "id": "SkyPillar_3F-view",
+  "map": "SkyPillar_3F",
+  "x": 4,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SkyPillar_3F"
+ },
+ {
+  "id": "SkyPillar_5F-view",
+  "map": "SkyPillar_5F",
+  "x": 3,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SkyPillar_5F"
+ },
+ {
+  "id": "SlateportCity_Mart-view",
+  "map": "SlateportCity_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SlateportCity_Mart"
+ },
+ {
+  "id": "SootopolisCity-pan",
+  "map": "SootopolisCity",
+  "x": 28,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 28,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 27,
+    "y": 17,
+    "settle": 70
+   },
+   {
+    "x": 27,
+    "y": 29,
+    "settle": 70
+   },
+   {
+    "x": 28,
+    "y": 42,
+    "settle": 70
+   },
+   {
+    "x": 28,
+    "y": 54,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "SootopolisCity end to end"
+ },
+ {
+  "id": "SootopolisCity_Mart-view",
+  "map": "SootopolisCity_Mart",
+  "x": 5,
+  "y": 4,
+  "facing": 1,
+  "settle": 90,
+  "caption": "SootopolisCity_Mart"
+ },
+ {
+  "id": "Underwater_Route124-pan",
+  "map": "Underwater_Route124",
+  "x": 43,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 43,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 41,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 44,
+    "y": 35,
+    "settle": 70
+   },
+   {
+    "x": 41,
+    "y": 47,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 52,
+    "settle": 70
+   },
+   {
+    "x": 51,
+    "y": 72,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Underwater_Route124 end to end"
+ },
+ {
+  "id": "Underwater_Route126-pan",
+  "map": "Underwater_Route126",
+  "x": 32,
+  "y": 9,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 32,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 31,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 31,
+    "y": 32,
+    "settle": 70
+   },
+   {
+    "x": 23,
+    "y": 37,
+    "settle": 70
+   },
+   {
+    "x": 29,
+    "y": 63,
+    "settle": 70
+   },
+   {
+    "x": 33,
+    "y": 70,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Underwater_Route126 end to end"
+ },
+ {
+  "id": "Underwater_Route127-pan",
+  "map": "Underwater_Route127",
+  "x": 49,
+  "y": 28,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 49,
+    "y": 28,
+    "settle": 70
+   },
+   {
+    "x": 38,
+    "y": 34,
+    "settle": 70
+   },
+   {
+    "x": 40,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 39,
+    "y": 59,
+    "settle": 70
+   },
+   {
+    "x": 36,
+    "y": 69,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Underwater_Route127 end to end"
+ },
+ {
+  "id": "Underwater_Route128-pan",
+  "map": "Underwater_Route128",
+  "x": 34,
+  "y": 11,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 34,
+    "y": 11,
+    "settle": 70
+   },
+   {
+    "x": 50,
+    "y": 15,
+    "settle": 70
+   },
+   {
+    "x": 68,
+    "y": 17,
+    "settle": 70
+   },
+   {
+    "x": 81,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Underwater_Route128 end to end"
+ },
+ {
+  "id": "Underwater_SeafloorCavern-view",
+  "map": "Underwater_SeafloorCavern",
+  "x": 6,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "caption": "Underwater_SeafloorCavern"
+ },
+ {
+  "id": "VerdanturfMeadow-view",
+  "map": "VerdanturfMeadow",
+  "x": 7,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "caption": "VerdanturfMeadow"
+ },
+ {
+  "id": "VerdanturfTown-view",
+  "map": "VerdanturfTown",
+  "x": 10,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "caption": "VerdanturfTown"
+ },
+ {
+  "id": "VerdanturfTown_Mart-view",
+  "map": "VerdanturfTown_Mart",
+  "x": 4,
+  "y": 3,
+  "facing": 1,
+  "settle": 90,
+  "caption": "VerdanturfTown_Mart"
+ },
+ {
+  "id": "VictoryRoad_1F_Frlg-pan",
+  "map": "VictoryRoad_1F_Frlg",
+  "x": 5,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 5,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 18,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 22,
+    "y": 5,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "VictoryRoad_1F_Frlg end to end"
+ }
+]

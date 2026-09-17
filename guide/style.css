@@ -358,3 +358,65 @@ tr:nth-child(even) td { background: rgba(255,255,255,0.045); }
   font-weight: 800;
   letter-spacing: 0.06em;
 }
+
+/* ---------- chapter opener ---------- */
+
+.page.chapter .chapter-plate {
+  margin-top: 0.5in;
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-deep) 100%);
+  border: 2px solid var(--panel-edge);
+  box-shadow: 0 5px 0 rgba(0,0,0,0.30);
+  clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+  padding: 0.42in 0.40in 0.44in;
+}
+.chapter-eyebrow {
+  color: var(--gold); font-size: 10pt; font-weight: 900;
+  letter-spacing: 0.30em; margin-bottom: 6px;
+}
+.page.chapter h1 {
+  margin: 0 0 10px;
+  font-size: 34pt; font-weight: 900; font-style: italic;
+  color: #eaffd0; -webkit-text-stroke: 4px #14320f; paint-order: stroke fill;
+  text-shadow: 0 4px 0 rgba(0,0,0,0.45); line-height: 1.05;
+}
+.chapter-count {
+  color: #9fd9ef; font-size: 9pt; font-weight: 700;
+  letter-spacing: 0.10em; border-top: 2px solid rgba(255,255,255,0.22);
+  padding-top: 8px; margin-bottom: 10px;
+}
+.chapter-list {
+  margin: 0; padding: 0; list-style: none;
+  column-count: 3; column-gap: 0.26in;
+}
+.chapter-list li {
+  color: #fff; font-size: 9pt; font-weight: 700; padding: 3px 0 3px 14px;
+  position: relative; break-inside: avoid;
+}
+.chapter-list li::before {
+  content: ""; position: absolute; left: 0; top: 7px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ---------- route strip: several viewpoints stitched end to end ---------- */
+
+.strip {
+  margin: 0.10in 0 0.16in;
+  background: linear-gradient(180deg, #0c2a38, #061923);
+  border: 2px solid #4fb4d6;
+  border-radius: 6px;
+  padding: 7px 7px 6px;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.28);
+}
+.strip h4 {
+  margin: 0 0 6px;
+  color: var(--gold); font-size: 9pt; font-weight: 900;
+  letter-spacing: 0.08em; text-align: center;
+  text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+}
+.strip img {
+  display: block; width: 100%; image-rendering: pixelated;
+  border: 1px solid #0a1f2a;
+}
+.strip.tall img { width: auto; max-height: 3.1in; margin: 0 auto; }
+.strip .cap { color: #9fd9ef; font-size: 6.6pt; text-align: center; padding-top: 5px; }

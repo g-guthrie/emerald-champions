@@ -165,7 +165,6 @@
  "RustboroCity_Mart",
  "SSTidalLowerDeck",
  "SafariZone_North",
- "SafariZone_North_Frlg",
  "SafariZone_Northeast",
  "SafariZone_Northwest",
  "SafariZone_South",
@@ -201,6 +200,5 @@
  "Underwater_SeafloorCavern",
  "VerdanturfMeadow",
  "VerdanturfTown",
- "VerdanturfTown_Mart",
- "VictoryRoad_1F_Frlg"
+ "VerdanturfTown_Mart"
 ]

@@ -35,6 +35,33 @@ LABELS = [
 ]
 
 
+CHAPTER_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>{title}</title>
+<link rel="stylesheet" href="../style.css"></head>
+<body>
+<section class="page chapter">
+  <div class="sheet">
+    <div class="masthead">
+      <div class="plaque"><img src="../assets/logo.png" alt="Emerald Champions"></div>
+      <div class="kicker"><b>OFFICIAL</b> FIELD GUIDE</div>
+    </div>
+    <div class="chapter-plate">
+      <div class="chapter-eyebrow">CHAPTER</div>
+      <h1>{title}</h1>
+      <div class="chapter-count">{count} locations</div>
+      <ul class="chapter-list">
+{listed}
+      </ul>
+    </div>
+  </div>
+  <div class="folio"><div class="n">{folio}</div><div class="ball"></div></div>
+</section>
+</body>
+</html>
+"""
+
+
 def label_for(dest):
     for pattern, name in LABELS:
         if pattern.search(dest):
@@ -137,6 +164,18 @@ def trainers_block(loc):
     </div>'''
 
 
+def strip_block(shot, pretty):
+    """A pan: several viewpoints stitched into one picture of the whole place."""
+    rel = Path(shot["file"]).name
+    frames = shot.get("frames") or []
+    tall = "tall" if "vertical" in rel or shot.get("direction") == "vertical" else ""
+    return f'''    <div class="strip {tall}">
+      <h4>{esc(pretty).upper()} END TO END</h4>
+      <img src="../assets/captures/{esc(rel)}" alt="{esc(pretty)}">
+      <div class="cap">{len(frames) or "Several"} viewpoints, stitched in order of travel</div>
+    </div>'''
+
+
 def events_block(shots):
     if not shots:
         return ""
@@ -155,9 +194,21 @@ def events_block(shots):
     return "\n".join(out)
 
 
+def pretty_name(name):
+    """Route102 -> Route 102; PetalburgCity_Gym -> Petalburg City Gym."""
+    return re.sub(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Za-z])(?=\d)", " ", name).replace("_", " ")
+
+
+def chapter_page(title, locations, folio):
+    """A divider that tells the reader where they are in the campaign."""
+    listed = "\n".join(f"        <li>{esc(pretty_name(n))}</li>" for n in locations)
+    body = CHAPTER_TEMPLATE.format(title=esc(title), count=len(locations),
+                                   listed=listed, folio=folio)
+    return body
+
+
 def page(loc, shots, folio, plate_exists):
-    # Route102 -> Route 102; PetalburgCity_Gym -> Petalburg City Gym
-    pretty = re.sub(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Za-z])(?=\d)", " ", loc["map"]).replace("_", " ")
+    pretty = pretty_name(loc["map"])
     plate = ""
     if plate_exists:
         plate = f'''        <div class="mapplate">
@@ -168,6 +219,9 @@ def page(loc, shots, folio, plate_exists):
         </div>'''
     grid = "\n".join(x for x in (items_block(loc), plate, mart_block(loc),
                                  encounters_block(loc)) if x)
+    pans = [s for s in shots if s["id"].endswith("-pan")]
+    others = [s for s in shots if not s["id"].endswith("-pan")]
+    strips = "\n".join(strip_block(s, pretty) for s in pans)
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"><title>{esc(pretty)}</title>
@@ -187,8 +241,9 @@ def page(loc, shots, folio, plate_exists):
       </div>
     </div>
 
+{strips}
 {trainers_block(loc)}
-{events_block(shots)}
+{events_block(others)}
   </div>
   <div class="folio"><div class="n">{folio}</div><div class="ball"></div></div>
 </section>
@@ -201,12 +256,12 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--locations", type=Path, default=ROOT / "guide/data/locations.json")
-    ap.add_argument("--order", type=Path, default=ROOT / "guide/data/order.json")
+    ap.add_argument("--book", type=Path, default=ROOT / "guide/data/book.json")
     ap.add_argument("--start-page", type=int, default=18)
     args = ap.parse_args()
 
     locations = json.loads(args.locations.read_text())
-    order = json.loads(args.order.read_text())
+    book = json.loads(args.book.read_text())
     manifest_path = CAPTURES / "manifest.json"
     manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else []
     by_map = {}
@@ -217,21 +272,26 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     missing_plate, missing_shots, written = [], [], []
     folio = args.start_page
-    for name in order:
-        loc = locations.get(name)
-        if not loc:
-            print(f"  skip {name}: not in the location data")
-            continue
-        plate = (MAPS / f"{name}.png").exists()
-        if not plate:
-            missing_plate.append(name)
-        shots = by_map.get(name, [])
-        if not shots:
-            missing_shots.append(name)
-        path = OUT / f"{folio:03d}-{name}.html"
-        path.write_text(page(loc, shots, folio, plate))
-        written.append(path.name)
+    for part in book:
+        (OUT / f"{folio:03d}-chapter.html").write_text(
+            chapter_page(part["chapter"], part["locations"], folio))
+        written.append(f"{folio:03d}-chapter.html")
         folio += 1
+        for name in part["locations"]:
+            loc = locations.get(name)
+            if not loc:
+                print(f"  skip {name}: not in the location data")
+                continue
+            plate = (MAPS / f"{name}.png").exists()
+            if not plate:
+                missing_plate.append(name)
+            shots = by_map.get(name, [])
+            if not shots:
+                missing_shots.append(name)
+            path = OUT / f"{folio:03d}-{name}.html"
+            path.write_text(page(loc, shots, folio, plate))
+            written.append(path.name)
+            folio += 1
 
     print(f"{len(written)} pages -> {OUT}")
     if missing_plate:

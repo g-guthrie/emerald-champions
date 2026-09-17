@@ -1,0 +1,245 @@
+[
+ {
+  "id": "DewfordTown_Gym-pan",
+  "map": "DewfordTown_Gym",
+  "x": 8,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 9,
+    "y": 21,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "DewfordTown_Gym end to end"
+ },
+ {
+  "id": "Route105-pan",
+  "map": "Route105",
+  "x": 20,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 20,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 20,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 33,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 46,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 60,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 73,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "Route105 end to end"
+ },
+ {
+  "id": "Route123-pan",
+  "map": "Route123",
+  "x": 10,
+  "y": 8,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 10,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 35,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 58,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 81,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 106,
+    "y": 7,
+    "settle": 70
+   },
+   {
+    "x": 128,
+    "y": 9,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route123 end to end"
+ },
+ {
+  "id": "Route121-pan",
+  "map": "Route121",
+  "x": 6,
+  "y": 10,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 6,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 20,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 31,
+    "y": 8,
+    "settle": 70
+   },
+   {
+    "x": 46,
+    "y": 10,
+    "settle": 70
+   },
+   {
+    "x": 59,
+    "y": 9,
+    "settle": 70
+   },
+   {
+    "x": 73,
+    "y": 10,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "Route121 end to end"
+ },
+ {
+  "id": "MagmaHideout_2F_1R-pan",
+  "map": "MagmaHideout_2F_1R",
+  "x": 16,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 16,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 19,
+    "settle": 70
+   },
+   {
+    "x": 16,
+    "y": 32,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MagmaHideout_2F_1R end to end"
+ },
+ {
+  "id": "MossdeepCity_Gym-pan",
+  "map": "MossdeepCity_Gym",
+  "x": 8,
+  "y": 5,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 8,
+    "y": 5,
+    "settle": 70
+   },
+   {
+    "x": 9,
+    "y": 18,
+    "settle": 70
+   },
+   {
+    "x": 7,
+    "y": 30,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "vertical"
+  },
+  "caption": "MossdeepCity_Gym end to end"
+ },
+ {
+  "id": "AbandonedShip_HiddenFloorRooms-pan",
+  "map": "AbandonedShip_HiddenFloorRooms",
+  "x": 7,
+  "y": 6,
+  "facing": 1,
+  "settle": 90,
+  "sequence": [
+   {
+    "x": 7,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 22,
+    "y": 6,
+    "settle": 70
+   },
+   {
+    "x": 36,
+    "y": 6,
+    "settle": 70
+   }
+  ],
+  "stitch": {
+   "direction": "horizontal"
+  },
+  "caption": "AbandonedShip_HiddenFloorRooms end to end"
+ }
+]
