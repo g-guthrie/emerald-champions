@@ -1,0 +1,54 @@
+{
+  "sha256": "591df3a7d2823a76e95870d3fabaafa97d174ac35f2f4492f081255b2de89a6c",
+  "raw_hex": "44f216a3b1ed7debcee3dbd9e8ddd7ff01008a02c1dfebebdfffff00ac423600091f9748f51b6b48f51f6b4845878549f5066b480a2d6a48ff1e6549661edd48e60c7b40f5caff490ae09477f51f6b680000000014ff1000460018003e001b002b003500ccd51074b1ed7debcdede0ead9e3e2ff14000a02c1dfebebdfffff00a1631f008138699f81386d9f7d386d9fc1a2949d3d276d9f820a6c9f4d39249da439db9f773761997dedf99e82c792a07d386ddf0000000014ff3700560021002500230049003f00c57b9ce5b1ed7debc7e9e2dfddd8e3e6ddff2a02c1dfebebdfffff00e8d047007443750f8b691e317496e10e2a965d0e8896570e7d9aed097096e1f28896e10e7496e10ef2eb3e0f64b1e10e8b96e00e0000000014ff000047002400250048004b002f0038cff407b1ed7debcdd5d6e0d9edd9ff1400b202c1dfebebdfffff00963f0000752275ec892689ec892289ec89f71ded76dd76d3892289aca7b382eedd3789ec760188ec752276ed8c23e0ec822f82e90000000014ff4c004c0024003c001f0025002700599e4c37b1ed7debbbd9e6e3d8d5d7e8ede07202c1dfebebdfffff00b8ff00000e71acdc1a7368dce47f21d0ec8f3120e87331dce87331dce8a6a5dd178ccee3e873319c666b8bddf854d1c3174130dc0000000014ff440044004100250052001f002900f54c7210b1ed7debbbeee9e1d5e6dde0e0ff4202c1dfebebdfffff0006412600b85d0ffb44a50ffb44a10ffbfc39f8fa44b80ffbbb930efb44749bfabb5ef0c444a10fdb03a397f981a007fb4dad1beb0000000014ff320058002f002b001f001f002b00",
+  "party": [
+    {
+      "personality": 2736190020,
+      "level": 20,
+      "hp": 16,
+      "max_hp": 70,
+      "species": 176,
+      "held_item": 494
+    },
+    {
+      "personality": 1947260364,
+      "level": 20,
+      "hp": 55,
+      "max_hp": 86,
+      "species": 700,
+      "held_item": 761
+    },
+    {
+      "personality": 3852237765,
+      "level": 20,
+      "hp": 0,
+      "max_hp": 71,
+      "species": 1414,
+      "held_item": 479
+    },
+    {
+      "personality": 133484344,
+      "level": 20,
+      "hp": 76,
+      "max_hp": 76,
+      "species": 302,
+      "held_item": 523
+    },
+    {
+      "personality": 927768153,
+      "level": 20,
+      "hp": 68,
+      "max_hp": 68,
+      "species": 142,
+      "held_item": 442
+    },
+    {
+      "personality": 275926261,
+      "level": 20,
+      "hp": 50,
+      "max_hp": 88,
+      "species": 184,
+      "held_item": 503
+    }
+  ]
+}
