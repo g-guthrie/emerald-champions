@@ -65,7 +65,6 @@
 #include "wallclock.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
-#include "constants/battle_pyramid.h"
 #include "constants/battle_tower.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
@@ -1055,7 +1054,6 @@ static void ChangeDeoxysRockLevel(u8);
 static void WaitForDeoxysRockMovement(u8);
 static void Task_LinkRetireStatusWithBattleTowerPartner(u8);
 static void Task_LoopWingFlapSE(u8);
-static void Task_CloseBattlePikeCurtain(u8);
 static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
@@ -4856,58 +4854,6 @@ static void Task_LoopWingFlapSE(u8 taskId)
 #undef playCount
 #undef delay
 
-#define CURTAIN_HEIGHT 4
-#define CURTAIN_WIDTH 3
-#define tFrameTimer   data
-#define tCurrentFrame data[3]
-
-void CloseBattlePikeCurtain(void)
-{
-    u8 taskId = CreateTask(Task_CloseBattlePikeCurtain, 8);
-    gTasks[taskId].tFrameTimer[0] = 4;
-    gTasks[taskId].tFrameTimer[1] = 4;
-    gTasks[taskId].tFrameTimer[2] = 4;
-    gTasks[taskId].tCurrentFrame = 0;
-}
-
-static void Task_CloseBattlePikeCurtain(u8 taskId)
-{
-    u8 x, y;
-    s16 *data = gTasks[taskId].data;
-
-    tFrameTimer[tCurrentFrame]--;
-    if (tFrameTimer[tCurrentFrame] == 0)
-    {
-        for (y = 0; y < CURTAIN_HEIGHT; y++)
-        {
-            for (x = 0; x < CURTAIN_WIDTH; x++)
-            {
-                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + MAP_OFFSET - 1,
-                                       gSaveBlock1Ptr->pos.y + y + MAP_OFFSET - 3,
-                                       (x + METATILE_BattlePike_CurtainFrames_Start) + (y * METATILE_ROW_WIDTH) + (tCurrentFrame * CURTAIN_HEIGHT * METATILE_ROW_WIDTH));
-            }
-        }
-        DrawWholeMapView();
-        tCurrentFrame++;
-        if (tCurrentFrame == 3)
-        {
-            DestroyTask(taskId);
-            ScriptContext_Enable();
-        }
-    }
-}
-
-#undef CURTAIN_HEIGHT
-#undef CURTAIN_WIDTH
-#undef tFrameTimer
-#undef tCurrentFrame
-
-void GetBattlePyramidHint(void)
-{
-    // gSpecialVar_0x8004 here is expected to be the current Battle Pyramid win streak.
-    gSpecialVar_Result = gSpecialVar_0x8004 / FRONTIER_STAGES_PER_CHALLENGE;
-    gSpecialVar_Result -= (gSpecialVar_Result / TOTAL_PYRAMID_ROUNDS) * TOTAL_PYRAMID_ROUNDS;
-}
 
 // Used to avoid a potential softlock if the player respawns on Dewford with no way off
 void ResetHealLocationFromDewford(void)

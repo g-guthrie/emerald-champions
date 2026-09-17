@@ -129,8 +129,6 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void);
 void ChooseContestMon(void);
 void ChoosePartyMon(void);
 void ChooseMonForMoveRelearner(void);
-void BattlePyramidChooseMonHeldItems(void);
-void DoBattlePyramidMonsHaveHeldItem(void);
 void IsSelectedMonEgg(void);
 bool32 WouldPartyLoseSurfByReplacingMove(u32 partySlot, u32 moveSlot, enum Move newMove);
 void MoveDeleterForgetMove(void);

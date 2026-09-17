@@ -3646,39 +3646,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR",
-      "name": "BattleFrontier_BattleDomeCorridor_Layout",
-      "width": 48,
-      "height": 7,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleDome",
-      "border_filepath": "data/layouts/BattleFrontier_BattleDomeCorridor/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleDomeCorridor/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM",
-      "name": "BattleFrontier_BattleDomePreBattleRoom_Layout",
-      "width": 9,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleDome",
-      "border_filepath": "data/layouts/BattleFrontier_BattleDomePreBattleRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleDomePreBattleRoom/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM",
-      "name": "BattleFrontier_BattleDomeBattleRoom_Layout",
-      "width": 20,
-      "height": 10,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleDome",
-      "border_filepath": "data/layouts/BattleFrontier_BattleDomeBattleRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleDomeBattleRoom/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_MAGMA_HIDEOUT_1F",
       "name": "MagmaHideout_1F_Layout",
       "width": 37,
@@ -3756,28 +3723,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR",
-      "name": "BattleFrontier_BattlePalaceCorridor_Layout",
-      "width": 17,
-      "height": 14,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_BattlePalace",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePalaceCorridor/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePalaceCorridor/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM",
-      "name": "BattleFrontier_BattlePalaceBattleRoom_Layout",
-      "width": 15,
-      "height": 10,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_BattlePalace",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePalaceBattleRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePalaceBattleRoom/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_BATTLE_FRONTIER_OUTSIDE_EAST",
       "name": "BattleFrontier_OutsideEast_Layout",
       "width": 72,
@@ -3800,28 +3745,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM",
-      "name": "BattleFrontier_BattleFactoryPreBattleRoom_Layout",
-      "width": 17,
-      "height": 14,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleFactory",
-      "border_filepath": "data/layouts/BattleFrontier_BattleFactoryPreBattleRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleFactoryPreBattleRoom/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM",
-      "name": "BattleFrontier_BattleFactoryBattleRoom_Layout",
-      "width": 13,
-      "height": 12,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleFactory",
-      "border_filepath": "data/layouts/BattleFrontier_BattleFactoryBattleRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleFactoryBattleRoom/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY",
       "name": "BattleFrontier_BattlePikeLobby_Layout",
       "width": 11,
@@ -3830,50 +3753,6 @@
       "secondary_tileset": "gTileset_BattlePike",
       "border_filepath": "data/layouts/BattleFrontier_BattlePikeLobby/border.bin",
       "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeLobby/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR",
-      "name": "BattleFrontier_BattlePikeCorridor_Layout",
-      "width": 14,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeCorridor/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeCorridor/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM",
-      "name": "BattleFrontier_BattlePikeThreePathRoom_Layout",
-      "width": 13,
-      "height": 11,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeThreePathRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeThreePathRoom/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL",
-      "name": "BattleFrontier_BattlePikeRoomNormal_Layout",
-      "width": 9,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomNormal/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomNormal/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL",
-      "name": "BattleFrontier_BattlePikeRoomFinal_Layout",
-      "width": 5,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomFinal/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomFinal/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -3888,28 +3767,6 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR",
-      "name": "BattleFrontier_BattleArenaCorridor_Layout",
-      "width": 18,
-      "height": 14,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleArena",
-      "border_filepath": "data/layouts/BattleFrontier_BattleArenaCorridor/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleArenaCorridor/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM",
-      "name": "BattleFrontier_BattleArenaBattleRoom_Layout",
-      "width": 16,
-      "height": 11,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleArena",
-      "border_filepath": "data/layouts/BattleFrontier_BattleArenaBattleRoom/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattleArenaBattleRoom/map.bin",
-      "layout_version": "emerald"
-    },
-    {
       "id": "LAYOUT_SOOTOPOLIS_CITY_LEGENDS_BATTLE",
       "name": "SootopolisCity_LegendsBattle_Layout",
       "width": 60,
@@ -3918,17 +3775,6 @@
       "secondary_tileset": "gTileset_Sootopolis",
       "border_filepath": "data/layouts/SootopolisCity_LegendsBattle/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_LegendsBattle/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS",
-      "name": "BattleFrontier_BattlePikeRoomWildMons_Layout",
-      "width": 9,
-      "height": 20,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePike",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePikeRoomWildMons/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePikeRoomWildMons/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -3951,204 +3797,6 @@
       "secondary_tileset": "gTileset_BattlePyramid",
       "border_filepath": "data/layouts/BattleFrontier_BattlePyramidLobby/border.bin",
       "blockdata_filepath": "data/layouts/BattleFrontier_BattlePyramidLobby/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR",
-      "name": "BattleFrontier_BattlePyramidFloor_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePyramidFloor/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePyramidFloor/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE01",
-      "name": "BattlePyramidSquare01_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare01/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare01/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE02",
-      "name": "BattlePyramidSquare02_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare02/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare02/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE03",
-      "name": "BattlePyramidSquare03_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare03/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare03/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE04",
-      "name": "BattlePyramidSquare04_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare04/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare04/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE05",
-      "name": "BattlePyramidSquare05_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare05/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare05/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE06",
-      "name": "BattlePyramidSquare06_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare06/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare06/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE07",
-      "name": "BattlePyramidSquare07_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare07/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare07/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE08",
-      "name": "BattlePyramidSquare08_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare08/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare08/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE09",
-      "name": "BattlePyramidSquare09_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare09/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare09/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE10",
-      "name": "BattlePyramidSquare10_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare10/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare10/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE11",
-      "name": "BattlePyramidSquare11_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare11/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare11/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE12",
-      "name": "BattlePyramidSquare12_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare12/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare12/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE13",
-      "name": "BattlePyramidSquare13_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare13/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare13/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE14",
-      "name": "BattlePyramidSquare14_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare14/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare14/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE15",
-      "name": "BattlePyramidSquare15_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare15/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare15/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_PYRAMID_SQUARE16",
-      "name": "BattlePyramidSquare16_Layout",
-      "width": 8,
-      "height": 8,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattlePyramidSquare16/border.bin",
-      "blockdata_filepath": "data/layouts/BattlePyramidSquare16/map.bin",
-      "layout_version": "emerald"
-    },
-    {
-      "id": "LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP",
-      "name": "BattleFrontier_BattlePyramidTop_Layout",
-      "width": 34,
-      "height": 23,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattlePyramid",
-      "border_filepath": "data/layouts/BattleFrontier_BattlePyramidTop/border.bin",
-      "blockdata_filepath": "data/layouts/BattleFrontier_BattlePyramidTop/map.bin",
       "layout_version": "emerald"
     },
     {

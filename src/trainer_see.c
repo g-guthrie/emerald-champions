@@ -14,7 +14,6 @@
 #include "trainer_see.h"
 #include "trainer_hill.h"
 #include "util.h"
-#include "battle_pyramid.h"
 #include "constants/battle_frontier.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -498,7 +497,7 @@ bool8 CheckForTrainersWantingBattle(void)
 
     if (gNoOfApproachingTrainers > 0)
     {
-        if (InBattlePyramid() || InTrainerHillChallenge())
+        if (InTrainerHillChallenge())
             ConfigureApproachingFacilityTrainerBattle(gApproachingTrainers);
         else
             ConfigureApproachingTrainerBattle(gApproachingTrainers);
@@ -527,9 +526,6 @@ static u8 CheckTrainer(u8 objectEventId)
     {
         trainerBattlePtr = GetTrainerHillTrainerScript();
     }
-    else if (InBattlePyramid()) {
-        trainerBattlePtr = GetBattlePyramidTrainerScript();
-    }
     else
     {
         trainerBattlePtr = GetObjectEventScriptPointerByObjectEventId(objectEventId);
@@ -547,12 +543,7 @@ static u8 CheckTrainer(u8 objectEventId)
         }
     }
 
-    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
-    {
-        if (GetBattlePyramidTrainerFlag(objectEventId))
-            return 0;
-    }
-    else if (InTrainerHill())
+    if (InTrainerHill())
     {
         if (GetHillTrainerFlag(objectEventId))
             return 0;
@@ -578,7 +569,7 @@ static u8 CheckTrainer(u8 objectEventId)
         numTrainers = 0xFF;
     }
 
-    if (trainerBattlePtr && !InTrainerHillChallenge() && !InBattlePyramid()) 
+    if (trainerBattlePtr && !InTrainerHillChallenge())
     {
         TrainerBattleParameter *temp = (TrainerBattleParameter *)(trainerBattlePtr + 1);
         if (temp->params.isDoubleBattle)

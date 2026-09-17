@@ -2029,11 +2029,6 @@ extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u32 gSwapLineGfx[];
 extern const u16 gSwapLinePal[];
 
-extern const u32 gBattlePyramidBag_Gfx[];
-extern const u16 gBattlePyramidBag_Pal[];
-extern const u32 gBattlePyramidBagTilemap[];
-extern const u16 gBattlePyramidBagInterface_Pal[];
-extern const u16 gBattlePyramidFloor_Pal[][16];
 
 extern const u16 gStandardMenuPalette[];
 
@@ -2047,25 +2042,11 @@ extern const u16 gTitleScreenPressStartPal[];
 extern const u16 gTitleScreenEmeraldVersionPal[];
 
 // Battle Dome
-extern const u32 gDomeTourneyInfoCard_Gfx[];
-extern const u32 gDomeTourneyInfoCard_Tilemap[];
-extern const u32 gDomeTourneyInfoCardBg_Tilemap[];
-extern const u16 gDomeTourneyTree_Pal[];
-extern const u16 gDomeTourneyTreeButtons_Pal[];
-extern const u16 gDomeTourneyMatchCardBg_Pal[];
-extern const u32 gDomeTourneyTree_Gfx[];
-extern const u32 gDomeTourneyLine_Gfx[];
-extern const u32 gDomeTourneyLineDown_Tilemap[];
-extern const u32 gDomeTourneyLineUp_Tilemap[];
-extern const u32 gDomeTourneyTree_Tilemap[];
-extern const u32 gDomeTourneyTreeButtons_Gfx[];
 extern const u16 gTilesetAnims_BattleDomePals0_0[];
 extern const u16 gTilesetAnims_BattleDomePals0_1[];
 extern const u16 gTilesetAnims_BattleDomePals0_2[];
 extern const u16 gTilesetAnims_BattleDomePals0_3[];
 
-extern const u32 gBattleArenaJudgmentSymbolsGfx[];
-extern const u16 gBattleArenaJudgmentSymbolsPalette[];
 
 extern const u16 gBattleWindowTextPalette[];
 
@@ -3326,9 +3307,6 @@ extern const u32 gPokenavOptions_Gfx[];
 extern const u16 gPokenavOptions_Pal[];
 
 // Battle Factory Screen
-extern const u16 gFrontierFactoryMenu_Gfx[34 * TILE_SIZE_4BPP / 2];
-extern const u16 gFrontierFactoryMenu_Tilemap[];
-extern const u16 gFrontierFactoryMenu_Pal[];
 
 // Object event pals
 extern const u16 gObjectEventPal_Brendan[];

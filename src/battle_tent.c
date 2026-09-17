@@ -8,7 +8,6 @@
 #include "battle_tower.h"
 #include "random.h"
 #include "item.h"
-#include "battle_factory_screen.h"
 #include "frontier_util.h"
 #include "string_util.h"
 #include "constants/battle_tent.h"
@@ -41,8 +40,6 @@ static void SetSlateportTentPrize(void);
 static void SaveSlateportTentChallenge(void);
 static void SetRandomSlateportTentPrize(void);
 static void GiveSlateportTentPrize(void);
-static void SelectInitialRentalMons(void);
-static void SwapRentalMons(void);
 static void GenerateOpponentMons(void);
 static void GenerateInitialRentalMons(void);
 
@@ -102,8 +99,6 @@ void static (*const sSlateportTentFuncs[])(void) =
     [SLATEPORT_TENT_FUNC_SAVE]                   = SaveSlateportTentChallenge,
     [SLATEPORT_TENT_FUNC_SET_RANDOM_PRIZE]       = SetRandomSlateportTentPrize,
     [SLATEPORT_TENT_FUNC_GIVE_PRIZE]             = GiveSlateportTentPrize,
-    [SLATEPORT_TENT_FUNC_SELECT_RENT_MONS]       = SelectInitialRentalMons,
-    [SLATEPORT_TENT_FUNC_SWAP_RENT_MONS]         = SwapRentalMons,
     [SLATEPORT_TENT_FUNC_GENERATE_OPPONENT_MONS] = GenerateOpponentMons,
     [SLATEPORT_TENT_FUNC_GENERATE_RENTAL_MONS]   = GenerateInitialRentalMons
 };
@@ -284,17 +279,6 @@ static void GiveSlateportTentPrize(void)
     {
         gSpecialVar_Result = FALSE;
     }
-}
-
-static void SelectInitialRentalMons(void)
-{
-    ZeroPlayerPartyMons();
-    DoBattleFactorySelectScreen();
-}
-
-static void SwapRentalMons(void)
-{
-    DoBattleFactorySwapScreen();
 }
 
 bool8 InSlateportBattleTent(void)

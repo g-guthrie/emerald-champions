@@ -35,13 +35,6 @@ BattleFrontier_BattlePikeLobby_EventScript_Beauty::
 	msgbox BattleFrontier_BattlePikeLobby_Text_OneLossEndsIt, MSGBOX_NPC
 	end
 
-@ Still called by the Pike corridor and battle_pike.inc.
-BattleFrontier_BattlePike_EventScript_CloseCurtain::
-	playse SE_PIKE_CURTAIN_CLOSE
-	special CloseBattlePikeCurtain
-	waitse
-	return
-
 BattleFrontier_BattlePikeLobby_Text_NoMoreGuessingDoors:
 	.string "No more guessing behind curtains.\n"
 	.string "You register and you battle.$"

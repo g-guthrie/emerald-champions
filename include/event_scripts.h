@@ -628,10 +628,6 @@ extern const u8 SecretBase_EventScript_PutAwayDecoration[];
 extern const u8 SecretBase_EventScript_SetDecoration[];
 
 // Battle Pyramid.
-extern const u8 BattlePyramid_Retire[];
-extern const u8 BattlePyramid_WarpToNextFloor[];
-extern const u8 BattlePyramid_TrainerBattle[];
-extern const u8 BattlePyramid_FindItemBall[];
 
 // fldeff misc
 extern const u8 SecretBase_EventScript_CaveUseSecretPower[];
