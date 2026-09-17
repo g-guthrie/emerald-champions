@@ -107,3 +107,6 @@ playtests/*.zip
 *.sav
 *.mgba
 *.ss[0-9]
+
+# Studio virtualenv created by the guide capture pipeline
+.venv-studio/
