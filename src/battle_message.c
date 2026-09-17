@@ -27,7 +27,6 @@
 #include "window.h"
 #include "line_break.h"
 #include "constants/abilities.h"
-#include "constants/battle_dome.h"
 #include "constants/battle_string_ids.h"
 #include "constants/frontier_util.h"
 #include "constants/items.h"
@@ -1510,15 +1509,6 @@ const u8 gText_Loss[] = _("{BACKGROUND TRANSPARENT}{ACCENT TRANSPARENT}Loss");
 const u8 gText_Draw[] = _("{BACKGROUND TRANSPARENT}{ACCENT TRANSPARENT}Draw");
 static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
-const u8 gText_BattleTourney[] = _("BATTLE TOURNEY");
-
-const u8 *const gRoundsStringTable[DOME_ROUNDS_COUNT] =
-{
-    [DOME_ROUND1]    = COMPOUND_STRING("Round 1"),
-    [DOME_ROUND2]    = COMPOUND_STRING("Round 2"),
-    [DOME_SEMIFINAL] = COMPOUND_STRING("Semifinal"),
-    [DOME_FINAL]     = COMPOUND_STRING("Final"),
-};
 
 const u8 gText_TheGreatNewHope[] = _("The great new hope!\p");
 const u8 gText_WillChampionshipDreamComeTrue[] = _("Will the championship dream come true?!\p");

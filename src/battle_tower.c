@@ -26,7 +26,6 @@
 #include "battle_factory.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
-#include "constants/battle_dome.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
 #include "constants/battle_move_effects.h"
