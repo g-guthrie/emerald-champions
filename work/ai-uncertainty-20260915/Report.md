@@ -2123,3 +2123,28 @@ produced it (the pair search's own reserve enumeration or the candidate
 comparison) and whether the budget had already expired when it did.
 
 The workflow for that is now in `docs/VERIFICATION.md` and takes one build.
+
+## The live Olivia trace: the switch was not the budget
+
+Instrumented the switch path the same way as the Mega one and drove E0464 at
+seed 1. A switch was emitted and the trace reads:
+
+```
+FROM_PAIR=1   BUDGET_GONE=0   TRUNCATED=1(sticky)   slot=5
+```
+
+So the joint search's own reserve enumeration produced it, **with the clock
+still intact** — the comparison was affordable and the switch won it. That is
+evidence against the budget explanation that solved E0409, and it means the
+receiver choice is a scoring question after all, not a truncation artifact.
+
+Two limits of this first cut, which the next trace should fix: the truncation
+bit is sticky for the whole battle rather than per decision, and a forced
+replacement after a faint is not yet distinguished from a voluntary exit — the
+sample above may be the replacement for the Tentacruel that had just fainted.
+
+The other thing this run showed is that my greedy drive script does not
+reproduce the receipt's line: it won in four turns where the receipt took six
+and saw five switches. To land this one I need to replay the receipt's own
+player commands from its `events.jsonl` so the same boards arise, which is the
+next step rather than another constructed fixture.
