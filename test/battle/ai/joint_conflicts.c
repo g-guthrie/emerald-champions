@@ -126,8 +126,12 @@ AI_DOUBLE_BATTLE_TEST("EC joint conflicts: the HP-scaled spread wins at full hea
         AI_FLAGS(JOINT_FLAGS);
         // Kyogre's board: at full health Water Spout is a hundred and fifty
         // that cannot miss, against a hundred and ten at eighty-five accuracy.
-        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(300); MaxHP(300); Attack(20); Defense(120); SpDefense(120); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
-        PLAYER(SPECIES_MAGIKARP) { Level(50); HP(300); MaxHP(300); Defense(120); SpDefense(120); Speed(10); Moves(MOVE_SPLASH); }
+        // The bodies opposite hit back, because the live board does and a
+        // board that cannot fight back was not testing the question: an
+        // HP-scaled move must be priced at the health its user will have when
+        // it acts, not at the health the forecast leaves it with afterwards.
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(300); MaxHP(300); Attack(200); Defense(120); SpDefense(120); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_MAGIKARP) { Level(50); HP(300); MaxHP(300); Attack(200); Defense(120); SpDefense(120); Speed(10); Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_KYOGRE) {
             Level(50); HP(400); MaxHP(400); SpAttack(180); Defense(150); SpDefense(150); Speed(90);
             Ability(ABILITY_DRIZZLE); Moves(MOVE_WATER_SPOUT, MOVE_ORIGIN_PULSE);
@@ -135,8 +139,8 @@ AI_DOUBLE_BATTLE_TEST("EC joint conflicts: the HP-scaled spread wins at full hea
         OPPONENT(SPECIES_MAGIKARP) { Level(50); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
     } WHEN {
         TURN {
-            MOVE(playerLeft, MOVE_CELEBRATE);
-            MOVE(playerRight, MOVE_SPLASH);
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentLeft);
             EXPECT_MOVE(opponentLeft, MOVE_WATER_SPOUT);
         }
     }

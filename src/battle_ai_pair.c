@@ -1297,6 +1297,10 @@ u32 gAiSwitchTrace[MAX_BATTLERS_COUNT];
 // An empty guard that wins by a hair is a different story from one that wins
 // by a mile, and a receipt cannot tell them apart.
 u32 gAiGuardTrace[MAX_BATTLERS_COUNT];
+// Per battler, per move slot: the largest simulated damage that move has
+// against anything on the other side, as the decision saw it. Enough to tell a
+// mispriced move from a correctly priced one that lost for another reason.
+u32 gAiMoveDamageTrace[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
 static u32 sPairWorkAllowance;
 static u32 sPairWorkDecision;
 
@@ -6057,6 +6061,15 @@ decisionReady:
         else
         {
             gAiGuardTrace[battler] = 0;
+        }
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            u32 best = 0;
+            for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+                if (IsBattlerAlive(foe) && !IsBattlerAlly(battler, foe)
+                 && gAiLogicData->simulatedDmg[battler][foe][slot].median > best)
+                    best = gAiLogicData->simulatedDmg[battler][foe][slot].median;
+            gAiMoveDamageTrace[battler][slot] = best;
         }
         gAiBattleData->chosenMoveIndex[battler] = chosenIndex;
         // The fallback action this search starts from carries the actor as its

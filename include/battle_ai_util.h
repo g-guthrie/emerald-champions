@@ -179,6 +179,7 @@ extern u32 gAiPairMegaTrace[MAX_BATTLERS_COUNT];
 extern u32 gAiSwitchTrace[MAX_BATTLERS_COUNT];
 // Per battler: guard chosen, and its margin over the best attacking board.
 extern u32 gAiGuardTrace[MAX_BATTLERS_COUNT];
+extern u32 gAiMoveDamageTrace[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
 extern bool8 gAiPairDecisionTruncated;
 u32 NoOfHitsForTargetToFaintBattler(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure);
 void GetBestDmgMovesFromBattler(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum DamageCalcContext calcContext, enum Move *bestMoves);
