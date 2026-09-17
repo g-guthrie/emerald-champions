@@ -2148,3 +2148,52 @@ reproduce the receipt's line: it won in four turns where the receipt took six
 and saw five switches. To land this one I need to replay the receipt's own
 player commands from its `events.jsonl` so the same boards arise, which is the
 next step rather than another constructed fixture.
+
+# The switch family, measured and fixed
+
+Commit `ab8a849663`. **198 passed, 0 failed**; `pokeemerald.gba` clean.
+
+## What the live replay said
+
+Olivia's own player line replayed from her receipt's `events.jsonl`, with the
+trace made per decision and the margin against the best stay board recorded:
+
+| turn | path | clock | truncated | slot | margin over staying |
+| --- | --- | --- | --- | --- | --- |
+| 2 | joint search | intact | no | 4 | **38** |
+| 4 | joint search | intact | no | 5 | **14** |
+
+A healthy member is worth 180. Both exits won by a sliver, on a full
+comparison, with budget to spare. **This family is not the budget** — the
+opposite of E0409 — and the missing term is the entry damage.
+
+## The fix
+
+A reserve that a move the player has already shown removes on arrival has not
+improved the position; it has spent a member to change the sprite. That entry
+now costs `PAIR_SWITCH_INTO_DEATH` (220), more than a whole body, so it can
+never win on a margin like 14 or 38. Only revealed moves count — last turn's
+move, or one already in the battle history — because the AI does not get to
+read a set it has not been shown.
+
+## Verified the same way it was found
+
+Same replay after the change: **both switches are gone**, Araquanid stays in,
+and the room lasts three turns longer. The four constructed fixtures from this
+family still pass, which is the check that the new charge has not turned into a
+blanket refusal to switch.
+
+## What this pair of investigations has taught me
+
+Two families, opposite causes, and neither was visible from a fixture:
+
+* **E0409's Mega decline** was the shared decision budget — invisible because a
+  two-turn fixture never exhausts a clock.
+* **The switch carousel** is ordinary scoring, on a full comparison — invisible
+  because my constructed boards never produced a reserve that was attractive on
+  offence *and* dead on arrival.
+
+The instrumented live replay found both in one build each, after four
+constructed boards had found nothing. For any report that says "the AI kept
+doing X across a whole battle", that is now the first tool I reach for, not the
+last.
