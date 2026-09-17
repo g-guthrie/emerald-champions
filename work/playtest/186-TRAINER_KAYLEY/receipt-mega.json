@@ -1,0 +1,31 @@
+{
+  "play_order": 186, "e_group": "E0277", "trainer": "TRAINER_KAYLEY", "cap": 54, "difficulty": "medium",
+  "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
+  "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
+  "question": "Does Mega Charizard X now Mega-Evolve on its first action, and does it fight at all (E0277-1 retest)?",
+  "party_manifest": "work/playtest/186-TRAINER_KAYLEY/party_b54_kayley.json",
+  "party_reuse": "Unchanged from receipt.json; same cap 54 and location, chronology audit unchanged.",
+  "level_offsets_at_run": {"CASTFORM": 1, "SAWSBUCK": 1, "CHARIZARD": 0, "EMOLGA": 2},
+  "resolved_opponent_levels": {"CASTFORM": 53, "SAWSBUCK": 53, "CHARIZARD": 52, "EMOLGA": 54},
+  "attempts": [
+    {"attempt": 1, "run_dir": "work/playtest/186-TRAINER_KAYLEY/m1", "seed": 1, "outcome": "won", "turns": 5, "player_faints": 2, "opponent_faints": 4,
+     "narrative": "T1 Fake Out flinched Castform's Sunny Day; Sawsbuck's Horn Leech took Mamoswine 200->32 before Icicle Crash KO'd it. Charizard entered (no switch-into-attack this time). T2 CHARIZARD MEGA-EVOLVED ON ITS FIRST ACTION and Dragon Clawed into Mamoswine's Protect; Castform set sun as Flare Blitz KO'd it. T3 Emolga Protect blocked Flare Blitz; Dragon Claw KO'd Mamoswine after its Ice Shard (56). T4 Gardevoir in, Mega-Evolved, and was OHKO'd by a sun-boosted Tough Claws Flare Blitz before Hyper Voice resolved; Emolga Encored Incineroar into Flare Blitz. T5 Regieleki in; Electroweb (spread, past Lightning Rod) KO'd the 15-HP Mega Charizard before it moved; Emolga Protect blocked Flare Blitz again. T6 Flare Blitz KO'd Emolga (Encore locked but correct)."}
+  ],
+  "mega_check": {"evolved": true, "turn": 2, "first_action": true, "board": "Charizard 159/159 enters end of T1 beside Castform 117/154 vs Incineroar 217/217 and Mamoswine 32/200. T2: Mega Evolution, Dragon Claw into Mamoswine (Protected). It then KO'd Mamoswine (T3) and Mega Gardevoir (T4) before recoil + Ice Shard + Electroweb removed it."},
+  "strategy_checks": [
+    {"check": "Mega Charizard X Mega-Evolves and fights", "result": "PASS", "evidence": "T2 'has Mega Evolved'; two KOs (Mamoswine, Mega Gardevoir) over T3-T4. E0277-1 (switching the Mega into a committed Icicle Crash) did not recur: Charizard entered only as a replacement."},
+    {"check": "Castform sets sun when useful", "result": "PASS", "evidence": "Sunny Day chosen T1 (flinched) and T2 (set, transformed) - after Sawsbuck died the sun still fed Mega Charizard's Flare Blitz, which OHKO'd Mega Gardevoir."},
+    {"check": "Emolga control supports the Mega", "result": "PASS", "evidence": "T4 Encore locked Incineroar into a resisted Flare Blitz for the rest of the fight; Lightning Rod redirected nothing because I only used a spread Electric move."},
+    {"check": "Dragon Dance setup", "result": "NOT FIRED", "evidence": "Charizard attacked every turn; with Mamoswine at 32 and a Fairy switching in, attacking was correct each time."},
+    {"check": "Every opposing Protect has a payoff", "result": "PASS", "evidence": "Emolga T3 and T5 each blocked a lethal Flare Blitz; not consecutive."}
+  ],
+  "protect_ledger": [
+    {"turn": 3, "battler": "EMOLGA", "payoff": "Blocked a lethal Flare Blitz on its entry turn."},
+    {"turn": 5, "battler": "EMOLGA", "payoff": "Blocked a lethal Encored Flare Blitz and stalled Regieleki's spread turn."}
+  ],
+  "ai_defects": [],
+  "difficulty_reading": "Changed. The prior run lost one Pokemon in three turns because the AI threw its Mega into an Icicle Crash. With the Mega actually fighting: five turns, two faints (Mamoswine to Dragon Claw, Mega Gardevoir OHKO'd by a sun-boosted Flare Blitz), plus an Encore lock. A real fight; keep.",
+  "level_changes": {"rule_applied": "KEEP (won with 2 faints after a real fight).", "changes": []},
+  "could_this_be_cooler": "Unchanged from receipt.json. With the Mega live, the sun-fed Tough Claws Flare Blitz is the showcase the plan promised.",
+  "scope": "Synthetic headless benchmark on work/agent-battle-build-10; not earned play. scene.gba/scene.elf deleted after result; logs kept."
+}
