@@ -2521,3 +2521,63 @@ surviving instance of the `738e5a8809` defect.
 **This invalidates the three-board pattern** (Kyogre turn 2 on Wallace, Zekrom
 turn 3 on Drake, Chimecho turn 4 on Virgil) until Drake and Virgil are re-read
 with the fixed instrument. One of the three has now come back defensible.
+
+# The three-board pattern is refuted, and the margin is not the test
+
+All three boards re-read with the fixed instrument, replaying each receipt's own
+submitted line at its own seed and party. Caveat: these run against the current
+tree rather than the b16 build, and Virgil's Chimecho now reads 286 maximum HP
+against the receipt's 283, so that room's levels have moved since. Drake matches
+its receipt exactly (Zekrom 325/325, Reshiram 322/322).
+
+| Board | Guard | Receipt verdict | Margin |
+| --- | --- | --- | --- |
+| Virgil, Bronzong 243/256 | Protect | REAL — excellent | **17** |
+| Virgil, Chimecho at full, entry turn | Protect | EMPTY | **19** |
+| Virgil, Cofagrigus 167/242 | Protect | REAL — excellent | 119 |
+| Drake, Zekrom 325/325, entry turn | Protect | EMPTY | 111 |
+| Drake, Reshiram under Encore | Protect | not a choice | 4095 |
+| Wallace, Kyogre 231/322 | Protect | EMPTY | 194 |
+
+Two things follow, and the second is the more important.
+
+**The three first-entry-turn guards have nothing in common.** 194, 111 and 19.
+They are not one cause and should not be worked as one.
+
+**The margin does not separate earned guards from empty ones.** Bronzong's
+guard, which the reviewer called excellent because it blocked a 2x Flare Blitz,
+scores 17. Chimecho's empty one scores 19 — two points apart, opposite verdicts.
+Cofagrigus's excellent guard scores 119; Zekrom's empty one scores 111.
+
+That is not the instrument failing a second time. It is the two numbers
+measuring different things, and under the no-read rule they *must* diverge:
+
+- the receipt's verdict is **ex post** — did the player happen to aim at it;
+- the margin is **ex ante** — how much better the model thought shielding was
+  before it could possibly know.
+
+A thin margin is a close call, and close calls go both ways: Bronzong's paid off
+brilliantly at 17, Chimecho's paid nothing at 19. Neither is evidence of a
+defect. **A guard is only a defect when the forecast that justified it was
+itself mispriced** — which makes the forecast, not the guard scorer, the thing
+to audit. Empty-guard counts in the receipts are a measure of luck as much as of
+quality, and a rerun split that moves them is weaker evidence than it looks.
+
+The sentinel, meanwhile, now carries real information: Drake's Reshiram reads
+4095 on two consecutive turns because Encore has left it with nothing but
+Protect to score. That is the instrument being right.
+
+## The one lead that survives
+
+Virgil's Chimecho at margin **19** is thin enough that a small correction flips
+it, and there is a specific candidate: Bronzong is at **1/256** in front of the
+attacker when Chimecho arrives. `PairJointFoeForecast` values a target by
+`weightedDamage / maxHP` plus a flat KO credit, so finishing a 1 HP body is
+worth about 80 while swinging at a full-health Chimecho is worth 100 or more —
+the forecast prefers the big swing where a real player takes the free knockout
+first. That is the same asymmetry as the forecast-chooser note above, and it is
+a single lever under two reports.
+
+Drake's Zekrom at 111 and Wallace's Kyogre at 194 do not need that lever. Both
+are guards the model defends by a wide margin against a live lethal threat, and
+neither should be tuned away.
