@@ -133,6 +133,9 @@
 #define PAIR_SWITCH_COMMITMENT 35
 #define PAIR_SWITCH_TEMPO_CAP 70
 #define PAIR_SWITCH_BLIND_COST 60
+// More than a whole member, so an exit that loses the body it brings in can
+// never win on a margin.
+#define PAIR_SWITCH_INTO_DEATH 220
 
 static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MOVE_REVELATION_DANCE, MOVE_AQUA_STEP, MOVE_FEATHER_DANCE};
 
@@ -1258,6 +1261,8 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
 bool8 gAiPairBudgetTruncated;
 // Why the joint search did not run for this decision, if it did not.
 u32 gAiPairSkipReason;
+// Whether the clock cut this decision, as opposed to some earlier one.
+bool8 gAiPairDecisionTruncated;
 // Per battler: what the joint search decided about Mega Evolution, so a driven
 // battle can say whether the search ran, whether the candidate was legal, and
 // what it chose - none of which is visible from the outside otherwise.
@@ -5025,6 +5030,7 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             if (!mustFinish && PairDecisionBudgetExpired())
             {
                 gAiPairBudgetTruncated = TRUE;
+                gAiPairDecisionTruncated = TRUE;
                 if (!canStop)
                     goto done;
                 if (shortCount != 0)
@@ -5186,6 +5192,35 @@ static s32 PairForfeitedAttackValue(enum BattlerId actor)
         }
     }
     return min(PAIR_SWITCH_TEMPO_CAP, best);
+}
+
+// Whether a move the other side has already used would remove the body that
+// is about to come in, before it acts. Only revealed moves count: the AI does
+// not get to read a set it has not been shown.
+static bool32 PairEntryIsLethal(enum BattlerId entering)
+{
+    if (!IsBattlerAlive(entering))
+        return FALSE;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(entering, foe))
+            continue;
+        for (u32 index = 0; index < MAX_MON_MOVES; index++)
+        {
+            enum Move move = gBattleMons[foe].moves[index];
+            if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IsBattleMoveStatus(move))
+                continue;
+            bool32 revealed = gAiLogicData->lastUsedMove[foe] == move;
+            for (u32 seen = 0; seen < MAX_MON_MOVES && !revealed; seen++)
+                revealed = gBattleHistory->usedMoves[foe][seen] == move;
+            if (!revealed)
+                continue;
+            if (gAiLogicData->simulatedDmg[foe][entering][index].minimum >= gBattleMons[entering].hp
+             && gAiLogicData->simulatedDmg[foe][entering][index].minimum != 0)
+                return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 static bool32 PairCanSwitch(enum BattlerId actor)
@@ -5602,6 +5637,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
 {
     enum BattlerId partner = GetPartnerBattler(actor);
     u32 skip = 0;
+    gAiPairDecisionTruncated = FALSE;
     if (!IsDoubleBattle())
         skip |= AI_PAIR_SKIP_NOT_DOUBLE;
     if (!BattlerHasAi(partner))
@@ -5690,6 +5726,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
         bestActions[index] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actors[index]};
     u32 bestReserves[2] = {PARTY_SIZE, PARTY_SIZE};
     u32 bestMega = 0, bestTieCost = UINT_MAX;
+    s32 bestStay = INT_MIN; // Best board that keeps both bodies, for the trace.
     u32 activeMega = 0;
     s32 best = INT_MIN;
     for (u32 left = 0; left < count[0]; left++)
@@ -5823,6 +5860,14 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     {
                         if (slots[index] >= PARTY_SIZE)
                             continue;
+                        // The body coming in is the one that eats the turn. A
+                        // reserve that a move the player has already shown
+                        // removes on arrival has not improved the position; it
+                        // has spent a member to change the sprite. Live play
+                        // produced this over and over, and the exits were
+                        // winning by 14 and 38 points - well inside a body.
+                        if (PairEntryIsLethal(actors[index]))
+                            score -= PAIR_SWITCH_INTO_DEATH;
                         score -= PAIR_SWITCH_COMMITMENT;
                         if (pressured[index])
                             continue;
@@ -5843,6 +5888,8 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 for (u32 index = 0; index < 2; index++)
                     if (earlyPivot[index] && slots[index] < PARTY_SIZE)
                         score += 70;
+                if (slots[0] >= PARTY_SIZE && slots[1] >= PARTY_SIZE && score > bestStay)
+                    bestStay = score;
                 if (score > best || (score == best && tieCost < bestTieCost))
                 {
                     best = score;
@@ -5879,10 +5926,16 @@ decisionReady:
         if (bestReserves[index] < PARTY_SIZE && !attackPivot[index])
         {
             gAiLogicData->shouldSwitch |= 1u << battler;
+            // How much the exit beat the best board that keeps both bodies.
+            // A switch that wins by a hair is a different story from one that
+            // wins by a mile, and the receipts cannot tell them apart.
+            s32 margin = bestStay == INT_MIN ? 999 : best - bestStay;
             gAiSwitchTrace[battler] = AI_SWITCH_FROM_PAIR
                 | (PairDecisionBudgetExpired() ? AI_SWITCH_BUDGET_GONE : 0)
-                | (gAiPairBudgetTruncated ? AI_SWITCH_TRUNCATED : 0)
-                | ((bestReserves[index] & 7) << 8);
+                | (gAiPairDecisionTruncated ? AI_SWITCH_TRUNCATED : 0)
+                | (bestStay != INT_MIN ? AI_SWITCH_HAD_STAY : 0)
+                | ((bestReserves[index] & 7) << AI_SWITCH_SLOT_SHIFT)
+                | ((u32)(margin < 0 ? 0 : margin > 4095 ? 4095 : margin) << 16);
         }
         // Never hand the controller a move it cannot select: the selection
         // script would reject it and ask again, and the answer never changes.
