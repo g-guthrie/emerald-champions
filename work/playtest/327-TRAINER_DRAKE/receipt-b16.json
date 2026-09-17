@@ -1,0 +1,72 @@
+{
+  "trainer": "TRAINER_DRAKE", "e_group": "E0496", "play_order": 327, "cap": 96, "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-16 (inputs stamp 448b369f7a06..., rom 8f2abbcb..., elf 2b73cfab...)",
+  "purpose": "Rerun after AI commits 738e5a8809 (empty-Protect cause) and d50e8337c8 (no ACTIVATE on the turn the recipient shields). The room's standing complaint is Zekrom's empty entry-turn guards.",
+  "party_manifest": "work/playtest/327-TRAINER_DRAKE/party_league96_v3.json (unchanged)",
+  "replay_of": "work/playtest/327-TRAINER_DRAKE/receipt.json, attempt 5 (seed 5, League v3, build-12: won 6-3 in 10 turns) - the attempt the 'keep all offsets' decision rests on",
+  "attempts": [
+    {
+      "seed": 5, "run_dir": "work/playtest/327-TRAINER_DRAKE/b16-a1",
+      "outcome": "won", "turns": 13, "turns_reported_by_result": 12,
+      "player_faints": 2, "opponent_faints": 6,
+      "faints_player": ["Whimsicott (T7, at 1 HP behind its broken Sash, into Koraidon's Collision Course after it had set the second Tailwind)", "Incineroar (T8, Collision Course 2x after Zekrom's Bolt Strike had already taken 198 and paralysed it)"],
+      "faints_opponent": [
+        "Mega Salamence (T2, Whimsicott Moonblast 2x from 245/312)",
+        "Dragonite (T5, Moonblast - it entered on T4 at 11/370 behind Multiscale and never acted)",
+        "Reshiram (T6, Moonblast at 66/322)",
+        "Koraidon (T8, Draco Meteor 2x from 287/318)",
+        "Regidrago (T10, Draco Meteor after Kowtow Cleave had taken 342 of its 520)",
+        "Zekrom (T13, Kowtow Cleave)"
+      ],
+      "ai_decision_seconds_max": 1.005,
+      "player_line": "Replicated a5's opening exactly through T3 so the Zekrom guard would be measured on the same board: T1 Mega Fake Out on Salamence + Prankster Tailwind (Blue Flare broke Whimsicott's Sash). T2 Moonblast KO'd Mega Salamence, Reshiram Protected the Double-Edge. T3 Kangaskhan Protect + Encore locked Reshiram into Protect. T4 both attacks into Zekrom - the AI switched it out for Dragonite. T5 Moonblast finished Dragonite, Double-Edge took Reshiram to 66. T6 Moonblast KO'd Reshiram; Koraidon entered with sun. T7 pivot to Incineroar (Intimidate; Zekrom's Clear Amulet blocked its share) and a second Tailwind; Whimsicott died. T8 Fake Out was Protected, Koraidon KO'd Incineroar, Draco Meteor KO'd Koraidon. T9-T13 Kingambit (which resists every move Zekrom and Regidrago own) ground both down behind Raging Bolt's Protects."
+    }
+  ],
+  "protect_ledger_b16": [
+    {"turn": 2, "battler": "Reshiram (322/322)", "payoff": "blocked Mega Kangaskhan's Parental Bond Double-Edge - the same attack took 256 off it on T5, so this was a large real block"},
+    {"turn": 3, "battler": "Zekrom (325/325, entry turn)", "payoff": "EMPTY - nothing was aimed at it; Kangaskhan Protected and Whimsicott used Encore on Reshiram"},
+    {"turn": 3, "battler": "Reshiram", "payoff": "forced repeat under Encore, and it failed - not a choice"},
+    {"turn": 4, "battler": "Reshiram", "payoff": "forced repeat under Encore (succeeded) - not a choice"},
+    {"turn": 5, "battler": "Reshiram", "payoff": "forced repeat under Encore, failed - not a choice"},
+    {"turn": 6, "battler": "Zekrom (325/325, second entry turn)", "payoff": "blocked Parental Bond Double-Edge - real"},
+    {"turn": 8, "battler": "Zekrom (325/325)", "payoff": "marginal - blocked Incineroar's Fake Out. It saved the chip damage but not the turn: a flinch would have cost Zekrom the same action the Protect cost it"},
+    {"turn": 10, "battler": "Zekrom (325/325)", "payoff": "blocked Kingambit's Kowtow Cleave - real"},
+    {"turn": 12, "battler": "Zekrom (160/325)", "payoff": "blocked Draco Meteor AND Kowtow Cleave. Kowtow Cleave was doing 165 a hit and Zekrom had 160 HP, so this Protect blocked a lethal turn outright - the best guard of the fight"}
+  ],
+  "protect_comparison": {
+    "prior_receipt": "receipt.json attempt 5 (seed 5, same party, build-12)",
+    "prior_zekrom_ledger": "Zekrom Protected on its two entry turns, T3 and T6, and defect 3 recorded both as empty (no attack aimed at it).",
+    "zekrom_protects_before_after": "2 -> 5",
+    "empty_protects_before_after": "2 -> 1",
+    "consecutive_protects_before_after": "0 -> 0 (Zekrom alternated: guard T6, attack T7, guard T8, attack T9, guard T10, attack T11, guard T12)",
+    "whole_board_before_after": "Counting only real decisions and excluding Reshiram's Encore-forced repeats: build-12 a5 had Reshiram's T2 block plus Zekrom's two empty entry guards; build-16 has Reshiram's T2 block plus Zekrom's one empty entry guard, two full blocks and one lethal-turn block. Payoff rate on genuine Protect decisions went 1/3 -> 4/5 (or 3/5 if the Fake Out block is counted as no payoff).",
+    "note": "This is the clearest behavioural improvement in the rerun set. The guard that remains empty is specifically the FIRST entry turn at full HP; every later Zekrom guard in this run was aimed at a real incoming attack, including one that was exactly lethal."
+  },
+  "strategy_checks": [
+    {"check": "Mega Salamence Mega Evolves T1 and acts", "result": "PASS", "evidence": "T1 'Salamence has Mega Evolved into Mega Salamence'; native latch shows it chose DOUBLE_EDGE at Kangaskhan and was Fake Out flinched."},
+    {"check": "Earthquake only beside an airborne or protected partner", "result": "NOT EXERCISED", "evidence": "Salamence was KO'd on T2 and never selected Earthquake in this run. No evidence either way."},
+    {"check": "Koraidon Orichalcum Pulse sun on entry", "result": "PASS", "evidence": "T6 entry: 'The sunlight turned harsh'; weather stayed B_WEATHER_SUN_NORMAL until it expired after T11. It also turned on my own Raging Bolt's Protosynthesis when it entered on T7."},
+    {"check": "Regidrago Choice Specs Dragon Energy at full HP", "result": "PASS", "evidence": "T9 Dragon Energy at 520/520 into Kingambit for 48 through Steel resistance plus an Assault Vest; Raging Bolt Protected its half. It then stayed locked into Dragon Energy after Kowtow Cleave dropped it to 178/520, which is the correct Specs consequence."},
+    {"check": "Reshiram Blue Flare / Draco Meteor / Earth Power lane", "result": "PASS", "evidence": "T1 Blue Flare into Whimsicott (super effective, broke the Focus Sash). Its T3 and T6 native choices were EARTH_POWER, i.e. the correct Ground answer to Kingambit/Incineroar; T3 was overridden by my Encore and T6 never resolved because Moonblast KO'd it first."},
+    {"check": "Mega Dragonite Draco Meteor / Air Slash / Roost behind Multiscale", "result": "FAIL (AI switch), fourth build running", "evidence": "T4: with Zekrom at full HP the AI hard-switched it out for Dragonite, which took Moonblast (2x on Dragon) and Parental Bond Double-Edge on entry and survived at 11/370 only because of Multiscale. It reported usable_gimmick=mega on T5, selected FLAMETHROWER, and was KO'd by Moonblast before acting. Dragonite has still never acted in this room on any build."},
+    {"check": "AI decision budget <= 1.2s", "result": "PASS", "evidence": "ai_decision_seconds_max 1.005."}
+  ],
+  "ai_defects": [
+    {"id": 2, "severity": "AI", "status": "PERSISTS on build-16 (builds 10, 12, 16)", "description": "T4: Zekrom at 325/325 was hard-switched out for Dragonite, the team's Mega-slot ace, which is 2x weak to the Moonblast that was coming and entered into both of my attacks. Multiscale left it at 11/370 and it fainted on T5 without ever acting. A switch only helps when the incoming body resists what is arriving; this one is the worst possible receiver, and it costs Drake his second Mega every single time. Turn evidence: b1 'switch NONE->1(self)' in T4's native latch, then damage opponent_a:5 -> 11/370, then faint on T5."},
+    {"id": 3, "severity": "AI (Protect cadence)", "status": "IMPROVED but not gone", "description": "Zekrom still opens with Protect on its first entry turn at full HP with nothing aimed at it (T3; Kangaskhan Protected and Whimsicott used Encore, so literally no attack existed). Unlike build-12, its later guards are all earned: T6 blocked a Parental Bond Double-Edge, T10 blocked Kowtow Cleave and T12 blocked a lethal Draco Meteor + Kowtow Cleave turn at 160/325. Empty count 2 -> 1 on the same seed and party."},
+    {"id": 5, "severity": "AI (minor, new)", "status": "new observation", "description": "T8 Zekrom Protected against Incineroar's Fake Out and nothing else. Blocking a flinch move with Protect spends the action it was trying to save; only the chip damage is gained. Low-value rather than wrong, but worth a forecast-weight note: a Fake Out should score near zero as a reason to guard."},
+    {"id": 1, "severity": "engine", "status": "UNRESOLVED, untestable here", "description": "The second authored Mega could not be observed again because defect 2 kills Dragonite before it acts. Nothing in this run either confirms or clears the one-Mega-per-trainer gate for Drake."},
+    {"id": 4, "severity": "driver", "status": "NOT REPRODUCED", "description": "The a4 item-read glitch did not recur: Zekrom read ITEM_CLEAR_AMULET correctly from its first entry, and the amulet visibly blocked Incineroar's Intimidate on T7 while Koraidon's Attack fell."}
+  ],
+  "ai_choices_that_were_correct": [
+    "T12 Zekrom Protect at 160/325 against a turn that was doing 165+ - a read that bought a whole extra turn",
+    "T2 Reshiram Protect against the Parental Bond Double-Edge",
+    "T9 Regidrago Dragon Energy at full HP rather than a weaker locked option",
+    "Reshiram's T3/T6 Earth Power selections were the right type answer to my Steel/Fire bodies even though neither resolved"
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NO LEVEL CHANGE. The prior receipt decided 'keep all offsets' from a 6-3 build-12 win; this is a 6-2 win on the same seed and party, which does not flip that decision - two faints is squarely the 'won with 2+ faints or after a real fight' bucket, and it took 13 turns with Kingambit tanking the last four. Offsets stay 0/0/1/-1/2/2 (medium levels 94/94/95/93/96/96).",
+  "cooler": "Unchanged and still the honest answer: the fight would be markedly cooler if Dragonite stopped being fed to a double-target on turn 4. Defect 2 is now the single largest quality loss in the room - it deletes a Mega, a Multiscale wall and a whole special-attacking lane from the encounter before it ever swings.",
+  "legality": "No legality problem found in the authored set.",
+  "verdict": "The Protect fix shows up here: Zekrom's guards went from two-of-two empty to one empty and four aimed at real attacks, one of them exactly lethal, with no consecutive guarding. The switch defect did not move at all."
+}
