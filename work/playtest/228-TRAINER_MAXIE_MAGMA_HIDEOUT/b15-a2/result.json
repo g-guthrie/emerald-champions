@@ -1,0 +1,29 @@
+{
+  "trainer_a": "TRAINER_MAXIE_MAGMA_HIDEOUT",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "seed": 2,
+  "difficulty": "medium",
+  "level_cap": 60,
+  "phase": "ended",
+  "outcome": "won",
+  "turns": 6,
+  "decisions": 8,
+  "player_faints": 1,
+  "opponent_faints": 6,
+  "ai_decision_frames_max": 62,
+  "ai_decision_seconds_max": 1.038,
+  "ai_decision_frames": [
+    58,
+    60,
+    60,
+    62,
+    60,
+    51,
+    25,
+    25
+  ],
+  "rom_sha256": "7e270fe4f94f3801502604a4f46e21e3f2a167a5dcf62d8ac0ac798e17704bf9",
+  "elf_sha256": "60f7295d7fed54f23d08ee0eb8842921aa1deab78024dcaa162eca4b60770356",
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play."
+}
