@@ -2,9 +2,7 @@
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "battle_pyramid.h"
 #include "frontier_util.h"
-#include "battle_pyramid_bag.h"
 #include "berry_tag_screen.h"
 #include "bg.h"
 #include "data.h"
@@ -45,8 +43,6 @@
 #include "text_window.h"
 #include "menu_helpers.h"
 #include "window.h"
-#include "apprentice.h"
-#include "battle_pike.h"
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -179,7 +175,6 @@ static void WaitAfterItemSell(u8);
 static void TryDepositItem(u8);
 static void Task_ChooseHowManyToDeposit(u8 taskId);
 static void WaitDepositErrorMessage(u8);
-static void CB2_ApprenticeExitBagMenu(void);
 static void CB2_FavorLadyExitBagMenu(void);
 static void CB2_QuizLadyExitBagMenu(void);
 static void UpdatePocketItemLists(void);
@@ -201,7 +196,6 @@ static void ItemMenu_Give(u8);
 static void ItemMenu_Cancel(u8);
 static void ItemMenu_UseInBattle(u8);
 static void ItemMenu_CheckTag(u8);
-static void ItemMenu_Show(u8);
 static void ItemMenu_GiveFavorLady(u8);
 static void ItemMenu_ConfirmQuizLady(u8);
 static void Task_ItemContext_Normal(u8);
@@ -301,7 +295,6 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_DESELECT]          = {COMPOUND_STRING("DESELECT"),  {ItemMenu_Deselect}},
     [ACTION_CHECK_TAG]         = {COMPOUND_STRING("CHECK TAG"), {ItemMenu_CheckTag}},
     [ACTION_CONFIRM]           = {gMenuText_Confirm,            {Task_FadeAndCloseBagMenu}},
-    [ACTION_SHOW]              = {COMPOUND_STRING("SHOW"),      {ItemMenu_Show}},
     [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,              {ItemMenu_GiveFavorLady}},
     [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,            {ItemMenu_ConfirmQuizLady}},
     [ACTION_BY_NAME]           = {COMPOUND_STRING("Name"),      {ItemMenu_SortByName}},
@@ -352,10 +345,6 @@ static const u8 sContextMenuItems_Cancel[] = {
 static const u8 sContextMenuItems_BerryBlenderCrush[] = {
     ACTION_CONFIRM,     ACTION_CHECK_TAG,
     ACTION_DUMMY,       ACTION_CANCEL
-};
-
-static const u8 sContextMenuItems_Apprentice[] = {
-    ACTION_SHOW,        ACTION_CANCEL
 };
 
 static const u8 sContextMenuItems_FavorLady[] = {
@@ -577,10 +566,7 @@ void CB2_BagMenuFromStartMenu(void)
 
 void CB2_BagMenuFromBattle(void)
 {
-    if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
-        GoToBagMenu(ITEMMENULOCATION_BATTLE, POCKETS_COUNT, CB2_SetUpReshowBattleScreenAfterMenu2);
-    else
-        GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_BATTLE, POCKETS_COUNT, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 // Choosing berry to plant
@@ -614,13 +600,6 @@ void CB2_GoToSellMenu(void)
 void CB2_GoToItemDepositMenu(void)
 {
     GoToBagMenu(ITEMMENULOCATION_ITEMPC, POCKETS_COUNT, CB2_PlayerPCExitBagMenu);
-}
-
-void ApprenticeOpenBagMenu(void)
-{
-    GoToBagMenu(ITEMMENULOCATION_APPRENTICE, POCKETS_COUNT, CB2_ApprenticeExitBagMenu);
-    gSpecialVar_0x8005 = ITEM_NONE;
-    gSpecialVar_Result = FALSE;
 }
 
 void FavorLadyOpenBagMenu(void)
@@ -1604,18 +1583,6 @@ static void OpenContextMenu(u8 taskId)
         gBagMenu->contextMenuItemsPtr = sContextMenuItems_BerryBlenderCrush;
         gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BerryBlenderCrush);
         break;
-    case ITEMMENULOCATION_APPRENTICE:
-        if (!GetItemImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
-        {
-            gBagMenu->contextMenuItemsPtr = sContextMenuItems_Apprentice;
-            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Apprentice);
-        }
-        else
-        {
-            gBagMenu->contextMenuItemsPtr = sContextMenuItems_Cancel;
-            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Cancel);
-        }
-        break;
     case ITEMMENULOCATION_FAVOR_LADY:
         if (!IsItemProtectedFromLoss(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
@@ -1938,10 +1905,7 @@ static void ConfirmToss(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
     BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
-    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
-        gTasks[taskId].func = Task_RemoveItemFromBag;
-    else
-        gTasks[taskId].func = Task_TossItemFromBag;
+    gTasks[taskId].func = Task_TossItemFromBag;
 }
 
 static void Task_TossItemFromBag(u8 taskId)
@@ -2196,7 +2160,7 @@ bool8 UseRegisteredKeyItemOnField(enum RegisterButton button)
     u8 taskId;
     u16 *registeredItemPtr = GetRegisteredItemPtr(button);
 
-    if (InUnionRoom() == TRUE || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InBattlePike() || InMultiPartnerRoom() == TRUE)
+    if (InUnionRoom() == TRUE || InMultiPartnerRoom() == TRUE)
         return FALSE;
     if (button != REGISTER_BUTTON_SELECT && *registeredItemPtr == ITEM_NONE)
         return FALSE;
@@ -2540,22 +2504,6 @@ static void Task_WallyTutorialBagMenu(u8 taskId)
 }
 
 #undef tTimer
-
-// This action is used to show the Apprentice an item when
-// they ask what item they should make their Pokémon hold
-static void ItemMenu_Show(u8 taskId)
-{
-    gSpecialVar_0x8005 = gSpecialVar_ItemId;
-    gSpecialVar_Result = TRUE;
-    RemoveContextWindow();
-    Task_FadeAndCloseBagMenu(taskId);
-}
-
-static void CB2_ApprenticeExitBagMenu(void)
-{
-    gFieldCallback = Apprentice_ScriptContext_Enable;
-    SetMainCallback2(CB2_ReturnToField);
-}
 
 static void ItemMenu_GiveFavorLady(u8 taskId)
 {

@@ -138,14 +138,7 @@ EventScript_PickUpItem::
 	waitfanfare
 	waitmessage
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
-	pyramid_getlocation
-	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_FLOOR, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	hideitemdescription
-	return
-
-EventScript_PutBattlePyramidItemInBag::
-	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
 	hideitemdescription
 	return
 

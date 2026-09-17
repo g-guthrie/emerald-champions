@@ -252,13 +252,7 @@ gSpecials::
 	def_special GetLeadMonFriendshipScore
 	def_special CallFrontierUtilFunc
 	def_special CallBattleTowerFunc
-	def_special CallBattleDomeFunction
-	def_special CallBattlePalaceFunction
 	def_special DoSpecialTrainerBattle, waitstate=1
-	def_special CallBattleArenaFunction
-	def_special CallBattleFactoryFunction
-	def_special CallBattlePikeFunction
-	def_special CallBattlePyramidFunction
 	def_special StopMapMusic
 	def_special CallVerdanturfTentFunction
 	def_special CallFallarborTentFunction
@@ -419,8 +413,6 @@ gSpecials::
 	def_special GetContestLadyMonSpecies
 	def_special GetContestLadyCategory
 	def_special PutLilycoveContestLadyShowOnTheAir
-	def_special CloseBattlePikeCurtain, waitstate=1
-	def_special CallApprenticeFunction
 	def_special ShouldTryGetTrainerScript
 	def_special ShowMapNamePopup
 	def_special ShowMapNamePopup
@@ -460,10 +452,6 @@ gSpecials::
 	def_special ShowScrollableMultichoice, waitstate=1
 	def_special ScrollableMultichoice_TryReturnToList
 	def_special BufferBattleTowerElevatorFloors
-	def_special TryStoreHeldItemsInPyramidBag
-	def_special ChooseItemsToTossFromPyramidBag, waitstate=1
-	def_special DoBattlePyramidMonsHaveHeldItem
-	def_special BattlePyramidChooseMonHeldItems, waitstate=1
 	def_special SetBattleTowerLinkPlayerGfx
 	def_special ShowNatureGirlMessage
 	def_special ShowBattlePointsWindow
@@ -585,7 +573,6 @@ gSpecials::
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen, waitstate=1
 	def_special TryGetWallpaperWithWaldaPhrase
-	def_special GetBattlePyramidHint
 	def_special LoadLinkContestPlayerPalettes
 	def_special ShowTrainerTowerRecords, waitstate=1
 	def_special PlayerFaceTrainerAfterBattle

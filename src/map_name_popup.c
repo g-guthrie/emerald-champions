@@ -1,5 +1,4 @@
 #include "global.h"
-#include "battle_pyramid.h"
 #include "bg.h"
 #include "event_data.h"
 #include "field_weather.h"
@@ -327,26 +326,6 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[] =
     [MAPSEC_VERDANTURF_MEADOW - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
 };
 
-static const u8 sText_PyramidFloor1[] = _("PYRAMID FLOOR 1");
-static const u8 sText_PyramidFloor2[] = _("PYRAMID FLOOR 2");
-static const u8 sText_PyramidFloor3[] = _("PYRAMID FLOOR 3");
-static const u8 sText_PyramidFloor4[] = _("PYRAMID FLOOR 4");
-static const u8 sText_PyramidFloor5[] = _("PYRAMID FLOOR 5");
-static const u8 sText_PyramidFloor6[] = _("PYRAMID FLOOR 6");
-static const u8 sText_PyramidFloor7[] = _("PYRAMID FLOOR 7");
-static const u8 sText_Pyramid[] = _("PYRAMID");
-
-static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE + 1] =
-{
-    sText_PyramidFloor1,
-    sText_PyramidFloor2,
-    sText_PyramidFloor3,
-    sText_PyramidFloor4,
-    sText_PyramidFloor5,
-    sText_PyramidFloor6,
-    sText_PyramidFloor7,
-    sText_Pyramid,
-};
 
 // States and data defines for Task_MapNamePopUpWindow
 enum {
@@ -582,28 +561,10 @@ static void ShowMapNamePopUpWindow(void)
     u8 mapDisplayHeader[MAP_POPUP_STRING_BUFFER_LENGTH];
     u8 *withoutPrefixPtr;
     u8 x;
-    const u8 *mapDisplayHeaderSource;
     u8 mapNamePopUpWindowId, secondaryPopUpWindowId;
 
-    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
-    {
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
-        {
-            withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
-            mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE];
-        }
-        else
-        {
-            withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
-            mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->frontier.curChallengeBattleNum];
-        }
-        StringCopy(withoutPrefixPtr, mapDisplayHeaderSource);
-    }
-    else
-    {
-        withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
-        GetPopUpMapName(withoutPrefixPtr, &gMapHeader);
-    }
+    withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
+    GetPopUpMapName(withoutPrefixPtr, &gMapHeader);
 
     if (OW_POPUP_GENERATION == GEN_5)
     {

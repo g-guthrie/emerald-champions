@@ -1,6 +1,5 @@
 #include "global.h"
 #include "overworld.h"
-#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_util.h"
 #include "berry.h"
@@ -953,10 +952,7 @@ static void LoadMapFromWarp(bool32 a1)
     LoadCurrentMapData();
     if (!(sObjectEventLoadFlag & SKIP_OBJECT_EVENT_LOAD))
     {
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-            LoadBattlePyramidObjectEventTemplates();
-        else
-            LoadObjEventTemplatesFromHeader();
+        LoadObjEventTemplatesFromHeader();
     }
 
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
@@ -988,10 +984,7 @@ static void LoadMapFromWarp(bool32 a1)
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
     gChainFishingDexNavStreak = 0;
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        InitBattlePyramidMap(FALSE);
-    else
-        InitMap();
+    InitMap();
 
     if (a1 != TRUE && isIndoors)
     {
@@ -2133,18 +2126,12 @@ void CB2_ContinueSavedGame(void)
 
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        LoadBattlePyramidFloorObjectEventScripts();
-    else
-        LoadSaveblockObjEventScripts();
+    LoadSaveblockObjEventScripts();
 
     UnfreezeObjectEvents();
     DoTimeBasedEvents();
     UpdateMiscOverworldStates();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        InitBattlePyramidMap(TRUE);
-    else
-        InitMapFromSavedGame();
+    InitMapFromSavedGame();
 
     PlayTimeCounter_Start();
     ScriptContext_Init();
@@ -2210,12 +2197,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 {
     u8 flashLevel;
 
-    if (InBattlePyramid())
-    {
-        WriteBattlePyramidViewScanlineEffectBuffer();
-        ScanlineEffect_SetParams(sFlashEffectParams);
-    }
-    else if ((flashLevel = GetFlashLevel()))
+    if ((flashLevel = GetFlashLevel()))
     {
         WriteFlashScanlineEffectBuffer(flashLevel);
         ScanlineEffect_SetParams(sFlashEffectParams);
@@ -3703,7 +3685,7 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     u8 *dst;
     bool8 handleFlash = FALSE;
 
-    if (GetFlashLevel() > 0 || InBattlePyramid())
+    if (GetFlashLevel() > 0)
         handleFlash = TRUE;
 
     if (headerType == 1) // berry

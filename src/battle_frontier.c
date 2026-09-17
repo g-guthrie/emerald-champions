@@ -4,8 +4,6 @@
 #include "battle_main.h"
 #include "battle_frontier.h"
 #include "battle_setup.h"
-#include "battle_dome.h"
-#include "battle_factory.h"
 #include "battle_partner.h"
 #include "battle_tower.h"
 #include "battle_transition.h"
@@ -36,13 +34,6 @@ static void HandleFacilityTrainerBattleEnd(void)
     switch (facility)
     {
     case FACILITY_BATTLE_TOWER:
-    case FACILITY_BATTLE_DOME:
-    case FACILITY_BATTLE_PALACE:
-    case FACILITY_BATTLE_ARENA:
-    case FACILITY_BATTLE_FACTORY:
-    case FACILITY_BATTLE_PIKE_SINGLE:
-    case FACILITY_BATTLE_PIKE_DOUBLE:
-    case FACILITY_BATTLE_PYRAMID:
         if (gSaveBlock2Ptr->frontier.battlesCount < 0xFFFFFF)
         {
             gSaveBlock2Ptr->frontier.battlesCount++;
@@ -102,68 +93,6 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_TOWER));
-        break;
-    case FACILITY_BATTLE_DOME:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOME;
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
-        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_FRONTIER_BRAIN)
-        FillFrontierTrainerParty(DOME_BATTLE_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        CreateTask_PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_DOME));
-        break;
-    case FACILITY_BATTLE_PALACE:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE;
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
-        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
-        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        else
-        FillTentTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PALACE));
-        break;
-    case FACILITY_BATTLE_ARENA:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_ARENA;
-        if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
-        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        else
-        FillTentTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_ARENA));
-        break;
-    case FACILITY_BATTLE_FACTORY:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
-        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        FillFactoryTrainerParty();
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_FACTORY));
-        break;
-    case FACILITY_BATTLE_PIKE_SINGLE:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
-        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PIKE));
-        break;
-    case FACILITY_BATTLE_PIKE_DOUBLE:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
-        FillFrontierTrainersParties(1);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PIKE));
-        break;
-    case FACILITY_BATTLE_PYRAMID:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID;
-        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID));
         break;
     default:
         break;
@@ -237,13 +166,6 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
                 CreateBattleTowerMon_HandleLevel(&gParties[trainer][i], &gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[j], FALSE);
             }
         }
-        return;
-    }
-    else
-    {
-        // Apprentice.
-        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
-            CreateApprenticeMon(&gParties[trainer][i], &gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE], i);
         return;
     }
 

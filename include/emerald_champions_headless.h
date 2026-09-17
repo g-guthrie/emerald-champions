@@ -42,7 +42,9 @@ enum EmeraldChampionsHeadlessScenario
     EC_HEADLESS_SCENARIO_BIRCH,
     EC_HEADLESS_SCENARIO_POKEBLOCK,
     EC_HEADLESS_SCENARIO_TRAINER_CARD,
-    EC_HEADLESS_SCENARIO_DOME_INFO,
+    // Retired with the Battle Dome; the slot is kept so the later scenario
+    // ids that scripts/render_emerald_champions_ui.py hard-codes do not shift.
+    EC_HEADLESS_SCENARIO_DOME_INFO_RETIRED,
     EC_HEADLESS_SCENARIO_CONTEST_RESULTS,
     EC_HEADLESS_SCENARIO_SLOT_MACHINE,
     EC_HEADLESS_SCENARIO_FAIRY_SUMMARY,

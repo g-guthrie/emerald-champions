@@ -1,10 +1,6 @@
 BattleFrontier_BattleTowerMultiPartnerRoom_MapScripts::
 	.byte 0
 
-BattleFrontier_BattleTowerMultiPartnerRoom_OnResume:
-	pyramid_resetparty
-	end
-
 BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition:
 	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ChosePartner
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1

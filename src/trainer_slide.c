@@ -25,7 +25,6 @@
 #include "window.h"
 #include "line_break.h"
 #include "constants/abilities.h"
-#include "constants/battle_dome.h"
 #include "constants/battle_string_ids.h"
 #include "constants/comparison_operators.h"
 #include "constants/flags.h"

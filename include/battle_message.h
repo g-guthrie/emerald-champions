@@ -263,7 +263,6 @@ extern const u8 *const gBattleStringsTable[];
 extern const u8 *const gStatNamesTable[NUM_BATTLE_STATS];
 extern const u8 *const gPokeblockWasTooXStringTable[];
 extern const u8 *const gRefereeStringsTable[];
-extern const u8 *const gRoundsStringTable[];
 
 extern const u8 gText_PkmnIsEvolving[];
 extern const u8 gText_CongratsPkmnEvolved[];
@@ -333,7 +332,6 @@ extern const u8 gText_Judgment[];
 extern const u8 gText_EmptyString3[];
 extern const u8 gText_RecordBattleToPass[];
 extern const u8 gText_BattleRecordedOnPass[];
-extern const u8 gText_BattleTourney[];
 extern const u16 gStatUpStringIds[];
 extern const u16 gStatDownStringIds[];
 

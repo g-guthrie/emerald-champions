@@ -361,21 +361,6 @@ TEST("Species names fit on Contest Screen - Rankings")
     EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
 }
 
-TEST("Species names fit on Battle Dome Screen")
-{
-    enum Species i;
-    const u32 fontId = FONT_SHORT_NARROWER, widthPx = 60;
-    enum Species species = SPECIES_NONE;
-    for (i = SPECIES_NONE + 1; i < NUM_SPECIES; i++)
-    {
-        if (IsSpeciesEnabled(i))
-        {
-            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
-        }
-    }
-    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
-}
-
 TEST("Species names fit on Hall of Fame")
 {
     enum Species i;

@@ -1,0 +1,36 @@
+{
+  "trainer": "TRAINER_KEIRA", "e_group": "E0500", "play_order": 331, "cap": 100, "difficulty": "medium",
+  "party_manifest": "work/playtest/331-TRAINER_KEIRA/party_th100_v2.json",
+  "build_dir": "a1 on work/agent-battle-build-10, a2 on work/agent-battle-build-12; Mega Clefable evolved on its first action on both",
+  "attempts": [
+    {"seed": 1, "outcome": "lost", "turns": 12, "player_faints": 6, "opponent_faints": 5, "run_dir": "work/playtest/331-TRAINER_KEIRA/a1", "party": "v1 (Encore Whimsicott)", "notes": "Sand + Smooth Rock on entry; Gigalith's Heavy Slam plus sand chip removed Whimsicott T1 after its Sash; both leads Protected T2; Double-Edge + Headlong Rush KO'd Sandslash and Gigalith T3; Whimsicott's Prankster Tailwind let Wise Glasses Rotom-Wash out-speed and OHKO Mega Kangaskhan (Hydro Pump 184) and later Incineroar (394 from full); Necrozma's Photon Geyser OHKO'd Great Tusk and Earth Power forced Raging Bolt into Protects; it ended Kingambit (burned by Rotom's Will-O-Wisp) 79 HP short of a second Iron Head on Mega Clefable, which out-sped it."},
+    {"seed": 2, "outcome": "won", "turns": 9, "player_faints": 3, "opponent_faints": 6, "run_dir": "work/playtest/331-TRAINER_KEIRA/a2", "party": "v2 (Taunt Whimsicott)", "notes": "Fake Out Gigalith T1; Sandslash Protected the T2 double-target and Gigalith's Heavy Slam crit KO'd Whimsicott (Sash already eaten by sand); Sucker Punch + Headlong Rush removed Sandslash and Gigalith T4; Iron Head KO'd Keira's Whimsicott as it set Tailwind; Thunderbolt KO'd Rotom, then Necrozma's Earth Power took Bolt to 34; Mega Clefable's Follow Me pulled both my attacks and Iron Head (2x) OHKO'd it (370); Necrozma Protected once and died to Flare Blitz. Necrozma was only ever hit neutrally, so the Weakness Policy never fired."}
+  ],
+  "strategy_checks": [
+    {"check": "Sand Stream + Smooth Rock live on entry; Sand Rush Sandslash attacks", "result": "PASS", "evidence": "Sand at turn 0 both attempts (lasted 8 turns); Sandslash's chosen T1 move was Rock Slide/High Horsepower each time, out-speeding my Tailwind-less leads."},
+    {"check": "Clefable Follow Me as a genuine decision (can disarm the Policy)", "result": "PASS", "evidence": "a2 T8 Follow Me pulled Thunderclap and Iron Head off Necrozma onto Mega Clefable, which died to the 2x Iron Head - it protected the Policy holder at the cost of the Mega. a1 T11 it Protected on entry instead."},
+    {"check": "Weakness Policy Necrozma / Prism Armor", "result": "PASS (never triggered)", "evidence": "I never hit it super-effectively; it OHKO'd Great Tusk with Photon Geyser (a1 T8) and took Raging Bolt apart with Earth Power across both attempts. Protect a1 T7 / a2 T7, T9."},
+    {"check": "Whimsicott Prankster Tailwind / Encore backup speed plan", "result": "PASS", "evidence": "Prankster Tailwind chosen T5 in both attempts the moment Sandslash was gone; it made Rotom out-speed Mega Kangaskhan (a1) and Raging Bolt (a2)."},
+    {"check": "Rotom-Wash Water/Electric lane + Will-O-Wisp", "result": "PASS", "evidence": "Hydro Pump OHKOs on Kangaskhan/Incineroar (a1), Will-O-Wisp on Kingambit (a1 T7), Protects on T4/T6/T8 (a1) and T6 (a2) each blocking a KO."},
+    {"check": "Mega Clefable closer", "result": "PASS", "evidence": "Mega Evolved on first action both attempts; a1 it out-sped and KO'd the burned Kingambit; a2 it Dazzling Gleamed into a Protect then Follow Me'd."}
+  ],
+  "protect_ledger": [
+    {"attempt": 1, "turn": 2, "battler": "Gigalith + Sandslash", "payoff": "both blocked KO-range hits"},
+    {"attempt": 1, "turn": 4, "battler": "Rotom", "payoff": "blocked Double-Edge (KO)"},
+    {"attempt": 1, "turn": 6, "battler": "Rotom", "payoff": "blocked Thunderbolt + Kowtow (KO)"},
+    {"attempt": 1, "turn": 7, "battler": "Necrozma", "payoff": "empty (I Protected/switched)"},
+    {"attempt": 1, "turn": 8, "battler": "Rotom", "payoff": "blocked Kowtow Cleave (KO)"},
+    {"attempt": 1, "turn": 11, "battler": "Mega Clefable (entry)", "payoff": "empty - nothing aimed at it"},
+    {"attempt": 2, "turn": 2, "battler": "Sandslash", "payoff": "blocked Double-Edge + Moonblast (KO)"},
+    {"attempt": 2, "turn": 3, "battler": "Gigalith", "payoff": "blocked Headlong Rush (KO)"},
+    {"attempt": 2, "turn": 7, "battler": "Necrozma", "payoff": "blocked Iron Head (Bolt also Protected)"},
+    {"attempt": 2, "turn": 9, "battler": "Necrozma", "payoff": "blocked Fake Out + Iron Head (KO)"}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "AI (minor)", "description": "a1 T11 / a2 T7: Mega Clefable used Protect on its entry turn with nothing aimed at it (empty Protect) instead of Follow Me while Necrozma was the one under fire."}
+  ],
+  "level_changes": [],
+  "calibration": "Lost 5-6 then won 6-3 - a real post-game fight either way. Keep offsets 1/1/1/1/1/2.",
+  "cooler": "The Follow Me-versus-Policy tension is real and the AI actually chose the redirect once; the sand plus Prankster Tailwind speed layers stack well. Cooler still if Rotom's Hydro Pump were not the team's best OHKO tool (Wise Glasses on a 105 SpA Rotom is doing more work than the Necrozma concept).",
+  "legality": "No legality problem found in the authored set."
+}

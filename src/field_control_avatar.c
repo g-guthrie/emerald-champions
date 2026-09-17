@@ -755,11 +755,6 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
         ScriptContext_SetupScript(EventScript_FallDownHole);
         return TRUE;
     }
-    else if (MetatileBehavior_IsBattlePyramidWarp(metatileBehavior))
-    {
-        ScriptContext_SetupScript(BattlePyramid_WarpToNextFloor);
-        return TRUE;
-    }
     else if (MetatileBehavior_IsSecretBaseGlitterMat(metatileBehavior) == TRUE)
     {
         DoSecretBaseGlitterMatSparkle();
@@ -921,15 +916,6 @@ static bool32 ShouldDisableRandomEncounters(void)
 {
     if (FlagGet(WE_FLAG_NO_ENCOUNTER))
         return TRUE;
-
-    if (!WE_VANILLA_RANDOM && WE_OW_ENCOUNTERS)
-    {
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && !WE_OWE_BATTLE_PIKE)
-            return FALSE;
-
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR && !WE_OWE_BATTLE_PYRAMID)
-            return FALSE;
-    }
 
     return !WE_VANILLA_RANDOM;
 }
