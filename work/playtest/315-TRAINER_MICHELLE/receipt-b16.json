@@ -1,0 +1,76 @@
+{
+  "trainer": "TRAINER_MICHELLE", "e_group": "E0484", "play_order": 315, "cap": 96, "difficulty": "medium",
+  "build_dir": "work/agent-battle-build-16 (inputs stamp 448b369f7a06..., rom 8f2abbcb..., elf 2b73cfab...)",
+  "purpose": "Rerun after AI commits 738e5a8809 (empty-Protect cause) and d50e8337c8 (no ACTIVATE on the turn the recipient shields).",
+  "party_manifest": "work/playtest/315-TRAINER_MICHELLE/party_vr96_b.json (unchanged)",
+  "replay_of": "work/playtest/315-TRAINER_MICHELLE/receipt-mega.json, run m1 (seed 4, same party, build-10: won 6-1 in 7 turns)",
+  "confound_to_read_first": "This is NOT a like-for-like board. Two things changed between m1 and this run. (1) receipt-mega.json's level rule landed: Hydreigon and Umbreon are now offset 2, not 1, so the team is a level stronger in two slots than the ROM m1 played. (2) I played differently from m1 on turn 2 - m1 let Machamp's Dynamic Punch OHKO Incineroar, and here I pivoted Incineroar out into Urshifu instead. That kept Machamp alive two turns longer than in m1, which is why this run has Wide Guard turns m1 never reached. Read the guard comparison with that in mind.",
+  "attempts": [
+    {
+      "seed": 4, "run_dir": "work/playtest/315-TRAINER_MICHELLE/b16-a1",
+      "outcome": "won", "turns": 12, "turns_reported_by_result": 11,
+      "player_faints": 4, "opponent_faints": 6,
+      "faints_player": [
+        "Urshifu-Rapid (T3, confused by No Guard Dynamic Punch, hit itself, then Giga Drain)",
+        "Mega Kangaskhan (T5, Hydreigon Life Orb Draco Meteor for 317)",
+        "Whimsicott (T8, Probopass Flash Cannon 2x)",
+        "Landorus (T9, Hydreigon Draco Meteor for 307 - a clean OHKO)"
+      ],
+      "faints_opponent": [
+        "Machamp (T4, Parental Bond Double-Edge through its own Wide Guard, which does not stop single-target moves)",
+        "Mega Meganium (T4, Chi-Yu Overheat at 114/349)",
+        "Chansey (T8, Flare Blitz at 127/676 after Knock Off removed the Eviolite and Whimsicott's Prankster Taunt shut off Soft-Boiled)",
+        "Probopass (T9, Landorus Earth Power 4x)",
+        "Hydreigon (T9, its own Life Orb recoil at 12 HP, right after its Draco Meteor OHKO'd Landorus)",
+        "Umbreon (T12, Heat Wave)"
+      ],
+      "ai_decision_seconds_max": 1.088,
+      "player_line": "T1 replicated m1 exactly (Fake Out on Machamp, Overheat at Meganium) to measure the lead guard on the same board. T2 pivoted Incineroar out into Urshifu instead of feeding it to Dynamic Punch; Heat Wave took Meganium to 61 and Machamp to 66; Meganium Mega Evolved on its second action and set Light Screen. T3 the spread Heat Wave that would have KO'd both was stopped by Wide Guard and Urshifu died. T4 Mega Kangaskhan's single-target Double-Edge went straight through the second Wide Guard and Overheat finished Meganium. T5-T9 Knock Off stripped the Eviolite, Taunt shut the stall down, Earth Power answered Probopass, and Hydreigon traded itself for Landorus. T10-T12 Incineroar and Chi-Yu ground Umbreon out."
+    }
+  ],
+  "guard_ledger_b16": [
+    {"turn": 1, "battler": "Meganium (349/349, base form)", "move": "Protect", "payoff": "blocked Chi-Yu's Overheat - large, and the same move later did 288 to it"},
+    {"turn": 3, "battler": "Machamp (66/306)", "move": "Wide Guard", "payoff": "BEST GUARD OF THE FIGHT - blocked a spread Heat Wave that was lethal to BOTH bodies (Meganium at 61/349 and Machamp itself at 66/306). Two Pokemon saved with one action. Wide Guard has never been observed in this room before."},
+    {"turn": 4, "battler": "Machamp (66/306)", "move": "Wide Guard", "payoff": "EMPTY, and CONSECUTIVE with T3. Both of my attacks that turn were single-target (Parental Bond Double-Edge and Overheat), which Wide Guard cannot touch; Machamp died to the Double-Edge it had just refused to play around."},
+    {"turn": 5, "battler": "Chansey (676/676)", "move": "Protect", "payoff": "EMPTY - Double-Edge went into Hydreigon and Chi-Yu spent its action switching out; nothing was aimed at Chansey"},
+    {"turn": 6, "battler": "Hydreigon (12/313)", "move": "Protect", "payoff": "blocked a 4x Moonblast that was lethal - correct"},
+    {"turn": 7, "battler": "Chansey (127/676)", "move": "Protect", "payoff": "blocked Incineroar's Flare Blitz, lethal at 127 HP - correct"},
+    {"turn": 11, "battler": "Umbreon (28/378)", "move": "Protect", "payoff": "blocked Heat Wave and Knock Off, both lethal - correct"}
+  ],
+  "guard_comparison": {
+    "prior_run": "receipt-mega.json m1 (seed 4, same party, build-10)",
+    "prior_ledger": ["T1 Meganium Protect - blocked Overheat", "T3 Meganium Protect - blocked Sludge Bomb 2x", "T6 Meganium Protect - blocked Sludge Bomb 2x"],
+    "guard_count_before_after": "3 -> 7 (5 Protect + 2 Wide Guard)",
+    "empty_guards_before_after": "0 -> 2",
+    "consecutive_guards_before_after": "0 -> 1 pair (Machamp Wide Guard T3 then T4)",
+    "note": "The two empties are both new and both belong to bodies m1 never gave a turn to. Machamp lived to turn 4 only because I pivoted Incineroar out on turn 2, and Chansey never got a free action in m1 at all. So this is not a straightforward regression against m1 - it is new coverage of two bodies - but it is still two empty guards and one repeat guard on a build whose stated fix was the empty-Protect cause, and the Machamp repeat is the exact 'repetitive guarding' failure the September 15 rule names. Meganium itself, the only body m1 measured, guarded once and it paid off, same as before.",
+    "ai_choices_that_were_correct": [
+      "T3 Machamp Wide Guard - the single best AI decision in any of the five rooms this pass",
+      "T7 the AI withdrew Hydreigon at 12/313 to save it, brought it back on T9 and its Draco Meteor OHKO'd Landorus for 307 - a switch that actually paid",
+      "T6 Hydreigon Protect at 12 HP and T7/T11 Chansey/Umbreon Protects, all against lethal turns",
+      "T8 Probopass Flash Cannon rather than a setup move - it was the KO on Whimsicott"
+    ]
+  },
+  "strategy_checks": [
+    {"check": "Lead Mega Meganium Mega-Evolves on its first action", "result": "FAIL (third build running)", "evidence": "T1 it chose Protect in base form with usable_gimmick=mega; 'has Mega Evolved into Mega Meganium' came on T2 with Light Screen. Same as receipt.json and receipt-mega.json. A lead Mega that opens with Protect still holds its stone a turn."},
+    {"check": "Triage Heal Pulse priority wall (authored plan)", "result": "NOT OBSERVED / impossible as authored", "evidence": "Heal Pulse was never chosen across Meganium's four actions (Protect, Light Screen, Giga Drain, Giga Drain). The engine fact from receipt.json stands and is confirmed by the state readings: base ability TRIAGE becomes ABILITY_MEGA_SOL the moment it Mega Evolves, so the plan's priority Heal Pulse cannot exist on the Mega. Still a book-vs-source mismatch for the main agent."},
+    {"check": "Machamp No Guard Dynamic Punch confusion", "result": "PASS", "evidence": "T1 selected at Incineroar (Fake Out flinched it); T2 it hit Urshifu through a 0.5x resistance and confused it, and the confusion self-hit on T3 is what actually killed Urshifu."},
+    {"check": "Machamp Wide Guard", "result": "PASS then FAIL", "evidence": "T3 blocked a lethal spread for both bodies. T4 repeated it into two single-target attacks and died. See defect E0484-M3."},
+    {"check": "Chansey Seismic Toss / Soft-Boiled / Helping Hand", "result": "PARTIAL", "evidence": "Seismic Toss chosen T6 and T8; Soft-Boiled and Helping Hand never chosen. Knock Off removing the Eviolite took it from 676 to 127 in one action, which left no room for Soft-Boiled, and Prankster Taunt on T8 removed the option outright."},
+    {"check": "Probopass Stealth Rock / Thunder Wave", "result": "FAIL (third build running)", "evidence": "Its two actions were Flash Cannon (T8, the KO on Whimsicott) and Power Gem (T9). Neither support move has ever been chosen in this room. Flash Cannon was the right move on T8, so this is a set-usage observation, not a bad choice."},
+    {"check": "Umbreon Foul Play punishes the physical attacker", "result": "NOT OBSERVED", "evidence": "Umbreon's two actions were Snarl (T10) and Protect (T11). Snarl was defensible - both of my bodies (Incineroar Fire/Dark and Chi-Yu Fire/Dark) resist Dark, so Foul Play would also have been resisted, and Snarl at least dropped both Special Attacks. Not a defect, but the authored Foul Play trap has still never fired."},
+    {"check": "Hydreigon is the fast special mode", "result": "PASS, emphatically", "evidence": "T5 Draco Meteor KO'd Mega Kangaskhan for 317; T9 Draco Meteor OHKO'd Landorus for 307. It out-sped both. This is the member that turned a 6-1 into a 6-4."},
+    {"check": "AI decision budget <= 1.2s", "result": "PASS", "evidence": "ai_decision_seconds_max 1.088 - the highest of the five rooms, but inside budget."}
+  ],
+  "ai_defects": [
+    {"id": "E0484-M2", "severity": "medium", "status": "PERSISTS on build-16", "description": "T1: the lead Mega holder opened with Protect and did not Mega Evolve. Mega Evolution is free and resolves before any move, so the turn of Mega stats was given away for nothing. Reproduced on builds 8, 10 and 16."},
+    {"id": "E0484-M3", "severity": "medium", "status": "new", "description": "T4: Machamp used Wide Guard for the second turn running, at 66/306, against a board holding a freshly switched-in Kangaskhan (which Mega Evolved that turn) and a Chi-Yu. Both incoming attacks were single-target, which Wide Guard cannot block, and Machamp was KO'd by the Double-Edge. The T3 use was excellent; repeating it is the empty, repetitive guard case. Evidence: T4 native latch b3 use_move WIDE_GUARD->3(self); messages show Double-Edge resolving normally and Machamp fainting."},
+    {"id": "E0484-M4", "severity": "low", "status": "new", "description": "T5: Chansey at 676/676 used Protect with nothing aimed at it (Double-Edge went into Hydreigon, Chi-Yu switched out). Defensible under a mixed forecast, since a Parental Bond Double-Edge into a 5-defence Chansey is the obvious threat, but it is an empty guard on a build whose fix targeted exactly this."},
+    {"id": "E0484-M1", "severity": "high", "status": "NOT REPRODUCED", "description": "The m1 Heal Pulse-into-a-full-HP-foe case did not recur, because Meganium never chose Heal Pulse at all this run. Cannot be called fixed; it was simply never reached."}
+  ],
+  "level_changes": [],
+  "level_rule_statement": "NO LEVEL CHANGE. The prior receipt's decision (+1 on Hydreigon and Umbreon) has already landed in the teams file - the ROM ran Hydreigon and Umbreon at offset 2 here - and this run does not flip it, it confirms it. A 6-4 win is squarely 'won with 2+ faints or after a real fight', and the +1 Hydreigon is precisely the member that took two of the four faints with OHKO Draco Meteors. Offsets stay 2/1/2/2/2/2 (medium levels 96/95/96/96/96/96).",
+  "cooler": "Unchanged from receipt.json and now better supported: the Triage Heal Pulse concept still cannot exist on the Mega form, and this run adds a positive finding - Machamp's Wide Guard is the most interesting thing the team does, and it is not mentioned in the plan text at all. If the room is rewritten, build the plan around Wide Guard plus the Eviolite wall rather than around a priority heal the engine will not give it.",
+  "legality": "No legality problem found in the authored set. The plan-vs-engine mismatch (TRIAGE -> MEGA_SOL on Mega Evolution) is a book/source reconciliation item, already flagged in receipt.json.",
+  "verdict": "The team is now a genuine fight rather than the cruise m1 recorded - four player faints, and the Hydreigon that received the +1 is the reason. On guards the picture is mixed: five of seven were correct, one of them outstanding (T3 Wide Guard saved two bodies), but two were empty and one of those was a consecutive repeat, which is the pattern the September 15 rule singles out."
+}

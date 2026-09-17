@@ -1,0 +1,40 @@
+{
+  "rom_sha256": "8f2abbcb06f92816f59864ddd03036fd12345175d2db33ad484261e2078fcdae",
+  "elf_sha256": "2b73cfab517165ade29ebc20a369adfdd45a81e5b60a56c28bdcd414801ce0d5",
+  "seed": 4,
+  "trainer_a": "TRAINER_MICHELLE",
+  "trainer_b": null,
+  "partner": "PARTNER_NONE",
+  "difficulty": "medium",
+  "level_cap": 96,
+  "party_manifest": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/playtest/315-TRAINER_MICHELLE/party_vr96_b.json",
+  "party_sha256": "17bb954084b410daf8df889541e49fb13a03acf75eb9779b4022c25500060fe5",
+  "script_pairing": null,
+  "scope": "Synthetic headless benchmark: native debug trainer lifecycle, native AI, user-authorized stage-legal preparation. Not earned campaign play.",
+  "milestones": [
+    "FLAG_BADGE01_GET",
+    "FLAG_EC_REPORT_C14_COMPLETE",
+    "FLAG_BADGE03_GET",
+    "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",
+    "FLAG_BADGE04_GET",
+    "FLAG_BADGE05_GET",
+    "FLAG_EC_REPORT_C30_COMPLETE",
+    "FLAG_BADGE06_GET",
+    "FLAG_EC_REPORT_C36_COMPLETE",
+    "FLAG_EC_REPORT_C39_COMPLETE",
+    "FLAG_EC_REPORT_C42_COMPLETE",
+    "FLAG_BADGE08_GET",
+    "FLAG_DEFEATED_WALLY_VICTORY_ROAD"
+  ],
+  "prepared": {
+    "encounter": "E0484 Michelle (Victory Road B1F) cap 96",
+    "party": 6
+  },
+  "started": {
+    "frames": 3836
+  },
+  "replacement_commits": {
+    "turn": 11,
+    "slots": {}
+  }
+}
