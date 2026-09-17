@@ -1,0 +1,29 @@
+{
+  "trainer": "TRAINER_VINCENT", "e_group": "E0499", "play_order": 330, "cap": 100, "difficulty": "medium",
+  "party_manifest": "work/playtest/330-TRAINER_VINCENT/party_th100.json",
+  "build_dir": "work/agent-battle-build-9 (started before the build-10 snapshot; Vincent's only authored Mega, Zeraora, evolved on its first action, so no replay is needed)",
+  "attempts": [
+    {"seed": 1, "outcome": "won", "turns": 11, "player_faints": 2, "opponent_faints": 6, "run_dir": "work/playtest/330-TRAINER_VINCENT/a1",
+     "notes": "T1 Klefki Prankster Light Screen while Mienshao Protected the Fake Out; T2 Prankster Encore locked Klefki into Light Screen for three turns (its chosen move was Thunder Wave) and Mega Kangaskhan's Double-Edge OHKO'd Mienshao (its chosen move was Close Combat, a KO on Kangaskhan); Gliscor Protected on entry then died to Double-Edge + Moonblast; Xurkitree died to a Double-Edge crit; the AI switched Klefki out for Zeraora into Intimidate, Scarf Typhlosion's Eruption forced Protects and pivots, Mega Zeraora's Plasma Fists KO'd Incineroar, then Booster-Speed Great Tusk under Tailwind Headlong Rushed Zeraora, Typhlosion and Klefki in three consecutive turns."}
+  ],
+  "strategy_checks": [
+    {"check": "Klefki Prankster Thunder Wave / Light Screen first", "result": "PASS", "evidence": "T1 Light Screen (Light Clay, lasted to T8); chosen move T2 and T5 was Thunder Wave on Kangaskhan, both pre-empted by Encore."},
+    {"check": "Mienshao attacks and U-turns with Regenerator", "result": "PARTIAL", "evidence": "T1 Protect (blocked Fake Out), T2 chosen Close Combat (KO read on Kangaskhan) - it was OHKO'd first; U-turn never came up."},
+    {"check": "Poison Heal Gliscor Swords Dance mode", "result": "PARTIAL", "evidence": "Toxic Orb activated on entry T3 (Poison Heal); chosen T4 move was High Horsepower on Kangaskhan, not Swords Dance; KO'd before acting."},
+    {"check": "Xurkitree Beast Boost / Electroweb", "result": "PASS (choice)", "evidence": "Chosen T5 move was Thunderbolt on Kangaskhan (KO range); OHKO'd first. Electroweb was never preferred."},
+    {"check": "Scarf Typhlosion Eruption comes in clean", "result": "PASS", "evidence": "Eruption at full HP T6, T7, T8 (99 on Incineroar resisted, 261 on Whimsicott, 342 on Great Tusk), then at 77% T9; Scarf outsped everything including my Tailwind."},
+    {"check": "Mega Zeraora Plasma Fists", "result": "PASS", "evidence": "Mega Evolved T7 on its first action (after a hard switch into Intimidate on T6); Plasma Fists KO'd Incineroar T8 (Ion Deluge set)."}
+  ],
+  "protect_ledger": [
+    {"turn": 1, "battler": "Mienshao", "payoff": "blocked Fake Out"},
+    {"turn": 3, "battler": "Gliscor (entry)", "payoff": "blocked Double-Edge + Moonblast (KO)"},
+    {"turn": 10, "battler": "Klefki (entry)", "payoff": "empty - nothing aimed at it"}
+  ],
+  "ai_defects": [
+    {"id": 1, "severity": "AI (minor)", "description": "T6 the AI hard-switched Klefki out for Zeraora into Incineroar's Intimidate with nothing gained (Klefki was Encored but healthy; the Mega then entered at -1 Atk)."}
+  ],
+  "level_changes": [],
+  "calibration": "Won first try 6-2 after a real fight (two faints, Scarf Eruption and Mega Zeraora both took a Pokemon). Keep offsets 1/1/1/1/1/2.",
+  "cooler": "The Scarf Eruption is exactly the unforgiving read the plan promises and Klefki's Prankster opening is real. It would be cooler if the AI protected its Encore-locked Klefki by not switching the Mega into Intimidate, and if Gliscor reached for Swords Dance behind a Protect instead of attacking into a Mega Kangaskhan.",
+  "legality": "No legality problem found in the authored set."
+}
