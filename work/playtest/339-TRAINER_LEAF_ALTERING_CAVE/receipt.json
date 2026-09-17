@@ -1,0 +1,41 @@
+{
+ "play_order": 339, "e_group": "E0511", "trainer": "TRAINER_LEAF_ALTERING_CAVE", "class": "rival", "location": "AlteringCave_B1F", "cap": 100,
+ "cap_confirmation": "driver state level_cap 100; offset-1 members L99, Mewtwo offset 2 L100 = cap+offset-2 on Medium.",
+ "difficulty": "medium",
+ "party_manifests": ["work/playtest/339-TRAINER_LEAF_ALTERING_CAVE/party_pg100_core.json", "work/playtest/339-TRAINER_LEAF_ALTERING_CAVE/party_rain_kanto.json"],
+ "chronology_note": "Post-game after the Champion, pool-100 fully open. Mewtwo (gate 100, this very map) deliberately not used. Attempt 3 uses two reachable legends (Chien-Pao, Shoal Cave sign gate 60; Ting-Lu, Desert Underpass sign gate 42) and Pelipper's Drizzle to replace her sun. See the manifests' availability audits.",
+ "pre_play_strategy_checks": ["Ninetales Drought on entry; Solar Beam without a charge; Encore locks a wasted action", "Kangaskhan Fake Out or Scrappy pressure turn 1", "Tangrowth Chlorophyll speed in sun; Rage Powder / Sleep Powder", "Gengar Icy Wind speed control; Cursed Body", "Snorlax Thick Fat wall, Recycle", "Mega Mewtwo Y special closer"],
+ "attempts": [
+  {"n": 1, "seed": 1, "run_dir": "a1", "party": "party_pg100_core.json (Incineroar/Chi-Yu/Flutter Mane/Urshifu/Rillaboom/Whimsicott)", "outcome": "lost", "turns": 11, "player_faints": 6, "opponent_faints": 2,
+   "why": "Real loss. t1 double Fake Out trade; t2 Ninetales Protected Knock Off while Overheat KO'd Kangaskhan; t3 Gengar Sludge Bomb + Heat Wave KO'd Chi-Yu, Knock Off through the Sash KO'd Gengar but Cursed Body disabled Knock Off; t4 Tangrowth Giga Drain OHKO'd Urshifu (342) and Ninetales Encored Incineroar into the disabled Knock Off - a full turn lost; t5-t7 Tangrowth Protect/Giga Drain alternation and sun Heat Wave took Flutter Mane and most of Rillaboom; t8-t9 Tangrowth Protected twice more (one through Encore at the 1/3 odds), Whimsicott died to Heat Wave; t10 AI switched Tangrowth for Snorlax, Heat Wave KO'd Rillaboom; t11 Snorlax High Horsepower + Body Slam KO'd Incineroar."},
+  {"n": 2, "seed": 2, "run_dir": "a2", "party": "party_rain_kanto.json", "outcome": "VOID (mid-battle at the session-limit resume order; 3-0 up on turn 9)", "turns": 9, "player_faints": 0, "opponent_faints": 3, "why": "Not used for calibration. Evidence kept: Ninetales Encored Pelipper into Wide Guard t3 and Incineroar into Fake Out t5, both exact lock-outs."},
+  {"n": 3, "seed": 3, "run_dir": "a3", "party": "party_rain_kanto.json (Chien-Pao/Pelipper/Incineroar/Urshifu/Archaludon/Ting-Lu)", "outcome": "won", "turns": 10, "player_faints": 2, "opponent_faints": 6,
+   "why": "Drizzle replaced Drought at the start. t1 Kangaskhan Fake Out flinched Chien-Pao, Heat Wave 180 on it, Hurricane 247 on Kangaskhan. t2 Wide Guard blanked Heat Wave, Sacred Sword (Sword of Ruin) KO'd Kangaskhan. t3 double switch to Incineroar/Ting-Lu made Encore fail. t4 Gengar Protected Knock Off, Rock Slide 130 on Ninetales. t5 AI switched Gengar out for Mewtwo INTO Knock Off (204, super effective) as rain ended. t6 Mega Mewtwo Y Protected, Ninetales Encored Incineroar into Knock Off, Stomping Tantrum KO'd Ninetales. t7 Ice Beam 212 on Ting-Lu, Knock Off KO'd Mega Mewtwo Y. t8 Knock Off KO'd Gengar, Sleep Powder missed. t9 Giga Drain + Body Slam KO'd Ting-Lu after Ruination hit Snorlax; Flare Blitz 129 on Tangrowth. t10 Close Combat OHKO'd Snorlax (518), Giga Drain OHKO'd Urshifu; Flare Blitz 116. t11 Icicle Crash KO'd Tangrowth. Faints: Ting-Lu, Urshifu."}
+ ],
+ "strategy_checks": [
+  {"check": "Ninetales Drought + Solar Beam / Encore", "result": "PASS (Encore), Solar Beam never chosen", "evidence": "sun at turn 0 in a1 (rain overrode it in a2/a3). Encore: a1 t4 locked Incineroar into a Cursed-Body-disabled Knock Off; a2 t3 locked Pelipper into Wide Guard, t5 Incineroar into Fake Out; a3 t6 Incineroar into Knock Off, t3 failed into a double switch. The Encore lock is the best thing this team does."},
+  {"check": "Kangaskhan Fake Out turn 1", "result": "PASS", "evidence": "a1 t1 (Chi-Yu), a3 t1 (Chien-Pao) then Double-Edge / Drain Punch chosen; Scrappy blocked Intimidate on entry"},
+  {"check": "Tangrowth Chlorophyll / powders / Rage Powder", "result": "PASS (Sleep Powder chosen), Rage Powder never", "evidence": "a1 t9 Sleep Powder chosen (overridden by Encore into Protect), a3 t8 Sleep Powder missed Incineroar; Giga Drain OHKO'd Urshifu in both runs; Protect alternated every other turn in a1"},
+  {"check": "Gengar Icy Wind / Cursed Body", "result": "PASS", "evidence": "a3 t7 and t8 Icy Wind dropped both player actives; Cursed Body disabled Knock Off a1 t3 and a3 t8"},
+  {"check": "Snorlax Thick Fat wall / Recycle", "result": "PARTIAL", "evidence": "a1 t10-t11 High Horsepower and Body Slam KO'd Incineroar; a3 OHKO'd by Close Combat before Recycle mattered"},
+  {"check": "Mega Mewtwo Y closer", "result": "PASS (Mega), lost to Knock Off", "evidence": "a3 t6 Mega Evolved and Protected; t7 Ice Beam 212 on Ting-Lu then KO'd by Knock Off after entering into one on t5"}
+ ],
+ "protect_ledger": [
+  {"run": "a1", "turn": 2, "user": "Ninetales", "payoff": "blocked Knock Off (Charcoal); partner Kangaskhan died anyway"},
+  {"run": "a1", "turn": 6, "user": "Tangrowth", "payoff": "blocked Shadow Ball (~180); partner Ninetales flinched"},
+  {"run": "a1", "turn": 8, "user": "Tangrowth", "payoff": "blocked Flare Blitz (an OHKO); partner Heat Wave took Whimsicott to 68"},
+  {"run": "a1", "turn": 9, "user": "Tangrowth (Encore-forced)", "payoff": "blocked Flare Blitz again at 1/3 odds; partner Heat Wave KO'd Whimsicott"},
+  {"run": "a1", "turn": 11, "user": "Ninetales", "payoff": "blocked Flare Blitz; partner Snorlax High Horsepower"},
+  {"run": "a3", "turn": 4, "user": "Gengar", "payoff": "blocked Knock Off (Sash break) and Rock Slide; partner Heat Wave chip"},
+  {"run": "a3", "turn": 5, "user": "Ninetales", "payoff": "blocked Stomping Tantrum (an OHKO); Gengar switched to Mewtwo the same turn"},
+  {"run": "a3", "turn": 6, "user": "Mega Mewtwo Y", "payoff": "blocked Knock Off (an OHKO at 150); partner Encore locked Incineroar"}
+ ],
+ "protect_summary": "8 Protects, all blocked a real hit; the a1 Tangrowth Protect cadence (every other turn) was excellent.",
+ "ai_defects": [],
+ "ai_notes": "One poor read, not illegal: a3 t5 the AI withdrew Gengar (full HP, Sash) and brought Mewtwo into a Knock Off, losing 204 HP and its Mega turn to a Dark move it could have expected from Incineroar. The a1 loss was mostly the Ninetales Encore + Cursed Body interaction and Tangrowth's Protect cadence, which is the team playing well.",
+ "level_changes": [],
+ "level_change_rationale": "Lost attempt 1 with the generic core, won attempt 3 (6-2, 10 turns) with a rain rebuild after a real fight; keep.",
+ "cooler": "Already cool: Encore into a disabled move, Tangrowth's Protect rhythm and a Mewtwo Y that has to be answered by Dark priority. Nothing to change; a Sunny Day on Ninetales would let it re-take the weather from a Drizzle lead, which is the one thing the rain party exposed.",
+ "legality_notes": "Sets legal; driver accepted both parties.",
+ "verification_limit": "No level change."
+}
