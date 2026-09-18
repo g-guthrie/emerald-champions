@@ -3,6 +3,7 @@
   "name": "Route101",
   "layout": "LAYOUT_ROUTE101",
   "music": "MUS_ROUTE101",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_101",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,14 +15,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_OLDALE_TOWN",
       "offset": 0,
-      "map": "MAP_OLDALE_TOWN"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_LITTLEROOT_TOWN",
       "offset": 0,
-      "map": "MAP_LITTLEROOT_TOWN"
+      "direction": "down"
     }
   ],
   "object_events": [
@@ -104,6 +105,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route101_EventScript_Boy",
       "flag": "FLAG_HIDE_ROUTE_101_BOY"
+    },
+    {
+      "local_id": "LOCALID_ROUTE101_POOCHYENA",
+      "graphics_id": "OBJ_EVENT_GFX_POOCHYENA",
+      "x": 6,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_JOG_IN_PLACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_ROUTE_101_ZIGZAGOON"
     }
   ],
   "warp_events": [],

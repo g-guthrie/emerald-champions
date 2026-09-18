@@ -951,6 +951,14 @@ LittlerootTown_EventScript_GiveRunningShoes:: @ 81E8693
 	msgbox LittlerootTown_Text_WearTheseRunningShoes, MSGBOX_DEFAULT
 	giveitem ITEM_OLD_ROD
 	setflag FLAG_RECEIVED_OLD_ROD
+	msgbox LittlerootTown_Text_AndPutTheseOn, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message LittlerootTown_Text_SwitchedShoesWithRunningShoes
+	waitmessage
+	waitfanfare
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_RECEIVED_RUNNING_SHOES
+	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -981,6 +989,18 @@ LittlerootTown_Text_WearTheseRunningShoes: @ 81E87F0
 	.string "Here, honey! If you're going out on an\n"
 	.string "adventure, take Dad's old Fishing Rod.\p"
 	.string "He never uses it anyway!$"
+
+LittlerootTown_Text_AndPutTheseOn:
+	.string "Mom: Oh, and put these on, too!$"
+
+LittlerootTown_Text_SwitchedShoesWithRunningShoes:
+	.string "{PLAYER} switched shoes with the\n"
+	.string "Running Shoes.$"
+
+LittlerootTown_Text_ExplainRunningShoes:
+	.string "Mom: They came with a note:\p"
+	.string "“Hold the B Button to run.\n"
+	.string "Now get out there and explore!”$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens: @ 81E8A03
 	.string "… … … … … … … …\n"

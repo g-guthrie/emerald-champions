@@ -3021,8 +3021,10 @@ void ShowScrollableMultichoice(void)
         task->tHeight = task->tMaxItemsOnScreen * 2;
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
-        task->tScrollOffset = min(gSpecialVar_0x8005, task->tNumItems - task->tMaxItemsOnScreen);
-        task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;
+        // The list always opens at its top, in generation order; VAR_0x8005 only
+        // chooses which visible row carries the cursor (the script passes Hoenn).
+        task->tScrollOffset = 0;
+        task->tSelectedRow = min(gSpecialVar_0x8005, task->tMaxItemsOnScreen - 1);
         break;
     case SCROLL_MULTI_FURFROU_TRIMS:
         task->tMaxItemsOnScreen = 5;
