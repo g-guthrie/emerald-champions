@@ -6,6 +6,8 @@
 #include "main.h"
 #include "battle.h"
 #include "battle_frontier.h"
+#include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_partner.h"
 #include "battle_tower.h"
@@ -42,6 +44,7 @@
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
+#include "trainer_hill.h"
 #include "trainer_pools.h"
 #include "trainer_see.h"
 #include "trainer_util.h"
@@ -58,6 +61,7 @@
 #include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
 enum TransitionType
@@ -69,6 +73,7 @@ enum TransitionType
 };
 
 // this file's functions
+static void DoBattlePikeWildBattle(void);
 static void DoSafariBattle(void);
 static void DoGhostBattle(void);
 static void DoStandardWildBattle(bool32 isDouble);
@@ -86,6 +91,9 @@ static void CB2_EndTrainerBattle(void);
 static void CB2_EndChampionsCircuitBattle(void);
 static void CB2_EndScriptedMultiBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
+#if FREE_MATCH_CALL == FALSE
+static u16 GetRematchTrainerId(u16 trainerId);
+#endif //FREE_MATCH_CALL
 static void RegisterTrainerInMatchCall(void);
 static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
@@ -118,7 +126,7 @@ static const u8 sBattleTransitionTable_Trainer[][2] =
     [TRANSITION_TYPE_WATER]  = {B_TRANSITION_SWIRL,           B_TRANSITION_RIPPLE},
 };
 
-// Battle Frontier
+// Battle Frontier (excluding Pyramid and Dome, which have their own tables below)
 static const u8 sBattleTransitionTable_BattleFrontier[] =
 {
     B_TRANSITION_FRONTIER_LOGO_WIGGLE,
@@ -133,6 +141,21 @@ static const u8 sBattleTransitionTable_BattleFrontier[] =
     B_TRANSITION_FRONTIER_CIRCLES_CROSS_IN_SEQ,
     B_TRANSITION_FRONTIER_CIRCLES_ASYMMETRIC_SPIRAL_IN_SEQ,
     B_TRANSITION_FRONTIER_CIRCLES_SYMMETRIC_SPIRAL_IN_SEQ
+};
+
+static const u8 sBattleTransitionTable_BattlePyramid[] =
+{
+    B_TRANSITION_FRONTIER_SQUARES,
+    B_TRANSITION_FRONTIER_SQUARES_SCROLL,
+    B_TRANSITION_FRONTIER_SQUARES_SPIRAL
+};
+
+static const u8 sBattleTransitionTable_BattleDome[] =
+{
+    B_TRANSITION_FRONTIER_LOGO_WIGGLE,
+    B_TRANSITION_FRONTIER_SQUARES,
+    B_TRANSITION_FRONTIER_SQUARES_SCROLL,
+    B_TRANSITION_FRONTIER_SQUARES_SPIRAL
 };
 
 #define REMATCH(trainer1, trainer2, trainer3, trainer4, trainer5, map)  \
@@ -381,6 +404,12 @@ void BattleSetup_StartMultiBattle(void)
     }
 }
 
+
+void BattleSetup_StartBattlePikeWildBattle(void)
+{
+    DoBattlePikeWildBattle();
+}
+
 static void DoStandardWildBattle(bool32 isDouble)
 {
     LockPlayerFieldControls();
@@ -394,6 +423,11 @@ static void DoStandardWildBattle(bool32 isDouble)
     }
     else if (isDouble)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+    {
+        VarSet(VAR_TEMP_E, 0);
+        gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
+    }
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -438,6 +472,20 @@ static void DoGhostBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
+static void DoBattlePikeWildBattle(void)
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    StopPlayerAvatar();
+    gMain.savedCallback = CB2_EndWildBattle;
+    gBattleTypeFlags = BATTLE_TYPE_PIKE;
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    IncrementDailyWildBattles();
+    TryUpdateGymLeaderRematchFromWild();
+}
+
 static void CreateTrainerBattleOpponentParties(void)
 {
     CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_A][0], TRAINER_BATTLE_PARAM.opponentA);
@@ -462,6 +510,18 @@ void EmeraldChampions_RebuildTrainerBattleParties(void)
 {
     ZeroEnemyPartyMons();
     CreateTrainerBattleOpponentParties();
+}
+
+static void DoBattlePyramidTrainerHillBattle(void)
+{
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID), 0);
+    else
+        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_HILL), 0);
+
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
+    TryUpdateGymLeaderRematchFromTrainer();
 }
 
 // Initiates battle where Wally catches Ralts
@@ -657,7 +717,7 @@ static void CB2_EndWildBattle(void)
             HealPlayerParty();
     }
 
-    if (IsPlayerDefeated(gBattleOutcome) == TRUE)
+    if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -676,7 +736,10 @@ static void CB2_EndScriptedWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        SetMainCallback2(CB2_WhiteOut);
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        else
+            SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -842,11 +905,17 @@ enum BattleTransition GetWildBattleTransition(void)
 
     if (enemyLevel < playerLevel)
     {
-        return sBattleTransitionTable_Wild[transitionType][0];
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+            return B_TRANSITION_BLUR;
+        else
+            return sBattleTransitionTable_Wild[transitionType][0];
     }
     else
     {
-        return sBattleTransitionTable_Wild[transitionType][1];
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+            return B_TRANSITION_GRID_SQUARES;
+        else
+            return sBattleTransitionTable_Wild[transitionType][1];
     }
 }
 
@@ -903,9 +972,14 @@ enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id)
     {
         switch (id)
         {
+        case B_TRANSITION_GROUP_TRAINER_HILL:
         case B_TRANSITION_GROUP_SECRET_BASE:
         case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_POKEBALLS_TRAIL;
+        case B_TRANSITION_GROUP_B_PYRAMID:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattlePyramid);
+        case B_TRANSITION_GROUP_B_DOME:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattleDome);
         default:
             break;
         }
@@ -917,9 +991,14 @@ enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id)
     {
         switch (id)
         {
+        case B_TRANSITION_GROUP_TRAINER_HILL:
         case B_TRANSITION_GROUP_SECRET_BASE:
         case B_TRANSITION_GROUP_E_READER:
             return B_TRANSITION_BIG_POKEBALL;
+        case B_TRANSITION_GROUP_B_PYRAMID:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattlePyramid);
+        case B_TRANSITION_GROUP_B_DOME:
+            return RANDOM_TRANSITION(sBattleTransitionTable_BattleDome);
         default:
             break;
         }
@@ -1182,6 +1261,12 @@ static void BattleSetup_ConfigureTrainerBattle(TrainerBattleParameter *battlePar
         gNoOfApproachingTrainers = 2;
     }
     
+#if FREE_MATCH_CALL == FALSE
+    if (battleParams->params.isRematch)
+    {
+        battleParams->params.opponentA = GetRematchTrainerId(battleParams->params.opponentA);
+    }
+#endif //FREE_MATCH_CALL
     
     PUSH_IF_SET(EventSnippet_PlayTrainerEncounterMusic, battleParams->params.playMusicA)
     PUSH_IF_SET(EventSnippet_SetTrainerFacingDirection, battleParams->params.facePlayer);
@@ -1233,6 +1318,12 @@ static void SetFacilityOpponent(u8 facility, u8 localId, bool8 isTrainerA)
     u16 trainerId = TRAINER_NONE;
 
     switch (facility) {
+        case FACILITY_BATTLE_PYRAMID:
+            trainerId = LocalIdToPyramidTrainerId(localId);
+            break;
+        case FACILITY_BATTLE_TRAINER_HILL:
+            trainerId = LocalIdToHillTrainerId(localId);
+            break;
         default:
             errorf("Invalid facility: %d", facility);
     } 
@@ -1305,7 +1396,12 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 
 bool32 GetRematchFromScriptPointer(const u8 *data)
 {
+#if FREE_MATCH_CALL
     return FALSE;
+#else
+    TrainerBattleParameter *temp = (TrainerBattleParameter*)(data + TRAINERBATTLE_OPCODE_OFFSET);
+    return ShouldTryRematchBattleForTrainerId(temp->params.opponentA);
+#endif
 }
 
 // Set trainer's movement type so they stop and remain facing that direction
@@ -1328,7 +1424,12 @@ u8 GetRivalBattleFlags(void)
 
 bool8 GetTrainerFlag(void)
 {
-    return FlagGet(GetTrainerAFlag());
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+        return GetBattlePyramidTrainerFlag(gSelectedObjectEvent);
+    else if (InTrainerHill())
+        return GetHillTrainerFlag(gSelectedObjectEvent);
+    else
+        return FlagGet(GetTrainerAFlag());
 }
 
 static void SetBattledTrainersFlags(void)
@@ -1383,7 +1484,43 @@ void BattleSetup_StartTrainerBattle(void)
     if (TRAINER_BATTLE_PARAM.earlyRival && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
 
-    if (GetTrainerBattleType(TRAINER_BATTLE_PARAM.opponentA) == TRAINER_BATTLE_TYPE_DOUBLES)
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+    {
+        VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
+        gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
+
+        if (gNoOfApproachingTrainers == 2)
+        {
+            FillFrontierTrainersParties(1);
+            ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][1]);
+            ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][2]);
+            ZeroMonData(&gParties[B_TRAINER_OPPONENT_B][1]);
+            ZeroMonData(&gParties[B_TRAINER_OPPONENT_B][2]);
+        }
+        else
+        {
+            FillFrontierTrainerParty(1);
+            ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][1]);
+            ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][2]);
+        }
+
+        MarkApproachingPyramidTrainersAsBattled();
+    }
+    else if (InTrainerHillChallenge())
+    {
+        gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
+        TRAINER_BATTLE_PARAM.opponentB = TRAINER_BATTLE_PARAM.opponentA == 1 ? 2 : 1;
+        if (!FillHillTrainersParties())
+        {
+            AbortTrainerHillChallenge();
+            gNoOfApproachingTrainers = 0;
+            ScriptContext_SetupScript(TrainerHill_EventScript_GenerationFailed);
+            ScriptContext_Enable();
+            return;
+        }
+        SetHillTrainerFlag();
+    }
+    else if (GetTrainerBattleType(TRAINER_BATTLE_PARAM.opponentA) == TRAINER_BATTLE_TYPE_DOUBLES)
     {
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     }
@@ -1394,7 +1531,10 @@ void BattleSetup_StartTrainerBattle(void)
     gWhichTrainerToFaceAfterBattle = 0;
     gMain.savedCallback = CB2_EndTrainerBattle;
 
-    DoTrainerBattle();
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge())
+        DoBattlePyramidTrainerHillBattle();
+    else
+        DoTrainerBattle();
 
     ScriptContext_Stop();
 }
@@ -1525,7 +1665,7 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome))
     {
-        if (FlagGet(B_FLAG_NO_WHITEOUT))
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge() || FlagGet(B_FLAG_NO_WHITEOUT))
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
@@ -1534,6 +1674,7 @@ static void CB2_EndTrainerBattle(void)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         DowngradeBadPoison();
+        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InTrainerHillChallenge())
         {
             RegisterTrainerInMatchCall();
             SetBattledTrainersFlags();
@@ -1575,7 +1716,28 @@ void BattleSetup_StartRematchBattle(void)
 
 void ShowTrainerIntroSpeech(void)
 {
-    ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+    {
+        if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
+            CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gSpecialVar_LastTalked));
+        else
+            CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gObjectEvents[gApproachingTrainers[gApproachingTrainerId].objectEventId].localId));
+
+        ShowFieldMessageFromBuffer();
+    }
+    else if (InTrainerHillChallenge())
+    {
+        if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
+            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gSpecialVar_LastTalked));
+        else
+            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gObjectEvents[gApproachingTrainers[gApproachingTrainerId].objectEventId].localId));
+
+        ShowFieldMessageFromBuffer();
+    }
+    else
+    {
+        ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
+    }
 }
 
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
@@ -1775,6 +1937,21 @@ static void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 table
     if (!OW_TRAINER_REMATCHES)
         return;
 
+#if FREE_MATCH_CALL == FALSE
+    s32 i;
+
+    for (i = 1; i < REMATCHES_COUNT; i++)
+    {
+        u16 trainerId = table[tableId].trainerIds[i];
+
+        if (trainerId == 0)
+            break;
+        if (!HasTrainerBeenFought(trainerId))
+            break;
+    }
+
+    gSaveBlock1Ptr->trainerRematches[tableId] = i;
+#endif //FREE_MATCH_CALL
 }
 
 static inline bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
@@ -1787,6 +1964,35 @@ bool32 TrainerIsMatchCallRegistered(s32 i)
     return FlagGet(TRAINER_REGISTERED_FLAGS_START + i);
 }
 
+#if FREE_MATCH_CALL == FALSE
+static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
+{
+    s32 i;
+
+    if (CheckBagHasItem(ITEM_VS_SEEKER, 1) && I_VS_SEEKER_CHARGING != 0)
+        return FALSE;
+
+    for (i = 0; i < REMATCH_SPECIAL_TRAINER_START; i++)
+    {
+        if (!DoesCurrentMapMatchRematchTrainerMap(i,table,mapGroup,mapNum) || IsRematchForbidden(i))
+            continue; // Only check permitted trainers within the current map.
+
+        if (gSaveBlock1Ptr->trainerRematches[i] != 0)
+        {
+            // Trainer already wants a rematch. Don't bother updating it.
+            return TRUE;
+        }
+        else if (TrainerIsMatchCallRegistered(i) && ((Random() % 100) <= 30))
+            // 31% chance of getting a rematch.
+        {
+            SetRematchIdForTrainer(table, i);
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+#endif //FREE_MATCH_CALL
 
 void UpdateRematchIfDefeated(s32 rematchTableId)
 {
@@ -1805,6 +2011,10 @@ static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table,
         return FALSE;
     if (tableId >= MAX_REMATCH_ENTRIES)
         return FALSE;
+#if FREE_MATCH_CALL == FALSE
+    if (gSaveBlock1Ptr->trainerRematches[tableId] == 0)
+        return FALSE;
+#endif //FREE_MATCH_CALL
 
     return TRUE;
 }
@@ -1820,6 +2030,10 @@ static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 t
         return FALSE;
     if (tableId >= MAX_REMATCH_ENTRIES)
         return FALSE;
+#if FREE_MATCH_CALL == FALSE
+    if (gSaveBlock1Ptr->trainerRematches[tableId] == 0)
+        return FALSE;
+#endif //FREE_MATCH_CALL
 
     return TRUE;
 }
@@ -1877,10 +2091,26 @@ static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *t
 
 static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
+#if FREE_MATCH_CALL == FALSE
+    s32 tableId = TrainerIdToRematchTableId(table, firstBattleTrainerId);
+
+    if (tableId != -1)
+        gSaveBlock1Ptr->trainerRematches[tableId] = 0;
+#endif //FREE_MATCH_CALL
 }
 
 void ClearCurrentTrainerWantRematchVsSeeker(void)
 {
+#if FREE_MATCH_CALL == FALSE
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && FlagGet(I_VS_SEEKER_CHARGING) && (I_VS_SEEKER_CHARGING != 0))
+    {
+        for (u32 i = 0; i < REMATCH_TABLE_ENTRIES; i++)
+        {
+            if (gSaveBlock1Ptr->trainerRematches[i] == TRAINER_BATTLE_PARAM.opponentA)
+                gSaveBlock1Ptr->trainerRematches[i] = 0;
+        }
+    }
+#endif //FREE_MATCH_CALL
 }
 
 // Match Call is removed; beating a trainer registers nobody.
@@ -1896,9 +2126,33 @@ static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBa
         return FALSE;
     if (!HasTrainerBeenFought(table[tableId].trainerIds[1]))
         return FALSE;
+#if FREE_MATCH_CALL == FALSE
+    if (I_VS_SEEKER_CHARGING)
+    {
+        if (gSaveBlock1Ptr->trainerRematches[tableId] == 0)
+            return FALSE;
+    }
+#endif
     return TRUE;
 }
 
+#if FREE_MATCH_CALL == FALSE
+static bool32 HasEnoughBadgesForRematch(void)
+{
+    s32 i, count;
+
+    for (count = 0, i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
+    {
+        if (FlagGet(gBadgeFlags[i]) == TRUE)
+        {
+            if (++count >= OW_REMATCH_BADGE_COUNT)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+#endif //FREE_MATCH_CALL
 
 #define STEP_COUNTER_MAX 255
 
@@ -1907,9 +2161,48 @@ void IncrementRematchStepCounter(void)
     if (!OW_TRAINER_REMATCHES)
         return;
 
+#if FREE_MATCH_CALL == FALSE
+    if (!HasEnoughBadgesForRematch())
+        return;
+
+    if (IsVsSeekerEnabled())
+        return;
+
+    if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
+        gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
+    else
+        gSaveBlock1Ptr->trainerRematchStepCounter++;
+#endif //FREE_MATCH_CALL
 }
 
+#if FREE_MATCH_CALL == FALSE
+static bool32 IsRematchStepCounterMaxed(void)
+{
+    if (HasEnoughBadgesForRematch() && gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
+        return TRUE;
+    else
+        return FALSE;
+}
 
+void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
+{
+    if (!OW_TRAINER_REMATCHES)
+        return;
+
+    if (IsRematchStepCounterMaxed() && UpdateRandomTrainerRematches(gRematchTable, mapGroup, mapNum) == TRUE)
+        gSaveBlock1Ptr->trainerRematchStepCounter = 0;
+}
+#endif //FREE_MATCH_CALL
+
+#if FREE_MATCH_CALL == FALSE
+static u16 GetRematchTrainerId(u16 trainerId)
+{
+    if (FlagGet(I_VS_SEEKER_CHARGING) && (I_VS_SEEKER_CHARGING != 0))
+        return GetRematchTrainerIdVSSeeker(trainerId);
+    else
+        return GetRematchTrainerIdFromTable(gRematchTable, trainerId);
+}
+#endif //FREE_MATCH_CALL
 
 u16 GetLastBeatenRematchTrainerId(u16 trainerId)
 {

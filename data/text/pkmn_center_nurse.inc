@@ -18,12 +18,10 @@ gText_EmeraldChampionsExplainTools::
 	.string "party outside battle. Every Center\l"
 	.string "refills its one dose.\p"
 	.string "The Leveler raises your party to\n"
-	.string "the current level cap. It never\l"
+	.string "the previous level cap. It never\l"
 	.string "runs out.\p"
-	.string "The Tutor and the Vendor beside\n"
-	.string "the PC are free.\p"
-	.string "I topped your Poké Balls back up\n"
-	.string "to ten.$"
+	.string "The tutor teaches moves for free.\n"
+	.string "The vendor sells discovered items.$"
 
 gText_EmeraldChampionsGiveMissingFlightBeacon::
 	.string "One more tool for you:\n"

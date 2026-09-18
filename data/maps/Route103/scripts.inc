@@ -97,63 +97,63 @@ Route103_EventScript_RivalBrendanRematch:: @ 81EC434
 	end
 
 Route103_EventScript_StartMayBattleTreecko:: @ 81EC48E
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleTorchic:: @ 81EC49E
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleMudkip:: @ 81EC4AE
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTreecko:: @ 81EC4BE
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTorchic:: @ 81EC4CE
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleMudkip:: @ 81EC4DE
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 @@@@@@@@@@@@@@@@@@@@@@@@ Rematch teams @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Route103_EventScript_StartMayRematchTreecko:: @ 81EC48E
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_TREECKO, Route103_Text_MayRematchDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TREECKO, Route103_Text_MayRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayRematch
 	end
 
 Route103_EventScript_StartMayRematchTorchic:: @ 81EC49E
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_TORCHIC, Route103_Text_MayRematchDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TORCHIC, Route103_Text_MayRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayRematch
 	end
 
 Route103_EventScript_StartMayRematchMudkip:: @ 81EC4AE
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_MUDKIP, Route103_Text_MayRematchDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_MUDKIP, Route103_Text_MayRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayRematch
 	end
 
 Route103_EventScript_StartBrendanRematchTreecko:: @ 81EC4BE
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_TREECKO, Route103_Text_BrendanRematchDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TREECKO, Route103_Text_BrendanRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanRematch
 	end
 
 Route103_EventScript_StartBrendanRematchTorchic:: @ 81EC4CE
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_TORCHIC, Route103_Text_BrendanRematchDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TORCHIC, Route103_Text_BrendanRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanRematch
 	end
 
 Route103_EventScript_StartBrendanRematchMudkip:: @ 81EC4DE
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_MUDKIP, Route103_Text_BrendanRematchDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_MUDKIP, Route103_Text_BrendanRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanRematch
 	end
 
@@ -301,7 +301,7 @@ Route103_EventScript_RouteSign:: @ 81EC5EB
 	end
 
 Route103_EventScript_Daisy:: @ 81EC5F4
-	trainerbattle_single TRAINER_DAISY, Route103_Text_DaisyIntro, Route103_Text_DaisyDefeated
+	trainerbattle_double TRAINER_DAISY, Route103_Text_DaisyIntro, Route103_Text_DaisyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route103_Text_DaisyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -320,7 +320,7 @@ Route102_EventScript_AmyRegisterMatchCallAfterBattle:: @ 81EC63A
 	end
 
 Route102_EventScript_AmyRematch:: @ 81EC653
-	trainerbattle_rematch_double TRAINER_AMY_AND_LIV_1, Route103_Text_AmyRematchIntro, Route103_Text_AmyRematchDefeated, Route103_Text_AmyRematchNotEnoughPokemon
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_AmyRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -339,17 +339,17 @@ Route102_EventScript_LivRegisterMatchCallAfterBattle:: @ 81EC69D
 	end
 
 Route102_EventScript_LivRematch:: @ 81EC6B6
-	trainerbattle_rematch_double TRAINER_AMY_AND_LIV_1, Route103_Text_LivRematchIntro, Route103_Text_LivRematchDefeated, Route103_Text_LivRematchNotEnoughPokemon
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_LivRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Andrew:: @ 81EC6D1
-	trainerbattle_single TRAINER_ANDREW, Route103_Text_AndrewIntro, Route103_Text_AndrewDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_AndrewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Miguel:: @ 81EC6E8
-	trainerbattle_single TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, Route102_EventScript_MiguelRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route102_EventScript_MiguelRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route103_EventScript_MiguelRematch
@@ -366,27 +366,27 @@ Route102_EventScript_MiguelRegisterMatchCallAfterBattle:: @ 81EC714
 	end
 
 Route103_EventScript_MiguelRematch:: @ 81EC733
-	trainerbattle_rematch TRAINER_MIGUEL_1, Route103_Text_MiguelRematchIntro, Route103_Text_MiguelRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_MiguelRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Marcos:: @ 81EC74A
-	trainerbattle_single TRAINER_MARCOS, Route103_Text_MarcosIntro, Route103_Text_MarcosDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Rhett:: @ 81EC761
-	trainerbattle_single TRAINER_RHETT, Route103_Text_RhettIntro, Route103_Text_RhettDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_RhettPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Pete:: @ 81EC778
-	trainerbattle_single TRAINER_PETE, Route103_Text_PeteIntro, Route103_Text_PeteDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_PetePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Isabelle:: @ 81EC78F
-	trainerbattle_single TRAINER_ISABELLE, Route103_Text_IsabelleIntro, Route103_Text_IsabelleDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_IsabellePostBattle, MSGBOX_AUTOCLOSE
 	end
 

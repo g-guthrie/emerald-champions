@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle_tower.h"
+#include "apprentice.h"
 #include "event_data.h"
 #include "battle_setup.h"
 #include "battle_special.h"
@@ -25,7 +26,9 @@
 #include "tv.h"
 #include "battle_factory.h"
 #include "constants/abilities.h"
+#include "constants/apprentice.h"
 #include "constants/battle_ai.h"
+#include "constants/battle_dome.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
 #include "constants/battle_move_effects.h"
@@ -60,6 +63,7 @@ static void SetMultiPartnerGfx(void);
 static void SetTowerInterviewData(void);
 static void ValidateBattleTowerRecordChecksums(void);
 static void SaveCurrentWinStreak(void);
+static void ValidateApprenticesChecksums(void);
 static void SetNextBattleTentOpponent(void);
 static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record);
 static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
@@ -213,6 +217,85 @@ static const u8 sRubyFacilityClassToEmerald[RS_FACILITY_CLASSES_COUNT - 2][2] =
     BattleFrontier_BattleTowerMultiPartnerRoom_Text_##name##Accept,     \
     BattleFrontier_BattleTowerMultiPartnerRoom_Text_##name##Reject
 
+static const u8 *const sPartnerApprenticeTexts1[] =
+{
+    PARTNER_TEXTS(Apprentice1)
+};
+
+static const u8 *const sPartnerApprenticeTexts2[] =
+{
+    PARTNER_TEXTS(Apprentice2)
+};
+
+static const u8 *const sPartnerApprenticeTexts3[] =
+{
+    PARTNER_TEXTS(Apprentice3)
+};
+
+static const u8 *const sPartnerApprenticeTexts4[] =
+{
+    PARTNER_TEXTS(Apprentice4)
+};
+
+static const u8 *const sPartnerApprenticeTexts5[] =
+{
+    PARTNER_TEXTS(Apprentice5)
+};
+
+static const u8 *const sPartnerApprenticeTexts6[] =
+{
+     PARTNER_TEXTS(Apprentice6)
+};
+
+static const u8 *const sPartnerApprenticeTexts7[] =
+{
+     PARTNER_TEXTS(Apprentice7)
+};
+
+static const u8 *const sPartnerApprenticeTexts8[] =
+{
+     PARTNER_TEXTS(Apprentice8)
+};
+
+static const u8 *const sPartnerApprenticeTexts9[] =
+{
+     PARTNER_TEXTS(Apprentice9)
+};
+
+static const u8 *const sPartnerApprenticeTexts10[] =
+{
+     PARTNER_TEXTS(Apprentice10)
+};
+
+static const u8 *const sPartnerApprenticeTexts11[] =
+{
+     PARTNER_TEXTS(Apprentice11)
+};
+
+static const u8 *const sPartnerApprenticeTexts12[] =
+{
+     PARTNER_TEXTS(Apprentice12)
+};
+
+static const u8 *const sPartnerApprenticeTexts13[] =
+{
+     PARTNER_TEXTS(Apprentice13)
+};
+
+static const u8 *const sPartnerApprenticeTexts14[] =
+{
+     PARTNER_TEXTS(Apprentice14)
+};
+
+static const u8 *const sPartnerApprenticeTexts15[] =
+{
+     PARTNER_TEXTS(Apprentice15)
+};
+
+static const u8 *const sPartnerApprenticeTexts16[] =
+{
+     PARTNER_TEXTS(Apprentice16)
+};
 
 static const u8 *const sPartnerTextsLass[] =
 {
@@ -522,6 +605,25 @@ struct
     {FACILITY_CLASS_SWIMMER_M,             sPartnerTextsSwimmerM}
 };
 
+static const u8 *const *const sPartnerApprenticeTextTables[NUM_APPRENTICES] =
+{
+    sPartnerApprenticeTexts1,
+    sPartnerApprenticeTexts2,
+    sPartnerApprenticeTexts3,
+    sPartnerApprenticeTexts4,
+    sPartnerApprenticeTexts5,
+    sPartnerApprenticeTexts6,
+    sPartnerApprenticeTexts7,
+    sPartnerApprenticeTexts8,
+    sPartnerApprenticeTexts9,
+    sPartnerApprenticeTexts10,
+    sPartnerApprenticeTexts11,
+    sPartnerApprenticeTexts12,
+    sPartnerApprenticeTexts13,
+    sPartnerApprenticeTexts14,
+    sPartnerApprenticeTexts15,
+    sPartnerApprenticeTexts16
+};
 
 #include "data/battle_frontier/battle_tent.h"
 
@@ -559,6 +661,12 @@ static const u32 sWinStreakMasks[][2] =
     {~(STREAK_TOWER_DOUBLES_50),     ~(STREAK_TOWER_DOUBLES_OPEN)},
     {~(STREAK_TOWER_MULTIS_50),      ~(STREAK_TOWER_MULTIS_OPEN)},
     {~(STREAK_TOWER_LINK_MULTIS_50), ~(STREAK_TOWER_LINK_MULTIS_OPEN)},
+};
+
+// The challenge number at which an Apprentice can appear, depending on how many of their questions were answered
+static const u8 sApprenticeChallengeThreshold[MAX_APPRENTICE_QUESTIONS] =
+{
+    1, 2, 3, 4, 5, 8, 9, 10, 11, 12
 };
 
 // Unclear why this was duplicated
@@ -715,6 +823,21 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
         {
             trainerIds[idsCount] = i + TRAINER_RECORD_MIXING_FRIEND;
             idsCount++;
+        }
+    }
+
+    if (battleMode == FRONTIER_MODE_SINGLES)
+    {
+        ValidateApprenticesChecksums();
+        for (i = 0; i < APPRENTICE_COUNT; i++)
+        {
+            if (gSaveBlock2Ptr->apprentices[i].lvlMode != 0
+                && sApprenticeChallengeThreshold[gSaveBlock2Ptr->apprentices[i].numQuestions] == winStreak
+                && gSaveBlock2Ptr->apprentices[i].lvlMode - 1 == lvlMode)
+            {
+                trainerIds[idsCount] = i + TRAINER_RECORD_MIXING_APPRENTICE;
+                idsCount++;
+            }
         }
     }
 
@@ -901,8 +1024,10 @@ static void GetOpponentIntroSpeech(void)
     if (trainerId < FRONTIER_TRAINERS_COUNT)
 #endif //FREE_BATTLE_TOWER_E_READER
         FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
-    else
+    else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
+    else
+        BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
 }
 
 static void SaveCurrentWinStreak(void)
@@ -987,6 +1112,31 @@ static void BattleTowerNop1(void)
 static void BattleTowerNop2(void)
 {
 
+}
+
+static void GetApprenticeMultiPartnerParty(u16 trainerId)
+{
+    s32 i, count;
+    enum Species validSpecies[MULTI_PARTY_SIZE];
+    enum Species species1 = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES);
+    enum Species species2 = GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES);
+
+    count = 0;
+    for (i = 0; i < MULTI_PARTY_SIZE; i++)
+    {
+        enum Species apprenticeSpecies = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].party[i].species;
+        if (apprenticeSpecies != species1 && apprenticeSpecies != species2)
+        {
+            validSpecies[count] = i;
+            count++;
+        }
+    }
+
+    gFrontierTempParty[0] = validSpecies[Random() % count];
+    do
+    {
+        gFrontierTempParty[1] = validSpecies[Random() % count];
+    } while (gFrontierTempParty[0] == gFrontierTempParty[1]);
 }
 
 static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
@@ -1084,6 +1234,38 @@ static void LoadMultiPartnerCandidatesData(void)
             gSaveBlock2Ptr->frontier.trainerIds[r10] = monId;
             r10++;
         }
+    }
+
+    r10 = 0;
+    ValidateApprenticesChecksums();
+    for (i = 0; i < APPRENTICE_COUNT; i++)
+    {
+        if (gSaveBlock2Ptr->apprentices[i].lvlMode != 0
+            && sApprenticeChallengeThreshold[gSaveBlock2Ptr->apprentices[i].numQuestions] / FRONTIER_STAGES_PER_CHALLENGE <= challengeNum
+            && gSaveBlock2Ptr->apprentices[i].lvlMode - 1 == lvlMode)
+        {
+            k = 0;
+            for (j = 0; j < MULTI_PARTY_SIZE; j++)
+            {
+                if (species1 != gSaveBlock2Ptr->apprentices[i].party[j].species
+                    && species2 != gSaveBlock2Ptr->apprentices[i].party[j].species)
+                {
+                    k++;
+                }
+            }
+            if (k > 2)
+            {
+                spArray[r10] = i + TRAINER_RECORD_MIXING_APPRENTICE;
+                r10++;
+            }
+        }
+    }
+    if (r10 != 0)
+    {
+        gSaveBlock2Ptr->frontier.trainerIds[6] = spArray[Random() % r10];
+        objEventTemplates[7].graphicsId = GetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[6]);
+        FlagClear(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1);
+        GetApprenticeMultiPartnerParty(gSaveBlock2Ptr->frontier.trainerIds[6]);
     }
 
     r10 = 0;
@@ -1269,9 +1451,15 @@ static void ShowPartnerCandidateMessage(void)
     {
         ShowFieldMessage(sPartnerTrainerTextTables[partnerId].strings[gSpecialVar_0x8005]);
     }
-    else
+    else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         ShowFieldMessage(sPartnerTrainerTextTables[partnerId].strings[gSpecialVar_0x8005]);
+    }
+    // Trainer is a former/record-mixed Apprentice, do Apprentice message
+    else
+    {
+        u8 apprenticeId = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id;
+        ShowFieldMessage(sPartnerApprenticeTextTables[apprenticeId][gSpecialVar_0x8005]);
     }
 }
 
@@ -1653,6 +1841,30 @@ void CalcApprenticeChecksum(struct Apprentice *apprentice)
         apprentice->checksum += ((u32 *)apprentice)[i];
 }
 
+static void ClearApprentice(struct Apprentice *apprentice)
+{
+    s32 i;
+
+    for (i = 0; i < sizeof(struct Apprentice) / sizeof(u32); i++)
+        ((u32 *)apprentice)[i] = 0;
+    ResetApprenticeStruct(apprentice);
+}
+
+static void ValidateApprenticesChecksums(void)
+{
+    s32 i, j;
+
+    for (i = 0; i < APPRENTICE_COUNT; i++)
+    {
+        u32 *data = (u32 *) &gSaveBlock2Ptr->apprentices[i];
+        u32 checksum = 0;
+        for (j = 0; j < offsetof(struct Apprentice, checksum) / sizeof(u32); j++)
+            checksum += data[j];
+        if (gSaveBlock2Ptr->apprentices[i].checksum != checksum)
+            ClearApprentice(&gSaveBlock2Ptr->apprentices[i]);
+    }
+}
+
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
 {
     if (trainerId == TRAINER_EREADER)
@@ -1669,6 +1881,13 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
             *dst = GetRecordedBattleRecordMixFriendLanguage();
         else
             *dst = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].language;
+    }
+    else
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+            *dst = GetRecordedBattleApprenticeLanguage();
+        else
+            *dst = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].language;
     }
 }
 

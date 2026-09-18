@@ -1,15 +1,15 @@
 .set LOCALID_ATTENDANT, 1
 
-@ Emerald Champions: the ON_RESUME script here only ran the Battle Pyramid's
-@ party-reset (a vestigial Emerald quirk). src/battle_pyramid.c is gone, so the
-@ script and its map_script entry are removed. Everything else in this room is
-@ Battle Tower code, which is still present.
-
 BattleFrontier_BattleTowerMultiPartnerRoom_MapScripts:: @ 8243D92
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerMultiPartnerRoom_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiPartnerRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiPartnerRoom_OnFrame
 	.byte 0
+
+BattleFrontier_BattleTowerMultiPartnerRoom_OnResume: @ 8243DA7
+	pyramid_resetparty
+	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition: @ 8243DB0
 	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ChosePartner
@@ -78,7 +78,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterRoom: @ 8243E75
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantBlockExit: @ 8243E77
 	walk_left
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Attendant:: @ 8243E7A

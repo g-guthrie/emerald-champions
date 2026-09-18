@@ -26,27 +26,27 @@ Route125_OnFrame: @ 81F679A
 	.2byte 0
 
 Route125_EventScript_Nolen:: @ 81F67A4
-	trainerbattle_single TRAINER_NOLEN, Route125_Text_NolenIntro, Route125_Text_NolenDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_NolenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Stan:: @ 81F67BB
-	trainerbattle_single TRAINER_STAN, Route125_Text_StanIntro, Route125_Text_StanDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_StanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Tanya:: @ 81F67D2
-	trainerbattle_single TRAINER_TANYA, Route125_Text_TanyaIntro, Route125_Text_TanyaDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_TanyaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Sharon:: @ 81F67E9
-	trainerbattle_single TRAINER_SHARON, Route125_Text_SharonIntro, Route125_Text_SharonDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_SharonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Ernest:: @ 81F6800
-	trainerbattle_single TRAINER_ERNEST_1, Route125_Text_ErnestIntro, Route125_Text_ErnestDefeat, Route125_EventScript_RegisterErnest
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route125_EventScript_RematchErnest
@@ -63,27 +63,27 @@ Route125_EventScript_RegisterErnest:: @ 81F682C
 	end
 
 Route125_EventScript_RematchErnest:: @ 81F684B
-	trainerbattle_rematch TRAINER_ERNEST_1, Route125_Text_ErnestRematchIntro, Route125_Text_ErnestRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_ErnestRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Kim:: @ 81F6862
-	trainerbattle_double TRAINER_KIM_AND_IRIS, Route125_Text_KimIntro, Route125_Text_KimDefeat, Route125_Text_KimNotEnoughMons
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_KimPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Iris:: @ 81F687D
-	trainerbattle_double TRAINER_KIM_AND_IRIS, Route125_Text_IrisIntro, Route125_Text_IrisDefeat, Route125_Text_IrisNotEnoughMons
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_IrisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Presley:: @ 81F6898
-	trainerbattle_single TRAINER_PRESLEY, Route125_Text_PresleyIntro, Route125_Text_PresleyDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route125_Text_PresleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Auron:: @ 81F68AF
-	trainerbattle_single TRAINER_AURON, Route125_Text_AuronIntro, Route125_Text_AuronDefeat
+	trainerbattle_double TRAINER_AURON, Route125_Text_AuronIntro, Route125_Text_AuronDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route125_Text_AuronPostBattle, MSGBOX_AUTOCLOSE
 	end
 

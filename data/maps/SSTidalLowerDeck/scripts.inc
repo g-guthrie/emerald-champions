@@ -2,12 +2,12 @@ SSTidalLowerDeck_MapScripts:: @ 823C818
 	.byte 0
 
 SSTidalLowerDeck_EventScript_Phillip:: @ 823C819
-	trainerbattle_single TRAINER_PHILLIP, SSTidalLowerDeck_Text_PhillipIntro, SSTidalLowerDeck_Text_PhillipDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox SSTidalLowerDeck_Text_PhillipPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalLowerDeck_EventScript_Leonard:: @ 823C830
-	trainerbattle_single TRAINER_LEONARD, SSTidalLowerDeck_Text_LeonardIntro, SSTidalLowerDeck_Text_LeonardDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox SSTidalLowerDeck_Text_LeonardPostBattle, MSGBOX_AUTOCLOSE
 	end
 

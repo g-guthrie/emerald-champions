@@ -62,6 +62,7 @@
 	STD_OBTAIN_ITEM = 0
 	STD_FIND_ITEM = 1
 	STD_OBTAIN_DECORATION = 7
+	STD_REGISTER_MATCH_CALL = 8
 	STD_PUT_ITEM_AWAY = 11
 	STD_RECEIVED_ITEM = 12
 
@@ -1044,6 +1045,12 @@
 	.byte SCR_OP_HIDEMONPIC
 	.endm
 
+	@ Draws an image of the winner of the contest. winnerId is any CONTEST_WINNER_* constant.
+	.macro showcontestpainting winnerId:req
+	.byte SCR_OP_SHOWCONTESTPAINTING
+	.byte \winnerId
+	.endm
+
 	@ Displays the given string as braille text in a standard message box. The string should use the .braille directive
 	@ to convert text to braille, and be preceded by brailleformat. The brailleformat data is skipped over (in RS, these
 	@ bytes determined the box's size and position, but in Emerald these are calculated automatically).
@@ -1355,6 +1362,26 @@
 	.byte \treeId
 	.byte \berryId
 	.byte \growthStage
+	.endm
+
+	@ Opens the party menu to select a Pokemon for a contest.
+	.macro choosecontestmon
+	.byte SCR_OP_CHOOSECONTESTMON
+	.endm
+
+	@ Starts the appeals round of a contest.
+	.macro startcontest
+	.byte SCR_OP_STARTCONTEST
+	.endm
+
+	@ Shows the results screen of a contest.
+	.macro showcontestresults
+	.byte SCR_OP_SHOWCONTESTRESULTS
+	.endm
+
+	@ Starts communication to initialize a link contest.
+	.macro contestlinktransfer
+	.byte SCR_OP_CONTESTLINKTRANSFER
 	.endm
 
 	@ Stores a random integer between 0 and limit (exclusive of limit) in VAR_RESULT.
@@ -1919,6 +1946,14 @@
 	formatwarp \map, \a, \b, \c
 	.endm
 
+	@ Buffers the name of the contest category to the buffer.
+	@ For example a category of CONTEST_CATEGORY_COOL will buffer the string "COOLNESS CONTEST".
+	.macro buffercontestname stringVarId:req, category:req
+	.byte SCR_OP_BUFFERCONTESTNAME
+	stringvar \stringVarId
+	.2byte \category
+	.endm
+
 	@ Writes the name of the specified item to the specified buffer. If 'item' is a Berry or ITEM_POKE_BALL
 	@ and if the quantity is 2 or more, the buffered string will be pluralized ("IES" or "S" appended).
 	@ If the specified item is >= ITEMS_COUNT then the name of ITEM_NONE ("????????") is buffered instead.
@@ -2164,6 +2199,11 @@
 	.macro givedecoration decoration:req
 	setorcopyvar VAR_0x8000, \decoration
 	callstd STD_OBTAIN_DECORATION
+	.endm
+
+	@ Registers the specified trainer in Match Call and plays a fanfare with a notification message.
+	@ Match Call is removed; registering a Trainer does nothing.
+	.macro register_matchcall trainer:req
 	.endm
 
 	@ Does a sparkle field effect (e.g. when the Trick Master is hiding) at the given coordinates.
@@ -3123,16 +3163,3 @@
 	@ than beside lock_anim in asm/macros/movement.inc because macros.inc is
 	@ included first, so create_movement_action is already in scope.
 	create_movement_action store_lock_anim, MOVEMENT_ACTION_LOCK_ANIM
-
-	@ The Match Call / trainer rematch phone system does not exist in this
-	@ engine: src/match_call.c and include/match_call.h are deleted, the
-	@ SetMatchCallRegisteredFlag special is gone, and the std script slot is
-	@ marked "unused slot 8 (was STD_REGISTER_MATCH_CALL)" in
-	@ data/event_scripts.s. Restored Inclement route-trainer scripts still ask
-	@ to register a phone number after their battle, so this expands to nothing
-	@ at all - zero bytes, no opcode, no effect on script flow - and those
-	@ scripts assemble and run exactly as before minus the registration.
-	@ Do NOT give this a real opcode: there is no handler to run.
-	.macro register_matchcall trainer:req
-	@ intentionally empty
-	.endm

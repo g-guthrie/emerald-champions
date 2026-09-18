@@ -2,7 +2,7 @@ MeteorFalls_1F_2R_MapScripts:: @ 822C4DD
 	.byte 0
 
 MeteorFalls_1F_2R_EventScript_Nicolas:: @ 822C4DE
-	trainerbattle_single TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, MeteorFalls_1F_2R_EventScript_RegisterNicolas
+	trainerbattle_double TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, EmeraldChampions_Text_NeedTwoPokemon, MeteorFalls_1F_2R_EventScript_RegisterNicolas
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq MeteorFalls_1F_2R_EventScript_RematchNicolas
@@ -19,12 +19,12 @@ MeteorFalls_1F_2R_EventScript_RegisterNicolas:: @ 822C50A
 	end
 
 MeteorFalls_1F_2R_EventScript_RematchNicolas:: @ 822C529
-	trainerbattle_rematch TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasRematchIntro, MeteorFalls_1F_2R_Text_NicolasRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox MeteorFalls_1F_2R_Text_NicolasPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 MeteorFalls_1F_2R_EventScript_John:: @ 822C540
-	trainerbattle_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_JohnIntro, MeteorFalls_1F_2R_Text_JohnDefeat, MeteorFalls_1F_2R_Text_JohnNotEnoughMons, MeteorFalls_1F_2R_EventScript_RegisterJohn
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq MeteorFalls_1F_2R_EventScript_RematchJohn
@@ -39,12 +39,12 @@ MeteorFalls_1F_2R_EventScript_RegisterJohn:: @ 822C570
 	end
 
 MeteorFalls_1F_2R_EventScript_RematchJohn:: @ 822C589
-	trainerbattle_rematch_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_JohnRematchIntro, MeteorFalls_1F_2R_Text_JohnRematchDefeat, MeteorFalls_1F_2R_Text_JohnRematchNotEnoughMons
+	@ This retired encounter has no campaign battle.
 	msgbox MeteorFalls_1F_2R_Text_JohnPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 MeteorFalls_1F_2R_EventScript_Jay:: @ 822C5A4
-	trainerbattle_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_JayIntro, MeteorFalls_1F_2R_Text_JayDefeat, MeteorFalls_1F_2R_Text_JayNotEnoughMons, MeteorFalls_1F_2R_EventScript_RegisterJay
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq MeteorFalls_1F_2R_EventScript_RematchJay
@@ -59,7 +59,7 @@ MeteorFalls_1F_2R_EventScript_RegisterJay:: @ 822C5D4
 	end
 
 MeteorFalls_1F_2R_EventScript_RematchJay:: @ 822C5ED
-	trainerbattle_rematch_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_JayRematchIntro, MeteorFalls_1F_2R_Text_JayRematchDefeat, MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons
+	@ This retired encounter has no campaign battle.
 	msgbox MeteorFalls_1F_2R_Text_JayPostRematch, MSGBOX_AUTOCLOSE
 	end
 

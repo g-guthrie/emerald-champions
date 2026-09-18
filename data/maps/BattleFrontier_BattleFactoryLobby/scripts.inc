@@ -1,7 +1,8 @@
 .set LOCALID_ATTENDANT_SINGLES, 1
 .set LOCALID_ATTENDANT_DOUBLES, 6
 
-BattleFrontier_BattleFactoryLobby_MapScripts::
+BattleFrontier_BattleFactoryLobby_MapScripts:: @ 82583E8
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryLobby_OnWarp
 	.byte 0
 
@@ -14,29 +15,242 @@ BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth:: @ 82583FD
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-@ Emerald Champions: the Battle Factory is retired. src/battle_factory.c and the Factory's own
-@ maps are gone from this tree, so the challenge flow that used to live here
-@ (challenge-status dispatch, party select, save, Factory) has been removed
-@ rather than left calling missing code. The attendants still greet the
-@ player and explain that the Factory is closed.
+BattleFrontier_BattleFactoryLobby_OnFrame: @ 8258407
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_WON, BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge
+	.2byte 0
 
-BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant::
+BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus:: @ 8258431
+	frontier_getstatus
+	end
+
+BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving:: @ 825843A
+	lockall
+	msgbox BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT
+	closemessage
+	factory_setswapped
+	factory_set FACTORY_DATA_WIN_STREAK_SWAPS, 0
+	factory_set FACTORY_DATA_WIN_STREAK, 0
+	factory_set FACTORY_DATA_WIN_STREAK_ACTIVE, FALSE
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+	setvar VAR_TEMP_0, 255
+	releaseall
+	end
+
+BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge:: @ 825849B
+	lockall
+	frontier_isbrain
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead
+	msgbox BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins, MSGBOX_DEFAULT
+	waitmessage
+	goto BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints
+
+BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead:: @ 82584BD
+	msgbox BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead, MSGBOX_DEFAULT
+	waitmessage
+BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints:: @ 82584C6
+	msgbox BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints, MSGBOX_DEFAULT
+	frontier_givepoints
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
+	message BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave
+	waitmessage
+	frontier_checkairshow
+	special LoadPlayerParty
+	factory_save 0
+	playse SE_SAVE
+	waitse
+	goto BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle
+	end
+
+BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge:: @ 8258506
+	lockall
+	message BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults
+	waitmessage
+	frontier_checkairshow
+	special LoadPlayerParty
+	factory_set FACTORY_DATA_WIN_STREAK_ACTIVE, FALSE
+	factory_save 0
+	playse SE_SAVE
+	waitse
+
+BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle:: @ 825853B
+	call BattleFrontier_EventScript_GetCantRecordBattle
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
+	message BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch
+	waitmessage
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
+	switch VAR_RESULT
+	case 1, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
+	case 0, BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle
+	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
+
+BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle:: @ 825857D
+	call BattleFrontier_EventScript_SaveBattle
+BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle:: @ 8258582
+	msgbox BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_TEMP_0, 255
+	releaseall
+	end
+
+BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge:: @ 8258592
+	lockall
+	message BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume
+	waitmessage
+	factory_save CHALLENGE_STATUS_SAVING
+	playse SE_SAVE
+	waitse
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
+	setvar VAR_TEMP_0, 255
+	setvar VAR_0x8006, 2
+	goto BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge
+
+BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant:: @ 82585CB
 	lock
 	faceplayer
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	goto BattleFrontier_BattleFactoryLobby_EventScript_Attendant
+	end
+
+BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant:: @ 82585DD
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
+	goto BattleFrontier_BattleFactoryLobby_EventScript_Attendant
+	end
+
+BattleFrontier_BattleFactoryLobby_EventScript_Attendant:: @ 82585ED
+	special SavePlayerParty
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle
+BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge:: @ 8258606
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge
+	waitmessage
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge
+	case 1, BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge
+	case 2, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
+
+BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge:: @ 8258653
+	message BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode
+	waitmessage
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
+	switch VAR_RESULT
+	case FRONTIER_LVL_TENT, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
+	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
+	msgbox BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO
+	switch VAR_RESULT
+	case NO, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge
+	case YES, BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge
+
+BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge:: @ 82586B9
+	setvar VAR_TEMP_0, 0
+	factory_init
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
+	factory_set FACTORY_DATA_WIN_STREAK_ACTIVE, TRUE
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
+	closemessage
+	delay 2
+	call Common_EventScript_SaveGame
+	setvar VAR_TEMP_0, 255
+	compare VAR_RESULT, 0
+	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed
+	setvar VAR_0x8006, 0
+BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge:: @ 825871A
+	special SavePlayerParty
+	msgbox BattleFrontier_BattleFactoryLobby_Text_StepThisWay, MSGBOX_DEFAULT
+	closemessage
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant
+	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor
+	waitmovement 0
+	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 13
+	setvar VAR_TEMP_0, 0
+	waitstate
+	end
+
+BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant:: @ 825875C
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
+	return
+
+BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant:: @ 8258762
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
+	return
+
+BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge:: @ 8258768
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_ExplainSinglesChallenge
+	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
+	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge
+	goto BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge
+
+BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed:: @ 8258783
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+	goto BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
+
+BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge:: @ 825879A
+	special LoadPlayerParty
+BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge:: @ 825879D
+	msgbox BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor: @ 82587A7
+	walk_up
+	walk_up
+	walk_up
+	set_invisible
+	step_end
+
+BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor: @ 82587AC
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle:: @ 82587B1
 	msgbox BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle, MSGBOX_DEFAULT
-	msgbox BattleFrontier_BattleFactoryLobby_Text_FactoryClosed, MSGBOX_DEFAULT
-	release
-	end
+	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant::
-	lock
-	faceplayer
+BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle:: @ 82587BA
 	msgbox BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle, MSGBOX_DEFAULT
-	msgbox BattleFrontier_BattleFactoryLobby_Text_FactoryClosed, MSGBOX_DEFAULT
-	release
-	end
+	return
 
-BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults::
+BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge:: @ 82587C3
+	message BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge
+	return
+
+BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge:: @ 82587C9
+	message BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge
+	return
+
+BattleFrontier_BattleFactoryLobby_EventScript_ExplainSinglesChallenge:: @ 82587CF
+	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge:: @ 82587D8
+	msgbox BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults:: @ 82587E1
 	lockall
 	frontier_results FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES
 	waitbuttonpress
@@ -118,14 +332,6 @@ BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv:: @ 82588DE
 BattleFrontier_BattleFactoryLobby_EventScript_ExitRules:: @ 82588EC
 	releaseall
 	end
-
-BattleFrontier_BattleFactoryLobby_Text_FactoryClosed:
-	.string "I am sorry to report that our rental\n"
-	.string "Pokémon are not available today.\p"
-	.string "The pre-battle room is closed, so no\n"
-	.string "challenges can be accepted.\p"
-	.string "Please enjoy the rest of the\n"
-	.string "BATTLE FRONTIER!$"
 
 BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle: @ 82588EE
 	.string "Where the intelligence of Trainers\n"

@@ -142,7 +142,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_DRAWBOXTEXT                   ScrCmd_drawboxtext,                 requests_effects=1  @ 0x74
 	script_cmd_table_entry SCR_OP_SHOWMONPIC                    ScrCmd_showmonpic,                  requests_effects=1  @ 0x75
 	script_cmd_table_entry SCR_OP_HIDEMONPIC                    ScrCmd_hidemonpic,                  requests_effects=1  @ 0x76
-	script_cmd_table_entry SCR_OP_SHOWCONTESTPAINTING           ScrCmd_nop1,         requests_effects=1  @ 0x77
+	script_cmd_table_entry SCR_OP_SHOWCONTESTPAINTING           ScrCmd_showcontestpainting,         requests_effects=1  @ 0x77
 	script_cmd_table_entry SCR_OP_BRAILLEMESSAGE                ScrCmd_braillemessage,              requests_effects=1  @ 0x78
 	script_cmd_table_entry SCR_OP_GIVEMON                       ScrCmd_nop1,                        requests_effects=1  @ 0x79
 	script_cmd_table_entry SCR_OP_GIVEEGG                       ScrCmd_giveegg,                     requests_effects=1  @ 0x7a
@@ -162,10 +162,10 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_POKEMARTDECORATION2           ScrCmd_pokemartdecoration2,         requests_effects=1  @ 0x88
 	script_cmd_table_entry SCR_OP_PLAYSLOTMACHINE               ScrCmd_playslotmachine,             requests_effects=1  @ 0x89
 	script_cmd_table_entry SCR_OP_SETBERRYTREE                  ScrCmd_setberrytree,                requests_effects=1  @ 0x8a
-	script_cmd_table_entry SCR_OP_CHOOSECONTESTMON              ScrCmd_nop1,            requests_effects=1  @ 0x8b
-	script_cmd_table_entry SCR_OP_STARTCONTEST                  ScrCmd_nop1,                requests_effects=1  @ 0x8c
-	script_cmd_table_entry SCR_OP_SHOWCONTESTRESULTS            ScrCmd_nop1,          requests_effects=1  @ 0x8d
-	script_cmd_table_entry SCR_OP_CONTESTLINKTRANSFER           ScrCmd_nop1,         requests_effects=1  @ 0x8e
+	script_cmd_table_entry SCR_OP_CHOOSECONTESTMON              ScrCmd_choosecontestmon,            requests_effects=1  @ 0x8b
+	script_cmd_table_entry SCR_OP_STARTCONTEST                  ScrCmd_startcontest,                requests_effects=1  @ 0x8c
+	script_cmd_table_entry SCR_OP_SHOWCONTESTRESULTS            ScrCmd_showcontestresults,          requests_effects=1  @ 0x8d
+	script_cmd_table_entry SCR_OP_CONTESTLINKTRANSFER           ScrCmd_contestlinktransfer,         requests_effects=1  @ 0x8e
 	script_cmd_table_entry SCR_OP_RANDOM                        ScrCmd_random,                      requests_effects=1  @ 0x8f
 	script_cmd_table_entry SCR_OP_ADDMONEY                      ScrCmd_addmoney,                    requests_effects=1  @ 0x90
 	script_cmd_table_entry SCR_OP_REMOVEMONEY                   ScrCmd_removemoney,                 requests_effects=1  @ 0x91
@@ -248,7 +248,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_BUFFERTRAINERNAME             ScrCmd_buffertrainername,           requests_effects=1  @ 0xde
 	script_cmd_table_entry SCR_OP_POKENAVCALL                   ScrCmd_pokenavcall,                 requests_effects=1  @ 0xdf
 	script_cmd_table_entry SCR_OP_WARPWHITEFADE                 ScrCmd_warpwhitefade,               requests_effects=1  @ 0xe0
-	script_cmd_table_entry SCR_OP_BUFFERCONTESTNAME             ScrCmd_nop1,           requests_effects=1  @ 0xe1
+	script_cmd_table_entry SCR_OP_BUFFERCONTESTNAME             ScrCmd_buffercontestname,           requests_effects=1  @ 0xe1
 	script_cmd_table_entry SCR_OP_BUFFERITEMNAMEPLURAL          ScrCmd_bufferitemnameplural,        requests_effects=1  @ 0xe2
 	script_cmd_table_entry SCR_OP_DYNMULTICHOICE                ScrCmd_dynmultichoice,              requests_effects=1  @ 0xe3
 	script_cmd_table_entry SCR_OP_DYNMULTIPUSH                  ScrCmd_dynmultipush,                requests_effects=1  @ 0xe4

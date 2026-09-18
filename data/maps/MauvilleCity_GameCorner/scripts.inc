@@ -377,8 +377,6 @@ MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon::
 
 MauvilleCity_GameCorner_EventScript_ReceivePokemon::
 	msgbox MauvilleCity_GameCorner_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
-	removecoins VAR_0x8006
-	updatecoinsbox
 	special GetStaticEncounterLevel
 	givemon VAR_TEMP_1, VAR_0x800A, ITEM_NONE
 	compare VAR_RESULT, 0
@@ -409,6 +407,8 @@ MauvilleCity_GameCorner_EventScript_SendPokemonToPC::
 	goto MauvilleCity_GameCorner_EventScript_TakeCareOfPokemon
 
 MauvilleCity_GameCorner_EventScript_ReceivedPokemonFanfare::
+	removecoins VAR_0x8006
+	updatecoinsbox
 	bufferspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_OBTAIN_ITEM
 	message MauvilleCity_GameCorner_Text_PlayerReceivedPokemon

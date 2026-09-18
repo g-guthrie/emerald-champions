@@ -514,6 +514,11 @@ enum __attribute__((packed)) Item
     ITEM_PURE_INCENSE = 412,
 
     // Contest Scarves
+    ITEM_RED_SCARF = 413,
+    ITEM_BLUE_SCARF = 414,
+    ITEM_PINK_SCARF = 415,
+    ITEM_GREEN_SCARF = 416,
+    ITEM_YELLOW_SCARF = 417,
 
     // EV Gain Modifiers
     ITEM_MACHO_BRACE = 418,
@@ -777,6 +782,7 @@ enum __attribute__((packed)) Item
     ITEM_RM_6_KEY = ITEM_KEY_TO_ROOM_6, // Pre-Gen VI name
     ITEM_METEORITE = 634,
     ITEM_MAGMA_EMBLEM = 635,
+    ITEM_CONTEST_PASS = 636,
     ITEM_PARCEL = 637,
     ITEM_OAKS_PARCEL = ITEM_PARCEL, // Pre-Gen IV name
     ITEM_SECRET_KEY = 638,

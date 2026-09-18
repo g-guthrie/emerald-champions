@@ -37,8 +37,18 @@ enum
 {
     PBLOCK_CASE_FIELD,
     PBLOCK_CASE_BATTLE,
+    PBLOCK_CASE_FEEDER,
+    PBLOCK_CASE_GIVE
 };
 
+// use pokeblock
+extern u8 gPokeblockMonId;
+extern s16 gPokeblockGain;
+
+void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void));
+
+// pokeblock feed
+void PreparePokeblockFeedScene(void);
 
 // pokeblock
 extern const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];
@@ -48,6 +58,7 @@ extern const struct SpritePalette gPokeblockCase_SpritePal;
 
 void OpenPokeblockCase(u8 caseId, void (*callback)(void));
 void OpenPokeblockCaseInBattle(void);
+void OpenPokeblockCaseOnFeeder(void);
 void ResetPokeblockScrollPositions(void);
 u8 CreatePokeblockCaseSprite(s16 x, s16 y, u8 subpriority);
 void ClearPokeblocks(void);

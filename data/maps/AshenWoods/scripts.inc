@@ -1,5 +1,5 @@
-.set LOCALID_CHANSEY, 9
-.set LOCALID_POKE_BALL, 10
+.set LOCALID_CHANSEY, 8
+.set LOCALID_POKE_BALL, 9
 
 AshenWoods_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, AshenWoods_OnResume
@@ -161,22 +161,22 @@ AshenWoods_Movement_ChanseyEscape2:
 	step_end
 
 AshenWoods_EventScript_Alannah::
-	trainerbattle_single TRAINER_ALANNAH, AshenWoods_Text_AlannahIntro, AshenWoods_Text_AlannahDefeat
+	trainerbattle_double TRAINER_ALANNAH, AshenWoods_Text_AlannahIntro, AshenWoods_Text_AlannahDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AshenWoods_Text_AlannahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AshenWoods_EventScript_Martin::
-	trainerbattle_single TRAINER_MARTIN, AshenWoods_Text_MartinIntro, AshenWoods_Text_MartinDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox AshenWoods_Text_MartinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AshenWoods_EventScript_Roman::
-	trainerbattle_single TRAINER_ROMAN, AshenWoods_Text_RomanIntro, AshenWoods_Text_RomanDefeat
+	trainerbattle_double TRAINER_ROMAN, AshenWoods_Text_RomanIntro, AshenWoods_Text_RomanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AshenWoods_Text_RomanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AshenWoods_EventScript_Elmer::
-	trainerbattle_single TRAINER_ELMER, AshenWoods_Text_ElmerIntro, AshenWoods_Text_ElmerDefeat
+	trainerbattle_double TRAINER_ELMER, AshenWoods_Text_ElmerIntro, AshenWoods_Text_ElmerDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AshenWoods_Text_ElmerPostBattle, MSGBOX_AUTOCLOSE
 	end
 

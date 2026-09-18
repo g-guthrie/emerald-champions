@@ -14,7 +14,6 @@ void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool
 void StartEmeraldChampionsBirchRescue(void);
 void BufferEmeraldChampionsRivalBranch(void);
 void GiveEmeraldChampionsOpeningBalls(void);
-void RestockEmeraldChampionsBasicBalls(void);
 void BufferEmeraldChampionsStarterNames(void);
 void SelectEmeraldChampionsStarterForNaming(void);
 

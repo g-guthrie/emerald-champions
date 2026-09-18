@@ -46,19 +46,20 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs: @ 821FE44
 	end
 
 LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM: @ 821FE50
-	.string "Hmm…\p"
-	.string "An attacking move…\n"
-	.string "Or a defensive move…\p"
-	.string "It's no easy matter to decide which TM\n"
-	.string "moves should be taught to Pokémon…$"
+	.string "Should I evolve my partner now,\n"
+	.string "or wait a little longer?\p"
+	.string "There are so many choices here.$"
 
 LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs: @ 821FEC7
-	.string "There are so many different kinds of\n"
-	.string "TM moves.\p"
-	.string "A catalog I read said there are fifty\n"
-	.string "different kinds.$"
+	.string "Evolution items help all sorts\n"
+	.string "of Pokémon grow.\p"
+	.string "Check what your partner needs\n"
+	.string "before buying one.$"
 
 LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves: @ 821FF2D
-	.string "I'd like to get all the different TMs,\n"
-	.string "but a Pokémon learns only four moves.$"
+	.string "The Center tutor offers plenty\n"
+	.string "of moves, but a Pokémon can use\l"
+	.string "only four at once.\p"
+	.string "I choose them to suit the whole\n"
+	.string "team.$"
 

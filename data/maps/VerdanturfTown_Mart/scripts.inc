@@ -39,11 +39,11 @@ VerdanturfTown_Mart_EventScript_Lass:: @ 82025CC
 VerdanturfTown_Mart_EventScript_PaybackTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq VerdanturfTown_Mart_EventScript_ReceivedTM66
+	goto_if_set FLAG_EC_GIFT_VERDANTURF_TOWN_MART, VerdanturfTown_Mart_EventScript_ReceivedTM66
 	msgbox VerdanturfTown_Mart_Text_SlowPokemon, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_VERDANTURF_TOWN_MART
 	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
 	release
 	end
@@ -54,18 +54,16 @@ VerdanturfTown_Mart_EventScript_ReceivedTM66::
 	end
 
 VerdanturfTown_Mart_Text_SlowPokemon:
-	.string "Do you think slow Pokémon ever get\n"
-	.string "tired of taking the first hit in every\l"
-	.string "battle?\p"
-	.string "I think they'd be itching for a little\n"
-	.string "payback!\p"
-	.string "If you've got any slow Pokémon, give\n"
-	.string "this TM a try.$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 VerdanturfTown_Mart_Text_HaveTM66:
-	.string "TM66 contains Payback!\p"
-	.string "It's an attack that doubles in power\n"
-	.string "if the user moves after its target.$"
+	.string "A Rare Candy raises a Pokémon by\n"
+	.string "one level, up to your current\l"
+	.string "cap.\p"
+	.string "For new moves, visit the Center\n"
+	.string "tutor.$"
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
 	.string "For any Pokémon match, X Special\n"

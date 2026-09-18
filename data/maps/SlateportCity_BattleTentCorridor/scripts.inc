@@ -67,12 +67,11 @@ SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed: @ 82091DC
 
 @ Unused
 SlateportCity_ContestHall_Text_ExplainTorment: @ 8209322
-	.string "That's, like, TM41, you know?\n"
-	.string "Hey, it's TORMENT, you hearing me?\p"
-	.string "Like, it won't let the other guy\n"
-	.string "use the same move twice in a row, see?\p"
-	.string "Hey, now, you listen here, like,\n"
-	.string "I'm not laying a torment on you!$"
+	.string "A Rare Candy raises a Pokémon by\n"
+	.string "one level, up to your current\l"
+	.string "cap.\p"
+	.string "For new moves, visit the Center\n"
+	.string "tutor.$"
 
 @ Unused
 SlateportCity_ContestHall_Text_MCStepUpTakePartInContest: @ 82093ED

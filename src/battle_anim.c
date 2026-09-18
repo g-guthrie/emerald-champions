@@ -1685,20 +1685,6 @@ bool8 IsContest(void)
         return FALSE;
 }
 
-// Contests are retired. These two are the smallest stub that keeps the contest
-// branches above compiling: nothing allocates gContestResources, so it stays
-// NULL and those branches stay unreachable.
-struct ContestResources *gContestResources = NULL;
-
-void LoadContestBgAfterMoveAnim(void)
-{
-}
-
-bool8 IsSpeciesNotUnown(enum Species species)
-{
-    return species != SPECIES_UNOWN;
-}
-
 #define tBackgroundId   data[0]
 #define tState          data[10]
 

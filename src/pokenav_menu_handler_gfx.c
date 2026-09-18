@@ -17,8 +17,10 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
+#define GFXTAG_BLUE_LIGHT 1
 #define GFXTAG_OPTIONS    3
 
+#define PALTAG_BLUE_LIGHT 3
 #define PALTAG_OPTIONS_DEFAULT 4 // Includes green for Smart/Region Map and yellow for Tough
 #define PALTAG_OPTIONS_BLUE 5
 #define PALTAG_OPTIONS_PINK 6
@@ -43,6 +45,7 @@ struct Pokenav_MenuGfx
     u8 numIconsBlending;
     bool8 pokenavAlreadyOpen;
     bool32 iconVisible[MAX_POKENAV_MENUITEMS];
+    struct Sprite *blueLightSprite;
     struct Sprite *iconSprites[MAX_POKENAV_MENUITEMS][NUM_OPTION_SUBSPRITES];
     u8 bg1TilemapBuffer[BG_SCREEN_SIZE];
 };
@@ -51,7 +54,10 @@ static struct Pokenav_MenuGfx * OpenPokenavMenu(void);
 static bool32 GetCurrentLoopedTaskActive(void);
 static u32 LoopedTask_OpenMenu(s32);
 static u32 LoopedTask_MoveMenuCursor(s32);
+static u32 LoopedTask_OpenConditionMenu(s32);
 static u32 LoopedTask_ReturnToMainMenu(s32);
+static u32 LoopedTask_OpenConditionSearchMenu(s32);
+static u32 LoopedTask_ReturnToConditionMenu(s32);
 static u32 LoopedTask_SelectRibbonsNoWinners(s32);
 static u32 LoopedTask_ReShowDescription(s32);
 static u32 LoopedTask_OpenPokenavFeature(s32);
@@ -71,6 +77,9 @@ static void SetOptionInvisibility(struct Sprite **, bool32);
 static void SpriteCB_OptionSlide(struct Sprite *);
 static void SpriteCB_OptionZoom(struct Sprite *);
 static void Task_OptionBlend(u8);
+static void CreateMatchCallBlueLightSprite(void);
+static void SpriteCB_BlinkingBlueLight(struct Sprite *);
+static void DestroyRematchBlueLightSprite(void);
 static void AddOptionDescriptionWindow(void);
 static void PrintCurrentOptionDescription(void);
 static void PrintNoRibbonWinners(void);
@@ -96,6 +105,8 @@ static const u32 sPokenavBgDotsTilemap[] = INCGFX_U32("graphics/pokenav/bg_dots.
 static const u16 sPokenavDeviceBgPal[] = INCGFX_U16("graphics/pokenav/device_outline.png", ".gbapal");
 static const u32 sPokenavDeviceBgTiles[] = INCGFX_U32("graphics/pokenav/device_outline.png", ".4bpp.smol", "-num_tiles 53 -Wnum_tiles");
 static const u32 sPokenavDeviceBgTilemap[] = INCGFX_U32("graphics/pokenav/device_outline_map.bin", ".smolTM");
+static const u16 sMatchCallBlueLightPal[] = INCGFX_U16("graphics/pokenav/blue_light.png", ".gbapal");
+static const u32 sMatchCallBlueLightTiles[] = INCGFX_U32("graphics/pokenav/blue_light.png", ".4bpp.smol");
 
 static const u8 gText_NoRibbonWinners[] = _("There are no RIBBON winners.");
 
@@ -131,7 +142,10 @@ static const LoopedTask sMenuHandlerLoopTaskFuncs[] =
 {
     [POKENAV_MENU_FUNC_NONE]                  = NULL,
     [POKENAV_MENU_FUNC_MOVE_CURSOR]           = LoopedTask_MoveMenuCursor,
+    [POKENAV_MENU_FUNC_OPEN_CONDITION]        = LoopedTask_OpenConditionMenu,
     [POKENAV_MENU_FUNC_RETURN_TO_MAIN]        = LoopedTask_ReturnToMainMenu,
+    [POKENAV_MENU_FUNC_OPEN_CONDITION_SEARCH] = LoopedTask_OpenConditionSearchMenu,
+    [POKENAV_MENU_FUNC_RETURN_TO_CONDITION]   = LoopedTask_ReturnToConditionMenu,
     [POKENAV_MENU_FUNC_NO_RIBBON_WINNERS]     = LoopedTask_SelectRibbonsNoWinners,
     [POKENAV_MENU_FUNC_RESHOW_DESCRIPTION]    = LoopedTask_ReShowDescription,
     [POKENAV_MENU_FUNC_OPEN_FEATURE]          = LoopedTask_OpenPokenavFeature
@@ -143,6 +157,11 @@ static const struct CompressedSpriteSheet sPokenavOptionsSpriteSheets[] =
         .data = gPokenavOptions_Gfx,
         .size = 0x3400,
         .tag = GFXTAG_OPTIONS
+    },
+    {
+        .data = sMatchCallBlueLightTiles,
+        .size = 0x0100,
+        .tag = GFXTAG_BLUE_LIGHT
     }
 };
 
@@ -153,13 +172,24 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
     {&gPokenavOptions_Pal[0x20], PALTAG_OPTIONS_PINK},
     {&gPokenavOptions_Pal[0x30], PALTAG_OPTIONS_BEIGE},
     {&gPokenavOptions_Pal[0x40], PALTAG_OPTIONS_RED},
+    {sMatchCallBlueLightPal, PALTAG_BLUE_LIGHT},
     {}
 };
 
 // Tile number, palette tag offset
 static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Party[]     = {0x0A0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Search[]    = {0x0C0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Cool[]      = {0x0E0, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Beauty[]    = {0x100, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Cute[]      = {0x120, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Smart[]     = {0x140, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Tough[]     = {0x160, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Cancel[]    = {0x180, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
 
 struct
 {
@@ -177,7 +207,16 @@ struct
             sOptionsLabelGfx_SwitchOff
         }
     },
-    [POKENAV_MENU_TYPE_RIBBONS] =
+    [POKENAV_MENU_TYPE_UNLOCK_MC] =
+    {
+        .yStart = 42,
+        .deltaY = 20,
+        .gfx = {
+            sOptionsLabelGfx_RegionMap,
+            sOptionsLabelGfx_SwitchOff
+        }
+    },
+    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] =
     {
         .yStart = 42,
         .deltaY = 20,
@@ -185,6 +224,29 @@ struct
             sOptionsLabelGfx_RegionMap,
             sOptionsLabelGfx_Ribbons,
             sOptionsLabelGfx_SwitchOff
+        }
+    },
+    [POKENAV_MENU_TYPE_CONDITION] =
+    {
+        .yStart = 56,
+        .deltaY = 20,
+        .gfx = {
+            sOptionsLabelGfx_Party,
+            sOptionsLabelGfx_Search,
+            sOptionsLabelGfx_Cancel
+        }
+    },
+    [POKENAV_MENU_TYPE_CONDITION_SEARCH] =
+    {
+        .yStart = 40,
+        .deltaY = 16,
+        .gfx = {
+            sOptionsLabelGfx_Cool,
+            sOptionsLabelGfx_Beauty,
+            sOptionsLabelGfx_Cute,
+            sOptionsLabelGfx_Smart,
+            sOptionsLabelGfx_Tough,
+            sOptionsLabelGfx_Cancel
         }
     },
 };
@@ -203,8 +265,19 @@ static const struct WindowTemplate sOptionDescWindowTemplate =
 static const u8 *const sPageDescriptions[] =
 {
     [POKENAV_MENUITEM_MAP]                     = COMPOUND_STRING("Check the map of the HOENN region"),
+    [POKENAV_MENUITEM_CONDITION]               = COMPOUND_STRING("Check POKéMON in detail."),
+    [POKENAV_MENUITEM_MATCH_CALL]              = COMPOUND_STRING("Call a registered TRAINER."),
     [POKENAV_MENUITEM_RIBBONS]                 = COMPOUND_STRING("Check obtained RIBBONS."),
-    [POKENAV_MENUITEM_SWITCH_OFF]              = COMPOUND_STRING("Put away the POKéNAV.")
+    [POKENAV_MENUITEM_SWITCH_OFF]              = COMPOUND_STRING("Put away the POKéNAV."),
+    [POKENAV_MENUITEM_CONDITION_PARTY]         = COMPOUND_STRING("Check party POKéMON in detail."),
+    [POKENAV_MENUITEM_CONDITION_SEARCH]        = COMPOUND_STRING("Check all POKéMON in detail."),
+    [POKENAV_MENUITEM_CONDITION_CANCEL]        = COMPOUND_STRING("Return to the POKéNAV menu."),
+    [POKENAV_MENUITEM_CONDITION_SEARCH_COOL]   = COMPOUND_STRING("Find cool POKéMON."),
+    [POKENAV_MENUITEM_CONDITION_SEARCH_BEAUTY] = COMPOUND_STRING("Find beautiful POKéMON."),
+    [POKENAV_MENUITEM_CONDITION_SEARCH_CUTE]   = COMPOUND_STRING("Find cute POKéMON."),
+    [POKENAV_MENUITEM_CONDITION_SEARCH_SMART]  = COMPOUND_STRING("Find smart POKéMON."),
+    [POKENAV_MENUITEM_CONDITION_SEARCH_TOUGH]  = COMPOUND_STRING("Find tough POKéMON."),
+    [POKENAV_MENUITEM_CONDITION_SEARCH_CANCEL] = COMPOUND_STRING("Return to the CONDITION menu.")
 };
 
 static const u8 sOptionDescTextColors[]  = {TEXT_COLOR_GREEN, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_GREEN};
@@ -251,6 +324,27 @@ static const struct SpriteTemplate sMenuOptionSpriteTemplate =
     .affineAnims = sAffineAnims_MenuOption,
 };
 
+static const struct OamData sBlueLightOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
+    .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+};
+
+static const struct SpriteTemplate sMatchCallBlueLightSpriteTemplate =
+{
+    .tileTag = GFXTAG_BLUE_LIGHT,
+    .paletteTag = PALTAG_BLUE_LIGHT,
+    .oam = &sBlueLightOamData,
+};
+
 static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
 {
     &REG_WIN0H,
@@ -258,6 +352,23 @@ static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
     1,
     0
 };
+
+static bool32 AreAnyTrainerRematchesNearby(void)
+{
+#if FREE_MATCH_CALL == FALSE
+    s32 i;
+
+    for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
+    {
+        if (GetMatchTableMapSectionId(i) == gMapHeader.regionMapSectionId
+            && IsRematchEntryRegistered(i)
+            && gSaveBlock1Ptr->trainerRematches[i])
+            return TRUE;
+    }
+#endif //FREE_MATCH_CALL
+
+    return FALSE;
+}
 
 bool32 OpenPokenavMenuInitial(void)
 {
@@ -359,6 +470,8 @@ static u32 LoopedTask_OpenMenu(s32 state)
         DecompressAndCopyTileDataToVram(3, sPokenavBgDotsTiles, 0, 0, 0);
         DecompressAndCopyTileDataToVram(3, sPokenavBgDotsTilemap, 0, 0, 1);
         CopyPaletteIntoBufferUnfaded(sPokenavBgDotsPal, BG_PLTT_ID(3), sizeof(sPokenavBgDotsPal));
+        if (GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION || GetPokenavMenuType() == POKENAV_MENU_TYPE_CONDITION_SEARCH)
+            ChangeBgDotsColorToPurple();
         return LT_INC_AND_PAUSE;
     case 3:
         if (FreeTempTileDataBuffersIfPossible())
@@ -372,6 +485,7 @@ static u32 LoopedTask_OpenMenu(s32 state)
     case 5:
         PrintCurrentOptionDescription();
         CreateMenuOptionSprites();
+        CreateMatchCallBlueLightSprite();
         DrawCurrentMenuOptionLabels();
         return LT_INC_AND_PAUSE;
     case 6:
@@ -391,12 +505,34 @@ static u32 LoopedTask_OpenMenu(s32 state)
             PlaySE(SE_POKENAV_ON);
             PokenavFadeScreen(POKENAV_FADE_FROM_BLACK_ALL);
         }
-        LoadLeftHeaderGfxForIndex(POKENAV_GFX_MAIN_MENU);
+        switch (GetPokenavMenuType())
+        {
+        case POKENAV_MENU_TYPE_CONDITION_SEARCH:
+            LoadLeftHeaderGfxForIndex(7);
+            // fallthrough
+        case POKENAV_MENU_TYPE_CONDITION:
+            LoadLeftHeaderGfxForIndex(1);
+            break;
+        default:
+            LoadLeftHeaderGfxForIndex(0);
+            break;
+        }
         return LT_INC_AND_PAUSE;
     case 8:
         if (IsPaletteFadeActive())
             return LT_PAUSE;
-        ShowLeftHeaderGfx(POKENAV_GFX_MAIN_MENU, FALSE, FALSE);
+        switch (GetPokenavMenuType())
+        {
+        case POKENAV_MENU_TYPE_CONDITION_SEARCH:
+            ShowLeftHeaderGfx(7, FALSE, FALSE);
+            // fallthrough
+        case POKENAV_MENU_TYPE_CONDITION:
+            ShowLeftHeaderGfx(1, FALSE, FALSE);
+            break;
+        default:
+            ShowLeftHeaderGfx(0, FALSE, FALSE);
+            break;
+        }
         StartOptionAnimations_Enter();
         SetupPokenavMenuScanlineEffects();
         return LT_INC_AND_CONTINUE;
@@ -430,7 +566,7 @@ static u32 LoopedTask_MoveMenuCursor(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_ReturnToMainMenu(s32 state)
+static u32 LoopedTask_OpenConditionMenu(s32 state)
 {
     switch (state)
     {
@@ -438,6 +574,45 @@ static u32 LoopedTask_ReturnToMainMenu(s32 state)
         ResetBldCnt();
         StartOptionAnimations_Exit();
         HideMainOrSubMenuLeftHeader(POKENAV_GFX_MAIN_MENU, FALSE);
+        PlaySE(SE_SELECT);
+        return LT_INC_AND_PAUSE;
+    case 1:
+        if (AreMenuOptionSpritesMoving())
+            return LT_PAUSE;
+        if (AreLeftHeaderSpritesMoving())
+            return LT_PAUSE;
+        DrawCurrentMenuOptionLabels();
+        LoadLeftHeaderGfxForIndex(1);
+        return LT_INC_AND_PAUSE;
+    case 2:
+        StartOptionAnimations_Enter();
+        ShowLeftHeaderGfx(1, FALSE, FALSE);
+        CreateBgDotPurplePalTask();
+        PrintCurrentOptionDescription();
+        return LT_INC_AND_PAUSE;
+    case 3:
+        if (AreMenuOptionSpritesMoving())
+            return LT_PAUSE;
+        if (AreLeftHeaderSpritesMoving())
+            return LT_PAUSE;
+        if (IsTaskActive_UpdateBgDotsPalette())
+            return LT_PAUSE;
+        if (IsDma3ManagerBusyWithBgCopy_())
+            return LT_PAUSE;
+        InitMenuOptionGlow();
+        break;
+    }
+    return LT_FINISH;
+}
+
+static u32 LoopedTask_ReturnToMainMenu(s32 state)
+{
+    switch (state)
+    {
+    case 0:
+        ResetBldCnt();
+        StartOptionAnimations_Exit();
+        HideMainOrSubMenuLeftHeader(POKENAV_GFX_CONDITION_MENU, FALSE);
         return LT_INC_AND_PAUSE;
     case 1:
         if (AreMenuOptionSpritesMoving())
@@ -461,6 +636,70 @@ static u32 LoopedTask_ReturnToMainMenu(s32 state)
         if (IsTaskActive_UpdateBgDotsPalette())
             return LT_PAUSE;
         if (IsDma3ManagerBusyWithBgCopy_())
+            return LT_PAUSE;
+        InitMenuOptionGlow();
+        break;
+    }
+    return LT_FINISH;
+}
+
+static u32 LoopedTask_OpenConditionSearchMenu(s32 state)
+{
+    switch (state)
+    {
+    case 0:
+        ResetBldCnt();
+        StartOptionAnimations_Exit();
+        PlaySE(SE_SELECT);
+        return LT_INC_AND_PAUSE;
+    case 1:
+        if (AreMenuOptionSpritesMoving())
+            return LT_PAUSE;
+        LoadLeftHeaderGfxForIndex(7);
+        DrawCurrentMenuOptionLabels();
+        return LT_INC_AND_PAUSE;
+    case 2:
+        StartOptionAnimations_Enter();
+        ShowLeftHeaderGfx(7, FALSE, FALSE);
+        PrintCurrentOptionDescription();
+        return LT_INC_AND_PAUSE;
+    case 3:
+        if (AreMenuOptionSpritesMoving())
+            return LT_PAUSE;
+        if (AreLeftHeaderSpritesMoving())
+            return LT_PAUSE;
+        if (IsTaskActive_UpdateBgDotsPalette())
+            return LT_PAUSE;
+        InitMenuOptionGlow();
+        break;
+    }
+    return LT_FINISH;
+}
+
+static u32 LoopedTask_ReturnToConditionMenu(s32 state)
+{
+    switch (state)
+    {
+    case 0:
+        ResetBldCnt();
+        StartOptionAnimations_Exit();
+        HideMainOrSubMenuLeftHeader(POKENAV_GFX_SEARCH_MENU, FALSE);
+        return LT_INC_AND_PAUSE;
+    case 1:
+        if (AreMenuOptionSpritesMoving())
+            return LT_PAUSE;
+        if (AreLeftHeaderSpritesMoving())
+            return LT_PAUSE;
+        DrawCurrentMenuOptionLabels();
+        return LT_INC_AND_PAUSE;
+    case 2:
+        StartOptionAnimations_Enter();
+        PrintCurrentOptionDescription();
+        return LT_INC_AND_PAUSE;
+    case 3:
+        if (AreMenuOptionSpritesMoving())
+            return LT_PAUSE;
+        if (IsTaskActive_UpdateBgDotsPalette())
             return LT_PAUSE;
         InitMenuOptionGlow();
         break;
@@ -515,7 +754,18 @@ static u32 LoopedTask_OpenPokenavFeature(s32 state)
         SlideMenuHeaderUp();
         ResetBldCnt();
         StartOptionAnimations_Exit();
-        HideMainOrSubMenuLeftHeader(POKENAV_GFX_MAIN_MENU, FALSE);
+        switch (GetPokenavMenuType())
+        {
+        case POKENAV_MENU_TYPE_CONDITION_SEARCH:
+            HideMainOrSubMenuLeftHeader(POKENAV_GFX_SEARCH_MENU, FALSE);
+            // fallthrough
+        case POKENAV_MENU_TYPE_CONDITION:
+            HideMainOrSubMenuLeftHeader(POKENAV_GFX_CONDITION_MENU, FALSE);
+            break;
+        default:
+            HideMainOrSubMenuLeftHeader(POKENAV_GFX_MAIN_MENU, FALSE);
+            break;
+        }
         PlaySE(SE_SELECT);
         return LT_INC_AND_PAUSE;
     case 2:
@@ -545,12 +795,15 @@ static void LoadPokenavOptionPalettes(void)
 static void FreeAndDestroyMainMenuSprites(void)
 {
     FreeSpriteTilesByTag(GFXTAG_OPTIONS);
+    FreeSpriteTilesByTag(GFXTAG_BLUE_LIGHT);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_DEFAULT);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_BLUE);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_PINK);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_BEIGE);
     FreeSpritePaletteByTag(PALTAG_OPTIONS_RED);
+    FreeSpritePaletteByTag(PALTAG_BLUE_LIGHT);
     DestroyMenuOptionSprites();
+    DestroyRematchBlueLightSprite();
 }
 
 static void CreateMenuOptionSprites(void)
@@ -920,6 +1173,34 @@ static void Task_OptionBlend(u8 taskId)
 #undef tBlendTarget1
 #undef tBlendTarget2
 #undef tBlendCounter
+
+// Blue light that blinks if there are available rematches nearby
+static void CreateMatchCallBlueLightSprite(void)
+{
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    u8 spriteId = CreateSprite(&sMatchCallBlueLightSpriteTemplate, 0x10, 0x60, 4);
+    gfx->blueLightSprite = &gSprites[spriteId];
+    if (AreAnyTrainerRematchesNearby())
+        gfx->blueLightSprite->callback = SpriteCB_BlinkingBlueLight;
+    else
+        gfx->blueLightSprite->invisible = TRUE;
+}
+
+static void DestroyRematchBlueLightSprite(void)
+{
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    DestroySprite(gfx->blueLightSprite);
+}
+
+static void SpriteCB_BlinkingBlueLight(struct Sprite *sprite)
+{
+    sprite->data[0]++;
+    if (sprite->data[0] > 8)
+    {
+        sprite->data[0] = 0;
+        sprite->invisible ^= 1;
+    }
+}
 
 static void AddOptionDescriptionWindow(void)
 {

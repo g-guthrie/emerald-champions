@@ -26,6 +26,7 @@
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
 #include "caps.h"
+#include "contest_util.h"
 #include "mega_stone_rewards.h"
 #include "decompress.h"
 #include "constants/songs.h"
@@ -716,8 +717,10 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     case CARD_TYPE_EMERALD:
         trainerCard->battleTowerWins = 0;
         trainerCard->battleTowerStraightWins = 0;
-        trainerCard->contestsWithFriends = 0;
+        trainerCard->contestsWithFriends = GetCappedGameStat(GAME_STAT_WON_LINK_CONTEST, 999);
         trainerCard->pokeblocksWithFriends = GetCappedGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
+        if (CountPlayerMuseumPaintings() >= CONTEST_CATEGORIES_COUNT)
+            trainerCard->hasAllPaintings = TRUE;
         break;
     case CARD_TYPE_FRLG:
         trainerCard->battleTowerWins = 0;

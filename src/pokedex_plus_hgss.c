@@ -2,6 +2,8 @@
 #include "battle_main.h"
 #include "battle_util.h"
 #include "bg.h"
+#include "contest.h"
+#include "contest_effect.h"
 #include "data.h"
 #include "daycare.h"
 #include "debug.h"
@@ -102,6 +104,8 @@ static const u8 sText_Stats_FLUCTUATING[] = _("FLUCTUATING");
 static const u8 sText_Stats_MEDIUM_SLOW[] = _("MED. SLOW");
 static const u8 sText_Stats_FAST[] = _("FAST");
 static const u8 sText_Stats_SLOW[] = _("SLOW");
+static const u8 sText_Stats_ContestHeart[] = _("H");
+static const u8 sText_Stats_Minus[] = _("-");
 static const u8 sText_Stats_eggGroup[] = _("EGG G1:");
 static const u8 sText_Stats_eggGroup_Groups[] = _("{STR_VAR_1}/{STR_VAR_2}");
 static const u8 sText_Stats_eggGroup_MONSTER[] = _("MONSTER");
@@ -150,6 +154,7 @@ static const u8 sText_FORMS_Buttons_Decapped_PE[] = _("{A_BUTTON}Form Mode  {STA
 static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}FORMs {A_BUTTON}CHECK {START_BUTTON}EVOs");
 static const u8 sText_FORMS_Buttons_Submenu_Decapped_PE[] = _("{DPAD_NONE}Forms {A_BUTTON}Check {START_BUTTON}Evos");
 static const u8 sText_FORMS_NONE[] = _("{STR_VAR_1} has no alternate forms.");
+static const u8 sText_PlusSymbol[] = _("+");
 
 // static .rodata graphics
 
@@ -1686,7 +1691,10 @@ static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
 
     sprite = &gSprites[sPokedexView->typeIconSpriteIds[spriteArrayId]];
     StartSpriteAnim(sprite, typeId);
-    sprite->oam.paletteNum = gTypesInfo[typeId].palette + TYPE_INFO_PALETTE_NUM_OFFSET;
+    if (typeId < NUMBER_OF_MON_TYPES)
+        sprite->oam.paletteNum = gTypesInfo[typeId].palette + TYPE_INFO_PALETTE_NUM_OFFSET;
+    else
+        sprite->oam.paletteNum = gContestCategoryInfo[typeId - NUMBER_OF_MON_TYPES].palette  + TYPE_INFO_PALETTE_NUM_OFFSET;
     sprite->x = x + 16;
     sprite->y = y + 8;
     SetSpriteInvisibility(spriteArrayId, FALSE);
@@ -2280,8 +2288,16 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar3, moves_x, moves_y + 17);
 
     //Draw move type icon
-    SetTypeIconPosAndPal(GetMoveType(move), moves_x + 146, moves_y + 17, 0);
-    SetSpriteInvisibility(1, TRUE);
+    if (gTasks[taskId].data[5] == 0)
+    {
+        SetTypeIconPosAndPal(GetMoveType(move), moves_x + 146, moves_y + 17, 0);
+        SetSpriteInvisibility(1, TRUE);
+    }
+    else
+    {
+        SetTypeIconPosAndPal(NUMBER_OF_MON_TYPES + GetMoveContestCategory(move), moves_x + 146, moves_y + 17, 1);
+        SetSpriteInvisibility(0, TRUE);
+    }
 
     //Egg/TM/Level/Tutor Item Icon
     gTasks[taskId].data[3] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, item);
@@ -2300,8 +2316,16 @@ static void PrintStatsScreen_Moves_Description(u8 taskId)
     enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
 
     //Move description
-    StringCopy(gStringVar4, GetMoveDescription(move));
-    PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
+    if (gTasks[taskId].data[5] == 0)
+    {
+        StringCopy(gStringVar4, GetMoveDescription(move));
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
+    }
+    else
+    {
+        StringCopy(gStringVar4, gContestEffects[GetMoveContestEffect(move)].description);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
+    }
 }
 
 static void PrintStatsScreen_Moves_BottomText(u8 taskId)
@@ -2309,8 +2333,16 @@ static void PrintStatsScreen_Moves_BottomText(u8 taskId)
     u8 moves_x = 8;
     u8 moves_y = 3;
 
-    PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Power,  moves_x, moves_y);
-    PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Accuracy2,  moves_x + 66, moves_y);
+    if (gTasks[taskId].data[5] == 0)
+    {
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Power,  moves_x, moves_y);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Accuracy2,  moves_x + 66, moves_y);
+    }
+    else
+    {
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Appeal,  moves_x, moves_y);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Jam,  moves_x + 66, moves_y);
+    }
 }
 
 static void PrintStatsScreen_Moves_Bottom(u8 taskId)
@@ -2318,26 +2350,56 @@ static void PrintStatsScreen_Moves_Bottom(u8 taskId)
     u8 moves_x = 8;
     u8 moves_y = 3;
 
+    //Contest
+    u8 contest_effectValue;
+    u8 contest_appeal = 0;
+    u8 contest_jam = 0;
+
     enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
     enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
 
-    //Power
-    u32 power = GetMovePower(move);
-    if (power < 2)
-        StringCopy(gStringVar1, gText_ThreeDashes);
-    else
-        ConvertIntToDecimalStringN(gStringVar1, power, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar1, moves_x + 45, moves_y);
-    //Physical/Special/Status Category
-    DestroyCategoryIcon();
-    ShowCategoryIcon(GetMoveCategory(move));
-    //Accuracy
-    u32 accuracy = GetMoveAccuracy(move);
-    if (accuracy == 0)
-        StringCopy(gStringVar1, gText_ThreeDashes);
-    else
-        ConvertIntToDecimalStringN(gStringVar1, accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar1,  moves_x + 114, moves_y);
+    //Power + Accuracy
+    if (gTasks[taskId].data[5] == 0)
+    {
+        //Power
+        u32 power = GetMovePower(move);
+        if (power < 2)
+            StringCopy(gStringVar1, gText_ThreeDashes);
+        else
+            ConvertIntToDecimalStringN(gStringVar1, power, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar1, moves_x + 45, moves_y);
+        //Physical/Special/Status Category
+        DestroyCategoryIcon();
+        ShowCategoryIcon(GetMoveCategory(move));
+        //Accuracy
+        u32 accuracy = GetMoveAccuracy(move);
+        if (accuracy == 0)
+            StringCopy(gStringVar1, gText_ThreeDashes);
+        else
+            ConvertIntToDecimalStringN(gStringVar1, accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar1,  moves_x + 114, moves_y);
+    }
+    else //Appeal + Jam
+    {
+        DestroyCategoryIcon();
+        //Appeal
+        contest_effectValue = gContestEffects[GetMoveContestEffect(move)].appeal;
+        if (contest_effectValue != 0xFF)
+            contest_appeal = contest_effectValue / 10;
+        ConvertIntToDecimalStringN(gStringVar1, contest_appeal, STR_CONV_MODE_RIGHT_ALIGN, 1);
+        StringCopy(gStringVar2, sText_PlusSymbol);
+        StringAppend(gStringVar2, gStringVar1);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar2, moves_x + 45, moves_y);
+
+        //Jam
+        contest_effectValue = gContestEffects[GetMoveContestEffect(move)].jam;
+        if (contest_effectValue != 0xFF)
+            contest_jam = contest_effectValue / 10;
+        ConvertIntToDecimalStringN(gStringVar1, contest_jam, STR_CONV_MODE_RIGHT_ALIGN, 1);
+        StringCopy(gStringVar2, sText_Stats_Minus);
+        StringAppend(gStringVar2, gStringVar1);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gStringVar2,  moves_x + 119, moves_y);
+    }
 }
 
 static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value)

@@ -26,7 +26,6 @@ ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 WORK = ROOT / "work/studio"
 BUILD_STORE = WORK / "builds"
-BOOK = ROOT / "Game Blueprint/Emerald_Champions_Game_Book.txt"
 sys.path.insert(0, str(ROOT / "scripts"))
 from native_tools import build_runner, symbols
 from rom_artifacts import verify_rom_elf_pair
@@ -47,7 +46,7 @@ class Catalogue:
         for g, group in enumerate(groups["group_order"]):
             for n, name in enumerate(groups[group]):
                 m = json.loads((ROOT / "data/maps" / name / "map.json").read_text())
-                if m["region"] == "REGION_HOENN":
+                if m.get("region", "REGION_KANTO" if name.endswith("_Frlg") else "REGION_HOENN") == "REGION_HOENN":
                     self.maps[name] = dict(m, group=g, num=n)
         self.layouts = {x["id"]: x for x in json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]}
         self.map_ids = {(m["group"], m["num"]): name for name, m in self.maps.items()}
@@ -639,13 +638,6 @@ class Studio:
             first, last = body_start+matches[0].start(), body_start+matches[-1].end()
             (WORK / f"dialogue-{time.time_ns()}.json").write_text(json.dumps(dict(path=str(path), before=full, label=label)))
             path.write_text(full[:first] + replacement + full[last:])
-            # Keep one current record per edited label in the canonical book.
-            book = BOOK.read_text()
-            marker = f"STUDIO DIALOGUE {label}: "
-            record = marker + json.dumps(data["text"].strip(), ensure_ascii=False) + f" (source: {path.relative_to(ROOT)})"
-            if marker in book: book = re.sub(r"(?m)^" + re.escape(marker) + r".*$", lambda _: record, book)
-            else: book = book.replace("18. COHESION CHECKS", record + "\n\n18. COHESION CHECKS", 1)
-            BOOK.write_text(book)
             self.building = True
             proc = await asyncio.create_subprocess_exec(sys.executable, "scripts/emerald_champions_teams.py", "--write", cwd=ROOT,
                                                        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)

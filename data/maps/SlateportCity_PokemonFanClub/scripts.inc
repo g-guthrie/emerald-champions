@@ -269,11 +269,11 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill:: @ 820A220
 SlateportCity_PokemonFanClub_EventScript_EndureTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
+	goto_if_set FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB, SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
 	msgbox SlateportCity_PokemonFanClub_Text_GiveTM58, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB
 	msgbox SlateportCity_PokemonFanClub_Text_HaveTM58, MSGBOX_DEFAULT
 	release
 	end
@@ -286,11 +286,9 @@ SlateportCity_PokemonFanClub_EventScript_ReceivedTM58::
 	end
 
 SlateportCity_PokemonFanClub_Text_GiveTM58:
-	.string "Check out my Azumarill! It's pretty\n"
-	.string "sturdy, right? Almost as sturdy as\l"
-	.string "a Roggenrola with Sturdy!\p"
-	.string "Your Pokémon can be sturdy too,\n"
-	.string "if you use this TM!$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 SlateportCity_PokemonFanClub_Text_HaveTM58:
 	.string "Endure allows a Pokémon to withstand\n"

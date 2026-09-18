@@ -83,7 +83,6 @@ SootopolisCity_Gym_1F_Movement_FallThroughIce: @ 8224F42
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_Juan:: @ 8224F44
-	goto_if_set FLAG_DAILY_REMATCH_JUAN, SootopolisCity_Gym_1F_EventScript_AlreadyRematched
 @ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
 @ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
 @ for bespoke campaign fights -- so post-game rematching a leader would start the
@@ -91,7 +90,7 @@ SootopolisCity_Gym_1F_EventScript_Juan:: @ 8224F44
 @ one. The gate below is disabled so leaders fall through to normal post-battle
 @ dialogue. To re-enable once real rematch teams exist, restore this single line.
 @	goto_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_Gym_1F_EventScript_JuanRematch
-	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
+	trainerbattle_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, EmeraldChampions_Text_NeedTwoPokemon, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM03, SootopolisCity_Gym_1F_EventScript_GiveScald2
 	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
@@ -169,8 +168,7 @@ SootopolisCity_Gym_1F_EventScript_JuanRematch::
 SootopolisCity_Gym_1F_EventScript_SetSingles::
 	msgbox SootopolisCity_Gym_1F_Text_JuanAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_Gym_1F_EventScript_JuanSinglesRematch
-	trainerbattle_no_intro TRAINER_JUAN_4, SootopolisCity_Gym_1F_Text_JuanRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_JUAN
 	releaseall
 	end
@@ -178,20 +176,19 @@ SootopolisCity_Gym_1F_EventScript_SetSingles::
 SootopolisCity_Gym_1F_EventScript_SetDoubles::
 	msgbox SootopolisCity_Gym_1F_Text_JuanAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_Gym_1F_EventScript_JuanDoublesRematch
-	trainerbattle_no_intro TRAINER_JUAN_5, SootopolisCity_Gym_1F_Text_JuanRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_JUAN
 	releaseall
 	end
 
 SootopolisCity_Gym_1F_EventScript_JuanSinglesRematch::
-	trainerbattle_no_intro TRAINER_JUAN_2, SootopolisCity_Gym_1F_Text_JuanRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_JUAN
 	releaseall
 	end
 
 SootopolisCity_Gym_1F_EventScript_JuanDoublesRematch::
-	trainerbattle_no_intro TRAINER_JUAN_3, SootopolisCity_Gym_1F_Text_JuanRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_JUAN
 	releaseall
 	end
@@ -302,16 +299,11 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge: @ 8225598
 	.string "from Juan.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis: @ 82255BE
-	.string "Having the Rain Badge shall assure you\n"
-	.string "the full obedience of all your Pokémon\l"
-	.string "to your every command.\p"
-	.string "The Rain Badge also allows the use\n"
-	.string "of the HM move Waterfall to scale\l"
-	.string "walls of cascading water.\p"
-	.string "If you require assistance finding a\n"
-	.string "Pokémon to use Waterfall for you,\l"
-	.string "you may borrow my Kabutops.\p"
-	.string "… … … … … …$"
+	.string "The Rain Badge lets you climb\n"
+	.string "waterfalls with the Waterfall\l"
+	.string "license and a compatible\l"
+	.string "partner.\p"
+	.string "No battle move slot is needed.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredKabutops:
 	.string "Registered Juan's Kabutops\n"
@@ -322,11 +314,9 @@ SootopolisCity_Gym_1F_Text_TakeThis:
 	.string "battle we shared, take this…$"
 
 SootopolisCity_Gym_1F_Text_ExplainScald: @ 82256C1
-	.string "The Technical Machine I handed you\n"
-	.string "contains Scald.\p"
-	.string "In use, it will occasionally burn\n"
-	.string "the target with boiling hot water.\p"
-	.string "… … … … … …$"
+	.string "This is Feraligite. A Feraligatr\n"
+	.string "holding it can Mega Evolve with\l"
+	.string "your Mega Ring.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredJuan: @ 822574D
 	.string "Registered Gym Leader Juan\n"

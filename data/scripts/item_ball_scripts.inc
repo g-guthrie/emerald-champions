@@ -80,7 +80,7 @@ Route110_EventScript_ItemElixir:: @ 8290D8E
 	end
 
 Route111_EventScript_ItemTM37:: @ 8290D9B
-	finditem ITEM_LAPRASITE
+	finditem ITEM_ZYGARDITE
 	end
 
 Route111_EventScript_ItemStarPiece:: @ 8290DA8
@@ -88,7 +88,7 @@ Route111_EventScript_ItemStarPiece:: @ 8290DA8
 	end
 
 Route111_EventScript_ItemTM63RockSlide:: @ 8290DB5
-	finditem ITEM_ABSOLITE
+	finditem ITEM_GARCHOMPITE_Z
 	end
 
 Route111_EventScript_ItemElixir:: @ 8290DC2
@@ -192,7 +192,7 @@ Route119_EventScript_ItemElixir:: @ 8290EFA
 	end
 
 Route119_EventScript_ItemTM84_Poison_Jab:: @ 8290F07
-	finditem ITEM_MEDICHAMITE
+	finditem ITEM_SCRAFTINITE
 	end
 
 Route119_EventScript_ItemRareCandy:: @ 8290F14
@@ -396,11 +396,11 @@ FieryPath_EventScript_ItemCharizarditeX::
 	end
 
 FieryPath_EventScript_ItemTM06:: @ 829119E
-	finditem ITEM_BEEDRILLITE
+	finditem ITEM_SCOVILLAINITE
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemTM23:: @ 82911AB
-	finditem ITEM_SCIZORITE
+	finditem ITEM_ZERAORITE
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemCometShard:: @ 82911B8
@@ -408,7 +408,7 @@ MeteorFalls_1F_1R_EventScript_ItemCometShard:: @ 82911B8
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemTM59DragonPulse:: @ 82911C5
-	finditem ITEM_MANECTITE
+	finditem ITEM_RAICHUNITE_Y
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemPPUP:: @ 82911D2
@@ -452,7 +452,7 @@ AbandonedShip_Rooms2_B1F_EventScript_ItemLevelBall:: @ 8291247
 	end
 
 AbandonedShip_Room_B1F_EventScript_ItemTM13:: @ 8291254
-	finditem ITEM_HOUNDOOMINITE
+	finditem ITEM_MAGEARNITE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_ItemRevive:: @ 8291261
@@ -480,7 +480,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18:: @ 82912A2
 	end
 
 ScorchedSlab_EventScript_ItemTM11:: @ 82912AF
-	finditem ITEM_AMPHAROSITE
+	finditem ITEM_NUGGET
 	end
 
 SafariZone_Northwest_EventScript_ItemTM22:: @ 82912BC
@@ -520,7 +520,7 @@ MtPyre_5F_EventScript_ItemLaxIncense:: @ 8291324
 	end
 
 MtPyre_6F_EventScript_ItemTM30:: @ 8291331
-	finditem ITEM_STEELIXITE
+	finditem ITEM_RARE_CANDY
 	end
 
 MtPyre_Exterior_EventScript_ItemGengarite:: @ 829133E
@@ -528,7 +528,7 @@ MtPyre_Exterior_EventScript_ItemGengarite:: @ 829133E
 	end
 
 MtPyre_Exterior_EventScript_ItemTM48:: @ 829134B
-	finditem ITEM_LUCARIONITE
+	finditem ITEM_LUCARIONITE_Z
 	end
 
 AquaHideout_B1F_EventScript_ItemMasterBall:: @ 8291358
@@ -572,11 +572,11 @@ ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy:: @ 82913CD
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_ItemTM70AuroraVeil::
-	finditem ITEM_SHARPEDONITE
+	finditem ITEM_BIG_PEARL
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemTM07:: @ 82913E7
-	finditem ITEM_PINSIRITE
+	finditem ITEM_FROSLASSITE
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce:: @ 82913F4
@@ -632,7 +632,7 @@ VictoryRoad_1F_EventScript_ItemMetagrossite:: @ 8291490
 	end
 
 VictoryRoad_B1F_EventScript_ItemTM29:: @ 829149D
-	finditem ITEM_GLALITITE
+	finditem ITEM_BIG_NUGGET
 	end
 
 VictoryRoad_B1F_EventScript_ItemFullRestore:: @ 82914AA
@@ -676,11 +676,11 @@ MagmaHideout_4F_EventScript_ItemMaxRevive:: @ 829151F
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemTM35Flamethrower:: @ 829152C
-	finditem ITEM_SABLENITE
+	finditem ITEM_NUGGET
 	end
 
 PetalburgWoods_2_Item_TM80Venoshock::
-	finditem ITEM_BANETTITE
+	finditem ITEM_SCOLIPITE
 	end
 
 PetalburgWoods_2_Item_SunStone::
@@ -688,11 +688,11 @@ PetalburgWoods_2_Item_SunStone::
 	end
 
 PetalburgWoods_3_TM86_GrassKnot::
-	finditem ITEM_KINGLERITE
+	finditem ITEM_NUGGET
 	end
 
 PetalburgWoods_3_TM34_SludgeWave::
-	finditem ITEM_KANGASKHANITE
+	finditem ITEM_VICTREEBELITE
 	end
 
 PetalburgWoods_3_Beedrillite::
@@ -736,7 +736,7 @@ Seaspray_Cave_B1F_ItemKingsRock::
 	end
 
 Granite_Cave_B2F_TM31_Brick_Break::
-	finditem ITEM_AUDINITE
+	finditem ITEM_RARE_CANDY
 	end
 
 Ember_Path_ItemSmack_Down::
@@ -812,11 +812,11 @@ NewMauville_Inside_EventScript_ItemTM91FlashCannon::
 	end
 
 Route119_EventScript_ItemTM62_Acrobatics::
-	finditem ITEM_KINGDRANITE
+	finditem ITEM_GRENINJITE
 	end
 
 MtPyre_Summit_EventScript_ItemTM61_WillOWisp::
-	finditem ITEM_HERACRONITE
+	finditem ITEM_STAR_PIECE
 	end
 
 Route111_RuinsExterior_EventScript_ItemMedichamite::
@@ -848,7 +848,7 @@ ScorchedSlab_EventScript_ItemTyranitarite::
 	end
 
 GraniteCave_B1F_EventScript_ItemTM65ShadowClaw::
-	finditem ITEM_BUTTERFRENITE
+	finditem ITEM_MEGANIUMITE
 	end
 
 Route117_EventScript_Mawilite::
@@ -876,7 +876,7 @@ DewfordMeadow_EventScript_RingTarget::
 	end
 
 DewfordManor_EventScript_TM100Curse::
-	finditem ITEM_MAWILITE
+	finditem ITEM_RARE_CANDY
 	end
 
 DewfordManor_EventScript_Banettite::

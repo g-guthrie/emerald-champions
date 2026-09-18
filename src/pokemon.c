@@ -2,11 +2,14 @@
 #include "move.h"
 #include "champions_circuit.h"
 #include "malloc.h"
+#include "apprentice.h"
 #include "battle.h"
 #include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
+#include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "battle_z_move.h"
@@ -54,6 +57,7 @@
 #include "test_runner.h"
 #include "text.h"
 #include "trainer.h"
+#include "trainer_hill.h"
 #include "util.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
@@ -863,7 +867,7 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
     if (FlagGet(P_FLAG_FORCE_SHINY))
         return TRUE;
 
-    if (P_ONLY_OBTAINABLE_SHINIES && FlagGet(WE_FLAG_NO_CATCHING))
+    if (P_ONLY_OBTAINABLE_SHINIES && (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || (FlagGet(WE_FLAG_NO_CATCHING))))
         return FALSE;
 
     if (P_NO_SHINIES_WITHOUT_POKEBALLS && !HasAtLeastOnePokeBall() && FlagGet(FLAG_SYS_POKEDEX_GET))
@@ -893,11 +897,28 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
 
 void SetBoxMonIVs(struct BoxPokemon *mon, u8 fixedIV)
 {
-    // Ordinary acquisitions stay perfect without IV grinding. Explicit values
-    // support deliberate preparation and authored zero-IV team strategies.
-    u32 value = fixedIV <= MAX_PER_STAT_IVS ? fixedIV : MAX_PER_STAT_IVS;
-    u32 ivs = value | (value << 5) | (value << 10) | (value << 15)
-             | (value << 20) | (value << 25);
+    u32 ivs;
+
+    if (fixedIV <= MAX_PER_STAT_IVS)
+    {
+        u32 value = fixedIV;
+        ivs = value | (value << 5) | (value << 10) | (value << 15)
+            | (value << 20) | (value << 25);
+    }
+    else
+    {
+        // Inclement Emerald: natural acquisitions have random IVs with three
+        // distinct perfect stats. Explicit trainer IVs remain untouched.
+        u8 stats[NUM_STATS] = {0, 1, 2, 3, 4, 5};
+        ivs = Random32() & 0x3FFFFFFF;
+        for (u32 i = 0; i < 3; i++)
+        {
+            u32 chosen = i + Random() % (NUM_STATS - i);
+            u8 stat = stats[chosen];
+            stats[chosen] = stats[i];
+            ivs |= (u32)MAX_PER_STAT_IVS << (stat * 5);
+        }
+    }
     SetBoxMonData(mon, MON_DATA_IVS, &ivs);
 }
 
@@ -1143,6 +1164,35 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     value = src->spDefenseIV;
     SetMonData(mon, MON_DATA_SPDEF_IV, &value);
     MonRestorePP(mon);
+    CalculateMonStats(mon);
+}
+
+void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId)
+{
+    s32 i;
+    u16 evAmount;
+    u8 language;
+    u32 otId = gApprentices[src->id].otId;
+    u32 personality = ((gApprentices[src->id].otId >> 8) | ((gApprentices[src->id].otId & 0xFF) << 8))
+                    + src->party[monId].species + src->number;
+
+    CreateMonWithIVs(mon,
+              src->party[monId].species,
+              GetFrontierEnemyMonLevel(src->lvlMode - 1),
+              personality,
+              OTID_STRUCT_PRESET(otId),
+              MAX_PER_STAT_IVS);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &src->party[monId].item);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        SetMonMoveSlot(mon, src->party[monId].moves[i], i);
+
+    evAmount = MAX_TOTAL_EVS / NUM_STATS;
+    for (i = 0; i < NUM_STATS; i++)
+        SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
+
+    language = src->language;
+    SetMonData(mon, MON_DATA_LANGUAGE, &language);
+    SetMonData(mon, MON_DATA_OT_NAME, GetApprenticeNameInLanguage(src->id, language));
     CalculateMonStats(mon);
 }
 
@@ -2927,6 +2977,7 @@ static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
 
     memcpy(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon));
     gPartiesCount[B_TRAINER_PLAYER] = i + 1;
+    EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
     return MON_GIVEN_TO_PARTY;
 }
 
@@ -2955,6 +3006,7 @@ u8 CopyMonToPC(struct Pokemon *mon)
             {
                 MonRestorePP(mon);
                 memcpy(checkingMon, &mon->box, sizeof(mon->box));
+                EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
                 if (GetPCBoxToSendMon() != boxNo)
@@ -4371,11 +4423,26 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
     return TRUE;
 }
 
+bool32 RaiseMonToLevelerTarget(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 target = min(GetPreviousLevelCap(), GetPlayerLevelCapForSpecies(species));
+    u32 experience;
+
+    if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG)
+     || GetMonData(mon, MON_DATA_LEVEL) >= target)
+        return FALSE;
+    experience = gExperienceTables[gSpeciesInfo[species].growthRate][target];
+    SetMonData(mon, MON_DATA_EXP, &experience);
+    CalculateMonStats(mon);
+    return TRUE;
+}
+
 bool32 IsMonEligibleForLeveler(struct Pokemon *mon)
 {
     return GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE
         && !GetMonData(mon, MON_DATA_IS_EGG)
-        && (GetMonData(mon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES))
+        && (GetMonData(mon, MON_DATA_LEVEL) < min(GetPreviousLevelCap(), GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES)))
             || GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, NULL, CHECK_EVO) != SPECIES_NONE);
 }
 
@@ -4768,7 +4835,12 @@ s32 GetBattlerMultiplayerId(u16 id)
 
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 {
-    return GetTrainerStructFromId(trainerOpponentId)->encounterMusic;
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+        return GetTrainerEncounterMusicIdInBattlePyramid(trainerOpponentId);
+    else if (InTrainerHillChallenge())
+        return GetTrainerEncounterMusicIdInTrainerHill(trainerOpponentId);
+    else
+        return GetTrainerStructFromId(trainerOpponentId)->encounterMusic;
 }
 
 u16 ModifyStatByNature(u8 nature, u16 stat, enum Stat statIndex)
@@ -5628,6 +5700,8 @@ bool8 HasTwoFramesAnimation(enum Species species)
 bool8 ShouldSkipFriendshipChange(void)
 {
     if (gMain.inBattle && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER))
+        return TRUE;
+    if (!gMain.inBattle && (InBattlePike() || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE))
         return TRUE;
     return FALSE;
 }
@@ -6640,6 +6714,7 @@ u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
     }
     if (sentToPc != MON_CANT_GIVE)
     {
+        EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
         HandleSetPokedexFlagFromMon(mon, FLAG_SET_SEEN);
         HandleSetPokedexFlagFromMon(mon, FLAG_SET_CAUGHT);
     }

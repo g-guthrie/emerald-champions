@@ -63,13 +63,6 @@ BerryBlender_Text_DontHavePokeblockCase: @ 8293157
 	.string "You should get a {POKEBLOCK} CASE and then\n"
 	.string "come see me.$"
 
-BerryBlender_Text_BlenderWontSpinUp:
-	.string "…Hm?\p"
-	.string "The BERRY BLENDER just whirrs and\n"
-	.string "won't spin up.\p"
-	.string "It looks like nobody is going to be\n"
-	.string "blending anything today.$"
-
 BerryBlender_Text_LetsGetBlendingAlready: @ 82931AA
 	.string "Let's get blending already!$"
 
@@ -316,13 +309,11 @@ BerryBlender_EventScript_TryUseBerryBlender1: @ 8293CEE
 	goto BerryBlender_EventScript_UseBerryBlender1
 	end
 
-@ Emerald Champions: src/berry_blender.c is gone from this tree, so the blending
-@ minigame itself cannot run. Everything leading up to it -- the invitations, the
-@ spare Berry, the Pokeblock Case checks and the explanations -- is untouched;
-@ only the minigame call is replaced. No fadescreen is started here any more,
-@ because nothing would be left to fade the screen back in.
 BerryBlender_EventScript_DoBerryBlending: @ 8293D2C
-	msgbox BerryBlender_Text_BlenderWontSpinUp, MSGBOX_DEFAULT
+	copyvar VAR_0x8004, NUM_OPPONENTS
+	fadescreen FADE_TO_BLACK
+	special DoBerryBlending
+	waitstate
 	releaseall
 	end
 
@@ -576,7 +567,7 @@ BerryBlender_EventScript_ExpertMGiveBerry: @ 8294032
 	end
 
 BerryBlender_Movement_BlendLeaderWalkInPlace: @ 8294053
-	walk_in_place_fast_right
+	walk_in_place_faster_right
 	step_end
 
 BerryBlender_EventScript_BerryBlenderLink:: @ 8294055
@@ -646,11 +637,14 @@ BerryBlender_EventScript_FourPlayerLink: @ 8294139
 	end
 
 BerryBlender_EventScript_DoLinkBerryBlending: @ 8294147
+	setvar VAR_0x8004, 0  @ number of opponents, 0 indicates Link
+	fadescreen FADE_TO_BLACK
 	removeobject 240 @ Unclear where these local IDs come from,
 	removeobject 239 @ but presumably they'd be the 4 link players
 	removeobject 238 
 	removeobject 237
-	msgbox BerryBlender_Text_BlenderWontSpinUp, MSGBOX_DEFAULT
+	special DoBerryBlending
+	waitstate
 	releaseall
 	end
 

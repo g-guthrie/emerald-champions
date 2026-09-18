@@ -34,6 +34,7 @@
 #include "load_save.h"
 #include "mail.h"
 #include "main.h"
+#include "match_call.h"
 #include "menu.h"
 #include "move.h"
 #include "metatile_behavior.h"
@@ -65,6 +66,7 @@
 #include "wallclock.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_pyramid.h"
 #include "constants/battle_tower.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
@@ -94,119 +96,6 @@
 #define PALTAG_MULTICHOICE_SCROLL_ARROWS 100
 
 static const u8 sText_Back[] = _("Back");
-static const u8 sText_Reset[] = _("Reset All");
-static const u8 sText_StatHp[] = _("HP");
-static const u8 sText_StatAttack[] = _("Attack");
-static const u8 sText_StatDefense[] = _("Defense");
-static const u8 sText_StatSpAttack[] = _("Sp. Atk");
-static const u8 sText_StatSpDefense[] = _("Sp. Def");
-static const u8 sText_StatSpeed[] = _("Speed");
-static const u8 sText_Minus32[] = _("-32");
-static const u8 sText_Minus16[] = _("-16");
-static const u8 sText_Minus4[] = _("-4");
-static const u8 sText_Minus1[] = _("-1");
-static const u8 sText_Plus1[] = _("+1");
-static const u8 sText_Plus4[] = _("+4");
-static const u8 sText_Plus16[] = _("+16");
-static const u8 sText_Plus32[] = _("+32");
-static const u8 sText_SetZero[] = _("Set to 0");
-static const u8 sText_SetMaximum[] = _("Set Maximum");
-static const u8 sText_NoPokemonSelected[] = _("No Pokémon was selected.");
-static const u8 sText_StatSummaryPrefix[] = _("EVs used: ");
-static const u8 sText_StatSummarySuffix[] = _("/510\nEVs {RIGHT_ARROW} stat after Nature");
-static const u8 sText_StatCannotAdjust[] = _("That stat cannot be adjusted.");
-static const u8 sText_StatMenuDivider[] = _("  ");
-static const u8 sText_StatMenuMaximum[] = _("/252");
-static const u8 sText_IvMenuMaximum[] = _("/31");
-static const u8 sText_IvSummary[] = _("IVs: 0-31 each\nIVs {RIGHT_ARROW} stat after Nature");
-static const u8 sText_IvsPrefix[] = _("\nIVs: ");
-static const u8 sText_StatArrow[] = _(" {RIGHT_ARROW} ");
-static const u8 sText_StatColon[] = _(": ");
-static const u8 sText_EvsPrefix[] = _("\nEVs: ");
-static const u8 sText_EvsLeft[] = _("/252  Left: ");
-static const u8 sText_StatFixedHp[] = _(" (fixed HP)");
-
-static const u8 *const sEmeraldChampionsTrainingStatNames[] =
-{
-    sText_StatHp,
-    sText_StatAttack,
-    sText_StatDefense,
-    sText_StatSpAttack,
-    sText_StatSpDefense,
-    sText_StatSpeed,
-    sText_Reset,
-    sText_Back,
-};
-
-static const u8 *const sEmeraldChampionsStatAdjustNames[] =
-{
-    sText_Minus32,
-    sText_Minus16,
-    sText_Minus4,
-    sText_Plus4,
-    sText_Plus16,
-    sText_Plus32,
-    sText_SetZero,
-    sText_SetMaximum,
-    sText_Back,
-};
-
-static const u8 *const sEmeraldChampionsIvAdjustNames[] =
-{
-    sText_Minus16, sText_Minus4, sText_Minus1,
-    sText_Plus1, sText_Plus4, sText_Plus16,
-    sText_SetZero, sText_SetMaximum, sText_Back,
-};
-
-// Script-local editor mode; every entry point selects it explicitly.
-static bool32 IsEditingEmeraldChampionsIvs(void)
-{
-    return gSpecialVar_0x8002 == EC_TRAINING_IVS;
-}
-
-static EWRAM_DATA u8 sEmeraldChampionsTrainingMenuText[NUM_STATS][32] = {0};
-
-// Nature rows are built from gNaturesInfo so the list can never disagree with
-// the engine's own table: "Adamant  +Atk -SpA", "Hardy  no change".
-static const u8 sText_NatureNoChange[] = _("no change");
-static const u8 sText_NaturePlus[] = _("+");
-static const u8 sText_NatureMinus[] = _(" -");
-static const u8 sText_StatAbbrAtk[] = _("Atk");
-static const u8 sText_StatAbbrDef[] = _("Def");
-static const u8 sText_StatAbbrSpe[] = _("Spe");
-static const u8 sText_StatAbbrSpA[] = _("SpA");
-static const u8 sText_StatAbbrSpD[] = _("SpD");
-static const u8 *const sNatureStatAbbreviations[NUM_STATS] =
-{
-    [STAT_ATK] = sText_StatAbbrAtk,
-    [STAT_DEF] = sText_StatAbbrDef,
-    [STAT_SPEED] = sText_StatAbbrSpe,
-    [STAT_SPATK] = sText_StatAbbrSpA,
-    [STAT_SPDEF] = sText_StatAbbrSpD,
-};
-static EWRAM_DATA u8 sEmeraldChampionsNatureMenuText[NUM_NATURES][24] = {0};
-
-static const u8 *BuildEmeraldChampionsNatureMenuText(u32 nature)
-{
-    const struct NatureInfo *info = &gNaturesInfo[nature];
-    u8 *text = sEmeraldChampionsNatureMenuText[nature];
-
-    StringCopy(text, info->name);
-    StringAppend(text, sText_StatMenuDivider);
-    if (info->statUp == info->statDown)
-    {
-        StringAppend(text, sText_NatureNoChange);
-    }
-    else
-    {
-        StringAppend(text, sText_NaturePlus);
-        StringAppend(text, sNatureStatAbbreviations[info->statUp]);
-        StringAppend(text, sText_NatureMinus);
-        StringAppend(text, sNatureStatAbbreviations[info->statDown]);
-    }
-    return text;
-}
-
 #define ELEVATOR_WINDOW_WIDTH  3
 #define ELEVATOR_WINDOW_HEIGHT 3
 #define ELEVATOR_LIGHT_STAGES  3
@@ -440,6 +329,13 @@ static const u16 sEmeraldChampionsSpeciesItems[] =
     ITEM_DRAGON_MEMORY,
     ITEM_DARK_MEMORY,
     ITEM_FAIRY_MEMORY,
+    ITEM_ADAMANT_CRYSTAL,
+    ITEM_LUSTROUS_GLOBE,
+    ITEM_GRISEOUS_CORE,
+    ITEM_DOUSE_DRIVE,
+    ITEM_SHOCK_DRIVE,
+    ITEM_BURN_DRIVE,
+    ITEM_CHILL_DRIVE,
     ITEM_NONE,
 };
 
@@ -535,7 +431,7 @@ static const u16 sEmeraldChampionsEvolutionItems[] =
     ITEM_NONE,
 };
 
-COMMON_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
+EWRAM_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
 EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
 
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
@@ -560,13 +456,10 @@ static u8 TryGiveEmeraldChampionsPreparedPokemon(enum Species species, u8 level)
     if (species <= SPECIES_NONE
      || species >= NUM_SPECIES
      || level == 0
-     || level > MAX_LEVEL
-     || GetEmeraldChampionsRawBattleSetCount(species) == 0)
+     || level > MAX_LEVEL)
         return EC_GAME_CORNER_PRIZE_SET_FAILED;
 
     CreateRandomMon(&mon, species, level);
-    if (ApplyEmeraldChampionsRandomNonMegaSet(&mon) != EC_BATTLE_SET_SUCCESS)
-        return EC_GAME_CORNER_PRIZE_SET_FAILED;
 
     for (emptyPartySlot = 0; emptyPartySlot < PARTY_SIZE; emptyPartySlot++)
     {
@@ -702,7 +595,7 @@ bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item)
 
 // Called the first time the player actually holds one. The world teaches you
 // an item exists; the vendor then keeps you supplied with as many as a team
-// needs. Wild Pokemon carry nothing, so a catch can never unlock anything.
+// needs. Successful captures, gifts and trades also record held-item acquisition.
 void EmeraldChampions_UnlockBattleItem(enum Item item)
 {
     s32 index = EmeraldChampionsBattleItemIndex(item);
@@ -711,7 +604,24 @@ void EmeraldChampions_UnlockBattleItem(enum Item item)
         gSaveBlock1Ptr->battleItemsUnlocked[index / 8] |= 1u << (index % 8);
 }
 
-static u16 sEmeraldChampionsUnlockedStock[EC_BATTLE_ITEM_MAX_CATEGORY + 1];
+// Acquisition bits also preserve partial starter-kit delivery across Bag-full
+// retries. An already acquired item never needs another free opening copy.
+void GiveEmeraldChampionsStarterBattleItems(void)
+{
+    static const enum Item items[] = {
+        ITEM_CHOICE_BAND, ITEM_CHOICE_SPECS, ITEM_CHOICE_SCARF,
+        ITEM_FOCUS_SASH, ITEM_EVIOLITE,
+    };
+
+    gSpecialVar_Result = FALSE;
+    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
+        if (!IsEmeraldChampionsBattleItemUnlocked(items[i]) && !AddBagItem(items[i], 1))
+            return;
+    FlagSet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS);
+    gSpecialVar_Result = TRUE;
+}
+
+static EWRAM_DATA u16 sEmeraldChampionsUnlockedStock[EC_BATTLE_ITEM_MAX_CATEGORY + 1];
 
 void OpenEmeraldChampionsBattleItemMart(void)
 {
@@ -767,310 +677,36 @@ void TakeEmeraldChampionsHandoffItem(void)
     }
 }
 
+static enum Species GetFormEquipmentSpecies(enum Item item)
+{
+    switch (item)
+    {
+    case ITEM_ADAMANT_CRYSTAL: return SPECIES_DIALGA;
+    case ITEM_LUSTROUS_GLOBE: return SPECIES_PALKIA;
+    case ITEM_GRISEOUS_CORE: return SPECIES_GIRATINA;
+    case ITEM_DOUSE_DRIVE: return SPECIES_GENESECT;
+    case ITEM_SHOCK_DRIVE: return SPECIES_GENESECT;
+    case ITEM_BURN_DRIVE: return SPECIES_GENESECT;
+    case ITEM_CHILL_DRIVE: return SPECIES_GENESECT;
+    default: return SPECIES_NONE;
+    }
+}
+
 void OpenEmeraldChampionsEvolutionItemArchive(void)
 {
-    CreateFreePokemartMenu(sEmeraldChampionsEvolutionItems);
+    static EWRAM_DATA u16 stock[ARRAY_COUNT(sEmeraldChampionsEvolutionItems)] = {0};
+    u32 count = 0;
+    for (u32 i = 0; sEmeraldChampionsEvolutionItems[i] != ITEM_NONE; i++)
+    {
+        enum Item item = sEmeraldChampionsEvolutionItems[i];
+        enum Species species = GetFormEquipmentSpecies(item);
+        if (species == SPECIES_NONE || IsEmeraldChampionsBattleItemUnlocked(item)
+            || GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+            stock[count++] = item;
+    }
+    stock[count] = ITEM_NONE;
+    CreatePokemartMenu(stock);
     ScriptContext_Stop();
-}
-
-void ApplySelectedMonEmeraldChampionsBattleSet(void)
-{
-    gSpecialVar_Result = EC_BATTLE_SET_FAILED;
-    if (gSpecialVar_0x8004 < gPartiesCount[B_TRAINER_PLAYER])
-        gSpecialVar_Result = ApplyEmeraldChampionsBattleSetChoiceForFormat(
-            &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],
-            gSpecialVar_0x8005,
-            gSpecialVar_0x8007
-        );
-}
-
-void GetSelectedMonEmeraldChampionsBattleSetCount(void)
-{
-    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
-        gSpecialVar_Result = 0;
-    else
-        gSpecialVar_Result = GetEmeraldChampionsBattleSetCountForFormat(
-            &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A],
-            gSpecialVar_0x8007
-        );
-}
-
-void BufferSelectedMonEmeraldChampionsBattleSetName(void)
-{
-    gSpecialVar_Result = FALSE;
-    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
-    {
-        StringCopy(gStringVar2, gText_Exit);
-        return;
-    }
-
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    StringCopy(
-        gStringVar2,
-        GetEmeraldChampionsBattleSetNameForFormat(mon, gSpecialVar_0x8005, gSpecialVar_0x8007)
-    );
-    CopyItemName(
-        GetEmeraldChampionsBattleSetItemForFormat(mon, gSpecialVar_0x8005, gSpecialVar_0x8007),
-        gStringVar3
-    );
-    enum Item requiredItem = GetEmeraldChampionsBattleSetRequiredItemForFormat(
-        mon, gSpecialVar_0x8005, gSpecialVar_0x8007
-    );
-    if (requiredItem == ITEM_NONE)
-        gSpecialVar_Result = 0;
-    else if (GetMonData(mon, MON_DATA_HELD_ITEM) == requiredItem)
-        gSpecialVar_Result = 2;
-    else
-        gSpecialVar_Result = 1;
-}
-
-static const u8 sText_BattleSetPreviewNewline[] = _("\n");
-static const u8 sText_BattleSetPreviewScroll[] = _("\l");
-static const u8 sText_BattleSetPreviewPage[] = _("\p");
-static const u8 sText_BattleSetPreviewEmpty[] = _("--");
-static const u8 sText_BattleSetPreviewAbility[] = _("Ability: ");
-static const u8 sText_BattleSetPreviewNature[] = _("Nature: ");
-static const u8 sText_BattleSetPreviewItem[] = _("Item: ");
-static const u8 sText_BattleSetPreviewMissing[] = _("I don't have that set anymore.");
-
-// Shown between choosing a set from the style list and the confirmation
-// prompt, so the player can read what the set actually does first. Page 1 is
-// the set name and its first two moves, page 2 the other two, page 3 the
-// Ability, nature and held item.
-// Mirrors the party menu's Change Ability flow: nickname in STR_VAR_1, the
-// value being replaced in STR_VAR_2, so the nature service reads like the
-// Ability service the player already knows.
-void BufferSelectedMonNature(void)
-{
-    struct Pokemon *mon;
-
-    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
-        return;
-
-    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    GetMonNickname(mon, gStringVar1);
-    gSpecialVar_0x8005 = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
-    StringCopy(gStringVar2, gNaturesInfo[gSpecialVar_0x8005].name);
-}
-
-void BufferSelectedMonEmeraldChampionsBattleSetPreview(void)
-{
-    struct Pokemon *mon;
-    const struct EmeraldChampionsBattleSet *preset;
-    enum Item item;
-    u8 *end;
-
-    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
-    {
-        StringCopy(gStringVar4, sText_BattleSetPreviewMissing);
-        return;
-    }
-
-    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    preset = GetEmeraldChampionsBattleSetPresetForFormat(mon, gSpecialVar_0x8005, gSpecialVar_0x8007);
-    if (preset == NULL)
-    {
-        StringCopy(gStringVar4, sText_BattleSetPreviewMissing);
-        return;
-    }
-
-    end = StringCopy(
-        gStringVar4,
-        GetEmeraldChampionsBattleSetNameForFormat(mon, gSpecialVar_0x8005, gSpecialVar_0x8007)
-    );
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        const u8 *separator;
-
-        if (i == 1)
-            separator = sText_BattleSetPreviewScroll;
-        else if (i == 2)
-            separator = sText_BattleSetPreviewPage;
-        else
-            separator = sText_BattleSetPreviewNewline;
-
-        end = StringAppend(end, separator);
-        end = StringAppend(end, preset->moves[i] != MOVE_NONE
-                              ? GetMoveName(preset->moves[i])
-                              : sText_BattleSetPreviewEmpty);
-    }
-
-    end = StringAppend(end, sText_BattleSetPreviewPage);
-    end = StringAppend(end, sText_BattleSetPreviewAbility);
-    end = StringAppend(end, gAbilitiesInfo[preset->ability].name);
-    end = StringAppend(end, sText_BattleSetPreviewNewline);
-    end = StringAppend(end, sText_BattleSetPreviewNature);
-    end = StringAppend(end, gNaturesInfo[preset->nature].name);
-    end = StringAppend(end, sText_BattleSetPreviewScroll);
-    end = StringAppend(end, sText_BattleSetPreviewItem);
-
-    item = preset->requiredItem != ITEM_NONE ? preset->requiredItem : preset->item;
-    StringAppend(end, item != ITEM_NONE ? GetItemName(item) : sText_BattleSetPreviewEmpty);
-}
-
-void BufferSelectedMonCurrentEmeraldChampionsBattleSet(void)
-{
-    gSpecialVar_Result = FALSE;
-    gSpecialVar_0x8005 = 0;
-    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
-        return;
-
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    s16 choice = GetEmeraldChampionsCurrentBattleSetChoiceForFormat(mon, gSpecialVar_0x8007);
-
-    GetMonNickname(mon, gStringVar1);
-    if (choice < 0)
-        return;
-
-    gSpecialVar_0x8005 = choice;
-    StringCopy(gStringVar2, GetEmeraldChampionsBattleSetNameForFormat(mon, choice, gSpecialVar_0x8007));
-    gSpecialVar_Result = TRUE;
-}
-
-
-
-static void AppendEvValue(u8 *text, u32 value)
-{
-    u8 number[4];
-
-    ConvertIntToDecimalStringN(number, value, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringAppend(text, number);
-}
-
-static void AppendStatValue(u8 *text, u32 value)
-{
-    u8 number[6];
-
-    ConvertIntToDecimalStringN(number, value, STR_CONV_MODE_LEFT_ALIGN, 5);
-    StringAppend(text, number);
-}
-
-// "HP  252/252 {RIGHT_ARROW} 80": show the actual native stat beside its EVs.
-static const u8 *BuildEmeraldChampionsTrainingMenuText(u32 stat)
-{
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    u8 *text = sEmeraldChampionsTrainingMenuText[stat];
-
-    StringCopy(text, sEmeraldChampionsTrainingStatNames[stat]);
-    StringAppend(text, sText_StatMenuDivider);
-    AppendEvValue(text, GetMonData(mon, IsEditingEmeraldChampionsIvs() ? EC_IV_DATA(stat) : EC_EV_DATA(stat)));
-    StringAppend(text, IsEditingEmeraldChampionsIvs() ? sText_IvMenuMaximum : sText_StatMenuMaximum);
-    StringAppend(text, sText_StatArrow);
-    AppendStatValue(text, GetMonData(mon, EC_STAT_VALUE_DATA(stat)));
-    return text;
-}
-
-void BufferSelectedMonEmeraldChampionsTrainingSummary(void)
-{
-    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
-    {
-        StringCopy(gStringVar4, sText_NoPokemonSelected);
-        return;
-    }
-
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    if (IsEditingEmeraldChampionsIvs())
-    {
-        StringCopy(gStringVar4, sText_IvSummary);
-        return;
-    }
-    StringCopy(gStringVar4, sText_StatSummaryPrefix);
-    AppendEvValue(gStringVar4, GetMonEVCount(mon));
-    StringAppend(gStringVar4, sText_StatSummarySuffix);
-}
-
-// Show the native level-scaled stat after Nature beside the EV allocation.
-void BufferSelectedMonEmeraldChampionsTrainingDetail(void)
-{
-    struct Pokemon *mon;
-    u32 stat;
-    u32 total;
-
-    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER]
-     || gSpecialVar_0x8005 >= NUM_STATS)
-    {
-        StringCopy(gStringVar4, sText_StatCannotAdjust);
-        return;
-    }
-
-    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    stat = gSpecialVar_0x8005;
-    total = GetMonEVCount(mon);
-    StringCopy(gStringVar4, sEmeraldChampionsTrainingStatNames[stat]);
-    StringAppend(gStringVar4, sText_StatColon);
-    AppendStatValue(gStringVar4, GetMonData(mon, EC_STAT_VALUE_DATA(stat)));
-    if (stat == 0 && HasShedinjaHPHandling(GetMonData(mon, MON_DATA_SPECIES)))
-        StringAppend(gStringVar4, sText_StatFixedHp);
-    if (IsEditingEmeraldChampionsIvs())
-    {
-        StringAppend(gStringVar4, sText_IvsPrefix);
-        AppendEvValue(gStringVar4, GetMonData(mon, EC_IV_DATA(stat)));
-        StringAppend(gStringVar4, sText_IvMenuMaximum);
-    }
-    else
-    {
-        StringAppend(gStringVar4, sText_EvsPrefix);
-        AppendEvValue(gStringVar4, GetMonData(mon, EC_EV_DATA(stat)));
-        StringAppend(gStringVar4, sText_EvsLeft);
-        AppendEvValue(gStringVar4, MAX_TOTAL_EVS - min(total, MAX_TOTAL_EVS));
-    }
-}
-
-void AdjustSelectedMonEmeraldChampionsTraining(void)
-{
-    static const s8 deltas[][6] = {{-32, -16, -4, 4, 16, 32}, {-16, -4, -1, 1, 4, 16}};
-    bool32 ivs = IsEditingEmeraldChampionsIvs();
-    u32 maximum = ivs ? MAX_PER_STAT_IVS : MAX_PER_STAT_EVS;
-    struct Pokemon *mon;
-    s32 current;
-    s32 total;
-    s32 target;
-
-    gSpecialVar_Result = FALSE;
-    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER]
-     || gSpecialVar_0x8005 >= NUM_STATS
-     || gSpecialVar_0x8006 >= ARRAY_COUNT(sEmeraldChampionsStatAdjustNames) - 1)
-        return;
-
-    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    current = GetMonData(mon, ivs ? EC_IV_DATA(gSpecialVar_0x8005) : EC_EV_DATA(gSpecialVar_0x8005));
-    total = GetMonEVCount(mon);
-    if (gSpecialVar_0x8006 < ARRAY_COUNT(deltas[0]))
-        target = current + deltas[ivs][gSpecialVar_0x8006];
-    else if (gSpecialVar_0x8006 == 6)
-        target = 0;
-    else
-        target = maximum;
-
-    // Never below zero or above the per-stat cap, and an increase can only
-    // spend what is left of the budget.
-    target = min(max(target, 0), maximum);
-    if (!ivs && target > current)
-        target = min(target, current + max(MAX_TOTAL_EVS - total, 0));
-    if (target == current)
-        return;
-    u8 value = target;
-    SetMonData(mon, ivs ? EC_IV_DATA(gSpecialVar_0x8005) : EC_EV_DATA(gSpecialVar_0x8005), &value);
-    CalculateMonStats(mon);
-    gSpecialVar_Result = TRUE;
-}
-
-void ResetSelectedMonEmeraldChampionsTraining(void)
-{
-    bool32 ivs = IsEditingEmeraldChampionsIvs();
-    u8 value = ivs ? MAX_PER_STAT_IVS : 0;
-
-    gSpecialVar_Result = FALSE;
-    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
-        return;
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        SetMonData(
-            &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A],
-            ivs ? EC_IV_DATA(stat) : EC_EV_DATA(stat),
-            &value
-        );
-    CalculateMonStats(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]);
-    gSpecialVar_Result = TRUE;
 }
 
 void TryLoseFansFromPlayTime(void);
@@ -1111,6 +747,7 @@ static void ChangeDeoxysRockLevel(u8);
 static void WaitForDeoxysRockMovement(u8);
 static void Task_LinkRetireStatusWithBattleTowerPartner(u8);
 static void Task_LoopWingFlapSE(u8);
+static void Task_CloseBattlePikeCurtain(u8);
 static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
@@ -2346,6 +1983,11 @@ u16 GetBattleTowerSinglesStreak(void)
     return GetGameStat(GAME_STAT_BATTLE_TOWER_SINGLES_STREAK);
 }
 
+void BufferEReaderTrainerName(void)
+{
+    GetEreaderTrainerName(gStringVar1);
+}
+
 u16 GetSlotMachineId(void)
 {
     static const u8 sSlotMachineRandomSeeds[SLOT_MACHINE_COUNT] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
@@ -3018,6 +2660,14 @@ bool8 UsedPokemonCenterWarp(void)
     return FALSE;
 }
 
+bool32 PlayerNotAtTrainerHillEntrance(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_HILL_ENTRANCE))
+        return FALSE;
+
+    return TRUE;
+}
+
 void UpdateFrontierManiac(u16 daysSince)
 {
     u16 *var = GetVarPointer(VAR_FRONTIER_MANIAC_FACILITY);
@@ -3362,24 +3012,6 @@ void ShowScrollableMultichoice(void)
         task->tScrollOffset = sElevatorScroll;
         task->tSelectedRow = sElevatorCursorPos;
         break;
-    case SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET:
-        if (gSpecialVar_0x800A < gPartiesCount[B_TRAINER_PLAYER])
-            task->tNumItems = GetEmeraldChampionsBattleSetCountForFormat(
-                &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A],
-                gSpecialVar_0x8007
-            ) + 1;
-        else
-            task->tNumItems = 1;
-        task->tMaxItemsOnScreen = min(task->tNumItems, 4);
-        task->tLeft = 10;
-        task->tTop = 1;
-        task->tWidth = 20;
-        task->tHeight = task->tMaxItemsOnScreen * 2;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        task->tScrollOffset = min(gSpecialVar_0x8005, task->tNumItems - task->tMaxItemsOnScreen);
-        task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;
-        break;
     case SCROLL_MULTI_STARTER_REGIONS:
         task->tMaxItemsOnScreen = 5;
         task->tNumItems = 9;
@@ -3390,48 +3022,6 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         task->tScrollOffset = min(gSpecialVar_0x8005, task->tNumItems - task->tMaxItemsOnScreen);
-        task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;
-        break;
-    case SCROLL_MULTI_EMERALD_CHAMPIONS_EVS:
-        task->tMaxItemsOnScreen = 4;
-        task->tNumItems = ARRAY_COUNT(sEmeraldChampionsTrainingStatNames);
-        // Rows include three-digit EVs and the resulting stat. The actual
-        // text width is measured below and the left edge adjusted to fit.
-        task->tLeft = 14;
-        task->tTop = 1;
-        task->tWidth = 15;
-        task->tHeight = task->tMaxItemsOnScreen * 2;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        task->tScrollOffset = min(gSpecialVar_0x8008, task->tNumItems - task->tMaxItemsOnScreen);
-        task->tSelectedRow = gSpecialVar_0x8008 - task->tScrollOffset;
-        break;
-    case SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST:
-        task->tMaxItemsOnScreen = 4;
-        task->tNumItems = ARRAY_COUNT(sEmeraldChampionsStatAdjustNames);
-        task->tLeft = 18;
-        task->tTop = 1;
-        task->tWidth = 11;
-        task->tHeight = task->tMaxItemsOnScreen * 2;
-        // The list stays open while the script applies each step and rewrites
-        // the running total, so tuning a stat never flickers. Only Back (the
-        // last row) or B closes it.
-        task->tKeepOpenAfterSelect = TRUE;
-        task->tTaskId = taskId;
-        task->tScrollOffset = min(gSpecialVar_0x8006, task->tNumItems - task->tMaxItemsOnScreen);
-        task->tSelectedRow = gSpecialVar_0x8006 - task->tScrollOffset;
-        break;
-    case SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES:
-        // All 25 Natures, five rows, opened on the Pokémon's current Nature.
-        task->tMaxItemsOnScreen = 5;
-        task->tNumItems = NUM_NATURES;
-        task->tLeft = 1;
-        task->tTop = 1;
-        task->tWidth = 14;
-        task->tHeight = task->tMaxItemsOnScreen * 2;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        task->tScrollOffset = min(gSpecialVar_0x8005, NUM_NATURES - task->tMaxItemsOnScreen);
         task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;
         break;
     case SCROLL_MULTI_FURFROU_TRIMS:
@@ -3500,33 +3090,6 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     [SCROLL_MULTI_NONE] =
     {
         gText_Exit
-    },
-    [SCROLL_MULTI_EMERALD_CHAMPIONS_EVS] =
-    {
-        sText_StatHp,
-        sText_StatAttack,
-        sText_StatDefense,
-        sText_StatSpAttack,
-        sText_StatSpDefense,
-        sText_StatSpeed,
-        sText_Reset,
-        sText_Back,
-    },
-    [SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST] =
-    {
-        sText_Minus32,
-        sText_Minus16,
-        sText_Minus4,
-        sText_Plus4,
-        sText_Plus16,
-        sText_Plus32,
-        sText_SetZero,
-        sText_SetMaximum,
-        sText_Back,
-    },
-    [SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES] =
-    {
-        sText_Back, // unused: rows are built from gNaturesInfo
     },
     [SCROLL_MULTI_FURFROU_TRIMS] =
     {
@@ -3819,33 +3382,6 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     for (width = 0, i = 0; i < task->tNumItems; i++)
     {
         const u8 *text;
-        if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET)
-        {
-            if (i == task->tNumItems - 1 || gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
-                text = sText_Back;
-            else
-                text = GetEmeraldChampionsBattleSetNameForFormat(
-                    &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A],
-                    i,
-                    gSpecialVar_0x8007
-                );
-        }
-        else if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_EVS
-              && i < NUM_STATS
-              && gSpecialVar_0x800A < gPartiesCount[B_TRAINER_PLAYER])
-        {
-            text = BuildEmeraldChampionsTrainingMenuText(i);
-        }
-        else if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST
-              && IsEditingEmeraldChampionsIvs())
-        {
-            text = sEmeraldChampionsIvAdjustNames[i];
-        }
-        else if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES && i < NUM_NATURES)
-        {
-            text = BuildEmeraldChampionsNatureMenuText(i);
-        }
-        else
         {
             text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
         }
@@ -4811,6 +4347,17 @@ u32 GetMartEmployeeObjectEventId(void)
     return 1;
 }
 
+bool32 IsTrainerRegistered(void)
+{
+    int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
+    if (index >= 0)
+    {
+        if (FlagGet(TRAINER_REGISTERED_FLAGS_START + index) == TRUE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 // Always returns FALSE
 bool32 ShouldDistributeEonTicket(void)
 {
@@ -5009,6 +4556,58 @@ static void Task_LoopWingFlapSE(u8 taskId)
 #undef playCount
 #undef delay
 
+#define CURTAIN_HEIGHT 4
+#define CURTAIN_WIDTH 3
+#define tFrameTimer   data
+#define tCurrentFrame data[3]
+
+void CloseBattlePikeCurtain(void)
+{
+    u8 taskId = CreateTask(Task_CloseBattlePikeCurtain, 8);
+    gTasks[taskId].tFrameTimer[0] = 4;
+    gTasks[taskId].tFrameTimer[1] = 4;
+    gTasks[taskId].tFrameTimer[2] = 4;
+    gTasks[taskId].tCurrentFrame = 0;
+}
+
+static void Task_CloseBattlePikeCurtain(u8 taskId)
+{
+    u8 x, y;
+    s16 *data = gTasks[taskId].data;
+
+    tFrameTimer[tCurrentFrame]--;
+    if (tFrameTimer[tCurrentFrame] == 0)
+    {
+        for (y = 0; y < CURTAIN_HEIGHT; y++)
+        {
+            for (x = 0; x < CURTAIN_WIDTH; x++)
+            {
+                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + MAP_OFFSET - 1,
+                                       gSaveBlock1Ptr->pos.y + y + MAP_OFFSET - 3,
+                                       (x + METATILE_BattlePike_CurtainFrames_Start) + (y * METATILE_ROW_WIDTH) + (tCurrentFrame * CURTAIN_HEIGHT * METATILE_ROW_WIDTH));
+            }
+        }
+        DrawWholeMapView();
+        tCurrentFrame++;
+        if (tCurrentFrame == 3)
+        {
+            DestroyTask(taskId);
+            ScriptContext_Enable();
+        }
+    }
+}
+
+#undef CURTAIN_HEIGHT
+#undef CURTAIN_WIDTH
+#undef tFrameTimer
+#undef tCurrentFrame
+
+void GetBattlePyramidHint(void)
+{
+    // gSpecialVar_0x8004 here is expected to be the current Battle Pyramid win streak.
+    gSpecialVar_Result = gSpecialVar_0x8004 / FRONTIER_STAGES_PER_CHALLENGE;
+    gSpecialVar_Result -= (gSpecialVar_Result / TOTAL_PYRAMID_ROUNDS) * TOTAL_PYRAMID_ROUNDS;
+}
 
 // Used to avoid a potential softlock if the player respawns on Dewford with no way off
 void ResetHealLocationFromDewford(void)
@@ -6892,60 +6491,6 @@ static void PushEmeraldChampionsServiceChoice(const u8 *name, u32 id)
     MultichoiceDynamic_PushElement((struct ListMenuItem){text, id});
 }
 
-static bool32 CanReceiveEmeraldChampionsFormGift(u32 gift)
-{
-    if (gift >= ARRAY_COUNT(sEmeraldChampionsFormGifts) || FlagGet(sEmeraldChampionsFormGifts[gift].flag))
-        return FALSE;
-    switch (gift)
-    {
-    case 0: return VarGet(VAR_EC_OPENING_STATE) >= EC_OPENING_COMPLETE;
-    case 1: return TRUE;
-    case 5: return IsLegendarySignCaught(LEGENDARY_SIGN_KUBFU);
-    case 6: return IsLegendarySignCaught(LEGENDARY_SIGN_COSMOG);
-    default: return FlagGet(FLAG_SYS_GAME_CLEAR);
-    }
-}
-
-void BufferEmeraldChampionsFormGift(void)
-{
-    u32 gift = gSpecialVar_0x8004;
-    gSpecialVar_Result = CanReceiveEmeraldChampionsFormGift(gift);
-    if (gift < ARRAY_COUNT(sEmeraldChampionsFormGifts))
-        StringCopy(gStringVar2, sEmeraldChampionsFormGifts[gift].name);
-}
-
-void BuildEmeraldChampionsResearchPartnerChoices(void)
-{
-    gSpecialVar_Result = 0;
-    for (u32 gift = 2; gift < ARRAY_COUNT(sEmeraldChampionsFormGifts); gift++)
-        if (CanReceiveEmeraldChampionsFormGift(gift))
-        {
-            PushEmeraldChampionsServiceChoice(sEmeraldChampionsFormGifts[gift].name, gift);
-            gSpecialVar_Result++;
-        }
-}
-
-void GiveEmeraldChampionsFormGift(void)
-{
-    u32 gift = gSpecialVar_0x8004;
-    struct Pokemon mon;
-    gSpecialVar_Result = MON_CANT_GIVE;
-    if (!CanReceiveEmeraldChampionsFormGift(gift))
-        return;
-    const struct EmeraldChampionsFormGift *entry = &sEmeraldChampionsFormGifts[gift];
-    CreateRandomMon(&mon, entry->species, min(GetCurrentLevelCap(), 25));
-    if (ApplyEmeraldChampionsScriptedSet(&mon, entry->preset != NULL ? entry->preset : GetEmeraldChampionsRawBattleSet(entry->species, 0)) != EC_BATTLE_SET_SUCCESS)
-        return;
-    u32 partySlot = CalculatePlayerPartyCount();
-    gSpecialVar_Result = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
-    if (gSpecialVar_Result == MON_GIVEN_TO_PARTY || gSpecialVar_Result == MON_GIVEN_TO_PC)
-    {
-        FlagSet(entry->flag);
-        if (gSpecialVar_Result == MON_GIVEN_TO_PARTY)
-            RecordPlayerPartyMonHeldItemForRestoration(partySlot);
-    }
-}
-
 static struct Pokemon *GetEmeraldChampionsServiceMon(void)
 {
     if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
@@ -7219,14 +6764,14 @@ static const u16 sPaidEvolutionItems[] =
 
 bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item)
 {
-    if (item == ITEM_NONE)
+    if (item == ITEM_NONE || GetFormEquipmentSpecies(item) != SPECIES_NONE)
         return FALSE;
     // Battle items are bought now, so they sell back like anything else. Only
     // what the game still hands over for nothing is barred from the counter.
     for (u32 i = 0; sEmeraldChampionsEvolutionItems[i] != ITEM_NONE; i++)
         if (sEmeraldChampionsEvolutionItems[i] == item)
             return TRUE;
-    return IsEmeraldChampionsFreePresetItem(item);
+    return FALSE;
 }
 
 void OpenEmeraldChampionsEvolutionSpecialist(void)
@@ -7582,25 +7127,5 @@ bool8 GetDiancieFriendshipScore(void)
          && GetMonData(mon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
             return TRUE;
     }
-    return FALSE;
-}
-
-// Museum paintings are won by taking a Master-rank Contest, and Contests are
-// gone from this engine along with gSaveBlock1Ptr->contestWinners, so the
-// player genuinely cannot own one. Zero is the true count, not a placeholder:
-// the Lilycove curator falls through to his "wish to fill the exhibit" line
-// and the museum sign takes its no-paintings branch, which is exactly what
-// vanilla does for a player who has not won a contest.
-u8 CountPlayerMuseumPaintings(void)
-{
-    return 0;
-}
-
-// Match Call is deleted from this engine (there is no src/match_call.c, no
-// gRematchTable registration flags and no PokeNav call list), so no trainer
-// can ever be registered and FALSE is the honest answer. The scripts that ask
-// then offer to register, which register_matchcall already no-ops.
-bool32 IsTrainerRegistered(void)
-{
     return FALSE;
 }

@@ -25,7 +25,7 @@
 #define B_EC_CATCHUP_PER_LEVEL      50         // Each level below the party's strongest adds this % to a Pokemon's share...
 #define B_EC_CATCHUP_MAX            600        // ...to a ceiling of this % of the base rate, so the furthest behind close fastest.
 #define B_EC_EXP_AT_CAP             1          // A Pokemon at its cap still earns a token point, so a fight is never worth literally nothing. It can never carry past the cap's own threshold.
-#define B_EC_WILD_HELD_ITEMS        FALSE      // Wild Pokemon carry nothing. Held items are things the player finds, buys or earns, never something a catch hands over.
+#define B_EC_WILD_HELD_ITEMS        TRUE       // Preserve natural held-item acquisition from wild Pokemon.
 #define B_EC_WILD_BATTLE_SETS       FALSE      // Wild Pokemon use their natural level-up moves. The move tutor is where a team gets built.
 #define B_EXP_CATCH                 GEN_LATEST // In Gen6+, the party gains experience when the player catches another Pokémon.
 #define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // In Gen7+, Trainer battles no longer increase total experience by 1.5x.

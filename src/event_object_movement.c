@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle_anim.h"
+#include "battle_pyramid.h"
 #include "battle_util.h"
 #include "berry.h"
 #include "data.h"
@@ -37,6 +38,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
+#include "trainer_hill.h"
 #include "util.h"
 #include "wild_encounter.h"
 #include "wild_encounter_ow.h"
@@ -2803,7 +2805,12 @@ void TrySpawnLightSprites(s16 camX, s16 camY)
     if (gMapHeader.events == NULL)
         return;
 
-    objectCount = gMapHeader.events->objectEventCount;
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+        objectCount = GetNumBattlePyramidObjectEvents();
+    else if (InTrainerHill())
+        objectCount = 2;
+    else
+        objectCount = gMapHeader.events->objectEventCount;
 
     for (i = 0; i < objectCount; i++)
     {
@@ -2830,7 +2837,12 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
         s16 top = gSaveBlock1Ptr->pos.y;
         s16 bottom = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H + 2;
 
-        objectCount = gMapHeader.events->objectEventCount;
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+            objectCount = GetNumBattlePyramidObjectEvents();
+        else if (InTrainerHill())
+            objectCount = HILL_TRAINERS_PER_FLOOR;
+        else
+            objectCount = gMapHeader.events->objectEventCount;
 
         for (i = 0; i < objectCount; i++)
         {

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "overworld.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_util.h"
 #include "berry.h"
@@ -41,6 +42,7 @@
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "map_preview_screen.h"
+#include "match_call.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "mirage_tower.h"
@@ -66,6 +68,7 @@
 #include "task.h"
 #include "tileset_anims.h"
 #include "time_events.h"
+#include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "scanline_effect.h"
@@ -80,6 +83,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/trainer_hill.h"
 #include "constants/weather.h"
 
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
@@ -903,6 +907,10 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetDexNavSearch();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
+#if FREE_MATCH_CALL == FALSE
+    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
+#endif //FREE_MATCH_CALL
+
     if (I_VS_SEEKER_CHARGING != 0)
         MapResetTrainerRematches(mapGroup, mapNum);
 
@@ -947,7 +955,12 @@ static void LoadMapFromWarp(bool32 a1)
     LoadCurrentMapData();
     if (!(sObjectEventLoadFlag & SKIP_OBJECT_EVENT_LOAD))
     {
-        LoadObjEventTemplatesFromHeader();
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+            LoadBattlePyramidObjectEventTemplates();
+        else if (InTrainerHill())
+            LoadTrainerHillObjectEventTemplates();
+        else
+            LoadObjEventTemplatesFromHeader();
     }
 
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
@@ -960,6 +973,10 @@ static void LoadMapFromWarp(bool32 a1)
     // reset hours override on every warp
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
+#if FREE_MATCH_CALL == FALSE
+    TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+#endif //FREE_MATCH_CALL
+
     if (I_VS_SEEKER_CHARGING != 0)
          MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
 
@@ -975,7 +992,12 @@ static void LoadMapFromWarp(bool32 a1)
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
     gChainFishingDexNavStreak = 0;
-    InitMap();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        InitBattlePyramidMap(FALSE);
+    else if (InTrainerHill())
+        InitTrainerHillMap();
+    else
+        InitMap();
 
     if (a1 != TRUE && isIndoors)
     {
@@ -2109,6 +2131,8 @@ static void FieldCB_FadeTryShowMapPopup(void)
 
 void CB2_ContinueSavedGame(void)
 {
+    u8 trainerHillMapId;
+
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
@@ -2117,17 +2141,29 @@ void CB2_ContinueSavedGame(void)
 
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();
-    LoadSaveblockObjEventScripts();
+    trainerHillMapId = GetCurrentTrainerHillMapId();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        LoadBattlePyramidFloorObjectEventScripts();
+    else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
+        LoadTrainerHillFloorObjectEventScripts();
+    else
+        LoadSaveblockObjEventScripts();
 
     UnfreezeObjectEvents();
     DoTimeBasedEvents();
     UpdateMiscOverworldStates();
-    InitMapFromSavedGame();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        InitBattlePyramidMap(TRUE);
+    else if (trainerHillMapId != 0)
+        InitTrainerHillMap();
+    else
+        InitMapFromSavedGame();
 
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gExitStairsMovementDisabled = TRUE;
+    InitMatchCallCounters();
     if (UseContinueGameWarp() == TRUE)
     {
         ClearContinueGameWarpStatus();
@@ -2187,7 +2223,12 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 {
     u8 flashLevel;
 
-    if ((flashLevel = GetFlashLevel()))
+    if (InBattlePyramid())
+    {
+        WriteBattlePyramidViewScanlineEffectBuffer();
+        ScanlineEffect_SetParams(sFlashEffectParams);
+    }
+    else if ((flashLevel = GetFlashLevel()))
     {
         WriteFlashScanlineEffectBuffer(flashLevel);
         ScanlineEffect_SetParams(sFlashEffectParams);
@@ -2369,6 +2410,7 @@ static bool32 ReturnToFieldLocal(u8 *state)
         break;
     case 1:
         InitViewGraphics();
+        TryLoadTrainerHillEReaderPalette();
         FollowerNPC_BindToSurfBlobOnReloadScreen();
         ResumeORASDowseFieldEffect();
         (*state)++;
@@ -3675,7 +3717,7 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     u8 *dst;
     bool8 handleFlash = FALSE;
 
-    if (GetFlashLevel() > 0)
+    if (GetFlashLevel() > 0 || InBattlePyramid())
         handleFlash = TRUE;
 
     if (headerType == 1) // berry

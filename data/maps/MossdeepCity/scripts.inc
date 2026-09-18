@@ -286,11 +286,11 @@ MossdeepCity_EventScript_ScottExitEast:: @ 81E4CC2
 MossdeepCity_EventScript_AvalancheTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq MossdeepCity_EventScript_ReceivedTM96
+	goto_if_set FLAG_EC_GIFT_MOSSDEEP_CITY, MossdeepCity_EventScript_ReceivedTM96
 	msgbox MossdeepCity_Text_AvalancheNonsense, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_MOSSDEEP_CITY
 	msgbox MossdeepCity_Text_HaveTM96, MSGBOX_DEFAULT
 	release
 	end
@@ -455,10 +455,11 @@ MossdeepCity_Text_SootopolisNewGymLeader: @ 81E5581
 	.string "mentored Wallace.$"
 
 MossdeepCity_Text_AvalancheNonsense:
-	.string "You Trainer?\p"
-	.string "Take TM!$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 MossdeepCity_Text_HaveTM96:
-	.string "… … … … … … … … … … … … … … … …\p"
-	.string "… … … … … … … … … … … … … … … …\p"
-	.string "(Seems he has nothing more to say…)$"
+	.string "That Rare Candy helps a Pokémon\n"
+	.string "grow one level, up to your\l"
+	.string "current cap.$"

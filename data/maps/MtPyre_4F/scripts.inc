@@ -4,7 +4,7 @@ MtPyre_4F_MapScripts:: @ 8231BC8
 @ Seems like the scripts for the 4F and 5F were swapped
 
 MtPyre_5F_EventScript_Atsushi:: @ 8231BC9
-	trainerbattle_single TRAINER_ATSUSHI, MtPyre_5F_Text_AtsushiIntro, MtPyre_5F_Text_AtsushiDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox MtPyre_5F_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE
 	end
 

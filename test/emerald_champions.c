@@ -886,81 +886,6 @@ TEST("Emerald Champions exposes named Doubles and Singles sets for every direct 
     ClearBag();
 }
 
-TEST("Emerald Champions evolution applies the evolved Doubles recommendation")
-{
-    struct Pokemon mon;
-    enum Species species = SPECIES_BEAUTIFLY;
-    enum Item protectedItem = ITEM_LINKING_CORD;
-
-    CreateMon(&mon, SPECIES_WURMPLE, 14, 0, OTID_STRUCT_PLAYER_ID);
-    EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, 1), EC_BATTLE_SET_SUCCESS);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_STRING_SHOT);
-    SetMonData(&mon, MON_DATA_HELD_ITEM, &protectedItem);
-    SetMonData(&mon, MON_DATA_SPECIES, &species);
-
-    EXPECT_EQ(ApplyEmeraldChampionsRecommendedEvolutionSet(&mon), EC_BATTLE_SET_SUCCESS);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1), MOVE_QUIVER_DANCE);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE2), MOVE_BUG_BUZZ);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE3), MOVE_AIR_CUTTER);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_PROTECT);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_LINKING_CORD);
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV + stat), MAX_PER_STAT_IVS);
-
-    // Scovillain's raw slot zero is Mega-oriented. Evolution must skip it and
-    // choose the first ordinary campaign role instead.
-    CreateMon(&mon, SPECIES_SCOVILLAIN, 40, 0, OTID_STRUCT_PLAYER_ID);
-    EXPECT_EQ(ApplyEmeraldChampionsRecommendedEvolutionSet(&mon), EC_BATTLE_SET_SUCCESS);
-    EXPECT_NE(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_SCOVILLAINITE);
-}
-
-TEST("Emerald Champions EV editor clamps individual and total allocations")
-{
-    u32 total = 0;
-
-    ZeroPlayerPartyMons();
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
-    CalculatePlayerPartyCount();
-    gSpecialVar_0x800A = 0;
-    ResetSelectedMonEmeraldChampionsTraining();
-    gSpecialVar_0x8005 = STAT_HP;
-    gSpecialVar_0x8006 = 7; // Set Maximum.
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(gSpecialVar_Result, TRUE);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), 252);
-
-    gSpecialVar_0x8005 = STAT_ATK;
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK_EV), 252);
-    gSpecialVar_0x8005 = 5; // Display-order Speed; only six EVs remain.
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 6);
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-    {
-        u32 value = GetMonData(&gParties[B_TRAINER_PLAYER][0], EC_EV_DATA(stat));
-        EXPECT_LE(value, MAX_PER_STAT_EVS);
-        total += value;
-    }
-    EXPECT_EQ(total, MAX_TOTAL_EVS);
-
-    // A capped increase is rejected so the field script can play native
-    // failure feedback instead of silently redrawing an unchanged value.
-    gSpecialVar_0x8006 = 3; // +4 with no EVs remaining.
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(gSpecialVar_Result, FALSE);
-
-    gSpecialVar_0x8006 = 2; // -4, then clamp the remaining two to zero.
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 2);
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 0);
-    ResetSelectedMonEmeraldChampionsTraining();
-    total = 0;
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        total += GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV + stat);
-    EXPECT_EQ(total, 0);
-}
-
 TEST("Emerald Champions protects progression items from preparation services")
 {
     static const enum Item evolutionItems[] =
@@ -1395,7 +1320,7 @@ TEST("Emerald Champions Game Corner rejects invalid or presetless prizes")
     EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_QUAXLY));
 }
 
-TEST("Emerald Champions story gifts arrive battle-ready with restoration baselines")
+TEST("Emerald Champions story gifts preserve natural builds and empty held items")
 {
     static const enum Species species[] =
     {
@@ -1423,9 +1348,9 @@ TEST("Emerald Champions story gifts arrive battle-ready with restoration baselin
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES), species[slot]);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL),
             min(levels[slot], GetPlayerLevelCapForSpecies(species[slot])));
-        EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_PLAYER][slot]));
+        EXPECT_EQ(GetMonEVCount(&gParties[B_TRAINER_PLAYER][slot]), 0);
         item = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM);
-        EXPECT_NE(item, ITEM_NONE);
+        EXPECT_EQ(item, ITEM_NONE);
         restorationItem = gBattleStruct->itemLost[B_TRAINER_PLAYER][slot].originalItem;
         EXPECT_EQ(restorationItem, item);
     }
@@ -1459,7 +1384,9 @@ TEST("Emerald Champions prepared story gifts preserve PC delivery and no-room re
         GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES),
         SPECIES_BELDUM
     );
-    EXPECT(BoxMonMatchesEmeraldChampionsNonMegaPreset(&gPokemonStoragePtr->boxes[0][0]));
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HP_EV + stat), 0);
 
     ZeroPlayerPartyMons();
     memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
@@ -2157,41 +2084,6 @@ TEST("Emerald Champions reload refreshes cached stats without reviving fainted P
     EXPECT_EQ(GetMonData(mon, MON_DATA_HP), hp);
 }
 
-TEST("Emerald Champions EV editor shows native stats and three-digit allocations")
-{
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
-    u32 nature = NATURE_HARDY;
-    u32 friendship = 0;
-    u32 base;
-    u8 zero = 0;
-    static const u8 expected[] = _("HP: 53\nEVs: 32/252  Left: 478");
-    static const u8 maximum[] = _("HP: 64\nEVs: 252/252  Left: 258");
-
-    ZeroPlayerPartyMons();
-    CreateMon(mon, SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
-    CalculatePlayerPartyCount();
-    SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
-    SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        SetMonData(mon, MON_DATA_HP_EV + stat, &zero);
-    CalculateMonStats(mon);
-    base = GetMonData(mon, MON_DATA_MAX_HP);
-    gSpecialVar_0x800A = 0;
-    gSpecialVar_0x8005 = 0;
-    gSpecialVar_0x8006 = 4; // +16 EVs, twice.
-    AdjustSelectedMonEmeraldChampionsTraining();
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), base + 2);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), 32);
-    BufferSelectedMonEmeraldChampionsTrainingDetail();
-    EXPECT_EQ(StringCompare(gStringVar4, expected), 0);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_HP), base + 2);
-    gSpecialVar_0x8006 = 7;
-    AdjustSelectedMonEmeraldChampionsTraining();
-    BufferSelectedMonEmeraldChampionsTrainingDetail();
-    EXPECT_EQ(StringCompare(gStringVar4, maximum), 0);
-}
-
 TEST("Emerald Champions field moves need the badge and a party member that could learn them")
 {
     struct Pokemon *party = gParties[B_TRAINER_PLAYER];
@@ -2382,31 +2274,6 @@ TEST("Emerald Champions partial mask grants retry only their saved undelivered i
     EXPECT(!CheckPCHasItem(ITEM_WELLSPRING_MASK, 1));
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
-}
-
-TEST("Emerald Champions IV editor uses precise values and leaves EVs untouched")
-{
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
-    u8 evs = 252;
-    ZeroPlayerPartyMons();
-    CreateRandomMonWithIVs(mon, SPECIES_ZIGZAGOON, 50, 31);
-    CalculatePlayerPartyCount();
-    SetMonData(mon, MON_DATA_ATK_EV, &evs);
-    gSpecialVar_0x800A = 0;
-    gSpecialVar_0x8002 = EC_TRAINING_IVS;
-    gSpecialVar_0x8005 = 1; // Attack in the displayed order.
-    gSpecialVar_0x8006 = 6; // Set to zero.
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_IV), 0);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 252);
-    gSpecialVar_0x8006 = 3; // +1 IV, not +4 EVs.
-    AdjustSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_IV), 1);
-    ResetSelectedMonEmeraldChampionsTraining();
-    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_IV), 31);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 252);
-    gSpecialVar_0x8002 = EC_TRAINING_EVS;
-    ZeroPlayerPartyMons();
 }
 
 TEST("Emerald Champions no-repetition evolutions work at cap and honor Everstone")

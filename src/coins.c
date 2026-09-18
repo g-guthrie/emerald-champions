@@ -7,7 +7,6 @@
 #include "menu.h"
 #include "international_string_util.h"
 #include "constants/coins.h"
-#include "money.h"
 
 static EWRAM_DATA u8 sCoinsWindowId = 0;
 
@@ -39,22 +38,14 @@ void HideCoinsWindow(void)
     RemoveWindow(sCoinsWindowId);
 }
 
-// Emerald Champions: there is no coin currency. The Game Corner machines play
-// for ordinary money; a coin on the counter is COIN_VALUE money, and the Coin
-// Case is only the licence to sit down. SaveBlock1.coins is unused.
 u16 GetCoins(void)
 {
-    u32 coins = GetMoney(&gSaveBlock1Ptr->money) / COIN_VALUE;
-    return coins > MAX_COINS ? MAX_COINS : coins;
+    return gSaveBlock1Ptr->coins ^ gSaveBlock2Ptr->encryptionKey;
 }
 
 void SetCoins(u16 coinAmount)
 {
-    s32 delta = (s32)coinAmount - (s32)GetCoins();
-    if (delta > 0)
-        AddMoney(&gSaveBlock1Ptr->money, (u32)delta * COIN_VALUE);
-    else if (delta < 0)
-        RemoveMoney(&gSaveBlock1Ptr->money, (u32)(-delta) * COIN_VALUE);
+    gSaveBlock1Ptr->coins = coinAmount ^ gSaveBlock2Ptr->encryptionKey;
 }
 
 bool8 AddCoins(u16 toAdd)

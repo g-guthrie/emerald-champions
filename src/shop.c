@@ -1,4 +1,5 @@
 #include "global.h"
+#include "field_specials.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -678,7 +679,7 @@ static bool32 IsSinglePurchaseItem(enum Item item)
 
 static u32 GetShopItemPrice(enum Item item)
 {
-    if (sMartInfo.freeItems)
+    if (sMartInfo.freeItems || IsEmeraldChampionsFreeCatalogueItem(item))
         return 0;
     return GetItemPrice(item);
 }

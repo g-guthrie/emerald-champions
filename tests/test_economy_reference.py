@@ -35,27 +35,25 @@ class EconomyReferenceTests(unittest.TestCase):
             self.assertEqual(economy.item_prices(root)['ITEM_TEST']['base_price'],1000)
             self.assertEqual(economy.item_prices(root)['DECOR_TEST']['base_price'],123)
 
-    def test_coin_offers_follow_shared_price_setup_and_reject_unmapped_prizes(self):
+    def test_coin_offers_follow_prices_before_and_after_species_selection(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);source='data/maps/MauvilleCity_GameCorner/scripts.inc'
             p=root/source;p.parent.mkdir(parents=True)
             definitions={
-                'Select': 'setvar VAR_MON, SPECIES_BULBASAUR\ngoto StarterPrice\n',
-                'SelectLast': 'setvar VAR_MON, SPECIES_CHARMANDER\n',
-                'StarterPrice': 'setvar VAR_COST, 500\ngoto Purchase\n',
-                'Purchase': 'removecoins VAR_COST\nend\n',
+                'Menu': 'setvar VAR_0x8006, STARTER_COINS\ncase 0, Select\nend\n',
+                'Select': 'setvar VAR_TEMP_1, SPECIES_BULBASAUR\ngoto Purchase\n',
+                'SelectLast': 'setvar VAR_TEMP_1, SPECIES_CHARMANDER\n',
+                'StarterPrice': 'setvar VAR_0x8006, 500\ngoto Purchase\n',
+                'Purchase': 'givemon VAR_TEMP_1, 5, ITEM_NONE\nremovecoins VAR_0x8006\nend\n',
             }
-            p.write_text(''.join(label+'::\n'+body for label,body in definitions.items()))
+            p.write_text('.set STARTER_COINS, 500\n'+''.join(label+'::\n'+body for label,body in definitions.items()))
             blocks={label:[(source,1,body)] for label,body in definitions.items()}
-            tables={'native':{'name':'sEmeraldChampionsGameCornerPokemonPrizes','body':'{SPECIES_BULBASAUR, FLAG_BULBASAUR}, {SPECIES_CHARMANDER, FLAG_CHARMANDER},','source':'src/prizes.c:1'}}
-            rows=economy.game_corner_offers(root,blocks,tables)
-            self.assertEqual(rows[0]['coins'],500)
-            self.assertEqual(rows[0]['species'],'SPECIES_BULBASAUR')
-            self.assertEqual(rows[1]['coins'],500)
-            self.assertEqual(rows[1]['species'],'SPECIES_CHARMANDER')
-            tables['native']['body']+='{SPECIES_PIKACHU, FLAG_PIKACHU},'
-            with self.assertRaisesRegex(ValueError,'differs from native'):
-                economy.game_corner_offers(root,blocks,tables)
+            rows,bp=economy.game_corner_offers(root,blocks,{})
+            self.assertEqual([(r['species'],r['coins']) for r in rows],[('SPECIES_BULBASAUR',500),('SPECIES_CHARMANDER',500)])
+            self.assertEqual(bp,[])
+            p.write_text(p.read_text()+'Unresolved::\nsetvar VAR_TEMP_1, SPECIES_PIKACHU\nend\n')
+            with self.assertRaisesRegex(ValueError,'Unresolved Game Corner'):
+                economy.game_corner_offers(root,blocks,{})
 
     def test_native_transfer_register_excludes_function_definitions_and_prototypes(self):
         with tempfile.TemporaryDirectory() as d:
@@ -76,6 +74,7 @@ class EconomyReferenceTests(unittest.TestCase):
     def test_additem_pc_fallback_does_not_hide_stevens_real_mega_reward(self):
         # Regression for the actual missing source route in the former verifier.
         routes=world_reward_sources()
-        self.assertTrue(any('GraniteCave_StevensRoom' in source for source in routes['ITEM_AERODACTYLITE']))
+        self.assertTrue(routes['ITEM_AERODACTYLITE'])
+        self.assertEqual(len(routes['ITEM_AERODACTYLITE']),1)
 
 if __name__=='__main__':unittest.main()

@@ -68,7 +68,6 @@ RusturfTunnel_EventScript_ClearTunnelScene:: @ 822CEAE
 	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
 	compare VAR_TEMP_1, 3
 	call_if_eq RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer
-	giveitem ITEM_RARE_CANDY
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_ExplainStrength, MSGBOX_DEFAULT
 	closemessage
@@ -318,7 +317,7 @@ RusturfTunnel_EventScript_Grunt:: @ 822D0C2
 	faceplayer
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	msgbox RusturfTunnel_Text_GruntIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RusturfTunnel_Text_GruntTakePackage, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_GOODS
 	closemessage
@@ -431,7 +430,7 @@ RusturfTunnel_Movement_PeekoExit: @ 822D1A7
 	step_end
 
 RusturfTunnel_EventScript_Mike:: @ 822D1B1
-	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_MikeIntro, RusturfTunnel_Text_MikeDefeat
+	trainerbattle_double TRAINER_MIKE_2, RusturfTunnel_Text_MikeIntro, RusturfTunnel_Text_MikeDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RusturfTunnel_Text_MikePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -502,16 +501,16 @@ RusturfTunnel_Text_ToGetToVerdanturf: @ 822D5F3
 	.string "through Slateport and Mauville…$"
 
 RusturfTunnel_Text_YouShatteredBoulderTakeHM: @ 822D65C
-	.string "Wow! You shattered that boulder\n"
-	.string "blocking the way.\p"
-	.string "To show you how much I appreciate it,\n"
-	.string "I'd like you to have this HM.$"
+	.string "You cleared the way! Thank you!\p"
+	.string "I will authorize you to use\n"
+	.string "Strength as well.$"
 
 RusturfTunnel_Text_ExplainStrength: @ 822D6D2
-	.string "That HM contains Strength.\p"
-	.string "If a muscular Pokémon were to learn\n"
-	.string "that, it would be able to move even\l"
-	.string "large boulders.$"
+	.string "With the Heat Badge and this\n"
+	.string "license, a compatible partner\l"
+	.string "can push large boulders.\p"
+	.string "Strength does not need a battle\n"
+	.string "move slot.$"
 
 RusturfTunnel_Text_WandaReunion: @ 822D745
 	.string "Wanda!\n"

@@ -1,6 +1,6 @@
 @ NOTE: Route 104's sail to Dewford script references local IDs from Dewford's map. 
 @  These are labeled in DewfordTown/scripts.inc
-.set LOCALID_RIVAL, 34
+.set LOCALID_RIVAL, 32
 
 Route104_MapScripts:: @ 81ECC32
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_OnFrame
@@ -171,19 +171,19 @@ Route104_EventScript_RestoreMusic:: @ 81ECE31
 	return
 
 Route104_EventScript_BattleMayTreecko:: @ 81ECE36
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayTorchic:: @ 81ECE49
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayMudkip:: @ 81ECE5C
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
@@ -241,19 +241,19 @@ Route104_EventScript_BrendanDefeated:: @ 81ECF38
 	end
 
 Route104_EventScript_BattleBrendanTreecko:: @ 81ECF4D
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanTorchic:: @ 81ECF60
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanMudkip:: @ 81ECF73
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
@@ -861,17 +861,17 @@ Route104_Movement_BrineyExitBoat: @ 81ED35C
 	step_end
 
 Route104_EventScript_Ivan:: @ 81ED35F
-	trainerbattle_single TRAINER_IVAN, Route104_Text_IvanIntro, Route104_Text_IvanDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route104_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Billy:: @ 81ED376
-	trainerbattle_single TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat
+	trainerbattle_double TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Haley:: @ 81ED38D
-	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route104_EventScript_RematchHaley
@@ -909,12 +909,12 @@ Route104_EventScript_RegisterHaley:: @ 81ED40B
 	end
 
 Route104_EventScript_RematchHaley:: @ 81ED424
-	trainerbattle_rematch TRAINER_HALEY_1, Route104_Text_HaleyRematchIntro, Route104_Text_HaleyRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route104_Text_HaleyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Winston:: @ 81ED43B
-	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle
+	trainerbattle_double TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterWinstonAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route104_EventScript_RematchWinston
@@ -952,12 +952,12 @@ Route104_EventScript_RegisterWinston:: @ 81ED4B9
 	end
 
 Route104_EventScript_RematchWinston:: @ 81ED4D2
-	trainerbattle_rematch TRAINER_WINSTON_1, Route104_Text_WinstonRematchIntro, Route104_Text_WinstonRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route104_Text_WinstonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Cindy:: @ 81ED4E9
-	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle
+	trainerbattle_double TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterCindyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route104_EventScript_RematchCindy
@@ -995,7 +995,7 @@ Route104_EventScript_RegisterCindy:: @ 81ED567
 	end
 
 Route104_EventScript_RematchCindy:: @ 81ED580
-	trainerbattle_rematch TRAINER_CINDY_1, Route104_Text_CindyRematchIntro, Route104_Text_CindyRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route104_Text_CindyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -1014,7 +1014,7 @@ Route104_EventScript_Mia:: @ 81ED5B6
 	end
 
 Route104_EventScript_Darian:: @ 81ED5D5
-	trainerbattle_single TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat
+	trainerbattle_double TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -1056,11 +1056,12 @@ Route104_Text_LikeFillingMouthWithSeedsTakeThis: @ 81ED838
 	.string "a move for firing seeds rapidly.$"
 
 Route104_Text_TMsAreOneTimeUse:
-	.string "A word of advice!\p"
-	.string "A TM, Technical Machine, can be used\n"
-	.string "many times. It won't go away.\p"
-	.string "So try it out as many times as you\n"
-	.string "want!$"
+	.string "The Center tutor teaches every\n"
+	.string "move your Pokémon can legally\l"
+	.string "learn, for free.\p"
+	.string "That Rare Candy will help it\n"
+	.string "grow one level, up to your\l"
+	.string "current cap.$"
 
 Route104_Text_DontNeedThisTakeIt: @ 81ED96A
 	.string "This Flower Shop started selling\n"

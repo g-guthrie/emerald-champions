@@ -378,7 +378,7 @@ Route_109_EventScript_SandMound::
 	faceplayer
 	special RockSmashWildEncounter
 	delay 0x60
-	removeobject 25
+	removeobject 17
 	releaseall
 	end
 
@@ -387,7 +387,7 @@ Route_109_EventScript_SandMound1::
 	faceplayer
 	special RockSmashWildEncounter
 	delay 0x60
-	removeobject 26
+	removeobject 18
 	releaseall
 	end
 
@@ -396,7 +396,7 @@ Route_109_EventScript_SandMound2::
 	faceplayer
 	special RockSmashWildEncounter
 	delay 0x60
-	removeobject 27
+	removeobject 19
 	releaseall
 	end
 
@@ -409,27 +409,27 @@ Route109_EventScript_TrainerTipsSign:: @ 81EEA34
 	end
 
 Route109_EventScript_David:: @ 81EEA3D
-	trainerbattle_single TRAINER_DAVID, Route109_Text_DavidIntro, Route109_Text_DavidDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_DavidPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Alice:: @ 81EEA54
-	trainerbattle_single TRAINER_ALICE, Route109_Text_AliceIntro, Route109_Text_AliceDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_AlicePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Huey:: @ 81EEA6B
-	trainerbattle_single TRAINER_HUEY, Route109_Text_HueyIntro, Route109_Text_HueyDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_HueyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Edmond:: @ 81EEA82
-	trainerbattle_single TRAINER_EDMOND, Route109_Text_EdmondIntro, Route109_Text_EdmondDefeated
+	trainerbattle_double TRAINER_EDMOND, Route109_Text_EdmondIntro, Route109_Text_EdmondDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route109_Text_EdmondPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Ricky:: @ 81EEA99
-	trainerbattle_single TRAINER_RICKY_1, Route109_Text_RickyIntro, Route109_Text_RickyDefeated, Route109_EventScript_RickyRegisterMatchCallAfterBattle
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route109_EventScript_RickyRematch
@@ -446,12 +446,12 @@ Route109_EventScript_RickyRegisterMatchCallAfterBattle:: @ 81EEAC5
 	end
 
 Route109_EventScript_RickyRematch:: @ 81EEAE4
-	trainerbattle_rematch TRAINER_RICKY_1, Route109_Text_RickyRematchIntro, Route109_Text_RickyRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_RickyRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Lola:: @ 81EEAFB
-	trainerbattle_single TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, Route109_EventScript_LolaRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route109_EventScript_LolaRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route109_EventScript_LolaRematch
@@ -468,22 +468,22 @@ Route109_EventScript_LolaRegisterMatchCallAfterBattle:: @ 81EEB27
 	end
 
 Route109_EventScript_LolaRematch:: @ 81EEB46
-	trainerbattle_rematch TRAINER_LOLA_1, Route109_Text_LolaRematchIntro, Route109_Text_LolaRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_LolaRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Austina:: @ 81EEB5D
-	trainerbattle_single TRAINER_AUSTINA, Route109_Text_AustinaIntro, Route109_Text_AustinaDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_AustinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Gwen:: @ 81EEB74
-	trainerbattle_single TRAINER_GWEN, Route109_Text_GwenIntro, Route109_Text_GwenDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_GwenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Carter:: @ 81EEB8B
-	trainerbattle_single TRAINER_CARTER, Route109_Text_CarterIntro, Route109_Text_CarterDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_CarterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -498,17 +498,17 @@ Route109_EventScript_Mel:: @ 81EEBBD
 	end
 
 Route109_EventScript_Chandler:: @ 81EEBD8
-	trainerbattle_single TRAINER_CHANDLER, Route109_Text_ChandlerIntro, Route109_Text_ChandlerDefeated
+	trainerbattle_double TRAINER_CHANDLER, Route109_Text_ChandlerIntro, Route109_Text_ChandlerDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route109_Text_ChandlerPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Hailey:: @ 81EEBEF
-	trainerbattle_single TRAINER_HAILEY, Route109_Text_HaileyIntro, Route109_Text_HaileyDefeated
+	trainerbattle_double TRAINER_HAILEY, Route109_Text_HaileyIntro, Route109_Text_HaileyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route109_Text_HaileyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Elijah:: @ 81EEC06
-	trainerbattle_single TRAINER_ELIJAH, Route109_Text_ElijahIntro, Route109_Text_ElijahDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_ElijahPostBattle, MSGBOX_AUTOCLOSE
 	end
 

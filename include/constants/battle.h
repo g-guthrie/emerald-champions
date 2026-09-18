@@ -124,11 +124,8 @@ enum BattleSide
 #define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 23)
 #define BATTLE_TYPE_RECORDED           (1 << 24)
 #define BATTLE_TYPE_RECORDED_LINK      (1 << 25)
-#define BATTLE_TYPE_TRAINER_TOWER      (1 << 26)
-// Retired Trainer Hill shared this bit with Trainer Tower. The name is kept as an
-// alias because it is part of the engine's battle-type bitfield and is still read by
-// engine checks and tests; nothing sets it for Trainer Hill any more.
-#define BATTLE_TYPE_TRAINER_HILL       BATTLE_TYPE_TRAINER_TOWER
+#define BATTLE_TYPE_TRAINER_HILL       (1 << 26)
+#define BATTLE_TYPE_TRAINER_TOWER      BATTLE_TYPE_TRAINER_HILL
 #define BATTLE_TYPE_SECRET_BASE        (1 << 27)
 #define BATTLE_TYPE_GHOST              (1 << 28)
 #define BATTLE_TYPE_POKEDUDE           (1 << 29)

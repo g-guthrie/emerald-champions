@@ -14,29 +14,23 @@ BattleFrontier_BattleTowerLobby_OnResume: @ 823E690
 	special TryHideBattleTowerReporter
 	end
 
-@ Emerald Champions: the Apprentice is retired. src/apprentice.c is gone and
-@ data/scripts/apprentice.inc is no longer assembled, so the Apprentice object is
-@ kept permanently hidden instead of being shown and given a graphics id.
-@ The rest of the Battle Tower is intact: src/battle_tower.c is still present.
-@ The Bravo Trainer reporter went with the TV/interview system: this tree's
-@ data/scripts/interview.inc keeps only a stub EventScript_Reporter and expects
-@ this map to hide the object, so the ShowOrHideReporter helper is gone and the
-@ flag is simply set here.
 BattleFrontier_BattleTowerLobby_OnTransition: @ 823E694
-	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
+	call BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter
+	apprentice_shouldcheckgone
+	compare VAR_0x8004, FALSE  @ Always TRUE here
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice
+	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, BattleFrontier_BattleTowerLobby_EventScript_HideApprentice
+BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice:: @ 823E6B5
+	clearflag FLAG_HIDE_APPRENTICE
+	apprentice_setgfx
+BattleFrontier_BattleTowerLobby_EventScript_EndShowOrHideApprentice:: @ 823E6C0
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_HideApprentice:: @ 823E6C1
 	setflag FLAG_HIDE_APPRENTICE
-	end
+	goto BattleFrontier_BattleTowerLobby_EventScript_EndShowOrHideApprentice
 
-@ Kept only so the map's Apprentice object event has a valid script to point at.
-@ The object above is always hidden, so this is unreachable in play.
-BattleFrontier_BattleTowerLobby_EventScript_Apprentice::
-	lock
-	faceplayer
-	msgbox BattleFrontier_BattleTowerLobby_Text_ApprenticeGone, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_BattleTowerLobby_OnWarp:
+BattleFrontier_BattleTowerLobby_OnWarp: @ 823E6C9
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth
 	.2byte 0
 
@@ -978,10 +972,6 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules:: @ 823F558
 @ Unused
 BattleFrontier_BattleTowerLobby_EventScript_DirectYouToBattleRoom: @ 823F55A
 	.string "I'll direct you to your BATTLE ROOM now.$"
-
-BattleFrontier_BattleTowerLobby_Text_ApprenticeGone:
-	.string "The apprentice who used to train\n"
-	.string "here has moved on.$"
 
 BattleFrontier_BattleTowerLobby_Text_DidntSaveBeforeQuitting: @ 823F583
 	.string "Excuse me!\p"

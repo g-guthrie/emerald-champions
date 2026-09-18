@@ -3,6 +3,7 @@
 #include "overworld.h"
 #include "fldeff.h"
 #include "field_specials.h"
+#include "pokeblock.h"
 #include "event_data.h"
 #include "script.h"
 #include "random.h"
@@ -13,6 +14,7 @@
 #include "text.h"
 #include "easy_chat.h"
 #include "lilycove_lady.h"
+#include "contest.h"
 #include "strings.h"
 #include "constants/lilycove_lady.h"
 
@@ -20,14 +22,17 @@
 
 static void InitLilycoveQuizLady(void);
 static void InitLilycoveFavorLady(void);
+static void InitLilycoveContestLady(void);
 static void ResetQuizLadyForRecordMix(void);
 static void ResetFavorLadyForRecordMix(void);
+static void ResetContestLadyForRecordMix(void);
 static u8 BufferQuizAuthorName(void);
 static bool8 IsQuizTrainerIdNotPlayer(void);
 static u8 GetPlayerNameLength(const u8 *);
 
 static EWRAM_DATA struct LilycoveLadyFavor *sFavorLadyPtr = NULL;
 static EWRAM_DATA struct LilycoveLadyQuiz *sQuizLadyPtr = NULL;
+static EWRAM_DATA struct LilycoveLadyContest *sContestLadyPtr = NULL;
 
 extern EWRAM_DATA enum Item gSpecialVar_ItemId;
 
@@ -38,14 +43,25 @@ u8 GetLilycoveLadyId(void)
 
 void SetLilycoveLadyGfx(void)
 {
+    LilycoveLady *lilycoveLady;
+
     VarSet(VAR_OBJ_GFX_ID_0, sLilycoveLadyGfxId[GetLilycoveLadyId()]);
-    gSpecialVar_Result = FALSE;
+    if (GetLilycoveLadyId() == LILYCOVE_LADY_CONTEST)
+    {
+        lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
+        VarSet(VAR_OBJ_GFX_ID_1, sContestLadyValues[lilycoveLady->contest.category].monGfxId);
+        gSpecialVar_Result = TRUE;
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
 }
 
 void InitLilycoveLady(void)
 {
     u16 id = ((gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0]);
-    id %= 4;
+    id %= 6;
     id >>= 1;
     switch (id)
     {
@@ -54,6 +70,9 @@ void InitLilycoveLady(void)
         break;
     case LILYCOVE_LADY_FAVOR:
         InitLilycoveFavorLady();
+        break;
+    case LILYCOVE_LADY_CONTEST:
+        InitLilycoveContestLady();
         break;
     }
 }
@@ -67,6 +86,9 @@ void ResetLilycoveLadyForRecordMix(void)
         break;
     case LILYCOVE_LADY_FAVOR:
         ResetFavorLadyForRecordMix();
+        break;
+    case LILYCOVE_LADY_CONTEST:
+        ResetContestLadyForRecordMix();
         break;
     }
 }
@@ -556,4 +578,191 @@ void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady)
     }
 }
 
+static void ResetContestLadyContestData(void)
+{
+    sContestLadyPtr->playerName[0] = EOS;
+    sContestLadyPtr->numGoodPokeblocksGiven = 0;
+    sContestLadyPtr->numOtherPokeblocksGiven = 0;
+    sContestLadyPtr->maxSheen = 0;
+    sContestLadyPtr->category = Random() % CONTEST_CATEGORIES_COUNT;
+}
 
+static void InitLilycoveContestLady(void)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
+    sContestLadyPtr->givenPokeblock = FALSE;
+    ResetContestLadyContestData();
+    sContestLadyPtr->language = gGameLanguage;
+}
+
+static void ResetContestLadyForRecordMix(void)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
+    sContestLadyPtr->givenPokeblock = FALSE;
+
+    if (sContestLadyPtr->numGoodPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD
+     || sContestLadyPtr->numOtherPokeblocksGiven == LILYCOVE_LADY_GIFT_THRESHOLD)
+        ResetContestLadyContestData();
+}
+
+static void ContestLadySavePlayerNameIfHighSheen(u8 sheen)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->maxSheen <= sheen)
+    {
+        sContestLadyPtr->maxSheen = sheen;
+        memset(sContestLadyPtr->playerName, EOS, sizeof(sContestLadyPtr->playerName));
+        memcpy(sContestLadyPtr->playerName, gSaveBlock2Ptr->playerName, sizeof(sContestLadyPtr->playerName));
+        sContestLadyPtr->language = gGameLanguage;
+    }
+}
+
+bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
+{
+    u8 sheen = 0;
+    bool8 correctFlavor = FALSE;
+
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    switch (sContestLadyPtr->category)
+    {
+    case CONTEST_CATEGORY_COOL:
+        if (pokeblock->spicy != 0)
+        {
+            sheen = pokeblock->spicy;
+            correctFlavor = TRUE;
+        }
+        break;
+    case CONTEST_CATEGORY_BEAUTY:
+        if (pokeblock->dry != 0)
+        {
+            sheen = pokeblock->dry;
+            correctFlavor = TRUE;
+        }
+        break;
+    case CONTEST_CATEGORY_CUTE:
+        if (pokeblock->sweet != 0)
+        {
+            sheen = pokeblock->sweet;
+            correctFlavor = TRUE;
+        }
+        break;
+    case CONTEST_CATEGORY_SMART:
+        if (pokeblock->bitter != 0)
+        {
+            sheen = pokeblock->bitter;
+            correctFlavor = TRUE;
+        }
+        break;
+    case CONTEST_CATEGORY_TOUGH:
+        if (pokeblock->sour != 0)
+        {
+            sheen = pokeblock->sour;
+            correctFlavor = TRUE;
+        }
+        break;
+    }
+    if (correctFlavor == TRUE)
+    {
+        ContestLadySavePlayerNameIfHighSheen(sheen);
+        sContestLadyPtr->numGoodPokeblocksGiven++;
+    }
+    else
+    {
+        sContestLadyPtr->numOtherPokeblocksGiven++;
+    }
+    return correctFlavor;
+}
+
+static void BufferContestLadyCategoryAndMonName(u8 *category, u8 *nickname)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    StringCopy(category, sContestLadyValues[sContestLadyPtr->category].categoryName);
+    StringCopy_Nickname(nickname, sContestLadyValues[sContestLadyPtr->category].monName);
+}
+
+void BufferContestLadyMonName(u8 *category, u8 *nickname)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    *category = sContestLadyPtr->category;
+    StringCopy(nickname, sContestLadyValues[sContestLadyPtr->category].monName);
+}
+
+void BufferContestLadyPlayerName(u8 *dest)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    StringCopy(dest, sContestLadyPtr->playerName);
+}
+
+void BufferContestLadyLanguage(u8 *dest)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    *dest = sContestLadyPtr->language;
+}
+
+void BufferContestName(u8 *dest, u8 category)
+{
+    StringCopy(dest, sContestLadyValues[category].contestName);
+}
+
+// Used by the Contest Lady's TV show to determine how well she performed
+u8 GetContestLadyPokeblockState(void)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
+        return CONTEST_LADY_GOOD;
+    else if (sContestLadyPtr->numGoodPokeblocksGiven == 0)
+        return CONTEST_LADY_BAD;
+    else
+        return CONTEST_LADY_NORMAL;
+}
+
+
+bool8 HasPlayerGivenContestLadyPokeblock(void)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->givenPokeblock == TRUE)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 ShouldContestLadyShowGoOnAir(void)
+{
+    bool8 putOnAir = FALSE;
+
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (sContestLadyPtr->numGoodPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD
+     || sContestLadyPtr->numOtherPokeblocksGiven >= LILYCOVE_LADY_GIFT_THRESHOLD)
+        putOnAir = TRUE;
+
+    return putOnAir;
+}
+
+void Script_BufferContestLadyCategoryAndMonName(void)
+{
+    BufferContestLadyCategoryAndMonName(gStringVar2, gStringVar1);
+}
+
+void OpenPokeblockCaseForContestLady(void)
+{
+    OpenPokeblockCase(PBLOCK_CASE_GIVE, CB2_ReturnToField);
+}
+
+void SetContestLadyGivenPokeblock(void)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    sContestLadyPtr->givenPokeblock = TRUE;
+}
+
+void GetContestLadyMonSpecies(void)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    gSpecialVar_0x8005 = sContestLadyValues[sContestLadyPtr->category].monSpecies;
+}
+
+u8 GetContestLadyCategory(void)
+{
+    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
+    return sContestLadyPtr->category;
+}

@@ -1,6 +1,6 @@
-.set LOCALID_RIVAL, 28
-.set LOCALID_RIVAL_ON_BIKE, 29
-.set LOCALID_BIRCH, 36
+.set LOCALID_RIVAL, 23
+.set LOCALID_RIVAL_ON_BIKE, 24
+.set LOCALID_BIRCH, 29
 
 Route110_MapScripts:: @ 81EF269
 	map_script MAP_SCRIPT_ON_RESUME, Route110_OnResume
@@ -169,17 +169,17 @@ Route110_EventScript_PlayerRidingAcroBike:: @ 81EF3E8
 	end
 
 Route110_EventScript_Edward:: @ 81EF3F2
-	trainerbattle_single TRAINER_EDWARD, Route110_Text_EdwardIntro, Route110_Text_EdwardDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_EdwardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Jaclyn:: @ 81EF409
-	trainerbattle_single TRAINER_JACLYN, Route110_Text_JaclynIntro, Route110_Text_JaclynDefeated
+	trainerbattle_double TRAINER_JACLYN, Route110_Text_JaclynIntro, Route110_Text_JaclynDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_JaclynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Edwin:: @ 81EF420
-	trainerbattle_single TRAINER_EDWIN_1, Route110_Text_EdwinIntro, Route110_Text_EdwinDefeated, Route110_EventScript_EdwinRegisterMatchCallAfterBattle
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_EventScript_EdwinRematch
@@ -196,27 +196,27 @@ Route110_EventScript_EdwinRegisterMatchCallAfterBattle:: @ 81EF44C
 	end
 
 Route110_EventScript_EdwinRematch:: @ 81EF46B
-	trainerbattle_rematch TRAINER_EDWIN_1, Route110_Text_EdwinRematchIntro, Route110_Text_EdwinRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_EdwinRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Dale:: @ 81EF482
-	trainerbattle_single TRAINER_DALE, Route110_Text_DaleIntro, Route110_Text_DaleDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_DalePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Jacob:: @ 81EF499
-	trainerbattle_single TRAINER_JACOB, Route110_Text_JacobIntro, Route110_Text_JacobDefeated
+	trainerbattle_double TRAINER_JACOB, Route110_Text_JacobIntro, Route110_Text_JacobDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_JacobPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Anthony:: @ 81EF4B0
-	trainerbattle_single TRAINER_ANTHONY, Route110_Text_AnthonyIntro, Route110_Text_AnthonyDefeated
+	trainerbattle_double TRAINER_ANTHONY, Route110_Text_AnthonyIntro, Route110_Text_AnthonyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_AnthonyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Benjamin:: @ 81EF4C7
-	trainerbattle_single TRAINER_BENJAMIN_1, Route110_Text_BenjaminIntro, Route110_Text_BenjaminDefeated, Route110_EventScript_BenjaminRegisterMatchCallAfterBattle
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_EventScript_BenjaminRematch
@@ -233,17 +233,17 @@ Route110_EventScript_BenjaminRegisterMatchCallAfterBattle:: @ 81EF4F3
 	end
 
 Route110_EventScript_BenjaminRematch:: @ 81EF512
-	trainerbattle_rematch TRAINER_BENJAMIN_1, Route110_Text_BenjaminRematchIntro, Route110_Text_BenjaminRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_BenjaminRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Jasmine:: @ 81EF529
-	trainerbattle_single TRAINER_JASMINE, Route110_Text_JasmineIntro, Route110_Text_JasmineDefeated
+	trainerbattle_double TRAINER_JASMINE, Route110_Text_JasmineIntro, Route110_Text_JasmineDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_JasminePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Abigail:: @ 81EF540
-	trainerbattle_single TRAINER_ABIGAIL_1, Route110_Text_AbigailIntro, Route110_Text_AbigailDefeated, Route110_EventScript_AbigailRegisterMatchCallAfterBattle
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_EventScript_AbigailRematch
@@ -260,12 +260,12 @@ Route110_EventScript_AbigailRegisterMatchCallAfterBattle:: @ 81EF56C
 	end
 
 Route110_EventScript_AbigailRematch:: @ 81EF58B
-	trainerbattle_rematch TRAINER_ABIGAIL_1, Route110_Text_AbigailRematchIntro, Route110_Text_AbigailRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_AbigailRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Isabel:: @ 81EF5A2
-	trainerbattle_single TRAINER_ISABEL_1, Route110_Text_IsabelIntro, Route110_Text_IsabelDefeated, Route110_EventScript_IsabelRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_ISABEL_1, Route110_Text_IsabelIntro, Route110_Text_IsabelDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route110_EventScript_IsabelRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_EventScript_IsabelRematch
@@ -282,12 +282,12 @@ Route110_EventScript_IsabelRegisterMatchCallAfterBattle:: @ 81EF5CE
 	end
 
 Route110_EventScript_IsabelRematch:: @ 81EF5ED
-	trainerbattle_rematch TRAINER_ISABEL_1, Route110_Text_IsabelRematchIntro, Route110_Text_IsabelRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_IsabelRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Timmy:: @ 81EF604
-	trainerbattle_single TRAINER_TIMMY, Route110_Text_TimmyIntro, Route110_Text_TimmyDefeated
+	trainerbattle_double TRAINER_TIMMY, Route110_Text_TimmyIntro, Route110_Text_TimmyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_TimmyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -295,17 +295,17 @@ Route110_EventScript_Unused:: @ 81EF61B
 	end
 
 Route110_EventScript_Kaleb:: @ 81EF61C
-	trainerbattle_single TRAINER_KALEB, Route110_Text_KalebIntro, Route110_Text_KalebDefeated
+	trainerbattle_double TRAINER_KALEB, Route110_Text_KalebIntro, Route110_Text_KalebDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_KalebPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Joseph:: @ 81EF633
-	trainerbattle_single TRAINER_JOSEPH, Route110_Text_JosephIntro, Route110_Text_JosephDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_JosephPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Alyssa:: @ 81EF64A
-	trainerbattle_single TRAINER_ALYSSA, Route110_Text_AlyssaIntro, Route110_Text_AlyssaDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_Text_AlyssaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -344,11 +344,11 @@ Route110_EventScript_ChallengeReactionBest:: @ 81EF6FD
 
 Route110_EventScript_ChallengeReactionGood:: @ 81EF70B
 	msgbox Route110_Text_ChallengeReactionGood, MSGBOX_DEFAULT
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq Route110_EventScript_EndChallenge
+	goto_if_set FLAG_EC_GIFT_ROUTE110, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM83, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_ROUTE110
 	goto Route110_EventScript_EndChallenge
 	end
 
@@ -433,17 +433,17 @@ Route110_EventScript_MayBattle:: @ 81EF7EB
 	end
 
 Route110_EventScript_MayBattleTreecko:: @ 81EF81A
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_TREECKO, Route110_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_110_TREECKO, Route110_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route110_EventScript_MayDefeated
 	end
 
 Route110_EventScript_MayBattleTorchic:: @ 81EF82A
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_TORCHIC, Route110_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_110_TORCHIC, Route110_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route110_EventScript_MayDefeated
 	end
 
 Route110_EventScript_MayBattleMudkip:: @ 81EF83A
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_110_MUDKIP, Route110_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_110_MUDKIP, Route110_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route110_EventScript_MayDefeated
 	end
 
@@ -463,17 +463,17 @@ Route110_EventScript_BrendanBattle:: @ 81EF865
 	end
 
 Route110_EventScript_BrendanBattleTreecko:: @ 81EF894
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_TREECKO, Route110_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_110_TREECKO, Route110_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route110_EventScript_BrendanDefeated
 	end
 
 Route110_EventScript_BrendanBattleTorchic:: @ 81EF8A4
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_TORCHIC, Route110_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_110_TORCHIC, Route110_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route110_EventScript_BrendanDefeated
 	end
 
 Route110_EventScript_BrendanBattleMudkip:: @ 81EF8B4
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_110_MUDKIP, Route110_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_110_MUDKIP, Route110_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route110_EventScript_BrendanDefeated
 	end
 
@@ -911,8 +911,9 @@ Route110_Text_ChallengeReactionBest: @ 81F0431
 	.string "You've shaken me to my very soul!$"
 
 Route110_Text_GiveTM93:
-	.string "Please, take this TM as a reward\n"
-	.string "for your cycling mastery!$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "Your technique is remarkable.\p"
@@ -920,8 +921,9 @@ Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "still avoiding collisions.$"
 
 Route110_Text_GiveTM83:
-	.string "Here, take this TM to commemorate\n"
-	.string "your success.$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 Route110_Text_ChallengeReactionOk: @ 81F0500
 	.string "I would consider you a work in\n"

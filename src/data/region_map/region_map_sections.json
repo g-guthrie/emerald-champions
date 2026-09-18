@@ -1624,6 +1624,14 @@
       "name": "NAVEL ROCK"
     },
     {
+      "id": "MAPSEC_TRAINER_HILL",
+      "name": "TRAINER HILL",
+      "x": 8,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
       "id": "MAPSEC_SEASPRAY_CAVE",
       "name": "SEASPRAY CAVE",
       "x": 0,

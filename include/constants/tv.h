@@ -5,7 +5,8 @@
 #define POKENEWS_SLATEPORT    1
 #define POKENEWS_GAME_CORNER  2
 #define POKENEWS_LILYCOVE     3
-#define NUM_POKENEWS_TYPES    3 // Excludes NONE
+#define POKENEWS_BLENDMASTER  4
+#define NUM_POKENEWS_TYPES    4 // Excludes NONE
 
 #define POKENEWS_STATE_INACTIVE 0
 #define POKENEWS_STATE_UPCOMING 1
@@ -30,13 +31,13 @@
 #define TVSHOW_PKMN_FAN_CLUB_OPINIONS               3
 #define TVSHOW_DUMMY                                4
 #define TVSHOW_NAME_RATER_SHOW                      5
-// This show has no handler in src/tv.c; the ID is kept only so the Inclement
-// Lilycove Contest Lobby reporter script assembles. InterviewBefore ignores
-// unhandled show types (VAR_RESULT stays FALSE), so passing it is inert.
 #define TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE        6
 #define TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE   7
+#define TVSHOW_CONTEST_LIVE_UPDATES                 8
+#define TVSHOW_3_CHEERS_FOR_POKEBLOCKS              9
 #define TVSHOW_BATTLE_UPDATE                        10
 #define TVSHOW_FAN_CLUB_SPECIAL                     11
+#define TVSHOW_LILYCOVE_CONTEST_LADY                12
 //
 #define TVGROUP_NORMAL_END                          20
 

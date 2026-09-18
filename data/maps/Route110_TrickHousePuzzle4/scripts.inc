@@ -14,17 +14,17 @@ Route110_TrickHousePuzzle4_EventScript_FoundScroll:: @ 826C873
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Cora:: @ 826C87E
-	trainerbattle_single TRAINER_CORA, Route110_TrickHousePuzzle4_Text_CoraIntro, Route110_TrickHousePuzzle4_Text_CoraDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_TrickHousePuzzle4_Text_CoraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Yuji:: @ 826C895
-	trainerbattle_single TRAINER_YUJI, Route110_TrickHousePuzzle4_Text_YujiIntro, Route110_TrickHousePuzzle4_Text_YujiDefeat
+	trainerbattle_double TRAINER_YUJI, Route110_TrickHousePuzzle4_Text_YujiIntro, Route110_TrickHousePuzzle4_Text_YujiDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle4_Text_YujiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Paula:: @ 826C8AC
-	trainerbattle_single TRAINER_PAULA, Route110_TrickHousePuzzle4_Text_PaulaIntro, Route110_TrickHousePuzzle4_Text_PaulaDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route110_TrickHousePuzzle4_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE
 	end
 

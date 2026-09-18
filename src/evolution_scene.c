@@ -588,7 +588,6 @@ static void CreateShedinja(enum Species preEvoSpecies, enum Species postEvoSpeci
             data = MAIL_NONE;
             SetMonData(&gParties[B_TRAINER_PLAYER][gPartiesCount[B_TRAINER_PLAYER]], MON_DATA_MAIL, &data);
 
-            ApplyEmeraldChampionsRecommendedEvolutionSet(shedinja);
             CalculateMonStats(&gParties[B_TRAINER_PLAYER][gPartiesCount[B_TRAINER_PLAYER]]);
             CalculatePlayerPartyCount();
 
@@ -840,7 +839,7 @@ static void Task_EvolutionScene(u8 taskId)
 
             if (!gTasks[taskId].tEvoWasStopped)
             {
-                ApplyEmeraldChampionsRecommendedEvolutionSet(mon);
+
                 CreateShedinja(gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies, mon);
             }
 
@@ -1258,7 +1257,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         if (!IsTextPrinterActiveOnWindow(0))
         {
             if (!gTasks[taskId].tEvoWasStopped)
-                ApplyEmeraldChampionsRecommendedEvolutionSet(mon);
+
             DestroyTask(taskId);
             FREE_AND_SET_NULL(sEvoStructPtr);
             gTextFlags.useAlternateDownArrow = FALSE;

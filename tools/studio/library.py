@@ -131,7 +131,7 @@ class Library:
             if len(maps)>1: shared.append(r)
             else: by_map[maps[0]].append(r)
         lines=["# Emerald Studio — dialogue reading copy",
-               "", "Generated from current NPC script bindings. Edit the source and canonical Game Book; this is a reading index.",
+               "", "Generated from current NPC script bindings. Edit native source; this is a development inspection index.",
                "Conditional dialogue is included. Native-handler text and actual visual delivery need runtime inspection.", ""]
         for name in sorted(by_map):
             lines += ["## "+name,""]

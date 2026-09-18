@@ -1373,7 +1373,6 @@ SootopolisCity_EventScript_Wallace:: @ 81E6446
 
 SootopolisCity_EventScript_GiveWaterfall:: @ 81E646F
 	msgbox SootopolisCity_Text_ThankYouForHelpAcceptThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
 	setflag FLAG_RECEIVED_HM07
 	msgbox SootopolisCity_Text_ExplainWaterfallGoToGym, MSGBOX_DEFAULT
 	closemessage
@@ -1778,17 +1777,14 @@ SootopolisCity_Text_ThankYouForHelpAcceptThis: @ 81E7ACF
 	.string "Please accept it.$"
 
 SootopolisCity_Text_ExplainWaterfallGoToGym: @ 81E7B86
-	.string "That Hidden Machine contains\n"
+	.string "You now have the Waterfall\n"
+	.string "license. Earn the Rain Badge\l"
+	.string "here in Sootopolis, then bring a\l"
+	.string "partner that can learn\l"
 	.string "Waterfall.\p"
-	.string "If you have the Rain Badge, a Pokémon\n"
-	.string "that has learned that HM move can\l"
-	.string "force its way up waterfalls.\p"
-	.string "And where does one get the Rain Badge?\n"
-	.string "You know, don't you?\p"
-	.string "That's right! You have to beat\n"
-	.string "the Sootopolis Gym Leader.\p"
-	.string "When you're all set to go, step through\n"
-	.string "that door.$"
+	.string "Approach a waterfall to climb\n"
+	.string "it. You do not need to teach the\l"
+	.string "move.$"
 
 SootopolisCity_Text_DazzledByMentor: @ 81E7CBC
 	.string "Wallace: I'm sure that you will be\n"

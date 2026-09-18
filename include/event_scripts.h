@@ -59,6 +59,15 @@ extern const u8 EventSnippet_NotEnoughMonsForDoubleBattle[];
 
 extern const u8 BerryTreeScript[];
 
+extern const u8 gTVBravoTrainerText00[];
+extern const u8 gTVBravoTrainerText01[];
+extern const u8 gTVBravoTrainerText02[];
+extern const u8 gTVBravoTrainerText03[];
+extern const u8 gTVBravoTrainerText04[];
+extern const u8 gTVBravoTrainerText05[];
+extern const u8 gTVBravoTrainerText06[];
+extern const u8 gTVBravoTrainerText07[];
+extern const u8 gTVBravoTrainerText08[];
 extern const u8 BravoTrainerBattleTower_Text_Intro[];
 extern const u8 BravoTrainerBattleTower_Text_NewRecord[];
 extern const u8 BravoTrainerBattleTower_Text_Lost[];
@@ -94,6 +103,12 @@ extern const u8 gTVRecentHappeningsText03[];
 extern const u8 gTVRecentHappeningsText04[];
 extern const u8 gTVRecentHappeningsText05[];
 extern const u8 gTVMassOutbreakText00[];
+extern const u8 gTV3CheersForPokeblocksText00[];
+extern const u8 gTV3CheersForPokeblocksText01[];
+extern const u8 gTV3CheersForPokeblocksText02[];
+extern const u8 gTV3CheersForPokeblocksText03[];
+extern const u8 gTV3CheersForPokeblocksText04[];
+extern const u8 gTV3CheersForPokeblocksText05[];
 extern const u8 gTVTrainerFanClubSpecialText00[];
 extern const u8 gTVTrainerFanClubSpecialText01[];
 extern const u8 gTVTrainerFanClubSpecialText02[];
@@ -326,6 +341,39 @@ extern const u8 gTVSafariFanClubText07[];
 extern const u8 gTVSafariFanClubText08[];
 extern const u8 gTVSafariFanClubText09[];
 extern const u8 gTVSafariFanClubText10[];
+extern const u8 ContestLiveUpdates_Text_Intro[];
+extern const u8 ContestLiveUpdates_Text_WonBothRounds[];
+extern const u8 ContestLiveUpdates_Text_BetterRound2[];
+extern const u8 ContestLiveUpdates_Text_EqualRounds[];
+extern const u8 ContestLiveUpdates_Text_BetterRound1[];
+extern const u8 ContestLiveUpdates_Text_GotNervous[];
+extern const u8 ContestLiveUpdates_Text_StartledFoes[];
+extern const u8 ContestLiveUpdates_Text_UsedCombo[];
+extern const u8 ContestLiveUpdates_Text_ExcitingAppeal[];
+extern const u8 ContestLiveUpdates_Text_WasCool[];
+extern const u8 ContestLiveUpdates_Text_WasBeautiful[];
+extern const u8 ContestLiveUpdates_Text_WasCute[];
+extern const u8 ContestLiveUpdates_Text_WasSmart[];
+extern const u8 ContestLiveUpdates_Text_WasTough[];
+extern const u8 ContestLiveUpdates_Text_VeryExcitingAppeal[];
+extern const u8 ContestLiveUpdates_Text_VeryCool[];
+extern const u8 ContestLiveUpdates_Text_VeryBeautiful[];
+extern const u8 ContestLiveUpdates_Text_VeryCute[];
+extern const u8 ContestLiveUpdates_Text_VerySmart[];
+extern const u8 ContestLiveUpdates_Text_VeryTough[];
+extern const u8 ContestLiveUpdates_Text_TookBreak[];
+extern const u8 ContestLiveUpdates_Text_GotStartled[];
+extern const u8 ContestLiveUpdates_Text_MoveWonderful[];
+extern const u8 ContestLiveUpdates_Text_TalkAboutAnotherMon[];
+extern const u8 ContestLiveUpdates_Text_FailedToAppeal[];
+extern const u8 ContestLiveUpdates_Text_LastInBothRounds[];
+extern const u8 ContestLiveUpdates_Text_NotExcitingEnough[];
+extern const u8 ContestLiveUpdates_Text_LostAfterWinningRound1[];
+extern const u8 ContestLiveUpdates_Text_NeverExciting[];
+extern const u8 ContestLiveUpdates_Text_LostBySmallMargin[];
+extern const u8 ContestLiveUpdates_Text_RepeatedAppeals[];
+extern const u8 ContestLiveUpdates_Text_ValiantEffortButLost[];
+extern const u8 ContestLiveUpdates_Text_Outro[];
 extern const u8 gTVPokemonBattleUpdateText00[];
 extern const u8 gTVPokemonBattleUpdateText01[];
 extern const u8 gTVPokemonBattleUpdateText02[];
@@ -343,6 +391,10 @@ extern const u8 gTVInSearchOfTrainersText05[];
 extern const u8 gTVInSearchOfTrainersText06[];
 extern const u8 gTVInSearchOfTrainersText07[];
 extern const u8 gTVInSearchOfTrainersText08[];
+extern const u8 ContestLadyShow_Text_Intro[];
+extern const u8 ContestLadyShow_Text_Won[];
+extern const u8 ContestLadyShow_Text_Lost[];
+extern const u8 ContestLadyShow_Text_LostBadly[];
 extern const u8 gPokeNewsTextSlateport_Upcoming[];
 extern const u8 gPokeNewsTextSlateport_Ongoing[];
 extern const u8 gPokeNewsTextSlateport_Ending[];
@@ -352,6 +404,9 @@ extern const u8 gPokeNewsTextGameCorner_Ending[];
 extern const u8 gPokeNewsTextLilycove_Upcoming[];
 extern const u8 gPokeNewsTextLilycove_Ongoing[];
 extern const u8 gPokeNewsTextLilycove_Ending[];
+extern const u8 gPokeNewsTextBlendMaster_Upcoming[];
+extern const u8 gPokeNewsTextBlendMaster_Ongoing[];
+extern const u8 gPokeNewsTextBlendMaster_Ending[];
 extern const u8 SecretBase_Text_Trainer0Defeated[];
 extern const u8 SecretBase_Text_Trainer1Defeated[];
 extern const u8 SecretBase_Text_Trainer2Defeated[];
@@ -535,6 +590,7 @@ extern const u8 EventScript_Blueprint[];
 extern const u8 EventScript_WirelessBoxResults[];
 extern const u8 EventScript_CableBoxResults[];
 extern const u8 EventScript_Questionnaire[];
+extern const u8 EventScript_TrainerHillTimer[];
 extern const u8 EventScript_CurrentTooFast[];
 extern const u8 EventScript_UseSurf[];
 extern const u8 EventScript_NobodyCanSurf[];
@@ -572,11 +628,18 @@ extern const u8 SecretBase_EventScript_PutAwayDecoration[];
 extern const u8 SecretBase_EventScript_SetDecoration[];
 
 // Battle Pyramid.
+extern const u8 BattlePyramid_Retire[];
+extern const u8 BattlePyramid_WarpToNextFloor[];
+extern const u8 BattlePyramid_TrainerBattle[];
+extern const u8 BattlePyramid_FindItemBall[];
 
 // fldeff misc
 extern const u8 SecretBase_EventScript_CaveUseSecretPower[];
 extern const u8 SecretBase_EventScript_TreeUseSecretPower[];
 extern const u8 SecretBase_EventScript_ShrubUseSecretPower[];
+
+// trainer hill
+extern const u8 TrainerHill_EventScript_TrainerBattle[];
 
 // Item Use
 extern const u8 BerryTree_EventScript_ItemUsePlantBerry[];
@@ -746,4 +809,5 @@ extern const u8 CableClub_EventScript_ShowBattleRecords_Frlg[];
 extern const u8 EventScript_Indigo_UltimateGoal[];
 extern const u8 EventScript_Indigo_HighestAuthority[];
 
+extern const u8 TrainerHill_EventScript_GenerationFailed[];
 #endif // GUARD_EVENT_SCRIPTS_H

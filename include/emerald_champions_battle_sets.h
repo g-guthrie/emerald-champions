@@ -51,7 +51,6 @@ s16 GetEmeraldChampionsCurrentBattleSetChoice(struct Pokemon *mon);
 s16 GetEmeraldChampionsCurrentBattleSetChoiceForFormat(struct Pokemon *mon, u8 format);
 u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice);
 u8 ApplyEmeraldChampionsBattleSetChoiceForFormat(struct Pokemon *mon, u8 choice, u8 format);
-u8 ApplyEmeraldChampionsRecommendedEvolutionSet(struct Pokemon *mon);
 u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon);
 u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon);
 u8 GetEmeraldChampionsRawBattleSetCount(enum Species species);

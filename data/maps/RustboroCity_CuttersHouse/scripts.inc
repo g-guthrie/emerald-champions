@@ -6,7 +6,6 @@ RustboroCity_CuttersHouse_EventScript_Cutter:: @ 8215BD4
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM01, RustboroCity_CuttersHouse_EventScript_ExplainCut
 	msgbox RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
 	setflag FLAG_RECEIVED_HM01
 	msgbox RustboroCity_CuttersHouse_Text_ExplainCut, MSGBOX_DEFAULT
 	release
@@ -22,27 +21,18 @@ RustboroCity_CuttersHouse_EventScript_Lass:: @ 8215C0A
 	end
 
 RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse: @ 8215C13
-	.string "That determined expression…\n"
-	.string "That limber way you move…\l"
-	.string "And your well-trained Pokémon…\p"
-	.string "You're obviously a skilled Trainer!\p"
-	.string "No, wait, don't say a word.\n"
-	.string "I can tell just by looking at you.\p"
-	.string "I'm sure that you can put this\n"
-	.string "Hidden Machine to good use.\p"
-	.string "No need to be modest or shy.\n"
-	.string "Go on, take it!$"
+	.string "That determined expression...\n"
+	.string "You look ready to learn how to\l"
+	.string "clear a path.\p"
+	.string "I authorize you to use Cut!$"
 
 RustboroCity_CuttersHouse_Text_ExplainCut: @ 8215D33
-	.string "That Hidden Machine, or HM for\n"
-	.string "short, is Cut.\p"
-	.string "An HM move is one that can be used\n"
-	.string "by Pokémon outside of battle.\p"
-	.string "Any Pokémon that's learned Cut can\n"
-	.string "chop down thin trees if the Trainer\l"
-	.string "has earned the Stone Badge.\p"
-	.string "And, like a TM, an HM can be used\n"
-	.string "more than once.$"
+	.string "With the Stone Badge and this\n"
+	.string "license, approach a thin tree\l"
+	.string "with a partner that can learn\l"
+	.string "Cut.\p"
+	.string "It does not need to know Cut in\n"
+	.string "battle.$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees: @ 8215E39
 	.string "When they were expanding the city of\n"

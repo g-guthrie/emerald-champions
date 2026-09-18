@@ -1591,37 +1591,6 @@ void EmeraldChampionsHeadlessObserve(void)
         }
         return;
     }
-    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BATTLE_SET_LONG_LIST)
-    {
-        bool32 menuActive;
-        u16 expectedOffset;
-
-        if (gEcHeadlessFixtureTrigger
-         && !gEcHeadlessFixtureSetupResult
-         && gMain.callback2 == CB2_Overworld)
-        {
-            gEcHeadlessFixtureTrigger = FALSE;
-            gSpecialVar_0x800A = 0;
-            gSpecialVar_0x8007 = EC_BATTLE_FORMAT_DOUBLES;
-            gSpecialVar_0x8004 = SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET;
-            gSpecialVar_0x8005 = 0;
-            ScriptContext_Stop();
-            ShowScrollableMultichoice();
-            gEcHeadlessFixtureSetupResult = TRUE;
-        }
-        menuActive = IsScrollableMultichoiceHeadlessActive(
-            SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET
-        );
-        expectedOffset = gEcHeadlessFixtureParam == EC_HEADLESS_BATTLE_SET_LIST_BOTTOM
-            ? 3
-            : gEcHeadlessFixtureParam == EC_HEADLESS_BATTLE_SET_LIST_MIDDLE ? 2 : 0;
-        gEcHeadlessFixtureObservedResult = menuActive
-            && GetEmeraldChampionsBattleSetCountForFormat(
-                &gParties[B_TRAINER_PLAYER][0], EC_BATTLE_FORMAT_DOUBLES
-            ) == 6
-            && gScrollableMultichoice_ScrollOffset == expectedOffset;
-        return;
-    }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_POKEDEX)
     {
         gEcHeadlessFixtureObservedResult = IsHeadlessPokedexStateObserved();
@@ -2258,11 +2227,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             LoadHeadlessMap(MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE, 7, 5);
         else
             LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 13, 3);
-        break;
-    case EC_HEADLESS_SCENARIO_MOVE_SPECIALIST_CURRENT_SET:
-        GiveHeadlessGeodude(30);
-        ApplyEmeraldChampionsBattleSetChoice(&gParties[B_TRAINER_PLAYER][0], 1);
-        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 13, 3);
         break;
     case EC_HEADLESS_SCENARIO_THUNDURUS:
         LoadHeadlessMap(MAP_ROUTE110, 6, 16);
@@ -4040,17 +4004,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         FlagSet(FLAG_ITEM_NEW_MAUVILLE_UPGRADE);
         VarSet(VAR_REPEL_STEP_COUNT, 250);
         LoadHeadlessMap(MAP_NEW_MAUVILLE_INSIDE, 6, 12);
-        break;
-    case EC_HEADLESS_SCENARIO_BATTLE_SET_LONG_LIST:
-        AddBagItem(ITEM_MEGA_RING, 1);
-        CreateHealthyHeadlessMon(
-            &gParties[B_TRAINER_PLAYER][0],
-            SPECIES_CHARIZARD,
-            50,
-            OTID_STRUCT_PLAYER_ID
-        );
-        CalculatePlayerPartyCount();
-        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
         break;
     case EC_HEADLESS_SCENARIO_START_MENU_FULL:
         // Every Start menu row an established save can show: Pokedex, Pokemon, Bag,

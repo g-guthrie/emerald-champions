@@ -50,7 +50,7 @@ AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked:: @ 8237E09
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_Duncan:: @ 8237E13
-	trainerbattle_single TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_DuncanIntro, AbandonedShip_Corridors_B1F_Text_DuncanDefeat
+	trainerbattle_double TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_DuncanIntro, AbandonedShip_Corridors_B1F_Text_DuncanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AbandonedShip_Corridors_B1F_Text_DuncanPostBattle, MSGBOX_AUTOCLOSE
 	end
 

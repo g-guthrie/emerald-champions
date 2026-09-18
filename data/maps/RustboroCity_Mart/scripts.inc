@@ -16,11 +16,11 @@ RustboroCity_Mart_EventScript_BugCatcher:: @ 8214F86
 RustboroCity_Mart_EventScript_FalseSwipeTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq RustboroCity_Mart_EventScript_ReceivedTM98
+	goto_if_set FLAG_EC_GIFT_RUSTBORO_CITY_MART, RustboroCity_Mart_EventScript_ReceivedTM98
 	msgbox RustboroCity_Mart_Text_ExcuseMeTrainer, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_RUSTBORO_CITY_MART
 	msgbox RustboroCity_Mart_Text_HaveTM98, MSGBOX_DEFAULT
 	release
 	end
@@ -40,12 +40,10 @@ RustboroCity_Mart_Text_ExcuseMeTrainer:
 	.string "For such a common problem, use this!$"
 
 RustboroCity_Mart_Text_HaveTM98:
-	.string "False Swipe is a very handy move.\p"
-	.string "No matter how many times it's used on\n"
-	.string "the opposing Pokémon, it won't cause\l"
-	.string "the Pokémon to faint!\p"
-	.string "I'm offering it for free right now.\n"
-	.string "This is a limited-time promotion!$"
+	.string "Use that Rare Candy to help a\n"
+	.string "partner grow one level. It\l"
+	.string "cannot take you past the current\l"
+	.string "cap.$"
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
 	.string "I'm buying some Parlyz Heals and\n"

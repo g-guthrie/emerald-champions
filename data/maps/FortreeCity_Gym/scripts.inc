@@ -16,7 +16,6 @@ FortreeCity_Gym_EventScript_InitRotatingGates:: @ 82165C4
 	end
 
 FortreeCity_Gym_EventScript_Winona:: @ 82165C8
-	goto_if_set FLAG_DAILY_REMATCH_WINONA, FortreeCity_Gym_EventScript_AlreadyRematched
 @ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
 @ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
 @ for bespoke campaign fights -- so post-game rematching a leader would start the
@@ -24,7 +23,7 @@ FortreeCity_Gym_EventScript_Winona:: @ 82165C8
 @ one. The gate below is disabled so leaders fall through to normal post-battle
 @ dialogue. To re-enable once real rematch teams exist, restore this single line.
 @	goto_if_set FLAG_SYS_GAME_CLEAR, FortreeCity_Gym_EventScript_WinonaRematch
-	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
+	trainerbattle_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, EmeraldChampions_Text_NeedTwoPokemon, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM51, FortreeCity_Gym_EventScript_GiveRoost2
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	release
@@ -85,8 +84,7 @@ FortreeCity_Gym_EventScript_WinonaRematch::
 FortreeCity_Gym_EventScript_SetSingles::
 	msgbox FortreeCity_Gym_Text_WinonaAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_Gym_EventScript_WinonaSinglesRematch
-	trainerbattle_no_intro TRAINER_WINONA_4, FortreeCity_Gym_Text_WinonaRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_WINONA
 	releaseall
 	end
@@ -94,20 +92,19 @@ FortreeCity_Gym_EventScript_SetSingles::
 FortreeCity_Gym_EventScript_SetDoubles::
 	msgbox FortreeCity_Gym_Text_WinonaAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_Gym_EventScript_WinonaDoublesRematch
-	trainerbattle_no_intro TRAINER_WINONA_5, FortreeCity_Gym_Text_WinonaRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_WINONA
 	releaseall
 	end
 
 FortreeCity_Gym_EventScript_WinonaSinglesRematch::
-	trainerbattle_no_intro TRAINER_WINONA_2, FortreeCity_Gym_Text_WinonaRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_WINONA
 	releaseall
 	end
 
 FortreeCity_Gym_EventScript_WinonaDoublesRematch::
-	trainerbattle_no_intro TRAINER_WINONA_3, FortreeCity_Gym_Text_WinonaRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_WINONA
 	releaseall
 	end
@@ -122,32 +119,32 @@ FortreeCity_Gym_EventScript_Exit::
 	end
 
 FortreeCity_Gym_EventScript_Jared:: @ 82166A8
-	trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_JaredIntro, FortreeCity_Gym_Text_JaredDefeat
+	trainerbattle_double TRAINER_JARED, FortreeCity_Gym_Text_JaredIntro, FortreeCity_Gym_Text_JaredDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox FortreeCity_Gym_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Edwardo:: @ 82166BF
-	trainerbattle_single TRAINER_EDWARDO, FortreeCity_Gym_Text_EdwardoIntro, FortreeCity_Gym_Text_EdwardoDefeat
+	trainerbattle_double TRAINER_EDWARDO, FortreeCity_Gym_Text_EdwardoIntro, FortreeCity_Gym_Text_EdwardoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox FortreeCity_Gym_Text_EdwardoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Flint:: @ 82166D6
-	trainerbattle_single TRAINER_FLINT, FortreeCity_Gym_Text_FlintIntro, FortreeCity_Gym_Text_FlintDefeat
+	trainerbattle_double TRAINER_FLINT, FortreeCity_Gym_Text_FlintIntro, FortreeCity_Gym_Text_FlintDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox FortreeCity_Gym_Text_FlintPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Ashley:: @ 82166ED
-	trainerbattle_single TRAINER_ASHLEY, FortreeCity_Gym_Text_AshleyIntro, FortreeCity_Gym_Text_AshleyDefeat
+	trainerbattle_double TRAINER_ASHLEY, FortreeCity_Gym_Text_AshleyIntro, FortreeCity_Gym_Text_AshleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox FortreeCity_Gym_Text_AshleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Humberto:: @ 8216704
-	trainerbattle_single TRAINER_HUMBERTO, FortreeCity_Gym_Text_HumbertoIntro, FortreeCity_Gym_Text_HumbertoDefeat
+	trainerbattle_double TRAINER_HUMBERTO, FortreeCity_Gym_Text_HumbertoIntro, FortreeCity_Gym_Text_HumbertoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox FortreeCity_Gym_Text_HumbertoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Darius:: @ 821671B
-	trainerbattle_single TRAINER_DARIUS, FortreeCity_Gym_Text_DariusIntro, FortreeCity_Gym_Text_DariusDefeat
+	trainerbattle_double TRAINER_DARIUS, FortreeCity_Gym_Text_DariusIntro, FortreeCity_Gym_Text_DariusDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox FortreeCity_Gym_Text_DariusPostBattle, MSGBOX_AUTOCLOSE
 	end
 

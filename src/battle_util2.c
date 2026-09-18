@@ -4,6 +4,7 @@
 #include "battle_controllers.h"
 #include "malloc.h"
 #include "pokemon.h"
+#include "trainer_hill.h"
 #include "trainer_tower.h"
 #include "party_menu.h"
 #include "event_data.h"
@@ -35,6 +36,8 @@ void AllocateBattleResources(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
         InitTrainerTowerBattleStruct();
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+        InitTrainerHillBattleStruct();
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
     gAiBattleData = AllocZeroed(sizeof(*gAiBattleData));
@@ -69,6 +72,8 @@ void FreeBattleResources(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
         FreeTrainerTowerBattleStruct();
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+        FreeTrainerHillBattleStruct();
 
     gFieldTimers.terrain = 0;
     if (gBattleResources != NULL)

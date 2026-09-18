@@ -1,3 +1,12 @@
+#include "constants/apprentice.h"
+#include "constants/contest.h"
+#include "constants/trainer_hill.h"
+#include "constants/battle_dome.h"
+#include "constants/battle_factory.h"
+#include "constants/battle_pike.h"
+#include "constants/battle_pyramid.h"
+#include "constants/battle_arena.h"
+#include "constants/battle_palace.h"
 #include "config/general.h"
 #include "config/battle.h"
 #include "config/item.h"
@@ -95,8 +104,8 @@ gSpecialVars::
 	.4byte gSpecialVar_Result
 	.4byte gSpecialVar_ItemId
 	.4byte gSpecialVar_LastTalked
-	.4byte gSpecialVar_Unused_0x8010
-	.4byte gSpecialVar_Unused_0x8011
+	.4byte gSpecialVar_ContestRank
+	.4byte gSpecialVar_ContestCategory
 	.4byte gSpecialVar_MonBoxId
 	.4byte gSpecialVar_MonBoxPos
 	.4byte gSpecialVar_Unused_0x8014
@@ -1788,3 +1797,99 @@ Common_EventScript_TryRemoveMon::
 
 
 @ The below and surf.inc could be split into some text/notices.inc
+
+	.include "data/maps/OldaleTown_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/DewfordTown_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/LavaridgeTown_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/FallarborTown_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/VerdanturfTown_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/PacifidlogTown_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/PetalburgCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/SlateportCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/MauvilleCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/RustboroCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/FortreeCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/LilycoveCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/MossdeepCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/SootopolisCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/EverGrandeCity_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/EverGrandeCity_PokemonLeague_2F/scripts.inc"
+
+	.include "data/maps/BattleFrontier_PokemonCenter_2F/scripts.inc"
+
+	.include "data/maps/ContestHall/scripts.inc"
+
+	.include "data/maps/LilycoveCity_ContestHall/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattleArenaCorridor/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattleDomeCorridor/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattleFactoryPreBattleRoom/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePalaceCorridor/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePikeCorridor/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePikeRoomWildMons/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePyramidFloor/scripts.inc"
+
+	.include "data/maps/BattleFrontier_BattlePyramidTop/scripts.inc"
+
+	.include "data/maps/BattlePyramidSquare01/scripts.inc"
+
+	.include "data/maps/TrainerHill_1F/scripts.inc"
+
+	.include "data/maps/TrainerHill_2F/scripts.inc"
+
+	.include "data/maps/TrainerHill_3F/scripts.inc"
+
+	.include "data/maps/TrainerHill_4F/scripts.inc"
+
+	.include "data/maps/TrainerHill_Elevator/scripts.inc"
+
+	.include "data/maps/TrainerHill_Entrance/scripts.inc"
+
+	.include "data/maps/TrainerHill_Roof/scripts.inc"
+
+	.include "data/scripts/contest_hall.inc"
+
+	.include "data/scripts/apprentice.inc"
+
+	.include "data/text/apprentice.inc"
+
+	.include "data/scripts/battle_pike.inc"
+
+	.include "data/scripts/trainer_hill.inc"

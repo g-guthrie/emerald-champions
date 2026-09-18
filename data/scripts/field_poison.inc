@@ -26,12 +26,20 @@ EventScript_SetRespawnLavaridgePkmnCenter::
 	return
 
 EventScript_FrontierFieldWhiteOut::
-	@ Emerald Champions: the Battle Pike / Pyramid / Trainer Hill retire paths are gone
-	@ (their C drivers were deleted and their label targets live in .inc files that are
-	@ no longer assembled), so a white-out here is just an ordinary white-out.
 	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
+	pike_inchallenge
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_BattlePike_EventScript_Retire
+	pyramid_getlocation
+	compare VAR_RESULT, 1  @ On Pyramid floor
+	goto_if_eq BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	compare VAR_RESULT, 2  @ On Pyramid peak
+	goto_if_eq BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	trainerhill_inchallenge
+	compare VAR_RESULT, TRUE
+	goto_if_eq TrainerHill_1F_EventScript_Lost
 	special Script_FadeOutMapMusic
 	waitstate
 	fadescreen FADE_TO_BLACK

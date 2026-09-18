@@ -202,11 +202,11 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine:: @ 822045E
 LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90
+	goto_if_set FLAG_EC_GIFT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP, LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90, MSGBOX_DEFAULT
 	release
 	end
@@ -251,15 +251,9 @@ LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink: @ 8220603
 	.string "Decided against buying a drink.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute:
-	.string "When I see the wide world from up\n"
-	.string "here on the roof…\p"
-	.string "I think about how nice it would be\n"
-	.string "if there were more than just one me\l"
-	.string "so I could enjoy all sorts of lives.\p"
-	.string "Of course it's not possible.\n"
-	.string "Giggle…\p"
-	.string "I know! Take this TM, and you can have\n"
-	.string "your Pokémon learn Substitute!$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90:
 	.string "We human beings should enjoy our\n"

@@ -1,3 +1,113 @@
+LilycoveCity_ContestLobby_Text_InterviewRequest:
+	.string "Oh, hello! You were in a POKéMON\n"
+	.string "CONTEST, weren't you?\l"
+	.string "It's easy to tell from your POKéMON.\p"
+	.string "I'm a reporter. I'm working on a story\n"
+	.string "on POKéMON CONTESTS.\p"
+	.string "If I may, would you be willing to answer\n"
+	.string "a few questions?$"
+
+LilycoveCity_ContestLobby_Text_DescribeContest:
+	.string "Oh, you will?\n"
+	.string "Thank you.\p"
+	.string "Briefly, how would you describe the\n"
+	.string "CONTEST you just entered?$"
+
+LilycoveCity_ContestLobby_Text_WhatImageWhenYouHearX:
+	.string "Ah, I see.\n"
+	.string "That's a very edifying comment.\p"
+	.string "You get a good feel for what\n"
+	.string "the CONTEST was like.\p"
+	.string "I've got one last question.\p"
+	.string "When you hear the word “{STR_VAR_2},”\n"
+	.string "what image do you get?$"
+
+LilycoveCity_ContestLobby_Text_ThatsAllForInterview:
+	.string "I see!\p"
+	.string "So that's how you imagine the concept\n"
+	.string "of “{STR_VAR_2}” to be.\p"
+	.string "Thank you!\n"
+	.string "You've given me some good ideas.\p"
+	.string "I think I can write a good story on\n"
+	.string "POKéMON CONTESTS now.\p"
+	.string "Maybe, just maybe, this story will even\n"
+	.string "make it to television.\l"
+	.string "I hope you'll look forward to it!$"
+
+LilycoveCity_ContestLobby_Text_PleaseDoShareStoryWithMe:
+	.string "Oh, too bad…\p"
+	.string "Well, if you come across a good story,\n"
+	.string "please do share it with me.$"
+
+LilycoveCity_ContestLobby_Text_LookingForwardToNextContest:
+	.string "I'll be looking forward to your next\n"
+	.string "POKéMON CONTEST.$"
+
+gTVBravoTrainerText00::
+	.string "Yeah!\n"
+	.string "It's BRAVO TRAINER time!\p"
+	.string "Today, we're going to profile a POKéMON\n"
+	.string "belonging to {STR_VAR_1}.\p"
+	.string "Now, this POKéMON boasts a {STR_VAR_3}\n"
+	.string "Rank in the {STR_VAR_2} Category.$"
+
+gTVBravoTrainerText01::
+	.string "Introducing {STR_VAR_2} the\n"
+	.string "{STR_VAR_1}!\p"
+	.string "The nickname {STR_VAR_2}…\p"
+	.string "Even the nickname exudes an air that\n"
+	.string "proclaims “{STR_VAR_3}”!$"
+
+gTVBravoTrainerText02::
+	.string "Anyway, when the TRAINER {STR_VAR_1}\n"
+	.string "entered the POKéMON in a CONTEST,\l"
+	.string "we managed to get a few impassioned\l"
+	.string "quotes about the trusty partner.$"
+
+gTVBravoTrainerText03::
+	.string "Asked about the CONTEST afterwards,\n"
+	.string "{STR_VAR_1} happily replied with a huge\l"
+	.string "grin, “{STR_VAR_2}!”\p"
+	.string "Well, sure, {STR_VAR_1}'s POKéMON came in\n"
+	.string "number {STR_VAR_3} in the CONTEST.\p"
+	.string "That line perfectly suits {STR_VAR_1}\n"
+	.string "right now, I'd say!$"
+
+gTVBravoTrainerText04::
+	.string "Asked about the CONTEST afterwards,\n"
+	.string "{STR_VAR_1} replied with a tinge of\l"
+	.string "bitterness, “{STR_VAR_2}.”\p"
+	.string "Well, sure, {STR_VAR_1}'s POKéMON came in\n"
+	.string "number {STR_VAR_3} in the CONTEST.\p"
+	.string "{STR_VAR_1}'s disappointment comes across\n"
+	.string "loud and clear, I'd say!$"
+
+gTVBravoTrainerText05::
+	.string "Wouldn't you also like to know what\n"
+	.string "{STR_VAR_1} imagines {STR_VAR_2} to be?\p"
+	.string "You bet we did!\n"
+	.string "So we asked, of course!\p"
+	.string "The answer is all perfectly condensed:\n"
+	.string "“{STR_VAR_3}!”\p"
+	.string "That's what the concept of {STR_VAR_2}\n"
+	.string "represents to {STR_VAR_1}!$"
+
+gTVBravoTrainerText06::
+	.string "The last move {STR_VAR_2} used by\n"
+	.string "the {STR_VAR_1} is entirely about\l"
+	.string "“{STR_VAR_3}”!$"
+
+gTVBravoTrainerText07::
+	.string "Bravo, {STR_VAR_1}!\n"
+	.string "Bravo, {STR_VAR_2}!\p"
+	.string "I hope we can count on seeing\n"
+	.string "{STR_VAR_1} scale even greater heights!\p"
+	.string "That's all the time we have!\n"
+	.string "Until next time, see you!$"
+
+gTVBravoTrainerText08::
+	.string "Introducing the TRAINER's {STR_VAR_1}!$"
+
 BattleFrontier_BattleTowerLobby_Text_InterviewRequest::
 	.string "Hello! You're the TRAINER who just had\n"
 	.string "a battle, right?\p"
@@ -462,6 +572,45 @@ gTVMassOutbreakText00::
 	.string "see the mystifying outbreak of\l"
 	.string "{STR_VAR_2} in the wild.\p"
 	.string "That's the news on POKéMON NEWS.$"
+
+gTV3CheersForPokeblocksText00::
+	.string "MC: We hope you're in good cheer,\n"
+	.string "“3 CHEERS FOR {POKEBLOCK}S” is here!\p"
+	.string "Today, we examine the {POKEBLOCK} blended\n"
+	.string "by {STR_VAR_1} and associates.\p"
+	.string "Without any delay, let me feed it\n"
+	.string "to my gourmet POKéMON GULPIN.\p"
+	.string "… … … … … …\n"
+	.string "… … … … … …$"
+
+gTV3CheersForPokeblocksText01::
+	.string "GULPIN: Gubi! Gubii!\p"
+	.string "MC: And the verdict is very {STR_VAR_1}!\n"
+	.string "GULPIN says it tastes “{STR_VAR_2}!”\p"
+	.string "Thank you so much, {STR_VAR_3}!$"
+
+gTV3CheersForPokeblocksText02::
+	.string "{STR_VAR_1}'s blending performance\n"
+	.string "left something to be desired.\p"
+	.string "If this TRAINER could blend better,\n"
+	.string "the {POKEBLOCK} would be much tastier.$"
+
+gTV3CheersForPokeblocksText03::
+	.string "GULPIN: Gubi! Gubii!\p"
+	.string "MC: Hmm… It's too {STR_VAR_1}.\n"
+	.string "GULPIN says it tastes “{STR_VAR_2}!”\p"
+	.string "It looks like {STR_VAR_3}'s errors\n"
+	.string "hurt the blending quality…$"
+
+gTV3CheersForPokeblocksText04::
+	.string "It's too bad that {STR_VAR_1}'s\n"
+	.string "leading effort went to waste.\p"
+	.string "Let's hope {STR_VAR_2} can turn in\n"
+	.string "a better showing next time!$"
+
+gTV3CheersForPokeblocksText05::
+	.string "Tune in next time!\n"
+	.string "Our slogan is “3 CHEERS FOR {POKEBLOCK}S!”$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer::
 	.string "Hi, there!\p"
@@ -2285,6 +2434,214 @@ gTVSafariFanClubText10::
 	.string "and make the challenge yourself!\p"
 	.string "Until next time, cheerio!$"
 
+ContestLiveUpdates_Text_Intro::
+	.string "“POKéMON CONTEST LIVE UPDATES!”\p"
+	.string "MC: Thanks for joining us!\p"
+	.string "We're live from the just-ended\n"
+	.string "{STR_VAR_1} site.\p"
+	.string "The hall is still filled with\n"
+	.string "an audience unwilling to leave.\p"
+	.string "Spectator: {STR_VAR_2}!\p"
+	.string "Spectator: {STR_VAR_3}!\p"
+	.string "MC: As you've just heard, the CONTEST\n"
+	.string "was won by the POKéMON {STR_VAR_2}\l"
+	.string "of {STR_VAR_3}.\p"
+	.string "Spectator: {STR_VAR_2}!\n"
+	.string "You're the best!\p"
+	.string "Spectator: {STR_VAR_3}!\n"
+	.string "Way to go!\p"
+	.string "MC: Let's hear what the fans have\n"
+	.string "to say about this CONTEST.$"
+
+ContestLiveUpdates_Text_WonBothRounds::
+	.string "Spectator: The {STR_VAR_2} was tops in\n"
+	.string "both primary and secondary judging!\p"
+	.string "That {STR_VAR_2} will keep winning!$"
+
+ContestLiveUpdates_Text_BetterRound2::
+	.string "Spectator: The {STR_VAR_2} didn't do\n"
+	.string "well in the primary judging, but it\l"
+	.string "cleaned up in the secondary judging!\p"
+	.string "It was a miraculous comeback\n"
+	.string "for that {STR_VAR_2}. Yippee!$"
+
+ContestLiveUpdates_Text_EqualRounds::
+	.string "Spectator: The {STR_VAR_2} remained\n"
+	.string "consistent throughout both primary\l"
+	.string "and secondary judging.\p"
+	.string "{STR_VAR_3} and the {STR_VAR_2},\n"
+	.string "they're no ordinary combo!$"
+
+ContestLiveUpdates_Text_BetterRound1::
+	.string "Spectator: In terms of being {STR_VAR_1},\n"
+	.string "that {STR_VAR_2} was outstanding.\p"
+	.string "I hope it makes better appeals\n"
+	.string "next time, though.$"
+
+ContestLiveUpdates_Text_GotNervous::
+	.string "Spectator: When the {STR_VAR_2} got\n"
+	.string "nervous, I couldn't stop myself from\l"
+	.string "shouting encouragement.\p"
+	.string "I'd like to say this to that\n"
+	.string "{STR_VAR_2}, “Congratulations!”$"
+
+ContestLiveUpdates_Text_StartledFoes::
+	.string "Spectator: That {STR_VAR_2}'s appeal\n"
+	.string "startled even me!\p"
+	.string "{STR_VAR_2}, you were awesome!$"
+
+ContestLiveUpdates_Text_UsedCombo::
+	.string "Spectator: That {STR_VAR_2}'s combo\n"
+	.string "appeal was stunning!\p"
+	.string "It's shaken me to the core!$"
+
+ContestLiveUpdates_Text_ExcitingAppeal::
+	.string "Spectator: The winning {STR_VAR_2}'s\n"
+	.string "appeal got my heart pounding!$"
+
+ContestLiveUpdates_Text_WasCool::
+	.string "{STR_VAR_2}!\n"
+	.string "You were cool!$"
+
+ContestLiveUpdates_Text_WasBeautiful::
+	.string "{STR_VAR_2}!\n"
+	.string "You were beautiful!$"
+
+ContestLiveUpdates_Text_WasCute::
+	.string "{STR_VAR_2}!\n"
+	.string "You were cute!$"
+
+ContestLiveUpdates_Text_WasSmart::
+	.string "{STR_VAR_2}!\n"
+	.string "You were smart!$"
+
+ContestLiveUpdates_Text_WasTough::
+	.string "{STR_VAR_2}!\n"
+	.string "You were tough!$"
+
+ContestLiveUpdates_Text_VeryExcitingAppeal::
+	.string "Spectator: The winning {STR_VAR_2}'s\n"
+	.string "appeal still has my heart pounding!$"
+
+ContestLiveUpdates_Text_VeryCool::
+	.string "{STR_VAR_2}!\n"
+	.string "You're the last word in cool!$"
+
+ContestLiveUpdates_Text_VeryBeautiful::
+	.string "{STR_VAR_2}!\n"
+	.string "You're the most beautiful!$"
+
+ContestLiveUpdates_Text_VeryCute::
+	.string "{STR_VAR_2}!\n"
+	.string "You're simply the cutest!$"
+
+ContestLiveUpdates_Text_VerySmart::
+	.string "{STR_VAR_2}!\n"
+	.string "You're the smartest among the smart!$"
+
+ContestLiveUpdates_Text_VeryTough::
+	.string "{STR_VAR_2}!\n"
+	.string "You're the toughest of the tough!$"
+
+ContestLiveUpdates_Text_TookBreak::
+	.string "Spectator: Even when the {STR_VAR_2}\n"
+	.string "took a break from making appeals,\l"
+	.string "I couldn't take my eyes off it.\p"
+	.string "I'm captivated by that {STR_VAR_2}.$"
+
+ContestLiveUpdates_Text_GotStartled::
+	.string "Spectator: When the {STR_VAR_2} was\n"
+	.string "startled by another POKéMON's appeal,\l"
+	.string "I was close to tears.\p"
+	.string "{STR_VAR_2}, you were resilient!\n"
+	.string "Way to go!$"
+
+ContestLiveUpdates_Text_MoveWonderful::
+	.string "Spectator: Oh…\n"
+	.string "That {STR_VAR_2}'s {STR_VAR_3}!\l"
+	.string "{STR_VAR_2}'s {STR_VAR_3}!\l"
+	.string "{STR_VAR_2}'s {STR_VAR_3}!\l"
+	.string "How could it be so wonderful?$"
+
+ContestLiveUpdates_Text_TalkAboutAnotherMon::
+	.string "MC: Well, there you have it. This place\n"
+	.string "is full of the {STR_VAR_1}'s fans!\p"
+	.string "I should also mention that another\n"
+	.string "POKéMON, {STR_VAR_2}'s {STR_VAR_3}, \l"
+	.string "caught my eye.\p"
+	.string "{STR_VAR_2}'s {STR_VAR_3}…$"
+
+ContestLiveUpdates_Text_FailedToAppeal::
+	.string "It failed to make a single appeal during\n"
+	.string "secondary judging out of nervousness.\p"
+	.string "Next time, I would like to see this\n"
+	.string "{STR_VAR_1} make even one appeal.$"
+
+ContestLiveUpdates_Text_LastInBothRounds::
+	.string "It finished last in both rounds of\n"
+	.string "judging.\p"
+	.string "{STR_VAR_1} and the {STR_VAR_2}\n"
+	.string "have a fresh challenge: a routine\l"
+	.string "that lets their best qualities\l"
+	.string "shine.$"
+
+ContestLiveUpdates_Text_NotExcitingEnough::
+	.string "It failed to take advantage of\n"
+	.string "the audience's excitement and make\l"
+	.string "an appropriate appeal.\p"
+	.string "We hope {STR_VAR_1} will learn how to get\n"
+	.string "a feel for the audience and whip their\l"
+	.string "excitement to a fever pitch next time.$"
+
+ContestLiveUpdates_Text_LostAfterWinningRound1::
+	.string "While finishing first in the primary\n"
+	.string "judging, its appeals in the secondary\l"
+	.string "judging failed to click.\p"
+	.string "It suffered a humiliating come-from-\n"
+	.string "behind loss.\p"
+	.string "I'm sure {STR_VAR_1} is studying how to\n"
+	.string "make more effective appeals now.$"
+
+ContestLiveUpdates_Text_NeverExciting::
+	.string "The audience never got excited by its\n"
+	.string "appeals during the secondary judging.\p"
+	.string "We hope it will stop worrying about\n"
+	.string "other POKéMON and learn to pitch\l"
+	.string "its appeals to the audience more.$"
+
+ContestLiveUpdates_Text_LostBySmallMargin::
+	.string "It lost to {STR_VAR_1}'s {STR_VAR_2}\n"
+	.string "by only a small margin.\p"
+	.string "It must be heartbreaking to come\n"
+	.string "so close to victory only to fail.\p"
+	.string "I wouldn't be surprised if {STR_VAR_3}\n"
+	.string "were weeping over this outcome.$"
+
+ContestLiveUpdates_Text_RepeatedAppeals::
+	.string "Repeating the same appeals cost it\n"
+	.string "the JUDGE's attention.\p"
+	.string "{STR_VAR_1} could try varying the\n"
+	.string "routine next time to keep the\l"
+	.string "audience guessing.$"
+
+ContestLiveUpdates_Text_ValiantEffortButLost::
+	.string "{STR_VAR_1} finished last, but\n"
+	.string "kept giving the performance\l"
+	.string "everything.\p"
+	.string "There is plenty to learn from that\n"
+	.string "effort. We hope to see a comeback!$"
+
+ContestLiveUpdates_Text_Outro::
+	.string "I'd like to end this program with our\n"
+	.string "usual farewell to the winners.\p"
+	.string "This time, it's {STR_VAR_1} and\n"
+	.string "the {STR_VAR_2}!\p"
+	.string "MC: Is everyone ready?\n"
+	.string "All together now!\p"
+	.string "Audience: {STR_VAR_1}! {STR_VAR_2}!\n"
+	.string "Congratulations!\l"
+	.string "You're the CONTEST winner!$"
+
 gTVPokemonBattleUpdateText00::
 	.string "“POKéMON BATTLE UPDATE!”\p"
 	.string "Bringing you the results of POKéMON\n"
@@ -2564,3 +2921,73 @@ gTVInSearchOfTrainersText08::
 	.string "That's all for today!\n"
 	.string "See you again on our next broadcast!$"
 
+ContestLadyShow_Text_Intro::
+	.string "“POKéMON CONTEST LIVE UPDATES!”\p"
+	.string "MC: Sorry to interrupt the regular\n"
+	.string "programming, and thanks for joining us!\p"
+	.string "We bring you this live from\n"
+	.string "the scene of a just-completed\l"
+	.string "{STR_VAR_1}!\p"
+	.string "Spectators: ?!!!!\p"
+	.string "MC: Oh! It looks like the CONTEST\n"
+	.string "participants are headed this way!\p"
+	.string "I'll try to get an impromptu interview\n"
+	.string "for you folks at home!\p"
+	.string "Spectators: ?!!!!\n"
+	.string "?!!!!$"
+
+ContestLadyShow_Text_Won::
+	.string "MC: Excuse me!\n"
+	.string "Thanks for joining us on live TV!\p"
+	.string "May I congratulate you on your win?\p"
+	.string "What was the key factor in today's\n"
+	.string "stunning victory?\p"
+	.string "BEAUTY: We gave it our best effort\n"
+	.string "today, my {STR_VAR_2} and I!\p"
+	.string "But I'm sure we wouldn't have made it\n"
+	.string "if it weren't for all the help we\l"
+	.string "received leading up to the CONTEST!\p"
+	.string "MC: Do you have a special someone\n"
+	.string "with whom you'd like to share your joy?\l"
+	.string "Let's hear it live!\p"
+	.string "BEAUTY: Hey, out there!\p"
+	.string "{STR_VAR_3}! Are you watching?\n"
+	.string "We did it!\l"
+	.string "Thank you!$"
+
+ContestLadyShow_Text_Lost::
+	.string "MC: Excuse me!\n"
+	.string "Thanks for joining us on live TV!\p"
+	.string "You must be disappointed by that turn\n"
+	.string "of events. Do you have any comments?\p"
+	.string "BEAUTY: It's heartbreaking…\n"
+	.string "My {STR_VAR_2} and I, we did our best…\p"
+	.string "But I feel like I've let down everyone\n"
+	.string "who has supported us through this.\p"
+	.string "MC: I hate to say it, but the POKéMON's\n"
+	.string "coloration is a little wanting.\p"
+	.string "BEAUTY: {STR_VAR_3}, I'm so sorry…\n"
+	.string "I'll do better next time, I swear…\l"
+	.string "…Sniff… Waaaaah!\p"
+	.string "Spectators: See that?\n"
+	.string "The poor girl!\p"
+	.string "MC: Uh… Uh-oh…\p"
+	.string "Uh… That's all the time we have today!\n"
+	.string "Thanks for tuning in!$"
+
+ContestLadyShow_Text_LostBadly::
+	.string "MC: Excuse me!\n"
+	.string "Thanks for joining us on live TV!\p"
+	.string "How did your CONTEST appearance go?\p"
+	.string "BEAUTY: Nothing went right…\n"
+	.string "For some reason, my {STR_VAR_2}\l"
+	.string "couldn't attract any popularity.\p"
+	.string "MC: I hate to say it, but the POKéMON's\n"
+	.string "coloration is a little wanting.\p"
+	.string "BEAUTY: … … … … … …\n"
+	.string "…Sniff… Waaaaah!\p"
+	.string "Spectators: See that?\n"
+	.string "The poor girl!\p"
+	.string "MC: Uh… Uh-oh…\p"
+	.string "Uh… That's all the time we have today!\n"
+	.string "Thanks for tuning in!$"

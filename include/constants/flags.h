@@ -516,6 +516,22 @@
 #define FLAG_EC_ITEM_SEASPRAY_CAVE_DUSK_BALL 0x1E3
 
 // Mystery Gift Flags (Unknown)
+#define FLAG_MYSTERY_GIFT_DONE               0x1E4
+#define FLAG_MYSTERY_GIFT_1                  0x1E5
+#define FLAG_MYSTERY_GIFT_2                  0x1E6
+#define FLAG_MYSTERY_GIFT_3                  0x1E7
+#define FLAG_MYSTERY_GIFT_4                  0x1E8
+#define FLAG_MYSTERY_GIFT_5                  0x1E9
+#define FLAG_MYSTERY_GIFT_6                  0x1EA
+#define FLAG_MYSTERY_GIFT_7                  0x1EB
+#define FLAG_MYSTERY_GIFT_8                  0x1EC
+#define FLAG_MYSTERY_GIFT_9                  0x1ED
+#define FLAG_MYSTERY_GIFT_10                 0x1EE
+#define FLAG_MYSTERY_GIFT_11                 0x1EF
+#define FLAG_MYSTERY_GIFT_12                 0x1F0
+#define FLAG_MYSTERY_GIFT_13                 0x1F1
+#define FLAG_MYSTERY_GIFT_14                 0x1F2
+#define FLAG_MYSTERY_GIFT_15                 0x1F3
 
 // Hidden Items
 #define FLAG_HIDDEN_ITEMS_START                                                         0x1F4
@@ -831,13 +847,6 @@
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE115_NANAB_BERRY 0x2A8
 #define FLAG_EC_WINSTRATE_GARDEN_BERRIES 0x2A9
 #define FLAG_EC_HATCHED_DAYCARE_EGG 0x2AA
-#define FLAG_EC_GIFT_INDEEDEE_F  0x2AB // Emerald Champions: persistent receipt.
-#define FLAG_EC_GIFT_COSPLAY_PIKACHU  0x2AC // Emerald Champions: persistent receipt.
-#define FLAG_EC_GIFT_BATTLE_BOND_GRENINJA  0x2AD // Emerald Champions: persistent receipt.
-#define FLAG_EC_GIFT_PARTNER_PIKACHU  0x2AE // Emerald Champions: persistent receipt.
-#define FLAG_EC_GIFT_PARTNER_EEVEE  0x2AF // Emerald Champions: persistent receipt.
-#define FLAG_EC_GIFT_SECOND_KUBFU  0x2B0 // Emerald Champions: persistent receipt.
-#define FLAG_EC_GIFT_SECOND_COSMOG  0x2B1 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
 #define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
@@ -1186,7 +1195,7 @@
 #define FLAG_ITEM_ROUTE_120_GENGARITE                                  0x406
 #define FLAG_ITEM_ROUTE_120_KANGASKHANITE                               0x407
 #define FLAG_ITEM_ROUTE_123_TIMER_BALL                              0x408
-#define FLAG_UNUSED_ITEM_ROUTE_123_RS_ULTRA_BALL                    0x409 // Unused Flag, leftover from R/S. In Emerald this is a hidden item and uses a different flag
+#define FLAG_EC_GIFT_FALLARBOR_TOWN_COZMOS_HOUSE                    0x409 // Unused Flag, leftover from R/S. In Emerald this is a hidden item and uses a different flag
 #define FLAG_ITEM_ROUTE_127_NET_BALL                                0x40A
 #define FLAG_ITEM_ROUTE_127_DIVE_BALL                               0x40B
 #define FLAG_ITEM_ROUTE_132_ULTRA_BALL                              0x40C
@@ -1373,7 +1382,7 @@
 #define FLAG_EC_CAUGHT_TERAPAGOS                                   0x4C2
 #define FLAG_EC_CAUGHT_WO_CHIEN                                    0x4C3
 #define FLAG_EC_CAUGHT_ZAPDOS                                      0x4C4
-#define FLAG_UNUSED_0x4C5                                       0x4C5
+#define FLAG_EC_GIFT_FALLARBOR_TOWN_MART                                       0x4C5
 #define FLAG_EC_LEGENDARY_QUEST_RESERVED_2                          0x4C6
 #define FLAG_EC_STARTER_ARCHIVE_ROWLET                               0x4C7
 #define FLAG_EC_STARTER_ARCHIVE_LITTEN                               0x4C8
@@ -1435,7 +1444,7 @@
 #define FLAG_DEFEATED_ELITE_4_GLACIA                                0x4FD
 #define FLAG_DEFEATED_ELITE_4_DRAKE                                 0x4FE
 
-#define FLAG_UNUSED_0x4FF                                           0x4FF // Unused Flag
+#define FLAG_EC_GIFT_FORTREE_CITY_HOUSE2                                           0x4FF // Unused Flag
 
 
 // ---------------------------------------------------------------------------
@@ -1493,7 +1502,7 @@
 #define FLAG_SYS_POKEMON_GET                         (SYSTEM_FLAGS + 0x0) // FLAG_0x860
 #define FLAG_SYS_POKEDEX_GET                         (SYSTEM_FLAGS + 0x1)
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
-#define FLAG_UNUSED_0x863                            (SYSTEM_FLAGS + 0x3) // Unused Flag
+#define FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE                            (SYSTEM_FLAGS + 0x3) // Unused Flag
 #define FLAG_SYS_GAME_CLEAR                          (SYSTEM_FLAGS + 0x4)
 #define FLAG_SYS_CHAT_USED                           (SYSTEM_FLAGS + 0x5)
 #define FLAG_UNLOCKED_TRENDY_SAYINGS                 (SYSTEM_FLAGS + 0x6)
@@ -1530,13 +1539,13 @@
 #define FLAG_IS_CHAMPION                            (SYSTEM_FLAGS + 0x1F) // Seems to be related to linking.
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
-#define FLAG_UNUSED_0x881                           (SYSTEM_FLAGS + 0x21) // Unused Flag
-#define FLAG_UNUSED_0x882                           (SYSTEM_FLAGS + 0x22) // Unused Flag
-#define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
-#define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
-#define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
-#define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag
-#define FLAG_UNUSED_0x887                           (SYSTEM_FLAGS + 0x27) // Unused Flag
+#define FLAG_EC_GIFT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP                           (SYSTEM_FLAGS + 0x21) // Unused Flag
+#define FLAG_EC_GIFT_MAUVILLE_CITY                           (SYSTEM_FLAGS + 0x22) // Unused Flag
+#define FLAG_EC_GIFT_MOSSDEEP_CITY                           (SYSTEM_FLAGS + 0x23) // Unused Flag
+#define FLAG_EC_GIFT_PACIFIDLOG_TOWN_POKEMON_CENTER_1_F                           (SYSTEM_FLAGS + 0x24) // Unused Flag
+#define FLAG_EC_GIFT_ROUTE110                           (SYSTEM_FLAGS + 0x25) // Unused Flag
+#define FLAG_EC_GIFT_RUSTBORO_CITY_MART                           (SYSTEM_FLAGS + 0x26) // Unused Flag
+#define FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB                           (SYSTEM_FLAGS + 0x27) // Unused Flag
 
 #define FLAG_SYS_USE_FLASH                          (SYSTEM_FLAGS + 0x28)
 #define FLAG_SYS_USE_STRENGTH                       (SYSTEM_FLAGS + 0x29)
@@ -1636,6 +1645,7 @@
 #define FLAG_ARRIVED_AT_MARINE_CAVE_EMERGE_SPOT     (SYSTEM_FLAGS + 0x79)
 #define FLAG_ARRIVED_AT_TERRA_CAVE_ENTRANCE         (SYSTEM_FLAGS + 0x7A)
 
+#define FLAG_SYS_MYSTERY_GIFT_ENABLE                (SYSTEM_FLAGS + 0x7B)
 
 #define FLAG_ENTERED_MIRAGE_TOWER                   (SYSTEM_FLAGS + 0x7C)
 #define FLAG_LANDMARK_ALTERING_CAVE                 (SYSTEM_FLAGS + 0x7D)
@@ -1643,8 +1653,9 @@
 #define FLAG_LANDMARK_ARTISAN_CAVE                  (SYSTEM_FLAGS + 0x7F)
 #define FLAG_ENABLE_SHIP_NAVEL_ROCK                 (SYSTEM_FLAGS + 0x80)
 #define FLAG_ARRIVED_AT_NAVEL_ROCK                  (SYSTEM_FLAGS + 0x81)
+#define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
 
-#define FLAG_UNUSED_0x8E3                           (SYSTEM_FLAGS + 0x83) // Unused Flag
+#define FLAG_EC_GIFT_VERDANTURF_TOWN_MART                           (SYSTEM_FLAGS + 0x83) // Unused Flag
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
@@ -1705,8 +1716,7 @@
 #define FLAG_EC_LOTTERY_TICKET_READY                (SYSTEM_FLAGS + 0xBA)
 #define FLAG_EC_TUTOR_MACHINES_LINE_SEEN            (SYSTEM_FLAGS + 0xBB) // Emerald Champions: the Center tutor explained once that machines are gone
 #define FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS       (SYSTEM_FLAGS + 0xBC) // Emerald Champions: the vendor has handed over the five opening held items
-#define FLAG_UNUSED_0x91C                           (SYSTEM_FLAGS + 0xBC) // Unused Flag
-#define FLAG_UNUSED_0x91D                           (SYSTEM_FLAGS + 0xBD) // Unused Flag
+#define FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F                           (SYSTEM_FLAGS + 0xBD) // Unused Flag
 #define FLAG_UNUSED_0x91E                           (SYSTEM_FLAGS + 0xBE) // Unused Flag
 #define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF) // Unused Flag
 
@@ -2860,6 +2870,8 @@
 #define FLAG_ALTERING_CAVE_COMET_SHARD                                 0x210 // relocated 0x4E9 -> 0x210; 0x4E9 is live as FLAG_EC_CAUGHT_RESHIRAM. Target bit's only other name is dead FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_UPGRADE
 #define FLAG_ALTERING_CAVE_MASTER_BALL_2                               0x212 // relocated 0x4EA -> 0x212; 0x4EA is live as FLAG_HIDE_ROUTE133_VIAL_NURSE. Target bit's only other name is dead FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL
 #define FLAG_DEFEATED_LEAF                                             0x217 // relocated 0x4EB -> 0x217; 0x4EB is live as FLAG_RECEIVED_GAME_CORNER_GENESECT. Target bit's only other name is dead FLAG_HIDDEN_ITEM_SS_TIDAL_LOWER_DECK_ULTRA_BALL
+#define FLAG_ENABLE_MOM_MATCH_CALL           0xD8
+#define FLAG_ENABLE_MR_STONE_POKENAV         0x158
 #endif
 
 #if TESTING
@@ -2872,7 +2884,11 @@
 #define TESTING_FLAG_UNUSED_5                   (TESTING_FLAGS_START + 0x5)
 #define TESTING_FLAG_UNUSED_6                   (TESTING_FLAGS_START + 0x6)
 #define TESTING_FLAG_UNUSED_7                   (TESTING_FLAGS_START + 0x7)
+#define FLAG_ENABLE_MOM_MATCH_CALL           0xD8
+#define FLAG_ENABLE_MR_STONE_POKENAV         0x158
 #endif // TESTING
 
 
+#define FLAG_ENABLE_MOM_MATCH_CALL           0xD8
+#define FLAG_ENABLE_MR_STONE_POKENAV         0x158
 #endif // GUARD_CONSTANTS_FLAGS_H

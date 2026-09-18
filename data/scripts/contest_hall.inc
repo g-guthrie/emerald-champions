@@ -1,8 +1,5 @@
 .set LOCALID_MC, 1
 .set LOCALID_JUDGE, 2
-.set LOCALID_CONTESTANT_1, 3
-.set LOCALID_CONTESTANT_2, 4
-.set LOCALID_CONTESTANT_3, 5
 .set LOCALID_AUDIENCE_1, 6
 .set LOCALID_AUDIENCE_3, 7
 .set LOCALID_AUDIENCE_4, 8
@@ -11,7 +8,6 @@
 .set LOCALID_AUDIENCE_7, 11
 .set LOCALID_AUDIENCE_2, 12
 .set LOCALID_POKEBALL, 13
-.set LOCALID_CONTESTANT_4, 14
 .set LOCALID_ARTIST, 15
 
 @ Either ends or returns to EventScript_ContestReceptionist after submitting a contest entry
@@ -283,7 +279,7 @@ ContestHall_EventScript_GetCategoryTough:: @ 827A091
 	return
 
 ContestHall_EventScript_ContestGettingStarted:: @ 827A097
-	buffercontesttypestring 1, VAR_0x8008
+	buffercontestname 1, VAR_0x8008
 	bufferstdstring 2, VAR_0x8009
 	call ContestHall_EventScript_GettingStarted
 	lockall
@@ -1285,7 +1281,7 @@ ContestHall_Movement_MCBackUp: @ 827AD0B
 	step_end
 
 ContestHall_Movement_MCFaceJudge: @ 827AD0F
-	walk_in_place_fast_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_Heart: @ 827AD11
@@ -1293,24 +1289,24 @@ ContestHall_Movement_Heart: @ 827AD11
 	step_end
 
 ContestHall_Movement_FaceContestants: @ 827AD13
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WalkStageLeft: @ 827AD15
 	walk_left
 	walk_left
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WalkStageRight: @ 827AD19
 	walk_right
 	walk_right
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_WinningPlayerWalkUp: @ 827AD1D
 	walk_up
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_ContestantDelay32: @ 827AD20
@@ -1319,15 +1315,15 @@ ContestHall_Movement_ContestantDelay32: @ 827AD20
 	step_end
 
 ContestHall_Movement_MCFaceJudge2: @ 827AD23
-	walk_in_place_fast_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_JudgeFaceMC: @ 827AD25
-	walk_in_place_fast_left
+	walk_in_place_faster_left
 	step_end
 
 ContestHall_Movement_FaceContestants2: @ 827AD27
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_Player3ApproachForPrize: @ 827AD29
@@ -1375,20 +1371,20 @@ ContestHall_Movement_Player4FaceUp: @ 827AD43
 ContestHall_Movement_MCLookAtJudge: @ 827AD45
 	face_up
 	delay_16
-	walk_in_place_fast_right
+	walk_in_place_faster_right
 	step_end
 
 ContestHall_Movement_JudgeLookAtMC: @ 827AD49
-	walk_in_place_fast_left
+	walk_in_place_faster_left
 	delay_16
 	delay_16
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_MCWalkInPlaceDown: @ 827AD4E
 	delay_16
 	delay_16
-	walk_in_place_fast_down
+	walk_in_place_faster_down
 	step_end
 
 ContestHall_Movement_Player1WalkToCenter: @ 827AD52
@@ -1396,7 +1392,7 @@ ContestHall_Movement_Player1WalkToCenter: @ 827AD52
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player1WalkBack: @ 827AD58
@@ -1404,31 +1400,31 @@ ContestHall_Movement_Player1WalkBack: @ 827AD58
 	walk_fast_left
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player2WalkToCenter: @ 827AD5E
 	walk_up
 	walk_right
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player2WalkBack: @ 827AD62
 	walk_fast_left
 	walk_fast_down
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player3WalkToCenter: @ 827AD66
 	walk_up
 	walk_left
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player3WalkBack: @ 827AD6A
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player4WalkToCenter: @ 827AD6E
@@ -1436,7 +1432,7 @@ ContestHall_Movement_Player4WalkToCenter: @ 827AD6E
 	walk_left
 	walk_left
 	walk_left
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player4WalkBack: @ 827AD74
@@ -1444,7 +1440,7 @@ ContestHall_Movement_Player4WalkBack: @ 827AD74
 	walk_fast_right
 	walk_fast_right
 	walk_fast_down
-	walk_in_place_fast_up
+	walk_in_place_faster_up
 	step_end
 
 ContestHall_Movement_Player1ApproachForPrize: @ 827AD7A

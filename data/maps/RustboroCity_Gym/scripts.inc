@@ -2,7 +2,6 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 	.byte 0
 
 RustboroCity_Gym_EventScript_Roxanne::
-	goto_if_set FLAG_DAILY_REMATCH_ROXANNE, RustboroCity_Gym_EventScript_AlreadyRematched
 @ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
 @ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
 @ for bespoke campaign fights -- so post-game rematching a leader would start the
@@ -10,8 +9,7 @@ RustboroCity_Gym_EventScript_Roxanne::
 @ one. The gate below is disabled so leaders fall through to normal post-battle
 @ dialogue. To re-enable once real rematch teams exist, restore this single line.
 @	goto_if_set FLAG_SYS_GAME_CLEAR, RustboroCity_Gym_EventScript_RoxanneRematch
-	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
-	goto_if_eq RustboroCity_Gym_EventScript_RoxanneRematch
+	trainerbattle_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, EmeraldChampions_Text_NeedTwoPokemon, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
@@ -57,8 +55,7 @@ RustboroCity_Gym_EventScript_RoxanneRematch::
 RustboroCity_Gym_EventScript_SetSingles::
 	msgbox RustboroCity_Gym_Text_RoxanneAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq RustboroCity_Gym_EventScript_RoxanneSinglesRematch
-	trainerbattle_no_intro TRAINER_ROXANNE_3, RustboroCity_Gym_Text_RoxanneRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_ROXANNE
 	releaseall
 	end
@@ -66,20 +63,19 @@ RustboroCity_Gym_EventScript_SetSingles::
 RustboroCity_Gym_EventScript_SetDoubles::
 	msgbox RustboroCity_Gym_Text_RoxanneAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq RustboroCity_Gym_EventScript_RoxanneDoublesRematch
-	trainerbattle_no_intro TRAINER_ROXANNE_5, RustboroCity_Gym_Text_RoxanneRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_ROXANNE
 	releaseall
 	end
 
 RustboroCity_Gym_EventScript_RoxanneSinglesRematch::
-	trainerbattle_no_intro TRAINER_ROXANNE_2, RustboroCity_Gym_Text_RoxanneRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_ROXANNE
 	releaseall
 	end
 
 RustboroCity_Gym_EventScript_RoxanneDoublesRematch::
-	trainerbattle_no_intro TRAINER_ROXANNE_4, RustboroCity_Gym_Text_RoxanneRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_ROXANNE
 	releaseall
 	end
@@ -94,17 +90,17 @@ RustboroCity_Gym_EventScript_Exit::
 	end
 
 RustboroCity_Gym_EventScript_Josh:: @ 8212FE3
-	trainerbattle_single TRAINER_JOSH, RustboroCity_Gym_Text_JoshIntro, RustboroCity_Gym_Text_JoshDefeat
+	trainerbattle_double TRAINER_JOSH, RustboroCity_Gym_Text_JoshIntro, RustboroCity_Gym_Text_JoshDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RustboroCity_Gym_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_Tommy:: @ 8212FFA
-	trainerbattle_single TRAINER_TOMMY, RustboroCity_Gym_Text_TommyIntro, RustboroCity_Gym_Text_TommyDefeat
+	trainerbattle_double TRAINER_TOMMY, RustboroCity_Gym_Text_TommyIntro, RustboroCity_Gym_Text_TommyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RustboroCity_Gym_Text_TommyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_Marc:: @ 8213011
-	trainerbattle_single TRAINER_MARC, RustboroCity_Gym_Text_MarcIntro, RustboroCity_Gym_Text_MarcDefeat
+	trainerbattle_double TRAINER_MARC, RustboroCity_Gym_Text_MarcIntro, RustboroCity_Gym_Text_MarcDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RustboroCity_Gym_Text_MarcPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -423,20 +419,16 @@ RustboroCity_Gym_Text_ReceivedStoneBadge: @ 82137EC
 	.string "from Roxanne.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
-	.string "The Stone Badge enables your Pokémon\n"
-	.string "to use the HM move Cut outside\l"
-	.string "of battle.\p"
-	.string "Please take this with you, too.$"
+	.string "The Stone Badge lets you use\n"
+	.string "Cut. Visit the cutter beside the\l"
+	.string "Pokémon Center for the license.\p"
+	.string "Please take this Mega Stone,\n"
+	.string "too.$"
 
 RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1
-	.string "That Technical Machine, TM39,\n"
-	.string "contains Rock Tomb.\p"
-	.string "It not only inflicts damage by dropping\n"
-	.string "rocks, it also lowers Speed.\p"
-	.string "If you use a TM, it instantly teaches\n"
-	.string "the move to a Pokémon.\p"
-	.string "You can use a TM as many times as you\n"
-	.string "want, so please try it out!$"
+	.string "This is Delphoxite. Give it to\n"
+	.string "Delphox to Mega Evolve once you\l"
+	.string "have a Mega Ring.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle: @ 82139A7
 	.string "Since you are so strong, you should\n"

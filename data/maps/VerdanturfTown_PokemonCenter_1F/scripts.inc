@@ -21,14 +21,14 @@ VerdanturfTown_PokemonCenter_1F_EventScript_Nurse:: @ 820273A
 VerdanturfTown_PokemonCenter_1F_EventScript_XscissorTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_ReceivedTM81
+	goto_if_set FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F, VerdanturfTown_PokemonCenter_1F_EventScript_ReceivedTM81
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_DoYouLikeBugs, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_DontLikeBugs
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_GiveTM81, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_HaveTM81, MSGBOX_DEFAULT
 	release
 	end
@@ -75,12 +75,16 @@ VerdanturfTown_PokemonCenter_1F_Text_DoYouLikeBugs:
 	.string "You agree, right?$"
 
 VerdanturfTown_PokemonCenter_1F_Text_GiveTM81:
-	.string "Yeah! I like you. We can be friends.\p"
-	.string "And you can have this TM!$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 VerdanturfTown_PokemonCenter_1F_Text_HaveTM81:
-	.string "TM81 is X-scissor.\n"
-	.string "It's a wickedly cool Bug-type attack!$"
+	.string "A Rare Candy raises a Pokémon by\n"
+	.string "one level, up to your current\l"
+	.string "cap.\p"
+	.string "For new moves, visit the Center\n"
+	.string "tutor.$"
 
 VerdanturfTown_PokemonCenter_1F_Text_DontLikeBugs:
 	.string "No? We're not on the same wavelength.$"

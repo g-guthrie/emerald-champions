@@ -1,5 +1,5 @@
 .set LOCALID_BRINEY, 11
-.set LOCALID_WANDAS_BF_OUTSIDE, 21
+.set LOCALID_WANDAS_BF_OUTSIDE, 20
 
 Route116_MapScripts:: @ 81F2C0C
 	map_script MAP_SCRIPT_ON_TRANSITION, Route116_OnTransition
@@ -247,17 +247,17 @@ Route116_Movement_GlassesManExitEast: @ 81F2E7E
 	step_end
 
 Route116_EventScript_Joey:: @ 81F2E89
-	trainerbattle_single TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat
+	trainerbattle_double TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JoeyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Jose:: @ 81F2EA0
-	trainerbattle_single TRAINER_JOSE, Route116_Text_JoseIntro, Route116_Text_JoseDefeat
+	trainerbattle_double TRAINER_JOSE, Route116_Text_JoseIntro, Route116_Text_JoseDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Jerry:: @ 81F2EB7
-	trainerbattle_single TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, Route116_EventScript_TryRegisterJerryAfterBattle
+	trainerbattle_double TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route116_EventScript_TryRegisterJerryAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route116_EventScript_RematchJerry
@@ -295,22 +295,22 @@ Route116_EventScript_RegisterJerry:: @ 81F2F35
 	end
 
 Route116_EventScript_RematchJerry:: @ 81F2F4E
-	trainerbattle_rematch TRAINER_JERRY_1, Route116_Text_JerryRematchIntro, Route116_Text_JerryRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route116_Text_JerryPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Clark:: @ 81F2F65
-	trainerbattle_single TRAINER_CLARK, Route116_Text_ClarkIntro, Route116_Text_ClarkDefeat
+	trainerbattle_double TRAINER_CLARK, Route116_Text_ClarkIntro, Route116_Text_ClarkDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_ClarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Janice:: @ 81F2F7C
-	trainerbattle_single TRAINER_JANICE, Route116_Text_JaniceIntro, Route116_Text_JaniceDefeat
+	trainerbattle_double TRAINER_JANICE, Route116_Text_JaniceIntro, Route116_Text_JaniceDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JanicePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Karen:: @ 81F2F93
-	trainerbattle_single TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, Route116_EventScript_TryRegisterKarenAfterBattle
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route116_EventScript_RematchKaren
@@ -348,27 +348,27 @@ Route116_EventScript_RegisterKaren:: @ 81F3011
 	end
 
 Route116_EventScript_RematchKaren:: @ 81F302A
-	trainerbattle_rematch TRAINER_KAREN_1, Route116_Text_KarenRematchIntro, Route116_Text_KarenRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route116_Text_KarenPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Sarah:: @ 81F3041
-	trainerbattle_single TRAINER_SARAH, Route116_Text_SarahIntro, Route116_Text_SarahDefeat
+	trainerbattle_double TRAINER_SARAH, Route116_Text_SarahIntro, Route116_Text_SarahDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_SarahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Dawson:: @ 81F3058
-	trainerbattle_single TRAINER_DAWSON, Route116_Text_DawsonIntro, Route116_Text_DawsonDefeat
+	trainerbattle_double TRAINER_DAWSON, Route116_Text_DawsonIntro, Route116_Text_DawsonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_DawsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Devan:: @ 81F306F
-	trainerbattle_single TRAINER_DEVAN, Route116_Text_DevanIntro, Route116_Text_DevanDefeat
+	trainerbattle_double TRAINER_DEVAN, Route116_Text_DevanIntro, Route116_Text_DevanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_DevanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Johnson:: @ 81F3086
-	trainerbattle_single TRAINER_JOHNSON, Route116_Text_JohnsonIntro, Route116_Text_JohnsonDefeat
+	trainerbattle_double TRAINER_JOHNSON, Route116_Text_JohnsonIntro, Route116_Text_JohnsonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 

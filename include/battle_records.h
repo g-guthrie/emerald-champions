@@ -7,6 +7,6 @@ void ClearPlayerLinkBattleRecords(void);
 void UpdatePlayerLinkBattleRecords(s32 battler);
 void ShowLinkBattleRecords(void);
 void RemoveRecordsWindow(void);
-void ShowTrainerTowerRecords(void);
+void ShowTrainerHillRecords(void);
 
 #endif // GUARD_BATTLE_RECORDS_H

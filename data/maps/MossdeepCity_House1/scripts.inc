@@ -30,7 +30,7 @@ MossdeepCity_House1_EventScript_CynthiaBattle::
 	call_if_eq MossdeepCity_House1_EventScript_CynthiaHeal
 	msgbox MossdeepCity_House1_Text_BeforeISendOut, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat
+	trainerbattle_no_intro_double TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MossdeepCity_House1_Text_BeyondExpectation, MSGBOX_DEFAULT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
@@ -71,13 +71,13 @@ MossdeepCity_House1_EventScript_CynthiaStartRematch::
 	random 1
 	compare VAR_RESULT, 1
 	goto_if_eq MossdeepCity_House1_EventScript_CynthiaTeam1
-	trainerbattle_no_intro TRAINER_CYNTHIA_2, MossdeepCity_House1_Text_CynthiaDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_CYNTHIA
 	releaseall
 	end
 
 MossdeepCity_House1_EventScript_CynthiaTeam1::
-	trainerbattle_no_intro TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat
+	trainerbattle_no_intro_double TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DAILY_REMATCH_CYNTHIA
 	releaseall
 	end

@@ -25,11 +25,11 @@ MauvilleCity_EventScript_MoveWattsonBackToGym:: @ 81DF3A9
 MauvilleCity_EventScript_GyroBallTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq MauvilleCity_EventScript_ReceivedTM74
+	goto_if_set FLAG_EC_GIFT_MAUVILLE_CITY, MauvilleCity_EventScript_ReceivedTM74
 	msgbox MauvilleCity_Text_GiveTM74, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_MAUVILLE_CITY
 	msgbox MauvilleCity_Text_HaveTM74, MSGBOX_DEFAULT
 	release
 	end
@@ -229,7 +229,7 @@ MauvilleCity_EventScript_ScottExitEast:: @ 81DF628
 
 MauvilleCity_EventScript_BattleWally:: @ 81DF63A
 	msgbox MauvilleCity_Text_WallyHereICome, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
+	trainerbattle_no_intro_double TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_WallyIllGoBackToVerdanturf, MSGBOX_DEFAULT
@@ -629,12 +629,9 @@ MauvilleCity_Text_WattsonWontBeChallenge: @ 81E0154
 	.string "Wahahahaha!$"
 
 MauvilleCity_Text_WattsonThanksTakeTM: @ 81E020E
-	.string "Wattson: Wahahahaha!\p"
-	.string "I knew it, {PLAYER}{KUN}! I knew I'd made\n"
-	.string "the right choice asking you!\p"
-	.string "This is my thanks--a TM containing\n"
-	.string "Thunderbolt!\p"
-	.string "Go on, you've earned it!$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 MauvilleCity_Text_WattsonYoungTakeCharge: @ 81E02AA
 	.string "Wattson: Wahahahaha!\p"
@@ -700,17 +697,13 @@ MauvilleCity_Text_BeenCheckingOutTV: @ 81E0699
 	.string "Hi, have you been checking out TVs?$"
 
 MauvilleCity_Text_GiveTM74:
-	.string "Did you know that you can go from\n"
-	.string "here a long way in that direction\l"
-	.string "without changing direction?\p"
-	.string "I might even be able to roll\n"
-	.string "that way.\p"
-	.string "Do you think your Pokémon will\n"
-	.string "want to roll, too?\p"
-	.string "Here, let them try out this TM\n"
-	.string "if you'd like.$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 MauvilleCity_Text_HaveTM74:
-	.string "TM74 contains Gyro Ball, an attack\n"
-	.string "that does more damage the slower the\l"
-	.string "user is compared to the foe.$"
+	.string "A Rare Candy raises a Pokémon by\n"
+	.string "one level, up to your current\l"
+	.string "cap.\p"
+	.string "For new moves, visit the Center\n"
+	.string "tutor.$"

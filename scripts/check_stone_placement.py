@@ -3,9 +3,8 @@
 
 Every OBJ_EVENT_GFX_MEGA_STONE sparkle must sit on a designer-authored pickup tile
 (data/emerald_champions/authored_pickup_tiles.json, snapshotted from Inclement Emerald)
-or on an explicitly approved tile below; no two stones may share one screen (15x10
-metatiles); and no item ball may sit within three tiles of a stone. Invented sparkles
-fail; use a scripted gift instead. Exit 1 on any violation.
+or on an explicitly approved tile below. Preserve Inclement's authored clusters,
+including the Aqua Hideout decoy puzzle. Exit 1 on invented pickup placement.
 """
 import json
 import sys
@@ -21,8 +20,6 @@ APPROVED = {
     ("Route109", 25, 5): "Sharpedonite, nudged under the umbrella",
 }
 PICKUPS = ("OBJ_EVENT_GFX_MEGA_STONE", "OBJ_EVENT_GFX_ITEM_BALL", "OBJ_EVENT_GFX_GOLD_ITEM_BALL")
-HALF_W, HALF_H = 7, 5
-BALL_RADIUS = 3
 
 
 def main() -> int:
@@ -44,15 +41,6 @@ def main() -> int:
                 tile = (o["x"], o["y"])
                 if [o["x"], o["y"]] not in AUTHORED.get(name, []) and (name, *tile) not in APPROVED:
                     errors.append(f"{name} {item} at {tile}: not an authored or approved tile")
-                for p in pickups:
-                    if p is o:
-                        continue
-                    dx, dy = abs(p["x"] - o["x"]), abs(p["y"] - o["y"])
-                    other = p["trainer_sight_or_berry_tree_id"]
-                    if p["graphics_id"] == "OBJ_EVENT_GFX_MEGA_STONE" and dx <= HALF_W and dy <= HALF_H:
-                        errors.append(f"{name} {item} at {tile}: shares a screen with {other} at ({p['x']}, {p['y']})")
-                    elif p["graphics_id"] != "OBJ_EVENT_GFX_MEGA_STONE" and max(dx, dy) <= BALL_RADIUS:
-                        errors.append(f"{name} {item} at {tile}: item ball {other} within {BALL_RADIUS} tiles at ({p['x']}, {p['y']})")
     for e in errors:
         print("FAIL", e)
     print(f"{stones} ground stones checked, {len(errors)} violations")

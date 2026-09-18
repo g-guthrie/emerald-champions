@@ -66,19 +66,19 @@ MossdeepCity_SpaceCenter_2F_Movement_PlayerExit: @ 8223E07
 
 MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts:: @ 8223E09
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_GRUNT_5, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat
+	@ This retired encounter has no campaign battle.
 	applymovement LOCALID_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_GRUNT_7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
@@ -346,7 +346,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest:: @ 8224152
 @ scripts had no callers and no equivalent opcode. Removed.
 
 MossdeepCity_SpaceCenter_1F_EventScript_Tabitha::
-	trainerbattle_single TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaIntro, MossdeepCity_SpaceCenter_Text_TabithaDefeat
+	trainerbattle_double TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaIntro, MossdeepCity_SpaceCenter_Text_TabithaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MossdeepCity_SpaceCenter_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -420,8 +420,8 @@ MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat: @ 8224461
 	.string "But!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro: @ 822446E
-	.string "It's too soon to be relieved!\n"
-	.string "I'm up next!$"
+	.string "You beat his whole team?!\n"
+	.string "I am standing aside. You handle this!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat: @ 8224499
 	.string "I lost, too!\n"
@@ -440,8 +440,8 @@ MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle: @ 822452C
 	.string "mess we got ourselves into.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle: @ 8224570
-	.string "We three losing like this…\n"
-	.string "We look worse than usual by triple!$"
+	.string "Both our teams lost…\n"
+	.string "Even our lookout ran for cover!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle: @ 82245AF
 	.string "Are we being useful to our leader\n"

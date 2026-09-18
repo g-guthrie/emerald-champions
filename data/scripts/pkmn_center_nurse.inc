@@ -21,7 +21,6 @@ Common_EventScript_PkmnCenterNurse::
 	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	special RestockEmeraldChampionsBasicBalls
 	message gText_EmeraldChampionsExplainTools
 	waitmessage
 	waitbuttonpress
@@ -102,7 +101,6 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_0x800B, Common_Movement_FaceDown
 	waitmovement 0
 	special HealPlayerParty
-	special RestockEmeraldChampionsBasicBalls
 	callnative RetryPendingLegendaryRelics
 	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
 	callnative UpdateFollowingPokemon

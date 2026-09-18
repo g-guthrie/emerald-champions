@@ -65,7 +65,6 @@ include config.mk
 
 # Default make rule
 all: rom
-	python3 scripts/sync_game_book.py --write
 
 # Toolchain selection
 TOOLCHAIN := $(DEVKITARM)

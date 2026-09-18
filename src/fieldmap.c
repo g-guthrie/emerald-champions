@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_pyramid.h"
 #include "bg.h"
 #include "fieldmap.h"
 #include "fldeff.h"
@@ -11,6 +12,7 @@
 #include "pokenav.h"
 #include "script.h"
 #include "secret_base.h"
+#include "trainer_hill.h"
 #include "tv.h"
 #include "constants/rgb.h"
 #include "constants/layouts.h"
@@ -145,6 +147,18 @@ void InitMapFromSavedGame(void)
     LoadSavedMapView();
     RunOnLoadMapScript();
     UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
+}
+
+void InitBattlePyramidMap(bool8 setPlayerPosition)
+{
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    GenerateBattlePyramidFloorLayout(sBackupMapData, setPlayerPosition);
+}
+
+void InitTrainerHillMap(void)
+{
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    GenerateTrainerHillFloorLayout(sBackupMapData);
 }
 
 static void InitMapLayoutData(const struct MapHeader *mapHeader)
@@ -1024,6 +1038,12 @@ bool32 AreCoordsInsideMap(u8 mapGroup, u8 mapNum, s16 x, s16 y)
     s32 height = layout->height;
     x -= MAP_OFFSET;
     y -= MAP_OFFSET;
+
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+    {
+        width *= PYRAMID_FLOOR_SQUARES_WIDE;
+        height *= PYRAMID_FLOOR_SQUARES_HIGH;
+    }
 
     return (x >= 0 && x < width && y >= 0 && y < height);
 }

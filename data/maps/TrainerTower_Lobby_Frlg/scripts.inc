@@ -207,7 +207,7 @@ TrainerTower_Lobby_EventScript_ShowRecords::
 	lockall
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 1
-	special ShowTrainerTowerRecords
+	special ShowTrainerHillRecords
 	releaseall
 	end
 

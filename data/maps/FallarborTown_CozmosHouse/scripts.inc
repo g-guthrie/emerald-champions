@@ -6,9 +6,7 @@ FallarborTown_CozmosHouse_MapScripts:: @ 8200F12
 FallarborTown_CozmosHouse_EventScript_ProfCozmo:: @ 8200F13
 	lockall
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq FallarborTown_CozmosHouse_EventScript_GaveMeteorite
+	goto_if_set FLAG_EC_GIFT_FALLARBOR_TOWN_COZMOS_HOUSE, FallarborTown_CozmosHouse_EventScript_GaveMeteorite
 	checkitem ITEM_METEORITE, 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite
@@ -23,6 +21,8 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite:: @ 8200F38
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_PleaseUseThisTM, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_FALLARBOR_TOWN_COZMOS_HOUSE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, ITEM_METEORITE
@@ -161,9 +161,7 @@ FallarborTown_CozmosHouse_EventScript_DeoxysAlreadyThatForme::
 FallarborTown_CozmosHouse_EventScript_CozmosWife:: @ 8200FBC
 	lockall
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
+	goto_if_set FLAG_EC_GIFT_FALLARBOR_TOWN_COZMOS_HOUSE, FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
 	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_CozmosHouse_EventScript_CozmoIsSad
 	msgbox FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls, MSGBOX_DEFAULT
 	releaseall
@@ -197,20 +195,14 @@ FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow: @ 8200FEE
 	.string "It's never going to be mine now…$"
 
 FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt: @ 82010A2
-	.string "Oh!\n"
-	.string "Hah?\p"
-	.string "That item…\p"
-	.string "Could it be?\p"
-	.string "Is it the Meteorite that Team Magma\n"
-	.string "took from Meteor Falls?\p"
-	.string "Please, may I have it?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "May I have that Meteorite?\p"
+	.string "I will give you a Rare Candy in\n"
+	.string "exchange.$"
 
 FallarborTown_CozmosHouse_Text_PleaseUseThisTM: @ 8201159
-	.string "Prof. Cozmo: This TM, it represents\n"
-	.string "my feeling of gratitude.\l"
-	.string "Please use it!$"
+	.string "Prof. Cozmo: Thank you for\n"
+	.string "returning my Meteorite. Please\l"
+	.string "use this Rare Candy!$"
 
 FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch: @ 82011A5
 	.string "Prof. Cozmo: Oh, I can't believe it.\n"
@@ -222,10 +214,9 @@ FallarborTown_CozmosHouse_Text_CrushedWithDisappointment: @ 8201212
 	.string "I'm crushed with disappointment…$"
 
 FallarborTown_CozmosHouse_Text_MayIHaveMeteorite: @ 8201249
-	.string "Prof. Cozmo: Please, may I have that\n"
-	.string "Meteorite?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "May I have that Meteorite?\p"
+	.string "I will give you a Rare Candy in\n"
+	.string "exchange.$"
 
 FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls: @ 82012BC
 	.string "Prof. Cozmo went off to Meteor Falls\n"

@@ -436,6 +436,7 @@ gSpecials::
 	def_special StartMirageTowerFossilFallAndSink, waitstate=1
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
+	def_special SetMatchCallRegisteredFlag
 	def_special DoDomeConfetti
 	def_special CreateAbnormalWeatherEvent
 	def_special GetAbnormalWeatherMapNameAndType
@@ -453,16 +454,6 @@ gSpecials::
 	def_special IsEmeraldChampionsGameCornerPokemonClaimed
 	def_special GiveEmeraldChampionsGameCornerPokemon
 	def_special GiveEmeraldChampionsPreparedPokemon
-	def_special ApplySelectedMonEmeraldChampionsBattleSet
-	def_special GetSelectedMonEmeraldChampionsBattleSetCount
-	def_special BufferSelectedMonEmeraldChampionsBattleSetName
-	def_special BufferSelectedMonEmeraldChampionsBattleSetPreview
-	def_special BufferSelectedMonNature
-	def_special BufferSelectedMonCurrentEmeraldChampionsBattleSet
-	def_special BufferSelectedMonEmeraldChampionsTrainingSummary
-	def_special BufferSelectedMonEmeraldChampionsTrainingDetail
-	def_special AdjustSelectedMonEmeraldChampionsTraining
-	def_special ResetSelectedMonEmeraldChampionsTraining
 	def_special TryUnlockSelectedLegendarySign
 	def_special GetSelectedLegendarySignState
 	def_special ShouldShowSelectedLegendarySignObject
@@ -489,9 +480,6 @@ gSpecials::
 	def_special ChampionsTentEnd
 	def_special ChampionsTentTryGivePrize
 	def_special CheckChampionsLinkBattleParty
-	def_special BufferEmeraldChampionsFormGift
-	def_special BuildEmeraldChampionsResearchPartnerChoices
-	def_special GiveEmeraldChampionsFormGift
 	def_special BuildEmeraldChampionsFormChoices
 	def_special PrepareEmeraldChampionsFormSelection
 	def_special BufferEmeraldChampionsFormPreview
@@ -501,12 +489,12 @@ gSpecials::
 	def_special StartEmeraldChampionsBirchRescue, waitstate=1
 	def_special BufferEmeraldChampionsRivalBranch
 	def_special GiveEmeraldChampionsOpeningBalls
-	def_special RestockEmeraldChampionsBasicBalls
 	def_special BufferEmeraldChampionsStarterNames
 	def_special SelectEmeraldChampionsStarterForNaming
 	def_special SaveForBattleTowerLink, waitstate=1
 	def_special Unused_SetWeatherSunny
 	def_special SetUnlockedPokedexFlags
+	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
 	def_special EnableNationalPokedex
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice, waitstate=1
@@ -523,7 +511,7 @@ gSpecials::
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen, waitstate=1
 	def_special TryGetWallpaperWithWaldaPhrase
-	def_special ShowTrainerTowerRecords, waitstate=1
+	def_special ShowTrainerTowerRecords, unused=1
 	def_special PlayerFaceTrainerAfterBattle
 	def_special ResetHealLocationFromDewford
 	def_special CountPartyAliveNonEggMons
@@ -742,3 +730,137 @@ gSpecials::
 	@ Already implemented in this tree, but never declared.
 	def_special GetPokeblockFeederInFront
 	def_special TryBerryBlenderLinkup
+
+	def_special GiveEmeraldChampionsStarterBattleItems
+
+	def_special CallBattleDomeFunction
+
+	def_special CallBattlePalaceFunction
+
+	def_special CallBattleArenaFunction
+
+	def_special CallBattleFactoryFunction
+
+	def_special CallBattlePikeFunction
+
+	def_special CallBattlePyramidFunction
+
+	def_special CloseBattlePikeCurtain, waitstate=1
+
+	def_special CallApprenticeFunction
+
+	def_special TryStoreHeldItemsInPyramidBag
+
+	def_special ChooseItemsToTossFromPyramidBag, waitstate=1
+
+	def_special DoBattlePyramidMonsHaveHeldItem
+
+	def_special BattlePyramidChooseMonHeldItems, waitstate=1
+
+	def_special GetBattlePyramidHint
+
+	def_special SetContestCategoryStringVarForInterview
+
+	def_special GetContestWinnerId
+
+	def_special GetContestPlayerId
+
+	def_special GetNpcContestantLocalId
+
+	def_special BufferContestWinnerTrainerName
+
+	def_special BufferContestWinnerMonName
+
+	def_special BufferContestTrainerAndMonNames
+
+	def_special GetContestMonConditionRanking
+
+	def_special SetContestTrainerGfxIds
+
+	def_special TryEnterContestMon
+
+	def_special GetContestantNamesAtRank
+
+	def_special SetLinkContestPlayerGfx
+
+	def_special GetContestMonCondition
+
+	def_special HasMonWonThisContestBefore
+
+	def_special GiveMonContestRibbon
+
+	def_special Unused_IsContestDebugActive, unused=1
+
+	def_special GiveMonArtistRibbon
+
+	def_special TryContestGModeLinkup, waitstate=1
+
+	def_special ShouldReadyContestArtist
+
+	def_special SaveMuseumContestPainting
+
+	def_special DoesContestCategoryHaveMuseumPainting
+
+	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
+
+	def_special DoBerryBlending, waitstate=1
+
+	def_special OpenPokeblockCaseOnFeeder, waitstate=1
+
+	def_special ShowBerryBlenderRecordWindow
+
+	def_special DoContestHallWarp, waitstate=1
+
+	def_special ShowContestEntryMonPic
+
+	def_special HideContestEntryMonPic
+
+	def_special GetContestMultiplayerId
+
+	def_special GenerateContestRand
+
+	def_special ShouldContestLadyShowGoOnAir
+
+	def_special HasPlayerGivenContestLadyPokeblock
+
+	def_special Script_BufferContestLadyCategoryAndMonName
+
+	def_special OpenPokeblockCaseForContestLady, waitstate=1
+
+	def_special SetContestLadyGivenPokeblock
+
+	def_special GetContestLadyMonSpecies
+
+	def_special GetContestLadyCategory
+
+	def_special PutLilycoveContestLadyShowOnTheAir
+
+	def_special LinkContestWaitForConnection, waitstate=1
+
+	def_special LinkContestTryShowWirelessIndicator
+
+	def_special LinkContestTryHideWirelessIndicator
+
+	def_special IsWirelessContest
+
+	def_special IsContestWithRSPlayer
+
+	def_special ClearLinkContestFlags
+
+	def_special TryContestEModeLinkup, waitstate=1
+
+	def_special LoadLinkContestPlayerPalettes
+
+	def_special CopyEReaderTrainerGreeting
+
+	def_special BufferEReaderTrainerName
+
+	def_special SetEReaderTrainerGfxId
+
+	def_special TrainerHillHasPendingPrize
+
+	def_special CallTrainerHillFunction
+
+	def_special PlayerNotAtTrainerHillEntrance
+
+	def_special ShowTrainerHillRecords, waitstate=1

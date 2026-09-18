@@ -165,9 +165,20 @@ SlateportCity_PokemonFanClub_EventScript_AlreadyInterviewed::
 @ Tower lobby hides it on transition, so this script is unreachable; it keeps a
 @ single line so the map.json reference still resolves.
 BattleFrontier_BattleTowerLobby_EventScript_Reporter::
-	msgbox BattleFrontier_BattleTowerLobby_Text_NoStoryToFile, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_TEMP_2, BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed
+	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
+	special InterviewBefore
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed
+	copyvar VAR_0x8009, VAR_0x8006
+	msgbox BattleFrontier_BattleTowerLobby_Text_InterviewRequest, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview
+	compare VAR_RESULT, NO
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview
 	end
-
 BattleFrontier_BattleTowerLobby_Text_NoStoryToFile:
 	.string "There is no broadcast to file.\n"
 	.string "The CIRCUIT keeps its own record.$"
@@ -230,4 +241,143 @@ LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan:: @ 823BECE
 
 LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay:: @ 823BED4
 	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	return
+
+LilycoveCity_ContestLobby_EventScript_Reporter::
+	lock
+	faceplayer
+	goto_if_set FLAG_TEMP_2, LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed
+	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE
+	special InterviewBefore
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed
+	copyvar VAR_0x8009, VAR_0x8006
+	msgbox LilycoveCity_ContestLobby_Text_InterviewRequest, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_AcceptInterview
+	compare VAR_RESULT, NO
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_DeclineInterview
+	end
+
+LilycoveCity_ContestLobby_EventScript_AcceptInterview::
+	msgbox LilycoveCity_ContestLobby_Text_DescribeContest, MSGBOX_DEFAULT
+	setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
+	copyvar VAR_0x8005, VAR_0x8009
+	setvar VAR_0x8006, 0
+	call Common_ShowEasyChatScreen
+	lock
+	faceplayer
+	compare VAR_RESULT, 1
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_SubmitResponse
+	compare VAR_RESULT, 0
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_DeclineInterview
+	end
+
+LilycoveCity_ContestLobby_EventScript_DeclineInterview::
+	msgbox LilycoveCity_ContestLobby_Text_PleaseDoShareStoryWithMe, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_ContestLobby_EventScript_SubmitResponse::
+	setvar VAR_0x8004, 24
+	special SetContestCategoryStringVarForInterview
+	msgbox LilycoveCity_ContestLobby_Text_WhatImageWhenYouHearX, MSGBOX_DEFAULT
+	setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
+	copyvar VAR_0x8005, VAR_0x8009
+	setvar VAR_0x8006, 1
+	call Common_ShowEasyChatScreen
+	lock
+	faceplayer
+	compare VAR_RESULT, 0
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_DeclineInterview
+	msgbox LilycoveCity_ContestLobby_Text_ThatsAllForInterview, MSGBOX_DEFAULT
+	setflag FLAG_TEMP_2
+	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE
+	goto Interview_EventScript_EndInterview
+	end
+
+LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed::
+	msgbox LilycoveCity_ContestLobby_Text_LookingForwardToNextContest, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview::
+	message BattleFrontier_BattleTowerLobby_Text_HowDidBattleTowerTurnOut
+	waitmessage
+	multichoice 20, 8, MULTI_SATISFACTION, TRUE
+	copyvar VAR_0x8008, VAR_RESULT
+	compare VAR_RESULT, 0
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_Satisfied
+	compare VAR_RESULT, 1
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied
+	msgbox BattleFrontier_BattleTowerLobby_Text_DescribeYourBattle, MSGBOX_DEFAULT
+	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW
+	copyvar VAR_0x8005, VAR_0x8009
+	call Common_ShowEasyChatScreen
+	lock
+	faceplayer
+	compare VAR_RESULT, 1
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse
+	compare VAR_RESULT, 0
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CancelInterview
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview::
+	msgbox BattleFrontier_BattleTowerLobby_Text_SorryWeDisturbedYou, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_Satisfied::
+	msgbox BattleFrontier_BattleTowerLobby_Text_ObviousYouHadGreatBattle, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied::
+	msgbox BattleFrontier_BattleTowerLobby_Text_DifficultToMakeBattleTurnOutAsPlanned, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse::
+	compare VAR_RESULT, 0
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CancelInterview
+	msgbox BattleFrontier_BattleTowerLobby_Text_ThatsGreatLine, MSGBOX_DEFAULT
+	setflag FLAG_TEMP_2
+	copyvar VAR_0x8004, VAR_0x8008
+	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
+	goto Interview_EventScript_EndInterview
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_CancelInterview::
+	msgbox BattleFrontier_BattleTowerLobby_Text_SilentType, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed::
+	msgbox BattleFrontier_BattleTowerLobby_Text_LookingForwardToNextBattle, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter::
+	compare VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_HideReporter
+	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
+	special InterviewBefore
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_HideReporter
+	clearflag FLAG_HIDE_BATTLE_TOWER_REPORTER
+	return
+
+BattleFrontier_BattleTowerLobby_EventScript_HideReporter::
+	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
+	return
+
+@ Unused
+EventScript_ContestLiveInterview::
+	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
+	special InterviewBefore
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_ContestLiveInterviewEnd
+	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
+	special InterviewAfter
+	return
+
+EventScript_ContestLiveInterviewEnd::
 	return

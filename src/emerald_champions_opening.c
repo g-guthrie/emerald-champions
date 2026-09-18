@@ -214,22 +214,6 @@ void GiveEmeraldChampionsOpeningBalls(void)
     }
 }
 
-void RestockEmeraldChampionsBasicBalls(void)
-{
-    u32 count = CountTotalItemQuantityInBag(ITEM_POKE_BALL);
-
-    gSpecialVar_Result = 0;
-    for (u32 i = 0; i < PC_ITEMS_COUNT; i++)
-        if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_POKE_BALL)
-            count += gSaveBlock1Ptr->pcItems[i].quantity;
-    if (count >= 10)
-        return;
-    if (AddBagItem(ITEM_POKE_BALL, 10 - count))
-        gSpecialVar_Result = 1;
-    else if (AddPCItem(ITEM_POKE_BALL, 10 - count))
-        gSpecialVar_Result = 2;
-}
-
 void BufferEmeraldChampionsStarterNames(void)
 {
     StringCopy(gStringVar1, GetSpeciesName(GetStarterPokemon(VarGet(VAR_STARTER_MON))));

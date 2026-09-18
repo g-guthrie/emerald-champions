@@ -40,19 +40,19 @@ Common_Movement_WalkInPlaceFastestDown: @ 82725AA
 	walk_in_place_fast_down
 	step_end
 
-Common_Movement_FaceRight: @ 82725AC
+Common_Movement_FaceRight:: @ 82725AC
 	face_right
 	step_end
 
-Common_Movement_FaceLeft: @ 82725AE
+Common_Movement_FaceLeft:: @ 82725AE
 	face_left
 	step_end
 
-Common_Movement_FaceDown: @ 82725B0
+Common_Movement_FaceDown:: @ 82725B0
 	face_down
 	step_end
 
-Common_Movement_FaceUp: @ 82725B2
+Common_Movement_FaceUp:: @ 82725B2
 	face_up
 	step_end
 

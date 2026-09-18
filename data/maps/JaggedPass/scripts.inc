@@ -1,5 +1,5 @@
-.set LOCALID_HIDEOUT_GUARD, 5
-.set LOCALID_CHANSEY, 8
+.set LOCALID_HIDEOUT_GUARD, 4
+.set LOCALID_CHANSEY, 7
 
 JaggedPass_MapScripts:: @ 8230656
 	map_script MAP_SCRIPT_ON_RESUME, JaggedPass_OnResume
@@ -82,7 +82,7 @@ JaggedPass_EventScript_MagmaHideoutGuard:: @ 8230718
 	waitmovement 0
 	msgbox JaggedPass_Text_GruntIntro, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro TRAINER_GRUNT_JAGGED_PASS, JaggedPass_Text_GruntDefeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_JAGGED_PASS, JaggedPass_Text_GruntDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
 	applymovement LOCALID_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -178,12 +178,12 @@ JaggedPass_Movement_PlayerShove:
 	step_end
 
 JaggedPass_EventScript_Eric:: @ 8230785
-	trainerbattle_single TRAINER_ERIC, JaggedPass_Text_EricIntro, JaggedPass_Text_EricDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox JaggedPass_Text_EricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Diana:: @ 823079C
-	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_EventScript_RegisterDiana
+	trainerbattle_double TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, EmeraldChampions_Text_NeedTwoPokemon, JaggedPass_EventScript_RegisterDiana
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq JaggedPass_EventScript_DianaRematch
@@ -199,12 +199,12 @@ JaggedPass_EventScript_RegisterDiana:: @ 82307C8
 	end
 
 JaggedPass_EventScript_DianaRematch:: @ 82307E4
-	trainerbattle_rematch TRAINER_DIANA_1, JaggedPass_Text_DianaRematchIntro, JaggedPass_Text_DianaRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox JaggedPass_Text_DianaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Ethan:: @ 82307FB
-	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_EventScript_RegisterEthan
+	trainerbattle_double TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, EmeraldChampions_Text_NeedTwoPokemon, JaggedPass_EventScript_RegisterEthan
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq JaggedPass_EventScript_EthanRematch
@@ -220,17 +220,17 @@ JaggedPass_EventScript_RegisterEthan:: @ 8230827
 	end
 
 JaggedPass_EventScript_EthanRematch:: @ 8230843
-	trainerbattle_rematch TRAINER_ETHAN_1, JaggedPass_Text_EthanRematchIntro, JaggedPass_Text_EthanRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox JaggedPass_Text_EthanPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Julio:: @ 823085A
-	trainerbattle_single TRAINER_JULIO, JaggedPass_Text_JulioIntro, JaggedPass_Text_JulioDefeat
+	trainerbattle_double TRAINER_JULIO, JaggedPass_Text_JulioIntro, JaggedPass_Text_JulioDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_JulioPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Autumn:: @ 8230871
-	trainerbattle_single TRAINER_AUTUMN, JaggedPass_Text_AutumnIntro, JaggedPass_Text_AutumnDefeat
+	trainerbattle_double TRAINER_AUTUMN, JaggedPass_Text_AutumnIntro, JaggedPass_Text_AutumnDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_AutumnPostBattle, MSGBOX_AUTOCLOSE
 	end
 

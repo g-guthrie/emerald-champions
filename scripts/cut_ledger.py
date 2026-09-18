@@ -10,7 +10,7 @@ branch, E0133 Eric), recovered from this repo's prior hand-authored ledger
 text and git history -- see the "_source" field in that data file.
 
 This module only renders that committed data file; it does not re-derive
-retirements from source. scripts/check_book_consistency.py cross-checks the
+retirements from source. The source roster verifier cross-checks the
 data file's identities against active authored teams, nonempty native
 parties and Hoenn battle opcodes (see check_cut_ledger there), and against
 the CUT POLICY paragraph's stated retired-identity count.

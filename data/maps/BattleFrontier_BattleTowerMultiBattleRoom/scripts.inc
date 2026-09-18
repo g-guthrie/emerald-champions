@@ -2,9 +2,7 @@
 .set LOCALID_ATTENDANT_1, 2
 .set LOCALID_ATTENDANT_2, 3
 .set LOCALID_OPPONENT_2, 4
-@ Renamed from LOCALID_PLAYER: this map hides the real player and represents them
-@ with object 5. The bare name collides with the engine constant LOCALID_PLAYER (255).
-.set LOCALID_PLAYER_STANDIN, 5
+.set LOCALID_PLAYER_OBJECT, 5
 .set LOCALID_PARTNER, 6
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScripts:: @ 8248EE8
@@ -14,7 +12,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScripts:: @ 8248EE8
 	.byte 0
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by LOCALID_PLAYER_STANDIN, which has the gfx id VAR_OBJ_GFX_ID_F
+	@ The player is represented instead by LOCALID_PLAYER_OBJECT, which has the gfx id VAR_OBJ_GFX_ID_F
 	@ The multi partner is represented by LOCALID_PARTNER, which has the gfx id VAR_OBJ_GFX_ID_E
 
 BattleFrontier_BattleTowerMultiBattleRoom_OnTransition: @ 8248EF8
@@ -54,7 +52,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_OnFrame: @ 8248F43
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_EnterRoom:: @ 8248F4D
 	setvar VAR_TEMP_0, 1
-	applymovement LOCALID_PLAYER_STANDIN, BattleFrontier_BattleTowerMultiBattleRoom_Movement_PlayerEnterRoom
+	applymovement LOCALID_PLAYER_OBJECT, BattleFrontier_BattleTowerMultiBattleRoom_Movement_PlayerEnterRoom
 	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_PartnerEnterRoom
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
@@ -63,7 +61,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_EnterRoom:: @ 8248F4D
 	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer
 	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer
 	waitmovement 0
-	applymovement LOCALID_PLAYER_STANDIN, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant
+	applymovement LOCALID_PLAYER_OBJECT, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant
 	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant
 	waitmovement 0
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
@@ -129,7 +127,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DefeatedOpponents:: @ 8249
 	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer
 	applymovement LOCALID_ATTENDANT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer
 	waitmovement 0
-	applymovement LOCALID_PLAYER_STANDIN, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant
+	applymovement LOCALID_PLAYER_OBJECT, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant
 	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
@@ -205,7 +203,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallenge:: @ 824
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallenge:: @ 8249283
 	closemessage
 	clearflag FLAG_TEMP_2
-	applymovement LOCALID_PLAYER_STANDIN, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceBattle
+	applymovement LOCALID_PLAYER_OBJECT, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceBattle
 	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceBattle
 	waitmovement 0
 	applymovement LOCALID_ATTENDANT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantReturnToPos
@@ -410,7 +408,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceAttendant: @ 8249524
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_FaceBattle: @ 8249526
-	walk_in_place_fast_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_Opponent1Enter: @ 8249528
@@ -451,7 +449,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantApproachPlayer: @ 82
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_AttendantReturnToPos: @ 8249541
 	walk_left
 	walk_left
-	walk_in_place_fast_right
+	walk_in_place_faster_right
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft: @ 8249545

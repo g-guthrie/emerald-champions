@@ -1,14 +1,16 @@
 .set LOCALID_ATTENDANT, 1
 
-@ Emerald Champions: the Battle Pike is retired. src/battle_pike.c and the
-@ Pike's own maps are gone from this tree, so the challenge flow that used to
-@ live here (challenge-status dispatch, party select, save, warp to the Pike
-@ corridor) has been removed rather than left calling missing code.
-@ The attendant still greets the player and explains that the Pike is closed.
-
 BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeLobby_OnWarp
 	.byte 0
+
+BattleFrontier_BattlePikeLobby_OnFrame: @ 825B6D1
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeLobby_EventScript_GetChallengeStatus
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_WON, BattleFrontier_BattlePikeLobby_EventScript_WonChallenge
+	map_script_2 VAR_TEMP_0, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePikeLobby_EventScript_LostChallenge
+	.2byte 0
 
 BattleFrontier_BattlePikeLobby_OnWarp: @ 825B6F3
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth
@@ -19,11 +21,175 @@ BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth:: @ 825B6FD
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
+BattleFrontier_BattlePikeLobby_EventScript_GetChallengeStatus:: @ 825B707
+	frontier_getstatus
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving:: @ 825B710
+	special HealPlayerParty
+	pike_resethelditems
+	lockall
+	msgbox BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting, MSGBOX_DEFAULT
+	closemessage
+	pike_set PIKE_DATA_WIN_STREAK 0
+	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, FALSE
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+	setvar VAR_TEMP_0, 255
+	releaseall
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_WonChallenge:: @ 825B762
+	lockall
+	frontier_isbrain
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_DefeatedQueen
+	msgbox BattleFrontier_BattlePikeLobby_Text_PossessLuckInAbundance, MSGBOX_DEFAULT
+	waitmessage
+	goto BattleFrontier_BattlePikeLobby_EventScript_GiveBattlePoints
+
+BattleFrontier_BattlePikeLobby_EventScript_DefeatedQueen:: @ 825B784
+	msgbox BattleFrontier_BattlePikeLobby_Text_SnatchedVictoryFromQueen, MSGBOX_DEFAULT
+	waitmessage
+BattleFrontier_BattlePikeLobby_EventScript_GiveBattlePoints:: @ 825B78D
+	msgbox BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints, MSGBOX_DEFAULT
+	frontier_givepoints
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
+	frontier_checkairshow
+	pike_get PIKE_DATA_TOTAL_STREAKS
+	addvar VAR_RESULT, 1
+	pike_set PIKE_DATA_TOTAL_STREAKS, VAR_RESULT
+	special LoadPlayerParty
+	special HealPlayerParty
+	pike_resethelditems
+	message BattleFrontier_BattlePikeLobby_Text_ShallRecordResults
+	waitmessage
+	pike_save 0
+	playse SE_SAVE
+	waitse
+	msgbox BattleFrontier_BattlePikeLobby_Text_LookForwardToSeeingYou, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_TEMP_0, 255
+	releaseall
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_LostChallenge:: @ 825B806
+	lockall
+	message BattleFrontier_BattlePikeLobby_Text_ChallengeEndedRecordResults
+	waitmessage
+	frontier_checkairshow
+	frontier_set FRONTIER_DATA_BATTLE_NUM, 0
+	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, FALSE
+	special LoadPlayerParty
+	special HealPlayerParty
+	pike_resethelditems
+	pike_save 0
+	playse SE_SAVE
+	waitse
+	msgbox BattleFrontier_BattlePikeLobby_Text_LookForwardToSeeingYou, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_TEMP_0, 255
+	releaseall
+	end
+
 BattleFrontier_BattlePikeLobby_EventScript_Attendant:: @ 825B868
 	lock
 	faceplayer
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	special SavePlayerParty
 	msgbox BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike, MSGBOX_DEFAULT
-	msgbox BattleFrontier_BattlePikeLobby_Text_PikeClosed, MSGBOX_DEFAULT
+BattleFrontier_BattlePikeLobby_EventScript_AskTakeChallenge:: @ 825B87F
+	message BattleFrontier_BattlePikeLobby_Text_TakeChallenge
+	waitmessage
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge
+	case 1, BattleFrontier_BattlePikeLobby_EventScript_ExplainChallenge
+	case 2, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
+
+BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge:: @ 825B8BB
+	message BattleFrontier_BattlePikeLobby_Text_WhichChallengeMode
+	waitmessage
+	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
+	switch VAR_RESULT
+	case FRONTIER_LVL_TENT, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
+	frontier_checkineligible
+	compare VAR_0x8004, TRUE
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons
+	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
+	msgbox BattleFrontier_BattlePikeLobby_Text_PleaseChooseThreeMons, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+	call BattleFrontier_EventScript_GetLvlMode
+	copyvar VAR_0x8004, VAR_RESULT
+	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	special ChoosePartyForBattleFrontier
+	waitstate
+	compare VAR_RESULT, 0
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
+	msgbox BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
+	switch VAR_RESULT
+	case NO, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
+	case YES, BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
+
+BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge:: @ 825B95C
+	setvar VAR_TEMP_0, 0
+	setvar VAR_TEMP_1, 0
+	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
+	pike_init
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING
+	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, TRUE
+	pike_savehelditems
+	frontier_set FRONTIER_DATA_PAUSED, FALSE
+	special LoadPlayerParty
+	closemessage
+	delay 2
+	call Common_EventScript_SaveGame
+	setvar VAR_TEMP_0, 255
+	pike_savehelditems
+	compare VAR_RESULT, 0
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_CancelChallengeSaveFailed
+	special SavePlayerParty
+	frontier_setpartyorder FRONTIER_PARTY_SIZE
+	msgbox BattleFrontier_BattlePikeLobby_Text_StepThisWay, MSGBOX_DEFAULT
+	closemessage
+	frontier_settrainers
+	call BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor
+	special HealPlayerParty
+	call BattleFrontier_BattlePike_EventScript_CloseCurtain
+	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
+	setvar VAR_TEMP_0, 0
+	waitstate
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_ExplainChallenge:: @ 825BA1A
+	msgbox BattleFrontier_BattlePikeLobby_Text_ExplainBattlePike, MSGBOX_DEFAULT
+	goto BattleFrontier_BattlePikeLobby_EventScript_AskTakeChallenge
+
+BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMons:: @ 825BA27
+	switch VAR_RESULT
+	case FRONTIER_LVL_50, BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLv50
+	case FRONTIER_LVL_OPEN, BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLvOpen
+
+BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLv50:: @ 825BA42
+	msgbox BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT
+	goto BattleFrontier_BattlePikeLobby_EventScript_EndCancelChallenge
+
+BattleFrontier_BattlePikeLobby_EventScript_NotEnoughValidMonsLvOpen:: @ 825BA4F
+	msgbox BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT
+	goto BattleFrontier_BattlePikeLobby_EventScript_EndCancelChallenge
+
+BattleFrontier_BattlePikeLobby_EventScript_CancelChallengeSaveFailed:: @ 825BA5C
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+	goto BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge
+
+BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge:: @ 825BA73
+	special LoadPlayerParty
+BattleFrontier_BattlePikeLobby_EventScript_CancelChallenge:: @ 825BA76
+	msgbox BattleFrontier_BattlePikeLobby_Text_LookForwardToSeeingYou, MSGBOX_DEFAULT
+BattleFrontier_BattlePikeLobby_EventScript_EndCancelChallenge:: @ 825BA7E
 	release
 	end
 
@@ -34,6 +200,20 @@ BattleFrontier_BattlePikeLobby_EventScript_ShowResults:: @ 825BA80
 	special RemoveRecordsWindow
 	releaseall
 	end
+
+BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor:: @ 825BA94
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeLobby_Movement_PlayerWalkToCorridor
+	waitmovement 0
+	return
+
+BattleFrontier_BattlePikeLobby_Movement_PlayerWalkToCorridor: @ 825BAA6
+	walk_up
+BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor: @ 825BAA7
+	walk_up
+	walk_up
+	set_invisible
+	step_end
 
 BattleFrontier_BattlePikeLobby_EventScript_Hiker:: @ 825BAAB
 	msgbox BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal, MSGBOX_NPC
@@ -84,14 +264,12 @@ BattleFrontier_BattlePikeLobby_EventScript_ExitRules:: @ 825BB47
 	releaseall
 	end
 
-BattleFrontier_BattlePikeLobby_Text_PikeClosed:
-	.string "But the Battle Choice is not being\n"
-	.string "held at present…\p"
-	.string "The paths beyond this room have been\n"
-	.string "sealed, and I must ask you not to\l"
-	.string "go any farther…\p"
-	.string "Please enjoy the rest of the\n"
-	.string "BATTLE FRONTIER…$"
+BattleFrontier_BattlePike_EventScript_CloseCurtain:: @ 825BB49
+	playse SE_PIKE_CURTAIN_CLOSE
+	special CloseBattlePikeCurtain
+	waitstate
+	waitse
+	return
 
 BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike: @ 825BB52
 	.string "Where the luck of Trainers\n"

@@ -1,4 +1,4 @@
-.set LOCALID_STEVEN, 31
+.set LOCALID_STEVEN, 24
 
 Route120_MapScripts:: @ 81F53EC
 	map_script MAP_SCRIPT_ON_RESUME, Route120_OnResume
@@ -289,12 +289,12 @@ Route120_EventScript_RouteSign121:: @ 81F57CE
 	end
 
 Route120_EventScript_Colin:: @ 81F57D7
-	trainerbattle_single TRAINER_COLIN, Route120_Text_ColinIntro, Route120_Text_ColinDefeat
+	trainerbattle_double TRAINER_COLIN, Route120_Text_ColinIntro, Route120_Text_ColinDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route120_Text_ColinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Robert:: @ 81F57EE
-	trainerbattle_single TRAINER_ROBERT_1, Route120_Text_RobertIntro, Route120_Text_RobertDefeat, Route120_EventScript_RegisterRobert
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route120_EventScript_RematchRobert
@@ -311,22 +311,22 @@ Route120_EventScript_RegisterRobert:: @ 81F581A
 	end
 
 Route120_EventScript_RematchRobert:: @ 81F5839
-	trainerbattle_rematch TRAINER_ROBERT_1, Route120_Text_RobertRematchIntro, Route120_Text_RobertRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_RobertPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Lorenzo:: @ 81F5850
-	trainerbattle_single TRAINER_LORENZO, Route120_Text_LorenzoIntro, Route120_Text_LorenzoDefeat
+	trainerbattle_double TRAINER_LORENZO, Route120_Text_LorenzoIntro, Route120_Text_LorenzoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route120_Text_LorenzoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Jenna:: @ 81F5867
-	trainerbattle_single TRAINER_JENNA, Route120_Text_JennaIntro, Route120_Text_JennaDefeat
+	trainerbattle_double TRAINER_JENNA, Route120_Text_JennaIntro, Route120_Text_JennaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route120_Text_JennaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Jeffrey:: @ 81F587E
-	trainerbattle_single TRAINER_JEFFREY_1, Route120_Text_JeffreyIntro, Route120_Text_JeffreyDefeat, Route120_EventScript_RegisterJeffrey
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route120_EventScript_RematchJeffrey
@@ -343,47 +343,47 @@ Route120_EventScript_RegisterJeffrey:: @ 81F58AA
 	end
 
 Route120_EventScript_RematchJeffrey:: @ 81F58C9
-	trainerbattle_rematch TRAINER_JEFFREY_1, Route120_Text_JeffreyRematchIntro, Route120_Text_JeffreyRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_JeffreyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Jennifer:: @ 81F58E0
-	trainerbattle_single TRAINER_JENNIFER, Route120_Text_JenniferIntro, Route120_Text_JenniferDefeat
+	trainerbattle_double TRAINER_JENNIFER, Route120_Text_JenniferIntro, Route120_Text_JenniferDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route120_Text_JenniferPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Chip:: @ 81F58F7
-	trainerbattle_single TRAINER_CHIP, Route120_Text_ChipIntro, Route120_Text_ChipDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_ChipPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Clarissa:: @ 81F590E
-	trainerbattle_single TRAINER_CLARISSA, Route120_Text_ClarissaIntro, Route120_Text_ClarissaDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_ClarissaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Angelica:: @ 81F5925
-	trainerbattle_single TRAINER_ANGELICA, Route120_Text_AngelicaIntro, Route120_Text_AngelicaDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Keigo:: @ 81F593C
-	trainerbattle_single TRAINER_KEIGO, Route120_Text_KeigoIntro, Route120_Text_KeigoDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_KeigoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Riley:: @ 81F5953
-	trainerbattle_single TRAINER_RILEY, Route120_Text_RileyIntro, Route120_Text_RileyDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_RileyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Leonel:: @ 81F596A
-	trainerbattle_single TRAINER_LEONEL, Route120_Text_LeonelIntro, Route120_Text_LeonelDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_LeonelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Callie:: @ 81F5981
-	trainerbattle_single TRAINER_CALLIE, Route120_Text_CallieIntro, Route120_Text_CallieDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_CalliePostBattle, MSGBOX_AUTOCLOSE
 	end
 

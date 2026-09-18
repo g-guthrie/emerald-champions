@@ -4,6 +4,7 @@
 #include "battle_util.h"
 #include "bg.h"
 #include "chooseboxmon.h"
+#include "contest_effect.h"
 #include "data.h"
 #include "decompress.h"
 #include "emerald_champions_battle_sets.h"
@@ -32,12 +33,22 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+// The different versions of hearts are selected using animation
+// commands.
+enum {
+    APPEAL_HEART_EMPTY,
+    APPEAL_HEART_FULL,
+    JAM_HEART_EMPTY,
+    JAM_HEART_FULL,
+};
+
 #define TAG_MODE_ARROWS 5325
 #define TAG_LIST_ARROWS 5425
 #define GFXTAG_UI       5525
 #define PALTAG_UI       5526
 
 #define BATTLE_INFO 0
+#define CONTEST_INFO 1
 #define RETURN_FROM_MOVE_SELECT 2
 
 struct RelearnType
@@ -50,6 +61,7 @@ struct RelearnType
 
 static EWRAM_DATA struct
 {
+    u8 heartSpriteIds[16];
     u16 movesToLearn[MAX_RELEARNER_MOVES];
     struct ListMenuItem menuItems[MAX_RELEARNER_MOVES + 1];
     u8 mainTask;
@@ -75,6 +87,23 @@ static const u16 sUI_Pal[] = INCGFX_U16("graphics/interface/ui_learn_move.png", 
 // The arrow sprites in this spritesheet aren't used. The scroll-arrow system provides its own
 // arrow sprites.
 static const u8 sUI_Tiles[] = INCGFX_U8("graphics/interface/ui_learn_move.png", ".4bpp");
+
+static const struct OamData sHeartSpriteOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
 
 static const struct OamData sUnusedOam1 =
 {
@@ -151,6 +180,46 @@ static const struct ScrollArrowsTemplate sMoveListScrollArrowsTemplate =
     .tileTag = TAG_LIST_ARROWS,
     .palTag = TAG_LIST_ARROWS,
     .palNum = 0,
+};
+
+static const union AnimCmd sHeartSprite_AppealEmptyFrame[] =
+{
+    ANIMCMD_FRAME(8, 5, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sHeartSprite_AppealFullFrame[] =
+{
+    ANIMCMD_FRAME(9, 5, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sHeartSprite_JamEmptyFrame[] =
+{
+    ANIMCMD_FRAME(10, 5, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sHeartSprite_JamFullFrame[] =
+{
+    ANIMCMD_FRAME(11, 5, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sHeartSpriteAnimationCommands[] =
+{
+    [APPEAL_HEART_EMPTY] = sHeartSprite_AppealEmptyFrame,
+    [APPEAL_HEART_FULL] = sHeartSprite_AppealFullFrame,
+    [JAM_HEART_EMPTY] = sHeartSprite_JamEmptyFrame,
+    [JAM_HEART_FULL] = sHeartSprite_JamFullFrame,
+};
+
+static const struct SpriteTemplate sConstestMoveHeartSprite =
+{
+    .tileTag = GFXTAG_UI,
+    .paletteTag = PALTAG_UI,
+    .oam = &sHeartSpriteOamData,
+    .anims = sHeartSpriteAnimationCommands,
 };
 
 static const struct BgTemplate sMoveRelearnerMenuBackgroundTemplates[] =
@@ -270,7 +339,7 @@ static void CB2_InitLearnMove_Basic(void)
         break;
     case 1:
         InitMoveRelearnerBackgroundLayers();
-        InitMoveRelearnerWindows();
+        InitMoveRelearnerWindows(gTasks[sMoveRelearnerStruct->mainTask].tCategory == CONTEST_INFO);
         gMain.state++;
         break;
     case 2:
@@ -287,6 +356,7 @@ static void CB2_InitLearnMove_Basic(void)
         break;
     case 4:
         ShowTeachMoveText();
+        MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
         SetBackdropFromColor(RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
         gMain.state++;
@@ -326,7 +396,10 @@ void CB2_InitLearnMove(void)
     gTasks[sMoveRelearnerStruct->mainTask].tState = 0;
     gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = gSpecialVar_0x8004;
     gTasks[sMoveRelearnerStruct->mainTask].tMove = MOVE_NONE;
-    gTasks[sMoveRelearnerStruct->mainTask].tCategory = BATTLE_INFO;
+    if (!C_HIDE_CONTEST_DATA && gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
+        gTasks[sMoveRelearnerStruct->mainTask].tCategory = CONTEST_INFO;
+    else
+        gTasks[sMoveRelearnerStruct->mainTask].tCategory = BATTLE_INFO;
     SetMainCallback2(CB2_InitLearnMove_Basic);
 }
 
@@ -455,7 +528,10 @@ static void Task_MoveRelearner_Quit(u8 taskId)
 
     if (gInitialSummaryScreenCallback != NULL)
     {
-        ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_BATTLE, gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
+        if (gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
+            ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_CONTEST, gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
+        else
+            ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_BATTLE, gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
     }
     else
     {
@@ -544,6 +620,32 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
                 PlaySE(SE_FAILURE);
             }
         }
+        else if (!C_HIDE_CONTEST_DATA)
+        {
+            if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
+                break;
+
+            PlaySE(SE_SELECT);
+
+            if (gTasks[taskId].tCategory == BATTLE_INFO)
+            {
+                PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
+                gTasks[taskId].tCategory = CONTEST_INFO;
+            }
+            else
+            {
+                PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
+                gTasks[taskId].tCategory = BATTLE_INFO;
+            }
+
+            MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
+
+            ScheduleBgCopyTilemapToVram(1);
+
+            if (B_SHOW_CATEGORY_ICON == TRUE)
+                MoveRelearnerShowHideCategoryIcon(GetCurrentSelectedMove());
+            AddScrollArrows();
+        }
         break;
     case LIST_CANCEL:
         PlaySE(SE_SELECT);
@@ -589,10 +691,28 @@ static void CreateUISprites(void)
     sMoveRelearnerStruct->categoryIconSpriteId = 0xFF;
     LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
     LoadSpritePalette(&gSpritePal_CategoryIcons);
+
+    // These are the appeal hearts.
+    for (i = 0; i < 8; i++)
+        sMoveRelearnerStruct->heartSpriteIds[i] = CreateSprite(&sConstestMoveHeartSprite, (i - (i / 4) * 4) * 8 + 104, (i / 4) * 8 + 36, 0);
+
+    // These are the jam harts.
+    // The animation is used to toggle between full/empty heart sprites.
+    for (i = 0; i < 8; i++)
+    {
+        sMoveRelearnerStruct->heartSpriteIds[i + 8] = CreateSprite(&sConstestMoveHeartSprite, (i - (i / 4) * 4) * 8 + 104, (i / 4) * 8 + 52, 0);
+        StartSpriteAnim(&gSprites[sMoveRelearnerStruct->heartSpriteIds[i + 8]], 2);
+    }
+
+    for (i = 0; i < 16; i++)
+        gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = TRUE;
 }
 
 static void AddScrollArrows(void)
 {
+    if (!C_HIDE_CONTEST_DATA && sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
+        sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
+
     if (sMoveRelearnerStruct->moveListScrollArrowTask == TASK_NONE)
     {
         gTempScrollArrowTemplate = sMoveListScrollArrowsTemplate;
@@ -603,6 +723,12 @@ static void AddScrollArrows(void)
 
 static void RemoveScrollArrows(void)
 {
+    if (!C_HIDE_CONTEST_DATA && sMoveRelearnerStruct->moveDisplayArrowTask != TASK_NONE)
+    {
+        RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveDisplayArrowTask);
+        sMoveRelearnerStruct->moveDisplayArrowTask = TASK_NONE;
+    }
+
     if (sMoveRelearnerStruct->moveListScrollArrowTask != TASK_NONE)
     {
         RemoveScrollIndicatorArrowPair(sMoveRelearnerStruct->moveListScrollArrowTask);
@@ -635,9 +761,51 @@ static void CreateLearnableMovesList(void)
     sMoveRelearnerStruct->numToShowAtOnce = LoadMoveRelearnerMovesList(sMoveRelearnerStruct->menuItems, sMoveRelearnerStruct->numMenuChoices);
 }
 
+void MoveRelearnerShowHideHearts(s32 move)
+{
+    u16 numHearts;
+    u16 i;
+
+    if (gTasks[sMoveRelearnerStruct->mainTask].tCategory == BATTLE_INFO || move == LIST_CANCEL)
+    {
+        for (i = 0; i < 16; i++)
+            gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = TRUE;
+    }
+    else
+    {
+        numHearts = (u8)(gContestEffects[GetMoveContestEffect(move)].appeal / 10);
+
+        if (numHearts == 0xFF)
+            numHearts = 0;
+
+        for (i = 0; i < 8; i++)
+        {
+            if (i < numHearts)
+                StartSpriteAnim(&gSprites[sMoveRelearnerStruct->heartSpriteIds[i]], 1);
+            else
+                StartSpriteAnim(&gSprites[sMoveRelearnerStruct->heartSpriteIds[i]], 0);
+            gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = FALSE;
+        }
+
+        numHearts = (u8)(gContestEffects[GetMoveContestEffect(move)].jam / 10);
+
+        if (numHearts == 0xFF)
+            numHearts = 0;
+
+        for (i = 0; i < 8; i++)
+        {
+            if (i < numHearts)
+                StartSpriteAnim(&gSprites[sMoveRelearnerStruct->heartSpriteIds[i + 8]], 3);
+            else
+                StartSpriteAnim(&gSprites[sMoveRelearnerStruct->heartSpriteIds[i + 8]], 2);
+            gSprites[sMoveRelearnerStruct->heartSpriteIds[i + 8]].invisible = FALSE;
+        }
+    }
+}
+
 void MoveRelearnerShowHideCategoryIcon(s32 moveId)
 {
-    if (moveId == LIST_CANCEL)
+    if (gTasks[sMoveRelearnerStruct->mainTask].tCategory == CONTEST_INFO || moveId == LIST_CANCEL)
     {
         if (sMoveRelearnerStruct->categoryIconSpriteId != 0xFF)
             DestroySprite(&gSprites[sMoveRelearnerStruct->categoryIconSpriteId]);

@@ -1,4 +1,4 @@
-.set LOCALID_STEVEN, 19
+.set LOCALID_STEVEN, 14
 
 Route118_MapScripts:: @ 81F3DBC
 	map_script MAP_SCRIPT_ON_TRANSITION, Route118_OnTransition
@@ -188,7 +188,7 @@ Route118_Movement_StevenExit2: @ 81F3F7E
 	step_end
 
 Route118_EventScript_Rose:: @ 81F3F87
-	trainerbattle_single TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, Route118_EventScript_RegisterRose
+	trainerbattle_double TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route118_EventScript_RegisterRose
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route118_EventScript_RematchRose
@@ -205,22 +205,22 @@ Route118_EventScript_RegisterRose:: @ 81F3FB3
 	end
 
 Route118_EventScript_RematchRose:: @ 81F3FD2
-	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route118_Text_RosePostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Barny:: @ 81F3FE9
-	trainerbattle_single TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Wade:: @ 81F4000
-	trainerbattle_single TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Dalton:: @ 81F4017
-	trainerbattle_single TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, Route118_EventScript_RegisterDalton
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route118_EventScript_RematchDalton
@@ -237,22 +237,22 @@ Route118_EventScript_RegisterDalton:: @ 81F4043
 	end
 
 Route118_EventScript_RematchDalton:: @ 81F4062
-	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Perry:: @ 81F4079
-	trainerbattle_single TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Chester:: @ 81F4090
-	trainerbattle_single TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Deandre:: @ 81F40A7
-	trainerbattle_single TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat
+	trainerbattle_double TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -292,7 +292,7 @@ Route118_EventScript_CheckParty::
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route118_EventScript_NeedMoreKarp
 	msgbox Route118_Text_KarpFiteStart, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpDefeat
+	trainerbattle_no_intro_double TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_TakeGyaradosite, MSGBOX_DEFAULT
 	giveitem ITEM_GYARADOSITE
 	setflag FLAG_ROUTE118_GYARADOSITE

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "bg.h"
-#include "pokenav_call.h"
 #include "blit.h"
 #include "decompress.h"
 #include "dma3.h"
@@ -12,6 +11,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "map_name_popup.h"
+#include "match_call.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "palette.h"
@@ -265,8 +265,8 @@ static void WindowFunc_RedrawDialogueFrame(u8 bg, u8 left, u8 top, u8 width, u8 
 
 void RedrawDialogueFrame(void)
 {
-    if (IsPokenavCallTaskActive())
-        RedrawPokenavCallTextBoxBorder();
+    if (IsMatchCallTaskActive())
+        RedrawMatchCallTextBoxBorder();
     else
         CallWindowFunction(0, WindowFunc_RedrawDialogueFrame);
 }

@@ -6,12 +6,12 @@ AbandonedShip_Rooms_1F_EventScript_Gentleman:: @ 8237A93
 	end
 
 AbandonedShip_Rooms_1F_EventScript_Demetrius:: @ 8237A9C
-	trainerbattle_single TRAINER_DEMETRIUS, AbandonedShip_Rooms_1F_Text_DemetriusIntro, AbandonedShip_Rooms_1F_Text_DemetriusDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox AbandonedShip_Rooms_1F_Text_DemetriusPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms_1F_EventScript_Thalia:: @ 8237AB3
-	trainerbattle_single TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_ThaliaIntro, AbandonedShip_Rooms_1F_Text_ThaliaDefeat, AbandonedShip_Rooms_1F_EventScript_RegisterThalia
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq AbandonedShip_Rooms_1F_EventScript_ThaliaRematch
@@ -28,7 +28,7 @@ AbandonedShip_Rooms_1F_EventScript_RegisterThalia:: @ 8237ADF
 	end
 
 AbandonedShip_Rooms_1F_EventScript_ThaliaRematch:: @ 8237AFE
-	trainerbattle_rematch TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_ThaliaRematchIntro, AbandonedShip_Rooms_1F_Text_ThaliaRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox AbandonedShip_Rooms_1F_Text_ThaliaPostRematch, MSGBOX_AUTOCLOSE
 	end
 

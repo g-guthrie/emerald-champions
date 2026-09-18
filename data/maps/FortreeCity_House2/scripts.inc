@@ -45,14 +45,14 @@ FortreeCity_House2_EventScript_WrongGuess:: @ 8217878
 FortreeCity_House2_EventScript_SleepTalkTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq FortreeCity_House2_EventScript_ReceivedTM49
+	goto_if_set FLAG_EC_GIFT_FORTREE_CITY_HOUSE2, FortreeCity_House2_EventScript_ReceivedTM49
 	msgbox FortreeCity_House2_Text_WantSleepTalk, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq FortreeCity_House2_EventScript_SleepTalkDeclined
 	msgbox FortreeCity_Text_GiveTM49, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_FORTREE_CITY_HOUSE2
 	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
 	release
 	end
@@ -85,8 +85,9 @@ FortreeCity_House2_Text_SleepTalkDeclined:
 	.string "with Hidden Power, too…$"
 
 FortreeCity_Text_GiveTM49:
-	.string "Ah, an appreciative child!\n"
-	.string "Please take this TM.$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 FortreeCity_Text_HaveTM49:
 	.string "I've never once gotten my wife's\n"

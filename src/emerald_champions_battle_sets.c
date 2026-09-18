@@ -555,27 +555,6 @@ u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice)
     );
 }
 
-u8 ApplyEmeraldChampionsRecommendedEvolutionSet(struct Pokemon *mon)
-{
-    const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(GetMonData(mon, MON_DATA_SPECIES), EC_BATTLE_FORMAT_DOUBLES);
-    if (range == NULL)
-        return EC_BATTLE_SET_FAILED;
-
-    // Evolution always returns the campaign to its doubles-first orientation.
-    // Select the first ordinary role explicitly: a small number of legacy
-    // species arrays place a Mega role in raw slot zero.
-    for (u8 choice = 0; choice < range->count; choice++)
-    {
-        const struct EmeraldChampionsBattleSet *preset =
-            &gEmeraldChampionsBattleSets[range->offset + choice].preset;
-
-        if (!PresetRequiresTransformation(preset)
-         && !IsEmeraldChampionsProtectedProgressionItem(preset->item))
-            return ApplyPreset(mon, preset, PRESET_EVOLUTION);
-    }
-    return EC_BATTLE_SET_FAILED;
-}
-
 u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon)
 {
     // Wild loadouts are independent of campaign inventory.  In particular,

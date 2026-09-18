@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export native trainer parties plus book comparison and runtime alternatives.
+"""Export native trainer parties plus authoring comparison and runtime alternatives.
 
 Read-only with respect to design/game sources. Fails on missing required fields or
 authoring/native party mismatch; never fabricates a fixed party for procedural battles.
@@ -18,7 +18,6 @@ import textwrap
 import emerald_champions_teams as teams
 
 ROOT = Path(__file__).resolve().parents[1]
-BOOK = ROOT / 'Game Blueprint/Emerald_Champions_Game_Book.txt'
 STATS = ('HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe')
 PARTY = 'src/data/trainers.party'
 
@@ -266,9 +265,9 @@ def main():
     w.line('Includes the current uncommitted working-tree changes; this is not a published-release claim.')
     w.line()
     total=sum(len(x['mons']) for x in parties.values())
-    w.prose(f"Scope: ALL {len(branches)} CURRENT COMBAT PARTY VARIANTS, containing {total} Pokemon slots, across {len(set(b.encounter for b in branches))} retained authored encounter groups. See the Game Book battle/access section for the finite encounter count and physical-access ledger; starter/gender alternatives and multi-battle owners are not extra clears. An E-group or catalogue position is not first-access order. Native source also preserves {len(parties)-len(branches)} empty records: {len(parties)-len(branches)-1} retired trainer metadata entries and TRAINER_NONE. Those contain NO battle parties. They are included separately for audit, not counted as playable trainers.")
+    w.prose(f"Scope: ALL {len(branches)} CURRENT COMBAT PARTY VARIANTS, containing {total} Pokemon slots, across {len(set(b.encounter for b in branches))} retained authored encounter groups. See docs/trainer-review-index.json for the encounter count; starter/gender alternatives and multi-battle owners are not extra clears. An E-group or catalogue position is not first-access order. Native source also preserves {len(parties)-len(branches)} empty records: {len(parties)-len(branches)-1} retired trainer metadata entries and TRAINER_NONE. Those contain NO battle parties. They are included separately for audit, not counted as playable trainers.")
     w.prose('Contents: 1) findings and reading guide; 2) campaign index; 3) every retained campaign party; 4) empty retired metadata and sentinel; 5) exact regional-rival replacement sets; 6) Steven ally and opening rescue; 7) procedural Circuit/Tent roster templates and generating rules; 8) source fingerprints and validation scope.')
-    w.heading('1. FINDINGS, BOOK COMPARISON, AND READING GUIDE')
+    w.heading('1. FINDINGS, AUTHORING COMPARISON, AND READING GUIDE')
     findings=[
         f'LOADOUT AGREEMENT: all {len(branches)} retained authored variants and {checked} Pokemon slots match native source for species, order, items, abilities, natures, EVs, IVs, moves, friendship and level offsets. Separate generator verification checks generated encounter/AI tables. Agreement is not proof that every tactical idea works or every battle has been played.',
         'LEVELS: actual campaign level = live player cap + authored offset + difficulty adjustment, with a floor of 1 and the existing native byte representation bound of 255. Opponents can exceed 100. Hard plays the roster as authored against the cap; Medium is one level below and Easy three. The cap ladder is Inclement Emerald Strict, badge-indexed, with one extra step at the Groudon awakening: 14, 20, 30, 40, 45, 55, 60, 65, 70, 80, 100. The printed absolute Level in trainers.party is a Hard-difficulty preview rendered against the authored strict_cap, not a stored encounter level.',
@@ -277,7 +276,7 @@ def main():
         'RUNTIME RIVALS: native Hoenn trainer blocks are seeds. Nonmatching regional starters replace the first Hoenn starter slot using the selected generation and unchosen starter index, preserving its level and using the matching evolution stage. Appendix 5 gives the complete alternative sets; printing only the seeds would be incomplete.',
         'PROCEDURAL OPPONENTS: the Champions Circuit, live Battle Tents and exhibition provider generate teams. There is no finite list of fixed six-Pokemon parties for them. Appendix 7 includes every native variant/template plus the exact local generator source, rather than inventing deterministic teams.',
         'STATIC COVERAGE IS NOT SHOWCASE ACCEPTANCE: the authored roster contains all 99 supported Mega Stone item types. The current legendary-family index reports 73 of 78 acquisition families, with Galarian Articuno/Zapdos/Moltres, Glastrier and Meltan absent under its explicit identity/alias rules. Meltan has a recorded intentional trainer-showcase cut; the others need curation review. Hoopa Unbound counts toward the Hoopa family. Presence alone does not prove useful Mega activation, good synergy, fair availability or strong AI execution.',
-        f'ROSTER CLEANUP: {len(branches)} authored combat parties agree with nonempty native parties and Hoenn battle IDs. The {len(parties)-len(branches)-1} retired metadata records and TRAINER_NONE contain no combat loadouts. Native rematches are disabled. Historical counts and first-access ordering belong to the Game Book battle/access section; this export does not reuse a pre-restoration census.',
+        f'ROSTER CLEANUP: {len(branches)} authored combat parties agree with nonempty native parties and Hoenn battle IDs. The {len(parties)-len(branches)-1} retired metadata records and TRAINER_NONE contain no combat loadouts. Native rematches are disabled. First-access ordering is tracked in docs/trainer-review-index.json; this export does not reuse a pre-restoration census.',
         'DIFFICULTY AND DESIGN: native play is still in chapter C15. Earlier source checks and fixed-mechanic regressions do not amount to completed whole-game playtesting. Evaluate each team concept, local theme, engine support, AI decisions and strongest stage-legal counterteam before using levels as the main tuning lever. This catalogue provides the exact inputs for that work, not a final green check.'
     ]
     for i,f in enumerate(findings,1):w.prose(f'{i}. {f}');w.line()
@@ -408,7 +407,7 @@ def main():
     w.heading('8. PROVENANCE AND VALIDATION SCOPE')
     w.prose('The exporter independently parsed native trainerproc input, validated every required mon field, compared every retained authored slot field, and asserted complete unique coverage of all native trainer IDs and all procedural templates. It reads source files, not screenshots or memory of an older build. It does not certify every script branch reachable, every move strategically sensible, every AI tactic implemented correctly, or the full game playtested.')
     w.prose('Out-of-scope alternate games/providers: trainers_frlg.party belongs to the alternate FireRed/LeafGreen build selected by IS_FRLG; debug_trainers.party is development content. Retired original Battle Frontier facility tables, Trainer Hill, record-mixed Secret Base teams, link opponents and player-created teams do not constitute fixed current campaign encounters. The active Frontier desk boundary is the Champions Circuit. The complete active Hoenn trainers.party is included even for dormant or otherwise unclassified definitions.')
-    for path in (PARTY,'Game Blueprint/Emerald_Champions_Game_Book.txt',
+    for path in (PARTY,
         'data/emerald_champions/emerald_champions_master_battle_design.txt',
         'src/data/emerald_champions_battle_plans.h','src/battle_setup.c','src/difficulty.c','include/data.h','src/trainer_util.c','src/pokemon.c',
         'src/emerald_champions_opening.c','src/data/pokemon/emerald_champions_battle_sets.h',

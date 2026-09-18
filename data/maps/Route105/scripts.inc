@@ -31,37 +31,37 @@ Route105_OnFrame: @ 81EE240
 	.2byte 0
 
 Route105_EventScript_Foster:: @ 81EE24A
-	trainerbattle_single TRAINER_FOSTER, Route105_Text_FosterIntro, Route105_Text_FosterDefeated
+	trainerbattle_double TRAINER_FOSTER, Route105_Text_FosterIntro, Route105_Text_FosterDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_FosterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Luis:: @ 81EE261
-	trainerbattle_single TRAINER_LUIS, Route105_Text_LuisIntro, Route105_Text_LuisDefeated
+	trainerbattle_double TRAINER_LUIS, Route105_Text_LuisIntro, Route105_Text_LuisDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_LuisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Dominik:: @ 81EE278
-	trainerbattle_single TRAINER_DOMINIK, Route105_Text_DominikIntro, Route105_Text_DominikDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route105_Text_DominikPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Beverly:: @ 81EE28F
-	trainerbattle_single TRAINER_BEVERLY, Route105_Text_BeverlyIntro, Route105_Text_BeverlyDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route105_Text_PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Imani:: @ 81EE2A6
-	trainerbattle_single TRAINER_IMANI, Route105_Text_ImaniIntro, Route105_Text_ImaniDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route105_Text_ImaniPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Josue:: @ 81EE2BD
-	trainerbattle_single TRAINER_JOSUE, Route105_Text_JosueIntro, Route105_Text_JosueDefeated
+	trainerbattle_double TRAINER_JOSUE, Route105_Text_JosueIntro, Route105_Text_JosueDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_JosuePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Andres:: @ 81EE2D4
-	trainerbattle_single TRAINER_ANDRES_1, Route105_Text_AndresIntro, Route105_Text_AndresDefeated, Route105_EventScript_AndresRegisterMatchCallAfterBattle
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route105_EventScript_AndresRematch
@@ -78,7 +78,7 @@ Route105_EventScript_AndresRegisterMatchCallAfterBattle:: @ 81EE300
 	end
 
 Route105_EventScript_AndresRematch:: @ 81EE31F
-	trainerbattle_rematch TRAINER_ANDRES_1, Route105_Text_AndresRematchIntro, Route105_Text_AndresRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route105_Text_AndresRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 

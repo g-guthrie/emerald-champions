@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle.h"
+#include "berry_blender.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -15,7 +16,7 @@
 #include "task.h"
 #include "text.h"
 #include "save.h"
-#include "link_menu_text.h"
+#include "mystery_gift_menu.h"
 
 enum {
     RFUSTATE_INIT,
@@ -993,6 +994,20 @@ void ClearLinkRfuCallback(void)
     gRfu.callback = NULL;
 }
 
+static void Rfu_BerryBlenderSendHeldKeys(void)
+{
+    RfuPrepareSendBuffer(RFUCMD_BLENDER_SEND_KEYS);
+    if (GetMultiplayerId() == 0)
+        gSendCmd[BLENDER_COMM_ARROW_POS] = GetBlenderArrowPosition();
+    gBerryBlenderKeySendAttempts++;
+}
+
+void Rfu_SetBerryBlenderLinkCallback(void)
+{
+    if (gRfu.callback == NULL)
+        gRfu.callback = Rfu_BerryBlenderSendHeldKeys;
+}
+
 static void RfuHandleReceiveCommand(u8 unused)
 {
     u16 i;
@@ -1909,7 +1924,7 @@ static void RfuCheckErrorStatus(void)
 {
     if (gRfu.errorState == RFU_ERROR_STATE_OCCURRED && lman.childClockSlave_flag == 0)
     {
-        if (lman.init_param->mboot_flag) // the Mystery Gift e-Reader screen is removed
+        if (gMain.callback2 == CB2_MysteryGiftEReader || lman.init_param->mboot_flag)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;

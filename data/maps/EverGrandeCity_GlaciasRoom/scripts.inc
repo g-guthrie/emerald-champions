@@ -40,41 +40,11 @@ EverGrandeCity_GlaciasRoom_EventScript_CloseDoor:: @ 8228463
 EverGrandeCity_GlaciasRoom_EventScript_Glacia:: @ 8228469
 	lock
 	faceplayer
-@ Emerald Champions: Inclement's Elite Four rematch ladder (singles/doubles x
-@ legendaries) is removed -- this is a one-and-done campaign. The dead dispatch
-@ below is kept only so its labels stay defined; it is unreachable.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch
 	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_GlaciasRoom_Text_IntroSpeech, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_Defeat
+	trainerbattle_no_intro_double TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_GlaciasRoom_EventScript_Defeated
-	end
-
-EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch::
-	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeechRematch
-	playbgm MUS_ENCOUNTER_ELITE_FOUR, 0
-	msgbox EverGrandeCity_GlaciasRoom_Text_IntroSpeechRematch, MSGBOX_DEFAULT
-	goto EverGrandeCity_GlaciasRoom_EventScript_GlaciaDoublesLegends
-
-EverGrandeCity_GlaciasRoom_EventScript_GlaciaSingles::
-	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_Defeat
-	goto EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch
-	end
-
-EverGrandeCity_GlaciasRoom_EventScript_GlaciaSinglesLegends::
-	trainerbattle_no_intro TRAINER_GLACIA_3, EverGrandeCity_GlaciasRoom_Text_Defeat
-	goto EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch
-	end
-
-EverGrandeCity_GlaciasRoom_EventScript_GlaciaDoubles::
-	trainerbattle_no_intro TRAINER_GLACIA_2, EverGrandeCity_GlaciasRoom_Text_Defeat
-	goto EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch
-	end
-
-EverGrandeCity_GlaciasRoom_EventScript_GlaciaDoublesLegends::
-	trainerbattle_no_intro TRAINER_GLACIA_4, EverGrandeCity_GlaciasRoom_Text_Defeat
-	goto EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech:: @ 8228490
@@ -82,22 +52,10 @@ EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech:: @ 8228490
 	release
 	end
 
-EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeechRematch::
-	msgbox EverGrandeCity_GlaciasRoom_Text_PostBattleSpeechRematch, MSGBOX_DEFAULT
-	release
-	end
-
 EverGrandeCity_GlaciasRoom_EventScript_Defeated:: @ 822849A
 	setflag FLAG_DEFEATED_ELITE_4_GLACIA
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 	msgbox EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
-	release
-	end
-
-EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch::
-	setflag FLAG_DEFEATED_ELITE_4_GLACIA
-	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
-	msgbox EverGrandeCity_GlaciasRoom_Text_PostBattleSpeechRematch, MSGBOX_DEFAULT
 	release
 	end
 
@@ -123,16 +81,3 @@ EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech: @ 8228640
 	.string "Advance to the next room.\p"
 	.string "And there, confirm the truly fearsome\n"
 	.string "side of the Pokémon League.$"
-
-EverGrandeCity_GlaciasRoom_Text_IntroSpeechRematch:
-	.string "I've been waiting for a Trainer\n"
-	.string "with a burning-hot soul.\p"
-	.string "How can you oppose Mega Evolution\n"
-	.string "that can freeze everything?$"
-
-EverGrandeCity_GlaciasRoom_Text_PostBattleSpeechRematch:
-	.string "Hmmph…\n"
-	.string "Do you intend to thaw my very heart?\p"
-	.string "That actually wouldn't bother me.\p"
-	.string "Anyway, continue onward!\n"
-	.string "Drake is waiting for you as well.$"

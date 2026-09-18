@@ -1,3 +1,46 @@
+Current authorization (September 18): fix the full Inclement integration.
+Keep the immediate free opening gift of Eviolite, Choice Band, Choice Specs,
+Choice Scarf and Focus Sash; subsequent vendor copies are purchased. Preserve
+other major battle-item discoveries unless a concrete conflict needs repair.
+Proceed with repairs and native validation; the earlier discussion hold is lifted.
+
+# Current work — September 18, 2026
+
+The user superseded the custom campaign with Inclement Emerald as the default
+for design decisions, preserving authored doubles battles/AI and explicit QoL.
+The active branch is `inclement-merge`, based on `13061e9ba2`.
+The Game Book, reading copy and field guide are removed by explicit request.
+Center battle-set presets and Center stat editing are removed; keep the
+move tutor, native ability switcher and Inclement's existing EV/IV services.
+Do not recreate guides or use their historical requirements as authority.
+
+Current priority is real opening playability from NEW GAME, ordinary native
+input/battle controls, followed by Center services and native Save/clean Continue.
+Do not use chapter fixtures as evidence of earned opening progression. One
+Astra Medium implementation agent works under the main agent's read-only review;
+no nested delegation, commits, pushes, resets or guide regeneration. Optional
+activity gameplay is deferred until the core game is testable.
+
+Delivered September 18 test ROM SHA256:
+105e9c9ea1caac1f494f62a9a8a3555f8187c0dadec720cd391904d5a03bbf82.
+Its normal/headless builds and full release source/header/memory gates passed.
+Authoring/native comparison preserves 368 variants and 1,753 opponent Pokemon;
+protected trainer/AI files remain unchanged. Six focused native economy tests
+passed. Synthetic native captures verified the opening five-item kit, consolidated
+Center supplies/held-item clerk (including paid purchase and exit), and the
+Space Center two retained battles/retreat using forced wins. These are scoped
+checks, not proof that the opening or entire campaign is playable.
+
+Known pending checks: actual new-game journey and save continuity; complete
+Museum delivery beyond Archie; campaign traversal/balance; optional activity
+runtime acceptance. The user's report is that the delivered game is still buggy.
+Reproduce observable failures and fix them before claiming a tested block works.
+Evidence for the prior scoped pass: work/inclement-reconciliation-20260918/.
+
+Everything below is historical evidence and may describe superseded behavior.
+
+---
+
 # Current development checkpoint — September 15, 2026 (team/AI session)
 
 Landed this session (all on main, release gates PASS, focused AI suite 89/89):
@@ -105,7 +148,7 @@ Cleanup wave (same day, five Opus worktrees, merged by hand): contests, Pokéblo
 
 ## Ground Mega Stone placement review — September 15, 2026
 
-All 71 ground sparkles were rendered natively with the player one tile below each (`scripts/audit/stone_sweep.py`; the headless map-sweep fixture now carries a Mega Ring so stone actors spawn). Compared against Inclement Emerald's authored pickup tiles (snapshot in `data/emerald_champions/authored_pickup_tiles.json`): 51 sat on authored tiles, 20 on tiles an agent invented. Rule adopted and enforced by `scripts/check_stone_placement.py`: a sparkle needs an authored or hand-approved tile, no second stone in the same screen, and no item ball within three tiles; anything else becomes a scripted gift. Outcome: 55 sparkles remain, 16 stones became Ring-gated, once-only, Bag-full-retryable gifts (list in the guide's Mega paragraph and the generated register), Sharpedonite moved under an umbrella, Garchompite onto the authored Stardust tile (Stardust retired), Route 117 Quick Ball and manor Dusk Ball retired. Altarianite stays at (3,113): the tile to its left is a solid border wall. The book's generated section could not be re-synced this round because the other session's uncommitted `trainers.party` disagrees with its authored offsets (`export_trainer_catalogue.native_vs_authoring` assertion on TRAINER_BRENDAN_ROUTE_103_MUDKIP); rerun `scripts/sync_game_book.py --write` after their commit.
+All 71 ground sparkles were rendered natively with the player one tile below each (`scripts/audit/stone_sweep.py`; the headless map-sweep fixture now carries a Mega Ring so stone actors spawn). Compared against Inclement Emerald's authored pickup tiles (snapshot in `data/emerald_champions/authored_pickup_tiles.json`): 51 sat on authored tiles, 20 on tiles an agent invented. Rule adopted and enforced by `scripts/check_stone_placement.py`: a sparkle needs an authored or hand-approved tile, no second stone in the same screen, and no item ball within three tiles; anything else becomes a scripted gift. Outcome: 55 sparkles remain, 16 stones became Ring-gated, once-only, Bag-full-retryable gifts (list in the guide's Mega paragraph and the generated register), Sharpedonite moved under an umbrella, Garchompite onto the authored Stardust tile (Stardust retired), Route 117 Quick Ball and manor Dusk Ball retired. Altarianite stays at (3,113): the tile to its left is a solid border wall. The book's generated section could not be re-synced this round because the other session's uncommitted `trainers.party` disagrees with its authored offsets (`export_trainer_catalogue.native_vs_authoring` assertion on TRAINER_BRENDAN_ROUTE_103_MUDKIP); rerun the retired guide generator after their commit.
 
 ## Cohesion audit — September 15, 2026 (twelve read-only Sonnet auditors)
 
@@ -165,7 +208,7 @@ Garchompite with Caroline; Sonnet subagents supervised by the main agent.
 Day log:
 
 - One clone: the redundant `emerald-champions-restored-20260914` checkout is deleted.
-- `scripts/check_book_consistency.py` runs in the release gate (advisory until
+- the retired publication checker runs in the release gate (advisory until
   `--strict-book`). README, this file, GOAL and the guide now agree on
   341 encounters / 324 groups / 368 variants from source. Prices, caps, stipends
   and retired items pass. Remaining FAIL: Garchompite has no trainer holder
@@ -436,7 +479,7 @@ midbattle experiment is historical and must not be resumed on the revised ROM.
 
 The earned playthrough remains paused. The user has authorized generated book
 and audit exports. The Game Book now has a short editable
-guide plus a generated source reference. `scripts/sync_game_book.py --write`
+guide plus a generated source reference. the retired guide generator
 refreshes exact teams, world data and dialogue; `--check` rejects stale output.
 `Game_Guide_Reading_Copy.txt` is the generated short view. Exact team edits belong
 in `data/emerald_champions/emerald_champions_battle_teams.txt`, followed by the

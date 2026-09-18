@@ -1,4 +1,5 @@
 #include "global.h"
+#include "field_specials.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
@@ -22,7 +23,7 @@
 #include "item.h"
 #include "main.h"
 #include "mystery_gift.h"
-#include "link_menu_text.h"
+#include "mystery_gift_menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -45,6 +46,7 @@
 #include "union_room.h"
 #include "util.h"
 #include "window.h"
+#include "constants/contest.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -3100,6 +3102,7 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
 
     SWAP(*playerMon, *partnerMon, sTradeAnim->tempMon);
     ClampMonToPlayerLevelCap(playerMon);
+    EmeraldChampions_UnlockBattleItem(GetMonData(playerMon, MON_DATA_HELD_ITEM));
 
     // By default, a Pokémon received from a trade will have 70 Friendship.
     // Eggs use Friendship to track egg cycles, so don't set this on Eggs.
@@ -4611,9 +4614,6 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
             SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
         }
     }
-    // Apply this last so legacy trade fields cannot overwrite the finished
-    // competitive build's moves, nature, Ability, EVs, or held item.
-    ApplyEmeraldChampionsBattleSetChoice(pokemon, 0);
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 

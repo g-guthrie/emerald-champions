@@ -179,7 +179,7 @@ def render_lines() -> tuple[list[str], dict]:
 
 
 def generate(root: Path = ROOT) -> tuple[list[str], dict, set[Path]]:
-    """Book-section render plus a light path set for sync_game_book's
+    """Development report render plus a light path set for the
     top-level source hash. The work/ and test(s)/ trees that L1/L2 actually
     scan are deliberately NOT included here (hundreds of files, many binary
     screenshots/saves); scripts/acceptance_ladder.py --check is the precise

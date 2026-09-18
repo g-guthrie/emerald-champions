@@ -246,6 +246,7 @@ void Rfu_SetBlockReceivedFlag(u8 linkPlayerId);
 void Rfu_ResetBlockReceivedFlag(u8 linkPlayerId);
 bool32 IsSendingKeysToRfu(void);
 void StartSendingKeysToRfu(void);
+void Rfu_SetBerryBlenderLinkCallback(void);
 u8 Rfu_GetBlockReceivedStatus(void);
 bool32 Rfu_InitBlockSend(const u8 *src, size_t size);
 void ClearLinkRfuCallback(void);

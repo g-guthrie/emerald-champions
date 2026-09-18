@@ -1,6 +1,28 @@
 General_Mart_Script::
 	lock
 	faceplayer
+	goto_if_set FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS, General_Mart_ChooseService
+	special GiveEmeraldChampionsStarterBattleItems
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_StarterItemsBagFull
+	msgbox EmeraldChampions_Text_BattleVendorStarterKit, MSGBOX_DEFAULT
+General_Mart_ChooseService:
+	message gText_HowMayIServeYou
+	waitmessage
+	dynmultipush General_Mart_Text_Supplies, 0
+	dynmultipush EmeraldChampions_Text_HeldItems, 1
+	dynmultipush EmeraldChampions_Text_Exit, 2
+	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, 0, General_Mart_Supplies
+	goto_if_eq VAR_RESULT, 1, Common_EventScript_EmeraldChampionsBattleVendor
+	release
+	end
+General_Mart_Text_Supplies:
+	.string "Supplies$"
+
+General_Mart_Supplies::
+	lock
+	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_BADGE06_GET, Mart_Poke_Center_Feather_Badge

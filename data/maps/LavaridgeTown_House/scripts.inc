@@ -18,14 +18,14 @@ LavaridgeTown_House_EventScript_Zigzagoon:: @ 81FF91B
 LavaridgeTown_House_EventScript_SuckerPunchTM::
 	lock
 	faceplayer
-	checkitem ITEM_RARE_CANDY, 1
-	compare VAR_RESULT, 1
-	goto_if_eq LavaridgeTown_House_EventScript_ReceivedTM94
+	goto_if_set FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE, LavaridgeTown_House_EventScript_ReceivedTM94
 	msgbox MoveTutor_MimicTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MoveTutor_EventScript_MimicDeclined
 	msgbox LavaridgeTown_House_Text_GiveTM94, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE
 	msgbox LavaridgeTown_House_Text_HaveTM94, MSGBOX_DEFAULT
 	release
 	end
@@ -41,13 +41,16 @@ LavaridgeTown_House_EventScript_ReceivedTM94::
 	end
 
 LavaridgeTown_House_Text_HaveTM94::
-	.string "TM94 teaches Sucker Punch.\p"
-	.string "It's a move that may go first if the\n"
-	.string "target Pokémon is about to attack.$"
+	.string "A Rare Candy raises a Pokémon by\n"
+	.string "one level, up to your current\l"
+	.string "cap.\p"
+	.string "For new moves, visit the Center\n"
+	.string "tutor.$"
 
 LavaridgeTown_House_Text_GiveTM94::
-	.string "Too bad!\p"
-	.string "You can have this TM instead.$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
 	.string "My wife's warming an Egg in the hot\n"

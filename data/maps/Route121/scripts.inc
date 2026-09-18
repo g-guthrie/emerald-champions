@@ -1,6 +1,6 @@
-.set LOCALID_GRUNT_1, 12
-.set LOCALID_GRUNT_2, 13
-.set LOCALID_GRUNT_3, 14
+.set LOCALID_GRUNT_1, 10
+.set LOCALID_GRUNT_2, 11
+.set LOCALID_GRUNT_3, 12
 
 Route121_MapScripts:: @ 81F5DFC
 	.byte 0
@@ -102,12 +102,12 @@ Route121_Movement_Grunt3Exit: @ 81F5E6B
 	step_end
 
 Route121_EventScript_Vanessa:: @ 81F5E74
-	trainerbattle_single TRAINER_VANESSA, Route121_Text_VanessaIntro, Route121_Text_VanessaDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_VanessaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Walter:: @ 81F5E8B
-	trainerbattle_single TRAINER_WALTER_1, Route121_Text_WalterIntro, Route121_Text_WalterDefeat, Route121_EventScript_RegisterWalter
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route121_EventScript_RematchWalter
@@ -124,27 +124,27 @@ Route121_EventScript_RegisterWalter:: @ 81F5EB7
 	end
 
 Route121_EventScript_RematchWalter:: @ 81F5ED6
-	trainerbattle_rematch TRAINER_WALTER_1, Route121_Text_WalterRematchIntro, Route121_Text_WalterRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_WalterPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Tammy:: @ 81F5EED
-	trainerbattle_single TRAINER_TAMMY, Route121_Text_TammyIntro, Route121_Text_TammyDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_TammyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Kate:: @ 81F5F04
-	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_KateIntro, Route121_Text_KateDefeat, Route121_Text_KateNotEnoughMons
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_KatePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Joy:: @ 81F5F1F
-	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_JoyIntro, Route121_Text_JoyDefeat, Route121_Text_JoyNotEnoughMons
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_JoyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Jessica:: @ 81F5F3A
-	trainerbattle_single TRAINER_JESSICA_1, Route121_Text_JessicaIntro, Route121_Text_JessicaDefeat, Route121_EventScript_RegisterJessica
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route121_EventScript_RematchJessica
@@ -161,32 +161,32 @@ Route121_EventScript_RegisterJessica:: @ 81F5F66
 	end
 
 Route121_EventScript_RematchJessica:: @ 81F5F85
-	trainerbattle_rematch TRAINER_JESSICA_1, Route121_Text_JessicaRematchIntro, Route121_Text_JessicaRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_JessicaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Cale:: @ 81F5F9C
-	trainerbattle_single TRAINER_CALE, Route121_Text_CaleIntro, Route121_Text_CaleDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_CalePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Myles:: @ 81F5FB3
-	trainerbattle_single TRAINER_MYLES, Route121_Text_MylesIntro, Route121_Text_MylesDefeat
+	trainerbattle_double TRAINER_MYLES, Route121_Text_MylesIntro, Route121_Text_MylesDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route121_Text_MylesPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Pat:: @ 81F5FCA
-	trainerbattle_single TRAINER_PAT, Route121_Text_PatIntro, Route121_Text_PatDefeat
+	trainerbattle_double TRAINER_PAT, Route121_Text_PatIntro, Route121_Text_PatDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route121_Text_PatPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Marcel:: @ 81F5FE1
-	trainerbattle_single TRAINER_MARCEL, Route121_Text_MarcelIntro, Route121_Text_MarcelDefeat
+	trainerbattle_double TRAINER_MARCEL, Route121_Text_MarcelIntro, Route121_Text_MarcelDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route121_Text_MarcelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_Cristin:: @ 81F5FF8
-	trainerbattle_single TRAINER_CRISTIN_1, Route121_Text_CristinIntro, Route121_Text_CristinDefeat, Route121_EventScript_RegisterCristin
+	trainerbattle_double TRAINER_CRISTIN_1, Route121_Text_CristinIntro, Route121_Text_CristinDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route121_EventScript_RegisterCristin
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route121_EventScript_RematchCristin
@@ -203,7 +203,7 @@ Route121_EventScript_RegisterCristin:: @ 81F6024
 	end
 
 Route121_EventScript_RematchCristin:: @ 81F6043
-	trainerbattle_rematch TRAINER_CRISTIN_1, Route121_Text_CristinRematchIntro, Route121_Text_CristinRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route121_Text_CristinPostRematch, MSGBOX_AUTOCLOSE
 	end
 

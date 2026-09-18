@@ -94,13 +94,12 @@ GraniteCave_StevensRoom_Text_ImStevenLetterForMe: @ 822DD5A
 	.string "A Letter for me?$"
 
 GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
-	.string "Steven: Okay, thank you.\p"
-	.string "You went through all this trouble to\n"
-	.string "deliver that. I need to thank you.\p"
-	.string "Let me see…\n"
-	.string "I'll give you this TM.\p"
-	.string "It contains my favorite move,\n"
-	.string "Steel Wing.$"
+	.string "Steven: Thank you for delivering\n"
+	.string "the letter.\p"
+	.string "Please take this Rare Candy. If\n"
+	.string "you want to learn my favorite\l"
+	.string "move, Steel Wing, ask the Center\l"
+	.string "tutor.$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
 	.string "Steven: Your Pokémon appear quite\n"

@@ -34,6 +34,7 @@
 #include "sound.h"
 #include "start_menu.h"
 #include "trainer_see.h"
+#include "trainer_hill.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
 #include "wild_encounter_ow.h"
@@ -43,6 +44,7 @@
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
+#include "constants/trainer_hill.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
@@ -429,6 +431,8 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
         script = GetOverworlWildEncounterScript(objectEventId);
     else if (gObjectEvents[objectEventId].localId == OBJ_EVENT_ID_FOLLOWER)
         script = EventScript_Follower;
+    else if (InTrainerHill() == TRUE)
+        script = GetTrainerHillTrainerScript();
     else
         script = GetObjectEventScriptPointerByObjectEventId(objectEventId);
 
@@ -548,6 +552,8 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_CableBoxResults;
     if (MetatileBehavior_IsQuestionnaire(metatileBehavior) == TRUE)
         return EventScript_Questionnaire;
+    if (MetatileBehavior_IsTrainerHillTimer(metatileBehavior) == TRUE)
+        return EventScript_TrainerHillTimer;
     if (IS_FRLG)
     {
         if (MetatileBehavior_IsFood(metatileBehavior) == TRUE)
@@ -755,6 +761,11 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
         ScriptContext_SetupScript(EventScript_FallDownHole);
         return TRUE;
     }
+    else if (MetatileBehavior_IsBattlePyramidWarp(metatileBehavior))
+    {
+        ScriptContext_SetupScript(BattlePyramid_WarpToNextFloor);
+        return TRUE;
+    }
     else if (MetatileBehavior_IsSecretBaseGlitterMat(metatileBehavior) == TRUE)
     {
         DoSecretBaseGlitterMatSparkle();
@@ -917,6 +928,15 @@ static bool32 ShouldDisableRandomEncounters(void)
     if (FlagGet(WE_FLAG_NO_ENCOUNTER))
         return TRUE;
 
+    if (!WE_VANILLA_RANDOM && WE_OW_ENCOUNTERS)
+    {
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && !WE_OWE_BATTLE_PIKE)
+            return FALSE;
+
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR && !WE_OWE_BATTLE_PYRAMID)
+            return FALSE;
+    }
+
     return !WE_VANILLA_RANDOM;
 }
 
@@ -1070,7 +1090,30 @@ static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPositi
 {
     const struct WarpEvent *warpEvent;
 
-    warpEvent = &gMapHeader.events->warps[warpEventId];
+    u8 trainerHillMapId = GetCurrentTrainerHillMapId();
+
+    if (trainerHillMapId)
+    {
+        if (trainerHillMapId == GetNumFloorsInTrainerHillChallenge())
+        {
+            if (warpEventId == 0)
+                warpEvent = &gMapHeader.events->warps[0];
+            else
+                warpEvent = SetWarpDestinationTrainerHill4F();
+        }
+        else if (trainerHillMapId == TRAINER_HILL_ROOF)
+        {
+            warpEvent = SetWarpDestinationTrainerHillFinalFloor(warpEventId);
+        }
+        else
+        {
+            warpEvent = &gMapHeader.events->warps[warpEventId];
+        }
+    }
+    else
+    {
+        warpEvent = &gMapHeader.events->warps[warpEventId];
+    }
 
     if (warpEvent->mapNum == MAP_NUM(MAP_DYNAMIC))
     {

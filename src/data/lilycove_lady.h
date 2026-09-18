@@ -3,6 +3,15 @@
 #include "constants/moves.h"
 #include "constants/species.h"
 
+struct LilycoveContestLadyValues
+{
+    u16 monGfxId;
+    enum Species monSpecies;
+    const u8 *monName;
+    const u8 *categoryName;
+    const u8 *contestName;
+};
+
 struct LilycoveQuizLadyQuestions
 {
     const u16 *question;
@@ -21,6 +30,47 @@ static const u16 sLilycoveLadyGfxId[] =
 {
     [LILYCOVE_LADY_QUIZ]    = OBJ_EVENT_GFX_WOMAN_4,
     [LILYCOVE_LADY_FAVOR]   = OBJ_EVENT_GFX_WOMAN_2,
+    [LILYCOVE_LADY_CONTEST] = OBJ_EVENT_GFX_GIRL_2,
+};
+
+// Contest Lady data
+static const struct LilycoveContestLadyValues sContestLadyValues[] =
+{
+    [CONTEST_CATEGORY_COOL] = {
+        .monGfxId = OBJ_EVENT_GFX_ZIGZAGOON_1,
+        .monSpecies = SPECIES_ZIGZAGOON,
+        .monName = COMPOUND_STRING("HANDSOME"),
+        .categoryName = COMPOUND_STRING("coolness"),
+        .contestName = gText_CoolnessContest,
+    },
+    [CONTEST_CATEGORY_BEAUTY] = {
+        .monGfxId = OBJ_EVENT_GFX_SKITTY,
+        .monSpecies = SPECIES_SKITTY,
+        .monName = COMPOUND_STRING("VINNY"),
+        .categoryName = COMPOUND_STRING("beauty"),
+        .contestName = gText_BeautyContest,
+    },
+    [CONTEST_CATEGORY_CUTE] = {
+        .monGfxId = OBJ_EVENT_GFX_POOCHYENA,
+        .monSpecies = SPECIES_POOCHYENA,
+        .monName = COMPOUND_STRING("MOREME"),
+        .categoryName = COMPOUND_STRING("cuteness"),
+        .contestName = gText_CutenessContest,
+    },
+    [CONTEST_CATEGORY_SMART] = {
+        .monGfxId = OBJ_EVENT_GFX_KECLEON,
+        .monSpecies = SPECIES_KECLEON,
+        .monName = COMPOUND_STRING("IRONHARD"),
+        .categoryName = COMPOUND_STRING("smartness"),
+        .contestName = gText_SmartnessContest,
+    },
+    [CONTEST_CATEGORY_TOUGH] = {
+        .monGfxId = OBJ_EVENT_GFX_PIKACHU,
+        .monSpecies = SPECIES_PIKACHU,
+        .monName = COMPOUND_STRING("MUSCLE"),
+        .categoryName = COMPOUND_STRING("toughness"),
+        .contestName = gText_ToughnessContest,
+    },
 };
 
 // Quiz Lady data

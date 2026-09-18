@@ -42,6 +42,7 @@ enum PACKED ItemSortType
     ITEM_TYPE_Z_CRYSTAL,
     ITEM_TYPE_HELD_ITEM,
     ITEM_TYPE_TYPE_BOOST_HELD_ITEM,
+    ITEM_TYPE_CONTEST_HELD_ITEM,
     ITEM_TYPE_EV_BOOST_HELD_ITEM,
     ITEM_TYPE_GEM,
     ITEM_TYPE_PLATE,
@@ -178,6 +179,8 @@ void MoveItemSlotInPocket(enum Pocket pocketId, u32 from, u32 to);
 void MoveItemSlotInPC(struct ItemSlot *itemSlots, u32 from, u32 to);
 void ClearBag(void);
 u16 CountTotalItemQuantityInBag(enum Item itemId);
+bool32 AddPyramidBagItem(enum Item itemId, u16 count);
+bool32 RemovePyramidBagItem(enum Item itemId, u16 count);
 const u8 *GetItemName(enum Item itemId);
 u32 GetItemPrice(enum Item itemId);
 const u8 *GetItemEffect(enum Item itemId);

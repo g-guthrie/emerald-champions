@@ -3,7 +3,7 @@
 
 Edit data/emerald_champions/emerald_champions_battle_teams.txt for exact loadouts,
 per-member live-cap offsets, strategy, tactics and intended plan/counterplay.
-The short Game Book is design guidance, not parsed build input.
+Trainer authoring is the build input; there is no Game Book.
 Use --write after authoring and --check for materialized agreement and configured
 ability validation. Neither check certifies battle quality or route access.
 """

@@ -299,32 +299,32 @@ LilycoveCity_EventScript_DeclineBrendanBattle:: @ 81E2ECD
 	end
 
 LilycoveCity_EventScript_BattleMayTreecko:: @ 81E2EDE
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_TREECKO, LilycoveCity_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TREECKO, LilycoveCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleMayTorchic:: @ 81E2EEE
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_TORCHIC, LilycoveCity_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TORCHIC, LilycoveCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleMayMudkip:: @ 81E2EFE
-	trainerbattle_no_intro TRAINER_MAY_LILYCOVE_MUDKIP, LilycoveCity_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_MUDKIP, LilycoveCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleBrendanTreecko:: @ 81E2F0E
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_TREECKO, LilycoveCity_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TREECKO, LilycoveCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
 LilycoveCity_EventScript_BattleBrendanTorchic:: @ 81E2F1E
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_TORCHIC, LilycoveCity_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TORCHIC, LilycoveCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
 LilycoveCity_EventScript_BattleBrendanMudkip:: @ 81E2F2E
-	trainerbattle_no_intro TRAINER_BRENDAN_LILYCOVE_MUDKIP, LilycoveCity_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_MUDKIP, LilycoveCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
@@ -638,10 +638,12 @@ LilycoveCity_Text_StrangeCaveInCove: @ 81E3E3C
 	.string "the cove at the edge of town?$"
 
 LilycoveCity_Text_GoingToMoveDeleterForHMs: @ 81E3E7D
-	.string "I'm going to teach my Pokémon some new\n"
-	.string "moves for entering a Contest.\p"
-	.string "So, I'm going to see the Move Deleter\n"
-	.string "and make it forget HM moves.$"
+	.string "I am preparing new moves for a\n"
+	.string "Contest.\p"
+	.string "The Center tutor can teach\n"
+	.string "anything my Pokémon can legally\l"
+	.string "learn, and field techniques need\l"
+	.string "no move slots.$"
 
 LilycoveCity_Text_ImFromKanto: @ 81E3F05
 	.string "I came from Kanto.\p"

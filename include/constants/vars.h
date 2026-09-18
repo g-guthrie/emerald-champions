@@ -63,8 +63,7 @@
 #define VAR_POISON_STEP_COUNTER                          0x402B
 #define VAR_RESET_RTC_ENABLE                             0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE                       0x402D
-#define VAR_CYNTHIA_STATE                     0x402E  // Restored from Inclement Emerald. Reclaimed the
-        // id of VAR_WONDER_NEWS_STEP_COUNTER, which had zero references in data/, src/ or include/.
+#define VAR_CYNTHIA_STATE                                0x402E // Preserve existing Cynthia progress; Wonder News uses 0x4048.
 
 #define VAR_FRONTIER_MANIAC_FACILITY                     0x402F
 #define VAR_FRONTIER_GAMBLER_CHALLENGE                   0x4030
@@ -92,7 +91,7 @@
 #define VAR_POKELOT_PRIZE_ITEM                           0x4045
 #define VAR_NATIONAL_DEX                                 0x4046
 #define VAR_SEEDOT_SIZE_RECORD                           0x4047
-#define VAR_UNUSED_0x4048                                0x4048 // Emerald Champions: the second soot balance is retired.
+#define VAR_WONDER_NEWS_STEP_COUNTER                     0x4048 // Reuses the retired second soot balance; Cynthia retains 0x402E.
 #define VAR_BIRCH_STATE                                  0x4049
 #define VAR_CRUISE_STEP_COUNT                            0x404A
 #define VAR_POKELOT_RND1                                 0x404B // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
@@ -307,8 +306,8 @@
 #define VAR_RESULT                    0x800D
 #define VAR_ITEM_ID                   0x800E
 #define VAR_LAST_TALKED               0x800F
-#define VAR_CONTEST_RANK              0x8010 // Restored from Inclement Emerald at its own ID (special, non-saved var).
-#define VAR_CONTEST_CATEGORY          0x8011 // Restored from Inclement Emerald at its own ID (special, non-saved var).
+#define VAR_CONTEST_RANK              0x8010
+#define VAR_CONTEST_CATEGORY          0x8011
 #define VAR_MON_BOX_ID                0x8012
 #define VAR_MON_BOX_POS               0x8013
 #define VAR_UNUSED_0x8014             0x8014

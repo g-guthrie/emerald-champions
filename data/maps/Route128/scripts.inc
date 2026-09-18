@@ -1,6 +1,6 @@
-.set LOCALID_STEVEN, 3
-.set LOCALID_ARCHIE, 4
-.set LOCALID_MAXIE, 5
+.set LOCALID_STEVEN, 2
+.set LOCALID_ARCHIE, 3
+.set LOCALID_MAXIE, 4
 
 Route128_MapScripts:: @ 81F6B38
 	map_script MAP_SCRIPT_ON_TRANSITION, Route128_OnTransition
@@ -179,7 +179,7 @@ Route128_Movement_MaxieApproachPlayer: @ 81F6CBB
 	step_end
 
 Route128_EventScript_Isaiah:: @ 81F6CBE
-	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_IsaiahIntro, Route128_Text_IsaiahDefeat, Route128_EventScript_RegisterIsaiah
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route128_EventScript_RematchIsaiah
@@ -196,12 +196,12 @@ Route128_EventScript_RegisterIsaiah:: @ 81F6CEA
 	end
 
 Route128_EventScript_RematchIsaiah:: @ 81F6D09
-	trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_IsaiahRematchIntro, Route128_Text_IsaiahRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route128_Text_IsaiahPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Katelyn:: @ 81F6D20
-	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, Route128_EventScript_RegisterKatelyn
+	trainerbattle_double TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route128_EventScript_RegisterKatelyn
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route128_EventScript_RematchKatelyn
@@ -218,32 +218,32 @@ Route128_EventScript_RegisterKatelyn:: @ 81F6D4C
 	end
 
 Route128_EventScript_RematchKatelyn:: @ 81F6D6B
-	trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_KatelynRematchIntro, Route128_Text_KatelynRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route128_Text_KatelynPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Alexa:: @ 81F6D82
-	trainerbattle_single TRAINER_ALEXA, Route128_Text_AlexaIntro, Route128_Text_AlexaDefeat
+	trainerbattle_double TRAINER_ALEXA, Route128_Text_AlexaIntro, Route128_Text_AlexaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Ruben:: @ 81F6D99
-	trainerbattle_single TRAINER_RUBEN, Route128_Text_RubenIntro, Route128_Text_RubenDefeat
+	trainerbattle_double TRAINER_RUBEN, Route128_Text_RubenIntro, Route128_Text_RubenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_RubenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Wayne:: @ 81F6DB0
-	trainerbattle_single TRAINER_WAYNE, Route128_Text_WayneIntro, Route128_Text_WayneDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route128_Text_WaynePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Harrison:: @ 81F6DC7
-	trainerbattle_single TRAINER_HARRISON, Route128_Text_HarrisonIntro, Route128_Text_HarrisonDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route128_Text_HarrisonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Carlee:: @ 81F6DDE
-	trainerbattle_single TRAINER_CARLEE, Route128_Text_CarleeIntro, Route128_Text_CarleeDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route128_Text_CarleePostBattle, MSGBOX_AUTOCLOSE
 	end
 

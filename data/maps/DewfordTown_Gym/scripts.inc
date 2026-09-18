@@ -144,7 +144,6 @@ DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 	return
 
 DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
-	goto_if_set FLAG_DAILY_REMATCH_BRAWLY, DewfordTown_Gym_EventScript_AlreadyRematched
 @ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
 @ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
 @ for bespoke campaign fights -- so post-game rematching a leader would start the
@@ -152,7 +151,7 @@ DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
 @ one. The gate below is disabled so leaders fall through to normal post-battle
 @ dialogue. To re-enable once real rematch teams exist, restore this single line.
 @	goto_if_set FLAG_SYS_GAME_CLEAR, DewfordTown_Gym_EventScript_BrawlyRematch
-	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
+	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
@@ -218,8 +217,7 @@ DewfordTown_Gym_EventScript_BrawlyRematch::
 DewfordTown_Gym_EventScript_SetSingles::
 	msgbox DewfordTown_Gym_Text_BrawlyAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq DewfordTown_Gym_EventScript_BrawlySinglesRematch
-	trainerbattle_no_intro TRAINER_BRAWLY_3, DewfordTown_Gym_Text_BrawlyRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_BRAWLY
 	releaseall
 	end
@@ -227,20 +225,19 @@ DewfordTown_Gym_EventScript_SetSingles::
 DewfordTown_Gym_EventScript_SetDoubles::
 	msgbox DewfordTown_Gym_Text_BrawlyAllowLegends, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq DewfordTown_Gym_EventScript_BrawlyDoublesRematch
-	trainerbattle_no_intro TRAINER_BRAWLY_5, DewfordTown_Gym_Text_BrawlyRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_BRAWLY
 	releaseall
 	end
 
 DewfordTown_Gym_EventScript_BrawlySinglesRematch::
-	trainerbattle_no_intro TRAINER_BRAWLY_2, DewfordTown_Gym_Text_BrawlyRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_BRAWLY
 	releaseall
 	end
 
 DewfordTown_Gym_EventScript_BrawlyDoublesRematch::
-	trainerbattle_no_intro TRAINER_BRAWLY_4, DewfordTown_Gym_Text_BrawlyRematchDefeat
+	@ This retired encounter has no campaign battle.
 	setflag FLAG_DAILY_REMATCH_BRAWLY
 	releaseall
 	end
@@ -255,7 +252,7 @@ DewfordTown_Gym_EventScript_Exit::
 	end
 
 DewfordTown_Gym_EventScript_Takao:: @ 81FC8B7
-	trainerbattle_single TRAINER_TAKAO, DewfordTown_Gym_Text_TakaoIntro, DewfordTown_Gym_Text_TakaoDefeat, DewfordTown_Gym_EventScript_TakaoBrightenRoom
+	trainerbattle_double TRAINER_TAKAO, DewfordTown_Gym_Text_TakaoIntro, DewfordTown_Gym_Text_TakaoDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_TakaoBrightenRoom
 	msgbox DewfordTown_Gym_Text_TakaoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -265,7 +262,7 @@ DewfordTown_Gym_EventScript_TakaoBrightenRoom:: @ 81FC8D2
 	end
 
 DewfordTown_Gym_EventScript_Jocelyn:: @ 81FC8D9
-	trainerbattle_single TRAINER_JOCELYN, DewfordTown_Gym_Text_JocelynIntro, DewfordTown_Gym_Text_JocelynDefeat, DewfordTown_Gym_EventScript_JocelynBrightenRoom
+	trainerbattle_double TRAINER_JOCELYN, DewfordTown_Gym_Text_JocelynIntro, DewfordTown_Gym_Text_JocelynDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_JocelynBrightenRoom
 	msgbox DewfordTown_Gym_Text_JocelynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -275,7 +272,7 @@ DewfordTown_Gym_EventScript_JocelynBrightenRoom:: @ 81FC8F4
 	end
 
 DewfordTown_Gym_EventScript_Laura:: @ 81FC8FB
-	trainerbattle_single TRAINER_LAURA, DewfordTown_Gym_Text_LauraIntro, DewfordTown_Gym_Text_LauraDefeat, DewfordTown_Gym_EventScript_LauraBrightenRoom
+	trainerbattle_double TRAINER_LAURA, DewfordTown_Gym_Text_LauraIntro, DewfordTown_Gym_Text_LauraDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_LauraBrightenRoom
 	msgbox DewfordTown_Gym_Text_LauraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -285,7 +282,7 @@ DewfordTown_Gym_EventScript_LauraBrightenRoom:: @ 81FC916
 	end
 
 DewfordTown_Gym_EventScript_Brenden:: @ 81FC91D
-	trainerbattle_single TRAINER_BRENDEN, DewfordTown_Gym_Text_BrendenIntro, DewfordTown_Gym_Text_BrendenDefeat, DewfordTown_Gym_EventScript_BrendenBrightenRoom
+	trainerbattle_double TRAINER_BRENDEN, DewfordTown_Gym_Text_BrendenIntro, DewfordTown_Gym_Text_BrendenDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrendenBrightenRoom
 	msgbox DewfordTown_Gym_Text_BrendenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -295,7 +292,7 @@ DewfordTown_Gym_EventScript_BrendenBrightenRoom:: @ 81FC938
 	end
 
 DewfordTown_Gym_EventScript_Cristian:: @ 81FC93F
-	trainerbattle_single TRAINER_CRISTIAN, DewfordTown_Gym_Text_CristianIntro, DewfordTown_Gym_Text_CristianDefeat, DewfordTown_Gym_EventScript_CristianBrightenRoom
+	trainerbattle_double TRAINER_CRISTIAN, DewfordTown_Gym_Text_CristianIntro, DewfordTown_Gym_Text_CristianDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_CristianBrightenRoom
 	msgbox DewfordTown_Gym_Text_CristianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -305,7 +302,7 @@ DewfordTown_Gym_EventScript_CristianBrightenRoom:: @ 81FC95A
 	end
 
 DewfordTown_Gym_EventScript_Lilith:: @ 81FC961
-	trainerbattle_single TRAINER_LILITH, DewfordTown_Gym_Text_LilithIntro, DewfordTown_Gym_Text_LilithDefeat, DewfordTown_Gym_EventScript_LilithBrightenRoom
+	trainerbattle_double TRAINER_LILITH, DewfordTown_Gym_Text_LilithIntro, DewfordTown_Gym_Text_LilithDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_LilithBrightenRoom
 	msgbox DewfordTown_Gym_Text_LilithPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -481,23 +478,15 @@ DewfordTown_Gym_Text_ReceivedKnuckleBadge: @ 81FD07D
 	.string "from Brawly.$"
 
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
-	.string "The Knuckle Badge makes all Pokémon\n"
-	.string "up to Level 40, even those you get in\l"
-	.string "trades, obey without question.\p"
-	.string "And, you'll be able to use the HM move\n"
-	.string "Flash outside of battle.\p"
-	.string "Oh, yeah. You don't need to teach a\n"
-	.string "Pokémon Flash to use it.\p"
-	.string "If your Pokémon can learn Flash, it\n"
-	.string "can always use it outside of battle.\p"
-	.string "If you'd like, use this Technical\n"
-	.string "Machine, too.$"
+	.string "That was an excellent battle!\n"
+	.string "You have earned the Knuckle\l"
+	.string "Badge.\p"
+	.string "Take this Mega Stone as well.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181
-	.string "That TM08 contains Bulk Up.\p"
-	.string "It's a move that raises both Attack\n"
-	.string "and Defense stats.\p"
-	.string "… … … … … …$"
+	.string "This is Emboarite. An Emboar\n"
+	.string "holding it can Mega Evolve once\l"
+	.string "you have a Mega Ring.$"
 
 DewfordTown_Gym_Text_RegisteredBrawly: @ 81FD1E0
 	.string "Registered Gym Leader Brawly\n"

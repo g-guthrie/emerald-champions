@@ -644,6 +644,18 @@ static const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
         .confirmText2 = gText_IsAsShownOkay,
     },
     {
+        .type = EASY_CHAT_TYPE_CONTEST_INTERVIEW,
+        .numColumns = 1,
+        .numRows = 1,
+        .frameId = FRAMEID_INTERVIEW_SHOW_PERSON,
+        .fourFooterOptions = FALSE,
+        .titleText = gText_Interview,
+        .instructionsText1 = gText_FindWordsThatDescribeYour,
+        .instructionsText2 = gText_FeelingsRightNow,
+        .confirmText1 = gText_TheAnswer,
+        .confirmText2 = gText_IsAsShownOkay,
+    },
+    {
         .type = EASY_CHAT_TYPE_FAN_QUESTION,
         .numColumns = 1,
         .numRows = 1,
@@ -1430,8 +1442,7 @@ void ShowEasyChatScreen(void)
         words = bard->newSongLyrics;
         break;
     case EASY_CHAT_TYPE_INTERVIEW:
-        // Same union offset the Bravo Trainer show used before contests were retired.
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubLetter.words;
+        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words;
         displayedPersonType = gSpecialVar_0x8006;
         break;
     case EASY_CHAT_TYPE_FAN_CLUB:
@@ -1451,6 +1462,10 @@ void ShowEasyChatScreen(void)
         words = gSaveBlock1Ptr->gabbyAndTyData.quote;
         *words = EC_EMPTY_WORD;
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_FEMALE;
+        break;
+    case EASY_CHAT_TYPE_CONTEST_INTERVIEW:
+        words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words[gSpecialVar_0x8006];
+        displayedPersonType = EASY_CHAT_PERSON_REPORTER_MALE;
         break;
     case EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW:
         words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainerTower.words;
@@ -2012,7 +2027,8 @@ static u16 HandleEasyChatInput_ConfirmLyricsYesNo(void)
 
 static u16 StartConfirmExitPrompt(void)
 {
-    if (sEasyChatScreen->type == EASY_CHAT_TYPE_APPRENTICE)
+    if (sEasyChatScreen->type == EASY_CHAT_TYPE_APPRENTICE
+     || sEasyChatScreen->type == EASY_CHAT_TYPE_CONTEST_INTERVIEW)
     {
         sEasyChatScreen->inputStateBackup = sEasyChatScreen->inputState;
         sEasyChatScreen->inputState = INPUTSTATE_WAIT_FOR_MSG;
@@ -2093,7 +2109,8 @@ static u16 TryConfirmWords(void)
         sEasyChatScreen->inputState = INPUTSTATE_CONFIRM_WORDS_YES_NO;
         return ECFUNC_PROMPT_CONFIRM;
     }
-    else if (sEasyChatScreen->type == EASY_CHAT_TYPE_APPRENTICE)
+    else if (sEasyChatScreen->type == EASY_CHAT_TYPE_APPRENTICE
+          || sEasyChatScreen->type == EASY_CHAT_TYPE_CONTEST_INTERVIEW)
     {
         if (IsCurrentPhraseEmpty())
         {

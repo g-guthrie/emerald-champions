@@ -12,7 +12,9 @@
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
+#include "trainer_hill.h"
 #include "util.h"
+#include "battle_pyramid.h"
 #include "constants/battle_frontier.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -496,8 +498,11 @@ bool8 CheckForTrainersWantingBattle(void)
 
     if (gNoOfApproachingTrainers > 0)
     {
-        ConfigureApproachingTrainerBattle(gApproachingTrainers);
-            
+        if (InBattlePyramid() || InTrainerHillChallenge())
+            ConfigureApproachingFacilityTrainerBattle(gApproachingTrainers);
+        else
+            ConfigureApproachingTrainerBattle(gApproachingTrainers);
+
         gTrainerApproachedPlayer = TRUE;
         gApproachingTrainerId = 0;
         return TRUE;
@@ -518,6 +523,14 @@ static u8 CheckTrainer(u8 objectEventId)
     if (approachDistance == 0)
         return 0;
 
+    if (InTrainerHill())
+    {
+        trainerBattlePtr = GetTrainerHillTrainerScript();
+    }
+    else if (InBattlePyramid()) {
+        trainerBattlePtr = GetBattlePyramidTrainerScript();
+    }
+    else
     {
         trainerBattlePtr = GetObjectEventScriptPointerByObjectEventId(objectEventId);
         struct ScriptContext ctx;
@@ -534,7 +547,17 @@ static u8 CheckTrainer(u8 objectEventId)
         }
     }
 
-    if (trainerBattlePtr)
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+    {
+        if (GetBattlePyramidTrainerFlag(objectEventId))
+            return 0;
+    }
+    else if (InTrainerHill())
+    {
+        if (GetHillTrainerFlag(objectEventId))
+            return 0;
+    }
+    else if (trainerBattlePtr)
     {
         if (GetTrainerFlagFromScriptPointer(trainerBattlePtr))
         {
@@ -555,7 +578,7 @@ static u8 CheckTrainer(u8 objectEventId)
         numTrainers = 0xFF;
     }
 
-    if (trainerBattlePtr)
+    if (trainerBattlePtr && !InTrainerHillChallenge() && !InBattlePyramid())
     {
         TrainerBattleParameter *temp = (TrainerBattleParameter *)(trainerBattlePtr + 1);
         if (temp->params.isDoubleBattle)

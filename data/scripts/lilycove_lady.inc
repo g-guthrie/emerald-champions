@@ -1,11 +1,11 @@
-@ LOCALID_LILYCOVE_LADY is generated from LilycoveCity_PokemonCenter_1F/map.json (object 6).
-.set LOCALID_LADYS_MON, 7  @ was 5, which is the Maniac; her mon is map.json object 7
+.set LOCALID_LADYS_MON, 5
 
 LilycoveCity_PokemonCenter_1F_EventScript_LilycoveLady:: @ 82A836B
     special Script_GetLilycoveLadyId
     switch VAR_RESULT
     case LILYCOVE_LADY_QUIZ, LilycoveCity_PokemonCenter_1F_EventScript_QuizLady
     case LILYCOVE_LADY_FAVOR, LilycoveCity_PokemonCenter_1F_EventScript_FavorLady
+    case LILYCOVE_LADY_CONTEST, LilycoveCity_PokemonCenter_1F_EventScript_ContestLady
     end
 
 LilycoveCity_PokemonCenter_1F_EventScript_FavorLady:: @ 82A8395
@@ -376,21 +376,226 @@ LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz:: @ 82A8817
     release
     end
 
-@ Emerald Champions: the Contest Lady is retired along with Pokemon Contests.
-@ src/contest.c and the Pokeblock feeder are gone from this tree, so the whole
-@ Pokeblock-feeding flow that she existed for has been removed rather than left
-@ calling missing code. SetLilycoveLadyGfx always reports FALSE in this engine,
-@ so LilycoveCity_PokemonCenter_1F_OnTransition permanently sets
-@ FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON and her Pokémon is never
-@ spawned. The script below is kept only so that object still has a valid
-@ script to point at, and it terminates cleanly if it is ever reached.
-LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon::
+LilycoveCity_PokemonCenter_1F_EventScript_ContestLady:: @ 82A882A
     lock
     faceplayer
-    msgbox LilycoveCity_PokemonCenter_1F_Text_LadysMonDozing, MSGBOX_DEFAULT
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ImTheContestLady, MSGBOX_DEFAULT
+    specialvar VAR_RESULT, HasPlayerGivenContestLadyPokeblock
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NotGivenPokeblock
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock
+    end
+
+@ Redundant with above script, VAR_RESULT will always be FALSE here
+LilycoveCity_PokemonCenter_1F_EventScript_NotGivenPokeblock:: @ 82A8850
+    specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskForPokeblock
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock:: @ 82A886C
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ThankForPokeblock, MSGBOX_DEFAULT
     release
     end
 
+LilycoveCity_PokemonCenter_1F_EventScript_AskForPokeblock:: @ 82A8876
+    special Script_BufferContestLadyCategoryAndMonName
+    msgbox LilycoveCity_PokemonCenter_1F_Text_MyFriendDisplaysQuality, MSGBOX_DEFAULT
+    checkitem ITEM_POKEBLOCK_CASE, 1
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoPokeblockCase
+    msgbox LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock, MSGBOX_YESNO
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock:: @ 82A88B0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WhatACheapskate, MSGBOX_DEFAULT
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock:: @ 82A88BA
+    fadescreen FADE_TO_BLACK
+    special OpenPokeblockCaseForContestLady
+    waitstate
+    compare VAR_RESULT, 0xFFFF
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitGivingPokeblock
+    compare VAR_RESULT, 0xFFFF
+    goto_if_ne LilycoveCity_PokemonCenter_1F_EventScript_GivePokeblock
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_AskQuitGivingPokeblock:: @ 82A88D7
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ICantHaveOnePokeblock, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_GivePokeblock:: @ 82A88F6
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IllUseYourPokeblock, MSGBOX_DEFAULT
+    special SetContestLadyGivenPokeblock
+    special GetContestLadyMonSpecies
+    goto LilycoveCity_PokemonCenter_1F_EventScript_FeedPokeblock
+    end
+
+@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
+LilycoveCity_PokemonCenter_1F_EventScript_FeedPokeblock:: @ 82A890A
+    applymovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon
+    waitmovement 0
+    delay 60
+    applymovement LOCALID_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady
+    waitmovement 0
+    delay 60
+    waitse
+    playmoncry VAR_0x8005, 0
+    delay 120
+    waitmoncry
+    compare VAR_0x8004, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_MonEnjoyPokeblock
+    goto LilycoveCity_PokemonCenter_1F_EventScript_FinishFeedPokeblock
+    end
+
+@ VAR_0x8004 here is the return value from GivePokeblockToContestLady
+LilycoveCity_PokemonCenter_1F_EventScript_MonEnjoyPokeblock:: @ 82A893F
+    applymovement LOCALID_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonJump
+    waitmovement 0
+    delay 60
+LilycoveCity_PokemonCenter_1F_EventScript_FinishFeedPokeblock:: @ 82A894C
+    applymovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer
+    waitmovement 0
+    delay 60
+    compare VAR_0x8004, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_MonDislikedPokeblock
+    compare VAR_0x8004, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_MonLikedPokeblock
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_MonDislikedPokeblock:: @ 82A8970
+    msgbox LilycoveCity_PokemonCenter_1F_Text_NoChangeThanks, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_CheckAirContestLadyShow
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_MonLikedPokeblock:: @ 82A897E
+    special Script_BufferContestLadyCategoryAndMonName
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ReallyImprovedThanks, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_CheckAirContestLadyShow
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_CheckAirContestLadyShow:: @ 82A898F
+    specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
+    compare VAR_RESULT, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AirContestLadyShow
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_AirContestLadyShow:: @ 82A89A1
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests, MSGBOX_DEFAULT
+    special PutLilycoveContestLadyShowOnTheAir
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_NoPokeblockCase:: @ 82A89AE
+    msgbox LilycoveCity_PokemonCenter_1F_Text_DontHaveAPokeblockCase, MSGBOX_DEFAULT
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon: @ 82A89B8
+    face_right
+    delay_8
+    step_end
+
+LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady: @ 82A89BB
+    face_left
+    delay_8
+    step_end
+
+@ Unused
+LilycoveCity_PokemonCenter_1F_Movement_MonFaceDown: @ 82A89BE
+    face_down
+    step_end
+
+LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer: @ 82A89C0
+    face_player
+    step_end
+
+LilycoveCity_PokemonCenter_1F_Movement_MonJump: @ 82A89C2
+    disable_jump_landing_ground_effect
+    jump_in_place_left
+    disable_jump_landing_ground_effect
+    jump_in_place_left
+    step_end
+
+LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon:: @ 82A89C7
+    specialvar VAR_RESULT, GetContestLadyCategory
+    special Script_BufferContestLadyCategoryAndMonName
+    special GetContestLadyMonSpecies
+    compare VAR_RESULT, CONTEST_CATEGORY_COOL
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon
+    compare VAR_RESULT, CONTEST_CATEGORY_BEAUTY
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_Skitty
+    compare VAR_RESULT, CONTEST_CATEGORY_CUTE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_Poochyena
+    compare VAR_RESULT, CONTEST_CATEGORY_SMART
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_Kecleon
+    compare VAR_RESULT, CONTEST_CATEGORY_TOUGH
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_Pikachu
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon:: @ 82A8A0A
+    lock
+    faceplayer
+    waitse
+    playmoncry VAR_0x8005, 0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_Zigzagoon, MSGBOX_DEFAULT
+    waitmoncry
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_Skitty:: @ 82A8A1D
+    lock
+    faceplayer
+    waitse
+    playmoncry VAR_0x8005, 0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_Skitty, MSGBOX_DEFAULT
+    waitmoncry
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_Poochyena:: @ 82A8A30
+    lock
+    faceplayer
+    waitse
+    playmoncry VAR_0x8005, 0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_Poochyena, MSGBOX_DEFAULT
+    waitmoncry
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_Kecleon:: @ 82A8A43
+    lock
+    faceplayer
+    waitse
+    playmoncry VAR_0x8005, 0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_Kecleon, MSGBOX_DEFAULT
+    waitmoncry
+    release
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_Pikachu:: @ 82A8A56
+    lock
+    faceplayer
+    waitse
+    playmoncry VAR_0x8005, 0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_Pikachu, MSGBOX_DEFAULT
+    waitmoncry
+    release
+    end
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady: @ 82A8A69
     .string "I'm the FAVOR LADY…$"
@@ -576,8 +781,78 @@ LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger: @ 82A9336
     .string "I'll go look for someone who'll take\n"
     .string "your quiz challenge right away.$"
 
-LilycoveCity_PokemonCenter_1F_Text_LadysMonDozing:
-    .string "The Pokémon is dozing quietly.\p"
-    .string "With no Contests being held, it seems\n"
-    .string "to have nowhere it needs to be.$"
+LilycoveCity_PokemonCenter_1F_Text_ImTheContestLady: @ 82A93A7
+    .string "I'm the Contest Lady!\n"
+    .string "I sure do love Contests!$"
 
+LilycoveCity_PokemonCenter_1F_Text_ThankForPokeblock: @ 82A93D6
+    .string "Thanks for your {POKEBLOCK} before!$"
+
+LilycoveCity_PokemonCenter_1F_Text_MyFriendDisplaysQuality: @ 82A93F4
+    .string "This is my friend {STR_VAR_1}!\n"
+    .string "It's the epitome of {STR_VAR_2}!\p"
+    .string "But I think that it will display\n"
+    .string "even more {STR_VAR_2}!$"
+
+LilycoveCity_PokemonCenter_1F_Text_DontHaveAPokeblockCase: @ 82A9451
+    .string "So, I need your help!\p"
+    .string "Please, may I have one {POKEBLOCK}?\n"
+    .string "All I'm asking for is one!\p"
+    .string "…Oh, but…\n"
+    .string "Don't you have a {POKEBLOCK} CASE?\l"
+    .string "That's no good. Next time, then!$"
+
+LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock: @ 82A94E8
+    .string "So, I need your help!\p"
+    .string "Please, may I have one {POKEBLOCK}?\n"
+    .string "All I'm asking for is one!$"
+
+LilycoveCity_PokemonCenter_1F_Text_ICantHaveOnePokeblock: @ 82A9537
+    .string "Awww!\n"
+    .string "I can't have one {POKEBLOCK}?!$"
+
+LilycoveCity_PokemonCenter_1F_Text_WhatACheapskate: @ 82A9556
+    .string "Sheesh!\n"
+    .string "What a cheapskate!$"
+
+LilycoveCity_PokemonCenter_1F_Text_IllUseYourPokeblock: @ 82A9571
+    .string "Yay!\n"
+    .string "Thank you!\p"
+    .string "I'll feed my Pokémon your {POKEBLOCK}\n"
+    .string "right away.$"
+
+LilycoveCity_PokemonCenter_1F_Text_NoChangeThanks: @ 82A95AD
+    .string "…It doesn't seem to have changed\n"
+    .string "in any way at all…\p"
+    .string "Hmm…\p"
+    .string "Oh, well!\n"
+    .string "Thank you very much!$"
+
+LilycoveCity_PokemonCenter_1F_Text_ReallyImprovedThanks: @ 82A9605
+    .string "Oh, yay!\n"
+    .string "It's really delighted!\p"
+    .string "I think it really improved {STR_VAR_1}'s\n"
+    .string "{STR_VAR_2} quality, too.\p"
+    .string "Thank you so much!$"
+
+LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests: @ 82A9669
+    .string "Hmm…\p"
+    .string "I think we may be ready to enter\n"
+    .string "some Contests.\p"
+    .string "If you see us in one somewhere,\n"
+    .string "I hope you'll cheer for us.$"
+
+LilycoveCity_PokemonCenter_1F_Text_Zigzagoon: @ 82A96DA
+    .string "{STR_VAR_1}: Guguuh!$"
+
+LilycoveCity_PokemonCenter_1F_Text_Kecleon: @ 82A96E6
+    .string "{STR_VAR_1}: Igigigiiih!$"
+
+LilycoveCity_PokemonCenter_1F_Text_Poochyena: @ 82A96F6
+    .string "{STR_VAR_1}: Baaarun…$"
+
+LilycoveCity_PokemonCenter_1F_Text_Pikachu: @ 82A9703
+    .string "{STR_VAR_1}: Pikka!$"
+
+LilycoveCity_PokemonCenter_1F_Text_Skitty: @ 82A970E
+    .string "{STR_VAR_1}: Umyaaaan!$"

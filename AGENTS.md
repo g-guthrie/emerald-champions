@@ -1,16 +1,29 @@
-# Working on Emerald Champions v4
+Current authorization (September 18): fix the full Inclement integration.
+Keep the immediate free opening gift of Eviolite, Choice Band, Choice Specs,
+Choice Scarf and Focus Sash; subsequent vendor copies are purchased. Preserve
+other major battle-item discoveries unless a concrete conflict needs repair.
+Proceed with repairs and native validation; the earlier discussion hold is lifted.
 
-Current user-directed work is the consolidation goal in docs/GOAL.md: the new
-campaign spine, narrow economy and acceptance ladder are landed; a fresh earned
-Medium run under work/fresh-run/ is the only source of L3 clears; the team and
-AI side rewrites trainers concurrently (see the ownership split below). Emerald
-Studio remains the native scene/battle workspace. See docs/CONTINUE.md.
+# Current user direction — September 18, 2026
 
-Read `docs/CONTINUE.md`, `docs/GOAL.md` and the relevant parts of the single
-canonical `Game Blueprint/Emerald_Champions_Game_Book.txt` before working.
-This repository root is the active native pokeemerald-expansion implementation.
-The separate replacement-engine experiment is parked and is not the game to run.
-Old 7.0/7.1 branches and archived reports are evidence, not competing instructions.
+Inclement Emerald is the default for story, world, progression and economy.
+Preserve authored doubles teams and AI, the universal legal-move tutor, native
+ability switcher, Flight Beacon and field-move convenience, reduced trainer
+roster, previous-cap Leveler, and the requested EXP improvements. Battle items
+are paid starting stock plus stock unlocked through successful acquisition.
+Remove Center battle-set presets and Center stat editing; use Inclement's
+existing EV/IV services. No Game Book or player guides. Do not add rematches.
+Older campaign policies below apply only where consistent with this direction.
+Current priority: core playability from a genuine new game, ordinary native input,
+opening progression, Center services, and native Save followed by clean Continue.
+Optional Contests, PokéNav extras and Frontier activities are last. One Astra
+Medium implementation agent works under the main agent's read-only review;
+no nested delegation. No commits, pushes, resets, or guide regeneration.
+Read the current top of docs/CONTINUE.md. Preserve the delivered 105e9c9e test
+ROM package when building later fixes.
+
+Everything below is historical policy; apply only where consistent with the
+current Inclement baseline and explicit retained features above.
 
 ## Goal and autonomy
 
@@ -20,13 +33,10 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
 - When the user asks to continue/start goal work, create or resume the goal in
   `docs/GOAL.md` using the available goal tool. An account/machine change does not
   imply that the game goal is complete. Do not recreate an already active goal.
-- The one authorized fresh Astra High full-book review is complete; its dispositions
-  are integrated in the guide and source. Trainer design review happens in chat
-  with the main agent. No new full-book review.
 - Subagents (user direction, September 15): use Sonnet subagents for basic,
   well-scoped code implementation from a self-contained spec (files, constraints,
   verification command). The main agent reviews every subagent diff and runs the
-  checks before it lands, and keeps design decisions, book prose, trainer teams
+  checks before it lands, and keeps design decisions, trainer teams
   and playtesting itself. No nested delegation.
 - Preserve existing user/concurrent work. Use Git history for older source rather
   than introducing competing copies into the live tree. Commit and push supported
@@ -39,43 +49,24 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
 Two sessions work this repository concurrently. One owns trainer teams and the
 battle AI: `data/emerald_champions/emerald_champions_battle_teams.txt`, its
 materialized outputs, `src/battle_ai*`, `src/battle_util*`, `test/battle/ai/*`.
-The other owns story scripts, economy, world data, docs, the book's hand-authored
-guide and the acceptance machinery (`scripts/*`, `docs/trainer-review-index.json`).
+The other owns story scripts, economy, world data, docs and the acceptance machinery (`scripts/*`, `docs/trainer-review-index.json`).
 Do not edit the other side's files; commit by explicit path so a concurrent
 working-tree change is never swept into your commit; re-materialize teams and
 refresh the ladder index only after the team side's commits land. Never delete a
 clone or worktree without `git status --ignored`; `work/` holds earned saves.
 
-## Book and source stay together
+## Source ownership
 
-- The book owns intended design. Source implements the game. Reconcile a mismatch;
-  do not silently treat either stale prose or accidental code as the final choice.
-- At every reached area, reconcile book intent with active code and native play:
-  dialogue/story gates, choreography, habitats/evolution, gifts/trades/shops,
-  services/storage, Mega access and trainer teams/AI. Record source agreement,
-  exercised behavior, visual evidence and pending branches separately in the
-  book. Report this non-battle work in chat. A battle clear is not area acceptance;
-  final sign-off requires coverage of the entire design and honest remaining limits.
-- Retrospectively reconcile C01–C14 story and area coverage too. Check active
-  source against the book and archived evidence; repair missed inconsistencies
-  globally. Revisit changed or unverified interactions as needed, without
-  replaying already won trainers merely to repeat this review.
-- Every gameplay change must update its book rule, exact party/build/tactical
-  record, habitat, progression, reward or scene description in the same change.
-  Update implemented/pending statements and evidence scope too. Do not leave the
-  book describing a discarded experiment. A hypothesis is not an approved policy.
-- For exact trainer changes, edit `data/emerald_champions/emerald_champions_battle_teams.txt`,
-  materialize with `scripts/emerald_champions_teams.py --write`, then refresh the
-  book reference with `scripts/sync_game_book.py --write`. The book has a short
-  hand-authored guide plus a generated canonical reference. Never hand-edit the
-  generated appendix or native projections. Shared preparation presets are separately authored;
-  do not overwrite bespoke trainer moves or EVs with player presets.
-- Use the working Deus stdio MCP adapter in `docs/VERIFICATION.md` for codebase
-  memory and affected-caller tracing. Refresh its index when source changes.
-  Check coverage exclusions; graph results supplement active-script/book review.
-- Keep the guide and generated references in this one book; generated reading views are not editable authorities. `docs/CONTINUE.md` owns checkpoint
-  and next-work state, `docs/VERIFICATION.md` owns commands, and `docs/GOAL.md` owns
-  the goal. Do not accumulate new competing handoffs or historical task lists.
+- Inclement Emerald is the default design authority. Preserve the authored
+  doubles teams and AI and the user's explicit quality-of-life exceptions.
+- The Game Book and player guides were deleted at the user's request on
+  September 18. Do not recreate them or require publication checks for builds.
+- Edit exact trainers in `data/emerald_champions/emerald_champions_battle_teams.txt`
+  and materialize with `scripts/emerald_champions_teams.py --write`. Never edit
+  generated party projections independently.
+- Report source agreement, native behavior, visual evidence and untested paths
+  separately. Keep current work in `docs/CONTINUE.md` and commands in
+  `docs/VERIFICATION.md`; these are development records, not player guides.
 
 ## Earned campaign, battles and difficulty
 
@@ -88,7 +79,7 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
   baby team may need levels substantially above the player cap; an exceptional
   Mega may need a negative offset. The initial role ranges are not ceilings.
   Change composition for a better concept or demonstrated strategic defect,
-  keeping the book and source synchronized. Do not substitute stronger species
+  keeping authoring and generated source synchronized. Do not substitute stronger species
   for this design review or count a mechanic's mere presence as a showcase.
   Route aces, Gyms and villain bosses should demand serious optimization; League
   encounters are the culmination. Model failure is not an expert-human ceiling.
@@ -100,7 +91,7 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
   The user directs informed initial level choices now and tuning during later
   playtesting. Do not stall the five-team discussions for exhaustive simulations;
   keep chosen seeds distinct from demonstrated difficulty calibration.
-- Follow book play order: C01, first-arrival Oldale C03, rival/send-off C02, then
+- Historical earned-run order: C01, first-arrival Oldale C03, rival/send-off C02, then
   onward. Implement and inspect each reached chapter and handoff. Later synthetic
   scene tests never count as earned traversal. The fresh run's progress is in
   handoff/checkpoint.json; use it for the exact next encounter.
@@ -126,8 +117,8 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
 - Before EVERY trainer battle, briefly inspect the exact team, intent/tactics and
   applicable shared AI code. Expect possible quality decline beyond roughly the
   first 130 historically authored encounters. Freely improve demonstrated team,
-  moveset, strategy or AI weaknesses; synchronize the book and consumers.
-- Every AI bug requires an affected-team index in the canonical book: earlier
+  moveset, strategy or AI weaknesses; synchronize authoring and consumers.
+- Every AI bug requires an affected-team index in the development evidence: earlier
   cleared encounters, bespoke tactics/implementations, and later authored teams.
   Trace every plausible shared path, repair every affected implementation, and
   run focused behavioral regressions for relevant mechanics and exceptions. Carry
@@ -151,7 +142,7 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
   party; explain justified exceptions. This is a judgment threshold, not an
   automatic quota. Do not count pre-existing faints from an adjacent fight. Fix
   AI defects before compensating with levels; preserve themes and counterplay.
-- Before every trainer, appraise its exact book design, team composition, regional
+- Before every trainer, appraise its authored design, team composition, regional
   theme, distinctive plan and AI. Then audit the complete reachable Pokemon pool
   and construct the strongest practical legal team for that encounter, including
   available legendaries and Ultra Beasts. Assisted preparation replaces capture/
@@ -165,7 +156,7 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
   Answer with a concrete judgment about species, partnerships, theme, memorable
   interactions and counterplay. Recommend a specific improvement when warranted;
   do not equate cooler with simply rarer Pokemon or higher stats. If the concept
-  earns retention, explain why. Approved revisions update book, code and AI plan.
+  earns retention, explain why. Approved revisions update authoring, code and AI plan.
 - Every Gym trainer and Gym leader must field six Pokemon. Build each Gym as a
   creative doubles showcase with unusual/rare species, meaningful partnerships
   and distinct room strategies. Occasional type-appropriate legendaries are
@@ -218,7 +209,7 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
 
 - Build a flowing new adventure with repeatable guide-free directions for EVERY
   required handoff and the required exploration integrated into the main story.
-  Do not leave old Inclement routing that contradicts the book.
+  Preserve Inclement routing unless an explicit user exception changes it.
 - Main-path guidance must be unusually explicit: never assume a ROM-hack guide
   exists. Every gate names the next action, exact destination/person/entrance,
   and the nearest currently reachable source of each required resource. For a
@@ -246,7 +237,7 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
   missions, preparation, rewards and other non-dialogue interactions. Review
   their actual native screens in contact sheets. Assisted team creation does
   not replace this economy/service acceptance. At each chapter reconcile all
-  active dialogue and systems with the book; record unvisited branches as
+  active dialogue and systems with the intended Inclement behavior; record unvisited branches as
   pending. Decorative furniture does not substitute for functional coverage.
 
 ## Verification and delivery
@@ -266,4 +257,4 @@ clone or worktree without `git status --ignored`; `work/` holds earned saves.
   party restoration and native Retry versus Reload. Field medicine stays available;
   free preparation must not become a resale exploit. No legacy save migrations.
 - Deliver a source-bound normal ROM and working downloads, organized evidence and
-  the maintained book. Upload success alone is not delivery; verify downloads.
+  the source and development evidence. Upload success alone is not delivery; verify downloads.

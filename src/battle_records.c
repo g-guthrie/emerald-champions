@@ -22,23 +22,24 @@
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "constants/game_stat.h"
+#include "trainer_hill.h"
 #include "trainer_tower.h"
 #include "constants/rgb.h"
 
-static void Task_CloseTrainerTowerRecordsScreenOnButton(u8 taskId);
+static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);
 static void Task_BeginPaletteFade(u8 taskId);
-static void Task_ExitTrainerTowerRecordsScreen(u8 taskId);
-static void RemoveTrainerTowerRecordsScreenWindow(u8 windowId);
-static void CB2_ShowTrainerTowerRecords(void);
+static void Task_ExitTrainerHillRecords(u8 taskId);
+static void RemoveTrainerHillRecordsWindow(u8 windowId);
+static void CB2_ShowTrainerHillRecords(void);
 
 EWRAM_DATA u8 gRecordsWindowId = 0;
 EWRAM_DATA static u8 *sTilemapBuffer = NULL;
 
-static const u32 sRecordsWindowTileset[] = INCGFX_U32("graphics/battle_records/records_window.png", ".4bpp");
-static const u16 sRecordsWindowPalette[] = INCGFX_U16("graphics/battle_records/records_window.png", ".gbapal");
-static const u32 sRecordsWindowTilemap[] = INCBIN_U32("graphics/battle_records/records_window.bin");
+static const u32 sTrainerHillWindowTileset[] = INCGFX_U32("graphics/trainer_hill/records_window.png", ".4bpp");
+static const u16 sTrainerHillWindowPalette[] = INCGFX_U16("graphics/trainer_hill/records_window.png", ".gbapal");
+static const u32 sTrainerHillWindowTilemap[] = INCBIN_U32("graphics/trainer_hill/records_window.bin");
 
-static const struct BgTemplate sTrainerTowerRecordsScreenBgTemplates[] =
+static const struct BgTemplate sTrainerHillRecordsBgTemplates[] =
 {
     {
         .bg = 0,
@@ -60,7 +61,7 @@ static const struct BgTemplate sTrainerTowerRecordsScreenBgTemplates[] =
     }
 };
 
-static const struct WindowTemplate sTrainerTowerRecordsScreenWindowTemplates[] =
+static const struct WindowTemplate sTrainerHillRecordsWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -356,13 +357,13 @@ void RemoveRecordsWindow(void)
     RemoveWindow(gRecordsWindowId);
 }
 
-static void Task_RecordsWaitForPaletteFade(u8 taskId)
+static void Task_TrainerHillWaitForPaletteFade(u8 taskId)
 {
     if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_CloseTrainerTowerRecordsScreenOnButton;
+        gTasks[taskId].func = Task_CloseTrainerHillRecordsOnButton;
 }
 
-static void Task_CloseTrainerTowerRecordsScreenOnButton(u8 taskId)
+static void Task_CloseTrainerHillRecordsOnButton(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -376,22 +377,22 @@ static void Task_CloseTrainerTowerRecordsScreenOnButton(u8 taskId)
 static void Task_BeginPaletteFade(u8 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-    gTasks[taskId].func = Task_ExitTrainerTowerRecordsScreen;
+    gTasks[taskId].func = Task_ExitTrainerHillRecords;
 }
 
-static void Task_ExitTrainerTowerRecordsScreen(u8 taskId)
+static void Task_ExitTrainerHillRecords(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         Free(sTilemapBuffer);
-        RemoveTrainerTowerRecordsScreenWindow(0);
+        RemoveTrainerHillRecordsWindow(0);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
     }
 }
 
-static void RemoveTrainerTowerRecordsScreenWindow(u8 windowId)
+static void RemoveTrainerHillRecordsWindow(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
@@ -442,21 +443,21 @@ static void SetDispcntReg(void)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_1D_MAP);
 }
 
-static void LoadTrainerTowerRecordsScreenWindowGfx(u8 bgId)
+static void LoadTrainerHillRecordsWindowGfx(u8 bgId)
 {
-    LoadBgTiles(bgId, sRecordsWindowTileset, sizeof(sRecordsWindowTileset), 0);
-    CopyToBgTilemapBufferRect(bgId, sRecordsWindowTilemap, 0, 0, 0x20, 0x20);
-    LoadPalette(sRecordsWindowPalette, BG_PLTT_ID(0), sizeof(sRecordsWindowPalette));
+    LoadBgTiles(bgId, sTrainerHillWindowTileset, sizeof(sTrainerHillWindowTileset), 0);
+    CopyToBgTilemapBufferRect(bgId, sTrainerHillWindowTilemap, 0, 0, 0x20, 0x20);
+    LoadPalette(sTrainerHillWindowPalette, BG_PLTT_ID(0), sizeof(sTrainerHillWindowPalette));
 }
 
-static void VblankCB_TrainerTowerRecordsScreen(void)
+static void VblankCB_TrainerHillRecords(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void MainCB2_TrainerTowerRecordsScreen(void)
+static void MainCB2_TrainerHillRecords(void)
 {
     RunTasks();
     AnimateSprites();
@@ -464,13 +465,13 @@ static void MainCB2_TrainerTowerRecordsScreen(void)
     UpdatePaletteFade();
 }
 
-void ShowTrainerTowerRecords(void)
+void ShowTrainerHillRecords(void)
 {
     SetVBlankCallback(NULL);
-    SetMainCallback2(CB2_ShowTrainerTowerRecords);
+    SetMainCallback2(CB2_ShowTrainerHillRecords);
 }
 
-static void CB2_ShowTrainerTowerRecords(void)
+static void CB2_ShowTrainerHillRecords(void)
 {
     switch (gMain.state)
     {
@@ -486,13 +487,13 @@ static void CB2_ShowTrainerTowerRecords(void)
     case 2:
         sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, sTrainerTowerRecordsScreenBgTemplates, ARRAY_COUNT(sTrainerTowerRecordsScreenBgTemplates));
+        InitBgsFromTemplates(0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
         SetBgTilemapBuffer(3, sTilemapBuffer);
         ResetAllBgsCoordinates();
         gMain.state++;
         break;
     case 3:
-        LoadTrainerTowerRecordsScreenWindowGfx(3);
+        LoadTrainerHillRecordsWindowGfx(3);
         LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
@@ -506,7 +507,7 @@ static void CB2_ShowTrainerTowerRecords(void)
         }
         break;
     case 5:
-        InitWindows(sTrainerTowerRecordsScreenWindowTemplates);
+        InitWindows(sTrainerHillRecordsWindowTemplates);
         DeactivateAllTextPrinters();
         gMain.state++;
         break;
@@ -516,10 +517,13 @@ static void CB2_ShowTrainerTowerRecords(void)
         break;
     case 7:
         SetDispcntReg();
-        SetVBlankCallback(VblankCB_TrainerTowerRecordsScreen);
-        PrintTrainerTowerRecords();
-        CreateTask(Task_RecordsWaitForPaletteFade, 8);
-        SetMainCallback2(MainCB2_TrainerTowerRecordsScreen);
+        SetVBlankCallback(VblankCB_TrainerHillRecords);
+        if (gSpecialVar_0x8004)
+            PrintTrainerTowerRecords();
+        else
+            PrintOnTrainerHillRecordsWindow();
+        CreateTask(Task_TrainerHillWaitForPaletteFade, 8);
+        SetMainCallback2(MainCB2_TrainerHillRecords);
         gMain.state = 0;
         break;
     }

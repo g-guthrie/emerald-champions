@@ -1,6 +1,6 @@
 .set LOCALID_GRUNT_1, 1
-.set LOCALID_GRUNT_2, 6
-.set LOCALID_CHANSEY, 15
+.set LOCALID_GRUNT_2, 3
+.set LOCALID_CHANSEY, 12
 
 Route112_MapScripts:: @ 81F1DA8
 	map_script MAP_SCRIPT_ON_TRANSITION, Route112_OnTransition
@@ -80,12 +80,12 @@ Route112_EventScript_Hiker:: @ 81F1E61
 	end
 
 Route112_EventScript_Brice:: @ 81F1E6A
-	trainerbattle_single TRAINER_BRICE, Route112_Text_BriceIntro, Route112_Text_BriceDefeat
+	trainerbattle_double TRAINER_BRICE, Route112_Text_BriceIntro, Route112_Text_BriceDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_BricePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Trent:: @ 81F1E81
-	trainerbattle_single TRAINER_TRENT_1, Route112_Text_TrentIntro, Route112_Text_TrentDefeat, Route112_EventScript_RegisterTrent
+	@ This retired encounter has no campaign battle.
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route112_EventScript_RematchTrent
@@ -102,27 +102,27 @@ Route112_EventScript_RegisterTrent:: @ 81F1EAD
 	end
 
 Route112_EventScript_RematchTrent:: @ 81F1ECC
-	trainerbattle_rematch TRAINER_TRENT_1, Route112_Text_TrentRematchIntro, Route112_Text_TrentRematchDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route112_Text_TrentRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Larry:: @ 81F1EE3
-	trainerbattle_single TRAINER_LARRY, Route112_Text_LarryIntro, Route112_Text_LarryDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route112_Text_LarryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Carol:: @ 81F1EFA
-	trainerbattle_single TRAINER_CAROL, Route112_Text_CarolIntro, Route112_Text_CarolDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route112_Text_CarolPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Bryant:: @ 81F1F11
-	trainerbattle_single TRAINER_BRYANT, Route112_Text_BryantIntro, Route112_Text_BryantDefeat
+	trainerbattle_double TRAINER_BRYANT, Route112_Text_BryantIntro, Route112_Text_BryantDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_BryantPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Shayla:: @ 81F1F28
-	trainerbattle_single TRAINER_SHAYLA, Route112_Text_ShaylaIntro, Route112_Text_ShaylaDefeat
+	trainerbattle_double TRAINER_SHAYLA, Route112_Text_ShaylaIntro, Route112_Text_ShaylaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_ShaylaPostBattle, MSGBOX_AUTOCLOSE
 	end
 

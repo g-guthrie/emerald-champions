@@ -30,14 +30,16 @@ SootopolisCity_House1_EventScript_Kecleon:: @ 822698E
 	end
 
 SootopolisCity_House1_Text_DevelopedThisTM: @ 82269A1
-	.string "For thirty years I've remained in\n"
-	.string "Sootopolis honing my skills.\p"
-	.string "I developed a sword-dancing TM.\n"
-	.string "I bequeath it to you!$"
+	.string "You have earned a little help\n"
+	.string "for your journey. Please take\l"
+	.string "this Rare Candy!$"
 
 SootopolisCity_House1_Text_ExplainBrickBreak: @ 8226A13
-	.string "TM75 contains Swords Dance! It's a move\n"
-	.string "so horrible that I can't describe it.$"
+	.string "A Rare Candy raises a Pokémon by\n"
+	.string "one level, up to your current\l"
+	.string "cap.\p"
+	.string "For new moves, visit the Center\n"
+	.string "tutor.$"
 
 SootopolisCity_House1_Text_Kecleon: @ 8226A60
 	.string "Kecleon: Puu puhyaah.$"

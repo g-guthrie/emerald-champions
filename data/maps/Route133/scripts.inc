@@ -1,5 +1,5 @@
-.set LOCALID_NURSE, 11
-.set LOCALID_CHANSEY, 12
+.set LOCALID_NURSE, 8
+.set LOCALID_CHANSEY, 9
 
 Route133_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route133_OnTransition
@@ -21,37 +21,37 @@ Route133_ShowNurse:
 	end
 
 Route133_EventScript_Franklin:: @ 81F75A3
-	trainerbattle_single TRAINER_FRANKLIN, Route133_Text_FranklinIntro, Route133_Text_FranklinDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route133_Text_FranklinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Debra:: @ 81F75BA
-	trainerbattle_single TRAINER_DEBRA, Route133_Text_DebraIntro, Route133_Text_DebraDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route133_Text_DebraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Linda:: @ 81F75D1
-	trainerbattle_single TRAINER_LINDA, Route133_Text_LindaIntro, Route133_Text_LindaDefeat
+	trainerbattle_double TRAINER_LINDA, Route133_Text_LindaIntro, Route133_Text_LindaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_LindaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Warren:: @ 81F75E8
-	trainerbattle_single TRAINER_WARREN, Route133_Text_WarrenIntro, Route133_Text_WarrenDefeat
+	trainerbattle_double TRAINER_WARREN, Route133_Text_WarrenIntro, Route133_Text_WarrenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_WarrenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Beck:: @ 81F75FF
-	trainerbattle_single TRAINER_BECK, Route133_Text_BeckIntro, Route133_Text_BeckDefeat
+	@ This retired encounter has no campaign battle.
 	msgbox Route133_Text_BeckPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Mollie:: @ 81F7616
-	trainerbattle_single TRAINER_MOLLIE, Route133_Text_MollieIntro, Route133_Text_MollieDefeat
+	trainerbattle_double TRAINER_MOLLIE, Route133_Text_MollieIntro, Route133_Text_MollieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_MolliePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Conor:: @ 81F762D
-	trainerbattle_single TRAINER_CONOR, Route133_Text_ConorIntro, Route133_Text_ConorDefeat
+	trainerbattle_double TRAINER_CONOR, Route133_Text_ConorIntro, Route133_Text_ConorDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_ConorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -124,26 +124,22 @@ Route133_Text_Chansey:
 	.string "Siii!$"
 
 Route133_Text_NurseHello:
-	.string "Oh, hey, it's {PLAYER}!\n"
-	.string "Mind giving us a hand?\p"
-	.string "We've been stuck on this island\n"
-	.string "for hours!\p"
-	.string "I Surfed out here on my Audino, but\n"
-	.string "it forgot the move, and then a\l"
-	.string "certain pink blob smashed my Surf HM!\p"
-	.string "Can I borrow yours for a moment?\n"
-	.string "I'll make it worth your while!$"
+	.string "Oh, hey, {PLAYER}! Can you help\n"
+	.string "us?\p"
+	.string "My Audino is frightened of the\n"
+	.string "strong currents. Could your team\l"
+	.string "show it a safe way across?$"
 
 Route133_Text_NurseReally:
 	.string "Really? Please, I'm desperate here!$"
 
 Route133_Text_NurseSoYoullHelp:
-	.string "So, can I borrow your Surf HM?\n"
-	.string "It'll only take a moment!$"
+	.string "Will your team help my Audino\n"
+	.string "across the currents?$"
 
 Route133_Text_NurseTeachAudino:
-	.string "Thanks! I'll just teach it to\n"
-	.string "my Audino…$"
+	.string "Thank you! Look, Audino. Follow\n"
+	.string "their lead and take your time.$"
 
 Route133_Text_NurseDoneHaveVialUpgrade:
 	.string "And… done!\p"

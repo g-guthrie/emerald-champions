@@ -42,7 +42,7 @@ For choreography, run the approach, movement, dialogue and exit together. Open t
 
 Compare a preserved before run with the revised run after meaningful changes. Keep proven input sequences, scenario prerequisites and named markers. Review first visit, repeat and relevant reward/storage failures. Only call a branch tested if it actually executed. Text telemetry records a buffer submitted to the printer, not proof every page was read; screenshots and the input trace establish delivery.
 
-Dialogue search follows static references and can include conditional/unreachable branches. Read its source and native-handler boundaries before concluding an NPC says something. Repeated service text is not automatically a defect. The generated reading copy is a derived index; edit native source and the one canonical Game Book, then regenerate. Preserve source/book ownership for trainer data too.
+Dialogue search follows static references and can include conditional/unreachable branches. Read its source and native-handler boundaries before concluding an NPC says something. Repeated service text is not automatically a defect. The generated reading copy is a derived index; edit native source. Player guides and the Game Book were removed by user direction. Preserve authored trainer ownership.
 
 ## State and evidence boundaries
 

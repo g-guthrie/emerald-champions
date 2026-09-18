@@ -1,50 +1,26 @@
 Common_EventScript_EmeraldChampionsMoveTutor::
 	lockall
 	faceplayer
-	setvar VAR_0x8007, EC_BATTLE_FORMAT_DOUBLES
 	setvar VAR_0x8009, 0
 	call_if_unset FLAG_EC_TUTOR_MACHINES_LINE_SEEN, EmeraldChampions_EventScript_MoveTutorNoMachines
 
 EmeraldChampions_EventScript_MoveTutorMain:
 	message EmeraldChampions_Text_MoveTutorHowCanHelp
 	waitmessage
-	dynmultipush EmeraldChampions_Text_BuildBattleSet, 0
-	dynmultipush EmeraldChampions_Text_ChangeNature, 1
-	dynmultipush EmeraldChampions_Text_EditEvs, 2
-	dynmultipush EmeraldChampions_Text_LearnMove, 3
-	dynmultipush EmeraldChampions_Text_OtherServices, 4
-	dynmultipush EmeraldChampions_Text_Exit, 5
-	@ A far-right anchor gives this the same upper-right presentation as
-	@ Inclement Emerald's native Pokémon Center specialist menu.  The dynamic
-	@ menu code clamps the final left edge from its measured text width.
-	dynmultistack 30, 1, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultipush EmeraldChampions_Text_LearnMove, 0
+	dynmultipush EmeraldChampions_Text_OtherServices, 1
+	dynmultipush EmeraldChampions_Text_Exit, 2
+	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
-	case 0, EmeraldChampions_EventScript_BattleSetChooseMon
-	case 1, EmeraldChampions_EventScript_NatureChooseMon
-	case 2, EmeraldChampions_EventScript_TrainingType
-	case 3, EmeraldChampions_EventScript_OpenMoveRelearner
-	case 4, EmeraldChampions_EventScript_OtherServices
-	case 5, EmeraldChampions_EventScript_MoveTutorExit
-	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorExit
+	case 0, EmeraldChampions_EventScript_OpenMoveRelearner
+	case 1, EmeraldChampions_EventScript_OtherServices
+	goto EmeraldChampions_EventScript_MoveTutorExit
 
 EmeraldChampions_EventScript_MoveTutorNoMachines:
 	setflag FLAG_EC_TUTOR_MACHINES_LINE_SEEN
 	msgbox EmeraldChampions_Text_MoveTutorNoMachines, MSGBOX_DEFAULT
 	return
-
-EmeraldChampions_EventScript_TrainingType:
-	message EmeraldChampions_Text_TrainingType
-	waitmessage
-	dynmultipush EmeraldChampions_Text_EvTraining, 0
-	dynmultipush EmeraldChampions_Text_IvTraining, 1
-	dynmultipush EmeraldChampions_Text_Back, 2
-	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorMain
-	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_MoveTutorMain
-	copyvar VAR_0x8002, VAR_RESULT
-	goto EmeraldChampions_EventScript_EvChooseMon
 
 EmeraldChampions_EventScript_OtherServices:
 	message EmeraldChampions_Text_OtherServicesPrompt
@@ -93,232 +69,6 @@ EmeraldChampions_EventScript_MoveRelearnerNoMoves:
 	goto EmeraldChampions_EventScript_MoveRelearnerChooseMon
 
 
-Common_EventScript_EmeraldChampionsEvEditor::
-	lockall
-	faceplayer
-	setvar VAR_0x8009, 1
-	setvar VAR_0x8002, EC_TRAINING_EVS
-	goto EmeraldChampions_EventScript_EvChooseMon
-
-EmeraldChampions_EventScript_EvChooseMon:
-	goto_if_eq VAR_0x8002, EC_TRAINING_IVS, EmeraldChampions_EventScript_IvChooseMon
-	msgbox EmeraldChampions_Text_ChooseEvMon, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_TrainingChooseMon
-EmeraldChampions_EventScript_IvChooseMon:
-	msgbox EmeraldChampions_Text_ChooseIvMon, MSGBOX_DEFAULT
-EmeraldChampions_EventScript_TrainingChooseMon:
-	special ChoosePartyMon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_EvCancel
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_EvEgg
-	copyvar VAR_0x800A, VAR_0x8004
-	setvar VAR_0x8008, 0
-	goto EmeraldChampions_EventScript_EvMain
-
-EmeraldChampions_EventScript_EvMain:
-	special BufferSelectedMonEmeraldChampionsTrainingSummary
-	message gStringVar4
-	waitmessage
-	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_EVS
-	special ShowScrollableMultichoice
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EvChooseMon
-	copyvar VAR_0x8008, VAR_RESULT
-	goto_if_eq VAR_0x8008, 7, EmeraldChampions_EventScript_EvChooseMon
-	goto_if_eq VAR_0x8008, 6, EmeraldChampions_EventScript_EvReset
-	copyvar VAR_0x8005, VAR_0x8008
-	setvar VAR_0x8006, 0
-	goto EmeraldChampions_EventScript_EvAdjust
-
-EmeraldChampions_EventScript_EvAdjust:
-	special BufferSelectedMonEmeraldChampionsTrainingDetail
-	message gStringVar4
-	waitmessage
-	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST
-	special ShowScrollableMultichoice
-
-@ The adjustment list persists between presses. Each step is applied, the
-@ running total is rewritten in place, and the same list resumes input.
-EmeraldChampions_EventScript_EvAdjustResult:
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EvMain
-	copyvar VAR_0x8006, VAR_RESULT
-	goto_if_eq VAR_0x8006, 8, EmeraldChampions_EventScript_EvMain
-	special AdjustSelectedMonEmeraldChampionsTraining
-	call_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EvAdjustmentBlocked
-	special BufferSelectedMonEmeraldChampionsTrainingDetail
-	message gStringVar4
-	waitmessage
-	special ScrollableMultichoice_TryReturnToList
-	waitstate
-	goto EmeraldChampions_EventScript_EvAdjustResult
-
-EmeraldChampions_EventScript_EvAdjustmentBlocked:
-	playse SE_FAILURE
-	return
-
-EmeraldChampions_EventScript_EvReset:
-	goto_if_eq VAR_0x8002, EC_TRAINING_IVS, EmeraldChampions_EventScript_IvReset
-	msgbox EmeraldChampions_Text_ResetEvs, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EvMain
-	special ResetSelectedMonEmeraldChampionsTraining
-	msgbox EmeraldChampions_Text_EvsReset, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_EvMain
-
-EmeraldChampions_EventScript_IvReset:
-	msgbox EmeraldChampions_Text_ResetIvs, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EvMain
-	special ResetSelectedMonEmeraldChampionsTraining
-	msgbox EmeraldChampions_Text_IvsReset, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_EvMain
-
-EmeraldChampions_EventScript_EvEgg:
-	msgbox EmeraldChampions_Text_EvEgg, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_EvChooseMon
-
-EmeraldChampions_EventScript_EvCancel:
-	goto_if_eq VAR_0x8009, 1, EmeraldChampions_EventScript_EvExternalExit
-	goto EmeraldChampions_EventScript_MoveTutorMain
-
-EmeraldChampions_EventScript_EvExternalExit:
-	msgbox EmeraldChampions_Text_EvGoodbye, MSGBOX_DEFAULT
-	releaseall
-	end
-
-@ Nature service. Mirrors the party menu's Change Ability flow: pick a party
-@ member, see what it is now, then pick the replacement from a scrolling list
-@ that names the stat each Nature raises and lowers. B backs out at every step.
-EmeraldChampions_EventScript_NatureChooseMon:
-	msgbox EmeraldChampions_Text_ChooseNatureMon, MSGBOX_DEFAULT
-	special ChoosePartyMon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_NatureEgg
-	special BufferSelectedMonNature
-	copyvar VAR_0x800A, VAR_0x8004
-	message EmeraldChampions_Text_CurrentNature
-	waitmessage
-@ The list is built from gNaturesInfo in C (see BuildEmeraldChampionsNatureMenuText)
-@ and opens on the current Nature. VAR_0x8004 carries the menu id for the
-@ scrolling list, so the party slot rides in VAR_0x800A meanwhile.
-	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES
-	special ShowScrollableMultichoice
-	copyvar VAR_0x8004, VAR_0x800A
-	closemessage
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_NatureChooseMon
-	special SetHiddenNature
-	playfanfare MUS_LEVEL_UP
-	special BufferSelectedMonNature
-	msgbox EmeraldChampions_Text_NatureChanged, MSGBOX_DEFAULT
-	msgbox EmeraldChampions_Text_ChangeAnotherNature, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_NatureChooseMon
-	goto EmeraldChampions_EventScript_MoveTutorMain
-
-EmeraldChampions_EventScript_NatureEgg:
-	msgbox EmeraldChampions_Text_NatureEgg, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_NatureChooseMon
-
-EmeraldChampions_EventScript_BattleSetChooseMon:
-	msgbox EmeraldChampions_Text_ChooseBattleSetMon, MSGBOX_DEFAULT
-	special ChoosePartyMon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleSetEgg
-	copyvar VAR_0x800A, VAR_0x8004
-	goto EmeraldChampions_EventScript_BattleSetChooseFormat
-
-EmeraldChampions_EventScript_BattleSetChooseFormat:
-	message EmeraldChampions_Text_ChooseBattleFormat
-	waitmessage
-	dynmultipush EmeraldChampions_Text_Doubles, EC_BATTLE_FORMAT_DOUBLES
-	dynmultipush EmeraldChampions_Text_Singles, EC_BATTLE_FORMAT_SINGLES
-	dynmultipush EmeraldChampions_Text_Back, 2
-	dynmultistack 30, 1, FALSE, 3, 0, VAR_0x8007, DYN_MULTICHOICE_CB_NONE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleSetChooseMon
-	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_BattleSetChooseMon
-	copyvar VAR_0x8007, VAR_RESULT
-	setvar VAR_0x8005, 0
-	special GetSelectedMonEmeraldChampionsBattleSetCount
-	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_BattleSetMissing
-
-EmeraldChampions_EventScript_BattleSetChooseStyle:
-	special BufferSelectedMonCurrentEmeraldChampionsBattleSet
-	goto_if_eq VAR_0x8007, EC_BATTLE_FORMAT_SINGLES, EmeraldChampions_EventScript_BattleSetChooseSinglesStyle
-	message EmeraldChampions_Text_ChooseDoublesBattleSetStyle
-	waitmessage
-	goto EmeraldChampions_EventScript_BattleSetOpenStyleList
-
-EmeraldChampions_EventScript_BattleSetChooseSinglesStyle:
-	message EmeraldChampions_Text_ChooseSinglesBattleSetStyle
-	waitmessage
-	goto EmeraldChampions_EventScript_BattleSetOpenStyleList
-
-EmeraldChampions_EventScript_BattleSetOpenStyleList:
-	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET
-	special ShowScrollableMultichoice
-	copyvar VAR_0x8006, VAR_RESULT
-	special GetSelectedMonEmeraldChampionsBattleSetCount
-	goto_if_ge VAR_0x8006, VAR_RESULT, EmeraldChampions_EventScript_BattleSetChooseFormat
-	copyvar VAR_0x8005, VAR_0x8006
-	goto EmeraldChampions_EventScript_BattleSetPreview
-
-@ Read the set out loud before the yes/no prompt: four moves, then Ability,
-@ nature and held item. Declining the prompt returns to the style list.
-EmeraldChampions_EventScript_BattleSetPreview:
-	copyvar VAR_0x8004, VAR_0x800A
-	special BufferSelectedMonEmeraldChampionsBattleSetPreview
-	msgbox gStringVar4, MSGBOX_DEFAULT
-
-EmeraldChampions_EventScript_BattleSetConfirm:
-	copyvar VAR_0x8004, VAR_0x800A
-	bufferpartymonnick 0, VAR_0x8004
-	special BufferSelectedMonEmeraldChampionsBattleSetName
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleSetConfirmMega
-	msgbox EmeraldChampions_Text_ConfirmBattleSet, MSGBOX_YESNO
-	goto EmeraldChampions_EventScript_BattleSetConfirmResult
-
-EmeraldChampions_EventScript_BattleSetConfirmMega:
-	msgbox EmeraldChampions_Text_ConfirmMegaBattleSet, MSGBOX_YESNO
-
-EmeraldChampions_EventScript_BattleSetConfirmResult:
-	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_BattleSetApply
-	goto EmeraldChampions_EventScript_BattleSetChooseStyle
-
-EmeraldChampions_EventScript_BattleSetApply:
-	special ApplySelectedMonEmeraldChampionsBattleSet
-	goto_if_eq VAR_RESULT, EC_BATTLE_SET_SPECIAL_ITEM_EQUIPPED, EmeraldChampions_EventScript_BattleSetSpecialItem
-	goto_if_eq VAR_RESULT, EC_BATTLE_SET_MEGA_STONE_HELD, EmeraldChampions_EventScript_BattleSetMegaHeldSuccess
-	goto_if_eq VAR_RESULT, EC_BATTLE_SET_MEGA, EmeraldChampions_EventScript_BattleSetMegaSuccess
-	goto_if_ne VAR_RESULT, EC_BATTLE_SET_SUCCESS, EmeraldChampions_EventScript_BattleSetMissing
-	playfanfare MUS_LEVEL_UP
-	msgbox EmeraldChampions_Text_BattleSetSuccess, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_PrepareAnotherBattleSet
-
-EmeraldChampions_EventScript_BattleSetMegaSuccess:
-	playfanfare MUS_LEVEL_UP
-	msgbox EmeraldChampions_Text_MegaBattleSetSuccess, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_PrepareAnotherBattleSet
-
-EmeraldChampions_EventScript_BattleSetMegaHeldSuccess:
-	playfanfare MUS_LEVEL_UP
-	msgbox EmeraldChampions_Text_MegaBattleSetHeldSuccess, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_PrepareAnotherBattleSet
-
-EmeraldChampions_EventScript_PrepareAnotherBattleSet:
-	msgbox EmeraldChampions_Text_PrepareAnotherBattleSet, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_BattleSetChooseMon
-	goto EmeraldChampions_EventScript_MoveTutorMain
-
-EmeraldChampions_EventScript_BattleSetEgg:
-	msgbox EmeraldChampions_Text_BattleSetEgg, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_BattleSetChooseMon
-
-EmeraldChampions_EventScript_BattleSetMissing:
-	msgbox EmeraldChampions_Text_BattleSetMissing, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_BattleSetChooseFormat
-
-EmeraldChampions_EventScript_BattleSetSpecialItem:
-	msgbox EmeraldChampions_Text_BattleSetSpecialItem, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_BattleSetChooseMon
-
 EmeraldChampions_EventScript_MoveTutorExit:
 	msgbox EmeraldChampions_Text_MoveTutorGoodbye, MSGBOX_DEFAULT
 	releaseall
@@ -329,21 +79,25 @@ Common_EventScript_EmeraldChampionsBattleVendor::
 	faceplayer
 	setvar VAR_0x8008, 0
 	setvar VAR_0x8009, 0
-	checkitem ITEM_BERRY_POUCH
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorStarterKit
-	additem ITEM_BERRY_POUCH
 
 @ The five held items a competitive set cannot function without are handed over
 @ once, free. Everything else on his shelves is bought.
 EmeraldChampions_EventScript_BattleVendorStarterKit:
 	goto_if_set FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS, EmeraldChampions_EventScript_BattleVendorMain
-	setflag FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS
-	additem ITEM_CHOICE_BAND
-	additem ITEM_CHOICE_SPECS
-	additem ITEM_CHOICE_SCARF
-	additem ITEM_FOCUS_SASH
-	additem ITEM_EVIOLITE
+	special GiveEmeraldChampionsStarterBattleItems
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_StarterItemsBagFull
 	msgbox EmeraldChampions_Text_BattleVendorStarterKit, MSGBOX_DEFAULT
+
+	goto EmeraldChampions_EventScript_BattleVendorMain
+
+EmeraldChampions_EventScript_StarterItemsBagFull:
+	msgbox EmeraldChampions_Text_StarterItemsBagFull, MSGBOX_DEFAULT
+	release
+	end
+
+EmeraldChampions_Text_StarterItemsBagFull:
+	.string "Make room in your Bag and come back.\n"
+	.string "I'll keep the rest of your kit here.$"
 
 EmeraldChampions_EventScript_BattleVendorMain:
 	@ Let the prior native list window finish clearing before another menu can
@@ -371,9 +125,6 @@ EmeraldChampions_EventScript_BattleVendorCompleteArchive:
 	goto EmeraldChampions_EventScript_BattleVendorExit
 
 EmeraldChampions_EventScript_BattleItemCategories:
-	checkitem ITEM_BERRY_POUCH
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleItemCategoriesReady
-	additem ITEM_BERRY_POUCH
 EmeraldChampions_EventScript_BattleItemCategoriesReady:
 	delay 1
 	message EmeraldChampions_Text_BattleItemCategoryPrompt
@@ -387,7 +138,6 @@ EmeraldChampions_EventScript_BattleItemCategoryChoices:
 	dynmultipush EmeraldChampions_Text_GemItems, EC_BATTLE_ITEM_CATEGORY_GEM
 	dynmultipush EmeraldChampions_Text_SpeciesItems, EC_BATTLE_ITEM_CATEGORY_SPECIES
 	dynmultipush EmeraldChampions_Text_Berries, EC_BATTLE_ITEM_CATEGORY_BERRIES
-	dynmultipush EmeraldChampions_Text_HarvestPouch, 7
 	dynmultipush EmeraldChampions_Text_Back, 8
 	@ Four visible rows keep the lower scroll arrow comfortably above the
 	@ native message box while preserving the category cursor between visits.
@@ -395,7 +145,6 @@ EmeraldChampions_EventScript_BattleItemCategoryChoices:
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleItemCategoryBack
 	copyvar VAR_0x8008, VAR_RESULT
-	goto_if_eq VAR_RESULT, 7, EmeraldChampions_EventScript_VendorHarvest
 	goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT, EmeraldChampions_EventScript_BattleItemCategoryBack
 	copyvar VAR_0x8004, VAR_RESULT
 	special OpenEmeraldChampionsBattleItemMart
@@ -420,27 +169,27 @@ EmeraldChampions_Text_BattleVendorStarterKit:
 	.string "A CHOICE BAND, CHOICE SPECS and\n"
 	.string "CHOICE SCARF, a FOCUS SASH and\l"
 	.string "an EVIOLITE.\p"
-	.string "No set works without one of them.\n"
+	.string "These will help you get started.\n"
 	.string "The rest you buy like anyone else.$"
 
 EmeraldChampions_Text_BattleVendorWelcome:
-	.string "Competitive held items are free here.\p"
-	.string "Take as many as your teams need!\p"
+	.string "I stock the held items you discover.\p"
+	.string "Buy extra copies for your team here.\p"
 	.string "Which kind of held item do you need?$"
 
 EmeraldChampions_Text_BattleVendorCompleteWelcome:
 	.string "Your RING opens the Form Tools archive.\n"
-	.string "These form-changing tools are free!\p"
+	.string "Tools are free; held equipment is sold\lafter you catch its Pokémon.\p"
 	.string "Evolution specialists sell stones and\n"
 	.string "devices. LILYCOVE has the full range.\p"
 	.string "For Mega Stones, explore HOENN and\n"
 	.string "get to know the people who live here.$"
 
-EmeraldChampions_Text_HeldItems:
-	.string "Held Items$"
-
 EmeraldChampions_Text_EvolutionArchive:
 	.string "Form Tools$"
+
+EmeraldChampions_Text_HeldItems:
+	.string "Held Items$"
 
 EmeraldChampions_Text_BattleItemCategoryPrompt:
 	.string "Which kind of held item do you need?$"
@@ -463,19 +212,6 @@ EmeraldChampions_Text_GemItems:
 EmeraldChampions_Text_SpeciesItems:
 	.string "Species Items$"
 
-EmeraldChampions_EventScript_VendorHarvest:
-	setvar VAR_0x8009, 0
-	call EmeraldChampions_EventScript_HarvestMenu
-	goto EmeraldChampions_EventScript_BattleItemCategories
-
-EmeraldChampions_Text_Berries:
-	.string "Berries$"
-EmeraldChampions_Text_HarvestPouch:
-	.string "Harvest Pouch$"
-
-EmeraldChampions_Text_Back:
-	.string "Back$"
-
 EmeraldChampions_Text_MoveTutorHowCanHelp:
 	.string "How can I help prepare your Pokémon?$"
 
@@ -484,12 +220,6 @@ EmeraldChampions_Text_MoveTutorNoMachines:
 	.string "more.\p"
 	.string "Bring me any Pokémon and I'll teach\n"
 	.string "it anything it can legally learn.$"
-
-EmeraldChampions_Text_BuildBattleSet:
-	.string "Build a Battle Set$"
-
-EmeraldChampions_Text_EditEvs:
-	.string "Edit Stats$"
 
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
@@ -502,82 +232,6 @@ EmeraldChampions_Text_OtherServicesPrompt:
 
 EmeraldChampions_Text_Exit:
 	.string "Exit$"
-
-EmeraldChampions_Text_ChooseBattleSetMon:
-	.string "Choose a Pokémon for a free set.\n"
-	.string "You'll review it before applying.$"
-
-EmeraldChampions_Text_ChooseBattleFormat:
-	.string "Which battle format are you\n"
-	.string "preparing for?$"
-
-EmeraldChampions_Text_Doubles:
-	.string "Doubles$"
-
-EmeraldChampions_Text_Singles:
-	.string "Singles$"
-
-EmeraldChampions_Text_ChooseEvMon:
-	.string "Up to 252 EVs per stat, 510 total.\n"
-	.string "Whose stats should we adjust?$"
-
-EmeraldChampions_Text_ResetEvs:
-	.string "Reset all six EVs to zero?$"
-
-EmeraldChampions_Text_EvsReset:
-	.string "All EVs were reset.\n"
-	.string "You can now build a new spread.$"
-
-EmeraldChampions_Text_EvEgg:
-	.string "An Egg's stats can't be edited.$"
-
-EmeraldChampions_Text_EvGoodbye:
-	.string "Come back whenever you want to\n"
-	.string "customize another spread.$"
-
-EmeraldChampions_Text_ChooseDoublesBattleSetStyle:
-	.string "Which Doubles set should I build?$"
-
-EmeraldChampions_Text_ChooseSinglesBattleSetStyle:
-	.string "Which Singles set should I build?$"
-
-EmeraldChampions_Text_ConfirmBattleSet:
-	.string "Apply {STR_VAR_2} to\n"
-	.string "{STR_VAR_1}?$"
-
-EmeraldChampions_Text_ConfirmMegaBattleSet:
-	.string "Required item:\n"
-	.string "{STR_VAR_3}.\p"
-	.string "Apply this set without it?$"
-
-EmeraldChampions_Text_BattleSetSuccess:
-	.string "{STR_VAR_1}'s set is ready!\n"
-	.string "Its full build was updated.$"
-
-EmeraldChampions_Text_MegaBattleSetSuccess:
-	.string "{STR_VAR_1}'s transformation\n"
-	.string "set is ready!\p"
-	.string "No item was supplied.\n"
-	.string "Required: {STR_VAR_3}.$"
-
-EmeraldChampions_Text_MegaBattleSetHeldSuccess:
-	.string "{STR_VAR_1}'s transformation\n"
-	.string "set is ready!\p"
-	.string "It kept its {STR_VAR_3}.$"
-
-EmeraldChampions_Text_PrepareAnotherBattleSet:
-	.string "Prepare another Pokémon?$"
-
-EmeraldChampions_Text_BattleSetEgg:
-	.string "An Egg can't use a battle set.$"
-
-EmeraldChampions_Text_BattleSetMissing:
-	.string "I don't have a finished battle set\n"
-	.string "for that Pokémon yet.$"
-
-EmeraldChampions_Text_BattleSetSpecialItem:
-	.string "I won't discard that special item.\p"
-	.string "Remove it before changing sets.$"
 
 EmeraldChampions_Text_MoveTutorGoodbye:
 	.string "Come back whenever you want to\n"
@@ -683,25 +337,6 @@ EmeraldChampions_Text_StarterRegionGalar:
 EmeraldChampions_Text_StarterRegionPaldea:
 	.string "Paldea$"
 
-EmeraldChampions_Text_ChangeNature:
-	.string "Change Nature$"
-
-EmeraldChampions_Text_ChooseNatureMon:
-	.string "Whose Nature should I change?$"
-
-EmeraldChampions_Text_CurrentNature:
-	.string "Nature: {STR_VAR_2}.\nWhich Nature would you like?$"
-
-EmeraldChampions_Text_NatureChanged:
-	.string "{STR_VAR_1}'s Nature is now\n{STR_VAR_2}. Stats recalculated.$"
-
-EmeraldChampions_Text_ChangeAnotherNature:
-	.string "Change another Nature?$"
-
-EmeraldChampions_Text_NatureEgg:
-	.string "An Egg's Nature can't be changed.$"
-
-@ Emerald Champions: the Repel Spray ran out of steps (see UpdateRepelCounter).
 EmeraldChampions_EventScript_RepelSprayWoreOff::
 	lockall
 	msgbox EmeraldChampions_Text_RepelSprayWoreOffUseAgain, MSGBOX_YESNO
@@ -736,76 +371,6 @@ EmeraldChampions_Text_RepelSprayMistedAgain:
 
 
 @ These continuations run under their caller's lock and return to that caller.
-Common_EventScript_EmeraldChampionsFormGift::
-	copyvar VAR_0x8007, VAR_0x8004
-	special BufferEmeraldChampionsFormGift
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_ReturnService
-	call_if_eq VAR_0x8007, 2, EmeraldChampions_EventScript_BattleBondInfo
-	call_if_eq VAR_0x8007, 3, EmeraldChampions_EventScript_PartnerInfo
-	call_if_eq VAR_0x8007, 4, EmeraldChampions_EventScript_PartnerInfo
-	call_if_eq VAR_0x8007, 5, EmeraldChampions_EventScript_KubfuInfo
-	call_if_eq VAR_0x8007, 6, EmeraldChampions_EventScript_CosmogInfo
-	msgbox EmeraldChampions_Text_FormGiftOffer, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_ReturnService
-	copyvar VAR_0x8004, VAR_0x8007
-	special GiveEmeraldChampionsFormGift
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, EmeraldChampions_EventScript_FormGiftPC
-	goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, EmeraldChampions_EventScript_FormGiftFull
-	playfanfare MUS_OBTAIN_ITEM
-	waitfanfare
-	msgbox EmeraldChampions_Text_FormGiftParty, MSGBOX_DEFAULT
-	return
-
-EmeraldChampions_EventScript_FormGiftPC:
-	playfanfare MUS_OBTAIN_ITEM
-	waitfanfare
-	msgbox EmeraldChampions_Text_FormGiftPC, MSGBOX_DEFAULT
-	return
-
-EmeraldChampions_EventScript_FormGiftFull:
-	msgbox EmeraldChampions_Text_FormGiftFull, MSGBOX_DEFAULT
-	return
-
-Common_EventScript_EmeraldChampionsResearchPartners::
-	special BuildEmeraldChampionsResearchPartnerChoices
-	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_ReturnService
-	message EmeraldChampions_Text_ResearchPartners
-	waitmessage
-	dynmultipush EmeraldChampions_Text_Back, 7
-	dynmultistack 30, 1, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	goto_if_ge VAR_RESULT, 7, EmeraldChampions_EventScript_ReturnService
-	copyvar VAR_0x8004, VAR_RESULT
-	call Common_EventScript_EmeraldChampionsFormGift
-	goto Common_EventScript_EmeraldChampionsResearchPartners
-
-Common_EventScript_EmeraldChampionsStylistServices::
-	message EmeraldChampions_Text_StylistServices
-	waitmessage
-	dynmultipush EmeraldChampions_Text_Appearance, 0
-	dynmultipush EmeraldChampions_Text_CosplayPartner, 1
-	dynmultipush EmeraldChampions_Text_CostumeLessons, 2
-	dynmultipush EmeraldChampions_Text_Back, 3
-	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	goto_if_ge VAR_RESULT, 3, EmeraldChampions_EventScript_ReturnService
-	goto_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_CosplayGift
-	setvar VAR_0x8006, 0
-	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_StylistAppearance
-	setvar VAR_0x8006, 1
-	call EmeraldChampions_EventScript_FormChooseMon
-	goto Common_EventScript_EmeraldChampionsStylistServices
-
-EmeraldChampions_EventScript_StylistAppearance:
-	msgbox EmeraldChampions_Text_AppearanceInfo, MSGBOX_DEFAULT
-	call EmeraldChampions_EventScript_FormChooseMon
-	goto Common_EventScript_EmeraldChampionsStylistServices
-
-EmeraldChampions_EventScript_CosplayGift:
-	setvar VAR_0x8004, 1
-	call Common_EventScript_EmeraldChampionsFormGift
-	goto Common_EventScript_EmeraldChampionsStylistServices
-
 Common_EventScript_EmeraldChampionsDeoxysResearch::
 	goto_if_unset FLAG_EC_REPORT_C43_COMPLETE, EmeraldChampions_EventScript_ReturnService
 	msgbox EmeraldChampions_Text_DeoxysResearch, MSGBOX_YESNO
@@ -996,21 +561,6 @@ EmeraldChampions_Text_CenterLocalGuide:
 	.string "I listen for stories about rare\n"
 	.string "POKéMON around here. Let me tell\l"
 	.string "you where to look!$"
-
-EmeraldChampions_Text_TrainingType:
-	.string "Choose EV training or IV tuning.$"
-EmeraldChampions_Text_EvTraining:
-	.string "EV Training$"
-EmeraldChampions_Text_IvTraining:
-	.string "IV Tuning$"
-EmeraldChampions_Text_ChooseIvMon:
-	.string "IVs start at 31. You can lower them\n"
-	.string "deliberately for your strategy.\p"
-	.string "Whose stats should we adjust?$"
-EmeraldChampions_Text_ResetIvs:
-	.string "Restore all six IVs to 31?$"
-EmeraldChampions_Text_IvsReset:
-	.string "All IVs were restored to 31.$"
 
 EmeraldChampions_EventScript_UseHarvestPouch::
 	lockall
@@ -1647,3 +1197,9 @@ EmeraldChampions_EventScript_MintBerryHarvest::
 	special MintEmeraldChampionsHarvestCredit
 EmeraldChampions_EventScript_MintBerryHarvestDone:
 	return
+
+EmeraldChampions_Text_Back:
+	.string "Back$"
+
+EmeraldChampions_Text_Berries:
+	.string "Berries$"

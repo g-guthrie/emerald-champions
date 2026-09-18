@@ -44,35 +44,7 @@ EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace: @ 8228A42
 EverGrandeCity_ChampionsRoom_EventScript_Wallace:: @ 8228A45
 	playbgm MUS_ENCOUNTER_CHAMPION, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_IntroSpeech, MSGBOX_DEFAULT
-@ Emerald Champions: Inclement's Elite Four rematch ladder (singles/doubles x
-@ legendaries) is removed -- this is a one-and-done campaign. The dead dispatch
-@ below is kept only so its labels stay defined; it is unreachable.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_WallacesRoom_EventScript_WallaceRematch
-	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat
-	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
-	end
-
-EverGrandeCity_WallacesRoom_EventScript_WallaceRematch::
-	goto EverGrandeCity_WallacesRoom_EventScript_WallaceDoublesLegends
-	end
-
-EverGrandeCity_WallacesRoom_EventScript_WallaceSingles::
-	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat
-	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
-	end
-
-EverGrandeCity_WallacesRoom_EventScript_WallaceSinglesLegends::
-	trainerbattle_no_intro TRAINER_WALLACE_LEGENDS, EverGrandeCity_ChampionsRoom_Text_Defeat
-	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
-	end
-
-EverGrandeCity_WallacesRoom_EventScript_WallaceDoubles::
-	trainerbattle_no_intro TRAINER_WALLACE_DOUBLES, EverGrandeCity_ChampionsRoom_Text_Defeat
-	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
-	end
-
-EverGrandeCity_WallacesRoom_EventScript_WallaceDoublesLegends::
-	trainerbattle_no_intro TRAINER_WALLACE_DOUBLES_LEGENDS, EverGrandeCity_ChampionsRoom_Text_Defeat
+	trainerbattle_no_intro_double TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
 	end
 
@@ -375,4 +347,3 @@ EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations: @ 82294F5
 	.string "It can't be helped if that's the rule.\p"
 	.string "{PLAYER}, way to go!\n"
 	.string "Congratulations!$"
-

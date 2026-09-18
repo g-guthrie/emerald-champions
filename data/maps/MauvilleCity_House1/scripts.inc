@@ -6,7 +6,6 @@ MauvilleCity_House1_EventScript_RockSmashDude:: @ 820F976
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM06, MauvilleCity_House1_EventScript_ReceivedRockSmash
 	msgbox MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
 	setflag FLAG_RECEIVED_HM06
 	msgbox MauvilleCity_House1_Text_ExplainRockSmash, MSGBOX_DEFAULT
 	release
@@ -18,25 +17,18 @@ MauvilleCity_House1_EventScript_ReceivedRockSmash:: @ 820F9A5
 	end
 
 MauvilleCity_House1_Text_ImRockSmashDudeTakeThis: @ 820F9AF
-	.string "Woohoo!\p"
-	.string "I hear people call me the Rock Smash\n"
-	.string "Guy, but I find that sort of degrading.\p"
-	.string "I think I deserve a bit more respect,\n"
-	.string "like maybe the Rock Smash Dude.\p"
-	.string "Woohoo!\p"
-	.string "Anyways, your Pokémon look pretty\n"
-	.string "strong.\p"
-	.string "I like that!\n"
-	.string "Here, take this Hidden Machine!$"
+	.string "Woohoo! Call me the Rock Smash\n"
+	.string "Dude!\p"
+	.string "Your team looks strong. I\n"
+	.string "authorize you to use Rock Smash!$"
 
 MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
-	.string "That HM contains Rock Smash.\p"
-	.string "If you come across large boulders\n"
-	.string "that block your path…\p"
-	.string "Well, use that HM move and smash\n"
-	.string "them right out of your way!\p"
-	.string "Yes, sir! Smash rocks aside, I say!\n"
-	.string "Woohoo!$"
+	.string "Earn the Dynamo Badge, then\n"
+	.string "approach a cracked rock with a\l"
+	.string "partner that can learn Rock\l"
+	.string "Smash.\p"
+	.string "You can break it without\n"
+	.string "teaching the move. Woohoo!$"
 
 MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock: @ 820FB67
 	.string "Oh, yes, if you smash a rock, a Pokémon\n"

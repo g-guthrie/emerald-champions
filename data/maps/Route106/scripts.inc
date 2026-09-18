@@ -6,17 +6,17 @@ Route106_EventScript_TrainerTipsSign:: @ 81EE48A
 	end
 
 Route106_EventScript_Douglas:: @ 81EE493
-	trainerbattle_single TRAINER_DOUGLAS, Route106_Text_DouglasIntro, Route106_Text_DouglasDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route106_Text_DouglasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route106_EventScript_Kyla:: @ 81EE4AA
-	trainerbattle_single TRAINER_KYLA, Route106_Text_KylaIntro, Route106_Text_KylaDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route106_Text_KylaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route106_EventScript_Elliot:: @ 81EE4C1
-	trainerbattle_single TRAINER_ELLIOT_1, Route106_Text_ElliotIntro, Route106_Text_ElliotDefeated, Route106_EventScript_ElliotRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_ELLIOT_1, Route106_Text_ElliotIntro, Route106_Text_ElliotDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route106_EventScript_ElliotRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route106_EventScript_ElliotRematch
@@ -33,12 +33,12 @@ Route106_EventScript_ElliotRegisterMatchCallAfterBattle:: @ 81EE4ED
 	end
 
 Route106_EventScript_ElliotRematch:: @ 81EE50C
-	trainerbattle_rematch TRAINER_ELLIOT_1, Route106_Text_ElliotRematchIntro, Route106_Text_ElliotRematchDefeated
+	@ This retired encounter has no campaign battle.
 	msgbox Route106_Text_ElliotRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route106_EventScript_Ned:: @ 81EE523
-	trainerbattle_single TRAINER_NED, Route106_Text_NedIntro, Route106_Text_NedDefeated
+	trainerbattle_double TRAINER_NED, Route106_Text_NedIntro, Route106_Text_NedDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route106_Text_NedPostBattle, MSGBOX_AUTOCLOSE
 	end
 

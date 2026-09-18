@@ -7,6 +7,9 @@ void ClearDailyFlags(void);
 void DisableNationalPokedex(void);
 void EnableNationalPokedex(void);
 bool32 IsNationalPokedexEnabled(void);
+bool32 IsMysteryEventEnabled(void);
+bool32 IsMysteryGiftEnabled(void);
+void ClearMysteryGiftFlags(void);
 void ClearMysteryGiftVars(void);
 void DisableResetRTC(void);
 void EnableResetRTC(void);
@@ -38,8 +41,6 @@ extern u16 gSpecialVar_LastTalked;
 extern u16 gSpecialVar_Facing;
 extern u16 gSpecialVar_MonBoxId;
 extern u16 gSpecialVar_MonBoxPos;
-extern u16 gSpecialVar_Unused_0x8010;
-extern u16 gSpecialVar_Unused_0x8011;
 extern u16 gSpecialVar_Unused_0x8014;
 
 extern const u16 gBadgeFlags[NUM_BADGES];

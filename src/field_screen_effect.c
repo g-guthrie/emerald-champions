@@ -40,6 +40,7 @@
 #include "constants/heal_locations.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "trainer_hill.h"
 #include "fldeff.h"
 #include "battle.h"
 
@@ -312,7 +313,8 @@ void FieldCB_WarpExitFadeFromWhite(void)
 
 void FieldCB_WarpExitFadeFromBlack(void)
 {
-    Overworld_PlaySpecialMapMusic();
+    if (!OnTrainerHillEReaderChallengeFloor()) // always false
+        Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
     SetUpWarpExitTask();
     LockPlayerFieldControls();
@@ -1074,6 +1076,12 @@ void WriteFlashScanlineEffectBuffer(u8 flashLevel)
         SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sFlashLevelToRadius[flashLevel]);
         CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
     }
+}
+
+void WriteBattlePyramidViewScanlineEffectBuffer(void)
+{
+    SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, gSaveBlock2Ptr->frontier.pyramidLightRadius);
+    CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
 }
 
 static void Task_SpinEnterWarp(u8 taskId)

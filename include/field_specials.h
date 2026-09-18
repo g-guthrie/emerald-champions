@@ -42,10 +42,7 @@ void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
 void GiveEmeraldChampionsPreparedPokemon(void);
-void BufferSelectedMonEmeraldChampionsTrainingSummary(void);
-void BufferSelectedMonEmeraldChampionsTrainingDetail(void);
-void AdjustSelectedMonEmeraldChampionsTraining(void);
-void ResetSelectedMonEmeraldChampionsTraining(void);
+void GiveEmeraldChampionsStarterBattleItems(void);
 #if EC_HEADLESS_FIXTURES
 bool32 IsScrollableMultichoiceHeadlessActive(u16 menu);
 #endif
@@ -55,9 +52,6 @@ u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
 #endif
 
 
-void BufferEmeraldChampionsFormGift(void);
-void BuildEmeraldChampionsResearchPartnerChoices(void);
-void GiveEmeraldChampionsFormGift(void);
 void BuildEmeraldChampionsFormChoices(void);
 void PrepareEmeraldChampionsFormSelection(void);
 void BufferEmeraldChampionsFormPreview(void);
