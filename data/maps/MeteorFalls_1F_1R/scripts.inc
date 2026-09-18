@@ -155,7 +155,9 @@ MeteorFalls_1F_1R_EventScript_MultiMay::
 	choose_mons
     compare VAR_RESULT, 0
     call_if_eq MeteorFalls_1F_1R_EventScript_ChooseMons
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, MeteorFalls_1F_1R_EventScript_MayBattleTreecko
 	case 1, MeteorFalls_1F_1R_EventScript_MayBattleTorchic
 	case 2, MeteorFalls_1F_1R_EventScript_MayBattleMudkip
@@ -173,7 +175,9 @@ MeteorFalls_1F_1R_EventScript_MultiBrendan::
 	choose_mons
     compare VAR_RESULT, 0
     call_if_eq MeteorFalls_1F_1R_EventScript_ChooseMons
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, MeteorFalls_1F_1R_EventScript_BrendanBattleTreecko
 	case 1, MeteorFalls_1F_1R_EventScript_BrendanBattleTorchic
 	case 2, MeteorFalls_1F_1R_EventScript_BrendanBattleMudkip

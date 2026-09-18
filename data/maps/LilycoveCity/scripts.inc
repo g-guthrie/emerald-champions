@@ -247,7 +247,9 @@ LilycoveCity_EventScript_May:: @ 81E2DF8
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_DeclineMayBattle
 	msgbox LilycoveCity_Text_MayWontBeBeaten, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, LilycoveCity_EventScript_BattleMayTreecko
 	case 1, LilycoveCity_EventScript_BattleMayTorchic
 	case 2, LilycoveCity_EventScript_BattleMayMudkip
@@ -276,7 +278,9 @@ LilycoveCity_EventScript_Brendan:: @ 81E2E6B
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_DeclineBrendanBattle
 	msgbox LilycoveCity_Text_BrendanWontBeBeaten, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, LilycoveCity_EventScript_BattleBrendanTreecko
 	case 1, LilycoveCity_EventScript_BattleBrendanTorchic
 	case 2, LilycoveCity_EventScript_BattleBrendanMudkip

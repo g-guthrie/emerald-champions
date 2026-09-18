@@ -152,7 +152,9 @@ Route104_EventScript_MayAskToBattle:: @ 81ECDD0
 
 Route104_EventScript_BattleMay:: @ 81ECDED
 	msgbox Route104_Text_MayIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route104_EventScript_BattleMayTreecko
 	case 1, Route104_EventScript_BattleMayTorchic
 	case 2, Route104_EventScript_BattleMayMudkip
@@ -227,7 +229,9 @@ Route104_EventScript_BrendanAskToBattle:: @ 81ECEEC
 
 Route104_EventScript_BattleBrendan:: @ 81ECF09
 	msgbox Route104_Text_BrendanIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route104_EventScript_BattleBrendanTreecko
 	case 1, Route104_EventScript_BattleBrendanTorchic
 	case 2, Route104_EventScript_BattleBrendanMudkip

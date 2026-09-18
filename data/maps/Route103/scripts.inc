@@ -78,7 +78,9 @@ Route103_EventScript_RivalMayRematch::
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_MayRematch, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route103_EventScript_StartMayRematchTreecko
 	case 1, Route103_EventScript_StartMayRematchTorchic
 	case 2, Route103_EventScript_StartMayRematchMudkip
@@ -94,7 +96,9 @@ Route103_EventScript_RivalBrendanRematch:: @ 81EC434
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_BrendanRematch, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route103_EventScript_StartBrendanRematchTreecko
 	case 1, Route103_EventScript_StartBrendanRematchTorchic
 	case 2, Route103_EventScript_StartBrendanRematchMudkip

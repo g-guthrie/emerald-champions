@@ -426,7 +426,9 @@ Route110_EventScript_PlayBrendanMusic:: @ 81EF7E6
 
 Route110_EventScript_MayBattle:: @ 81EF7EB
 	msgbox Route110_Text_MayLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route110_EventScript_MayBattleTreecko
 	case 1, Route110_EventScript_MayBattleTorchic
 	case 2, Route110_EventScript_MayBattleMudkip
@@ -456,7 +458,9 @@ Route110_EventScript_MayDefeated:: @ 81EF84A
 
 Route110_EventScript_BrendanBattle:: @ 81EF865
 	msgbox Route110_Text_BrendanLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route110_EventScript_BrendanBattleTreecko
 	case 1, Route110_EventScript_BrendanBattleTorchic
 	case 2, Route110_EventScript_BrendanBattleMudkip

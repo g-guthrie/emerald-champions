@@ -885,7 +885,9 @@ RustboroCity_EventScript_MayAskToBattle:: @ 81E1070
 
 RustboroCity_EventScript_BattleMay:: @ 81E1092
 	msgbox RustboroCity_Text_MayImNotGoingToLose, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, RustboroCity_EventScript_BattleMayTreecko
 	case 1, RustboroCity_EventScript_BattleMayTorchic
 	case 2, RustboroCity_EventScript_BattleMayMudkip
@@ -954,7 +956,9 @@ RustboroCity_EventScript_BrendanAskToBattle:: @ 81E1174
 
 RustboroCity_EventScript_BattleBrendan:: @ 81E1191
 	msgbox RustboroCity_Text_BrendanIWontGoEasy, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	@ The rival keeps the starter the player left behind (the player takes two).
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, RustboroCity_EventScript_BattleBrendanTreecko
 	case 1, RustboroCity_EventScript_BattleBrendanTorchic
 	case 2, RustboroCity_EventScript_BattleBrendanMudkip
