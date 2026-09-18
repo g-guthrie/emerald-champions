@@ -223,3 +223,30 @@ SootopolisCity_Text_OhDoesntMatter:
 	.string "Oh…\n"
 	.string "It doesn't matter…\p"
 	.string "There's so much that I want to know…$"
+
+@ ---------------------------------------------------------------------------
+@ Inclement Emerald Berry Master's wife dialogue, restored because the
+@ Inclement Route 123 Berry Master's House scripts reference these 4 symbols.
+@ Additive only: the 37 symbols this file already shared with the donor keep
+@ their existing Emerald Champions text and were NOT taken from the donor.
+@ ---------------------------------------------------------------------------
+
+Route123_BerryMastersHouse_Text_HeardAGoodSayingLately: @ 82A74E6
+	.string "The way my husband grows Berries,\n"
+	.string "oh, he's the best in the world.\p"
+	.string "He makes me proud, that he does.\p"
+	.string "Incidentally, child, have you heard\n"
+	.string "a good saying lately?$"
+
+Route123_BerryMastersHouse_Text_InspirationalTakeThis: @ 82A7583
+	.string "Ah! What a remarkable saying!\n"
+	.string "Inspirational, it is!\p"
+	.string "I want you to have this.$"
+
+Route123_BerryMastersHouse_Text_GoodSayingTakeThis: @ 82A75D0
+	.string "Oh! A good saying it is.\n"
+	.string "You're quite remarkable.\p"
+	.string "I want you to have this.$"
+
+Route123_BerryMastersHouse_Text_Ah: @ 82A7682
+	.string "Ah…$"

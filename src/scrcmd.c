@@ -2438,10 +2438,10 @@ bool8 ScrCmd_cleartrainerflag(struct ScriptContext *ctx)
 bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 {
     enum Species species = ScriptReadHalfword(ctx);
-    u8 level = ScriptReadByte(ctx);
+    u16 level = VarGet(ScriptReadHalfword(ctx));
     enum Item item = ScriptReadHalfword(ctx);
     enum Species species2 = ScriptReadHalfword(ctx);
-    u8 level2 = ScriptReadByte(ctx);
+    u16 level2 = VarGet(ScriptReadHalfword(ctx));
     enum Item item2 = ScriptReadHalfword(ctx);
 
     Script_RequestEffects(SCREFF_V1);
@@ -3325,4 +3325,61 @@ bool8 ScrCmd_normalmsg(struct ScriptContext *ctx)
 
     gMsgIsSignPost = FALSE;
     return FALSE;
+}
+
+// Emerald Champions: restored from Inclement Emerald, where these were script
+// commands 0xe3 and 0xe4. Both of those opcodes are already taken in this
+// engine (SCR_OP_DYNMULTICHOICE and SCR_OP_DYNMULTIPUSH), so rather than
+// renumber the command table they are reached through callnative from the
+// checkPartyHasSpecies / isChosenMonSpecies macros in asm/macros/event.inc.
+//
+// The donor compared the party member's National Dex number against the raw
+// species constant, which only lines up in its own species numbering. Both
+// sides are converted here instead, which is what the donor's comment
+// describes - "a certain species OR one of its forms that shares the same
+// national dex number" - and is correct whatever the species ids happen to be.
+
+// Sets VAR_RESULT to TRUE if the player's party holds the given species, or any
+// alternate form sharing its National Dex number.
+void NativeFunc_CheckPartyHasSpecies(struct ScriptContext *ctx)
+{
+    enum Species wantedSpecies = ScriptReadHalfword(ctx);
+    enum NationalDexOrder wantedDexNum = SpeciesToNationalPokedexNum(wantedSpecies);
+    u32 partyCount = CalculatePlayerPartyCount();
+
+    Script_RequestEffects(SCREFF_V1);
+
+    gSpecialVar_Result = FALSE;
+    if (wantedDexNum == NATIONAL_DEX_NONE)
+        return;
+
+    for (u32 i = 0; i < partyCount; i++)
+    {
+        enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);
+
+        if (SpeciesToNationalPokedexNum(species) == wantedDexNum)
+        {
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
+}
+
+// Sets VAR_RESULT to TRUE if the party member chosen into VAR_0x8004 is the
+// given species, or any alternate form sharing its National Dex number.
+void NativeFunc_IsChosenMonSpecies(struct ScriptContext *ctx)
+{
+    enum Species wantedSpecies = ScriptReadHalfword(ctx);
+    enum NationalDexOrder wantedDexNum = SpeciesToNationalPokedexNum(wantedSpecies);
+
+    Script_RequestEffects(SCREFF_V1);
+
+    gSpecialVar_Result = FALSE;
+    if (wantedDexNum == NATIONAL_DEX_NONE || gSpecialVar_0x8004 >= PARTY_SIZE)
+        return;
+
+    // MON_DATA_SPECIES_OR_EGG reports SPECIES_EGG for an egg, which has no
+    // National Dex number, so an egg can never match.
+    if (SpeciesToNationalPokedexNum(GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG)) == wantedDexNum)
+        gSpecialVar_Result = TRUE;
 }

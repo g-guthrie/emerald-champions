@@ -75,4 +75,30 @@ void CheckEmeraldChampionsRedundantPurchase(void);
 void ConvertEmeraldChampionsFiniteReward(void);
 void ClaimEmeraldChampionsSootMilestone(void);
 
+bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item);
+void EmeraldChampions_UnlockBattleItem(enum Item item);
+
+
+// Specials restored for the Inclement Emerald map scripts.
+void PutZigzagoonInPlayerParty(void);
+bool8 IsItemFossil(void);
+bool8 DoesPlayerHaveFossil(void);
+void FossilToSpecies(void);
+void Bag_ChooseItem(void);
+void Bag_ChoosePokeBall(void);
+void ChangePokeBall(void);
+void ChangeMonSpecies(void);
+bool8 CheckSpeciesInParty(void);
+bool8 FoundBlackGlasses(void);
+bool8 CheckMagikarpBattle(void);
+void GetStaticEncounterLevel(void);
+void CreateEventLegalEnemyMon(void);
+void SetSpeciesAndEggMove(void);
+void SetGiftEggMove(void);
+bool8 LeadMonHasEffortRibbon(void);
+void GiveLeadMonEffortRibbon(void);
+bool8 GetDiancieFriendshipScore(void);
+u8 CountPlayerMuseumPaintings(void);
+bool32 IsTrainerRegistered(void);
+
 #endif // GUARD_FIELD_SPECIALS_H

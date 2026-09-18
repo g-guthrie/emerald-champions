@@ -1,115 +1,107 @@
-Route111_WinstrateFamilysHouse_MapScripts::
+.set LOCALID_VIVI, 1
+.set LOCALID_VICTOR, 2
+.set LOCALID_VICTORIA, 3
+.set LOCALID_VICKY, 4
+
+Route111_WinstrateFamilysHouse_MapScripts:: @ 822A48C
 	.byte 0
 
-Route111_WinstrateFamilysHouse_EventScript_Victor::
+Route111_WinstrateFamilysHouse_EventScript_Victor:: @ 822A48D
 	lock
 	faceplayer
-	setvar VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VICTOR
+	setvar VAR_0x8008, LOCALID_VICTOR
 	msgbox Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_Victoria::
+Route111_WinstrateFamilysHouse_EventScript_Victoria:: @ 822A4A2
 	lock
 	faceplayer
-	setvar VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VICTORIA
-	goto_if_set FLAG_EC_WINSTRATE_GARDEN_BERRIES, Route111_WinstrateFamilysHouse_EventScript_ReceivedBerries
-	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveBerries, MSGBOX_DEFAULT
-	giveitem ITEM_RAZZ_BERRY, 5
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_WINSTRATE_GARDEN_BERRIES
-	goto Route111_WinstrateFamilysHouse_EventScript_MegaGift_CHARIZARDITE_Y
-	end
-
-Route111_WinstrateFamilysHouse_EventScript_ReceivedBerries::
-	msgbox Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles, MSGBOX_DEFAULT
-Route111_WinstrateFamilysHouse_EventScript_MegaGift_CHARIZARDITE_Y::
-	goto_if_not_defeated TRAINER_VICKY, Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
-	goto_if_set FLAG_EC_MEGA_GIFT_CHARIZARDITE_Y, Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
-	msgbox Route111_WinstrateFamilysHouse_Text_MegaGift_CHARIZARDITE_Y, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_CHARIZARDITE_Y
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_CHARIZARDITE_Y
+	setvar VAR_0x8008, LOCALID_VICTORIA
+	goto_if_set FLAG_RECEIVED_LIFE_ORB, Route111_WinstrateFamilysHouse_EventScript_ReceivedLifeOrb
+	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveLifeOrb, MSGBOX_DEFAULT
+	giveitem ITEM_LIFE_ORB
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_LIFE_ORB
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_Vivi::
+Route111_WinstrateFamilysHouse_EventScript_ReceivedLifeOrb:: @ 822A4DA
+	msgbox Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles, MSGBOX_DEFAULT
+	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
+	end
+
+Route111_WinstrateFamilysHouse_EventScript_Vivi:: @ 822A4E8
 	lock
 	faceplayer
-	setvar VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VIVI
+	setvar VAR_0x8008, LOCALID_VIVI
 	msgbox Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_Vicky::
+Route111_WinstrateFamilysHouse_EventScript_Vicky:: @ 822A4FD
 	lock
 	faceplayer
-	setvar VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VICKY
+	setvar VAR_0x8008, LOCALID_VICKY
 	goto_if_set FLAG_TEMP_4, Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo
 	msgbox Route111_WinstrateFamilysHouse_Text_GrandsonStrong, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_4
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo::
+Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo:: @ 822A51E
 	msgbox Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection::
+Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection:: @ 822A52C
 	closemessage
 	applymovement VAR_0x8008, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
-	.string "You're the first TRAINER I've seen who\n"
-	.string "deploys POKéMON so masterfully.\p"
+Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou: @ 822A539
+	.string "You're the first Trainer I've seen who\n"
+	.string "deploys Pokémon so masterfully.\p"
 	.string "But, I should tell you--my son is\n"
 	.string "stronger than you.\p"
-	.string "He even took the POKéMON LEAGUE\n"
+	.string "He even took the Pokémon League\n"
 	.string "challenge, I'll have you know.$"
 
-Route111_WinstrateFamilysHouse_Text_LikeYouToHaveBerries:
-	.string "You defeated all four of us without\n"
-	.string "a chance to rest. That's remarkable!\p"
-	.string "Take these berries from our garden.\n"
-	.string "You have earned a little harvest.$"
+Route111_WinstrateFamilysHouse_Text_LikeYouToHaveLifeOrb: @ 822A5F4
+	.string "We sometimes use this Life Orb to\n"
+	.string "power up our Pokémon in battle.\p"
+	.string "Since you've beaten all of us here,\n"
+	.string "I don't know if you need it, but we\l"
+	.string "would like you to have our Life Orb.$"
 
-Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
-	.string "Plant those berries or save them for\n"
-	.string "the BERRY MASTER on ROUTE 123.$"
+Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles: @ 822A6B4
+	.string "When it comes to Pokémon battles,\n"
+	.string "we tend to be pretty passionate.$"
 
-Route111_WinstrateFamilysHouse_Text_MegaGift_CHARIZARDITE_Y:
-	.string "The desert winds bring us strange\n"
-	.string "things, baked hard in the sun.\p"
-	.string "Take this stone. It soaked up all\n"
-	.string "that heat. Your CHARIZARD might put\l"
-	.string "it to good use.$"
-
-Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
+Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers: @ 822A6F7
 	.string "Mommy is stronger than Daddy.\p"
 	.string "I'm stronger than Mommy.\p"
 	.string "And Grandma's stronger than me!\p"
 	.string "But my big brother is even stronger\n"
 	.string "than Grandma.$"
 
-Route111_WinstrateFamilysHouse_Text_GrandsonStrong:
+Route111_WinstrateFamilysHouse_Text_GrandsonStrong: @ 822A780
 	.string "There's no question that you're strong.\p"
 	.string "But if you were to battle my grandson,\n"
 	.string "you'd end up crying in frustration.\p"
-	.string "He's much stronger than any TRAINER\n"
+	.string "He's much stronger than any Trainer\n"
 	.string "our family knows.\p"
-	.string "He must be challenging the POKéMON\n"
-	.string "LEAGUE CHAMPION by now.\p"
+	.string "He must be challenging the Pokémon\n"
+	.string "League Champion by now.\p"
 	.string "Knowing my grandson, he could be the\n"
-	.string "CHAMPION already!$"
+	.string "Champion already!$"
 
-Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort:
+Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort: @ 822A89B
 	.string "My grandson must be challenging the\n"
-	.string "POKéMON LEAGUE CHAMPION by now.\p"
+	.string "Pokémon League Champion by now.\p"
 	.string "Knowing my grandson, he could be the\n"
-	.string "CHAMPION already!$"
+	.string "Champion already!$"
+

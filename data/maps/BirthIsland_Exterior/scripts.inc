@@ -1,14 +1,17 @@
-BirthIsland_Exterior_MapScripts::
+.set LOCALID_DEOXYS_ROCK, 1
+.set LOCALID_DEOXYS, 2
+
+BirthIsland_Exterior_MapScripts:: @ 8267F15
 	map_script MAP_SCRIPT_ON_TRANSITION, BirthIsland_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, BirthIsland_Exterior_OnResume
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, BirthIsland_Exterior_OnReturnToField
 	.byte 0
 
-BirthIsland_Exterior_OnReturnToField:
+BirthIsland_Exterior_OnReturnToField: @ 8267F25
 	special SetDeoxysRockPalette
 	end
 
-BirthIsland_Exterior_OnTransition:
+BirthIsland_Exterior_OnTransition: @ 8267F29
 	setflag FLAG_MAP_SCRIPT_CHECKED_DEOXYS
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
@@ -17,104 +20,100 @@ BirthIsland_Exterior_OnTransition:
 	call_if_unset FLAG_BATTLED_DEOXYS, BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle
 	end
 
-BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle::
+BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle:: @ 8267F4E
 	setflag FLAG_HIDE_DEOXYS
 	setflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	return
 
-BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle::
+BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle:: @ 8267F55
 	goto_if_set FLAG_DEFEATED_DEOXYS, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	clearflag FLAG_DEOXYS_ROCK_COMPLETE
 	return
 
-BirthIsland_Exterior_OnResume:
+BirthIsland_Exterior_OnResume: @ 8267F65
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, BirthIsland_Exterior_EventScript_TryRemoveDeoxys
 	end
 
-BirthIsland_Exterior_EventScript_TryRemoveDeoxys::
+BirthIsland_Exterior_EventScript_TryRemoveDeoxys:: @ 8267F6F
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_BIRTH_ISLAND_DEOXYS
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne Common_EventScript_NopReturn
+	removeobject LOCALID_DEOXYS
 	return
 
-BirthIsland_Exterior_EventScript_Triangle::
-	call EC_RequireSpace
+BirthIsland_Exterior_EventScript_Triangle:: @ 8267F83
 	lock
 	faceplayer
 	special DoDeoxysRockInteraction
 	waitstate
 	switch VAR_RESULT
-	case DEOXYS_ROCK_FAILED,     BirthIsland_Exterior_EventScript_Failed
-	case DEOXYS_ROCK_PROGRESSED, BirthIsland_Exterior_EventScript_Progressed
-	case DEOXYS_ROCK_SOLVED,     BirthIsland_Exterior_EventScript_Deoxys
-	case DEOXYS_ROCK_COMPLETE,   BirthIsland_Exterior_EventScript_Complete
+	case 0, BirthIsland_Exterior_EventScript_NotSolved1
+	case 1, BirthIsland_Exterior_EventScript_NotSolved2
+	case 2, BirthIsland_Exterior_EventScript_Deoxys
+	case 3, BirthIsland_Exterior_EventScript_NotSolved3
 	end
 
-@ The actual rock triangle movement is handled by DoDeoxysRockInteraction.
-@ Unless the player has solved the puzzle and needs to encounter Deoxys,
-@ there's nothing else the script needs to do.
-BirthIsland_Exterior_EventScript_Failed::
-	msgbox BirthIsland_Exterior_Text_PuzzleReset, MSGBOX_DEFAULT
+BirthIsland_Exterior_EventScript_NotSolved1:: @ 8267FBB
 	release
 	end
 
-BirthIsland_Exterior_EventScript_Progressed::
+BirthIsland_Exterior_EventScript_NotSolved2:: @ 8267FBD
 	release
 	end
 
-BirthIsland_Exterior_EventScript_Complete::
+BirthIsland_Exterior_EventScript_NotSolved3:: @ 8267FBF
 	release
 	end
 
-BirthIsland_Exterior_EventScript_Deoxys::
+BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	waitse
-	setfieldeffectargument 0, LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK
-	setfieldeffectargument 1, MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR)
-	setfieldeffectargument 2, MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR)
+	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
+	setfieldeffectargument 1, 58
+	setfieldeffectargument 2, 26
 	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
-	addobject LOCALID_BIRTH_ISLAND_DEOXYS
-	applymovement LOCALID_BIRTH_ISLAND_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
+	addobject LOCALID_DEOXYS
+	applymovement LOCALID_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_DEOXYS_NORMAL, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_DEOXYS, 2
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, LOCALID_BIRTH_ISLAND_DEOXYS
-	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
-	setvar VAR_0x8005, 0
-	special CreateEmeraldChampionsStaticLegendaryEncounter
+	setvar VAR_LAST_TALKED, LOCALID_DEOXYS
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x8005, VAR_RESULT @ level
+	setvar VAR_0x8004, SPECIES_DEOXYS
+	setvar VAR_0x8006, ITEM_NONE
+	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
+	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, BirthIsland_Exterior_EventScript_CaughtDeoxys
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	release
-	end
-
-BirthIsland_Exterior_EventScript_CaughtDeoxys::
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq BirthIsland_Exterior_EventScript_DefeatedDeoxys
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
 	setflag FLAG_BATTLED_DEOXYS
-	call BirthIsland_Exterior_EventScript_RecordResearch
 	release
 	end
 
-BirthIsland_Exterior_EventScript_DefeatedDeoxys::
-	call BirthIsland_Exterior_EventScript_RecordResearch
-	goto Common_EventScript_LegendaryResting
-	end
-
-BirthIsland_Exterior_EventScript_RanFromDeoxys::
-	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
+BirthIsland_Exterior_EventScript_DefeatedDeoxys:: @ 826803B
+	setflag FLAG_DEFEATED_DEOXYS
+	setvar VAR_0x8004, SPECIES_DEOXYS
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-BirthIsland_Exterior_Movement_DeoxysApproach:
+BirthIsland_Exterior_EventScript_RanFromDeoxys:: @ 8268049
+	setvar VAR_0x8004, SPECIES_DEOXYS
+	goto Common_EventScript_LegendaryFlewAway
+	end
+
+BirthIsland_Exterior_Movement_DeoxysApproach: @ 8268054
 	walk_slow_down
 	walk_slow_down
 	walk_slow_down
@@ -123,45 +122,3 @@ BirthIsland_Exterior_Movement_DeoxysApproach:
 	walk_slow_down
 	walk_slow_down
 	step_end
-
-BirthIsland_Exterior_EventScript_RecordResearch::
-	goto_if_set FLAG_EC_REPORT_C43_COMPLETE, Common_EventScript_NopReturn
-	completemilestone FLAG_EC_REPORT_C43_COMPLETE
-	buffermilestonetext FLAG_EC_REPORT_C43_COMPLETE
-	msgbox BirthIsland_Exterior_Text_ResearchRecord, MSGBOX_DEFAULT
-	call_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_PrintMilestoneCapLine
-	call_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_PrintMilestoneCapLine
-	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, BirthIsland_Exterior_EventScript_ResearchRecordDirectionsAfterCrisis
-	msgbox BirthIsland_Exterior_Text_ResearchRecordDirections, MSGBOX_DEFAULT
-	return
-
-BirthIsland_Exterior_EventScript_ResearchRecordDirectionsAfterCrisis::
-	msgbox BirthIsland_Exterior_Text_ResearchRecordDirectionsAfterCrisis, MSGBOX_DEFAULT
-	return
-
-BirthIsland_Exterior_Text_ResearchRecord:
-	.string "The meteorite signal belonged\n"
-	.string "to another living POKéMON.\l"
-	.string "It was never a source to command.$"
-
-BirthIsland_Exterior_Text_ResearchRecordDirections:
-	.string "Return to the sailor at the harbor.\p"
-	.string "AQUA's submarine is still down at\n"
-	.string "SEAFLOOR CAVERN, south of MOSSDEEP\l"
-	.string "past ROUTE 128. Bring licensed\l"
-	.string "SURF, DIVE, STRENGTH and ROCK\l"
-	.string "SMASH and take up the pursuit.$"
-
-BirthIsland_Exterior_Text_ResearchRecordDirectionsAfterCrisis:
-	.string "Return to the sailor at the harbor.\p"
-	.string "With the SOOTOPOLIS crisis behind\n"
-	.string "you, visit STEVEN's house in\l"
-	.string "MOSSDEEP, or press on to the\l"
-	.string "POKéMON LEAGUE.$"
-
-BirthIsland_Exterior_Text_PuzzleReset:
-	.string "The triangle returns to its\n"
-	.string "starting point.\p"
-	.string "Reach its next position in as\n"
-	.string "few steps as possible, then face\l"
-	.string "it and press A. Extra steps reset it.$"

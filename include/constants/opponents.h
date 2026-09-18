@@ -895,7 +895,7 @@
 #else
 #define TRAINERS_COUNT                      TRAINERS_COUNT_EMERALD
 #define MAX_TRAINERS_COUNT                  MAX_TRAINERS_COUNT_EMERALD
-#endif
+
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 
 #if TESTING
@@ -907,3 +907,27 @@
 #endif
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H
+
+// Emerald Champions: Inclement Emerald's Elite Four / Champion rematch ladder is
+// restored in script, but its teams are not authored yet (the user is doing that
+// later). These names alias to each member's base trainer so the ladder links and
+// plays -- a rematch currently fights the same team as the first encounter.
+// To author a real rematch, give the name its own slot and party instead of this alias.
+// VAR_ELITE_4_MODE: 0 = singles, 1 = singles+legends (_3), 2 = doubles (_2), 3 = doubles+legends (_4).
+#define TRAINER_SIDNEY_2                    TRAINER_SIDNEY
+#define TRAINER_SIDNEY_3                    TRAINER_SIDNEY
+#define TRAINER_SIDNEY_4                    TRAINER_SIDNEY
+#define TRAINER_PHOEBE_2                    TRAINER_PHOEBE
+#define TRAINER_PHOEBE_3                    TRAINER_PHOEBE
+#define TRAINER_PHOEBE_4                    TRAINER_PHOEBE
+#define TRAINER_GLACIA_2                    TRAINER_GLACIA
+#define TRAINER_GLACIA_3                    TRAINER_GLACIA
+#define TRAINER_GLACIA_4                    TRAINER_GLACIA
+#define TRAINER_DRAKE_2                     TRAINER_DRAKE
+#define TRAINER_DRAKE_3                     TRAINER_DRAKE
+#define TRAINER_DRAKE_4                     TRAINER_DRAKE
+#define TRAINER_WALLACE_DOUBLES             TRAINER_WALLACE
+#define TRAINER_WALLACE_LEGENDS             TRAINER_WALLACE
+#define TRAINER_CYNTHIA_2                   TRAINER_CYNTHIA_1
+
+#endif

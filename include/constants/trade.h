@@ -25,6 +25,13 @@ enum InGameTradeID
     INGAME_TRADE_HAPPINY,
 };
 
+// Inclement Emerald's first and fourth in-game trades live at these same two
+// slots here, re-skinned onto newer species. Both keep the donor's otId, OT
+// name, contest conditions and personality, so the NPCs and their scripts line
+// up 1:1 (Rustboro's Kobe, the Frontier/Fortree trader's Isis).
+#define INGAME_TRADE_PAWNIARD    INGAME_TRADE_FIDOUGH
+#define INGAME_TRADE_KARRABLAST  INGAME_TRADE_TYPE_NULL
+
 // Return values for CanTradeSelectedMon and CanSpinTradeMon
 enum CanTradeMon
 {

@@ -1362,3 +1362,9 @@ CableClub_EventScript_ExitRejectedBattle::
 	lockall
 	msgbox CableClub_Text_IncompatibleLinkBattle, MSGBOX_DEFAULT
 	goto CableClub_EventScript_ExitLinkRoom
+
+
+@ Emerald Champions: restored after the Inclement merge.
+CableClub_OnResume:
+	special InitUnionRoom
+	end

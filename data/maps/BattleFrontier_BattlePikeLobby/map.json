@@ -3,7 +3,6 @@
   "name": "BattleFrontier_BattlePikeLobby",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY",
   "music": "MUS_B_PIKE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -26,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit",
+      "script": "BattleFrontier_BattlePikeLobby_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -75,21 +74,21 @@
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 4,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 6,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [],

@@ -1,56 +1,79 @@
-LilycoveCity_CoveLilyMotel_2F_MapScripts::
+LilycoveCity_CoveLilyMotel_2F_MapScripts:: @ 82186D2
 	.byte 0
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner::
+LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner:: @ 82186D3
 	lock
 	faceplayer
 	call_if_unset FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex
 	call_if_set FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma
 	specialvar VAR_RESULT, HasAllHoennMons
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex::
+LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex:: @ 82186F9
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex, MSGBOX_DEFAULT
 	return
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare::
+LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare:: @ 8218702
 	setflag FLAG_TEMP_2
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	goto LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma::
+LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma:: @ 821870F
 	message LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	special Special_ShowDiploma
+	waitstate
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_Programmer::
+LilycoveCity_CoveLilyMotel_2F_EventScript_SelfInsert::
+	lockall
+	faceplayer
+	goto_if_set FLAG_DAILY_REMATCH_BUFFEL, LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDefeated
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImBuffel, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_SelfInsertNo
+	message LilycoveCity_CoveLilyMotel_2F_Text_SelfInsertBattle
+	waitmessage
+	trainerbattle_no_intro TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat
+	setflag FLAG_DAILY_REMATCH_BUFFEL
+LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDefeated::
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ThanksAgain, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_CoveLilyMotel_2F_EventScript_SelfInsertNo::
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_SelfInsertNo, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_CoveLilyMotel_2F_EventScript_Programmer:: @ 8218720
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist::
+LilycoveCity_CoveLilyMotel_2F_EventScript_GraphicArtist:: @ 8218729
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan::
+LilycoveCity_CoveLilyMotel_2F_EventScript_FatMan:: @ 8218732
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_Woman::
+LilycoveCity_CoveLilyMotel_2F_EventScript_Woman:: @ 821873B
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_GameBoyKid::
+LilycoveCity_CoveLilyMotel_2F_EventScript_GameBoyKid:: @ 8218744
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy, MSGBOX_NPC
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_Scott::
+LilycoveCity_CoveLilyMotel_2F_EventScript_Scott:: @ 821874D
 	lock
 	faceplayer
 	goto_if_set FLAG_MET_SCOTT_IN_LILYCOVE, LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott
@@ -60,109 +83,102 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_Scott::
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott::
+LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott:: @ 821876A
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_CoveLilyMotel_2F_EventScript_Buffel::
-	lock
-	faceplayer
-	goto_if_defeated TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelAfter
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_BuffelChallenge, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDecline
-	trainerbattle_no_intro_double TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat, EmeraldChampions_Text_NeedTwoPokemon
-
-LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelAfter::
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_BuffelAfter, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDecline::
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_BuffelDecline, MSGBOX_DEFAULT
-	release
-	end
-
-LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex:
-	.string "I'm the GAME DESIGNER.\p"
+LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex: @ 8218774
+	.string "I'm the Game Designer.\p"
 	.string "Oh, is that right?\n"
-	.string "You're working on a POKéDEX?\p"
+	.string "You're working on a Pokédex?\p"
 	.string "It's tough trying to complete it,\n"
 	.string "but don't give up.\p"
 	.string "If you do complete it, please come\n"
 	.string "show me.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_BuffelChallenge:
-	.string "I helped design battles where\n"
-	.string "every role hands momentum to the\l"
-	.string "next.\p"
-	.string "Want to test one of my favorite\n"
-	.string "teams?$"
-
-LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat:
-	.string "You've given me something to think on!$"
-
-LilycoveCity_CoveLilyMotel_2F_Text_BuffelAfter:
-	.string "The best battle is difficult, readable,\n"
-	.string "and different from the one before it.$"
-
-LilycoveCity_CoveLilyMotel_2F_Text_BuffelDecline:
-	.string "Return when you want a designer's test.$"
-
-LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:
+LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis: @ 821881C
 	.string "Wow! That's awesome!\n"
 	.string "Yep, it's totally awesome!\p"
-	.string "This POKéDEX is completely filled!\n"
-	.string "You really must love POKéMON!\p"
+	.string "This Pokédex is completely filled!\n"
+	.string "You really must love Pokémon!\p"
 	.string "I'm so impressed!\p"
 	.string "Let me give you something in\n"
 	.string "recognition of your feat!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer:
+LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer: @ 82188D6
 	.string "Me? You're talking to me?\n"
-	.string "I'm the PROGRAMMER.\p"
-	.string "I wonder what the SLOTS are\n"
+	.string "I'm the Programmer.\p"
+	.string "I wonder what the Slots are\n"
 	.string "like here.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist:
-	.string "I'm the GRAPHIC ARTIST! Aren't the\n"
-	.string "POKéMON of HOENN interesting?$"
+LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist: @ 821892B
+	.string "I'm the Graphic Artist! Aren't the\n"
+	.string "Pokémon of Hoenn interesting?$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute:
-	.string "I love watching young TRAINERS\n"
-	.string "discover what their POKéMON can\l"
-	.string "do.\p"
-	.string "A pair of TWINS surprised me with\n"
-	.string "their teamwork. They'd practiced\l"
-	.string "together for ages!\p"
-	.string "Whoop! That's the joy of battling!$"
+LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute: @ 821896C
+	.string "The girl Tubers, they're cute, hey?\n"
+	.string "To battle against a cute Tuber…\p"
+	.string "Whoop, it's so awesome!\p"
+	.string "And the Twins! Aren't they cute?\n"
+	.string "A 2-on-2 battle with Twins…\p"
+	.string "Whoop, it's unbearably fun!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart:
+LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart: @ 8218A21
 	.string "The sea breeze tickles my heart.\n"
 	.string "It feels wonderful here!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy:
+LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy: @ 8218A5B
 	.string "You never know when and where\n"
 	.string "people will challenge you.\p"
 	.string "That's why I never leave home without\n"
-	.string "my GAME BOY ADVANCE.$"
+	.string "my Game Boy Advance.$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles:
-	.string "SCOTT: … … … … …\n"
+LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles: @ 8218ACF
+	.string "Scott: … … … … …\n"
 	.string "… … … … … Zzz…\p"
 	.string "… … … … … Huh?!\n"
 	.string "Oh, sorry, sorry! I was snoozing!\p"
-	.string "I came to watch the CIRCUIT teams\n"
-	.string "come through the harbor.\p"
+	.string "I came to check out this Pokémon\n"
+	.string "Contest thing.\p"
+	.string "I have to admit, it does look quite\n"
+	.string "entertaining, but…\p"
 	.string "Consider me a purist--I prefer\n"
-	.string "battles and tough TRAINERS.\p"
-	.string "{PLAYER}{KUN}, I hope you'll enjoy\n"
-	.string "everything, the GYMS, the CIRCUIT,\l"
+	.string "battles and tough Trainers.\p"
+	.string "But that's just me.\p"
+	.string "{PLAYER}{KUN}, I hope you'll enjoy everything\n"
+	.string "like the Gyms, Contests, Battle Tent,\l"
 	.string "the whole works!$"
 
-LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy:
-	.string "SCOTT: A CIRCUIT run is won before\n"
-	.string "the first turn, in the team you\l"
-	.string "chose to bring.\p"
-	.string "Thinking that far ahead is how a\n"
-	.string "TRAINER gets better, I'd say.$"
+LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy: @ 8218C33
+	.string "Scott: I think it does take strategy\n"
+	.string "to win a Contest.\p"
+	.string "Devising Contest strategies is one way\n"
+	.string "of becoming a better Trainer, I'd say.$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_ImBuffel:
+	.string "Hey {PLAYER}!\p"
+	.string "I'm Buffel, the creator of this\n"
+	.string "mod (or ROM hack).\p"
+	.string "Thanks for playing!\p"
+	.string "I hope you had fun on your journey,\n"
+	.string "and didn't run in to too many bugs!\p"
+	.string "Now that you're the Champion, how about\n"
+	.string "we have a friendly battle?\p"
+	.string "Don't worry - I haven't given myself\n"
+	.string "any unfair advantages!\p"
+	.string "So, are you ready?$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_SelfInsertNo:
+	.string "Some other time, then?$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_SelfInsertBattle:
+	.string "Great! let's see what you can do!$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat:
+	.string "Well done, {PLAYER}!$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_ThanksAgain:
+	.string "Thanks again for playing!\p"
+	.string "If you want a rematch, come back\n"
+	.string "tomorrow!$"

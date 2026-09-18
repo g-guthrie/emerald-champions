@@ -3,7 +3,6 @@
   "name": "RustboroCity_Gym",
   "layout": "LAYOUT_RUSTBORO_CITY_GYM",
   "music": "MUS_GYM",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_RUSTBORO_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -73,7 +72,7 @@
       "x": 1,
       "y": 6,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -88,14 +87,14 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 6,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [
@@ -104,36 +103,36 @@
       "x": 4,
       "y": 19,
       "elevation": 0,
-      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "0",
-      "script": "RustboroCity_Gym_EventScript_GuideTrigger1"
+      "script": "Rustboro_Gym_Guide_Trigger1"
     },
     {
       "type": "trigger",
       "x": 5,
       "y": 18,
       "elevation": 0,
-      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "0",
-      "script": "RustboroCity_Gym_EventScript_GuideTrigger2"
+      "script": "Rustboro_Gym_Guide_Trigger2"
     },
     {
       "type": "trigger",
       "x": 6,
       "y": 18,
       "elevation": 0,
-      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "0",
-      "script": "RustboroCity_Gym_EventScript_GuideTrigger3"
+      "script": "Rustboro_Gym_Guide_Trigger3"
     },
     {
       "type": "trigger",
       "x": 7,
       "y": 19,
       "elevation": 0,
-      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "0",
-      "script": "RustboroCity_Gym_EventScript_GuideTrigger4"
+      "script": "Rustboro_Gym_Guide_Trigger4"
     }
   ],
   "bg_events": [

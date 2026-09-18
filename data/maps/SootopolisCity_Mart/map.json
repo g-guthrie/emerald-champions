@@ -3,7 +3,6 @@
   "name": "SootopolisCity_Mart",
   "layout": "LAYOUT_MART",
   "music": "MUS_POKE_MART",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SOOTOPOLIS_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -26,7 +25,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_Mart_EventScript_Clerk",
+      "script": "General_Pokemart_Script",
       "flag": "0"
     },
     {
@@ -62,14 +61,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     }
   ],
   "coord_events": [],

@@ -175,6 +175,20 @@ enum
     MULTI_EC_SHOAL_DECORATIONS,
     MULTI_BF_EXCHANGE_EVOLUTION_CATEGORY,
     MULTI_BF_EXCHANGE_RARE_POKEMON,
+    // Inclement Emerald services. Every member below must have a matching
+    // entry in sMultichoiceLists[] (src/data/script_menu.h) -- DrawMultichoiceMenu
+    // indexes that table unguarded.
+    MULTI_SUPER_TRAINING_MENU,
+    MULTI_HYPER_TRAINING_MENU,
+    MULTI_EV_MENU,
+    MULTI_IV_MENU,
+    MULTI_BASE_STATS,
+    MULTI_STARTER_MOVES,
+    MULTI_MOOMOO_MILK,
+    MULTI_FLAVORS,
+    MULTI_GRASS_FIRE_WATER,
+    MULTI_DEOXYS_FORMES,
+    MULTI_REMATCH_BATTLE_MODE,
 };
 
 #define MULTI_NONE 255

@@ -1,173 +1,137 @@
-PetalburgCity_WallysHouse_MapScripts::
+.set LOCALID_WALLYS_DAD, 1
+
+PetalburgCity_WallysHouse_MapScripts:: @ 8204229
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_WallysHouse_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_WallysHouse_OnWarp
 	.byte 0
 
-PetalburgCity_WallysHouse_OnWarp:
+PetalburgCity_WallysHouse_OnWarp: @ 8204234
 	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther
 	.2byte 0
 
-PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther::
-	turnobject LOCALID_PLAYER, DIR_EAST
-	turnobject LOCALID_WALLYS_HOUSE_WALLYS_DAD, DIR_WEST
+PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther:: @ 820423E
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
+	turnobject LOCALID_WALLYS_DAD, DIR_WEST
 	end
 
-PetalburgCity_WallysHouse_OnFrame:
-	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_WallysHouse_EventScript_GiveHMSurf
+PetalburgCity_WallysHouse_OnFrame: @ 8204247
+	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_WallysHouse_EventScript_GiveHM03Surf
 	.2byte 0
 
-PetalburgCity_WallysHouse_EventScript_GiveHMSurf::
+PetalburgCity_WallysHouse_EventScript_GiveHM03Surf:: @ 8204251
 	lockall
-	setvar VAR_PETALBURG_CITY_STATE, 5
 	msgbox PetalburgCity_WallysHouse_Text_PleaseExcuseUs, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_HM_SURF
-	call PetalburgCity_WallysHouse_EventScript_ExplainSurfRoute
+	giveitem ITEM_RARE_CANDY
+	setflag FLAG_RECEIVED_HM03
+	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
+	setvar VAR_PETALBURG_CITY_STATE, 5
 	releaseall
 	end
 
-PetalburgCity_WallysHouse_EventScript_WallysDad::
+PetalburgCity_WallysHouse_EventScript_WallysDad:: @ 8204278
 	lock
 	faceplayer
-	goto_if_lt VAR_PETALBURG_GYM_STATE, 2, PetalburgCity_WallysHouse_EventScript_BeforeWallyCatch
 	goto_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad
-	goto_if_set FLAG_RECEIVED_HM_SURF, PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf
-	goto_if_set FLAG_BADGE05_GET, PetalburgCity_WallysHouse_EventScript_GiveHMSurf
+	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_ReceievedHM03Surf
 	goto_if_set FLAG_THANKED_FOR_PLAYING_WITH_WALLY, PetalburgCity_WallysHouse_EventScript_PlayedWithWally
 	msgbox PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally, MSGBOX_DEFAULT
 	setflag FLAG_THANKED_FOR_PLAYING_WITH_WALLY
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf::
-	goto_if_unset FLAG_BADGE06_GET, PetalburgCity_WallysHouse_EventScript_RemindFortreeRoute
+PetalburgCity_WallysHouse_EventScript_ReceievedHM03Surf:: @ 82042A2
 	msgbox PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_RemindFortreeRoute::
-	call PetalburgCity_WallysHouse_EventScript_ExplainSurfRoute
-	release
-	end
-
-PetalburgCity_WallysHouse_EventScript_ExplainSurfRoute::
-	goto_if_set FLAG_EC_REPORT_C28_COMPLETE, PetalburgCity_WallysHouse_EventScript_ExplainEastRoute
-	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
-	return
-
-PetalburgCity_WallysHouse_EventScript_ExplainEastRoute::
-	msgbox PetalburgCity_WallysHouse_Text_EastRoute, MSGBOX_DEFAULT
-	return
-
-PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad::
+PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad:: @ 82042AC
 	msgbox PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_PlayedWithWally::
+PetalburgCity_WallysHouse_EventScript_PlayedWithWally:: @ 82042B6
 	msgbox PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_WallysMom::
+PetalburgCity_WallysHouse_EventScript_WallysMom:: @ 82042C0
 	lock
 	faceplayer
-	goto_if_lt VAR_PETALBURG_GYM_STATE, 2, PetalburgCity_WallysHouse_EventScript_BeforeWallyCatch
-	goto_if_set FLAG_RECEIVED_HM_SURF, PetalburgCity_WallysHouse_EventScript_MomReceivedHMSurf
+	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf
 	msgbox PetalburgCity_WallysHouse_Text_WallyWasReallyHappy, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_EventScript_MomReceivedHMSurf::
+PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf:: @ 82042D5
 	msgbox PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling, MSGBOX_DEFAULT
 	release
 	end
 
-PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:
-	.string "You must be {PLAYER}{KUN}!\n"
-	.string "Thank you for helping WALLY catch\l"
-	.string "his first POKéMON.\p"
-	.string "He's often been too ill to go out.\n"
-	.string "Seeing him so excited means a lot.\p"
-	.string "He's left to stay with relatives\n"
-	.string "in VERDANTURF TOWN. We hope the\l"
-	.string "clean air will do him good.$"
+PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally: @ 82042DF
+	.string "You're…\n"
+	.string "Ah, you must be {PLAYER}{KUN}, right?\p"
+	.string "Thank you for playing with Wally a\n"
+	.string "little while ago.\p"
+	.string "He's been frail and sickly ever\n"
+	.string "since he was a baby.\p"
+	.string "We've sent him to stay with my relatives\n"
+	.string "in Verdanturf Town for a while.\p"
+	.string "The air is a lot cleaner there\n"
+	.string "than it is here.\p"
+	.string "What's that? Where's Wally?\n"
+	.string "He's already left, our Wally.\p"
+	.string "I wonder where he could have\n"
+	.string "gotten by now?$"
 
-PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:
-	.string "I wonder how our WALLY is doing?$"
+PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing: @ 820444D
+	.string "I wonder how our Wally is doing?$"
 
-PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
+PetalburgCity_WallysHouse_Text_PleaseExcuseUs: @ 820446E
 	.string "{PLAYER}{KUN}! Please excuse us for\n"
 	.string "dragging you here this way.\p"
-	.string "But our WALLY's become very healthy\n"
-	.string "since he went to VERDANTURF TOWN.\p"
+	.string "But our Wally's become very healthy\n"
+	.string "since he went to Verdanturf Town.\p"
 	.string "We owe it all to you!\p"
-	.string "When WALLY left town, you helped\n"
-	.string "him catch a POKéMON, right?\p"
-	.string "I think that made WALLY really\n"
+	.string "When Wally left town, you helped\n"
+	.string "him catch a Pokémon, right?\p"
+	.string "I think that made Wally really\n"
 	.string "happy.\p"
-	.string "Actually, not just WALLY.\n"
+	.string "Actually, not just Wally.\n"
 	.string "It made me, his father, happy too.\p"
 	.string "Happy that he's gained such a great\n"
 	.string "friend as you.\p"
-	.string "Let me register SURF for your team.\n"
-	.string "You've earned that freedom!$"
+	.string "This isn't a bribe or anything, but\n"
+	.string "I'd really like you to have this.$"
 
-PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
-	.string "A partner that can learn SURF can\n"
-	.string "carry you across water.\p"
-	.string "It need not learn the move first.\n"
-	.string "Keep it in your party and face\l"
-	.string "the water.\p"
-	.string "LOTAD in the grass on ROUTE 102,\n"
-	.string "just east of town, can help.\p"
-	.string "Return to MAUVILLE. WATTSON is\n"
-	.string "near the city's east exit.\p"
-	.string "He needs help in NEW MAUVILLE.\n"
-	.string "Its entrance is across the water\l"
-	.string "on ROUTE 110, south of MAUVILLE.$"
+PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces: @ 820461A
+	.string "If your Pokémon can Surf, you'll be\n"
+	.string "able to go to all sorts of places.$"
 
-PetalburgCity_WallysHouse_Text_EastRoute:
-	.string "With WATTSON's problem settled,\n"
-	.string "leave MAUVILLE east on ROUTE 118.\p"
-	.string "SURF across the river, then take\n"
-	.string "ROUTE 119 north to the WEATHER\l"
-	.string "INSTITUTE. FORTREE lies beyond.$"
-
-PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:
-	.string "WALLY's coming home soon.\n"
+PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon: @ 8204661
+	.string "Wally's coming home soon.\n"
 	.string "I'm looking forward to that.$"
 
-PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity:
-	.string "Oh? You met WALLY in\n"
-	.string "EVER GRANDE CITY?\p"
+PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity: @ 8204698
+	.string "Oh? You met Wally in\n"
+	.string "Ever Grande City?\p"
 	.string "Oh, {PLAYER}{KUN}, don't be silly.\p"
 	.string "He may have gotten healthy, but he\n"
 	.string "can't go somewhere far away like\l"
 	.string "that all by himself.$"
 
-PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:
-	.string "WALLY was really happy when he told\n"
-	.string "us that he caught a POKéMON.\p"
+PetalburgCity_WallysHouse_Text_WallyWasReallyHappy: @ 8204732
+	.string "Wally was really happy when he told\n"
+	.string "us that he caught a Pokémon.\p"
 	.string "It's been ages since I've seen him\n"
 	.string "smile like that.$"
 
-PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:
+PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling: @ 82047A7
 	.string "I want you to keep this a secret\n"
 	.string "from my husband…\p"
-	.string "But our WALLY left VERDANTURF TOWN\n"
+	.string "But our Wally left Verdanturf Town\n"
 	.string "without telling anyone.\p"
-	.string "You know, WALLY is frail, but\n"
+	.string "You know, Wally is frail, but\n"
 	.string "he's surprisingly strong-willed.\p"
 	.string "I'm sure that he'll come back safe\n"
 	.string "and sound one day!$"
 
-PetalburgCity_WallysHouse_EventScript_BeforeWallyCatch::
-	msgbox PetalburgCity_WallysHouse_Text_BeforeWallyCatch, MSGBOX_DEFAULT
-	release
-	end
-
-PetalburgCity_WallysHouse_Text_BeforeWallyCatch:
-	.string "Our WALLY is going to stay with\n"
-	.string "relatives in VERDANTURF TOWN.\p"
-	.string "He hopes to take a POKéMON along.\n"
-	.string "He went to ask NORMAN for help.$"

@@ -3,7 +3,6 @@
   "name": "BattleFrontier_ReceptionGate",
   "layout": "LAYOUT_BATTLE_FRONTIER_RECEPTION_GATE",
   "music": "MUS_B_TOWER_RS",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -90,14 +89,14 @@
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST",
-      "dest_warp_id": "8"
+      "dest_warp_id": 8
     },
     {
       "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST",
-      "dest_warp_id": "9"
+      "dest_warp_id": 9
     }
   ],
   "coord_events": [],

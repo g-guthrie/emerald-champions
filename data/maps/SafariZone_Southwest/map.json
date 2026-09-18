@@ -3,7 +3,6 @@
   "name": "SafariZone_Southwest",
   "layout": "LAYOUT_SAFARI_ZONE_SOUTHWEST",
   "music": "MUS_SAFARI_ZONE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -15,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_SAFARI_ZONE_NORTHWEST",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_SAFARI_ZONE_NORTHWEST"
     },
     {
-      "map": "MAP_SAFARI_ZONE_SOUTH",
+      "direction": "right",
       "offset": 0,
-      "direction": "right"
+      "map": "MAP_SAFARI_ZONE_SOUTH"
     }
   ],
   "object_events": [
@@ -48,8 +47,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_MAX_REVIVE",
-      "script": "Common_EventScript_FindItem",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_Southwest_EventScript_ItemMaxRevive",
       "flag": "FLAG_ITEM_SAFARI_ZONE_SOUTH_WEST_MAX_REVIVE"
     }
   ],
@@ -59,7 +58,7 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_SAFARI_ZONE_REST_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [],

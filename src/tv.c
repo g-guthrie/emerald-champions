@@ -2755,6 +2755,37 @@ void ChangePokemonNickname(void)
     ChangePokemonNicknameWithCallback(ChangeBoxPokemonNickname_CB);
 }
 
+// Names a mon that was just sent to a box, for the restored Inclement
+// "Common_EventScript_NameReceivedBoxMon" flow.
+//
+// This cannot forward to ChangePokemonNickname above: that one resolves its
+// target through GetSelectedBoxMonFromPcOrParty(), which only looks in a box
+// when VAR_0x8004 == PC_MON_CHOSEN, and the calling script does not set it -
+// it relies on gSpecialVar_MonBoxId / gSpecialVar_MonBoxPos, which
+// GiveMonToPartyOrPC filled in. So address the box slot directly.
+// The donor finished with SetBoxMonNickAt(boxId, boxPos, name); that helper is
+// gone here, and SetBoxMonData(ptr, MON_DATA_NICKNAME, ...) is its equivalent.
+static void ChangeReceivedBoxMonNickname_CB(void)
+{
+    SetBoxMonData(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos),
+                  MON_DATA_NICKNAME, gStringVar2);
+    CB2_ReturnToFieldContinueScriptPlayMapMusic();
+}
+
+void ChangeBoxPokemonNickname(void)
+{
+    struct BoxPokemon *boxMon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
+
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME,
+                   gStringVar2,
+                   GetBoxMonData(boxMon, MON_DATA_SPECIES),
+                   GetBoxMonGender(boxMon),
+                   GetBoxMonData(boxMon, MON_DATA_PERSONALITY),
+                   ChangeReceivedBoxMonNickname_CB);
+}
+
 void BufferMonNickname(void)
 {
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();

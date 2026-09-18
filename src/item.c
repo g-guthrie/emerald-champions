@@ -445,6 +445,11 @@ static bool32 NONNULL BagPocket_AddItem(struct BagPocket *pocket, enum Item item
 
 bool32 AddBagItem(enum Item itemId, u16 count)
 {
+    // Emerald Champions: holding one for the first time is what tells the
+    // vendor to stock it from then on. Every route in - a gift, a pickup, a
+    // purchase - lands here, so nothing has to be hooked twice.
+    EmeraldChampions_UnlockBattleItem(itemId);
+
     itemId = SanitizeBagItemId(itemId);
     if (itemId == ITEM_NONE)
         return FALSE;

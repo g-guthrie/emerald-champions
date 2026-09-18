@@ -1,75 +1,78 @@
-MagmaHideout_2F_2R_MapScripts::
+MagmaHideout_2F_2R_MapScripts:: @ 8239E07
 	.byte 0
 
-MagmaHideout_2F_2R_EventScript_Grunt15::
-	trainerbattle_double TRAINER_GRUNT_MAGMA_HIDEOUT_15, MagmaHideout_2F_2R_Text_Grunt15Intro, MagmaHideout_2F_2R_Text_Grunt15Defeat, EmeraldChampions_Text_NeedTwoPokemon
+MagmaHideout_2F_2R_EventScript_Grunt15:: @ 8239E08
+	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_15, MagmaHideout_2F_2R_Text_Grunt15Intro, MagmaHideout_2F_2R_Text_Grunt15Defeat
 	msgbox MagmaHideout_2F_2R_Text_Grunt15PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MagmaHideout_2F_2R_EventScript_Grunt6::
-	trainerbattle_double TRAINER_GRUNT_MAGMA_HIDEOUT_6, MagmaHideout_2F_2R_Text_Grunt6Intro, MagmaHideout_2F_2R_Text_Grunt6Defeat, EmeraldChampions_Text_NeedTwoPokemon
+MagmaHideout_2F_2R_EventScript_Grunt6:: @ 8239E1F
+	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_6, MagmaHideout_2F_2R_Text_Grunt6Intro, MagmaHideout_2F_2R_Text_Grunt6Defeat
 	msgbox MagmaHideout_2F_2R_Text_Grunt6PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MagmaHideout_2F_2R_EventScript_Grunt7::
-	trainerbattle_double TRAINER_GRUNT_MAGMA_HIDEOUT_7, MagmaHideout_2F_2R_Text_Grunt7Intro, MagmaHideout_2F_2R_Text_Grunt7Defeat, EmeraldChampions_Text_NeedTwoPokemon
+MagmaHideout_2F_2R_EventScript_Grunt7:: @ 8239E36
+	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_7, MagmaHideout_2F_2R_Text_Grunt7Intro, MagmaHideout_2F_2R_Text_Grunt7Defeat
 	msgbox MagmaHideout_2F_2R_Text_Grunt7PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MagmaHideout_2F_2R_EventScript_Grunt8::
-	trainerbattle_double TRAINER_GRUNT_MAGMA_HIDEOUT_8, MagmaHideout_2F_2R_Text_Grunt8Intro, MagmaHideout_2F_2R_Text_Grunt8Defeat, EmeraldChampions_Text_NeedTwoPokemon
+MagmaHideout_2F_2R_EventScript_Grunt8:: @ 8239E4D
+	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_8, MagmaHideout_2F_2R_Text_Grunt8Intro, MagmaHideout_2F_2R_Text_Grunt8Defeat
 	msgbox MagmaHideout_2F_2R_Text_Grunt8PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MagmaHideout_2F_2R_Text_Grunt15Intro:
-	.string "Nothing personal. I'm following orders,\n"
-	.string "and my orders are: nobody passes.$"
+MagmaHideout_2F_2R_Text_Grunt15Intro: @ 8239E64
+	.string "I don't have a bone to pick with you.\n"
+	.string "I'm just following orders!$"
 
-MagmaHideout_2F_2R_Text_Grunt15Defeat:
-	.string "Orders, meet reality…$"
+MagmaHideout_2F_2R_Text_Grunt15Defeat: @ 8239EA5
+	.string "I may have lost, but…$"
 
-MagmaHideout_2F_2R_Text_Grunt15PostBattle:
-	.string "We dug up something huge down here, and\n"
-	.string "MAXIE has the BLUE ORB now.\p"
-	.string "I don't know what happens next. I don't\n"
-	.string "think he does either.$"
+MagmaHideout_2F_2R_Text_Grunt15PostBattle: @ 8239EBB
+	.string "We dug up something beyond belief!\n"
+	.string "And, we got the Red Orb!\p"
+	.string "All that's left is for our leader to…\n"
+	.string "Fufufu… Fwahahaha!$"
 
-MagmaHideout_2F_2R_Text_Grunt6Intro:
-	.string "I used to hate this heat. My\n"
-	.string "POKéMON seem perfectly\l"
-	.string "comfortable!\p"
-	.string "Maybe they're trying to tell me to\n"
-	.string "stop complaining. Come on, then!$"
+MagmaHideout_2F_2R_Text_Grunt6Intro: @ 8239F31
+	.string "I can't stand heat. Maybe I should've\n"
+	.string "joined Team Aqua instead…$"
 
-MagmaHideout_2F_2R_Text_Grunt6Defeat:
-	.string "Now I really need some fresh air…$"
+MagmaHideout_2F_2R_Text_Grunt6Defeat: @ 8239F71
+	.string "Yeah, I really may not be right for\n"
+	.string "Team Magma…$"
 
-MagmaHideout_2F_2R_Text_Grunt6PostBattle:
-	.string "They love it here. I suppose I can\n"
-	.string "put up with a little sweat.\p"
-	.string "A lot of sweat, actually.$"
+MagmaHideout_2F_2R_Text_Grunt6PostBattle: @ 8239FA1
+	.string "Don't you get lonely for the sea\n"
+	.string "being in a place like this?$"
 
-MagmaHideout_2F_2R_Text_Grunt7Intro:
-	.string "You feel those tremors? People say it's\n"
-	.string "the volcano. Some of us know better.\p"
-	.string "Whoops! Never mind. Fight me!$"
+MagmaHideout_2F_2R_Text_Grunt7Intro: @ 8239FDE
+	.string "You can hear tremors here sometimes.\p"
+	.string "Could it be the volcano rattling?\n"
+	.string "Or is it Grou…\p"
+	.string "Whoops!\n"
+	.string "No, no, never mind!$"
 
-MagmaHideout_2F_2R_Text_Grunt7Defeat:
-	.string "You hit like a volcano yourself…$"
+MagmaHideout_2F_2R_Text_Grunt7Defeat: @ 823A050
+	.string "You're a fiery battler.\n"
+	.string "Just like a volcano!$"
 
-MagmaHideout_2F_2R_Text_Grunt7PostBattle:
-	.string "You won this one. Doesn't matter.\n"
-	.string "MAGMA's almost there. I hope.$"
+MagmaHideout_2F_2R_Text_Grunt7PostBattle: @ 823A07D
+	.string "You just happened to win this time,\n"
+	.string "but that doesn't matter.\p"
+	.string "Team Magma's goal is about to be\n"
+	.string "reached!$"
 
-MagmaHideout_2F_2R_Text_Grunt8Intro:
-	.string "Wait. One of ours lost a MAGMA\n"
-	.string "EMBLEM. Is that how you got in?\p"
-	.string "Oh, he'll hear about this! But\n"
-	.string "first, I've got to deal with you!$"
+MagmaHideout_2F_2R_Text_Grunt8Intro: @ 823A0E4
+	.string "One of our guys was freaking out that\n"
+	.string "he lost his Magma Emblem…\p"
+	.string "Wait a minute!\n"
+	.string "Was it you who found it?$"
 
-MagmaHideout_2F_2R_Text_Grunt8Defeat:
+MagmaHideout_2F_2R_Text_Grunt8Defeat: @ 823A14C
 	.string "I'm having trouble believing this…$"
 
-MagmaHideout_2F_2R_Text_Grunt8PostBattle:
-	.string "Between you and me? I've got a feeling\n"
-	.string "this plan ends badly for everyone.$"
+MagmaHideout_2F_2R_Text_Grunt8PostBattle: @ 823A16F
+	.string "I'm getting this feeling that our plan\n"
+	.string "is going to end in failure…$"
+

@@ -1,45 +1,39 @@
-DewfordTown_PokemonCenter_1F_MapScripts::
+.set LOCALID_NURSE, 1
+
+DewfordTown_PokemonCenter_1F_MapScripts:: @ 81FC523
 	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-DewfordTown_PokemonCenter_1F_OnTransition:
+DewfordTown_PokemonCenter_1F_OnTransition: @ 81FC52E
 	setrespawn HEAL_LOCATION_DEWFORD_TOWN
 	call Common_EventScript_UpdateBrineyLocation
 	end
 
-DewfordTown_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_DEWFORD_NURSE
+DewfordTown_PokemonCenter_1F_EventScript_Nurse:: @ 81FC537
+	setvar VAR_0x800B, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-DewfordTown_PokemonCenter_1F_EventScript_PokefanF::
-	buffermilestonetext FLAG_BADGE01_GET
+DewfordTown_PokemonCenter_1F_EventScript_PokefanF:: @ 81FC545
 	msgbox DewfordTown_PokemonCenter_1F_Text_StoneCavern, MSGBOX_NPC
 	end
 
-DewfordTown_PokemonCenter_1F_EventScript_Man::
+DewfordTown_PokemonCenter_1F_EventScript_Man:: @ 81FC54E
 	msgbox DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM, MSGBOX_NPC
 	end
 
-DewfordTown_PokemonCenter_1F_Text_StoneCavern:
-	.string "Off to explore the cavern?\n"
-	.string "There are rare stones in there.\p"
-	.string "If you've earned the STONE BADGE,\n"
-	.string "your level cap is now {STR_VAR_1}. Use\l"
-	.string "the LEVELER before heading out!\p"
-	.string "A new evolution may suit a new\n"
-	.string "Battle Set. The TUTOR can help\l"
-	.string "you prepare for BRAWLY, too.$"
+DewfordTown_PokemonCenter_1F_Text_StoneCavern: @ 81FC557
+	.string "There's a stone cavern at the edge\n"
+	.string "of town.\p"
+	.string "I've heard you can find rare stones\n"
+	.string "there.$"
 
-DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM:
-	.string "With a field license and BADGE, a\n"
-	.string "compatible partner can use skills\l"
-	.string "such as CUT without a move slot.\p"
-	.string "Even a fainted partner can help.\n"
-	.string "FLASH is different: get its license\l"
-	.string "and BADGE, and caves light up\l"
-	.string "as you enter. No partner needed!$"
+DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM: @ 81FC5AE
+	.string "Even if a Pokémon faints and can't\n"
+	.string "battle, it can still use a move learned\l"
+	.string "from a Hidden Machine (HM).$"
 

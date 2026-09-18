@@ -1,137 +1,65 @@
-GraniteCave_StevensRoom_MapScripts::
+.set LOCALID_STEVEN, 1
+
+GraniteCave_StevensRoom_MapScripts:: @ 822DC7A
 	.byte 0
 
-GraniteCave_StevensRoom_EventScript_Steven::
+GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	lock
 	faceplayer
-	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge
-	setvar VAR_0x8004, ITEM_LETTER
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
 	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_LETTER
 	call Common_EventScript_PlayerHandedOverTheItem
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
-
-GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge::
-	goto_if_unset FLAG_BADGE02_GET, GraniteCave_StevensRoom_EventScript_WaitForKnuckleBadge
-	setvar VAR_0x8004, ITEM_MEGA_RING
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_Aerodactylite
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_MEGA_RING
-	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
-@ This reuses the original Aerodactylite entitlement; Roxanne now gives Amber only.
-GraniteCave_StevensRoom_EventScript_Aerodactylite::
-	goto_if_set FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, GraniteCave_StevensRoom_EventScript_ArchiveOpen
-	msgbox GraniteCave_StevensRoom_Text_Aerodactylite, MSGBOX_DEFAULT
-	setvar VAR_0x8000, ITEM_AERODACTYLITE
-	setvar VAR_0x8001, 1
-	special ConvertEmeraldChampionsFiniteReward
-	setvar VAR_0x800B, 3
-	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt
-	additem ITEM_AERODACTYLITE, 1
-	setvar VAR_0x800B, 1
-	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt
-	addpcitem ITEM_AERODACTYLITE, 1
-	setvar VAR_0x800B, 2
-	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_StoneStorageFull
-GraniteCave_StevensRoom_EventScript_AerodactyliteReceipt::
-	setvar VAR_0x8000, ITEM_AERODACTYLITE
-	call GraniteCave_StevensRoom_EventScript_StoneReceipt
-	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
-GraniteCave_StevensRoom_EventScript_ArchiveOpen::
-	msgbox GraniteCave_StevensRoom_Text_ArchiveOpen, MSGBOX_DEFAULT
-
-GraniteCave_StevensRoom_EventScript_Finish::
-	call_if_unset FLAG_DELIVERED_DEVON_GOODS, GraniteCave_StevensRoom_EventScript_ManorHandoff
-	call GraniteCave_StevensRoom_EventScript_CobalionFarewell
+	giveitem ITEM_RARE_CANDY
+	compare VAR_RESULT, FALSE
+	call_if_eq GraniteCave_StevensRoom_EventScript_BagFull
+	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_HIDE_GRANITE_CAVE_STEVEN
-	call_if_eq VAR_FACING, DIR_NORTH, GraniteCave_StevensRoom_EventScript_StevenExitNorth
-	call_if_eq VAR_FACING, DIR_SOUTH, GraniteCave_StevensRoom_EventScript_StevenExitSouth
-	call_if_eq VAR_FACING, DIR_WEST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
-	call_if_eq VAR_FACING, DIR_EAST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
-	playse SE_EXIT
-	removeobject LOCALID_GRANITE_CAVE_STEVEN
-	release
-	end
-
-GraniteCave_StevensRoom_EventScript_CobalionFarewell::
-	setvar VAR_0x8004, LEGENDARY_SIGN_COBALION
-	special GetSelectedLegendarySignState
-	goto_if_ne VAR_RESULT, 2, GraniteCave_StevensRoom_EventScript_CobalionUncaught
-
-GraniteCave_StevensRoom_EventScript_CobalionCaught::
-	msgbox GraniteCave_StevensRoom_Text_CobalionCaught, MSGBOX_DEFAULT
-	return
-
-GraniteCave_StevensRoom_EventScript_CobalionUncaught::
-	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
-	return
-
-GraniteCave_StevensRoom_EventScript_ManorHandoff::
-	msgbox GraniteCave_StevensRoom_Text_ManorHandoff, MSGBOX_DEFAULT
-	return
-
-GraniteCave_StevensRoom_EventScript_WaitForKnuckleBadge::
-	msgbox GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge, MSGBOX_DEFAULT
-	release
-	end
-
-GraniteCave_StevensRoom_EventScript_StevenExitNorth::
-	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
-	waitmovement 0
-	return
-
-GraniteCave_StevensRoom_EventScript_StevenExitWestEast::
-	applymovement LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
-	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
-	waitmovement 0
-	return
-
-GraniteCave_StevensRoom_EventScript_StevenExitSouth::
-	applymovement LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
-	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
-	waitmovement 0
-	return
-
-GraniteCave_StevensRoom_EventScript_BagFull::
-	msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
-	release
-	end
-
-GraniteCave_StevensRoom_EventScript_StoneStorageFull::
-	msgbox GraniteCave_StevensRoom_Text_StoneStorageFull, MSGBOX_DEFAULT
-	release
-	end
-
-GraniteCave_StevensRoom_EventScript_StoneReceipt::
-	goto_if_eq VAR_0x800B, 3, GraniteCave_StevensRoom_EventScript_StoneCashReceipt
-	bufferitemnameplural STR_VAR_2, VAR_0x8000, 1
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
 	waitfanfare
-	goto_if_eq VAR_0x800B, 2, GraniteCave_StevensRoom_EventScript_StonePCReceipt
-	putitemaway VAR_0x8000
+	closemessage
+	delay 30
+	setflag FLAG_REGISTERED_STEVEN_POKENAV
+	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
+	closemessage
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitNorth
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitSouth
+	compare VAR_FACING, DIR_WEST
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
+	compare VAR_FACING, DIR_EAST
+	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
+	playse SE_EXIT
+	removeobject LOCALID_STEVEN
+	release
+	end
+
+GraniteCave_StevensRoom_EventScript_StevenExitNorth:: @ 822DD0D
+	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
+	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_StonePCReceipt::
-	msgbox GraniteCave_StevensRoom_Text_StoneInPC, MSGBOX_DEFAULT
+GraniteCave_StevensRoom_EventScript_StevenExitWestEast:: @ 822DD18
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
+	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_Text_StoneInPC:
-	.string "{PLAYER} put the {STR_VAR_2}\n"
-	.string "in the PC.$"
+GraniteCave_StevensRoom_EventScript_StevenExitSouth:: @ 822DD2A
+	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
+	waitmovement 0
+	return
 
-GraniteCave_StevensRoom_Text_StoneStorageFull:
-	.string "Your BAG and PC have no room for the\n"
-	.string "remaining stone. I'll keep it here.\p"
-	.string "Make some room, then speak to me\n"
-	.string "again. Your gift will still be here.$"
+GraniteCave_StevensRoom_EventScript_BagFull:: @ 822DD3C
+	msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
+	return
 
-GraniteCave_StevensRoom_Movement_StevenExit:
+GraniteCave_StevensRoom_Movement_StevenExit: @ 822DD45
 	walk_up
 	walk_up
 	walk_up
@@ -140,14 +68,14 @@ GraniteCave_StevensRoom_Movement_StevenExit:
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit:
+GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit: @ 822DD4C
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_faster_up
+	walk_in_place_fast_up
 	step_end
 
-GraniteCave_StevensRoom_Movement_StevenExitSouth:
+GraniteCave_StevensRoom_Movement_StevenExitSouth: @ 822DD51
 	walk_left
 	walk_up
 	walk_up
@@ -158,103 +86,41 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
-	.string "I'm STEVEN. Forgive me, I didn't\n"
-	.string "hear you come in.\p"
-	.string "Rare POKéMON have been seeking\n"
-	.string "shelter in these caves. Their\l"
-	.string "movements seem to follow the\l"
-	.string "unusual weather.\p"
-	.string "I'm trying to understand why. Oh?\n"
-	.string "A LETTER from my father?$"
-GraniteCave_StevensRoom_Text_ThankYouTakeThis:
-	.string "You've earned BRAWLY's trust. And you\n"
-	.string "came all this way to find me. Thank you.\p"
-	.string "Take this MEGA RING. With a matching\n"
-	.string "stone, one partner can Mega Evolve\l"
-	.string "during a battle.\p"
-	.string "Have your partner hold its stone.\n"
-	.string "Choose FIGHT, then press START before\l"
-	.string "you choose a move.\p"
-	.string "With this RING, you can recognize\n"
-	.string "MEGA STONES out in the field.\p"
-	.string "Some trainers may share the stone\n"
-	.string "their own partner uses!$"
+GraniteCave_StevensRoom_Text_ImStevenLetterForMe: @ 822DD5A
+	.string "My name is Steven.\p"
+	.string "I'm interested in rare stones,\n"
+	.string "so I travel here and there.\p"
+	.string "Oh?\n"
+	.string "A Letter for me?$"
 
-GraniteCave_StevensRoom_Text_Aerodactylite:
-	.string "Take this AERODACTYLITE with\n"
-	.string "your MEGA RING.\p"
-	.string "ROXANNE's OLD AMBER can be restored\n"
-	.string "at DEVON's second-floor laboratory.\p"
-	.string "Have AERODACTYL hold this stone\n"
-	.string "to unlock its Mega Evolution!$"
+GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
+	.string "Steven: Okay, thank you.\p"
+	.string "You went through all this trouble to\n"
+	.string "deliver that. I need to thank you.\p"
+	.string "Let me see…\n"
+	.string "I'll give you this TM.\p"
+	.string "It contains my favorite move,\n"
+	.string "Steel Wing.$"
 
-GraniteCave_StevensRoom_Text_ArchiveOpen:
-	.string "The RING lets your partners use\n"
-	.string "Mega Stones you find across\l"
-	.string "HOENN. Look off the path, and\l"
-	.string "talk to people you meet!\p"
-	.string "It also opens the CENTER vendors'\n"
-	.string "free Form Tools archive.\l"
-	.string "Legendary form tools are there,\l"
-	.string "too.$"
+GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
+	.string "Steven: Your Pokémon appear quite\n"
+	.string "capable.\p"
+	.string "If you keep training, you could even\n"
+	.string "become the Champion of the Pokémon\l"
+	.string "League one day. That's what I think.\p"
+	.string "I know, since we've gotten to know each\n"
+	.string "other, let's register one another in\l"
+	.string "our PokéNavs.\p"
+	.string "… … … … … …$"
 
-GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge:
-	.string "My father's survey equipment may\n"
-	.string "explain these changes in the sea.\p"
-	.string "The manor's old expedition records\n"
-	.string "describe similar events. I'd like\l"
-	.string "you to help investigate them.\p"
-	.string "First challenge BRAWLY in\n"
-	.string "DEWFORD's GYM. Then return to me\l"
-	.string "here with the KNUCKLE BADGE.\p"
-	.string "I'll entrust you with a MEGA RING\n"
-	.string "before you explore the manor.$"
+GraniteCave_StevensRoom_Text_RegisteredSteven: @ 822DF6A
+	.string "Registered Steven\n"
+	.string "in the PokéNav.$"
 
-GraniteCave_StevensRoom_Text_ManorHandoff:
-	.string "The old account continues out to sea.\n"
-	.string "STERN is studying those waters now.\p"
-	.string "Go west from DEWFORD into the\n"
-	.string "MEADOW and enter the old MANOR.\p"
-	.string "Read the historian's account, then\n"
-	.string "speak to the meadow warden with\l"
-	.string "a partner that knows SING.\p"
-	.string "The manor's JIGGLYPUFF already know\n"
-	.string "SING. You can catch one there, or\l"
-	.string "bring another partner that knows it.\p"
-	.string "Once you've read the account and\n"
-	.string "heard the meadow's answer, take\l"
-	.string "STERN's GOODS on to SLATEPORT.$"
+GraniteCave_StevensRoom_Text_IveGotToHurryAlong: @ 822DF8C
+	.string "Now, I've got to hurry along.$"
 
-GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
-	.string "I am heading east. MAGMA and AQUA\n"
-	.string "are disturbing more than land\l"
-	.string "and sea.\p"
-	.string "COBALION lives among wild\n"
-	.string "POKéMON on GRANITE CAVE B2F,\l"
-	.string "with a 3% encounter chance.\p"
-	.string "Read the area signs as you travel.\n"
-	.string "They list the local POKéMON and\l"
-	.string "any special requirements.$"
+GraniteCave_StevensRoom_Text_OhBagIsFull: @ 822DFAA
+	.string "Oh, your Bag is full…\n"
+	.string "That's too bad, then.$"
 
-GraniteCave_StevensRoom_Text_OhBagIsFull:
-	.string "Your BAG is full. Make room and return;\n"
-	.string "I will keep the MEGA RING safe.$"
-
-GraniteCave_StevensRoom_Text_CobalionCaught:
-	.string "You've already found COBALION!\n"
-	.string "It chose a remarkable companion.\p"
-	.string "I am heading east to study these\n"
-	.string "disturbances. Keep checking the\l"
-	.string "route signs as you travel.\p"
-	.string "They record your discoveries and\n"
-	.string "show which POKéMON remain nearby.$"
-
-GraniteCave_StevensRoom_EventScript_StoneCashReceipt::
-	bufferitemname STR_VAR_1, VAR_0x8000
-	msgbox GraniteCave_StevensRoom_Text_StoneCash, MSGBOX_DEFAULT
-	return
-
-GraniteCave_StevensRoom_Text_StoneCash:
-	.string "You already own a {STR_VAR_1}.\n"
-	.string "DEVON awards you ¥3,000 instead!$"

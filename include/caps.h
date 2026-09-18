@@ -21,6 +21,7 @@
 #endif
 
 u32 GetCurrentLevelCap(void);
+u32 GetPreviousLevelCap(void);
 u32 GetLevelCapForSpecies(enum Species species, u32 baseline);
 u32 GetPlayerLevelCapForSpecies(enum Species species);
 bool32 CompleteCampaignMilestone(u16 flag);

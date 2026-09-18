@@ -23,9 +23,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_MAGMARIZER",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_EMBER_MAGMARIZER"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Ember_Path_ItemSmack_Down",
+      "flag": "FLAG_EMBER_PATH_SMACK_DOWN"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -41,7 +41,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 36,
       "y": 2,
       "elevation": 3,
@@ -49,9 +49,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_QUICK_BALL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_EMBER_QUICK_BALL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Ember_Path_ItemCharizarditeY",
+      "flag": "FLAG_EMBER_PATH_CHARIZARDITE_Y"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -80,7 +80,8 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MOLTRES)",
+      "local_id": "LOCALID_EC_MOLTRES",
+      "graphics_id": "OBJ_EVENT_GFX_MOLTRES",
       "x": 21,
       "y": 14,
       "elevation": 3,
@@ -90,8 +91,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EmberPath_EventScript_Moltres",
-      "flag": "FLAG_EC_CAUGHT_MOLTRES",
-      "local_id": "LOCALID_EC_MOLTRES"
+      "flag": "FLAG_DEFEATED_MOLTRES"
     }
   ],
   "warp_events": [
@@ -118,8 +118,15 @@
       "y": 38,
       "elevation": 3,
       "item": "ITEM_MAGMARIZER",
-      "flag": "FLAG_EC_HIDDEN_ITEM_EMBER_PATH_MAGMARIZER"
+      "flag": "FLAG_HIDDEN_ITEM_EMBER_PATH_MAGMARIZER"
+    },
+    {
+      "type": "hidden_item",
+      "x": 6,
+      "y": 2,
+      "elevation": 3,
+      "item": "ITEM_FLAME_PLATE",
+      "flag": "FLAG_HIDDEN_ITEM_EMBER_PATH_FLAME_PLATE"
     }
-  ],
-  "region": "REGION_HOENN"
+  ]
 }

@@ -1,116 +1,96 @@
-DesertRuins_MapScripts::
+DesertRuins_MapScripts:: @ 822D95B
 	map_script MAP_SCRIPT_ON_RESUME, DesertRuins_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, DesertRuins_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertRuins_OnTransition
 	.byte 0
 
-DesertRuins_OnResume:
+DesertRuins_OnResume: @ 822D96B
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, DesertRuins_EventScript_TryRemoveRegirock
 	end
 
-DesertRuins_EventScript_TryRemoveRegirock::
+DesertRuins_EventScript_TryRemoveRegirock:: @ 822D975
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
-DesertRuins_OnLoad:
+DesertRuins_OnLoad: @ 822D989
 	call_if_unset FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_HideRegiEntrance
 	end
 
-DesertRuins_EventScript_HideRegiEntrance::
-	setmetatile 7, 19, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 8, 19, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 9, 19, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+DesertRuins_EventScript_HideRegiEntrance:: @ 822D993
+	setmetatile 7, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 8, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 9, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
-DesertRuins_OnTransition:
+DesertRuins_OnTransition: @ 822D9CA
 	setflag FLAG_LANDMARK_DESERT_RUINS
 	call_if_unset FLAG_DEFEATED_REGIROCK, DesertRuins_EventScript_ShowRegirock
 	end
 
-DesertRuins_EventScript_ShowRegirock::
+DesertRuins_EventScript_ShowRegirock:: @ 822D9D7
 	clearflag FLAG_HIDE_REGIROCK
 	return
 
-DesertRuins_EventScript_CaveEntranceMiddle::
+DesertRuins_EventScript_CaveEntranceMiddle:: @ 822D9DB
 	lockall
 	goto_if_set FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_BigHoleInWall
-	msgbox DesertRuins_Text_PuzzleDirections, MSGBOX_DEFAULT
+	braillemessage DesertRuins_Braille_UseRockSmash
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-DesertRuins_EventScript_BigHoleInWall::
-	call DesertRuins_EventScript_ReadAccount
+DesertRuins_EventScript_BigHoleInWall:: @ 822D9EE
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
-DesertRuins_EventScript_CaveEntranceSide::
+DesertRuins_EventScript_CaveEntranceSide:: @ 822D9F8
 	lockall
-	goto_if_set FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_BigHoleInWall
-	msgbox DesertRuins_Text_PuzzleDirections, MSGBOX_DEFAULT
+	braillemessage DesertRuins_Braille_UseRockSmash
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-DesertRuins_EventScript_Regirock::
+DesertRuins_EventScript_Regirock:: @ 822DA02
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_REGIROCK, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_REGIROCK, 2
 	delay 40
 	waitmoncry
-	setvar VAR_0x8004, SPECIES_REGIROCK
-	setvar VAR_0x8005, 0
-	special CreateEmeraldChampionsStaticLegendaryEncounter
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x800A, VAR_RESULT
+	setwildbattle SPECIES_REGIROCK, VAR_0x800A, ITEM_HARD_STONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
+	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, DesertRuins_EventScript_CaughtRegirock
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, DesertRuins_EventScript_RanFromRegirock
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, DesertRuins_EventScript_RanFromRegirock
-	release
-	end
-
-DesertRuins_EventScript_CaughtRegirock::
-	setflag FLAG_EC_RESOLVED_REGIROCK
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq DesertRuins_EventScript_DefeatedRegirock
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq DesertRuins_EventScript_RanFromRegirock
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq DesertRuins_EventScript_RanFromRegirock
 	setflag FLAG_DEFEATED_REGIROCK
 	release
 	end
 
-DesertRuins_EventScript_DefeatedRegirock::
-	setflag FLAG_EC_RESOLVED_REGIROCK
-	goto EmeraldChampions_EventScript_GuardianVictory
+DesertRuins_EventScript_DefeatedRegirock:: @ 822DA49
+	setflag FLAG_DEFEATED_REGIROCK
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
-DesertRuins_EventScript_RanFromRegirock::
+DesertRuins_EventScript_RanFromRegirock:: @ 822DA52
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-
-DesertRuins_EventScript_ReadAccount::
-	msgbox DesertRuins_Text_RouteAccount, MSGBOX_DEFAULT
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
-	return
-
-DesertRuins_Text_PuzzleDirections:
-	.string "From this inscription, walk LEFT\n"
-	.string "twice, then DOWN twice. Use your\l"
-	.string "licensed ROCK SMASH there.\p"
-	.string "TRAPINCH in the ROUTE 111 desert\n"
-	.string "outside can use ROCK SMASH.$"
-
-DesertRuins_Text_RouteAccount:
-	.string "The first account describes a\n"
-	.string "route south of the eastern city,\l"
-	.string "past two broad sea routes.\p"
-	.string "When land and sea fought, the\n"
-	.string "builders appealed to the guardian\l"
-	.string "of the sky.$"

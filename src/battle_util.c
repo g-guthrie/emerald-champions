@@ -9589,6 +9589,12 @@ bool32 MoveEffectIsGuaranteed(enum BattlerId battler, enum Ability battlerAbilit
 
 bool32 IsGen6ExpShareEnabled(void)
 {
+    // Emerald Champions: every Pokemon in the party was present for the fight,
+    // so every Pokemon in the party learns from it. Nothing has to be held and
+    // no flag has to be set.
+    if (B_EC_TEAM_EXP)
+        return TRUE;
+
     if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
         return FALSE;
 

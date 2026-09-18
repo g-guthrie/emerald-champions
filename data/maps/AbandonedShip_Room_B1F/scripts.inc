@@ -1,32 +1,37 @@
-AbandonedShip_Room_B1F_MapScripts::
+AbandonedShip_Room_B1F_MapScripts:: @ 82380A5
 	.byte 0
 
 AbandonedShip_Room_B1F_EventScript_Spiritomb::
 	lock
-	goto AbandonedShip_Room_B1F_EventScript_CheckOddKeystone
-
-AbandonedShip_Room_B1F_EventScript_Empty::
-	msgbox AbandonedShip_Room_B1F_Text_KeystoneMissing, MSGBOX_DEFAULT
+	checkPartyHasSpecies SPECIES_LICKITUNG
+	compare VAR_RESULT, TRUE
+	goto_if_eq AbandonedShip_Room_B1F_EventScript_CheckOddKeystone
+	checkPartyHasSpecies SPECIES_SLUGMA
+	compare VAR_RESULT, TRUE
+	goto_if_eq AbandonedShip_Room_B1F_EventScript_CheckOddKeystone
+AbandonedShip_Room_B1F_EventScript_ItsEmpty::
+	msgbox Text_EmptyTrashCan, MSGBOX_DEFAULT
+	closemessage
 	release
 	end
 
 AbandonedShip_Room_B1F_EventScript_CheckOddKeystone::
 	checkitem ITEM_ODD_KEYSTONE, 1
-	goto_if_eq VAR_RESULT, FALSE, AbandonedShip_Room_B1F_EventScript_Empty
+	compare VAR_RESULT, FALSE
+	goto_if_eq AbandonedShip_Room_B1F_EventScript_ItsEmpty
 	msgbox AbandonedShip_Room_B1F_Text_PutKeystoneInTrash, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, AbandonedShip_Room_B1F_EventScript_End
+	compare VAR_RESULT, NO
+	goto_if_eq AbandonedShip_Room_B1F_EventScript_End
 	closemessage
-	setvar VAR_0x8004, SPECIES_SPIRITOMB
-	setvar VAR_0x8005, 0
-	special CreateEmeraldChampionsStaticLegendaryEncounter
+	removeitem ITEM_ODD_KEYSTONE, 1
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x800A, VAR_RESULT
+	setwildbattle SPECIES_SPIRITOMB, VAR_0x800A, ITEM_SMOKE_BALL
 	waitse
-	playmoncry SPECIES_SPIRITOMB, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_SPIRITOMB, 2
 	delay 40
 	waitmoncry
-	special BattleSetup_StartLegendaryBattle
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, AbandonedShip_Room_B1F_EventScript_End
-	removeitem ITEM_ODD_KEYSTONE, 1
+	dowildbattle
 	release
 	end
 
@@ -36,12 +41,6 @@ AbandonedShip_Room_B1F_EventScript_End::
 	end
 
 AbandonedShip_Room_B1F_Text_PutKeystoneInTrash:
-	.string "The ODD KEYSTONE fits the cracked\n"
-	.string "socket in this old bin.\p"
-	.string "A whisper rises from the hull. Set\n"
-	.string "the stone in place?$"
-
-AbandonedShip_Room_B1F_Text_KeystoneMissing::
-	.string "Cold air seeps from the old bin.\p"
-	.string "A cracked socket in its base looks\n"
-	.string "made for an ODD KEYSTONE.$"
+	.string "Something is compelling you to toss\n"
+	.string "the Odd Keystone into this trash can.\p"
+	.string "Trash the Odd Keystone?$"

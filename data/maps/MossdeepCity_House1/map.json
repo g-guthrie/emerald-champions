@@ -3,7 +3,6 @@
   "name": "MossdeepCity_House1",
   "layout": "LAYOUT_HOUSE2",
   "music": "MUS_RUSTBORO",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MOSSDEEP_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -13,7 +12,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "local_id": "LOCALID_EC_CYNTHIA",
@@ -26,8 +25,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_House1_EventScript_CynthiaEC",
-      "flag": "0"
+      "script": "MossdeepCity_House1_EventScript_Cynthia",
+      "flag": "FLAG_HIDE_MOSSDEEP_CYNTHIA"
     }
   ],
   "warp_events": [
@@ -36,14 +35,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [],

@@ -57,6 +57,11 @@ struct PokenavMonList
 enum
 {
     POKENAV_MODE_NORMAL,           // Chosen from Start menu.
+    // Opened by a script (the Rustboro PokeNav tutorial). Any mode other than
+    // POKENAV_MODE_NORMAL makes the PokeNav exit through
+    // CB2_ReturnToFieldContinueScriptPlayMapMusic so the script's waitstate
+    // resumes; see the shutdown branch in src/pokenav.c.
+    POKENAV_MODE_TUTORIAL,
 };
 
 enum
@@ -165,6 +170,7 @@ enum {
 // pokenav.c
 
 void CB2_InitPokeNav(void);
+void OpenPokenavForTutorial(void);
 u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority);
 bool32 FuncIsActiveLoopedTask(LoopedTask func);
 void *GetSubstructPtr(u32 index);

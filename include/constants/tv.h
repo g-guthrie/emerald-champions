@@ -30,6 +30,10 @@
 #define TVSHOW_PKMN_FAN_CLUB_OPINIONS               3
 #define TVSHOW_DUMMY                                4
 #define TVSHOW_NAME_RATER_SHOW                      5
+// This show has no handler in src/tv.c; the ID is kept only so the Inclement
+// Lilycove Contest Lobby reporter script assembles. InterviewBefore ignores
+// unhandled show types (VAR_RESULT stays FALSE), so passing it is inert.
+#define TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE        6
 #define TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE   7
 #define TVSHOW_BATTLE_UPDATE                        10
 #define TVSHOW_FAN_CLUB_SPECIAL                     11

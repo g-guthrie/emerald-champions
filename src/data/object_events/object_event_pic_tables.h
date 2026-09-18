@@ -1081,6 +1081,7 @@ static const struct SpriteFrameImage sPicTable_InclementHeatran[] = {obj_frame_t
 static const struct SpriteFrameImage sPicTable_InclementDiancie[] = {obj_frame_tiles(gObjectEventPic_InclementDiancie)};
 static const struct SpriteFrameImage sPicTable_InclementCarbink[] = {obj_frame_tiles(gObjectEventPic_InclementCarbink)};
 static const struct SpriteFrameImage sPicTable_InclementRegirock[] = {obj_frame_tiles(gObjectEventPic_InclementRegirock)};
+static const struct SpriteFrameImage sPicTable_InclementRegigigas[] = {obj_frame_tiles(gObjectEventPic_InclementRegigigas)};
 static const struct SpriteFrameImage sPicTable_InclementRegice[] = {obj_frame_tiles(gObjectEventPic_InclementRegice)};
 static const struct SpriteFrameImage sPicTable_InclementRegisteel[] = {obj_frame_tiles(gObjectEventPic_InclementRegisteel)};
 static const struct SpriteFrameImage sPicTable_InclementItemBall[] = {obj_frame_tiles(gObjectEventPic_InclementItemBall)};

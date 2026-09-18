@@ -1634,13 +1634,17 @@
 	@ that is also against 'species2' at 'level2' holding 'item2'.
 	@ Running this command will not affect normal wild battles. You start the prepared battle with dowildbattle.
 	@ If the player only has one Pokemon, a scripted double battle will be buggy.
+	@ Emerald Champions: level/level2 are halfwords so a VAR_ id can be passed and
+	@ resolved at runtime (Inclement Emerald does this for every static/legendary
+	@ encounter, e.g. "setwildbattle SPECIES_RAYQUAZA, VAR_0x800A, ITEM_...").
+	@ As a byte, VAR_0x800A truncated to 0x0A and every such encounter was level 10.
 	.macro setwildbattle species:req, level:req, item=ITEM_NONE, species2=SPECIES_NONE, level2=0, item2=ITEM_NONE
 	.byte SCR_OP_SETWILDBATTLE
 	.2byte \species
-	.byte \level
+	.2byte \level
 	.2byte \item
 	.2byte \species2
-	.byte \level2
+	.2byte \level2
 	.2byte \item2
 	.endm
 
@@ -3001,4 +3005,134 @@
 	.macro buffermilestonetext flag:req
 	setvar VAR_0x8003, \flag
 	special BufferCampaignMilestoneText
+	.endm
+
+@ Inclement Emerald compatibility
+@
+@ Map and field scripts restored from Inclement Emerald (v1.13, 2021 engine)
+@ call script macros whose names changed - or whose subsystems were removed -
+@ in this engine. Every alias below forwards to the macro that already exists
+@ here, so the opcode always comes from this tree's SCR_OP_* constants in
+@ data/script_cmd_table.inc and is never hard-coded to a donor opcode number.
+
+	@ Inclement's name for setobjectsubpriority (SCR_OP_SETOBJECTSUBPRIORITY).
+	@ Identical argument order, and this tree's ScrCmd_setobjectsubpriority is
+	@ byte-for-byte the donor's ScrCmd_setobjectpriority (localId halfword, map
+	@ group/num bytes, priority byte, passed on as subpriority + 83).
+	@ Used by the Mr. Briney follow sequences on Route 104 / 109 / Dewford Town.
+	.macro setobjectpriority localId:req, map:req, priority:req
+	setobjectsubpriority \localId, \map, \priority
+	.endm
+
+	@ Inclement's name for resetobjectsubpriority (SCR_OP_RESETOBJECTSUBPRIORITY).
+	.macro resetobjectpriority localId:req, map:req
+	resetobjectsubpriority \localId, \map
+	.endm
+
+	@ Inclement's name for setflashlevel (SCR_OP_SETFLASHLEVEL). Despite the
+	@ donor's name the argument is a flash *level* in both engines, read as a
+	@ halfword through VarGet - cave darkness / Flash in Granite Cave.
+	.macro setflashradius level:req
+	setflashlevel \level
+	.endm
+
+	@ Inclement's name for getpokenewsactive (SCR_OP_GETPOKENEWSACTIVE). Both
+	@ take a POKENEWS_* kind as a halfword and report through VAR_RESULT; the
+	@ command was renamed upstream once it was understood to be a PokeNews
+	@ check rather than a price lookup. The restored call sites already pass
+	@ POKENEWS_* constants.
+	.macro getpricereduction newsKind:req
+	getpokenewsactive \newsKind
+	.endm
+
+	@ Inclement's name for warpwhitefade (SCR_OP_WARPWHITEFADE): the Sootopolis
+	@ legendary encounter warp. The donor's DoSootopolisLegendWarp is this
+	@ tree's DoWhiteFadeWarp, and the donor's "map, byte, word1, word2" layout
+	@ is exactly what formatwarp emits for "map, warpId, x, y".
+	.macro warpsootopolislegend map:req, warpId:req, x:req, y:req
+	warpwhitefade \map, \warpId, \x, \y
+	.endm
+
+	@ Inclement's checkpartymove took a MOVE_* id. This engine's checkfieldmove
+	@ takes a FIELD_MOVE_* id (include/constants/field_move.h) and encodes it as
+	@ a single byte, so the two are NOT interchangeable by argument - passing a
+	@ MOVE_* id straight through would silently select the wrong field move.
+	@ Translate here instead, and refuse to assemble anything with no field-move
+	@ equivalent rather than emit a wrong index. checkUnlocked stays FALSE,
+	@ which is the plain "who in the party can do this" check the donor had.
+	.macro checkpartymove move:req
+	.if \move == MOVE_CUT
+	checkfieldmove FIELD_MOVE_CUT
+	.elseif \move == MOVE_FLASH
+	checkfieldmove FIELD_MOVE_FLASH
+	.elseif \move == MOVE_ROCK_SMASH
+	checkfieldmove FIELD_MOVE_ROCK_SMASH
+	.elseif \move == MOVE_STRENGTH
+	checkfieldmove FIELD_MOVE_STRENGTH
+	.elseif \move == MOVE_SURF
+	checkfieldmove FIELD_MOVE_SURF
+	.elseif \move == MOVE_FLY
+	checkfieldmove FIELD_MOVE_FLY
+	.elseif \move == MOVE_DIVE
+	checkfieldmove FIELD_MOVE_DIVE
+	.elseif \move == MOVE_WATERFALL
+	checkfieldmove FIELD_MOVE_WATERFALL
+	.elseif \move == MOVE_TELEPORT
+	checkfieldmove FIELD_MOVE_TELEPORT
+	.elseif \move == MOVE_DIG
+	checkfieldmove FIELD_MOVE_DIG
+	.elseif \move == MOVE_SECRET_POWER
+	checkfieldmove FIELD_MOVE_SECRET_POWER
+	.elseif \move == MOVE_MILK_DRINK
+	checkfieldmove FIELD_MOVE_MILK_DRINK
+	.elseif \move == MOVE_SOFT_BOILED
+	checkfieldmove FIELD_MOVE_SOFT_BOILED
+	.elseif \move == MOVE_SWEET_SCENT
+	checkfieldmove FIELD_MOVE_SWEET_SCENT
+	.elseif \move == MOVE_ROCK_CLIMB
+	checkfieldmove FIELD_MOVE_ROCK_CLIMB
+	.elseif \move == MOVE_DEFOG
+	checkfieldmove FIELD_MOVE_DEFOG
+	.else
+	.error "checkpartymove: this move has no FIELD_MOVE_* equivalent - use checkfieldmove directly"
+	.endif
+	.endm
+
+	@ Inclement defined checkPartyHasSpecies and isChosenMonSpecies as script
+	@ commands 0xe3 and 0xe4. Both opcodes are already occupied in this engine
+	@ (SCR_OP_DYNMULTICHOICE and SCR_OP_DYNMULTIPUSH), so the two commands are
+	@ restored as callnative handlers in src/scrcmd.c instead of new command
+	@ table entries - no opcode is invented and the table is left untouched.
+
+	@ Sets VAR_RESULT to TRUE if the player's party holds the given species or
+	@ any alternate form that shares its National Dex number.
+	.macro checkPartyHasSpecies species:req
+	callnative NativeFunc_CheckPartyHasSpecies
+	.2byte \species
+	.endm
+
+	@ Sets VAR_RESULT to TRUE if the party member chosen into VAR_0x8004 is the
+	@ given species or any alternate form that shares its National Dex number.
+	.macro isChosenMonSpecies species:req
+	callnative NativeFunc_IsChosenMonSpecies
+	.2byte \species
+	.endm
+
+	@ Inclement's name for the lock_anim movement action
+	@ (MOVEMENT_ACTION_LOCK_ANIM, 0x94 in both engines). Defined here rather
+	@ than beside lock_anim in asm/macros/movement.inc because macros.inc is
+	@ included first, so create_movement_action is already in scope.
+	create_movement_action store_lock_anim, MOVEMENT_ACTION_LOCK_ANIM
+
+	@ The Match Call / trainer rematch phone system does not exist in this
+	@ engine: src/match_call.c and include/match_call.h are deleted, the
+	@ SetMatchCallRegisteredFlag special is gone, and the std script slot is
+	@ marked "unused slot 8 (was STD_REGISTER_MATCH_CALL)" in
+	@ data/event_scripts.s. Restored Inclement route-trainer scripts still ask
+	@ to register a phone number after their battle, so this expands to nothing
+	@ at all - zero bytes, no opcode, no effect on script flow - and those
+	@ scripts assemble and run exactly as before minus the registration.
+	@ Do NOT give this a real opcode: there is no handler to run.
+	.macro register_matchcall trainer:req
+	@ intentionally empty
 	.endm

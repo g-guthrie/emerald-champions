@@ -965,6 +965,34 @@ enum BerryId
 
 #undef UNPACK_BERRY_ID
 
+// ---------------------------------------------------------------------------
+// Ranges of berries handed out by various NPCs.
+// Restored from Inclement Emerald's include/constants/items.h verbatim; the
+// scripts that use them (Route123_BerryMastersHouse, Route114, SootopolisCity)
+// were restored along with data/maps and reference these names directly.
+// Each script does: random NUM_x -> addvar NUM_x_SKIPPED -> addvar
+// FIRST_BERRY_INDEX, so the SKIPPED value is the offset of the first berry in
+// the range from FIRST_BERRY_INDEX. This tree's berry ordering matches the
+// donor's offset for offset (CHERI +0, SITRUS +9, RAZZ +15, PINAP +19,
+// POMEG +20, NOMEL +29), so the resulting counts are identical.
+// ---------------------------------------------------------------------------
+#define FIRST_BERRY_MASTER_BERRY      ITEM_POMEG_BERRY
+#define LAST_BERRY_MASTER_BERRY       ITEM_NOMEL_BERRY
+#define FIRST_BERRY_MASTER_WIFE_BERRY ITEM_CHERI_BERRY
+#define LAST_BERRY_MASTER_WIFE_BERRY  ITEM_SITRUS_BERRY
+#define FIRST_KIRI_BERRY              ITEM_POMEG_BERRY
+#define LAST_KIRI_BERRY               ITEM_NOMEL_BERRY
+#define FIRST_ROUTE_114_MAN_BERRY     ITEM_RAZZ_BERRY
+#define LAST_ROUTE_114_MAN_BERRY      ITEM_PINAP_BERRY
+
+#define NUM_BERRY_MASTER_BERRIES          (LAST_BERRY_MASTER_BERRY - FIRST_BERRY_MASTER_BERRY + 1)
+#define NUM_BERRY_MASTER_BERRIES_SKIPPED  (FIRST_BERRY_MASTER_BERRY - FIRST_BERRY_INDEX)
+#define NUM_BERRY_MASTER_WIFE_BERRIES     (LAST_BERRY_MASTER_WIFE_BERRY - FIRST_BERRY_MASTER_WIFE_BERRY + 1)
+#define NUM_KIRI_BERRIES                  (LAST_KIRI_BERRY - FIRST_KIRI_BERRY + 1)
+#define NUM_KIRI_BERRIES_SKIPPED          (FIRST_KIRI_BERRY - FIRST_BERRY_INDEX)
+#define NUM_ROUTE_114_MAN_BERRIES         (LAST_ROUTE_114_MAN_BERRY - FIRST_ROUTE_114_MAN_BERRY + 1)
+#define NUM_ROUTE_114_MAN_BERRIES_SKIPPED (FIRST_ROUTE_114_MAN_BERRY - FIRST_BERRY_INDEX)
+
 #define ITEM_TO_MAIL(itemId) ((itemId) - FIRST_MAIL_INDEX)
 #define MAIL_NONE 0xFF
 #define ITEM_TO_MULCH(itemId)(((itemId) - ITEM_GROWTH_MULCH) + 1)

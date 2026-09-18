@@ -87,6 +87,32 @@ EventScript_BrailleFieldMove:
 	releaseall
 	end
 
+DesertRuins_EventScript_ReadAccount::
+	msgbox DesertRuins_Text_RouteAccount, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	return
+
+AncientTomb_EventScript_ReadAccount::
+	msgbox AncientTomb_Text_RouteAccount, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	return
+
+DesertRuins_Text_RouteAccount:
+	.string "The first account describes a\n"
+	.string "route south of the eastern city,\l"
+	.string "past two broad sea routes.\p"
+	.string "When land and sea fought, the\n"
+	.string "builders appealed to the guardian\l"
+	.string "of the sky.$"
+
+AncientTomb_Text_RouteAccount:
+	.string "The final account describes an\n"
+	.string "underwater cave where the path\l"
+	.string "rises above the waterline.\p"
+	.string "The sky guardian quieted the\n"
+	.string "land and sea. Its tower stood\l"
+	.string "above the southern ocean.$"
+
 EventScript_BrailleFieldMoveUnavailable:
 	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_BrailleFieldMoveLocked, MSGBOX_DEFAULT

@@ -28,7 +28,10 @@ TEST("Harvest economy: ordinary free stock never pays a harvest recipe")
         enum Item item = BerryTypeToItemId(berry);
         EXPECT(AddBagItem(item, 30));
         EXPECT_EQ(GetHarvestedBerryCount(berry), 0);
-        EXPECT_EQ(GetItemSellPrice(item), 0);
+        // Berries are bought now, so they sell back like any other stock. What
+        // this test is really guarding is that ordinary stock never counts as
+        // harvest, which is the assertion above and the trade attempts below.
+        EXPECT_EQ(GetItemSellPrice(item), GetItemPrice(item) / ITEM_SELL_FACTOR);
         EXPECT(GetItemFieldFunc(item) == ItemUseOutOfBattle_CannotUse);
     }
     for (u32 choice = 0; choice < 3; choice++)
@@ -172,6 +175,9 @@ TEST("Harvest economy: daily seed pair rolls back if only its first berry fits")
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LUM_BERRY), 1);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SITRUS_BERRY), 1);
-    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_SITRUS), 0);
+    // Since "berry gifts mint harvest" the pair credits both counters once it
+    // actually lands; only the rolled-back attempt above leaves them at zero.
+    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_SITRUS), 1);
+    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_LUM), 1);
     ResetHarvest();
 }

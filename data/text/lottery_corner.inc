@@ -77,3 +77,11 @@ LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding:
 
 LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2:
 	.string "Please do visit again.$"
+
+@ ---------------------------------------------------------------------------
+@ Restored from Inclement Emerald: referenced by the Inclement Lilycove
+@ Department Store scripts. Additive only; no existing symbol was changed.
+@ ---------------------------------------------------------------------------
+
+LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow: @ 82A6496
+	.string "Please come back tomorrow.$"

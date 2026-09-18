@@ -1,33 +1,54 @@
 Std_MsgboxNPC:
 	lock
 	faceplayer
-	message NULL
+	message 0x0
 	waitmessage
 	waitbuttonpress
 	release
 	return
 
 Std_MsgboxSign:
-	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	lockall
-	message NULL
+	message 0x0
 	waitmessage
 	waitbuttonpress
 	releaseall
-	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	return
 
 Std_MsgboxDefault:
-	message NULL
+	message 0x0
 	waitmessage
 	waitbuttonpress
 	return
 
 Std_MsgboxYesNo:
-	message NULL
+	message 0x0
 	waitmessage
 	yesnobox 20, 8
 	return
+
+Std_MsgboxGetPoints:
+	message 0x0
+	playfanfare MUS_OBTAIN_B_POINTS
+	waitfanfare
+	waitmessage
+	return
+
+Std_10:
+	pokenavcall 0x0
+	waitmessage
+	return
+
+EventScript_UnusedReturn:
+	return
+
+Common_EventScript_SaveGame::
+	special SaveGame
+	waitstate
+	return
+
+@ Emerald Champions: restored after the Inclement merge overwrote this file;
+@ these are referenced from this engine's own C and scripts.
 
 Std_ReceivedItem::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
@@ -41,6 +62,14 @@ Std_ReceivedItem::
 	call EventScript_RestorePrevTextColor
 	return
 
+Std_MsgboxPokenav:
+	pokenavcall NULL
+	waitmessage
+	return
+
+@ Emerald Champions: restored from this repo's own pre-merge version; the Inclement
+@ merge replaced this file and these definitions were lost while still referenced.
+
 EventScript_ReceivedItemFanfare1::
 	playfanfare MUS_LEVEL_UP
 	return
@@ -51,24 +80,4 @@ EventScript_ReceivedItemFanfare2::
 
 EventScript_ReceivedItemWaitFanfare::
 	delay 50
-	return
-
-Std_MsgboxGetPoints:
-	message NULL
-	playfanfare MUS_OBTAIN_B_POINTS
-	waitfanfare
-	waitmessage
-	return
-
-@ Never used, pokenavcall is always used directly instead
-Std_MsgboxPokenav:
-	pokenavcall NULL
-	waitmessage
-	return
-
-EventScript_UnusedReturn:
-	return
-
-Common_EventScript_SaveGame::
-	special SaveGame
 	return

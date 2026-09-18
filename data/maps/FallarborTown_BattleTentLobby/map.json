@@ -3,7 +3,6 @@
   "name": "FallarborTown_BattleTentLobby",
   "layout": "LAYOUT_BATTLE_TENT_LOBBY",
   "music": "MUS_B_TOWER_RS",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_FALLARBOR_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -88,14 +87,14 @@
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 7,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_FALLARBOR_TOWN",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     }
   ],
   "coord_events": [],

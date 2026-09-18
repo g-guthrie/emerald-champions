@@ -3,7 +3,6 @@
   "name": "MossdeepCity",
   "layout": "LAYOUT_MOSSDEEP_CITY",
   "music": "MUS_RUSTBORO",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MOSSDEEP_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -15,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE125",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE125"
     },
     {
-      "map": "MAP_ROUTE127",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE127"
     },
     {
-      "map": "MAP_ROUTE124",
+      "direction": "left",
       "offset": -40,
-      "direction": "left"
+      "map": "MAP_ROUTE124"
     }
   ],
   "object_events": [
@@ -97,7 +96,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 63,
       "y": 35,
       "elevation": 5,
@@ -105,9 +104,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_QUICK_BALL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_MOSSDEEP_CITY_QUICK_BALL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MossdeepCity_EventScript_ItemMiloticite",
+      "flag": "FLAG_ITEM_MOSSDEEP_CITY_MILOTICITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
@@ -228,7 +227,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MossdeepCity_EventScript_DynamicPunchTutor",
+      "script": "MossdeepCity_EventScript_AvalancheTM",
       "flag": "0"
     },
     {
@@ -265,70 +264,70 @@
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_HOUSE1",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 38,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_GYM",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 28,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 67,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_HOUSE2",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 37,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_MART",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 49,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_HOUSE3",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 19,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_STEVENS_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 18,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_HOUSE4",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 64,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_SPACE_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 36,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_MOSSDEEP_CITY_GAME_CORNER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [
@@ -487,6 +486,14 @@
       "elevation": 7,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "MossdeepCity_EventScript_WhiteRock"
+    },
+    {
+      "type": "hidden_item",
+      "x": 21,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_BOTTLE_CAP",
+      "flag": "FLAG_HIDDEN_ITEM_MOSSDEEP_CITY_BOTTLE_CAP"
     }
   ]
 }

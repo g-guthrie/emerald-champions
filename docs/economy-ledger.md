@@ -1,16 +1,35 @@
 # Economy ledger
 
-Regenerated September 16, 2026 for design item F (prize retune) after C8 (dead shop stock) and
-C9 (cash pickups). Money in this game buys evolution items, Balls, Archive starters and cosmetics
-and nothing else; this file is the arithmetic behind that claim.
+Rewritten September 17, 2026 for the Inclement conversion. Money is no longer a
+near-dead currency: battle items are bought rather than handed over, treasure is
+worth what Inclement paid for it, trainers pay their authored tier in full, and
+milestones pay nothing at all.
+
+## What changed in this pass
+
+| | Before | After |
+|---|---|---|
+| Milestone stipends | 38,000 over 14 milestones | none; milestones move the cap only |
+| Prize multiplier | ~40% of the authored tier | the authored tier, in full |
+| Treasure (Nugget, Star Piece, ...) | `.price = 0`, unsellable | Inclement's prices, sellable at half |
+| Battle items | free from the vendor | bought; 57 prices restored to Inclement's |
+| EV training | impossible (`EV_CAP_NO_GAIN`) | earned in battle again (`EV_CAP_NONE`) |
+
+Prize income across the 368 priced encounters goes from **72,318** to **180,795**.
+Lifetime income goes from **116,318** (6,000 start + 38,000 stipends + prizes) to
+**186,795** (6,000 start, no stipends, prizes in full) - and that is before any
+treasure is sold, which is now real income rather than zero.
+
+Against that, money now has to cover a 195-entry battle-item catalogue at roughly
+4,000 a piece on top of the evolution catalogue, so the surplus that used to sit
+unspent at the end of a run is gone.
 
 ## Model
 
 Income sources counted here, all from source:
 
 - Starting money 6,000 (`src/new_game.c`).
-- Fourteen milestone stipends totalling 38,000 (`sCampaignMilestones`, `src/caps.c:13-30`).
-  6,000 + 38,000 = the guide's 44,000. Unchanged by this pass.
+- No milestone stipends: every entry in `sCampaignMilestones` (`src/caps.c`) pays 0.
 - First-clear campaign prize money, `campaignLevelCap * campaignPrizeMultiplier`
   (`GetCampaignBattleMoneyReward`, `src/battle_setup.c`). Return fights and rematches pay 0
   (`campaignRewardEligible`); defeat deducts nothing.

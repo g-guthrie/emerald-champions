@@ -3,7 +3,6 @@
   "name": "SlateportCity",
   "layout": "LAYOUT_SLATEPORT_CITY",
   "music": "MUS_SLATEPORT",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -15,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE110",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE110"
     },
     {
-      "map": "MAP_ROUTE109",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE109"
     },
     {
-      "map": "MAP_ROUTE134",
+      "direction": "right",
       "offset": 0,
-      "direction": "right"
+      "map": "MAP_ROUTE134"
     }
   ],
   "object_events": [
@@ -339,7 +338,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_EventScript_EvGuide",
+      "script": "SlateportCity_EventScript_EffortRibbonWoman",
       "flag": "0"
     },
     {
@@ -352,8 +351,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_EventScript_FieldSupplyClerk",
-      "flag": "FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN"
+      "script": "SlateportCity_EventScript_PowerTMClerk",
+      "flag": "0"
     },
     {
       "local_id": "LOCALID_SLATEPORT_ENERGY_GURU",
@@ -366,7 +365,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_EventScript_CatchingGuru",
+      "script": "SlateportCity_EventScript_EnergyGuru",
       "flag": "0"
     },
     {
@@ -490,7 +489,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_EventScript_HerbalSupplyClerk",
+      "script": "SlateportCity_EventScript_BerryPowderClerk",
       "flag": "0"
     },
     {
@@ -508,7 +507,7 @@
       "flag": "FLAG_HIDE_SLATEPORT_CITY_SCOTT"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 6,
       "y": 54,
       "elevation": 3,
@@ -516,9 +515,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_QUICK_BALL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_SLATEPORT_CITY_QUICK_BALL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Slateport_City_ItemAlakazite",
+      "flag": "FLAG_ITEM_SLATEPORT_CITY_ALAKAZITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
@@ -530,7 +529,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_EventScript_BattleItemScholar",
+      "script": "SlateportCity_EventScript_PowerItems",
       "flag": "0"
     },
     {
@@ -543,7 +542,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_EventScript_IncenseScholar",
+      "script": "SlateportCity_EventScript_IncenseStand",
       "flag": "0"
     },
     {
@@ -557,7 +556,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_EventScript_Greta",
-      "flag": "0"
+      "flag": "FLAG_SYS_ARENA_SILVER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BRAWLY",
@@ -571,19 +570,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_EventScript_Brawly",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_BRAWLY"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
-      "x": 18,
-      "y": 3,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_EventScript_KnuckleGuard",
-      "flag": "FLAG_HIDE_SLATEPORT_CITY_KNUCKLE_GUARD"
     }
   ],
   "warp_events": [
@@ -592,77 +578,77 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 13,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_MART",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 26,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_STERNS_SHIPYARD_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 10,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 4,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_POKEMON_FAN_CLUB",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 30,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 5,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_NAME_RATERS_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 31,
       "y": 26,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 28,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_HARBOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 40,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_HARBOR",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     },
     {
       "x": 21,
       "y": 44,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [
@@ -674,42 +660,6 @@
       "var": "VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE",
       "var_value": "2",
       "script": "SlateportCity_EventScript_ScottBattleTentScene"
-    },
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 3,
-      "elevation": 3,
-      "var": "VAR_TEMP_4",
-      "var_value": "0",
-      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 3,
-      "elevation": 3,
-      "var": "VAR_TEMP_4",
-      "var_value": "0",
-      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
-    },
-    {
-      "type": "trigger",
-      "x": 19,
-      "y": 3,
-      "elevation": 3,
-      "var": "VAR_TEMP_4",
-      "var_value": "0",
-      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
-    },
-    {
-      "type": "trigger",
-      "x": 20,
-      "y": 3,
-      "elevation": 3,
-      "var": "VAR_TEMP_4",
-      "var_value": "0",
-      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
     }
   ],
   "bg_events": [
@@ -815,7 +765,7 @@
       "y": 36,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "SlateportCity_EventScript_MarketDirectory"
+      "script": "SlateportCity_EventScript_BerryCrushRankingsSign"
     }
   ]
 }

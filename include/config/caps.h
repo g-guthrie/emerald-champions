@@ -11,7 +11,7 @@
 #define LEVEL_CAP_VARIABLE              2 // Level cap is chosen according to the contents of the event variable specified by B_LEVEL_CAP_VARIABLE
 
 // Level Cap Configs
-#define B_EXP_CAP_TYPE                  EXP_CAP_HARD   // Emerald Champions uses strict caps; leveling past the current milestone is never required.
+#define B_EXP_CAP_TYPE                  EXP_CAP_HARD   // The cap is a ceiling, never passed. EXP_CAP_SOFT would let levels run past it, which is not what Inclement's soft cap means: there the cap holds and the fight still trains EVs, which B_EV_CAP_TYPE below now restores.
 #define B_LEVEL_CAP_TYPE                LEVEL_CAP_FLAG_LIST
 #define B_LEVEL_CAP_VARIABLE            0 // event variable used to derive level cap if B_LEVEL_CAP_TYPE is set to LEVEL_CAP_VARIABLE
 
@@ -25,9 +25,9 @@
 #define EV_CAP_NO_GAIN                  3 // No EVs can be gained
 
 // EV Cap Configs
-#define B_EV_CAP_TYPE                   EV_CAP_NO_GAIN // Editable EVs are applied by wild and tutor presets, never through grinding.
-#define B_EV_CAP_VARIABLE               0 // unused when B_EV_CAP_TYPE is EV_CAP_NO_GAIN
+#define B_EV_CAP_TYPE                   EV_CAP_NONE    // Battles train EVs again, including at the level cap, where the fight is still worth something even though no level can be gained.
+#define B_EV_CAP_VARIABLE               0 // unused when B_EV_CAP_TYPE is EV_CAP_NONE
 
-#define B_EV_ITEMS_CAP                  TRUE  // EVs come from presets or the tutor; vitamins cannot bypass the no-grind contract.
+#define B_EV_ITEMS_CAP                  FALSE // Vitamins train to the ordinary 252/510 limits, as they do in Inclement.
 
 #endif /* GUARD_CONFIG_CAPS_H */

@@ -2,7 +2,7 @@
   "id": "MAP_ALTERING_CAVE_1F",
   "name": "AlteringCave_1F",
   "layout": "LAYOUT_ALTERING_CAVE_1F",
-  "music": "MUS_RG_SEVII_CAVE",
+  "music": "HG_SEQ_GS_D_IWAYAMA",
   "region_map_section": "MAPSEC_ALTERING_CAVE",
   "requires_flash": true,
   "weather": "WEATHER_NONE",
@@ -153,12 +153,12 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_PRISON_BOTTLE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_PRISON_BOTTLE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Altering_Cave_EventScript_CometShard",
+      "flag": "FLAG_ALTERING_CAVE_COMET_SHARD"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 29,
       "y": 16,
       "elevation": 3,
@@ -166,12 +166,12 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_MASTER_BALL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_MASTER_BALL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Altering_Cave_EventScript_MasterBall2",
+      "flag": "FLAG_ALTERING_CAVE_MASTER_BALL_2"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 9,
       "y": 18,
       "elevation": 3,
@@ -179,22 +179,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_BEAST_BALL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_ALTERING_BEAST_BALL"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
-      "x": 6,
-      "y": 6,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AlteringCave_1F_EventScript_Researcher",
-      "flag": "0"
+      "script": "Altering_Cave_EventScript_MasterBall1",
+      "flag": "FLAG_ALTERING_CAVE_MASTER_BALL_1"
     }
   ],
   "warp_events": [
@@ -241,7 +228,10 @@
       "dest_warp_id": 6
     }
   ],
-  "coord_events": [],
-  "bg_events": [],
-  "region": "REGION_HOENN"
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

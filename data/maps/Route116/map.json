@@ -3,7 +3,6 @@
   "name": "Route116",
   "layout": "LAYOUT_ROUTE116",
   "music": "MUS_ROUTE104",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_116",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -15,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_VERDANTURF_TOWN",
+      "direction": "down",
       "offset": 80,
-      "direction": "down"
+      "map": "MAP_VERDANTURF_TOWN"
     },
     {
-      "map": "MAP_RUSTBORO_CITY",
+      "direction": "left",
       "offset": 0,
-      "direction": "left"
+      "map": "MAP_RUSTBORO_CITY"
     }
   ],
   "object_events": [
@@ -105,7 +104,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 19,
       "y": 6,
       "elevation": 3,
@@ -113,12 +112,12 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_LUCARIONITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_LUCARIONITE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route116_EventScript_ItemEther",
+      "flag": "FLAG_ITEM_ROUTE_116_ETHER"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 10,
       "y": 17,
       "elevation": 3,
@@ -126,9 +125,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_STARAPTITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_STARAPTITE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route116_EventScript_ItemRepel",
+      "flag": "FLAG_ITEM_ROUTE_116_REPEL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
@@ -210,7 +209,7 @@
       "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 80,
       "y": 8,
       "elevation": 3,
@@ -218,9 +217,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_GARCHOMPITE_Z",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_GARCHOMPITE_Z"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route116_EventScript_ItemHPUp",
+      "flag": "FLAG_ITEM_ROUTE_116_HP_UP"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
@@ -243,8 +242,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route116_EventScript_Karen",
       "flag": "0"
     },
@@ -275,7 +274,7 @@
       "flag": "FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
       "x": 55,
       "y": 12,
       "elevation": 4,
@@ -283,9 +282,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_LUCARIONITE_Z",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_LUCARIONITE_Z"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route116_EventScript_TM77StruggleBug",
+      "flag": "FLAG_ITEM_ROUTE_116_X_SPECIAL"
     },
     {
       "local_id": "LOCALID_ROUTE116_WANDAS_BF",
@@ -311,8 +310,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_DuskStoneSeeker",
-      "flag": "FLAG_HIDE_ROUTE_116_DUSK_STONE_SEEKER"
+      "script": "Route116_EventScript_GlassesMan",
+      "flag": "FLAG_HIDE_ROUTE_116_DROPPED_GLASSES_MAN"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
@@ -341,7 +340,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 34,
       "y": 7,
       "elevation": 0,
@@ -349,9 +348,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_MEOWSTICITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_MEOWSTICITE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route116_EventScript_ItemBindingBand",
+      "flag": "FLAG_ITEM_ROUTE_116_BINDING_BAND"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
@@ -399,35 +398,35 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_RUSTURF_TUNNEL",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 38,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ROUTE116_TUNNELERS_REST_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 65,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_RUSTURF_TUNNEL",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     },
     {
       "x": 59,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 79,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [
@@ -523,8 +522,8 @@
       "x": 70,
       "y": 13,
       "elevation": 3,
-      "item": "ITEM_DUSK_STONE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_116_DUSK_STONE"
+      "item": "ITEM_BLACK_GLASSES",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES"
     }
   ]
 }

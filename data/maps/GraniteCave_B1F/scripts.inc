@@ -1,17 +1,12 @@
-GraniteCave_B1F_MapScripts::
+GraniteCave_B1F_MapScripts:: @ 822DC5E
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CaveHole_CheckFallDownHole
 	map_script MAP_SCRIPT_ON_TRANSITION, CaveHole_FixCrackedGround
 	map_script MAP_SCRIPT_ON_RESUME, GraniteCave_B1F_SetHoleWarp
 	.byte 0
 
-GraniteCave_B1F_SetHoleWarp:
-	@ Keep the original moderate ambient radius if the player misses the hiker;
-	@ the Flash license and Stone Badge open the wider radius.
-	special SetGraniteCaveFlashLevel
+GraniteCave_B1F_SetHoleWarp: @ 822DC6E
+	setflashradius 4
 	setstepcallback STEP_CB_CRACKED_FLOOR
-	setholewarp MAP_GRANITE_CAVE_B2F
+	setholewarp MAP_GRANITE_CAVE_B2F, 255, 0, 0
 	end
 
-GraniteCave_B1F_EventScript_DuskBallPack::
-	finditem ITEM_DUSK_BALL, 5
-	end

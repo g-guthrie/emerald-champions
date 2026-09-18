@@ -1,27 +1,80 @@
 SealedChamber_InnerRoom_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, Common_EventScript_RemoveOverworldAfterBattle
 	.byte 0
 
-SealedChamber_InnerRoom_EventScript_BrailleBackWall::
-	lockall
-	msgbox SealedChamber_InnerRoom_Text_ThreeRecords, MSGBOX_DEFAULT
-	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
-	goto_if_unset FLAG_EC_REPORT_C26_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
-	goto_if_unset FLAG_EC_REPORT_C30_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
+SealedChamber_InnerRoom_EventScript_Regigigas::
+	lock
+	msgbox SealedChamber_InnerRoom_Text_RegigigasStatue, MSGBOX_DEFAULT
 	closemessage
+	braillemessage SealedChamber_InnerRoom_Braille_Regigigas
+	waitbuttonpress
+	closebraillemessage
+	setvar VAR_0x8004, SPECIES_REGICE
+	setvar VAR_0x8005, SPECIES_REGIROCK
+	setvar VAR_0x8006, SPECIES_REGISTEEL
+	setvar VAR_0x8007, 3
+	specialvar VAR_RESULT, CheckSpeciesInParty
+	compare VAR_RESULT, FALSE
+	goto_if_eq SealedChamber_InnerRoom_EventScript_RegigigasStatue
+	waitse
+	playmoncry SPECIES_REGIGIGAS, 2
+	delay 40
+	waitmoncry
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x800A, VAR_RESULT
+	setwildbattle SPECIES_REGIGIGAS, VAR_0x800A, ITEM_NORMAL_GEM
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	waitstate
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq SealedChamber_InnerRoom_EventScript_DefeatedRegigigas
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq SealedChamber_InnerRoom_EventScript_RanFromRegigigas
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq SealedChamber_InnerRoom_EventScript_RanFromRegigigas
+	setflag FLAG_DEFEATED_REGIGIGAS
+	release
+	end
+
+SealedChamber_InnerRoom_EventScript_DefeatedRegigigas::
+	setflag FLAG_DEFEATED_REGIGIGAS
+	goto Common_EventScript_RemoveStaticPokemon
+	end
+
+SealedChamber_InnerRoom_EventScript_RanFromRegigigas::
+	setvar VAR_0x8004, SPECIES_REGIGIGAS
+	goto Common_EventScript_LegendaryFlewAway
+	end
+
+SealedChamber_InnerRoom_EventScript_RegigigasStatue::
+	release
+	end
+
+SealedChamber_InnerRoom_EventScript_BrailleBackWall:: @ 82391F8
+	lockall
+	braillemessage SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth
+	waitbuttonpress
+	closebraillemessage
+	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
+	specialvar VAR_RESULT, CheckRelicanthWailord
+	compare VAR_RESULT, FALSE
+	goto_if_eq SealedChamber_InnerRoom_EventScript_NoEffect
 	fadeoutbgm 0
 	playse SE_TRUCK_MOVE
-	special DoSealedChamberShakingEffect_Long
+	special DoSealedChamberShakingEffect1
 	waitstate
 	delay 40
-	special DoSealedChamberShakingEffect_Short
-	waitstate
-	playse SE_DOOR
-	delay 40
-	special DoSealedChamberShakingEffect_Short
+	special DoSealedChamberShakingEffect2
 	waitstate
 	playse SE_DOOR
 	delay 40
-	special DoSealedChamberShakingEffect_Short
+	special DoSealedChamberShakingEffect2
+	waitstate
+	playse SE_DOOR
+	delay 40
+	special DoSealedChamberShakingEffect2
 	waitstate
 	playse SE_DOOR
 	delay 40
@@ -29,134 +82,62 @@ SealedChamber_InnerRoom_EventScript_BrailleBackWall::
 	closemessage
 	fadeinbgm 0
 	setflag FLAG_REGI_DOORS_OPENED
-	msgbox SealedChamber_InnerRoom_Text_ThreeSites, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_NoEffect::
-	msgbox SealedChamber_InnerRoom_Text_ThreeSites, MSGBOX_DEFAULT
+SealedChamber_InnerRoom_EventScript_NoEffect:: @ 8239253
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_BrailleStoryPart1::
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart1:: @ 8239255
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived
+	braillemessage SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_BrailleStoryPart2::
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart2:: @ 823925F
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_WeOweAllToThePokemon
+	braillemessage SealedChamber_InnerRoom_Braille_WeOweAllToThePokemon
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_BrailleStoryPart3::
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart3:: @ 8239269
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_ButWeSealedThePokemonAway
+	braillemessage SealedChamber_InnerRoom_Braille_ButWeSealedThePokemonAway
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_BrailleStoryPart4::
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart4:: @ 8239273
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_WeFearedIt
+	braillemessage SealedChamber_InnerRoom_Braille_WeFearedIt
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_BrailleStoryPart5::
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart5:: @ 823927D
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_ThoseWithCourageHope
+	braillemessage SealedChamber_InnerRoom_Braille_ThoseWithCourageHope
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_InnerRoom_EventScript_BrailleStoryPart6::
+SealedChamber_InnerRoom_EventScript_BrailleStoryPart6:: @ 8239287
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_OpenDoorEternalPokemonWaits
+	braillemessage SealedChamber_InnerRoom_Braille_OpenDoorEternalPokemonWaits
+	waitbuttonpress
+	closebraillemessage
 	releaseall
-	end
-
-@ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
-.set EC_SIGN_REGIGIGAS_ID, 66
-
-SealedChamber_InnerRoom_EventScript_RegigigasEC::
-	lock
-	msgbox SealedChamber_InnerRoom_Text_RegigigasStatue, MSGBOX_DEFAULT
-	closemessage
-	braillemsgbox SealedChamber_InnerRoom_Braille_Regigigas
-	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
-	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
-	goto_if_eq VAR_RESULT, 0, SealedChamber_InnerRoom_EventScript_RegigigasStatue
-	goto_if_eq VAR_RESULT, 1, SealedChamber_InnerRoom_EventScript_RegigigasStatue
-	goto_if_eq VAR_RESULT, 4, SealedChamber_InnerRoom_EventScript_RegigigasECCaught
-	waitse
-	playmoncry SPECIES_REGIGIGAS, CRY_MODE_ENCOUNTER
-	delay 40
-	waitmoncry
-	msgbox SealedChamber_InnerRoom_Text_RegigigasECAwakens, MSGBOX_DEFAULT
-	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
-	special CreateSelectedLegendarySignEncounter
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special BattleSetup_StartLegendaryBattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	special FinishLegendaryLandmarkEncounter
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryResting
-	goto SealedChamber_InnerRoom_EventScript_RegigigasECCaught
-	end
-
-SealedChamber_InnerRoom_EventScript_RegigigasStatue::
-	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
-	special ResearchSelectedLegendarySign
-	msgbox gStringVar4, MSGBOX_DEFAULT
-	release
-	end
-
-SealedChamber_InnerRoom_EventScript_RegigigasECCaught::
-	setflag FLAG_EC_CAUGHT_REGIGIGAS
-	removeobject LOCALID_EC_REGIGIGAS
-	release
 	end
 
 SealedChamber_InnerRoom_Text_RegigigasStatue:
 	.string "It's a statue of a Pokémon.\n"
 	.string "It exudes tremendous power…\p"
 	.string "There's something engraved on it…$"
-
-SealedChamber_InnerRoom_Text_RegigigasECAwakens:
-	.string "The three REGIS answer together!\n"
-	.string "The colossal statue begins to move!$"
-
-
-
-@ END EMERALD CHAMPIONS LEGENDARY ROOTS
-
-SealedChamber_InnerRoom_EventScript_ResearchPending::
-	msgbox SealedChamber_InnerRoom_Text_ResearchPending, MSGBOX_DEFAULT
-	releaseall
-	end
-
-SealedChamber_InnerRoom_Text_ResearchPending:
-	.string "The marks describe three records:\n"
-	.string "the DESERT safeguards, CASTFORM's\l"
-	.string "weather, and STERN's seabed scan.\p"
-	.string "Complete those research reports\n"
-	.string "to read the builders' message.$"
-
-SealedChamber_InnerRoom_Text_ThreeRecords:
-	.string "STONE. STORM. SEA. REMEMBER.\p"
-	.string "The desert safeguards, weather\n"
-	.string "survey and seabed scan reveal\l"
-	.string "the meaning of these marks.$"
-
-SealedChamber_InnerRoom_Text_ThreeSites:
-	.string "Three doors answer across HOENN.\n"
-	.string "Each site preserves part of the\l"
-	.string "lost undersea route.\p"
-	.string "DESERT RUINS: ROUTE 111's desert.\n"
-	.string "ISLAND CAVE: west of ROUTE 105.\l"
-	.string "ANCIENT TOMB: on ROUTE 120.\p"
-	.string "Solve each rear-wall puzzle and\n"
-	.string "read the revealed account. Start\l"
-	.string "with the DESERT RUINS.\p"
-	.string "The REGIS guard these places.\n"
-	.string "Catching them is optional.$"

@@ -2,7 +2,7 @@
   "id": "MAP_ALTERING_CAVE_B1F",
   "name": "AlteringCave_B1F",
   "layout": "LAYOUT_ALTERING_CAVE_B1F",
-  "music": "MUS_RG_SEVII_CAVE",
+  "music": "HG_SEQ_GS_D_IWAYAMA",
   "region_map_section": "MAPSEC_ALTERING_CAVE",
   "requires_flash": true,
   "weather": "WEATHER_NONE",
@@ -132,7 +132,8 @@
       "flag": "FLAG_TEMP_9"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_INCLEMENT_MEWTWO",
+      "local_id": "LOCALID_EC_MEWTWO",
+      "graphics_id": "OBJ_EVENT_GFX_MEWTWO",
       "x": 7,
       "y": 13,
       "elevation": 3,
@@ -142,10 +143,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AlteringCave_B1F_EventScript_Mewtwo",
-      "flag": "FLAG_EC_CAUGHT_MEWTWO",
-      "local_id": "LOCALID_EC_MEWTWO"
+      "flag": "FLAG_DEFEATED_MEWTWO"
     },
     {
+      "local_id": "LOCALID_EC_LEAF",
       "graphics_id": "OBJ_EVENT_GFX_LEAF",
       "x": 21,
       "y": 16,
@@ -156,8 +157,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE",
-      "local_id": "LOCALID_EC_LEAF"
+      "flag": "FLAG_DEFEATED_LEAF"
     }
   ],
   "warp_events": [
@@ -175,11 +175,27 @@
       "x": 21,
       "y": 19,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "VAR_LEAF_STATE",
       "var_value": "0",
       "script": "AlteringCave_B1F_EventScript_Leaf"
     }
   ],
-  "bg_events": [],
-  "region": "REGION_HOENN"
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 6,
+      "y": 12,
+      "elevation": 3,
+      "item": "ITEM_CARBOS",
+      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_CARBOS"
+    },
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 12,
+      "elevation": 3,
+      "item": "ITEM_CALCIUM",
+      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_CALCIUM"
+    }
+  ]
 }

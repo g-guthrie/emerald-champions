@@ -3,7 +3,6 @@
   "name": "Route128",
   "layout": "LAYOUT_ROUTE128",
   "music": "MUS_ROUTE120",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_128",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -15,24 +14,24 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE127",
+      "direction": "up",
       "offset": 0,
-      "direction": "up"
+      "map": "MAP_ROUTE127"
     },
     {
-      "map": "MAP_ROUTE129",
+      "direction": "down",
       "offset": 0,
-      "direction": "down"
+      "map": "MAP_ROUTE129"
     },
     {
-      "map": "MAP_EVER_GRANDE_CITY",
+      "direction": "right",
       "offset": -40,
-      "direction": "right"
+      "map": "MAP_EVER_GRANDE_CITY"
     },
     {
-      "map": "MAP_UNDERWATER_ROUTE128",
+      "direction": "dive",
       "offset": 0,
-      "direction": "dive"
+      "map": "MAP_UNDERWATER_ROUTE128"
     }
   ],
   "object_events": [
@@ -44,8 +43,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN",
       "movement_range_x": 5,
       "movement_range_y": 5,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route128_EventScript_Isaiah",
       "flag": "0"
     },
@@ -112,7 +111,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route128_EventScript_Wayne",
       "flag": "0"
@@ -151,8 +150,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_UP_AND_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 3,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "Route128_EventScript_Carlee",
       "flag": "0"
     },
@@ -164,8 +163,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
       "movement_range_x": 1,
       "movement_range_y": 3,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "Route128_EventScript_Harrison",
       "flag": "0"
     }
@@ -178,24 +177,24 @@
       "x": 49,
       "y": 9,
       "elevation": 3,
-      "item": "ITEM_LURE_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_LURE_BALL"
+      "item": "ITEM_BOTTLE_CAP",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_1"
     },
     {
       "type": "hidden_item",
       "x": 57,
       "y": 21,
       "elevation": 3,
-      "item": "ITEM_LEVEL_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_LEVEL_BALL"
+      "item": "ITEM_BOTTLE_CAP",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_2"
     },
     {
       "type": "hidden_item",
       "x": 31,
       "y": 33,
       "elevation": 3,
-      "item": "ITEM_HEAVY_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEAVY_BALL"
+      "item": "ITEM_BOTTLE_CAP",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_3"
     }
   ]
 }

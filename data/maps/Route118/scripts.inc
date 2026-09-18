@@ -1,160 +1,157 @@
-Route118_MapScripts::
+.set LOCALID_STEVEN, 19
+
+Route118_MapScripts:: @ 81F3DBC
 	map_script MAP_SCRIPT_ON_TRANSITION, Route118_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route118_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route118_OnFrame
 	.byte 0
 
-Route118_OnTransition:
+Route118_OnTransition: @ 81F3DCC
 	call GabbyAndTy_EventScript_UpdateLocation
-	call_if_eq VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_HideMapNamePopup
-	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST, AbnormalWeather_StartGroudonWeather
-	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST, AbnormalWeather_StartGroudonWeather
+	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	call_if_eq AbnormalWeather_EventScript_HideMapNamePopup
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST
+	call_if_eq AbnormalWeather_StartGroudonWeather
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST
+	call_if_eq AbnormalWeather_StartGroudonWeather
 	end
 
-Route118_OnLoad:
-	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST, AbnormalWeather_EventScript_PlaceTilesRoute118East
-	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST, AbnormalWeather_EventScript_PlaceTilesRoute118West
+Route118_OnLoad: @ 81F3DF3
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_EAST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute118East
+	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_118_WEST
+	call_if_eq AbnormalWeather_EventScript_PlaceTilesRoute118West
 	end
 
-Route118_OnFrame:
+Route118_OnFrame: @ 81F3E0A
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
-Route118_EventScript_GoodRodFisherman::
+Route114_EventScript_GoodRodFisherman:: @ 81F3E14
 	lock
 	faceplayer
-	goto_if_set FLAG_EC_ROUTE118_ROD_GIFT, Route118_EventScript_ReceivedGoodRod
-	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_RodBallGift
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_ReceivedGoodRod
 	msgbox Route118_Text_YouAgreeGoodRodIsGood, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route118_EventScript_ReceiveGoodRod
-	goto_if_eq VAR_RESULT, NO, Route118_EventScript_DeclineGoodRod
+	compare VAR_RESULT, YES
+	goto_if_eq Route118_EventScript_ReceiveGoodRod
+	compare VAR_RESULT, NO
+	goto_if_eq Route118_EventScript_DeclineGoodRod
 	end
 
-Route118_EventScript_ReceiveGoodRod::
+Route118_EventScript_ReceiveGoodRod:: @ 81F3E3E
 	msgbox Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_GOOD_ROD
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_GOOD_ROD
-	setflag FLAG_EC_ROUTE118_ROD_GIFT
 	msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT
 	release
 	end
 
-Route118_EventScript_DeclineGoodRod::
+Route118_EventScript_DeclineGoodRod:: @ 81F3E5F
 	msgbox Route118_Text_DontYouLikeToFish, MSGBOX_DEFAULT
 	release
 	end
 
-Route118_EventScript_ReceivedGoodRod::
+Route118_EventScript_ReceivedGoodRod:: @ 81F3E69
 	msgbox Route118_Text_TryCatchingMonWithGoodRod, MSGBOX_DEFAULT
-	goto_if_defeated TRAINER_MAGIKARP_GUY, Route118_EventScript_MagikarpGuyAfter
-	msgbox Route118_Text_MagikarpGuyChallenge, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route118_EventScript_MagikarpGuyDecline
-	trainerbattle_no_intro_double TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpGuyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-
-Route118_EventScript_MagikarpGuyAfter::
-	msgbox Route118_Text_MagikarpGuyAfter, MSGBOX_DEFAULT
 	release
 	end
 
-Route118_EventScript_MagikarpGuyDecline::
-	msgbox Route118_Text_MagikarpGuyDecline, MSGBOX_DEFAULT
-	release
-	end
-
-Route118_EventScript_Girl::
+Route118_EventScript_Girl:: @ 81F3E73
 	msgbox Route118_Text_CanCrossRiversWithSurf, MSGBOX_NPC
 	end
 
-Route118_EventScript_RouteSignMauville::
+Route118_EventScript_RouteSignMauville:: @ 81F3E7C
 	msgbox Route118_Text_RouteSignMauville, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	end
 
-Route118_EventScript_RouteSign119::
+Route118_EventScript_RouteSign119:: @ 81F3E85
 	msgbox Route118_Text_RouteSign119, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	end
 
-Route118_EventScript_StevenTrigger0::
+Route118_EventScript_StevenTrigger0:: @ 81F3E8E
 	lockall
 	setvar VAR_0x8008, 0
-	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenApproachLedge0
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenApproachLedge0
 	waitmovement 0
 	goto Route118_EventScript_StevenTrigger
 	end
 
-Route118_EventScript_StevenTrigger1::
+Route118_EventScript_StevenTrigger1:: @ 81F3EAE
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	goto Route118_EventScript_StevenTrigger
 	end
 
-Route118_EventScript_StevenTrigger2::
+Route118_EventScript_StevenTrigger2:: @ 81F3EC4
 	lockall
 	setvar VAR_0x8008, 2
-	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenApproachLedge2
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenApproachLedge2
 	waitmovement 0
 	goto Route118_EventScript_StevenTrigger
 	end
 
-Route118_EventScript_StevenTrigger::
+Route118_EventScript_StevenTrigger:: @ 81F3EE4
 	playse SE_LEDGE
-	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenJumpLedge
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenJumpLedge
 	waitmovement 0
 	delay 30
 	msgbox Route118_Text_StevenQuestions, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8008, 0, Route118_EventScript_StevenExit0
-	call_if_eq VAR_0x8008, 1, Route118_EventScript_StevenExit1
-	call_if_eq VAR_0x8008, 2, Route118_EventScript_StevenExit2
+	compare VAR_0x8008, 0
+	call_if_eq Route118_EventScript_StevenExit0
+	compare VAR_0x8008, 1
+	call_if_eq Route118_EventScript_StevenExit1
+	compare VAR_0x8008, 2
+	call_if_eq Route118_EventScript_StevenExit2
 	setvar VAR_ROUTE118_STATE, 1
-	removeobject LOCALID_ROUTE118_STEVEN
+	removeobject LOCALID_STEVEN
 	releaseall
 	end
 
-Route118_EventScript_StevenExit0::
-	applymovement LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit
-	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit0
+Route118_EventScript_StevenExit0:: @ 81F3F28
+	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenExit0
 	waitmovement 0
 	return
 
-Route118_EventScript_StevenExit1::
-	applymovement LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit
-	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit1
+Route118_EventScript_StevenExit1:: @ 81F3F3A
+	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenExit1
 	waitmovement 0
 	return
 
-Route118_EventScript_StevenExit2::
-	applymovement LOCALID_PLAYER, Route118_Movement_PlayerWatchStevenExit
-	applymovement LOCALID_ROUTE118_STEVEN, Route118_Movement_StevenExit2
+Route118_EventScript_StevenExit2:: @ 81F3F4C
+	applymovement OBJ_EVENT_ID_PLAYER, Route118_Movement_PlayerWatchStevenExit
+	applymovement LOCALID_STEVEN, Route118_Movement_StevenExit2
 	waitmovement 0
 	return
 
-Route118_Movement_PlayerWatchStevenExit:
+Route118_Movement_PlayerWatchStevenExit: @ 81F3F5E
 	delay_16
-	walk_in_place_faster_right
+	walk_in_place_fast_right
 	step_end
 
-Route118_Movement_StevenApproachLedge0:
+Route118_Movement_StevenApproachLedge0: @ 81F3F61
 	walk_left
 	step_end
 
-Route118_Movement_StevenApproachLedge2:
+Route118_Movement_StevenApproachLedge2: @ 81F3F63
 	walk_right
 	step_end
 
-Route118_Movement_StevenJumpLedge:
+Route118_Movement_StevenJumpLedge: @ 81F3F65
 	jump_2_down
 	delay_16
 	walk_down
 	step_end
 
-Route118_Movement_StevenExit0:
+Route118_Movement_StevenExit0: @ 81F3F69
 	walk_right
 	walk_right
 	walk_right
@@ -167,7 +164,7 @@ Route118_Movement_StevenExit0:
 	walk_right
 	step_end
 
-Route118_Movement_StevenExit1:
+Route118_Movement_StevenExit1: @ 81F3F74
 	walk_right
 	walk_right
 	walk_right
@@ -179,7 +176,7 @@ Route118_Movement_StevenExit1:
 	walk_right
 	step_end
 
-Route118_Movement_StevenExit2:
+Route118_Movement_StevenExit2: @ 81F3F7E
 	walk_right
 	walk_right
 	walk_right
@@ -190,140 +187,221 @@ Route118_Movement_StevenExit2:
 	walk_right
 	step_end
 
-Route118_EventScript_Rose::
-	trainerbattle_double TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route118_EventScript_RegisterRose
+Route118_EventScript_Rose:: @ 81F3F87
+	trainerbattle_single TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, Route118_EventScript_RegisterRose
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route118_EventScript_RematchRose
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route118_EventScript_RematchRose
 	msgbox Route118_Text_RosePostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route118_EventScript_RegisterRose::
+Route118_EventScript_RegisterRose:: @ 81F3FB3
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	msgbox Route118_Text_RoseRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ROSE_1
 	release
 	end
 
-Route118_EventScript_RematchRose::
-	trainerbattle_rematch_double TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
+Route118_EventScript_RematchRose:: @ 81F3FD2
+	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat
 	msgbox Route118_Text_RosePostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route118_EventScript_Barny::
-	msgbox Route118_Text_BARNY_LocalConversation, MSGBOX_NPC
+Route118_EventScript_Barny:: @ 81F3FE9
+	trainerbattle_single TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat
+	msgbox Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route118_EventScript_Wade::
-	msgbox Route118_Text_WADE_LocalConversation, MSGBOX_NPC
+Route118_EventScript_Wade:: @ 81F4000
+	trainerbattle_single TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat
+	msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route118_EventScript_Dalton::
-	msgbox Route118_Text_DaltonPostBattle, MSGBOX_NPC
+Route118_EventScript_Dalton:: @ 81F4017
+	trainerbattle_single TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, Route118_EventScript_RegisterDalton
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route118_EventScript_RematchDalton
+	msgbox Route118_Text_DaltonPostBattle, MSGBOX_DEFAULT
+	release
 	end
 
-Route118_EventScript_Perry::
-	msgbox Route118_Text_PerryPostBattle, MSGBOX_NPC
+Route118_EventScript_RegisterDalton:: @ 81F4043
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	msgbox Route118_Text_DaltonRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DALTON_1
+	release
 	end
 
-Route118_EventScript_Chester::
-	msgbox Route118_Text_ChesterPostBattle, MSGBOX_NPC
+Route118_EventScript_RematchDalton:: @ 81F4062
+	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat
+	msgbox Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route118_EventScript_Deandre::
-	trainerbattle_double TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat, EmeraldChampions_Text_NeedTwoPokemon
+Route118_EventScript_Perry:: @ 81F4079
+	trainerbattle_single TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat
+	msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route118_EventScript_Chester:: @ 81F4090
+	trainerbattle_single TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat
+	msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route118_EventScript_Deandre:: @ 81F40A7
+	trainerbattle_single TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat
 	msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route118_Text_StevenQuestions:
-	.string "STEVEN: {PLAYER}{KUN}! Good to\n"
-	.string "see you.\p"
-	.string "Have you found new partners, or\n"
-	.string "stayed with your favorites?\p"
-	.string "Either way, think about how they\n"
-	.string "help one another. That's a team's\l"
-	.string "strength.\p"
-	.string "Head north on ROUTE 119. Visit\n"
-	.string "the WEATHER INSTITUTE on the way.\p"
-	.string "Ask its researchers about the\n"
-	.string "weather. Then challenge WINONA in\l"
-	.string "FORTREE.\p"
-	.string "I'll keep exploring. Let's\n"
-	.string "compare discoveries next time.$"
+Route114_EventScript_MagikarpGuy::
+	lock
+	faceplayer
+	goto_if_set FLAG_ROUTE118_GYARADOSITE, Route118_EventScript_ReceivedGyaradosite
+	msgbox Route118_Text_DoYouLiekKarp, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq Route118_EventScript_ILuurveKarp
+	compare VAR_RESULT, NO
+	goto_if_eq Route118_EventScript_DontLikeKarp
+	release
+	end
 
-Route118_Text_YouAgreeGoodRodIsGood:
+Route118_EventScript_ReceivedGyaradosite::
+	msgbox Route118_Text_KarpBetterThanGyara, MSGBOX_DEFAULT
+	release
+	end
+
+Route118_EventScript_ILuurveKarp::
+	msgbox Route118_Text_ILuurveKarp, MSGBOX_DEFAULT
+	closemessage
+	msgbox Route118_Text_ReadyForKarpFite, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq Route118_EventScript_CheckParty
+	release
+	end
+
+Route118_EventScript_DontLikeKarp::
+	msgbox Route118_Text_DontLikeKarp, MSGBOX_DEFAULT
+	release
+	end
+
+Route118_EventScript_CheckParty::
+	specialvar VAR_RESULT, CheckMagikarpBattle
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route118_EventScript_NeedMoreKarp
+	msgbox Route118_Text_KarpFiteStart, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpDefeat
+	msgbox Route118_Text_TakeGyaradosite, MSGBOX_DEFAULT
+	giveitem ITEM_GYARADOSITE
+	setflag FLAG_ROUTE118_GYARADOSITE
+	msgbox Route118_Text_KarpBetterThanGyara, MSGBOX_DEFAULT
+	release
+	end
+
+Route118_EventScript_NeedMoreKarp::
+	msgbox Route118_Text_NeedMoreKarp, MSGBOX_DEFAULT
+	release
+	end
+
+Route118_Text_DoYouLiekKarp:
+	.string "Do you like the Pokémon Magikarp?$"
+
+Route118_Text_DontLikeKarp:
+	.string "Oh… That's disappointing.\n"
+	.string "I was hoping you were a fellow\l"
+	.string "Magikarp aficionado…$"
+
+Route118_Text_ILuurveKarp:
+	.string "You do?!\n"
+	.string "That's great!\p"
+	.string "Not many people appreciate the true\n"
+	.string "majesty of Magikarp…\p"
+	.string "Oh, I know! If you can show me you\n"
+	.string "truly love Magikarp, I'll give you this\l"
+	.string "Gyaradosite I found!\p"
+	.string "Here's what I want you to do…\p"
+	.string "You must defeat my team of Magikarp\n"
+	.string "all stars…\p"
+	.string "With your own team of Magikarp!$"
+
+Route118_Text_ReadyForKarpFite:
+	.string "So, are you ready for our magical\n"
+	.string "showdown?$"
+
+Route118_Text_NeedMoreKarp:
+	.string "Hmm… You don't have enough Magikarp\n"
+	.string "to challenge me.\p"
+	.string "Please come back once you've fished up\n"
+	.string "a full team of them!$"
+
+Route118_Text_KarpFiteStart:
+	.string "Oho! Then let us begin!$"
+
+Route118_Text_MagikarpDefeat:
+	.string "Ah! Your love for Magikarp is clear!$"
+
+Route118_Text_TakeGyaradosite:
+	.string "Here, take this Gyaradosite - you\n"
+	.string "earned it!$"
+
+Route118_Text_KarpBetterThanGyara:
+	.string "Gyarados might not be Magikarp, but\n"
+	.string "it's almost as good!$"
+
+Route118_Text_StevenQuestions: @ 81F40BE
+	.string "Steven: Hi, {PLAYER}{KUN}!\p"
+	.string "It's me, Steven!\n"
+	.string "We met in the cave near Dewford.\p"
+	.string "Have you met many kinds of Pokémon\n"
+	.string "since I last saw you?\p"
+	.string "There are many, many kinds of Pokémon\n"
+	.string "in this wide world of ours.\p"
+	.string "If you wanted to raise only your\n"
+	.string "favorites, that's fine.\p"
+	.string "Perhaps you find it more fun to raise\n"
+	.string "all sorts of Pokémon.\p"
+	.string "As a Trainer of Pokémon,\n"
+	.string "what do you think?\p"
+	.string "Of course, it's not any of my business.\p"
+	.string "It would be nice if we were to meet\n"
+	.string "again somewhere.$"
+
+Route118_Text_YouAgreeGoodRodIsGood: @ 81F427B
 	.string "Hmm!\n"
-	.string "A GOOD ROD is really good!\p"
+	.string "A Good Rod is really good!\p"
 	.string "Wouldn't you agree?$"
 
-Route118_Text_IdenticalMindsTakeThis:
+Route118_Text_IdenticalMindsTakeThis: @ 81F42AF
 	.string "Hmm!\n"
 	.string "We're of identical minds!\p"
 	.string "Hmm!\n"
-	.string "Take this GOOD ROD!$"
+	.string "Take this Good Rod!$"
 
-Route118_Text_TryYourLuckFishing:
+Route118_Text_TryYourLuckFishing: @ 81F42E7
 	.string "Wherever there's water, try your luck\n"
 	.string "at fishing.$"
 
-Route118_Text_DontYouLikeToFish:
+Route118_Text_DontYouLikeToFish: @ 81F4319
 	.string "Don't you like to fish?$"
 
-Route118_Text_TryCatchingMonWithGoodRod:
-	.string "Try catching all sorts of POKéMON\n"
-	.string "with your GOOD ROD.$"
+Route118_Text_TryCatchingMonWithGoodRod: @ 81F4331
+	.string "Try catching all sorts of Pokémon\n"
+	.string "with your Good Rod.$"
 
-Route118_Text_MagikarpGuyChallenge:
-	.string "People see my MAGIKARP and smile.\n"
-	.string "I don't mind. I smiled when I\l"
-	.string "caught it!\p"
-	.string "Care to battle my fishing team?$"
+Route118_Text_CanCrossRiversWithSurf: @ 81F4367
+	.string "Even if there isn't a boat, you can\n"
+	.string "cross rivers and the sea if you have\l"
+	.string "a Pokémon that knows Surf.\p"
+	.string "Pokémon can be counted on to do so\n"
+	.string "much!$"
 
-Route118_Text_MagikarpGuyDefeat:
-	.string "Well caught! That was a good\n"
-	.string "battle.$"
+Route118_Text_RouteSignMauville: @ 81F43F4
+	.string "Route 118\n"
+	.string "{LEFT_ARROW} Mauville City$"
 
-Route118_Text_MagikarpGuyAfter:
-	.string "Every partner has a story. Mine\n"
-	.string "usually starts with a fishing rod\l"
-	.string "and a very long wait.\p"
-	.string "Even that little MAGIKARP made me\n"
-	.string "work for it!$"
+Route118_Text_RouteSign119: @ 81F440E
+	.string "Route 118\n"
+	.string "{UP_ARROW} Route 119$"
 
-Route118_Text_MagikarpGuyDecline:
-	.string "No hurry. The river and my team will wait.$"
-
-Route118_Text_CanCrossRiversWithSurf:
-	.string "With SURF registered and the\n"
-	.string "BALANCE BADGE, a compatible party\l"
-	.string "member can cross water.\p"
-	.string "It doesn't need SURF in its battle\n"
-	.string "moveset. Partners can help in more\l"
-	.string "ways than one!$"
-Route118_Text_RouteSignMauville:
-	.string "ROUTE 118\n"
-	.string "{LEFT_ARROW} MAUVILLE CITY$"
-
-Route118_Text_RouteSign119:
-	.string "ROUTE 118\n"
-	.string "{UP_ARROW} ROUTE 119$"
-
-Route118_Text_WADE_LocalConversation:
-	.string "That splash was a huge fish!\n"
-	.string "Or my lunch. I hope it was a fish.$"
-
-Route118_Text_BARNY_LocalConversation:
-	.string "WAILORD took the bait once.\n"
-	.string "I am still paying for the rod.$"
-
-Route118_EventScript_RodBallGift::
-	msgbox Route118_Text_RodBallGift, MSGBOX_DEFAULT
-	giveitem ITEM_NET_BALL, 10
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_ROUTE118_ROD_GIFT
-	goto Route118_EventScript_ReceivedGoodRod
-
-Route118_Text_RodBallGift:
-	.string "You already have a GOOD ROD!\p"
-	.string "Take this one-time pack of ten\n"
-	.string "NET BALLS for your next fishing trip.$"

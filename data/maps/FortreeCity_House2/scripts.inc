@@ -1,10 +1,10 @@
-FortreeCity_House2_MapScripts::
+FortreeCity_House2_MapScripts:: @ 82177CA
 	.byte 0
 
-FortreeCity_House2_EventScript_DubiousDiscGiver::
+FortreeCity_House2_EventScript_HiddenPowerGiver:: @ 82177CB
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_FORTREE_DUBIOUS_DISC, FortreeCity_House2_EventScript_ExplainDubiousDisc
+	goto_if_set FLAG_RECEIVED_TM10, FortreeCity_House2_EventScript_ExplainHiddenPower
 	call_if_unset FLAG_MET_HIDDEN_POWER_GIVER, FortreeCity_House2_EventScript_Greeting
 	msgbox FortreeCity_House2_Text_CoinInWhichHand, MSGBOX_DEFAULT
 	multichoice 21, 8, MULTI_RIGHTLEFT, TRUE
@@ -19,58 +19,116 @@ FortreeCity_House2_EventScript_DubiousDiscGiver::
 	switch VAR_RESULT
 	case 0, FortreeCity_House2_EventScript_WrongGuess
 	msgbox FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT
-	giveitem ITEM_DUBIOUS_DISC
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FORTREE_DUBIOUS_DISC
-	msgbox FortreeCity_House2_Text_ExplainDubiousDisc, MSGBOX_DEFAULT
+	giveitem ITEM_RARE_CANDY
+	compare VAR_RESULT, 0
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_TM10
+	msgbox FortreeCity_House2_Text_ExplainHiddenPower, MSGBOX_DEFAULT
 	release
 	end
 
-FortreeCity_House2_EventScript_Greeting::
+FortreeCity_House2_EventScript_Greeting:: @ 8217862
 	msgbox FortreeCity_House2_Text_HiddenPowersArousedByNature, MSGBOX_DEFAULT
 	setflag FLAG_MET_HIDDEN_POWER_GIVER
 	return
 
-FortreeCity_House2_EventScript_ExplainDubiousDisc::
-	msgbox FortreeCity_House2_Text_ExplainDubiousDisc, MSGBOX_DEFAULT
+FortreeCity_House2_EventScript_ExplainHiddenPower:: @ 821786E
+	msgbox FortreeCity_House2_Text_ExplainHiddenPower, MSGBOX_DEFAULT
 	release
 	end
 
-FortreeCity_House2_EventScript_WrongGuess::
+FortreeCity_House2_EventScript_WrongGuess:: @ 8217878
 	msgbox FortreeCity_House2_Text_YouGuessedWrong, MSGBOX_DEFAULT
 	release
 	end
 
-FortreeCity_House2_Text_HiddenPowersArousedByNature:
-	.string "People… POKéMON…\p"
+FortreeCity_House2_EventScript_SleepTalkTM::
+	lock
+	faceplayer
+	checkitem ITEM_RARE_CANDY, 1
+	compare VAR_RESULT, 1
+	goto_if_eq FortreeCity_House2_EventScript_ReceivedTM49
+	msgbox FortreeCity_House2_Text_WantSleepTalk, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq FortreeCity_House2_EventScript_SleepTalkDeclined
+	msgbox FortreeCity_Text_GiveTM49, MSGBOX_DEFAULT
+	giveitem ITEM_RARE_CANDY
+	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
+	release
+	end
+
+FortreeCity_House2_EventScript_ReceivedTM49::
+	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
+	release
+	end
+
+FortreeCity_House2_EventScript_SleepTalkDeclined::
+	msgbox FortreeCity_House2_Text_SleepTalkDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+FortreeCity_House2_EventScript_SleepTalkTaught::
+	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
+	release
+	end
+
+FortreeCity_House2_Text_WantSleepTalk:
+	.string "Humph! My wife relies on Hidden\n"
+	.string "Power to stay awake.\p"
+	.string "She should just take a nap like I do,\n"
+	.string "and Sleep Talk.\p"
+	.string "I can teach your Pokémon how to\n"
+	.string "Sleep Talk instead. Interested?$"
+
+FortreeCity_House2_Text_SleepTalkDeclined:
+	.string "Oh, fine, fine. You want to stay awake\n"
+	.string "with Hidden Power, too…$"
+
+FortreeCity_Text_GiveTM49:
+	.string "Ah, an appreciative child!\n"
+	.string "Please take this TM.$"
+
+FortreeCity_Text_HaveTM49:
+	.string "I've never once gotten my wife's\n"
+	.string "coin trick right.\p"
+	.string "I would be happy if I got it right\n"
+	.string "even as I Sleep Talk…$"
+
+FortreeCity_House2_Text_HiddenPowersArousedByNature: @ 8217882
+	.string "People… Pokémon…\p"
 	.string "Their hidden powers are aroused by\n"
 	.string "living in natural environments…$"
 
-FortreeCity_House2_Text_CoinInWhichHand:
+FortreeCity_House2_Text_CoinInWhichHand: @ 82178D6
 	.string "Let this old woman see if your hidden\n"
 	.string "power has awoken…\p"
 	.string "I hold a coin in my hand.\p"
 	.string "Now, tell me, have I palmed it in\n"
 	.string "the right hand? Or in the left?$"
 
-FortreeCity_House2_Text_CorrectTryAgainWhichHand:
+FortreeCity_House2_Text_CorrectTryAgainWhichHand: @ 821796A
 	.string "Oh! Yes, correct!\p"
 	.string "We shall try again.\p"
 	.string "In which hand have I palmed the coin?\n"
 	.string "The right or left?$"
 
-FortreeCity_House2_Text_CorrectTryAgainWhichHand2:
+FortreeCity_House2_Text_CorrectTryAgainWhichHand2: @ 82179C9
 	.string "Oh! Yes, correct!\p"
 	.string "We shall try again.\p"
 	.string "In which hand have I palmed the coin?\n"
 	.string "The right or left?$"
-FortreeCity_House2_Text_YourHiddenPowerHasAwoken:
-	.string "Your insight has awoken!\p"
-	.string "Take this Dubious Disc for Porygon2.$"
-FortreeCity_House2_Text_ExplainDubiousDisc:
-	.string "A DUBIOUS DISC evolves PORYGON2.\n"
-	.string "Use it from the Bag when ready.$"
 
-FortreeCity_House2_Text_YouGuessedWrong:
+FortreeCity_House2_Text_YourHiddenPowerHasAwoken: @ 8217A28
+	.string "Oh! Splendid!\n"
+	.string "Your hidden power has awoken!\p"
+	.string "Here, take this and awaken the hidden\n"
+	.string "power of your Pokémon.$"
+
+FortreeCity_House2_Text_ExplainHiddenPower: @ 8217A91
+	.string "Hidden Power is a move that changes\n"
+	.string "with the Pokémon.$"
+
+FortreeCity_House2_Text_YouGuessedWrong: @ 8217AC7
 	.string "No, too bad.\n"
 	.string "You guessed wrong.$"
+

@@ -15,6 +15,32 @@
   "connections": 0,
   "object_events": [
     {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 5,
+      "y": 56,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemGarchompite",
+      "flag": "FLAG_SANDSTREWN_RUINS_GARCHOMPITE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "x": 12,
+      "y": 113,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemLeechLife",
+      "flag": "FLAG_SANDSTREWN_RUINS_LEECH_LIFE"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
       "x": 14,
       "y": 18,
@@ -23,9 +49,22 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_SAIL_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_SAIL_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemSailFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_SAIL_FOSSIL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
+      "x": 2,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemOldAmber",
+      "flag": "FLAG_SANDSTREWN_RUINS_OLD_AMBER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
@@ -36,9 +75,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ARMOR_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_ARMOR_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemArmorFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_ARMOR_FOSSIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
@@ -49,9 +88,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_PLUME_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_PLUME_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemPlumeFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_PLUME_FOSSIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
@@ -62,9 +101,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_SKULL_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_SKULL_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemSkullFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_SKULL_FOSSIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
@@ -75,9 +114,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_COVER_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_COVER_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemCoverFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_COVER_FOSSIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
@@ -88,9 +127,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_HELIX_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_HELIX_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemHelixFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_HELX_FOSSIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
@@ -101,9 +140,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_DOME_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_DOME_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemDomeFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_DOME_FOSSIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
@@ -114,9 +153,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_JAW_FOSSIL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_JAW_FOSSIL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_ItemJawFossil",
+      "flag": "FLAG_SANDSTREWN_RUINS_JAW_FOSSIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -231,9 +270,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ODD_KEYSTONE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_RUINS_ODD_KEYSTONE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Sandstrewn_Ruins_EventScript_OddKeystone",
+      "flag": "FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -247,19 +286,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_19"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_HIKER",
-      "x": 9,
-      "y": 130,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "SandstrewnRuins_EventScript_Archaeologist",
-      "flag": "0"
     }
   ],
   "warp_events": [
@@ -439,7 +465,9 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "hidden_item",
@@ -447,8 +475,15 @@
       "y": 31,
       "elevation": 3,
       "item": "ITEM_PROTECTOR",
-      "flag": "FLAG_EC_HIDDEN_ITEM_SANDSTREWN_PROTECTOR"
+      "flag": "FLAG_SANDSTREWN_RUINS_PROTECTOR"
+    },
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 89,
+      "elevation": 3,
+      "item": "ITEM_BIG_NUGGET",
+      "flag": "FLAG_SANDSTREWN_RUINS_BIG_NUGGET"
     }
-  ],
-  "region": "REGION_HOENN"
+  ]
 }

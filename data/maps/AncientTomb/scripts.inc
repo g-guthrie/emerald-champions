@@ -1,118 +1,96 @@
-AncientTomb_MapScripts::
+AncientTomb_MapScripts:: @ 8238FB3
 	map_script MAP_SCRIPT_ON_RESUME, AncientTomb_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, AncientTomb_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, AncientTomb_OnTransition
 	.byte 0
 
-AncientTomb_OnResume:
+AncientTomb_OnResume: @ 8238FC3
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AncientTomb_EventScript_TryRemoveRegisteel
 	end
 
-AncientTomb_EventScript_TryRemoveRegisteel::
+AncientTomb_EventScript_TryRemoveRegisteel:: @ 8238FCD
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne Common_EventScript_NopReturn
 	removeobject VAR_LAST_TALKED
 	return
 
-AncientTomb_OnTransition:
+AncientTomb_OnTransition: @ 8238FE1
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
 	call_if_unset FLAG_DEFEATED_REGISTEEL, AncientTomb_EventScript_ShowRegisteel
 	end
 
-AncientTomb_EventScript_ShowRegisteel::
+AncientTomb_EventScript_ShowRegisteel:: @ 8238FEE
 	clearflag FLAG_HIDE_REGISTEEL
 	return
 
-AncientTomb_OnLoad:
+AncientTomb_OnLoad: @ 8238FF2
 	call_if_unset FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_HideRegiEntrance
 	end
 
-AncientTomb_EventScript_HideRegiEntrance::
-	setmetatile 7, 19, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 8, 19, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 9, 19, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+AncientTomb_EventScript_HideRegiEntrance:: @ 8238FFC
+	setmetatile 7, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 8, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 9, 19, METATILE_Cave_EntranceCover, 1
+	setmetatile 7, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 8, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 9, 20, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
-AncientTomb_EventScript_CaveEntranceMiddle::
+AncientTomb_EventScript_CaveEntranceMiddle:: @ 8239033
 	lockall
 	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_BigHoleInWall
-	msgbox AncientTomb_Text_PuzzleDirections, MSGBOX_DEFAULT
+	braillemessage AncientTomb_Braille_ShineInTheMiddle
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-AncientTomb_EventScript_BigHoleInWall::
-	call AncientTomb_EventScript_ReadAccount
+AncientTomb_EventScript_BigHoleInWall:: @ 8239046
+	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
-AncientTomb_EventScript_CaveEntranceSide::
+AncientTomb_EventScript_CaveEntranceSide:: @ 8239050
 	lockall
-	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_BigHoleInWall
-	msgbox AncientTomb_Text_PuzzleDirections, MSGBOX_DEFAULT
+	braillemessage AncientTomb_Braille_ShineInTheMiddle
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-AncientTomb_EventScript_Registeel::
+AncientTomb_EventScript_Registeel:: @ 823905A
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_REGISTEEL, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_REGISTEEL, 2
 	delay 40
 	waitmoncry
-	setvar VAR_0x8004, SPECIES_REGISTEEL
-	setvar VAR_0x8005, 0
-	special CreateEmeraldChampionsStaticLegendaryEncounter
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x800A, VAR_RESULT
+	setwildbattle SPECIES_REGISTEEL, VAR_0x800A, ITEM_METAL_COAT
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
+	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_CaughtRegisteel
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegisteel
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AncientTomb_EventScript_RanFromRegisteel
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AncientTomb_EventScript_RanFromRegisteel
-	release
-	end
-
-AncientTomb_EventScript_CaughtRegisteel::
-	setflag FLAG_EC_RESOLVED_REGISTEEL
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq AncientTomb_EventScript_DefeatedRegisteel
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
 	end
 
-AncientTomb_EventScript_DefeatedRegisteel::
-	setflag FLAG_EC_RESOLVED_REGISTEEL
-	goto EmeraldChampions_EventScript_GuardianVictory
+AncientTomb_EventScript_DefeatedRegisteel:: @ 82390A1
+	setflag FLAG_DEFEATED_REGISTEEL
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
-AncientTomb_EventScript_RanFromRegisteel::
+AncientTomb_EventScript_RanFromRegisteel:: @ 82390AA
 	setvar VAR_0x8004, SPECIES_REGISTEEL
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-
-AncientTomb_EventScript_ReadAccount::
-	msgbox AncientTomb_Text_RouteAccount, MSGBOX_DEFAULT
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
-	return
-
-AncientTomb_Text_PuzzleDirections:
-	.string "Stand in the middle of this room\n"
-	.string "and use your licensed FLASH.\p"
-	.string "The FLASH hiker is at GRANITE\n"
-	.string "CAVE's entrance, by DEWFORD. The\l"
-	.string "STONE BADGE permits its use.\p"
-	.string "ABRA on GRANITE CAVE's entrance\n"
-	.string "floor can use FLASH.$"
-
-AncientTomb_Text_RouteAccount:
-	.string "The final account describes an\n"
-	.string "underwater cave where the path\l"
-	.string "rises above the waterline.\p"
-	.string "The sky guardian quieted the\n"
-	.string "land and sea. Its tower stood\l"
-	.string "above the southern ocean.$"

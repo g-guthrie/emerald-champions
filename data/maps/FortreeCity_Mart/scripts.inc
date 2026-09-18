@@ -1,7 +1,9 @@
-FortreeCity_Mart_MapScripts::
+.set LOCALID_SPENSER, 6
+
+FortreeCity_Mart_MapScripts:: @ 8217665
 	.byte 0
 
-FortreeCity_Mart_EventScript_Clerk::
+FortreeCity_Mart_EventScript_Clerk:: @ 8217666
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -13,74 +15,126 @@ FortreeCity_Mart_EventScript_Clerk::
 
 	.align 2
 FortreeCity_Mart_Pokemart:
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_REVIVE
-	pokemartlistend
+	.2byte ITEM_PROTECTOR
+	.2byte ITEM_ELECTIRIZER
+	.2byte ITEM_MAGMARIZER
+	.2byte ITEM_RAZOR_FANG
+	.2byte ITEM_RAZOR_CLAW
+	.2byte ITEM_DUBIOUS_DISC
+	.2byte ITEM_REAPER_CLOTH
+	.2byte ITEM_DRAGON_SCALE
+	.2byte ITEM_NONE
+	release
+	end
 
-FortreeCity_Mart_EventScript_Woman::
+FortreeCity_Mart_EventScript_Woman:: @ 8217698
 	msgbox FortreeCity_Mart_Text_SuperRepelBetter, MSGBOX_NPC
 	end
 
-FortreeCity_Mart_EventScript_Girl::
+FortreeCity_Mart_EventScript_Girl:: @ 82176A1
 	msgbox FortreeCity_Mart_Text_StockUpOnItems, MSGBOX_NPC
 	end
 
-FortreeCity_Mart_EventScript_Boy::
+FortreeCity_Mart_EventScript_Boy:: @ 82176AA
 	msgbox FortreeCity_Mart_Text_RareCandyMakesMonGrow, MSGBOX_NPC
 	end
 
 FortreeCity_Mart_EventScript_Spenser::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_SPENSER_PROTECTOR, FortreeCity_Mart_EventScript_SpenserAfter
-	goto_if_defeated TRAINER_SPENSER_FORTREE, FortreeCity_Mart_EventScript_SpenserReward
-	msgbox FortreeCity_Mart_Text_SpenserChallenge, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat, EmeraldChampions_Text_NeedTwoPokemon
-FortreeCity_Mart_EventScript_SpenserReward::
-	checkitemspace ITEM_PROTECTOR, 1
-	goto_if_eq VAR_RESULT, FALSE, FortreeCity_Mart_EventScript_SpenserBagFull
-	giveitem ITEM_PROTECTOR
-	setflag FLAG_RECEIVED_SPENSER_PROTECTOR
-FortreeCity_Mart_EventScript_SpenserAfter::
-	msgbox FortreeCity_Mart_Text_SpenserAfter, MSGBOX_DEFAULT
+	compare VAR_LAVARIDGE_LUCY_STATE, 2
+	goto_if_eq FortreeCity_Mart_EventScript_SpenserBeatLucy
+FortreeCity_Mart_EventScript_SpenserBattle::
+	msgbox FortreeCity_Mart_Text_SpenserBeforeBattle, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat
+	msgbox FortreeCity_Mart_Text_SpenserGiveChoiceScarf, MSGBOX_DEFAULT
+	giveitem ITEM_CHOICE_SCARF
+	giveitem ITEM_BOTTLE_CAP, 3
+	msgbox FortreeCity_Mart_Text_SpenserFarewell, MSGBOX_AUTOCLOSE
+	switch VAR_FACING
+	case DIR_NORTH, FortreeCity_Mart_EventScript_SpenserExitNorth
+	case DIR_WEST, FortreeCity_Mart_EventScript_SpenserExitDown
+	case DIR_EAST, FortreeCity_Mart_EventScript_SpenserExitDown
+	end
+
+FortreeCity_Mart_EventScript_SpenserExitNorth::
+	applymovement LOCALID_SPENSER, FortreeCity_Mart_Movement_SpenserExitNorth
+	waitmovement 0
+	goto FortreeCity_Mart_EventScript_SpenserLeave
+
+FortreeCity_Mart_EventScript_SpenserExitDown::
+	applymovement LOCALID_SPENSER, FortreeCity_Mart_Movement_SpenserExitDown
+	waitmovement 0
+	goto FortreeCity_Mart_EventScript_SpenserLeave
+
+FortreeCity_Mart_EventScript_SpenserLeave::
+	playse SE_SLIDING_DOOR
+	removeobject LOCALID_SPENSER
 	release
 	end
 
-FortreeCity_Mart_EventScript_SpenserBagFull::
-	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	release
-	end
+FortreeCity_Mart_EventScript_SpenserBeatLucy::
+	msgbox FortreeCity_Mart_Text_SpenserBeatLucy, MSGBOX_DEFAULT
+	goto FortreeCity_Mart_EventScript_SpenserBattle
 
-FortreeCity_Mart_Text_SpenserChallenge:
-	.string "I am SPENSER of the BATTLE PALACE.\p"
-	.string "A Pokémon's instincts reveal its\n"
-	.string "Trainer's trust. Let me see yours!$"
+FortreeCity_Mart_Text_SpenserBeatLucy:
+	.string "Hm? You're the youngster who beat Lucy!\n"
+	.string "Gwahahah! She wasn't happy about that!$"
+
+FortreeCity_Mart_Text_SpenserIntro:
+	.string "Hm? You're the youngster Scott's\n"
+	.string "always talking about!$"
+
+FortreeCity_Mart_Text_SpenserBeforeBattle:
+	.string "I'd like to see your skills for myself.\p"
+	.string "Can your bonds of trust with your\n"
+	.string "Pokémon match mine?\p"
+	.string "If not, you will never beat my\n"
+	.string "brethren!$"
 
 FortreeCity_Mart_Text_SpenserDefeat:
-	.string "Gwahaha! Your trust held firm!$"
+	.string "Gwahahah!$"
 
-FortreeCity_Mart_Text_SpenserAfter:
-	.string "Use that PROTECTOR to raise a new\n"
-	.string "partner. We will meet at the FRONTIER.$"
+FortreeCity_Mart_Text_SpenserGiveChoiceScarf:
+	.string "Hahahaha! Saw right through my\n"
+	.string "bluster, did you?\p"
+	.string "Here, take these things!$"
 
-FortreeCity_Mart_Text_SuperRepelBetter:
-	.string "I stopped buying REPELS.\n"
-	.string "The REPEL SPRAY never runs out.$"
+FortreeCity_Mart_Text_SpenserFarewell:
+	.string "I look forward to our next battle.\n"
+	.string "Farewell for now!$"
 
-FortreeCity_Mart_Text_StockUpOnItems:
+FortreeCity_Mart_Text_SuperRepelBetter: @ 82176B3
+	.string "Super Repel lasts a long time,\n"
+	.string "and it gets the job done.\p"
+	.string "It's much better than an ordinary\n"
+	.string "Repel.$"
+
+FortreeCity_Mart_Text_StockUpOnItems: @ 8217715
 	.string "I always stock up on more items than\n"
 	.string "I'm sure I'll need.\p"
 	.string "You never know what might happen.\n"
 	.string "Better to be safe than sorry!$"
 
-FortreeCity_Mart_Text_RareCandyMakesMonGrow:
-	.string "The LEVELER raises your whole party to\n"
-	.string "the current level limit at once.\p"
-	.string "Use it again when a new BADGE\n"
-	.string "or major discovery raises that limit.$"
+FortreeCity_Mart_Text_RareCandyMakesMonGrow: @ 821778E
+	.string "A Rare Candy makes a Pokémon grow\n"
+	.string "immediately by one level.$"
+
+FortreeCity_Mart_Movement_SpenserExitNorth:
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
+	step_end
+
+FortreeCity_Mart_Movement_SpenserExitDown:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
+	step_end

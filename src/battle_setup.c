@@ -2160,17 +2160,13 @@ void CreateTrainerPartyForPlayer(void)
 // this table is the money they pay per point of the live level cap. Retuning
 // here rather than in the party file keeps the trainer roster untouched and
 // keeps one place to read the whole prize curve.
+// The authored tier in trainers.party is the money a trainer pays per point of
+// the live cap. It was cut to roughly 40% while the only thing money bought was
+// a small evolution catalogue; with the world paying for itself again, and
+// battle items and training back on the bill, the tier is paid in full.
 static u32 CampaignPrizeMultiplier(u32 authoredTier)
 {
-    switch (authoredTier)
-    {
-    case 5:  return 2;  // ordinary
-    case 10: return 4;  // ace, Gym member, rival
-    case 25: return 10; // Gym Leader, team admin
-    case 40: return 16; // Elite Four
-    case 50: return 20; // Champion
-    default: return authoredTier;
-    }
+    return authoredTier;
 }
 
 void InitCampaignBattleReward(void)

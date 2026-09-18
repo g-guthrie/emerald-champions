@@ -557,4 +557,21 @@
 #define PHONEME_ID(song)            ((song) - FIRST_PHONEME_SONG)
 #define PHONEME_ID_NONE             0xFF
 
+// Inclement Emerald plays its own Diamond/Pearl Cynthia track here (its id 668);
+// this engine has no such track, so the Mossdeep Cynthia rematch uses the
+// champion encounter theme instead.
+#define DP_SEQ_EYE_CHAMP            MUS_ENCOUNTER_CHAMPION
+
+// Inclement Emerald's MUS_ROUTE111 is its id 380, which is the MUS_ASHROAD track.
+// In this engine 380 is MUS_ENCOUNTER_MALE, and MUS_ASHROAD is MUS_DESERT (409),
+// so alias the name to the track rather than carrying the donor's number over.
+#define MUS_ROUTE111                MUS_DESERT
+
+// Inclement Emerald adds HeartGold tracks this engine does not have. Mapped by what
+// the scene is (all are Navel Rock, the Lugia/Ho-Oh island), not by donor track number.
+#define HG_SEQ_GS_TO_SUZU            MUS_CAVE_OF_ORIGIN   // Tin Tower ascent -> grand legendary theme
+#define HG_SEQ_GS_D_CHIKATSUURO      MUS_MT_PYRE          // underground path -> dungeon theme
+#define HG_SEQ_GS_D_IWAYAMA          MUS_RG_MT_MOON       // rock cave -> cave theme
+#define HG_SEQ_GS_D_UNKNOWN_ISEKI    MUS_SEALED_CHAMBER   // unknown ruins -> ruins theme
+
 #endif  // GUARD_CONSTANTS_SONGS_H

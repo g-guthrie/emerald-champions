@@ -520,7 +520,7 @@ static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nabi
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_DigThroughWall[] = _("Use DIG to open a passage\nthrough this wall?");
-static const u8 sText_LevelerComplete[] = _("Party preparation is complete.\nChapter cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_LevelerComplete[] = _("Party raised to Lv. {STR_VAR_1}.\nThe rest is earned in battle.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s EVs\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows an HM move.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
@@ -5782,7 +5782,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             u32 targetExperience;
 
             if (isLeveler)
-                targetLevel = levelCap;
+                targetLevel = min(GetPreviousLevelCap(), levelCap);
             else
                 targetLevel = min(sInitialLevel + 10, levelCap);
 
@@ -5977,7 +5977,7 @@ static void Task_ShowLevelerComplete(u8 taskId)
     if (gPaletteFade.active || IsPartyMenuTextPrinterActive())
         return;
 
-    ConvertIntToDecimalStringN(gStringVar1, min(GetCurrentLevelCap(), MAX_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, min(GetPreviousLevelCap(), MAX_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, sText_LevelerComplete);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);

@@ -1,48 +1,258 @@
-@ Emerald Champions: the Pike is a Champions Circuit registration desk. Its room
-@ challenge is retired; the receptionist runs
-@ BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit from map.json.
-BattleFrontier_BattlePikeLobby_MapScripts::
+.set LOCALID_ATTENDANT, 1
+
+@ Emerald Champions: the Battle Pike is retired. src/battle_pike.c and the
+@ Pike's own maps are gone from this tree, so the challenge flow that used to
+@ live here (challenge-status dispatch, party select, save, warp to the Pike
+@ corridor) has been removed rather than left calling missing code.
+@ The attendant still greets the player and explains that the Pike is closed.
+
+BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeLobby_OnWarp
 	.byte 0
 
-BattleFrontier_BattlePikeLobby_OnWarp:
+BattleFrontier_BattlePikeLobby_OnWarp: @ 825B6F3
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth
 	.2byte 0
 
-BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth::
+BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth:: @ 825B6FD
 	setvar VAR_TEMP_1, 1
-	turnobject LOCALID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePikeLobby_EventScript_RulesBoard::
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
+BattleFrontier_BattlePikeLobby_EventScript_Attendant:: @ 825B868
+	lock
+	faceplayer
+	msgbox BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePikeLobby_Text_PikeClosed, MSGBOX_DEFAULT
+	release
 	end
 
-BattleFrontier_BattlePikeLobby_EventScript_ShowResults::
-	special ChampionsCircuitBufferRecord
-	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
+BattleFrontier_BattlePikeLobby_EventScript_ShowResults:: @ 825BA80
+	lockall
+	frontier_results FRONTIER_FACILITY_PIKE
+	waitbuttonpress
+	special RemoveRecordsWindow
+	releaseall
 	end
 
-BattleFrontier_BattlePikeLobby_EventScript_Hiker::
-	msgbox BattleFrontier_BattlePikeLobby_Text_NoMoreGuessingDoors, MSGBOX_NPC
+BattleFrontier_BattlePikeLobby_EventScript_Hiker:: @ 825BAAB
+	msgbox BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal, MSGBOX_NPC
 	end
 
-BattleFrontier_BattlePikeLobby_EventScript_Twin::
-	msgbox BattleFrontier_BattlePikeLobby_Text_DeskTakesMyName, MSGBOX_NPC
+BattleFrontier_BattlePikeLobby_EventScript_Twin:: @ 825BAB4
+	msgbox BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer, MSGBOX_NPC
 	end
 
-BattleFrontier_BattlePikeLobby_EventScript_Beauty::
-	msgbox BattleFrontier_BattlePikeLobby_Text_OneLossEndsIt, MSGBOX_NPC
+BattleFrontier_BattlePikeLobby_EventScript_Beauty:: @ 825BABD
+	msgbox BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere, MSGBOX_NPC
 	end
 
-BattleFrontier_BattlePikeLobby_Text_NoMoreGuessingDoors:
-	.string "No more guessing behind curtains.\n"
-	.string "You register and you battle.$"
+BattleFrontier_BattlePikeLobby_EventScript_RulesBoard:: @ 825BAC6
+	lockall
+	msgbox BattleFrontier_BattlePikeLobby_Text_RulesAreListed, MSGBOX_DEFAULT
+	goto BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard
+	end
 
-BattleFrontier_BattlePikeLobby_Text_DeskTakesMyName:
-	.string "The desk takes my name and sends me\n"
-	.string "straight to the CIRCUIT.$"
+BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard:: @ 825BAD5
+	message BattleFrontier_BattlePikeLobby_Text_ReadWhichHeading
+	waitmessage
+	multichoice 16, 4, MULTI_BATTLE_PIKE_RULES, FALSE
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattlePikeLobby_EventScript_RulesPokenavBag
+	case 1, BattleFrontier_BattlePikeLobby_EventScript_RulesHeldItems
+	case 2, BattleFrontier_BattlePikeLobby_EventScript_RulesMonOrder
+	case 3, BattleFrontier_BattlePikeLobby_EventScript_ExitRules
+	case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_ExitRules
+	end
 
-BattleFrontier_BattlePikeLobby_Text_OneLossEndsIt:
-	.string "One loss ends a run.\n"
-	.string "Your best streak is kept.$"
+BattleFrontier_BattlePikeLobby_EventScript_RulesPokenavBag:: @ 825BB1D
+	msgbox BattleFrontier_BattlePikeLobby_Text_ExplainPokenavBagRules, MSGBOX_DEFAULT
+	goto BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_RulesHeldItems:: @ 825BB2B
+	msgbox BattleFrontier_BattlePikeLobby_Text_ExplainHeldItemRules, MSGBOX_DEFAULT
+	goto BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_RulesMonOrder:: @ 825BB39
+	msgbox BattleFrontier_BattlePikeLobby_Text_ExplainMonOrderRules, MSGBOX_DEFAULT
+	goto BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_ExitRules:: @ 825BB47
+	releaseall
+	end
+
+BattleFrontier_BattlePikeLobby_Text_PikeClosed:
+	.string "But the Battle Choice is not being\n"
+	.string "held at present…\p"
+	.string "The paths beyond this room have been\n"
+	.string "sealed, and I must ask you not to\l"
+	.string "go any farther…\p"
+	.string "Please enjoy the rest of the\n"
+	.string "BATTLE FRONTIER…$"
+
+BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike: @ 825BB52
+	.string "Where the luck of Trainers\n"
+	.string "is put to the test…\p"
+	.string "Welcome to the BATTLE PIKE…\p"
+	.string "I am your guide to the BATTLE PIKE…$"
+
+BattleFrontier_BattlePikeLobby_Text_TakeChallenge: @ 825BBC1
+	.string "Would you like to take the Battle\n"
+	.string "Choice challenge?$"
+
+BattleFrontier_BattlePikeLobby_Text_ExplainBattlePike: @ 825BBF5
+	.string "Here we conduct an event we call\n"
+	.string "the Battle Choice.\p"
+	.string "The Battle Choice rules are very\n"
+	.string "simple…\p"
+	.string "Choose one of three paths and make\n"
+	.string "your way to the goal room at the end\l"
+	.string "of the BATTLE PIKE. It's that simple.\p"
+	.string "However, what happens on the chosen\n"
+	.string "path depends entirely on the luck\l"
+	.string "of the challenger…\p"
+	.string "If you reach the goal, you will be\n"
+	.string "rewarded with Battle Points.\p"
+	.string "If you want to interrupt your\n"
+	.string "challenge, please have a word with\l"
+	.string "our staff in the big rooms on the way.\p"
+	.string "If you don't save before interrupting,\n"
+	.string "you will be disqualified.$"
+
+BattleFrontier_BattlePikeLobby_Text_LookForwardToSeeingYou: @ 825BE02
+	.string "We look forward to seeing you\n"
+	.string "on another occasion…$"
+
+BattleFrontier_BattlePikeLobby_Text_WhichChallengeMode: @ 825BE35
+	.string "You have the choice of two courses,\n"
+	.string "Level 50 and Open Level.\l"
+	.string "Which will you challenge?$"
+
+BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLv50: @ 825BE8C
+	.string "I beg your pardon, but…\p"
+	.string "You do not have three eligible\n"
+	.string "Pokémon for the Battle Choice event.\p"
+	.string "You must have three different Pokémon\n"
+	.string "of Level 50 or less to enter.\p"
+	.string "They also must be holding different\n"
+	.string "kinds of items.\p"
+	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "Please come see me when\n"
+	.string "you are ready…$"
+
+BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLvOpen: @ 825BF9A
+	.string "I beg your pardon, but…\p"
+	.string "You do not have three eligible\n"
+	.string "Pokémon for the Battle Choice event.\p"
+	.string "You must have three different\n"
+	.string "Pokémon to enter.\p"
+	.string "They also must be holding different\n"
+	.string "kinds of items.\p"
+	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "Please come see me when\n"
+	.string "you are ready…$"
+
+BattleFrontier_BattlePikeLobby_Text_PleaseChooseThreeMons: @ 825C094
+	.string "Please choose the three Pokémon\n"
+	.string "you wish to enter in the challenge…$"
+
+BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge: @ 825C0D8
+	.string "Before starting your Battle Choice\n"
+	.string "challenge, I must save the game.\l"
+	.string "Is that acceptable?$"
+
+BattleFrontier_BattlePikeLobby_Text_StepThisWay: @ 825C130
+	.string "Please step this way…$"
+
+BattleFrontier_BattlePikeLobby_Text_ChallengeEndedRecordResults: @ 825C146
+	.string "Your challenge has ended…\p"
+	.string "I shall record your results.\n"
+	.string "Please wait…$"
+
+BattleFrontier_BattlePikeLobby_Text_PossessLuckInAbundance: @ 825C18A
+	.string "You have completed the challenge…\p"
+	.string "I must say… You seem to possess luck\n"
+	.string "in abundance…$"
+
+BattleFrontier_BattlePikeLobby_Text_ShallRecordResults: @ 825C1DF
+	.string "I shall record your results.\n"
+	.string "Please wait…$"
+
+@ Unused
+BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2: @ 825C209
+	.string "To commemorate your completion of\n"
+	.string "the Battle Choice challenge, we award\l"
+	.string "you these Battle Point(s)…$"
+
+@ Unused
+BattleFrontier_BattlePikeLobby_Text_ReachedBattlePointLimit: @ 825C26C
+	.string "You appear to have reached the limit\n"
+	.string "for Battle Points…\pPlease exchange some Battle Points\n"
+	.string "for prizes, then return…$"
+
+BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting: @ 825C2E0
+	.string "I beg your pardon, but…\p"
+	.string "You failed to save before you quit\n"
+	.string "your challenge the last time.\p"
+	.string "Because of that, your challenge so far\n"
+	.string "has been disqualified. I am sorry…$"
+
+BattleFrontier_BattlePikeLobby_Text_SnatchedVictoryFromQueen: @ 825C383
+	.string "Congratulations…\p"
+	.string "You have snatched victory from the\n"
+	.string "PIKE QUEEN and cleared the event…$"
+
+BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints: @ 825C3D9
+	.string "In recognition of your amazing luck,\n"
+	.string "we award you these Battle Point(s)…$"
+
+BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal: @ 825C422
+	.string "Arrgh! I blew my chance!\n"
+	.string "I was one room away from the goal!\p"
+	.string "In this place, you'd better watch out\n"
+	.string "for poison, freezing, and so on.$"
+
+BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer: @ 825C4A5
+	.string "I've completed the challenge 10 times\n"
+	.string "now, but I've never had to battle\l"
+	.string "a Trainer once.$"
+
+BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere: @ 825C4FD
+	.string "Listen! Listen!\p"
+	.string "Don't you think that the special\n"
+	.string "abilities of Pokémon will be useful\l"
+	.string "here?$"
+
+@ Unused
+BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose: @ 825C558
+	.string "What is this weird place?\n"
+	.string "I can't figure it out at all!\p"
+	.string "I've taken the challenge a bunch\n"
+	.string "of times, but all I ever do is run into\l"
+	.string "Trainers whichever path I choose.$"
+
+BattleFrontier_BattlePikeLobby_Text_RulesAreListed: @ 825C5FB
+	.string "The Battle Choice's rules are listed.$"
+
+BattleFrontier_BattlePikeLobby_Text_ReadWhichHeading: @ 825C621
+	.string "Which heading do you want to read?$"
+
+BattleFrontier_BattlePikeLobby_Text_ExplainPokenavBagRules: @ 825C644
+	.string "The Bag and PokéNav may not be used\n"
+	.string "during a Battle Choice challenge.$"
+
+BattleFrontier_BattlePikeLobby_Text_ExplainHeldItemRules: @ 825C68A
+	.string "During a Battle Choice challenge,\n"
+	.string "any Berry or HERB held by Pokémon\l"
+	.string "will be effective only once.$"
+
+BattleFrontier_BattlePikeLobby_Text_ExplainMonOrderRules: @ 825C6EB
+	.string "During a Battle Choice challenge,\n"
+	.string "the sequence of Pokémon cannot be\l"
+	.string "changed.\p"
+	.string "The sequence must be set before\n"
+	.string "starting your challenge.$"
+

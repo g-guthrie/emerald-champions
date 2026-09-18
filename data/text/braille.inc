@@ -284,3 +284,16 @@ Braille_Text_WorldWaits::
 Braille_Text_ForYou::
 	brailleformat 3, 0, 25, 19, 6, 3
 	.braille "FOR YOU.$"
+
+@ ---------------------------------------------------------------------------
+@ Restored from Inclement Emerald: the Regi trio braille clue, referenced by
+@ the Inclement Sealed Chamber inner-room scripts.
+@ Additive only; no existing symbol was changed.
+@ ---------------------------------------------------------------------------
+
+SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth:
+	brailleformat 0, 0, 29, 19, 3, 3
+	.braille "FIRST COMES\n"
+	.braille "WAILORD.\n"
+	.braille "LAST COMES\n"
+	.braille "RELICANTH.$"

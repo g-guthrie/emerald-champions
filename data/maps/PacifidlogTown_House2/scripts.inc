@@ -4,75 +4,46 @@ PacifidlogTown_House2_MapScripts::
 PacifidlogTown_House2_EventScript_FanClubYoungerBrother::
 	lock
 	faceplayer
-	dotimebasedevents
-	call PacifidlogTown_House2_EventScript_UpdateFanClubStoneFlag
-	goto_if_set FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK, PacifidlogTown_House2_EventScript_ComeBackInXDays
-	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_MonAssessment
-	call_if_unset FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_FirstMonAssessment
+	goto_if_set FLAG_RECEIVED_DIANCITE, PacifidlogTown_House2_EventScript_HaveDiancite
+	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_FanClubYoungerBrotherStrongBond
+	call_if_unset FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_FanClubYoungerBrotherIntro
 	setflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
-	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	goto_if_ge VAR_RESULT, FRIENDSHIP_150_TO_199, PacifidlogTown_House2_EventScript_GiveReturn
-	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	goto_if_ge VAR_RESULT, FRIENDSHIP_50_TO_99, PacifidlogTown_House2_EventScript_PutInEffort
-	goto PacifidlogTown_House2_EventScript_GiveFrustration
+	specialvar VAR_RESULT, GetDiancieFriendshipScore
+	compare VAR_RESULT, TRUE	
+	goto_if_eq PacifidlogTown_House2_EventScript_GiveDiancite
+	msgbox PacifidlogTown_House2_Text_AlasNotYou, MSGBOX_DEFAULT
+	release
 	end
 
-PacifidlogTown_House2_EventScript_UpdateFanClubStoneFlag::
-	goto_if_unset FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK, Common_EventScript_NopReturn
-	specialvar VAR_RESULT, GetDaysUntilPacifidlogStoneAvailable
-	call_if_eq VAR_RESULT, 0, PacifidlogTown_House2_EventScript_ClearReceivedFanClubStone
-	return
+PacifidlogTown_House2_EventScript_GiveDiancite::
+	playse SE_PIN
+	applymovement 1, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement 1, Common_Movement_Delay48
+	waitmovement 0
+	msgbox PacifidlogTown_House2_Text_DiancieLikesYou, MSGBOX_DEFAULT
+	giveitem ITEM_DIANCITE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_DIANCITE
+PacifidlogTown_House2_EventScript_HaveDiancite::
+	msgbox PacifidlogTown_House2_Text_ExplainDiancite, MSGBOX_DEFAULT
+	release
+	end
 
-PacifidlogTown_House2_EventScript_MonAssessment::
-	msgbox PacifidlogTown_House2_Text_AhYourPokemon, MSGBOX_DEFAULT
-	return
-
-PacifidlogTown_House2_EventScript_FirstMonAssessment::
+PacifidlogTown_House2_FanClubYoungerBrotherIntro::
 	msgbox PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation, MSGBOX_DEFAULT
-	msgbox PacifidlogTown_House2_Text_AhYourPokemon, MSGBOX_DEFAULT
 	return
 
-PacifidlogTown_House2_EventScript_ClearReceivedFanClubStone::
-	clearflag FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK
+PacifidlogTown_House2_FanClubYoungerBrotherStrongBond::
+	msgbox PacifidlogTown_House2_Text_StrongBond, MSGBOX_DEFAULT
 	return
-
-PacifidlogTown_House2_EventScript_GiveReturn::
-	msgbox PacifidlogTown_House2_Text_AdoringPokemonTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_SUN_STONE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK
-	special SetPacifidlogStoneReceivedDay
-	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
-	release
-	end
-
-PacifidlogTown_House2_EventScript_PutInEffort::
-	msgbox PacifidlogTown_House2_Text_PutInSomeMoreEffort, MSGBOX_DEFAULT
-	release
-	end
-
-PacifidlogTown_House2_EventScript_GiveFrustration::
-	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_MOON_STONE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK
-	special SetPacifidlogStoneReceivedDay
-	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
-	release
-	end
-
-PacifidlogTown_House2_EventScript_ComeBackInXDays::
-	specialvar VAR_RESULT, GetDaysUntilPacifidlogStoneAvailable
-	buffernumberstring STR_VAR_1, VAR_RESULT
-	msgbox PacifidlogTown_House2_Text_GetGoodStoneInXDays, MSGBOX_DEFAULT
-	release
-	end
 
 PacifidlogTown_House2_EventScript_HappyAzurill::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, CRY_MODE_NORMAL
+	playmoncry SPECIES_AZURILL, 0
 	msgbox PacifidlogTown_House2_Text_Rurii, MSGBOX_DEFAULT
 	waitmoncry
 	msgbox PacifidlogTown_House2_Text_VeryFriendlyWithTrainer, MSGBOX_DEFAULT
@@ -83,7 +54,7 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_AZURILL, 2
 	msgbox PacifidlogTown_House2_Text_Rururi, MSGBOX_DEFAULT
 	waitmoncry
 	msgbox PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch, MSGBOX_DEFAULT
@@ -92,49 +63,46 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill::
 
 PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation:
 	.string "Er-hem!\p"
-	.string "I am the POKéMON FAN CLUB's most\n"
-	.string "important person, the CHAIRMAN's\l"
+	.string "I am the Pokémon Fan Club's most\n"
+	.string "important person, the Chairman's\l"
 	.string "younger brother.\p"
 	.string "I'm here enjoying my vacation with\n"
-	.string "POKéMON, yes, indeed.$"
+	.string "Pokémon, yes, indeed.\p"
+	.string "Also, I have here a very special stone\n"
+	.string "that I would like to give to a special\l"
+	.string "Trainer.$"
 
-PacifidlogTown_House2_Text_AhYourPokemon:
-	.string "Ah!\n"
-	.string "Your POKéMON…$"
-PacifidlogTown_House2_Text_AdoringPokemonTakeThis:
-	.string "It clearly likes you very much.\p"
-	.string "A POKéMON that bright deserves this\n"
-	.string "SUN STONE, don't you think?$"
+PacifidlogTown_House2_Text_AlasNotYou:
+	.string "But alas, it seems you are not that\n"
+	.string "Trainer…$"
 
-PacifidlogTown_House2_Text_PutInSomeMoreEffort:
-	.string "Hmm…\n"
-	.string "It's not bad, but it's also not good.\p"
-	.string "You, as the TRAINER, need to put in\n"
-	.string "some more effort.$"
-PacifidlogTown_House2_Text_ViciousPokemonTakeThis:
-	.string "It has a fierce look to it.\p"
-	.string "A POKéMON that intense deserves this\n"
-	.string "MOON STONE.$"
-PacifidlogTown_House2_Text_ExplainReturnFrustration:
-	.string "SUN and MOON STONES evolve different\n"
-	.string "POKéMON. Use this one when ready.$"
-PacifidlogTown_House2_Text_GetGoodStoneInXDays:
-	.string "In {STR_VAR_1} days, I'll receive more\n"
-	.string "evolution stones.\p"
-	.string "Come see me then, and I'll choose one\n"
-	.string "that suits your lead POKéMON.$"
+PacifidlogTown_House2_Text_DiancieLikesYou:
+	.string "Oho! That's a Diancie you have with you!\p"
+	.string "And it seems to like you very much.\n"
+	.string "You are worthy of this Mega Stone.\n"
+	.string "Please take it!$"
 
-PacifidlogTown_House2_Text_Rurii:
-	.string "AZURILL: Rurii.$"
+PacifidlogTown_House2_Text_ExplainDiancite:
+	.string "If you let Diancie hold that stone, it\n"
+	.string "will be able to Mega Evolve in battle.$"
 
-PacifidlogTown_House2_Text_VeryFriendlyWithTrainer:
+PacifidlogTown_House2_Text_StrongBond:
+	.string "Er-hem!\p"
+	.string "I will only give this stone to a\n"
+	.string "Trainer who has a strong bond with\l"
+	.string "a certain Mythical Pokémon.$"
+
+PacifidlogTown_House2_Text_Rurii: @ 8203B8D
+	.string "Azurill: Rurii.$"
+
+PacifidlogTown_House2_Text_VeryFriendlyWithTrainer: @ 8203B9D
 	.string "It appears to be very friendly with the\n"
-	.string "TRAINER.$"
+	.string "Trainer.$"
 
-PacifidlogTown_House2_Text_Rururi:
-	.string "AZURILL: Rururi!$"
+PacifidlogTown_House2_Text_Rururi: @ 8203BCE
+	.string "Azurill: Rururi!$"
 
-PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
-	.string "It doesn't appear to like the TRAINER\n"
+PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch: @ 8203BDF
+	.string "It doesn't appear to like the Trainer\n"
 	.string "very much.$"
 

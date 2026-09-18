@@ -1162,6 +1162,123 @@ static const struct MenuAction MultichoiceList_Exit[] =
     {gText_Exit},
 };
 
+// Inclement Emerald services. Entry counts here must match the `case N` labels
+// in the calling scripts -- see the per-list comments.
+
+// FallarborTown_SuperMainMenu: cases 0-3
+static const struct MenuAction MultichoiceList_SuperTrainingMenu[] =
+{
+    {gText_Modify},
+    {gText_ResetEVs},
+    {gText_ExplainEVs},
+    {gText_Exit},
+};
+
+// FallarborTown_HyperMainMenu: cases 0-3
+static const struct MenuAction MultichoiceList_HyperTrainingMenu[] =
+{
+    {gText_ChangeIV},
+    {gText_HiddenPower},
+    {gText_ExplainIVs},
+    {gText_Exit},
+};
+
+// FallarborTown_ChooseNewEV: cases 0-5
+static const struct MenuAction MultichoiceList_EVMenu[] =
+{
+    {gText_Add4toEV},
+    {gText_Add8toEV},
+    {gText_Add12toEV},
+    {gText_Add64toEV},
+    {gText_Add128toEV},
+    {gText_Add252toEV},
+};
+
+// FallarborTown_ChooseNewIV: cases 0-5
+static const struct MenuAction MultichoiceList_IVMenu[] =
+{
+    {gText_ChangeIVto0},
+    {gText_ChangeIVto1},
+    {gText_ChangeIVto14},
+    {gText_ChangeIVto15},
+    {gText_ChangeIVto30},
+    {gText_ChangeIVto31},
+};
+
+// FallarborTown_ChangeEV / FallarborTown_ChangeIV: cases 0-5, in NUM_STATS order
+// (HP, ATK, DEF, SPEED, SPATK, SPDEF), matching sStatData[] in
+// src/inclement_stat_services.c.
+// Inclement printed the live value on each row via {STR_VAR_n}/{EXTRA_STR_VAR_n};
+// this engine's PrintMenuTable does not expand placeholders and has no
+// gExtraStringVar*, so the rows are plain stat names. The chosen stat's current
+// value is still reported by the follow-up msgbox (BufferChosenMonEV/IV).
+static const struct MenuAction MultichoiceList_BaseStats[] =
+{
+    {gText_HP3},
+    {gText_Attack},
+    {gText_Defense},
+    {gText_Speed},
+    {gText_SpAtk},
+    {gText_SpDef},
+};
+
+// MauvilleCity_House2 starter-move tutor: cases 0-5
+static const struct MenuAction MultichoiceList_StarterMoves[] =
+{
+    {gText_GrassPledge},
+    {gText_FirePledge},
+    {gText_WaterPledge},
+    {gText_FrenzyPlant},
+    {gText_BlastBurn},
+    {gText_HydroCannon},
+};
+
+// LavaridgeTown_PokemonCenter_1F: cases 0-2
+static const struct MenuAction MultichoiceList_MoomooMilk[] =
+{
+    {gText_TakeOne},
+    {gText_TakeOneDozen},
+    {gText_IllPass},
+};
+
+// SlateportCity_NameRatersHouse nature service: cases 0-4 (+ EXIT on B)
+static const struct MenuAction MultichoiceList_Flavors[] =
+{
+    {gText_FlavourRed},
+    {gText_FlavourYellow},
+    {gText_FlavourBlue},
+    {gText_FlavourGreen},
+    {gText_FlavourPink},
+    {gText_Exit},
+};
+
+// MauvilleCity_GameCorner starter purchase: cases 0-3
+static const struct MenuAction MultichoiceList_GrassFireWater[] =
+{
+    {gText_GrassType},
+    {gText_FireType},
+    {gText_WaterType},
+    {gText_Exit},
+};
+
+// FallarborTown_CozmosHouse Deoxys forme change: cases 0-4
+static const struct MenuAction MultichoiceList_DeoxysFormes[] =
+{
+    {gText_Normal},
+    {gText_Attack},
+    {gText_Defense},
+    {gText_Speed},
+    {gText_Exit},
+};
+
+// Gym leader / Elite Four rematch format picker: cases 0-2
+static const struct MenuAction MultichoiceList_RematchBattleMode[] =
+{
+    {gText_SingleBattle},
+    {gText_DoubleBattle},
+    {gText_Exit},
+};
+
 struct MultichoiceListStruct
 {
     const struct MenuAction *list;
@@ -1335,6 +1452,17 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_HOF_VICTORIES_QUIT]                         = MULTICHOICE(sMultichoiceList_HOF_Victories_Quit),
     [MULTI_EGGS_VICTORIES_QUIT]                        = MULTICHOICE(sMultichoiceList_Eggs_Victories_Quit),
     [MULTI_HOF_EGGS_VICTORIES_QUIT]                    = MULTICHOICE(sMultichoiceList_HOF_Eggs_Victories_Quit),
+    [MULTI_SUPER_TRAINING_MENU]                        = MULTICHOICE(MultichoiceList_SuperTrainingMenu),
+    [MULTI_HYPER_TRAINING_MENU]                        = MULTICHOICE(MultichoiceList_HyperTrainingMenu),
+    [MULTI_EV_MENU]                                    = MULTICHOICE(MultichoiceList_EVMenu),
+    [MULTI_IV_MENU]                                    = MULTICHOICE(MultichoiceList_IVMenu),
+    [MULTI_BASE_STATS]                                 = MULTICHOICE(MultichoiceList_BaseStats),
+    [MULTI_STARTER_MOVES]                              = MULTICHOICE(MultichoiceList_StarterMoves),
+    [MULTI_MOOMOO_MILK]                                = MULTICHOICE(MultichoiceList_MoomooMilk),
+    [MULTI_FLAVORS]                                    = MULTICHOICE(MultichoiceList_Flavors),
+    [MULTI_GRASS_FIRE_WATER]                           = MULTICHOICE(MultichoiceList_GrassFireWater),
+    [MULTI_DEOXYS_FORMES]                              = MULTICHOICE(MultichoiceList_DeoxysFormes),
+    [MULTI_REMATCH_BATTLE_MODE]                        = MULTICHOICE(MultichoiceList_RematchBattleMode),
 };
 
 const u8 *const gStdStrings[] =

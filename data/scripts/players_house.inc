@@ -301,25 +301,10 @@ PlayersHouse_1F_EventScript_Mom::
 	faceplayer
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
-	goto_if_set FLAG_RECEIVED_RUNNING_SHOES, PlayersHouse_1F_EventScript_CheckOldRodPending
-PlayersHouse_1F_EventScript_MomAfterOldRodCheck::
 	goto_if_set FLAG_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
 	goto_if_eq VAR_TEMP_1, 1, PlayersHouse_1F_EventScript_SeeYouHoney
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, PlayersHouse_1F_EventScript_DidYouMeetProfBirch
 	msgbox PlayersHouse_1F_Text_IsntItNiceInHere, MSGBOX_DEFAULT
-	release
-	end
-
-PlayersHouse_1F_EventScript_CheckOldRodPending::
-	goto_if_unset FLAG_RECEIVED_OLD_ROD, PlayersHouse_1F_EventScript_TryGiveOldRod
-	goto PlayersHouse_1F_EventScript_MomAfterOldRodCheck
-
-PlayersHouse_1F_EventScript_TryGiveOldRod::
-	msgbox LittlerootTown_Text_AlsoPackedOldRod, MSGBOX_DEFAULT
-	giveitem ITEM_OLD_ROD
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_OLD_ROD
-	msgbox LittlerootTown_Text_OldRodPondsTip, MSGBOX_DEFAULT
 	release
 	end
 

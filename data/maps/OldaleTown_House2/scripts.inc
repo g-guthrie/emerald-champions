@@ -1,33 +1,20 @@
-OldaleTown_House2_MapScripts::
+OldaleTown_House2_MapScripts:: @ 81FBF5A
 	.byte 0
 
-OldaleTown_House2_EventScript_Woman::
+OldaleTown_House2_EventScript_Woman:: @ 81FBF5B
 	msgbox OldaleTown_House2_Text_PokemonLevelUp, MSGBOX_NPC
 	end
 
-OldaleTown_House2_EventScript_Man::
+OldaleTown_House2_EventScript_Man:: @ 81FBF64
 	msgbox OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon, MSGBOX_NPC
 	end
 
-OldaleTown_House2_Text_PokemonLevelUp:
-	.string "Battles test your team here.\n"
-	.string "They don't give experience.\p"
-	.string "Use the free LEVELER from the\n"
-	.string "CENTER to raise your whole party\l"
-	.string "to the current level cap.\p"
-	.string "BADGES and major discoveries\n"
-	.string "raise that cap. Use it again\l"
-	.string "when a new partner joins!\p"
-	.string "It also checks for evolutions.\n"
-	.string "If you meet a new requirement,\l"
-	.string "try it again, even at the cap.$"
+OldaleTown_House2_Text_PokemonLevelUp: @ 81FBF6D
+	.string "When Pokémon battle, they eventually\n"
+	.string "level up and become stronger.$"
 
-OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
-	.string "A new move can make an old\n"
-	.string "partner feel completely different!\p"
-	.string "The TUTOR by the CENTER PC can\n"
-	.string "teach your partner its available\l"
-	.string "moves for free.\p"
-	.string "You don't need to wait for\n"
-	.string "level-up moves. Visit again\l"
-	.string "after your partner evolves!$"
+OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon: @ 81FBFB0
+	.string "If the Pokémon with you become\n"
+	.string "stronger, you'll be able to go farther\l"
+	.string "away from here.$"
+

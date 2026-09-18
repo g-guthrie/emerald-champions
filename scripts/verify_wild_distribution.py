@@ -6,8 +6,9 @@ import json
 from verify_trainer_ability_legality import configured_species_abilities, species_aliases, resolve_species
 
 ROOT = Path(__file__).resolve().parents[1]
-# Current no-grind policy. This is deliberately explicit and revisable.
-MIN_ORDINARY_SPECIES_PERCENT = 5
+# Inclement's land curve ends 4, 4, 1, 1; the tail is lifted to 3 so nothing in
+# the game sits at a rate you would never realistically see.
+MIN_ORDINARY_SPECIES_PERCENT = 3
 
 
 def main():

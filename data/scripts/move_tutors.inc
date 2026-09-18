@@ -54,10 +54,8 @@ LavaridgeTown_House_EventScript_MimicTutor::
 	move_tutor MOVE_MIMIC, MoveTutor_MimicTeach, MoveTutor_Text_MimicWhichMon, MoveTutor_EventScript_MimicDeclined, MoveTutor_EventScript_MimicTaught, FLAG_MOVE_TUTOR_TAUGHT_MIMIC
 	end
 
-MoveTutor_EventScript_MimicDeclined::
-	msgbox MoveTutor_MimicDeclined, MSGBOX_DEFAULT
-	release
-	end
+@ MoveTutor_EventScript_MimicDeclined is defined in data/maps/LavaridgeTown_House/scripts.inc
+@ (identical body); the duplicate that used to live here was removed.
 
 MoveTutor_EventScript_MimicTaught::
 	msgbox MoveTutor_Text_MimicTaught, MSGBOX_DEFAULT
@@ -160,11 +158,10 @@ MoveTutor_EventScript_ExplosionTaught::
 	release
 	end
 
-MoveTutor_EventScript_OpenPartyMenu::
-	special ChooseMonForMoveTutor
-	lock
-	faceplayer
-	return
+@ MoveTutor_EventScript_OpenPartyMenu is defined in data/maps/MeteorFalls_1F_2R/scripts.inc,
+@ which is also its only caller. Its explicit `waitstate` is suppressed by the waitstate macro
+@ because `special ChooseMonForMoveTutor` already emits an implicit one (see data/specials.inc),
+@ so it assembles to the same bytes as the duplicate that used to live here, which was removed.
 
 MoveTutor_EventScript_OpenBox::
 	chooseboxmon SELECT_PC_MON_MOVE_TUTOR

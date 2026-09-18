@@ -1,28 +1,29 @@
-CaveOfOrigin_B1F_MapScripts::
+.set LOCALID_WALLACE, 1
+
+CaveOfOrigin_B1F_MapScripts:: @ 82357A8
 	.byte 0
 
-CaveOfOrigin_B1F_EventScript_Wallace::
+CaveOfOrigin_B1F_EventScript_Wallace:: @ 82357A9
 	lock
 	faceplayer
 	msgbox CaveOfOrigin_B1F_Text_WallaceStory, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_CAVE_OF_ORIGIN_WALLACE, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 60
 	playse SE_PIN
-	applymovement LOCALID_CAVE_OF_ORIGIN_WALLACE, Common_Movement_ExclamationMark
+	applymovement LOCALID_WALLACE, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_CAVE_OF_ORIGIN_WALLACE, Common_Movement_Delay48
+	applymovement LOCALID_WALLACE, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
-	applymovement LOCALID_CAVE_OF_ORIGIN_WALLACE, Common_Movement_FacePlayer
+	applymovement LOCALID_WALLACE, Common_Movement_FacePlayer
 	waitmovement 0
-	goto_if_set FLAG_EC_REPORT_C45_COMPLETE, CaveOfOrigin_B1F_EventScript_RecallRuins
 	message CaveOfOrigin_B1F_Text_WhereIsRayquaza
 	waitmessage
 	goto CaveOfOrigin_B1F_EventScript_WheresRayquaza
 
-CaveOfOrigin_B1F_EventScript_WheresRayquaza::
+CaveOfOrigin_B1F_EventScript_WheresRayquaza:: @ 82357F0
 	multichoice 0, 0, MULTI_WHERES_RAYQUAZA, FALSE
 	switch VAR_RESULT
 	case 0, CaveOfOrigin_B1F_EventScript_AtCaveOfOrigin
@@ -32,99 +33,88 @@ CaveOfOrigin_B1F_EventScript_WheresRayquaza::
 	goto CaveOfOrigin_B1F_EventScript_DontRemember
 	end
 
-CaveOfOrigin_B1F_EventScript_AtCaveOfOrigin::
+CaveOfOrigin_B1F_EventScript_AtCaveOfOrigin:: @ 823582C
 	message CaveOfOrigin_B1F_Text_ButWereInCaveOfOrigin
 	waitmessage
 	goto CaveOfOrigin_B1F_EventScript_WheresRayquaza
 
-CaveOfOrigin_B1F_EventScript_AtMtPyre::
+CaveOfOrigin_B1F_EventScript_AtMtPyre:: @ 8235837
 	message CaveOfOrigin_B1F_Text_OldLadyDidntMentionThat
 	waitmessage
 	goto CaveOfOrigin_B1F_EventScript_WheresRayquaza
 
-CaveOfOrigin_B1F_EventScript_DontRemember::
+CaveOfOrigin_B1F_EventScript_DontRemember:: @ 8235842
 	message CaveOfOrigin_B1F_Text_CantYouRememberSomehow
 	waitmessage
 	goto CaveOfOrigin_B1F_EventScript_WheresRayquaza
 
-CaveOfOrigin_B1F_EventScript_AtSkyPillar::
+CaveOfOrigin_B1F_EventScript_AtSkyPillar:: @ 823584D
 	msgbox CaveOfOrigin_B1F_Text_WellHeadToSkyPillar, MSGBOX_DEFAULT
 	closemessage
 	playse SE_EXIT
 	fadescreenspeed FADE_TO_BLACK, 4
 	setflag FLAG_WALLACE_GOES_TO_SKY_PILLAR
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 3
-	removeobject LOCALID_CAVE_OF_ORIGIN_WALLACE
+	removeobject LOCALID_WALLACE
 	clearflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	fadescreen FADE_FROM_BLACK
 	release
 	end
 
-CaveOfOrigin_B1F_Text_WallaceStory:
-	.string "Ah, {PLAYER}{KUN}. STEVEN told me\n"
-	.string "how far you have traveled.\p"
-	.string "I am WALLACE. I once led the\n"
-	.string "SOOTOPOLIS GYM; JUAN leads it\l"
-	.string "now.\p"
-	.string "GROUDON and KYOGRE's powers are\n"
-	.string "overwhelming HOENN. Their\l"
-	.string "struggle will consume land and\l"
-	.string "sea alike.\p"
-	.string "The oldest tale tells of a third\n"
-	.string "power that stopped their clash:\l"
-	.string "RAYQUAZA.\p"
-	.string "We need its help again. But I do\n"
-	.string "not know where it sleeps...$"
+CaveOfOrigin_B1F_Text_WallaceStory: @ 823586E
+	.string "Ah, so you are {PLAYER}{KUN}?\n"
+	.string "I've heard tales of your exploits.\p"
+	.string "My name is Wallace.\p"
+	.string "I was once the Gym Leader of\n"
+	.string "Sootopolis, but something came up.\p"
+	.string "So now, I've entrusted my mentor Juan\n"
+	.string "with the Gym's operation.\p"
+	.string "… … … … … …\n"
+	.string "… … … … … …\p"
+	.string "Groudon and Kyogre, the two Pokémon\n"
+	.string "wreaking havoc here, are considered\l"
+	.string "to be super-ancient Pokémon.\p"
+	.string "But there aren't just two super-\n"
+	.string "ancient Pokémon.\p"
+	.string "There is one more somewhere.\p"
+	.string "Somewhere, there is a super-\n"
+	.string "ancient Pokémon named Rayquaza.\p"
+	.string "It's said that it was Rayquaza that\n"
+	.string "becalmed the two combatants in\l"
+	.string "the distant past.\p"
+	.string "But even I have no clue as to\n"
+	.string "Rayquaza's whereabouts…$"
 
-CaveOfOrigin_B1F_Text_WhereIsRayquaza:
-	.string "WALLACE: Where might a POKéMON of\n"
-	.string "the sky rest?\p"
-	.string "Have you heard of any place on\n"
-	.string "your travels that could shelter\l"
-	.string "RAYQUAZA?$"
+CaveOfOrigin_B1F_Text_WhereIsRayquaza: @ 8235ACE
+	.string "Wallace: {PLAYER}{KUN}, do you perhaps\n"
+	.string "know where Rayquaza is now?\p"
+	.string "If you do, please tell me.$"
 
-CaveOfOrigin_B1F_Text_ButWereInCaveOfOrigin:
-	.string "WALLACE: We've searched the CAVE\n"
-	.string "OF ORIGIN. There is no sign of\l"
-	.string "RAYQUAZA here.\p"
-	.string "Perhaps somewhere higher, closer\n"
-	.string "to the sky?$"
+CaveOfOrigin_B1F_Text_ButWereInCaveOfOrigin: @ 8235B23
+	.string "Wallace: The Cave of Origin?\p"
+	.string "But that's right here!\n"
+	.string "I need you to do better than that!\p"
+	.string "Please, I need you to think about\n"
+	.string "where Rayquaza might be right now.$"
 
-CaveOfOrigin_B1F_Text_OldLadyDidntMentionThat:
-	.string "WALLACE: The elders at MT. PYRE\n"
-	.string "told me RAYQUAZA's story, but it\l"
-	.string "doesn't rest there.\p"
-	.string "Perhaps another place high above\n"
-	.string "the sea?$"
+CaveOfOrigin_B1F_Text_OldLadyDidntMentionThat: @ 8235BBF
+	.string "Wallace: Mt. Pyre?\p"
+	.string "But when I met the old lady there\n"
+	.string "earlier, she made no mention of it.\p"
+	.string "I very much doubt that the old lady\n"
+	.string "would try to hide something from me…\p"
+	.string "{PLAYER}{KUN}, could you think about this\n"
+	.string "more carefully for me?$"
 
-CaveOfOrigin_B1F_Text_CantYouRememberSomehow:
-	.string "WALLACE: There is an old tower\n"
-	.string "called SKY PILLAR, near ROUTE\l"
-	.string "131. It reaches high above the\l"
-	.string "sea.\p"
-	.string "Could that be the place we're\n"
-	.string "looking for?$"
+CaveOfOrigin_B1F_Text_CantYouRememberSomehow: @ 8235C99
+	.string "Wallace: Huh? You don't remember?\n"
+	.string "Hmm… That's a problem…\p"
+	.string "Can't you remember somehow?$"
 
-CaveOfOrigin_B1F_Text_WellHeadToSkyPillar:
-	.string "WALLACE: The SKY PILLAR! Of\n"
-	.string "course. A place between the sea\l"
-	.string "and sky.\p"
-	.string "From ROUTE 128, SURF south, then\n"
-	.string "west through ROUTES 129 and 130\l"
-	.string "to ROUTE 131.\p"
-	.string "SKY PILLAR is on its north side,\n"
-	.string "east of PACIFIDLOG. I will open\l"
-	.string "the way!$"
+CaveOfOrigin_B1F_Text_WellHeadToSkyPillar: @ 8235CEE
+	.string "Wallace: The Sky Pillar?\p"
+	.string "That's it!\n"
+	.string "It must be the Sky Pillar!\p"
+	.string "{PLAYER}{KUN}, there's not a moment to lose!\n"
+	.string "We'll head to the Sky Pillar right away!$"
 
-
-CaveOfOrigin_B1F_EventScript_RecallRuins::
-	msgbox CaveOfOrigin_B1F_Text_RuinsWarning, MSGBOX_DEFAULT
-	goto CaveOfOrigin_B1F_EventScript_AtSkyPillar
-	end
-
-CaveOfOrigin_B1F_Text_RuinsWarning:
-	.string "The desert warnings. The sea\n"
-	.string "ruins. They were describing this.\p"
-	.string "Your three accounts named the\n"
-	.string "sky's guardian and its tower.\l"
-	.string "We must reach SKY PILLAR.$"

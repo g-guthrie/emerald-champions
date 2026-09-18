@@ -183,6 +183,8 @@ static const struct WildPokemonInfo *GetRouteSignInfo(u32 headerId, enum WildPok
         return types->fishingMonsInfo;
     case WILD_AREA_HIDDEN:
         return types->hiddenMonsInfo;
+    case WILD_AREA_HONEY:
+        return types->honeyMonsInfo;
     default:
         return NULL;
     }
@@ -418,7 +420,6 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemon *mons, enum WildPokemo
     static const u8 waterBounds[] = {
         ENCOUNTER_CHANCE_WATER_MONS_SLOT_0, ENCOUNTER_CHANCE_WATER_MONS_SLOT_1,
         ENCOUNTER_CHANCE_WATER_MONS_SLOT_2, ENCOUNTER_CHANCE_WATER_MONS_SLOT_3,
-        ENCOUNTER_CHANCE_WATER_MONS_SLOT_4,
     };
     struct ScentSpecies { enum Species species; u32 weight; } entries[NUM_LAND_MONS_ENCOUNTER_SLOTS];
     const u8 *bounds = area == WILD_AREA_WATER ? waterBounds : landBounds;
@@ -511,17 +512,15 @@ u32 ChooseWildMonIndex_Water(void)
         wildMonIndex = 1;
     else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_2)
         wildMonIndex = 2;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_3)
-        wildMonIndex = 3;
     else
-        wildMonIndex = 4;
+        wildMonIndex = 3;
 
     // Lures occasionally reverse slots. Sweet Scent uses species totals instead.
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
     if (swap)
-        wildMonIndex = 4 - wildMonIndex;
+        wildMonIndex = 3 - wildMonIndex;
 
     return wildMonIndex;
 }
@@ -541,19 +540,36 @@ u32 ChooseWildMonIndex_Rocks(void)
         wildMonIndex = 1;
     else if (rand >= ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2)
         wildMonIndex = 2;
-    else if (rand >= ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_3)
-        wildMonIndex = 3;
     else
-        wildMonIndex = 4;
+        wildMonIndex = 3;
 
     // Lures occasionally reverse slots. Sweet Scent uses species totals instead.
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
     if (swap)
-        wildMonIndex = 4 - wildMonIndex;
+        wildMonIndex = 3 - wildMonIndex;
 
     return wildMonIndex;
+}
+
+// Honey draws its own six-slot table, the way it does in Inclement.
+u32 ChooseWildMonIndex_Honey(void)
+{
+    u8 rand = Random() % ENCOUNTER_CHANCE_HONEY_MONS_TOTAL;
+
+    if (rand < ENCOUNTER_CHANCE_HONEY_MONS_SLOT_0)
+        return 0;
+    else if (rand < ENCOUNTER_CHANCE_HONEY_MONS_SLOT_1)
+        return 1;
+    else if (rand < ENCOUNTER_CHANCE_HONEY_MONS_SLOT_2)
+        return 2;
+    else if (rand < ENCOUNTER_CHANCE_HONEY_MONS_SLOT_3)
+        return 3;
+    else if (rand < ENCOUNTER_CHANCE_HONEY_MONS_SLOT_4)
+        return 4;
+    else
+        return 5;
 }
 
 // NUM_FISHING_MONS_ENCOUNTER_SLOTS
@@ -753,7 +769,7 @@ void CreateWildMon(enum Species species, u8 level)
     u32 personality = GetMonPersonality(species, GetSynchronizedGender(WILDMON_ORIGIN, species), PickWildMonNature(species), RANDOM_UNOWN_LETTER);
     CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
-    if (IsEmeraldChampionsOrdinaryWildSpecies(species))
+    if (B_EC_WILD_BATTLE_SETS && IsEmeraldChampionsOrdinaryWildSpecies(species))
         ApplyEmeraldChampionsRandomWildSet(&gParties[B_TRAINER_OPPONENT_A][0]);
 
     // The manor's singers are the nearby solution to its meadow quest.
@@ -865,6 +881,8 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
         return FALSE;
 
     CreateWildMon(species, level);
+    // Legendaries are authored set-piece fights, not ordinary encounters, so
+    // they keep their prepared set even though wild Pokemon no longer do.
     if (rareLegendary)
         ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
     return TRUE;

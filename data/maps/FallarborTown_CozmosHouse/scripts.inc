@@ -1,139 +1,294 @@
-FallarborTown_CozmosHouse_MapScripts::
+.set LOCALID_COZMO, 1
+
+FallarborTown_CozmosHouse_MapScripts:: @ 8200F12
 	.byte 0
 
-FallarborTown_CozmosHouse_EventScript_ProfCozmo::
-	lock
+FallarborTown_CozmosHouse_EventScript_ProfCozmo:: @ 8200F13
+	lockall
 	faceplayer
-	goto_if_set FLAG_RECEIVED_COZMO_DAWN_STONE, FallarborTown_CozmosHouse_EventScript_GaveMeteorite
-	setvar VAR_0x8004, ITEM_METEORITE
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite
+	checkitem ITEM_RARE_CANDY, 1
+	compare VAR_RESULT, TRUE
+	goto_if_eq FallarborTown_CozmosHouse_EventScript_GaveMeteorite
+	checkitem ITEM_METEORITE, 1
+	compare VAR_RESULT, TRUE
+	goto_if_eq FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow, MSGBOX_DEFAULT
-	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
+	releaseall
+	end
 
-FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite::
+FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite:: @ 8200F38
 	call_if_unset FLAG_TEMP_2, FallarborTown_CozmosHouse_EventScript_NoticeMeteorite
 	call_if_set FLAG_TEMP_2, FallarborTown_CozmosHouse_EventScript_AskForMeteorite
-	goto_if_eq VAR_RESULT, NO, FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
-	msgbox FallarborTown_CozmosHouse_Text_PleaseTakeThisDawnStone, MSGBOX_DEFAULT
-	giveitem ITEM_DAWN_STONE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	compare VAR_RESULT, NO
+	goto_if_eq FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
+	msgbox FallarborTown_CozmosHouse_Text_PleaseUseThisTM, MSGBOX_DEFAULT
+	giveitem ITEM_RARE_CANDY
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, ITEM_METEORITE
 	call Common_EventScript_PlayerHandedOverTheItem
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
-	setflag FLAG_RECEIVED_COZMO_DAWN_STONE
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
-	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
+	releaseall
+	end
 
-FallarborTown_CozmosHouse_EventScript_NoticeMeteorite::
+FallarborTown_CozmosHouse_EventScript_NoticeMeteorite:: @ 8200F8B
 	msgbox FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow, MSGBOX_DEFAULT
 	msgbox FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt, MSGBOX_YESNO
 	return
 
-FallarborTown_CozmosHouse_EventScript_AskForMeteorite::
+FallarborTown_CozmosHouse_EventScript_AskForMeteorite:: @ 8200F9C
 	msgbox FallarborTown_CozmosHouse_Text_MayIHaveMeteorite, MSGBOX_YESNO
 	return
 
-FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite::
+FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite:: @ 8200FA5
 	setflag FLAG_TEMP_2
 	msgbox FallarborTown_CozmosHouse_Text_CrushedWithDisappointment, MSGBOX_DEFAULT
-	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
+	releaseall
+	end
 
-FallarborTown_CozmosHouse_EventScript_GaveMeteorite::
+FallarborTown_CozmosHouse_EventScript_GaveMeteorite:: @ 8200FB2
+	checkPartyHasSpecies SPECIES_DEOXYS
+	compare VAR_RESULT, TRUE
+	goto_if_eq FallarborTown_CozmosHouse_EventScript_ExplainDeoxysFormChange
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
-	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
+	releaseall
+	end
 
-FallarborTown_CozmosHouse_EventScript_CozmosWife::
-	lock
+FallarborTown_CozmosHouse_EventScript_ExplainDeoxysFormChange::
+	goto_if_set FLAG_SHOWN_DEOXYS_TO_COSMO, FallarborTown_CozmosHouse_EventScript_ShouldChangeDeoxysForm
+	setflag FLAG_SHOWN_DEOXYS_TO_COSMO
+	msgbox FallarborTown_CozmosHouse_Text_MeteorAffectsDeoxys, MSGBOX_DEFAULT
+	delay 40
+	playse SE_PIN
+	applymovement LOCALID_COZMO, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_COZMO, Common_Movement_Delay48
+	waitmovement 0
+FallarborTown_CozmosHouse_EventScript_ShouldChangeDeoxysForm::
+	msgbox FallarborTown_CozmosHouse_Text_YouHaveDeoxys, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq FallarborTown_CozmosHouse_EventScript_ChangeDeoxysForm
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_EventScript_ChangeDeoxysForm::
+    msgbox FallarborTown_CozmosHouse_Text_WhichDeoxys, MSGBOX_DEFAULT
+    special ChoosePartyMon
+	waitstate
+    compare VAR_0x8004, 255
+	goto_if_eq FallarborTown_CozmosHouse_EventScript_Exit
+	special IsSelectedMonEgg
+	compare VAR_RESULT, TRUE
+    goto_if_eq FallarborTown_CozmosHouse_EventScript_MonIsEgg
+    isChosenMonSpecies SPECIES_DEOXYS
+    compare VAR_RESULT, FALSE
+    goto_if_eq FallarborTown_CozmosHouse_EventScript_MonIsNotDeoxys
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge FallarborTown_CozmosHouse_EventScript_Exit
+    specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+    copyvar VAR_0x8006, VAR_RESULT
+	lockall
 	faceplayer
-	goto_if_set FLAG_RECEIVED_COZMO_DAWN_STONE, FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
+FallarborTown_CozmosHouse_EventScript_DeoxysMultichoice::
+    bufferpartymonnick 0, VAR_0x8004
+    message FallarborTown_CozmosHouse_Text_WhichForm
+    waitmessage
+	multichoice 0, 0, MULTI_DEOXYS_FORMES, 0
+	switch VAR_RESULT
+	case 0, FallarborTown_CozmosHouse_DeoxysNormal
+    case 1, FallarborTown_CozmosHouse_DeoxysAttack
+	case 2, FallarborTown_CozmosHouse_DeoxysDefense
+    case 3, FallarborTown_CozmosHouse_DeoxysSpeed
+	case 4, FallarborTown_CozmosHouse_EventScript_Exit
+    case MULTI_B_PRESSED, FallarborTown_CozmosHouse_EventScript_Exit
+    end
+
+FallarborTown_CozmosHouse_EventScript_Exit::
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_EventScript_MonIsEgg::
+	msgbox FallarborTown_CozmosHouse_Text_EggIsNotReacting, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_EventScript_MonIsNotDeoxys::
+	msgbox FallarborTown_CozmosHouse_Text_PokemonIsNotReacting, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_DeoxysNormal::
+    setvar VAR_0x8005, SPECIES_DEOXYS
+    compare VAR_0x8006, VAR_0x8005
+    goto_if_eq FallarborTown_CozmosHouse_EventScript_DeoxysAlreadyThatForme
+	special ChangeMonSpecies
+    msgbox FallarborTown_CozmosHouse_Text_DeoxysBalancedStats, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_DeoxysAttack::
+    setvar VAR_0x8005, SPECIES_DEOXYS_ATTACK
+    compare VAR_0x8006, VAR_0x8005
+    goto_if_eq FallarborTown_CozmosHouse_EventScript_DeoxysAlreadyThatForme
+	special ChangeMonSpecies
+    msgbox FallarborTown_CozmosHouse_Text_DeoxysAttackingStats, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_DeoxysDefense::
+    setvar VAR_0x8005, SPECIES_DEOXYS_DEFENSE
+    compare VAR_0x8006, VAR_0x8005
+    goto_if_eq FallarborTown_CozmosHouse_EventScript_DeoxysAlreadyThatForme
+	special ChangeMonSpecies
+    msgbox FallarborTown_CozmosHouse_Text_DeoxysDefendingStats, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_DeoxysSpeed::
+    setvar VAR_0x8005, SPECIES_DEOXYS_SPEED
+    compare VAR_0x8006, VAR_0x8005
+    goto_if_eq FallarborTown_CozmosHouse_EventScript_DeoxysAlreadyThatForme
+	special ChangeMonSpecies
+    msgbox FallarborTown_CozmosHouse_Text_DeoxysSanicStats, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_EventScript_DeoxysAlreadyThatForme::
+	msgbox FallarborTown_CozmosHouse_Text_DeoxysAlreadyThatForme, MSGBOX_DEFAULT
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_EventScript_CozmosWife:: @ 8200FBC
+	lockall
+	faceplayer
+	checkitem ITEM_RARE_CANDY, 1
+	compare VAR_RESULT, TRUE
+	goto_if_eq FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
 	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_CozmosHouse_EventScript_CozmoIsSad
 	msgbox FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls, MSGBOX_DEFAULT
-	release
+	releaseall
 	end
 
-FallarborTown_CozmosHouse_EventScript_CozmoIsSad::
+FallarborTown_CozmosHouse_EventScript_CozmoIsSad:: @ 8200FDA
+	goto_if_unset FLAG_RECEIVED_GALLADITE, FallarborTown_CozmosHouse_EventScript_GiveGalladite
 	msgbox FallarborTown_CozmosHouse_Text_FeelSorryForCozmo, MSGBOX_DEFAULT
-	release
+	releaseall
 	end
 
-FallarborTown_CozmosHouse_EventScript_CozmoIsHappy::
+FallarborTown_CozmosHouse_EventScript_GiveGalladite::
+	msgbox FallarborTown_CozmosHouse_Text_PleaseTakeThis, MSGBOX_DEFAULT
+	giveitem ITEM_GALLADITE
+	setflag FLAG_RECEIVED_GALLADITE
+	releaseall
+	end
+
+FallarborTown_CozmosHouse_EventScript_CozmoIsHappy:: @ 8200FE4
+	goto_if_unset FLAG_RECEIVED_GALLADITE, FallarborTown_CozmosHouse_EventScript_GiveGalladite
 	msgbox FallarborTown_CozmosHouse_Text_CozmoIsSoHappy, MSGBOX_DEFAULT
-	release
+	releaseall
 	end
 
-FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow:
-	.string "PROF. COZMO: Oh…\n"
+FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow: @ 8200FEE
+	.string "Prof. Cozmo: Oh…\n"
 	.string "I never should have let myself be\l"
-	.string "conned into telling TEAM MAGMA where\l"
-	.string "you can find METEORITES…\p"
-	.string "That METEORITE from METEOR FALLS…\n"
+	.string "conned into telling Team Magma where\l"
+	.string "you can find Meteorites…\p"
+	.string "That Meteorite from Meteor Falls…\n"
 	.string "It's never going to be mine now…$"
-FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt:
-	.string "Oh! Is that the METEORITE TEAM MAGMA\n"
-	.string "took from METEOR FALLS?\p"
-	.string "Please, may I have it? I can offer this\n"
-	.string "rare DAWN STONE in exchange.$"
-FallarborTown_CozmosHouse_Text_PleaseTakeThisDawnStone:
-	.string "This Dawn Stone is my thanks.\n"
-	.string "Please put it to good use.$"
 
-FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch:
-	.string "PROF. COZMO: Oh, I can't believe it.\n"
+FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt: @ 82010A2
+	.string "Oh!\n"
+	.string "Hah?\p"
+	.string "That item…\p"
+	.string "Could it be?\p"
+	.string "Is it the Meteorite that Team Magma\n"
+	.string "took from Meteor Falls?\p"
+	.string "Please, may I have it?\p"
+	.string "I'm not asking for it for free.\n"
+	.string "How about in exchange for this TM?$"
+
+FallarborTown_CozmosHouse_Text_PleaseUseThisTM: @ 8201159
+	.string "Prof. Cozmo: This TM, it represents\n"
+	.string "my feeling of gratitude.\l"
+	.string "Please use it!$"
+
+FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch: @ 82011A5
+	.string "Prof. Cozmo: Oh, I can't believe it.\n"
 	.string "This is really, really great!\p"
 	.string "This is really going to help my research!$"
 
-FallarborTown_CozmosHouse_Text_CrushedWithDisappointment:
-	.string "PROF. COZMO: Oh, but…\n"
+FallarborTown_CozmosHouse_Text_CrushedWithDisappointment: @ 8201212
+	.string "Prof. Cozmo: Oh, but…\n"
 	.string "I'm crushed with disappointment…$"
-FallarborTown_CozmosHouse_Text_MayIHaveMeteorite:
-	.string "PROF. COZMO: Please, may I have that\n"
-	.string "METEORITE?\p"
-	.string "I can offer this rare DAWN STONE\n"
-	.string "in exchange.$"
 
-FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls:
-	.string "PROF. COZMO went off to METEOR FALLS\n"
-	.string "on ROUTE 114 with some people from\l"
-	.string "TEAM MAGMA.$"
+FallarborTown_CozmosHouse_Text_MayIHaveMeteorite: @ 8201249
+	.string "Prof. Cozmo: Please, may I have that\n"
+	.string "Meteorite?\p"
+	.string "I'm not asking for it for free.\n"
+	.string "How about in exchange for this TM?$"
 
-FallarborTown_CozmosHouse_Text_FeelSorryForCozmo:
-	.string "Poor PROF. COZMO…\n"
+FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls: @ 82012BC
+	.string "Prof. Cozmo went off to Meteor Falls\n"
+	.string "on Route 114 with some people from\l"
+	.string "Team Magma.$"
+
+FallarborTown_CozmosHouse_Text_FeelSorryForCozmo: @ 8201310
+	.string "Poor Prof. Cozmo…\n"
 	.string "He's so depressed… I feel sorry for him.$"
 
-FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
-	.string "Look at PROF. COZMO…\n"
+FallarborTown_CozmosHouse_Text_CozmoIsSoHappy: @ 820134B
+	.string "Look at Prof. Cozmo…\n"
 	.string "He's so happy! I think it's cute.$"
 
-FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE::
-	msgbox FallarborTown_CozmosHouse_Text_HisuianGoomy, MSGBOX_NPC
-	goto_if_set FLAG_EC_MEGA_GIFT_CLEFABLITE, FallarborTown_CozmosHouse_EventScript_CozmosWife
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, FallarborTown_CozmosHouse_EventScript_CozmosWife
-	lock
-	faceplayer
-	msgbox FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE_Text, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_CLEFABLITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_CLEFABLITE
-	release
-	goto FallarborTown_CozmosHouse_EventScript_CozmosWife
+FallarborTown_CozmosHouse_Text_PleaseTakeThis:
+	.string "Thank you for saving Prof. Cozmo!\p"
+	.string "Please take this stone as a sign of\n"
+	.string "our gratitude.$"
 
-FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE_Text:
-	.string "Cozmo studies what falls from space.\n"
-	.string "I notice who comes looking for it.\p"
-	.string "Clefairy gather around these stones.\n"
-	.string "Take this one for its evolved form.$"
+FallarborTown_CozmosHouse_Text_MeteorAffectsDeoxys:
+	.string "Ah! It's you! I've made a discovery!\p"
+	.string "It seems the Meteorite has something\n"
+	.string "to do with a Pokémon called Deoxys.\p"
+	.string "If exposed to the Meteorite, it'll\n"
+	.string "change shape!$"
 
-FallarborTown_CozmosHouse_Text_HisuianGoomy:
-	.string "METEOR FALLS has iron-rich stone. Level\n"
-	.string "GOOMY to Lv. 40 or higher in its main\l"
-	.string "entrance chamber for Hisuian SLIGGOO.\p"
-	.string "Elsewhere, GOOMY keeps its usual form.\n"
-	.string "Either SLIGGOO evolves at Lv. 50 or\l"
-	.string "higher when leveled in rain or fog.$"
+FallarborTown_CozmosHouse_Text_YouHaveDeoxys::
+	.string "Oh! Is that a Deoxys with you?\p"
+	.string "Would you like to bring it closer to\n"
+	.string "the Meteorite?$"
 
-FallarborTown_CozmosHouse_EventScript_DeoxysResearch::
-	call Common_EventScript_EmeraldChampionsDeoxysResearch
-	release
-	end
+FallarborTown_CozmosHouse_Text_WhichDeoxys::
+	.string "Which Deoxys would you like to bring\n"
+	.string "closer to the Meteorite?$"
+
+FallarborTown_CozmosHouse_Text_EggIsNotReacting:
+	.string "The Egg is not reacting to the\n"
+	.string "Meteorite.$"
+
+FallarborTown_CozmosHouse_Text_PokemonIsNotReacting:
+	.string "The Pokémon is not reacting to the\n"
+	.string "Meteorite.$"
+
+FallarborTown_CozmosHouse_Text_WhichForm:
+	.string "{STR_VAR_1} is reacting to the\n"
+	.string "Meteorite!\p"
+	.string "Which Forme should it change into?$"
+
+FallarborTown_CozmosHouse_Text_DeoxysBalancedStats:
+	.string "{STR_VAR_1} has changed to have\n"
+	.string "balanced stats!$"
+
+FallarborTown_CozmosHouse_Text_DeoxysAttackingStats:
+	.string "{STR_VAR_1} has changed to have\n"
+	.string "superior stats for attacking!$"
+
+FallarborTown_CozmosHouse_Text_DeoxysDefendingStats:
+	.string "{STR_VAR_1} has changed to have\n"
+	.string "superior stats for defending!$"
+
+FallarborTown_CozmosHouse_Text_DeoxysSanicStats:
+	.string "{STR_VAR_1} has changed to have\n"
+	.string "increased Speed!$"
+
+FallarborTown_CozmosHouse_Text_DeoxysAlreadyThatForme:
+	.string "{STR_VAR_1} is already in that Forme!$"

@@ -3,7 +3,6 @@
   "name": "GraniteCave_B2F",
   "layout": "LAYOUT_GRANITE_CAVE_B2F",
   "music": "MUS_PETALBURG_WOODS",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_GRANITE_CAVE",
   "requires_flash": true,
   "weather": "WEATHER_NONE",
@@ -13,10 +12,10 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 4,
       "y": 4,
       "elevation": 3,
@@ -24,12 +23,12 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_REPEL",
-      "script": "Common_EventScript_FindItem",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GraniteCave_B2F_EventScript_ItemSteelixite",
       "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_REPEL"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 29,
       "y": 4,
       "elevation": 3,
@@ -37,9 +36,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_GLIMMORANITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "GraniteCave_B2F_EventScript_ItemRareCandy",
+      "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
@@ -49,10 +48,10 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_TIMER_BALL",
-      "script": "GraniteCave_B2F_EventScript_TimerBallPack",
-      "flag": "FLAG_EC_ITEM_GRANITE_CAVE_B2F_TIMER_BALL"
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Granite_Cave_B2F_TM31_Brick_Break",
+      "flag": "FLAG_GRANITE_CAVE_BRICK_BREAK"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -152,38 +151,40 @@
       "y": 13,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B1F",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     },
     {
       "x": 28,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B1F",
-      "dest_warp_id": "3"
+      "dest_warp_id": 3
     },
     {
       "x": 8,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B1F",
-      "dest_warp_id": "4"
+      "dest_warp_id": 4
     },
     {
       "x": 12,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B1F",
-      "dest_warp_id": "5"
+      "dest_warp_id": 5
     },
     {
       "x": 29,
       "y": 2,
       "elevation": 3,
       "dest_map": "MAP_GRANITE_CAVE_B1F",
-      "dest_warp_id": "6"
+      "dest_warp_id": 6
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "hidden_item",

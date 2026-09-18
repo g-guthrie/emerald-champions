@@ -1,11 +1,13 @@
 EventScript_UseSurf::
-	checkfieldmove FIELD_MOVE_SURF
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_EndUseSurf
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	checkpartymove MOVE_SURF
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_eq EventScript_ExploudSurf
+	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	lockall
 	msgbox gText_WantToUseSurf, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_ReleaseUseSurf
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_ReleaseUseSurf
 	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
 EventScript_ReleaseUseSurf::
@@ -13,12 +15,31 @@ EventScript_ReleaseUseSurf::
 EventScript_EndUseSurf::
 	end
 
+EventScript_ExploudSurf::
+	setvar VAR_0x8004, SPECIES_EXPLOUD
+	setvar VAR_0x8008, MOVE_SURF
+	setvar VAR_0x8009, 1
+	bufferspeciesname 0, VAR_0x8004	
+	buffermovename 1, VAR_0x8008
+	msgbox Text_ExploudSurf, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_ReleaseUseSurf
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	closemessage
+	dofieldeffect FLDEFF_USE_SURF
+	end
+
+
+@ Emerald Champions: restored after the Inclement merge.
 EventScript_CurrentTooFast::
 	lockall
 	checkfieldmove FIELD_MOVE_SURF
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CurrentTooFastEndMsg
 	playse SE_SELECT
 	msgbox Text_CurrentTooFast
+
+
+@ Emerald Champions: restored after the Inclement merge.
 EventScript_CurrentTooFastEndMsg::
 	releaseall
 	end

@@ -3,7 +3,6 @@
   "name": "SlateportCity_NameRatersHouse",
   "layout": "LAYOUT_HOUSE_WITH_BED",
   "music": "MUS_SLATEPORT",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -13,7 +12,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_COOK",
@@ -25,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE",
+      "script": "SlateportCity_NameRatersHouse_NatureChanger",
       "flag": "0"
     }
   ],
@@ -35,16 +34,20 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY",
-      "dest_warp_id": "6"
+      "dest_warp_id": 6
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY",
-      "dest_warp_id": "6"
+      "dest_warp_id": 6
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

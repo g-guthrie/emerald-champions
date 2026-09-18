@@ -248,6 +248,43 @@ void CB2_InitPokeNav(void)
     }
 }
 
+// Opens the PokeNav from a script, for the Rustboro tutorial.
+//
+// The donor put the PokeNav straight onto the Match Call screen via
+// POKENAV_MODE_FORCE_CALL_READY. Match Call is deleted from this engine, so
+// that mode and that screen no longer exist; the tutorial now simply opens the
+// PokeNav. What matters for the script is the mode being something other than
+// POKENAV_MODE_NORMAL, which routes the shutdown below through
+// CB2_ReturnToFieldContinueScriptPlayMapMusic so the script's waitstate ends.
+static void CB2_InitPokenavForTutorial(void)
+{
+    UpdatePaletteFade();
+    if (gPaletteFade.active)
+        return;
+
+    gPokenavResources = Alloc(sizeof(*gPokenavResources));
+    if (gPokenavResources == NULL)
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    }
+    else
+    {
+        InitPokenavResources(gPokenavResources);
+        gPokenavResources->mode = POKENAV_MODE_TUTORIAL;
+        ResetTasks();
+        SetVBlankCallback(NULL);
+        CreateTask(Task_Pokenav, 0);
+        SetMainCallback2(CB2_Pokenav);
+        SetVBlankCallback(VBlankCB_Pokenav);
+    }
+}
+
+void OpenPokenavForTutorial(void)
+{
+    SetMainCallback2(CB2_InitPokenavForTutorial);
+    FadeScreen(FADE_TO_BLACK, 0);
+}
+
 static void FreePokenavResources(void)
 {
     int i;

@@ -1,101 +1,98 @@
-Route111_MapScripts::
+.set LOCALID_VICTOR, 1
+.set LOCALID_VICTORIA, 2
+.set LOCALID_VIVI, 3
+.set LOCALID_VICKY, 4
+.set LOCALID_PLAYER_FALLING, 44
+.set LOCALID_NURSE, 45
+.set LOCALID_CHANSEY, 46
+
+Route111_MapScripts:: @ 81F0CA7
 	map_script MAP_SCRIPT_ON_LOAD, Route111_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, Route111_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route111_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route111_OnFrame
 	.byte 0
 
-Route111_OnLoad:
+Route111_OnLoad: @ 81F0CBC
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_CloseDesertRuins
-	call_if_eq VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_ShowTemporaryMirageTower
+	compare VAR_MIRAGE_TOWER_STATE, 1
+	call_if_eq Route111_EventScript_ShowTemporaryMirageTower
 	end
 
-Route111_EventScript_CloseDesertRuins::
-	setmetatile 29, 86, METATILE_General_RockWall_RockBase, TRUE
-	setmetatile 29, 87, METATILE_General_RockWall_SandBase, TRUE
+Route111_EventScript_CloseDesertRuins:: @ 81F0CD1
+	setmetatile 29, 86, METATILE_General_RockWall_RockBase, 1
+	setmetatile 29, 87, METATILE_General_RockWall_SandBase, 1
 	return
 
 @ Show Mirage Tower just prior to disintegration. Mirage Tower is otherwise handled by the map layout
-Route111_EventScript_ShowTemporaryMirageTower::
-	setmetatile 18, 53, METATILE_Mauville_MirageTower_Tile0, FALSE
-	setmetatile 19, 53, METATILE_Mauville_MirageTower_Tile1, FALSE
-	setmetatile 20, 53, METATILE_Mauville_MirageTower_Tile2, FALSE
-	setmetatile 18, 54, METATILE_Mauville_MirageTower_Tile3, FALSE
-	setmetatile 19, 54, METATILE_Mauville_MirageTower_Tile4, FALSE
-	setmetatile 20, 54, METATILE_Mauville_MirageTower_Tile5, FALSE
-	setmetatile 18, 55, METATILE_Mauville_MirageTower_Tile6, FALSE
-	setmetatile 19, 55, METATILE_Mauville_MirageTower_Tile7, FALSE
-	setmetatile 20, 55, METATILE_Mauville_MirageTower_Tile8, FALSE
-	setmetatile 18, 56, METATILE_Mauville_MirageTower_Tile9, FALSE
-	setmetatile 19, 56, METATILE_Mauville_MirageTower_TileA, FALSE
-	setmetatile 20, 56, METATILE_Mauville_MirageTower_TileB, FALSE
-	setmetatile 18, 57, METATILE_Mauville_MirageTower_TileC, FALSE
-	setmetatile 19, 57, METATILE_Mauville_MirageTower_TileD, FALSE
-	setmetatile 20, 57, METATILE_Mauville_MirageTower_TileE, FALSE
-	setmetatile 18, 58, METATILE_Mauville_MirageTower_TileF, FALSE
-	setmetatile 19, 58, METATILE_Mauville_MirageTower_Tile10, FALSE
-	setmetatile 20, 58, METATILE_Mauville_MirageTower_Tile11, FALSE
+Route111_EventScript_ShowTemporaryMirageTower:: @ 81F0CE4
+	setmetatile 18, 53, METATILE_Mauville_MirageTower_Tile0, 0
+	setmetatile 19, 53, METATILE_Mauville_MirageTower_Tile1, 0
+	setmetatile 20, 53, METATILE_Mauville_MirageTower_Tile2, 0
+	setmetatile 18, 54, METATILE_Mauville_MirageTower_Tile3, 0
+	setmetatile 19, 54, METATILE_Mauville_MirageTower_Tile4, 0
+	setmetatile 20, 54, METATILE_Mauville_MirageTower_Tile5, 0
+	setmetatile 18, 55, METATILE_Mauville_MirageTower_Tile6, 0
+	setmetatile 19, 55, METATILE_Mauville_MirageTower_Tile7, 0
+	setmetatile 20, 55, METATILE_Mauville_MirageTower_Tile8, 0
+	setmetatile 18, 56, METATILE_Mauville_MirageTower_Tile9, 0
+	setmetatile 19, 56, METATILE_Mauville_MirageTower_TileA, 0
+	setmetatile 20, 56, METATILE_Mauville_MirageTower_TileB, 0
+	setmetatile 18, 57, METATILE_Mauville_MirageTower_TileC, 0
+	setmetatile 19, 57, METATILE_Mauville_MirageTower_TileD, 0
+	setmetatile 20, 57, METATILE_Mauville_MirageTower_TileE, 0
+	setmetatile 18, 58, METATILE_Mauville_MirageTower_TileF, 0
+	setmetatile 19, 58, METATILE_Mauville_MirageTower_Tile10, 0
+	setmetatile 20, 58, METATILE_Mauville_MirageTower_Tile11, 0
 	return
 
-Route111_OnTransition:
+Route111_OnTransition: @ 81F0D87
+	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
 	special SetMirageTowerVisibility
 	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_SetLayoutNoMirageTower
-	call_if_eq VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_SetFallingPlayerGfx
-	call_if_eq VAR_MIRAGE_TOWER_STATE, 2, Route111_EventScript_SetMirageTowerGone
+	compare VAR_MIRAGE_TOWER_STATE, 1
+	call_if_eq Route111_EventScript_SetFallingPlayerGfx
+	compare VAR_MIRAGE_TOWER_STATE, 2
+	call_if_eq Route111_EventScript_SetMirageTowerGone
 	call Route111_EventScript_CheckSetSandstorm
-	call Route111_EventScript_CheckDynamoGuard
 	call GabbyAndTy_EventScript_UpdateLocation
-	call Route111_EventScript_UpdateVialQuestObjects
 	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
 	end
 
-Route111_EventScript_UpdateVialQuestObjects::
-	setflag FLAG_HIDE_ROUTE111_VIAL_NURSE
-	setflag FLAG_HIDE_ROUTE111_VIAL_CHANSEY
-	switch VAR_CHANSEY_NURSE_STATE
-	case 0, Route111_EventScript_ShowVialNurseAndChansey
-	case 1, Route111_EventScript_ShowVialNurse
-	case 2, Route111_EventScript_ShowVialNurse
-	case 3, Route111_EventScript_ShowVialNurse
-	case 4, Route111_EventScript_ShowVialNurse
-	case 5, Route111_EventScript_ShowVialNurse
-	case 6, Route111_EventScript_ShowVialNurse
-	case 7, Route111_EventScript_ShowVialNurse
-	return
-
-Route111_EventScript_ShowVialNurseAndChansey::
-	clearflag FLAG_HIDE_ROUTE111_VIAL_CHANSEY
-Route111_EventScript_ShowVialNurse::
-	clearflag FLAG_HIDE_ROUTE111_VIAL_NURSE
-	return
-
-Route111_EventScript_SetFallingPlayerGfx::
+Route111_EventScript_SetFallingPlayerGfx:: @ 81F0DC2
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route111_EventScript_SetFallingPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, Route111_EventScript_SetFallingPlayerGfxFemale
+	compare VAR_RESULT, MALE
+	goto_if_eq Route111_EventScript_SetFallingPlayerGfxMale
+	compare VAR_RESULT, FEMALE
+	goto_if_eq Route111_EventScript_SetFallingPlayerGfxFemale
 	return
 
-Route111_EventScript_SetFallingPlayerGfxMale::
+Route111_EventScript_SetFallingPlayerGfxMale:: @ 81F0DDA
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-Route111_EventScript_SetFallingPlayerGfxFemale::
+Route111_EventScript_SetFallingPlayerGfxFemale:: @ 81F0DE0
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
-Route111_EventScript_CheckSetSandstorm::
+Route111_EventScript_CheckSetSandstorm:: @ 81F0DE6
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	goto_if_lt VAR_TEMP_1, 34, Route111_EventScript_EndCheckSetSandstorm
-	goto_if_gt VAR_TEMP_1, 107, Route111_EventScript_EndCheckSetSandstorm
-	goto_if_gt VAR_TEMP_1, 72, Route111_EventScript_SetSandstorm
-	goto_if_gt VAR_TEMP_0, 2000, Route111_EventScript_EndCheckSetSandstorm
-	goto_if_lt VAR_TEMP_0, 8, Route111_EventScript_EndCheckSetSandstorm
-Route111_EventScript_SetSandstorm::
+	compare VAR_TEMP_1, 34
+	goto_if_lt Route111_EventScript_EndCheckSetSandstorm
+	compare VAR_TEMP_1, 107
+	goto_if_gt Route111_EventScript_EndCheckSetSandstorm
+	compare VAR_TEMP_1, 72
+	goto_if_gt Route111_EventScript_SetSandstorm
+	compare VAR_TEMP_0, 2000
+	goto_if_gt Route111_EventScript_EndCheckSetSandstorm
+	compare VAR_TEMP_0, 8
+	goto_if_lt Route111_EventScript_EndCheckSetSandstorm
+Route111_EventScript_SetSandstorm:: @ 81F0E22
 	setweather WEATHER_SANDSTORM
-Route111_EventScript_EndCheckSetSandstorm::
+Route111_EventScript_EndCheckSetSandstorm:: @ 81F0E25
 	return
 
-Route111_EventScript_SetWinstratesNotDefeated::
+Route111_EventScript_SetWinstratesNotDefeated:: @ 81F0E26
 	clearflag FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE
 	setflag FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE
 	setflag FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE
@@ -105,41 +102,44 @@ Route111_EventScript_SetWinstratesNotDefeated::
 	cleartrainerflag TRAINER_VIVI
 	end
 
-Route111_EventScript_SetLayoutNoMirageTower::
+Route111_EventScript_SetLayoutNoMirageTower:: @ 81F0E3C
 	setmaplayoutindex LAYOUT_ROUTE111_NO_MIRAGE_TOWER
 	return
 
-Route111_EventScript_SetMirageTowerGone::
-	call Route111_EventScript_SetLayoutNoMirageTower
+Route111_EventScript_SetMirageTowerGone:: @ 81F0E40
 	setvar VAR_MIRAGE_TOWER_STATE, 3
 	return
 
-Route111_OnWarp:
+Route111_OnWarp: @ 81F0E46
 	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_HidePlayerForMirageTower
 	.2byte 0
 
-Route111_EventScript_HidePlayerForMirageTower::
-	hideobjectat LOCALID_PLAYER, MAP_LITTLEROOT_TOWN
+Route111_EventScript_HidePlayerForMirageTower:: @ 81F0E50
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	end
 
-Route111_OnFrame:
+Route111_OnFrame: @ 81F0E56
 	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_MirageTowerDisappear
 	.2byte 0
 
-Route111_EventScript_MirageTowerDisappear::
+Route111_EventScript_MirageTowerDisappear:: @ 81F0E60
 	lockall
 	special StartMirageTowerShake
+	waitstate
 	delay 24
 	playse SE_FALL
-	addobject LOCALID_ROUTE111_PLAYER_FALLING
+	addobject LOCALID_PLAYER_FALLING
 	special StartPlayerDescendMirageTower
-	showobjectat LOCALID_PLAYER, MAP_LITTLEROOT_TOWN
-	removeobject LOCALID_ROUTE111_PLAYER_FALLING
+	waitstate
+	showobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
+	removeobject LOCALID_PLAYER_FALLING
 	delay 16
-	turnobject LOCALID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	delay 16
 	special StartMirageTowerDisintegration
+	waitstate
 	special StartMirageTowerFossilFallAndSink
+	waitstate
 	setvar VAR_MIRAGE_TOWER_STATE, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	goto_if_set FLAG_CHOSE_CLAW_FOSSIL, Route111_EventScript_RootFossilDisappeared
@@ -147,14 +147,14 @@ Route111_EventScript_MirageTowerDisappear::
 	releaseall
 	end
 
-Route111_EventScript_RootFossilDisappeared::
+Route111_EventScript_RootFossilDisappeared:: @ 81F0EA7
 	msgbox Route111_Text_RootFossilDisappeared, MSGBOX_DEFAULT
 	releaseall
 	end
 
 @ Unused
-Route111_Movement_PlayerFall::
-	lock_anim
+Route111_Movement_PlayerFall:: @ 81F0EB1
+	store_lock_anim
 	walk_fast_down
 	walk_fast_down
 	walk_fast_down
@@ -163,361 +163,501 @@ Route111_Movement_PlayerFall::
 	walk_fast_down
 	step_end
 
-Route111_EventScript_Girl::
+Route111_EventScript_Girl:: @ 81F0EB9
 	lock
 	faceplayer
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_111_RECEIVED_BERRY, Route111_EventScript_ReceivedBerry
 	msgbox Route111_Text_WateredPlantsEveryDayTakeBerry, MSGBOX_DEFAULT
 	giveitem ITEM_RAZZ_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_111_RECEIVED_BERRY
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_GoingToTryToMakeDifferentColorBerries, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_ReceivedBerry::
+Route111_EventScript_ReceivedBerry:: @ 81F0EF4
 	msgbox Route111_Text_WhatColorBerriesToLookForToday, MSGBOX_DEFAULT
 	release
 	end
 
 @ Unused
-Route111_EventScript_ViciousSandstormTriggerUp::
+Route111_EventScript_ViciousSandstormTriggerUp:: @ 81F0EFE
 	lockall
 	setvar VAR_0x8004, 0
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
-Route111_EventScript_ViciousSandstormTriggerDown::
+Route111_EventScript_ViciousSandstormTriggerDown:: @ 81F0F0A
 	lockall
 	setvar VAR_0x8004, 1
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
-Route111_EventScript_ViciousSandstormTriggerLeft::
+Route111_EventScript_ViciousSandstormTriggerLeft:: @ 81F0F16
 	lockall
 	setvar VAR_0x8004, 2
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
 @ Unused
-Route111_EventScript_ViciousSandstormTriggerRight::
+Route111_EventScript_ViciousSandstormTriggerRight:: @ 81F0F22
 	lockall
 	setvar VAR_0x8004, 3
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
-Route111_EventScript_ViciousSandstormTrigger::
-	checkitem ITEM_GO_GOGGLES
-	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_PreventRouteAccess
+Route111_EventScript_ViciousSandstormTrigger:: @ 81F0F2E
+	checkitem ITEM_GO_GOGGLES, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route111_EventScript_PreventRouteAccess
 	setvar VAR_TEMP_3, 1
 	releaseall
 	end
 
-Route111_EventScript_PreventRouteAccess::
+Route111_EventScript_PreventRouteAccess:: @ 81F0F45
 	msgbox gText_SandstormIsVicious, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8004, 0, Route111_EventScript_PushUpFromRoute
-	call_if_eq VAR_0x8004, 1, Route111_EventScript_PushDownFromRoute
-	call_if_eq VAR_0x8004, 2, Route111_EventScript_PushLeftFromRoute
-	call_if_eq VAR_0x8004, 3, Route111_EventScript_PushRightFromRoute
+	compare VAR_0x8004, 0
+	call_if_eq Route111_EventScript_PushUpFromRoute
+	compare VAR_0x8004, 1
+	call_if_eq Route111_EventScript_PushDownFromRoute
+	compare VAR_0x8004, 2
+	call_if_eq Route111_EventScript_PushLeftFromRoute
+	compare VAR_0x8004, 3
+	call_if_eq Route111_EventScript_PushRightFromRoute
 	releaseall
 	end
 
-Route111_EventScript_PushUpFromRoute::
-	applymovement LOCALID_PLAYER, Route111_Movement_PushUpFromRoute
+Route111_EventScript_PushUpFromRoute:: @ 81F0F7C
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushUpFromRoute
 	waitmovement 0
 	return
 
-Route111_EventScript_PushDownFromRoute::
-	applymovement LOCALID_PLAYER, Route111_Movement_PushDownFromRoute
+Route111_EventScript_PushDownFromRoute:: @ 81F0F87
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushDownFromRoute
 	waitmovement 0
 	return
 
-Route111_EventScript_PushLeftFromRoute::
-	applymovement LOCALID_PLAYER, Route111_Movement_PushLeftFromRoute
+Route111_EventScript_PushLeftFromRoute:: @ 81F0F92
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushLeftFromRoute
 	waitmovement 0
 	return
 
-Route111_EventScript_PushRightFromRoute::
-	applymovement LOCALID_PLAYER, Route111_Movement_PushRightFromRoute
+Route111_EventScript_PushRightFromRoute:: @ 81F0F9D
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PushRightFromRoute
 	waitmovement 0
 	return
 
-Route111_Movement_PushUpFromRoute:
+Route111_Movement_PushUpFromRoute: @ 81F0FA8
 	walk_up
 	step_end
 
-Route111_Movement_PushDownFromRoute:
+Route111_Movement_PushDownFromRoute: @ 81F0FAA
 	walk_down
 	step_end
 
-Route111_Movement_PushLeftFromRoute:
+Route111_Movement_PushLeftFromRoute: @ 81F0FAC
 	walk_left
 	step_end
 
-Route111_Movement_PushRightFromRoute:
+Route111_Movement_PushRightFromRoute: @ 81F0FAE
 	walk_right
 	step_end
 
-Route111_EventScript_SunTrigger::
+Route111_EventScript_SunTrigger:: @ 81F0FB0
 	setweather WEATHER_SUNNY
 	fadenewbgm MUS_ROUTE110
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
-Route111_EventScript_SandstormTrigger::
+Route111_EventScript_SandstormTrigger:: @ 81F0FBD
 	setweather WEATHER_SANDSTORM
-	fadenewbgm MUS_DESERT
+	fadenewbgm MUS_ROUTE111
 	doweather
 	end
 
-Route111_EventScript_Victor::
+Route111_EventScript_Victor:: @ 81F0FC5
 	lock
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_BattleOurFamily, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route111_EventScript_BattleWinstrates
+	compare VAR_RESULT, YES
+	goto_if_eq Route111_EventScript_BattleWinstrates
 	msgbox Route111_Text_IsThatSo, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_BattleWinstrates::
+Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	msgbox Route111_Text_VictorIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_VICTOR, Route111_Text_VictorDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	applymovement LOCALID_ROUTE111_VICTOR, Common_Movement_WalkInPlaceFasterUp
+	trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_VictorDefeat
+	applymovement LOCALID_VICTOR, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
 	msgbox Route111_Text_VictorPostBattle, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ROUTE111_VICTOR, Route111_Movement_WinstrateEnterHouse
+	applymovement LOCALID_VICTOR, Route111_Movement_WinstrateEnterHouse
 	waitmovement 0
-	removeobject LOCALID_ROUTE111_VICTOR
+	removeobject LOCALID_VICTOR
 	call Route111_EventScript_CloseWinstrateDoor
-	applymovement LOCALID_PLAYER, Route111_Movement_WaitForNextWinstrate
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
-	addobject LOCALID_ROUTE111_VICTORIA
-	applymovement LOCALID_ROUTE111_VICTORIA, Route111_Movement_WinstrateExitHouse
+	addobject LOCALID_VICTORIA
+	applymovement LOCALID_VICTORIA, Route111_Movement_WinstrateExitHouse
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_VictoriaIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double_allow_single TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
-	applymovement LOCALID_ROUTE111_VICTORIA, Common_Movement_WalkInPlaceFasterUp
+	trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
+	applymovement LOCALID_VICTORIA, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
 	msgbox Route111_Text_VictoriaPostBattle, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ROUTE111_VICTORIA, Route111_Movement_WinstrateEnterHouse
+	applymovement LOCALID_VICTORIA, Route111_Movement_WinstrateEnterHouse
 	waitmovement 0
-	removeobject LOCALID_ROUTE111_VICTORIA
+	removeobject LOCALID_VICTORIA
 	call Route111_EventScript_CloseWinstrateDoor
-	applymovement LOCALID_PLAYER, Route111_Movement_WaitForNextWinstrate
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
-	addobject LOCALID_ROUTE111_VIVI
-	applymovement LOCALID_ROUTE111_VIVI, Route111_Movement_WinstrateExitHouse
+	addobject LOCALID_VIVI
+	applymovement LOCALID_VIVI, Route111_Movement_WinstrateExitHouse
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_ViviIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double_allow_single TRAINER_VIVI, Route111_Text_ViviDefeat
-	applymovement LOCALID_ROUTE111_VIVI, Common_Movement_WalkInPlaceFasterUp
+	trainerbattle_no_intro TRAINER_VIVI, Route111_Text_ViviDefeat
+	applymovement LOCALID_VIVI, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
 	msgbox Route111_Text_ViviPostBattle, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ROUTE111_VIVI, Route111_Movement_WinstrateEnterHouse
+	applymovement LOCALID_VIVI, Route111_Movement_WinstrateEnterHouse
 	waitmovement 0
-	removeobject LOCALID_ROUTE111_VIVI
+	removeobject LOCALID_VIVI
 	call Route111_EventScript_CloseWinstrateDoor
-	applymovement LOCALID_PLAYER, Route111_Movement_WaitForNextWinstrate
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_WaitForNextWinstrate
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
-	addobject LOCALID_ROUTE111_VICKY
-	applymovement LOCALID_ROUTE111_VICKY, Route111_Movement_WinstrateExitHouse
+	addobject LOCALID_VICKY
+	applymovement LOCALID_VICKY, Route111_Movement_WinstrateExitHouse
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_VickyIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double_allow_single TRAINER_VICKY, Route111_Text_VickyDefeat
+	trainerbattle_no_intro TRAINER_VICKY, Route111_Text_VickyDefeat
 	msgbox Route111_Text_VickyPostBattle, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ROUTE111_VICKY, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_VICKY, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
-	applymovement LOCALID_ROUTE111_VICKY, Route111_Movement_WinstrateEnterHouse
+	applymovement LOCALID_VICKY, Route111_Movement_WinstrateEnterHouse
 	waitmovement 0
-	removeobject LOCALID_ROUTE111_VICKY
+	removeobject LOCALID_VICKY
 	call Route111_EventScript_CloseWinstrateDoor
 	release
 	end
 
-Route111_EventScript_OpenWinstrateDoor::
+Route111_EventScript_OpenWinstrateDoor:: @ 81F113C
 	opendoor 13, 113
 	waitdooranim
 	return
 
-Route111_EventScript_CloseWinstrateDoor::
+Route111_EventScript_CloseWinstrateDoor:: @ 81F1143
 	closedoor 13, 113
 	waitdooranim
 	return
 
-Route111_Movement_WinstrateEnterHouse:
-	walk_in_place_faster_up
+Route111_Movement_WinstrateEnterHouse: @ 81F114A
+	walk_in_place_fast_up
 	walk_up
 	step_end
 
-Route111_Movement_WinstrateExitHouse:
+Route111_Movement_WinstrateExitHouse: @ 81F114D
 	walk_down
 	step_end
 
-Route111_Movement_WaitForNextWinstrate:
+Route111_Movement_WaitForNextWinstrate: @ 81F114F
 	delay_16
 	delay_16
 	delay_16
 	step_end
 
-Route111_EventScript_RouteSignMauville::
+Route111_EventScript_RouteSignMauville:: @ 81F1153
 	msgbox Route111_Text_RouteSignMauville, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	end
 
-Route111_EventScript_WinstrateHouseSign::
+Route111_EventScript_WinstrateHouseSign:: @ 81F115C
 	msgbox Route111_Text_WinstrateHouseSign, MSGBOX_SIGN
 	end
 
-Route111_EventScript_RouteSign112::
+Route111_EventScript_RouteSign112:: @ 81F1165
 	msgbox Route111_Text_RouteSign112, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	end
 
-Route111_EventScript_RouteSign113::
+Route111_EventScript_RouteSign113:: @ 81F116E
 	msgbox Route111_Text_RouteSign113, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	end
 
-Route111_EventScript_OldLadysRestStopSign::
+Route111_EventScript_OldLadysRestStopSign:: @ 81F1177
 	msgbox Route111_Text_OldLadysRestStopSign, MSGBOX_SIGN
 	end
 
-Route111_EventScript_TrainerTipsSpAtkSpDef::
+Route111_EventScript_TrainerTipsSpAtkSpDef:: @ 81F1180
 	msgbox Route111_Text_TrainerTipsSpAtkSpDef, MSGBOX_SIGN
 	end
 
-Route111_EventScript_Man1::
+Route111_EventScript_Man1:: @ 81F1189
 	msgbox Route111_Text_ToughToKeepWinningUpTheRanks, MSGBOX_NPC
 	end
 
-Route111_EventScript_Man2::
+Route111_EventScript_Man2:: @ 81F1192
 	msgbox Route111_Text_WinstrateFamilyDestroyedMe, MSGBOX_NPC
 	end
 
-Route111_EventScript_Hiker::
+Route111_EventScript_Hiker:: @ 81F119B
 	lock
 	faceplayer
-	msgbox Route111_Text_CursedStoneClue, MSGBOX_DEFAULT
-	goto_if_eq VAR_MIRAGE_TOWER_STATE, 3, Route111_EventScript_HikerMirageTowerGone
-	goto_if_eq VAR_MIRAGE_TOWER_STATE, 2, Route111_EventScript_HikerMirageTowerDisintegrated
+	compare VAR_MIRAGE_TOWER_STATE, 3
+	goto_if_eq Route111_EventScript_HikerMirageTowerGone
+	compare VAR_MIRAGE_TOWER_STATE, 2
+	goto_if_eq Route111_EventScript_HikerMirageTowerDisintegrated
 	goto_if_set FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_HikerMirageTowerVisible
 	msgbox Route111_Text_ShouldBeMirageTowerAroundHere, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_HikerMirageTowerGone::
+Route111_EventScript_HikerMirageTowerGone:: @ 81F11C6
 	msgbox Route111_Text_MirageTowerHasntBeenSeenSince, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_HikerMirageTowerDisintegrated::
+Route111_EventScript_HikerMirageTowerDisintegrated:: @ 81F11D0
 	msgbox Route111_Text_ThatWasShockingSandRainedDown, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_HikerMirageTowerVisible::
+Route111_EventScript_HikerMirageTowerVisible:: @ 81F11DA
 	msgbox Route111_Text_MirageTowerClearlyVisible, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_VialChanseyEscape::
+Route111_EventScript_Drew:: @ 81F1204
+	trainerbattle_single TRAINER_DREW, Route111_Text_DrewIntro, Route111_Text_DrewDefeat
+	msgbox Route111_Text_DrewPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Heidi:: @ 81F121B
+	trainerbattle_single TRAINER_HEIDI, Route111_Text_HeidiIntro, Route111_Text_HeidiDefeat
+	msgbox Route111_Text_HeidiPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Beau:: @ 81F1232
+	trainerbattle_single TRAINER_BEAU, Route111_Text_BeauIntro, Route111_Text_BeauDefeat
+	msgbox Route111_Text_BeauPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Becky:: @ 81F1249
+	trainerbattle_single TRAINER_BECKY, Route111_Text_BeckyIntro, Route111_Text_BeckyDefeat
+	msgbox Route111_Text_BeckyPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Dusty:: @ 81F1260
+	trainerbattle_single TRAINER_DUSTY_1, Route111_Text_DustyIntro, Route111_Text_DustyDefeat, Route111_EventScript_RegisterDusty
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route111_EventScript_RematchDusty
+	msgbox Route111_Text_DustyPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_RegisterDusty:: @ 81F128C
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	msgbox Route111_Text_DustyRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DUSTY_1
+	release
+	end
+
+Route111_EventScript_RematchDusty:: @ 81F12AB
+	trainerbattle_rematch TRAINER_DUSTY_1, Route111_Text_DustyRematchIntro, Route111_Text_DustyRematchDefeat
+	msgbox Route111_Text_DustyPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Travis:: @ 81F12C2
+	trainerbattle_single TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat
+	msgbox Route111_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Irene:: @ 81F12D9
+	trainerbattle_single TRAINER_IRENE, Route111_Text_IreneIntro, Route111_Text_IreneDefeat
+	msgbox Route111_Text_IrenePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Daisuke:: @ 81F12F0
+	trainerbattle_single TRAINER_DAISUKE, Route111_Text_DaisukeIntro, Route111_Text_DaisukeDefeat
+	msgbox Route111_Text_DaisukePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Wilton:: @ 81F1307
+	trainerbattle_single TRAINER_WILTON_1, Route111_Text_WiltonIntro, Route111_Text_WiltonDefeat, Route111_EventScript_RegisterWilton
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route111_EventScript_RematchWilton
+	msgbox Route111_Text_WiltonPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_RegisterWilton:: @ 81F1333
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	msgbox Route111_Text_WiltonRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_WILTON_1
+	release
+	end
+
+Route111_EventScript_RematchWilton:: @ 81F1352
+	trainerbattle_rematch TRAINER_WILTON_1, Route111_Text_WiltonRematchIntro, Route111_Text_WiltonRematchDefeat
+	msgbox Route111_Text_WiltonPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Brooke:: @ 81F1369
+	trainerbattle_single TRAINER_BROOKE_1, Route111_Text_BrookeIntro, Route111_Text_BrookeDefeat, Route111_EventScript_RegisterBrooke
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, TRUE
+	goto_if_eq Route111_EventScript_RematchBrooke
+	msgbox Route111_Text_BrookePostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_RegisterBrooke:: @ 81F1395
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	msgbox Route111_Text_BrookeRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_BROOKE_1
+	release
+	end
+
+Route111_EventScript_RematchBrooke:: @ 81F13B4
+	trainerbattle_rematch TRAINER_BROOKE_1, Route111_Text_BrookeRematchIntro, Route111_Text_BrookeRematchDefeat
+	msgbox Route111_Text_BrookePostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Hayden:: @ 81F13CB
+	trainerbattle_single TRAINER_HAYDEN, Route111_Text_HaydenIntro, Route111_Text_HaydenDefeat
+	msgbox Route111_Text_HaydenPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Bianca:: @ 81F13E2
+	trainerbattle_single TRAINER_BIANCA, Route111_Text_BiancaIntro, Route111_Text_BiancaDefeat
+	msgbox Route111_Text_BiancaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Tyron:: @ 81F13F9
+	trainerbattle_single TRAINER_TYRON, Route111_Text_TyronIntro, Route111_Text_TyronDefeat
+	msgbox Route111_Text_TyronPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Celina:: @ 81F1410
+	trainerbattle_single TRAINER_CELINA, Route111_Text_CelinaIntro, Route111_Text_CelinaDefeat
+	msgbox Route111_Text_CelinaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Celia:: @ 81F1427
+	trainerbattle_single TRAINER_CELIA, Route111_Text_CeliaIntro, Route111_Text_CeliaDefeat
+	msgbox Route111_Text_CeliaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Bryan:: @ 81F143E
+	trainerbattle_single TRAINER_BRYAN, Route111_Text_BryanIntro, Route111_Text_BryanDefeat
+	msgbox Route111_Text_BryanPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_Branden:: @ 81F1455
+	trainerbattle_single TRAINER_BRANDEN, Route111_Text_BrandenIntro, Route111_Text_BrandenDefeat
+	msgbox Route111_Text_BrandenPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_TrainerHillSign:: @ 81F146C
+	msgbox Route111_Text_TrainerHillSign, MSGBOX_SIGN
+	end
+
+Route111_EventScript_ChanseyBlob::
 	lockall
 	specialvar VAR_RESULT, GetPlayerFacingDirection
-	call_if_ne VAR_RESULT, DIR_NORTH, Route111_EventScript_VialPlayerFaceUp
-	applymovement LOCALID_ROUTE111_VIAL_NURSE, Common_Movement_WalkInPlaceFasterUp
-	applymovement LOCALID_ROUTE111_VIAL_CHANSEY, Common_Movement_WalkInPlaceFasterDown
+	compare VAR_RESULT, DIR_NORTH
+	call_if_ne Route111_EventScript_PlayerFaceUp
+	applymovement LOCALID_NURSE, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_CHANSEY, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	msgbox Route111_Text_VialBlobGetBackHere, MSGBOX_DEFAULT
-	applymovement LOCALID_ROUTE111_VIAL_CHANSEY, Route111_Movement_VialChanseyJump
+	msgbox Route111_Text_BlobGetBackHere, MSGBOX_DEFAULT
+	applymovement LOCALID_CHANSEY, Route111_Movement_ChanseyJump
 	waitmovement 0
-	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
+	waitse
+	playmoncry SPECIES_CHANSEY, 0
 	delay 40
 	waitmoncry
-	applymovement LOCALID_ROUTE111_VIAL_CHANSEY, Route111_Movement_VialChanseyEscape
+	applymovement LOCALID_CHANSEY, Route111_Movement_ChanseyEscape
 	waitmovement 0
-	msgbox Route111_Text_VialNurseNeedsHelp, MSGBOX_DEFAULT
+	msgbox Route111_Text_ThatsJustGreat, MSGBOX_DEFAULT
+	playse SE_PIN
+	applymovement LOCALID_NURSE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_NURSE, Common_Movement_WalkInPlaceFastestRight
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	waitmovement 0
+	msgbox Route111_Text_DidYouSeeThat, MSGBOX_DEFAULT
 	giveitem ITEM_HEAL_BALL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	msgbox Route111_Text_BlobGetInAnyHealBall, MSGBOX_DEFAULT
 	setvar VAR_CHANSEY_NURSE_STATE, 1
-	setflag FLAG_HIDE_ROUTE111_VIAL_CHANSEY
-	removeobject LOCALID_ROUTE111_VIAL_CHANSEY
-	msgbox Route111_Text_VialHealBall, MSGBOX_DEFAULT
+	removeobject LOCALID_CHANSEY
 	releaseall
 	end
 
 Route111_EventScript_VialUpgradeNurse::
 	lock
 	faceplayer
-	goto_if_ge VAR_CHANSEY_NURSE_STATE, 7, Route111_EventScript_VialNextDestination
-	goto_if_eq VAR_CHANSEY_NURSE_STATE, 6, Route111_EventScript_VialUpgradeComplete
-	goto_if_eq VAR_CHANSEY_NURSE_STATE, 0, Route111_EventScript_VialNurseWatching
-	checkitem ITEM_HEAL_BALL
-	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_VialNurseReminder
-	msgbox Route111_Text_VialReplacementBall, MSGBOX_DEFAULT
-	giveitem ITEM_HEAL_BALL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-Route111_EventScript_VialNurseReminder::
-	goto_if_eq VAR_CHANSEY_NURSE_STATE, 2, Route111_EventScript_VialNurseJaggedPass
-	goto_if_ge VAR_CHANSEY_NURSE_STATE, 3, Route111_EventScript_VialNurseAshenWoods
-	msgbox Route111_Text_VialBringBlobBack, MSGBOX_DEFAULT
+	compare VAR_CHANSEY_NURSE_STATE, 6
+	goto_if_eq Route111_EventScript_UpgradeVialHideNurse
+	msgbox Route111_Text_BringBlobBack, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_VialNurseJaggedPass::
-	msgbox Route111_Text_VialNurseJaggedPass, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_VialNurseAshenWoods::
-	msgbox Route111_Text_VialNurseAshenWoods, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_VialNurseWatching::
-	msgbox Route111_Text_VialNurseWatching, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_VialUpgradeComplete::
-	msgbox Route111_Text_VialThanks, MSGBOX_DEFAULT
-	goto_if_ge VAR_POKE_VIAL_MAX_CHARGES, 2, Route111_EventScript_VialUpgradeMarkDone
+Route111_EventScript_UpgradeVialHideNurse::
+	msgbox Route111_Text_ThanksPlayer, MSGBOX_AUTOCLOSE
 	setvar VAR_POKE_VIAL_MAX_CHARGES, 2
 	setvar VAR_POKE_VIAL_CHARGES, 2
-Route111_EventScript_VialUpgradeMarkDone::
-	setvar VAR_CHANSEY_NURSE_STATE, 7
-Route111_EventScript_VialNextDestination::
-	call LavaridgeTown_EventScript_MountainHandoff
-	release
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	compare VAR_RESULT, DIR_NORTH
+	goto_if_eq Route111_EventScript_NurseLeaves2
+	applymovement LOCALID_NURSE, Route111_Movement_NurseLeaves1
+	waitmovement 0
+	removeobject LOCALID_NURSE
+	releaseall
 	end
 
-Route111_EventScript_VialPlayerFaceUp::
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+Route111_EventScript_NurseLeaves2::
+	applymovement LOCALID_NURSE, Route111_Movement_NurseLeaves2
+	waitmovement 0
+	removeobject LOCALID_NURSE
+	releaseall
+	end
+
+Route111_EventScript_PlayerFaceUp::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-Route111_Movement_VialChanseyJump:
+Route111_Movement_ChanseyJump:
 	jump_in_place_down
 	delay_4
 	jump_in_place_down
 	step_end
 
-Route111_Movement_VialChanseyEscape:
+Route111_Movement_ChanseyEscape:
 	walk_up
 	walk_left
 	walk_up
@@ -525,416 +665,206 @@ Route111_Movement_VialChanseyEscape:
 	walk_up
 	step_end
 
-Route111_Text_VialBlobGetBackHere:
-	.string "Blob! Stop goofing around and get back\n"
-	.string "here! How did you get over there?$"
+Route111_Movement_NurseLeaves1:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
 
-Route111_Text_VialNurseNeedsHelp:
-	.string "Oh, no! My CHANSEY ran north!\p"
-	.string "Please bring Blob back. I'll improve\n"
-	.string "your Poké Vial's capacity as thanks.$"
+Route111_Movement_NurseLeaves2:
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
 
-Route111_Text_VialHealBall:
-	.string "Blob trusts this HEAL BALL.\n"
-	.string "Follow the trail north and use it.$"
+Route111_Text_BlobGetBackHere:
+	.string "Blob!\n"
+	.string "Stop goofing around and get back here!\p"
+	.string "Argh, how did you even get over there?$"
 
-Route111_Text_VialNurseWatching:
-	.string "Blob and I help travelers here.\n"
-	.string "CHANSEY can be rather playful.$"
+Route111_Text_ThatsJustGreat:
+	.string "Blob, wait! Stop!\p"
+	.string "Oh, that's just great…$"
 
-Route111_Text_VialReplacementBall:
-	.string "You lost the HEAL BALL? Take another.\n"
-	.string "Blob will recognize it.$"
+Route111_Text_DidYouSeeThat:
+	.string "Oh, a Trainer!\p"
+	.string "Did you see that? My Chansey's\n"
+	.string "escaped!\p"
+	.string "Please, you've got to help me get it\n"
+	.string "back!\p"
+	.string "I'll make it worth your while.\p"
+	.string "If you can bring Blob back to me, I'll\n"
+	.string "get all the nurses to give you an extra\l"
+	.string "dose when they refill your Poké Vial.\p"
+	.string "Sounds good, right? Good!\p"
+	.string "Here, take Blob's Poké Ball.$"
 
-Route111_Text_VialBringBlobBack:
-	.string "Follow ROUTE 111 north to ROUTE 112.\n"
-	.string "Please bring my CHANSEY home!$"
+Route111_Text_BlobGetInAnyHealBall:
+	.string "Blob will get in any old Heal Ball,\n"
+	.string "so don't worry if you lose that one.\p"
+	.string "Good luck!$"
 
-Route111_Text_VialNurseJaggedPass:
-	.string "Blob climbed toward JAGGED PASS.\n"
-	.string "Try the slope below MT. CHIMNEY.$"
+Route111_Text_BringBlobBack:
+	.string "Blob ran off up Route 111.\p"
+	.string "Please bring it back to me!$\p"
 
-Route111_Text_VialNurseAshenWoods:
-	.string "Take EMBER PATH off JAGGED PASS.\n"
-	.string "Blob ran into ASHEN WOODS beyond.$"
+Route111_Text_ThanksPlayer:
+	.string "Thanks for catching Blob for me!\p"
+	.string "As promised, you'll get an extra dose\n"
+	.string "when you refill your Poké Vial from\l"
+	.string "now on.\p"
+	.string "See you around, {PLAYER}!$"
 
-Route111_Text_VialThanks:
-	.string "You caught Blob! Thank you!\p"
-	.string "Poké Centers will now refill your\n"
-	.string "Poké Vial with two full charges.$"
+Route111_Text_BattleOurFamily: @ 81F1475
+	.string "Hello! I take it you're a traveler.\p"
+	.string "How's this? What do you say to taking\n"
+	.string "on our family of four in a series of\l"
+	.string "Pokémon battles?$"
 
-Route111_EventScript_Drew::
-	trainerbattle_double TRAINER_DREW, Route111_Text_DrewIntro, Route111_Text_DrewDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_DrewPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Heidi::
-	trainerbattle_double TRAINER_HEIDI, Route111_Text_HeidiIntro, Route111_Text_HeidiDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_HeidiPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Beau::
-	trainerbattle_double TRAINER_BEAU, Route111_Text_BeauIntro, Route111_Text_BeauDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_BeauPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Becky::
-	msgbox Route111_Text_BECKY_LocalConversation, MSGBOX_NPC
-	end
-
-Route111_EventScript_Dusty::
-	trainerbattle_double TRAINER_DUSTY_1, Route111_Text_DustyIntro, Route111_Text_DustyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route111_EventScript_RegisterDusty
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchDusty
-	msgbox Route111_Text_DustyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_RegisterDusty::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route111_Text_DustyRegister, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_RematchDusty::
-	trainerbattle_rematch_double TRAINER_DUSTY_1, Route111_Text_DustyRematchIntro, Route111_Text_DustyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_DustyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Travis::
-	trainerbattle_double TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Irene::
-	msgbox Route111_Text_IRENE_LocalConversation, MSGBOX_NPC
-	end
-
-Route111_EventScript_Daisuke::
-	msgbox Route111_Text_DaisukePostBattle, MSGBOX_NPC
-	end
-
-Route111_EventScript_Wilton::
-	trainerbattle_double TRAINER_WILTON_1, Route111_Text_WiltonIntro, Route111_Text_WiltonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route111_EventScript_RegisterWilton
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchWilton
-	msgbox Route111_Text_WiltonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_RegisterWilton::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route111_Text_WiltonRegister, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_RematchWilton::
-	trainerbattle_rematch_double TRAINER_WILTON_1, Route111_Text_WiltonRematchIntro, Route111_Text_WiltonRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_WiltonPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Brooke::
-	trainerbattle_double TRAINER_BROOKE_1, Route111_Text_BrookeIntro, Route111_Text_BrookeDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route111_EventScript_RegisterBrooke
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchBrooke
-	msgbox Route111_Text_BrookePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_RegisterBrooke::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route111_Text_BrookeRegister, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_RematchBrooke::
-	trainerbattle_rematch_double TRAINER_BROOKE_1, Route111_Text_BrookeRematchIntro, Route111_Text_BrookeRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_BrookePostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Hayden::
-	msgbox Route111_Text_HaydenPostBattle, MSGBOX_NPC
-	end
-
-Route111_EventScript_Bianca::
-	trainerbattle_double TRAINER_BIANCA, Route111_Text_BiancaIntro, Route111_Text_BiancaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_BiancaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Tyron::
-	trainerbattle_double TRAINER_TYRON, Route111_Text_TyronIntro, Route111_Text_TyronDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_TyronPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Celina::
-	msgbox Route111_Text_CelinaPostBattle, MSGBOX_NPC
-	end
-
-Route111_EventScript_Celia::
-	msgbox Route111_Text_CeliaPostBattle, MSGBOX_NPC
-	end
-
-Route111_EventScript_Bryan::
-	msgbox Route111_Text_BryanPostBattle, MSGBOX_NPC
-	end
-
-Route111_EventScript_Branden::
-	msgbox Route111_Text_BrandenPostBattle, MSGBOX_NPC
-	end
-
-Route111_EventScript_TrainerHillSign::
-	msgbox Route111_Text_TrainerHillSign, MSGBOX_SIGN
-	end
-
-@ Emerald Champions (C5): attach this to the Trainer Hill door once the warp at
-@ Route111 (31, 113) is replaced with a sign bg event.
-Route111_EventScript_TrainerHillSealedDoor::
-	msgbox Route111_Text_TrainerHillSealedDoor, MSGBOX_SIGN
-	end
-
-Route111_Text_TrainerHillSealedDoor:
-	.string "The Hill closed when the Circuit\n"
-	.string "opened; the Frontier ferry sails\l"
-	.string "from Lilycove.$"
-
-Route111_Text_BattleOurFamily:
-	.string "Hello, traveler! How about four\n"
-	.string "family battles back-to-back?\p"
-	.string "There are no breaks to recover\n"
-	.string "between opponents.\p"
-	.string "If you leave before beating all\n"
-	.string "four of us, we start again with me.\p"
-	.string "Will you take our challenge?$"
-
-Route111_Text_IsThatSo:
+Route111_Text_IsThatSo: @ 81F14F5
 	.string "Is that so?\n"
 	.string "Drop in, if you change your mind!$"
 
-Route111_Text_VictorIntro:
+Route111_Text_VictorIntro: @ 81F1523
 	.string "That's the spirit! I like you!$"
 
-Route111_Text_VictorDefeat:
+Route111_Text_VictorDefeat: @ 81F1542
 	.string "Aiyah!\n"
 	.string "You're a lot tougher than I expected!$"
 
-Route111_Text_VictorPostBattle:
+Route111_Text_VictorPostBattle: @ 81F156F
 	.string "Hey, all!\n"
-	.string "I've found a pretty strong TRAINER!$"
+	.string "I've found a pretty strong Trainer!$"
 
-Route111_Text_VictoriaIntro:
+Route111_Text_VictoriaIntro: @ 81F159D
 	.string "Oh, my goodness! Aren't you young?\p"
-	.string "You must be quite the TRAINER to beat\n"
+	.string "You must be quite the Trainer to beat\n"
 	.string "my husband, though.\p"
 	.string "It's my turn to battle now!$"
 
-Route111_Text_VictoriaDefeat:
+Route111_Text_VictoriaDefeat: @ 81F1616
 	.string "Oh, gosh!\n"
 	.string "I can't get over how strong you are!$"
 
-Route111_Text_VictoriaPostBattle:
-	.string "There's a strong TRAINER here!\n"
+Route111_Text_VictoriaPostBattle: @ 81F1645
+	.string "There's a strong Trainer here!\n"
 	.string "This one's really strong!$"
 
-Route111_Text_ViviIntro:
+Route111_Text_ViviIntro: @ 81F167E
 	.string "You're stronger than Mommy? Wow!\p"
 	.string "But I'm strong, too!\n"
 	.string "Really! Honestly!$"
 
-Route111_Text_ViviDefeat:
+Route111_Text_ViviDefeat: @ 81F16C6
 	.string "Huh? Did I just lose?$"
 
-Route111_Text_ViviPostBattle:
+Route111_Text_ViviPostBattle: @ 81F16DC
 	.string "This stinks…\p"
 	.string "…Snivel… Grandma!$"
 
-Route111_Text_VickyIntro:
+Route111_Text_VickyIntro: @ 81F16FB
 	.string "How dare you make my granddaughter\n"
 	.string "cry!\p"
 	.string "For that, I'm going to smack you!\n"
 	.string "Prepare to lose!$"
 
-Route111_Text_VickyDefeat:
+Route111_Text_VickyDefeat: @ 81F1756
 	.string "Kwah! You are strong…\n"
 	.string "My granddaughter was right…$"
 
-Route111_Text_VickyPostBattle:
+Route111_Text_VickyPostBattle: @ 81F1788
 	.string "If you're not in any hurry,\n"
 	.string "visit with us awhile.$"
 
-Route111_Text_ToughToKeepWinningUpTheRanks:
-	.string "If you don't raise your POKéMON some\n"
+Route111_Text_ToughToKeepWinningUpTheRanks: @ 81F17BA
+	.string "If you don't raise your Pokémon some\n"
 	.string "more, it could be tough to keep winning\l"
 	.string "up through the ranks.\p"
-	.string "I've heard the POKéMON LEAGUE's\n"
-	.string "ELITE FOUR are far stronger than\l"
-	.string "any GYM LEADER.$"
+	.string "I've heard the Pokémon League's\n"
+	.string "Elite Four are far stronger than\l"
+	.string "any Gym Leader.$"
 
-Route111_Text_WinstrateFamilyDestroyedMe:
-	.string "I challenged the WINSTRATE family,\n"
+Route111_Text_WinstrateFamilyDestroyedMe: @ 81F186E
+	.string "I challenged the Winstrate family,\n"
 	.string "but four matches in a row is tough\l"
 	.string "going… They destroyed me.$"
 
-Route111_Text_RouteSignMauville:
-	.string "ROUTE 111\n"
-	.string "{DOWN_ARROW} MAUVILLE CITY$"
+Route111_Text_RouteSignMauville: @ 81F18CE
+	.string "Route 111\n"
+	.string "{DOWN_ARROW} Mauville City$"
 
-Route111_Text_WinstrateHouseSign:
+Route111_Text_WinstrateHouseSign: @ 81F18E8
 	.string "“Our family's hearts beat as one!”\n"
-	.string "THE WINSTRATE'S HOUSE$"
+	.string "The Winstrate's House$"
 
-Route111_Text_RouteSign112:
-	.string "ROUTE 111\n"
-	.string "{LEFT_ARROW} ROUTE 112$"
+Route111_Text_RouteSign112: @ 81F1921
+	.string "Route 111\n"
+	.string "{LEFT_ARROW} Route 112$"
 
-Route111_Text_RouteSign113:
-	.string "ROUTE 111\n"
-	.string "{LEFT_ARROW} ROUTE 113$"
+Route111_Text_RouteSign113: @ 81F1937
+	.string "Route 111\n"
+	.string "{LEFT_ARROW} Route 113$"
 
-Route111_Text_OldLadysRestStopSign:
-	.string "OLD LADY'S REST STOP\n"
+Route111_Text_OldLadysRestStopSign: @ 81F194D
+	.string "Old Lady's Rest Stop\n"
 	.string "“Come in and rest your tired bones.”$"
 
-Route111_Text_TrainerTipsSpAtkSpDef:
-	.string "TRAINER TIPS\p"
-	.string "SP. ATK means SPECIAL ATTACK. It\n"
-	.string "determines the power of special\l"
-	.string "moves.\p"
-	.string "SP. DEF means SPECIAL DEFENSE. It\n"
-	.string "helps a POKéMON withstand them.$"
+Route111_Text_TrainerTipsSpAtkSpDef: @ 81F1987
+	.string "Trainer Tips\p"
+	.string "One of the indicators of a Pokémon's\n"
+	.string "powerfulness is Sp. Atk. It stands for\l"
+	.string "“Special Attack.”\p"
+	.string "Likewise, Sp. Def stands for “Special\n"
+	.string "Defense.”$"
 
-Route111_Text_ShouldBeMirageTowerAroundHere:
+Route111_Text_ShouldBeMirageTowerAroundHere: @ 81F1A22
 	.string "There should be a tower made of sand\n"
 	.string "around here somewhere.\p"
 	.string "But for some reason, it can be seen\n"
 	.string "sometimes, and sometimes not.\p"
-	.string "That's why I call it the MIRAGE TOWER.$"
+	.string "That's why I call it the Mirage Tower.$"
 
-Route111_Text_MirageTowerClearlyVisible:
-	.string "The MIRAGE TOWER is visible!\n"
-	.string "Beneath its first floor lies an\l"
-	.string "older stairway.\p"
-	.string "Archaeologists say it reaches a\n"
-	.string "fossil archive called SANDSTREWN\l"
-	.string "RUINS.$"
+Route111_Text_MirageTowerClearlyVisible: @ 81F1AC7
+	.string "I see it!\n"
+	.string "The tower of sand!\p"
+	.string "The sand tower they called a mirage\n"
+	.string "is clearly visible!\p"
+	.string "But it looks so fragile…\n"
+	.string "It could crumble away anytime…\p"
+	.string "I want to go inside it, but I can't\n"
+	.string "get my courage up for it…$"
 
-Route111_Text_ThatWasShockingSandRainedDown:
-	.string "The tower collapsed, and every\n"
-	.string "route into SANDSTREWN RUINS is\l"
-	.string "sealed forever.\p"
-	.string "DESERT UNDERPASS still exists,\n"
-	.string "but it cannot get you back in.$"
+Route111_Text_ThatWasShockingSandRainedDown: @ 81F1B92
+	.string "Whoa…\n"
+	.string "That was shocking.\p"
+	.string "Sand rained down in chunks all of\n"
+	.string "a sudden.\p"
+	.string "What was it like inside?\n"
+	.string "Were there sandy ghosts and such?$"
 
-Route111_Text_MirageTowerHasntBeenSeenSince:
-	.string "MIRAGE TOWER is gone. The ruins\n"
-	.string "below it are sealed forever.\p"
-	.string "The FOSSIL MANIAC's tunnel on\n"
-	.string "ROUTE 114 reaches DESERT UNDERPASS,\l"
-	.string "but that passage to the ruins is shut.$"
+Route111_Text_MirageTowerHasntBeenSeenSince: @ 81F1C12
+	.string "Since I spoke to you, the tower of sand\n"
+	.string "hasn't been seen.\p"
+	.string "Perhaps it really was\n"
+	.string "the Mirage Tower…$"
 
-Route111_Text_ClawFossilDisappeared:
-	.string "The CLAW FOSSIL disappeared into\n"
+Route111_Text_ClawFossilDisappeared: @ 81F1C74
+	.string "The Claw Fossil disappeared into\n"
 	.string "the sand…$"
 
-Route111_Text_RootFossilDisappeared:
-	.string "The ROOT FOSSIL disappeared into\n"
+Route111_Text_RootFossilDisappeared: @ 81F1C9F
+	.string "The Root Fossil disappeared into\n"
 	.string "the sand…$"
 
-Route111_Text_MauvilleUncleToldMeToTakeRockSmash:
-	.string "Oh, no!\p"
-	.string "My uncle in MAUVILLE told me to take\n"
-	.string "ROCK SMASH with me if I was going to\l"
-	.string "ROUTE 111!\p"
-	.string "My uncle? He lives across from\n"
-	.string "the bike shop in MAUVILLE.$"
+Route111_Text_TrainerHillSign: @ 81F1D61
+	.string "{RIGHT_ARROW} Trainer Hill Entrance\p"
+	.string "“Scale the heights, you hot-blooded\n"
+	.string "Trainers!”$"
 
-Route111_Text_TrainerHillSign:
-	.string "{RIGHT_ARROW} TRAINER HILL\p"
-	.string "Closed. The CHAMPIONS CIRCUIT took\n"
-	.string "its trainers years ago.$"
-
-@ Emerald Champions: everything north of this point (Route 111 west lane, Route 112,
-@ Fiery Path, Routes 113-114, Meteor Falls, Mt. Chimney, Lavaridge) is authored at
-@ the Dynamo Badge chapter (cap 30). Vanilla never gated it, so a two-badge
-@ player could walk into post-Wattson trainers. A road worker holds the trail until Wattson
-@ certifies the player; the three trigger tiles beside him push the player back.
-Route111_EventScript_CheckDynamoGuard::
-	goto_if_unset FLAG_BADGE03_GET, Route111_EventScript_CheckDynamoGuardEnd
-	setflag FLAG_HIDE_ROUTE_111_DYNAMO_GUARD
-	setvar VAR_TEMP_4, 1
-Route111_EventScript_CheckDynamoGuardEnd::
-	return
-
-Route111_EventScript_DynamoGuard::
-	lock
-	faceplayer
-	msgbox Route111_Text_DynamoGuardClosed, MSGBOX_DEFAULT
-	release
-	end
-
-Route111_EventScript_DynamoGuardTrigger::
-	lockall
-	msgbox Route111_Text_DynamoGuardTrigger, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
-	waitmovement 0
-	releaseall
-	end
-
-Route111_Text_DynamoGuardClosed:
-	.string "The trail north is closed for now.\n"
-	.string "The power lines up to LAVARIDGE went\l"
-	.string "down in the last storm.\p"
-	.string "WATTSON's crew is rewiring the route.\n"
-	.string "Once his GYM certifies you with the\l"
-	.string "DYNAMO BADGE, you're cleared to pass.$"
-
-Route111_Text_DynamoGuardTrigger:
-	.string "Hey! Not past the rope. Storm\n"
-	.string "damage has made the northern trail\l"
-	.string "unsafe.\p"
-	.string "You'll need WATTSON's DYNAMO BADGE\n"
-	.string "before I can let you through.$"
-
-Route111_Text_IRENE_LocalConversation:
-	.string "A picnic needs three things:\n"
-	.string "Food, shade, and less SANDSTORM.$"
-
-Route111_Text_BECKY_LocalConversation:
-	.string "I came to admire the desert.\n"
-	.string "The desert came into my shoes.$"
-
-Route111_EventScript_CursedStone::
-	lockall
-	msgbox Route111_Text_CursedStone, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route111_EventScript_CursedStoneEnd
-	closemessage
-	tryspecialevo EVO_TRIGGER_TABLET_CURSE, TRUE, TRUE
-	goto_if_ne VAR_RESULT, 0, Route111_EventScript_CursedStoneEnd
-	msgbox Route111_Text_CursedStoneUnchanged, MSGBOX_DEFAULT
-Route111_EventScript_CursedStoneEnd:
-	releaseall
-	end
-
-Route111_Text_CursedStoneClue:
-	.string "That carved stone just east of me\n"
-	.string "matches a Galarian YAMASK's slab.\p"
-	.string "Read it with a conscious Galarian\n"
-	.string "YAMASK missing at least 49 HP from\l"
-	.string "its maximum. It becomes RUNERIGUS.\p"
-	.string "You can return to the stone even after\n"
-	.string "MIRAGE TOWER disappears.$"
-
-Route111_Text_CursedStone:
-	.string "A curse is carved into this stone.\p"
-	.string "Each conscious Galarian YAMASK in your\n"
-	.string "party that is missing at least 49 HP\l"
-	.string "can become RUNERIGUS here.\p"
-	.string "Let the stone call to your party?$"
-
-Route111_Text_CursedStoneUnchanged:
-	.string "The stone falls silent. Bring a\n"
-	.string "conscious Galarian YAMASK missing\l"
-	.string "at least 49 HP, without an EVERSTONE.$"

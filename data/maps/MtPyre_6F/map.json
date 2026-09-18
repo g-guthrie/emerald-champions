@@ -3,7 +3,6 @@
   "name": "MtPyre_6F",
   "layout": "LAYOUT_MT_PYRE_6F",
   "music": "MUS_MT_PYRE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -13,7 +12,7 @@
   "allow_running": false,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_HEX_MANIAC",
@@ -23,23 +22,23 @@
       "movement_type": "MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "MtPyre_6F_EventScript_Valerie",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
       "x": 6,
       "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 5,
-      "movement_range_y": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_BLUK_BERRY",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_GARDEN_BUNDLE_MTPYRE_6F_BLUK_BERRY"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_6F_EventScript_ItemTM30",
+      "flag": "FLAG_ITEM_MT_PYRE_6F_TM_30"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",
@@ -49,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_ROTATE_CLOCKWISE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "MtPyre_6F_EventScript_Cedric",
       "flag": "0"
     }
@@ -61,25 +60,20 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_5F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 1,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_5F",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
-    {
-      "type": "sign",
-      "x": 8,
-      "y": 8,
-      "elevation": 3,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MtPyre_6F_EventScript_Pecharunt"
-    }
+
   ]
 }

@@ -198,6 +198,11 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KyogreFront
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GroudonFront;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regirock;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regigigas;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Jirachi;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Heatran;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Diancie;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Carbink;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regice;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Registeel;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Skitty;
@@ -618,6 +623,11 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_REGIROCK] =                 &gObjectEventGraphicsInfo_Regirock,
     [OBJ_EVENT_GFX_REGICE] =                   &gObjectEventGraphicsInfo_Regice,
     [OBJ_EVENT_GFX_REGISTEEL] =                &gObjectEventGraphicsInfo_Registeel,
+    [OBJ_EVENT_GFX_REGIGIGAS] = &gObjectEventGraphicsInfo_Regigigas,
+    [OBJ_EVENT_GFX_JIRACHI] = &gObjectEventGraphicsInfo_Jirachi,
+    [OBJ_EVENT_GFX_HEATRAN] = &gObjectEventGraphicsInfo_Heatran,
+    [OBJ_EVENT_GFX_DIANCIE] = &gObjectEventGraphicsInfo_Diancie,
+    [OBJ_EVENT_GFX_CARBINK] = &gObjectEventGraphicsInfo_Carbink,
     [OBJ_EVENT_GFX_SKITTY] =                   &gObjectEventGraphicsInfo_Skitty,
     [OBJ_EVENT_GFX_KECLEON] =                  &gObjectEventGraphicsInfo_Kecleon,
     [OBJ_EVENT_GFX_KYOGRE_ASLEEP] =            &gObjectEventGraphicsInfo_KyogreAsleep,

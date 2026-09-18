@@ -1,30 +1,16 @@
-FallarborTown_MapScripts::
+FallarborTown_MapScripts:: @ 81EB1FA
 	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_OnTransition
 	.byte 0
 
-FallarborTown_OnTransition:
+FallarborTown_OnTransition: @ 81EB200
 	setflag FLAG_VISITED_FALLARBOR_TOWN
 	setvar VAR_CONTEST_HALL_STATE, 0
 	clearflag FLAG_CONTEST_SKETCH_CREATED
-	setflag FLAG_HIDE_FALLARBOR_RIVAL_ON_BIKE
-	call_if_ne VAR_METEOR_FALLS_STATE, 0, FallarborTown_EventScript_MarkRivalSceneComplete
-	call_if_eq VAR_FALLARBOR_TOWN_STATE, 1, FallarborTown_EventScript_HideRivals
 	call Common_EventScript_SetupRivalGfxId
 	call Common_EventScript_SetupRivalOnBikeGfxId
 	end
 
-FallarborTown_EventScript_MarkRivalSceneComplete:
-	setvar VAR_FALLARBOR_TOWN_STATE, 1
-	setflag FLAG_HIDE_FALLARBOR_RIVAL
-	setflag FLAG_HIDE_FALLARBOR_RIVAL_ON_BIKE
-	return
-
-FallarborTown_EventScript_HideRivals:
-	setflag FLAG_HIDE_FALLARBOR_RIVAL
-	setflag FLAG_HIDE_FALLARBOR_RIVAL_ON_BIKE
-	return
-
-FallarborTown_EventScript_ExpertM::
+FallarborTown_EventScript_ExpertM:: @ 81EB20C
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_EventScript_ExpertMNormal
@@ -32,38 +18,38 @@ FallarborTown_EventScript_ExpertM::
 	release
 	end
 
-FallarborTown_EventScript_ExpertMNormal::
+FallarborTown_EventScript_ExpertMNormal:: @ 81EB221
 	msgbox FallarborTown_Text_RegionKnownForMeteors, MSGBOX_DEFAULT
 	release
 	end
 
-FallarborTown_EventScript_Girl::
+FallarborTown_EventScript_Girl:: @ 81EB22B
 	msgbox FallarborTown_Text_MyPreciousAzurill, MSGBOX_NPC
 	end
 
-FallarborTown_EventScript_Gentleman::
+FallarborTown_EventScript_Gentleman:: @ 81EB234
 	msgbox FallarborTown_Text_HaveYouChallengedFlannery, MSGBOX_NPC
 	end
 
-FallarborTown_EventScript_Azurill::
+FallarborTown_EventScript_Azurill:: @ 81EB23D
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, CRY_MODE_NORMAL
+	playmoncry SPECIES_AZURILL, 0
 	msgbox FallarborTown_Text_Azurill, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-FallarborTown_EventScript_BattleTentSign::
+FallarborTown_EventScript_BattleTentSign:: @ 81EB250
 	msgbox FallarborTown_Text_BattleTentSign, MSGBOX_SIGN
 	end
 
-FallarborTown_EventScript_TownSign::
+FallarborTown_EventScript_TownSign:: @ 81EB259
 	msgbox FallarborTown_Text_TownSign, MSGBOX_SIGN
 	end
 
-FallarborTown_EventScript_MoveTutorSign::
+FallarborTown_EventScript_MoveTutorSign:: @ 81EB262
 	msgbox FallarborTown_Text_MoveTutorSign, MSGBOX_SIGN
 	end
 
@@ -86,7 +72,7 @@ FallarborTown_EventScript_RivalTrigger4::
 	setvar VAR_0x8004, 4
 	goto FallarborTown_EventScript_RivalScene
 	end
-
+	
 FallarborTown_EventScript_RivalTrigger5::
 	setvar VAR_0x8004, 5
 	goto FallarborTown_EventScript_RivalScene
@@ -95,47 +81,45 @@ FallarborTown_EventScript_RivalTrigger5::
 FallarborTown_EventScript_RivalScene::
 	lockall
 	playse SE_PIN
-	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
-	applymovement LOCALID_FALLARBOR_RIVAL, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_Delay48
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, FallarborTown_EventScript_MayScene
-	goto FallarborTown_EventScript_BrendanScene
-	end
+	compare VAR_RESULT, MALE
+	goto_if_eq FallarborTown_EventScript_MayScene
+	compare VAR_RESULT, FEMALE
+	goto_if_eq FallarborTown_EventScript_BrendanScene
 
 FallarborTown_EventScript_MayScene::
-	playbgm MUS_ENCOUNTER_MAY, TRUE
+	playbgm MUS_ENCOUNTER_MAY, 1
 	msgbox FallarborTown_Text_MayDisaster, MSGBOX_DEFAULT
 	closemessage
 	call FallarborTown_EventScript_MoveToPlayer
 	msgbox FallarborTown_Text_MayWeirdos, MSGBOX_DEFAULT
 	closemessage
 	goto FallarborTown_EventScript_RivalExit
-	end
 
 FallarborTown_EventScript_BrendanScene::
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
+	playbgm MUS_ENCOUNTER_BRENDAN, 1
 	msgbox FallarborTown_Text_BrendanComeHere, MSGBOX_DEFAULT
 	closemessage
 	call FallarborTown_EventScript_MoveToPlayer
 	msgbox FallarborTown_Text_BrendanNuts, MSGBOX_DEFAULT
 	closemessage
 	goto FallarborTown_EventScript_RivalExit
-	end
 
 FallarborTown_EventScript_RivalExit::
-	setobjectxyperm LOCALID_FALLARBOR_RIVAL_ON_BIKE, 12, 10
-	setobjectmovementtype LOCALID_FALLARBOR_RIVAL, MOVEMENT_TYPE_FACE_DOWN
-	setobjectmovementtype LOCALID_FALLARBOR_RIVAL_ON_BIKE, MOVEMENT_TYPE_FACE_DOWN
-	setflag FLAG_HIDE_FALLARBOR_RIVAL
-	removeobject LOCALID_FALLARBOR_RIVAL
-	addobject LOCALID_FALLARBOR_RIVAL_ON_BIKE
+	setobjectxyperm 6, 12, 10
+	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_DOWN
+	removeobject 5
+	addobject 6
 	delay 45
-	applymovement LOCALID_FALLARBOR_RIVAL_ON_BIKE, FallarborTown_Movement_RivalExit
+	applymovement 6, FallarborTown_Movement_RivalExit
 	waitmovement 0
-	removeobject LOCALID_FALLARBOR_RIVAL_ON_BIKE
+	removeobject 6
 	setvar VAR_FALLARBOR_TOWN_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -143,40 +127,45 @@ FallarborTown_EventScript_RivalExit::
 	end
 
 FallarborTown_EventScript_MoveToPlayer::
-	call_if_eq VAR_0x8004, 1, FallarborTown_EventScript_PlayerApproach1
-	call_if_eq VAR_0x8004, 2, FallarborTown_EventScript_PlayerApproach2
-	call_if_eq VAR_0x8004, 3, FallarborTown_EventScript_PlayerApproach3
-	call_if_eq VAR_0x8004, 4, FallarborTown_EventScript_PlayerApproach4
-	call_if_eq VAR_0x8004, 5, FallarborTown_EventScript_PlayerApproach5
+	compare VAR_0x8004, 1
+	call_if_eq FallarborTown_EventScript_PlayerApproach1
+	compare VAR_0x8004, 2
+	call_if_eq FallarborTown_EventScript_PlayerApproach2
+	compare VAR_0x8004, 3
+	call_if_eq FallarborTown_EventScript_PlayerApproach3
+	compare VAR_0x8004, 4
+	call_if_eq FallarborTown_EventScript_PlayerApproach4
+	compare VAR_0x8004, 5
+	call_if_eq FallarborTown_EventScript_PlayerApproach5
 	return
 
 FallarborTown_EventScript_PlayerApproach1::
-	applymovement LOCALID_PLAYER, FallarborTown_Movement_PlayerApproach1
-	applymovement LOCALID_FALLARBOR_RIVAL, FallarborTown_Movement_RivalApproach
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_Movement_PlayerApproach1
+	applymovement 5, FallarborTown_Movement_RivalApproach
 	waitmovement 0
 	return
 
 FallarborTown_EventScript_PlayerApproach2::
-	applymovement LOCALID_PLAYER, FallarborTown_Movement_PlayerApproach2
-	applymovement LOCALID_FALLARBOR_RIVAL, FallarborTown_Movement_RivalApproach
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_Movement_PlayerApproach2
+	applymovement 5, FallarborTown_Movement_RivalApproach
 	waitmovement 0
 	return
 
 FallarborTown_EventScript_PlayerApproach3::
-	applymovement LOCALID_PLAYER, FallarborTown_Movement_PlayerApproach3
-	applymovement LOCALID_FALLARBOR_RIVAL, FallarborTown_Movement_RivalApproach
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_Movement_PlayerApproach3
+	applymovement 5, FallarborTown_Movement_RivalApproach
 	waitmovement 0
 	return
 
 FallarborTown_EventScript_PlayerApproach4::
-	applymovement LOCALID_PLAYER, FallarborTown_Movement_PlayerApproach4
-	applymovement LOCALID_FALLARBOR_RIVAL, FallarborTown_Movement_RivalApproach
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_Movement_PlayerApproach4
+	applymovement 5, FallarborTown_Movement_RivalApproach
 	waitmovement 0
 	return
 
 FallarborTown_EventScript_PlayerApproach5::
-	applymovement LOCALID_PLAYER, FallarborTown_Movement_PlayerApproach5
-	applymovement LOCALID_FALLARBOR_RIVAL, FallarborTown_Movement_RivalApproach
+	applymovement OBJ_EVENT_ID_PLAYER, FallarborTown_Movement_PlayerApproach5
+	applymovement 5, FallarborTown_Movement_RivalApproach
 	waitmovement 0
 	return
 
@@ -227,61 +216,75 @@ FallarborTown_Movement_RivalExit:
 	step_end
 
 FallarborTown_Text_MayDisaster:
-	.string "MAY: Oh! {PLAYER}{KUN}! Help!$"
+	.string "May: Oh! {PLAYER}{KUN}! Help!$"
 
 FallarborTown_Text_BrendanComeHere:
-	.string "BRENDAN: {PLAYER}! Come here!$"
+	.string "Brendan: {PLAYER}! C'mere!$"
 
 FallarborTown_Text_MayWeirdos:
-	.string "MAY: PROF. COZMO was abducted by\n"
-	.string "TEAM MAGMA!\p"
-	.string "I'm heading for METEOR FALLS now.\n"
-	.string "Please catch up and help us!$"
+	.string "May: You've got to come with me!\p"
+	.string "Y-you see…\n"
+	.string "Professor Cozmo…\p"
+	.string "He got abducted by some weirdos\n"
+	.string "calling themselves Team Magma!\p"
+	.string "{PLAYER}{KUN}, please…\n"
+	.string "You've got to help me save him!\p"
+	.string "I… I'm going to head after them\n"
+	.string "right away!\l"
+	.string "Let's meet up at Meteor Falls!$"
 
 FallarborTown_Text_BrendanNuts:
-	.string "BRENDAN: PROF. COZMO was abducted by\n"
-	.string "TEAM MAGMA!\p"
-	.string "I'm heading for METEOR FALLS now.\n"
-	.string "Catch up as soon as you can!$"
+	.string "Brendan: Everything's a mess!\p"
+	.string "It's ridiculous…\n"
+	.string "Professor Cozmo…\p"
+	.string "They say that he was just up and\n"
+	.string "kidnapped by some nuts calling\l"
+	.string "themselves Team Magma!\p"
+	.string "{PLAYER}… I know it's a lot to ask,\n"
+	.string "but we've gotta help Cozmo!\p"
+	.string "I'm going to head to Meteor Falls\n"
+	.string "right away. Come catch up to me\l"
+	.string "as soon as you can.$"
 
-FallarborTown_Text_ShadyCharactersCozmosHome:
+FallarborTown_Text_ShadyCharactersCozmosHome: @ 81EB26B
 	.string "Something's happening,\n"
 	.string "and I don't like it!\p"
 	.string "I've seen shady characters wandering\n"
-	.string "in and out of PROF. COZMO's home…$"
+	.string "in and out of Prof. Cozmo's home…$"
 
-FallarborTown_Text_RegionKnownForMeteors:
+FallarborTown_Text_RegionKnownForMeteors: @ 81EB2DE
 	.string "This region's been known for meteors\n"
 	.string "since the olden days.\p"
-	.string "They say METEOR FALLS was gouged out\n"
+	.string "They say Meteor Falls was gouged out\n"
 	.string "by a falling meteorite long ago.$"
 
-FallarborTown_Text_MyPreciousAzurill:
+FallarborTown_Text_MyPreciousAzurill: @ 81EB35F
 	.string "See! Take a look!\n"
-	.string "This is my precious AZURILL!\p"
+	.string "This is my precious Azurill!\p"
 	.string "It's slick and smooth and plushy, too!$"
 
-FallarborTown_Text_Azurill:
-	.string "AZURILL: Rooreelooo.$"
+FallarborTown_Text_Azurill: @ 81EB3B5
+	.string "Azurill: Rooreelooo.$"
 
-FallarborTown_Text_HaveYouChallengedFlannery:
-	.string "Have you already challenged FLANNERY,\n"
-	.string "the LEADER of LAVARIDGE GYM?\p"
+FallarborTown_Text_HaveYouChallengedFlannery: @ 81EB3CA
+	.string "Have you already challenged Flannery,\n"
+	.string "the Leader of Lavaridge Gym?\p"
 	.string "The girl's grandfather was famous.\n"
-	.string "He was one of the ELITE FOUR in the\l"
-	.string "POKéMON LEAGUE at one point.\p"
-	.string "It wouldn't surprise me to see FLANNERY\n"
-	.string "become a great TRAINER in her own\l"
+	.string "He was one of the Elite Four in the\l"
+	.string "Pokémon League at one point.\p"
+	.string "It wouldn't surprise me to see Flannery\n"
+	.string "become a great Trainer in her own\l"
 	.string "right.$"
 
-FallarborTown_Text_BattleTentSign:
-	.string "BATTLE TENT FALLARBOR SITE\n"
+FallarborTown_Text_BattleTentSign: @ 81EB4C2
+	.string "Battle Tent Fallarbor Site\n"
 	.string "“May the Greatest Teams Gather!”$"
 
-FallarborTown_Text_TownSign:
-	.string "FALLARBOR TOWN\n"
+FallarborTown_Text_TownSign: @ 81EB4FE
+	.string "Fallarbor Town\n"
 	.string "“A farm community with small gardens.”$"
 
-FallarborTown_Text_MoveTutorSign:
-	.string "POKéMON TRAINING WORKSHOP\n"
-	.string "“Free EV and move advice.”$"
+FallarborTown_Text_MoveTutorSign: @ 81EB534
+	.string "Ivy and Evie's House\n"
+	.string "“Special training for Pokémon.”$"
+

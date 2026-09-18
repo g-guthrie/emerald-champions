@@ -1,41 +1,47 @@
+@ Note: data/scripts/berry_blender.inc is for the same map, so shares local IDs
+
+@ Emerald Champions: Pokemon Contests are retired. src/contest.c, the Contest
+@ Halls and the link-contest code are all gone from this tree, so everything in
+@ this room that actually ran a Contest -- the receptionists' entry flow, the
+@ five Contest Hall warps, the link-contest handshake, the artist who paints the
+@ winner, and the painting viewer on the walls -- has been removed rather than
+@ left calling missing code.
+@ The room itself stays open and reachable: the Berry Blenders (still driven by
+@ data/scripts/berry_blender.inc), every flavour NPC and the Pokeblock Case girl
+@ all behave exactly as before, and the two receptionists explain that Contests
+@ are not being held.
+
 LilycoveCity_ContestLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestLobby_OnTransition
 	.byte 0
 
-@ The hobby wing. Contests, Pokeblocks and the Berry Blender are retired; the counter
-@ reads harvest pouches and the hall behind it is closed. The blender objects are in
-@ data/scripts/berry_blender.
-
+@ The contest reporter and the Blend Master were both shown by PokeNews/TV, which
+@ is also gone, so they stay hidden and the Blend Master's replacement NPC (an
+@ ordinary Berry Blender partner) is shown in his place. This is the same state
+@ the original scripts produced whenever PokeNews had not featured him.
 LilycoveCity_ContestLobby_OnTransition:
-	call LilycoveCity_ContestLobby_EventScript_TryShowBlendMaster
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
+	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER
+	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT
 	end
 
-LilycoveCity_ContestLobby_EventScript_TryShowBlendMaster::
-	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT
-	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER
-	return
+@ Kept so the map's (permanently hidden) reporter object has a valid script.
+LilycoveCity_ContestLobby_EventScript_Reporter::
+	msgbox LilycoveCity_ContestLobby_Text_NoContestsToReport, MSGBOX_NPC
+	end
 
 LilycoveCity_ContestLobby_EventScript_ContestReceptionist::
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_HarvestCounter, MSGBOX_DEFAULT
-	setvar VAR_0x8009, 0
-	call EmeraldChampions_EventScript_HarvestMenu
+	msgbox LilycoveCity_ContestLobby_Text_ContestsNotBeingHeld, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_LinkContestReceptionist::
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_HallClosed, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_LinkContestsNotBeingHeld, MSGBOX_DEFAULT
 	release
-	end
-
-@ For the doors at the back of the lobby once the hall warps are gone.
-LilycoveCity_ContestLobby_EventScript_ContestHallClosed::
-	lockall
-	msgbox LilycoveCity_ContestLobby_Text_HallClosed, MSGBOX_SIGN
-	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_BlackBelt::
@@ -43,87 +49,105 @@ LilycoveCity_ContestLobby_EventScript_BlackBelt::
 	end
 
 LilycoveCity_ContestLobby_EventScript_Girl::
-	lock
-	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere, MSGBOX_DEFAULT
-	call Common_EventScript_EmeraldChampionsStylistServices
-	release
+	msgbox LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_Artist::
-	msgbox LilycoveCity_ContestLobby_Text_PaintingBerryTrees, MSGBOX_NPC
+	msgbox LilycoveCity_ContestLobby_Text_ContestFeastForEyes, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_FatMan::
-	msgbox LilycoveCity_ContestLobby_Text_HaulingSoil, MSGBOX_NPC
+	msgbox LilycoveCity_ContestLobby_Text_ToughContestIsExtreme, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_Fisherman::
-	msgbox LilycoveCity_ContestLobby_Text_LavishedCareOnTree, MSGBOX_NPC
+	msgbox LilycoveCity_ContestLobby_Text_LavishedCareOnMon, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_NinjaBoy::
-	msgbox LilycoveCity_ContestLobby_Text_PickedBerriesWithFamily, MSGBOX_NPC
+	msgbox LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily, MSGBOX_NPC
 	end
 
-LilycoveCity_ContestLobby_EventScript_LittleGirl::
-	lock
-	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_LittleGirl, MSGBOX_DEFAULT
-	release
+@ The six wall frames used to open the contest-painting viewer.
+LilycoveCity_ContestLobby_EventScript_ContestWinner1::
+LilycoveCity_ContestLobby_EventScript_ContestWinner2::
+LilycoveCity_ContestLobby_EventScript_ContestWinner3::
+LilycoveCity_ContestLobby_EventScript_ContestWinner4::
+LilycoveCity_ContestLobby_EventScript_ContestWinner5::
+LilycoveCity_ContestLobby_EventScript_ContestWinner6::
+	lockall
+	msgbox LilycoveCity_ContestLobby_Text_PaintingNotOnDisplay, MSGBOX_SIGN
+	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_Blender3Boy::
-	msgbox LilycoveCity_ContestLobby_Text_Blender3Boy, MSGBOX_NPC
+	msgbox BerryBlender_Text_LetsGetBlendingAlready, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_Blender3Girl::
-	msgbox LilycoveCity_ContestLobby_Text_Blender3Girl, MSGBOX_NPC
+	msgbox BerryBlender_Text_WhatKindOfPokeblockWillIGet, MSGBOX_NPC
 	end
 
+@ The Berry Blender speed records were kept by the contest code.
+LilycoveCity_ContestLobby_EventScript_BerryBlenderSpeedRecords::
+	lockall
+	msgbox LilycoveCity_ContestLobby_Text_NoBlenderRecords, MSGBOX_SIGN
+	releaseall
+	end
+
+LilycoveCity_ContestLobby_EventScript_LinkContestResults::
+	lockall
+	msgbox LilycoveCity_ContestLobby_Text_NoLinkContestResults, MSGBOX_SIGN
+	releaseall
+	end
+
+@ The Blend Master and his onlookers are hidden by OnTransition above, so these
+@ are unreachable in play. Their lines were previously pulled from the donor
+@ tree's berry_blender.inc, which this engine's copy does not carry, so the text
+@ now lives at the bottom of this file.
 LilycoveCity_ContestLobby_EventScript_BlendMaster::
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_GrowerPride, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_BlendWithTheBlendMaster, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
 LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker1::
 	lock
-	msgbox LilycoveCity_ContestLobby_Text_Onlooker1, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_WhoaAwesome, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker2::
 	lock
-	msgbox LilycoveCity_ContestLobby_Text_Onlooker2, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_WickedlyFast, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3::
 	lock
-	msgbox LilycoveCity_ContestLobby_Text_Onlooker3, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_WhatAnExpert, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker4::
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_Onlooker4, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_MadeAmazingPokeblocksWithMaster, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
 LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker5::
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_Onlooker5, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_QualitiesOfBlendMaster, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
 LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker6::
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_Onlooker6, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_MasterWorksOnSkillsInMountains, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection
 	end
 
@@ -134,116 +158,187 @@ LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection::
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_ContestWinner1::
-LilycoveCity_ContestLobby_EventScript_ContestWinner2::
-LilycoveCity_ContestLobby_EventScript_ContestWinner3::
-LilycoveCity_ContestLobby_EventScript_ContestWinner4::
-LilycoveCity_ContestLobby_EventScript_ContestWinner5::
-LilycoveCity_ContestLobby_EventScript_ContestWinner6::
-	lockall
-	msgbox LilycoveCity_ContestLobby_Text_EmptyFrame, MSGBOX_SIGN
-	releaseall
+LilycoveCity_ContestLobby_EventScript_LittleGirl:: @ 821ACF1
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase
+	msgbox LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase, MSGBOX_DEFAULT
+	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_BerryBlenderSpeedRecords::
-LilycoveCity_ContestLobby_EventScript_LinkContestResults::
-	lockall
-	msgbox LilycoveCity_ContestLobby_Text_HarvestBoard, MSGBOX_SIGN
-	releaseall
+LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase:: @ 821AD06
+	msgbox LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries, MSGBOX_DEFAULT
+	release
 	end
 
-LilycoveCity_ContestLobby_Text_HarvestCounter:
-	.string "Welcome to the hobby wing.\p"
-	.string "The BERRY MASTER on ROUTE 123 pays\n"
-	.string "in stones. I can show you what he\l"
-	.string "still needs.$"
+LilycoveCity_ContestLobby_Text_ContestsNotBeingHeld:
+	.string "Welcome to the CONTEST HALL!\p"
+	.string "I'm afraid we aren't holding any\n"
+	.string "Contests just now.\p"
+	.string "The halls are dark and the judges\n"
+	.string "have all gone home.\p"
+	.string "Do enjoy the BERRY BLENDERS while\n"
+	.string "you're here!$"
 
-LilycoveCity_ContestLobby_Text_HallClosed:
-	.string "The hall behind me is closed for\n"
-	.string "the season.\p"
-	.string "The stage has been dark a long\n"
-	.string "while now.$"
+LilycoveCity_ContestLobby_Text_LinkContestsNotBeingHeld:
+	.string "This counter is for Contests held\n"
+	.string "with other TRAINERS.\p"
+	.string "With no Contests being held, I'm\n"
+	.string "afraid there's nothing to link up.\p"
+	.string "Sorry to disappoint you!$"
 
-LilycoveCity_ContestLobby_Text_EmptyFrame:
-	.string "An empty frame.\n"
-	.string "Nothing hangs in it.$"
+LilycoveCity_ContestLobby_Text_NoContestsToReport:
+	.string "There's no Contest to report on,\n"
+	.string "so there's no story for me here.$"
 
-LilycoveCity_ContestLobby_Text_HarvestBoard:
-	.string "A board of BERRY trees around\n"
-	.string "HOENN, with the ripe ones circled.$"
+LilycoveCity_ContestLobby_Text_PaintingNotOnDisplay:
+	.string "The frame is empty.\p"
+	.string "The painting that belongs here is\n"
+	.string "not on display.$"
 
-LilycoveCity_ContestLobby_Text_MasterRankHereICome:
-	.string "Hoo, boy… One more season and my\n"
-	.string "SITRUS tree will outgrow the roof.\p"
-	.string "The whole street will know whose\n"
-	.string "garden that is. Uheheheh.$"
+LilycoveCity_ContestLobby_Text_NoBlenderRecords:
+	.string "It's the BERRY BLENDER record board.\p"
+	.string "No records have been posted on it.$"
 
-LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere:
-	.string "You can see a whole variety of\n"
-	.string "POKéMON here.\p"
-	.string "That's why I make this place a\n"
-	.string "regular part of my daily stroll.\p"
-	.string "I can fix up how yours looks, too,\n"
-	.string "if you like.$"
+LilycoveCity_ContestLobby_Text_NoLinkContestResults:
+	.string "It's the Contest results board.\p"
+	.string "There are no results posted on it.$"
 
-LilycoveCity_ContestLobby_Text_PaintingBerryTrees:
-	.string "I came to paint the BERRY trees on\n"
-	.string "ROUTE 123.\p"
-	.string "A row of ripe ones in the morning\n"
-	.string "light. That is my subject.$"
+@ Used by the link Berry Blender in data/scripts/berry_blender.inc, which is still
+@ live. It used to be defined in the contest-hall scripts, which are gone, so it
+@ lives here with the rest of this map's text.
+LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader:
+	.string "Please decide which of you will\n"
+	.string "become the GROUP Leader.\p"
+	.string "The other players must then choose\n"
+	.string "“JOIN GROUP.”$"
 
-LilycoveCity_ContestLobby_Text_HaulingSoil:
-	.string "Hauling soil up to a hill garden is\n"
-	.string "like extreme, man!\p"
-	.string "Sun on your back, dirt to the elbow…\n"
-	.string "I swoon!$"
+LilycoveCity_ContestLobby_Text_BlendWithTheBlendMaster:
+	.string "Hello, hello! Would you care to\n"
+	.string "blend BERRIES with me?$"
 
-LilycoveCity_ContestLobby_Text_LavishedCareOnTree:
-	.string "Day in and day out, I watered that\n"
-	.string "tree by the shore.\p"
-	.string "Today it finally ripened.\n"
-	.string "Worth every trip!$"
+LilycoveCity_ContestLobby_Text_WhoaAwesome:
+	.string "Whoa! Awesome!$"
 
-LilycoveCity_ContestLobby_Text_PickedBerriesWithFamily:
-	.string "I picked BERRIES with Mom, Dad, and\n"
-	.string "Big Sister!\p"
-	.string "A tree gives more when more of us\n"
-	.string "come back for it.$"
+LilycoveCity_ContestLobby_Text_WickedlyFast:
+	.string "That's wickedly fast!$"
 
-LilycoveCity_ContestLobby_Text_LittleGirl:
+LilycoveCity_ContestLobby_Text_WhatAnExpert:
+	.string "What an expert!$"
+
+LilycoveCity_ContestLobby_Text_MadeAmazingPokeblocksWithMaster:
+	.string "I made some amazing POKéBLOCKS\n"
+	.string "with the BLEND MASTER!$"
+
+LilycoveCity_ContestLobby_Text_QualitiesOfBlendMaster:
+	.string "Speed, timing, and a feel for the\n"
+	.string "BERRIES.\p"
+	.string "Those are the qualities that make\n"
+	.string "a BLEND MASTER.$"
+
+LilycoveCity_ContestLobby_Text_MasterWorksOnSkillsInMountains:
+	.string "They say the MASTER works on his\n"
+	.string "skills deep in the mountains.$"
+
+LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase: @ 821AD10
 	.string "Yippee!\p"
-	.string "The lady at the counter counted my\n"
-	.string "BERRIES. I picked nine!$"
+	.string "The lady at the reception counter\n"
+	.string "gave me a case for {POKEBLOCK}s!$"
 
-LilycoveCity_ContestLobby_Text_GrowerPride:
-	.string "Forty trees, and I have never lost\n"
-	.string "one to a dry summer.\p"
-	.string "Pick a tree and it thanks you the\n"
-	.string "next time you come by.$"
+LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries: @ 821AD55
+	.string "Make {POKEBLOCK}S and put them in there.\p"
+	.string "When you make a {POKEBLOCK}, everyone\n"
+	.string "has to put in a different Berry.$"
 
-LilycoveCity_ContestLobby_Text_Onlooker1:
-	.string "Whoa! Forty trees!$"
+LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint: @ 821ADB9
+	.string "Congratulations!\p"
+	.string "I did a painting of your Pokémon to\n"
+	.string "commemorate its victory…\p"
+	.string "Well, your Pokémon's appeals were\n"
+	.string "so fantastic, it spurred me into\l"
+	.string "painting better than I usually do.\l"
+	.string "Look, see?$"
 
-LilycoveCity_ContestLobby_Text_Onlooker2:
-	.string "He never loses one.$"
+LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum: @ 821AE78
+	.string "What do you think? I'm confident in\n"
+	.string "what I've done, but do you like it?\p"
+	.string "A work of this caliber, it wouldn't look\n"
+	.string "out of place in an art museum.\p"
+	.string "Huh? An art museum really is looking\n"
+	.string "for paintings?\p"
+	.string "Do you think I should take this there?$"
 
-LilycoveCity_ContestLobby_Text_Onlooker3:
-	.string "What a grower!$"
+LilycoveCity_ContestLobby_Text_IllTakePaintingToMuseum: @ 821AF63
+	.string "What, really? Then, sure, I will take\n"
+	.string "this painting there right now.\p"
+	.string "I'll give it a proper title, too.\p"
+	.string "I hope they'll like it and consider\n"
+	.string "exhibiting this.\p"
+	.string "Please check if they did accept this.\n"
+	.string "Thank you!$"
 
-LilycoveCity_ContestLobby_Text_Onlooker4:
-	.string "I walked his ROUTE 123 row with\n"
-	.string "him once. My pouch came home full.$"
+LilycoveCity_ContestLobby_Text_TakeMementoOfPainting: @ 821B030
+	.string "Oh, that's right!\p"
+	.string "As a memento of me painting your\n"
+	.string "Pokémon, please take this.$"
 
-LilycoveCity_ContestLobby_Text_Onlooker5:
-	.string "A real grower waters before dawn\n"
-	.string "and never argues with the weather.$"
+LilycoveCity_ContestLobby_Text_ReceivedARibbon: @ 821B07E
+	.string "{PLAYER} received a Ribbon.$"
 
-LilycoveCity_ContestLobby_Text_Onlooker6:
-	.string "He keeps a second row up in the\n"
-	.string "mountains, they say.$"
+LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon: @ 821B094
+	.string "{PLAYER} put the Ribbon on\n"
+	.string "{STR_VAR_1}.$"
 
-LilycoveCity_ContestLobby_Text_Blender3Boy:
-	.string "Let's go pick something already!$"
+LilycoveCity_ContestLobby_Text_OkaySeeYou: @ 821B0AD
+	.string "Okay, see you!$"
 
-LilycoveCity_ContestLobby_Text_Blender3Girl:
-	.string "I wonder which tree is ripe today.$"
+LilycoveCity_ContestLobby_Text_TakeHomeButIdLikeToTakeToMuseum: @ 821B0BC
+	.string "Oh… Then, I guess I'll just take\n"
+	.string "this home with me…\p"
+	.string "But, you know, I would like to take\n"
+	.string "this to the art museum… Okay?$"
+
+LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs: @ 821B132
+	.string "Oh, fine, that's the way it is.\n"
+	.string "I will hang this in my own house.\p"
+	.string "I'll just have to try harder next time.\n"
+	.string "Well, be seeing you.$"
+
+LilycoveCity_ContestLobby_Text_MasterRankHereICome: @ 821B1B1
+	.string "Hoo, boy… Master Rank Contests,\n"
+	.string "here I come.\p"
+	.string "The world will know that my dearest\n"
+	.string "Pokémon is the cutest being in all\l"
+	.string "existence. The time has come!\l"
+	.string "Uheheheh.$"
+
+LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere: @ 821B24D
+	.string "You can see a whole variety of\n"
+	.string "Pokémon here.\p"
+	.string "That's why I make this place a regular\n"
+	.string "part of my daily stroll.$"
+
+LilycoveCity_ContestLobby_Text_ContestFeastForEyes: @ 821B2BA
+	.string "Wow, coming out to a Contest is\n"
+	.string "a feast for these eyes!\p"
+	.string "Would you look at all the Pokémon\n"
+	.string "that just scream to be painted?$"
+
+LilycoveCity_ContestLobby_Text_ToughContestIsExtreme: @ 821B334
+	.string "The Toughness Contest is like\n"
+	.string "extreme, man!\p"
+	.string "Those muscular appeals…\n"
+	.string "Cascading sweat… I swoon!$"
+
+LilycoveCity_ContestLobby_Text_LavishedCareOnMon: @ 821B392
+	.string "Day in and day out, I lavished my care\n"
+	.string "on this Pokémon.\p"
+	.string "Its condition is peaking.\n"
+	.string "Today, victory is mine!$"
+
+LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily: @ 821B3FC
+	.string "I made {POKEBLOCK}S with Mom, Dad, and\n"
+	.string "Big Sister. They turned out great!\p"
+	.string "I bet you can make smoother, better\n"
+	.string "{POKEBLOCK}s if you have more people.$"
+

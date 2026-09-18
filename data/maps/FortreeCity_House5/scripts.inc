@@ -1,54 +1,35 @@
-FortreeCity_House5_MapScripts::
+FortreeCity_House5_MapScripts:: @ 8217EF1
 	.byte 0
 
-FortreeCity_House5_EventScript_PokefanF::
+FortreeCity_House5_EventScript_PokefanF:: @ 8217EF2
 	msgbox FortreeCity_House5_Text_TreeHousesAreGreat, MSGBOX_NPC
 	end
 
-FortreeCity_House5_EventScript_Man::
+FortreeCity_House5_EventScript_Man:: @ 8217EFB
 	msgbox FortreeCity_House5_Text_AdaptedToNature, MSGBOX_NPC
 	end
 
-FortreeCity_House5_EventScript_Zigzagoon::
+FortreeCity_House5_EventScript_Zigzagoon:: @ 8217F04
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
+	playmoncry SPECIES_ZIGZAGOON, 0
 	msgbox FortreeCity_House5_Text_Zigzagoon, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-FortreeCity_House5_Text_TreeHousesAreGreat:
-	.string "The tree houses of FORTREE are great!\p"
+FortreeCity_House5_Text_TreeHousesAreGreat: @ 8217F17
+	.string "The tree houses of Fortree are great!\p"
 	.string "I think it's the number one town for\n"
-	.string "living together with POKéMON.$"
+	.string "living together with Pokémon.$"
 
-FortreeCity_House5_Text_AdaptedToNature:
-	.string "POKéMON and people have adapted to\n"
+FortreeCity_House5_Text_AdaptedToNature: @ 8217F80
+	.string "Pokémon and people have adapted to\n"
 	.string "nature for survival.\p"
 	.string "There's no need to make nature\n"
 	.string "conform to the way we want to live.$"
 
-FortreeCity_House5_Text_Zigzagoon:
-	.string "ZIGZAGOON: Bufuu!$"
+FortreeCity_House5_Text_Zigzagoon: @ 8217FFB
+	.string "Zigzagoon: Bufuu!$"
 
-
-FortreeCity_House5_EventScript_MegaGift_CHIMECHITE::
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, FortreeCity_House5_EventScript_PokefanF
-	goto_if_set FLAG_EC_MEGA_GIFT_CHIMECHITE, FortreeCity_House5_EventScript_PokefanF
-	lock
-	faceplayer
-	msgbox FortreeCity_House5_EventScript_MegaGift_CHIMECHITE_Text, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_CHIMECHITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_CHIMECHITE
-	release
-	goto FortreeCity_House5_EventScript_PokefanF
-
-FortreeCity_House5_EventScript_MegaGift_CHIMECHITE_Text:
-	.string "Listen to the chimes in the trees.\n"
-	.string "No two breezes sound quite alike.\p"
-	.string "I kept this for a Chimecho.\n"
-	.string "Perhaps yours will give it a voice.$"

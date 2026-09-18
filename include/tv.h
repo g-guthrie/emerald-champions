@@ -55,4 +55,6 @@ void GetGabbyAndTyLocalIds(void);
 u8 CheckForPlayersHouseNews(void);
 bool8 IsGabbyAndTyShowOnTheAir(void);
 
+void ChangeBoxPokemonNickname(void);
+
 #endif //GUARD_TV_H

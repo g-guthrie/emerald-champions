@@ -29,6 +29,8 @@
 #define EC_BATTLE_ITEM_CATEGORY_SPECIES 5
 #define EC_BATTLE_ITEM_CATEGORY_BERRIES 6
 #define EC_BATTLE_ITEM_CATEGORY_COUNT 7
+// Bounds the vendor's filtered stock buffer; the widest non-berry category.
+#define EC_BATTLE_ITEM_MAX_CATEGORY 40
 
 // Permanent two-starter opening transaction.
 #define EC_OPENING_UNSELECTED                 0

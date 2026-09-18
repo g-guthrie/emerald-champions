@@ -3,7 +3,6 @@
   "name": "MtPyre_2F",
   "layout": "LAYOUT_MT_PYRE_2F",
   "music": "MUS_MT_PYRE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -23,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "MtPyre_2F_EventScript_Mark",
       "flag": "0"
     },
@@ -37,8 +36,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
-      "script": "Common_EventScript_FindItem",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_2F_EventScript_ItemUltraBall",
       "flag": "FLAG_ITEM_MT_PYRE_2F_ULTRA_BALL"
     },
     {
@@ -75,8 +74,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "MtPyre_2F_EventScript_Dez",
       "flag": "0"
     },
@@ -88,8 +87,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "MtPyre_2F_EventScript_Luke",
       "flag": "0"
     },
@@ -101,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "MtPyre_2F_EventScript_Zander",
       "flag": "0"
     },
@@ -114,8 +113,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "MtPyre_2F_EventScript_Leah",
       "flag": "0"
     }
@@ -126,35 +125,35 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_1F",
-      "dest_warp_id": "4"
+      "dest_warp_id": 4
     },
     {
       "x": 10,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_3F",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 10,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_3F",
-      "dest_warp_id": "4"
+      "dest_warp_id": 4
     },
     {
       "x": 6,
       "y": 12,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_3F",
-      "dest_warp_id": "5"
+      "dest_warp_id": 5
     },
     {
       "x": 11,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_1F",
-      "dest_warp_id": "5"
+      "dest_warp_id": 5
     }
   ],
   "coord_events": [],

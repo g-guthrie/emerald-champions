@@ -1,506 +1,583 @@
-LilycoveCity_PokemonCenter_1F_EventScript_LilycoveLady::
-	special Script_GetLilycoveLadyId
-	switch VAR_RESULT
-	case LILYCOVE_LADY_QUIZ, LilycoveCity_PokemonCenter_1F_EventScript_QuizLady
-	case LILYCOVE_LADY_FAVOR, LilycoveCity_PokemonCenter_1F_EventScript_FavorLady
-	end
+@ LOCALID_LILYCOVE_LADY is generated from LilycoveCity_PokemonCenter_1F/map.json (object 6).
+.set LOCALID_LADYS_MON, 7  @ was 5, which is the Maniac; her mon is map.json object 7
 
-LilycoveCity_PokemonCenter_1F_EventScript_FavorLady::
-	lock
-	faceplayer
-	msgbox LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GetFavorLadyState
-	goto_if_eq VAR_RESULT, LILYCOVE_LADY_STATE_READY, LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyReady
-	goto_if_eq VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED, LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyCompleted
-	goto_if_eq VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE, LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_LilycoveLady:: @ 82A836B
+    special Script_GetLilycoveLadyId
+    switch VAR_RESULT
+    case LILYCOVE_LADY_QUIZ, LilycoveCity_PokemonCenter_1F_EventScript_QuizLady
+    case LILYCOVE_LADY_FAVOR, LilycoveCity_PokemonCenter_1F_EventScript_FavorLady
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyCompleted::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_FavorLady:: @ 82A8395
+    lock
+    faceplayer
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady, MSGBOX_DEFAULT
+    specialvar VAR_RESULT, GetFavorLadyState
+    compare VAR_RESULT, LILYCOVE_LADY_STATE_READY
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyReady
+    compare VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyCompleted
+    compare VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyReady::
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, HasAnotherPlayerGivenFavorLadyItem
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_RequestItem
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_TellAboutPlayersItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyCompleted:: @ 82A83C6
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_TellAboutPlayersItem::
-	special BufferFavorLadyItemName
-	special BufferFavorLadyPlayerName
-	specialvar VAR_RESULT, DidFavorLadyLikeItem
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveBadThing
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveGreatThing
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyReady:: @ 82A83D0
+    special BufferFavorLadyRequest
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing, MSGBOX_DEFAULT
+    specialvar VAR_RESULT, HasAnotherPlayerGivenFavorLadyItem
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_RequestItem
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_TellAboutPlayersItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveBadThing::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_RequestItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_TellAboutPlayersItem:: @ 82A83F7
+    special BufferFavorLadyItemName
+    special BufferFavorLadyPlayerName
+    specialvar VAR_RESULT, DidFavorLadyLikeItem
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveBadThing
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveGreatThing
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveGreatThing::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeGreatThing, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_RequestItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveBadThing:: @ 82A8419
+    msgbox LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_RequestItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_RequestItem::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonCenter_1F_EventScript_AcceptFavor
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveGreatThing:: @ 82A8427
+    msgbox LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeGreatThing, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_RequestItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_RequestItem:: @ 82A8435
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing, MSGBOX_YESNO
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AcceptFavor
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_AcceptFavor::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor:: @ 82A8454
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem::
-	fadescreen FADE_TO_BLACK
-	setvar VAR_RESULT, 0
-	special Script_FavorLadyOpenBagMenu
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonCenter_1F_EventScript_GiveFavorItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_AcceptFavor:: @ 82A845E
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem:: @ 82A846C
+    fadescreen FADE_TO_BLACK
+    setvar VAR_RESULT, 0
+    special Script_FavorLadyOpenBagMenu
+    waitstate
+    compare VAR_RESULT, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem
+    compare VAR_RESULT, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GiveFavorItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_GiveFavorItem::
-	specialvar VAR_RESULT, Script_DoesFavorLadyLikeItem
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_DidntLikeFavorItem
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_CheckLovedItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem:: @ 82A848E
+    msgbox LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_DidntLikeFavorItem::
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_GiveFavorItem:: @ 82A84AD
+    specialvar VAR_RESULT, Script_DoesFavorLadyLikeItem
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DidntLikeFavorItem
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_CheckLovedItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_CheckLovedItem::
-	specialvar VAR_RESULT, IsFavorLadyThresholdMet
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_LikedFavorItem
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_LovedFavorItem
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_DidntLikeFavorItem:: @ 82A84C9
+    special BufferFavorLadyRequest
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_LikedFavorItem::
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_CheckLovedItem:: @ 82A84D6
+    specialvar VAR_RESULT, IsFavorLadyThresholdMet
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_LikedFavorItem
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_LovedFavorItem
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_LovedFavorItem::
-	special BufferFavorLadyRequest
-	msgbox LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_LikedFavorItem:: @ 82A84F2
+    special BufferFavorLadyRequest
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize::
-	setvar VAR_0x8004, 0
-	specialvar VAR_0x8004, FavorLadyGetPrize
-	msgbox LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn, MSGBOX_DEFAULT
-	giveitem VAR_0x8004
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonCenter_1F_EventScript_NoRoomForFavorPrize
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonCenter_1F_EventScript_ReceivedFavorPrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_LovedFavorItem:: @ 82A84FF
+    special BufferFavorLadyRequest
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_NoRoomForFavorPrize::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize:: @ 82A8510
+    setvar VAR_0x8004, 0
+    specialvar VAR_0x8004, FavorLadyGetPrize
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn, MSGBOX_DEFAULT
+    giveitem VAR_0x8004
+    compare VAR_RESULT, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoRoomForFavorPrize
+    compare VAR_RESULT, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ReceivedFavorPrize
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_ReceivedFavorPrize::
-	special SetFavorLadyState_Complete
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_NoRoomForFavorPrize:: @ 82A8545
+    msgbox LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_QuizLady::
-	lock
-	faceplayer
-	msgbox LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GetQuizLadyState
-	goto_if_eq VAR_RESULT, LILYCOVE_LADY_STATE_READY, LilycoveCity_PokemonCenter_1F_EventScript_HasQuiz
-	goto_if_eq VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED, LilycoveCity_PokemonCenter_1F_EventScript_CheckMadeQuiz
-	goto_if_eq VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE, LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_ReceivedFavorPrize:: @ 82A854F
+    special SetFavorLadyState_Complete
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_HasQuiz::
-	specialvar VAR_RESULT, GetQuizAuthor
-	goto_if_eq VAR_RESULT, QUIZ_AUTHOR_PLAYER, LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz
-	goto_if_eq VAR_RESULT, QUIZ_AUTHOR_OTHER_PLAYER, LilycoveCity_PokemonCenter_1F_EventScript_PlayerQuizReady
-	goto_if_eq VAR_RESULT, QUIZ_AUTHOR_LADY, LilycoveCity_PokemonCenter_1F_EventScript_LadyQuizReady
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_QuizLady:: @ 82A8554
+    lock
+    faceplayer
+    msgbox LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady, MSGBOX_DEFAULT
+    specialvar VAR_RESULT, GetQuizLadyState
+    compare VAR_RESULT, LILYCOVE_LADY_STATE_READY
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_HasQuiz
+    compare VAR_RESULT, LILYCOVE_LADY_STATE_COMPLETED
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_CheckMadeQuiz
+    compare VAR_RESULT, LILYCOVE_LADY_STATE_PRIZE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_CheckMadeQuiz::
-	specialvar VAR_RESULT, IsQuizLadyWaitingForChallenger
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_HasQuiz:: @ 82A8585
+    specialvar VAR_RESULT, GetQuizAuthor
+    compare VAR_RESULT, QUIZ_AUTHOR_PLAYER
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz
+    compare VAR_RESULT, QUIZ_AUTHOR_OTHER_PLAYER
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_PlayerQuizReady
+    compare VAR_RESULT, QUIZ_AUTHOR_LADY
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_LadyQuizReady
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_CheckMadeQuiz:: @ 82A85AC
+    specialvar VAR_RESULT, IsQuizLadyWaitingForChallenger
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_PlayerQuizReady::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz:: @ 82A85C8
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_LadyQuizReady::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_PlayerQuizReady:: @ 82A85D2
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz::
-	setvar VAR_0x8004, 0
-	msgbox LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonCenter_1F_EventScript_DeclineQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_LadyQuizReady:: @ 82A85E0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_DeclineQuiz::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_HowBoringBye, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz:: @ 82A85EE
+    setvar VAR_0x8004, 0
+    msgbox LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz::
-	special ClearQuizLadyPlayerAnswer
-	goto_if_eq VAR_0x8004, 0, LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion
-	goto_if_eq VAR_0x8004, EASY_CHAT_TYPE_QUIZ_ANSWER, LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer
+LilycoveCity_PokemonCenter_1F_EventScript_DeclineQuiz:: @ 82A8612
+    msgbox LilycoveCity_PokemonCenter_1F_Text_HowBoringBye, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState::
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonCenter_1F_EventScript_AskQuitQuiz
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz:: @ 82A861C
+    special ClearQuizLadyPlayerAnswer
+    compare VAR_0x8004, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion
+    compare VAR_0x8004, EASY_CHAT_TYPE_QUIZ_ANSWER
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer
 
-LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion::
-	special QuizLadyShowQuizQuestion
-	goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState:: @ 82A8635
+    compare VAR_RESULT, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitQuiz
+    compare VAR_RESULT, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer::
-	special QuizLadyGetPlayerAnswer
-	goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion:: @ 82A864C
+    special QuizLadyShowQuizQuestion
+    waitstate
+    goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_AskQuitQuiz::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonCenter_1F_EventScript_QuitTakingQuiz
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer:: @ 82A8656
+    special QuizLadyGetPlayerAnswer
+    waitstate
+    goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_QuitTakingQuiz::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_TakeTheQuizAnotherTime, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_AskQuitQuiz:: @ 82A8660
+    msgbox LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_QuitTakingQuiz
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse::
-	special SetQuizLadyState_Complete
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, IsQuizAnswerCorrect
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_IncorrectResponse
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_QuitTakingQuiz:: @ 82A867F
+    msgbox LilycoveCity_PokemonCenter_1F_Text_TakeTheQuizAnotherTime, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse::
-	playse SE_SUCCESS
-	delay 10
-	playse SE_SUCCESS
-	msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRight, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse:: @ 82A8689
+    special SetQuizLadyState_Complete
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer, MSGBOX_DEFAULT
+    specialvar VAR_RESULT, IsQuizAnswerCorrect
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_IncorrectResponse
+    compare VAR_RESULT, TRUE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_IncorrectResponse::
-	special BufferQuizCorrectAnswer
-	special BufferQuizPrizeName
-	playse SE_FAILURE
-	delay 10
-	playse SE_FAILURE
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs, MSGBOX_DEFAULT
-	msgbox LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse:: @ 82A86B0
+    playse SE_SUCCESS
+    delay 10
+    playse SE_SUCCESS
+    msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRight, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize
+    end
+
+LilycoveCity_PokemonCenter_1F_EventScript_IncorrectResponse:: @ 82A86C7
+    special BufferQuizCorrectAnswer
+    special BufferQuizPrizeName
+    playse SE_FAILURE
+    delay 10
+    playse SE_FAILURE
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs, MSGBOX_DEFAULT
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
+    end
 
 @ VAR_RESULT is essentially ignored, both jumps are identical
-LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize::
-	specialvar VAR_RESULT, BufferQuizAuthorNameAndCheckIfLady
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonCenter_1F_EventScript_GivePrize1
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonCenter_1F_EventScript_GivePrize0
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize:: @ 82A86EC
+    specialvar VAR_RESULT, BufferQuizAuthorNameAndCheckIfLady
+    compare VAR_RESULT, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GivePrize1
+    compare VAR_RESULT, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_GivePrize0
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_GivePrize1::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_GivePrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_GivePrize1:: @ 82A8708
+    msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_GivePrize
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_GivePrize0::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize, MSGBOX_DEFAULT
-	goto LilycoveCity_PokemonCenter_1F_EventScript_GivePrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_GivePrize0:: @ 82A8716
+    msgbox LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize, MSGBOX_DEFAULT
+    goto LilycoveCity_PokemonCenter_1F_EventScript_GivePrize
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_GivePrize::
-	setvar VAR_0x8005, 0
-	special BufferQuizPrizeItem
-	special SetQuizLadyState_Complete
-	giveitem VAR_0x8005
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize
-	goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_GivePrize:: @ 82A8724
+    setvar VAR_0x8005, 0
+    special BufferQuizPrizeItem
+    special SetQuizLadyState_Complete
+    giveitem VAR_0x8005
+    compare VAR_RESULT, FALSE
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize
+    goto LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp, MSGBOX_DEFAULT
-	special SetQuizLadyState_GivePrize
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize:: @ 82A874C
+    msgbox LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp, MSGBOX_DEFAULT
+    special SetQuizLadyState_GivePrize
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonCenter_1F_EventScript_MakeQuiz
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz:: @ 82A8759
+    msgbox LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_MakeQuiz
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz::
-	special QuizLadyPickNewQuestion
-	msgbox LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz:: @ 82A8778
+    special QuizLadyPickNewQuestion
+    msgbox LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_MakeQuiz::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_PickYourPrize, MSGBOX_DEFAULT
-LilycoveCity_PokemonCenter_1F_EventScript_PickPrize::
-	fadescreen FADE_TO_BLACK
-	setvar VAR_RESULT, 0
-	special Script_QuizLadyOpenBagMenu
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChoosingPrize
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonCenter_1F_EventScript_WriteQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_MakeQuiz:: @ 82A8785
+    msgbox LilycoveCity_PokemonCenter_1F_Text_PickYourPrize, MSGBOX_DEFAULT
+LilycoveCity_PokemonCenter_1F_EventScript_PickPrize:: @ 82A878D
+    fadescreen FADE_TO_BLACK
+    setvar VAR_RESULT, 0
+    special Script_QuizLadyOpenBagMenu
+    waitstate
+    compare VAR_RESULT, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChoosingPrize
+    compare VAR_RESULT, 1
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_WriteQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChoosingPrize::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonCenter_1F_EventScript_PickPrize
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChoosingPrize:: @ 82A87AF
+    msgbox LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_PickPrize
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_WriteQuiz::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_WriteYourQuiz, MSGBOX_DEFAULT
-	special ClearQuizLadyQuestionAndAnswer
-	special ClearQuizLadyPlayerAnswer
-	setvar VAR_0x8004, EASY_CHAT_TYPE_QUIZ_QUESTION
-LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion::
-	fadescreen FADE_TO_BLACK
-	special QuizLadySetCustomQuestion
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonCenter_1F_EventScript_AskQuitWritingQuizQuestion
-	goto LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_WriteQuiz:: @ 82A87CE
+    msgbox LilycoveCity_PokemonCenter_1F_Text_WriteYourQuiz, MSGBOX_DEFAULT
+    special ClearQuizLadyQuestionAndAnswer
+    special ClearQuizLadyPlayerAnswer
+    setvar VAR_0x8004, EASY_CHAT_TYPE_QUIZ_QUESTION
+LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion:: @ 82A87E1
+    fadescreen FADE_TO_BLACK
+    special QuizLadySetCustomQuestion
+    waitstate
+    compare VAR_RESULT, 0
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitWritingQuizQuestion
+    goto LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_AskQuitWritingQuizQuestion::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_AskQuitWritingQuizQuestion:: @ 82A87F8
+    msgbox LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion, MSGBOX_YESNO
+    compare VAR_RESULT, YES
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz
+    compare VAR_RESULT, NO
+    goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion
+    end
 
-LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz::
-	special QuizLadyTakePrizeForCustomQuiz
-	special QuizLadyRecordCustomQuizData
-	special QuizLadySetWaitingForChallenger
-	msgbox LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger, MSGBOX_DEFAULT
-	release
-	end
+LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz:: @ 82A8817
+    special QuizLadyTakePrizeForCustomQuiz
+    special QuizLadyRecordCustomQuizData
+    special QuizLadySetWaitingForChallenger
+    msgbox LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady:
-	.string "I'm the FAVOR LADY…$"
+@ Emerald Champions: the Contest Lady is retired along with Pokemon Contests.
+@ src/contest.c and the Pokeblock feeder are gone from this tree, so the whole
+@ Pokeblock-feeding flow that she existed for has been removed rather than left
+@ calling missing code. SetLilycoveLadyGfx always reports FALSE in this engine,
+@ so LilycoveCity_PokemonCenter_1F_OnTransition permanently sets
+@ FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON and her Pokémon is never
+@ spawned. The script below is kept only so that object still has a valid
+@ script to point at, and it terminates cleanly if it is ever reached.
+LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon::
+    lock
+    faceplayer
+    msgbox LilycoveCity_PokemonCenter_1F_Text_LadysMonDozing, MSGBOX_DEFAULT
+    release
+    end
 
-LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing:
-	.string "I've recently developed an obsession\n"
-	.string "for {STR_VAR_1} things…$"
 
-LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime:
-	.string "Oh…\n"
-	.string "Thank you for last time…$"
+LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady: @ 82A8A69
+    .string "I'm the FAVOR LADY…$"
 
-LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing:
-	.string "Before, I think it was {STR_VAR_3}…\p"
-	.string "{STR_VAR_3} gave me one\n"
-	.string "{STR_VAR_2},\l"
-	.string "saying it was {STR_VAR_1}.\p"
-	.string "But it wasn't {STR_VAR_1}.\n"
-	.string "Not in the least bit.$"
+LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing: @ 82A8A7D
+    .string "I've recently developed an obsession\n"
+    .string "for {STR_VAR_1} things…$"
 
-LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeGreatThing:
-	.string "Before, {STR_VAR_3} gave me a very\n"
-	.string "{STR_VAR_1} {STR_VAR_2}.\p"
-	.string "I cherish it now.$"
+LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime: @ 82A8AB1
+    .string "Oh…\n"
+    .string "Thank you for last time…$"
 
-LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing:
-	.string "Listen, if you have anything that\n"
-	.string "is {STR_VAR_1}, will you share it\l"
-	.string "with me?$"
+LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing: @ 82A8ACE
+    .string "Before, I think it was {STR_VAR_3}…\p"
+    .string "{STR_VAR_3} gave me one {STR_VAR_2},\n"
+    .string "saying it was {STR_VAR_1}.\p"
+    .string "But it wasn't {STR_VAR_1}.\n"
+    .string "Not in the least bit.$"
 
-LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe:
-	.string "…Really?\n"
-	.string "What will you give me?$"
+LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeGreatThing: @ 82A8B36
+    .string "Before, {STR_VAR_3} gave me a very\n"
+    .string "{STR_VAR_1} {STR_VAR_2}.\p"
+    .string "I cherish it now.$"
 
-LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye:
-	.string "Is that so?\n"
-	.string "Then, it's good-bye…$"
+LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing: @ 82A8B69
+    .string "Listen, if you have anything that\n"
+    .string "is {STR_VAR_1}, will you share it\l"
+    .string "with me?$"
 
-LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare:
-	.string "Oh…\n"
-	.string "You're not willing to share?$"
+LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe: @ 82A8BAD
+    .string "…Really?\n"
+    .string "What will you give me?$"
 
-LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt:
-	.string "Oh?\n"
-	.string "That {STR_VAR_2} is {STR_VAR_1}?\p"
-	.string "…Oh, is that right?\p"
-	.string "Well, I owe you a thanks anyway.\n"
-	.string "I'll try to cherish it…$"
+LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye: @ 82A8BCD
+    .string "Is that so?\n"
+    .string "Then, it's good-bye…$"
 
-LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis:
-	.string "Oh…\p"
-	.string "That's a quite {STR_VAR_1}\n"
-	.string "{STR_VAR_2}…\p"
-	.string "Isn't it nice?\n"
-	.string "It's so dreamy…\p"
-	.string "Thank you…\n"
-	.string "I will cherish this…$"
+LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare: @ 82A8BEE
+    .string "Oh…\n"
+    .string "You're not willing to share?$"
 
-LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis:
-	.string "…Oh, oh, oh…\p"
-	.string "This is amazing!\n"
-	.string "This really is {STR_VAR_1}!\p"
-	.string "I never knew that one {STR_VAR_2}\n"
-	.string "could be this {STR_VAR_1}!\p"
-	.string "Thank you!\p"
-	.string "I will treasure this for the rest\n"
-	.string "of my life!$"
+LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt: @ 82A8C0F
+    .string "Oh?\n"
+    .string "That {STR_VAR_2} is {STR_VAR_1}?\p"
+    .string "…Oh, is that right?\p"
+    .string "Well, I owe you a thanks anyway.\n"
+    .string "I'll try to cherish it…$"
 
-LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn:
-	.string "I'll give you this wonderful item in\n"
-	.string "return for your fabulous gift.\p"
-	.string "I hope you will cherish it…$"
+LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis: @ 82A8C6F
+    .string "Oh…\p"
+    .string "That's a quite {STR_VAR_1}\n"
+    .string "{STR_VAR_2}…\p"
+    .string "Isn't it nice?\n"
+    .string "It's so dreamy…\p"
+    .string "Thank you…\n"
+    .string "I will cherish this…$"
 
-LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt:
-	.string "Oh, you can't have it if you don't have\n"
-	.string "the space for it.\p"
-	.string "Please come see me when you get\n"
-	.string "your BAG organized…$"
+LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis: @ 82A8CC8
+    .string "…Oh, oh, oh…\p"
+    .string "This is amazing!\n"
+    .string "This really is {STR_VAR_1}!\p"
+    .string "I never knew that one {STR_VAR_2}\n"
+    .string "could be this {STR_VAR_1}!\p"
+    .string "Thank you!\p"
+    .string "I will treasure this for the rest\n"
+    .string "of my life!$"
 
-LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady:
-	.string "I'm the QUIZ LADY!\n"
-	.string "I love quizzes!$"
+LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn: @ 82A8D5D
+    .string "I'll give you this wonderful item in\n"
+    .string "return for your fabulous gift.\p"
+    .string "I hope you will cherish it…$"
 
-LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz:
-	.string "Oh?\p"
-	.string "I'm waiting for a challenger to answer\n"
-	.string "the quiz you made.\p"
-	.string "We can chat another time, okay?$"
+LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt: @ 82A8DBD
+    .string "Oh, you can't have it if you don't have\n"
+    .string "the space for it.\p"
+    .string "Please come see me when you get\n"
+    .string "your Bag organized…$"
 
-LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger:
-	.string "I'm waiting for someone to challenge\n"
-	.string "a quiz this {STR_VAR_1} thought up!$"
+LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady: @ 82A8E2B
+    .string "I'm the QUIZ LADY!\n"
+    .string "I love quizzes!$"
 
-LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge:
-	.string "If you answer correctly, you can win\n"
-	.string "fabulous prizes!\p"
-	.string "Would you like to take the quiz\n"
-	.string "challenge?$"
+LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz: @ 82A8E4E
+    .string "Oh?\p"
+    .string "I'm waiting for a challenger to answer\n"
+    .string "the quiz you made.\p"
+    .string "We can chat another time, okay?$"
 
-LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer:
-	.string "… … … … … …\n"
-	.string "… … … … … …$"
+LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger: @ 82A8EAC
+    .string "I'm waiting for someone to challenge\n"
+    .string "a quiz this {STR_VAR_1} thought up!$"
 
-LilycoveCity_PokemonCenter_1F_Text_HowBoringBye:
-	.string "Oh, how boring!\n"
-	.string "Bye-bye!$"
+LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge: @ 82A8EEC
+    .string "If you answer correctly, you can win\n"
+    .string "fabulous prizes!\p"
+    .string "Would you like to take the quiz\n"
+    .string "challenge?$"
 
-LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit:
-	.string "Awww!\n"
-	.string "You're going to quit?$"
+LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer: @ 82A8F4D
+    .string "… … … … … …\n"
+    .string "… … … … … …$"
 
-LilycoveCity_PokemonCenter_1F_Text_TakeTheQuizAnotherTime:
-	.string "Please take the quiz challenge\n"
-	.string "another time!$"
+LilycoveCity_PokemonCenter_1F_Text_HowBoringBye: @ 82A8F65
+    .string "Oh, how boring!\n"
+    .string "Bye-bye!$"
 
-LilycoveCity_PokemonCenter_1F_Text_YouGotItRight:
-	.string "You're amazing! You've got it right!\n"
-	.string "You're one sharp customer!$"
+LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit: @ 82A8F7E
+    .string "Awww!\n"
+    .string "You're going to quit?$"
 
-LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize:
-	.string "Congratulations!\n"
-	.string "You've got the quiz right!\p"
-	.string "You've won a prize provided by\n"
-	.string "{STR_VAR_1}!$"
+LilycoveCity_PokemonCenter_1F_Text_TakeTheQuizAnotherTime: @ 82A8F9A
+    .string "Please take the quiz challenge\n"
+    .string "another time!$"
 
-@ Unused
-LilycoveCity_PokemonCenter_1F_Text_XReceivedOneY:
-	.string "{STR_VAR_1} received\n"
-	.string "one {STR_VAR_2}!$"
+LilycoveCity_PokemonCenter_1F_Text_YouGotItRight: @ 82A8FC7
+    .string "You're amazing! You've got it right!\n"
+    .string "You're one sharp customer!$"
 
-LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp:
-	.string "Oh? Your BAG is filled up!\n"
-	.string "Come see me when you have room.$"
-
-LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs:
-	.string "Hmm… Wrong!\n"
-	.string "The correct answer is “{STR_VAR_3}”!$"
-
-LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize:
-	.string "Too bad!\p"
-	.string "I get to keep the quiz prize\n"
-	.string "{STR_VAR_1} now!$"
-
-LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz:
-	.string "Listen, listen!\n"
-	.string "Would you like to make your own quiz?$"
-
-LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime:
-	.string "Oh, I see…\n"
-	.string "Well, maybe next time!$"
-
-LilycoveCity_PokemonCenter_1F_Text_PickYourPrize:
-	.string "Okay, the first thing you have to do\n"
-	.string "is pick the prize for the person that\l"
-	.string "answers your quiz correctly.\p"
-	.string "But beware, if the person taking\n"
-	.string "the quiz can't get it right, I get to\l"
-	.string "keep the prize!$"
-
-LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize:
-	.string "If you don't choose a prize,\n"
-	.string "your quiz can't be made.\p"
-	.string "Are you going to quit making\n"
-	.string "your quiz?$"
-
-LilycoveCity_PokemonCenter_1F_Text_WriteYourQuiz:
-	.string "Oh, how nice!\n"
-	.string "That's a wonderful prize!\p"
-	.string "Next, you need to write your quiz\n"
-	.string "question and its answer.$"
-
-LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion:
-	.string "Are you going to quit writing\n"
-	.string "your quiz question?$"
+LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize: @ 82A9007
+    .string "Congratulations!\n"
+    .string "You've got the quiz right!\p"
+    .string "You've won a prize provided by\n"
+    .string "{STR_VAR_1}!$"
 
 @ Unused
-LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizAnswer:
-	.string "Are you going to quit choosing\n"
-	.string "your quiz answer?$"
+LilycoveCity_PokemonCenter_1F_Text_XReceivedOneY: @ 82A9056
+    .string "{STR_VAR_1} received\n"
+    .string "one {STR_VAR_2}!$"
 
-LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger:
-	.string "Thank you!\n"
-	.string "You've put together a nice quiz.\p"
-	.string "I'll go look for someone who'll take\n"
-	.string "your quiz challenge right away.$"
+LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp: @ 82A906A
+    .string "Oh? Your Bag is filled up!\n"
+    .string "Come see me when you have room.$"
+
+LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs: @ 82A90A5
+    .string "Hmm… Wrong!\n"
+    .string "The correct answer is “{STR_VAR_3}”!$"
+
+LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize: @ 82A90CD
+    .string "Too bad!\p"
+    .string "I get to keep the quiz prize\n"
+    .string "{STR_VAR_1} now!$"
+
+LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz: @ 82A90FB
+    .string "Listen, listen!\n"
+    .string "Would you like to make your own quiz?$"
+
+LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime: @ 82A9131
+    .string "Oh, I see…\n"
+    .string "Well, maybe next time!$"
+
+LilycoveCity_PokemonCenter_1F_Text_PickYourPrize: @ 82A9153
+    .string "Okay, the first thing you have to do\n"
+    .string "is pick the prize for the person that\l"
+    .string "answers your quiz correctly.\p"
+    .string "But beware, if the person taking\n"
+    .string "the quiz can't get it right, I get to\l"
+    .string "keep the prize!$"
+
+LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize: @ 82A9212
+    .string "If you don't choose a prize,\n"
+    .string "your quiz can't be made.\p"
+    .string "Are you going to quit making\n"
+    .string "your quiz?$"
+
+LilycoveCity_PokemonCenter_1F_Text_WriteYourQuiz: @ 82A9270
+    .string "Oh, how nice!\n"
+    .string "That's a wonderful prize!\p"
+    .string "Next, you need to write your quiz\n"
+    .string "question and its answer.$"
+
+LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion: @ 82A92D3
+    .string "Are you going to quit writing\n"
+    .string "your quiz question?$"
+
+@ Unused
+LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizAnswer: @ 82A9305
+    .string "Are you going to quit choosing\n"
+    .string "your quiz answer?$"
+
+LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger: @ 82A9336
+    .string "Thank you!\n"
+    .string "You've put together a nice quiz.\p"
+    .string "I'll go look for someone who'll take\n"
+    .string "your quiz challenge right away.$"
+
+LilycoveCity_PokemonCenter_1F_Text_LadysMonDozing:
+    .string "The Pokémon is dozing quietly.\p"
+    .string "With no Contests being held, it seems\n"
+    .string "to have nowhere it needs to be.$"
 

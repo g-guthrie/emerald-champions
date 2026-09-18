@@ -3,20 +3,28 @@ EventScript_TV::
 	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
 	specialvar VAR_RESULT, CheckForPlayersHouseNews
-	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_MOVIE, EventScript_PlayersHouseMovie
-	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_LATI, EventScript_PlayersHouseLatiNewsFlash
+	compare VAR_RESULT, PLAYERS_HOUSE_TV_MOVIE
+	goto_if_eq EventScript_PlayersHouseMovie
+	compare VAR_RESULT, PLAYERS_HOUSE_TV_LATI
+	goto_if_eq EventScript_PlayersHouseLatiNewsFlash
 	goto_if_unset FLAG_SYS_TV_START, EventScript_MomDadMightLikeThis1
 	goto_if_set FLAG_SYS_TV_WATCH, EventScript_MomDadMightLikeThis1
 	specialvar VAR_RESULT, IsGabbyAndTyShowOnTheAir
-	goto_if_eq VAR_RESULT, TRUE, EventScript_DoInSearchOfTrainers
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_DoInSearchOfTrainers
 	goto EventScript_TryDoPokeNews
 	end
 
 EventScript_TryDoTVShow::
 	specialvar VAR_0x8004, GetRandomActiveShowIdx
-	goto_if_eq VAR_0x8004, 255, EventScript_MomDadMightLikeThis2
-	specialvar VAR_0x8004, GetSelectedTVShow
-	goto_if_ne VAR_0x8004, 0, EventScript_DoTVShow
+	compare VAR_0x8004, 255
+	goto_if_eq EventScript_MomDadMightLikeThis2
+@ Emerald Champions: the mass-outbreak PokeNews override this used to consult is
+@ not part of this engine, so the randomly picked show is used as-is. VAR_0x8004
+@ still holds the show index that DoTVShow reads.
+	specialvar VAR_RESULT, GetSelectedTVShow
+	compare VAR_RESULT, 0
+	goto_if_ne EventScript_DoTVShow
 	end
 
 EventScript_MomDadMightLikeThis1::
@@ -43,13 +51,12 @@ EventScript_PlayersHouseLatiNewsFlash::
 	releaseall
 	end
 
-@ The following is a loop for the TV show messages
-@ VAR_RESULT is set to TRUE when the show has printed its final message
 EventScript_DoTVShow::
 	special DoTVShow
 	waitmessage
 	waitbuttonpress
-	goto_if_ne VAR_RESULT, TRUE, EventScript_DoTVShow
+	compare VAR_RESULT, 1
+	goto_if_ne EventScript_DoTVShow
 	goto EventScript_TurnOffTV
 	end
 
@@ -67,7 +74,8 @@ EventScript_MomDadMightLikeThis2::
 
 EventScript_TryDoPokeNews::
 	special DoPokeNews
-	goto_if_eq VAR_RESULT, FALSE, EventScript_TryDoTVShow
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_TryDoTVShow
 	waitmessage
 	waitbuttonpress
 	goto EventScript_TurnOffTV
@@ -77,6 +85,7 @@ EventScript_DoInSearchOfTrainers::
 	special DoTVShowInSearchOfTrainers
 	waitmessage
 	waitbuttonpress
-	goto_if_eq VAR_RESULT, 0, EventScript_DoInSearchOfTrainers
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_DoInSearchOfTrainers
 	goto EventScript_TurnOffTV
 	end

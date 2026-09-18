@@ -63,7 +63,8 @@
 #define VAR_POISON_STEP_COUNTER                          0x402B
 #define VAR_RESET_RTC_ENABLE                             0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE                       0x402D
-#define VAR_WONDER_NEWS_STEP_COUNTER                     0x402E
+#define VAR_CYNTHIA_STATE                     0x402E  // Restored from Inclement Emerald. Reclaimed the
+        // id of VAR_WONDER_NEWS_STEP_COUNTER, which had zero references in data/, src/ or include/.
 
 #define VAR_FRONTIER_MANIAC_FACILITY                     0x402F
 #define VAR_FRONTIER_GAMBLER_CHALLENGE                   0x4030
@@ -128,7 +129,8 @@
 #define VAR_ROUTE111_STATE                               0x406A // Unused Var
 #define VAR_ROUTE112_STATE                               0x406B // Unused Var
 #define VAR_ROUTE113_STATE                               0x406C // Unused Var
-#define VAR_ROUTE114_STATE                               0x406D // Unused Var
+#define VAR_LAVARIDGE_LUCY_STATE                               0x406D  // Restored from Inclement Emerald. Reclaimed the
+        // id of VAR_ROUTE114_STATE, which had zero references in data/, src/ or include/.
 #define VAR_ROUTE115_STATE                               0x406E // Unused Var
 #define VAR_ROUTE116_STATE                               0x406F
 #define VAR_ROUTE117_STATE                               0x4070 // Unused Var
@@ -138,10 +140,12 @@
 #define VAR_ROUTE121_STATE                               0x4074
 #define VAR_ROUTE122_STATE                               0x4075 // Unused Var
 #define VAR_ROUTE123_STATE                               0x4076 // Unused Var
-#define VAR_ROUTE124_STATE                               0x4077 // Unused Var
+#define VAR_IVY_EVIE_HOUSE_STATE                               0x4077  // Restored from Inclement Emerald. Reclaimed the
+        // id of VAR_ROUTE124_STATE, which had zero references in data/, src/ or include/.
 #define VAR_ROUTE125_STATE                               0x4078 // Unused Var
 #define VAR_ROUTE126_STATE                               0x4079 // Unused Var
-#define VAR_ROUTE127_STATE                               0x407A // Unused Var
+#define VAR_LEAF_STATE                               0x407A  // Restored from Inclement Emerald. Reclaimed the
+        // id of VAR_ROUTE127_STATE, which had zero references in data/, src/ or include/.
 #define VAR_ROUTE128_STATE                               0x407B
 #define VAR_ROUTE129_STATE                               0x407C // Unused Var
 #define VAR_ROUTE130_STATE                               0x407D // Unused Var
@@ -209,7 +213,9 @@
 #define VAR_RUSTBORO_GYM_GUIDE_STATE                     0x40BB // 0: entrance advice pending, 1: complete
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                0x40BC
 #define VAR_JAGGED_PASS_ASH_WEATHER                      0x40BD
-#define VAR_UNUSED_0x40BE                                0x40BE // Emerald Champions: the glass workshop keeps no state.
+#define VAR_GLASS_WORKSHOP_STATE                         0x40BE // Restored from Inclement Emerald at its own ID.
+                                                                // This tree had retired the slot as VAR_UNUSED_0x40BE
+                                                                // ("the glass workshop keeps no state"), so the bit was free.
 #define VAR_METEOR_FALLS_STATE                           0x40BF
 #define VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE              0x40C0
 #define VAR_TRICK_HOUSE_PRIZE_PICKUP                     0x40C1
@@ -230,10 +236,13 @@
 #define VAR_HAS_ENTERED_BATTLE_FRONTIER                  0x40D0 // Var is used like a flag.
 #define VAR_SCOTT_STATE                                  0x40D1
 #define VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE               0x40D2
-#define VAR_BIRCH_POSTGAME_RESEARCH_STATE                0x40D3
+#define VAR_ASH_GATHER_COUNT                0x40D3  // Restored from Inclement Emerald. Reclaimed the
+        // id of VAR_BIRCH_POSTGAME_RESEARCH_STATE, which had zero references in data/, src/ or include/.
 #define VAR_SS_TIDAL_SCOTT_STATE                         0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
 #define VAR_ROAMER_POKEMON                               0x40D5 // 0 = Latias, 1 = Latios
+#define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6 // Restored from Inclement Emerald at its own ID; 0x40D6 was an unclaimed hole.
 #define VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE                 0x40D7
+#define VAR_SKY_PILLAR_RAQUAZA_CRY_DONE                  VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE // Inclement's spelling of the same var (identical ID 0x40D7).
 #define VAR_SOOTOPOLIS_WALLACE_STATE                     0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE                         0x40DA
@@ -242,7 +251,8 @@
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
 #define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic delivery bits 0-15.
 #define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned species bits 24-29.
-#define VAR_STEVEN_STARTER_STONE_DELIVERY                 0x40E0 // Reserved: retired extra starter-stone grant receipts.
+#define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE                 0x40E0  // Restored from Inclement Emerald. Reclaimed the
+        // id of VAR_STEVEN_STARTER_STONE_DELIVERY, which had zero references in data/, src/ or include/.
 #define VAR_EC_SECOND_STARTER                         0x40E1 // 0 unset; second regional starter index + 1.
 #define VAR_EC_OPENING_STATE                         0x40E2 // EC_OPENING_* transaction state.
 #define VAR_EC_CIRCUIT_BEST_WINS                         0x40E3 // Best observed Circuit streak; 0 means no record yet.
@@ -297,8 +307,8 @@
 #define VAR_RESULT                    0x800D
 #define VAR_ITEM_ID                   0x800E
 #define VAR_LAST_TALKED               0x800F
-#define VAR_UNUSED_0x8010             0x8010
-#define VAR_UNUSED_0x8011             0x8011
+#define VAR_CONTEST_RANK              0x8010 // Restored from Inclement Emerald at its own ID (special, non-saved var).
+#define VAR_CONTEST_CATEGORY          0x8011 // Restored from Inclement Emerald at its own ID (special, non-saved var).
 #define VAR_MON_BOX_ID                0x8012
 #define VAR_MON_BOX_POS               0x8013
 #define VAR_UNUSED_0x8014             0x8014

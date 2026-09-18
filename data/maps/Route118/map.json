@@ -3,7 +3,6 @@
   "name": "Route118",
   "layout": "LAYOUT_ROUTE118",
   "music": "MUS_ROUTE118",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_118",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -15,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE119",
+      "direction": "up",
       "offset": 40,
-      "direction": "up"
+      "map": "MAP_ROUTE119"
     },
     {
-      "map": "MAP_MAUVILLE_CITY",
+      "direction": "left",
       "offset": 0,
-      "direction": "left"
+      "map": "MAP_MAUVILLE_CITY"
     },
     {
-      "map": "MAP_ROUTE123",
+      "direction": "right",
       "offset": 0,
-      "direction": "right"
+      "map": "MAP_ROUTE123"
     }
   ],
   "object_events": [
@@ -78,8 +77,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route118_EventScript_Perry",
       "flag": "0"
     },
@@ -203,7 +202,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route118_EventScript_GoodRodFisherman",
+      "script": "Route114_EventScript_MagikarpGuy",
       "flag": "0"
     },
     {
@@ -227,7 +226,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route118_EventScript_Wade",
       "flag": "0"
@@ -240,8 +239,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route118_EventScript_Chester",
       "flag": "0"
     },
@@ -253,8 +252,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "Route118_EventScript_Barny",
       "flag": "0"
     },
@@ -266,8 +265,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route118_EventScript_Dalton",
       "flag": "0"
     },
@@ -286,7 +285,7 @@
       "flag": "FLAG_HIDE_ROUTE_118_STEVEN"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 69,
       "y": 7,
       "elevation": 3,
@@ -294,9 +293,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_SCIZORITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_118_SCIZORITE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route118_EventScript_ItemHyperPotion",
+      "flag": "FLAG_ITEM_ROUTE_118_HYPER_POTION"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
@@ -318,14 +317,14 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 9,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [
@@ -414,16 +413,16 @@
       "x": 31,
       "y": 13,
       "elevation": 3,
-      "item": "ITEM_NET_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_118_NET_BALL"
+      "item": "ITEM_IRON",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_118_IRON"
     },
     {
       "type": "hidden_item",
       "x": 12,
       "y": 14,
       "elevation": 3,
-      "item": "ITEM_MOON_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_118_MOON_BALL"
+      "item": "ITEM_BOTTLE_CAP",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_118_BOTTLE_CAP"
     }
   ]
 }

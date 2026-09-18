@@ -1726,5 +1726,43 @@ extern const u8 gText_OakThisIsListOfPokemon[];
 extern const u8 gText_Boy[];
 extern const u8 gText_Girl[];
 
+// Inclement Emerald multichoice menu labels
+extern const u8 gText_GrassType[];
+extern const u8 gText_FireType[];
+extern const u8 gText_WaterType[];
+extern const u8 gText_FlavourRed[];
+extern const u8 gText_FlavourYellow[];
+extern const u8 gText_FlavourPink[];
+extern const u8 gText_FlavourBlue[];
+extern const u8 gText_FlavourGreen[];
+extern const u8 gText_Modify[];
+extern const u8 gText_ResetEVs[];
+extern const u8 gText_ExplainEVs[];
+extern const u8 gText_ChangeIVto0[];
+extern const u8 gText_ChangeIVto1[];
+extern const u8 gText_ChangeIVto14[];
+extern const u8 gText_ChangeIVto15[];
+extern const u8 gText_ChangeIVto30[];
+extern const u8 gText_ChangeIVto31[];
+extern const u8 gText_Add4toEV[];
+extern const u8 gText_Add8toEV[];
+extern const u8 gText_Add12toEV[];
+extern const u8 gText_Add64toEV[];
+extern const u8 gText_Add128toEV[];
+extern const u8 gText_Add252toEV[];
+extern const u8 gText_HiddenPower[];
+extern const u8 gText_ChangeIV[];
+extern const u8 gText_ExplainIVs[];
+extern const u8 gText_TakeOne[];
+extern const u8 gText_TakeOneDozen[];
+extern const u8 gText_IllPass[];
+extern const u8 gText_GrassPledge[];
+extern const u8 gText_FirePledge[];
+extern const u8 gText_WaterPledge[];
+extern const u8 gText_FrenzyPlant[];
+extern const u8 gText_BlastBurn[];
+extern const u8 gText_HydroCannon[];
+extern const u8 gText_SingleBattle[];
+extern const u8 gText_DoubleBattle[];
 
 #endif // GUARD_STRINGS_H

@@ -1,55 +1,62 @@
-SouthernIsland_Interior_MapScripts::
+.set LOCALID_LATI, 2
+
+SouthernIsland_Interior_MapScripts:: @ 8242A45
 	map_script MAP_SCRIPT_ON_RESUME, SouthernIsland_Interior_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Interior_OnTransition
 	.byte 0
 
-SouthernIsland_Interior_OnResume:
+SouthernIsland_Interior_OnResume: @ 8242A50
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_TryRemoveLati
 	end
 
-SouthernIsland_Interior_EventScript_TryRemoveLati::
+SouthernIsland_Interior_EventScript_TryRemoveLati:: @ 8242A5A
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_SOUTHERN_ISLAND_LATI
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne Common_EventScript_NopReturn
+	removeobject LOCALID_LATI
 	return
 
-SouthernIsland_Interior_OnTransition:
-	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpLatios
-	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetUpLatias
+SouthernIsland_Interior_OnTransition: @ 8242A6E
+	compare VAR_ROAMER_POKEMON, 0
+	call_if_eq SouthernIsland_Interior_EventScript_SetUpLatios
+	compare VAR_ROAMER_POKEMON, 0
+	call_if_ne SouthernIsland_Interior_EventScript_SetUpLatias
 	call SouthernIsland_Interior_EventScript_SetUpPlayerGfx
 	end
 
-SouthernIsland_Interior_EventScript_SetUpLatios::
+SouthernIsland_Interior_EventScript_SetUpLatios:: @ 8242A8A
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIOS
 	setvar VAR_TEMP_4, SPECIES_LATIOS
 	return
 
-SouthernIsland_Interior_EventScript_SetUpLatias::
+SouthernIsland_Interior_EventScript_SetUpLatias:: @ 8242A95
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LATIAS
 	setvar VAR_TEMP_4, SPECIES_LATIAS
 	return
 
-SouthernIsland_Interior_EventScript_SetUpPlayerGfx::
+SouthernIsland_Interior_EventScript_SetUpPlayerGfx:: @ 8242AA0
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, SouthernIsland_Interior_EventScript_SetBrendanGfx
-	goto_if_eq VAR_RESULT, FEMALE, SouthernIsland_Interior_EventScript_SetMayGfx
+	compare VAR_RESULT, MALE
+	goto_if_eq SouthernIsland_Interior_EventScript_SetBrendanGfx
+	compare VAR_RESULT, FEMALE
+	goto_if_eq SouthernIsland_Interior_EventScript_SetMayGfx
 	end
 
-SouthernIsland_Interior_EventScript_SetBrendanGfx::
+SouthernIsland_Interior_EventScript_SetBrendanGfx:: @ 8242AB8
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
-SouthernIsland_Interior_EventScript_SetMayGfx::
+SouthernIsland_Interior_EventScript_SetMayGfx:: @ 8242ABE
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
 	return
 
-SouthernIsland_Interior_EventScript_TryLatiEncounter::
+SouthernIsland_Interior_EventScript_TryLatiEncounter:: @ 8242AC4
 	lockall
-	setvar VAR_0x8008, 12  @ Player's Y coordinate. Not read
+	setvar VAR_0x8008, 12
 	goto SouthernIsland_Interior_EventScript_Lati
 	end
 
-SouthernIsland_Interior_EventScript_Lati::
+SouthernIsland_Interior_EventScript_Lati:: @ 8242AD0
 	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_Sign
 	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
 	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
@@ -57,105 +64,97 @@ SouthernIsland_Interior_EventScript_Lati::
 	setflag FLAG_ENCOUNTERED_LATIAS_OR_LATIOS
 	setflag FLAG_TEMP_2
 	special SpawnCameraObject
-	applymovement LOCALID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
+	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanUp
 	waitmovement 0
 	delay 50
 	waitse
-	playmoncry VAR_TEMP_4, CRY_MODE_NORMAL
+	playmoncry VAR_TEMP_4, 0
 	delay 30
 	waitmoncry
-	addobject LOCALID_SOUTHERN_ISLAND_LATI
+	addobject LOCALID_LATI
 	delay 30
-	applymovement LOCALID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
-	applymovement LOCALID_SOUTHERN_ISLAND_LATI, SouthernIsland_Interior_Movement_LatiApproach
+	applymovement OBJ_EVENT_ID_CAMERA, SouthernIsland_Interior_Movement_CameraPanDown
+	applymovement LOCALID_LATI, SouthernIsland_Interior_Movement_LatiApproach
 	waitmovement 0
 	delay 50
 	special RemoveCameraObject
-	setvar VAR_LAST_TALKED, LOCALID_SOUTHERN_ISLAND_LATI
-	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiosBattleVars
-	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiasBattleVars
+	setvar VAR_LAST_TALKED, LOCALID_LATI
+	compare VAR_ROAMER_POKEMON, 0
+	call_if_eq SouthernIsland_Interior_EventScript_SetLatiosBattleVars
+	compare VAR_ROAMER_POKEMON, 0
+	call_if_ne SouthernIsland_Interior_EventScript_SetLatiasBattleVars
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLatiBattle
+	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, SouthernIsland_Interior_EventScript_LatiCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_LatiDefeated
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_RanFromLati
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SouthernIsland_Interior_EventScript_RanFromLati
-	releaseall
-	end
-
-SouthernIsland_Interior_EventScript_LatiCaught::
-	setflag FLAG_EC_RESOLVED_SOUTHERN_LATI
-	msgbox SouthernIsland_Interior_Text_TwoStonesRest, MSGBOX_DEFAULT
-	call SouthernIsland_Interior_EventScript_MegaGift_LATIASITE
-	call SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE
-	msgbox SouthernIsland_Exterior_Text_ContinueJourney, MSGBOX_DEFAULT
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq SouthernIsland_Interior_EventScript_LatiDefeated
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq SouthernIsland_Interior_EventScript_RanFromLati
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq SouthernIsland_Interior_EventScript_RanFromLati
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall
 	end
 
-SouthernIsland_Interior_EventScript_LatiDefeated::
-	setflag FLAG_EC_RESOLVED_SOUTHERN_LATI
-	msgbox SouthernIsland_Interior_Text_TwoStonesRest, MSGBOX_DEFAULT
-	call SouthernIsland_Interior_EventScript_MegaGift_LATIASITE
-	call SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE
-	msgbox SouthernIsland_Exterior_Text_ContinueJourney, MSGBOX_DEFAULT
-	goto Common_EventScript_LegendaryResting
-	end
-
-SouthernIsland_Interior_EventScript_RanFromLati::
+SouthernIsland_Interior_EventScript_LatiDefeated:: @ 8242B81
+	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
 	copyvar VAR_0x8004, VAR_TEMP_4
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-@ Repeatable: also how either stone is retried after a full Bag, since it
-@ is reached every later visit once the encounter is resolved.
-SouthernIsland_Interior_EventScript_Sign::
-	goto_if_unset FLAG_EC_RESOLVED_SOUTHERN_LATI, SouthernIsland_Interior_EventScript_Sign_ShowText
-	call SouthernIsland_Interior_EventScript_MegaGift_LATIASITE
-	call SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE
-SouthernIsland_Interior_EventScript_Sign_ShowText::
+SouthernIsland_Interior_EventScript_RanFromLati:: @ 8242B8F
+	copyvar VAR_0x8004, VAR_TEMP_4
+	goto Common_EventScript_LegendaryFlewAway
+	end
+
+SouthernIsland_Interior_EventScript_Sign:: @ 8242B9A
 	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
+	goto_if_unset FLAG_RECEIVED_LATI_STONES SouthernIsland_Interior_EventScript_GiveLatiStones
 	releaseall
 	end
 
-SouthernIsland_Interior_EventScript_MegaGift_LATIASITE::
-	goto_if_set FLAG_EC_MEGA_GIFT_LATIASITE, SouthernIsland_Interior_EventScript_MegaGift_LATIASITE_Done
-	giveuniqueitem ITEM_LATIASITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_LATIASITE
-SouthernIsland_Interior_EventScript_MegaGift_LATIASITE_Done::
-	return
+SouthernIsland_Interior_EventScript_GiveLatiStones::
+	closemessage
+	delay 20
+	playse SE_M_DETECT
+	dofieldeffectsparkle 13, 11, 0
+	waitfieldeffect FLDEFF_SPARKLE
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
+	waitmovement 0
+	giveitem ITEM_LATIOSITE
+	giveitem ITEM_LATIASITE
+	setflag FLAG_RECEIVED_LATI_STONES
+	releaseall
+	end
 
-SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE::
-	goto_if_set FLAG_EC_MEGA_GIFT_LATIOSITE, SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE_Done
-	giveuniqueitem ITEM_LATIOSITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_LATIOSITE
-SouthernIsland_Interior_EventScript_MegaGift_LATIOSITE_Done::
-	return
-
-SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
+SouthernIsland_Interior_EventScript_SetLatiosBattleVars:: @ 8242BA4
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x8005, VAR_RESULT @ level
 	setvar VAR_0x8004, SPECIES_LATIOS
-	setvar VAR_0x8005, 0
-	special CreateEmeraldChampionsStaticLegendaryEncounter
+	setvar VAR_0x8006, ITEM_SOUL_DEW
+	special CreateEventLegalEnemyMon
 	return
 
-SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
+SouthernIsland_Interior_EventScript_SetLatiasBattleVars:: @ 8242BB7
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x8005, VAR_RESULT @ level
 	setvar VAR_0x8004, SPECIES_LATIAS
-	setvar VAR_0x8005, 0
-	special CreateEmeraldChampionsStaticLegendaryEncounter
+	setvar VAR_0x8006, ITEM_SOUL_DEW
+	special CreateEventLegalEnemyMon
 	return
 
-SouthernIsland_Interior_Movement_CameraPanUp:
+SouthernIsland_Interior_Movement_CameraPanUp: @ 8242BCA
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-SouthernIsland_Interior_Movement_CameraPanDown:
+SouthernIsland_Interior_Movement_CameraPanDown: @ 8242BCE
 	delay_16
 	delay_16
 	delay_16
@@ -166,10 +165,10 @@ SouthernIsland_Interior_Movement_CameraPanDown:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_faster_up
+	walk_in_place_fast_up
 	step_end
 
-SouthernIsland_Interior_Movement_LatiApproach:
+SouthernIsland_Interior_Movement_LatiApproach: @ 8242BDA
 	walk_down
 	walk_down
 	walk_down
@@ -182,7 +181,3 @@ SouthernIsland_Interior_Movement_LatiApproach:
 	walk_down
 	walk_down
 	step_end
-
-SouthernIsland_Interior_Text_TwoStonesRest:
-	.string "Two stones rest where the pair\n"
-	.string "slept.$"

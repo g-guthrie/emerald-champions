@@ -1,59 +1,21 @@
-LilycoveCity_House4_MapScripts::
+LilycoveCity_House4_MapScripts:: @ 821F5B4
 	.byte 0
 
-LilycoveCity_House4_EventScript_Man1::
+LilycoveCity_House4_EventScript_Man1:: @ 821F5B5
 	msgbox LilycoveCity_House4_Text_MysteriesAtBottomOfSea, MSGBOX_NPC
 	end
 
-LilycoveCity_House4_EventScript_Man2::
+LilycoveCity_House4_EventScript_Man2:: @ 821F5BE
 	msgbox LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis, MSGBOX_NPC
 	end
 
-LilycoveCity_House4_Text_MysteriesAtBottomOfSea:
+LilycoveCity_House4_Text_MysteriesAtBottomOfSea: @ 821F5C7
 	.string "This planet's biggest mysteries are\n"
 	.string "at the bottom of the sea.\p"
 	.string "Somebody said that, but I don't know…$"
 
-LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis:
+LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis: @ 821F62B
 	.string "There's a deep underwater trench\n"
-	.string "between MOSSDEEP and SOOTOPOLIS.\p"
+	.string "between Mossdeep and Sootopolis.\p"
 	.string "That's what someone told me, anyway.$"
 
-
-LilycoveCity_House4_EventScript_MegaGift_LAPRASITE::
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_House4_EventScript_Man2
-	goto_if_set FLAG_EC_MEGA_GIFT_LAPRASITE, LilycoveCity_House4_EventScript_Man2
-	lock
-	faceplayer
-	msgbox LilycoveCity_House4_EventScript_MegaGift_LAPRASITE_Text, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_LAPRASITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_LAPRASITE
-	release
-	goto LilycoveCity_House4_EventScript_Man2
-
-LilycoveCity_House4_EventScript_MegaGift_LAPRASITE_Text:
-	.string "A Lapras once carried my family\n"
-	.string "home through a terrible storm.\p"
-	.string "I kept this stone in gratitude.\n"
-	.string "Please find a Lapras to give it to.$"
-
-LilycoveCity_House4_EventScript_MegaGift_STARMINITE::
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_House4_EventScript_Man1
-	goto_if_set FLAG_EC_MEGA_GIFT_STARMINITE, LilycoveCity_House4_EventScript_Man1
-	lock
-	faceplayer
-	msgbox LilycoveCity_House4_EventScript_MegaGift_STARMINITE_Text, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_STARMINITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_STARMINITE
-	release
-	goto LilycoveCity_House4_EventScript_Man1
-
-LilycoveCity_House4_EventScript_MegaGift_STARMINITE_Text:
-	.string "The sea leaves more than shells\n"
-	.string "on our shore after a storm.\p"
-	.string "This stone shines like a Starmie.\n"
-	.string "Let one carry it beneath the stars.$"

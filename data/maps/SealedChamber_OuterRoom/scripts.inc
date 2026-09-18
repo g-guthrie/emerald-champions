@@ -1,133 +1,130 @@
-SealedChamber_OuterRoom_MapScripts::
+SealedChamber_OuterRoom_MapScripts:: @ 8239106
 	map_script MAP_SCRIPT_ON_RESUME, SealedChamber_OuterRoom_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, SealedChamber_OuterRoom_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, SealedChamber_OuterRoom_OnLoad
 	.byte 0
 
-SealedChamber_OuterRoom_OnResume:
-	setdivewarp MAP_UNDERWATER_SEALED_CHAMBER, 12, 44
-	setescapewarp MAP_UNDERWATER_SEALED_CHAMBER, 12, 44
+SealedChamber_OuterRoom_OnResume: @ 8239116
+	setdivewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
+	setescapewarp MAP_UNDERWATER_SEALED_CHAMBER, 255, 12, 44
 	end
 
-SealedChamber_OuterRoom_OnTransition:
+SealedChamber_OuterRoom_OnTransition: @ 8239127
 	setflag FLAG_LANDMARK_SEALED_CHAMBER
 	end
 
-SealedChamber_OuterRoom_OnLoad:
+SealedChamber_OuterRoom_OnLoad: @ 823912B
 	call_if_unset FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_CloseInnerRoomEntrance
 	end
 
-SealedChamber_OuterRoom_EventScript_CloseInnerRoomEntrance::
-	setmetatile 9, 1, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 10, 1, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 11, 1, METATILE_Cave_EntranceCover, TRUE
-	setmetatile 9, 2, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-	setmetatile 10, 2, METATILE_Cave_SealedChamberBraille_Mid, TRUE
-	setmetatile 11, 2, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+SealedChamber_OuterRoom_EventScript_CloseInnerRoomEntrance:: @ 8239135
+	setmetatile 9, 1, METATILE_Cave_EntranceCover, 1
+	setmetatile 10, 1, METATILE_Cave_EntranceCover, 1
+	setmetatile 11, 1, METATILE_Cave_EntranceCover, 1
+	setmetatile 9, 2, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 10, 2, METATILE_Cave_SealedChamberBraille_Mid, 1
+	setmetatile 11, 2, METATILE_Cave_SealedChamberBraille_Mid, 1
 	return
 
-SealedChamber_OuterRoom_EventScript_BrailleABC::
+SealedChamber_OuterRoom_EventScript_BrailleABC:: @ 823916C
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_ABC
+	braillemessage SealedChamber_OuterRoom_Braille_ABC
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BrailleGHI::
+SealedChamber_OuterRoom_EventScript_BrailleGHI:: @ 8239176
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_GHI
+	braillemessage SealedChamber_OuterRoom_Braille_GHI
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BrailleMNO::
+SealedChamber_OuterRoom_EventScript_BrailleMNO:: @ 8239180
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_MNO
+	braillemessage SealedChamber_OuterRoom_Braille_MNO
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BrailleTUV::
+SealedChamber_OuterRoom_EventScript_BrailleTUV:: @ 823918A
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_TUV
+	braillemessage SealedChamber_OuterRoom_Braille_TUV
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BrailleDEF::
+SealedChamber_OuterRoom_EventScript_BrailleDEF:: @ 8239194
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_DEF
+	braillemessage SealedChamber_OuterRoom_Braille_DEF
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BrailleJKL::
+SealedChamber_OuterRoom_EventScript_BrailleJKL:: @ 823919E
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_JKL
+	braillemessage SealedChamber_OuterRoom_Braille_JKL
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BraillePQRS::
+SealedChamber_OuterRoom_EventScript_BraillePQRS:: @ 82391A8
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_PQRS
+	braillemessage SealedChamber_OuterRoom_Braille_PQRS
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BraillePeriod::
+SealedChamber_OuterRoom_EventScript_BraillePeriod:: @ 82391B2
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_Period
+	braillemessage SealedChamber_OuterRoom_Braille_Period
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BrailleWXYZ::
+SealedChamber_OuterRoom_EventScript_BrailleWXYZ:: @ 82391BC
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_WXYZ
+	braillemessage SealedChamber_OuterRoom_Braille_WXYZ
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_BrailleComma::
+SealedChamber_OuterRoom_EventScript_BrailleComma:: @ 82391C6
 	lockall
-	braillemsgbox SealedChamber_OuterRoom_Braille_Comma
+	braillemessage SealedChamber_OuterRoom_Braille_Comma
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-@ DIG is capability-based like the obstacle moves: the wall asks for it, and any
-@ party member whose species could learn DIG opens it. No battle slot is spent.
-SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall::
-SealedChamber_OuterRoom_EventScript_BrailleDigHere::
+SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall:: @ 82391D0
 	lockall
 	goto_if_set FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_HoleInWall
-	checkfieldmove FIELD_MOVE_DIG, TRUE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, SealedChamber_OuterRoom_EventScript_NobodyCanDig
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	msgbox SealedChamber_OuterRoom_Text_RearWallSoundsHollow, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SealedChamber_OuterRoom_EventScript_CancelDig
-	msgbox SealedChamber_OuterRoom_Text_MonUsedDig, MSGBOX_DEFAULT
-	closemessage
-	goto EventScript_DigCommon
-
-SealedChamber_OuterRoom_EventScript_CancelDig::
-	closemessage
+	braillemessage SealedChamber_OuterRoom_Braille_DigHere
+	waitbuttonpress
+	closebraillemessage
 	releaseall
 	end
 
-SealedChamber_OuterRoom_EventScript_NobodyCanDig::
-	msgbox SealedChamber_OuterRoom_Text_DigDirections, MSGBOX_DEFAULT
-	releaseall
-	end
-
-SealedChamber_OuterRoom_EventScript_HoleInWall::
+SealedChamber_OuterRoom_EventScript_HoleInWall:: @ 82391E3
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
+SealedChamber_OuterRoom_EventScript_BrailleDigHere:: @ 82391ED
+	lockall
+	braillemessage SealedChamber_OuterRoom_Braille_DigHere
+	waitbuttonpress
+	closebraillemessage
+	releaseall
+	end
 
-SealedChamber_OuterRoom_Text_RearWallSoundsHollow:
-	.string "The rear wall sounds hollow.\n"
-	.string "Use DIG?$"
-
-SealedChamber_OuterRoom_Text_MonUsedDig:
-	.string "{STR_VAR_1} used DIG!$"
-
-SealedChamber_OuterRoom_Text_DigDirections:
-	.string "The rear wall sounds hollow.\p"
-	.string "No POKéMON with you could dig\n"
-	.string "through it.\p"
-	.string "Beyond it, the far wall's account\n"
-	.string "opens the three ruins.$"

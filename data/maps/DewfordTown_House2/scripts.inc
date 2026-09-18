@@ -1,86 +1,58 @@
-DewfordTown_House2_MapScripts::
+DewfordTown_House2_MapScripts:: @ 81FE22D
 	.byte 0
 
-DewfordTown_House2_EventScript_Man::
+DewfordTown_House2_EventScript_Man:: @ 81FE22E
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_DEWFORD_REAPER_CLOTH, DewfordTown_House2_EventScript_ExplainReaperCloth
-	msgbox DewfordTown_House2_Text_WantYouToHaveReaperCloth, MSGBOX_DEFAULT
-	giveitem ITEM_REAPER_CLOTH
-	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_NoRoomForScarf
-	setflag FLAG_RECEIVED_DEWFORD_REAPER_CLOTH
+	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_ExplainSilkScarf
+	msgbox DewfordTown_House2_Text_WantYouToHaveSilkScarf, MSGBOX_DEFAULT
+	giveitem ITEM_SILK_SCARF
+	compare VAR_RESULT, FALSE
+	goto_if_eq DewfordTown_House2_EventScript_NoRoomForScarf
+	setflag FLAG_RECEIVED_SILK_SCARF
 	release
 	end
 
-DewfordTown_House2_EventScript_NoRoomForScarf::
+DewfordTown_House2_EventScript_NoRoomForScarf:: @ 81FE25D
 	msgbox DewfordTown_House2_Text_NoRoom, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_House2_EventScript_ExplainReaperCloth::
-	msgbox DewfordTown_House2_Text_ExplainReaperCloth, MSGBOX_DEFAULT
+DewfordTown_House2_EventScript_ExplainSilkScarf:: @ 81FE267
+	msgbox DewfordTown_House2_Text_ExplainSilkScarf, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_House2_EventScript_Boy::
+DewfordTown_House2_EventScript_Boy:: @ 81FE271
 	msgbox DewfordTown_House2_Text_BrawlySoCool, MSGBOX_NPC
 	end
-DewfordTown_House2_Text_WantYouToHaveReaperCloth:
-	.string "Gorge your eyes on this rare\n"
-	.string "REAPER CLOTH! Spooky, yet stylish!\p"
-	.string "You appreciate my dazzling taste.\n"
-	.string "Here, I want you to have it!$"
 
-DewfordTown_House2_Text_NoRoom:
+DewfordTown_House2_Text_WantYouToHaveSilkScarf: @ 81FE27A
+	.string "Gorge your eyes on this!\p"
+	.string "It's a Silk Scarf. It's right at the\n"
+	.string "cutting edge of fashion, yeah!\p"
+	.string "Oh, I can see your eyes twinkling!\n"
+	.string "You appreciate my dazzling style!\p"
+	.string "Oh, you're a delight!\n"
+	.string "Here you go. I want you to have it!$"
+
+DewfordTown_House2_Text_NoRoom: @ 81FE356
 	.string "Oh, you don't have room?\p"
-	.string "This REAPER CLOTH is rare! Make room\n"
-	.string "and come back for it.$"
-DewfordTown_House2_Text_ExplainReaperCloth:
-	.string "A Reaper Cloth evolves Dusclops.\n"
-	.string "Use it from the Bag when ready.$"
+	.string "Now, listen tight, this SCARF is a must-\n"
+	.string "have! Why, I would sell all my items\l"
+	.string "in order to get it!$"
 
-DewfordTown_House2_Text_BrawlySoCool:
+DewfordTown_House2_Text_ExplainSilkScarf: @ 81FE3D1
+	.string "The Silk Scarf raises the power of\n"
+	.string "Normal-type moves.\p"
+	.string "It's a marvelous Scarf that will go\n"
+	.string "with almost all Pokémon!$"
+
+DewfordTown_House2_Text_BrawlySoCool: @ 81FE444
 	.string "Wow, you bothered to cross the sea\n"
-	.string "to visit DEWFORD?\p"
+	.string "to visit Dewford?\p"
 	.string "Did you maybe come here because you\n"
-	.string "heard about BRAWLY?\p"
+	.string "heard about Brawly?\p"
 	.string "He's so cool…\n"
 	.string "Everyone idolizes him.$"
 
-DewfordTown_House2_EventScript_MegaGift_KINGLERITE::
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_Boy
-	goto_if_set FLAG_EC_MEGA_GIFT_KINGLERITE, DewfordTown_House2_EventScript_Boy
-	lock
-	faceplayer
-	msgbox DewfordTown_House2_EventScript_MegaGift_KINGLERITE_Text, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_KINGLERITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_KINGLERITE
-	release
-	goto DewfordTown_House2_EventScript_Boy
-
-DewfordTown_House2_EventScript_MegaGift_KINGLERITE_Text:
-	.string "I followed a Krabby along the shore\n"
-	.string "and found this where it was digging.\p"
-	.string "When its claw is big and strong,\n"
-	.string "this stone could make it stronger!$"
-
-DewfordTown_House2_EventScript_MegaGift_GYARADOSITE::
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_Man
-	goto_if_set FLAG_EC_MEGA_GIFT_GYARADOSITE, DewfordTown_House2_EventScript_Man
-	lock
-	faceplayer
-	msgbox DewfordTown_House2_EventScript_MegaGift_GYARADOSITE_Text, MSGBOX_DEFAULT
-	giveuniqueitem ITEM_GYARADOSITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_MEGA_GIFT_GYARADOSITE
-	release
-	goto DewfordTown_House2_EventScript_Man
-
-DewfordTown_House2_EventScript_MegaGift_GYARADOSITE_Text:
-	.string "The fish you overlook today might\n"
-	.string "carry you through a storm tomorrow.\p"
-	.string "Raise a Magikarp with care.\n"
-	.string "This stone is for its grown form.$"

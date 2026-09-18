@@ -6,9 +6,9 @@ SaffronCity_MrPsychicsHouse_EventScript_MrPsychic::
 	faceplayer
 	goto_if_set FLAG_GOT_TM29_FROM_MR_PSYCHIC, SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29
 	msgbox SaffronCity_MrPsychicsHouse_Text_YouWantedThis
-	checkitemspace ITEM_TM29
+	checkitemspace ITEM_RARE_CANDY
 	goto_if_eq VAR_RESULT, FALSE, SaffronCity_MrPsychicsHouse_EventScript_NoRoomForTM29
-	giveitem_msg SaffronCity_MrPsychicsHouse_Text_ReceivedTM29FromMrPsychic, ITEM_TM29
+	giveitem_msg SaffronCity_MrPsychicsHouse_Text_ReceivedTM29FromMrPsychic, ITEM_RARE_CANDY
 	msgbox SaffronCity_MrPsychicsHouse_Text_ExplainTM29
 	setflag FLAG_GOT_TM29_FROM_MR_PSYCHIC
 	release

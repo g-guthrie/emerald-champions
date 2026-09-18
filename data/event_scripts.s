@@ -550,6 +550,10 @@ gStdScripts_End::
 	.include "data/maps/Route119_House/scripts.inc"
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc"
 
+@ Emerald Champions: Petalburg City Pokemon Center (a Hoenn map) points an object at
+@ MysteryEventClub_EventScript_Man, so this cannot live inside the IS_FRLG gate.
+	.include "data/scripts/mystery_event_club.inc"
+
 .if IS_FRLG
 
 @ FRLG scripts
@@ -981,7 +985,6 @@ gStdScripts_End::
 	.include "data/scripts/cable_club_frlg.inc"
 	.include "data/scripts/trainer_card_frlg.inc"
 	.include "data/text/trainer_card_frlg.inc"
-	.include "data/scripts/mystery_event_club.inc"
 	.include "data/scripts/day_care_frlg.inc"
 	.include "data/text/day_care_frlg.inc"
 	.include "data/scripts/seagallop.inc"
@@ -1113,6 +1116,13 @@ EventScript_SetBrineyLocation_Route109::
 
 	.include "data/scripts/pkmn_center_nurse.inc"
 	.include "data/scripts/emerald_champions.inc"
+@ These were referenced from map.json but never included, so their scripts were
+@ undefined at link: general_mart (18 maps) and poke_mart (12 maps) are every
+@ Pokemart clerk in the game.
+	.include "data/scripts/general_mart.inc"
+	.include "data/scripts/poke_mart.inc"
+	.include "data/scripts/eevee.inc"
+	.include "data/scripts/furfrou.inc"
 	.include "data/scripts/champions_tent.inc"
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/record_mix.inc"
@@ -1705,6 +1715,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/berry_blender.inc"
 	.include "data/text/mauville_man.inc"
 	.include "data/text/trainers.inc"
+	.include "data/text/match_call.inc"
 	.include "data/scripts/repel.inc"
 	.include "data/scripts/safari_zone.inc"
 	.include "data/scripts/roulette.inc"
@@ -1753,3 +1764,27 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/Seaspray_Cave/scripts.inc"
 	.include "data/maps/Seaspray_Cave_B1F/scripts.inc"
 	.include "data/maps/VerdanturfMeadow/scripts.inc"
+
+
+@ Emerald Champions: restored after the Inclement merge.
+Common_EventScript_RemoveOverworldAfterBattle::
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Common_EventScript_TryRemoveMon
+	end
+
+
+@ Emerald Champions: restored after the Inclement merge.
+gText_RegisteredTrainerinPokeNav:: @ 8272E0F
+	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"
+	.string "in the PokéNav.$"
+
+
+@ Emerald Champions: dependency of Common_EventScript_RemoveOverworldAfterBattle.
+Common_EventScript_TryRemoveMon::
+	specialvar VAR_RESULT, GetBattleOutcome
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne Common_EventScript_NopReturn
+	removeobject VAR_LAST_TALKED
+	return
+
+
+@ The below and surf.inc could be split into some text/notices.inc

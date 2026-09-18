@@ -1,79 +1,30 @@
-BirthIsland_Harbor_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BirthIsland_Harbor_OnArrivalFrame
+.set LOCALID_SAILOR, 1
+.set LOCALID_SS_TIDAL, 2
+
+BirthIsland_Harbor_MapScripts:: @ 826805C
 	.byte 0
 
-BirthIsland_Harbor_EventScript_Sailor::
+BirthIsland_Harbor_EventScript_Sailor:: @ 826805D
 	lock
 	faceplayer
-	call_if_set FLAG_EC_REPORT_C43_COMPLETE, BirthIsland_Harbor_EventScript_RepeatOnwardLead
-	call_if_unset FLAG_EC_REPORT_C43_COMPLETE, BirthIsland_Harbor_EventScript_RepeatIslandGuide
 	msgbox BirthIsland_Harbor_Text_SailorReturn, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BirthIsland_Harbor_EventScript_AsYouLike
+	compare VAR_RESULT, NO
+	goto_if_eq BirthIsland_Harbor_EventScript_AsYouLike
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 30
-	hideobjectat LOCALID_BIRTH_ISLAND_SAILOR, MAP_BIRTH_ISLAND_HARBOR
-	setvar VAR_0x8004, LOCALID_BIRTH_ISLAND_SS_TIDAL
+	hideobjectat LOCALID_SAILOR, MAP_BIRTH_ISLAND_HARBOR
+	setvar VAR_0x8004, LOCALID_SS_TIDAL
 	call Common_EventScript_FerryDepartIsland
-	setflag FLAG_EC_FERRY_ARRIVAL_PENDING
-	warp MAP_LILYCOVE_CITY_HARBOR, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
 
-BirthIsland_Harbor_EventScript_AsYouLike::
+BirthIsland_Harbor_EventScript_AsYouLike:: @ 82680A2
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	release
 	end
 
-
-BirthIsland_Harbor_OnArrivalFrame:
-	map_script_2 VAR_TEMP_F, 0, BirthIsland_Harbor_EventScript_Arrival
-	.2byte 0
-
-BirthIsland_Harbor_EventScript_Arrival::
-	setvar VAR_TEMP_F, 1
-	goto_if_unset FLAG_EC_FERRY_ARRIVAL_PENDING, BirthIsland_Harbor_EventScript_ArrivalEnd
-	clearflag FLAG_EC_FERRY_ARRIVAL_PENDING
-	lockall
-	msgbox BirthIsland_Harbor_Text_ArrivalGuide, MSGBOX_DEFAULT
-	releaseall
-BirthIsland_Harbor_EventScript_ArrivalEnd::
-	end
-
-BirthIsland_Harbor_Text_ArrivalGuide:
-	.string "The disturbance is at the\n"
-	.string "triangle outside this harbor.\p"
-	.string "Reach each new triangle position\n"
-	.string "in the fewest steps, then face\l"
-	.string "it and press A. Extra steps reset it.\p"
-	.string "The sailor stays here for your\n"
-	.string "return trip, whatever happens.$"
-
-BirthIsland_Harbor_Text_ScannerLead:
-	.string "The meteorite lead is resolved.\p"
-	.string "AQUA's submarine is still down at\n"
-	.string "SEAFLOOR CAVERN, south of MOSSDEEP\l"
-	.string "past ROUTE 128. Bring licensed\l"
-	.string "SURF, DIVE, STRENGTH and ROCK\l"
-	.string "SMASH and take up the pursuit.$"
-
-BirthIsland_Harbor_Text_OnwardLeadAfterCrisis:
-	.string "The meteorite lead is resolved.\p"
-	.string "With the SOOTOPOLIS crisis behind\n"
-	.string "you, visit STEVEN's house in\l"
-	.string "MOSSDEEP, or press on to the\l"
-	.string "POKéMON LEAGUE.$"
-
-BirthIsland_Harbor_EventScript_RepeatOnwardLead::
-	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, BirthIsland_Harbor_EventScript_RepeatOnwardLeadAfterCrisis
-	msgbox BirthIsland_Harbor_Text_ScannerLead, MSGBOX_DEFAULT
-	return
-BirthIsland_Harbor_EventScript_RepeatOnwardLeadAfterCrisis::
-	msgbox BirthIsland_Harbor_Text_OnwardLeadAfterCrisis, MSGBOX_DEFAULT
-	return
-BirthIsland_Harbor_EventScript_RepeatIslandGuide::
-	msgbox BirthIsland_Harbor_Text_ArrivalGuide, MSGBOX_DEFAULT
-	return

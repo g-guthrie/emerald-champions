@@ -1,13 +1,14 @@
-DesertUnderpass_MapScripts::
-	map_script MAP_SCRIPT_ON_LOAD, DesertUnderpass_OnLoad
+.set LOCALID_FOSSIL, 1
+
+DesertUnderpass_MapScripts:: @ 823AF37
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertUnderpass_OnTransition
 	.byte 0
 
-DesertUnderpass_OnTransition:
+DesertUnderpass_OnTransition: @ 823AF3D
 	setflag FLAG_LANDMARK_DESERT_UNDERPASS
 	end
 
-DesertUnderpass_EventScript_Fossil::
+DesertUnderpass_EventScript_Fossil:: @ 823AF41
 	lock
 	faceplayer
 	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, DesertUnderpass_EventScript_GiveClawFossil
@@ -15,31 +16,23 @@ DesertUnderpass_EventScript_Fossil::
 	release
 	end
 
-DesertUnderpass_EventScript_GiveClawFossil::
+DesertUnderpass_EventScript_GiveClawFossil:: @ 823AF57
 	giveitem ITEM_CLAW_FOSSIL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	removeobject LOCALID_UNDERPASS_FOSSIL
+	removeobject LOCALID_FOSSIL
 	release
 	end
 
-DesertUnderpass_EventScript_GiveRootFossil::
+DesertUnderpass_EventScript_GiveRootFossil:: @ 823AF68
 	giveitem ITEM_ROOT_FOSSIL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	removeobject LOCALID_UNDERPASS_FOSSIL
+	removeobject LOCALID_FOSSIL
 	release
 	end
 
 @ Unused
-DesertUnderpass_Text_FoundRootFossil::
-	.string "{PLAYER} found the ROOT FOSSIL.$"
+DesertUnderpass_Text_FoundRootFossil:: @ 823AF79
+	.string "{PLAYER} found the Root Fossil.$"
 
 @ Unused
-DesertUnderpass_Text_FoundClawFossil::
-	.string "{PLAYER} found the CLAW FOSSIL.$"
+DesertUnderpass_Text_FoundClawFossil:: @ 823AF93
+	.string "{PLAYER} found the Claw Fossil.$"
 
-
-DesertUnderpass_OnLoad:
-	goto_if_lt VAR_MIRAGE_TOWER_STATE, 2, DesertUnderpass_EntranceOpen
-	setmetatile 132, 15, METATILE_Cave_EntranceCover, TRUE
-DesertUnderpass_EntranceOpen:
-	end

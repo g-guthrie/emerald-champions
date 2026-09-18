@@ -1,3 +1,7 @@
+@ Emerald Champions: this is EC's Spray/Repel feature, restored over Inclement's
+@ version. src/wild_encounter.c calls EventScript_SprayWoreOff directly, and
+@ Inclement's variant instead callnative's TryDrawRepelMenu/HandleRepelMenuChoice,
+@ which are C functions this engine does not have.
 .set LOCAL_VAR_SPRAY, VAR_0x8004
 .set LOCAL_VAR_NUM_SPRAY_STRENGTH, VAR_0x8005
 .set LOCAL_VAR_SPRAY_TYPE, VAR_0x8009

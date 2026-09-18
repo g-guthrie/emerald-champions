@@ -18,7 +18,15 @@
 #define B_PARALYSIS_CHANCE          GEN_LATEST // In Champions, paralysis has a 12.5% chance of not moving, instead of 25%.
 
 // Experience settings
-#define B_EC_BATTLE_EXP             FALSE      // Emerald Champions: battles award no experience at all. The Leveler is the only way to gain levels, so the exp phase (and its "gained 0 Exp. Points" message at the cap) is skipped entirely.
+#define B_EC_BATTLE_EXP             TRUE       // Emerald Champions: battles award experience again.
+#define B_EC_TEAM_EXP               TRUE       // Every Pokemon in the party gains from every battle, with no item and no flag: they were all there.
+#define B_EC_EXP_NUMERATOR          2          // Flat campaign-wide experience multiplier, applied last.
+#define B_EC_EXP_DENOMINATOR        1
+#define B_EC_CATCHUP_PER_LEVEL      50         // Each level below the party's strongest adds this % to a Pokemon's share...
+#define B_EC_CATCHUP_MAX            600        // ...to a ceiling of this % of the base rate, so the furthest behind close fastest.
+#define B_EC_EXP_AT_CAP             1          // A Pokemon at its cap still earns a token point, so a fight is never worth literally nothing. It can never carry past the cap's own threshold.
+#define B_EC_WILD_HELD_ITEMS        FALSE      // Wild Pokemon carry nothing. Held items are things the player finds, buys or earns, never something a catch hands over.
+#define B_EC_WILD_BATTLE_SETS       FALSE      // Wild Pokemon use their natural level-up moves. The move tutor is where a team gets built.
 #define B_EXP_CATCH                 GEN_LATEST // In Gen6+, the party gains experience when the player catches another Pokémon.
 #define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // In Gen7+, Trainer battles no longer increase total experience by 1.5x.
 #define B_SPLIT_EXP                 GEN_LATEST // In Gen6+, all Pokémon that participate in a battle gain full experience. In Gen5 and earlier, the total experience would be evenly split across them.

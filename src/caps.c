@@ -8,24 +8,26 @@
 #include "string_util.h"
 
 
-// A completed milestone owns both its cap and finite stipend. Capture and
-// pending item delivery are separate. A zero cap leaves the current cap alone.
+// The campaign runs on Inclement Emerald's Strict level caps, indexed by badge.
+// One extra step sits at the Groudon awakening: the stretch between the sixth
+// and seventh badges carries a fifth of the roster, and a single cap across all
+// of it would fight Mossdeep's Gym at the level Route 121 was authored to.
+// A milestone owns its cap. It pays no stipend: money comes from battles and
+// from what the world is worth, the way it does in Inclement. A zero cap
+// leaves the current cap alone.
+// The pre-badge cap is the fallback in GetCurrentLevelCap below.
 static const struct { u16 flag; u8 cap; u16 stipend; } sCampaignMilestones[] =
 {
-    {FLAG_BADGE01_GET, 20, 3000},
-    {FLAG_EC_REPORT_C14_COMPLETE, 24, 2000},
-    {FLAG_BADGE03_GET, 30, 3000},
-    {FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, 36, 2000},
-    {FLAG_BADGE04_GET, 42, 3000},
-    {FLAG_BADGE05_GET, 48, 3000},
-    {FLAG_EC_REPORT_C30_COMPLETE, 54, 2000},
-    {FLAG_BADGE06_GET, 60, 3000},
-    {FLAG_EC_REPORT_C36_COMPLETE, 68, 3000},
-    {FLAG_EC_REPORT_C39_COMPLETE, 76, 3000},
-    {FLAG_EC_REPORT_C42_COMPLETE, 84, 3000},
-    {FLAG_BADGE08_GET, 90, 3000},
-    {FLAG_DEFEATED_WALLY_VICTORY_ROAD, 96, 0},
-    {FLAG_IS_CHAMPION, 100, 5000},
+    {FLAG_BADGE01_GET, 20, 0},
+    {FLAG_BADGE02_GET, 30, 0},
+    {FLAG_BADGE03_GET, 40, 0},
+    {FLAG_BADGE04_GET, 45, 0},
+    {FLAG_BADGE05_GET, 55, 0},
+    {FLAG_BADGE06_GET, 60, 0},
+    {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 65, 0},
+    {FLAG_BADGE07_GET, 70, 0},
+    {FLAG_BADGE08_GET, 80, 0},
+    {FLAG_IS_CHAMPION, 100, 0},
 };
 
 // Milestones not in the table above still need their flag set (story gates
@@ -115,6 +117,29 @@ u32 GetCurrentLevelCap(void)
     }
 
     return MAX_LEVEL;
+}
+
+// The Leveler raises a party to the PREVIOUS milestone's cap rather than the
+// live one: enough that a newly caught partner is immediately usable, while the
+// last stretch up to the current cap is still earned in battle.
+u32 GetPreviousLevelCap(void)
+{
+    u32 latest = 0;
+
+    for (u32 i = ARRAY_COUNT(sCampaignMilestones); i > 0; i--)
+    {
+        if (sCampaignMilestones[i - 1].cap != 0 && FlagGet(sCampaignMilestones[i - 1].flag))
+        {
+            latest = i - 1;
+            break;
+        }
+    }
+    for (u32 i = latest; i > 0; i--)
+    {
+        if (sCampaignMilestones[i - 1].cap != 0 && FlagGet(sCampaignMilestones[i - 1].flag))
+            return sCampaignMilestones[i - 1].cap;
+    }
+    return 14;
 }
 
 u32 GetLevelCapForSpecies(enum Species species, u32 baseline)

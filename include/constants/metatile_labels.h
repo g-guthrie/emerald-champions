@@ -1084,4 +1084,16 @@
 #define METATILE_RSMossdeepGym_Switch_Down           0x239
 #define METATILE_RSMossdeepGym_Switch_Up             0x238
 
+// Inclement Emerald spells these with an underscore after RS; values verified
+// identical to this tree's METATILE_RSMossdeepGym_*. MirageTower_* come from the
+// donor with the SandstrewnRuins map and its tileset.
+#define METATILE_RS_MossdeepGym_RedArrow_Down    METATILE_RSMossdeepGym_RedArrow_Down
+#define METATILE_RS_MossdeepGym_RedArrow_Left    METATILE_RSMossdeepGym_RedArrow_Left
+#define METATILE_RS_MossdeepGym_RedArrow_Right   METATILE_RSMossdeepGym_RedArrow_Right
+#define METATILE_RS_MossdeepGym_RedArrow_Up      METATILE_RSMossdeepGym_RedArrow_Up
+#define METATILE_RS_MossdeepGym_Switch_Down      METATILE_RSMossdeepGym_Switch_Down
+#define METATILE_RS_MossdeepGym_Switch_Up        METATILE_RSMossdeepGym_Switch_Up
+#define METATILE_MirageTower_Floor           0x211
+#define METATILE_MirageTower_Ledge           0x209
+
 #endif // GUARD_METATILE_LABELS_H

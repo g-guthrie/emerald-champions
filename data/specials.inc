@@ -670,3 +670,75 @@ gSpecials::
 	def_special MintEmeraldChampionsHarvestCredit
 	def_special PrepareEmeraldChampionsMeadowSong
 	def_special PrepareEmeraldChampionsCastformSurvey
+
+	@ Inclement Emerald's Super Training, Hyper Training and nature services,
+	@ implemented natively in src/inclement_stat_services.c.
+	def_special BufferChosenMonAllEVs
+	def_special BufferChosenMonAllIVs
+	def_special BufferChosenMonEV
+	def_special BufferChosenMonIV
+	def_special BufferChosenMonNature
+	def_special CheckChosenMonCanGainEVs
+	def_special AreChosenMonEVsMaxedOut
+	def_special Special_AreLeadMonEVsMaxedOut
+	def_special IncreaseChosenMonEVs
+	def_special ResetChosenMonEVs
+	def_special ChangeChosenMonIVs
+	def_special ChangeChosenMonHiddenPower
+	def_special ChangePokemonNature
+	def_special BufferVarsForIVRater
+	def_special GetHighestLevelInPlayerParty
+
+	@ Specials the restored Inclement Emerald map scripts call. Every call site
+	@ writes its own explicit "waitstate" where one is needed, so these are all
+	@ declared waitstate=0 - declaring waitstate=1 here would make the "special"
+	@ macro emit an implicit waitstate and the script's explicit one would be
+	@ dropped with an assembler warning (see asm/macros/event.inc).
+	@ None of them call Script_RequestEffects, so requests_effects stays 0.
+
+	@ Wally's catching tutorial, Petalburg Gym.
+	def_special PutZigzagoonInPlayerParty
+
+	@ Devon Corp fossil revival.
+	def_special DoesPlayerHaveFossil
+	def_special FossilToSpecies
+	def_special IsItemFossil
+
+	@ Rotom / Deoxys / Eevee form and species changes.
+	def_special ChangeMonSpecies
+
+	@ Sealed Chamber and the Regi trio braille puzzle.
+	def_special CheckRelicanthWailord
+	def_special CheckSpeciesInParty
+	def_special DoSealedChamberShakingEffect1
+	def_special DoSealedChamberShakingEffect2
+
+	@ Shoal Cave tides.
+	def_special UpdateShoalTideFlag
+
+	@ Inclement's Ball Swapper, and the bag pickers it shares with Devon Corp.
+	def_special Bag_ChooseItem
+	def_special Bag_ChoosePokeBall
+	def_special ChangePokeBall
+
+	@ One-offs.
+	def_special FoundBlackGlasses
+	def_special CheckMagikarpBattle
+	def_special GetStaticEncounterLevel
+	def_special CreateEventLegalEnemyMon
+	def_special SetGiftEggMove
+	def_special SetSpeciesAndEggMove
+	def_special GiveLeadMonEffortRibbon
+	def_special LeadMonHasEffortRibbon
+	def_special ChangeBoxPokemonNickname
+	def_special GetDiancieFriendshipScore
+	def_special CountPlayerMuseumPaintings
+	def_special IsTrainerRegistered
+
+	@ Rustboro PokeNav tutorial.
+	def_special OpenPokenavForTutorial
+	def_special ScriptMenu_CreateStartMenuForPokenavTutorial
+
+	@ Already implemented in this tree, but never declared.
+	def_special GetPokeblockFeederInFront
+	def_special TryBerryBlenderLinkup

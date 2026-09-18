@@ -3,7 +3,6 @@
   "name": "TerraCave_End",
   "layout": "LAYOUT_TERRA_CAVE_END",
   "music": "MUS_PETALBURG_WOODS",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_TERRA_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_FOG_HORIZONTAL",
@@ -36,7 +35,7 @@
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     }
   ],
   "coord_events": [

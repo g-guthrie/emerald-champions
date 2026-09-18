@@ -1103,7 +1103,13 @@ struct SaveBlock1
     // Evolution plays on either side. Taken from the dead Dex Flags filler so
     // no later SaveBlock1 offset moves.
     /*0x98C*/ u8 megasWitnessed[13];
-    /*0x999*/ u8 filler1[0x34 - 4 - 13]; // Previously Dex Flags, feel free to remove. Shrunk to store registeredItemL/R and megasWitnessed above.
+    // One bit per entry in the battle-item catalogue, set the first time the
+    // player actually obtains that item. The vendor only lists what is set, so
+    // the world teaches you an item exists and the counter then keeps you
+    // supplied. Taken from the same dead Dex Flags filler, so no later
+    // SaveBlock1 offset moves and existing saves stay readable.
+    /*0x999*/ u8 battleItemsUnlocked[25];
+    /*0x9B2*/ u8 filler1[0x34 - 4 - 13 - 25]; // Previously Dex Flags, feel free to remove. Shrunk to store registeredItemL/R, megasWitnessed and battleItemsUnlocked above.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[2];

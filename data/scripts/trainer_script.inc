@@ -1,6 +1,19 @@
+Std_RegisteredInMatchCall::
+	buffertrainerclassname 0, VAR_0x8000
+	buffertrainername 1, VAR_0x8000
+	closemessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox gText_RegisteredTrainerinPokeNav, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	return
+
 EventScript_TryGetTrainerScript::
 	special ShouldTryGetTrainerScript
-	goto_if_eq VAR_RESULT, TRUE, EventScript_GotoTrainerScript
+	compare VAR_RESULT, 1
+	goto_if_eq EventScript_GotoTrainerScript
 	releaseall
 	end
 
@@ -8,6 +21,9 @@ EventScript_GotoTrainerScript::
 	gotobeatenscript
 	releaseall
 	end
+
+@ Emerald Champions: restored after the Inclement merge overwrote this file;
+@ these are referenced from this engine's own C and scripts.
 
 EventScript_ObjectApproachPlayer::
 	lock

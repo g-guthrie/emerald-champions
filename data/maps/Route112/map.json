@@ -3,7 +3,6 @@
   "name": "Route112",
   "layout": "LAYOUT_ROUTE112",
   "music": "MUS_ROUTE110",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_112",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -15,19 +14,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE113",
+      "direction": "up",
       "offset": -60,
-      "direction": "up"
+      "map": "MAP_ROUTE113"
     },
     {
-      "map": "MAP_LAVARIDGE_TOWN",
+      "direction": "left",
       "offset": 40,
-      "direction": "left"
+      "map": "MAP_LAVARIDGE_TOWN"
     },
     {
-      "map": "MAP_ROUTE111",
+      "direction": "right",
       "offset": -20,
-      "direction": "right"
+      "map": "MAP_ROUTE111"
     }
   ],
   "object_events": [
@@ -66,8 +65,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route112_EventScript_Larry",
       "flag": "0"
     },
@@ -79,8 +78,8 @@
       "movement_type": "MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route112_EventScript_Carol",
       "flag": "0"
     },
@@ -92,8 +91,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route112_EventScript_Trent",
       "flag": "0"
     },
@@ -185,9 +184,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_SKARMORITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_112_SKARMORITE"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route112_EventScript_ItemHoundoominite",
+      "flag": "FLAG_ITEM_ROUTE_112_HOUNDOOMINITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
@@ -217,7 +216,7 @@
     },
     {
       "local_id": "LOCALID_ROUTE112_VIAL_CHANSEY",
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
+      "graphics_id": "OBJ_EVENT_GFX_CHANSEY",
       "x": 25,
       "y": 29,
       "elevation": 3,
@@ -227,7 +226,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0",
-      "flag": "FLAG_HIDE_ROUTE112_VIAL_CHANSEY"
+      "flag": "FLAG_HIDE_ROUTE112_CHANSEY"
     }
   ],
   "warp_events": [
@@ -236,42 +235,42 @@
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_ROUTE112_CABLE_CAR_STATION",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 29,
       "y": 27,
       "elevation": 0,
       "dest_map": "MAP_ROUTE112_CABLE_CAR_STATION",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 6,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_JAGGED_PASS",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 7,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_JAGGED_PASS",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 11,
       "y": 36,
       "elevation": 0,
       "dest_map": "MAP_FIERY_PATH",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 22,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_FIERY_PATH",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     }
   ],
   "coord_events": [
@@ -282,7 +281,7 @@
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
       "var_value": "1",
-      "script": "Route112_EventScript_VialChanseyEscape"
+      "script": "Route112_EventScript_ChanseyBlob"
     },
     {
       "type": "trigger",
@@ -291,7 +290,7 @@
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
       "var_value": "1",
-      "script": "Route112_EventScript_VialChanseyEscape"
+      "script": "Route112_EventScript_ChanseyBlob"
     },
     {
       "type": "trigger",
@@ -300,7 +299,7 @@
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
       "var_value": "1",
-      "script": "Route112_EventScript_VialChanseyEscape"
+      "script": "Route112_EventScript_ChanseyBlob"
     }
   ],
   "bg_events": [

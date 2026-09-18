@@ -88,8 +88,14 @@ static void SetMenuInputHandler(struct Pokenav_Menu *menu)
     switch (menu->menuType)
     {
     case POKENAV_MENU_TYPE_DEFAULT:
-        SetPokenavMode(POKENAV_MODE_NORMAL);
-        // fallthrough
+        // This used to force POKENAV_MODE_NORMAL here. That is redundant when
+        // the PokeNav is opened from the Start menu - InitPokenavResources has
+        // already set NORMAL - and it is actively wrong when a script opened
+        // it, because the mode is what tells the shutdown path to return to
+        // the script instead of reopening the Start menu. Upstream only got
+        // away with it because the tutorial arrived on
+        // POKENAV_MENU_TYPE_UNLOCK_MC, a menu type that went away with Match
+        // Call, leaving DEFAULT as the only way in.
     case POKENAV_MENU_TYPE_RIBBONS:
         menu->callback = GetMainMenuInputHandler();
         break;

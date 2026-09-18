@@ -1052,3 +1052,51 @@ const u8 gText_Volcanobadge[] = _("VOLCANOBADGE");
 const u8 gText_Earthbadge[] = _("EARTHBADGE");
 const u8 gText_OakImportantToGetToKnowPokemonThroughly[] = _("OAK: It's important to get to know\nyour POKéMON thoroughly.\p");
 const u8 gText_OakThisIsListOfPokemon[] = _("This is a list of your POKéMON,\n{PLAYER}.\pOpen this to check the skills\nand moves of your POKéMON.\pYou also choose POKéMON here if\nyou want to use an item on one.{PAUSE_UNTIL_PRESS}");
+
+// Inclement Emerald multichoice menu labels (Super Training, Hyper Training,
+// nature service, starter-move tutor, Moomoo Milk, Deoxys formes, rematches).
+const u8 gText_GrassType[] = _("Grass-type");
+const u8 gText_FireType[] = _("Fire-type");
+const u8 gText_WaterType[] = _("Water-type");
+
+const u8 gText_FlavourRed[] = _("Red:{CLEAR_TO 0x32}Attack");
+const u8 gText_FlavourYellow[] = _("Yellow:{CLEAR_TO 0x32}Defense");
+const u8 gText_FlavourPink[] = _("Pink:{CLEAR_TO 0x32}Speed");
+const u8 gText_FlavourBlue[] = _("Blue:{CLEAR_TO 0x32}Sp. Atk");
+const u8 gText_FlavourGreen[] = _("Green:{CLEAR_TO 0x32}Sp. Def");
+
+const u8 gText_Modify[] = _("Add EVs");
+const u8 gText_ResetEVs[] = _("Reset EVs");
+const u8 gText_ExplainEVs[] = _("Explain EVs");
+
+const u8 gText_ChangeIVto0[] = _(" 0");
+const u8 gText_ChangeIVto1[] = _(" 1");
+const u8 gText_ChangeIVto14[] = _("14");
+const u8 gText_ChangeIVto15[] = _("15");
+const u8 gText_ChangeIVto30[] = _("30");
+const u8 gText_ChangeIVto31[] = _("31");
+
+const u8 gText_Add4toEV[] = _(" 4 EVs");
+const u8 gText_Add8toEV[] = _(" 8 EVs");
+const u8 gText_Add12toEV[] = _("12 EVs");
+const u8 gText_Add64toEV[] = _("64 EVs");
+const u8 gText_Add128toEV[] = _("128 EVs");
+const u8 gText_Add252toEV[] = _("252 EVs");
+
+const u8 gText_HiddenPower[] = _("Change Hidden Power");
+const u8 gText_ChangeIV[] = _("Change IVs");
+const u8 gText_ExplainIVs[] = _("Explain IVs");
+
+const u8 gText_TakeOne[] =      _("I'll take one.");
+const u8 gText_TakeOneDozen[] = _("I'll take a dozen!");
+const u8 gText_IllPass[] =      _("I'll pass.");
+
+const u8 gText_GrassPledge[] = _("Grass Pledge");
+const u8 gText_FirePledge[] = _("Fire Pledge");
+const u8 gText_WaterPledge[] = _("Water Pledge");
+const u8 gText_FrenzyPlant[] = _("Frenzy Plant");
+const u8 gText_BlastBurn[] = _("Blast Burn");
+const u8 gText_HydroCannon[] = _("Hydro Cannon");
+
+const u8 gText_SingleBattle[] = _("Single Battle");
+const u8 gText_DoubleBattle[] = _("Double Battle");

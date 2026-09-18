@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WILD_JSON = "src/data/wild_encounters.json"
-FIELD_TYPES = ("land_mons", "water_mons", "rock_smash_mons", "fishing_mons")
+FIELD_TYPES = ("land_mons", "water_mons", "rock_smash_mons", "fishing_mons", "honey_mons")
 
 
 def is_sealed(map_name: str) -> bool:

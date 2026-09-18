@@ -60,10 +60,27 @@ enum ScrollMulti
     SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST,
     SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES,
     SCROLL_MULTI_FURFROU_TRIMS,
+    // Restored from Inclement Emerald.
+    SCROLL_MULTI_GAMECORNER_POKEMON,
+    SCROLL_MULTI_GAMECORNER_GRASS_STARTERS,
+    SCROLL_MULTI_GAMECORNER_FIRE_STARTERS,
+    SCROLL_MULTI_GAMECORNER_WATER_STARTERS,
+    SCROLL_MULTI_GLASS_WORKSHOP_VENDOR,
+    SCROLL_MULTI_HIDDEN_POWER,
 };
 
+// Inclement Emerald names the two Battle Frontier Exchange Corner vendors for
+// what they sold in vanilla. Same clerk, same slot, same row count either way;
+// this matches the EXCHANGE_CORNER_*_CLERK aliases in constants/battle_frontier.h.
+#define SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR    SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR
+#define SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR  SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR
+
+// Inclement Emerald's starter-region picker. This engine's list is the same
+// menu in the same order, extended past Alola with Galar and Paldea.
+#define SCROLL_MULTI_REGION_NAMES                         SCROLL_MULTI_STARTER_REGIONS
+
 #define MAX_SCROLL_MULTI_ON_SCREEN 6
-#define MAX_SCROLL_MULTI_LENGTH 16
+#define MAX_SCROLL_MULTI_LENGTH 17
 
 // Dept Store Floor Numbers
 enum DeptStoreFloorNumber

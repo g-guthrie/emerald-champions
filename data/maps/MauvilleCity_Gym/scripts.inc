@@ -1,8 +1,8 @@
-MauvilleCity_Gym_MapScripts::
+MauvilleCity_Gym_MapScripts:: @ 820DD6E
 	map_script MAP_SCRIPT_ON_LOAD, MauvilleCity_Gym_OnLoad
 	.byte 0
 
-MauvilleCity_Gym_OnLoad:
+MauvilleCity_Gym_OnLoad: @ 820DD74
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_DeactivatePuzzle
 	switch VAR_MAUVILLE_GYM_STATE
 	case 0, MauvilleCity_Gym_EventScript_UpdateBarriers
@@ -12,178 +12,235 @@ MauvilleCity_Gym_OnLoad:
 	case 4, MauvilleCity_Gym_EventScript_Switch4Pressed
 	end
 
-MauvilleCity_Gym_EventScript_UpdateBarriers::
+MauvilleCity_Gym_EventScript_UpdateBarriers:: @ 820DDBA
 	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_SetAltBarriers
 	end
 
-MauvilleCity_Gym_EventScript_SetAltBarriers::
-	setmetatile 3, 11, METATILE_MauvilleGym_RedBeamV1_On, TRUE
-	setmetatile 3, 12, METATILE_MauvilleGym_RedBeamV2_On, TRUE
-	setmetatile 3, 13, METATILE_MauvilleGym_PoleTop_On, TRUE
-	setmetatile 4, 10, METATILE_MauvilleGym_RedBeamH1_On, FALSE
-	setmetatile 5, 10, METATILE_MauvilleGym_RedBeamH2_On, FALSE
-	setmetatile 4, 11, METATILE_MauvilleGym_RedBeamH3_On, TRUE
-	setmetatile 5, 11, METATILE_MauvilleGym_RedBeamH4_On, TRUE
-	setmetatile 7, 10, METATILE_MauvilleGym_RedBeamH1_On, FALSE
-	setmetatile 8, 10, METATILE_MauvilleGym_RedBeamH2_On, FALSE
-	setmetatile 7, 11, METATILE_MauvilleGym_RedBeamH3_On, TRUE
-	setmetatile 8, 11, METATILE_MauvilleGym_RedBeamH4_On, TRUE
-	setmetatile 4, 13, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
-	setmetatile 5, 13, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
-	setmetatile 4, 14, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
-	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
-	setmetatile 1, 10, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
-	setmetatile 2, 10, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
-	setmetatile 1, 11, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
-	setmetatile 2, 11, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
-	setmetatile 6, 8, METATILE_MauvilleGym_PoleBottom_On, TRUE
-	setmetatile 6, 9, METATILE_MauvilleGym_FloorTile, FALSE
-	setmetatile 6, 10, METATILE_MauvilleGym_PoleTop_Off, FALSE
-	setmetatile 4, 6, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
-	setmetatile 5, 6, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
-	setmetatile 4, 7, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
-	setmetatile 5, 7, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
+MauvilleCity_Gym_EventScript_SetAltBarriers:: @ 820DDC4
+	setmetatile 3, 11, METATILE_MauvilleGym_RedBeamV1_On, 1
+	setmetatile 3, 12, METATILE_MauvilleGym_RedBeamV2_On, 1
+	setmetatile 3, 13, METATILE_MauvilleGym_PoleTop_On, 1
+	setmetatile 4, 10, METATILE_MauvilleGym_RedBeamH1_On, 0
+	setmetatile 5, 10, METATILE_MauvilleGym_RedBeamH2_On, 0
+	setmetatile 4, 11, METATILE_MauvilleGym_RedBeamH3_On, 1
+	setmetatile 5, 11, METATILE_MauvilleGym_RedBeamH4_On, 1
+	setmetatile 7, 10, METATILE_MauvilleGym_RedBeamH1_On, 0
+	setmetatile 8, 10, METATILE_MauvilleGym_RedBeamH2_On, 0
+	setmetatile 7, 11, METATILE_MauvilleGym_RedBeamH3_On, 1
+	setmetatile 8, 11, METATILE_MauvilleGym_RedBeamH4_On, 1
+	setmetatile 4, 13, METATILE_MauvilleGym_GreenBeamH1_Off, 0
+	setmetatile 5, 13, METATILE_MauvilleGym_GreenBeamH2_Off, 0
+	setmetatile 4, 14, METATILE_MauvilleGym_GreenBeamH3_Off, 0
+	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH4_Off, 0
+	setmetatile 1, 10, METATILE_MauvilleGym_GreenBeamH1_Off, 0
+	setmetatile 2, 10, METATILE_MauvilleGym_GreenBeamH2_Off, 0
+	setmetatile 1, 11, METATILE_MauvilleGym_GreenBeamH3_Off, 0
+	setmetatile 2, 11, METATILE_MauvilleGym_GreenBeamH4_Off, 0
+	setmetatile 6, 8, METATILE_MauvilleGym_PoleBottom_On, 1
+	setmetatile 6, 9, METATILE_MauvilleGym_FloorTile, 0
+	setmetatile 6, 10, METATILE_MauvilleGym_PoleTop_Off, 0
+	setmetatile 4, 6, METATILE_MauvilleGym_GreenBeamH1_Off, 0
+	setmetatile 5, 6, METATILE_MauvilleGym_GreenBeamH2_Off, 0
+	setmetatile 4, 7, METATILE_MauvilleGym_GreenBeamH3_Off, 0
+	setmetatile 5, 7, METATILE_MauvilleGym_GreenBeamH4_Off, 0
 	end
 
-MauvilleCity_Gym_EventScript_Switch1Pressed::
+MauvilleCity_Gym_EventScript_Switch1Pressed:: @ 820DEAF
 	setvar VAR_0x8004, 0
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
-MauvilleCity_Gym_EventScript_Switch2Pressed::
+MauvilleCity_Gym_EventScript_Switch2Pressed:: @ 820DEBD
 	setvar VAR_0x8004, 1
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
-MauvilleCity_Gym_EventScript_Switch3Pressed::
+MauvilleCity_Gym_EventScript_Switch3Pressed:: @ 820DECB
 	setvar VAR_0x8004, 2
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
-MauvilleCity_Gym_EventScript_Switch4Pressed::
+MauvilleCity_Gym_EventScript_Switch4Pressed:: @ 820DED9
 	setvar VAR_0x8004, 3
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
-MauvilleCity_Gym_EventScript_DeactivatePuzzle::
+MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 	special MauvilleGymDeactivatePuzzle
 	end
 
-MauvilleCity_Gym_EventScript_Wattson::
-	call EC_RequireMuseum
-	call EC_RequireWally
-	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, EmeraldChampions_Text_NeedTwoPokemon, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
-	call_if_unset FLAG_RECEIVED_WATTSON_MANECTITE, MauvilleCity_Gym_EventScript_GiveManectite
-	goto_if_unset FLAG_RECEIVED_HM_STRENGTH, MauvilleCity_Gym_EventScript_ReunionHandoff
-	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
-	goto_if_set FLAG_BADGE04_GET, MauvilleCity_Gym_EventScript_WattsonJourneyContinues
-	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MauvilleCity_Gym_EventScript_WattsonLavaridge
-	goto_if_set FLAG_MET_ARCHIE_METEOR_FALLS, MauvilleCity_Gym_EventScript_WattsonMtChimney
-	call MauvilleCity_Gym_EventScript_NextNorthernStop
+MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
+	goto_if_set FLAG_DAILY_REMATCH_WATTSON, MauvilleCity_Gym_EventScript_AlreadyRematched
+@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
+@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
+@ for bespoke campaign fights -- so post-game rematching a leader would start the
+@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
+@ one. The gate below is disabled so leaders fall through to normal post-battle
+@ dialogue. To re-enable once real rematch teams exist, restore this single line.
+@	goto_if_set FLAG_SYS_GAME_CLEAR, MauvilleCity_Gym_EventScript_WattsonRematch
+	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
+	goto_if_unset FLAG_RECEIVED_TM72, MauvilleCity_Gym_EventScript_GiveVoltSwitch2
+	compare VAR_NEW_MAUVILLE_STATE, 6
+	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
+	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_Gym_EventScript_WattsonMtChimney::
-	msgbox MauvilleCity_Gym_Text_WattsonMtChimney, MSGBOX_DEFAULT
-	release
-	end
-
-MauvilleCity_Gym_EventScript_WattsonLavaridge::
-	msgbox MauvilleCity_Gym_Text_WattsonLavaridge, MSGBOX_DEFAULT
-	release
-	end
-
-MauvilleCity_Gym_EventScript_WattsonDefeated::
+MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
-	buffermilestonetext FLAG_BADGE03_GET
 	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox MauvilleCity_Gym_Text_RegisteredRaichu, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	msgbox MauvilleCity_Gym_Text_ExplainTakeThis, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
-	completemilestone FLAG_BADGE03_GET
+	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
-	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
+	compare VAR_PETALBURG_GYM_STATE, 6
+	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 3
 	call Common_EventScript_SetGymTrainers
 	special MauvilleGymDeactivatePuzzle
 	special DrawWholeMapView
 	playse SE_UNLOCK
-	call MauvilleCity_Gym_EventScript_GiveManectite
+	call MauvilleCity_Gym_EventScript_GiveVoltSwitch
 	closemessage
 	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox MauvilleCity_Gym_Text_RegisteredWattson, MSGBOX_DEFAULT
+	waitfanfare
 	closemessage
 	delay 30
-	call MauvilleCity_Gym_EventScript_NextNorthernStop
+	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
 	release
 	end
 
-MauvilleCity_Gym_EventScript_GiveManectite::
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_Gym_EventScript_GiveManectiteNoRing
-	giveuniqueitem ITEM_MANECTITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox MauvilleCity_Gym_Text_ExplainManectite, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_WATTSON_MANECTITE
+MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
+	giveitem ITEM_RAICHUNITE_X
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM72
+	release
+	end
+
+MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
+	giveitem ITEM_RAICHUNITE_X
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_BagIsFull
+	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM72
 	return
 
-MauvilleCity_Gym_EventScript_GiveManectiteNoRing::
-	return
-
-MauvilleCity_Gym_EventScript_CompletedNewMauville::
+MauvilleCity_Gym_EventScript_CompletedNewMauville:: @ 820DFD4
 	msgbox MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_Gym_EventScript_WattsonRematch::
-	trainerbattle_rematch_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonPreRematch, MauvilleCity_Gym_Text_WattsonRematchDefeat, MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons
-	msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_AUTOCLOSE
+	message MauvilleCity_Gym_Text_WattsonChooseFormat
+	waitmessage
+	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
+	switch VAR_RESULT
+	case 0, MauvilleCity_Gym_EventScript_SetSingles
+	case 1, MauvilleCity_Gym_EventScript_SetDoubles
+	case 2, MauvilleCity_Gym_EventScript_Exit
+	case 127, MauvilleCity_Gym_EventScript_Exit
+	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_Switch1::
+MauvilleCity_Gym_EventScript_SetSingles::
+	msgbox MauvilleCity_Gym_Text_WattsonAllowLegends, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq MauvilleCity_Gym_EventScript_WattsonSinglesRematch
+	trainerbattle_no_intro TRAINER_WATTSON_3, MauvilleCity_Gym_Text_WattsonRematchDefeat
+	setflag FLAG_DAILY_REMATCH_WATTSON
+	releaseall
+	end
+
+MauvilleCity_Gym_EventScript_SetDoubles::
+	msgbox MauvilleCity_Gym_Text_WattsonAllowLegends, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq MauvilleCity_Gym_EventScript_WattsonDoublesRematch
+	trainerbattle_no_intro TRAINER_WATTSON_5, MauvilleCity_Gym_Text_WattsonRematchDefeat
+	setflag FLAG_DAILY_REMATCH_WATTSON
+	releaseall
+	end
+
+MauvilleCity_Gym_EventScript_WattsonSinglesRematch::
+	trainerbattle_no_intro TRAINER_WATTSON_2, MauvilleCity_Gym_Text_WattsonRematchDefeat
+	setflag FLAG_DAILY_REMATCH_WATTSON
+	releaseall
+	end
+
+MauvilleCity_Gym_EventScript_WattsonDoublesRematch::
+	trainerbattle_no_intro TRAINER_WATTSON_4, MauvilleCity_Gym_Text_WattsonRematchDefeat
+	setflag FLAG_DAILY_REMATCH_WATTSON
+	releaseall
+	end
+
+MauvilleCity_Gym_EventScript_AlreadyRematched::
+	msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_AUTOCLOSE
+	releaseall
+	end
+
+MauvilleCity_Gym_EventScript_Exit::
+	releaseall
+	end
+
+MauvilleCity_Gym_EventScript_Switch1:: @ 820DFF9
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	goto_if_eq VAR_MAUVILLE_GYM_STATE, 1, MauvilleCity_Gym_EventScript_SwitchDoNothing
+	compare VAR_MAUVILLE_GYM_STATE, 1
+	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 1
 	setvar VAR_0x8004, 0
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
-MauvilleCity_Gym_EventScript_Switch2::
+MauvilleCity_Gym_EventScript_Switch2:: @ 820E01E
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	goto_if_eq VAR_MAUVILLE_GYM_STATE, 2, MauvilleCity_Gym_EventScript_SwitchDoNothing
+	compare VAR_MAUVILLE_GYM_STATE, 2
+	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 2
 	setvar VAR_0x8004, 1
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
-MauvilleCity_Gym_EventScript_Switch3::
+MauvilleCity_Gym_EventScript_Switch3:: @ 820E043
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	goto_if_eq VAR_MAUVILLE_GYM_STATE, 3, MauvilleCity_Gym_EventScript_SwitchDoNothing
+	compare VAR_MAUVILLE_GYM_STATE, 3
+	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 3
 	setvar VAR_0x8004, 2
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
-MauvilleCity_Gym_EventScript_Switch4::
+MauvilleCity_Gym_EventScript_Switch4:: @ 820E068
 	lockall
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
-	goto_if_eq VAR_MAUVILLE_GYM_STATE, 4, MauvilleCity_Gym_EventScript_SwitchDoNothing
+	compare VAR_MAUVILLE_GYM_STATE, 4
+	goto_if_eq MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 4
 	setvar VAR_0x8004, 3
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
-MauvilleCity_Gym_EventScript_PressFloorSwitch::
+MauvilleCity_Gym_EventScript_PressFloorSwitch:: @ 820E08D
 	special MauvilleGymSetDefaultBarriers
 	special MauvilleGymPressSwitch
 	special DrawWholeMapView
@@ -193,42 +250,42 @@ MauvilleCity_Gym_EventScript_PressFloorSwitch::
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_SwitchDoNothing::
+MauvilleCity_Gym_EventScript_SwitchDoNothing:: @ 820E0AD
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_SetBarriersAltState::
+MauvilleCity_Gym_EventScript_SetBarriersAltState:: @ 820E0AF
 	setflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_ClearBarriersAltState::
+MauvilleCity_Gym_EventScript_ClearBarriersAltState:: @ 820E0B4
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_Kirk::
-	trainerbattle_double TRAINER_KIRK, MauvilleCity_Gym_Text_KirkIntro, MauvilleCity_Gym_Text_KirkDefeat, EmeraldChampions_Text_NeedTwoPokemon
+MauvilleCity_Gym_EventScript_Kirk:: @ 820E0B9
+	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_KirkIntro, MauvilleCity_Gym_Text_KirkDefeat
 	msgbox MauvilleCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_Shawn::
-	trainerbattle_double TRAINER_SHAWN, MauvilleCity_Gym_Text_ShawnIntro, MauvilleCity_Gym_Text_ShawnDefeat, EmeraldChampions_Text_NeedTwoPokemon
+MauvilleCity_Gym_EventScript_Shawn:: @ 820E0D0
+	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_ShawnIntro, MauvilleCity_Gym_Text_ShawnDefeat
 	msgbox MauvilleCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_Ben::
-	trainerbattle_double TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat, EmeraldChampions_Text_NeedTwoPokemon
+MauvilleCity_Gym_EventScript_Ben:: @ 820E0E7
+	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat
 	msgbox MauvilleCity_Gym_Text_BenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_Vivian::
-	trainerbattle_double TRAINER_VIVIAN, MauvilleCity_Gym_Text_VivianIntro, MauvilleCity_Gym_Text_VivianDefeat, EmeraldChampions_Text_NeedTwoPokemon
+MauvilleCity_Gym_EventScript_Vivian:: @ 820E0FE
+	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_VivianIntro, MauvilleCity_Gym_Text_VivianDefeat
 	msgbox MauvilleCity_Gym_Text_VivianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_Angelo::
-	trainerbattle_double TRAINER_ANGELO, MauvilleCity_Gym_Text_AngeloIntro, MauvilleCity_Gym_Text_AngeloDefeat, EmeraldChampions_Text_NeedTwoPokemon
+MauvilleCity_Gym_EventScript_Angelo:: @ 820E115
+	trainerbattle_single TRAINER_ANGELO, MauvilleCity_Gym_Text_AngeloIntro, MauvilleCity_Gym_Text_AngeloDefeat
 	msgbox MauvilleCity_Gym_Text_AngeloPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -236,7 +293,11 @@ MauvilleCity_Gym_EventScript_GymGuide::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_GymGuidePostVictory
+	goto_if_set FLAG_MAUVILLE_GYM_MOOMOOMILK, MauvilleCity_GymGuide_2
 	msgbox MauvilleCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
+	giveitem ITEM_MOOMOO_MILK, 12
+	setflag FLAG_MAUVILLE_GYM_MOOMOOMILK
+	msgbox MauvilleCity_Gym_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -245,244 +306,211 @@ MauvilleCity_Gym_EventScript_GymGuidePostVictory::
 	release
 	end
 
-MauvilleCity_Gym_EventScript_LeftGymStatue::
+MauvilleCity_GymGuide_2::
+	msgbox MauvilleCity_Gym_Text_GymGuideAdvice2, MSGBOX_DEFAULT
+	release
+	end
+
+MauvilleCity_Gym_EventScript_LeftGymStatue:: @ 820E14B
 	lockall
 	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_GymStatueCertified
 	goto MauvilleCity_Gym_EventScript_GymStatue
 	end
 
-MauvilleCity_Gym_EventScript_RightGymStatue::
+MauvilleCity_Gym_EventScript_RightGymStatue:: @ 820E15B
 	lockall
 	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_GymStatueCertified
 	goto MauvilleCity_Gym_EventScript_GymStatue
 	end
 
-MauvilleCity_Gym_EventScript_GymStatueCertified::
+MauvilleCity_Gym_EventScript_GymStatueCertified:: @ 820E16B
 	msgbox MauvilleCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
 	releaseall
 	end
 
-MauvilleCity_Gym_EventScript_GymStatue::
+MauvilleCity_Gym_EventScript_GymStatue:: @ 820E175
 	msgbox MauvilleCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
 	end
 
-MauvilleCity_Gym_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "WATTSON, the LEADER of MAUVILLE\n"
-	.string "GYM, uses ELECTRIC-type POKéMON.\p"
-	.string "If you challenge him with WATER-type\n"
-	.string "POKéMON, he'll zap them! Bzzt!\p"
+MauvilleCity_Gym_Text_GymGuideAdvice2:
+	.string "Wattson, the Leader of Mauville\n"
+	.string "Gym, uses Electric-type Pokémon.\p"
+	.string "He's prepared for Ground and Grass-Type\n"
+	.string "Pokémon, so you should have a backup\l"
+	.string "plan if you want to beat him!\p"
 	.string "And, he's put in switch-controlled\n"
-	.string "doors all over his GYM! Eccentric!\p"
+	.string "doors all over his Gym! Eccentric!\p"
 	.string "Hey, go for it!$"
 
-MauvilleCity_Gym_Text_GymGuidePostVictory:
+MauvilleCity_Gym_Text_GymGuideAdvice:
+	.string "Hey, how's it going, Champion-\n"
+	.string "bound {PLAYER}?\p"
+	.string "Please, take this Moomoo Milk to\n"
+	.string "help with your challenge!$"
+
+MauvilleCity_Gym_Text_GymGuidePostVictory: @ 820E283
 	.string "Whoa, you're electrifying!\n"
 	.string "You've powered the door open!$"
 
-MauvilleCity_Gym_Text_KirkIntro:
-	.string "PINCURCHIN floors the whole stage,\n"
-	.string "and EMOLGA turns bolts into speed.\p"
-	.string "Find the current's blind spot!$"
+MauvilleCity_Gym_Text_KirkIntro: @ 820E2BC
+	.string "My electric soul, it'll shatter your\n"
+	.string "dreams whole, whoa-yeahah!$"
 
-MauvilleCity_Gym_Text_KirkDefeat:
-	.string "You shut down my amplifier!$"
+MauvilleCity_Gym_Text_KirkDefeat: @ 820E2FC
+	.string "That was plugged in, amped up,\n"
+	.string "over-driven electric, man!$"
 
-MauvilleCity_Gym_Text_KirkPostBattle:
-	.string "ELECTRIC TERRAIN protects grounded\n"
-	.string "Pokémon from sleep.\p"
-	.string "A Flying Pokémon or an AIR BALLOON\n"
-	.string "changes which benefits apply.$"
+MauvilleCity_Gym_Text_KirkPostBattle: @ 820E336
+	.string "Pokémon and rock, it's all about heart,\n"
+	.string "whoa-yeah!$"
 
-MauvilleCity_Gym_Text_ShawnIntro:
-	.string "Some of my Pokémon float above\n"
-	.string "Ground attacks. Others use the\l"
-	.string "terrain beneath them.\p"
-	.string "Can you tell which answer fits\n"
-	.string "each pair?$"
+MauvilleCity_Gym_Text_ShawnIntro: @ 820E369
+	.string "I trained under Wattson!\n"
+	.string "There ain't no way I'll lose easily!$"
 
-MauvilleCity_Gym_Text_ShawnDefeat:
-	.string "You broke our live connection…$"
+MauvilleCity_Gym_Text_ShawnDefeat: @ 820E3A7
+	.string "Unplugged and turned off…$"
 
-MauvilleCity_Gym_Text_ShawnPostBattle:
-	.string "BELLIBOLT can set ELECTRIC TERRAIN\n"
-	.string "for RAICHU's SURGE SURFER.\p"
-	.string "MEGA AMPHAROS brings a different\n"
-	.string "pace and a Dragon typing.$"
+MauvilleCity_Gym_Text_ShawnPostBattle: @ 820E3C1
+	.string "Wattson, our Gym Leader, has been\n"
+	.string "around for a long, long time.\p"
+	.string "He was battling even before your\n"
+	.string "daddy was born, that tough coot.$"
 
-MauvilleCity_Gym_Text_BenIntro:
-	.string "Send electricity, and LANTURN\n"
-	.string "drinks it. Send water, and\l"
-	.string "HELIOLISK drinks that.\p"
-	.string "What else can your partners do?$"
+MauvilleCity_Gym_Text_BenIntro: @ 820E443
+	.string "This Gym's got puzzles!\n"
+	.string "Isn't it fun?$"
 
-MauvilleCity_Gym_Text_BenDefeat:
-	.string "Our circuit couldn't hold!$"
+MauvilleCity_Gym_Text_BenDefeat: @ 820E469
+	.string "It's no fun to lose…$"
 
-MauvilleCity_Gym_Text_BenPostBattle:
-	.string "CHARJABUG powers special attacks\n"
-	.string "with BATTERY. DISCHARGE can even\l"
-	.string "heal LANTURN.\p"
-	.string "That same move is not safe beside\n"
-	.string "every partner.$"
+MauvilleCity_Gym_Text_BenPostBattle: @ 820E47E
+	.string "Wattson says he likes setting up\n"
+	.string "little traps with switches.$"
 
-MauvilleCity_Gym_Text_VivianIntro:
-	.string "PLUSLE and MINUN amplify each other\n"
-	.string "just by standing side by side.\p"
-	.string "Split us, or lose to both!$"
+MauvilleCity_Gym_Text_VivianIntro: @ 820E4BB
+	.string "With my charm and my Pokémon's moves,\n"
+	.string "you'll be shocked!$"
 
-MauvilleCity_Gym_Text_VivianDefeat:
-	.string "Our partnership wasn't enough!$"
+MauvilleCity_Gym_Text_VivianDefeat: @ 820E4F4
+	.string "I'm shocked by your power!$"
 
-MauvilleCity_Gym_Text_VivianPostBattle:
-	.string "Do not press ELECTRIC attacks into the\n"
-	.string "Ability that wants to absorb them.$"
+MauvilleCity_Gym_Text_VivianPostBattle: @ 820E50F
+	.string "I've heard that Mauville was founded\n"
+	.string "by Wattson.\p"
+	.string "He was a Trainer long before we\n"
+	.string "became Trainers.\l"
+	.string "He must know all sorts of things!$"
 
-MauvilleCity_Gym_Text_AngeloIntro:
-	.string "JOLTIK makes THUNDER more\n"
-	.string "reliable, and TOXTRICITY turns\l"
-	.string "sound into power.\p"
-	.string "We are ready to take our chances!$"
+MauvilleCity_Gym_Text_AngeloIntro: @ 820E593
+	.string "I love shiny things!$"
 
-MauvilleCity_Gym_Text_AngeloDefeat:
-	.string "Our relay lost its charge…$"
+MauvilleCity_Gym_Text_AngeloDefeat: @ 820E5A8
+	.string "Oh…\n"
+	.string "My eyes are frazzled…$"
 
-MauvilleCity_Gym_Text_AngeloPostBattle:
-	.string "WATTREL can set TAILWIND, and\n"
-	.string "JOLTIK can slow opponents with\l"
-	.string "ELECTROWEB.\p"
-	.string "Those moves change speed in\n"
-	.string "different ways.$"
+MauvilleCity_Gym_Text_AngeloPostBattle: @ 820E5C2
+	.string "Mauville Gym's Wattson has a shiny\n"
+	.string "forehead. It makes me happy!$"
 
-MauvilleCity_Gym_Text_WattsonIntro:
-	.string "Wahahahah! I am WATTSON!\p"
-	.string "ELECTRODE sends the current.\n"
-	.string "ELECTIVIRE turns it into speed.\p"
-	.string "I know how my partners work\n"
-	.string "together. Show me what yours can\l"
-	.string "do!$"
+MauvilleCity_Gym_Text_WattsonIntro: @ 820E602
+	.string "I've given up on my plans to convert\n"
+	.string "the city, I have.\p"
+	.string "And so, I put my time into making\n"
+	.string "door traps in my Gym.\p"
+	.string "Oh? Now, what are you doing here?\p"
+	.string "What's that? You say you've gotten\n"
+	.string "past all my rigged doors?\p"
+	.string "Wahahahah!\n"
+	.string "Now, that is amusing!\p"
+	.string "Then, I, Wattson, the Leader of\n"
+	.string "Mauville Gym, shall electrify you!$"
 
-MauvilleCity_Gym_Text_WattsonDefeat:
-	.string "Wahahah! What a battle!\p"
-	.string "You have earned the DYNAMO BADGE!$"
+MauvilleCity_Gym_Text_WattsonDefeat: @ 820E734
+	.string "Wahahahah!\n"
+	.string "Fine, I lost!\p"
+	.string "You ended up giving me a thrill!\n"
+	.string "Take this Badge!$"
 
-MauvilleCity_Gym_Text_ReceivedDynamoBadge:
-	.string "{PLAYER} received the DYNAMO BADGE\n"
-	.string "from WATTSON.$"
+MauvilleCity_Gym_Text_ReceivedDynamoBadge: @ 820E77F
+	.string "{PLAYER} received the Dynamo Badge\n"
+	.string "from Wattson.$"
 
-MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
-	.string "The DYNAMO BADGE lets your LEVELER\n"
-	.string "train a party up to Lv. {STR_VAR_1}.\p"
-	.string "It also enables ROCK SMASH outside\n"
-	.string "of battle.\p"
+MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis: @ 820E7AA
+	.string "With the Dynamo Badge, Pokémon can\n"
+	.string "use Rock Smash out of battle.\p"
+	.string "And, I'll register my Raichu in your\n"
+	.string "PokéNav. It'll help you by smashing\l"
+	.string "any rocks in your way.\p"
+	.string "… … … … … …$"
+
+MauvilleCity_Gym_Text_ExplainTakeThis:
 	.string "Hmm…\n"
 	.string "You should take this, too!$"
-MauvilleCity_Gym_Text_ExplainManectite:
-	.string "Manectite lets Manectric Mega Evolve.\n"
-	.string "Let it hold the stone in battle.$"
 
-MauvilleCity_Gym_Text_WattsonPostBattle:
-	.string "Head north on ROUTE 111. My crew\n"
-	.string "will let you through with that BADGE.\p"
-	.string "Turn west onto ROUTE 112 and go\n"
-	.string "through FIERY PATH to ROUTE 113.\p"
-	.string "Follow it west to FALLARBOR TOWN.\n"
-	.string "Ask there about the trouble at\p"
-	.string "METEOR FALLS, down ROUTE 114.$"
+MauvilleCity_Gym_Text_ExplainVoltSwitch: @ 820E844
+	.string "That TM72 there contains Volt Switch.\p"
+	.string "It's a move where your Pokémon attacks\n"
+	.string "the opponent and then rushes back to\l"
+	.string "switch places with a party Pokémon.\p"
+	.string "… … … … … …$"
 
-MauvilleCity_Gym_Text_WattsonMtChimney:
-	.string "Head north on ROUTE 111, then west\n"
-	.string "onto ROUTE 112.\p"
-	.string "Take the cable car up MT. CHIMNEY.\n"
-	.string "Stop TEAM MAGMA at the crater.$"
+MauvilleCity_Gym_Text_RegisteredWattson: @ 820E8B5
+	.string "Registered Gym Leader Wattson\n"
+	.string "in the PokéNav.$"
 
-MauvilleCity_Gym_Text_WattsonLavaridge:
-	.string "Take ROUTE 112's cable car up\n"
-	.string "MT. CHIMNEY, then descend JAGGED PASS.\p"
-	.string "That leads to LAVARIDGE TOWN.\n"
-	.string "Challenge FLANNERY at the GYM.$"
+MauvilleCity_Gym_Text_RegisteredRaichu: @ 820E8B5
+	.string "Registered Wattson's Raichu\n"
+	.string "in the PokéNav.$"
 
-MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
+MauvilleCity_Gym_Text_WattsonPostBattle: @ 820E8E3
+	.string "I swell with optimism, seeing a promising\n"
+	.string "young Trainer like you!$"
+
+MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor: @ 820E925
 	.string "Wahahahah!\n"
 	.string "Go forth and endeavor, youngster!$"
 
-MauvilleCity_Gym_Text_GymStatue:
-	.string "MAUVILLE CITY POKéMON GYM$"
+MauvilleCity_Gym_Text_GymStatue: @ 820E952
+	.string "Mauville City Pokémon Gym$"
 
-MauvilleCity_Gym_Text_GymStatueCertified:
-	.string "MAUVILLE CITY POKéMON GYM\p"
-	.string "WATTSON'S CERTIFIED TRAINERS:\n"
+MauvilleCity_Gym_Text_GymStatueCertified: @ 820E96C
+	.string "Mauville City Pokémon Gym\p"
+	.string "Wattson's Certified Trainers:\n"
 	.string "{PLAYER}$"
 
-MauvilleCity_Gym_Text_WattsonPreRematch:
-	.string "WATTSON: Ah-ha! Here at last!\n"
-	.string "I know what you want.\l"
-	.string "You want to battle my POKéMON!\p"
-	.string "Wahahahaha!\p"
+MauvilleCity_Gym_Text_WattsonPreRematch: @ 820E9A7
 	.string "I'll make sparks fly from you!\n"
 	.string "Don't say I didn't warn you!$"
 
-MauvilleCity_Gym_Text_WattsonRematchDefeat:
+MauvilleCity_Gym_Text_WattsonRematchDefeat: @ 820EA42
 	.string "Oof…\n"
 	.string "Our batteries ran dry…$"
 
-MauvilleCity_Gym_Text_WattsonPostRematch:
-	.string "WATTSON: We'll have to recharge our\n"
+MauvilleCity_Gym_Text_WattsonPostRematch: @ 820EA5E
+	.string "Wattson: We'll have to recharge our\n"
 	.string "batteries again.\p"
 	.string "When we're fully charged up, we'll\n"
 	.string "gladly accept your challenge.\p"
 	.string "So, come back again sometime,\n"
 	.string "won't you?$"
 
-MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons:
-	.string "WATTSON: Ah-ha! Here at last!\n"
-	.string "I know what you want.\l"
-	.string "You want to battle my POKéMON!\p"
-	.string "Wahahahaha!\p"
-	.string "Oops! Wait!\n"
-	.string "You've only one POKéMON with you!\p"
+MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons: @ 820EAFD
+	.string "Wattson: Oops! Wait!\n"
+	.string "You've only one Pokémon with you!\p"
 	.string "Come see me with two or more\n"
-	.string "POKéMON, all right?$"
+	.string "Pokémon, all right?$"
 
-MauvilleCity_Gym_EventScript_WattsonJourneyContinues::
-	msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_DEFAULT
-	release
-	end
+MauvilleCity_Gym_Text_WattsonChooseFormat:
+	.string "Wattson: Ah-ha! Here at last!\n"
+	.string "I know what you want.\l"
+	.string "You want to battle my Pokémon!\p"
+	.string "Wahahahaha!\p"
+	.string "I'll let you decide the rules -\n"
+	.string "Singles or Doubles?$"
 
-MauvilleCity_Gym_EventScript_ReunionHandoff::
-	call MauvilleCity_Gym_EventScript_NextNorthernStop
-	release
-	end
-
-MauvilleCity_Gym_EventScript_NextNorthernStop::
-	goto_if_unset FLAG_RECEIVED_HM_ROCK_SMASH, MauvilleCity_Gym_EventScript_FindRockSmash
-	goto_if_unset FLAG_RECEIVED_HM_STRENGTH, MauvilleCity_Gym_EventScript_FindStrength
-	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
-	return
-MauvilleCity_Gym_EventScript_FindRockSmash::
-	msgbox MauvilleCity_Gym_Text_FindRockSmash, MSGBOX_DEFAULT
-	return
-MauvilleCity_Gym_EventScript_FindStrength::
-	msgbox MauvilleCity_Gym_Text_FindStrength, MSGBOX_DEFAULT
-	return
-
-MauvilleCity_Gym_Text_FindRockSmash:
-	.string "Visit the ROCK SMASH man in\n"
-	.string "MAUVILLE's southeastern house.\p"
-	.string "His license and your DYNAMO BADGE\n"
-	.string "let a compatible partner break rocks.\p"
-	.string "Galarian FARFETCH'D on ROUTE 117\n"
-	.string "can help. Head west to VERDANTURF and\l"
-	.string "reunite the couple in RUSTURF TUNNEL.$"
-MauvilleCity_Gym_Text_FindStrength:
-	.string "Head west along ROUTE 117 to\n"
-	.string "VERDANTURF. Enter RUSTURF TUNNEL.\p"
-	.string "Use ROCK SMASH on the rocks\n"
-	.string "separating the couple there.\p"
-	.string "Galarian FARFETCH'D can do it.\n"
-	.string "Find one in ROUTE 117's grass.\p"
-	.string "The tunneler will give you STRENGTH.\p"
-	.string "Then return to MAUVILLE and head\n"
-	.string "north on ROUTE 111.$"
+MauvilleCity_Gym_Text_WattsonAllowLegends:
+	.string "Think you can handle my Legendary\n"
+	.string "Pokémon?\p"
+	.string "They're shockingly strong!$"

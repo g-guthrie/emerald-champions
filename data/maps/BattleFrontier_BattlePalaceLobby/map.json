@@ -3,7 +3,6 @@
   "name": "BattleFrontier_BattlePalaceLobby",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY",
   "music": "MUS_B_PALACE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -26,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit",
+      "script": "BattleFrontier_BattlePalaceLobby_EventScript_SinglesAttendant",
       "flag": "0"
     },
     {
@@ -92,7 +91,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit",
+      "script": "BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant",
       "flag": "0"
     }
   ],
@@ -102,14 +101,21 @@
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     },
     {
       "x": 13,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [],

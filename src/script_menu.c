@@ -62,6 +62,10 @@ static void CreatePCMultichoice(void);
 static void CreateLilycoveSSTidalMultichoice(void);
 static bool8 IsPicboxClosed(void);
 static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowId, u8 multichoiceId);
+static void CreateStartMenuForPokenavTutorial(void);
+
+// Pokedex, Pokemon, Bag, PokeNav, <player>, Save, Option, Exit
+#define START_MENU_TUTORIAL_ENTRY_COUNT 8
 static void MultichoiceDynamicEventDebug_OnInit(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventDebug_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventDebug_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
@@ -552,6 +556,51 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                 ScriptContext_Enable();
             }
         }
+    }
+}
+
+// The Rustboro PokeNav tutorial's fake Start menu. The player has to pick the
+// PokeNav entry (index 3); every other index sends the script back round.
+//
+// Drawn by hand rather than through the multichoice list table because the
+// fifth row is the player's own name. MULTI_NONE is passed as the multichoice
+// id: nothing indexes sMultichoiceLists[] on this path, and
+// DrawLinkServicesMultichoiceMenu only reacts to the link-service ids, so no
+// new table entry is needed.
+//
+// The donor used the all-caps gText_MenuOption* strings, which were deleted
+// from this tree along with Match Call. These are the strings this engine's
+// own Start menu uses (src/start_menu.c), so the fake menu now matches the
+// real one instead of resurrecting dead duplicates.
+static void CreateStartMenuForPokenavTutorial(void)
+{
+    u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
+
+    SetStandardWindowBorderStyle(windowId, FALSE);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuPokedex, 8, 9, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuPokemon, 8, 25, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuBag, 8, 41, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuPokenav, 8, 57, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gSaveBlock2Ptr->playerName, 8, 73, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuSave, 8, 89, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOption, 8, 105, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuExit, 8, 121, TEXT_SKIP_DRAW, NULL);
+    InitMenuNormal(windowId, FONT_NORMAL, 0, 9, 16, START_MENU_TUTORIAL_ENTRY_COUNT, 0);
+    InitMultichoiceNoWrap(FALSE, START_MENU_TUTORIAL_ENTRY_COUNT, windowId, MULTI_NONE);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+bool16 ScriptMenu_CreateStartMenuForPokenavTutorial(void)
+{
+    if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
+    {
+        return FALSE;
+    }
+    else
+    {
+        gSpecialVar_Result = 0xFF;
+        CreateStartMenuForPokenavTutorial();
+        return TRUE;
     }
 }
 

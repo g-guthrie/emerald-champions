@@ -575,6 +575,22 @@ void CB2_ChooseBerry(void)
     GoToBagMenu(ITEMMENULOCATION_BERRY_TREE, POCKET_BERRIES, CB2_ReturnToFieldContinueScript);
 }
 
+// Choosing any item, for the Devon Corp fossil regenerator (Bag_ChooseItem).
+// ITEMMENULOCATION_BERRY_TREE is the "pick one and hand it straight back to
+// the script" context: its context func is Task_FadeAndCloseBagMenu, so
+// selecting stores the item in gSpecialVar_ItemId and closes, and cancelling
+// stores ITEM_NONE. It also locks pocket switching, which is what we want.
+void CB2_ChooseItem(void)
+{
+    GoToBagMenu(ITEMMENULOCATION_BERRY_TREE, POCKET_ITEMS, CB2_ReturnToFieldContinueScript);
+}
+
+// As above but locked to the Poke Balls pocket, for the Ball Swapper.
+void CB2_ChoosePokeBall(void)
+{
+    GoToBagMenu(ITEMMENULOCATION_BERRY_TREE, POCKET_POKE_BALLS, CB2_ReturnToFieldContinueScript);
+}
+
 // Choosing mulch to use
 void CB2_ChooseMulch(void)
 {

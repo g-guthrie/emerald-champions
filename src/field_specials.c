@@ -22,6 +22,7 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
+#include "frontier_util.h"
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -670,13 +671,70 @@ u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
 }
 #endif
 
+// The catalogue's flat index for an item, or -1 if it is not vendor stock.
+// Berries are deliberately outside this: the harvest economy governs them.
+static s32 EmeraldChampionsBattleItemIndex(enum Item item)
+{
+    s32 index = 0;
+
+    if (item == ITEM_NONE)
+        return -1;
+    for (u32 category = 0; category < EC_BATTLE_ITEM_CATEGORY_BERRIES; category++)
+    {
+        for (u32 i = 0; sEmeraldChampionsBattleItemCategories[category][i] != ITEM_NONE; i++, index++)
+        {
+            if (sEmeraldChampionsBattleItemCategories[category][i] == item)
+                return index;
+        }
+    }
+    return -1;
+}
+
+bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item)
+{
+    s32 index = EmeraldChampionsBattleItemIndex(item);
+
+    // Anything outside the catalogue is not gated at all.
+    if (index < 0)
+        return TRUE;
+    return (gSaveBlock1Ptr->battleItemsUnlocked[index / 8] >> (index % 8)) & 1;
+}
+
+// Called the first time the player actually holds one. The world teaches you
+// an item exists; the vendor then keeps you supplied with as many as a team
+// needs. Wild Pokemon carry nothing, so a catch can never unlock anything.
+void EmeraldChampions_UnlockBattleItem(enum Item item)
+{
+    s32 index = EmeraldChampionsBattleItemIndex(item);
+
+    if (index >= 0)
+        gSaveBlock1Ptr->battleItemsUnlocked[index / 8] |= 1u << (index % 8);
+}
+
+static u16 sEmeraldChampionsUnlockedStock[EC_BATTLE_ITEM_MAX_CATEGORY + 1];
+
 void OpenEmeraldChampionsBattleItemMart(void)
 {
     u16 category = gSpecialVar_0x8004;
+    const u16 *stock;
+    u32 out = 0;
 
     if (category >= ARRAY_COUNT(sEmeraldChampionsBattleItemCategories))
         return;
-    CreateFreePokemartMenu(sEmeraldChampionsBattleItemCategories[category]);
+    stock = sEmeraldChampionsBattleItemCategories[category];
+    if (category == EC_BATTLE_ITEM_CATEGORY_BERRIES)
+    {
+        CreatePokemartMenu(stock);
+        ScriptContext_Stop();
+        return;
+    }
+    for (u32 i = 0; stock[i] != ITEM_NONE && out < ARRAY_COUNT(sEmeraldChampionsUnlockedStock) - 1; i++)
+    {
+        if (IsEmeraldChampionsBattleItemUnlocked(stock[i]))
+            sEmeraldChampionsUnlockedStock[out++] = stock[i];
+    }
+    sEmeraldChampionsUnlockedStock[out] = ITEM_NONE;
+    CreatePokemartMenu(sEmeraldChampionsUnlockedStock);
     ScriptContext_Stop();
 }
 
@@ -3388,6 +3446,48 @@ void ShowScrollableMultichoice(void)
         task->tScrollOffset = min(min(gSpecialVar_0x8005, 10), task->tNumItems - task->tMaxItemsOnScreen);
         task->tSelectedRow = min(gSpecialVar_0x8005, 10) - task->tScrollOffset;
         break;
+    case SCROLL_MULTI_GAMECORNER_POKEMON:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 13; // Twelve prize Pokemon plus Exit.
+        task->tLeft = 19;
+        task->tTop = 1;
+        task->tWidth = 12;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_GAMECORNER_GRASS_STARTERS:
+    case SCROLL_MULTI_GAMECORNER_FIRE_STARTERS:
+    case SCROLL_MULTI_GAMECORNER_WATER_STARTERS:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 8; // Seven starters plus Exit.
+        task->tLeft = 19;
+        task->tTop = 1;
+        task->tWidth = 12;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
+        task->tNumItems = 8; // Five flutes, two furnishings, Exit.
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 9;
+        task->tHeight = 10;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_HIDDEN_POWER:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 17; // Sixteen Hidden Power types plus Exit.
+        task->tLeft = 20;
+        task->tTop = 1;
+        task->tWidth = 14;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
     default:
         gSpecialVar_Result = MULTI_B_PRESSED;
         DestroyTask(taskId);
@@ -3617,7 +3717,87 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Alola"),
         COMPOUND_STRING("Galar"),
         COMPOUND_STRING("Paldea"),
-    }
+    },
+    [SCROLL_MULTI_GAMECORNER_POKEMON] =
+    {
+        COMPOUND_STRING("Porygon{CLEAR_TO 72}5000 Coins"),
+        COMPOUND_STRING("Munchlax{CLEAR_TO 72}4000 Coins"),
+        COMPOUND_STRING("Vulpix{CLEAR_TO 72}2000 Coins"),
+        COMPOUND_STRING("Sandshrew{CLEAR_TO 72}2000 Coins"),
+        COMPOUND_STRING("Rattata{CLEAR_TO 72}1000 Coins"),
+        COMPOUND_STRING("Meowth{CLEAR_TO 72}2000 Coins"),
+        COMPOUND_STRING("Grimer{CLEAR_TO 72}2000 Coins"),
+        COMPOUND_STRING("Diglett{CLEAR_TO 72}2000 Coins"),
+        COMPOUND_STRING("Geodude{CLEAR_TO 72}2000 Coins"),
+        COMPOUND_STRING("Raichu{CLEAR_TO 72}4500 Coins"),
+        COMPOUND_STRING("Marowak{CLEAR_TO 72}4500 Coins"),
+        COMPOUND_STRING("Exeggutor{CLEAR_TO 72}4500 Coins"),
+        gText_Exit,
+    },
+    [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
+    {
+        COMPOUND_STRING("Bulbasaur{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Chikorita{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Treecko{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Turtwig{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Snivy{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Chespin{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Rowlet{CLEAR_TO 72}2500 Coins"),
+        gText_Exit,
+    },
+    [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
+    {
+        COMPOUND_STRING("Charmander{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Cyndaquil{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Torchic{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Chimchar{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Tepig{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Fennekin{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Litten{CLEAR_TO 72}2500 Coins"),
+        gText_Exit,
+    },
+    [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
+    {
+        COMPOUND_STRING("Squirtle{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Totodile{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Mudkip{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Piplup{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Oshawott{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Froakie{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Popplio{CLEAR_TO 72}2500 Coins"),
+        gText_Exit,
+    },
+    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
+    {
+        COMPOUND_STRING("Blue Flute"),
+        COMPOUND_STRING("Yellow Flute"),
+        COMPOUND_STRING("Red Flute"),
+        COMPOUND_STRING("White Flute"),
+        COMPOUND_STRING("Black Flute"),
+        COMPOUND_STRING("Pretty Chair"),
+        COMPOUND_STRING("Pretty Desk"),
+        gText_Exit,
+    },
+    [SCROLL_MULTI_HIDDEN_POWER] =
+    {
+        COMPOUND_STRING("Fighting"),
+        COMPOUND_STRING("Flying"),
+        COMPOUND_STRING("Poison"),
+        COMPOUND_STRING("Ground"),
+        COMPOUND_STRING("Rock"),
+        COMPOUND_STRING("Bug"),
+        COMPOUND_STRING("Ghost"),
+        COMPOUND_STRING("Steel"),
+        COMPOUND_STRING("Fire"),
+        COMPOUND_STRING("Water"),
+        COMPOUND_STRING("Grass"),
+        COMPOUND_STRING("Electric"),
+        COMPOUND_STRING("Psychic"),
+        COMPOUND_STRING("Ice"),
+        COMPOUND_STRING("Dragon"),
+        COMPOUND_STRING("Dark"),
+        gText_Exit,
+    },
 };
 
 static void Task_ShowScrollableMultichoice(u8 taskId)
@@ -7041,10 +7221,8 @@ bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item)
 {
     if (item == ITEM_NONE)
         return FALSE;
-    for (u32 category = 0; category < ARRAY_COUNT(sEmeraldChampionsBattleItemCategories); category++)
-        for (u32 i = 0; sEmeraldChampionsBattleItemCategories[category][i] != ITEM_NONE; i++)
-            if (sEmeraldChampionsBattleItemCategories[category][i] == item)
-                return TRUE;
+    // Battle items are bought now, so they sell back like anything else. Only
+    // what the game still hands over for nothing is barred from the counter.
     for (u32 i = 0; sEmeraldChampionsEvolutionItems[i] != ITEM_NONE; i++)
         if (sEmeraldChampionsEvolutionItems[i] == item)
             return TRUE;
@@ -7131,4 +7309,298 @@ void ConvertEmeraldChampionsFiniteReward(void)
         CopyItemName(item, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, bonus, STR_CONV_MODE_LEFT_ALIGN, 4);
     }
+}
+
+// ---------------------------------------------------------------------------
+// Specials the restored Inclement Emerald map scripts call.
+//
+// These were reimplemented against this engine's APIs rather than copied from
+// the 2021 donor; the drift each one had to cross is noted above it.
+// ---------------------------------------------------------------------------
+
+// Wally's catching tutorial in Petalburg Gym lends the player a Zigzagoon for
+// one scripted battle (the script brackets it with SavePlayerParty /
+// LoadPlayerParty). LoadWallyZigzagoon above already builds exactly that mon
+// with this engine's CreateRandomMon signature, so this is simply the name the
+// Inclement script asks for. The donor built it with the old eight-argument
+// CreateMon(..., fixedIV, hasFixedPersonality, ..., otIdType, fixedOtId).
+void PutZigzagoonInPlayerParty(void)
+{
+    LoadWallyZigzagoon();
+}
+
+// Every fossil the Devon Corp regenerator accepts, and the only fossils
+// FossilToSpecies can name.
+//
+// The donor tested a contiguous range, ITEM_ARMOR_FOSSIL..ITEM_CLAW_FOSSIL.
+// That range is INVERTED in this engine - here CLAW is 169 and ARMOR is 170 -
+// so porting the test verbatim would have matched nothing at all and quietly
+// broken the whole fossil questline. Listing the fossils explicitly keeps the
+// accepted set in step with the switch below and survives further reordering.
+static const enum Item sRevivableFossils[] =
+{
+    ITEM_HELIX_FOSSIL,
+    ITEM_DOME_FOSSIL,
+    ITEM_OLD_AMBER,
+    ITEM_ROOT_FOSSIL,
+    ITEM_CLAW_FOSSIL,
+    ITEM_ARMOR_FOSSIL,
+    ITEM_SKULL_FOSSIL,
+    ITEM_COVER_FOSSIL,
+    ITEM_PLUME_FOSSIL,
+    ITEM_JAW_FOSSIL,
+    ITEM_SAIL_FOSSIL,
+};
+
+// Checks whether the item the player just picked with Bag_ChooseItem is a fossil.
+bool8 IsItemFossil(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sRevivableFossils); i++)
+    {
+        if (gSpecialVar_ItemId == sRevivableFossils[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// Checks the player's bag for any fossil, so the scientist only offers to
+// revive one when the player actually has something to hand over.
+bool8 DoesPlayerHaveFossil(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sRevivableFossils); i++)
+    {
+        if (CheckBagHasItem(sRevivableFossils[i], 1))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// Reads a fossil item from gSpecialVar_0x8008 and stores the species it
+// revives into into gSpecialVar_0x8006. Anything that is not a fossil leaves
+// gSpecialVar_0x8006 untouched, which the Devon Corp script relies on.
+void FossilToSpecies(void)
+{
+    enum Species species = SPECIES_NONE;
+
+    switch (gSpecialVar_0x8008)
+    {
+    case ITEM_HELIX_FOSSIL: species = SPECIES_OMANYTE;    break;
+    case ITEM_DOME_FOSSIL:  species = SPECIES_KABUTO;     break;
+    case ITEM_OLD_AMBER:    species = SPECIES_AERODACTYL; break;
+    case ITEM_ROOT_FOSSIL:  species = SPECIES_LILEEP;     break;
+    case ITEM_CLAW_FOSSIL:  species = SPECIES_ANORITH;    break;
+    case ITEM_ARMOR_FOSSIL: species = SPECIES_SHIELDON;   break;
+    case ITEM_SKULL_FOSSIL: species = SPECIES_CRANIDOS;   break;
+    case ITEM_COVER_FOSSIL: species = SPECIES_TIRTOUGA;   break;
+    case ITEM_PLUME_FOSSIL: species = SPECIES_ARCHEN;     break;
+    case ITEM_SAIL_FOSSIL:  species = SPECIES_AMAURA;     break;
+    case ITEM_JAW_FOSSIL:   species = SPECIES_TYRUNT;     break;
+    }
+
+    if (species != SPECIES_NONE)
+        gSpecialVar_0x8006 = species;
+}
+
+// Lets the player pick an item out of the Items pocket. The chosen item lands
+// in gSpecialVar_ItemId (VAR_ITEM_ID), and cancelling stores ITEM_NONE.
+// Deferred through a callback exactly as the donor did, so the bag allocates
+// on the frame after the script's fadescreen rather than during it.
+void Bag_ChooseItem(void)
+{
+    SetMainCallback2(CB2_ChooseItem);
+}
+
+// As above, but restricted to the Poke Balls pocket. Used by the Ball Swapper.
+void Bag_ChoosePokeBall(void)
+{
+    SetMainCallback2(CB2_ChoosePokeBall);
+}
+
+// Repaints the chosen party mon's Poke Ball.
+// gSpecialVar_0x8004: party slot, gSpecialVar_0x8005: the ball to change to.
+void ChangePokeBall(void)
+{
+    u16 pokeball = gSpecialVar_0x8005;
+
+    SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_POKEBALL, &pokeball);
+}
+
+// Changes the chosen party mon's species, used by the Rotom, Deoxys and Eevee
+// form scripts. gSpecialVar_0x8004: party slot, gSpecialVar_0x8005: species.
+//
+// The donor also wrote MON_DATA_SPECIES2. That field is MON_DATA_SPECIES_OR_EGG
+// here and is derived, not stored - SetMonData ignores writes to it (see the
+// empty case in src/pokemon.c) - so writing MON_DATA_SPECIES alone is both
+// necessary and sufficient.
+void ChangeMonSpecies(void)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    u16 newSpecies = gSpecialVar_0x8005;
+
+    SetMonData(mon, MON_DATA_SPECIES, &newSpecies);
+    CalculateMonStats(mon);
+}
+
+// Checks the party for up to three species at once, for the Regi legendary
+// events. 0x8004/0x8005/0x8006 hold the species to look for and 0x8007 holds
+// how many of them must be present.
+bool8 CheckSpeciesInParty(void)
+{
+    u16 wanted[3] = { gSpecialVar_0x8004, gSpecialVar_0x8005, gSpecialVar_0x8006 };
+    u32 numSpecies = gSpecialVar_0x8007;
+    u32 speciesFound = 0;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
+
+        // An empty slot also reads back as SPECIES_NONE, so never let an
+        // unused wanted[] entry be satisfied by an empty party slot.
+        if (species == SPECIES_NONE)
+            continue;
+
+        for (u32 j = 0; j < ARRAY_COUNT(wanted); j++)
+        {
+            if (wanted[j] != SPECIES_NONE && species == wanted[j])
+                speciesFound++;
+        }
+    }
+
+    return speciesFound == numSpecies;
+}
+
+// Route 116: has the Black Glasses hidden item already been picked up?
+bool8 FoundBlackGlasses(void)
+{
+    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES);
+}
+
+// Route 118: TRUE only when every party slot holds a Magikarp.
+bool8 CheckMagikarpBattle(void)
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_MAGIKARP)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+// Picks the level for gift mons and static encounters that can still evolve:
+// three below the player's best, floored at 1, left in gSpecialVar_0x800A.
+void GetStaticEncounterLevel(void)
+{
+    s32 level = GetHighestLevelInPlayerParty() - 3;
+
+    if (level < 1)
+        level = 1;
+
+    gSpecialVar_0x800A = level;
+}
+
+// Birth Island, Faraway Island, Navel Rock and Southern Island set up their
+// legendary with this. Upstream renamed it to CreateEnemyEventMon when
+// "event legal" became "modern fateful encounter"; the restored scripts still
+// use the old name, so keep the alias rather than renaming upstream API.
+void CreateEventLegalEnemyMon(void)
+{
+    CreateEnemyEventMon();
+}
+
+// Rolls the Day Care's gift egg: a random species from the table, plus one of
+// that species' three egg moves. 0x8004 takes the species, 0x8005 the move.
+void SetSpeciesAndEggMove(void)
+{
+    static const u16 sEggMoves[][4] =
+    {
+        {SPECIES_BAGON,     MOVE_DRAGON_DANCE,  MOVE_DRAGON_RUSH,   MOVE_THRASH},
+        {SPECIES_SHUPPET,   MOVE_GUNK_SHOT,     MOVE_DESTINY_BOND,  MOVE_PHANTOM_FORCE},
+        {SPECIES_SNEASEL,   MOVE_FAKE_OUT,      MOVE_ICICLE_CRASH,  MOVE_BITE},
+        {SPECIES_CORPHISH,  MOVE_DRAGON_DANCE,  MOVE_AQUA_JET,      MOVE_BODY_SLAM},
+        {SPECIES_MARILL,    MOVE_BELLY_DRUM,    MOVE_AQUA_JET,      MOVE_PERISH_SONG},
+        {SPECIES_EMOLGA,    MOVE_ROOST,         MOVE_AIR_SLASH,     MOVE_BATON_PASS},
+        {SPECIES_GOOMY,     MOVE_ACID_ARMOR,    MOVE_POISON_TAIL,   MOVE_IRON_TAIL},
+        {SPECIES_RHYHORN,   MOVE_CRUNCH,        MOVE_METAL_BURST,   MOVE_DRAGON_RUSH},
+        {SPECIES_GASTLY,    MOVE_PERISH_SONG,   MOVE_DISABLE,       MOVE_CLEAR_SMOG},
+        {SPECIES_PICHU,     MOVE_SURF,          MOVE_FLY,           MOVE_EXTREME_SPEED},
+        {SPECIES_WIMPOD,    MOVE_SPIKES,        MOVE_AQUA_JET,      MOVE_METAL_CLAW},
+        {SPECIES_PONYTA,    MOVE_HYPNOSIS,      MOVE_MORNING_SUN,   MOVE_HIGH_HORSEPOWER},
+        {SPECIES_SNOVER,    MOVE_LEECH_SEED,    MOVE_AVALANCHE,     MOVE_SEED_BOMB},
+        {SPECIES_FERROSEED, MOVE_SPIKES,        MOVE_LEECH_SEED,    MOVE_ACID_SPRAY},
+        {SPECIES_TAILLOW,   MOVE_BOOMBURST,     MOVE_BOOMBURST,     MOVE_BOOMBURST},
+        {SPECIES_DRATINI,   MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED},
+        {SPECIES_FEEBAS,    MOVE_HAZE,          MOVE_HYPNOSIS,      MOVE_MIRROR_COAT},
+    };
+
+    u32 randSpecies = Random() % ARRAY_COUNT(sEggMoves);
+    u32 randEggMove = (Random() % 3) + 1; // columns 1..3 are the egg moves
+
+    gSpecialVar_0x8004 = sEggMoves[randSpecies][0];
+    gSpecialVar_0x8005 = sEggMoves[randSpecies][randEggMove];
+}
+
+// Teaches the gift egg the move SetSpeciesAndEggMove rolled.
+// gSpecialVar_0x8005: the move, gSpecialVar_0x8006: the egg's party slot.
+// MonKnowsMove(mon, MOVE_NONE) is the engine's idiom for "has a free slot".
+void SetGiftEggMove(void)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8006];
+    enum Move move = gSpecialVar_0x8005;
+
+    if (MonKnowsMove(mon, MOVE_NONE))
+        GiveMoveToMon(mon, move);
+    else
+        SetMonMoveSlot(mon, move, 0);
+}
+
+// Slateport's Effort Ribbon judge.
+bool8 LeadMonHasEffortRibbon(void)
+{
+    return GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON);
+}
+
+void GiveLeadMonEffortRibbon(void)
+{
+    bool8 ribbonSet = TRUE;
+    struct Pokemon *leadMon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
+
+    IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
+    FlagSet(FLAG_SYS_RIBBON_GET);
+    SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
+    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
+        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
+}
+
+// Pacifidlog: TRUE when the player is carrying a Diancie at max friendship.
+bool8 GetDiancieFriendshipScore(void)
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+
+        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_DIANCIE
+         && GetMonData(mon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// Museum paintings are won by taking a Master-rank Contest, and Contests are
+// gone from this engine along with gSaveBlock1Ptr->contestWinners, so the
+// player genuinely cannot own one. Zero is the true count, not a placeholder:
+// the Lilycove curator falls through to his "wish to fill the exhibit" line
+// and the museum sign takes its no-paintings branch, which is exactly what
+// vanilla does for a player who has not won a contest.
+u8 CountPlayerMuseumPaintings(void)
+{
+    return 0;
+}
+
+// Match Call is deleted from this engine (there is no src/match_call.c, no
+// gRematchTable registration flags and no PokeNav call list), so no trainer
+// can ever be registered and FALSE is the honest answer. The scripts that ask
+// then offer to register, which register_matchcall already no-ops.
+bool32 IsTrainerRegistered(void)
+{
+    return FALSE;
 }

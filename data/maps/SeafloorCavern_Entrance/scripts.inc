@@ -1,76 +1,95 @@
-SeafloorCavern_Entrance_MapScripts::
+.set LOCALID_GRUNT, 1
+
+SeafloorCavern_Entrance_MapScripts:: @ 823446E
 	map_script MAP_SCRIPT_ON_RESUME, SeafloorCavern_Entrance_OnResume
 	.byte 0
 
-SeafloorCavern_Entrance_OnResume:
-	setdivewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 6, 5
-	setescapewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 6, 5
+SeafloorCavern_Entrance_OnResume: @ 8234474
+	setdivewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 255, 6, 5
+	setescapewarp MAP_UNDERWATER_SEAFLOOR_CAVERN, 255, 6, 5
 	end
 
-SeafloorCavern_Entrance_EventScript_Grunt::
+SeafloorCavern_Entrance_EventScript_Grunt:: @ 8234485
 	lockall
-	goto_if_eq VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 1, SeafloorCavern_Entrance_EventScript_GruntSpeechShort
+	compare VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 1
+	goto_if_eq SeafloorCavern_Entrance_EventScript_GruntSpeechShort
 	waitse
 	playse SE_PIN
-	applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_ExclamationMark
+	applymovement LOCALID_GRUNT, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_Delay48
+	applymovement LOCALID_GRUNT, Common_Movement_Delay48
 	waitmovement 0
 	delay 20
-	call_if_eq VAR_FACING, DIR_WEST, SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest
-	call_if_eq VAR_FACING, DIR_EAST, SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast
-	call_if_eq VAR_FACING, DIR_NORTH, SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth
+	compare VAR_FACING, DIR_WEST
+	call_if_eq SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest
+	compare VAR_FACING, DIR_EAST
+	call_if_eq SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth
 	delay 30
 	setvar VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 1
-	copyobjectxytoperm LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT
+	copyobjectxytoperm LOCALID_GRUNT
 	msgbox SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
-SeafloorCavern_Entrance_EventScript_GruntSpeechShort::
-	call_if_eq VAR_FACING, DIR_WEST, SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest
-	call_if_eq VAR_FACING, DIR_EAST, SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast
-	call_if_eq VAR_FACING, DIR_NORTH, SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth
+SeafloorCavern_Entrance_EventScript_GruntSpeechShort:: @ 82344ED
+	compare VAR_FACING, DIR_WEST
+	call_if_eq SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest
+	compare VAR_FACING, DIR_EAST
+	call_if_eq SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth
 	msgbox SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	releaseall
 	end
 
-SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast::
-	applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterLeft
+SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast:: @ 8234523
+	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest::
-	applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterRight
+SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest:: @ 823452E
+	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
-SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth::
-	applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterDown
+SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth:: @ 8234539
+	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
-SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep:
-	.string "Hey! I remember your face!\n"
-	.string "You just keep turning up!\p"
-	.string "You followed our sub down here?\n"
-	.string "Don't tell me you swam!\p"
-	.string "ARCHIE says the ocean needs room\n"
-	.string "to breathe. We came all this way\l"
-	.string "to give it that chance.\p"
-	.string "You won't stop us now. There are\n"
-	.string "plenty of us waiting inside!$"
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep: @ 8234544
+	.string "Hey!\n"
+	.string "I remember your face!\p"
+	.string "If you're here, it must mean that\n"
+	.string "you're about to mess with us again!\p"
+	.string "A punk like you, do you really think\n"
+	.string "you can take on Team Aqua?\p"
+	.string "I'd say you're too early by about\n"
+	.string "a trillion years!\p"
+	.string "You're a perfect fit for the likes of\n"
+	.string "Team Magma!\p"
+	.string "Speaking of Team Magma, I hear they\n"
+	.string "were spotted near Mossdeep.\p"
+	.string "That bunch of goons, they sure don't\n"
+	.string "look good near the sea!$"
 
-SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort:
-	.string "ARCHIE says the ocean needs room\n"
-	.string "to breathe. We came all this way\l"
-	.string "to give it that chance.\p"
-	.string "Go on, then. The others inside\n"
-	.string "will send you back to the surface!$"
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort: @ 82346C8
+	.string "A punk like you, do you really think\n"
+	.string "you can take on Team Aqua?\p"
+	.string "I'd say you're too early by about\n"
+	.string "a trillion years!\p"
+	.string "You're a perfect fit for the likes of\n"
+	.string "Team Magma!\p"
+	.string "Speaking of Team Magma, I hear they\n"
+	.string "were spotted near Mossdeep.\p"
+	.string "That bunch of goons, they sure don't\n"
+	.string "look good near the sea!$"
 

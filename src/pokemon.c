@@ -5349,6 +5349,11 @@ static inline bool32 CanFirstMonBoostHeldItemRarity(void)
 
 void SetWildMonHeldItem(void)
 {
+    // Emerald Champions: a wild Pokemon carries nothing. Held items are found,
+    // bought or earned, so catching one is never a way to acquire one.
+    if (!B_EC_WILD_HELD_ITEMS)
+        return;
+
     u16 rnd;
     enum Species species;
     u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;

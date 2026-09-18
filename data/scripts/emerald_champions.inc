@@ -49,17 +49,13 @@ EmeraldChampions_EventScript_TrainingType:
 EmeraldChampions_EventScript_OtherServices:
 	message EmeraldChampions_Text_OtherServicesPrompt
 	waitmessage
-	dynmultipush EmeraldChampions_Text_ForgetMove, 0
-	dynmultipush EmeraldChampions_Text_RenamePokemon, 1
-	dynmultipush EmeraldChampions_Text_Bonding, 2
-	dynmultipush EmeraldChampions_Text_Back, 3
-	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultipush EmeraldChampions_Text_Bonding, 0
+	dynmultipush EmeraldChampions_Text_Back, 1
+	dynmultistack 30, 1, FALSE, 2, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
-	case 0, EmeraldChampions_EventScript_OpenMoveDeleter
-	case 1, EmeraldChampions_EventScript_OpenNameRater
-	case 2, EmeraldChampions_EventScript_SpecialistBonding
-	case 3, EmeraldChampions_EventScript_MoveTutorMain
+	case 0, EmeraldChampions_EventScript_SpecialistBonding
+	case 1, EmeraldChampions_EventScript_MoveTutorMain
 	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorMain
 
 EmeraldChampions_EventScript_OpenMoveRelearner:
@@ -96,79 +92,6 @@ EmeraldChampions_EventScript_MoveRelearnerNoMoves:
 	msgbox MoveRelearner_Text_CantTeachMoveToPkmn, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_MoveRelearnerChooseMon
 
-EmeraldChampions_EventScript_OpenMoveDeleter:
-	msgbox EmeraldChampions_Text_SpecialistForgetMove, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_OtherServices
-
-EmeraldChampions_EventScript_MoveDeleterChooseMon:
-	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT
-	special ChoosePartyMon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_OtherServices
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_MoveDeleterEgg
-	special GetNumMovesSelectedMonHas
-	goto_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_MoveDeleterOneMove
-	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
-	fadescreen FADE_TO_BLACK
-	special MoveDeleterChooseMoveToForget
-	fadescreen FADE_FROM_BLACK
-	goto_if_eq VAR_0x8005, MAX_MON_MOVES, EmeraldChampions_EventScript_MoveDeleterChooseMon
-	special BufferMoveDeleterNicknameAndMove
-	msgbox LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_MoveDeleterChooseMon
-	special MoveDeleterForgetMove
-	playfanfare MUS_MOVE_DELETED
-	waitfanfare
-	msgbox LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove, MSGBOX_DEFAULT
-	msgbox EmeraldChampions_Text_ForgetAnotherMove, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_MoveDeleterChooseMon
-	goto EmeraldChampions_EventScript_OtherServices
-
-EmeraldChampions_EventScript_MoveDeleterEgg:
-	msgbox LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_MoveDeleterChooseMon
-
-EmeraldChampions_EventScript_MoveDeleterOneMove:
-	special BufferMoveDeleterNicknameAndMove
-	msgbox LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_MoveDeleterChooseMon
-
-EmeraldChampions_EventScript_OpenNameRater:
-EmeraldChampions_EventScript_NameRaterChooseMon:
-	msgbox SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname, MSGBOX_DEFAULT
-	special ChoosePartyMon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_OtherServices
-	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	goto_if_eq VAR_RESULT, SPECIES_EGG, EmeraldChampions_EventScript_NameRaterEgg
-	special BufferMonNickname
-	special IsMonOTIDNotPlayers
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_NameRaterNotPlayerOT
-	specialvar VAR_RESULT, MonOTNameNotPlayer
-	special BufferMonNickname
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_NameRaterNotPlayerOT
-	msgbox SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_OtherServices
-	msgbox SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe, MSGBOX_DEFAULT
-	call Common_EventScript_NameReceivedPartyMon
-	specialvar VAR_RESULT, TryPutNameRaterShowOnTheAir
-	special BufferMonNickname
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_NameRaterChanged
-	msgbox SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_OtherServices
-
-EmeraldChampions_EventScript_NameRaterEgg:
-	msgbox SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_NameRaterChooseMon
-
-EmeraldChampions_EventScript_NameRaterNotPlayerOT:
-	msgbox SlateportCity_NameRatersHouse_Text_MagnificentName, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_NameRaterChooseMon
-
-EmeraldChampions_EventScript_NameRaterChanged:
-	msgbox SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName, MSGBOX_DEFAULT
-	msgbox EmeraldChampions_Text_RenameAnotherPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_NameRaterChooseMon
-	goto EmeraldChampions_EventScript_OtherServices
 
 Common_EventScript_EmeraldChampionsEvEditor::
 	lockall
@@ -407,8 +330,20 @@ Common_EventScript_EmeraldChampionsBattleVendor::
 	setvar VAR_0x8008, 0
 	setvar VAR_0x8009, 0
 	checkitem ITEM_BERRY_POUCH
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorStarterKit
 	additem ITEM_BERRY_POUCH
+
+@ The five held items a competitive set cannot function without are handed over
+@ once, free. Everything else on his shelves is bought.
+EmeraldChampions_EventScript_BattleVendorStarterKit:
+	goto_if_set FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS, EmeraldChampions_EventScript_BattleVendorMain
+	setflag FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS
+	additem ITEM_CHOICE_BAND
+	additem ITEM_CHOICE_SPECS
+	additem ITEM_CHOICE_SCARF
+	additem ITEM_FOCUS_SASH
+	additem ITEM_EVIOLITE
+	msgbox EmeraldChampions_Text_BattleVendorStarterKit, MSGBOX_DEFAULT
 
 EmeraldChampions_EventScript_BattleVendorMain:
 	@ Let the prior native list window finish clearing before another menu can
@@ -479,6 +414,14 @@ EmeraldChampions_EventScript_BattleVendorExit:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
+
+EmeraldChampions_Text_BattleVendorStarterKit:
+	.string "Before you shop, take these.\p"
+	.string "A CHOICE BAND, CHOICE SPECS and\n"
+	.string "CHOICE SCARF, a FOCUS SASH and\l"
+	.string "an EVIOLITE.\p"
+	.string "No set works without one of them.\n"
+	.string "The rest you buy like anyone else.$"
 
 EmeraldChampions_Text_BattleVendorWelcome:
 	.string "Competitive held items are free here.\p"
@@ -556,12 +499,6 @@ EmeraldChampions_Text_OtherServices:
 
 EmeraldChampions_Text_OtherServicesPrompt:
 	.string "What else can I help with?$"
-
-EmeraldChampions_Text_ForgetMove:
-	.string "Forget a Move$"
-
-EmeraldChampions_Text_RenamePokemon:
-	.string "Rename Pokémon$"
 
 EmeraldChampions_Text_Exit:
 	.string "Exit$"
@@ -641,12 +578,6 @@ EmeraldChampions_Text_BattleSetMissing:
 EmeraldChampions_Text_BattleSetSpecialItem:
 	.string "I won't discard that special item.\p"
 	.string "Remove it before changing sets.$"
-
-EmeraldChampions_Text_ForgetAnotherMove:
-	.string "Should another move be forgotten?$"
-
-EmeraldChampions_Text_RenameAnotherPokemon:
-	.string "Rename another Pokémon?$"
 
 EmeraldChampions_Text_MoveTutorGoodbye:
 	.string "Come back whenever you want to\n"
@@ -769,11 +700,6 @@ EmeraldChampions_Text_ChangeAnotherNature:
 
 EmeraldChampions_Text_NatureEgg:
 	.string "An Egg's Nature can't be changed.$"
-
-EmeraldChampions_Text_SpecialistForgetMove:
-	.string "Forgetting a move clears a slot for\n"
-	.string "something your team needs more.\p"
-	.string "Shall I help a POKéMON forget one?$"
 
 @ Emerald Champions: the Repel Spray ran out of steps (see UpdateRepelCounter).
 EmeraldChampions_EventScript_RepelSprayWoreOff::
@@ -908,7 +834,7 @@ EmeraldChampions_EventScript_FormChooseMon:
 	goto EmeraldChampions_EventScript_FormPreview
 
 EmeraldChampions_EventScript_CostumeChooseMove:
-	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
+	msgbox EmeraldChampions_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
 	copyvar VAR_0x8004, VAR_0x800A
 	fadescreen FADE_TO_BLACK
 	special MoveDeleterChooseMoveToForget
@@ -1025,6 +951,8 @@ EmeraldChampions_Text_FormChooseMon:
 	.string "Which partner would you like to study?$"
 EmeraldChampions_Text_FormChooseTarget:
 	.string "Which appearance or form?$"
+EmeraldChampions_Text_WhichMoveShouldBeForgotten:
+	.string "Which move should be forgotten?$"
 EmeraldChampions_Text_ConfirmFormChange:
 	.string "Make this change?$"
 EmeraldChampions_Text_FormChanged:
@@ -1288,6 +1216,12 @@ EmeraldChampions_EventScript_NextIslandRuin::
 EmeraldChampions_EventScript_NextAncientRuin::
 	msgbox EmeraldChampions_Text_NextAncientRuin, MSGBOX_DEFAULT
 	return
+SealedChamber_InnerRoom_Text_ResearchPending:
+	.string "The marks describe three records:\n"
+	.string "the DESERT safeguards, CASTFORM's\l"
+	.string "weather, and STERN's seabed scan.\p"
+	.string "Complete those research reports\n"
+	.string "to read the builders' message.$"
 EmeraldChampions_Text_NextDesertRuin:
 	.string "Next, read the DESERT RUINS\n"
 	.string "account in ROUTE 111's desert.\l"

@@ -173,3 +173,61 @@ BattleFrontier_BattleTowerLobby_Text_NoStoryToFile:
 	.string "The CIRCUIT keeps its own record.$"
 
 
+
+@ ---------------------------------------------------------------------------
+@ Inclement Emerald Lilycove Contest Lobby helpers, restored verbatim because
+@ data/maps/LilycoveCity_ContestLobby/scripts.inc calls
+@ LilycoveCity_ContestLobby_EventScript_TryShowContestReporter (on transition)
+@ and LilycoveCity_ContestLobby_EventScript_SetPlayerGfx (contest entry).
+@
+@ TryShowContestReporter and its two tails come from the donor's
+@ data/scripts/interview.inc. SetPlayerGfx and its two tails come from the
+@ donor's data/maps/ContestHall/scripts.inc, which has no counterpart in this
+@ engine (there is no data/maps/ContestHall here), so they are homed in this
+@ file rather than in the map script.
+@
+@ Note: the special InterviewBefore below is passed
+@ TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE, a TV show this engine no longer
+@ implements. InterviewBefore clears VAR_RESULT to FALSE and ignores unhandled
+@ show types, so the call is inert: the duplicate-broadcast check simply never
+@ suppresses the reporter. Kept verbatim rather than rewritten.
+@ ---------------------------------------------------------------------------
+
+LilycoveCity_ContestLobby_EventScript_TryShowContestReporter::
+	compare VAR_CONTEST_HALL_STATE, 2
+	goto_if_ne LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
+	setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE
+	special InterviewBefore
+	compare VAR_RESULT, TRUE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
+	switch VAR_CONTEST_TYPE
+	case 0, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
+	case 2, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 1, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 3, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 4, LilycoveCity_ContestLobby_EventScript_ShowContestReporter
+	case 5, LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
+	end
+
+LilycoveCity_ContestLobby_EventScript_ShowContestReporter::
+	clearflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
+	return
+
+LilycoveCity_ContestLobby_EventScript_DontShowContestReporter::
+	return
+
+LilycoveCity_ContestLobby_EventScript_SetPlayerGfx:: @ 823BEB6
+	checkplayergender
+	compare VAR_RESULT, MALE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan
+	compare VAR_RESULT, FEMALE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay
+	return
+
+LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan:: @ 823BECE
+	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	return
+
+LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay:: @ 823BED4
+	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	return

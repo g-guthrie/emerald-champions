@@ -3,7 +3,6 @@
   "name": "BattleFrontier_BattleTowerBattleRoom",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM",
   "music": "MUS_B_TOWER",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -64,14 +63,14 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     },
     {
       "x": 6,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     }
   ],
   "coord_events": [],

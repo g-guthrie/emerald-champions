@@ -3,7 +3,6 @@
   "name": "MtPyre_Summit",
   "layout": "LAYOUT_MT_PYRE_SUMMIT",
   "music": "MUS_MT_PYRE_EXTERIOR",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_FOG_HORIZONTAL",
@@ -13,7 +12,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
@@ -29,7 +28,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_MT_PYRE_SUMMIT_ARCHIE",
+      "local_id": "LOCALID_MT_PYRE_SUMMIT_MAXIE",
       "graphics_id": "OBJ_EVENT_GFX_ARCHIE",
       "x": 23,
       "y": 6,
@@ -113,7 +112,6 @@
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     },
     {
-      "local_id": "LOCALID_MT_PYRE_SUMMIT_MAXIE",
       "graphics_id": "OBJ_EVENT_GFX_MAXIE",
       "x": 23,
       "y": 6,
@@ -135,9 +133,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_BEAST_BALL",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_MT_PYRE_SUMMIT_BEAST_BALL"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtPyre_Summit_EventScript_ItemTM61_WillOWisp",
+      "flag": "FLAG_ITEM_MT_PYRE_SUMMIT_TM61_WILLOWISP"
     },
     {
       "local_id": "LOCALID_EC_MATT_MT_PYRE",
@@ -148,8 +146,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "MtPyre_Summit_EventScript_Matt",
       "flag": "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA"
     }
@@ -160,21 +158,21 @@
       "y": 31,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_EXTERIOR",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 23,
       "y": 31,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_EXTERIOR",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     },
     {
       "x": 24,
       "y": 31,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_EXTERIOR",
-      "dest_warp_id": "1"
+      "dest_warp_id": 1
     }
   ],
   "coord_events": [
@@ -236,27 +234,19 @@
   "bg_events": [
     {
       "type": "hidden_item",
-      "x": 9,
-      "y": 25,
+      "x": 37,
+      "y": 7,
       "elevation": 0,
-      "item": "ITEM_DUSK_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_DUSK_BALL"
+      "item": "ITEM_SPOOKY_PLATE",
+      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_SPOOKY_PLATE"
     },
     {
       "type": "hidden_item",
-      "x": 37,
-      "y": 7,
+      "x": 9,
+      "y": 25,
       "elevation": 3,
-      "item": "ITEM_ULTRA_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_ULTRA_BALL"
-    },
-    {
-      "type": "sign",
-      "x": 23,
-      "y": 10,
-      "elevation": 3,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "MtPyre_Summit_EventScript_Darkrai"
+      "item": "ITEM_RARE_CANDY",
+      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_RARE_CANDY"
     }
   ]
 }
