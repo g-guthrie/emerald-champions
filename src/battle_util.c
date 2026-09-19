@@ -9199,23 +9199,13 @@ void SortBattlersBySpeed(enum BattlerId *battlers, bool32 slowToFast)
         currSpeed = speeds[i];
         j = i - 1;
 
-        if (slowToFast)
+        // Strict comparisons preserve the original order of equal-speed
+        // battlers in either direction; this helper must not roll speed ties.
+        while (j >= 0 && (slowToFast ? speeds[j] > currSpeed : speeds[j] < currSpeed))
         {
-            while (j >= 0 && speeds[j] > currSpeed)
-            {
-                battlers[j + 1] = battlers[j];
-                speeds[j + 1] = speeds[j];
-                j = j - 1;
-            }
-        }
-        else
-        {
-            while (j >= 0 && speeds[j] < currSpeed)
-            {
-                battlers[j + 1] = battlers[j];
-                speeds[j + 1] = speeds[j];
-                j = j - 1;
-            }
+            battlers[j + 1] = battlers[j];
+            speeds[j + 1] = speeds[j];
+            j--;
         }
 
         battlers[j + 1] = currBattler;

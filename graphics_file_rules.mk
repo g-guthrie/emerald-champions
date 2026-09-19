@@ -9,10 +9,25 @@ SLOTMACHINEGFXDIR := graphics/slot_machine
 PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
 TITLESCREENGFXDIR := graphics/title_screen
+JPCONTESTGFXDIR := graphics/contest/japanese
 
 types := none normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy stellar
 
 ### Miscellaneous ###
+
+# The contest tilemaps address these concatenated sheets, not standalone PNGs.
+$(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
+                                  $(JPCONTESTGFXDIR)/floor.4bpp \
+                                  $(JPCONTESTGFXDIR)/frame_2.4bpp \
+                                  $(JPCONTESTGFXDIR)/symbols.4bpp \
+                                  $(JPCONTESTGFXDIR)/meter.4bpp \
+                                  $(JPCONTESTGFXDIR)/letters.4bpp \
+                                  $(JPCONTESTGFXDIR)/numbers.4bpp
+	@cat $^ >$@
+
+$(JPCONTESTGFXDIR)/composite_2.4bpp: $(JPCONTESTGFXDIR)/interface.4bpp \
+                                  $(JPCONTESTGFXDIR)/audience.4bpp
+	@cat $^ >$@
 
 $(TITLESCREENGFXDIR)/pokemon_logo.gbapal: %.gbapal: %.pal
 	$(GFX) $< $@ -num_colors 224

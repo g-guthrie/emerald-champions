@@ -1,8 +1,18 @@
 # Current handoff — solo source cleanup
 
-The user explicitly authorized merging all current integration/fix work into main
-and continuing the file-by-file audit there. Complete and verify that merge/push
-before beginning new edits. This supersedes all earlier no-merge status notes.
+The user authorized merging the integration and current fixes into main. The
+integration landed at51bb2b2f68; continue solo source review on main. Do not resume
+the old subagents or campaign-playthrough approach. Verify the current GitHub
+Actions build rather than treating the historical commit as a release guarantee.
+
+A fresh CI checkout exposed missing recipes for two Japanese contest composite
+sheets. graphics_file_rules.mk now rebuilds them from tracked PNG sources. The
+regenerated sheets match the previous local graphics byte-for-byte.
+
+The battle_util.c pass has started: held-item restoration and EXP sharing were
+traced; duplicated ascending/descending speed-sort loops were consolidated.
+A native battle test verifies both orders, stable equal-speed ties and unchanged
+RNG state. This is a partial pass, not an exhaustive audit of that whole file.
 
 ## Current design
 
@@ -29,7 +39,7 @@ acceptance. See AGENTS.md and docs/GOAL.md.
 - HM/Leveler/XP changes built and verified with focused engine checks.
 - event_object_movement.c: see docs/OBJECT_MOVEMENT_AUDIT.md.
 - battle_script_commands.c: see docs/BATTLE_SCRIPT_AUDIT.md.
-- Next file: src/battle_util.c. Full source/coherence review remains unfinished.
+- Current file: src/battle_util.c. Full source/coherence review remains unfinished.
 
 Authored AI/team files are unchanged against pre-integration508775fad8. The rejected
 guard-forecast experiment was removed from active source and parked locally;

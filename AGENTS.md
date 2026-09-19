@@ -1,6 +1,6 @@
 # Current direction — September 19, 2026
 
-Work solo on `main` after completing the user-authorized integration merge. The user stopped the subagents
+Work solo on `main`; the user authorized and completed the integration merge. The user stopped the subagents
 and campaign playthrough. Do not resume them. Review the largest relevant game
 source files first and continue file by file. Prefer removing obsolete code,
 reusing established paths and fixing demonstrated integration defects. Avoid
