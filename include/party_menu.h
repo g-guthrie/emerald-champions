@@ -132,7 +132,6 @@ void ChooseMonForMoveRelearner(void);
 void BattlePyramidChooseMonHeldItems(void);
 void DoBattlePyramidMonsHaveHeldItem(void);
 void IsSelectedMonEgg(void);
-bool32 WouldPartyLoseSurfByReplacingMove(u32 partySlot, u32 moveSlot, enum Move newMove);
 void MoveDeleterForgetMove(void);
 void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);

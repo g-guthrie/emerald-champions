@@ -1470,9 +1470,8 @@ PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis: @ 820618A
 	.string "Dad: The Balance Badge lets you\n"
 	.string "Surf. Visit Wally's family next\l"
 	.string "door for the license.\p"
-	.string "Bring a compatible partner; Surf\n"
-	.string "does not need a battle move\l"
-	.string "slot.$"
+	.string "Then press A at the water's edge.\n"
+	.string "No special Pokémon is needed.$"
 
 PetalburgCity_Gym_Text_RegisteredExploud: @ 81FF517
 	.string "Registered Dad's Exploud\n"

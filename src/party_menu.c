@@ -308,7 +308,6 @@ static void HandleChooseMonSelection(u8, s8 *);
 static u16 PartyMenuButtonHandler(s8 *);
 static s8 *GetCurrentPartySlotPtr(void);
 static bool8 IsSelectedMonNotEgg(u8 *);
-static bool8 DoesSelectedMonKnowHM(u8 *);
 static void PartyMenuRemoveWindow(u8 *);
 static void CB2_SetUpExitToBattleScreen(void);
 static void Task_ClosePartyMenuAfterText(u8);
@@ -528,9 +527,8 @@ static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nabi
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_DigThroughWall[] = _("Use DIG to open a passage\nthrough this wall?");
-static const u8 sText_LevelerComplete[] = _("Party raised to Lv. {STR_VAR_1}.\nThe rest is earned in battle.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_LevelerComplete[] = _("Party raised to each Pokémon's cap.\nCurrent cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s EVs\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
-static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows an HM move.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
 
 // static const data
@@ -1648,13 +1646,6 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
                 ScheduleBgCopyTilemapToVram(2);
                 gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
             }
-            else if (DoesSelectedMonKnowHM((u8 *)slotPtr))
-            {
-                PlaySE(SE_FAILURE);
-                DisplayPartyMenuMessage(sText_CannotSendMonToBoxHM, FALSE);
-                ScheduleBgCopyTilemapToVram(2);
-                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-            }
             else
             {
                 PlaySE(SE_SELECT);
@@ -1683,18 +1674,7 @@ static bool8 IsSelectedMonNotEgg(u8 *slotPtr)
     return TRUE;
 }
 
-static bool8 DoesSelectedMonKnowHM(u8 *slotPtr)
-{
-    if (B_CATCH_SWAP_CHECK_HMS == FALSE)
-        return FALSE;
 
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (IsMoveHM(GetMonData(&gParties[B_TRAINER_PLAYER][*slotPtr], MON_DATA_MOVE1 + i)))
-            return TRUE;
-    }
-    return FALSE;
-}
 
 static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
 {
@@ -5992,7 +5972,7 @@ static void Task_ShowLevelerComplete(u8 taskId)
     if (gPaletteFade.active || IsPartyMenuTextPrinterActive())
         return;
 
-    ConvertIntToDecimalStringN(gStringVar1, min(GetPreviousLevelCap(), MAX_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, min(GetCurrentLevelCap(), MAX_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, sText_LevelerComplete);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
@@ -6630,23 +6610,7 @@ static bool32 PrepareEmeraldChampionsUnfusionMoves(u8 taskId)
     return changed;
 }
 
-static bool32 WouldUnfusionLoseSurf(u8 taskId)
-{
-    if (FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE)
-        return FALSE;
-    u32 slot = gTasks[taskId].firstFusionSlot;
-    u32 freeSlot = gPartiesCount[B_TRAINER_PLAYER];
-    struct Pokemon saved = gParties[B_TRAINER_PLAYER][slot];
-    struct Pokemon empty = gParties[B_TRAINER_PLAYER][freeSlot];
-    enum Species species = gTasks[taskId].fusionResult;
-    SetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES, &species);
-    ApplyEmeraldChampionsUnfusionMoves(&gParties[B_TRAINER_PLAYER][slot]);
-    gParties[B_TRAINER_PLAYER][freeSlot] = gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex];
-    bool32 losesSurf = FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE;
-    gParties[B_TRAINER_PLAYER][slot] = saved;
-    gParties[B_TRAINER_PLAYER][freeSlot] = empty;
-    return losesSurf;
-}
+
 
 static void Task_HandleEmeraldChampionsUnfusionConfirmation(u8 taskId)
 {
@@ -6675,14 +6639,7 @@ static void Task_ShowEmeraldChampionsUnfusionConfirmation(u8 taskId)
 static void TryConfirmEmeraldChampionsUnfusion(u8 taskId, TaskFunc callback)
 {
     bool32 changed = PrepareEmeraldChampionsUnfusionMoves(taskId);
-    if (WouldUnfusionLoseSurf(taskId))
-    {
-        gPartyMenuUseExitCallback = FALSE;
-        DisplayPartyMenuMessage(COMPOUND_STRING("Your party needs its Surf capability."), TRUE);
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = callback;
-    }
-    else if (changed)
+    if (changed)
     {
         SetWordTaskArg(taskId, tNextFunc, (u32)callback);
         DisplayPartyMenuMessage(gStringVar4, FALSE);
@@ -8565,18 +8522,7 @@ void IsSelectedMonEgg(void)
         gSpecialVar_Result = FALSE;
 }
 
-bool32 WouldPartyLoseSurfByReplacingMove(u32 partySlot, u32 moveSlot, enum Move newMove)
-{
-    if (partySlot >= PARTY_SIZE || moveSlot >= MAX_MON_MOVES
-        || FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE)
-        return FALSE;
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partySlot];
-    enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + moveSlot);
-    SetMonData(mon, MON_DATA_MOVE1 + moveSlot, &newMove);
-    bool32 losesSurf = FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE;
-    SetMonData(mon, MON_DATA_MOVE1 + moveSlot, &oldMove);
-    return losesSurf;
-}
+
 
 void CursorCb_MoveItemCallback(u8 taskId)
 {

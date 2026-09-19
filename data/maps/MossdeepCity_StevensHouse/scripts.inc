@@ -159,9 +159,9 @@ MossdeepCity_StevensHouse_Text_YouveEarnedHMDive: @ 8222936
 	.string "Steven: Thank you for\n"
 	.string "everything.\p"
 	.string "I authorize you to use Dive.\n"
-	.string "With the Mind Badge and a\l"
-	.string "compatible partner, you can\l"
-	.string "explore dark patches of water.$"
+	.string "With the Mind Badge, press A\l"
+	.string "over dark patches of water.\p"
+	.string "No special Pokémon is needed.$"
 
 MossdeepCity_StevensHouse_Text_ExplainDive: @ 8222A0E
 	.string "Steven: While you're using Surf, you\n"

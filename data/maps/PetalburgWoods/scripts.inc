@@ -91,9 +91,11 @@ PetalburgWoods_EventScript_DevonResearcherPostBattle::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox PetalburgWoods_Text_ThatWasAwfullyClose, MSGBOX_DEFAULT
-	giveitem ITEM_EXP_SHARE
+	setflag FLAG_EC_WOODS_GREAT_BALL_PENDING
+	giveitem ITEM_DUSK_BALL, 3
 	compare VAR_RESULT, FALSE
 	goto_if_eq PetalburgWoods_EventScript_BagFull
+	clearflag FLAG_EC_WOODS_GREAT_BALL_PENDING
 	goto PetalburgWoods_EventScript_DevonResearcherFinish
 	end
 
@@ -371,16 +373,12 @@ PetalburgWoods_Text_ThatWasAwfullyClose: @ 822E63D
 	.string "That was awfully close!\p"
 	.string "Thanks to you, he didn't rob me of\n"
 	.string "these important papers.\p"
-	.string "I know, I'll give you an Exp. Share\n"
-	.string "as my thanks!$"
+	.string "Healthy party members already share\n"
+	.string "battle experience automatically.\p"
+	.string "Take these three Dusk Balls as thanks!\n"
+	.string "They work best at night and in caves!$"
 
 PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro:
-	.string "A Pokémon holding that Exp. Share\n"
-	.string "will get 100% of the Exp. points from\l"
-	.string "battle, even if it didn't participate.\p"
-	.string "Normally they'd only get a quarter of\n"
-	.string "the Exp. points, so it's quite useful\l"
-	.string "for raising weak Pokémon!\p"
 	.string "Didn't that Team Aqua thug say\n"
 	.string "they were after something in\l"
 	.string "Rustboro, too?$"
@@ -390,8 +388,9 @@ PetalburgWoods_Text_ICantBeWastingTime: @ 822E712
 	.string "I can't be wasting time!$"
 
 PetalburgWoods_Text_YoureLoadedWithItems: @ 822E741
-	.string "You're loaded with items.\n"
-	.string "I can't give you this Exp. Share.$"
+	.string "Your Bag is full. A Pokémon Center\n"
+	.string "nurse will hold the three Dusk Balls\l"
+	.string "until you make room.$"
 
 PetalburgWoods_Text_GoBugPokemonTeam: @ 822E77D
 	.string "I caught a whole bunch of Pokémon!\p"
@@ -483,4 +482,3 @@ PetalburgWoods_Text_TrainerTipsPP: @ 822ED07
 	.string "make moves during battle.\p"
 	.string "If a Pokémon runs out of PP, it must be\n"
 	.string "taken to a Pokémon Center.$"
-

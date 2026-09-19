@@ -287,11 +287,10 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge: @ 8225598
 	.string "from Juan.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis: @ 82255BE
-	.string "The Rain Badge lets you climb\n"
-	.string "waterfalls with the Waterfall\l"
-	.string "license and a compatible\l"
-	.string "partner.\p"
-	.string "No battle move slot is needed.$"
+	.string "The Rain Badge and Waterfall\n"
+	.string "license let you climb waterfalls.\p"
+	.string "Press A at the falls. No special\n"
+	.string "Pokémon or move slot is needed.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredKabutops:
 	.string "Registered Juan's Kabutops\n"

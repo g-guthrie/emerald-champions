@@ -517,11 +517,12 @@ Route119_Text_MayDefeat: @ 81F4A98
 Route119_Text_MayPresentForYou: @ 81F4AF3
 	.string "May: But I had absolutely nothing to\n"
 	.string "worry about! Keep it up!\p"
-	.string "And, here! I have a present for you.$"
+	.string "I can authorize your Flight Beacon!$"
 
 Route119_Text_MayExplainFly:
-	.string "May: You should Fly home and visit\n"
-	.string "Littleroot for a change.\p"
+	.string "May: Once you earn the Feather Badge,\n"
+	.string "your Flight Beacon can take you home.\p"
+	.string "Visit Littleroot for a change!\p"
 	.string "I bet your mom's worried about you,\n"
 	.string "{PLAYER}{KUN}.\p"
 	.string "Well, let's meet again somewhere!$"
@@ -541,8 +542,9 @@ Route119_Text_BrendanDefeat: @ 81F4D24
 Route119_Text_BrendanIllGiveYouThis: @ 81F4D4B
 	.string "Brendan: I'd say you're good enough\n"
 	.string "to search for Pokémon anywhere.\p"
-	.string "Here, I'll give you this.\n"
-	.string "Try it out.$"
+	.string "I'll authorize your Flight Beacon.\p"
+	.string "Earn the Feather Badge, and you can\n"
+	.string "use it to revisit towns you know.$"
 
 Route119_Text_BrendanExplainFly: @ 81F4DB5
 	.string "Brendan: Anyway, I have to move along.$"

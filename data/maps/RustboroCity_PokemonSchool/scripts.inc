@@ -318,9 +318,9 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut: @ 82148C0
 	.string "The Cutter's house is west of\n"
 	.string "the Pokémon Center. Ask him for\l"
 	.string "a Cut license.\p"
-	.string "With the Stone Badge, a partner\n"
-	.string "that can learn Cut can clear\l"
-	.string "thin trees without knowing it.$"
+	.string "With the Stone Badge, you can\n"
+	.string "clear thin trees with any team.\l"
+	.string "Just approach one and press A!$"
 
 RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown: @ 8214A5F
 	.string "Scott: Hmm…\p"

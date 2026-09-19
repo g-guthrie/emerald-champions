@@ -1779,12 +1779,9 @@ SootopolisCity_Text_ThankYouForHelpAcceptThis: @ 81E7ACF
 SootopolisCity_Text_ExplainWaterfallGoToGym: @ 81E7B86
 	.string "You now have the Waterfall\n"
 	.string "license. Earn the Rain Badge\l"
-	.string "here in Sootopolis, then bring a\l"
-	.string "partner that can learn\l"
-	.string "Waterfall.\p"
-	.string "Approach a waterfall to climb\n"
-	.string "it. You do not need to teach the\l"
-	.string "move.$"
+	.string "here in Sootopolis.\p"
+	.string "Then press A at a waterfall\n"
+	.string "to climb it with any team.$"
 
 SootopolisCity_Text_DazzledByMentor: @ 81E7CBC
 	.string "Wallace: I'm sure that you will be\n"

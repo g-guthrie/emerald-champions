@@ -42,6 +42,14 @@ extern const struct FieldMoveUnlock gFieldMoveUnlocks[];
 u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck);
 bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move);
 
+static inline bool32 FieldMove_IsHM(enum FieldMove fieldMove)
+{
+    return fieldMove == FIELD_MOVE_CUT || fieldMove == FIELD_MOVE_FLASH
+        || fieldMove == FIELD_MOVE_ROCK_SMASH || fieldMove == FIELD_MOVE_STRENGTH
+        || fieldMove == FIELD_MOVE_SURF || fieldMove == FIELD_MOVE_FLY
+        || fieldMove == FIELD_MOVE_DIVE || fieldMove == FIELD_MOVE_WATERFALL;
+}
+
 static inline bool32 SetUpFieldMove(enum FieldMove fieldMove)
 {
     return gFieldMoveInfo[fieldMove].fieldMoveFunc();
@@ -78,5 +86,7 @@ static inline bool32 FieldMove_IsVisible(enum FieldMove fieldMove)
         return FALSE;
     return !gFieldMoveInfo[fieldMove].hideIfLocked || IsFieldMoveUnlocked(fieldMove);
 }
+
+void BufferFieldMoveUnlockRequirement(void);
 
 #endif //GUARD_FIELD_MOVE_H

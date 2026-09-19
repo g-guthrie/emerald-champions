@@ -507,10 +507,10 @@ RusturfTunnel_Text_YouShatteredBoulderTakeHM: @ 822D65C
 
 RusturfTunnel_Text_ExplainStrength: @ 822D6D2
 	.string "With the Heat Badge and this\n"
-	.string "license, a compatible partner\l"
-	.string "can push large boulders.\p"
-	.string "Strength does not need a battle\n"
-	.string "move slot.$"
+	.string "license, you can push large\l"
+	.string "boulders.\p"
+	.string "Press A by a boulder to use\n"
+	.string "Strength. Any party will do!$"
 
 RusturfTunnel_Text_WandaReunion: @ 822D745
 	.string "Wanda!\n"

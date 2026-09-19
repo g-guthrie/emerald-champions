@@ -2260,7 +2260,10 @@ static void Debug_CreateTrainerIcon(u8 taskId)
     gTasks[taskId].tSpriteId = CreateObjectGraphicsSpriteWithTag(graphicsId, SpriteCallbackDummy, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, DEBUG_ICON_TAG);
     StartSpriteAnim(&gSprites[gTasks[taskId].tSpriteId], ANIM_STD_GO_SOUTH);
     gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
-    gSprites[gTasks[taskId].tSpriteId].oam.paletteNum =  LoadObjectEventPaletteCopy(gSprites[gTasks[taskId].tSpriteId].template->paletteTag, DEBUG_ICON_TAG);
+    // Object graphics use a temporary template. Read the installed palette
+    // instead of dereferencing that descriptor after the constructor freed it.
+    u16 paletteTag = GetSpritePaletteTagByPaletteNum(gSprites[gTasks[taskId].tSpriteId].oam.paletteNum);
+    gSprites[gTasks[taskId].tSpriteId].oam.paletteNum = LoadObjectEventPaletteCopy(paletteTag, DEBUG_ICON_TAG);
 }
 
 static void DebugSelectionStep_UpdateMapTrainer(u8 taskId, u8 digits, u32 min, u32 max)

@@ -64,8 +64,6 @@ RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon: @ 8214E13
 RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor: @ 8214E81
 	.string "The cutter next door gave me a\n"
 	.string "Cut license.\p"
-	.string "With the Stone Badge, a\n"
-	.string "compatible partner can clear\l"
-	.string "thin trees without learning a\l"
-	.string "battle move.$"
+	.string "With the Stone Badge, I can\n"
+	.string "clear thin trees with any team!$"
 

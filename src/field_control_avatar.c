@@ -671,25 +671,27 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
 {
     if (MetatileBehavior_IsFastWater(metatileBehavior) == TRUE && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return EventScript_CurrentTooFast;
-    if (IsFieldMoveUnlocked(FIELD_MOVE_SURF) && IsPlayerFacingSurfableFishableWater() == TRUE
+    if (IsPlayerFacingSurfableFishableWater() == TRUE
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF)
-     )
+     && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
+        if (!IsFieldMoveUnlocked(FIELD_MOVE_SURF))
+            return EventScript_SurfLocked;
         if (PartyHasMonWithSurf() == TRUE)
             return EventScript_UseSurf;
         // Unlocked, but nobody in the party could learn Surf: say so.
-        if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-            return EventScript_NobodyCanSurf;
+        return EventScript_NobodyCanSurf;
     }
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_WATERFALL)
      )
     {
-        if (IsFieldMoveUnlocked(FIELD_MOVE_WATERFALL) && IsPlayerSurfingNorth() == TRUE)
-            return EventScript_UseWaterfall;
-        else
+        if (!IsPlayerSurfingNorth())
             return EventScript_CannotUseWaterfall;
+        if (!IsFieldMoveUnlocked(FIELD_MOVE_WATERFALL))
+            return EventScript_WaterfallLocked;
+        return EventScript_UseWaterfall;
     }
     return NULL;
 }
@@ -699,9 +701,10 @@ static bool32 TrySetupDiveDownScript(void)
     if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_DIVE))
         return FALSE;
 
-    if (IsFieldMoveUnlocked(FIELD_MOVE_DIVE) && TrySetDiveWarp() == 2)
+    if (TrySetDiveWarp() == 2)
     {
-        ScriptContext_SetupScript(EventScript_UseDive);
+        ScriptContext_SetupScript(IsFieldMoveUnlocked(FIELD_MOVE_DIVE)
+            ? EventScript_UseDive : EventScript_DiveLocked);
         return TRUE;
     }
     return FALSE;
@@ -712,9 +715,10 @@ static bool32 TrySetupDiveEmergeScript(void)
     if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_DIVE))
         return FALSE;
 
-    if (IsFieldMoveUnlocked(FIELD_MOVE_DIVE) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
+    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
-        ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
+        ScriptContext_SetupScript(IsFieldMoveUnlocked(FIELD_MOVE_DIVE)
+            ? EventScript_UseDiveUnderwater : EventScript_DiveLocked);
         return TRUE;
     }
     return FALSE;

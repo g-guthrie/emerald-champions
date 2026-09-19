@@ -19,7 +19,6 @@
 #include "reset_rtc_screen.h"
 #include "berry_fix_program.h"
 #include "sound.h"
-#include "sprite.h"
 #include "task.h"
 #include "scanline_effect.h"
 #include "gpu_regs.h"
@@ -69,8 +68,6 @@ static const u32 sTitleScreenRayquazaGfx[] = INCGFX_U32("graphics/title_screen/r
 static const u32 sTitleScreenRayquazaTilemap[] = INCGFX_U32("graphics/title_screen/rayquaza.bin", ".smolTM");
 static const u32 sTitleScreenLogoShineGfx[] = INCGFX_U32("graphics/title_screen/logo_shine.png", ".4bpp.smol");
 static const u32 sTitleScreenCloudsGfx[] = INCGFX_U32("graphics/title_screen/clouds.png", ".4bpp.smol");
-
-
 
 // Used to blend "Emerald Champions" as it passes over the Pokémon banner.
 // Also used by the intro to blend the Game Freak name/logo in and out as they appear and disappear

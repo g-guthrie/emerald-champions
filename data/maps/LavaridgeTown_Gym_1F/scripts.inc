@@ -404,9 +404,9 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge: @ 81FF32F
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis: @ 81FF359
 	.string "The Heat Badge lets you use\n"
 	.string "Strength. Get the license from\l"
-	.string "the grateful man in Rusturf\l"
-	.string "Tunnel, then bring a compatible\l"
-	.string "partner.\p"
+	.string "the grateful man in Rusturf Tunnel.\p"
+	.string "Then you can push boulders\n"
+	.string "with any team!\p"
 	.string "Take this Mega Stone, too!$"
 
 LavaridgeTown_Gym_1F_Text_TakeThis:

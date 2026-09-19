@@ -1,5 +1,7 @@
 #include "global.h"
 #include "caps.h"
+#include "braille_puzzles.h"
+#include "battle_util.h"
 #include "chooseboxmon.h"
 #include "sound.h"
 #include "task.h"
@@ -11,6 +13,8 @@
 #include "overworld.h"
 #include "constants/event_objects.h"
 #include "field_specials.h"
+#include "field_move.h"
+#include "string_util.h"
 #include "item.h"
 #include "money.h"
 #include "legendary_signs.h"
@@ -19,6 +23,35 @@
 #include "constants/vars.h"
 #include "pokemon.h"
 #include "test/test.h"
+
+TEST("Inclement integration: every HM uses badge and license without a party requirement")
+{
+    static const enum FieldMove moves[] = {FIELD_MOVE_CUT, FIELD_MOVE_FLASH, FIELD_MOVE_ROCK_SMASH,
+        FIELD_MOVE_STRENGTH, FIELD_MOVE_SURF, FIELD_MOVE_FLY, FIELD_MOVE_DIVE, FIELD_MOVE_WATERFALL};
+    static const u16 licenses[] = {FLAG_RECEIVED_HM_CUT, FLAG_RECEIVED_HM_FLASH, FLAG_RECEIVED_HM_ROCK_SMASH,
+        FLAG_RECEIVED_HM_STRENGTH, FLAG_RECEIVED_HM_SURF, FLAG_RECEIVED_HM_FLY, FLAG_RECEIVED_HM_DIVE, FLAG_RECEIVED_HM_WATERFALL};
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID);
+    for (u32 i = 0; i < ARRAY_COUNT(moves); i++)
+    {
+        u16 badge = FLAG_BADGE01_GET + gFieldMoveInfo[moves[i]].arg;
+        FlagClear(badge);
+        FlagClear(licenses[i]);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), PARTY_SIZE);
+        FlagSet(licenses[i]);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), PARTY_SIZE);
+        FlagSet(badge);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), 0);
+        // Boxing or replacing this party never removes a player unlock.
+        ZeroPlayerPartyMons();
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), 0);
+        CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID);
+        FlagClear(licenses[i]);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], FALSE), IS_FRLG ? 0 : PARTY_SIZE);
+        FlagClear(badge);
+    }
+    ZeroPlayerPartyMons();
+}
 
 TEST("Inclement integration: failed item delivery cannot unlock vendor stock")
 {
@@ -67,7 +100,7 @@ TEST("Inclement integration: opening held items retry without duplicate gifts")
     }
 }
 
-TEST("Inclement integration: Leveler stops at the previous cap on repeated use")
+TEST("Inclement integration: Leveler reaches the current cap and remains safe on repeated use")
 {
     struct Pokemon mon;
     for (u32 flag = FLAG_BADGE01_GET; flag <= FLAG_BADGE08_GET; flag++)
@@ -76,16 +109,15 @@ TEST("Inclement integration: Leveler stops at the previous cap on repeated use")
     FlagClear(FLAG_IS_CHAMPION);
     FlagSet(FLAG_BADGE01_GET);
     EXPECT_EQ(GetCurrentLevelCap(), 20);
-    EXPECT_EQ(GetPreviousLevelCap(), 14);
-    CreateMon(&mon, SPECIES_ZIGZAGOON, 5, 0, OTID_STRUCT_PLAYER_ID);
-    EXPECT(RaiseMonToLevelerTarget(&mon));
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 14);
-    EXPECT(!RaiseMonToLevelerTarget(&mon));
-    EXPECT(!IsMonEligibleForLeveler(&mon));
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 14);
-    FlagSet(FLAG_BADGE02_GET);
+    CreateMon(&mon, SPECIES_LINOONE, 5, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT(RaiseMonToLevelerTarget(&mon));
     EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 20);
+    EXPECT(!RaiseMonToLevelerTarget(&mon));
+    EXPECT(!IsMonEligibleForLeveler(&mon));
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 20);
+    FlagSet(FLAG_BADGE02_GET);
+    EXPECT(RaiseMonToLevelerTarget(&mon));
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 30);
     EXPECT(!RaiseMonToLevelerTarget(&mon));
 }
 
@@ -469,4 +501,107 @@ TEST("Inclement integration: Effort Ribbon predicate returns a boolean for the n
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG, &isEgg);
     EXPECT_EQ(GetLeadMonIndex(), 1);
     EXPECT_EQ(Special_AreLeadMonEVsMaxedOut(), TRUE);
+}
+
+TEST("Inclement integration: Flash uses the regional badge plus authorization")
+{
+    FlagClear(FLAG_BADGE01_GET);
+    FlagClear(FLAG_BADGE02_GET);
+    FlagClear(FLAG_RECEIVED_HM_FLASH);
+    EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_FLASH));
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_RECEIVED_HM_FLASH);
+    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_FLASH), IS_FRLG);
+    FlagSet(FLAG_BADGE02_GET);
+    EXPECT(IsFieldMoveUnlocked(FIELD_MOVE_FLASH));
+    FlagClear(FLAG_RECEIVED_HM_FLASH);
+    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_FLASH), IS_FRLG);
+}
+
+TEST("Inclement integration: locked field message distinguishes badge from authorization")
+{
+    u32 badgeFlag = IS_FRLG ? FLAG_BADGE06_GET : FLAG_BADGE03_GET;
+    FlagClear(badgeFlag);
+    FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
+    gSpecialVar_0x8004 = FIELD_MOVE_ROCK_SMASH;
+    EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH));
+    BufferFieldMoveUnlockRequirement();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(StringCompare(gStringVar2, IS_FRLG ? COMPOUND_STRING("MARSH BADGE") : COMPOUND_STRING("DYNAMO BADGE")), 0);
+    FlagSet(badgeFlag);
+    FlagClear(FLAG_RECEIVED_HM_ROCK_SMASH);
+    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH), IS_FRLG);
+    BufferFieldMoveUnlockRequirement();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT(FlagGet(badgeFlag));
+    EXPECT(!FlagGet(FLAG_RECEIVED_HM_ROCK_SMASH));
+    FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
+    EXPECT(IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH));
+}
+
+TEST("Inclement integration: HM convenience preserves the Regi puzzle conditions")
+{
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_WAILORD, 40, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_RELICANTH, 40, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT(CheckRelicanthWailord());
+    struct Pokemon swap = gParties[B_TRAINER_PLAYER][0];
+    gParties[B_TRAINER_PLAYER][0] = gParties[B_TRAINER_PLAYER][1];
+    gParties[B_TRAINER_PLAYER][1] = swap;
+    EXPECT(!CheckRelicanthWailord());
+
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_DESERT_RUINS);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_DESERT_RUINS);
+    gSaveBlock1Ptr->pos.x = 6;
+    gSaveBlock1Ptr->pos.y = 23;
+    FlagClear(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
+    EXPECT(ShouldDoBrailleRegirockEffect());
+    gSaveBlock1Ptr->pos.y++;
+    EXPECT(!ShouldDoBrailleRegirockEffect());
+    gSaveBlock1Ptr->pos.y--;
+    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
+    EXPECT(!ShouldDoBrailleRegirockEffect());
+    FlagClear(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
+
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ANCIENT_TOMB);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ANCIENT_TOMB);
+    gSaveBlock1Ptr->pos.x = 8;
+    gSaveBlock1Ptr->pos.y = 25;
+    FlagClear(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
+    EXPECT(ShouldDoBrailleRegisteelEffect());
+    gSaveBlock1Ptr->pos.x++;
+    EXPECT(!ShouldDoBrailleRegisteelEffect());
+    gSaveBlock1Ptr->pos.x--;
+    FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
+    EXPECT(!ShouldDoBrailleRegisteelEffect());
+    FlagClear(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
+
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_SEALED_CHAMBER_OUTER_ROOM);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_SEALED_CHAMBER_OUTER_ROOM);
+    gSaveBlock1Ptr->pos.x = 10;
+    gSaveBlock1Ptr->pos.y = 3;
+    FlagClear(FLAG_SYS_BRAILLE_DIG);
+    EXPECT(ShouldDoBrailleDigEffect());
+    gSaveBlock1Ptr->pos.y++;
+    EXPECT(!ShouldDoBrailleDigEffect());
+    ZeroPlayerPartyMons();
+}
+
+TEST("Inclement integration: consumed berries still return after battle")
+{
+    static EWRAM_DATA struct BattleStruct state;
+    struct BattleStruct *saved = gBattleStruct;
+    gBattleStruct = &state;
+    memset(&state, 0, sizeof(state));
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MAGIKARP, 14, 0, OTID_STRUCT_PLAYER_ID);
+    enum Item berry = ITEM_SITRUS_BERRY;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &berry);
+    RecordPlayerPartyMonHeldItemForRestoration(0);
+    enum Item consumed = ITEM_NONE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &consumed);
+    TryRestoreHeldItems();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_SITRUS_BERRY);
+    gBattleStruct = saved;
+    ZeroPlayerPartyMons();
 }

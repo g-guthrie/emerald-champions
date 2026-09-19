@@ -18,7 +18,7 @@ gText_EmeraldChampionsExplainTools::
 	.string "party outside battle. Every Center\l"
 	.string "refills its one dose.\p"
 	.string "The Leveler raises your party to\n"
-	.string "the previous level cap. It never\l"
+	.string "each Pokémon's cap. It never\l"
 	.string "runs out.\p"
 	.string "The tutor teaches moves for free.\n"
 	.string "The vendor sells discovered items.$"
@@ -32,14 +32,14 @@ gText_EmeraldChampionsHealAfterTools::
 	.string "you also like to heal your Pokémon?$"
 
 gText_EmeraldChampionsExplainFlightBeacon::
-	.string "Use it to call a flier once you\n"
-	.string "have the badge for Fly.\p"
-	.string "For skills such as Cut and Surf,\n"
-	.string "you need the license, badge, and\l"
-	.string "a compatible party member.\p"
-	.string "They don't take a battle move\n"
-	.string "slot. Flash is automatic: with\l"
-	.string "its license and badge, caves light up!$"
+	.string "Use the Flight Beacon after you\n"
+	.string "earn its license and Fly badge.\p"
+	.string "For Cut, Surf and other HM skills,\n"
+	.string "you only need the license and\l"
+	.string "badge. Any party will do!\p"
+	.string "Flash lights caves automatically.\n"
+	.string "Use the other skills at their\l"
+	.string "obstacles by pressing A.$"
 
 gText_EmeraldChampionsGiveMissingRepelSpray::
 	.string "One more tool for you:\n"

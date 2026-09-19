@@ -55,7 +55,6 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "constants/metatile_behaviors.h"
 #include "constants/trainer_types.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
@@ -1578,7 +1577,6 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     objectEvent->range.rangeX = template->movementRangeX;
     objectEvent->range.rangeY = template->movementRangeY;
     objectEvent->trainerType = template->trainerType;
-    objectEvent->mapNum = mapNum;
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
     objectEvent->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
     SetObjectEventDirection(objectEvent, objectEvent->previousMovementDirection);
@@ -1703,7 +1701,7 @@ u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, 
     {
         // sheet-based gfx
         u32 sheetSpan = GetSpanPerImage(info->oam->shape, info->oam->size);
-        u16 oldTiles = 0;
+        u16 oldTiles = TAG_NONE;
         u16 tileStart;
         bool32 oldInvisible;
         if (tag == TAG_NONE)
@@ -1712,8 +1710,8 @@ u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, 
         if (sprite)
         {
             oldInvisible = sprite->invisible;
-            oldTiles = sprite->sheetTileStart;
-            sprite->sheetTileStart = 0; // mark unused
+            oldTiles = sprite->usingSheet ? sprite->sheetTileStart : TAG_NONE;
+            sprite->sheetTileStart = TAG_NONE; // Tile zero is valid; detach the old sheet.
             // Note: If sprite was not allocated to use a sheet,
             // the tiles assigned to it will leak here,
             // as its tileNum will be repointed to the new tileStart
@@ -1729,12 +1727,12 @@ u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, 
             // Load, then free, in order to avoid displaying garbage data
             // before sprite's `sheetTileStart` is repointed
             tileStart = LoadCompressedSpriteSheetByTemplate(&template, TILE_SIZE_4BPP << sheetSpan);
-            if (oldTiles)
+            if (oldTiles != TAG_NONE)
             {
                 FieldEffectFreeTilesIfUnused(oldTiles);
                 // We weren't able to load the sheet;
                 // retry (after having freed), and set sprite to invisible until done
-                if (tileStart <= 0)
+                if (GetSpriteTileStartByTag(tag) == TAG_NONE)
                 {
                     if (sprite)
                         sprite->invisible = TRUE;
@@ -1743,7 +1741,7 @@ u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, 
             }
         // sheet loaded; unload any *other* sheet for sprite
         }
-        else if (oldTiles && oldTiles != tileStart)
+        else if (oldTiles != TAG_NONE && oldTiles != tileStart)
         {
             FieldEffectFreeTilesIfUnused(oldTiles);
         }
@@ -2787,6 +2785,19 @@ static void SpawnLightSprite(s16 x, s16 y, s16 camX, s16 camY, u32 lightType)
 #undef sLightXPos
 #undef sLightYPos
 
+// Generated facilities store their active templates in the save block; their
+// static map header does not describe that list. Use one count everywhere.
+static u8 GetCurrentObjectEventTemplateCount(void)
+{
+    if (gMapHeader.events == NULL)
+        return 0;
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+        return GetNumBattlePyramidObjectEvents();
+    if (InTrainerHill())
+        return HILL_TRAINERS_PER_FLOOR;
+    return gMapHeader.events->objectEventCount;
+}
+
 void TrySpawnLightSprites(s16 camX, s16 camY)
 {
     u32 i;
@@ -2798,12 +2809,7 @@ void TrySpawnLightSprites(s16 camX, s16 camY)
     if (gMapHeader.events == NULL)
         return;
 
-    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
-        objectCount = GetNumBattlePyramidObjectEvents();
-    else if (InTrainerHill())
-        objectCount = 2;
-    else
-        objectCount = gMapHeader.events->objectEventCount;
+    objectCount = GetCurrentObjectEventTemplateCount();
 
     for (i = 0; i < objectCount; i++)
     {
@@ -2830,12 +2836,7 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
         s16 top = gSaveBlock1Ptr->pos.y;
         s16 bottom = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H + 2;
 
-        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
-            objectCount = GetNumBattlePyramidObjectEvents();
-        else if (InTrainerHill())
-            objectCount = HILL_TRAINERS_PER_FLOOR;
-        else
-            objectCount = gMapHeader.events->objectEventCount;
+        objectCount = GetCurrentObjectEventTemplateCount();
 
         for (i = 0; i < objectCount; i++)
         {
@@ -3413,10 +3414,7 @@ u8 AddCameraObject(u8 followSpriteId)
 
 static void SpriteCB_CameraObject(struct Sprite *sprite)
 {
-    void (*callbacks[ARRAY_COUNT(sCameraObjectFuncs)])(struct Sprite *);
-
-    memcpy(callbacks, sCameraObjectFuncs, sizeof sCameraObjectFuncs);
-    callbacks[sprite->sCamera_State](sprite);
+    sCameraObjectFuncs[sprite->sCamera_State](sprite);
 }
 
 static void CameraObject_Init(struct Sprite *sprite)
@@ -3541,7 +3539,8 @@ void SetObjectEventDirection(struct ObjectEvent *objectEvent, enum Direction dir
 
 static const u8 *GetObjectEventScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    return GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->script;
+    const struct ObjectEventTemplate *template = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+    return template == NULL ? NULL : template->script;
 }
 
 const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId)
@@ -3552,12 +3551,7 @@ const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId)
 u16 GetObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     const struct ObjectEventTemplate *obj = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
-#ifdef UBFIX
-    // BUG: The function may return NULL, and attempting to read from NULL may freeze the game using modern compilers.
-    if (obj == NULL)
-        return 0;
-#endif // UBFIX
-    return obj->flagId;
+    return obj == NULL ? 0 : obj->flagId;
 }
 
 static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
@@ -3579,11 +3573,13 @@ const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 local
     if (gSaveBlock1Ptr->location.mapNum == mapNum && gSaveBlock1Ptr->location.mapGroup == mapGroup)
     {
         templates = gSaveBlock1Ptr->objectEventTemplates;
-        count = gMapHeader.events->objectEventCount;
+        count = GetCurrentObjectEventTemplateCount();
     }
     else
     {
         mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+        if (mapHeader->events == NULL)
+            return NULL;
         templates = mapHeader->events->objectEvents;
         count = mapHeader->events->objectEventCount;
     }
@@ -4030,8 +4026,7 @@ bool8 MovementType_WanderUpAndDown_Step2(struct ObjectEvent *objectEvent, struct
 bool8 MovementType_WanderUpAndDown_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gUpAndDownDirections, sizeof directions);
+    const enum Direction *directions = gUpAndDownDirections;
     direction = directions[Random() & 1];
     SetObjectEventDirection(objectEvent, direction);
     sprite->sTypeFuncId = 5;
@@ -4088,8 +4083,7 @@ bool8 MovementType_WanderLeftAndRight_Step2(struct ObjectEvent *objectEvent, str
 bool8 MovementType_WanderLeftAndRight_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gLeftAndRightDirections, sizeof directions);
+    const enum Direction *directions = gLeftAndRightDirections;
     direction = directions[Random() & 1];
     SetObjectEventDirection(objectEvent, direction);
     sprite->sTypeFuncId = 5;
@@ -4299,8 +4293,7 @@ bool8 MovementType_FaceDownAndUp_Step3(struct ObjectEvent *objectEvent, struct S
 bool8 MovementType_FaceDownAndUp_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gUpAndDownDirections, sizeof gUpAndDownDirections);
+    const enum Direction *directions = gUpAndDownDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_NORTH_SOUTH);
     if (direction == DIR_NONE)
         direction = directions[Random() & 1];
@@ -4338,8 +4331,7 @@ bool8 MovementType_FaceLeftAndRight_Step3(struct ObjectEvent *objectEvent, struc
 bool8 MovementType_FaceLeftAndRight_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gLeftAndRightDirections, sizeof gLeftAndRightDirections);
+    const enum Direction *directions = gLeftAndRightDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_EAST_WEST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 1];
@@ -4388,8 +4380,7 @@ bool8 MovementType_FaceUpAndLeft_Step3(struct ObjectEvent *objectEvent, struct S
 bool8 MovementType_FaceUpAndLeft_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gUpAndLeftDirections, sizeof gUpAndLeftDirections);
+    const enum Direction *directions = gUpAndLeftDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_NORTH_WEST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 1];
@@ -4427,8 +4418,7 @@ bool8 MovementType_FaceUpAndRight_Step3(struct ObjectEvent *objectEvent, struct 
 bool8 MovementType_FaceUpAndRight_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gUpAndRightDirections, sizeof gUpAndRightDirections);
+    const enum Direction *directions = gUpAndRightDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_NORTH_EAST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 1];
@@ -4466,8 +4456,7 @@ bool8 MovementType_FaceDownAndLeft_Step3(struct ObjectEvent *objectEvent, struct
 bool8 MovementType_FaceDownAndLeft_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gDownAndLeftDirections, sizeof gDownAndLeftDirections);
+    const enum Direction *directions = gDownAndLeftDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_SOUTH_WEST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 1];
@@ -4505,8 +4494,7 @@ bool8 MovementType_FaceDownAndRight_Step3(struct ObjectEvent *objectEvent, struc
 bool8 MovementType_FaceDownAndRight_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[2];
-    memcpy(directions, gDownAndRightDirections, sizeof gDownAndRightDirections);
+    const enum Direction *directions = gDownAndRightDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_SOUTH_EAST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 1];
@@ -4544,8 +4532,7 @@ bool8 MovementType_FaceDownUpAndLeft_Step3(struct ObjectEvent *objectEvent, stru
 bool8 MovementType_FaceDownUpAndLeft_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[4];
-    memcpy(directions, gDownUpAndLeftDirections, sizeof gDownUpAndLeftDirections);
+    const enum Direction *directions = gDownUpAndLeftDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_NORTH_SOUTH_WEST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 3];
@@ -4583,8 +4570,7 @@ bool8 MovementType_FaceDownUpAndRight_Step3(struct ObjectEvent *objectEvent, str
 bool8 MovementType_FaceDownUpAndRight_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[4];
-    memcpy(directions, gDownUpAndRightDirections, sizeof gDownUpAndRightDirections);
+    const enum Direction *directions = gDownUpAndRightDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_NORTH_SOUTH_EAST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 3];
@@ -4622,8 +4608,7 @@ bool8 MovementType_FaceUpLeftAndRight_Step3(struct ObjectEvent *objectEvent, str
 bool8 MovementType_FaceUpLeftAndRight_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[4];
-    memcpy(directions, gUpLeftAndRightDirections, sizeof gUpLeftAndRightDirections);
+    const enum Direction *directions = gUpLeftAndRightDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_NORTH_EAST_WEST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 3];
@@ -4661,8 +4646,7 @@ bool8 MovementType_FaceDownLeftAndRight_Step3(struct ObjectEvent *objectEvent, s
 bool8 MovementType_FaceDownLeftAndRight_Step4(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[4];
-    memcpy(directions, gDownLeftAndRightDirections, sizeof gDownLeftAndRightDirections);
+    const enum Direction *directions = gDownLeftAndRightDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_SOUTH_EAST_WEST);
     if (direction == DIR_NONE)
         direction = directions[Random() & 3];
@@ -4701,8 +4685,7 @@ bool8 MovementType_RotateCounterclockwise_Step2(struct ObjectEvent *objectEvent,
 bool8 MovementType_RotateCounterclockwise_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[5];
-    memcpy(directions, gCounterclockwiseDirections, sizeof gCounterclockwiseDirections);
+    const enum Direction *directions = gCounterclockwiseDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_ANY);
     if (direction == DIR_NONE)
         direction = directions[objectEvent->facingDirection];
@@ -4741,8 +4724,7 @@ bool8 MovementType_RotateClockwise_Step2(struct ObjectEvent *objectEvent, struct
 bool8 MovementType_RotateClockwise_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     enum Direction direction;
-    enum Direction directions[5];
-    memcpy(directions, gClockwiseDirections, sizeof gClockwiseDirections);
+    const enum Direction *directions = gClockwiseDirections;
     direction = TryGetTrainerEncounterDirection(objectEvent, RUNFOLLOW_ANY);
     if (direction == DIR_NONE)
         direction = directions[objectEvent->facingDirection];
@@ -4818,7 +4800,7 @@ bool8 MovementType_WalkSequence_Step0(struct ObjectEvent *objectEvent, struct Sp
     return TRUE;
 }
 
-bool8 MoveNextDirectionInSequence(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction *route)
+static bool8 MoveNextDirectionInSequence(struct ObjectEvent *objectEvent, struct Sprite *sprite, const enum Direction *route)
 {
     enum Collision collision;
     u8 movementActionId;
@@ -4860,8 +4842,7 @@ movement_type_def(MovementType_WalkSequenceUpRightLeftDown, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceUpRightLeftDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gUpRightLeftDownDirections)];
-    memcpy(directions, gUpRightLeftDownDirections, sizeof(gUpRightLeftDownDirections));
+    const enum Direction *directions = gUpRightLeftDownDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -4872,8 +4853,7 @@ movement_type_def(MovementType_WalkSequenceRightLeftDownUp, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceRightLeftDownUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gRightLeftDownUpDirections)];
-    memcpy(directions, gRightLeftDownUpDirections, sizeof(gRightLeftDownUpDirections));
+    const enum Direction *directions = gRightLeftDownUpDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 2;
 
@@ -4884,8 +4864,7 @@ movement_type_def(MovementType_WalkSequenceDownUpRightLeft, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceDownUpRightLeft_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gDownUpRightLeftDirections)];
-    memcpy(directions, gDownUpRightLeftDirections, sizeof(gDownUpRightLeftDirections));
+    const enum Direction *directions = gDownUpRightLeftDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 2;
 
@@ -4896,8 +4875,7 @@ movement_type_def(MovementType_WalkSequenceLeftDownUpRight, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceLeftDownUpRight_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gLeftDownUpRightDirections)];
-    memcpy(directions, gLeftDownUpRightDirections, sizeof(gLeftDownUpRightDirections));
+    const enum Direction *directions = gLeftDownUpRightDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -4908,8 +4886,7 @@ movement_type_def(MovementType_WalkSequenceUpLeftRightDown, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceUpLeftRightDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gUpLeftRightDownDirections)];
-    memcpy(directions, gUpLeftRightDownDirections, sizeof(gUpLeftRightDownDirections));
+    const enum Direction *directions = gUpLeftRightDownDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -4920,8 +4897,7 @@ movement_type_def(MovementType_WalkSequenceLeftRightDownUp, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceLeftRightDownUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gLeftRightDownUpDirections)];
-    memcpy(directions, gLeftRightDownUpDirections, sizeof(gLeftRightDownUpDirections));
+    const enum Direction *directions = gLeftRightDownUpDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 2;
 
@@ -4932,8 +4908,7 @@ movement_type_def(MovementType_WalkSequenceDownUpLeftRight, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceDownUpLeftRight_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gStandardDirections)];
-    memcpy(directions, gStandardDirections, sizeof(gStandardDirections));
+    const enum Direction *directions = gStandardDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 2;
 
@@ -4944,8 +4919,7 @@ movement_type_def(MovementType_WalkSequenceRightDownUpLeft, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceRightDownUpLeft_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gRightDownUpLeftDirections)];
-    memcpy(directions, gRightDownUpLeftDirections, sizeof(gRightDownUpLeftDirections));
+    const enum Direction *directions = gRightDownUpLeftDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -4956,8 +4930,7 @@ movement_type_def(MovementType_WalkSequenceLeftUpDownRight, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceLeftUpDownRight_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gLeftUpDownRightDirections)];
-    memcpy(directions, gLeftUpDownRightDirections, sizeof(gLeftUpDownRightDirections));
+    const enum Direction *directions = gLeftUpDownRightDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -4968,8 +4941,7 @@ movement_type_def(MovementType_WalkSequenceUpDownRightLeft, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceUpDownRightLeft_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gUpDownRightLeftDirections)];
-    memcpy(directions, gUpDownRightLeftDirections, sizeof(gUpDownRightLeftDirections));
+    const enum Direction *directions = gUpDownRightLeftDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 2;
 
@@ -4980,8 +4952,7 @@ movement_type_def(MovementType_WalkSequenceRightLeftUpDown, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceRightLeftUpDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gRightLeftUpDownDirections)];
-    memcpy(directions, gRightLeftUpDownDirections, sizeof(gRightLeftUpDownDirections));
+    const enum Direction *directions = gRightLeftUpDownDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 2;
 
@@ -4992,8 +4963,7 @@ movement_type_def(MovementType_WalkSequenceDownRightLeftUp, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceDownRightLeftUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gDownRightLeftUpDirections)];
-    memcpy(directions, gDownRightLeftUpDirections, sizeof(gDownRightLeftUpDirections));
+    const enum Direction *directions = gDownRightLeftUpDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5004,8 +4974,7 @@ movement_type_def(MovementType_WalkSequenceRightUpDownLeft, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceRightUpDownLeft_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gRightUpDownLeftDirections)];
-    memcpy(directions, gRightUpDownLeftDirections, sizeof(gRightUpDownLeftDirections));
+    const enum Direction *directions = gRightUpDownLeftDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5016,8 +4985,7 @@ movement_type_def(MovementType_WalkSequenceUpDownLeftRight, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceUpDownLeftRight_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gUpDownLeftRightDirections)];
-    memcpy(directions, gUpDownLeftRightDirections, sizeof(gUpDownLeftRightDirections));
+    const enum Direction *directions = gUpDownLeftRightDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 2;
 
@@ -5028,8 +4996,7 @@ movement_type_def(MovementType_WalkSequenceLeftRightUpDown, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceLeftRightUpDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gLeftRightUpDownDirections)];
-    memcpy(directions, gLeftRightUpDownDirections, sizeof(gLeftRightUpDownDirections));
+    const enum Direction *directions = gLeftRightUpDownDirections;
     if (objectEvent->directionSequenceIndex == 1 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 2;
 
@@ -5040,8 +5007,7 @@ movement_type_def(MovementType_WalkSequenceDownLeftRightUp, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceDownLeftRightUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gDownLeftRightUpDirections)];
-    memcpy(directions, gDownLeftRightUpDirections, sizeof(gDownLeftRightUpDirections));
+    const enum Direction *directions = gDownLeftRightUpDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5052,8 +5018,7 @@ movement_type_def(MovementType_WalkSequenceUpLeftDownRight, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceUpLeftDownRight_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gUpLeftDownRightDirections)];
-    memcpy(directions, gUpLeftDownRightDirections, sizeof(gUpLeftDownRightDirections));
+    const enum Direction *directions = gUpLeftDownRightDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5064,8 +5029,7 @@ movement_type_def(MovementType_WalkSequenceDownRightUpLeft, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceDownRightUpLeft_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gDownRightUpLeftDirections)];
-    memcpy(directions, gDownRightUpLeftDirections, sizeof(gDownRightUpLeftDirections));
+    const enum Direction *directions = gDownRightUpLeftDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5076,8 +5040,7 @@ movement_type_def(MovementType_WalkSequenceLeftDownRightUp, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceLeftDownRightUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gLeftDownRightUpDirections)];
-    memcpy(directions, gLeftDownRightUpDirections, sizeof(gLeftDownRightUpDirections));
+    const enum Direction *directions = gLeftDownRightUpDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5088,8 +5051,7 @@ movement_type_def(MovementType_WalkSequenceRightUpLeftDown, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceRightUpLeftDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gRightUpLeftDownDirections)];
-    memcpy(directions, gRightUpLeftDownDirections, sizeof(gRightUpLeftDownDirections));
+    const enum Direction *directions = gRightUpLeftDownDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5100,8 +5062,7 @@ movement_type_def(MovementType_WalkSequenceUpRightDownLeft, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceUpRightDownLeft_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gUpRightDownLeftDirections)];
-    memcpy(directions, gUpRightDownLeftDirections, sizeof(gUpRightDownLeftDirections));
+    const enum Direction *directions = gUpRightDownLeftDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5112,8 +5073,7 @@ movement_type_def(MovementType_WalkSequenceDownLeftUpRight, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceDownLeftUpRight_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gDownLeftUpRightDirections)];
-    memcpy(directions, gDownLeftUpRightDirections, sizeof(gDownLeftUpRightDirections));
+    const enum Direction *directions = gDownLeftUpRightDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.y == objectEvent->currentCoords.y)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5124,8 +5084,7 @@ movement_type_def(MovementType_WalkSequenceLeftUpRightDown, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gLeftUpRightDownDirections)];
-    memcpy(directions, gLeftUpRightDownDirections, sizeof(gLeftUpRightDownDirections));
+    const enum Direction *directions = gLeftUpRightDownDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -5136,8 +5095,7 @@ movement_type_def(MovementType_WalkSequenceRightDownLeftUp, gMovementTypeFuncs_W
 
 u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    enum Direction directions[sizeof(gRightDownLeftUpDirections)];
-    memcpy(directions, gRightDownLeftUpDirections, sizeof(gRightDownLeftUpDirections));
+    const enum Direction *directions = gRightDownLeftUpDirections;
     if (objectEvent->directionSequenceIndex == 2 && objectEvent->initialCoords.x == objectEvent->currentCoords.x)
         objectEvent->directionSequenceIndex = 3;
 
@@ -6496,14 +6454,10 @@ void UpdateObjectEventCurrentMovement(struct ObjectEvent *objectEvent, struct Sp
 }
 
 #define dirn_to_anim(name, table)\
-u8 name(u32 idx)\
+u8 name(u32 direction)\
 {\
-    enum Direction direction;\
-    u8 animIds[sizeof(table)];\
-    direction = idx;\
-    memcpy(animIds, (table), sizeof(table));\
-    if (direction > sizeof(table)) direction = 0;\
-    return animIds[direction];\
+    if (direction >= ARRAY_COUNT(table)) direction = DIR_NONE;\
+    return (table)[direction];\
 }
 
 dirn_to_anim(GetFaceDirectionMovementAction, gFaceDirectionMovementActions);
@@ -6669,11 +6623,8 @@ void InitNpcForMovement(struct ObjectEvent *objectEvent, struct Sprite *sprite, 
 
 static void InitMovementNormal(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction, u8 speed)
 {
-    u8 (*functions[ARRAY_COUNT(sDirectionAnimFuncsBySpeed)])(u8);
-
-    memcpy(functions, sDirectionAnimFuncsBySpeed, sizeof sDirectionAnimFuncsBySpeed);
     InitNpcForMovement(objectEvent, sprite, direction, speed);
-    SetStepAnimHandleAlternation(objectEvent, sprite, functions[speed](objectEvent->facingDirection));
+    SetStepAnimHandleAlternation(objectEvent, sprite, sDirectionAnimFuncsBySpeed[speed](objectEvent->facingDirection));
 }
 
 static void StartRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction)
@@ -7009,15 +6960,13 @@ enum {
 
 static void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction, u8 distance, u8 type)
 {
-    s16 displacements[ARRAY_COUNT(sJumpInitDisplacements)];
     s16 x;
     s16 y;
 
-    memcpy(displacements, sJumpInitDisplacements, sizeof sJumpInitDisplacements);
     x = 0;
     y = 0;
     SetObjectEventDirection(objectEvent, direction);
-    MoveCoordsInDirection(direction, &x, &y, displacements[distance], displacements[distance]);
+    MoveCoordsInDirection(direction, &x, &y, sJumpInitDisplacements[distance], sJumpInitDisplacements[distance]);
     ShiftObjectEventCoords(objectEvent, objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y);
     SetJumpSpriteData(sprite, direction, distance, type);
     sprite->sActionFuncId = 1;
@@ -7046,18 +6995,16 @@ static void InitJumpRegular(struct ObjectEvent *objectEvent, struct Sprite *spri
 
 static u8 UpdateJumpAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 callback(struct Sprite *))
 {
-    s16 displacements[ARRAY_COUNT(sJumpDisplacements)];
     s16 x;
     s16 y;
     u8 result;
 
-    memcpy(displacements, sJumpDisplacements, sizeof sJumpDisplacements);
     result = callback(sprite);
-    if (result == JUMP_HALFWAY && displacements[sprite->sDistance] != 0)
+    if (result == JUMP_HALFWAY && sJumpDisplacements[sprite->sDistance] != 0)
     {
         x = 0;
         y = 0;
-        MoveCoordsInDirection(objectEvent->movementDirection, &x, &y, displacements[sprite->sDistance], displacements[sprite->sDistance]);
+        MoveCoordsInDirection(objectEvent->movementDirection, &x, &y, sJumpDisplacements[sprite->sDistance], sJumpDisplacements[sprite->sDistance]);
         ShiftObjectEventCoords(objectEvent, objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y);
         objectEvent->triggerGroundEffectsOnMove = TRUE;
         objectEvent->disableCoveringGroundEffects = TRUE;
@@ -10986,9 +10933,6 @@ static enum Species GetUnownSpecies(struct Pokemon *mon)
 
 static void InitMovementSurfStill(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction, u8 speed)
 {
-    u8 (*functions[ARRAY_COUNT(sDirectionAnimFuncsBySpeed)])(u8);
-
-    memcpy(functions, sDirectionAnimFuncsBySpeed, sizeof sDirectionAnimFuncsBySpeed);
     InitNpcForMovement(objectEvent, sprite, direction, speed);
     ObjectEventTurn(objectEvent, direction);
 }

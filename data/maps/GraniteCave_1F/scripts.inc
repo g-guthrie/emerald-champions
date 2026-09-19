@@ -31,7 +31,7 @@ GraniteCave_1F_Text_GetsDarkAheadHereYouGo: @ 822DA94
 GraniteCave_1F_Text_ExplainFlash: @ 822DBB7
 	.string "I authorize you to use Flash!\p"
 	.string "With Dewford's Knuckle Badge,\n"
-	.string "bring a partner that can learn\l"
-	.string "Flash to light up dark caves.\p"
-	.string "It doesn't need to know Flash\n"
+	.string "dark caves will light up\l"
+	.string "automatically.\p"
+	.string "No Pokémon needs to know Flash\n"
 	.string "as a battle move.$"

@@ -24,11 +24,10 @@ MauvilleCity_House1_Text_ImRockSmashDudeTakeThis: @ 820F9AF
 
 MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
 	.string "Earn the Dynamo Badge, then\n"
-	.string "approach a cracked rock with a\l"
-	.string "partner that can learn Rock\l"
-	.string "Smash.\p"
-	.string "You can break it without\n"
-	.string "teaching the move. Woohoo!$"
+	.string "press A by a cracked rock\l"
+	.string "to smash it. Woohoo!\p"
+	.string "This license works with any\n"
+	.string "party. No move slot needed!$"
 
 MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock: @ 820FB67
 	.string "Oh, yes, if you smash a rock, a Pokémon\n"

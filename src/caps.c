@@ -119,28 +119,7 @@ u32 GetCurrentLevelCap(void)
     return MAX_LEVEL;
 }
 
-// The Leveler raises a party to the PREVIOUS milestone's cap rather than the
-// live one: enough that a newly caught partner is immediately usable, while the
-// last stretch up to the current cap is still earned in battle.
-u32 GetPreviousLevelCap(void)
-{
-    u32 latest = 0;
 
-    for (u32 i = ARRAY_COUNT(sCampaignMilestones); i > 0; i--)
-    {
-        if (sCampaignMilestones[i - 1].cap != 0 && FlagGet(sCampaignMilestones[i - 1].flag))
-        {
-            latest = i - 1;
-            break;
-        }
-    }
-    for (u32 i = latest; i > 0; i--)
-    {
-        if (sCampaignMilestones[i - 1].cap != 0 && FlagGet(sCampaignMilestones[i - 1].flag))
-            return sCampaignMilestones[i - 1].cap;
-    }
-    return 14;
-}
 
 u32 GetLevelCapForSpecies(enum Species species, u32 baseline)
 {

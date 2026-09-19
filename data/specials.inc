@@ -864,3 +864,5 @@ gSpecials::
 	def_special PlayerNotAtTrainerHillEntrance
 
 	def_special ShowTrainerHillRecords, waitstate=1
+
+	def_special BufferFieldMoveUnlockRequirement

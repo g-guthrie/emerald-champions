@@ -1,41 +1,24 @@
-# Full integration objective — September 19, 2026
+# Current goal: solo source cleanup and title repair
 
-Finish a coherent Inclement-based Emerald Champions campaign with the authored
-doubles teams/AI and the explicit retained QoL listed in AGENTS.md. Preserve the
-current integration branch and newer opening/rival fixes. Validate Inclement
-behavior first, each changed service/traversal rule next, and their combined
-native campaign path through the Champion. Do not strip and re-add doubles.
+The user replaced the campaign-playthrough approach on September19. Stop all
+subagents. Review the largest game-responsible source files first, then proceed
+file by file. Clean demonstrated code/integration problems while preserving
+authored doubles battles and AI. Compare against the good pre-integration game;
+do not tune behavior to make a synthetic test pass.
 
-Main coordinates two Astra Low agents with separate campaign and system owners.
-Prioritize the actual fresh-save opening, Birch doubles/Mightyena staging,
-services/save continuity, HM-driven progression, dialogue/choreography, and
-species/reward availability. Follow the campaign forward, repairing demonstrated
-failures; use focused synthetic coverage for alternatives and failure branches.
-Optional minigame/activity polish comes last. No player guides or Game Book.
+Repair the Champions title PNG and its integration. Measure source art, palette,
+GBA tiles/sprites and motion. Match native pixelation, restore a complete outline
+and inspect headless title frames. No gameplay campaign required; bounded native
+captures only when a concrete question calls for them.
 
-Completion requires a source-bound playable ROM, passing relevant source and
-native checks, campaign progression evidence, reviewed visuals for changed scenes,
-and a clear account of repository/remote state. A build or fixture alone is not
-campaign or balance acceptance. Preserve pending work explicitly.
+Review queue: work/code-cleanup-20260919/runtime-source-order.json. Record what
+was actually examined and changed, plus remaining coverage, in a concise ledger.
+Build and check proportionately. Preserve existing saves and delivered batch10.
+Experimental AI batch11 is not approved for publication. Historical goal and
+handoff are preserved in work/code-cleanup-20260919/*before.
 
-Design coherence is an explicit completion requirement (latest user direction):
-Inclement's handcrafted progression must still make sense after the retained
-changes. Audit XP/current caps against the previous-cap Leveler; universal tutor
-against every live TM pickup/shop/gift and move-access quest; immediate held gear
-against later reward/shop value; and wild species/evolution/Mega availability
-against traversal and upcoming authored battles. A working feature or passing
-source gate alone does not prove a worthwhile incentive or coherent explanation.
-
-Do not treat blanket Rare Candy replacement as a settled design solution. For
-each affected reward/quest, establish what useful purpose remains at that stage,
-whether it should be removed or repurposed, and whether the resulting offer and
-dialogue match. Preserve useful story/exploration purposes and authored battles.
-Review concrete design tradeoffs with the main agent before changing economy or
-distribution; main should bring material unresolved choices to the user with
-source-backed options rather than silently redesigning the game.
-
-Explicit placement rule: use Inclement's existing overworld item locations only.
-Mega Stone sparkles can replace former ground-TM pickups; additional stones may
-replace existing TM gifts. No newly placed overworld/hidden items or extra sparkle
-locations. Audit existing item topology against pinned Inclement as well as new
-edits, and preserve original pickup access/coordinates/receipt identity.
+Latest approved convenience rules: HMs require only their story license and badge;
+no compatible-party or move-slot requirement. Preserve legendary puzzle conditions.
+Leveler raises every non-egg party member to its current species cap. Standard
+modern full/half-share XP below the cap; no custom flat/catch-up bonuses and no
+XP award/message/animation at cap. Consumed berries still restore after battle.

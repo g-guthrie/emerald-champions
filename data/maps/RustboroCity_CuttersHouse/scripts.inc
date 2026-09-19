@@ -29,10 +29,9 @@ RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse: @ 8215C13
 RustboroCity_CuttersHouse_Text_ExplainCut: @ 8215D33
 	.string "With the Stone Badge and this\n"
 	.string "license, approach a thin tree\l"
-	.string "with a partner that can learn\l"
-	.string "Cut.\p"
-	.string "It does not need to know Cut in\n"
-	.string "battle.$"
+	.string "and press A to cut it down.\p"
+	.string "Your Pokémon do not need to\n"
+	.string "learn Cut.$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees: @ 8215E39
 	.string "When they were expanding the city of\n"

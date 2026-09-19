@@ -618,7 +618,7 @@ MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis: @ 8221999
 	.string "Tate: You earned the Mind Badge!\p"
 	.string "Liza: It lets you use Dive once\n"
 	.string "Steven gives you the license.\l"
-	.string "Bring a compatible partner!$"
+	.string "It works with any party!$"
 
 MossdeepCity_Gym_Text_RegisteredSlowbro: @ 8221AEA
 	.string "Registered Tate & Liza's Slowbro\n"

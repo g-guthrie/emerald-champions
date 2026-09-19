@@ -18,13 +18,6 @@
 #define B_PARALYSIS_CHANCE          GEN_LATEST // In Champions, paralysis has a 12.5% chance of not moving, instead of 25%.
 
 // Experience settings
-#define B_EC_BATTLE_EXP             TRUE       // Emerald Champions: battles award experience again.
-#define B_EC_TEAM_EXP               TRUE       // Every Pokemon in the party gains from every battle, with no item and no flag: they were all there.
-#define B_EC_EXP_NUMERATOR          2          // Flat campaign-wide experience multiplier, applied last.
-#define B_EC_EXP_DENOMINATOR        1
-#define B_EC_CATCHUP_PER_LEVEL      50         // Each level below the party's strongest adds this % to a Pokemon's share...
-#define B_EC_CATCHUP_MAX            600        // ...to a ceiling of this % of the base rate, so the furthest behind close fastest.
-#define B_EC_EXP_AT_CAP             1          // Hard-cap clamping still reduces this to zero at the cap threshold.
 #define B_EC_WILD_HELD_ITEMS        TRUE       // Preserve natural held-item acquisition from wild Pokemon.
 #define B_EC_WILD_BATTLE_SETS       FALSE      // Wild Pokemon use their natural level-up moves. The move tutor is where a team gets built.
 #define B_EXP_CATCH                 GEN_LATEST // In Gen6+, the party gains experience when the player catches another Pokémon.
@@ -392,7 +385,6 @@
 #define B_LAST_USED_BALL_BUTTON     R_BUTTON   // If last used Ball is implemented, this button (or button combination) will trigger throwing the last used Ball.
 #define B_LAST_USED_BALL_CYCLE      TRUE       // If set to TRUE, then holding B_LAST_USED_BALL_BUTTON while pressing the D-Pad cycles through the Balls.
 #define B_CATCH_SWAP_INTO_PARTY     GEN_LATEST // In Gen7+, the option to swap caught Pokémon into the party will appear, allowing you to send a different Pokémon to the Box.
-#define B_CATCH_SWAP_CHECK_HMS      TRUE       // If set to TRUE, the catch swap feature above will prevent returning Pokémon to the Box if they know HMs.
 
 // Other settings
 #define B_MULTI_BATTLE_WHITEOUT         GEN_LATEST // In Gen4+, Multi Battles end when the player as well as their partner don't have any Pokémon left.

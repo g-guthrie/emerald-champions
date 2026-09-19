@@ -34,7 +34,6 @@ Movement_CutTreeDown:
 	step_end
 
 EventScript_CheckTreeCantCut::
-	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	goto_if_set FLAG_RECEIVED_HM_CUT, EventScript_CutNeedsStoneBadge
 	msgbox Text_CantCut, MSGBOX_DEFAULT
 	releaseall
@@ -114,7 +113,6 @@ AncientTomb_Text_RouteAccount:
 	.string "above the southern ocean.$"
 
 EventScript_BrailleFieldMoveUnavailable:
-	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_BrailleFieldMoveLocked, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -284,10 +282,8 @@ Movement_SmashRock:
 	step_end
 
 EventScript_CantSmashRock::
-	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
-	msgbox Text_CantSmash, MSGBOX_DEFAULT
-	releaseall
-	end
+	setvar VAR_0x8004, FIELD_MOVE_ROCK_SMASH
+	goto EventScript_FieldMoveLocked
 
 EventScript_CancelSmash::
 	closemessage
@@ -297,10 +293,6 @@ EventScript_CancelSmash::
 Text_WantToSmash:
 	.string "This rock appears to be breakable.\n"
 	.string "Would you like to use ROCK SMASH?$"
-
-Text_CantSmash:
-	.string "It's a rugged rock, but a POKéMON\n"
-	.string "may be able to smash it.$"
 
 EventScript_StrengthBoulder::
 	lockall
@@ -331,10 +323,8 @@ EventScript_ActivateStrength::
 	end
 
 EventScript_CantStrength::
-	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
-	msgbox Text_CantStrength, MSGBOX_DEFAULT
-	releaseall
-	end
+	setvar VAR_0x8004, FIELD_MOVE_STRENGTH
+	goto EventScript_FieldMoveLocked
 
 EventScript_CheckActivatedBoulder::
 	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
@@ -355,10 +345,6 @@ Text_MonUsedStrength:
 	.string "{STR_VAR_1} used STRENGTH!\p"
 	.string "{STR_VAR_1}'s STRENGTH made it\n"
 	.string "possible to move boulders around!$"
-
-Text_CantStrength:
-	.string "It's a big boulder, but a POKéMON\n"
-	.string "may be able to push it aside.$"
 
 Text_StrengthActivated:
 	.string "STRENGTH made it possible to move\n"
@@ -383,7 +369,6 @@ EventScript_CannotUseWaterfall::
 	setvar VAR_0x8005, 0
 
 EventScript_CantWaterfall::
-	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
 
 EventScript_EndWaterfall::
@@ -420,7 +405,6 @@ EventScript_UseDive::
 	end
 
 EventScript_CantDive::
-	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantDive, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -446,7 +430,6 @@ EventScript_UseDiveUnderwater::
 
 EventScript_CantSurface::
 	lockall
-	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantSurface, MSGBOX_DEFAULT
 	goto EventScript_EndSurface
 	end
@@ -578,3 +561,37 @@ EventScript_NobodyCanSurf::
 
 Text_NobodyCanUseFieldMove:
 	.string "Nobody in your party can use\n{STR_VAR_1}.$"
+
+@ These entries are reached only in a valid action context after unlock failed.
+EventScript_SurfLocked::
+	setvar VAR_0x8004, FIELD_MOVE_SURF
+	goto EventScript_FieldMoveLocked
+
+EventScript_WaterfallLocked::
+	setvar VAR_0x8004, FIELD_MOVE_WATERFALL
+	goto EventScript_FieldMoveLocked
+
+EventScript_DiveLocked::
+	setvar VAR_0x8004, FIELD_MOVE_DIVE
+	goto EventScript_FieldMoveLocked
+
+EventScript_FieldMoveLocked:
+	lockall
+	special BufferFieldMoveUnlockRequirement
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FieldMoveAuthorizationRequired
+	msgbox Text_FieldMoveBadgeRequired, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EventScript_FieldMoveAuthorizationRequired:
+	msgbox Text_FieldMoveAuthorizationRequired, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Text_FieldMoveBadgeRequired:
+	.string "The {STR_VAR_2} is needed\n"
+	.string "to use {STR_VAR_1} here.$"
+
+Text_FieldMoveAuthorizationRequired:
+	.string "You need the {STR_VAR_1}\n"
+	.string "field license to use it here.$"

@@ -7,6 +7,8 @@
 #include "pokemon.h"
 #include "constants/battle.h"
 #include "strings.h"
+#include "string_util.h"
+#include "move.h"
 #include "constants/field_move.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
@@ -44,6 +46,27 @@ static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
     return FlagGet(licenseFlag);
 }
 
+// Called only after an action has failed the central unlock check.
+// Report its existing badge metadata; this does not grant or change access.
+void BufferFieldMoveUnlockRequirement(void)
+{
+    static const u8 badgeNames[][14] = {
+#if IS_FRLG
+        _("BOULDER BADGE"), _("CASCADE BADGE"), _("THUNDER BADGE"), _("RAINBOW BADGE"),
+        _("SOUL BADGE"), _("MARSH BADGE"), _("VOLCANO BADGE"), _("EARTH BADGE"),
+#else
+        _("STONE BADGE"), _("KNUCKLE BADGE"), _("DYNAMO BADGE"), _("HEAT BADGE"),
+        _("BALANCE BADGE"), _("FEATHER BADGE"), _("MIND BADGE"), _("RAIN BADGE"),
+#endif
+    };
+    enum FieldMove fieldMove = gSpecialVar_0x8004;
+    u32 badge = gFieldMoveInfo[fieldMove].arg;
+
+    StringCopy(gStringVar1, GetMoveName(FieldMove_GetMoveId(fieldMove)));
+    StringCopy(gStringVar2, badgeNames[badge]);
+    gSpecialVar_Result = FlagGet(FLAG_BADGE01_GET + badge);
+}
+
 const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
 {
     [CANT_UNLOCK] =
@@ -65,11 +88,8 @@ const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
 
 #define FLAG_TO_BADGE(flag) flag - FLAG_BADGE01_GET
 
-// Emerald Champions: badges unlock the map, not HM carriers. Once a field
-// move is unlocked, a party member that could learn the move performs it,
-// whether or not it currently knows it: one that knows it is preferred so
-// the "used CUT!" line reads naturally, then the first that could learn it.
-// Nobody qualifying is reported to the player by the obstacle script.
+// Species compatibility remains relevant to optional non-HM moves, such as
+// Teleport and Sweet Scent. It never gates an HM unlock.
 bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move)
 {
     const struct LevelUpMove *learnset;
@@ -87,6 +107,19 @@ bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move)
 
 u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)
 {
+    // HM access belongs to the player. A party slot is chosen only for the
+    // existing field animation, never as a compatibility requirement.
+    if (FieldMove_IsHM(fieldMove))
+    {
+        if (!IsFieldMoveUnlocked(fieldMove))
+            return PARTY_SIZE;
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG))
+                return i;
+        return 0;
+    }
+
     enum Move move = FieldMove_GetMoveId(fieldMove);
     u32 fallback = PARTY_SIZE;
 
@@ -112,6 +145,10 @@ u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)
     return PARTY_SIZE;
 }
 
+// Check a proposed party replacement without changing either Pokemon. Field
+// access depends on species compatibility, not on keeping an HM in a move slot.
+
+
 const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
 {
     [FIELD_MOVE_CUT] =
@@ -131,7 +168,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_FLASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE01_GET),
+        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE01_GET) : FLAG_TO_BADGE(FLAG_BADGE02_GET),
         .hideIfLocked = TRUE,
         .hideInPartyMenu = TRUE,
     },

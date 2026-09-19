@@ -75,7 +75,6 @@
 #include "constants/pokemon.h"
 #include "config/battle.h"
 #include "data/battle_move_effects.h"
-#include "test/battle.h"
 #include "follower_npc.h"
 #include "load_save.h"
 #if EC_HEADLESS_FIXTURES
@@ -2102,11 +2101,6 @@ FEATURE_FLAG_ASSERT(I_EXP_SHARE_FLAG, YouNeedToSetTheExpShareFlagToAnUnusedFlag)
 
 static bool32 BattleTypeAllowsExp(void)
 {
-    // Emerald Champions: the Leveler brings the party to the cap for free, so
-    // battle experience only ever printed "gained 0 Exp. Points" at the cap.
-    // Skip the whole exp phase instead of showing a meaningless message.
-    if (!B_EC_BATTLE_EXP)
-        return FALSE;
     if (RECORDED_WILD_BATTLE)
         return TRUE;
     else if (gBattleTypeFlags &
@@ -2141,12 +2135,38 @@ static enum BattlerId GetBattlerFromPlayerPartyId(u32 partyId)
     return MAX_BATTLERS_COUNT;
 }
 
+static s32 CalculateMonExpReward(u32 partyId, bool32 wasSentOut, enum HoldEffect holdEffect)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyId];
+    u32 level = GetMonData(mon, MON_DATA_LEVEL);
+    s32 reward = wasSentOut ? GetSoftLevelCapExpValue(level, gBattleStruct->expValue) : 0;
+
+    if ((holdEffect == HOLD_EFFECT_EXP_SHARE || IsGen6ExpShareEnabled())
+     && (B_SPLIT_EXP < GEN_6 || reward == 0))
+        reward += GetSoftLevelCapExpValue(level, gBattleStruct->expShareExpValue);
+
+    ApplyExperienceMultipliers(&reward, partyId, gBattlerFainted);
+    if (B_EXP_CAP_TYPE == EXP_CAP_HARD && reward != 0)
+    {
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+        u32 currentExp = GetMonData(mon, MON_DATA_EXP);
+        u32 capExp = gExperienceTables[gSpeciesInfo[species].growthRate][GetPlayerLevelCapForSpecies(species)];
+
+        // Saved/traded Pokemon may already be past their species threshold.
+        if (currentExp >= capExp)
+            return 0;
+        if (reward > capExp - currentExp)
+            reward = capExp - currentExp;
+    }
+    return reward;
+}
+
 static void Cmd_getexp(void)
 {
     CMD_ARGS(u8 battler);
 
     enum HoldEffect holdEffect;
-    s32 i; // also used as stringId
+    s32 i;
     u8 *expMonId = &gBattleStruct->expGetterMonId;
     u32 currLvl;
 
@@ -2255,58 +2275,17 @@ static void Cmd_getexp(void)
             *expMonId = gBattleStruct->expGettersOrder[0];
             gBattleStruct->expSentInMons = sentInBits;
 
-            // Emerald Champions: the party shares every battle, so announce it
-            // once here instead of printing a box per Pokemon as each bar
-            // fills. A battle box is two lines wide, so at most two names fit;
-            // past that the team is named as a whole. Individual amounts are
-            // still visible on the bars themselves.
-            {
-                u32 named[2];
-                u32 namedCount = 0;
-                bool32 anyBelowCap = FALSE;
-
-                for (i = 0; i < PARTY_SIZE; i++)
-                {
-                    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-
-                    if (!IsValidForBattle(mon))
-                        continue;
-                    if (GetMonData(mon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES)))
-                        anyBelowCap = TRUE;
-                    if (!((1u << i) & sentInBits))
-                        continue;
-                    if (namedCount < ARRAY_COUNT(named))
-                        named[namedCount] = i;
-                    namedCount++;
-                }
-
-                // With the whole party at its cap nothing can be gained, and
-                // saying otherwise is the "gained 0 Exp. Points" box this
-                // campaign removed exp to avoid in the first place.
-                if (anyBelowCap)
-                {
-                    if (namedCount == 1)
-                    {
-                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, named[0]);
-                        PrepareStringBattle(STRINGID_PKMNGAINEDEXP, 0);
-                    }
-                    else if (namedCount == 2)
-                    {
-                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, named[0]);
-                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, 0, named[1]);
-                        PrepareStringBattle(STRINGID_TEAMGAINEDEXP, 0);
-                    }
-                    else
-                    {
-                        PrepareStringBattle(STRINGID_ECTEAMGAINEDEXP, 0);
-                    }
-                }
-            }
         }
         // fall through
     case 2: // set exp value to the poke in expgetter_id and print message
         if (gBattleControllerExecFlags == 0)
         {
+            gBattleStruct->battlerExpReward = 0;
+            if (*expMonId >= PARTY_SIZE)
+            {
+                gBattleScripting.getexpState = 6;
+                break;
+            }
             bool32 wasSentOut = (gBattleStruct->expSentInMons & (1u << *expMonId)) != 0;
             holdEffect = GetMonHoldEffect(&gParties[B_TRAINER_PLAYER][*expMonId]);
 
@@ -2339,38 +2318,21 @@ static void Cmd_getexp(void)
 
                 if (IsValidForBattle(&gParties[B_TRAINER_PLAYER][*expMonId]))
                 {
-                    if (wasSentOut)
-                        gBattleStruct->battlerExpReward = GetSoftLevelCapExpValue(gParties[B_TRAINER_PLAYER][*expMonId].level, gBattleStruct->expValue);
-                    else
-                        gBattleStruct->battlerExpReward = 0;
+                    gBattleStruct->battlerExpReward = CalculateMonExpReward(*expMonId, wasSentOut, holdEffect);
 
-                    if ((holdEffect == HOLD_EFFECT_EXP_SHARE || IsGen6ExpShareEnabled())
-                        && (B_SPLIT_EXP < GEN_6 || gBattleStruct->battlerExpReward == 0)) // only give exp share bonus in later gens if the mon wasn't sent out
+                    if (gBattleStruct->battlerExpReward > 0)
                     {
-                        gBattleStruct->battlerExpReward += GetSoftLevelCapExpValue(gParties[B_TRAINER_PLAYER][*expMonId].level, gBattleStruct->expShareExpValue);
+                        u32 stringId = IsTradedMon(&gParties[B_TRAINER_PLAYER][*expMonId]) ? STRINGID_ABOOSTED : STRINGID_EMPTYSTRING4;
+                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, *expMonId);
+                        PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId);
+                        PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleStruct->battlerExpReward);
+                        PrepareStringBattle(STRINGID_PKMNGAINEDEXP, 0);
                     }
-
-                    ApplyExperienceMultipliers(&gBattleStruct->battlerExpReward, *expMonId, gBattlerFainted);
-
-                    if (B_EXP_CAP_TYPE == EXP_CAP_HARD && gBattleStruct->battlerExpReward != 0)
-                    {
-                        enum GrowthRate growthRate = gSpeciesInfo[GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES)].growthRate;
-                        u32 currentExp = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_EXP);
-                        u32 levelCap = GetPlayerLevelCapForSpecies(GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES));
-
-                        // No experience can be banked beyond the species cap.
-                        // At its exact threshold, the final clamp yields zero.
-                        if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL) >= levelCap)
-                            gBattleStruct->battlerExpReward = B_EC_EXP_AT_CAP;
-                        if (gExperienceTables[growthRate][levelCap] < currentExp + gBattleStruct->battlerExpReward)
-                            gBattleStruct->battlerExpReward = gExperienceTables[growthRate][levelCap] - currentExp;
-                    }
-
-                    // The single announcement was already made in case 1; the
-                    // bars fill silently from here.
                     MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
                 }
-                gBattleScripting.getexpState++;
+                // A capped recipient earns EVs but needs no EXP message,
+                // controller animation or level-up processing.
+                gBattleScripting.getexpState = gBattleStruct->battlerExpReward == 0 ? 5 : 3;
             }
         }
         break;
@@ -3929,30 +3891,19 @@ static void Cmd_hitanimation(void)
 
 static u32 GetTrainerMoneyToGive(u16 trainerId)
 {
-    u32 lastMonLevel = 0;
-    u32 moneyReward;
-    u8 trainerMoney = 0;
-
     if (trainerId == TRAINER_SECRET_BASE)
-    {
-        moneyReward = 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
-    }
-    else
-    {
-        const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
-        if (party == NULL)
-            return 20;
-        lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
-        trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money ?: 5;
+        return 20 * gBattleResources->secretBase->party.levels[0] * gBattleStruct->moneyMultiplier;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            moneyReward = 8 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
-        else if (IsDoubleBattle())
-            moneyReward = 8 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * trainerMoney;
-        else
-            moneyReward = 8 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
-    }
+    const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
+    u32 partySize = party == NULL ? 0 : GetTrainerPartySizeFromId(trainerId);
+    if (party == NULL || partySize == 0)
+        return 20;
 
+    u32 trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money ?: 5;
+    u32 moneyReward = 8 * party[partySize - 1].lvl * gBattleStruct->moneyMultiplier * trainerMoney;
+    // Two separate trainers are paid separately by Cmd_getmoneyreward.
+    if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
+        moneyReward *= 2;
     return moneyReward;
 }
 
@@ -7927,9 +7878,8 @@ static u32 ComputeCaptureOdds(u32 wildMonBattler, u32 playerBattler)
     else
         catchRate = GetBattleMonCatchRate(battleMon);
 
-    catchRate += ball.flatBonus;
-    if (catchRate <= 0)
-        catchRate = catchRate + ball.flatBonus;
+    // Heavy Ball penalties must not turn negative before the unsigned HP math.
+    catchRate = max(1, catchRate + ball.flatBonus);
 
     odds = odds * catchRate / (battleMon->maxHP * 3);
     odds = odds * ball.multiplier / ball.divider;
@@ -7967,7 +7917,9 @@ static u32 ComputeCaptureOdds(u32 wildMonBattler, u32 playerBattler)
     // ball and every status still matter in the same proportion.
     odds = odds * B_EC_CATCH_ODDS_PERCENT / 100;
 
-    return odds;
+    // The shake formula divides by these odds. Small ball/HP multipliers may
+    // round below one; retain the smallest representable nonzero chance.
+    return max(1u, odds);
 }
 
 #if TESTING
@@ -9214,31 +9166,7 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         *expAmount = value + 1;
     }
 
-    // Emerald Champions: the further a Pokemon sits below the current cap, the
-    // larger its share, so a freshly caught or long-benched team member closes
-    // the gap instead of being stranded behind the party. This runs after the
-    // level scaling above so the two compound rather than cancel, and last of
-    // all comes the flat campaign multiplier.
-    if (B_EC_CATCHUP_PER_LEVEL != 0)
-    {
-        s32 partyBest = GetHighestLevelInPlayerParty();
-        u32 level = GetMonData(&gParties[B_TRAINER_PLAYER][expGetterMonId], MON_DATA_LEVEL);
 
-        // Measured against the party's strongest, not the cap: a new partner
-        // closes the gap on the team it actually travels with, and the bonus
-        // keeps working once the team is sitting at the cap. Nothing has to be
-        // held to earn it - the party's held items stay free for battle use.
-        if (partyBest > 0 && level < (u32)partyBest)
-        {
-            u32 bonus = 100 + ((u32)partyBest - level) * B_EC_CATCHUP_PER_LEVEL;
-
-            if (bonus > B_EC_CATCHUP_MAX)
-                bonus = B_EC_CATCHUP_MAX;
-            *expAmount = (*expAmount * bonus) / 100;
-        }
-    }
-
-    *expAmount = (*expAmount * B_EC_EXP_NUMERATOR) / B_EC_EXP_DENOMINATOR;
 }
 
 void BS_ItemRestoreHP(void)

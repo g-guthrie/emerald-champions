@@ -33,9 +33,8 @@ DewfordTown_PokemonCenter_1F_Text_StoneCavern: @ 81FC557
 	.string "there.$"
 
 DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM: @ 81FC5AE
-	.string "Even a fainted partner can help\n"
-	.string "with a field technique it could\l"
-	.string "learn.\p"
-	.string "You still need the right badge\n"
-	.string "and license.$"
-
+	.string "Once you have the badge and\n"
+	.string "license, HM skills work with\l"
+	.string "any team!\p"
+	.string "You never need a special Pokémon\n"
+	.string "or a spare move slot.$"

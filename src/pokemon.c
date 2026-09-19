@@ -4426,7 +4426,7 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
 bool32 RaiseMonToLevelerTarget(struct Pokemon *mon)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    u32 target = min(GetPreviousLevelCap(), GetPlayerLevelCapForSpecies(species));
+    u32 target = GetPlayerLevelCapForSpecies(species);
     u32 experience;
 
     if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG)
@@ -4442,7 +4442,7 @@ bool32 IsMonEligibleForLeveler(struct Pokemon *mon)
 {
     return GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE
         && !GetMonData(mon, MON_DATA_IS_EGG)
-        && (GetMonData(mon, MON_DATA_LEVEL) < min(GetPreviousLevelCap(), GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES)))
+        && (GetMonData(mon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES))
             || GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, NULL, CHECK_EVO) != SPECIES_NONE);
 }
 

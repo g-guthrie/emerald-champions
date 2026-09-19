@@ -3098,8 +3098,8 @@
 	@ a single byte, so the two are NOT interchangeable by argument - passing a
 	@ MOVE_* id straight through would silently select the wrong field move.
 	@ Translate here instead, and refuse to assemble anything with no field-move
-	@ equivalent rather than emit a wrong index. checkUnlocked stays FALSE,
-	@ which is the plain "who in the party can do this" check the donor had.
+	@ equivalent rather than emit a wrong index. HMs always enforce the player
+	@ unlock; non-HM moves retain their ordinary compatibility lookup.
 	.macro checkpartymove move:req
 	.if \move == MOVE_CUT
 	checkfieldmove FIELD_MOVE_CUT

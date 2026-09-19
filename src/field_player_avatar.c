@@ -1617,7 +1617,7 @@ enum Gender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 bool8 PartyHasMonWithSurf(void)
 {
     // Emerald Champions: the Balance Badge is the requirement; any party
-    // member surfs. See FieldMove_GetUserSlot.
+    // animation uses a party member, but access is the player's unlock.
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return FALSE;
     return FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) != PARTY_SIZE;

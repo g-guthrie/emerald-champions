@@ -104,11 +104,10 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs: @ 820446E
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces: @ 820461A
 	.string "I authorize you to use Surf!\p"
-	.string "With your Balance Badge, bring\n"
-	.string "a partner that can learn Surf\l"
-	.string "to the water's edge.\p"
-	.string "It doesn't need to know Surf\n"
-	.string "as a battle move.$"
+	.string "With your Balance Badge, press A\n"
+	.string "at the water's edge.\p"
+	.string "You can travel with any team.\n"
+	.string "Nobody needs to learn Surf!$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon: @ 8204661
 	.string "Wally's coming home soon.\n"

@@ -2301,8 +2301,8 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1);
 
     gSpecialVar_Result = FieldMove_GetUserSlot(fieldMove, doUnlockedCheck);
-    // Emerald Champions: VAR_0x8005 = 1 means "unlocked, but nobody in the
-    // party could learn it", with the move name in STR_VAR_1 for the message.
+    // Non-HM moves can still lack a compatible user. HM access itself
+    // depends only on the player's unlock, so this case never blocks an HM.
     gSpecialVar_0x8005 = 0;
     if (gSpecialVar_Result != PARTY_SIZE)
     {

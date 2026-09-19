@@ -80,7 +80,6 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
-#include "constants/battle_frontier.h"
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "constants/rgb.h"
@@ -6634,11 +6633,6 @@ void BufferEmeraldChampionsFormPreview(void)
     if (gSpecialVar_0x8006 == 1 && gSpecialVar_0x8005 < MAX_MON_MOVES)
     {
         enum Move move = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(gSpecialVar_0x8008)].move;
-        if (WouldPartyLoseSurfByReplacingMove(gSpecialVar_0x800A, gSpecialVar_0x8005, move))
-        {
-            StringCopy(gStringVar4, COMPOUND_STRING("Your party still needs its Surf\ncapability. Choose another move."));
-            return;
-        }
         enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
         StringCopy(gStringVar2, oldMove == MOVE_NONE ? COMPOUND_STRING("Empty slot") : GetMoveName(oldMove));
         StringCopy(gStringVar3, move == MOVE_NONE || MonKnowsMove(mon, move) ? COMPOUND_STRING("Empty slot") : GetMoveName(move));
