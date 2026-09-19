@@ -13,8 +13,7 @@ MeteorFalls_1F_2R_EventScript_Nicolas:: @ 822C4DE
 MeteorFalls_1F_2R_EventScript_RegisterNicolas:: @ 822C50A
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox MeteorFalls_1F_2R_Text_NicolasRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_NICOLAS_1
+	msgbox MeteorFalls_1F_2R_Text_NicolasPostBattle, MSGBOX_DEFAULT
 	release
 	end
 

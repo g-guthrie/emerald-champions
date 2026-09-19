@@ -1,27 +1,41 @@
-Current authorization (September 18): fix the full Inclement integration.
-Keep the immediate free opening gift of Eviolite, Choice Band, Choice Specs,
-Choice Scarf and Focus Sash; subsequent vendor copies are purchased. Preserve
-other major battle-item discoveries unless a concrete conflict needs repair.
-Proceed with repairs and native validation; the earlier discussion hold is lifted.
+# Full integration objective — September 19, 2026
 
-# Current objective
+Finish a coherent Inclement-based Emerald Champions campaign with the authored
+doubles teams/AI and the explicit retained QoL listed in AGENTS.md. Preserve the
+current integration branch and newer opening/rival fixes. Validate Inclement
+behavior first, each changed service/traversal rule next, and their combined
+native campaign path through the Champion. Do not strip and re-add doubles.
 
-Reconcile Inclement Emerald's world, story, progression and economy with the
-existing authored doubles campaign and battle AI. Inclement is the default
-when a design question has no explicit user exception.
+Main coordinates two Astra Low agents with separate campaign and system owners.
+Prioritize the actual fresh-save opening, Birch doubles/Mightyena staging,
+services/save continuity, HM-driven progression, dialogue/choreography, and
+species/reward availability. Follow the campaign forward, repairing demonstrated
+failures; use focused synthetic coverage for alternatives and failure branches.
+Optional minigame/activity polish comes last. No player guides or Game Book.
 
-Preserve the Center's universal legal-move tutor, native ability switcher,
-Flight Beacon, convenient field moves, reduced trainer roster, previous-cap
-Leveler and EXP improvements. Remove TMs as a player system and make their
-replacement rewards coherent. Battle items are purchased: starting stock is
-available immediately, other stock unlocks upon successful world acquisition
-or purchase from its original provider. Rematches are unwanted.
+Completion requires a source-bound playable ROM, passing relevant source and
+native checks, campaign progression evidence, reviewed visuals for changed scenes,
+and a clear account of repository/remote state. A build or fixture alone is not
+campaign or balance acceptance. Preserve pending work explicitly.
 
-The user explicitly removed the Game Book and all player guides, Center
-battle-set presets, and Center stat editing. Use Inclement's existing EV/IV
-services. Do not recreate publications or their maintenance obligations.
+Design coherence is an explicit completion requirement (latest user direction):
+Inclement's handcrafted progression must still make sense after the retained
+changes. Audit XP/current caps against the previous-cap Leveler; universal tutor
+against every live TM pickup/shop/gift and move-access quest; immediate held gear
+against later reward/shop value; and wild species/evolution/Mega availability
+against traversal and upcoming authored battles. A working feature or passing
+source gate alone does not prove a worthwhile incentive or coherent explanation.
 
-First investigate the responsible source and discuss remaining design choices
-with the user. Implement explicitly requested deletions now. Validate subsequent
-repairs with focused checks and native evidence before claiming working game
-behavior. A build alone does not establish progression, balance or completion.
+Do not treat blanket Rare Candy replacement as a settled design solution. For
+each affected reward/quest, establish what useful purpose remains at that stage,
+whether it should be removed or repurposed, and whether the resulting offer and
+dialogue match. Preserve useful story/exploration purposes and authored battles.
+Review concrete design tradeoffs with the main agent before changing economy or
+distribution; main should bring material unresolved choices to the user with
+source-backed options rather than silently redesigning the game.
+
+Explicit placement rule: use Inclement's existing overworld item locations only.
+Mega Stone sparkles can replace former ground-TM pickups; additional stones may
+replace existing TM gifts. No newly placed overworld/hidden items or extra sparkle
+locations. Audit existing item topology against pinned Inclement as well as new
+edits, and preserve original pickup access/coordinates/receipt identity.

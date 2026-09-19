@@ -19,7 +19,7 @@ static const struct EmeraldChampionsBattleSet sRescueSets[] =
         .moves = {MOVE_CRUNCH, MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_HELPING_HAND},
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_RATTLED,
+        .ability = ABILITY_INTIMIDATE,
         .evs = {4, 252, 0, 0, 0, 252},
     },
     {
@@ -116,7 +116,7 @@ bool32 IsEmeraldChampionsBirchRescueBattle(void)
 
 void CreateEmeraldChampionsBirchRescueParty(void)
 {
-    static const enum Species sSpecies[] = {SPECIES_POOCHYENA, SPECIES_ZIGZAGOON};
+    static const enum Species sSpecies[] = {SPECIES_MIGHTYENA, SPECIES_ZIGZAGOON};
 
     ZeroEnemyPartyMons();
     for (u32 i = 0; i < ARRAY_COUNT(sSpecies); i++)

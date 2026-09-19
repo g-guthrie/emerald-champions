@@ -29,10 +29,9 @@ GraniteCave_1F_Text_GetsDarkAheadHereYouGo: @ 822DA94
 	.string "Here you go, I'll pass this on to you.$"
 
 GraniteCave_1F_Text_ExplainFlash: @ 822DBB7
-	.string "Teach that hidden move Flash to\n"
-	.string "a Pokémon and use it.\p"
-	.string "It lights up even the inky darkness\n"
-	.string "of caves.\p"
-	.string "But, to use it, you need the Gym Badge\n"
-	.string "from Dewford's Pokémon Gym.$"
-
+	.string "I authorize you to use Flash!\p"
+	.string "With Dewford's Knuckle Badge,\n"
+	.string "bring a partner that can learn\l"
+	.string "Flash to light up dark caves.\p"
+	.string "It doesn't need to know Flash\n"
+	.string "as a battle move.$"

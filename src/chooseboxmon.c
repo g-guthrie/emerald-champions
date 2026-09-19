@@ -15,6 +15,7 @@
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "script.h"
+#include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "constants/party_menu.h"
@@ -211,6 +212,7 @@ enum LearnMoveState
 
     LEARNED_MOVE_1,
     LEARNED_MOVE_2,
+    WAIT_LEARNED_MOVE_FANFARE,
 
     FORGOT_MOVE_1,
 
@@ -341,7 +343,11 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
     case LEARNED_MOVE_2:
         gSpecialVar_Result = TRUE;
         ui->playFanfare(MUS_LEVEL_UP);
-        return LEARN_MOVE_END;
+        return WAIT_LEARNED_MOVE_FANFARE;
+    case WAIT_LEARNED_MOVE_FANFARE:
+        // Returning to the field resets tasks. Let the fanfare restore the
+        // paused map music before its task can be destroyed by UI teardown.
+        return IsFanfareTaskInactive() ? LEARN_MOVE_END : WAIT_LEARNED_MOVE_FANFARE;
     case FORGOT_MOVE_1:
         GetBoxMonNickname(boxmon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(GetBoxMonData(boxmon, MON_DATA_MOVE1 + GetMoveSlotToReplace())));

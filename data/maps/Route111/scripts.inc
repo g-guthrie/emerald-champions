@@ -476,8 +476,7 @@ Route111_EventScript_Dusty:: @ 81F1260
 Route111_EventScript_RegisterDusty:: @ 81F128C
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route111_Text_DustyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_DUSTY_1
+	msgbox Route111_Text_DustyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -513,8 +512,7 @@ Route111_EventScript_Wilton:: @ 81F1307
 Route111_EventScript_RegisterWilton:: @ 81F1333
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route111_Text_WiltonRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_WILTON_1
+	msgbox Route111_Text_WiltonPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -535,8 +533,7 @@ Route111_EventScript_Brooke:: @ 81F1369
 Route111_EventScript_RegisterBrooke:: @ 81F1395
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route111_Text_BrookeRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_BROOKE_1
+	msgbox Route111_Text_BrookePostBattle, MSGBOX_DEFAULT
 	release
 	end
 

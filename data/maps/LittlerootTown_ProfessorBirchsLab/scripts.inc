@@ -790,27 +790,30 @@ LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival: @ 81FA8F6
 	.string "a good idea to go see {RIVAL}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou: @ 81FA9D5
-	.string "Prof. Birch: Great!\n"
-	.string "{RIVAL} should be happy, too.\p"
-	.string "Get {RIVAL} to teach you what it\n"
-	.string "means to be a Trainer.$"
+	.string "Prof. Birch: Great! {RIVAL} is on\n"
+	.string "Route 103, north of Oldale Town.\p"
+	.string "Oldale's shop sells Poké Balls.\n"
+	.string "Catch more partners on the way\l"
+	.string "before you challenge {RIVAL}!\p"
+	.string "The Pokémon Center can help you\n"
+	.string "prepare your whole team.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay: @ 81FAA35
 	.string "Prof. Birch: Oh, don't be that way.\n"
 	.string "You should go meet my kid.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome: @ 81FAA74
-	.string "Prof. Birch: {RIVAL}?\n"
-	.string "Gone home, I think.\p"
-	.string "Or maybe that kid's scrabbling around\n"
-	.string "in tall grass again somewhere…\p"
-	.string "If you or your Pokémon get tired,\n"
-	.string "you should get some rest at home.$"
+	.string "Prof. Birch: Look for {RIVAL} on\n"
+	.string "Route 103, north of Oldale Town.\p"
+	.string "Buy Poké Balls in Oldale and\n"
+	.string "catch partners along the way.\p"
+	.string "The Pokémon Center will help\n"
+	.string "you prepare for the battle.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex: @ 81FAB22
 	.string "Prof. Birch: Oh, hi, {PLAYER}{KUN}!\p"
 	.string "I heard you beat {RIVAL} on\n"
-	.string "your first try. That's excellent!\p"
+	.string "Route 103. That's excellent!\p"
 	.string "{RIVAL}'s been helping with my research\n"
 	.string "for a long time.\p"
 	.string "{RIVAL} has an extensive history as\n"

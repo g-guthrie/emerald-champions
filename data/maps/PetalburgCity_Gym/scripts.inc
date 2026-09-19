@@ -478,12 +478,6 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox PetalburgCity_Gym_Text_RegisteredExploud, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	msgbox PetalburgCity_Gym_Text_TakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7

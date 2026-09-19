@@ -118,8 +118,7 @@ Route114_EventScript_Steve:: @ 81F269C
 Route114_EventScript_RegisterSteve:: @ 81F26C8
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route114_Text_SteveRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_STEVE_1
+	msgbox Route114_Text_StevePostBattle, MSGBOX_DEFAULT
 	release
 	end
 

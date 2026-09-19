@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "international_string_util.h"
 #include "pokemon.h"
 #include "string_util.h"
@@ -75,7 +76,8 @@ void BufferChosenMonEV(void)
 
     if (stat >= NUM_STATS)
         stat = 0;
-    ConvertIntToDecimalStringN(gStringVar2, GetMonData(ChosenMon(), sStatData[stat]), STR_CONV_MODE_LEFT_ALIGN, 3);
+    gSpecialVar_0x8006 = GetMonData(ChosenMon(), sStatData[stat]);
+    ConvertIntToDecimalStringN(gStringVar2, gSpecialVar_0x8006, STR_CONV_MODE_LEFT_ALIGN, 3);
 }
 
 void BufferChosenMonIV(void)
@@ -84,12 +86,13 @@ void BufferChosenMonIV(void)
 
     if (stat >= NUM_STATS)
         stat = 0;
-    ConvertIntToDecimalStringN(gStringVar2, GetMonData(ChosenMon(), sIvData[stat]), STR_CONV_MODE_LEFT_ALIGN, 2);
+    gSpecialVar_0x8006 = GetMonData(ChosenMon(), sIvData[stat]);
+    ConvertIntToDecimalStringN(gStringVar2, gSpecialVar_0x8006, STR_CONV_MODE_LEFT_ALIGN, 2);
 }
 
 void BufferChosenMonNature(void)
 {
-    StringCopy(gStringVar2, gNaturesInfo[GetNature(ChosenMon())].name);
+    StringCopy(gStringVar2, gNaturesInfo[GetMonData(ChosenMon(), MON_DATA_HIDDEN_NATURE)].name);
 }
 
 // TRUE while the spread still has room for the requested amount.
@@ -100,8 +103,9 @@ void CheckChosenMonCanGainEVs(void)
     u32 want = gSpecialVar_0x8006;
     u32 current = GetMonData(mon, sStatData[stat]);
 
+    gSpecialVar_0x8008 = TotalEVs(mon);
     gSpecialVar_Result = (current + want <= MAX_PER_STAT_EVS
-                       && TotalEVs(mon) + want <= MAX_TOTAL_EVS);
+                       && gSpecialVar_0x8008 + want <= MAX_TOTAL_EVS);
 }
 
 void AreChosenMonEVsMaxedOut(void)
@@ -109,10 +113,9 @@ void AreChosenMonEVsMaxedOut(void)
     gSpecialVar_Result = (TotalEVs(ChosenMon()) >= MAX_TOTAL_EVS);
 }
 
-void Special_AreLeadMonEVsMaxedOut(void)
+bool8 Special_AreLeadMonEVsMaxedOut(void)
 {
-    gSpecialVar_0x8004 = 0;
-    AreChosenMonEVsMaxedOut();
+    return TotalEVs(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]) >= MAX_TOTAL_EVS;
 }
 
 void IncreaseChosenMonEVs(void)
@@ -131,7 +134,7 @@ void IncreaseChosenMonEVs(void)
     gained = current + want;
     SetMonData(mon, sStatData[stat], &gained);
     CalculateMonStats(mon);
-    gSpecialVar_0x8007 = want;
+    gSpecialVar_0x8007 = gained;
     gSpecialVar_Result = (want != 0);
 }
 
@@ -145,54 +148,62 @@ void ResetChosenMonEVs(void)
     CalculateMonStats(mon);
 }
 
-// Hyper Training: one stat, or every stat, taken to its ceiling.
+// The native menu permits low IVs as well as maximum IVs.
 void ChangeChosenMonIVs(void)
 {
     struct Pokemon *mon = ChosenMon();
     u32 stat = gSpecialVar_0x8005;
-    u32 best = MAX_PER_STAT_IVS;
+    u32 value = gSpecialVar_0x8006;
 
-    if (stat >= NUM_STATS)
-    {
-        for (u32 i = 0; i < NUM_STATS; i++)
-            SetMonData(mon, sIvData[i], &best);
-    }
-    else
-    {
-        SetMonData(mon, sIvData[stat], &best);
-    }
+    if (stat >= NUM_STATS || value > MAX_PER_STAT_IVS)
+        return;
+    SetMonData(mon, sIvData[stat], &value);
     CalculateMonStats(mon);
 }
 
-// Hidden Power's type follows from the IV parities, so the chosen type is
-// reached by nudging each IV's low bit rather than by storing a type.
+// The native scroll menu saves the party slot in 800A and the type in 8007.
+// Minimize Attack, then retain as many maximum remaining IVs as possible.
 void ChangeChosenMonHiddenPower(void)
 {
-    static const u8 sOrder[NUM_STATS] = {0, 1, 2, 3, 4, 5};
-    struct Pokemon *mon = ChosenMon();
-    u32 wanted = gSpecialVar_0x8005;
-    u32 bits = (wanted * 63) / (NUMBER_OF_MON_TYPES - 3);
+    static const u8 spreads[16][NUM_STATS] = {
+        {31, 0, 30, 30, 30, 30}, // Fighting
+        {31, 0, 31, 30, 30, 30}, // Flying
+        {31, 0, 30, 31, 30, 30}, // Poison
+        {31, 0, 31, 31, 30, 30}, // Ground
+        {31, 0, 30, 30, 31, 30}, // Rock
+        {31, 0, 30, 31, 31, 30}, // Bug
+        {31, 0, 31, 31, 31, 30}, // Ghost
+        {31, 0, 30, 30, 30, 31}, // Steel
+        {31, 0, 31, 30, 30, 31}, // Fire
+        {31, 0, 30, 31, 30, 31}, // Water
+        {31, 0, 31, 31, 30, 31}, // Grass
+        {31, 0, 30, 30, 31, 31}, // Electric
+        {31, 0, 31, 30, 31, 31}, // Psychic
+        {31, 0, 30, 31, 31, 31}, // Ice
+        {31, 0, 31, 31, 31, 31}, // Dragon
+        {31, 1, 31, 31, 31, 31}, // Dark
+    };
+    u32 slot = gSpecialVar_0x800A;
+    u32 type = gSpecialVar_0x8007;
 
+    if (slot >= PARTY_SIZE || type >= ARRAY_COUNT(spreads))
+        return;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
     for (u32 i = 0; i < NUM_STATS; i++)
-    {
-        u32 iv = GetMonData(mon, sIvData[sOrder[i]]);
-
-        iv = (iv & ~1u) | ((bits >> i) & 1u);
-        SetMonData(mon, sIvData[sOrder[i]], &iv);
-    }
+        SetMonData(mon, sIvData[i], &spreads[type][i]);
     CalculateMonStats(mon);
 }
 
 void ChangePokemonNature(void)
 {
     struct Pokemon *mon = ChosenMon();
-    u32 nature = gSpecialVar_0x8006;
+    u32 raisedStat = gSpecialVar_0x8005;
+    u32 loweredStat = gSpecialVar_0x8006;
 
-    if (nature >= NUM_NATURES)
-        nature = 0;
-    // This engine keeps the visible nature separate from personality, the same
-    // field the Champions tutor writes, so the change survives without
-    // rerolling the Pokemon.
+    if (raisedStat >= NUM_STATS - 1 || loweredStat >= NUM_STATS - 1)
+        return;
+    u32 nature = raisedStat * (NUM_STATS - 1) + loweredStat;
+    // Preserve personality; this is the effective nature used for stats.
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
     CalculateMonStats(mon);
 }
@@ -213,7 +224,7 @@ void BufferVarsForIVRater(void)
             bestStat = i;
         }
     }
-    gSpecialVar_0x8005 = bestStat;
-    gSpecialVar_0x8006 = best;
-    gSpecialVar_0x8007 = total;
+    gSpecialVar_0x8005 = total;
+    gSpecialVar_0x8006 = bestStat;
+    gSpecialVar_0x8007 = best;
 }

@@ -315,10 +315,12 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut: @ 82148C0
 	.string "Pokémon battle experts.\p"
 	.string "So, what brings you to this School?\n"
 	.string "Are you a Trainer, too?\p"
-	.string "The first thing you should do is to\n"
-	.string "have a Pokémon learn the move Cut.\p"
-	.string "If I remember correctly, someone in\n"
-	.string "this town has Cut.$"
+	.string "The Cutter's house is west of\n"
+	.string "the Pokémon Center. Ask him for\l"
+	.string "a Cut license.\p"
+	.string "With the Stone Badge, a partner\n"
+	.string "that can learn Cut can clear\l"
+	.string "thin trees without knowing it.$"
 
 RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown: @ 8214A5F
 	.string "Scott: Hmm…\p"

@@ -144,9 +144,6 @@ RustboroCity_Gym_EventScript_RegisterRoxanne:: @ 821307B
 	pokenavcall RustboroCity_Gym_Text_RoxanneRegisterCall
 	waitmessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Gym_Text_RegisteredRoxanne, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_ROXANNE_MATCH_CALL
@@ -452,12 +449,12 @@ RustboroCity_Gym_Text_RoxanneRegisterCall: @ 8213A76
 	.string "I heard from Brawly that you're\n"
 	.string "moving up through the ranks of\l"
 	.string "Trainers at an incredible clip.\p"
-	.string "Well, I'd rather not think that\n"
-	.string "I can't beat you.\p"
-	.string "I promise, I will shape up my Gym\n"
-	.string "so that you may challenge us again.\p"
-	.string "I hope you'll be looking forward to\n"
-	.string "that occasion as much as me!\p"
+	.string "Your battle showed my students\n"
+	.string "how much teamwork matters.\p"
+	.string "Keep discovering new partners\n"
+	.string "and learning from your battles.\p"
+	.string "I look forward to hearing more\n"
+	.string "about your journey!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
 

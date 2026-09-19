@@ -163,14 +163,15 @@ SSTidalRooms_Text_NaomiPostBattle: @ 823D013
 	.string "side to touring Hoenn by ferry.$"
 
 SSTidalRooms_Text_NotSuspiciousTakeThis: @ 823D098
-	.string "Uh… Hi! I… I'm not acting suspicious!\n"
-	.string "Uh… You can have this! For free!\p"
-	.string "It… Honestly, I didn't Snatch it from\n"
-	.string "someone! I'd never do such a thing!\l"
-	.string "It's clean! You can use it!$"
+	.string "Uh… Hi! I'm not acting suspicious!\n"
+	.string "You can have this Rare Candy!\p"
+	.string "Honestly, I didn't snatch it\n"
+	.string "from someone! I'd never do that!$"
 
 SSTidalRooms_Text_ExplainSnatch: @ 823D145
-	.string "Snatch steals the beneficial effects\n"
-	.string "of certain moves before they can be\l"
-	.string "used by a foe or ally.$"
+	.string "Rare Candy raises a Pokémon\n"
+	.string "one level, up to your cap.\p"
+	.string "If you want to learn Snatch,\n"
+	.string "ask the Center's move tutor.\p"
+	.string "Just don't try it on me!$"
 

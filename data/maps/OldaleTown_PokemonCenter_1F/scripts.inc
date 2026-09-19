@@ -52,13 +52,11 @@ OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat: @ 81FC0CD
 	.string "You never have to worry!$"
 
 OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable: @ 81FC148
-	.string "The Pokémon Wireless Club on\n"
-	.string "the second floor was built recently.\p"
-	.string "But they say they're still making\n"
-	.string "adjustments.$"
+	.string "The nurse has useful travel tools.\n"
+	.string "She'll also heal your whole team.$"
 
 OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub: @ 81FC1B9
-	.string "The Pokémon Wireless Club on\n"
-	.string "the second floor was built recently.\p"
-	.string "I traded Pokémon right away.$"
+	.string "I change my team as I travel.\p"
+	.string "The tutor here helps each partner\n"
+	.string "learn new moves for free!$"
 

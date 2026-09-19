@@ -4,7 +4,7 @@ OldaleTown_Mart_MapScripts:: @ 81FC23F
 OldaleTown_Mart_EventScript_Woman:: @ 81FC28A
 	lock
 	faceplayer
-	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_EventScript_PokeBallsInStock
+	goto_if_set FLAG_SYS_POKEMON_GET, OldaleTown_Mart_EventScript_PokeBallsInStock
 	msgbox OldaleTown_Mart_Text_PokeBallsAreSoldOut, MSGBOX_DEFAULT
 	release
 	end

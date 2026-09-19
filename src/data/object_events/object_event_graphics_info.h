@@ -2508,7 +2508,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HotSpringsOldWoman
     .width = 16,
     .height = 32,
     .paletteSlot = PALSLOT_NPC_4,
-    .shadowSize = SHADOW_SIZE_M,
+    // This is an already submerged head on the pool's normal marker tile.
+    .shadowSize = SHADOW_SIZE_NONE,
     .inanimate = FALSE,
     .compressed = FALSE,
     .tracks = TRACKS_FOOT,
@@ -3672,24 +3673,6 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regice = {
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Standard,
     .images = sPicTable_InclementRegice,
-};
-
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regigigas = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_2,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 512,
-    .width = 32,
-    .height = 32,
-    .paletteSlot = PALSLOT_NPC_2,
-    .shadowSize = SHADOW_SIZE_M,
-    .inanimate = TRUE,
-    .compressed = FALSE,
-    .tracks = TRACKS_FOOT,
-    .oam = &gObjectEventBaseOam_32x32,
-    .subspriteTables = sOamTables_32x32,
-    .anims = sAnimTable_Standard,
-    .images = sPicTable_InclementRegigigas,
 };
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Jirachi = {

@@ -380,6 +380,7 @@ EventScript_UseWaterfall::
 
 EventScript_CannotUseWaterfall::
 	lockall
+	setvar VAR_0x8005, 0
 
 EventScript_CantWaterfall::
 	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
@@ -456,7 +457,7 @@ EventScript_NoSurface::
 	releaseall
 	end
 
-EventScript_DigCommon:
+EventScript_DigCommon::
 	isfollowerfieldmoveuser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if true
 	dofieldeffect FLDEFF_USE_DIG

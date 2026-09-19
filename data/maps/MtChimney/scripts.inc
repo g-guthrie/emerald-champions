@@ -491,8 +491,7 @@ MtChimney_EventScript_Shelby:: @ 822F14A
 MtChimney_EventScript_DefeatedShelby:: @ 822F176
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox MtChimney_Text_ShelbyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_SHELBY_1
+	msgbox MtChimney_Text_ShelbyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 

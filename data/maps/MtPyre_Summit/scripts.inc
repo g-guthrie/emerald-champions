@@ -670,3 +670,47 @@ MtPyre_Summit_Text_HoennTrioTale: @ 823325D
 	.string "Then, its duty done, the green Pokémon\n"
 	.string "flew off into the wild blue yonder…$"
 
+
+MtPyre_Summit_EventScript_Darkrai::
+	lockall
+	special TryUnlockDarkraiLegendarySign
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
+	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiDormant
+	goto_if_eq VAR_RESULT, 1, MtPyre_Summit_EventScript_DarkraiDormant
+	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_DarkraiQuiet
+	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI
+	special CreateSelectedLegendarySignEncounter
+	goto_if_eq VAR_RESULT, FALSE, MtPyre_Summit_EventScript_DarkraiDormant
+	playmoncry SPECIES_DARKRAI, CRY_MODE_ENCOUNTER
+	waitmoncry
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	waitstate
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryRestingAtShrine
+	releaseall
+	end
+
+MtPyre_Summit_EventScript_DarkraiDormant::
+	msgbox MtPyre_Summit_Text_DarkraiDormant, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MtPyre_Summit_EventScript_DarkraiQuiet::
+	msgbox MtPyre_Summit_Text_DarkraiQuiet, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MtPyre_Summit_Text_DarkraiDormant:
+	.string "A dream can calm this nightmare.\p"
+	.string "After helping the elders, catch\n"
+	.string "Munna in Verdanturf Meadow,\l"
+	.string "then return to this pedestal.\p"
+	.string "Munna or Musharna can be in\n"
+	.string "your party or your PC.$"
+
+MtPyre_Summit_Text_DarkraiQuiet:
+	.string "The nightmare has lifted.\n"
+	.string "The pedestal is quiet.$"

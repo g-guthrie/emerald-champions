@@ -391,9 +391,6 @@ Route104_EventScript_SailToDewfordDadCalls:: @ 81ED0EF
 	pokenavcall Route104_Text_DadPokenavCall
 	waitmessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox Route104_Text_RegisteredDadInPokenav, MSGBOX_DEFAULT
-	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_NORMAN_MATCH_CALL
@@ -1055,9 +1052,10 @@ Route104_Text_ImNotATrainer: @ 81ED7A2
 Route104_Text_LikeFillingMouthWithSeedsTakeThis: @ 81ED838
 	.string "I like filling my mouth with seeds,\n"
 	.string "then spitting them out fast!\p"
-	.string "You can have this, so you try it out!\p"
-	.string "Use it on a Pokémon, and it will learn\n"
-	.string "a move for firing seeds rapidly.$"
+	.string "Here, have a Rare Candy for\n"
+	.string "your Pokémon!\p"
+	.string "It helps one grow a level, up\n"
+	.string "to your current cap.$"
 
 Route104_Text_TMsAreOneTimeUse:
 	.string "The Center tutor teaches every\n"

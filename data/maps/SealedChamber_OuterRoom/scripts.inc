@@ -112,8 +112,25 @@ SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall:: @ 82391D0
 	braillemessage SealedChamber_OuterRoom_Braille_DigHere
 	waitbuttonpress
 	closebraillemessage
+	checkfieldmove FIELD_MOVE_DIG, TRUE
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_NobodyCanUseFieldMove
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
+	msgbox SealedChamber_OuterRoom_Text_UseDig, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SealedChamber_OuterRoom_EventScript_DeclineDig
+	msgbox SealedChamber_OuterRoom_Text_UsedDig, MSGBOX_DEFAULT
+	goto EventScript_DigCommon
+
+SealedChamber_OuterRoom_EventScript_DeclineDig::
 	releaseall
 	end
+
+SealedChamber_OuterRoom_Text_UseDig:
+	.string "Would you like {STR_VAR_1}\n"
+	.string "to use Dig here?$"
+
+SealedChamber_OuterRoom_Text_UsedDig:
+	.string "{STR_VAR_1} used Dig!$"
 
 SealedChamber_OuterRoom_EventScript_HoleInWall:: @ 82391E3
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT

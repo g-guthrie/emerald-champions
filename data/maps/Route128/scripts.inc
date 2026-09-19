@@ -212,8 +212,7 @@ Route128_EventScript_Katelyn:: @ 81F6D20
 Route128_EventScript_RegisterKatelyn:: @ 81F6D4C
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route128_Text_KatelynRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_KATELYN_1
+	msgbox Route128_Text_KatelynPostBattle, MSGBOX_DEFAULT
 	release
 	end
 

@@ -103,8 +103,12 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs: @ 820446E
 	.string "I'd really like you to have this.$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces: @ 820461A
-	.string "If your Pokémon can Surf, you'll be\n"
-	.string "able to go to all sorts of places.$"
+	.string "I authorize you to use Surf!\p"
+	.string "With your Balance Badge, bring\n"
+	.string "a partner that can learn Surf\l"
+	.string "to the water's edge.\p"
+	.string "It doesn't need to know Surf\n"
+	.string "as a battle move.$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon: @ 8204661
 	.string "Wally's coming home soon.\n"

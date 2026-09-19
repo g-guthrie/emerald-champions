@@ -2358,9 +2358,8 @@ static void Cmd_getexp(void)
                         u32 currentExp = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_EXP);
                         u32 levelCap = GetPlayerLevelCapForSpecies(GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES));
 
-                        // At the cap a fight still pays a token point rather than a
-                        // flat zero, but it can never carry a Pokemon past the cap's
-                        // own experience threshold, so the ceiling still holds.
+                        // No experience can be banked beyond the species cap.
+                        // At its exact threshold, the final clamp yields zero.
                         if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL) >= levelCap)
                             gBattleStruct->battlerExpReward = B_EC_EXP_AT_CAP;
                         if (gExperienceTables[growthRate][levelCap] < currentExp + gBattleStruct->battlerExpReward)
@@ -7708,7 +7707,7 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
     ball->flatBonus = 0;
     ball->guaranteedCapture = FALSE;
 
-    if (gSpeciesInfo[battleMon->species].isUltraBeast)
+    if (gSpeciesInfo[battleMon->species].isUltraBeast && ballId != BALL_MASTER)
     {
         if (ballId == BALL_BEAST)
             ball->multiplier = 500;
@@ -7970,6 +7969,13 @@ static u32 ComputeCaptureOdds(u32 wildMonBattler, u32 playerBattler)
 
     return odds;
 }
+
+#if TESTING
+u32 Test_ComputeCaptureOdds(u32 wildMonBattler, u32 playerBattler)
+{
+    return ComputeCaptureOdds(wildMonBattler, playerBattler);
+}
+#endif
 
 static bool32 CriticalCapture(u32 odds)
 {

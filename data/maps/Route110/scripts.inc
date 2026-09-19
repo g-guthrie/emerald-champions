@@ -276,8 +276,7 @@ Route110_EventScript_Isabel:: @ 81EF5A2
 Route110_EventScript_IsabelRegisterMatchCallAfterBattle:: @ 81EF5CE
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route110_Text_IsabelRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ISABEL_1
+	msgbox Route110_Text_IsabelPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -336,9 +335,11 @@ Route110_EventScript_CyclingChallengeResults:: @ 81EF673
 
 Route110_EventScript_ChallengeReactionBest:: @ 81EF6FD
 	msgbox Route110_Text_ChallengeReactionBest, MSGBOX_DEFAULT
-	goto_if_set FLAG_TM93_WILD_CHARGE, Route110_EventScript_EndChallenge
+	goto_if_set FLAG_RECEIVED_ROUTE110_CYCLING_REWARD, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM93, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
+	goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_EndChallenge
+	setflag FLAG_RECEIVED_ROUTE110_CYCLING_REWARD
 	goto Route110_EventScript_EndChallenge
 	end
 

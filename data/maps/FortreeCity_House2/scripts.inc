@@ -121,13 +121,15 @@ FortreeCity_House2_Text_CorrectTryAgainWhichHand2: @ 82179C9
 
 FortreeCity_House2_Text_YourHiddenPowerHasAwoken: @ 8217A28
 	.string "Oh! Splendid!\n"
-	.string "Your hidden power has awoken!\p"
-	.string "Here, take this and awaken the hidden\n"
-	.string "power of your Pokémon.$"
+	.string "Your intuition is remarkable!\p"
+	.string "Here, take this Rare Candy\n"
+	.string "to help your Pokémon grow.$"
 
 FortreeCity_House2_Text_ExplainHiddenPower: @ 8217A91
-	.string "Hidden Power is a move that changes\n"
-	.string "with the Pokémon.$"
+	.string "Rare Candy raises a Pokémon\n"
+	.string "one level, up to your cap.\p"
+	.string "For Hidden Power, visit the\n"
+	.string "Pokémon Center's move tutor.$"
 
 FortreeCity_House2_Text_YouGuessedWrong: @ 8217AC7
 	.string "No, too bad.\n"

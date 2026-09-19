@@ -33,11 +33,13 @@ RustboroCity_Mart_EventScript_ReceivedTM98::
 RustboroCity_Mart_Text_ExcuseMeTrainer:
 	.string "Excuse me, Trainer over there.\n"
 	.string "Do you have a minute?\p"
-	.string "You know, sometimes moves are too\n"
-	.string "strong to catch a Pokémon.\p"
-	.string "You end up making a Pokémon faint even\n"
-	.string "when you don't want to.\p"
-	.string "For such a common problem, use this!$"
+	.string "False Swipe leaves a wild Pokémon\n"
+	.string "with at least one HP. It helps\l"
+	.string "when you're trying to catch one.\p"
+	.string "The Center tutor can teach it\n"
+	.string "to compatible Pokémon.\p"
+	.string "Here's a Rare Candy to help\n"
+	.string "your new partners grow!$"
 
 RustboroCity_Mart_Text_HaveTM98:
 	.string "Use that Rare Candy to help a\n"

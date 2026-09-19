@@ -462,8 +462,7 @@ Route109_EventScript_Lola:: @ 81EEAFB
 Route109_EventScript_LolaRegisterMatchCallAfterBattle:: @ 81EEB27
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route109_Text_LolaRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_LOLA_1
+	msgbox Route109_Text_LolaPostBattle, MSGBOX_DEFAULT
 	release
 	end
 

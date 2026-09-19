@@ -128,6 +128,7 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
         return sSignLocationSealedChamber;
     case LEGENDARY_SIGN_MEWTWO:
     case LEGENDARY_SIGN_GUZZLORD:
+    case LEGENDARY_SIGN_POIPOLE:
         return sSignLocationAlteringB1F;
     case LEGENDARY_SIGN_BLACEPHALON:
         return sSignLocationEmberPath;
@@ -161,6 +162,7 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
         return sSignLocationRoute111Ruins;
     case LEGENDARY_SIGN_MESPRIT:
     case LEGENDARY_SIGN_XERNEAS:
+    case LEGENDARY_SIGN_CELESTEELA:
         return sSignLocationRoute120;
     case LEGENDARY_SIGN_PALKIA:
     case LEGENDARY_SIGN_NIHILEGO:
@@ -174,6 +176,7 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     case LEGENDARY_SIGN_REGIELEKI:
     case LEGENDARY_SIGN_ZAPDOS:
     case LEGENDARY_SIGN_MELTAN:
+    case LEGENDARY_SIGN_XURKITREE:
     case LEGENDARY_SIGN_ZEKROM:
     case LEGENDARY_SIGN_ZERAORA:
         return sSignLocationNewMauville;
@@ -908,7 +911,7 @@ static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
     }
     if (sign->requiredFlag == FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE && !FlagGet(sign->requiredFlag))
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, resolve the weather crisis\nin Sootopolis."));
-    else if (sign->requiredFlag == FLAG_EC_REPORT_C28_COMPLETE && !FlagGet(sign->requiredFlag))
+    else if (sign->requiredFlag == FLAG_GOT_TM24_FROM_WATTSON && !FlagGet(sign->requiredFlag))
         StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Wattson stop New Mauville's\ngenerator, then report back to him."));
     else if (sign->requiredFlag == FLAG_HIDE_ROUTE_119_TEAM_AQUA && !FlagGet(sign->requiredFlag))
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, rescue the Weather Institute\nresearchers from Team Aqua."));

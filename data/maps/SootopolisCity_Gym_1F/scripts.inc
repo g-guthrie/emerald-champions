@@ -103,12 +103,6 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox SootopolisCity_Gym_1F_Text_RegisteredKabutops, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	msgbox SootopolisCity_Gym_1F_Text_TakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
@@ -121,12 +115,6 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 	call Common_EventScript_SetGymTrainers
 	call SootopolisCity_Gym_1F_EventScript_GiveScald
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox SootopolisCity_Gym_1F_Text_RegisteredJuan, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_JUAN_MATCH_CALL
 	release
 	end

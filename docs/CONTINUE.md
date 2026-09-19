@@ -1,41 +1,169 @@
-Current authorization (September 18): fix the full Inclement integration.
-Keep the immediate free opening gift of Eviolite, Choice Band, Choice Specs,
-Choice Scarf and Focus Sash; subsequent vendor copies are purchased. Preserve
-other major battle-item discoveries unless a concrete conflict needs repair.
-Proceed with repairs and native validation; the earlier discussion hold is lifted.
+# Current integration checkpoint — September 19, 2026
 
-# Current work — September 18, 2026
+## Goal and authority
 
-The user superseded the custom campaign with Inclement Emerald as the default
-for design decisions, preserving authored doubles battles/AI and explicit QoL.
-The active branch is `inclement-merge`, based on `13061e9ba2`.
-The Game Book, reading copy and field guide are removed by explicit request.
-Center battle-set presets and Center stat editing are removed; keep the
-move tutor, native ability switcher and Inclement's existing EV/IV services.
-Do not recreate guides or use their historical requirements as authority.
+Complete the native campaign through the Champion, repairing integration and
+proving design coherence around the user's retained changes. Inclement is the
+world/progression baseline; preserve authored doubles teams and AI, native ability
+switching, universal legal-move tutor/no TMs, capability field moves/Flight Beacon,
+previous-cap Leveler/EXP, and the immediate five held-item gifts with paid copies.
+Use native stat services. No Game Book, player guides or Center presets/stat editor.
 
-Current priority is real opening playability from NEW GAME, ordinary native
-input/battle controls, followed by Center services and native Save/clean Continue.
-Do not use chapter fixtures as evidence of earned opening progression. One
-Astra Medium implementation agent works under the main agent's read-only review;
-no nested delegation, commits, pushes, resets or guide regeneration. Optional
-activity gameplay is deferred until the core game is testable.
+Latest explicit placement rule: no new overworld item locations. Mega Stones may
+replace existing Inclement pickups or TM gifts only. Preserve coordinates, access,
+layout, actor IDs and receipts. The full audit matches all 276 visible and 165 hidden
+item locations to pinned Inclement cf41a95b6; no extra positions exist.
 
-Delivered September 18 test ROM SHA256:
-105e9c9ea1caac1f494f62a9a8a3555f8187c0dadec720cd391904d5a03bbf82.
-Its normal/headless builds and full release source/header/memory gates passed.
-Authoring/native comparison preserves 368 variants and 1,753 opponent Pokemon;
-protected trainer/AI files remain unchanged. Six focused native economy tests
-passed. Synthetic native captures verified the opening five-item kit, consolidated
-Center supplies/held-item clerk (including paid purchase and exit), and the
-Space Center two retained battles/retreat using forced wins. These are scoped
-checks, not proof that the opening or entire campaign is playable.
+Current rules are consolidated in AGENTS.md and docs/GOAL.md. Historical early
+Steven Mega unlock and automatic faint-count retuning are superseded. Mega Ring
+access remains the native Norman handoff. Current design review must distinguish
+runtime bugs, stale explanations and genuinely useful rewards; do not silently
+rebalance prices, caps, teams or distribution.
 
-Known pending checks: actual new-game journey and save continuity; complete
-Museum delivery beyond Archie; campaign traversal/balance; optional activity
-runtime acceptance. The user's report is that the delivered game is still buggy.
-Reproduce observable failures and fix them before claiming a tested block works.
-Evidence for the prior scoped pass: work/inclement-reconciliation-20260918/.
+## Owners and repository
+
+- Main coordinates review, Git, docs, shared builds and delivery.
+- campaign_integration (Astra Low): data/maps, earned traversal/battles, map evidence.
+- systems_integration (Astra Low): engine, headers/shared scripts, tests, system evidence.
+- compatibility_audit (Sol Low): independent analogous-bug/coherence audits; native
+  observations may write evidence only, never production source or run shared builds.
+- No concurrent makes. Agree source freezes, then test immutable ROM/ELF pairs.
+- Active checkout: game-source, branch inclement-merge. Integration base is
+  9975c05d57; the verified September19 repairs are being recorded as a local Git
+  checkpoint on this branch. Remote main 508775fad8 and origin/inclement-merge are
+  unchanged; no push, PR or main merge. Preserve newer opening/rival commits and
+  the three starting fixes recorded in work/integration-20260919/starting-*.
+
+## Artifacts and current checks
+
+The DELIVERED Desktop ROM is batch9:
+`/Users/gguthrie/Desktop/Pokémon Emerald Champions/Emerald Champions - Inclement Test - 2026-09-19.gba`
+SHA256 66f1ee0af0459c911dcc981b296c84d0791b87ed137f4d670ade9b8377be2922.
+Archive: ../downloads/inclement-test-20260919-batch9/ (ROM, ELF, input stamp, patch,
+verification). Prior batch6, batch4 and September18 archives remain preserved.
+
+Both batch9 builds, all16 focused native regressions and release gates PASS.
+Immutable pairs: work/integration-20260919/batch9/{release,native}/pokeemerald.*.
+Native SHA256 2a673d07b93661f9a96669d50f2724a6e1d1cab79904ad8b06b6ee7c99ce3550.
+Fresh GUI acceptance passed EV payment (6000→5600, selected64→68), No, insufficient
+funds and both Nature-menu explicit Exit choices; negative cases preserve full party
+and money/berries. Prior paid IV/Hidden Power/nature paths also passed. No shared
+build is running. Only main publishes normal releases, never fixture ROMs.
+
+Build commands/toolchain are in the logs and docs/VERIFICATION.md. DEVKITARM is
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload. Build release with
+USE_LTO_ON_RELEASE=0, stamp actual inputs after successful make, preserve ELF/ROM
+identity. Never make -n. Save normally and clean-Continue between ROMs; never load a
+savestate into a different ROM or restamp stale objects to manufacture freshness.
+
+## Earned campaign checkpoint
+
+Actual New Game, paired starter selection, doubles Mightyena/Zigzagoon rescue win,
+Birch lab handoff, Oldale services and normal Save/Continue were exercised. Paid
+pre-rival balls were unavailable; corrected stock now opens after rescue. Native
+paid captures: Wurmple (evolved to Dustox), Lillipup, Shellos and Snubbull, alongside
+Torchic/Mudkip. Leveler, legal tutor, ability switching, free equipment and paid
+copies were used normally. No assisted party edits, medicine, forced outcomes,
+trainer-win or story-flag writes in this earned run.
+
+First two-starter rival attempt lost. Prepared six-member retry WON: four faints,
+Dustox7HP/Lillipup3HP surviving, authored team/AI unchanged. Actual Birch/Mom sendoff
+then gave Pokédex, Old Rod, 30 Cherish Balls and the running-shoe handoff. Old20-ball
+prose was stale; no gift quantity change was made.
+
+Calvin WON first attempt: five faints, Lillipup9HP; coherent native tactics, no AI or
+roster changes. Rick then WON on first attempt with four faints. Native Petalburg/Norman/Wally
+catch tutorial completed, all six original mons restored, controls and Save verified.
+Safe battery: campaign/new-game-batch9/wally-story-complete.sav. The live same-ROM
+state has since completed Scott and reached Route104(16,45), six healthy; Woods next.
+See campaign/coverage.json, evidence.json and per-build journeys for newer updates.
+Earned empty-slot Scald teaching followed by a normal Center exit now passes on6.
+
+## Verified repairs and limits
+
+- Hot-spring head shadows: native before/after verified. Nine restored actors used
+  FRLG-only NULL graphics and caused Route111 resets; native approach/nurse handoff
+  now works. Regigigas frame overflow and Jirachi/Heatran/Carbink projections repaired
+  with existing assets; native visuals inspected.
+- Capability Cut/Surf/Rock Smash, actual Strength push, Dive round trip, Waterfall,
+  Dig wall/refusal/decline/reentry, Bag Beacon flight, and licensed/unlicensed Flash
+  have scoped native evidence. Granite callbacks no longer override auto-Flash;
+  real stairs out/back retain licensed lighting. These fixtures are not earned
+  traversal of every location.
+- Route104 boat/Briney aliases now use generated IDs instead of stale7/8. Actual
+  outbound/return sailing passes; recording starts mid-outbound with synthetic
+  prerequisites, not the full initial house conversation.
+- Individual wins persist in ordinary Museum/Space Center sequences; removed dead
+  ship-clear trainer gates. Whole ordinary sequences still need earned acceptance.
+- Master Ball previously hit the Ultra Beast penalty branch. Native failure and
+  fixed Guzzlord throw/capture receipt/control return are verified. All11 UB forms
+  share the fix. Ten restored UB habitats have valid selector/table/tile routing;
+  native Poipole/Guzzlord appearances and flee/reencounter are recorded separately.
+- Empty-slot tutoring orphaned the fanfare and paused BGM, causing a black exit.
+  Shared learner now waits before UI teardown. Same native sequence stalls on5 and
+  exits normally on6; post-tutor Beacon flight and earned Scald→door also pass.
+- Darkrai/Pecharunt restored background interactions enter real battles from their
+  existing authored scenery; Magearna delivery/repeat passes. Pecharunt flee/rest
+  and explicit native map-reload retry pass; physical floor retry was not proven.
+  Alleged ineligible dialogue stalls were RETRACTED: text telemetry showed the whole
+  buffer while the actual printer was still paging. No message-contract patch.
+- Synthetic Poipole tutor Dragon Pulse→Leveler→Naganadel804/control return passes;
+  it is not earned acquisition of Naganadel.
+
+## Latest coherence/service work
+
+All45 stones added beyond pinned IE have one source:37 former ground TMs and8 Gym
+TM gifts. All54 donor form relations survive; 49 added relations produce103 total.
+Do not confuse the full set with the seven-species backport subset. The37 actors
+now use native animated sparkles with all other pickup data unchanged. Native
+Route103 proof: same donor tile, visible before Ring, actual Starminite receipt,
+actor removed and controls returned. Dormant old Steven/Ring spawn code was removed;
+no live visibility or Mega battle eligibility was changed.
+
+Five original Contest scarves accidentally converted to Candy were restored.
+False regular/Gym registration presentations and the live Roxanne rematch promise
+were corrected while keeping story calls/flags. Candy description now matches its
+actual one-level effect. Current cap progression leaves a real previous→current
+training gap after badge1; no XP/price redesign has been made.
+
+Native services had real script/C mismatches. Fixed selected IV values, nonlead
+Hidden Power/type with16 validated spreads, EV/IV reports, IV rater, stat-nature
+selection/report and Effort Ribbon return/valid-lead handling. Native7 afterproof:
+selected Poipole AttackIV0 only, Caps10→9; selected Poipole HiddenPowerFire only,
+Caps10→7; lead unchanged. Native8 paid Nature: selected Poipole Modest, actual
+Attack down/SpAtk up, personality/lead unchanged, Oran10→5, controls returned.
+Nature text now describes stat growth, not changed food tastes; global personality
+and flavor rules are untouched. Low-IV success text is neutral.
+
+Batch9 additionally handles the Nature menu's explicit Exit row5 (B127 already
+worked), and fixes EV variable-price payment by reusing existing money specials.
+Save stat8005 in800B, pass quote8009 through8005, restore the stat before mutation
+or failure. No new C API/global opcode semantics. Native before quoted400 but
+compared literal32777; final fresh9 positive/negative menu checks all passed.
+
+Batch7's new unit failures were incorrect fixtures: CreateMon fourth argument is
+personality, not IV. Corrected tests use CreateMonWithIVs; no expectations weakened.
+Production-call audit found no analogous misuse. Key-item full-pocket findings were
+also retracted as normal-play blockers: current reachable distinct keys cannot fill
+55 slots. Preserve qualified evidence rather than adding speculative workarounds.
+
+## Remaining work
+
+Continue the earned campaign and functional NPC coverage, preserving authored teams
+and ordinary wins. Systems independently tests the real Museum grunt→Archie
+loss/retry path (retired second grunt is not a fight). Review
+empty former-TM shops on Lilycove4F before choosing a useful replacement purpose;
+no arbitrary stock or world changes are authorized. Keep economic pacing, native
+service affordability and the >600BST species-cap policy as design-review topics,
+not automatic rebalances. Missing remaining species roots are inventoried in
+systems/acquisition-audit.md / acquisition-proposal.md; extra NPC/quest proposals
+and optional activities remain deferred. No new item locations are allowed.
+
+Evidence and compact audits live in campaign/, systems/, compatibility-native/ under
+work/integration-20260919. Full campaign completion is still unproven; keep the
+original goal active. Historical turn notes were consolidated into this checkpoint;
+the prior September19 text is archived in work/integration-20260919/
+handoff-history-before-consolidation.md.
 
 Everything below is historical evidence and may describe superseded behavior.
 

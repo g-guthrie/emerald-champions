@@ -198,7 +198,6 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KyogreFront
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GroudonFront;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regirock;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Regigigas;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Jirachi;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Heatran;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Diancie;
@@ -623,7 +622,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_REGIROCK] =                 &gObjectEventGraphicsInfo_Regirock,
     [OBJ_EVENT_GFX_REGICE] =                   &gObjectEventGraphicsInfo_Regice,
     [OBJ_EVENT_GFX_REGISTEEL] =                &gObjectEventGraphicsInfo_Registeel,
-    [OBJ_EVENT_GFX_REGIGIGAS] = &gObjectEventGraphicsInfo_Regigigas,
+    // The living and dormant Inclement artwork is the same 64x64 asset.
+    [OBJ_EVENT_GFX_REGIGIGAS] = &gObjectEventGraphicsInfo_RegigigasStatue,
     [OBJ_EVENT_GFX_JIRACHI] = &gObjectEventGraphicsInfo_Jirachi,
     [OBJ_EVENT_GFX_HEATRAN] = &gObjectEventGraphicsInfo_Heatran,
     [OBJ_EVENT_GFX_DIANCIE] = &gObjectEventGraphicsInfo_Diancie,

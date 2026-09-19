@@ -72,56 +72,56 @@ SlateportCity_PokemonFanClub_EventScript_NoHighConditions:: @ 8209FD6
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveRedScarf:: @ 8209FE0
-	checkitemspace ITEM_RARE_CANDY, 1
+	checkitemspace ITEM_RED_SCARF, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_RED_SCARF
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_RED_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_ExplainRedScarf, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveBlueScarf:: @ 820A011
-	checkitemspace ITEM_RARE_CANDY, 1
+	checkitemspace ITEM_BLUE_SCARF, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_BLUE_SCARF
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BLUE_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_ExplainBlueScarf, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GivePinkScarf:: @ 820A042
-	checkitemspace ITEM_RARE_CANDY, 1
+	checkitemspace ITEM_PINK_SCARF, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_PINK_SCARF
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_PINK_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_ExplainPinkScarf, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveGreenScarf:: @ 820A073
-	checkitemspace ITEM_RARE_CANDY, 1
+	checkitemspace ITEM_GREEN_SCARF, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_GREEN_SCARF
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_GREEN_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_ExplainGreenScarf, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_PokemonFanClub_EventScript_GiveYellowScarf:: @ 820A0A4
-	checkitemspace ITEM_RARE_CANDY, 1
+	checkitemspace ITEM_YELLOW_SCARF, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_NoRoomForScarf
 	msgbox SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_YELLOW_SCARF
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_YELLOW_SCARF
 	msgbox SlateportCity_PokemonFanClub_Text_ExplainYellowScarf, MSGBOX_DEFAULT
 	release
 	end
@@ -291,10 +291,11 @@ SlateportCity_PokemonFanClub_Text_GiveTM58:
 	.string "this Rare Candy!$"
 
 SlateportCity_PokemonFanClub_Text_HaveTM58:
-	.string "Endure allows a Pokémon to withstand\n"
-	.string "any attack with one HP left.\p"
-	.string "It might not work if you use it too\n"
-	.string "many times in a row, though.$"
+	.string "That Rare Candy raises a partner\n"
+	.string "one level, up to your cap.\p"
+	.string "The Center tutor can teach Endure\n"
+	.string "to compatible Pokémon. It helps\l"
+	.string "them withstand a powerful attack.$"
 
 SlateportCity_PokemonFanClub_Text_MeetChairman: @ 820A233
 	.string "Er-hem! I am the Chairman of the\n"

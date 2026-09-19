@@ -197,8 +197,7 @@ Route121_EventScript_Cristin:: @ 81F5FF8
 Route121_EventScript_RegisterCristin:: @ 81F6024
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox Route121_Text_CristinRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CRISTIN_1
+	msgbox Route121_Text_CristinPostBattle, MSGBOX_DEFAULT
 	release
 	end
 

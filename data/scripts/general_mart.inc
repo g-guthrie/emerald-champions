@@ -32,7 +32,7 @@ General_Mart_Supplies::
 	goto_if_set FLAG_BADGE02_GET, Mart_Poke_Center_Knuckle_Badge
 	goto_if_set FLAG_BADGE01_GET, Mart_Poke_Center_Stone_Badge
 	goto_if_set FLAG_VISITED_RUSTBORO_CITY, Mart_Poke_Center_Rustboro
-	goto_if_set FLAG_ADVENTURE_STARTED, Mart_Poke_Center_Pokedex
+	goto_if_set FLAG_SYS_POKEMON_GET, Mart_Poke_Center_Pokedex
 	pokemart PokeMart_Poke_Center_No_Badges
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release

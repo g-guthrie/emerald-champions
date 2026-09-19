@@ -522,10 +522,10 @@ DewfordTown_Hall_Text_WellBeTrendDuo: @ 81FE0F2
 DewfordTown_Hall_Text_GiveYouSludgeBomb: @ 81FE142
 	.string "For me, Sludge Bomb is at the peak\n"
 	.string "of popularity. It's the one.\p"
-	.string "Hunh? You're telling me that you don't\n"
-	.string "know about Sludge Bomb?\p"
-	.string "That's outright pitiful.\n"
-	.string "I'll give you one.$"
+	.string "Ask the Center tutor if your\n"
+	.string "Pokémon can learn it.\p"
+	.string "Take this Rare Candy, too.\n"
+	.string "A little growth never goes out of style!$"
 
 DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo: @ 81FE1ED
 	.string "I love Sludge Bomb.\p"

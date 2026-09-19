@@ -56,6 +56,16 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist:: @ 82118DA
 	faceplayer
 	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	setvar VAR_0x8004, LEGENDARY_SIGN_MAGEARNA
+	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_DreamsFallback
+	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_DreamsFallback
+	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_MagearnaAwake
+	special TryGiveSelectedLegendarySignReward
+	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaParty
+	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaPC
+	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom
+RustboroCity_DevonCorp_2F_EventScript_DreamsFallback::
 	msgbox RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams, MSGBOX_DEFAULT
 	release
 	end
@@ -228,7 +238,13 @@ RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams: @ 8211EE0
 	.string "I'm trying to develop a device that\n"
 	.string "visually reproduces the dreams of\l"
 	.string "Pokémon…\p"
-	.string "But it's not going well.$"
+	.string "But it's not going well.\p"
+	.string "My other project is a mechanical\n"
+	.string "Pokémon named Magearna.\p"
+	.string "Earn eight badges and catch\n"
+	.string "Diancie, then come back.\p"
+	.string "Its power may awaken the\n"
+	.string "prototype!$"
 
 RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils: @ 8211F48
 	.string "I've been trying to develop a device\n"
@@ -297,3 +313,48 @@ RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext: @ 8212386
 
 RustboroCity_DevonCorp_2F_Text_ThatsNotAFossil:
 	.string "Come now, that's not a fossil!$"
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaParty::
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaParty, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaPC::
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaPC, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom::
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_MagearnaParty:
+	.string "Diancie has awakened Devon's\n"
+	.string "mechanical prototype!\p"
+	.string "Magearna joins your party.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaPC:
+	.string "Diancie has awakened Devon's\n"
+	.string "mechanical prototype!\p"
+	.string "Magearna was sent to your PC.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
+	.string "The prototype answers Diancie,\n"
+	.string "but your party and PC are full.\p"
+	.string "Make room and come back.\n"
+	.string "Magearna will wait here.$"
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaAwake::
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaAwake, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_MagearnaAwake:
+	.string "Thanks to you, Magearna is awake!\p"
+	.string "Now, back to my dream-visualizing\n"
+	.string "device…$"

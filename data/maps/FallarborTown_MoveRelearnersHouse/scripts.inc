@@ -291,10 +291,16 @@ FallarborTown_DoSuperTraining::
 	msgbox SuperTraining_ShowPrice, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_WontPay
-	checkmoney VAR_0x8009
+	@ Native money opcodes take literals; reuse the variable-cost specials.
+	copyvar VAR_0x800B, VAR_0x8005
+	copyvar VAR_0x8005, VAR_0x8009
+	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
+	copyvar VAR_0x8005, VAR_0x800B
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_CantAfford
-	removemoney VAR_0x8009
+	copyvar VAR_0x8005, VAR_0x8009
+	special SubtractMoneyFromVar0x8005
+	copyvar VAR_0x8005, VAR_0x800B
 	updatemoneybox
 	special IncreaseChosenMonEVs
 	bufferpartymonnick 0, VAR_0x8004
@@ -759,8 +765,8 @@ HyperTraining_ReportSpDef:
 	.string "What would you like to change it to?$"
 
 HyperTraining_Text_HyperTrainingMadeMonStronger:
-	.string "The Hyper Training made {STR_VAR_1}\n"
-	.string "stronger!\p"
+	.string "The Hyper Training is complete\n"
+	.string "for {STR_VAR_1}.\p"
 	.string "Would you like to train some more?$"
 
 HyperTraining_Text_ForThreeCapsChangeAllIVs:

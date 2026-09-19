@@ -1957,7 +1957,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 10000,
         .description = COMPOUND_STRING(
             "Raises a Pokémon\n"
-            "up to ten levels.\n"
+            "by one level.\n"
             "Stops at the cap."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_LEVEL_UP_ITEM,

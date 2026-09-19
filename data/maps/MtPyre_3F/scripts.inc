@@ -23,8 +23,7 @@ MtPyre_3F_EventScript_Gabrielle:: @ 8231781
 MtPyre_3F_EventScript_RegisterGabrielle:: @ 82317AD
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
-	msgbox MtPyre_3F_Text_GabrielleRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_GABRIELLE_1
+	msgbox MtPyre_3F_Text_GabriellePostBattle, MSGBOX_DEFAULT
 	release
 	end
 

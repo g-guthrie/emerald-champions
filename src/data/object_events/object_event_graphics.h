@@ -369,7 +369,6 @@ const u32 gObjectEventPic_InclementDiancie[] = INCGFX_U32("graphics/object_event
 const u16 gObjectEventPal_InclementDiancie[] = INCGFX_U16("graphics/object_events/pics/pokemon/diancie_inclement.png", ".gbapal");
 const u32 gObjectEventPic_InclementCarbink[] = INCGFX_U32("graphics/object_events/pics/pokemon/carbink_inclement.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gObjectEventPic_InclementRegirock[] = INCGFX_U32("graphics/object_events/pics/pokemon/regirock_inclement.png", ".4bpp", "-mwidth 4 -mheight 4");
-const u32 gObjectEventPic_InclementRegigigas[] = INCGFX_U32("graphics/object_events/pics/pokemon/regigigas_inclement.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_InclementRegice[] = INCGFX_U32("graphics/object_events/pics/pokemon/regice_inclement.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_InclementRegisteel[] = INCGFX_U32("graphics/object_events/pics/pokemon/registeel_inclement.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_InclementItemBall[] = INCGFX_U32("graphics/object_events/pics/misc/item_ball_inclement.png", ".4bpp", "-mwidth 2 -mheight 2");
