@@ -80,3 +80,27 @@ Covet transfer them permanently in ordinary trainer battles. Keep Cud Chew, Recy
 Harvest and all normal in-battle effects functional without the tool. A genuinely
 recovered original Berry is no longer lost. Preserve non-Berry restoration policy.
 No cross-task coordination messages: user explicitly requested they stop.
+
+# Pokémon distribution — September 23, 2026 (ground truth is the source)
+
+The "Legendary Sign" encounter engine is retired. Every wild Legendary, Mythical
+and Ultra Beast is an ordinary slot in `src/data/wild_encounters.json`; the only
+engine-side data is the slim gate table in `src/data/pokemon/legendary_signs.h`
+(species, unlock flag, required caught family, minimum badges, kind). A gated or
+already-caught slot rerolls to the next slot. Any Legendary-class or Ultra Beast
+wild slot or scripted battle spawns at the current level cap with a competitive
+set (authored set from `legendary_authored_sets.h` when one exists). Roaming
+Latias/Latios follow the cap. Rarity ladder, enforced by `test/wild_slot_odds.c`
+and `scripts/verify_wild_distribution.py`: legends exactly 1%, at most two per
+table; Ultra Beasts and Paradox 2-3%; ordinary slots never below 2%; every
+method totals 100 via per-table `encounter_rates`. Sweet Scent multiplies live
+legend/UB slots by five. Party rule everywhere, including the League door: one
+Legendary/Mythical, one Ultra Beast, one Paradox. Regigigas needs the three
+Regis caught in the Pokédex, not carried. Arceus is the Devon researcher's gift
+after the Hall of Fame. Groudon/Kyogre weather reports open after the Sootopolis
+crisis. The Champions Circuit gives no Pokémon; its former rewards live in the
+campaign. Game Corner Pokémon prizes arrive at the cap; starters are one-time.
+Water and rod tables use narrow level bands tied to when Surf/each rod opens.
+Do not reintroduce percentage text in dialogue; the route sign rosters and
+Center leads describe location and requirements only. Tune odds and timing in
+the JSON and gate table, never in prose.

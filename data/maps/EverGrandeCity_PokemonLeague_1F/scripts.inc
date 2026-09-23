@@ -189,10 +189,12 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth: @ 82297EF
 	.string "Pokémon, and go forth!$"
 
 EverGrandeCity_PokemonLeague_1F_Text_RestrictedParty::
-	.string "League rules exclude Legendary\n"
-	.string "and Mythical Pokémon.\p"
-	.string "Ultra Beasts and Paradox Pokémon\n"
-	.string "may still enter.$"
+	.string "League rules allow at most one\n"
+	.string "Legendary or Mythical Pokémon,\l"
+	.string "one Ultra Beast and one Paradox\l"
+	.string "Pokémon in your party.\p"
+	.string "Adjust your party at a PC,\n"
+	.string "then come back.$"
 
 EverGrandeCity_PokemonLeague_1F_Text_GoForthChampion:
 	.string "Champion! Believe in yourself and your\n"

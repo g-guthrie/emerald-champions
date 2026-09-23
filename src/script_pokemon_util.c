@@ -117,8 +117,15 @@ bool8 DoesPartyHaveEnigmaBerry(void)
     return hasItem;
 }
 
+// setwildbattle and every scripted legendary share one rule: a Legendary-class
+// or Ultra Beast species ignores the script's level, meets the player at the
+// current cap and receives its authored set (or a random non-Mega set). The
+// script's held item stays only when that set leaves the Pokemon empty-handed.
 static void InitScriptedWildMon(struct Pokemon *mon, enum Species species, u8 level, enum Item item)
 {
+    bool32 legendary = IsLegendaryEncounterSpecies(species);
+    if (legendary)
+        level = GetLegendaryEncounterLevel(species);
     u32 personality = GetMonPersonality(species,
         GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species),
         GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species),
@@ -130,6 +137,8 @@ static void InitScriptedWildMon(struct Pokemon *mon, enum Species species, u8 le
         u16 heldItem = item;
         SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
     }
+    if (legendary)
+        ApplyLegendaryEncounterSet(mon, item);
 }
 
 void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)

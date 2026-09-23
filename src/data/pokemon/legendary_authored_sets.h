@@ -1,8 +1,9 @@
-// Authored competitive sets for the seven mandatory legendary story scenes.
-// Applied via ApplyEmeraldChampionsScriptedSet at the live cap level, in
-// place of ApplyEmeraldChampionsRandomNonMegaSet, by
-// CreateSelectedLegendarySignEncounter and
-// CreateEmeraldChampionsStaticLegendaryEncounter in src/legendary_signs.c.
+// Authored competitive sets for eight static legendaries (Moltres, Landorus,
+// Latias, Latios, Mew, Heatran, Diancie, Jirachi). ApplyLegendaryEncounterSet
+// in src/legendary_signs.c applies them via ApplyEmeraldChampionsScriptedSet,
+// in place of ApplyEmeraldChampionsRandomNonMegaSet, to every encounter of the
+// species at the live cap level: wild slots, setwildbattle/CreateScriptedWildMon,
+// CreateEventLegalEnemyMon and the roaming Lati.
 //
 // evs[] is in display order (HP, Atk, Def, SpA, SpD, Spe), matching
 // gEmeraldChampionsEvOrder. IVs are always maxed by ApplyEmeraldChampionsScriptedSet

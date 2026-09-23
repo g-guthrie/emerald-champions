@@ -1148,21 +1148,26 @@ Common_EventScript_ShowPokemonCenterSign::
 	msgbox gText_PokemonCenterSign, MSGBOX_SIGN
 	end
 
+@ Route and area signs: the sign's own text comes first (MSGBOX_SIGN), then
+@ this map's wild roster. Maps with legendary residents call
+@ Common_EventScript_ShowRouteRoster, then Common_EventScript_ShowRouteLegend
+@ once per resident, then releaseall/end.
 Common_EventScript_ShowRouteSpecies::
+	call Common_EventScript_ShowRouteRoster
+	releaseall
+	end
+
+Common_EventScript_ShowRouteRoster::
 	lockall
 	special BufferCurrentMapRouteSignSpecies
 	msgbox gStringVar4, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 0
+	return
 
-Common_EventScript_ShowRouteRequirements::
-	special BufferNextLocalLegendaryRequirement
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_RouteSpeciesEnd
+@ VAR_0x8004 = the LEGENDARY_SIGN_* id of a resident of this map.
+Common_EventScript_ShowRouteLegend::
+	special ResearchSelectedLegendarySign
 	msgbox gStringVar4, MSGBOX_DEFAULT
-	goto Common_EventScript_ShowRouteRequirements
-
-Common_EventScript_RouteSpeciesEnd::
-	releaseall
-	end
+	return
 
 Common_ShowEasyChatScreen::
 	fadescreen FADE_TO_BLACK

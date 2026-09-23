@@ -3,50 +3,126 @@
 #include "event_data.h"
 #include "legendary_signs.h"
 #include "wild_encounter.h"
+#include "caps.h"
+#include "constants/maps.h"
 #include "random.h"
 #include "test/test.h"
 
-TEST("Ultra Beast access: every native source has a table, one-percent slot and one-time capture gate")
+static const u16 sUltraBeastCaughtVars[] = {VAR_LEGENDARY_SIGNS_CAUGHT_0, VAR_LEGENDARY_SIGNS_CAUGHT_1,
+    VAR_LEGENDARY_SIGNS_CAUGHT_2, VAR_LEGENDARY_SIGNS_CAUGHT_3,
+    VAR_LEGENDARY_SIGNS_CAUGHT_4, VAR_LEGENDARY_SIGNS_CAUGHT_5};
+
+static const struct WildPokemonInfo *FindUltraBeastLandTable(u16 map)
 {
-    static const enum Species species[] = {SPECIES_BLACEPHALON, SPECIES_BUZZWOLE,
-        SPECIES_CELESTEELA, SPECIES_GUZZLORD, SPECIES_KARTANA, SPECIES_NIHILEGO,
-        SPECIES_PHEROMOSA, SPECIES_POIPOLE, SPECIES_STAKATAKA, SPECIES_XURKITREE};
-    static const u16 caughtVars[] = {VAR_LEGENDARY_SIGNS_CAUGHT_0, VAR_LEGENDARY_SIGNS_CAUGHT_1,
-        VAR_LEGENDARY_SIGNS_CAUGHT_2, VAR_LEGENDARY_SIGNS_CAUGHT_3,
-        VAR_LEGENDARY_SIGNS_CAUGHT_4, VAR_LEGENDARY_SIGNS_CAUGHT_5};
-    s8 group = gSaveBlock1Ptr->location.mapGroup, map = gSaveBlock1Ptr->location.mapNum;
-    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    for (u32 i = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED); i++)
+        if (gWildMonHeaders[i].mapGroup == MAP_GROUP(map) && gWildMonHeaders[i].mapNum == MAP_NUM(map))
+            return gWildMonHeaders[i].encounterTypes[TIME_OF_DAY_DEFAULT].landMonsInfo;
+    return NULL;
+}
+
+TEST("Ultra Beast access: every habitat has a 2-3% gated slot that spawns at the cap and closes on capture")
+{
+    static const struct { enum Species species; u16 map; } habitats[] = {
+        {SPECIES_POIPOLE, MAP_SEASPRAY_CAVE_B1F},
+        {SPECIES_BLACEPHALON, MAP_EMBER_PATH},
+        {SPECIES_BUZZWOLE, MAP_ASHEN_WOODS},
+        {SPECIES_KARTANA, MAP_PETALBURG_WOODS_3},
+        {SPECIES_STAKATAKA, MAP_ROUTE111_RUINS_EXTERIOR},
+        {SPECIES_PHEROMOSA, MAP_DEWFORD_MEADOW},
+        {SPECIES_CELESTEELA, MAP_ROUTE120},
+        {SPECIES_XURKITREE, MAP_NEW_MAUVILLE_INSIDE},
+        {SPECIES_NIHILEGO, MAP_UNDERWATER_SEAFLOOR_CAVERN},
+        {SPECIES_GUZZLORD, MAP_ALTERING_CAVE_B1F},
+    };
+    bool8 badges[NUM_BADGES];
+    bool8 wattson = FlagGet(FLAG_GOT_TM24_FROM_WATTSON);
+    u16 savedRepel = VarGet(VAR_REPEL_STEP_COUNT);
+    VarSet(VAR_REPEL_STEP_COUNT, 0);
+    ZeroPlayerPartyMons();
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        badges[badge] = FlagGet(FLAG_BADGE01_GET + badge);
+    for (u32 i = 0; i < ARRAY_COUNT(habitats); i++)
     {
-        for (u32 v = 0; v < ARRAY_COUNT(caughtVars); v++)
-            VarSet(caughtVars[v], 0);
-        enum LegendarySignId id = GetLegendarySignIdBySpecies(species[i]);
-        EXPECT(id < LEGENDARY_SIGN_COUNT);
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-        gSaveBlock1Ptr->location.mapGroup = sign->mapId >> 8;
-        gSaveBlock1Ptr->location.mapNum = sign->mapId;
-        u32 header = GetCurrentMapWildMonHeaderId();
-        EXPECT_NE(header, HEADER_NONE);
-        EXPECT(gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT].landMonsInfo != NULL);
-        EXPECT(CanAcquireLegendarySignSpecies(species[i]));
-        u32 appearances = 0;
-        for (u32 roll = 0; roll < 100; roll++)
+        enum Species species = habitats[i].species;
+        for (u32 v = 0; v < ARRAY_COUNT(sUltraBeastCaughtVars); v++)
+            VarSet(sUltraBeastCaughtVars[v], 0);
+        EXPECT_EQ(GetRestrictedPartyClass(species), RESTRICTED_PARTY_ULTRA_BEAST);
+        EXPECT(GetLegendarySignIdBySpecies(species) < LEGENDARY_SIGN_COUNT);
+        const struct WildPokemonInfo *land = FindUltraBeastLandTable(habitats[i].map);
+        EXPECT(land != NULL);
+        u32 odds = 0;
+        for (u32 slot = 0; slot < NUM_LAND_MONS_ENCOUNTER_SLOTS; slot++)
+            if (land->wildPokemon[slot].species == species)
+                odds += GetWildSlotOdds(land, WILD_AREA_LAND, slot);
+        Test_MgbaPrintf("Ultra Beast %d on map %d: %d percent", species, habitats[i].map, odds);
+        EXPECT(odds >= 2 && odds <= 3);
+
+        // Open every gate: all badges and the one milestone flag in use.
+        for (u32 badge = 0; badge < NUM_BADGES; badge++)
+            FlagSet(FLAG_BADGE01_GET + badge);
+        FlagSet(FLAG_GOT_TM24_FROM_WATTSON);
+        EXPECT(CanAcquireLegendarySignSpecies(species));
+        u32 hits = 0;
+        for (u32 seed = 0; seed < 2048 && hits == 0; seed++)
         {
-            SET_RNG(RNG_NONE, roll);
-            appearances += ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE) == species[i];
+            SeedRng(seed);
+            EXPECT(TryGenerateWildMon(land, WILD_AREA_LAND, 0));
+            struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+            if (GetMonData(mon, MON_DATA_SPECIES) != species)
+                continue;
+            hits++;
+            EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
         }
-        EXPECT_EQ(appearances, 1);
-        MarkLegendarySignCaughtBySpecies(species[i]);
-        EXPECT(!CanAcquireLegendarySignSpecies(species[i]));
-        for (u32 roll = 0; roll < 100; roll++)
+        EXPECT_GT(hits, 0);
+
+        MarkLegendarySignCaughtBySpecies(species);
+        EXPECT(!CanAcquireLegendarySignSpecies(species));
+        for (u32 seed = 0; seed < 512; seed++)
         {
-            SET_RNG(RNG_NONE, roll);
-            EXPECT_NE(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE), species[i]);
+            SeedRng(seed);
+            EXPECT(TryGenerateWildMon(land, WILD_AREA_LAND, 0));
+            EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), species);
         }
+        for (u32 badge = 0; badge < NUM_BADGES; badge++)
+            FlagClear(FLAG_BADGE01_GET + badge);
     }
-    for (u32 v = 0; v < ARRAY_COUNT(caughtVars); v++)
-        VarSet(caughtVars[v], 0);
-    gSaveBlock1Ptr->location.mapGroup = group;
-    gSaveBlock1Ptr->location.mapNum = map;
+    for (u32 v = 0; v < ARRAY_COUNT(sUltraBeastCaughtVars); v++)
+        VarSet(sUltraBeastCaughtVars[v], 0);
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        if (badges[badge]) FlagSet(FLAG_BADGE01_GET + badge); else FlagClear(FLAG_BADGE01_GET + badge);
+    if (wattson) FlagSet(FLAG_GOT_TM24_FROM_WATTSON); else FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
+    VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
+    ZeroEnemyPartyMons();
+}
+
+TEST("Ultra Beast access: badge gates keep Ultra Beast slots inert until their milestone")
+{
+    bool8 badges[NUM_BADGES];
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+    {
+        badges[badge] = FlagGet(FLAG_BADGE01_GET + badge);
+        FlagClear(FLAG_BADGE01_GET + badge);
+    }
+    for (u32 v = 0; v < ARRAY_COUNT(sUltraBeastCaughtVars); v++)
+        VarSet(sUltraBeastCaughtVars[v], 0);
+    // Poipole is the ungated first hint; Buzzwole waits for three badges.
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_POIPOLE));
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_BUZZWOLE));
+    EXPECT(!IsWildSlotSpeciesAcquirable(SPECIES_BUZZWOLE));
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_BADGE02_GET);
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_BUZZWOLE));
+    FlagSet(FLAG_BADGE03_GET);
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_BUZZWOLE));
+    // Kartana also needs the fifth badge's own flag, not just a count.
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_KARTANA));
+    FlagSet(FLAG_BADGE04_GET);
+    FlagSet(FLAG_BADGE05_GET);
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_KARTANA));
+    // Paradox Pokemon have no gate row and are always acquirable.
+    EXPECT(IsWildSlotSpeciesAcquirable(SPECIES_IRON_LEAVES));
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        if (badges[badge]) FlagSet(FLAG_BADGE01_GET + badge); else FlagClear(FLAG_BADGE01_GET + badge);
 }
 
 TEST("Ultra Beast access: Poipole evolves only with its obtainable Dragon Pulse")

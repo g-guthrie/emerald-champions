@@ -7,10 +7,17 @@ Route102_EventScript_LittleBoy:: @ 81EC0E1
 
 Route102_EventScript_RouteSignOldale:: @ 81EC0EA
 	msgbox Route102_Text_RouteSignOldale, MSGBOX_SIGN
-	end
+	goto Route102_EventScript_ShowRouteRoster
 
 Route102_EventScript_RouteSignPetalburg:: @ 81EC0F3
 	msgbox Route102_Text_RouteSignPetalburg, MSGBOX_SIGN
+	goto Route102_EventScript_ShowRouteRoster
+
+Route102_EventScript_ShowRouteRoster::
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_SHAYMIN
+	call Common_EventScript_ShowRouteLegend
+	releaseall
 	end
 
 Route102_EventScript_Boy:: @ 81EC0FC

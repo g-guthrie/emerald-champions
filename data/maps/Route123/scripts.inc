@@ -34,6 +34,15 @@ Route123_EventScript_ReceivedGigaDrain:: @ 81F61A0
 
 Route123_EventScript_RouteSign:: @ 81F61AA
 	msgbox Route123_Text_RouteSign, MSGBOX_SIGN
+	goto Route123_EventScript_ShowRouteRoster
+
+Route123_EventScript_ShowRouteRoster::
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_TAPU_BULU
+	call Common_EventScript_ShowRouteLegend
+	setvar VAR_0x8004, LEGENDARY_SIGN_MUNKIDORI
+	call Common_EventScript_ShowRouteLegend
+	releaseall
 	end
 
 Route123_EventScript_RouteSignMtPyre:: @ 81F61B3

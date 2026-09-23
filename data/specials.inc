@@ -624,7 +624,7 @@ gSpecials::
 	def_special FinishLegendaryLandmarkEncounter
 	def_special HideRestingLegendaryObject
 
-	def_special BufferNextLocalLegendaryRequirement
+	def_special Unused_BufferNextLocalLegendaryRequirement, unused=1
 
 	def_special TryUnlockLocalLegendaryDiscovery
 	def_special BufferNextCenterLegendaryLead
@@ -694,6 +694,7 @@ gSpecials::
 	def_special FoundBlackGlasses
 	def_special CheckMagikarpBattle
 	def_special GetStaticEncounterLevel
+	def_special GetLevelCapForScriptedGift
 	def_special CreateEventLegalEnemyMon
 	def_special SetGiftEggMove
 	def_special SetSpeciesAndEggMove

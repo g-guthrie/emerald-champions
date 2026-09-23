@@ -30,7 +30,7 @@ Route115_EventScript_Woman:: @ 81F2973
 
 Route115_EventScript_RouteSignRustboro:: @ 81F297C
 	msgbox Route115_Text_RouteSignRustboro, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route115_EventScript_MeteorFallsSign:: @ 81F2985
 	msgbox Route115_Text_MeteorFallsSign, MSGBOX_SIGN

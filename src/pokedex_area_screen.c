@@ -332,6 +332,7 @@ static void FindMapsWithMon(enum Species species)
     enum RegionMapType currentRegionMapType;
     u16 i;
     struct Roamer *roamer;
+    bool32 showWild;
 
     sPokedexAreaScreen->alteringCaveCounter = 0;
     sPokedexAreaScreen->alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
@@ -362,8 +363,11 @@ static void FindMapsWithMon(enum Species species)
     }
 
     currentRegionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
-    // Add regular species to the area map
-    for (i = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED); i++)
+    // Add regular species to the area map. Legendary and Ultra Beast
+    // residents are ordinary slots, shown only while their slot is live:
+    // gate open and species not yet caught.
+    showWild = IsWildSlotSpeciesAcquirable(species);
+    for (i = 0; showWild && gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED); i++)
     {
         u32 headerSectionId = Overworld_GetMapHeaderByGroupAndId(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum)->regionMapSectionId;
 
@@ -374,21 +378,6 @@ static void FindMapsWithMon(enum Species species)
         {
             AddMapToAreaScreen(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
         }
-    }
-
-    // Rare residents are selected outside the ordinary encounter tables.
-    // Use the same discovery/progression/capture predicate as encounter creation.
-    for (u32 id = 0; id < LEGENDARY_SIGN_COUNT; id++)
-    {
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-        if (sign->species != species
-            || (sign->source != LEGENDARY_SOURCE_RARE_WILD && sign->source != LEGENDARY_SOURCE_NATIVE_WILD)
-            || !CanAcquireLegendarySignSpecies(species))
-            continue;
-        u16 group = MAP_GROUP(sign->mapId), num = MAP_NUM(sign->mapId);
-        u32 section = Overworld_GetMapHeaderByGroupAndId(group, num)->regionMapSectionId;
-        if (GetRegionMapType(section) == currentRegionMapType)
-            AddMapToAreaScreen(group, num);
     }
 
     // Add roamers to the area map

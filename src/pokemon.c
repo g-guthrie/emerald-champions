@@ -3012,12 +3012,11 @@ bool32 PlayerPartyWithinRestrictedLimit(void)
     return legends <= 1 && ultraBeasts <= 1 && paradoxes <= 1;
 }
 
+// The League door uses the same party rule as everywhere else: at most one
+// Legendary-class, one Ultra Beast and one Paradox Pokemon.
 bool32 PlayerPartyLeagueEligible(void)
 {
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        if (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) == RESTRICTED_PARTY_LEGENDARY)
-            return FALSE;
-    return TRUE;
+    return PlayerPartyWithinRestrictedLimit();
 }
 
 static u8 GiveMonToPartyOrPC(struct Pokemon *mon)

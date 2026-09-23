@@ -2754,10 +2754,15 @@ awards Badge6, displays the full-Bag message and returns control, while
 Staraptite remains0 and its receipt flag remains0
 (`movement/fortree-winona-staraptite-full-mega-pocket`, ROM
 `050a59f5c2a87882aeb16d01f9f9328877d469cb6a27bd9d774198b8de2f6623`).
-The retry branch is source-visible; a subsequent visit after freeing a slot
-was not visually replayed. Both reward sheets were inspected. The relevant
-Gym script and item code match their respective ROM archives; whole-tree
-input stamps have since drifted under concurrent edits.
+The retry branch was then replayed from a separate synthetic defeated-
+trainer/Badge6 state with room for the item. Talking to Winona gives one
+Staraptite, sets the receipt, keeps Badge6, faces the player and returns
+control (`movement/fortree-winona-staraptite-retry-run`, ROM
+`15b701cec71e7f9c3dbe16c1e39cc00ad8ede610f30386444b2971b816809215`).
+Its contact sheet was inspected. This verifies the retry interaction,
+not one earned full-Bag→free-slot save chain. The relevant Gym script and
+item code match their respective ROM archives; whole-tree input stamps
+have since drifted under concurrent edits.
 
 ### Rotating-tile threshold defect and moving-statue checks
 
@@ -3266,3 +3271,72 @@ save that *lost* it to the old full-pocket bug has no separate
 Spiritomb-attempt receipt to distinguish that loss from a legitimately
 consumed Keystone; this source repair prevents new losses but does
 not automatically reconstruct that ambiguous history.
+
+### Sandstrewn fossil receipts restored by item identity
+
+Eight fossils in the pre-rebase Sandstrewn map occupied the same
+coordinates and represented the same species as the eight current
+pickups, but the Inclement materialization bound their hide flags to
+old receipts from unrelated maps. Native reproduction: a legacy
+Granite Cave Dusk Ball receipt hid an uncollected Dome Fossil
+(`movement/sandstrewn-dome-legacy-collision-run`). The current fossil
+flags now alias their original same-fossil receipts0x35/0x37–0x3D,
+including Cover0x3A, Helix0x3B and Dome0x3C. The earlier Route111 rock
+and Fallarbor rival fixes had already removed their erroneous reuse of
+those bits. Under eight unrelated old receipts, native queries show
+all eight fossil flags clear and the Dome visible; under eight
+same-fossil old receipts, all eight stay collected and the Dome stays
+absent (`movement/sandstrewn-fossils-legacy-{unrelated,owned}-after-run`).
+This preserves the old save's actual fossil ownership rather than
+making eight pickups respawn.
+
+Old Amber had no pre-rebase Sandstrewn pickup. Its previous bit0xE9
+was a live Trick House Master Ball receipt, so it now uses the
+previously unnamed persistent system bit0x919. A native legacy
+Master Ball receipt leaves Amber visible
+(`movement/sandstrewn-amber-legacy-after-run`). Normal Dome and
+Amber pickups set only their intended hide flags and grant one item;
+their contact sheets were inspected
+(`movement/sandstrewn-{dome,amber}-pickup-after-run`). Build ROM
+`7b720b57e38a9bdcde78171635f8592bd721c943cdf3e85d2ad07f482f9ef45e`
+contains the current flag definitions and passes the scoped diff and
+static progression checks. A player who picked up Old Amber under the
+post-rebase0xE9 binding may see that one pickup reappear once; the
+earlier campaign had no such Sandstrewn Amber receipt.
+
+### Seaspray same-item pickup flags and three replacement receipts
+
+Compared both Seaspray floors with the pre-rebase map JSON by item and
+coordinate. Lure Ball(10,24), Blastoisinite(6,25), and King's Rock
+(46,15) are the same pickups in both versions, but the current map
+bound them to unrelated old save bits. A native old-save setup with
+all three *same-item* receipts set showed all three current flags0,
+with King's Rock still visible. An unrelated old Dawn Stone receipt
+instead hid King's Rock before this repair
+(`movement/seaspray-same-item-old-receipts-before-run` and
+`movement/seaspray-king-unrelated-old-receipt-before-run`).
+
+The three current hide flags now alias their original same-item
+receipts. The displaced newer B1F pickups—Revive, Absolite Z and
+Abomasite—use previously unused persistent bits0x2AA,0x466 and0x897
+respectively. Native replays with the three same-item old receipts
+keep exactly those pickups hidden while the three replacements remain
+available; an old Dawn Stone receipt no longer hides King's Rock
+(`movement/seaspray-same-item-old-receipts-after-run` and
+`movement/seaspray-king-unrelated-old-receipt-after-run`).
+All six normal pickups grant their intended item and mark their own
+receipt; their result queries pass and representative contact sheets
+were inspected (`movement/seaspray-{lure,blast,king,revive,absolite,
+abomasite}-pickup-after-*`). The first Lure Ball fixture faced north
+from the north-adjacent tile, so it did not interact; corrected south
+facing passed. That failure was a fixture direction, not a game block.
+
+ROM `15b701cec71e7f9c3dbe16c1e39cc00ad8ede610f30386444b2971b816809215`
+contains the six final Seaspray definitions. The full flags file
+changed afterward only for an unrelated Poipole flag; the six scoped
+definitions match the ROM archive. Build, scoped diff and static
+progression checks pass. Post-rebase saves that already collected one
+of the three *replacement* pickups may see it respawn once after this
+flag move; the retained Lure Ball, Blastoisinite and King's Rock keep
+their old collected state. Other changed Seaspray pickups still need
+the same source/old-save review.

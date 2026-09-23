@@ -1231,7 +1231,7 @@ TEST("Emerald Champions Game Corner delivers a natural alternate starter transac
     EXPECT(FlagGet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_CHARMANDER);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), min(30, GetCurrentLevelCap()));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), GetCurrentLevelCap());
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), 0);
 }
 
@@ -1408,30 +1408,37 @@ TEST("Emerald Champions persists appended legendary sign bits")
     EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ARCEUS));
 }
 
-TEST("Emerald Champions Arceus gift requires final badge and resolved crisis")
+TEST("Emerald Champions Arceus gift waits only for the Hall of Fame")
 {
     ZeroPlayerPartyMons();
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
         VarSet(sEmeraldChampionsTestSignStateVars[i], 0);
-    FlagClear(FLAG_BADGE08_GET);
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
     FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    FlagClear(FLAG_IS_CHAMPION);
 
     TryGiveArceusLegendarySignMasteryReward();
     EXPECT_EQ(gSpecialVar_Result, 0);
+    // The former badge-and-crisis gate no longer opens it.
     FlagSet(FLAG_BADGE08_GET);
+    FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     TryGiveArceusLegendarySignMasteryReward();
     EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NONE);
+    FlagClear(FLAG_BADGE08_GET);
+    FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
 
-    FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    FlagSet(FLAG_IS_CHAMPION);
     TryGiveArceusLegendarySignMasteryReward();
     EXPECT_EQ(gSpecialVar_Result, 1);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ARCEUS);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), GetCurrentLevelCap());
     TryGiveArceusLegendarySignMasteryReward();
     EXPECT_EQ(gSpecialVar_Result, 4);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_NONE);
-    FlagClear(FLAG_BADGE08_GET);
-    FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    FlagClear(FLAG_IS_CHAMPION);
+    ZeroPlayerPartyMons();
 }
 
 TEST("Emerald Champions Ogerpon mask roles require owned masks without a Mega Ring")
@@ -1680,83 +1687,23 @@ TEST("Champions Circuit win and loss transitions preserve counters and restore t
     // Full prepared-party byte restoration is checked by its dedicated test.
 }
 
-TEST("Champions Circuit sends earned rewards to the PC")
+TEST("Champions Circuit no longer grants legendary rewards")
 {
     ZeroPlayerPartyMons();
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        CreateMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_RATTATA, 20, 0, OTID_STRUCT_PLAYER_ID);
     memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
     ClearEmeraldChampionsLegendaryCaughtState();
-    UnlockLegendarySign(LEGENDARY_SIGN_CALYREX);
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 2);
-
-    ChampionsCircuitTryGiveReward();
-
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_CALYREX);
-    EXPECT_EQ(GetLevelFromBoxMonExp(&gPokemonStoragePtr->boxes[0][0]),
-        GetLevelCapForSpecies(SPECIES_CALYREX, GetCurrentLevelCap()));
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_CALYREX));
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 2);
-}
-
-TEST("Champions Circuit full-PC rewards remain claimable without another win")
-{
-    ZeroPlayerPartyMons();
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        CreateMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_RATTATA, 20, 0, OTID_STRUCT_PLAYER_ID);
-    FillEmeraldChampionsPokemonStorage();
-    ClearEmeraldChampionsLegendaryCaughtState();
-    UnlockLegendarySign(LEGENDARY_SIGN_CALYREX);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 2);
-
-    ChampionsCircuitTryGiveReward();
-    EXPECT_EQ(gSpecialVar_Result, 3);
-    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_CALYREX));
-
-    memset(&gPokemonStoragePtr->boxes[0][0], 0, sizeof(gPokemonStoragePtr->boxes[0][0]));
-    ChampionsCircuitTryGiveReward();
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_CALYREX);
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_CALYREX));
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 2);
-}
-
-TEST("Champions Circuit mastery waits for every finite Circuit reward")
-{
-    ZeroPlayerPartyMons();
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        CreateMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_RATTATA, 20, 0, OTID_STRUCT_PLAYER_ID);
-    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
-    ClearEmeraldChampionsLegendaryCaughtState();
-    UnlockLegendarySign(LEGENDARY_SIGN_CALYREX);
-    UnlockLegendarySign(LEGENDARY_SIGN_ETERNATUS);
     VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 40);
 
+    gSpecialVar_Result = 0xFFFF;
     ChampionsCircuitTryGiveReward();
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_CALYREX));
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_NONE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NONE);
+    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_CALYREX));
     EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
-
-    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
-        if (gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_CIRCUIT)
-            MarkLegendarySignCaughtBySpecies(gLegendarySignDefinitions[signId].species);
-    // Acquisition-source metadata is not the finite reward list: these two
-    // also have wild habitats and still need their Circuit rewards resolved.
-    ChampionsCircuitTryGiveReward();
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_CELESTEELA));
-    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
-    ChampionsCircuitTryGiveReward();
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_XURKITREE));
-    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
-    ChampionsCircuitTryGiveReward();
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
+    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 40);
+    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 0);
 }
 
 TEST("Champions Circuit honors the live difficulty level reduction")

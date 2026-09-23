@@ -8,35 +8,36 @@
 
 #include "constants/legendary_signs.h"
 
-enum LegendarySignSource
+// How a gated species is met. Presentation only: no engine rule reads it.
+enum LegendaryKind
 {
-    LEGENDARY_SOURCE_RARE_WILD,
-    LEGENDARY_SOURCE_VISIBLE,
-    LEGENDARY_SOURCE_BREEDING,
-    LEGENDARY_SOURCE_GAME_CORNER,
-    LEGENDARY_SOURCE_CIRCUIT,
-    LEGENDARY_SOURCE_MASTERY,
-    LEGENDARY_SOURCE_ORDINARY_WILD,
-    LEGENDARY_SOURCE_NATIVE_WILD,
+    LEGENDARY_KIND_WILD,   // Ordinary slot in src/data/wild_encounters.json.
+    LEGENDARY_KIND_STATIC, // Map-script encounter (shared cap + set path).
+    LEGENDARY_KIND_GIFT,
+    LEGENDARY_KIND_QUEST,  // Gated wild slot unlocked by a local NPC quest.
+    LEGENDARY_KIND_PRIZE,
+    LEGENDARY_KIND_BREED,
 };
 
-struct LegendarySignDefinition
+// When a Legendary-class or Ultra Beast species may be acquired. A species
+// without a row is always acquirable. Where it appears, and how often, is the
+// wild data table's or the map script's business.
+struct LegendaryGate
 {
     enum Species species;
-    u16 mapId;
-    enum Species requiredSpecies;
-    u16 requiredFlag;
-    enum LegendarySignSource source;
+    u16 unlockFlag;            // 0 = none.
+    enum Species requiredSpecies; // Family that must be caught in the Pokedex; NONE = none.
     u8 minimumBadges;
-    s8 levelOffset;
+    u8 kind;                   // enum LegendaryKind
 };
 
-extern const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_SIGN_COUNT];
+extern const struct LegendaryGate gLegendaryGates[LEGENDARY_SIGN_COUNT];
 
-// Mandatory legendary story scenes use hand-authored competitive sets rather
-// than the random non-Mega pool every other wild legendary draws from. Only
-// the seven species listed in data/pokemon/legendary_authored_sets.h have a
-// row here; everything else falls back to ApplyEmeraldChampionsRandomNonMegaSet.
+// Hand-authored competitive sets for the eight legendaries listed in
+// data/pokemon/legendary_authored_sets.h. Every Legendary-class or Ultra Beast
+// encounter (wild slot, setwildbattle, CreateEventLegalEnemyMon, roamer) uses
+// the authored set when one exists and otherwise
+// ApplyEmeraldChampionsRandomNonMegaSet; see ApplyLegendaryEncounterSet.
 struct LegendaryAuthoredSet
 {
     enum Species species;
@@ -47,27 +48,34 @@ extern const struct LegendaryAuthoredSet gLegendaryAuthoredSets[];
 extern const u32 gLegendaryAuthoredSetCount;
 
 // Returns the authored set for species, or NULL when species has no row and
-// should keep receiving the random non-Mega wild set.
+// should receive the random non-Mega set.
 const struct EmeraldChampionsBattleSet *GetLegendaryAuthoredSet(enum Species species);
+
+// Shared encounter rule: Legendary-class and Ultra Beast species spawn at the
+// current level cap with a competitive set. Paradox and ordinary species keep
+// their own level (clamped to the cap by the caller) and natural moves.
+bool32 IsLegendaryEncounterSpecies(enum Species species);
+u8 GetLegendaryEncounterLevel(enum Species species);
+void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem);
+// Legendary/UB slots are acquirable only while their gate is open and the
+// species is uncaught; everything else always is.
+bool32 IsWildSlotSpeciesAcquirable(enum Species species);
 
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);
 bool32 IsLegendarySignCaught(enum LegendarySignId signId);
-bool32 IsNativeWildLegendarySpecies(enum Species species);
 bool32 CanAcquireLegendarySignSpecies(enum Species species);
 void UnlockLegendarySign(enum LegendarySignId signId);
 void RetryPendingLegendaryRelics(void);
 void MarkLegendarySignCaughtBySpecies(enum Species species);
 enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species);
 bool32 PlayerPartyHasSpeciesFamily(enum Species species);
-bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species);
+bool32 HasCaughtSpeciesFamily(enum Species species);
 void TryUnlockSelectedLegendarySign(void);
 u16 GetSelectedLegendarySignState(void);
 void CreateSelectedLegendarySignEncounter(void);
 void TryGiveSelectedLegendarySignReward(void);
 void CreateEmeraldChampionsStaticLegendaryEncounter(void);
 void TryUnlockDarkraiLegendarySign(void);
-enum Species ChooseRareWildLegendarySpecies(enum WildPokemonArea area, bool32 sweetScent);
-void BufferNextLocalLegendaryRequirement(void);
 void BufferNextCenterLegendaryLead(void);
 u16 GetHeatranDiscoveryState(void);
 const u8 *GetLegendaryDisplayName(enum Species species);

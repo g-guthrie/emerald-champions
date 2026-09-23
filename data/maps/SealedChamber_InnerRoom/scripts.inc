@@ -9,13 +9,17 @@ SealedChamber_InnerRoom_EventScript_Regigigas::
 	braillemessage SealedChamber_InnerRoom_Braille_Regigigas
 	waitbuttonpress
 	closebraillemessage
+	@ The three golems must be registered as caught in the Pokédex; none
+	@ need to be carried, so the one-Legendary party rule is never broken.
+	setvar VAR_0x8004, SPECIES_REGIROCK
+	special CheckPlayerCaughtSpecies
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	setvar VAR_0x8004, SPECIES_REGICE
-	setvar VAR_0x8005, SPECIES_REGIROCK
-	setvar VAR_0x8006, SPECIES_REGISTEEL
-	setvar VAR_0x8007, 3
-	specialvar VAR_RESULT, CheckSpeciesInParty
-	compare VAR_RESULT, FALSE
-	goto_if_eq SealedChamber_InnerRoom_EventScript_RegigigasStatue
+	special CheckPlayerCaughtSpecies
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
+	setvar VAR_0x8004, SPECIES_REGISTEEL
+	special CheckPlayerCaughtSpecies
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_LegendaryNotReady
 	waitse
 	playmoncry SPECIES_REGIGIGAS, 2
@@ -30,6 +34,7 @@ SealedChamber_InnerRoom_EventScript_CheckRegigigasResult::
 	goto Common_EventScript_EndVisibleLegendaryEncounter
 
 SealedChamber_InnerRoom_EventScript_RegigigasStatue::
+	msgbox SealedChamber_InnerRoom_Text_RegigigasStatueSilent, MSGBOX_DEFAULT
 	release
 	end
 
@@ -122,3 +127,8 @@ SealedChamber_InnerRoom_Text_RegigigasStatue:
 	.string "It's a statue of a Pokémon.\n"
 	.string "It exudes tremendous power…\p"
 	.string "There's something engraved on it…$"
+
+SealedChamber_InnerRoom_Text_RegigigasStatueSilent:
+	.string "The statue stays silent…\p"
+	.string "It may stir once REGIROCK, REGICE\n"
+	.string "and REGISTEEL have all been caught.$"

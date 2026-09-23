@@ -187,50 +187,7 @@ TEST("Inclement integration: owned captured and boxed held items unlock paid cop
 }
 
 
-TEST("Inclement integration: every restored Ultra Beast can be rolled in its habitat")
-{
-    static const struct { enum Species species; u16 map; } residents[] = {
-        {SPECIES_BLACEPHALON, MAP_EMBER_PATH},
-        {SPECIES_BUZZWOLE, MAP_ASHEN_WOODS},
-        {SPECIES_GUZZLORD, MAP_ALTERING_CAVE_B1F},
-        {SPECIES_KARTANA, MAP_PETALBURG_WOODS_3},
-        {SPECIES_NIHILEGO, MAP_UNDERWATER_SEAFLOOR_CAVERN},
-        {SPECIES_PHEROMOSA, MAP_DEWFORD_MEADOW},
-        {SPECIES_STAKATAKA, MAP_ROUTE111_RUINS_EXTERIOR},
-        {SPECIES_CELESTEELA, MAP_ROUTE120},
-        {SPECIES_XURKITREE, MAP_NEW_MAUVILLE_INSIDE},
-        {SPECIES_POIPOLE, MAP_ALTERING_CAVE_B1F},
-    };
-    static const u16 caughtVars[] = {
-        VAR_LEGENDARY_SIGNS_CAUGHT_0, VAR_LEGENDARY_SIGNS_CAUGHT_1,
-        VAR_LEGENDARY_SIGNS_CAUGHT_2, VAR_LEGENDARY_SIGNS_CAUGHT_3,
-        VAR_LEGENDARY_SIGNS_CAUGHT_4, VAR_LEGENDARY_SIGNS_CAUGHT_5,
-    };
-    for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
-        VarSet(caughtVars[i], 0);
-    for (u32 i = 0; i < ARRAY_COUNT(residents); i++)
-    {
-        u32 appearances = 0;
-        gSaveBlock1Ptr->location.mapGroup = residents[i].map >> 8;
-        gSaveBlock1Ptr->location.mapNum = residents[i].map & 0xff;
-        // Function tests intercept RandomUniform; SeedRng cannot vary its result.
-        // Exercise every percentile roll rather than repeatedly testing roll zero.
-        for (u32 roll = 0; roll < 100; roll++)
-        {
-            SET_RNG(RNG_NONE, roll);
-            appearances += ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE) == residents[i].species;
-        }
-        Test_MgbaPrintf("Ultra Beast species %d, map %d: %d percentile rolls", residents[i].species, residents[i].map, appearances);
-        EXPECT_EQ(appearances, 1);
-        MarkLegendarySignCaughtBySpecies(residents[i].species);
-        EXPECT(!CanAcquireLegendarySignSpecies(residents[i].species));
-        for (u32 roll = 0; roll < 100; roll++)
-        {
-            SET_RNG(RNG_NONE, roll);
-            EXPECT_NE(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE), residents[i].species);
-        }
-    }
-}
+// Ultra Beast habitats, odds and capture gating are covered by test/ultra_beast_access.c.
 
 TEST("Inclement integration: New Mauville discoveries use Wattson's native completion receipt")
 {

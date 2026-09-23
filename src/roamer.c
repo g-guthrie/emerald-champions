@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "legendary_signs.h"
 #include "ow_abilities.h"
 #include "pokemon.h"
 #include "random.h"
@@ -101,6 +102,10 @@ static void CreateInitialRoamerMon(u8 index, enum Species species, u8 level)
         RANDOM_UNOWN_LETTER);
     CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
+    // Record IVs and HP after the shared legendary set, so every later
+    // instance rebuilt by CreateRoamerMonInstance matches this one.
+    if (IsLegendaryEncounterSpecies(species))
+        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], ITEM_NONE);
     ROAMER(index)->ivs = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_IVS);
     ROAMER(index)->personality = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_PERSONALITY);
     ROAMER(index)->species = species;
@@ -149,10 +154,12 @@ bool8 TryAddRoamer(enum Species species, u8 level)
 // gSpecialVar_0x8004 here corresponds to the options in the multichoice MULTI_TV_LATI (0 for 'Red', 1 for 'Blue')
 void InitRoamer(void)
 {
+    // The roaming Lati meets the player at the current cap, like every
+    // other static legendary.
     if (gSpecialVar_0x8004 == 0) // Red
-        TryAddRoamer(SPECIES_LATIAS, 40);
+        TryAddRoamer(SPECIES_LATIAS, GetLegendaryEncounterLevel(SPECIES_LATIAS));
     else
-        TryAddRoamer(SPECIES_LATIOS, 40);
+        TryAddRoamer(SPECIES_LATIOS, GetLegendaryEncounterLevel(SPECIES_LATIOS));
 }
 
 void UpdateLocationHistoryForRoamer(void)
@@ -238,6 +245,8 @@ void CreateRoamerMonInstance(u32 roamerIndex)
     struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
     ZeroEnemyPartyMons();
     CreateMonWithIVsPersonality(mon, ROAMER(roamerIndex)->species, ROAMER(roamerIndex)->level, ROAMER(roamerIndex)->ivs, ROAMER(roamerIndex)->personality);
+    if (IsLegendaryEncounterSpecies(ROAMER(roamerIndex)->species))
+        ApplyLegendaryEncounterSet(mon, ITEM_NONE);
     SetMonData(mon, MON_DATA_STATUS, &status);
     if (ROAMER(roamerIndex)->hp != 0)
         SetMonData(mon, MON_DATA_HP, &ROAMER(roamerIndex)->hp);

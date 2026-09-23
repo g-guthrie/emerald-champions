@@ -67,6 +67,7 @@ TEST("Mauville Genesect prize needs eight badges and records its one-time acquis
     EXPECT(FlagGet(FLAG_RECEIVED_GAME_CORNER_GENESECT));
     EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_GENESECT));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_GENESECT);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), GetCurrentLevelCap());
 
     GiveEmeraldChampionsGameCornerPokemon();
     EXPECT_EQ(gSpecialVar_Result, EC_GAME_CORNER_PRIZE_SET_FAILED);
@@ -84,7 +85,7 @@ TEST("Sign state survives a native flash save and load across all six storage gr
         // Retain both active and caught entries in each populated group.
         UnlockLegendarySign(id);
         if (id % 2 == 0)
-            MarkLegendarySignCaughtBySpecies(gLegendarySignDefinitions[id].species);
+            MarkLegendarySignCaughtBySpecies(gLegendaryGates[id].species);
     }
     for (u32 i = 0; i < ARRAY_COUNT(sUnlockedVars); i++)
     {
@@ -162,142 +163,135 @@ TEST("Sweet Scent reverses species totals with duplicates and ties while preserv
     EXPECT_EQ(counts[1], 72);
     EXPECT_EQ(counts[2], 56);
 
-    // An ordinary-table Ultra Beast keeps its 40% slot, outside reversal.
-    // Ordinary totals 30/20/10 reverse to 10/20/30.
-    mons[0].species = SPECIES_PHEROMOSA;
-    for (u32 i = 1; i < NUM_WATER_MONS_ENCOUNTER_SLOTS; i++)
-        mons[i].species = species[i - 1];
-    u32 legendaryCount = 0;
-    memset(counts, 0, sizeof(counts));
-    for (u32 choice = 1; choice <= 2; choice++)
-    {
-        SET_RNG(RNG_WILD_MON_TARGET, choice);
-        for (u32 roll = 0; roll < 100; roll++)
-        {
-            SET_RNG(RNG_NONE, roll);
-            u32 index = ChooseSweetScentWildMonIndex(&(struct WildPokemonInfo){.wildPokemon = mons}, WILD_AREA_WATER);
-            EXPECT_LT(index, NUM_WATER_MONS_ENCOUNTER_SLOTS);
-            legendaryCount += index == 0;
-            for (u32 i = 0; i < ARRAY_COUNT(species); i++)
-                counts[i] += mons[index].species == species[i];
-        }
-    }
-    EXPECT_EQ(legendaryCount, 80);
-    EXPECT_EQ(counts[0], 20);
-    EXPECT_EQ(counts[1], 40);
-    EXPECT_EQ(counts[2], 60);
-    EXPECT_EQ(counts[3], 0);
-    MarkLegendarySignCaughtBySpecies(SPECIES_PHEROMOSA);
-    for (u32 roll = 0; roll < 100; roll++)
-    {
-        SET_RNG(RNG_NONE, roll);
-        EXPECT_NE(ChooseSweetScentWildMonIndex(&(struct WildPokemonInfo){.wildPokemon = mons}, WILD_AREA_WATER), 0);
-    }
-    // A habitat with a single ordinary species remains usable after capture.
-    for (u32 i = 1; i < NUM_WATER_MONS_ENCOUNTER_SLOTS; i++)
-        mons[i].species = SPECIES_MAGIKARP;
-    EXPECT_EQ(mons[ChooseSweetScentWildMonIndex(&(struct WildPokemonInfo){.wildPokemon = mons}, WILD_AREA_WATER)].species, SPECIES_MAGIKARP);
+    // Legend slots and their five-fold Sweet Scent boost are covered in
+    // test/wild_slot_odds.c.
 }
 
-TEST("Wild residents leave encounter pools after capture and signs record completion")
+static bool32 BufferContains(const u8 *haystack, const u8 *needle)
 {
-    const enum Species expected[] = {SPECIES_RAIKOU, SPECIES_TAPU_KOKO, SPECIES_THUNDURUS};
-    ResetSignState();
-    for (u32 badge = 0; badge < 8; badge++)
-        FlagClear(FLAG_BADGE01_GET + badge);
-    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE110);
-    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ROUTE110);
-    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_RAIKOU));
-    for (u32 unlocked = 0; unlocked < 2; unlocked++)
+    u32 length = StringLength(haystack);
+    u32 needleLength = StringLength(needle);
+    for (u32 i = 0; i + needleLength <= length; i++)
+        if (StringCompareN(haystack + i, needle, needleLength) == 0)
+            return TRUE;
+    return FALSE;
+}
+
+static void ExpectLinesFitSignWindow(void)
+{
+    u8 line[sizeof(gStringVar4)];
+    u32 lineLength = 0;
+    for (u32 i = 0; ; i++)
     {
-        if (unlocked)
+        u8 c = gStringVar4[i];
+        if (c == EOS || c == CHAR_NEWLINE || c == CHAR_PROMPT_SCROLL || c == CHAR_PROMPT_CLEAR)
         {
-            for (u32 badge = 0; badge < 5; badge++)
-                FlagSet(FLAG_BADGE01_GET + badge);
-            FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+            line[lineLength] = EOS;
+            EXPECT_LE(GetStringWidth(FONT_NORMAL, line, 0), 200);
+            lineLength = 0;
+            if (c == EOS)
+                break;
         }
-        for (u32 roll = 0; roll < 100; roll++)
-        {
-            SET_RNG(RNG_NONE, roll);
-            EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE),
-                roll == 0 ? SPECIES_RAIKOU : roll == 1 ? SPECIES_TAPU_KOKO
-                : unlocked && roll == 2 ? SPECIES_THUNDURUS : SPECIES_NONE);
-            for (u32 choice = 0; choice < 2 + unlocked; choice++)
-            {
-                SET_RNG(RNG_WILD_MON_TARGET, choice);
-                EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, TRUE),
-                    roll < 25 ? expected[choice] : SPECIES_NONE);
-            }
-        }
+        else
+            line[lineLength++] = c;
     }
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_WATER, TRUE), SPECIES_NONE);
-    MarkLegendarySignCaughtBySpecies(SPECIES_RAIKOU);
-    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_RAIKOU));
-    // The remaining native and quest each keep a 1% standard slot.
-    // Sweet Scent redistributes its total 25% over the two remaining species.
-    for (u32 roll = 0; roll < 100; roll++)
-    {
-        SET_RNG(RNG_NONE, roll);
-        EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE),
-            roll == 0 ? SPECIES_TAPU_KOKO : roll == 1 ? SPECIES_THUNDURUS : SPECIES_NONE);
-        for (u32 choice = 0; choice < 2; choice++)
-        {
-            SET_RNG(RNG_WILD_MON_TARGET, choice);
-            EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, TRUE),
-                roll < 25 ? expected[choice + 1] : SPECIES_NONE);
-        }
-    }
-    MarkLegendarySignCaughtBySpecies(SPECIES_THUNDURUS);
-    SET_RNG(RNG_NONE, 0);
-    SET_RNG(RNG_WILD_MON_TARGET, 0);
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, TRUE), SPECIES_TAPU_KOKO);
-    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE), SPECIES_NONE);
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, TRUE), SPECIES_NONE);
+}
+
+TEST("Route rosters list legend slots with caught marks and the Sweet Scent hint")
+{
+    struct WarpData oldLocation = gSaveBlock1Ptr->location;
+    u16 oldCave = VarGet(VAR_ALTERING_CAVE_WILD_SET);
+    u32 checked = 0;
     ResetSignState();
+    VarSet(VAR_ALTERING_CAVE_WILD_SET, 0);
+    for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
+    {
+        const struct WildEncounterTypes *types = &gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT];
+        enum Species legend = SPECIES_NONE;
+        for (u32 slot = 0; types->landMonsInfo != NULL && slot < NUM_LAND_MONS_ENCOUNTER_SLOTS && legend == SPECIES_NONE; slot++)
+            if (IsLegendaryEncounterSpecies(types->landMonsInfo->wildPokemon[slot].species))
+                legend = types->landMonsInfo->wildPokemon[slot].species;
+        for (u32 slot = 0; types->waterMonsInfo != NULL && slot < NUM_WATER_MONS_ENCOUNTER_SLOTS && legend == SPECIES_NONE; slot++)
+            if (IsLegendaryEncounterSpecies(types->waterMonsInfo->wildPokemon[slot].species))
+                legend = types->waterMonsInfo->wildPokemon[slot].species;
+        if (legend == SPECIES_NONE || GetLegendarySignIdBySpecies(legend) >= LEGENDARY_SIGN_COUNT)
+            continue;
+        gSaveBlock1Ptr->location.mapGroup = gWildMonHeaders[header].mapGroup;
+        gSaveBlock1Ptr->location.mapNum = gWildMonHeaders[header].mapNum;
+        if (GetCurrentMapWildMonHeaderId() != header)
+            continue; // Altering Cave variants share one map.
+        MarkLegendarySignCaughtBySpecies(legend);
+        BufferCurrentMapRouteSignSpecies();
+        u8 name[64];
+        StringCopy(name, GetLegendaryDisplayName(legend));
+        StringAppend(name, COMPOUND_STRING(" (Caught)"));
+        EXPECT_LT(StringLength(gStringVar4), sizeof(gStringVar4));
+        EXPECT(BufferContains(gStringVar4, name));
+        EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Legends and Ultra Beasts are rare")));
+        EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("%")));
+        ExpectLinesFitSignWindow();
+        checked++;
+    }
+    Test_MgbaPrintf("Route rosters with legend slots: %d", checked);
+    EXPECT_GT(checked, 0);
+    // Every gate row reports its capture on research.
     for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
     {
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-        if (sign->source != LEGENDARY_SOURCE_NATIVE_WILD)
-            continue;
-        EXPECT(CanAcquireLegendarySignSpecies(sign->species));
-        MarkLegendarySignCaughtBySpecies(sign->species);
-        EXPECT(!CanAcquireLegendarySignSpecies(sign->species));
-        gSaveBlock1Ptr->location.mapGroup = sign->mapId >> 8;
-        gSaveBlock1Ptr->location.mapNum = sign->mapId & 255;
-        BufferCurrentMapRouteSignSpecies();
-        u32 length = StringLength(gStringVar4);
-        u8 name[64];
-        StringCopy(name, GetLegendaryDisplayName(sign->species));
-        StringAppend(name, COMPOUND_STRING(" (Caught)"));
-        u32 nameLength = StringLength(name);
-        bool32 found = FALSE;
-        EXPECT_LT(length, sizeof(gStringVar4));
-        for (u32 i = 0; i + nameLength <= length; i++)
-            found |= StringCompareN(gStringVar4 + i, name, nameLength) == 0;
-        EXPECT(found);
-        // Long regional names plus the marker must still fit the sign window.
-        u8 line[sizeof(gStringVar4)];
-        u32 lineLength = 0;
-        for (u32 i = 0; ; i++)
-        {
-            u8 c = gStringVar4[i];
-            if (c == EOS || c == CHAR_NEWLINE || c == CHAR_PROMPT_SCROLL || c == CHAR_PROMPT_CLEAR)
-            {
-                line[lineLength] = EOS;
-                EXPECT_LE(GetStringWidth(FONT_NORMAL, line, 0), 200);
-                lineLength = 0;
-                if (c == EOS)
-                    break;
-            }
-            else
-                line[lineLength++] = c;
-        }
+        MarkLegendarySignCaughtBySpecies(gLegendaryGates[id].species);
         gSpecialVar_0x8004 = id;
         ResearchSelectedLegendarySign();
         EXPECT_EQ(gSpecialVar_Result, 4);
     }
+    gSaveBlock1Ptr->location = oldLocation;
+    VarSet(VAR_ALTERING_CAVE_WILD_SET, oldCave);
+    ResetSignState();
+}
+
+TEST("Research reports badges, milestone, family and availability from the gate row")
+{
+    ResetSignState();
+    u8 savedCaught[sizeof(gSaveBlock1Ptr->dexCaught)];
+    memcpy(savedCaught, gSaveBlock1Ptr->dexCaught, sizeof(savedCaught));
+    memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(savedCaught));
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
+    FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
+    FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_KOKO;
+    ResearchSelectedLegendarySign();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required:\n3.")));
+    for (u32 badge = 0; badge < 3; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    ResearchSelectedLegendarySign();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required")));
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Help Wattson")));
+    FlagSet(FLAG_GOT_TM24_FROM_WATTSON);
+    ResearchSelectedLegendarySign();
+    EXPECT_EQ(gSpecialVar_Result, 2);
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
+
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_CRESSELIA;
+    ResearchSelectedLegendarySign();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT(BufferContains(gStringVar4, GetSpeciesName(SPECIES_DARKRAI)));
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DARKRAI), FLAG_SET_CAUGHT);
+    ResearchSelectedLegendarySign();
+    EXPECT_EQ(gSpecialVar_Result, 2);
+    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("%")));
+    ExpectLinesFitSignWindow();
+
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
+    FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
+    FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    memcpy(gSaveBlock1Ptr->dexCaught, savedCaught, sizeof(savedCaught));
+    ResetSignState();
 }
 
 TEST("Rare wild NPC discovery requires local help and survives depositing the partner")
@@ -379,14 +373,13 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
     EXPECT(GuideTextContains(COMPOUND_STRING("SHAYMIN")));
-    EXPECT(GuideTextContains(COMPOUND_STRING("1%")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("%")));
     BufferNextCenterLegendaryLead();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
     MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
     EXPECT(GuideTextContains(COMPOUND_STRING("You've already found")));
-    EXPECT(!GuideTextContains(COMPOUND_STRING("1%")));
     EXPECT(!GuideTextContains(COMPOUND_STRING("find more")));
     // Regional Moltres shares the national Dex entry, but not the Ember Path scene.
     FlagClear(FLAG_EC_CAUGHT_MOLTRES);
@@ -440,27 +433,36 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     }
 }
 
-TEST("Legendary scene retries require the Regis")
+TEST("Regigigas wakes for the three Regis' Pokedex records, not a three-Legendary party")
 {
     // Route roster signs must resolve in Emerald, not only in FireRed/LeafGreen.
     const struct ObjectEventGraphicsInfo *sign = GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_SIGN);
     EXPECT(sign != NULL);
     EXPECT(sign->images != NULL);
     ResetSignState();
+    u8 savedCaught[sizeof(gSaveBlock1Ptr->dexCaught)];
+    memcpy(savedCaught, gSaveBlock1Ptr->dexCaught, sizeof(savedCaught));
+    memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(savedCaught));
     for (u32 badge = 0; badge < 8; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
-    UnlockLegendarySign(LEGENDARY_SIGN_REGIGIGAS);
-    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_REGIGIGAS));
     const enum Species regis[] = {SPECIES_REGIROCK, SPECIES_REGICE, SPECIES_REGISTEEL};
-    for (u32 slot = 0; slot < ARRAY_COUNT(regis); slot++)
-        CreateMon(&gParties[B_TRAINER_PLAYER][slot], regis[slot], 50, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_REGIGIGAS));
+    for (u32 i = 0; i < ARRAY_COUNT(regis); i++)
+    {
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(regis[i]), FLAG_SET_CAUGHT);
+        EXPECT_EQ(CanAcquireLegendarySignSpecies(SPECIES_REGIGIGAS), i + 1 == ARRAY_COUNT(regis));
+    }
+    // The party holds none of them: the restricted-party rule allows only one.
+    EXPECT(!PlayerPartyHasSpeciesFamily(SPECIES_REGIROCK));
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_REGIGIGAS));
-    ZeroMonData(&gParties[B_TRAINER_PLAYER][2]);
+    // An unlocked bit from an older save does not bypass the records.
+    memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(savedCaught));
+    UnlockLegendarySign(LEGENDARY_SIGN_REGIGIGAS);
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_REGIGIGAS));
     for (u32 badge = 0; badge < 8; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
-    // Southern Island's Latis keep Inclement's own encounter (party level,
-    // Soul Dew) through CreateEventLegalEnemyMon in their map script.
+    memcpy(gSaveBlock1Ptr->dexCaught, savedCaught, sizeof(savedCaught));
+    ResetSignState();
 }
 
 extern const u8 SealedChamber_InnerRoom_EventScript_CheckRegigigasResult[];
@@ -523,45 +525,6 @@ TEST("Visible legendary events: uncaught outcomes retreat and capture uses the m
     }
 }
 
-TEST("Verdanturf Meadow: each uncaught resident keeps its odds and capture removes only that resident")
-{
-    ResetSignState();
-    for (u32 badge = 0; badge < 8; badge++)
-        FlagClear(FLAG_BADGE01_GET + badge);
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_VERDANTURF_MEADOW);
-    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_VERDANTURF_MEADOW);
-    const enum Species residents[] = {SPECIES_ENAMORUS, SPECIES_FEZANDIPITI};
-    for (u32 caught = 0; caught <= ARRAY_COUNT(residents); caught++)
-    {
-        u32 counts[3] = {0};
-        for (u32 roll = 0; roll < 100; roll++)
-        {
-            SET_RNG(RNG_NONE, roll);
-            enum Species species = ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE);
-            EXPECT(species == SPECIES_NONE || species == residents[0] || species == residents[1]);
-            counts[species == residents[0] ? 0 : species == residents[1] ? 1 : 2]++;
-        }
-        EXPECT_EQ(counts[0], caught == 0 ? 1 : 0);
-        EXPECT_EQ(counts[1], caught < 2 ? 1 : 0);
-        EXPECT_EQ(counts[2], 98 + caught);
-        EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_WATER, FALSE), SPECIES_NONE);
-        EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_ROCKS, FALSE), SPECIES_NONE);
-        for (u32 choice = 0; choice < ARRAY_COUNT(residents) - caught; choice++)
-        {
-            SET_RNG(RNG_WILD_MON_TARGET, choice);
-            for (u32 roll = 0; roll < 100; roll++)
-            {
-                SET_RNG(RNG_NONE, roll);
-                EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, TRUE),
-                    roll < 25 ? residents[caught + choice] : SPECIES_NONE);
-            }
-        }
-        if (caught < ARRAY_COUNT(residents))
-            MarkLegendarySignCaughtBySpecies(residents[caught]);
-    }
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, TRUE), SPECIES_NONE);
-}
-
 extern void Test_CollectAsh(void);
 
 TEST("Soot collection: spendable ash and lifetime discovery progress remain independent")
@@ -597,6 +560,8 @@ TEST("Soot collection: spendable ash and lifetime discovery progress remain inde
 TEST("Marshadow discovery: glassmaker requires lifetime soot and unlocks once without spending it")
 {
     ResetSignState();
+    for (u32 badge = 0; badge < 3; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
     VarSet(VAR_ASH_GATHER_COUNT, 0);
     VarSet(VAR_EC_SOOT_PROGRESS, EC_SOOT_CORD_RECEIVED | 250);
     gSpecialVar_0x8004 = LEGENDARY_SIGN_MARSHADOW;
@@ -619,16 +584,10 @@ TEST("Marshadow discovery: glassmaker requires lifetime soot and unlocks once wi
     EXPECT_EQ(VarGet(VAR_EC_SOOT_PROGRESS), EC_SOOT_CORD_RECEIVED | 250);
     TryUnlockLocalLegendaryDiscovery();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE113);
-    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ROUTE113);
-    for (u32 roll = 0; roll < 100; roll++)
-    {
-        SET_RNG(RNG_NONE, roll);
-        EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE),
-            roll == 0 ? SPECIES_MARSHADOW : SPECIES_NONE);
-    }
     MarkLegendarySignCaughtBySpecies(SPECIES_MARSHADOW);
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_MARSHADOW));
+    for (u32 badge = 0; badge < 3; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
 }
 
 extern bool32 Test_PokedexAreaHasSection(enum Species species, u16 section);
@@ -644,18 +603,20 @@ TEST("Rare habitat: the Pokedex reflects unlocked and uncaught wild residents")
     gAreaTimeOfDay = TIME_OF_DAY_DEFAULT;
     gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE113);
     gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ROUTE113);
+    for (u32 badge = 0; badge < 3; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_MARSHADOW));
     EXPECT(!Test_PokedexAreaHasSection(SPECIES_MARSHADOW, MAPSEC_ROUTE_113));
     UnlockLegendarySign(LEGENDARY_SIGN_MARSHADOW);
-    SET_RNG(RNG_NONE, 0);
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE), SPECIES_MARSHADOW);
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_MARSHADOW));
     EXPECT(Test_PokedexAreaHasSection(SPECIES_MARSHADOW, MAPSEC_ROUTE_113));
     gMapHeader.regionMapSectionId = MAPSEC_PALLET_TOWN;
     EXPECT(!Test_PokedexAreaHasSection(SPECIES_MARSHADOW, MAPSEC_ROUTE_113));
     gMapHeader.regionMapSectionId = MAPSEC_ROUTE_113;
     MarkLegendarySignCaughtBySpecies(SPECIES_MARSHADOW);
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE), SPECIES_NONE);
     EXPECT(!Test_PokedexAreaHasSection(SPECIES_MARSHADOW, MAPSEC_ROUTE_113));
+    for (u32 badge = 0; badge < 3; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
     gMapHeader.regionMapSectionId = oldSection;
     gAreaTimeOfDay = oldTime;
     gSaveBlock1Ptr->location = oldLocation;
@@ -669,66 +630,86 @@ TEST("Rare habitat: native meadow residents disappear independently after captur
     u8 oldTime = gAreaTimeOfDay;
     gMapHeader.regionMapSectionId = MAPSEC_VERDANTURF_MEADOW;
     gAreaTimeOfDay = TIME_OF_DAY_DEFAULT;
+    // Gated residents stay off the map until their milestones.
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
+    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    EXPECT(!Test_PokedexAreaHasSection(SPECIES_ENAMORUS, MAPSEC_VERDANTURF_MEADOW));
+    EXPECT(!Test_PokedexAreaHasSection(SPECIES_FEZANDIPITI, MAPSEC_VERDANTURF_MEADOW));
+    for (u32 badge = 0; badge < 6; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
     EXPECT(Test_PokedexAreaHasSection(SPECIES_ENAMORUS, MAPSEC_VERDANTURF_MEADOW));
     EXPECT(Test_PokedexAreaHasSection(SPECIES_FEZANDIPITI, MAPSEC_VERDANTURF_MEADOW));
     MarkLegendarySignCaughtBySpecies(SPECIES_ENAMORUS);
     EXPECT(!Test_PokedexAreaHasSection(SPECIES_ENAMORUS, MAPSEC_VERDANTURF_MEADOW));
     EXPECT(Test_PokedexAreaHasSection(SPECIES_FEZANDIPITI, MAPSEC_VERDANTURF_MEADOW));
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
+    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
     gMapHeader.regionMapSectionId = oldSection;
     gAreaTimeOfDay = oldTime;
     ResetSignState();
 }
 
-TEST("Rare distribution: every wild legend has a runtime table and one-percent standard odds")
+static bool32 IsEmeraldWildHeader(u32 header)
 {
-    u32 id = 0;
-    for (u32 candidate = 0; candidate < LEGENDARY_SIGN_COUNT; candidate++)
-        if (gLegendarySignDefinitions[candidate].source == LEGENDARY_SOURCE_RARE_WILD
-            || gLegendarySignDefinitions[candidate].source == LEGENDARY_SOURCE_NATIVE_WILD)
-            PARAMETRIZE { id = candidate; }
+    const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(gWildMonHeaders[header].mapGroup, gWildMonHeaders[header].mapNum);
+    return map->mapLayout == NULL || !map->mapLayout->isFrlg;
+}
 
-    struct WarpData oldLocation = gSaveBlock1Ptr->location;
-    u32 oldBadges = 0;
-    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+static bool32 WildTableHasSpecies(const struct WildPokemonInfo *info, u32 slots, enum Species species)
+{
+    for (u32 slot = 0; info != NULL && slot < slots; slot++)
+        if (info->wildPokemon[slot].species == species)
+            return TRUE;
+    return FALSE;
+}
+
+TEST("Gate table: every wild or quest row has a compiled slot and every wild legend has a row")
+{
+    u32 missing = 0;
+    for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
     {
-        oldBadges |= FlagGet(FLAG_BADGE01_GET + badge) << badge;
-        FlagSet(FLAG_BADGE01_GET + badge);
+        const struct LegendaryGate *gate = &gLegendaryGates[id];
+        EXPECT(IsLegendaryEncounterSpecies(gate->species));
+        EXPECT_EQ(GetLegendarySignIdBySpecies(gate->species), id);
+        if (gate->kind != LEGENDARY_KIND_WILD && gate->kind != LEGENDARY_KIND_QUEST)
+            continue;
+        bool32 found = FALSE;
+        for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED) && !found; header++)
+        {
+            const struct WildEncounterTypes *types = &gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT];
+            found = IsEmeraldWildHeader(header)
+                && (WildTableHasSpecies(types->landMonsInfo, NUM_LAND_MONS_ENCOUNTER_SLOTS, gate->species)
+                 || WildTableHasSpecies(types->waterMonsInfo, NUM_WATER_MONS_ENCOUNTER_SLOTS, gate->species));
+        }
+        if (!found)
+        {
+            Test_MgbaPrintf("Wild gate row without a compiled slot: sign %d species %d", id, gate->species);
+            missing++;
+        }
     }
-    ResetSignState();
-    const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-    bool32 oldRequirement = sign->requiredFlag && FlagGet(sign->requiredFlag);
-    if (sign->requiredFlag) FlagSet(sign->requiredFlag);
-    UnlockLegendarySign(id);
-    EXPECT(CanAcquireLegendarySignSpecies(sign->species));
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(sign->mapId);
-    gSaveBlock1Ptr->location.mapNum = MAP_NUM(sign->mapId);
-    u16 header = GetCurrentMapWildMonHeaderId();
-    EXPECT_NE(header, HEADER_NONE);
-    enum WildPokemonArea habitat = sign->mapId == MAP_ROUTE125 || sign->mapId == MAP_ROUTE126
-                                || sign->mapId == MAP_ROUTE127 ? WILD_AREA_WATER : WILD_AREA_LAND;
-    enum TimeOfDay encounterTime = GetTimeOfDayForEncounters(header, habitat);
-    const struct WildEncounterTypes *tables = &gWildMonHeaders[header].encounterTypes[encounterTime];
-    const struct WildPokemonInfo *table = habitat == WILD_AREA_WATER ? tables->waterMonsInfo : tables->landMonsInfo;
-    EXPECT(table != NULL);
-    EXPECT(table->encounterRate > 0);
-    u32 hits = 0;
-    for (u32 roll = 0; roll < 100; roll++)
+    // A Legendary or Ultra Beast in a wild table without a row would be
+    // ungated and uncatchable-once only by accident.
+    for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
     {
-        SET_RNG(RNG_NONE, roll);
-        if (ChooseRareWildLegendarySpecies(habitat, FALSE) == sign->species)
-            hits++;
+        if (!IsEmeraldWildHeader(header))
+            continue;
+        const struct WildEncounterTypes *types = &gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT];
+        const struct WildPokemonInfo *infos[] = {types->landMonsInfo, types->waterMonsInfo};
+        const u32 slots[] = {NUM_LAND_MONS_ENCOUNTER_SLOTS, NUM_WATER_MONS_ENCOUNTER_SLOTS};
+        for (u32 method = 0; method < ARRAY_COUNT(infos); method++)
+        for (u32 slot = 0; infos[method] != NULL && slot < slots[method]; slot++)
+        {
+            enum Species species = infos[method]->wildPokemon[slot].species;
+            if (IsLegendaryEncounterSpecies(species) && GetLegendarySignIdBySpecies(species) >= LEGENDARY_SIGN_COUNT)
+            {
+                Test_MgbaPrintf("Wild legend without a gate row: map %d.%d species %d",
+                    gWildMonHeaders[header].mapGroup, gWildMonHeaders[header].mapNum, species);
+                missing++;
+            }
+        }
     }
-    EXPECT_EQ(hits, 1);
-    EXPECT_EQ(ChooseRareWildLegendarySpecies(habitat == WILD_AREA_WATER ? WILD_AREA_LAND : WILD_AREA_WATER, FALSE), SPECIES_NONE);
-    MarkLegendarySignCaughtBySpecies(sign->species);
-    for (u32 roll = 0; roll < 100; roll++)
-    {
-        SET_RNG(RNG_NONE, roll);
-        EXPECT_NE(ChooseRareWildLegendarySpecies(habitat, FALSE), sign->species);
-    }
-    if (sign->requiredFlag && !oldRequirement) FlagClear(sign->requiredFlag);
-    for (u32 badge = 0; badge < NUM_BADGES; badge++)
-        if (!(oldBadges & (1u << badge))) FlagClear(FLAG_BADGE01_GET + badge);
-    gSaveBlock1Ptr->location = oldLocation;
-    ResetSignState();
+    EXPECT_EQ(missing, 0);
 }

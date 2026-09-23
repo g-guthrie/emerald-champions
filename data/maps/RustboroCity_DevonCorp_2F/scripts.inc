@@ -68,10 +68,12 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist:: @ 82118DA
 RustboroCity_DevonCorp_2F_EventScript_DreamsFallback::
 	call RustboroCity_DevonCorp_2F_EventScript_TryArceus
 	msgbox RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams, MSGBOX_DEFAULT
+	call_if_unset FLAG_IS_CHAMPION, RustboroCity_DevonCorp_2F_EventScript_ArceusHint
 	release
 	end
 
-@ Devon's final discovery: eight badges and the Sootopolis crisis resolved.
+@ Devon's final discovery: available once the player is Champion
+@ (FLAG_IS_CHAMPION, set on entering the Hall of Fame).
 RustboroCity_DevonCorp_2F_EventScript_TryArceus:
 	special TryGiveArceusLegendarySignMasteryReward
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardParty
@@ -100,16 +102,16 @@ RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom:
 	end
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
-	.string "You restored Hoenn's weather and\n"
-	.string "earned all eight badges.\l"
+	.string "You entered the Hall of Fame as\n"
+	.string "Hoenn's Champion.\l"
 	.string "Something extraordinary has\l"
 	.string "answered!\p"
 	.string "Arceus appears before you and\n"
 	.string "joins your party.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardPC:
-	.string "You restored Hoenn's weather and\n"
-	.string "earned all eight badges.\l"
+	.string "You entered the Hall of Fame as\n"
+	.string "Hoenn's Champion.\l"
 	.string "Something extraordinary has\l"
 	.string "answered!\p"
 	.string "Arceus appears before you and is\n"
@@ -399,10 +401,22 @@ RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
 RustboroCity_DevonCorp_2F_EventScript_MagearnaAwake::
 	call RustboroCity_DevonCorp_2F_EventScript_TryArceus
 	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaAwake, MSGBOX_DEFAULT
+	call_if_unset FLAG_IS_CHAMPION, RustboroCity_DevonCorp_2F_EventScript_ArceusHint
 	release
 	end
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusHint::
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusHint, MSGBOX_DEFAULT
+	return
 
 RustboroCity_DevonCorp_2F_Text_MagearnaAwake:
 	.string "Thanks to you, Magearna is awake!\p"
 	.string "Now, back to my dream-visualizing\n"
 	.string "device…$"
+
+RustboroCity_DevonCorp_2F_Text_ArceusHint:
+	.string "My readings also hint at something\n"
+	.string "far older than any prototype.\p"
+	.string "It may answer only a Champion.\n"
+	.string "Enter the Hall of Fame, then come\l"
+	.string "see me again.$"

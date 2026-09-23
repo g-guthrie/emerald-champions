@@ -336,6 +336,15 @@ Route119_EventScript_CyclingTriathleteM:: @ 81F476B
 
 Route119_EventScript_RouteSignFortree:: @ 81F4774
 	msgbox Route119_Text_RouteSignFortree, MSGBOX_SIGN
+	goto Route119_EventScript_ShowRouteRoster
+
+Route119_EventScript_ShowRouteRoster::
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_ARTICUNO_GALAR
+	call Common_EventScript_ShowRouteLegend
+	setvar VAR_0x8004, LEGENDARY_SIGN_TORNADUS
+	call Common_EventScript_ShowRouteLegend
+	releaseall
 	end
 
 Route119_EventScript_WeatherInstituteSign:: @ 81F477D

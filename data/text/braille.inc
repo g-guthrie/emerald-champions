@@ -124,7 +124,7 @@ SealedChamber_InnerRoom_Braille_Regigigas:
 	.braille "BODIES OF\n"
 	.braille "ROCK, ICE,\n"
 	.braille "AND STEEL.\n"
-	.braille "BRING THREE.\n"
+	.braille "CATCH THREE.\n"
 	.braille "THE KING\n"
 	.braille "SHALL AWAKEN.$"
 

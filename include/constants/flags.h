@@ -846,7 +846,7 @@
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE120_WEPEAR_BERRY 0x2A7
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE115_NANAB_BERRY 0x2A8
 #define FLAG_EC_WINSTRATE_GARDEN_BERRIES 0x2A9
-#define FLAG_UNUSED_0x2AA 0x2AA // Unused Flag
+#define FLAG_SEASPRAY_CAVE_B1F_REVIVE 0x2AA // Formerly unused; old 0x43 belongs to the same-location Lure Ball.
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
 #define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
@@ -1286,7 +1286,7 @@
 #define FLAG_ITEM_NEW_MAUVILLE_UPGRADE                        0x463
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL                      0x464
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MASTER_BALL                 0x465 // Unused Flag, leftover from the Ruby Magma hideout
-#define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MAX_ELIXIR                  0x466 // Unused Flag, leftover from the Ruby Magma hideout
+#define FLAG_SEASPRAY_CAVE_B1F_FREEZE_DRY                           0x466 // Formerly unused Ruby Magma flag; the pickup is now Absolite Z.
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B2F_NEST_BALL                   0x467 // Unused Flag, leftover from the Ruby Magma hideout
 #define FLAG_UNUSED_0x468                                           0x468 // Unused Flag
 #define FLAG_ITEM_MT_PYRE_2F_ULTRA_BALL                             0x469
@@ -1421,7 +1421,7 @@
 #define FLAG_EC_CAUGHT_RESHIRAM                                     0x4E9
 #define FLAG_HIDE_ROUTE133_VIAL_NURSE                              0x4EA
 #define FLAG_RECEIVED_GAME_CORNER_GENESECT                          0x4EB
-#define FLAG_RECEIVED_GAME_CORNER_POIPOLE                           0x4EC
+#define FLAG_UNUSED_0x4EC                                           0x4EC // Retired Game Corner Poipole prize; Poipole is a wild Ultra Beast.
 #define FLAG_HIDE_LEGENDARY_SIGN_DARKRAI                            0x4ED
 #define FLAG_HIDE_LEGENDARY_SIGN_CRESSELIA                          0x4EE
 #define FLAG_HIDE_LEGENDARY_SIGN_DIALGA                             0x4EF
@@ -1565,7 +1565,7 @@
 #define FLAG_SYS_MIX_RECORD                         (SYSTEM_FLAGS + 0x34)
 #define FLAG_SYS_CLOCK_SET                          (SYSTEM_FLAGS + 0x35)
 #define FLAG_SYS_NATIONAL_DEX                       (SYSTEM_FLAGS + 0x36)
-#define FLAG_SYS_CAVE_SHIP                          (SYSTEM_FLAGS + 0x37) // Unused Flag, leftover from R/S debug, presumably used by Emerald's debug too
+#define FLAG_SEASPRAY_CAVE_B1F_ABOMASITE           (SYSTEM_FLAGS + 0x37) // Formerly unused R/S debug flag; old 0x44 belongs to King's Rock.
 #define FLAG_SYS_CAVE_WONDER                        (SYSTEM_FLAGS + 0x38) // Unused Flag, same as above
 #define FLAG_SYS_CAVE_BATTLE                        (SYSTEM_FLAGS + 0x39) // Unused Flag, same as above
 #define FLAG_SYS_SHOAL_TIDE                         (SYSTEM_FLAGS + 0x3A)
@@ -1711,6 +1711,7 @@
 #define FLAG_EC_RESOLVED_JIRACHI                    (SYSTEM_FLAGS + 0xB6)
 #define FLAG_EC_RECEIVED_EON_TICKET                     (SYSTEM_FLAGS + 0xB7)
 #define FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE              (SYSTEM_FLAGS + 0xB8) // Old 0x20E is a live legacy Underwater Route 128 Dive Ball receipt.
+#define FLAG_SANDSTREWN_RUINS_OLD_AMBER                  (SYSTEM_FLAGS + 0xB9) // No pre-rebase Sandstrewn pickup; old 0xE9 is a live Trick House receipt.
 // Reserved former Circuit lottery-ticket bit; the current lottery uses daily draws.
 #define FLAG_EC_LOTTERY_TICKET_READY                (SYSTEM_FLAGS + 0xBA)
 #define FLAG_EC_TUTOR_MACHINES_LINE_SEEN            (SYSTEM_FLAGS + 0xBB) // Emerald Champions: the Center tutor explained once that machines are gone
@@ -2686,27 +2687,23 @@
 #define PETALBURG_WOODS_3_BEEDRILLITE                                  0x28 // shares 0x28 with FLAG_EC_ITEM_MEADOW_MAWILITE (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_STEALTH_ROCK                                0x2C // shares 0x2C with FLAG_EC_ITEM_EMBER_MAGMARIZER (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_WATER_PULSE                                 0x2D // shares 0x2D with FLAG_EC_ITEM_EMBER_MASTER_BALL (dead: its map.json was overwritten)
-#define FLAG_SEASPRAY_CAVE_LURE_BALL                                   0x2E // shares 0x2E with FLAG_EC_ITEM_WOODS2_SUN_STONE (dead: its map.json was overwritten)
+#define FLAG_SEASPRAY_CAVE_LURE_BALL                                   FLAG_EC_ITEM_SEASPRAY_LURE_BALL
 #define FLAG_GRANITE_CAVE_BRICK_BREAK                                  0x30 // shares 0x30 with FLAG_EC_ITEM_WOODS3_BEEDRILLITE (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_STONE_EDGE                                  0x40 // shares 0x40 with FLAG_EC_ITEM_SCORCHED_BEAST_BALL (dead: its map.json was overwritten)
-#define FLAG_SEASPRAY_CAVE_B1F_FREEZE_DRY                              0x41 // shares 0x41 with FLAG_EC_ITEM_SEASPRAY_BLASTOISINITE (dead: its map.json was overwritten)
-#define FLAG_SEASPRAY_CAVE_B1F_KINGS_ROCK                              0x42 // shares 0x42 with FLAG_EC_ITEM_SEASPRAY_DAWN_STONE (dead: its map.json was overwritten)
-#define FLAG_SEASPRAY_CAVE_B1F_REVIVE                                  0x43 // shares 0x43 with FLAG_EC_ITEM_SEASPRAY_LURE_BALL (dead: its map.json was overwritten)
-#define FLAG_SEASPRAY_CAVE_B1F_ABOMASITE                               0x44 // shares 0x44 with FLAG_EC_ITEM_SEASPRAY_KINGS_ROCK (dead: its map.json was overwritten)
+#define FLAG_SEASPRAY_CAVE_B1F_KINGS_ROCK                              FLAG_EC_ITEM_SEASPRAY_KINGS_ROCK
 #define FLAG_EMBER_PATH_SMACK_DOWN                                     0x45 // shares 0x45 with FLAG_EC_ITEM_SEASPRAY_SLOWBRONITE (dead: its map.json was overwritten)
 #define FLAG_EMBER_PATH_CHARIZARDITE_Y                                 0x46 // shares 0x46 with FLAG_EC_ITEM_SEASPRAY_ICE_STONE (dead: its map.json was overwritten)
 #define FLAG_ASHEN_WOODS_FLAME_ORB                                     0x47 // shares 0x47 with FLAG_EC_ITEM_VERDANTURF_FLOETTITE (dead: its map.json was overwritten)
 #define FLAG_ASHEN_WOODS_PINSIRITE                                     0x48 // shares 0x48 with FLAG_EC_ITEM_SEASPRAY_TIMER_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_DOME_FOSSIL                              0x4A // shares 0x4A with FLAG_EC_ITEM_GRANITE_CAVE_B1F_DUSK_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_HELX_FOSSIL                              0x4B // shares 0x4B with FLAG_EC_ITEM_GRANITE_CAVE_B2F_TIMER_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_ARMOR_FOSSIL                             0x4C // shares 0x4C with FLAG_EC_ITEM_METEOR_FALLS_1F_2R_MASTER_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_SKULL_FOSSIL                             0x4D // shares 0x4D with FLAG_EC_ITEM_MOSSDEEP_CITY_QUICK_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_PLUME_FOSSIL                             0x4E // shares 0x4E with FLAG_EC_ITEM_MT_PYRE_SUMMIT_BEAST_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_COVER_FOSSIL                             0x4F // shares 0x4F with FLAG_EC_ITEM_NEW_MAUVILLE_QUICK_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_SAIL_FOSSIL                              0x54 // shares 0x54 with FLAG_EC_ITEM_PETALBURG_WOODS_2_QUICK_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_JAW_FOSSIL                               0x55 // shares 0x55 with FLAG_EC_ITEM_ROUTE105_DUSK_BALL (dead: its map.json was overwritten)
+#define FLAG_SANDSTREWN_RUINS_DOME_FOSSIL                              FLAG_EC_ITEM_RUINS_DOME_FOSSIL
+#define FLAG_SANDSTREWN_RUINS_HELX_FOSSIL                              FLAG_EC_ITEM_RUINS_HELIX_FOSSIL
+#define FLAG_SANDSTREWN_RUINS_ARMOR_FOSSIL                             FLAG_EC_ITEM_RUINS_ARMOR_FOSSIL
+#define FLAG_SANDSTREWN_RUINS_SKULL_FOSSIL                             FLAG_EC_ITEM_RUINS_SKULL_FOSSIL
+#define FLAG_SANDSTREWN_RUINS_PLUME_FOSSIL                             FLAG_EC_ITEM_RUINS_PLUME_FOSSIL
+#define FLAG_SANDSTREWN_RUINS_COVER_FOSSIL                             FLAG_EC_ITEM_RUINS_COVER_FOSSIL
+#define FLAG_SANDSTREWN_RUINS_SAIL_FOSSIL                              FLAG_EC_ITEM_RUINS_SAIL_FOSSIL
+#define FLAG_SANDSTREWN_RUINS_JAW_FOSSIL                               FLAG_EC_ITEM_RUINS_JAW_FOSSIL
 #define FLAG_SANDSTREWN_RUINS_GARCHOMPITE                              0x68 // shares 0x68 with FLAG_EC_ITEM_ROUTE110_DUSK_BALL (dead: its map.json was overwritten)
-#define FLAG_SANDSTREWN_RUINS_OLD_AMBER                                0xE9 // shares 0xE9 with FLAG_EC_ITEM_TRICK_HOUSE_PUZZLE5_MASTER_BALL (dead: its map.json was overwritten)
 #define FLAG_SANDSTREWN_RUINS_LEECH_LIFE                               0x1AA // shares 0x1AA with FLAG_EC_ITEM_ROUTE111_ALTARIANITE (dead: its map.json was overwritten)
 #define FLAG_ROUTE_131_SPLASH_PLATE                                    0x1DA // shares 0x1DA with FLAG_EC_ITEM_ROUTE119_QUICK_BALL (dead: its map.json was overwritten)
 #define FLAG_SCORCHED_SLAB_TYRANITARITE                                0x1E1 // shares 0x1E1 with FLAG_EC_ITEM_SAFARI_ZONE_SOUTH_HONEY (dead: its map.json was overwritten)
@@ -2844,7 +2841,7 @@
 // -- Relocated: the donor ID is held by a flag Emerald Champions still uses.
 //    Each lands on a bit whose only EC name is dead, so no live flag moves and
 //    no bit is added. New bits read 0 in existing saves ("not picked up yet").
-#define FLAG_SEASPRAY_CAVE_BLASTOISINITE                               0x1F6 // relocated 0x2F -> 0x1F6; 0x2F is live as FLAG_DECORATION_0. Target bit's only other name is dead FLAG_HIDDEN_ITEM_ROUTE_111_SUN_STONE
+#define FLAG_SEASPRAY_CAVE_BLASTOISINITE                               FLAG_EC_ITEM_SEASPRAY_BLASTOISINITE
 #define FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE                         0x1F8 // relocated 0x3F -> 0x1F8; 0x3F is live as FLAG_DEWFORD_EVIOLITE. Target bit's only other name is dead FLAG_HIDDEN_ITEM_ROUTE_114_DAWN_STONE
 #define FLAG_ASHEN_WOODS_U_TURN                                        0x1F9 // relocated 0x49 -> 0x1F9; 0x49 is live as FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE. Target bit's only other name is dead FLAG_HIDDEN_ITEM_ROUTE_119_KINGS_ROCK
 #define FLAG_ITEM_MT_PYRE_SUMMIT_TM61_WILLOWISP                        0x1FB // relocated 0x1B2 -> 0x1FB; 0x1B2 is live as FLAG_MOVE_TUTOR_TAUGHT_ROLLOUT. Target bit's only other name is dead FLAG_HIDDEN_ITEM_ROUTE_123_SUPER_REPEL

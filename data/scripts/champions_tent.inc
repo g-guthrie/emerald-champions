@@ -75,9 +75,7 @@ ChampionsTent_Text_Rules:
 	.string "level cap. Your chosen builds stay.\p"
 	.string "Win three battles for a prize.\n"
 	.string "You may retire between battles.\p"
-	.string "Your party is restored afterward.\n"
-	.string "These wins are separate from the\l"
-	.string "Champions Circuit.$"
+	.string "Your party is restored afterward.$"
 ChampionsTent_Text_Opponent:
 	.string "Battle {STR_VAR_2}: {STR_VAR_1}!\n"
 	.string "The opposing team is Lv. {STR_VAR_3}.$"

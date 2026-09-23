@@ -10,6 +10,7 @@
 #include "overworld.h"
 #include "constants/region_map_sections.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "fieldmap.h"
 #include "item.h"
 #include "metatile_behavior.h"
@@ -175,12 +176,6 @@ TEST("Route rosters: every encounter map fits the dialog buffer with caught labe
         {
             gSaveBlock1Ptr->location.mapGroup = gWildMonHeaders[header].mapGroup;
             gSaveBlock1Ptr->location.mapNum = gWildMonHeaders[header].mapNum;
-            u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
-            u32 nativeCount = 0;
-            for (u32 id = 0; id < LEGENDARY_SIGN_COUNT; id++)
-                nativeCount += gLegendarySignDefinitions[id].mapId == map
-                    && gLegendarySignDefinitions[id].source == LEGENDARY_SOURCE_NATIVE_WILD;
-            EXPECT(nativeCount <= NUM_LAND_MONS_ENCOUNTER_SLOTS);
             rng_value_t before = gRngValue;
             BufferCurrentMapRouteSignSpecies();
             u32 length = 0;
@@ -268,8 +263,18 @@ TEST("Scripted wild creation: doubles preserve single-mon identity items moves a
                     GetMonData(&expected[0], MON_DATA_PERSONALITY), GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_PERSONALITY),
                     GetMonData(&expected[1], MON_DATA_PERSONALITY), GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_PERSONALITY));
             EXPECT_EQ(GetMonData(&expected[0], MON_DATA_SPECIES), encounters[first].species);
-            EXPECT_EQ(GetMonData(&expected[0], MON_DATA_LEVEL), encounters[first].level);
-            EXPECT_EQ(GetMonData(&expected[0], MON_DATA_HELD_ITEM), encounters[first].item);
+            // Legendary-class species ignore the script level and take the
+            // cap plus their set; everything else keeps the script's values.
+            if (IsLegendaryEncounterSpecies(encounters[first].species))
+            {
+                EXPECT_EQ(GetMonData(&expected[0], MON_DATA_LEVEL), GetCurrentLevelCap());
+                EXPECT_NE(GetMonData(&expected[0], MON_DATA_HELD_ITEM), ITEM_NONE);
+            }
+            else
+            {
+                EXPECT_EQ(GetMonData(&expected[0], MON_DATA_LEVEL), encounters[first].level);
+                EXPECT_EQ(GetMonData(&expected[0], MON_DATA_HELD_ITEM), encounters[first].item);
+            }
             EXPECT_EQ(memcmp(expected, gParties[B_TRAINER_OPPONENT_A], sizeof(expected)), 0);
             EXPECT_EQ(memcmp(&after, &gRngValue, sizeof(after)), 0);
             for (u32 slot = 0; slot < 2; slot++)
@@ -710,7 +715,10 @@ TEST("Wild rarity: early Dreepy uses local land odds and Sweet Scent reverses th
     EXPECT_NE(header->mapGroup, MAP_GROUP(MAP_UNDEFINED));
     const struct WildPokemonInfo *info = header->encounterTypes[TIME_OF_DAY_DEFAULT].landMonsInfo;
     EXPECT(info != NULL);
-    static const u8 weights[] = {20, 18, 10, 10, 9, 9, 5, 5, 2, 4, 4, 4};
+    u8 weights[NUM_LAND_MONS_ENCOUNTER_SLOTS];
+    for (u32 slot = 0; slot < NUM_LAND_MONS_ENCOUNTER_SLOTS; slot++)
+        weights[slot] = GetWildSlotOdds(info, WILD_AREA_LAND, slot);
+    EXPECT_EQ(weights[0], 20); // The most common resident sets Dreepy's reversed share.
     u16 savedRepel = VarGet(VAR_REPEL_STEP_COUNT);
     VarSet(VAR_REPEL_STEP_COUNT, 0);
     for (u32 seed = 0; seed < 512; seed++)
@@ -772,4 +780,307 @@ TEST("Wild doubles: rejected second encounter preserves the first without duplic
     ZeroEnemyPartyMons();
     ZeroPlayerPartyMons();
     CalculatePlayerPartyCount();
+}
+
+static const u16 sLegendCaughtVars[] = {
+    VAR_LEGENDARY_SIGNS_CAUGHT_0, VAR_LEGENDARY_SIGNS_CAUGHT_1,
+    VAR_LEGENDARY_SIGNS_CAUGHT_2, VAR_LEGENDARY_SIGNS_CAUGHT_3,
+    VAR_LEGENDARY_SIGNS_CAUGHT_4, VAR_LEGENDARY_SIGNS_CAUGHT_5,
+};
+
+static void ClearLegendCaughtBits(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sLegendCaughtVars); i++)
+        VarSet(sLegendCaughtVars[i], 0);
+}
+
+TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at the cap with a set")
+{
+    bool8 saved[ARRAY_COUNT(sWildCapFlags)];
+    SaveAndClearWildCapFlags(saved);
+    u16 savedRepel = VarGet(VAR_REPEL_STEP_COUNT);
+    VarSet(VAR_REPEL_STEP_COUNT, 0);
+    ZeroPlayerPartyMons();
+    ClearLegendCaughtBits();
+    struct WildPokemon mons[NUM_LAND_MONS_ENCOUNTER_SLOTS];
+    for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
+        mons[i] = (struct WildPokemon){5, 5, SPECIES_ZIGZAGOON};
+    mons[NUM_LAND_MONS_ENCOUNTER_SLOTS - 1].species = SPECIES_RAIKOU; // Badge 3 gate.
+    const struct WildPokemonInfo land = {.encounterRate = 20, .wildPokemon = mons};
+
+    // Gate closed: the Raikou slot is inert and passes to the next slot.
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_RAIKOU));
+    for (u32 seed = 0; seed < 512; seed++)
+    {
+        SeedRng(seed);
+        EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    }
+
+    // Gate open: the slot spawns at the cap with a competitive set, while
+    // ordinary slots keep their table level.
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE03_GET);
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_RAIKOU));
+    u32 raikou = 0;
+    for (u32 seed = 0; seed < 512; seed++)
+    {
+        SeedRng(seed);
+        EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
+        struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_RAIKOU)
+        {
+            raikou++;
+            EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+            if (GetEmeraldChampionsRawBattleSetCount(SPECIES_RAIKOU) != 0)
+                EXPECT_EQ(GetMonData(mon, MON_DATA_SPEED_IV), MAX_PER_STAT_IVS);
+        }
+        else
+        {
+            EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 5);
+        }
+    }
+    EXPECT_GT(raikou, 0);
+    EXPECT_LT(raikou, 64);
+
+    // Caught: the slot is inert again.
+    MarkLegendarySignCaughtBySpecies(SPECIES_RAIKOU);
+    for (u32 seed = 0; seed < 512; seed++)
+    {
+        SeedRng(seed);
+        EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    }
+    // A table made only of inert legends yields no encounter.
+    for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
+        mons[i].species = SPECIES_RAIKOU;
+    SeedRng(1);
+    EXPECT(!TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
+
+    // Paradox slots are not legend slots: table level, no gate.
+    for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
+        mons[i] = (struct WildPokemon){9, 9, SPECIES_IRON_LEAVES};
+    SeedRng(2);
+    EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 9);
+
+    ClearLegendCaughtBits();
+    RestoreWildCapFlags(saved);
+    VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
+    ZeroEnemyPartyMons();
+}
+
+static u32 CountSweetScentSlot(const struct WildPokemonInfo *info, u32 slot)
+{
+    u32 hits = 0;
+    SET_RNG(RNG_WILD_MON_TARGET, 0);
+    for (u32 roll = 0; roll < 100; roll++)
+    {
+        SET_RNG(RNG_NONE, roll);
+        hits += ChooseSweetScentWildMonIndex(info, WILD_AREA_WATER) == slot;
+    }
+    return hits;
+}
+
+TEST("Sweet Scent: live legend slots get five times their odds, capped at half of all outcomes")
+{
+    bool8 saved[ARRAY_COUNT(sWildCapFlags)];
+    SaveAndClearWildCapFlags(saved);
+    ClearLegendCaughtBits();
+    struct WildPokemon mons[NUM_WATER_MONS_ENCOUNTER_SLOTS] = {
+        {5, 5, SPECIES_MAGIKARP}, {5, 5, SPECIES_GOLDEEN}, {5, 5, SPECIES_TENTACOOL}, {5, 5, SPECIES_SHAYMIN},
+    };
+    static const u8 onePercent[] = {60, 90, 99, 100};
+    static const u8 threePercent[] = {60, 87, 97, 100};
+    static const u8 heavy[] = {40, 60, 80, 100};
+    struct WildPokemonInfo info = {.wildPokemon = mons, .encounterBounds = onePercent};
+
+    // A 1% Legendary slot becomes 5%.
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 5);
+    // Caught: inert, and the ordinary reversal takes every outcome.
+    MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
+    // Gated: Cobalion waits for Badge 2, so its slot is inert too.
+    mons[3].species = SPECIES_COBALION;
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_BADGE02_GET);
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 5);
+
+    // A 3% Ultra Beast slot becomes 15%.
+    mons[3].species = SPECIES_POIPOLE;
+    info.encounterBounds = threePercent;
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
+
+    // 60% of legend odds would boost to 300%: scaled down to 50%, shared
+    // by table odds, and the other half stays with the ordinary species.
+    ClearLegendCaughtBits();
+    mons[1].species = SPECIES_SHAYMIN;
+    mons[2].species = SPECIES_MELTAN;
+    info.encounterBounds = heavy;
+    u32 legends = 0;
+    for (u32 slot = 1; slot < NUM_WATER_MONS_ENCOUNTER_SLOTS; slot++)
+    {
+        u32 hits = CountSweetScentSlot(&info, slot);
+        EXPECT_GT(hits, 0);
+        legends += hits;
+    }
+    EXPECT_EQ(legends, 50);
+    EXPECT_EQ(CountSweetScentSlot(&info, 0), 50);
+
+    ClearLegendCaughtBits();
+    RestoreWildCapFlags(saved);
+}
+
+TEST("Scripted legendary encounters take the cap and their authored or random set")
+{
+    ZeroPlayerPartyMons();
+    // Authored set: Moltres ignores the script level and item.
+    CreateScriptedWildMon(SPECIES_MOLTRES, 5, ITEM_LEFTOVERS);
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_SITRUS_BERRY);
+    EXPECT_EQ(GetMonAbility(mon), ABILITY_FLAME_BODY);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_MOVE1), MOVE_FLAMETHROWER);
+
+    // Unauthored: a random non-Mega set at the cap.
+    CreateScriptedWildMon(SPECIES_COBALION, 5, ITEM_NONE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        EXPECT_NE(GetMonData(mon, MON_DATA_MOVE1 + slot), MOVE_NONE);
+
+    // A script item survives when no set supplies one.
+    enum Species presetless = SPECIES_NONE;
+    static const enum Species candidates[] = {SPECIES_COSMOG, SPECIES_MELTAN, SPECIES_KUBFU, SPECIES_TYPE_NULL, SPECIES_POIPOLE};
+    for (u32 i = 0; i < ARRAY_COUNT(candidates) && presetless == SPECIES_NONE; i++)
+        if (GetEmeraldChampionsRawBattleSetCount(candidates[i]) == 0)
+            presetless = candidates[i];
+    if (presetless != SPECIES_NONE)
+    {
+        CreateScriptedWildMon(presetless, 5, ITEM_ORAN_BERRY);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+        EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_ORAN_BERRY);
+    }
+
+    // Ordinary species keep the script's level and item.
+    CreateScriptedWildMon(SPECIES_PIKACHU, 7, ITEM_ORAN_BERRY);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 7);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_ORAN_BERRY);
+
+    // Island events use CreateEventLegalEnemyMon with the same rule.
+    gSpecialVar_0x8004 = SPECIES_MEW;
+    gSpecialVar_0x8005 = 30;
+    gSpecialVar_0x8006 = ITEM_NONE;
+    CreateEventLegalEnemyMon();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), SPECIES_MEW);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_LEFTOVERS);
+    EXPECT_EQ(gSpecialVar_0x8005, 30);
+    gSpecialVar_0x8004 = SPECIES_PIKACHU;
+    gSpecialVar_0x8005 = 7;
+    gSpecialVar_0x8006 = ITEM_ORAN_BERRY;
+    CreateEventLegalEnemyMon();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 7);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_ORAN_BERRY);
+    ZeroEnemyPartyMons();
+}
+
+TEST("Wild roamers: the roaming Lati starts at the current cap with its authored set")
+{
+    bool8 saved[ARRAY_COUNT(sWildCapFlags)];
+    SaveAndClearWildCapFlags(saved);
+    FlagSet(FLAG_IS_CHAMPION);
+    DeactivateAllRoamers();
+    gSpecialVar_0x8004 = 0;
+    InitRoamer();
+    EXPECT(gSaveBlock1Ptr->roamer[0].active);
+    EXPECT_EQ(gSaveBlock1Ptr->roamer[0].species, SPECIES_LATIAS);
+    EXPECT_EQ(gSaveBlock1Ptr->roamer[0].level, GetCurrentLevelCap());
+    CreateRoamerMonInstance(0);
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_SOUL_DEW);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
+    DeactivateAllRoamers();
+    RestoreWildCapFlags(saved);
+    ZeroEnemyPartyMons();
+}
+
+// Data contract for src/data/wild_encounters.json (Emerald maps only):
+// Legendary-class slots are exactly 1%, Ultra Beast and Paradox slots 2-3%,
+// no ordinary slot is below 2%, a table holds at most two Legendary-class
+// slots, and each method (each rod) totals 100.
+TEST("Wild tables: Legendary, Ultra Beast and Paradox slot odds follow the rarity ladder")
+{
+    static const struct { enum WildPokemonArea area; u8 count; } methods[] = {
+        {WILD_AREA_LAND, NUM_LAND_MONS_ENCOUNTER_SLOTS},
+        {WILD_AREA_WATER, NUM_WATER_MONS_ENCOUNTER_SLOTS},
+        {WILD_AREA_ROCKS, NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS},
+        {WILD_AREA_FISHING, NUM_FISHING_MONS_ENCOUNTER_SLOTS},
+        {WILD_AREA_HONEY, NUM_HONEY_MONS_ENCOUNTER_SLOTS},
+    };
+    u32 tables = 0, legendSlots = 0, failures = 0;
+    for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
+    {
+        const struct WildPokemonHeader *wild = &gWildMonHeaders[header];
+        const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(wild->mapGroup, wild->mapNum);
+        if (map->mapLayout != NULL && map->mapLayout->isFrlg)
+            continue;
+        for (u32 time = 0; time < TIMES_OF_DAY_COUNT; time++)
+        {
+            const struct WildEncounterTypes *types = &wild->encounterTypes[time];
+            const struct WildPokemonInfo *infos[] = {types->landMonsInfo, types->waterMonsInfo,
+                types->rockSmashMonsInfo, types->fishingMonsInfo, types->honeyMonsInfo};
+            for (u32 method = 0; method < ARRAY_COUNT(methods); method++)
+            {
+                const struct WildPokemonInfo *info = infos[method];
+                if (info == NULL)
+                    continue;
+                tables++;
+                u32 legends = 0, totals[3] = {0};
+                for (u32 slot = 0; slot < methods[method].count; slot++)
+                {
+                    enum Species species = info->wildPokemon[slot].species;
+                    u32 odds = GetWildSlotOdds(info, methods[method].area, slot);
+                    bool32 ok;
+                    // Each rod is its own method.
+                    totals[methods[method].area != WILD_AREA_FISHING ? 0 : slot < 2 ? 0 : slot < 5 ? 1 : 2] += odds;
+                    switch (GetRestrictedPartyClass(species))
+                    {
+                    case RESTRICTED_PARTY_LEGENDARY:
+                        legends++;
+                        legendSlots++;
+                        ok = odds == 1;
+                        break;
+                    case RESTRICTED_PARTY_ULTRA_BEAST:
+                    case RESTRICTED_PARTY_PARADOX:
+                        ok = odds >= 2 && odds <= 3;
+                        break;
+                    default:
+                        ok = odds >= 2;
+                        break;
+                    }
+                    if (!ok)
+                    {
+                        Test_MgbaPrintf("Slot odds: map %d.%d method %d slot %d species %d odds %d",
+                            wild->mapGroup, wild->mapNum, method, slot, species, odds);
+                        failures++;
+                    }
+                }
+                bool32 fishing = methods[method].area == WILD_AREA_FISHING;
+                if (legends > 2 || totals[0] != 100
+                 || (fishing && (totals[1] != 100 || totals[2] != 100)))
+                {
+                    Test_MgbaPrintf("Table: map %d.%d method %d legends %d totals %d/%d/%d",
+                        wild->mapGroup, wild->mapNum, method, legends, totals[0], totals[1], totals[2]);
+                    failures++;
+                }
+            }
+        }
+    }
+    Test_MgbaPrintf("Wild tables checked=%d legend slots=%d failures=%d", tables, legendSlots, failures);
+    EXPECT_GT(tables, 0);
+    EXPECT_GT(legendSlots, 0);
+    EXPECT_EQ(failures, 0);
 }

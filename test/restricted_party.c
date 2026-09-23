@@ -23,7 +23,8 @@ TEST("Restricted party: Legendary, Ultra Beast, and Paradox categories are indep
     CreateMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_FLUTTER_MANE, 14, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
     EXPECT(PlayerPartyWithinRestrictedLimit());
-    EXPECT(!PlayerPartyLeagueEligible());
+    // The League door uses the same one/one/one rule as the party.
+    EXPECT(PlayerPartyLeagueEligible());
     EXPECT(!CanAddRestrictedMonToParty(SPECIES_MEWTWO, PARTY_SIZE));
     EXPECT(!CanAddRestrictedMonToParty(SPECIES_NAGANADEL, PARTY_SIZE));
     EXPECT(!CanAddRestrictedMonToParty(SPECIES_ROARING_MOON, PARTY_SIZE));
@@ -31,8 +32,18 @@ TEST("Restricted party: Legendary, Ultra Beast, and Paradox categories are indep
     EXPECT(CanAddRestrictedMonToParty(SPECIES_MEWTWO, 0));
     EXPECT(CanAddRestrictedMonToParty(SPECIES_NAGANADEL, 1));
     EXPECT(CanAddRestrictedMonToParty(SPECIES_ROARING_MOON, 2));
+    // A second member of any one category closes the door.
+    static const enum Species extras[] = {SPECIES_MEWTWO, SPECIES_NAGANADEL, SPECIES_ROARING_MOON};
+    for (u32 i = 0; i < ARRAY_COUNT(extras); i++)
+    {
+        CreateMon(&gParties[B_TRAINER_PLAYER][3], extras[i], 14, 0, OTID_STRUCT_PLAYER_ID);
+        EXPECT(!PlayerPartyWithinRestrictedLimit());
+        EXPECT(!PlayerPartyLeagueEligible());
+    }
+    ZeroMonData(&gParties[B_TRAINER_PLAYER][3]);
+    EXPECT(PlayerPartyLeagueEligible());
     ZeroMonData(&gParties[B_TRAINER_PLAYER][0]);
-    EXPECT(PlayerPartyLeagueEligible()); // Ultra Beasts and Paradox Pokémon may enter.
+    EXPECT(PlayerPartyLeagueEligible());
     ZeroPlayerPartyMons();
     EXPECT(PlayerPartyLeagueEligible());
 }

@@ -18,9 +18,6 @@ for block in re.split(r"(?m)^=== ENCOUNTER \d{4} ===$", master)[1:]:
     if loc and cap:
         key = "MAP_" + re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", loc.group(1).rstrip(";")).upper()
         caps.setdefault(key, int(cap.group(1)))
-sheet = json.load(open(ROOT/"data/emerald_champions/wild_route_sheet.json"))
-for k, v in sheet.items():
-    if isinstance(v, dict) and "cap" in v: caps.setdefault(k, v["cap"])
 groups = json.load(open(ROOT/"data/maps/map_groups.json"))
 map_data = {m: json.load(open(ROOT/"data/maps"/m/"map.json"))
             for g in groups["group_order"] for m in groups[g]}

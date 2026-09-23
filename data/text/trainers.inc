@@ -1355,8 +1355,8 @@ Route120_Text_CalliePostBattle:
 	.string "They're cute the way they are, though.$"
 
 Route121_Text_VanessaPostBattle:
-	.string "I'm off to the Circuit desks in\n"
-	.string "Lilycove.\p"
+	.string "I'm off to challenge the\n"
+	.string "Pokémon League someday.\p"
 	.string "My Pokémon should have no problem\n"
 	.string "sweeping the first round.$"
 

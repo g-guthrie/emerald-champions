@@ -387,7 +387,7 @@ MauvilleCity_GameCorner_EventScript_ReceivePokemon::
 	msgbox MauvilleCity_GameCorner_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
 	compare VAR_TEMP_1, SPECIES_GENESECT
 	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceiveGenesect
-	special GetStaticEncounterLevel
+	special GetLevelCapForScriptedGift
 	givemon VAR_TEMP_1, VAR_0x800A, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonParty
@@ -636,7 +636,13 @@ MauvilleCity_GameCorner_EventScript_Quaxly::
 	setvar VAR_TEMP_1, SPECIES_QUAXLY
 	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
 	
+@ Each starter can be bought once. The claim flags live in
+@ sEmeraldChampionsGameCornerPokemonPrizes; the player's own starter(s)
+@ also count as claimed.
 MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize::
+	copyvar VAR_0x8004, VAR_TEMP_1
+	special IsEmeraldChampionsGameCornerPokemonClaimed
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_GameCorner_EventScript_StarterClaimed
 	bufferspeciesname 0, VAR_TEMP_1
 	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsThePokemonX, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -644,7 +650,22 @@ MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize::
 	checkcoins VAR_0x8007
 	compare VAR_0x8007, VAR_0x8006
 	goto_if_lt MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForStarter
-	goto MauvilleCity_GameCorner_EventScript_ReceivePokemon
+	msgbox MauvilleCity_GameCorner_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
+	copyvar VAR_0x8004, VAR_TEMP_1
+	special GiveEmeraldChampionsGameCornerPokemon
+	compare VAR_RESULT, MON_GIVEN_TO_PARTY
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonParty
+	compare VAR_RESULT, MON_GIVEN_TO_PC
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonPC
+	compare VAR_RESULT, EC_GAME_CORNER_PRIZE_SET_FAILED
+	goto_if_eq MauvilleCity_GameCorner_EventScript_StarterClaimed
+	hidecoinsbox
+	goto Common_EventScript_NoMoreRoomForPokemon
+
+MauvilleCity_GameCorner_EventScript_StarterClaimed::
+	bufferspeciesname 0, VAR_TEMP_1
+	msgbox MauvilleCity_GameCorner_Text_StarterClaimed, MSGBOX_DEFAULT
+	goto MauvilleCity_GameCorner_EventScript_ChooseStarterPrizeMessage
 	
 MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForStarter::
 	msgbox MauvilleCity_GameCorner_Text_NotEnoughCoins, MSGBOX_DEFAULT
@@ -1096,3 +1117,7 @@ MauvilleCity_GameCorner_Text_GenesectLocked::
 
 MauvilleCity_GameCorner_Text_GenesectClaimed::
 	.string "You've already received GENESECT.$"
+
+MauvilleCity_GameCorner_Text_StarterClaimed::
+	.string "{STR_VAR_1} was already claimed.\n"
+	.string "Each starter is a one-time prize.$"

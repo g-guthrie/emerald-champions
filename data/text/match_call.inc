@@ -2279,8 +2279,8 @@ MatchCall_Text_Glacia::
 MatchCall_Text_Drake::
 	.string "Drake: That voice… {PLAYER}, is\n"
 	.string "it? You sound well…\p"
-	.string "The Champions Circuit tests how\n"
-	.string "long a crew can keep winning.\p"
+	.string "Streak challenges test how long\n"
+	.string "a crew can keep winning.\p"
 	.string "Here at the League, you face us in\n"
 	.string "succession. Two worthy challenges\l"
 	.string "for a seasoned Trainer.\p"
@@ -2659,11 +2659,10 @@ MatchCall_Text_Scott6::
 	.string "eight Badges! The League is\l"
 	.string "waiting for you.\p"
 	.string "If you want another challenge,\n"
-	.string "visit the Champions Circuit at the\l"
-	.string "Battle Frontier.\p"
-	.string "The Lilycove ferry opens that\n"
-	.string "route with six Badges. You've\l"
-	.string "already earned your passage!\p"
+	.string "visit the Battle Frontier.\p"
+	.string "The Lilycove ferry sails there\n"
+	.string "once you've entered the Hall of\l"
+	.string "Fame.\p"
 	.string "I hope to see you over there!$"
 
 MatchCall_Text_Scott7::

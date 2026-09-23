@@ -14,7 +14,7 @@ Route119_WeatherInstitute_2F_OnTransition: @ 826FF24
 	call_if_eq Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if_eq Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaGone
-	call_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear
+	call_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear
 	end
 
 Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere:: @ 826FF44
@@ -140,7 +140,7 @@ Route119_WeatherInstitute_2F_EventScript_ExplainCastform:: @ 82700EA
 	end
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather:: @ 82700F7
-	goto_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
 	msgbox Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT
 	release
 	end

@@ -32,28 +32,6 @@
 
 #define CIRCUIT_TEAM_SIZE PARTY_SIZE
 #define CIRCUIT_BASE_LEVEL CHAMPIONS_CIRCUIT_BASE_LEVEL
-// Acquisition levels follow the live campaign cap, independently of arena normalization.
-static const struct
-{
-    enum LegendarySignId sign;
-    u8 wins;
-} sCircuitLegendaryRewards[] =
-{
-    {LEGENDARY_SIGN_CALYREX, 2},
-    {LEGENDARY_SIGN_CELESTEELA, 4},
-    {LEGENDARY_SIGN_GLASTRIER, 6},
-    {LEGENDARY_SIGN_NECROZMA, 10},
-    {LEGENDARY_SIGN_SPECTRIER, 12},
-    {LEGENDARY_SIGN_XURKITREE, 14},
-    {LEGENDARY_SIGN_ZACIAN, 16},
-    {LEGENDARY_SIGN_ZAMAZENTA, 18},
-    {LEGENDARY_SIGN_ZARUDE, 20},
-    {LEGENDARY_SIGN_KORAIDON, 22},
-    {LEGENDARY_SIGN_MIRAIDON, 24},
-    // Mastery follows all earlier unclaimed rewards through the same retry path.
-    {LEGENDARY_SIGN_ETERNATUS, 40},
-};
-
 struct CircuitTeamDetails
 {
     bool8 rain;
@@ -1695,40 +1673,11 @@ void ChampionsCircuitHandleBattleResult(void)
     }
 }
 
+// The Circuit no longer grants Pokemon: its former legendary rewards live in
+// the campaign's wild tables and statics. Scripts read 0 as "nothing to claim".
 void ChampionsCircuitTryGiveReward(void)
 {
-    // Reward entitlement is lifetime Circuit progress, not transient streak
-    // state.  A full PC can therefore delay delivery without making the player
-    // repeat the same milestone after retiring to create room.
-    u16 wins = VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS);
-
     gSpecialVar_Result = 0;
-    for (u32 reward = 0; reward < ARRAY_COUNT(sCircuitLegendaryRewards); reward++)
-    {
-        enum LegendarySignId signId = sCircuitLegendaryRewards[reward].sign;
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[signId];
-        u8 giveResult;
-
-        if (wins < sCircuitLegendaryRewards[reward].wins || IsLegendarySignCaught(signId))
-            continue;
-        giveResult = GiveLegendarySignReward(sign->species,
-            GetLevelCapForSpecies(sign->species, GetCurrentLevelCap()));
-        if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
-        {
-            StringCopy(gStringVar1, GetSpeciesName(sign->species));
-            gSpecialVar_Result = 4;
-            return;
-        }
-        if (giveResult == MON_CANT_GIVE)
-        {
-            gSpecialVar_Result = 3;
-            return;
-        }
-        StringCopy(gStringVar1, GetSpeciesName(sign->species));
-        gSpecialVar_Result = giveResult == MON_GIVEN_TO_PARTY ? 1 : 2;
-        return;
-    }
-
 }
 
 void ChampionsCircuitEnd(void)

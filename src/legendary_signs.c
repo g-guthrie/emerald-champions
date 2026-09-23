@@ -27,7 +27,7 @@
 #include "constants/opponents.h"
 #include "constants/vars.h"
 
-const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_SIGN_COUNT] =
+const struct LegendaryGate gLegendaryGates[LEGENDARY_SIGN_COUNT] =
 {
 #include "data/pokemon/legendary_signs.h"
 };
@@ -49,191 +49,43 @@ const struct EmeraldChampionsBattleSet *GetLegendaryAuthoredSet(enum Species spe
     return NULL;
 }
 
-static const u8 sSignLocationShoalIce[] = _("Shoal Cave's ice room");
-static const u8 sSignLocationGraniteB2F[] = _("Granite Cave B2F");
-static const u8 sSignLocationFieryPath[] = _("Fiery Path");
-static const u8 sSignLocationMtPyre6F[] = _("Mt. Pyre's sixth floor");
-static const u8 sSignLocationRoute111Desert[] = _("Route 111's desert");
-static const u8 sSignLocationRoute111Ruins[] = _("the ruins above Route 111");
-static const u8 sSignLocationRoute120[] = _("Route 120");
-static const u8 sSignLocationUnderwaterSeafloor[] = _("the Seafloor Cavern seabed");
-static const u8 sSignLocationRoute110[] = _("Route 110");
-static const u8 sSignLocationMeteor1F2R[] = _("Meteor Falls' rear cave");
-static const u8 sSignLocationDewfordMeadow[] = _("Dewford Meadow");
-static const u8 sSignLocationAlteringCave[] = _("Altering Cave");
-static const u8 sSignLocationCaveOfOriginB1F[] = _("Cave of Origin B1F");
-static const u8 sSignLocationNewMauville[] = _("New Mauville");
-static const u8 sSignLocationScorchedB2F[] = _("Scorched Slab B2F");
-static const u8 sSignLocationRoute102[] = _("Route 102's grass");
-static const u8 sSignLocationRoute123[] = _("Route 123");
-static const u8 sSignLocationMtPyreExterior[] = _("Mt. Pyre's exterior");
-static const u8 sSignLocationRoute119Land[] = _("Route 119's grass");
-static const u8 sSignLocationMeteorB1F1R[] = _("Meteor Falls B1F");
-static const u8 sSignLocationVictoryRoad1F[] = _("Victory Road 1F");
-static const u8 sSignLocationPetalburgWoods2[] = _("Petalburg Woods, second area");
-static const u8 sSignLocationPetalburgWoods3[] = _("Petalburg Woods, third area");
-static const u8 sSignLocationMeteorB1F2R[] = _("Meteor Falls B1F, rear room");
-static const u8 sSignLocationDesertUnderpass[] = _("Desert Underpass");
-static const u8 sSignLocationAshenWoods[] = _("Ashen Woods");
-static const u8 sSignLocationVerdanturfMeadow[] = _("Verdanturf Meadow");
-static const u8 sSignLocationRoute112[] = _("Route 112");
-static const u8 sSignLocationRoute117[] = _("Route 117");
-static const u8 sSignLocationRoute125[] = _("Route 125");
-static const u8 sSignLocationRoute126[] = _("Route 126");
-static const u8 sSignLocationRoute127[] = _("Route 127");
-static const u8 sSignLocationVictoryRoadB1F[] = _("Victory Road B1F");
-static const u8 sSignLocationMagmaHideout4F[] = _("Magma Hideout 4F");
-static const u8 sSignLocationDevon[] = _("Devon Corp. 2F");
-static const u8 sSignLocationCircuit[] = _("the Champions Circuit");
-static const u8 sSignLocationGameCorner[] = _("Mauville's Game Corner");
-static const u8 sSignLocationDayCare[] = _("Route 117's Day Care");
-static const u8 sSignLocationMtPyreSummit[] = _("Mt. Pyre's summit");
-static const u8 sSignLocationSealedChamber[] = _("the Sealed Chamber");
-static const u8 sSignLocationAlteringB1F[] = _("Altering Cave B1F");
-static const u8 sSignLocationEmberPath[] = _("Ember Path");
-static EWRAM_DATA u8 sRestingSigns[(LEGENDARY_SIGN_COUNT + 7) / 8];
-static EWRAM_DATA u16 sEncounterSignPlusOne;
-
-static const u8 sSignLocationUnknown[] = _("an unknown place");
-
-static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
+bool32 IsLegendaryEncounterSpecies(enum Species species)
 {
-    switch (gLegendarySignDefinitions[signId].source)
+    enum RestrictedPartyClass kind = GetRestrictedPartyClass(species);
+    return kind == RESTRICTED_PARTY_LEGENDARY || kind == RESTRICTED_PARTY_ULTRA_BEAST;
+}
+
+u8 GetLegendaryEncounterLevel(enum Species species)
+{
+    return GetLevelCapForSpecies(species, GetCurrentLevelCap());
+}
+
+// One rule for every Legendary-class or Ultra Beast encounter: the authored
+// set when the species has one, otherwise a random non-Mega competitive set.
+// A caller-supplied held item survives only when the set leaves the mon empty-handed.
+void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    const struct EmeraldChampionsBattleSet *authored = GetLegendaryAuthoredSet(species);
+
+    if (authored != NULL)
+        ApplyEmeraldChampionsScriptedSet(mon, authored);
+    else
+        ApplyEmeraldChampionsRandomNonMegaSet(mon);
+    if (fallbackItem != ITEM_NONE && GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_NONE)
     {
-    case LEGENDARY_SOURCE_CIRCUIT:
-        return sSignLocationCircuit;
-    case LEGENDARY_SOURCE_GAME_CORNER:
-        return sSignLocationGameCorner;
-    case LEGENDARY_SOURCE_BREEDING:
-        return sSignLocationDayCare;
-    case LEGENDARY_SOURCE_MASTERY:
-        return signId == LEGENDARY_SIGN_ARCEUS ? sSignLocationDevon : sSignLocationCircuit;
-    default:
-        break;
-    }
-    switch (signId)
-    {
-    case LEGENDARY_SIGN_MARSHADOW:
-        return COMPOUND_STRING("Route 113 ash grass");
-    case LEGENDARY_SIGN_ARTICUNO_GALAR:
-        return sSignLocationRoute120;
-    case LEGENDARY_SIGN_ZAPDOS_GALAR:
-        return sSignLocationRoute112;
-    case LEGENDARY_SIGN_MOLTRES_GALAR:
-        return sSignLocationMtPyreExterior;
-    case LEGENDARY_SIGN_DARKRAI:
-        return sSignLocationMtPyreSummit;
-    case LEGENDARY_SIGN_MAGEARNA:
-        return sSignLocationDevon;
-    case LEGENDARY_SIGN_REGIGIGAS:
-        return sSignLocationSealedChamber;
-    case LEGENDARY_SIGN_MEWTWO:
-    case LEGENDARY_SIGN_GUZZLORD:
-    case LEGENDARY_SIGN_POIPOLE:
-        return sSignLocationAlteringB1F;
-    case LEGENDARY_SIGN_BLACEPHALON:
-        return sSignLocationEmberPath;
-    case LEGENDARY_SIGN_AZELF:
-    case LEGENDARY_SIGN_ARTICUNO:
-    case LEGENDARY_SIGN_CHIEN_PAO:
-    case LEGENDARY_SIGN_KYUREM:
-        return sSignLocationShoalIce;
-    case LEGENDARY_SIGN_CELEBI:
-    case LEGENDARY_SIGN_KARTANA:
-        return sSignLocationPetalburgWoods3;
-    case LEGENDARY_SIGN_COBALION:
-        return sSignLocationGraniteB2F;
-    case LEGENDARY_SIGN_ENTEI:
-        return sSignLocationFieryPath;
-    case LEGENDARY_SIGN_GIRATINA:
-    case LEGENDARY_SIGN_PECHARUNT:
-        return sSignLocationMtPyre6F;
-    case LEGENDARY_SIGN_OKIDOGI:
-    case LEGENDARY_SIGN_BUZZWOLE:
-    case LEGENDARY_SIGN_CHI_YU:
-        return sSignLocationAshenWoods;
-    case LEGENDARY_SIGN_MUNKIDORI:
-    case LEGENDARY_SIGN_PHEROMOSA:
-    case LEGENDARY_SIGN_COSMOG:
-    case LEGENDARY_SIGN_MELOETTA:
-        return sSignLocationDewfordMeadow;
-    case LEGENDARY_SIGN_HOOPA:
-        return sSignLocationAlteringCave;
-    case LEGENDARY_SIGN_LANDORUS:
-        return sSignLocationRoute111Ruins;
-    case LEGENDARY_SIGN_MESPRIT:
-    case LEGENDARY_SIGN_XERNEAS:
-    case LEGENDARY_SIGN_CELESTEELA:
-        return sSignLocationRoute120;
-    case LEGENDARY_SIGN_PALKIA:
-    case LEGENDARY_SIGN_NIHILEGO:
-        return sSignLocationUnderwaterSeafloor;
-    case LEGENDARY_SIGN_RAIKOU:
-    case LEGENDARY_SIGN_TAPU_KOKO:
-    case LEGENDARY_SIGN_THUNDURUS:
-        return sSignLocationRoute110;
-    case LEGENDARY_SIGN_REGIDRAGO:
-        return sSignLocationMeteor1F2R;
-    case LEGENDARY_SIGN_REGIELEKI:
-    case LEGENDARY_SIGN_ZAPDOS:
-    case LEGENDARY_SIGN_MELTAN:
-    case LEGENDARY_SIGN_XURKITREE:
-    case LEGENDARY_SIGN_ZEKROM:
-    case LEGENDARY_SIGN_ZERAORA:
-        return sSignLocationNewMauville;
-    case LEGENDARY_SIGN_RESHIRAM:
-        return sSignLocationScorchedB2F;
-    case LEGENDARY_SIGN_SHAYMIN:
-        return sSignLocationRoute102;
-    case LEGENDARY_SIGN_TAPU_BULU:
-        return sSignLocationRoute123;
-    case LEGENDARY_SIGN_TAPU_LELE:
-    case LEGENDARY_SIGN_YVELTAL:
-        return sSignLocationMtPyreExterior;
-    case LEGENDARY_SIGN_TORNADUS:
-        return sSignLocationRoute119Land;
-    case LEGENDARY_SIGN_UXIE:
-    case LEGENDARY_SIGN_DIALGA:
-        return sSignLocationMeteorB1F1R;
-    case LEGENDARY_SIGN_CRESSELIA:
-        return sSignLocationMeteorB1F2R;
-    case LEGENDARY_SIGN_VICTINI:
-        return sSignLocationVictoryRoad1F;
-    case LEGENDARY_SIGN_VIRIZION:
-    case LEGENDARY_SIGN_WO_CHIEN:
-        return sSignLocationPetalburgWoods2;
-    case LEGENDARY_SIGN_TING_LU:
-    case LEGENDARY_SIGN_ZYGARDE:
-        return sSignLocationDesertUnderpass;
-    case LEGENDARY_SIGN_STAKATAKA:
-        return sSignLocationRoute111Ruins;
-    case LEGENDARY_SIGN_KUBFU:
-        return sSignLocationRoute112;
-    case LEGENDARY_SIGN_TYPE_NULL:
-        return sSignLocationRoute117;
-    case LEGENDARY_SIGN_OGERPON:
-        return sSignLocationRoute120;
-    case LEGENDARY_SIGN_ENAMORUS:
-    case LEGENDARY_SIGN_FEZANDIPITI:
-        return sSignLocationVerdanturfMeadow;
-    case LEGENDARY_SIGN_TERAPAGOS:
-        return sSignLocationCaveOfOriginB1F;
-    case LEGENDARY_SIGN_MANAPHY:
-        return sSignLocationUnderwaterSeafloor;
-    case LEGENDARY_SIGN_SUICUNE:
-        return sSignLocationRoute125;
-    case LEGENDARY_SIGN_TAPU_FINI:
-        return sSignLocationRoute126;
-    case LEGENDARY_SIGN_KELDEO:
-        return sSignLocationRoute127;
-    case LEGENDARY_SIGN_TERRAKION:
-        return sSignLocationVictoryRoadB1F;
-    case LEGENDARY_SIGN_VOLCANION:
-        return sSignLocationMagmaHideout4F;
-    default:
-        return sSignLocationUnknown;
+        u16 item = fallbackItem;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
     }
 }
+
+bool32 IsWildSlotSpeciesAcquirable(enum Species species)
+{
+    return !IsLegendaryEncounterSpecies(species) || CanAcquireLegendarySignSpecies(species);
+}
+
+static EWRAM_DATA u8 sRestingSigns[(LEGENDARY_SIGN_COUNT + 7) / 8];
+static EWRAM_DATA u16 sEncounterSignPlusOne;
 
 static u16 GetLegendaryStateVar(u16 firstVar, enum LegendarySignId signId)
 {
@@ -337,7 +189,7 @@ enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species)
 {
     species = SanitizeSpeciesId(species);
     for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
-        if (gLegendarySignDefinitions[signId].species == species)
+        if (gLegendaryGates[signId].species == species)
             return signId;
 
     // Registered regional discoveries are independent; interchangeable
@@ -347,17 +199,17 @@ enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species)
         return LEGENDARY_SIGN_COUNT;
     species = GET_BASE_SPECIES_ID(species);
     for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
-        if (gLegendarySignDefinitions[signId].species == species)
+        if (gLegendaryGates[signId].species == species)
             return signId;
     return LEGENDARY_SIGN_COUNT;
 }
 
-// Save indices are append-only. Reserve 0-95 for Signs and 96-127 for
-// canonical encounters that predate the Sign ledger. Never use caught bits
-// for a failed encounter: ownership-dependent quests must still know the difference.
+// Save indices are append-only and the six Unlocked/Caught var pairs hold
+// ids 0-95. Never use caught bits for a failed encounter: ownership-dependent
+// quests must still know the difference.
 STATIC_ASSERT(LEGENDARY_SIGN_COUNT <= 96, LegendarySignCapacity);
 
-static bool32 HasCaughtSpeciesFamily(enum Species species)
+bool32 HasCaughtSpeciesFamily(enum Species species)
 {
     if (species == SPECIES_NONE || PlayerPartyHasSpeciesFamily(species))
         return TRUE;
@@ -375,21 +227,27 @@ static bool32 HasCaughtSpeciesFamily(enum Species species)
 
 static bool32 MeetsSignProgression(enum LegendarySignId id)
 {
-    const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-    return GetBadgeCountForLegendarySigns() >= sign->minimumBadges
-        && (sign->requiredFlag == 0 || FlagGet(sign->requiredFlag));
+    const struct LegendaryGate *gate = &gLegendaryGates[id];
+    return GetBadgeCountForLegendarySigns() >= gate->minimumBadges
+        && (gate->unlockFlag == 0 || FlagGet(gate->unlockFlag));
+}
+
+static bool32 IsLocalQuestSign(enum LegendarySignId id)
+{
+    return id == LEGENDARY_SIGN_MELOETTA || id == LEGENDARY_SIGN_LANDORUS || id == LEGENDARY_SIGN_MARSHADOW;
 }
 
 static bool32 MeetsSignDiscovery(enum LegendarySignId id)
 {
-    // The statue needs all three partners present, including on retries.
+    // The statue answers the three Regis' Pokedex records. The party may
+    // hold only one Legendary-class Pokemon, so it never asks for all three.
     if (id == LEGENDARY_SIGN_REGIGIGAS)
-        return PlayerPartyHasSpeciesFamily(SPECIES_REGIROCK)
-            && PlayerPartyHasSpeciesFamily(SPECIES_REGICE)
-            && PlayerPartyHasSpeciesFamily(SPECIES_REGISTEEL);
+        return HasCaughtSpeciesFamily(SPECIES_REGIROCK)
+            && HasCaughtSpeciesFamily(SPECIES_REGICE)
+            && HasCaughtSpeciesFamily(SPECIES_REGISTEEL);
     if (IsLegendarySignUnlocked(id))
         return TRUE;
-    if (id == LEGENDARY_SIGN_MELOETTA || id == LEGENDARY_SIGN_LANDORUS || id == LEGENDARY_SIGN_MARSHADOW)
+    if (IsLocalQuestSign(id))
         return FALSE; // Their local NPC completes a small, permanent discovery quest.
     if (id == LEGENDARY_SIGN_KYUREM)
         return HasCaughtSpeciesFamily(SPECIES_RESHIRAM) || HasCaughtSpeciesFamily(SPECIES_ZEKROM);
@@ -397,7 +255,22 @@ static bool32 MeetsSignDiscovery(enum LegendarySignId id)
         return IsLegendarySignCaught(LEGENDARY_SIGN_OKIDOGI)
             && IsLegendarySignCaught(LEGENDARY_SIGN_MUNKIDORI)
             && IsLegendarySignCaught(LEGENDARY_SIGN_FEZANDIPITI);
-    return HasCaughtSpeciesFamily(gLegendarySignDefinitions[id].requiredSpecies);
+    return HasCaughtSpeciesFamily(gLegendaryGates[id].requiredSpecies);
+}
+
+static u16 GetLocalQuestMap(enum LegendarySignId id)
+{
+    switch (id)
+    {
+    case LEGENDARY_SIGN_MELOETTA:
+        return MAP_DEWFORD_MEADOW;
+    case LEGENDARY_SIGN_LANDORUS:
+        return MAP_ROUTE111_RUINS_EXTERIOR;
+    case LEGENDARY_SIGN_MARSHADOW:
+        return MAP_ROUTE113_GLASS_WORKSHOP;
+    default:
+        return MAP_UNDEFINED;
+    }
 }
 
 void TryUnlockLocalLegendaryDiscovery(void)
@@ -407,10 +280,9 @@ void TryUnlockLocalLegendaryDiscovery(void)
     bool32 helped = FALSE;
 
     gSpecialVar_Result = FALSE;
-    if (id != LEGENDARY_SIGN_MELOETTA && id != LEGENDARY_SIGN_LANDORUS && id != LEGENDARY_SIGN_MARSHADOW)
+    if (!IsLocalQuestSign(id))
         return;
-    u16 discoveryMap = id == LEGENDARY_SIGN_MARSHADOW ? MAP_ROUTE113_GLASS_WORKSHOP : gLegendarySignDefinitions[id].mapId;
-    if (map != discoveryMap || !MeetsSignProgression(id)
+    if (map != GetLocalQuestMap(id) || !MeetsSignProgression(id)
      || IsLegendarySignUnlocked(id) || IsLegendarySignCaught(id))
         return;
     if (id == LEGENDARY_SIGN_MARSHADOW)
@@ -468,29 +340,12 @@ void FinishLegendaryLandmarkEncounter(void)
     sEncounterSignPlusOne = 0;
 }
 
-bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species)
-{
-    enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
-
-    return signId < LEGENDARY_SIGN_COUNT
-        && gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_ORDINARY_WILD;
-}
-
-bool32 IsNativeWildLegendarySpecies(enum Species species)
-{
-    enum LegendarySignId id = GetLegendarySignIdBySpecies(species);
-    return id < LEGENDARY_SIGN_COUNT
-        && gLegendarySignDefinitions[id].source == LEGENDARY_SOURCE_NATIVE_WILD;
-}
-
 bool32 CanAcquireLegendarySignSpecies(enum Species species)
 {
     enum LegendarySignId id = GetLegendarySignIdBySpecies(species);
     return id >= LEGENDARY_SIGN_COUNT
         || (!IsLegendarySignCaught(id) && MeetsSignProgression(id) && MeetsSignDiscovery(id));
 }
-
-
 
 // Saved bit indices are append-only: 0-23 are undelivered relics and
 // 24-29 mark species whose one-time relic grant has already been earned.
@@ -616,20 +471,6 @@ bool32 PlayerPartyHasSpeciesFamily(enum Species species)
     return FALSE;
 }
 
-// Scripted discoveries use the live campaign cap plus their encounter offset.
-static u8 GetSignLevelForSpecies(enum Species species, s8 offset)
-{
-    s32 level = (s32)GetLevelCapForSpecies(species, GetCurrentLevelCap()) + offset;
-
-    if (level < 1)
-        level = 1;
-    if (level > MAX_LEVEL)
-        level = MAX_LEVEL;
-    return level;
-}
-
-
-
 void TryUnlockSelectedLegendarySign(void)
 {
     enum LegendarySignId id = gSpecialVar_0x8004;
@@ -658,51 +499,38 @@ u16 GetSelectedLegendarySignState(void)
         gSpecialVar_Result = 0;
     else if (IsLegendarySignCaught(id))
         gSpecialVar_Result = 2;
-    else if (CanAcquireLegendarySignSpecies(gLegendarySignDefinitions[id].species))
+    else if (CanAcquireLegendarySignSpecies(gLegendaryGates[id].species))
         gSpecialVar_Result = IsSignResting(id) ? 3 : 1;
     else
         gSpecialVar_Result = 0;
     return gSpecialVar_Result;
 }
 
+// Shrines call this from their own map; the gate row decides eligibility and
+// CreateScriptedWildMon applies the shared cap-level and battle-set rule.
 void CreateSelectedLegendarySignEncounter(void)
 {
     enum LegendarySignId id = gSpecialVar_0x8004;
     gSpecialVar_Result = FALSE;
     if (id >= LEGENDARY_SIGN_COUNT || IsSignResting(id)
-     || !CanAcquireLegendarySignSpecies(gLegendarySignDefinitions[id].species))
-        return;
-    u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
-    if (gLegendarySignDefinitions[id].mapId != map)
+     || !CanAcquireLegendarySignSpecies(gLegendaryGates[id].species))
         return;
     sEncounterSignPlusOne = id + 1;
     UnlockLegendarySign(id);
-    CreateScriptedWildMon(gLegendarySignDefinitions[id].species,
-        GetSignLevelForSpecies(gLegendarySignDefinitions[id].species, gLegendarySignDefinitions[id].levelOffset), ITEM_NONE);
-    {
-        const struct EmeraldChampionsBattleSet *authored = GetLegendaryAuthoredSet(gLegendarySignDefinitions[id].species);
-        if (authored != NULL)
-            ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
-        else
-            ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
-    }
+    CreateScriptedWildMon(gLegendaryGates[id].species,
+        GetLegendaryEncounterLevel(gLegendaryGates[id].species), ITEM_NONE);
     gSpecialVar_Result = TRUE;
 }
 
+// VAR_0x8004 = species. VAR_0x8005 (a legacy level offset) is ignored: static
+// legendaries always meet the player at the current cap.
 void CreateEmeraldChampionsStaticLegendaryEncounter(void)
 {
     enum Species species = gSpecialVar_0x8004;
-    s16 levelOffset = gSpecialVar_0x8005;
-    const struct EmeraldChampionsBattleSet *authored;
 
     if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return;
-    CreateScriptedWildMon(species, GetSignLevelForSpecies(species, levelOffset), ITEM_NONE);
-    authored = GetLegendaryAuthoredSet(species);
-    if (authored != NULL)
-        ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
-    else
-        ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    CreateScriptedWildMon(species, GetLegendaryEncounterLevel(species), ITEM_NONE);
 }
 
 void TryGiveSelectedLegendarySignReward(void)
@@ -713,9 +541,8 @@ void TryGiveSelectedLegendarySignReward(void)
     gSpecialVar_Result = 0;
     if (signId >= LEGENDARY_SIGN_COUNT || IsLegendarySignCaught(signId))
         return;
-    giveResult = GiveLegendarySignReward(
-        gLegendarySignDefinitions[signId].species,
-        GetSignLevelForSpecies(gLegendarySignDefinitions[signId].species, gLegendarySignDefinitions[signId].levelOffset));
+    giveResult = GiveLegendarySignReward(gLegendaryGates[signId].species,
+        GetLegendaryEncounterLevel(gLegendaryGates[signId].species));
     if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
         return;
     if (giveResult == MON_CANT_GIVE)
@@ -741,91 +568,61 @@ const u8 *GetLegendaryDisplayName(enum Species species)
     }
 }
 
-// Standard encounters give each eligible wild legend 1%.
-// Sweet Scent shares one 25% roll evenly across both eligible groups.
-enum Species ChooseRareWildLegendarySpecies(enum WildPokemonArea area, bool32 sweetScent)
-{
-    u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
-    enum WildPokemonArea habitat = WILD_AREA_LAND;
-    enum Species native[LEGENDARY_SIGN_COUNT];
-    enum Species quests[LEGENDARY_SIGN_COUNT];
-    u32 nativeCount = 0, questCount = 0;
-    u32 roll;
-
-    if (map == MAP_ROUTE125 || map == MAP_ROUTE126 || map == MAP_ROUTE127)
-        habitat = WILD_AREA_WATER;
-    if (area != habitat)
-        return SPECIES_NONE;
-    for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
-    {
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-        if (sign->mapId != map
-         || (sign->source != LEGENDARY_SOURCE_NATIVE_WILD && sign->source != LEGENDARY_SOURCE_RARE_WILD)
-         || !CanAcquireLegendarySignSpecies(sign->species))
-            continue;
-        if (sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
-            native[nativeCount++] = sign->species;
-        else
-            quests[questCount++] = sign->species;
-    }
-    if (nativeCount == 0 && questCount == 0)
-        return SPECIES_NONE;
-    roll = RandomUniform(RNG_NONE, 0, 99);
-    if (sweetScent)
-    {
-        if (roll >= 25)
-            return SPECIES_NONE;
-        u32 choice = RandomUniform(RNG_WILD_MON_TARGET, 0, nativeCount + questCount - 1);
-        return choice < nativeCount ? native[choice] : quests[choice - nativeCount];
-    }
-    if (roll < nativeCount)
-        return native[roll];
-    roll -= nativeCount;
-    if (roll < questCount)
-        return quests[roll];
-    return SPECIES_NONE;
-}
-
-// A sign advances through local requirements as ordinary text pages.
-void BufferNextLocalLegendaryRequirement(void)
-{
-    u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
-    for (u32 id = gSpecialVar_0x8004; id < LEGENDARY_SIGN_COUNT; id++)
-    {
-        if (gLegendarySignDefinitions[id].source != LEGENDARY_SOURCE_RARE_WILD
-         || gLegendarySignDefinitions[id].mapId != map)
-            continue;
-        gSpecialVar_0x8004 = id;
-        ResearchSelectedLegendarySign();
-        gSpecialVar_0x8004 = id + 1;
-        gSpecialVar_Result = TRUE;
-        return;
-    }
-    gSpecialVar_Result = FALSE;
-}
-
 static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
 {
-    const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-    if (GetBadgeCountForLegendarySigns() < sign->minimumBadges)
+    const struct LegendaryGate *gate = &gLegendaryGates[id];
+    bool32 needsBadges = GetBadgeCountForLegendarySigns() < gate->minimumBadges;
+    u8 buffer[80];
+
+    if (needsBadges)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sign->minimumBadges, STR_CONV_MODE_LEFT_ALIGN, 1);
-        u8 buffer[80];
+        ConvertIntToDecimalStringN(gStringVar1, gate->minimumBadges, STR_CONV_MODE_LEFT_ALIGN, 1);
         StringExpandPlaceholders(buffer, COMPOUND_STRING("\pGym Badges required:\n{STR_VAR_1}."));
         StringAppend(gStringVar4, buffer);
     }
-    if (sign->requiredFlag == FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE && !FlagGet(sign->requiredFlag))
+    if (gate->unlockFlag == 0 || FlagGet(gate->unlockFlag))
+        return;
+    switch (gate->unlockFlag)
+    {
+    case FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE:
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, resolve the weather crisis\nin Sootopolis."));
-    else if (sign->requiredFlag == FLAG_GOT_TM24_FROM_WATTSON && !FlagGet(sign->requiredFlag))
+        break;
+    case FLAG_GOT_TM24_FROM_WATTSON:
         StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Wattson stop New Mauville's\ngenerator, then report back to him."));
-    else if (sign->requiredFlag == FLAG_HIDE_ROUTE_119_TEAM_AQUA && !FlagGet(sign->requiredFlag))
+        break;
+    case FLAG_HIDE_ROUTE_119_TEAM_AQUA:
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, rescue the Weather Institute\nresearchers from Team Aqua."));
-    else if (sign->requiredFlag == FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT && !FlagGet(sign->requiredFlag))
+        break;
+    case FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT:
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, confront Maxie deep inside\nthe Magma Hideout."));
-    else if (sign->requiredFlag == FLAG_RECEIVED_RED_OR_BLUE_ORB && !FlagGet(sign->requiredFlag))
+        break;
+    case FLAG_RECEIVED_RED_OR_BLUE_ORB:
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, help the elders at Mt. Pyre\nand receive the Magma Emblem."));
+        break;
+    case FLAG_IS_CHAMPION:
+    case FLAG_SYS_GAME_CLEAR:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, enter the Hall of Fame."));
+        break;
+    default:
+        if (gate->unlockFlag >= FLAG_BADGE01_GET && gate->unlockFlag <= FLAG_BADGE08_GET)
+        {
+            if (!needsBadges)
+            {
+                ConvertIntToDecimalStringN(gStringVar1, gate->unlockFlag - FLAG_BADGE01_GET + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+                StringExpandPlaceholders(buffer, COMPOUND_STRING("\pFirst, earn Gym Badge {STR_VAR_1}."));
+                StringAppend(gStringVar4, buffer);
+            }
+        }
+        else
+        {
+            StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, reach the next milestone\nof your journey."));
+        }
+        break;
+    }
 }
 
+// Result: 0 = needs progression, 1 = needs discovery, 2 = available,
+// 4 = caught, 5 = resting after a failed static encounter.
 void ResearchSelectedLegendarySign(void)
 {
     u16 selection = gSpecialVar_0x8004;
@@ -833,25 +630,13 @@ void ResearchSelectedLegendarySign(void)
     if (selection >= LEGENDARY_SIGN_COUNT)
         return;
     enum LegendarySignId id = selection;
-    const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-    StringCopy(gStringVar1, GetSpeciesName(sign->requiredSpecies));
-    StringCopy(gStringVar2, GetLegendaryDisplayName(sign->species));
-    StringCopy(gStringVar3, GetLegendarySignLocationName(id));
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}\n{STR_VAR_3}."));
+    const struct LegendaryGate *gate = &gLegendaryGates[id];
+    StringCopy(gStringVar2, GetLegendaryDisplayName(gate->species));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}"));
     if (IsLegendarySignCaught(id))
     {
         StringAppend(gStringVar4, COMPOUND_STRING("\pCaught! This discovery is recorded."));
         gSpecialVar_Result = 4;
-        return;
-    }
-    if (sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
-    {
-        StringAppend(gStringVar4, COMPOUND_STRING("\pA wild resident: 1% per encounter."));
-        StringAppend(gStringVar4, sign->mapId == MAP_ROUTE125
-            ? COMPOUND_STRING("\pSearch while SURFING here.")
-            : COMPOUND_STRING("\pSearch the wild Pokémon here."));
-        StringAppend(gStringVar4, COMPOUND_STRING("\pNo special requirements. Once\ncaught, it stops appearing here.\pSWEET SCENT: a shared 25% chance\namong eligible, uncaught legends."));
-        gSpecialVar_Result = 0;
         return;
     }
     if (!MeetsSignProgression(id))
@@ -870,51 +655,17 @@ void ResearchSelectedLegendarySign(void)
         else if (id == LEGENDARY_SIGN_KYUREM)
             StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, catch RESHIRAM or ZEKROM.\nEither discovery is enough."));
         else if (id == LEGENDARY_SIGN_REGIGIGAS)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pBring REGIROCK, REGICE and REGISTEEL\ntogether to the statue."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pCatch REGIROCK, REGICE and\nREGISTEEL. Their Pokédex records\lare enough; they can stay in the PC."));
         else if (id == LEGENDARY_SIGN_PECHARUNT)
             StringAppend(gStringVar4, COMPOUND_STRING("\pCatch OKIDOGI, MUNKIDORI and\nFEZANDIPITI, then inspect the shrine."));
         else
         {
             u8 buffer[180];
+            StringCopy(gStringVar1, GetSpeciesName(gate->requiredSpecies));
             StringExpandPlaceholders(buffer, COMPOUND_STRING("\pA clue points to this family:\n{STR_VAR_1}.\pBefriend a member of that family.\nA caught Pokédex entry is enough;\lyour partner can stay in the PC."));
             StringAppend(gStringVar4, buffer);
         }
         gSpecialVar_Result = 1;
-        return;
-    }
-    switch (sign->source)
-    {
-    case LEGENDARY_SOURCE_GAME_CORNER:
-        StringAppend(gStringVar4, COMPOUND_STRING("\pAsk the Pokémon prize counter at\nMauville's Game Corner."));
-        return;
-    case LEGENDARY_SOURCE_CIRCUIT:
-        StringAppend(gStringVar4, COMPOUND_STRING("\pEarn its Champions Circuit milestone\nat the Battle Frontier's Battle Tower.\pThe ferry opens with six badges.\pLifetime wins count. The attendant\nkeeps an earned reward until claimed."));
-        return;
-    case LEGENDARY_SOURCE_MASTERY:
-        StringAppend(gStringVar4, id == LEGENDARY_SIGN_ARCEUS
-            ? COMPOUND_STRING("\pResolve the weather crisis and earn\nall eight badges, then visit Devon.\pNo Pokédex completion is needed.")
-            : COMPOUND_STRING("\pWin 40 Circuit battles in total and\nclaim its other legendary rewards."));
-        return;
-    case LEGENDARY_SOURCE_BREEDING:
-        StringAppend(gStringVar4, COMPOUND_STRING("\pLeave MANAPHY and DITTO together\nat Route 117's Day Care.\pHatch their Egg to meet PHIONE."));
-        return;
-    case LEGENDARY_SOURCE_RARE_WILD:
-        StringAppend(gStringVar4, COMPOUND_STRING("\pAvailable now!"));
-        StringAppend(gStringVar4, (sign->mapId == MAP_ROUTE125 || sign->mapId == MAP_ROUTE126 || sign->mapId == MAP_ROUTE127)
-            ? COMPOUND_STRING("\pSearch while SURFING in this area.\nThis Pokémon has a 1% encounter chance.")
-            : COMPOUND_STRING("\pSearch the wild Pokémon in this area.\nThis Pokémon has a 1% encounter chance."));
-        StringAppend(gStringVar4, COMPOUND_STRING("\pSWEET SCENT gives a 25% chance of\na legendary encounter here.\pEligible local legendaries share\nthat chance equally. Their badge and\lother requirements still apply."));
-        StringAppend(gStringVar4, COMPOUND_STRING("\pIf it escapes or faints, keep looking.\nIt can appear again until caught."));
-        return;
-    case LEGENDARY_SOURCE_ORDINARY_WILD:
-        StringAppend(gStringVar4, COMPOUND_STRING("\pSearch the wild Pokémon in this area.\nNo research visit is needed."));
-        return;
-    default:
-        break;
-    }
-    if (id == LEGENDARY_SIGN_MAGEARNA)
-    {
-        StringAppend(gStringVar4, COMPOUND_STRING("\pSpeak to Devon's dream researcher\nabout his mechanical prototype."));
         return;
     }
     if (IsSignResting(id))
@@ -923,8 +674,26 @@ void ResearchSelectedLegendarySign(void)
         gSpecialVar_Result = 5;
         return;
     }
-    StringAppend(gStringVar4, COMPOUND_STRING("\pReady! Approach the Pokémon or\ninspect its shrine in this area."));
     gSpecialVar_Result = 2;
+    switch (gate->kind)
+    {
+    case LEGENDARY_KIND_WILD:
+    case LEGENDARY_KIND_QUEST:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pAvailable now! Search the wild\nPokémon where it lives.\lOnce caught, it stops appearing."));
+        break;
+    case LEGENDARY_KIND_GIFT:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pAvailable now! Speak to Devon's\ndream researcher on 2F."));
+        break;
+    case LEGENDARY_KIND_PRIZE:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pAvailable now! Ask the Pokémon prize\ncounter at Mauville's Game Corner."));
+        break;
+    case LEGENDARY_KIND_BREED:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pLeave MANAPHY and DITTO together\nat Route 117's Day Care.\pHatch their Egg to meet PHIONE."));
+        break;
+    default:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pReady! Approach the Pokémon or\ninspect its shrine."));
+        break;
+    }
 }
 
 static const struct
@@ -959,7 +728,7 @@ void BufferNextCenterLegendaryLead(void)
         StringCopy(gStringVar4, sCenterLegendaryLeads[i].lead);
         if (id == LEGENDARY_SIGN_SHAYMIN && !FlagGet(FLAG_ADVENTURE_STARTED))
             StringCopy(gStringVar4, COMPOUND_STRING("After you battle the PROF.'s kid,\nreturn to BIRCH for your send-off.\pThen head west to ROUTE 102.\nSHAYMIN lives in its grass."));
-        if (id == LEGENDARY_SIGN_COUNT)
+        if (id >= LEGENDARY_SIGN_COUNT)
         {
             enum Species species = sCenterLegendaryLeads[i].classicSpecies;
             if (species == SPECIES_NONE)
@@ -989,22 +758,19 @@ void BufferNextCenterLegendaryLead(void)
             gSpecialVar_Result = TRUE;
             return;
         }
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
+        const struct LegendaryGate *gate = &gLegendaryGates[id];
         if (IsLegendarySignCaught(id))
         {
-            StringCopy(gStringVar2, GetLegendaryDisplayName(sign->species));
-            StringCopy(gStringVar3, GetLegendarySignLocationName(id));
-            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You've already found\n{STR_VAR_2}!\pThe local lead was:\n{STR_VAR_3}."));
+            StringCopy(gStringVar2, GetLegendaryDisplayName(gate->species));
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You've already found\n{STR_VAR_2}!\pThat's one local legend you have\nturned into a partner."));
         }
-        else if (sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pIt has a 1% wild encounter chance.\nSWEET SCENT gives a shared 25%\lchance among uncaught local legends."));
         else if (!MeetsSignProgression(id))
             AppendLegendaryProgressionRequirements(id);
         else if (!MeetsSignDiscovery(id))
             StringAppend(gStringVar4, COMPOUND_STRING("\pThat discovery is still waiting\nfor your help."));
-        else if (sign->source == LEGENDARY_SOURCE_RARE_WILD)
+        else if (gate->kind == LEGENDARY_KIND_WILD || gate->kind == LEGENDARY_KIND_QUEST)
             StringAppend(gStringVar4, COMPOUND_STRING("\pYou've met its requirements!\nYou can search for it there now."));
-        else if (sign->source == LEGENDARY_SOURCE_VISIBLE && id != LEGENDARY_SIGN_MAGEARNA)
+        else if (gate->kind == LEGENDARY_KIND_STATIC)
             StringAppend(gStringVar4, COMPOUND_STRING("\pYou've met its requirements.\nVisit its resting place to meet it."));
         gSpecialVar_Result = TRUE;
         return;
@@ -1056,6 +822,7 @@ u8 GiveLegendarySignReward(enum Species species, u8 level)
     return giveResult;
 }
 
+// Devon's finale reward: the Hall of Fame is the only gate.
 void TryGiveArceusLegendarySignMasteryReward(void)
 {
     u8 giveResult;
@@ -1066,12 +833,11 @@ void TryGiveArceusLegendarySignMasteryReward(void)
         gSpecialVar_Result = 4;
         return;
     }
-    if (!FlagGet(FLAG_BADGE08_GET) || !FlagGet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE))
+    if (!FlagGet(FLAG_IS_CHAMPION))
         return;
 
-    // Devon's final campaign discovery is available before the Elite Four.
     UnlockLegendarySign(LEGENDARY_SIGN_ARCEUS);
-    giveResult = GiveLegendarySignReward(SPECIES_ARCEUS, GetSignLevelForSpecies(SPECIES_ARCEUS, 0));
+    giveResult = GiveLegendarySignReward(SPECIES_ARCEUS, GetLegendaryEncounterLevel(SPECIES_ARCEUS));
     if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
         return;
     if (giveResult == MON_CANT_GIVE)

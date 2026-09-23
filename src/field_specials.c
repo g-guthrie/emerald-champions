@@ -153,7 +153,6 @@ static const struct EmeraldChampionsGameCornerPokemonPrize sEmeraldChampionsGame
     {SPECIES_FUECOCO,    FLAG_EC_STARTER_ARCHIVE_FUECOCO},
     {SPECIES_QUAXLY,     FLAG_EC_STARTER_ARCHIVE_QUAXLY},
     {SPECIES_GENESECT,   FLAG_RECEIVED_GAME_CORNER_GENESECT},
-    {SPECIES_POIPOLE,    FLAG_RECEIVED_GAME_CORNER_POIPOLE},
 };
 
 static u16 GetEmeraldChampionsGameCornerPokemonPrizeFlag(enum Species species)
@@ -407,10 +406,8 @@ static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 fla
     if (!CanAcquireLegendarySignSpecies(species))
         return EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT;
 
-    giveResult = TryGiveEmeraldChampionsPreparedPokemon(
-        species,
-        min(30, GetCurrentLevelCap())
-    );
+    // Every Game Corner Pokemon prize arrives at the current level cap.
+    giveResult = TryGiveEmeraldChampionsPreparedPokemon(species, GetCurrentLevelCap());
     if (giveResult != MON_GIVEN_TO_PARTY && giveResult != MON_GIVEN_TO_PC)
         return giveResult;
 
@@ -6835,13 +6832,32 @@ void GetStaticEncounterLevel(void)
     gSpecialVar_0x800A = level;
 }
 
+// Gift Pokemon that should arrive ready to use (Game Corner prizes) take the
+// live campaign cap, left in gSpecialVar_0x800A for givemon.
+void GetLevelCapForScriptedGift(void)
+{
+    gSpecialVar_0x800A = GetCurrentLevelCap();
+}
+
 // Birth Island, Faraway Island, Navel Rock and Southern Island set up their
 // legendary with this. Upstream renamed it to CreateEnemyEventMon when
 // "event legal" became "modern fateful encounter"; the restored scripts still
 // use the old name, so keep the alias rather than renaming upstream API.
+// VAR_0x8004 = species, VAR_0x8005 = level, VAR_0x8006 = held item. Legendary
+// and Ultra Beast species follow the shared scripted rule instead of the
+// script's level: current cap plus the authored or random non-Mega set.
 void CreateEventLegalEnemyMon(void)
 {
+    enum Species species = gSpecialVar_0x8004;
+    u16 scriptLevel = gSpecialVar_0x8005;
+    bool32 legendary = IsLegendaryEncounterSpecies(species);
+
+    if (legendary)
+        gSpecialVar_0x8005 = GetLegendaryEncounterLevel(species);
     CreateEnemyEventMon();
+    gSpecialVar_0x8005 = scriptLevel;
+    if (legendary)
+        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], gSpecialVar_0x8006);
 }
 
 // Rolls the Day Care's gift egg: a random species from the table, plus one of

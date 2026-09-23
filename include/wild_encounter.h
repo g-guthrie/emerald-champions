@@ -79,6 +79,7 @@ bool8 AreLegendariesInSootopolisPreventingEncounters(void);
 u16 GetCurrentMapWildMonHeaderId(void);
 u32 ChooseWildMonIndex_Land(const struct WildPokemonInfo *info);
 u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPokemonArea area);
+u32 GetWildSlotOdds(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 slot);
 u32 ChooseWildMonIndex_Water(const struct WildPokemonInfo *info);
 u32 ChooseWildMonIndex_Rocks(const struct WildPokemonInfo *info);
 u32 ChooseHiddenMonIndex(void);

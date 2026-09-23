@@ -295,7 +295,6 @@ static const struct MenuAction MultichoiceList_BFExchangeEvolutionCategory[] =
 static const struct MenuAction MultichoiceList_BFExchangeRarePokemon[] =
 {
     {COMPOUND_STRING("GENESECT{CLEAR_TO 72}240 BP")},
-    {COMPOUND_STRING("POIPOLE{CLEAR_TO 72}160 BP")},
     {gText_Exit},
 };
 

@@ -124,7 +124,8 @@ static u8 *AppendRouteSignMethod(
     const u8 *methodName,
     const struct RouteSignSpecies *entries,
     u8 count,
-    bool32 *hasMethod)
+    bool32 *hasMethod,
+    bool32 *hasLegend)
 {
     bool32 firstName = TRUE;
     u16 lineWidth;
@@ -138,6 +139,8 @@ static u8 *AppendRouteSignMethod(
     {
         u8 name[64];
         enum LegendarySignId id = GetLegendarySignIdBySpecies(entries[i].species);
+        if (IsLegendaryEncounterSpecies(entries[i].species))
+            *hasLegend = TRUE;
         StringCopy(name, GetLegendaryDisplayName(entries[i].species));
         if (id < LEGENDARY_SIGN_COUNT && IsLegendarySignCaught(id))
             StringAppend(name, COMPOUND_STRING(" (Caught)"));
@@ -195,63 +198,48 @@ void BufferCurrentMapRouteSignSpecies(void)
 {
     struct RouteSignSpecies entries[ROUTE_SIGN_MAX_METHOD_SPECIES];
     u32 headerId = GetCurrentMapWildMonHeaderId();
-    bool32 hasMethod = FALSE;
+    bool32 hasMethod = FALSE, hasLegend = FALSE;
     u8 *dest = StringCopy(gStringVar4, sText_RouteSignSpeciesHeader);
 
     if (headerId != HEADER_NONE)
     {
         const struct WildPokemonInfo *info;
         u8 count;
-        u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
 
         info = GetRouteSignInfo(headerId, WILD_AREA_LAND);
         count = CollectRouteSignSpecies(entries, info, 0, NUM_LAND_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignGrass, entries, count, &hasMethod);
+        dest = AppendRouteSignMethod(dest, sText_RouteSignGrass, entries, count, &hasMethod, &hasLegend);
         info = GetRouteSignInfo(headerId, WILD_AREA_WATER);
         count = CollectRouteSignSpecies(entries, info, 0, NUM_WATER_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignSurf, entries, count, &hasMethod);
+        dest = AppendRouteSignMethod(dest, sText_RouteSignSurf, entries, count, &hasMethod, &hasLegend);
         info = GetRouteSignInfo(headerId, WILD_AREA_ROCKS);
         count = CollectRouteSignSpecies(entries, info, 0, NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignRockSmash, entries, count, &hasMethod);
+        dest = AppendRouteSignMethod(dest, sText_RouteSignRockSmash, entries, count, &hasMethod, &hasLegend);
         info = GetRouteSignInfo(headerId, WILD_AREA_FISHING);
         count = CollectRouteSignSpecies(entries, info, 0, 2);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignOldRod, entries, count, &hasMethod);
+        dest = AppendRouteSignMethod(dest, sText_RouteSignOldRod, entries, count, &hasMethod, &hasLegend);
         count = CollectRouteSignSpecies(entries, info, 2, 3);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignGoodRod, entries, count, &hasMethod);
+        dest = AppendRouteSignMethod(dest, sText_RouteSignGoodRod, entries, count, &hasMethod, &hasLegend);
         count = CollectRouteSignSpecies(entries, info, 5, 5);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignSuperRod, entries, count, &hasMethod);
+        dest = AppendRouteSignMethod(dest, sText_RouteSignSuperRod, entries, count, &hasMethod, &hasLegend);
         info = GetRouteSignInfo(headerId, WILD_AREA_HONEY);
         count = CollectRouteSignSpecies(entries, info, 0, NUM_HONEY_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignHoney, entries, count, &hasMethod);
-        // Keep caught discoveries on the roster as a record, after the rods.
-        count = 0;
-        for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
-        {
-            const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-            if (sign->mapId == map && sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
-                entries[count++].species = sign->species;
-        }
-        dest = AppendRouteSignMethod(dest,
-            gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE125)
-                && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE125)
-                ? COMPOUND_STRING("Legendaries (Surf, 3% each): ")
-                : COMPOUND_STRING("Legendaries (3% each): "),
-            entries, count, &hasMethod);
-        if (count != 0)
-            dest = StringCopy(dest, COMPOUND_STRING("\pSWEET SCENT: 25% total chance\namong eligible, uncaught legends.\pOnce caught, they stop appearing."));
+        dest = AppendRouteSignMethod(dest, sText_RouteSignHoney, entries, count, &hasMethod, &hasLegend);
         if (DEXNAV_ENABLED)
         {
             info = GetRouteSignInfo(headerId, WILD_AREA_HIDDEN);
             count = CollectRouteSignSpecies(entries, info, 0, NUM_HIDDEN_MONS_ENCOUNTER_SLOTS);
-            dest = AppendRouteSignMethod(dest, sText_RouteSignHidden, entries, count, &hasMethod);
+            dest = AppendRouteSignMethod(dest, sText_RouteSignHidden, entries, count, &hasMethod, &hasLegend);
         }
     }
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE119))
         dest = StringCopy(dest, COMPOUND_STRING("\pFEEBAS hides in a few fishing spots.\nAny rod works if you find one."));
+    if (hasMethod && hasLegend)
+        dest = StringCopy(dest, COMPOUND_STRING("\pLegends and Ultra Beasts are rare\nhere. SWEET SCENT draws them out."));
     if (hasMethod)
-        StringCopy(dest, COMPOUND_STRING("\pSWEET SCENT reverses grass/Surf\nrarity: rare species become common.\pLegendary chances stay separate."));
+        StringCopy(dest, COMPOUND_STRING("\pSWEET SCENT reverses grass/Surf\nrarity: rare species become common."));
     else
         StringCopy(gStringVar4, sText_RouteSignNoSpecies);
 }
@@ -391,13 +379,17 @@ static const u8 *GetEncounterBounds(const struct WildPokemonInfo *info, const u8
     return info != NULL && info->encounterBounds != NULL ? info->encounterBounds : defaults;
 }
 
-static u32 ChooseEncounterSlot(const u8 *bounds, u32 count)
+static u32 ChooseEncounterSlotFromRoll(const u8 *bounds, u32 count, u32 roll)
 {
-    u32 roll = Random() % bounds[count - 1];
     for (u32 slot = 0; slot + 1 < count; slot++)
         if (roll < bounds[slot])
             return slot;
     return count - 1;
+}
+
+static u32 ChooseEncounterSlot(const u8 *bounds, u32 count)
+{
+    return ChooseEncounterSlotFromRoll(bounds, count, Random() % bounds[count - 1]);
 }
 
 static u32 ChooseEncounterSlotWithLure(const u8 *bounds, u32 count)
@@ -414,32 +406,37 @@ u32 ChooseWildMonIndex_Land(const struct WildPokemonInfo *info)
     return ChooseEncounterSlotWithLure(GetEncounterBounds(info, sLandEncounterBounds), ARRAY_COUNT(sLandEncounterBounds));
 }
 
-// Reverse ordinary species probabilities, not slot positions. Duplicate slots
-// are combined first; tied species share their reversed probability equally.
-// Ordinary-table legends retain their own slot chances and capture rules.
+// Sweet Scent draws out eligible Legendary and Ultra Beast slots: each gets
+// five times its table odds (1% -> 5%, 3% -> 15%), with their combined share
+// scaled down to at most half of all outcomes. Gated or caught slots are inert
+// and contribute nothing. The remaining mass reverses ordinary species
+// probabilities, not slot positions: duplicate slots are combined first and
+// tied species share their reversed probability equally.
+#define SWEET_SCENT_LEGEND_MULTIPLIER 5
+
+static bool32 IsSweetScentLegendSlot(enum Species species)
+{
+    return IsLegendaryEncounterSpecies(species);
+}
+
 u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPokemonArea area)
 {
     const struct WildPokemon *mons = info->wildPokemon;
     struct ScentSpecies { enum Species species; u32 weight; } entries[NUM_LAND_MONS_ENCOUNTER_SLOTS];
     const u8 *bounds = GetEncounterBounds(info, area == WILD_AREA_WATER ? sWaterEncounterBounds : sLandEncounterBounds);
     u32 slots = area == WILD_AREA_WATER ? ARRAY_COUNT(sWaterEncounterBounds) : ARRAY_COUNT(sLandEncounterBounds);
-    u32 count = 0, total = 0;
-    u32 roll = RandomUniform(RNG_NONE, 0, bounds[slots - 1] - 1);
-    u32 ordinaryRoll = roll;
-    u32 originalSlot = 0;
-    while (roll >= bounds[originalSlot])
-        originalSlot++;
-    if (GetLegendarySignIdBySpecies(mons[originalSlot].species) < LEGENDARY_SIGN_COUNT
-     && CanAcquireLegendarySignSpecies(mons[originalSlot].species))
-        return originalSlot;
+    u32 total = bounds[slots - 1];
+    u32 count = 0, ordinaryTotal = 0, legendTotal = 0, legendMass;
+    u32 roll = RandomUniform(RNG_NONE, 0, total - 1);
+    u32 ordinaryRoll;
 
     for (u32 i = 0; i < slots; i++)
     {
         u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
-        if (GetLegendarySignIdBySpecies(mons[i].species) < LEGENDARY_SIGN_COUNT)
+        if (IsSweetScentLegendSlot(mons[i].species))
         {
-            if (i < originalSlot)
-                ordinaryRoll -= weight;
+            if (CanAcquireLegendarySignSpecies(mons[i].species))
+                legendTotal += weight;
             continue;
         }
         u32 j;
@@ -449,13 +446,31 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
         if (j == count)
             entries[count++] = (struct ScentSpecies){mons[i].species, 0};
         entries[j].weight += weight;
-        total += weight;
+        ordinaryTotal += weight;
     }
-    // Let the existing acquisition fallback handle an all-legendary table.
+
+    legendMass = min(legendTotal * SWEET_SCENT_LEGEND_MULTIPLIER, total / 2);
+    // A table with no ordinary residents gives every outcome to its legends.
+    if (count == 0 && legendTotal != 0)
+        legendMass = total;
+    if (roll < legendMass)
+    {
+        // Spread the boosted share over eligible legends by their table odds.
+        u32 target = roll * legendTotal / legendMass;
+        for (u32 i = 0; i < slots; i++)
+        {
+            u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
+            if (!IsSweetScentLegendSlot(mons[i].species) || !CanAcquireLegendarySignSpecies(mons[i].species))
+                continue;
+            if (target < weight)
+                return i;
+            target -= weight;
+        }
+    }
+    // Only inert legends: let the acquisition walk in TryGenerateWildMon decide.
     if (count == 0)
-        return originalSlot;
-    if (GetLegendarySignIdBySpecies(mons[originalSlot].species) < LEGENDARY_SIGN_COUNT)
-        ordinaryRoll = RandomUniform(RNG_WILD_MON_TARGET, 0, total - 1);
+        return ChooseEncounterSlotFromRoll(bounds, slots, roll);
+    ordinaryRoll = (roll - legendMass) * ordinaryTotal / (total - legendMass);
 
     for (u32 i = 1; i < count; i++)
     {
@@ -493,7 +508,54 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
             return i;
         roll -= weight;
     }
-    return originalSlot;
+    return ChooseEncounterSlotFromRoll(bounds, slots, roll);
+}
+
+// The authored odds of one slot, in percent of its method (or rod) total.
+u32 GetWildSlotOdds(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 slot)
+{
+    static const u8 sFishingDefaults[] = {
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0, ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1,
+        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3,
+        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4,
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6,
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8,
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9,
+    };
+    const u8 *bounds;
+    u32 count;
+    bool32 segmentStart = slot == 0;
+
+    switch (area)
+    {
+    case WILD_AREA_LAND:
+        bounds = GetEncounterBounds(info, sLandEncounterBounds);
+        count = ARRAY_COUNT(sLandEncounterBounds);
+        break;
+    case WILD_AREA_WATER:
+        bounds = GetEncounterBounds(info, sWaterEncounterBounds);
+        count = ARRAY_COUNT(sWaterEncounterBounds);
+        break;
+    case WILD_AREA_ROCKS:
+        bounds = GetEncounterBounds(info, sRockEncounterBounds);
+        count = ARRAY_COUNT(sRockEncounterBounds);
+        break;
+    case WILD_AREA_HONEY:
+        bounds = GetEncounterBounds(info, sHoneyEncounterBounds);
+        count = ARRAY_COUNT(sHoneyEncounterBounds);
+        break;
+    case WILD_AREA_FISHING:
+        bounds = GetEncounterBounds(info, sFishingDefaults);
+        count = ARRAY_COUNT(sFishingDefaults);
+        // Each rod's cumulative odds restart at its first slot.
+        segmentStart = slot == 0 || slot == 2 || slot == 5;
+        break;
+    default:
+        return 0;
+    }
+    if (slot >= count)
+        return 0;
+    return bounds[slot] - (segmentStart ? 0 : bounds[slot - 1]);
 }
 
 // Mostly equivalent to ChooseWildMonIndex_Land
@@ -723,8 +785,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     u8 wildMonIndex = 0;
     u8 level;
     enum Species species;
-    bool32 rareLegendary;
-    u32 levelCap;
+    bool32 legendary;
     if (sSweetScentActive && (area == WILD_AREA_LAND || area == WILD_AREA_WATER))
         wildMonIndex = ChooseSweetScentWildMonIndex(wildMonInfo, area);
     else
@@ -774,15 +835,11 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
         break;
     }
 
-    species = ChooseRareWildLegendarySpecies(area, sSweetScentActive);
-    rareLegendary = species != SPECIES_NONE && !IsNativeWildLegendarySpecies(species);
-    if (species == SPECIES_NONE)
-        species = wildMonInfo->wildPokemon[wildMonIndex].species;
-    if (!CanAcquireLegendarySignSpecies(species))
+    species = wildMonInfo->wildPokemon[wildMonIndex].species;
+    if (!IsWildSlotSpeciesAcquirable(species))
     {
-        // A caught one-time resident leaves its slot to another local resident.
-        // Do not cancel ordinary outcomes and inflate the legendary share of
-        // successful Sweet Scent encounters after a player catches an Ultra Beast.
+        // A gated or caught Legendary/Ultra Beast slot is inert: the draw
+        // moves on to the next acquirable slot of the same table.
         u32 slots = area == WILD_AREA_LAND ? NUM_LAND_MONS_ENCOUNTER_SLOTS
                   : area == WILD_AREA_WATER ? NUM_WATER_MONS_ENCOUNTER_SLOTS
                   : area == WILD_AREA_ROCKS ? NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS
@@ -792,42 +849,72 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
         {
             wildMonIndex = (wildMonIndex + 1) % slots;
             species = wildMonInfo->wildPokemon[wildMonIndex].species;
-            if (CanAcquireLegendarySignSpecies(species))
+            if (IsWildSlotSpeciesAcquirable(species))
                 break;
         }
         if (tried == slots)
             return FALSE;
     }
 
-    level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
-    levelCap = GetCurrentLevelCap();
-    if (rareLegendary || IsLegendarySignOrdinaryWildSpecies(species))
-        level = min(MAX_LEVEL, GetLevelCapForSpecies(species, levelCap));
+    legendary = IsLegendaryEncounterSpecies(species);
     // Emerald Champions: nothing in the wild is ever above the live level cap.
     // Table levels describe the route; an early Old Rod cannot pull a Lv 45
-    // Qwilfish out of Route 103 when the cap is 14.
-    level = min(level, levelCap);
+    // Qwilfish out of Route 103 when the cap is 14. Legendary and Ultra Beast
+    // slots always meet the player at the cap.
+    if (legendary)
+        level = GetLegendaryEncounterLevel(species);
+    else
+        level = min(ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area), GetCurrentLevelCap());
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
     CreateWildMon(species, level);
-    // Legendaries are authored set-piece fights, not ordinary encounters, so
-    // they keep their prepared set even though wild Pokemon no longer do.
-    if (rareLegendary)
-        ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    if (legendary)
+        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], ITEM_NONE);
     return TRUE;
 }
 
+// Rods follow the same slot rule as every other method: an inert Legendary or
+// Ultra Beast slot passes to the next acquirable slot of the same rod, then of
+// the whole fishing table.
 static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
 {
+    static const u8 starts[] = {0, 2, 5};
+    static const u8 counts[] = {2, 3, 5};
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(wildMonInfo, rod);
     enum Species wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
-    u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
+    u8 level;
+
+    if (!IsWildSlotSpeciesAcquirable(wildMonSpecies) && rod <= SUPER_ROD)
+    {
+        u32 candidate = wildMonIndex;
+        bool32 found = FALSE;
+        for (u32 i = 1; i < counts[rod] && !found; i++)
+        {
+            candidate = starts[rod] + (wildMonIndex - starts[rod] + i) % counts[rod];
+            found = IsWildSlotSpeciesAcquirable(wildMonInfo->wildPokemon[candidate].species);
+        }
+        for (u32 i = 1; i < NUM_FISHING_MONS_ENCOUNTER_SLOTS && !found; i++)
+        {
+            candidate = (wildMonIndex + i) % NUM_FISHING_MONS_ENCOUNTER_SLOTS;
+            found = IsWildSlotSpeciesAcquirable(wildMonInfo->wildPokemon[candidate].species);
+        }
+        // A table made only of inert legends keeps its drawn slot.
+        if (found)
+            wildMonIndex = candidate;
+        wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
+    }
+    if (IsLegendaryEncounterSpecies(wildMonSpecies))
+        level = GetLegendaryEncounterLevel(wildMonSpecies);
+    else
+        level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
     UpdateChainFishingStreak();
     CreateWildMon(wildMonSpecies, level);
+    if (IsLegendaryEncounterSpecies(wildMonSpecies))
+        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], ITEM_NONE);
     return wildMonSpecies;
 }
 
