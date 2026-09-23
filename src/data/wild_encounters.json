@@ -3937,7 +3937,7 @@
               {
                 "min_level": 41,
                 "max_level": 43,
-                "species": "SPECIES_BUTTERFREE"
+                "species": "SPECIES_MILCERY"
               },
               {
                 "min_level": 41,
@@ -13589,12 +13589,12 @@
               {
                 "min_level": 29,
                 "max_level": 29,
-                "species": "SPECIES_MISDREAVUS"
+                "species": "SPECIES_PUMPKABOO_SUPER"
               },
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_MURKROW"
+                "species": "SPECIES_PUMPKABOO"
               }
             ],
             "encounter_rates": [
@@ -18309,7 +18309,7 @@
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_WURMPLE"
+                "species": "SPECIES_SCATTERBUG"
               },
               {
                 "min_level": 3,
@@ -18440,7 +18440,7 @@
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_RALTS"
+                "species": "SPECIES_MEOWTH"
               }
             ],
             "encounter_rates": [
@@ -18659,7 +18659,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_BLITZLE"
+                "species": "SPECIES_PACHIRISU"
               },
               {
                 "min_level": 2,
@@ -18888,7 +18888,7 @@
               {
                 "min_level": 5,
                 "max_level": 7,
-                "species": "SPECIES_BUDEW"
+                "species": "SPECIES_FLABEBE_WHITE"
               }
             ],
             "encounter_rates": [
@@ -20318,7 +20318,7 @@
               {
                 "min_level": 21,
                 "max_level": 21,
-                "species": "SPECIES_SILICOBRA"
+                "species": "SPECIES_CAPSAKID"
               },
               {
                 "min_level": 20,
@@ -21397,7 +21397,7 @@
               {
                 "min_level": 8,
                 "max_level": 10,
-                "species": "SPECIES_SKITTY"
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
               },
               {
                 "min_level": 8,
