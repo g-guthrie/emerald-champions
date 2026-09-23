@@ -45,7 +45,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE"
     },
     {
-      "local_id": "LOCALID_ROUTE111_VICKY",
+      "local_id": "LOCALID_ROUTE111_VICTORIA",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 13,
       "y": 113,
@@ -59,6 +59,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE"
     },
     {
+      "local_id": "LOCALID_ROUTE111_VIVI",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 13,
       "y": 113,
@@ -72,6 +73,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE"
     },
     {
+      "local_id": "LOCALID_ROUTE111_VICKY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 13,
       "y": 113,
@@ -453,7 +455,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ROUTE111_VICTORIA",
+      "local_id": "LOCALID_ROUTE111_DESERT_FOSSIL",
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
       "x": 20,
       "y": 53,

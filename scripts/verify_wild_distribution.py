@@ -306,6 +306,7 @@ def main():
     map_rows = {}
     for name in (n for g in groups['group_order'] for n in groups[g]):
         row = json.loads((ROOT / 'data/maps' / name / 'map.json').read_text())
+        row['_dir'] = name
         map_rows[row['id']] = row
     fields = {f['type']: f for f in group['fields']}
     dexnav_config = (ROOT / 'include/config/dexnav.h').read_text()
@@ -326,8 +327,18 @@ def main():
         if 'hidden_mons' in entry and not dexnav_enabled:
             errors.append(f"{map_id}/hidden_mons: DexNav is disabled; this is not an obtainable source")
         if 'rock_smash_mons' in entry:
-            if not any(obj.get('script') == 'EventScript_RockSmash'
-                       for obj in map_rows.get(map_id, {}).get('object_events', [])):
+            # A breakable rock, or any local object whose script rolls the
+            # Rock Smash table itself (Route 109's sand mounds).
+            objects = map_rows.get(map_id, {}).get('object_events', [])
+            scripts_path = ROOT / 'data' / 'maps' / map_rows.get(map_id, {}).get('_dir', '') / 'scripts.inc'
+            local_scripts = scripts_path.read_text() if scripts_path.exists() else ''
+            def rolls_rock_table(obj):
+                script = obj.get('script', '')
+                if script == 'EventScript_RockSmash':
+                    return True
+                body = local_scripts.split(script + '::', 1)
+                return len(body) == 2 and 'RockSmashWildEncounter' in body[1].split('\n\n', 1)[0]
+            if not any(rolls_rock_table(obj) for obj in objects):
                 errors.append(f"{map_id}/rock_smash_mons: map has no smashable rock")
         for table in entry.values():
             if isinstance(table, dict) and 'mons' in table:
